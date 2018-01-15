@@ -12,14 +12,14 @@ contract UserProfile {
   }
 
   struct Key {
-    string public_key; // it can be any blockchain address 
-    string private_key;
+    string publicKey; // it can be any blockchain address 
+    string privateKey;
     string name;
-    string chain_symbol; // will leave this for the extension to use it as a reference
+    string chainSymbol; // will leave this for the extension to use it as a reference
   }
 
-  modifier onlyOwner() {
-    require(msg.sender == owner);
+  modifier onlyDelegates() {
+    require(delegates[msg.sender]);
     _;
   }
   
@@ -34,65 +34,93 @@ contract UserProfile {
     _; 
   }
 
-  struct Profile {
+  struct Profile { // might change the profile to a contract in the future if needed
     address addr;
     string data; // json string includes all the profile data we want to store (encrypted by the user)
 
     mapping (uint => App) apps;  // app_id  => app_version_id
-    
-    mapping (string => Key) keys; // the string is the public_key (theoritically this might be replicated but technically it's very very unlikely)
+    uint[] appList;
+
+    mapping (string => Key) keys; // the string is the publicKey (theoritically this might be replicated but technically it's very very unlikely)
   }
 
   mapping (address => Profile) users;
   
-  address market_place;
+  address marketPlaceContract;
 
-  address owner;
+  mapping (address => bool) delegates;
+
+  address republicContract;
 
 
   function UserProfile() public {
-    owner = msg.sender;
+    delegates[msg.sender] = true; // only one delegate for now until republic contract is fully functional
   }
 
+  function setRepublicContract (address _contract_address) public onlyDelegates returns(bool res) {
+    republicContract = _contract_address;
 
-  function register (string data) public returns(bool res) {
-    require (users[msg.sender].addr != msg.sender);
-
-    users[msg.sender] = Profile({addr: msg.sender, data: data});
+    return true;
+  }
+  
+  function refreshDelegatesList() public pure returns(bool res) { // this should be called after delegates elections
     return true;
   }
 
-  function getDefaultPermissions () public pure returns(uint res) {
+  function register(string _data) public returns(bool res) {
+    require (users[msg.sender].addr != msg.sender);
+    uint[] memory app_list;
+
+    users[msg.sender] = Profile({addr: msg.sender, data: _data, appList: app_list});
+    return true;
+  }
+
+  function getDefaultPermissions() public pure returns(uint res) {
     return 256;
   }
 
-  function installApp (uint _id, bytes32 _version) public userOnly returns(bool res) {
+
+  function installApp(uint _id, bytes32 _version) public userOnly returns(bool res) {
     require(users[msg.sender].apps[_id].version != _version);
 
-    MarketPlace market = MarketPlace(market_place);
-    var (owner_addr, name, category, files, status, checksum) = market.getApp(_id, _version); // will raise unused vars warning. ignore for now
+    MarketPlace market = MarketPlace(marketPlaceContract);
+    var (owner_addr, name, category, files, votes) = market.getApp(_id, _version); // will raise unused vars warning. ignore for now
 
-    if (status == "approved") {
-        users[msg.sender].apps[_id] = App(_id, _version, true, getDefaultPermissions());
+    if (votes > 0) {
+        if (users[msg.sender].apps[_id].id == _id) { // the user installing different version
+          users[msg.sender].apps[_id].version = _version;
+          // TODO check for permissions changes as well
+        } else {
+          users[msg.sender].apps[_id] = App(_id, _version, true, getDefaultPermissions());
+          users[msg.sender].appList.push(_id);
+        }
+        
         return true;
     }
 
     return false;
   }
 
-//   function removeApp () userOnly hasApp returns(bool res)  {
-//     return true;
-//   }
+  
+  function getAppList() public view userOnly returns(uint[] apps) {
+    return users[msg.sender].appList;
+  }
 
-//   function disableApp () userOnly hasApp returns(bool res)  {
-//     return true;
-//   }
+  // function removeApp (uint _id, bytes32 _version) userOnly hasApp returns(bool res)  {
+  //   return true;
+  // }
+
+  function disableApp (uint _id) public userOnly hasApp(_id) returns(bool res)  {
+    users[msg.sender].apps[_id].enabled = false;
+
+    return true;
+  }
 
 //   function changePermissions (address addr, uint perm) userOnly hasApp returns(bool res) {
 //     return true;
 //   }
 
-  function setMarketPlace(address addr) public onlyOwner {
-      market_place = addr;
+  function setMarketPlace(address addr) public onlyDelegates {
+      marketPlaceContract = addr;
   }
 }
