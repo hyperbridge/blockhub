@@ -1,6 +1,6 @@
 pragma solidity >=0.4.15;
 
-import "./MarketPlace.sol";
+import "./Marketplace.sol";
 
 contract UserProfile {
 
@@ -11,15 +11,16 @@ contract UserProfile {
     uint permissions; // bitmap for effeciency ;)
   }
 
+  /* this data structure is mainly to store keys for blockhub wallets/extensions */
   struct Key {
     string publicKey; // it can be any blockchain address 
     string privateKey;
     string name;
-    string chainSymbol; // will leave this for the extension to use it as a reference
+    string metaData;
   }
 
   modifier onlyDelegates() {
-    require(delegates[msg.sender]);
+    require(msg.sender == owner || delegates[msg.sender]);
     _;
   }
   
@@ -51,10 +52,11 @@ contract UserProfile {
   mapping (address => bool) delegates;
 
   address republicContract;
+  address owner;
 
 
   function UserProfile() public {
-    delegates[msg.sender] = true; // only one delegate for now until republic contract is fully functional
+    owner = msg.sender;
   }
 
   function setRepublicContract (address _contract_address) public onlyDelegates returns(bool res) {
@@ -63,7 +65,7 @@ contract UserProfile {
     return true;
   }
   
-  function refreshDelegatesList() public pure returns(bool res) { // this should be called after delegates elections
+  function refreshDelegateList() public pure returns(bool res) { // this should be called after delegates elections
     return true;
   }
 
@@ -83,7 +85,7 @@ contract UserProfile {
   function installApp(uint _id, bytes32 _version) public userOnly returns(bool res) {
     require(users[msg.sender].apps[_id].version != _version);
 
-    MarketPlace market = MarketPlace(marketPlaceContract);
+    Marketplace market = Marketplace(marketPlaceContract);
     var (owner_addr, name, category, files, votes) = market.getApp(_id, _version); // will raise unused vars warning. ignore for now
 
     if (votes > 0) {

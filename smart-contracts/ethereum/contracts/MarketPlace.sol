@@ -1,9 +1,9 @@
 pragma solidity >=0.4.15;
 
-contract MarketPlace {
+contract Marketplace {
 
   modifier onlyDelegates() {
-    require(delegates[msg.sender]);
+    require(msg.sender == owner || delegates[msg.sender]);
     _;
   }
 
@@ -27,17 +27,18 @@ contract MarketPlace {
   }
   
   mapping (uint => App) apps;
-  uint[] app_ids;
+  uint[] appIds;
   mapping (address => bool) delegates;
 
+  address owner;
   address republicContract;
   
   event AppSubmitted(uint id);
   event VersionSubmitted(uint app_id, bytes32 version);
   event AppVoting(uint app_id, bytes32 version, int8 vote);
   
-  function MarketPlace() public {
-    delegates[msg.sender] = true; // only one delegate for now until republic contract is fully functional
+  function Marketplace() public {
+    owner = msg.sender;
   }
 
   function setRepublicContract (address _contract_address) public onlyDelegates returns(bool res) {
@@ -46,14 +47,14 @@ contract MarketPlace {
     return true;
   }
   
-  function refreshDelegatesList() public pure returns(bool res) { // this should be called after delegates elections
+  function refreshDelegateList() public pure returns(bool res) { // this should be called after delegates elections
     return true;
   }
   
 
   function submitAppForReview(string _name, bytes32 _version, string _category, string _files, string _checksum, uint _permissions) public returns(bool res) {
-    uint new_id = app_ids.length;
-    app_ids.push(new_id);
+    uint new_id = appIds.length;
+    appIds.push(new_id);
     bytes32[] memory versionList;
 
     apps[new_id] = App(new_id, msg.sender, _name, _category, versionList);
@@ -64,8 +65,10 @@ contract MarketPlace {
   }
 
   function submitVersionForReview(uint _id, bytes32 _version, string _files, string _checksum, uint _permissions) public returns(bool res) {
-    require(apps[_id].id == _id);
-    require(apps[_id].versions[_version].version != _version);
+    require(apps[_id].id == _id); // check if the app exists
+    require(apps[_id].versions[_version].version != _version); // check that the version doesn't exist
+    require(apps[_id].owner == msg.sender);
+
     address[] memory voters;
 
     apps[_id].versions[_version] = AppVersion(_version, _files, voters, _checksum, _permissions);
@@ -78,7 +81,7 @@ contract MarketPlace {
 
 
   function voteForApp(uint _id, bytes32 _version, int8 _vote) public onlyDelegates returns(bool res) {
-    require (apps[_id].id == _id && apps[_id].versions[_version].version == _version);
+    require (apps[_id].id == _id && apps[_id].versions[_version].version == _version); // check if the app and the version exist
     require (_vote == -1 || _vote == 1);
 
     if (apps[_id].versions[_version].votes[msg.sender] == 0) {
@@ -91,7 +94,7 @@ contract MarketPlace {
     return true;
   }
   
-  function getApp(uint _id, bytes32 _version) public view returns(address owner, string name, string category, string files, int votes) {
+  function getApp(uint _id, bytes32 _version) public view returns(address appOwner, string name, string category, string files, int votes) {
     require (apps[_id].id == _id && apps[_id].versions[_version].version == _version);
 
     int8 vote_sum = 0;
