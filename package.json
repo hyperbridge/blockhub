@@ -1,0 +1,17 @@
+{
+    "name": "blockhub-protocol",
+    "version": "0.1.0",
+    "repository": "git@github.com:hyperbridge/blockhub-protocol.git",
+    "license": "UNLICENSED",
+    "main": "./index.js",
+    "scripts": {
+    },
+    "dependencies": {
+    },
+    "engines": {
+        "node": "7.4.0",
+        "npm": "3.10.10"
+    },
+    "devDependencies": {
+    }
+}
