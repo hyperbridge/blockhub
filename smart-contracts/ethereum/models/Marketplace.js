@@ -53,10 +53,12 @@ class Marketplace {
         this.nonce = 0
     }
 
-    async submitAppForReview() {
+    async submitAppForReview(name, version, category, files, checksum, permissions) {
         let contract = web3.eth.contract(this.contractMeta.abi).at(this.contractAddress)
         const fromAddress = "0x8d53fe1D1CAC541801178bA7747920a7c010C5d0"
         const toAddress = "0x1D312928DACfA0ff4352cB3BEdaC901CAA217945"
+
+        console.log('Calling Marketplace.submitAppForReview with arguments: ', arguments)
 
         return await new Promise((resolve) => {
             web3.eth.getTransactionCount(fromAddress, (err, nonce) => {
@@ -67,7 +69,7 @@ class Marketplace {
                     "gasLimit": "0x7458",
                     "to": this.contractAddress,
                     "value": "0x0",
-                    "data": contract.submitAppForReview.getData("Something", "0.4.", "something", "something", "something", 1),
+                    "data": contract.submitAppForReview.getData(name, version, category, files, checksum, permissions),
                     "chainId": 0x03
                 }
 
