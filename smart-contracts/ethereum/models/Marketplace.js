@@ -119,6 +119,34 @@ class Marketplace {
         })
     }
 
+    async getAppListing(page, offset) {
+        let contract = new web3.eth.Contract(this.contractMeta.abi, this.contractAddress)
+    
+        console.log(contract)
+        //abiDecoder.addABI(this.contractMeta.abi)
+
+        console.log('Calling Marketplace.listApps with arguments: ', arguments)
+        return await new Promise((resolve) => {
+            const data = contract.methods.listApps(page, offset).call({ from: this.fromAddress }, (err, res) => {
+
+                resolve(res)
+            })
+        })
+    }
+
+    async getApp(id) {
+        let contract = new web3.eth.Contract(this.contractMeta.abi, this.contractAddress)
+
+        console.log('Calling Marketplace.getApp with arguments: ', arguments)
+
+        return await new Promise((resolve) => {
+            const data = contract.methods.getLatestVersion(id).call({ from: this.fromAddress }, (err, res) => {
+
+                resolve(res)
+            })
+        })
+    }
+
     getBalance() {
         return 0
     }
