@@ -39,6 +39,7 @@ contract Marketplace {
   event AppSubmitted(uint id);
   event VersionSubmitted(uint app_id, bytes32 version);
   event AppVoting(uint app_id, bytes32 version, int8 vote);
+  event AppListing(uint[]);
 
   function Marketplace() public {
     owner = msg.sender;
@@ -135,6 +136,8 @@ contract Marketplace {
       apps.push(current_id);
       current_id++;
     }
+
+    AppListing(apps);
 
     return (apps);
   }

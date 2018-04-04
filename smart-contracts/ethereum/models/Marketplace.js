@@ -1,3 +1,7 @@
+import * as abiDecoder from '../lib/abi-decoder'
+
+
+window.web3 = new window.Web3(new window.Web3.providers.HttpProvider("http://localhost:8545"))
 
 
 class Marketplace {
@@ -46,30 +50,60 @@ class Marketplace {
         ]
     }
 
-    init(contractMeta, contractAddress) {
-        //web3.setProvider(new web3.providers.HttpProvider("https://ropsten.infura.io/XXXXXX"));
+    init(contractMeta, contractAddress, fromAddress, toAddress) {
+        //web3.setProvider(new web3.providers.HttpProvider("https://ropsten.infura.io/XXXXXX"))
         this.contractMeta = contractMeta
         this.contractAddress = contractAddress
+        this.fromAddress = fromAddress
+        this.toAddress = toAddress
         this.nonce = 0
     }
 
     async submitAppForReview(name, version, category, files, checksum, permissions) {
-        let contract = web3.eth.contract(this.contractMeta.abi).at(this.contractAddress)
-        const fromAddress = "0x8d53fe1D1CAC541801178bA7747920a7c010C5d0"
-        const toAddress = "0x1D312928DACfA0ff4352cB3BEdaC901CAA217945"
+        let contract = new web3.eth.Contract(this.contractMeta.abi, this.contractAddress)
 
         console.log('Calling Marketplace.submitAppForReview with arguments: ', arguments)
 
         return await new Promise((resolve) => {
-            web3.eth.getTransactionCount(fromAddress, (err, nonce) => {
+            web3.eth.getTransactionCount(this.fromAddress, (err, nonce) => {
                 let rawTransaction = {
-                    "from": fromAddress,
-                    "nonce": web3.toHex(nonce),
+                    "from": this.fromAddress,
+                    "nonce": web3.utils.toHex(nonce),
+                    "gasPrice": web3.utils.toWei("0.000000021", "ether"),
+                    "gasLimit": web3.utils.toHex("900000"),
+                    "to": this.contractAddress,
+                    "value": "0x0",
+                    "data": contract.methods.submitAppForReview(name, web3.utils.asciiToHex(version), category, files, checksum, permissions).encodeABI(),
+                    "chainId": 0x03
+                }
+
+                web3.eth.sendTransaction(rawTransaction, (err, hash) => {
+                    if (err)
+                        console.log(err)
+
+                    console.log(hash)
+                })
+
+                resolve()
+            })
+        })
+    }
+
+    async voteForApp(id, version, vote) {
+        let contract = new web3.eth.Contract(this.contractMeta.abi, this.contractAddress)
+
+        console.log('Calling Marketplace.voteForApp with arguments: ', arguments)
+
+        return await new Promise((resolve) => {
+            web3.eth.getTransactionCount(this.fromAddress, (err, nonce) => {
+                let rawTransaction = {
+                    "from": this.fromAddress,
+                    "nonce": web3.utils.toHex(nonce),
                     "gasPrice": "0x04e3b29200",
                     "gasLimit": "0x7458",
                     "to": this.contractAddress,
                     "value": "0x0",
-                    "data": contract.submitAppForReview.getData(name, version, category, files, checksum, permissions),
+                    "data": contract.methods.voteForApp(id, version, vote).encodeABI(),
                     "chainId": 0x03
                 }
 
