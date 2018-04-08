@@ -43,6 +43,9 @@ contract Marketplace {
 
   function Marketplace() public {
     owner = msg.sender;
+
+    // Reserve 0
+    appIds.push(0);
   }
 
   function setRepublicContract (address _contract_address) public onlyDelegates returns(bool res) {
@@ -81,8 +84,6 @@ contract Marketplace {
 
     return true;
   }
-
-
 
   function voteForApp(uint _id, bytes32 _version, int8 _vote) public onlyDelegates returns(bool res) {
     require (apps[_id].id == _id && apps[_id].versions[_version].version == _version); // check if the app and the version exist
@@ -136,8 +137,6 @@ contract Marketplace {
       apps.push(current_id);
       current_id++;
     }
-
-    AppListing(apps);
 
     return (apps);
   }
