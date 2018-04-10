@@ -113,14 +113,14 @@ export default (state = initialState, action) => {
     }
 }
 
-export const fetchContractMeta = async () => {
+export const fetchContractMeta = async (key) => {
     console.log("Fetching contract meta from server", arguments)
 
     if (contractMeta)
         return contractMeta
 
     return await new Promise((resolve) => {
-        fetch("/contracts/Marketplace.json").then((data) => {
+        fetch("/contracts/" + key + ".json").then((data) => {
             contractMeta = data.json()
 
             resolve(contractMeta)
@@ -175,7 +175,7 @@ export const setupContracts = () => {
     console.log("Setting up contracts", arguments)
 
     return dispatch => {
-        fetchContractMeta().then((contractMeta) => {
+        fetchContractMeta("Marketplace").then((contractMeta) => {
             dispatch({
                 type: FETCH_CONTRACT_META_RESPONSE,
                 contractMeta: contractMeta
@@ -196,103 +196,6 @@ export const setupContracts = () => {
                     contractAddress: contractAddress
                 })
             })
-        })
-
-        return {
-            type: SETUP_CONTRACTS_REQUEST
-        }
-    }
-}
-
-
-export const syncLocalToBlockchain = () => {
-    console.log("Syncing local data to blockchain", arguments)
-
-    return (dispatch, getState) => {
-        fetchContractMeta().then((contractMeta) => {
-            new Promise((resolve, reject) => {
-                setupContracts()((event) => {
-                    dispatch(event)
-                    if (event.type === SETUP_CONTRACTS_RESPONSE) {
-                        Blockhub.Ethereum.Models.Marketplace.init(contractMeta, event.contractAddress, network[currentNetwork].userFromAddress)
-
-                        setTimeout(resolve, 0)
-                    }
-                })
-            }).then(() => {
-                {
-                    // get local apps
-                    const apps = getState().marketplace.apps.all
-                    const promises = []
-
-                    // submit each app
-                    apps.forEach((app, i) => {
-                        console.log("Submitting local app: ", app)
-
-                        const promise = new Promise((resolve, reject) => {
-                            submitApp(app.name, '1', '1', '1', '1', 1)((event) => {
-                                dispatch(event)
-                                console.log(event.app.name, app.name, event.app)
-                                if (event.type === SUBMIT_APP_FOR_REVIEW_RESPONSE && event.app.name === app.name) {
-                                    const id = event.app.id
-
-                                    voteForApp(id, '1', 1)((event) => {
-                                        dispatch(event)
-
-                                        updateAppVotes(id, 1)((event) => {
-                                            dispatch(event)
-
-                                            resolve()
-                                        })
-                                    })
-                                }
-                            })
-                        })
-
-                        promises.push(promise)
-                    })
-
-                    Promise.all(promises).then((values) => {
-                        console.log("Submitted all apps")
-
-                        // update listing
-                        getAppListing(0, 0)((event) => {
-                            dispatch(event)
-                        })
-                    })
-                }
-
-                {
-                    const users = [] // TODO
-                    const promises = []
-
-                    // get user profiles
-                    users.forEach((i, user) => {
-                        const promise = new Promise((resolve, reject) => {
-                            // submit each profile
-
-                        })
-
-                        promises.push(promise)
-                    })
-                }
-            })
-        })
-
-        return {
-            type: SETUP_CONTRACTS_REQUEST
-        }
-    }
-}
-
-export const syncBlockchainToLocal = () => {
-    return dispatch => {
-        fetchContractMeta().then((contractMeta) => {
-            // get app listing
-
-            // get app details
-
-            // get user profile
         })
 
         return {
@@ -390,6 +293,97 @@ export const submitApp = (name, version, category, files, checksum, permissions)
 
         return {
             type: SUBMIT_APP_FOR_REVIEW_REQUEST
+        }
+    }
+}
+
+export const syncLocalToBlockchain = () => {
+    console.log("Syncing local data to blockchain", arguments)
+
+    return (dispatch, getState) => {
+        setupContracts()((event) => {
+            dispatch(event)
+            
+            if (event.type === SETUP_CONTRACTS_RESPONSE) {
+                Blockhub.Ethereum.Models.Marketplace.init(contractMeta, event.contractAddress, network[currentNetwork].userFromAddress)
+                
+                {
+                    // get local apps
+                    const apps = getState().marketplace.apps.all
+                    const promises = []
+
+                    // submit each app
+                    apps.forEach((app, i) => {
+                        console.log("Submitting local app: ", app)
+
+                        const promise = new Promise((resolve, reject) => {
+                            submitApp(app.name, '1', '1', '1', '1', 1)((event) => {
+                                dispatch(event)
+                                console.log(event.app.name, app.name, event.app)
+                                if (event.type === SUBMIT_APP_FOR_REVIEW_RESPONSE && event.app.name === app.name) {
+                                    const id = event.app.id
+
+                                    voteForApp(id, '1', 1)((event) => {
+                                        dispatch(event)
+
+                                        updateAppVotes(id, 1)((event) => {
+                                            dispatch(event)
+
+                                            resolve()
+                                        })
+                                    })
+                                }
+                            })
+                        })
+
+                        promises.push(promise)
+                    })
+
+                    Promise.all(promises).then((values) => {
+                        console.log("Submitted all apps")
+
+                        // update listing
+                        getAppListing(0, 0)((event) => {
+                            dispatch(event)
+                        })
+                    })
+                }
+
+                {
+                    const users = [] // TODO
+                    const promises = []
+
+                    // get user profiles
+                    users.forEach((i, user) => {
+                        const promise = new Promise((resolve, reject) => {
+                            // submit each profile
+
+                        })
+
+                        promises.push(promise)
+                    })
+                }
+            }
+        })
+
+        return {
+            type: SETUP_CONTRACTS_REQUEST
+        }
+    }
+}
+
+export const syncBlockchainToLocal = () => {
+    return dispatch => {
+        fetchContractMeta("Marketplace").then((contractMeta) => {
+            // get app listing
+
+            // get app details
+
+            // get user profile
+        })
+
+        return {
+            type: SETUP_CONTRACTS_REQUEST
         }
     }
 }
