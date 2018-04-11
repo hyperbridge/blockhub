@@ -17,6 +17,8 @@ export const SUBMIT_APP_FOR_REVIEW_RESPONSE = 'network/SUBMIT_APP_FOR_REVIEW_RES
 export const SETUP_CONTRACTS_REQUEST = 'network/SETUP_CONTRACTS_REQUEST'
 export const SETUP_CONTRACTS_RESPONSE = 'network/SETUP_CONTRACTS_RESPONSE'
 export const FETCH_CONTRACT_META_RESPONSE = 'network/FETCH_CONTRACT_META_RESPONSE'
+export const LOCAL_DATA_TO_BLOCKCHAIN_SYNC_REQUEST = 'network/LOCAL_DATA_TO_BLOCKCHAIN_SYNC_REQUEST'
+export const LOCAL_DATA_TO_BLOCKCHAIN_SYNC_RESPONSE = 'network/LOCAL_DATA_TO_BLOCKCHAIN_SYNC_RESPONSE'
 
 
 const network = {
@@ -41,6 +43,11 @@ const initialApp = {
 const initialState = {
     contractMeta: null,
     contractAddress: null,
+    user: {
+        permissions: {
+            auditing: false
+        }
+    },
     apps: {
         all: [],
         upcoming: [],
@@ -300,10 +307,14 @@ export const submitApp = (name, version, category, files, checksum, permissions)
 export const syncLocalToBlockchain = () => {
     console.log("Syncing local data to blockchain", arguments)
 
-    return (dispatch, getState) => {
+    return (dispatch, getState, store) => {
+        if (getState == null) {
+            getState = store.getState
+        }
+
         setupContracts()((event) => {
             dispatch(event)
-            
+
             if (event.type === SETUP_CONTRACTS_RESPONSE) {
                 Blockhub.Ethereum.Models.Marketplace.init(contractMeta, event.contractAddress, network[currentNetwork].userFromAddress)
                 
@@ -345,6 +356,10 @@ export const syncLocalToBlockchain = () => {
                         // update listing
                         getAppListing(0, 0)((event) => {
                             dispatch(event)
+
+                            dispatch({
+                                type: LOCAL_DATA_TO_BLOCKCHAIN_SYNC_RESPONSE
+                            })
                         })
                     })
                 }
@@ -367,7 +382,7 @@ export const syncLocalToBlockchain = () => {
         })
 
         return {
-            type: SETUP_CONTRACTS_REQUEST
+            type: LOCAL_DATA_TO_BLOCKCHAIN_SYNC_REQUEST
         }
     }
 }

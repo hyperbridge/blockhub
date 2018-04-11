@@ -27,6 +27,7 @@ import { changeSection } from '../modules/site'
 import { history } from '../store'
 
 import * as NetworkActions from '../modules/network'
+import * as MarketplaceActions from '../modules/marketplace'
 
 import './index.css'
 
@@ -54,7 +55,8 @@ class App extends Component {
     state = {
         showSignIn: false,
         userDetails: null,
-        lastRoute: ''
+        lastRoute: '',
+        isReady: false
     }
 
     constructor(props) {
@@ -71,7 +73,16 @@ class App extends Component {
         this.onRouteChange = this.onRouteChange.bind(this)
 
         NetworkActions.getAccounts(props.dispatch)
-        //props.dispatch(login())
+
+        MarketplaceActions.syncLocalToBlockchain()((event) => {
+            props.dispatch(event)
+
+            if (event.type === MarketplaceActions.LOCAL_DATA_TO_BLOCKCHAIN_SYNC_RESPONSE) {
+                this.setState({
+                    isReady: true
+                })
+            }
+        }, null, props.store)
     }
 
     onChangeLocation(location) {
@@ -88,7 +99,6 @@ class App extends Component {
         document.body && document.body.classList.add('t-' + route);
 
         this.setState({ lastRoute: route })
-        console.log(route);
         //props.dispatch(changeSection(route))
     }
 
@@ -103,7 +113,6 @@ class App extends Component {
 
         this.setState({ lastRoute: route.url })
 
-        console.log(route);
         //let route = route.url.slice(1).replace(/\//g, '-')
 
         this.props.dispatch(changeSection(route))
@@ -112,23 +121,28 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
-                    <Switch>
-                        <Route exact path="/" component={Home} onChange={this.onRouteChange} />
-                        <Route exact path="/accounts" component={Accounts} onChange={this.onRouteChange} />
-                        <Route exact path="/games" component={Games} onChange={this.onRouteChange} />
-                        <Route exact path="/apps" component={Apps} onChange={this.onRouteChange} />
-                        <Route exact path="/news" component={News} onChange={this.onRouteChange} />
-                        <Route exact path="/settings/client" component={ClientSettings} onChange={this.onRouteChange} />
-                        <Route exact path="/app/create" component={CreateApp} onChange={this.onRouteChange} />
-                        <Route exact path="/app/:id" component={AppDetail} onChange={this.onRouteChange} />
-                        <Route exact path="/app/:id/edit" component={ManageApp} onChange={this.onRouteChange} />
-                        <Route exact path="/community/chat" component={CommunityChat} onChange={this.onRouteChange} />
-                        <Route exact path="/republic/structure" component={RepublicStructure} onChange={this.onRouteChange} />
-                        <Route exact path="/republic/citizenship" component={RepublicCitizenship} onChange={this.onRouteChange} />
-                        <Route exact path="/republic/district/create" component={CreateDistrict} onChange={this.onRouteChange} />
-                    </Switch>
-                </Router>
+                {!this.state.isReady && (
+                    <div style={{color: "#FFFFFF"}}>Loading</div>
+                )}
+                {this.state.isReady && (
+                    <Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
+                        <Switch>
+                            <Route exact path="/" component={Home} onChange={this.onRouteChange} />
+                            <Route exact path="/accounts" component={Accounts} onChange={this.onRouteChange} />
+                            <Route exact path="/games" component={Games} onChange={this.onRouteChange} />
+                            <Route exact path="/apps" component={Apps} onChange={this.onRouteChange} />
+                            <Route exact path="/news" component={News} onChange={this.onRouteChange} />
+                            <Route exact path="/settings/client" component={ClientSettings} onChange={this.onRouteChange} />
+                            <Route exact path="/app/create" component={CreateApp} onChange={this.onRouteChange} />
+                            <Route exact path="/app/:id" component={AppDetail} onChange={this.onRouteChange} />
+                            <Route exact path="/app/:id/edit" component={ManageApp} onChange={this.onRouteChange} />
+                            <Route exact path="/community/chat" component={CommunityChat} onChange={this.onRouteChange} />
+                            <Route exact path="/republic/structure" component={RepublicStructure} onChange={this.onRouteChange} />
+                            <Route exact path="/republic/citizenship" component={RepublicCitizenship} onChange={this.onRouteChange} />
+                            <Route exact path="/republic/district/create" component={CreateDistrict} onChange={this.onRouteChange} />
+                        </Switch>
+                    </Router>
+                )}
             </div>
         )
     }
@@ -137,8 +151,9 @@ class App extends Component {
 const mapStateToProps = (state) => ({
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
     dispatch: dispatch,
+    store: ownProps.store,
     changePage: (page) => push(page)
 }, dispatch)
 

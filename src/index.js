@@ -31,7 +31,7 @@ const store = createStore(
 
 render(
     <Provider store={store}>
-        <App />
+        <App store={store} />
     </Provider>,
     target
 )
