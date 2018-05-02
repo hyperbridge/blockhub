@@ -41,7 +41,7 @@ contract Marketplace {
   event AppVoting(uint app_id, bytes32 version, int8 vote);
   event AppListing(uint[]);
 
-  function Marketplace() public {
+  constructor() public {
     owner = msg.sender;
 
     // Reserve 0
@@ -65,7 +65,7 @@ contract Marketplace {
     bytes32[] memory versionList;
 
     apps[new_id] = App(new_id, msg.sender, _name, _category, versionList, 0);
-    AppSubmitted(new_id);
+    emit AppSubmitted(new_id);
     submitVersionForReview(new_id, _version, _files, _checksum, _permissions);
 
     return true;
@@ -80,7 +80,7 @@ contract Marketplace {
 
     apps[_id].versions[_version] = AppVersion(_version, _files, voters, _checksum, _permissions, 0, now);
     apps[_id].versionList.push(_version);
-    VersionSubmitted(_id, _version);
+    emit VersionSubmitted(_id, _version);
 
     return true;
   }
@@ -95,7 +95,7 @@ contract Marketplace {
 
     apps[_id].versions[_version].votesMap[msg.sender] = _vote;
 
-    AppVoting(_id, _version, _vote);
+    emit AppVoting(_id, _version, _vote);
     return true;
   }
 
