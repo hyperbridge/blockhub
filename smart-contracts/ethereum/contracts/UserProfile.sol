@@ -55,7 +55,7 @@ contract UserProfile {
   address owner;
 
 
-  function UserProfile() public {
+  constructor() public {
     owner = msg.sender;
   }
 
