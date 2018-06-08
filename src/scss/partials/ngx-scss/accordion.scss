@@ -1,0 +1,57 @@
+
+// ng bootstrap accordion
+.ngb-accordion{
+
+  .card{
+    border-top:1px solid #ddd;
+    box-shadow: none;
+    margin-bottom: 0;
+    border-radius: 0;
+    .card-header{
+      border-radius: 0;
+      padding: 14px 20px;
+      box-shadow: none;
+      a{
+        transition: all 0.5s ease-in-out;
+        font-weight: 500;
+      }
+      &:hover,&:focus{
+        a{
+          color: $color-blue;
+          background: #fff;
+          &:hover,&:focus{
+            background: #fff;
+          }
+        }
+      }
+      +.card-body{
+        padding-top: 0;
+      }
+    }
+  }
+  &.color-accordion{
+    .card{
+      border-top:1px solid #fff;
+      .card-header{
+        transition: all 0s ease-in-out;
+        a{
+          transition: all 0s ease-in-out;
+        }
+        &:hover,&:focus,&.active{
+          background: $color-blue;
+          a{
+            color: #fff;
+            background: $color-blue;
+            &:hover,&:focus{
+              color: #fff;
+              background: $color-blue;
+            }
+          }
+        }
+        +.card-body{
+          padding-top: 20px;
+        }
+      }
+    }
+  }
+}
