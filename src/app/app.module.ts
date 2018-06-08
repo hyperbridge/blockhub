@@ -11,6 +11,7 @@ import {SharedModule} from './shared/shared.module';
 import {MenuItems} from './shared/menu-items/menu-items';
 import {BreadcrumbsComponent} from './layout/admin/breadcrumbs/breadcrumbs.component';
 
+import { ContractsService } from './contracts.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import {BreadcrumbsComponent} from './layout/admin/breadcrumbs/breadcrumbs.compo
     AppRoutingModule,
     SharedModule
   ],
-  providers: [MenuItems],
+  providers: [MenuItems, ContractsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { ContractsService } from '../../../contracts.service';
 
 @Component({
     selector: 'app-signup',
@@ -36,13 +37,15 @@ export class SignupComponent implements OnInit {
     public filterQuery = '';
     public sortBy = '';
     public sortOrder = 'desc';
+    public balance: number;
     profitChartOption: any;
 
     rowsContact = [];
     loadingIndicator = true;
     reorderable = true;
 
-    constructor() {
+    constructor(cs: ContractsService) {
+        cs.getUserBalance().then(balance => this.balance = balance);
         this.fetchContactData((data) => {
             this.rowsContact = data;
             setTimeout(() => { this.loadingIndicator = false; }, 1500);
