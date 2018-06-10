@@ -36,6 +36,14 @@ export const init = () => {
   local._tokenContract = new local._web3.eth.Contract(tokenAbi.abi, local._tokenContractAddress) //_web3.eth.contract(tokenAbi).at(_tokenContractAddress)
 }
 
+// TODO: fix
+export const isConnected = (): Boolean => {
+    if (typeof window.web3 === 'undefined')
+        return false
+    
+    return true
+}
+
 export const getAccount = async (): Promise<string> => {
   if (local._account == null) {
     local._account = await new Promise((resolve, reject) => {

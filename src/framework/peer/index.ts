@@ -1,4 +1,5 @@
 import * as ChaosMonkey from '../chaos-monkey'
+import * as Ethereum from '../ethereum'
 
 declare let require: any
 declare let window: any
@@ -10,6 +11,7 @@ const md5 = require('js-md5')
 const config = {
     RAFT_ENABLED: true,
     ETHEREUM_ENABLED: false,
+    DATA_RELAYER_ENABLED: true,
     CHAOS_MONKEY_ENABLED: true,
     CHAOS_MONKEY_STRENGTH: null,
     DARKLAUNCH: {
@@ -34,7 +36,7 @@ export const ID = function () {
     return '_' + Math.random().toString(36).substr(2, 9);
 }
 
-export const sendCommand = (peer, key, data, responseId = null, cb = null) => {
+export const sendCommand = (key: String, data: any = {}, peer: any = null, responseId: String = null, cb: Function = null) => {
     const cmd = {
         key: key,
         responseId: responseId,
@@ -48,6 +50,16 @@ export const sendCommand = (peer, key, data, responseId = null, cb = null) => {
         local.requests[cmd.requestId] = cb
     }
 
+    if (!peer) {
+        const peers = Object.keys(local.connectedPeers)
+        
+        peer = local.connectedPeers[peers[0]]
+    }
+
+    if (!peer) {
+        console.warn('[PeerService] Not connected to peer. This shouldnt happen.')
+    }
+
     peer.send(JSON.stringify(cmd))
 }
 
@@ -58,7 +70,7 @@ export const pageContentValidationRequest = (path, content, peer) => {
         path: path
     }
 
-    sendCommand(peer, 'pageContentValidationRequest', data, null, (data) => {
+    sendCommand('pageContentValidationRequest', data, peer, null, (data) => {
         console.log('Page content validation response', data.hash)
 
         if (data.hash === hashedContent) {
@@ -72,7 +84,7 @@ export const pageContentValidationRequest = (path, content, peer) => {
         const packet = local.raft.packet('vote', data)
 
         local.raft.message(LifeRaft.FOLLOWER, packet, () => {
-            console.log('[Raft] Vote request sent', data)
+            console.log('[PeerService] Vote request sent', data)
         })
     }
 }
@@ -85,7 +97,7 @@ export const pageContentDataRequest = (path, params) => {
     const peers = Object.keys(local.connectedPeers)
     const peer = local.connectedPeers[peers[0]]
 
-    sendCommand(peer, 'pageContentDataRequest', data, null, (data) => {
+    sendCommand('pageContentDataRequest', data, null, null, (data) => {
         console.log('Page content data response', data.content)
 
         const peers = Object.keys(local.connectedPeers)
@@ -95,7 +107,29 @@ export const pageContentDataRequest = (path, params) => {
     })
 }
 
-export const runCommand = (cmd, meta = null) => {
+export const addressBalanceRequest = async(address): Promise<any> => {
+    if (config.DATA_RELAYER_ENABLED && Ethereum.isConnected()) {
+        const balance = await Ethereum.getUserBalance()
+
+        const data = {
+            balance
+        }
+
+        return Promise.resolve(data)
+    } else {
+        return new Promise((resolve) => {
+            const data = {
+                address
+            }
+
+            sendCommand('addressBalanceRequest', data, null, null, (data) => {
+                resolve(data)
+            })
+        })
+    }
+}
+
+export const runCommand = async (cmd, meta = null) => {
     console.log('[PeerService] Running command', cmd.key)
 
     if (cmd.responseId) {
@@ -119,19 +153,23 @@ export const runCommand = (cmd, meta = null) => {
             data.hash = 'chaos'
         }
 
-        sendCommand(meta.client, 'pageContentValidationResponse', data, cmd.requestId)
+        sendCommand('pageContentValidationResponse', data, meta.client, cmd.requestId)
     } else if (cmd.key === 'pageContentDataRequest') {
         const data = {
             content: document.getElementById('main_navbar').innerHTML
         }
 
-        sendCommand(meta.client, 'pageContentDataResponse', data, cmd.requestId)
+        sendCommand('pageContentDataResponse', data, meta.client, cmd.requestId)
     } else if (cmd.key === 'raft') {
         local.raft.emit('data', cmd.data, (data) => {
-            console.log('[Raft] Packet reply from ' + local.raft.address, data);
+            console.log('[PeerService] Packet reply from ' + local.raft.address, data);
 
-            sendCommand(meta.client, 'raft', data, cmd.requestId)
+            sendCommand('raft', data, meta.client, cmd.requestId)
         });
+    } else if (cmd.key === 'addressBalanceRequest') {
+        const data = await addressBalanceRequest(cmd.address)
+
+        sendCommand('addressBalanceResponse', data, meta.client, cmd.requestId)
     }
 }
 
@@ -188,7 +226,7 @@ export const peerConnect = (peerId) => {
                 if (!cmd.key) // If no key, then this is a native raft command, so lets wrap it
                     cmd = { key: 'raft', data: cmd }
 
-                sendCommand(client, cmd.key, cmd.data, null, cb)
+                sendCommand(cmd.key, cmd.data, client, null, cb)
             })
         }
     })
@@ -261,8 +299,10 @@ export const init = () => {
         console.log('[PeerService] Error', err)
     })
 
+    window.config = config
     window.peerConnect = peerConnect
     window.pageContentDataRequest = pageContentDataRequest
+    window.addressBalanceRequest = addressBalanceRequest
 
     // Make sure things clean up properly.
     window.onunload = window.onbeforeunload = function (e) {
