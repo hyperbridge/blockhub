@@ -9,7 +9,7 @@ declare let require: any
 declare let window: any
 
 const config = {
-  RAFT_ENABLED: false
+  RAFT_ENABLED: true
 }
 
 const ID = function () {
@@ -24,8 +24,6 @@ let tokenAbi = require('./contracts/tokenContract.json')
 let raft = null
 let peer = null
 
-// PEER JS
-
 class PeerService {
   peer = null
   connectedPeers = {}
@@ -35,53 +33,44 @@ class PeerService {
   pendingData = ''
 
   constructor() {
-
-    // Connect to PeerJS, have server assign an ID instead of providing one
-    // Showing off some of the configs available with PeerJS :).
     let peer = this.peer = new Peer({
       host: 'blockhub-peer-server.herokuapp.com',//'0.peerjs.com',
       port: 80,//9000,
-      // Set API key for cloud server (you don't need this if you're running your
-      // own.
       secure: false,
-      // Set highest debug level (log everything!).
       debug: 3,
       allow_discovery: true,
-      // Set a logging function:
       logFunction: function () {
         var copy = Array.prototype.slice.call(arguments).join(' ')
         console.log(copy)
 
         if (copy == 'ERROR Error: Lost connection to server.') {
           peer.disconnect()
-          peer.reconnect()
+          setTimeout(() => peer.reconnect(), 200)
         }
       }
     })
 
-    // Show this peer's ID.
     this.peer.on('open', (id) => {
       console.log('[PeerService] Connected', id)
 
       raft = new LifeRaft(id, {
-        'election min': '50 millisecond',
-        'election max': '1 second',
+        'election min': 2000,
+        'election max': 4000,
+        'heartbeat min': 1000,
+        'heartbeat max': 2000,
         'socket': null
       })
-
-      //window.$('#pid').text(id)
-      // this.peer.listAllPeers((peers) => {
-      //   console.log(peers)
-      // })
-      //this.peerId = id
-
-      //this.peer.send('hi all')
-      // listAllPeers
     })
 
-    const sendCommand = (peer, cmd, cb = null) => {
-      console.log('[PeerService] Sending response', cmd)
+    const sendCommand = (peer, key, data, responseId = null, cb = null) => {
+      const cmd = {
+        key: key,
+        responseId: responseId,
+        requestId: ID(),
+        data: data
+      }
 
+      console.log('[PeerService] Sending command', cmd)
 
       if (cb) {
         this.requests[cmd.requestId] = cb
@@ -93,13 +82,11 @@ class PeerService {
     const pageContentValidationRequest = (path, content, peer) => {
       const hashedContent = md5(content)
 
-      const cmd = {
-        key: 'pageContentValidationRequest',
-        requestId: ID(),
+      const data = {
         path: path
       }
 
-      sendCommand(peer, cmd, (data) => {
+      sendCommand(peer, 'pageContentValidationRequest', data, null, (data) => {
         console.log('Page content validation response', data.hash)
 
         if (data.hash === hashedContent) {
@@ -108,21 +95,22 @@ class PeerService {
           console.log('Failed validation')
         }
       })
-      // const packet = raft.packet('vote', cmd)
 
-      // raft.message(LifeRaft.FOLLOWER, packet, () => {
-      //   console.log('[Raft] Vote request sent', cmd)
-      // })
+      if (config.RAFT_ENABLED) {
+        const packet = raft.packet('vote', data)
+
+        raft.message(LifeRaft.FOLLOWER, packet, () => {
+          console.log('[Raft] Vote request sent', data)
+        })
+      }
     }
 
     const pageContentDataRequest = (path, peer) => {
-      const cmd = {
-        key: 'pageContentDataRequest',
-        requestId: ID(),
+      const data = {
         path: path
       }
 
-      sendCommand(peer, cmd, (data) => {
+      sendCommand(peer, 'pageContentDataRequest', data, null, (data) => {
         console.log('Page content data response', data.content)
 
         const peers = Object.keys(this.connectedPeers)
@@ -148,36 +136,22 @@ class PeerService {
       }
 
       if (cmd.key === 'pageContentValidationRequest') {
-        const cmdRes = {
-          key: 'pageContentValidationResponse',
-          responseId: cmd.requestId,
-          data: {
-            hash: md5(document.getElementById('main_navbar').innerHTML)
-          }
+        const data = {
+          hash: md5(document.getElementById('main_navbar').innerHTML)
         }
 
-        sendCommand(meta.client, cmdRes)
+        sendCommand(meta.client, 'pageContentValidationResponse', data, cmd.requestId)
       } else if (cmd.key === 'pageContentDataRequest') {
-        const cmdRes = {
-          key: 'pageContentDataResponse',
-          responseId: cmd.requestId,
-          data: {
-            content: document.getElementById('main_navbar').innerHTML
-          }
+        const data = {
+          content: document.getElementById('main_navbar').innerHTML
         }
 
-        sendCommand(meta.client, cmdRes)
+        sendCommand(meta.client, 'pageContentDataResponse', data, cmd.requestId)
       } else if (cmd.key === 'raft') {
         raft.emit('data', cmd.data, (data) => {
           console.log('[Raft] Packet reply from ' + raft.address, data);
 
-          const cmdRes = {
-            key: 'raft',
-            responseId: cmd.requestId,
-            data: data
-          }
-
-          sendCommand(meta.client, cmdRes)
+          sendCommand(meta.client, 'raft', data, cmd.requestId)
         });
       }
     }
@@ -200,9 +174,6 @@ class PeerService {
       }
     })
 
-
-
-    // Await connections from others
     this.peer.on('connection', (c) => {
       console.log('[PeerService] New connection', c)
 
@@ -214,8 +185,6 @@ class PeerService {
 
       c.on('call', function (call) {
         console.log('[PeerService] Received call', call)
-        // Answer the call, providing our mediaStream
-        //call.answer('sssss')
       })
 
       c.on('data', function (data) {
@@ -239,7 +208,6 @@ class PeerService {
 
         raft.leave(c.peer)
       })
-
 
       c.on('error', function (err) { alert(err) })
     })
@@ -307,85 +275,6 @@ class PeerService {
     }
 
     window.getPageData = getPageData
-
-
-
-
-    // window.$(document).ready(function () {
-    //   // Connect to a peer
-    //   window.$('#connect').click(function () {
-    //     var requestedPeer = window.$('#rid').val()
-    //     if (!this.connectedPeers[requestedPeer]) {
-    //       // Create 2 connections, one labelled chat and another labelled file.
-    //       var c = this.peer.connect(requestedPeer, {
-    //         label: 'chat',
-    //         serialization: 'none',
-    //         metadata: { message: 'hi i want to chat with you!' }
-    //       })
-
-    //       c.on('open', function () {
-    //         connect(c)
-    //       })
-
-    //       c.on('error', function (err) { alert(err) })
-
-    //       var f = this.peer.connect(requestedPeer, { label: 'file', reliable: true })
-
-    //       f.on('open', function () {
-    //         connect(f)
-    //       })
-
-    //       f.on('error', function (err) { alert(err) })
-    //     }
-
-    //     this.connectedPeers[requestedPeer] = 1
-    //   })
-
-    //   // Close a connection.
-    //   window.$('#close').click(function () {
-    //     eachActiveConnection(function (c) {
-    //       c.close()
-    //     })
-    //   })
-
-    //   // Send a chat message to all active connections.
-    //   window.$('#send').submit(function (e) {
-    //     e.preventDefault()
-
-    //     // For each active connection, send the message.
-    //     var msg = window.$('#text').val()
-
-    //     eachActiveConnection(function (c, $c) {
-    //       if (c.label === 'chat') {
-    //         c.send(msg)
-    //         $c.find('.messages').append('<div><span className="you">You: </span>' + msg + '</div>')
-    //       }
-    //     })
-
-    //     window.$('#text').val('')
-    //     window.$('#text').focus()
-    //   })
-
-      // // Goes through each active peer and calls FN on its connections.
-      // function eachActiveConnection(fn) {
-      //   var actives = window.$('.active')
-      //   var checkedIds = {}
-      //   actives.each(function () {
-      //     var peerId = window.$(this).attr('id')
-      //     if (!checkedIds[peerId]) {
-      //       var conns = this.peer.connections[peerId]
-      //       for (var i = 0, ii = conns.length i < ii i += 1) {
-      //         var conn = conns[i]
-      //         fn(conn, window.$(this))
-      //       }
-      //     }
-      //     checkedIds[peerId] = 1
-      //   })
-      // }
-
-      // // Show browser version
-      // //window.$('#browsers').text(navigator.userAgent)
-    //})
 
     // Make sure things clean up properly.
     window.onunload = window.onbeforeunload = function (e) {
