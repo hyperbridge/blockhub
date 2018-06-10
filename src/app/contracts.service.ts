@@ -9,15 +9,46 @@ declare let require: any
 declare let window: any
 
 const config = {
-  RAFT_ENABLED: true
+  RAFT_ENABLED: true,
+  ETHEREUM_ENABLED: false,
+  CHAOS_MONKEY_ENABLED: true,
+  CHAOS_MONKEY_STRENGTH: null,
+  DARKLAUNCH: {
+    NODE_OPERATORS: false
+  }
 }
 
-const ID = function () {
+const ID = function() {
   // Math.random should be unique because of its seeding algorithm.
   // Convert it to base 36 (numbers + letters), and grab the first 9 characters
   // after the decimal.
   return '_' + Math.random().toString(36).substr(2, 9);
-};
+}
+
+const InitChaosMonkey = function() {
+  if (!config.CHAOS_MONKEY_STRENGTH) {
+    config.CHAOS_MONKEY_STRENGTH = Math.floor(Math.random() * 10)
+  }
+
+}
+
+const Chaosify = function() {
+  const spec = {
+    0: (10 - config.CHAOS_MONKEY_STRENGTH) / 100,
+    1: config.CHAOS_MONKEY_STRENGTH / 100
+  }
+
+  let i, sum = 0, r = Math.random()
+  for (i in spec) {
+    sum += spec[i];
+    if (r <= sum) return i ? true : false
+  }
+}
+
+InitChaosMonkey()
+
+console.log('[BlockHub] Configuration set', config)
+
 
 let tokenAbi = require('./contracts/tokenContract.json')
 
@@ -28,7 +59,6 @@ class PeerService {
   peer = null
   connectedPeers = {}
   peerId = null
-  peerCallbacks = {}
   requests = {}
   pendingData = ''
 
@@ -105,10 +135,13 @@ class PeerService {
       }
     }
 
-    const pageContentDataRequest = (path, peer) => {
+    const pageContentDataRequest = (path, params) => {
       const data = {
         path: path
       }
+
+      const peers = Object.keys(this.connectedPeers)
+      const peer = this.connectedPeers[peers[0]]
 
       sendCommand(peer, 'pageContentDataRequest', data, null, (data) => {
         console.log('Page content data response', data.content)
@@ -140,6 +173,10 @@ class PeerService {
           hash: md5(document.getElementById('main_navbar').innerHTML)
         }
 
+        if (config.CHAOS_MONKEY_ENABLED && Chaosify()) {
+          data.hash = 'chaos'
+        }
+
         sendCommand(meta.client, 'pageContentValidationResponse', data, cmd.requestId)
       } else if (cmd.key === 'pageContentDataRequest') {
         const data = {
@@ -154,6 +191,40 @@ class PeerService {
           sendCommand(meta.client, 'raft', data, cmd.requestId)
         });
       }
+    }
+    
+    const initClient = (client) => {
+      let pendingData = ''
+
+      client.on('call', function (call) {
+        console.log('[PeerService] Received call', call)
+      })
+
+      client.on('data', function (data) {
+        console.log('[PeerService] Received data from', client.peer, data)
+
+        if (data[data.length - 1] === '}') {
+          const cmd = JSON.parse(pendingData + data)
+
+          pendingData = ''
+
+          runCommand(cmd, { client })
+        } else {
+          pendingData += data
+        }
+      })
+
+      client.on('close', function () {
+        console.log('[PeerService] Peer has left', client.peer)
+
+        delete this.connectedPeers[client.peer]
+
+        raft.leave(client.peer)
+      })
+
+      client.on('error', function (err) {
+        console.log('[PeerService] Error', err)
+      })
     }
 
     this.peer.on('call', (call) => {
@@ -174,42 +245,12 @@ class PeerService {
       }
     })
 
-    this.peer.on('connection', (c) => {
-      console.log('[PeerService] New connection', c)
+    this.peer.on('connection', (client) => {
+      console.log('[PeerService] New connection', client)
 
-      this.connectedPeers[c.peer] = c
+      this.connectedPeers[client.peer] = client
 
-      var riftCallback = null
-
-      let pendingData = ''
-
-      c.on('call', function (call) {
-        console.log('[PeerService] Received call', call)
-      })
-
-      c.on('data', function (data) {
-        console.log('[PeerService] Received data from', c.peer, data)
-
-        if (data[data.length - 1] === '}') {
-          const cmd = JSON.parse(pendingData + data)
-
-          pendingData = ''
-
-          runCommand(cmd, { client: c })
-        } else {
-          pendingData += data
-        }
-      })
-
-      c.on('close', function () {
-        alert(c.peer + ' has left the chat.')
-
-        delete this.connectedPeers[c.peer]
-
-        raft.leave(c.peer)
-      })
-
-      c.on('error', function (err) { alert(err) })
+      initClient(client)
     })
 
     this.peer.on('error', (err) => {
@@ -217,64 +258,35 @@ class PeerService {
     })
 
     const peerConnect = (peerId) => {
-      var pp = this.peer.connect(peerId, {
+      var client = this.peer.connect(peerId, {
         label: 'chat',
         serialization: 'none',
         metadata: { message: 'Lets connect' }
       })
 
-      let pendingData = ''
-
-      pp.on('open', () => {
+      client.on('open', () => {
         console.log('[PeerService] Connected to', peerId)
 
-        pp.open = true
+        client.open = true
 
-        this.connectedPeers[peerId] = pp
+        this.connectedPeers[peerId] = client
 
         if (config.RAFT_ENABLED) {
           raft.join(peerId, (cmd, cb) => {
             if (!cmd.key) // If no key, then this is a native raft command, so lets wrap it
-              cmd = { key: 'raft', requestId: ID(), data: cmd }
+              cmd = { key: 'raft', data: cmd }
 
-            console.log('[Rift] Sending command to peer', peerId, cmd)
-
-            this.requests[cmd.requestId] = (data) => {
-              console.log('[Raft] Request callback', data)
-
-              cb(data)
-            }
-
-            sendCommand(pp, cmd)
+            sendCommand(client, cmd.key, cmd.data, null, cb)
           })
         }
       })
 
-      pp.on('data', function (data) {
-        console.log('[PeerService] Received data from', pp.peer, data)
-
-        if (data[data.length - 1] === '}') {
-          const cmd = JSON.parse(pendingData + data)
-
-          pendingData = ''
-
-          runCommand(cmd)
-        } else {
-          pendingData += data
-        }
-      })
+      initClient(client)
     }
 
     window.peerConnect = peerConnect
 
-    const getPageData = (pagePath, params) => {
-      const peers = Object.keys(this.connectedPeers)
-      const dataRelayer = this.connectedPeers[peers[0]]
-
-      pageContentDataRequest('/', dataRelayer)
-    }
-
-    window.getPageData = getPageData
+    window.pageContentDataRequest = pageContentDataRequest
 
     // Make sure things clean up properly.
     window.onunload = window.onbeforeunload = function (e) {
@@ -348,6 +360,7 @@ export class ContractsService {
 
     this._tokenContract = new this._web3.eth.Contract(tokenAbi.abi, this._tokenContractAddress) //this._web3.eth.contract(tokenAbi).at(this._tokenContractAddress)
   }
+
   private async getAccount(): Promise<string> {
     if (this._account == null) {
       this._account = await new Promise((resolve, reject) => {
