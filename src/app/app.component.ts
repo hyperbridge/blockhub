@@ -7,7 +7,7 @@ import {NavigationEnd, Router} from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Blockhub';
+  title = 'BlockHub';
 
   constructor(private router: Router) { }
 

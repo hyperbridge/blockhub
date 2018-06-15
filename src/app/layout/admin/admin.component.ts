@@ -211,6 +211,8 @@ export class AdminComponent implements OnInit {
     this.setMenuAttributes(this.windowWidth);
     this.setHeaderAttributes(this.windowWidth);
 
+    this.setLayoutType('dark');
+
     // dark
     /*this.setLayoutType('dark');*/
 
@@ -229,7 +231,7 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setBackgroundPattern('theme1');
+    //this.setBackgroundPattern('theme1');
     /*document.querySelector('body').classList.remove('dark');*/
   }
 
