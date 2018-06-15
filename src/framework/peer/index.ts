@@ -10,7 +10,7 @@ const md5 = require('js-md5')
 
 const config = {
     RAFT_ENABLED: true,
-    ETHEREUM_ENABLED: false,
+    ETHEREUM_ENABLED: true,
     DATA_RELAYER_ENABLED: true,
     CHAOS_MONKEY_ENABLED: true,
     CHAOS_MONKEY_STRENGTH: null,
@@ -23,9 +23,13 @@ const local = {
     raft: null,
     peer: null,
     connectedPeers: {},
+    connectingPeers: {},
     peerId: null,
     requests: {},
     pendingData: '',
+    peerHost: 'localhost',//'blockhub-peer-server.herokuapp.com',//'0.peerjs.com',
+    peerPort: 9000,//80,//9000,
+    peerKey: 'nodeOperator',
 }
 
 
@@ -36,7 +40,21 @@ export const ID = function () {
     return '_' + Math.random().toString(36).substr(2, 9);
 }
 
-export const sendCommand = (key: String, data: any = {}, peer: any = null, responseId: String = null, cb: Function = null) => {
+export const getPeer = async (peerId) => {
+    const peer = local.connectedPeers[peerId]
+
+    if (!peer.open) {
+        await peerConnect(peerId)
+
+        return new Promise((resolve) => {
+            resolve(peer)
+        })
+    }
+
+    Promise.resolve(peer)
+}
+
+export const sendCommand = async (key: String, data: any = {}, peer: any = null, responseId: String = null, cb: Function = null) => {
     const cmd = {
         key: key,
         responseId: responseId,
@@ -53,7 +71,7 @@ export const sendCommand = (key: String, data: any = {}, peer: any = null, respo
     if (!peer) {
         const peers = Object.keys(local.connectedPeers)
         
-        peer = local.connectedPeers[peers[0]]
+        peer = await getPeer(peers[0])
     }
 
     if (!peer) {
@@ -63,14 +81,14 @@ export const sendCommand = (key: String, data: any = {}, peer: any = null, respo
     peer.send(JSON.stringify(cmd))
 }
 
-export const pageContentValidationRequest = (path, content, peer) => {
+export const pageContentValidationRequest = async (path, content, peer) => {
     const hashedContent = md5(content)
 
     const data = {
         path: path
     }
 
-    sendCommand('pageContentValidationRequest', data, peer, null, (data) => {
+    await sendCommand('pageContentValidationRequest', data, peer, null, (data) => {
         console.log('Page content validation response', data.hash)
 
         if (data.hash === hashedContent) {
@@ -89,7 +107,7 @@ export const pageContentValidationRequest = (path, content, peer) => {
     }
 }
 
-export const pageContentDataRequest = (path, params) => {
+export const pageContentDataRequest = async (path, params) => {
     const data = {
         path: path
     }
@@ -97,7 +115,7 @@ export const pageContentDataRequest = (path, params) => {
     const peers = Object.keys(local.connectedPeers)
     const peer = local.connectedPeers[peers[0]]
 
-    sendCommand('pageContentDataRequest', data, null, null, (data) => {
+    await sendCommand('pageContentDataRequest', data, null, null, (data) => {
         console.log('Page content data response', data.content)
 
         const peers = Object.keys(local.connectedPeers)
@@ -107,8 +125,8 @@ export const pageContentDataRequest = (path, params) => {
     })
 }
 
-export const addressBalanceRequest = async(address): Promise<any> => {
-    if (config.DATA_RELAYER_ENABLED && Ethereum.isConnected()) {
+export const addressBalanceRequest = async (address): Promise<any> => {
+    if (config.ETHEREUM_ENABLED && config.DATA_RELAYER_ENABLED && Ethereum.isConnected()) {
         const balance = await Ethereum.getUserBalance()
 
         const data = {
@@ -117,12 +135,12 @@ export const addressBalanceRequest = async(address): Promise<any> => {
 
         return Promise.resolve(data)
     } else {
-        return new Promise((resolve) => {
+        return new Promise(async (resolve) => {
             const data = {
                 address
             }
 
-            sendCommand('addressBalanceRequest', data, null, null, (data) => {
+            await sendCommand('addressBalanceRequest', data, null, null, (data) => {
                 resolve(data)
             })
         })
@@ -153,23 +171,23 @@ export const runCommand = async (cmd, meta = null) => {
             data.hash = 'chaos'
         }
 
-        sendCommand('pageContentValidationResponse', data, meta.client, cmd.requestId)
+        await sendCommand('pageContentValidationResponse', data, meta.client, cmd.requestId)
     } else if (cmd.key === 'pageContentDataRequest') {
         const data = {
             content: document.getElementById('main_navbar').innerHTML
         }
 
-        sendCommand('pageContentDataResponse', data, meta.client, cmd.requestId)
+        await sendCommand('pageContentDataResponse', data, meta.client, cmd.requestId)
     } else if (cmd.key === 'raft') {
-        local.raft.emit('data', cmd.data, (data) => {
+        local.raft.emit('data', cmd.data, async (data) => {
             console.log('[PeerService] Packet reply from ' + local.raft.address, data);
 
-            sendCommand('raft', data, meta.client, cmd.requestId)
-        });
+            await sendCommand('raft', data, meta.client, cmd.requestId)
+        })
     } else if (cmd.key === 'addressBalanceRequest') {
         const data = await addressBalanceRequest(cmd.address)
 
-        sendCommand('addressBalanceResponse', data, meta.client, cmd.requestId)
+        await sendCommand('addressBalanceResponse', data, meta.client, cmd.requestId)
     }
 }
 
@@ -207,43 +225,95 @@ export const initClient = (client) => {
     })
 }
 
-export const peerConnect = (peerId) => {
-    var client = local.peer.connect(peerId, {
-        label: 'chat',
-        serialization: 'none',
-        metadata: { message: 'Lets connect' }
+export const peerConnect = async (peerId) => {
+    console.log('[PeerService] Connecting to', peerId)
+
+    local.connectingPeers[peerId] = true
+
+    return new Promise((resolve) => {
+        const client = local.peer.connect(peerId, {
+            label: 'chat',
+            serialization: 'none',
+            metadata: { message: 'Lets connect' }
+        })
+
+        client.on('open', () => {
+            console.log('[PeerService] Connected to', peerId)
+
+            client.open = true
+
+            delete local.connectingPeers[peerId]
+
+            local.connectedPeers[peerId] = client
+
+            if (config.RAFT_ENABLED) {
+                local.raft.join(peerId, async (cmd, cb) => {
+                    if (!cmd.key) // If no key, then this is a native raft command, so lets wrap it
+                        cmd = { key: 'raft', data: cmd }
+
+                    await sendCommand(cmd.key, cmd.data, client, null, cb)
+                })
+            }
+
+            resolve(client)
+        })
+
+        initClient(client)
     })
-
-    client.on('open', () => {
-        console.log('[PeerService] Connected to', peerId)
-
-        client.open = true
-
-        local.connectedPeers[peerId] = client
-
-        if (config.RAFT_ENABLED) {
-            local.raft.join(peerId, (cmd, cb) => {
-                if (!cmd.key) // If no key, then this is a native raft command, so lets wrap it
-                    cmd = { key: 'raft', data: cmd }
-
-                sendCommand(cmd.key, cmd.data, client, null, cb)
-            })
-        }
-    })
-
-    initClient(client)
 }
 
+export const fetchPeers = async () => {
+    return new Promise((resolve) => {
+        const req = new XMLHttpRequest()
+
+        req.open('GET', 'http://' + local.peerHost + ':' + local.peerPort + '/' + local.peerKey + '/peers')
+
+        req.onload = () => {
+            const result = JSON.parse(req.response)
+
+            console.log('[PeerService] Peers found', result)
+
+            resolve(result)
+        }
+
+        req.send()
+    })
+}
+
+export const monitorPeers = () => {
+    const check = async () => {
+        const peers = await fetchPeers()
+
+        for (let i in peers) {
+            const peerId = peers[i]
+
+            if (peerId == local.peerId) continue
+            if (local.connectedPeers[peerId]) continue
+            if (local.connectingPeers[peerId]) continue
+            
+            await peerConnect(peerId)
+        }
+
+        setTimeout(check, 2000)
+    }
+
+    check()
+}
 
 export const init = () => {
-    console.log('[BlockHub] Configuration set', config)
+    console.log('[PeerService] Initializing')
 
     ChaosMonkey.init(config.CHAOS_MONKEY_STRENGTH)
 
+    if (ChaosMonkey.random()) {
+        config.DATA_RELAYER_ENABLED = false
+    }
+
     local.peer = new Peer({
-        host: 'blockhub-peer-server.herokuapp.com',//'0.peerjs.com',
-        port: 80,//9000,
+        host: local.peerHost,
+        port: local.peerPort,
         secure: false,
+        key: local.peerKey,
         debug: 3,
         allow_discovery: true,
         logFunction: function () {
@@ -260,13 +330,17 @@ export const init = () => {
     local.peer.on('open', (id) => {
         console.log('[PeerService] Connected', id)
 
-        local.raft = new LifeRaft(id, {
+        local.peerId = id
+
+        local.raft = new LifeRaft(local.peerId, {
             'election min': 2000,
             'election max': 4000,
             'heartbeat min': 1000,
             'heartbeat max': 2000,
             'socket': null
         })
+
+        monitorPeers()
     })
 
     local.peer.on('call', (call) => {
@@ -310,4 +384,7 @@ export const init = () => {
             local.peer.destroy()
         }
     }
+
+    console.log('[PeerService] Configuration set', config)
+
 }

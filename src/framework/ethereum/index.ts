@@ -47,16 +47,14 @@ export const isConnected = (): Boolean => {
 export const getAccount = async (): Promise<string> => {
   if (local._account == null) {
     local._account = await new Promise((resolve, reject) => {
-        local._web3.eth.getAccounts((err, accs) => {
+      local._web3.eth.getAccounts((err, accs) => {
         if (err != null) {
-          alert('There was an error fetching your accounts.')
+          console.warn('There was an error fetching your accounts.', err)
           return
         }
 
         if (accs.length === 0) {
-          alert(
-            'Couldn\'t get any accounts! Make sure your Ethereum client is configured correctly.'
-          )
+          console.warn('Couldn\'t get any accounts! Make sure your Ethereum client is configured correctly.')
           return
         }
         resolve(accs[0])
