@@ -96,7 +96,7 @@ var app = {
             // helper for aside fixed layout. adds/romoves class with paddings.
             var pageContent = document.getElementById("page-content");
 
-            if(pageContent.classList.contains("page__content--w-aside-fixed")){
+            if (pageContent && pageContent.classList.contains("page__content--w-aside-fixed")){
                                 
                 window.addEventListener("scroll", app._debouncer( function(){
                     

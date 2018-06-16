@@ -48,7 +48,7 @@
 
 <script lang="ts">
 export default {
-  name: 'component',
+  name: 'default_w_user',
   components: {
     'c-navigation-list': () => import('@/components/navigation/navigation-list')
   },

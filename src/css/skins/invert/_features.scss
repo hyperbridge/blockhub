@@ -45,6 +45,7 @@
 .credit-card{
     &.invert{
         border: 0px;
+        background: #3d3e5d;
         
         .credit-card__number{
             color: $invert-color-heading;

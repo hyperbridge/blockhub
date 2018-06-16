@@ -10,12 +10,15 @@
 
 <script lang="ts">
 export default {
-  name: 'hello',
+  name: 'home',
   data() {
     return {
       msg: 'Welcome to Your Vue.js PWA',
     }
   },
+  mounted() {
+    initBlockHubSettings()
+  }
 }
 </script>
 

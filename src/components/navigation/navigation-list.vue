@@ -627,7 +627,7 @@
 
 <script lang="ts">
 export default {
-  name: 'component',
+  name: 'navigation-list',
   data() {
     return {}
   }

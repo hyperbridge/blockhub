@@ -11,6 +11,7 @@ var demo_dashboard = {
         app._loading.show(document.getElementById("dashboard-budget-card"),{spinner: true});
             
         setTimeout(function(){
+            if (!document.getElementById("dashboard-ec-radar")) return
             
             dashboardECradar = echarts.init(document.getElementById("dashboard-ec-radar"));
 
@@ -91,6 +92,7 @@ var demo_dashboard = {
         var dashboardECline = false;
         
         setTimeout(function(){
+            if (!document.getElementById("dashboard-ec-line")) return
                 
             dashboardECline = echarts.init(document.getElementById("dashboard-ec-line"));
 

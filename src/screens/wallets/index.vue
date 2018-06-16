@@ -484,7 +484,11 @@ export default {
   },
   components: {
     'c-example-banking': () => import('@/components/headers/example_banking'),
-    'c-default-w-user': () => import('@/components/navigation/default_w_user')
+    'c-default-w-user': () => import('@/components/navigation/default_w_user'),
+    'c-heading': () => import('@/components/heading/heading')
+  },
+  mounted() {
+    initBlockHubSettings()
   }
 }
 </script>
