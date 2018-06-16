@@ -1,78 +1,71 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8">
-    <title>Blockhub</title>
-    <base href="/dist/">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="author" content="" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
-    <link href="styles.9c041dbf78a3cf3ac792.bundle.css" rel="stylesheet" />
-</head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<body>
-    <app-root>
-        <div class="theme-loader">
-            <div class="loader-track">
-                <div class="preloader-wrapper">
-                    <div class="spinner-layer spinner-blue">
-                        <div class="circle-clipper left">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="gap-patch">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="circle-clipper right">
-                            <div class="circle"></div>
-                        </div>
-                    </div>
-                    <div class="spinner-layer spinner-red">
-                        <div class="circle-clipper left">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="gap-patch">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="circle-clipper right">
-                            <div class="circle"></div>
-                        </div>
-                    </div>
-                    <div class="spinner-layer spinner-yellow">
-                        <div class="circle-clipper left">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="gap-patch">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="circle-clipper right">
-                            <div class="circle"></div>
-                        </div>
-                    </div>
-                    <div class="spinner-layer spinner-green">
-                        <div class="circle-clipper left">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="gap-patch">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="circle-clipper right">
-                            <div class="circle"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </app-root>
-    <script type="text/javascript" src="inline.cd1e2953971fbdda288f.bundle.js"></script>
-    <script type="text/javascript" src="polyfills.cf74fde116aaa177a9a0.bundle.js"></script>
-    <script type="text/javascript" src="vendor.330749b4e5cda1b57d85.bundle.js"></script>
-    <script type="text/javascript" src="main.8b8865af8bcfaa1422c6.bundle.js"></script>
-</body>
+    <title>BlockHub</title>
 
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-16x16.png">
+    <!--[if IE]><link rel="shortcut icon" href="/static/img/icons/favicon.ico"><![endif]-->
+
+    <link rel="manifest" href="<%= htmlWebpackPlugin.files.publicPath %>static/manifest.json">
+
+    <meta name="theme-color" content="#4DBA87">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="BlockHub">
+    <meta name="msapplication-TileImage" content="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+
+    <link rel="apple-touch-icon" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/apple-touch-icon-152x152.png">
+    <link rel="mask-icon" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/safari-pinned-tab.svg" color="#4DBA87">
+
+    <% for (var chunk of webpack.chunks) {
+        for (var file of chunk.files) {
+          if (file.match(/\.(js|css)$/)) { %>
+
+    <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
+
+  </head>
+  <body>
+    <noscript>
+      Please enable JavaScript
+    </noscript>
+
+    <div id="app"></div>
+
+    <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
+    
+    <!-- IMPORTANT SCRIPTS -->
+    <script type="text/javascript" src="/static/js/vendors/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/vendors/jquery/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="/static/js/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+    
+    <script type="text/javascript" src="/static/js/vendors/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- END IMPORTANT SCRIPTS -->
+
+    <!-- THIS PAGE SCRIPTS ONLY -->
+    <script type="text/javascript" src="/static/js/vendors/moment/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="/static/js/vendors/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="/static/js/vendors/select2/select2.min.js"></script>
+    <script type="text/javascript" src="/static/js/vendors/daterangepicker/daterangepicker.js"></script>
+    <script type="text/javascript" src="/static/js/vendors/raty/jquery.raty.js"></script>
+    <!-- //END THIS PAGE SCRIPTS ONLY -->
+
+
+<!-- TEMPLATE SCRIPTS -->
+<script type="text/javascript" src="/static/js/app.js"></script>
+<script type="text/javascript" src="/static/js/plugins.js"></script>
+<script type="text/javascript" src="/static/js/demo.js"></script>
+<script type="text/javascript" src="/static/js/settings.js"></script>
+<!-- END TEMPLATE SCRIPTS -->
+
+
+    <!-- THIS PAGE DEMO -->
+    <script type="text/javascript" src="/static/js/demo_dashboard.js"></script>
+    <!-- //THIS PAGE DEMO -->
+  </body>
 </html>

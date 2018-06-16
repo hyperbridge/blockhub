@@ -1,0 +1,1358 @@
+/*------------------------------------------------------------------
+
+    [Template features]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]    
+    
+    
+    [Table of contents]
+    
+    1. Backdrop
+    2. Loading
+    3. Divider
+    4. Text divider
+    5. Page loader
+    6. Back to top
+    7. Rw progress
+    8. Rw informative progress
+    9. Tag
+    10. Form features
+    11. Icon box
+    12. Credit card
+    13. FAQ list
+    14. Timeline    
+
+-------------------------------------------------------------------*/
+
+
+/*-----
+    [Backdrop]     
+-----*/
+.backdrop{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: 999;
+    background: rgba(0,0,0,0.8);
+    
+    /*-----
+        [.backdrop--mtransparent lower transparency]     
+    -----*/
+    &--mtransparent{
+        background: rgba(0,0,0,0.1);
+    }
+    &.fadeOut{
+        animation: fadeOut $animation linear;
+    }
+}
+
+
+
+/*-----
+    [Loading]
+    
+    Loading layer for all containers
+
+    .loading - wrapper
+        & .loading--solid      - [modify] adds removes transparency
+        & .loading--w-spinner  - [modify] adds spinner icon
+        & .loading--dark       - [modify] changes to dark background
+        & .loading--text       - [modify] adds container with text
+
+    .preloading - spcial state for container before loading
+    
+-----*/
+.loading{
+    position: absolute;    
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.9);
+    left: 0px;
+    top: 0px;
+    z-index: 998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /*-----
+        [.loading--solid adds removes transparency]
+    -----*/
+    &--solid{
+        background: rgba(255,255,255,1);
+    }
+    
+    > div{
+        position: relative;
+        width: 20px;
+        height: 20px;
+    }
+    
+    /*-----
+        [.loading--w-spinner adds spinner icon]
+    -----*/
+    &--w-spinner{
+        > div{
+            
+            .loading-spinner{
+                position: absolute;
+                left: 0px;
+                top: 0px;                
+                width: 20px;
+                height: 20px;                                                                                
+                animation: rotate 500ms infinite linear;
+                
+                &:before{
+                    position: absolute;
+                    left: 3px;
+                    top: 3px;
+                    content: " ";
+                    width: 14px;
+                    height: 14px;
+                    border: 2px solid $color;                   
+                    border-right-color: transparent;
+                    border-radius: 7px;
+                }                
+            }
+        }
+    }       
+    
+    /*-----
+        [.loading--text adds container with text]
+    -----*/
+    &--text{        
+        &.loading--w-spinner{
+            > div{
+                padding-left: 25px;
+                width: auto;
+            }
+        }
+        > div{
+            font-size: $font-size - 2;
+            font-weight: 600;
+            line-height: 22px;
+        }
+    }
+    
+    /*-----
+        [.loading--dark changes to dark background]
+    -----*/    
+    &--dark{
+        color: $color-invert;
+        background: rgba(0,0,0,0.8);
+        
+        &.loading--w-spinner{
+            > div{
+                .loading-spinner{
+                    &:before{
+                        border-color: $color-invert;
+                        border-right-color: transparent;
+                    }                    
+                }                
+            }
+        }
+        &.loading--solid{
+            background: rgba(0,0,0,1);
+        }
+    }
+    
+    &.fadeOut{
+        animation: fadeOut $animation linear;
+    }   
+}
+
+/*-----
+    [Corrections for some containers]
+-----*/ 
+.page__content > .content{
+    .loading{
+        z-index: 997;
+    }
+}
+.page-sidepanel--hidden,.page-aside--hidden{
+    > .loading{
+        display: none;
+    }
+}
+
+/*-----
+    [.preloading state for box]
+-----*/ 
+.preloading{
+    max-height: 50px;
+    overflow: hidden;
+    @if $animation != 0 {
+        @include transition(max-height $animation ease-in-out);
+    }
+    
+    > div:not(.loading), > ul{
+        opacity: 0;
+        @if $animation != 0 {
+            @include transition(opacity $animation ease-in-out);
+        }
+    }
+    
+    &.loaded{
+        max-height: 1000px;
+        
+        > div:not(.loading), > ul{
+            opacity: 1;
+        }
+    }
+}
+
+.card.loading-process{
+    &.card-inner-container--up{
+        .card-inner-container{
+            z-index: 999;
+        }
+    }
+}
+
+
+
+/*-----
+    [Divider]
+    
+    Simple divider for all containers
+
+    .divider - wrapper
+        & .divider--sm      - [modify] small vertical margins
+        & .divder--lg       - [modify] large vertical margins
+        & .divder--dashed   - [modify] changes solid line to dashed    
+-----*/
+.divider{
+    width: 100%;
+    height: 1px;
+    background: $border-color;
+    margin: 30px 0px;
+    position: relative;
+    
+    &:after,&:before{
+        position: absolute;
+        content: " ";
+        left: 50%;
+        top: -3px;
+        width: 7px;
+        height: 7px;
+        background: $base-skin-background;
+        border: 1px solid $border-color;
+        margin-left: -10px;
+    }
+    &:before{
+        margin-left: 0px;
+        margin-right: -10px;
+    }
+    
+    /*-----
+        [.divider--sm - small vertical margins]
+    -----*/
+    &--sm{
+        margin: 10px 0px;
+    }
+    
+    /*-----
+        [.divider--lg - large vertical margins]
+    -----*/
+    &--lg{
+        margin: 50px 0px;
+    }
+    
+    /*-----
+        [.divder--dashed - changes solid line to dashed]
+    -----*/
+    &--dashed{
+        background: transparent;
+        border: 1px dashed $border-color;
+        
+        &:after,&:before{
+            display: none;
+        }
+    }
+}
+
+
+/*-----
+    [Text divider]
+    
+    Divider with text for any container
+
+    .divider-text - wrapper
+        & .divider-text--sm      - [modify] small vertical margins
+        & .divider-text--lg      - [modify] large vertical margins
+        & .divider-text--xs      - [modify] no vertical margins
+-----*/
+.divider-text{
+    float: left;
+    width: 100%;
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+    line-height: $line-height;
+    color: $color-heading;
+    padding: 5px 20px;
+    margin: 30px 0px;
+    font-weight: 500;
+    background: rgba(0, 0, 0, 0.05);
+    
+    /*-----
+        [.divider-text--lg - large vertical margins]
+    -----*/
+    &--lg{
+        margin: 50px 0px;
+    }
+    
+    /*-----
+        [.divider-text--sm - small vertical margins]
+    -----*/
+    &--sm{
+        margin: 10px 0px;
+    }
+    
+    /*-----
+        [.divider-text--xs - no vertical margins]
+    -----*/
+    &--xs{
+        margin: 0px 0px;
+    }
+}
+
+
+
+/*-----
+    [Page loader]
+    
+    Page loader layer
+
+    .page-loader                            - wrapper
+        & .page-loader--animation           - adds animations
+        & .page-loader--animation-primary   - adds animations with primary color
+        + .page-loader__spinner             - spinner 
+-----*/
+body{            
+    
+    /*-----
+        [.page-loading loading state for document]
+    -----*/
+    &.page-loading{
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    /*-----
+        [Page loader wrapper / .page-loader]
+    -----*/
+    .page-loader{        
+        position: fixed;
+        z-index: 9999;
+        width: 100%;
+        height: 100%;
+        left: 0px;
+        top: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #FFF;
+
+        &:before{
+            content: " ";
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            left: 25%;
+            bottom: -50%;
+            border-radius: 50%;
+            display: none;
+        }  
+        
+        /*-----
+            [Animation / .page-loader--animation]
+        -----*/
+        &--animation{
+            &:before{
+                display: block;
+                animation: pageLoaderDefault 2s infinite ease-in-out;
+            }
+        }
+        
+        /*-----
+            [Animation primary color / .page-loader--animation-primary]
+        -----*/
+        &--animation-primary{
+            &:before{
+                display: block;
+                animation: pageLoaderPrimary 2s infinite ease-in-out;
+            }
+        }
+        
+        /*-----
+            [Spinner / .page-loader__spinner]
+        -----*/
+        &__spinner{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            height: 14px;
+            width: 14px;
+            border-radius: 7px;
+            border: 2px solid $color;
+            border-top-color: #FFF;
+            animation: rotate 500ms infinite linear;
+        }
+        
+        &.fadeOut{
+            animation: fadeOut $animation linear;
+        }
+    }
+}        
+
+
+
+/*-----
+    [Back to top]    
+
+    Back to top button        
+-----*/
+.back_to_top{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 20px;
+    height: 20px;
+    background: rgba($base-skin-color,0.1);
+    border-radius: $border-radius;
+    opacity: 0;
+    cursor: pointer;
+    display: none;    
+    @if $animation != 0 {
+        @include transition(all 100ms ease-in-out);
+    }
+    
+    &:before{
+        content: "\f106";
+        font-family: "FontAwesome";
+        position: absolute;
+        line-height: 20px;
+        text-align: center;
+        width: 100%;
+        color: #fff;
+        @if $animation != 0 {
+            @include transition(all 100ms ease-in-out);
+        }
+    }    
+    
+    &.show{        
+        display: block;
+        opacity: 1;
+        animation: fadeIn $animation ease-in;
+    }
+    
+    &:hover{
+        right: 10px;
+        bottom: 10px;
+        width: 40px;
+        height: 40px;
+        
+        &:before{
+            line-height: 40px;
+        }
+        
+        background: rgba($base-skin-color,0.95);
+    }
+}
+
+
+
+/*-----
+    [Rw progress]    
+    
+    Simple progress with sections
+    
+    .rw-progress                  - wrapper
+        & .rw-progress--secondary - [modify] background to secondary theme color
+        & .rw-progress--animation - [modify] adds apear animation
+        & .rw-progress--sm        - [modify] small height
+-----*/
+.rw-progress{
+    float: left;
+    width: 100%;
+    height: 20px;
+    padding: 0px;
+    margin: 0px; 
+    
+    > div{
+        background: rgba(0,0,0,0.05);
+        width: 9%;
+        height: 100%;
+        margin-right: 1%;
+        float: left;        
+        position: relative;
+        
+        &.active{
+            &:after{
+                content: " ";
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                width: 100%;
+                height: 100%;
+                background: $primary-background;
+            }
+        }
+        
+        &:first-child{
+            border-radius: $border-radius 0px 0px $border-radius;
+            &:after{
+                border-radius: $border-radius 0px 0px $border-radius;
+            }
+        }
+        &:last-child{
+            border-radius: 0px $border-radius $border-radius 0px;
+            &:after{
+                border-radius: 0px $border-radius $border-radius 0px;
+            }
+        }
+    }
+    
+    /*-----
+        [.rw-progress--secondary - [modify] background to secondary theme color]
+    -----*/
+    &--secondary{
+        > div{
+            &.active{
+                &:after{
+                    background: $secondary-background;
+                }
+            }
+        }
+    }
+    
+    /*-----
+        [.rw-progress--animation - [modify] adds apear animation]
+    -----*/
+    &--animation{
+        > div{
+            opacity: 0;
+            
+            &.animate{
+                animation: fadeIn $animation ease-in;
+                opacity: 1;
+            }
+        }
+    }
+    
+    /*-----
+        [.rw-progress--sm - [modify] small height]
+    -----*/
+    &--sm{
+        height: 4px;
+        margin: 8px 0px;
+    }
+}
+
+
+
+/*-----
+    [Rw informative progress]    
+    
+    Progress bar container with text
+    
+    .rw-informative-progress                    - wrapper
+        & .rw-informative-progress--bordered    - [modify] adds borders
+        & .rw-informative-progress--rounded     - [modify] adds border radius
+        + .bar                                  - progress line
+        + .text                                 - container for text        
+-----*/
+.rw-informative-progress{
+    position: relative;
+    float: left;
+    width: 100%;
+    min-height: 40px;
+    margin-bottom: 10px;
+    background: rgba(0,0,0,0.01);
+    @include clearfix();
+    
+    /*-----
+        [.bar - progress line]
+    -----*/
+    > .bar{
+        content: " ";
+        position: absolute;
+        z-index: 1;
+        left: 0px;
+        top: 0px;
+        height: 100%;
+        min-width: 1%;
+        background: rgba(0,0,0,0.03);
+        
+        &--primary{
+            background: rgba($primary-background,0.1);
+        }
+        &--secondary{
+            background: rgba($secondary-background,0.1);
+        }
+        &--success{
+            background: rgba($success-background,0.1);
+        }
+        &--info{
+            background: rgba($info-background,0.1);
+        }
+        &--warning{
+            background: rgba($warning-background,0.1);
+        }
+        &--danger{
+            background: rgba($danger-background,0.1);
+        }
+    }
+    
+    /*-----
+        [.text - container for text]
+    -----*/
+    > .text{
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        line-height: $line-height;
+        color: $color;
+        padding: 10px 15px;        
+        font-weight: 500;
+        z-index: 2;
+    }
+    
+    /*-----
+        [.rw-informative-progress--bordered adds borders]
+    -----*/    
+    &--bordered{
+        border: 1px solid rgba(0,0,0,0.1);
+        > .bar{
+            border-right: 1px solid rgba(0,0,0,0.05);
+        }
+    }
+    
+    /*-----
+        [.rw-informative-progress--rounded  adds border radius]
+    -----*/
+    &--rounded{
+        border-radius: $border-radius;
+    }
+}
+
+
+
+/*-----
+    [Tag]    
+    
+    Simple template tag
+    
+    .tag - wrapper
+        & .tag--transparent - [modify] adds trasparent background
+        & .tag--sm          - [modify] small size
+        & .tag--block       - [modify] block
+-----*/
+.tag{
+    display: inline-block;
+    line-height: 20px;
+    padding: 10px 15px;
+    font-size: $font-size - 2;
+    background: $secondary-background;
+    color: $secondary-color;
+    border-radius: $border-radius;    
+    margin-right: 5px;
+    font-weight: 500;
+    
+    &[href]:hover{
+        color: $secondary-color;
+        text-decoration: none;
+        background: darken($secondary-background,5%);
+        @if $animation != 0 {
+            @include transition(all $animation ease-in-out);
+        }
+    }
+    
+    /*-----
+        [.tag--transparent adds trasparent background]
+    -----*/
+    &--transparent{
+        background: transparent;
+        border: 1px solid rgba(0,0,0,0.1);
+        color: $color;
+        
+        &[href]:hover{
+            background: rgba(0,0,0,0.05);
+            color: $color;
+        }
+    }
+    
+    /*-----
+        [.tag--sm small size]
+    -----*/
+    &--sm{
+        padding: 5px 15px;
+        margin-bottom: 5px;
+    }
+    
+    /*-----
+        [.tag--block tag as block]
+    -----*/
+    &--block{
+        float: left;
+        margin-right: 5px;
+    }
+}
+
+
+
+
+/*-----
+    [Form features]
+    
+    Simple bootstrap extension for form elements
+    
+    .form-control-element                         - wrapper
+        + .form-control-element__box              - absolute container for elements
+            & .form-control-element__box--pretify - [modify] pretify box
+        & .form-control-element--right            - [modify] right box position
+        & .form-control-element--both             - [modify] both sides box
+-----*/
+.form-control-element{
+    position: relative;
+    
+    .form-control{
+        padding-left: 40px;
+    }
+    
+    /*-----
+        [.form-control-element__box absolute container for elements]
+    -----*/
+    .form-control-element__box{
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        line-height: 30px;
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        padding: 5px;
+        
+        > .fa{
+            font-size: 14px;
+            line-height: 30px;
+        }
+        
+        .btn{
+            float: left;
+        }
+        
+        /*-----
+            [.form-control-element__box--pretify pretify box]
+        -----*/
+        &--pretify{
+            width: 30px;
+            height: 30px;
+            line-height: 20px;
+            border: 1px solid rgba(0,0,0,0.05);
+            top: 5px;
+            left: 5px;
+            border-radius: $border-radius;
+            
+            > .fa{
+                line-height: 18px;
+            }
+        }
+    }
+    
+    /*-----
+        [.form-control-element--right right box position]
+    -----*/
+    &.form-control-element--right{
+        .form-control{
+            padding-left: 9px;
+            padding-right: 40px;
+        }
+        .form-control-element__box{
+            left: auto;
+            right: 0px;
+            
+            &--pretify{
+                left: auto;
+                right: 5px;
+            }
+        }
+    }
+    
+    /*-----
+        [ .form-control-element--both both sides box]
+    -----*/
+    &.form-control-element--both{
+        .form-control{
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+        .form-control-element__box{            
+            &:last-child{
+                left: auto;
+                right: 0px;
+                
+                &.form-control-element__box--pretify{
+                    left: auto;
+                    right: 5px;
+                }
+            }
+        }
+    }
+}
+
+
+
+/*-----
+    [Icon box]
+    
+    Container for icons
+    
+    .icon-box                   - wrapper
+        & .icon-box--inline     - [modify] inline element        
+        & .icon-box--sm         - [modify] small box size
+        & .icon-box--lg         - [modify] large box size
+        & .icon-box--xlg        - [modify] extra large box size
+        & .icon-box--bordered   - [modify] adds border
+        & .icon-box--rounded    - [modify] adds rounded corners/border-radius
+        & .icon-box--circle     - [modify] circle box
+-----*/
+.icon-box{
+    float: left;
+    line-height: $line-height*2;
+    min-width: $line-height*2;
+    max-height: $line-height*2;
+    text-align: center;
+    margin: 0px;    
+    
+    > .fa{
+        line-height: $line-height*2;
+        font-size: 14px;
+    }
+    > [class^="li-"]{
+        line-height: $line-height*2;
+        font-size: 20px;
+    }
+    
+    /*-----
+        [.icon-box--inline inline element]
+    -----*/
+    &--inline{
+        display: inline-block;
+        float: none;
+    }
+    
+    /*-----
+        [.icon-box--sm small box size]
+    -----*/
+    &--sm{
+        line-height: $line-height;
+        min-width: $line-height;
+        
+        > .fa{
+            line-height: $line-height;
+        }
+    }
+    
+    /*-----
+        [.icon-box--lg large box size]
+    -----*/
+    &--lg{
+        > .fa{
+            font-size: 28px;
+        }
+    }
+    
+    /*-----
+        [.icon-box--xlg extra large box size]
+    -----*/
+    &--xlg{
+        line-height: $line-height*4;
+        min-width: $line-height*4;
+        max-height: $line-height*4;
+        
+        > .fa{
+            line-height: $line-height*4;
+            font-size: 42px;
+        }
+        
+        > [class^="li-"]{
+            font-size: 40px;
+            line-height: $line-height*4;
+        }
+    }
+    
+    /*-----
+        [.icon-box--bordered  adds border]
+    -----*/
+    &--bordered{
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    /*-----
+        [.icon-box--rounded adds rounded corners/border-radius]
+    -----*/
+    &--rounded{
+        border-radius: $border-radius;
+    }
+    
+    /*-----
+        [.icon-box--circle circle box]
+    -----*/
+    &--circle{
+        border-radius: 50%;
+    }        
+    
+    &[href]{
+        text-decoration: none;
+        @if $animation != 0 {
+            @include transition(background $animation ease-in-out);
+        }
+
+        &:hover{
+            background: rgba(0,0,0,0.03);
+        }
+    }        
+}
+
+
+
+/*-----
+    [Credit card]
+    
+    Credi card container
+    
+    .credit-card                - wrapper
+        + .credit-card__number  - Container for credit card number
+-----*/
+.credit-card{
+    float: left;
+    width: 100%;    
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: $base-skin-background;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: $border-radius;
+    font-family: "Oswald";
+    
+    /*-----
+        [.credit-card__number container for credit card number]
+    -----*/
+    &__number{
+        font-size: $font-size * 2;
+        font-weight: 700;
+        margin: 25px 0px;
+
+        > div{
+            padding: 0px;
+            text-align: center;
+            
+            &:first-child{
+                text-align: left;
+            }
+            &:last-child{
+                text-align: right;
+            }
+        }
+    }
+}
+
+/*-----
+    [FAQ list]        
+    
+    .list-faq                           - wrapper
+        + .list-faq-item                - list item
+            + .list-faq-item-title      - title
+            + .list-faq-item-content    - content
+-----*/
+.list-faq{
+    float: left;
+    width: 100%;
+
+    /*-----
+        [.list-faq-item list item]
+    -----*/
+    .list-faq-item{
+        float: left;
+        width: 100%;            
+        margin-bottom: 10px;
+        background: $base-skin-background;
+        border-radius: $border-radius;
+        border: 1px dashed rgba(0,0,0,0.1);                            
+        @if $animation != 0 {
+            @include transition(all $animation ease-in-out);
+        }
+        
+        /*-----
+            [.list-faq-item-title title]
+        -----*/
+        .list-faq-item-title{
+            float: left;
+            width: 100%;
+            padding: 15px 15px 15px 45px;                
+            line-height: 20px;
+            font-size: $font-size;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+
+            &:after{
+                position: absolute;
+                content: "\e996";
+                font-family: 'linearicons';
+                left: 15px;
+                top: 15px;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                font-size: 20px;
+                speak: none;
+                font-style: normal;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+                line-height: 1;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                color: $color;
+            }
+        }
+        /*-----
+            [.list-faq-item-content content]
+        -----*/
+        .list-faq-item-content{
+            float: left;
+            width: 100%;  
+            padding: 0px;                
+            max-height: 0px;
+            overflow: hidden;
+
+            .list-faq-highlight{
+                color: $success-background;
+                text-decoration: underline;
+            }
+        }
+
+        &.open{
+            border-style: solid;            
+            background: darken($base-skin-background,2%);                
+
+            .list-faq-item-title{
+                &:after{                        
+                    content: "\e995";
+                }
+            }
+
+            .list-faq-item-content{
+                padding: 5px 15px 15px;                    
+                max-height: 500px;
+            }                
+        }
+
+        &:hover{
+            background: darken($base-skin-background,2%);
+        }
+
+        &:last-child{
+            margin-bottom: 0px;
+        }
+    }
+}
+
+/*-----
+    [Timeline]        
+    
+    .timeline               - wrapper
+        & .timeline--right  - [modify] right elements position
+        & .timeline--simple - [modify] simplify timeline
+
+        + .timeline__item   - timeline item
+            + .user         - user image container
+            + .dot          - dot
+            + .content      - content container
+        + .timeline__more   - more button
+        
+-----*/
+.timeline{
+    padding: 0px 0px;
+    float: left;
+    width: 100%;
+    
+    /*-----
+        [.timeline__item timeline item]
+    -----*/
+    &__item{
+        float: left;
+        width: 100%;
+        padding-left: 70px;
+        position: relative;
+        padding-bottom: 30px;
+        
+        /*-----
+            [.user item image container]
+        -----*/
+        > .user{
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            z-index: 2;
+
+            > img{
+                width: 45px;
+                height: 45px;
+                padding: 2px;
+                border: 1px solid rgba(0,0,0,0.1);
+                background: #FFF;
+            }
+            
+            &--rounded{
+                > img{
+                    border-radius: 50%;
+                }
+            }
+        }
+        
+        /*-----
+            [.dot dot]
+        -----*/
+        > .dot{
+            position: absolute;
+            left: 13px;
+            top: 13px;
+            width: 21px;
+            height: 21px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 50%;
+            z-index: 2;
+
+            &:before{
+                content: " ";
+                position: absolute;
+                top: 11px;
+                left: 13px;
+                width: 20px;
+                height: 1px;
+                z-index: 1;
+                background: rgba(0,0,0,0.1);
+            }
+
+            &:after{
+                content: " ";
+                position: absolute;
+                width: 11px;
+                height: 11px;
+                background: #FFF;
+                border-radius: 50%;
+                top: 5px;
+                left: 5px;
+                z-index: 3;
+            }
+
+            &.dot-primary:after{background: $primary-background;}
+            &.dot-info:after{background: $info-background;}
+            &.dot-success:after{background: $success-background;}
+            &.dot-warning:after{background: $warning-background;}
+            &.dot-danger:after{background: $danger-background;}                
+        }
+        
+        /*-----
+            [.content content container]
+        -----*/
+        > .content{
+            padding: 12px 20px 12px;
+            float: left;
+            width: 100%;
+            background: $base-skin-background;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: $border-radius;
+
+            .title{                    
+                margin-bottom: 5px;
+                float: left;
+                width: 100%;
+                color: $color;
+
+                > a{                        
+                    font-weight: 500;
+                }                    
+            }                
+            strong{
+                font-weight: 500;
+                color: $color-heading;
+            }
+
+            .comments{
+                position: relative;
+                float: left;
+                width: 100%;                                    
+                margin-bottom: 10px;
+                border: 1px solid rgba(0,0,0,0.1);
+
+                .total{
+                    float: left;
+                    width: 100%;
+                    line-height: 30px;
+                    background: rgba(0,0,0,0.05);
+                    padding: 10px 20px;
+                    border-bottom: 1px solid rgba(0,0,0,0.1);
+                    font-weight: 500;
+                }
+                .comment{
+                    float: left;
+                    width: 100%;
+                    padding: 15px 20px 15px;
+                    background: rgba(0,0,0,0.03);
+                    border-bottom: 1px dashed rgba(0,0,0,0.1);
+
+                    &:last-child{
+                        border-bottom: 0px;
+                    }
+                }
+                .form{
+                    display: block;
+                    float: left;
+                    background: rgba(0,0,0,0.05);
+                    padding: 15px 15px;
+                    width: 100%;
+                }
+                      
+            }
+        }            
+        &:after{
+            position: absolute;
+            z-index: 1;
+            width: 26px;
+            height: 1px;
+            content: " ";
+            left: 45px;
+            top: 24px;
+            background: rgba(0,0,0,0.1);
+        }
+        &:before{
+            position: absolute;
+            z-index: 1;
+            width: 1px;
+            height: 100%;
+            content: " ";
+            left: 23px;
+            top: 0px;
+            background: rgba(0,0,0,0.1);
+        }
+    }
+    
+    /*-----
+        [.timeline__more more button]
+    -----*/
+    &__more{
+        float: left;
+        width: 100%;
+        height: 50px;            
+        position: relative;
+
+        > a{
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            background: #FFF;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 50%;
+            line-height: 32px;
+            font-size: 21px;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: none;
+            color: $color;            
+
+            &:hover{
+                color: $color-heading;
+                background: #F5F5F5;
+            }
+        }
+    }
+    
+    /*-----
+        [.timeline--right right elements position]
+    -----*/
+    &--right{
+        .timeline__item{
+            padding-left: 0px !important;
+            padding-right: 70px;
+
+            > .user{
+                left: auto;
+                right: 0px;
+            }
+
+            &:after{
+                left: auto;
+                right: 45px;
+            }
+            &:before{
+                left: auto;
+                right: 23px;
+            }
+        }
+        .timeline__more{
+            > a{
+                right: 0px;
+            }
+        }
+
+        &.timeline--simple{
+            .timeline__item{                                        
+                padding-right: 45px;
+                
+                > .dot{
+                    left: auto;
+                    right: 13px;
+
+                    &:before{
+                        left: auto;
+                        right: 13px;
+                    }
+                }
+            }
+        }
+    }
+    
+    /*-----
+        [.timeline--simple simplify timeline]
+    -----*/
+    &--simple{
+        .timeline__item{
+            padding-left: 45px;                
+            padding-bottom: 15px;
+
+            &:after{
+                display: none;
+            }
+
+            &:last-child{
+                padding-bottom: 0px;
+            }
+        }
+    }
+}
+/*-----
+    [Media for timeline]
+-----*/
+@include media-breakpoint-down(md) {
+    .timeline{
+        .timeline__item{
+            > .content{
+                .comments{
+                    overflow-x: hidden;
+                    
+                    .comment{
+                        overflow-x: scroll;
+                    }
+                }
+            }            
+        } 
+    }
+}
+

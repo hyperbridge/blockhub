@@ -1,0 +1,25 @@
+/*------------------------------------------------------------------
+
+    [Header]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+
+-------------------------------------------------------------------*/
+
+.invert{
+    .page-header-search{
+        &__icon{
+            &:after{border-color: $color-invert;}
+            &:before{background: $color-invert;}
+        }
+        &--focus{
+            .page-header-search__icon{
+                &:after{
+                    background: $color-invert;
+                }
+            }
+        }
+    }
+}

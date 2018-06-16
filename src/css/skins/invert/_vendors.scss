@@ -1,0 +1,53 @@
+/*------------------------------------------------------------------
+
+    [Vendors invert classes]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+
+-------------------------------------------------------------------*/
+
+.invert{    
+    
+    // datetimepicker
+    .bootstrap-datetimepicker-widget{
+        .dropdown-menu{
+            background: $base-skin-background;
+        }
+    } 
+    
+    // select2 plugin
+    .select2-container--default{
+        
+        .select2-selection--single,
+        .select2-selection--multiple{
+            border-color: $invert-form-border;
+            background: $invert-form-background;
+
+            .select2-selection__rendered{
+                color: $invert-color;
+            }
+        }    
+        .select2-search--inline .select2-search__field{
+            color: $invert-color;
+        }
+        
+        &.select2-container--open{
+            .select2-selection--single,
+            .select2-selection--multiple{
+                border-color: $invert-form-focus;
+            }
+        }
+        
+        &.select2-container--disabled{
+            .select2-selection__rendered{
+                background: $invert-form-background-disabed;
+            }
+        }        
+    }
+    .select2-dropdown{
+        border-color: $invert-form-border;
+        background: $invert-form-background;
+    }
+}

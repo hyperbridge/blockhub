@@ -1,0 +1,74 @@
+/*------------------------------------------------------------------
+
+    [User elements]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+
+-------------------------------------------------------------------*/
+
+.invert{
+    .user{
+        > .user__name{
+            a{
+                color: $invert-color;
+
+                &:hover{
+                    color: darken($invert-color,5%);
+                }
+            }
+        }
+        > .user__button{
+            border-color: $invert-border-color;        
+            color: $invert-color;        
+            background: $invert-base-skin-background;
+
+            &:hover{            
+                background: darken($invert-base-skin-background,2%);
+                color: darken($invert-color,5%);        
+            }
+        }
+
+        &.user--bordered{
+            > img{
+                box-shadow: 0px 0px 0px 2px $invert-border-color;
+            }
+        }
+    }
+
+    .user-group{
+        &.user-group--bordered{
+            .user{
+                img{
+                    box-shadow: 0px 0px 0px 2px $invert-base-skin-background;
+                }
+            }
+        }
+    }
+    
+    .navigation{
+        .user{
+            &--w-lineunder{
+                .user__lineunder{
+                    background: rgba(0,0,0,0.05);
+                    
+                    .text{
+                        color: $invert-color-secondary;
+                    }
+                    
+                    .buttons{                        
+                        .button{
+                            color: $invert-color-secondary;
+                            
+                            &:hover{
+                                background: rgba(0,0,0,0.1);
+                            }
+                        }                        
+                    }
+                }
+            }
+        }
+    }
+    
+}

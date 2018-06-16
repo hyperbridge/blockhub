@@ -1,0 +1,64 @@
+/*------------------------------------------------------------------
+
+    [Invert skin variables]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+
+-------------------------------------------------------------------*/
+    
+/* Base feature colors */
+$invert-base-skin-background: #22212f;
+$invert-base-skin-color: #fff;       
+
+/* Other important variables */
+$invert-border-color: rgba(0,0,0,0.2);    
+
+/* Content */
+$invert-content-background: #171624;
+
+/* Header */
+$invert-header-background: #22212f;
+$invert-header-border: $invert-border-color;    
+
+/* Container */
+$invert-container-background: #22212f;
+$invert-container-border: $invert-border-color;    
+
+/* Aside */
+$invert-aside-background: #22212f;
+$invert-aside-border: $invert-border-color;    
+
+/* Sidepanel */
+$invert-sidepanel-background: darken(#22212f,1%);
+$invert-sidepanel-border: $invert-border-color;    
+
+/* Logo */
+$invert-logo-image: url("../../static/img/logo_light-2x.png");
+$invert-logo-image-2x: "../../static/img/logo_light-2x.png";    
+
+/* Typography */
+$invert-color: #dfdfe9;
+$invert-color-heading: #fefeff;
+$invert-color-secondary: rgba(#dfdfe9,0.9);
+$invert-color-hover: #fd0100;
+$invert-color-link: #fdfcff;
+$invert-color-link-hover: #fd0100;
+$invert-color-invert: #22212f;    
+
+/* Navigation */
+$invert-navigation-color: #ebebf5;
+$invert-navigation-color-hover: #c6c6ce;
+$invert-navigation-color-active: #fefeff;
+$invert-navigation-icon-color: #FFF;
+$invert-navigation-icon-color-active: $primary-background;
+$invert-navigation-background: transparent;
+$invert-navigation-background-hover: rgba(0,0,0,0.08);
+$invert-navigation-background-active: rgba(0,0,0,0.1);    
+
+/* Form elements and components */
+$invert-form-background: rgba(0,0,0,0.3);
+$invert-form-background-disabed: rgba(0,0,0,0.1);
+$invert-form-border: rgba(0,0,0,0.1);
+$invert-form-focus: #2c9fdd;

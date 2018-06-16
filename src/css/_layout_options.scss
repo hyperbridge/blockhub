@@ -1,0 +1,474 @@
+/*------------------------------------------------------------------
+
+    [Layout options]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+
+
+    [Table of contents]
+    
+    1. Boxed layout
+    2. Indent layout
+
+-------------------------------------------------------------------*/
+
+
+/*-----
+    [Boxed layout]
+    
+    Append classes to body element to change layout option and settings
+    
+    .boxed - boxed layout (important)
+        + .boxed--vspace    - [modify] adds vertical margins
+        + .boxed--rounded   - [modify] adds border-radius with support for all layout components (only with boxed--vspace)
+        + .boxed--shadowed  - [modify] adds shadow to box
+
+-----*/
+body{
+    &.boxed{
+        background: $layout-boxed-background;        
+        
+        > .page{
+            width: $layout-boxed-width;
+            margin: 0px auto;
+        }
+        
+        
+        /*-----
+            [boxed--vspace layout modification with vertical margins]
+        -----*/
+        &--vspace{
+            > .page{
+                margin: $layout-boxed-space-margin auto;
+            }                        
+        }
+                
+        /*-----
+            [boxed--vspace--rounded modification for boxed--vspace mode]
+        -----*/
+        &--rounded{
+            
+            > .page{
+                border-radius: $layout-boxed-space-border-radius;
+                
+                &.page--w-header{                    
+                    > .page__header{
+                        border-radius: $layout-boxed-space-border-radius $layout-boxed-space-border-radius 0px 0px;
+                    }
+                    > .page__container{
+                        border-radius: 0px;
+                    }
+                }
+                
+                &.page--w-container{                    
+                    &:not(.page--w-header){
+                        > .page__container{
+                            border-radius: $layout-boxed-space-border-radius $layout-boxed-space-border-radius 0px 0px;
+                        }
+                    }                                        
+                }
+
+                > .page__content{
+                    border-radius: $layout-boxed-space-border-radius;
+
+                    .page__header{
+                        border-radius: 0px $layout-boxed-space-border-radius 0px 0px;
+                    }
+
+                    > .page-aside{
+                        border-radius: 0px 0px 0px $layout-boxed-space-border-radius;
+
+                        > .page-aside-controls{
+                            border-radius: 0px 0px 0px $layout-boxed-space-border-radius;
+                        }
+
+                        &.page-aside--hidden{
+                            & + .page-sidepanel{
+                                border-radius: 0px 0px 0px $layout-boxed-space-border-radius;
+
+                                &.page-sidepanel--hidden{
+                                    width: $layout-boxed-space-border-radius;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                &:not(.page--w-header):not(.page--w-container){
+                    > .page__content{
+                        > .page-aside{
+                            border-radius: $layout-boxed-space-border-radius 0px 0px $layout-boxed-space-border-radius;
+
+                            &.page-aside--hidden{
+                                & + .page-sidepanel{
+                                    border-radius: $layout-boxed-space-border-radius 0px 0px $layout-boxed-space-border-radius;
+                                }
+                            }
+                        }
+                        > .content{
+                            > .page-heading{
+                                border-radius: $layout-boxed-space-border-radius $layout-boxed-space-border-radius 0px 0px;
+                            }
+                        }
+                    }
+                }
+            }
+        }        
+        
+        
+        /*-----
+            [boxed--shadowed modification adds shadow to boxed layout]
+        -----*/
+        &--shadowed{
+            > .page{
+                box-shadow: 0px 0px 24px 6px rgba(0,0,0,0.1);
+            }
+        }
+    }        
+}
+
+/*-----
+    [Media for boxed layout]
+-----*/
+@include media-breakpoint-down(lg) {
+    body{                
+        &.boxed{
+            > .page{
+                width: 100%;
+            }
+            &--rounded{
+                > .page{
+                    border-radius: 0px
+                }
+            } 
+            &--vspace{
+                > .page{
+                    margin: 5px auto;
+                    padding: 0px 5px;
+                    
+                    .page__header{
+                        width: calc(100% - 10px);
+                    }
+                }
+            } 
+        }
+    }
+}
+
+
+
+/*-----
+    [Indent layout]
+    
+    Append classes to body element to change layout option and settings
+    
+    .indent - indent layout (important)
+        + .indent--single-header    - [modify] adds space between header & content
+        + .indent--relative-header  - [modify] allows you to use page-heading below header
+        + .indent--single-container - [modify] allows you to use separated page__container
+        + .indent--rounded          - [modify] adds border-radius with support for all layout components
+        + .indent--shadowed         - [modify] adds shadow to box
+
+-----*/
+body{        
+    &.indent{
+        background: $layout-indent-background;
+        padding: $layout-indent-space;        
+        
+        
+        /*-----
+            [indent--single-header adds space between header & content]
+        -----*/
+        &--single-header{
+            .page{
+                &--w-header{
+                    .page__content{
+                        padding-top: 0px;
+                        margin-top: $layout-indent-space + $header-height;
+                    }
+                    
+                    &.page--w-container{
+                        .page__container{
+                            margin-top: $layout-indent-space + $header-height;
+                        }
+                        .page__content{
+                            margin-top: 0px;
+                        }
+                    }                    
+                }
+            }
+        }
+        
+        
+        /*-----
+            [indent--relative-header allows you to use page-heading below header]
+        -----*/
+        &--relative-header{
+            .page{
+                &--w-header{
+                    .page__header{
+                        position: relative;
+                        left: auto;
+                        top: auto;
+                    }
+                                        
+                    > .page-heading{                    
+                        margin-top: $layout-indent-space;
+                    }
+                    
+                    .page__content{
+                        padding-top: 0px;
+                        margin-top: $layout-indent-space;
+                    }
+                    
+                    &.page--w-container{
+                        .page__container{
+                            margin-top: $layout-indent-space;
+                        }
+                        .page__content{
+                            padding-top: 0px;
+                            margin-top: 0px;
+                        }
+                    }
+                    
+                } 
+            }
+        }        
+        
+        
+        /*-----
+            [indent--single-container allows you to use separated page__container]
+        -----*/
+        &--single-container{
+            .page{
+                &.page--w-container{
+                    .page__container{
+                        margin-bottom: $layout-indent-space;
+                    }
+                }
+            }
+        }
+        
+        
+        /*-----
+            [indent--rounded adds border-radius to elements]
+        -----*/
+        &--rounded{
+            
+            > .page{
+                border-radius: $layout-indent-border-radius;
+                
+                &.page--w-header,
+                &.page--w-container{
+                    > .page__header{
+                        border-radius: $layout-indent-border-radius $layout-indent-border-radius 0px 0px;
+                    }
+                    
+                    > .page__content{
+                        border-radius: $layout-indent-border-radius+1; // +1 to avoid white line
+
+                        > .page-aside{
+                            border-radius: 0px 0px 0px $layout-indent-border-radius;
+
+                            > .page-aside-controls{
+                                border-radius: 0px 0px 0px $layout-indent-border-radius;
+                            }
+
+                            &.page-aside--hidden{
+                                & + .page-sidepanel{
+                                    border-radius: $layout-indent-border-radius 0px 0px $layout-indent-border-radius;
+
+                                    &.page-sidepanel--hidden{
+                                        width: $layout-indent-border-radius;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                &.page--w-container{
+                    &:not(.page--w-header){
+                        
+                        > .page__container{
+                            border-radius: $layout-indent-border-radius $layout-indent-border-radius 0px 0px;
+                        }
+                        
+                    }
+                }
+                
+                &:not(.page--w-header):not(.page--w-container){
+                    > .page__content{
+                        border-radius: $layout-indent-border-radius+1; // +1 to avoid white line
+
+                        > .page-aside{
+                            border-radius: $layout-indent-border-radius 0px 0px $layout-indent-border-radius;
+
+                            > .page-aside-controls{
+                                border-radius: 0px 0px 0px $layout-indent-border-radius;
+                            }
+
+                            &.page-aside--hidden{
+                                & + .page-sidepanel{
+                                    border-radius: $layout-indent-border-radius 0px 0px $layout-indent-border-radius;
+
+                                    &.page-sidepanel--hidden{
+                                        width: $layout-indent-border-radius;
+                                    }
+                                }
+                            }
+                        }
+                        > .content{
+                            > .page-heading{
+                                border-radius: $layout-indent-border-radius $layout-indent-border-radius 0px 0px;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            &.indent--single-header,
+            &.indent--relative-header{
+                
+                > .page{
+                    > .page__header{
+                        border-radius: $layout-indent-border-radius;
+                    }
+                    
+                    &.page--w-container{
+                        > .page__container{
+                            border-radius: $layout-indent-border-radius $layout-indent-border-radius 0px 0px;
+                        }
+                    }
+                    
+                    &:not(.page--w-container){
+                        > .page__content{
+                            > .page-aside{
+                                border-radius: $layout-indent-border-radius 0px 0px $layout-indent-border-radius;
+                            }
+                            > .content{
+                                > .page-heading{
+                                    border-radius: $layout-indent-border-radius $layout-indent-border-radius 0px 0px;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                &.indent--single-container{
+                    > .page{
+                        > .page__container{
+                            border-radius: $layout-indent-border-radius;
+                        }
+                    }
+                }
+                
+            }
+            
+            &.indent--single-container{
+                > .page{
+                    &:not(.page--w-header){
+                        > .page__container{
+                            border-radius: $layout-indent-border-radius;
+                        }
+                    }
+                    
+                    > .page__content{
+                        > .page-aside{
+                            border-radius: $layout-indent-border-radius 0px 0px $layout-indent-border-radius;
+                        }
+                        > .content{
+                            > .page-heading{
+                                border-radius: $layout-indent-border-radius $layout-indent-border-radius 0px 0px;
+                            }
+                        }
+                    }
+                }
+                
+                &:not(.indent--single-header):not(.indent--relative-header){
+                    > .page{
+                        &.page--w-header{
+                            > .page__container{
+                                border-radius: 0px 0px $layout-indent-border-radius $layout-indent-border-radius;
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+        
+        /*-----
+            [indent--shadowed adds shadow to boxed layout]
+        -----*/
+        &--shadowed{
+            &.indent--single-header,
+            &.indent--relative-header{
+                > .page{
+                    > .page__header{
+                        box-shadow: 0px 0px 24px 6px rgba(0,0,0,0.1);
+                    }
+                }
+                
+                &.indent--single-container{
+                    > .page{
+                        > .page__container{
+                            box-shadow: 0px 0px 24px 6px rgba(0,0,0,0.1);
+                        }
+                    }
+                }
+            }
+            
+            > .page{             
+                > .page__container{
+                    z-index: 999;
+                }
+                > .page__content{
+                    box-shadow: 0px 0px 24px 6px rgba(0,0,0,0.1);
+                }
+            }
+        }
+        
+    }
+    
+}
+
+/*-----
+    [Media for indent layout option]
+-----*/
+@include media-breakpoint-down(lg) {
+    body{            
+        &.indent{
+            padding: 5px;
+            
+            &--single-header{
+                .page{
+                    &--w-header{
+                        .page__content{                            
+                            margin-top: 5px + $header-height;
+                        }
+
+                        &.page--w-container{
+                            .page__container{
+                                margin-top: 5px + $header-height;
+                            }                            
+                        }                    
+                    }
+                }
+            }
+            
+            &--single-container{
+                .page{
+                    &.page--w-container{
+                        .page__container{
+                            margin-bottom: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,893 @@
+/*------------------------------------------------------------------
+
+    [Navigation styles]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+    
+    
+    [Table of contents]
+    
+    1. Navigation settings
+    2. Basic navigation
+    3. Horizontal navigation
+    
+-------------------------------------------------------------------*/
+
+
+/*-----
+
+    [Basic navigation]
+
+    + .navigation                       - navigation wrapper
+        & .navigation--condensed        - [modify] removes horizontal paddings on elements
+        & .navigation--minimized        - [modify] minimize navigation
+        & .navigation--quick            - [modify] adds simple icon to each element
+        & .navigation--vertical-middle  - [modify] vertical centering for all elements
+
+        + ul                            - navigation
+            + li                        - navigation element
+                + a                     - navigation link
+
+-----*/
+
+/*-----
+    [Navigation settings]
+-----*/
+.page__content{
+    .navigation--minimized{
+        width: $aside-width-minimized;
+    }
+    .page-sidepanel{
+        &.navigation--minimized{
+            width: $aside-width-minimized;
+        }
+    }
+    
+    .page-aside{
+        &.navigation--vertical-middle{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        &.page-aside--minimized{
+            .navigation{
+                width: $aside-width-minimized;
+            }
+        }
+    }
+}
+
+/*-----
+    [Navigation wrapper]
+-----*/
+.navigation{
+    padding: 10px;
+    float: left;
+    width: 100%;
+    position: relative;
+    
+    .icon{
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        margin-right: 10px;
+        float: left;
+        color: $navigation-icon-color;
+        
+        &[class*=' li-']{font-size: 20px;}
+        &[class*=' fa-']{font-size: 14px;}
+        
+        &:before{
+            line-height: 20px;
+        }
+    }
+    .text{
+        float: left;
+        line-height: 18px;
+        margin-top: 2px;
+    }
+    
+    /*-----
+        [Navigation list]
+    -----*/
+    ul{
+        > li{
+            > a.no-icon{
+                position: relative;
+                padding-left: 40px;
+
+                &:after{
+                    content: " ";
+                    width: 3px;
+                    height: 3px;
+                    background: $navigation-icon-color;
+                    position: absolute;
+                    left: 19px;
+                    top: 18px;
+                }
+            }
+            &.active{
+                > a.no-icon{
+                    &:after{
+                        background: $navigation-icon-color-active;
+                    }
+                }
+            }
+            
+            &.open{
+                > ul{                    
+                    max-height: 800px;                    
+                }
+            }
+            
+            &.openable{
+                position: relative;
+                @include clearfix();
+                
+                &:before{
+                    position: absolute;
+                    z-index: 1;
+                    right: 10px;
+                    top: 10px;
+                    font-family: "FontAwesome";
+                    font-size: 14px;
+                    content: "\f107";
+                    line-height: $line-height;
+                }
+                &.open{
+                    &:before{
+                        content: "\f106";
+                    }
+                }
+            }
+        }
+    }
+    
+    > ul{
+        float: left;
+        width: 100%;
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+        
+        > li{
+            float: left;
+            width: 100%;
+            padding-bottom: 1px;
+            
+            &.title{
+                padding: 10px 0px 0px 10px;
+                font-size: 10px;
+                line-height: 20px;
+                font-weight: 400;
+                margin-bottom: 5px;
+                color: $color-secondary;
+                text-transform: uppercase;
+                
+                &:not(:first-child){
+                    margin-top: 10px;
+                }
+            }
+            
+            > a{
+                float: left;
+                width: 100%;
+                line-height: 20px;
+                font-size: 12px;
+                font-weight: 400;
+                padding: 10px 10px 10px 10px;
+                color: $navigation-color;
+                background: $navigation-background;
+                text-decoration: none;
+                border-radius: $border-radius;
+                @if $animation != 0 {
+                    @include transition(all $animation ease-in-out, color $animation ease-in-out);
+                }
+                
+                &:hover{
+                    background: $navigation-background-hover;
+                    color: $navigation-color-hover;
+                }
+            }                        
+            
+            &.active{
+                > a{
+                    background: $navigation-background-active;
+                    color: $navigation-color-active;
+                    
+                    .icon{
+                        color: $navigation-icon-color-active;
+                    }
+                }
+            }
+            &.open{
+                > a{
+                    background: $navigation-background-active;
+                    color: $navigation-color;
+                }
+            }
+
+            ul{ 
+                float: left;
+                width: 100%;
+                max-height: 0px;
+                overflow: hidden;
+                list-style: none;
+                padding: 0px;
+                margin: 0px;                                
+                @if $animation != 0 {
+                    @include transition(max-height $animation ease-in-out);
+                }
+                    
+                > li{
+                    float: left;
+                    width: 100%;
+                    
+                    > a{
+                        float: left;
+                        width: 100%;
+                        padding: 10px 10px 10px 10px;
+                        line-height: 20px;
+                        font-size: 12px;
+                        color: $navigation-color;
+                        font-weight: 400;
+                        text-decoration: none;
+                        background: opacify($navigation-background, 0.05);
+                        
+                        @if $animation != 0 {
+                            @include transition(all $animation ease-in-out);
+                        }
+                
+                        &:hover{
+                            background: opacify($navigation-background-hover, 0.02);
+                            color: $navigation-color-hover;
+                        }
+                    }
+                    
+                    &:last-child{
+                        > a{
+                            border-radius: 0px 0px $border-radius $border-radius;
+                        }
+                    }
+                    
+                    &.open{
+                        > a{
+                            background: opacify($navigation-background-active, 0.02);
+                        }
+                    }
+                    &.active{
+                        > a{
+                            background: opacify($navigation-background-active, 0.02);                            
+                        }
+                    }
+                    
+                    > ul{
+                        > li{
+                            > a{
+                                background: opacify($navigation-background, 0.07);                                                                
+
+                                &:after{
+                                    display: none;
+                                }
+                                    
+                                &:hover{
+                                    background: opacify($navigation-background, 0.09);
+                                }
+                            }
+                            
+                            &.active{
+                                > a{
+                                    .text{
+                                        text-decoration: underline;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            &.open{
+                > a{                               
+                    border-radius: $border-radius $border-radius 0px 0px;                    
+                }
+            }
+        }
+    }
+    
+    &:first-child:last-child{
+        margin-bottom: 0px;
+    }    
+    
+    /*-----
+        [.navigation--condensed condensed navigation mode]
+    -----*/
+    &--condensed{
+        padding: 0px;
+        
+        > ul{
+            > li{
+                > a{
+                    border-radius: 0px !important;                    
+                }
+                
+                > ul{
+                    > li{
+                        > a{
+                            border-radius: 0px;
+                        }
+                    }
+                }                                
+            }
+        }
+        
+        ul{
+            > li{
+                &.active{
+                    > a{
+                        position: relative;
+
+                        &:before{
+                            position: absolute;
+                            content: " ";
+                            width: 2px;
+                            height: 100%;
+                            left: 0px;
+                            top: 0px;    
+                            background: $primary-background;
+                        }
+                    }
+                }
+                &:last-child > a{
+                    border-radius: 0px !important;
+                }
+            }
+        }        
+    }    
+        
+    /*-----
+        [Support for file-tree as next element]
+    -----*/
+    & + .file-tree{
+        padding-top: 0px;
+    }
+    
+    /*-----
+        [.navigation--quick quick navigation: + simple icon to each element]
+    -----*/
+    &--quick{
+        ul{
+            > li {                
+                
+                > a{
+                    position: relative;
+                    padding-left: 30px;
+                    font-weight: 500;
+                    
+                    &:after{
+                        content: " ";
+                        width: 3px;
+                        height: 3px;
+                        background: $primary-background;
+                        position: absolute;
+                        left: 14px;
+                        top: 18px;
+                    }
+                }
+            }
+        }                
+    }
+    
+}
+
+/*-----
+    [.navigation--minimized minimized navigation support]
+-----*/
+.page__content{
+    .navigation--minimized,.page-aside--minimized{
+        
+        // mcustomscrollbar support
+        .mCustomScrollBox{
+            overflow: visible;
+            .mCSB_container{
+                overflow: visible;
+            }
+        }
+        // end 
+        
+        .navigation{
+            // keep condensed navigation looks like default
+            &--condensed{
+                padding: 10px;
+            }
+            // end
+            
+            > ul{
+                > li{
+                    position: relative;
+                    
+                    > a{
+                        padding: 10px;
+                        text-align: center;
+                        border-radius: $border-radius;
+                        
+                        .icon{
+                           margin: 0px;
+                           float: none;
+                           width: auto;
+                           height: auto;                           
+                           
+                           &[class*=' dripicons-']{font-size: 14px;}
+                           &[class*=' li-']{font-size: 20px;}
+                           
+                           &:before{
+                               line-height: 30px;
+                           }
+                        }
+                        .text{
+                            display: none;
+                        }
+                        
+                    }
+                    
+                    > ul{
+                        display: none;                                                
+                        position: absolute;
+                        left: 100%;
+                        width: $aside-width;
+                        z-index: 10;                        
+                        padding-left: 5px;                        
+                        @include transition(none);
+                        
+                        > li{                            
+                            background: $base-skin-background;
+                            float: left;
+                            width: 100%;
+                            
+                            &:first-child{
+                                border-radius: $border-radius $border-radius 0px 0px;
+                                > a{
+                                    border-radius: $border-radius $border-radius 0px 0px;
+                                }
+                            }
+                            &:last-child{
+                                border-radius: 0px 0px $border-radius $border-radius;
+                                > a{
+                                    border-radius: 0px 0px $border-radius $border-radius;
+                                }
+                            }
+                        }
+                        
+                        ul{
+                            @include transition(none);
+                        }
+                        
+                        &.height-control{
+                            overflow-y: scroll;                                                        
+                        }
+                        &.dropup{
+                            top: auto;
+                            bottom: 0px;
+                        }
+                    }
+                    
+                    &:hover{
+                        > a{                
+                            background: $navigation-background-hover;
+                            color: $navigation-color-hover;
+                        }
+                        > ul{
+                            max-height: 500px;
+                            display: block;
+                        }
+                    }
+                    
+                    &.title{
+                        display: none;
+                    }
+                    
+                    &.openable{
+                        &:before{
+                            display: none;
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+    }
+}
+
+
+/*-----
+
+    [Horizontal navigation]
+
+    + .horizontal-navigation            - navigation wrapper
+
+        + ul                            - navigation
+            + li                        - navigation element
+                + a                     - navigation link
+
+-----*/
+.horizontal-navigation{
+    
+    > button{
+        margin: 10px;
+        display: none;
+    }
+    
+    > ul{
+        display: block;
+        padding: 0px;
+        margin: 0px;
+        list-style: none;
+        
+        .icon{
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            margin-right: 10px;
+            float: left;
+            color: $navigation-icon-color;
+
+            &[class*=' li-']{font-size: 20px;}
+            &[class*=' fa-']{font-size: 14px;}
+
+            &:before{
+                line-height: 20px;
+            }
+        }
+        
+        .text{
+            float: left;
+            line-height: 18px;
+            margin-top: 2px;
+        }
+        
+        > li{
+            float: left;
+            position: relative;
+            
+            > a{
+                display: block;
+                float: left;
+                line-height: $line-height;
+                font-size: 12px;
+                padding: 10px 15px 9px 10px;
+                margin: 10px 0px 10px 10px;
+                text-decoration: none;
+                color: $navigation-color;
+                background: $navigation-background;
+                border-radius: $border-radius;
+                @if $animation != 0 {
+                    @include transition(all $animation ease-in-out);
+                }
+                
+                &:hover{
+                    color: $navigation-color-hover;
+                    background: $navigation-background-hover;
+                }
+            }                        
+            
+            ul{
+                display: none;
+                padding: 0px;
+                margin: 0px;
+                list-style: none;
+                position: absolute;                
+                min-width: 250px;
+                left: 10px;
+                top: 100%;
+                margin-top: -5px;
+                border: 1px solid $border-color;
+                border-radius: $border-radius;
+                //border-top-color: $navigation-background;
+                z-index: 1000;
+                @if $shadows != 0 {
+                    box-shadow: 0px 1px 12px 1px rgba(0,0,0,0.1);
+                }
+                
+                > li{
+                    background: $base-skin-background;
+                    float: left;
+                    width: 100%;
+                    position: relative;
+                    
+                    > a{
+                        float: left;
+                        display: block;
+                        color: $navigation-color;
+                        font-size: 12px;
+                        background: $navigation-background;
+                        border-bottom: 1px dotted $border-color;
+                        line-height: $line-height;
+                        padding: 10px;
+                        text-decoration: none;
+                        width: 100%;
+                        @if $animation != 0 {
+                            @include transition(all $animation ease-in-out);
+                        }
+                        
+                        &:hover{
+                            color: $navigation-color-hover;
+                            background: $navigation-background-hover;
+                        }
+                    }
+                    
+                    &:first-child{
+                        > a{
+                            border-radius: $border-radius $border-radius 0px 0px;
+                        }
+                    }
+                    &:last-child{
+                        > a{
+                            border-radius: 0px 0px $border-radius $border-radius;
+                            border-bottom: 0px;
+                        }
+                    }
+                    
+                    ul{
+                        top: 0px;
+                        left: 99%;
+                        margin-top: -1px;
+                    }
+                }
+            }
+            
+            &.title{
+                display: none;
+            }                        
+        }
+                
+        li{
+            > a.no-icon{
+                position: relative;
+                padding-left: 40px;
+
+                &:after{
+                    content: " ";
+                    width: 3px;
+                    height: 3px;
+                    background: $navigation-icon-color;
+                    position: absolute;
+                    left: 19px;
+                    top: 18px;
+                }
+            }            
+            
+            &:hover{
+                > a{
+                    color: $navigation-color-hover;
+                    background: $navigation-background-hover;
+                }
+                > ul{
+                    display: block;
+                }
+            }
+            
+            &.active{
+                > a{
+                    background: $navigation-background-active;
+                    color: $navigation-color-active;
+                    
+                    .icon{
+                        color: $navigation-icon-color-active;
+                    }
+                }
+                > a.no-icon{
+                    &:after{
+                        background: $navigation-icon-color-active;
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+/*-----
+    [Support for horizontal navigation in page__container element]
+-----*/
+.page__container{
+    .horizontal-navigation{
+        > ul{
+            > li{
+                border-radius: 5px;
+            }
+            li{
+                background: $container-background;                
+            }
+        }
+    }
+}
+
+/*-----
+    [Media for horizontal navigation]
+-----*/
+@include media-breakpoint-down(md) {
+    .horizontal-navigation{
+        float: left;
+        width: 100%;
+        
+        > button{
+            display: block;
+        }
+        > ul{
+            width: 100%;                        
+            display: none;
+            
+            li{
+                float: left;
+                width: 100%;
+                
+                > a{                    
+                    width: 100%;                
+                }
+            }
+            
+            > li{
+                border-bottom: 1px dotted $border-color;
+                
+                &:last-child{
+                    border-bottom: 0px;
+                }
+                
+                > a{
+                    width: 100%;
+                    margin: 5px 0px;
+                    padding: 10px 15px;
+                }
+                
+                ul{
+                    width: 100%;
+                    margin-top: 0px;
+                    left: 0px;
+                    border: 0px;
+                    border-bottom: 1px solid $border-color;
+                }
+            }
+        }
+        
+        &--show{
+            > ul{
+                display: block;
+            }
+        }
+    }
+}
+
+
+
+/*-----
+
+    [File tree]
+
+    + .file-tree        - file tree wrapper
+
+        + ul            - navigation
+            + li        - navigation element
+                + a     - navigation link
+
+-----*/
+.file-tree{
+    padding: 10px;
+    margin-bottom: 30px;
+    float: left;
+    width: 100%;
+    
+    .icon{
+        line-height: 20px;
+        &[class*=' li-']{font-size: 20px;}
+        &[class*=' fa-']{font-size: 14px;}
+    }
+    
+    ul{
+        float: left;
+        width: 100%;
+        list-style: none;
+        padding: 0px 0px 0px 20px;
+        margin: 0px;     
+        position: relative;        
+    
+        > li{
+            float: left;
+            width: 100%;
+            position: relative;
+            
+            > a{
+                float: left;
+                width: 100%;
+                font-size: 12px;
+                font-weight: 400;
+                color: $color;
+                line-height: $line-height;
+                padding: 3px 0px;
+                overflow: hidden;
+                @if $animation != 0 {
+                    @include transition(color $animation ease-in-out);
+                }
+                
+                .text{
+                    float: left;                    
+                    line-height: $line-height - 2;
+                    margin-top: 2px;
+                }
+                
+                .icon{
+                    float: left;
+                    margin-right: 10px;
+                }
+                
+                &:hover{
+                    color: $color-link-hover;
+                }
+            }
+            
+            > ul{
+                max-height: 0px;
+                overflow: hidden;
+                @if $animation != 0 {
+                    @include transition(max-height $animation ease-in-out);
+                }
+            }
+            
+            &:after{
+                position: absolute;
+                content: " ";
+                width: 10px;
+                height: 1px;
+                border-top: 1px dotted $border-color;
+                left: -15px;
+                top: 13px;
+                z-index: 1;
+            }
+            
+            &.folder{
+                &:before{
+                    position: absolute;
+                    left: -16px;
+                    top: 11px;
+                    content: " ";
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 3px 0 3px 4px;
+                    border-color: transparent transparent transparent $color;
+                    z-index: 2;
+                }
+            }            
+            
+            &.open{
+                &.folder{
+                    &:before{                    
+                        border-width: 4px 3px 0 3px;
+                        border-color: $color transparent transparent transparent;           
+                        left: -17.5px;
+                        top: 12px;
+                    }
+                }
+                
+                > ul{
+                    max-height: 500px;
+                }
+            }
+        }
+        
+        &:after{
+            position: absolute;
+            content: " ";
+            width: 1px;
+            height: 100%;
+            top: 0px;
+            left: 5px;
+            border-right: 1px dotted $border-color;
+        }        
+    }
+}

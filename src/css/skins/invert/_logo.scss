@@ -1,0 +1,21 @@
+/*------------------------------------------------------------------
+
+    [Logo]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+
+-------------------------------------------------------------------*/
+
+.invert{
+    .logo-holder{
+        .logo{
+            background-image: $invert-logo-image;
+            @include image-2x($invert-logo-image-2x,250,50);
+        }
+        .logo-text{
+            color: $invert-color-heading;
+        }
+    }
+}
