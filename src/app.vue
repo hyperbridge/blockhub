@@ -4,10 +4,17 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
+<script>
+import Vue from "vue"
+
+export default Vue.extend({
   name: 'app',
   created() {
+    window.initBlockHub = function() {
+      import('./framework/ethereum').then(c => c.init())
+      import('./framework/peer').then(c => c.init())
+    }
+    
     window.initBlockHubSettings = function() {
       var settings = {    
           showSettings: function(){
@@ -700,11 +707,11 @@ export default {
               settings.vars.s_content_invert.checked = settings.vars.page_content.classList.contains("page__content-invert") ? true : false;
           }
       };
-
-      settings.init();
     }
+
+    window.initBlockHub()
   }
-}
+})
 </script>
 
 <style>

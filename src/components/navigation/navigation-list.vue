@@ -625,7 +625,7 @@
     </ul>
 </template>
 
-<script lang="ts">
+<script>
 export default {
   name: 'navigation-list',
   data() {

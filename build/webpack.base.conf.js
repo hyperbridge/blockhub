@@ -1,5 +1,6 @@
 'use strict'
 
+const helpers = require('./helpers')
 const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
@@ -11,8 +12,9 @@ function resolve (dir) {
 
 module.exports = {
   mode: 'development',
+  devtool: 'source-map',
   entry: {
-    app: './src/main.js'
+    app: helpers.root('/src/main.js')
   },
   output: {
     path: config.build.assetsRoot,
@@ -22,7 +24,7 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.ts', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src')
@@ -39,6 +41,28 @@ module.exports = {
       //     formatter: require('eslint-friendly-formatter')
       //   }
       // },
+      // {
+      //   test: /\.ts$/,
+      //   use: [ // {loader: 'babel-loader'}, 
+      //     // {
+      //     //   loader: require.resolve('babel-loader'),
+      //     //   options: {
+      //     //     compact: true,
+      //     //   },
+      //     // },
+      //     {
+      //       loader: require.resolve('ts-loader'),
+      //       options: {
+      //         "configFile": require("../tsconfig.json"),
+      //         appendTsSuffixTo: [/\.vue$/],
+      //       }
+      //     }
+      //   ],
+      //   "exclude": [
+      //     // instead of /\/node_modules\//
+      //     path.join(process.cwd(), 'node_modules')
+      //   ],
+      // },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -47,7 +71,11 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
+        "exclude": [
+          // instead of /\/node_modules\//
+          path.join(process.cwd(), 'node_modules')
+        ]
+        //include: [resolve('src'), resolve('test')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 export default {
   name: 'home',
   data() {
@@ -16,8 +16,8 @@ export default {
       msg: 'Welcome to Your Vue.js PWA',
     }
   },
-  mounted() {
-    initBlockHubSettings()
+  created() {
+
   }
 }
 </script>

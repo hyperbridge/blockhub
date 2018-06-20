@@ -36,7 +36,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Log out</a>
                         </div>
-                    </div>                
+                    </div>
                     <div class="button button-minimize" data-action="aside-minimize" data-toggle="tooltip" data-placement="top" data-original-title="Minimize navigation"></div>                
                 </div>
             </div>
@@ -46,7 +46,7 @@
     </div>
 </template>
 
-<script lang="ts">
+<script>
 export default {
   name: 'default_w_user',
   components: {

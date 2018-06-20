@@ -1,11 +1,35 @@
 import * as ChaosMonkey from '../chaos-monkey'
 import * as Ethereum from '../ethereum'
 
-declare let require: any
-declare let window: any
+
+// declare let require: any
+// declare let Promise: any
+// declare let window: any
+// declare let window: {
+//     web3: any;
+//     peer: any;
+//     pageContentDataRequest: any;
+//     addressBalanceRequest: any;
+//     peerConnect: any;
+//     onunload: any;
+//     config: any;
+//     onbeforeunload: any;
+// }
+
+
+// declare global {
+//     interface Window {
+//         web3: any;
+//         peer: any;
+//         pageContentDataRequest: any;
+//         addressBalanceRequest: any;
+//         peerConnect: any;
+//     }
+// }
+
 
 const Peer = require('peerjs')
-const LifeRaft = require('liferaft')
+const LifeRaft = require('liferaft/index')
 const md5 = require('js-md5')
 
 const config = {
@@ -54,7 +78,7 @@ export const getPeer = async (peerId) => {
     Promise.resolve(peer)
 }
 
-export const sendCommand = async (key: String, data: any = {}, peer: any = null, responseId: String = null, cb: Function = null) => {
+export const sendCommand = async (key, data = {}, peer = null, responseId = null, cb = null) => {
     const cmd = {
         key: key,
         responseId: responseId,
@@ -125,7 +149,7 @@ export const pageContentDataRequest = async (path, params) => {
     })
 }
 
-export const addressBalanceRequest = async (address): Promise<any> => {
+export const addressBalanceRequest = async (address) => {
     if (config.ETHEREUM_ENABLED && config.DATA_RELAYER_ENABLED && Ethereum.isConnected()) {
         const balance = await Ethereum.getUserBalance()
 

@@ -5,6 +5,7 @@ const config = require('../config')
 const isProduction = process.env.NODE_ENV === 'production'
 
 module.exports = {
+  esModule: true,
   loaders: utils.cssLoaders({
     sourceMap: isProduction
       ? config.build.productionSourceMap

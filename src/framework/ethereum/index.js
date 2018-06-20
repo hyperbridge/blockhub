@@ -1,22 +1,31 @@
 const Web3 = require('web3')
 let tokenAbi = require('../../contracts/tokenContract.json')
 
-declare let require: any
-declare let window: any
+// declare let require: any
+// declare let Promise: any
+// declare let window: any
 
-type Local = {
-    _account: string,
-    _web3: any,
-    _tokenContract: any,
-    _tokenContractAddress: string
-}
+// // declare global {
+// //   interface Window {
+// //     web3: any;
+// //   }
+// // }
 
-const local: Local = {
+
+// type Local = {
+//     _account: string,
+//     _web3: any,
+//     _tokenContract: any,
+//     _tokenContractAddress: string
+// }
+
+const local = {
     _account: null,
     _web3: null,
     _tokenContract: null,
     _tokenContractAddress: "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
 }
+
 
 export const init = () => {
   if (typeof window.web3 !== 'undefined') {
@@ -36,15 +45,16 @@ export const init = () => {
   local._tokenContract = new local._web3.eth.Contract(tokenAbi.abi, local._tokenContractAddress) //_web3.eth.contract(tokenAbi).at(_tokenContractAddress)
 }
 
+
 // TODO: fix
-export const isConnected = (): Boolean => {
-    if (typeof window.web3 === 'undefined')
+export const isConnected = () => {
+    if (typeof local._web3 === 'undefined')
         return false
     
     return true
 }
 
-export const getAccount = async (): Promise<string> => {
+export const getAccount = async () => {
   if (local._account == null) {
     local._account = await new Promise((resolve, reject) => {
       local._web3.eth.getAccounts((err, accs) => {
@@ -59,7 +69,7 @@ export const getAccount = async (): Promise<string> => {
         }
         resolve(accs[0])
       })
-    }) as string
+    })
 
     local._web3.eth.defaultAccount = local._account
   }
@@ -67,7 +77,7 @@ export const getAccount = async (): Promise<string> => {
   return Promise.resolve(local._account)
 }
 
-export const getUserBalance = async (): Promise<number> => {
+export const getUserBalance = async () => {
   let account = await getAccount()
 
   return new Promise((resolve, reject) => {
@@ -78,5 +88,5 @@ export const getUserBalance = async (): Promise<number> => {
 
       resolve(local._web3.utils.fromWei(result))
     })
-  }) as Promise<number>
+  })
 }

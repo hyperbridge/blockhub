@@ -9,7 +9,9 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin')
 const VueLoader = require('vue-loader')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -26,6 +28,8 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': config.dev.env
     }),
+    new NamedModulesPlugin(),
+    //new TsconfigPathsPlugin({ configFile: "./tsconfig.json" }),
     new VueLoader.VueLoaderPlugin(),
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.HotModuleReplacementPlugin(),
