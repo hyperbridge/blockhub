@@ -1,18 +1,80 @@
 <template>
     <ul>
-        <li class="title">Main ddddd</li>
+        <li class="title">Wallet</li>
         <li>
             <a href="index.html">
                 <span class="icon li-home"></span>
-                <span class="text">Dashboard</span>
+                <span class="text">Add New</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.html">
+                <span class="icon li-home"></span>
+                <span class="text">Backup to Device</span>
+            </a>
+        </li>
+        <li class="title">Transactions</li>
+        <li>
+            <a href="#/account/send">
+                <span class="icon li-home"></span>
+                <span class="text">Send</span>
+            </a>
+        </li>
+        <li>
+            <a href="#/account/receive">
+                <span class="icon li-home"></span>
+                <span class="text">Receive</span>
+            </a>
+        </li>
+        <li>
+            <a href="#/account/transactions">
+                <span class="icon li-home"></span>
+                <span class="text">Transaction History</span>
+            </a>
+        </li>
+        <li class="title">Help</li>
+        <li>
+            <a href="index.html">
+                <span class="icon li-home"></span>
+                <span class="text">Coin vs Token</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.html">
+                <span class="icon li-home"></span>
+                <span class="text">Preferred Payment Sources</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.html">
+                <span class="icon li-home"></span>
+                <span class="text">Search and Filters</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.html">
+                <span class="icon li-home"></span>
+                <span class="text">Tokenized Assets</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.html">
+                <span class="icon li-home"></span>
+                <span class="text">Sending Currency</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.html">
+                <span class="icon li-home"></span>
+                <span class="text">More...</span>
             </a>
         </li>
         
         <li class="openable">
             <a href="#">
                 <span class="icon li-document"></span>
-                <span class="text">Pages</span>
-            </a>            
+                <span class="text">Add New</span>
+            </a>
             <ul>
                 <li>
                     <a href="pages-gallery.html" class="no-icon">
@@ -634,6 +696,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 </style>
