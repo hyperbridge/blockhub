@@ -4,50 +4,12 @@
     <div class="page page--w-header page--w-container">
         
         <!-- PAGE HEADER -->
-        <header class="page__header invert">
-            <c-example-banking />
-        </header>
+            <c-header />
         <!-- //END PAGE HEADER -->
         
         <!-- PAGE CONTAINER -->
         <div class="page__container invert">
-            <nav class="horizontal-navigation">
-                <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
-                
-                <ul>                        
-                    <li>
-                        <a href="solutions-banking-main.html">
-                            <span class="icon li-man"></span>
-                            <span class="text">Account</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="solutions-banking-cards.html">
-                            <span class="icon li-credit-card"></span>
-                            <span class="text">Cards</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="solutions-banking-activity.html">
-                            <span class="icon li-sync"></span>
-                            <span class="text">Activity</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="icon li-wallet"></span>
-                            <span class="text">Deposits</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="icon li-cog"></span>
-                            <span class="text">Settings</span>
-                        </a>
-                    </li>
-                </ul>
-                
-            </nav>
+
         </div>
         <!-- //END PAGE CONTAINER -->
         
@@ -55,13 +17,25 @@
         <div class="page__content page-aside--hidden" id="page-content">
             
             <!-- PAGE ASIDE PANEL -->
-            <div class="page-aside page-aside--hidden invert" id="page-aside">
-                <c-default-w-user />
+            <div class="page-aside invert" id="page-aside">
+                <c-navigation />
             </div>
             <!-- //END PAGE ASIDE PANEL -->
             
+
+            
             <slot></slot>
 
+
+            <!-- SIDEPANEL -->
+            <div class="page-sidepanel invert" id="page-sidepanel">
+                <div class="page-sidepanel__content">
+                    
+                </div>
+                <div class="page-sidepanel__button page-sidepanel__button--lower" data-action="sidepanel-hide"><div></div></div>
+            </div>
+            <!-- //END SIDEPANEL -->
+            
         </div>
         <!-- //END PAGE CONTENT -->
         
@@ -74,15 +48,15 @@
 <script>
 export default {
     components: {
-        'c-default-w-user': () => import('@/components/navigation/default_w_user'),
-        'c-example-banking': () => import('@/components/headers/example_banking')
+        'c-navigation': () => import('@/components/navigation/wallet-navigation'),
+        'c-header': () => import('@/components/headers/basic')
     },
-    created() {
+    mounted() {
         initBlockHubSettings()
     }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 </style>

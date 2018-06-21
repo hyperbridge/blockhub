@@ -18,6 +18,7 @@ export default Vue.extend({
     window.initBlockHubSettings = function() {
       var settings = {    
           showSettings: function(){
+              return;
               
               var fixed_panel = document.getElementById("fixed_panel");
               
@@ -144,6 +145,7 @@ export default Vue.extend({
                       settings.vars.s_layout_gi_shadowed.checked = false;
                       
                       settings.vars.s_nav_vmiddle.disabled = true;
+                      settings.vars.s_content_invert.checked = true;
                       
                       var page_heading = settings.vars.page.querySelectorAll(".page-heading")[0];
                       if(page_heading){
@@ -529,7 +531,6 @@ export default Vue.extend({
 
               
               var contentInverter = function(e){
-                  
                   var cards = settings.vars.content.querySelectorAll(".card");
                   var page_heading = settings.vars.content.querySelectorAll(".page-heading")[0];
                   
@@ -560,6 +561,8 @@ export default Vue.extend({
               // content invert
               settings.vars.s_content_invert.addEventListener("change", (e) => contentInverter(e.target));
 
+              settings.vars.s_content_invert.checked = true;
+
               if (settings.vars.s_content_invert) contentInverter(settings.vars.s_content_invert)
               
           },
@@ -569,8 +572,6 @@ export default Vue.extend({
               settings.vars.s_header_invert.checked = true
               settings.vars.s_nav_invert.checked = true
 
-              settings.vars.page_content.classList.add("page__content-invert");
-              
               // layout options
               if(settings.vars.body.classList.contains("boxed")){
                   settings.vars.s_layout.value = "boxed";
@@ -704,9 +705,11 @@ export default Vue.extend({
                   settings.vars.s_content.checked = settings.vars.content.querySelectorAll("[class^='container'")[0].classList.contains("container-fluid") ? true : false;
               }
               
-              settings.vars.s_content_invert.checked = settings.vars.page_content.classList.contains("page__content-invert") ? true : false;
+              //settings.vars.s_content_invert.checked = settings.vars.page_content.classList.contains("page__content-invert") ? true : false;
           }
       };
+
+      settings.init()
     }
 
     window.initBlockHub()
