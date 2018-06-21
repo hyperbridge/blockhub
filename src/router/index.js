@@ -15,5 +15,10 @@ export default new Router({
       name: 'Wallets',
       component: () => import('@/screens/wallets'),
     },
-  ],
+    {
+      path: '/account/transactions',
+      name: 'Transactions',
+      component: () => import('@/screens/transaction-history')
+    }
+  ]
 })
