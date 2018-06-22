@@ -4,13 +4,14 @@ import Vuex from 'vuex'
 import marketplace from '../modules/marketplace'
 import funding from '../modules/funding'
 import news from '../modules/news'
+import network from '../modules/network'
 
 Vue.use(Vuex)
 
-const state = {
-    marketplace: marketplace.state,
-    funding: funding.state
-}
+// const state = {
+//     marketplace: marketplace.state,
+//     funding: funding.state
+// }
 
 // const getters = {
 //     evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd',
@@ -67,6 +68,13 @@ export default new Vuex.Store({
             getters: news.getters,
             actions: news.actions,
             mutations: news.mutations
+        },
+        network: {
+            namespaced: true,
+            state: network.state,
+            getters: network.getters,
+            actions: network.actions,
+            mutations: network.mutations
         }
     }
 })
