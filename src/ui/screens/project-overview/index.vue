@@ -28,9 +28,6 @@ export default {
       this.$store.dispatch('marketplace/updateProductTitle', { id: 'post1', name })
       this.$data.product.name = name
     }
-  },
-  created() {
-
   }
 }
 </script>

@@ -9,17 +9,22 @@ const rawData = {
             name: 'Word',
             type: 'app',
             downloads: 1000,
+            images: {},
             owner: '0x0',
             author: {
                 id: '0x0'
             },
-            republicTags: ['app', 'upcoming'],
+            systemTags: ['app', 'upcoming'],
             authorTags: ['office']
         },
         {
             id: '5',
             name: 'Far Cry® 5',
             version: '1',
+            images: {
+                headerUrl: '/static/img/products/bless/headerUrl.png',
+                mediumTileUrl: '/static/img/products/bless/mediumTileUrl.png'
+            },
             shortDescription: 'Welcome to Hope County, Montana, home to a fanatical doomsday cult known as Eden’s Gate. Stand up to cult leader Joseph Seed & his siblings, the Heralds, to spark the fires of resistance & liberate the besieged community.',
             about: `Far Cry comes to America in the latest installment of the award-winning franchise.
 Welcome to Hope County, Montana, land of the free and the brave but also home to a fanatical doomsday cult known as Eden’s Gate.Stand up to cult leader Joseph Seed, and his siblings, the Heralds, to spark the fires of resistance and liberate the besieged community.
@@ -59,7 +64,7 @@ Additional notes: Eye tracking features available with Tobii Eye Tracking.`,
                     name: 'Ubisoft'
                 }
             ],
-            republicTags: ['game', 'upcoming'],
+            systemTags: ['game', 'upcoming'],
             authorTags: ['moba'],
             genre: ['Action', 'Adventure'],
             features: [
@@ -102,20 +107,25 @@ Additional notes: Eye tracking features available with Tobii Eye Tracking.`,
             id: '2',
             name: 'Fortnite',
             type: 'game',
+            images: {},
             downloads: 4000,
             owner: '0x0',
             author: {
                 id: '0x0'
             },
-            republicTags: ['game', 'specials'],
+            systemTags: ['game', 'specials'],
             authorTags: ['fps']
         },
         {
             id: "3",
-            name: "World of Warcraft",
+            name: "Tibia",
+            images: {
+                headerUrl: '/static/img/products/tibia/headerUrl.png',
+                mediumTileUrl: '/static/img/products/tibia/mediumTileUrl.png'
+            },
             type: 'game',
             downloads: 20,
-            republicTags: ['game', 'specials'],
+            systemTags: ['game', 'specials'],
             author: {
                 id: '0x0'
             },
@@ -124,9 +134,10 @@ Additional notes: Eye tracking features available with Tobii Eye Tracking.`,
         {
             id: "4",
             name: "Divvy",
+            images: {},
             type: 'app',
             downloads: 0,
-            republicTags: ['app', 'productivity', 'specials'],
+            systemTags: ['app', 'productivity', 'specials'],
             author: {
                 id: '0x0'
             },
