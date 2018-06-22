@@ -3,12 +3,37 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
       name: 'Home',
       component: () => import('@/screens/home'),
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: () => import('@/screens/home'),
+    },
+    {
+      path: '/help',
+      name: 'Help',
+      component: () => import('@/screens/help')
+    },
+    {
+      path: '/support',
+      name: 'Support',
+      component: () => import('@/screens/support')
+    },
+    {
+      path: '/store',
+      name: 'Store',
+      component: () => import('@/screens/store')
+    },
+    {
+      path: '/news',
+      name: 'News',
+      component: () => import('@/screens/news')
     },
     {
       path: '/account',
@@ -33,27 +58,43 @@ export default new Router({
     {
       path: '/account/transactions',
       name: 'Transactions',
-        component: () => import('@/screens/account-transactions')
+      component: () => import('@/screens/account-transactions')
     },
     {
       path: '/account/identities',
       name: 'Identities',
-        component: () => import('@/screens/account-identities')
+      component: () => import('@/screens/account-identities')
     },
     {
-      path: '/contacts',
-      name: 'Contacts',
-        component: () => import('@/screens/contacts')
+      path: '/identity/:id',
+      name: 'Identity',
+      props: true,
+      component: () => import('@/screens/identity-overview')
     },
     {
-      path: '/store',
-      name: 'Store',
-      component: () => import('@/screens/store')
+      path: '/identity/:id/contacts',
+      name: 'Identity Contacts',
+      component: () => import('@/screens/identity-contacts')
     },
     {
-      path: '/news',
-      name: 'News',
-      component: () => import('@/screens/news')
+      path: '/identity/:id/projects',
+      name: 'Identity Projects',
+      component: () => import('@/screens/identity-projects')
+    },
+    {
+      path: '/identity/:id/assets',
+      name: 'Identity Assets',
+      component: () => import('@/screens/identity-assets')
+    },
+    {
+      path: '/identity/:id/contacts',
+      name: 'Identity Contacts',
+      component: () => import('@/screens/identity-contacts')
+    },
+    {
+      path: '/invoice/:id',
+      name: 'Invoice',
+      component: () => import('@/screens/invoice-overview')
     },
     {
       path: '/settings',
@@ -116,16 +157,6 @@ export default new Router({
       component: () => import('@/screens/republic-district')
     },
     {
-      path: '/users',
-      name: 'Users',
-      component: () => import('@/screens/users')
-    },
-    {
-      path: '/user/:id',
-      name: 'User',
-      component: () => import('@/screens/user-overview')
-    },
-    {
       path: '/projects',
       name: 'Projects',
       component: () => import('@/screens/projects')
@@ -136,6 +167,21 @@ export default new Router({
       component: () => import('@/screens/project-overview')
     },
     {
+      path: '/project/:id/bounties',
+      name: 'Project Bounties',
+      component: () => import('@/screens/project-bounties')
+    },
+    {
+      path: '/project/:id/contributors',
+      name: 'Project Contributors',
+      component: () => import('@/screens/project-contributors')
+    },
+    {
+      path: '/project/:id/discussion',
+      name: 'Project Discussion',
+      component: () => import('@/screens/project-discussion')
+    },
+    {
       path: '/curators',
       name: 'Curators',
       component: () => import('@/screens/curators')
@@ -144,16 +190,22 @@ export default new Router({
       path: '/curator/:id',
       name: 'Curator',
       component: () => import('@/screens/curator-overview')
-    },
-    {
-      path: '/help',
-      name: 'Help',
-      component: () => import('@/screens/help')
-    },
-    {
-      path: '/support',
-      name: 'Support',
-      component: () => import('@/screens/support')
     }
   ]
 })
+
+// router.beforeEach((to, from, next) => {
+//   get_data_from_server(to.fullPath).then(component => {
+//     if (to.matched.length === 0) {
+//       // the target route doesn't exist yet
+//       router.addRoutes({ path: to.path, component: component })
+//       next(to.fullPath)
+//       return
+//     } else {
+//       // the route and component are known and data is available
+//       next()
+//     }
+//   })
+// })
+
+export default router

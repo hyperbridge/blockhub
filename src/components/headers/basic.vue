@@ -34,7 +34,7 @@
                     </li>
                 </ul>
             </nav>
-            <a class="appHeader-navCenter" href="/">A</a>
+            <a class="appHeader-navCenter" href="/#/home">A</a>
             <nav class="horizontal-navigation appHeader-navRight">
                 <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
                 <ul>

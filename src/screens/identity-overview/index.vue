@@ -1,6 +1,6 @@
 <template>
     <c-layout>
-
+      ID #{{id}}
     </c-layout>
 </template>
 
@@ -9,8 +9,11 @@ export default {
   components: {
     'c-layout': () => import('@/layouts/default')
   },
+  props: [
+    'id'
+  ],
   data: () => ({
-    items: []
+    wallets: []
   })
 }
 </script>
