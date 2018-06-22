@@ -118,28 +118,28 @@ const router = new Router({
       component: () => import('@/screens/settings-client')
     },
     {
-      path: '/app/:id',
-      name: 'App',
+      path: '/product/:id',
+      name: 'Product',
       props: true,
-      component: () => import('@/screens/app-overview')
+      component: () => import('@/screens/product-overview')
     },
     {
-      path: '/app/:id/community',
-      name: 'App Community',
+      path: '/product/:id/community',
+      name: 'Product Community',
       props: true,
-      component: () => import('@/screens/app-community')
+      component: () => import('@/screens/product-community')
     },
     {
-      path: '/app/:id/projects',
-      name: 'App Projects',
+      path: '/product/:id/projects',
+      name: 'Product Projects',
       props: true,
-      component: () => import('@/screens/app-projects')
+      component: () => import('@/screens/product-projects')
     },
     {
-      path: '/app/:id/assets',
-      name: 'App Assets',
+      path: '/product/:id/assets',
+      name: 'Product Assets',
       props: true,
-      component: () => import('@/screens/app-assets')
+      component: () => import('@/screens/product-assets')
     },
     {
       path: '/community',
