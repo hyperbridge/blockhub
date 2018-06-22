@@ -15,19 +15,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/#/contacts">
-                            <span class="icon li-credit-card"></span>
-                            <span class="text">Contacts</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/#/wallets">
+                        <a href="/#/account/wallets">
                             <span class="icon li-sync"></span>
                             <span class="text">Wallets</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/#/identities">
+                        <a href="/#/account/identities">
                             <span class="icon li-wallet"></span>
                             <span class="text">Identities</span>
                         </a>
@@ -39,9 +33,15 @@
                 <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
                 <ul>
                     <li>
-                        <a href="solutions-banking-main.html">
+                        <a href="/#/identity/1">
                             <span class="icon li-man"></span>
                             <span class="text">Satoshi</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/#/identity/1/contacts">
+                            <span class="icon li-credit-card"></span>
+                            <span class="text">Contacts</span>
                         </a>
                     </li>
                     <li>
@@ -51,7 +51,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/#/settings/profile">
+                        <a href="/#/account/signout">
                             <span class="icon li-sync"></span>
                             <span class="text">Sign Out</span>
                         </a>
