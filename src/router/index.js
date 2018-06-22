@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+
 const router = new Router({
   routes: [
     {
@@ -74,26 +75,31 @@ const router = new Router({
     {
       path: '/identity/:id/contacts',
       name: 'Identity Contacts',
+      props: true,
       component: () => import('@/screens/identity-contacts')
     },
     {
       path: '/identity/:id/projects',
       name: 'Identity Projects',
+      props: true,
       component: () => import('@/screens/identity-projects')
     },
     {
       path: '/identity/:id/assets',
       name: 'Identity Assets',
+      props: true,
       component: () => import('@/screens/identity-assets')
     },
     {
       path: '/identity/:id/contacts',
       name: 'Identity Contacts',
+      props: true,
       component: () => import('@/screens/identity-contacts')
     },
     {
       path: '/invoice/:id',
       name: 'Invoice',
+      props: true,
       component: () => import('@/screens/invoice-overview')
     },
     {
@@ -114,21 +120,25 @@ const router = new Router({
     {
       path: '/app/:id',
       name: 'App',
+      props: true,
       component: () => import('@/screens/app-overview')
     },
     {
       path: '/app/:id/community',
       name: 'App Community',
+      props: true,
       component: () => import('@/screens/app-community')
     },
     {
       path: '/app/:id/projects',
       name: 'App Projects',
+      props: true,
       component: () => import('@/screens/app-projects')
     },
     {
       path: '/app/:id/assets',
       name: 'App Assets',
+      props: true,
       component: () => import('@/screens/app-assets')
     },
     {
@@ -164,21 +174,25 @@ const router = new Router({
     {
       path: '/project/:id',
       name: 'Project',
+      props: true,
       component: () => import('@/screens/project-overview')
     },
     {
       path: '/project/:id/bounties',
       name: 'Project Bounties',
+      props: true,
       component: () => import('@/screens/project-bounties')
     },
     {
       path: '/project/:id/contributors',
       name: 'Project Contributors',
+      props: true,
       component: () => import('@/screens/project-contributors')
     },
     {
       path: '/project/:id/discussion',
       name: 'Project Discussion',
+      props: true,
       component: () => import('@/screens/project-discussion')
     },
     {
@@ -189,6 +203,7 @@ const router = new Router({
     {
       path: '/curator/:id',
       name: 'Curator',
+      props: true,
       component: () => import('@/screens/curator-overview')
     }
   ]

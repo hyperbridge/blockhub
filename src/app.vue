@@ -6,10 +6,14 @@
 
 <script>
 import Vue from "vue"
-
+// {{ data.user }}
 export default Vue.extend({
   name: 'app',
+  props: ['data'],
   created() {
+    console.log('user data from parent component:')
+    console.log(this._props, this.data) //prints out an empty string
+
     window.initBlockHub = function() {
       import('./framework/ethereum').then(c => c.init())
       import('./framework/peer').then(c => c.init())

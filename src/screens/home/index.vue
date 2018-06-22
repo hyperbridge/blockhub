@@ -5,10 +5,14 @@
             <!-- PAGE HEADING -->
             <div class="page-heading">
                 <div class="page-heading__container">
-                    <h1 class="title">Cards</h1>
-                    <p class="caption">List of your active personal cards</p>
+                    <h1 class="title">Home</h1>
+                    <p class="caption">Getter done</p>
+                    <div class="row text-center">
+                        <h3>Product title {{ product.name }} News title {{ article.body }}</h3>
+                        <button class="btn" @click="marketplace/viewProduct">viewProduct</button>
+                        <button class="btn" @click="updateTitle()">updateProductTitle</button>
+                    </div>
                 </div>
-                <c-heading />
             </div>
             <!-- //END PAGE HEADING -->
             
@@ -17,7 +21,6 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h1>{{ msg }}</h1>
                                 <h2>Links</h2>
                                 <ul>
                                   <li><a href="/#/store">Store</a></li>
@@ -69,12 +72,32 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'home',
   data() {
     return {
-      msg: '',
+      product: this.$store.state.marketplace.entities.products['5'],
+      article: this.$store.state.news.entities.articles['post1']
     }
+  },
+  computed: mapGetters([
+    'evenOrOdd'
+  ]),
+  methods: {
+    updateTitle () {
+      const title = 'newww2'
+
+      this.$store.dispatch('marketplace/updateProductTitle', { id: 'post1', title })
+      this.$data.xxx = title
+    },
+    ...mapActions([
+      'increment',
+      'decrement',
+      'incrementIfOdd',
+      'incrementAsync'
+    ])
   },
   components: {
     'c-layout': () => import('@/layouts/default')
