@@ -18,7 +18,7 @@
             
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert" id="page-aside">
-                <c-navigation />
+                <component v-bind:is="`${navigationComponent}`"></component>
             </div>
             <!-- //END PAGE ASIDE PANEL -->
             
@@ -47,9 +47,18 @@
 
 <script>
 export default {
+    props: [
+        'navigationKey'
+    ],
     components: {
-        'c-navigation': () => import('@/ui/components/navigation/wallet-navigation'),
-        'c-header': () => import('@/ui/components/headers/basic')
+        'c-header': () => import('@/ui/components/headers/basic'),
+        'walletNavigation': () => import('@/ui/components/navigation/wallet'),
+        'storeNavigation': () => import('@/ui/components/navigation/store')
+    },
+    data() {
+        return {
+            navigationComponent: this.navigationKey || 'walletNavigation'
+        }
     },
     mounted() {
         initBlockHubSettings()
