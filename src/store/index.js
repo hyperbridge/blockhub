@@ -2,47 +2,48 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import marketplace from '../modules/marketplace'
+import funding from '../modules/funding'
 import news from '../modules/news'
 
 Vue.use(Vuex)
 
 const state = {
-    count: 0,
-    marketplace: marketplace.state
+    marketplace: marketplace.state,
+    funding: funding.state
 }
 
-const getters = {
-    evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd',
-    getProduct: state => state.marketplace.entities.articles['post1']
-}
+// const getters = {
+//     evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd',
+//     getProduct: state => state.marketplace.entities.articles['post1']
+// }
 
-const mutations = {
-    increment(state) {
-        state.count++
-    },
-    decrement(state) {
-        state.count--
-    }
-}
+// const mutations = {
+//     increment(state) {
+//         state.count++
+//     },
+//     decrement(state) {
+//         state.count--
+//     }
+// }
 
 
-const actions = {
-    increment: ({ commit }) => commit('increment'),
-    decrement: ({ commit }) => commit('decrement'),
-    incrementIfOdd({ commit, state }) {
-        if ((state.count + 1) % 2 === 0) {
-            commit('increment')
-        }
-    },
-    incrementAsync({ commit }) {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                commit('increment')
-                resolve()
-            }, 1000)
-        })
-    }
-}
+// const actions = {
+//     increment: ({ commit }) => commit('increment'),
+//     decrement: ({ commit }) => commit('decrement'),
+//     incrementIfOdd({ commit, state }) {
+//         if ((state.count + 1) % 2 === 0) {
+//             commit('increment')
+//         }
+//     },
+//     incrementAsync({ commit }) {
+//         return new Promise((resolve, reject) => {
+//             setTimeout(() => {
+//                 commit('increment')
+//                 resolve()
+//             }, 1000)
+//         })
+//     }
+// }
 
 export default new Vuex.Store({
     modules: {
@@ -52,6 +53,13 @@ export default new Vuex.Store({
             getters: marketplace.getters,
             actions: marketplace.actions,
             mutations: marketplace.mutations
+        },
+        funding: {
+            namespaced: true,
+            state: funding.state,
+            getters: funding.getters,
+            actions: funding.actions,
+            mutations: funding.mutations
         },
         news: {
             namespaced: true,

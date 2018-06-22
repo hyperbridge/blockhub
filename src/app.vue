@@ -733,10 +733,10 @@ export default Vue.extend({
     top: 0;
     left: 0;
     width: 100%;
-    height: 381px;
+    height: 926px;
     background: url(/static/img/product-bg-fade.png);
     background-size: contain;
-    background-position: 0 381px;
+    background-position: 0 382px;
     z-index: 0;
   }
 

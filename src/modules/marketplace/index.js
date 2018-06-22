@@ -18,12 +18,65 @@ const rawData = {
             authorTags: ['office']
         },
         {
-            id: '5',
-            name: 'Far Cry® 5',
-            version: '1',
+            id: '2',
+            name: 'Fortnite',
+            type: 'game',
+            images: {},
+            downloads: 4000,
+            owner: '0x0',
+            author: {
+                id: '0x0'
+            },
+            systemTags: ['game', 'specials'],
+            authorTags: ['fps']
+        },
+        {
+            id: "3",
+            name: "Tibia",
+            images: {
+                headerUrl: '/static/img/products/tibia/headerUrl.png',
+                mediumTileUrl: '/static/img/products/tibia/mediumTileUrl.png'
+            },
+            type: 'game',
+            downloads: 20,
+            systemTags: ['game', 'specials'],
+            author: {
+                id: '0x0'
+            },
+            authorTags: ['mmo']
+        },
+        {
+            id: "4",
+            name: "Divvy",
+            images: {},
+            type: 'app',
+            downloads: 0,
+            systemTags: ['app', 'productivity', 'specials'],
+            author: {
+                id: '0x0'
+            },
+            authorTags: ['hotkeys']
+        },
+        {
+            id: "5",
+            name: "Bless",
             images: {
                 headerUrl: '/static/img/products/bless/headerUrl.png',
                 mediumTileUrl: '/static/img/products/bless/mediumTileUrl.png'
+            },
+            type: 'game',
+            downloads: 100,
+            systemTags: ['game', 'specials'],
+            author: {
+                id: '0x0'
+            },
+            authorTags: ['mmo']
+        },
+        {
+            id: '6',
+            name: 'Far Cry® 5',
+            version: '1',
+            images: {
             },
             shortDescription: 'Welcome to Hope County, Montana, home to a fanatical doomsday cult known as Eden’s Gate. Stand up to cult leader Joseph Seed & his siblings, the Heralds, to spark the fires of resistance & liberate the besieged community.',
             about: `Far Cry comes to America in the latest installment of the award-winning franchise.
@@ -102,46 +155,6 @@ Additional notes: Eye tracking features available with Tobii Eye Tracking.`,
                     ]
                 }
             ]
-        },
-        {
-            id: '2',
-            name: 'Fortnite',
-            type: 'game',
-            images: {},
-            downloads: 4000,
-            owner: '0x0',
-            author: {
-                id: '0x0'
-            },
-            systemTags: ['game', 'specials'],
-            authorTags: ['fps']
-        },
-        {
-            id: "3",
-            name: "Tibia",
-            images: {
-                headerUrl: '/static/img/products/tibia/headerUrl.png',
-                mediumTileUrl: '/static/img/products/tibia/mediumTileUrl.png'
-            },
-            type: 'game',
-            downloads: 20,
-            systemTags: ['game', 'specials'],
-            author: {
-                id: '0x0'
-            },
-            authorTags: ['mmo']
-        },
-        {
-            id: "4",
-            name: "Divvy",
-            images: {},
-            type: 'app',
-            downloads: 0,
-            systemTags: ['app', 'productivity', 'specials'],
-            author: {
-                id: '0x0'
-            },
-            authorTags: ['hotkeys']
         }
     ]
 }

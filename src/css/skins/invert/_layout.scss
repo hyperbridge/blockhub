@@ -13,7 +13,7 @@
         &.invert{
             background: transparent;
             color: $invert-color;        
-            border-bottom-color: $invert-header-border;
+            border-bottom-color: transparent;
             @if $shadows != 0 {
                 box-shadow: 0px 2px 12px rgba(0,0,0,0.2);
             }
@@ -24,7 +24,7 @@
         &.invert{
             background: transparent;
             color: $invert-color;        
-            border-bottom-color: $invert-header-border;
+            border-bottom-color: transparent;
         }
     }
     
@@ -37,14 +37,14 @@
             &.invert{
                 background-color: transparent;
                 color: $invert-color;            
-                border-right-color: $invert-aside-border;
+                border-right-color: transparent;
                 @if $shadows != 0 {
                     box-shadow: 2px 0px 12px rgba(0,0,0,0.2);
                 }
                                 
                 .page-aside-controls{
                     background: darken($invert-aside-background,2%);
-                    border-top: 1px solid $invert-aside-border;                        
+                    border-top: 1px solid transparent;                        
                 }                
             }
         }
