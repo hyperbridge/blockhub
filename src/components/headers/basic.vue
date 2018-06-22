@@ -5,64 +5,58 @@
         <div class="appHeader-barCenter"><!-- add icons --></div>
         <div class="appHeader-barRight"><!-- add icons --></div>
         <nav class="appHeader-nav">
-            
             <nav class="horizontal-navigation appHeader-navLeft">
                 <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
-                
                 <ul>
                     <li>
-                        <a href="solutions-banking-main.html">
+                        <a href="/#/store">
                             <span class="icon li-man"></span>
                             <span class="text">Store</span>
                         </a>
                     </li>
                     <li>
-                        <a href="solutions-banking-cards.html">
+                        <a href="/#/contacts">
                             <span class="icon li-credit-card"></span>
                             <span class="text">Contacts</span>
                         </a>
                     </li>
                     <li>
-                        <a href="solutions-banking-activity.html">
+                        <a href="/#/wallets">
                             <span class="icon li-sync"></span>
                             <span class="text">Wallets</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/#/identities">
                             <span class="icon li-wallet"></span>
                             <span class="text">Identities</span>
                         </a>
                     </li>
                 </ul>
-                
             </nav>
-
-
+            <a class="appHeader-navCenter" href="/">A</a>
             <nav class="horizontal-navigation appHeader-navRight">
                 <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
-                
                 <ul>
                     <li>
                         <a href="solutions-banking-main.html">
                             <span class="icon li-man"></span>
-                            <span class="text">Store</span>
+                            <span class="text">Satoshi</span>
                         </a>
                     </li>
                     <li>
-                        <a href="solutions-banking-cards.html">
+                        <a href="/#/settings">
                             <span class="icon li-credit-card"></span>
-                            <span class="text">Contacts</span>
+                            <span class="text">Settings</span>
                         </a>
                     </li>
                     <li>
-                        <a href="solutions-banking-activity.html">
+                        <a href="/#/settings/profile">
                             <span class="icon li-sync"></span>
-                            <span class="text">@JohnDoe</span>
+                            <span class="text">Sign Out</span>
                         </a>
                     </li>
                 </ul>
-                
             </nav>
         </nav>
     </header>
@@ -114,6 +108,15 @@ export default {}
                 color: #fff;
             }
         }
+    }
+
+    .appHeader-navCenter {
+        position: absolute;
+        top: -20px;
+        left: 40%;
+        width: 250px;
+        height: 50px;
+        text-indent: -9999px;
     }
 
     .appHeader-barLeft {

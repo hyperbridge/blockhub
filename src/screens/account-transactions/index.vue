@@ -205,7 +205,7 @@ export default {
   name: 'wallets',
   data() {
     return {
-      msg: 'Welcome to Your Vue.js PWA',
+      msg: '',
     }
   },
   components: {

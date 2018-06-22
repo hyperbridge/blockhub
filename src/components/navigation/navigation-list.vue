@@ -70,7 +70,7 @@
             </a>
         </li>
         
-        <li class="openable">
+        <li class="openable" style="display: none">
             <a href="#">
                 <span class="icon li-document"></span>
                 <span class="text">Add New</span>
@@ -148,7 +148,7 @@
             </ul>
         </li>
         
-        <li class="openable">
+        <li class="openable"  style="display: none">
             <a href="#">
                 <span class="icon li-group-work"></span>
                 <span class="text">Business solutions</span>
@@ -246,8 +246,8 @@
             </ul>
         </li>
         
-        <li class="title">Interface</li>
-        <li class="openable">
+        <li class="title" style="display: none">Interface</li>
+        <li class="openable" style="display: none">
             <a href="#">
                 <span class="icon li-laptop-phone"></span>
                 <span class="text">Elements</span>
@@ -319,7 +319,7 @@
             </ul>
             
         </li>
-        <li class="openable">
+        <li class="openable" style="display: none">
             <a href="#">
                 <span class="icon li-pen-add"></span>
                 <span class="text">Components</span>
@@ -393,7 +393,7 @@
             </ul>
             
         </li>
-        <li class="openable">
+        <li class="openable" style="display: none">
             <a href="#">
                 <span class="icon li-layers"></span>
                 <span class="text">Forms</span>
@@ -468,7 +468,7 @@
                 </li>
             </ul>
         </li>    
-        <li class="openable">
+        <li class="openable" style="display: none">
             <a href="#">
                 <span class="icon li-pie-chart"></span>
                 <span class="text">Charts</span>
@@ -496,7 +496,7 @@
                 </li>
             </ul>
         </li>                
-        <li class="openable">
+        <li class="openable" style="display: none">
             <a href="#">
                 <span class="icon li-menu-square"></span>
                 <span class="text">Tables</span>
@@ -531,7 +531,7 @@
                 </li>
             </ul>            
         </li>
-        <li class="openable">
+        <li class="openable" style="display: none">
             <a href="#">
                 <span class="icon li-map-marker"></span>
                 <span class="text">Maps</span>
@@ -549,8 +549,8 @@
                 </li>
             </ul>            
         </li>        
-        <li class="title">Template options</li>
-        <li class="openable">
+        <li class="title" style="display: none">Template options</li>
+        <li class="openable" style="display: none">
             <a href="#">
                 <span class="icon li-layers"></span>
                 <span class="text">Layout examples</span>

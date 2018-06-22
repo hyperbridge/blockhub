@@ -16,6 +16,16 @@ export default new Router({
       component: () => import('@/screens/account'),
     },
     {
+      path: '/account/signup',
+      name: 'Sign Up',
+      component: () => import('@/screens/account-signup'),
+    },
+    {
+      path: '/account/signin',
+      name: 'Sign In',
+      component: () => import('@/screens/account-signin'),
+    },
+    {
       path: '/account/wallets',
       name: 'Wallets',
       component: () => import('@/screens/account-wallets'),
@@ -24,6 +34,16 @@ export default new Router({
       path: '/account/transactions',
       name: 'Transactions',
         component: () => import('@/screens/account-transactions')
+    },
+    {
+      path: '/account/identities',
+      name: 'Identities',
+        component: () => import('@/screens/account-identities')
+    },
+    {
+      path: '/contacts',
+      name: 'Contacts',
+        component: () => import('@/screens/contacts')
     },
     {
       path: '/store',
@@ -124,6 +144,16 @@ export default new Router({
       path: '/curator/:id',
       name: 'Curator',
       component: () => import('@/screens/curator-overview')
+    },
+    {
+      path: '/help',
+      name: 'Help',
+      component: () => import('@/screens/help')
+    },
+    {
+      path: '/support',
+      name: 'Support',
+      component: () => import('@/screens/support')
     }
   ]
 })
