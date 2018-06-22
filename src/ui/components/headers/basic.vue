@@ -100,13 +100,17 @@ export default {}
 
         .horizontal-navigation > ul > li > a {
             padding: 0;
-            margin: 0;
+            margin: 0 0 0 17px;
 
             & > span.text {
                 font-size: 16px;
                 padding: 0;
                 color: #fff;
             }
+        }
+
+        .horizontal-navigation > ul .icon {
+            color: #fff;
         }
     }
 

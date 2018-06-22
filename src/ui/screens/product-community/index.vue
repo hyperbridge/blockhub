@@ -1,14 +1,21 @@
 <template>
-    <div>todo</div>
+    <c-layout>
+        <div class="content" id="content">
+            <div class="container-fluid">  
+                <div class="row">
+                    <div class="col-12">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </c-layout>
 </template>
 
 <script>
 export default {
   components: {
-  },
-  data: () => ({
-    wallets: []
-  })
+    'c-layout': () => import('@/ui/layouts/default')
+  }
 }
 </script>
 

@@ -11,7 +11,7 @@
 .page{
     .page__header{
         &.invert{
-            background: $invert-header-background;
+            background: transparent;
             color: $invert-color;        
             border-bottom-color: $invert-header-border;
             @if $shadows != 0 {
@@ -22,7 +22,7 @@
     
     .page__container{
         &.invert{
-            background: $invert-header-background;
+            background: transparent;
             color: $invert-color;        
             border-bottom-color: $invert-header-border;
         }
@@ -30,12 +30,12 @@
     
     .page__content{
         &.page__content-invert{
-            background: $invert-content-background;
+            background: transparent;
         }
         
         .page-aside{
             &.invert{
-                background-color: $invert-aside-background;
+                background-color: transparent;
                 color: $invert-color;            
                 border-right-color: $invert-aside-border;
                 @if $shadows != 0 {
@@ -51,12 +51,12 @@
         
         .page-sidepanel{
             &.invert{
-                background: $invert-sidepanel-background;
+                background: transparent;
                 color: $invert-color;
                 border-right-color: $invert-sidepanel-border;
                 
                 > .page-sidepanel__button{
-                    background: $invert-sidepanel-background;
+                    background: transparent;
                     border: 1px solid $invert-sidepanel-border;
                     border-left-color: $invert-sidepanel-background;
                     
@@ -76,7 +76,7 @@
         
         .important-container{
             &.invert{
-                background: $invert-sidepanel-background;
+                background: transparent;
                 color: $invert-color;
             }
         }

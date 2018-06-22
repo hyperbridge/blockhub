@@ -20,7 +20,7 @@ export default Vue.extend({
     }
     
     window.initBlockHubSettings = function() {
-      var settings = {    
+      var settings = {
           showSettings: function(){
               return;
               
@@ -721,39 +721,38 @@ export default Vue.extend({
 })
 </script>
 
-<style>
-body {
-  margin: 0;
-}
-
+<style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
 
-main {
-  text-align: center;
-  margin-top: 40px;
-}
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 381px;
+    background: url(/static/img/product-bg-fade.png);
+    background-size: contain;
+    background-position: 0 381px;
+    z-index: 0;
+  }
 
-header {
-  margin: 0;
-  height: 56px;
-  padding: 0 16px 0 24px;
-  background-color: #35495E;
-  color: #ffffff;
-}
+  &::after {
+    content: '';
+    position: fixed;
+    top: 381px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #30314c;
+    z-index: 0;
+  }
 
-header span {
-  display: block;
-  position: relative;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
-  padding-top: 16px;
+  .page {
+      z-index: 1;
+  }
 }
 </style>
