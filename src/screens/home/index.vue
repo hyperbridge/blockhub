@@ -89,7 +89,7 @@ export default {
     updateTitle () {
       const title = 'newww2'
 
-      this.$store.dispatch('marketplace/updateProductTitle', { id: 'post1', title })
+      this.$store.dispatch('marketplace/updateProductTitle', { id: '5', title })
       this.$data.xxx = title
     },
     ...mapActions([

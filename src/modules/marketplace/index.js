@@ -1,5 +1,6 @@
 import { normalize } from 'normalizr'
 import schema from './schema'
+import * as ethereum from '../../framework/ethereum'
 
 const rawData = {
     products: [
@@ -134,11 +135,13 @@ Additional notes: Eye tracking features available with Tobii Eye Tracking.`,
     ]
 }
 
+ethereum.init()
+
 export default {
     state: normalize(rawData, { products: [schema.product] }),
     getters: {
         getProduct(state) {
-            return state.marketplace.entities.product['5']
+            return state.entities.products['5']
         }
     },
     actions: {
@@ -146,12 +149,16 @@ export default {
             console.log('viewProduct', id)
         },
         updateProductTitle({ commit, state }, payload) {
+            ethereum.getUserBalance().then((balance) => {
+                commit('updateProductTitle', { id: '5', name: balance })
+            })
+
             commit('updateProductTitle', payload)
         }
     },
     mutations: {
         updateProductTitle(state, { id, name }) {
-            state.entities.articles[id].body = name
+            state.entities.products[id].name = name
         }
     }
 }
