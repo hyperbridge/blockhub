@@ -18,7 +18,7 @@
             
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert" id="page-aside">
-                <component v-bind:is="`${navigationComponent}`"></component>
+                <component v-if="navigationComponent" v-bind:is="`${navigationComponent}`"></component>
             </div>
             <!-- //END PAGE ASIDE PANEL -->
             
@@ -53,11 +53,12 @@ export default {
     components: {
         'c-header': () => import('@/ui/components/headers/basic'),
         'walletNavigation': () => import('@/ui/components/navigation/wallet'),
+        'accountNavigation': () => import('@/ui/components/navigation/account'),
         'storeNavigation': () => import('@/ui/components/navigation/store')
     },
     data() {
         return {
-            navigationComponent: this.navigationKey || 'walletNavigation'
+            navigationComponent: this.navigationKey || false
         }
     },
     mounted() {
