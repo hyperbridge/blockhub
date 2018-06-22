@@ -4,6 +4,10 @@
             <div class="container-fluid">  
                 <div class="row">
                     <div class="col-12">
+                      {id}
+                      {name}
+                      {images.avatarUrl}
+                      
                     </div>
                 </div>
             </div>

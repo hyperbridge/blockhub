@@ -4,6 +4,15 @@
             <div class="container-fluid">  
                 <div class="row">
                     <div class="col-12">
+                      name
+                      description
+                      copy link
+                      value
+                      is completed 
+                      hunters
+
+                      if owner: reports
+                      
                     </div>
                 </div>
             </div>
