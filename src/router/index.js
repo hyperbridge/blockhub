@@ -9,202 +9,202 @@ const router = new Router({
     {
       path: '/',
       name: 'Home',
-      component: () => import('@/screens/home'),
+      component: () => import('@/ui/screens/home'),
     },
     {
       path: '/home',
       name: 'Home',
-      component: () => import('@/screens/home'),
+      component: () => import('@/ui/screens/home'),
     },
     {
       path: '/help',
       name: 'Help',
-      component: () => import('@/screens/help')
+      component: () => import('@/ui/screens/help')
     },
     {
       path: '/support',
       name: 'Support',
-      component: () => import('@/screens/support')
+      component: () => import('@/ui/screens/support')
     },
     {
       path: '/store',
       name: 'Store',
-      component: () => import('@/screens/store')
+      component: () => import('@/ui/screens/store')
     },
     {
       path: '/news',
       name: 'News',
-      component: () => import('@/screens/news')
+      component: () => import('@/ui/screens/news')
     },
     {
       path: '/account',
       name: 'Account',
-      component: () => import('@/screens/account'),
+      component: () => import('@/ui/screens/account'),
     },
     {
       path: '/account/signup',
       name: 'Sign Up',
-      component: () => import('@/screens/account-signup'),
+      component: () => import('@/ui/screens/account-signup'),
     },
     {
       path: '/account/signin',
       name: 'Sign In',
-      component: () => import('@/screens/account-signin'),
+      component: () => import('@/ui/screens/account-signin'),
     },
     {
       path: '/account/wallets',
       name: 'Wallets',
-      component: () => import('@/screens/account-wallets'),
+      component: () => import('@/ui/screens/account-wallets'),
     },
     {
       path: '/account/transactions',
       name: 'Transactions',
-      component: () => import('@/screens/account-transactions')
+      component: () => import('@/ui/screens/account-transactions')
     },
     {
       path: '/account/identities',
       name: 'Identities',
-      component: () => import('@/screens/account-identities')
+      component: () => import('@/ui/screens/account-identities')
     },
     {
       path: '/identity/:id',
       name: 'Identity',
       props: true,
-      component: () => import('@/screens/identity-overview')
+      component: () => import('@/ui/screens/identity-overview')
     },
     {
       path: '/identity/:id/contacts',
       name: 'Identity Contacts',
       props: true,
-      component: () => import('@/screens/identity-contacts')
+      component: () => import('@/ui/screens/identity-contacts')
     },
     {
       path: '/identity/:id/projects',
       name: 'Identity Projects',
       props: true,
-      component: () => import('@/screens/identity-projects')
+      component: () => import('@/ui/screens/identity-projects')
     },
     {
       path: '/identity/:id/assets',
       name: 'Identity Assets',
       props: true,
-      component: () => import('@/screens/identity-assets')
+      component: () => import('@/ui/screens/identity-assets')
     },
     {
       path: '/identity/:id/contacts',
       name: 'Identity Contacts',
       props: true,
-      component: () => import('@/screens/identity-contacts')
+      component: () => import('@/ui/screens/identity-contacts')
     },
     {
       path: '/invoice/:id',
       name: 'Invoice',
       props: true,
-      component: () => import('@/screens/invoice-overview')
+      component: () => import('@/ui/screens/invoice-overview')
     },
     {
       path: '/settings',
       name: 'Settings',
-      component: () => import('@/screens/settings')
+      component: () => import('@/ui/screens/settings')
     },
     {
       path: '/settings/profile',
       name: 'Profile',
-        component: () => import('@/screens/settings-profile')
+        component: () => import('@/ui/screens/settings-profile')
     },
     {
       path: '/settings/client',
       name: 'Client Settings',
-      component: () => import('@/screens/settings-client')
+      component: () => import('@/ui/screens/settings-client')
     },
     {
       path: '/product/:id',
       name: 'Product',
       props: true,
-      component: () => import('@/screens/product-overview')
+      component: () => import('@/ui/screens/product-overview')
     },
     {
       path: '/product/:id/community',
       name: 'Product Community',
       props: true,
-      component: () => import('@/screens/product-community')
+      component: () => import('@/ui/screens/product-community')
     },
     {
       path: '/product/:id/projects',
       name: 'Product Projects',
       props: true,
-      component: () => import('@/screens/product-projects')
+      component: () => import('@/ui/screens/product-projects')
     },
     {
       path: '/product/:id/assets',
       name: 'Product Assets',
       props: true,
-      component: () => import('@/screens/product-assets')
+      component: () => import('@/ui/screens/product-assets')
     },
     {
       path: '/community',
       name: 'Community',
-      component: () => import('@/screens/community')
+      component: () => import('@/ui/screens/community')
     },
     {
       path: '/community/chat',
       name: 'Chat',
-      component: () => import('@/screens/community-chat')
+      component: () => import('@/ui/screens/community-chat')
     },
     {
       path: '/republic',
       name: 'Republic',
-      component: () => import('@/screens/republic')
+      component: () => import('@/ui/screens/republic')
     },
     {
       path: '/republic/citizenship',
       name: 'Republic Citizenship',
-      component: () => import('@/screens/republic-citizenship')
+      component: () => import('@/ui/screens/republic-citizenship')
     },
     {
       path: '/republic/district/create',
       name: 'Create District',
-      component: () => import('@/screens/republic-district')
+      component: () => import('@/ui/screens/republic-district')
     },
     {
       path: '/projects',
       name: 'Projects',
-      component: () => import('@/screens/projects')
+      component: () => import('@/ui/screens/projects')
     },
     {
       path: '/project/:id',
       name: 'Project',
       props: true,
-      component: () => import('@/screens/project-overview')
+      component: () => import('@/ui/screens/project-overview')
     },
     {
       path: '/project/:id/bounties',
       name: 'Project Bounties',
       props: true,
-      component: () => import('@/screens/project-bounties')
+      component: () => import('@/ui/screens/project-bounties')
     },
     {
       path: '/project/:id/contributors',
       name: 'Project Contributors',
       props: true,
-      component: () => import('@/screens/project-contributors')
+      component: () => import('@/ui/screens/project-contributors')
     },
     {
       path: '/project/:id/discussion',
       name: 'Project Discussion',
       props: true,
-      component: () => import('@/screens/project-discussion')
+      component: () => import('@/ui/screens/project-discussion')
     },
     {
       path: '/curators',
       name: 'Curators',
-      component: () => import('@/screens/curators')
+      component: () => import('@/ui/screens/curators')
     },
     {
       path: '/curator/:id',
       name: 'Curator',
       props: true,
-      component: () => import('@/screens/curator-overview')
+      component: () => import('@/ui/screens/curator-overview')
     }
   ]
 })
