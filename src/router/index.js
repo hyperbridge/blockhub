@@ -52,6 +52,11 @@ const router = new Router({
       component: () => import('@/ui/screens/account-signin'),
     },
     {
+      path: '/account/signout',
+      name: 'Sign Out',
+      component: () => import('@/ui/screens/account-signout'),
+    },
+    {
       path: '/account/wallets',
       name: 'Wallets',
       component: () => import('@/ui/screens/account-wallets'),

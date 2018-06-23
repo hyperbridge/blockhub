@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <c-layout navigationKey="accountNavigation">
 
     </c-layout>
 </template>
