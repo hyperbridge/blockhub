@@ -54,6 +54,7 @@ export default {
         'c-header': () => import('@/ui/components/headers/basic'),
         'walletNavigation': () => import('@/ui/components/navigation/wallet'),
         'accountNavigation': () => import('@/ui/components/navigation/account'),
+        'settingsNavigation': () => import('@/ui/components/navigation/settings'),
         'storeNavigation': () => import('@/ui/components/navigation/store')
     },
     data() {
