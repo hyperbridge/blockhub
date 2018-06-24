@@ -69,7 +69,6 @@
 <script>
 export default {
   components: {
-    'c-navigation-list': () => import('@/ui/components/navigation/navigation-list')
   },
   data() {
     return {}
