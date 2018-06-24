@@ -21,11 +21,8 @@
                 <component v-if="navigationComponent" v-bind:is="`${navigationComponent}`"></component>
             </div>
             <!-- //END PAGE ASIDE PANEL -->
-            
 
-            
             <slot></slot>
-
 
             <!-- SIDEPANEL -->
             <div class="page-sidepanel invert" id="page-sidepanel">
@@ -55,6 +52,7 @@ export default {
         'walletNavigation': () => import('@/ui/components/navigation/wallet'),
         'accountNavigation': () => import('@/ui/components/navigation/account'),
         'settingsNavigation': () => import('@/ui/components/navigation/settings'),
+        'helpNavigation': () => import('@/ui/components/navigation/help'),
         'storeNavigation': () => import('@/ui/components/navigation/store')
     },
     data() {

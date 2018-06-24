@@ -55,13 +55,19 @@
                     <span class="text">Simulation</span>
                 </a>
             </li>
+            <li class="title">Help</li>
+            <li>
+                <a onclick="filter({genre: 'action'})">
+                    <span class="icon li-home"></span>
+                    <span class="text">Content Availability by Country</span>
+                </a>
+            </li>
         </ul>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'default_w_user',
   components: {
     'c-navigation-list': () => import('@/ui/components/navigation/navigation-list')
   },
