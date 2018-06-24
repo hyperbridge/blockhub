@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-3" v-for="(item, index) in products" v-bind:key="index">
                         <div class="card">
-                            <a :href="`/#/product/${item.id}`" style="padding: 10px;"><img class="card-img-top" :src="item.images.mediumTileUrl" /></a>
+                            <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.mediumTileUrl" /></a>
                             <div class="card-body">
                                 <h4 class="card-title"><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
                                 <p class="card-text">{{ item.shortDescription }} </p>
@@ -50,5 +50,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card {
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
+}
 
+.card > a {
+    padding: 7px;
+}
+
+.card-title a {
+    color: #fff;
+    font-family: Barlow, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.card-link {
+    color: #C6C6D6;
+    background: #3D3E5D;
+    border-radius: 4px;
+    padding: 0px 6px;
+    font-size: 13px;
+}
 </style>
