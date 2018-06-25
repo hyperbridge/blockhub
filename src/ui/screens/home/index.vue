@@ -27,6 +27,7 @@
                                   <li><a href="/#/news">News</a></li>
                                   <li><a href="/#/help">Help</a></li>
                                   <li><a href="/#/support">Support</a></li>
+                                  <li><a href="/#/changelog">Changelog</a></li>
                                   
                                   <li><a href="/#/settings">Settings</a></li>
                                   <li><a href="/#/settings/profile">Settings > Profile</a></li>
@@ -88,13 +89,19 @@ export default {
   name: 'home',
   data() {
     return {
-      product: this.$store.state.marketplace.entities.products['5'],
-      article: this.$store.state.news.entities.articles['post1']
     }
   },
-  computed: mapGetters([
-    'evenOrOdd'
-  ]),
+  computed: {
+    product() {console.log('aaaa', this.$store.state.marketplace.entities.products)
+      return this.$store.state.marketplace.entities.products ? this.$store.state.marketplace.entities.products['5'] : {}
+    },
+    article() {
+      return this.$store.state.news.entities.articles ? this.$store.state.news.entities.articles['post1'] : {}
+    }
+  },
+//   computed: mapGetters([
+//     'evenOrOdd'
+//   ]),
   methods: {
     updateTitle () {
       const title = 'newww2'

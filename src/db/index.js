@@ -2,143 +2,166 @@ import Loki from 'lokijs'
 
 const data = require('json-loader!yaml-loader!./data.yaml')
 
-
-console.log(JSON.stringify(data))
-
 // TODO: refactor from class to functional
 
-class DB {
-    constructor() {
-        const databaseInitialize = () => {
-            this.accounts = this.loki.getCollection('accounts')
+let loki = null
 
-            if (!this.accounts) {
-                this.loki.addCollection('accounts', { indices: ['id'] })
-            }
+export let marketplace = null
+export let accounts = null
+export let republic = null
 
-            this.republic = {
-                citizens: this.loki.getCollection('republicCitizens'),
-                delegates: this.loki.getCollection('republicCouncilDelegates'),
-                elections: this.loki.getCollection('republicElections')
-            }
+// const databaseInitialize = () => {
+//     accounts = loki.getCollection('accounts')
 
-            if (!this.republic.citizens) {
-                this.republic = {
-                    citizens: this.loki.addCollection('republicCitizens', { indices: ['id'] }),
-                    delegates: this.loki.addCollection('republicCouncilDelegates', { indices: ['id'] }),
-                    elections: this.loki.addCollection('republicElections', { indices: ['id'] })
-                }
+//     republic = {
+//         citizens: loki.getCollection('republicCitizens'),
+//         delegates: loki.getCollection('republicCouncilDelegates'),
+//         elections: loki.getCollection('republicElections')
+//     }
 
-                this.republic.council.delegates.insert([
-                    {
-                        name: 'Hyperbridge',
-                        address: "0x0",
-                        industry: "Technology"
-                    }
-                ])
+//     marketplace = {
+//         products: loki.getCollection('marketplaceProducts')
+//     }
+// }
 
-                this.republic.citizens.insert([
-                    {
-                        name: "eric",
-                        address: "0x0",
-                        apps: [
-                            {
-                                id: "0asdasd0a-adsasda-asdasd9",
-                                name: "blockhub",
-                                link: "http://something/blockhub.exe"
-                            }
-                        ]
-                    }
-                ])
+// const idbAdapter = (new Loki()).getIndexedAdapter()
 
-                this.republic.elections.insert([
-                    {
-                        title: '2018 Election',
-                        description: 'We intend to do things. Learn more here: https://hyperbridge.org/election2018',
-                        startAt: '03-03-2018',
-                        endAt: '03-03-2019',
-                        nominees: [
-                            {
-                                address: "0x0",
-                                name: "Microsoft"
-                            },
-                            {
-                                address: "0x0",
-                                name: "Google"
-                            }
-                        ],
-                        winners: []
-                    },
-                    {
-                        title: '2019 Election',
-                        startAt: '03-03-2019',
-                        endAt: '03-03-2020',
-                        nominees: [
-                            {
-                                address: "0x0",
-                                name: "Microsoft"
-                            },
-                            {
-                                address: "0x0",
-                                name: "Google"
-                            }
-                        ],
-                        winners: [
-                            {
-                                address: "0x0",
-                                name: "Google"
-                            }
-                        ]
-                    }
-                ])
-            }
+// loki = new Loki('main.db', {
+//     adapter: new idbAdapter('main.db'),
+//     autoload: true,
+//     autoloadCallback: databaseInitialize,
+//     autosave: true,
+//     autosaveInterval: 4000
+// })
 
-            this.marketplace = {
-                products: this.loki.getCollection('marketplaceProducts')
-            }
+// accounts = loki.addCollection('accounts')
 
-            if (!this.marketplace.products) {
-                this.marketplace.products = this.loki.addCollection('marketplaceProducts', { indices: ['id'] })
+// republic = {
+//     citizens: loki.addCollection('republicCitizens'),
+//     delegates: loki.addCollection('republicCouncilDelegates'),
+//     elections: loki.addCollection('republicElections')
+// }
 
-                this.marketplace.products.insert(data.products)
-            }
+// marketplace = {
+//     products: loki.addCollection('marketplaceProducts')
+// }
 
-            // debugger;
-            // // manually save
-            // this.loki.saveDatabase(function (err) {
-            //     if (err) {
-            //         console.log(err);
-            //     }
-            //     else {
-            //         console.log("saved... it can now be loaded or reloaded with up to date data");
-            //     }
-            // });
+// marketplace.products.insert(data.products)
+
+
+// republic.council.delegates.insert([
+//     {
+//         name: 'Hyperbridge',
+//         address: "0x0",
+//         industry: "Technology"
+//     }
+// ])
+
+// republic.citizens.insert([
+//     {
+//         name: "eric",
+//         address: "0x0",
+//         apps: [
+//             {
+//                 id: "0asdasd0a-adsasda-asdasd9",
+//                 name: "blockhub",
+//                 link: "http://something/blockhub.exe"
+//             }
+//         ]
+//     }
+// ])
+
+// republic.elections.insert([
+//     {
+//         title: '2018 Election',
+//         description: 'We intend to do things. Learn more here: https://hyperbridge.org/election2018',
+//         startAt: '03-03-2018',
+//         endAt: '03-03-2019',
+//         nominees: [
+//             {
+//                 address: "0x0",
+//                 name: "Microsoft"
+//             },
+//             {
+//                 address: "0x0",
+//                 name: "Google"
+//             }
+//         ],
+//         winners: []
+//     },
+//     {
+//         title: '2019 Election',
+//         startAt: '03-03-2019',
+//         endAt: '03-03-2020',
+//         nominees: [
+//             {
+//                 address: "0x0",
+//                 name: "Microsoft"
+//             },
+//             {
+//                 address: "0x0",
+//                 name: "Google"
+//             }
+//         ],
+//         winners: [
+//             {
+//                 address: "0x0",
+//                 name: "Google"
+//             }
+//         ]
+//     }
+// ])
+
+
+
+export const init = (cb) => {
+    const databaseInitialize = () => {
+        accounts = loki.getCollection('accounts')
+
+        republic = {
+            citizens: loki.getCollection('republicCitizens'),
+            delegates: loki.getCollection('republicCouncilDelegates'),
+            elections: loki.getCollection('republicElections')
         }
 
-        const idbAdapter = (new Loki()).getIndexedAdapter()
-
-        this.loki = new Loki('main.db', {
-            adapter: new idbAdapter('main.db'),
-            autoload: true,
-            autoloadCallback: databaseInitialize,
-            autosave: true,
-            autosaveInterval: 4000
-        })
-
-        this.accounts = this.loki.addCollection('accounts')
-
-        this.republic = {
-            citizens: this.loki.addCollection('republicCitizens'),
-            delegates: this.loki.addCollection('republicCouncilDelegates'),
-            elections: this.loki.addCollection('republicElections')
+        marketplace = {
+            products: loki.getCollection('marketplaceProducts')
         }
 
-        this.marketplace = {
-            products: this.loki.addCollection('marketplaceProducts')
-        }
-
-        this.marketplace.products.insert(data.products)
+        cb && cb()
     }
+
+    const idbAdapter = (new Loki()).getIndexedAdapter()
+
+    loki = new Loki('main.db', {
+        adapter: new idbAdapter('main.db'),
+        autoload: true,
+        autoloadCallback: databaseInitialize,
+        autosave: true,
+        autosaveInterval: 4000
+    })
 }
 
-export default new DB()
+export const instance = () => {
+    return loki
+}
+
+export const save = () => {
+    loki.saveDatabase(function(err) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log("Database saved.");
+        }
+    })
+}
+
+export const toObject = () => {
+    return {
+        accounts: accounts.data,
+        marketplace: {
+            products: marketplace.products.data
+        }
+    }
+}

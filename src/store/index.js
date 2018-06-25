@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import marketplace from '../modules/marketplace'
+import * as marketplace from '../modules/marketplace'
 import funding from '../modules/funding'
 import news from '../modules/news'
 import network from '../modules/network'
@@ -46,7 +46,7 @@ Vue.use(Vuex)
 //     }
 // }
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
     modules: {
         marketplace: {
             namespaced: true,
@@ -78,3 +78,14 @@ export default new Vuex.Store({
         }
     }
 })
+
+marketplace.init(() => {
+    console.log('[BlockHub] Marketplace initialized. Updating store state.')
+
+    store.state.marketplace = marketplace.state
+
+    console.log(store.state.marketplace)
+})
+
+
+export default store
