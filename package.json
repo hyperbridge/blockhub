@@ -61,6 +61,7 @@
     "http-proxy-middleware": "^0.17.4",
     "inject-loader": "^3.0.1",
     "js-md5": "^0.7.3",
+    "json-loader": "^0.5.7",
     "karma": "^1.7.1",
     "karma-coverage": "^1.1.1",
     "karma-mocha": "^1.3.0",
@@ -71,6 +72,7 @@
     "karma-spec-reporter": "0.0.31",
     "karma-webpack": "^3.0.0",
     "liferaft": "^1.0.0",
+    "lokijs": "^1.5.5",
     "mocha": "^4.0.1",
     "nightwatch": "^0.9.16",
     "normalizr": "^3.2.4",
@@ -100,7 +102,8 @@
     "webpack-bundle-analyzer": "*",
     "webpack-dev-middleware": "^3.1.3",
     "webpack-hot-middleware": "*",
-    "webpack-merge": "*"
+    "webpack-merge": "*",
+    "yaml-loader": "^0.5.0"
   },
   "engines": {
     "node": ">= 4.0.0",
