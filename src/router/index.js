@@ -27,6 +27,11 @@ const router = new Router({
       component: () => import('@/ui/screens/support')
     },
     {
+      path: '/changelog',
+      name: 'Changelog',
+      component: () => import('@/ui/screens/changelog')
+    },
+    {
       path: '/store',
       name: 'Store',
       component: () => import('@/ui/screens/store')
@@ -94,12 +99,6 @@ const router = new Router({
       name: 'Identity Assets',
       props: true,
       component: () => import('@/ui/screens/identity-assets')
-    },
-    {
-      path: '/identity/:id/contacts',
-      name: 'Identity Contacts',
-      props: true,
-      component: () => import('@/ui/screens/identity-contacts')
     },
     {
       path: '/invoice/:id',
