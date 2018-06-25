@@ -7,7 +7,7 @@
                         <h3>New Releases</h3>
                     </div>
                     <div class="col-3" v-for="(item, index) in products" v-bind:key="index">
-                        <div class="card">
+                        <div class="card invert">
                             <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.mediumTileUrl" /></a>
                             <div class="card-body">
                                 <h4 class="card-title"><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>

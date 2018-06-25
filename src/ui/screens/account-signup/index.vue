@@ -5,6 +5,9 @@
             <div class="container">
                 <div class="col-12">
 
+                            <a href="/" class="logo-holder logo-holder--lg logo-holder--wide">
+                                <div class="logo-text"><strong class="text-primary">#</strong>BLOCK<strong>HUB</strong></div>
+                            </a>
                     <div class="login-container__buttons">
                         <a href="/#/account/signin" class="btn btn-outline-primary btn--icon"><span class="fa fa-angle-left"></span> Already have account?</a>
                     </div>
@@ -23,10 +26,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="step1" role="tabpanel" aria-labelledby="step1-tab">
 
-                            <a href="/" class="logo-holder logo-holder--lg logo-holder--wide">
-                                <div class="logo-text"><strong class="text-primary">#</strong>BLOCK<strong>HUB</strong></div>
-                            </a>
-                            <p class="caption text-center margin-bottom-30">Welcome</p>
+                            <p class="caption text-center margin-bottom-30">Personal Information</p>
                             
                             <form action="/" method="post">
                                 <div class="form-group">
@@ -42,22 +42,34 @@
                                     <input type="password" class="form-control" placeholder="Your password" name="password" autocomplete="new-password">
                                 </div>
 
+                                <p class="caption text-center margin-bottom-30">Agreement</p>
+
+                                <textarea cols="4" rows="10">
+
+                                    
+                                </textarea>
+
                                 <div class="form-group margin-bottom-30">
                                     <div class="form-row">
                                         <div class="col-12">
                                             <label class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" checked="">
-                                                <span class="custom-control-label">Don't send me updates</span>
+                                                <span class="custom-control-label">I agree to the <a href="#">terms</a> and <a href="#">privacy policy</a></span>
+                                            </label>
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" checked="">
+                                                <span class="custom-control-label">Sign up for our newsletter, get 100 HBX bonus!</span>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
 
+
                                 <div class="form-group margin-bottom-30">
                                     <div class="form-row">
                                         <div class="col-2"></div>
                                         <div class="col-8">
-                                            <button class="btn btn-primary btn-block">Create my account</button>
+                                            <button class="btn btn-primary btn-block">Next step</button>
                                         </div>
                                     </div>
                                 </div>
