@@ -11,6 +11,12 @@ export default Vue.extend({
   name: 'app',
   props: ['data'],
   created() {
+    this.$store.dispatch('network/connect')
+
+    setInterval(() => {
+        this.$store.dispatch('network/checkInternetConnection')
+    }, 4000)
+
     console.log('user data from parent component:')
     console.log(this._props, this.data) //prints out an empty string
 
@@ -535,6 +541,8 @@ export default Vue.extend({
 
               
               var contentInverter = function(e){
+                  if (!settings.vars.content) return
+
                   var cards = settings.vars.content.querySelectorAll(".card");
                   var page_heading = settings.vars.content.querySelectorAll(".page-heading")[0];
                   
@@ -705,7 +713,7 @@ export default Vue.extend({
               }
               
               // content options        
-              if(settings.vars.content.querySelectorAll("[class^='container'")[0]){
+              if(settings.vars.content && settings.vars.content.querySelectorAll("[class^='container'")[0]){
                   settings.vars.s_content.checked = settings.vars.content.querySelectorAll("[class^='container'")[0].classList.contains("container-fluid") ? true : false;
               }
               

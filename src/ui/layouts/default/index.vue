@@ -2,7 +2,6 @@
 
     <!-- PAGE WRAPPER -->
     <div class="page page--w-header page--w-container">
-        
         <!-- PAGE HEADER -->
             <c-header />
         <!-- //END PAGE HEADER -->
@@ -22,7 +21,7 @@
             </div>
             <!-- //END PAGE ASIDE PANEL -->
 
-            <slot></slot>
+            <slot v-if="this.$store.state.network.connection.internet"></slot>
 
             <!-- SIDEPANEL -->
             <div class="page-sidepanel invert" id="page-sidepanel">
@@ -32,7 +31,10 @@
                 <div class="page-sidepanel__button page-sidepanel__button--lower" data-action="sidepanel-hide"><div></div></div>
             </div>
             <!-- //END SIDEPANEL -->
-            
+
+            <div class="status-bar" v-if="!this.$store.state.network.connection.internet">
+                {{ this.$store.state.network.connectionMessage }}
+            </div>
         </div>
         <!-- //END PAGE CONTENT -->
         
@@ -67,5 +69,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+ .status-bar {
+     position: fixed;
+     bottom: 0;
+     left: 0;
+     width: 100%;
+     padding: 10px;
+     background: #48171D;
+     border-top: 2px solid #48171D;
+     color: #fff;
+ }
 </style>

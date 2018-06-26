@@ -43,9 +43,6 @@ export const updateState = () => {
 updateState()
 
 export const getters = {
-    getProduct(state) {
-        return state.entities.products['5']
-    }
 }
 
 export const actions = {
@@ -89,8 +86,6 @@ export const mutations = {
 }
 
 export const init = (cb) => {
-    ethereum.init()
-
     db.init(() => {
         console.log('[BlockHub] Database initialized')
 

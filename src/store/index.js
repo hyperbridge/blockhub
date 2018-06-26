@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import * as marketplace from '../modules/marketplace'
 import funding from '../modules/funding'
 import news from '../modules/news'
-import network from '../modules/network'
+import * as network from '../modules/network'
 
 Vue.use(Vuex)
 
@@ -78,6 +78,8 @@ const store = new Vuex.Store({
         }
     }
 })
+
+
 
 marketplace.init(() => {
     console.log('[BlockHub] Marketplace initialized. Updating store state.')
