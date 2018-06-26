@@ -3,6 +3,11 @@ import schema from './schema'
 import * as ethereum from '../../framework/ethereum'
 
 const rawData = {
+    connection: {
+        internet: false,
+        ethereum: false
+    },
+    connectionMessage: "Establishing connection...",
     account: {
         wallets: [
             {
@@ -39,14 +44,13 @@ const rawData = {
     }
 }
 
-export const state = {
-    connection: {
-        internet: false,
-        ethereum: false
-    },
-    connectionMessage: "Establishing connection...",
-    account: normalize(rawData.account, schema.account)
-}
+export let state = normalize(rawData, {
+    account: schema.account,
+    wallets: [schema.wallet],
+    identities: [schema.identity]
+})
+
+state = {...state, ...state.result}
 
 export const getters = {}
 
@@ -54,8 +58,8 @@ export const actions = {
     connect(store, payload) {
         console.log('[BlockHub] Network connecting...')
 
-        store.dispatch('network/checkInternetConnection')
-        store.dispatch('network/checkEthereumConnection')
+        store.dispatch('checkInternetConnection')
+        store.dispatch('checkEthereumConnection')
     },
     checkEthereumConnection(store, payload) {
         const success = () => {
