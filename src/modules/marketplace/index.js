@@ -4,8 +4,6 @@ import BlockHub from 'blockhub-protocol'
 import * as ethereum from '@/framework/ethereum'
 import * as db from '@/db'
 
-const data = require('json-loader!yaml-loader!../../db/data.yaml')
-
 let rawData = {
     contractMeta: null,
     contractAddress: null,
@@ -54,12 +52,14 @@ export const actions = {
     viewProduct(id) {
         console.log('viewProduct', id)
     },
-    updateProductTitle(store, payload) {
+    updateProduct(store, payload) {
         ethereum.getUserBalance().then((balance) => {
-            store.commit('updateProductTitle', { id: '5', name: balance })
+            payload.name = payload.name + ' ' + balance // Test
+
+            store.commit('updateProduct', payload)
         })
 
-        store.commit('updateProductTitle', payload)
+        store.commit('updateProduct', payload)
     },
     submitProductForReviewRequest(store, payload) {
         // payload = name, version, category, files, checksum, permissions
@@ -75,11 +75,11 @@ export const actions = {
 }
 
 export const mutations = {
-    updateProductTitle(state, { id, name }) {
-        const product = db.marketplace.products.findOne({ 'name': state.entities.products[id].name })
+    updateProduct(state, payload) {
+        const product = db.marketplace.products.findOne({ 'id': payload.id })
 
-        product.name = name
-        state.entities.products[id].name = name
+        product.name = payload.name
+        state.entities.products[payload.id].name = payload.name
 
         db.save()
     },
@@ -94,23 +94,11 @@ export const init = (cb) => {
     db.init(() => {
         console.log('[BlockHub] Database initialized')
 
-        // updateRawData()
-        //console.log(db.marketplace.products.data)
-        //state.products = normalize(db.marketplace.products.data, [schema.product])
-
         updateRawData()
         updateState()
 
-        console.log(JSON.stringify(db.toObject()))
+        console.log(db.toObject(), JSON.stringify(db.toObject()))
 
-        //console.log(state.products)
-        // , {
-        //     products: [schema.product],
-        //     upcomingProducts: [schema.product],
-        //     newTrendingProducts: [schema.product],
-        //     topSellingProducts: [schema.product],
-        //     specialProducts: [schema.product]
-        // })
         cb && cb()
     })
 }

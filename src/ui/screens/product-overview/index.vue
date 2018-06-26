@@ -5,8 +5,14 @@
                 <div class="row">
                     <div class="col-12">
                         {{ product.name }}
+
+                        <input type="text" name="name" v-model.lazy="product.name" />
+
+                        <button class="btn" @click="save()">Save</button>
+
                         {{ product.author }}
                         {{ product.images }}
+
                         <div v-html="product.content"></div>
                         
                         view: https://user-images.githubusercontent.com/156768/41747362-8f17d1e8-7562-11e8-8c42-72a78233f921.png
@@ -25,10 +31,23 @@ export default {
         'c-layout': () => import('@/ui/layouts/default')
     },
     data() {
-        return {}
+        return {
+            productName: 'Product name'
+        }
+    },
+    methods: {
+        save() {
+            console.log('ddd', this.product)
+            this.$store.dispatch('marketplace/updateProduct', this.product)
+        }
     },
     computed: {
-        product() {
+        product() {console.log('bbb', arguments)
+            if (!this.$store.state.marketplace.entities.products)
+                return {
+                    name: "Product name"
+                }
+            
             const product = this.$store.state.marketplace.entities.products[this.id]
 
             if (product.images && product.images.headerUrl)
