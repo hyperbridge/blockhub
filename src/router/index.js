@@ -9,12 +9,17 @@ const router = new Router({
     {
       path: '/',
       name: 'Home',
-      component: () => import('@/ui/screens/home'),
+      component: () => import('@/ui/screens/home')
     },
     {
       path: '/home',
       name: 'Home',
-      component: () => import('@/ui/screens/home'),
+      component: () => import('@/ui/screens/home')
+    },
+    {
+      path: '/sitemap',
+      name: 'Sitemap',
+      component: () => import('@/ui/screens/sitemap')
     },
     {
       path: '/help',
@@ -44,27 +49,27 @@ const router = new Router({
     {
       path: '/account',
       name: 'Account',
-      component: () => import('@/ui/screens/account'),
+      component: () => import('@/ui/screens/account')
     },
     {
       path: '/account/signup',
       name: 'Sign Up',
-      component: () => import('@/ui/screens/account-signup'),
+      component: () => import('@/ui/screens/account-signup')
     },
     {
       path: '/account/signin',
       name: 'Sign In',
-      component: () => import('@/ui/screens/account-signin'),
+      component: () => import('@/ui/screens/account-signin')
     },
     {
       path: '/account/signout',
       name: 'Sign Out',
-      component: () => import('@/ui/screens/account-signout'),
+      component: () => import('@/ui/screens/account-signout')
     },
     {
       path: '/account/wallets',
       name: 'Wallets',
-      component: () => import('@/ui/screens/account-wallets'),
+      component: () => import('@/ui/screens/account-wallets')
     },
     {
       path: '/account/transactions',
