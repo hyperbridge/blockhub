@@ -75,7 +75,7 @@
         width: 20px;
         height: 20px;
         text-align: center;
-        margin-right: 10px;
+        margin-right: 5px;
         float: left;
         color: $navigation-icon-color;
         
@@ -89,7 +89,7 @@
     .text{
         float: left;
         line-height: 18px;
-        margin-top: 2px;
+        margin-top: 1px;
     }
     
     /*-----
@@ -161,16 +161,17 @@
             padding-bottom: 1px;
             
             &.title{
-                padding: 10px 0px 0px 10px;
-                font-size: 10px;
+                /* padding: 10px 0px 0px 10px; */
+                font-size: 11px;
                 line-height: 20px;
-                font-weight: 400;
+                font-weight: 600;
+                letter-spacing: 1px;
                 margin-bottom: 5px;
                 color: $color-secondary;
                 text-transform: uppercase;
                 
                 &:not(:first-child){
-                    margin-top: 10px;
+                    margin-top: 20px;
                 }
             }
             
@@ -178,9 +179,9 @@
                 float: left;
                 width: 100%;
                 line-height: 20px;
-                font-size: 12px;
+                font-size: 14px;
                 font-weight: 400;
-                padding: 10px 10px 10px 10px;
+                /* padding: 10px 10px 10px 10px; */
                 color: $navigation-color;
                 background: $navigation-background;
                 text-decoration: none;
