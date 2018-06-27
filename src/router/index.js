@@ -214,6 +214,10 @@ const router = new Router({
       name: 'Curator',
       props: true,
       component: () => import('@/ui/screens/curator-overview')
+    },
+    {
+      path: "*",
+      component: () => import('@/ui/screens/not-found')
     }
   ]
 })
