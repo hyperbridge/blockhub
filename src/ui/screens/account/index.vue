@@ -8,7 +8,7 @@
                             <div class="widget__icon_layer widget__icon_layer--right">
                                 <span class="li-window"></span>
                             </div>
-                            <div class="widget__container">
+                            <a class="widget__container" href="/#/account/identities">
                                 <div class="widget__line">
                                     <div class="widget__icon">
                                         <span class="li-window"></span>
@@ -19,7 +19,7 @@
                                 <div class="widget__box widget__box--left">
                                     <div class="widget__informer">{{ identityCount }} identities</div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                     <div class="col-4 margin-top-20">
