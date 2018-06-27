@@ -9,6 +9,11 @@
 -------------------------------------------------------------------*/
 
 .invert{
+    input {
+        color: $invert-color-secondary;
+        background: rgba(0, 0, 0, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
         
     label{
         color: $invert-color-heading;
@@ -125,11 +130,12 @@
 
 // card
 .card{
-    border: none;
     &.invert{
-        background: transparent;
+        background: $invert-sidepanel-background;
         color: $invert-color;
-        
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
         .card-header{     
             background: rgba(0,0,0,0.2);
             .card-title{
