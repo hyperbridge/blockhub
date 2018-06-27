@@ -147,8 +147,12 @@ export default {}
         a{
             color:#30314C;
             display: inline-block;
-            &:first-of-type{margin-right:10px;}
-            &:last-of-type{margin-left:5px;}
+            &:first-of-type{
+                margin-right:15px;
+            }
+            &:last-of-type{
+                margin-left:5px;
+            }
         }
         .fa{
             line-height: 30px;
