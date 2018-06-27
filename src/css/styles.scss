@@ -9,7 +9,7 @@
 
     [Table of contents]
     
-    1. Import google fonts
+    1. Import Oswald Typeface
     2. Third-party plugins vendors
     3. Import config and template variables
     4. Import other vendors (using variables)
@@ -22,11 +22,9 @@
 @charset "UTF-8";
 
 /*-----
-    [Import google fonts] 
-    
-    Imported: Barlow, Oswald
+    [Import Oswald Typeface]
 -----*/
-@import "vendors/barlow-font/barlow"; /* url('https://fonts.googleapis.com/css?family=Barlow:300,300i,400,400i,500,500i,700,700i|Oswald:400,500,600,700') */
+@import "vendors/barlow-font/barlow"; 
 
 
 /*-----
@@ -35,7 +33,9 @@
     1. Animate.css
     2. Bootstrap 4.*
     3. Linearicons
-    4. FontAwesome icons
+    4. FontAwesome Base
+        4.1. FontAwesome Solid
+        4.2. FontAwesome Brands
     5. mCustomScrollbar custom content scroller
     6. Codemirror
     7. Lightbox

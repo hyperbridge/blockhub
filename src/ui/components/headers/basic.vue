@@ -20,19 +20,19 @@
                 <ul>
                     <li>
                         <a href="/#/store">
-                            <span class="icon li-man"></span>
+                            <span class="icon fa fa-shopping-bag"></span>
                             <span class="text">Store</span>
                         </a>
                     </li>
                     <li>
                         <a href="/#/account/wallets">
-                            <span class="icon li-sync"></span>
+                            <span class="icon fa fa-wallet"></span>
                             <span class="text">Wallets</span>
                         </a>
                     </li>
                     <li>
                         <a href="/#/account/identities">
-                            <span class="icon li-wallet"></span>
+                            <span class="icon fa fa-id-card"></span>
                             <span class="text">Identities</span>
                         </a>
                     </li>
@@ -44,25 +44,25 @@
                 <ul>
                     <li>
                         <a href="/#/identity/1">
-                            <span class="icon li-man"></span>
+                            <span class="icon fa fa-user"></span>
                             <span class="text">Satoshi</span>
                         </a>
                     </li>
                     <li>
                         <a href="/#/identity/1/contacts">
-                            <span class="icon li-credit-card"></span>
+                            <span class="icon fa fa-users"></span>
                             <span class="text">Contacts</span>
                         </a>
                     </li>
                     <li>
                         <a href="/#/settings">
-                            <span class="icon li-credit-card"></span>
+                            <span class="icon fa fa-cog"></span>
                             <span class="text">Settings</span>
                         </a>
                     </li>
                     <li>
                         <a href="/#/account/signout">
-                            <span class="icon li-sync"></span>
+                            <span class="icon fa fa-sign-out-alt"></span>
                             <span class="text">Sign Out</span>
                         </a>
                     </li>
@@ -193,12 +193,12 @@ export default {}
 
     .appHeader-navLeft {
         float: left;
-        margin: 0 0 0 90px;
+        margin: 0 0 0 95px;
     }
 
     .appHeader-navRight {
         float: right;
-        margin: 0 50px 0 0;
+        margin: 0 65px 0 0;
     }
 
     .appHeader-navItem {
