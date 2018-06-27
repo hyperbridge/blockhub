@@ -3,17 +3,16 @@
         <div class="content" id="content">
             <div class="page-heading">
                 <div class="page-heading__container">
-                    <h1 class="title">Cards</h1>
-                    <p class="caption">List of your active personal cards</p>
+                    <h1 class="title">Wallets</h1>
+                    <p class="caption">List of your wallets</p>
                 </div>
-                <c-heading />
             </div>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-lg-10"> 
                         <div class="row">
                             <div class="col-12 col-lg-4" v-for="(item, index) in wallets" v-bind:key="index">
-                                <div class="credit-card invert">
+                                <a class="credit-card invert" :href="`/#/wallet/${item.id}`">
                                     <div class="row">
                                         <div class="col-6 text-left">
                                             <img src="/static/img/card/mastercard.png">
@@ -38,7 +37,7 @@
                                             <strong>09/20</strong>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -52,7 +51,6 @@
 export default {
   name: 'wallets',
   components: {
-    'c-heading': () => import('@/ui/components/heading/heading'),
     'c-layout': () => import('@/ui/layouts/default')
   },
   computed: {
