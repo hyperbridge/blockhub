@@ -3,16 +3,6 @@
         <!-- PAGE CONTENT CONTAINER -->
         <div class="content" id="content">
             
-            <!-- PAGE HEADING -->
-            <div class="page-heading">
-                <div class="page-heading__container">
-                    <h1 class="title">Cards</h1>
-                    <p class="caption">List of your active personal cards</p>
-                </div>
-                <c-heading />
-            </div>
-            <!-- //END PAGE HEADING -->
-            
             <div class="container-fluid">  
                 
                 <div class="row">
@@ -199,50 +189,18 @@
 </template>
 
 <script>
-import { init as initEthereum } from '@/framework/ethereum'
-
 export default {
-  name: 'wallets',
   data() {
     return {
       msg: '',
     }
   },
   components: {
-    'c-heading': () => import('@/ui/components/heading/heading'),
     'c-layout': () => import('@/ui/layouts/default')
   },
   data: () => ({
-    wallets: [
-        {
-            name: 'Foo',
-            token: '',
-            amount: 0
-        },
-        {
-            name: 'Foo',
-            token: '',
-            amount: 0
-        },
-        {
-            name: 'Foo',
-            token: '',
-            amount: 0
-        },
-        {
-            name: 'Foo',
-            token: '',
-            amount: 0
-        },
-    ],
-    profiles: [
-        {
-            name: 'aaa'
-        }
-    ]
   }),
   created() {
-    initEthereum()
   }
 }
 </script>

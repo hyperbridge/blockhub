@@ -125,8 +125,9 @@
 
 // card
 .card{
+    border: none;
     &.invert{
-        background: $invert-sidepanel-background;
+        background: transparent;
         color: $invert-color;
         
         .card-header{     
@@ -217,7 +218,7 @@
 .invert{
     .table{
         color: $invert-color;
-        background-color: $invert-sidepanel-background;            
+        background-color: transparent;            
 
         th,td{        
             border-top: 1px solid $invert-sidepanel-border;

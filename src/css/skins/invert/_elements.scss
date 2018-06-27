@@ -11,7 +11,7 @@
 // invert page heading
 .page-heading{
     &.invert{
-        background: darken($invert-content-background,2%);
+        background: transparent;
         border-bottom-color: $invert-border-color;    
         
         .page-heading__container{

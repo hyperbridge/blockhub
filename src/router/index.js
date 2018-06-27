@@ -72,14 +72,27 @@ const router = new Router({
       component: () => import('@/ui/screens/account-wallets')
     },
     {
-      path: '/account/transactions',
-      name: 'Transactions',
-      component: () => import('@/ui/screens/account-transactions')
-    },
-    {
       path: '/account/identities',
       name: 'Identities',
       component: () => import('@/ui/screens/account-identities')
+    },
+    {
+      path: '/wallet/:id',
+      name: 'Wallet',
+      props: true,
+      component: () => import('@/ui/screens/wallet-overview')
+    },
+    {
+      path: '/wallet/:id/transactions',
+      name: 'Transactions',
+      props: true,
+      component: () => import('@/ui/screens/wallet-transactions')
+    },
+    {
+      path: '/transaction/:id',
+      name: 'Transaction',
+      props: true,
+      component: () => import('@/ui/screens/transaction-overview')
     },
     {
       path: '/identity/:id',

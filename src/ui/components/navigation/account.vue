@@ -4,17 +4,17 @@
         <h3>ACCOUNT</h3>
 
         <ul>
-            <li class="title">XXX</li>
+            <li class="title">General</li>
             <li>
-                <a href="index.html">
+                <a href="/#/account/wallets">
                     <span class="icon li-home"></span>
-                    <span class="text">xxx</span>
+                    <span class="text">Wallets</span>
                 </a>
             </li>
             <li>
-                <a href="index.html">
+                <a href="/#/account/identities">
                     <span class="icon li-home"></span>
-                    <span class="text">yyy</span>
+                    <span class="text">Identities</span>
                 </a>
             </li>
         </ul>
