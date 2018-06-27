@@ -3,7 +3,10 @@
         <div class="content" id="content">
             <div class="container-fluid">  
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12" v-if="!product">
+                        Product not found
+                    </div>
+                    <div class="col-12" v-if="product">
                         {{ product.name }}
 
                         <input type="text" name="name" v-model.lazy="product.name" />
@@ -32,23 +35,22 @@ export default {
     },
     data() {
         return {
-            productName: 'Product name'
         }
     },
     methods: {
         save() {
-            console.log('ddd', this.product)
             this.$store.dispatch('marketplace/updateProduct', this.product)
         }
     },
     computed: {
-        product() {console.log('bbb', arguments)
+        product() {
             if (!this.$store.state.marketplace.entities.products)
-                return {
-                    name: "Product name"
-                }
+                return
             
             const product = this.$store.state.marketplace.entities.products[this.id]
+
+            if (!product)
+                return
 
             if (product.images && product.images.headerUrl)
                 window.document.body.style['background-image'] = 'url(' + product.images.headerUrl + ')'
