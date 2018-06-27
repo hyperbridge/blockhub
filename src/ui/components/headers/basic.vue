@@ -1,7 +1,7 @@
 <template>
     <!-- Header Module -->
     <header class="appHeader">
-        <div class="appHeader-barLeft"><!-- add icons --></div>
+        <div class="appHeader-barLeft"><span class="fa fa-home"></span></div>
         <div class="appHeader-barCenter"><!-- add icons --></div>
         <div class="appHeader-barRight"><!-- add icons --></div>
         <nav class="appHeader-nav">
@@ -111,6 +111,9 @@ export default {}
 
         .horizontal-navigation > ul .icon {
             color: #fff;
+            &.fa::before{
+                font-size: 16px;
+            }
         }
     }
 
