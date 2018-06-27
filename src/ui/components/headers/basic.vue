@@ -1,7 +1,17 @@
 <template>
     <!-- Header Module -->
     <header class="appHeader">
-        <div class="appHeader-barLeft"><span class="fa fa-home"></span></div>
+        <div class="appHeader-barLeft">
+            <a href="/#/store">
+                <span class="fa fa-home"></span>
+            </a>
+            <a @click="$router.go(-1)">
+                <span class="fa fa-arrow-left"></span>
+            </a>
+            <a @click="$router.go(+1)">
+                <span class="fa fa-arrow-right"></span>
+            </a>
+        </div>
         <div class="appHeader-barCenter"><!-- add icons --></div>
         <div class="appHeader-barRight"><!-- add icons --></div>
         <nav class="appHeader-nav">
@@ -132,7 +142,19 @@ export default {}
         left: 0;
         height: 30px;
         width: 118px;
+        padding-left: 10px;
         background: url(../../../assets/SVG/left-bar.svg) no-repeat top left;
+        a{
+            color:#30314C;
+            display: inline-block;
+            &:first-of-type{margin-right:10px;}
+            &:last-of-type{margin-left:5px;}
+        }
+        .fa{
+            line-height: 30px;
+            font-size: 16px;
+            
+        }
     }
 
     .appHeader-barCenter {
