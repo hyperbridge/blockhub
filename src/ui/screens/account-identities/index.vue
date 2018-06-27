@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-lg-4" v-for="(item, index) in identities" v-bind:key="index">
-                        <div class="credit-card invert">
+                        <a class="credit-card invert" :href="`/#/identity/${item.id}`">
                             <div class="row">
                                 <div class="col-6 text-left">
                                     <img src="/static/img/card/mastercard.png">
@@ -26,7 +26,7 @@
                                     <strong>C</strong>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>

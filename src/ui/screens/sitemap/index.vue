@@ -18,11 +18,16 @@
                             <div class="card-body">
                                 <h2>Links</h2>
                                 <ul>
-                                  <li><a href="/#/store">Store</a></li>
                                   <li><a href="/#/news">News</a></li>
                                   <li><a href="/#/help">Help</a></li>
                                   <li><a href="/#/support">Support</a></li>
                                   <li><a href="/#/changelog">Changelog</a></li>
+
+                                  <li><a href="/#/store">Store</a></li>
+                                  <li><a href="/#/store/cart">Store Cart</a></li>
+                                  <li><a href="/#/store/checkout">Store Checkout</a></li>
+                                  <li><a href="/#/store/invoices">Store Invoices</a></li>
+                                  <li><a href="/#/store/invoice/1">Store Invoice #1</a></li>
                                   
                                   <li><a href="/#/settings">Settings</a></li>
                                   <li><a href="/#/settings/profile">Settings > Profile</a></li>

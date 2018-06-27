@@ -37,14 +37,34 @@ const router = new Router({
       component: () => import('@/ui/screens/changelog')
     },
     {
+      path: '/news',
+        name: 'News',
+          component: () => import('@/ui/screens/news')
+    },
+    {
       path: '/store',
       name: 'Store',
       component: () => import('@/ui/screens/store')
     },
     {
-      path: '/news',
-      name: 'News',
-      component: () => import('@/ui/screens/news')
+      path: '/store/cart',
+      name: 'Store Cart',
+      component: () => import('@/ui/screens/store-cart')
+    },
+    {
+      path: '/store/checkout',
+      name: 'Store Checkout',
+      component: () => import('@/ui/screens/store-checkout')
+    },
+    {
+      path: '/store/invoices',
+      name: 'Store Invoices',
+      component: () => import('@/ui/screens/store-invoices')
+    },
+    {
+      path: '/store/invoice/:id',
+      name: 'Store Invoice',
+      component: () => import('@/ui/screens/store-invoice')
     },
     {
       path: '/account',
