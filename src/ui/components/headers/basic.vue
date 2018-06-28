@@ -1,7 +1,17 @@
 <template>
     <!-- Header Module -->
     <header class="appHeader">
-        <div class="appHeader-barLeft"><!-- add icons --></div>
+        <div class="appHeader-barLeft">
+            <a href="/#/store">
+                <span class="fa fa-home"></span>
+            </a>
+            <a @click="$router.go(-1)">
+                <span class="fa fa-arrow-left"></span>
+            </a>
+            <a @click="$router.go(+1)">
+                <span class="fa fa-arrow-right"></span>
+            </a>
+        </div>
         <div class="appHeader-barCenter"><!-- add icons --></div>
         <div class="appHeader-barRight"><!-- add icons --></div>
         <nav class="appHeader-nav">
@@ -10,19 +20,19 @@
                 <ul>
                     <li>
                         <a href="/#/store">
-                            <span class="icon li-man"></span>
+                            <span class="icon fa fa-shopping-bag"></span>
                             <span class="text">Store</span>
                         </a>
                     </li>
                     <li>
                         <a href="/#/account/wallets">
-                            <span class="icon li-sync"></span>
+                            <span class="icon fa fa-wallet"></span>
                             <span class="text">Wallets</span>
                         </a>
                     </li>
                     <li>
                         <a href="/#/account/identities">
-                            <span class="icon li-wallet"></span>
+                            <span class="icon fa fa-id-card"></span>
                             <span class="text">Identities</span>
                         </a>
                     </li>
@@ -34,25 +44,25 @@
                 <ul>
                     <li>
                         <a href="/#/identity/1">
-                            <span class="icon li-man"></span>
+                            <span class="icon fa fa-user"></span>
                             <span class="text">Satoshi</span>
                         </a>
                     </li>
                     <li>
                         <a href="/#/identity/1/contacts">
-                            <span class="icon li-credit-card"></span>
+                            <span class="icon fa fa-users"></span>
                             <span class="text">Contacts</span>
                         </a>
                     </li>
                     <li>
                         <a href="/#/settings">
-                            <span class="icon li-credit-card"></span>
+                            <span class="icon fa fa-cog"></span>
                             <span class="text">Settings</span>
                         </a>
                     </li>
                     <li>
                         <a href="/#/account/signout">
-                            <span class="icon li-sync"></span>
+                            <span class="icon fa fa-sign-out-alt"></span>
                             <span class="text">Sign Out</span>
                         </a>
                     </li>
@@ -111,6 +121,9 @@ export default {}
 
         .horizontal-navigation > ul .icon {
             color: #fff;
+            &.fa::before{
+                font-size: 16px;
+            }
         }
     }
 
@@ -129,7 +142,23 @@ export default {}
         left: 0;
         height: 30px;
         width: 118px;
+        padding-left: 10px;
         background: url(../../../assets/SVG/left-bar.svg) no-repeat top left;
+        a{
+            color:#30314C;
+            display: inline-block;
+            &:first-of-type{
+                margin-right:15px;
+            }
+            &:last-of-type{
+                margin-left:5px;
+            }
+        }
+        .fa{
+            line-height: 30px;
+            font-size: 16px;
+            
+        }
     }
 
     .appHeader-barCenter {
@@ -164,12 +193,12 @@ export default {}
 
     .appHeader-navLeft {
         float: left;
-        margin: 0 0 0 90px;
+        margin: 0 0 0 95px;
     }
 
     .appHeader-navRight {
         float: right;
-        margin: 0 50px 0 0;
+        margin: 0 65px 0 0;
     }
 
     .appHeader-navItem {

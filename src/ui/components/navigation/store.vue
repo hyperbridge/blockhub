@@ -7,58 +7,58 @@
             <li class="title">Store Home</li>
             <li>
                 <a href="index.html">
-                    <span class="icon li-home"></span>
+                    <span class="icon fa fa-home"></span>
                     <span class="text">My Store</span>
                 </a>
             </li>
             <li>
                 <a href="index.html">
-                    <span class="icon li-home"></span>
+                    <span class="icon fa fa-home"></span>
                     <span class="text">Friends Store</span>
                 </a>
             </li>
             <li class="title">Browse By Genre</li>
             <li>
                 <a onclick="filter({genre: 'action'})">
-                    <span class="icon li-home"></span>
+                    <span class="icon fa fa-home"></span>
                     <span class="text">Action</span>
                 </a>
             </li>
             <li>
                 <a href="#/account/receive">
-                    <span class="icon li-home"></span>
+                    <span class="icon fa fa-home"></span>
                     <span class="text">Adventure</span>
                 </a>
             </li>
             <li>
                 <a href="index.html">
-                    <span class="icon li-home"></span>
+                    <span class="icon fa fa-home"></span>
                     <span class="text">RPG</span>
                 </a>
             </li>
             <li>
                 <a href="#/account/transactions">
-                    <span class="icon li-home"></span>
+                    <span class="icon fa fa-home"></span>
                     <span class="text">Racing</span>
                 </a>
             </li>
             <li class="title">Help</li>
             <li>
                 <a onclick="filter({genre: 'fighting'})">
-                    <span class="icon li-home"></span>
+                    <span class="icon fa fa-home"></span>
                     <span class="text">Fighting</span>
                 </a>
             </li>
             <li>
                 <a href="index.html">
-                    <span class="icon li-home"></span>
+                    <span class="icon fa fa-home"></span>
                     <span class="text">Simulation</span>
                 </a>
             </li>
             <li class="title">Help</li>
             <li>
                 <a onclick="filter({genre: 'action'})">
-                    <span class="icon li-home"></span>
+                    <span class="icon fa fa-home"></span>
                     <span class="text">Content Availability by Country</span>
                 </a>
             </li>
