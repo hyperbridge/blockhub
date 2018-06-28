@@ -44,8 +44,6 @@
                                   <li><a href="/#/wallet/1/transactions">Wallet #1 > Transactions</a></li>
                                   <li><a href="/#/wallet/1/send">Wallet #1 > Send</a></li>
                                   <li><a href="/#/wallet/1/receive">Wallet #1 > Receive</a></li>
-                                  
-                                  <li><a href="/#/invoice/#1">Invoice #1</a></li>
 
                                   <li><a href="/#/identity/1">Identity #1</a></li>
                                   <li><a href="/#/identity/1/assets">Identity #1 > Digital Assets</a></li>

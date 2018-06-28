@@ -139,12 +139,6 @@ const router = new Router({
       component: () => import('@/ui/screens/identity-assets')
     },
     {
-      path: '/invoice/:id',
-      name: 'Invoice',
-      props: true,
-      component: () => import('@/ui/screens/invoice-overview')
-    },
-    {
       path: '/settings',
       name: 'Settings',
       component: () => import('@/ui/screens/settings')
