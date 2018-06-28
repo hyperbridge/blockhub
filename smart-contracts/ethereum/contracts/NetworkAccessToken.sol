@@ -36,7 +36,7 @@ contract Ownable {
    * @dev The Ownable constructor sets the original `owner` of the contract to the sender
    * account.
    */
-  function Ownable() public {
+  constructor() public {
     owner = msg.sender;
   }
 
@@ -85,7 +85,7 @@ contract Pausable is Ownable {
    */
   function pause() onlyOwner whenNotPaused public {
     paused = true;
-    Pause();
+    emit Pause();
   }
 
   /**
@@ -93,7 +93,7 @@ contract Pausable is Ownable {
    */
   function unpause() onlyOwner whenPaused public {
     paused = false;
-    Unpause();
+    emit Unpause();
   }
 }
 
@@ -119,7 +119,7 @@ contract BasicToken is ERC20Basic {
   function transfer(address _to, uint256 _value) public returns (bool) {
     balances[msg.sender] = balances[msg.sender].sub(_value);
     balances[_to] = balances[_to].add(_value);
-    Transfer(msg.sender, _to, _value);
+    emit Transfer(msg.sender, _to, _value);
     return true;
   }
 
@@ -151,7 +151,7 @@ contract StandardToken is ERC20, BasicToken {
    * @param _value uint256 the amout of tokens to be transfered
    */
   function transferFrom(address _from, address _to, uint256 _value) public returns (bool) {
-    var _allowance = allowed[_from][msg.sender];
+    uint256 _allowance = allowed[_from][msg.sender];
 
     // Check is not needed because sub(_allowance, _value) will already throw if this condition is not met
     // require (_value <= _allowance);
@@ -159,7 +159,7 @@ contract StandardToken is ERC20, BasicToken {
     balances[_from] = balances[_from].sub(_value);
     balances[_to] = balances[_to].add(_value);
     allowed[_from][msg.sender] = _allowance.sub(_value);
-    Transfer(_from, _to, _value);
+    emit Transfer(_from, _to, _value);
     return true;
   }
 
@@ -176,7 +176,7 @@ contract StandardToken is ERC20, BasicToken {
     require((_value == 0) || (allowed[msg.sender][_spender] == 0));
 
     allowed[msg.sender][_spender] = _value;
-    Approval(msg.sender, _spender, _value);
+    emit Approval(msg.sender, _spender, _value);
     return true;
   }
 
@@ -211,10 +211,10 @@ contract NetworkAccessToken is StandardToken, Pausable {
    * Runs only on initial contract creation.
    */
 
-  function NetworkAccessToken() public {
+  constructor() public {
     totalSupply = total_supply;
     balances[msg.sender] = total_supply; // Creator address is assigned all
-    Transfer(0x0, msg.sender, total_supply);
+    emit Transfer(0x0, msg.sender, total_supply);
   }
 
   /**
