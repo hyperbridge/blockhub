@@ -1,0 +1,196 @@
+/*------------------------------------------------------------------
+
+    [Custom button styles]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]    
+    
+
+    [Table of contents]
+    
+    1. RW Button    
+
+-------------------------------------------------------------------*/
+
+
+/*-----
+    [RW Button]
+    
+    Special buttons for template
+
+    .rw-btn                 - wrapper
+        & .rw-btn--nav      - [modify] navigation button
+        & .rw-btn--card     - [modify] card button
+            & .rw-btn--lg   - [modify] card button modify to large btn
+-----*/
+.rw-btn{
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    cursor: pointer;
+    
+    /*-----
+        [rw-btn--nav  navigation button]
+    -----*/
+    &--nav{
+        span{
+            float: left;
+            display: block;
+            position: relative;            
+            margin: 9px 0px;
+            width: 20px;
+            height: 2px;
+            background: $color;
+            @if $animation != 0 {
+                    @include transition(all $animation ease-in-out);
+                }                
+
+            &:after{
+                position: absolute;
+                top: -6px;
+                content: " ";
+                background: $color;
+                right: 0px;
+                width: 15px;
+                height: 2px;
+                @if $animation != 0 {
+                    @include transition(width $animation ease-in-out);
+                }                
+            }
+            &:before{
+                position: absolute;
+                top: 6px;
+                content: " ";
+                background: $color;
+                right: 0px;
+                width: 20px;
+                height: 2px;                
+                @if $animation != 0 {
+                    @include transition(width $animation ease-in-out);
+                }                
+            }
+        }
+        
+        
+        
+        &:hover,&.active{
+            span{
+                &:after{
+                    width: 20px;
+                }
+            }
+        }        
+    }    
+    
+    /*-----
+        [.rw-btn--card - card button]
+    -----*/
+    &--card{
+        width: 30px;
+        height: 30px;
+        padding: 5px;
+        line-height: 20px;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;        
+        position: relative;
+        @if $animation != 0 {
+            @include transition(all $animation ease-in-out);
+        } 
+        
+        > div{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -1px;
+            margin-top: -1px;
+            width: 3px;
+            height: 3px;
+            border: 1px solid $color-secondary;
+            @if $animation != 0 {
+                @include transition(all $animation ease-in-out);
+            }
+            
+            &:after,&:before{
+                position: absolute;
+                content: " ";
+                left: -1px;
+                top: -6px;
+                width: 3px;
+                height: 3px;
+                border: 1px solid $color-secondary;
+                @if $animation != 0 {
+                    @include transition(all $animation ease-in-out);
+                }
+            }
+            &:after{
+                top: 4px;
+            }
+        }
+        
+        &:hover{
+            background: rgba(0,0,0,0.05);
+        }
+        
+        /*-----
+            [.rw-btn--lg  card button modify to large btn]
+        -----*/
+        &.rw-btn--lg{
+            width: 40px;
+            height: 40px;
+            padding: 10px;
+        }
+        
+    }        
+}
+
+
+/*-----
+    [Dropdown support for rw-btn--card]
+-----*/
+.dropdown{
+    &.show{        
+        .rw-btn--card{
+            background: rgba(0,0,0,0.03);
+            
+            > div{
+                width: 15px;
+                height: 1px;
+                transform: rotate(45deg);
+                margin-left: -7px;     
+                margin-top: 0px;
+                background: $color;
+                border: 0px;
+                
+                &:before{
+                    width: 15px;
+                    height: 1px;
+                    left: 0px;
+                    top: 0px;
+                    transform: rotate(90deg);
+                    background: $color;
+                    border: 0px;
+                }
+                
+                &:after{
+                    opacity: 0;
+                }
+            }
+        }        
+    }
+}
+
+/*-----
+    [Minimized aside support for rw-btn]
+-----*/
+.page-content{    
+    .page-aside{
+        &.page-aside-minimized{
+            .page-aside-controls{
+                .rw-btn{
+                    margin-right: 5px;
+                }
+            }
+        }
+    }    
+}

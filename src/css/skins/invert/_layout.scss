@@ -1,0 +1,85 @@
+/*------------------------------------------------------------------
+
+    [Layout]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+
+-------------------------------------------------------------------*/
+
+.page{
+    .page__header{
+        &.invert{
+            background: transparent;
+            color: $invert-color;        
+            border-bottom-color: transparent;
+            @if $shadows != 0 {
+                box-shadow: 0px 2px 12px rgba(0,0,0,0.2);
+            }
+        }        
+    }    
+    
+    .page__container{
+        &.invert{
+            background: transparent;
+            color: $invert-color;        
+            border-bottom-color: transparent;
+        }
+    }
+    
+    .page__content{
+        &.page__content-invert{
+            background: transparent;
+        }
+        
+        .page-aside{
+            &.invert{
+                background-color: transparent;
+                color: $invert-color;            
+                border-right-color: transparent;
+                @if $shadows != 0 {
+                    box-shadow: 2px 0px 12px rgba(0,0,0,0.2);
+                }
+                                
+                .page-aside-controls{
+                    background: darken($invert-aside-background,2%);
+                    border-top: 1px solid transparent;                        
+                }                
+            }
+        }
+        
+        .page-sidepanel{
+            &.invert{
+                background: transparent;
+                color: $invert-color;
+                border-right-color: $invert-sidepanel-border;
+                
+                > .page-sidepanel__button{
+                    background: transparent;
+                    border: 1px solid $invert-sidepanel-border;
+                    border-left-color: $invert-sidepanel-background;
+                    
+                    div{
+                        border-color: transparent $invert-color transparent transparent;                        
+                    }                                        
+                }
+                &.page-sidepanel--hidden{
+                    > .page-sidepanel__button{
+                        div{
+                            border-color: transparent transparent transparent $invert-color;
+                        }
+                    }
+                }
+            }
+        }
+        
+        .important-container{
+            &.invert{
+                background: transparent;
+                color: $invert-color;
+            }
+        }
+    }
+}
+// end basic layout invert styles

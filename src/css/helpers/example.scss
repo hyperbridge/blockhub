@@ -1,0 +1,193 @@
+/*------------------------------------------------------------------
+
+    [Examples]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+
+-------------------------------------------------------------------*/
+
+/* colors example classes */
+.color_example{
+    width: 100%;    
+    background: #FFF;
+    text-align: center;
+    border: 1px solid $border-color;
+    
+    .color{
+        width: 100%;
+        padding: 20px;
+
+        > div{
+            width: 100%;
+            height: 100px;
+        }
+    }
+    .caption{
+        border-top: 1px solid $border-color;        
+        margin: 0px;        
+        font-weight: 500;
+        padding: 10px 20px;
+        
+        strong{
+            color: $color;
+        }
+    }
+}
+/* end colors example classes */
+
+/* Typography Example Classes */
+.typography_example{
+    width: 150px;
+    height: 150px;
+    background: #FFF;
+    text-align: center;
+    border: 1px solid $border-color;    
+    
+    .text{
+        font-size: 90px;
+        line-height: 110px;
+        font-weight: 700;
+        color: $color-heading;
+        border-bottom: 1px solid $border-color;
+    }
+    .caption{
+        line-height: 40px;
+        margin: 0px;        
+    }
+}
+/* end Typography Example Classes */
+
+
+/* background examples */
+.bg-examples{
+    width: 100%;
+    @include clearfix();
+    
+    > div{
+        position: relative;
+        float: left;
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        
+        &.active{
+            &:before{
+                content: " ";
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                background: rgba(255,255,255,0.8);
+                width: 100%;
+                height: 100%;
+            }
+            &:after{                
+                content: "\f00c";
+                font-family: "FontAwesome";
+                width: 100%;
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                font-size: 14px;
+                color: $success-background;
+                line-height: 40px;
+                text-align: center;
+            }
+        }
+    }
+}
+/* end background examples */
+
+.dashboard_rating{
+    width: 100%;
+}
+
+.link-wrapper{
+    height: 100%;
+}
+
+/* icon preview */
+.icons-preview{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    
+    li{
+        float: none;
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border: 1px solid rgba(0,0,0,0.1);
+        margin: 0px 1px 4px 0px;
+        background: transparent; 
+        @if $animation != 0 {
+            @include transition(all $animation linear);
+        }
+        
+        span[class^='li-'],span.fa{
+            line-height: 40px;
+            font-size: 20px;
+        }
+        span.fa{
+            font-size: 14px;
+        }
+        
+        span.name{
+            display: none;
+        }
+        
+        &:hover{
+            background: rgba(0,0,0,0.05);
+        }
+    }
+    
+    &.extended{
+        
+        li{
+            width: 100px;
+            height: 100px;
+            padding: 5px;
+            margin: 0px 1px 0px 0px;
+            overflow: hidden;
+            
+            span[class^='li-'], span.fa{
+                line-height: 60px;
+                font-size: 40px;
+                display: block;
+                float: left;
+                width: 100%;                
+            }
+            
+            span.fa{
+                font-size: 28px;
+            }
+            
+            span.name{
+                display: block;
+                float: left;
+                width: 100%;
+                font-size: 11px;
+                font-weight: 600;
+                line-height: 14px;
+            }   
+        }
+        
+    }
+}
+/* ./icon preview */
+
+/* knob */
+@include media-breakpoint-down(md) {
+    .knob{
+        > div{display: block !important;}
+    }
+}
+/* ./knob */

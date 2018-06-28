@@ -1,0 +1,111 @@
+.irs {
+    height: 55px;
+}
+.irs-with-grid {
+    height: 75px;
+}
+.irs-line {
+    height: 5px; top: 33px;
+    background: transparent;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+}
+    .irs-line-left {
+        height: 8px;
+    }
+    .irs-line-mid {
+        height: 8px;
+    }
+    .irs-line-right {
+        height: 8px;
+    }
+
+.irs-bar {
+    height: 5px; 
+    top: 33px;
+    border-top: 1px solid $primary-background;
+    border-bottom: 1px solid $primary-background;
+    background: $primary-background;
+}
+    .irs-bar-edge {
+        height: 5px; top: 33px;
+        width: 14px;
+        border: 1px solid $primary-background;
+        border-right: 0;
+        background: $primary-background;
+        border-radius: $border-radius 0px 0px $border-radius;
+    }
+
+.irs-shadow {
+    height: 5px;
+    top: 33px;
+    background: #CCC;
+    opacity: 0.5;       
+}
+.lt-ie9 .irs-shadow {
+    filter: alpha(opacity=30);
+}
+
+.irs-slider {
+    top: 26px;
+    width: 19px; 
+    height: 19px;
+    border: 3px solid $primary-background;
+    background: $base-skin-background;            
+    cursor: pointer;
+    border-radius: 50%; 
+}
+
+.irs-slider.state_hover, .irs-slider:hover {
+    background: lighten($primary-background,5%);
+}
+
+.irs-min, .irs-max {
+    color: $primary-color;
+    font-size: $font-size - 2; 
+    line-height: 13px;
+    text-shadow: none;
+    top: 0;
+    padding: 3px 10px;
+    background: $primary-background;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+.lt-ie9 .irs-min, .lt-ie9 .irs-max {
+    background: #ccc;
+}
+
+.irs-from, .irs-to, .irs-single {
+    color: #fff;
+    font-size: $font-size - 2; 
+    font-weight: 400;
+    line-height: 13px;
+    text-shadow: none;
+    padding: 3px 10px;
+    background: $primary-background;
+    border-radius: $border-radius;
+    
+}
+.lt-ie9 .irs-from, .lt-ie9 .irs-to, .lt-ie9 .irs-single {
+    background: lighten($primary-background,5%);
+}
+
+.irs-grid {
+    height: 27px;
+}
+.irs-grid-pol {
+    opacity: 0.5;
+    background: #428bca;
+}
+.irs-grid-pol.small {
+    background: #999;
+}
+
+.irs-grid-text {
+    bottom: 5px;
+    color: #99a4ac;
+}
+
+.irs-disabled {
+}

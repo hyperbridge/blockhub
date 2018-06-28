@@ -1,0 +1,174 @@
+/*------------------------------------------------------------------
+
+    [Configure and options stylesheet]
+
+    Project:        BlockHub
+    Version:        v1.0.0
+    Last change:    17/05/18 [Release]
+
+    
+    [Table of contents]
+
+    1. Main typography variables
+    2. Animation settings
+    3. Header settings
+    4. Aside settings
+    5. Sidepanel settings
+    6. Fixed panel settings
+    7. Important container
+    8. Other variables
+    9. Boxed layout settings
+    10. Indent layout settings
+    11. Basic template colors
+    12. Import template skin variables
+
+-------------------------------------------------------------------*/
+
+
+/*-----
+    [Main typography variables] 
+-----*/
+$font-family:               'Roboto', sans-serif;
+$font-size:                 13px;
+$font-size-secondary:       10px;
+$font-weight:               400;
+$line-height:               20px;
+
+
+/*-----
+    [Animation settings]
+        
+    1. Set $animation: 0; to disable all template animations;
+    2. $animationPanelSpeed animation speed for panel appear/disappear;
+    3. Set $shadows: 1; to get shadows on elements(Not fully supported in v1.0.0);
+*/
+$animation:                 200ms;
+$animationPanelSpeed:       500ms;
+$shadows:                   0;
+
+
+/*-----
+    [Header settings]
+    
+    1. Basic header height;
+-----*/
+$header-height:             60px;
+
+
+/*-----
+    [Container settings]
+    
+    1. Basic container height;
+-----*/
+$container-height:          60px;
+
+
+/*-----
+    [Aside settings]
+
+    1. Basic aside width;
+    2. Minimized aside width;
+    3. Compact aside width(Not fully supported in v1.0.0);
+-----*/    
+$aside-width:               250px;
+$aside-width-minimized:     70px;
+$aside-width-compact:       100px;
+
+
+/*-----
+    [Sidepanel settings]
+    
+    1. Basic sidepanel width;
+-----*/    
+$sidepanel-width:           250px;
+
+
+/*-----
+    [Fixed panel settings]
+    
+    1. Basic fixed panel width;
+-----*/    
+$fixed-panel-width:         300px;
+
+
+/*-----
+    [Important container]
+    
+    1. Basic container width;
+-----*/    
+$important-container-width: 30%;
+
+
+/*-----
+    [Other variables]
+    
+    1. Default global border radius;
+    2. Global border color;
+    3. Template logo width;
+-----*/
+$border-radius:             3px;
+$border-color:              #d7dde3;
+$logo-width: 250px;
+
+
+/*-----
+    [Boxed layout settings]
+    
+    1. Default boxed width. You can use width in px or %;
+    2. Default background for boxed layout option;
+    3. Boxed layout vertical spacing;
+    4. Boxed layout border radius for .page wrapper and other top level containers;
+-----*/
+$layout-boxed-width:        1400px;
+$layout-boxed-background:   linear-gradient(to top right, #ef5562 0%, #fec8a0 100%);
+$layout-boxed-space-margin: 50px;
+$layout-boxed-space-border-radius: 10px;
+
+
+/*-----
+    [Indent layout settings]
+    
+    1. Indent layout spacing(around);
+    2. Default background for indent layout option;
+    3. Indent layout border radius for .page wrapper, and other top level containers;
+-----*/
+$layout-indent-space:       30px;
+$layout-indent-background:  linear-gradient(to right, #c94b4b 0%, #4b134f 100%);
+$layout-indent-border-radius: 6px;
+
+
+
+/*-----
+    [Basic template colors]        
+-----*/    
+$primary-background: #5abaf9;
+$primary-color: #FFF;
+
+$secondary-background: #3d3e5d;
+$secondary-color: #FFF;
+
+$success-background: #428c01;
+$success-color: #FFF;
+
+$danger-background: #ba3030;
+$danger-color: #FFF;
+
+$warning-background: #fece00;
+$warning-color: #211b01;
+
+$info-background: #008abe;
+$info-color: #FFF;
+
+$dark-background: #121119;
+$dark-color: #FFF;
+    
+
+/*-----
+    [Import template skin variables]
+-----*/
+
+/* Default template skin variables */
+@import "skins/default/variables";
+
+/* Invert skin variables */
+@import "skins/invert/variables";
