@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
-    "build": "node build/build.js",
+    "build": "node build/build.js && mv dist/index.html .",
+    "push": "NODE_ENV=production npm run build && git add -A && git commit -m \"Rebuild\" && git push",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
@@ -54,7 +55,7 @@
     "eslint-plugin-node": "*",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.16.2",
-    "extract-text-webpack-plugin": "*",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.5",
     "friendly-errors-webpack-plugin": "*",
     "html-webpack-plugin": "^3.2.0",

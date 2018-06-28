@@ -15,6 +15,8 @@ export let republic = null
 
 export const init = (cb) => {
     const databaseInitialize = () => {
+        reload()
+
         accounts = loki.getCollection('accounts')
 
         republic = {
@@ -57,11 +59,11 @@ export const save = () => {
 }
 
 export const clean = () => {
-    loki.getCollection('accounts').chain().remove()
-    loki.getCollection('republicCitizens').chain().remove()
-    loki.getCollection('republicCouncilDelegates').chain().remove()
-    loki.getCollection('republicElections').chain().remove()
-    loki.getCollection('marketplaceProducts').chain().remove()
+    loki.getCollection('accounts') && loki.getCollection('accounts').chain().remove()
+    loki.getCollection('republicCitizens') && loki.getCollection('republicCitizens').chain().remove()
+    loki.getCollection('republicCouncilDelegates') && loki.getCollection('republicCouncilDelegates').chain().remove()
+    loki.getCollection('republicElections') && loki.getCollection('republicElections').chain().remove()
+    loki.getCollection('marketplaceProducts') && loki.getCollection('marketplaceProducts').chain().remove()
 }
 
 export const reload = () => {
