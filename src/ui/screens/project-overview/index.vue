@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <c-layout navigationKey="projectNavigation">
         <div class="content" id="content">
             <div class="container-fluid">  
                 <div class="row">
@@ -21,8 +21,6 @@
 
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-
 export default {
   props: ['id'],
   components: {

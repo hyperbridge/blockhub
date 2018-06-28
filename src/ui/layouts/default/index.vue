@@ -55,7 +55,9 @@ export default {
         'accountNavigation': () => import('@/ui/components/navigation/account'),
         'settingsNavigation': () => import('@/ui/components/navigation/settings'),
         'helpNavigation': () => import('@/ui/components/navigation/help'),
-        'storeNavigation': () => import('@/ui/components/navigation/store')
+        'storeNavigation': () => import('@/ui/components/navigation/store'),
+        'productNavigation': () => import('@/ui/components/navigation/product'),
+        'projectNavigation': () => import('@/ui/components/navigation/project')
     },
     data() {
         return {

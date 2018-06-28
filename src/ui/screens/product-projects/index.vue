@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <c-layout navigationKey="productNavigation">
         <div class="content" id="content">
             <div class="container-fluid">  
                 <div class="row">
@@ -28,10 +28,57 @@
                             </li>
                         </ul>
 
-                        name
-                        short description
-                        completion 
-                        comment count
+                        <div class="card" v-for="(project, index) in product.projects" v-bind:key="index">
+                            <div class="page-heading">
+                                <div class="page-heading__container">
+                                    <h2 class="title">{{ project.title }}</h2>
+                                    <p class="caption">Project ID: 1442, 02/2018 - 02/2018</p>
+                                </div>
+                            </div>
+                            <div class="card-container">
+                                <div class="dropdown">
+                                    <div class="rw-btn rw-btn--card" data-toggle="dropdown" aria-expanded="false"><div></div></div>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">See details</a>
+                                        <a class="dropdown-item" href="#">Download</a>
+                                        <a class="dropdown-item" href="#">Edit</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-inner-container">                                             
+                                    <p class="text-muted margin-bottom-20">Invoice #9501 &mdash; 20 Feb, 2018</p>
+                                    <div class="form-row">
+                                        <div class="col-6">                                                                                                        
+                                            <h3 class="margin-bottom-0">$800.00</h3>
+                                            <span class="text-muted">Amount</span><br>                                                    
+                                        </div>
+                                        <div class="col-6 text-right">                                                    
+                                            <h3 class="margin-bottom-0">24 Feb, 18</h3>
+                                            <span class="text-muted">Due date</span><br>                                                    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-7">
+                                        
+                                        <div class="user user--rounded user--bordered">
+                                            <img src="http://via.placeholder.com/128x128">
+                                            <div class="user__name">
+                                                <strong>Francisco Dero</strong>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-5 text-right">
+                                        <small class="text-muted">Total spent: 15h</small>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
