@@ -67,6 +67,9 @@ products:
     id: '0x0'
   authorTags:
   - mmo
+  projects:
+  - id: '1'
+  - id: '2'
 - id: '6'
   name: Far Cry® 5
   version: '1'

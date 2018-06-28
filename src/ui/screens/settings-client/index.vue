@@ -190,6 +190,23 @@
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="card">
+                            <div class="page-heading">
+                                <div class="page-heading__container">
+                                    <h1 class="title">Database Settings</h1>
+                                    <p class="caption"></p>
+                                </div>
+                                <div class="page-heading__container float-right d-none d-md-block">
+                                    <button class="btn btn-outline-secondary" @click="cleanDatabase()">Clean</button>
+                                    <button class="btn btn-outline-secondary" @click="reloadDatabase()">Reload initial data</button>
+                                </div>
+                            </div>
+                            <div class="">
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -206,6 +223,14 @@ export default {
         return {}
     },
     computed: {
+    },
+    methods: {
+        cleanDatabase() {
+            this.$store.dispatch('database/clean')
+        },
+        reloadDatabase() {
+            this.$store.dispatch('database/reload')
+        }
     },
     beforeDestroy() {
     }

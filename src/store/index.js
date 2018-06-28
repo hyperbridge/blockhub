@@ -1,50 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import * as marketplace from '../modules/marketplace'
 import funding from '../modules/funding'
 import news from '../modules/news'
+import * as marketplace from '../modules/marketplace'
 import * as network from '../modules/network'
+import * as database from '../modules/database'
 
 Vue.use(Vuex)
-
-// const state = {
-//     marketplace: marketplace.state,
-//     funding: funding.state
-// }
-
-// const getters = {
-//     evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd',
-//     getProduct: state => state.marketplace.entities.articles['post1']
-// }
-
-// const mutations = {
-//     increment(state) {
-//         state.count++
-//     },
-//     decrement(state) {
-//         state.count--
-//     }
-// }
-
-
-// const actions = {
-//     increment: ({ commit }) => commit('increment'),
-//     decrement: ({ commit }) => commit('decrement'),
-//     incrementIfOdd({ commit, state }) {
-//         if ((state.count + 1) % 2 === 0) {
-//             commit('increment')
-//         }
-//     },
-//     incrementAsync({ commit }) {
-//         return new Promise((resolve, reject) => {
-//             setTimeout(() => {
-//                 commit('increment')
-//                 resolve()
-//             }, 1000)
-//         })
-//     }
-// }
 
 const store = new Vuex.Store({
     modules: {
@@ -54,6 +17,13 @@ const store = new Vuex.Store({
             getters: marketplace.getters,
             actions: marketplace.actions,
             mutations: marketplace.mutations
+        },
+        database: {
+            namespaced: true,
+            state: database.state,
+            getters: database.getters,
+            actions: database.actions,
+            mutations: database.mutations
         },
         funding: {
             namespaced: true,
@@ -80,13 +50,10 @@ const store = new Vuex.Store({
 })
 
 
-
 marketplace.init(() => {
     console.log('[BlockHub] Marketplace initialized. Updating store state.')
 
     store.state.marketplace = marketplace.state
-
-    console.log(store.state.marketplace)
 })
 
 
