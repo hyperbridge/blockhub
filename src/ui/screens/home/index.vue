@@ -22,21 +22,20 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: 'home',
-  data() {
-    return {
-    }
-  },
-  computed: {
-  },
-  methods: {
-  },
-  components: {
-    'c-layout': () => import('@/ui/layouts/default')
-  },
-  created() {
+    name: 'home',
+    data() {
+        return {}
+    },
+    computed: {
+    },
+    methods: {
+    },
+    components: {
+        'c-layout': () => import('@/ui/layouts/default')
+    },
+    created() {
 
-  }
+    }
 }
 </script>
 

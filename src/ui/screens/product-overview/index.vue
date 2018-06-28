@@ -115,6 +115,21 @@
 </template>
 
 <script>
+const updateProduct = function() {
+    if (!this.$store.state.marketplace.entities.products)
+        return
+
+    const product = this.$store.state.marketplace.entities.products[this.id]
+
+    if (!product)
+        return
+
+    if (product.images && product.images.headerUrl)
+        window.document.body.style['background-image'] = 'url(' + product.images.headerUrl + ')'
+        
+    return product
+}
+
 export default {
     props: ['id'],
     components: {
@@ -130,21 +145,10 @@ export default {
         }
     },
     computed: {
-        product() {
-            if (!this.$store.state.marketplace.entities.products)
-                return
-            
-            const product = this.$store.state.marketplace.entities.products[this.id]
-
-            if (!product)
-                return
-
-            if (product.images && product.images.headerUrl)
-                window.document.body.style['background-image'] = 'url(' + product.images.headerUrl + ')'
-            
-            return product
-        }
+        product: updateProduct
     },
+    mounted: updateProduct,
+    created: updateProduct,
     beforeDestroy() {
         window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
     }
