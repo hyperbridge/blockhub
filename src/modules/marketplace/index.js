@@ -1,6 +1,6 @@
 import { normalize } from 'normalizr'
 import schema from './schema'
-import BlockHub from 'blockhub-protocol'
+import MarketplaceProtocol from 'marketplace-protocol'
 import * as ethereum from '@/framework/ethereum'
 import * as db from '@/db'
 
@@ -61,7 +61,7 @@ export const actions = {
     submitProductForReviewRequest(store, payload) {
         // payload = name, version, category, files, checksum, permissions
 
-        BlockHub.Ethereum.Models.Marketplace.submitAppForReview(payload).then((res) => {
+        MarketplaceProtocol.Ethereum.Models.Marketplace.submitAppForReview(payload).then((res) => {
             const product = db.marketplace.products.findOne({ 'name': product.name })
             product.id = res[0]
             // TODO: assign rest of props
