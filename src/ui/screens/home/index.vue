@@ -10,7 +10,7 @@
             <div class="container-fluid">  
                 <div class="row">
                     <div class="col-12">
-                        <a href="/#/sitemap">Go to sitemap</a>
+                        <a href="#/sitemap">Go to sitemap</a>
                     </div>
                 </div>
             </div>

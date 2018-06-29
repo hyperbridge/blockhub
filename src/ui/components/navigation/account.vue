@@ -6,13 +6,13 @@
         <ul>
             <li class="title">General</li>
             <li>
-                <a href="/#/account/wallets">
+                <a href="#/account/wallets">
                     <span class="icon fa fa-home"></span>
                     <span class="text">Wallets</span>
                 </a>
             </li>
             <li>
-                <a href="/#/account/identities">
+                <a href="#/account/identities">
                     <span class="icon fa fa-home"></span>
                     <span class="text">Identities</span>
                 </a>

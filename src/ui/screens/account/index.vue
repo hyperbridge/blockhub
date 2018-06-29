@@ -8,7 +8,7 @@
                             <div class="widget__icon_layer widget__icon_layer--right">
                                 <span class="li-window"></span>
                             </div>
-                            <a class="widget__container" href="/#/account/identities">
+                            <a class="widget__container" href="#/account/identities">
                                 <div class="widget__line">
                                     <div class="widget__icon">
                                         <span class="li-window"></span>

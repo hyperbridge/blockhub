@@ -5,11 +5,11 @@
             <div class="container">
                 <div class="col-12">
 
-                            <a href="/" class="logo-holder logo-holder--lg logo-holder--wide">
+                            <a href="" class="logo-holder logo-holder--lg logo-holder--wide">
                                 <div class="logo-text"><strong class="text-primary">#</strong>BLOCK<strong>HUB</strong></div>
                             </a>
                     <div class="login-container__buttons">
-                        <a href="/#/account/signin" class="btn btn-outline-primary btn--icon"><span class="fa fa-angle-left"></span> Already have account?</a>
+                        <a href="#/account/signin" class="btn btn-outline-primary btn--icon"><span class="fa fa-angle-left"></span> Already have account?</a>
                     </div>
                     
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -80,10 +80,10 @@
                             <div class="form-group text-center">
                                 <div class="form-row">
                                     <div class="col-4">
-                                        <a href="/#/help" class="text-muted">Help</a>
+                                        <a href="#/help" class="text-muted">Help</a>
                                     </div>
                                     <div class="col-4">
-                                        <a href="/#/support" class="text-muted">Support</a>
+                                        <a href="#/support" class="text-muted">Support</a>
                                     </div>
                                 </div>
                             </div>
