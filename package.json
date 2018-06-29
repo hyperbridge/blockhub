@@ -1,9 +1,8 @@
 {
   "name": "blockhub-web-client",
   "version": "1.0.0",
-  "description": "BlockHub Web App",
-  "author": "Hyperbridge <hello@hyperbridge.org>",
-  "private": true,
+  "description": "BlockHub Web Client",
+  "license": "SEE LICENSE IN LICENSE.md",
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
@@ -107,8 +106,7 @@
     "yaml-loader": "^0.5.0"
   },
   "engines": {
-    "node": ">= 4.0.0",
-    "npm": ">= 3.0.0"
+    "node": "8.11.1"
   },
   "browserslist": [
     "> 1%",
