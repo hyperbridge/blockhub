@@ -2,10 +2,9 @@
     "name": "marketplace-protocol",
     "version": "0.1.0",
     "repository": "git@github.com:hyperbridge/marketplace-protocol.git",
-    "license": "UNLICENSED",
+    "license": "SEE LICENSE IN LICENSE.md",
     "main": "./index.js",
-    "scripts": {
-    },
+    "scripts": {},
     "dependencies": {},
     "engines": {
         "node": "8.11.1"
