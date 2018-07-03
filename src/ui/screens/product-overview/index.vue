@@ -34,9 +34,7 @@
 
                                 SALE PRICE BOX
 
-                                ITEM PRICE BOX
-                                ITEM PRICE BOX
-                                ITEM PRICE BOX
+                                <plan-list></plan-list>
 
                                 <h2>An adventure of a lifetime...</h2>
 
@@ -133,7 +131,8 @@ const updateProduct = function() {
 export default {
     props: ['id'],
     components: {
-        'c-layout': () => import('@/ui/layouts/default')
+        'c-layout': () => import('@/ui/layouts/default'),
+        'plan-list': () => import('@/ui/components/game-plans/list.vue')
     },
     data() {
         return {
