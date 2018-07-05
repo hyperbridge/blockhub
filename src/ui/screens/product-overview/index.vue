@@ -165,24 +165,24 @@
                                 <div class="card transparent languages-blk">
                                     <div class="card-body">
                                         <h2 class="title">Languages <i class="fas fa-laptop title-icon"></i></h2>
-                                        <ul class="languages-blk__list">
-                                            <li class="languages-blk__item">
-                                                <span class="languages-blk__name">English</span>
-                                                <span class="languages-blk__icon">
+                                        <ul class="languages-list">
+                                            <li class="languages-list__item">
+                                                <span class="languages-list__name">English</span>
+                                                <span class="languages-list__icon">
                                                     <i class="fas fa-closed-captioning"></i>
                                                     <i class="fas fa-closed-captioning"></i>
                                                 </span>
                                             </li>
-                                            <li class="languages-blk__item">
-                                                <span class="languages-blk__name">Spanish</span>
-                                                <span class="languages-blk__icon">
+                                            <li class="languages-list__item">
+                                                <span class="languages-list__name">Spanish</span>
+                                                <span class="languages-list__icon">
                                                     <i class="fas fa-closed-captioning"></i>
                                                     <i class="fas fa-closed-captioning"></i>
                                                 </span>
                                             </li>
-                                            <li class="languages-blk__item">
-                                                <span class="languages-blk__name">French</span>
-                                                <span class="languages-blk__icon">
+                                            <li class="languages-list__item">
+                                                <span class="languages-list__name">French</span>
+                                                <span class="languages-list__icon">
                                                     <i class="fas fa-closed-captioning"></i>
                                                     <i class="fas fa-closed-captioning"></i>
                                                 </span>
@@ -515,33 +515,32 @@ export default {
             }
         }
     }
-    .languages-blk{
-        .languages-blk__list{
-            padding: 0;
-            .languages-blk__item{
-                list-style: none;
-                display: block;
-                margin: 5px 0;
-                width: 100%;
-                overflow: hidden;
-                .languages-blk__name{
-                    float: left;
-                    max-width: 80%;
-                    font-size: 14px;
-                    font-weight: bold;
-                }
-                .languages-blk__icon{
-                    float: right;
-                    max-width: 20%;
-                    text-align: right;
-                    i{
-                        margin-right: 5px;
-                        &:last-child{
-                            margin-right: 0;
-                        }
-                    }
 
+    .languages-list{
+        padding: 0;
+        .languages-list__item{
+            list-style: none;
+            display: block;
+            margin: 5px 0;
+            width: 100%;
+            overflow: hidden;
+            .languages-list__name{
+                float: left;
+                max-width: 80%;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            .languages-list__icon{
+                float: right;
+                max-width: 20%;
+                text-align: right;
+                i{
+                    margin-right: 5px;
+                    &:last-child{
+                        margin-right: 0;
+                    }
                 }
+
             }
         }
     }
