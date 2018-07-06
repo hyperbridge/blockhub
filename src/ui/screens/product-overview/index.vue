@@ -58,16 +58,36 @@
                                     <div class="card-body">
                                         <h2 class="title">Crowndfunding campaing</h2>
                                         <div class="crowndfunding-campaing">
-                                            <div class="crowndfunding-campaing__progress" >
+                                            <div class="crowndfunding-campaing__progress">
                                                 <div v-for="(stage, index) in crowndfunding_data.stages" :key="index"
-                                                     :class="stage.status" class="crowndfunding-campaing_progress-stage">
+                                                     :class="stage.status"
+                                                     class="crowndfunding-campaing_progress-stage">
                                                     <i class="fas fa-check" v-if="stage.status === 'done'"></i>
                                                     <i class="fas fa-clock" v-if="stage.status === 'in_progress'"></i>
                                                     <span>{{ stage.text}}</span>
                                                 </div>
                                             </div>
                                             <div class="crowndfunding-campaing__info">
-
+                                                <div class="funded">
+                                                    <div class="text">114% Funded</div>
+                                                    $ {{ crowndfunding_data.funded_amount }}
+                                                </div>
+                                                <div class="goal">
+                                                    <div class="text">Goal</div>
+                                                    $ {{ crowndfunding_data.goal_amount }}
+                                                </div>
+                                                <div class="spent_blk">
+                                                    <div class="text">Spent</div>
+                                                    $ {{ crowndfunding_data.spent_amount }}
+                                                </div>
+                                                <div class="locked_blk">
+                                                    <div class="text">Locked</div>
+                                                    $ {{ crowndfunding_data.locked_amount }}
+                                                </div>
+                                                <div class="overflow_blk">
+                                                    <div class="text">Overflow</div>
+                                                    $ {{ crowndfunding_data.overflow_amount }}
+                                                </div>
                                             </div>
                                             <div class="crowndfunding-campaing__action">
 
@@ -80,7 +100,8 @@
                                     <div class="card-body">
                                         <h2 class="title">Milestones</h2>
                                         <ul class="milestones-blk__list">
-                                            <li v-for="(item, index) in milestones_data" v-bind:class="{ done: item.status }" :key="index">
+                                            <li v-for="(item, index) in milestones_data"
+                                                v-bind:class="{ done: item.status }" :key="index">
                                                 <div class="step_number" v-if="item.step_number">
                                                     {{ item.step_number}}
                                                 </div>
@@ -211,7 +232,8 @@
                                     <div class="card-body">
                                         <h2 class="title">System Requirements <i class="fas fa-laptop title-icon"></i>
                                         </h2>
-                                        <div class="system-requirements__item" v-for="(item, index) in system_requirements_data" :key="index">
+                                        <div class="system-requirements__item"
+                                             v-for="(item, index) in system_requirements_data" :key="index">
                                             <h6>{{ item.system }} <i :class="item.icon"></i></h6>
                                             <p>{{ item.requirements }}</p>
                                         </div>
@@ -222,11 +244,14 @@
                                     <div class="card-body">
                                         <h2 class="title">Languages <i class="fas fa-laptop title-icon"></i></h2>
                                         <ul class="languages-list">
-                                            <li class="languages-list__item" v-for="(item, index) in languages_data" :key="index">
+                                            <li class="languages-list__item" v-for="(item, index) in languages_data"
+                                                :key="index">
                                                 <span class="languages-list__name">{{ item.name }}</span>
                                                 <span class="languages-list__icon">
-                                                    <i class="fas fa-closed-captioning" v-if="item.closed_captioning"></i>
-                                                    <i class="fas fa-audio-description" v-if="item.audio_description"></i>
+                                                    <i class="fas fa-closed-captioning"
+                                                       v-if="item.closed_captioning"></i>
+                                                    <i class="fas fa-audio-description"
+                                                       v-if="item.audio_description"></i>
                                                 </span>
                                             </li>
                                         </ul>
@@ -304,7 +329,12 @@
                             status: 'awaiting',
                             text: 'm6'
                         },
-                    ]
+                    ],
+                    funded_amount: '202,190.63',
+                    goal_amount: '200,000.00',
+                    spent_amount: '32,000',
+                    locked_amount: '182,242',
+                    overflow_amount: '17,342'
                 },
                 milestones_data: [
                     {
@@ -409,7 +439,9 @@
             product: updateProduct
         },
         mounted: updateProduct,
-        created: updateProduct,
+        created: {
+            updateProduct
+        },
         beforeDestroy() {
             window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
         }
@@ -417,9 +449,9 @@
 </script>
 
 <style lang="scss" scoped>
-    .product__tag{
+    .product__tag {
         margin-bottom: 25px;
-        .tag-link{
+        .tag-link {
             background: #fbe17d;
             border-radius: 3px;
             padding: 2px 5px;
@@ -428,16 +460,17 @@
             text-transform: lowercase;
             font-size: 13px;
             font-weight: bold;
-            &:hover{
+            &:hover {
                 text-decoration: none;
                 background: #d8c26c;
             }
-            &:last-child{
+            &:last-child {
                 margin: 0;
             }
         }
     }
-    .main_content{
+
+    .main_content {
         margin-top: 15px;
         padding: 15px;
         border-radius: 5px;
@@ -445,11 +478,11 @@
         overflow: hidden;
         color: #C6C6D6;
         font-size: 14px;
-        h2{
+        h2 {
             font-size: 21px;
             margin-bottom: 30px;
         }
-        p{
+        p {
             margin-bottom: 20px;
         }
     }
@@ -482,24 +515,25 @@
             background: transparent;
         }
     }
-    .crowndfunding-campaing{
-        .crowndfunding-campaing__progress{
+
+    .crowndfunding-campaing {
+        .crowndfunding-campaing__progress {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
             flex-wrap: nowrap;
             overflow: hidden;
-            .crowndfunding-campaing_progress-stage{
+            .crowndfunding-campaing_progress-stage {
                 width: 30%;
                 text-align: left;
-                span{
+                span {
                     display: inline-block;
                     width: 100%;
                     position: relative;
                     padding-top: 35px;
                     text-transform: uppercase;
                     font-weight: bold;
-                    &:before{
+                    &:before {
                         position: absolute;
                         top: 0;
                         left: 0;
@@ -509,7 +543,7 @@
                         content: "";
                         background: #3D691F;
                     }
-                    &:after{
+                    &:after {
                         position: absolute;
                         top: 23px;
                         width: 2px;
@@ -520,54 +554,107 @@
                         background: #fff;
                     }
                 }
-                i{
+                i {
                     margin-bottom: 7px;
                     font-size: 10px;
                 }
-                &:first-child{
-                    span:before{
+                &:first-child {
+                    span:before {
                         border-radius: 5px 0 0 5px;
                     }
                 }
-                &:last-child{
-                    span:before{
+                &:last-child {
+                    span:before {
                         border-radius: 0 5px 5px 0;
                     }
                 }
-                &.done{
-                    span{
-                        &:before{
+                &.done {
+                    span {
+                        &:before {
                             background: #3D691F;
                         }
                     }
-                    i{
+                    i {
                         color: #3D691F;
                     }
                 }
-                &.in_progress{
-                    span{
-                        &:before{
+                &.in_progress {
+                    span {
+                        &:before {
                             background: #5EA72B;
                         }
                     }
-                    i{
+                    i {
                         color: #FADC72;
                     }
                 }
-                &.awaiting{
-                    span{
-                        &:before{
+                &.awaiting {
+                    span {
+                        &:before {
                             background: #5EA72B;
                         }
                     }
                 }
             }
         }
+        .crowndfunding-campaing__info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 10px 0;
+            .funded,
+            .goal {
+                background: rgba(0, 0, 0, 0.16);
+                border-radius: 5px;
+                width: calc(50% - 5px);
+                padding: 10px;
+                color: #fff;
+                font-size: 18px;
+                .text {
+                    font-size: 14px;
+                    font-weight: bold;
+                    margin-bottom: 8px;
+                }
+            }
+            .spent_blk,
+            .locked_blk,
+            .overflow_blk {
+                width: 30%;
+                margin-top: 10px;
+                font-size: 15px;
+                position: relative;
+                padding-left: 10px;
+                .text {
+                    font-weight: bold;
+                    margin-bottom: 4px;
+                }
+                &:before {
+                    position: absolute;
+                    left: 0;
+                    top: 2px;
+                    bottom: 2px;
+                    width: 5px;
+                    background: #fff;
+                    z-index: 1;
+                    content: "";
+                }
+                &:after {
+                    position: absolute;
+                    left: 0;
+                    bottom: 2px;
+                    width: 5px;
+                    z-index: 2;
+                    background: #5EA72B;
+                    content: "";
+                }
+            }
+        }
     }
-    .milestones-blk__list{
+
+    .milestones-blk__list {
         padding: 0;
         margin: 0;
-        li{
+        li {
             list-style: none;
             font-size: 14px;
             font-weight: bold;
@@ -579,22 +666,22 @@
             box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
             background: #27283E;
             margin-bottom: 10px;
-            &:last-child{
+            &:last-child {
                 margin-bottom: 0;
             }
-            &.done{
+            &.done {
                 border: 2px solid #5EA72B;
             }
-            .text{
-                flex-basis: calc( 100% - 40px );
+            .text {
+                flex-basis: calc(100% - 40px);
                 text-align: left;
             }
-            .step_number{
+            .step_number {
                 flex-basis: 40px;
                 text-align: center;
                 font-size: 22px;
             }
-            .status_done{
+            .status_done {
                 flex-basis: 40px;
                 text-align: center;
                 font-size: 22px;
