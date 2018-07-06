@@ -54,12 +54,13 @@
                                 </div>
                             </div>
                             <div class="col-5">
-                                <div class="card invert crowndfunding-campaing-blk">
+                                <div class="card invert crowndfunding-campaing-blk" v-if="crowndfunding_data">
                                     <div class="card-body">
                                         <h2 class="title">Crowndfunding campaing</h2>
                                         <div class="crowndfunding-campaing">
-                                            <div class="crowndfunding-campaing__progress">
-                                                <div v-for="(stage, index) in crowndfunding_data.stages" :key="index" class="crowndfunding-campaing_progress-stage">
+                                            <div class="crowndfunding-campaing__progress" >
+                                                <div v-for="(stage, index) in crowndfunding_data.stages" :key="index"
+                                                     :class="stage.status" class="crowndfunding-campaing_progress-stage">
                                                     <i class="fas fa-check" v-if="stage.status === 'done'"></i>
                                                     <i class="fas fa-clock" v-if="stage.status === 'in_progress'"></i>
                                                     <span>{{ stage.text}}</span>
@@ -481,7 +482,88 @@
             background: transparent;
         }
     }
-
+    .crowndfunding-campaing{
+        .crowndfunding-campaing__progress{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: nowrap;
+            .crowndfunding-campaing_progress-stage{
+                width: 30%;
+                text-align: center;
+                span{
+                    display: inline-block;
+                    width: 100%;
+                    position: relative;
+                    padding-top: 35px;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    &:before{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        height: 15px;
+                        display: inline-block;
+                        content: "";
+                        background: #3D691F;
+                    }
+                    &:after{
+                        position: absolute;
+                        top: 23px;
+                        width: 2px;
+                        content: "";
+                        height: 8px;
+                        left: calc( 50% - 1px );
+                        display: inline-block;
+                        background: #fff;
+                    }
+                }
+                i{
+                    margin-bottom: 7px;
+                    font-size: 10px;
+                }
+                &:first-child{
+                    span:before{
+                        border-radius: 5px 0 0 5px;
+                    }
+                }
+                &:last-child{
+                    span:before{
+                        border-radius: 0 5px 5px 0;
+                    }
+                }
+                &.done{
+                    span{
+                        &:before{
+                            background: #3D691F;
+                        }
+                    }
+                    i{
+                        color: #3D691F;
+                    }
+                }
+                &.in_progress{
+                    span{
+                        &:before{
+                            left: 50%;
+                            background: #5EA72B;
+                        }
+                    }
+                    i{
+                        color: #FADC72;
+                    }
+                }
+                &.awaiting{
+                    span{
+                        &:before{
+                            background: #5EA72B;
+                        }
+                    }
+                }
+            }
+        }
+    }
     .milestones-blk__list{
         padding: 0;
         margin: 0;
