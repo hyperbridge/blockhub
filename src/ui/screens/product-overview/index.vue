@@ -488,9 +488,10 @@
             justify-content: space-between;
             align-items: flex-end;
             flex-wrap: nowrap;
+            overflow: hidden;
             .crowndfunding-campaing_progress-stage{
                 width: 30%;
-                text-align: center;
+                text-align: left;
                 span{
                     display: inline-block;
                     width: 100%;
@@ -514,7 +515,7 @@
                         width: 2px;
                         content: "";
                         height: 8px;
-                        left: calc( 50% - 1px );
+                        left: 0;
                         display: inline-block;
                         background: #fff;
                     }
@@ -546,7 +547,6 @@
                 &.in_progress{
                     span{
                         &:before{
-                            left: 50%;
                             background: #5EA72B;
                         }
                     }
