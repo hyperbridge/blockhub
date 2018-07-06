@@ -54,11 +54,51 @@
                                 </div>
                             </div>
                             <div class="col-5">
-                                <div class="card invert rating-blk">
+                                <div class="card invert crowndfunding-campaing-blk">
+                                    <div class="card-body">
+                                        <h2 class="title">Crowndfunding campaing</h2>
+                                        <div class="crowndfunding-campaing">
+                                            <div class="crowndfunding-campaing__progress">
+                                                <div v-for="(stage, index) in crowndfunding_data.stages" :key="index" class="crowndfunding-campaing_progress-stage">
+                                                    <i class="fas fa-check" v-if="stage.status === 'done'"></i>
+                                                    <i class="fas fa-clock" v-if="stage.status === 'in_progress'"></i>
+                                                    <span>{{ stage.text}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="crowndfunding-campaing__info">
+
+                                            </div>
+                                            <div class="crowndfunding-campaing__action">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card invert milestones-blk" v-if="milestones_data">
+                                    <div class="card-body">
+                                        <h2 class="title">Milestones</h2>
+                                        <ul class="milestones-blk__list">
+                                            <li v-for="(item, index) in milestones_data" v-bind:class="{ done: item.status }" :key="index">
+                                                <div class="step_number" v-if="item.step_number">
+                                                    {{ item.step_number}}
+                                                </div>
+                                                <div class="status_done" v-else>
+                                                    <i class="fas fa-check"></i>
+                                                </div>
+                                                <div class="text">
+                                                    {{ item.text}}
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="card invert rating-blk" v-if="rating_data">
                                     <div class="card-body">
                                         <h2 class="title">Rating</h2>
                                         <ul class="rating-blk__list">
-                                            <li v-for="(item, index) in rating_blk" :key="index">
+                                            <li v-for="(item, index) in rating_data" :key="index">
                                                 <div class="rating-blk__info">
                                                     <span class="rating-blk__name">{{ item.name }}</span>
                                                     <span class="rating-blk__number">{{ item.number }}</span>
@@ -75,7 +115,7 @@
                                     </div>
                                 </div>
 
-                                <div class="card invert traded-assets">
+                                <div class="card invert traded-assets" v-if="assets_data">
                                     <div class="card-body">
                                         <h2 class="title">Frequently Traded Assets</h2>
                                         <div class="traded-assets__filter">
@@ -146,7 +186,7 @@
                                     </div>
                                 </div>
 
-                                <div class="card invert community-spotlight">
+                                <div class="card invert community-spotlight" v-if="community_data">
                                     <div class="card-body">
                                         <h2 class="title">Community Spotlight
                                             <a href="#3" class="title-icon">
@@ -155,16 +195,10 @@
                                             </a>
                                         </h2>
                                         <ul class="community-spotlight__list">
-                                            <li>
-                                                <a href="#3">
-                                                    <span class="community-spotlight__name">[GUIDE] Short Title</span>
-                                                    <span class="community-spotlight__count">381</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#3">
-                                                    <span class="community-spotlight__name">Just Title</span>
-                                                    <span class="community-spotlight__count">381</span>
+                                            <li v-for="(item, index) in community_data" :key="index">
+                                                <a :href="item.link">
+                                                    <span class="community-spotlight__name">{{ item.name }}</span>
+                                                    <span class="community-spotlight__count">{{ item.count }}</span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -172,44 +206,26 @@
                                     </div>
                                 </div>
 
-                                <div class="card invert system-requirements">
+                                <div class="card invert system-requirements" v-if="system_requirements_data">
                                     <div class="card-body">
                                         <h2 class="title">System Requirements <i class="fas fa-laptop title-icon"></i>
                                         </h2>
-                                        <div class="system-requirements__item">
-                                            <h6>Microsoft Windows <i class="fab fa-windows"></i></h6>
-                                            <p>8GB storage space, 4GB RAM, GTX 1050, or equivalent</p>
-                                        </div>
-                                        <div class="system-requirements__item">
-                                            <h6>Linux/Debian <i class="fab fa-linux"></i></h6>
-                                            <p>8GB storage space, 4GB RAM, GTX 1050, or equivalent</p>
+                                        <div class="system-requirements__item" v-for="(item, index) in system_requirements_data" :key="index">
+                                            <h6>{{ item.system }} <i :class="item.icon"></i></h6>
+                                            <p>{{ item.requirements }}</p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="card transparent languages-blk">
+                                <div class="card transparent languages-blk" v-if="languages_data">
                                     <div class="card-body">
                                         <h2 class="title">Languages <i class="fas fa-laptop title-icon"></i></h2>
                                         <ul class="languages-list">
-                                            <li class="languages-list__item">
-                                                <span class="languages-list__name">English</span>
+                                            <li class="languages-list__item" v-for="(item, index) in languages_data" :key="index">
+                                                <span class="languages-list__name">{{ item.name }}</span>
                                                 <span class="languages-list__icon">
-                                                    <i class="fas fa-closed-captioning"></i>
-                                                    <i class="fas fa-closed-captioning"></i>
-                                                </span>
-                                            </li>
-                                            <li class="languages-list__item">
-                                                <span class="languages-list__name">Spanish</span>
-                                                <span class="languages-list__icon">
-                                                    <i class="fas fa-closed-captioning"></i>
-                                                    <i class="fas fa-closed-captioning"></i>
-                                                </span>
-                                            </li>
-                                            <li class="languages-list__item">
-                                                <span class="languages-list__name">French</span>
-                                                <span class="languages-list__icon">
-                                                    <i class="fas fa-closed-captioning"></i>
-                                                    <i class="fas fa-closed-captioning"></i>
+                                                    <i class="fas fa-closed-captioning" v-if="item.closed_captioning"></i>
+                                                    <i class="fas fa-audio-description" v-if="item.audio_description"></i>
                                                 </span>
                                             </li>
                                         </ul>
@@ -261,7 +277,53 @@
         },
         data() {
             return {
-                rating_blk: [
+                crowndfunding_data: {
+                    stages: [
+                        {
+                            status: 'done',
+                            text: 'm1'
+                        },
+                        {
+                            status: 'done',
+                            text: 'm2'
+                        },
+                        {
+                            status: 'done',
+                            text: 'm3'
+                        },
+                        {
+                            status: 'in_progress',
+                            text: 'm4'
+                        },
+                        {
+                            status: 'awaiting',
+                            text: 'm5'
+                        },
+                        {
+                            status: 'awaiting',
+                            text: 'm6'
+                        },
+                    ]
+                },
+                milestones_data: [
+                    {
+                        text: 'Create the base game with 2 dungeons',
+                        status: 'done',
+                    },
+                    {
+                        text: 'New Class, storyline and weapons type',
+                        status: 'done',
+                    },
+                    {
+                        text: 'Level cap updated to 90 with new set of armors and weapons.',
+                        step_number: '3',
+                    },
+                    {
+                        text: 'Add 3 extra dungeons',
+                        step_number: '4',
+                    }
+                ],
+                rating_data: [
                     {
                         name: 'Game',
                         number: 2.3
@@ -273,6 +335,66 @@
                     {
                         name: 'Market',
                         number: 3.5
+                    }
+                ],
+                assets_data: {},
+                community_data: [
+                    {
+                        name: '[GUIDE] Short Title',
+                        count: '381',
+                        link: '#3'
+                    },
+                    {
+                        name: 'Just Title',
+                        count: '31',
+                        link: '#4'
+                    },
+                    {
+                        name: 'Just Some a Little bit long Title',
+                        count: '1701',
+                        link: '#5'
+                    }
+                ],
+                system_requirements_data: [
+                    {
+                        system: 'Microsoft Windows',
+                        requirements: '8GB storage space, 4GB RAM, GTX 1050, or equivalent',
+                        icon: 'fab fa-windows'
+
+                    },
+                    {
+                        system: 'Linux/Debian',
+                        requirements: '8GB storage space, 4GB RAM, GTX 1050, or equivalent',
+                        icon: 'fab fa-linux'
+
+                    },
+                    {
+                        system: 'MacOS',
+                        requirements: 'macOS Hight Sierra, 8GB storage space, 8GB RAM, GTX 1050, or equivalent',
+                        icon: 'fab fa-apple'
+
+                    }
+                ],
+                languages_data: [
+                    {
+                        name: 'English',
+                        closed_captioning: true,
+                        audio_description: true
+                    },
+                    {
+                        name: 'Spanish',
+                        closed_captioning: true,
+                        audio_description: true
+                    },
+                    {
+                        name: 'French',
+                        closed_captioning: true,
+                        audio_description: true
+                    },
+                    {
+                        name: 'Portuguese',
+                        closed_captioning: true,
+                        audio_description: true
                     }
                 ]
             }
@@ -357,6 +479,45 @@
         &.transparent {
             border: none;
             background: transparent;
+        }
+    }
+
+    .milestones-blk__list{
+        padding: 0;
+        margin: 0;
+        li{
+            list-style: none;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 5px 5px 0;
+            border-radius: 5px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
+            background: #27283E;
+            margin-bottom: 10px;
+            &:last-child{
+                margin-bottom: 0;
+            }
+            &.done{
+                border: 2px solid #5EA72B;
+            }
+            .text{
+                flex-basis: calc( 100% - 40px );
+                text-align: left;
+            }
+            .step_number{
+                flex-basis: 40px;
+                text-align: center;
+                font-size: 22px;
+            }
+            .status_done{
+                flex-basis: 40px;
+                text-align: center;
+                font-size: 22px;
+                color: #5EA72B;
+            }
         }
     }
 
