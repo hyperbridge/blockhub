@@ -64,7 +64,8 @@
                                                      class="crowndfunding-campaing_progress-stage">
                                                     <i class="fas fa-check" v-if="stage.status === 'done'"></i>
                                                     <i class="fas fa-clock" v-if="stage.status === 'in_progress'"></i>
-                                                    <span>{{ stage.text}}</span>
+                                                    <span class="stage_line"></span>
+                                                    <span class="name">{{ stage.text}}</span>
                                                 </div>
                                             </div>
                                             <div class="crowndfunding-campaing__info">
@@ -77,20 +78,55 @@
                                                     $ {{ crowndfunding_data.goal_amount }}
                                                 </div>
                                                 <div class="spent_blk">
+                                                    <div class="progress progress-bar-vertical">
+                                                        <div class="progress-bar bg-success" role="progressbar"
+                                                             :aria-valuenow="crowndfunding_data.spent_amount['percent']"
+                                                             aria-valuemin="0" aria-valuemax="100"
+                                                             :style="{ height: crowndfunding_data.spent_amount['percent'] + '%' }">
+                                                            <span class="sr-only">{{ crowndfunding_data.spent_amount['percent'] }}% Complete</span>
+                                                        </div>
+                                                    </div>
                                                     <div class="text">Spent</div>
-                                                    $ {{ crowndfunding_data.spent_amount }}
+                                                    $ {{ crowndfunding_data.spent_amount['amount'] }}
                                                 </div>
                                                 <div class="locked_blk">
+                                                    <div class="progress progress-bar-vertical">
+                                                        <div class="progress-bar bg-success" role="progressbar"
+                                                             :aria-valuenow="crowndfunding_data.locked_amount['percent']"
+                                                             aria-valuemin="0" aria-valuemax="100"
+                                                             :style="{ height: crowndfunding_data.locked_amount['percent'] + '%' }">
+                                                            <span class="sr-only">{{ crowndfunding_data.locked_amount['percent'] }}% Complete</span>
+                                                        </div>
+                                                    </div>
                                                     <div class="text">Locked</div>
-                                                    $ {{ crowndfunding_data.locked_amount }}
+                                                    $ {{ crowndfunding_data.locked_amount['amount'] }}
                                                 </div>
                                                 <div class="overflow_blk">
+                                                    <div class="progress progress-bar-vertical">
+                                                        <div class="progress-bar bg-success" role="progressbar"
+                                                             :aria-valuenow="crowndfunding_data.overflow_amount['percent']"
+                                                             aria-valuemin="0" aria-valuemax="100"
+                                                             :style="{ height: crowndfunding_data.overflow_amount['percent'] + '%' }">
+                                                            <span class="sr-only">{{ crowndfunding_data.overflow_amount['percent'] }}% Complete</span>
+                                                        </div>
+                                                    </div>
                                                     <div class="text">Overflow</div>
-                                                    $ {{ crowndfunding_data.overflow_amount }}
+                                                    $ {{ crowndfunding_data.overflow_amount['amount'] }}
                                                 </div>
                                             </div>
                                             <div class="crowndfunding-campaing__action">
-
+                                                <a href="#3" class="follow_link">
+                                                    <i class="fas fa-check"></i>
+                                                    Follow
+                                                </a>
+                                                <a href="#3" class="share_link">
+                                                    <i class="fas fa-share"></i>
+                                                    Share
+                                                </a>
+                                                <a href="#3" class="support_link">
+                                                    <i class="fas fa-life-ring"></i>
+                                                    Support
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -306,19 +342,19 @@
                 crowndfunding_data: {
                     stages: [
                         {
-                            status: 'done',
+                            status: 'in_progress',
                             text: 'm1'
                         },
                         {
-                            status: 'done',
+                            status: 'awaiting',
                             text: 'm2'
                         },
                         {
-                            status: 'done',
+                            status: 'awaiting',
                             text: 'm3'
                         },
                         {
-                            status: 'in_progress',
+                            status: 'awaiting',
                             text: 'm4'
                         },
                         {
@@ -332,9 +368,18 @@
                     ],
                     funded_amount: '202,190.63',
                     goal_amount: '200,000.00',
-                    spent_amount: '32,000',
-                    locked_amount: '182,242',
-                    overflow_amount: '17,342'
+                    spent_amount: {
+                        amount: '32,000',
+                        percent: '37'
+                    },
+                    locked_amount: {
+                        amount: '182,242',
+                        percent: '71'
+                    },
+                    overflow_amount: {
+                        amount: '17,342',
+                        percent: '12'
+                    },
                 },
                 milestones_data: [
                     {
@@ -523,49 +568,68 @@
             align-items: flex-end;
             flex-wrap: nowrap;
             overflow: hidden;
+            margin: 10px -6%;
             .crowndfunding-campaing_progress-stage {
-                width: 30%;
-                text-align: left;
+                width: 50%;
+                text-align: center;
                 span {
                     display: inline-block;
                     width: 100%;
                     position: relative;
-                    padding-top: 35px;
                     text-transform: uppercase;
                     font-weight: bold;
-                    &:before {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        height: 15px;
-                        display: inline-block;
-                        content: "";
+                    overflow: hidden;
+                    &.stage_line{
                         background: #3D691F;
+                        height: 15px;
+                        float: left;
                     }
-                    &:after {
-                        position: absolute;
-                        top: 23px;
-                        width: 2px;
-                        content: "";
-                        height: 8px;
-                        left: 0;
-                        display: inline-block;
-                        background: #fff;
+                    &.name{
+                        padding-top: 15px;
+                        &:after {
+                            position: absolute;
+                            top: 5px;
+                            width: 2px;
+                            content: "";
+                            height: 8px;
+                            left: calc( 50% - 1px );
+                            display: inline-block;
+                            background: #fff;
+                        }
                     }
                 }
                 i {
                     margin-bottom: 7px;
                     font-size: 10px;
+                    display: block;
+                    width: 100%;
                 }
                 &:first-child {
-                    span:before {
+                    .stage_line {
                         border-radius: 5px 0 0 5px;
+                        width: 65%;
+                        float: right;
+                    }
+                    &.in_progress {
+                        .stage_line {
+                            &:after {
+                                left: 25%;
+                            }
+                        }
                     }
                 }
                 &:last-child {
-                    span:before {
+                    .stage_line {
                         border-radius: 0 5px 5px 0;
+                        width: 65%;
+                        float: left;
+                    }
+                    &.in_progress {
+                        .stage_line {
+                            &:after {
+                                left: 75%;
+                            }
+                        }
                     }
                 }
                 &.done {
@@ -579,9 +643,15 @@
                     }
                 }
                 &.in_progress {
-                    span {
-                        &:before {
+                    .stage_line {
+                        &:after {
+                            position: absolute;
                             background: #5EA72B;
+                            height: 100%;
+                            left: 50%;
+                            right: 0;
+                            content: "";
+                            display: inline-block;
                         }
                     }
                     i {
@@ -589,10 +659,8 @@
                     }
                 }
                 &.awaiting {
-                    span {
-                        &:before {
-                            background: #5EA72B;
-                        }
+                    .stage_line {
+                        background: #5EA72B;
                     }
                 }
             }
@@ -613,39 +681,77 @@
                 .text {
                     font-size: 14px;
                     font-weight: bold;
-                    margin-bottom: 8px;
+                    margin-bottom: 5px;
+                    text-transform: uppercase;
                 }
             }
             .spent_blk,
             .locked_blk,
             .overflow_blk {
-                width: 30%;
+                width: 32%;
                 margin-top: 10px;
                 font-size: 15px;
                 position: relative;
-                padding-left: 10px;
                 .text {
                     font-weight: bold;
                     margin-bottom: 4px;
                 }
-                &:before {
-                    position: absolute;
-                    left: 0;
-                    top: 2px;
-                    bottom: 2px;
+                .progress-bar-vertical {
                     width: 5px;
+                    min-height: calc( 100% - 7px );
+                    display: flex;
+                    align-items: flex-end;
+                    margin: 4px 8px 3px 0;
+                    float: left;
+                    border-radius: 0;
                     background: #fff;
-                    z-index: 1;
-                    content: "";
+                    .progress-bar {
+                        width: 100%;
+                        height: 0;
+                        -webkit-transition: height 0.6s ease;
+                        -o-transition: height 0.6s ease;
+                        transition: height 0.6s ease;
+                    }
                 }
-                &:after {
-                    position: absolute;
-                    left: 0;
-                    bottom: 2px;
-                    width: 5px;
-                    z-index: 2;
-                    background: #5EA72B;
-                    content: "";
+            }
+        }
+        .crowndfunding-campaing__action{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            margin-top: 15px;
+            a{
+                width: 31%;
+                border-radius: 5px;
+                color: #fff;
+                font-size: 13px;
+                text-transform: uppercase;
+                text-align: center;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, .16);
+                line-height: 24px;
+                font-weight: bold;
+                text-decoration: none;
+                i{
+                    margin-right: 5px;
+                    font-size: 16px;
+                }
+                &.follow_link{
+                    background: #436CC9;
+                    &:hover{
+                        background: #314e92;
+                    }
+                }
+                &.share_link{
+                    background: #43B4C9;
+                    &:hover{
+                        background: #348b9b;
+                    }
+                }
+                &.support_link{
+                    background: #43C981;
+                    &:hover{
+                        background: #2e8b59;
+                    }
                 }
             }
         }
