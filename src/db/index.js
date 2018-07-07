@@ -2,15 +2,11 @@ import Loki from 'lokijs'
 
 const data = require('json-loader!yaml-loader!./data.yaml')
 
-// TODO: refactor from class to functional
-
 let loki = null
 
 export let marketplace = null
 export let accounts = null
 export let republic = null
-
-
 
 
 export const init = (cb) => {
