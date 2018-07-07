@@ -30,11 +30,15 @@
 
                         <div class="row">
                             <div class="col-7">
-                                SCREENSHOT GALLERY
+                                <screen-gallery></screen-gallery>
 
-                                SALE PRICE BOX
+                                <sale-box
+                                    :sale_box="sale_box"
+                                    v-if="sale_box"
+                                ></sale-box>
 
                                 <plan-list></plan-list>
+
                                 <div class="main_content">
                                     <h2>An adventure of a lifetime...</h2>
 
@@ -335,22 +339,29 @@
         props: ['id'],
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
-            'plan-list': () => import('@/ui/components/game-plans/list.vue')
+            'plan-list': () => import('@/ui/components/game-plans/list.vue'),
+            'screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
+            'sale-box': () => import('@/ui/components/sale-box/box')
         },
         data() {
             return {
+                sale_box: {
+                    title: 'Game + All Packs 30% Free!',
+                    price: '41',
+                    link: '#33'
+                },
                 crowndfunding_data: {
                     stages: [
                         {
-                            status: 'in_progress',
+                            status: 'done',
                             text: 'm1'
                         },
                         {
-                            status: 'awaiting',
+                            status: 'done',
                             text: 'm2'
                         },
                         {
-                            status: 'awaiting',
+                            status: 'in_progress',
                             text: 'm3'
                         },
                         {
@@ -530,6 +541,14 @@
         p {
             margin-bottom: 20px;
         }
+        img{
+            max-width: 100%;
+            height: auto;
+        }
+        &.with_bg{
+            color: #1C2032;
+            background: #FEEBCE;
+        }
     }
 
     .card {
@@ -648,7 +667,7 @@
                             position: absolute;
                             background: #5EA72B;
                             height: 100%;
-                            left: 50%;
+                            left: 0%;
                             right: 0;
                             content: "";
                             display: inline-block;
