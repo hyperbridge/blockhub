@@ -277,7 +277,7 @@ export default {
                 text-decoration: none;
             }
         }
-        .product__tag {
+        .product-tags {
             margin-top: 10px;
             margin-bottom: 0;
             a{
