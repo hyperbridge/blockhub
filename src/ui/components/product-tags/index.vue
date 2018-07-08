@@ -1,6 +1,9 @@
 <template>
         <div class="product__tag">
-            <a href="#" v-for="(tag, index) in tags" v-bind:key="index" class="tag-link" @click="filterTag(tag)">{{ tag }}</a>
+            <a href="#" v-for="(tag, index) in tags"
+               v-bind:key="index"
+               class="tag-link"
+               @click="filterTag(tag)">{{ tag }}</a>
         </div>
 </template>
 

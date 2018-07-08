@@ -25,20 +25,19 @@
                                 </div>
                             </div>
                         </div>
-                <div class="row">
+                <div class="row new-releases">
                     <div class="col-12">
                         <h3>New Releases</h3>
+                        <div class="line"></div>
                     </div>
                     <div class="col-12 col-lg-4" v-for="(item, index) in products" v-bind:key="index">
-                        <div class="card invert">
-                            <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.mediumTileUrl" /></a>
-                            <div class="card-body">
-                                <h4 class="card-title"><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
+                        <div class="card invert new-releases__item">
+                            <div class="card-body padding-0">
+                                <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.mediumTileUrl" /></a>
+                                <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
                                 <p class="card-text">{{ item.shortDescription }} </p>
 
-                                <div class="product__tag" v-for="(tag, index) in item.authorTags" v-bind:key="index">
-                                    <a href="#" class="card-link" @click="filterTag(tag)">{{ tag }}</a>
-                                </div>
+                                <tags-list :tags="item.authorTags"></tags-list>
                             </div>
                         </div>
                     </div>
@@ -95,11 +94,19 @@ export default {
     .top-product__slider{
         img{
             width: 100%;
-            height: 220px;
+            height: 250px;
             object-fit: cover;
         }
     }
     .top-product__info{
+        h2{
+            font-size: 26px;
+            font-weight: bold;
+            margin: 0;
+        }
+        p{
+            margin: 15px 0;
+        }
     }
     .top-product__footer{
         .price-list{
@@ -114,11 +121,36 @@ export default {
                 font-weight: bold;
                 text-transform: uppercase;
                 line-height: 32px;
+                position: relative;
+                overflow: hidden;
                 span{
                     font-size: 13px;
                 }
                 &.old_price{
-
+                    &:before{
+                        position: absolute;
+                        height: 2px;
+                        left: 0;
+                        right: 0;
+                        top: 50%;
+                        width: 100%;
+                        background: red;
+                        content: "";
+                        display: inline-block;
+                        transform: rotate(30deg)
+                    }
+                    &:after{
+                        position: absolute;
+                        height: 2px;
+                        left: 0;
+                        right: 0;
+                        top: 50%;
+                        width: 100%;
+                        background: red;
+                        content: "";
+                        display: inline-block;
+                        transform: rotate(-30deg)
+                    }
                 }
             }
         }
@@ -129,6 +161,49 @@ export default {
             font-weight: bold;
             i{
                 margin-right: 5px;
+            }
+        }
+    }
+
+    .new-releases{
+        h3{
+            color: #fff;
+            border-bottom: 5px solid #fff;
+            padding: 0;
+            margin: 0;
+            display: inline-block;
+            font-size: 21px;
+            font-weight: bold;
+            line-height: 36px;
+        }
+        .line{
+            display: inline-block;
+            width: 100%;
+            height: 2px;
+            background: #fff;
+            float: left;
+            margin-bottom: 20px;
+        }
+    }
+    .new-releases__item{
+        padding: 8px 6px;
+        border-radius: 5px;
+        h4{
+            color: #fff;
+            font-weight: bold;
+            font-size: 20px;
+            padding: 13px 0;
+            a{
+                color: #fff;
+                text-decoration: none;
+            }
+        }
+        .product__tag {
+            margin-top: 10px;
+            margin-bottom: 0;
+            a{
+                background: red;
+                color: green;
             }
         }
     }
