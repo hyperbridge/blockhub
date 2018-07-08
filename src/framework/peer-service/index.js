@@ -28,7 +28,7 @@ import * as Ethereum from '../ethereum'
 // }
 
 
-const Peer = require('peerjs')
+const NodeClient = require('peerjs')
 const LifeRaft = require('liferaft/index')
 const md5 = require('js-md5')
 
@@ -51,8 +51,8 @@ const local = {
     peerId: null,
     requests: {},
     pendingData: '',
-    peerHost: 'localhost',//'blockhub-peer-server.herokuapp.com',//'0.peerjs.com',
-    peerPort: 9000,//80,//9000,
+    peerHost: 'node.blockhub.gg', //'localhost',
+    peerPort: 80, // 9000,
     peerKey: 'nodeOperator',
 }
 
@@ -333,7 +333,7 @@ export const init = () => {
         config.DATA_RELAYER_ENABLED = false
     }
 
-    local.peer = new Peer({
+    local.peer = new NodeClient({
         host: local.peerHost,
         port: local.peerPort,
         secure: false,
@@ -394,7 +394,7 @@ export const init = () => {
     })
 
     local.peer.on('error', (err) => {
-        console.log('[PeerService] Error', err)
+        console.warn('[PeerService] Error', err)
     })
 
     window.config = config

@@ -1,6 +1,7 @@
 import { normalize } from 'normalizr'
 import schema from './schema'
-import * as ethereum from '../../framework/ethereum'
+import * as Ethereum from '../../framework/ethereum'
+import * as PeerService from '../../framework/peer-service'
 
 const rawData = {
     connection: {
@@ -58,9 +59,13 @@ export const actions = {
     connect(store, payload) {
         console.log('[BlockHub] Network connecting...')
 
+        //store.dispatch('initPeerService')
         store.dispatch('checkInternetConnection')
         store.dispatch('checkEthereumConnection')
     },
+    // initPeerService() {
+    //     PeerService.init()
+    // },
     checkEthereumConnection(store, payload) {
         const success = () => {
             store.state.connection.ethereum = true
@@ -70,7 +75,7 @@ export const actions = {
             store.state.connection.ethereum = false
         }
 
-        ethereum.init().then(success, failure)
+        Ethereum.init().then(success, failure)
     },
     checkInternetConnection(store, payload) {
         console.log('[BlockHub] Connection status: ', store.state.connection)

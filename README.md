@@ -4,7 +4,12 @@
 
 ## Build Setup
 
-Clone these 2 repos: `https://github.com/hyperbridge/blockhub-web-client` + `https://github.com/hyperbridge/marketplace-protocol`
+Clone these repos:
+
+`https://github.com/hyperbridge/blockhub-web-client`
+
+`https://github.com/hyperbridge/marketplace-protocol`
+
 
 Install NVM: `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash`
 Install Node 8.11.1: `nvm install 8.11.1`

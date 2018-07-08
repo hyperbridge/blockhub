@@ -60,22 +60,22 @@ export const clean = () => {
     loki.getCollection('republicCouncilDelegates') && loki.getCollection('republicCouncilDelegates').chain().remove()
     loki.getCollection('republicElections') && loki.getCollection('republicElections').chain().remove()
     loki.getCollection('marketplaceProducts') && loki.getCollection('marketplaceProducts').chain().remove()
-}
 
-export const reload = () => {
-    clean()
+    accounts = loki.addCollection('accounts')
 
-    let accounts = loki.addCollection('accounts')
-
-    let republic = {
+    republic = {
         citizens: loki.addCollection('republicCitizens'),
         delegates: loki.addCollection('republicCouncilDelegates'),
         elections: loki.addCollection('republicElections')
     }
 
-    let marketplace = {
+    marketplace = {
         products: loki.addCollection('marketplaceProducts')
     }
+}
+
+export const reload = () => {
+    clean()
 
     marketplace.products.insert(data.products)
 

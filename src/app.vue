@@ -6,10 +6,14 @@
 
 <script>
 import Vue from "vue"
-// {{ data.user }}
+
 export default Vue.extend({
   name: 'app',
   props: ['data'],
+  computed: {
+  },
+  watch: {
+  },
   created() {
     this.$store.dispatch('network/connect')
 
@@ -22,10 +26,11 @@ export default Vue.extend({
 
     window.initBlockHub = function() {
       import('./framework/ethereum').then(c => c.init())
-      import('./framework/peer').then(c => c.init())
+      import('./framework/peer-service').then(c => c.init())
     }
     
     window.initBlockHubSettings = function() {
+    // TODO: Remove most of this
       var settings = {
           showSettings: function(){
               return;

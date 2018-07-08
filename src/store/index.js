@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import * as ChaosMonkey from '../framework/chaos-monkey'
 import funding from '../modules/funding'
 import news from '../modules/news'
 import * as marketplace from '../modules/marketplace'
@@ -9,7 +10,27 @@ import * as database from '../modules/database'
 
 Vue.use(Vuex)
 
+
+let initializer = (store) => {
+    store.dispatch('database/init')
+    store.dispatch('marketplace/init')
+
+    store.subscribe((mutation, state) => {
+        if (mutation.type === 'database/initialized') {
+            if (ChaosMonkey.random()) {
+                // Hey devs, lets have some fun
+                // Bye bye data
+                // Things still workie?
+                store.dispatch('database/clean')
+            }
+        } else if (mutation.type === 'database/updateState') {
+            store.dispatch('marketplace/updateState')
+        }
+    });
+};
+
 const store = new Vuex.Store({
+    plugins: [initializer],
     modules: {
         marketplace: {
             namespaced: true,
@@ -50,11 +71,11 @@ const store = new Vuex.Store({
 })
 
 
-marketplace.init(() => {
-    console.log('[BlockHub] Marketplace initialized. Updating store state.')
+// marketplace.init(() => {
+//     console.log('[BlockHub] Marketplace initialized. Updating store state.')
 
-    store.state.marketplace = marketplace.state
-})
+//     store.state.marketplace = marketplace.state
+// })
 
 
 export default store
