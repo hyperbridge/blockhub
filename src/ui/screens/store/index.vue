@@ -25,13 +25,21 @@
                                 </div>
                             </div>
                         </div>
-                <div class="row new-releases">
+                <div class="row game-grid">
                     <div class="col-12">
                         <h3>New Releases</h3>
+                        <div class="sl_nav">
+                            <a href="#3" class="nav-prev">
+                                <i class="fas fa-arrow-left"></i>
+                            </a>
+                            <a href="#3" class="nav-next">
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
                         <div class="line"></div>
                     </div>
                     <div class="col-12 col-lg-4" v-for="(item, index) in products" v-bind:key="index">
-                        <div class="card invert new-releases__item">
+                        <div class="card invert game-grid__item">
                             <div class="card-body padding-0">
                                 <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.mediumTileUrl" /></a>
                                 <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
@@ -41,7 +49,34 @@
                             </div>
                         </div>
                     </div>
-                    
+
+                </div>
+
+                <div class="row game-grid">
+                    <div class="col-12">
+                        <h3 class="with_bg">75% Off Week</h3>
+                        <div class="sl_nav">
+                            <a href="#3" class="nav-prev">
+                                <i class="fas fa-arrow-left"></i>
+                            </a>
+                            <a href="#3" class="nav-next">
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="col-12 col-lg-4" v-for="(item, index) in products" v-bind:key="index">
+                        <div class="card invert game-grid__item">
+                            <div class="card-body padding-0">
+                                <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.mediumTileUrl" /></a>
+                                <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
+                                <p class="card-text">{{ item.shortDescription }} </p>
+
+                                <tags-list :tags="item.authorTags"></tags-list>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -165,16 +200,60 @@ export default {
         }
     }
 
-    .new-releases{
+    .game-grid{
         h3{
             color: #fff;
             border-bottom: 5px solid #fff;
-            padding: 0;
+            padding: 0 5px 0 0;
             margin: 0;
             display: inline-block;
             font-size: 21px;
             font-weight: bold;
             line-height: 36px;
+            float: left;
+            max-width: calc( 100% - 95px );
+            position: relative;
+            &:after{
+                content: "";
+                position: absolute;
+                bottom: -6px;
+                right: -5px;
+                height: 5px;
+                border: 3px solid transparent;
+                border-bottom: 3px solid #fff;
+                border-left: 3px solid #fff;
+            }
+            &.with_bg{
+                background: #fff;
+                color: #30304B;
+                border-radius: 5px 10px 0 0;
+                border: none;
+                padding: 0 15px;
+                line-height: 40px;
+                font-weight: normal;
+                &:after{
+                    height: 36px;
+                    bottom: 0;
+                    right: -34px;
+                    border: 18px solid transparent;
+                    border-bottom: 18px solid #fff;
+                    border-left: 18px solid #fff;
+                }
+            }
+        }
+        .sl_nav{
+            display: inline-block;
+            width: 60px;
+            float: right;
+            text-align: right;
+            a{
+                display: inline-block;
+                width: 30px;
+                color: #fff;
+                float: left;
+                line-height: 40px;
+                font-size: 20px;
+            }
         }
         .line{
             display: inline-block;
@@ -185,7 +264,7 @@ export default {
             margin-bottom: 20px;
         }
     }
-    .new-releases__item{
+    .game-grid__item{
         padding: 8px 6px;
         border-radius: 5px;
         h4{
