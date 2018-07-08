@@ -73,7 +73,6 @@
                                     </div>
                                     <div class="wallet-item__body">
                                         <div class="wallet-item__graph">
-
                                         </div>
                                         <div class="wallet-item__history">
                                             <ul>
@@ -91,7 +90,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="wallet-item__wallet_address">
+                                        <div class="wallet-item__wallet_address" @click="copyWalletNumber(wallet.wallet_number)">
                                             <span>{{ wallet.wallet_number }}</span>
                                             <i class="fas fa-copy"></i>
                                         </div>
@@ -100,7 +99,7 @@
                                 <div class="wallet-item__footer">
                                     <div class="wallet-item__preferred_switcher">
                                         <label class="switch switch-sm">
-                                            <input type="checkbox" name="switch_8" checked="" value="0">
+                                            <input type="checkbox" name="switch_8" checked="" v-model="wallet.preferred_switcher" value="0">
                                             <span>Preferred</span>
                                         </label>
                                     </div>
@@ -135,6 +134,7 @@
             wallets: [
                 {
                     name: 'Bitcoin',
+                    icon: '',
                     short_name: 'BTC',
                     count: '0.00827',
                     history:[
@@ -155,9 +155,11 @@
                         }
                     ],
                     wallet_number: 'QMdp32odsoN45insPS91ninZPEld9',
+                    preferred_switcher: true
                 },
                 {
                     name: 'Ethereum',
+                    icon: '',
                     short_name: 'ETH',
                     count: '0.00015',
                     history:[
@@ -178,9 +180,11 @@
                         }
                     ],
                     wallet_number: 'kKJV798BIUFvu6ibkvVV7',
+                    preferred_switcher: false
                 },
                 {
                     name: 'Viacoin',
+                    icon: '',
                     short_name: 'VIA',
                     count: '0.00045',
                     history:[
@@ -201,9 +205,11 @@
                         }
                     ],
                     wallet_number: 'kKJV798BIUFvu6ibkvVV7',
+                    preferred_switcher: false
                 },
                 {
                     name: 'Monero',
+                    icon: '',
                     short_name: 'XMR',
                     count: '0.00045',
                     history:[
@@ -224,10 +230,16 @@
                         }
                     ],
                     wallet_number: 'kKJV798BIUFvu6ibkvVV7',
+                    preferred_switcher: true
                 }
             ]
         }),
         created() {
+        },
+        methods: {
+            copyWalletNumber: function (number) {
+                alert('You have copy wallet number - ' + number )
+            }
         }
     }
 </script>
@@ -398,17 +410,20 @@
                 margin-top: 10px;
                 font-size: 14px;
                 line-height: 18px;
+                cursor: pointer;
                 span {
                     width: 90%;
                     overflow: hidden;
                     display: inline-block;
                     float: left;
+                    text-overflow: ellipsis;
                 }
                 i {
                     float: right;
                 }
             }
         }
+
         .wallet-item__preferred_switcher{
             display: inline-block;
             float: left;
