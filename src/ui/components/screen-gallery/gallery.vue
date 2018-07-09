@@ -33,31 +33,31 @@
         display: flex;
         justify-content: space-between;
         align-items: stretch;
-        .screen-gallery__main-img{
-            width: 70%;
-            padding-right: 5px;
-            img{
-                width: 100%;
-                height: 230px;
-                object-fit: cover;
-            }
+    }
+    .screen-gallery__main-img{
+        width: 70%;
+        padding-right: 5px;
+        img{
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
         }
-        .screen-gallery__thumb-nav{
-            width: 30%;
-            padding-left: 5px;
-            ul{
-                padding: 0;
-                li{
-                    list-style: none;
-                    margin-bottom: 10px;
-                    img{
-                        width: 100%;
-                        height: 70px;
-                        object-fit: cover;
-                    }
-                    &:last-child{
-                        margin-bottom: 0;
-                    }
+    }
+    .screen-gallery__thumb-nav{
+        width: 30%;
+        padding-left: 5px;
+        ul{
+            padding: 0;
+            li{
+                list-style: none;
+                margin-bottom: 10px;
+                img{
+                    width: 100%;
+                    height: 70px;
+                    object-fit: cover;
+                }
+                &:last-child{
+                    margin-bottom: 0;
                 }
             }
         }
