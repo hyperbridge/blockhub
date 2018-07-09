@@ -8,9 +8,9 @@
                     </div>
                     <div class="col-3" v-for="(item, index) in products" v-bind:key="index">
                         <div class="card invert">
-                            <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.mediumTileUrl" /></a>
+                            <a :href="`#/product/${item.id}`"><img class="card-img-top" :src="item.images.mediumTileUrl" /></a>
                             <div class="card-body">
-                                <h4 class="card-title"><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
+                                <h4 class="card-title"><a :href="`#/product/${item.id}`">{{ item.name }}</a></h4>
                                 <p class="card-text">{{ item.shortDescription }} </p>
 
                                 <div class="product__tag" v-for="(tag, index) in item.authorTags" v-bind:key="index">
@@ -36,9 +36,20 @@ export default {
     },
     computed: {
         products() {
-            const products = this.$store.state.marketplace.entities.products
+            // TODO: less bad
+            console.log('vvv', '/store', this.$store.state.cache.screens['/store'])
 
-            return products
+            if (this.$store.state.cache.screens['/store'] && this.$store.state.cache.screens['/store'].products)
+                return this.$store.state.cache.screens['/store'].products
+
+            console.log('vvv2', this.$store.state.marketplace.products)
+
+            const products = this.$store.state.marketplace.products
+
+            if (this.$store.state.marketplace.products)
+                return this.$store.state.marketplace.products
+            
+            return null
         }
     },
     methods: {

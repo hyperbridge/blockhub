@@ -1,6 +1,8 @@
 import * as ChaosMonkey from '../chaos-monkey'
 import * as Ethereum from '../ethereum'
 
+import * as Util from '../util'
+
 
 // declare let require: any
 // declare let Promise: any
@@ -8,7 +10,7 @@ import * as Ethereum from '../ethereum'
 // declare let window: {
 //     web3: any;
 //     peer: any;
-//     pageContentDataRequest: any;
+//     pageContentHashRequest: any;
 //     addressBalanceRequest: any;
 //     peerConnect: any;
 //     onunload: any;
@@ -21,7 +23,7 @@ import * as Ethereum from '../ethereum'
 //     interface Window {
 //         web3: any;
 //         peer: any;
-//         pageContentDataRequest: any;
+//         pageContentHashRequest: any;
 //         addressBalanceRequest: any;
 //         peerConnect: any;
 //     }
@@ -32,7 +34,8 @@ const NodeClient = require('peerjs')
 const LifeRaft = require('liferaft/index')
 const md5 = require('js-md5')
 
-const config = {
+export let config = {
+    RELAY: true,
     RAFT_ENABLED: true,
     ETHEREUM_ENABLED: true,
     DATA_RELAYER_ENABLED: true,
@@ -46,18 +49,22 @@ const config = {
 const local = {
     raft: null,
     peer: null,
+    resolver: () => {{}},
     connectedPeers: {},
     connectingPeers: {},
     peerId: null,
     requests: {},
     pendingData: '',
-    peerHost: 'node.blockhub.gg', //'localhost',
-    peerPort: 80, // 9000,
+    peerHost: 'localhost', //'node.blockhub.gg', //'localhost',
+    peerPort: 9000, //80, // 9000,
     peerKey: 'nodeOperator',
 }
 
+export const setResolver = (resolver) => {
+    local.resolver = resolver
+}
 
-export const ID = function () {
+export const ID = () => {
     // Math.random should be unique because of its seeding algorithm.
     // Convert it to base 36 (numbers + letters), and grab the first 9 characters
     // after the decimal.
@@ -75,10 +82,10 @@ export const getPeer = async (peerId) => {
         })
     }
 
-    Promise.resolve(peer)
+    return peer
 }
 
-export const sendCommand = async (key, data = {}, peer = null, responseId = null, cb = null) => {
+export const sendCommand = async (key, data = {}, peer = null, responseId = null) => {
     const cmd = {
         key: key,
         responseId: responseId,
@@ -88,12 +95,12 @@ export const sendCommand = async (key, data = {}, peer = null, responseId = null
 
     console.log('[PeerService] Sending command', cmd)
 
-    if (cb) {
-        local.requests[cmd.requestId] = cb
-    }
-
     if (!peer) {
         const peers = Object.keys(local.connectedPeers)
+
+        if (!peers.length) {
+            return
+        }
         
         peer = await getPeer(peers[0])
     }
@@ -102,50 +109,87 @@ export const sendCommand = async (key, data = {}, peer = null, responseId = null
         console.warn('[PeerService] Not connected to peer. This shouldnt happen.')
     }
 
-    peer.send(JSON.stringify(cmd))
-}
-
-export const pageContentValidationRequest = async (path, content, peer) => {
-    const hashedContent = md5(content)
-
-    const data = {
-        path: path
-    }
-
-    await sendCommand('pageContentValidationRequest', data, peer, null, (data) => {
-        console.log('Page content validation response', data.hash)
-
-        if (data.hash === hashedContent) {
-            console.log('Successful validation')
-        } else {
-            console.log('Failed validation')
-        }
+    let _resolve, _reject
+    let promise = new Promise((resolve, reject) => {
+        _resolve = resolve
+        _reject = reject
     })
+    promise.resolve = _resolve
+    promise.reject = _reject
 
-    if (config.RAFT_ENABLED) {
-        const packet = local.raft.packet('vote', data)
+    local.requests[cmd.requestId] = promise
 
-        local.raft.message(LifeRaft.FOLLOWER, packet, () => {
-            console.log('[PeerService] Vote request sent', data)
-        })
-    }
+    peer.send(JSON.stringify(cmd))
+
+    return promise
 }
 
-export const pageContentDataRequest = async (path, params) => {
-    const data = {
-        path: path
-    }
+export const pageContentDataRequest = async (path, confirmedHash, peer) => {
+    return new Promise(async (resolve, reject) => {
+        let req = {
+            path: path
+        }
 
-    const peers = Object.keys(local.connectedPeers)
-    const peer = local.connectedPeers[peers[0]]
+        const data = await sendCommand('pageContentDataRequest', req, peer)
 
-    await sendCommand('pageContentDataRequest', data, null, null, (data) => {
-        console.log('Page content data response', data.content)
+        const peerHash = md5(data.content)
+        console.log('Page content data response', data, confirmedHash, peerHash)
 
-        const peers = Object.keys(local.connectedPeers)
-        const dataRelayer = local.connectedPeers[peers[0]]
+        if (confirmedHash === peerHash) {
+            console.log('Successful validation')
 
-        pageContentValidationRequest('/', data.content, dataRelayer)
+            resolve(data)
+        } else {
+            console.warn('Failed validation')
+
+            reject("Failed validation")
+        }
+
+        // if (config.RAFT_ENABLED) {
+        //     const packet = local.raft.packet('vote', data)
+
+        //     local.raft.message(LifeRaft.FOLLOWER, packet, () => {
+        //         console.log('[PeerService] Vote request sent', data)
+        //     })
+        // }
+    })
+}
+
+export const getPathState = async (path, params) => {
+    return new Promise(async (resolve) => {
+        const req = {
+            path: path
+        }
+
+        const results = []
+
+        for (let i in local.connectedPeers) {
+            const peer = local.connectedPeers[i]
+
+            let data = await sendCommand('pageContentHashRequest', req, peer)
+            
+            console.log('Page content hash response', data.hash)
+
+            results.push({
+                peer,
+                data
+            })
+        }
+
+        console.log('eee', results)
+
+        // TODO: less stupid
+        if (results.length) {
+            console.log('Chosen peer', results[0])
+            let data = await pageContentDataRequest(results[0].data.path, results[0].data.hash, results[0].peer)
+
+            console.log('Content data', data.content)
+
+            resolve(JSON.parse(data.content))
+        } else {
+            resolve()
+        }
+        
     })
 }
 
@@ -157,16 +201,14 @@ export const addressBalanceRequest = async (address) => {
             balance
         }
 
-        return Promise.resolve(data)
+        return data
     } else {
         return new Promise(async (resolve) => {
-            const data = {
+            const req = {
                 address
             }
 
-            await sendCommand('addressBalanceRequest', data, null, null, (data) => {
-                resolve(data)
-            })
+            resolve(await sendCommand('addressBalanceRequest', req))
         })
     }
 }
@@ -174,45 +216,61 @@ export const addressBalanceRequest = async (address) => {
 export const runCommand = async (cmd, meta = null) => {
     console.log('[PeerService] Running command', cmd.key)
 
-    if (cmd.responseId) {
-        if (local.requests[cmd.responseId]) {
-            console.log('[PeerService] Running response callback', cmd.responseId)
+    return new Promise(async (resolve, reject) => {
+        if (cmd.responseId) {
+            if (local.requests[cmd.responseId]) {
+                console.log('[PeerService] Running response callback', cmd.responseId)
 
-            local.requests[cmd.responseId](cmd.data)
+                local.requests[cmd.responseId].resolve(cmd.data)
 
-            delete local.requests[cmd.responseId]
+                delete local.requests[cmd.responseId]
+            }
+
+            return resolve()
         }
 
-        return
-    }
+        if (cmd.key === 'pageContentHashRequest') {
+            if (!config.RELAY) return Promise.resolve()
 
-    if (cmd.key === 'pageContentValidationRequest') {
-        const data = {
-            hash: md5(document.getElementById('main_navbar').innerHTML)
+            console.log(local, 'bbb');
+            const state = local.resolver(cmd)
+            const req = {
+                path: cmd.data.path,
+                hash: md5(JSON.stringify(state) + '')
+            }
+
+            // if (config.CHAOS_MONKEY_ENABLED && ChaosMonkey.random()) {
+            //     req.hash = 'chaos'
+            // }
+
+            return resolve(await sendCommand('pageContentHashResponse', req, meta.client, cmd.requestId))
+        } else if (cmd.key === 'pageContentDataRequest') {
+            if (!config.RELAY) return Promise.resolve()
+
+            const state = local.resolver(cmd)
+            const req = {
+                content: JSON.stringify(state)
+            }
+
+            return resolve(await sendCommand('pageContentDataResponse', req, meta.client, cmd.requestId))
+        } else if (cmd.key === 'raft') {
+            if (!config.RELAY) return Promise.resolve()
+
+            local.raft.emit('data', cmd.data, async (data) => {
+                console.log('[PeerService] Packet reply from ' + local.raft.address, data);
+
+                return resolve(sendCommand('raft', data, meta.client, cmd.requestId))
+            })
+
+            return
+        } else if (cmd.key === 'addressBalanceRequest') {
+            if (!config.RELAY) return Promise.resolve()
+            
+            const req = await addressBalanceRequest(cmd.address)
+
+            return resolve(await sendCommand('addressBalanceResponse', req, meta.client, cmd.requestId))
         }
-
-        if (config.CHAOS_MONKEY_ENABLED && ChaosMonkey.random()) {
-            data.hash = 'chaos'
-        }
-
-        await sendCommand('pageContentValidationResponse', data, meta.client, cmd.requestId)
-    } else if (cmd.key === 'pageContentDataRequest') {
-        const data = {
-            content: document.getElementById('main_navbar').innerHTML
-        }
-
-        await sendCommand('pageContentDataResponse', data, meta.client, cmd.requestId)
-    } else if (cmd.key === 'raft') {
-        local.raft.emit('data', cmd.data, async (data) => {
-            console.log('[PeerService] Packet reply from ' + local.raft.address, data);
-
-            await sendCommand('raft', data, meta.client, cmd.requestId)
-        })
-    } else if (cmd.key === 'addressBalanceRequest') {
-        const data = await addressBalanceRequest(cmd.address)
-
-        await sendCommand('addressBalanceResponse', data, meta.client, cmd.requestId)
-    }
+    })
 }
 
 export const initClient = (client) => {
@@ -275,7 +333,9 @@ export const peerConnect = async (peerId) => {
                     if (!cmd.key) // If no key, then this is a native raft command, so lets wrap it
                         cmd = { key: 'raft', data: cmd }
 
-                    await sendCommand(cmd.key, cmd.data, client, null, cb)
+                    await sendCommand(cmd.key, cmd.data, client)
+
+                    cb()
                 })
             }
 
@@ -296,6 +356,7 @@ export const fetchPeers = async () => {
             const result = JSON.parse(req.response)
 
             console.log('[PeerService] Peers found', result)
+            console.log('[PeerService] Peers connected', local.connectedPeers)
 
             resolve(result)
         }
@@ -306,16 +367,22 @@ export const fetchPeers = async () => {
 
 export const monitorPeers = () => {
     const check = async () => {
-        const peers = await fetchPeers()
+        if (local.peerId) {
+            console.log('[PeerService] Checking peers')
 
-        for (let i in peers) {
-            const peerId = peers[i]
+            const peers = await fetchPeers()
 
-            if (peerId == local.peerId) continue
-            if (local.connectedPeers[peerId]) continue
-            if (local.connectingPeers[peerId]) continue
-            
-            await peerConnect(peerId)
+            for (let i in peers) {
+                const peerId = peers[i]
+
+                if (peerId == local.peerId) continue
+                if (local.connectedPeers[peerId]) continue
+                if (local.connectingPeers[peerId]) continue
+
+                peerConnect(peerId).then(() => {})
+            }
+        } else {
+            console.log('[PeerService] Cant check peers. Reason: not connected')
         }
 
         setTimeout(check, 2000)
@@ -345,14 +412,16 @@ export const init = () => {
             console.log(copy)
 
             if (copy == 'ERROR Error: Lost connection to server.') {
-                local.peer.disconnect()
-                setTimeout(() => local.peer.reconnect(), 200)
+                Util.throttle(() => {
+                    local.peer.disconnect()
+                    setTimeout(() => local.peer.reconnect(), 200)
+                }, 1000)
             }
         }
     })
 
     local.peer.on('open', (id) => {
-        console.log('[PeerService] Connected', id)
+        console.log('[PeerService] Connected as ', id)
 
         local.peerId = id
 
@@ -363,8 +432,6 @@ export const init = () => {
             'heartbeat max': 2000,
             'socket': null
         })
-
-        monitorPeers()
     })
 
     local.peer.on('call', (call) => {
@@ -394,12 +461,14 @@ export const init = () => {
     })
 
     local.peer.on('error', (err) => {
+        local.peerId = null
+
         console.warn('[PeerService] Error', err)
     })
 
     window.config = config
     window.peerConnect = peerConnect
-    window.pageContentDataRequest = pageContentDataRequest
+    window.getPathState = getPathState
     window.addressBalanceRequest = addressBalanceRequest
 
     // Make sure things clean up properly.
@@ -408,6 +477,8 @@ export const init = () => {
             local.peer.destroy()
         }
     }
+
+    monitorPeers()
 
     console.log('[PeerService] Configuration set', config)
 

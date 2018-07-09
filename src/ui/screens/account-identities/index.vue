@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     identities() {console.log('aaa', this.$store.state.network)
-      return this.$store.state.network.entities.identities
+      return this.$store.state.network.identities
     }
   },
   data: () => ({

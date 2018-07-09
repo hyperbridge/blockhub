@@ -1,5 +1,4 @@
 <template>
-
     <!-- PAGE WRAPPER -->
     <div class="page page--w-header page--w-container">
         <!-- PAGE HEADER -->
@@ -21,7 +20,7 @@
             </div>
             <!-- //END PAGE ASIDE PANEL -->
 
-            <slot v-if="this.$store.state.network.connection.internet"></slot>
+            <slot v-if="isConnected"></slot>
 
             <!-- SIDEPANEL -->
             <div class="page-sidepanel invert" id="page-sidepanel">
@@ -32,15 +31,14 @@
             </div>
             <!-- //END SIDEPANEL -->
 
-            <div class="status-bar" v-if="!this.$store.state.network.connection.internet">
-                {{ this.$store.state.network.connectionMessage }}
+            <div class="status-bar" v-if="!isConnected">
+                {{ connectionMessage }}
             </div>
         </div>
         <!-- //END PAGE CONTENT -->
         
     </div>
     <!-- //END PAGE WRAPPER -->
-    
 </template>
 
 
@@ -58,6 +56,14 @@ export default {
         'storeNavigation': () => import('@/ui/components/navigation/store'),
         'productNavigation': () => import('@/ui/components/navigation/product'),
         'projectNavigation': () => import('@/ui/components/navigation/project')
+    },
+    computed: {
+        isConnected() {
+            return this.$store.state.network.connection.internet
+        },
+        connectionMessage() {
+            return this.$store.state.network.connectionMessage
+        }
     },
     data() {
         return {

@@ -31,10 +31,10 @@ export default {
   },
   computed: {
       transaction() {
-        if (!this.$store.state.network.entities.transactions)
+        if (!this.$store.state.network.transactions)
             return
         
-        const transaction = this.$store.state.network.entities.transactions[this.id]
+        const transaction = this.$store.state.network.transactions[this.id]
 
         if (!transaction)
             return

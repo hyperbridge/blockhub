@@ -91,10 +91,10 @@ export default {
   },
   computed: {
     product() {
-      return this.$store.state.marketplace.entities.products ? this.$store.state.marketplace.entities.products['5'] : {}
+      return this.$store.state.marketplace.products ? this.$store.state.marketplace.products['5'] : {}
     },
     article() {
-      return this.$store.state.news.entities.articles ? this.$store.state.news.entities.articles['post1'] : {}
+      return this.$store.state.news.articles ? this.$store.state.news.articles['post1'] : {}
     }
   },
 //   computed: mapGetters([

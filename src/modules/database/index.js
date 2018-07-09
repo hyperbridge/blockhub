@@ -17,7 +17,7 @@ const updateState = () => {
         // schema stuff
     })
 
-    state = { ...normalizedData, ...normalizedData.result }
+    state = { ...rawData, ...normalizedData.entities }
 }
 
 updateState()
@@ -58,8 +58,9 @@ export const mutations = {
     initialized(state) {
         state.initialized = true
     },
-    updateState(state, payload) {
-        state.entities = payload.entities
-        state.result = payload.result
+    updateState(s, payload) {
+        for (let x in payload) {
+            s[x] = payload[x]
+        }
     },
 }

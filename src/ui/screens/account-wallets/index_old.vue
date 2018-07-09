@@ -55,7 +55,7 @@ export default {
   },
   computed: {
     wallets() {
-      return this.$store.state.network.entities.wallets
+      return this.$store.state.network.wallets
     }
   },
   data: () => ({}),

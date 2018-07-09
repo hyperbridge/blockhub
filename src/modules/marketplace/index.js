@@ -35,7 +35,7 @@ const updateState = () => {
         specialProducts: [schema.product]
     })
 
-    state = { ...normalizedData, ...normalizedData.result }
+    state = { ...rawData, ...normalizedData.entities }
 }
 
 updateState()
@@ -86,15 +86,16 @@ export const actions = {
 }
 
 export const mutations = {
-    updateState(state, payload) {
-        state.entities = payload.entities
-        state.result = payload.result
+    updateState(s, payload) {
+        for (let x in payload) {
+            s[x] = payload[x]
+        }
     },
     updateProduct(state, payload) {
         const product = db.marketplace.products.findOne({ 'id': payload.id })
 
         product.name = payload.name
-        state.entities.products[payload.id].name = payload.name
+        state.products[payload.id].name = payload.name
 
         db.save()
     },

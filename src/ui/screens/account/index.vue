@@ -92,7 +92,7 @@ export default {
   },
   computed: {
     identityCount() {
-      return Object.keys(this.$store.state.network.entities.identities).length
+      return Object.keys(this.$store.state.network.identities).length
     }
   },
   data: () => ({
