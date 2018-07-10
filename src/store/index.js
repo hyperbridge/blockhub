@@ -96,7 +96,7 @@ let initializer = (store) => {
         }
     })
 
-    const monitorData = async () => {
+    const monitorPathState = async () => {
         const path = document.location.hash.replace('#', '')
 
         console.log("[BlockHub] Checking peers for state changes on path", path)
@@ -114,10 +114,10 @@ let initializer = (store) => {
         // Do it all over again
         await new Promise(r => setTimeout(r, 5000))
 
-        monitorData()
+        monitorPathState()
     }
 
-    monitorData()
+    monitorPathState()
 
     window.BlockStore = store
 }
@@ -169,13 +169,6 @@ const store = new Vuex.Store({
         }
     }
 })
-
-
-// marketplace.init(() => {
-//     console.log('[BlockHub] Marketplace initialized. Updating store state.')
-
-//     store.state.marketplace = marketplace.state
-// })
 
 
 export default store
