@@ -39,8 +39,8 @@ export let config = {
     RAFT_ENABLED: true,
     ETHEREUM_ENABLED: true,
     DATA_RELAYER_ENABLED: true,
-    CHAOS_MONKEY_ENABLED: true,
-    CHAOS_MONKEY_STRENGTH: null,
+    ENABLED: true,
+    STRENGTH: null,
     DARKLAUNCH: {
         NODE_OPERATORS: false
     }
@@ -239,7 +239,7 @@ export const runCommand = async (cmd, meta = null) => {
                 hash: md5(JSON.stringify(state) + '')
             }
 
-            // if (config.CHAOS_MONKEY_ENABLED && ChaosMonkey.random()) {
+            // if (config.ENABLED && ChaosMonkey.random()) {
             //     req.hash = 'chaos'
             // }
 
@@ -265,7 +265,7 @@ export const runCommand = async (cmd, meta = null) => {
             return
         } else if (cmd.key === 'addressBalanceRequest') {
             if (!config.RELAY) return Promise.resolve()
-            
+
             const req = await addressBalanceRequest(cmd.address)
 
             return resolve(await sendCommand('addressBalanceResponse', req, meta.client, cmd.requestId))
@@ -394,7 +394,7 @@ export const monitorPeers = () => {
 export const init = () => {
     console.log('[PeerService] Initializing')
 
-    ChaosMonkey.init(config.CHAOS_MONKEY_STRENGTH)
+    ChaosMonkey.init(config.STRENGTH)
 
     if (ChaosMonkey.random()) {
         config.DATA_RELAYER_ENABLED = false

@@ -21,8 +21,8 @@ Project structure:
 * `src/modules/` Vue.js module code
 * `src/router/` Vue.js router code
 * `src/store/` Vue.js store code
-* `src/ui/` Vue.js UI layouts, screens and component
-* `src/util/` Util - basically helper code
+* `src/ui/` Vue.js UI layouts, screens and components
+* `src/util/` Utility code - basically helper code
 * `build` Build configuration files
 * `dist/` ES5 generated code, shouldn't be touched directly
 * `static/` Static assets

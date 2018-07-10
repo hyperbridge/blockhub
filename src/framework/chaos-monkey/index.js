@@ -1,31 +1,31 @@
 
 export let config = {
-    CHAOS_MONKEY_ENABLED: true,
-    CHAOS_MONKEY_FORCED: false,
-    CHAOS_MONKEY_STRENGTH: null
+    ENABLED: true,
+    FORCED: false,
+    STRENGTH: null
 }
 
 export const init = function (strength) {
-    config.CHAOS_MONKEY_STRENGTH = strength
+    config.STRENGTH = strength
 
-    if (!config.CHAOS_MONKEY_STRENGTH) {
-        config.CHAOS_MONKEY_STRENGTH = Math.floor(Math.random() * 10)
+    if (!config.STRENGTH) {
+        config.STRENGTH = Math.floor(Math.random() * 10)
     }
 
 }
 
 export const random = function () {
-    if (!config.CHAOS_MONKEY_ENABLED) {
+    if (!config.ENABLED) {
         return false
     }
 
-    if (config.CHAOS_MONKEY_FORCED) {
+    if (config.FORCED) {
         return true
     }
 
     const spec = {
-        0: (10 - config.CHAOS_MONKEY_STRENGTH) / 100,
-        1: config.CHAOS_MONKEY_STRENGTH / 100
+        0: (10 - config.STRENGTH) / 100,
+        1: config.STRENGTH / 100
     }
 
     let i, sum = 0, r = Math.random()
@@ -42,4 +42,4 @@ window.ChaosMonkey = {
 }
 
 // testing
-// ChaosMonkey.config.CHAOS_MONKEY_FORCED = true && BlockStore.dispatch('database/clean')
+// ChaosMonkey.config.FORCED = true && BlockStore.dispatch('database/clean')

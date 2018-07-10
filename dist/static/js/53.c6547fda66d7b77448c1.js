@@ -13,21 +13,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "random", function() { return random; });
 
 var config = {
-    CHAOS_MONKEY_STRENGTH: null
+    STRENGTH: null
 };
 
 var init = function init(strength) {
-    config.CHAOS_MONKEY_STRENGTH = strength;
+    config.STRENGTH = strength;
 
-    if (!config.CHAOS_MONKEY_STRENGTH) {
-        config.CHAOS_MONKEY_STRENGTH = Math.floor(Math.random() * 10);
+    if (!config.STRENGTH) {
+        config.STRENGTH = Math.floor(Math.random() * 10);
     }
 };
 
 var random = function random() {
     var spec = {
-        0: (10 - config.CHAOS_MONKEY_STRENGTH) / 100,
-        1: config.CHAOS_MONKEY_STRENGTH / 100
+        0: (10 - config.STRENGTH) / 100,
+        1: config.STRENGTH / 100
     };
 
     var i = void 0,
@@ -119,8 +119,8 @@ var config = {
     RAFT_ENABLED: true,
     ETHEREUM_ENABLED: true,
     DATA_RELAYER_ENABLED: true,
-    CHAOS_MONKEY_ENABLED: true,
-    CHAOS_MONKEY_STRENGTH: null,
+    ENABLED: true,
+    STRENGTH: null,
     DARKLAUNCH: {
         NODE_OPERATORS: false
     }
@@ -426,7 +426,7 @@ var runCommand = function () {
                         };
 
 
-                        if (config.CHAOS_MONKEY_ENABLED && _chaos_monkey__WEBPACK_IMPORTED_MODULE_5__["random"]()) {
+                        if (config.ENABLED && _chaos_monkey__WEBPACK_IMPORTED_MODULE_5__["random"]()) {
                             data.hash = 'chaos';
                         }
 
@@ -731,7 +731,7 @@ var monitorPeers = function monitorPeers() {
 var init = function init() {
     console.log('[PeerService] Initializing');
 
-    _chaos_monkey__WEBPACK_IMPORTED_MODULE_5__["init"](config.CHAOS_MONKEY_STRENGTH);
+    _chaos_monkey__WEBPACK_IMPORTED_MODULE_5__["init"](config.STRENGTH);
 
     if (_chaos_monkey__WEBPACK_IMPORTED_MODULE_5__["random"]()) {
         config.DATA_RELAYER_ENABLED = false;
