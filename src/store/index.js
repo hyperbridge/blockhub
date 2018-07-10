@@ -13,6 +13,12 @@ import * as cache from '../modules/cache'
 
 Vue.use(Vuex)
 
+/* Usage:
+    - Navigate to http://localhost:8000/template.html#/dev1
+        - Permanent chaos monkey
+    - Navigate to http://localhost:8000/template.html#/dev2
+        - No relaying
+*/
 const CheckDevelopmentMode = () => {
     let hash = document.location.hash.replace('#/', '')
 
