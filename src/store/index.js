@@ -63,7 +63,7 @@ let initializer = (store) => {
                 // Hey devs, lets have some fun
                 // Bye bye data
                 // Things still workie?
-                //store.dispatch('database/clean')
+                store.dispatch('database/clean')
             }
 
             if (developmentMode === 'dev2') {
