@@ -26,23 +26,23 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        .sale-box__title{
-            font-size: 21px;
-            font-weight: bold;
-            padding: 0;
-            margin: 0;
-        }
-        .sale-box__link{
-            background: #5EA72B;
-            color: #fff;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 5px;
-            padding: 8px 13px;
-            text-decoration: none;
-            &:hover{
-                background: #508e25
-            }
+    }
+    .sale-box__title{
+        font-size: 21px;
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+    }
+    .sale-box__link{
+        background: #5EA72B;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        padding: 8px 13px;
+        text-decoration: none;
+        &:hover{
+            background: #508e25
         }
     }
 </style>

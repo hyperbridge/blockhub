@@ -9,9 +9,11 @@
                     <div class="col-12" v-if="product">
                         <h1 class="title margin-top-10 margin-bottom-15">{{ product.name }}</h1>
 
-                        <div class="product__tag" v-for="(tag, index) in product.authorTags" v-bind:key="index">
-                            <a href="#" class="tag-link" @click="filterTag(tag)">{{ tag }}</a>
-                        </div>
+                        <!--<div class="product__tag" v-for="(tag, index) in product.authorTags" v-bind:key="index">-->
+                            <!--<a href="#" class="tag-link" @click="filterTag(tag)">{{ tag }}</a>-->
+                        <!--</div>-->
+
+                        <tags-list :tags="product.authorTags"></tags-list>
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
@@ -341,7 +343,8 @@
             'c-layout': () => import('@/ui/layouts/default'),
             'plan-list': () => import('@/ui/components/game-plans/list.vue'),
             'screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
-            'sale-box': () => import('@/ui/components/sale-box/box')
+            'sale-box': () => import('@/ui/components/sale-box/box'),
+            'tags-list': () => import('@/ui/components/product-tags/index')
         },
         data() {
             return {
