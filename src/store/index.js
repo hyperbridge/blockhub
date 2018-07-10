@@ -15,9 +15,12 @@ Vue.use(Vuex)
 
 /* Usage:
     - Navigate to http://localhost:8000/template.html#/dev1
+        - Best used to test fault-tolerance, ie. does this thing behave appropriately when problems occur
         - Permanent chaos monkey
     - Navigate to http://localhost:8000/template.html#/dev2
-        - No relaying
+        - Best used to test a non-Web3 enabled user can receive data from peer network
+        - Clean database
+        - No relaying, ie. no responding to peer data requests
 */
 const CheckDevelopmentMode = () => {
     let hash = document.location.hash.replace('#/', '')
