@@ -5,6 +5,9 @@ Vue.use(Router)
 
 
 const router = new Router({
+  //mode: 'history',
+  scrollBehavior: () => ({ y: 0 }),
+  linkActiveClass: 'is-active',
   routes: [
     {
       path: '/',
