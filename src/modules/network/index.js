@@ -59,13 +59,9 @@ export const actions = {
     connect(store, payload) {
         console.log('[BlockHub] Network connecting...')
 
-        //store.dispatch('initPeerService')
         store.dispatch('checkInternetConnection')
         store.dispatch('checkEthereumConnection')
     },
-    // initPeerService() {
-    //     PeerService.init()
-    // },
     checkEthereumConnection(store, payload) {
         const success = () => {
             store.state.connection.ethereum = true

@@ -1,4 +1,3 @@
-
 export let config = {
     ENABLED: true,
     FORCED: false,
@@ -34,12 +33,3 @@ export const random = function () {
         if (r <= sum) return i ? true : false
     }
 }
-
-window.ChaosMonkey = {
-    config,
-    init,
-    random
-}
-
-// testing
-// ChaosMonkey.config.FORCED = true && BlockStore.dispatch('database/clean')

@@ -5,21 +5,7 @@ import * as db from '@/db'
 
 let rawData = {
     initial: true,
-    screens: {
-        // '/store': {
-        //     products: [{
-        //         id: null,
-        //         name: null,
-        //         shortDescription: null,
-        //         images: {
-        //             mediumTileUrl: null
-        //         },
-        //         authorTags: [
-        //             'test'
-        //         ]
-        //     }]
-        // }
-    }
+    screens: {}
 }
 
 export let state = null
