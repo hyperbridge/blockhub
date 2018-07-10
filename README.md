@@ -1,24 +1,41 @@
-# blockhub-web-client
+<div align="center">
+  <a href="https://hyperbridge.org/"><img src="https://hyperbridge.org/img/blockhub-logotype-color.svg" width="220" alt="logo"></a>
 
-> BlockHub Web Client
+  <h1><code>blockhub-web-client</code> for BlockHub</h1>
+</div>
+<br>
 
-## Build Setup
+This is the main web client for BlockHub, built primarily with Web3.js and Vue.js.
 
-Clone these repos:
+## Install
 
-`https://github.com/hyperbridge/blockhub-web-client`
+Install Node Package Manager (NVM): 
 
-`https://github.com/hyperbridge/marketplace-protocol`
+```bash
+$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+```
+
+Install Node 8.11.1: 
+
+```bash
+$ nvm install 8.11.1
+```
+
+Then, clone these repos:
+
+```bash
+$ git clone https://github.com/hyperbridge/blockhub-web-client
+$ git clone https://github.com/hyperbridge/marketplace-protocol
+```
 
 
-Install NVM: `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash`
-Install Node 8.11.1: `nvm install 8.11.1`
+## Setup
 
 Make sure you're running Node 8.11.1
 
-In `blockhub-web-client`, run `npm install` then `npm link ../marketplace-protocol` then npm start
+In `blockhub-web-client`, run `npm install` then `npm link ../marketplace-protocol` then `npm start`
 
-It should open `http://localhost:8000` with the web app
+It should open `http://localhost:8000/template.html` with the web app
 
 
 ```bash
@@ -32,7 +49,7 @@ npm start
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-## All Commands
+## Docs
 
 ```bash
 # install dependencies
@@ -56,3 +73,15 @@ npm run e2e
 # run all tests
 npm test
 ```
+
+## Articles
+
+* [TBD](docs/tbd.md)
+
+## Contribution
+
+See [CONTRIBUTING](CONTRIBUTING.md)
+
+## License
+
+[Apache License 2.0](LICENSE.md)
