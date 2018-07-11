@@ -6,16 +6,7 @@
                     <div class="col-12">
                         <ul class="nav nav-tabs justify-content-between">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#3">Overview</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#3">Coins</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#3">Tokens</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#3">Content</a>
+                                <a class="nav-link active" href="#">Overview</a>
                             </li>
                         </ul>
                         <div class="action-wallets">

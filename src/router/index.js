@@ -95,9 +95,19 @@ const router = new Router({
       component: () => import('@/ui/screens/account-wallets')
     },
     {
+      path: '/account/new-wallet',
+      name: 'New Wallet',
+      component: () => import('@/ui/screens/account-new-wallet')
+    },
+    {
       path: '/account/identities',
       name: 'Identities',
       component: () => import('@/ui/screens/account-identities')
+    },
+    {
+      path: '/account/new-identity',
+      name: 'New Identity',
+      component: () => import('@/ui/screens/account-new-identity')
     },
     {
       path: '/wallet/:id',

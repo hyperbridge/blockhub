@@ -41,7 +41,7 @@
                     <div class="col-12 col-lg-4" v-for="(item, index) in products" v-bind:key="index">
                         <div class="card invert game-grid__item">
                             <div class="card-body padding-0">
-                                <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.mediumTileUrl" /></a>
+                                <a :href="`#/product/${item.id}`"><img class="card-img-top" :src="item.images.mediumTileUrl" /></a>
                                 <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
                                 <p class="card-text">{{ item.shortDescription }} </p>
 
@@ -68,7 +68,7 @@
                     <div class="col-12 col-lg-4" v-for="(item, index) in products" v-bind:key="index">
                         <div class="card invert game-grid__item">
                             <div class="card-body padding-0">
-                                <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.mediumTileUrl" /></a>
+                                <a :href="`#/product/${item.id}`"><img class="card-img-top" :src="item.images.mediumTileUrl" /></a>
                                 <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
                                 <p class="card-text">{{ item.shortDescription }} </p>
 

@@ -5,8 +5,8 @@
             <!-- PAGE HEADING -->
             <div class="page-heading">
                 <div class="page-heading__container">
-                    <h1 class="title">Home</h1>
-                    <p class="caption">Getter done</p>
+                    <h1 class="title">Sitemap</h1>
+                    <p class="caption">Mostly for testing</p>
                 </div>
             </div>
             <!-- //END PAGE HEADING -->
@@ -16,7 +16,6 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h2>Links</h2>
                                 <ul>
                                   <li><a href="#/news">News</a></li>
                                   <li><a href="#/help">Help</a></li>
@@ -37,11 +36,13 @@
                                   <li><a href="#/account/signup">Account > Sign Up</a></li>
                                   <li><a href="#/account/signin">Account > Sign In</a></li>
                                   <li><a href="#/account/wallets">Account > Wallets</a></li>
-                                  <li><a href="#/account/transactions">Account > Transactions</a></li>
+                                  <li><a href="#/account/new-wallet">Account > New Wallet</a></li>
                                   <li><a href="#/account/identities">Account > Identities</a></li>
+                                  <li><a href="#/account/new-identity">Account > New Identity</a></li>
 
                                   <li><a href="#/wallet/1">Wallet #1</a></li>
                                   <li><a href="#/wallet/1/transactions">Wallet #1 > Transactions</a></li>
+                                  <li><a href="#/wallet/1/tokens">Wallet #1 > Tokens</a></li>
                                   <li><a href="#/wallet/1/send">Wallet #1 > Send</a></li>
                                   <li><a href="#/wallet/1/receive">Wallet #1 > Receive</a></li>
 

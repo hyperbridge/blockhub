@@ -12,9 +12,21 @@
                 </a>
             </li>
             <li>
+                <a href="#/account/new-wallet">
+                    <span class="icon fa fa-home"></span>
+                    <span class="text">New Wallet</span>
+                </a>
+            </li>
+            <li>
                 <a href="#/account/identities">
                     <span class="icon fa fa-home"></span>
                     <span class="text">Identities</span>
+                </a>
+            </li>
+            <li>
+                <a href="#/account/new-identity">
+                    <span class="icon fa fa-home"></span>
+                    <span class="text">New Identity</span>
                 </a>
             </li>
         </ul>

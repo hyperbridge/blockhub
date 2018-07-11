@@ -12,7 +12,7 @@
         <!-- //END PAGE CONTAINER -->
         
         <!-- PAGE CONTENT WRAPPER -->
-        <div class="page__content page-aside--hidden" id="page-content">
+        <div class="page__content page__content-invert invert page-aside--hidden" id="page-content">
             
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert" id="page-aside">
@@ -20,7 +20,7 @@
             </div>
             <!-- //END PAGE ASIDE PANEL -->
 
-            <slot v-if="isConnected"></slot>
+            <slot></slot>
 
             <!-- SIDEPANEL -->
             <div class="page-sidepanel invert" id="page-sidepanel">
