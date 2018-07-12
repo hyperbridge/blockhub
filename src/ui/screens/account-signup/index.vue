@@ -24,7 +24,7 @@
                             <div class="tab-container">
                                 <div class="tab-card">
                                     <h4>Personal Information</h4>
-                                    <form action="/" method="post" class="form-inline">
+                                    <form action="/" method="post">
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
@@ -41,10 +41,14 @@
                                                 </div>
                                             </div>
                                             <div class="col">
-                                                <div class="form-group">
+                                                <div class="input-group">
                                                     <label class="sr-only">Birthday</label>
-                                                    <input type="text" class="form-control" placeholder="Birthday"
-                                                           name="birthday">
+                                                    <input type="text" class="form-control" placeholder="Birthday">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-calendar-alt"></i>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -66,14 +70,16 @@
 
                                         <h2>Introduction</h2>
 
-                                        <p>These Website Standard Terms and Conditions written on this webpage shall manage
+                                        <p>These Website Standard Terms and Conditions written on this webpage shall
+                                            manage
                                             your use of our website, <span class="highlight preview_website_name">Webiste Name</span>
                                             accessible at <span class="highlight preview_website_url">Website.com</span>.
                                         </p>
 
                                         <p>These Terms will be applied fully and affect to your use of this Website. By
                                             using this Website, you agreed to accept all terms and conditions written in
-                                            here. You must not use this Website if you disagree with any of these Website
+                                            here. You must not use this Website if you disagree with any of these
+                                            Website
                                             Standard Terms and Conditions.</p>
 
                                         <p>Minors or people below 18 years old are not allowed to use this Website.</p>
@@ -81,7 +87,8 @@
                                         <h2>Intellectual Property Rights</h2>
 
                                         <p>Other than the content you own, under these Terms, <span
-                                            class="highlight preview_company_name">Company Name</span> and/or its licensors
+                                            class="highlight preview_company_name">Company Name</span> and/or its
+                                            licensors
                                             own all the intellectual property rights and materials contained in this
                                             Website.</p>
 
@@ -98,22 +105,31 @@
                                                 material;
                                             </li>
                                             <li>publicly performing and/or showing any Website material;</li>
-                                            <li>using this Website in any way that is or may be damaging to this Website;
+                                            <li>using this Website in any way that is or may be damaging to this
+                                                Website;
                                             </li>
-                                            <li>using this Website in any way that impacts user access to this Website;</li>
-                                            <li>using this Website contrary to applicable laws and regulations, or in any
+                                            <li>using this Website in any way that impacts user access to this
+                                                Website;
+                                            </li>
+                                            <li>using this Website contrary to applicable laws and regulations, or in
+                                                any
                                                 way may cause harm to the Website, or to any person or business entity;
                                             </li>
-                                            <li>engaging in any data mining, data harvesting, data extracting or any other
+                                            <li>engaging in any data mining, data harvesting, data extracting or any
+                                                other
                                                 similar activity in relation to this Website;
                                             </li>
                                             <li>using this Website to engage in any advertising or marketing.</li>
                                         </ul>
 
-                                        <p>Certain areas of this Website are restricted from being access by you and <span
-                                            class="highlight preview_company_name">Company Name</span> may further restrict
-                                            access by you to any areas of this Website, at any time, in absolute discretion.
-                                            Any user ID and password you may have for this Website are confidential and you
+                                        <p>Certain areas of this Website are restricted from being access by you and
+                                            <span
+                                                class="highlight preview_company_name">Company Name</span> may further
+                                            restrict
+                                            access by you to any areas of this Website, at any time, in absolute
+                                            discretion.
+                                            Any user ID and password you may have for this Website are confidential and
+                                            you
                                             must maintain confidentiality as well.</p>
 
                                         <h2>Your Content</h2>
@@ -121,12 +137,16 @@
                                         <p>In these Website Standard Terms and Conditions, “Your Content” shall mean any
                                             audio, video text, images or other material you choose to display on this
                                             Website. By displaying Your Content, you grant <span
-                                                class="highlight preview_company_name">Company Name</span> a non-exclusive,
-                                            worldwide irrevocable, sub licensable license to use, reproduce, adapt, publish,
+                                                class="highlight preview_company_name">Company Name</span> a
+                                            non-exclusive,
+                                            worldwide irrevocable, sub licensable license to use, reproduce, adapt,
+                                            publish,
                                             translate and distribute it in any and all media.</p>
 
-                                        <p>Your Content must be your own and must not be invading any third-party's rights.
-                                            <span class="highlight preview_company_name">Company Name</span> reserves the
+                                        <p>Your Content must be your own and must not be invading any third-party's
+                                            rights.
+                                            <span class="highlight preview_company_name">Company Name</span> reserves
+                                            the
                                             right to remove any of Your Content from this Website at any time without
                                             notice.</p>
 
@@ -142,38 +162,49 @@
 
                                         <p>In no event shall <span
                                             class="highlight preview_company_name">Company Name</span>, nor any of its
-                                            officers, directors and employees, shall be held liable for anything arising out
-                                            of or in any way connected with your use of this Website whether such liability
+                                            officers, directors and employees, shall be held liable for anything arising
+                                            out
+                                            of or in any way connected with your use of this Website whether such
+                                            liability
                                             is under contract. &nbsp;<span class="highlight preview_company_name">Company Name</span>,
-                                            including its officers, directors and employees shall not be held liable for any
+                                            including its officers, directors and employees shall not be held liable for
+                                            any
                                             indirect, consequential or special liability arising out of or in any way
                                             related to your use of this Website.</p>
 
                                         <h2>Indemnification<p></p>
 
                                             <p>You hereby indemnify to the fullest extent <span
-                                                class="highlight preview_company_name">Company Name</span> from and against
-                                                any and/or all liabilities, costs, demands, causes of action, damages and
-                                                expenses arising in any way related to your breach of any of the provisions
+                                                class="highlight preview_company_name">Company Name</span> from and
+                                                against
+                                                any and/or all liabilities, costs, demands, causes of action, damages
+                                                and
+                                                expenses arising in any way related to your breach of any of the
+                                                provisions
                                                 of these Terms.</p>
 
                                         </h2>
                                         <h2>Severability</h2>
 
-                                        <p>If any provision of these Terms is found to be invalid under any applicable law,
+                                        <p>If any provision of these Terms is found to be invalid under any applicable
+                                            law,
                                             such provisions shall be deleted without affecting the remaining provisions
                                             herein.</p>
 
                                         <h2>Variation of Terms</h2>
 
-                                        <p><span class="highlight preview_company_name">Company Name</span> is permitted to
-                                            revise these Terms at any time as it sees fit, and by using this Website you are
+                                        <p><span class="highlight preview_company_name">Company Name</span> is permitted
+                                            to
+                                            revise these Terms at any time as it sees fit, and by using this Website you
+                                            are
                                             expected to review these Terms on a regular basis.</p>
 
                                         <h2>Assignment</h2>
 
-                                        <p>The <span class="highlight preview_company_name">Company Name</span> is allowed
-                                            to assign, transfer, and subcontract its rights and/or obligations under these
+                                        <p>The <span class="highlight preview_company_name">Company Name</span> is
+                                            allowed
+                                            to assign, transfer, and subcontract its rights and/or obligations under
+                                            these
                                             Terms without any notification. However, you are not allowed to assign,
                                             transfer, or subcontract any of your rights and/or obligations under these
                                             Terms.</p>
@@ -181,16 +212,20 @@
                                         <h2>Entire Agreement</h2>
 
                                         <p>These Terms constitute the entire agreement between <span
-                                            class="highlight preview_company_name">Company Name</span> and you in relation
+                                            class="highlight preview_company_name">Company Name</span> and you in
+                                            relation
                                             to your use of this Website, and supersede all prior agreements and
                                             understandings.</p>
 
                                         <h2>Governing Law &amp; Jurisdiction</h2>
 
-                                        <p>These Terms will be governed by and interpreted in accordance with the laws of
+                                        <p>These Terms will be governed by and interpreted in accordance with the laws
+                                            of
                                             the State of <span class="highlight preview_country">Country</span>, and you
-                                            submit to the non-exclusive jurisdiction of the state and federal courts located
-                                            in <span class="highlight preview_country">Country</span> for the resolution of
+                                            submit to the non-exclusive jurisdiction of the state and federal courts
+                                            located
+                                            in <span class="highlight preview_country">Country</span> for the resolution
+                                            of
                                             any disputes.</p>
 
                                     </div>
@@ -231,7 +266,8 @@
                                                 <div class="identity-block">
                                                     <div class="avatar">
                                                         <a href="#3" class="avatar_upload_btn">
-                                                            <img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMxOS45ODIgMzE5Ljk4MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzE5Ljk4MiAzMTkuOTgyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjY0cHgiIGhlaWdodD0iNjRweCI+CjxnPgoJPHBhdGggZD0iTTIzNC45OTEsMzE5Ljk4MmMyLjYxOCwwLDUuMjItMS4wNzgsNy4wNzEtMi45MjlzMi45MjktNC40NTMsMi45MjktNy4wNzF2LTE0MGg2NSAgIGMzLjkyMi0wLjAwOCw3LjcyMS0yLjU1Miw5LjIyMS02LjE3NnMwLjYxLTguMTA5LTIuMTU5LTEwLjg4NmwtMTUwLTE1MEMxNjUuMjAyLDEuMDc0LDE2Mi42MDQsMCwxNTkuOTkxLDAgICBjLTIuNjE0LDAtNS4yMTIsMS4wNzQtNy4wNjIsMi45MmwtMTUwLDE1MGMtMi43NjksMi43NzctMy42NTksNy4yNjMtMi4xNTksMTAuODg2YzEuNSwzLjYyNCw1LjI5OSw2LjE2OCw5LjIyMSw2LjE3Nmg2NXYxNDAgICBjMCwyLjYxOCwxLjA3OCw1LjIyLDIuOTI5LDcuMDcxczQuNDUzLDIuOTI5LDcuMDcxLDIuOTI5SDIzNC45OTF6IiBmaWxsPSIjNjQ3M2Y0Ii8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
+                                                            <img
+                                                                src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMxOS45ODIgMzE5Ljk4MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzE5Ljk4MiAzMTkuOTgyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjY0cHgiIGhlaWdodD0iNjRweCI+CjxnPgoJPHBhdGggZD0iTTIzNC45OTEsMzE5Ljk4MmMyLjYxOCwwLDUuMjItMS4wNzgsNy4wNzEtMi45MjlzMi45MjktNC40NTMsMi45MjktNy4wNzF2LTE0MGg2NSAgIGMzLjkyMi0wLjAwOCw3LjcyMS0yLjU1Miw5LjIyMS02LjE3NnMwLjYxLTguMTA5LTIuMTU5LTEwLjg4NmwtMTUwLTE1MEMxNjUuMjAyLDEuMDc0LDE2Mi42MDQsMCwxNTkuOTkxLDAgICBjLTIuNjE0LDAtNS4yMTIsMS4wNzQtNy4wNjIsMi45MmwtMTUwLDE1MGMtMi43NjksMi43NzctMy42NTksNy4yNjMtMi4xNTksMTAuODg2YzEuNSwzLjYyNCw1LjI5OSw2LjE2OCw5LjIyMSw2LjE3Nmg2NXYxNDAgICBjMCwyLjYxOCwxLjA3OCw1LjIyLDIuOTI5LDcuMDcxczQuNDUzLDIuOTI5LDcuMDcxLDIuOTI5SDIzNC45OTF6IiBmaWxsPSIjNjQ3M2Y0Ii8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg=="/>
                                                         </a>
                                                     </div>
                                                     <div class="user_info">
@@ -260,7 +296,8 @@
                                                     </div>
                                                     <div class="wallet_number">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="wallet_number" placeholder="Wallet number"/>
+                                                            <input type="text" class="form-control" name="wallet_number"
+                                                                   placeholder="Wallet number"/>
                                                         </div>
                                                         <button>
                                                             <i class="fas fa-redo-alt"></i>
@@ -277,7 +314,8 @@
                                                         <i class="fas fa-check"></i>
                                                     </div>
                                                     <div class="avatar">
-                                                        <img src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1" />
+                                                        <img
+                                                            src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
                                                     </div>
                                                     <div class="user_info">
                                                         <div class="form-group margin-bottom-5">
@@ -348,59 +386,60 @@
                                     <div class="row margin-top-40">
                                         <div class="col">
                                             <div class="identity-block finish">
-                                                    <div class="block-icon warning">
-                                                        <i class="fas fa-exclamation-triangle"></i>
+                                                <div class="block-icon warning">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                </div>
+                                                <div class="avatar">
+                                                    <img
+                                                        src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
+                                                </div>
+                                                <div class="user_info">
+                                                    <div class="form-group margin-bottom-5">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               name="profile_name"
+                                                               placeholder="Profile name"
+                                                               readonly
+                                                        />
                                                     </div>
-                                                    <div class="avatar">
-                                                        <img src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1" />
-                                                    </div>
-                                                    <div class="user_info">
-                                                        <div class="form-group margin-bottom-5">
-                                                            <input type="text"
-                                                                   class="form-control"
-                                                                   name="profile_name"
-                                                                   placeholder="Profile name"
-                                                                   readonly
-                                                            />
-                                                        </div>
-                                                        <p>User</p>
-                                                    </div>
-                                                    <div class="unknown_blk">
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <div class="counts">
+                                                    <p>User</p>
+                                                </div>
+                                                <div class="unknown_blk">
+                                                    <a href="#3">
+                                                        <i class="fas fa-plus"></i>
+                                                    </a>
+                                                    <a href="#3">
+                                                        <i class="fas fa-plus"></i>
+                                                    </a>
+                                                    <a href="#3">
+                                                        <i class="fas fa-plus"></i>
+                                                    </a>
+                                                    <a href="#3">
+                                                        <i class="fas fa-plus"></i>
+                                                    </a>
+                                                    <div class="counts">
                                                             <span>
                                                                 0 <i class="fas fa-long-arrow-alt-down"></i>
                                                             </span>
-                                                            <span>
+                                                        <span>
                                                                 0 <i class="fas fa-long-arrow-alt-up"></i>
                                                             </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="wallet_number">
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                   class="form-control"
-                                                                   name="wallet_number"
-                                                                   placeholder="Wallet number"
-                                                                   readonly
-                                                            />
-                                                        </div>
-                                                        <button>
-                                                            <i class="fas fa-copy"></i>
-                                                        </button>
                                                     </div>
                                                 </div>
+                                                <div class="wallet_number">
+                                                    <div class="form-group">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               name="wallet_number"
+                                                               placeholder="Wallet number"
+                                                               readonly
+                                                        />
+                                                    </div>
+                                                    <button>
+                                                        <i class="fas fa-copy"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col">
                                             <div class="tab-card margin-top-5 margin-bottom-15">
@@ -423,6 +462,44 @@
                                                         <h5>Govermment Issued ID</h5>
                                                         <p>Maximum file size is 8mb</p>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row margin-top-40">
+                                        <div class="col">
+                                            <div class="verification-info">
+                                                <div class="verification-icon success">
+                                                    <i class="fas fa-lock"></i>
+                                                </div>
+                                                <div class="verification-text">
+                                                    <h4>ID Verification Pending</h4>
+                                                    <p>Identity Proof reviewed and approved by a high
+                                                        trust profile. Gains 15% more trust for interactions.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="verification-info">
+                                                <div class="verification-icon warning">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                </div>
+                                                <div class="verification-text">
+                                                    <h4>ID Verification Pending</h4>
+                                                    <p>Identity Proof submited but not yet reviewed. Trust bonus of 5%
+                                                        is activated</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="verification-info">
+                                                <div class="verification-icon danger">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                </div>
+                                                <div class="verification-text">
+                                                    <h4>ID Verification Pending</h4>
+                                                    <p>Identity Proof not submitted at all, trust must be gained by
+                                                        simple interactions</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -455,12 +532,12 @@
 
 <style lang="scss" scoped>
 
-    .nav-tabs{
+    .nav-tabs {
         border-bottom: none;
         position: relative;
-        .nav-item{
+        .nav-item {
             border-radius: 8px 8px 0 0;
-            a{
+            a {
                 color: #606079;
                 background: #393955;
                 padding: 0 15px;
@@ -469,7 +546,7 @@
                 border: none;
                 position: relative;
                 box-shadow: 0 -1px 10px rgba(0, 0, 0, .2);
-                &:before{
+                &:before {
                     content: "";
                     position: absolute;
                     height: 23px;
@@ -478,10 +555,10 @@
                     border: 15px solid transparent;
                     border-bottom: 15px solid #393955;
                     border-right: 15px solid #393955;
-                    -webkit-filter: drop-shadow(-5px 0px 3px rgba(0,0,0,.15));
-                    filter: drop-shadow(-5px 0px 3px rgba(0,0,0,.1));
+                    -webkit-filter: drop-shadow(-5px 0px 3px rgba(0, 0, 0, .15));
+                    filter: drop-shadow(-5px 0px 3px rgba(0, 0, 0, .1));
                 }
-                &:after{
+                &:after {
                     content: "";
                     position: absolute;
                     height: 23px;
@@ -490,36 +567,37 @@
                     border: 15px solid transparent;
                     border-bottom: 15px solid #393955;
                     border-left: 15px solid #393955;
-                    -webkit-filter: drop-shadow(5px 0px 3px rgba(0,0,0,.15));
-                    filter: drop-shadow(5px 0px 3px rgba(0,0,0,.15));
+                    -webkit-filter: drop-shadow(5px 0px 3px rgba(0, 0, 0, .15));
+                    filter: drop-shadow(5px 0px 3px rgba(0, 0, 0, .15));
                 }
-                &.active{
+                &.active {
                     border-bottom: none;
                     background: #3e3e5c;
                     z-index: 8;
-                    &:before{
+                    &:before {
                         border-bottom-color: #3e3e5c;
                         border-right-color: #3e3e5c;
                     }
-                    &:after{
+                    &:after {
                         border-bottom-color: #3e3e5c;
                         border-left-color: #3e3e5c;
                     }
                 }
             }
-            &:first-child{
-                a{
-                    box-shadow: 0 0 20px rgba(0,0,0,.2);
-                    &:before{
+            &:first-child {
+                a {
+                    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+                    &:before {
                         display: none;
                     }
                 }
             }
         }
     }
-    .tab-pane{
+
+    .tab-pane {
         position: relative;
-        &:before{
+        &:before {
             content: "";
             position: absolute;
             left: 0;
@@ -541,7 +619,7 @@
                 padding: 8px 10px;
                 border: 1px solid #373752;
                 margin-bottom: 15px;
-                &:last-child{
+                &:last-child {
                     margin: 0;
                 }
                 input {
@@ -562,28 +640,28 @@
                 }
             }
         }
-        .action{
+        .action {
             margin-top: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: nowrap;
-            div{
+            div {
                 display: flex;
                 align-items: center;
                 width: auto;
-                .switch{
+                .switch {
                     margin: 0;
                 }
-                .label{
+                .label {
                     font-size: 16px;
                     margin-left: 10px;
-                    a{
+                    a {
                         color: #fff;
                         text-decoration: underline;
                     }
                 }
-                .btn{
+                .btn {
                     padding: 5px 10px;
                     font-size: 15px;
                     text-transform: uppercase;
@@ -593,7 +671,7 @@
         }
     }
 
-    .identity-block{
+    .identity-block {
         padding: 10px;
         background: #303046;
         border-radius: 5px;
@@ -602,7 +680,7 @@
         overflow: hidden;
         width: 100%;
         position: relative;
-        .block-icon{
+        .block-icon {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -613,15 +691,15 @@
             border-radius: 100%;
             width: 25px;
             height: 25px;
-            &.done{
+            &.done {
                 background: #00a100;
             }
-            &.warning{
+            &.warning {
                 background: #ff6c5e;
                 font-size: 13px;
             }
         }
-        .avatar{
+        .avatar {
             width: 60px;
             height: 60px;
             display: inline-block;
@@ -631,13 +709,13 @@
             background: #1f202f;
             border-radius: 100%;
             border: 1px solid #1c1c2a;
-            img{
+            img {
                 width: 60px;
                 height: 60px;
                 object-fit: cover;
             }
-            a{
-                img{
+            a {
+                img {
                     width: 28px;
                     height: auto;
                     vertical-align: middle;
@@ -645,17 +723,17 @@
                 }
             }
         }
-        .user_info{
+        .user_info {
             display: inline-block;
             float: right;
-            width: calc( 100% - 75px );
+            width: calc(100% - 75px);
         }
-        .unknown_blk{
+        .unknown_blk {
             display: inline-block;
             float: left;
             width: 100%;
             margin: 10px 0;
-            a{
+            a {
                 width: 35px;
                 height: 35px;
                 display: inline-block;
@@ -664,26 +742,26 @@
                 text-align: center;
                 line-height: 33px;
                 font-size: 16px;
-                border: 1px solid#3b3b55;
+                border: 1px solid #3b3b55;
                 background: transparent;
                 margin: 5px 10px 5px 0;
                 color: rgba(255, 255, 255, 0);
                 &:hover,
-                &:first-child{
+                &:first-child {
                     color: #6473f4;
                     background: #222131;
                     border: 1px solid #1b1b28;
                 }
             }
         }
-        .wallet_number{
-            .form-group{
+        .wallet_number {
+            .form-group {
                 display: inline-block;
-                width: calc( 100% - 40px );
+                width: calc(100% - 40px);
                 float: left;
                 margin-bottom: 0;
             }
-            button{
+            button {
                 display: inline-block;
                 float: right;
                 width: 30px;
@@ -694,37 +772,37 @@
                 height: 38px;
                 background: transparent;
                 &:focus,
-                &:active{
+                &:active {
                     box-shadow: none;
                     outline: none;
                 }
             }
         }
-        &.finish{
+        &.finish {
             background: #1d2031;
-            input:read-only{
+            input:read-only {
                 border: none;
                 background: transparent;
                 box-shadow: none;
                 color: #fff;
                 padding: 9px 0;
             }
-            .unknown_blk{
-                a{
+            .unknown_blk {
+                a {
                     border-color: #404354;
                     color: #404354;
                 }
-                .counts{
+                .counts {
                     display: inline-block;
                     float: right;
-                    span{
+                    span {
                         width: 45px;
                         font-size: 15px;
                         color: #fff;
                         line-height: 45px;
                         display: inline-block;
                         text-align: right;
-                        i{
+                        i {
                             font-size: 18px;
                             margin-left: 5px;
                         }
@@ -732,15 +810,16 @@
                     }
                 }
             }
-            button{
+            button {
                 color: #fff;
             }
         }
     }
-    .button_blk{
+
+    .button_blk {
         overflow: hidden;
         display: block;
-        .button{
+        .button {
             display: inline-block;
             width: 120px;
             padding: 20px;
@@ -752,15 +831,45 @@
             float: left;
             cursor: pointer;
         }
-        .description{
+        .description {
             display: inline-block;
             float: right;
-            width: calc( 100% - 135px );
+            width: calc(100% - 135px);
             font-size: 14px;
-            h5{
+            h5 {
                 margin-bottom: 5px;
                 font-size: 14px;
             }
+        }
+    }
+
+    .verification-info {
+        display: inline-block;
+        width: 100%;
+        float: left;
+        .verification-icon {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 28px;
+            color: #1d2031;
+            font-size: 15px;
+            border-radius: 100%;
+            &.success {
+                background: #43ca85;
+            }
+            &.warning {
+                background: #f8dc78;
+            }
+            &.danger {
+                background: #f5595d;
+            }
+        }
+        .verification-text {
+            display: inline-block;
+            float: right;
+            width: calc(100% - 45px);
         }
     }
 </style>
