@@ -164,10 +164,10 @@
 
 <script>
     const updateProduct = function () {
-        if (!this.$store.state.marketplace.entities.products)
+        if (!this.$store.state.marketplace.products)
             return
 
-        const product = this.$store.state.marketplace.entities.products[this.id]
+        const product = this.$store.state.marketplace.products[this.id]
 
         if (!product)
             return
