@@ -7,7 +7,7 @@
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="step1-tab" data-toggle="tab" href="#step1" role="tab"
+                            <a class="nav-link" id="step1-tab" data-toggle="tab" href="#step1" role="tab"
                                aria-controls="step1-tab" aria-expanded="true">Step 1</a>
                         </li>
                         <li class="nav-item">
@@ -15,7 +15,7 @@
                                aria-controls="step2-tab">Step 2</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="step3-tab" data-toggle="tab" href="#step3" role="tab"
+                            <a class="nav-link active" id="step3-tab" data-toggle="tab" href="#step3" role="tab"
                                aria-controls="step3-tab">Step 3</a>
                         </li>
                     </ul>
@@ -219,7 +219,7 @@
                             </div>
 
                         </div>
-                        <div class="tab-pane fade show active" id="step2" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="tab-pane fade" id="step2" role="tabpanel" aria-labelledby="step2-tab">
                             <div class="tab-container">
                                 <div class="padding-40">
                                     <h3>Welcome, UserName. Let's build your main identity.</h3>
@@ -244,26 +244,196 @@
                                                         </div>
                                                         <p>User</p>
                                                     </div>
+                                                    <div class="unknown_blk">
+                                                        <a href="#3">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                        <a href="#3">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                        <a href="#3">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                        <a href="#3">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="wallet_number">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="wallet_number" placeholder="Wallet number"/>
+                                                        </div>
+                                                        <button>
+                                                            <i class="fas fa-redo-alt"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="tab-card">
                                                 <h4>Preview your identity</h4>
+                                                <div class="identity-block finish">
+                                                    <div class="block-icon done">
+                                                        <i class="fas fa-check"></i>
+                                                    </div>
+                                                    <div class="avatar">
+                                                        <img src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1" />
+                                                    </div>
+                                                    <div class="user_info">
+                                                        <div class="form-group margin-bottom-5">
+                                                            <input type="text"
+                                                                   class="form-control"
+                                                                   name="profile_name"
+                                                                   placeholder="Profile name"
+                                                                   readonly
+                                                            />
+                                                        </div>
+                                                        <p>User</p>
+                                                    </div>
+                                                    <div class="unknown_blk">
+                                                        <a href="#3">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                        <a href="#3">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                        <a href="#3">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                        <a href="#3">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                        <div class="counts">
+                                                            <span>
+                                                                0 <i class="fas fa-long-arrow-alt-down"></i>
+                                                            </span>
+                                                            <span>
+                                                                0 <i class="fas fa-long-arrow-alt-up"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="wallet_number">
+                                                        <div class="form-group">
+                                                            <input type="text"
+                                                                   class="form-control"
+                                                                   name="wallet_number"
+                                                                   placeholder="Wallet number"
+                                                                   readonly
+                                                            />
+                                                        </div>
+                                                        <button>
+                                                            <i class="fas fa-copy"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="action justify-content-end">
+                                <div class="align-self-end">
+                                    <a href="#3" class="btn btn-success">Next step</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="step3" role="tabpanel" aria-labelledby="profile-tab">
-                            <h3>Verify your identity (Optional)</h3>
-                            <p>Submit a proof of identity issued by your country of residence.
-                                This is optional but allows you to start with 1000 trust after verification, allowing
-                                you to
-                                reassure reviews of other user’s proofs of identity. You can skip this and finish
-                                later.</p>
-
+                        <div class="tab-pane fade show active" id="step3" role="tabpanel" aria-labelledby="step3-tab">
+                            <div class="tab-container">
+                                <div class="padding-20">
+                                    <h3>Verify your identity(Optional)</h3>
+                                    <p>Submit a proof of identity by your country of residence.<br>
+                                        This is optional but allows you to start with 1000 trust after verification,
+                                        allowing you to reassure reviews of other user's proofs of identity.
+                                        You can skip and finish later.</p>
+                                    <div class="row margin-top-40">
+                                        <div class="col">
+                                            <div class="identity-block finish">
+                                                    <div class="block-icon warning">
+                                                        <i class="fas fa-exclamation-triangle"></i>
+                                                    </div>
+                                                    <div class="avatar">
+                                                        <img src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1" />
+                                                    </div>
+                                                    <div class="user_info">
+                                                        <div class="form-group margin-bottom-5">
+                                                            <input type="text"
+                                                                   class="form-control"
+                                                                   name="profile_name"
+                                                                   placeholder="Profile name"
+                                                                   readonly
+                                                            />
+                                                        </div>
+                                                        <p>User</p>
+                                                    </div>
+                                                    <div class="unknown_blk">
+                                                        <a href="#3">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                        <a href="#3">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                        <a href="#3">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                        <a href="#3">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                        <div class="counts">
+                                                            <span>
+                                                                0 <i class="fas fa-long-arrow-alt-down"></i>
+                                                            </span>
+                                                            <span>
+                                                                0 <i class="fas fa-long-arrow-alt-up"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="wallet_number">
+                                                        <div class="form-group">
+                                                            <input type="text"
+                                                                   class="form-control"
+                                                                   name="wallet_number"
+                                                                   placeholder="Wallet number"
+                                                                   readonly
+                                                            />
+                                                        </div>
+                                                        <button>
+                                                            <i class="fas fa-copy"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="tab-card margin-top-5 margin-bottom-15">
+                                                <div class="button_blk">
+                                                    <div class="button">
+                                                        select file
+                                                    </div>
+                                                    <div class="description">
+                                                        <h5>Govermment Issued ID</h5>
+                                                        <p>Maximum file size is 8mb</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-card">
+                                                <div class="button_blk">
+                                                    <div class="button">
+                                                        select file
+                                                    </div>
+                                                    <div class="description">
+                                                        <h5>Govermment Issued ID</h5>
+                                                        <p>Maximum file size is 8mb</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="action justify-content-end">
+                                <div class="align-self-end">
+                                    <a href="#3" class="btn btn-success">Complete</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -367,7 +537,7 @@
             .tab-card {
                 background: #383853;
                 border-radius: 5px;
-                padding: 10px;
+                padding: 8px 10px;
                 border: 1px solid #373752;
                 margin-bottom: 15px;
                 &:last-child{
@@ -430,6 +600,26 @@
         display: inline-block;
         overflow: hidden;
         width: 100%;
+        position: relative;
+        .block-icon{
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #303046;
+            font-size: 16px;
+            text-align: center;
+            line-height: 25px;
+            border-radius: 100%;
+            width: 25px;
+            height: 25px;
+            &.done{
+                background: #00a100;
+            }
+            &.warning{
+                background: #ff6c5e;
+                font-size: 13px;
+            }
+        }
         .avatar{
             width: 60px;
             height: 60px;
@@ -441,15 +631,134 @@
             border-radius: 100%;
             border: 1px solid #1c1c2a;
             img{
-                width: 28px;
-                vertical-align: middle;
-                margin-top: 12px;
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+            }
+            a{
+                img{
+                    width: 28px;
+                    vertical-align: middle;
+                    margin-top: 12px;
+                }
             }
         }
         .user_info{
             display: inline-block;
             float: right;
             width: calc( 100% - 75px );
+        }
+        .unknown_blk{
+            display: inline-block;
+            float: left;
+            width: 100%;
+            margin: 10px 0;
+            a{
+                width: 35px;
+                height: 35px;
+                display: inline-block;
+                float: left;
+                border-radius: 100%;
+                text-align: center;
+                line-height: 33px;
+                font-size: 16px;
+                border: 1px solid#3b3b55;
+                background: transparent;
+                margin: 5px 10px 5px 0;
+                color: rgba(255, 255, 255, 0);
+                &:hover,
+                &:first-child{
+                    color: #6473f4;
+                    background: #222131;
+                    border: 1px solid #1b1b28;
+                }
+            }
+        }
+        .wallet_number{
+            .form-group{
+                display: inline-block;
+                width: calc( 100% - 40px );
+                float: left;
+                margin-bottom: 0;
+            }
+            button{
+                display: inline-block;
+                float: right;
+                width: 30px;
+                font-size: 18px;
+                color: #ff5454;
+                padding: 0;
+                border: none;
+                height: 38px;
+                background: transparent;
+                &:focus,
+                &:active{
+                    box-shadow: none;
+                    outline: none;
+                }
+            }
+        }
+        &.finish{
+            background: #1d2031;
+            input:read-only{
+                border: none;
+                background: transparent;
+                box-shadow: none;
+                color: #fff;
+                padding: 9px 0;
+            }
+            .unknown_blk{
+                a{
+                    border-color: #404354;
+                    color: #404354;
+                }
+                .counts{
+                    display: inline-block;
+                    float: right;
+                    span{
+                        width: 45px;
+                        font-size: 15px;
+                        color: #fff;
+                        line-height: 45px;
+                        display: inline-block;
+                        text-align: right;
+                        i{
+                            font-size: 18px;
+                            margin-left: 5px;
+                        }
+
+                    }
+                }
+            }
+            button{
+                color: #fff;
+            }
+        }
+    }
+    .button_blk{
+        overflow: hidden;
+        display: block;
+        .button{
+            display: inline-block;
+            width: 120px;
+            padding: 20px;
+            text-transform: uppercase;
+            border-radius: 5px;
+            background: #5b67db;
+            color: #fff;
+            border: none;
+            float: left;
+            cursor: pointer;
+        }
+        .description{
+            display: inline-block;
+            float: right;
+            width: calc( 100% - 135px );
+            font-size: 14px;
+            h5{
+                margin-bottom: 5px;
+                font-size: 14px;
+            }
         }
     }
 </style>
