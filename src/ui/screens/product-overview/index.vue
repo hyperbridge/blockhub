@@ -9,10 +9,6 @@
                     <div class="col-12" v-if="product">
                         <h1 class="title margin-top-10 margin-bottom-15">{{ product.name }}</h1>
 
-                        <!--<div class="product__tag" v-for="(tag, index) in product.authorTags" v-bind:key="index">-->
-                            <!--<a href="#" class="tag-link" @click="filterTag(tag)">{{ tag }}</a>-->
-                        <!--</div>-->
-
                         <c-tags-list :tags="product.authorTags"></c-tags-list>
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
@@ -168,7 +164,7 @@
                                                     <span class="rating-blk__number">{{ item.number }}</span>
                                                 </div>
                                                 <span class="rating-blk__stars">
-                                                    <i class="fas fa-star" v-for="num in Math.floor(item.number)"></i>
+                                                    <i class="fas fa-star" v-for="num in Math.floor(item.number)" :key="num"></i>
                                                     <i class="fas fa-star-half"
                                                        v-if="Number.isInteger(item.number) === false"></i>
                                                 </span>
@@ -341,10 +337,10 @@
         props: ['id'],
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
-            'c-plan-list': () => import('@/ui/components/game-plans/list.vue'),
+            'c-plan-list': () => import('@/ui/components/game-plans/list'),
             'c-screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
             'c-sale-box': () => import('@/ui/components/sale-box/box'),
-            'c-tags-list': () => import('@/ui/components/product-tags/index')
+            'c-tags-list': () => import('@/ui/components/product-tags')
         },
         data() {
             return {
@@ -583,197 +579,195 @@
         }
     }
 
-    .crowndfunding-campaign {
-        .crowndfunding-campaign__progress {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            flex-wrap: nowrap;
+    .crowndfunding-campaign__progress {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: nowrap;
+        overflow: hidden;
+        margin: 10px -6%;
+    }
+    .crowndfunding-campaign_progress-stage {
+        width: 50%;
+        text-align: center;
+        span {
+            display: inline-block;
+            width: 100%;
+            position: relative;
+            text-transform: uppercase;
+            font-weight: bold;
             overflow: hidden;
-            margin: 10px -6%;
-            .crowndfunding-campaign_progress-stage {
-                width: 50%;
-                text-align: center;
-                span {
+            &.stage_line{
+                background: #3D691F;
+                height: 15px;
+                float: left;
+            }
+            &.name{
+                padding-top: 15px;
+                &:after {
+                    position: absolute;
+                    top: 5px;
+                    width: 2px;
+                    content: "";
+                    height: 8px;
+                    left: calc( 50% - 1px );
                     display: inline-block;
-                    width: 100%;
-                    position: relative;
-                    text-transform: uppercase;
-                    font-weight: bold;
-                    overflow: hidden;
-                    &.stage_line{
-                        background: #3D691F;
-                        height: 15px;
-                        float: left;
-                    }
-                    &.name{
-                        padding-top: 15px;
-                        &:after {
-                            position: absolute;
-                            top: 5px;
-                            width: 2px;
-                            content: "";
-                            height: 8px;
-                            left: calc( 50% - 1px );
-                            display: inline-block;
-                            background: #fff;
-                        }
-                    }
-                }
-                i {
-                    margin-bottom: 7px;
-                    font-size: 10px;
-                    display: block;
-                    width: 100%;
-                }
-                &:first-child {
-                    .stage_line {
-                        border-radius: 5px 0 0 5px;
-                        width: 65%;
-                        float: right;
-                    }
-                    &.in_progress {
-                        .stage_line {
-                            &:after {
-                                left: 25%;
-                            }
-                        }
-                    }
-                }
-                &:last-child {
-                    .stage_line {
-                        border-radius: 0 5px 5px 0;
-                        width: 65%;
-                        float: left;
-                    }
-                    &.in_progress {
-                        .stage_line {
-                            &:after {
-                                left: 75%;
-                            }
-                        }
-                    }
-                }
-                &.done {
-                    span {
-                        &:before {
-                            background: #3D691F;
-                        }
-                    }
-                    i {
-                        color: #3D691F;
-                    }
-                }
-                &.in_progress {
-                    .stage_line {
-                        &:after {
-                            position: absolute;
-                            background: #5EA72B;
-                            height: 100%;
-                            left: 0%;
-                            right: 0;
-                            content: "";
-                            display: inline-block;
-                        }
-                    }
-                    i {
-                        color: #FADC72;
-                    }
-                }
-                &.awaiting {
-                    .stage_line {
-                        background: #5EA72B;
-                    }
-                }
-            }
-        }
-        .crowndfunding-campaign__info {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin: 10px 0;
-            .funded,
-            .goal {
-                background: rgba(0, 0, 0, 0.16);
-                border-radius: 5px;
-                width: calc(50% - 5px);
-                padding: 10px;
-                color: #fff;
-                font-size: 18px;
-                .text {
-                    font-size: 14px;
-                    font-weight: bold;
-                    margin-bottom: 5px;
-                    text-transform: uppercase;
-                }
-            }
-            .spent_blk,
-            .locked_blk,
-            .overflow_blk {
-                width: 32%;
-                margin-top: 10px;
-                font-size: 15px;
-                position: relative;
-                .text {
-                    font-weight: bold;
-                    margin-bottom: 4px;
-                }
-                .progress-bar-vertical {
-                    width: 5px;
-                    min-height: calc( 100% - 7px );
-                    display: flex;
-                    align-items: flex-end;
-                    margin: 4px 8px 3px 0;
-                    float: left;
-                    border-radius: 0;
                     background: #fff;
-                    .progress-bar {
-                        width: 100%;
-                        height: 0;
-                        -webkit-transition: height 0.6s ease;
-                        -o-transition: height 0.6s ease;
-                        transition: height 0.6s ease;
+                }
+            }
+        }
+        i {
+            margin-bottom: 7px;
+            font-size: 10px;
+            display: block;
+            width: 100%;
+        }
+        &:first-child {
+            .stage_line {
+                border-radius: 5px 0 0 5px;
+                width: 65%;
+                float: right;
+            }
+            &.in_progress {
+                .stage_line {
+                    &:after {
+                        left: 25%;
                     }
                 }
             }
         }
-        .crowndfunding-campaign__action{
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: nowrap;
-            margin-top: 15px;
-            a{
-                width: 31%;
-                border-radius: 5px;
-                color: #fff;
-                font-size: 13px;
-                text-transform: uppercase;
-                text-align: center;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, .16);
-                line-height: 24px;
+        &:last-child {
+            .stage_line {
+                border-radius: 0 5px 5px 0;
+                width: 65%;
+                float: left;
+            }
+            &.in_progress {
+                .stage_line {
+                    &:after {
+                        left: 75%;
+                    }
+                }
+            }
+        }
+        &.done {
+            span {
+                &:before {
+                    background: #3D691F;
+                }
+            }
+            i {
+                color: #3D691F;
+            }
+        }
+        &.in_progress {
+            .stage_line {
+                &:after {
+                    position: absolute;
+                    background: #5EA72B;
+                    height: 100%;
+                    left: 0%;
+                    right: 0;
+                    content: "";
+                    display: inline-block;
+                }
+            }
+            i {
+                color: #FADC72;
+            }
+        }
+        &.awaiting {
+            .stage_line {
+                background: #5EA72B;
+            }
+        }
+    }
+    .crowndfunding-campaign__info {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin: 10px 0;
+        .funded,
+        .goal {
+            background: rgba(0, 0, 0, 0.16);
+            border-radius: 5px;
+            width: calc(50% - 5px);
+            padding: 10px;
+            color: #fff;
+            font-size: 18px;
+            .text {
+                font-size: 14px;
                 font-weight: bold;
-                text-decoration: none;
-                i{
-                    margin-right: 5px;
-                    font-size: 16px;
+                margin-bottom: 5px;
+                text-transform: uppercase;
+            }
+        }
+        .spent_blk,
+        .locked_blk,
+        .overflow_blk {
+            width: 32%;
+            margin-top: 10px;
+            font-size: 15px;
+            position: relative;
+            .text {
+                font-weight: bold;
+                margin-bottom: 4px;
+            }
+            .progress-bar-vertical {
+                width: 5px;
+                min-height: calc( 100% - 7px );
+                display: flex;
+                align-items: flex-end;
+                margin: 4px 8px 3px 0;
+                float: left;
+                border-radius: 0;
+                background: #fff;
+                .progress-bar {
+                    width: 100%;
+                    height: 0;
+                    -webkit-transition: height 0.6s ease;
+                    -o-transition: height 0.6s ease;
+                    transition: height 0.6s ease;
                 }
-                &.follow_link{
-                    background: #436CC9;
-                    &:hover{
-                        background: #314e92;
-                    }
+            }
+        }
+    }
+    .crowndfunding-campaign__action{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        margin-top: 15px;
+        a{
+            width: 31%;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 13px;
+            text-transform: uppercase;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .16);
+            line-height: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            i{
+                margin-right: 5px;
+                font-size: 16px;
+            }
+            &.follow_link{
+                background: #436CC9;
+                &:hover{
+                    background: #314e92;
                 }
-                &.share_link{
-                    background: #43B4C9;
-                    &:hover{
-                        background: #348b9b;
-                    }
+            }
+            &.share_link{
+                background: #43B4C9;
+                &:hover{
+                    background: #348b9b;
                 }
-                &.support_link{
-                    background: #43C981;
-                    &:hover{
-                        background: #2e8b59;
-                    }
+            }
+            &.support_link{
+                background: #43C981;
+                &:hover{
+                    background: #2e8b59;
                 }
             }
         }
@@ -818,38 +812,61 @@
         }
     }
 
-    .rating-blk {
-        .rating-blk__list {
-            padding: 0;
-            li {
-                list-style: none;
-                display: block;
-                overflow: hidden;
-                font-size: 14px;
-                margin-bottom: 8px;
-                color: #fff;
-                .rating-blk__info {
-                    display: inline-block;
+    .rating-blk__list {
+        padding: 0;
+        li {
+            list-style: none;
+            display: block;
+            overflow: hidden;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #fff;
+            .rating-blk__info {
+                display: inline-block;
+                float: left;
+                width: calc(100% - 90px);
+                .rating-blk__name {
                     float: left;
-                    width: calc(100% - 90px);
-                    .rating-blk__name {
-                        float: left;
-                        width: 80%;
-                        font-weight: bold;
-                    }
-                    .rating-blk__number {
-                        float: right;
-                        width: 20%;
-                        text-align: right;
-                    }
+                    width: 80%;
+                    font-weight: bold;
                 }
-                .rating-blk__stars {
+                .rating-blk__number {
                     float: right;
-                    text-align: left;
-                    width: 80px;
+                    width: 20%;
+                    text-align: right;
                 }
             }
+            .rating-blk__stars {
+                float: right;
+                text-align: left;
+                width: 80px;
+            }
         }
+    }
+    a.btn-outline-white {
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #fff;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        font-weight: bold;
+        display: inline-block;
+        float: left;
+        line-height: 24px;
+        padding: 0 8px;
+        width: auto;
+        margin: 5px 10px 3px 0;
+        &:last-child {
+            margin-right: 0;
+        }
+        &:hover {
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+        }
+    }
+
+    .traded-assets {
         a.btn-outline-white {
             font-size: 12px;
             text-transform: uppercase;
@@ -873,126 +890,62 @@
             }
         }
     }
-
-    .traded-assets {
-        .traded-assets__filter {
-            .dropdown {
-                display: inline-block;
-                float: left;
-                margin-right: 20px;
-                &:last-child {
-                    margin-right: 0;
-                }
-                a.dropdown-toggle {
-                    padding: 0;
-                    background: transparent;
-                    border: none;
-                    font-size: 11px;
-                    text-transform: uppercase;
-                    &:active,
-                    &:focus {
-                        box-shadow: none;
-                        border: none;
-                        background: transparent;
-                    }
-                    &:after {
-                        margin-left: 18px;
-                    }
-                }
-                .dropdown-menu {
-                    .dropdown-item {
-                        padding-left: 15px;
-                        &:after {
-                            display: none;
-                        }
-                    }
-                }
-            }
-        }
-        .traded-assets__list {
-            padding: 0;
-            display: block;
-            width: 100%;
-            overflow: hidden;
-            margin: 10px -10px;
-            .traded-assets__item {
-                list-style: none;
-                display: inline-block;
-                float: left;
-                width: 25%;
-                padding: 10px;
-                img {
-                    /*height: 60px;*/
-                    width: auto;
-                    max-width: 100%;
-                    max-height: 100%;
-                }
-            }
-        }
-        a.btn-outline-white {
-            font-size: 12px;
-            text-transform: uppercase;
-            color: #fff;
-            border: 1px solid #fff;
-            border-radius: 5px;
-            font-weight: bold;
+    .traded-assets__filter {
+        .dropdown {
             display: inline-block;
             float: left;
-            line-height: 24px;
-            padding: 0 8px;
-            width: auto;
-            margin: 5px 10px 3px 0;
+            margin-right: 20px;
             &:last-child {
                 margin-right: 0;
             }
-            &:hover {
-                background: #fff;
-                color: #000;
-                text-decoration: none;
+            a.dropdown-toggle {
+                padding: 0;
+                background: transparent;
+                border: none;
+                font-size: 11px;
+                text-transform: uppercase;
+                &:active,
+                &:focus {
+                    box-shadow: none;
+                    border: none;
+                    background: transparent;
+                }
+                &:after {
+                    margin-left: 18px;
+                }
+            }
+            .dropdown-menu {
+                .dropdown-item {
+                    padding-left: 15px;
+                    &:after {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    .traded-assets__list {
+        padding: 0;
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        margin: 10px -10px;
+        .traded-assets__item {
+            list-style: none;
+            display: inline-block;
+            float: left;
+            width: 25%;
+            padding: 10px;
+            img {
+                /*height: 60px;*/
+                width: auto;
+                max-width: 100%;
+                max-height: 100%;
             }
         }
     }
 
     .community-spotlight {
-        .community-spotlight__list {
-            padding: 0;
-            margin: 10px 0;
-            display: block;
-            width: 100%;
-            overflow: hidden;
-            li {
-                display: block;
-                width: 100%;
-                overflow: hidden;
-                margin: 5px 0;
-                padding-right: 20px;
-                position: relative;
-                &:after {
-                    position: absolute;
-                    right: 0px;
-                    top: 1px;
-                    bottom: 0;
-                    width: 20px;
-                    content: "\f086";
-                    font-family: 'Font Awesome 5 Free';
-                    color: #fff;
-                    text-align: right;
-                }
-                a {
-                    color: #fff;
-                    .community-spotlight__name {
-                        float: left;
-                        max-width: 70%;
-                        font-weight: bold;
-                    }
-                    .community-spotlight__count {
-                        float: right;
-                        max-width: 30px;
-                    }
-                }
-
-            }
-        }
         a.btn-outline-white {
             font-size: 12px;
             text-transform: uppercase;
@@ -1016,59 +969,94 @@
             }
         }
     }
-
-    .system-requirements {
-        .system-requirements__item {
+    .community-spotlight__list {
+        padding: 0;
+        margin: 10px 0;
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        li {
             display: block;
             width: 100%;
-            margin-bottom: 10px;
-            background: rgba(0, 0, 0, .13);
-            border: 1px solid rgba(70, 70, 70, 0.5);
-            border-radius: 5px;
-            padding: 5px;
+            overflow: hidden;
+            margin: 5px 0;
+            padding-right: 20px;
             position: relative;
-            &:last-child {
-                margin-bottom: 0;
+            &:after {
+                position: absolute;
+                right: 0px;
+                top: 1px;
+                bottom: 0;
+                width: 20px;
+                content: "\f086";
+                font-family: 'Font Awesome 5 Free';
+                color: #fff;
+                text-align: right;
             }
-            h6 {
-                font-weight: bold;
-                font-size: 14px;
-                padding-bottom: 0;
-                i {
-                    float: right;
-                }
+            a {
+                color: #fff;
             }
-            p {
-                margin: 0;
+        }
+    }
+    .community-spotlight__name {
+        float: left;
+        max-width: 70%;
+        font-weight: bold;
+    }
+    .community-spotlight__count {
+        float: right;
+        max-width: 30px;
+    }
+
+    .system-requirements__item {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        background: rgba(0, 0, 0, .13);
+        border: 1px solid rgba(70, 70, 70, 0.5);
+        border-radius: 5px;
+        padding: 5px;
+        position: relative;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        h6 {
+            font-weight: bold;
+            font-size: 14px;
+            padding-bottom: 0;
+            i {
+                float: right;
             }
+        }
+        p {
+            margin: 0;
         }
     }
 
     .languages-list {
         padding: 0;
-        .languages-list__item {
-            list-style: none;
-            display: block;
-            margin: 5px 0;
-            width: 100%;
-            overflow: hidden;
-            .languages-list__name {
-                float: left;
-                max-width: 80%;
-                font-size: 14px;
-                font-weight: bold;
-            }
-            .languages-list__icon {
-                float: right;
-                max-width: 20%;
-                text-align: right;
-                i {
-                    margin-right: 5px;
-                    &:last-child {
-                        margin-right: 0;
-                    }
-                }
-
+    }
+    .languages-list__item {
+        list-style: none;
+        display: block;
+        margin: 5px 0;
+        width: 100%;
+        overflow: hidden;
+    }
+    .languages-list__name {
+        float: left;
+        max-width: 80%;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .languages-list__icon {
+        float: right;
+        max-width: 20%;
+        text-align: right;
+        i {
+            margin-right: 5px;
+            &:last-child {
+                margin-right: 0;
             }
         }
     }
