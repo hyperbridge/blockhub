@@ -284,10 +284,6 @@ export default {
         .product-tags {
             margin-top: 10px;
             margin-bottom: 0;
-            a{
-                background: red;
-                color: green;
-            }
         }
     }
 </style>
