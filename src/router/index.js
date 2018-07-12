@@ -41,8 +41,8 @@ const router = new Router({
     },
     {
       path: '/news',
-        name: 'News',
-          component: () => import('@/ui/screens/news')
+      name: 'News',
+      component: () => import('@/ui/screens/news')
     },
     {
       path: '/store',
@@ -201,6 +201,18 @@ const router = new Router({
       component: () => import('@/ui/screens/community-chat')
     },
     {
+      path: '/assets',
+      name: 'Assets',
+      props: true,
+      component: () => import('@/ui/screens/assets')
+    },
+    {
+      path: '/asset/:id',
+      name: 'Asset',
+      props: true,
+      component: () => import('@/ui/screens/asset-overview')
+    },
+    {
       path: '/republic',
       name: 'Republic',
       component: () => import('@/ui/screens/republic')
@@ -243,6 +255,12 @@ const router = new Router({
       name: 'Project Discussion',
       props: true,
       component: () => import('@/ui/screens/project-discussion')
+    },
+    {
+      path: '/project/:id/milestones',
+      name: 'Project Milestones',
+      props: true,
+      component: () => import('@/ui/screens/project-milestones')
     },
     {
       path: '/curators',
