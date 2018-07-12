@@ -1,6 +1,6 @@
 import Loki from 'lokijs'
 
-const data = require('json-loader!yaml-loader!./data.yaml')
+const data = require('./data')
 
 let loki = null
 
@@ -12,18 +12,6 @@ export let republic = null
 export const init = (cb) => {
     const databaseInitialize = () => {
         reload()
-
-        account = loki.getCollection('account')
-
-        republic = {
-            citizens: loki.getCollection('republicCitizens'),
-            delegates: loki.getCollection('republicCouncilDelegates'),
-            elections: loki.getCollection('republicElections')
-        }
-
-        marketplace = {
-            products: loki.getCollection('marketplaceProducts')
-        }
 
         cb && cb()
     }

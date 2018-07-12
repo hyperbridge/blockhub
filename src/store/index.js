@@ -20,15 +20,15 @@ PeerService.config.RELAY = false
 ChaosMonkey.config.ENABLED = false
 
 /* Usage:
-    - dev1 - Navigate to http://localhost:8000/template.html#/dev1
-        - Best used to test a well-behaved peer relayer
-    - dev2 - Navigate to http://localhost:8000/template.html#/dev2
-        - Best used to test a non-Web3 enabled user can receive data from peer network
-        - Clean database
-        - No relaying, ie. no responding to peer data requests
-    - dev3 - Navigate to http://localhost:8000/template.html#/dev3
-        - Best used to test fault-tolerance, ie. does this thing behave appropriately when problems occur
-        - Permanent chaos monkey
+- dev1 - Navigate to http://localhost:8000/template.html#/dev1
+    - Best used to test a well-behaved peer relayer
+- dev2 - Navigate to http://localhost:8000/template.html#/dev2
+    - Best used to test a non-Web3 enabled user can receive data from peer network
+    - Clean database
+    - No relaying, ie. no responding to peer data requests
+- dev3 - Navigate to http://localhost:8000/template.html#/dev3
+    - Best used to test fault-tolerance, ie. does this thing behave appropriately when problems occur
+    - Permanent chaos monkey
 */
 const CheckDevelopmentMode = () => {
     let hash = document.location.hash.replace('#/', '')
@@ -119,7 +119,10 @@ let initializer = (store) => {
 
     monitorPathState()
 
-    window.BlockStore = store
+    if (!window.BlockHub)
+        window.BlockHub = {}
+
+    window.BlockHub.store = store
 }
 
 const store = new Vuex.Store({
