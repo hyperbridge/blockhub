@@ -6,13 +6,13 @@
         <ul>
             <li class="title">Store Home</li>
             <li>
-                <a href="index.html">
+                <a href="/#/store">
                     <span class="icon fa fa-home"></span>
                     <span class="text">My Store</span>
                 </a>
             </li>
             <li>
-                <a href="index.html">
+                <a href="/#/store">
                     <span class="icon fa fa-home"></span>
                     <span class="text">Friends Store</span>
                 </a>

@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="settingsNavigation">
+    <c-layout navigationKey="settings-navigation">
         <div class="content" id="content">
             <div class="container-fluid">  
                 <div class="row">

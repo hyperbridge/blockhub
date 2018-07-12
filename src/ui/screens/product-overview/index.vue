@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="productNavigation">
+    <c-layout navigationKey="product-navigation">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
@@ -13,7 +13,7 @@
                             <!--<a href="#" class="tag-link" @click="filterTag(tag)">{{ tag }}</a>-->
                         <!--</div>-->
 
-                        <tags-list :tags="product.authorTags"></tags-list>
+                        <c-tags-list :tags="product.authorTags"></c-tags-list>
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
@@ -32,14 +32,14 @@
 
                         <div class="row">
                             <div class="col-7">
-                                <screen-gallery></screen-gallery>
+                                <c-screen-gallery></c-screen-gallery>
 
-                                <sale-box
+                                <c-sale-box
                                     :sale_box="sale_box"
                                     v-if="sale_box"
-                                ></sale-box>
+                                ></c-sale-box>
 
-                                <plan-list></plan-list>
+                                <c-plan-list></c-plan-list>
 
                                 <div class="main_content">
                                     <h2>An adventure of a lifetime...</h2>
@@ -60,21 +60,21 @@
                                 </div>
                             </div>
                             <div class="col-5">
-                                <div class="card invert crowndfunding-campaing-blk" v-if="crowndfunding_data">
+                                <div class="card invert crowndfunding-campaign-blk" v-if="crowndfunding_data">
                                     <div class="card-body">
-                                        <h2 class="title">Crowndfunding campaing</h2>
-                                        <div class="crowndfunding-campaing">
-                                            <div class="crowndfunding-campaing__progress">
+                                        <h2 class="title">Crowndfunding campaign</h2>
+                                        <div class="crowndfunding-campaign">
+                                            <div class="crowndfunding-campaign__progress">
                                                 <div v-for="(stage, index) in crowndfunding_data.stages" :key="index"
                                                      :class="stage.status"
-                                                     class="crowndfunding-campaing_progress-stage">
+                                                     class="crowndfunding-campaign_progress-stage">
                                                     <i class="fas fa-check" v-if="stage.status === 'done'"></i>
                                                     <i class="fas fa-clock" v-if="stage.status === 'in_progress'"></i>
                                                     <span class="stage_line"></span>
                                                     <span class="name">{{ stage.text}}</span>
                                                 </div>
                                             </div>
-                                            <div class="crowndfunding-campaing__info">
+                                            <div class="crowndfunding-campaign__info">
                                                 <div class="funded">
                                                     <div class="text">114% Funded</div>
                                                     $ {{ crowndfunding_data.funded_amount }}
@@ -120,7 +120,7 @@
                                                     $ {{ crowndfunding_data.overflow_amount['amount'] }}
                                                 </div>
                                             </div>
-                                            <div class="crowndfunding-campaing__action">
+                                            <div class="crowndfunding-campaign__action">
                                                 <a href="#3" class="follow_link">
                                                     <i class="fas fa-check"></i>
                                                     Follow
@@ -341,10 +341,10 @@
         props: ['id'],
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
-            'plan-list': () => import('@/ui/components/game-plans/list.vue'),
-            'screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
-            'sale-box': () => import('@/ui/components/sale-box/box'),
-            'tags-list': () => import('@/ui/components/product-tags/index')
+            'c-plan-list': () => import('@/ui/components/game-plans/list.vue'),
+            'c-screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
+            'c-sale-box': () => import('@/ui/components/sale-box/box'),
+            'c-tags-list': () => import('@/ui/components/product-tags/index')
         },
         data() {
             return {
@@ -583,15 +583,15 @@
         }
     }
 
-    .crowndfunding-campaing {
-        .crowndfunding-campaing__progress {
+    .crowndfunding-campaign {
+        .crowndfunding-campaign__progress {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
             flex-wrap: nowrap;
             overflow: hidden;
             margin: 10px -6%;
-            .crowndfunding-campaing_progress-stage {
+            .crowndfunding-campaign_progress-stage {
                 width: 50%;
                 text-align: center;
                 span {
@@ -687,7 +687,7 @@
                 }
             }
         }
-        .crowndfunding-campaing__info {
+        .crowndfunding-campaign__info {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
@@ -737,7 +737,7 @@
                 }
             }
         }
-        .crowndfunding-campaing__action{
+        .crowndfunding-campaign__action{
             display: flex;
             justify-content: space-between;
             flex-wrap: nowrap;

@@ -6,13 +6,13 @@
         <ul>
             <li class="title">General</li>
             <li>
-                <a href="#/settings/client">
+                <a href="/#/settings/client">
                     <span class="icon fa fa-home"></span>
                     <span class="text">Client</span>
                 </a>
             </li>
             <li>
-                <a href="#/settings/profile">
+                <a href="/#/settings/profile">
                     <span class="icon fa fa-home"></span>
                     <span class="text">Profile</span>
                 </a>

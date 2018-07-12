@@ -16,7 +16,7 @@
             
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert" id="page-aside">
-                <component v-if="navigationComponent" v-bind:is="`${navigationComponent}`"></component>
+                <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}`"></component>
             </div>
             <!-- //END PAGE ASIDE PANEL -->
 
@@ -49,13 +49,13 @@ export default {
     ],
     components: {
         'c-header': () => import('@/ui/components/headers/basic'),
-        'walletNavigation': () => import('@/ui/components/navigation/wallet'),
-        'accountNavigation': () => import('@/ui/components/navigation/account'),
-        'settingsNavigation': () => import('@/ui/components/navigation/settings'),
-        'helpNavigation': () => import('@/ui/components/navigation/help'),
-        'storeNavigation': () => import('@/ui/components/navigation/store'),
-        'productNavigation': () => import('@/ui/components/navigation/product'),
-        'projectNavigation': () => import('@/ui/components/navigation/project')
+        'c-wallet-navigation': () => import('@/ui/components/navigation/wallet'),
+        'c-account-navigation': () => import('@/ui/components/navigation/account'),
+        'c-settings-navigation': () => import('@/ui/components/navigation/settings'),
+        'c-help-navigation': () => import('@/ui/components/navigation/help'),
+        'c-store-navigation': () => import('@/ui/components/navigation/store'),
+        'c-product-navigation': () => import('@/ui/components/navigation/product'),
+        'c-project-navigation': () => import('@/ui/components/navigation/project')
     },
     computed: {
         isConnected() {

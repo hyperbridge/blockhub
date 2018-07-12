@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="accountNavigation">
+    <c-layout navigationKey="account-navigation">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
@@ -52,7 +52,7 @@
                         </div>
                         <div class="wallets-list">
                             <div class="wallet-item" v-for="(wallet, index) in wallets" :key="index">
-                                <div class="wallet-item__info">
+                                <a class="wallet-item__info" :href='`/#/wallet/${wallet.id}`'>
                                     <div class="wallet-item__head">
                                         <div class="wallet-item__name">
                                             <i class="fab fa-bitcoin"></i>
@@ -67,7 +67,7 @@
                                         </div>
                                         <div class="wallet-item__history">
                                             <ul>
-                                                <li v-for="(item, index) in wallet.history" :class="item.direction">
+                                                <li v-for="(item, index) in wallet.history" :class="item.direction" :key="index">
                                                     <span class="time">
                                                         {{ item.time }}
                                                     </span>
@@ -86,11 +86,11 @@
                                             <i class="fas fa-copy"></i>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                                 <div class="wallet-item__footer">
                                     <div class="wallet-item__preferred_switcher">
                                         <label class="switch switch-sm">
-                                            <input type="checkbox" name="switch_8" checked="" v-model="wallet.preferred_switcher" value="0">
+                                            <input type="checkbox" name="preeferred" checked="" v-model="wallet.preferred_switcher" value="0">
                                             <span>Preferred</span>
                                         </label>
                                     </div>
@@ -124,6 +124,7 @@
         data: () => ({
             wallets: [
                 {
+                    id: '1',
                     name: 'Bitcoin',
                     icon: '',
                     short_name: 'BTC',
@@ -149,6 +150,7 @@
                     preferred_switcher: true
                 },
                 {
+                    id: '2',
                     name: 'Ethereum',
                     icon: '',
                     short_name: 'ETH',
@@ -174,6 +176,7 @@
                     preferred_switcher: false
                 },
                 {
+                    id: '3',
                     name: 'Viacoin',
                     icon: '',
                     short_name: 'VIA',
@@ -199,6 +202,7 @@
                     preferred_switcher: false
                 },
                 {
+                    id: '4',
                     name: 'Monero',
                     icon: '',
                     short_name: 'XMR',
@@ -340,6 +344,8 @@
         background: rgba(255, 255, 255, .2);
         padding: 10px;
         overflow: hidden;
+        display: block;
+        text-decoration: none;
     }
     .wallet-item__head {
         display: flex;
