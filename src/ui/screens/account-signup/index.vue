@@ -7,7 +7,7 @@
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link" id="step1-tab" data-toggle="tab" href="#step1" role="tab"
+                            <a class="nav-link active" id="step1-tab" data-toggle="tab" href="#step1" role="tab"
                                aria-controls="step1-tab" aria-expanded="true">Step 1</a>
                         </li>
                         <li class="nav-item">
@@ -15,12 +15,12 @@
                                aria-controls="step2-tab">Step 2</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" id="step3-tab" data-toggle="tab" href="#step3" role="tab"
+                            <a class="nav-link" id="step3-tab" data-toggle="tab" href="#step3" role="tab"
                                aria-controls="step3-tab">Step 3</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade" id="step1" role="tabpanel" aria-labelledby="step1-tab">
+                        <div class="tab-pane fade show active" id="step1" role="tabpanel" aria-labelledby="step1-tab">
                             <div class="tab-container">
                                 <div class="tab-card">
                                     <h4>Personal Information</h4>
@@ -337,7 +337,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade show active" id="step3" role="tabpanel" aria-labelledby="step3-tab">
+                        <div class="tab-pane fade" id="step3" role="tabpanel" aria-labelledby="step3-tab">
                             <div class="tab-container">
                                 <div class="padding-20">
                                     <h3>Verify your identity(Optional)</h3>
@@ -454,6 +454,7 @@
 </script>
 
 <style lang="scss" scoped>
+
     .nav-tabs{
         border-bottom: none;
         position: relative;
@@ -638,6 +639,7 @@
             a{
                 img{
                     width: 28px;
+                    height: auto;
                     vertical-align: middle;
                     margin-top: 12px;
                 }
