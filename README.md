@@ -35,7 +35,7 @@ Make sure you're running Node 8.11.1
 
 In `blockhub-web-client`, run `npm install` then `npm link ../marketplace-protocol` then `npm start`
 
-It should open `http://localhost:8000/template.html` with the web app
+It should open `http://localhost:8000/` with the web app
 
 
 ```bash
@@ -49,7 +49,7 @@ npm start
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-## Docs
+## Commands
 
 ```bash
 # install dependencies
@@ -73,6 +73,14 @@ npm run e2e
 # run all tests
 npm test
 ```
+
+## Building
+
+Use `npm run build` to build production. Currently it uses `/docs` directory, as that makes Github-served pages easier (`beta.blockhub.gg` points to `/docs`)
+
+## Testing modes
+
+Check [PR #4](https://github.com/hyperbridge/blockhub-web-client/pull/4) for instructions on using different testing modes and how data-driven p2p views work.
 
 ## Articles
 
