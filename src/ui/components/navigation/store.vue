@@ -6,13 +6,13 @@
         <ul>
             <li class="title">Store Home</li>
             <li>
-                <a href="index.html">
+                <a href="/#/store">
                     <span class="icon fa fa-home"></span>
                     <span class="text">My Store</span>
                 </a>
             </li>
             <li>
-                <a href="index.html">
+                <a href="/#/dashboard">
                     <span class="icon fa fa-home"></span>
                     <span class="text">Friends Store</span>
                 </a>
@@ -25,39 +25,26 @@
                 </a>
             </li>
             <li>
-                <a href="#/account/receive">
+                <a href="filter({genre: 'adventure'})">
                     <span class="icon fa fa-home"></span>
                     <span class="text">Adventure</span>
                 </a>
             </li>
             <li>
-                <a href="index.html">
+                <a href="filter({genre: 'rpg'})">
                     <span class="icon fa fa-home"></span>
                     <span class="text">RPG</span>
                 </a>
             </li>
             <li>
-                <a href="#/account/transactions">
+                <a href="filter({genre: 'racing'})">
                     <span class="icon fa fa-home"></span>
                     <span class="text">Racing</span>
                 </a>
             </li>
             <li class="title">Help</li>
             <li>
-                <a onclick="filter({genre: 'fighting'})">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">Fighting</span>
-                </a>
-            </li>
-            <li>
-                <a href="index.html">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">Simulation</span>
-                </a>
-            </li>
-            <li class="title">Help</li>
-            <li>
-                <a onclick="filter({genre: 'action'})">
+                <a onclick="/#/help/country-availability">
                     <span class="icon fa fa-home"></span>
                     <span class="text">Content Availability by Country</span>
                 </a>

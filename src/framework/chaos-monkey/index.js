@@ -1,21 +1,30 @@
-
-let config = {
-    CHAOS_MONKEY_STRENGTH: null
+export let config = {
+    ENABLED: true,
+    FORCED: false,
+    STRENGTH: null
 }
 
 export const init = function (strength) {
-    config.CHAOS_MONKEY_STRENGTH = strength
+    config.STRENGTH = strength
 
-    if (!config.CHAOS_MONKEY_STRENGTH) {
-        config.CHAOS_MONKEY_STRENGTH = Math.floor(Math.random() * 10)
+    if (!config.STRENGTH) {
+        config.STRENGTH = Math.floor(Math.random() * 10)
     }
 
 }
 
 export const random = function () {
+    if (!config.ENABLED) {
+        return false
+    }
+
+    if (config.FORCED) {
+        return true
+    }
+
     const spec = {
-        0: (10 - config.CHAOS_MONKEY_STRENGTH) / 100,
-        1: config.CHAOS_MONKEY_STRENGTH / 100
+        0: (10 - config.STRENGTH) / 100,
+        1: config.STRENGTH / 100
     }
 
     let i, sum = 0, r = Math.random()

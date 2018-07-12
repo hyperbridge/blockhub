@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="accountNavigation">
+    <c-layout navigationKey="account-navigation">
         <div class="content" id="content">
             <div class="container-fluid">  
                 <div class="row">
@@ -31,10 +31,10 @@ export default {
   },
   computed: {
       transaction() {
-        if (!this.$store.state.network.entities.transactions)
+        if (!this.$store.state.network.transactions)
             return
         
-        const transaction = this.$store.state.network.entities.transactions[this.id]
+        const transaction = this.$store.state.network.transactions[this.id]
 
         if (!transaction)
             return

@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="projectNavigation">
+    <c-layout navigationKey="project-navigation">
         <div class="content" id="content">
             <div class="container-fluid">  
                 <div class="row">
@@ -32,10 +32,10 @@ export default {
   },
   computed: {
       project() {
-        if (!this.$store.state.funding.entities.projects)
+        if (!this.$store.state.funding.projects)
             return
         
-        const project = this.$store.state.funding.entities.projects[this.id]
+        const project = this.$store.state.funding.projects[this.id]
 
         if (!project)
             return

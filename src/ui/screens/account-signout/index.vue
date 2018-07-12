@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="accountNavigation">
+    <c-layout navigationKey="account-navigation">
         <div class="content" id="content">
             <div class="page-heading">
                 <div class="page-heading__container">

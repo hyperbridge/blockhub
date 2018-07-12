@@ -1,8 +1,9 @@
 import { normalize } from 'normalizr'
 import schema from './schema'
-import * as ethereum from '../../framework/ethereum'
+import * as Ethereum from '../../framework/ethereum'
+import * as PeerService from '../../framework/peer-service'
 
-const rawData = {
+let rawData = {
     connection: {
         internet: false,
         ethereum: false
@@ -13,27 +14,107 @@ const rawData = {
             {
                 id: '1',
                 name: 'Bitcoin',
-                token: '',
-                amount: '1'
+                icon: '',
+                short_name: 'BTC',
+                count: '0.00827',
+                history: [
+                    {
+                        time: '14:00',
+                        percent: '0.93',
+                        direction: 'up'
+                    },
+                    {
+                        time: '14:30',
+                        percent: '0.53',
+                        direction: 'down'
+                    },
+                    {
+                        time: '15:00',
+                        percent: '0.67',
+                        direction: 'up'
+                    }
+                ],
+                wallet_number: 'QMdp32odsoN45insPS91ninZPEld9',
+                preferred_switcher: true
             },
             {
                 id: '2',
                 name: 'Ethereum',
-                token: '',
-                amount: '21'
+                icon: '',
+                short_name: 'ETH',
+                count: '0.00015',
+                history: [
+                    {
+                        time: '11:00',
+                        percent: '0.03',
+                        direction: 'up'
+                    },
+                    {
+                        time: '12:30',
+                        percent: '0.027',
+                        direction: 'down'
+                    },
+                    {
+                        time: '13:00',
+                        percent: '0.031',
+                        direction: 'up'
+                    }
+                ],
+                wallet_number: 'kKJV798BIUFvu6ibkvVV7',
+                preferred_switcher: false
             },
             {
                 id: '3',
-                name: 'Hyperbridge',
-                token: '',
-                amount: '34'
+                name: 'Viacoin',
+                icon: '',
+                short_name: 'VIA',
+                count: '0.00045',
+                history: [
+                    {
+                        time: '11:00',
+                        percent: '0.03',
+                        direction: 'up'
+                    },
+                    {
+                        time: '12:30',
+                        percent: '0.027',
+                        direction: 'down'
+                    },
+                    {
+                        time: '13:00',
+                        percent: '0.031',
+                        direction: 'up'
+                    }
+                ],
+                wallet_number: 'kKJV798BIUFvu6ibkvVV7',
+                preferred_switcher: false
             },
             {
                 id: '4',
-                name: 'Civic',
-                token: '',
-                amount: '10'
-            },
+                name: 'Monero',
+                icon: '',
+                short_name: 'XMR',
+                count: '0.00045',
+                history: [
+                    {
+                        time: '11:00',
+                        percent: '0.03',
+                        direction: 'up'
+                    },
+                    {
+                        time: '12:30',
+                        percent: '0.027',
+                        direction: 'down'
+                    },
+                    {
+                        time: '13:00',
+                        percent: '0.031',
+                        direction: 'up'
+                    }
+                ],
+                wallet_number: 'kKJV798BIUFvu6ibkvVV7',
+                preferred_switcher: true
+            }
         ],
         identities: [
             {
@@ -44,13 +125,24 @@ const rawData = {
     }
 }
 
-export let state = normalize(rawData, {
-    account: schema.account,
-    wallets: [schema.wallet],
-    identities: [schema.identity]
-})
 
-state = {...state, ...state.result}
+export let state = null
+
+const updateState = () => {
+    rawData = {
+        ...rawData,
+    }
+
+    const normalizedData = normalize(rawData, {
+        account: schema.account,
+        wallets: [schema.wallet],
+        identities: [schema.identity]
+    })
+
+    state = { ...rawData, ...normalizedData.entities }
+}
+
+updateState()
 
 export const getters = {}
 
@@ -70,7 +162,7 @@ export const actions = {
             store.state.connection.ethereum = false
         }
 
-        ethereum.init().then(success, failure)
+        Ethereum.init().then(success, failure)
     },
     checkInternetConnection(store, payload) {
         console.log('[BlockHub] Connection status: ', store.state.connection)

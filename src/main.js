@@ -15,6 +15,7 @@ const data = {
 
 const dataString = JSON.stringify(data).replace(/"/g, "'")
 
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

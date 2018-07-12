@@ -1,5 +1,4 @@
 <template>
-
     <!-- PAGE WRAPPER -->
     <div class="page page--w-header page--w-container">
         <!-- PAGE HEADER -->
@@ -13,15 +12,15 @@
         <!-- //END PAGE CONTAINER -->
         
         <!-- PAGE CONTENT WRAPPER -->
-        <div class="page__content page-aside--hidden" id="page-content">
+        <div class="page__content page__content-invert invert page-aside--hidden" id="page-content">
             
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert" id="page-aside">
-                <component v-if="navigationComponent" v-bind:is="`${navigationComponent}`"></component>
+                <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}`"></component>
             </div>
             <!-- //END PAGE ASIDE PANEL -->
 
-            <slot v-if="this.$store.state.network.connection.internet"></slot>
+            <slot></slot>
 
             <!-- SIDEPANEL -->
             <div class="page-sidepanel invert" id="page-sidepanel">
@@ -32,15 +31,14 @@
             </div>
             <!-- //END SIDEPANEL -->
 
-            <div class="status-bar" v-if="!this.$store.state.network.connection.internet">
-                {{ this.$store.state.network.connectionMessage }}
+            <div class="status-bar" v-if="!isConnected">
+                {{ connectionMessage }}
             </div>
         </div>
         <!-- //END PAGE CONTENT -->
         
     </div>
     <!-- //END PAGE WRAPPER -->
-    
 </template>
 
 
@@ -51,13 +49,21 @@ export default {
     ],
     components: {
         'c-header': () => import('@/ui/components/headers/basic'),
-        'walletNavigation': () => import('@/ui/components/navigation/wallet'),
-        'accountNavigation': () => import('@/ui/components/navigation/account'),
-        'settingsNavigation': () => import('@/ui/components/navigation/settings'),
-        'helpNavigation': () => import('@/ui/components/navigation/help'),
-        'storeNavigation': () => import('@/ui/components/navigation/store'),
-        'productNavigation': () => import('@/ui/components/navigation/product'),
-        'projectNavigation': () => import('@/ui/components/navigation/project')
+        'c-wallet-navigation': () => import('@/ui/components/navigation/wallet'),
+        'c-account-navigation': () => import('@/ui/components/navigation/account'),
+        'c-settings-navigation': () => import('@/ui/components/navigation/settings'),
+        'c-help-navigation': () => import('@/ui/components/navigation/help'),
+        'c-store-navigation': () => import('@/ui/components/navigation/store'),
+        'c-product-navigation': () => import('@/ui/components/navigation/product'),
+        'c-project-navigation': () => import('@/ui/components/navigation/project')
+    },
+    computed: {
+        isConnected() {
+            return this.$store.state.network.connection.internet
+        },
+        connectionMessage() {
+            return this.$store.state.network.connectionMessage
+        }
     },
     data() {
         return {
@@ -65,7 +71,6 @@ export default {
         }
     },
     mounted() {
-        initBlockHubSettings()
     }
 }
 </script>

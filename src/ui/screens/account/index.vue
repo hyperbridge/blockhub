@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="accountNavigation">
+    <c-layout navigationKey="account-navigation">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
@@ -92,7 +92,7 @@ export default {
   },
   computed: {
     identityCount() {
-      return Object.keys(this.$store.state.network.entities.identities).length
+      return Object.keys(this.$store.state.network.identities).length
     }
   },
   data: () => ({

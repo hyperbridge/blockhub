@@ -10,6 +10,7 @@
             <div class="container-fluid">  
                 <div class="row">
                     <div class="col-12">
+                        Welcome, you're now on the decentralized web. <br />
                         <a href="#/sitemap">Go to sitemap</a>
                     </div>
                 </div>

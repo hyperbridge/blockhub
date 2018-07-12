@@ -1,21 +1,12 @@
 <template>
-    <c-layout navigationKey="accountNavigation">
+    <c-layout navigationKey="account-navigation">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <ul class="nav nav-tabs justify-content-between">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#3">Overview</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#3">Coins</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#3">Tokens</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#3">Content</a>
+                                <a class="nav-link active" href="#">Overview</a>
                             </li>
                         </ul>
                         <div class="action-wallets">
@@ -61,7 +52,7 @@
                         </div>
                         <div class="wallets-list">
                             <div class="wallet-item" v-for="(wallet, index) in wallets" :key="index">
-                                <div class="wallet-item__info">
+                                <a class="wallet-item__info" :href='`/#/wallet/${wallet.id}`'>
                                     <div class="wallet-item__head">
                                         <div class="wallet-item__name">
                                             <i class="fab fa-bitcoin"></i>
@@ -76,7 +67,7 @@
                                         </div>
                                         <div class="wallet-item__history">
                                             <ul>
-                                                <li v-for="(item, index) in wallet.history" :class="item.direction">
+                                                <li v-for="(item, index) in wallet.history" :class="item.direction" :key="index">
                                                     <span class="time">
                                                         {{ item.time }}
                                                     </span>
@@ -95,11 +86,11 @@
                                             <i class="fas fa-copy"></i>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                                 <div class="wallet-item__footer">
                                     <div class="wallet-item__preferred_switcher">
                                         <label class="switch switch-sm">
-                                            <input type="checkbox" name="switch_8" checked="" v-model="wallet.preferred_switcher" value="0">
+                                            <input type="checkbox" name="preeferred" checked="" v-model="wallet.preferred_switcher" value="0">
                                             <span>Preferred</span>
                                         </label>
                                     </div>
@@ -126,113 +117,12 @@
             'c-layout': () => import('@/ui/layouts/default')
         },
         computed: {
-            // wallets() {
-            //   return this.$store.state.network.entities.wallets
-            // }
+            wallets() {
+                return this.$store.state.network.wallets
+            }
         },
         data: () => ({
-            wallets: [
-                {
-                    name: 'Bitcoin',
-                    icon: '',
-                    short_name: 'BTC',
-                    count: '0.00827',
-                    history:[
-                        {
-                            time: '14:00',
-                            percent: '0.93',
-                            direction: 'up'
-                        },
-                        {
-                            time: '14:30',
-                            percent: '0.53',
-                            direction: 'down'
-                        },
-                        {
-                            time: '15:00',
-                            percent: '0.67',
-                            direction: 'up'
-                        }
-                    ],
-                    wallet_number: 'QMdp32odsoN45insPS91ninZPEld9',
-                    preferred_switcher: true
-                },
-                {
-                    name: 'Ethereum',
-                    icon: '',
-                    short_name: 'ETH',
-                    count: '0.00015',
-                    history:[
-                        {
-                            time: '11:00',
-                            percent: '0.03',
-                            direction: 'up'
-                        },
-                        {
-                            time: '12:30',
-                            percent: '0.027',
-                            direction: 'down'
-                        },
-                        {
-                            time: '13:00',
-                            percent: '0.031',
-                            direction: 'up'
-                        }
-                    ],
-                    wallet_number: 'kKJV798BIUFvu6ibkvVV7',
-                    preferred_switcher: false
-                },
-                {
-                    name: 'Viacoin',
-                    icon: '',
-                    short_name: 'VIA',
-                    count: '0.00045',
-                    history:[
-                        {
-                            time: '11:00',
-                            percent: '0.03',
-                            direction: 'up'
-                        },
-                        {
-                            time: '12:30',
-                            percent: '0.027',
-                            direction: 'down'
-                        },
-                        {
-                            time: '13:00',
-                            percent: '0.031',
-                            direction: 'up'
-                        }
-                    ],
-                    wallet_number: 'kKJV798BIUFvu6ibkvVV7',
-                    preferred_switcher: false
-                },
-                {
-                    name: 'Monero',
-                    icon: '',
-                    short_name: 'XMR',
-                    count: '0.00045',
-                    history:[
-                        {
-                            time: '11:00',
-                            percent: '0.03',
-                            direction: 'up'
-                        },
-                        {
-                            time: '12:30',
-                            percent: '0.027',
-                            direction: 'down'
-                        },
-                        {
-                            time: '13:00',
-                            percent: '0.031',
-                            direction: 'up'
-                        }
-                    ],
-                    wallet_number: 'kKJV798BIUFvu6ibkvVV7',
-                    preferred_switcher: true
-                }
-            ]
+            
         }),
         created() {
         },
@@ -349,6 +239,8 @@
         background: rgba(255, 255, 255, .2);
         padding: 10px;
         overflow: hidden;
+        display: block;
+        text-decoration: none;
     }
     .wallet-item__head {
         display: flex;

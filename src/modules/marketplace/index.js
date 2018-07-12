@@ -17,27 +17,25 @@ let rawData = {
 
 export let state = null
 
-export const updateRawData = () => {
+const updateState = () => {
     rawData = {
-        contractMeta: null,
-        contractAddress: null,
-        selectedApp: null,
-        products: db.marketplace.products.data,
-        upcomingProducts: db.marketplace.products.find({ 'systemTags': { '$contains': ['upcoming'] } }).data,
-        newTrendingProducts: db.marketplace.products.find({ 'systemTags': { '$contains': ['newTrending'] } }).data,
-        topSellingProducts: db.marketplace.products.find({ 'systemTags': { '$contains': ['topSellers'] } }).data,
-        specialProducts: db.marketplace.products.find({ 'systemTags': { '$contains': ['specials'] } }).data
+        ...rawData,
+        products: db.marketplace ? db.marketplace.products.data : [],
+        upcomingProducts: db.marketplace ? db.marketplace.products.find({ 'systemTags': { '$contains': ['upcoming'] } }).data : [],
+        newTrendingProducts: db.marketplace ? db.marketplace.products.find({ 'systemTags': { '$contains': ['newTrending'] } }).data : [],
+        topSellingProducts: db.marketplace ? db.marketplace.products.find({ 'systemTags': { '$contains': ['topSellers'] } }).data : [],
+        specialProducts: db.marketplace ? db.marketplace.products.find({ 'systemTags': { '$contains': ['specials'] } }).data : []
     }
-}
 
-export const updateState = () => {
-    state = normalize(rawData, {
+    const normalizedData = normalize(rawData, {
         products: [schema.product],
         upcomingProducts: [schema.product],
         newTrendingProducts: [schema.product],
         topSellingProducts: [schema.product],
         specialProducts: [schema.product]
     })
+
+    state = { ...rawData, ...normalizedData.entities }
 }
 
 updateState()
@@ -46,6 +44,22 @@ export const getters = {
 }
 
 export const actions = {
+    init(store, payload) {
+        console.log("[BlockHub][Marketplace] Initializing...")
+
+        updateState()
+
+        store.commit('updateState', state)
+
+        //console.log(db.toObject(), JSON.stringify(db.toObject()))
+    },
+    updateState(store, payload) {
+        console.log("[BlockHub][Marketplace] Updating store...")
+
+        updateState()
+
+        store.commit('updateState', state)
+    },
     viewProduct(id) {
         console.log('viewProduct', id)
     },
@@ -72,11 +86,16 @@ export const actions = {
 }
 
 export const mutations = {
+    updateState(s, payload) {
+        for (let x in payload) {
+            s[x] = payload[x]
+        }
+    },
     updateProduct(state, payload) {
         const product = db.marketplace.products.findOne({ 'id': payload.id })
 
         product.name = payload.name
-        state.entities.products[payload.id].name = payload.name
+        state.products[payload.id].name = payload.name
 
         db.save()
     },
@@ -85,15 +104,3 @@ export const mutations = {
     }
 }
 
-export const init = (cb) => {
-    db.init(() => {
-        console.log('[BlockHub] Database initialized')
-
-        updateRawData()
-        updateState()
-
-        console.log(db.toObject(), JSON.stringify(db.toObject()))
-
-        cb && cb()
-    })
-}

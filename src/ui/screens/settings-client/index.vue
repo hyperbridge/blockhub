@@ -1,12 +1,12 @@
 <template>
-    <c-layout navigationKey="settingsNavigation">
+    <c-layout navigationKey="settings-navigation">
         <div class="content" id="content">
             <div class="container-fluid">  
                 <div class="row">
                     <div class="col-12">
                         <h3>Client Settings</h3>
 
-                        <div class="card">
+                        <div class="card invert">
                             <div class="page-heading">
                                 <div class="page-heading__container">
                                     <h1 class="title">Protocol Settings</h1>
@@ -192,7 +192,7 @@
                         </div>
 
 
-                        <div class="card">
+                        <div class="card invert">
                             <div class="page-heading">
                                 <div class="page-heading__container">
                                     <h1 class="title">Database Settings</h1>

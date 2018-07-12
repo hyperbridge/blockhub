@@ -2,22 +2,18 @@ import Loki from 'lokijs'
 
 const data = require('json-loader!yaml-loader!./data.yaml')
 
-// TODO: refactor from class to functional
-
 let loki = null
 
 export let marketplace = null
-export let accounts = null
+export let account = null
 export let republic = null
-
-
 
 
 export const init = (cb) => {
     const databaseInitialize = () => {
         reload()
 
-        accounts = loki.getCollection('accounts')
+        account = loki.getCollection('account')
 
         republic = {
             citizens: loki.getCollection('republicCitizens'),
@@ -59,27 +55,27 @@ export const save = () => {
 }
 
 export const clean = () => {
-    loki.getCollection('accounts') && loki.getCollection('accounts').chain().remove()
+    loki.getCollection('account') && loki.getCollection('account').chain().remove()
     loki.getCollection('republicCitizens') && loki.getCollection('republicCitizens').chain().remove()
     loki.getCollection('republicCouncilDelegates') && loki.getCollection('republicCouncilDelegates').chain().remove()
     loki.getCollection('republicElections') && loki.getCollection('republicElections').chain().remove()
     loki.getCollection('marketplaceProducts') && loki.getCollection('marketplaceProducts').chain().remove()
-}
 
-export const reload = () => {
-    clean()
+    account = loki.addCollection('account')
 
-    let accounts = loki.addCollection('accounts')
-
-    let republic = {
+    republic = {
         citizens: loki.addCollection('republicCitizens'),
         delegates: loki.addCollection('republicCouncilDelegates'),
         elections: loki.addCollection('republicElections')
     }
 
-    let marketplace = {
+    marketplace = {
         products: loki.addCollection('marketplaceProducts')
     }
+}
+
+export const reload = () => {
+    clean()
 
     marketplace.products.insert(data.products)
 
@@ -151,7 +147,7 @@ export const reload = () => {
 
 export const toObject = () => {
     return {
-        accounts: accounts.data,
+        account: account.data,
         marketplace: {
             products: marketplace.products.data
         }

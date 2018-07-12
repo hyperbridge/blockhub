@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="accountNavigation">
+    <c-layout navigationKey="account-navigation">
         <!-- PAGE LOGIN CONTAINER -->
         <div class="content login-container" id="content">
             <div class="container">
