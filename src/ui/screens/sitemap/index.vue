@@ -14,7 +14,7 @@
             <div class="container-fluid">  
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card invert">
                             <div class="card-body">
                                 <ul>
                                   <li><a href="#/news">News</a></li>

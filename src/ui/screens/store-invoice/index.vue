@@ -4,7 +4,7 @@
             <div class="container">  
                 
                 
-                <div class="card">
+                <div class="card invert">
                     <div class="card-body padding-top-50 padding-bottom-30">
                         
                         <div class="row padding-top-50 padding-bottom-50">

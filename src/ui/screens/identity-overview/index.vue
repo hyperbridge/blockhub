@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12 col-lg-3">
                     
-                    <div class="card">
+                    <div class="card invert">
                         <div class="card-body">
                             
                             <div class="row">
