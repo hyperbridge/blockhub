@@ -32,7 +32,7 @@
 
                                 <c-sale-box
                                     :sale_box="sale_box"
-                                    v-if="sale_box"
+                                    v-if="product.sale_box"
                                 ></c-sale-box>
 
                                 <c-plan-list></c-plan-list>
@@ -191,7 +191,7 @@
                                             </div>
                                         </div>
                                         <ul class="traded-assets__list">
-                                            <li class="traded-assets__item" v-for="(item, index) in frequently_traded_assets" :key="index">
+                                            <li class="traded-assets__item" v-for="(item, index) in product.frequently_traded_assets" :key="index">
                                                 <a :href="`/#/asset/${item.id}`">
                                                     <img :src="item.image_data" />
                                                 </a>
