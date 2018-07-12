@@ -117,117 +117,12 @@
             'c-layout': () => import('@/ui/layouts/default')
         },
         computed: {
-            // wallets() {
-            //   return this.$store.state.network.wallets
-            // }
+            wallets() {
+                return this.$store.state.network.wallets
+            }
         },
         data: () => ({
-            wallets: [
-                {
-                    id: '1',
-                    name: 'Bitcoin',
-                    icon: '',
-                    short_name: 'BTC',
-                    count: '0.00827',
-                    history:[
-                        {
-                            time: '14:00',
-                            percent: '0.93',
-                            direction: 'up'
-                        },
-                        {
-                            time: '14:30',
-                            percent: '0.53',
-                            direction: 'down'
-                        },
-                        {
-                            time: '15:00',
-                            percent: '0.67',
-                            direction: 'up'
-                        }
-                    ],
-                    wallet_number: 'QMdp32odsoN45insPS91ninZPEld9',
-                    preferred_switcher: true
-                },
-                {
-                    id: '2',
-                    name: 'Ethereum',
-                    icon: '',
-                    short_name: 'ETH',
-                    count: '0.00015',
-                    history:[
-                        {
-                            time: '11:00',
-                            percent: '0.03',
-                            direction: 'up'
-                        },
-                        {
-                            time: '12:30',
-                            percent: '0.027',
-                            direction: 'down'
-                        },
-                        {
-                            time: '13:00',
-                            percent: '0.031',
-                            direction: 'up'
-                        }
-                    ],
-                    wallet_number: 'kKJV798BIUFvu6ibkvVV7',
-                    preferred_switcher: false
-                },
-                {
-                    id: '3',
-                    name: 'Viacoin',
-                    icon: '',
-                    short_name: 'VIA',
-                    count: '0.00045',
-                    history:[
-                        {
-                            time: '11:00',
-                            percent: '0.03',
-                            direction: 'up'
-                        },
-                        {
-                            time: '12:30',
-                            percent: '0.027',
-                            direction: 'down'
-                        },
-                        {
-                            time: '13:00',
-                            percent: '0.031',
-                            direction: 'up'
-                        }
-                    ],
-                    wallet_number: 'kKJV798BIUFvu6ibkvVV7',
-                    preferred_switcher: false
-                },
-                {
-                    id: '4',
-                    name: 'Monero',
-                    icon: '',
-                    short_name: 'XMR',
-                    count: '0.00045',
-                    history:[
-                        {
-                            time: '11:00',
-                            percent: '0.03',
-                            direction: 'up'
-                        },
-                        {
-                            time: '12:30',
-                            percent: '0.027',
-                            direction: 'down'
-                        },
-                        {
-                            time: '13:00',
-                            percent: '0.031',
-                            direction: 'up'
-                        }
-                    ],
-                    wallet_number: 'kKJV798BIUFvu6ibkvVV7',
-                    preferred_switcher: true
-                }
-            ]
+            
         }),
         created() {
         },

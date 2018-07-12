@@ -2,29 +2,29 @@
     <c-layout navigationKey="store-navigation">
         <div class="content" id="content">
             <div class="container-fluid">
-                        <div class="row justify-content-center top-product">
-                            <div class="col-12 col-lg-6 top-product__slider">
-                                <img :src="top_game.images['0']" />
-                            </div>
-                            <div class="col-12 col-lg-6 top-product__info">
-                                <h2>{{ top_game.title}}</h2>
-                                <p>{{ top_game.description }}</p>
-                                <tags-list :tags="top_game.tags"></tags-list>
-                                <div class="top-product__footer">
-                                    <div class="price-list">
-                                        <div class="price old_price" v-if="top_game.old_price">
-                                            {{ top_game.old_price }}
-                                            <span>usd</span>
-                                        </div>
-                                        <div class="price">
-                                            {{ top_game.price }}
-                                            <span>usd</span>
-                                        </div>
-                                    </div>
-                                    <a href="#3" class="btn btn-success"><i class="fas fa-cart-plus"></i> add to cart</a>
+                <div class="row justify-content-center top-product">
+                    <div class="col-12 col-lg-6 top-product__slider">
+                        <img :src="top_game.images['0']" />
+                    </div>
+                    <div class="col-12 col-lg-6 top-product__info">
+                        <h2><a :href="`/#/product/${top_game.id}`">{{ top_game.title}}</a></h2>
+                        <p>{{ top_game.description }}</p>
+                        <c-tags :tags="top_game.tags"></c-tags>
+                        <div class="top-product__footer">
+                            <div class="price-list">
+                                <div class="price old_price" v-if="top_game.old_price">
+                                    {{ top_game.old_price }}
+                                    <span>usd</span>
+                                </div>
+                                <div class="price">
+                                    {{ top_game.price }}
+                                    <span>usd</span>
                                 </div>
                             </div>
+                            <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> add to cart</a>
                         </div>
+                    </div>
+                </div>
                 <div class="row game-grid">
                     <div class="col-12">
                         <h3>New Releases</h3>
@@ -45,11 +45,10 @@
                                 <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
                                 <p class="card-text">{{ item.shortDescription }} </p>
 
-                                <tags-list :tags="item.authorTags"></tags-list>
+                                <c-tags :tags="item.authorTags"></c-tags>
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="row game-grid">
@@ -72,7 +71,7 @@
                                 <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
                                 <p class="card-text">{{ item.shortDescription }} </p>
 
-                                <tags-list :tags="item.authorTags"></tags-list>
+                                <c-tags :tags="item.authorTags"></c-tags>
                             </div>
                         </div>
                     </div>
@@ -87,7 +86,7 @@
 export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default'),
-        'tags-list': () => import('@/ui/components/product-tags/index')
+        'c-tags': () => import('@/ui/components/product-tags')
     },
     data() {
         return {
@@ -109,20 +108,10 @@ export default {
     },
     computed: {
         products() {
-            // TODO: less bad
-            console.log('vvv', '/store', this.$store.state.cache.screens['/store'])
-
             if (this.$store.state.cache.screens['/store'] && this.$store.state.cache.screens['/store'].products)
                 return this.$store.state.cache.screens['/store'].products
 
-            console.log('vvv2', this.$store.state.marketplace.products)
-
-            const products = this.$store.state.marketplace.products
-
-            if (this.$store.state.marketplace.products)
-                return this.$store.state.marketplace.products
-            
-            return null
+            return this.$store.state.marketplace.products
         }
     },
     methods: {
@@ -149,6 +138,10 @@ export default {
             font-size: 26px;
             font-weight: bold;
             margin: 0;
+
+            a {
+                color: #fff;
+            }
         }
         p{
             margin: 15px 0;

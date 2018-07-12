@@ -1,10 +1,13 @@
 <template>
-        <div class="product-tags">
-            <a href="#" v-for="(tag, index) in tags"
-               v-bind:key="index"
-               class="product-tags__link"
-               @click="filterTag(tag)">{{ tag }}</a>
-        </div>
+    <div class="product-tags">
+        <a v-for="(tag, index) in tags"
+            :href="`/#/store/tag/${tag}`"
+            :key="index"
+            @click="filterTag(tag)"
+            class="product-tags__link">
+            {{ tag }}
+        </a>
+    </div>
 </template>
 
 <script>
@@ -16,7 +19,7 @@
             }
         }
     }
-    </script>
+</script>
 
 <style lang="scss" scoped>
     .product-tags {
@@ -39,4 +42,4 @@
             margin: 0;
         }
     }
-    </style>
+</style>

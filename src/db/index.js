@@ -5,7 +5,7 @@ const data = require('json-loader!yaml-loader!./data.yaml')
 let loki = null
 
 export let marketplace = null
-export let accounts = null
+export let account = null
 export let republic = null
 
 
@@ -13,7 +13,7 @@ export const init = (cb) => {
     const databaseInitialize = () => {
         reload()
 
-        accounts = loki.getCollection('accounts')
+        account = loki.getCollection('account')
 
         republic = {
             citizens: loki.getCollection('republicCitizens'),
@@ -55,13 +55,13 @@ export const save = () => {
 }
 
 export const clean = () => {
-    loki.getCollection('accounts') && loki.getCollection('accounts').chain().remove()
+    loki.getCollection('account') && loki.getCollection('account').chain().remove()
     loki.getCollection('republicCitizens') && loki.getCollection('republicCitizens').chain().remove()
     loki.getCollection('republicCouncilDelegates') && loki.getCollection('republicCouncilDelegates').chain().remove()
     loki.getCollection('republicElections') && loki.getCollection('republicElections').chain().remove()
     loki.getCollection('marketplaceProducts') && loki.getCollection('marketplaceProducts').chain().remove()
 
-    accounts = loki.addCollection('accounts')
+    account = loki.addCollection('account')
 
     republic = {
         citizens: loki.addCollection('republicCitizens'),
@@ -147,7 +147,7 @@ export const reload = () => {
 
 export const toObject = () => {
     return {
-        accounts: accounts.data,
+        account: account.data,
         marketplace: {
             products: marketplace.products.data
         }
