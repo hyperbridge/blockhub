@@ -712,57 +712,57 @@
 /*-----
     [Media for horizontal navigation]
 -----*/
-@include media-breakpoint-down(md) {
-    .horizontal-navigation{
-        float: left;
-        width: 100%;
+// @include media-breakpoint-down(md) {
+//     .horizontal-navigation{
+//         float: left;
+//         width: 100%;
         
-        > button{
-            display: block;
-        }
-        > ul{
-            width: 100%;                        
-            display: none;
+//         > button{
+//             display: block;
+//         }
+//         > ul{
+//             width: 100%;                        
+//             display: none;
             
-            li{
-                float: left;
-                width: 100%;
+//             li{
+//                 float: left;
+//                 width: 100%;
                 
-                > a{                    
-                    width: 100%;                
-                }
-            }
+//                 > a{                    
+//                     width: 100%;                
+//                 }
+//             }
             
-            > li{
-                border-bottom: 1px dotted $border-color;
+//             > li{
+//                 border-bottom: 1px dotted $border-color;
                 
-                &:last-child{
-                    border-bottom: 0px;
-                }
+//                 &:last-child{
+//                     border-bottom: 0px;
+//                 }
                 
-                > a{
-                    width: 100%;
-                    margin: 5px 0px;
-                    padding: 10px 15px;
-                }
+//                 > a{
+//                     width: 100%;
+//                     margin: 5px 0px;
+//                     padding: 10px 15px;
+//                 }
                 
-                ul{
-                    width: 100%;
-                    margin-top: 0px;
-                    left: 0px;
-                    border: 0px;
-                    border-bottom: 1px solid $border-color;
-                }
-            }
-        }
+//                 ul{
+//                     width: 100%;
+//                     margin-top: 0px;
+//                     left: 0px;
+//                     border: 0px;
+//                     border-bottom: 1px solid $border-color;
+//                 }
+//             }
+//         }
         
-        &--show{
-            > ul{
-                display: block;
-            }
-        }
-    }
-}
+//         &--show{
+//             > ul{
+//                 display: block;
+//             }
+//         }
+//     }
+// }
 
 
 

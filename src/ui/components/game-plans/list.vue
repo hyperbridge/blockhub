@@ -1,4 +1,5 @@
 <template>
+
     <div class="plans-list">
         <div class="plans-list__container">
             <div v-for="(plan, index) in plans" v-bind:key="index" class="plans-list__item">
@@ -12,24 +13,26 @@
             </div>
         </div>
     </div>
+
 </template>
+
 
 <script>
     export default {
         data: function () {
             return {
-                plans:[
+                plans: [
                     {
-                        title: 'Play Tibiria Now',
+                        title: 'Play Tibia Now',
                         link: '#3'
                     },
                     {
-                        title: '1 Mounth Premium benefits',
+                        title: '1 Month Premium benefits',
                         price: '34',
                         link: '#4'
                     },
                     {
-                        title: '2 Mounth Premium benefits',
+                        title: '2 Month Premium benefits',
                         price: '57',
                         link: '#4'
                     }
@@ -39,10 +42,13 @@
     }
 </script>
 
+
 <style lang="scss" scoped>
+
     .plans-list{
         overflow: hidden;
     }
+
     .plans-list__item{
         padding: 10px;
         border-radius: 5px;

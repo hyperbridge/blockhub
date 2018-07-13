@@ -7,7 +7,7 @@
                         <img :src="top_game.images['0']" />
                     </div>
                     <div class="col-12 col-lg-6 top-product__info">
-                        <h2><a :href="`/#/product/${top_game.id}`">{{ top_game.title}}</a></h2>
+                        <h2><a :href="`/#/product/${top_game.id}`">{{ top_game.name }}</a></h2>
                         <p>{{ top_game.description }}</p>
                         <c-tags :tags="top_game.tags"></c-tags>
                         <div class="top-product__footer">
@@ -41,11 +41,11 @@
                     <div class="col-12 col-lg-4" v-for="(item, index) in products" v-bind:key="index">
                         <div class="card invert game-grid__item">
                             <div class="card-body padding-0">
-                                <a :href="`#/product/${item.id}`"><img class="card-img-top" :src="item.images.mediumTileUrl" /></a>
+                                <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile_url" /></a>
                                 <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
-                                <p class="card-text">{{ item.shortDescription }} </p>
+                                <p class="card-text">{{ item.short_description }} </p>
 
-                                <c-tags :tags="item.authorTags"></c-tags>
+                                <c-tags :tags="item.author_tags"></c-tags>
                             </div>
                         </div>
                     </div>
@@ -67,11 +67,11 @@
                     <div class="col-12 col-lg-4" v-for="(item, index) in products" v-bind:key="index">
                         <div class="card invert game-grid__item">
                             <div class="card-body padding-0">
-                                <a :href="`#/product/${item.id}`"><img class="card-img-top" :src="item.images.mediumTileUrl" /></a>
+                                <a :href="`#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile_url" /></a>
                                 <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
-                                <p class="card-text">{{ item.shortDescription }} </p>
+                                <p class="card-text">{{ item.short_description }} </p>
 
-                                <c-tags :tags="item.authorTags"></c-tags>
+                                <c-tags :tags="item.author_tags"></c-tags>
                             </div>
                         </div>
                     </div>
@@ -90,18 +90,15 @@ export default {
     },
     data() {
         return {
-            top_game:{
-                images:[
+            top_game: {
+                images: [
                     'https://3dnews.ru/assets/external/illustrations/2018/05/28/970351/da-inquisition-1.jpg',
                     'https://orig00.deviantart.net/2a38/f/2012/272/8/1/swamp_dragon_by_schur-d5g96rw.jpg'
                 ],
-                title: 'Dragon Age: Origins Ultimate Edition',
-                description: 'Dragon Age: Origins is a role-playing game developed by BioWare ' +
-                'and published by Electronic Arts. It is the first game in the Dragon ' +
-                'Age franchise, and was released for Microsoft Windows, PlayStation 3, ' +
-                'and Xbox 360 in November 2009',
-                tags:['top', 'adventure', 'rpg', 'popular'],
-                old_price: '59',
+                name: 'Dragon Age: Origins Ultimate Edition',
+                description: 'Dragon Age: Origins is a role-playing game developed by BioWare and published by Electronic Arts. It is the first game in the Dragon Age franchise, and was released for Microsoft Windows, PlayStation 3, and Xbox 360 in November 2009',
+                tags: ['top', 'adventure', 'rpg', 'popular'],
+                old_price: '59.00',
                 price: '29.99'
             }
         }

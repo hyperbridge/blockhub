@@ -46,9 +46,7 @@ const rawData = {
     ]
 }
 
-export default {
-    state: normalize(rawData, { articles: [schema.article] }),
-    getters: {},
-    actions: {},
-    mutations: {}
-}
+export const state = normalize(rawData, { articles: [schema.article] })
+export const getters = {}
+export const actions = {}
+export const mutations = {}

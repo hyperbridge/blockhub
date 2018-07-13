@@ -7,7 +7,8 @@ import * as db from '@/db'
 let rawData = {
     contractMeta: null,
     contractAddress: null,
-    selectedApp: null,
+    selectedProduct: null,
+    assets: [],
     products: [],
     upcomingProducts: [],
     newTrendingProducts: [],
@@ -20,6 +21,7 @@ export let state = null
 const updateState = () => {
     rawData = {
         ...rawData,
+        assets: db.marketplace ? db.marketplace.assets.data : [],
         products: db.marketplace ? db.marketplace.products.data : [],
         upcomingProducts: db.marketplace ? db.marketplace.products.find({ 'systemTags': { '$contains': ['upcoming'] } }).data : [],
         newTrendingProducts: db.marketplace ? db.marketplace.products.find({ 'systemTags': { '$contains': ['newTrending'] } }).data : [],
@@ -28,6 +30,7 @@ const updateState = () => {
     }
 
     const normalizedData = normalize(rawData, {
+        assets: [schema.asset],
         products: [schema.product],
         upcomingProducts: [schema.product],
         newTrendingProducts: [schema.product],
@@ -50,8 +53,6 @@ export const actions = {
         updateState()
 
         store.commit('updateState', state)
-
-        //console.log(db.toObject(), JSON.stringify(db.toObject()))
     },
     updateState(store, payload) {
         console.log("[BlockHub][Marketplace] Updating store...")

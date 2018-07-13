@@ -5,6 +5,7 @@ const data = require('./data')
 let loki = null
 
 export let marketplace = null
+export let funding = null
 export let account = null
 export let republic = null
 
@@ -48,6 +49,8 @@ export const clean = () => {
     loki.getCollection('republicCouncilDelegates') && loki.getCollection('republicCouncilDelegates').chain().remove()
     loki.getCollection('republicElections') && loki.getCollection('republicElections').chain().remove()
     loki.getCollection('marketplaceProducts') && loki.getCollection('marketplaceProducts').chain().remove()
+    loki.getCollection('marketplaceAssets') && loki.getCollection('marketplaceAssets').chain().remove()
+    loki.getCollection('fundingProjects') && loki.getCollection('fundingProjects').chain().remove()
 
     account = loki.addCollection('account')
 
@@ -58,14 +61,22 @@ export const clean = () => {
     }
 
     marketplace = {
-        products: loki.addCollection('marketplaceProducts')
+        products: loki.addCollection('marketplaceProducts'),
+        assets: loki.addCollection('marketplaceAssets')
+    }
+
+    funding = {
+        projects: loki.addCollection('fundingProjects')
     }
 }
 
 export const reload = () => {
     clean()
 
-    marketplace.products.insert(data.products)
+    marketplace.products.insert(data.marketplace.products)
+    marketplace.assets.insert(data.marketplace.assets)
+
+    funding.projects.insert(data.funding.projects)
 
     republic.delegates.insert([
         {
@@ -137,7 +148,8 @@ export const toObject = () => {
     return {
         account: account.data,
         marketplace: {
-            products: marketplace.products.data
+            products: marketplace.products.data,
+            assets: marketplace.assets.data
         }
     }
 }
