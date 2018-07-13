@@ -38,7 +38,7 @@
                         </div>
                         <div class="line"></div>
                     </div>
-                    <div class="col-12 col-lg-4" v-for="(item, index) in products" v-bind:key="index">
+                    <div class="col-12 col-lg-4" v-for="(item, index) in new_products" v-bind:key="index">
                         <div class="card invert product-grid__item">
                             <div class="card-body padding-0" v-if="frontpage_product.images">
                                 <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="line"></div>
                     </div>
-                    <div class="col-12 col-lg-4" v-for="(item, index) in products" v-bind:key="index">
+                    <div class="col-12 col-lg-4" v-for="(item, index) in sale_products" v-bind:key="index">
                         <div class="card invert product-grid__item">
                             <div class="card-body padding-0" v-if="frontpage_product.images">
                                 <a :href="`#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
@@ -94,6 +94,12 @@ export default {
                 return this.$store.state.cache.screens['/store'].products
 
             return this.$store.state.marketplace.products
+        },
+        new_products() {
+            return this.$store.state.marketplace.new_products
+        },
+        sale_products() {
+            return this.$store.state.marketplace.sale_products
         },
         frontpage_product() {
             return this.$store.state.marketplace.frontpage_product
@@ -190,6 +196,8 @@ export default {
     }
 
     .product-grid{
+        margin-top: 60px;
+
         h3{
             color: #fff;
             border-bottom: 5px solid #fff;

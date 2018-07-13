@@ -213,7 +213,7 @@
                 "owner": "0x0",
                 "author": "0x0",
                 "system_tags": [
-                    "app",
+                    "game",
                     "upcoming"
                 ],
                 "author_tags": [
@@ -237,7 +237,7 @@
                 "author": "0x0",
                 "system_tags": [
                     "game",
-                    "new_release"
+                    "new"
                 ],
                 "author_tags": [
                     "adventure",
@@ -267,7 +267,7 @@
                 "downloads": 20,
                 "system_tags": [
                     "game",
-                    "new_release"
+                    "new"
                 ],
                 "author": "0x0",
                 "author_tags": [
@@ -411,7 +411,8 @@
                 "type": "game",
                 "downloads": 0,
                 "system_tags": [
-                    "game"
+                    "game",
+                    "sale"
                 ],
                 "author": "0x0",
                 "author_tags": [
@@ -434,7 +435,8 @@
                 "downloads": 100,
                 "system_tags": [
                     "game",
-                    "specials"
+                    "specials",
+                    "sale"
                 ],
                 "author": "0x0",
                 "author_tags": [

@@ -11,6 +11,8 @@ let rawData = {
     assets: [],
     products: [],
     frontpage_product: {},
+    new_products: [],
+    sale_products: [],
     upcoming_products: [],
     trending_products: [],
     top_selling_products: [],
@@ -25,17 +27,21 @@ const updateState = () => {
         assets: db.marketplace ? db.marketplace.assets.data : [],
         products: db.marketplace ? db.marketplace.products.data : [],
         frontpage_product: db.marketplace ? db.marketplace.products.findOne({ 'system_tags': { '$contains': ['frontpage'] } }) : {},
-        featured_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['featured'] } }).data : [],
-        upcoming_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['upcoming'] } }).data : [],
-        trending_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['trending'] } }).data : [],
-        top_selling_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }).data : [],
-        special_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }).data : []
+        sale_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['sale'] } }) : [],
+        new_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['new'] } }) : [],
+        featured_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['featured'] } }) : [],
+        upcoming_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['upcoming'] } }) : [],
+        trending_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['trending'] } }) : [],
+        top_selling_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }) : [],
+        special_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : []
     }
 
     const normalizedData = normalize(rawData, {
         assets: [schema.asset],
         products: [schema.product],
         frontpage_product: schema.product,
+        new_products: [schema.product],
+        sale_products: [schema.product],
         upcoming_products: [schema.product],
         trending_products: [schema.product],
         top_selling_products: [schema.product],
