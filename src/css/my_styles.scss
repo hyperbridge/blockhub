@@ -11,8 +11,10 @@
 -------------------------------------------------------------------*/
 
 body {
+    min-width: 1200px;
+    overflow-x: hidden;
+    
     background: url(/static/img/products/default.png);
     background-size: 100% auto;
-    overflow-x: hidden;
     background-repeat: no-repeat;
 }
