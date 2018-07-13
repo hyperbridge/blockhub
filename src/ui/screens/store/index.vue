@@ -2,22 +2,22 @@
     <c-layout navigationKey="store-navigation">
         <div class="content" id="content">
             <div class="container-fluid">
-                <div class="row justify-content-center top-product">
-                    <div class="col-12 col-lg-6 top-product__slider">
-                        <img :src="top_game.images['0']" />
+                <div class="row justify-content-center frontpage-product" v-if="frontpage_product">
+                    <div class="col-12 col-lg-6 frontpage-product__slider" v-if="frontpage_product.images">
+                        <img :src="frontpage_product.images.medium_tile" />
                     </div>
-                    <div class="col-12 col-lg-6 top-product__info">
-                        <h2><a :href="`/#/product/${top_game.id}`">{{ top_game.name }}</a></h2>
-                        <p>{{ top_game.description }}</p>
-                        <c-tags :tags="top_game.tags"></c-tags>
-                        <div class="top-product__footer">
+                    <div class="col-12 col-lg-6 frontpage-product__info">
+                        <h2><a :href="`/#/product/${frontpage_product.id}`">{{ frontpage_product.name }}</a></h2>
+                        <p>{{ frontpage_product.short_description }}</p>
+                        <c-tags :tags="frontpage_product.author_tags"></c-tags>
+                        <div class="frontpage-product__footer">
                             <div class="price-list">
-                                <div class="price old_price" v-if="top_game.old_price">
-                                    {{ top_game.old_price }}
+                                <div class="price old_price" v-if="frontpage_product.old_price">
+                                    {{ frontpage_product.old_price }}
                                     <span>usd</span>
                                 </div>
                                 <div class="price">
-                                    {{ top_game.price }}
+                                    {{ frontpage_product.price }}
                                     <span>usd</span>
                                 </div>
                             </div>
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row game-grid">
+                <div class="row product-grid">
                     <div class="col-12">
                         <h3>New Releases</h3>
                         <div class="sl_nav">
@@ -38,12 +38,12 @@
                         </div>
                         <div class="line"></div>
                     </div>
-                    <div class="col-12 col-lg-4" v-for="(item, index) in products" v-bind:key="index">
-                        <div class="card invert game-grid__item">
-                            <div class="card-body padding-0">
-                                <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile_url" /></a>
+                    <div class="col-12 col-lg-4" v-for="(item, index) in new_products" v-bind:key="index">
+                        <div class="card invert product-grid__item">
+                            <div class="card-body padding-0" v-if="frontpage_product.images">
+                                <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
                                 <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
-                                <p class="card-text">{{ item.short_description }} </p>
+                                <p class="card-text" hidden>{{ item.short_description }} </p>
 
                                 <c-tags :tags="item.author_tags"></c-tags>
                             </div>
@@ -51,9 +51,9 @@
                     </div>
                 </div>
 
-                <div class="row game-grid">
+                <div class="row product-grid">
                     <div class="col-12">
-                        <h3 class="with_bg">75% Off Week</h3>
+                        <h3 class="with_bg">Summer Sale</h3>
                         <div class="sl_nav">
                             <a href="#3" class="nav-prev">
                                 <i class="fas fa-arrow-left"></i>
@@ -64,12 +64,12 @@
                         </div>
                         <div class="line"></div>
                     </div>
-                    <div class="col-12 col-lg-4" v-for="(item, index) in products" v-bind:key="index">
-                        <div class="card invert game-grid__item">
-                            <div class="card-body padding-0">
-                                <a :href="`#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile_url" /></a>
+                    <div class="col-12 col-lg-4" v-for="(item, index) in sale_products" v-bind:key="index">
+                        <div class="card invert product-grid__item">
+                            <div class="card-body padding-0" v-if="frontpage_product.images">
+                                <a :href="`#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
                                 <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
-                                <p class="card-text">{{ item.short_description }} </p>
+                                <p class="card-text" hidden>{{ item.short_description }} </p>
 
                                 <c-tags :tags="item.author_tags"></c-tags>
                             </div>
@@ -88,27 +88,21 @@ export default {
         'c-layout': () => import('@/ui/layouts/default'),
         'c-tags': () => import('@/ui/components/product-tags')
     },
-    data() {
-        return {
-            top_game: {
-                images: [
-                    'https://3dnews.ru/assets/external/illustrations/2018/05/28/970351/da-inquisition-1.jpg',
-                    'https://orig00.deviantart.net/2a38/f/2012/272/8/1/swamp_dragon_by_schur-d5g96rw.jpg'
-                ],
-                name: 'Dragon Age: Origins Ultimate Edition',
-                description: 'Dragon Age: Origins is a role-playing game developed by BioWare and published by Electronic Arts. It is the first game in the Dragon Age franchise, and was released for Microsoft Windows, PlayStation 3, and Xbox 360 in November 2009',
-                tags: ['top', 'adventure', 'rpg', 'popular'],
-                old_price: '59.00',
-                price: '29.99'
-            }
-        }
-    },
     computed: {
         products() {
             if (this.$store.state.cache.screens['/store'] && this.$store.state.cache.screens['/store'].products)
                 return this.$store.state.cache.screens['/store'].products
 
             return this.$store.state.marketplace.products
+        },
+        new_products() {
+            return this.$store.state.marketplace.new_products
+        },
+        sale_products() {
+            return this.$store.state.marketplace.sale_products
+        },
+        frontpage_product() {
+            return this.$store.state.marketplace.frontpage_product
         }
     },
     methods: {
@@ -120,17 +114,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .top-product{
+    .frontpage-product{
         margin-bottom: 30px;
     }
-    .top-product__slider{
+    .frontpage-product__slider{
         img{
             width: 100%;
             height: 250px;
             object-fit: cover;
         }
     }
-    .top-product__info{
+    .frontpage-product__info{
         h2{
             font-size: 26px;
             font-weight: bold;
@@ -144,7 +138,7 @@ export default {
             margin: 15px 0;
         }
     }
-    .top-product__footer{
+    .frontpage-product__footer{
         .price-list{
             margin-right: 15px;
             display: inline-block;
@@ -201,7 +195,9 @@ export default {
         }
     }
 
-    .game-grid{
+    .product-grid{
+        margin-top: 60px;
+
         h3{
             color: #fff;
             border-bottom: 5px solid #fff;
@@ -265,7 +261,7 @@ export default {
             margin-bottom: 20px;
         }
     }
-    .game-grid__item{
+    .product-grid__item{
         padding: 8px 6px;
         border-radius: 5px;
         h4{

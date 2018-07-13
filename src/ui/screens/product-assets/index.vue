@@ -27,8 +27,8 @@
         if (!product)
             return
 
-        if (product.images && product.images.header_url)
-            window.document.body.style['background-image'] = 'url(' + product.images.header_url + ')'
+        if (product.images && product.images.header)
+            window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
 
         return product
     }

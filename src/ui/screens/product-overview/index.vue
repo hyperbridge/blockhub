@@ -28,14 +28,14 @@
 
                         <div class="row">
                             <div class="col-7">
-                                <c-screen-gallery></c-screen-gallery>
+                                <c-screen-gallery :main="product.images.main" :items="product.images.preview"></c-screen-gallery>
 
                                 <c-sale-box
                                     :sale_box="product.sale_box"
                                     v-if="product.sale_box"
                                 ></c-sale-box>
 
-                                <c-plan-list></c-plan-list>
+                                <c-plan-list :items="product.plans"></c-plan-list>
 
                                 <div class="main-content" v-html="product.content">
                                     {{ product.content }}
@@ -46,7 +46,7 @@
 
                                 <c-frequently-traded-assets :items="product.frequently_traded_assets" :assets_url="`/#/product/${product.id}`" />
 
-                                <c-community-spotlight :community_url="`/#/product/${product.id}`"/>
+                                <c-community-spotlight :discussions="product.community.discussions" :community_url="`/#/product/${product.id}`"/>
 
                                 <div class="card invert system-requirements" v-if="product.system_requirements">
                                     <div class="card-body">
@@ -101,8 +101,8 @@
         if (!product)
             return
 
-        if (product.images && product.images.header_url)
-            window.document.body.style['background-image'] = 'url(' + product.images.header_url + ')'
+        if (product.images && product.images.header)
+            window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
 
         return product
     }
@@ -140,7 +140,6 @@
         margin-top: 15px;
         padding: 15px;
         border-radius: 5px;
-        border: 1px solid rgba(255, 255, 255, 0.07);
         overflow: hidden;
         color: #C6C6D6;
         font-size: 14px;
@@ -160,7 +159,6 @@
             background: #FEEBCE;
         }
     }
-
 
     .system-requirements__item {
         display: block;

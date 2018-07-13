@@ -55,13 +55,13 @@
                                             <div class="crowndfunding-campaign__info">
                                                 <div class="funded">
                                                     <div class="text">114% Funded</div>
-                                                    $ {{ project.funding.funded_amount }}
+                                                    {{ project.funding.funded_amount }} USD
                                                 </div>
                                                 <div class="goal">
                                                     <div class="text">Goal</div>
-                                                    $ {{ project.funding.goal_amount }}
+                                                    {{ project.funding.goal_amount }} USD
                                                 </div>
-                                                <div class="spent-blk">
+                                                <div class="spent">
                                                     <div class="progress progress-bar-vertical">
                                                         <div class="progress-bar bg-success" role="progressbar"
                                                              :aria-valuenow="project.funding.spent_amount['percent']"
@@ -71,9 +71,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="text">Spent</div>
-                                                    $ {{ project.funding.spent_amount['amount'] }}
+                                                    {{ project.funding.spent_amount['amount'] }} USD
                                                 </div>
-                                                <div class="locked-blk">
+                                                <div class="locked">
                                                     <div class="progress progress-bar-vertical">
                                                         <div class="progress-bar bg-success" role="progressbar"
                                                              :aria-valuenow="project.funding.locked_amount['percent']"
@@ -83,9 +83,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="text">Locked</div>
-                                                    $ {{ project.funding.locked_amount['amount'] }}
+                                                    {{ project.funding.locked_amount['amount'] }} USD
                                                 </div>
-                                                <div class="overflow-blk">
+                                                <div class="overflow">
                                                     <div class="progress progress-bar-vertical">
                                                         <div class="progress-bar bg-success" role="progressbar"
                                                              :aria-valuenow="project.funding.overflow_amount['percent']"
@@ -95,7 +95,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="text">Overflow</div>
-                                                    $ {{ project.funding.overflow_amount['amount'] }}
+                                                    {{ project.funding.overflow_amount['amount'] }} USD
                                                 </div>
                                             </div>
                                             <div class="crowndfunding-campaign__action">
@@ -116,10 +116,10 @@
                                     </div>
                                 </div>
 
-                                <div class="card invert milestones-blk" v-if="project.milestones">
+                                <div class="card invert milestones" v-if="project.milestones">
                                     <div class="card-body">
                                         <h2 class="title">Milestones</h2>
-                                        <ul class="milestones-blk__list">
+                                        <ul class="milestones__list">
                                             <li v-for="(item, index) in project.milestones"
                                                 v-bind:class="{ done: item.status }" :key="index">
                                                 <div class="step_number" v-if="item.step_number">
@@ -140,7 +140,7 @@
 
                                 <c-frequently-traded-assets :items="project.frequently_traded_assets" :assets_url="`/#/project/${project.id}`" />
 
-                                <c-community-spotlight :community_url="`/#/project/${project.id}`"/>
+                                <c-community-spotlight :discussions="project.community.discussions" :community_url="`/#/project/${project.id}`"/>
 
                             </div>
                         </div>
@@ -165,8 +165,8 @@
         if (!project)
             return
 
-        if (project.images && project.images.header_url)
-            window.document.body.style['background-image'] = 'url(' + project.images.header_url + ')'
+        if (project.images && project.images.header)
+            window.document.body.style['background-image'] = 'url(' + project.images.header + ')'
 
         return project
     }
@@ -224,7 +224,6 @@
         }
     }
 
-
     .crowndfunding-campaign__progress {
         display: flex;
         justify-content: space-between;
@@ -233,6 +232,7 @@
         overflow: hidden;
         margin: 10px -6%;
     }
+
     .crowndfunding-campaign__progress-stage {
         width: 50%;
         text-align: center;
@@ -328,6 +328,7 @@
             }
         }
     }
+
     .crowndfunding-campaign__info {
         display: flex;
         justify-content: space-between;
@@ -348,9 +349,9 @@
                 text-transform: uppercase;
             }
         }
-        .spent-blk,
-        .locked-blk,
-        .overflow-blk {
+        .spent,
+        .locked,
+        .overflow {
             width: 32%;
             margin-top: 10px;
             font-size: 15px;
@@ -378,6 +379,7 @@
             }
         }
     }
+
     .crowndfunding-campaign__action{
         display: flex;
         justify-content: space-between;
@@ -419,7 +421,12 @@
         }
     }
 
-    .milestones-blk__list {
+    .card {
+        background: transparent;
+        border: 0 none;
+    }
+
+    .milestones__list {
         padding: 0;
         margin: 0;
         li {

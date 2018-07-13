@@ -10,10 +10,13 @@ let rawData = {
     selectedProduct: null,
     assets: [],
     products: [],
-    upcomingProducts: [],
-    newTrendingProducts: [],
-    topSellingProducts: [],
-    specialProducts: []
+    frontpage_product: {},
+    new_products: [],
+    sale_products: [],
+    upcoming_products: [],
+    trending_products: [],
+    top_selling_products: [],
+    special_products: []
 }
 
 export let state = null
@@ -23,19 +26,26 @@ const updateState = () => {
         ...rawData,
         assets: db.marketplace ? db.marketplace.assets.data : [],
         products: db.marketplace ? db.marketplace.products.data : [],
-        upcomingProducts: db.marketplace ? db.marketplace.products.find({ 'systemTags': { '$contains': ['upcoming'] } }).data : [],
-        newTrendingProducts: db.marketplace ? db.marketplace.products.find({ 'systemTags': { '$contains': ['newTrending'] } }).data : [],
-        topSellingProducts: db.marketplace ? db.marketplace.products.find({ 'systemTags': { '$contains': ['topSellers'] } }).data : [],
-        specialProducts: db.marketplace ? db.marketplace.products.find({ 'systemTags': { '$contains': ['specials'] } }).data : []
+        frontpage_product: db.marketplace ? db.marketplace.products.findOne({ 'system_tags': { '$contains': ['frontpage'] } }) : {},
+        sale_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['sale'] } }) : [],
+        new_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['new'] } }) : [],
+        featured_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['featured'] } }) : [],
+        upcoming_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['upcoming'] } }) : [],
+        trending_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['trending'] } }) : [],
+        top_selling_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }) : [],
+        special_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : []
     }
 
     const normalizedData = normalize(rawData, {
         assets: [schema.asset],
         products: [schema.product],
-        upcomingProducts: [schema.product],
-        newTrendingProducts: [schema.product],
-        topSellingProducts: [schema.product],
-        specialProducts: [schema.product]
+        frontpage_product: schema.product,
+        new_products: [schema.product],
+        sale_products: [schema.product],
+        upcoming_products: [schema.product],
+        trending_products: [schema.product],
+        top_selling_products: [schema.product],
+        special_products: [schema.product]
     })
 
     state = { ...rawData, ...normalizedData.entities }
