@@ -9,7 +9,7 @@
                     <div class="col-12" v-if="product">
                         <h1 class="title margin-top-10">{{ product.name }}</h1>
                         
-                        <div class="product__tag" v-for="(tag, index) in product.authorTags" v-bind:key="index">
+                        <div class="product__tag" v-for="(tag, index) in product.author_tags" v-bind:key="index">
                             <a href="#" class="card-link" @click="filterTag(tag)">{{ tag }}</a>
                         </div>
 
@@ -45,8 +45,8 @@ const updateProduct = function() {
     if (!product)
         return
 
-    if (product.images && product.images.headerUrl)
-        window.document.body.style['background-image'] = 'url(' + product.images.headerUrl + ')'
+    if (product.images && product.images.header_url)
+        window.document.body.style['background-image'] = 'url(' + product.images.header_url + ')'
         
     return product
 }

@@ -4,8 +4,8 @@ import Vuex from 'vuex'
 import router from '../router'
 import * as ChaosMonkey from '../framework/chaos-monkey'
 import * as PeerService from '../framework/peer-service'
-import funding from '../modules/funding'
-import news from '../modules/news'
+import * as funding from '../modules/funding'
+import * as news from '../modules/news'
 import * as marketplace from '../modules/marketplace'
 import * as network from '../modules/network'
 import * as database from '../modules/database'
@@ -54,6 +54,7 @@ const developmentMode = CheckDevelopmentMode()
 let initializer = (store) => {
     store.dispatch('database/init')
     store.dispatch('marketplace/init')
+    store.dispatch('funding/init')
 
     store.subscribe((mutation, state) => {
         console.log('[BlockHub] Mutation', mutation, state)
@@ -93,6 +94,7 @@ let initializer = (store) => {
             })
 
             store.dispatch('marketplace/updateState')
+            store.dispatch('funding/updateState')
         }
     })
 

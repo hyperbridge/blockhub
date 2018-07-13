@@ -31,8 +31,8 @@
             </div>
             <!-- //END SIDEPANEL -->
 
-            <div class="status-bar" v-if="!isConnected">
-                {{ connectionMessage }}
+            <div class="status-bar" v-if="!is_connected">
+                {{ connection_message }}
             </div>
         </div>
         <!-- //END PAGE CONTENT -->
@@ -53,16 +53,18 @@ export default {
         'c-account-navigation': () => import('@/ui/components/navigation/account'),
         'c-settings-navigation': () => import('@/ui/components/navigation/settings'),
         'c-help-navigation': () => import('@/ui/components/navigation/help'),
+        'c-funding-navigation': () => import('@/ui/components/navigation/funding'),
         'c-store-navigation': () => import('@/ui/components/navigation/store'),
+        'c-asset-navigation': () => import('@/ui/components/navigation/asset'),
         'c-product-navigation': () => import('@/ui/components/navigation/product'),
         'c-project-navigation': () => import('@/ui/components/navigation/project')
     },
     computed: {
-        isConnected() {
+        is_connected() {
             return this.$store.state.network.connection.internet
         },
-        connectionMessage() {
-            return this.$store.state.network.connectionMessage
+        connection_message() {
+            return this.$store.state.network.connection_message
         }
     },
     data() {

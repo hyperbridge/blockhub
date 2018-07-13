@@ -8,7 +8,7 @@ let rawData = {
         internet: false,
         ethereum: false
     },
-    connectionMessage: "Establishing connection...",
+    connection_message: "Establishing connection...",
     account: {
         wallets: [
             {
@@ -169,7 +169,7 @@ export const actions = {
         
         if (!navigator.onLine) {
             store.state.connection.internet = false
-            store.state.connectionMessage = "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection."
+            store.state.connection_message = "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection."
             return
         }
 
@@ -184,10 +184,10 @@ export const actions = {
             if (xhr.readyState == 4) {
                 if (xhr.status >= 200 && xhr.status < 304) {
                     store.state.connection.internet = true
-                    store.state.connectionMessage = "Connected."
+                    store.state.connection_message = "Connected."
                 } else {
                     store.state.connection.internet = false
-                    store.state.connectionMessage = "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection."
+                    store.state.connection_message = "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection."
                 }
             }
         }

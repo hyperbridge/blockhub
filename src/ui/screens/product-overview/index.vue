@@ -9,7 +9,7 @@
                     <div class="col-12" v-if="product">
                         <h1 class="title margin-top-10 margin-bottom-15">{{ product.name }}</h1>
 
-                        <c-tags-list :tags="product.authorTags"></c-tags-list>
+                        <c-tags-list :tags="product.author_tags"></c-tags-list>
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
@@ -31,7 +31,7 @@
                                 <c-screen-gallery></c-screen-gallery>
 
                                 <c-sale-box
-                                    :sale_box="sale_box"
+                                    :sale_box="product.sale_box"
                                     v-if="product.sale_box"
                                 ></c-sale-box>
 
@@ -42,12 +42,12 @@
                                 </div>
                             </div>
                             <div class="col-5">
-                                <div class="card invert" v-if="product.crowndfunding_data">
+                                <div class="card invert" v-if="product.funding">
                                     <div class="card-body">
                                         <h2 class="title">Crowndfunding campaign</h2>
                                         <div class="crowndfunding-campaign">
                                             <div class="crowndfunding-campaign__progress">
-                                                <div v-for="(stage, index) in product.crowndfunding_data.stages" :key="index"
+                                                <div v-for="(stage, index) in product.funding.stages" :key="index"
                                                      :class="stage.status"
                                                      class="crowndfunding-campaign__progress-stage">
                                                     <i class="fas fa-check" v-if="stage.status === 'done'"></i>
@@ -59,47 +59,47 @@
                                             <div class="crowndfunding-campaign__info">
                                                 <div class="funded">
                                                     <div class="text">114% Funded</div>
-                                                    $ {{ product.crowndfunding_data.funded_amount }}
+                                                    $ {{ product.funding.funded_amount }}
                                                 </div>
                                                 <div class="goal">
                                                     <div class="text">Goal</div>
-                                                    $ {{ product.crowndfunding_data.goal_amount }}
+                                                    $ {{ product.funding.goal_amount }}
                                                 </div>
                                                 <div class="spent-blk">
                                                     <div class="progress progress-bar-vertical">
                                                         <div class="progress-bar bg-success" role="progressbar"
-                                                             :aria-valuenow="product.crowndfunding_data.spent_amount['percent']"
+                                                             :aria-valuenow="product.funding.spent_amount['percent']"
                                                              aria-valuemin="0" aria-valuemax="100"
-                                                             :style="{ height: product.crowndfunding_data.spent_amount['percent'] + '%' }">
-                                                            <span class="sr-only">{{ product.crowndfunding_data.spent_amount['percent'] }}% Complete</span>
+                                                             :style="{ height: product.funding.spent_amount['percent'] + '%' }">
+                                                            <span class="sr-only">{{ product.funding.spent_amount['percent'] }}% Complete</span>
                                                         </div>
                                                     </div>
                                                     <div class="text">Spent</div>
-                                                    $ {{ product.crowndfunding_data.spent_amount['amount'] }}
+                                                    $ {{ product.funding.spent_amount['amount'] }}
                                                 </div>
                                                 <div class="locked-blk">
                                                     <div class="progress progress-bar-vertical">
                                                         <div class="progress-bar bg-success" role="progressbar"
-                                                             :aria-valuenow="product.crowndfunding_data.locked_amount['percent']"
+                                                             :aria-valuenow="product.funding.locked_amount['percent']"
                                                              aria-valuemin="0" aria-valuemax="100"
-                                                             :style="{ height: product.crowndfunding_data.locked_amount['percent'] + '%' }">
-                                                            <span class="sr-only">{{ product.crowndfunding_data.locked_amount['percent'] }}% Complete</span>
+                                                             :style="{ height: product.funding.locked_amount['percent'] + '%' }">
+                                                            <span class="sr-only">{{ product.funding.locked_amount['percent'] }}% Complete</span>
                                                         </div>
                                                     </div>
                                                     <div class="text">Locked</div>
-                                                    $ {{ product.crowndfunding_data.locked_amount['amount'] }}
+                                                    $ {{ product.funding.locked_amount['amount'] }}
                                                 </div>
                                                 <div class="overflow-blk">
                                                     <div class="progress progress-bar-vertical">
                                                         <div class="progress-bar bg-success" role="progressbar"
-                                                             :aria-valuenow="product.crowndfunding_data.overflow_amount['percent']"
+                                                             :aria-valuenow="product.funding.overflow_amount['percent']"
                                                              aria-valuemin="0" aria-valuemax="100"
-                                                             :style="{ height: product.crowndfunding_data.overflow_amount['percent'] + '%' }">
-                                                            <span class="sr-only">{{ product.crowndfunding_data.overflow_amount['percent'] }}% Complete</span>
+                                                             :style="{ height: product.funding.overflow_amount['percent'] + '%' }">
+                                                            <span class="sr-only">{{ product.funding.overflow_amount['percent'] }}% Complete</span>
                                                         </div>
                                                     </div>
                                                     <div class="text">Overflow</div>
-                                                    $ {{ product.crowndfunding_data.overflow_amount['amount'] }}
+                                                    $ {{ product.funding.overflow_amount['amount'] }}
                                                 </div>
                                             </div>
                                             <div class="crowndfunding-campaign__action">
@@ -120,11 +120,11 @@
                                     </div>
                                 </div>
 
-                                <div class="card invert milestones-blk" v-if="product.milestones_data">
+                                <div class="card invert milestones-blk" v-if="product.milestones">
                                     <div class="card-body">
                                         <h2 class="title">Milestones</h2>
                                         <ul class="milestones-blk__list">
-                                            <li v-for="(item, index) in product.milestones_data"
+                                            <li v-for="(item, index) in product.milestones"
                                                 v-bind:class="{ done: item.status }" :key="index">
                                                 <div class="step_number" v-if="item.step_number">
                                                     {{ item.step_number}}
@@ -140,11 +140,11 @@
                                     </div>
                                 </div>
 
-                                <div class="card invert rating-blk" v-if="product.rating_data">
+                                <div class="card invert rating-blk" v-if="product.rating">
                                     <div class="card-body">
                                         <h2 class="title">Rating</h2>
                                         <ul class="rating-blk__list">
-                                            <li v-for="(item, index) in product.rating_data" :key="index">
+                                            <li v-for="(item, index) in product.rating" :key="index">
                                                 <div class="rating-blk__info">
                                                     <span class="rating-blk__name">{{ item.name }}</span>
                                                     <span class="rating-blk__number">{{ item.number }}</span>
@@ -201,7 +201,7 @@
                                     </div>
                                 </div>
 
-                                <div class="card invert community-spotlight" v-if="product.community_data">
+                                <div class="card invert community-spotlight" v-if="product.community">
                                     <div class="card-body">
                                         <h2 class="title">Community Spotlight
                                             <a href="#3" class="title-icon">
@@ -210,7 +210,7 @@
                                             </a>
                                         </h2>
                                         <ul class="community-spotlight__list">
-                                            <li v-for="(item, index) in product.community_data" :key="index">
+                                            <li v-for="(item, index) in product.community.discussions" :key="index">
                                                 <a :href="item.link">
                                                     <span class="community-spotlight__name">{{ item.name }}</span>
                                                     <span class="community-spotlight__count">{{ item.count }}</span>
@@ -233,12 +233,12 @@
                                     </div>
                                 </div>
 
-                                <div class="card transparent languages-blk" v-if="product.languages_data">
+                                <div class="card transparent languages-blk" v-if="product.language_support">
                                     <div class="card-body">
                                         <h2 class="title">Languages <i class="fas fa-laptop title-icon"></i></h2>
                                         <ul class="languages-list">
                                             <li class="languages-list__item"
-                                                v-for="(item, index) in product.languages_data"
+                                                v-for="(item, index) in product.language_support"
                                                 :key="index">
                                                 <span class="languages-list__name">{{ item.name }}</span>
                                                 <span class="languages-list__icon">
@@ -283,8 +283,8 @@
         if (!product)
             return
 
-        if (product.images && product.images.headerUrl)
-            window.document.body.style['background-image'] = 'url(' + product.images.headerUrl + ')'
+        if (product.images && product.images.header_url)
+            window.document.body.style['background-image'] = 'url(' + product.images.header_url + ')'
 
         return product
     }
@@ -307,9 +307,7 @@
             product: updateProduct
         },
         mounted: updateProduct,
-        created: {
-            updateProduct
-        },
+        created: updateProduct,
         beforeDestroy() {
             window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
         }
