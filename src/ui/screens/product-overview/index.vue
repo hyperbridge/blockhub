@@ -28,14 +28,14 @@
 
                         <div class="row">
                             <div class="col-7">
-                                <c-screen-gallery></c-screen-gallery>
+                                <c-screen-gallery :main="product.images.main" :items="product.images.preview"></c-screen-gallery>
 
                                 <c-sale-box
                                     :sale_box="product.sale_box"
                                     v-if="product.sale_box"
                                 ></c-sale-box>
 
-                                <c-plan-list></c-plan-list>
+                                <c-plan-list :items="product.plans"></c-plan-list>
 
                                 <div class="main-content" v-html="product.content">
                                     {{ product.content }}
@@ -101,8 +101,8 @@
         if (!product)
             return
 
-        if (product.images && product.images.header_url)
-            window.document.body.style['background-image'] = 'url(' + product.images.header_url + ')'
+        if (product.images && product.images.header)
+            window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
 
         return product
     }
@@ -160,7 +160,6 @@
             background: #FEEBCE;
         }
     }
-
 
     .system-requirements__item {
         display: block;

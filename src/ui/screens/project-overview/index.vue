@@ -165,8 +165,8 @@
         if (!project)
             return
 
-        if (project.images && project.images.header_url)
-            window.document.body.style['background-image'] = 'url(' + project.images.header_url + ')'
+        if (project.images && project.images.header)
+            window.document.body.style['background-image'] = 'url(' + project.images.header + ')'
 
         return project
     }

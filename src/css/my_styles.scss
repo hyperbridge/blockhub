@@ -48,6 +48,11 @@ body {
     }
 }
 
+.card-img-top {
+    height: 120px;
+    object-fit: cover;
+}
+
 a.btn-outline-white {
     font-size: 12px;
     text-transform: uppercase;

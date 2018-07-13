@@ -2,7 +2,7 @@
 
     <div class="plans-list">
         <div class="plans-list__container">
-            <div v-for="(plan, index) in plans" v-bind:key="index" class="plans-list__item">
+            <div v-for="(plan, index) in items" v-bind:key="index" class="plans-list__item">
                 <h6>{{ plan.title}}</h6>
                 <a :href="plan.link" v-if="plan.price">
                     <i class="fas fa-shopping-bag"></i> Buy for ${{ plan.price }}
@@ -19,26 +19,7 @@
 
 <script>
     export default {
-        data: function () {
-            return {
-                plans: [
-                    {
-                        title: 'Play Tibia Now',
-                        link: '#3'
-                    },
-                    {
-                        title: '1 Month Premium benefits',
-                        price: '34',
-                        link: '#4'
-                    },
-                    {
-                        title: '2 Month Premium benefits',
-                        price: '57',
-                        link: '#4'
-                    }
-                ]
-            }
-        }
+        props: ['items']
     }
 </script>
 
