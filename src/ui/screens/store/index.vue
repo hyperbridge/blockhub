@@ -83,6 +83,13 @@
 </template>
 
 <script>
+const updateLandingImage = function() {
+    const frontpage_product = this.$store.state.marketplace.frontpage_product
+
+    if (frontpage_product.images && frontpage_product.images.header)
+        window.document.body.style['background-image'] = 'url(' + frontpage_product.images.header + ')'
+}
+
 export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default'),
@@ -102,6 +109,8 @@ export default {
             return this.$store.state.marketplace.sale_products
         },
         frontpage_product() {
+            updateLandingImage.bind(this)()
+
             return this.$store.state.marketplace.frontpage_product
         }
     },
@@ -109,6 +118,11 @@ export default {
         filterTag(tagName) {
             alert(tagName)
         }
+    },
+    mounted: updateLandingImage,
+    created: updateLandingImage,
+    beforeDestroy() {
+        window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
     }
 }
 </script>
