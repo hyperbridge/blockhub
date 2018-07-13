@@ -21,6 +21,25 @@
                 "comments": [],
                 "contributors": [],
                 "moderators": [],
+                "community": {
+                    "discussions": [
+                        {
+                            "name": "[GUIDE] Short Title",
+                            "count": "381",
+                            "link": "#3"
+                        },
+                        {
+                            "name": "Just Title",
+                            "count": "31",
+                            "link": "#4"
+                        },
+                        {
+                            "name": "Just Some a Little bit long Title",
+                            "count": "1701",
+                            "link": "#5"
+                        }
+                    ]
+                },
                 "funding": {
                     "stages": [
                         {

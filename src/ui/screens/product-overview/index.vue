@@ -46,7 +46,7 @@
 
                                 <c-frequently-traded-assets :items="product.frequently_traded_assets" :assets_url="`/#/product/${product.id}`" />
 
-                                <c-community-spotlight :community_url="`/#/product/${product.id}`"/>
+                                <c-community-spotlight :discussions="product.community.discussions" :community_url="`/#/product/${product.id}`"/>
 
                                 <div class="card invert system-requirements" v-if="product.system_requirements">
                                     <div class="card-body">
@@ -140,7 +140,6 @@
         margin-top: 15px;
         padding: 15px;
         border-radius: 5px;
-        border: 1px solid rgba(255, 255, 255, 0.07);
         overflow: hidden;
         color: #C6C6D6;
         font-size: 14px;

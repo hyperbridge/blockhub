@@ -155,8 +155,7 @@
     &.invert{
         background: $invert-sidepanel-background;
         color: $invert-color;
-        background: rgba(0, 0, 0, 0.4);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(70, 70, 70, 0.5);
 
         .card-header{     
             background: rgba(0,0,0,0.2);
