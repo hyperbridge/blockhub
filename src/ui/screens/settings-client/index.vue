@@ -134,23 +134,27 @@
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <a href="https://github.com/hyperbridge/marketplace-protocol/blob/master/smart-contracts/ethereum/contracts/MarketplaceService.sol">MarketplaceService</a> 
-                                                    <span class="badge badge-success">Deployed</span>
+                                                    <a href="https://github.com/hyperbridge/marketplace-protocol/blob/master/smart-contracts/ethereum/contracts/Marketplace.sol">Marketplace</a> 
+                                                    <span class="badge badge-success" v-if="contracts.marketplace.Marketplace.created_at">Deployed</span>
+                                                    <span class="badge badge-warning" v-if="!contracts.marketplace.Marketplace.created_at">Undeployed</span>
                                                 </td>
                                                 <td>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" value="" />
+                                                        <input type="text" class="form-control" :value="contracts.marketplace.Marketplace.address" />
                                                         <span class="input-group-append">
                                                             <button class="btn btn-light" type="button">Copy</button>
                                                         </span>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <strong>Undeployed</strong><br>
-                                                    <span class="text-muted"></span>
+                                                    <div v-if="contracts.marketplace.Marketplace.created_at">
+                                                        <strong>{{ contracts.marketplace.Marketplace.created_at | formatDate }}</strong><br>
+                                                        <span class="text-muted">{{ contracts.marketplace.Marketplace.created_at | formatTime }}</span>
+                                                    </div>
+                                                    <strong v-if="!contracts.marketplace.Marketplace.created_at">Undeployed</strong>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-light btn-sm">Deploy</button>
+                                                    <button class="btn btn-light btn-sm" @click.prevent="deployContract('marketplace', 'Marketplace')">Deploy</button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -219,10 +223,12 @@ export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default')
     },
-    data() {
-        return {}
-    },
     computed: {
+        contracts() {
+            return {
+                marketplace: this.$store.state.marketplace.network[this.$store.state.marketplace.current_network].contracts
+            }
+        }
     },
     methods: {
         cleanDatabase() {
@@ -230,9 +236,10 @@ export default {
         },
         reloadDatabase() {
             this.$store.dispatch('database/reload')
+        },
+        deployContract(moduleName, contractName) {
+            this.$store.commit(moduleName + '/deployContract', { contractName })
         }
-    },
-    beforeDestroy() {
     }
 }
 </script>

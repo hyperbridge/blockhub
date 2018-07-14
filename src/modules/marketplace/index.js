@@ -5,9 +5,7 @@ import * as ethereum from '@/framework/ethereum'
 import * as db from '@/db'
 
 let rawData = {
-    contractMeta: null,
-    contractAddress: null,
-    selectedProduct: null,
+    selected_product: null,
     assets: [],
     products: [],
     frontpage_product: {},
@@ -16,7 +14,30 @@ let rawData = {
     upcoming_products: [],
     trending_products: [],
     top_selling_products: [],
-    special_products: []
+    special_products: [],
+    network: {
+        ropsten: {
+            contracts: {
+                Marketplace: {
+                    created_at: null,
+                    address: "0x7ed7885cbc32668242a53b806ce676980ebb084e"
+                }
+            },
+            user_from_address: "0x66fb0ff9a23e90f3f205a406fd3253532919fb69",
+            user_to_address: null
+        },
+        local: {
+            contracts: {
+                Marketplace: {
+                    created_at: null,
+                    address: null
+                }
+            },
+            user_from_address: "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
+            user_to_address: null
+        }
+    },
+    current_network: 'local'
 }
 
 export let state = null
@@ -103,15 +124,55 @@ export const mutations = {
         }
     },
     updateProduct(state, payload) {
-        const product = db.marketplace.products.findOne({ 'id': payload.id })
+        const success = () => {
+            const product = db.marketplace.products.findOne({ 'id': id })
 
-        product.name = payload.name
-        state.products[payload.id].name = payload.name
+            product.id = id
+            product.name = name
 
-        db.save()
+            db.marketplace.products.update(product)
+
+            state.products[id] = product
+
+            db.save()
+        }
+
+        MarketplaceProtocol.Ethereum.Models.Marketplace.updateProduct(payload).then((res) => {
+            success()
+        })
+    },
+    createProduct(state, payload) {
+        const success = (id) => {
+            const product = db.marketplace.products.findOne({ 'id': id })
+
+            product.id = id
+            product.name = name
+
+            db.marketplace.products.update(product)
+
+            db.save()
+        }
+
+        MarketplaceProtocol.Ethereum.Models.Marketplace.createProduct(payload).then((res) => {
+            success(res[0])
+        })
     },
     submitProductForReviewResponse(state, product) {
         db.marketplace.products.update(product)
+    },
+    deployContract(state, payload) {
+        const meta = MarketplaceProtocol.Ethereum.Contracts[payload.contractName]
+        const contract = new window.web3.eth.Contract(meta.abi)
+
+        contract.deploy({
+            data: meta.bytecode
+        }).send({
+            from: state.network[state.current_network].user_from_address,
+            gas: 4500000
+        }).then((res) => {
+            state.network[state.current_network].contracts[payload.contractName].created_at = Date.now()
+            state.network[state.current_network].contracts[payload.contractName].address = res._address
+        })
     }
 }
 
