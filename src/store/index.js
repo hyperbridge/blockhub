@@ -56,6 +56,7 @@ let initializer = (store) => {
     db.setInitCallback(() => {
         // TODO: is this a race condition?
         store.dispatch('database/init')
+        store.dispatch('marketplace/initEthereum')
     })
 
     store.dispatch('marketplace/init')
