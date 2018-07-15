@@ -21,26 +21,26 @@ PeerService.config.RELAY = false
 ChaosMonkey.config.ENABLED = false
 
 /* Usage:
-- dev1 - Navigate to http://localhost:8000/template.html#/dev1
-    - Best used to test a well-behaved peer relayer
-- dev2 - Navigate to http://localhost:8000/template.html#/dev2
-    - Best used to test a non-Web3 enabled user can receive data from peer network
+- mode1 - Navigate to http://localhost:8000/#/mode1
+    - Best used to mode a well-behaved peer relayer
+- mode2 - Navigate to http://localhost:8000/#/mode2
+    - Best used to mode a non-Web3 enabled user can receive data from peer network
     - Clean database
     - No relaying, ie. no responding to peer data requests
-- dev3 - Navigate to http://localhost:8000/template.html#/dev3
-    - Best used to test fault-tolerance, ie. does this thing behave appropriately when problems occur
+- mode3 - Navigate to http://localhost:8000/#/mode3
+    - Best used to mode fault-tolerance, ie. does this thing behave appropriately when problems occur
     - Permanent chaos monkey
 */
 const CheckDevelopmentMode = () => {
     let hash = document.location.hash.replace('#/', '')
 
-    if (hash.slice(0, 3) !== 'dev') return false
+    if (hash.slice(0, 3) !== 'mode') return false
 
-    if (hash === 'dev1') {
+    if (hash === 'mode1') {
         PeerService.config.RELAY = true
-    } else if (hash === 'dev2') {
+    } else if (hash === 'mode2') {
         PeerService.config.RELAY = false
-    } else if (hash === 'dev3') {
+    } else if (hash === 'mode3') {
         ChaosMonkey.config.FORCED = true
     }
 
@@ -73,7 +73,7 @@ let initializer = (store) => {
                 store.dispatch('database/clean')
             }
 
-            if (developmentMode === 'dev2') {
+            if (developmentMode === 'mode2') {
                 store.dispatch('database/clean')
             }
         } else if (mutation.type === 'database/updateState') {
