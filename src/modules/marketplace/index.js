@@ -4,47 +4,14 @@ import MarketplaceProtocol from 'marketplace-protocol'
 import * as ethereum from '@/framework/ethereum'
 import * as db from '@/db'
 
-let rawData = {
-    selected_product: null,
-    assets: [],
-    products: [],
-    frontpage_product: {},
-    new_products: [],
-    sale_products: [],
-    upcoming_products: [],
-    trending_products: [],
-    top_selling_products: [],
-    special_products: [],
-    network: {
-        ropsten: {
-            contracts: {
-                Marketplace: {
-                    created_at: null,
-                    address: "0x7ed7885cbc32668242a53b806ce676980ebb084e"
-                }
-            },
-            user_from_address: "0x66fb0ff9a23e90f3f205a406fd3253532919fb69",
-            user_to_address: null
-        },
-        local: {
-            contracts: {
-                Marketplace: {
-                    created_at: null,
-                    address: null
-                }
-            },
-            user_from_address: "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
-            user_to_address: null
-        }
-    },
-    current_network: 'local'
-}
+let rawData = {}
 
 export let state = null
 
 const updateState = () => {
     rawData = {
         ...rawData,
+        ...db.marketplace.config.data[0],
         assets: db.marketplace ? db.marketplace.assets.data : [],
         products: db.marketplace ? db.marketplace.products.data : [],
         frontpage_product: db.marketplace ? db.marketplace.products.findOne({ 'system_tags': { '$contains': ['frontpage'] } }) : {},
@@ -127,14 +94,12 @@ export const mutations = {
         const success = () => {
             const product = db.marketplace.products.findOne({ 'id': id })
 
-            product.id = id
-            product.name = name
+            Object.assign(product, payload)
 
             db.marketplace.products.update(product)
-
-            state.products[id] = product
-
             db.save()
+
+            Vue.set(state.products, id, product)
         }
 
         MarketplaceProtocol.Ethereum.Models.Marketplace.updateProduct(payload).then((res) => {
@@ -143,17 +108,24 @@ export const mutations = {
     },
     createProduct(state, payload) {
         const success = (id) => {
-            const product = db.marketplace.products.findOne({ 'id': id })
+            const product = db.marketplace.products.insert({ id, ...payload })
 
-            product.id = id
-            product.name = name
+            Object.assign(product, payload)
 
             db.marketplace.products.update(product)
-
             db.save()
+
+            Vue.set(state.products, id, product)
         }
 
-        MarketplaceProtocol.Ethereum.Models.Marketplace.createProduct(payload).then((res) => {
+        MarketplaceProtocol.Ethereum.Models.Marketplace.createProduct({
+            name: payload.name,
+            version: '1',
+            category: '1',
+            files: '1',
+            checksum: '1',
+            permissions: '1'
+        }).then((res) => {
             success(res[0])
         })
     },
@@ -172,6 +144,9 @@ export const mutations = {
         }).then((res) => {
             state.network[state.current_network].contracts[payload.contractName].created_at = Date.now()
             state.network[state.current_network].contracts[payload.contractName].address = res._address
+
+            db.marketplace.config.update(state)
+            db.save()
         })
     }
 }

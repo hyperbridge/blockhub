@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import router from '../router'
+import * as db from '../db'
 import * as ChaosMonkey from '../framework/chaos-monkey'
 import * as PeerService from '../framework/peer-service'
 import * as funding from '../modules/funding'
@@ -52,7 +53,10 @@ const developmentMode = CheckDevelopmentMode()
 
 
 let initializer = (store) => {
-    store.dispatch('database/init')
+    db.setInitCallback(() => {
+        store.dispatch('database/init')
+    })
+
     store.dispatch('marketplace/init')
     store.dispatch('funding/init')
 
@@ -99,6 +103,10 @@ let initializer = (store) => {
     })
 
     const monitorPathState = async () => {
+        if (!store.state.network.connection.operator) {
+            return
+        }
+
         const path = document.location.hash.replace('#', '')
 
         console.log("[BlockHub] Checking peers for state changes on path", path)
