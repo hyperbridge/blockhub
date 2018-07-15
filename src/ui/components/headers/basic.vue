@@ -1,6 +1,7 @@
 <template>
     <!-- Header Module -->
     <header class="appHeader">
+        <div class="appHeader-topBar"></div>
         <div class="appHeader-barLeft">
             <a href="/#/store">
                 <span class="fa fa-home"></span>
@@ -12,6 +13,7 @@
                 <span class="fa fa-arrow-right"></span>
             </a>
         </div>
+        <div class="appHeader-shadow"></div>
         <div class="appHeader-barCenter"><!-- add icons --></div>
         <div class="appHeader-barRight">
             <a href="/#/settings">
@@ -42,7 +44,7 @@
                     </li>
                 </ul>
             </nav>
-            <a class="appHeader-navCenter" href="#/home">A</a>
+            <a class="appHeader-navCenter" href="/#/home">&nbsp;</a>
             <nav class="horizontal-navigation appHeader-navRight">
                 <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
                 <ul>
@@ -96,7 +98,6 @@ export default {}
             width: 100vw;
             display: block;
             content: '';
-            background: #fff;
         }
 
         a {
@@ -131,6 +132,28 @@ export default {}
         }
     }
 
+    .appHeader-topBar {
+        height: 10px;
+        width: 100vw;
+        display: block;
+        background: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 13;
+    }
+
+    .appHeader-shadow {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 56px;
+        pointer-events: none;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABVoAAAA4CAYAAAAMw0MRAAAGnElEQVR4Ae3dOw5TUQwEUN/EChuhh22w/0VQQYtQPkZhCZnSJ/1E8tFUT5bv+fb9x7P8CBAgQIAAAQIECBAgQIAAAQIECBAgQOBjga6q+8dpQQIECBAgQIAAAQIECBAgQIAAAQIECBCo94fWBwcCBAgQIECAAAECBAgQIECAAAECBAgQ+FzARuvndpIECBAgQIAAAQIECBAgQIAAAQIECBD4L9BTx0arMhAgQIAAAQIECBAgQIAAAQIECBAgQCAQ6KlxozUAFCVAgAABAgQIECBAgAABAgQIECBAgEBXHR9a9YAAAQIECBAgQIAAAQIECBAgQIAAAQKBQJ/xGFbgJ0qAAAECBAgQIECAAAECBAgQIECAAIHqc142WhWBAAECBAgQIECAAAECBAgQIECAAAECgcD7dIDHsAJAUQIECBAgQIAAAQIECBAgQIAAAQIECLjRqgMECBAgQIAAAQIECBAgQIAAAQIECBAIBXrO2GgNEcUJECBAgAABAgQIECBAgAABAgQIENgt0DPlRuvuDpieAAECBAgQIECAAAECBAgQIECAAIFQoGvcaA0NxQkQIECAAAECBAgQIECAAAECBAgQWC7QlxobrctLYHwCBAgQIECAAAECBAgQIECAAAECBDKBnnI6ICOUJkCAAAECBAgQIECAAAECBAgQIEBgu0Cf43TA9hKYnwABAgQIECBAgAABAgQIECBAgACBTKDL6YBMUJoAAQIECBAgQIAAAQIECBAgQIAAgfUC79MBj/UKAAgQIECAAAECBAgQIECAAAECBAgQIBAIdNXxGFYAKEqAAAECBAgQIECAAAECBAgQIECAAIGuedlo1QMCBAgQIECAAAECBAgQIECAAAECBAgEAj02WgM+UQIECBAgQIAAAQIECBAgQIAAAQIECFT1pcZGqyYQIECAAAECBAgQIECAAAECBAgQIEAgEOiqcqM1ABQlQIAAAQIECBAgQIAAAQIECBAgQIBAz9VjWGpAgAABAgQIECBAgAABAgQIECBAgACBRKDr5XRAAihLgAABAgQIECBAgAABAgQIECBAgAABpwN0gAABAgQIECBAgAABAgQIECBAgAABAqFAzxyPYYWI4gQIECBAgAABAgQIECBAgAABAgQI7Bbovrw8hrW7A6YnQIAAAQIECBAgQIAAAQIECBAgQCAU6OfzaqM1RBQnQIAAAQIECBAgQIAAAQIECBAgQGC3QFcdG627O2B6AgQIECBAgAABAgQIECBAgAABAgRCga562WgNEcUJECBAgAABAgQIECBAgAABAgQIENgt0HOx0bq7AqYnQIAAAQIECBAgQIAAAQIECBAgQCAV6PKhNTWUJ0CAAAECBAgQIECAAAECBAgQIEBguUDP0+mA5R0wPgECBAgQIECAAAECBAgQIECAAAECoUBfPYYVEooTIECAAAECBAgQIECAAAECBAgQILBdoGdstG4vgfkJECBAgAABAgQIECBAgAABAgQIEMgEumy0ZoLSBAgQIECAAAECBAgQIECAAAECBAisF+iZeqxXAECAAAECBAgQIECAAAECBAgQIECAAIFA4H064B7kRQkQIECAAAECBAgQIECAAAECBAgQILBeoOd6bLSurwEAAgQIECBAgAABAgQIECBAgAABAgQSga45NloTQVkCBAgQIECAAAECBAgQIECAAAECBNYL9LWcDljfAgAECBAgQIAAAQIECBAgQIAAAQIECEQCPeN0QCQoTIAAAQIECBAgQIAAAQIECBAgQIDAeoGeuTgdsL4GAAgQIECAAAECBAgQIECAAAECBAgQSAR65u4xrERQlgABAgQIECBAgAABAgQIECBAgACB9QI2WtdXAAABAgQIECBAgAABAgQIECBAgAABAqlAP9uN1hRRngABAgQIECBAgAABAgQIECBAgACB3QJ9m4cbrbs7YHoCBAgQIECAAAECBAgQIECAAAECBEKBvt3KjdYQUZwAAQIECBAgQIAAAQIECBAgQIAAgd0CXfXXRuvuDpieAAECBAgQIECAAAECBAgQIECAAIFQoKuuPrSGiOIECBAgQIAAAQIECBAgQIAAAQIECOwW6F9PpwN2V8D0BAgQIECAAAECBAgQIECAAAECBAikAv3n528bramiPAECBAgQIECAAAECBAgQIECAAAECqwVO1dcvqwUMT4AAAQIECBAgQIAAAQIECBAgQIAAgVDgVNUl/A9xAgQIECBAgAABAgQIECBAgAABAgQIrBb4B9OOcmw9Qwc2AAAAAElFTkSuQmCC) no-repeat top left;
+        z-index: 11;
+    }
+
     .appHeader-navCenter {
         position: absolute;
         top: -20px;
@@ -138,6 +161,7 @@ export default {}
         width: 250px;
         height: 50px;
         text-indent: -9999px;
+        z-index: 13;
     }
 
     .appHeader-barLeft {
@@ -148,6 +172,7 @@ export default {}
         width: 118px;
         padding-left: 10px;
         background: url(../../../assets/SVG/left-bar.svg) no-repeat top left;
+        z-index: 13;
     }
 
     .appHeader-barLeft, .appHeader-barRight {
@@ -168,10 +193,12 @@ export default {}
     }
 
     .appHeader-barCenter {
+        position: relative;
         margin: -10px auto 0 auto;
         height: 50px;
         width: 258px;
         background: url(../../../assets/SVG/logo.svg) no-repeat center center/135px, url(../../../assets/SVG/center-bar.svg) no-repeat top left;
+        z-index: 14;
     }
 
     .appHeader-barRight {
@@ -182,6 +209,7 @@ export default {}
         width: 66px;
         background: url(../../../assets/SVG/right-bar.svg) no-repeat top right;
         text-align: right;
+        z-index: 13;
     }
 
     .appHeader-nav {
@@ -189,7 +217,7 @@ export default {}
         top: 20px;
         width: 100%;
         font-size: 15px;
-        z-index: inherit;
+        z-index: 15;
 
         ul {
             padding: 0;
