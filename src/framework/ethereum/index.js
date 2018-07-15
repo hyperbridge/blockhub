@@ -42,13 +42,23 @@ export const init = () => {
       //   alert('Please connect to the Rinkeby network')
       // }
 
+      let timeout = setTimeout(() => {
+        const err = 'Ethereum not initialized. Please use install MetaMask for Chrome, or use a dapp browser like Mist.'
+
+        reject(err)
+      }, 5000)
+
       web3.eth.net.isListening().then(() => {
         console.log('[BlockHub] Ethereum initialized')
+
+        clearTimeout(timeout)
 
         local._tokenContract = new local._web3.eth.Contract(tokenAbi.abi, local._tokenContractAddress) //_web3.eth.contract(tokenAbi).at(_tokenContractAddress)
 
         resolve()
       }, () => {
+        clearTimeout(timeout)
+
         const err = 'Ethereum not initialized. Please use install MetaMask for Chrome, or use a dapp browser like Mist.'
 
         reject(err)

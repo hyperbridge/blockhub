@@ -191,6 +191,7 @@ export const actions = {
 
         const failure = (err) => {
             store.state.connection.ethereum = false
+            store.state.connection.datasource = false
 
             store.state.connection.status.code = 344
             store.state.connection.status.message = err
