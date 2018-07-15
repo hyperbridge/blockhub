@@ -54,6 +54,7 @@ const developmentMode = CheckDevelopmentMode()
 
 let initializer = (store) => {
     db.setInitCallback(() => {
+        // TODO: is this a race condition?
         store.dispatch('database/init')
     })
 

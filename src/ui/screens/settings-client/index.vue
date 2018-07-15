@@ -35,160 +35,44 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="margin-top-0 margin-bottom-0" colspan="5" style="background: rgba(255, 255, 255, 0.01);">
-                                                    <a href="https://github.com/hyperbridge/token"><strong>Core</strong></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input">
-                                                        <span class="custom-control-label"></span>
-                                                    </label>
-                                                </td>
-                                                <td>
-                                                    <a href="https://github.com/hyperbridge/marketplace-protocol/blob/master/smart-contracts/ethereum/contracts/MarketplaceService.sol">Token</a> 
-                                                    <span class="badge badge-success">Deployed</span>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" value="0x7312c5f03dac383b0e371263851b14dc8e1e0089" />
-                                                        <span class="input-group-append">
-                                                            <button class="btn btn-light" type="button">Copy</button>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <strong>21 June 2018</strong><br>
-                                                    <span class="text-muted">12:23:15 GMT</span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-light btn-sm">Deploy</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input">
-                                                        <span class="custom-control-label"></span>
-                                                    </label>
-                                                </td>
-                                                <td>
-                                                    <a href="https://github.com/hyperbridge/marketplace-protocol/blob/master/smart-contracts/ethereum/contracts/MarketplaceService.sol">TokenDelegate</a> 
-                                                    <span class="badge badge-success">Deployed</span>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" value="0x9453eD18535138Bd6037C31fd0EBCcba2b331961" />
-                                                        <span class="input-group-append">
-                                                            <button class="btn btn-light" type="button">Copy</button>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <strong>21 June 2018</strong><br>
-                                                    <span class="text-muted">12:23:15 GMT</span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-light btn-sm">Deploy</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input">
-                                                        <span class="custom-control-label"></span>
-                                                    </label>
-                                                </td>
-                                                <td>
-                                                    <a href="https://github.com/hyperbridge/marketplace-protocol/blob/master/smart-contracts/ethereum/contracts/MarketplaceService.sol">EternalStorage</a> 
-                                                    <span class="badge badge-success">Deployed</span>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" value="0x23376381c5ea53fa7440e60fd94883e83f9bea83" />
-                                                        <span class="input-group-append">
-                                                            <button class="btn btn-light" type="button">Copy</button>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <strong>21 June 2018</strong><br>
-                                                    <span class="text-muted">12:23:15 GMT</span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-light btn-sm">Deploy</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="margin-top-0 margin-bottom-0" colspan="5" style="background: rgba(255, 255, 255, 0.01);">
-                                                    <a href="https://github.com/hyperbridge/marketplace-protocol"><strong>Marketplace Protocol</strong></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input">
-                                                        <span class="custom-control-label"></span>
-                                                    </label>
-                                                </td>
-                                                <td>
-                                                    <a href="https://github.com/hyperbridge/marketplace-protocol/blob/master/smart-contracts/ethereum/contracts/Marketplace.sol">Marketplace</a> 
-                                                    <span class="badge badge-success" v-if="contracts.marketplace.Marketplace.created_at">Deployed</span>
-                                                    <span class="badge badge-warning" v-if="!contracts.marketplace.Marketplace.created_at">Undeployed</span>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" :value="contracts.marketplace.Marketplace.address" />
-                                                        <span class="input-group-append">
-                                                            <button class="btn btn-light" type="button">Copy</button>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div v-if="contracts.marketplace.Marketplace.created_at">
-                                                        <strong>{{ contracts.marketplace.Marketplace.created_at | formatDate }}</strong><br>
-                                                        <span class="text-muted">{{ contracts.marketplace.Marketplace.created_at | formatTime }}</span>
-                                                    </div>
-                                                    <strong v-if="!contracts.marketplace.Marketplace.created_at">Undeployed</strong>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-light btn-sm" @click.prevent="deployContract('marketplace', 'Marketplace')">Deploy</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="margin-top-0 margin-bottom-0" colspan="5" style="background: rgba(255, 255, 255, 0.01);">
-                                                    <a href="https://github.com/hyperbridge/funding-protocol"><strong>Funding Protocol</strong></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input">
-                                                        <span class="custom-control-label"></span>
-                                                    </label>
-                                                </td>
-                                                <td>
-                                                    <a href="https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/FundingService.sol">FundingService</a> 
-                                                    <span class="badge badge-success">Deployed</span>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" value="" />
-                                                        <span class="input-group-append">
-                                                            <button class="btn btn-light" type="button">Copy</button>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <strong>Undeployed</strong><br>
-                                                    <span class="text-muted"></span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-light btn-sm">Deploy</button>
-                                                </td>
-                                            </tr>
+                                            <template v-for="protocol in protocols">
+                                                <tr v-bind:key="protocol.id">
+                                                    <td class="margin-top-0 margin-bottom-0" colspan="5" style="background: rgba(255, 255, 255, 0.01);">
+                                                        <a :href="protocol.link"><strong>{{ protocol.name }}</strong></a>
+                                                    </td>
+                                                </tr>
+                                                <tr v-for="contract in protocol.contracts" v-bind:key="index">
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <a :href="contract.link">{{ contract.name }}</a> 
+                                                        <span class="badge badge-success" v-if="contract.created_at">Deployed</span>
+                                                        <span class="badge badge-warning" v-if="!contract.created_at">Undeployed</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" :value="contract.address" />
+                                                            <span class="input-group-append">
+                                                                <button class="btn btn-light" type="button">Copy</button>
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div v-if="contract.created_at">
+                                                            <strong>{{ contract.created_at | formatDate }}</strong><br>
+                                                            <span class="text-muted">{{ contract.created_at | formatTime }}</span>
+                                                        </div>
+                                                        <strong v-if="!contract.created_at">Undeployed</strong>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-light btn-sm" @click.prevent="deployContract(protocol.id, contract.name)">Deploy</button>
+                                                    </td>
+                                                </tr>
+                                            </template>
                                         </tbody>
                                     </table>
                                 </div>
@@ -224,10 +108,60 @@ export default {
         'c-layout': () => import('@/ui/layouts/default')
     },
     computed: {
-        contracts() {
-            return {
-                marketplace: this.$store.state.marketplace.network[this.$store.state.marketplace.current_network].contracts
-            }
+        protocols() {
+            return [
+                {
+                    id: 'token',
+                    name: 'Token',
+                    link: 'https://github.com/hyperbridge/token',
+                    contracts: [
+                        {
+                            name: 'Token',
+                            link: 'https://github.com/hyperbridge/token/blob/master/smart-contracts/ethereum/contracts/Token.sol',
+                            created_at: null,
+                            address: null
+                        },
+                        {
+                            name: 'TokenDelegate',
+                            link: 'https://github.com/hyperbridge/token/blob/master/smart-contracts/ethereum/contracts/TokenDelegate.sol',
+                            created_at: null,
+                            address: null
+                        },
+                        {
+                            name: 'EternalStorage',
+                            link: 'https://github.com/hyperbridge/token/blob/master/smart-contracts/ethereum/contracts/EternalStorage.sol',
+                            created_at: null,
+                            address: null
+                        }
+                    ]
+                },
+                {
+                    id: 'marketplace',
+                    name: 'Marketplace Protocol',
+                    link: 'https://github.com/hyperbridge/marketplace-protocol',
+                    contracts: [
+                        {
+                            name: 'Marketplace',
+                            link: 'https://github.com/hyperbridge/marketplace-protocol/blob/master/smart-contracts/ethereum/contracts/Marketplace.sol',
+                            created_at: this.$store.state.marketplace.network[this.$store.state.marketplace.current_network].contracts.Marketplace.created_at,
+                            address: this.$store.state.marketplace.network[this.$store.state.marketplace.current_network].contracts.Marketplace.address
+                        }
+                    ]
+                },
+                {
+                    id: 'funding',
+                    name: 'Funding Protocol',
+                    link: 'https://github.com/hyperbridge/funding-protocol',
+                    contracts: [
+                        {
+                            name: 'Project',
+                            link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/Project.sol',
+                            created_at: null,
+                            address: null
+                        }
+                    ]
+                }
+            ]
         }
     },
     methods: {
