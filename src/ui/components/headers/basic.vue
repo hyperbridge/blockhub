@@ -2,7 +2,7 @@
     <!-- Header Module -->
     <header class="appHeader">
         <div class="appHeader-barLeft">
-            <a href="#/store">
+            <a href="/#/store">
                 <span class="fa fa-home"></span>
             </a>
             <a @click="$router.go(-1)">
@@ -13,25 +13,29 @@
             </a>
         </div>
         <div class="appHeader-barCenter"><!-- add icons --></div>
-        <div class="appHeader-barRight"><!-- add icons --></div>
+        <div class="appHeader-barRight">
+            <a href="/#/settings">
+                <span class="fa fa-cog"></span>
+            </a>
+        </div>
         <nav class="appHeader-nav">
             <nav class="horizontal-navigation appHeader-navLeft">
                 <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
                 <ul>
                     <li>
-                        <a href="#/store">
-                            <span class="icon fa fa-shopping-bag"></span>
+                        <a href="/#/store">
+                            <span class="icon fa fa-shopping-cart"></span>
                             <span class="text">Store</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#/account/wallets">
-                            <span class="icon fa fa-wallet"></span>
+                        <a href="/#/account/wallets">
+                            <span class="icon fa fa-credit-card"></span>
                             <span class="text">Wallets</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#/account/identities">
+                        <a href="/#/account/identities">
                             <span class="icon fa fa-id-card"></span>
                             <span class="text">Identities</span>
                         </a>
@@ -43,25 +47,25 @@
                 <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
                 <ul>
                     <li>
-                        <a href="#/identity/1">
+                        <a href="/#/identity/1">
                             <span class="icon fa fa-user"></span>
                             <span class="text">Satoshi</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#/identity/1/contacts">
+                        <a href="/#/identity/1/contacts">
                             <span class="icon fa fa-users"></span>
                             <span class="text">Contacts</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#/settings">
+                        <a href="/#/settings">
                             <span class="icon fa fa-cog"></span>
                             <span class="text">Settings</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#/account/signout">
+                        <a href="/#/account/signout">
                             <span class="icon fa fa-sign-out-alt"></span>
                             <span class="text">Sign Out</span>
                         </a>
@@ -144,6 +148,9 @@ export default {}
         width: 118px;
         padding-left: 10px;
         background: url(../../../assets/SVG/left-bar.svg) no-repeat top left;
+    }
+
+    .appHeader-barLeft, .appHeader-barRight {
         a{
             color:#30314C;
             display: inline-block;
@@ -157,7 +164,6 @@ export default {}
         .fa{
             line-height: 30px;
             font-size: 16px;
-            
         }
     }
 
@@ -175,6 +181,7 @@ export default {}
         height: 30px;
         width: 66px;
         background: url(../../../assets/SVG/right-bar.svg) no-repeat top right;
+        text-align: right;
     }
 
     .appHeader-nav {

@@ -29,6 +29,12 @@
                     <span class="text">New Identity</span>
                 </a>
             </li>
+            <li>
+                <a href="/#/developer">
+                    <span class="icon fa fa-home"></span>
+                    <span class="text">Developer Area</span>
+                </a>
+            </li>
         </ul>
     </div>
 </template>

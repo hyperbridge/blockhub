@@ -3,18 +3,68 @@ import Loki from 'lokijs'
 const data = require('./data')
 
 let loki = null
+let initCallback = null
 
-export let marketplace = null
-export let funding = null
 export let account = null
-export let republic = null
 
+export let marketplace = {
+    config: null,
+    products: null,
+    assets: null
+}
 
-export const init = (cb) => {
+export let funding = {
+    projects: null
+}
+
+export let setInitCallback = (cb) => {
+    initCallback = cb
+}
+
+export const init = () => {
+
     const databaseInitialize = () => {
-        reload()
+        console.log('[BlockHub] Database loaded from IndexedDB')
 
-        cb && cb()
+        if (loki.getCollection('account')) {
+            account = loki.getCollection('account')
+            marketplace.config = loki.getCollection('marketplaceConfig')
+            marketplace.products = loki.getCollection('marketplaceProducts')
+            marketplace.assets = loki.getCollection('marketplaceAssets')
+            funding.projects = loki.getCollection('fundingProjects')
+        } else {
+            let accountData = account.data
+            let marketplaceConfigData = marketplace.config.data
+            let marketplaceProductsData = marketplace.products.data
+            let marketplaceAssetsData = marketplace.assets.data
+            let fundingProjectsData = funding.projects.data
+
+            account.chain().remove()
+            marketplace.config.chain().remove()
+            marketplace.products.chain().remove()
+            marketplace.assets.chain().remove()
+            funding.projects.chain().remove()
+
+            account = loki.addCollection('account')
+            marketplace.config = loki.addCollection('marketplaceConfig')
+            marketplace.products = loki.addCollection('marketplaceProducts')
+            marketplace.assets = loki.addCollection('marketplaceAssets')
+            funding.projects = loki.addCollection('fundingProjects')
+
+            account.data = accountData
+            marketplace.products.data = marketplaceProductsData
+            marketplace.assets.data = marketplaceAssetsData
+            funding.projects.data = fundingProjectsData
+            marketplace.config.data = marketplaceConfigData
+
+            account.ensureId()
+            account.ensureAllIndexes(true)
+
+            marketplace.config.ensureId()
+            marketplace.config.ensureAllIndexes(true)
+        }
+
+        initCallback()
     }
 
     const idbAdapter = (new Loki()).getIndexedAdapter()
@@ -26,122 +76,67 @@ export const init = (cb) => {
         autosave: true,
         autosaveInterval: 4000
     })
+
+    loadDefault()
 }
 
 export const instance = () => {
     return loki
 }
 
+export const loadDefault = () => {
+    account = loki.addCollection('accountDefault')
+    marketplace.config = loki.addCollection('marketplaceConfigDefault')
+    marketplace.products = loki.addCollection('marketplaceProductsDefault')
+    marketplace.assets = loki.addCollection('marketplaceAssetsDefault')
+    funding.projects = loki.addCollection('fundingProjectsDefault')
+
+    data.marketplace.id = '1'
+
+    try {
+        updateCollection(marketplace.config, data.marketplace)
+        updateCollection(marketplace.products, data.marketplace.products)
+        updateCollection(marketplace.assets, data.marketplace.assets)
+        updateCollection(funding.projects, data.funding.projects)
+    }
+    catch (e) {
+        console.warn(e)
+    }
+}
+
 export const save = () => {
-    loki.saveDatabase(function(err) {
+    loki.saveDatabase(function (err) {
         if (err) {
-            console.log(err);
+            console.log(err)
         }
         else {
-            console.log("Database saved.");
+            console.log("[BlockHub] Database saved.")
         }
     })
 }
 
 export const clean = () => {
-    loki.getCollection('account') && loki.getCollection('account').chain().remove()
-    loki.getCollection('republicCitizens') && loki.getCollection('republicCitizens').chain().remove()
-    loki.getCollection('republicCouncilDelegates') && loki.getCollection('republicCouncilDelegates').chain().remove()
-    loki.getCollection('republicElections') && loki.getCollection('republicElections').chain().remove()
-    loki.getCollection('marketplaceProducts') && loki.getCollection('marketplaceProducts').chain().remove()
-    loki.getCollection('marketplaceAssets') && loki.getCollection('marketplaceAssets').chain().remove()
-    loki.getCollection('fundingProjects') && loki.getCollection('fundingProjects').chain().remove()
+    account.chain().remove()
+    marketplace.config.chain().remove()
+    marketplace.products.chain().remove()
+    marketplace.assets.chain().remove()
+    funding.projects.chain().remove()
+}
 
-    account = loki.addCollection('account')
+const updateCollection = (collection, data) => {
+    let obj = collection.findObject({ 'id': data.id })
 
-    republic = {
-        citizens: loki.addCollection('republicCitizens'),
-        delegates: loki.addCollection('republicCouncilDelegates'),
-        elections: loki.addCollection('republicElections')
-    }
-
-    marketplace = {
-        products: loki.addCollection('marketplaceProducts'),
-        assets: loki.addCollection('marketplaceAssets')
-    }
-
-    funding = {
-        projects: loki.addCollection('fundingProjects')
+    if (obj) {
+        collection.update(data)
+    } else {
+        collection.insert(data)
     }
 }
 
 export const reload = () => {
     clean()
 
-    marketplace.products.insert(data.marketplace.products)
-    marketplace.assets.insert(data.marketplace.assets)
-
-    funding.projects.insert(data.funding.projects)
-
-    republic.delegates.insert([
-        {
-            name: 'Hyperbridge',
-            address: "0x0",
-            industry: "Technology"
-        }
-    ])
-
-    republic.citizens.insert([
-        {
-            name: "eric",
-            address: "0x0",
-            apps: [
-                {
-                    id: "0asdasd0a-adsasda-asdasd9",
-                    name: "blockhub",
-                    link: "http://something/blockhub.exe"
-                }
-            ]
-        }
-    ])
-
-    republic.elections.insert([
-        {
-            title: '2018 Election',
-            description: 'We intend to do things. Learn more here: https://hyperbridge.org/election2018',
-            startAt: '03-03-2018',
-            endAt: '03-03-2019',
-            nominees: [
-                {
-                    address: "0x0",
-                    name: "Microsoft"
-                },
-                {
-                    address: "0x0",
-                    name: "Google"
-                }
-            ],
-            winners: []
-        },
-        {
-            title: '2019 Election',
-            startAt: '03-03-2019',
-            endAt: '03-03-2020',
-            nominees: [
-                {
-                    address: "0x0",
-                    name: "Microsoft"
-                },
-                {
-                    address: "0x0",
-                    name: "Google"
-                }
-            ],
-            winners: [
-                {
-                    address: "0x0",
-                    name: "Google"
-                }
-            ]
-        }
-    ])
-
-    save()
+    loadDefault()
 }
 
 export const toObject = () => {
@@ -153,3 +148,5 @@ export const toObject = () => {
         }
     }
 }
+
+init()

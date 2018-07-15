@@ -74,6 +74,7 @@
     "liferaft": "^1.0.0",
     "lokijs": "^1.5.5",
     "mocha": "^4.0.1",
+    "moment": "^2.22.2",
     "nightwatch": "^0.9.16",
     "normalizr": "^3.2.4",
     "opn": "^5.1.0",

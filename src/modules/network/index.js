@@ -6,9 +6,32 @@ import * as PeerService from '../../framework/peer-service'
 let rawData = {
     connection: {
         internet: false,
-        ethereum: false
+        datasource: false,
+        operator: false,
+        ethereum: false,
+        status: {
+            code: null,
+            message: "Establishing connection..."
+        }
     },
-    connection_message: "Establishing connection...",
+    user_submitted_connection_messages: [
+        {
+            id: '1',
+            message: 'wubba lubba dub dubbbb',
+            user: {
+                id: '0x0',
+                name: 'fr0stbyte'
+            }
+        },
+        {
+            id: '2',
+            message: 'LOADING SIMULATION',
+            user: {
+                id: '0x0',
+                name: 'GymTim'
+            }
+        }
+    ],
     account: {
         wallets: [
             {
@@ -152,14 +175,28 @@ export const actions = {
 
         store.dispatch('checkInternetConnection')
         store.dispatch('checkEthereumConnection')
+
+        setInterval(() => {
+            store.dispatch('checkEthereumConnection')
+        }, 5000)
     },
     checkEthereumConnection(store, payload) {
         const success = () => {
             store.state.connection.ethereum = true
+            store.state.connection.datasource = true
+
+            store.state.connection.status.code = null
+            store.state.connection.status.message = null
         }
 
-        const failure = () => {
+        const failure = (err) => {
             store.state.connection.ethereum = false
+            store.state.connection.datasource = false
+
+            store.state.connection.status.code = 344
+            store.state.connection.status.message = err
+
+            // TODO: fallback to peer datasource
         }
 
         Ethereum.init().then(success, failure)

@@ -71,6 +71,10 @@
 
                                   <li><a href="#/curators">Curators</a></li>
                                   <li><a href="#/curator/1">Curator #1</a></li>
+
+                                  <li><a href="#/developer">Developer Area</a></li>
+                                  <li><a href="#/developer/new-product">Developer > New Product</a></li>
+                                  <li><a href="#/developer/new-asset">Developer > New Digital Asset</a></li>
                                 </ul>
                             </div>
                         </div>

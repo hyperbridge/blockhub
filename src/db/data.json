@@ -146,6 +146,37 @@
         ]
     },
     "marketplace": {
+        "network": {
+            "ropsten": {
+                "contracts": {
+                    "Marketplace": {
+                        "created_at": null,
+                        "address": "0x7ed7885cbc32668242a53b806ce676980ebb084e"
+                    }
+                },
+                "user_from_address": "0x66fb0ff9a23e90f3f205a406fd3253532919fb69",
+                "user_to_address": null
+            },
+            "local": {
+                "contracts": {
+                    "Marketplace": {
+                        "created_at": null,
+                        "address": null
+                    }
+                },
+                "user_from_address": "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
+                "user_to_address": null
+            }
+        },
+        "current_network": "local",
+        "selected_product": null,
+        "frontpage_product": {},
+        "new_products": [],
+        "sale_products": [],
+        "upcoming_products": [],
+        "trending_products": [],
+        "top_selling_products": [],
+        "special_products": [],
         "assets": [
             {
                 "id": "1",

@@ -67,7 +67,7 @@
                     <div class="col-12 col-lg-4" v-for="(item, index) in sale_products" v-bind:key="index">
                         <div class="card invert product-grid__item">
                             <div class="card-body padding-0" v-if="frontpage_product.images">
-                                <a :href="`#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
+                                <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
                                 <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
                                 <p class="card-text" hidden>{{ item.short_description }} </p>
 
@@ -83,6 +83,13 @@
 </template>
 
 <script>
+const updateLandingImage = function() {
+    const frontpage_product = this.$store.state.marketplace.frontpage_product
+
+    if (frontpage_product.images && frontpage_product.images.header)
+        window.document.body.style['background-image'] = 'url(' + frontpage_product.images.header + ')'
+}
+
 export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default'),
@@ -102,6 +109,8 @@ export default {
             return this.$store.state.marketplace.sale_products
         },
         frontpage_product() {
+            updateLandingImage.bind(this)()
+
             return this.$store.state.marketplace.frontpage_product
         }
     },
@@ -109,6 +118,11 @@ export default {
         filterTag(tagName) {
             alert(tagName)
         }
+    },
+    mounted: updateLandingImage,
+    created: updateLandingImage,
+    beforeDestroy() {
+        window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
     }
 }
 </script>
@@ -167,7 +181,8 @@ export default {
                         background: red;
                         content: "";
                         display: inline-block;
-                        transform: rotate(30deg)
+                        transform: rotate(20deg);
+                        opacity: 0.7;
                     }
                     &:after{
                         position: absolute;
@@ -179,7 +194,8 @@ export default {
                         background: red;
                         content: "";
                         display: inline-block;
-                        transform: rotate(-30deg)
+                        transform: rotate(-20deg);
+                        opacity: 0.7;
                     }
                 }
             }

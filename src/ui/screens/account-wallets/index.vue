@@ -110,6 +110,7 @@
     </c-layout>
 </template>
 
+
 <script>
     export default {
         name: 'wallets',
@@ -121,11 +122,6 @@
                 return this.$store.state.network.wallets
             }
         },
-        data: () => ({
-            
-        }),
-        created() {
-        },
         methods: {
             copyWalletNumber: function (number) {
                 alert('You have copy wallet number - ' + number )
@@ -133,6 +129,7 @@
         }
     }
 </script>
+
 
 <style lang="scss" scoped>
     .action-wallets {
@@ -241,6 +238,7 @@
         overflow: hidden;
         display: block;
         text-decoration: none;
+        color: #fff;
     }
     .wallet-item__head {
         display: flex;
@@ -348,4 +346,5 @@
             }
         }
     }
+
 </style>

@@ -28,15 +28,11 @@ export const actions = {
     init(store, payload) {
         console.log('[BlockHub] Database initializing...')
 
-        db.init(() => {
-            console.log('[BlockHub] Database initialized')
+        store.commit('initialized')
 
-            store.commit('initialized')
+        updateState()
 
-            updateState()
-
-            store.commit('updateState', state)
-        })
+        store.commit('updateState', state)
     },
     clean(store, payload) {
         console.log('[BlockHub] Cleaning database...')

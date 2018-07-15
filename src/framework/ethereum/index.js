@@ -32,21 +32,40 @@ export const init = () => {
 
   return new Promise((resolve, reject) => {
     if (typeof window.web3 !== 'undefined') {
-      const provider = new window.web3.providers.HttpProvider("http://localhost:8545")
-      // Use Mist/MetaMask's provider
-      local._web3 = new Web3(provider) //window.web3.currentProvider)
+      if (!local._web3) {
+        const provider = new window.web3.providers.HttpProvider("http://localhost:8545")
+        // Use Mist/MetaMask's provider
+        local._web3 = new Web3(provider) //window.web3.currentProvider)
+      }
 
       // if (_web3.version !== "1.0.0-beta.34") {
       //   alert('Please connect to the Rinkeby network')
       // }
 
-      local._tokenContract = new local._web3.eth.Contract(tokenAbi.abi, local._tokenContractAddress) //_web3.eth.contract(tokenAbi).at(_tokenContractAddress)
+      let timeout = setTimeout(() => {
+        const err = 'Ethereum not initialized. Please use install MetaMask for Chrome, or use a dapp browser like Mist.'
 
-      console.log('[BlockHub] Ethereum initialized')
+        reject(err)
+      }, 5000)
 
-      resolve()
+      web3.eth.net.isListening().then(() => {
+        console.log('[BlockHub] Ethereum initialized')
+
+        clearTimeout(timeout)
+
+        local._tokenContract = new local._web3.eth.Contract(tokenAbi.abi, local._tokenContractAddress) //_web3.eth.contract(tokenAbi).at(_tokenContractAddress)
+
+        resolve()
+      }, () => {
+        clearTimeout(timeout)
+
+        const err = 'Ethereum not initialized. Please use install MetaMask for Chrome, or use a dapp browser like Mist.'
+
+        reject(err)
+      })
+
     } else {
-      const err = '[BlockHub] Ethereum not initialized. Please use install MetaMask for Chrome, or use a dapp browser like Mist.'
+      const err = 'Ethereum not initialized. Please use install MetaMask for Chrome, or use a dapp browser like Mist.'
 
       reject(err)
     }

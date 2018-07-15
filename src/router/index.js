@@ -167,6 +167,16 @@ const router = new Router({
       component: () => import('@/ui/screens/settings-client')
     },
     {
+      path: '/developer',
+      name: 'Developer Area',
+      component: () => import('@/ui/screens/developer')
+    },
+    {
+      path: '/developer/new-product',
+      name: 'New Product',
+      component: () => import('@/ui/screens/developer-new-product')
+    },
+    {
       path: '/product/:id',
       name: 'Product',
       props: true,

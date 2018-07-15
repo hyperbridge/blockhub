@@ -1,12 +1,10 @@
 <template>
-    <c-layout>
+    <c-layout navigationKey="store-navigation">
         <div class="content" id="content">
             <div class="container-fluid">  
                 <div class="row">
                     <div class="col-12">
-                        <p v-if="is_connected">
-                            Welcome, you're now on the decentralized web. <a href="/#/sitemap">Check the sitemap</a> for things to do.
-                        </p>
+                        <a href="/#/developer/new-product">New Product</a>
                     </div>
                 </div>
             </div>
@@ -14,22 +12,20 @@
     </c-layout>
 </template>
 
-
 <script>
 export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default')
     },
-    computed: {
-        is_connected() {
-            return this.$store.state.network.connection.datasource
+    data() {
+        return {
         }
     },
-    updated() {
+    methods: {
     }
 }
 </script>
 
-
 <style lang="scss" scoped>
+
 </style>

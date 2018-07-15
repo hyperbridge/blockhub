@@ -28,14 +28,14 @@
 
                         <div class="row">
                             <div class="col-7">
-                                <c-screen-gallery :main="product.images.main" :items="product.images.preview"></c-screen-gallery>
+                                <c-screen-gallery :main="product.images.main" :items="product.images.preview" />
 
                                 <c-sale-box
                                     :sale_box="product.sale_box"
                                     v-if="product.sale_box"
-                                ></c-sale-box>
+                                />
 
-                                <c-plan-list :items="product.plans"></c-plan-list>
+                                <c-plan-list :items="product.plans" />
 
                                 <div class="main-content" v-html="product.content">
                                     {{ product.content }}
@@ -46,7 +46,7 @@
 
                                 <c-frequently-traded-assets :items="product.frequently_traded_assets" :assets_url="`/#/product/${product.id}`" />
 
-                                <c-community-spotlight :discussions="product.community.discussions" :community_url="`/#/product/${product.id}`"/>
+                                <c-community-spotlight :discussions="product.community.discussions" :community_url="`/#/product/${product.id}`" />
 
                                 <div class="card invert system-requirements" v-if="product.system_requirements">
                                     <div class="card-body">
