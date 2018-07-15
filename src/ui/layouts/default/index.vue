@@ -15,15 +15,15 @@
         <div class="page__content page__content-invert invert" id="page-content">
             <div class="loading loading--w-spinner" v-if="!is_connected">
                 <div>
-                    <div v-if="!connection_status.code">
+                    <div>
                         <div class="loading-spinner"></div>
                         <p class="loading__message">{{ user_submitted_connection_message.message }}</p>
                         <p class="loading__user">Submitted by <a :href="`/#/identity/${user_submitted_connection_message.user.id}`">@{{ user_submitted_connection_message.user.name }}</a></p>
                     </div>
 
-                    <h2 v-if="connection_status.code">ERROR {{ connection_status.code }}</h2>
+                    <h1 class="loading__status-code" v-if="connection_status.code">ERROR {{ connection_status.code }}</h1>
                     
-                    <p class="loading__status">{{ connection_status.message }}</p>
+                    <p class="loading__status-message">{{ connection_status.message }}</p>
                     
                     <div class="loading__links">
                         <p>Connection problems? Let us know!</p>
@@ -143,9 +143,13 @@ export default {
         }
     }
 
+    .loading__status-code {
+        margin-top: 80px;
+    }
 
-    .loading__status {
-        color: #999;
+    .loading__status-message {
+        color: #ddd;
+        font-size: 16px;
         margin-top: 30px;
         text-transform: uppercase;
     }
