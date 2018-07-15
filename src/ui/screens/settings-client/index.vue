@@ -41,7 +41,7 @@
                                                         <a :href="protocol.link"><strong>{{ protocol.name }}</strong></a>
                                                     </td>
                                                 </tr>
-                                                <tr v-for="contract in protocol.contracts" v-bind:key="index">
+                                                <tr v-for="contract in protocol.contracts" v-bind:key="contract.name">
                                                     <td>
                                                         <label class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input">

@@ -39,6 +39,12 @@ export const init = () => {
             let marketplaceAssetsData = marketplace.assets.data
             let fundingProjectsData = funding.projects.data
 
+            account.chain().remove()
+            marketplace.config.chain().remove()
+            marketplace.products.chain().remove()
+            marketplace.assets.chain().remove()
+            funding.projects.chain().remove()
+
             account = loki.addCollection('account')
             marketplace.config = loki.addCollection('marketplaceConfig')
             marketplace.products = loki.addCollection('marketplaceProducts')
@@ -71,6 +77,14 @@ export const init = () => {
         autosaveInterval: 4000
     })
 
+    loadDefault()
+}
+
+export const instance = () => {
+    return loki
+}
+
+export const loadDefault = () => {
     account = loki.addCollection('accountDefault')
     marketplace.config = loki.addCollection('marketplaceConfigDefault')
     marketplace.products = loki.addCollection('marketplaceProductsDefault')
@@ -90,10 +104,6 @@ export const init = () => {
     }
 }
 
-export const instance = () => {
-    return loki
-}
-
 export const save = () => {
     loki.saveDatabase(function (err) {
         if (err) {
@@ -106,22 +116,11 @@ export const save = () => {
 }
 
 export const clean = () => {
-    // loki.getCollection('marketplaceConfig') && loki.getCollection('marketplaceConfig').chain().remove()
-    // loki.getCollection('marketplaceProducts') && loki.getCollection('marketplaceProducts').chain().remove()
-    // loki.getCollection('marketplaceAssets') && loki.getCollection('marketplaceAssets').chain().remove()
-    // loki.getCollection('fundingProjects') && loki.getCollection('fundingProjects').chain().remove()
-
-    // account = loki.getCollection('account') ? loki.getCollection('account') : loki.addCollection('account')
-
-    // marketplace = {
-    //     config: loki.getCollection('marketplaceConfig') ? loki.getCollection('marketplaceConfig') : loki.addCollection('marketplaceConfig'),
-    //     products: loki.getCollection('marketplaceProducts') ? loki.getCollection('marketplaceProducts') : loki.addCollection('marketplaceProducts'),
-    //     assets: loki.getCollection('marketplaceAssets') ? loki.getCollection('marketplaceAssets') : loki.addCollection('marketplaceAssets')
-    // }
-
-    // funding = {
-    //     projects: loki.getCollection('fundingProjects') ? loki.getCollection('fundingProjects') : loki.addCollection('fundingProjects')
-    // }
+    account.chain().remove()
+    marketplace.config.chain().remove()
+    marketplace.products.chain().remove()
+    marketplace.assets.chain().remove()
+    funding.projects.chain().remove()
 }
 
 const updateCollection = (collection, data) => {
@@ -135,8 +134,9 @@ const updateCollection = (collection, data) => {
 }
 
 export const reload = () => {
-    //clean()
+    clean()
 
+    loadDefault()
 }
 
 export const toObject = () => {
