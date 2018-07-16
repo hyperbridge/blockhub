@@ -283,6 +283,7 @@
             border-radius: 6px;
             box-shadow: 1px 1px 0px #101010;
             font-size: 17px;
+            padding-top: 8px;
 
             span {
                 font-size: 17px;

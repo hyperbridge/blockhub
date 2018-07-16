@@ -134,14 +134,13 @@ export default {
         display: inline-block;
         width: 100px;
         height: 100px;
-        margin-top: -19px;
-        background: transparent;
-        text-align: left;
+        margin-top: -19px !important;
+        background: transparent !important;
         text-transform: uppercase;
         border: 0;
         font-weight: bold;
         font-size: 13px;
-        text-align: center;
+        text-align: center !important;
 
         img {
             position: absolute;
@@ -165,10 +164,14 @@ export default {
         &:hover, &:focus, &:active {
             background: transparent !important;
         }
-    }
 
-    .exit-btn {
-        padding-left: 36px;
+        &.exit-btn {
+            padding-left: 36px;
+        }
+
+        &.edit-btn {
+            margin-top: -38px !important;
+        }
     }
 
     .appHeader {
@@ -315,10 +318,6 @@ export default {
         a {
             z-index: 12;
             position: relative;
-        }
-
-        .btn-block {
-            margin-top: -38px;
         }
     }
 
