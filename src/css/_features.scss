@@ -432,9 +432,11 @@ body{
     
     &:before{
         content: "\f106";
-        font-family: "FontAwesome";
+        font-family: Font Awesome\ 5 Free;
+        font-weight: 900;
         position: absolute;
         line-height: 20px;
+        font-size: 30px;
         text-align: center;
         width: 100%;
         color: #fff;
