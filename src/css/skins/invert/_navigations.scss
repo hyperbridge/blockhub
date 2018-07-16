@@ -35,8 +35,24 @@
         
         > ul{
             > li{
-                &.title{                
-                    color: $invert-color-secondary;
+                &.title{
+                    color: #fff;
+                    font-size: 14px;
+                    font-weight: bold;
+
+                    > a {
+                        color: #fff;
+                        font-size: 14px;
+                        font-weight: bold;
+                    }
+                }
+
+                &.more{
+                    > a {
+                        color: #fff;
+                        font-size: 12px;
+                        font-weight: bold;
+                    }
                 }
 
                 > a{

@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="editor-container">
-                                    <div class="editor" v-if="developer_mode">
+                                    <div class="editor" v-if="editor_mode">
                                         <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('name')" v-if="!activeElement['name']">Change Product Name <span class="fa fa-edit"></span></button>
 
                                         <div class="form-group" v-if="activeElement['name']">
@@ -26,18 +26,18 @@
                                 </div>
 
                                 <div class="editor-container">
-                                    <div class="" v-if="developer_mode">
+                                    <div class="" v-if="editor_mode">
                                         <div class="form-group">
                                             <select id="tag-editor" class="form-control" multiple="multiple">
                                                 <option v-for="(tag, index) in author_tag_options" :key="index" :selected="product.author_tags.includes(tag)">{{ tag }}</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <c-tags-list :tags="product.author_tags" v-if="!developer_mode"></c-tags-list>
+                                    <c-tags-list :tags="product.author_tags" v-if="!editor_mode"></c-tags-list>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="editor" v-if="developer_mode">
+                                <div class="editor" v-if="editor_mode">
                                     <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('background_image')" v-if="!activeElement['background_image']">Change Background Image <span class="fa fa-edit"></span></button>
 
                                     <div class="form-group" v-if="activeElement['background_image']">
@@ -81,11 +81,11 @@
 
                                 <c-plan-list :items="product.plans" />
 
-                                <div class="main-content" v-html="product.content" v-if="!developer_mode">
+                                <div class="main-content" v-html="product.content" v-if="!editor_mode">
                                     {{ product.content }}
                                 </div>
 
-                                <div class="content-editor" v-if="developer_mode">
+                                <div class="content-editor" v-if="editor_mode">
                                     <div id="summernote" v-html="product.content" v-model="product.content">{{ product.content }}</div>
                                 </div>
                             </div>
@@ -205,14 +205,14 @@
         },
         computed: {
             product: updateProduct,
-            developer_mode() {
-                if (!this.$store.state.marketplace.developer_mode) {
+            editor_mode() {
+                if (!this.$store.state.marketplace.editor_mode) {
                     for (let key in this.activeElement) {
                         this.activeElement[key] = false
                     }
                 }
 
-                return this.$store.state.marketplace.developer_mode
+                return this.$store.state.marketplace.editor_mode
             }
         },
         mounted: updateProduct,

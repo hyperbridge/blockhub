@@ -60,7 +60,7 @@
                                             <span class="text">Gym with Tim</span>
                                         </a>
                                     </li>
-                                    <li class="title">
+                                    <li class="more">
                                         <a href="/#/">
                                             <span class="text">MORE...</span>
                                         </a>
@@ -85,7 +85,7 @@
                                             <span class="text">Gym with Tim</span>
                                         </a>
                                     </li>
-                                    <li class="title">
+                                    <li class="more">
                                         <a href="/#/">
                                             <span class="text">MORE...</span>
                                         </a>
@@ -110,7 +110,7 @@
                                             <span class="text">Gym with Tim</span>
                                         </a>
                                     </li>
-                                    <li class="title">
+                                    <li class="more">
                                         <a href="/#/">
                                             <span class="text">MORE...</span>
                                         </a>
@@ -254,12 +254,6 @@ export default {
 
     .navigation .text {
         float: right;
-    }
-
-    .invert .navigation > ul > li.title, .invert .navigation > ul > li.title a {
-        color: #fff;
-        font-size: 14px;
-        font-weight: bold;
     }
 
     .status-bar {

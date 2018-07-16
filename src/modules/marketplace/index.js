@@ -67,8 +67,8 @@ export const actions = {
 
         store.commit('updateState', state)
     },
-    setDeveloperMode(store, payload) {
-        store.commit('setDeveloperMode', payload)
+    setEditorMode(store, payload) {
+        store.commit('setEditorMode', payload)
     },
     viewProduct(id) {
         console.log('viewProduct', id)
@@ -122,8 +122,8 @@ export const mutations = {
             s[x] = payload[x]
         }
     },
-    setDeveloperMode(state, payload) {
-        state.developer_mode = payload
+    setEditorMode(state, payload) {
+        state.editor_mode = payload
     },
     updateProduct(state, payload) {
         Vue.set(state.products, payload.id, payload.data)

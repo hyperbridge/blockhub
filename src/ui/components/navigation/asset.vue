@@ -1,20 +1,43 @@
 
 <template>
     <div class="navigation" id="navigation-default">
-        <h3>ASSET</h3>
+        <h3>ASSET MANAGER</h3>
 
         <ul>
-            <li class="title">General</li>
+            <li class="title">
+                <a href="/#/">Top Picks</a>
+            </li>
+            <li class="title">
+                <a href="/#/">Offers</a>
+            </li>
+            <li class="title">
+                <a href="/#/">Metadata</a>
+            </li>
+            <li class="title">
+                <a href="/#/">Owned (13)</a>
+            </li>
+            <li class="title"><span class="icon fas fa-question-circle"></span> Help</li>
             <li>
-                <a href="/#/assets">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">All Assets</span>
+                <a href="/#/">
+                    Buying and Selling Assets
                 </a>
             </li>
             <li>
+                <a href="/#/">
+                    How Top Picks are selected
+                </a>
+            </li>
+            <li>
+                <a href="/#/">
+                    Accepting offers
+                </a>
+            </li>
+            <li class="title">
+                <a href="/#/">General</a>
+            </li>
+            <li>
                 <a href="/#/assets">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">All Assets</span>
+                    Asset Browser
                 </a>
             </li>
         </ul>
