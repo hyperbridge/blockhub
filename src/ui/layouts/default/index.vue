@@ -38,27 +38,80 @@
             <!-- SIDEPANEL -->
             <div class="page-sidepanel invert" id="page-sidepanel">
                 <div class="page-sidepanel__content">
-                    <h3>TOP LISTS</h3>
+                    <div class="owl-carousel" data-nav-dots="true" data-nav-arrow="true" data-items="1" data-sm-items="1" data-lg-items="1" data-md-items="1" data-autoplay="false">
+                        <div class="item">
+                            <h3>TOP LISTS</h3>
 
-                    <div class="navigation">
-                        <ul>
-                            <li class="title">TOP 5</li>
-                            <li>
-                                <a href="/#/product/1">
-                                    <span class="text">Joe's Adventure</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/#/product/1">
-                                    <span class="text">The Mission</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/#/product/1">
-                                    <span class="text">Gym with Tim</span>
-                                </a>
-                            </li>
-                        </ul>
+                            <div class="navigation">
+                                <ul>
+                                    <li class="title">TOP 5</li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">Joe's Adventure</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">The Mission</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">Gym with Tim</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <h3>MESSAGES</h3>
+
+                            <div class="navigation">
+                                <ul>
+                                    <li class="title">TOP 5</li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">Joe's Adventure</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">The Mission</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">Gym with Tim</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <h3>UPDATES</h3>
+
+                            <div class="navigation">
+                                <ul>
+                                    <li class="title">TOP 5</li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">BlockHub v1.0.15</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">With the last update, we bring
+lorem ipsum dolor sit amet and
+check the changelog.</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <br />
+                                        <button class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;"><span class="icon fa fa-sync" /> Relaunch</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="page-sidepanel__button page-sidepanel__button--lower" data-action="sidepanel-hide"><div></div></div>
@@ -108,6 +161,9 @@ export default {
         return {
             navigationComponent: this.navigationKey || false
         }
+    },
+    updated() {
+        window.owlcarousel()
     }
 }
 </script>
