@@ -141,6 +141,7 @@ export default {
         border: 0;
         font-weight: bold;
         font-size: 13px;
+        text-align: center;
 
         img {
             position: absolute;
@@ -152,6 +153,7 @@ export default {
         p {
             z-index: 12;
             position: relative;
+            display: inline-block;
         }
 
         .fa {
