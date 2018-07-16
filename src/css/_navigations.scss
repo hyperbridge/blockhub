@@ -46,6 +46,11 @@
     }
     
     .page-aside{
+        h3 {
+            font-size: 30px;
+            opacity: 0.5;
+        }
+
         &.navigation--vertical-middle{
             display: flex;
             flex-direction: row;
@@ -66,7 +71,7 @@
     [Navigation wrapper]
 -----*/
 .navigation{
-    padding: 10px;
+    padding: 10px 10px 10px 30px;
     float: left;
     width: 100%;
     position: relative;

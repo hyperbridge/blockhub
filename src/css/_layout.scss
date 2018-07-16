@@ -427,10 +427,15 @@
         > .content{
             position: relative;
             flex: 1;
+            padding-top: 60px;
             /* overflow: hidden; */
             
             .container,.container-fluid{
                 padding: 20px;
+            }
+
+            h1 {
+                font-size: 30px;
             }
         }                                                    
         

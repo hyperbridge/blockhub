@@ -7,9 +7,53 @@
                         Product not found
                     </div>
                     <div class="col-12" v-if="product">
-                        <h1 class="title margin-top-10 margin-bottom-15">{{ product.name }}</h1>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="editor-container">
+                                    <div class="editor" v-if="developer_mode">
+                                        <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('name')" v-if="!activeElement['name']">Change Product Name <span class="fa fa-edit"></span></button>
 
-                        <c-tags-list :tags="product.author_tags"></c-tags-list>
+                                        <div class="form-group" v-if="activeElement['name']">
+                                            <div class="form-control-element form-control-element--right">
+                                                <input ref="name" name="name" type="text" class="form-control" placeholder="Product name..." v-model="product.name" />
+                                                <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                                    <span class="fa fa-check" @click="deactivateElement('name')"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h1 class="title margin-top-10 margin-bottom-15">{{ product.name }}</h1>
+                                </div>
+
+                                <div class="editor-container">
+                                    <div class="" v-if="developer_mode">
+                                        <div class="form-group">
+                                            <select id="tag-editor" class="form-control" multiple="multiple">
+                                                <option v-for="(tag, index) in author_tag_options" :key="index" :selected="product.author_tags.includes(tag)">{{ tag }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <c-tags-list :tags="product.author_tags" v-if="!developer_mode"></c-tags-list>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="editor" v-if="developer_mode">
+                                    <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('background_image')" v-if="!activeElement['background_image']">Change Background Image <span class="fa fa-edit"></span></button>
+
+                                    <div class="form-group" v-if="activeElement['background_image']">
+                                        <div class="form-control-element form-control-element--right">
+                                            <input ref="background_image" name="background_image" type="text" class="form-control" placeholder="Background image URL..." v-model="product.images.header" />
+                                            <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                                <span class="fa fa-check" @click="deactivateElement('background_image')"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <label>RECOMMENDED SIZE: 1120 x 524px</label>
+                                </div>
+                            </div>
+                        </div>
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
@@ -37,8 +81,12 @@
 
                                 <c-plan-list :items="product.plans" />
 
-                                <div class="main-content" v-html="product.content">
+                                <div class="main-content" v-html="product.content" v-if="!developer_mode">
                                     {{ product.content }}
+                                </div>
+
+                                <div class="content-editor" v-if="developer_mode">
+                                    <div id="summernote" v-html="product.content" v-model="product.content">{{ product.content }}</div>
                                 </div>
                             </div>
                             <div class="col-5">
@@ -80,10 +128,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <input type="text" name="name" v-model.lazy="product.name"/>
-
-                        <button class="btn" @click="save()">Save</button>
                     </div>
                 </div>
             </div>
@@ -92,6 +136,8 @@
 </template>
 
 <script>
+    import Vue from 'vue'
+
     const updateProduct = function () {
         if (!this.$store.state.marketplace.products)
             return
@@ -119,23 +165,138 @@
             'c-frequently-traded-assets': () => import('@/ui/components/frequently-traded-assets'),
             'c-community-spotlight': () => import('@/ui/components/community-spotlight')
         },
+        data() {
+            return {
+                activeElement: {
+                    name: false,
+                    background_image: false,
+                    tags: false
+                },
+                author_tag_options: [
+                    'rpg',
+                    'adventure',
+                    'racing',
+                    'action'
+                ]
+            }
+        },
         methods: {
+            deactivateElement(key) {
+                this.activeElement[key] = false
+            },
+            activateElement(key) {
+                for (let key in this.activeElement) {
+                    this.activeElement[key] = false
+                }
+
+                this.activeElement[key] = true
+
+                setTimeout(() => {
+                    if (this.$refs[key])
+                        this.$refs[key].focus()
+                }, 10)
+            },
             save() {
                 this.$store.dispatch('marketplace/updateProduct', this.product)
             }
         },
         computed: {
-            product: updateProduct
+            product: updateProduct,
+            developer_mode() {
+                if (!this.$store.state.marketplace.developer_mode) {
+                    for (let key in this.activeElement) {
+                        this.activeElement[key] = false
+                    }
+                }
+
+                return this.$store.state.marketplace.developer_mode
+            }
         },
         mounted: updateProduct,
         created: updateProduct,
         beforeDestroy() {
             window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+        },
+        updated() {
+            $('#tag-editor').select2()
+                .on('select2:select', (e) => {
+                    let data = e.params.data
+                    
+                    if (!this.product.author_tags.includes(data.text)) {
+                        this.product.author_tags.push(data.text)
+                    }
+
+                    Vue.set(this.product, 'author_tags', this.product.author_tags)
+                })
+                .on('select2:unselect', (e) => {
+                    let data = e.params.data
+
+                    this.product.author_tags = this.product.author_tags.filter(e => e !== data.text)
+
+                    Vue.set(this.product, 'author_tags', this.product.author_tags)
+                })
+
+            $('#summernote').summernote({
+                placeholder: 'Type in your text',
+                tabsize: 2,
+                height: 300,
+                callbacks: {
+                    onBlur: () => {
+                        Vue.set(this.product, 'content', $('#summernote').summernote('code'))
+                    }
+                }
+            });
+
         }
     }
 </script>
 
+
+<style lang="scss">
+    .content-editor .note-editor.note-frame .note-editing-area .note-editable {
+        background-color: transparent;
+        color: inherit;
+    }
+
+    .content-editor .card {
+        background: rgba(0, 0, 0, 0.13);
+        color: #dfdfe9;
+        border: 1px solid rgba(70, 70, 70, 0.5);
+    }
+
+    .content-editor .note-editor.note-frame .note-statusbar {
+        background: transparent;
+        border: 0 none;
+    }
+</style>
+
 <style lang="scss" scoped>
+    .editor {
+        position: absolute;
+        top: -45px;
+        left: -5px;
+        z-index: 10;
+
+        .btn, input {
+            border-color: #1b1c2b;
+            background: #1B1C2B;
+            border-radius: 6px;
+            box-shadow: 1px 1px 0px #101010;
+            font-size: 17px;
+
+            span {
+                font-size: 17px;
+            }
+        }
+        .form-control-element .form-control-element__box--pretify {
+            line-height: 11px;
+        }
+    }
+
+    .editor-container {
+        position: relative;
+    }
+
     .main-content {
         margin-top: 15px;
         padding: 15px;

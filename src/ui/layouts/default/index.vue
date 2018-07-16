@@ -5,12 +5,6 @@
             <c-header />
         <!-- //END PAGE HEADER -->
         
-        <!-- PAGE CONTAINER -->
-        <div class="page__container invert">
-
-        </div>
-        <!-- //END PAGE CONTAINER -->
-        
         <!-- PAGE CONTENT WRAPPER -->
         <div class="page__content page__content-invert invert" id="page-content">
             <div class="loading loading--w-spinner" v-if="!is_connected">
