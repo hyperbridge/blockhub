@@ -139,16 +139,19 @@
     import Vue from 'vue'
 
     const updateProduct = function () {
-        if (!this.$store.state.marketplace.products)
-            return
+        let product = null
+        
+        if (this.id === 'new') {
+            product = this.$store.state.marketplace.default_product
+        }
 
-        const product = this.$store.state.marketplace.products[this.id]
-
-        if (!product)
-            return
-
-        if (product.images && product.images.header)
+        if (this.$store.state.marketplace.products && this.$store.state.marketplace.products[this.id]) {
+            product = this.$store.state.marketplace.products[this.id]
+        }
+    
+        if (product && product.images && product.images.header) {
             window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
+        }
 
         return product
     }

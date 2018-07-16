@@ -174,7 +174,8 @@ const router = new Router({
     {
       path: '/developer/new-product',
       name: 'New Product',
-      component: () => import('@/ui/screens/developer-new-product')
+      component: () => import('@/ui/screens/product-overview'),
+      props: { id: 'new' }
     },
     {
       path: '/product/:id',
