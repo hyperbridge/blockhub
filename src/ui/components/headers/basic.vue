@@ -162,8 +162,8 @@ export default {
             margin-right: 6px;
         }
 
-        &:hover {
-            background: transparent;
+        &:hover, &:focus, &:active {
+            background: transparent !important;
         }
     }
 
