@@ -1,17 +1,11 @@
 <template>
     <c-layout navigationKey="store-navigation">
-        <div class="option-panel">
-            <button class="edit-btn btn btn-secondary btn-block margin-top-10" @click="clickEdit()" v-if="!editMode">Edit</button>
-            <button class="remove-btn btn btn-secondary btn-block margin-top-10" @click="clickRemove()" v-if="editMode">Remove</button>
-            <button class="publish-btn btn btn-secondary btn-block margin-top-10" @click="clickPublish()" v-if="editMode">Publish</button>
-            <button class="exit-btn btn btn-secondary btn-block margin-top-10" @click="clickExit()" v-if="editMode">Exit</button>
-        </div>
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-8">
                         <h1 class="title editor-container margin-top-10">
-                            <div class="editor" v-if="editMode">
+                            <div class="editor" v-if="developer_mode">
                                 <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('name')" v-if="!activeElement['name']">Change Product Name <span class="fa fa-edit"></span></button>
 
                                 <div class="form-group" v-if="activeElement['name']">
@@ -36,6 +30,23 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="col-4">
+                        <div class="editor" v-if="developer_mode">
+                            <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('background_image')" v-if="!activeElement['background_image']">Change Background Image <span class="fa fa-edit"></span></button>
+
+                            <div class="form-group" v-if="activeElement['background_image']">
+                                <div class="form-control-element form-control-element--right">
+                                    <input ref="background_image" name="background_image" type="text" class="form-control" placeholder="Background image URL..." v-model="product.background_image" />
+                                    <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                        <span class="fa fa-check" @click="deactivateElement('background_image')"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br />
+                            <label>RECOMMENDED SIZE: 1120 x 524px</label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,34 +61,29 @@ export default {
     data() {
         return {
             activeElement: {
-                name: false
+                name: false,
+                background_image: false
             },
             product: {
                 name: 'My Product Name',
                 author_tags: []
-            },
-            editMode: false
+            }
+        }
+    },
+    computed: {
+        developer_mode() {
+            if (!this.$store.state.marketplace.developer_mode) {
+                for (let key in this.activeElement) {
+                    this.activeElement[key] = false
+                }
+            }
+
+            return this.$store.state.marketplace.developer_mode
         }
     },
     methods: {
         handleSubmit() {
         
-        },
-        clickEdit() {
-            this.editMode = true
-        },
-        clickRemove() {
-
-        },
-        clickPublish() {
-
-        },
-        clickExit() {
-            this.editMode = false
-            
-            for (let key in this.activeElement) {
-                this.activeElement[key] = false
-            }
         },
         deactivateElement(key) {
             this.activeElement[key] = false
@@ -97,6 +103,9 @@ export default {
         save() {
             this.$store.dispatch('marketplace/createProduct', this.product)
         }
+    },
+    mounted() {
+        this.$store.dispatch('marketplace/setDeveloperMode', true)
     }
 }
 </script>
@@ -126,16 +135,5 @@ export default {
 
     .editor-container {
         position: relative;
-    }
-
-    .option-panel {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 100;
-
-        .btn {
-            width: 100px;
-        }
     }
 </style>

@@ -168,6 +168,7 @@
                 "user_to_address": null
             }
         },
+        "developer_mode": true,
         "current_network": "local",
         "selected_product": null,
         "frontpage_product": {},
