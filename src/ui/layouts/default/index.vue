@@ -60,15 +60,16 @@
                                             <span class="text">Gym with Tim</span>
                                         </a>
                                     </li>
+                                    <li class="more">
+                                        <a href="/#/">
+                                            <span class="text">MORE...</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="item">
-                            <h3>MESSAGES</h3>
-
                             <div class="navigation">
                                 <ul>
-                                    <li class="title">TOP 5</li>
+                                    <li class="title">TOP FREE</li>
                                     <li>
                                         <a href="/#/product/1">
                                             <span class="text">Joe's Adventure</span>
@@ -84,8 +85,80 @@
                                             <span class="text">Gym with Tim</span>
                                         </a>
                                     </li>
+                                    <li class="more">
+                                        <a href="/#/">
+                                            <span class="text">MORE...</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
+                            <div class="navigation">
+                                <ul>
+                                    <li class="title">MOST RENTABLE</li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">Joe's Adventure</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">The Mission</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">Gym with Tim</span>
+                                        </a>
+                                    </li>
+                                    <li class="more">
+                                        <a href="/#/">
+                                            <span class="text">MORE...</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <button class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;">Messages</button> <button class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;">Updates</button>
+                        </div>
+                        <div class="item">
+                            <h3>MESSAGES</h3>
+
+                            <div class="navigation">
+                                <ul>
+                                    <li class="title">
+                                        <a href="/#/product/1">
+                                            @MrSatoshi   Apr 3   12:32am
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">Lorem ipsum dolor sit amet more mssage from tis user</span>
+                                        </a>
+                                    </li>
+                                    <li class="title">
+                                        <a href="/#/product/1">
+                                            @MrSatoshi   Apr 3   12:32am
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">Lorem ipsum dolor sit amet more mssage from tis user</span>
+                                        </a>
+                                    </li>
+                                    <li class="title">
+                                        <a href="/#/product/1">
+                                            @MrSatoshi   Apr 3   12:32am
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">Lorem ipsum dolor sit amet more mssage from tis user</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <button class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;">TOP LISTS</button> <button class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;">Updates</button>
                         </div>
                         <div class="item">
                             <h3>UPDATES</h3>
@@ -100,9 +173,7 @@
                                     </li>
                                     <li>
                                         <a href="/#/product/1">
-                                            <span class="text">With the last update, we bring
-lorem ipsum dolor sit amet and
-check the changelog.</span>
+                                            <span class="text">With the last update, we bring lorem ipsum dolor sit amet and check the changelog.</span>
                                         </a>
                                     </li>
                                     <li>
@@ -111,6 +182,8 @@ check the changelog.</span>
                                     </li>
                                 </ul>
                             </div>
+
+                            <button class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;">TOP LISTS</button> <button class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;">Messages</button>
                         </div>
                     </div>
                 </div>
@@ -173,6 +246,10 @@ export default {
     .page-sidepanel {
         text-align: right;
         padding-right: 30px;
+    }
+
+    .navigation {
+        margin-bottom: 50px;
     }
 
     .navigation .text {

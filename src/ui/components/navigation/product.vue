@@ -4,17 +4,20 @@
         <h3>GAME OVERVIEW</h3>
 
         <ul>
-            <li class="title">Store Home</li>
+            <li class="title"><span class="icon fas fa-question-circle"></span> Help</li>
             <li>
-                <a href="/#/store">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">My Store</span>
+                <a href="/#/">
+                    Suggesting Features
                 </a>
             </li>
             <li>
-                <a href="/#/store">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">Friends Store</span>
+                <a href="/#/">
+                    Voting and Curating Updates
+                </a>
+            </li>
+            <li class="more">
+                <a href="/#/">
+                    MORE...
                 </a>
             </li>
         </ul>
