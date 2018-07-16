@@ -847,3 +847,51 @@ window.addEventListener("resize", function(){
     app.layout.responsive();
     
 }, true);
+
+
+/*************************
+       owl carousel 
+*************************/
+function owlcarousel() {
+    $(".owl-carousel").each(function () {
+        var $this = $(this),
+            $items = ($this.data('items')) ? $this.data('items') : 1,
+            $loop = ($this.data('loop')) ? $this.data('loop') : true,
+            $navdots = ($this.data('nav-dots')) ? $this.data('nav-dots') : false,
+            $navarrow = ($this.data('nav-arrow')) ? $this.data('nav-arrow') : false,
+            $autoplay = ($this.attr('data-autoplay')) ? $this.data('autoplay') : true,
+            $space = ($this.attr('data-space')) ? $this.data('space') : 30;
+        $(this).owlCarousel({
+            loop: $loop,
+            items: $items,
+            responsive: {
+                0: {
+                    items: $this.data('xx-items') ? $this.data('xx-items') : 1
+                },
+                600: {
+                    items: $this.data('xs-items') ? $this.data('xs-items') : 1
+                },
+                767: {
+                    items: $this.data('sm-items') ? $this.data('sm-items') : 2
+                },
+                992: {
+                    items: $this.data('md-items') ? $this.data('md-items') : 2
+                },
+                1190: {
+                    items: $this.data('lg-items') ? $this.data('lg-items') : 3
+                },
+                1200: {
+                    items: $items
+                }
+            },
+            dots: $navdots,
+            margin: $space,
+            nav: $navarrow,
+            navText: ["<i class='ion-ios-arrow-left'></i>", "<i class='ion-ios-arrow-right'></i>"],
+            autoplay: $autoplay,
+            autoplayHoverPause: true
+        });
+
+    });
+
+}
