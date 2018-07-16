@@ -38,7 +38,28 @@
             <!-- SIDEPANEL -->
             <div class="page-sidepanel invert" id="page-sidepanel">
                 <div class="page-sidepanel__content">
-                    
+                    <h3>TOP LISTS</h3>
+
+                    <div class="navigation">
+                        <ul>
+                            <li class="title">TOP 5</li>
+                            <li>
+                                <a href="/#/product/1">
+                                    <span class="text">Joe's Adventure</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/#/product/1">
+                                    <span class="text">The Mission</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/#/product/1">
+                                    <span class="text">Gym with Tim</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="page-sidepanel__button page-sidepanel__button--lower" data-action="sidepanel-hide"><div></div></div>
             </div>
@@ -92,6 +113,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+    .page-sidepanel {
+        text-align: right;
+        padding-right: 30px;
+    }
+
+    .navigation .text {
+        float: right;
+    }
 
     .status-bar {
         position: fixed;

@@ -104,3 +104,12 @@ a.btn-outline-white {
 ::-webkit-scrollbar-thumb:hover {
     background: #fbe17d;
 }
+
+
+.page-aside, .page-sidepanel {
+    padding: 10px 10px 10px 30px;
+    h3 {
+        font-size: 30px;
+        opacity: 0.4;
+    }
+}
