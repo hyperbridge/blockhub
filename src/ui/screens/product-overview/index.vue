@@ -81,8 +81,12 @@
 
                                 <c-plan-list :items="product.plans" />
 
-                                <div class="main-content" v-html="product.content">
+                                <div class="main-content" v-html="product.content" v-if="!developer_mode">
                                     {{ product.content }}
+                                </div>
+
+                                <div class="content-editor" v-if="developer_mode">
+                                    <div id="summernote" v-html="product.content" v-model="product.content">{{ product.content }}</div>
                                 </div>
                             </div>
                             <div class="col-5">
@@ -231,9 +235,40 @@
 
                     Vue.set(this.product, 'author_tags', this.product.author_tags)
                 })
+
+            $('#summernote').summernote({
+                placeholder: 'Type in your text',
+                tabsize: 2,
+                height: 300,
+                callbacks: {
+                    onBlur: () => {
+                        Vue.set(this.product, 'content', $('#summernote').summernote('code'))
+                    }
+                }
+            });
+
         }
     }
 </script>
+
+
+<style lang="scss">
+    .content-editor .note-editor.note-frame .note-editing-area .note-editable {
+        background-color: transparent;
+        color: inherit;
+    }
+
+    .content-editor .card {
+        background: rgba(0, 0, 0, 0.13);
+        color: #dfdfe9;
+        border: 1px solid rgba(70, 70, 70, 0.5);
+    }
+
+    .content-editor .note-editor.note-frame .note-statusbar {
+        background: transparent;
+        border: 0 none;
+    }
+</style>
 
 <style lang="scss" scoped>
     .editor {
