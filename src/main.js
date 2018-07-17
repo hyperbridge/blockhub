@@ -28,6 +28,19 @@ Vue.filter('formatTime', function(value) {
   }
 })
 
+const overrideConsoleLog = () => {
+  window.consoleLogMessages = []
+
+  var oldLog = console.log
+  console.log = function (message) {
+    window.consoleLogMessages.push(message)
+
+    oldLog.apply(console, arguments)
+  }
+}
+
+overrideConsoleLog()
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

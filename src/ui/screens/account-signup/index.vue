@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="account-navigation">
-        <!-- PAGE LOGIN CONTAINER -->
         <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
@@ -19,7 +18,7 @@
                                aria-controls="step3-tab">Step 3</a>
                         </li>
                     </ul>
-                    <div class="tab-content" id="myTabContent">
+                    <div class="tab-content">
                         <div class="tab-pane fade show active" id="step1" role="tabpanel" aria-labelledby="step1-tab">
                             <div class="tab-container">
                                 <div class="tab-card">
@@ -519,16 +518,15 @@
     </c-layout>
 </template>
 
+
 <script>
     export default {
         components: {
             'c-layout': () => import('@/ui/layouts/default')
-        },
-        data: () => ({
-            wallets: []
-        })
+        }
     }
 </script>
+
 
 <style lang="scss" scoped>
 
