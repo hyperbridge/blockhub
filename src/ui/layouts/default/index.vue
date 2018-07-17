@@ -3,6 +3,7 @@
     <div class="page page--w-header page--w-container">
         <!-- PAGE HEADER -->
             <c-header />
+            <c-header :isLoader="true" />
         <!-- //END PAGE HEADER -->
         
         <!-- PAGE CONTENT WRAPPER -->

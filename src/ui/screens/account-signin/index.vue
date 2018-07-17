@@ -1,17 +1,15 @@
 <template>
     <c-layout navigationKey="account-navigation">
-        <!-- PAGE LOGIN CONTAINER -->
         <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
-
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="step1-tab" data-toggle="tab" href="#step1" role="tab"
                                aria-controls="step1-tab" aria-expanded="true">Sign In</a>
                         </li>
                     </ul>
-                    <div class="tab-content" id="myTabContent">
+                    <div class="tab-content">
                         <div class="tab-pane fade show active" id="step1" role="tabpanel" aria-labelledby="step1-tab">
                             <div class="tab-container">
                                 <div class="tab-card">
@@ -38,10 +36,9 @@
                             </div>
                             <div class="action">
                                 <div>
-                                    <a href="#3" class="btn btn-success" @click="signIn()">Go</a>
+                                    <a href="#" class="btn btn-success" @click="signIn()">Go</a>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -49,6 +46,7 @@
         </div>
     </c-layout>
 </template>
+
 
 <script>
     export default {
@@ -64,6 +62,7 @@
         }
     }
 </script>
+
 
 <style lang="scss" scoped>
 

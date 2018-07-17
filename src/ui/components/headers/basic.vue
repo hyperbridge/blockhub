@@ -1,5 +1,5 @@
 <template>
-    <header class="app-header">
+    <header class="app-header" :class="{ 'app-header--loader': isLoader, 'app-header--loading': isLoading }">
         <div class="app-header__top-bar"></div>
         <div class="app-header__bar-left">
             <a href="/#/store">
@@ -108,6 +108,7 @@
 
 <script>
 export default {
+    props: ['isLoader'],
     computed: {
         developer_enabled() {
             return this.$store.state.marketplace.developer_enabled
@@ -117,6 +118,9 @@ export default {
         },
         signed_in() { 
             return this.$store.state.network.signed_in
+        },
+        isLoading() {
+            return this.$store.state.network.loading
         }
     },
     methods: {
@@ -134,7 +138,11 @@ export default {
         },
         signOut() {
             this.$store.dispatch('network/signOut')
+
+            this.isLoading = true
         }
+    },
+    created() {
     }
 }
 </script>
@@ -200,6 +208,23 @@ export default {
             width: 100vw;
             display: block;
             content: '';
+        }
+
+        &.app-header--loading {
+            opacity: 0.6;
+        }
+
+        &.app-header--loader {
+            visibility: hidden;
+            z-index: 101;
+            opacity: 1;
+            clip: rect(0px, 0px, 200px, 0px);
+            transition: clip 10s;
+
+            &.app-header--loading {
+                visibility: visible;
+                clip: rect(0px, 10000px, 200px, 0px);
+            }
         }
 
         a {
