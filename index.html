@@ -5,44 +5,50 @@
 <html lang="en">
 <!--<![endif]-->
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BlockHub</title>
 
-    <base href="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimal-ui">
-
     <meta name="description" content="BlockHub is a next-generation decentralized digital distribution platform" />
-    <meta name="author" content="Hyperbridge" />
     <meta name="keywords" content="blockhub, hyperbridge, blockchain, cryptocurrency, game, indie, developer" />
 
-    <meta property="og:title" content="BlockHub - " />
+    <meta property="og:title" content="BlockHub" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://blockhub.gg" />
-    <meta property="og:image" content="img/og/facebook.jpg" />
+    <meta property="og:image" content="/static/img/logo.png" />
     <meta property="og:image:width" content="470" />
     <meta property="og:image:height" content="246" />
     <meta property="og:site_name" content="BlockHub" />
     <meta property="og:description" content="" />
 
-    <title>BlockHub</title>
-
-    <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-16x16.png" />
     <!--[if IE]><link rel="shortcut icon" href="static/img/icons/favicon.ico"><![endif]-->
 
     <link rel="manifest" href="<%= htmlWebpackPlugin.files.publicPath %>static/manifest.json">
 
-    <meta name="theme-color" content="#4DBA87">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="BlockHub">
-    <meta name="msapplication-TileImage" content="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/msapplication-icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="theme-color" content="#4DBA87" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="BlockHub" />
+    <meta name="msapplication-TileImage" content="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/msapplication-icon-144x144.png" />
+    <meta name="msapplication-TileColor" content="#000000" />
 
-    <link rel="apple-touch-icon" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/apple-touch-icon-152x152.png">
-    <link rel="mask-icon" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/safari-pinned-tab.svg" color="#4DBA87">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110820930-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-110820930-3');
+    </script>
+    
+    <link rel="apple-touch-icon" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/apple-touch-icon-152x152.png" />
+    <link rel="mask-icon" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/safari-pinned-tab.svg" color="#4DBA87" />
 
     <% for (var chunk of webpack.chunks) {
         for (var file of chunk.files) {
@@ -64,7 +70,6 @@
     <script type="text/javascript" src="/static/js/vendors/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/vendors/jquery/jquery-migrate.min.js"></script>
     <script type="text/javascript" src="/static/js/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-    
     <script type="text/javascript" src="/static/js/vendors/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
     <!-- END IMPORTANT SCRIPTS -->
 
