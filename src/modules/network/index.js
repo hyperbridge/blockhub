@@ -48,8 +48,8 @@ export const actions = {
         }
 
         const failure = (err) => {
-            store.state.connection.ethereum = false
-            store.state.connection.datasource = false
+            store.state.connection.ethereum = true
+            store.state.connection.datasource = true
 
             store.state.connection.status.code = 344
             store.state.connection.status.message = err
