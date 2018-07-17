@@ -202,6 +202,7 @@ export default {
         padding: 0;
         z-index: 100;
         filter: drop-shadow(0 0px 15px rgba(48, 49, 76, 1));
+        transition: opacity 0.5s;
 
         &::before {
             height: 10px;
@@ -211,14 +212,14 @@ export default {
         }
 
         &.app-header--loading {
-            opacity: 0.6;
+            opacity: 0.7;
         }
 
         &.app-header--loader {
             z-index: 101;
             opacity: 1;
             clip: rect(0px, 0vw, 200px, 0px);
-            transition: clip 10s;
+            transition: clip 8s;
 
             &.app-header--loading {
                 clip: rect(0px, 100vw, 200px, 0px);
