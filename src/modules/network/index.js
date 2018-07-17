@@ -88,7 +88,20 @@ export const actions = {
         }
 
         xhr.addEventListener("readystatechange", processRequest, false)
+    },
+    signIn(store, payload) {
+        store.commit('signIn', payload)
+    },
+    signOut(store, payload) {
+        store.commit('signOut', payload)
     }
 }
 
-export const mutations = {}
+export const mutations = {
+    signIn(state, payload) {
+        state.signed_in = true
+    },
+    signOut(state, payload) {
+        state.signed_in = false
+    }
+}

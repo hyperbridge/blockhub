@@ -88,8 +88,14 @@
                             <span class="text">Settings</span>
                         </a>
                     </li>
+                    <li v-if="!signed_in">
+                        <a href="/#/account/signin">
+                            <span class="icon fa fa-sign-out-alt"></span>
+                            <span class="text">Sign In</span>
+                        </a>
+                    </li>
                     <li v-if="signed_in">
-                        <a href="/#/account/signout">
+                        <a href="#" @click="signOut()">
                             <span class="icon fa fa-sign-out-alt"></span>
                             <span class="text">Sign Out</span>
                         </a>
@@ -110,7 +116,7 @@ export default {
             return this.$store.state.marketplace.editor_mode
         },
         signed_in() { 
-            return false
+            return this.$store.state.network.signed_in
         }
     },
     methods: {
@@ -126,6 +132,9 @@ export default {
         clickExit() {
             this.$store.dispatch('marketplace/setEditorMode', false)
         },
+        signOut() {
+            this.$store.dispatch('network/signOut')
+        }
     }
 }
 </script>
