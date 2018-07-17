@@ -1,6 +1,7 @@
 {
     "network": {
         "signed_in": false,
+        "loading": false,
         "connection": {
             "internet": false,
             "datasource": false,

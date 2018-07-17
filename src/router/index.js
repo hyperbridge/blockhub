@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store'
 
 Vue.use(Router)
 
@@ -290,6 +291,24 @@ const router = new Router({
     }
   ]
 })
+
+router.beforeResolve((to, from, next) => {
+  // If this isn't an initial page load.
+  if (to.name) {
+    // Start the route progress bar.
+    store.commit('network/beforeLoadRoute')
+  }
+  // setTimeout(() => {
+  //   next()
+  // }, 20000)
+  next()
+})
+
+router.afterEach((to, from) => {
+  // Complete the animation of the route progress bar.
+  store.commit('network/afterLoadRoute')
+})
+
 
 // router.beforeEach((to, from, next) => {
 //   get_data_from_server(to.fullPath).then(component => {

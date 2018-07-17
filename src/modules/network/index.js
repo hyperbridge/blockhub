@@ -103,5 +103,11 @@ export const mutations = {
     },
     signOut(state, payload) {
         state.signed_in = false
+    },
+    beforeLoadRoute(state, payload) {
+        state.loading = true
+    },
+    afterLoadRoute(state, payload) {
+        state.loading = false
     }
 }
