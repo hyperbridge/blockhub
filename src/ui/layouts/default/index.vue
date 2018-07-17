@@ -40,7 +40,151 @@
                 <div class="page-sidepanel__content">
                     <div class="owl-carousel" data-nav-dots="true" data-nav-arrow="true" data-items="1" data-sm-items="1" data-lg-items="1" data-md-items="1" data-autoplay="false">
                         <div class="item">
+                            <h3>NOTIFICATIONS</h3>
+
+                            <div class="slide-chooser">
+                                <button class="btn active js-go-notifications">
+                                    <span class="icon fa fa-bell" />
+                                </button>
+                                <button class="btn js-go-messages">
+                                    <span class="icon fa fa-envelope" />
+                                </button>
+                                <button class="btn js-go-updates">
+                                    <span class="icon fa fa-star" />
+                                </button>
+                                <button class="btn js-go-lists">
+                                    <span class="icon fa fa-trophy" />
+                                </button>
+                            </div>
+
+                            <div class="navigation">
+                                <ul>
+                                    <li class="title">INFO 1</li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">STUFF</span>
+                                        </a>
+                                    </li>
+                                    <li class="title">INFO 1</li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">STUFF</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="item">
+                            <h3>MESSAGES</h3>
+
+                            <div class="slide-chooser">
+                                <button class="btn js-go-notifications">
+                                    <span class="icon fa fa-bell" />
+                                </button>
+                                <button class="btn active js-go-messages">
+                                    <span class="icon fa fa-envelope" />
+                                </button>
+                                <button class="btn js-go-updates">
+                                    <span class="icon fa fa-star" />
+                                </button>
+                                <button class="btn js-go-lists">
+                                    <span class="icon fa fa-trophy" />
+                                </button>
+                            </div>
+
+                            <div class="navigation">
+                                <ul>
+                                    <li class="title">
+                                        <a href="/#/product/1">
+                                            @MrSatoshi   Apr 3   12:32am
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">Lorem ipsum dolor sit amet more mssage from tis user</span>
+                                        </a>
+                                    </li>
+                                    <li class="title">
+                                        <a href="/#/product/1">
+                                            @MrSatoshi   Apr 3   12:32am
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">Lorem ipsum dolor sit amet more mssage from tis user</span>
+                                        </a>
+                                    </li>
+                                    <li class="title">
+                                        <a href="/#/product/1">
+                                            @MrSatoshi   Apr 3   12:32am
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">Lorem ipsum dolor sit amet more mssage from tis user</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="item">
+                            <h3>UPDATES</h3>
+
+                            <div class="slide-chooser">
+                                <button class="btn js-go-notifications">
+                                    <span class="icon fa fa-bell" />
+                                </button>
+                                <button class="btn js-go-messages">
+                                    <span class="icon fa fa-envelope" />
+                                </button>
+                                <button class="btn active js-go-updates">
+                                    <span class="icon fa fa-star" />
+                                </button>
+                                <button class="btn js-go-lists">
+                                    <span class="icon fa fa-trophy" />
+                                </button>
+                            </div>
+
+                            <div class="navigation">
+                                <ul>
+                                    <li class="title">TOP 5</li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">BlockHub v1.0.15</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/#/product/1">
+                                            <span class="text">With the last update, we bring lorem ipsum dolor sit amet and check the changelog.</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <br />
+                                        <button class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;"><span class="icon fa fa-sync" /> Relaunch</button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="item">
                             <h3>TOP LISTS</h3>
+
+                            <div class="slide-chooser">
+                                <button class="btn js-go-notifications">
+                                    <span class="icon fa fa-bell" />
+                                </button>
+                                <button class="btn js-go-messages">
+                                    <span class="icon fa fa-envelope" />
+                                </button>
+                                <button class="btn js-go-updates">
+                                    <span class="icon fa fa-star" />
+                                </button>
+                                <button class="btn active js-go-lists">
+                                    <span class="icon fa fa-trophy" />
+                                </button>
+                            </div>
 
                             <div class="navigation">
                                 <ul>
@@ -117,73 +261,6 @@
                                     </li>
                                 </ul>
                             </div>
-
-                            <button ref="lists_to_messages_btn" class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;">Messages</button> <button ref="lists_to_updates_btn" class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;">Updates</button>
-                        </div>
-                        <div class="item">
-                            <h3>MESSAGES</h3>
-
-                            <div class="navigation">
-                                <ul>
-                                    <li class="title">
-                                        <a href="/#/product/1">
-                                            @MrSatoshi   Apr 3   12:32am
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Lorem ipsum dolor sit amet more mssage from tis user</span>
-                                        </a>
-                                    </li>
-                                    <li class="title">
-                                        <a href="/#/product/1">
-                                            @MrSatoshi   Apr 3   12:32am
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Lorem ipsum dolor sit amet more mssage from tis user</span>
-                                        </a>
-                                    </li>
-                                    <li class="title">
-                                        <a href="/#/product/1">
-                                            @MrSatoshi   Apr 3   12:32am
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Lorem ipsum dolor sit amet more mssage from tis user</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <button ref="messages_to_lists_btn" class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;">TOP LISTS</button> <button ref="messages_to_updates_btn" class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;">Updates</button>
-                        </div>
-                        <div class="item">
-                            <h3>UPDATES</h3>
-
-                            <div class="navigation">
-                                <ul>
-                                    <li class="title">TOP 5</li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">BlockHub v1.0.15</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">With the last update, we bring lorem ipsum dolor sit amet and check the changelog.</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <br />
-                                        <button class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;"><span class="icon fa fa-sync" /> Relaunch</button>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <button ref="updates_to_lists_btn" class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;">TOP LISTS</button> <button ref="updates_to_messages_btn" class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;">Messages</button>
                         </div>
                     </div>
                 </div>
@@ -238,34 +315,38 @@ export default {
     updated() {
         window.owlcarousel()
 
-        let owl = $(".owl-carousel").owlCarousel()
+        let owl = $('.owl-carousel').owlCarousel()
 
-        $(this.$refs.lists_to_messages_btn).click(function() {
-            owl.trigger('to.owl.carousel', [1]);
+        owl.trigger('to.owl.carousel', [3])
+
+        $('.js-go-notifications').click(function() {
+            owl.trigger('to.owl.carousel', [0])
         })
 
-        $(this.$refs.lists_to_updates_btn).click(function() {
-            owl.trigger('to.owl.carousel', [2]);
+        $('.js-go-messages').click(function() {
+            owl.trigger('to.owl.carousel', [1])
         })
 
-        $(this.$refs.messages_to_lists_btn).click(function() {
-            owl.trigger('to.owl.carousel', [0]);
+        $('.js-go-updates').click(function() {
+            owl.trigger('to.owl.carousel', [2])
         })
 
-        $(this.$refs.messages_to_updates_btn).click(function() {
-            owl.trigger('to.owl.carousel', [2]);
+        $('.js-go-lists').click(function() {
+            owl.trigger('to.owl.carousel', [3])
         })
 
-        $(this.$refs.updates_to_lists_btn).click(function() {
-            owl.trigger('to.owl.carousel', [0]);
-        })
-
-        $(this.$refs.updates_to_messages_btn).click(function() {
-            owl.trigger('to.owl.carousel', [1]);
-        })
+        //$('.owl-controls').insertBefore('')
     }
 }
 </script>
+
+<style lang="scss">
+
+    .owl-controls {
+        display: none !important;
+    }
+
+</style>
 
 <style lang="scss" scoped>
 
@@ -280,6 +361,30 @@ export default {
 
     .navigation .text {
         float: right;
+    }
+
+    .slide-chooser {
+        margin-bottom: 10px;
+
+        .btn {
+            background: transparent;
+            opacity: 0.5;
+            color: #fff;
+            padding: 6px 6px;
+
+            &.active {
+                opacity: 1;
+            }
+
+            &:hover {
+                background: transparent;
+                opacity: 1;
+            }
+
+            span {
+                font-size: 16px;
+            }
+        }
     }
 
     .status-bar {
