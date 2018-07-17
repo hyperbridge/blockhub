@@ -63,7 +63,7 @@ let initializer = (store) => {
     store.dispatch('funding/init')
 
     store.subscribe((mutation, state) => {
-        console.log('[BlockHub] Mutation', mutation, state)
+        console.log('[BlockHub] Mutation: ' + mutation.type, state)
         
         if (mutation.type === 'database/initialized') {
             if (ChaosMonkey.random()) {

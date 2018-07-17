@@ -60,7 +60,7 @@ export const actions = {
         Ethereum.init().then(success, failure)
     },
     checkInternetConnection(store, payload) {
-        console.log('[BlockHub] Connection status: ', store.state.connection)
+        console.log('[BlockHub] Connection status: ' + JSON.stringify(store.state.connection))
         
         if (!navigator.onLine) {
             store.state.connection.internet = false
