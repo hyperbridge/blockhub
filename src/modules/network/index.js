@@ -2,158 +2,16 @@ import { normalize } from 'normalizr'
 import schema from './schema'
 import * as Ethereum from '../../framework/ethereum'
 import * as PeerService from '../../framework/peer-service'
+import * as db from '@/db'
 
-let rawData = {
-    connection: {
-        internet: false,
-        datasource: false,
-        operator: false,
-        ethereum: false,
-        status: {
-            code: null,
-            message: "Establishing connection..."
-        }
-    },
-    user_submitted_connection_messages: [
-        {
-            id: '1',
-            message: 'wubba lubba dub dubbbb',
-            user: {
-                id: '0x0',
-                name: 'fr0stbyte'
-            }
-        },
-        {
-            id: '2',
-            message: 'LOADING SIMULATION',
-            user: {
-                id: '0x0',
-                name: 'GymTim'
-            }
-        }
-    ],
-    account: {
-        wallets: [
-            {
-                id: '1',
-                name: 'Bitcoin',
-                icon: '',
-                short_name: 'BTC',
-                count: '0.00827',
-                history: [
-                    {
-                        time: '14:00',
-                        percent: '0.93',
-                        direction: 'up'
-                    },
-                    {
-                        time: '14:30',
-                        percent: '0.53',
-                        direction: 'down'
-                    },
-                    {
-                        time: '15:00',
-                        percent: '0.67',
-                        direction: 'up'
-                    }
-                ],
-                wallet_number: 'QMdp32odsoN45insPS91ninZPEld9',
-                preferred_switcher: true
-            },
-            {
-                id: '2',
-                name: 'Ethereum',
-                icon: '',
-                short_name: 'ETH',
-                count: '0.00015',
-                history: [
-                    {
-                        time: '11:00',
-                        percent: '0.03',
-                        direction: 'up'
-                    },
-                    {
-                        time: '12:30',
-                        percent: '0.027',
-                        direction: 'down'
-                    },
-                    {
-                        time: '13:00',
-                        percent: '0.031',
-                        direction: 'up'
-                    }
-                ],
-                wallet_number: 'kKJV798BIUFvu6ibkvVV7',
-                preferred_switcher: false
-            },
-            {
-                id: '3',
-                name: 'Viacoin',
-                icon: '',
-                short_name: 'VIA',
-                count: '0.00045',
-                history: [
-                    {
-                        time: '11:00',
-                        percent: '0.03',
-                        direction: 'up'
-                    },
-                    {
-                        time: '12:30',
-                        percent: '0.027',
-                        direction: 'down'
-                    },
-                    {
-                        time: '13:00',
-                        percent: '0.031',
-                        direction: 'up'
-                    }
-                ],
-                wallet_number: 'kKJV798BIUFvu6ibkvVV7',
-                preferred_switcher: false
-            },
-            {
-                id: '4',
-                name: 'Monero',
-                icon: '',
-                short_name: 'XMR',
-                count: '0.00045',
-                history: [
-                    {
-                        time: '11:00',
-                        percent: '0.03',
-                        direction: 'up'
-                    },
-                    {
-                        time: '12:30',
-                        percent: '0.027',
-                        direction: 'down'
-                    },
-                    {
-                        time: '13:00',
-                        percent: '0.031',
-                        direction: 'up'
-                    }
-                ],
-                wallet_number: 'kKJV798BIUFvu6ibkvVV7',
-                preferred_switcher: true
-            }
-        ],
-        identities: [
-            {
-                id: '1',
-                name: 'aaa'
-            }
-        ]
-    }
-}
-
+let rawData = {}
 
 export let state = null
 
 const updateState = () => {
     rawData = {
         ...rawData,
+        ...db.network.config.data[0]
     }
 
     const normalizedData = normalize(rawData, {
