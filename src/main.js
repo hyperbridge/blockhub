@@ -39,6 +39,9 @@ const overrideConsoleLog = () => {
   }
 }
 
+window.addEventListener("hashchange", () => { $('.app-header').addClass('app-header--loading') }, false);
+
+
 overrideConsoleLog()
 
 /* eslint-disable no-new */

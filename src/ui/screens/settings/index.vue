@@ -27,17 +27,21 @@ export default {
     },
     data() {
         return {
-            consoleLogMessages: ''
+            consoleLogMessages: '',
+            consoleLogInterval: null
         }
     },
     created() {
-        setInterval(() => {
+        this.consoleLogInterval = setInterval(() => {
             this.consoleLogMessages = window.consoleLogMessages.join("<br />")
 
             this.$forceUpdate()
 
             this.$refs.consoleLog.scrollTop = this.$refs.consoleLog.scrollHeight
         }, 1000)
+    },
+    beforeDestroy() {
+        clearInterval(this.consoleLogInterval)
     }
 }
 </script>

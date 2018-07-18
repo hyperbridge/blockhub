@@ -292,21 +292,9 @@ const router = new Router({
   ]
 })
 
-router.beforeResolve((to, from, next) => {
-  // If this isn't an initial page load.
-  if (to.name) {
-    // Start the route progress bar.
-    store.commit('network/beforeLoadRoute')
-  }
-  // setTimeout(() => {
-  //   next()
-  // }, 20000)
-  next()
-})
-
 router.afterEach((to, from) => {
   // Complete the animation of the route progress bar.
-  store.commit('network/afterLoadRoute')
+  $('.app-header--loader').removeClass('app-header--loading')
 })
 
 
