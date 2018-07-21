@@ -1,25 +1,24 @@
 import { normalize } from 'normalizr'
+import Vue from 'vue'
 import schema from './schema'
 //import FundingProtocol from 'funding-protocol'
 import * as ethereum from '@/framework/ethereum'
+import FundingProtocol from 'funding-protocol'
 import * as db from '@/db'
 
-let rawData = {
-    contractMeta: null,
-    contractAddress: null,
-    projects: []
-}
+let rawData = {}
 
 export let state = null
 
 const updateState = () => {
     rawData = {
         ...rawData,
+        ...db.funding.config.data[0],
         projects: db.funding ? db.funding.projects.data : []
     }
 
     const normalizedData = normalize(rawData, {
-        projects: [schema.project]
+        projects: [schema.project],
     })
 
     state = { ...rawData, ...normalizedData.entities }
@@ -37,6 +36,23 @@ export const actions = {
         updateState()
 
         store.commit('updateState', state)
+    },
+    initEthereum(store, payload) {
+        FundingProtocol.ethereum.modules.funding.init(
+            store.state.ethereum[store.state.current_ethereum_network].user_from_address,
+            store.state.ethereum[store.state.current_ethereum_network].user_to_address
+        )
+
+        FundingProtocol.ethereum.modules.project.init(
+            store.state.ethereum[store.state.current_ethereum_network].user_from_address,
+            store.state.ethereum[store.state.current_ethereum_network].user_to_address
+        )
+
+        FundingProtocol.ethereum.modules.funding.setContractAddress('FundingStorage', store.state.ethereum[store.state.current_ethereum_network].contracts.FundingStorage.address)
+        FundingProtocol.ethereum.modules.funding.setContractAddress('FundingVault', store.state.ethereum[store.state.current_ethereum_network].contracts.FundingVault.address)
+        FundingProtocol.ethereum.modules.project.setContractAddress('ProjectRegistration', store.state.ethereum[store.state.current_ethereum_network].contracts.ProjectRegistration.address)
+        FundingProtocol.ethereum.modules.project.setContractAddress('ProjectTimeline', store.state.ethereum[store.state.current_ethereum_network].contracts.ProjectTimeline.address)
+    
     },
     updateState(store, payload) {
         console.log("[BlockHub][Funding] Updating store...")
@@ -56,17 +72,6 @@ export const actions = {
         })
 
         store.commit('updateProject', payload)
-    },
-    submitProjectForReviewRequest(store, payload) {
-        // payload = name, version, category, files, checksum, permissions
-
-        // FundingProtocol.Ethereum.Models.Funding.submitAppForReview(payload).then((res) => {
-        //     const project = db.funding.projects.findOne({ 'name': project.name })
-        //     project.id = res[0]
-        //     // TODO: assign rest of props
-
-        //     store.commit('submitProjectForReviewResponse', project)
-        // })
     }
 }
 
@@ -84,8 +89,46 @@ export const mutations = {
 
         db.save()
     },
-    submitProjectForReviewResponse(state, project) {
-        db.funding.projects.update(project)
+    createProject(store, payload) {console.log('aaaa')
+        FundingProtocol.ethereum.modules.project.call('ProjectRegistration', 'createProject', [
+            payload.name,
+            payload.description,
+            payload.content,
+            10,
+            false,
+            false
+        ]).then((res) => {
+            console.log(res)
+        })
+
+        payload.id = '20'
+
+        db.funding.projects.update(payload)
+    },
+    deployContract(state, payload) {
+        if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {
+            state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = {
+                created_at: null,
+                address: null
+            }
+        }
+
+        let params = []
+
+        if (payload.contractName !== 'FundingStorage') {
+            params = [
+                state.ethereum[state.current_ethereum_network].contracts.FundingStorage.address
+            ]
+        }
+
+        FundingProtocol.ethereum.modules.project.deployContract(payload.contractName, params).then((res) => {
+            state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
+            state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = res._address
+
+            db.funding.config.update(state)
+            db.save()
+        })
+
     }
 }
 

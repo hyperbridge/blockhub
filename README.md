@@ -12,20 +12,22 @@ This is the main web client for BlockHub, built primarily with Web3.js and Vue.j
 Install Node Package Manager (NVM): 
 
 ```bash
-$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 ```
 
 Install Node 8.11.1: 
 
 ```bash
-$ nvm install 8.11.1
+nvm install 8.11.1
 ```
 
 Then, clone these repos:
 
 ```bash
-$ git clone https://github.com/hyperbridge/blockhub-web-client
-$ git clone https://github.com/hyperbridge/marketplace-protocol
+git clone git@github.com:hyperbridge/blockhub-web-client.git
+git clone git@github.com:hyperbridge/token.git
+git clone git@github.com:hyperbridge/marketplace-protocol.git
+git clone git@github.com:hyperbridge/funding-protocol.git
 ```
 
 
@@ -33,7 +35,14 @@ $ git clone https://github.com/hyperbridge/marketplace-protocol
 
 Make sure you're running Node 8.11.1
 
-In `blockhub-web-client`, run `npm install` then `npm link ../marketplace-protocol` then `npm start`
+In `blockhub-web-client`, run `npm install` then:
+```
+npm link ../token
+npm link ../marketplace-protocol
+npm link ../funding-protocol
+```
+
+Then run `npm start`
 
 It should open `http://localhost:8000/` with the web app
 

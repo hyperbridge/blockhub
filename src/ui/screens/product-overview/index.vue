@@ -86,7 +86,7 @@
                                 </div>
 
                                 <div class="content-editor" v-if="editor_mode">
-                                    <div id="summernote" v-html="product.content" v-model="product.content">{{ product.content }}</div>
+                                    <div id="summernote" v-html="product.content">{{ product.content }}</div>
                                 </div>
                             </div>
                             <div class="col-5">
@@ -200,7 +200,11 @@
                 }, 10)
             },
             save() {
-                this.$store.dispatch('marketplace/updateProduct', this.product)
+                if (this.id === 'new') {
+                    this.$store.commit('marketplace/createProject', this.product)
+                } else {
+                    this.$store.dispatch('marketplace/updateProject', this.product)
+                }
             }
         },
         computed: {

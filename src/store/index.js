@@ -56,6 +56,8 @@ let initializer = (store) => {
     db.setInitCallback(() => {
         // TODO: is this a race condition?
         store.dispatch('database/init')
+        store.dispatch('network/initEthereum')
+        store.dispatch('funding/initEthereum')
         store.dispatch('marketplace/initEthereum')
     })
 
@@ -64,7 +66,7 @@ let initializer = (store) => {
 
     store.subscribe((mutation, state) => {
         console.log('[BlockHub] Mutation: ' + mutation.type, state)
-        
+
         if (mutation.type === 'database/initialized') {
             if (ChaosMonkey.random()) {
                 // Hey devs, lets have some fun
@@ -101,6 +103,7 @@ let initializer = (store) => {
 
             store.dispatch('marketplace/updateState')
             store.dispatch('funding/updateState')
+            store.dispatch('network/updateState')
         }
     })
 
@@ -120,7 +123,7 @@ let initializer = (store) => {
         console.log('[BlockHub] Received peer state', state)
 
         if (state) {
-            store.dispatch('cache/updateScreenState', {path, state})
+            store.dispatch('cache/updateScreenState', { path, state })
         }
 
         // Do it all over again

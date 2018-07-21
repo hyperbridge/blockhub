@@ -7,9 +7,54 @@
                         Project not found
                     </div>
                     <div class="col-12" v-if="project">
-                        <h1 class="title margin-top-10 margin-bottom-15">{{ project.name }}</h1>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="editor-container">
+                                    <div class="editor" v-if="editor_mode">
+                                        <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('name')" v-if="!activeElement['name']">Change Project Name <span class="fa fa-edit"></span></button>
 
-                        <c-tags-list :tags="project.author_tags"></c-tags-list>
+                                        <div class="form-group" v-if="activeElement['name']">
+                                            <div class="form-control-element form-control-element--right">
+                                                <input ref="name" name="name" type="text" class="form-control" placeholder="Project name..." v-model="project.name" />
+                                                <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                                    <span class="fa fa-check" @click="deactivateElement('name')"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h1 class="title margin-top-10 margin-bottom-15">{{ project.name }}</h1>
+                                </div>
+
+                                <div class="editor-container">
+                                    <div class="" v-if="editor_mode">
+                                        <div class="form-group">
+                                            <select id="tag-editor" class="form-control" multiple="multiple">
+                                                <option v-for="(tag, index) in author_tag_options" :key="index" :selected="project.author_tags.includes(tag)">{{ tag }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <c-tags-list :tags="project.author_tags" v-if="!editor_mode"></c-tags-list>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="editor" v-if="editor_mode">
+                                    <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('background_image')" v-if="!activeElement['background_image']">Change Background Image <span class="fa fa-edit"></span></button>
+
+                                    <div class="form-group" v-if="activeElement['background_image']">
+                                        <div class="form-control-element form-control-element--right">
+                                            <input ref="background_image" name="background_image" type="text" class="form-control" placeholder="Background image URL..." v-model="project.images.header" />
+                                            <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                                <span class="fa fa-check" @click="deactivateElement('background_image')"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <label>RECOMMENDED SIZE: 1120 x 524px</label>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
@@ -33,8 +78,12 @@
                             <div class="col-7">
                                 <c-screen-gallery></c-screen-gallery>
 
-                                <div class="main-content" v-html="project.content">
+                                <div class="main-content" v-html="project.content" v-if="!editor_mode">
                                     {{ project.content }}
+                                </div>
+
+                                <div class="content-editor" v-if="editor_mode">
+                                    <div id="summernote" v-html="project.content">{{ project.content }}</div>
                                 </div>
                             </div>
                             <div class="col-5">
@@ -144,10 +193,6 @@
 
                             </div>
                         </div>
-
-                        <input type="text" name="name" v-model.lazy="project.name"/>
-
-                        <button class="btn" @click="save()">Save</button>
                     </div>
                 </div>
             </div>
@@ -157,17 +202,20 @@
 
 <script>
     const updateProject = function () {
-        if (!this.$store.state.funding.projects)
-            return
+        let project = null
+        
+        if (this.id === 'new') {
+            project = this.$store.state.funding.default_project
+        }
 
-        const project = this.$store.state.funding.projects[this.id]
-
-        if (!project)
-            return
-
-        if (project.images && project.images.header)
+        if (this.$store.state.funding.projects && this.$store.state.funding.projects[this.id]) {
+            project = this.$store.state.funding.projects[this.id]
+        }
+    
+        if (project && project.images && project.images.header) {
             window.document.body.style['background-image'] = 'url(' + project.images.header + ')'
-
+        }
+        
         return project
     }
 
@@ -184,16 +232,60 @@
         },
         methods: {
             save() {
-                this.$store.dispatch('funding/updateProject', this.product)
+                if (this.id === 'new') {
+                    this.$store.commit('funding/createProject', this.project)
+                } else {
+                    this.$store.dispatch('funding/updateProject', this.project)
+                }
             }
         },
         computed: {
-            project: updateProject
+            project: updateProject,
+            editor_mode() {
+                if (!this.$store.state.marketplace.editor_mode) {
+                    for (let key in this.activeElement) {
+                        this.activeElement[key] = false
+                    }
+                }
+
+                return this.$store.state.marketplace.editor_mode
+            }
         },
         mounted: updateProject,
         created: updateProject,
         beforeDestroy() {
             window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+        },
+        updated() {
+            $('#tag-editor').select2()
+                .on('select2:select', (e) => {
+                    let data = e.params.data
+                    
+                    if (!this.project.author_tags.includes(data.text)) {
+                        this.project.author_tags.push(data.text)
+                    }
+
+                    Vue.set(this.project, 'author_tags', this.project.author_tags)
+                })
+                .on('select2:unselect', (e) => {
+                    let data = e.params.data
+
+                    this.project.author_tags = this.project.author_tags.filter(e => e !== data.text)
+
+                    Vue.set(this.project, 'author_tags', this.project.author_tags)
+                })
+
+            $('#summernote').summernote({
+                placeholder: 'Type in your text',
+                tabsize: 2,
+                height: 300,
+                callbacks: {
+                    onBlur: () => {
+                        Vue.set(this.project, 'content', $('#summernote').summernote('code'))
+                    }
+                }
+            });
+
         }
     }
 </script>

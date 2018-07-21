@@ -179,6 +179,12 @@ const router = new Router({
       props: { id: 'new' }
     },
     {
+      path: '/developer/new-project',
+      name: 'New Project',
+      component: () => import('@/ui/screens/project-overview'),
+      props: { id: 'new' }
+    },
+    {
       path: '/product/:id',
       name: 'Product',
       props: true,

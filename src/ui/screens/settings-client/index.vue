@@ -111,27 +111,27 @@ export default {
         protocols() {
             return [
                 {
-                    id: 'token',
+                    id: 'network',
                     name: 'Token',
                     link: 'https://github.com/hyperbridge/token',
                     contracts: [
                         {
                             name: 'Token',
                             link: 'https://github.com/hyperbridge/token/blob/master/smart-contracts/ethereum/contracts/Token.sol',
-                            created_at: null,
-                            address: null
+                            created_at: this.$store.state.network.ethereum[this.$store.state.network.current_ethereum_network].contracts.Token.created_at,
+                            address: this.$store.state.network.ethereum[this.$store.state.network.current_ethereum_network].contracts.Token.address
                         },
                         {
                             name: 'TokenDelegate',
                             link: 'https://github.com/hyperbridge/token/blob/master/smart-contracts/ethereum/contracts/TokenDelegate.sol',
-                            created_at: null,
-                            address: null
+                            created_at: this.$store.state.network.ethereum[this.$store.state.network.current_ethereum_network].contracts.TokenDelegate.created_at,
+                            address: this.$store.state.network.ethereum[this.$store.state.network.current_ethereum_network].contracts.TokenDelegate.address
                         },
                         {
                             name: 'EternalStorage',
                             link: 'https://github.com/hyperbridge/token/blob/master/smart-contracts/ethereum/contracts/EternalStorage.sol',
-                            created_at: null,
-                            address: null
+                            created_at: this.$store.state.network.ethereum[this.$store.state.network.current_ethereum_network].contracts.EternalStorage.created_at,
+                            address: this.$store.state.network.ethereum[this.$store.state.network.current_ethereum_network].contracts.EternalStorage.address
                         }
                     ]
                 },
@@ -143,8 +143,8 @@ export default {
                         {
                             name: 'Marketplace',
                             link: 'https://github.com/hyperbridge/marketplace-protocol/blob/master/smart-contracts/ethereum/contracts/Marketplace.sol',
-                            created_at: this.$store.state.marketplace.network[this.$store.state.marketplace.current_network].contracts.Marketplace.created_at,
-                            address: this.$store.state.marketplace.network[this.$store.state.marketplace.current_network].contracts.Marketplace.address
+                            created_at: this.$store.state.marketplace.ethereum[this.$store.state.marketplace.current_ethereum_network].contracts.Marketplace.created_at,
+                            address: this.$store.state.marketplace.ethereum[this.$store.state.marketplace.current_ethereum_network].contracts.Marketplace.address
                         }
                     ]
                 },
@@ -154,11 +154,41 @@ export default {
                     link: 'https://github.com/hyperbridge/funding-protocol',
                     contracts: [
                         {
-                            name: 'Project',
-                            link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/Project.sol',
-                            created_at: null,
-                            address: null
-                        }
+                            name: 'FundingStorage',
+                            link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/FundingStorage.sol',
+                            created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.FundingStorage.created_at,
+                            address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.FundingStorage.address
+                        },
+                        {
+                            name: 'FundingVault',
+                            link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/FundingVault.sol',
+                            created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.FundingVault.created_at,
+                            address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.FundingVault.address
+                        },
+                        {
+                            name: 'ProjectRegistration',
+                            link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/ProjectRegistration.sol',
+                            created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectRegistration.created_at,
+                            address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectRegistration.address
+                        },
+                        {
+                            name: 'ProjectTimeline',
+                            link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/ProjectTimeline.sol',
+                            created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectTimeline.created_at,
+                            address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectTimeline.address
+                        },
+                        {
+                            name: 'Contribution',
+                            link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/Contribution.sol',
+                            created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.Contribution.created_at,
+                            address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.Contribution.address
+                        },
+                        {
+                            name: 'Developer',
+                            link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/Developer.sol',
+                            created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.Developer.created_at,
+                            address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.Developer.address
+                        },
                     ]
                 }
             ]
