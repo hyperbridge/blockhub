@@ -5,6 +5,7 @@ import router from '../router'
 import * as db from '../db'
 import * as ChaosMonkey from '../framework/chaos-monkey'
 import * as PeerService from '../framework/peer-service'
+import * as Ethereum from '../framework/ethereum'
 import * as funding from '../modules/funding'
 import * as news from '../modules/news'
 import * as marketplace from '../modules/marketplace'
@@ -51,97 +52,8 @@ const CheckDevelopmentMode = () => {
 
 const developmentMode = CheckDevelopmentMode()
 
-
-let initializer = (store) => {
-    db.setInitCallback(() => {
-        // TODO: is this a race condition?
-        store.dispatch('database/init')
-        store.dispatch('network/initEthereum')
-        store.dispatch('funding/initEthereum')
-        store.dispatch('marketplace/initEthereum')
-    })
-
-    store.dispatch('marketplace/init')
-    store.dispatch('funding/init')
-
-    store.subscribe((mutation, state) => {
-        console.log('[BlockHub] Mutation: ' + mutation.type, state)
-
-        if (mutation.type === 'database/initialized') {
-            if (ChaosMonkey.random()) {
-                // Hey devs, lets have some fun
-                // Bye bye data
-                // Things still workie?
-                store.dispatch('database/clean')
-            }
-
-            if (developmentMode === 'mode2') {
-                store.dispatch('database/clean')
-            }
-        } else if (mutation.type === 'database/updateState') {
-            PeerService.setResolver((cmd) => {
-                if (cmd.key = 'pageContentHashRequest' || cmd.key === 'pageContentDataRequest') {
-                    const computedState = {}
-
-                    try {
-                        if (router.matcher.match(cmd.data.path).matched.length && router.matcher.match(cmd.data.path).matched[0].components.default.computed) {
-                            for (let x in router.matcher.match(cmd.data.path).matched[0].components.default.computed) {
-                                computedState[x] = router.matcher.match(cmd.data.path).matched[0].components.default.computed[x].bind(new function FakeStore() { this.$store = store; })()
-                            }
-                        }
-                    } catch (e) {
-                        console.log("Problem encountered computing vue state", e)
-                    }
-
-                    console.log('[BlockHub] Computed vue state', computedState)
-
-                    return computedState
-                }
-
-                return {}
-            })
-
-            store.dispatch('marketplace/updateState')
-            store.dispatch('funding/updateState')
-            store.dispatch('network/updateState')
-        }
-    })
-
-    const monitorPathState = async () => {
-        if (!store.state.network.connection.operator) {
-            return
-        }
-
-        const path = document.location.hash.replace('#', '')
-
-        console.log("[BlockHub] Checking peers for state changes on path", path)
-
-        // Send request for latest hash of current pages data
-        // TODO: compare timestamp
-        const state = await PeerService.getPathState(path)
-
-        console.log('[BlockHub] Received peer state', state)
-
-        if (state) {
-            store.dispatch('cache/updateScreenState', { path, state })
-        }
-
-        // Do it all over again
-        await new Promise(r => setTimeout(r, 5000))
-
-        monitorPathState()
-    }
-
-    monitorPathState()
-
-    if (!window.BlockHub)
-        window.BlockHub = {}
-
-    window.BlockHub.store = store
-}
-
 const store = new Vuex.Store({
-    plugins: [initializer],
+    plugins: [],
     modules: {
         cache: {
             namespaced: true,
@@ -187,6 +99,115 @@ const store = new Vuex.Store({
         }
     }
 })
+
+export let initializer = () => {
+    return new Promise((resolve, reject) => {
+        let initialized = false
+
+        Ethereum.init()
+        PeerService.init()
+
+        db.setInitCallback(() => {
+            // TODO: is this a race condition?
+            store.dispatch('database/init')
+            store.dispatch('network/initEthereum')
+            store.dispatch('funding/initEthereum')
+            store.dispatch('marketplace/initEthereum')
+        })
+
+        store.dispatch('marketplace/init')
+        store.dispatch('funding/init')
+
+        store.subscribe((mutation, state) => {
+            console.info('[BlockHub] Mutation: ' + mutation.type, state)
+
+            if (mutation.type === 'database/initialized') {
+                if (ChaosMonkey.random()) {
+                    // Hey devs, lets have some fun
+                    // Bye bye data
+                    // Things still workie?
+                    store.dispatch('database/clean')
+                }
+
+                if (developmentMode === 'mode2') {
+                    store.dispatch('database/clean')
+                }
+            } else if (mutation.type === 'database/updateState') {
+                PeerService.setResolver((cmd) => {
+                    if (cmd.key = 'pageContentHashRequest' || cmd.key === 'pageContentDataRequest') {
+                        const computedState = {}
+
+                        try {
+                            if (router.matcher.match(cmd.data.path).matched.length && router.matcher.match(cmd.data.path).matched[0].components.default.computed) {
+                                for (let x in router.matcher.match(cmd.data.path).matched[0].components.default.computed) {
+                                    computedState[x] = router.matcher.match(cmd.data.path).matched[0].components.default.computed[x].bind(new function FakeStore() { this.$store = store; })()
+                                }
+                            }
+                        } catch (e) {
+                            console.log("Problem encountered computing vue state", e)
+                        }
+
+                        console.log('[BlockHub] Computed vue state', computedState)
+
+                        return computedState
+                    }
+
+                    return {}
+                })
+
+                store.dispatch('marketplace/updateState')
+                store.dispatch('funding/updateState')
+                store.dispatch('network/updateState')
+
+                if (!initialized) {
+                    initialized = true
+
+                    console.log('BlockHub initialized.')
+
+                    setInterval(() => {
+                        store.dispatch('network/checkInternetConnection')
+                    }, 4000)
+
+                    resolve()
+                }
+            }
+        })
+
+        const monitorPathState = async () => {
+            if (!store.state.network.connection.operator) {
+                return
+            }
+
+            const path = document.location.hash.replace('#', '')
+
+            console.log("[BlockHub] Checking peers for state changes on path", path)
+
+            // Send request for latest hash of current pages data
+            // TODO: compare timestamp
+            const state = await PeerService.getPathState(path)
+
+            console.log('[BlockHub] Received peer state', state)
+
+            if (state) {
+                store.dispatch('cache/updateScreenState', { path, state })
+            }
+
+            // Do it all over again
+            await new Promise(r => setTimeout(r, 5000))
+
+            monitorPathState()
+        }
+
+        monitorPathState()
+
+        if (!window.BlockHub)
+            window.BlockHub = {}
+
+        window.BlockHub.store = store
+    })
+}
+
+
 
 
 

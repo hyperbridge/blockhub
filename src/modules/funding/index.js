@@ -89,7 +89,7 @@ export const mutations = {
 
         db.save()
     },
-    createProject(store, payload) {console.log('aaaa')
+    createProject(store, payload) {
         FundingProtocol.ethereum.modules.project.call('ProjectRegistration', 'createProject', [
             payload.name,
             payload.description,
@@ -99,11 +99,11 @@ export const mutations = {
             false
         ]).then((res) => {
             console.log(res)
+
+            payload.id = '20'
+
+            db.funding.projects.insert(payload)
         })
-
-        payload.id = '20'
-
-        db.funding.projects.update(payload)
     },
     deployContract(state, payload) {
         if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {

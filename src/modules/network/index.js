@@ -26,7 +26,13 @@ const updateState = () => {
 
 updateState()
 
-export const getters = {}
+export const getters = {
+    privileges() {
+        return [
+            'edit'
+        ]
+    }
+}
 
 export const actions = {
     connect(store, payload) {
@@ -40,7 +46,7 @@ export const actions = {
         }, 5000)
     },
     updateState(store, payload) {
-        console.log("[BlockHub][Marketplace] Updating store...")
+        console.log('[BlockHub][Marketplace] Updating store...')
 
         updateState()
 
@@ -106,7 +112,7 @@ export const actions = {
             }
         }
 
-        xhr.addEventListener("readystatechange", processRequest, false)
+        xhr.addEventListener('readystatechange', processRequest, false)
     },
     signIn(store, payload) {
         store.commit('signIn', payload)

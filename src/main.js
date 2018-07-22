@@ -4,7 +4,7 @@ import Vue from 'vue'
 import moment from 'moment'
 import app from './app'
 import router from './router'
-import store from './store'
+import store, { initializer } from './store'
 
 Vue.config.productionTip = false
 
@@ -39,18 +39,23 @@ const overrideConsoleLog = () => {
   }
 }
 
-window.addEventListener("hashchange", () => { $('.app-header').addClass('app-header--loading') }, false);
+window.addEventListener('hashchange', () => { $('.app-header').addClass('app-header--loading') }, false);
 
 
 overrideConsoleLog()
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  template: `<app :data="${dataString}" />`,
-  components: {
-    'app': app
-  },
+initializer().then(() => {
+  console.log('[BlockHub] Loading app...')
+
+  /* eslint-disable no-new */
+  new Vue({
+      el: '#app',
+      router,
+      store,
+      template: `<app :data="${dataString}" />`,
+      components: {
+        'app': app
+      },
+  })
+
 })

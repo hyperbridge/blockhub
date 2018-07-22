@@ -303,6 +303,37 @@ router.afterEach((to, from) => {
   $('.app-header--loader').removeClass('app-header--loading')
 })
 
+export const Auth = {
+  loggedIn() {
+    return true
+  },
+  accessGate(permission = false) {
+    const privileges = store.getters['network/privileges']
+    if (!permission) {
+      return true
+    }
+    return !!privileges && !!privileges.find(p => {
+      return p === permission
+    })
+  }
+}
+
+
+router.beforeEach((to, from, next) => {
+  if (!Auth.loggedIn() && !!to.meta.auth) {
+    next({
+      path: '/login',
+      query: { redirect: to.fullPath }
+    })
+  }
+
+  if (!Auth.accessGate(to.meta.permission)) {
+    next('/')
+    throw new Error("Oops! You don't seem to have access to that page.")
+  }
+
+  next()
+})
 
 // router.beforeEach((to, from, next) => {
 //   get_data_from_server(to.fullPath).then(component => {

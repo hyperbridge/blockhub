@@ -7,10 +7,17 @@
                         Project not found
                     </div>
                     <div class="col-12" v-if="project">
+                        <p class="errors" v-if="errors.length">
+                            <strong>Please correct the following error(s):</strong>
+                            <ul>
+                                <li v-for="error in errors" :key="error">{{ error }}</li>
+                            </ul>
+                        </p>
+                        
                         <div class="row">
                             <div class="col-8">
                                 <div class="editor-container">
-                                    <div class="editor" v-if="editor_mode">
+                                    <div class="editor" v-if="editing">
                                         <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('name')" v-if="!activeElement['name']">Change Project Name <span class="fa fa-edit"></span></button>
 
                                         <div class="form-group" v-if="activeElement['name']">
@@ -25,19 +32,24 @@
                                     <h1 class="title margin-top-10 margin-bottom-15">{{ project.name }}</h1>
                                 </div>
 
+
+                                                <input ref="description" name="name" type="text" class="form-control" placeholder="Project description..." v-model="project.description" />
+
+
+
                                 <div class="editor-container">
-                                    <div class="" v-if="editor_mode">
+                                    <div class="" v-if="editing">
                                         <div class="form-group">
                                             <select id="tag-editor" class="form-control" multiple="multiple">
                                                 <option v-for="(tag, index) in author_tag_options" :key="index" :selected="project.author_tags.includes(tag)">{{ tag }}</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <c-tags-list :tags="project.author_tags" v-if="!editor_mode"></c-tags-list>
+                                    <c-tags-list :tags="project.author_tags" v-if="!editing"></c-tags-list>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="editor" v-if="editor_mode">
+                                <div class="editor" v-if="editing">
                                     <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('background_image')" v-if="!activeElement['background_image']">Change Background Image <span class="fa fa-edit"></span></button>
 
                                     <div class="form-group" v-if="activeElement['background_image']">
@@ -78,11 +90,11 @@
                             <div class="col-7">
                                 <c-screen-gallery></c-screen-gallery>
 
-                                <div class="main-content" v-html="project.content" v-if="!editor_mode">
+                                <div class="main-content" v-html="project.content" v-if="!editing">
                                     {{ project.content }}
                                 </div>
 
-                                <div class="content-editor" v-if="editor_mode">
+                                <div class="content-editor" v-if="editing">
                                     <div id="summernote" v-html="project.content">{{ project.content }}</div>
                                 </div>
                             </div>
@@ -93,8 +105,8 @@
                                         <div class="crowndfunding-campaign">
                                             <div class="crowndfunding-campaign__progress">
                                                 <div v-for="(stage, index) in project.funding.stages" :key="index"
-                                                     :class="stage.status"
-                                                     class="crowndfunding-campaign__progress-stage">
+                                                    :class="stage.status"
+                                                    class="crowndfunding-campaign__progress-stage">
                                                     <i class="fas fa-check" v-if="stage.status === 'done'"></i>
                                                     <i class="fas fa-clock" v-if="stage.status === 'in_progress'"></i>
                                                     <span class="stage_line"></span>
@@ -113,9 +125,9 @@
                                                 <div class="spent">
                                                     <div class="progress progress-bar-vertical">
                                                         <div class="progress-bar bg-success" role="progressbar"
-                                                             :aria-valuenow="project.funding.spent_amount['percent']"
-                                                             aria-valuemin="0" aria-valuemax="100"
-                                                             :style="{ height: project.funding.spent_amount['percent'] + '%' }">
+                                                            :aria-valuenow="project.funding.spent_amount['percent']"
+                                                            aria-valuemin="0" aria-valuemax="100"
+                                                            :style="{ height: project.funding.spent_amount['percent'] + '%' }">
                                                             <span class="sr-only">{{ project.funding.spent_amount['percent'] }}% Complete</span>
                                                         </div>
                                                     </div>
@@ -125,9 +137,9 @@
                                                 <div class="locked">
                                                     <div class="progress progress-bar-vertical">
                                                         <div class="progress-bar bg-success" role="progressbar"
-                                                             :aria-valuenow="project.funding.locked_amount['percent']"
-                                                             aria-valuemin="0" aria-valuemax="100"
-                                                             :style="{ height: project.funding.locked_amount['percent'] + '%' }">
+                                                            :aria-valuenow="project.funding.locked_amount['percent']"
+                                                            aria-valuemin="0" aria-valuemax="100"
+                                                            :style="{ height: project.funding.locked_amount['percent'] + '%' }">
                                                             <span class="sr-only">{{ project.funding.locked_amount['percent'] }}% Complete</span>
                                                         </div>
                                                     </div>
@@ -137,9 +149,9 @@
                                                 <div class="overflow">
                                                     <div class="progress progress-bar-vertical">
                                                         <div class="progress-bar bg-success" role="progressbar"
-                                                             :aria-valuenow="project.funding.overflow_amount['percent']"
-                                                             aria-valuemin="0" aria-valuemax="100"
-                                                             :style="{ height: project.funding.overflow_amount['percent'] + '%' }">
+                                                            :aria-valuenow="project.funding.overflow_amount['percent']"
+                                                            aria-valuemin="0" aria-valuemax="100"
+                                                            :style="{ height: project.funding.overflow_amount['percent'] + '%' }">
                                                             <span class="sr-only">{{ project.funding.overflow_amount['percent'] }}% Complete</span>
                                                         </div>
                                                     </div>
@@ -230,29 +242,87 @@
             'c-frequently-traded-assets': () => import('@/ui/components/frequently-traded-assets'),
             'c-community-spotlight': () => import('@/ui/components/community-spotlight')
         },
+        data() {
+            return {
+                errors: [],
+                activeElement: {
+                    name: false,
+                    background_image: false,
+                    tags: false
+                },
+                author_tag_options: [
+                    'game',
+                    'mod',
+                    'other'
+                ]
+            }
+        },
         methods: {
+            deactivateElement(key) {
+                this.activeElement[key] = false
+            },
+            activateElement(key) {
+                for (let key in this.activeElement) {
+                    this.activeElement[key] = false
+                }
+
+                this.activeElement[key] = true
+
+                setTimeout(() => {
+                    if (this.$refs[key])
+                        this.$refs[key].focus()
+                }, 10)
+            },
             save() {
+                if (!this.checkForm()) {
+                    this.$store.dispatch('marketplace/setEditorMode', 'editing')
+
+                    return
+                }
+
                 if (this.id === 'new') {
                     this.$store.commit('funding/createProject', this.project)
                 } else {
                     this.$store.dispatch('funding/updateProject', this.project)
                 }
+            },
+            checkForm: function (e) {
+                this.errors = []
+
+                if (this.project.name && this.project.description) {
+                    return true
+                }
+                
+                if (!this.project.name) {
+                    this.errors.push('Project name required.')
+                }
+                if (!this.project.description) {
+                    this.errors.push('Project description required.')
+                }
             }
         },
         computed: {
             project: updateProject,
-            editor_mode() {
+            editing() {
                 if (!this.$store.state.marketplace.editor_mode) {
                     for (let key in this.activeElement) {
                         this.activeElement[key] = false
                     }
                 }
 
-                return this.$store.state.marketplace.editor_mode
+                return this.$store.state.marketplace.editor_mode === 'editing'
             }
         },
-        mounted: updateProject,
-        created: updateProject,
+        watch: {
+            editing(newVal, oldVal) {
+                if (this.$store.state.marketplace.editor_mode === 'publishing') {
+                    this.save()
+                }
+            }
+        },
+        created() {
+            this.$store.dispatch('marketplace/setEditorMode', 'editing')
+        },
         beforeDestroy() {
             window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
         },
@@ -290,7 +360,57 @@
     }
 </script>
 
+
+<style lang="scss">
+    .content-editor .note-editor.note-frame .note-editing-area .note-editable {
+        background-color: transparent;
+        color: inherit;
+    }
+
+    .content-editor .card {
+        background: rgba(0, 0, 0, 0.13);
+        color: #dfdfe9;
+        border: 1px solid rgba(70, 70, 70, 0.5);
+    }
+
+    .content-editor .note-editor.note-frame .note-statusbar {
+        background: transparent;
+        border: 0 none;
+    }
+</style>
+
 <style lang="scss" scoped>
+    .errors {
+        margin-bottom: 60px;
+    }
+
+    .editor {
+        position: absolute;
+        top: -45px;
+        left: -5px;
+        z-index: 10;
+
+        .btn, input {
+            border-color: #1b1c2b;
+            background: #1B1C2B;
+            border-radius: 6px;
+            box-shadow: 1px 1px 0px #101010;
+            font-size: 17px;
+            padding-top: 8px;
+
+            span {
+                font-size: 17px;
+            }
+        }
+        .form-control-element .form-control-element__box--pretify {
+            line-height: 11px;
+        }
+    }
+
+    .editor-container {
+        position: relative;
+    }
+
     .main-content {
         margin-top: 15px;
         padding: 15px;
