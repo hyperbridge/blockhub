@@ -69,6 +69,9 @@
                                 <a class="nav-link" :href="`/#/project/${project.id}/community`">Community</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" :href="`/#/project/${project.id}/bounties`">Bounties</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" :href="`/#/project/${project.id}/suggestions`">Suggestions</a>
                             </li>
                             <li class="nav-item">
