@@ -4,6 +4,7 @@ const data = require('./data')
 
 let loki = null
 let initCallback = null
+let initialized = false
 
 export let account = null
 
@@ -28,9 +29,24 @@ export let setInitCallback = (cb) => {
 export const init = () => {
 
     const databaseInitialize = () => {
+    }
+
+    const idbAdapter = (new Loki()).getIndexedAdapter()
+
+    loki = new Loki('main.db', {
+        adapter: new idbAdapter('main.db'),
+        autoload: false,
+        //autoloadCallback: databaseInitialize,
+        autosave: true,
+        autosaveInterval: 4000
+    })
+
+    loadDefault()
+
+    loki.loadDatabase({}, (result) => {
         console.log('[BlockHub] Database loaded from IndexedDB')
 
-        if (loki.getCollection('account')) {
+        if (loki.getCollection('networkConfig')) {
             account = loki.getCollection('account')
             network.config = loki.getCollection('networkConfig')
             marketplace.config = loki.getCollection('marketplaceConfig')
@@ -84,20 +100,10 @@ export const init = () => {
             funding.config.ensureAllIndexes(true)
         }
 
+        initialized = true
+
         initCallback()
-    }
-
-    const idbAdapter = (new Loki()).getIndexedAdapter()
-
-    loki = new Loki('main.db', {
-        adapter: new idbAdapter('main.db'),
-        autoload: true,
-        autoloadCallback: databaseInitialize,
-        autosave: true,
-        autosaveInterval: 4000
     })
-
-    loadDefault()
 }
 
 export const instance = () => {
@@ -131,13 +137,17 @@ export const loadDefault = () => {
 }
 
 export const save = () => {
+    if (!initialized) {
+        return
+    }
+
     loki.saveDatabase(function (err) {
         if (err) {
             console.log(err)
+            return
         }
-        else {
-            console.log("[BlockHub] Database saved.")
-        }
+        
+        console.log("[BlockHub] Database saved.")
     })
 }
 
