@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="editor-container">
-                                    <div class="editor" v-if="editing">
+                                    <div class="editor editor--offset-above" v-if="editing">
                                         <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('name')" v-if="!activeElement['name']">Change Project Name <span class="fa fa-edit"></span></button>
 
                                         <div class="form-control-element form-control-element--right" v-if="activeElement['name']">
@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="editor" v-if="editing">
+                                <div class="editor editor--offset-above" v-if="editing">
                                     <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('background_image')" v-if="!activeElement['background_image']">Change Background Image <span class="fa fa-edit"></span></button>
 
                                     <div class="form-group" v-if="activeElement['background_image']">
@@ -90,9 +90,14 @@
                                     <div class="editor" v-if="editing">
                                         <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('description')" v-if="!activeElement['description']">Change Description <span class="fa fa-edit"></span></button>
 
-                                        <input ref="description" name="name" type="text" class="form-control" placeholder="Project description..." v-model="project.description" v-if="activeElement['description']" />
+                                        <div class="form-control-element form-control-element--right" v-if="activeElement['description']">
+                                            <input ref="description" name="name" type="text" class="form-control" placeholder="Project description..." v-model="project.description" />
+                                            <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                                <span class="fa fa-check" @click="deactivateElement('description')"></span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p>{{ project.description }}</p>
+                                    <p class="project__description">{{ project.description }}</p>
                                 </div>
 
                                 <div class="main-content" v-html="project.content" v-if="!editing">
@@ -111,18 +116,18 @@
                                             <span>Set Up Campaign</span>
                                         </a>
                                         <h2 class="title">Crowndfunding campaign</h2>
-                                        <div class="crowndfunding-campaign">
-                                            <div class="crowndfunding-campaign__progress">
+                                        <div class="project">
+                                            <div class="project__progress">
                                                 <div v-for="(stage, index) in project.funding.stages" :key="index"
                                                     :class="stage.status"
-                                                    class="crowndfunding-campaign__progress-stage">
+                                                    class="project__progress-stage">
                                                     <i class="fas fa-check" v-if="stage.status === 'done'"></i>
                                                     <i class="fas fa-clock" v-if="stage.status === 'in_progress'"></i>
                                                     <span class="stage_line"></span>
                                                     <span class="name">{{ stage.text}}</span>
                                                 </div>
                                             </div>
-                                            <div class="crowndfunding-campaign__info">
+                                            <div class="project__info">
                                                 <div class="funded">
                                                     <div class="text">114% Funded</div>
                                                     {{ project.funding.funded_amount }} USD
@@ -168,7 +173,7 @@
                                                     {{ project.funding.overflow_amount['amount'] }} USD
                                                 </div>
                                             </div>
-                                            <div class="crowndfunding-campaign__action">
+                                            <div class="project__action">
                                                 <a href="#3" class="follow_link">
                                                     <i class="fas fa-check"></i>
                                                     Follow
@@ -259,7 +264,9 @@
                 activeElement: {
                     name: false,
                     background_image: false,
-                    tags: false
+                    tags: false,
+                    description: false,
+                    content: false
                 },
                 author_tag_options: [
                     'game',
@@ -398,12 +405,6 @@
     }
 
     .editor {
-        position: absolute;
-        top: -45px;
-        left: -5px;
-        z-index: 10;
-        text-align: right;
-
         .btn, input {
             border-color: #1b1c2b;
             background: #1B1C2B;
@@ -419,6 +420,14 @@
         .form-control-element .form-control-element__box--pretify {
             line-height: 11px;
         }
+    }
+
+    .editor.editor--offset-above {
+        position: absolute;
+        top: -45px;
+        left: -5px;
+        z-index: 10;
+        text-align: right;
     }
 
     .editor-container {
@@ -485,7 +494,12 @@
         }
     }
 
-    .crowndfunding-campaign__progress {
+    .project__description {
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .project__progress {
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
@@ -494,7 +508,7 @@
         margin: 10px -6%;
     }
 
-    .crowndfunding-campaign__progress-stage {
+    .project__progress-stage {
         width: 50%;
         text-align: center;
         span {
@@ -590,7 +604,7 @@
         }
     }
 
-    .crowndfunding-campaign__info {
+    .project__info {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
@@ -641,7 +655,7 @@
         }
     }
 
-    .crowndfunding-campaign__action{
+    .project__action{
         display: flex;
         justify-content: space-between;
         flex-wrap: nowrap;
