@@ -15,26 +15,20 @@
                         </p>
                         
                         <div class="row">
-                            <div class="col-8">
+                            <div class="col-md-8">
                                 <div class="editor-container">
                                     <div class="editor" v-if="editing">
                                         <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('name')" v-if="!activeElement['name']">Change Project Name <span class="fa fa-edit"></span></button>
 
-                                        <div class="form-group" v-if="activeElement['name']">
-                                            <div class="form-control-element form-control-element--right">
-                                                <input ref="name" name="name" type="text" class="form-control" placeholder="Project name..." v-model="project.name" />
-                                                <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                                    <span class="fa fa-check" @click="deactivateElement('name')"></span>
-                                                </div>
+                                        <div class="form-control-element form-control-element--right" v-if="activeElement['name']">
+                                            <input ref="name" name="name" type="text" class="form-control" placeholder="Project name..." v-model="project.name" />
+                                            <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                                <span class="fa fa-check" @click="deactivateElement('name')"></span>
                                             </div>
                                         </div>
                                     </div>
                                     <h1 class="title margin-top-10 margin-bottom-15">{{ project.name }}</h1>
                                 </div>
-
-
-                                                <input ref="description" name="name" type="text" class="form-control" placeholder="Project description..." v-model="project.description" />
-
 
 
                                 <div class="editor-container">
@@ -48,7 +42,7 @@
                                     <c-tags-list :tags="project.author_tags" v-if="!editing"></c-tags-list>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4">
                                 <div class="editor" v-if="editing">
                                     <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('background_image')" v-if="!activeElement['background_image']">Change Background Image <span class="fa fa-edit"></span></button>
 
@@ -66,7 +60,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
@@ -87,8 +80,17 @@
                         </ul>
 
                         <div class="row">
-                            <div class="col-7">
+                            <div class="col-md-7 col-xl-8">
                                 <c-screen-gallery></c-screen-gallery>
+
+                                <div class="editor-container">
+                                    <div class="editor" v-if="editing">
+                                        <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('description')" v-if="!activeElement['description']">Change Description <span class="fa fa-edit"></span></button>
+
+                                        <input ref="description" name="name" type="text" class="form-control" placeholder="Project description..." v-model="project.description" v-if="activeElement['description']" />
+                                    </div>
+                                    <p>{{ project.description }}</p>
+                                </div>
 
                                 <div class="main-content" v-html="project.content" v-if="!editing">
                                     {{ project.content }}
@@ -98,9 +100,13 @@
                                     <div id="summernote" v-html="project.content">{{ project.content }}</div>
                                 </div>
                             </div>
-                            <div class="col-5">
+                            <div class="col-md-5 col-xl-4">
                                 <div class="card invert" v-if="project.funding">
                                     <div class="card-body">
+                                        <a href="#" class="editor-container editor-container--style-2" v-if="editing && !activeElement['campaign']">
+                                            <i class="fas fa-cog"></i>
+                                            <span>Set Up Campaign</span>
+                                        </a>
                                         <h2 class="title">Crowndfunding campaign</h2>
                                         <div class="crowndfunding-campaign">
                                             <div class="crowndfunding-campaign__progress">
@@ -179,6 +185,10 @@
 
                                 <div class="card invert milestones" v-if="project.milestones">
                                     <div class="card-body">
+                                        <a href="#" class="editor-container editor-container--style-2" v-if="editing && !activeElement['milestones']">
+                                            <i class="fas fa-cog"></i>
+                                            <span>Set Up Milestones</span>
+                                        </a>
                                         <h2 class="title">Milestones</h2>
                                         <ul class="milestones__list">
                                             <li v-for="(item, index) in project.milestones"
@@ -197,11 +207,7 @@
                                     </div>
                                 </div>
 
-                                <c-rating-block :items="project.rating" :parent_url="`/#/project/${project.id}`" />
-
-                                <c-frequently-traded-assets :items="project.frequently_traded_assets" :assets_url="`/#/project/${project.id}`" />
-
-                                <c-community-spotlight :discussions="project.community.discussions" :community_url="`/#/project/${project.id}`"/>
+                                <c-community-spotlight :discussions="project.community.discussions" :community_url="`/#/project/${project.id}`" :editing="editing" :activeElement="activeElement['milestones']" />
 
                             </div>
                         </div>
@@ -213,6 +219,8 @@
 </template>
 
 <script>
+    import Vue from 'vue'
+
     const updateProject = function () {
         let project = null
         
@@ -282,8 +290,10 @@
 
                 if (this.id === 'new') {
                     this.$store.commit('funding/createProject', this.project)
+                    this.$store.dispatch('marketplace/setEditorMode', 'viewing')
                 } else {
                     this.$store.dispatch('funding/updateProject', this.project)
+                    this.$store.dispatch('marketplace/setEditorMode', 'viewing')
                 }
             },
             checkForm: function (e) {
@@ -389,6 +399,7 @@
         top: -45px;
         left: -5px;
         z-index: 10;
+        text-align: right;
 
         .btn, input {
             border-color: #1b1c2b;
@@ -409,6 +420,41 @@
 
     .editor-container {
         position: relative;
+    }
+
+    .editor-container--style-2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.4);
+        width: 100%;
+        height: 100%;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-flow: column;
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+
+        i {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        span {
+            font-size: 18px;
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .editor-container--style-2 ~ * {
+        opacity: 0.3;
     }
 
     .main-content {

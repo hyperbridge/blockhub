@@ -201,9 +201,9 @@
             },
             save() {
                 if (this.id === 'new') {
-                    this.$store.commit('marketplace/createProject', this.product)
+                    this.$store.commit('marketplace/createProduct', this.product)
                 } else {
-                    this.$store.dispatch('marketplace/updateProject', this.product)
+                    this.$store.dispatch('marketplace/updateProduct', this.product)
                 }
             }
         },

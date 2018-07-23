@@ -37,6 +37,20 @@ const overrideConsoleLog = () => {
 
     oldLog.apply(console, arguments)
   }
+
+  var oldWarn = console.log
+  console.warn = function (message) {
+    window.consoleLogMessages.push('Warn: ' + message)
+
+    oldWarn.apply(console, arguments)
+  }
+
+  var oldError = console.log
+  console.error = function (message) {
+    window.consoleLogMessages.push('Error: ' + message)
+
+    oldError.apply(console, arguments)
+  }
 }
 
 window.addEventListener('hashchange', () => { $('.app-header').addClass('app-header--loading') }, false);

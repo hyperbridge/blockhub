@@ -2,6 +2,12 @@
 
     <div class="card invert community-spotlight" v-if="discussions">
         <div class="card-body">
+            <div class="editor-container editor-container--style-2" v-if="editing">
+                <p class="" v-if="!activeElement">
+                    <i class="fas fa-cog"></i>
+                    Set Up Community
+                </p>
+            </div>
             <h2 class="title">Community Spotlight
                 <a href="#3" class="title-icon">
                     <i class="fas fa-comments"></i>
@@ -25,12 +31,42 @@
 
 <script>
     export default {
-        props: ['discussions', 'community_url']
+        props: ['discussions', 'community_url', 'editing', 'activateElement']
     }
 </script>
 
 
 <style lang="scss" scoped>
+    .editor-container {
+        position: relative;
+    }
+
+    .editor-container--style-2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.3);
+        width: 100%;
+        height: 100%;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+
+        i {
+            display: block;
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+    }
+
+    .editor-container--style-2 ~ * {
+        opacity: 0.3;
+    }
 
     .community-spotlight {
         a.btn-outline-white {

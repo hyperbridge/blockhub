@@ -4,9 +4,9 @@
         "loading": false,
         "connection": {
             "internet": false,
-            "datasource": false,
-            "operator": false,
-            "ethereum": false,
+            "datasource": true,
+            "operator": true,
+            "ethereum": true,
             "status": {
                 "code": null,
                 "message": "Establishing connection..."
@@ -170,30 +170,79 @@
     "funding": {
         "ethereum": {
             "ropsten": {
-                "contracts": {
-                    "Contribution": {"created_at": null, "address": null},
-                    "Developer": {"created_at": null, "address": null},
-                    "Curation": {"created_at": null, "address": null},
-                    "FundingStorage": {"created_at": null, "address": null},
-                    "FundingVault": {"created_at": null, "address": null},
-                    "ProjectRegistration": {"created_at": null, "address": null},
-                    "ProjectTimeline": {"created_at": null, "address": null}
-                },
                 "user_from_address": "0x66fb0ff9a23e90f3f205a406fd3253532919fb69",
-                "user_to_address": null
+                "user_to_address": null,
+                "contracts": {}
             },
             "local": {
-                "contracts": {
-                    "Contribution": {"created_at": null, "address": null},
-                    "Developer": {"created_at": null, "address": null},
-                    "Curation": {"created_at": null, "address": null},
-                    "FundingStorage": {"created_at": null, "address": null},
-                    "FundingVault": {"created_at": null, "address": null},
-                    "ProjectRegistration": {"created_at": null, "address": null},
-                    "ProjectTimeline": {"created_at": null, "address": null}
-                },
                 "user_from_address": "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
-                "user_to_address": null
+                "user_to_address": null,
+                "contracts": {
+                    "FundingStorage": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "DeveloperStorageAccess": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ContributionStorageAccess": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectStorageAccess": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "CurationStorageAccess": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "FundingVault": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "Developer": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "Contribution": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectBase": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectTimeline": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectTimelineHelpersLibrary": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectTimelineProposal": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectContributionTierHelpersLibrary": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectMilestoneCompletion": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectRegistration": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "Curation": {
+                        "created_at": null,
+                        "address": null
+                    }
+                }
             }
         },
         "current_ethereum_network": "local",

@@ -107,11 +107,11 @@ export let initializer = () => {
         Ethereum.init()
         PeerService.init()
 
-        db.setInitCallback(() => {
+        db.setInitCallback(async () => {
             // TODO: is this a race condition?
             store.dispatch('database/init')
             store.dispatch('network/initEthereum')
-            store.dispatch('funding/initEthereum')
+            await store.dispatch('funding/initEthereum')
             store.dispatch('marketplace/initEthereum')
         })
 
