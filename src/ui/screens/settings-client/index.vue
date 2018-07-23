@@ -13,18 +13,18 @@
                                     <p class="caption">Select protocol contracts to deploy</p>
                                 </div>
                                 <div class="page-heading__container float-right d-none d-md-block">
-                                    <button class="btn btn-outline-secondary">Deploy selected</button>
+                                    <button class="btn btn-outline-secondary" v-if="selected.length" @click="deploySelected">Deploy selected</button>
                                     <button class="btn btn-outline-secondary">Deploy all</button>
                                 </div>
                             </div>
                             <div class="">
                                 <div class="table-responsive">
-                                    <table class="table table-dark margin-bottom-0">   
+                                    <table class="table table-dark margin-bottom-0">
                                         <thead>
                                             <tr>
                                                 <th scope="col" width="40">
                                                     <label class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input">
+                                                        <input type="checkbox" class="custom-control-input" v-model="selectAll" />
                                                         <span class="custom-control-label"></span>
                                                     </label>
                                                 </th>
@@ -44,7 +44,7 @@
                                                 <tr v-for="contract in protocol.contracts" v-bind:key="contract.name">
                                                     <td>
                                                         <label class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input">
+                                                            <input type="checkbox" class="custom-control-input" v-model="selected" :value="`${protocol.id}.${contract.name}`" number />
                                                             <span class="custom-control-label"></span>
                                                         </label>
                                                     </td>
@@ -107,7 +107,25 @@ export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default')
     },
+    data() {
+        return {
+            selected: []
+        }
+    },
     computed: {
+        selectAll: {
+            get: function () {
+                return this.selected.length == this.protocols.map((protocol) => protocol.contracts.length).reduce((prev, cur) => prev + cur)
+            },
+            set: function (value) {
+                if (!value) {
+                    this.selected = []
+                    return
+                }
+
+                this.selected = this.protocols.map((protocol) => protocol.contracts.map((contract) => protocol.id + '.' + contract.name)).reduce((prev, cur) => prev.concat(cur))
+            }
+        },
         protocols() {
             return [
                 {
@@ -261,8 +279,27 @@ export default {
         reloadDatabase() {
             this.$store.dispatch('database/reload')
         },
-        deployContract(moduleName, contractName) {
-            this.$store.commit(moduleName + '/deployContract', { contractName })
+        deployContract(protocolId, contractName) {
+            this.$store.dispatch(protocolId + '/deployContract', { contractName })
+        },
+        async deployAll() {
+            for (let i in this.protocols) {
+                const protocol = this.protocols[i]
+
+                for (let j in protocol.contracts) {
+                    const contract = this.protocols[i].contracts[j]
+
+                    await this.$store.dispatch(protocol.id + '/deployContract', { contractName: contract.name })
+                }
+            }
+        },
+        async deploySelected() {
+            for (let i in this.selected) {
+                const protocolId = this.selected[i].split('.')[0]
+                const contractName = this.selected[i].split('.')[1]
+
+                await this.$store.dispatch(protocolId + '/deployContract', { contractName })
+            }
         }
     }
 }

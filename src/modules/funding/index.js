@@ -67,35 +67,6 @@ export const actions = {
         console.log('viewProject', id)
     },
     async createProject(store, payload) {
-        return store.commit('createProject', payload)
-    },
-    async updateProject(store, payload) {
-        store.commit('updateProject', payload)
-    }
-}
-
-export const mutations = {
-    updateState(s, payload) {
-        for (let x in payload) {
-            s[x] = payload[x]
-        }
-
-        db.funding.config.update(state)
-        db.save()
-    },
-    updateProject(state, payload) {
-        const project = db.funding.projects.findOne({ 'id': payload.id })
-
-        project.name = payload.name
-        state.projects[payload.id].name = payload.name
-
-        db.save()
-
-        return new Promise(async (resolve, reject) => {
-            resolve()
-        })
-    },
-    async createProject(state, payload) {
         const projectTitle = payload.name
         const projectDescription = payload.description
         const projectAbout = payload.content
@@ -123,12 +94,12 @@ export const mutations = {
                 } catch (e) {
                     try {
                         db.funding.projects.update(payload)
-                    } catch(e) {
+                    } catch (e) {
                         reject(e)
                     }
                 }
 
-                Vue.set(state.projects, payload.id, payload)
+                Vue.set(store.state.projects, payload.id, payload)
 
                 resolve(payload)
             })
@@ -145,66 +116,95 @@ export const mutations = {
             )
         })
     },
-    deployContract(state, payload) {
-        if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {
-            state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = {
-                created_at: null,
-                address: null
-            }
-        }
+    async updateProject(store, payload) {
+        const project = db.funding.projects.findOne({ 'id': payload.id })
 
-        let links = []
-        let params = []
+        project.name = payload.name
+        store.state.projects[payload.id].name = payload.name
 
-        if (payload.contractName !== 'FundingStorage') {
-            params = [
-                state.ethereum[state.current_ethereum_network].contracts.FundingStorage.address
-            ]
-        }
+        db.save()
 
-        if (FundingProtocol.api.ethereum.state.contracts[payload.contractName].links) {
-            links = FundingProtocol.api.ethereum.state.contracts[payload.contractName].links
+        store.dispatch('updateState')
 
-            for (let i in links) {
-                links[i].address = state.ethereum[state.current_ethereum_network].contracts[links[i].name].address
-            }
-        }
-
-
-        FundingProtocol.api.ethereum.deployContract(payload.contractName, links, params).then(async (contract) => {
-            state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
-            state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = contract.address
-
-            db.funding.config.update(state)
-            db.save()
-
-            if (payload.contractName === 'ProjectRegistration') {
-                const blankAddress = 0x0000000000000000000000000000000000000000
-                const projectRegistrationContract = FundingProtocol.api.ethereum.state.contracts.ProjectRegistration.deployed
-                const fundingStorageContract = FundingProtocol.api.ethereum.state.contracts.FundingStorage.deployed
-
-                await fundingStorageContract.registerContract("ProjectRegistration", blankAddress, projectRegistrationContract.address)
-                await projectRegistrationContract.initialize()
-
-                const developerContract = FundingProtocol.api.ethereum.state.contracts.Developer.deployed
-                await fundingStorageContract.registerContract("Developer", blankAddress, developerContract.address)
-                await developerContract.initialize()
-
-                let developerId = null
-                const developerAccount = state.ethereum[state.current_ethereum_network].user_from_address
-
-                developerContract.DeveloperCreated().watch((err, res) => {
-                    if (err) {
-                        console.warn('[BlockHub] Error', err)
-                    }
-                    
-                    developerId = res.args.developerId
-                })
-
-                await developerContract.createDeveloper("Hyperbridge", { from: developerAccount })
-            }
+        return new Promise(async (resolve, reject) => {
+            resolve()
         })
+    },
+    async deployContract(store, payload) {
+        return new Promise((resolve, reject) => {
+            if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {
+                state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = {
+                    created_at: null,
+                    address: null
+                }
+            }
 
+            let links = []
+            let params = []
+
+            if (payload.contractName !== 'FundingStorage') {
+                params = [
+                    state.ethereum[state.current_ethereum_network].contracts.FundingStorage.address
+                ]
+            }
+
+            if (FundingProtocol.api.ethereum.state.contracts[payload.contractName].links) {
+                links = FundingProtocol.api.ethereum.state.contracts[payload.contractName].links
+
+                for (let i in links) {
+                    links[i].address = state.ethereum[state.current_ethereum_network].contracts[links[i].name].address
+                }
+            }
+
+            FundingProtocol.api.ethereum.deployContract(payload.contractName, links, params).then(async (contract) => {
+                state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
+                state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = contract.address
+
+                db.funding.config.update(state)
+                db.save()
+
+                if (payload.contractName === 'ProjectRegistration') {
+                    const blankAddress = 0x0000000000000000000000000000000000000000
+                    const projectRegistrationContract = FundingProtocol.api.ethereum.state.contracts.ProjectRegistration.deployed
+                    const fundingStorageContract = FundingProtocol.api.ethereum.state.contracts.FundingStorage.deployed
+
+                    await fundingStorageContract.registerContract("ProjectRegistration", blankAddress, projectRegistrationContract.address)
+                    await projectRegistrationContract.initialize()
+
+                    const developerContract = FundingProtocol.api.ethereum.state.contracts.Developer.deployed
+                    await fundingStorageContract.registerContract("Developer", blankAddress, developerContract.address)
+                    await developerContract.initialize()
+
+                    let developerId = null
+                    const developerAccount = state.ethereum[state.current_ethereum_network].user_from_address
+
+                    developerContract.DeveloperCreated().watch((err, res) => {
+                        if (err) {
+                            console.warn('[BlockHub] Error', err)
+                        }
+
+                        developerId = res.args.developerId
+                    })
+
+                    await developerContract.createDeveloper("Hyperbridge", { from: developerAccount })
+                }
+
+                store.dispatch('updateState')
+
+                resolve(contract)
+            })
+        })
+    }
+}
+
+export const mutations = {
+    updateState(s, payload) {
+        for (let x in payload) {
+            Vue.set(s, x, payload[x])
+        }
+
+        db.funding.config.update(s)
+        db.save()
     }
 }
 

@@ -204,11 +204,12 @@ export let initializer = () => {
             window.BlockHub = {}
 
         window.BlockHub.store = store
+        window.BlockHub.db = db
+        window.BlockHub.ChaosMonkey = ChaosMonkey
+        window.BlockHub.Ethereum = Ethereum
+        window.BlockHub.PeerService = PeerService
     })
 }
-
-
-
 
 
 export default store

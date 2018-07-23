@@ -151,7 +151,7 @@ export const mutations = {
         }
 
     },
-    deployContract(state, payload) {
+    async deployContract(state, payload) {
         if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {
             state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = {
                 created_at: null,
