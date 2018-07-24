@@ -1,5 +1,5 @@
 <template>
-    <header class="app-header" :class="{ 'app-header--loader': isLoader, 'app-header--loading': isLoading }">
+    <header class="app-header" ref="aaa" :class="{ 'app-header--loader': isLoader }">
         <div class="app-header__top-bar"></div>
         <div class="app-header__bar-left">
             <a href="/#/store">
@@ -202,6 +202,7 @@ export default {
         padding: 0;
         z-index: 100;
         filter: drop-shadow(0 0px 15px rgba(48, 49, 76, 1));
+        transition: opacity 0.5s;
 
         &::before {
             height: 10px;
@@ -211,19 +212,17 @@ export default {
         }
 
         &.app-header--loading {
-            opacity: 0.6;
+            opacity: 0.7;
         }
 
         &.app-header--loader {
-            visibility: hidden;
             z-index: 101;
             opacity: 1;
-            clip: rect(0px, 0px, 200px, 0px);
-            transition: clip 10s;
+            clip: rect(0px, 0vw, 200px, 0px);
+            transition: clip 8s;
 
             &.app-header--loading {
-                visibility: visible;
-                clip: rect(0px, 10000px, 200px, 0px);
+                clip: rect(0px, 100vw, 200px, 0px);
             }
         }
 
