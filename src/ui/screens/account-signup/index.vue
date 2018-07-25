@@ -64,15 +64,15 @@
                                     <h4>Agreement</h4>
                                     <div class="terms_block">
 
-                                        <h1>Terms and Conditions for <span class="highlight preview_company_name">Company Name</span>
+                                        <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span>
                                         </h1>
 
                                         <h2>Introduction</h2>
 
                                         <p>These Website Standard Terms and Conditions written on this webpage shall
                                             manage
-                                            your use of our website, <span class="highlight preview_website_name">Webiste Name</span>
-                                            accessible at <span class="highlight preview_website_url">Website.com</span>.
+                                            your use of our website, <span class="highlight preview_website_name">BlockHub</span>
+                                            accessible at <span class="highlight preview_website_url">BlockHub.gg</span>.
                                         </p>
 
                                         <p>These Terms will be applied fully and affect to your use of this Website. By
@@ -86,7 +86,7 @@
                                         <h2>Intellectual Property Rights</h2>
 
                                         <p>Other than the content you own, under these Terms, <span
-                                            class="highlight preview_company_name">Company Name</span> and/or its
+                                            class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and/or its
                                             licensors
                                             own all the intellectual property rights and materials contained in this
                                             Website.</p>
@@ -123,7 +123,7 @@
 
                                         <p>Certain areas of this Website are restricted from being access by you and
                                             <span
-                                                class="highlight preview_company_name">Company Name</span> may further
+                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> may further
                                             restrict
                                             access by you to any areas of this Website, at any time, in absolute
                                             discretion.
@@ -136,7 +136,7 @@
                                         <p>In these Website Standard Terms and Conditions, “Your Content” shall mean any
                                             audio, video text, images or other material you choose to display on this
                                             Website. By displaying Your Content, you grant <span
-                                                class="highlight preview_company_name">Company Name</span> a
+                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> a
                                             non-exclusive,
                                             worldwide irrevocable, sub licensable license to use, reproduce, adapt,
                                             publish,
@@ -144,7 +144,7 @@
 
                                         <p>Your Content must be your own and must not be invading any third-party's
                                             rights.
-                                            <span class="highlight preview_company_name">Company Name</span> reserves
+                                            <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> reserves
                                             the
                                             right to remove any of Your Content from this Website at any time without
                                             notice.</p>
@@ -152,7 +152,7 @@
                                         <h2>No warranties</h2>
 
                                         <p>This Website is provided “as is,” with all faults, and <span
-                                            class="highlight preview_company_name">Company Name</span> express no
+                                            class="highlight preview_company_name">Hyperbridge Technology Inc.</span> express no
                                             representations or warranties, of any kind related to this Website or the
                                             materials contained on this Website. Also, nothing contained on this Website
                                             shall be interpreted as advising you.</p>
@@ -160,12 +160,12 @@
                                         <h2>Limitation of liability</h2>
 
                                         <p>In no event shall <span
-                                            class="highlight preview_company_name">Company Name</span>, nor any of its
+                                            class="highlight preview_company_name">Hyperbridge Technology Inc.</span>, nor any of its
                                             officers, directors and employees, shall be held liable for anything arising
                                             out
                                             of or in any way connected with your use of this Website whether such
                                             liability
-                                            is under contract. &nbsp;<span class="highlight preview_company_name">Company Name</span>,
+                                            is under contract. &nbsp;<span class="highlight preview_company_name">Hyperbridge Technology Inc.</span>,
                                             including its officers, directors and employees shall not be held liable for
                                             any
                                             indirect, consequential or special liability arising out of or in any way
@@ -174,7 +174,7 @@
                                         <h2>Indemnification<p></p>
 
                                             <p>You hereby indemnify to the fullest extent <span
-                                                class="highlight preview_company_name">Company Name</span> from and
+                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> from and
                                                 against
                                                 any and/or all liabilities, costs, demands, causes of action, damages
                                                 and
@@ -192,7 +192,7 @@
 
                                         <h2>Variation of Terms</h2>
 
-                                        <p><span class="highlight preview_company_name">Company Name</span> is permitted
+                                        <p><span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is permitted
                                             to
                                             revise these Terms at any time as it sees fit, and by using this Website you
                                             are
@@ -200,7 +200,7 @@
 
                                         <h2>Assignment</h2>
 
-                                        <p>The <span class="highlight preview_company_name">Company Name</span> is
+                                        <p>The <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is
                                             allowed
                                             to assign, transfer, and subcontract its rights and/or obligations under
                                             these
@@ -211,7 +211,7 @@
                                         <h2>Entire Agreement</h2>
 
                                         <p>These Terms constitute the entire agreement between <span
-                                            class="highlight preview_company_name">Company Name</span> and you in
+                                            class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and you in
                                             relation
                                             to your use of this Website, and supersede all prior agreements and
                                             understandings.</p>
@@ -377,7 +377,7 @@
                         <div class="tab-pane fade" id="step3" role="tabpanel" aria-labelledby="step3-tab">
                             <div class="tab-container">
                                 <div class="padding-20">
-                                    <h3>Verify your identity(Optional)</h3>
+                                    <h3>Verify your identity (Optional)</h3>
                                     <p>Submit a proof of identity by your country of residence.<br>
                                         This is optional but allows you to start with 1000 trust after verification,
                                         allowing you to reassure reviews of other user's proofs of identity.

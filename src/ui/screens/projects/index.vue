@@ -26,6 +26,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card invert game-grid__item">
+                        <div class="card-body padding-0">
+                            <h4><a :href="`/#/project/new`">NEW PROJECT</a></h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,7 +40,8 @@
 <script>
 export default {
     components: {
-        'c-layout': () => import('@/ui/layouts/default')
+        'c-layout': () => import('@/ui/layouts/default'),
+        'c-tags': () => import('@/ui/components/product-tags'),
     },
     computed: {
         projects() {
