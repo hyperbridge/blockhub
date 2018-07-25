@@ -9,7 +9,7 @@
                 </div>
                 <div class="row" v-if="product">
                     <div class="col-12">
-                       Here will be assets list
+                       Here will be assets list with new assets
                     </div>
                 </div>
             </div>
