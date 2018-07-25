@@ -6,7 +6,7 @@
                     <div class="col-12" v-if="!project">
                         Project not found
                     </div>
-                    <div class="col-12" v-if="project">
+                    <div class="col-12 tab-content" v-if="project">
                         <p class="errors" v-if="errors.length">
                             <strong>Please correct the following error(s):</strong>
                             <ul>
@@ -15,9 +15,9 @@
                         </p>
                         
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-7">
                                 <div class="editor-container">
-                                    <div class="editor editor--offset-above" v-if="editing">
+                                    <div class="editor" v-if="editing">
                                         <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('name')" v-if="!activeElement['name']">Change Project Name <span class="fa fa-edit"></span></button>
 
                                         <div class="form-control-element form-control-element--right" v-if="activeElement['name']">
@@ -30,23 +30,26 @@
                                     <h1 class="title margin-top-10 margin-bottom-15">{{ project.name }}</h1>
                                 </div>
 
-
                                 <div class="editor-container">
-                                    <div class="" v-if="editing">
-                                        <div class="form-group">
+                                    <div class="editor" v-if="editing">
+                                        <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('author_tags')" v-if="!activeElement['author_tags']" style="margin-bottom: 20px">Change Tags <span class="fa fa-edit"></span></button>
+                                        <div class="form-control-element form-control-element--right" v-if="activeElement['author_tags']">
                                             <select id="tag-editor" class="form-control" multiple="multiple">
                                                 <option v-for="(tag, index) in author_tag_options" :key="index" :selected="project.author_tags.includes(tag)">{{ tag }}</option>
                                             </select>
+                                            <div class="form-control-element__box form-control-element__box--pretify bg-secondary" style="">
+                                                <span class="fa fa-check" @click="deactivateElement('author_tags')"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <c-tags-list :tags="project.author_tags" v-if="!editing"></c-tags-list>
+                                    <c-tags-list :tags="project.author_tags" v-if="!editing || !activeElement['author_tags']"></c-tags-list>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="editor editor--offset-above" v-if="editing">
+                            <div class="col-md-5">
+                                <div class="editor text-right" v-if="editing" style="margin-bottom: 30px">
                                     <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('background_image')" v-if="!activeElement['background_image']">Change Background Image <span class="fa fa-edit"></span></button>
 
-                                    <div class="form-group" v-if="activeElement['background_image']">
+                                    <div class="" v-if="activeElement['background_image']">
                                         <div class="form-control-element form-control-element--right">
                                             <input ref="background_image" name="background_image" type="text" class="form-control" placeholder="Background image URL..." v-model="project.images.header" />
                                             <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
@@ -54,16 +57,27 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <label style="display: block">RECOMMENDED SIZE: 1120 x 524px</label>
+                                </div>
+                                <div class="editor text-right" v-if="editing">
+                                    <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('store_image')" v-if="!activeElement['store_image']">Change Store Image <span class="fa fa-edit"></span></button>
 
-                                    <br />
-                                    <label>RECOMMENDED SIZE: 1120 x 524px</label>
+                                    <div class="" v-if="activeElement['store_image']">
+                                        <div class="form-control-element form-control-element--right">
+                                            <input ref="store_image" name="store_image" type="text" class="form-control" placeholder="Background image URL..." v-model="project.images.header" />
+                                            <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                                <span class="fa fa-check" @click="deactivateElement('store_image')"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label style="display: block">RECOMMENDED SIZE: 2140 x 680px</label>
                                 </div>
                             </div>
                         </div>
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
-                                <a class="nav-link active" :href="`/#/project/${project.id}`">Overview</a>
+                                <a class="nav-link active" :href="`/#/project/${project.id}`" data-toggle="pill" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" :href="`/#/project/${project.id}/community`">Community</a>
@@ -72,17 +86,117 @@
                                 <a class="nav-link" :href="`/#/project/${project.id}/bounties`">Bounties</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/project/${project.id}/suggestions`">Suggestions</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" :href="`/#/project/${project.id}/updates`">Updates</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" :href="`/#/project/${project.id}/milestones`">Milestones</a>
                             </li>
+                            <li class="nav-item" v-if="editing">
+                                <a class="nav-link" data-toggle="pill" href="#configure" role="tab" aria-controls="configure" aria-selected="true">Configure</a>
+                            </li>
                         </ul>
 
-                        <div class="row">
+                        <div class="row tab-pane fade" id="configure" role="tabpanel" aria-labelledby="configure-tab">
+                            <c-block-1 title="Campaign">
+                                <form>
+
+                            <div class="form-group">
+                                <label>Support Email</label>
+                                <input type="email" class="form-control" placeholder="Email">
+                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                            </div>
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">@</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Twitter Username">
+                            </div>
+                            <div class="form-group">
+                                <label>Share Text</label>
+                                <input type="text" class="form-control" placeholder="Email">
+                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                            </div>
+                                        
+                            <div class="form-group">
+                                <label>Minimum Contribution Goal</label>
+                                <label class="switch switch-sm">
+                                    <input type="checkbox" name="switch_8" checked="" value="0">
+                                    <span></span>
+                                </label>
+                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Maximum Contribution Goal</label>
+                                <label class="switch switch-sm">
+                                    <input type="checkbox" name="switch_8" checked="" value="0">
+                                    <span></span>
+                                </label>
+                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                            </div>
+
+                                    <div class="form-group">
+                                        <label>Overflow Enabled</label>
+                                        <label class="switch switch-sm">
+                                            <input type="checkbox" name="switch_8" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Overflow Enabled</label>
+                                        <label class="switch switch-sm">
+                                            <input type="checkbox" name="switch_8" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Overflow Enabled</label>
+                                        <label class="switch switch-sm">
+                                            <input type="checkbox" name="switch_8" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Timeline Enabled</label>
+                                        <label class="switch switch-sm">
+                                            <input type="checkbox" name="switch_8" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <span class="form-text">Projects with Timeline Enabled will have a current timeline with associated milestones.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Refunds Enabled</label>
+                                        <label class="switch switch-sm">
+                                            <input type="checkbox" name="switch_8" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <span class="form-text">Projects with Refunds Enabled will allow contributors to get partial or full refund if the project is deemed not successful (by community vote).</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Curation Enabled</label>
+                                        <label class="switch switch-sm">
+                                            <input type="checkbox" name="switch_8" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <span class="form-text">Projects with Curation Enabled will allow the community to curate the project and earn reputation for their actions.</span>
+                                    </div>
+                                    Contribution Period 
+                                    Choose 
+                                    <div class="form-group">
+                                        <label>No Contribution Period</label>
+                                        <label class="switch switch-sm">
+                                            <input type="checkbox" name="switch_8" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <span class="form-text">Projects with No Contribution Period will be open for contribution until the project is completed, allowing for contributions during the project.</span>
+                                    </div>
+                                </form>
+                            </c-block-1>
+                        </div>
+
+                        <div class="row tab-pane fade active show" id="overview" role="tabpanel" aria-labelledby="overview-tab">
                             <div class="col-md-7 col-xl-8">
                                 <c-screen-gallery></c-screen-gallery>
 
@@ -111,7 +225,7 @@
                             <div class="col-md-5 col-xl-4">
                                 <div class="card invert" v-if="project.funding">
                                     <div class="card-body">
-                                        <a href="#" class="editor-container editor-container--style-2" v-if="editing && !activeElement['campaign']">
+                                        <a class="nav-link editor-container editor-container--style-2" href="javascript:;" v-if="editing && !activeElement['campaign']" @click="showTab('configure')">
                                             <i class="fas fa-cog"></i>
                                             <span>Set Up Campaign</span>
                                         </a>
@@ -216,14 +330,36 @@
                                 </div>
 
                                 <c-community-spotlight :discussions="project.community.discussions" :community_url="`/#/project/${project.id}`" :editing="editing" :activeElement="activeElement['milestones']" />
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="invertFormExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content invert">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Set Up Campaign</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </c-layout>
+
+
 </template>
 
 <script>
@@ -252,6 +388,7 @@
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
             'c-plan-list': () => import('@/ui/components/game-plans/list'),
+            'c-block-1': () => import('@/ui/components/block-1'),
             'c-screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
             'c-tags-list': () => import('@/ui/components/product-tags'),
             'c-rating-block': () => import('@/ui/components/rating-block'),
@@ -264,7 +401,8 @@
                 activeElement: {
                     name: false,
                     background_image: false,
-                    tags: false,
+                    store_image: false,
+                    author_tags: false,
                     description: false,
                     content: false
                 },
@@ -276,6 +414,9 @@
             }
         },
         methods: {
+            showTab(name) {
+                $('.nav-tabs a[href="#' + name + '"]').tab('show')
+            },
             deactivateElement(key) {
                 this.activeElement[key] = false
             },
@@ -400,6 +541,10 @@
 </style>
 
 <style lang="scss" scoped>
+    .tab-content > .row.active {
+        display: flex;
+    }
+
     .errors {
         margin-bottom: 60px;
     }
