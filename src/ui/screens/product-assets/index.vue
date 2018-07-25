@@ -8,8 +8,8 @@
                     </div>
                 </div>
                 <div class="row" v-if="product">
-                    <div class="col-12 ">
-                       
+                    <div class="col-12">
+                       Here will be assets list
                     </div>
                 </div>
             </div>
