@@ -5,7 +5,7 @@
             <c-header />
             <c-header :isLoader="true" />
         <!-- //END PAGE HEADER -->
-        
+
         <!-- PAGE CONTENT WRAPPER -->
         <div class="page__content page__content-invert invert" id="page-content">
             <div class="loading loading--w-spinner" v-if="!is_connected">
@@ -17,9 +17,9 @@
                     </div>
 
                     <h1 class="loading__status-code" v-if="connection_status.code">ERROR {{ connection_status.code }}</h1>
-                    
+
                     <p class="loading__status-message">{{ connection_status.message }}</p>
-                    
+
                     <div class="loading__links">
                         <p>Connection problems? Let us know!</p>
                         <a href="https://twitter.com/hyperbridge"><span class="fab fa-twitter"></span> Tweet Us</a>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert" id="page-aside">
                 <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}`"></component>
@@ -95,36 +95,34 @@
                             </div>
 
                             <div class="navigation">
-                                <ul>
-                                    <li class="title">
-                                        <a href="/#/product/1">
-                                            @MrSatoshi   Apr 3   12:32am
-                                        </a>
+                                <div class="messages-action">
+                                    <a href="#3" class="btn">Quick Send</a>
+                                    <a href="#3" class="btn">Go to Messages</a>
+                                </div>
+                                <ul class="message-list">
+                                    <li class="message-list__item">
+                                        <i class="fas fa-reply"></i>
+                                        <h5>Username, 2 days ago:</h5>
+                                        <p>Maybe I ought to crank Morley Safer's poutine,
+                                            eh, that should to start them up.</p>
                                     </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Lorem ipsum dolor sit amet more mssage from tis user</span>
-                                        </a>
+                                    <li class="message-list__item">
+                                        <i class="fas fa-reply"></i>
+                                        <h5>Username, 2 days ago:</h5>
+                                        <p>Maybe I ought to crank Morley Safer's poutine,
+                                            eh, that should to start them up.</p>
                                     </li>
-                                    <li class="title">
-                                        <a href="/#/product/1">
-                                            @MrSatoshi   Apr 3   12:32am
-                                        </a>
+                                    <li class="message-list__item">
+                                        <i class="fas fa-reply"></i>
+                                        <h5>Username, 2 days ago:</h5>
+                                        <p>Maybe I ought to crank Morley Safer's poutine,
+                                            eh, that should to start them up.</p>
                                     </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Lorem ipsum dolor sit amet more mssage from tis user</span>
-                                        </a>
-                                    </li>
-                                    <li class="title">
-                                        <a href="/#/product/1">
-                                            @MrSatoshi   Apr 3   12:32am
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Lorem ipsum dolor sit amet more mssage from tis user</span>
-                                        </a>
+                                    <li class="message-list__item">
+                                        <i class="fas fa-reply"></i>
+                                        <h5>Username, 2 days ago:</h5>
+                                        <p>Maybe I ought to crank Morley Safer's poutine,
+                                            eh, that should to start them up.</p>
                                     </li>
                                 </ul>
                             </div>
@@ -274,7 +272,7 @@
             </div>
         </div>
         <!-- //END PAGE CONTENT -->
-        
+
     </div>
     <!-- //END PAGE WRAPPER -->
 </template>
@@ -450,7 +448,7 @@ export default {
         text-align: center;
         width: 100%;
         font-size: 16px;
-            
+
         p {
             color: #999;
         }
@@ -464,6 +462,45 @@ export default {
                 color: #fff;
                 margin-right: 5px;
             }
+        }
+    }
+
+    .messages-action{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        a{
+            padding: 3px;
+            background: #5D75F7;
+            border-radius: 3px;
+            color: #fff;
+            font-size: 14px;
+            &:hover{
+                background: #5065d4;
+            }
+        }
+    }
+
+    .message-list__item{
+        background: rgba(0, 0, 0, .5);
+        border-radius: 5px;
+        padding: 6px;
+        color: #fff;
+        text-align: left;
+        position: relative;
+        margin-bottom: 10px;
+        &:last-child{
+            margin-bottom: 0;
+        }
+        h5{
+            max-width: calc( 100% - 20px );
+        }
+        i{
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            font-size: 16px;
+            color: #fff;
         }
     }
 </style>
