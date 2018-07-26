@@ -1,18 +1,13 @@
 {
-    "name": "blockhub-protocol",
+    "name": "marketplace-protocol",
     "version": "0.1.0",
-    "repository": "git@github.com:hyperbridge/blockhub-protocol.git",
-    "license": "UNLICENSED",
+    "repository": "git@github.com:hyperbridge/marketplace-protocol.git",
+    "license": "SEE LICENSE IN LICENSE.md",
     "main": "./index.js",
-    "scripts": {
-        "electron": "tsc && ELECTRON_ENABLE_LOGGING=1 electron build/app/electron.js"
-    },
-    "dependencies": {
-    },
+    "scripts": {},
+    "dependencies": {},
     "engines": {
-        "node": "7.4.0",
-        "npm": "3.10.10"
+        "node": "8.11.1"
     },
-    "devDependencies": {
-    }
+    "devDependencies": {}
 }
