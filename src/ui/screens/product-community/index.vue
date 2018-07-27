@@ -25,103 +25,172 @@
                                 <a class="nav-link" :href="`/#/product/${product.id}/assets`">Assets</a>
                             </li>
                         </ul>
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="icon">
-                                    <i class="fas fa-map-pin"></i>
-                                </div>
-                                <div class="text">
-                                    This post has been pinned and the title is a single line of text
-                                </div>
-                                <div class="statistic">
-                                    <div class="rating down">
-                                        <i class="fas fa-chevron-down"></i>
-                                        87
+                        <div v-if="community_1">
+                            <div class="community-item">
+                                <div class="community-item__header">
+                                    <div class="icon">
+                                        <i class="fas fa-map-pin"></i>
                                     </div>
-                                    <div class="user">
-                                        <span class="time">25 min</span>
-                                        <img src="https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png" />
-                                        <span class="name">Sakatoshi</span>
+                                    <div class="text">
+                                        This post has been pinned and the title is a single line of text
                                     </div>
-                                    <div class="comments_count">
-                                        <i class="fas fa-comment"></i>
-                                        320
+                                    <div class="statistic">
+                                        <div class="rating down">
+                                            <i class="fas fa-chevron-down"></i>
+                                            87
+                                        </div>
+                                        <div class="user">
+                                            <span class="time">25 min</span>
+                                            <img
+                                                src="https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png"/>
+                                            <span class="name">Sakatoshi</span>
+                                        </div>
+                                        <div class="comments_count">
+                                            <i class="fas fa-comment"></i>
+                                            320
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="community-item">
+                                <div class="community-item__header">
+                                    <div class="icon">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                    <div class="text">
+                                        The previous title doesn't have it's single line aligned
+                                        vertically because XD does not have this functionality.
+                                    </div>
+                                    <div class="statistic">
+                                        <div class="rating up">
+                                            <i class="fas fa-chevron-up"></i>
+                                            103
+                                        </div>
+                                        <div class="user">
+                                            <span class="time">3 min</span>
+                                            <img
+                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL"/>
+                                            <span class="name">Nakatochi</span>
+                                        </div>
+                                        <div class="comments_count">
+                                            <i class="fas fa-comment"></i>
+                                            894391
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="community-item" :class="{ is_reply:reply }">
+                                <div class="community-item__header">
+                                    <div class="icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="text">
+                                        Actually all the boxes with the titles here are the same size
+                                    </div>
+                                    <div class="statistic">
+                                        <div class="rating up">
+                                            <i class="fas fa-chevron-up"></i>
+                                            103
+                                        </div>
+                                        <div class="user">
+                                            <span class="time">3 min</span>
+                                            <img
+                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL"/>
+                                            <span class="name">Nakatochi</span>
+                                        </div>
+                                        <div class="comments_count">
+                                            <i class="fas fa-comment"></i>
+                                            894391
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="community-item__post">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam interdum sem nec
+                                        est interdum hendrerit. Phasellus ac magna leo. Duis faucibus posuere
+                                        pellentesque. Aliquam bibendum tincidunt cursus. Sed sit amet mauris at est
+                                        sodales elementum sed sed felis. Mauris consectetur, magna eu sodales luctus,
+                                        ipsum arcu laoreet neque, ut pharetra lacus ipsum at ipsum. Sed at aliquam
+                                        justo. Cras sagittis risus ut maximus pellentesque.</p>
+                                    <img src="http://memesbams.com/wp-content/uploads/2017/08/2.3-Delightful-cheer-up-cat-meme.jpg" />
+                                </div>
+                                <div class="community-item__post-reply" v-if="reply">
+                                    <h4 class="mt-4 mb-2 text-left">Your Reply:</h4>
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="6"></textarea>
+                                    </div>
+                                </div>
+                                <div class="community-item__action text-right">
+                                    <a href="#3" class="btn btn-sm btn-icon" v-if="!reply">
+                                        <i class="fas fa-thumbs-down"></i>
+                                    </a>
+                                    <a href="#3" class="btn btn-sm btn-info"
+                                       v-if="!reply"
+                                       @click="reply = true">
+                                        Reply
+                                    </a>
+                                    <a href="#3" class="btn btn-sm btn-danger"
+                                       @click="reply = false"
+                                       v-if="reply">
+                                        Cancel
+                                    </a>
+                                    <a href="#3" class="btn btn-sm btn-info"
+                                       @click="reply = false"
+                                       v-if="reply">
+                                        Submit
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="community-item">
+                                <div class="community-item__header">
+                                    <div class="icon">
+                                        <i class="fas fa-comments"></i>
+                                    </div>
+                                    <div class="text">
+                                        Actually all the boxes with the titles here are the same size
+                                    </div>
+                                    <div class="statistic">
+                                        <div class="rating up">
+                                            <i class="fas fa-chevron-up"></i>
+                                            103
+                                        </div>
+                                        <div class="user">
+                                            <span class="time">3 min</span>
+                                            <img
+                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL"/>
+                                            <span class="name">Nakatochi</span>
+                                        </div>
+                                        <div class="comments_count">
+                                            <i class="fas fa-comment"></i>
+                                            894391
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="icon">
-                                    <i class="fas fa-lock"></i>
-                                </div>
-                                <div class="text">
-                                    The previous title doesn't have it's single line aligned
-                                    vertically because XD does not have this functionality.
-                                </div>
-                                <div class="statistic">
-                                    <div class="rating up">
-                                        <i class="fas fa-chevron-up"></i>
-                                        103
+                        <div v-if="community_2">
+                            <div class="community-item">
+                                <div class="card-body">
+                                    <div class="icon">
+                                        <i class="fas fa-map-pin"></i>
                                     </div>
-                                    <div class="user">
-                                        <span class="time">3 min</span>
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL" />
-                                        <span class="name">Nakatochi</span>
+                                    <div class="text">
+                                        This post has been pinned and the title is a single line of text
                                     </div>
-                                    <div class="comments_count">
-                                        <i class="fas fa-comment"></i>
-                                        894391
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="icon">
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="text">
-                                    Actually all the boxes with the titles here are the same size
-                                </div>
-                                <div class="statistic">
-                                    <div class="rating up">
-                                        <i class="fas fa-chevron-up"></i>
-                                        103
-                                    </div>
-                                    <div class="user">
-                                        <span class="time">3 min</span>
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL" />
-                                        <span class="name">Nakatochi</span>
-                                    </div>
-                                    <div class="comments_count">
-                                        <i class="fas fa-comment"></i>
-                                        894391
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="icon">
-                                    <i class="fas fa-comments"></i>
-                                </div>
-                                <div class="text">
-                                    Actually all the boxes with the titles here are the same size
-                                </div>
-                                <div class="statistic">
-                                    <div class="rating up">
-                                        <i class="fas fa-chevron-up"></i>
-                                        103
-                                    </div>
-                                    <div class="user">
-                                        <span class="time">3 min</span>
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL" />
-                                        <span class="name">Nakatochi</span>
-                                    </div>
-                                    <div class="comments_count">
-                                        <i class="fas fa-comment"></i>
-                                        894391
+                                    <div class="statistic">
+                                        <div class="rating down">
+                                            <i class="fas fa-chevron-down"></i>
+                                            87
+                                        </div>
+                                        <div class="user">
+                                            <span class="time">25 min</span>
+                                            <img
+                                                src="https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png"/>
+                                            <span class="name">Sakatoshi</span>
+                                        </div>
+                                        <div class="comments_count">
+                                            <i class="fas fa-comment"></i>
+                                            320
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -134,60 +203,68 @@
 </template>
 
 <script>
-const updateProduct = function() {
-    if (!this.$store.state.marketplace.products)
-        return
+    const updateProduct = function () {
+        if (!this.$store.state.marketplace.products)
+            return
 
-    const product = this.$store.state.marketplace.products[this.id]
+        const product = this.$store.state.marketplace.products[this.id]
 
-    if (!product)
-        return
+        if (!product)
+            return
 
-    if (product.images && product.images.header)
-        window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
+        if (product.images && product.images.header)
+            window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
 
-    return product
-}
-
-export default {
-    props: ['id'],
-    components: {
-        'c-layout': () => import('@/ui/layouts/default'),
-        'c-tags-list': () => import('@/ui/components/product-tags'),
-    },
-    data() {
-        return {
-        }
-    },
-    methods: {
-        save() {
-            this.$store.dispatch('marketplace/updateProduct', this.product)
-        }
-    },
-    computed: {
-        product: updateProduct
-    },
-    mounted: updateProduct,
-    created: updateProduct,
-    beforeDestroy() {
-        window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+        return product
     }
-}
+
+    export default {
+        props: ['id'],
+        components: {
+            'c-layout': () => import('@/ui/layouts/default'),
+            'c-tags-list': () => import('@/ui/components/product-tags'),
+        },
+        data() {
+            return {
+                community_1: true,
+                community_2: false,
+                reply: false
+            }
+        },
+        methods: {
+            save() {
+                this.$store.dispatch('marketplace/updateProduct', this.product)
+            }
+        },
+        computed: {
+            product: updateProduct
+        },
+        mounted: updateProduct,
+        created: updateProduct,
+        beforeDestroy() {
+            window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
-    .card{
+    .community-item {
         background: rgba(0, 0, 0, .16);
         border: 1px solid rgba(112, 112, 112, .7);
         margin-bottom: 15px;
         border-radius: 5px;
-        .card-body{
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        &.is_reply{
+            background: rgba(255, 255, 255, .1);
         }
-        .icon{
+    }
+
+    .community-item__header {
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        .icon {
             width: 40px;
             height: 40px;
             margin-right: 15px;
@@ -195,47 +272,47 @@ export default {
             text-align: center;
             background: rgba(0, 0, 0, .13);
             font-size: 18px;
-            .fa-map-pin{
+            .fa-map-pin {
                 color: #5D75F7;
             }
-            .fa-lock{
+            .fa-lock {
                 color: #F75D5D;
             }
-            .fa-star{
+            .fa-star {
                 color: #FADC72;
             }
-            .fa-comments{
+            .fa-comments {
                 color: #3D3E5D;
             }
         }
-        .text{
-            width: calc( 70% - 70px );
+        .text {
+            width: calc(70% - 70px);
             font-weight: bold;
             font-size: 16px;
         }
-        .statistic{
+        .statistic {
             width: 30%;
             min-width: 250px;
             margin-left: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            .rating{
+            .rating {
                 width: 40px;
                 text-align: center;
-                i{
+                i {
                     margin-right: 5px;
                 }
-                &.down{
+                &.down {
                     color: #F75D5D;
                 }
-                &.up{
+                &.up {
                     color: #43C981;
                 }
             }
-            .user{
+            .user {
                 text-align: center;
-                img{
+                img {
                     width: 20px;
                     height: 20px;
                     border-radius: 100%;
@@ -243,13 +320,56 @@ export default {
                     float: unset;
                 }
             }
-            .comments_count{
+            .comments_count {
                 width: 60px;
                 text-align: left;
-                i{
+                i {
                     margin-right: 5px;
                 }
             }
+        }
+    }
+    .community-item__post{
+        background: rgba(0, 0, 0, .1);
+        border: 1px solid rgba(112, 112, 112, .5);
+        border-radius: 5px;
+        margin: 21px 10px 10px;
+        padding: 10px;
+        font-size: 14px;
+        line-height: 16px;
+        max-height: 350px;
+        overflow-y: auto;
+        img{
+            max-width: 100%;
+            max-height: 400px;
+        }
+    }
+    .community-item__action{
+        margin: 10px 7px;
+        .btn{
+            padding: 0px 7px;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin: 0 3px;
+        }
+        .btn-icon{
+            color: #F75D5D;
+            font-size: 16px;
+        }
+        .btn-info{
+            background: #5D75F7;
+        }
+        .btn-danger{
+            background: #F75D5D;
+        }
+    }
+    .community-item__post-reply{
+        margin: 0 10px;
+        h4{
+            font-weight: bold;
+        }
+        textarea{
+            background: rgba(0, 0, 0, .1);
         }
     }
 </style>
