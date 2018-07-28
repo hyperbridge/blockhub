@@ -7,12 +7,12 @@ contract MarketplaceStorage is Ownable {
 
     /**** Storage Types *******/
 
-    mapping(bytes32 => uint256)    private uIntStorage;
-    mapping(bytes32 => string)     private stringStorage;
-    mapping(bytes32 => address)    private addressStorage;
-    mapping(bytes32 => bytes)      private bytesStorage;
-    mapping(bytes32 => bool)       private boolStorage;
-    mapping(bytes32 => int256)     private intStorage;
+    mapping(bytes32 => uint256) private uIntStorage;
+    mapping(bytes32 => string) private stringStorage;
+    mapping(bytes32 => address) private addressStorage;
+    mapping(bytes32 => bytes) private bytesStorage;
+    mapping(bytes32 => bool) private boolStorage;
+    mapping(bytes32 => int256) private intStorage;
 
     /*** Modifiers ************/
 
@@ -78,53 +78,53 @@ contract MarketplaceStorage is Ownable {
     /**** Setters ***********/
 
 
-    function setAddress(bytes32 _key, address _value) external onlyLatestFundingContract {
+    function setAddress(bytes32 _key, address _value) external onlyLatestMarketplaceContract {
         addressStorage[_key] = _value;
     }
 
-    function setUint(bytes32 _key, uint _value) external onlyLatestFundingContract {
+    function setUint(bytes32 _key, uint _value) external onlyLatestMarketplaceContract {
         uIntStorage[_key] = _value;
     }
 
-    function setString(bytes32 _key, string _value) external onlyLatestFundingContract {
+    function setString(bytes32 _key, string _value) external onlyLatestMarketplaceContract {
         stringStorage[_key] = _value;
     }
 
-    function setBytes(bytes32 _key, bytes _value) external onlyLatestFundingContract {
+    function setBytes(bytes32 _key, bytes _value) external onlyLatestMarketplaceContract {
         bytesStorage[_key] = _value;
     }
 
-    function setBool(bytes32 _key, bool _value) external onlyLatestFundingContract {
+    function setBool(bytes32 _key, bool _value) external onlyLatestMarketplaceContract {
         boolStorage[_key] = _value;
     }
 
-    function setInt(bytes32 _key, int _value) external onlyLatestFundingContract {
+    function setInt(bytes32 _key, int _value) external onlyLatestMarketplaceContract {
         intStorage[_key] = _value;
     }
 
     /**** Deletion ***********/
 
-    function deleteAddress(bytes32 _key) external onlyLatestFundingContract {
+    function deleteAddress(bytes32 _key) external onlyLatestMarketplaceContract {
         delete addressStorage[_key];
     }
 
-    function deleteUint(bytes32 _key) external onlyLatestFundingContract {
+    function deleteUint(bytes32 _key) external onlyLatestMarketplaceContract {
         delete uIntStorage[_key];
     }
 
-    function deleteString(bytes32 _key) external onlyLatestFundingContract {
+    function deleteString(bytes32 _key) external onlyLatestMarketplaceContract {
         delete stringStorage[_key];
     }
 
-    function deleteBytes(bytes32 _key) external onlyLatestFundingContract {
+    function deleteBytes(bytes32 _key) external onlyLatestMarketplaceContract {
         delete bytesStorage[_key];
     }
 
-    function deleteBool(bytes32 _key) external onlyLatestFundingContract {
+    function deleteBool(bytes32 _key) external onlyLatestMarketplaceContract {
         delete boolStorage[_key];
     }
 
-    function deleteInt(bytes32 _key) external onlyLatestFundingContract {
+    function deleteInt(bytes32 _key) external onlyLatestMarketplaceContract {
         delete intStorage[_key];
     }
 }
