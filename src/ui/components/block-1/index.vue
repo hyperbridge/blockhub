@@ -22,7 +22,7 @@ export default {
 
 <style lang="scss" scoped>
     .card {
-        padding: 40px;
+        padding: 20px;
     }
 </style>
 
