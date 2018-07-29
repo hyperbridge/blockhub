@@ -26,7 +26,9 @@
                     </div>
                 </div>
                 <div class="row product-grid">
-                    <c-heading-bar name="New Releases" :showArrows="true" />
+                    <div class="col-12">
+                        <c-heading-bar name="New Releases" :showArrows="true" />
+                    </div>
 
                     <div class="col-12 col-lg-4" v-for="(item, index) in new_products" v-bind:key="index">
                         <div class="card invert product-grid__item">
@@ -42,8 +44,10 @@
                 </div>
 
                 <div class="row product-grid">
-                    <c-heading-bar name="Summer Sale" :showArrows="true" :showBackground="true" />
-                    
+                    <div class="col-12">
+                        <c-heading-bar name="Summer Sale" :showArrows="true" :showBackground="true" />
+                    </div>
+
                     <div class="col-12 col-lg-4" v-for="(item, index) in sale_products" v-bind:key="index">
                         <div class="card invert product-grid__item">
                             <div class="card-body padding-0" v-if="frontpage_product.images">
