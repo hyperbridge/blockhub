@@ -1,11 +1,31 @@
 <div align="center">
-  <a href="https://hyperbridge.org/"><img src="https://hyperbridge.org/img/blockhub-logotype-color.svg" width="220" alt="logo"></a>
+  <br>
 
-  <h1><code>blockhub-web-client</code> for BlockHub</h1>
+  <a href="https://hyperbridge.org/"><img src="https://hyperbridge.org/img/blockhub-logotype-color.svg" width="400" alt="logo"></a>
+
+  <br>
+  <br>
+
+  [![Gitter chat](https://img.shields.io/gitter/room/TechnologyAdvice/Stardust.svg)](https://gitter.im/Hyperbridge/Lobby) [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/hyperbridge/blockhub-web-client/blob/master/LICENSE.md)
+
+  <h1><code>Web Client</code> for BlockHub</h1>
 </div>
+
 <br>
 
 This is the main web client for BlockHub, built primarily with Web3.js and Vue.js.
+
+## Quick Links
+
+- [Site](http://blockhub.gg/)
+- 📺 [Demo](http://beta.blockhub.gg/)
+- 📖 [Docs](http://docs.hyperbridge.org/blockhub)
+- [EIPs](https://github.com/hyperbridge/EIPs)
+- [Desktop Client](https://github.com/hyperbridge/blockhub-desktop-client)
+- [Node Operator](https://github.com/hyperbridge/blockhub-node-operator)
+- [Token](https://github.com/hyperbridge/token)
+- [Funding Protocol](https://github.com/hyperbridge/funding-protocol)
+- [Marketplace Protocol](https://github.com/hyperbridge/marketplace-protocol)
 
 ## Install
 
@@ -20,6 +40,9 @@ Install Node 8.11.1:
 ```bash
 nvm install 8.11.1
 ```
+
+If you get `nvm: command not found`, simply close your current terminal, open a new terminal, and try again. Please see the [NVM readme](https://github.com/creationix/nvm) if you have any issues.
+
 
 Then, clone these repos:
 
@@ -102,3 +125,10 @@ See [CONTRIBUTING](CONTRIBUTING.md)
 ## License
 
 [Apache License 2.0](LICENSE.md)
+
+## Problems?
+
+Discuss Node Operator on our Gitter:
+https://gitter.im/Hyperbridge/Lobby
+
+Please post any bugs as Github issues.
