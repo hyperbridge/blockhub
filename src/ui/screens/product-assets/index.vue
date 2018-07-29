@@ -7,9 +7,515 @@
                         Product not found
                     </div>
                 </div>
+
+
+                
                 <div class="row" v-if="product">
-                    <div class="col-12 ">
-                       
+                    <div class="col-12">
+                        <h1 class="title margin-top-10 margin-bottom-15">{{ product.name }}</h1>
+                        <c-tags-list :tags="product.author_tags"></c-tags-list>
+                        <ul class="nav nav-tabs justify-content-between margin-bottom-30">
+                            <li class="nav-item">
+                                <a class="nav-link" :href="`/#/product/${product.id}`">Overview</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" :href="`/#/product/${product.id}/community`">Community</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" :href="`/#/product/${product.id}/projects`">Projects</a>
+                            </li>
+                            <li class="nav-item mr-0">
+                                <a class="nav-link active" :href="`/#/product/${product.id}/assets`">Assets</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 d-flex justify-content-between flex-wrap assets-list margin-bottom-30">
+                        <div class="assets-list__item">
+                            <div class="thumb">
+                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                            </div>
+                            <div class="info">
+                                <h5>Magic Plate Armor</h5>
+                                <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                            </div>
+                        </div>
+                        <div class="assets-list__item">
+                            <div class="thumb">
+                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                            </div>
+                            <div class="info">
+                                <h5>Magic Plate Armor</h5>
+                                <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                            </div>
+                        </div>
+                        <div class="assets-list__item">
+                            <div class="thumb">
+                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                            </div>
+                            <div class="info">
+                                <h5>Magic Plate Armor</h5>
+                                <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                            </div>
+                        </div>
+                        <div class="assets-list__item">
+                            <div class="thumb">
+                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                            </div>
+                            <div class="info">
+                                <h5>Magic Plate Armor</h5>
+                                <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                            </div>
+                        </div>
+                        <div class="assets-list__item">
+                            <div class="thumb">
+                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                            </div>
+                            <div class="info">
+                                <h5>Magic Plate Armor</h5>
+                                <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                            </div>
+                        </div>
+                        <div class="assets-list__item">
+                            <div class="thumb">
+                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                            </div>
+                            <div class="info">
+                                <h5>Magic Plate Armor</h5>
+                                <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                            </div>
+                        </div>
+                        <div class="assets-list__item">
+                            <div class="thumb">
+                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                            </div>
+                            <div class="info">
+                                <h5>Magic Plate Armor</h5>
+                                <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                            </div>
+                        </div>
+                        <div class="assets-list__item">
+                            <div class="thumb">
+                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                            </div>
+                            <div class="info">
+                                <h5>Magic Plate Armor</h5>
+                                <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                            </div>
+                        </div>
+                        <div class="assets-list__item">
+                            <div class="thumb">
+                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                            </div>
+                            <div class="info">
+                                <h5>Magic Plate Armor</h5>
+                                <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 grid">
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_container">
+                            <div class="item">
+                                <div class="item_info">
+                                    <div class="thumb">
+                                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                                    </div>
+                                    <div class="info">
+                                        <h5>Magic Plate Armor</h5>
+                                        <span class="float-left price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    1.99
+                                </span>
+                                        <span class="float-right box">
+                                    <i class="fas fa-box"></i>
+                                    350. 000
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -18,7 +524,7 @@
 </template>
 
 <script>
-    const updateProduct = function () {
+    const updateProduct = function() {
         if (!this.$store.state.marketplace.products)
             return
 
@@ -36,36 +542,11 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': () => import('@/ui/layouts/default')
+            'c-layout': () => import('@/ui/layouts/default'),
+            'c-tags-list': () => import('@/ui/components/product-tags')
         },
         data() {
             return {
-                assets: [
-                    {
-                        image: 'data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxMjYuNDQzIDEyNi40NDMiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEyNi40NDMgMTI2LjQ0MzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxnPgoJPGc+CgkJPGc+CgkJCTxwYXRoIHN0eWxlPSJmaWxsOiMzMzM2M0E7IiBkPSJNNjMuMjIyLDIzLjMzNmMtMS42NTcsMC0zLTEuMzQzLTMtM1YzYzAtMS42NTcsMS4zNDMtMywzLTNzMywxLjM0MywzLDN2MTcuMzM2ICAgICBDNjYuMjIyLDIxLjk5Myw2NC44NzksMjMuMzM2LDYzLjIyMiwyMy4zMzZ6Ii8+CgkJPC9nPgoJCTxnPgoJCQk8Zz4KCQkJCTxwYXRoIHN0eWxlPSJmaWxsOiMzMzM2M0E7IiBkPSJNNjAuMDQ0LDI2LjMwMWMtMC45NjksMC0xLjkxOS0wLjQ2OC0yLjQ5Ny0xLjMzM2wtOS42MzYtMTQuNDE2ICAgICAgYy0wLjkyMS0xLjM3Ny0wLjU1MS0zLjI0LDAuODI3LTQuMTYxYzEuMzc3LTAuOTIyLDMuMjQxLTAuNTUsNC4xNjEsMC44MjdsOS42MzYsMTQuNDE2YzAuOTIxLDEuMzc3LDAuNTUxLDMuMjQtMC44MjcsNC4xNjEgICAgICBDNjEuMTk2LDI2LjEzOCw2MC42MTcsMjYuMzAxLDYwLjA0NCwyNi4zMDF6Ii8+CgkJCTwvZz4KCQkJPGc+CgkJCQk8cGF0aCBzdHlsZT0iZmlsbDojMzMzNjNBOyIgZD0iTTY2LjM5OSwyNi4zMDFjLTAuNTczLDAtMS4xNTItMC4xNjMtMS42NjQtMC41MDZjLTEuMzc4LTAuOTIxLTEuNzQ4LTIuNzg0LTAuODI3LTQuMTYxICAgICAgbDkuNjM2LTE0LjQxNmMwLjkyLTEuMzc3LDIuNzg0LTEuNzQ5LDQuMTYxLTAuODI3YzEuMzc4LDAuOTIxLDEuNzQ4LDIuNzg0LDAuODI3LDQuMTYxbC05LjYzNiwxNC40MTYgICAgICBDNjguMzE4LDI1LjgzMyw2Ny4zNjgsMjYuMzAxLDY2LjM5OSwyNi4zMDF6Ii8+CgkJCTwvZz4KCQk8L2c+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRkZGODAwOyIgZD0iTTExMi40MzEsNjkuNTFjMCwyMC42NzYtMjIuMDMyLDM3LjQ0MS00OS4yMDksMzcuNDQxYy0yNy4xNzgsMC00OS4yMDktMTYuNzY2LTQ5LjIwOS0zNy40NDEgICAgYzAtMjAuNjgsMjIuMDMxLTQ1LjQ1OSw0OS4yMDktNDUuNDU5QzkwLjM5OCwyNC4wNTEsMTEyLjQzMSw0OC44MywxMTIuNDMxLDY5LjUxeiIvPgoJPC9nPgoJPGc+CgkJPHBhdGggc3R5bGU9ImZpbGw6I0ZGRDQwMDsiIGQ9Ik0xMTIuNDMxLDY5LjUxYzAsMjAuNjc2LTIyLjAzMiwzNy40NDEtNDkuMjA5LDM3LjQ0MWMtMjcuMTc4LDAtNDkuMjA5LTE2Ljc2Ni00OS4yMDktMzcuNDQxICAgIGMwLTIwLjY4LDIyLjAzMS0zNC45MjgsNDkuMjA5LTM0LjkyOEM5MC4zOTgsMzQuNTgyLDExMi40MzEsNDguODMsMTEyLjQzMSw2OS41MXoiLz4KCTwvZz4KCTxnPgoJCTxwYXRoIHN0eWxlPSJmaWxsOiNGRkY4MDA7IiBkPSJNNzMuNzAxLDU4LjM2N2MwLDEuMzk1LTQuNjkxLDEuNjQ1LTEwLjQ3OSwxLjY0NXMtMTAuNDc5LTAuMjUtMTAuNDc5LTEuNjQ1ICAgIGMwLTEuMzkzLDQuNjkxLTUuMDM1LDEwLjQ3OS01LjAzNVM3My43MDEsNTYuOTc1LDczLjcwMSw1OC4zNjd6Ii8+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRkZCMDAwOyIgZD0iTTExMi40MzEsNjkuNTFjMCwyMC42NzYtMjIuMDMyLDM3LjQ0MS00OS4yMDksMzcuNDQxYy0yNy4xNzgsMC00OS4yMDktMTYuNzY2LTQ5LjIwOS0zNy40NDEgICAgYzAtMjAuNjgyLDYuMjYxLDE4LjM0LDQ5LjIwOSwxOC4zNFMxMTIuNDMxLDQ4LjgyOCwxMTIuNDMxLDY5LjUxeiIvPgoJPC9nPgoJPGc+CgkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik02My4yMjIsMTA4LjQ1MWMtMjcuOTYxLDAtNTAuNzA5LTE3LjQ2OS01MC43MDktMzguOTQxYzAtMjEuMjcsMjIuNjE5LTQ2Ljk1OSw1MC43MDktNDYuOTU5ICAgIHM1MC43MDksMjUuNjg5LDUwLjcwOSw0Ni45NTlDMTEzLjkzMSw5MC45ODIsOTEuMTgzLDEwOC40NTEsNjMuMjIyLDEwOC40NTF6IE02My4yMjIsMjUuNTUxICAgIGMtMjYuNDI4LDAtNDcuNzA5LDI0LjA0OC00Ny43MDksNDMuOTU5YzAsMTkuODE4LDIxLjQwMiwzNS45NDEsNDcuNzA5LDM1Ljk0MXM0Ny43MDktMTYuMTIzLDQ3LjcwOS0zNS45NDEgICAgQzExMC45MzEsNDkuNTk5LDg5LjY0OSwyNS41NTEsNjMuMjIyLDI1LjU1MXoiLz4KCTwvZz4KCTxnPgoJCTxnPgoJCQk8Zz4KCQkJCTxnPgoJCQkJCTxnPgoJCQkJCQk8cGF0aCBzdHlsZT0iZmlsbDojMzMzNjNBOyIgZD0iTTQ3LjA2LDYwLjgyMmMtMC44MjgsMC0xLjUtMC42NzItMS41LTEuNWMwLTAuODctMi40ODctMi40NjktNi41NTItMi40NjkgICAgICAgIGMtNC4wNjMsMC02LjU1MSwxLjU5OS02LjU1MSwyLjQ2OWMwLDAuODI4LTAuNjcyLDEuNS0xLjUsMS41cy0xLjUtMC42NzItMS41LTEuNWMwLTMuMTE4LDQuMTA1LTUuNDY5LDkuNTUxLTUuNDY5ICAgICAgICBzOS41NTIsMi4zNTEsOS41NTIsNS40NjlDNDguNTYsNjAuMTUsNDcuODg4LDYwLjgyMiw0Ny4wNiw2MC44MjJ6Ii8+CgkJCQkJPC9nPgoJCQkJPC9nPgoJCQk8L2c+CgkJCTxnPgoJCQkJPGc+CgkJCQkJPGc+CgkJCQkJCTxwYXRoIHN0eWxlPSJmaWxsOiMzMzM2M0E7IiBkPSJNOTUuNDg2LDYwLjgyMmMtMC44MjgsMC0xLjUtMC42NzItMS41LTEuNWMwLTAuODctMi40ODctMi40NjktNi41NTEtMi40NjkgICAgICAgIGMtNC4wNjQsMC02LjU1MiwxLjU5OS02LjU1MiwyLjQ2OWMwLDAuODI4LTAuNjcyLDEuNS0xLjUsMS41cy0xLjUtMC42NzItMS41LTEuNWMwLTMuMTE4LDQuMTA2LTUuNDY5LDkuNTUyLTUuNDY5ICAgICAgICBzOS41NTEsMi4zNTEsOS41NTEsNS40NjlDOTYuOTg2LDYwLjE1LDk2LjMxNCw2MC44MjIsOTUuNDg2LDYwLjgyMnoiLz4KCQkJCQk8L2c+CgkJCQk8L2c+CgkJCTwvZz4KCQk8L2c+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRkZGNEM3OyIgZD0iTTEwMi42MzYsMTAxLjc1OGMwLTEyLjY5Ny0xMS41NzMtMTYuODMtMjAuMTc2LTIzLjcxM2MtMTQuMzkzLTEyLjM4My05LjY2My0yMC4yNzMtMTguNjQxLTIwLjg4OSAgICB2LTAuMDQzYy0wLjIwOSwwLTAuNDAxLDAuMDA4LTAuNTk4LDAuMDE0Yy0wLjE5Ni0wLjAwNi0wLjM4OS0wLjAxNC0wLjU5OC0wLjAxNHYwLjA0M2MtOC45NzgsMC42MTUtNC4yNDgsOC41MDYtMTguNjQxLDIwLjg4OSAgICBjLTguNjAzLDYuODgzLTIwLjE3NiwxMS4wMTYtMjAuMTc2LDIzLjcxM2MwLDIwLjUwNiwyMC4zMTksMjIuMjk3LDM4LjgxNiwyMy4xNDV2MC4wNDFjMC4xOTgsMCwwLjM5OC0wLjAxNiwwLjU5OC0wLjAyICAgIGMwLjE5OSwwLjAwNCwwLjM5OSwwLjAyLDAuNTk4LDAuMDJ2LTAuMDQxQzgyLjMxNiwxMjQuMDU1LDEwMi42MzYsMTIyLjI2NCwxMDIuNjM2LDEwMS43NTh6Ii8+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRTBENUE0OyIgZD0iTTEwMi4wNTEsMTAxLjkxNEM5OS42MDQsOTAuMjA3LDg5LjkxOCw4OS40MTIsODIuNDYsODMuNDQ1ICAgIGMtMTQuMzkzLTEyLjM4My05LjY2My0yMC4yNzItMTguNjQxLTIwLjg4OXYtMC4wNDNjLTAuMjA5LDAtMC40MDEsMC4wMS0wLjU5OCwwLjAxNmMtMC4xOTYtMC4wMDYtMC4zODktMC4wMTYtMC41OTgtMC4wMTZ2MC4wNDMgICAgYy04Ljk3OCwwLjYxNy00LjI0OCw4LjUwNi0xOC42NDEsMjAuODg5Yy03LjQ1OCw1Ljk2Ny0xNy4xNDQsNi43NjItMTkuNTkxLDE4LjQ2OWMzLjQzNSwxNS4yODcsMjEuNTY4LDE2LjgyMiwzOC4yMzEsMTcuNTg4ICAgIHYwLjA0MWMwLjE5OCwwLDAuMzk4LTAuMDE2LDAuNTk4LTAuMDIxYzAuMTk5LDAuMDA2LDAuMzk5LDAuMDIxLDAuNTk4LDAuMDIxdi0wLjA0MSAgICBDODAuNDgyLDExOC43MzYsOTguNjE2LDExNy4yMDEsMTAyLjA1MSwxMDEuOTE0eiIvPgoJPC9nPgoJPGc+CgkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik02My44MTksMTI2LjQ0M2MtMC4xMzYsMC0wLjI3MS0wLjAwNi0wLjQwOC0wLjAxMmwtMC4yMTktMC4wMDhsLTAuMTYsMC4wMDggICAgYy0wLjI4MiwwLjAxMy0wLjU2OCwwLjAyNy0wLjgyNC0wLjA0N2MtMTYuMDI3LTAuNzM1LTM5LjktMS45OTItMzkuOS0yNC42MjdjMC0xMC42MzcsNy40OTUtMTUuNzAxLDE0Ljc0My0yMC41OTkgICAgYzIuMDItMS4zNjQsNC4xMDctMi43NzQsNS45OTUtNC4yODVjNi44NjEtNS45MDUsOS4xOTMtMTAuNzI5LDEwLjg5Ni0xNC4yNTNjMS43NC0zLjYwMSwzLjEyMy02LjQ2Miw4LjIyNi02LjkzMyAgICBjMC4zMS0wLjEwNCwwLjY2NC0wLjA3NSwwLjk4NC0wLjA2NGwwLjExNCwwLjAwNGwwLjAyNC0wLjAwNGMwLjMyNy0wLjAxMSwwLjY4OC0wLjAzOCwxLjAwMywwLjA2NSAgICBjNS4wODcsMC40NzcsNi40NjksMy4zMzUsOC4yMDcsNi45MzJjMS43MDMsMy41MjMsNC4wMzUsOC4zNDgsMTAuOTM4LDE0LjI4N2MxLjg0NywxLjQ3NywzLjkzNSwyLjg4Nyw1Ljk1NCw0LjI1MSAgICBjNy4yNDgsNC44OTcsMTQuNzQzLDkuOTYyLDE0Ljc0MywyMC41OTljMCwyMi42NC0yMy44ODYsMjMuODkyLTM5LjkxMywyNC42MjhDNjQuMDk1LDEyNi40MjMsNjMuOTU5LDEyNi40NDMsNjMuODE5LDEyNi40NDN6ICAgICBNNjMuMTkyLDEyMy40MjRsMC4zMjUsMC4wMWMwLjA3Ni0wLjAxNiwwLjE1My0wLjAyNiwwLjIzMy0wLjAyOWMyMC40NTQtMC45MzgsMzcuMzg1LTMuMjE0LDM3LjM4NS0yMS42NDYgICAgYzAtOS4wNDMtNi41Mi0xMy40NDgtMTMuNDIzLTE4LjExMmMtMi4wNjgtMS4zOTctNC4yMDctMi44NDMtNi4xOS00LjQzQzc0LjEwNiw3Mi44MzcsNzEuNTE1LDY3LjQ3NSw2OS44LDYzLjkyNyAgICBjLTEuNzE3LTMuNTUzLTIuNDI4LTUuMDIzLTYuMDgzLTUuMjc0Yy0wLjA3OC0wLjAwNS0wLjE1NC0wLjAxNy0wLjIyOS0wLjAzM2MtMC4wMzQsMC4wMDEtMC4wNjgsMC4wMDItMC4xMDIsMC4wMDNsLTAuMTIsMC4wMDQgICAgbC0wLjIxLTAuMDA0Yy0wLjAzNS0wLjAwMS0wLjA3LTAuMDAyLTAuMTA1LTAuMDAzYy0wLjA3MywwLjAxNy0wLjE0OCwwLjAyOC0wLjIyNSwwLjAzM2MtMy42NTUsMC4yNTEtNC4zNjYsMS43MjItNi4wODMsNS4yNzQgICAgYy0xLjcxNSwzLjU0OC00LjMwNyw4LjkxLTExLjY4MiwxNS4yNTVjLTIuMDI0LDEuNjIxLTQuMTYzLDMuMDY2LTYuMjMxLDQuNDY0Yy02LjkwMyw0LjY2NC0xMy40MjMsOS4wNjktMTMuNDIzLDE4LjExMiAgICBjMCwxOC40MzMsMTYuOTMxLDIwLjcwOSwzNy4zODUsMjEuNjQ2YzAuMDgxLDAuMDAzLDAuMTYsMC4wMTQsMC4yMzcsMC4wMjlMNjMuMTkyLDEyMy40MjR6Ii8+Cgk8L2c+Cgk8Zz4KCQk8Zz4KCQkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik01OS4wNzcsNzYuMjEzYy0wLjU3MywwLTEuMTItMC4zMy0xLjM3LTAuODg3bC0xLjEwMi0yLjQ1N2MtMC4zMzktMC43NTYsMC0xLjY0NCwwLjc1Ni0xLjk4MiAgICAgYzAuNzU1LTAuMzM4LDEuNjQzLDAsMS45ODIsMC43NTZsMS4xMDIsMi40NTdjMC4zMzksMC43NTYsMCwxLjY0NC0wLjc1NiwxLjk4MkM1OS40OSw3Ni4xNzEsNTkuMjgyLDc2LjIxMyw1OS4wNzcsNzYuMjEzeiIvPgoJCTwvZz4KCQk8Zz4KCQkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik02Ny4zNjYsNzYuMjEzYy0wLjIwNSwwLTAuNDEzLTAuMDQyLTAuNjEyLTAuMTMxYy0wLjc1Ni0wLjMzOS0xLjA5NS0xLjIyNy0wLjc1Ni0xLjk4MiAgICAgbDEuMTAyLTIuNDU3YzAuMzQtMC43NTYsMS4yMjctMS4wOTMsMS45ODItMC43NTZjMC43NTYsMC4zMzksMS4wOTUsMS4yMjcsMC43NTYsMS45ODJsLTEuMTAyLDIuNDU3ICAgICBDNjguNDg2LDc1Ljg4Myw2Ny45MzksNzYuMjEzLDY3LjM2Niw3Ni4yMTN6Ii8+CgkJPC9nPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=',
-                        title: 'Some short title',
-                        price: '0.99',
-                        offers_accept: true
-                    },
-                    {
-                        image: 'data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxMjYuNDQzIDEyNi40NDMiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEyNi40NDMgMTI2LjQ0MzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxnPgoJPGc+CgkJPGc+CgkJCTxwYXRoIHN0eWxlPSJmaWxsOiMzMzM2M0E7IiBkPSJNNjMuMjIyLDIzLjMzNmMtMS42NTcsMC0zLTEuMzQzLTMtM1YzYzAtMS42NTcsMS4zNDMtMywzLTNzMywxLjM0MywzLDN2MTcuMzM2ICAgICBDNjYuMjIyLDIxLjk5Myw2NC44NzksMjMuMzM2LDYzLjIyMiwyMy4zMzZ6Ii8+CgkJPC9nPgoJCTxnPgoJCQk8Zz4KCQkJCTxwYXRoIHN0eWxlPSJmaWxsOiMzMzM2M0E7IiBkPSJNNjAuMDQ0LDI2LjMwMWMtMC45NjksMC0xLjkxOS0wLjQ2OC0yLjQ5Ny0xLjMzM2wtOS42MzYtMTQuNDE2ICAgICAgYy0wLjkyMS0xLjM3Ny0wLjU1MS0zLjI0LDAuODI3LTQuMTYxYzEuMzc3LTAuOTIyLDMuMjQxLTAuNTUsNC4xNjEsMC44MjdsOS42MzYsMTQuNDE2YzAuOTIxLDEuMzc3LDAuNTUxLDMuMjQtMC44MjcsNC4xNjEgICAgICBDNjEuMTk2LDI2LjEzOCw2MC42MTcsMjYuMzAxLDYwLjA0NCwyNi4zMDF6Ii8+CgkJCTwvZz4KCQkJPGc+CgkJCQk8cGF0aCBzdHlsZT0iZmlsbDojMzMzNjNBOyIgZD0iTTY2LjM5OSwyNi4zMDFjLTAuNTczLDAtMS4xNTItMC4xNjMtMS42NjQtMC41MDZjLTEuMzc4LTAuOTIxLTEuNzQ4LTIuNzg0LTAuODI3LTQuMTYxICAgICAgbDkuNjM2LTE0LjQxNmMwLjkyLTEuMzc3LDIuNzg0LTEuNzQ5LDQuMTYxLTAuODI3YzEuMzc4LDAuOTIxLDEuNzQ4LDIuNzg0LDAuODI3LDQuMTYxbC05LjYzNiwxNC40MTYgICAgICBDNjguMzE4LDI1LjgzMyw2Ny4zNjgsMjYuMzAxLDY2LjM5OSwyNi4zMDF6Ii8+CgkJCTwvZz4KCQk8L2c+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRkZGODAwOyIgZD0iTTExMi40MzEsNjkuNTFjMCwyMC42NzYtMjIuMDMyLDM3LjQ0MS00OS4yMDksMzcuNDQxYy0yNy4xNzgsMC00OS4yMDktMTYuNzY2LTQ5LjIwOS0zNy40NDEgICAgYzAtMjAuNjgsMjIuMDMxLTQ1LjQ1OSw0OS4yMDktNDUuNDU5QzkwLjM5OCwyNC4wNTEsMTEyLjQzMSw0OC44MywxMTIuNDMxLDY5LjUxeiIvPgoJPC9nPgoJPGc+CgkJPHBhdGggc3R5bGU9ImZpbGw6I0ZGRDQwMDsiIGQ9Ik0xMTIuNDMxLDY5LjUxYzAsMjAuNjc2LTIyLjAzMiwzNy40NDEtNDkuMjA5LDM3LjQ0MWMtMjcuMTc4LDAtNDkuMjA5LTE2Ljc2Ni00OS4yMDktMzcuNDQxICAgIGMwLTIwLjY4LDIyLjAzMS0zNC45MjgsNDkuMjA5LTM0LjkyOEM5MC4zOTgsMzQuNTgyLDExMi40MzEsNDguODMsMTEyLjQzMSw2OS41MXoiLz4KCTwvZz4KCTxnPgoJCTxwYXRoIHN0eWxlPSJmaWxsOiNGRkY4MDA7IiBkPSJNNzMuNzAxLDU4LjM2N2MwLDEuMzk1LTQuNjkxLDEuNjQ1LTEwLjQ3OSwxLjY0NXMtMTAuNDc5LTAuMjUtMTAuNDc5LTEuNjQ1ICAgIGMwLTEuMzkzLDQuNjkxLTUuMDM1LDEwLjQ3OS01LjAzNVM3My43MDEsNTYuOTc1LDczLjcwMSw1OC4zNjd6Ii8+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRkZCMDAwOyIgZD0iTTExMi40MzEsNjkuNTFjMCwyMC42NzYtMjIuMDMyLDM3LjQ0MS00OS4yMDksMzcuNDQxYy0yNy4xNzgsMC00OS4yMDktMTYuNzY2LTQ5LjIwOS0zNy40NDEgICAgYzAtMjAuNjgyLDYuMjYxLDE4LjM0LDQ5LjIwOSwxOC4zNFMxMTIuNDMxLDQ4LjgyOCwxMTIuNDMxLDY5LjUxeiIvPgoJPC9nPgoJPGc+CgkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik02My4yMjIsMTA4LjQ1MWMtMjcuOTYxLDAtNTAuNzA5LTE3LjQ2OS01MC43MDktMzguOTQxYzAtMjEuMjcsMjIuNjE5LTQ2Ljk1OSw1MC43MDktNDYuOTU5ICAgIHM1MC43MDksMjUuNjg5LDUwLjcwOSw0Ni45NTlDMTEzLjkzMSw5MC45ODIsOTEuMTgzLDEwOC40NTEsNjMuMjIyLDEwOC40NTF6IE02My4yMjIsMjUuNTUxICAgIGMtMjYuNDI4LDAtNDcuNzA5LDI0LjA0OC00Ny43MDksNDMuOTU5YzAsMTkuODE4LDIxLjQwMiwzNS45NDEsNDcuNzA5LDM1Ljk0MXM0Ny43MDktMTYuMTIzLDQ3LjcwOS0zNS45NDEgICAgQzExMC45MzEsNDkuNTk5LDg5LjY0OSwyNS41NTEsNjMuMjIyLDI1LjU1MXoiLz4KCTwvZz4KCTxnPgoJCTxnPgoJCQk8Zz4KCQkJCTxnPgoJCQkJCTxnPgoJCQkJCQk8cGF0aCBzdHlsZT0iZmlsbDojMzMzNjNBOyIgZD0iTTQ3LjA2LDYwLjgyMmMtMC44MjgsMC0xLjUtMC42NzItMS41LTEuNWMwLTAuODctMi40ODctMi40NjktNi41NTItMi40NjkgICAgICAgIGMtNC4wNjMsMC02LjU1MSwxLjU5OS02LjU1MSwyLjQ2OWMwLDAuODI4LTAuNjcyLDEuNS0xLjUsMS41cy0xLjUtMC42NzItMS41LTEuNWMwLTMuMTE4LDQuMTA1LTUuNDY5LDkuNTUxLTUuNDY5ICAgICAgICBzOS41NTIsMi4zNTEsOS41NTIsNS40NjlDNDguNTYsNjAuMTUsNDcuODg4LDYwLjgyMiw0Ny4wNiw2MC44MjJ6Ii8+CgkJCQkJPC9nPgoJCQkJPC9nPgoJCQk8L2c+CgkJCTxnPgoJCQkJPGc+CgkJCQkJPGc+CgkJCQkJCTxwYXRoIHN0eWxlPSJmaWxsOiMzMzM2M0E7IiBkPSJNOTUuNDg2LDYwLjgyMmMtMC44MjgsMC0xLjUtMC42NzItMS41LTEuNWMwLTAuODctMi40ODctMi40NjktNi41NTEtMi40NjkgICAgICAgIGMtNC4wNjQsMC02LjU1MiwxLjU5OS02LjU1MiwyLjQ2OWMwLDAuODI4LTAuNjcyLDEuNS0xLjUsMS41cy0xLjUtMC42NzItMS41LTEuNWMwLTMuMTE4LDQuMTA2LTUuNDY5LDkuNTUyLTUuNDY5ICAgICAgICBzOS41NTEsMi4zNTEsOS41NTEsNS40NjlDOTYuOTg2LDYwLjE1LDk2LjMxNCw2MC44MjIsOTUuNDg2LDYwLjgyMnoiLz4KCQkJCQk8L2c+CgkJCQk8L2c+CgkJCTwvZz4KCQk8L2c+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRkZGNEM3OyIgZD0iTTEwMi42MzYsMTAxLjc1OGMwLTEyLjY5Ny0xMS41NzMtMTYuODMtMjAuMTc2LTIzLjcxM2MtMTQuMzkzLTEyLjM4My05LjY2My0yMC4yNzMtMTguNjQxLTIwLjg4OSAgICB2LTAuMDQzYy0wLjIwOSwwLTAuNDAxLDAuMDA4LTAuNTk4LDAuMDE0Yy0wLjE5Ni0wLjAwNi0wLjM4OS0wLjAxNC0wLjU5OC0wLjAxNHYwLjA0M2MtOC45NzgsMC42MTUtNC4yNDgsOC41MDYtMTguNjQxLDIwLjg4OSAgICBjLTguNjAzLDYuODgzLTIwLjE3NiwxMS4wMTYtMjAuMTc2LDIzLjcxM2MwLDIwLjUwNiwyMC4zMTksMjIuMjk3LDM4LjgxNiwyMy4xNDV2MC4wNDFjMC4xOTgsMCwwLjM5OC0wLjAxNiwwLjU5OC0wLjAyICAgIGMwLjE5OSwwLjAwNCwwLjM5OSwwLjAyLDAuNTk4LDAuMDJ2LTAuMDQxQzgyLjMxNiwxMjQuMDU1LDEwMi42MzYsMTIyLjI2NCwxMDIuNjM2LDEwMS43NTh6Ii8+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRTBENUE0OyIgZD0iTTEwMi4wNTEsMTAxLjkxNEM5OS42MDQsOTAuMjA3LDg5LjkxOCw4OS40MTIsODIuNDYsODMuNDQ1ICAgIGMtMTQuMzkzLTEyLjM4My05LjY2My0yMC4yNzItMTguNjQxLTIwLjg4OXYtMC4wNDNjLTAuMjA5LDAtMC40MDEsMC4wMS0wLjU5OCwwLjAxNmMtMC4xOTYtMC4wMDYtMC4zODktMC4wMTYtMC41OTgtMC4wMTZ2MC4wNDMgICAgYy04Ljk3OCwwLjYxNy00LjI0OCw4LjUwNi0xOC42NDEsMjAuODg5Yy03LjQ1OCw1Ljk2Ny0xNy4xNDQsNi43NjItMTkuNTkxLDE4LjQ2OWMzLjQzNSwxNS4yODcsMjEuNTY4LDE2LjgyMiwzOC4yMzEsMTcuNTg4ICAgIHYwLjA0MWMwLjE5OCwwLDAuMzk4LTAuMDE2LDAuNTk4LTAuMDIxYzAuMTk5LDAuMDA2LDAuMzk5LDAuMDIxLDAuNTk4LDAuMDIxdi0wLjA0MSAgICBDODAuNDgyLDExOC43MzYsOTguNjE2LDExNy4yMDEsMTAyLjA1MSwxMDEuOTE0eiIvPgoJPC9nPgoJPGc+CgkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik02My44MTksMTI2LjQ0M2MtMC4xMzYsMC0wLjI3MS0wLjAwNi0wLjQwOC0wLjAxMmwtMC4yMTktMC4wMDhsLTAuMTYsMC4wMDggICAgYy0wLjI4MiwwLjAxMy0wLjU2OCwwLjAyNy0wLjgyNC0wLjA0N2MtMTYuMDI3LTAuNzM1LTM5LjktMS45OTItMzkuOS0yNC42MjdjMC0xMC42MzcsNy40OTUtMTUuNzAxLDE0Ljc0My0yMC41OTkgICAgYzIuMDItMS4zNjQsNC4xMDctMi43NzQsNS45OTUtNC4yODVjNi44NjEtNS45MDUsOS4xOTMtMTAuNzI5LDEwLjg5Ni0xNC4yNTNjMS43NC0zLjYwMSwzLjEyMy02LjQ2Miw4LjIyNi02LjkzMyAgICBjMC4zMS0wLjEwNCwwLjY2NC0wLjA3NSwwLjk4NC0wLjA2NGwwLjExNCwwLjAwNGwwLjAyNC0wLjAwNGMwLjMyNy0wLjAxMSwwLjY4OC0wLjAzOCwxLjAwMywwLjA2NSAgICBjNS4wODcsMC40NzcsNi40NjksMy4zMzUsOC4yMDcsNi45MzJjMS43MDMsMy41MjMsNC4wMzUsOC4zNDgsMTAuOTM4LDE0LjI4N2MxLjg0NywxLjQ3NywzLjkzNSwyLjg4Nyw1Ljk1NCw0LjI1MSAgICBjNy4yNDgsNC44OTcsMTQuNzQzLDkuOTYyLDE0Ljc0MywyMC41OTljMCwyMi42NC0yMy44ODYsMjMuODkyLTM5LjkxMywyNC42MjhDNjQuMDk1LDEyNi40MjMsNjMuOTU5LDEyNi40NDMsNjMuODE5LDEyNi40NDN6ICAgICBNNjMuMTkyLDEyMy40MjRsMC4zMjUsMC4wMWMwLjA3Ni0wLjAxNiwwLjE1My0wLjAyNiwwLjIzMy0wLjAyOWMyMC40NTQtMC45MzgsMzcuMzg1LTMuMjE0LDM3LjM4NS0yMS42NDYgICAgYzAtOS4wNDMtNi41Mi0xMy40NDgtMTMuNDIzLTE4LjExMmMtMi4wNjgtMS4zOTctNC4yMDctMi44NDMtNi4xOS00LjQzQzc0LjEwNiw3Mi44MzcsNzEuNTE1LDY3LjQ3NSw2OS44LDYzLjkyNyAgICBjLTEuNzE3LTMuNTUzLTIuNDI4LTUuMDIzLTYuMDgzLTUuMjc0Yy0wLjA3OC0wLjAwNS0wLjE1NC0wLjAxNy0wLjIyOS0wLjAzM2MtMC4wMzQsMC4wMDEtMC4wNjgsMC4wMDItMC4xMDIsMC4wMDNsLTAuMTIsMC4wMDQgICAgbC0wLjIxLTAuMDA0Yy0wLjAzNS0wLjAwMS0wLjA3LTAuMDAyLTAuMTA1LTAuMDAzYy0wLjA3MywwLjAxNy0wLjE0OCwwLjAyOC0wLjIyNSwwLjAzM2MtMy42NTUsMC4yNTEtNC4zNjYsMS43MjItNi4wODMsNS4yNzQgICAgYy0xLjcxNSwzLjU0OC00LjMwNyw4LjkxLTExLjY4MiwxNS4yNTVjLTIuMDI0LDEuNjIxLTQuMTYzLDMuMDY2LTYuMjMxLDQuNDY0Yy02LjkwMyw0LjY2NC0xMy40MjMsOS4wNjktMTMuNDIzLDE4LjExMiAgICBjMCwxOC40MzMsMTYuOTMxLDIwLjcwOSwzNy4zODUsMjEuNjQ2YzAuMDgxLDAuMDAzLDAuMTYsMC4wMTQsMC4yMzcsMC4wMjlMNjMuMTkyLDEyMy40MjR6Ii8+Cgk8L2c+Cgk8Zz4KCQk8Zz4KCQkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik01OS4wNzcsNzYuMjEzYy0wLjU3MywwLTEuMTItMC4zMy0xLjM3LTAuODg3bC0xLjEwMi0yLjQ1N2MtMC4zMzktMC43NTYsMC0xLjY0NCwwLjc1Ni0xLjk4MiAgICAgYzAuNzU1LTAuMzM4LDEuNjQzLDAsMS45ODIsMC43NTZsMS4xMDIsMi40NTdjMC4zMzksMC43NTYsMCwxLjY0NC0wLjc1NiwxLjk4MkM1OS40OSw3Ni4xNzEsNTkuMjgyLDc2LjIxMyw1OS4wNzcsNzYuMjEzeiIvPgoJCTwvZz4KCQk8Zz4KCQkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik02Ny4zNjYsNzYuMjEzYy0wLjIwNSwwLTAuNDEzLTAuMDQyLTAuNjEyLTAuMTMxYy0wLjc1Ni0wLjMzOS0xLjA5NS0xLjIyNy0wLjc1Ni0xLjk4MiAgICAgbDEuMTAyLTIuNDU3YzAuMzQtMC43NTYsMS4yMjctMS4wOTMsMS45ODItMC43NTZjMC43NTYsMC4zMzksMS4wOTUsMS4yMjcsMC43NTYsMS45ODJsLTEuMTAyLDIuNDU3ICAgICBDNjguNDg2LDc1Ljg4Myw2Ny45MzksNzYuMjEzLDY3LjM2Niw3Ni4yMTN6Ii8+CgkJPC9nPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=',
-                        title: 'Some title',
-                        price: '3.99',
-                        offers_accept: true
-                    },
-                    {
-                        image: 'data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxMjYuNDQzIDEyNi40NDMiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEyNi40NDMgMTI2LjQ0MzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxnPgoJPGc+CgkJPGc+CgkJCTxwYXRoIHN0eWxlPSJmaWxsOiMzMzM2M0E7IiBkPSJNNjMuMjIyLDIzLjMzNmMtMS42NTcsMC0zLTEuMzQzLTMtM1YzYzAtMS42NTcsMS4zNDMtMywzLTNzMywxLjM0MywzLDN2MTcuMzM2ICAgICBDNjYuMjIyLDIxLjk5Myw2NC44NzksMjMuMzM2LDYzLjIyMiwyMy4zMzZ6Ii8+CgkJPC9nPgoJCTxnPgoJCQk8Zz4KCQkJCTxwYXRoIHN0eWxlPSJmaWxsOiMzMzM2M0E7IiBkPSJNNjAuMDQ0LDI2LjMwMWMtMC45NjksMC0xLjkxOS0wLjQ2OC0yLjQ5Ny0xLjMzM2wtOS42MzYtMTQuNDE2ICAgICAgYy0wLjkyMS0xLjM3Ny0wLjU1MS0zLjI0LDAuODI3LTQuMTYxYzEuMzc3LTAuOTIyLDMuMjQxLTAuNTUsNC4xNjEsMC44MjdsOS42MzYsMTQuNDE2YzAuOTIxLDEuMzc3LDAuNTUxLDMuMjQtMC44MjcsNC4xNjEgICAgICBDNjEuMTk2LDI2LjEzOCw2MC42MTcsMjYuMzAxLDYwLjA0NCwyNi4zMDF6Ii8+CgkJCTwvZz4KCQkJPGc+CgkJCQk8cGF0aCBzdHlsZT0iZmlsbDojMzMzNjNBOyIgZD0iTTY2LjM5OSwyNi4zMDFjLTAuNTczLDAtMS4xNTItMC4xNjMtMS42NjQtMC41MDZjLTEuMzc4LTAuOTIxLTEuNzQ4LTIuNzg0LTAuODI3LTQuMTYxICAgICAgbDkuNjM2LTE0LjQxNmMwLjkyLTEuMzc3LDIuNzg0LTEuNzQ5LDQuMTYxLTAuODI3YzEuMzc4LDAuOTIxLDEuNzQ4LDIuNzg0LDAuODI3LDQuMTYxbC05LjYzNiwxNC40MTYgICAgICBDNjguMzE4LDI1LjgzMyw2Ny4zNjgsMjYuMzAxLDY2LjM5OSwyNi4zMDF6Ii8+CgkJCTwvZz4KCQk8L2c+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRkZGODAwOyIgZD0iTTExMi40MzEsNjkuNTFjMCwyMC42NzYtMjIuMDMyLDM3LjQ0MS00OS4yMDksMzcuNDQxYy0yNy4xNzgsMC00OS4yMDktMTYuNzY2LTQ5LjIwOS0zNy40NDEgICAgYzAtMjAuNjgsMjIuMDMxLTQ1LjQ1OSw0OS4yMDktNDUuNDU5QzkwLjM5OCwyNC4wNTEsMTEyLjQzMSw0OC44MywxMTIuNDMxLDY5LjUxeiIvPgoJPC9nPgoJPGc+CgkJPHBhdGggc3R5bGU9ImZpbGw6I0ZGRDQwMDsiIGQ9Ik0xMTIuNDMxLDY5LjUxYzAsMjAuNjc2LTIyLjAzMiwzNy40NDEtNDkuMjA5LDM3LjQ0MWMtMjcuMTc4LDAtNDkuMjA5LTE2Ljc2Ni00OS4yMDktMzcuNDQxICAgIGMwLTIwLjY4LDIyLjAzMS0zNC45MjgsNDkuMjA5LTM0LjkyOEM5MC4zOTgsMzQuNTgyLDExMi40MzEsNDguODMsMTEyLjQzMSw2OS41MXoiLz4KCTwvZz4KCTxnPgoJCTxwYXRoIHN0eWxlPSJmaWxsOiNGRkY4MDA7IiBkPSJNNzMuNzAxLDU4LjM2N2MwLDEuMzk1LTQuNjkxLDEuNjQ1LTEwLjQ3OSwxLjY0NXMtMTAuNDc5LTAuMjUtMTAuNDc5LTEuNjQ1ICAgIGMwLTEuMzkzLDQuNjkxLTUuMDM1LDEwLjQ3OS01LjAzNVM3My43MDEsNTYuOTc1LDczLjcwMSw1OC4zNjd6Ii8+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRkZCMDAwOyIgZD0iTTExMi40MzEsNjkuNTFjMCwyMC42NzYtMjIuMDMyLDM3LjQ0MS00OS4yMDksMzcuNDQxYy0yNy4xNzgsMC00OS4yMDktMTYuNzY2LTQ5LjIwOS0zNy40NDEgICAgYzAtMjAuNjgyLDYuMjYxLDE4LjM0LDQ5LjIwOSwxOC4zNFMxMTIuNDMxLDQ4LjgyOCwxMTIuNDMxLDY5LjUxeiIvPgoJPC9nPgoJPGc+CgkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik02My4yMjIsMTA4LjQ1MWMtMjcuOTYxLDAtNTAuNzA5LTE3LjQ2OS01MC43MDktMzguOTQxYzAtMjEuMjcsMjIuNjE5LTQ2Ljk1OSw1MC43MDktNDYuOTU5ICAgIHM1MC43MDksMjUuNjg5LDUwLjcwOSw0Ni45NTlDMTEzLjkzMSw5MC45ODIsOTEuMTgzLDEwOC40NTEsNjMuMjIyLDEwOC40NTF6IE02My4yMjIsMjUuNTUxICAgIGMtMjYuNDI4LDAtNDcuNzA5LDI0LjA0OC00Ny43MDksNDMuOTU5YzAsMTkuODE4LDIxLjQwMiwzNS45NDEsNDcuNzA5LDM1Ljk0MXM0Ny43MDktMTYuMTIzLDQ3LjcwOS0zNS45NDEgICAgQzExMC45MzEsNDkuNTk5LDg5LjY0OSwyNS41NTEsNjMuMjIyLDI1LjU1MXoiLz4KCTwvZz4KCTxnPgoJCTxnPgoJCQk8Zz4KCQkJCTxnPgoJCQkJCTxnPgoJCQkJCQk8cGF0aCBzdHlsZT0iZmlsbDojMzMzNjNBOyIgZD0iTTQ3LjA2LDYwLjgyMmMtMC44MjgsMC0xLjUtMC42NzItMS41LTEuNWMwLTAuODctMi40ODctMi40NjktNi41NTItMi40NjkgICAgICAgIGMtNC4wNjMsMC02LjU1MSwxLjU5OS02LjU1MSwyLjQ2OWMwLDAuODI4LTAuNjcyLDEuNS0xLjUsMS41cy0xLjUtMC42NzItMS41LTEuNWMwLTMuMTE4LDQuMTA1LTUuNDY5LDkuNTUxLTUuNDY5ICAgICAgICBzOS41NTIsMi4zNTEsOS41NTIsNS40NjlDNDguNTYsNjAuMTUsNDcuODg4LDYwLjgyMiw0Ny4wNiw2MC44MjJ6Ii8+CgkJCQkJPC9nPgoJCQkJPC9nPgoJCQk8L2c+CgkJCTxnPgoJCQkJPGc+CgkJCQkJPGc+CgkJCQkJCTxwYXRoIHN0eWxlPSJmaWxsOiMzMzM2M0E7IiBkPSJNOTUuNDg2LDYwLjgyMmMtMC44MjgsMC0xLjUtMC42NzItMS41LTEuNWMwLTAuODctMi40ODctMi40NjktNi41NTEtMi40NjkgICAgICAgIGMtNC4wNjQsMC02LjU1MiwxLjU5OS02LjU1MiwyLjQ2OWMwLDAuODI4LTAuNjcyLDEuNS0xLjUsMS41cy0xLjUtMC42NzItMS41LTEuNWMwLTMuMTE4LDQuMTA2LTUuNDY5LDkuNTUyLTUuNDY5ICAgICAgICBzOS41NTEsMi4zNTEsOS41NTEsNS40NjlDOTYuOTg2LDYwLjE1LDk2LjMxNCw2MC44MjIsOTUuNDg2LDYwLjgyMnoiLz4KCQkJCQk8L2c+CgkJCQk8L2c+CgkJCTwvZz4KCQk8L2c+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRkZGNEM3OyIgZD0iTTEwMi42MzYsMTAxLjc1OGMwLTEyLjY5Ny0xMS41NzMtMTYuODMtMjAuMTc2LTIzLjcxM2MtMTQuMzkzLTEyLjM4My05LjY2My0yMC4yNzMtMTguNjQxLTIwLjg4OSAgICB2LTAuMDQzYy0wLjIwOSwwLTAuNDAxLDAuMDA4LTAuNTk4LDAuMDE0Yy0wLjE5Ni0wLjAwNi0wLjM4OS0wLjAxNC0wLjU5OC0wLjAxNHYwLjA0M2MtOC45NzgsMC42MTUtNC4yNDgsOC41MDYtMTguNjQxLDIwLjg4OSAgICBjLTguNjAzLDYuODgzLTIwLjE3NiwxMS4wMTYtMjAuMTc2LDIzLjcxM2MwLDIwLjUwNiwyMC4zMTksMjIuMjk3LDM4LjgxNiwyMy4xNDV2MC4wNDFjMC4xOTgsMCwwLjM5OC0wLjAxNiwwLjU5OC0wLjAyICAgIGMwLjE5OSwwLjAwNCwwLjM5OSwwLjAyLDAuNTk4LDAuMDJ2LTAuMDQxQzgyLjMxNiwxMjQuMDU1LDEwMi42MzYsMTIyLjI2NCwxMDIuNjM2LDEwMS43NTh6Ii8+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRTBENUE0OyIgZD0iTTEwMi4wNTEsMTAxLjkxNEM5OS42MDQsOTAuMjA3LDg5LjkxOCw4OS40MTIsODIuNDYsODMuNDQ1ICAgIGMtMTQuMzkzLTEyLjM4My05LjY2My0yMC4yNzItMTguNjQxLTIwLjg4OXYtMC4wNDNjLTAuMjA5LDAtMC40MDEsMC4wMS0wLjU5OCwwLjAxNmMtMC4xOTYtMC4wMDYtMC4zODktMC4wMTYtMC41OTgtMC4wMTZ2MC4wNDMgICAgYy04Ljk3OCwwLjYxNy00LjI0OCw4LjUwNi0xOC42NDEsMjAuODg5Yy03LjQ1OCw1Ljk2Ny0xNy4xNDQsNi43NjItMTkuNTkxLDE4LjQ2OWMzLjQzNSwxNS4yODcsMjEuNTY4LDE2LjgyMiwzOC4yMzEsMTcuNTg4ICAgIHYwLjA0MWMwLjE5OCwwLDAuMzk4LTAuMDE2LDAuNTk4LTAuMDIxYzAuMTk5LDAuMDA2LDAuMzk5LDAuMDIxLDAuNTk4LDAuMDIxdi0wLjA0MSAgICBDODAuNDgyLDExOC43MzYsOTguNjE2LDExNy4yMDEsMTAyLjA1MSwxMDEuOTE0eiIvPgoJPC9nPgoJPGc+CgkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik02My44MTksMTI2LjQ0M2MtMC4xMzYsMC0wLjI3MS0wLjAwNi0wLjQwOC0wLjAxMmwtMC4yMTktMC4wMDhsLTAuMTYsMC4wMDggICAgYy0wLjI4MiwwLjAxMy0wLjU2OCwwLjAyNy0wLjgyNC0wLjA0N2MtMTYuMDI3LTAuNzM1LTM5LjktMS45OTItMzkuOS0yNC42MjdjMC0xMC42MzcsNy40OTUtMTUuNzAxLDE0Ljc0My0yMC41OTkgICAgYzIuMDItMS4zNjQsNC4xMDctMi43NzQsNS45OTUtNC4yODVjNi44NjEtNS45MDUsOS4xOTMtMTAuNzI5LDEwLjg5Ni0xNC4yNTNjMS43NC0zLjYwMSwzLjEyMy02LjQ2Miw4LjIyNi02LjkzMyAgICBjMC4zMS0wLjEwNCwwLjY2NC0wLjA3NSwwLjk4NC0wLjA2NGwwLjExNCwwLjAwNGwwLjAyNC0wLjAwNGMwLjMyNy0wLjAxMSwwLjY4OC0wLjAzOCwxLjAwMywwLjA2NSAgICBjNS4wODcsMC40NzcsNi40NjksMy4zMzUsOC4yMDcsNi45MzJjMS43MDMsMy41MjMsNC4wMzUsOC4zNDgsMTAuOTM4LDE0LjI4N2MxLjg0NywxLjQ3NywzLjkzNSwyLjg4Nyw1Ljk1NCw0LjI1MSAgICBjNy4yNDgsNC44OTcsMTQuNzQzLDkuOTYyLDE0Ljc0MywyMC41OTljMCwyMi42NC0yMy44ODYsMjMuODkyLTM5LjkxMywyNC42MjhDNjQuMDk1LDEyNi40MjMsNjMuOTU5LDEyNi40NDMsNjMuODE5LDEyNi40NDN6ICAgICBNNjMuMTkyLDEyMy40MjRsMC4zMjUsMC4wMWMwLjA3Ni0wLjAxNiwwLjE1My0wLjAyNiwwLjIzMy0wLjAyOWMyMC40NTQtMC45MzgsMzcuMzg1LTMuMjE0LDM3LjM4NS0yMS42NDYgICAgYzAtOS4wNDMtNi41Mi0xMy40NDgtMTMuNDIzLTE4LjExMmMtMi4wNjgtMS4zOTctNC4yMDctMi44NDMtNi4xOS00LjQzQzc0LjEwNiw3Mi44MzcsNzEuNTE1LDY3LjQ3NSw2OS44LDYzLjkyNyAgICBjLTEuNzE3LTMuNTUzLTIuNDI4LTUuMDIzLTYuMDgzLTUuMjc0Yy0wLjA3OC0wLjAwNS0wLjE1NC0wLjAxNy0wLjIyOS0wLjAzM2MtMC4wMzQsMC4wMDEtMC4wNjgsMC4wMDItMC4xMDIsMC4wMDNsLTAuMTIsMC4wMDQgICAgbC0wLjIxLTAuMDA0Yy0wLjAzNS0wLjAwMS0wLjA3LTAuMDAyLTAuMTA1LTAuMDAzYy0wLjA3MywwLjAxNy0wLjE0OCwwLjAyOC0wLjIyNSwwLjAzM2MtMy42NTUsMC4yNTEtNC4zNjYsMS43MjItNi4wODMsNS4yNzQgICAgYy0xLjcxNSwzLjU0OC00LjMwNyw4LjkxLTExLjY4MiwxNS4yNTVjLTIuMDI0LDEuNjIxLTQuMTYzLDMuMDY2LTYuMjMxLDQuNDY0Yy02LjkwMyw0LjY2NC0xMy40MjMsOS4wNjktMTMuNDIzLDE4LjExMiAgICBjMCwxOC40MzMsMTYuOTMxLDIwLjcwOSwzNy4zODUsMjEuNjQ2YzAuMDgxLDAuMDAzLDAuMTYsMC4wMTQsMC4yMzcsMC4wMjlMNjMuMTkyLDEyMy40MjR6Ii8+Cgk8L2c+Cgk8Zz4KCQk8Zz4KCQkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik01OS4wNzcsNzYuMjEzYy0wLjU3MywwLTEuMTItMC4zMy0xLjM3LTAuODg3bC0xLjEwMi0yLjQ1N2MtMC4zMzktMC43NTYsMC0xLjY0NCwwLjc1Ni0xLjk4MiAgICAgYzAuNzU1LTAuMzM4LDEuNjQzLDAsMS45ODIsMC43NTZsMS4xMDIsMi40NTdjMC4zMzksMC43NTYsMCwxLjY0NC0wLjc1NiwxLjk4MkM1OS40OSw3Ni4xNzEsNTkuMjgyLDc2LjIxMyw1OS4wNzcsNzYuMjEzeiIvPgoJCTwvZz4KCQk8Zz4KCQkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik02Ny4zNjYsNzYuMjEzYy0wLjIwNSwwLTAuNDEzLTAuMDQyLTAuNjEyLTAuMTMxYy0wLjc1Ni0wLjMzOS0xLjA5NS0xLjIyNy0wLjc1Ni0xLjk4MiAgICAgbDEuMTAyLTIuNDU3YzAuMzQtMC43NTYsMS4yMjctMS4wOTMsMS45ODItMC43NTZjMC43NTYsMC4zMzksMS4wOTUsMS4yMjcsMC43NTYsMS45ODJsLTEuMTAyLDIuNDU3ICAgICBDNjguNDg2LDc1Ljg4Myw2Ny45MzksNzYuMjEzLDY3LjM2Niw3Ni4yMTN6Ii8+CgkJPC9nPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=',
-                        title: 'Some little bit longer title',
-                        price: '39.99',
-                        offers_accept: false
-                    },
-                    {
-                        image: 'data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxMjYuNDQzIDEyNi40NDMiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEyNi40NDMgMTI2LjQ0MzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxnPgoJPGc+CgkJPGc+CgkJCTxwYXRoIHN0eWxlPSJmaWxsOiMzMzM2M0E7IiBkPSJNNjMuMjIyLDIzLjMzNmMtMS42NTcsMC0zLTEuMzQzLTMtM1YzYzAtMS42NTcsMS4zNDMtMywzLTNzMywxLjM0MywzLDN2MTcuMzM2ICAgICBDNjYuMjIyLDIxLjk5Myw2NC44NzksMjMuMzM2LDYzLjIyMiwyMy4zMzZ6Ii8+CgkJPC9nPgoJCTxnPgoJCQk8Zz4KCQkJCTxwYXRoIHN0eWxlPSJmaWxsOiMzMzM2M0E7IiBkPSJNNjAuMDQ0LDI2LjMwMWMtMC45NjksMC0xLjkxOS0wLjQ2OC0yLjQ5Ny0xLjMzM2wtOS42MzYtMTQuNDE2ICAgICAgYy0wLjkyMS0xLjM3Ny0wLjU1MS0zLjI0LDAuODI3LTQuMTYxYzEuMzc3LTAuOTIyLDMuMjQxLTAuNTUsNC4xNjEsMC44MjdsOS42MzYsMTQuNDE2YzAuOTIxLDEuMzc3LDAuNTUxLDMuMjQtMC44MjcsNC4xNjEgICAgICBDNjEuMTk2LDI2LjEzOCw2MC42MTcsMjYuMzAxLDYwLjA0NCwyNi4zMDF6Ii8+CgkJCTwvZz4KCQkJPGc+CgkJCQk8cGF0aCBzdHlsZT0iZmlsbDojMzMzNjNBOyIgZD0iTTY2LjM5OSwyNi4zMDFjLTAuNTczLDAtMS4xNTItMC4xNjMtMS42NjQtMC41MDZjLTEuMzc4LTAuOTIxLTEuNzQ4LTIuNzg0LTAuODI3LTQuMTYxICAgICAgbDkuNjM2LTE0LjQxNmMwLjkyLTEuMzc3LDIuNzg0LTEuNzQ5LDQuMTYxLTAuODI3YzEuMzc4LDAuOTIxLDEuNzQ4LDIuNzg0LDAuODI3LDQuMTYxbC05LjYzNiwxNC40MTYgICAgICBDNjguMzE4LDI1LjgzMyw2Ny4zNjgsMjYuMzAxLDY2LjM5OSwyNi4zMDF6Ii8+CgkJCTwvZz4KCQk8L2c+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRkZGODAwOyIgZD0iTTExMi40MzEsNjkuNTFjMCwyMC42NzYtMjIuMDMyLDM3LjQ0MS00OS4yMDksMzcuNDQxYy0yNy4xNzgsMC00OS4yMDktMTYuNzY2LTQ5LjIwOS0zNy40NDEgICAgYzAtMjAuNjgsMjIuMDMxLTQ1LjQ1OSw0OS4yMDktNDUuNDU5QzkwLjM5OCwyNC4wNTEsMTEyLjQzMSw0OC44MywxMTIuNDMxLDY5LjUxeiIvPgoJPC9nPgoJPGc+CgkJPHBhdGggc3R5bGU9ImZpbGw6I0ZGRDQwMDsiIGQ9Ik0xMTIuNDMxLDY5LjUxYzAsMjAuNjc2LTIyLjAzMiwzNy40NDEtNDkuMjA5LDM3LjQ0MWMtMjcuMTc4LDAtNDkuMjA5LTE2Ljc2Ni00OS4yMDktMzcuNDQxICAgIGMwLTIwLjY4LDIyLjAzMS0zNC45MjgsNDkuMjA5LTM0LjkyOEM5MC4zOTgsMzQuNTgyLDExMi40MzEsNDguODMsMTEyLjQzMSw2OS41MXoiLz4KCTwvZz4KCTxnPgoJCTxwYXRoIHN0eWxlPSJmaWxsOiNGRkY4MDA7IiBkPSJNNzMuNzAxLDU4LjM2N2MwLDEuMzk1LTQuNjkxLDEuNjQ1LTEwLjQ3OSwxLjY0NXMtMTAuNDc5LTAuMjUtMTAuNDc5LTEuNjQ1ICAgIGMwLTEuMzkzLDQuNjkxLTUuMDM1LDEwLjQ3OS01LjAzNVM3My43MDEsNTYuOTc1LDczLjcwMSw1OC4zNjd6Ii8+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRkZCMDAwOyIgZD0iTTExMi40MzEsNjkuNTFjMCwyMC42NzYtMjIuMDMyLDM3LjQ0MS00OS4yMDksMzcuNDQxYy0yNy4xNzgsMC00OS4yMDktMTYuNzY2LTQ5LjIwOS0zNy40NDEgICAgYzAtMjAuNjgyLDYuMjYxLDE4LjM0LDQ5LjIwOSwxOC4zNFMxMTIuNDMxLDQ4LjgyOCwxMTIuNDMxLDY5LjUxeiIvPgoJPC9nPgoJPGc+CgkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik02My4yMjIsMTA4LjQ1MWMtMjcuOTYxLDAtNTAuNzA5LTE3LjQ2OS01MC43MDktMzguOTQxYzAtMjEuMjcsMjIuNjE5LTQ2Ljk1OSw1MC43MDktNDYuOTU5ICAgIHM1MC43MDksMjUuNjg5LDUwLjcwOSw0Ni45NTlDMTEzLjkzMSw5MC45ODIsOTEuMTgzLDEwOC40NTEsNjMuMjIyLDEwOC40NTF6IE02My4yMjIsMjUuNTUxICAgIGMtMjYuNDI4LDAtNDcuNzA5LDI0LjA0OC00Ny43MDksNDMuOTU5YzAsMTkuODE4LDIxLjQwMiwzNS45NDEsNDcuNzA5LDM1Ljk0MXM0Ny43MDktMTYuMTIzLDQ3LjcwOS0zNS45NDEgICAgQzExMC45MzEsNDkuNTk5LDg5LjY0OSwyNS41NTEsNjMuMjIyLDI1LjU1MXoiLz4KCTwvZz4KCTxnPgoJCTxnPgoJCQk8Zz4KCQkJCTxnPgoJCQkJCTxnPgoJCQkJCQk8cGF0aCBzdHlsZT0iZmlsbDojMzMzNjNBOyIgZD0iTTQ3LjA2LDYwLjgyMmMtMC44MjgsMC0xLjUtMC42NzItMS41LTEuNWMwLTAuODctMi40ODctMi40NjktNi41NTItMi40NjkgICAgICAgIGMtNC4wNjMsMC02LjU1MSwxLjU5OS02LjU1MSwyLjQ2OWMwLDAuODI4LTAuNjcyLDEuNS0xLjUsMS41cy0xLjUtMC42NzItMS41LTEuNWMwLTMuMTE4LDQuMTA1LTUuNDY5LDkuNTUxLTUuNDY5ICAgICAgICBzOS41NTIsMi4zNTEsOS41NTIsNS40NjlDNDguNTYsNjAuMTUsNDcuODg4LDYwLjgyMiw0Ny4wNiw2MC44MjJ6Ii8+CgkJCQkJPC9nPgoJCQkJPC9nPgoJCQk8L2c+CgkJCTxnPgoJCQkJPGc+CgkJCQkJPGc+CgkJCQkJCTxwYXRoIHN0eWxlPSJmaWxsOiMzMzM2M0E7IiBkPSJNOTUuNDg2LDYwLjgyMmMtMC44MjgsMC0xLjUtMC42NzItMS41LTEuNWMwLTAuODctMi40ODctMi40NjktNi41NTEtMi40NjkgICAgICAgIGMtNC4wNjQsMC02LjU1MiwxLjU5OS02LjU1MiwyLjQ2OWMwLDAuODI4LTAuNjcyLDEuNS0xLjUsMS41cy0xLjUtMC42NzItMS41LTEuNWMwLTMuMTE4LDQuMTA2LTUuNDY5LDkuNTUyLTUuNDY5ICAgICAgICBzOS41NTEsMi4zNTEsOS41NTEsNS40NjlDOTYuOTg2LDYwLjE1LDk2LjMxNCw2MC44MjIsOTUuNDg2LDYwLjgyMnoiLz4KCQkJCQk8L2c+CgkJCQk8L2c+CgkJCTwvZz4KCQk8L2c+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRkZGNEM3OyIgZD0iTTEwMi42MzYsMTAxLjc1OGMwLTEyLjY5Ny0xMS41NzMtMTYuODMtMjAuMTc2LTIzLjcxM2MtMTQuMzkzLTEyLjM4My05LjY2My0yMC4yNzMtMTguNjQxLTIwLjg4OSAgICB2LTAuMDQzYy0wLjIwOSwwLTAuNDAxLDAuMDA4LTAuNTk4LDAuMDE0Yy0wLjE5Ni0wLjAwNi0wLjM4OS0wLjAxNC0wLjU5OC0wLjAxNHYwLjA0M2MtOC45NzgsMC42MTUtNC4yNDgsOC41MDYtMTguNjQxLDIwLjg4OSAgICBjLTguNjAzLDYuODgzLTIwLjE3NiwxMS4wMTYtMjAuMTc2LDIzLjcxM2MwLDIwLjUwNiwyMC4zMTksMjIuMjk3LDM4LjgxNiwyMy4xNDV2MC4wNDFjMC4xOTgsMCwwLjM5OC0wLjAxNiwwLjU5OC0wLjAyICAgIGMwLjE5OSwwLjAwNCwwLjM5OSwwLjAyLDAuNTk4LDAuMDJ2LTAuMDQxQzgyLjMxNiwxMjQuMDU1LDEwMi42MzYsMTIyLjI2NCwxMDIuNjM2LDEwMS43NTh6Ii8+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBzdHlsZT0iZmlsbDojRTBENUE0OyIgZD0iTTEwMi4wNTEsMTAxLjkxNEM5OS42MDQsOTAuMjA3LDg5LjkxOCw4OS40MTIsODIuNDYsODMuNDQ1ICAgIGMtMTQuMzkzLTEyLjM4My05LjY2My0yMC4yNzItMTguNjQxLTIwLjg4OXYtMC4wNDNjLTAuMjA5LDAtMC40MDEsMC4wMS0wLjU5OCwwLjAxNmMtMC4xOTYtMC4wMDYtMC4zODktMC4wMTYtMC41OTgtMC4wMTZ2MC4wNDMgICAgYy04Ljk3OCwwLjYxNy00LjI0OCw4LjUwNi0xOC42NDEsMjAuODg5Yy03LjQ1OCw1Ljk2Ny0xNy4xNDQsNi43NjItMTkuNTkxLDE4LjQ2OWMzLjQzNSwxNS4yODcsMjEuNTY4LDE2LjgyMiwzOC4yMzEsMTcuNTg4ICAgIHYwLjA0MWMwLjE5OCwwLDAuMzk4LTAuMDE2LDAuNTk4LTAuMDIxYzAuMTk5LDAuMDA2LDAuMzk5LDAuMDIxLDAuNTk4LDAuMDIxdi0wLjA0MSAgICBDODAuNDgyLDExOC43MzYsOTguNjE2LDExNy4yMDEsMTAyLjA1MSwxMDEuOTE0eiIvPgoJPC9nPgoJPGc+CgkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik02My44MTksMTI2LjQ0M2MtMC4xMzYsMC0wLjI3MS0wLjAwNi0wLjQwOC0wLjAxMmwtMC4yMTktMC4wMDhsLTAuMTYsMC4wMDggICAgYy0wLjI4MiwwLjAxMy0wLjU2OCwwLjAyNy0wLjgyNC0wLjA0N2MtMTYuMDI3LTAuNzM1LTM5LjktMS45OTItMzkuOS0yNC42MjdjMC0xMC42MzcsNy40OTUtMTUuNzAxLDE0Ljc0My0yMC41OTkgICAgYzIuMDItMS4zNjQsNC4xMDctMi43NzQsNS45OTUtNC4yODVjNi44NjEtNS45MDUsOS4xOTMtMTAuNzI5LDEwLjg5Ni0xNC4yNTNjMS43NC0zLjYwMSwzLjEyMy02LjQ2Miw4LjIyNi02LjkzMyAgICBjMC4zMS0wLjEwNCwwLjY2NC0wLjA3NSwwLjk4NC0wLjA2NGwwLjExNCwwLjAwNGwwLjAyNC0wLjAwNGMwLjMyNy0wLjAxMSwwLjY4OC0wLjAzOCwxLjAwMywwLjA2NSAgICBjNS4wODcsMC40NzcsNi40NjksMy4zMzUsOC4yMDcsNi45MzJjMS43MDMsMy41MjMsNC4wMzUsOC4zNDgsMTAuOTM4LDE0LjI4N2MxLjg0NywxLjQ3NywzLjkzNSwyLjg4Nyw1Ljk1NCw0LjI1MSAgICBjNy4yNDgsNC44OTcsMTQuNzQzLDkuOTYyLDE0Ljc0MywyMC41OTljMCwyMi42NC0yMy44ODYsMjMuODkyLTM5LjkxMywyNC42MjhDNjQuMDk1LDEyNi40MjMsNjMuOTU5LDEyNi40NDMsNjMuODE5LDEyNi40NDN6ICAgICBNNjMuMTkyLDEyMy40MjRsMC4zMjUsMC4wMWMwLjA3Ni0wLjAxNiwwLjE1My0wLjAyNiwwLjIzMy0wLjAyOWMyMC40NTQtMC45MzgsMzcuMzg1LTMuMjE0LDM3LjM4NS0yMS42NDYgICAgYzAtOS4wNDMtNi41Mi0xMy40NDgtMTMuNDIzLTE4LjExMmMtMi4wNjgtMS4zOTctNC4yMDctMi44NDMtNi4xOS00LjQzQzc0LjEwNiw3Mi44MzcsNzEuNTE1LDY3LjQ3NSw2OS44LDYzLjkyNyAgICBjLTEuNzE3LTMuNTUzLTIuNDI4LTUuMDIzLTYuMDgzLTUuMjc0Yy0wLjA3OC0wLjAwNS0wLjE1NC0wLjAxNy0wLjIyOS0wLjAzM2MtMC4wMzQsMC4wMDEtMC4wNjgsMC4wMDItMC4xMDIsMC4wMDNsLTAuMTIsMC4wMDQgICAgbC0wLjIxLTAuMDA0Yy0wLjAzNS0wLjAwMS0wLjA3LTAuMDAyLTAuMTA1LTAuMDAzYy0wLjA3MywwLjAxNy0wLjE0OCwwLjAyOC0wLjIyNSwwLjAzM2MtMy42NTUsMC4yNTEtNC4zNjYsMS43MjItNi4wODMsNS4yNzQgICAgYy0xLjcxNSwzLjU0OC00LjMwNyw4LjkxLTExLjY4MiwxNS4yNTVjLTIuMDI0LDEuNjIxLTQuMTYzLDMuMDY2LTYuMjMxLDQuNDY0Yy02LjkwMyw0LjY2NC0xMy40MjMsOS4wNjktMTMuNDIzLDE4LjExMiAgICBjMCwxOC40MzMsMTYuOTMxLDIwLjcwOSwzNy4zODUsMjEuNjQ2YzAuMDgxLDAuMDAzLDAuMTYsMC4wMTQsMC4yMzcsMC4wMjlMNjMuMTkyLDEyMy40MjR6Ii8+Cgk8L2c+Cgk8Zz4KCQk8Zz4KCQkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik01OS4wNzcsNzYuMjEzYy0wLjU3MywwLTEuMTItMC4zMy0xLjM3LTAuODg3bC0xLjEwMi0yLjQ1N2MtMC4zMzktMC43NTYsMC0xLjY0NCwwLjc1Ni0xLjk4MiAgICAgYzAuNzU1LTAuMzM4LDEuNjQzLDAsMS45ODIsMC43NTZsMS4xMDIsMi40NTdjMC4zMzksMC43NTYsMCwxLjY0NC0wLjc1NiwxLjk4MkM1OS40OSw3Ni4xNzEsNTkuMjgyLDc2LjIxMyw1OS4wNzcsNzYuMjEzeiIvPgoJCTwvZz4KCQk8Zz4KCQkJPHBhdGggc3R5bGU9ImZpbGw6IzMzMzYzQTsiIGQ9Ik02Ny4zNjYsNzYuMjEzYy0wLjIwNSwwLTAuNDEzLTAuMDQyLTAuNjEyLTAuMTMxYy0wLjc1Ni0wLjMzOS0xLjA5NS0xLjIyNy0wLjc1Ni0xLjk4MiAgICAgbDEuMTAyLTIuNDU3YzAuMzQtMC43NTYsMS4yMjctMS4wOTMsMS45ODItMC43NTZjMC43NTYsMC4zMzksMS4wOTUsMS4yMjcsMC43NTYsMS45ODJsLTEuMTAyLDIuNDU3ICAgICBDNjguNDg2LDc1Ljg4Myw2Ny45MzksNzYuMjEzLDY3LjM2Niw3Ni4yMTN6Ii8+CgkJPC9nPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=',
-                        title: 'Some short title',
-                        price: '0.99',
-                        offers_accept: true
-                    },
-                ]
             }
         },
         methods: {
@@ -85,5 +566,112 @@
 </script>
 
 <style lang="scss" scoped>
+    .assets-list__item{
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        background: #1C2032;
+        padding: 10px;
+        margin: 0 0 15px;
+        width: calc( 33% - 8px );
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @media only screen and (min-width: 1400px){
+            width: calc( 25% - 8px );
+        }
+        .thumb{
+            display: inline-block;
+            float: left;
+            width: 25%;
+            img{
+                width: 100%;
+                height: auto;
+            }
+        }
+        .info{
+            display: inline-block;
+            width: 70%;
+            float: right;
+            span{
+                i{
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+    .grid{
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        .item_container{
+            padding: 4px;
+            width: calc(100%/9);
+            .item{
+                border: 1px solid rgba(255, 255, 255, .8);
+                border-radius: 5px;
+                width: 100%;
+                position: relative;
+                display: inline-block;
+                float: left;
+                &:before{
+                    content: "";
+                    padding-top: 100%;
+                    float: left;
+                }
+                .item_info{
+                    border-radius: 5px;
+                    background: #3D3E5D;
+                    padding: 10px;
+                    box-shadow: 0 0 25px rgba(0, 0, 0, .6);
+                    justify-content: space-between;
+                    align-items: center;
+                    position: absolute;
+                    width: 230px;
+                    left: calc( 50% + 15px );
+                    z-index: 100;
+                    height: 80px;
+                    top: calc( 50% - 40px );
+                    display: none;
+                    &:before{
+                        display: flex;
+                        width: 30px;
+                        height: 30px;
+                        position: absolute;
+                        left: -15px;
+                        top: calc( 50% - 15px );
+                        content: "";
+                        background: #3D3E5D;
+                        transform: rotate(45deg);
+                        box-shadow: -7px 7px 14px rgba(0, 0, 0, .2);
+                    }
+                    .thumb{
+                        display: inline-block;
+                        float: left;
+                        width: 25%;
+                        img{
+                            width: 100%;
+                            height: auto;
+                        }
+                    }
+                    .info{
+                        display: inline-block;
+                        width: 70%;
+                        float: right;
+                        span{
+                            i{
+                                margin-right: 5px;
+                            }
+                        }
+                    }
+                }
+                &:hover{
+                    .item_info{
+                        display: flex;
+                    }
+                }
+            }
+        }
+    }
 </style>
 
