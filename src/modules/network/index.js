@@ -3,6 +3,7 @@ import schema from './schema'
 import * as Ethereum from '../../framework/ethereum'
 import * as PeerService from '../../framework/peer-service'
 import * as db from '@/db'
+import Token from 'hyperbridge-token'
 
 let rawData = {}
 
@@ -25,7 +26,13 @@ const updateState = () => {
 
 updateState()
 
-export const getters = {}
+export const getters = {
+    privileges() {
+        return [
+            'edit'
+        ]
+    }
+}
 
 export const actions = {
     connect(store, payload) {
@@ -37,6 +44,24 @@ export const actions = {
         setInterval(() => {
             store.dispatch('checkEthereumConnection')
         }, 5000)
+    },
+    updateState(store, payload) {
+        console.log('[BlockHub][Marketplace] Updating store...')
+
+        updateState()
+
+        store.commit('updateState', state)
+    },
+    initEthereum(store, payload) {
+        if (store.state.ethereum[store.state.current_ethereum_network].contracts.Token
+            && store.state.ethereum[store.state.current_ethereum_network].contracts.Token.address) {
+            Token.Ethereum.Models.Token.init(
+                Token.Ethereum.Contracts.Token,
+                store.state.ethereum[store.state.current_ethereum_network].contracts.Token.address,
+                store.state.ethereum[store.state.current_ethereum_network].user_from_address,
+                store.state.ethereum[store.state.current_ethereum_network].user_to_address
+            )
+        }
     },
     checkEthereumConnection(store, payload) {
         const success = () => {
@@ -87,7 +112,7 @@ export const actions = {
             }
         }
 
-        xhr.addEventListener("readystatechange", processRequest, false)
+        xhr.addEventListener('readystatechange', processRequest, false)
     },
     signIn(store, payload) {
         store.commit('signIn', payload)
@@ -98,16 +123,56 @@ export const actions = {
 }
 
 export const mutations = {
+    updateState(s, payload) {
+        for (let x in payload) {
+            s[x] = payload[x]
+        }
+    },
     signIn(state, payload) {
         state.signed_in = true
+
+        db.network.config.update(state)
+        db.save()
     },
     signOut(state, payload) {
         state.signed_in = false
+
+        db.network.config.update(state)
+        db.save()
     },
     beforeLoadRoute(state, payload) {
         state.loading = true
     },
     afterLoadRoute(state, payload) {
         state.loading = false
+    },
+    submitTransaction(state, payload) {
+        const success = (id) => {
+        }
+
+    },
+    async deployContract(state, payload) {
+        if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {
+            state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = {
+                created_at: null,
+                address: null
+            }
+        }
+
+        const meta = Token.Ethereum.Contracts[payload.contractName]
+        const contract = new window.web3.eth.Contract(meta.abi)
+
+        contract.deploy({
+            data: meta.bytecode
+        }).send({
+            from: state.ethereum[state.current_ethereum_network].user_from_address,
+            gas: 4500000
+        }).then((res) => {
+            state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
+            state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = res._address
+
+            db.network.config.update(state)
+            db.save()
+        })
     }
 }

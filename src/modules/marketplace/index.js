@@ -53,12 +53,15 @@ export const actions = {
         store.commit('updateState', state)
     },
     initEthereum(store, payload) {
-        MarketplaceProtocol.Ethereum.Models.Marketplace.init(
-            MarketplaceProtocol.Ethereum.Contracts.Marketplace,
-            store.state.network[store.state.current_network].contracts.Marketplace.address,
-            store.state.network[store.state.current_network].user_from_address,
-            store.state.network[store.state.current_network].user_to_address
-        )
+        if (store.state.ethereum[store.state.current_ethereum_network].contracts.Marketplace
+            && store.state.ethereum[store.state.current_ethereum_network].contracts.Marketplace.address) {
+            MarketplaceProtocol.Ethereum.Models.Marketplace.init(
+                MarketplaceProtocol.Ethereum.Contracts.Marketplace,
+                store.state.ethereum[store.state.current_ethereum_network].contracts.Marketplace.address,
+                store.state.ethereum[store.state.current_ethereum_network].user_from_address,
+                store.state.ethereum[store.state.current_ethereum_network].user_to_address
+            )
+        }
     },
     updateState(store, payload) {
         console.log("[BlockHub][Marketplace] Updating store...")
@@ -140,7 +143,7 @@ export const mutations = {
             Vue.set(state.products, id, product)
         }
 
-        MarketplaceProtocol.Ethereum.Models.Marketplace.createProduct({
+        MarketplaceProtocol.ethereum.modules.marketplace.createProduct({
             name: payload.name,
             version: '1',
             category: '1',
@@ -154,22 +157,22 @@ export const mutations = {
     submitProductForReviewResponse(state, product) {
         db.marketplace.products.update(product)
     },
-    deployContract(state, payload) {
-        const meta = MarketplaceProtocol.Ethereum.Contracts[payload.contractName]
-        const contract = new window.web3.eth.Contract(meta.abi)
+    async deployContract(state, payload) {
+        if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {
+            state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = {
+                created_at: null,
+                address: null
+            }
+        }
 
-        contract.deploy({
-            data: meta.bytecode
-        }).send({
-            from: state.network[state.current_network].user_from_address,
-            gas: 4500000
-        }).then((res) => {
-            state.network[state.current_network].contracts[payload.contractName].created_at = Date.now()
-            state.network[state.current_network].contracts[payload.contractName].address = res._address
+        MarketplaceProtocol.ethereum.modules.marketplace.deployContract(payload.contractName, state.ethereum[state.current_ethereum_network].user_from_address).then((res) => {
+            state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
+            state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = res._address
 
             db.marketplace.config.update(state)
             db.save()
         })
+        
     }
 }
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="col-12">
+    <div class="heading-bar">
         <h3 class="heading-bar__name" :class="{ 'heading-bar__name--with-bg': showBackground }">{{ name }}</h3>
         <div class="heading-bar__nav" v-if="showArrows">
             <a href="#3" class="nav-prev">

@@ -4,14 +4,35 @@
         "loading": false,
         "connection": {
             "internet": false,
-            "datasource": false,
-            "operator": false,
-            "ethereum": false,
+            "datasource": true,
+            "operator": true,
+            "ethereum": true,
             "status": {
                 "code": null,
                 "message": "Establishing connection..."
             }
         },
+        "ethereum": {
+            "ropsten": {
+                "contracts": {
+                    "Token": {},
+                    "TokenDelegate": {},
+                    "EternalStorage": {}
+                },
+                "user_from_address": "0x66fb0ff9a23e90f3f205a406fd3253532919fb69",
+                "user_to_address": null
+            },
+            "local": {
+                "contracts": {
+                    "Token": {},
+                    "TokenDelegate": {},
+                    "EternalStorage": {}
+                },
+                "user_from_address": "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
+                "user_to_address": null
+            }
+        },
+        "current_ethereum_network": "local",
         "user_submitted_connection_messages": [
             {
                 "id": "1",
@@ -147,6 +168,177 @@
         }
     },
     "funding": {
+        "ethereum": {
+            "ropsten": {
+                "user_from_address": "0x66fb0ff9a23e90f3f205a406fd3253532919fb69",
+                "user_to_address": null,
+                "contracts": {}
+            },
+            "local": {
+                "user_from_address": "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
+                "user_to_address": null,
+                "contracts": {
+                    "FundingStorage": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "DeveloperStorageAccess": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ContributionStorageAccess": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectStorageAccess": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "CurationStorageAccess": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "FundingVault": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "Developer": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "Contribution": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectBase": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectTimeline": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectTimelineHelpersLibrary": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectTimelineProposal": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectContributionTierHelpersLibrary": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectMilestoneCompletion": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "ProjectRegistration": {
+                        "created_at": null,
+                        "address": null
+                    },
+                    "Curation": {
+                        "created_at": null,
+                        "address": null
+                    }
+                }
+            }
+        },
+        "current_ethereum_network": "local",
+        "default_project": {
+            "name": "My Project Name",
+            "system_tags": [],
+            "images": {},
+            "author": "0x0",
+            "author_tags": [
+                "game"
+            ],
+            "content": "<h2>An adventure of a lifetime...</h2>\n<p>Any new features or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.</p><p>Our store is hosted on Shopify Inc. They provide us with the online e-commerce platform that allows us to sell our products and services to you.</p> IMAGE LIST",
+            "likes": 0,
+            "comments": [],
+            "contributors": [],
+            "moderators": [],
+            "community": {
+                "discussions": [
+                    {
+                        "name": "[GUIDE] Short Title",
+                        "count": "381",
+                        "link": "#3"
+                    },
+                    {
+                        "name": "Just Title",
+                        "count": "31",
+                        "link": "#4"
+                    },
+                    {
+                        "name": "Just Some a Little bit long Title",
+                        "count": "1701",
+                        "link": "#5"
+                    }
+                ]
+            },
+            "funding": {
+                "stages": [
+                    {
+                        "status": "done",
+                        "text": "m1"
+                    },
+                    {
+                        "status": "done",
+                        "text": "m2"
+                    },
+                    {
+                        "status": "in_progress",
+                        "text": "m3"
+                    },
+                    {
+                        "status": "awaiting",
+                        "text": "m4"
+                    },
+                    {
+                        "status": "awaiting",
+                        "text": "m5"
+                    },
+                    {
+                        "status": "awaiting",
+                        "text": "m6"
+                    }
+                ],
+                "funded_amount": "202,190.63",
+                "goal_amount": "200,000.00",
+                "spent_amount": {
+                    "amount": "32,000",
+                    "percent": "37"
+                },
+                "locked_amount": {
+                    "amount": "182,242",
+                    "percent": "71"
+                },
+                "overflow_amount": {
+                    "amount": "17,342",
+                    "percent": "12"
+                }
+            },
+            "milestones": [
+                {
+                    "text": "Create the base game with 2 dungeons",
+                    "status": "done"
+                },
+                {
+                    "text": "New Class, storyline and weapons type",
+                    "status": "done"
+                },
+                {
+                    "text": "Level cap updated to 90 with new set of armors and weapons.",
+                    "step_number": "3"
+                },
+                {
+                    "text": "Add 3 extra dungeons",
+                    "step_number": "4"
+                }
+            ]
+        },
         "projects": [
             {
                 "id": "1",
@@ -306,31 +498,25 @@
         ]
     },
     "marketplace": {
-        "network": {
+        "ethereum": {
             "ropsten": {
                 "contracts": {
-                    "Marketplace": {
-                        "created_at": null,
-                        "address": "0x7ed7885cbc32668242a53b806ce676980ebb084e"
-                    }
+                    "Marketplace": {}
                 },
                 "user_from_address": "0x66fb0ff9a23e90f3f205a406fd3253532919fb69",
                 "user_to_address": null
             },
             "local": {
                 "contracts": {
-                    "Marketplace": {
-                        "created_at": null,
-                        "address": null
-                    }
+                    "Marketplace": {}
                 },
                 "user_from_address": "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
                 "user_to_address": null
             }
         },
+        "current_ethereum_network": "local",
         "developer_enabled": true,
-        "editor_mode": false,
-        "current_network": "local",
+        "editor_mode": "viewing",
         "selected_product": null,
         "frontpage_product": {},
         "new_products": [],

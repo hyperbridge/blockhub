@@ -1,20 +1,11 @@
 <template>
     <c-layout navigationKey="settings-navigation">
         <div class="content" id="content">
-            <div class="container-fluid">  
-                <div class="row">
-                    <div class="col-12">
-                        Settings
-                        <br />
-                        <div class="card invert">
-                            <c-heading-bar name="Log" :showArrows="false" />
-                            <div class="console-log" ref="consoleLog" v-html="consoleLogMessages">
-                                {{ consoleLogMessages }}
-                            </div>
-                        </div>
-                    </div>
+            <c-block-1 title="Settings">
+                <div class="console-log" ref="consoleLog" v-html="consoleLogMessages">
+                    {{ consoleLogMessages }}
                 </div>
-            </div>
+            </c-block-1>
         </div>
     </c-layout>
 </template>
@@ -23,7 +14,7 @@
 export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default'),
-        'c-heading-bar': () => import('@/ui/components/heading-bar')
+        'c-block-1': () => import('@/ui/components/block-1')
     },
     data() {
         return {

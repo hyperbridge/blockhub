@@ -27,10 +27,13 @@
         display: flex;
         justify-content: space-between;
         align-items: stretch;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 6px;
+        margin-bottom: 10px;
+        padding: 10px;
     }
     .screen-gallery__main-img{
-        width: 70%;
-        padding-right: 5px;
+        width: calc(100% - 120px);
         img{
             width: 100%;
             height: 230px;
@@ -38,13 +41,14 @@
         }
     }
     .screen-gallery__thumb-nav{
-        width: 30%;
-        padding-left: 5px;
+        width: 110px;
         ul{
             padding: 0;
             li{
                 list-style: none;
                 margin-bottom: 10px;
+                background: rgba(0, 0, 0, 0.3);
+
                 img{
                     width: 100%;
                     height: 70px;
