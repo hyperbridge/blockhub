@@ -36,6 +36,37 @@
                             <img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
                         </div>
                     </div>
+                    <div class="col-12 d-flex margin-top-30 justify-content-end">
+                        <div class="identity__wallet">
+                            <i class="fas fa-copy"></i>
+                            <span id="wallet_number">jbkjBhBJIBXIUi8plmPOJOnoNCYTcPSkSOsvsdf08Uhg7gBU</span>
+                        </div>
+                        <div class="identity__action-group">
+                            <a href="#3" class="btn btn-sm btn-info">
+                                <i class="fas fa-arrow-up"></i>
+                                Send funds
+                            </a>
+                            <a href="#3" class="btn btn-sm btn-info">
+                                <i class="fas fa-share"></i>
+                                Share
+                            </a>
+                            <a href="#3" class="btn btn-sm btn-danger">
+                                <i class="fas fa-times"></i>
+                                report
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="identity__user-notify">
+                            <h3>Create your BlockHub Profile</h3>
+                            <p>BlockHub is the best place for curated community-driven game development,
+                                digital assets and micro-licensing. Sugn up for your own account and build
+                                the future of gaming.</p>
+                            <a href="#3" class="btn btn-success">
+                                Sign Up
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -115,6 +146,49 @@
             height: 40px;
             margin-left: 20px;
             width: auto;
+        }
+    }
+    .identity__wallet{
+        width: auto;
+        line-height: 30px;
+        margin-right: 15px;
+        span{
+            margin-left: 10px;
+            width: 200px;
+            text-overflow: ellipsis;
+            display: inline-block;
+            overflow: hidden;
+            float: right;
+        }
+    }
+    .identity__action-group{
+        width: auto;
+        a{
+            margin: 0 0 0 15px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        &:first-child{
+            margin-left: 0;
+        }
+    }
+    .identity__user-notify{
+        padding: 25px 40px;
+        text-align: center;
+        position: relative;
+        border-radius: 5px;
+        background: rgba(28, 32, 59, .5);
+        margin: 30px 0 0;
+        h3{
+            font-size: 21px;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+        }
+        p{
+            font-size: 18px;
+            line-height: 23px;
+            margin: 20px 0;
         }
     }
 </style>
