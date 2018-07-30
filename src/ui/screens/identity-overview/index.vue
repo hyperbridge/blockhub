@@ -58,6 +58,9 @@
                     </div>
                     <div class="col-12">
                         <div class="identity__user-notify">
+                            <a href="#3" class="btn btn-close">
+                                <i class="fas fa-times"></i>
+                            </a>
                             <h3>Create your BlockHub Profile</h3>
                             <p>BlockHub is the best place for curated community-driven game development,
                                 digital assets and micro-licensing. Sugn up for your own account and build
