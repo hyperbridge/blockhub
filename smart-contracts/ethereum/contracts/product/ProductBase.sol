@@ -1,7 +1,7 @@
 pragma solidity ^0.4.24;
 
 import "./MarketplaceStorage.sol";
-import "./libraries/storage/ProductStorageAccess.sol";
+import "../libraries/storage/ProductStorageAccess.sol";
 
 contract ProductBase {
 

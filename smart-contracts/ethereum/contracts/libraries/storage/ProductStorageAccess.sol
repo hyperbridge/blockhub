@@ -15,11 +15,16 @@ library ProductStorageAccess {
         associated namespace:
             string title                                                    (product.title)
             bytes32 type                                                    (product.type)
+            string content                                                  (product.content)
             ProduceBase.Status Status                                       (product.status)
             bytes32[] systemTags                                            (product.systemTags)
             bytes32[] authorTags                                            (product.authorTags)
             address developer                                               (product.developer)
             uint developerId                                                (product.developerId)
+            PricePlan[] pricePlans
+                string code                                                 (product.pricePlans.code)
+                string name                                                 (product.pricePlans.name)
+                uint price                                                  (product.pricePlans.price)
     */
 
     /**** Getters *******/
@@ -44,6 +49,10 @@ library ProductStorageAccess {
 
     function getProductStatus(MarketplaceStorage _storage, uint _productId) internal view returns (uint) {
         return _storage.getUint(keccak256(abi.encodePacked("product.status", _productId)));
+    }
+
+    function getProductContent(MarketplaceStorage _storage, uint _productId) internal view returns (string) {
+        return _storage.getString(keccak256(abi.encodePacked("product.content", _productId)));
     }
 
     function getProductSystemTagsLength(MarketplaceStorage _storage, uint _productId) internal view returns (uint) {
@@ -117,6 +126,10 @@ library ProductStorageAccess {
 
     function setProductStatus(MarketplaceStorage _storage, uint _productId, uint _status) internal {
         return _storage.setUint(keccak256(abi.encodePacked("product.status", _productId)), _status);
+    }
+
+    function setProductContent(MarketplaceStorage _storage, uint _productId, string _content) internal {
+        return _storage.setString(keccak256(abi.encodePacked("product.content", _productId)), _content);
     }
 
     function setProductSystemTagsLength(MarketplaceStorage _storage, uint _productId, uint _length) internal {

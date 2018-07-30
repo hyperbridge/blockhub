@@ -15,7 +15,7 @@ contract ProductRegistration is ProductBase {
         marketplaceStorage.incrementNextProductId();
     }
 
-    function createProduct(string _title, bytes32 _type, bytes32[] _systemTags, bytes32[] _authorTags) external {
+    function createProduct(string _title, bytes32 _type, string _content, bytes32[] _systemTags, bytes32[] _authorTags) external {
         // Verify that sender is a developer
         uint developerId = marketplaceStorage.getDeveloperId(msg.sender);
         require(developerId != 0, "This address is not a developer.");
@@ -25,6 +25,7 @@ contract ProductRegistration is ProductBase {
         marketplaceStorage.setProductTitle(productId, _title);
         marketplaceStorage.setProductStatus(productId, uint(Status.Draft));
         marketplaceStorage.setProductType(productId, _type);
+        marketplaceStorage.setProductContent(productId, _content);
         marketplaceStorage.setProductDeveloper(productId, msg.sender);
         marketplaceStorage.setProductDeveloperId(productId, _developerId);
 
@@ -68,6 +69,7 @@ contract ProductRegistration is ProductBase {
             uint status,
             string title,
             bytes32 type,
+            string content,
             bytes32[] systemTags,
             bytes32[] authorTags,
             address developer,
@@ -75,11 +77,12 @@ contract ProductRegistration is ProductBase {
         )
     {
         id = _productId;
-        status = marketplaceStorage.getProjectStatus(_productId);
-        title = marketplaceStorage.getProjectTitle(_productId);
-        type = marketplaceStorage.getProjectType(_productId);
-        developer = marketplaceStorage.getProjectDeveloper(_productId);
-        developerId = marketplaceStorage.getProjectDeveloperId(_productId);
+        status = marketplaceStorage.getProductStatus(_productId);
+        title = marketplaceStorage.getProductTitle(_productId);
+        type = marketplaceStorage.getProductType(_productId);
+        content = marketplaceStorage.getProductContent(_productId);
+        developer = marketplaceStorage.getProductDeveloper(_productId);
+        developerId = marketplaceStorage.getProductDeveloperId(_productId);
 
         uint systemTagsLength = marketplaceStorage.getSystemTagsLength(_productId);
         for (uint i = 0; i < systemTagsLength; i++) {
@@ -91,6 +94,6 @@ contract ProductRegistration is ProductBase {
             authorTags[j] = marketplaceStorage.getProductAuthorTag(_productId, j);
         }
 
-        return (id, status, title, type, systemTags, authorTags, developer, developerId);
+        return (id, status, title, type, content, systemTags, authorTags, developer, developerId);
     }
 }
