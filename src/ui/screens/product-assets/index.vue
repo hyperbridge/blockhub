@@ -607,6 +607,12 @@
         .item_container{
             padding: 4px;
             width: calc(100%/9);
+            @media only screen and (min-width: 1400px){
+                width: calc(100%/12);
+            }
+            @media only screen and (min-width: 1600px){
+                width: calc(100%/14);
+            }
             .item{
                 border: 1px solid rgba(255, 255, 255, .8);
                 border-radius: 5px;
