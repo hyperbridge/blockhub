@@ -4,9 +4,8 @@
   <a href="https://hyperbridge.org/"><img src="https://hyperbridge.org/img/blockhub-logotype-color.svg" width="400" alt="logo"></a>
 
   <br>
-  <br>
 
-  [![Gitter chat](https://img.shields.io/gitter/room/TechnologyAdvice/Stardust.svg)](https://gitter.im/Hyperbridge/Lobby) [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/hyperbridge/blockhub-web-client/blob/master/LICENSE.md)
+  [![Gitter chat](https://img.shields.io/gitter/room/TechnologyAdvice/Stardust.svg)](https://gitter.im/Hyperbridge/Lobby) [![license](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/hyperbridge/blockhub-web-client/blob/master/LICENSE.md)
 
   <h1><code>Web Client</code> for BlockHub</h1>
 </div>
