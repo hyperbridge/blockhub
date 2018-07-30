@@ -7,7 +7,7 @@ contract ProductBase {
 
     using ProductStorageAccess for MarketplaceStorage;
 
-    enum Status { Inactive, Pending, Published, Rejected }
+    enum Status { Inactive, Draft, Pending, Published, Rejected }
 
     MarketplaceStorage public marketplaceStorage;
 }
