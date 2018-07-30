@@ -7,7 +7,7 @@ contract Developer {
 
     using DeveloperStorageAccess for MarketplaceStorage;
 
-    MarketplaceStorage marketplaceStorage;
+    MarketplaceStorage public marketplaceStorage;
 
     event DeveloperCreated(address developerAddress, uint developerId);
 
