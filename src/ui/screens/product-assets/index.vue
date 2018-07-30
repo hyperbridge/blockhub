@@ -9,7 +9,7 @@
                 </div>
 
 
-                
+
                 <div class="row" v-if="product">
                     <div class="col-12">
                         <h1 class="title margin-top-10 margin-bottom-15">{{ product.name }}</h1>
