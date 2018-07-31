@@ -15,6 +15,12 @@ library ProductStorageAccess {
         string requirementInfo;
     }
 
+    struct LanguageSupport {
+        string language;
+        bool closedCaptioning;
+        bool audioDescription;
+    }
+
     /*
         Each product (indexed by ID) stores the following data in MarketplaceStorage and accesses it through the
         associated namespace:
@@ -33,6 +39,11 @@ library ProductStorageAccess {
             SystemRequirement[] systemRequirements
                 string system                                               (product.systemRequirements.system)
                 string info                                                 (product.systemRequirements.info)
+            LanguageSupport[] languagesSupported
+                string language                                             (product.languagesSupported.language)
+                bool closedCaptioning                                       (product.languagesSupported.closedCaptioning)
+                bool audioDescription                                       (product.languagesSupported.audioDescription)
+
     */
 
     /**** Getters *******/
@@ -136,6 +147,34 @@ library ProductStorageAccess {
         });
 
         return systemRequirement;
+    }
+
+    // Language Support
+
+    function getProductLanguagesSupportedLength(MarketplaceStorage _storage, uint _productId) internal view returns (uint) {
+        _storage.getUint(keccak256(abi.encodePacked("product.languagesSupported.length", _productId)));
+    }
+
+    function getProductLanguageSupportLanguage(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (string) {
+        return _storage.getString(keccak256(abi.encodePacked("product.languagesSupported.language", _productId, _index)));
+    }
+
+    function getProductLanguageSupportClosedCaptioning(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (bool) {
+        return _storage.getBool(keccak256(abi.encodePacked("product.languagesSupported.closedCaptioning", _productId, _index)));
+    }
+
+    function getProductLanguageSupportAudioDescription(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (bool) {
+        return _storage.getBool(keccak256(abi.encodePacked("product.languagesSupported.audioDescription", _productId, _index)));
+    }
+
+    function getProductLanguageSupport(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (LanguageSupport) {
+        LanguageSupport memory languageSupport = LanguageSupport({
+            language: getProductLanguageSupportLanguage(_storage, _productId, _index),
+            closedCaptioning: getProductLanguageSupportClosedCaptioning(_storage, _productId, _index),
+            audioDescription: getProductLanguageSupportAudioDescription(_storage, _productId, _index)
+        });
+
+        return languageSupport;
     }
 
 
@@ -244,5 +283,37 @@ library ProductStorageAccess {
         setProductSystemRequirement(_storage, _productId, nextIndex, _system, _info);
 
         setProductSystemRequirementsLength(_storage, _productId, nextIndex + 1);
+    }
+
+    // Language Support
+
+    function setProductLanguagesSupportedLength(MarketplaceStorage _storage, uint _productId, uint _length) internal {
+        _storage.setUint(keccak256(abi.encodePacked("product.languagesSupported.length", _productId)), _length);
+    }
+
+    function setProductLanguageSupportLanguage(MarketplaceStorage _storage, uint _productId, uint _index, string _language) internal {
+        return _storage.setString(keccak256(abi.encodePacked("product.languagesSupported.language", _productId, _index)), _language);
+    }
+
+    function setProductLanguageSupportClosedCaptioning(MarketplaceStorage _storage, uint _productId, uint _index, bool _closedCaptioning) internal {
+        return _storage.setBool(keccak256(abi.encodePacked("product.languagesSupported.closedCaptioning", _productId, _index)), _closedCaptioning);
+    }
+
+    function setProductLanguageSupportAudioDescription(MarketplaceStorage _storage, uint _productId, uint _index, bool _audioDescription) internal {
+        return _storage.setBool(keccak256(abi.encodePacked("product.languagesSupported.audioDescription", _productId, _index)), _audioDescription);
+    }
+
+    function setProductLanguageSupport(MarketplaceStorage _storage, uint _productId, uint _index, string _language, bool _closedCaptioning, bool _audioDescription) internal {
+        setProductLanguageSupportLanguage(_storage, _productId, _index, _language);
+        setProductLanguageSupportClosedCaptioning(_storage, _productId, _index, _closedCaptioning);
+        setProductLanguageSupportAudioDescription(_storage, _productId, _index, _audioDescription);
+    }
+
+    function pushProductLanguageSupport(MarketplaceStorage _storage, uint _productId, string _language, bool _closedCaptioning, bool _audioDescription) internal {
+        uint nextIndex = getProductLanguagesSupportedLength(_storage, _productId);
+
+        setProductLanguageSupport(_storage, _productId, nextIndex, _language, _closedCaptioning, _audioDescription);
+
+        setProductLanguagesSupportedLength(_storage, _productId, nextIndex + 1);
     }
 }
