@@ -5,7 +5,7 @@ import "./ProductBase.sol";
 contract ProductPricePlan is ProductBase {
 
     constructor(address _marketplaceStorage) public {
-        marketplaceStorage = _marketplaceStorage;
+        marketplaceStorage = MarketplaceStorage(_marketplaceStorage);
     }
 
     function createPricePlan(uint _productId, string _code, string _name, uint _price) external {
