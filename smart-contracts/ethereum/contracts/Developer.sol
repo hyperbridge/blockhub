@@ -49,6 +49,6 @@ contract Developer {
     )
     {
         DeveloperStorageAccess.Developer memory developer = marketplaceStorage.getDeveloper(_id);
-        return (_id, developer.addr, developer.name, developer.ownedProjectIds);
+        return (_id, developer.addr, developer.name, developer.ownedProductIds);
     }
 }
