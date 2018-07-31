@@ -10,6 +10,11 @@ library ProductStorageAccess {
         uint price;
     }
 
+    struct SystemRequirement {
+        string systemInfo;
+        string requirementInfo;
+    }
+
     /*
         Each product (indexed by ID) stores the following data in MarketplaceStorage and accesses it through the
         associated namespace:
@@ -25,6 +30,9 @@ library ProductStorageAccess {
                 string code                                                 (product.pricePlans.code)
                 string name                                                 (product.pricePlans.name)
                 uint price                                                  (product.pricePlans.price)
+            SystemRequirement[] systemRequirements
+                string system                                               (product.systemRequirements.system)
+                string info                                                 (product.systemRequirements.info)
     */
 
     /**** Getters *******/
@@ -107,6 +115,29 @@ library ProductStorageAccess {
         return pricePlan;
     }
 
+    // System Requirement
+
+    function getProductSystemRequirementsLength(MarketplaceStorage _storage, uint _productId) internal view returns (uint) {
+        _storage.getUint(keccak256(abi.encodePacked("product.systemRequirements.length", _productId)));
+    }
+
+    function getProductSystemRequirementSystem(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (string) {
+        return _storage.getString(keccak256(abi.encodePacked("product.systemRequirements.system", _productId, _index)));
+    }
+
+    function getProductSystemRequirementInfo(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (string) {
+        return _storage.getString(keccak256(abi.encodePacked("product.systemRequirements.info", _productId, _index)));
+    }
+
+    function getProductSystemRequirement(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (SystemRequirement) {
+        SystemRequirement memory systemRequirement = SystemRequirement({
+            systemInfo: getProductSystemRequirementSystem(_storage, _productId, _index),
+            requirementInfo: getProductSystemRequirementInfo(_storage, _productId, _index)
+        });
+
+        return systemRequirement;
+    }
+
 
 
     /**** Setters *******/
@@ -183,10 +214,35 @@ library ProductStorageAccess {
     function pushProductPricePlan(MarketplaceStorage _storage, uint _productId, string _code, string _name, uint _price) internal {
         uint nextIndex = getProductPricePlansLength(_productId);
 
-        setProductPricePlanCode(_storage, _productId, nextIndex, _code);
-        setProductPricePlanName(_storage, _productId, nextIndex, _name);
-        setProductPricePlanPrice(_storage, _productId, nextIndex, _price);
+        setProductPricePlan(_storage, _productId, nextIndex, _code, _name, _price);
 
         setProductPricePlansLength(_storage, _productId, nextIndex + 1);
+    }
+
+    // System Requirement
+
+    function setProductSystemRequirementsLength(MarketplaceStorage _storage, uint _productId, uint _length) internal {
+        _storage.setUint(keccak256(abi.encodePacked("product.systemRequirements.length", _productId)), _length);
+    }
+
+    function setProductSystemRequirementSystem(MarketplaceStorage _storage, uint _productId, uint _index, string _system) internal {
+        return _storage.setString(keccak256(abi.encodePacked("product.systemRequirements.system", _productId, _index)), _system);
+    }
+
+    function setProductSystemRequirementInfo(MarketplaceStorage _storage, uint _productId, uint _index, string _info) internal {
+        return _storage.setString(keccak256(abi.encodePacked("product.systemRequirements.info", _productId, _index)), _info);
+    }
+
+    function setProductSystemRequirement(MarketplaceStorage _storage, uint _productId, uint _index, string _system, string _info) internal {
+        setProductSystemRequirementSystem(_storage, _productId, _index, _system);
+        setProductSystemRequirementInfo(_storage, _productId, _index, _info);
+    }
+
+    function pushProductSystemRequirement(MarketplaceStorage _storage, uint _productId, string _system, string _info) internal {
+        uint nextIndex = getProductSystemRequirementsLength(_productId);
+
+        setProductSystemRequirement(_storage, _productId, nextIndex, _system, _info);
+
+        setProductSystemRequirementsLength(_storage, _productId, nextIndex + 1);
     }
 }
