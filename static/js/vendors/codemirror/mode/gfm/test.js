@@ -131,10 +131,10 @@
      "foo [link http://www.example.com/]. bar");
 
   MT("vanillaLinkExtension",
-     "foo [link http://www.example.com/index.html] bar");
+     "foo [link http://www.example.com/index.vue] bar");
 
   MT("vanillaLinkEmphasis",
-     "foo [em *][em&link http://www.example.com/index.html][em *] bar");
+     "foo [em *][em&link http://www.example.com/index.vue][em *] bar");
 
   MT("notALink",
      "foo asfd:asdf bar");

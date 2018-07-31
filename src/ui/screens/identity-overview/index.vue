@@ -124,56 +124,114 @@
                                     <p>Product name</p>
                                 </div>
                             </div>
-                            <div class="pagination-container">
-                                <div class="pagination-container__nav">
-                                    <ul>
-                                        <li>
-                                            <a href="#3" class="first">
-                                                <i class="fas fa-angle-double-left"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#3" class="prew">
-                                                <i class="fas fa-angle-left"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#3">1</a>
-                                        </li>
-                                        <li>
-                                            <a href="#3">2</a>
-                                        </li>
-                                        <li>
-                                            <a href="#3">3</a>
-                                        </li>
-                                        <li class="active">
-                                            <a href="#3">4</a>
-                                        </li>
-                                        <li>
-                                            <a href="#3">5</a>
-                                        </li>
-                                        <li>
-                                            <a href="#3">6</a>
-                                        </li>
-                                        <li>
-                                            <a href="#3">7</a>
-                                        </li>
-                                        <li>
-                                            <a href="#3">8</a>
-                                        </li>
-                                        <li>
-                                            <a href="#3" class="next">
-                                                <i class="fas fa-angle-right"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#3" class="last">
-                                                <i class="fas fa-angle-double-right"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
+                            <c-pagination></c-pagination>
+                        </div>
+                    </div>
+                    <div class="col-12 margin-top-40">
+                        <div class="featured-assets">
+                            <c-heading-bar name="Featured Assets" :showArrows="false" :showBackground="false">
+                            </c-heading-bar>
+                            <div class="featured-assets__list">
+                                <div class="featured-assets__list-item">
+                                    <div class="img">
+                                        <img src="https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de" />
+                                    </div>
+                                    <h3>Magic Plate Armor</h3>
+                                    <p>Tibia MMORPG</p>
+                                </div>
+                                <div class="featured-assets__list-item">
+                                    <div class="img">
+                                        <img src="https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de" />
+                                    </div>
+                                    <h3>Magic Plate Armor</h3>
+                                    <p>Tibia MMORPG</p>
+                                </div>
+                                <div class="featured-assets__list-item">
+                                    <div class="img">
+                                        <img src="https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de" />
+                                    </div>
+                                    <h3>Magic Plate Armor</h3>
+                                    <p>Tibia MMORPG</p>
+                                </div>
+                                <div class="featured-assets__list-item">
+                                    <div class="img">
+                                        <img src="https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de" />
+                                    </div>
+                                    <h3>Magic Plate Armor</h3>
+                                    <p>Tibia MMORPG</p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-12 margin-top-40">
+                        <div class="assets">
+                            <c-heading-bar name="Assets" :showArrows="false" :showBackground="false">
+                                <div class="additional-action margin-left-20" slot="additional-action">
+                                    <div class="text">
+                                        Value
+                                        <i class="fas fa-dollar-sign"></i>
+                                    </div>
+                                    <div class="arrow_container">
+                                        <i class="fas fa-sort-up"></i>
+                                        <i class="fas fa-sort-down"></i>
+                                    </div>
+                                </div>
+                                <div class="additional-action" slot="additional-action">
+                                    <div class="text">
+                                        Rating
+                                        <i class="fas fa-trophy"></i>
+                                    </div>
+                                    <div class="arrow_container">
+                                        <i class="fas fa-sort-up"></i>
+                                        <i class="fas fa-sort-down"></i>
+                                    </div>
+                                </div>
+                            </c-heading-bar>
+
+                            <c-assets-grid></c-assets-grid>
+
+                            <c-pagination></c-pagination>
+                        </div>
+                    </div>
+
+                    <div class="col-12 margin-top-40">
+                        <div class="games-list">
+                            <c-heading-bar name="Games" :showArrows="false" :showBackground="false">
+                                <div class="additional-action margin-left-20" slot="additional-action">
+                                    <div class="text">
+                                        Price
+                                        <i class="fas fa-dollar-sign"></i>
+                                    </div>
+                                    <div class="arrow_container">
+                                        <i class="fas fa-sort-up"></i>
+                                        <i class="fas fa-sort-down"></i>
+                                    </div>
+                                </div>
+                                <div class="additional-action margin-left-20" slot="additional-action">
+                                    <div class="text">
+                                        Play Time
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="arrow_container">
+                                        <i class="fas fa-sort-up"></i>
+                                        <i class="fas fa-sort-down"></i>
+                                    </div>
+                                </div>
+                                <div class="additional-action" slot="additional-action">
+                                    <div class="text">
+                                        Purchase Date
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                    <div class="arrow_container">
+                                        <i class="fas fa-sort-up"></i>
+                                        <i class="fas fa-sort-down"></i>
+                                    </div>
+                                </div>
+                            </c-heading-bar>
+                            <div class="games-list__grid">
+
+                            </div>
+                            <c-pagination></c-pagination>
                         </div>
                     </div>
                 </div>
@@ -187,7 +245,9 @@
         props: ['id'],
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
-            'c-heading-bar': () => import('@/ui/components/heading-bar')
+            'c-heading-bar': () => import('@/ui/components/heading-bar'),
+            'c-pagination': () => import('@/ui/components/pagination'),
+            'c-assets-grid': () => import('@/ui/components/assets-grid')
         },
         data: () => ({}),
         created() {
@@ -370,7 +430,7 @@
     .badges{
         border-radius: 5px;
         background: rgba(28, 32, 59, .5);
-        padding: 20px 15px 0 15px;
+        padding: 15px 15px 0 15px;
     }
     .badges__list{
         display: flex;
@@ -396,75 +456,71 @@
         }
     }
 
-    .pagination-container{
-        margin-top: 40px;
+    .featured-assets{
+        border-radius: 5px;
+        background: rgba(28, 32, 59, .5);
+        padding: 15px;
+        overflow: hidden;
+    }
+    .featured-assets__list{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .featured-assets__list-item{
+        display: inline-block;
+        padding: 25px;
+        width: 22%;
+        border-radius: 5px;
+        background: #27283E;
         text-align: center;
-        width: auto;
-        .pagination-container__nav{
-            padding: 10px;
-            text-align: center;
-            width: auto;
-            display: inline-block;
+        color: #C6C6D6;
+        margin-top: 2%;
+        .img{
             position: relative;
-            background: #2E2F4A;
-            border-radius: 5px 5px 0 0;
-            &:after {
-                position: absolute;
-                content: "";
-                height: 42px;
-                bottom: 0;
-                right: -39px;
-                border: 21px solid transparent;
-                border-bottom: 21px solid #2E2F4A;
-                border-left: 21px solid #2E2F4A;
+            margin-bottom: 20px;
+            padding-bottom: 30px;
+            display: inline-block;
+            width: 100%;
+            max-width: 160px;
+            img{
+                width: 100%;
             }
-            &:before {
+            &:after{
                 position: absolute;
+                bottom: 10px;
+                width: 80%;
+                left: 10%;
                 content: "";
-                height: 42px;
-                bottom: 0;
-                left: -39px;
-                border: 21px solid transparent;
-                border-bottom: 21px solid #2E2F4A;
-                border-right: 21px solid #2E2F4A;
-            }
-            ul{
-                padding: 0;
-                margin: 0;
-                display: flex;
-                justify-content: center;
-                flex-wrap: nowrap;
-                li{
-                    list-style: none;
-                    display: inline-block;
-                    margin: 0 3px;
-                    width: 22px;
-                    height: 22px;
-                    line-height: 22px;
-                    text-align: center;
-                    a{
-                        color: #A2A3BE;
-                        font-size: 14px;
-                        &.first,
-                        &.last,
-                        &.prew,
-                        &.next{
-                            color: #fff;
-                        }
-                    }
-                    &.active,
-                    &:hover{
-                        background: rgba(255, 255, 255, .15);
-                        border-radius: 3px;
-                        font-weight: bold;
-                        cursor: pointer;
-                        a{
-                            color: #fff;
-                            text-decoration: none;
-                        }
-                    }
-                }
+                height: 3px;
+                background: rgba(0, 0, 0, .2);
+                border-radius: 100%;
+                box-shadow: 0 0 20px rgba(0, 0, 0, .9);
             }
         }
+        h3{
+            font-weight: bold;
+            font-size: 18px;
+            color: #C6C6D6;
+            padding: 0px;
+            margin: 0px;
+        }
+        p{
+            margin: 0;
+        }
+    }
+
+    .assets{
+        border-radius: 5px;
+        background: rgba(28, 32, 59, .5);
+        padding: 15px 15px 0 15px;
+        overflow: hidden;
+    }
+
+    .games-list{
+        border-radius: 5px;
+        background: rgba(28, 32, 59, .5);
+        padding: 15px 15px 0 15px;
+        overflow: hidden;
     }
 </style>
