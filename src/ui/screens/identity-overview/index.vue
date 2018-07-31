@@ -311,6 +311,88 @@
                             <c-pagination></c-pagination>
                         </div>
                     </div>
+
+                    <div class="col-12 margin-top-40 margin-bottom-40">
+                        <div class="identity__user-notify-card">
+                            <div>
+                                <c-user-card></c-user-card>
+                            </div>
+                            <div class="text text-left">
+                                <h3>Create your BlockHub profile</h3>
+                                <p>BlockHub is the best place for curated community-driven game development,
+                                    digital assets and micro-licensing. Sugn up for your own account and build
+                                    the future of gaming.</p>
+                                <a href="#3" class="btn btn-success">
+                                    Sign Up
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-stretch">
+                    <div class="col-12 col-md-8">
+                        <div class="badges">
+                            <c-heading-bar name="Badges" :showArrows="false" :showBackground="false">
+                                <div class="additional-action margin-left-20" slot="additional-action">
+                                    <div class="text">
+                                        Trust
+                                        <i class="fas fa-hand-holding-heart"></i>
+                                    </div>
+                                    <div class="arrow_container">
+                                        <i class="fas fa-sort-up"></i>
+                                        <i class="fas fa-sort-down"></i>
+                                    </div>
+                                </div>
+                                <div class="additional-action" slot="additional-action">
+                                    <div class="text">
+                                        Rating
+                                        <i class="fas fa-trophy"></i>
+                                    </div>
+                                    <div class="arrow_container">
+                                        <i class="fas fa-sort-up"></i>
+                                        <i class="fas fa-sort-down"></i>
+                                    </div>
+                                </div>
+                            </c-heading-bar>
+                            <div class="badges__list">
+                                <div class="badges__item">
+                                    <div class="img">
+                                        <img src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108" />
+                                    </div>
+                                    <h3>Protector of the Reign</h3>
+                                    <p>Product name</p>
+                                </div>
+                                <div class="badges__item">
+                                    <div class="img">
+                                        <img src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108" />
+                                    </div>
+                                    <h3>Protector of the Reign</h3>
+                                    <p>Product name</p>
+                                </div>
+                                <div class="badges__item">
+                                    <div class="img">
+                                        <img src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108" />
+                                    </div>
+                                    <h3>Protector of the Reign</h3>
+                                    <p>Product name</p>
+                                </div>
+                                <div class="badges__item">
+                                    <div class="img">
+                                        <img src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108" />
+                                    </div>
+                                    <h3>Protector of the Reign</h3>
+                                    <p>Product name</p>
+                                </div>
+                            </div>
+                            <c-pagination></c-pagination>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="basic-info">
+                            <c-heading-bar name="Basic Information" :showArrows="false" :showBackground="false">
+                            </c-heading-bar>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -324,7 +406,8 @@
             'c-layout': () => import('@/ui/layouts/default'),
             'c-heading-bar': () => import('@/ui/components/heading-bar'),
             'c-pagination': () => import('@/ui/components/pagination'),
-            'c-assets-grid': () => import('@/ui/components/assets-grid')
+            'c-assets-grid': () => import('@/ui/components/assets-grid'),
+            'c-user-card': () => import('@/ui/components/user-card')
         },
         data: () => ({}),
         created() {
@@ -420,6 +503,7 @@
             margin-left: 0;
         }
     }
+
     .identity__user-notify{
         padding: 25px 40px;
         text-align: center;
@@ -640,5 +724,43 @@
                 }
             }
         }
+    }
+
+    .identity__user-notify-card{
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        border-radius: 5px;
+        background: rgba(28, 32, 59, .5);
+        margin: 30px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .text{
+            width: 60%;
+            padding-left: 15px;
+            h3{
+                font-weight: bold;
+                font-size: 21px;
+                margin: 0;
+            }
+            p{
+                margin: 20px 0;
+                font-size: 18px;
+                line-height: 22px;
+            }
+            .btn{
+                padding: 8px 30px;
+                font-weight: bold;
+                font-size: 18px;
+            }
+        }
+    }
+
+    .basic-info{
+        height: 100%;
+        border-radius: 5px;
+        background: rgba(28, 32, 59, .5);
+        padding: 15px 15px 0 15px;
     }
 </style>
