@@ -229,7 +229,84 @@
                                 </div>
                             </c-heading-bar>
                             <div class="games-list__grid">
-
+                                <div class="games-list__grid-item">
+                                    <div class="img">
+                                        <img src="http://via.placeholder.com/350x150" />
+                                    </div>
+                                    <div class="info">
+                                        <h4>Tibia MMORPG</h4>
+                                        <p>CipSoft Entertainment GmbH</p>
+                                        <div class="time">
+                                            <i class="fas fa-clock"></i>
+                                            527h Played
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games-list__grid-item">
+                                    <div class="img">
+                                        <img src="http://via.placeholder.com/350x150" />
+                                    </div>
+                                    <div class="info">
+                                        <h4>Tibia MMORPG</h4>
+                                        <p>CipSoft Entertainment GmbH</p>
+                                        <div class="time">
+                                            <i class="fas fa-clock"></i>
+                                            527h Played
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games-list__grid-item">
+                                    <div class="img">
+                                        <img src="http://via.placeholder.com/350x150" />
+                                    </div>
+                                    <div class="info">
+                                        <h4>Tibia MMORPG</h4>
+                                        <p>CipSoft Entertainment GmbH</p>
+                                        <div class="time">
+                                            <i class="fas fa-clock"></i>
+                                            527h Played
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games-list__grid-item">
+                                    <div class="img">
+                                        <img src="http://via.placeholder.com/350x150" />
+                                    </div>
+                                    <div class="info">
+                                        <h4>Tibia MMORPG</h4>
+                                        <p>CipSoft Entertainment GmbH</p>
+                                        <div class="time">
+                                            <i class="fas fa-clock"></i>
+                                            527h Played
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games-list__grid-item">
+                                    <div class="img">
+                                        <img src="http://via.placeholder.com/350x150" />
+                                    </div>
+                                    <div class="info">
+                                        <h4>Tibia MMORPG</h4>
+                                        <p>CipSoft Entertainment GmbH</p>
+                                        <div class="time">
+                                            <i class="fas fa-clock"></i>
+                                            527h Played
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games-list__grid-item">
+                                    <div class="img">
+                                        <img src="http://via.placeholder.com/350x150" />
+                                    </div>
+                                    <div class="info">
+                                        <h4>Tibia MMORPG</h4>
+                                        <p>CipSoft Entertainment GmbH</p>
+                                        <div class="time">
+                                            <i class="fas fa-clock"></i>
+                                            527h Played
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <c-pagination></c-pagination>
                         </div>
@@ -522,5 +599,46 @@
         background: rgba(28, 32, 59, .5);
         padding: 15px 15px 0 15px;
         overflow: hidden;
+    }
+    .games-list__grid{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 100%;
+        padding-top: 20px;
+        .games-list__grid-item{
+            width: 49%;
+            margin-bottom: 3%;
+            display: flex;
+            align-items: stretch;
+            .img{
+                width: 60%;
+                margin-right: 20px;
+                border-radius: 5px;
+                overflow: hidden;
+                img{
+                    width: 100%;
+                    height: auto;
+                }
+            }
+            .info{
+                width: auto;
+                position: relative;
+                padding-bottom: 25px;
+                h4{
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+                .time{
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    left: 0;
+                    i{
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
     }
 </style>

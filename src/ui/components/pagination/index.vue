@@ -61,7 +61,7 @@
 <style lang="scss" scoped>
 
     .pagination-container{
-        margin-top: 40px;
+        margin-top: 30px;
         text-align: center;
         width: auto;
         .pagination-container__nav{
