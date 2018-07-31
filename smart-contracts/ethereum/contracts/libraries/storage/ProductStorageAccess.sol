@@ -19,11 +19,11 @@ library ProductStorageAccess {
         Each product (indexed by ID) stores the following data in MarketplaceStorage and accesses it through the
         associated namespace:
             string title                                                    (product.title)
-            bytes32 type                                                    (product.type)
+            bytes32 type                                                      (product.type)
             string content                                                  (product.content)
             ProduceBase.Status Status                                       (product.status)
-            bytes32[] systemTags                                            (product.systemTags)
-            bytes32[] authorTags                                            (product.authorTags)
+            bytes32[] systemTags                                              (product.systemTags)
+            bytes32[] authorTags                                              (product.authorTags)
             address developer                                               (product.developer)
             uint developerId                                                (product.developerId)
             PricePlan[] pricePlans
@@ -52,7 +52,7 @@ library ProductStorageAccess {
     }
 
     function getProductType(MarketplaceStorage _storage, uint _productId) internal view returns (bytes32) {
-        return _storage.getBytes(keccak256(abi.encodePacked("product.type", _productId)));
+        return _storage.getBytes32(keccak256(abi.encodePacked("product.type", _productId)));
     }
 
     function getProductStatus(MarketplaceStorage _storage, uint _productId) internal view returns (uint) {
@@ -68,7 +68,7 @@ library ProductStorageAccess {
     }
 
     function getProductSystemTag(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (bytes32) {
-        return _storage.getBytes(keccak256(abi.encodePacked("product.systemTags", _productId, _index)));
+        return _storage.getBytes32(keccak256(abi.encodePacked("product.systemTags", _productId, _index)));
     }
 
     function getProductAuthorTagsLength(MarketplaceStorage _storage, uint _productId) internal view returns (uint) {
@@ -76,7 +76,7 @@ library ProductStorageAccess {
     }
 
     function getProductAuthorTag(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (bytes32) {
-        return _storage.getBytes(keccak256(abi.encodePacked("product.authorTags", _productId, _index)));
+        return _storage.getBytes32(keccak256(abi.encodePacked("product.authorTags", _productId, _index)));
     }
 
     function getProductDeveloper(MarketplaceStorage _storage, uint _productId) internal view returns (address) {
@@ -152,7 +152,7 @@ library ProductStorageAccess {
     }
 
     function setProductType(MarketplaceStorage _storage, uint _productId, bytes32 _type) internal {
-        return _storage.setBytes(keccak256(abi.encodePacked("product.type", _productId)), _type);
+        return _storage.setBytes32(keccak256(abi.encodePacked("product.type", _productId)), _type);
     }
 
     function setProductStatus(MarketplaceStorage _storage, uint _productId, uint _status) internal {
@@ -168,7 +168,7 @@ library ProductStorageAccess {
     }
 
     function setProductSystemTag(MarketplaceStorage _storage, uint _productId, uint _index, bytes32 _tag) internal {
-        return _storage.setBytes(keccak256(abi.encodePacked("product.systemTags", _productId, _index)), _tag);
+        return _storage.setBytes32(keccak256(abi.encodePacked("product.systemTags", _productId, _index)), _tag);
     }
 
     function setProductAuthorTagsLength(MarketplaceStorage _storage, uint _productId, uint _length) internal {
@@ -176,7 +176,7 @@ library ProductStorageAccess {
     }
 
     function setProductAuthorTag(MarketplaceStorage _storage, uint _productId, uint _index, bytes32 _tag) internal {
-        return _storage.setBytes(keccak256(abi.encodePacked("product.authorTags", _productId, _index)), _tag);
+        return _storage.setBytes32(keccak256(abi.encodePacked("product.authorTags", _productId, _index)), _tag);
     }
 
     function setProductDeveloper(MarketplaceStorage _storage, uint _productId, address _developer) internal {
@@ -212,7 +212,7 @@ library ProductStorageAccess {
     }
 
     function pushProductPricePlan(MarketplaceStorage _storage, uint _productId, string _code, string _name, uint _price) internal {
-        uint nextIndex = getProductPricePlansLength(_productId);
+        uint nextIndex = getProductPricePlansLength(_storage, _productId);
 
         setProductPricePlan(_storage, _productId, nextIndex, _code, _name, _price);
 
@@ -239,7 +239,7 @@ library ProductStorageAccess {
     }
 
     function pushProductSystemRequirement(MarketplaceStorage _storage, uint _productId, string _system, string _info) internal {
-        uint nextIndex = getProductSystemRequirementsLength(_productId);
+        uint nextIndex = getProductSystemRequirementsLength(_storage, _productId);
 
         setProductSystemRequirement(_storage, _productId, nextIndex, _system, _info);
 
