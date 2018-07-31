@@ -1,6 +1,9 @@
 <template>
     <div class="heading-bar w-100">
         <h3 class="heading-bar__name" :class="{ 'heading-bar__name--with-bg': showBackground }">{{ name }}</h3>
+        <div class="heading-bar__additional-action">
+            <slot name="additional-action"></slot>
+        </div>
         <div class="heading-bar__nav" v-if="showArrows">
             <a href="#3" class="nav-prev">
                 <i class="fas fa-arrow-left"></i>
