@@ -8,7 +8,7 @@
                         Product not found
                     </div>
                     <div class="col-12" v-if="product">
-                        <div class="row"  v-if="!editing">
+                        <div class="row">
                             <div class="col-8">
                                 <div class="editor-container">
                                     <div class="editor" v-if="editing">
@@ -140,16 +140,16 @@
                     <div class="">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link" id="step1-tab" data-toggle="tab" href="#agreement_tab" role="tab"
+                                <a class="nav-link active" id="step1-tab" data-toggle="tab" href="#agreement_tab" role="tab"
                                    aria-controls="step1-tab" aria-expanded="true">Agreement</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" id="step2-tab" data-toggle="tab" href="#sending_tab" role="tab"
+                                <a class="nav-link" id="step2-tab" data-toggle="tab" href="#sending_tab" role="tab"
                                    aria-controls="step2-tab">Sending</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane fade" id="agreement_tab" role="tabpanel" aria-labelledby="agreement-tab">
+                            <div class="tab-pane fade show active" id="agreement_tab" role="tabpanel" aria-labelledby="agreement-tab">
                                 <div class="tab-container">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <h4>Crowdfunding Campaing Adreement</h4>
@@ -335,11 +335,31 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade show active" id="sending_tab" role="tabpanel" aria-labelledby="sending-tab">
+                            <div class="tab-pane fade" id="sending_tab" role="tabpanel" aria-labelledby="sending-tab">
                                 <div class="tab-container">
                                     <div class="sending-blk">
                                         <div class="clmn-1">
                                             <div class="grid">
+                                                <div class="grid-item">
+                                                    <div>
+                                                        <img src="https://www.touchtapplay.com/wp-content/uploads/2017/12/bitcoin-game-cheats-ketchapp.jpg"/>
+                                                    </div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
                                                 <div class="grid-item">
                                                     <div></div>
                                                 </div>
@@ -361,11 +381,22 @@
                                             </div>
                                             <div class="info text-left">
                                                 <strong>SatoSama</strong>
-                                                <span class="float-right">-$14.00</span>
+                                                <span class="float-right down">-$14.00</span>
                                             </div>
                                         </div>
                                         <div class="clmn-2">
-                                            <div class=""
+                                            <div class="directions">
+                                                <div class="right-arrow">
+                                                    <div class="progress"></div>
+                                                </div>
+                                                <div class="left-arrow">
+                                                    <div class="progress" style="width: 45%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="time">
+                                                <i class="fas fa-clock"></i>
+                                                15 seconds
+                                            </div>
                                             <div class="info text-center">
                                                 1 <strong>hbx</strong> - 0.02 <strong>usd</strong>
                                             </div>
@@ -390,10 +421,28 @@
                                                 <div class="grid-item">
                                                     <div></div>
                                                 </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
                                             </div>
                                             <div class="info text-left">
-                                                <strong>SatishiStudios</strong>
-                                                <span class="float-right">+$14.00</span>
+                                                <strong>SatoshiStudios</strong>
+                                                <span class="float-right up">+$14.00</span>
                                             </div>
                                         </div>
                                     </div>
@@ -401,7 +450,7 @@
                                 <div class="action justify-content-end">
                                     <div class="align-self-end">
                                         <a href="#3" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
-                                        <a href="#3" class="btn btn-success"><i class="fas fa-arrow-right"></i> Next</a>
+                                        <a href="#3" class="btn btn-success"><i class="fas fa-check"></i> Complete</a>
                                     </div>
                                 </div>
                             </div>
@@ -694,7 +743,7 @@
                 width: 35%;
                 padding: 0 5px;
                 .grid{
-                    border: 1px solid rgba(255, 255, 255, .2);
+                    border: 1px solid rgba(255, 255, 255, .1);
                     border-radius: 5px;
                     margin-bottom: 15px;
                     display: flex;
@@ -704,20 +753,48 @@
                     .grid-item{
                         width: 33.3%;
                         padding: 5px;
-                        border-radius: 5px;
                         position: relative;
                         div{
                             border: 1px solid #30304B;
                             background: rgba(255, 255, 255, .07);
+                            border-radius: 5px;
                             position: relative;
                             display: inline-block;
                             width: 100%;
                             float: left;
+                            overflow: hidden;
+                            img{
+                                display: block;
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                height: 100%;
+                                width: 100%;
+                                object-fit: cover;
+                                transform: translate(-50%, -50%);
+                            }
                             &:before{
                                 content: "";
                                 padding-top: 100%;
                                 float: left;
                             }
+                            &:hover{
+                                cursor: pointer;
+                                background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQyIDQyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0MiA0MjsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIzMnB4IiBoZWlnaHQ9IjMycHgiPgo8cGF0aCBkPSJNMzcuMDU5LDE2SDI2VjQuOTQxQzI2LDIuMjI0LDIzLjcxOCwwLDIxLDBzLTUsMi4yMjQtNSw0Ljk0MVYxNkg0Ljk0MUMyLjIyNCwxNiwwLDE4LjI4MiwwLDIxczIuMjI0LDUsNC45NDEsNUgxNnYxMS4wNTkgIEMxNiwzOS43NzYsMTguMjgyLDQyLDIxLDQyczUtMi4yMjQsNS00Ljk0MVYyNmgxMS4wNTlDMzkuNzc2LDI2LDQyLDIzLjcxOCw0MiwyMVMzOS43NzYsMTYsMzcuMDU5LDE2eiIgZmlsbD0iIzJhMzA0ZCIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
+                                background-position: center;
+                                background-size: 16px;
+                                background-repeat: no-repeat;
+                            }
+                        }
+                    }
+                }
+                .info{
+                    span{
+                        &.down{
+                            color: #F75D5D
+                        }
+                        &.up{
+                            color: #43C981
                         }
                     }
                 }
@@ -725,12 +802,60 @@
             .clmn-2{
                 width: 30%;
                 padding: 0 5px;
+                text-align: center;
+                .time{
+                    padding: 20px 0 30px;
+                    i{
+                        display: block;
+                        font-size: 18px;
+                        margin-bottom: 4px;
+                    }
+                }
+                .directions{
+                    width: 100px;
+                    display: block;
+                    margin: auto auto 20px;
+                    .right-arrow{
+                        width: 100%;
+                        height: 35px;
+                        position: relative;
+                        -webkit-clip-path: polygon(0% 35%, 70% 35%, 70% 0%, 100% 50%, 70% 100%, 70% 65%, 0% 65%);
+                        clip-path: polygon(0% 35%, 70% 35%, 70% 0%, 100% 50%, 70% 100%, 70% 65%, 0% 65%);
+                        background: #30304B;
+                        margin-bottom: 4px;
+                        .progress{
+                            left: 0;
+                        }
+                    }
+                    .left-arrow{
+                        width: 100%;
+                        height: 35px;
+                        position: relative;
+                        -webkit-clip-path: polygon(0% 35%, 70% 35%, 70% 0%, 100% 50%, 70% 100%, 70% 65%, 0% 65%);
+                        clip-path: polygon(0% 35%, 70% 35%, 70% 0%, 100% 50%, 70% 100%, 70% 65%, 0% 65%);
+                        background: #30304B;
+                        transform: rotate(180deg);
+                        .progress{
+                            left: 0;
+                        }
+                    }
+                    .progress{
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        background: #5EA72B;
+                        margin: 0;
+                        padding: 0;
+                        border-radius: 0;
+                        height: 100%;
+                    }
+                }
             }
             .clmn-1,
             .clmn-2,
             .clmn-3{
                 .info{
-                    border: 1px solid rgba(255, 255, 255, .2);
+                    border: 1px solid rgba(255, 255, 255, .1);
                     border-radius: 5px;
                     padding: 5px;
                     width: 100%;
