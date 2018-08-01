@@ -3,11 +3,12 @@
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
+                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#invertFormExampleModal">Launch modal</button>
                     <div class="col-12" v-if="!product">
                         Product not found
                     </div>
                     <div class="col-12" v-if="product">
-                        <div class="row">
+                        <div class="row"  v-if="!editing">
                             <div class="col-8">
                                 <div class="editor-container">
                                     <div class="editor" v-if="editing">
@@ -124,6 +125,283 @@
                                                 </span>
                                             </li>
                                         </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="invertFormExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-dialog-centered" role="document">
+                <div class="modal-content send-funds-modal">
+                    <h3>Sending Funds</h3>
+                    <div class="">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link" id="step1-tab" data-toggle="tab" href="#agreement_tab" role="tab"
+                                   aria-controls="step1-tab" aria-expanded="true">Agreement</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" id="step2-tab" data-toggle="tab" href="#sending_tab" role="tab"
+                                   aria-controls="step2-tab">Sending</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade" id="agreement_tab" role="tabpanel" aria-labelledby="agreement-tab">
+                                <div class="tab-container">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h4>Crowdfunding Campaing Adreement</h4>
+                                    </div>
+                                    <div class="terms_block">
+
+                                            <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span>
+                                            </h1>
+
+                                            <h2>Introduction</h2>
+
+                                            <p>These Website Standard Terms and Conditions written on this webpage shall
+                                                manage
+                                                your use of our website, <span class="highlight preview_website_name">BlockHub</span>
+                                                accessible at <span class="highlight preview_website_url">BlockHub.gg</span>.
+                                            </p>
+
+                                            <p>These Terms will be applied fully and affect to your use of this Website. By
+                                                using this Website, you agreed to accept all terms and conditions written in
+                                                here. You must not use this Website if you disagree with any of these
+                                                Website
+                                                Standard Terms and Conditions.</p>
+
+                                            <p>Minors or people below 18 years old are not allowed to use this Website.</p>
+
+                                            <h2>Intellectual Property Rights</h2>
+
+                                            <p>Other than the content you own, under these Terms, <span
+                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and/or its
+                                                licensors
+                                                own all the intellectual property rights and materials contained in this
+                                                Website.</p>
+
+                                            <p>You are granted limited license only for purposes of viewing the material
+                                                contained on this Website.</p>
+
+                                            <h2>Restrictions</h2>
+
+                                            <p>You are specifically restricted from all of the following:</p>
+
+                                            <ul>
+                                                <li>publishing any Website material in any other media;</li>
+                                                <li>selling, sublicensing and/or otherwise commercializing any Website
+                                                    material;
+                                                </li>
+                                                <li>publicly performing and/or showing any Website material;</li>
+                                                <li>using this Website in any way that is or may be damaging to this
+                                                    Website;
+                                                </li>
+                                                <li>using this Website in any way that impacts user access to this
+                                                    Website;
+                                                </li>
+                                                <li>using this Website contrary to applicable laws and regulations, or in
+                                                    any
+                                                    way may cause harm to the Website, or to any person or business entity;
+                                                </li>
+                                                <li>engaging in any data mining, data harvesting, data extracting or any
+                                                    other
+                                                    similar activity in relation to this Website;
+                                                </li>
+                                                <li>using this Website to engage in any advertising or marketing.</li>
+                                            </ul>
+
+                                            <p>Certain areas of this Website are restricted from being access by you and
+                                                <span
+                                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> may further
+                                                restrict
+                                                access by you to any areas of this Website, at any time, in absolute
+                                                discretion.
+                                                Any user ID and password you may have for this Website are confidential and
+                                                you
+                                                must maintain confidentiality as well.</p>
+
+                                            <h2>Your Content</h2>
+
+                                            <p>In these Website Standard Terms and Conditions, “Your Content” shall mean any
+                                                audio, video text, images or other material you choose to display on this
+                                                Website. By displaying Your Content, you grant <span
+                                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> a
+                                                non-exclusive,
+                                                worldwide irrevocable, sub licensable license to use, reproduce, adapt,
+                                                publish,
+                                                translate and distribute it in any and all media.</p>
+
+                                            <p>Your Content must be your own and must not be invading any third-party's
+                                                rights.
+                                                <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> reserves
+                                                the
+                                                right to remove any of Your Content from this Website at any time without
+                                                notice.</p>
+
+                                            <h2>No warranties</h2>
+
+                                            <p>This Website is provided “as is,” with all faults, and <span
+                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> express no
+                                                representations or warranties, of any kind related to this Website or the
+                                                materials contained on this Website. Also, nothing contained on this Website
+                                                shall be interpreted as advising you.</p>
+
+                                            <h2>Limitation of liability</h2>
+
+                                            <p>In no event shall <span
+                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span>, nor any of its
+                                                officers, directors and employees, shall be held liable for anything arising
+                                                out
+                                                of or in any way connected with your use of this Website whether such
+                                                liability
+                                                is under contract. &nbsp;<span class="highlight preview_company_name">Hyperbridge Technology Inc.</span>,
+                                                including its officers, directors and employees shall not be held liable for
+                                                any
+                                                indirect, consequential or special liability arising out of or in any way
+                                                related to your use of this Website.</p>
+
+                                            <h2>Indemnification<p></p>
+
+                                                <p>You hereby indemnify to the fullest extent <span
+                                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> from and
+                                                    against
+                                                    any and/or all liabilities, costs, demands, causes of action, damages
+                                                    and
+                                                    expenses arising in any way related to your breach of any of the
+                                                    provisions
+                                                    of these Terms.</p>
+
+                                            </h2>
+                                            <h2>Severability</h2>
+
+                                            <p>If any provision of these Terms is found to be invalid under any applicable
+                                                law,
+                                                such provisions shall be deleted without affecting the remaining provisions
+                                                herein.</p>
+
+                                            <h2>Variation of Terms</h2>
+
+                                            <p><span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is permitted
+                                                to
+                                                revise these Terms at any time as it sees fit, and by using this Website you
+                                                are
+                                                expected to review these Terms on a regular basis.</p>
+
+                                            <h2>Assignment</h2>
+
+                                            <p>The <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is
+                                                allowed
+                                                to assign, transfer, and subcontract its rights and/or obligations under
+                                                these
+                                                Terms without any notification. However, you are not allowed to assign,
+                                                transfer, or subcontract any of your rights and/or obligations under these
+                                                Terms.</p>
+
+                                            <h2>Entire Agreement</h2>
+
+                                            <p>These Terms constitute the entire agreement between <span
+                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and you in
+                                                relation
+                                                to your use of this Website, and supersede all prior agreements and
+                                                understandings.</p>
+
+                                            <h2>Governing Law &amp; Jurisdiction</h2>
+
+                                            <p>These Terms will be governed by and interpreted in accordance with the laws
+                                                of
+                                                the State of <span class="highlight preview_country">Country</span>, and you
+                                                submit to the non-exclusive jurisdiction of the state and federal courts
+                                                located
+                                                in <span class="highlight preview_country">Country</span> for the resolution
+                                                of
+                                                any disputes.</p>
+
+                                        </div>
+                                </div>
+                                <div class="action justify-content-between">
+                                    <div>
+                                        <label class="switch switch-sm">
+                                            <input type="checkbox" name="switch_9" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <span class="label">I agree with the terms.</span>
+                                    </div>
+                                    <div class="align-self-end">
+                                        <a href="#3" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
+                                        <a href="#3" class="btn btn-success"><i class="fas fa-arrow-right"></i> Next</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show active" id="sending_tab" role="tabpanel" aria-labelledby="sending-tab">
+                                <div class="tab-container">
+                                    <div class="sending-blk">
+                                        <div class="clmn-1">
+                                            <div class="grid">
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                            </div>
+                                            <div class="info text-left">
+                                                <strong>SatoSama</strong>
+                                                <span class="float-right">-$14.00</span>
+                                            </div>
+                                        </div>
+                                        <div class="clmn-2">
+                                            <div class=""
+                                            <div class="info text-center">
+                                                1 <strong>hbx</strong> - 0.02 <strong>usd</strong>
+                                            </div>
+                                        </div>
+                                        <div class="clmn-3">
+                                            <div class="grid">
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                            </div>
+                                            <div class="info text-left">
+                                                <strong>SatishiStudios</strong>
+                                                <span class="float-right">+$14.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="action justify-content-end">
+                                    <div class="align-self-end">
+                                        <a href="#3" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
+                                        <a href="#3" class="btn btn-success"><i class="fas fa-arrow-right"></i> Next</a>
                                     </div>
                                 </div>
                             </div>
@@ -258,6 +536,210 @@
     }
 </script>
 
+<style lang="scss" scoped>
+    .modal-backdrop{
+        background-color: #30304B!important;
+        -webkit-filter: blur(10px);
+        filter: blur(10px);
+    }
+    .modal-dialog{
+        width: 650px;
+        max-width: 650px;
+    }
+    .send-funds-modal{
+        background: transparent;
+        h3{
+            font-size: 30px;
+            color: #C6C6D6;
+            margin-bottom: 40px;
+        }
+
+        .nav-tabs {
+            border-bottom: none;
+            position: relative;
+            .nav-item {
+                border-radius: 8px 8px 0 0;
+                a {
+                    color: #606079;
+                    background: #393955;
+                    padding: 0 15px;
+                    font-size: 16px;
+                    line-height: 32px;
+                    border: none;
+                    position: relative;
+                    box-shadow: 0 -1px 10px rgba(0, 0, 0, .2);
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        height: 23px;
+                        bottom: 0;
+                        left: -30px;
+                        border: 15px solid transparent;
+                        border-bottom: 15px solid #393955;
+                        border-right: 15px solid #393955;
+                        -webkit-filter: drop-shadow(-5px 0px 3px rgba(0, 0, 0, .15));
+                        filter: drop-shadow(-5px 0px 3px rgba(0, 0, 0, .1));
+                    }
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        height: 23px;
+                        bottom: 0;
+                        right: -30px;
+                        border: 15px solid transparent;
+                        border-bottom: 15px solid #393955;
+                        border-left: 15px solid #393955;
+                        -webkit-filter: drop-shadow(5px 0px 3px rgba(0, 0, 0, .15));
+                        filter: drop-shadow(5px 0px 3px rgba(0, 0, 0, .15));
+                    }
+                    &.active {
+                        border-bottom: none;
+                        background: #3e3e5c;
+                        color: #C6C6D6;
+                        z-index: 8;
+                        &:before {
+                            border-bottom-color: #3e3e5c;
+                            border-right-color: #3e3e5c;
+                        }
+                        &:after {
+                            border-bottom-color: #3e3e5c;
+                            border-left-color: #3e3e5c;
+                        }
+                    }
+                }
+                &:first-child {
+                    a {
+                        box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+                        &:before {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        .tab-pane {
+            position: relative;
+            &:before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 15px;
+                height: 15px;
+                background: #3e3e5c;
+                z-index: 10;
+            }
+            .tab-container {
+                background: #3e3e5c;
+                padding: 15px 10px 10px;
+                border-radius: 0 5px 5px 5px;
+                border-top: none;
+                box-shadow: 0 3px 20px rgba(0, 0, 0, .2);
+                .terms_block {
+                    background: #46466a;
+                    color: #C6C6D6;
+                    box-shadow: 0 0 3px rgba(0, 0, 0, .5) inset;
+                    padding: 15px;
+                    border-radius: 5px;
+                    max-height: 250px;
+                    overflow-y: auto;
+                    h1, h2, h3, h4, h5 {
+                        font-size: 18px;
+                        color: #C6C6D6;
+                    }
+                }
+            }
+            .action {
+                margin-top: 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: nowrap;
+                div {
+                    display: flex;
+                    align-items: center;
+                    width: auto;
+                    .switch {
+                        margin: 0;
+                    }
+                    .label {
+                        font-size: 16px;
+                        margin-left: 10px;
+                        a {
+                            color: #fff;
+                            text-decoration: underline;
+                        }
+                    }
+                    .btn {
+                        padding: 5px 10px;
+                        font-size: 13px;
+                        text-transform: uppercase;
+                        font-weight: bold;
+                        margin-left: 10px;
+                        i{
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .sending-blk{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            .clmn-1,
+            .clmn-3{
+                width: 35%;
+                padding: 0 5px;
+                .grid{
+                    border: 1px solid rgba(255, 255, 255, .2);
+                    border-radius: 5px;
+                    margin-bottom: 15px;
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    padding: 5px;
+                    .grid-item{
+                        width: 33.3%;
+                        padding: 5px;
+                        border-radius: 5px;
+                        position: relative;
+                        div{
+                            border: 1px solid #30304B;
+                            background: rgba(255, 255, 255, .07);
+                            position: relative;
+                            display: inline-block;
+                            width: 100%;
+                            float: left;
+                            &:before{
+                                content: "";
+                                padding-top: 100%;
+                                float: left;
+                            }
+                        }
+                    }
+                }
+            }
+            .clmn-2{
+                width: 30%;
+                padding: 0 5px;
+            }
+            .clmn-1,
+            .clmn-2,
+            .clmn-3{
+                .info{
+                    border: 1px solid rgba(255, 255, 255, .2);
+                    border-radius: 5px;
+                    padding: 5px;
+                    width: 100%;
+                }
+            }
+        }
+
+    }
+</style>
 
 <style lang="scss">
     .content-editor .note-editor.note-frame .note-editing-area .note-editable {
