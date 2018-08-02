@@ -11,7 +11,6 @@ contract MarketplaceStorage is Ownable {
     mapping(bytes32 => string) private stringStorage;
     mapping(bytes32 => address) private addressStorage;
     mapping(bytes32 => bytes) private bytesStorage;
-    mapping(bytes32 => bytes32) private bytes32Storage;
     mapping(bytes32 => bool) private boolStorage;
     mapping(bytes32 => int256) private intStorage;
 
@@ -68,10 +67,6 @@ contract MarketplaceStorage is Ownable {
         return bytesStorage[_key];
     }
 
-    function getBytes32(bytes32 _key) external view returns (bytes32) {
-        return bytes32Storage[_key];
-    }
-
     function getBool(bytes32 _key) external view returns (bool) {
         return boolStorage[_key];
     }
@@ -99,10 +94,6 @@ contract MarketplaceStorage is Ownable {
         bytesStorage[_key] = _value;
     }
 
-    function setBytes32(bytes32 _key, bytes32 _value) external onlyLatestMarketplaceContract {
-        bytes32Storage[_key] = _value;
-    }
-
     function setBool(bytes32 _key, bool _value) external onlyLatestMarketplaceContract {
         boolStorage[_key] = _value;
     }
@@ -127,10 +118,6 @@ contract MarketplaceStorage is Ownable {
 
     function deleteBytes(bytes32 _key) external onlyLatestMarketplaceContract {
         delete bytesStorage[_key];
-    }
-
-    function deleteBytes32(bytes32 _key) external onlyLatestMarketplaceContract {
-        delete bytes32Storage[_key];
     }
 
     function deleteBool(bytes32 _key) external onlyLatestMarketplaceContract {

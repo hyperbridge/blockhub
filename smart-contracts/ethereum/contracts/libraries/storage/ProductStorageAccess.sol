@@ -1,8 +1,13 @@
 pragma solidity ^0.4.24;
 
 import "../../MarketplaceStorage.sol";
+import "../utils/Bytes32Utils.sol";
+import "../utils/BytesUtils.sol";
 
 library ProductStorageAccess {
+
+    using Bytes32Utils for bytes32;
+    using BytesUtils for bytes;
 
     struct PricePlan {
         string code;
@@ -21,19 +26,27 @@ library ProductStorageAccess {
         bool audioDescription;
     }
 
-    struct Version {
-        bytes32 version;
+    struct ProductVersion {
+        string version;
         string downloadRefType;
         string downloadRefSource;
         string checksum;
         uint createdAt;
     }
 
+    struct VersionVoting {
+        uint approvalCount;
+        uint disapprovalCount;
+        bool isActive;
+        bool hasFailed;
+        mapping(address => bool) voters;
+    }
+
     /*
         Each product (indexed by ID) stores the following data in MarketplaceStorage and accesses it through the
         associated namespace:
             string title                                                    (product.title)
-            bytes32 type                                                    (product.type)
+            string type                                                     (product.type)
             string content                                                  (product.content)
             ProduceBase.Status Status                                       (product.status)
             bytes32[] systemTags                                            (product.systemTags)
@@ -41,17 +54,23 @@ library ProductStorageAccess {
             address developer                                               (product.developer)
             uint developerId                                                (product.developerId)
             Version latestVersion
-                bytes32 version                                             (product.latestVersion.version)
+                string version                                              (product.latestVersion.version)
                 string downloadRefType                                      (product.latestVersion.downloadRefType)
                 string downloadRefSource                                    (product.latestVersion.downloadRefSource)
                 string checksum                                             (product.latestVersion.checksum)
                 uint createdAt                                              (product.latestVersion.createdAt)
-            Version[] pendingVersions
-                bytes32 version                                             (product.pendingVersions.version)
-                string downloadRefType                                      (product.pendingVersions.downloadRefType)
-                string downloadRefSource                                    (product.pendingVersions.downloadRefSource)
-                string checksum                                             (product.pendingVersions.checksum)
-                uint createdAt                                              (product.pendingVersions.createdAt)
+            mapping(string (version) => ProductVersion) versions
+                string version                                              (product.versions.version)
+                string downloadRefType                                      (product.versions.downloadRefType)
+                string downloadRefSource                                    (product.versions.downloadRefSource)
+                string checksum                                             (product.versions.checksum)
+                uint createdAt                                              (product.versions.createdAt)
+            mapping(string (version) => VersionVoting) versionVoting
+                uint approvalCount                                          (product.versionVoting.approvalCount)
+                uint disapprovalCount                                       (product.versionVoting.disapprovalCount)
+                bool isActive                                               (product.versionVoting.isActive)
+                bool hasFailed                                              (product.versionVoting.hasFailed)
+                mapping(address => bool) voters                             (product.versionVoting.voters)
             PricePlan[] pricePlans
                 string code                                                 (product.pricePlans.code)
                 string name                                                 (product.pricePlans.name)
@@ -82,8 +101,8 @@ library ProductStorageAccess {
         return _storage.getString(keccak256(abi.encodePacked("product.title", _productId)));
     }
 
-    function getProductType(MarketplaceStorage _storage, uint _productId) internal view returns (bytes32) {
-        return _storage.getBytes32(keccak256(abi.encodePacked("product.type", _productId)));
+    function getProductType(MarketplaceStorage _storage, uint _productId) internal view returns (string) {
+        return _storage.getString(keccak256(abi.encodePacked("product.type", _productId)));
     }
 
     function getProductStatus(MarketplaceStorage _storage, uint _productId) internal view returns (uint) {
@@ -99,7 +118,8 @@ library ProductStorageAccess {
     }
 
     function getProductSystemTag(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (bytes32) {
-        return _storage.getBytes32(keccak256(abi.encodePacked("product.systemTags", _productId, _index)));
+        bytes memory bytesTag = _storage.getBytes(keccak256(abi.encodePacked("product.systemTags", _productId, _index)));
+        return bytesTag.toBytes32();
     }
 
     function getProductAuthorTagsLength(MarketplaceStorage _storage, uint _productId) internal view returns (uint) {
@@ -107,7 +127,8 @@ library ProductStorageAccess {
     }
 
     function getProductAuthorTag(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (bytes32) {
-        return _storage.getBytes32(keccak256(abi.encodePacked("product.authorTags", _productId, _index)));
+        bytes memory bytesTag = _storage.getBytes(keccak256(abi.encodePacked("product.authorTags", _productId, _index)));
+        return bytesTag.toBytes32();
     }
 
     function getProductDeveloper(MarketplaceStorage _storage, uint _productId) internal view returns (address) {
@@ -199,8 +220,8 @@ library ProductStorageAccess {
 
     // Version
 
-    function getProductLatestVersionVersion(MarketplaceStorage _storage, uint _productId) internal view returns (bytes32) {
-        _storage.getBytes32(keccak256(abi.encodePacked("product.latestVersion.version", _productId)));
+    function getProductLatestVersionVersion(MarketplaceStorage _storage, uint _productId) internal view returns (string) {
+        _storage.getString(keccak256(abi.encodePacked("product.latestVersion.version", _productId)));
     }
 
     function getProductLatestVersionDownloadRefType(MarketplaceStorage _storage, uint _productId) internal view returns (string) {
@@ -219,8 +240,8 @@ library ProductStorageAccess {
         _storage.getUint(keccak256(abi.encodePacked("product.latestVersion.createdAt", _productId)));
     }
 
-    function getProductLatestVersion(MarketplaceStorage _storage, uint _productId) internal view returns (Version) {
-        Version memory version = Version({
+    function getProductLatestVersion(MarketplaceStorage _storage, uint _productId) internal view returns (ProductVersion) {
+        ProductVersion memory version = ProductVersion({
             version: getProductLatestVersionVersion(_storage, _productId),
             downloadRefType: getProductLatestVersionDownloadRefType(_storage, _productId),
             downloadRefSource: getProductLatestVersionDownloadRefSource(_storage, _productId),
@@ -231,40 +252,74 @@ library ProductStorageAccess {
         return version;
     }
 
-    function getProductPendingVersionsLength(MarketplaceStorage _storage, uint _productId) internal view returns (uint) {
-        _storage.getUint(keccak256(abi.encodePacked("product.pendingVersions.length", _productId)));
+    function getProductVersionsLength(MarketplaceStorage _storage, uint _productId) internal view returns (uint) {
+        _storage.getUint(keccak256(abi.encodePacked("product.versions.length", _productId)));
     }
 
-    function getProductPendingVersionVersion(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (bytes32) {
-        _storage.getBytes32(keccak256(abi.encodePacked("product.pendingVersions.version", _productId, _index)));
+    function getProductVersionVersion(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (string) {
+        _storage.getString(keccak256(abi.encodePacked("product.versions.version", _productId, _version)));
     }
 
-    function getProductPendingVersionDownloadRefType(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (string) {
-        _storage.getString(keccak256(abi.encodePacked("product.pendingVersions.downloadRefType", _productId, _index)));
+    function getProductVersionDownloadRefType(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (string) {
+        _storage.getString(keccak256(abi.encodePacked("product.versions.downloadRefType", _productId, _version)));
     }
 
-    function getProductPendingVersionDownloadRefSource(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (string) {
-        _storage.getString(keccak256(abi.encodePacked("product.pendingVersions.downloadRefSource", _productId, _index)));
+    function getProductVersionDownloadRefSource(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (string) {
+        _storage.getString(keccak256(abi.encodePacked("product.versions.downloadRefSource", _productId, _version)));
     }
 
-    function getProductPendingVersionChecksum(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (string) {
-        _storage.getString(keccak256(abi.encodePacked("product.pendingVersions.checksum", _productId, _index)));
+    function getProductVersionChecksum(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (string) {
+        _storage.getString(keccak256(abi.encodePacked("product.versions.checksum", _productId, _version)));
     }
 
-    function getProductPendingVersionCreatedAt(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (uint) {
-        _storage.getUint(keccak256(abi.encodePacked("product.pendingVersions.createdAt", _productId, _index)));
+    function getProductVersionCreatedAt(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (uint) {
+        _storage.getUint(keccak256(abi.encodePacked("product.versions.createdAt", _productId, _version)));
     }
 
-    function getProductPendingVersion(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (Version) {
-        Version memory version = Version({
-            version: getProductPendingVersionVersion(_storage, _productId, _index),
-            downloadRefType: getProductPendingVersionDownloadRefType(_storage, _productId, _index),
-            downloadRefSource: getProductPendingVersionDownloadRefSource(_storage, _productId, _index),
-            checksum: getProductPendingVersionChecksum(_storage, _productId, _index),
-            createdAt: getProductPendingVersionCreatedAt(_storage, _productId, _index)
+    function getProductVersion(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (ProductVersion) {
+        ProductVersion memory version = ProductVersion({
+            version: getProductVersionVersion(_storage, _productId, _version),
+            downloadRefType: getProductVersionDownloadRefType(_storage, _productId, _version),
+            downloadRefSource: getProductVersionDownloadRefSource(_storage, _productId, _version),
+            checksum: getProductVersionChecksum(_storage, _productId, _version),
+            createdAt: getProductVersionCreatedAt(_storage, _productId, _version)
         });
 
         return version;
+    }
+
+    // Version Voting
+
+    function getProductVersionVotingApprovalCount(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (uint) {
+        _storage.getUint(keccak256(abi.encodePacked("product.versionVoting.approvalCount", _productId, _version)));
+    }
+
+    function getProductVersionVotingDisapprovalCount(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (uint) {
+        _storage.getUint(keccak256(abi.encodePacked("product.versionVoting.disapprovalCount", _productId, _version)));
+    }
+
+    function getProductVersionVotingIsActive(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (bool) {
+        _storage.getBool(keccak256(abi.encodePacked("product.versionVoting.isActive", _productId, _version)));
+    }
+
+    function getProductVersionVotingHasFailed(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (bool) {
+        _storage.getBool(keccak256(abi.encodePacked("product.versionVoting.hasFailed", _productId, _version)));
+    }
+
+    function getProductVersionVotingHasVoted(MarketplaceStorage _storage, uint _productId, string _version, address _address) internal view returns (bool) {
+        _storage.getBool(keccak256(abi.encodePacked("product.versionVoting.voters", _productId, _version, _address)));
+    }
+
+
+    function getProductVersionVoting(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (VersionVoting) {
+        VersionVoting memory versionVoting = VersionVoting({
+            approvalCount: getProductVersionVotingApprovalCount(_storage, _productId, _version),
+            disapprovalCount: getProductVersionVotingDisapprovalCount(_storage, _productId, _version),
+            isActive: getProductVersionVotingIsActive(_storage, _productId, _version),
+            hasFailed: getProductVersionVotingHasFailed(_storage, _productId, _version)
+        });
+
+        return versionVoting;
     }
 
 
@@ -277,43 +332,45 @@ library ProductStorageAccess {
     }
 
     function setProductTitle(MarketplaceStorage _storage, uint _productId, string _title) internal {
-        return _storage.setString(keccak256(abi.encodePacked("product.title", _productId)), _title);
+        _storage.setString(keccak256(abi.encodePacked("product.title", _productId)), _title);
     }
 
-    function setProductType(MarketplaceStorage _storage, uint _productId, bytes32 _type) internal {
-        return _storage.setBytes32(keccak256(abi.encodePacked("product.type", _productId)), _type);
+    function setProductType(MarketplaceStorage _storage, uint _productId, string _type) internal {
+        _storage.setString(keccak256(abi.encodePacked("product.type", _productId)), _type);
     }
 
     function setProductStatus(MarketplaceStorage _storage, uint _productId, uint _status) internal {
-        return _storage.setUint(keccak256(abi.encodePacked("product.status", _productId)), _status);
+        _storage.setUint(keccak256(abi.encodePacked("product.status", _productId)), _status);
     }
 
     function setProductContent(MarketplaceStorage _storage, uint _productId, string _content) internal {
-        return _storage.setString(keccak256(abi.encodePacked("product.content", _productId)), _content);
+        _storage.setString(keccak256(abi.encodePacked("product.content", _productId)), _content);
     }
 
     function setProductSystemTagsLength(MarketplaceStorage _storage, uint _productId, uint _length) internal {
-        return _storage.setUint(keccak256(abi.encodePacked("product.systemTags.length", _productId)), _length);
+        _storage.setUint(keccak256(abi.encodePacked("product.systemTags.length", _productId)), _length);
     }
 
     function setProductSystemTag(MarketplaceStorage _storage, uint _productId, uint _index, bytes32 _tag) internal {
-        return _storage.setBytes32(keccak256(abi.encodePacked("product.systemTags", _productId, _index)), _tag);
+        bytes memory bytesTag = _tag.toBytes();
+        _storage.setBytes(keccak256(abi.encodePacked("product.systemTags", _productId, _index)), bytesTag);
     }
 
     function setProductAuthorTagsLength(MarketplaceStorage _storage, uint _productId, uint _length) internal {
-        return _storage.setUint(keccak256(abi.encodePacked("product.authorTags.length", _productId)), _length);
+        _storage.setUint(keccak256(abi.encodePacked("product.authorTags.length", _productId)), _length);
     }
 
     function setProductAuthorTag(MarketplaceStorage _storage, uint _productId, uint _index, bytes32 _tag) internal {
-        return _storage.setBytes32(keccak256(abi.encodePacked("product.authorTags", _productId, _index)), _tag);
+        bytes memory bytesTag = _tag.toBytes();
+        _storage.setBytes(keccak256(abi.encodePacked("product.authorTags", _productId, _index)), bytesTag);
     }
 
     function setProductDeveloper(MarketplaceStorage _storage, uint _productId, address _developer) internal {
-        return _storage.setAddress(keccak256(abi.encodePacked("product.developer", _productId)), _developer);
+        _storage.setAddress(keccak256(abi.encodePacked("product.developer", _productId)), _developer);
     }
 
     function setProductDeveloperId(MarketplaceStorage _storage, uint _productId, uint _developerId) internal {
-        return _storage.setUint(keccak256(abi.encodePacked("product.developerId", _productId)), _developerId);
+        _storage.setUint(keccak256(abi.encodePacked("product.developerId", _productId)), _developerId);
     }
 
     // Price Plan
@@ -355,11 +412,11 @@ library ProductStorageAccess {
     }
 
     function setProductSystemRequirementSystem(MarketplaceStorage _storage, uint _productId, uint _index, string _system) internal {
-        return _storage.setString(keccak256(abi.encodePacked("product.systemRequirements.system", _productId, _index)), _system);
+        _storage.setString(keccak256(abi.encodePacked("product.systemRequirements.system", _productId, _index)), _system);
     }
 
     function setProductSystemRequirementInfo(MarketplaceStorage _storage, uint _productId, uint _index, string _info) internal {
-        return _storage.setString(keccak256(abi.encodePacked("product.systemRequirements.info", _productId, _index)), _info);
+        _storage.setString(keccak256(abi.encodePacked("product.systemRequirements.info", _productId, _index)), _info);
     }
 
     function setProductSystemRequirement(MarketplaceStorage _storage, uint _productId, uint _index, string _system, string _info) internal {
@@ -382,15 +439,15 @@ library ProductStorageAccess {
     }
 
     function setProductLanguageSupportLanguage(MarketplaceStorage _storage, uint _productId, uint _index, string _language) internal {
-        return _storage.setString(keccak256(abi.encodePacked("product.languagesSupported.language", _productId, _index)), _language);
+        _storage.setString(keccak256(abi.encodePacked("product.languagesSupported.language", _productId, _index)), _language);
     }
 
     function setProductLanguageSupportClosedCaptioning(MarketplaceStorage _storage, uint _productId, uint _index, bool _closedCaptioning) internal {
-        return _storage.setBool(keccak256(abi.encodePacked("product.languagesSupported.closedCaptioning", _productId, _index)), _closedCaptioning);
+        _storage.setBool(keccak256(abi.encodePacked("product.languagesSupported.closedCaptioning", _productId, _index)), _closedCaptioning);
     }
 
     function setProductLanguageSupportAudioDescription(MarketplaceStorage _storage, uint _productId, uint _index, bool _audioDescription) internal {
-        return _storage.setBool(keccak256(abi.encodePacked("product.languagesSupported.audioDescription", _productId, _index)), _audioDescription);
+        _storage.setBool(keccak256(abi.encodePacked("product.languagesSupported.audioDescription", _productId, _index)), _audioDescription);
     }
 
     function setProductLanguageSupport(MarketplaceStorage _storage, uint _productId, uint _index, string _language, bool _closedCaptioning, bool _audioDescription) internal {
@@ -409,8 +466,8 @@ library ProductStorageAccess {
 
     // Version
 
-    function setProductLatestVersionVersion(MarketplaceStorage _storage, uint _productId, bytes32 _version) internal {
-        _storage.setBytes32(keccak256(abi.encodePacked("product.latestVersion.version", _productId)), _version);
+    function setProductLatestVersionVersion(MarketplaceStorage _storage, uint _productId, string _version) internal {
+        _storage.setString(keccak256(abi.encodePacked("product.latestVersion.version", _productId)), _version);
     }
 
     function setProductLatestVersionDownloadRefType(MarketplaceStorage _storage, uint _productId, string _downloadRefType) internal {
@@ -429,7 +486,7 @@ library ProductStorageAccess {
         _storage.setUint(keccak256(abi.encodePacked("product.latestVersion.createdAt", _productId)), _createdAt);
     }
 
-    function setProductLatestVersion(MarketplaceStorage _storage, uint _productId, bytes32 _version, string _downloadRefType, string _downloadRefSource, string _checksum, uint _createdAt) internal {
+    function setProductLatestVersion(MarketplaceStorage _storage, uint _productId, string _version, string _downloadRefType, string _downloadRefSource, string _checksum, uint _createdAt) internal {
         setProductLatestVersionVersion(_storage, _productId, _version);
         setProductLatestVersionDownloadRefType(_storage, _productId, _downloadRefType);
         setProductLatestVersionDownloadRefSource(_storage, _productId, _downloadRefSource);
@@ -437,43 +494,64 @@ library ProductStorageAccess {
         setProductLatestVersionCreatedAt(_storage, _productId, _createdAt);
     }
 
-    function setProductPendingVersionsLength(MarketplaceStorage _storage, uint _productId, uint _length) internal {
-        _storage.setUint(keccak256(abi.encodePacked("product.pendingVersions.length", _productId)), _length);
+    function setProductVersionsLength(MarketplaceStorage _storage, uint _productId, uint _length) internal {
+        _storage.setUint(keccak256(abi.encodePacked("product.versions.length", _productId)), _length);
     }
 
-    function setProductPendingVersionVersion(MarketplaceStorage _storage, uint _productId, uint _index, bytes32 _version) internal {
-        _storage.setBytes32(keccak256(abi.encodePacked("product.pendingVersions.version", _productId, _index)), _version);
+    function setProductVersionVersion(MarketplaceStorage _storage, uint _productId, string _version) internal {
+        _storage.setString(keccak256(abi.encodePacked("product.versions.version", _productId, _version)), _version);
     }
 
-    function setProductPendingVersionDownloadRefType(MarketplaceStorage _storage, uint _productId, uint _index, string _downloadRefType) internal {
-        _storage.setString(keccak256(abi.encodePacked("product.pendingVersions.downloadRefType", _productId, _index)), _downloadRefType);
+    function setProductVersionDownloadRefType(MarketplaceStorage _storage, uint _productId, string _version, string _downloadRefType) internal {
+        _storage.setString(keccak256(abi.encodePacked("product.versions.downloadRefType", _productId, _version)), _downloadRefType);
     }
 
-    function setProductPendingVersionDownloadRefSource(MarketplaceStorage _storage, uint _productId, uint _index, string _downloadRefSource) internal {
-        _storage.setString(keccak256(abi.encodePacked("product.pendingVersions.downloadRefSource", _productId, _index)), _downloadRefSource);
+    function setProductVersionDownloadRefSource(MarketplaceStorage _storage, uint _productId, string _version, string _downloadRefSource) internal {
+        _storage.setString(keccak256(abi.encodePacked("product.versions.downloadRefSource", _productId, _version)), _downloadRefSource);
     }
 
-    function setProductPendingVersionChecksum(MarketplaceStorage _storage, uint _productId, uint _index, string _checksum) internal {
-        _storage.setString(keccak256(abi.encodePacked("product.pendingVersions.checksum", _productId, _index)), _checksum);
+    function setProductVersionChecksum(MarketplaceStorage _storage, uint _productId, string _version, string _checksum) internal {
+        _storage.setString(keccak256(abi.encodePacked("product.versions.checksum", _productId, _version)), _checksum);
     }
 
-    function setProductPendingVersionCreatedAt(MarketplaceStorage _storage, uint _productId, uint _index, uint _createdAt) internal {
-        _storage.setUint(keccak256(abi.encodePacked("product.pendingVersions.createdAt", _productId, _index)), _createdAt);
+    function setProductVersionCreatedAt(MarketplaceStorage _storage, uint _productId, string _version, uint _createdAt) internal {
+        _storage.setUint(keccak256(abi.encodePacked("product.versions.createdAt", _productId, _version)), _createdAt);
     }
 
-    function setProductPendingVersion(MarketplaceStorage _storage, uint _productId, uint _index, bytes32 _version, string _downloadRefType, string _downloadRefSource, string _checksum, uint _createdAt) internal {
-        setProductPendingVersionVersion(_storage, _productId, _index, _version);
-        setProductPendingVersionDownloadRefType(_storage, _productId, _index, _downloadRefType);
-        setProductPendingVersionDownloadRefSource(_storage, _productId, _index, _downloadRefSource);
-        setProductPendingVersionChecksum(_storage, _productId, _index, _checksum);
-        setProductPendingVersionCreatedAt(_storage, _productId, _index, _createdAt);
+    function setProductVersion(MarketplaceStorage _storage, uint _productId, string _version, string _downloadRefType, string _downloadRefSource, string _checksum, uint _createdAt) internal {
+        setProductVersionVersion(_storage, _productId, _version);
+        setProductVersionDownloadRefType(_storage, _productId, _version, _downloadRefType);
+        setProductVersionDownloadRefSource(_storage, _productId, _version, _downloadRefSource);
+        setProductVersionChecksum(_storage, _productId, _version, _checksum);
+        setProductVersionCreatedAt(_storage, _productId, _version, _createdAt);
     }
-    
-    function pushProductPendingVersion(MarketplaceStorage _storage, uint _productId, bytes32 _version, string _downloadRefType, string _downloadRefSource, string _checksum, uint _createdAt) internal {
-        uint nextIndex = getProductPendingVersionsLength(_storage, _productId);
 
-        setProductPendingVersion(_storage, _productId, nextIndex, _version, _downloadRefType, _downloadRefSource, _checksum, _createdAt);
+    // Version Voting
 
-        setProductPendingVersionsLength(_storage, _productId, nextIndex + 1);
+    function setProductVersionVotingApprovalCount(MarketplaceStorage _storage, uint _productId, string _version, uint _count) internal {
+        _storage.setUint(keccak256(abi.encodePacked("product.versionVoting.approvalCount", _productId, _version)), _count);
+    }
+
+    function setProductVersionVotingDisapprovalCount(MarketplaceStorage _storage, uint _productId, string _version, uint _count) internal {
+        _storage.setUint(keccak256(abi.encodePacked("product.versionVoting.disapprovalCount", _productId, _version)), _count);
+    }
+
+    function setProductVersionVotingIsActive(MarketplaceStorage _storage, uint _productId, string _version, bool _isActive) internal {
+        _storage.setBool(keccak256(abi.encodePacked("product.versionVoting.isActive", _productId, _version)), _isActive);
+    }
+
+    function setProductVersionVotingHasFailed(MarketplaceStorage _storage, uint _productId, string _version, bool _hasFailed) internal {
+        _storage.setBool(keccak256(abi.encodePacked("product.versionVoting.hasFailed", _productId, _version)), _hasFailed);
+    }
+
+    function setProductVersionVotingHasVoted(MarketplaceStorage _storage, uint _productId, string _version, address _address, bool _hasVoted) internal {
+        _storage.setBool(keccak256(abi.encodePacked("product.versionVoting.voters", _productId, _version, _address)), _hasVoted);
+    }
+
+    function setProductVersionVoting(MarketplaceStorage _storage, uint _productId, string _version, uint _approvalCount, uint _disapprovalCount, bool _isActive, bool _hasFailed) internal {
+        setProductVersionVotingApprovalCount(_storage, _productId, _version, _approvalCount);
+        setProductVersionVotingDisapprovalCount(_storage, _productId, _version, _disapprovalCount);
+        setProductVersionVotingIsActive(_storage, _productId, _version, _isActive);
+        setProductVersionVotingHasFailed(_storage, _productId, _version, _hasFailed);
     }
 }

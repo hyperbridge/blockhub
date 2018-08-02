@@ -16,7 +16,7 @@ contract ProductRegistration is ProductBase {
         marketplaceStorage.incrementNextProductId();
     }
 
-    function createProduct(string _title, bytes32 _type, string _content) external {
+    function createProduct(string _title, string _type, string _content) external {
         // Verify that sender is a developer
         uint developerId = marketplaceStorage.getDeveloperId(msg.sender);
         require(developerId != 0, "This address is not a developer.");
@@ -47,7 +47,7 @@ contract ProductRegistration is ProductBase {
         }
     }
 
-    function editProductInfo(uint _productId, string _title, bytes32 _type, string _content) external {
+    function editProductInfo(uint _productId, string _title, string _type, string _content) external {
         marketplaceStorage.setProductTitle(_productId, _title);
         marketplaceStorage.setProductType(_productId, _type);
         marketplaceStorage.setProductContent(_productId, _content);
@@ -62,7 +62,7 @@ contract ProductRegistration is ProductBase {
             uint id,
             uint status,
             string title,
-            bytes32 productType,
+            string productType,
             string content,
             bytes32[] systemTags,
             bytes32[] authorTags,
