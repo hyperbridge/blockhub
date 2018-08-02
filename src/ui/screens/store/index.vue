@@ -61,6 +61,25 @@
                     </div>
 
                 </div>
+
+                <div class="row product-grid">
+                    <div class="col-12">
+                        <c-heading-bar name="Crowdfund Projects" more="/projects" :showArrows="false" :showBackground="true" />
+                    </div>
+
+                    <div class="col-12 col-lg-4" v-for="(item, index) in projects" v-bind:key="index">
+                        <div class="card invert product-grid__item">
+                            <div class="card-body padding-0" v-if="frontpage_product.images">
+                                <a :href="`/#/project/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
+                                <h4><a :href="`/#/project/${item.id}`">{{ item.name }}</a></h4>
+                                <p class="card-text" hidden>{{ item.short_description }} </p>
+
+                                <c-tags :tags="item.author_tags"></c-tags>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </c-layout>
@@ -81,6 +100,9 @@ export default {
         'c-heading-bar': () => import('@/ui/components/heading-bar')
     },
     computed: {
+        projects() {
+            return this.$store.state.funding.projects
+        },
         products() {
             if (this.$store.state.cache.screens['/store'] && this.$store.state.cache.screens['/store'].products)
                 return this.$store.state.cache.screens['/store'].products

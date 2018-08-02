@@ -38,19 +38,18 @@
                 <ul>
                     <li class="app-header__create-account-btn" v-if="!signed_in">
                         <a href="/#/account/signup" class="">
-                            <span class="text">CREATE ACCOUNT</span> <span class="fa fa-arrow-right"></span>
+                            <span class="text">CREATE ACCOUNT</span> <span class="fa fa-user-plus"></span>
+                        </a>
+                    </li>
+                    <li class="app-header__download-btn">
+                        <a href="/#/download" class="">
+                            <span class="text">DOWNLOAD</span> <span class="fa fa-download"></span>
                         </a>
                     </li>
                     <li>
                         <a href="/#/store">
                             <span class="icon fa fa-shopping-cart"></span>
                             <span class="text">Store</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/#/projects">
-                            <span class="icon fa fa-shopping-cart"></span>
-                            <span class="text">Projects</span>
                         </a>
                     </li>
                     <li v-if="signed_in">
@@ -267,7 +266,7 @@ export default {
         }
     }
 
-    .app-header__create-account-btn {
+    .app-header__create-account-btn, .app-header__download-btn {
         position: relative;
         margin: 0 20px;
 
@@ -275,9 +274,7 @@ export default {
             position: absolute;
             top: -10px;
             left: 0;
-            background: #43C981;
             border-radius: 0 0 5px 5px;
-            width: 180px;
             height: 40px;
             z-index: 10;
             content: '';
@@ -293,6 +290,16 @@ export default {
             font-size: 14px;
             font-weight: bold;
         }
+    }
+
+    .app-header__create-account-btn:before {
+        width: 185px;
+        background: #43C981;
+    }
+
+    .app-header__download-btn:before {
+        width: 140px;
+        background: #4395c9;
     }
 
     .app-header__top-bar {

@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="product-navigation">
+    <c-layout>
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
@@ -7,7 +7,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-sub-bg position-relative">
-                                    <img src="../../../assets/SVG/logo.svg" alt="Logo" />
+                                    <img src="/static/img/logo-white-text.png" alt="Logo" />
                                     <img src="../../../assets/img/monitor_temp.png" class="absolute_img" alt="Logo" />
                                 </div>
                                 <div class="info">
