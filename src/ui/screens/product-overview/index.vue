@@ -210,13 +210,13 @@
         computed: {
             product: updateProduct,
             editing() {
-                if (!this.$store.state.marketplace.editor_mode === 'editing') {
+                if (!this.$store.state.marketplace.editor_mode) {
                     for (let key in this.activeElement) {
                         this.activeElement[key] = false
                     }
                 }
 
-                return this.$store.state.marketplace.editor_mode
+                return this.$store.state.marketplace.editor_mode === 'editing'
             }
         },
         mounted: updateProduct,
