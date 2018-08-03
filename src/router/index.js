@@ -147,6 +147,12 @@ const router = new Router({
             component: () => import('@/ui/screens/identity-projects')
         },
         {
+            path: '/identity/:id/licenses',
+            name: 'Identity licenses',
+            props: true,
+            component: () => import('@/ui/screens/identity-licenses')
+        },
+        {
             path: '/identity/:id/assets',
             name: 'Identity Assets',
             props: true,
