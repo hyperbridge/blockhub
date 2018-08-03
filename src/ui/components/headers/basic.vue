@@ -93,6 +93,12 @@
                             <span class="text">Sign In</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="/#/help">
+                            <span class="icon fa fa-question-circle"></span>
+                            <span class="text">Help</span>
+                        </a>
+                    </li>
                     <li v-if="signed_in">
                         <a href="#" @click.prevent="toggleMenu">
                             <span class="icon fa fa-caret-square-down"></span>
@@ -102,8 +108,16 @@
                             <p>Your Realms</p>
 
                             <a href="/#/realm/1">
-                                <span class="icon fa fa-tablet-alt"></span>
+                                <span class="icon icon-letter-circle">C</span>
                                 <span class="text">Continuum</span>
+                            </a>
+                            <a href="/#/realm/1">
+                                <span class="icon icon-letter-circle">H</span>
+                                <span class="text">Hyperbridge</span>
+                            </a>
+                            <a href="/#/realm/1">
+                                <span class="icon icon-letter-circle">R</span>
+                                <span class="text">Ready Block One</span>
                             </a>
 
                             <a href="/#/profile/1/realms">See More...</a>
@@ -112,15 +126,32 @@
 
                             <p>Your Products</p>
                             <a href="/#/product/1">
-                                <span class="icon fa fa-tablet-alt"></span>
+                                <span class="icon icon-letter-circle">B</span>
                                 <span class="text">BlockHub</span>
                             </a>
+                            <a href="/#/product/1">
+                                <span class="icon icon-letter-circle">D</span>
+                                <span class="text">Dataforce</span>
+                            </a>
+                            <a href="/#/product/1">
+                                <span class="icon icon-letter-circle">R</span>
+                                <span class="text">Republic</span>
+                            </a>
+
+                            <a href="/#/profile/1/realms">See More...</a>
                             
                             <hr />
 
                             <a href="/#/account">
                                 <span class="icon fa fa-user"></span>
-                                <span class="text">Manage Account</span>
+                                <span class="text">Developer Area</span>
+                            </a>
+
+                            <hr />
+
+                            <a href="/#/account">
+                                <span class="icon fa fa-user"></span>
+                                <span class="text">Account</span>
                             </a>
                             <a href="/#/account/identities">
                                 <span class="icon fa fa-id-card"></span>
@@ -141,17 +172,13 @@
                                 <span class="icon fa fa-users"></span>
                                 <span class="text">Contacts</span>
                             </a>
-                            
-                            <hr />
-
                             <a href="/#/account/activity">
                                 <span class="icon fa fa-list-alt"></span>
                                 <span class="text">Activity Log</span>
                             </a>
-                            <a href="/#/account/debug">
-                                <span class="icon fa fa-file-alt"></span>
-                                <span class="text">Debug Log</span>
-                            </a>
+                            
+                            <hr />
+
                             <a href="/#/settings">
                                 <span class="icon fa fa-cog"></span>
                                 <span class="text">Settings</span>
@@ -236,9 +263,6 @@ export default {
         z-index: 100;
         top: 32px;
         right: 0;
-        @media only screen and (min-width: 1400px){
-            width: calc( 25% - 8px );
-        }
 
         > p {
             color: #fff;
@@ -255,6 +279,14 @@ export default {
             width: 100%;
             margin: 10px 0;
         }
+    }
+
+    .icon-letter-circle {
+        background: #3f87b8;
+        border-radius: 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: 11px;
     }
 
     .btn-block {

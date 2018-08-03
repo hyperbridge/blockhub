@@ -168,6 +168,16 @@ const router = new Router({
             component: () => import('@/ui/screens/settings-client')
         },
         {
+            path: '/settings/activity',
+            name: 'Activity Settings',
+            component: () => import('@/ui/screens/settings-activity')
+        },
+        {
+            path: '/settings/debug',
+            name: 'Debug Settings',
+            component: () => import('@/ui/screens/settings-debug')
+        },
+        {
             path: '/developer',
             name: 'Developer Area',
             component: () => import('@/ui/screens/developer')

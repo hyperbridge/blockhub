@@ -1,7 +1,7 @@
 <template>
     <c-layout navigationKey="settings-navigation">
         <div class="content" id="content">
-            
+            Activity log...
         </div>
     </c-layout>
 </template>
