@@ -562,8 +562,8 @@
                                                 <div class="position">
                                                     <i class="fas fa-sort-up"></i>
                                                     <span class="number">
-                                            +1029
-                                        </span>
+                                                        +1029
+                                                    </span>
                                                     <i class="fas fa-sort-down"></i>
                                                 </div>
                                                 <div class="comment-container">
@@ -645,8 +645,8 @@
         },
         data() {
             return {
-                community_1: false,
-                community_2: true,
+                community_1: true,
+                community_2: false,
                 reply: false
             }
         },
@@ -669,7 +669,7 @@
 <style lang="scss" scoped>
     .community-item {
         background: rgba(0, 0, 0, .16);
-        border: 1px solid rgba(112, 112, 112, .7);
+        border: 1px solid rgba(112, 112, 112, .2);
         margin-bottom: 15px;
         border-radius: 5px;
         &.is_reply {

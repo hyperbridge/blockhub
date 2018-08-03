@@ -225,6 +225,14 @@ export default {
     .product-grid__item{
         padding: 8px 6px;
         border-radius: 5px;
+
+        &:hover {
+            will-change: transform;
+            transform: perspective(300px) rotateX(0deg) rotateY(0deg) scale(1.03);
+            box-shadow: 0 0 35px rgba(0, 0, 0, .2);
+            transition: transform 200ms cubic-bezier(0.34, 1.01, 0.8, 0.24);
+        }
+        
         h4{
             color: #fff;
             font-weight: bold;
