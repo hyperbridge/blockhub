@@ -73,8 +73,8 @@ const webpackConfig = merge(baseWebpackConfig, {
       }
     }),
     new VueLoader.VueLoaderPlugin(),
-    // generate dist index.html with correct asset hash for caching.
-    // you can customize output by editing /index.html
+    // generate dist index.vue with correct asset hash for caching.
+    // you can customize output by editing /index.vue
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: process.env.NODE_ENV === 'testing'

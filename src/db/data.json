@@ -234,6 +234,10 @@
                         "created_at": null,
                         "address": null
                     },
+                    "ProjectRegistrationHelpersLibrary": {
+                        "created_at": null,
+                        "address": null
+                    },
                     "ProjectRegistration": {
                         "created_at": null,
                         "address": null

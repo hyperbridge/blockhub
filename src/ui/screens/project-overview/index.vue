@@ -508,7 +508,7 @@
             }
         },
         created() {
-            this.$store.dispatch('marketplace/setEditorMode', 'editing')
+            //this.$store.dispatch('marketplace/setEditorMode', 'editing')
         },
         beforeDestroy() {
             window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'

@@ -1,11 +1,17 @@
 <template>
     <div class="heading-bar w-100">
         <h3 class="heading-bar__name" :class="{ 'heading-bar__name--with-bg': showBackground }">{{ name }}</h3>
-        <div class="heading-bar__nav" v-if="showArrows">
-            <a href="#3" class="nav-prev">
+        <div class="heading-bar__additional-action">
+            <slot name="additional-action"></slot>
+        </div>
+        <div class="heading-bar__nav">
+            <a :href="more" v-if="more">
+                <strong>MORE</strong>
+            </a>
+            <a href="#3" class="nav-prev" v-if="showArrows">
                 <i class="fas fa-arrow-left"></i>
             </a>
-            <a href="#3" class="nav-next">
+            <a href="#3" class="nav-next" v-if="showArrows">
                 <i class="fas fa-arrow-right"></i>
             </a>
         </div>
@@ -15,7 +21,7 @@
 
 <script>
 export default {
-    props: ['name', 'showBackground', 'showArrows']
+    props: ['name', 'showBackground', 'showArrows', 'more']
 }
 </script>
 

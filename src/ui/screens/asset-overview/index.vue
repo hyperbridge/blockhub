@@ -133,7 +133,7 @@
                                 <div class="item"
                                      v-for="(item, index) in my_assets"
                                      :key="index">
-                                    <a href="#3">
+                                    <a href="#3" data-toggle="modal" data-target="#assetModal">
                                         <i class="fas fa-external-link-alt"></i>
                                     </a>
                                     <div class="item_thumb">
@@ -150,6 +150,142 @@
                                                 <input type="checkbox" v-model="item.offers_accept" name="switch_8" checked="" value="0">
                                                 <span></span>
                                             </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade asset-modal" id="assetModal" tabindex="-1" role="dialog" aria-labelledby="assetModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <a href="#3" class="asset-link">
+                                            <i class="fas fa-link"></i>
+                                        </a>
+                                        <div class="asset-info d-flex justify-content-between align-items-stretch">
+                                            <div class="thumb">
+                                                <img src="http://via.placeholder.com/150x150"/>
+                                            </div>
+                                            <div class="info">
+                                                <div class="w-100 align-self-start">
+                                                    <h3>Sword of Pain</h3>
+                                                    <h4>Diablo III</h4>
+                                                </div>
+                                                <div class="w-100 align-self-end">
+                                                    <h4 class="mb-2">1512 GOV</h4>
+                                                    <p>Based on 7461 other transactions</p>
+                                                    <span class="mr-2">Lowest: 32 GOV</span>
+                                                    <span>Highest: 7850 GOV</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="action text-right my-4">
+                                            <a href="#3" class="btn btn-sm btn-danger float-left">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                            <a href="#3" class="btn btn-sm btn-info">
+                                                Send
+                                                <i class="fas fa-share"></i>
+                                            </a>
+                                            <a href="#3" class="btn btn-sm btn-success ml-2">
+                                                Use
+                                                <i class="fas fa-chevron-down"></i>
+                                            </a>
+                                        </div>
+                                        <div class="offer-switch d-flex w-100 align-items-center mb-4">
+                                            <h3 class="my-0">
+                                                Accept offers for this item?
+                                            </h3>
+                                            <label class="switch switch-sm py-0 my-0 ml-4">
+                                                <input type="checkbox" name="switch_modal" checked="" value="0">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        <div class="threshold mt-1 mb-4">
+                                            <h3>
+                                                Price Trechold
+                                            </h3>
+                                            <input type="range" class="form-control-range" id="priceTrechold">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="text-left">
+                                                    <div>0%</div>
+                                                    <div>0.00</div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <div>50%</div>
+                                                    <div>250</div>
+                                                </div>
+                                                <div class="text-right">
+                                                    <div>100%</div>
+                                                    <div>500</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="game-metadata w-100">
+                                            <div class="metadata-line">
+                                                <div>
+                                                    Type
+                                                </div>
+                                                <div>
+                                                    Legendary Two Handed Sword
+                                                </div>
+                                            </div>
+                                            <div class="metadata-line">
+                                                <div>
+                                                    Damage per Second
+                                                </div>
+                                                <div>
+                                                    2.905.8
+                                                </div>
+                                            </div>
+                                            <div class="metadata-line">
+                                                <div>
+                                                    Damage
+                                                </div>
+                                                <div>
+                                                    2193-2880
+                                                </div>
+                                            </div>
+                                            <div class="metadata-line">
+                                                <div>
+                                                    Attacks per Second
+                                                </div>
+                                                <div>
+                                                    1.15
+                                                </div>
+                                            </div>
+                                            <div class="metadata-line">
+                                                <div>
+                                                    Primary
+                                                </div>
+                                                <div>
+                                                    +1379-1679 Damage, +9% Damage, +1121 Strenght,
+                                                    Reduced Cooldown of all skills by 10%
+                                                </div>
+                                            </div>
+                                            <div class="metadata-line">
+                                                <div>
+                                                    Secondary
+                                                </div>
+                                                <div>
+                                                    Monster kills grant +151 experience, all condemned
+                                                    enemies also trigger condemn's explosion
+                                                </div>
+                                            </div>
+                                            <div class="metadata-line">
+                                                <div>
+                                                    Required Level
+                                                </div>
+                                                <div>
+                                                    70
+                                                </div>
+                                            </div>
+                                            <div class="metadata-line">
+                                                <div>
+                                                    Durability
+                                                </div>
+                                                <div>
+                                                    40/41
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -704,6 +840,113 @@
                     }
                 }
             }
+        }
+    }
+
+    .asset-modal{
+        .modal-content{
+            background: #27283E;
+            border-radius: 5px;
+            padding: 20px;
+            position: relative;
+            .asset-link{
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 16px;
+                color: #C6C6D6;
+            }
+            .asset-info{
+                .thumb{
+                    width: 150px;
+                    img{
+                        width: 100%;
+                        height: auto;
+                    }
+                }
+                .info{
+                    width: calc( 100% - 165px );
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    h3,
+                    h4,
+                    h5{
+                        padding: 0;
+                        margin: 0;
+                    }
+                    h3{
+                        font-size: 23px;
+                    }
+                    h4{
+                        font-size: 17px;
+                    }
+                    p{
+                        margin-bottom: 0px;
+                    }
+                }
+            }
+            .action{
+                a{
+                    font-size: 12px;
+                    padding: 0 5px;
+                    i{
+                        font-size: 14px;
+                    }
+                }
+            }
+            .metadata-line{
+                display: inline-block;
+                float: left;
+                width: 100%;
+                padding: 3px 10px;
+                border-bottom: 1px solid rgba(255, 255, 255, .3);
+                div{
+                    display: inline-block;
+                    &:first-child{
+                        float: left;
+                        width: 30%;
+                        font-weight: bold;
+                    }
+                    &:last-child{
+                        float: right;
+                        padding-left: 10px;
+                        width: 70%;
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+    .form-control-range{
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 3px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        margin: 10px 0;
+        border-radius: 3px;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            border-radius: 100%;
+            width: 14px;
+            height: 14px;
+            background: #FFFFFF;
+            cursor: pointer;
+            box-shadow: 0 0 2px rgba(0, 0, 0, .6);
+        }
+
+        &::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            background: #FFFFFF;
+            cursor: pointer;
+            box-shadow: 0 0 2px rgba(0, 0, 0, .6);
         }
     }
 </style>

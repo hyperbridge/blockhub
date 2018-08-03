@@ -14,7 +14,7 @@
                                 </div>
                                 <div class="page-heading__container float-right d-none d-md-block">
                                     <button class="btn btn-outline-secondary" v-if="selected.length" @click="deploySelected">Deploy selected</button>
-                                    <button class="btn btn-outline-secondary">Deploy all</button>
+                                    <button class="btn btn-outline-secondary" @click="deployAll">Deploy all</button>
                                 </div>
                             </div>
                             <div class="">
@@ -277,6 +277,13 @@ export default {
                             links: FundingProtocol.api.ethereum.state.contracts.ProjectMilestoneCompletion.links
                         },
                         {
+                            name: 'ProjectRegistrationHelpersLibrary',
+                            link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/ProjectRegistrationHelpersLibrary.sol',
+                            created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectRegistrationHelpersLibrary.created_at,
+                            address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectRegistrationHelpersLibrary.address,
+                            links: FundingProtocol.api.ethereum.state.contracts.ProjectRegistrationHelpersLibrary.links
+                        },
+                        {
                             name: 'ProjectRegistration',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/ProjectRegistration.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectRegistration.created_at,
@@ -312,7 +319,11 @@ export default {
                 for (let j in protocol.contracts) {
                     const contract = this.protocols[i].contracts[j]
 
-                    await this.$store.dispatch(protocol.id + '/deployContract', { contractName: contract.name })
+                    try {
+                        let _ = await this.$store.dispatch(protocol.id + '/deployContract', { contractName: contract.name })
+                    } catch(e) {
+
+                    }
                 }
             }
         },

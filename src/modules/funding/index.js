@@ -50,9 +50,12 @@ export const actions = {
                 await FundingProtocol.api.ethereum.setContractAddress(contractName, contract.address)
                     .catch(() => {
                         store.state.ethereum[store.state.current_ethereum_network].contracts[contractName].address = null
+                        store.state.ethereum[store.state.current_ethereum_network].contracts[contractName].created_at = null
 
                         store.dispatch('updateState')
                     })
+            } else {
+                store.state.ethereum[store.state.current_ethereum_network].contracts[contractName].created_at = null
             }
         }
     },
@@ -131,7 +134,7 @@ export const actions = {
         })
     },
     async deployContract(store, payload) {
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {
                 state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = {
                     created_at: null,
@@ -142,18 +145,48 @@ export const actions = {
             let links = []
             let params = []
 
-            if (payload.contractName !== 'FundingStorage') {
-                params = [
-                    state.ethereum[state.current_ethereum_network].contracts.FundingStorage.address
-                ]
-            }
-
             if (FundingProtocol.api.ethereum.state.contracts[payload.contractName].links) {
                 links = FundingProtocol.api.ethereum.state.contracts[payload.contractName].links
 
                 for (let i in links) {
                     links[i].address = state.ethereum[state.current_ethereum_network].contracts[links[i].name].address
+
+                    if (!links[i].address) {
+                        await actions.deployContract(store, {
+                            contractName: links[i].name
+                        })
+
+                        links[i].address = state.ethereum[state.current_ethereum_network].contracts[links[i].name].address
+                    }
                 }
+            }
+
+            // if (payload.contractName !== 'FundingStorage') {
+            //     params = [
+            //         state.ethereum[state.current_ethereum_network].contracts.FundingStorage.address
+            //     ]
+            // }
+
+            if (payload.contractName === 'FundingVault') {
+                params = [
+                    state.ethereum[state.current_ethereum_network].contracts.FundingStorage.address
+                ]
+            }
+
+            if (payload.contractName === 'Contribution'
+                || payload.contractName === 'Curation'
+                || payload.contractName === 'Developer'
+                || payload.contractName === 'ProjectContributionTier'
+                || payload.contractName === 'ProjectMilestoneCompletion'
+                || payload.contractName === 'ProjectMilestoneCompletionVoting'
+                || payload.contractName === 'ProjectRegistration'
+                || payload.contractName === 'ProjectTimeline'
+                || payload.contractName === 'ProjectTimelineProposal'
+                || payload.contractName === 'ProjectTimelineProposalVoting') {
+                params = [
+                    state.ethereum[state.current_ethereum_network].contracts.FundingStorage.address,
+                    false
+                ]
             }
 
             FundingProtocol.api.ethereum.deployContract(payload.contractName, links, params).then(async (contract) => {
