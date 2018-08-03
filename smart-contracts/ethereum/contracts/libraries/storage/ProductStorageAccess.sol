@@ -53,6 +53,7 @@ library ProductStorageAccess {
             bytes32[] authorTags                                            (product.authorTags)
             address developer                                               (product.developer)
             uint developerId                                                (product.developerId)
+            mapping(address => uint) purchasers                             (product.purchasers)
             Version latestVersion
                 string version                                              (product.latestVersion.version)
                 string downloadRefType                                      (product.latestVersion.downloadRefType)
@@ -322,6 +323,12 @@ library ProductStorageAccess {
         return versionVoting;
     }
 
+    // Purchasing
+
+    function getProductHasPurchased(MarketplaceStorage _storage, uint _productId, address _address) internal view returns (uint) {
+        _storage.getUint(keccak256(abi.encodePacked("product.purchasers", _productId, _address)));
+    }
+
 
 
     /**** Setters *******/
@@ -553,5 +560,11 @@ library ProductStorageAccess {
         setProductVersionVotingDisapprovalCount(_storage, _productId, _version, _disapprovalCount);
         setProductVersionVotingIsActive(_storage, _productId, _version, _isActive);
         setProductVersionVotingHasFailed(_storage, _productId, _version, _hasFailed);
+    }
+
+    // Purchasing
+
+    function setProductHasPurchased(MarketplaceStorage _storage, uint _productId, address _address, uint _val) internal {
+        _storage.setUint(keccak256(abi.encodePacked("product.purchasers", _productId, _address)), _val);
     }
 }
