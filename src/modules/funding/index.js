@@ -167,6 +167,12 @@ export const actions = {
             //     ]
             // }
 
+            if (payload.contractName === 'ProjectBase') {
+                params = [
+                    false
+                ]
+            }
+
             if (payload.contractName === 'FundingVault') {
                 params = [
                     state.ethereum[state.current_ethereum_network].contracts.FundingStorage.address
