@@ -92,9 +92,9 @@
                             <div class="col-5">
                                 <c-rating-block :items="product.rating" :parent_url="`/#/product/${product.id}`" />
 
-                                <c-frequently-traded-assets :items="product.frequently_traded_assets" :assets_url="`/#/product/${product.id}`" />
+                                <c-frequently-traded-assets :items="product.frequently_traded_assets" :assets_url="`/#/product/${product.id}/assets`" />
 
-                                <c-community-spotlight :discussions="product.community.discussions" :community_url="`/#/product/${product.id}`" />
+                                <c-community-spotlight :discussions="product.community.discussions" :community_url="`/#/product/${product.id}/community`" />
 
                                 <div class="card invert system-requirements" v-if="product.system_requirements">
                                     <div class="card-body">

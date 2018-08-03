@@ -76,7 +76,7 @@
                         </button>
                     </li>
                     <li v-if="signed_in">
-                        <a href="/#/identity/1">
+                        <a href="/#/account">
                             <span class="icon fa fa-user"></span>
                             <span class="text">Satoshi</span>
                         </a>
@@ -87,12 +87,6 @@
                             <span class="text">Contacts</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="/#/settings">
-                            <span class="icon fa fa-cog"></span>
-                            <span class="text">Settings</span>
-                        </a>
-                    </li>
                     <li v-if="!signed_in">
                         <a href="/#/account/signin">
                             <span class="icon fa fa-sign-out-alt"></span>
@@ -100,10 +94,73 @@
                         </a>
                     </li>
                     <li v-if="signed_in">
-                        <a href="#" @click="signOut()">
-                            <span class="icon fa fa-sign-out-alt"></span>
-                            <span class="text">Sign Out</span>
+                        <a href="#" @click.prevent="toggleMenu">
+                            <span class="icon fa fa-caret-square-down"></span>
+                            <span class="text">Menu</span>
                         </a>
+                        <div class="header-menu" v-if="show_menu">
+                            <p>Your Realms</p>
+
+                            <a href="/#/realm/1">
+                                <span class="icon fa fa-tablet-alt"></span>
+                                <span class="text">Continuum</span>
+                            </a>
+
+                            <a href="/#/profile/1/realms">See More...</a>
+
+                            <hr />
+
+                            <p>Your Products</p>
+                            <a href="/#/product/1">
+                                <span class="icon fa fa-tablet-alt"></span>
+                                <span class="text">BlockHub</span>
+                            </a>
+                            
+                            <hr />
+
+                            <a href="/#/account">
+                                <span class="icon fa fa-user"></span>
+                                <span class="text">Manage Account</span>
+                            </a>
+                            <a href="/#/account/identities">
+                                <span class="icon fa fa-id-card"></span>
+                                <span class="text">Identities</span>
+                            </a>
+                            <a href="/#/account/wallets">
+                                <span class="icon fa fa-credit-card"></span>
+                                <span class="text">Wallets</span>
+                            </a>
+
+                            <hr />
+
+                            <a href="/#/identity/1">
+                                <span class="icon fa fa-user"></span>
+                                <span class="text">Current Profile</span>
+                            </a>
+                            <a href="/#/identity/1/contacts">
+                                <span class="icon fa fa-users"></span>
+                                <span class="text">Contacts</span>
+                            </a>
+                            
+                            <hr />
+
+                            <a href="/#/account/activity">
+                                <span class="icon fa fa-list-alt"></span>
+                                <span class="text">Activity Log</span>
+                            </a>
+                            <a href="/#/account/debug">
+                                <span class="icon fa fa-file-alt"></span>
+                                <span class="text">Debug Log</span>
+                            </a>
+                            <a href="/#/settings">
+                                <span class="icon fa fa-cog"></span>
+                                <span class="text">Settings</span>
+                            </a>
+                            <a href="/#/account/signout">
+                                <span class="icon fa fa-sign-out-alt"></span>
+                                <span class="text">Sign Out</span>
+                            </a>
+                        </div>
                     </li>
                 </ul>
             </nav>
@@ -114,6 +171,11 @@
 <script>
 export default {
     props: ['isLoader'],
+    data() {
+        return {
+            show_menu: false
+        }
+    },
     computed: {
         developer_enabled() {
             return this.$store.state.marketplace.developer_enabled
@@ -145,6 +207,9 @@ export default {
             this.$store.dispatch('network/signOut')
 
             this.is_loading = true
+        },
+        toggleMenu() {
+            this.show_menu = !this.show_menu
         }
     },
     created() {
@@ -153,6 +218,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+    .header-menu {
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        background: #1C2032;
+        padding: 10px;
+        margin: 0 0 15px;
+        width: calc( 33% - 8px );
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
+        display: flex;
+        justify-content: space-between;
+        align-items: left;
+        flex-direction: column;
+        position: absolute;
+        width: 170px;
+        z-index: 100;
+        top: 32px;
+        right: 0;
+        @media only screen and (min-width: 1400px){
+            width: calc( 25% - 8px );
+        }
+
+        > p {
+            color: #fff;
+        }
+
+        > a {
+            display: block;
+            margin-left: 10px;
+            margin-bottom: 5px;
+        }
+
+        hr {
+            border-top: 1px solid #fff !important;
+            width: 100%;
+            margin: 10px 0;
+        }
+    }
 
     .btn-block {
         position: relative;

@@ -22,7 +22,7 @@
                     </a>
                 </li>
             </ul>
-            <a :href="community_url" class="btn btn-outline-white">Go To Forums</a>
+            <a :href="community_url" class="btn btn-outline-white">Go To Community</a>
         </div>
     </div>
 

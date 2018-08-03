@@ -408,6 +408,10 @@ export default {
         display: none !important;
     }
 
+    .owl-carousel .owl-stage {
+        transition: unset !important;
+    }
+
 </style>
 
 <style lang="scss" scoped>
