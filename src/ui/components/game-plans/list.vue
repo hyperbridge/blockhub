@@ -4,10 +4,10 @@
         <div class="plans-list__container">
             <div v-for="(plan, index) in items" v-bind:key="index" class="plans-list__item">
                 <h6>{{ plan.title}}</h6>
-                <a :href="plan.link" v-if="plan.price">
+                <a :href="plan.link" v-if="plan.price" data-toggle="modal" data-target="#purchase-modal">
                     <i class="fas fa-shopping-bag"></i> Buy for ${{ plan.price }}
                 </a>
-                <a :href="plan.link" v-else>
+                <a :href="plan.link" v-else data-toggle="modal" data-target="#purchase-modal">
                     <i class="fas fa-check"></i> Free Game
                 </a>
             </div>

@@ -30,140 +30,12 @@
                         </ul>
                     </div>
                     <div class="col-12 d-flex justify-content-between flex-wrap assets-list margin-bottom-30">
-                        <div class="assets-list__item">
-                            <div class="thumb">
+                        <div class="assets-list__item" v-for="(item, index) in product.assets" :key="index">
+                            <div class="assets-list__item-thumb">
                                 <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
                             </div>
-                            <div class="info">
-                                <h5>Magic Plate Armor</h5>
-                                <span class="float-left price">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    1.99
-                                </span>
-                                <span class="float-right box">
-                                    <i class="fas fa-box"></i>
-                                    350. 000
-                                </span>
-                            </div>
-                        </div>
-                        <div class="assets-list__item">
-                            <div class="thumb">
-                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
-                            </div>
-                            <div class="info">
-                                <h5>Magic Plate Armor</h5>
-                                <span class="float-left price">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    1.99
-                                </span>
-                                <span class="float-right box">
-                                    <i class="fas fa-box"></i>
-                                    350. 000
-                                </span>
-                            </div>
-                        </div>
-                        <div class="assets-list__item">
-                            <div class="thumb">
-                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
-                            </div>
-                            <div class="info">
-                                <h5>Magic Plate Armor</h5>
-                                <span class="float-left price">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    1.99
-                                </span>
-                                <span class="float-right box">
-                                    <i class="fas fa-box"></i>
-                                    350. 000
-                                </span>
-                            </div>
-                        </div>
-                        <div class="assets-list__item">
-                            <div class="thumb">
-                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
-                            </div>
-                            <div class="info">
-                                <h5>Magic Plate Armor</h5>
-                                <span class="float-left price">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    1.99
-                                </span>
-                                <span class="float-right box">
-                                    <i class="fas fa-box"></i>
-                                    350. 000
-                                </span>
-                            </div>
-                        </div>
-                        <div class="assets-list__item">
-                            <div class="thumb">
-                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
-                            </div>
-                            <div class="info">
-                                <h5>Magic Plate Armor</h5>
-                                <span class="float-left price">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    1.99
-                                </span>
-                                <span class="float-right box">
-                                    <i class="fas fa-box"></i>
-                                    350. 000
-                                </span>
-                            </div>
-                        </div>
-                        <div class="assets-list__item">
-                            <div class="thumb">
-                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
-                            </div>
-                            <div class="info">
-                                <h5>Magic Plate Armor</h5>
-                                <span class="float-left price">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    1.99
-                                </span>
-                                <span class="float-right box">
-                                    <i class="fas fa-box"></i>
-                                    350. 000
-                                </span>
-                            </div>
-                        </div>
-                        <div class="assets-list__item">
-                            <div class="thumb">
-                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
-                            </div>
-                            <div class="info">
-                                <h5>Magic Plate Armor</h5>
-                                <span class="float-left price">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    1.99
-                                </span>
-                                <span class="float-right box">
-                                    <i class="fas fa-box"></i>
-                                    350. 000
-                                </span>
-                            </div>
-                        </div>
-                        <div class="assets-list__item">
-                            <div class="thumb">
-                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
-                            </div>
-                            <div class="info">
-                                <h5>Magic Plate Armor</h5>
-                                <span class="float-left price">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    1.99
-                                </span>
-                                <span class="float-right box">
-                                    <i class="fas fa-box"></i>
-                                    350. 000
-                                </span>
-                            </div>
-                        </div>
-                        <div class="assets-list__item">
-                            <div class="thumb">
-                                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
-                            </div>
-                            <div class="info">
-                                <h5>Magic Plate Armor</h5>
+                            <div class="assets-list__item-info">
+                                <h5>{{ item.name }}</h5>
                                 <span class="float-left price">
                                     <i class="fas fa-dollar-sign"></i>
                                     1.99
@@ -176,7 +48,7 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <c-assets-grid></c-assets-grid>
+                        <c-assets-grid :list="product.assets" />
                     </div>
                 </div>
             </div>
@@ -196,6 +68,12 @@
 
         if (product.images && product.images.header)
             window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
+
+        product.assets = [
+            {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'},
+            {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'},
+            {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}
+        ]
 
         return product
     }
@@ -242,23 +120,23 @@
         @media only screen and (min-width: 1400px){
             width: calc( 25% - 8px );
         }
-        .thumb{
-            display: inline-block;
-            float: left;
-            width: 25%;
-            img{
-                width: 100%;
-                height: auto;
-            }
+    }
+    .assets-list__item-thumb{
+        display: inline-block;
+        float: left;
+        width: 25%;
+        img{
+            width: 100%;
+            height: auto;
         }
-        .info{
-            display: inline-block;
-            width: 70%;
-            float: right;
-            span{
-                i{
-                    margin-right: 5px;
-                }
+    }
+    .assets-list__item-info{
+        display: inline-block;
+        width: 70%;
+        float: right;
+        span{
+            i{
+                margin-right: 5px;
             }
         }
     }

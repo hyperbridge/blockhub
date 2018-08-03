@@ -4,7 +4,7 @@
         <h5 class="sale-box__title">
             {{ sale_box.title }}
         </h5>
-        <a :href="sale_box.link" class="sale-box__link">
+        <a :href="sale_box.link" class="sale-box__link" data-toggle="modal" data-target="#purchase-modal">
             Get for ${{ sale_box.price }}
         </a>
     </div>

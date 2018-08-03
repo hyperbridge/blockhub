@@ -188,9 +188,9 @@
                                 </div>
                             </c-heading-bar>
 
-                            <c-assets-grid></c-assets-grid>
+                            <c-assets-grid />
 
-                            <c-pagination></c-pagination>
+                            <c-pagination />
                         </div>
                     </div>
 
