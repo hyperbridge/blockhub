@@ -1,17 +1,33 @@
 <template>
     <div class="identity-block" :class="status">
-        <div class="avatar">
+        <div class="block-icon" :class="icon_color" v-if="user">
+            <i :class="icon_class"></i>
+        </div>
+        <div class="avatar" v-if="!user">
             <a href="#3" class="avatar_upload_btn">
                 <img
                     src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMxOS45ODIgMzE5Ljk4MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzE5Ljk4MiAzMTkuOTgyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjY0cHgiIGhlaWdodD0iNjRweCI+CjxnPgoJPHBhdGggZD0iTTIzNC45OTEsMzE5Ljk4MmMyLjYxOCwwLDUuMjItMS4wNzgsNy4wNzEtMi45MjlzMi45MjktNC40NTMsMi45MjktNy4wNzF2LTE0MGg2NSAgIGMzLjkyMi0wLjAwOCw3LjcyMS0yLjU1Miw5LjIyMS02LjE3NnMwLjYxLTguMTA5LTIuMTU5LTEwLjg4NmwtMTUwLTE1MEMxNjUuMjAyLDEuMDc0LDE2Mi42MDQsMCwxNTkuOTkxLDAgICBjLTIuNjE0LDAtNS4yMTIsMS4wNzQtNy4wNjIsMi45MmwtMTUwLDE1MGMtMi43NjksMi43NzctMy42NTksNy4yNjMtMi4xNTksMTAuODg2YzEuNSwzLjYyNCw1LjI5OSw2LjE2OCw5LjIyMSw2LjE3Nmg2NXYxNDAgICBjMCwyLjYxOCwxLjA3OCw1LjIyLDIuOTI5LDcuMDcxczQuNDUzLDIuOTI5LDcuMDcxLDIuOTI5SDIzNC45OTF6IiBmaWxsPSIjNjQ3M2Y0Ii8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg=="/>
             </a>
         </div>
+        <div class="avatar" v-else>
+            <img
+                src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
+        </div>
+
         <div class="user_info">
             <div class="form-group margin-bottom-5">
                 <input type="text"
                        class="form-control"
                        name="profile_name"
                        placeholder="Profile name"
+                       v-if="!user"
+                />
+                <input type="text"
+                       class="form-control"
+                       name="profile_name"
+                       placeholder="Profile name"
+                       readonly
+                       v-else
                 />
             </div>
             <p>User</p>
@@ -29,14 +45,29 @@
             <a href="#3">
                 <i class="fas fa-plus"></i>
             </a>
+            <div class="counts" v-if="user">
+                <span>
+                    0 <i class="fas fa-long-arrow-alt-down"></i>
+                </span>
+                    <span>
+                    0 <i class="fas fa-long-arrow-alt-up"></i>
+                </span>
+            </div>
         </div>
         <div class="wallet_number">
             <div class="form-group">
                 <input type="text" class="form-control" name="wallet_number"
-                       placeholder="Wallet number"/>
+                       placeholder="Wallet number" v-if="!user"/>
+                <input type="text" class="form-control" name="wallet_number"
+                       placeholder="Wallet number" readonly v-else/>
             </div>
-            <button>
+
+            <button v-if="!user">
                 <i class="fas fa-redo-alt"></i>
+            </button>
+
+            <button v-else>
+                <i class="fas fa-copy"></i>
             </button>
         </div>
     </div>
@@ -44,7 +75,7 @@
 
 <script>
     export default {
-        props: ['user', 'status']
+        props: ['user', 'status','icon_color', 'icon_class']
     }
 </script>
 
@@ -69,10 +100,10 @@
             border-radius: 100%;
             width: 25px;
             height: 25px;
-            &.done {
-                background: #00a100;
+            &.green {
+                background: #43C981;
             }
-            &.warning {
+            &.red {
                 background: #ff6c5e;
                 font-size: 13px;
             }
