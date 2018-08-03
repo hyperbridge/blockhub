@@ -9,11 +9,11 @@
                                 <a class="nav-link active" href="#">Overview</a>
                             </li>
                         </ul>
-                        <div class="action-wallets">
-                            <div class="action-wallets__search">
+                        <div class="filter-line">
+                            <div class="filter-line__search">
                                 <input type="text" class="form-control" placeholder="Term Search">
                             </div>
-                            <div class="action-wallets__filter">
+                            <div class="filter-line__filter">
                                 Filter by:
                                 <div class="dropdown">
                                     <a class="btn dropdown-toggle" href="#" role="button" id="filtering_type"
@@ -29,7 +29,7 @@
                                 <a href="#3" class="btn btn-clear">clear <i class="fas fa-times"></i></a>
                                 <a href="#3" class="btn btn-link">more filters</a>
                             </div>
-                            <div class="action-wallets__sorting">
+                            <div class="filter-line__sorting">
                                 Sort by:
                                 <div class="dropdown">
                                     <a class="btn dropdown-toggle" href="#" role="button" id="sorting_value"
@@ -132,24 +132,24 @@
 
 
 <style lang="scss" scoped>
-    .action-wallets {
+    .filter-line {
         display: inline-block;
         width: 100%;
         float: left;
         margin: 15px 0 25px;
     }
-    .action-wallets__search,
-    .action-wallets__filter,
-    .action-wallets__sorting {
+    .filter-line__search,
+    .filter-line__filter,
+    .filter-line__sorting {
         display: inline-block;
         float: left;
         line-height: 30px;
     }
-    .action-wallets__search,
-    .action-wallets__sorting {
+    .filter-line__search,
+    .filter-line__sorting {
         width: 26%;
     }
-    .action-wallets__filter {
+    .filter-line__filter {
         width: 48%;
         border-right: 2px solid rgba(255, 255, 255, .1);
         border-left: 2px solid rgba(255, 255, 255, .1);
@@ -182,7 +182,7 @@
             padding: 4px 10px;
         }
     }
-    .action-wallets__search {
+    .filter-line__search {
         input {
             color: rgba(255, 255, 255, .7);
             border: 1px solid rgba(255, 255, 255, .5);
@@ -191,7 +191,7 @@
             padding: 0 10px;
         }
     }
-    .action-wallets__sorting {
+    .filter-line__sorting {
         text-align: right;
         .dropdown {
             display: inline-block;
