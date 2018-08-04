@@ -157,27 +157,23 @@ library ProductStorageAccess {
 
     // Price Plan
 
-    function getProductPricePlansLength(MarketplaceStorage _storage, uint _productId) internal view returns (uint) {
-        _storage.getUint(keccak256(abi.encodePacked("product.pricePlans.length", _productId)));
+    function getProductPricePlanCode(MarketplaceStorage _storage, uint _productId, string _code) internal view returns (string) {
+        return _storage.getString(keccak256(abi.encodePacked("product.pricePlans.code", _productId, _code)));
     }
 
-    function getProductPricePlanCode(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (string) {
-        return _storage.getString(keccak256(abi.encodePacked("product.pricePlans.code", _productId, _index)));
+    function getProductPricePlanName(MarketplaceStorage _storage, uint _productId, string _code) internal view returns (string) {
+        return _storage.getString(keccak256(abi.encodePacked("product.pricePlans.name", _productId, _code)));
     }
 
-    function getProductPricePlanName(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (string) {
-        return _storage.getString(keccak256(abi.encodePacked("product.pricePlans.name", _productId, _index)));
+    function getProductPricePlanPrice(MarketplaceStorage _storage, uint _productId, string _code) internal view returns (uint) {
+        return _storage.getUint(keccak256(abi.encodePacked("product.pricePlans.price", _productId, _code)));
     }
 
-    function getProductPricePlanPrice(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (uint) {
-        return _storage.getUint(keccak256(abi.encodePacked("product.pricePlans.price", _productId, _index)));
-    }
-
-    function getProductPricePlan(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (PricePlan) {
+    function getProductPricePlan(MarketplaceStorage _storage, uint _productId, string _code) internal view returns (PricePlan) {
         PricePlan memory pricePlan = PricePlan({
-            code: getProductPricePlanCode(_storage, _productId, _index),
-            name: getProductPricePlanName(_storage, _productId, _index),
-            price: getProductPricePlanPrice(_storage, _productId, _index)
+            code: getProductPricePlanCode(_storage, _productId, _code),
+            name: getProductPricePlanName(_storage, _productId, _code),
+            price: getProductPricePlanPrice(_storage, _productId, _code)
         });
 
         return pricePlan;
@@ -433,34 +429,22 @@ library ProductStorageAccess {
 
     // Price Plan
 
-    function setProductPricePlansLength(MarketplaceStorage _storage, uint _productId, uint _length) internal {
-        _storage.setUint(keccak256(abi.encodePacked("product.pricePlans.length", _productId)), _length);
+    function setProductPricePlanCode(MarketplaceStorage _storage, uint _productId, string _code) internal {
+        _storage.setString(keccak256(abi.encodePacked("product.pricePlans.code", _productId, _code)), _code);
     }
 
-    function setProductPricePlanCode(MarketplaceStorage _storage, uint _productId, uint _index, string _code) internal {
-        _storage.setString(keccak256(abi.encodePacked("product.pricePlans.code", _productId, _index)), _code);
+    function setProductPricePlanName(MarketplaceStorage _storage, uint _productId, string _code, string _name) internal {
+        _storage.setString(keccak256(abi.encodePacked("product.pricePlans.name", _productId, _code)), _name);
     }
 
-    function setProductPricePlanName(MarketplaceStorage _storage, uint _productId, uint _index, string _name) internal {
-        _storage.setString(keccak256(abi.encodePacked("product.pricePlans.name", _productId, _index)), _name);
+    function setProductPricePlanPrice(MarketplaceStorage _storage, uint _productId, string _code, uint _price) internal {
+        _storage.setUint(keccak256(abi.encodePacked("product.pricePlans.price", _productId, _code)), _price);
     }
 
-    function setProductPricePlanPrice(MarketplaceStorage _storage, uint _productId, uint _index, uint _price) internal {
-        _storage.setUint(keccak256(abi.encodePacked("product.pricePlans.price", _productId, _index)), _price);
-    }
-
-    function setProductPricePlan(MarketplaceStorage _storage, uint _productId, uint _index, string _code, string _name, uint _price) internal {
-        setProductPricePlanCode(_storage, _productId, _index, _code);
-        setProductPricePlanName(_storage, _productId, _index, _name);
-        setProductPricePlanPrice(_storage, _productId, _index, _price);
-    }
-
-    function pushProductPricePlan(MarketplaceStorage _storage, uint _productId, string _code, string _name, uint _price) internal {
-        uint nextIndex = getProductPricePlansLength(_storage, _productId);
-
-        setProductPricePlan(_storage, _productId, nextIndex, _code, _name, _price);
-
-        setProductPricePlansLength(_storage, _productId, nextIndex + 1);
+    function setProductPricePlan(MarketplaceStorage _storage, uint _productId, string _code, string _name, uint _price) internal {
+        setProductPricePlanCode(_storage, _productId, _code);
+        setProductPricePlanName(_storage, _productId, _code, _name);
+        setProductPricePlanPrice(_storage, _productId, _code, _price);
     }
 
     // System Requirement
