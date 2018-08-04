@@ -29,7 +29,7 @@
                                                     </label>
                                                 </th>
                                                 <th scope="col">Name</th>
-                                                <th scope="col">Status</th>
+                                                <th scope="col" width="160">Status</th>
                                                 <th scope="col">Address</th>
                                                 <th scope="col"></th>
                                             </tr>

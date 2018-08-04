@@ -15,7 +15,7 @@
         <div class="app-header__shadow"></div>
         <a class="app-header__bar-center" href="/#/home"><!-- add icons --></a>
         <div class="app-header__bar-right">
-            <a href="/#/settings">
+            <a href="javascript:;" data-action="fixedpanel-toggle">
                 <span class="fa fa-cog"></span>
             </a>
         </div>
@@ -98,96 +98,6 @@
                             <span class="icon fa fa-question-circle"></span>
                             <span class="text">Help</span>
                         </a>
-                    </li>
-                    <li v-if="signed_in">
-                        <a href="#" @click.prevent="toggleMenu">
-                            <span class="icon fa fa-caret-square-down"></span>
-                            <span class="text">Menu</span>
-                        </a>
-                        <div class="header-menu" v-if="show_menu">
-                            <p>Your Realms</p>
-
-                            <a href="/#/realm/1">
-                                <span class="icon icon-letter-circle">C</span>
-                                <span class="text">Continuum</span>
-                            </a>
-                            <a href="/#/realm/1">
-                                <span class="icon icon-letter-circle">H</span>
-                                <span class="text">Hyperbridge</span>
-                            </a>
-                            <a href="/#/realm/1">
-                                <span class="icon icon-letter-circle">R</span>
-                                <span class="text">Ready Block One</span>
-                            </a>
-
-                            <a href="/#/profile/1/realms">See More...</a>
-
-                            <hr />
-
-                            <p>Your Products</p>
-                            <a href="/#/product/1">
-                                <span class="icon icon-letter-circle">B</span>
-                                <span class="text">BlockHub</span>
-                            </a>
-                            <a href="/#/product/1">
-                                <span class="icon icon-letter-circle">D</span>
-                                <span class="text">Dataforce</span>
-                            </a>
-                            <a href="/#/product/1">
-                                <span class="icon icon-letter-circle">R</span>
-                                <span class="text">Republic</span>
-                            </a>
-
-                            <a href="/#/profile/1/realms">See More...</a>
-                            
-                            <hr />
-
-                            <a href="/#/account">
-                                <span class="icon fa fa-user"></span>
-                                <span class="text">Developer Area</span>
-                            </a>
-
-                            <hr />
-
-                            <a href="/#/account">
-                                <span class="icon fa fa-user"></span>
-                                <span class="text">Account</span>
-                            </a>
-                            <a href="/#/account/identities">
-                                <span class="icon fa fa-id-card"></span>
-                                <span class="text">Identities</span>
-                            </a>
-                            <a href="/#/account/wallets">
-                                <span class="icon fa fa-credit-card"></span>
-                                <span class="text">Wallets</span>
-                            </a>
-
-                            <hr />
-
-                            <a href="/#/identity/1">
-                                <span class="icon fa fa-user"></span>
-                                <span class="text">Current Profile</span>
-                            </a>
-                            <a href="/#/identity/1/contacts">
-                                <span class="icon fa fa-users"></span>
-                                <span class="text">Contacts</span>
-                            </a>
-                            <a href="/#/account/activity">
-                                <span class="icon fa fa-list-alt"></span>
-                                <span class="text">Activity Log</span>
-                            </a>
-                            
-                            <hr />
-
-                            <a href="/#/settings">
-                                <span class="icon fa fa-cog"></span>
-                                <span class="text">Settings</span>
-                            </a>
-                            <a href="/#/account/signout">
-                                <span class="icon fa fa-sign-out-alt"></span>
-                                <span class="text">Sign Out</span>
-                            </a>
-                        </div>
                     </li>
                 </ul>
             </nav>
