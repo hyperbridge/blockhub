@@ -127,7 +127,7 @@ See [CONTRIBUTING](CONTRIBUTING.md)
 
 ## Problems?
 
-Discuss Node Operator on our Gitter:
+Discuss Web Client on our Gitter:
 https://gitter.im/Hyperbridge/Lobby
 
 Please post any bugs as Github issues.
