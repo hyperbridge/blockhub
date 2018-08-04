@@ -191,6 +191,239 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 ">
+                        <a href="#3" class="btn btn-info" data-toggle="modal" data-target="#send_money"
+                           @click="expert_mode = false">Simple modal</a>
+                        <a href="#3" class="btn btn-info" data-toggle="modal" data-target="#send_money"
+                           @click="expert_mode = true">Expert mode modal</a>
+                        <a href="#3" class="btn btn-info" data-toggle="modal" data-target="#login_modal">Login modal</a>
+                    </div>
+
+
+                    <!--Send Money Modal-->
+                    <div class="modal fade" id="send_money" tabindex="-1" role="dialog" aria-labelledby="send_money"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content justify-content-center">
+                                <div class="text-center">
+                                    <div class="send-money-modal">
+                                        <div class="custom-modal-header">
+                                            <div class="name">
+                                                Send money
+                                            </div>
+                                            <div class="action">
+                                                <button type="button" data-dismiss="modal" aria-label="Close">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <div class="money-info">
+                                                    <div class="card">
+                                                        <div
+                                                            class="form-row align-items-center justify-content-between margin-bottom-10">
+                                                            <div class="custom-col text-right">
+                                                                <label>
+                                                                    Send
+                                                                </label>
+                                                            </div>
+                                                            <div class="col">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="0.00"/>
+                                                            </div>
+                                                            <div class="col">
+                                                                <select class="form-control">
+                                                                    <option>BTC</option>
+                                                                    <option>TRX</option>
+                                                                    <option>ETH</option>
+                                                                    <option>CDA</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            class="form-row align-items-center justify-content-between">
+                                                            <div class="custom-col text-right">
+                                                                <label>
+                                                                    To
+                                                                </label>
+                                                            </div>
+                                                            <div class="col">
+                                                                <select class="form-control">
+                                                                    <option>Satoshi</option>
+                                                                    <option>Nakatoshi</option>
+                                                                    <option>Josh</option>
+                                                                    <option>Danial</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div
+                                                            class="d-flex justify-content-between align-items-center w-100">
+                                                            <div>
+                                                                <strong>
+                                                                    Transaction Cost
+                                                                </strong>
+                                                            </div>
+                                                            <div>
+                                                                0.000041 ETH <br>
+                                                                -0.03 USD
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div
+                                                            class="d-flex justify-content-between align-items-center flex-nowrap">
+                                                            <div class="text-left w-50">
+                                                                <strong>Total ETH</strong><br>
+                                                                0.000041 ETH
+                                                            </div>
+                                                            <div class="text-left w-50">
+                                                                <strong>Total USD</strong><br>
+                                                                ~ 0.03 USD
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="pl-1" style="font-size: 18px">
+                                                                <i class="fas fa-clock"></i>
+                                                            </div>
+                                                            <div class="pl-3 text-left">
+                                                                <strong>Time to Completion</strong>
+                                                                <div>12 Seconds</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="money-info expert margin-left-15" v-if="expert_mode">
+                                                    <div class="card">
+                                                        <div class="form-row align-items-center justify-content-between margin-bottom-10">
+                                                            <div class="custom-col text-right">
+                                                                <label>
+                                                                    Priority
+                                                                </label>
+                                                            </div>
+                                                            <div class="col">
+                                                                <select class="form-control">
+                                                                    <option>Custom</option>
+                                                                    <option>First</option>
+                                                                    <option>Second</option>
+                                                                    <option>Last</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row align-items-center justify-content-between margin-bottom-10">
+                                                            <div class="custom-col text-right">
+                                                                <label>
+                                                                    Gas Price
+                                                                </label>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="input-group mb-0">
+                                                                    <input type="number" class="form-control"
+                                                                           placeholder="0000">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text">GWEI</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row align-items-center justify-content-between margin-bottom-10">
+                                                            <div class="custom-col text-right">
+                                                                <label>
+                                                                    Nonce
+                                                                </label>
+                                                            </div>
+                                                            <div class="col">
+                                                                <input type="number" class="form-control" placeholder="0000" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card text-left">
+                                                        <strong class="w-100">
+                                                            Expression
+                                                        </strong>
+                                                        <span>
+                                                            40000000 * 21000<br>
+                                                            = 0.00000084 ETH<br>
+                                                            ~= 0.04 USD
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-action d-flex w-100 justify-content-between align-items-center mt-3 flex-nowrap">
+                                                <div class="modal-status text-uppercase text-left">
+                                                    Expert mode<br>
+                                                    <span v-if="!expert_mode"><i class="fas fa-times"></i> off</span>
+                                                    <span v-else style="color:#43C981"><i
+                                                        class="fas fa-check"></i> on</span>
+                                                </div>
+                                                <div>
+                                                    <a href="#3" class="btn btn-sm btn-info text-uppercase">
+                                                        Attach
+                                                        <i class="fas fa-paperclip"></i>
+                                                    </a>
+                                                    <a href="#3" class="btn btn-sm btn-success text-uppercase">
+                                                        Submit
+                                                        <i class="fas fa-angle-right"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Login Modal-->
+                    <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content justify-content-center">
+                                <div class="text-center">
+                                    <div class="login-modal">
+                                        <div class="custom-modal-header">
+                                            <div class="name">
+                                                Login
+                                            </div>
+                                            <div class="action">
+                                                <button type="button" data-dismiss="modal" aria-label="Close">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="modal-title">
+                                            <h3>Welcome to BlockHub</h3>
+                                            <h5>Please enter your login details</h5>
+                                        </div>
+                                        <div class="card">
+                                            <form action="">
+                                                <div class="form-group">
+                                                    <label>Username</label>
+                                                    <input type="text" class="form-control" placeholder="Username" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Password</label>
+                                                    <input type="password" class="form-control" placeholder="Password" />
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-action mt-4 d-flex justify-content-between align-items-center flex-nowrap">
+                                            <div>
+                                                <a href="#3" class="btn btn-sm btn-link">Recover Password</a><br>
+                                                <a href="#3" class="btn btn-sm btn-link">Create Account</a>
+                                            </div>
+                                            <div>
+                                                <a href="#3" class="btn btn-sm btn-success text-uppercase font-weight-bold">Log-in <i class="fas fa-angle-double-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -198,35 +431,218 @@
 </template>
 
 <script>
-export default {
-  components: {
-    'c-layout': () => import('@/ui/layouts/default'),
-      'c-heading-bar': () => import('@/ui/components/heading-bar')
-  },
-  computed: {
-    identityCount() {
-      return Object.keys(this.$store.state.network.identities).length
+    export default {
+        components: {
+            'c-layout': () => import('@/ui/layouts/default'),
+            'c-heading-bar': () => import('@/ui/components/heading-bar')
+        },
+        computed: {
+            identityCount() {
+                return Object.keys(this.$store.state.network.identities).length
+            }
+        },
+        data: () => ({
+            wallets: [],
+            expert_mode: false
+        })
     }
-  },
-  data: () => ({
-    wallets: []
-  })
-}
 </script>
 
 <style lang="scss" scoped>
-    .stat-card-container{
+    .modal-content {
+        background: transparent !important;
+    }
+
+    .custom-modal-header {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        overflow: hidden;
+        line-height: 30px;
+        &:before {
+            position: absolute;
+            background: #fff;
+            height: 8px;
+            content: "";
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 2;
+        }
+        .name {
+            padding: 0px 10px 0px 20px;
+            background: #fff;
+            color: #3D3E5D;
+            position: relative;
+            z-index: 5;
+            display: inline-block;
+            float: left;
+            font-size: 18px;
+            border-radius: 0 0 13px 0;
+            &:after {
+                content: "";
+                border-style: solid;
+                border-width: 26px 26px 0 0;
+                border-color: #ffffff transparent transparent transparent;
+                position: absolute;
+                right: -22px;
+                top: 0px;
+            }
+        }
+        .action {
+            display: inline-block;
+            float: right;
+            padding: 0;
+            background: #fff;
+            position: relative;
+            border-radius: 0 0 0 13px;
+            width: 30px;
+            button {
+                color: #F75D5D;
+                border: none;
+                background: transparent;
+                font-size: 18px;
+                cursor: pointer;
+                padding: 0;
+                &:active,
+                &:visited,
+                &:focus {
+                    box-shadow: none;
+                    outline: none;
+                }
+            }
+            &:before {
+                content: "";
+                border-style: solid;
+                border-width: 0 26px 26px 0;
+                border-color: transparent #ffffff transparent transparent;
+                position: absolute;
+                left: -24px;
+                top: 0px;
+            }
+        }
+    }
+
+    .send-money-modal {
+        background: #30314C;
+        display: inline-block;
+        width: auto !important;
+        padding: 30px 0 0;
+        position: relative;
+        min-width: 300px;
+        .card {
+            background: rgba(0, 0, 0, .13);
+            border-radius: 5px;
+            padding: 8px;
+            input,
+            select {
+                height: 30px;
+                line-height: 30px;
+                padding: 0 8px;
+            }
+            label {
+                margin: 0;
+                padding: 0;
+                text-align: left;
+            }
+            .custom-col {
+                width: auto;
+                margin-right: 10px;
+                min-width: 40px;
+            }
+        }
+        .modal-action {
+            color: #C6C6D6;
+            font-size: 12px;
+            .btn {
+                font-weight: bold;
+                color: #fff;
+            }
+        }
+        .money-info {
+            width: 300px;
+            &.expert {
+                width: 250px;
+                .card {
+                    .custom-col {
+                        width: 70px;
+                    }
+                }
+            }
+        }
+    }
+
+    .login-modal{
+        background: #30314C;
+        display: inline-block;
+        width: auto !important;
+        padding: 30px 10px 10px;
+        position: relative;
+        min-width: 250px;
+        .modal-title{
+            text-align: left;
+            margin: 15px 0;
+            h3{
+                padding: 0;
+                margin: 0 0 8px;
+                font-size: 21px;
+            }
+            h5{
+                font-size: 14px;
+                font-weight: bold;
+            }
+        }
+        .card {
+            background: rgba(0, 0, 0, .13);
+            border-radius: 5px;
+            padding: 8px;
+            margin: 0;
+            text-align: left;
+            input,
+            select {
+                height: 30px;
+                line-height: 30px;
+                padding: 0 8px;
+            }
+            label {
+                margin: 0 0 5px;
+                font-weight: bold;
+                padding: 0;
+                text-align: left;
+            }
+        }
+        .modal-action{
+            .btn{
+                &.btn-link{
+                    display: inline-block;
+                    line-height: 14px;
+                    padding: 0;
+                    color: #FFFFFF;
+                    float: left;
+                    font-size: 11px;
+                    border: none;
+                    margin: 0;
+                    text-align: left;
+                }
+            }
+        }
+    }
+</style>
+
+<style lang="scss" scoped>
+    .stat-card-container {
         position: relative;
         border-radius: 5px;
         background: rgba(28, 32, 59, .5);
         overflow: hidden;
         padding: 20px 20px 5px;
-        .stat-card-list{
+        .stat-card-list {
             display: flex;
             margin: 0 -1%;
             width: 102%;
             flex-wrap: wrap;
-            .stat-card{
+            .stat-card {
                 width: 31%;
                 margin: 0 1% 2%;
                 border-radius: 5px;
@@ -235,39 +651,39 @@ export default {
                 display: flex;
                 flex-wrap: nowrap;
                 justify-content: space-between;
-                .icon{
+                .icon {
                     font-size: 48px;
                     color: #5D75F7;
                     width: 60px;
                 }
-                .info{
-                    width: calc( 100% - 60px );
+                .info {
+                    width: calc(100% - 60px);
                     padding-left: 10px;
                     color: #fff;
-                    h4{
+                    h4 {
                         font-size: 18px;
                         margin: 0;
                         padding: 0;
                         font-weight: bold;
                     }
-                    p{
+                    p {
                         color: #C6C6D6;
                         line-height: 16px;
                     }
-                    .stat{
+                    .stat {
                         font-size: 14px;
                         font-weight: bold;
                         margin: 5px 0;
                         display: flex;
                         justify-content: space-between;
                         flex-wrap: nowrap;
-                        div{
+                        div {
                             width: 100%;
                             line-height: 20px;
-                            i{
+                            i {
                                 margin-right: 5px;
                                 color: #5D75F7;
-                                &.fa-circle{
+                                &.fa-circle {
                                     font-size: 8px;
                                     vertical-align: middle;
                                 }
