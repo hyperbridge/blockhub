@@ -42,6 +42,14 @@ library ProductStorageAccess {
         mapping(address => bool) voters;
     }
 
+    struct PurchaseOrder {
+        uint productId;
+        string pricePlanCode;
+        uint value;
+        address purchaser;
+        address developer;
+    }
+
     /*
         Each product (indexed by ID) stores the following data in MarketplaceStorage and accesses it through the
         associated namespace:
@@ -83,6 +91,13 @@ library ProductStorageAccess {
                 string language                                             (product.languagesSupported.language)
                 bool closedCaptioning                                       (product.languagesSupported.closedCaptioning)
                 bool audioDescription                                       (product.languagesSupported.audioDescription)
+            mapping(address (purchaser) => PurchaseOrder[]) purchaseOrders
+                uint productId                                              (product.purchaseOrders.productId)
+                string pricePlanCode                                        (product.purchaseOrders.pricePlanCode)
+                uint value                                                  (product.purchaseOrders.value)
+                address purchaser                                           (product.purchaseOrders.purchaser)
+                address developer                                           (product.purchaseOrders.developer)
+
 
     */
 
@@ -329,6 +344,42 @@ library ProductStorageAccess {
         _storage.getUint(keccak256(abi.encodePacked("product.purchasers", _productId, _address)));
     }
 
+    function getProductPurchaseOrdersLength(MarketplaceStorage _storage, uint _productId, address _purchaser) internal view returns (uint) {
+        _storage.getUint(keccak256(abi.encodePacked("product.purchaseOrders.length", _productId, _purchaser)));
+    }
+
+    function getProductPurchaseOrderProductId(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index) internal view returns (uint) {
+        _storage.getUint(keccak256(abi.encodePacked("product.purchaseOrders.productId", _productId, _purchaser, _index)));
+    }
+
+    function getProductPurchaseOrderPricePlanCode(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index) internal view returns (string) {
+        _storage.getString(keccak256(abi.encodePacked("product.purchaseOrders.pricePlanCode", _productId, _purchaser, _index)));
+    }
+
+    function getProductPurchaseOrderValue(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index) internal view returns (uint) {
+        _storage.getUint(keccak256(abi.encodePacked("product.purchaseOrders.value", _productId, _purchaser, _index)));
+    }
+
+    function getProductPurchaseOrderPurchaser(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index) internal view returns (address) {
+        _storage.getAddress(keccak256(abi.encodePacked("product.purchaseOrders.purchaser", _productId, _purchaser, _index)));
+    }
+
+    function getProductPurchaseOrderDeveloper(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index) internal view returns (address) {
+        _storage.getAddress(keccak256(abi.encodePacked("product.purchaseOrders.developer", _productId, _purchaser, _index)));
+    }
+
+    function getProductPurchaseOrder(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index) internal view returns (PurchaseOrder) {
+        PurchaseOrder memory purchaseOrder = PurchaseOrder({
+            productId: getProductPurchaseOrderProductId(_storage, _productId, _purchaser, _index),
+            pricePlanCode: getProductPurchaseOrderPricePlanCode(_storage, _productId, _purchaser, _index),
+            value: getProductPurchaseOrderValue(_storage, _productId, _purchaser, _index),
+            purchaser: getProductPurchaseOrderPurchaser(_storage, _productId, _purchaser, _index),
+            developer: getProductPurchaseOrderDeveloper(_storage, _productId, _purchaser, _index)
+        });
+
+        return purchaseOrder;
+    }
+
 
 
     /**** Setters *******/
@@ -566,5 +617,45 @@ library ProductStorageAccess {
 
     function setProductHasPurchased(MarketplaceStorage _storage, uint _productId, address _address, uint _val) internal {
         _storage.setUint(keccak256(abi.encodePacked("product.purchasers", _productId, _address)), _val);
+    }
+
+    function setProductPurchaseOrdersLength(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _length) internal {
+        _storage.setUint(keccak256(abi.encodePacked("product.purchaseOrders.length", _productId, _purchaser)), _length);
+    }
+
+    function setProductPurchaseOrderProductId(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index) internal {
+        _storage.setUint(keccak256(abi.encodePacked("product.purchaseOrders.productId", _productId, _purchaser, _index)), _productId);
+    }
+
+    function setProductPurchaseOrderPricePlanCode(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index, string _code) internal {
+        _storage.setString(keccak256(abi.encodePacked("product.purchaseOrders.pricePlanCode", _productId, _purchaser, _index)), _code);
+    }
+
+    function setProductPurchaseOrderValue(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index, uint _value) internal {
+        _storage.setUint(keccak256(abi.encodePacked("product.purchaseOrders.value", _productId, _purchaser, _index)), _value);
+    }
+
+    function setProductPurchaseOrderPurchaser(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index) internal {
+        _storage.setAddress(keccak256(abi.encodePacked("product.purchaseOrders.purchaser", _productId, _purchaser, _index)), _purchaser);
+    }
+
+    function setProductPurchaseOrderDeveloper(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index, address _developer) internal {
+        _storage.setAddress(keccak256(abi.encodePacked("product.purchaseOrders.developer", _productId, _purchaser, _index)), _developer);
+    }
+
+    function setProductPurchaseOrder(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index, string _pricePlanCode, uint _value, address _developer) internal {
+        setProductPurchaseOrderProductId(_storage, _productId, _purchaser, _index);
+        setProductPurchaseOrderPricePlanCode(_storage, _productId, _purchaser, _index, _pricePlanCode);
+        setProductPurchaseOrderValue(_storage, _productId, _purchaser, _index, _value);
+        setProductPurchaseOrderPurchaser(_storage, _productId, _purchaser, _index);
+        setProductPurchaseOrderDeveloper(_storage, _productId, _purchaser, _index, _developer);
+    }
+
+    function pushProductPurchaseOrder(MarketplaceStorage _storage, uint _productId, address _purchaser, string _pricePlanCode, uint _value, address _developer) internal {
+        uint nextIndex = getProductPurchaseOrdersLength(_storage, _productId, _purchaser);
+
+        setProductPurchaseOrder(_storage, _productId, _purchaser, nextIndex, _pricePlanCode, _value, _developer);
+
+        setProductPurchaseOrdersLength(_storage, _productId, _purchaser, nextIndex + 1);
     }
 }
