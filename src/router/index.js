@@ -309,7 +309,7 @@ const router = new Router({
 
 router.afterEach((to, from) => {
     // Complete the animation of the route progress bar.
-    $('.app-header--loader').removeClass('app-header--loading')
+    $('body').removeClass('screen-loading')
 })
 
 export const Auth = {
@@ -329,6 +329,8 @@ export const Auth = {
 
 
 router.beforeEach((to, from, next) => {
+    $('body').addClass('screen-loading')
+
   if (!Auth.loggedIn() && !!to.meta.auth) {
     next({
       path: '/login',

@@ -53,7 +53,7 @@ const overrideConsoleLog = () => {
   }
 }
 
-window.addEventListener('hashchange', () => { $('.app-header').addClass('app-header--loading') }, false);
+//window.addEventListener('hashchange', () => { $('body').addClass('screen-loading') }, false);
 
 
 overrideConsoleLog()
