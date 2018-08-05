@@ -14,8 +14,8 @@
                             </ul>
                         </p>
                         
-                        <div class="row">
-                            <div class="col-md-7">
+                        <div class="row justify-content-between">
+                            <div class="col-md-4 col-lg-5">
                                 <div class="editor-container">
                                     <div class="editor" v-if="editing">
                                         <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('name')" v-if="!activeElement['name']">Change Project Name <span class="fa fa-edit"></span></button>
@@ -45,7 +45,18 @@
                                     <c-tags-list :tags="project.author_tags" v-if="!editing || !activeElement['author_tags']"></c-tags-list>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4 col-lg-2">
+                                <div class="badges-list">
+                                    <div class="item">
+                                        <i class="fas fa-trophy"></i>
+                                    </div>
+                                    <div class="item">
+                                    </div>
+                                    <div class="item">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-5">
                                 <div class="editor text-right" v-if="editing" style="margin-bottom: 30px">
                                     <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('background_image')" v-if="!activeElement['background_image']">Change Background Image <span class="fa fa-edit"></span></button>
 
@@ -642,6 +653,31 @@
     .project__description {
         padding: 15px;
         font-size: 16px;
+    }
+
+    .badges-list{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 8px;
+        .item{
+            margin: 7px;
+            border-radius: 5px;
+            background: #FADC72;
+            width: 36px;
+            position: relative;
+            font-size: 24px;
+            text-align: center;
+            line-height: 36px;
+            color: #134269;
+            &:before{
+                content: "";
+                padding-top: 100%;
+                float: left;
+            }
+        }
+
     }
 
     .project__progress {
