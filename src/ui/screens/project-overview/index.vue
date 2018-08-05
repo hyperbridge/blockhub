@@ -9,20 +9,25 @@
                     <div class="col-12 tab-content" v-if="project">
                         <p class="errors" v-if="errors.length">
                             <strong>Please correct the following error(s):</strong>
-                            <ul>
-                                <li v-for="error in errors" :key="error">{{ error }}</li>
-                            </ul>
+                        <ul>
+                            <li v-for="error in errors" :key="error">{{ error }}</li>
+                        </ul>
                         </p>
-                        
+
                         <div class="row justify-content-between">
                             <div class="col-lg-4">
                                 <div class="editor-container">
                                     <div class="editor" v-if="editing">
-                                        <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('name')" v-if="!activeElement['name']">Change Project Name <span class="fa fa-edit"></span></button>
+                                        <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                                @click="activateElement('name')" v-if="!activeElement['name']">Change
+                                            Project Name <span class="fa fa-edit"></span></button>
 
-                                        <div class="form-control-element form-control-element--right" v-if="activeElement['name']">
-                                            <input ref="name" name="name" type="text" class="form-control" placeholder="Project name..." v-model="project.name" />
-                                            <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                        <div class="form-control-element form-control-element--right"
+                                             v-if="activeElement['name']">
+                                            <input ref="name" name="name" type="text" class="form-control"
+                                                   placeholder="Project name..." v-model="project.name"/>
+                                            <div
+                                                class="form-control-element__box form-control-element__box--pretify bg-secondary">
                                                 <span class="fa fa-check" @click="deactivateElement('name')"></span>
                                             </div>
                                         </div>
@@ -32,17 +37,27 @@
 
                                 <div class="editor-container">
                                     <div class="editor" v-if="editing">
-                                        <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('author_tags')" v-if="!activeElement['author_tags']" style="margin-bottom: 20px">Change Tags <span class="fa fa-edit"></span></button>
-                                        <div class="form-control-element form-control-element--right" v-if="activeElement['author_tags']">
+                                        <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                                @click="activateElement('author_tags')"
+                                                v-if="!activeElement['author_tags']" style="margin-bottom: 20px">Change
+                                            Tags <span class="fa fa-edit"></span></button>
+                                        <div class="form-control-element form-control-element--right"
+                                             v-if="activeElement['author_tags']">
                                             <select id="tag-editor" class="form-control" multiple="multiple">
-                                                <option v-for="(tag, index) in author_tag_options" :key="index" :selected="project.author_tags.includes(tag)">{{ tag }}</option>
+                                                <option v-for="(tag, index) in author_tag_options" :key="index"
+                                                        :selected="project.author_tags.includes(tag)">{{ tag }}
+                                                </option>
                                             </select>
-                                            <div class="form-control-element__box form-control-element__box--pretify bg-secondary" style="">
-                                                <span class="fa fa-check" @click="deactivateElement('author_tags')"></span>
+                                            <div
+                                                class="form-control-element__box form-control-element__box--pretify bg-secondary"
+                                                style="">
+                                                <span class="fa fa-check"
+                                                      @click="deactivateElement('author_tags')"></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <c-tags-list :tags="project.author_tags" v-if="!editing || !activeElement['author_tags']"></c-tags-list>
+                                    <c-tags-list :tags="project.author_tags"
+                                                 v-if="!editing || !activeElement['author_tags']"></c-tags-list>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -58,26 +73,40 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="editor text-right" v-if="editing" style="margin-bottom: 30px">
-                                    <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('background_image')" v-if="!activeElement['background_image']">Change Background Image <span class="fa fa-edit"></span></button>
+                                    <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                            @click="activateElement('background_image')"
+                                            v-if="!activeElement['background_image']">Change Background Image <span
+                                        class="fa fa-edit"></span></button>
 
                                     <div class="" v-if="activeElement['background_image']">
                                         <div class="form-control-element form-control-element--right">
-                                            <input ref="background_image" name="background_image" type="text" class="form-control" placeholder="Background image URL..." v-model="project.images.header" />
-                                            <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                                <span class="fa fa-check" @click="deactivateElement('background_image')"></span>
+                                            <input ref="background_image" name="background_image" type="text"
+                                                   class="form-control" placeholder="Background image URL..."
+                                                   v-model="project.images.header"/>
+                                            <div
+                                                class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                                <span class="fa fa-check"
+                                                      @click="deactivateElement('background_image')"></span>
                                             </div>
                                         </div>
                                     </div>
                                     <label style="display: block">RECOMMENDED SIZE: 1120 x 524px</label>
                                 </div>
                                 <div class="editor text-right" v-if="editing">
-                                    <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('store_image')" v-if="!activeElement['store_image']">Change Store Image <span class="fa fa-edit"></span></button>
+                                    <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                            @click="activateElement('store_image')"
+                                            v-if="!activeElement['store_image']">Change Store Image <span
+                                        class="fa fa-edit"></span></button>
 
                                     <div class="" v-if="activeElement['store_image']">
                                         <div class="form-control-element form-control-element--right">
-                                            <input ref="store_image" name="store_image" type="text" class="form-control" placeholder="Background image URL..." v-model="project.images.header" />
-                                            <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                                <span class="fa fa-check" @click="deactivateElement('store_image')"></span>
+                                            <input ref="store_image" name="store_image" type="text" class="form-control"
+                                                   placeholder="Background image URL..."
+                                                   v-model="project.images.header"/>
+                                            <div
+                                                class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                                <span class="fa fa-check"
+                                                      @click="deactivateElement('store_image')"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -88,7 +117,9 @@
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
-                                <a class="nav-link active" :href="`/#/project/${project.id}`" data-toggle="pill" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
+                                <a class="nav-link active" :href="`/#/project/${project.id}`" data-toggle="pill"
+                                   href="#overview" role="tab" aria-controls="overview"
+                                   aria-selected="true">Overview</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" :href="`/#/project/${project.id}/community`">Community</a>
@@ -103,7 +134,8 @@
                                 <a class="nav-link" :href="`/#/project/${project.id}/milestones`">Milestones</a>
                             </li>
                             <li class="nav-item" v-if="editing">
-                                <a class="nav-link" data-toggle="pill" href="#configure" role="tab" aria-controls="configure" aria-selected="true">Configure</a>
+                                <a class="nav-link" data-toggle="pill" href="#configure" role="tab"
+                                   aria-controls="configure" aria-selected="true">Configure</a>
                             </li>
                         </ul>
 
@@ -111,39 +143,39 @@
                             <c-block-1 title="Campaign">
                                 <form>
 
-                            <div class="form-group">
-                                <label>Support Email</label>
-                                <input type="email" class="form-control" placeholder="Email">
-                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                            </div>
-                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">@</span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Twitter Username">
-                            </div>
-                            <div class="form-group">
-                                <label>Share Text</label>
-                                <input type="text" class="form-control" placeholder="Email">
-                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                            </div>
-                                        
-                            <div class="form-group">
-                                <label>Minimum Contribution Goal</label>
-                                <label class="switch switch-sm">
-                                    <input type="checkbox" name="switch_8" checked="" value="0">
-                                    <span></span>
-                                </label>
-                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                            </div>
-                            <div class="form-group">
-                                <label>Maximum Contribution Goal</label>
-                                <label class="switch switch-sm">
-                                    <input type="checkbox" name="switch_8" checked="" value="0">
-                                    <span></span>
-                                </label>
-                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                            </div>
+                                    <div class="form-group">
+                                        <label>Support Email</label>
+                                        <input type="email" class="form-control" placeholder="Email">
+                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                                    </div>
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">@</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Twitter Username">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Share Text</label>
+                                        <input type="text" class="form-control" placeholder="Email">
+                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Minimum Contribution Goal</label>
+                                        <label class="switch switch-sm">
+                                            <input type="checkbox" name="switch_8" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Maximum Contribution Goal</label>
+                                        <label class="switch switch-sm">
+                                            <input type="checkbox" name="switch_8" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                                    </div>
 
                                     <div class="form-group">
                                         <label>Overflow Enabled</label>
@@ -193,8 +225,8 @@
                                         </label>
                                         <span class="form-text">Projects with Curation Enabled will allow the community to curate the project and earn reputation for their actions.</span>
                                     </div>
-                                    Contribution Period 
-                                    Choose 
+                                    Contribution Period
+                                    Choose
                                     <div class="form-group">
                                         <label>No Contribution Period</label>
                                         <label class="switch switch-sm">
@@ -207,18 +239,26 @@
                             </c-block-1>
                         </div>
 
-                        <div class="row tab-pane fade active show" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                        <div class="row tab-pane fade active show" id="overview" role="tabpanel"
+                             aria-labelledby="overview-tab">
                             <div class="col-md-7 col-xl-8">
                                 <c-screen-gallery></c-screen-gallery>
 
                                 <div class="editor-container">
                                     <div class="editor" v-if="editing">
-                                        <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right" @click="activateElement('description')" v-if="!activeElement['description']">Change Description <span class="fa fa-edit"></span></button>
+                                        <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                                @click="activateElement('description')"
+                                                v-if="!activeElement['description']">Change Description <span
+                                            class="fa fa-edit"></span></button>
 
-                                        <div class="form-control-element form-control-element--right" v-if="activeElement['description']">
-                                            <input ref="description" name="name" type="text" class="form-control" placeholder="Project description..." v-model="project.description" />
-                                            <div class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                                <span class="fa fa-check" @click="deactivateElement('description')"></span>
+                                        <div class="form-control-element form-control-element--right"
+                                             v-if="activeElement['description']">
+                                            <input ref="description" name="name" type="text" class="form-control"
+                                                   placeholder="Project description..." v-model="project.description"/>
+                                            <div
+                                                class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                                <span class="fa fa-check"
+                                                      @click="deactivateElement('description')"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -236,7 +276,9 @@
                             <div class="col-md-5 col-xl-4">
                                 <div class="card invert" v-if="project.funding">
                                     <div class="card-body">
-                                        <a class="nav-link editor-container editor-container--style-2" href="javascript:;" v-if="editing && !activeElement['campaign']" @click="showTab('configure')">
+                                        <a class="nav-link editor-container editor-container--style-2"
+                                           href="javascript:;" v-if="editing && !activeElement['campaign']"
+                                           @click="showTab('configure')">
                                             <i class="fas fa-cog"></i>
                                             <span>Set Up Campaign</span>
                                         </a>
@@ -244,8 +286,8 @@
                                         <div class="project">
                                             <div class="project__progress">
                                                 <div v-for="(stage, index) in project.funding.stages" :key="index"
-                                                    :class="stage.status"
-                                                    class="project__progress-stage">
+                                                     :class="stage.status"
+                                                     class="project__progress-stage">
                                                     <i class="fas fa-check" v-if="stage.status === 'done'"></i>
                                                     <i class="fas fa-clock" v-if="stage.status === 'in_progress'"></i>
                                                     <span class="stage_line"></span>
@@ -264,9 +306,9 @@
                                                 <div class="spent">
                                                     <div class="progress progress-bar-vertical">
                                                         <div class="progress-bar bg-success" role="progressbar"
-                                                            :aria-valuenow="project.funding.spent_amount['percent']"
-                                                            aria-valuemin="0" aria-valuemax="100"
-                                                            :style="{ height: project.funding.spent_amount['percent'] + '%' }">
+                                                             :aria-valuenow="project.funding.spent_amount['percent']"
+                                                             aria-valuemin="0" aria-valuemax="100"
+                                                             :style="{ height: project.funding.spent_amount['percent'] + '%' }">
                                                             <span class="sr-only">{{ project.funding.spent_amount['percent'] }}% Complete</span>
                                                         </div>
                                                     </div>
@@ -276,9 +318,9 @@
                                                 <div class="locked">
                                                     <div class="progress progress-bar-vertical">
                                                         <div class="progress-bar bg-success" role="progressbar"
-                                                            :aria-valuenow="project.funding.locked_amount['percent']"
-                                                            aria-valuemin="0" aria-valuemax="100"
-                                                            :style="{ height: project.funding.locked_amount['percent'] + '%' }">
+                                                             :aria-valuenow="project.funding.locked_amount['percent']"
+                                                             aria-valuemin="0" aria-valuemax="100"
+                                                             :style="{ height: project.funding.locked_amount['percent'] + '%' }">
                                                             <span class="sr-only">{{ project.funding.locked_amount['percent'] }}% Complete</span>
                                                         </div>
                                                     </div>
@@ -288,9 +330,9 @@
                                                 <div class="overflow">
                                                     <div class="progress progress-bar-vertical">
                                                         <div class="progress-bar bg-success" role="progressbar"
-                                                            :aria-valuenow="project.funding.overflow_amount['percent']"
-                                                            aria-valuemin="0" aria-valuemax="100"
-                                                            :style="{ height: project.funding.overflow_amount['percent'] + '%' }">
+                                                             :aria-valuenow="project.funding.overflow_amount['percent']"
+                                                             aria-valuemin="0" aria-valuemax="100"
+                                                             :style="{ height: project.funding.overflow_amount['percent'] + '%' }">
                                                             <span class="sr-only">{{ project.funding.overflow_amount['percent'] }}% Complete</span>
                                                         </div>
                                                     </div>
@@ -318,7 +360,8 @@
 
                                 <div class="card invert milestones" v-if="project.milestones">
                                     <div class="card-body">
-                                        <a href="#" class="editor-container editor-container--style-2" v-if="editing && !activeElement['milestones']">
+                                        <a href="#" class="editor-container editor-container--style-2"
+                                           v-if="editing && !activeElement['milestones']">
                                             <i class="fas fa-cog"></i>
                                             <span>Set Up Milestones</span>
                                         </a>
@@ -340,7 +383,299 @@
                                     </div>
                                 </div>
 
-                                <c-community-spotlight :discussions="project.community.discussions" :community_url="`/#/project/${project.id}`" :editing="editing" :activeElement="activeElement['milestones']" />
+                                <c-community-spotlight :discussions="project.community.discussions"
+                                                       :community_url="`/#/project/${project.id}`" :editing="editing"
+                                                       :activeElement="activeElement['milestones']"/>
+                            </div>
+                        </div>
+
+                        <div class="row reviews-blk margin-top-40">
+                            <div class="col-12">
+                                <c-heading-bar name="Reviews" :showArrows="false" :showBackground="false">
+                                </c-heading-bar>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <h3 class="margin-top-20">Most Helpful</h3>
+                                <div class="review-item">
+                                    <div class="liked">
+                                        <i class="fas fa-thumbs-up"></i>
+                                    </div>
+                                    <div class="review-item__head">
+                                        <div class="author_info">
+                                            <div class="avatar">
+                                                <img
+                                                    src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
+                                            </div>
+                                            <div class="user_info">
+                                                <h5 class="user_name">Satoshi San</h5>
+                                                <span class="time">Yesterday</span>
+                                            </div>
+                                        </div>
+                                        <div class="review_info">
+                                            <div class="rating_number">
+                                                4.5
+                                            </div>
+                                            <div class="other_info">
+                                                <div class="rating_stars">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div class="played_time">
+                                                    Played for 104h 15m
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="review-item__body">
+                                        <h5>
+                                            Good game very nice grapchics made by very smart people.
+                                        </h5>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eleifend
+                                            purus magna. Vestibulum sed commodo est. Duis lacinia, est vitae dictum
+                                            posuere, magna lorem mattis augue, a pulvinar justo velit at massa. Sed ac
+                                            mi purus. Maecenas cursus sodales lacus nec sagittis. Suspendisse dapibus
+                                            nulla vel ligula ultricies, sit amet vulputate eros eleifend. Ut aliquam
+                                            ipsum sit amet orci gravida accumsan. Curabitur at mi non urna faucibus
+                                            sollicitudin. Sed dui eros, elementum ut magna in, ultricies tempor nisi.
+                                            Integer malesuada orci interdum, fermentum tortor vehicula, mollis sem.
+                                            Donec nec elit sem.</p>
+                                    </div>
+                                    <div class="review-item__spec">
+                                        <div>
+                                            <strong>System</strong>
+                                            Windows 10
+                                        </div>
+                                        <div>
+                                            <strong>GPU</strong>
+                                            GF GTX 1080
+                                        </div>
+                                        <div>
+                                            <strong>CPU</strong>
+                                            Intel Core i9-7980XE
+                                        </div>
+                                        <div>
+                                            <strong>Storage</strong>
+                                            HyperX 2TB SSD
+                                        </div>
+                                        <div>
+                                            <strong>RAM</strong>
+                                            32 GB DDR5
+                                        </div>
+                                    </div>
+                                    <div class="review-item__footer">
+                                        <div class="emotions_action">
+                                            <a href="#3" class="btn-like">
+                                                <i class="fas fa-thumbs-up"></i>
+                                                Helpful
+                                            </a>
+                                            <a href="#3" class="btn-unlike">
+                                                <i class="fas fa-thumbs-down"></i>
+                                                Not Helpful
+                                            </a>
+                                        </div>
+                                        <a href="#3" class="btn btn-sm btn-link">
+                                            Continue Reading
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="review-item">
+                                    <div class="liked">
+                                        <i class="fas fa-thumbs-up"></i>
+                                    </div>
+                                    <div class="review-item__head">
+                                        <div class="author_info">
+                                            <div class="avatar">
+                                                <img
+                                                    src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
+                                            </div>
+                                            <div class="user_info">
+                                                <h5 class="user_name">Satoshi San</h5>
+                                                <span class="time">Yesterday</span>
+                                            </div>
+                                        </div>
+                                        <div class="review_info">
+                                            <div class="rating_number">
+                                                4.5
+                                            </div>
+                                            <div class="other_info">
+                                                <div class="rating_stars">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div class="played_time">
+                                                    Played for 104h 15m
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="review-item__body">
+                                        <h5>
+                                            Good game very nice grapchics made by very smart people.
+                                        </h5>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eleifend
+                                            purus magna. Vestibulum sed commodo est. Duis lacinia, est vitae dictum
+                                            posuere, magna lorem mattis augue, a pulvinar justo velit at massa. Sed ac
+                                            mi purus. Maecenas cursus sodales lacus nec sagittis. Suspendisse dapibus
+                                            nulla vel ligula ultricies, sit amet vulputate eros eleifend. Ut aliquam
+                                            ipsum sit amet orci gravida accumsan. Curabitur at mi non urna faucibus
+                                            sollicitudin. Sed dui eros, elementum ut magna in, ultricies tempor nisi.
+                                            Integer malesuada orci interdum, fermentum tortor vehicula, mollis sem.
+                                            Donec nec elit sem.</p>
+                                    </div>
+                                    <div class="review-item__spec">
+                                        <div>
+                                            <strong>System</strong>
+                                            Windows 10
+                                        </div>
+                                        <div>
+                                            <strong>GPU</strong>
+                                            GF GTX 1080
+                                        </div>
+                                        <div>
+                                            <strong>CPU</strong>
+                                            Intel Core i9-7980XE
+                                        </div>
+                                        <div>
+                                            <strong>Storage</strong>
+                                            HyperX 2TB SSD
+                                        </div>
+                                        <div>
+                                            <strong>RAM</strong>
+                                            32 GB DDR5
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <h3 class="margin-top-20">Most Recent</h3>
+                                <div class="review-item">
+                                    <div class="liked">
+                                        <i class="fas fa-thumbs-up"></i>
+                                    </div>
+                                    <div class="review-item__head">
+                                        <div class="author_info">
+                                            <div class="avatar">
+                                                <img
+                                                    src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
+                                            </div>
+                                            <div class="user_info">
+                                                <h5 class="user_name">Satoshi San</h5>
+                                                <span class="time">Yesterday</span>
+                                            </div>
+                                        </div>
+                                        <div class="review_info">
+                                            <div class="rating_number">
+                                                4.5
+                                            </div>
+                                            <div class="other_info">
+                                                <div class="rating_stars">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div class="played_time">
+                                                    Played for 104h 15m
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="review-item__body">
+                                        <h5>
+                                            Good game very nice grapchics made by very smart people.
+                                        </h5>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eleifend
+                                            purus magna. Vestibulum sed commodo est. Duis lacinia, est vitae dictum
+                                            posuere, magna lorem mattis augue, a pulvinar justo velit at massa. Sed ac
+                                            mi purus. Maecenas cursus sodales lacus nec sagittis. Suspendisse dapibus
+                                            nulla vel ligula ultricies, sit amet vulputate eros eleifend. Ut aliquam
+                                            ipsum sit amet orci gravida accumsan. Curabitur at mi non urna faucibus
+                                            sollicitudin. Sed dui eros, elementum ut magna in, ultricies tempor nisi.
+                                            Integer malesuada orci interdum, fermentum tortor vehicula, mollis sem.
+                                            Donec nec elit sem.</p>
+                                    </div>
+                                    <div class="review-item__footer">
+                                        <div class="emotions_action">
+                                            <a href="#3" class="btn-like">
+                                                <i class="fas fa-thumbs-up"></i>
+                                                Helpful
+                                            </a>
+                                            <a href="#3" class="btn-unlike">
+                                                <i class="fas fa-thumbs-down"></i>
+                                                Not Helpful
+                                            </a>
+                                        </div>
+                                        <a href="#3" class="btn btn-sm btn-link">
+                                            Continue Reading
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="review-item">
+                                    <div class="liked">
+                                        <i class="fas fa-thumbs-up"></i>
+                                    </div>
+                                    <div class="review-item__head">
+                                        <div class="author_info">
+                                            <div class="avatar">
+                                                <img
+                                                    src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
+                                            </div>
+                                            <div class="user_info">
+                                                <h5 class="user_name">Satoshi San</h5>
+                                                <span class="time">Yesterday</span>
+                                            </div>
+                                        </div>
+                                        <div class="review_info">
+                                            <div class="rating_number">
+                                                4.5
+                                            </div>
+                                            <div class="other_info">
+                                                <div class="rating_stars">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div class="played_time">
+                                                    Played for 104h 15m
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="review-item__body">
+                                        <h5>
+                                            Good game very nice grapchics made by very smart people.
+                                        </h5>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eleifend
+                                            purus magna. Vestibulum sed commodo est. Duis lacinia, est vitae dictum
+                                            posuere, magna lorem mattis augue, a pulvinar justo velit at massa. Sed ac
+                                            mi purus. Maecenas cursus sodales lacus nec sagittis. Suspendisse dapibus
+                                            nulla vel ligula ultricies, sit amet vulputate eros eleifend. Ut aliquam
+                                            ipsum sit amet orci gravida accumsan. Curabitur at mi non urna faucibus
+                                            sollicitudin. Sed dui eros, elementum ut magna in, ultricies tempor nisi.
+                                            Integer malesuada orci interdum, fermentum tortor vehicula, mollis sem.
+                                            Donec nec elit sem.</p>
+                                    </div>
+                                    <div class="review-item__footer">
+                                        <div class="emotions_action">
+                                            <a href="#3" class="btn-like">
+                                                <i class="fas fa-thumbs-up"></i>
+                                                Helpful
+                                            </a>
+                                            <a href="#3" class="btn-unlike">
+                                                <i class="fas fa-thumbs-down"></i>
+                                                Not Helpful
+                                            </a>
+                                        </div>
+                                        <a href="#3" class="btn btn-sm btn-link">
+                                            Continue Reading
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -348,7 +683,8 @@
             </div>
         </div>
 
-        <div class="modal fade" id="invertFormExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="invertFormExampleModal" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content invert">
                     <div class="modal-header">
@@ -358,8 +694,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        
-                        
+
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
@@ -378,7 +714,7 @@
 
     const updateProject = function () {
         let project = null
-        
+
         if (this.id === 'new') {
             project = this.$store.state.funding.default_project
         }
@@ -386,11 +722,11 @@
         if (this.$store.state.funding.projects && this.$store.state.funding.projects[this.id]) {
             project = this.$store.state.funding.projects[this.id]
         }
-    
+
         if (project && project.images && project.images.header) {
             window.document.body.style['background-image'] = 'url(' + project.images.header + ')'
         }
-        
+
         return project
     }
 
@@ -404,7 +740,8 @@
             'c-tags-list': () => import('@/ui/components/product-tags'),
             'c-rating-block': () => import('@/ui/components/rating-block'),
             'c-frequently-traded-assets': () => import('@/ui/components/frequently-traded-assets'),
-            'c-community-spotlight': () => import('@/ui/components/community-spotlight')
+            'c-community-spotlight': () => import('@/ui/components/community-spotlight'),
+            'c-heading-bar': () => import('@/ui/components/heading-bar'),
         },
         data() {
             return {
@@ -464,7 +801,7 @@
                 if (this.project.name && this.project.description) {
                     return true
                 }
-                
+
                 if (!this.project.name) {
                     this.errors.push('Project name required.')
                 }
@@ -502,7 +839,7 @@
             $('#tag-editor').select2()
                 .on('select2:select', (e) => {
                     let data = e.params.data
-                    
+
                     if (!this.project.author_tags.includes(data.text)) {
                         this.project.author_tags.push(data.text)
                     }
@@ -640,11 +977,11 @@
         p {
             margin-bottom: 20px;
         }
-        img{
+        img {
             max-width: 100%;
             height: auto;
         }
-        &.with_bg{
+        &.with_bg {
             color: #1C2032;
             background: #FEEBCE;
         }
@@ -655,13 +992,13 @@
         font-size: 16px;
     }
 
-    .badges-list{
+    .badges-list {
         display: flex;
         width: 100%;
         justify-content: center;
         flex-wrap: wrap;
         margin-top: 8px;
-        .item{
+        .item {
             margin: 7px;
             border-radius: 5px;
             background: #FADC72;
@@ -671,7 +1008,7 @@
             text-align: center;
             line-height: 36px;
             color: #134269;
-            &:before{
+            &:before {
                 content: "";
                 padding-top: 100%;
                 float: left;
@@ -699,12 +1036,12 @@
             text-transform: uppercase;
             font-weight: bold;
             overflow: hidden;
-            &.stage_line{
+            &.stage_line {
                 background: #3D691F;
                 height: 15px;
                 float: left;
             }
-            &.name{
+            &.name {
                 padding-top: 15px;
                 &:after {
                     position: absolute;
@@ -712,7 +1049,7 @@
                     width: 2px;
                     content: "";
                     height: 8px;
-                    left: calc( 50% - 1px );
+                    left: calc(50% - 1px);
                     display: inline-block;
                     background: #fff;
                 }
@@ -818,7 +1155,7 @@
             }
             .progress-bar-vertical {
                 width: 5px;
-                min-height: calc( 100% - 7px );
+                min-height: calc(100% - 7px);
                 display: flex;
                 align-items: flex-end;
                 margin: 4px 8px 3px 0;
@@ -836,12 +1173,12 @@
         }
     }
 
-    .project__action{
+    .project__action {
         display: flex;
         justify-content: space-between;
         flex-wrap: nowrap;
         margin-top: 15px;
-        a{
+        a {
             width: 31%;
             border-radius: 5px;
             color: #fff;
@@ -852,25 +1189,25 @@
             line-height: 24px;
             font-weight: bold;
             text-decoration: none;
-            i{
+            i {
                 margin-right: 5px;
                 font-size: 16px;
             }
-            &.follow_link{
+            &.follow_link {
                 background: #436CC9;
-                &:hover{
+                &:hover {
                     background: #314e92;
                 }
             }
-            &.share_link{
+            &.share_link {
                 background: #43B4C9;
-                &:hover{
+                &:hover {
                     background: #348b9b;
                 }
             }
-            &.support_link{
+            &.support_link {
                 background: #43C981;
-                &:hover{
+                &:hover {
                     background: #2e8b59;
                 }
             }
@@ -921,4 +1258,150 @@
         }
     }
 
+</style>
+
+<style lang="scss" scoped>
+    .review-item{
+        display: inline-block;
+        width: 100%;
+        float: left;
+        overflow: hidden;
+        border-radius: 5px;
+        background: rgba(0, 0, 0, .13);
+        border: 1px solid rgba(255, 255, 255, .13);
+        padding: 15px;
+        position: relative;
+        margin: 15px 0;
+        .liked{
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 16px;
+        }
+    }
+    .review-item__head{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        .author_info{
+            width: 40%;
+            .avatar{
+                display: inline-block;
+                float: left;
+                width: 35px;
+                margin-right: 10px;
+                img{
+                    width: 100%;
+                    height: auto;
+                }
+            }
+            .user_info{
+                display: inline-block;
+                width: auto;
+                float: left;
+                text-align: right;
+                h5{
+                    margin: 0;
+                    font-size: 14px;
+
+                }
+                .time{
+                    font-size: 12px;
+                }
+            }
+        }
+        .review_info{
+            display: flex;
+            width: 60%;
+            align-items: center;
+            justify-content: flex-end;
+            .rating_number{
+                font-size: 40px;
+                font-weight: 100;
+                width: 55px;
+                text-align: left;
+                margin-right: 10px;
+            }
+            .other_info{
+                width: 150px;
+                text-align: left;
+                .rating_stars{
+                    display: block;
+                    width: 100%;
+                    text-align: left;
+                    font-size: 15px;
+                    i{
+                        margin-right: 2px;
+                    }
+                }
+                .played_time{
+                    font-weight: bold;
+                    text-align: left;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+    .review-item__body{
+        display: inline-block;
+        float: left;
+        margin: 15px 0;
+    }
+    .review-item__spec{
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        div{
+            width: calc( 100%/3 );
+            margin-bottom: 10px;
+            text-align: left;
+            strong{
+                width: 100%;
+                display: block;
+            }
+        }
+    }
+    .review-item__footer{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 15px;
+        .emotions_action{
+            .btn-like{
+                display: inline-block;
+                float: left;
+                color: #fff;
+                margin-right: 25px;
+                font-size: 12px;
+                font-weight: bold;
+                text-transform: uppercase;
+                i{
+                    color: #43C981;
+                    margin-right: 5px;
+                }
+            }
+            .btn-unlike{
+                display: inline-block;
+                float: left;
+                color: #fff;
+                font-size: 12px;
+                font-weight: bold;
+                text-transform: uppercase;
+                i{
+                    color: #F75D5D;
+                    margin-right: 3px;
+                }
+            }
+        }
+        .btn-link{
+            color: #fff;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            padding-right: 0;
+        }
+    }
 </style>
