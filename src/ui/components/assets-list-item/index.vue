@@ -36,10 +36,10 @@
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
-        margin: 0 -5px;
+        margin: 0 -10px;
     }
     .assets-list__item-container{
-        padding: 5px;
+        padding: 10px;
     }
     .assets-list__item {
         border-radius: 5px;
