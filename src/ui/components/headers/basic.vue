@@ -90,7 +90,7 @@
                         </button>
                     </li>
                     <li v-if="signed_in">
-                        <a href="/#/account">
+                        <a href="/#/identity/1">
                             <span class="icon fa fa-user"></span>
                             <span class="text">Satoshi</span>
                         </a>

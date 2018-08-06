@@ -163,6 +163,8 @@
       justify-content: space-between;
       flex-direction: column;
 
+      padding-top: 60px;
+
       > p {
           color: #fff;
       }
