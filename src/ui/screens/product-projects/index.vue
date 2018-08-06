@@ -64,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-12">
                         <div class="card-container">
                             <h3>Top 3 Submissions</h3>
@@ -241,15 +241,12 @@
         if (!product)
             return
 
-    if (product.images && product.images.header)
-        window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
+        if (product.images && product.images.header)
+            window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
 
-    if (!product.projects)
-        product.projects = []
-        
-    return product
-}
-
+        if (!product.projects)
+            product.projects = []
+            
         return product
     }
 

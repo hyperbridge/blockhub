@@ -143,7 +143,6 @@
                             <c-block-1 title="Campaign">
                                 <form>
 
-<<<<<<< HEAD
                                     <div class="row">
                                         <div class="col-md-6">
 
@@ -261,99 +260,6 @@
                                                 </div>
                                             </div>
                                         </div>
-=======
-                                    <div class="form-group">
-                                        <label>Support Email</label>
-                                        <input type="email" class="form-control" placeholder="Email">
-                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">@</span>
-                                        </div>
-                                        <input type="text" class="form-control" placeholder="Twitter Username">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Share Text</label>
-                                        <input type="text" class="form-control" placeholder="Email">
-                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Minimum Contribution Goal</label>
-                                        <label class="switch switch-sm">
-                                            <input type="checkbox" name="switch_8" checked="" value="0">
-                                            <span></span>
-                                        </label>
-                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Maximum Contribution Goal</label>
-                                        <label class="switch switch-sm">
-                                            <input type="checkbox" name="switch_8" checked="" value="0">
-                                            <span></span>
-                                        </label>
-                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Overflow Enabled</label>
-                                        <label class="switch switch-sm">
-                                            <input type="checkbox" name="switch_8" checked="" value="0">
-                                            <span></span>
-                                        </label>
-                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Overflow Enabled</label>
-                                        <label class="switch switch-sm">
-                                            <input type="checkbox" name="switch_8" checked="" value="0">
-                                            <span></span>
-                                        </label>
-                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Overflow Enabled</label>
-                                        <label class="switch switch-sm">
-                                            <input type="checkbox" name="switch_8" checked="" value="0">
-                                            <span></span>
-                                        </label>
-                                        <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Timeline Enabled</label>
-                                        <label class="switch switch-sm">
-                                            <input type="checkbox" name="switch_8" checked="" value="0">
-                                            <span></span>
-                                        </label>
-                                        <span class="form-text">Projects with Timeline Enabled will have a current timeline with associated milestones.</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Refunds Enabled</label>
-                                        <label class="switch switch-sm">
-                                            <input type="checkbox" name="switch_8" checked="" value="0">
-                                            <span></span>
-                                        </label>
-                                        <span class="form-text">Projects with Refunds Enabled will allow contributors to get partial or full refund if the project is deemed not successful (by community vote).</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Curation Enabled</label>
-                                        <label class="switch switch-sm">
-                                            <input type="checkbox" name="switch_8" checked="" value="0">
-                                            <span></span>
-                                        </label>
-                                        <span class="form-text">Projects with Curation Enabled will allow the community to curate the project and earn reputation for their actions.</span>
-                                    </div>
-                                    Contribution Period
-                                    Choose
-                                    <div class="form-group">
-                                        <label>No Contribution Period</label>
-                                        <label class="switch switch-sm">
-                                            <input type="checkbox" name="switch_8" checked="" value="0">
-                                            <span></span>
-                                        </label>
-                                        <span class="form-text">Projects with No Contribution Period will be open for contribution until the project is completed, allowing for contributions during the project.</span>
->>>>>>> origin/bogdan
                                     </div>
                                 </form>
                             </c-block-1>
