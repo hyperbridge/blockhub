@@ -1,7 +1,7 @@
 <template>
     <div class="pagination-container">
         <div class="pagination-container__nav">
-            <ul>
+            <ul v-if="!custom_nav">
                 <li>
                     <a href="#3" class="first">
                         <i class="fas fa-angle-double-left"></i>
@@ -54,7 +54,7 @@
 
 <script>
     export default {
-        props: ['total_page']
+        props: ['total_page', 'custom_nav']
     }
 </script>
 
