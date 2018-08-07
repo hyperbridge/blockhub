@@ -8,11 +8,11 @@ contract ProductSystemRequirement is ProductBase {
         marketplaceStorage = MarketplaceStorage(_marketplaceStorage);
     }
 
-    function createSystemRequirement(uint _productId, string _systemInfo, string _requirementInfo) external {
+    function createSystemRequirement(uint _productId, string _systemInfo, string _requirementInfo) external onlyProductDeveloper(_productId) {
         marketplaceStorage.pushProductSystemRequirement(_productId, _systemInfo, _requirementInfo);
     }
 
-    function editSystemRequirement(uint _productId, uint _index, string _systemInfo, string _requirementInfo) external {
+    function editSystemRequirement(uint _productId, uint _index, string _systemInfo, string _requirementInfo) external onlyProductDeveloper(_productId) {
         marketplaceStorage.setProductSystemRequirement(_productId, _index, _systemInfo, _requirementInfo);
     }
 
