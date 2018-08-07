@@ -55,6 +55,14 @@ contract Administration {
     }
 
     /**
+     * @dev Checks if the provided address is an admin.
+     * @param _address The address to check.
+     */
+    function isAdministrator(address _address) public view returns (bool) {
+        return (marketplaceStorage.getIsAdmin(_address));
+    }
+
+    /**
      * @dev Allows the sending administrator to relinquish administration privileges.
      */
     function renounceAdministration() public onlyAdministrator {
