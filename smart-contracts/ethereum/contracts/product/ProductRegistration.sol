@@ -42,10 +42,14 @@ contract ProductRegistration is ProductBase {
             marketplaceStorage.setProductSystemTag(_productId, i, systemTag);
         }
 
+        marketplaceStorage.setProductSystemsTagsLength(_productId, _systemTags.length);
+
         for (uint j = 0; j < _authorTags.length; j++) {
             bytes32 authorTag = _authorTags[j];
             marketplaceStorage.setProductAuthorTag(_productId, j, authorTag);
         }
+
+        marketplaceStorage.setProductAuthorTagsLength(_productId, _authorTags.length);
     }
 
     function editProductInfo(uint _productId, string _title, string _type, string _content) external onlyProductDeveloper(_productId) {
