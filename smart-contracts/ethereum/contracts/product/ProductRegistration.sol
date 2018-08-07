@@ -30,7 +30,8 @@ contract ProductRegistration is ProductBase {
         marketplaceStorage.setProductDeveloper(productId, msg.sender);
         marketplaceStorage.setProductDeveloperId(productId, developerId);
 
-        // TODO - Add product to developer
+        marketplaceStorage.setDeveloperOwnsProduct(developerId, productId, true);
+        marketplaceStorage.pushDeveloperOwnedProduct(developerId, productId);
 
         emit ProductCreated(productId);
     }
