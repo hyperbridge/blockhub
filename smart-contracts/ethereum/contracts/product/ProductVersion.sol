@@ -8,7 +8,7 @@ contract ProductVersion is ProductBase {
         marketplaceStorage = MarketplaceStorage(_marketplaceStorage);
     }
 
-    function submitVersionForReview(uint _productId, string _version, string _downloadRefType, string _downloadRefSource, string _checksum) external {
+    function submitVersionForReview(uint _productId, string _version, string _downloadRefType, string _downloadRefSource, string _checksum) external onlyProductDeveloper(_productId) {
         // Check that version does not already exist
         require(bytes(marketplaceStorage.getProductVersionVersion(_productId, _version)).length != 0);
 
