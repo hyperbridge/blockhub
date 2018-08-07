@@ -117,4 +117,10 @@ library DeveloperStorageAccess {
     function setDeveloperOwnedProduct(MarketplaceStorage _storage, uint _developerId, uint _index, uint _productId) internal {
         _storage.setUint(keccak256(abi.encodePacked("developer.productIds", _index, _developerId)), _productId);
     }
+
+    function pushDeveloperOwnedProduct(MarketplaceStorage _storage, uint _developerId, uint _productId) internal {
+        uint nextIndex = getDeveloperOwnedProductsLength(_storage, _developerId);
+        setDeveloperOwnedProduct(_storage, _developerId, nextIndex, _productId);
+        setDeveloperOwnedProductsLength(_storage, _developerId, nextIndex + 1);
+    }
 }
