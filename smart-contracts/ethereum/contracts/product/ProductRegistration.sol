@@ -36,7 +36,7 @@ contract ProductRegistration is ProductBase {
         emit ProductCreated(productId);
     }
 
-    function setProductTags(uint _productId, bytes32[] _systemTags, bytes32[] _authorTags) external {
+    function setProductTags(uint _productId, bytes32[] _systemTags, bytes32[] _authorTags) external onlyProductDeveloper(_productId) {
         for (uint i = 0; i < _systemTags.length; i++) {
             bytes32 systemTag = _systemTags[i];
             marketplaceStorage.setProductSystemTag(_productId, i, systemTag);
@@ -48,7 +48,7 @@ contract ProductRegistration is ProductBase {
         }
     }
 
-    function editProductInfo(uint _productId, string _title, string _type, string _content) external {
+    function editProductInfo(uint _productId, string _title, string _type, string _content) external onlyProductDeveloper(_productId) {
         marketplaceStorage.setProductTitle(_productId, _title);
         marketplaceStorage.setProductType(_productId, _type);
         marketplaceStorage.setProductContent(_productId, _content);
