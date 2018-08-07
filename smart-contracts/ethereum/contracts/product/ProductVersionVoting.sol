@@ -1,8 +1,11 @@
 pragma solidity ^0.4.24;
 
 import "./ProductBase.sol";
+import "../libraries/storage/AdministrationStorageAccess.sol";
 
 contract ProductVersion is ProductBase {
+
+    using AdministrationStorageAccess for MarketplaceStorage;
 
     modifier onlyAdministrator() {
         require(marketplaceStorage.getIsAdmin(msg.sender));

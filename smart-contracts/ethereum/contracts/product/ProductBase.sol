@@ -8,7 +8,7 @@ contract ProductBase {
     using ProductStorageAccess for MarketplaceStorage;
 
     modifier onlyProductDeveloper(uint _productId) {
-        require(msg.sender == fundingStorage.getProductDeveloper(_productId), "You must be the product developer to perform this action.");
+        require(msg.sender == marketplaceStorage.getProductDeveloper(_productId), "You must be the product developer to perform this action.");
         _;
     }
 

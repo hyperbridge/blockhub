@@ -42,7 +42,7 @@ contract ProductRegistration is ProductBase {
             marketplaceStorage.setProductSystemTag(_productId, i, systemTag);
         }
 
-        marketplaceStorage.setProductSystemsTagsLength(_productId, _systemTags.length);
+        marketplaceStorage.setProductSystemTagsLength(_productId, _systemTags.length);
 
         for (uint j = 0; j < _authorTags.length; j++) {
             bytes32 authorTag = _authorTags[j];
