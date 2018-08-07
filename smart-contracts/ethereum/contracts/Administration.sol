@@ -15,7 +15,7 @@ contract Administration {
      * @dev Throws if called by any account other than the administrator.
      */
     modifier onlyAdministrator() {
-        require(msg.sender == administrator);
+        require(marketplaceStorage.getIsAdmin(msg.sender));
         _;
     }
 
@@ -48,18 +48,18 @@ contract Administration {
     * @dev Registers a new administrator
     * @param _newAdministrator The address to register as an administrator.
     */
-    function registerAdministrator(address _newAdministator) public onlyAdministrator {
+    function registerAdministrator(address _newAdministrator) public onlyAdministrator {
         require(_newAdministrator != address(0));
+        marketplaceStorage.setIsAdmin(_newAdministrator, true);
         emit AdministratorRegistered(_newAdministrator);
-        marketplaceStorage.setIsAdmin(_newAdminstrator, true);
     }
 
     /**
      * @dev Allows the sending administrator to relinquish administration privileges.
      */
     function renounceAdministration() public onlyAdministrator {
-        emit AdministrationRenounced(msg.sender);
         marketplaceStorage.setIsAdmin(msg.sender, false);
+        emit AdministrationRenounced(msg.sender);
     }
 
     /**
@@ -67,17 +67,9 @@ contract Administration {
      * @param _newAdministrator The address to transfer administration to.
      */
     function transferAdministration(address _newAdministrator) public onlyAdministrator {
-        _transferAdministration(_newAdministrator);
-    }
-
-    /**
-     * @dev Transfers administration privileges to a newAdministrator.
-     * @param _newAdministrator The address to transfer administration to.
-     */
-    function _transferAdministration(address _newAdministrator) internal {
         require(_newAdministrator != address(0));
-        emit AdministrationTransferred(administrator, _newAdministrator);
         marketplaceStorage.setIsAdmin(msg.sender, false);
         marketplaceStorage.setIsAdmin(_newAdministrator, true);
+        emit AdministrationTransferred(msg.sender, _newAdministrator);
     }
 }
