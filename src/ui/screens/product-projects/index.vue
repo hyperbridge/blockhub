@@ -74,135 +74,9 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card">
-                                <img
-                                    src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                <div class="description">
-                                    Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.
-                                </div>
-                                <div class="progress-container">
-                                    <div class="progress progress-bar-vertical">
-                                        <div class="progress-bar bg-success" role="progressbar"
-                                             aria-valuenow="40"
-                                             aria-valuemin="0" aria-valuemax="100"
-                                             style="height: 40%">
-                                            <span class="sr-only">40% Complete</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress-info">
-                                        <strong class="w-100">
-                                            Obtained Funds
-                                        </strong>
-                                        <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img
-                                    src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                <div class="description">
-                                    Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.
-                                </div>
-                                <div class="progress-container">
-                                    <div class="progress progress-bar-vertical">
-                                        <div class="progress-bar bg-success" role="progressbar"
-                                             aria-valuenow="40"
-                                             aria-valuemin="0" aria-valuemax="100"
-                                             style="height: 40%">
-                                            <span class="sr-only">40% Complete</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress-info">
-                                        <strong class="w-100">
-                                            Obtained Funds
-                                        </strong>
-                                        <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="card-container">
-                            <h3>Developer Submissions</h3>
-                            <div class="card">
-                                <img
-                                    src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                <div class="description">
-                                    Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.
-                                </div>
-                                <div class="progress-container">
-                                    <div class="progress progress-bar-vertical">
-                                        <div class="progress-bar bg-success" role="progressbar"
-                                             aria-valuenow="40"
-                                             aria-valuemin="0" aria-valuemax="100"
-                                             style="height: 40%">
-                                            <span class="sr-only">40% Complete</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress-info">
-                                        <strong class="w-100">
-                                            Obtained Funds
-                                        </strong>
-                                        <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img
-                                    src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                <div class="description">
-                                    Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.
-                                </div>
-                                <div class="progress-container">
-                                    <div class="progress progress-bar-vertical">
-                                        <div class="progress-bar bg-success" role="progressbar"
-                                             aria-valuenow="40"
-                                             aria-valuemin="0" aria-valuemax="100"
-                                             style="height: 40%">
-                                            <span class="sr-only">40% Complete</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress-info">
-                                        <strong class="w-100">
-                                            Obtained Funds
-                                        </strong>
-                                        <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img
-                                    src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                <div class="description">
-                                    Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.
-                                </div>
-                                <div class="progress-container">
-                                    <div class="progress progress-bar-vertical">
-                                        <div class="progress-bar bg-success" role="progressbar"
-                                             aria-valuenow="40"
-                                             aria-valuemin="0" aria-valuemax="100"
-                                             style="height: 40%">
-                                            <span class="sr-only">40% Complete</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress-info">
-                                        <strong class="w-100">
-                                            Obtained Funds
-                                        </strong>
-                                        <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                    </div>
+                                <div class="card-action">
+                                    <a href="#3" class="btn btn-sm btn-info">Participate</a>
+                                    <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
                                 </div>
                             </div>
                         </div>
@@ -323,7 +197,7 @@
         h3{
             width: 100%;
             font-size: 21px;
-            margin: 15px 10px 15px;
+            margin: 5px 10px 10px;
         }
         .card {
             background: rgba(0, 0, 0, .13);
@@ -342,6 +216,18 @@
                 margin: 15px 0;
                 font-weight: bold;
                 font-size: 16px;
+            }
+            .card-action{
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                flex-wrap: wrap;
+                margin-top: 15px;
+                a{
+                    margin-left: 10px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
             }
         }
     }
