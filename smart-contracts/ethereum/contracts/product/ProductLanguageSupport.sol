@@ -8,11 +8,11 @@ contract ProductLanguageSupport is ProductBase {
         marketplaceStorage = MarketplaceStorage(_marketplaceStorage);
     }
 
-    function createLanguageSupport(uint _productId, string _language, bool _closedCaptioning, bool _audioDescription) external {
+    function createLanguageSupport(uint _productId, string _language, bool _closedCaptioning, bool _audioDescription) external onlyProductDeveloper(_productId) {
         marketplaceStorage.pushProductLanguageSupport(_productId, _language, _closedCaptioning, _audioDescription);
     }
 
-    function editLanguageSupport(uint _productId, uint _index, string _language, bool _closedCaptioning, bool _audioDescription) external {
+    function editLanguageSupport(uint _productId, uint _index, string _language, bool _closedCaptioning, bool _audioDescription) external onlyProductDeveloper(_productId) {
         marketplaceStorage.setProductLanguageSupport(_productId, _index, _language, _closedCaptioning, _audioDescription);
     }
 
