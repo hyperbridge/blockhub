@@ -3,7 +3,7 @@ pragma solidity ^0.4.24;
 import "./ProductBase.sol";
 import "../libraries/storage/AdministrationStorageAccess.sol";
 
-contract ProductVersion is ProductBase {
+contract ProductVersionVoting is ProductBase {
 
     using AdministrationStorageAccess for MarketplaceStorage;
 

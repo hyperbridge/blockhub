@@ -20,8 +20,6 @@ contract Developer {
     }
 
     function initialize() external {
-        require(marketplaceStorage.getContractIsValid(this), "This contract is not registered in MarketplaceStorage.");
-
         // reserve developerId 0
         marketplaceStorage.incrementNextDeveloperId();
     }

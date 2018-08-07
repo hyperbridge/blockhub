@@ -11,7 +11,9 @@ contract ProductRegistration is ProductBase {
 
     constructor(address _marketplaceStorage) public {
         marketplaceStorage = MarketplaceStorage(_marketplaceStorage);
+    }
 
+    function initialize() external {
         // Reserve product ID 0
         marketplaceStorage.incrementNextProductId();
     }
