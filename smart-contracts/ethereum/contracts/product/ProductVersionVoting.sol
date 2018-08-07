@@ -4,6 +4,11 @@ import "./ProductBase.sol";
 
 contract ProductVersion is ProductBase {
 
+    modifier onlyAdministrator() {
+        require(marketplaceStorage.getIsAdmin(msg.sender));
+        _;
+    }
+
     modifier onlyActiveVersionVoting(uint _productId, string _version) {
         // Voting must be active for this version
         require(marketplaceStorage.getProductVersionVotingIsActive(_productId, _version));
@@ -14,7 +19,7 @@ contract ProductVersion is ProductBase {
         marketplaceStorage = MarketplaceStorage(_marketplaceStorage);
     }
 
-    function voteOnVersion(uint _productId, string _version, bool _vote) external onlyActiveVersionVoting(_productId, _version) {
+    function voteOnVersion(uint _productId, string _version, bool _vote) external onlyAdministrator onlyActiveVersionVoting(_productId, _version) {
         // Check that voter has not already voted
         require(marketplaceStorage.getProductVersionVotingHasVoted(_productId, _version, msg.sender));
 
@@ -29,7 +34,7 @@ contract ProductVersion is ProductBase {
         marketplaceStorage.setProductVersionVotingHasVoted(_productId, _version, msg.sender, true);
     }
 
-    function finalizeVersionVoting(uint _productId, string _version) external onlyActiveVersionVoting(_productId, _version) {
+    function finalizeVersionVoting(uint _productId, string _version) external onlyProductDeveloper(_productId) onlyActiveVersionVoting(_productId, _version) {
         uint approvalCount = marketplaceStorage.getProductVersionVotingApprovalCount(_productId, _version);
         uint disapprovalCount = marketplaceStorage.getProductVersionVotingDisapprovalCount(_productId, _version);
         uint numVoters = approvalCount + disapprovalCount;
