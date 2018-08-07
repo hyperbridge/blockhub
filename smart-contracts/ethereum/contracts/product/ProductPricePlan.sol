@@ -8,11 +8,11 @@ contract ProductPricePlan is ProductBase {
         marketplaceStorage = MarketplaceStorage(_marketplaceStorage);
     }
 
-    function createPricePlan(uint _productId, string _code, string _name, uint _price) external {
+    function createPricePlan(uint _productId, string _code, string _name, uint _price) external onlyProductDeveloper(_productId) {
         marketplaceStorage.setProductPricePlan(_productId, _code, _name, _price);
     }
 
-    function editPricePlan(uint _productId, string _code, string _name, uint _price) external {
+    function editPricePlan(uint _productId, string _code, string _name, uint _price) external onlyProductDeveloper(_productId) {
         marketplaceStorage.setProductPricePlan(_productId, _code, _name, _price);
     }
 
