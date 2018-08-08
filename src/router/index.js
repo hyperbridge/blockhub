@@ -307,6 +307,11 @@ const router = new Router({
             component: () => import('@/ui/screens/download')
         },
         {
+            path: '/realm',
+            name: 'Realm Page',
+            component: () => import('@/ui/screens/realm')
+        },
+        {
             path: "*",
             component: () => import('@/ui/screens/not-found')
         }
