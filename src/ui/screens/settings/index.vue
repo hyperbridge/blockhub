@@ -78,9 +78,10 @@ export default {
     .settings_item{
         display: flex;
         width: 100%;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: flex-start;
         color: #C6C6D6;
+        margin-bottom: 30px;
         .switch{
             margin: 1px 10px 0 0;
             padding: 0;

@@ -59,7 +59,12 @@
                                             {{ wallet.name }}
                                         </div>
                                         <div class="wallet-item__count">
-                                            {{ wallet.short_name }} {{ wallet.count }}
+                                            <span>
+                                                {{ wallet.short_name }}
+                                            </span>
+                                            <span>
+                                                {{ wallet.count }}
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="wallet-item__body">
@@ -124,8 +129,12 @@
                                             {{ new_wallets.name }}
                                         </div>
                                         <div class="wallet-item__count">
-                                            {{ new_wallets.short_name }}
-                                            {{ new_wallets.count }}
+                                            <span>
+                                                {{ new_wallets.short_name }}
+                                            </span>
+                                            <span>
+                                                {{ new_wallets.count }}
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="wallet-item__head" v-if="set_new_wallets_step_2">
@@ -134,7 +143,12 @@
                                             {{ new_wallets.name }}
                                         </div>
                                         <div class="wallet-item__count">
-                                            {{ new_wallets.short_name }} {{ new_wallets.count }}
+                                            <span>
+                                                {{ new_wallets.short_name }}
+                                            </span>
+                                            <span>
+                                                {{ new_wallets.count }}
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="wallet-item__body">
@@ -507,16 +521,20 @@
         font-size: 16px;
         font-weight: normal;
         width: 100px;
+        display: flex;
+        justify-content: space-between;
     }
     .wallet-item__history {
         display: inline-block;
         float: right;
-        width: 88px;
+        width: 100px;
         ul {
             padding: 0;
             li {
                 list-style: none;
-                display: block;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
                 text-align: right;
                 margin: 0;
                 float: left;
@@ -524,9 +542,12 @@
                 width: 100%;
                 font-size: 13px;
                 span {
-                    &:first-child {
-                        float: left;
-                    }
+                    display: inline-block;
+                    width: auto;
+                    float: unset!important;
+                }
+                .icon{
+                    margin: 0;
                 }
                 &.up {
                     color: #7cc27d;
