@@ -2,9 +2,6 @@ const MarketplaceStorage = artifacts.require("MarketplaceStorage");
 const Administration = artifacts.require("Administration");
 
 const blankAddress = 0x0000000000000000000000000000000000000000;
-const productTitle = "BlockHub";
-const productType = "BlockHub Type";
-const productContent = "BlockHub Content";
 
 contract('Administration', function(accounts) {
     let marketplaceStorage;
