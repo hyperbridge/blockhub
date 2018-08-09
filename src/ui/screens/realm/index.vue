@@ -110,6 +110,104 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="games-container">
+                            <c-heading-bar name="Games" :showArrows="false" :showBackground="false">
+                                <div class="additional-action margin-left-20" slot="additional-action">
+                                    <div class="text">
+                                        Price
+                                        <i class="fas fa-dollar-sign"></i>
+                                    </div>
+                                    <div class="arrow_container">
+                                        <i class="fas fa-sort-up"></i>
+                                        <i class="fas fa-sort-down"></i>
+                                    </div>
+                                </div>
+                                <div class="additional-action" slot="additional-action">
+                                    <div class="text">
+                                        Rating
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="arrow_container">
+                                        <i class="fas fa-sort-up"></i>
+                                        <i class="fas fa-sort-down"></i>
+                                    </div>
+                                </div>
+                            </c-heading-bar>
+                            <div class="games-list">
+                                <div class="games-list__item">
+                                    <div class="price">
+                                        <strong>12.5</strong> USD
+                                    </div>
+                                    <div class="img">
+                                        <img src="http://via.placeholder.com/200x105" />
+                                    </div>
+                                    <div class="info">
+                                        <div class="text">
+                                            <h4>Game Title here</h4>
+                                            <p>Publisher Name Goes Here</p>
+                                        </div>
+                                        <div class="footer">
+                                            <div class="rating_stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <a href="#3" class="btn btn-sm btn-success text-uppercase font-weight-bold">Buy Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games-list__item">
+                                    <div class="price">
+                                        <strong>12.5</strong> USD
+                                    </div>
+                                    <div class="img">
+                                        <img src="http://via.placeholder.com/200x105" />
+                                    </div>
+                                    <div class="info">
+                                        <div class="text">
+                                            <h4>Game Title here</h4>
+                                            <p>Publisher Name Goes Here</p>
+                                        </div>
+                                        <div class="footer">
+                                            <div class="rating_stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <a href="#3" class="btn btn-sm btn-success text-uppercase font-weight-bold">Buy Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games-list__item">
+                                    <div class="price">
+                                        <strong>12.5</strong> USD
+                                    </div>
+                                    <div class="img">
+                                        <img src="http://via.placeholder.com/200x105" />
+                                    </div>
+                                    <div class="info">
+                                        <div class="text">
+                                            <h4>Game Title here</h4>
+                                            <p>Publisher Name Goes Here</p>
+                                        </div>
+                                        <div class="footer">
+                                            <div class="rating_stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <a href="#3" class="btn btn-sm btn-success text-uppercase font-weight-bold">Buy Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -134,28 +232,6 @@
         }
     }
 </script>
-
-<!--
-<style lang="scss">
-    .custom_gradient{
-        background-image: url('../../../assets/img/realm_bg.jpg');
-        background-position: top center;
-        background-repeat: no-repeat;
-        background-size: 100% auto;
-        background-color: #2878c1;
-        #app{
-            &:before{
-                /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,2878c1+46,2878c1+46&0+0,1+62 */
-                background: -moz-linear-gradient(top, rgba(30,87,153,0) 0%, rgba(40,120,193,0.74) 46%, rgba(40,120,193,1) 62%); /* FF3.6-15 */
-                background: -webkit-linear-gradient(top, rgba(30,87,153,0) 0%,rgba(40,120,193,0.74) 46%,rgba(40,120,193,1) 62%); /* Chrome10-25,Safari5.1-6 */
-                background: linear-gradient(to bottom, rgba(30,87,153,0) 0%,rgba(40,120,193,0.74) 46%,rgba(40,120,193,1) 62%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#001e5799', endColorstr='#2878c1',GradientType=0 ); /* IE6-9 */
-            }
-        }
-    }
-</style>
--->
-
 
 <style lang="scss" scoped>
     .realm_page_header {
@@ -198,9 +274,53 @@
         }
     }
 
+    .additional-action{
+        float: right;
+        display: flex;
+        width: auto;
+        align-items: center;
+        font-size: 14px;
+        margin-top: 6px;
+        .text{
+            margin-right: 5px;
+            i{
+                font-size: 16px;
+                margin-left: 5px;
+            }
+        }
+        .arrow_container{
+            width: 20px;
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            height: 25px;
+            i{
+                font-size: 18px;
+                position: absolute;
+                opacity: .7;
+                left: 0;
+                right: 0;
+                &:first-child{
+                    top: 0;
+                    height: 50%;
+                    z-index: 3;
+                }
+                &:last-child{
+                    bottom: 0px;
+                    height: 18px;
+                    z-index: 1;
+                }
+                &:hover{
+                    opacity: 1;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
     .product-grid {
         background: rgba(0, 0, 0, .1);
-        padding: 5px 0 10px;
+        padding: 5px 0 0px;
         margin: 0;
         border-radius: 5px;
         overflow: hidden;
@@ -235,9 +355,10 @@
 
     .featured-assets{
         background: rgba(0, 0, 0, .1);
-        padding: 5px 15px 10px;
+        padding: 5px 15px 15px;
         border-radius: 5px;
         overflow: hidden;
+        margin-bottom: 40px;
     }
     .featured-assets__list{
         display: flex;
@@ -286,4 +407,104 @@
             margin: 0;
         }
     }
+
+    .games-container{
+        background: rgba(0, 0, 0, .1);
+        padding: 5px 15px 0px;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    .games-list{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .games-list__item{
+        display: flex;
+        width: calc( 50% - 10px );
+        justify-content: space-between;
+        align-items: stretch;
+        background: #27283E;
+        padding: 8px;
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 20px;
+        .price{
+            position: absolute;
+            width: auto;
+            bottom: 25px;
+            left: 8px;
+            padding: 2px 3px;
+            background: rgba(0, 0, 0, .3);
+            border-radius: 0 5px 5px 0;
+            font-size: 11px;
+            strong{
+                font-size: 14px;
+                font-weight: bold;
+            }
+        }
+        .img{
+            width: 50%;
+            img{
+                width: 100%;
+                border-radius: 5px;
+            }
+        }
+        .info{
+            width: 50%;
+            padding: 5px 0 5px 15px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            .text{
+                align-self: flex-start;
+                width: 100%;
+                h4{
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin: 0 0 3px 0;
+                    padding: 0;
+                }
+            }
+            .footer{
+                /*align-self: flex-end;*/
+                margin-top: auto;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .rating_stars{
+                    color: #FADC72;
+                    font-size: 15px;
+                }
+                .btn{
+                    padding: 0px 8px;
+                }
+            }
+        }
+    }
 </style>
+
+<!--
+<style lang="scss">
+    .custom_gradient{
+        background-image: url('../../../assets/img/realm_bg.jpg');
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        background-color: #2878c1;
+        #app{
+            &:before{
+                /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,2878c1+46,2878c1+46&0+0,1+62 */
+                background: -moz-linear-gradient(top, rgba(30,87,153,0) 0%, rgba(40,120,193,0.74) 46%, rgba(40,120,193,1) 62%); /* FF3.6-15 */
+                background: -webkit-linear-gradient(top, rgba(30,87,153,0) 0%,rgba(40,120,193,0.74) 46%,rgba(40,120,193,1) 62%); /* Chrome10-25,Safari5.1-6 */
+                background: linear-gradient(to bottom, rgba(30,87,153,0) 0%,rgba(40,120,193,0.74) 46%,rgba(40,120,193,1) 62%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#001e5799', endColorstr='#2878c1',GradientType=0 ); /* IE6-9 */
+            }
+        }
+    }
+</style>
+-->
+
