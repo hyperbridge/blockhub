@@ -182,7 +182,7 @@ library ProductStorageAccess {
     // System Requirement
 
     function getProductSystemRequirementsLength(MarketplaceStorage _storage, uint _productId) internal view returns (uint) {
-        _storage.getUint(keccak256(abi.encodePacked("product.systemRequirements.length", _productId)));
+        return _storage.getUint(keccak256(abi.encodePacked("product.systemRequirements.length", _productId)));
     }
 
     function getProductSystemRequirementSystem(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (string) {
@@ -205,7 +205,7 @@ library ProductStorageAccess {
     // Language Support
 
     function getProductLanguagesSupportedLength(MarketplaceStorage _storage, uint _productId) internal view returns (uint) {
-        _storage.getUint(keccak256(abi.encodePacked("product.languagesSupported.length", _productId)));
+        return _storage.getUint(keccak256(abi.encodePacked("product.languagesSupported.length", _productId)));
     }
 
     function getProductLanguageSupportLanguage(MarketplaceStorage _storage, uint _productId, uint _index) internal view returns (string) {
@@ -233,23 +233,23 @@ library ProductStorageAccess {
     // Version
 
     function getProductLatestVersionVersion(MarketplaceStorage _storage, uint _productId) internal view returns (string) {
-        _storage.getString(keccak256(abi.encodePacked("product.latestVersion.version", _productId)));
+        return _storage.getString(keccak256(abi.encodePacked("product.latestVersion.version", _productId)));
     }
 
     function getProductLatestVersionDownloadRefType(MarketplaceStorage _storage, uint _productId) internal view returns (string) {
-        _storage.getString(keccak256(abi.encodePacked("product.latestVersion.downloadRefType", _productId)));
+        return _storage.getString(keccak256(abi.encodePacked("product.latestVersion.downloadRefType", _productId)));
     }
 
     function getProductLatestVersionDownloadRefSource(MarketplaceStorage _storage, uint _productId) internal view returns (string) {
-        _storage.getString(keccak256(abi.encodePacked("product.latestVersion.downloadRefSource", _productId)));
+        return _storage.getString(keccak256(abi.encodePacked("product.latestVersion.downloadRefSource", _productId)));
     }
 
     function getProductLatestVersionChecksum(MarketplaceStorage _storage, uint _productId) internal view returns (string) {
-        _storage.getString(keccak256(abi.encodePacked("product.latestVersion.checksum", _productId)));
+        return _storage.getString(keccak256(abi.encodePacked("product.latestVersion.checksum", _productId)));
     }
 
     function getProductLatestVersionCreatedAt(MarketplaceStorage _storage, uint _productId) internal view returns (uint) {
-        _storage.getUint(keccak256(abi.encodePacked("product.latestVersion.createdAt", _productId)));
+        return _storage.getUint(keccak256(abi.encodePacked("product.latestVersion.createdAt", _productId)));
     }
 
     function getProductLatestVersion(MarketplaceStorage _storage, uint _productId) internal view returns (ProductVersion) {
@@ -265,27 +265,27 @@ library ProductStorageAccess {
     }
 
     function getProductVersionsLength(MarketplaceStorage _storage, uint _productId) internal view returns (uint) {
-        _storage.getUint(keccak256(abi.encodePacked("product.versions.length", _productId)));
+        return _storage.getUint(keccak256(abi.encodePacked("product.versions.length", _productId)));
     }
 
     function getProductVersionVersion(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (string) {
-        _storage.getString(keccak256(abi.encodePacked("product.versions.version", _productId, _version)));
+        return _storage.getString(keccak256(abi.encodePacked("product.versions.version", _productId, _version)));
     }
 
     function getProductVersionDownloadRefType(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (string) {
-        _storage.getString(keccak256(abi.encodePacked("product.versions.downloadRefType", _productId, _version)));
+        return _storage.getString(keccak256(abi.encodePacked("product.versions.downloadRefType", _productId, _version)));
     }
 
     function getProductVersionDownloadRefSource(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (string) {
-        _storage.getString(keccak256(abi.encodePacked("product.versions.downloadRefSource", _productId, _version)));
+        return _storage.getString(keccak256(abi.encodePacked("product.versions.downloadRefSource", _productId, _version)));
     }
 
     function getProductVersionChecksum(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (string) {
-        _storage.getString(keccak256(abi.encodePacked("product.versions.checksum", _productId, _version)));
+        return _storage.getString(keccak256(abi.encodePacked("product.versions.checksum", _productId, _version)));
     }
 
     function getProductVersionCreatedAt(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (uint) {
-        _storage.getUint(keccak256(abi.encodePacked("product.versions.createdAt", _productId, _version)));
+        return _storage.getUint(keccak256(abi.encodePacked("product.versions.createdAt", _productId, _version)));
     }
 
     function getProductVersion(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (ProductVersion) {
@@ -303,23 +303,23 @@ library ProductStorageAccess {
     // Version Voting
 
     function getProductVersionVotingApprovalCount(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (uint) {
-        _storage.getUint(keccak256(abi.encodePacked("product.versionVoting.approvalCount", _productId, _version)));
+        return _storage.getUint(keccak256(abi.encodePacked("product.versionVoting.approvalCount", _productId, _version)));
     }
 
     function getProductVersionVotingDisapprovalCount(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (uint) {
-        _storage.getUint(keccak256(abi.encodePacked("product.versionVoting.disapprovalCount", _productId, _version)));
+        return _storage.getUint(keccak256(abi.encodePacked("product.versionVoting.disapprovalCount", _productId, _version)));
     }
 
     function getProductVersionVotingIsActive(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (bool) {
-        _storage.getBool(keccak256(abi.encodePacked("product.versionVoting.isActive", _productId, _version)));
+        return _storage.getBool(keccak256(abi.encodePacked("product.versionVoting.isActive", _productId, _version)));
     }
 
     function getProductVersionVotingHasFailed(MarketplaceStorage _storage, uint _productId, string _version) internal view returns (bool) {
-        _storage.getBool(keccak256(abi.encodePacked("product.versionVoting.hasFailed", _productId, _version)));
+        return _storage.getBool(keccak256(abi.encodePacked("product.versionVoting.hasFailed", _productId, _version)));
     }
 
     function getProductVersionVotingHasVoted(MarketplaceStorage _storage, uint _productId, string _version, address _address) internal view returns (bool) {
-        _storage.getBool(keccak256(abi.encodePacked("product.versionVoting.voters", _productId, _version, _address)));
+        return _storage.getBool(keccak256(abi.encodePacked("product.versionVoting.voters", _productId, _version, _address)));
     }
 
 
@@ -337,31 +337,31 @@ library ProductStorageAccess {
     // Purchasing
 
     function getProductHasPurchased(MarketplaceStorage _storage, uint _productId, address _address) internal view returns (uint) {
-        _storage.getUint(keccak256(abi.encodePacked("product.purchasers", _productId, _address)));
+        return _storage.getUint(keccak256(abi.encodePacked("product.purchasers", _productId, _address)));
     }
 
     function getProductPurchaseOrdersLength(MarketplaceStorage _storage, uint _productId, address _purchaser) internal view returns (uint) {
-        _storage.getUint(keccak256(abi.encodePacked("product.purchaseOrders.length", _productId, _purchaser)));
+        return _storage.getUint(keccak256(abi.encodePacked("product.purchaseOrders.length", _productId, _purchaser)));
     }
 
     function getProductPurchaseOrderProductId(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index) internal view returns (uint) {
-        _storage.getUint(keccak256(abi.encodePacked("product.purchaseOrders.productId", _productId, _purchaser, _index)));
+        return _storage.getUint(keccak256(abi.encodePacked("product.purchaseOrders.productId", _productId, _purchaser, _index)));
     }
 
     function getProductPurchaseOrderPricePlanCode(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index) internal view returns (string) {
-        _storage.getString(keccak256(abi.encodePacked("product.purchaseOrders.pricePlanCode", _productId, _purchaser, _index)));
+        return _storage.getString(keccak256(abi.encodePacked("product.purchaseOrders.pricePlanCode", _productId, _purchaser, _index)));
     }
 
     function getProductPurchaseOrderValue(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index) internal view returns (uint) {
-        _storage.getUint(keccak256(abi.encodePacked("product.purchaseOrders.value", _productId, _purchaser, _index)));
+        return _storage.getUint(keccak256(abi.encodePacked("product.purchaseOrders.value", _productId, _purchaser, _index)));
     }
 
     function getProductPurchaseOrderPurchaser(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index) internal view returns (address) {
-        _storage.getAddress(keccak256(abi.encodePacked("product.purchaseOrders.purchaser", _productId, _purchaser, _index)));
+        return _storage.getAddress(keccak256(abi.encodePacked("product.purchaseOrders.purchaser", _productId, _purchaser, _index)));
     }
 
     function getProductPurchaseOrderDeveloper(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index) internal view returns (address) {
-        _storage.getAddress(keccak256(abi.encodePacked("product.purchaseOrders.developer", _productId, _purchaser, _index)));
+        return _storage.getAddress(keccak256(abi.encodePacked("product.purchaseOrders.developer", _productId, _purchaser, _index)));
     }
 
     function getProductPurchaseOrder(MarketplaceStorage _storage, uint _productId, address _purchaser, uint _index) internal view returns (PurchaseOrder) {
