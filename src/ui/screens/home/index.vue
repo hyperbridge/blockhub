@@ -1,12 +1,19 @@
 <template>
     <c-layout>
         <div class="content" id="content">
-            <div class="container-fluid">  
+            <div class="container-fluid" v-if="is_connected">
                 <div class="row">
                     <div class="col-12">
-                        <p v-if="is_connected">
+                        <p>
                             Welcome, you're now on the decentralized web. <a href="/#/sitemap">Check the sitemap</a> for things to do.
                         </p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid" v-if="!is_connected">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>Oops, something went wrong! ((</h3>
                     </div>
                 </div>
             </div>

@@ -81,53 +81,15 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="product-grid">
                             <c-heading-bar name="Featured Games" :showArrows="false" :showBackground="false" />
-                            <div class="product-grid__container">
-                                <div class="product-grid__item" v-for="(item, index) in projects" v-bind:key="index">
-                                    <div class="card-body padding-0">
-                                        <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
-                                        <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
-                                        <p class="card-text" hidden>{{ item.short_description }} </p>
-
-                                        <c-tags :tags="item.author_tags"></c-tags>
-                                    </div>
-                                </div>
-                            </div>
+                            <c-simple-game-grid :projects="projects"></c-simple-game-grid>
                         </div>
                         <div class="featured-assets">
                             <c-heading-bar name="Featured Assets" :showArrows="false" :showBackground="false">
                             </c-heading-bar>
-                            <div class="featured-assets__list">
-                                <div class="featured-assets__list-item">
-                                    <div class="img">
-                                        <img src="https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de" />
-                                    </div>
-                                    <h3>Magic Plate Armor</h3>
-                                    <p>Tibia MMORPG</p>
-                                </div>
-                                <div class="featured-assets__list-item">
-                                    <div class="img">
-                                        <img src="https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de" />
-                                    </div>
-                                    <h3>Magic Plate Armor</h3>
-                                    <p>Tibia MMORPG</p>
-                                </div>
-                                <div class="featured-assets__list-item">
-                                    <div class="img">
-                                        <img src="https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de" />
-                                    </div>
-                                    <h3>Magic Plate Armor</h3>
-                                    <p>Tibia MMORPG</p>
-                                </div>
-                                <div class="featured-assets__list-item">
-                                    <div class="img">
-                                        <img src="https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de" />
-                                    </div>
-                                    <h3>Magic Plate Armor</h3>
-                                    <p>Tibia MMORPG</p>
-                                </div>
-                            </div>
+                            <c-featured-assets></c-featured-assets>
                         </div>
                         <div class="games-container">
                             <c-heading-bar name="Games" :showArrows="false" :showBackground="false">
@@ -147,85 +109,12 @@
                                         <i class="fas fa-star"></i>
                                     </div>
                                     <div class="arrow_container">
-                                        <i class="fas fa-sort-up"></i>cd
+                                        <i class="fas fa-sort-up"></i>
                                         <i class="fas fa-sort-down"></i>
                                     </div>
                                 </div>
                             </c-heading-bar>
-                            <div class="games-list">
-                                <div class="games-list__item">
-                                    <div class="price">
-                                        <strong>12.5</strong> USD
-                                    </div>
-                                    <div class="img">
-                                        <img src="http://via.placeholder.com/200x105" />
-                                    </div>
-                                    <div class="info">
-                                        <div class="text">
-                                            <h4>Game Title here</h4>
-                                            <p>Publisher Name Goes Here</p>
-                                        </div>
-                                        <div class="footer">
-                                            <div class="rating_stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <a href="#3" class="btn btn-sm btn-success text-uppercase font-weight-bold">Buy Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="games-list__item">
-                                    <div class="price">
-                                        <strong>12.5</strong> USD
-                                    </div>
-                                    <div class="img">
-                                        <img src="http://via.placeholder.com/200x105" />
-                                    </div>
-                                    <div class="info">
-                                        <div class="text">
-                                            <h4>Game Title here</h4>
-                                            <p>Publisher Name Goes Here</p>
-                                        </div>
-                                        <div class="footer">
-                                            <div class="rating_stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <a href="#3" class="btn btn-sm btn-success text-uppercase font-weight-bold">Buy Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="games-list__item">
-                                    <div class="price">
-                                        <strong>12.5</strong> USD
-                                    </div>
-                                    <div class="img">
-                                        <img src="http://via.placeholder.com/200x105" />
-                                    </div>
-                                    <div class="info">
-                                        <div class="text">
-                                            <h4>Game Title here</h4>
-                                            <p>Publisher Name Goes Here</p>
-                                        </div>
-                                        <div class="footer">
-                                            <div class="rating_stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <a href="#3" class="btn btn-sm btn-success text-uppercase font-weight-bold">Buy Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <c-game-grid></c-game-grid>
                         </div>
                     </div>
                 </div>
@@ -238,8 +127,10 @@
     export default {
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
-            'c-tags': () => import('@/ui/components/product-tags'),
             'c-heading-bar': () => import('@/ui/components/heading-bar'),
+            'c-simple-game-grid': () => import('@/ui/components/games-grid/simple'),
+            'c-game-grid': () => import('@/ui/components/games-grid/with-description'),
+            'c-featured-assets': () => import('@/ui/components/assets-list-item/featured-list'),
         },
         data: () => ({
             wallets: []
@@ -419,38 +310,6 @@
         overflow: hidden;
         margin-bottom: 40px;
     }
-    .product-grid__container{
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-    }
-    .product-grid__item{
-        padding: 8px 6px;
-        border-radius: 5px;
-        width: 32%;
-        background: #27283E;
-        &:hover {
-            will-change: transform;
-            transform: perspective(300px) rotateX(0deg) rotateY(0deg) scale(1.03);
-            box-shadow: 0 0 35px rgba(0, 0, 0, .2);
-            transition: transform 200ms cubic-bezier(0.34, 1.01, 0.8, 0.24);
-        }
-
-        h4{
-            color: #fff;
-            font-weight: bold;
-            font-size: 20px;
-            padding: 13px 0;
-            a{
-                color: #fff;
-                text-decoration: none;
-            }
-        }
-        .product-tags {
-            margin-top: 10px;
-            margin-bottom: 0;
-        }
-    }
 
 
     .featured-assets{
@@ -459,53 +318,6 @@
         border-radius: 5px;
         overflow: hidden;
         margin-bottom: 40px;
-    }
-    .featured-assets__list{
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-    }
-    .featured-assets__list-item{
-        display: inline-block;
-        padding: 25px;
-        width: 22%;
-        border-radius: 5px;
-        background: #27283E;
-        text-align: center;
-        color: #C6C6D6;
-        margin-top: 2%;
-        .img{
-            position: relative;
-            margin-bottom: 20px;
-            padding-bottom: 30px;
-            display: inline-block;
-            width: 100%;
-            max-width: 160px;
-            img{
-                width: 100%;
-            }
-            &:after{
-                position: absolute;
-                bottom: 10px;
-                width: 80%;
-                left: 10%;
-                content: "";
-                height: 3px;
-                background: rgba(0, 0, 0, .2);
-                border-radius: 100%;
-                box-shadow: 0 0 20px rgba(0, 0, 0, .9);
-            }
-        }
-        h3{
-            font-weight: bold;
-            font-size: 18px;
-            color: #C6C6D6;
-            padding: 0px;
-            margin: 0px;
-        }
-        p{
-            margin: 0;
-        }
     }
 
     .games-container{
@@ -519,73 +331,6 @@
         width: 100%;
         justify-content: space-between;
         flex-wrap: wrap;
-    }
-    .games-list__item{
-        display: flex;
-        width: calc( 50% - 10px );
-        justify-content: space-between;
-        align-items: stretch;
-        background: #27283E;
-        padding: 8px;
-        border-radius: 5px;
-        overflow: hidden;
-        position: relative;
-        margin-bottom: 20px;
-        .price{
-            position: absolute;
-            width: auto;
-            bottom: 25px;
-            left: 8px;
-            padding: 2px 3px;
-            background: rgba(0, 0, 0, .3);
-            border-radius: 0 5px 5px 0;
-            font-size: 11px;
-            strong{
-                font-size: 14px;
-                font-weight: bold;
-            }
-        }
-        .img{
-            width: 50%;
-            img{
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 5px;
-            }
-        }
-        .info{
-            width: 50%;
-            padding: 5px 0 5px 15px;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            .text{
-                align-self: flex-start;
-                width: 100%;
-                h4{
-                    font-size: 18px;
-                    font-weight: bold;
-                    margin: 0 0 3px 0;
-                    padding: 0;
-                }
-            }
-            .footer{
-                /*align-self: flex-end;*/
-                margin-top: auto;
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                .rating_stars{
-                    color: #FADC72;
-                    font-size: 15px;
-                }
-                .btn{
-                    padding: 0px 8px;
-                }
-            }
-        }
     }
 </style>
 
