@@ -9,8 +9,10 @@ contract ProductVersion is ProductBase {
     }
 
     function submitVersionForReview(uint _productId, string _version, string _downloadRefType, string _downloadRefSource, string _checksum) external onlyProductDeveloper(_productId) {
+        // Check that version is specified
+        require(bytes(_version).length > 0);
         // Check that version does not already exist
-        require(bytes(marketplaceStorage.getProductVersionVersion(_productId, _version)).length != 0);
+        require(bytes(marketplaceStorage.getProductVersionVersion(_productId, _version)).length == 0);
 
         marketplaceStorage.setProductVersion(_productId, _version, _downloadRefType, _downloadRefSource, _checksum, now);
         marketplaceStorage.setProductVersionVotingIsActive(_productId, _version, true);
