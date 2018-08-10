@@ -34,4 +34,10 @@ contract ProductPurchase is ProductBase {
 
         emit productPurchased(_productId, _pricePlanCode, msg.value, msg.sender, developerAddress);
     }
+
+    function getPurchaseOrder(uint _productId, address _purchaser, uint _index) external view returns (uint id, string pricePlanCode, uint value, address purchaser, address developer) {
+        ProductStorageAccess.PurchaseOrder memory order = marketplaceStorage.getProductPurchaseOrder(_productId, _purchaser, _index);
+
+        return (order.productId, order.pricePlanCode, order.value, order.purchaser, order.developer);
+    }
 }
