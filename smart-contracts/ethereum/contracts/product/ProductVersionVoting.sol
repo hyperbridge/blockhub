@@ -24,7 +24,7 @@ contract ProductVersionVoting is ProductBase {
 
     function voteOnVersion(uint _productId, string _version, bool _vote) external onlyAdministrator onlyActiveVersionVoting(_productId, _version) {
         // Check that voter has not already voted
-        require(marketplaceStorage.getProductVersionVotingHasVoted(_productId, _version, msg.sender));
+        require(!marketplaceStorage.getProductVersionVotingHasVoted(_productId, _version, msg.sender));
 
         if (_vote) {
             uint currentApprovalCount = marketplaceStorage.getProductVersionVotingApprovalCount(_productId, _version);
@@ -42,12 +42,24 @@ contract ProductVersionVoting is ProductBase {
         uint disapprovalCount = marketplaceStorage.getProductVersionVotingDisapprovalCount(_productId, _version);
         uint numVoters = approvalCount + disapprovalCount;
 
-        if (approvalCount >= numVoters / 2) {
+        uint votingThreshold;
+
+        numVoters == 1 ? votingThreshold = 1 : votingThreshold = numVoters / 2;
+
+        if (approvalCount >= votingThreshold) {
             ProductStorageAccess.ProductVersion memory newLatestVersion = marketplaceStorage.getProductVersion(_productId, _version);
 
             marketplaceStorage.setProductLatestVersion(_productId, newLatestVersion.version, newLatestVersion.downloadRefType, newLatestVersion.downloadRefSource, newLatestVersion.checksum, newLatestVersion.createdAt);
         } else {
             marketplaceStorage.setProductVersionVotingHasFailed(_productId, _version, true);
         }
+
+        marketplaceStorage.setProductVersionVotingIsActive(_productId, _version, false);
+    }
+
+    function getVersionVoting(uint _productId, string _version) external view returns (uint approvalCount, uint disapprovalCount, bool isActive, bool hasFailed) {
+        ProductStorageAccess.VersionVoting memory version = marketplaceStorage.getProductVersionVoting(_productId, _version);
+
+        return (version.approvalCount, version.disapprovalCount, version.isActive, version.hasFailed);
     }
 }
