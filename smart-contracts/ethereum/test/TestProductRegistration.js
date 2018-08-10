@@ -1,6 +1,6 @@
 const MarketplaceStorage = artifacts.require("MarketplaceStorage");
 const ProductRegistration = artifacts.require("ProductRegistration");
-const Developer = artifacts.require("Developer")
+const Developer = artifacts.require("Developer");
 
 const blankAddress = 0x0000000000000000000000000000000000000000;
 const productTitle = "BlockHub";
@@ -37,6 +37,15 @@ contract('ProductRegistration', function(accounts) {
         await developerContract.createDeveloper("Hyperbridge", { from: developerAccount });
 
         watcher.stopWatching();
+    });
+
+    it("should deploy the product registration contract", async () => {
+        try {
+            assert.ok(productRegistrationContract.address);
+        } catch (e) {
+            console.log(e.message);
+            assert.fail();
+        }
     });
 
     it("developer should be able to create a product", async () => {
@@ -104,16 +113,9 @@ contract('ProductRegistration', function(accounts) {
         console.log(systemTags);
         console.log(authorTags);
 
-        let trans;
-
         try {
-            // trans = await productRegistrationContract.setProductTags(productId, systemTags, authorTags, { from: developerAccount });
-
-            // TODO Figure out why this isn't working...
-            //trans = await productRegistrationContract.setProductTagsLength(productId, 5);
-
-            //trans = await productRegistrationContract.setProductTagsLength2(productId, 5);
-            //trans = await productRegistrationContract.setProductStatus(productId, 3);
+            // TODO - figure out why this isn't working
+            await productRegistrationContract.setProductTags(productId, systemTags, authorTags, { from: developerAccount });
 
             const product = await productRegistrationContract.getProduct(productId);
 
