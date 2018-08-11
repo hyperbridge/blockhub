@@ -37,6 +37,7 @@
         justify-content: flex-start;
         flex-wrap: wrap;
         margin: 0 -10px;
+        width: calc( 100% + 20px );
     }
     .assets-list__item-container{
         padding: 10px;

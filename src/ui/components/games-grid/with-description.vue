@@ -1,74 +1,32 @@
 <template>
     <div class="games-list">
-        <div class="games-list__item">
-            <div class="price">
-                <strong>12.5</strong> USD
+        <div class="games-list__item"
+             v-for="(item, index) in items"
+             :style="{ width: 'calc( 100% / ' + itemInRow + ')', background: itemBg }">
+            <div v-if="showPrice" class="price">
+                <strong>{{ item.price }}</strong> USD
             </div>
             <div class="img">
-                <img src="http://via.placeholder.com/200x105" />
+                <img :src="item.img" />
             </div>
             <div class="info">
                 <div class="text">
-                    <h4>Game Title here</h4>
-                    <p>Publisher Name Goes Here</p>
+                    <h4>{{ item.title }}</h4>
+                    <p>{{ item.description }}</p>
                 </div>
                 <div class="footer">
-                    <div class="rating_stars">
+                    <div class="time" v-if="showTime">
+                        <i class="fas fa-calendar-alt"></i>
+                        {{ item.time }}
+                    </div>
+                    <div class="rating_stars" v-if="showStars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <a href="#3" class="btn btn-sm btn-success text-uppercase font-weight-bold">Buy Now</a>
-                </div>
-            </div>
-        </div>
-        <div class="games-list__item">
-            <div class="price">
-                <strong>12.5</strong> USD
-            </div>
-            <div class="img">
-                <img src="http://via.placeholder.com/200x105" />
-            </div>
-            <div class="info">
-                <div class="text">
-                    <h4>Game Title here</h4>
-                    <p>Publisher Name Goes Here</p>
-                </div>
-                <div class="footer">
-                    <div class="rating_stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <a href="#3" class="btn btn-sm btn-success text-uppercase font-weight-bold">Buy Now</a>
-                </div>
-            </div>
-        </div>
-        <div class="games-list__item">
-            <div class="price">
-                <strong>12.5</strong> USD
-            </div>
-            <div class="img">
-                <img src="http://via.placeholder.com/200x105" />
-            </div>
-            <div class="info">
-                <div class="text">
-                    <h4>Game Title here</h4>
-                    <p>Publisher Name Goes Here</p>
-                </div>
-                <div class="footer">
-                    <div class="rating_stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <a href="#3" class="btn btn-sm btn-success text-uppercase font-weight-bold">Buy Now</a>
+                    <a v-if="showButton" href="#3" class="btn btn-sm btn-success text-uppercase font-weight-bold">Buy Now</a>
                 </div>
             </div>
         </div>
@@ -77,7 +35,7 @@
 
 <script>
     export default {
-        props: ['projects'],
+        props: ['items', 'showPrice', 'showStars', 'showButton', 'showTime', 'itemInRow', 'itemBg'],
         components:{
             'c-tags': () => import('@/ui/components/product-tags'),
         }
