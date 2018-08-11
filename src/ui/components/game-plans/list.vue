@@ -1,6 +1,6 @@
 <template>
 
-    <div class="plans-list">
+    <div class="plans-list invert">
         <div class="plans-list__container">
             <div v-for="(plan, index) in items" v-bind:key="index" class="plans-list__item">
                 <h6>{{ plan.title}}</h6>
