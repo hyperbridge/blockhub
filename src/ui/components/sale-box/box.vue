@@ -1,6 +1,6 @@
 <template>
 
-    <div class="sale-box">
+    <div class="sale-box">sssss
         <h5 class="sale-box__title">
             {{ sale_box.title }}
         </h5>
@@ -13,6 +13,7 @@
 
 <script>
     export default {
+        name: 'c-sale-box',
         props: ['sale_box']
     }
 </script>

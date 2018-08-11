@@ -11,7 +11,8 @@
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "dependencies": {
     "node-sass": "^4.9.0",
@@ -20,6 +21,9 @@
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.4.10",
+    "@storybook/addon-links": "^3.4.10",
+    "@storybook/vue": "^4.0.0-alpha.16",
     "@types/core-js": "^2.5.0",
     "@types/mocha": "^5.2.2",
     "@types/node": "^10.3.3",
