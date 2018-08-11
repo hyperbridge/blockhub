@@ -1,6 +1,6 @@
 <template>
 
-    <div class="sale-box">sssss
+    <div class="sale-box invert">
         <h5 class="sale-box__title">
             {{ sale_box.title }}
         </h5>
