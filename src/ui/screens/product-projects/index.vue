@@ -66,9 +66,9 @@
                     </div>
 
                     <div class="col-12">
-                        <div class="card-container">
+                        <div class="project-card__container">
                             <h3>Top 3 Submissions</h3>
-                            <div class="card">
+                            <div class="project-card__item">
                                 <img
                                     src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
                                 <div class="description">
@@ -92,7 +92,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="card-action">
+                                <div class="item-action">
                                     <a href="#3" class="btn btn-sm btn-info">Participate</a>
                                     <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
                                 </div>
@@ -206,7 +206,7 @@
         }
     }
 
-    .card-container {
+    .project-card__container {
         background: rgba(0, 0, 0, .13);
         padding: 5px;
         border-radius: 5px;
@@ -220,35 +220,35 @@
             font-size: 21px;
             margin: 5px 10px 10px;
         }
-        .card {
-            background: rgba(0, 0, 0, .13);
-            padding: 15px;
+    }
+    .project-card__item {
+        background: rgba(0, 0, 0, .13);
+        padding: 15px;
+        border-radius: 5px;
+        width: calc(100%/3 - 20px);
+        margin: 10px;
+        border: 1px solid rgba(255, 255, 255, .1);
+        img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
             border-radius: 5px;
-            width: calc(100%/3 - 20px);
-            margin: 10px;
-            border: 1px solid rgba(255, 255, 255, .1);
-            img {
-                width: 100%;
-                height: 170px;
-                object-fit: cover;
-                border-radius: 5px;
-            }
-            .description {
-                margin: 15px 0;
+        }
+        .description {
+            margin: 15px 0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .item-action{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            a{
+                margin-left: 10px;
                 font-weight: bold;
-                font-size: 16px;
-            }
-            .card-action{
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-                flex-wrap: wrap;
-                margin-top: 15px;
-                a{
-                    margin-left: 10px;
-                    font-weight: bold;
-                    text-transform: uppercase;
-                }
+                text-transform: uppercase;
             }
         }
     }

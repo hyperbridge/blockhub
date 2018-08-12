@@ -245,7 +245,8 @@
 </script>
 
 <!--Heading Bar Additional Actions-->
-<style lang="scss">.dots-nav{
+<style lang="scss">
+    .dots-nav{
         float: right;
         margin-top: 6px;
         a{
