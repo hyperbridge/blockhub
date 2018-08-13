@@ -18,13 +18,12 @@ addons:
 
 before_install:
   - export CXX="g++-4.8"
-  - npm install -g npm@latest
-  - npm install -g ethereumjs-testrpc truffle
 
 install:
   - cd smart-contracts/ethereum && npm install 
 
 
 script:
-  - cd smart-contracts/ethereum && testrpc &
-  - cd smart-contracts/ethereum && truffle test
+  - cd smart-contracts/ethereum
+  - npm run ganache &
+  - npm run truffle test

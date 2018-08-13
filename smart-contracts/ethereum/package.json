@@ -8,6 +8,7 @@
     },
     "scripts": {
         "truffle": "truffle",
+        "ganache": "ganache-cli --chainid 5777 --networkid 5777 --mnemonic \"candy maple cake sugar pudding cream honey rich smooth crumble sweet treat\"",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
@@ -16,5 +17,8 @@
     "dependencies": {
         "truffle": "4.1.11",
         "openzeppelin-solidity": "1.10.0"
+    },
+    "devDependencies": {
+        "ganache-cli": "^6.1.6"
     }
 }
