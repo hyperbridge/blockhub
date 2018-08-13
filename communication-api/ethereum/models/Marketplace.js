@@ -20,8 +20,8 @@ class Marketplace {
         this.contract = new web3.eth.Contract(this.contractMeta.abi, this.contractAddress)
     }
 
-    async submitAppForReview(name, version, category, files, checksum, permissions) {
-        console.log('Calling Marketplace.submitAppForReview with arguments: ', arguments)
+    async createProduct({ name, version, category, files, checksum, permissions }) {
+        console.log('Calling Marketplace.createProduct: ', arguments)
 
         return await new Promise((resolve) => {
             this.contract.methods
@@ -29,6 +29,19 @@ class Marketplace {
                 .send({ from: this.fromAddress, gas: 3000000 })
                 .on('receipt', (receipt) => {
                     resolve(receipt.events.AppSubmitted.returnValues.id)
+                })
+        })
+    }
+
+    async updateProduct({ id, name, version, category, files, checksum, permissions }) {
+        console.log('Calling Marketplace.updateProduct: ', arguments)
+
+        return await new Promise((resolve) => {
+            this.contract.methods
+                .submitVersionForReview(id, web3.utils.asciiToHex(version), files, checksum, permissions)
+                .send({ from: this.fromAddress, gas: 3000000 })
+                .on('receipt', (receipt) => {
+                    resolve(receipt.events.VersionSubmitted.returnValues.app_id)
                 })
         })
     }
