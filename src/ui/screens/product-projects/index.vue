@@ -1,19 +1,19 @@
 <template>
     <c-layout navigationKey="product-navigation">
         <div class="content" id="content">
-            <div class="container-fluid">  
-                <div class="row">
-                    <div class="col-12" v-if="!product">
+            <div class="container-fluid">
+                <div class="row" v-if="!product">
+                    <div class="col-12">
                         Product not found
                     </div>
-                    <div class="col-12" v-if="product">
+                </div>
+                <div class="row" v-if="product">
+                    <div class="col-12">
                         <h1 class="title margin-top-10">{{ product.name }}</h1>
                         
-                        <div class="product__tag" v-for="(tag, index) in product.author_tags" v-bind:key="index">
-                            <a href="#" class="card-link" @click="filterTag(tag)">{{ tag }}</a>
-                        </div>
+                        <c-tags-list :tags="product.author_tags" v-if="!editing"></c-tags-list>
 
-                        <ul class="nav nav-tabs margin-bottom-50">
+                        <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
                                 <a class="nav-link" :href="`/#/product/${product.id}`">Overview</a>
                             </li>
@@ -27,56 +27,75 @@
                                 <a class="nav-link" :href="`/#/product/${product.id}/assets`">Assets</a>
                             </li>
                         </ul>
+                    </div>
+                    <div class="col-12">
+                        <div class="filter d-flex justify-content-between">
+                            <div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-search"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <a href="#3" class="btn btn-sm btn-info text-uppercase font-weight-bold">Submit
+                                    Project</a>
+                            </div>
+                        </div>
+                    </div>
 
-                        <div class="card" v-for="(project, index) in product.projects" v-bind:key="index">
-                            <div class="page-heading">
-                                <div class="page-heading__container">
-                                    <h2 class="title">{{ project.title }}</h2>
-                                    <p class="caption">Project ID: 1442, 02/2018 - 02/2018</p>
+                    <div class="card invert" v-if="!product.projects.length">
+                        No projects
+                    </div>
+
+                    <div class="row" v-if="product.projects.length">
+                        <div class="col-12 col-lg-4" v-for="(item, index) in product.projects" :key="index">
+                            <div class="card invert game-grid__item">
+                                <div class="card-body padding-0">
+                                    <a :href="`/#/project/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
+                                    <h4><a :href="`/#/project/${item.id}`">{{ item.name }}</a></h4>
+                                    <p class="card-text">{{ item.short_description }} </p>
+
+                                    <c-tags :tags="item.author_tags"></c-tags>
                                 </div>
                             </div>
-                            <div class="card-container">
-                                <div class="dropdown">
-                                    <div class="rw-btn rw-btn--card" data-toggle="dropdown" aria-expanded="false"><div></div></div>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">See details</a>
-                                        <a class="dropdown-item" href="#">Download</a>
-                                        <a class="dropdown-item" href="#">Edit</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Delete</a>
-                                    </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="project-card__container">
+                            <h3>Top 3 Submissions</h3>
+                            <div class="project-card__item">
+                                <img
+                                    src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
+                                <div class="description">
+                                    Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-inner-container">                                             
-                                    <p class="text-muted margin-bottom-20">Invoice #9501 &mdash; 20 Feb, 2018</p>
-                                    <div class="form-row">
-                                        <div class="col-6">                                                                                                        
-                                            <h3 class="margin-bottom-0">$800.00</h3>
-                                            <span class="text-muted">Amount</span><br>                                                    
-                                        </div>
-                                        <div class="col-6 text-right">                                                    
-                                            <h3 class="margin-bottom-0">24 Feb, 18</h3>
-                                            <span class="text-muted">Due date</span><br>                                                    
+                                <div class="progress-container">
+                                    <div class="progress progress-bar-vertical">
+                                        <div class="progress-bar bg-success" role="progressbar"
+                                             aria-valuenow="40"
+                                             aria-valuemin="0" aria-valuemax="100"
+                                             style="height: 40%">
+                                            <span class="sr-only">40% Complete</span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-7">
-                                        
-                                        <div class="user user--rounded user--bordered">
-                                            <img src="http://via.placeholder.com/128x128">
-                                            <div class="user__name">
-                                                <strong>Francisco Dero</strong>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="col-5 text-right">
-                                        <small class="text-muted">Total spent: 15h</small>
+                                    <div class="progress-info">
+                                        <strong class="w-100">
+                                            Obtained Funds
+                                        </strong>
+                                        <span>
+                                        $4,726 of $ 11,000
+                                        </span>
                                     </div>
                                 </div>
-                                
+                                <div class="item-action">
+                                    <a href="#3" class="btn btn-sm btn-info">Participate</a>
+                                    <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -87,47 +106,151 @@
 </template>
 
 <script>
-const updateProduct = function() {
-    if (!this.$store.state.marketplace.products)
-        return
+    const updateProduct = function () {
+        if (!this.$store.state.marketplace.products)
+            return
 
-    const product = this.$store.state.marketplace.products[this.id]
+        const product = this.$store.state.marketplace.products[this.id]
 
-    if (!product)
-        return
+        if (!product)
+            return
 
-    if (product.images && product.images.header)
-        window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
-        
-    return product
-}
+        if (product.images && product.images.header)
+            window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
 
-export default {
-    props: ['id'],
-    components: {
-        'c-layout': () => import('@/ui/layouts/default')
-    },
-    data() {
-        return {
-        }
-    },
-    methods: {
-        save() {
-            this.$store.dispatch('marketplace/updateProduct', this.product)
-        }
-    },
-    computed: {
-        product: updateProduct
-    },
-    mounted: updateProduct,
-    created: updateProduct,
-    beforeDestroy() {
-        window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+        if (!product.projects)
+            product.projects = []
+            
+        return product
     }
-}
+
+    export default {
+        props: ['id'],
+        components: {
+            'c-layout': () => import('@/ui/layouts/default'),
+            'c-tags-list': () => import('@/ui/components/product-tags')
+        },
+        data() {
+            return {}
+        },
+        methods: {
+            save() {
+                this.$store.dispatch('marketplace/updateProduct', this.product)
+            }
+        },
+        computed: {
+            product: updateProduct
+        },
+        mounted: updateProduct,
+        created: updateProduct,
+        beforeDestroy() {
+            window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
+    .filter {
+        margin-bottom: 10px;
+        .input-group {
+            border-color: rgba(0, 0, 0, .7);
+            border-radius: 5px;
+            overflow: hidden;
+            .input-group-append {
+                margin: 0;
+                .input-group-text {
+                    border: none;
+                }
+            }
+            input {
+                border: none;
+                &:active,
+                &:focus {
+                    border: unset;
+                    box-shadow: none;
+                }
+            }
+        }
+    }
 
+    .progress-container {
+        position: relative;
+        padding-left: 20px;
+        .progress-bar-vertical {
+            width: 5px;
+            position: absolute;
+            left: 0;
+            top: 4px;
+            bottom: 4px;
+            display: flex;
+            align-items: flex-end;
+            margin: 0;
+            float: left;
+            border-radius: 0;
+            background: #fff;
+            height: auto;
+            .progress-bar {
+                width: 100%;
+                height: 0;
+                -webkit-transition: height 0.6s ease;
+                -o-transition: height 0.6s ease;
+                transition: height 0.6s ease;
+            }
+        }
+        .progress-info{
+            font-size: 14px;
+            strong{
+                display: inline-block;
+                width: 100%;
+            }
+        }
+    }
+
+    .project-card__container {
+        background: rgba(0, 0, 0, .13);
+        padding: 5px;
+        border-radius: 5px;
+        display: flex;
+        align-items: stretch;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+        border: 1px solid rgba(255, 255, 255, .1);
+        h3{
+            width: 100%;
+            font-size: 21px;
+            margin: 5px 10px 10px;
+        }
+    }
+    .project-card__item {
+        background: rgba(0, 0, 0, .13);
+        padding: 15px;
+        border-radius: 5px;
+        width: calc(100%/3 - 20px);
+        margin: 10px;
+        border: 1px solid rgba(255, 255, 255, .1);
+        img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .description {
+            margin: 15px 0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .item-action{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            a{
+                margin-left: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+        }
+    }
 </style>
 

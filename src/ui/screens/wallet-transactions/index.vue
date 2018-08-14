@@ -2,209 +2,335 @@
     <c-layout navigationKey="account-navigation">
         <!-- PAGE CONTENT CONTAINER -->
         <div class="content" id="content">
-            
-            <div class="container-fluid">  
-                
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2>Transaction History</h2>
-
-                        <div class="card margin-bottom-0">
-                            <div class="page-heading">
-                                <div class="page-heading__container">                                    
-                                    <h1 class="title">Recent activity</h1>
-                                    <p class="caption">21/03/2018 - 29/03/2018</p>                                            
-                                </div>                                            
-                                <div class="page-heading__container float-right d-none d-md-block">
-                                    <div class="input-group margin-bottom-0">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <i class="fa fa-credit-card"></i>
-                                            </div>
-                                        </div>
-                                        <select class="custom-select">
-                                            <option>4149 5*** **** **29</option>
-                                            <option>5412 7*** **** **31</option>
-                                            <option>2249 9*** **** **48</option>                                                
-                                        </select>
-                                    </div>
-
-                                </div>
+                        <ul class="nav nav-tabs margin-bottom-10">
+                            <li class="nav-item">
+                                <a class="nav-link" :href="`/#/account/wallets`">Overview</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#3">Transactions</a>
+                            </li>
+                        </ul>
+                        <div class="filter-line margin-bottom-50">
+                            <div class="filter-line__search">
+                                <input type="text" class="form-control" placeholder="Term Search">
                             </div>
-                            <div class="card-body padding-top-15 padding-bottom-15">
-
-                                <div class="table-responsive">
-                                    <table class="table table-indent-rows margin-bottom-10" style="min-width: 500px;">                                            
-                                        <tbody>
-                                            <tr>
-                                                <td width="40">
-                                                    <div class="icon-box icon-box--bordered icon-box--rounded bg-secondary"><span class="fa fa-glass"></span></div>
-                                                </td>
-                                                <td>
-                                                    <strong>Pizza Best Pizza</strong><br>
-                                                    <span class="text-muted">Street name, 234 New York</span>
-                                                </td>
-                                                <td width="200">
-                                                    <strong>25 March 2018</strong><br>
-                                                    <span class="text-muted">12:23:15 GMT</span>
-                                                </td>
-                                                <td width="100">
-                                                    <strong class="text-danger">-$14.55</strong><br>
-                                                    <span class="text-muted">$1,959.22</span>
-                                                </td>                                                        
-                                            </tr>
-                                            <tr>
-                                                <td width="40">
-                                                    <div class="icon-box icon-box--bordered icon-box--rounded bg-secondary"><span class="fa fa-shopping-basket"></span></div>
-                                                </td>
-                                                <td>
-                                                    <strong>Products in ShopNmae</strong><br>
-                                                    <span class="text-muted">Street name, 234 New York</span>
-                                                </td>
-                                                <td>
-                                                    <strong>25 March 2018</strong><br>
-                                                    <span class="text-muted">12:23:15 GMT</span>
-                                                </td>
-                                                <td>
-                                                    <strong class="text-danger">-$32.21</strong><br>
-                                                    <span class="text-muted">$2,054.99</span>
-                                                </td>                                                        
-                                            </tr>
-                                            <tr>
-                                                <td width="40">
-                                                    <div class="icon-box icon-box--bordered icon-box--rounded bg-success"><span class="fa fa-university"></span></div>
-                                                </td>
-                                                <td>
-                                                    <strong>Income</strong><br>
-                                                    <span class="text-muted">5523 **** **** **23</span>
-                                                </td>
-                                                <td>
-                                                    <strong>25 March 2018</strong><br>
-                                                    <span class="text-muted">12:23:15 GMT</span>
-                                                </td>
-                                                <td>
-                                                    <strong class="text-success">+$1000.00</strong><br>
-                                                    <span class="text-muted">$2,185.75</span>
-                                                </td>                                                        
-                                            </tr>
-                                            <tr>
-                                                <td width="40">
-                                                    <div class="icon-box icon-box--bordered icon-box--rounded bg-secondary"><span class="fa fa-shopping-bag"></span></div>
-                                                </td>
-                                                <td>
-                                                    <strong>Online store purchase</strong><br>
-                                                    <span class="text-muted">http://domain.com/store/</span>
-                                                </td>
-                                                <td>
-                                                    <strong>25 March 2018</strong><br>
-                                                    <span class="text-muted">12:23:15 GMT</span>
-                                                </td>
-                                                <td>
-                                                    <strong class="text-danger">-$520.00</strong><br>
-                                                    <span class="text-muted">$1,185.75</span>
-                                                </td>                                                        
-                                            </tr>
-                                            <tr>
-                                                <td width="40">
-                                                    <div class="icon-box icon-box--bordered icon-box--rounded bg-danger"><span class="fa fa-exchange"></span></div>
-                                                </td>
-                                                <td>
-                                                    <strong>Transfer</strong><br>
-                                                    <span class="text-muted">To your card **21</span>
-                                                </td>
-                                                <td>
-                                                    <strong>25 March 2018</strong><br>
-                                                    <span class="text-muted">12:23:15 GMT</span>
-                                                </td>
-                                                <td>
-                                                    <strong class="text-danger">-$100.00</strong><br>
-                                                    <span class="text-muted">$1,285.75</span>
-                                                </td>                                                        
-                                            </tr>
-                                            <tr>
-                                                <td width="40">
-                                                    <div class="icon-box icon-box--bordered icon-box--rounded bg-secondary"><span class="fa fa-exchange"></span></div>
-                                                </td>
-                                                <td>
-                                                    <strong>Book store</strong><br>
-                                                    <span class="text-muted">Street name, 234 LA</span>
-                                                </td>
-                                                <td>
-                                                    <strong>24 March 2018</strong><br>
-                                                    <span class="text-muted">12:23:15 GMT</span>
-                                                </td>
-                                                <td>
-                                                    <strong class="text-danger">-$12.00</strong><br>
-                                                    <span class="text-muted">$1,285.75</span>
-                                                </td>                                                        
-                                            </tr>
-                                            <tr>
-                                                <td width="40">
-                                                    <div class="icon-box icon-box--bordered icon-box--rounded bg-secondary"><span class="fa fa-exchange"></span></div>
-                                                </td>
-                                                <td>
-                                                    <strong>Payment</strong><br>
-                                                    <span class="text-muted">Street name, 234 LA</span>
-                                                </td>
-                                                <td>
-                                                    <strong>23 March 2018</strong><br>
-                                                    <span class="text-muted">12:23:15 GMT</span>
-                                                </td>
-                                                <td>
-                                                    <strong class="text-danger">-$59.00</strong><br>
-                                                    <span class="text-muted">$1,380.75</span>
-                                                </td>                                                        
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="row">                                                    
-                                    <div class="col-12 col-md-6">                                                
-
-                                        <nav>
-                                            <ul class="pagination justify-content-end pagination--space">
-                                                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link margin-right-0" href="#">Next</a></li>
-                                            </ul>
-                                        </nav>
-
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <p class="text-muted margin-bottom-10 text-right">Total spent $459.21 per month</p>
+                            <div class="filter-line__filter">
+                                Filter by:
+                                <div class="dropdown">
+                                    <a class="btn dropdown-toggle" href="#" role="button" id="filtering_type"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Type
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
                                     </div>
                                 </div>
+                                <a href="#3" class="btn btn-sm btn-danger">clear <i class="fas fa-times"></i></a>
+                                <a href="#3" class="btn btn-sm btn-info">more filters</a>
+                            </div>
+                            <div class="filter-line__sorting">
+                                Sort by:
+                                <div class="dropdown">
+                                    <a class="btn dropdown-toggle" href="#" role="button" id="sorting_value"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Value
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>
+                                <a href="#3" class="btn btn-link">
+                                    <i class="fas fa-sort-numeric-up"></i>
+                                </a>
+                                <a href="#3" class="btn btn-link">
+                                    <i class="fas fa-sort-amount-up"></i>
+                                </a>
                             </div>
                         </div>
 
+                        <div class="transaction-list">
+                            <div class="transaction-list__item">
+                                <div class="date">
+                                    17 nov
+                                </div>
+                                <div class="direction up">
+                                    <i class="fas fa-angle-double-up"></i>
+                                </div>
+                                <div class="company">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                                    Wallmart
+                                </div>
+                                <div class="purpose">
+                                    Made a purchase on Online Store
+                                </div>
+                                <div class="currency">
+                                    Bitcoin
+                                </div>
+                                <div class="amount">
+                                    $ 0.05
+                                </div>
+                            </div>
+                            <div class="transaction-list__item">
+                                <div class="date">
+                                    17 nov
+                                </div>
+                                <div class="direction down">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </div>
+                                <div class="company">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                                    Wallmart
+                                </div>
+                                <div class="purpose">
+                                    Made a purchase on Online Store
+                                </div>
+                                <div class="currency">
+                                    Bitcoin
+                                </div>
+                                <div class="amount">
+                                    $ 0.05
+                                </div>
+                            </div>
+                            <div class="transaction-list__item">
+                                <div class="date">
+                                    17 nov
+                                </div>
+                                <div class="direction up">
+                                    <i class="fas fa-angle-double-up"></i>
+                                </div>
+                                <div class="company">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                                    Wallmart
+                                </div>
+                                <div class="purpose">
+                                    Made a purchase on Online Store
+                                </div>
+                                <div class="currency">
+                                    Bitcoin
+                                </div>
+                                <div class="amount">
+                                    $ 0.05
+                                </div>
+                            </div>
+                            <div class="transaction-list__item">
+                                <div class="date">
+                                    17 nov
+                                </div>
+                                <div class="direction up">
+                                    <i class="fas fa-angle-double-up"></i>
+                                </div>
+                                <div class="company">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                                    Wallmart
+                                </div>
+                                <div class="purpose">
+                                    Made a purchase on Online Store
+                                </div>
+                                <div class="currency">
+                                    Bitcoin
+                                </div>
+                                <div class="amount">
+                                    $ 0.05
+                                </div>
+                            </div>
+                            <div class="transaction-list__item">
+                                <div class="date">
+                                    17 nov
+                                </div>
+                                <div class="direction up">
+                                    <i class="fas fa-angle-double-up"></i>
+                                </div>
+                                <div class="company">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                                    Wallmart
+                                </div>
+                                <div class="purpose">
+                                    Made a purchase on Online Store
+                                </div>
+                                <div class="currency">
+                                    Bitcoin
+                                </div>
+                                <div class="amount">
+                                    $ 0.05
+                                </div>
+                            </div>
+                            <div class="transaction-list__item">
+                                <div class="date">
+                                    17 nov
+                                </div>
+                                <div class="direction up">
+                                    <i class="fas fa-angle-double-up"></i>
+                                </div>
+                                <div class="company">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                                    Wallmart
+                                </div>
+                                <div class="purpose">
+                                    Made a purchase on Online Store
+                                </div>
+                                <div class="currency">
+                                    Bitcoin
+                                </div>
+                                <div class="amount">
+                                    $ 0.05
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-            </div>                    
+            </div>
         </div>
         <!-- //END PAGE CONTENT CONTAINER -->
     </c-layout>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      msg: '',
+    export default {
+        props: ['id'],
+        data() {
+            return {
+                msg: '',
+            }
+        },
+        components: {
+            'c-layout': () => import('@/ui/layouts/default')
+        },
+        data: () => ({}),
+        created() {
+        }
     }
-  },
-  components: {
-    'c-layout': () => import('@/ui/layouts/default')
-  },
-  data: () => ({
-  }),
-  created() {
-  }
-}
 </script>
 
 <style lang="scss" scoped>
+    .filter-line {
+        display: inline-block;
+        width: 100%;
+        float: left;
+        margin: 15px 0 25px;
+    }
+    .filter-line__search,
+    .filter-line__filter,
+    .filter-line__sorting {
+        display: inline-block;
+        float: left;
+        line-height: 30px;
+    }
+    .filter-line__search,
+    .filter-line__sorting {
+        width: 26%;
+    }
+    .filter-line__filter {
+        width: 48%;
+        border-right: 2px solid rgba(255, 255, 255, .1);
+        border-left: 2px solid rgba(255, 255, 255, .1);
+        text-align: center;
+        .dropdown {
+            display: inline-block;
+            margin: 0 15px 0 5px;
+            .dropdown-toggle {
+                background: rgba(0, 0, 0, .16);
+                color: #fff;
+                padding: 4px 10px;
+                border: 1px solid rgba(0, 0, 0, .5);
+            }
+        }
+        .btn {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+    }
+    .filter-line__search {
+        input {
+            color: rgba(255, 255, 255, .7);
+            border: 1px solid rgba(0, 0, 0, .3);
+            width: 70%;
+            line-height: 30px;
+            padding: 0 10px;
+        }
+    }
+    .filter-line__sorting {
+        text-align: right;
+        .dropdown {
+            display: inline-block;
+            margin: 0 15px 0 5px;
+            .dropdown-toggle {
+                background: rgba(0, 0, 0, .16);
+                color: #fff;
+                padding: 4px 10px;
+                border: 1px solid rgba(0, 0, 0, .5);
+            }
+        }
+        .btn-link {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 2px;
+            font-size: 16px;
 
+        }
+    }
+
+    .transaction-list{
+        display: inline-block;
+        width: 100%;
+    }
+    .transaction-list__item{
+        display: flex;
+        width: 100%;
+        padding: 8px 10px;
+        border-radius: 5px;
+        background: #1C2032;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .5);
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+        font-size: 14px;
+        margin-bottom: 15px;
+        .date{
+            width: 30px;
+            text-align: center;
+            font-weight: bold;
+            line-height: 14px;
+            text-transform: uppercase;
+        }
+        .direction{
+            width: 80px;
+            text-align: center;
+            &.up{
+                color: #F75D5D;
+            }
+            &.down{
+                color: #43C981;
+            }
+        }
+        .company{
+            width: 160px;
+            font-weight: bold;
+            img{
+                height: 25px;
+                width: auto;
+                margin-right: 10px;
+            }
+        }
+        .purpose{
+            width: calc( 100% - 450px )
+        }
+        .currency{
+            width: 100px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .amount{
+            width: 80px;
+            text-align: left;
+        }
+    }
 </style>

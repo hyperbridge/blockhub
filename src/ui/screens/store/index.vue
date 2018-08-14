@@ -64,7 +64,7 @@
 
                 <div class="row product-grid">
                     <div class="col-12">
-                        <c-heading-bar name="Crowdfund Projects" more="/projects" :showArrows="false" :showBackground="true" />
+                        <c-heading-bar name="Crowdfund Projects" more="/#/projects" :showArrows="false" :showBackground="true" />
                     </div>
 
                     <div class="col-12 col-lg-4" v-for="(item, index) in projects" v-bind:key="index">
@@ -249,3 +249,4 @@ export default {
         }
     }
 </style>
+

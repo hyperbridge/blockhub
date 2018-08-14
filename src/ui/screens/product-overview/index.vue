@@ -3,7 +3,6 @@
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
-                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#invertFormExampleModal">Launch modal</button>
                     <div class="col-12" v-if="!product">
                         Product not found
                     </div>
@@ -93,9 +92,9 @@
                             <div class="col-5">
                                 <c-rating-block :items="product.rating" :parent_url="`/#/product/${product.id}`" />
 
-                                <c-frequently-traded-assets :items="product.frequently_traded_assets" :assets_url="`/#/product/${product.id}`" />
+                                <c-frequently-traded-assets :items="product.frequently_traded_assets" :assets_url="`/#/product/${product.id}/assets`" />
 
-                                <c-community-spotlight :discussions="product.community.discussions" :community_url="`/#/product/${product.id}`" />
+                                <c-community-spotlight :discussions="product.community.discussions" :community_url="`/#/product/${product.id}/community`" />
 
                                 <div class="card invert system-requirements" v-if="product.system_requirements">
                                     <div class="card-body">
@@ -133,7 +132,8 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="invertFormExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div class="modal fade" id="purchase-modal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog  modal-dialog-centered" role="document">
                 <div class="modal-content send-funds-modal">
                     <h3>Sending Funds</h3>
@@ -149,10 +149,10 @@
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" id="agreement_tab" role="tabpanel" aria-labelledby="agreement-tab">
+                            <div class="tab-pane show active" id="agreement_tab" role="tabpanel" aria-labelledby="agreement-tab">
                                 <div class="tab-container">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <h4>Crowdfunding Campaing Adreement</h4>
+                                        <h4>Crowdfunding Campaign Agreement</h4>
                                     </div>
                                     <div class="terms_block">
 
@@ -335,7 +335,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="sending_tab" role="tabpanel" aria-labelledby="sending-tab">
+                            <div class="tab-pane" id="sending_tab" role="tabpanel" aria-labelledby="sending-tab">
                                 <div class="tab-container">
                                     <div class="sending-blk">
                                         <div class="clmn-1">
@@ -479,6 +479,11 @@
         if (product && product.images && product.images.header) {
             window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
         }
+
+        if (!product.community)
+            product.community = {
+                discussions: []
+            }
 
         return product
     }

@@ -147,6 +147,12 @@ const router = new Router({
             component: () => import('@/ui/screens/identity-projects')
         },
         {
+            path: '/identity/:id/licenses',
+            name: 'Identity licenses',
+            props: true,
+            component: () => import('@/ui/screens/identity-licenses')
+        },
+        {
             path: '/identity/:id/assets',
             name: 'Identity Assets',
             props: true,
@@ -166,6 +172,16 @@ const router = new Router({
             path: '/settings/client',
             name: 'Client Settings',
             component: () => import('@/ui/screens/settings-client')
+        },
+        {
+            path: '/settings/activity',
+            name: 'Activity Settings',
+            component: () => import('@/ui/screens/settings-activity')
+        },
+        {
+            path: '/settings/debug',
+            name: 'Debug Settings',
+            component: () => import('@/ui/screens/settings-debug')
         },
         {
             path: '/developer',
@@ -291,6 +307,11 @@ const router = new Router({
             component: () => import('@/ui/screens/download')
         },
         {
+            path: '/realm',
+            name: 'Realm Page',
+            component: () => import('@/ui/screens/realm')
+        },
+        {
             path: "*",
             component: () => import('@/ui/screens/not-found')
         }
@@ -299,7 +320,7 @@ const router = new Router({
 
 router.afterEach((to, from) => {
     // Complete the animation of the route progress bar.
-    $('.app-header--loader').removeClass('app-header--loading')
+    $('body').removeClass('screen-loading')
 })
 
 export const Auth = {
@@ -319,6 +340,8 @@ export const Auth = {
 
 
 router.beforeEach((to, from, next) => {
+    $('body').addClass('screen-loading')
+
   if (!Auth.loggedIn() && !!to.meta.auth) {
     next({
       path: '/login',

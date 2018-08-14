@@ -29,7 +29,7 @@
                                                     </label>
                                                 </th>
                                                 <th scope="col">Name</th>
-                                                <th scope="col">Status</th>
+                                                <th scope="col" width="160">Status</th>
                                                 <th scope="col">Address</th>
                                                 <th scope="col"></th>
                                             </tr>
@@ -51,7 +51,7 @@
                                                     <td>
                                                         <a :href="contract.link">{{ contract.name }}</a>
                                                         <br />
-                                                        <p v-if="contract.links"><strong>Dependencies:</strong> <em v-for="link in contract.links" :key="link.name">{{ link.name }} </em></p>
+                                                        <p v-if="contract.links && contract.links.length"><strong>Dependencies:</strong> <em v-for="link in contract.links" :key="link.name">{{ link.name }} </em></p>
                                                     </td>
                                                     <td>
                                                         <span class="badge badge-success" v-if="contract.created_at">Deployed</span>
@@ -233,13 +233,6 @@ export default {
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.Contribution.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.Contribution.address,
                             links: FundingProtocol.api.ethereum.state.contracts.Contribution.links
-                        },
-                        {
-                            name: 'ProjectBase',
-                            link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/ProjectBase.sol',
-                            created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectBase.created_at,
-                            address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectBase.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.ProjectBase.links
                         },
                         {
                             name: 'ProjectTimeline',

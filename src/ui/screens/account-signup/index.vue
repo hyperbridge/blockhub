@@ -237,8 +237,8 @@
                                         <span></span>
                                     </label>
                                     <span class="label">I agree to the
-                                    <a href="#3">terms</a> and
-                                    <a href="#3">privacy policy</a> </span>
+                                    <a href="#" data-toggle="modal" data-target="#terms-modal">terms</a> and
+                                    <a href="#" data-toggle="modal" data-target="#privacy-policy-modal">privacy policy</a> </span>
                                 </div>
                                 <div>
                                     <label class="switch switch-sm">
@@ -511,6 +511,27 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="privacy-policy-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content invert">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Set Up Campaign</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </div>

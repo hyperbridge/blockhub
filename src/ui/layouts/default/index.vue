@@ -2,8 +2,7 @@
     <!-- PAGE WRAPPER -->
     <div class="page page--w-header page--w-container">
         <!-- PAGE HEADER -->
-            <c-header />
-            <c-header :isLoader="true" />
+        <c-header />
         <!-- //END PAGE HEADER -->
 
         <!-- PAGE CONTENT WRAPPER -->
@@ -406,6 +405,10 @@ export default {
 
     .owl-controls {
         display: none !important;
+    }
+
+    .owl-carousel .owl-stage {
+        transition: unset !important;
     }
 
 </style>

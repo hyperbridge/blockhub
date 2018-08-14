@@ -1,6 +1,20 @@
 <template>
-    <header class="app-header" ref="aaa" :class="{ 'app-header--loader': isLoader }">
-        <div class="app-header__top-bar"></div>
+    <header class="app-header">
+        <c-loading-bar class="app-header__loading" />
+
+        <div class="app-header__top-bar desktop-draggable">
+            <div class="app-header__buttons" v-if="is_desktop">
+                <div class="app-header__close-button">
+                    <a href="#" @click.prevent="closeWindow"><span>&times;</span></a>
+                </div>
+                <div class="app-header__minimize-button">
+                    <a href="#" @click.prevent="minimizeWindow"><span>&ndash;</span></a>
+                </div>
+                <div class="app-header__maximize-button">
+                    <a href="#" @click.prevent="maximizeWindow"><span>+</span></a>
+                </div>
+            </div>
+        </div>
         <div class="app-header__bar-left">
             <a href="/#/store">
                 <span class="fa fa-home"></span>
@@ -15,7 +29,7 @@
         <div class="app-header__shadow"></div>
         <a class="app-header__bar-center" href="/#/home"><!-- add icons --></a>
         <div class="app-header__bar-right">
-            <a href="/#/settings">
+            <a href="javascript:;" data-action="fixedpanel-toggle">
                 <span class="fa fa-cog"></span>
             </a>
         </div>
@@ -41,7 +55,7 @@
                             <span class="text">CREATE ACCOUNT</span> <span class="fa fa-user-plus"></span>
                         </a>
                     </li>
-                    <li class="app-header__download-btn">
+                    <li class="app-header__download-btn" v-if="!is_desktop">
                         <a href="/#/download" class="">
                             <span class="text">DOWNLOAD</span> <span class="fa fa-download"></span>
                         </a>
@@ -87,22 +101,16 @@
                             <span class="text">Contacts</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="/#/settings">
-                            <span class="icon fa fa-cog"></span>
-                            <span class="text">Settings</span>
-                        </a>
-                    </li>
                     <li v-if="!signed_in">
                         <a href="/#/account/signin">
                             <span class="icon fa fa-sign-out-alt"></span>
                             <span class="text">Sign In</span>
                         </a>
                     </li>
-                    <li v-if="signed_in">
-                        <a href="#" @click="signOut()">
-                            <span class="icon fa fa-sign-out-alt"></span>
-                            <span class="text">Sign Out</span>
+                    <li>
+                        <a href="/#/help">
+                            <span class="icon fa fa-question-circle"></span>
+                            <span class="text">Help</span>
                         </a>
                     </li>
                 </ul>
@@ -114,6 +122,15 @@
 <script>
 export default {
     props: ['isLoader'],
+    components: {
+        'c-loading-bar': () => import('@/ui/components/loading-bar')
+    },
+    data() {
+        return {
+            show_menu: false,
+            is_desktop: window && window.process && window.process.type
+        }
+    },
     computed: {
         developer_enabled() {
             return this.$store.state.marketplace.developer_enabled
@@ -145,6 +162,29 @@ export default {
             this.$store.dispatch('network/signOut')
 
             this.is_loading = true
+        },
+        toggleMenu() {
+            this.show_menu = !this.show_menu
+        },
+        closeWindow() {
+            const { BrowserWindow } = window.require('electron').remote
+            let browserWindow = BrowserWindow.getFocusedWindow()
+            browserWindow.close()
+        },
+        maximizeWindow() {
+            const { BrowserWindow } = window.require('electron').remote
+
+            let browserWindow = BrowserWindow.getFocusedWindow()
+            if (browserWindow.isMaximized()) {
+                browserWindow.unmaximize()
+            } else {
+                browserWindow.maximize()
+            }
+        },
+        minimizeWindow() {
+            const { BrowserWindow } = window.require('electron').remote
+            let browserWindow = BrowserWindow.getFocusedWindow()
+            browserWindow.minimize()
         }
     },
     created() {
@@ -152,7 +192,58 @@ export default {
 }
 </script>
 
+<style>
+    .desktop-draggable {
+        -webkit-app-region: drag;
+    }
+</style>
+
 <style lang="scss" scoped>
+
+    .header-menu {
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        background: #1C2032;
+        padding: 10px;
+        margin: 0 0 15px;
+        width: calc( 33% - 8px );
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
+        display: flex;
+        justify-content: space-between;
+        align-items: left;
+        flex-direction: column;
+        position: absolute;
+        width: 170px;
+        z-index: 100;
+        top: 32px;
+        right: 0;
+
+        > p {
+            color: #fff;
+        }
+
+        > a {
+            display: block;
+            margin-left: 10px;
+            margin-bottom: 5px;
+        }
+
+        hr {
+            border-top: 1px solid #fff !important;
+            width: 100%;
+            margin: 10px 0;
+        }
+    }
+
+    .icon-letter-circle {
+        background: #3f87b8;
+        border-radius: 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: 11px;
+    }
+
+    
 
     .btn-block {
         position: relative;
@@ -216,10 +307,6 @@ export default {
             content: '';
         }
 
-        &.app-header--loading {
-            opacity: 0.7;
-        }
-
         &.app-header--loader {
             z-index: 101;
             opacity: 1;
@@ -266,6 +353,22 @@ export default {
         }
     }
 
+    .app-header__loading {
+        height: 6px;
+        width: 100vw;
+        display: block;
+        background: #eee;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 15;
+        opacity: 0;
+
+        body.screen-loading & {
+            opacity: 1;
+        }
+    }
+
     .app-header__create-account-btn, .app-header__download-btn {
         position: relative;
         margin: 0 20px;
@@ -303,7 +406,7 @@ export default {
     }
 
     .app-header__top-bar {
-        height: 10px;
+        height: 50px;
         width: 100vw;
         display: block;
         background: #fff;
@@ -313,9 +416,107 @@ export default {
         z-index: 13;
     }
 
+
+    .app-header__buttons {
+        padding-left: 8px;
+        padding-top: 11px;
+        float: left;
+        line-height: 0px;
+        text-align: center;
+
+        a {
+            display: block;
+            width: 12px;
+            height: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            cursor: default;
+            font-weight: bold;
+
+            span {
+                display: block;
+                width: 4px;
+                height: 4px;
+                margin-left: -4px;
+            }
+        }
+
+        &:hover a {
+            visibility: visible;
+        }
+    }
+
+    .app-header__close-button {
+        background: #ff5c5c;
+        font-size: 17px;
+        border: 1px solid #e33e41;
+        border-radius: 50%;
+        display: inline-block;
+
+        a {
+            color: #820005;
+        }
+
+        &:active {
+            background: #c14645;
+            border: 1px solid #b03537;
+
+            a {
+                color: #4e0002;
+            }
+        }
+    }
+
+    .app-header__minimize-button {
+        background: #ffbd4c;
+        font-size: 17px;
+        margin-left: 6px;
+        border: 1px solid #e09e3e;
+        border-radius: 50%;
+        display: inline-block;
+
+        a {
+            color: #9a5518;
+        }
+
+        &:active {
+            background: #c08e38;
+            border: 1px solid #af7c33;
+
+            a {
+                color: #5a2607;
+            }
+        }
+    }
+
+
+    .app-header__maximize-button {
+        background: #00ca56;
+        font-size: 17px;
+        margin-left: 6px;
+        border: 1px solid #14ae46;
+        border-radius: 50%;
+        display: inline-block;
+
+        a {
+            color: #006519;
+        }
+
+        &:active {
+            background: #029740;
+            border: 1px solid #128435;
+
+            a {
+                color: #003107;
+            }
+        }
+    }
+
     .app-header__shadow {
         position: absolute;
-        top: 0px;
+        top: 40px;
         left: 0px;
         width: 100%;
         height: 56px;
@@ -334,7 +535,7 @@ export default {
     
     .app-header__nav-center {
         position: absolute;
-        top: -20px;
+        top: 20px;
         left: 40%;
         width: 250px;
         height: 50px;
@@ -344,7 +545,7 @@ export default {
 
     .app-header__bar-left {
         position: absolute;
-        top: 0;
+        top: 40px;
         left: 0;
         height: 30px;
         width: 118px;
@@ -373,7 +574,7 @@ export default {
     .app-header__bar-center {
         display: block;
         position: relative;
-        margin: -10px auto 0 auto;
+        margin: 30px auto 0 auto;
         height: 50px;
         width: 258px;
         background: url(../../../assets/SVG/logo.svg) no-repeat center center/135px, url(../../../assets/SVG/center-bar.svg) no-repeat top left;
@@ -382,7 +583,7 @@ export default {
 
     .app-header__bar-right {
         position: absolute;
-        top: 0;
+        top: 40px;
         right: 0;
         height: 30px;
         width: 66px;
@@ -393,7 +594,7 @@ export default {
 
     .app-header__nav {
         position: absolute;
-        top: 20px;
+        top: 60px;
         width: 100%;
         font-size: 15px;
 

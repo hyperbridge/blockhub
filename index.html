@@ -65,6 +65,8 @@
 
     <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
 
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
     <!-- IMPORTANT SCRIPTS -->
     <script type="text/javascript" src="/static/js/vendors/web3/web3.js"></script>
     <script type="text/javascript" src="/static/js/vendors/jquery/jquery.min.js"></script>
@@ -88,6 +90,8 @@
     <script type="text/javascript" src="/static/js/app.js"></script>
     <script type="text/javascript" src="/static/js/plugins.js"></script>
     <!-- END TEMPLATE SCRIPTS -->
+
+    <script>if (window.module) module = window.module;</script>
 
     <!-- Start of Async Drift Code -->
     <script>

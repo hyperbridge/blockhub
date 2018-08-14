@@ -22,9 +22,6 @@
                                 <a class="nav-link" :href="`/#/project/${project.id}/bounties`">Bounties</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/project/${project.id}/suggestions`">Suggestions</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" :href="`/#/project/${project.id}/updates`">Updates</a>
                             </li>
                             <li class="nav-item">
@@ -270,8 +267,6 @@
         computed: {
             project: updateProject
         },
-        mounted: updateProject,
-        created: updateProject,
         beforeDestroy() {
             window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
         }
