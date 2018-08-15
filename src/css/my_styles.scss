@@ -17,6 +17,7 @@ body {
     background: url(/static/img/products/default.png);
     background-size: 100% 383px;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 
     font-family: 'Barlow', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -131,6 +132,7 @@ a.btn-outline-white {
       background: url(/static/img/product-bg-fade.png);
       background-size: contain;
       background-position: 0 383px;
+      background-attachment: fixed;
       z-index: 0;
     }
   }
