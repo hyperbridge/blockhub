@@ -270,7 +270,6 @@
             }
         }
     }
-
     .tab-pane {
         position: relative;
         background: #3e3e5c;
