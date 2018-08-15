@@ -14,7 +14,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-6 margin-bottom-30">
                         <c-heading-bar name="New Releases" :showArrows="false" :showBackground="false">
                             <div class="additional-action margin-left-20" slot="additional-action">
                                 <div class="text">
@@ -55,7 +55,7 @@
                             itemBg="transparent"
                         ></c-game-grid>
                     </div>
-                    <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-6 margin-bottom-30">
                         <c-heading-bar name="Top 20 Items" :showArrows="false" :showBackground="false">
                             <div class="additional-action margin-left-20" slot="additional-action">
                                 <div class="text">
@@ -83,7 +83,7 @@
                         </c-assets-list-item>
 
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 margin-bottom-30">
                         <c-heading-bar name="What's up with your content" :showArrows="false" :showBackground="false">
                             <div class="additional-action margin-left-20" slot="additional-action">
                                 <div class="text">
@@ -217,7 +217,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 margin-bottom-30">
                         <c-heading-bar name="Trending Projects" :showArrows="false"
                                        :showBackground="false"></c-heading-bar>
                         <div class="img_slider w-100">
@@ -702,6 +702,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-12">
+                        <a href="/#/sitemap">Sitemap</a>
                     </div>
                 </div>
             </div>

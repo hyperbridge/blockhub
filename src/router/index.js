@@ -312,6 +312,11 @@ const router = new Router({
             component: () => import('@/ui/screens/realm')
         },
         {
+            path: '/unknown',
+            name: 'Unknown Layers',
+            component: () => import('@/ui/screens/unknown')
+        },
+        {
             path: "*",
             component: () => import('@/ui/screens/not-found')
         }
