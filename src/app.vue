@@ -161,6 +161,7 @@
       </div>
     </div>
     <div id="backdrop" class="backdrop"></div>
+    <vue-snotify></vue-snotify>
   </div>
 </template>
 
@@ -169,9 +170,11 @@
     name: 'app',
     props: ['data'],
     updated() {
-      $('body').off('click').on('click', "[data-action='fixedpanel-toggle']", function(e) {
+      $('body').off('click').on('click', "[data-action='fixedpanel-toggle']", (e) => {
         let panel = $('#fixed_panel')
         let backdrop = $('#backdrop')
+
+        this.$snotify.info("Test", "Sidebar toggled", {})
 
         if ($('body').hasClass('show-sidebar')) {
           $('body').removeClass('show-sidebar')

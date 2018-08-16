@@ -2,11 +2,18 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import moment from 'moment'
+import Snotify, { SnotifyPosition } from 'vue-snotify'
 import app from './app'
 import router from './router'
 import store, { initializer } from './store'
 
 Vue.config.productionTip = false
+
+Vue.use(Snotify, {
+  toast: {
+    position: SnotifyPosition.rightBottom
+  }
+})
 
 import './css/styles.scss'
 
