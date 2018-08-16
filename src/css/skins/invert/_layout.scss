@@ -36,6 +36,10 @@
         }
         
         .page-aside{
+            position: fixed;
+            top: 135px;
+            left: 0;
+
             &.invert{
                 background-color: transparent;
                 color: $invert-color;            
@@ -52,6 +56,10 @@
         }
         
         .page-sidepanel{
+            position: fixed;
+            top: 135px;
+            right: 0;
+
             &.invert{
                 background: transparent;
                 color: $invert-color;

@@ -186,6 +186,8 @@
         flex-direction: row;
         flex: 1 0 auto;
         background: $content-background;
+        text-align: center;
+
         @if $animation != 0 {
             @include transition(padding $animation ease-in-out);
         }
@@ -204,6 +206,8 @@
             flex: 0 0 auto;
             width: $aside-width;
             border-right: 1px solid $aside-border;
+            text-align: left;
+
             @if $animation != 0 {
                 @include transition(all $animation ease-in-out);
             }
@@ -298,6 +302,8 @@
             flex: 0 0 auto;
             width: $sidepanel-width;
             border-right: 1px solid $sidepanel-border;
+            text-align: left;
+
             @if $animation != 0 {
                 @include transition(width $animation ease-in-out);
             }
@@ -426,8 +432,10 @@
         -----*/
         > .content{
             position: relative;
-            flex: 1;
             padding-top: 60px;
+            width: calc(100% - 500px);
+            text-align: left;
+            margin: 0 auto;
             /* overflow: hidden; */
             
             .container,.container-fluid{

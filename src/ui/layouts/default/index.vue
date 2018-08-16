@@ -374,29 +374,38 @@ export default {
         }
     },
     updated() {
-        window.owlcarousel()
-
-        let owl = $('.owl-carousel').owlCarousel()
-
-        owl.trigger('to.owl.carousel', [3])
-
-        $('.js-go-notifications').click(function() {
-            owl.trigger('to.owl.carousel', [0])
-        })
-
-        $('.js-go-messages').click(function() {
-            owl.trigger('to.owl.carousel', [1])
-        })
-
-        $('.js-go-updates').click(function() {
-            owl.trigger('to.owl.carousel', [2])
-        })
-
-        $('.js-go-lists').click(function() {
-            owl.trigger('to.owl.carousel', [3])
-        })
 
         //$('.owl-controls').insertBefore('')
+    },
+    methods: {
+        installOwlCarousel: function () {
+            window.owlcarousel()
+
+            let owl = $('.owl-carousel').owlCarousel()
+
+            owl.trigger('to.owl.carousel', [3])
+
+            $('.js-go-notifications').click(function() {
+                owl.trigger('to.owl.carousel', [0])
+            })
+
+            $('.js-go-messages').click(function() {
+                owl.trigger('to.owl.carousel', [1])
+            })
+
+            $('.js-go-updates').click(function() {
+                owl.trigger('to.owl.carousel', [2])
+            })
+
+            $('.js-go-lists').click(function() {
+                owl.trigger('to.owl.carousel', [3])
+            })
+        }
+    },
+    mounted: function () {
+        this.$nextTick(() => {
+            this.installOwlCarousel()
+        })
     }
 }
 </script>
