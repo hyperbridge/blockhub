@@ -1,38 +1,42 @@
 <template>
-    <div class="item">
-        <div class="project-card__item">
-            <div class="head">
-                <div class="img">
-                    <img :src="project.game.img"/>
-                </div>
-                <div class="text">
-                    <h4>{{ project.game.title }}</h4>
-                    <p>{{ project.game.developer }}</p>
-                </div>
+    <div class="project-card__item">
+        <div class="head" v-if="project.game">
+            <div class="img">
+                <img :src="project.game.img"/>
             </div>
-            <img :src="project.img"/>
-            <div class="description">{{ project.description }}</div>
-            <div class="progress-container">
-                <div class="progress progress-bar-vertical">
-                    <div class="progress-bar bg-success" role="progressbar"
-                            aria-valuenow="40"
-                            aria-valuemin="0" aria-valuemax="100"
-                            :style="`height: ${goal_progress}%`">
-                        <span class="sr-only">{{ goal_progress }}% Complete</span>
-                    </div>
-                </div>
-                <div class="progress-info">
-                    <strong class="w-100">Obtained Funds</strong>
-                    <span>
-                        {{ project.funds.currency | currency_sign }} {{ project.funds.obtained }} of
-                        {{ project.funds.currency | currency_sign }} {{ project.funds.goal }}
+            <div class="text">
+                <h4>{{ project.game.title }}</h4>
+                <p>{{ project.game.developer }}</p>
+            </div>
+        </div>
+        <img :src="project.img"/>
+        <div class="description">{{ project.description }}</div>
+        <div class="progress-container">
+            <div class="progress progress-bar-vertical">
+                <div
+                    class="progress-bar bg-success"
+                    role="progressbar"
+                    :aria-valuenow="goal_progress"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    :style="`height: ${goal_progress}%`"
+                >
+                    <span class="sr-only">
+                        {{ goal_progress }}% Complete
                     </span>
                 </div>
             </div>
-            <div class="item-action">
-                <a href="#3" class="btn btn-sm btn-info">Participate</a>
-                <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
+            <div class="progress-info">
+                <strong class="w-100">Obtained Funds</strong>
+                <span>
+                    {{ project.funds.currency | currency_sign }} {{ project.funds.obtained }} of
+                    {{ project.funds.currency | currency_sign }} {{ project.funds.goal }}
+                </span>
             </div>
+        </div>
+        <div class="item-action">
+            <a href="#3" class="btn btn-sm btn-info">Participate</a>
+            <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
         </div>
     </div>
 </template>

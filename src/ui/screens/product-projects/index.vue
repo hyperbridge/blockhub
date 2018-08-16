@@ -10,7 +10,7 @@
                 <div class="row" v-if="product">
                     <div class="col-12">
                         <h1 class="title margin-top-10">{{ product.name }}</h1>
-                        
+
                         <c-tags-list :tags="product.author_tags" v-if="!editing"></c-tags-list>
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
@@ -68,35 +68,11 @@
                     <div class="col-12">
                         <div class="project-card__container">
                             <h3>Top 3 Submissions</h3>
-                            <div class="project-card__item">
-                                <img
-                                    src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                <div class="description">
-                                    Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.
-                                </div>
-                                <div class="progress-container">
-                                    <div class="progress progress-bar-vertical">
-                                        <div class="progress-bar bg-success" role="progressbar"
-                                             aria-valuenow="40"
-                                             aria-valuemin="0" aria-valuemax="100"
-                                             style="height: 40%">
-                                            <span class="sr-only">40% Complete</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress-info">
-                                        <strong class="w-100">
-                                            Obtained Funds
-                                        </strong>
-                                        <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="item-action">
-                                    <a href="#3" class="btn btn-sm btn-info">Participate</a>
-                                    <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
-                                </div>
-                            </div>
+                            <c-projects-card
+                                v-for="(project, index) in projects"
+                                :project="project"
+                                :showGame="false"
+                            />
                         </div>
                     </div>
                 </div>
@@ -120,7 +96,7 @@
 
         if (!product.projects)
             product.projects = []
-            
+
         return product
     }
 
@@ -128,10 +104,33 @@
         props: ['id'],
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
-            'c-tags-list': () => import('@/ui/components/product-tags')
+            'c-tags-list': () => import('@/ui/components/product-tags'),
+            'c-projects-card': () => import('@/ui/components/projects/card')
         },
         data() {
-            return {}
+            return {
+                projects: [
+                    {
+                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                        funds: {
+                            currency: 'USD',
+                            obtained: 2834,
+                            goal: 5000
+                        }
+                    },
+                    {
+                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                        funds: {
+                            currency: 'USD',
+                            obtained: 1234,
+                            goal: 16000
+                        }
+                    }
+
+                ]
+            }
         },
         methods: {
             save() {

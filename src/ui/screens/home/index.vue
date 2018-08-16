@@ -330,7 +330,35 @@
                         obtained: 7613,
                         goal: 8500
                     }
-                }
+                },
+                {
+                    game: {
+                        title: 'Diablo III',
+                        developer: 'Blizzard Entertainment',
+                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                    },
+                    description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                    img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                    funds: {
+                        currency: 'USD',
+                        obtained: 2834,
+                        goal: 5000
+                    }
+                },
+                {
+                    game: {
+                        title: 'Diablo III',
+                        developer: 'Blizzard Entertainment',
+                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                    },
+                    description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                    img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                    funds: {
+                        currency: 'USD',
+                        obtained: 2834,
+                        goal: 5000
+                    }
+                },
             ]
         }),
         computed: {
