@@ -79,6 +79,7 @@ storiesOf('Assets Importer', module)
         },
         data() {
             return {
+                show_skipped: true
             }
         },
         template: '<div class="row"><div class="col-8"><assets-importer /></div></div>'
