@@ -224,482 +224,15 @@
                             <div class="owl-carousel"
                                  data-nav-dots="false"
                                  data-nav-arrow="true"
-                                 data-items="4"
+                                 :data-items="trending_projects.length"
                                  data-loop="true"
                                  data-autoplay="false">
-                                <div class="item">
 
-                                    <div class="project-card__item">
-                                        <div class="head">
-                                            <div class="img">
-                                                <img
-                                                    src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240"/>
-                                            </div>
-                                            <div class="text">
-                                                <h4>Diablo III</h4>
-                                                <p>Blizzard Entertainment</p>
-                                            </div>
-                                        </div>
-                                        <img
-                                            src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                        <div class="description">
-                                            Add new desert canyon themed area with 15 new monsters, 4 bosses and 2
-                                            dungeons.
-                                        </div>
-                                        <div class="progress-container">
-                                            <div class="progress progress-bar-vertical">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                     aria-valuenow="40"
-                                                     aria-valuemin="0" aria-valuemax="100"
-                                                     style="height: 40%">
-                                                    <span class="sr-only">40% Complete</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-info">
-                                                <strong class="w-100">
-                                                    Obtained Funds
-                                                </strong>
-                                                <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                            </div>
-                                        </div>
-                                        <div class="item-action">
-                                            <a href="#3" class="btn btn-sm btn-info">Participate</a>
-                                            <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-
-                                    <div class="project-card__item">
-                                        <div class="head">
-                                            <div class="img">
-                                                <img
-                                                    src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240"/>
-                                            </div>
-                                            <div class="text">
-                                                <h4>Diablo III</h4>
-                                                <p>Blizzard Entertainment</p>
-                                            </div>
-                                        </div>
-                                        <img
-                                            src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                        <div class="description">
-                                            Add new desert canyon themed area with 15 new monsters, 4 bosses and 2
-                                            dungeons.
-                                        </div>
-                                        <div class="progress-container">
-                                            <div class="progress progress-bar-vertical">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                     aria-valuenow="40"
-                                                     aria-valuemin="0" aria-valuemax="100"
-                                                     style="height: 40%">
-                                                    <span class="sr-only">40% Complete</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-info">
-                                                <strong class="w-100">
-                                                    Obtained Funds
-                                                </strong>
-                                                <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                            </div>
-                                        </div>
-                                        <div class="item-action">
-                                            <a href="#3" class="btn btn-sm btn-info">Participate</a>
-                                            <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-
-                                    <div class="project-card__item">
-                                        <div class="head">
-                                            <div class="img">
-                                                <img
-                                                    src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240"/>
-                                            </div>
-                                            <div class="text">
-                                                <h4>Diablo III</h4>
-                                                <p>Blizzard Entertainment</p>
-                                            </div>
-                                        </div>
-                                        <img
-                                            src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                        <div class="description">
-                                            Add new desert canyon themed area with 15 new monsters, 4 bosses and 2
-                                            dungeons.
-                                        </div>
-                                        <div class="progress-container">
-                                            <div class="progress progress-bar-vertical">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                     aria-valuenow="40"
-                                                     aria-valuemin="0" aria-valuemax="100"
-                                                     style="height: 40%">
-                                                    <span class="sr-only">40% Complete</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-info">
-                                                <strong class="w-100">
-                                                    Obtained Funds
-                                                </strong>
-                                                <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                            </div>
-                                        </div>
-                                        <div class="item-action">
-                                            <a href="#3" class="btn btn-sm btn-info">Participate</a>
-                                            <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-
-                                    <div class="project-card__item">
-                                        <div class="head">
-                                            <div class="img">
-                                                <img
-                                                    src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240"/>
-                                            </div>
-                                            <div class="text">
-                                                <h4>Diablo III</h4>
-                                                <p>Blizzard Entertainment</p>
-                                            </div>
-                                        </div>
-                                        <img
-                                            src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                        <div class="description">
-                                            Add new desert canyon themed area with 15 new monsters, 4 bosses and 2
-                                            dungeons.
-                                        </div>
-                                        <div class="progress-container">
-                                            <div class="progress progress-bar-vertical">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                     aria-valuenow="40"
-                                                     aria-valuemin="0" aria-valuemax="100"
-                                                     style="height: 40%">
-                                                    <span class="sr-only">40% Complete</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-info">
-                                                <strong class="w-100">
-                                                    Obtained Funds
-                                                </strong>
-                                                <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                            </div>
-                                        </div>
-                                        <div class="item-action">
-                                            <a href="#3" class="btn btn-sm btn-info">Participate</a>
-                                            <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-
-                                    <div class="project-card__item">
-                                        <div class="head">
-                                            <div class="img">
-                                                <img
-                                                    src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240"/>
-                                            </div>
-                                            <div class="text">
-                                                <h4>Diablo III</h4>
-                                                <p>Blizzard Entertainment</p>
-                                            </div>
-                                        </div>
-                                        <img
-                                            src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                        <div class="description">
-                                            Add new desert canyon themed area with 15 new monsters, 4 bosses and 2
-                                            dungeons.
-                                        </div>
-                                        <div class="progress-container">
-                                            <div class="progress progress-bar-vertical">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                     aria-valuenow="40"
-                                                     aria-valuemin="0" aria-valuemax="100"
-                                                     style="height: 40%">
-                                                    <span class="sr-only">40% Complete</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-info">
-                                                <strong class="w-100">
-                                                    Obtained Funds
-                                                </strong>
-                                                <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                            </div>
-                                        </div>
-                                        <div class="item-action">
-                                            <a href="#3" class="btn btn-sm btn-info">Participate</a>
-                                            <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-
-                                    <div class="project-card__item">
-                                        <div class="head">
-                                            <div class="img">
-                                                <img
-                                                    src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240"/>
-                                            </div>
-                                            <div class="text">
-                                                <h4>Diablo III</h4>
-                                                <p>Blizzard Entertainment</p>
-                                            </div>
-                                        </div>
-                                        <img
-                                            src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                        <div class="description">
-                                            Add new desert canyon themed area with 15 new monsters, 4 bosses and 2
-                                            dungeons.
-                                        </div>
-                                        <div class="progress-container">
-                                            <div class="progress progress-bar-vertical">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                     aria-valuenow="40"
-                                                     aria-valuemin="0" aria-valuemax="100"
-                                                     style="height: 40%">
-                                                    <span class="sr-only">40% Complete</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-info">
-                                                <strong class="w-100">
-                                                    Obtained Funds
-                                                </strong>
-                                                <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                            </div>
-                                        </div>
-                                        <div class="item-action">
-                                            <a href="#3" class="btn btn-sm btn-info">Participate</a>
-                                            <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-
-                                    <div class="project-card__item">
-                                        <div class="head">
-                                            <div class="img">
-                                                <img
-                                                    src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240"/>
-                                            </div>
-                                            <div class="text">
-                                                <h4>Diablo III</h4>
-                                                <p>Blizzard Entertainment</p>
-                                            </div>
-                                        </div>
-                                        <img
-                                            src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                        <div class="description">
-                                            Add new desert canyon themed area with 15 new monsters, 4 bosses and 2
-                                            dungeons.
-                                        </div>
-                                        <div class="progress-container">
-                                            <div class="progress progress-bar-vertical">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                     aria-valuenow="40"
-                                                     aria-valuemin="0" aria-valuemax="100"
-                                                     style="height: 40%">
-                                                    <span class="sr-only">40% Complete</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-info">
-                                                <strong class="w-100">
-                                                    Obtained Funds
-                                                </strong>
-                                                <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                            </div>
-                                        </div>
-                                        <div class="item-action">
-                                            <a href="#3" class="btn btn-sm btn-info">Participate</a>
-                                            <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-
-                                    <div class="project-card__item">
-                                        <div class="head">
-                                            <div class="img">
-                                                <img
-                                                    src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240"/>
-                                            </div>
-                                            <div class="text">
-                                                <h4>Diablo III</h4>
-                                                <p>Blizzard Entertainment</p>
-                                            </div>
-                                        </div>
-                                        <img
-                                            src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                        <div class="description">
-                                            Add new desert canyon themed area with 15 new monsters, 4 bosses and 2
-                                            dungeons.
-                                        </div>
-                                        <div class="progress-container">
-                                            <div class="progress progress-bar-vertical">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                     aria-valuenow="40"
-                                                     aria-valuemin="0" aria-valuemax="100"
-                                                     style="height: 40%">
-                                                    <span class="sr-only">40% Complete</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-info">
-                                                <strong class="w-100">
-                                                    Obtained Funds
-                                                </strong>
-                                                <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                            </div>
-                                        </div>
-                                        <div class="item-action">
-                                            <a href="#3" class="btn btn-sm btn-info">Participate</a>
-                                            <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-
-                                    <div class="project-card__item">
-                                        <div class="head">
-                                            <div class="img">
-                                                <img
-                                                    src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240"/>
-                                            </div>
-                                            <div class="text">
-                                                <h4>Diablo III</h4>
-                                                <p>Blizzard Entertainment</p>
-                                            </div>
-                                        </div>
-                                        <img
-                                            src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                        <div class="description">
-                                            Add new desert canyon themed area with 15 new monsters, 4 bosses and 2
-                                            dungeons.
-                                        </div>
-                                        <div class="progress-container">
-                                            <div class="progress progress-bar-vertical">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                     aria-valuenow="40"
-                                                     aria-valuemin="0" aria-valuemax="100"
-                                                     style="height: 40%">
-                                                    <span class="sr-only">40% Complete</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-info">
-                                                <strong class="w-100">
-                                                    Obtained Funds
-                                                </strong>
-                                                <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                            </div>
-                                        </div>
-                                        <div class="item-action">
-                                            <a href="#3" class="btn btn-sm btn-info">Participate</a>
-                                            <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-
-                                    <div class="project-card__item">
-                                        <div class="head">
-                                            <div class="img">
-                                                <img
-                                                    src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240"/>
-                                            </div>
-                                            <div class="text">
-                                                <h4>Diablo III</h4>
-                                                <p>Blizzard Entertainment</p>
-                                            </div>
-                                        </div>
-                                        <img
-                                            src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                        <div class="description">
-                                            Add new desert canyon themed area with 15 new monsters, 4 bosses and 2
-                                            dungeons.
-                                        </div>
-                                        <div class="progress-container">
-                                            <div class="progress progress-bar-vertical">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                     aria-valuenow="40"
-                                                     aria-valuemin="0" aria-valuemax="100"
-                                                     style="height: 40%">
-                                                    <span class="sr-only">40% Complete</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-info">
-                                                <strong class="w-100">
-                                                    Obtained Funds
-                                                </strong>
-                                                <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                            </div>
-                                        </div>
-                                        <div class="item-action">
-                                            <a href="#3" class="btn btn-sm btn-info">Participate</a>
-                                            <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-
-                                    <div class="project-card__item">
-                                        <div class="head">
-                                            <div class="img">
-                                                <img
-                                                    src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240"/>
-                                            </div>
-                                            <div class="text">
-                                                <h4>Diablo III</h4>
-                                                <p>Blizzard Entertainment</p>
-                                            </div>
-                                        </div>
-                                        <img
-                                            src="https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"/>
-                                        <div class="description">
-                                            Add new desert canyon themed area with 15 new monsters, 4 bosses and 2
-                                            dungeons.
-                                        </div>
-                                        <div class="progress-container">
-                                            <div class="progress progress-bar-vertical">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                     aria-valuenow="40"
-                                                     aria-valuemin="0" aria-valuemax="100"
-                                                     style="height: 40%">
-                                                    <span class="sr-only">40% Complete</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-info">
-                                                <strong class="w-100">
-                                                    Obtained Funds
-                                                </strong>
-                                                <span>
-                                        $4,726 of $ 11,000
-                                        </span>
-                                            </div>
-                                        </div>
-                                        <div class="item-action">
-                                            <a href="#3" class="btn btn-sm btn-info">Participate</a>
-                                            <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <c-projects-carousel-item
+                                    v-for="(project, index) in trending_projects"
+                                    :key="index"
+                                    :project="project"
+                                />
                             </div>
                         </div>
                     </div>
@@ -728,6 +261,7 @@
             'c-assets-list-item': () => import('@/ui/components/assets-list-item'),
             'c-game-list-item': () => import('@/ui/components/assets-list-item'),
             'c-game-grid': () => import('@/ui/components/games-grid/with-description'),
+            'c-projects-carousel-item': () => import('@/ui/components/projects/carousel-item')
         },
         data: () => ({
             assets: [
@@ -794,6 +328,36 @@
                     price: '99.99',
                     time: '1 day ago',
                     img: 'https://freesteam.ru/wp-content/uploads/Faeria-header.jpg'
+                }
+            ],
+            trending_projects: [
+                {
+                    game: {
+                        title: 'Diablo III',
+                        developer: 'Blizzard Entertainment',
+                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                    },
+                    description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                    img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                    funds: {
+                        currency: 'USD',
+                        obtained: 2834,
+                        goal: 5000
+                    }
+                },
+                {
+                    game: {
+                        title: 'World of Warcraft',
+                        developer: 'Blizzard Entertainment',
+                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                    },
+                    description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                    img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                    funds: {
+                        currency: 'GBP',
+                        obtained: 7613,
+                        goal: 8500
+                    }
                 }
             ]
         }),
@@ -1012,97 +576,6 @@
                         opacity: 1;
                     }
                 }
-            }
-        }
-    }
-
-    .progress-container {
-        position: relative;
-        padding-left: 20px;
-        .progress-bar-vertical {
-            width: 5px;
-            position: absolute;
-            left: 0;
-            top: 4px;
-            bottom: 4px;
-            display: flex;
-            align-items: flex-end;
-            margin: 0;
-            float: left;
-            border-radius: 0;
-            background: #fff;
-            height: auto;
-            .progress-bar {
-                width: 100%;
-                height: 0;
-                -webkit-transition: height 0.6s ease;
-                -o-transition: height 0.6s ease;
-                transition: height 0.6s ease;
-            }
-        }
-        .progress-info{
-            font-size: 14px;
-            strong{
-                display: inline-block;
-                width: 100%;
-            }
-        }
-    }
-    .project-card__item {
-        background: rgba(0, 0, 0, .13);
-        padding: 15px;
-        border-radius: 5px;
-        width: 100%;
-        border: 1px solid rgba(255, 255, 255, .1);
-        .head{
-            display: flex;
-            width: 100%;
-            padding: 0px;
-            margin-bottom: 15px;
-            justify-content: space-between;
-            align-items: center;
-            .img {
-                width: 50px;
-                img {
-                    width: 100%;
-                    height: auto;
-                }
-            }
-            .text {
-                width: calc(100% - 65px);
-                color: #fff;
-                h4 {
-                    font-weight: bold;
-                    padding: 0;
-                    margin: 0 0 4px;
-                }
-                p {
-                    padding: 0;
-                    margin: 0;
-                }
-            }
-        }
-        img {
-            width: 100%;
-            height: 170px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-        .description {
-            margin: 15px 0;
-            font-weight: bold;
-            font-size: 16px;
-        }
-        .item-action {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-top: 15px;
-            a {
-                margin-left: 10px;
-                font-weight: bold;
-                text-transform: uppercase;
             }
         }
     }
