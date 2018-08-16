@@ -39,6 +39,7 @@
 
 <script>
 export default {
+    name: 'c-projects-card',
     props: ['project'],
     computed: {
         goal_progress() {

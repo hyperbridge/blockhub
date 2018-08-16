@@ -144,11 +144,12 @@
                                  data-loop="true"
                                  data-autoplay="false">
 
-                                <c-projects-carousel-item
+                                <c-projects-card
                                     v-for="(project, index) in trending_projects"
                                     :key="index"
                                     :project="project"
                                 />
+
                             </div>
                         </div>
                     </div>
@@ -177,7 +178,7 @@
             'c-assets-list-item': () => import('@/ui/components/assets-list-item'),
             'c-game-list-item': () => import('@/ui/components/assets-list-item'),
             'c-game-grid': () => import('@/ui/components/games-grid/with-description'),
-            'c-projects-carousel-item': () => import('@/ui/components/projects/carousel-item'),
+            'c-projects-card': () => import('@/ui/components/projects/card'),
             'c-news-list-navigation': () => import('@/ui/components/news-list/navigation'),
             'c-news-list-articles': () => import('@/ui/components/news-list/articles')
         },
