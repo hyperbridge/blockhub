@@ -118,102 +118,18 @@
                         </c-heading-bar>
                         <div class="home-tabs">
                             <ul class="nav custom-tabs w-100" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="step1-tab" data-toggle="tab" href="#tab_1" role="tab"
-                                       aria-controls="step1-tab" aria-expanded="true">
-                                        <div class="img">
-                                            <img
-                                                src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240"/>
-                                        </div>
-                                        <div class="text">
-                                            <h4>Diablo III</h4>
-                                            <p>Blizzard Entertainment</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="step2-tab" data-toggle="tab" href="#tab_2" role="tab"
-                                       aria-controls="step2-tab" aria-expanded="true">
-                                        <div class="img">
-                                            <img
-                                                src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240"/>
-                                        </div>
-                                        <div class="text">
-                                            <h4>Diablo III</h4>
-                                            <p>Blizzard Entertainment</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="step3-tab" data-toggle="tab" href="#tab_3" role="tab"
-                                       aria-controls="step3-tab" aria-expanded="true">
-                                        <div class="img">
-                                            <img
-                                                src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240"/>
-                                        </div>
-                                        <div class="text">
-                                            <h4>Diablo III</h4>
-                                            <p>Blizzard Entertainment</p>
-                                        </div>
-                                    </a>
-                                </li>
+                                <c-news-list-navigation
+                                    v-for="(news, index) in content_news"
+                                    :game="news.game"
+                                    :index="index+1"
+                                />
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane fade show active" id="tab_1" role="tabpanel"
-                                     aria-labelledby="tab_1-tab">
-                                    <ul class="home-tabs__news-list">
-                                        <li>
-                                            <h4>New class and event coming next week!</h4>
-                                            <div class="published_date mb-3">Piblished 2 hours ago</div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit
-                                                amet
-                                                laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis
-                                                lectus quis nisi.</p>
-                                            <a href="#3" class="btn btn-link">
-                                                Read More
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <h4>New class and event coming next week!</h4>
-                                            <div class="published_date mb-3">Piblished 2 hours ago</div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit
-                                                amet
-                                                laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis
-                                                lectus quis nisi.</p>
-                                            <a href="#3" class="btn btn-link">
-                                                Read More
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <h4>New class and event coming next week!</h4>
-                                            <div class="published_date mb-3">Piblished 2 hours ago</div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit
-                                                amet</p>
-                                            <a href="#3" class="btn btn-link">
-                                                Read More
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <h4>New class and event coming next week!</h4>
-                                            <div class="published_date mb-3">Piblished 2 hours ago</div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit
-                                                amet
-                                                laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis
-                                                lectus quis nisi.</p>
-                                            <a href="#3" class="btn btn-link">
-                                                Read More
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="tab-pane fade" id="tab_2" role="tabpanel" aria-labelledby="tab_2-tab">
-                                </div>
-                                <div class="tab-pane fade" id="tab_3" role="tabpanel" aria-labelledby="tab_3-tab">
-                                </div>
+                                <c-news-list-articles
+                                    v-for="(news, index) in content_news"
+                                    :news="news"
+                                    :index="index+1"
+                                />
                             </div>
                         </div>
                     </div>
@@ -261,7 +177,9 @@
             'c-assets-list-item': () => import('@/ui/components/assets-list-item'),
             'c-game-list-item': () => import('@/ui/components/assets-list-item'),
             'c-game-grid': () => import('@/ui/components/games-grid/with-description'),
-            'c-projects-carousel-item': () => import('@/ui/components/projects/carousel-item')
+            'c-projects-carousel-item': () => import('@/ui/components/projects/carousel-item'),
+            'c-news-list-navigation': () => import('@/ui/components/news-list/navigation'),
+            'c-news-list-articles': () => import('@/ui/components/news-list/articles')
         },
         data: () => ({
             assets: [
@@ -328,6 +246,59 @@
                     price: '99.99',
                     time: '1 day ago',
                     img: 'https://freesteam.ru/wp-content/uploads/Faeria-header.jpg'
+                }
+            ],
+            content_news: [
+                {
+                    game: {
+                        title: 'Diablo III',
+                        developer: 'Blizzard Entertainment',
+                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                    },
+                    articles: [
+                        {
+                            heading: 'New class and event coming next week!',
+                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
+                            url: 'article-url',
+                            date: '2018-07-24T04:09:00.000Z'
+                        }
+                    ]
+                },
+                {
+                    game: {
+                        title: 'Diablo I',
+                        developer: 'Blizzard Entertainment',
+                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                    },
+                    articles: [
+                        {
+                            heading: 'New class and event coming next week!',
+                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
+                            url: 'article-url',
+                            date: '2016-09-24T04:09:00.000Z'
+                        },
+                        {
+                            heading: 'New class and event coming next week!',
+                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
+                            url: 'article-url',
+                            date: '2014-03-24T04:09:00.000Z'
+                        }
+                    ]
+                },
+                {
+                    game: {
+                        title: 'Diablo II',
+                        developer: 'Blizzard Entertainment',
+                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                    },
+                    articles: [
+                        {
+                            heading: 'New class and event coming next week!',
+                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
+                            url: 'article-url',
+                            date: '2017-12-24T04:09:00.000Z'
+                        }
+                    ]
                 }
             ],
             trending_projects: [
@@ -467,40 +438,6 @@
                     background: #3D3E5D;
                 }
             }
-        }
-    }
-
-    .home-tabs {
-        .tab-pane {
-            padding: 15px 5px 5px;
-            background: #3D3E5D;
-        }
-    }
-
-    .home-tabs__news-list {
-        display: flex;
-        width: 100%;
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        align-items: stretch;
-        li {
-            list-style: none;
-            padding: 10px;
-            width: 33%;
-            h4 {
-                font-weight: bold;
-                font-size: 18px;
-                margin: 0;
-                padding: 0;
-            }
-            a {
-                padding: 0;
-                margin-top: auto;
-                color: #fff;
-                font-weight: bold;
-                text-transform: uppercase;
-            }
-
         }
     }
 
