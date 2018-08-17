@@ -18,6 +18,7 @@
   ],
   "plugins": [
     "transform-runtime",
+    "transform-es2015-template-literals",
     "transform-es3-member-expression-literals"
   ],
   "env": {

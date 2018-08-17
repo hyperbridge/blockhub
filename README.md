@@ -59,9 +59,7 @@ Make sure you're running Node 8.11.1
 
 In `blockhub-web-client`, run `npm install` then:
 ```
-npm link ../token
-npm link ../marketplace-protocol
-npm link ../funding-protocol
+npm link ../token ../funding-protocol ../marketplace-protocol
 ```
 
 Then run `npm start`

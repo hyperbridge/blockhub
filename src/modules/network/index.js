@@ -52,15 +52,26 @@ export const actions = {
 
         store.commit('updateState', state)
     },
-    initEthereum(store, payload) {
-        if (store.state.ethereum[store.state.current_ethereum_network].contracts.Token
-            && store.state.ethereum[store.state.current_ethereum_network].contracts.Token.address) {
-            Token.Ethereum.Models.Token.init(
-                Token.Ethereum.Contracts.Token,
-                store.state.ethereum[store.state.current_ethereum_network].contracts.Token.address,
-                store.state.ethereum[store.state.current_ethereum_network].user_from_address,
-                store.state.ethereum[store.state.current_ethereum_network].user_to_address
-            )
+    async initEthereum(store, payload) {
+        Token.api.ethereum.init(
+            store.state.ethereum[store.state.current_ethereum_network].user_from_address,
+            store.state.ethereum[store.state.current_ethereum_network].user_to_address
+        )
+
+        for (let contractName in store.state.ethereum[store.state.current_ethereum_network].contracts) {
+            const contract = store.state.ethereum[store.state.current_ethereum_network].contracts[contractName]
+
+            if (contract.address) {
+                await Token.api.ethereum.setContractAddress(contractName, contract.address)
+                    .catch(() => {
+                        store.state.ethereum[store.state.current_ethereum_network].contracts[contractName].address = null
+                        store.state.ethereum[store.state.current_ethereum_network].contracts[contractName].created_at = null
+
+                        store.dispatch('updateState')
+                    })
+            } else {
+                store.state.ethereum[store.state.current_ethereum_network].contracts[contractName].created_at = null
+            }
         }
     },
     checkEthereumConnection(store, payload) {
@@ -119,6 +130,74 @@ export const actions = {
     },
     signOut(store, payload) {
         store.commit('signOut', payload)
+    },
+    async deployContract(store, payload) {
+        return new Promise((resolve, reject) => {
+            if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {
+                state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = {
+                    created_at: null,
+                    address: null
+                }
+            }
+
+            let links = []
+            let params = []
+
+            if (payload.contractName !== 'EternalStorage') {
+                params = [
+                    state.ethereum[state.current_ethereum_network].contracts.EternalStorage.address
+                ]
+            }
+
+            if (Token.api.ethereum.state.contracts[payload.contractName].links) {
+                links = Token.api.ethereum.state.contracts[payload.contractName].links
+
+                for (let i in links) {
+                    links[i].address = state.ethereum[state.current_ethereum_network].contracts[links[i].name].address
+                }
+            }
+
+            Token.api.ethereum.deployContract(payload.contractName, links, params).then(async (contract) => {
+                state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
+                state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = contract.address
+
+                db.funding.config.update(state)
+                db.save()
+
+                if (payload.contractName === 'TBD') {
+                }
+
+                store.dispatch('updateState')
+
+                resolve(contract)
+            })
+        })
+    },
+    async deployContract(store, payload) {
+        return new Promise((resolve, reject) => {
+            if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {
+                state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = {
+                    created_at: null,
+                    address: null
+                }
+            }
+
+            const meta = Token.Ethereum.Contracts[payload.contractName]
+            const contract = new window.web3.eth.Contract(meta.abi)
+
+            contract.deploy({
+                data: meta.bytecode
+            }).send({
+                from: state.ethereum[state.current_ethereum_network].user_from_address,
+                gas: 4500000
+            }).then((res) => {
+                state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
+                state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = res._address
+
+                db.network.config.update(state)
+                db.save()
+            })
+        })
     }
 }
 
@@ -150,29 +229,5 @@ export const mutations = {
         const success = (id) => {
         }
 
-    },
-    async deployContract(state, payload) {
-        if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {
-            state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = {
-                created_at: null,
-                address: null
-            }
-        }
-
-        const meta = Token.Ethereum.Contracts[payload.contractName]
-        const contract = new window.web3.eth.Contract(meta.abi)
-
-        contract.deploy({
-            data: meta.bytecode
-        }).send({
-            from: state.ethereum[state.current_ethereum_network].user_from_address,
-            gas: 4500000
-        }).then((res) => {
-            state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
-            state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = res._address
-
-            db.network.config.update(state)
-            db.save()
-        })
     }
 }

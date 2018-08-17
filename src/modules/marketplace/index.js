@@ -52,7 +52,7 @@ export const actions = {
 
         store.commit('updateState', state)
     },
-    initEthereum(store, payload) {
+    async initEthereum(store, payload) {
         if (store.state.ethereum[store.state.current_ethereum_network].contracts.Marketplace
             && store.state.ethereum[store.state.current_ethereum_network].contracts.Marketplace.address) {
             MarketplaceProtocol.Ethereum.Models.Marketplace.init(

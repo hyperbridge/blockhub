@@ -110,9 +110,9 @@ export let initializer = () => {
         db.setInitCallback(async () => {
             // TODO: is this a race condition?
             store.dispatch('database/init')
-            store.dispatch('network/initEthereum')
+            await store.dispatch('network/initEthereum')
             await store.dispatch('funding/initEthereum')
-            store.dispatch('marketplace/initEthereum')
+            await store.dispatch('marketplace/initEthereum')
         })
 
         store.dispatch('marketplace/init')
