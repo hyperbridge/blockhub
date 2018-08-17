@@ -26,32 +26,10 @@
                             </li>
                         </ul>
                         <div v-if="community_1">
-                            <div class="community-item">
-                                <div class="community-item__header">
-                                    <div class="icon">
-                                        <i class="fas fa-map-pin"></i>
-                                    </div>
-                                    <div class="text">
-                                        This post has been pinned and the title is a single line of text
-                                    </div>
-                                    <div class="statistic">
-                                        <div class="rating down">
-                                            <i class="fas fa-chevron-down"></i>
-                                            87
-                                        </div>
-                                        <div class="user">
-                                            <span class="time">25 min</span>
-                                            <img
-                                                src="https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png"/>
-                                            <span class="name">Sakatoshi</span>
-                                        </div>
-                                        <div class="comments_count">
-                                            <i class="fas fa-comment"></i>
-                                            320
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <c-product-community-item
+                                v-for="(post, index) in posts"
+                                :post="post"
+                            />
                             <div class="community-item">
                                 <div class="community-item__header">
                                     <div class="icon">
@@ -642,12 +620,25 @@
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
             'c-tags-list': () => import('@/ui/components/product-tags'),
+            'c-product-community-item': () => import('@/ui/components/product-community/item'),
         },
         data() {
             return {
                 community_1: true,
                 community_2: false,
-                reply: false
+                reply: false,
+                posts: [
+                    {
+                        title: 'This post has been pinned and the title is a single line of text',
+                        date: '',
+                        rate: -319,
+                        comments_count: 3019,
+                        author: {
+                            name: 'Nakatochi',
+                            img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'
+                        }
+                    }
+                ]
             }
         },
         methods: {
