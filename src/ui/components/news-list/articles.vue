@@ -1,6 +1,6 @@
 <template>
     <div
-        class="tab-pane fade"
+        class="tab-pane"
         :class="[ index === 1 ? 'show active' : '' ]"
         :id="`tab_${index}`"
         :aria-labelledby="`tab_${index}-tab`"
