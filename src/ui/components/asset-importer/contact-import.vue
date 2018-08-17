@@ -88,12 +88,86 @@
                 </div>
             </div>
         </div>
-        <div class="assets-import__loading">
-            <div id="cont" data-pct="100">
-                <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                    <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
-                    <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="515.48" stroke-dashoffset="0"></circle>
-                </svg>
+        <div class="assets-import__loading d-none">
+            <c-loading-bar class="loading-bar" />
+            <div class="text">
+                <h4>We'ar importing your list!</h4>
+                <p>You can navigate away from this page - importing won't be affected!</p>
+            </div>
+        </div>
+        <div class="assets-import__results">
+            <h3>Import progress</h3>
+            <div class="results-status">
+                <div>
+                    Records added
+                    <strong>190</strong>
+                </div>
+                <div>
+                    Updated
+                    <strong>12</strong>
+                </div>
+                <div>
+                    Warnings
+                    <strong>34</strong>
+                </div>
+                <div>
+                    Errors
+                    <strong>3</strong>
+                </div>
+            </div>
+            <div class="w-100 mt-5">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="step1-tab" data-toggle="tab" href="#tab1" role="tab"
+                           aria-controls="tab" aria-expanded="true">Tab 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="step2-tab" data-toggle="tab" href="#tab2" role="tab"
+                           aria-controls="tab">Tab 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="step3-tab" data-toggle="tab" href="#tab3" role="tab"
+                           aria-controls="tab">Tab 3</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="step1-tab">
+                        <div class="tab-container">
+                            <div class="info-list">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Line #
+                                            </th>
+                                            <th>
+                                                Message
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                1
+                                            </td>
+                                            <td>
+                                                Some message
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                12
+                                            </td>
+                                            <td>
+                                                Some message a little bit longer
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -101,38 +175,17 @@
 
 
 <script>
+    import cLoadingBar from '../loading-bar';
+
     export default {
         props: ['show_skipped'],
+        components: {
+            'c-loading-bar': cLoadingBar
+        },
         data(){
             return {
                 skippedState: this.show_skipped,
-                percent: 30
-            }
-        },
-        created: function() {
-            this.loadingPercent()
-        },
-        method: {
-            loadingPercent: function () {
-                    var val = parseInt(this.percent);
-                    var $circle = $('#svg #bar');
-
-                    if (isNaN(val)) {
-                        val = 100;
-                    }
-                    else{
-                        var r = $circle.attr('r');
-                        var c = Math.PI*(r*2);
-
-                        if (val < 0) { val = 0;}
-                        if (val > 100) { val = 100;}
-
-                        var pct = ((100-val)/100)*c;
-
-                        $circle.css({ strokeDashoffset: pct});
-
-                        $('#cont').attr('data-pct',val);
-                    }
+                percent: 30,
             }
         }
     }
@@ -142,7 +195,8 @@
     .btn-sm{
         padding: 0px 10px;
     }
-    .assets-import{
+
+    .assets-import__contact{
         padding: 20px;
         color: #fff;
         width: 100%;
@@ -197,36 +251,173 @@
             }
         }
     }
-    #svg circle {
-        stroke-dashoffset: 0;
-        transition: stroke-dashoffset 1s linear;
-        stroke: rgba(0, 0, 0, .2);
-        stroke-width: 1em;
-    }
-    #svg #bar {
-        stroke: #FF9F1E;
-    }
-    #cont {
-        display: block;
-        height: 200px;
-        width: 200px;
-        margin: 2em auto;
-        border-radius: 100%;
-        position: relative;
-        &:after {
-            position: absolute;
-            display: block;
-            left: 50%;
-            top: 50%;
-            content: attr(data-pct)"%";
-            margin-top: -100px;
-            margin-left: -100px;
-            border-radius: 100%;
-            line-height: 200px;
-            font-size: 2em;
+    .assets-import__loading{
+        color: #fff;
+        width: 100%;
+        .loading-bar{
+            height: 10px;
+        }
+        .text{
             text-align: center;
-            width: 100%;
+            color: #fff;
+            margin-top: 15px;
+            padding: 20px;
+            h4{
+                color: #fff;
+                margin: 0;
+                padding: 0;
+            }
+        }
+    }
+    .assets-import__results{
+        padding: 20px;
+        color: #fff;
+        width: 100%;
+        h3{
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
+        }
+        .results-status{
+            display: flex;
+            flex-wrap: nowrap;
+            div{
+                width: auto;
+                padding: 5px 20px;
+                color: #fff;
+                font-size: 14px;
+                border-left: 1px solid rgba(255, 255, 255, .1);
+                strong{
+                    font-size: 28px;
+                    display: block;
+                    width: 100%;
+                    margin-top: 5px;
+                }
+                &:first-child{
+                    padding-left: 0;
+                    border-left: none;
+                }
+            }
         }
     }
 
+
+    .nav-tabs {
+        border-bottom: none;
+        position: relative;
+        .nav-item {
+            border-radius: 8px 8px 0 0;
+            a {
+                color: #606079;
+                background: #393955;
+                padding: 0 15px;
+                font-size: 16px;
+                line-height: 32px;
+                border: none;
+                position: relative;
+                box-shadow: 0 -1px 10px rgba(0, 0, 0, .2);
+                &:before {
+                    content: "";
+                    position: absolute;
+                    height: 23px;
+                    bottom: 0;
+                    left: -30px;
+                    border: 15px solid transparent;
+                    border-bottom: 15px solid #393955;
+                    border-right: 15px solid #393955;
+                    -webkit-filter: drop-shadow(-5px 0px 3px rgba(0, 0, 0, .15));
+                    filter: drop-shadow(-5px 0px 3px rgba(0, 0, 0, .1));
+                }
+                &:after {
+                    content: "";
+                    position: absolute;
+                    height: 23px;
+                    bottom: 0;
+                    right: -30px;
+                    border: 15px solid transparent;
+                    border-bottom: 15px solid #393955;
+                    border-left: 15px solid #393955;
+                    -webkit-filter: drop-shadow(5px 0px 3px rgba(0, 0, 0, .15));
+                    filter: drop-shadow(5px 0px 3px rgba(0, 0, 0, .15));
+                }
+                &.active {
+                    border-bottom: none;
+                    background: #3e3e5c;
+                    z-index: 8;
+                    color: #fff;
+                    &:before {
+                        border-bottom-color: #3e3e5c;
+                        border-right-color: #3e3e5c;
+                    }
+                    &:after {
+                        border-bottom-color: #3e3e5c;
+                        border-left-color: #3e3e5c;
+                    }
+                }
+            }
+            &:first-child {
+                a {
+                    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+                    &:before {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    .tab-pane {
+        position: relative;
+        &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 15px;
+            height: 15px;
+            background: #3e3e5c;
+            z-index: 10;
+        }
+        .tab-container {
+            background: #3e3e5c;
+            padding: 15px;
+            border-radius: 0 5px 5px 5px;
+            border-top: none;
+            box-shadow: 0 3px 20px rgba(0, 0, 0, .2);
+            .table{
+                margin: 0;
+                thead{
+                    tr{
+                        background: rgba(0, 0, 0, .1);
+                        th{
+                            font-weight: bold;
+                            color: #fff;
+                            border: none;
+                            &:first-child{
+                                width: 80px;
+                                text-align: right;
+                            }
+                        }
+                    }
+                }
+                tbody{
+                    tr{
+                        background: rgba(0, 0, 0, .1);
+                        &:nth-child(odd){
+                            background: rgba(0, 0, 0, .05);
+                        }
+                        td{
+                            border: none;
+                            &:first-child{
+                                width: 120px;
+                                text-align: right;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 </style>
