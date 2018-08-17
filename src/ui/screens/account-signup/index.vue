@@ -5,21 +5,21 @@
                 <div class="col-12">
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
+                        <li class="nav-item layer1">
                             <a class="nav-link active" id="step1-tab" data-toggle="tab" href="#step1" role="tab"
                                aria-controls="step1-tab" aria-expanded="true">Step 1</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item layer2">
                             <a class="nav-link" id="step2-tab" data-toggle="tab" href="#step2" role="tab"
                                aria-controls="step2-tab">Step 2</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item layer3">
                             <a class="nav-link" id="step3-tab" data-toggle="tab" href="#step3" role="tab"
                                aria-controls="step3-tab">Step 3</a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade show active" id="step1" role="tabpanel" aria-labelledby="step1-tab">
+                        <div class="tab-pane show active" id="step1" role="tabpanel" aria-labelledby="step1-tab">
                             <div class="tab-container">
                                 <div class="tab-card">
                                     <h4>Personal Information</h4>
@@ -253,7 +253,7 @@
                             </div>
 
                         </div>
-                        <div class="tab-pane fade" id="step2" role="tabpanel" aria-labelledby="step2-tab">
+                        <div class="tab-pane" id="step2" role="tabpanel" aria-labelledby="step2-tab">
                             <div class="tab-container">
                                 <div class="padding-40">
                                     <h3>Welcome, UserName. Let's build your main identity.</h3>
@@ -374,7 +374,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="step3" role="tabpanel" aria-labelledby="step3-tab">
+                        <div class="tab-pane" id="step3" role="tabpanel" aria-labelledby="step3-tab">
                             <div class="tab-container">
                                 <div class="padding-20">
                                     <h3>Verify your identity (Optional)</h3>
@@ -592,7 +592,7 @@
                 &.active {
                     border-bottom: none;
                     background: #3e3e5c;
-                    z-index: 8;
+                    z-index: 8 !important;
                     &:before {
                         border-bottom-color: #3e3e5c;
                         border-right-color: #3e3e5c;
@@ -602,6 +602,18 @@
                         border-left-color: #3e3e5c;
                     }
                 }
+            }
+            &.layer1 a {
+                z-index: 7;
+            }
+            &.layer2 a {
+                z-index: 6;
+            }
+            &.layer3 a {
+                z-index: 5;
+            }
+            &.layer4 a {
+                z-index: 4;
             }
             &:first-child {
                 a {
