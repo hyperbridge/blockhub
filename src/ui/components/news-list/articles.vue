@@ -10,7 +10,7 @@
           <li v-for="(article, index) in news.articles" :key="index">
               <h4>{{ article.heading }}</h4>
               <div class="published_date mb-3">
-                  Published {{ article.date | parse_date }}
+                  Published {{ article.date | timeAgo }}
               </div>
               <p>{{ article.content }}</p>
               <a :href="`/${article.url}`" class="btn btn-link">
@@ -26,12 +26,7 @@ import moment from 'moment';
 
 export default {
     name: 'c-news-list-articles',
-    props: ['news', 'index'],
-    filters: {
-        parse_date(date) {
-            return moment(date).fromNow();
-        }
-    }
+    props: ['news', 'index']
 }
 </script>
 

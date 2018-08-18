@@ -14,7 +14,7 @@
                         <img :src="comment.author.img"/>
                         <div>
                             <h6>{{ comment.author.name }}</h6>
-                            <span class="time">3 years Ago</span>
+                            <span class="time">{{ comment.date | timeAgoShort }}</span>
                         </div>
                     </div>
                     <div class="text">{{ comment.text }}</div>

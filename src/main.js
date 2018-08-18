@@ -37,6 +37,8 @@ Vue.filter('formatTime', function(value) {
 
 Vue.filter('timeAgo', (date) => moment(date).fromNow());
 
+Vue.filter('timeAgoShort', (date) => moment(date).fromNow().replace('ago', ''));
+
 const overrideConsoleLog = () => {
   window.consoleLogMessages = []
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="community-item" :class="{ 'is-reply': reply, 'preview-mode': !post.content }">
+    <div class="community-item" :class="{ 'is-reply': reply, 'preview-mode': !(post.content && post.content.comments) }">
         <div class="community-item__header">
             <c-rate-item
                 :rate="post.rate"
@@ -16,7 +16,7 @@
                     {{ post.rate < 0 ? post.rate * -1 : post.rate }}
                 </div>
                 <div class="user">
-                    <span class="time">25 min</span>
+                    <span class="time">{{ post.date | timeAgo }}</span>
                     <img :src="post.author.img"/>
                     <span class="name">{{ post.author.name }}</span>
                 </div>
