@@ -1,6 +1,9 @@
 <template>
-    <div class="community-item" :class="{ is_reply: reply }">
+    <div class="community-item" :class="{ 'is-reply': reply, 'preview-mode': !post.content }">
         <div class="community-item__header">
+            <c-rate-item
+                :rate="post.rate"
+            />
             <div class="icon">
                 <i class="fas" :class="post_icon"></i>
             </div>
@@ -25,38 +28,17 @@
         </div>
         <template v-if="post.content">
             <div class="community-item__post">
+                <c-dropdown-menu
+                    class="community-item__post-menu"
+                    :style="{ right: 0, top: '5px' }"
+                />
                 <p>{{ post.content.text }}</p>
                 <img :src="post.content.img"/>
             </div>
-            <div class="community-item__post-reply" v-if="reply">
-                <h4 class="mt-4 mb-2 text-left">Your Reply:</h4>
-                <div class="form-group">
-                    <textarea class="form-control" rows="6"></textarea>
-                </div>
-            </div>
-            <div class="community-item__action text-right">
-                <a href="#3" class="btn btn-sm btn-icon" v-if="!reply">
-                    <i class="fas fa-thumbs-down"></i>
-                </a>
-                <a href="#3" class="btn btn-sm btn-info"
-                    v-if="!reply"
-                    @click="reply = true">
-                    Reply
-                </a>
-                <a href="#3" class="btn btn-sm btn-danger"
-                    @click="reply = false"
-                    v-if="reply">
-                    Cancel
-                </a>
-                <a href="#3" class="btn btn-sm btn-info"
-                    @click="reply = false"
-                    v-if="reply">
-                    Submit
-                </a>
-            </div>
 
-            <c-post-comment />
-
+            <c-reply
+                @replyMode="reply=$event"
+            />
         </template>
     </div>
 </template>
@@ -65,7 +47,10 @@
 export default {
     props: ['post'],
     components: {
-        'c-post-comment': () => import('@/ui/components/product-community/comment')
+        'c-post-comment': () => import('@/ui/components/product-community/comment'),
+        'c-reply': () => import('@/ui/components/product-community/reply'),
+        'c-dropdown-menu': () => import('@/ui/components/dropdown-menu'),
+        'c-rate-item': () => import('@/ui/components/product-community/rate-item'),
     },
     data() {
         return {
@@ -91,12 +76,11 @@ export default {
 
 <style lang="scss" scoped>
 .community-item {
-    background: rgba(0, 0, 0, .16);
-    border: 1px solid rgba(112, 112, 112, .2);
     margin-bottom: 15px;
     border-radius: 5px;
-    &.is_reply {
-        background: rgba(255, 255, 255, .1);
+    &.preview-mode {
+        background: rgba(0, 0, 0, .16);
+        border: 1px solid rgba(112, 112, 112, .2);
     }
 }
 
@@ -106,45 +90,6 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    .position {
-        width: 50px;
-        text-align: center;
-        padding: 13px 0 15px;
-        position: relative;
-        margin-right: 10px;
-        span {
-            display: block;
-            position: relative;
-            z-index: 4;
-            &.up {
-                color: #43C981;
-            }
-            &.down {
-                color: #F75D5D;
-            }
-        }
-        i {
-            font-size: 26px;
-            position: absolute;
-            left: 0;
-            right: 0;
-            z-index: 3;
-            cursor: pointer;
-            color: #C6C6D6;
-            &.fa-sort-up {
-                top: 0;
-                &:hover {
-                    color: #43C981;
-                }
-            }
-            &.fa-sort-down {
-                bottom: 0;
-                &:hover {
-                    color: #F75D5D;
-                }
-            }
-        }
-    }
     .icon {
         width: 40px;
         height: 40px;
@@ -153,6 +98,7 @@ export default {
         text-align: center;
         background: rgba(0, 0, 0, .13);
         font-size: 18px;
+        border-radius: 3px;
         .fa-map-pin {
             color: #5D75F7;
         }
@@ -179,7 +125,7 @@ export default {
         justify-content: space-between;
         align-items: center;
         .rating {
-            width: 40px;
+            width: 50px;
             text-align: center;
             i {
                 margin-right: 5px;
@@ -248,189 +194,5 @@ export default {
     top: 5px;
     width: 20px;
     height: 20px;
-    .dropmenu_container {
-        .rw-btn--card {
-            padding: 0;
-            border: none;
-            width: 20px;
-            height: 20px;
-            div {
-                border-color: #fff;
-                &:before,
-                &:after {
-                    border-color: #fff;
-                }
-            }
-            &:hover {
-                background: transparent;
-            }
-        }
-        &.show {
-            .rw-btn--card {
-                background: transparent;
-                color: #fff;
-                div {
-                    border-color: #fff;
-                    &:before,
-                    &:after {
-                        background: #fff;
-                    }
-                }
-            }
-        }
-        .dropdown-menu {
-            width: auto;
-            min-width: 80px;
-            padding: 0;
-            background: #151824;
-            &:before {
-                width: 10px;
-                height: 10px;
-                display: inline-block;
-                content: "";
-                position: absolute;
-                top: -5px;
-                right: 5px;
-            }
-            ul {
-                padding: 0;
-                margin: 0;
-                li {
-                    width: 100%;
-                    padding: 3px;
-                    a {
-                        width: 100%;
-                        text-align: center;
-                        text-transform: uppercase;
-                        color: #fff;
-                        padding: 0;
-                        font-weight: bold;
-                    }
-                }
-            }
-        }
-    }
-}
-
-.community-item__action {
-    margin: 10px 7px;
-    .btn {
-        padding: 0px 7px;
-        text-transform: uppercase;
-        font-weight: bold;
-        margin: 0 3px;
-    }
-    .btn-icon {
-        color: #F75D5D;
-        font-size: 16px;
-    }
-    .btn-info {
-        background: #5D75F7;
-    }
-    .btn-danger {
-        background: #F75D5D;
-    }
-}
-
-.community-item__post-reply {
-    margin: 0 10px;
-    h4 {
-        font-weight: bold;
-    }
-    textarea {
-        background: rgba(0, 0, 0, .1);
-    }
-}
-
-.community-item__comment {
-    display: flex;
-    justify-content: space-between;
-    align-items: self-start;
-    padding: 0 10px;
-    margin: 30px 0 10px;
-    .position {
-        width: 50px;
-        text-align: center;
-        padding: 13px 0 15px;
-        position: relative;
-        margin-right: 10px;
-        span {
-            display: block;
-            position: relative;
-            z-index: 4;
-            &.up {
-                color: #43C981;
-            }
-            &.down {
-                color: #F75D5D;
-            }
-        }
-        i {
-            font-size: 26px;
-            position: absolute;
-            left: 0;
-            right: 0;
-            z-index: 3;
-            cursor: pointer;
-            color: #C6C6D6;
-            &.fa-sort-up {
-                top: 0;
-                &:hover {
-                    color: #43C981;
-                }
-            }
-            &.fa-sort-down {
-                bottom: 0;
-                &:hover {
-                    color: #F75D5D;
-                }
-            }
-        }
-    }
-    .comment-container {
-        width: calc(100% - 65px);
-        background: rgba(0, 0, 0, .16);
-        border: 1px solid rgba(112, 112, 112, .4);
-        position: relative;
-        .comment-content{
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            .user_info {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: auto;
-                max-width: 30%;
-                margin-right: 20px;
-                img {
-                    width: 30px;
-                    height: 30px;
-                    object-fit: cover;
-                    border-radius: 100%;
-                    margin-right: 10px;
-                }
-                h6{
-                    padding: 0;
-                    margin: 0;
-                    font-weight: bold;
-                    font-size: 14px;
-                }
-                .time{
-                    float: right;
-                }
-            }
-            .text{
-                width: auto;
-                font-size: 14px;
-                line-height: 17px;
-            }
-        }
-        .sub_comments_list{
-            display: block;
-            width: 100%;
-            border-top: 1px solid rgba(255, 255, 255, .1);
-        }
-    }
 }
 </style>

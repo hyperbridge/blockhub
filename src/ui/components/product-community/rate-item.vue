@@ -1,5 +1,5 @@
 <template>
-    <div class="position">
+    <div class="rate-item">
         <i class="fas fa-sort-up"></i>
         <span
             class="number"
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.position {
+.rate-item {
     width: 50px;
     text-align: center;
     padding: 13px 0 15px;
