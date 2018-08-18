@@ -104,7 +104,6 @@
             return {
                 community_1: false,
                 community_2: true,
-                reply: false,
                 posts: [
                     {
                         title: 'This post has been pinned and the title is a single line of text',
