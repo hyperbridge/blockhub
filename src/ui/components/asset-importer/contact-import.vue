@@ -1,6 +1,6 @@
 <template>
     <div class="assets-import">
-        <div class="assets-import__contact d-none">
+        <div class="assets-import__contact">
             <h3>Import contacts</h3>
             <p class="mb-0">Now let's match the columns in your uploaded file to your MailChimp list.</p>
             <p><a href="#3">See an example of the import field match process</a></p>
@@ -88,7 +88,7 @@
                 </div>
             </div>
         </div>
-        <div class="assets-import__loading d-none">
+        <div class="assets-import__loading">
             <c-loading-bar class="loading-bar" />
             <div class="text">
                 <h4>We'ar importing your list!</h4>
@@ -184,8 +184,7 @@
         },
         data(){
             return {
-                skippedState: this.show_skipped,
-                percent: 30,
+                skippedState: this.show_skipped
             }
         }
     }

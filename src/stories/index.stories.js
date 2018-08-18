@@ -5,6 +5,7 @@ import {action} from '@storybook/addon-actions'
 import {linkTo} from '@storybook/addon-links'
 
 import '../css/styles.scss'
+import '../css/vendors/font-awesome/fontawesome.scss'
 
 //import '!style-loader!css-loader!./styles.scss'
 
@@ -13,6 +14,7 @@ import Welcome from './Welcome.vue'
 import SaleBox from '../ui/components/sale-box/box.vue'
 import PlanList from '../ui/components/game-plans/list.vue'
 import AssetsImporter from '../ui/components/asset-importer/contact-import.vue'
+import Notification from '../ui/components/notification/index.vue'
 
 
 storiesOf('Welcome', module).add('to Storybook', () => ({
@@ -75,14 +77,64 @@ storiesOf('Plan List', module)
 storiesOf('Assets Importer', module)
     .add('default', () => ({
         components: {
-            'assets-importer': AssetsImporter
+            'c-assets-importer': AssetsImporter
         },
         data() {
             return {
                 show_skipped: true
             }
         },
-        template: '<div class="row"><div class="col-8"><assets-importer /></div></div>'
+        template: '<div class="row"><div class="col-8"><c-assets-importer /></div></div>'
     }))
+
+storiesOf('Notifications', module)
+    .add('default', () => ({
+        components: {
+            'c-notification': Notification
+        },
+        data() {
+            return {
+                ntf_messages: [
+                    {
+                        type: 'info',
+                        title: 'Info message',
+                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        actionOnClose: false,
+                        actionOnTextClick: true
+                    },
+                    {
+                        type: 'warning',
+                        title: 'Warning message',
+                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        actionOnClose: '',
+                        actionOnTextClick: ''
+                    },
+                    {
+                        type: 'danger',
+                        title: 'Danger message',
+                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        actionOnClose: '',
+                        actionOnTextClick: ''
+                    },
+                    {
+                        type: 'success',
+                        title: 'Success message',
+                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        actionOnClose: '',
+                        actionOnTextClick: ''
+                    },
+                    {
+                        type: '',
+                        title: 'Other message',
+                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        actionOnClose: '',
+                        actionOnTextClick: ''
+                    },
+                ]
+            }
+        },
+        template: '<div class="row"><div class="col-4 pt-3"><c-notification :notifications="ntf_messages" /></div></div>'
+    }))
+
 
 /* eslint-enable react/react-in-jsx-scope */
