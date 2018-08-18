@@ -58,83 +58,7 @@
                             </div>
 
                             <div class="navigation">
-                                <ul class="notifications-list">
-                                    <li class="notifi_item info">
-                                        <div class="title">
-                                            <h5 class="text-left">
-                                                <i class="fas fa-info"></i>
-                                                You should know ...
-                                                <a href="#3" class="close">
-                                                    <i class="fas fa-times"></i>
-                                                </a>
-                                            </h5>
-                                        </div>
-                                        <div class="text">
-                                            Something is changed in our privace policy,
-                                            please view this notification. Click to view full.
-                                        </div>
-                                    </li>
-                                    <li class="notifi_item success">
-                                        <div class="title">
-                                            <h5 class="text-left">
-                                                <i class="fas fa-check-circle"></i>
-                                                You should know ...
-                                                <a href="#3" class="close">
-                                                    <i class="fas fa-times"></i>
-                                                </a>
-                                            </h5>
-                                        </div>
-                                        <div class="text">
-                                            Something is changed in our privace policy,
-                                            please view this notification. Click to view full.
-                                        </div>
-                                    </li>
-                                    <li class="notifi_item warning">
-                                        <div class="title">
-                                            <h5 class="text-left">
-                                                <i class="fas fa-exclamation-triangle"></i>
-                                                You should know ...
-                                                <a href="#3" class="close">
-                                                    <i class="fas fa-times"></i>
-                                                </a>
-                                            </h5>
-                                        </div>
-                                        <div class="text">
-                                            Something is changed in our privace policy,
-                                            please view this notification. Click to view full.
-                                        </div>
-                                    </li>
-                                    <li class="notifi_item danger">
-                                        <div class="title">
-                                            <h5 class="text-left">
-                                                <i class="fas fa-times-circle"></i>
-                                                You should know ...
-                                                <a href="#3" class="close">
-                                                    <i class="fas fa-times"></i>
-                                                </a>
-                                            </h5>
-                                        </div>
-                                        <div class="text">
-                                            Something is changed in our privace policy,
-                                            please view this notification. Click to view full.
-                                        </div>
-                                    </li>
-                                    <li class="notifi_item">
-                                        <div class="title">
-                                            <h5 class="text-left">
-                                                <i class="fas fa-cog"></i>
-                                                You should know ...
-                                                <a href="#3" class="close">
-                                                    <i class="fas fa-times"></i>
-                                                </a>
-                                            </h5>
-                                        </div>
-                                        <div class="text">
-                                            Something is changed in our privace policy,
-                                            please view this notification. Click to view full.
-                                        </div>
-                                    </li>
-                                </ul>
+                                <c-notification :notifications="ntf_messages" />
                             </div>
 
                         </div>
@@ -355,7 +279,8 @@ export default {
         'c-store-navigation': () => import('@/ui/components/navigation/store'),
         'c-asset-navigation': () => import('@/ui/components/navigation/asset'),
         'c-product-navigation': () => import('@/ui/components/navigation/product'),
-        'c-project-navigation': () => import('@/ui/components/navigation/project')
+        'c-project-navigation': () => import('@/ui/components/navigation/project'),
+        'c-notification': () => import('@/ui/components/notification'),
     },
     computed: {
         is_connected() {
@@ -370,6 +295,43 @@ export default {
     },
     data() {
         return {
+            ntf_messages: [
+                {
+                    type: 'info',
+                    title: 'Info message',
+                    text: 'Something is changed in our policy, please view this notification.Click to view full',
+                    actionOnClose: false,
+                    actionOnTextClick: true
+                },
+                {
+                    type: 'warning',
+                    title: 'Warning message',
+                    text: 'Something is changed in our policy, please view this notification.Click to view full',
+                    actionOnClose: '',
+                    actionOnTextClick: ''
+                },
+                {
+                    type: 'danger',
+                    title: 'Danger message',
+                    text: 'Something is changed in our policy, please view this notification.Click to view full',
+                    actionOnClose: '',
+                    actionOnTextClick: ''
+                },
+                {
+                    type: 'success',
+                    title: 'Success message',
+                    text: 'Something is changed in our policy, please view this notification.Click to view full',
+                    actionOnClose: '',
+                    actionOnTextClick: ''
+                },
+                {
+                    type: '',
+                    title: 'Other message',
+                    text: 'Something is changed in our policy, please view this notification.Click to view full',
+                    actionOnClose: '',
+                    actionOnTextClick: ''
+                },
+            ],
             navigationComponent: this.navigationKey || false
         }
     },
