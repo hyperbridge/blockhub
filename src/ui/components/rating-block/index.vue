@@ -9,11 +9,10 @@
                         <span class="rating-block__name">{{ item.name }}</span>
                         <span class="rating-block__number">{{ item.number }}</span>
                     </div>
-                    <span class="rating-block__stars">
-                        <i class="fas fa-star" v-for="num in Math.floor(item.number)" :key="num"></i>
-                        <i class="fas fa-star-half"
-                            v-if="Number.isInteger(item.number) === false"></i>
-                    </span>
+                    <c-rating-stars
+                        :number="item.number"
+                        class="rating-block__stars"
+                    />
                 </li>
             </ul>
             <a href="#reviews" class="btn btn-outline-white">See Full Reviews</a>
@@ -26,7 +25,11 @@
 
 <script>
     export default {
-        props: ['items']
+        name: 'rating-block',
+        props: ['items'],
+        components: {
+            'c-rating-stars': () => import('@/ui/components/rating-stars')
+        }
     }
 </script>
 

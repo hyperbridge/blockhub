@@ -129,6 +129,32 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-12">
+                        <div class="row">
+                            <c-heading-bar name="Reviews" :showArrows="true" :showBackground="false" />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <h2>Most helpful</h2>
+                                <c-review
+                                    v-for="(review, index) in reviews.helpful"
+                                    :key="index"
+                                    :review="review"
+                                />
+                            </div>
+                            <div class="col-6">
+                                <h2>Most recent</h2>
+                                <c-review
+                                    v-for="(review, index) in reviews.recent"
+                                    :key="index"
+                                    :review="review"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -459,6 +485,9 @@
                 </div>
             </div>
         </div>
+
+
+
     </c-layout>
 </template>
 
@@ -467,7 +496,7 @@
 
     const updateProduct = function () {
         let product = null
-        
+
         if (this.id === 'new') {
             product = this.$store.state.marketplace.default_product
         }
@@ -475,7 +504,7 @@
         if (this.$store.state.marketplace.products && this.$store.state.marketplace.products[this.id]) {
             product = this.$store.state.marketplace.products[this.id]
         }
-    
+
         if (product && product.images && product.images.header) {
             window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
         }
@@ -498,9 +527,15 @@
             'c-tags-list': () => import('@/ui/components/product-tags'),
             'c-rating-block': () => import('@/ui/components/rating-block'),
             'c-frequently-traded-assets': () => import('@/ui/components/frequently-traded-assets'),
-            'c-community-spotlight': () => import('@/ui/components/community-spotlight')
+            'c-community-spotlight': () => import('@/ui/components/community-spotlight'),
+            'c-heading-bar': () => import('@/ui/components/heading-bar'),
+            'c-review': () => import('@/ui/components/product-overview/review')
         },
         data() {
+            const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.';
+            const title = 'Good game with very nice graphics made by very smart people.';
+            const setup = { system: 'Windows 10', gpu: 'GTX 1080', cpu: 'Core i7 7980x', ram: '8 GB', storage: 'HyperX 1TB SSD' };
+            const author = { name: 'Nakatochi', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png' };
             return {
                 activeElement: {
                     name: false,
@@ -512,7 +547,19 @@
                     'adventure',
                     'racing',
                     'action'
-                ]
+                ],
+                reviews: {
+                    helpful: [
+                        { author, title: title, text, date: '2018-08-19T04:09:00.000Z', rating: 4.5, minutes_played: 1938, setup },
+                        { author, title: title, text, date: '2018-08-16T04:09:00.000Z', rating: 1.5, minutes_played: 414, setup },
+                        { author, title: title, text, date: '2018-08-18T04:09:00.000Z', rating: 3.5, minutes_played: 71, setup }
+                    ],
+                    recent: [
+                        { author, title: title, text, date: '2018-08-20T04:09:00.000Z', rating: 1.5, minutes_played: 13, setup },
+                        { author, title: title, text, date: '2018-03-21T04:09:00.000Z', rating: 5, minutes_played: 241, setup },
+                        { author, title: title, text, date: '2018-08-11T04:09:00.000Z', rating: 3, minutes_played: 2941, setup }
+                    ]
+                }
             }
         },
         methods: {
@@ -560,7 +607,7 @@
             $('#tag-editor').select2()
                 .on('select2:select', (e) => {
                     let data = e.params.data
-                    
+
                     if (!this.product.author_tags.includes(data.text)) {
                         this.product.author_tags.push(data.text)
                     }
