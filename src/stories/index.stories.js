@@ -19,6 +19,10 @@ import Tab from '../ui/components/tab/tab.vue'
 import MilestonesLine from '../ui/components/milestones-line/index.vue'
 import SidebarMenu from '../ui/components/sidebar-menu/index.vue'
 import Buttons from '../ui/components/buttons/index.vue'
+import Links from '../ui/components/links/index.vue'
+import MoneyInfo from '../ui/components/money-info/index.vue'
+import Checkbox from '../ui/components/checkbox/checbox.vue'
+import CheckboxGroup from '../ui/components/checkbox/checbox-group.vue'
 
 
 // storiesOf('Welcome', module).add('to Storybook', () => ({
@@ -285,7 +289,7 @@ storiesOf('Sidebar Menu', module)
                     <c-sidebar-menu sub_title="This sub title" sub_icon="fas fa-info-circle" :menu="menu" />
                 </div>
             </div>`
-    }))
+    }));
 
 storiesOf('Buttons', module)
     .add('default', () =>({
@@ -299,7 +303,7 @@ storiesOf('Buttons', module)
         },
         template: `<div class="row m-0 p-3">
                 <div class="col-12">
-                    <c-button text="default" @click="testFunction" c_class="mx-1" />
+                    <c-button text="default" @click="testFunction" type="submit" c_class="mx-1" />
                 </div>
             </div>`
     }))
@@ -329,11 +333,101 @@ storiesOf('Buttons', module)
         },
         template: `<div class="row m-0 p-3">
                 <div class="col-12">
-                    <c-button text="danger" variant="danger" icon="fas fa-exclamation-triangle" icon_position="left" c_class="mx-1" @click="buttonClick" />
+                    <c-button text="danger" variant="danger" icon="fas fa-exclamation-triangle" icon_position="left" c_class="mx-1" />
+                </div>
+            </div>`
+    }));
+
+storiesOf('Links', module)
+    .add('default', () =>({
+        components: {
+            'c-link': Links
+        },
+        methods: {
+            testFunction: function () {
+                console.log('BOOOOOOOOOOOM!')
+            }
+        },
+        template: `<div class="row m-0 p-3">
+                <div class="col-12">
+                    <c-link href="#3" text="default" @click="testFunction" type="submit" c_class="mx-1" />
                 </div>
             </div>`
     }))
+    .add('info', () =>({
+        components: {
+            'c-link': Links
+        },
+        template: `<div class="row m-0 p-3">
+                <div class="col-12">
+                    <c-link href="#3" text="info" variant="info" c_class="mx-1" />
+                </div>
+            </div>`
+    }))
+    .add('success', () =>({
+        components: {
+            'c-link': Links
+        },
+        template: `<div class="row m-0 p-3">
+                <div class="col-12">
+                    <c-link href="#3" text="success" variant="success" icon="fas fa-check" icon_position="right" c_class="mx-1" />
+                </div>
+            </div>`
+    }))
+    .add('danger', () =>({
+        components: {
+            'c-link': Links
+        },
+        template: `<div class="row m-0 p-3">
+                <div class="col-12">
+                    <c-link href="#3" text="danger" variant="danger" icon="fas fa-exclamation-triangle" icon_position="left" c_class="mx-1" />
+                </div>
+            </div>`
+    }));
 
+storiesOf('Money Info', module)
+    .add('default', () => ({
+        components: {
+            'c-money-info': MoneyInfo
+        },
+        template: `
+        <div class="row m-0 p-3">
+            <c-money-info label="Spent" percent="63" amount="555.999" />
+        </div>
+        `
+    }));
 
+storiesOf('Checkbox', module)
+    .add('Single checkbox', () => ({
+        components: {
+            'c-checkbox': Checkbox
+        },
+        data() {
+            return {
+                value : true
+            }
+        },
+        template: `
+        <div class="row m-0 p-3">
+            <c-checkbox id="test_check" label="This is the test checkbox" v-model="value" />
+        </div>
+        `
+    }))
+    .add('Checkbox Group', () => ({
+    components: {
+        'c-checkbox': Checkbox,
+        'c-checkbox-group': CheckboxGroup,
+    },
+    template: `
+        <div class="row m-0 p-3">
+            <c-checkbox-group title="Group Title">
+                <c-checkbox id="test_check_1" label="This is the first checkbox" v-model="value" />
+                <c-checkbox id="test_check_2" label="This is the second checkbox with longer text" v-model="value" />
+                <c-checkbox id="test_check_3" label="This is the checkbox" v-model="value" />
+                <c-checkbox id="test_check_4" label="This is the test checkbox" v-model="value" />
+            </c-checkbox-group>
+        </div>
+        `
+}));
 
 /* eslint-enable react/react-in-jsx-scope */

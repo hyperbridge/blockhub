@@ -1,26 +1,27 @@
 <template>
-    <button  :type="type" class="c-btn" :class="[ 'c-' + variant, c_class ]" @click="$emit('click')">
+    <a  :href="href" class="c-link" :class="[ 'c-' + variant, c_class ]" @click="$emit('click')" :target="target">
         <i class="left-icon" :class="icon" v-if="icon_position == 'left'"></i>
         {{ text }}
         <i class="right-icon" :class="icon" v-if="icon_position == 'right'"></i>
-    </button>
+    </a>
 </template>
 
 <script>
     export default {
         props: {
-            type: { default: false },
+            href: { required: true },
             variant : { default: 'default' },
             text : { required: true },
             icon : { default: false },
             icon_position : { default: false},
-            c_class: { default: false }
+            c_class: { default: false },
+            target: { default: '_self' }
         }
     }
 </script>
 
 <style lang="scss">
-    .c-btn{
+    .c-link{
         display: inline-block;
         padding: 0px 8px;
         line-height: 24px;
@@ -30,7 +31,6 @@
         border-radius: 5px;
         box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
         text-transform: uppercase;
-        cursor: pointer;
         .left-icon{
             margin-right: 3px;
         }
@@ -38,9 +38,11 @@
             margin-left: 3px;
         }
         &:active,
+        &:hover,
         &:focus{
             outline: none;
             box-shadow: none;
+            text-decoration: none;
         }
         &.c-default{
             background: #fff;
