@@ -16,8 +16,9 @@ import AssetsImporter from '../ui/components/asset-importer/index.vue'
 import Notification from '../ui/components/notification/index.vue'
 import Tabs from '../ui/components/tab/tabs.vue'
 import Tab from '../ui/components/tab/tab.vue'
-import StagesLine from '../ui/components/stages-line/index.vue'
+import MilestonesLine from '../ui/components/milestones-line/index.vue'
 import SidebarMenu from '../ui/components/sidebar-menu/index.vue'
+import Buttons from '../ui/components/buttons/index.vue'
 
 
 // storiesOf('Welcome', module).add('to Storybook', () => ({
@@ -154,34 +155,34 @@ storiesOf('Tabs', module)
             return {
             }
         },
-        template: '<div class="row m-0">' +
-            '<div class="col-8 p-4">' +
-            '<c-tabs>' +
-            '<c-tab name="Tab 1" :selected="true" showFooter="true">' +
-            '<p>This is first tab with footer content</p>' +
-            '<template slot="footer">' +
-            '<a href="#3" class="btn btn-sm btn-success float-right">Button</a>' +
-            '</template>' +
-            '</c-tab>' +
-            '<c-tab name="Tab 2">' +
-            '<p>This is second tab</p>' +
-            '</c-tab>' +
-            '<c-tab name="Tab 3">' +
-            '<p>This is third tab</p>' +
-            '</c-tab>' +
-            '</c-tabs>' +
-            '</div>' +
-            '</div>'
+        template: `<div class="row m-0">
+            <div class="col-8 p-4">
+                <c-tabs>
+                    <c-tab name="Tab 1" :selected="true" showFooter="true">
+                        <p>This is first tab with footer content</p>
+                         <template slot="footer">
+                            <a href="#3" class="btn btn-sm btn-success float-right">Button</a>
+                        </template>
+                    </c-tab>
+                     <c-tab name="Tab 2">
+                        <p>This is second tab</p>
+                    </c-tab>
+                    <c-tab name="Tab 3">
+                        <p>This is third tab</p>
+                    </c-tab>
+                </c-tabs>
+            </div>
+            </div>`
     }))
 
-storiesOf('Stages Line', module)
+storiesOf('Milestones Line', module)
     .add('default', () => ({
         components: {
-            'c-stages-line': StagesLine
+            'c-milestones-line': MilestonesLine
         },
         data() {
             return {
-                stages: [
+                milestones: [
                     {
                         "status": "done",
                         "text": "m1"
@@ -209,11 +210,11 @@ storiesOf('Stages Line', module)
                 ],
             }
         },
-        template: '<div class="row m-0">' +
-            '<div class="col-8 p-4">' +
-            '<c-stages-line :stages="stages" />' +
-            '</div>' +
-            '</div>'
+        template: `<div class="row m-0">
+                <div class="col-8 p-4">
+                    <c-milestones-line :milestones="milestones" />
+                </div>
+            </div>`
     }))
 
 storiesOf('Sidebar Menu', module)
@@ -279,11 +280,60 @@ storiesOf('Sidebar Menu', module)
                 ],
             }
         },
-        template: '<div class="row m-0">' +
-            '<div class="col-3 p-4">' +
-            '<c-sidebar-menu sub_title="This sub title" sub_icon="fas fa-info-circle" :menu="menu" />' +
-            '</div>' +
-            '</div>'
+        template: `<div class="row m-0">
+                <div class="col-3 p-4">
+                    <c-sidebar-menu sub_title="This sub title" sub_icon="fas fa-info-circle" :menu="menu" />
+                </div>
+            </div>`
     }))
+
+storiesOf('Buttons', module)
+    .add('default', () =>({
+        components: {
+            'c-button': Buttons
+        },
+        methods: {
+            testFunction: function () {
+                console.log('BOOOOOOOOOOOM!')
+            }
+        },
+        template: `<div class="row m-0 p-3">
+                <div class="col-12">
+                    <c-button text="default" @click="testFunction" c_class="mx-1" />
+                </div>
+            </div>`
+    }))
+    .add('info', () =>({
+        components: {
+            'c-button': Buttons
+        },
+        template: `<div class="row m-0 p-3">
+                <div class="col-12">
+                    <c-button text="info" variant="info" c_class="mx-1" />
+                </div>
+            </div>`
+    }))
+    .add('success', () =>({
+        components: {
+            'c-button': Buttons
+        },
+        template: `<div class="row m-0 p-3">
+                <div class="col-12">
+                    <c-button text="success" variant="success" icon="fas fa-check" icon_position="right" c_class="mx-1" />
+                </div>
+            </div>`
+    }))
+    .add('danger', () =>({
+        components: {
+            'c-button': Buttons
+        },
+        template: `<div class="row m-0 p-3">
+                <div class="col-12">
+                    <c-button text="danger" variant="danger" icon="fas fa-exclamation-triangle" icon_position="left" c_class="mx-1" @click="buttonClick" />
+                </div>
+            </div>`
+    }))
+
+
 
 /* eslint-enable react/react-in-jsx-scope */

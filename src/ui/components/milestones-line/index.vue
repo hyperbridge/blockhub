@@ -1,23 +1,13 @@
 <template>
     <div>
-        <div class="stages-line" v-if="type_1">
-            <div v-for="(stage, index) in stages" :key="index"
-                 :class="stage.status"
+        <div class="stages-line">
+            <div v-for="(milestone, index) in milestones" :key="index"
+                 :class="milestone.status"
                  class="stages-line__stage">
-                <i class="fas fa-check" v-if="stage.status === 'done'"></i>
-                <i class="fas fa-clock" v-if="stage.status === 'in_progress'"></i>
+                <i class="fas fa-check" v-if="milestone.status === 'done'"></i>
+                <i class="fas fa-clock" v-if="milestone.status === 'in_progress'"></i>
                 <span class="stage_line"></span>
-                <span class="name">{{ stage.text }}</span>
-            </div>
-        </div>
-        <div class="stages-line" v-if="type_2">
-            <div v-for="(stage, index) in stages" :key="index"
-                 :class="stage.status"
-                 class="stages-line__stage">
-                <i class="fas fa-check" v-if="stage.status === 'done'"></i>
-                <i class="fas fa-clock" v-if="stage.status === 'in_progress'"></i>
-                <span class="stage_line"></span>
-                <span class="name">{{ stage.text }}</span>
+                <span class="name">{{ milestone.text }}</span>
             </div>
         </div>
     </div>
@@ -26,7 +16,7 @@
 <script>
     export default {
         props: [
-            'stages'
+            'milestones'
         ]
     }
 </script>
