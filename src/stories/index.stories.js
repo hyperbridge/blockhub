@@ -23,6 +23,7 @@ import Links from '../ui/components/links/index.vue'
 import MoneyInfo from '../ui/components/money-info/index.vue'
 import Checkbox from '../ui/components/checkbox/checbox.vue'
 import CheckboxGroup from '../ui/components/checkbox/checbox-group.vue'
+import RangeSlider from '../ui/components/range-slider/index.vue'
 
 
 // storiesOf('Welcome', module).add('to Storybook', () => ({
@@ -430,4 +431,15 @@ storiesOf('Checkbox', module)
         `
 }));
 
+storiesOf('Range Slider', module)
+    .add('default', () => ({
+        components: {
+            'c-range-slider': RangeSlider
+        },
+        template: `
+        <div class="row m-0 p-3">
+            <c-range-slider />
+        </div>
+        `
+    }));
 /* eslint-enable react/react-in-jsx-scope */
