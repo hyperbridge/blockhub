@@ -24,6 +24,7 @@ import MoneyInfo from '../ui/components/money-info/index.vue'
 import Checkbox from '../ui/components/checkbox/checbox.vue'
 import CheckboxGroup from '../ui/components/checkbox/checbox-group.vue'
 import RangeSlider from '../ui/components/range-slider/index.vue'
+import Tooltips from '../ui/components/tooltips/index.vue'
 
 
 // storiesOf('Welcome', module).add('to Storybook', () => ({
@@ -431,15 +432,75 @@ storiesOf('Checkbox', module)
         `
 }));
 
-storiesOf('Range Slider', module)
-    .add('default', () => ({
+storiesOf('Tooltips', module)
+    .add('dark', () => ({
         components: {
-            'c-range-slider': RangeSlider
+            'c-tooltips': Tooltips
         },
         template: `
-        <div class="row m-0 p-3">
-            <c-range-slider />
-        </div>
+            <div class="row">
+                <div class="col-4 text-center">
+                            <c-tooltips name="Hover Me(left Position)!" position="left" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='false' />
+                </div>
+                <div class="col-4 text-center">
+                    <c-tooltips name="Hover Me(Center Position)!" position="center" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='false' />
+                </div>
+                <div class="col-4 text-center">
+                    <c-tooltips name="Hover Me(Right Position)!" position="right" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='false' />
+                </div>
+            </div>
         `
-    }));
+    }))
+    .add('light', () => ({
+        components: {
+            'c-tooltips': Tooltips
+        },
+        template: `
+            <div class="row">
+                <div class="col-4 text-center">
+                            <c-tooltips name="Hover Me(left Position)!" position="left" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='true' />
+                </div>
+                <div class="col-4 text-center">
+                    <c-tooltips name="Hover Me(Center Position)!" position="center" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='true' />
+                </div>
+                <div class="col-4 text-center">
+                    <c-tooltips name="Hover Me(Right Position)!" position="right" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='true' />
+                </div>
+            </div>
+        `
+    }))
+    .add('custom content', () => ({
+        components: {
+            'c-tooltips': Tooltips
+        },
+        template: `
+            <div class="row">
+                <div class="col-6 text-center">
+                    <c-tooltips name="Click Me(Custom content)!" type="click" position="left" :lightStyle='true'>
+                        <p class="p-0">Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.</p>
+                        <p class="p-0 m-0">Lipsum generator.</p>
+                        <a href="#3" class="btn btn-sm btn-danger mt-2">Some link</a>
+                    <c-tooltips/>
+                </div>
+                <div class="col-6 text-center">
+                    <c-tooltips name="Hover Me(Custom content)!" position="center" :lightStyle='true'>
+                        <p class="p-0">Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.</p>
+                        <p class="p-0 m-0">Lipsum generator.</p>
+                    <c-tooltips/>
+                </div>
+            </div>
+        `
+    }))
+
+// storiesOf('Range Slider', module)
+//     .add('default', () => ({
+//         components: {
+//             'c-range-slider': RangeSlider
+//         },
+//         template: `
+//         <div class="row m-0 p-3">
+//             <c-range-slider />
+//         </div>
+//         `
+//     }));
 /* eslint-enable react/react-in-jsx-scope */
