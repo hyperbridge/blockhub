@@ -25,6 +25,7 @@ import Checkbox from '../ui/components/checkbox/checbox.vue'
 import CheckboxGroup from '../ui/components/checkbox/checbox-group.vue'
 import RangeSlider from '../ui/components/range-slider/index.vue'
 import Tooltips from '../ui/components/tooltips/index.vue'
+import ActivityChart from '../ui/components/activity-chart/index.vue'
 
 
 // storiesOf('Welcome', module).add('to Storybook', () => ({
@@ -158,8 +159,7 @@ storiesOf('Tabs', module)
             'c-tab': Tab,
         },
         data() {
-            return {
-            }
+            return {}
         },
         template: `<div class="row m-0">
             <div class="col-8 p-4">
@@ -294,7 +294,7 @@ storiesOf('Sidebar Menu', module)
     }));
 
 storiesOf('Buttons', module)
-    .add('default', () =>({
+    .add('default', () => ({
         components: {
             'c-button': Buttons
         },
@@ -309,7 +309,7 @@ storiesOf('Buttons', module)
                 </div>
             </div>`
     }))
-    .add('info', () =>({
+    .add('info', () => ({
         components: {
             'c-button': Buttons
         },
@@ -319,7 +319,7 @@ storiesOf('Buttons', module)
                 </div>
             </div>`
     }))
-    .add('success', () =>({
+    .add('success', () => ({
         components: {
             'c-button': Buttons
         },
@@ -329,7 +329,7 @@ storiesOf('Buttons', module)
                 </div>
             </div>`
     }))
-    .add('danger', () =>({
+    .add('danger', () => ({
         components: {
             'c-button': Buttons
         },
@@ -341,7 +341,7 @@ storiesOf('Buttons', module)
     }));
 
 storiesOf('Links', module)
-    .add('default', () =>({
+    .add('default', () => ({
         components: {
             'c-link': Links
         },
@@ -356,7 +356,7 @@ storiesOf('Links', module)
                 </div>
             </div>`
     }))
-    .add('info', () =>({
+    .add('info', () => ({
         components: {
             'c-link': Links
         },
@@ -366,7 +366,7 @@ storiesOf('Links', module)
                 </div>
             </div>`
     }))
-    .add('success', () =>({
+    .add('success', () => ({
         components: {
             'c-link': Links
         },
@@ -376,7 +376,7 @@ storiesOf('Links', module)
                 </div>
             </div>`
     }))
-    .add('danger', () =>({
+    .add('danger', () => ({
         components: {
             'c-link': Links
         },
@@ -406,7 +406,7 @@ storiesOf('Checkbox', module)
         },
         data() {
             return {
-                value : true
+                value: true
             }
         },
         template: `
@@ -416,11 +416,11 @@ storiesOf('Checkbox', module)
         `
     }))
     .add('Checkbox Group', () => ({
-    components: {
-        'c-checkbox': Checkbox,
-        'c-checkbox-group': CheckboxGroup,
-    },
-    template: `
+        components: {
+            'c-checkbox': Checkbox,
+            'c-checkbox-group': CheckboxGroup,
+        },
+        template: `
         <div class="row m-0 p-3">
             <c-checkbox-group title="Group Title">
                 <c-checkbox id="test_check_1" label="This is the first checkbox" v-model="value" />
@@ -430,7 +430,7 @@ storiesOf('Checkbox', module)
             </c-checkbox-group>
         </div>
         `
-}));
+    }));
 
 storiesOf('Tooltips', module)
     .add('dark', () => ({
@@ -492,6 +492,218 @@ storiesOf('Tooltips', module)
         `
     }))
 
+storiesOf('Activity Chart', module)
+    .add('default', () => ({
+        components: {
+            'c-activity-chart': ActivityChart
+        },
+        data() {
+            return {
+                years: [
+                    {
+                        title: '2018',
+                        months:[
+                            {
+                                percent: 31,
+                                month: 'October',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 12,
+                                month: 'August',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 50,
+                                month: 'December',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 42,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 85,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 94,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 37,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 12,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 83,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 37,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 54,
+                                month: 'July',
+                                text: '3 Updates'
+                            }
+                        ],
+                    },
+                    {
+                        title: '2019',
+                        months:[
+                            {
+                                percent: 10,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 36,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 78,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 90,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 33,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 56,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 31,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 78,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 10,
+                                month: 'July',
+                                text: '3 Updates'
+                            }
+                        ],
+                    },
+                    {
+                        title: '2020',
+                        months:[
+                            {
+                                percent: 90,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 10,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 30,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 70,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 34,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 67,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 70,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 40,
+                                month: 'July',
+                                text: '3 Updates'
+                            }
+                        ],
+                    }
+                ],
+            };
+        },
+        template: `
+            <div class="col-6 py-4">
+                <c-activity-chart title="Activity Chart" :years="years" />
+            </div>
+        `
+    }))
 // storiesOf('Range Slider', module)
 //     .add('default', () => ({
 //         components: {
