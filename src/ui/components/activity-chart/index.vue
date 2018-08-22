@@ -1,52 +1,23 @@
 <template>
     <div>
-        <div class="activity-chart">
-            <c-heading-bar :name="title" :showArrows="false" :showBackground="false" />
-            <div class="activity-chart__head">
-                <div>
-                    Jan
-                </div>
-                <div>
-                    Fev
-                </div>
-                <div>
-                    Mar
-                </div>
-                <div>
-                    Apr
-                </div>
-                <div>
-                    May
-                </div>
-                <div>
-                    Jun
-                </div>
-                <div>
-                    Jul
-                </div>
-                <div>
-                    Aug
-                </div>
-                <div>
-                    Set
-                </div>
-                <div>
-                    Oct
-                </div>
-                <div>
-                    Nov
-                </div>
-                <div>
-                    Dec
+        <div class="activity-chart" :class="[ 'size-' + size ]">
+            <c-heading-bar :name="title" :showArrows="false" :showBackground="false" v-if="size != 'xs'" />
+            <h4 class="activity-chart-title" v-if="size == 'xs'">{{ title }}</h4>
+            <div class="activity-chart__head" :class="[ 'size-' + size ]">
+                <!--{{ head_months }}-->
+                <div v-for="(month, index) in head_months" :key="index">
+                    <span v-if="size != 'xs'">{{ month.short_name }}</span>
+                    <span v-else>{{ month.number }}</span>
                 </div>
             </div>
-            <div class="activity-chart__grid">
-                <div class="activity-chart__item" v-for="(year, index) in years" :key="index">
+            <div class="activity-chart__grid"  :class="[ 'size-' + size ]">
+                <div class="activity-chart__item" :class="[ 'size-' + size ]" v-for="(year, index) in years" :key="index">
                     <div class="year">{{ year.title }}</div>
                     <div class="year_row">
                         <div class="year_month" v-for="(month, index) in year.months" :key="index">
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" :style="{ width: + month.percent +'%'}" :aria-valuenow="month.percent" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar" role="progressbar" :style="{ width: + month.percent +'%'}" :aria-valuenow="month.percent" aria-valuemin="0" aria-valuemax="100" v-if="size == 'lg'"></div>
+                                <div class="progress-bar" role="progressbar" :style="[ month.percent >= 50 ? {'width' : '100%' } : {'width' : '0%'} ]" :aria-valuenow="month.percent" aria-valuemin="0" aria-valuemax="100" v-else></div>
                             </div>
                             <div class="tooltips-info">
                                 <strong>{{ month.month }} {{ year.title }}</strong>
@@ -73,6 +44,12 @@
             },
             years:{
                 required: true
+            },
+            size:{
+                default: 'lg'
+            },
+            head_months:{
+                type: Array
             }
         },
         data() {
@@ -90,6 +67,25 @@
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+        background: rgba(0, 0, 0, .1);
+        border: 1px solid rgba(255, 255, 255, .1);
+        padding: 0 10px 5px;
+        border-radius: 5px;
+        &.size-md{
+            width: 365px;
+        }
+        &.size-sm{
+            width: 315px;
+        }
+        &.size-xs{
+            width: 235px;
+            .activity-chart-title{
+                font-size: 14px;
+                font-weight: bold;
+                margin: 5px 0;
+                color: #fff;
+            }
+        }
     }
     .activity-chart__head{
         display: flex;
@@ -97,7 +93,7 @@
         flex-wrap: wrap;
         color: #fff;
         font-size: 14px;
-        padding: 0 5px 5px 45px;
+        padding: 0 5px 0px 45px;
         justify-content: space-between;
         order: 1;
         align-self: flex-start;
@@ -106,11 +102,23 @@
             text-align: center;
             text-transform: uppercase;
         }
+        &.size-md,
+        &.size-sm{
+            padding: 0 5px 10px 45px;
+            div{
+                -ms-transform: rotate(90deg); /* IE 9 */
+                -webkit-transform: rotate(90deg); /* Safari */
+                transform: rotate(90deg);
+            }
+        }
+        &.size-xs{
+            padding-bottom: 0;
+        }
     }
     .activity-chart__grid{
         display: flex;
         width: 100%;
-        padding: 5px;
+        padding: 5px 0;
         order: 3;
         flex-wrap: wrap;
         align-items: flex-start;
@@ -216,6 +224,45 @@
             .year_row{
                 border: 1px solid rgba(255, 255, 255, .1)!important;
                 border-radius: 5px;
+            }
+        }
+        &.size-md,
+        &.size-sm{
+            .year_month{
+                text-align: center;
+                .progress{
+                    width: 15px;
+                    margin: auto;
+                }
+            }
+        }
+        &.size-xs{
+            .year{
+                line-height: 20px;
+            }
+            .year_row{
+                height: 21px;
+            }
+            .year_month{
+                padding: 1px;
+                .progress{
+                    width: 11px;
+                    height: 11px;
+                    margin: auto;
+                }
+                .tooltips-info{
+                    top: -58px;
+                }
+            }
+            &:last-child{
+                .year_row{
+                    padding-bottom: 5px
+                }
+            }
+            &:first-child{
+                .year_row{
+                    padding-top: 5px
+                }
             }
         }
     }

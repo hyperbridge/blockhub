@@ -499,6 +499,68 @@ storiesOf('Activity Chart', module)
         },
         data() {
             return {
+                head_months: [
+                    {
+                        name: 'January',
+                        short_name: 'Jan',
+                        number: '1'
+                    },
+                    {
+                        name: 'February',
+                        short_name: 'Feb',
+                        number: '2'
+                    },
+                    {
+                        name: 'March',
+                        short_name: 'Mar',
+                        number: '3'
+                    },
+                    {
+                        name: 'April',
+                        short_name: 'Apr',
+                        number: '4'
+                    },
+                    {
+                        name: 'May',
+                        short_name: 'May',
+                        number: '5'
+                    },
+                    {
+                        name: 'June',
+                        short_name: 'Jun',
+                        number: '6'
+                    },
+                    {
+                        name: 'July',
+                        short_name: 'Jul',
+                        number: '7'
+                    },
+                    {
+                        name: 'August',
+                        short_name: 'Aug',
+                        number: '8'
+                    },
+                    {
+                        name: 'September',
+                        short_name: 'Set',
+                        number: '9'
+                    },
+                    {
+                        name: 'October',
+                        short_name: 'Oct',
+                        number: '10'
+                    },
+                    {
+                        name: 'November',
+                        short_name: 'Nov',
+                        number: '11'
+                    },
+                    {
+                        name: 'December',
+                        short_name: 'Dec',
+                        number: '12'
+                    }
+                ],
                 years: [
                     {
                         title: '2018',
@@ -700,7 +762,826 @@ storiesOf('Activity Chart', module)
         },
         template: `
             <div class="col-6 py-4">
-                <c-activity-chart title="Activity Chart" :years="years" />
+                <c-activity-chart title="Activity Chart" :years="years" :head_months="head_months" />
+            </div>
+        `
+    }))
+    .add('medium size', () => ({
+        components: {
+            'c-activity-chart': ActivityChart
+        },
+        data() {
+            return {
+                head_months: [
+                    {
+                        name: 'January',
+                        short_name: 'Jan',
+                        number: '1'
+                    },
+                    {
+                        name: 'February',
+                        short_name: 'Feb',
+                        number: '2'
+                    },
+                    {
+                        name: 'March',
+                        short_name: 'Mar',
+                        number: '3'
+                    },
+                    {
+                        name: 'April',
+                        short_name: 'Apr',
+                        number: '4'
+                    },
+                    {
+                        name: 'May',
+                        short_name: 'May',
+                        number: '5'
+                    },
+                    {
+                        name: 'June',
+                        short_name: 'Jun',
+                        number: '6'
+                    },
+                    {
+                        name: 'July',
+                        short_name: 'Jul',
+                        number: '7'
+                    },
+                    {
+                        name: 'August',
+                        short_name: 'Aug',
+                        number: '8'
+                    },
+                    {
+                        name: 'September',
+                        short_name: 'Set',
+                        number: '9'
+                    },
+                    {
+                        name: 'October',
+                        short_name: 'Oct',
+                        number: '10'
+                    },
+                    {
+                        name: 'November',
+                        short_name: 'Nov',
+                        number: '11'
+                    },
+                    {
+                        name: 'December',
+                        short_name: 'Dec',
+                        number: '12'
+                    }
+                ],
+                years: [
+                    {
+                        title: '2018',
+                        months:[
+                            {
+                                percent: 31,
+                                month: 'October',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 12,
+                                month: 'August',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 50,
+                                month: 'December',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 42,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 85,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 94,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 37,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 12,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 83,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 37,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 54,
+                                month: 'July',
+                                text: '3 Updates'
+                            }
+                        ],
+                    },
+                    {
+                        title: '2019',
+                        months:[
+                            {
+                                percent: 10,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 36,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 78,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 90,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 33,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 56,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 31,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 78,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 10,
+                                month: 'July',
+                                text: '3 Updates'
+                            }
+                        ],
+                    },
+                    {
+                        title: '2020',
+                        months:[
+                            {
+                                percent: 90,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 10,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 30,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 70,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 34,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 67,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 70,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 40,
+                                month: 'July',
+                                text: '3 Updates'
+                            }
+                        ],
+                    }
+                ],
+            };
+        },
+        template: `
+            <div class="col-6 py-4">
+                <c-activity-chart title="Activity Chart" :years="years" :head_months="head_months" size="md" />
+            </div>
+        `
+    }))
+    .add('small size', () => ({
+        components: {
+            'c-activity-chart': ActivityChart
+        },
+        data() {
+            return {
+                head_months: [
+                    {
+                        name: 'January',
+                        short_name: 'Jan',
+                        number: '1'
+                    },
+                    {
+                        name: 'February',
+                        short_name: 'Feb',
+                        number: '2'
+                    },
+                    {
+                        name: 'March',
+                        short_name: 'Mar',
+                        number: '3'
+                    },
+                    {
+                        name: 'April',
+                        short_name: 'Apr',
+                        number: '4'
+                    },
+                    {
+                        name: 'May',
+                        short_name: 'May',
+                        number: '5'
+                    },
+                    {
+                        name: 'June',
+                        short_name: 'Jun',
+                        number: '6'
+                    },
+                    {
+                        name: 'July',
+                        short_name: 'Jul',
+                        number: '7'
+                    },
+                    {
+                        name: 'August',
+                        short_name: 'Aug',
+                        number: '8'
+                    },
+                    {
+                        name: 'September',
+                        short_name: 'Set',
+                        number: '9'
+                    },
+                    {
+                        name: 'October',
+                        short_name: 'Oct',
+                        number: '10'
+                    },
+                    {
+                        name: 'November',
+                        short_name: 'Nov',
+                        number: '11'
+                    },
+                    {
+                        name: 'December',
+                        short_name: 'Dec',
+                        number: '12'
+                    }
+                ],
+                years: [
+                    {
+                        title: '2018',
+                        months:[
+                            {
+                                percent: 31,
+                                month: 'October',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 12,
+                                month: 'August',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 50,
+                                month: 'December',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 42,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 85,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 94,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 37,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 12,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 83,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 37,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 54,
+                                month: 'July',
+                                text: '3 Updates'
+                            }
+                        ],
+                    },
+                    {
+                        title: '2019',
+                        months:[
+                            {
+                                percent: 10,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 36,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 78,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 90,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 33,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 56,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 31,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 78,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 10,
+                                month: 'July',
+                                text: '3 Updates'
+                            }
+                        ],
+                    },
+                    {
+                        title: '2020',
+                        months:[
+                            {
+                                percent: 90,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 10,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 30,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 70,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 34,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 67,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 70,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 40,
+                                month: 'July',
+                                text: '3 Updates'
+                            }
+                        ],
+                    }
+                ],
+            };
+        },
+        template: `
+            <div class="col-6 py-4">
+                <c-activity-chart title="Activity Chart" :years="years" :head_months="head_months" size="sm" />
+            </div>
+        `
+    }))
+    .add('extra small size', () => ({
+        components: {
+            'c-activity-chart': ActivityChart
+        },
+        data() {
+            return {
+                head_months: [
+                    {
+                        name: 'January',
+                        short_name: 'Jan',
+                        number: '1'
+                    },
+                    {
+                        name: 'February',
+                        short_name: 'Feb',
+                        number: '2'
+                    },
+                    {
+                        name: 'March',
+                        short_name: 'Mar',
+                        number: '3'
+                    },
+                    {
+                        name: 'April',
+                        short_name: 'Apr',
+                        number: '4'
+                    },
+                    {
+                        name: 'May',
+                        short_name: 'May',
+                        number: '5'
+                    },
+                    {
+                        name: 'June',
+                        short_name: 'Jun',
+                        number: '6'
+                    },
+                    {
+                        name: 'July',
+                        short_name: 'Jul',
+                        number: '7'
+                    },
+                    {
+                        name: 'August',
+                        short_name: 'Aug',
+                        number: '8'
+                    },
+                    {
+                        name: 'September',
+                        short_name: 'Set',
+                        number: '9'
+                    },
+                    {
+                        name: 'October',
+                        short_name: 'Oct',
+                        number: '10'
+                    },
+                    {
+                        name: 'November',
+                        short_name: 'Nov',
+                        number: '11'
+                    },
+                    {
+                        name: 'December',
+                        short_name: 'Dec',
+                        number: '12'
+                    }
+                ],
+                years: [
+                    {
+                        title: '2018',
+                        months:[
+                            {
+                                percent: 31,
+                                month: 'October',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 12,
+                                month: 'August',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 50,
+                                month: 'December',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 42,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 85,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 94,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 37,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 12,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 83,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 37,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 54,
+                                month: 'July',
+                                text: '3 Updates'
+                            }
+                        ],
+                    },
+                    {
+                        title: '2019',
+                        months:[
+                            {
+                                percent: 10,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 36,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 78,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 90,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 33,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 56,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 31,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 66,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 78,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 10,
+                                month: 'July',
+                                text: '3 Updates'
+                            }
+                        ],
+                    },
+                    {
+                        title: '2020',
+                        months:[
+                            {
+                                percent: 90,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 10,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 30,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 70,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 100,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 34,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 67,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 70,
+                                month: 'July',
+                                text: '3 Updates'
+                            },
+                            {
+                                percent: 40,
+                                month: 'July',
+                                text: '3 Updates'
+                            }
+                        ],
+                    }
+                ],
+            };
+        },
+        template: `
+            <div class="col-6 py-4">
+                <c-activity-chart title="Activity Chart" :years="years" :head_months="head_months" size="xs" />
             </div>
         `
     }))
