@@ -26,6 +26,7 @@ import CheckboxGroup from '../ui/components/checkbox/checbox-group.vue'
 import RangeSlider from '../ui/components/range-slider/index.vue'
 import Tooltips from '../ui/components/tooltips/index.vue'
 import ActivityChart from '../ui/components/activity-chart/index.vue'
+import PopUps from '../ui/components/popups/index.vue'
 
 
 // storiesOf('Welcome', module).add('to Storybook', () => ({
@@ -1582,6 +1583,39 @@ storiesOf('Activity Chart', module)
         template: `
             <div class="col-6 py-4">
                 <c-activity-chart title="Activity Chart" :years="years" :head_months="head_months" size="xs" />
+            </div>
+        `
+    }))
+
+storiesOf('Popups', module)
+    .add('default', () => ({
+        components: {
+            'c-popup': PopUps,
+            'c-button': Buttons
+        },
+        data() {
+            return {
+                showModal: false
+            }
+        },
+        methods:{
+            showModalHandler: function () {
+                this.showModal = true;
+            }
+        },
+        template: `
+            <div class="col-12 p-5 text-white">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et metus tellus. Praesent ante libero, mattis eu commodo nec, congue luctus arcu. Ut ac mauris tempus, egestas erat in, congue elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                <c-button text="Show modal" @click="showModalHandler" variant="default" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                <c-popup :show="showModal" ref="modal" title="Error" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                        text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
+                    <template slot="footer-action">
+                        <div class="text-right w-100">
+                            <c-button text="Cancel" variant="danger" icon="fas fa-times" icon_position="left" c_class="mx-1" />
+                            <c-button text="Confirm" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                        </div>
+                    </template>
+                </c-popup>
             </div>
         `
     }))
