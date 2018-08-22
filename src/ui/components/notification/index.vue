@@ -5,9 +5,8 @@
             v-for="(msg, index) in notifications"
             :class="msg.type"
             :key="index">
-            <div class="title">
+            <div class="title" v-if="msg.title">
                 <h5 class="text-left">
-
                     <!--Icons by type-->
                     <i class="fas fa-info" v-if="msg.type === 'info'"></i>
                     <i class="fas fa-check-circle" v-else-if="msg.type === 'success'"></i>
@@ -18,7 +17,7 @@
 
                     {{ msg.title }}
 
-                    <div class="close" @click="actionOnClose">
+                    <div class="close" @click="actionOnClose" v-if="msg.showCloseBtn">
                         <i class="fas fa-times"></i>
                     </div>
 

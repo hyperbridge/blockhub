@@ -1,6 +1,6 @@
 <template>
     <div class="assets-import">
-        <div class="assets-import__contact">
+        <div class="assets-import__contact" v-if="step1">
             <h3>Import contacts</h3>
             <p class="mb-0">Now let's match the columns in your uploaded file to your MailChimp list.</p>
             <p><a href="#3">See an example of the import field match process</a></p>
@@ -14,7 +14,7 @@
             <div class="row mt-4">
                 <div class="col-12 col-md-4">
                     <div class="card">
-                        <div class="card-header p-3 text-center d-none">
+                        <div class="card-header p-3 text-center">
                             <h4>Email Address</h4>
                             <h6>dedeqit@gmail.com</h6>
                             <div class="action">
@@ -22,7 +22,7 @@
                                 <a href="#3" class="btn btn-sm btn-info mx-1">Skip</a>
                             </div>
                         </div>
-                        <div class="card-header invert p-3">
+                        <div class="card-header invert p-3 d-none">
                             <div class="form-group mb-2">
                                 <select class="form-control" id="exampleFormControlSelect1">
                                     <option>Chose email</option>
@@ -87,15 +87,20 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-3">
+                <div class="col-12 text-right">
+                    <button @click="uploadAssets" class="btn btn-sm btn-success">Upload</button>
+                </div>
+            </div>
         </div>
-        <div class="assets-import__loading">
+        <div class="assets-import__loading" v-if="step2">
             <c-loading-bar class="loading-bar" />
             <div class="text">
-                <h4>We'ar importing your list!</h4>
+                <h4>We'ar importing your list!( 3 sec delay )</h4>
                 <p>You can navigate away from this page - importing won't be affected!</p>
             </div>
         </div>
-        <div class="assets-import__results">
+        <div class="assets-import__results" v-if="step3">
             <h3>Import progress</h3>
             <div class="results-status">
                 <div>
@@ -184,7 +189,23 @@
         },
         data(){
             return {
-                skippedState: this.show_skipped
+                skippedState: this.show_skipped,
+                step1: true,
+                step2: false,
+                step3: false
+            }
+        },
+        methods:{
+            uploadAssets: function () {
+                this.step1 = false;
+                this.step2 = true;
+                this.showResults()
+            },
+            showResults: function () {
+                setInterval( function () {
+                    this.step2 = false;
+                    this.step3 = true;
+                }.bind(this), 3000);
             }
         }
     }
