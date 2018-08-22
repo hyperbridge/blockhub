@@ -1,34 +1,35 @@
 <template>
-    <div class="c-popup" v-show="show" @click.self.prevent="hidePopup">
-        <span class="c-popup__close" @click="hidePopup">
-            <img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjMycHgiIGhlaWdodD0iMzJweCI+CjxnPgoJPGc+CgkJPHBhdGggZD0iTTUwNS45NDMsNi4wNThjLTguMDc3LTguMDc3LTIxLjE3Mi04LjA3Ny0yOS4yNDksMEw2LjA1OCw0NzYuNjkzYy04LjA3Nyw4LjA3Ny04LjA3NywyMS4xNzIsMCwyOS4yNDkgICAgQzEwLjA5Niw1MDkuOTgyLDE1LjM5LDUxMiwyMC42ODMsNTEyYzUuMjkzLDAsMTAuNTg2LTIuMDE5LDE0LjYyNS02LjA1OUw1MDUuOTQzLDM1LjMwNiAgICBDNTE0LjAxOSwyNy4yMyw1MTQuMDE5LDE0LjEzNSw1MDUuOTQzLDYuMDU4eiIgZmlsbD0iI0ZGRkZGRiIvPgoJPC9nPgo8L2c+CjxnPgoJPGc+CgkJPHBhdGggZD0iTTUwNS45NDIsNDc2LjY5NEwzNS4zMDYsNi4wNTljLTguMDc2LTguMDc3LTIxLjE3Mi04LjA3Ny0yOS4yNDgsMGMtOC4wNzcsOC4wNzYtOC4wNzcsMjEuMTcxLDAsMjkuMjQ4bDQ3MC42MzYsNDcwLjYzNiAgICBjNC4wMzgsNC4wMzksOS4zMzIsNi4wNTgsMTQuNjI1LDYuMDU4YzUuMjkzLDAsMTAuNTg3LTIuMDE5LDE0LjYyNC02LjA1N0M1MTQuMDE4LDQ5Ny44NjYsNTE0LjAxOCw0ODQuNzcxLDUwNS45NDIsNDc2LjY5NHoiIGZpbGw9IiNGRkZGRkYiLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />
-        </span>
-        <transition name="fade">
-            <div class="c-popup__item">
-            <h3>{{ title }}</h3>
-            <div class="c-popup__content">
-                <div class="c-popup__content-header" :class="[ 'c-popup-type-' + type ]">
-                    <div class="popup-icon">
-                        <i class="fas fa-exclamation-triangle" v-if=" type == ['warning', 'danger'] "></i>
-                        <i class="fas fa-check" v-if=" type == 'success' "></i>
-                        <i class="fas fa-info-circle" v-else></i>
+    <transition name="fade">
+        <div class="c-popup" v-if="mutableActived" @click.self.prevent="hidePopup">
+            <span class="c-popup__close" @click="hidePopup">
+                <img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjMycHgiIGhlaWdodD0iMzJweCI+CjxnPgoJPGc+CgkJPHBhdGggZD0iTTUwNS45NDMsNi4wNThjLTguMDc3LTguMDc3LTIxLjE3Mi04LjA3Ny0yOS4yNDksMEw2LjA1OCw0NzYuNjkzYy04LjA3Nyw4LjA3Ny04LjA3NywyMS4xNzIsMCwyOS4yNDkgICAgQzEwLjA5Niw1MDkuOTgyLDE1LjM5LDUxMiwyMC42ODMsNTEyYzUuMjkzLDAsMTAuNTg2LTIuMDE5LDE0LjYyNS02LjA1OUw1MDUuOTQzLDM1LjMwNiAgICBDNTE0LjAxOSwyNy4yMyw1MTQuMDE5LDE0LjEzNSw1MDUuOTQzLDYuMDU4eiIgZmlsbD0iI0ZGRkZGRiIvPgoJPC9nPgo8L2c+CjxnPgoJPGc+CgkJPHBhdGggZD0iTTUwNS45NDIsNDc2LjY5NEwzNS4zMDYsNi4wNTljLTguMDc2LTguMDc3LTIxLjE3Mi04LjA3Ny0yOS4yNDgsMGMtOC4wNzcsOC4wNzYtOC4wNzcsMjEuMTcxLDAsMjkuMjQ4bDQ3MC42MzYsNDcwLjYzNiAgICBjNC4wMzgsNC4wMzksOS4zMzIsNi4wNTgsMTQuNjI1LDYuMDU4YzUuMjkzLDAsMTAuNTg3LTIuMDE5LDE0LjYyNC02LjA1N0M1MTQuMDE4LDQ5Ny44NjYsNTE0LjAxOCw0ODQuNzcxLDUwNS45NDIsNDc2LjY5NHoiIGZpbGw9IiNGRkZGRkYiLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />
+            </span>
+                <div class="c-popup__item">
+                <h3 v-if="title">{{ title }}</h3>
+                <div class="c-popup__content">
+                    <div class="c-popup__content-header" :class="[ 'c-popup-type-' + type ]" v-if="sub_title">
+                        <div class="popup-icon">
+                            <i class="fas fa-exclamation-triangle" v-if=" type == ['warning', 'danger'] "></i>
+                            <i class="fas fa-check" v-if=" type == 'success' "></i>
+                            <i class="fas fa-info-circle" v-else></i>
+                        </div>
+                        <div class="sub_title">
+                            {{ sub_title }}
+                        </div>
                     </div>
-                    <div class="sub_title">
-                        {{ sub_title }}
+                    <div class="c-popup__content-body" v-if="text">
+                        <p class="m-0" v-if="text">
+                            {{ text }}
+                        </p>
+                        <slot name="body"></slot>
                     </div>
-                </div>
-                <div class="c-popup__content-body">
-                    <p class="m-0">
-                        {{ text }}
-                    </p>
-                </div>
-                <div class="c-popup__content-footer">
-                    <slot name="footer-action"></slot>
+                    <div class="c-popup__content-footer" v-if="this.$slots.footer">
+                        <slot name="footer"></slot>
+                    </div>
                 </div>
             </div>
         </div>
-        </transition>
-    </div>
+    </transition>
 </template>
 
 <script>
@@ -46,16 +47,30 @@
             text:{
                 type: String
             },
-            show:{
-                default: false,
+            activated:{
                 type: Boolean
             }
         },
         data() {
+            return{
+                mutableActived: false,
+            }
         },
         methods: {
             hidePopup: function () {
-                // this.show = false;
+                this.mutableActived = !this.mutableActived;
+                this.$emit('close')
+            }
+        },
+        watch: {
+            activated(oldVal, newVal) {
+                if (oldVal !== newVal) {
+                    this.mutableActived = !this.mutableActived;
+                    this.$el.tabIndex = 1;
+                    this.$nextTick(function() {
+                        this.$el.focus();
+                    });
+                }
             }
         }
     }
@@ -122,6 +137,7 @@
         border-radius: 5px;
         &.c-popup-type-warning{
             background: #FADC72;
+            color: #3D3E5D;
         }
         &.c-popup-type-danger{
             background: #F75D5D;
@@ -138,8 +154,6 @@
         .popup-icon{
             width: 45px;
             font-size: 40px;
-            color: #fff;
-            opacity: .9;
         }
         .sub_title{
             width: calc( 100% - 55px );
@@ -160,5 +174,11 @@
         margin-top: 15px;
         display: flex;
         width: 100%;
+    }
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .3s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+        opacity: 0;
     }
 </style>

@@ -48,7 +48,7 @@
             background: #fff;
             color: #3D3E5D;
             &:hover{
-                background: #3D3E5D;
+                background: #363752;
                 color: #A2A3BE;
             }
         }
@@ -56,7 +56,7 @@
             background: #5D75F7;
             color: #fff;
             &:hover{
-                background: #5D75F7;
+                background: #586ee9;
                 color: #30304B;
             }
         }
@@ -64,7 +64,7 @@
             background: #5EA72B;
             color: #fff;
             &:hover{
-                background: #5EA72B;
+                background: #559727;
                 color: #30304B;
             }
         }
@@ -72,8 +72,16 @@
             background: #F75D5D;
             color: #fff;
             &:hover{
-                background: #F75D5D;
+                background: #de5454;
                 color: #30304B;
+            }
+        }
+        &.c-warning{
+            background: #FADC72;
+            color: #3D3E5D;
+            &:hover{
+                background: #efd26d;
+                color: #32334c;
             }
         }
     }

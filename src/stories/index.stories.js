@@ -1595,21 +1595,21 @@ storiesOf('Popups', module)
         },
         data() {
             return {
-                showModal: false
+                modalActive: false
             }
         },
         methods:{
             showModalHandler: function () {
-                this.showModal = true;
+                this.modalActive = !this.modalActive;
             }
         },
         template: `
             <div class="col-12 p-5 text-white">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et metus tellus. Praesent ante libero, mattis eu commodo nec, congue luctus arcu. Ut ac mauris tempus, egestas erat in, congue elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                <h3 class="text-white">This is dafault popup</h3>
                 <c-button text="Show modal" @click="showModalHandler" variant="default" icon="fas fa-check" icon_position="left" c_class="ml-1" />
-                <c-popup :show="showModal" ref="modal" title="Error" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                <c-popup :activated="modalActive" ref="modal" title="Error" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
                         text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
-                    <template slot="footer-action">
+                    <template slot="footer">
                         <div class="text-right w-100">
                             <c-button text="Cancel" variant="danger" icon="fas fa-times" icon_position="left" c_class="mx-1" />
                             <c-button text="Confirm" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
@@ -1619,6 +1619,138 @@ storiesOf('Popups', module)
             </div>
         `
     }))
+    .add('warning', () => ({
+        components: {
+            'c-popup': PopUps,
+            'c-button': Buttons
+        },
+        data() {
+            return {
+                modalActive: false
+            }
+        },
+        methods:{
+            showModalHandler() {
+                this.modalActive = !this.modalActive;
+            },
+            close(){
+                console.log('PopUp was closed!!!!!!!!!')
+            }
+        },
+        template: `
+            <div class="col-12 p-5 text-white">
+                <h3 class="text-white">This is warning popup</h3>
+                <c-button text="Show modal" @click="showModalHandler" variant="warning" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                <c-popup :activated="modalActive" @close="close" ref="modal" title="Warning" type="warning" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                        text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
+                    <template slot="footer">
+                        <div class="text-right w-100">
+                            <c-button text="Cancel" variant="danger" icon="fas fa-times" icon_position="left" c_class="mx-1" />
+                            <c-button text="Confirm" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                        </div>
+                    </template>
+                </c-popup>
+            </div>
+        `
+    }))
+    .add('danger', () => ({
+        components: {
+            'c-popup': PopUps,
+            'c-button': Buttons
+        },
+        data() {
+            return {
+                modalActive: false
+            }
+        },
+        methods:{
+            showModalHandler: function () {
+                this.modalActive = !this.modalActive;
+            }
+        },
+        template: `
+            <div class="col-12 p-5 text-white">
+                <h3 class="text-white">This is danger popup</h3>
+                <c-button text="Show modal" @click="showModalHandler" variant="danger" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                <c-popup :activated="modalActive" ref="modal" title="Danger" type="danger" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                        text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
+                    <template slot="footer">
+                        <div class="text-right w-100">
+                            <c-button text="Cancel" variant="danger" icon="fas fa-times" icon_position="left" c_class="mx-1" />
+                            <c-button text="Confirm" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                        </div>
+                    </template>
+                </c-popup>
+            </div>
+        `
+    }))
+    .add('info', () => ({
+        components: {
+            'c-popup': PopUps,
+            'c-button': Buttons
+        },
+        data() {
+            return {
+                modalActive: false
+            }
+        },
+        methods:{
+            showModalHandler: function () {
+                this.modalActive = !this.modalActive;
+            }
+        },
+        template: `
+            <div class="col-12 p-5 text-white">
+                <h3 class="text-white">This is info popup</h3>
+                <c-button text="Show modal" @click="showModalHandler" variant="info" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                <c-popup :activated="modalActive" ref="modal" title="Info" type="info" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                        text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
+                    <template slot="footer">
+                        <div class="text-right w-100">
+                            <c-button text="Cancel" variant="danger" icon="fas fa-times" icon_position="left" c_class="mx-1" />
+                            <c-button text="Confirm" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                        </div>
+                    </template>
+                </c-popup>
+            </div>
+        `
+    }))
+    .add('success', () => ({
+        components: {
+            'c-popup': PopUps,
+            'c-button': Buttons
+        },
+        data() {
+            return {
+                modalActive: false
+            }
+        },
+        methods:{
+            showModalHandler: function () {
+                this.modalActive = !this.modalActive;
+            }
+        },
+        template: `
+            <div class="col-12 p-5 text-white">
+                <h3 class="text-white">This is success popup</h3>
+                <c-button text="Show modal" @click="showModalHandler" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                <c-popup :activated="modalActive" ref="modal" type="success" title="Success" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                        text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
+                    <template slot="footer">
+                        <div class="text-right w-100">
+                            <c-button text="Cancel" variant="danger" icon="fas fa-times" icon_position="left" c_class="mx-1" />
+                            <c-button text="Confirm" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                        </div>
+                    </template>
+                </c-popup>
+            </div>
+        `
+    }))
+
+
+
+
+
 // storiesOf('Range Slider', module)
 //     .add('default', () => ({
 //         components: {
