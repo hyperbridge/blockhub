@@ -1,8 +1,9 @@
 /* eslint-disable react/react-in-jsx-scope, react/no-this-in-sfc */
 
-import {storiesOf} from '@storybook/vue'
-import {action} from '@storybook/addon-actions'
-import {linkTo} from '@storybook/addon-links'
+import { storiesOf } from '@storybook/vue'
+import { action } from '@storybook/addon-actions'
+import { linkTo } from '@storybook/addon-links'
+import { withKnobs, text, boolean, number, object } from '@storybook/addon-knobs/vue'
 
 import '../css/styles.scss'
 
@@ -182,13 +183,16 @@ storiesOf('Tabs', module)
             </div>`
     }))
 
+
+
 storiesOf('Milestones Line', module)
+    .addDecorator(withKnobs)
     .add('default', () => ({
         components: {
             'c-milestones-line': MilestonesLine
         },
         data() {
-            return {
+            return object('Data', {
                 milestones: [
                     {
                         "status": "done",
@@ -214,8 +218,8 @@ storiesOf('Milestones Line', module)
                         "status": "awaiting",
                         "text": "m6"
                     }
-                ],
-            }
+                ]
+            })
         },
         template: `<div class="row m-0">
                 <div class="col-8 p-4">
