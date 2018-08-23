@@ -9,8 +9,8 @@
 </template>
 
 <script>
-    // import $ from '../../../../static/js/vendors/jquery/jquery.min';
-    // import '../../../../static/js/vendors/ionrangeslider/ion.rangeSlider.min';
+    import $ from '../../../../static/js/vendors/jquery/jquery.min';
+    import '../../../../static/js/vendors/ionrangeslider/ion.rangeSlider.min';
 
     export default {
         mounted: function () {

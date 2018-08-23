@@ -1751,15 +1751,15 @@ storiesOf('Popups', module)
 
 
 
-// storiesOf('Range Slider', module)
-//     .add('default', () => ({
-//         components: {
-//             'c-range-slider': RangeSlider
-//         },
-//         template: `
-//         <div class="row m-0 p-3">
-//             <c-range-slider />
-//         </div>
-//         `
-//     }));
-/* eslint-enable react/react-in-jsx-scope */
+storiesOf('Range Slider', module)
+    .add('default', () => ({
+        components: {
+            'c-range-slider': RangeSlider
+        },
+        template: `
+         <div class="row m-0 p-3">
+             <c-range-slider />
+         </div>
+        `
+    }));
+// /* eslint-enable react/react-in-jsx-scope */
