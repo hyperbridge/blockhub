@@ -196,11 +196,11 @@ storiesOf('Milestones Line', module)
             return object('Data', {
                 milestones: [
                     {
-                        "status": "done",
+                        "status": "awaiting",
                         "text": "m1"
                     },
                     {
-                        "status": "in_progress",
+                        "status": "awaiting",
                         "text": "m2"
                     },
                     {
@@ -217,6 +217,86 @@ storiesOf('Milestones Line', module)
                     },
                     {
                         "status": "awaiting",
+                        "text": "m6"
+                    }
+                ]
+            })
+        },
+        template: `<div class="row m-0">
+                <div class="col-8 p-4">
+                    <c-milestones-line :milestones="milestones" />
+                </div>
+            </div>`
+    }))
+    .add('in progress', () => ({
+        components: {
+            'c-milestones-line': MilestonesLine
+        },
+        data() {
+            return object('Data', {
+                milestones: [
+                    {
+                        "status": "done",
+                        "text": "m1"
+                    },
+                    {
+                        "status": "done",
+                        "text": "m2"
+                    },
+                    {
+                        "status": "done",
+                        "text": "m3"
+                    },
+                    {
+                        "status": "in_progress",
+                        "text": "m4"
+                    },
+                    {
+                        "status": "awaiting",
+                        "text": "m5"
+                    },
+                    {
+                        "status": "awaiting",
+                        "text": "m6"
+                    }
+                ]
+            })
+        },
+        template: `<div class="row m-0">
+                <div class="col-8 p-4">
+                    <c-milestones-line :milestones="milestones" />
+                </div>
+            </div>`
+    }))
+    .add('complete', () => ({
+        components: {
+            'c-milestones-line': MilestonesLine
+        },
+        data() {
+            return object('Data', {
+                milestones: [
+                    {
+                        "status": "done",
+                        "text": "m1"
+                    },
+                    {
+                        "status": "done",
+                        "text": "m2"
+                    },
+                    {
+                        "status": "done",
+                        "text": "m3"
+                    },
+                    {
+                        "status": "done",
+                        "text": "m4"
+                    },
+                    {
+                        "status": "done",
+                        "text": "m5"
+                    },
+                    {
+                        "status": "done",
                         "text": "m6"
                     }
                 ]
