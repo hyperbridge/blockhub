@@ -28,6 +28,7 @@ import RangeSlider from '../ui/components/range-slider/index.vue'
 import Tooltips from '../ui/components/tooltips/index.vue'
 import ActivityChart from '../ui/components/activity-chart/index.vue'
 import PopUps from '../ui/components/popups/index.vue'
+import AssetsGrid from '../ui/components/assets-grid/index.vue'
 
 
 // storiesOf('Welcome', module).add('to Storybook', () => ({
@@ -199,11 +200,11 @@ storiesOf('Milestones Line', module)
                         "text": "m1"
                     },
                     {
-                        "status": "done",
+                        "status": "in_progress",
                         "text": "m2"
                     },
                     {
-                        "status": "in_progress",
+                        "status": "awaiting",
                         "text": "m3"
                     },
                     {
@@ -1751,10 +1752,6 @@ storiesOf('Popups', module)
         `
     }))
 
-
-
-
-
 storiesOf('Range Slider', module)
     .add('default', () => ({
         components: {
@@ -1766,4 +1763,40 @@ storiesOf('Range Slider', module)
          </div>
         `
     }));
+
+storiesOf('Assets Grid', module)
+    .addDecorator(withKnobs)
+    .add('default', () => ({
+        components: {
+            'c-assets-grid': AssetsGrid
+        },
+        data() {
+            return object('Data', {
+                assets_list: [
+                    {
+                        name: 'some item name',
+                        price: '1.99',
+                        count: '240.000',
+                        main_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
+                        sub_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
+                    },
+                    {
+                        name: 'some another item name',
+                        price: '99.99',
+                        count: '824.000',
+                        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+                        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+                    }
+                ]
+            })
+        },
+        template: `
+         <div class="row m-0 p-3">
+             <c-assets-grid :list="assets_list" />
+         </div>
+        `
+    }));
+
+
+
 // /* eslint-enable react/react-in-jsx-scope */

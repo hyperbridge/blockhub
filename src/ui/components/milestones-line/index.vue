@@ -6,8 +6,11 @@
                  class="stages-line__stage">
                 <i class="fas fa-check" v-if="milestone.status === 'done'"></i>
                 <i class="fas fa-clock" v-if="milestone.status === 'in_progress'"></i>
-                <span class="stage_line"></span>
-                <span class="name">{{ milestone.text }}</span>
+                <div class="stage_progress">
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="name">{{ milestone.text }}</div>
             </div>
         </div>
     </div>
@@ -17,7 +20,13 @@
     export default {
         props: [
             'milestones'
-        ]
+        ],
+        mounted(){
+            let finished_el = document.getElementsByClassName('done'),
+                last_el = finished_el[finished_el.length - 1];
+            last_el.className += " last-done-el";
+            console.log(last_el);
+        }
     }
 </script>
 
@@ -33,17 +42,32 @@
     .stages-line__stage {
         width: 50%;
         text-align: center;
-        span {
+        div {
             display: inline-block;
             width: 100%;
             position: relative;
             text-transform: uppercase;
             font-weight: bold;
-            overflow: hidden;
-            &.stage_line {
+            /*overflow: hidden;*/
+            &.stage_progress {
                 background: #3D691F;
                 height: 15px;
                 float: left;
+                position: relative;
+                overflow: hidden;
+                span{
+                    display: inline-block;
+                    width: 50%;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    &:nth-child(1){
+                        left: 0;
+                    }
+                    &:nth-child(2){
+                        right: 0;
+                    }
+                }
             }
             &.name {
                 padding-top: 15px;
@@ -67,45 +91,71 @@
             width: 100%;
         }
         &:first-child {
-            .stage_line {
+            .stage_progress {
                 border-radius: 5px 0 0 5px;
                 width: 65%;
                 float: right;
             }
             &.in_progress {
-                .stage_line {
+                .stage_progress {
                     &:after {
                         left: 25%;
                     }
                 }
             }
+            &.last-done-el{
+                 .stage_progress{
+                     span{
+                         &:last-child{
+                             width: 75%;
+                         }
+                     }
+                 }
+             }
         }
         &:last-child {
-            .stage_line {
+            .stage_progress {
                 border-radius: 0 5px 5px 0;
                 width: 65%;
                 float: left;
             }
             &.in_progress {
-                .stage_line {
+                .stage_progress {
                     &:after {
                         left: 75%;
                     }
                 }
             }
+            &.done{
+                .stage_progress{
+                    span{
+                        background: #3D691F!important;
+                    }
+                }
+            }
         }
         &.done {
-            span {
+            .stage_progress {
                 &:before {
                     background: #3D691F;
                 }
             }
             i {
-                color: #3D691F;
+                color: #5EA72B;
+            }
+            &.last-done-el{
+                .stage_progress{
+                    span{
+                        &:last-child{
+                            background: #5EA72B;
+                        }
+                    }
+                }
             }
         }
         &.in_progress {
-            .stage_line {
+            .stage_progress {
+                background: #5EA72B;
                 &:after {
                     position: absolute;
                     background: #5EA72B;
@@ -121,7 +171,7 @@
             }
         }
         &.awaiting {
-            .stage_line {
+            .stage_progress {
                 background: #5EA72B;
             }
         }
