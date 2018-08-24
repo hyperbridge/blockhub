@@ -5,7 +5,7 @@
                 <a :href="`/#/product/${game.id}`"><img class="card-img-top" :src="game.images.medium_tile" /></a>
                 <h4><a :href="`/#/product/${game.id}`">{{ game.name }}</a></h4>
                 <p class="card-text" hidden>{{ game.short_description }} </p>
-                <c-tags :tags="game.author_tags" />
+                <c-tags :tags="game.author_tags.slice(0,3)" />
             </div>
         </div>
     </div>

@@ -31,9 +31,16 @@
                     </div>
 
                     <c-game-card
-                        v-for="(game, index) in new_products"
+                        v-for="(game, index) in new_products.slice(0,1)"
                         :key="index"
                         :game="game"
+                    />
+                    <c-game-card-dynamic
+                        v-for="(game, index) in demo_products"
+                        :key="index"
+                        :game="game"
+                        :index="index"
+                        @hover="game.hover=$event"
                     />
                 </div>
 
@@ -78,7 +85,52 @@ export default {
         'c-layout': () => import('@/ui/layouts/default'),
         'c-tags': () => import('@/ui/components/product-tags'),
         'c-heading-bar': () => import('@/ui/components/heading-bar'),
-        'c-game-card': () => import('@/ui/components/store/game-card')
+        'c-game-card': () => import('@/ui/components/store/game-card'),
+        'c-game-card-dynamic': () => import('@/ui/components/store/game-card-dynamic')
+    },
+    data() {
+        return {
+            demo_products: [
+                {
+                    id: "8",
+                    name: "Gothic® 3",
+                    content: "<strong>A nameless hero becomes a legend!</strong><br><br>\t\t\t\t\tMyrtana, a world in upheaval: overrun by orcs from the dark lands in the north, King Rhobar is defending Vengard, the former stronghold of the humans, with his last troop of followers. Chaos reigns without: rebels are offering resistance, and the Hashishin of the south are openly collaborating with the orcs.<br><br>\t\t\t\t\tRumours that the nameless hero of Khorinis is on his way to the mainland spawn both hope and worry. Whose side will he take? Who will feel his wrath, who enjoy his favor? Only one thing is sure: his deeds are going to change Myrtana forever...<br><br>\t\t\t\t\tLiberation or annihilitaion &#x2013; the fate of the world of Gothic lies in your hands! Create your own individual gaming experience through different solution paths.<br><br>\t\t\t\t\tDynamic, action-packed combat system: choose between Fast Attacks, deadly whirlwind close combat, or shooting from a distance.<br>\t\t\t\t\tImmerse yourself in the most colorful and authentic fantasy world of all time &#x2013; Myrtana awaits you!<br><br>\t\t\t\t\t<ul><li>Specially designed easy combat system<br>\t\t\t\t\t</li><li>Clear main goals&#x2014;story driven yet dictated by player&#x2019;s choice<br>\t\t\t\t\t</li><li>Huge free&#x2013;roaming world&#x2014;virtually no boundaries<br>\t\t\t\t\t</li><li>Advanced human behavior AI for hundreds of individual characters with full audio dialogues<br>\t\t\t\t\t</li><li>Countless side&#x2013;quests for the player to choose from<br>\t\t\t\t\t</li><li>Over 50 different monsters and animals and dozens of human enemies<br>\t\t\t\t\t</li><li>Over 50 different powerful spells and over a hundred different weapons<br>\t\t\t\t\t</li><li>Unique class&#x2013;free character development</li></ul>",
+                    images: {
+                        header: "/static/img/products/gothic-3/gothic-3-01.jpg",
+                        medium_tile: "/static/img/products/gothic-3/gothic-3-02.jpg",
+                        main: "/static/img/products/gothic-3/gothic-3-03.jpg",
+                        preview: [
+                            "/static/img/products/gothic-3/gothic-3-02.jpg",
+                            "/static/img/products/gothic-3/gothic-3-05.jpg",
+                            "/static/img/products/gothic-3/gothic-3-06.jpg"
+                        ]
+                    },
+                    author: "Piranha Bytes",
+                    videos: ["/static/videos/products/gothic-3/gothic-3-01.mp4"],
+                    author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"],
+                    hover: false
+                },
+                {
+                    id: "9",
+                    name: "Gothic® 2",
+                    content: "<strong>A nameless hero becomes a legend!</strong><br><br>\t\t\t\t\tMyrtana, a world in upheaval: overrun by orcs from the dark lands in the north, King Rhobar is defending Vengard, the former stronghold of the humans, with his last troop of followers. Chaos reigns without: rebels are offering resistance, and the Hashishin of the south are openly collaborating with the orcs.<br><br>\t\t\t\t\tRumours that the nameless hero of Khorinis is on his way to the mainland spawn both hope and worry. Whose side will he take? Who will feel his wrath, who enjoy his favor? Only one thing is sure: his deeds are going to change Myrtana forever...<br><br>\t\t\t\t\tLiberation or annihilitaion &#x2013; the fate of the world of Gothic lies in your hands! Create your own individual gaming experience through different solution paths.<br><br>\t\t\t\t\tDynamic, action-packed combat system: choose between Fast Attacks, deadly whirlwind close combat, or shooting from a distance.<br>\t\t\t\t\tImmerse yourself in the most colorful and authentic fantasy world of all time &#x2013; Myrtana awaits you!<br><br>\t\t\t\t\t<ul><li>Specially designed easy combat system<br>\t\t\t\t\t</li><li>Clear main goals&#x2014;story driven yet dictated by player&#x2019;s choice<br>\t\t\t\t\t</li><li>Huge free&#x2013;roaming world&#x2014;virtually no boundaries<br>\t\t\t\t\t</li><li>Advanced human behavior AI for hundreds of individual characters with full audio dialogues<br>\t\t\t\t\t</li><li>Countless side&#x2013;quests for the player to choose from<br>\t\t\t\t\t</li><li>Over 50 different monsters and animals and dozens of human enemies<br>\t\t\t\t\t</li><li>Over 50 different powerful spells and over a hundred different weapons<br>\t\t\t\t\t</li><li>Unique class&#x2013;free character development</li></ul>",
+                    images: {
+                        header: "/static/img/products/gothic-3/gothic-3-01.jpg",
+                        medium_tile: "/static/img/products/gothic-3/gothic-3-04.jpg",
+                        main: "/static/img/products/gothic-3/gothic-3-03.jpg",
+                        preview: [
+                            "/static/img/products/gothic-3/gothic-3-02.jpg",
+                            "/static/img/products/gothic-3/gothic-3-05.jpg",
+                            "/static/img/products/gothic-3/gothic-3-06.jpg"
+                        ]
+                    },
+                    author: "Piranha Bytes",
+                    videos: ["/static/videos/products/gothic-3/gothic-3-01.mp4"],
+                    author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"],
+                    hover: false
+                }
+            ]
+        }
     },
     computed: {
         projects() {
@@ -100,6 +152,9 @@ export default {
             updateLandingImage.bind(this)()
 
             return this.$store.state.marketplace.frontpage_product
+        },
+        dynamic_preview_product() {
+            return this.$store.state.marketplace.products[8];
         }
     },
     methods: {
