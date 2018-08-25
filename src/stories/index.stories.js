@@ -1884,4 +1884,87 @@ storiesOf('Switch', module)
         `
     }));
 
+
+
+import AssetsList from '../ui/components/assets-list-item/featured-list.vue'
+import AssetsListDetail from '../ui/components/assets-list-item/index.vue'
+storiesOf('Assets List', module)
+    .addDecorator(withKnobs)
+    .add('type 1', () => ({
+        components: {
+            'c-asset-list': AssetsList
+        },
+        data() {
+            return object('Data', {
+                items: [
+                    {
+                        img: 'https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de',
+                        title: 'Magic Plate Armor',
+                        sub_title: 'Tibia MMORPG'
+                    },
+                    {
+                        img: 'https://vignette.wikia.nocookie.net/angrybirds-fiction/images/8/8b/Toons_assets_chuck_01.png/revision/latest?cb=20150120103056&path-prefix=ru',
+                        title: 'Magic Chuck',
+                        sub_title: 'Angry Birds'
+                    }
+                ]
+            })
+        },
+        template: `
+         <div class="row m-0 p-3">
+             <c-asset-list :items="items" itemInRow="5" />
+         </div>
+        `
+    }))
+    .add('type 2', () => ({
+        components: {
+            'c-asset-list': AssetsListDetail
+        },
+        data() {
+            return object('Data', {
+                items: [
+                    {
+                        img: 'https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de',
+                        title: 'Magic Plate Armor',
+                        price: '4.99',
+                        count: '350.000'
+                    },
+                    {
+                        img: 'https://vignette.wikia.nocookie.net/angrybirds-fiction/images/8/8b/Toons_assets_chuck_01.png/revision/latest?cb=20150120103056&path-prefix=ru',
+                        title: 'Magic Chuck',
+                        price: '19.99',
+                        count: '50.000'
+                    }
+                ]
+            })
+        },
+        template: `
+         <div class="row m-0 p-3">
+             <c-asset-list :items="items" itemInRow="4" />
+         </div>
+        `
+    }))
+
+
+import Block from '../ui/components/block-1/index.vue'
+storiesOf('Block', module)
+    .add('default', () => ({
+        components: {
+            'c-block': Block
+        },
+        template: `
+         <div class="row m-0 p-3">
+             <c-block title="This is block title" bClass="col-8">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Suspendisse vel arcu sit amet erat vestibulum volutpat. 
+                Ut volutpat enim vel augue luctus luctus</p>
+                <p>Curabitur et molestie eros. Duis sodales ante velit, 
+                ut fringilla turpis dictum sit amet. Praesent quis lacus 
+                ac tellus vehicula commodo sit amet sit amet ex.</p>
+            </c-block>
+         </div>
+        `
+    }))
+
+
 // /* eslint-enable react/react-in-jsx-scope */

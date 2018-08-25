@@ -48,10 +48,12 @@
         background: rgba(0, 0, 0, .33);
         padding: 10px;
         width: 100%;
+        height: 100%;
         box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
         display: flex;
         justify-content: space-between;
         align-items: center;
+        color: #fff;
         .thumb {
             display: inline-block;
             float: left;
@@ -65,6 +67,9 @@
             display: inline-block;
             width: 70%;
             float: right;
+            h5{
+                color: #fff;
+            }
             span {
                 i {
                     margin-right: 5px;
