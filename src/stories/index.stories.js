@@ -1,9 +1,9 @@
 /* eslint-disable react/react-in-jsx-scope, react/no-this-in-sfc */
 
-import { storiesOf } from '@storybook/vue'
-import { action } from '@storybook/addon-actions'
-import { linkTo } from '@storybook/addon-links'
-import { withKnobs, text, boolean, number, object } from '@storybook/addon-knobs/vue'
+import {storiesOf} from '@storybook/vue'
+import {action} from '@storybook/addon-actions'
+import {linkTo} from '@storybook/addon-links'
+import {withKnobs, text, boolean, number, object} from '@storybook/addon-knobs/vue'
 
 import '../css/styles.scss'
 
@@ -29,6 +29,8 @@ import Tooltips from '../ui/components/tooltips/index.vue'
 import ActivityChart from '../ui/components/activity-chart/index.vue'
 import PopUps from '../ui/components/popups/index.vue'
 import AssetsGrid from '../ui/components/assets-grid/index.vue'
+import AssetsPopup from '../ui/components/asset-overview-popup/index.vue'
+import Switch from '../ui/components/switch/index.vue'
 
 
 // storiesOf('Welcome', module).add('to Storybook', () => ({
@@ -183,7 +185,6 @@ storiesOf('Tabs', module)
             </div>
             </div>`
     }))
-
 
 
 storiesOf('Milestones Line', module)
@@ -570,7 +571,7 @@ storiesOf('Activity Chart', module)
                 years: [
                     {
                         title: '2018',
-                        months:[
+                        months: [
                             {
                                 percent: 31,
                                 month: 'October',
@@ -635,7 +636,7 @@ storiesOf('Activity Chart', module)
                     },
                     {
                         title: '2019',
-                        months:[
+                        months: [
                             {
                                 percent: 10,
                                 month: 'July',
@@ -700,7 +701,7 @@ storiesOf('Activity Chart', module)
                     },
                     {
                         title: '2020',
-                        months:[
+                        months: [
                             {
                                 percent: 90,
                                 month: 'July',
@@ -843,7 +844,7 @@ storiesOf('Activity Chart', module)
                 years: [
                     {
                         title: '2018',
-                        months:[
+                        months: [
                             {
                                 percent: 31,
                                 month: 'October',
@@ -908,7 +909,7 @@ storiesOf('Activity Chart', module)
                     },
                     {
                         title: '2019',
-                        months:[
+                        months: [
                             {
                                 percent: 10,
                                 month: 'July',
@@ -973,7 +974,7 @@ storiesOf('Activity Chart', module)
                     },
                     {
                         title: '2020',
-                        months:[
+                        months: [
                             {
                                 percent: 90,
                                 month: 'July',
@@ -1116,7 +1117,7 @@ storiesOf('Activity Chart', module)
                 years: [
                     {
                         title: '2018',
-                        months:[
+                        months: [
                             {
                                 percent: 31,
                                 month: 'October',
@@ -1181,7 +1182,7 @@ storiesOf('Activity Chart', module)
                     },
                     {
                         title: '2019',
-                        months:[
+                        months: [
                             {
                                 percent: 10,
                                 month: 'July',
@@ -1246,7 +1247,7 @@ storiesOf('Activity Chart', module)
                     },
                     {
                         title: '2020',
-                        months:[
+                        months: [
                             {
                                 percent: 90,
                                 month: 'July',
@@ -1389,7 +1390,7 @@ storiesOf('Activity Chart', module)
                 years: [
                     {
                         title: '2018',
-                        months:[
+                        months: [
                             {
                                 percent: 31,
                                 month: 'October',
@@ -1454,7 +1455,7 @@ storiesOf('Activity Chart', module)
                     },
                     {
                         title: '2019',
-                        months:[
+                        months: [
                             {
                                 percent: 10,
                                 month: 'July',
@@ -1519,7 +1520,7 @@ storiesOf('Activity Chart', module)
                     },
                     {
                         title: '2020',
-                        months:[
+                        months: [
                             {
                                 percent: 90,
                                 month: 'July',
@@ -1603,7 +1604,7 @@ storiesOf('Popups', module)
                 modalActive: false
             }
         },
-        methods:{
+        methods: {
             showModalHandler: function () {
                 this.modalActive = !this.modalActive;
             }
@@ -1634,11 +1635,11 @@ storiesOf('Popups', module)
                 modalActive: false
             }
         },
-        methods:{
+        methods: {
             showModalHandler() {
                 this.modalActive = !this.modalActive;
             },
-            close(){
+            close() {
                 console.log('PopUp was closed!!!!!!!!!')
             }
         },
@@ -1668,7 +1669,7 @@ storiesOf('Popups', module)
                 modalActive: false
             }
         },
-        methods:{
+        methods: {
             showModalHandler: function () {
                 this.modalActive = !this.modalActive;
             }
@@ -1699,7 +1700,7 @@ storiesOf('Popups', module)
                 modalActive: false
             }
         },
-        methods:{
+        methods: {
             showModalHandler: function () {
                 this.modalActive = !this.modalActive;
             }
@@ -1730,7 +1731,7 @@ storiesOf('Popups', module)
                 modalActive: false
             }
         },
-        methods:{
+        methods: {
             showModalHandler: function () {
                 this.modalActive = !this.modalActive;
             }
@@ -1797,6 +1798,90 @@ storiesOf('Assets Grid', module)
         `
     }));
 
+storiesOf('Assets Overview Popup', module)
+    .addDecorator(withKnobs)
+    .add('default', () => ({
+        components: {
+            'c-asset-popup': AssetsPopup
+        },
+        data() {
+            return object('Data', {
+                asset: {
+                    metadata: [
+                        {
+                            "label": "type",
+                            "text": "Legendary Two Handed Sword"
+                        },
+                        {
+                            "label": "average dps",
+                            "text": "2,903.6"
+                        },
+                        {
+                            "label": "Damage Range",
+                            "text": "2193-2880"
+                        },
+                        {
+                            "label": "Attack speed",
+                            "text": "1.15"
+                        },
+                        {
+                            "label": "Bonus 1",
+                            "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
+                        },
+                        {
+                            "label": "Bonus 2",
+                            "text": "Monster kills grant +151 experiance"
+                        },
+                        {
+                            "label": "Level Requirement",
+                            "text": "70"
+                        },
+                        {
+                            "label": "Item Durability",
+                            "text": "40/41"
+                        }
+                    ]
+                }
+            })
+        },
+        template: `
+         <div class="row m-0 p-3">
+             <c-asset-popup :asset="asset" />
+         </div>
+        `
+    }));
 
+storiesOf('Switch', module)
+    .addDecorator(withKnobs)
+    .add('default', () => ({
+        components: {
+            'c-switch': Switch
+        },
+        template: `
+         <div class="row m-0 p-3">
+             <c-switch label="Some text" label_position="right" label_size="22px" />
+         </div>
+        `
+    }))
+    .add('small', () => ({
+        components: {
+            'c-switch': Switch
+        },
+        template: `
+         <div class="row m-0 p-3">
+             <c-switch size="sm" :value=true />
+         </div>
+        `
+    }))
+    .add('large', () => ({
+        components: {
+            'c-switch': Switch
+        },
+        template: `
+         <div class="row m-0 p-3">
+             <c-switch size="lg" :value=true />
+         </div>
+        `
+    }));
 
 // /* eslint-enable react/react-in-jsx-scope */

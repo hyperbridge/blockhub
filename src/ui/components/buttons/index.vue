@@ -1,6 +1,6 @@
 <template>
     <button  :type="type" class="c-btn" :class="[ 'c-' + variant, c_class ]" @click="$emit('click')">
-        <i class="left-icon" :class="icon" v-if="icon_position == 'left'"></i>
+        <i class="left-icon" :class="[ { 'm-0': !text }, icon]" v-if="icon_position == 'left'"></i>
         {{ text }}
         <i class="right-icon" :class="icon" v-if="icon_position == 'right'"></i>
     </button>
@@ -11,7 +11,7 @@
         props: {
             type: { default: false },
             variant : { default: 'default' },
-            text : { required: true },
+            text : { type: String },
             icon : { default: false },
             icon_position : { default: false},
             c_class: { default: false }
@@ -31,6 +31,9 @@
         box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
         text-transform: uppercase;
         cursor: pointer;
+        .m-0{
+            margin: 0;
+        }
         .left-icon{
             margin-right: 3px;
         }
