@@ -5,10 +5,10 @@
             <div v-for="(plan, index) in items" v-bind:key="index" class="plans-list__item">
                 <h6>{{ plan.title}}</h6>
                 <a :href="plan.link" v-if="plan.price" data-toggle="modal" data-target="#purchase-modal">
-                    <i class="fas fa-shopping-bag"></i> Buy for ${{ plan.price }}
+                    <i class="fas fa-shopping-bag"></i>{{ plan.link_text }} <span class="ml-1">${{ plan.price }}</span>
                 </a>
                 <a :href="plan.link" v-else data-toggle="modal" data-target="#purchase-modal">
-                    <i class="fas fa-check"></i> Free Game
+                    <i class="fas fa-check"></i>{{ plan.link_text }}
                 </a>
             </div>
         </div>
@@ -19,7 +19,9 @@
 
 <script>
     export default {
-        props: ['items']
+        props: {
+            items: Array
+        }
     }
 </script>
 
@@ -53,10 +55,10 @@
         a{
             width: 115px;
             border-radius: 5px;
-            background: #5EA72B;
             color: #fff;
             font-weight: bold;
             text-transform: uppercase;
+            background: #5EA72B;
             text-decoration: none;
             line-height: 25px;
             font-size: 13px;
@@ -66,7 +68,7 @@
             text-align: left;
             padding: 0 5px;
             &:hover{
-                background: #508e25
+                background: #559727
             }
         }
         i{
