@@ -79,9 +79,11 @@ export default {
     padding: 7px;
     border-radius: 5px;
     a {
-        position: relative;
         color: #fff;
-        display: block;
+        &.card-img-top {
+            position: relative;
+            display: block;
+        }
     }
     h4 {
         font-weight: bold;
