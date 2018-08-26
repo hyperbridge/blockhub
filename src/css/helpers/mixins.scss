@@ -8,7 +8,7 @@
 
 -------------------------------------------------------------------*/
 
-@import "vendors/sass/gradient.scss";
+@import "../vendors/sass/gradient.scss";
 
 @mixin transition($transition...) {
     -moz-transition:    $transition;
@@ -46,3 +46,53 @@
   }
 }
 
+
+@mixin width-max-xl {
+	@media (max-width: 1199px) {
+		@content;
+	}
+}
+
+@mixin width-max-lg {
+	@media (max-width: 991px) {
+		@content;
+	}
+}
+
+@mixin width-max-md {
+	@media (max-width: 767px) {
+		@content;
+	}
+}
+
+@mixin width-max-sm {
+	@media (max-width: 575px) {
+		@content;
+	}
+}
+
+
+
+@mixin width-min-xl {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin width-min-lg {
+    @media (min-width: 992px) {
+        @content;
+    }
+}
+
+@mixin width-min-md {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin width-min-sm {
+    @media (min-width: 576px) {
+        @content;
+    }
+}

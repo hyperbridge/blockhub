@@ -185,6 +185,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/css/helpers/mixins.scss';
+
 .frontpage-product{
     margin-bottom: 30px;
 }
@@ -263,18 +265,6 @@ export default {
         i{
             margin-right: 5px;
         }
-    }
-}
-
-@mixin width-max-lg {
-	@media (max-width: 991px) {
-		@content;
-	}
-}
-
-@mixin width-min-lg {
-    @media (min-width: 992px) {
-        @content;
     }
 }
 
