@@ -12,7 +12,6 @@ import '../css/styles.scss'
 import MyButton from './MyButton.vue'
 import Welcome from './Welcome.vue'
 import SaleBox from '../ui/components/sale-box/box.vue'
-import PlanList from '../ui/components/game-plans/list.vue'
 import AssetsImporter from '../ui/components/asset-importer/index.vue'
 import Notification from '../ui/components/notification/index.vue'
 import Tabs from '../ui/components/tab/tabs.vue'
@@ -59,35 +58,6 @@ storiesOf('Sale Box', module)
             }
         },
         template: '<div class="row"><div class="col-6"><c-sale-box :sale_box="sale_box"></c-sale-box></div></div>'
-    }))
-
-
-storiesOf('Plan List', module)
-    .add('default', () => ({
-        components: {
-            'c-plan-list': PlanList
-        },
-        data() {
-            return {
-                "plans": [
-                    {
-                        "title": "Play Tibia Now",
-                        "link": "#3"
-                    },
-                    {
-                        "title": "1 Month Premium benefits",
-                        "price": "34",
-                        "link": "#4"
-                    },
-                    {
-                        "title": "2 Month Premium benefits",
-                        "price": "57",
-                        "link": "#4"
-                    }
-                ],
-            }
-        },
-        template: '<div class="row"><div class="col-6"><c-plan-list :items="plans" /></div></div>'
     }))
 
 storiesOf('Assets Importer', module)
@@ -2098,8 +2068,61 @@ storiesOf('Game Plans', module)
          `
     }))
 
-
-
+import GamesGrid from '../ui/components/games-grid/with-description'
+storiesOf('Games Grid', module)
+    .addDecorator(withKnobs)
+    .add('with description', () => ({
+        components:{
+            'c-games-grid': GamesGrid
+        },
+        data(){
+            return object('Data', {
+                games: [
+                    {
+                        title: 'Game Title Here and two lines',
+                        description: 'Developer or Studio name with two lines too!',
+                        price: '12.99',
+                        time: '21 day ago',
+                        img: 'https://steamcdn-a.akamaihd.net/steam/apps/247240/header.jpg?t=1502724769'
+                    },
+                    {
+                        title: 'Game Title Here',
+                        description: 'Developer name!',
+                        price: '99.99',
+                        time: '1 day ago',
+                        img: 'https://freesteam.ru/wp-content/uploads/Faeria-header.jpg'
+                    },
+                    {
+                        title: 'Game Title Here',
+                        description: 'Developer name!',
+                        price: '99.99',
+                        time: '1 day ago',
+                        img: 'https://freesteam.ru/wp-content/uploads/Faeria-header.jpg'
+                    },
+                    {
+                        title: 'Game Title Here and two lines',
+                        description: 'Developer or Studio name with two lines too!',
+                        price: '12.99',
+                        time: '21 day ago',
+                        img: 'https://steamcdn-a.akamaihd.net/steam/apps/247240/header.jpg?t=1502724769'
+                    }
+                ]
+            })
+        },
+        template: `
+         <div class="row m-0 p-3">
+            <div class="col-12">
+                <c-games-grid
+                            showPrice="true"
+                            showTime="true"
+                            itemInRow="3"
+                            :items="games"
+                            itemBg="transparent"
+                        ></c-games-grid>  
+            </div>
+         </div>
+         `
+    }))
 
 
 // /* eslint-enable react/react-in-jsx-scope */

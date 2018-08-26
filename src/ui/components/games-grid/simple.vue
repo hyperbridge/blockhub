@@ -13,10 +13,11 @@
 </template>
 
 <script>
+    import Tags from '../product-tags/index'
     export default {
         props: ['projects'],
         components:{
-            'c-tags': () => import('@/ui/components/product-tags'),
+            'c-tags': Tags,
         }
     }
 </script>

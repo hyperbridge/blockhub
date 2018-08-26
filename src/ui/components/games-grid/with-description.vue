@@ -34,21 +34,29 @@
 </template>
 
 <script>
+    import Tags from '../product-tags/index'
+
     export default {
         props: ['items', 'showPrice', 'showStars', 'showButton', 'showTime', 'itemInRow', 'itemBg'],
         components:{
-            'c-tags': () => import('@/ui/components/product-tags'),
+            'c-tags': Tags
         }
     }
 </script>
 
 <style lang="scss" scoped>
+    .games-list{
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+    }
     .games-list__item{
         display: flex;
         width: calc( 50% - 10px );
         justify-content: space-between;
         align-items: stretch;
         background: #27283E;
+        color: #fff;
         padding: 8px;
         border-radius: 5px;
         overflow: hidden;
@@ -91,6 +99,7 @@
                     font-weight: bold;
                     margin: 0 0 3px 0;
                     padding: 0;
+                    color: #fff;
                 }
             }
             .footer{
