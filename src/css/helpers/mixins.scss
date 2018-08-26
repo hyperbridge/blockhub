@@ -46,32 +46,3 @@
   }
 }
 
-@mixin desktop {
-	@media (max-width: 1200px) {
-		@content;
-	}
-}
-
-@mixin tablet {
-	@media (max-width: 979px) {
-		@content;
-	}
-}
-
-@mixin tablet2 {
-	@media (max-width: 979px) {
-		@content;
-	}
-}
-
-@mixin phone {
-	@media (max-width: 767px) {
-		@content;
-	}
-}
-
-@mixin small {
-	@media (max-width: 480px) {
-		@content;
-	}
-}

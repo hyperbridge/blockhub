@@ -1,6 +1,6 @@
 <template>
     <div
-        class="product-grid__item col-12 col-lg-4"
+        class="product-grid__item"
         @mouseover="show_preview(true)"
         @mouseout="show_preview(false)"
     >

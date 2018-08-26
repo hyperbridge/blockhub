@@ -35,18 +35,8 @@
                             v-for="(game, index) in demo_products"
                             :key="index"
                             :game="game"
-                            :index="index"
-                            @hover="game.hover=$event"
                         />
                     </div>
-
-
-                    <!-- <c-game-card
-                        v-for="(game, index) in new_products.slice(0,1)"
-                        :key="index"
-                        :game="game"
-                    /> -->
-
                 </div>
 
                 <div class="row product-grid">
@@ -276,6 +266,18 @@ export default {
     }
 }
 
+@mixin width-max-lg {
+	@media (max-width: 991px) {
+		@content;
+	}
+}
+
+@mixin width-min-lg {
+    @media (min-width: 992px) {
+        @content;
+    }
+}
+
 .products-grid-wrapper {
     margin-top: 20px;
     margin-bottom: 40px;
@@ -283,19 +285,24 @@ export default {
     display: flex;
     justify-content: center;
     width: 100%;
+    @include width-max-lg {
+        flex-direction: column;
+    }
 }
 
-.products-grid-wrapper:hover {
-    .product-grid__item {
-        transform: translateX(-15%);
-    }
-
-    .product-grid__item:hover {
-		transform: scale(1.3);
-        ~ .product-grid__item {
-		    transform: translateX(15%);
+@include width-min-lg {
+    .products-grid-wrapper:hover {
+        .product-grid__item {
+            transform: translateX(-15%);
         }
-	}
+
+        .product-grid__item:hover {
+            transform: scale(1.3);
+            ~ .product-grid__item {
+                transform: translateX(15%);
+            }
+        }
+    }
 }
 </style>
 
