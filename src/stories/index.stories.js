@@ -2282,6 +2282,81 @@ storiesOf('Block Title', module)
         `
     }))
 
-
+import NewsListNav from '../ui/components/news-list/navigation'
+import NewsList from '../ui/components/news-list/articles'
+storiesOf('News List', module)
+    .add('default', () => ({
+        components:{
+            'c-news-list-navigation': NewsListNav,
+            'c-news-list-articles': NewsList,
+        },
+        data(){
+            return{
+                content_news: [
+                    {
+                        game: {
+                            title: 'Diablo III',
+                            developer: 'Blizzard Entertainment',
+                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                        },
+                        articles: [
+                            {
+                                heading: 'New class and event coming next week!',
+                                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
+                                url: 'article-url',
+                                date: '2018-07-24T04:09:00.000Z'
+                            }
+                        ]
+                    },
+                    {
+                        game: {
+                            title: 'Diablo I',
+                            developer: 'Blizzard Entertainment',
+                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                        },
+                        articles: [
+                            {
+                                heading: 'New class and event coming next week!',
+                                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
+                                url: 'article-url',
+                                date: '2016-09-24T04:09:00.000Z'
+                            },
+                            {
+                                heading: 'New class and event coming next week!',
+                                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
+                                url: 'article-url',
+                                date: '2014-03-24T04:09:00.000Z'
+                            }
+                        ]
+                    },
+                    {
+                        game: {
+                            title: 'Diablo II',
+                            developer: 'Blizzard Entertainment',
+                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                        },
+                        articles: [
+                            {
+                                heading: 'New class and event coming next week!',
+                                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
+                                url: 'article-url',
+                                date: '2017-12-24T04:09:00.000Z'
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        template: `
+        <div class="row m-0 p-5">
+            <c-news-list-navigation
+                :content_news="content_news"
+            />
+            <c-news-list-articles
+                :content_news="content_news"
+            />
+        </div>
+        `
+    }))
 
 // /* eslint-enable react/react-in-jsx-scope */

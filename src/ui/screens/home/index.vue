@@ -16,36 +16,11 @@
                     </div>
                     <div class="col-12 col-lg-6 margin-bottom-30">
                         <c-heading-bar name="New Releases" :showArrows="false" :showBackground="false">
-                            <div class="additional-action margin-left-20" slot="additional-action">
-                                <div class="text">
-                                    Price
-                                    <i class="fas fa-dollar-sign"></i>
-                                </div>
-                                <div class="arrow_container">
-                                    <i class="fas fa-sort-up"></i>
-                                    <i class="fas fa-sort-down"></i>
-                                </div>
-                            </div>
-                            <div class="additional-action margin-left-20" slot="additional-action">
-                                <div class="text">
-                                    Reviews
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="arrow_container">
-                                    <i class="fas fa-sort-up"></i>
-                                    <i class="fas fa-sort-down"></i>
-                                </div>
-                            </div>
-                            <div class="additional-action" slot="additional-action">
-                                <div class="text">
-                                    Date
-                                    <i class="fas fa-calendar"></i>
-                                </div>
-                                <div class="arrow_container">
-                                    <i class="fas fa-sort-up"></i>
-                                    <i class="fas fa-sort-down"></i>
-                                </div>
-                            </div>
+                            <template slot="additional-action">
+                                <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" @click_up=""  @click_down="" />
+                                <c-heading-bar-fields name="Reviews" icon="fas fa-star" @click_up=""  @click_down="" />
+                                <c-heading-bar-fields name="Date" icon="fas fa-calendar" @click_up=""  @click_down="" />
+                            </template>
                         </c-heading-bar>
                         <c-game-grid
                             showPrice="true"
@@ -57,24 +32,10 @@
                     </div>
                     <div class="col-12 col-lg-6 margin-bottom-30">
                         <c-heading-bar name="Top 20 Items" :showArrows="false" :showBackground="false">
-                            <div class="additional-action margin-left-20" slot="additional-action">
-                                <div class="text">
-                                    Price
-                                    <i class="fas fa-dollar-sign"></i>
-                                </div>
-                                <div class="arrow_container">
-                                    <i class="fas fa-sort-up"></i>
-                                    <i class="fas fa-sort-down"></i>
-                                </div>
-                            </div>
-                            <div class="additional-action" slot="additional-action">
-                                <div class="text">
-                                    Trading
-                                </div>
-                                <div class="arrow_container">
-                                    <i class="fas fa-sort-down"></i>
-                                </div>
-                            </div>
+                            <template slot="additional-action">
+                                <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" @click_up=""  @click_down="" />
+                                <c-heading-bar-fields name="Trading" icon="fas fa-star" @click_up=""  @click_down="" />
+                            </template>
                         </c-heading-bar>
 
                         <c-assets-list-item
@@ -85,52 +46,21 @@
                     </div>
                     <div class="col-12 margin-bottom-30">
                         <c-heading-bar name="What's up with your content" :showArrows="false" :showBackground="false">
-                            <div class="additional-action margin-left-20" slot="additional-action">
-                                <div class="text">
-                                    Price
-                                    <i class="fas fa-dollar-sign"></i>
-                                </div>
-                                <div class="arrow_container">
-                                    <i class="fas fa-sort-up"></i>
-                                    <i class="fas fa-sort-down"></i>
-                                </div>
-                            </div>
-                            <div class="additional-action margin-left-20" slot="additional-action">
-                                <div class="text">
-                                    Reviews
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="arrow_container">
-                                    <i class="fas fa-sort-up"></i>
-                                    <i class="fas fa-sort-down"></i>
-                                </div>
-                            </div>
-                            <div class="additional-action" slot="additional-action">
-                                <div class="text">
-                                    Date
-                                    <i class="fas fa-calendar"></i>
-                                </div>
-                                <div class="arrow_container">
-                                    <i class="fas fa-sort-up"></i>
-                                    <i class="fas fa-sort-down"></i>
-                                </div>
-                            </div>
+                            <template slot="additional-action">
+                                <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" @click_up=""  @click_down="" />
+                                <c-heading-bar-fields name="Reviews" icon="fas fa-star" @click_up=""  @click_down="" />
+                                <c-heading-bar-fields name="Date" icon="fas fa-calendar" @click_up=""  @click_down="" />
+                            </template>
                         </c-heading-bar>
+
+
                         <div class="home-tabs">
-                            <ul class="nav custom-tabs w-100" id="myTab" role="tablist">
-                                <c-news-list-navigation
-                                    v-for="(news, index) in content_news"
-                                    :game="news.game"
-                                    :index="index+1"
-                                />
-                            </ul>
-                            <div class="tab-content">
-                                <c-news-list-articles
-                                    v-for="(news, index) in content_news"
-                                    :news="news"
-                                    :index="index+1"
-                                />
-                            </div>
+                            <c-news-list-navigation
+                                :content_news="content_news"
+                            />
+                            <c-news-list-articles
+                                :content_news="content_news"
+                            />
                         </div>
                     </div>
                     <div class="col-12 margin-bottom-30">
@@ -175,6 +105,7 @@
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
             'c-heading-bar': () => import('@/ui/components/heading-bar'),
+            'c-heading-bar-fields' : () => import('@/ui/components/heading-bar/additional-action'),
             'c-assets-list-item': () => import('@/ui/components/assets-list-item'),
             'c-game-list-item': () => import('@/ui/components/assets-list-item'),
             'c-game-grid': () => import('@/ui/components/games-grid/with-description'),
@@ -385,89 +316,6 @@
         padding: 10px;
         border-radius: 5px;
         background: rgba(0, 0, 0, .1);
-    }
-
-    .additional-action {
-        float: right;
-        display: flex;
-        width: auto;
-        align-items: center;
-        font-size: 14px;
-        margin-top: 6px;
-        .text {
-            margin-right: 5px;
-            i {
-                font-size: 16px;
-                margin-left: 5px;
-            }
-        }
-        .arrow_container {
-            width: 20px;
-            position: relative;
-            display: inline-block;
-            text-align: center;
-            height: 25px;
-            i {
-                font-size: 18px;
-                position: absolute;
-                opacity: .7;
-                left: 0;
-                right: 0;
-                &:first-child {
-                    top: 0;
-                    height: 50%;
-                    z-index: 3;
-                }
-                &:last-child {
-                    bottom: 0px;
-                    height: 18px;
-                    z-index: 1;
-                }
-                &:hover {
-                    opacity: 1;
-                    cursor: pointer;
-                }
-            }
-        }
-    }
-
-    .custom-tabs {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        li {
-            width: 25%;
-            a {
-                display: flex;
-                width: 100%;
-                padding: 15px;
-                justify-content: space-between;
-                align-items: center;
-                .img {
-                    width: 50px;
-                    img {
-                        width: 100%;
-                        height: auto;
-                    }
-                }
-                .text {
-                    width: calc(100% - 65px);
-                    color: #fff;
-                    h4 {
-                        font-weight: bold;
-                        padding: 0;
-                        margin: 0 0 4px;
-                    }
-                    p {
-                        padding: 0;
-                        margin: 0;
-                    }
-                }
-                &.active {
-                    background: #3D3E5D;
-                }
-            }
-        }
     }
 
     .img_slider {
