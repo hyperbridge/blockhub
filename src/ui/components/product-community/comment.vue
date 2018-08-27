@@ -55,6 +55,10 @@
 </template>
 
 <script>
+
+    import DropdownMenu from '../dropdown-menu/index'
+    import CommentRate from '../product-community/comment-rate'
+
 export default {
     props: {
         comment: {
@@ -63,8 +67,8 @@ export default {
         }
     },
     components: {
-        'dropdown-menu': () => import('@/ui/components/dropdown-menu'),
-        'comment-rate': () => import('@/ui/components/product-community/comment-rate')
+        'dropdown-menu': DropdownMenu,
+        'comment-rate': CommentRate
     },
     data() {
         return {
@@ -115,6 +119,7 @@ export default {
                     margin: 0;
                     font-weight: bold;
                     font-size: 14px;
+                    color: #fff;
                 }
                 .time {
                     float: right;

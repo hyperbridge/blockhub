@@ -2359,4 +2359,69 @@ storiesOf('News List', module)
         `
     }))
 
+import Pagination from '../ui/components/pagination/index'
+storiesOf('Pagination(not finished)', module)
+    .add('default', () => ({
+        components:{
+            'c-pagination': Pagination
+        },
+        template:`
+            <div class="row m-0 p-5">
+                <c-pagination total_page="10" />
+            </div>
+        `
+    }))
+
+import ProductCommunity from '../ui/components/product-community/item'
+storiesOf('Product Community', module)
+    .add('post', () => ({
+        components:{
+            'c-post': ProductCommunity
+        },
+        data(){
+            const authors = [
+                { name: 'Nakatochi', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png' },
+                { name: 'Nakatochi', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL' },
+                { name: 'SatoshiSan', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL' },
+            ];
+            const placeholderText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non maximus tellus, eu lacinia justo. Cras semper vestibulum est. Donec a massa vitae nibh consectetur efficitur non in erat. Morbi id dapibus tortor. Praesent sit amet vulputate leo, eu posuere neque. In id ante scelerisque, commodo nisi non, eleifend mauris. Pellentesque massa elit, semper non libero nec, interdum aliquet dolor.';
+            return{
+                post: {
+                    title: `The previous title doesn't have it's single line aligned vertically because XD does not have this functionality.`,
+                    date: '',
+                    rate: 103,
+                    comments_count: 894391,
+                    status: 'starred',
+                    author: authors[0],
+                    content: {
+                        img: 'http://memesbams.com/wp-content/uploads/2017/08/2.3-Delightful-cheer-up-cat-meme.jpg',
+                        text: placeholderText,
+                        comments: [
+                            { author: authors[1], text: placeholderText, rate: 319 },
+                            { author: authors[0], text: placeholderText, rate: 932, replies: [
+                                    { author: authors[1], text: placeholderText, rate: 318 },
+                                    { author: authors[0], text: placeholderText, rate: -49 },
+                                    { author: authors[1], text: placeholderText, rate: 442 },
+                                    { author: authors[0], text: placeholderText, rate: 1239 }
+                                ]},
+                            { author: authors[0], text: placeholderText, rate: -51 }
+                        ]
+                    }
+                }
+            }
+        },
+        template:`
+            <div class="row m-0 p-5">
+                <div class="col-10">
+                    <c-post :post="post" />
+                </div>
+            </div>
+        `
+    }))
+
+
+
+
+
+
 // /* eslint-enable react/react-in-jsx-scope */
