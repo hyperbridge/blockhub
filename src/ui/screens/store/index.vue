@@ -62,6 +62,22 @@
                         :game="game"
                     />
                 </div>
+
+                <div class="row curators-wrapper">
+                    <div class="col-12">
+                        <c-heading-bar name="From our curators" :showArrows="false" />
+                    </div>
+
+                    <div class="curators-wrapper__content">
+                        <c-curator-review
+                            v-for="(review, index) in curators_reviews"
+                            :key="index"
+                            :review="review"
+                        />
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </c-layout>
@@ -81,9 +97,32 @@ export default {
         'c-tags': () => import('@/ui/components/product-tags'),
         'c-heading-bar': () => import('@/ui/components/heading-bar'),
         'c-game-card': () => import('@/ui/components/store/game-card'),
-        'c-game-card-dynamic': () => import('@/ui/components/store/game-card-dynamic')
+        'c-game-card-dynamic': () => import('@/ui/components/store/game-card-dynamic'),
+        'c-curator-review': () => import('@/ui/components/store/curator-review')
     },
     data() {
+        const curator_review = {
+            author: { name: 'SatoSan', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png' },
+            rate: 4.5,
+            game: { img: 'http://www.pixels-association.ch/wp-content/uploads/2017/11/no1.jpg' },
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mi arcu, viverra et efficitur luctus, tincidunt vel lacus. Morbi erat augue, posuere et sodales venenatis, tincidunt eu arcu. In sollicitudin purus quis sodales ornare. Cras tempus vestibulum elementum. Sed placerat, turpis id cursus cursus, augue enim molestie dui, elementum luctus lectus est vitae dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris vehicula mi a nunc cursus, id volutpat purus commodo. Duis consequat elementum varius. Suspendisse dui enim, rhoncus a molestie at, tristique ut urna. Praesent et consectetur dui. Pellentesque ut volutpat nunc, ut viverra nulla. Duis ultricies, sem sit amet laoreet lobortis, mauris est mollis orci, non eleifend urna leo quis lectus. Vestibulum sit amet volutpat est.',
+            more_reviews: [
+                {
+                    rate: 3.5,
+                    game: {
+                        title: 'Volgar the Viking',
+                        img: 'https://images-1.gog.com/54e9b9504af871d5a6ed67f9a9c439fc3a889ecd4e84d24173b10e49971db9c7.jpg'
+                    }
+                },
+                {
+                    rate: 5,
+                    game: {
+                        title: 'The Witcher 3: Wild Hunt',
+                        img: 'http://getwallpapers.com/wallpaper/full/6/f/7/22250.jpg'
+                    }
+                }
+            ]
+        }
         return {
             demo_products: [
                 {
@@ -143,7 +182,8 @@ export default {
                     author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"],
                     hover: false
                 }
-            ]
+            ],
+            curators_reviews: [curator_review, curator_review, curator_review]
         }
     },
     computed: {
@@ -290,6 +330,27 @@ export default {
             transform: scale(1.3);
             ~ .product-grid__item {
                 transform: translateX(15%);
+            }
+        }
+    }
+}
+
+.curators-wrapper {
+    margin: 30px 0;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #24253B;
+    border-radius: 4px;
+    &__content {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        @include width-max-lg {
+            flex-direction: column;
+        }
+        @include width-min-lg {
+            .curator-review {
+                width: 33%;
             }
         }
     }
