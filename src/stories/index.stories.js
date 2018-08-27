@@ -371,7 +371,7 @@ storiesOf('Money Info', module)
         },
         template: `
         <div class="row m-0 p-3">
-            <c-money-info label="Spent" percent="63" amount="555.999" />
+            <c-money-info label="Spent" percent="63" amount="555.999" goal="555.999" />
         </div>
         `
     }));
@@ -1730,7 +1730,9 @@ storiesOf('Range Slider', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-range-slider />
+            <div class="col-8">
+                <c-range-slider label="Single slider" :min="45" />
+            </div>
          </div>
         `
     }));
@@ -2419,8 +2421,110 @@ storiesOf('Product Community', module)
         `
     }))
 
+import ProductTags from '../ui/components/product-tags/index'
+storiesOf('Product Tags', module)
+    .add('default', () => ({
+        components:{
+            'c-tags-list' : ProductTags
+        },
+        data(){
+            return{
+                tags: [
+                    "adventure",
+                    "rpg",
+                    "mmorpg"
+                ],
+            }
+        },
+        template:`
+            <div class="row m-0 p-5">
+                <div class="col-12">
+                    <h3 class="text-white d-block">Some title or name</h3>
+                    <c-tags-list :tags="tags" />
+                </div>
+            </div>
+        `
+    }))
 
-
+import ProjectCard from '../ui/components/projects/card'
+storiesOf('Project Card', module)
+    .add('default', () => ({
+        components:{
+            'c-projects-card': ProjectCard
+        },
+        data(){
+            return{
+                trending_projects: [
+                    {
+                        game: {
+                            title: 'Diablo III',
+                            developer: 'Blizzard Entertainment',
+                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                        },
+                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                        funds: {
+                            currency: 'USD',
+                            obtained: 2834,
+                            goal: 5000
+                        }
+                    },
+                    {
+                        game: {
+                            title: 'World of Warcraft',
+                            developer: 'Blizzard Entertainment',
+                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                        },
+                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                        funds: {
+                            currency: 'GBP',
+                            obtained: 7613,
+                            goal: 8500
+                        }
+                    },
+                    {
+                        game: {
+                            title: 'Diablo III',
+                            developer: 'Blizzard Entertainment',
+                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                        },
+                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                        funds: {
+                            currency: 'USD',
+                            obtained: 2834,
+                            goal: 5000
+                        }
+                    },
+                    {
+                        game: {
+                            title: 'Diablo III',
+                            developer: 'Blizzard Entertainment',
+                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                        },
+                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                        funds: {
+                            currency: 'USD',
+                            obtained: 2834,
+                            goal: 5000
+                        }
+                    },
+                ]
+            }
+        },
+        template:`
+            <div class="row m-0 p-5">
+                <div class="col-10">
+                    <c-projects-card v-for="(project, index) in trending_projects"
+                                    :key="index"
+                                    :project="project"
+                                    customClass="margin-bottom-20"/>
+                </div>
+            </div>
+        `
+    }))
 
 
 
