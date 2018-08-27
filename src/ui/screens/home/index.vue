@@ -78,7 +78,7 @@
                         </c-heading-bar>
 
                         <c-assets-list-item
-                            v-bind:items="assets"
+                            :items="assets"
                             itemInRow="2">
                         </c-assets-list-item>
 
@@ -120,6 +120,7 @@
                             <ul class="nav custom-tabs w-100" id="myTab" role="tablist">
                                 <c-news-list-navigation
                                     v-for="(news, index) in content_news"
+                                    :key="index"
                                     :game="news.game"
                                     :index="index+1"
                                 />
@@ -127,6 +128,7 @@
                             <div class="tab-content">
                                 <c-news-list-articles
                                     v-for="(news, index) in content_news"
+                                    :key="index"
                                     :news="news"
                                     :index="index+1"
                                 />

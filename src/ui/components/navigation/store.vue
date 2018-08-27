@@ -64,16 +64,7 @@
 
         <h3 class="text-uppercase">Search</h3>
         <div class="filter-blk">
-            <div class="form-group">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <span class="input-group-text">
-                            <i class="fas fa-search"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
+            <c-searcher />
             <div class="form-group range-slider">
                 <label for="communitySize">Community size</label>
                 <input type="range" class="form-control-range" id="communitySize">
@@ -130,7 +121,9 @@
 
 <script>
     export default {
-        components: {},
+        components: {
+            'c-searcher': () => import('@/ui/components/searcher')
+        },
         data() {
             return {}
         }
@@ -141,33 +134,14 @@
     .filter-blk {
         .form-group{
             margin-bottom: 10px;
-            label{
-                font-size: 14px;
-                font-weight: bold;
-                color: #fff;
-            }
-            .result{
-                font-size: 14px;
-            }
         }
-        .input-group {
-            border-color: rgba(0, 0, 0, .7);
-            border-radius: 5px;
-            overflow: hidden;
-            .input-group-append {
-                margin: 0;
-                .input-group-text {
-                    border: none;
-                }
-            }
-            input {
-                border: none;
-                &:active,
-                &:focus {
-                    border: unset;
-                    box-shadow: none;
-                }
-            }
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .result {
+            font-size: 14px;
         }
         .form-control-range{
             -webkit-appearance: none;
