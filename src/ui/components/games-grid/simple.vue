@@ -1,12 +1,17 @@
 <template>
     <div class="product-grid__container">
-        <div class="product-grid__item" v-for="(item, index) in projects" v-bind:key="index">
-            <div class="card-body padding-0">
-                <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
-                <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
-                <p class="card-text" hidden>{{ item.short_description }} </p>
-
-                <c-tags :tags="item.author_tags"></c-tags>
+        <div class="product-grid__item-container"
+             v-for="(item, index) in items"
+             v-bind:key="index"
+             :style="{ width: 'calc( 100% / ' + itemInRow + ')'}"
+        >
+            <div class="product-grid__item">
+                <div class="card-body padding-0">
+                    <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
+                    <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
+                    <p class="card-text" hidden>{{ item.short_description }} </p>
+                    <c-tags :tags="item.author_tags"></c-tags>
+                </div>
             </div>
         </div>
     </div>
@@ -15,7 +20,12 @@
 <script>
     import Tags from '../product-tags/index'
     export default {
-        props: ['projects'],
+        props: {
+            items: Array,
+            itemInRow:{
+                default: '4'
+            }
+        },
         components:{
             'c-tags': Tags,
         }
@@ -27,20 +37,37 @@
     .product-grid__container{
         display: flex;
         width: 100%;
-        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .product-grid__item-container{
+        padding: 0 4px;
+        margin-bottom: 10px;
     }
     .product-grid__item{
         padding: 8px 6px;
         border-radius: 5px;
-        width: 32%;
+        width: 100%;
+        height: 100%;
         background: #27283E;
+        box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1);
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1);
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1);
+        transition: all 200ms ease-in;
+        transform: scale(1);
         &:hover {
-            will-change: transform;
-            transform: perspective(300px) rotateX(0deg) rotateY(0deg) scale(1.03);
-            box-shadow: 0 0 35px rgba(0, 0, 0, .2);
-            transition: transform 200ms cubic-bezier(0.34, 1.01, 0.8, 0.24);
+            -webkit-transition: all 200ms ease-in;
+            -webkit-transform: scale(1.05);
+            -ms-transition: all 200ms ease-in;
+            -ms-transform: scale(1.05);
+            -moz-transition: all 200ms ease-in;
+            -moz-transform: scale(1.05);
+            transition: all 200ms ease-in;
+            transform: scale(1.05);
         }
-
         h4{
             color: #fff;
             font-weight: bold;

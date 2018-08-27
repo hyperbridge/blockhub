@@ -1,17 +1,18 @@
 <template>
     <div class="games-list">
         <div class="games-list__item"
+             :class="{ 'hovered' : hovered}"
              v-for="(item, index) in items"
              :style="{ width: 'calc( 100% / ' + itemInRow + ')', background: itemBg }">
             <div v-if="showPrice" class="price">
                 <strong>{{ item.price }}</strong> USD
             </div>
             <div class="img">
-                <img :src="item.img" />
+                <img :src="item.images.medium_tile" />
             </div>
             <div class="info">
                 <div class="text">
-                    <h4>{{ item.title }}</h4>
+                    <h4>{{ item.name }}</h4>
                     <p>{{ item.description }}</p>
                 </div>
                 <div class="footer">
@@ -37,7 +38,7 @@
     import Tags from '../product-tags/index'
 
     export default {
-        props: ['items', 'showPrice', 'showStars', 'showButton', 'showTime', 'itemInRow', 'itemBg'],
+        props: ['items', 'showPrice', 'showStars', 'showButton', 'showTime', 'itemInRow', 'itemBg', 'hovered'],
         components:{
             'c-tags': Tags
         }
@@ -116,6 +117,31 @@
                 .btn{
                     padding: 0px 8px;
                 }
+                .time{
+                    i{
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+        &.hovered{
+            -webkit-transition: all 200ms ease-in;
+            -webkit-transform: scale(1);
+            -ms-transition: all 200ms ease-in;
+            -ms-transform: scale(1);
+            -moz-transition: all 200ms ease-in;
+            -moz-transform: scale(1);
+            transition: all 200ms ease-in;
+            transform: scale(1);
+            &:hover {
+                -webkit-transition: all 200ms ease-in;
+                -webkit-transform: scale(1.05);
+                -ms-transition: all 200ms ease-in;
+                -ms-transform: scale(1.05);
+                -moz-transition: all 200ms ease-in;
+                -moz-transform: scale(1.05);
+                transition: all 200ms ease-in;
+                transform: scale(1.05);
             }
         }
     }
