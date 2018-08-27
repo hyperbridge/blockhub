@@ -2193,5 +2193,95 @@ storiesOf('Games Grid', module)
          `
     }))
 
+import Headers from '../ui/components/headers/basic'
+storiesOf('Headers', module)
+    .add('default', () => ({
+        components: {
+            'c-headers' : Headers
+        },
+        template: `
+            <!--<c-headers />-->
+        `
+    }))
+
+import BlockHeaders from '../ui/components/heading-bar/index'
+import BlockHeadersAddFields from '../ui/components/heading-bar/additional-action'
+storiesOf('Block Title', module)
+    .add('default', () => ({
+        components: {
+            'c-heading-bar' : BlockHeaders
+        },
+        template: `
+            <div class="row">
+                <div class="col-8 p-5">
+                    <c-heading-bar name="This is the Title" />
+                </div>
+            </div>
+        `
+    }))
+    .add('with background', () => ({
+        components: {
+            'c-heading-bar' : BlockHeaders
+        },
+        template: `
+            <div class="row">
+                <div class="col-8 p-5">
+                    <c-heading-bar name="This is the Title" showBackground="true" />
+                </div>
+            </div>
+        `
+    }))
+    .add('with arrows', () => ({
+        components: {
+            'c-heading-bar' : BlockHeaders
+        },
+        template: `
+            <div class="row">
+                <div class="col-8 p-5">
+                    <c-heading-bar name="This is the Title" showArrows="true"  />
+                </div>
+            </div>
+        `
+    }))
+    .add('with more button', () => ({
+        components: {
+            'c-heading-bar' : BlockHeaders
+        },
+        template: `
+            <div class="row">
+                <div class="col-8 p-5">
+                    <c-heading-bar name="This is the Title" more="#some_link"  />
+                </div>
+            </div>
+        `
+    }))
+    .add('with custom content', () => ({
+        components: {
+            'c-heading-bar' : BlockHeaders,
+            'c-heading-bar-fields' : BlockHeadersAddFields
+        },
+        methods:{
+            upClick: function () {
+                alert('It was Up click')
+            },
+            downClick: function () {
+                alert('It was Down click')
+            }
+        },
+        template: `
+            <div class="row">
+                <div class="col-8 p-5">
+                    <c-heading-bar name="This is the Title">
+                        <template slot="additional-action">
+                            <c-heading-bar-fields name="Reviews" icon="fas fa-trophy" @click_up="upClick"  @click_down="downClick" />
+                            <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" />
+                        </template>
+                    </c-heading-bar>
+                </div>
+            </div>
+        `
+    }))
+
+
 
 // /* eslint-enable react/react-in-jsx-scope */
