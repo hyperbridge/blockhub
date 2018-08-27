@@ -136,7 +136,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-md-6 col-12">
                                 <h2>Most helpful</h2>
                                 <c-review
                                     v-for="(review, index) in reviews.helpful"
@@ -144,7 +144,7 @@
                                     :review="review"
                                 />
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6 col-12">
                                 <h2>Most recent</h2>
                                 <c-review
                                     v-for="(review, index) in reviews.recent"

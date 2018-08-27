@@ -168,7 +168,7 @@ export default {
 }
 
 .fade-scale-enter-active, .fade-scale-leave-active {
-    transition: opacity .3s ease, transform .5s ease;
+    transition: opacity .2s ease, transform .5s ease;
 }
 
 .fade-scale-leave-active {
@@ -177,6 +177,6 @@ export default {
 
 .fade-scale-enter, .fade-scale-leave-to {
     opacity: 0;
-    transform: scale(0);
+    transform: scale(.7);
 }
 </style>
