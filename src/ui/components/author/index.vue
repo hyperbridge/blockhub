@@ -1,8 +1,7 @@
 <template>
     <span class="author">
         <img class="author__img" :src="author.img" />
-        <strong class="author__name">{{ author.name }}</strong>
-        <slot />
+        {{ author.name }}
     </span>
 </template>
 
@@ -22,17 +21,12 @@ export default {
 .author {
     display: flex;
     align-items: center;
-    &__ {
-        &name {
-            font-size: 16px;
-        }
-        &img {
-            width: 24px;
-            height: 24px;
-            margin-right: 5px;
-        }
+    // font-size: 16px;
+    &__img {
+        width: 24px;
+        height: 24px;
+        margin-right: 5px;
     }
-
 }
 </style>
 

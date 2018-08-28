@@ -2,12 +2,7 @@
     <div class="card invert review">
         <div class="card-body padding-0">
             <div class="review__header">
-                <img
-                    class="avatar"
-                    :src="review.author.img"
-                    :alt="`${review.author.name} - user avatar image - BlockHub`"
-                />
-                {{ review.author.name }}
+                <c-author :author="review.author"/>
                 <div class="review__rating">
                     <i class="review__rating-score">{{ review.rating }}</i>
                     <div>
@@ -51,7 +46,7 @@
                     </a>
                 </span>
                 <a href="#" @click.prevent="show_more = !show_more">
-                    {{ show_more ? 'HIDE REVIEW' : 'CONTINUE READING' }}
+                    {{ show_more ? 'HIDE REVIEW' : 'READ MORE...' }}
                 </a>
             </div>
         </div>
@@ -68,7 +63,8 @@ export default {
         }
     },
     components: {
-        'c-rating-stars': () => import('@/ui/components/rating-stars')
+        'c-rating-stars': () => import('@/ui/components/rating-stars'),
+        'c-author': () => import('@/ui/components/author')
     },
     data() {
         return {
@@ -107,11 +103,6 @@ export default {
         display: flex;
         align-items: center;
         margin-bottom: 10px;
-        .avatar {
-           width: 28px;
-           height: 28px;
-           margin-right: 5px;
-        }
     }
 }
 
