@@ -1,11 +1,11 @@
 <template>
     <div class="switch-container">
-        <p v-if="label && label_position == 'left'" style="padding-right: 20px" :style="{ fontSize: label_size }">{{ label }}</p>
+        <p v-if="label && label_position == 'left'" style="padding-right: 10px" :style="{ fontSize: label_size }">{{ label }}</p>
         <label class="switch" :class="[ 'switch-' + size ]">
             <input :type="type" :id="id" name="switch_1" :checked="value" @change="$emit('input', $event.target.checked)">
             <span></span>
         </label>
-        <p v-if="label && label_position == 'right'" style="padding-left: 20px" :style="{ fontSize: label_size }">{{ label }}</p>
+        <p v-if="label && label_position == 'right'" style="padding-left: 10px" :style="{ fontSize: label_size }">{{ label }}</p>
     </div>
 </template>
 

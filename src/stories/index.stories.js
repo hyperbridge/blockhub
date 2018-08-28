@@ -2657,7 +2657,6 @@ storiesOf('Rating Block', module)
     }))
 
 import ScreenGallery from '../ui/components/screen-gallery/gallery'
-
 storiesOf('Screen Gallery', module)
     .add('default', () => ({
         components: {
@@ -2672,5 +2671,32 @@ storiesOf('Screen Gallery', module)
         `
     }))
 
+import SendingFundsPopup from '../ui/components/send-funds-popup/index'
+storiesOf('Sending Funds', module)
+    .add('default', () => ({
+        components:{
+            'c-send-funds': SendingFundsPopup,
+            'c-button': Buttons
+        },
+        data() {
+            return {
+                modalActive: false
+            }
+        },
+        methods: {
+            showModalHandler: function () {
+                this.modalActive = !this.modalActive;
+            }
+        },
+        template: `
+        <div class="row p-5">
+            <div class="col-8">
+                <c-button text="Show Sending Funds Modal" @click="showModalHandler" variant="warning" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                
+                <c-send-funds :modalActive="modalActive"  />
+            </div>
+        </div>
+        `
+    }))
 
 // /* eslint-enable react/react-in-jsx-scope */
