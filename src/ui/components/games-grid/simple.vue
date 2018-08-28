@@ -1,6 +1,7 @@
 <template>
     <div class="product-grid__container">
         <div class="product-grid__item-container"
+             v-if="items"
              v-for="(item, index) in items"
              v-bind:key="index"
              :style="{ width: 'calc( 100% / ' + itemInRow + ')'}"
@@ -13,6 +14,9 @@
                     <c-tags :tags="item.author_tags"></c-tags>
                 </div>
             </div>
+        </div>
+        <div v-else class="text-white">
+            Nothing to show
         </div>
     </div>
 </template>
@@ -58,6 +62,8 @@
         -moz-transform: scale(1);
         transition: all 200ms ease-in;
         transform: scale(1);
+        position: relative;
+        z-index: 10;
         &:hover {
             -webkit-transition: all 200ms ease-in;
             -webkit-transform: scale(1.05);
@@ -67,6 +73,7 @@
             -moz-transform: scale(1.05);
             transition: all 200ms ease-in;
             transform: scale(1.05);
+            z-index: 20;
         }
         h4{
             color: #fff;

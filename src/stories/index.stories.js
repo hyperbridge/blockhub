@@ -1909,9 +1909,9 @@ storiesOf('Switch', module)
     }));
 
 
-
 import AssetsList from '../ui/components/assets-list-item/featured-list.vue'
 import AssetsListDetail from '../ui/components/assets-list-item/index.vue'
+
 storiesOf('Assets List', module)
     .addDecorator(withKnobs)
     .add('type 1', () => ({
@@ -1971,6 +1971,7 @@ storiesOf('Assets List', module)
 
 
 import Block from '../ui/components/block-1/index.vue'
+
 storiesOf('Block', module)
     .add('default', () => ({
         components: {
@@ -1991,6 +1992,7 @@ storiesOf('Block', module)
     }))
 
 import CustomModal from '../ui/components/custom-modal/index'
+
 storiesOf('Modal', module)
     .add('default', () => ({
         components: {
@@ -2017,9 +2019,10 @@ storiesOf('Modal', module)
     }))
 
 import Dropdown from '../ui/components/dropdown-menu/index'
+
 storiesOf('Dropdown', module)
     .add('default', () => ({
-        components:{
+        components: {
             'c-dropdown': Dropdown
         },
         template: `
@@ -2031,14 +2034,15 @@ storiesOf('Dropdown', module)
 
 import DropdownMenu from '../ui/components/dropdown-menu/type-2.vue'
 import FTradedAssets from '../ui/components/frequently-traded-assets/index'
+
 storiesOf('Frequently traded assets', module)
     .add('default', () => ({
-        components:{
+        components: {
             'c-traded-assets': FTradedAssets,
             'c-dropdown': DropdownMenu
         },
         data() {
-            return object('Data',{
+            return object('Data', {
                 frequently_traded_assets: [
                     {
                         "id": "1",
@@ -2085,13 +2089,14 @@ storiesOf('Frequently traded assets', module)
     }))
 
 import GamePlans from '../ui/components/game-plans/list'
+
 storiesOf('Game Plans', module)
     .add('default', () => ({
-        components:{
+        components: {
             'c-game-plans': GamePlans
         },
         data() {
-            return object('Data',{
+            return object('Data', {
                 plans: [
                     {
                         "title": "Play Tibia Now",
@@ -2124,13 +2129,14 @@ storiesOf('Game Plans', module)
 
 import GamesGrid from '../ui/components/games-grid/with-description'
 import GamesGridSimple from '../ui/components/games-grid/simple'
+
 storiesOf('Games Grid', module)
     .addDecorator(withKnobs)
     .add('with description', () => ({
-        components:{
+        components: {
             'c-games-grid': GamesGrid
         },
-        data(){
+        data() {
             return object('Data', {
                 itemInRow: '2',
                 games: [
@@ -2189,10 +2195,10 @@ storiesOf('Games Grid', module)
          `
     }))
     .add('simple', () => ({
-        components:{
+        components: {
             'c-games-grid': GamesGridSimple
         },
-        data(){
+        data() {
             return object('Data', {
                 itemInRow: '3',
                 games: [
@@ -2248,10 +2254,11 @@ storiesOf('Games Grid', module)
     }))
 
 import Headers from '../ui/components/headers/basic'
+
 storiesOf('Headers', module)
     .add('default', () => ({
         components: {
-            'c-headers' : Headers
+            'c-headers': Headers
         },
         template: `
             <!--<c-headers />-->
@@ -2260,10 +2267,11 @@ storiesOf('Headers', module)
 
 import BlockHeaders from '../ui/components/heading-bar/index'
 import BlockHeadersAddFields from '../ui/components/heading-bar/additional-action'
+
 storiesOf('Block Title', module)
     .add('default', () => ({
         components: {
-            'c-heading-bar' : BlockHeaders
+            'c-heading-bar': BlockHeaders
         },
         template: `
             <div class="row">
@@ -2275,7 +2283,7 @@ storiesOf('Block Title', module)
     }))
     .add('with background', () => ({
         components: {
-            'c-heading-bar' : BlockHeaders
+            'c-heading-bar': BlockHeaders
         },
         template: `
             <div class="row">
@@ -2287,7 +2295,7 @@ storiesOf('Block Title', module)
     }))
     .add('with arrows', () => ({
         components: {
-            'c-heading-bar' : BlockHeaders
+            'c-heading-bar': BlockHeaders
         },
         template: `
             <div class="row">
@@ -2299,7 +2307,7 @@ storiesOf('Block Title', module)
     }))
     .add('with more button', () => ({
         components: {
-            'c-heading-bar' : BlockHeaders
+            'c-heading-bar': BlockHeaders
         },
         template: `
             <div class="row">
@@ -2311,10 +2319,10 @@ storiesOf('Block Title', module)
     }))
     .add('with custom content', () => ({
         components: {
-            'c-heading-bar' : BlockHeaders,
-            'c-heading-bar-fields' : BlockHeadersAddFields
+            'c-heading-bar': BlockHeaders,
+            'c-heading-bar-fields': BlockHeadersAddFields
         },
-        methods:{
+        methods: {
             upClick: function () {
                 alert('It was Up click')
             },
@@ -2338,14 +2346,16 @@ storiesOf('Block Title', module)
 
 import NewsListNav from '../ui/components/news-list/navigation'
 import NewsList from '../ui/components/news-list/articles'
+import NewsArticle from '../ui/components/news-list/article'
+
 storiesOf('News List', module)
     .add('default', () => ({
-        components:{
+        components: {
             'c-news-list-navigation': NewsListNav,
             'c-news-list-articles': NewsList,
         },
-        data(){
-            return{
+        data() {
+            return {
                 content_news: [
                     {
                         game: {
@@ -2412,14 +2422,36 @@ storiesOf('News List', module)
         </div>
         `
     }))
-
+    .add('single article', () => ({
+        components: {
+            'c-news-article': NewsArticle
+        },
+        data() {
+            return {
+                article: {
+                    heading: 'New class and event coming next week!',
+                    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
+                    url: 'article-url',
+                    date: '2018-07-24T04:09:00.000Z'
+                }
+            }
+        },
+        template: `
+            <div class="row">
+                <div class="col-6">
+                    <c-news-article :article="article" itemInRow="1" />
+                </div>
+            </div>
+        `
+    }))
 import Pagination from '../ui/components/pagination/index'
+
 storiesOf('Pagination(not finished)', module)
     .add('default', () => ({
-        components:{
+        components: {
             'c-pagination': Pagination
         },
-        template:`
+        template: `
             <div class="row m-0 p-5">
                 <c-pagination total_page="10" />
             </div>
@@ -2427,19 +2459,26 @@ storiesOf('Pagination(not finished)', module)
     }))
 
 import ProductCommunity from '../ui/components/product-community/item'
+
 storiesOf('Product Community', module)
     .add('post', () => ({
-        components:{
+        components: {
             'c-post': ProductCommunity
         },
-        data(){
+        data() {
             const authors = [
-                { name: 'Nakatochi', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png' },
-                { name: 'Nakatochi', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL' },
-                { name: 'SatoshiSan', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL' },
+                {name: 'Nakatochi', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'},
+                {
+                    name: 'Nakatochi',
+                    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL'
+                },
+                {
+                    name: 'SatoshiSan',
+                    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL'
+                },
             ];
             const placeholderText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non maximus tellus, eu lacinia justo. Cras semper vestibulum est. Donec a massa vitae nibh consectetur efficitur non in erat. Morbi id dapibus tortor. Praesent sit amet vulputate leo, eu posuere neque. In id ante scelerisque, commodo nisi non, eleifend mauris. Pellentesque massa elit, semper non libero nec, interdum aliquet dolor.';
-            return{
+            return {
                 post: {
                     title: `The previous title doesn't have it's single line aligned vertically because XD does not have this functionality.`,
                     date: '',
@@ -2451,20 +2490,22 @@ storiesOf('Product Community', module)
                         img: 'http://memesbams.com/wp-content/uploads/2017/08/2.3-Delightful-cheer-up-cat-meme.jpg',
                         text: placeholderText,
                         comments: [
-                            { author: authors[1], text: placeholderText, rate: 319 },
-                            { author: authors[0], text: placeholderText, rate: 932, replies: [
-                                    { author: authors[1], text: placeholderText, rate: 318 },
-                                    { author: authors[0], text: placeholderText, rate: -49 },
-                                    { author: authors[1], text: placeholderText, rate: 442 },
-                                    { author: authors[0], text: placeholderText, rate: 1239 }
-                                ]},
-                            { author: authors[0], text: placeholderText, rate: -51 }
+                            {author: authors[1], text: placeholderText, rate: 319},
+                            {
+                                author: authors[0], text: placeholderText, rate: 932, replies: [
+                                    {author: authors[1], text: placeholderText, rate: 318},
+                                    {author: authors[0], text: placeholderText, rate: -49},
+                                    {author: authors[1], text: placeholderText, rate: 442},
+                                    {author: authors[0], text: placeholderText, rate: 1239}
+                                ]
+                            },
+                            {author: authors[0], text: placeholderText, rate: -51}
                         ]
                     }
                 }
             }
         },
-        template:`
+        template: `
             <div class="row m-0 p-5">
                 <div class="col-10">
                     <c-post :post="post" />
@@ -2474,13 +2515,14 @@ storiesOf('Product Community', module)
     }))
 
 import ProductTags from '../ui/components/product-tags/index'
+
 storiesOf('Product Tags', module)
     .add('default', () => ({
-        components:{
-            'c-tags-list' : ProductTags
+        components: {
+            'c-tags-list': ProductTags
         },
-        data(){
-            return{
+        data() {
+            return {
                 tags: [
                     "adventure",
                     "rpg",
@@ -2488,7 +2530,7 @@ storiesOf('Product Tags', module)
                 ],
             }
         },
-        template:`
+        template: `
             <div class="row m-0 p-5">
                 <div class="col-12">
                     <h3 class="text-white d-block">Some title or name</h3>
@@ -2499,13 +2541,14 @@ storiesOf('Product Tags', module)
     }))
 
 import ProjectCard from '../ui/components/projects/card'
+
 storiesOf('Project Card', module)
     .add('default', () => ({
-        components:{
+        components: {
             'c-projects-card': ProjectCard
         },
-        data(){
-            return{
+        data() {
+            return {
                 trending_projects: [
                     {
                         game: {
@@ -2566,7 +2609,7 @@ storiesOf('Project Card', module)
                 ]
             }
         },
-        template:`
+        template: `
             <div class="row m-0 p-5">
                 <div class="col-10">
                     <c-projects-card v-for="(project, index) in trending_projects"
@@ -2580,14 +2623,15 @@ storiesOf('Project Card', module)
 
 
 import RatingBlock from '../ui/components/rating-block/index'
+
 storiesOf('Rating Block', module)
     .add('default', () => ({
-        components:{
-            'c-rating-block' : RatingBlock
+        components: {
+            'c-rating-block': RatingBlock
         },
-        data(){
-            return{
-                items:[
+        data() {
+            return {
+                items: [
                     {
                         name: 'Some title',
                         number: 4
@@ -2613,12 +2657,13 @@ storiesOf('Rating Block', module)
     }))
 
 import ScreenGallery from '../ui/components/screen-gallery/gallery'
+
 storiesOf('Screen Gallery', module)
     .add('default', () => ({
         components: {
-            'c-screen-gallery' : ScreenGallery
+            'c-screen-gallery': ScreenGallery
         },
-        template:`
+        template: `
         <div class="row p-5">
             <div class="col-8">
                 <c-screen-gallery />
@@ -2626,10 +2671,6 @@ storiesOf('Screen Gallery', module)
         </div>
         `
     }))
-
-
-
-
 
 
 // /* eslint-enable react/react-in-jsx-scope */

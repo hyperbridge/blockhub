@@ -26,9 +26,10 @@
                             showPrice="true"
                             showTime="true"
                             itemInRow="1"
-                            :items="new_games"
+                            v-bind:items="new_games"
                             itemBg="transparent"
                         ></c-game-grid>
+
                     </div>
                     <div class="col-12 col-lg-6 margin-bottom-30">
                         <c-heading-bar name="Top 20 Items" :showArrows="false" :showBackground="false">

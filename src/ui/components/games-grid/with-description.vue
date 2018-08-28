@@ -3,6 +3,8 @@
         <div class="games-list__item"
              :class="{ 'hovered' : hovered}"
              v-for="(item, index) in items"
+             v-if="items"
+             :key="index"
              :style="{ width: 'calc( 100% / ' + itemInRow + ')', background: itemBg }">
             <div v-if="showPrice" class="price">
                 <strong>{{ item.price }}</strong> USD
@@ -30,6 +32,9 @@
                     <a v-if="showButton" href="#3" class="btn btn-sm btn-success text-uppercase font-weight-bold">Buy Now</a>
                 </div>
             </div>
+        </div>
+        <div v-else class="text-white">
+            Nothing to show
         </div>
     </div>
 </template>
