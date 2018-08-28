@@ -1,5 +1,4 @@
 <template>
-
     <div class="sale-box invert">
         <h5 class="sale-box__title">
             {{ sale_box.title }}
@@ -8,14 +7,15 @@
             Get for ${{ sale_box.price }}
         </a>
     </div>
-
 </template>
 
 <script>
-    export default {
-        name: 'c-sale-box',
-        props: ['sale_box']
+export default {
+    name: 'sale-box',
+    props: {
+        sale_box: Object
     }
+}
 </script>
 
 <style lang="scss" scoped>

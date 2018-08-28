@@ -39,13 +39,17 @@
             <a :href="assets_url" class="btn btn-outline-white">Go To Assets</a>
         </div>
     </div>
-    
+
 </template>
 
 <script>
-    export default {
-        props: ['items', 'assets_url']
+export default {
+    name: 'frequently-traded-assets',
+    props: {
+        items: Array,
+        assets_url: String
     }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -131,5 +135,5 @@
             max-height: 100%;
         }
     }
-    
+
 </style>

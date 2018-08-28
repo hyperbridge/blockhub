@@ -21,7 +21,13 @@
 
 <script>
 export default {
-    props: ['rate'],
+    name: 'rate-item',
+    props: {
+        rate: {
+            type: Number,
+            required: true
+        }
+    },
     data() {
         return {
             animateUp: false,

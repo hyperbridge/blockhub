@@ -20,7 +20,7 @@
 
             <transition name="fade-scale">
                 <p v-if="show_more" :key="show_more">{{ review.text }}</p>
-                <p v-else>{{ review.text | cut_length }}</p>
+                <p v-else>{{ review.text.substring(0, 200) }}</p>
             </transition>
 
             <transition name="fade-scale">
@@ -84,11 +84,6 @@ export default {
             const hours_played = Math.floor(minutes_played / 60);
 
             return hours_played + 'h ' + (minutes_played - hours_played * 60) + 'm';
-        }
-    },
-    filters: {
-        cut_length(val) {
-            return val.length > 200 ? val.substring(0, 200) + '...' : val;
         }
     }
 }

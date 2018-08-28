@@ -21,7 +21,6 @@ export default {
 .author {
     display: flex;
     align-items: center;
-    // font-size: 16px;
     &__img {
         width: 24px;
         height: 24px;

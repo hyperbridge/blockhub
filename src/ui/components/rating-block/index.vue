@@ -1,5 +1,4 @@
 <template>
-
     <div class="card invert rating-block" v-if="items">
         <div class="card-body">
             <h2 class="title">Rating</h2>
@@ -19,20 +18,22 @@
             <a href="#reviews" class="btn btn-outline-white">Rate the game</a>
         </div>
     </div>
-
 </template>
 
-
 <script>
-    export default {
-        name: 'rating-block',
-        props: ['items'],
-        components: {
-            'c-rating-stars': () => import('@/ui/components/rating-stars')
+export default {
+    name: 'rating-block',
+    props: {
+        items: {
+            type: Array,
+            required: true
         }
+    },
+    components: {
+        'c-rating-stars': () => import('@/ui/components/rating-stars')
     }
+}
 </script>
-
 
 <style lang="scss" scoped>
 

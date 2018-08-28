@@ -1,5 +1,4 @@
 <template>
-
     <div class="card invert community-spotlight" v-if="discussions">
         <div class="card-body">
             <div class="editor-container editor-container--style-2" v-if="editing">
@@ -25,14 +24,19 @@
             <a :href="community_url" class="btn btn-outline-white">Go To Community</a>
         </div>
     </div>
-
 </template>
 
 
 <script>
-    export default {
-        props: ['discussions', 'community_url', 'editing', 'activateElement']
+export default {
+    name: 'community-spotlight',
+    props: {
+        discussions: Array,
+        community_url: String,
+        editing: Boolean,
+        activateElement: Boolean
     }
+}
 </script>
 
 
@@ -92,7 +96,7 @@
             }
         }
     }
-    
+
     .community-spotlight__list {
         padding: 0;
         margin: 10px 0;

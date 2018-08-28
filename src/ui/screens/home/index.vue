@@ -547,4 +547,8 @@
             }
         }
     }
+
+.project-card__item {
+    margin-bottom: 30px;
+}
 </style>

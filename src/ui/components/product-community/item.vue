@@ -45,7 +45,13 @@
 
 <script>
 export default {
-    props: ['post'],
+    name: 'community-item',
+    props: {
+        post: {
+            type: Object,
+            required: true
+        }
+    },
     components: {
         'c-post-comment': () => import('@/ui/components/product-community/comment'),
         'c-reply': () => import('@/ui/components/product-community/reply'),

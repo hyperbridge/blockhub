@@ -34,6 +34,7 @@
 
 <script>
 export default {
+    name: 'comment',
     props: {
         comment: {
             type: Object,
