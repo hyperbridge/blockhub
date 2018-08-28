@@ -21,6 +21,7 @@
                :data-postfix="postfix"
                :data-max-postfix="maxPostfix"
                :data-grid="grid"
+               :data-grid-num="gridNum"
                :data-disable="disable"
                :data-block="block"
                :data-extra-classes="extraClasses"
@@ -75,6 +76,10 @@
             grid:{
                 type: Boolean,
                 default: false
+            },
+            gridNum:{
+                type: Number,
+                default: 4
             },
             disable:{
                 type: Boolean,
@@ -133,15 +138,28 @@
         .irs-max{
             background: transparent;
             font-size: 15px;
-            top: 40px;
+            top: 45px;
+            padding: 0;
+            min-width: 20px;
+            text-align: center;
+            display: inline-block;
         }
-        .irs-single{
+        .irs-single,
+        .irs-from,
+        .irs-to{
             background: transparent;
             font-size: 15px;
-            top: 40px;
+            top: 45px;
             &:after{
                 display: none;
             }
+        }
+        .irs-grid-text{
+            display: none;
+        }
+        .irs-grid-pol{
+            height: 4px;
+            width: 2px;
         }
     }
 </style>

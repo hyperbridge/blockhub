@@ -1724,7 +1724,7 @@ storiesOf('Popups', module)
     }))
 
 storiesOf('Range Slider', module)
-    .add('default', () => ({
+    .add('single range slider', () => ({
         components: {
             'c-range-slider': RangeSlider
         },
@@ -1735,7 +1735,59 @@ storiesOf('Range Slider', module)
             </div>
          </div>
         `
-    }));
+    }))
+    .add('single step slider', () => ({
+        components: {
+            'c-range-slider': RangeSlider
+        },
+        template: `
+         <div class="row m-0 p-3">
+            <div class="col-8">
+                <c-range-slider label="Single step slider" 
+                 :min="1"
+                 :max="10"
+                 :step="1"
+                 :gridNum="2"
+                 :grid="true"/>
+            </div>
+         </div>
+        `
+    }))
+    .add('double range slider', () => ({
+        components: {
+            'c-range-slider': RangeSlider
+        },
+        template: `
+         <div class="row m-0 p-3">
+            <div class="col-8">
+                <c-range-slider 
+                label="Double slider" 
+                :min="0" 
+                :from="25"
+                :to="67"
+                type="double" />
+            </div>
+         </div>
+        `
+    }))
+    .add('double grid range slider', () => ({
+        components: {
+            'c-range-slider': RangeSlider
+        },
+        template: `
+         <div class="row m-0 p-3">
+            <div class="col-8">
+                <c-range-slider 
+                label="Double slider" 
+                :min="0" 
+                :from="25"
+                :to="67"
+                :grid="true"
+                type="double" />
+            </div>
+         </div>
+        `
+    }))
 
 storiesOf('Assets Grid', module)
     .addDecorator(withKnobs)
