@@ -118,7 +118,7 @@
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
                                 <a class="nav-link active" :href="`/#/project/${project.id}`" data-toggle="pill"
-                                   href="#overview" role="tab" aria-controls="overview"
+                                    role="tab" aria-controls="overview"
                                    aria-selected="true">Overview</a>
                             </li>
                             <li class="nav-item">
@@ -160,12 +160,12 @@
                                                     <label>Maximum Contribution Goal</label>
                                                 </label>
                                                 <div class="col-sm-9">
-                                                    
+
                                                     <input type="text" class="form-control" placeholder="Example: 1000">
                                                     <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="form-group row">
                                                 <div class="col-sm-3">
                                                     <label>Support Email</label>
@@ -763,7 +763,7 @@
             'c-plan-list': () => import('@/ui/components/game-plans/list'),
             'c-block-1': () => import('@/ui/components/block-1'),
             'c-screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
-            'c-tags-list': () => import('@/ui/components/product-tags'),
+            'c-tags-list': () => import('@/ui/components/tags'),
             'c-rating-block': () => import('@/ui/components/rating-block'),
             'c-frequently-traded-assets': () => import('@/ui/components/frequently-traded-assets'),
             'c-community-spotlight': () => import('@/ui/components/community-spotlight'),

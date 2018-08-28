@@ -81,7 +81,7 @@
         props: ['id'],
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
-            'c-tags-list': () => import('@/ui/components/product-tags'),
+            'c-tags-list': () => import('@/ui/components/tags'),
             'c-item': () => import('@/ui/components/product-community/item'),
             'c-post-comment': () => import('@/ui/components/product-community/comment'),
             'dropdown-menu': () => import('@/ui/components/dropdown-menu'),

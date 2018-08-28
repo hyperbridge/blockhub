@@ -2,6 +2,7 @@
     <div class="games-list">
         <div class="games-list__item"
              v-for="(item, index) in items"
+             :key="index"
              :style="{ width: 'calc( 100% / ' + itemInRow + ')', background: itemBg }">
             <div v-if="showPrice" class="price">
                 <strong>{{ item.price }}</strong> USD
@@ -37,7 +38,7 @@
     export default {
         props: ['items', 'showPrice', 'showStars', 'showButton', 'showTime', 'itemInRow', 'itemBg'],
         components:{
-            'c-tags': () => import('@/ui/components/product-tags'),
+            'c-tags': () => import('@/ui/components/tags'),
         }
     }
 </script>

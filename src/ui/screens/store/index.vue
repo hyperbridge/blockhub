@@ -94,7 +94,7 @@ const updateLandingImage = function() {
 export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default'),
-        'c-tags': () => import('@/ui/components/product-tags'),
+        'c-tags': () => import('@/ui/components/tags'),
         'c-heading-bar': () => import('@/ui/components/heading-bar'),
         'c-game-card': () => import('@/ui/components/store/game-card'),
         'c-game-card-dynamic': () => import('@/ui/components/store/game-card-dynamic'),
@@ -247,7 +247,7 @@ export default {
             color: #fff;
         }
     }
-    p{
+    p {
         margin: 15px 0;
     }
 }

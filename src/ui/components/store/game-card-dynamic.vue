@@ -39,7 +39,7 @@ export default {
         }
     },
     components: {
-        'c-tags': () => import('@/ui/components/product-tags')
+        'c-tags': () => import('@/ui/components/tags')
     },
     data() {
         return {

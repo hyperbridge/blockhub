@@ -524,7 +524,7 @@
             'c-plan-list': () => import('@/ui/components/game-plans/list'),
             'c-screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
             'c-sale-box': () => import('@/ui/components/sale-box/box'),
-            'c-tags-list': () => import('@/ui/components/product-tags'),
+            'c-tags-list': () => import('@/ui/components/tags'),
             'c-rating-block': () => import('@/ui/components/rating-block'),
             'c-frequently-traded-assets': () => import('@/ui/components/frequently-traded-assets'),
             'c-community-spotlight': () => import('@/ui/components/community-spotlight'),

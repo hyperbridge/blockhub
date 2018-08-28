@@ -70,6 +70,7 @@
                             <h3>Top 3 Submissions</h3>
                             <c-projects-card
                                 v-for="(project, index) in projects"
+                                :key="index"
                                 :project="project"
                                 :showGame="false"
                             />
@@ -104,7 +105,7 @@
         props: ['id'],
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
-            'c-tags-list': () => import('@/ui/components/product-tags'),
+            'c-tags-list': () => import('@/ui/components/tags'),
             'c-projects-card': () => import('@/ui/components/projects/card')
         },
         data() {

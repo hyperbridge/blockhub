@@ -14,8 +14,6 @@ import Welcome from './Welcome.vue'
 import SaleBox from '../ui/components/sale-box/box.vue'
 import PlanList from '../ui/components/game-plans/list.vue'
 import AssetsImporter from '../ui/components/asset-importer/contact-import.vue'
-import Notification from '../ui/components/notification/index.vue'
-import Searcher from '../ui/components/searcher';
 
 
 storiesOf('Welcome', module).add('to Storybook', () => ({
@@ -88,10 +86,12 @@ storiesOf('Assets Importer', module)
         template: '<div class="row"><div class="col-8"><c-assets-importer /></div></div>'
     }))
 
+import Notifications from '../ui/components/notification/index.vue';
+import Notification from '../ui/components/notification/single.vue';
 storiesOf('Notifications', module)
     .add('default', () => ({
         components: {
-            'c-notification': Notification
+            Notifications
         },
         data() {
             return {
@@ -134,16 +134,111 @@ storiesOf('Notifications', module)
                 ]
             }
         },
-        template: '<div class="row"><div class="col-4 pt-3"><c-notification :notifications="ntf_messages" /></div></div>'
+        template: '<div class="row"><div class="col-4 pt-3"><notifications :notifications="ntf_messages" /></div></div>'
+    }))
+    .add('single', () => ({
+        components: { Notification },
+        data() {
+            return {
+                notif: {
+                    type: 'info',
+                    title: 'Info message',
+                    text: 'Something is changed in our policy, please view this notification.Click to view full',
+                    actionOnClose: false,
+                    actionOnTextClick: true
+                },
+                notifs: [
+                    {
+                        type: 'info',
+                        title: 'Info message',
+                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        actionOnClose: false,
+                        actionOnTextClick: true
+                    },
+                    {
+                        type: 'warning',
+                        title: 'Warning message',
+                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        actionOnClose: '',
+                        actionOnTextClick: ''
+                    },
+                    {
+                        type: 'danger',
+                        title: 'Danger message',
+                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        actionOnClose: '',
+                        actionOnTextClick: ''
+                    },
+                    {
+                        type: 'success',
+                        title: 'Success message',
+                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        actionOnClose: '',
+                        actionOnTextClick: ''
+                    },
+                    {
+                        type: '',
+                        title: 'Other message',
+                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        actionOnClose: '',
+                        actionOnTextClick: ''
+                    }
+                ]
+            }
+        },
+        template: `
+            <div class="row">
+                <div class="col-4 pt-3">
+                    Single:
+                    <notification :notification="notif"/>
+                    Multiple:
+                    <notification v-for="(notif, index) in notifs" :key="index" :notification="notif"/>
+                </div>
+            </div>
+        `
     }))
 
-
+import Searcher from '../ui/components/searcher';
 storiesOf('Searcher', module)
     .add('default', () => ({
-        components: {
-            'c-searcher': Searcher
+        components: { Searcher },
+        template: `<searcher />`
+    }))
+
+import RatingStars from '../ui/components/rating-stars';
+storiesOf('Rating', module)
+    .add('Stars', () => ({
+        components: { RatingStars },
+        template: '<rating-stars :number="3.5"/>'
+    }));
+
+import Author from '../ui/components/author';
+storiesOf('Author', module)
+    .add('Author', () => ({
+        components: { Author },
+        data() {
+            return {
+                author: {
+                    name: 'SatoSan',
+                    img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'
+                }
+            }
         },
-        template: `<c-searcher />`
+        template: `<author :author="author"/>`
+    }))
+
+import Tags from '../ui/components/tags';
+storiesOf('Tags', module)
+    .add('Tags', () => ({
+        components: { Tags },
+        template: `<tags :tags="['RPG', 'Open-World']"/>`
+    }))
+
+import LoadingBar from '../ui/components/loading-bar';
+storiesOf('LoadingBar', module)
+    .add('LoadingBar', () => ({
+        components: { LoadingBar },
+        template: `<loading-bar/>`
     }))
 
 /* eslint-enable react/react-in-jsx-scope */

@@ -6,7 +6,7 @@
                 <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
                 <p class="card-text" hidden>{{ item.short_description }} </p>
 
-                <c-tags :tags="item.author_tags"></c-tags>
+                <c-tags :tags="item.author_tags" />
             </div>
         </div>
     </div>
@@ -16,7 +16,7 @@
     export default {
         props: ['projects'],
         components:{
-            'c-tags': () => import('@/ui/components/product-tags'),
+            'c-tags': () => import('@/ui/components/tags'),
         }
     }
 </script>
