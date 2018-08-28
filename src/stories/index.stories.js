@@ -57,7 +57,7 @@ storiesOf('Sale Box', module)
                 }
             }
         },
-        template: '<div class="row"><div class="col-6"><c-sale-box :sale_box="sale_box"></c-sale-box></div></div>'
+        template: '<div class="row"><div class="col-6 p-5"><c-sale-box :sale_box="sale_box"></c-sale-box></div></div>'
     }))
 
 storiesOf('Assets Importer', module)
@@ -2577,6 +2577,58 @@ storiesOf('Project Card', module)
             </div>
         `
     }))
+
+
+import RatingBlock from '../ui/components/rating-block/index'
+storiesOf('Rating Block', module)
+    .add('default', () => ({
+        components:{
+            'c-rating-block' : RatingBlock
+        },
+        data(){
+            return{
+                items:[
+                    {
+                        name: 'Some title',
+                        number: 4
+                    },
+                    {
+                        name: 'Some second title',
+                        number: 3.6
+                    },
+                    {
+                        name: 'Some third a little bit bigger title',
+                        number: 5
+                    }
+                ]
+            }
+        },
+        template: `
+        <div class="row">
+            <div class="col-8">
+                <c-rating-block :items="items" fullReviewsLink="#3" rateGameLink="#4" />
+            </div>
+        </div>
+        `
+    }))
+
+import ScreenGallery from '../ui/components/screen-gallery/gallery'
+storiesOf('Screen Gallery', module)
+    .add('default', () => ({
+        components: {
+            'c-screen-gallery' : ScreenGallery
+        },
+        template:`
+        <div class="row p-5">
+            <div class="col-8">
+                <c-screen-gallery />
+            </div>
+        </div>
+        `
+    }))
+
+
+
 
 
 
