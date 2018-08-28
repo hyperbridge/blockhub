@@ -2657,7 +2657,7 @@ storiesOf('Rating Block', module)
     }))
 
 import ScreenGallery from '../ui/components/screen-gallery/gallery'
-storiesOf('Screen Gallery', module)
+storiesOf('Screen Gallery(not finished)', module)
     .add('default', () => ({
         components: {
             'c-screen-gallery': ScreenGallery
@@ -2672,7 +2672,7 @@ storiesOf('Screen Gallery', module)
     }))
 
 import SendingFundsPopup from '../ui/components/send-funds-popup/index'
-storiesOf('Sending Funds', module)
+storiesOf('Sending Funds(not finished)', module)
     .add('default', () => ({
         components:{
             'c-send-funds': SendingFundsPopup,
@@ -2694,6 +2694,33 @@ storiesOf('Sending Funds', module)
                 <c-button text="Show Sending Funds Modal" @click="showModalHandler" variant="warning" icon="fas fa-check" icon_position="left" c_class="ml-1" />
                 
                 <c-send-funds :modalActive="modalActive"  />
+            </div>
+        </div>
+        `
+    }))
+
+import UserCard from '../ui/components/user-card/index'
+storiesOf('User Card(not finished)', module)
+    .add('default', () => ({
+        components:{
+            'c-user-card' : UserCard
+        },
+        template: `
+        <div class="row p-5">
+            <div class="col-4">
+                <c-user-card  />
+            </div>
+        </div>
+        `
+    }))
+    .add('done', () => ({
+        components:{
+            'c-user-card' : UserCard
+        },
+        template: `
+        <div class="row p-5">
+            <div class="col-4">
+                <c-user-card status="success" :user="true"  />
             </div>
         </div>
         `
