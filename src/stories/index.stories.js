@@ -86,57 +86,9 @@ storiesOf('Assets Importer', module)
         template: '<div class="row"><div class="col-8"><c-assets-importer /></div></div>'
     }))
 
-import Notifications from '../ui/components/notification/index.vue';
-import Notification from '../ui/components/notification/single.vue';
+import Notification from '../ui/components/notification';
 storiesOf('Notifications', module)
     .add('default', () => ({
-        components: {
-            Notifications
-        },
-        data() {
-            return {
-                ntf_messages: [
-                    {
-                        type: 'info',
-                        title: 'Info message',
-                        text: 'Something is changed in our policy, please view this notification.Click to view full',
-                        actionOnClose: false,
-                        actionOnTextClick: true
-                    },
-                    {
-                        type: 'warning',
-                        title: 'Warning message',
-                        text: 'Something is changed in our policy, please view this notification.Click to view full',
-                        actionOnClose: '',
-                        actionOnTextClick: ''
-                    },
-                    {
-                        type: 'danger',
-                        title: 'Danger message',
-                        text: 'Something is changed in our policy, please view this notification.Click to view full',
-                        actionOnClose: '',
-                        actionOnTextClick: ''
-                    },
-                    {
-                        type: 'success',
-                        title: 'Success message',
-                        text: 'Something is changed in our policy, please view this notification.Click to view full',
-                        actionOnClose: '',
-                        actionOnTextClick: ''
-                    },
-                    {
-                        type: '',
-                        title: 'Other message',
-                        text: 'Something is changed in our policy, please view this notification.Click to view full',
-                        actionOnClose: '',
-                        actionOnTextClick: ''
-                    },
-                ]
-            }
-        },
-        template: '<div class="row"><div class="col-4 pt-3"><notifications :notifications="ntf_messages" /></div></div>'
-    }))
-    .add('single', () => ({
         components: { Notification },
         data() {
             return {
