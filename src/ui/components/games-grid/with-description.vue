@@ -6,7 +6,7 @@
              v-if="items"
              :key="index"
              :style="{ width: 'calc( 100% / ' + itemInRow + ')', background: itemBg }">
-            <div v-if="showPrice" class="price">
+            <div v-if="item.price && showPrice" class="price">
                 <strong>{{ item.price }}</strong> USD
             </div>
             <div class="img">
@@ -18,18 +18,16 @@
                     <p>{{ item.description }}</p>
                 </div>
                 <div class="footer">
-                    <div class="time" v-if="showTime">
+                    <div class="time" v-if="item.time && showTime">
                         <i class="fas fa-calendar-alt"></i>
                         {{ item.time }}
                     </div>
-                    <div class="rating_stars" v-if="showStars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                    <div class="rating_stars" v-if="item.starsCount && showRating">
+                        <i class="fas fa-star" v-for="num in Math.floor(item.starsCount)" :key="num"></i>
+                        <i class="fas fa-star-half"
+                           v-if="Number.isInteger(item.starsCount) === false"></i>
                     </div>
-                    <a v-if="showButton" href="#3" class="btn btn-sm btn-success text-uppercase font-weight-bold">Buy Now</a>
+                    <a v-if="item.moreLink" :href="item.moreLink" class="btn btn-sm btn-success text-uppercase font-weight-bold">Buy Now</a>
                 </div>
             </div>
         </div>
@@ -43,7 +41,34 @@
     import Tags from '../product-tags/index'
 
     export default {
-        props: ['items', 'showPrice', 'showStars', 'showButton', 'showTime', 'itemInRow', 'itemBg', 'hovered'],
+        props: {
+            items:{
+                type: Array
+            },
+            itemInRow: {
+                type: Number,
+                default: 1
+            },
+            showRating: {
+                type: Boolean,
+                default: true
+            },
+            showTime: {
+                type: Boolean,
+                default: true
+            },
+            showPrice: {
+                type: Boolean,
+                default: true
+            },
+            hovered: {
+                type: Boolean,
+                default: true
+            },
+            itemBg: {
+                type: String
+            }
+        },
         components:{
             'c-tags': Tags
         }
@@ -115,6 +140,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                padding-top: 10px;
                 .rating_stars{
                     color: #FADC72;
                     font-size: 15px;
