@@ -70,6 +70,7 @@
                             <h3>Top 3 Submissions</h3>
                             <c-projects-card
                                 v-for="(project, index) in projects"
+                                :key="index"
                                 :project="project"
                                 :showGame="false"
                             />
