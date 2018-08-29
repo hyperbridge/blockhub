@@ -44,7 +44,6 @@
 
 <style lang="scss" scoped>
     .money-info {
-        width: 32%;
         margin-top: 10px;
         font-size: 15px;
         position: relative;
