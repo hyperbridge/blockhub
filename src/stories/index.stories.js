@@ -31,29 +31,16 @@ import AssetsGrid from '../ui/components/assets-grid/index.vue'
 import AssetsPopup from '../ui/components/asset-overview-popup/index.vue'
 import Switch from '../ui/components/switch/index.vue'
 
-
-// storiesOf('Welcome', module).add('to Storybook', () => ({
-//     components: {Welcome},
-//     template: '<welcome :showApp="action" />',
-//     methods: {action: linkTo('Button')},
-// }))
-
-// storiesOf('Button', module)
-//   .add('with text', () => ({
-//     components: { MyButton },
-//     template: '<my-button @click="action">Hello Button</my-button>',
-//     methods: { action: action('clicked') },
-//   }))
-
 storiesOf('Sale Box', module)
     .add('default', () => ({
         components: {
             'c-sale-box': SaleBox
         },
         data() {
+            let title = 'test';
             return {
                 sale_box: {
-                    title: 'test'
+                    title: title
                 }
             }
         },
