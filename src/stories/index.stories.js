@@ -22,13 +22,6 @@ storiesOf('Welcome', module).add('to Storybook', () => ({
     methods: {action: linkTo('Button')},
 }))
 
-// storiesOf('Button', module)
-//   .add('with text', () => ({
-//     components: { MyButton },
-//     template: '<my-button @click="action">Hello Button</my-button>',
-//     methods: { action: action('clicked') },
-//   }))
-
 storiesOf('Sale Box', module)
     .add('default', () => ({
         components: {
@@ -192,5 +185,180 @@ storiesOf('LoadingBar', module)
         components: { LoadingBar },
         template: `<loading-bar/>`
     }))
+
+import HeadingBar from '../ui/components/heading-bar';
+storiesOf('HeadingBar', module)
+    .add('HeadingBar', () => ({
+        components: { HeadingBar },
+        data() {
+            return {
+                trueVal: true
+            }
+        },
+        template: `<heading-bar name="Heading" :showBackground="trueVal" :showArrows="trueVal"/>`
+    }))
+
+import NavigationAccount from '../ui/components/navigation/account';
+import NavigationAsset from '../ui/components/navigation/asset';
+import NavigationFunding from '../ui/components/navigation/funding';
+import NavigationHelp from '../ui/components/navigation/help';
+import NavigationProduct from '../ui/components/navigation/product';
+import NavigationProject from '../ui/components/navigation/project';
+import NavigationSettings from '../ui/components/navigation/settings';
+import NavigationWallet from '../ui/components/navigation/wallet';
+storiesOf('Navigation', module)
+    .add('account', () => ({
+        components: { NavigationAccount }, template: `<NavigationAccount />`
+    }))
+    .add('asset', () => ({
+        components: { NavigationAsset }, template: `<NavigationAsset />`
+    }))
+    .add('funding', () => ({
+        components: { NavigationFunding }, template: `<NavigationFunding />`
+    }))
+    .add('help', () => ({
+        components: { NavigationHelp }, template: `<NavigationHelp />`
+    }))
+    .add('product', () => ({
+        components: { NavigationProduct }, template: `<NavigationProduct />`
+    }))
+    .add('project', () => ({
+        components: { NavigationProject }, template: `<NavigationProject />`
+    }))
+    .add('settings', () => ({
+        components: { NavigationSettings }, template: `<NavigationSettings />`
+    }))
+    .add('wallet', () => ({
+        components: { NavigationWallet }, template: `<NavigationWallet />`
+    }))
+
+
+import Card from '../ui/components/projects/card';
+storiesOf('Projects', module)
+    .add('card', () => ({
+        components: { Card },
+        data() {
+            return {
+                projects: [
+                    {
+                        game: {
+                            title: 'Diablo III',
+                            developer: 'Blizzard Entertainment',
+                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                        },
+                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                        funds: {
+                            currency: 'USD',
+                            obtained: 2834,
+                            goal: 5000
+                        }
+                    },
+                    {
+                        game: {
+                            title: 'World of Warcraft',
+                            developer: 'Blizzard Entertainment',
+                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                        },
+                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                        funds: {
+                            currency: 'GBP',
+                            obtained: 7613,
+                            goal: 8500
+                        }
+                    },
+                    {
+                        game: {
+                            title: 'Diablo III',
+                            developer: 'Blizzard Entertainment',
+                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                        },
+                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                        funds: {
+                            currency: 'USD',
+                            obtained: 2834,
+                            goal: 5000
+                        }
+                    },
+                    {
+                        game: {
+                            title: 'Diablo III',
+                            developer: 'Blizzard Entertainment',
+                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                        },
+                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                        funds: {
+                            currency: 'USD',
+                            obtained: 2834,
+                            goal: 5000
+                        }
+                    },
+                ]
+            }
+        },
+        template: `
+            <div class="col-4">
+                <card
+                    v-for="(project, index) in projects"
+                    :key="index"
+                    :project="project"
+                />
+            </div>
+        `
+    }))
+
+import ScreenGallery from '../ui/components/screen-gallery/gallery';
+storiesOf('Gallery', module)
+    .add('screen-gallery', () => ({
+        components: { ScreenGallery },
+        data() {
+            return {
+                main: 'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012',
+                items: [
+                    'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012',
+                    'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012',
+                    'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012',
+                ]
+            }
+        },
+        template: `<screen-gallery :main="main" :items="items" class="col-6"/>`
+    }))
+
+import UserCard from '../ui/components/user-card';
+storiesOf('User Card', module)
+    .add('user-card', () => ({
+        components: { UserCard },
+        data() {
+            return {
+
+            }
+        },
+        template: `<user-card/>`
+    }))
+
+import GameCard from '../ui/components/store/game-card';
+storiesOf('Game Card', module)
+    .add('game-card', () => ({
+        components: { GameCard },
+        template: `<game-card/>`
+    }))
+
+/*
+     Dynamic import - test version
+
+const navigation = storiesOf('Navigation', module);
+
+['account', 'asset', 'funding'].forEach(component => {
+    navigation.add(component, () => ({
+        components: { [component]: () => import(`../ui/components/navigation/${component}`) },
+        template: `<${component}/>`
+    }))
+});
+
+*/
+
 
 /* eslint-enable react/react-in-jsx-scope */

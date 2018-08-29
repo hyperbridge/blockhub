@@ -24,7 +24,12 @@
 <script>
 export default {
     name: 'heading-bar',
-    props: ['name', 'showBackground', 'showArrows', 'more']
+    props: {
+        name: String,
+        showBackground: Boolean,
+        showArrows: Boolean,
+        more: Boolean
+    }
 }
 </script>
 

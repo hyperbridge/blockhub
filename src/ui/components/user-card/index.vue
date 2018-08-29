@@ -74,9 +74,9 @@
 </template>
 
 <script>
-    export default {
-        props: ['user', 'status','icon_color', 'icon_class']
-    }
+export default {
+    props: ['user', 'status','icon_color', 'icon_class']
+}
 </script>
 
 <style lang="scss" scoped>

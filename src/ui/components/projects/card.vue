@@ -43,8 +43,13 @@
 
 <script>
 export default {
-    name: 'c-projects-card',
-    props: ['project'],
+    name: 'projects-card',
+    props: {
+        project: {
+            type: Object,
+            required: true
+        }
+    },
     computed: {
         goal_progress() {
             const { obtained, goal } = this.project.funds;
