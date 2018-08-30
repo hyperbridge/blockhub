@@ -9,34 +9,7 @@ import '../css/styles.scss'
 
 //import '!style-loader!css-loader!./styles.scss'
 
-import MyButton from './MyButton.vue'
-import Welcome from './Welcome.vue'
 import SaleBox from '../ui/components/sale-box/box.vue'
-import AssetsImporter from '../ui/components/asset-importer/index.vue'
-import Tabs from '../ui/components/tab/tabs.vue'
-import Tab from '../ui/components/tab/tab.vue'
-import MilestonesLine from '../ui/components/milestones-line/index.vue'
-import Buttons from '../ui/components/buttons/index.vue'
-import Links from '../ui/components/links/index.vue'
-import MoneyInfo from '../ui/components/money-info/index.vue'
-import Checkbox from '../ui/components/checkbox/checbox.vue'
-import CheckboxGroup from '../ui/components/checkbox/checbox-group.vue'
-import RangeSlider from '../ui/components/range-slider/index.vue'
-import Tooltips from '../ui/components/tooltips/index.vue'
-import ActivityChart from '../ui/components/activity-chart/index.vue'
-import PopUps from '../ui/components/popups/index.vue'
-import AssetsGrid from '../ui/components/assets-grid/index.vue'
-import AssetsPopup from '../ui/components/asset-overview-popup/index.vue'
-import Switch from '../ui/components/switch/index.vue'
-import PlanList from '../ui/components/game-plans/list.vue'
-
-
-storiesOf('Welcome', module).add('to Storybook', () => ({
-    components: {Welcome},
-    template: '<welcome :showApp="action" />',
-    methods: {action: linkTo('Button')},
-}))
-
 storiesOf('Sale Box', module)
     .add('default', () => ({
         components: {
@@ -53,6 +26,7 @@ storiesOf('Sale Box', module)
         template: '<div class="row"><div class="col-6 p-5"><c-sale-box :sale_box="sale_box"></c-sale-box></div></div>'
     }))
 
+import AssetsImporter from '../ui/components/asset-importer/index.vue'
 storiesOf('Assets Importer', module)
     .add('default', () => ({
         components: {
@@ -66,10 +40,12 @@ storiesOf('Assets Importer', module)
         template: '<div class="row"><div class="col-8"><c-assets-importer show_skipped="show_skipped" /></div></div>'
     }))
 
-
+import Notification from '../ui/components/notification/index.vue'
 storiesOf('Notifications', module)
     .add('default', () => ({
-        components: { Notification },
+        components: {
+            'c-notification' : Notification
+        },
         data() {
             return {
                 notif: {
@@ -124,12 +100,12 @@ storiesOf('Notifications', module)
             }
         },
         template: `
-            <div class="row">
-                <div class="col-4 pt-3">
+            <div class="row m-0">
+                <div class="col-4 pt-3 text-white">
                     Single:
-                    <notification :notification="notif"/>
+                    <c-notification :notification="notif"/>
                     Multiple:
-                    <notification v-for="(notif, index) in notifs" :key="index" :notification="notif"/>
+                    <c-notification v-for="(notif, index) in notifs" :key="index" :notification="notif"/>
                 </div>
             </div>
         `
@@ -178,17 +154,6 @@ storiesOf('LoadingBar', module)
         template: `<loading-bar/>`
     }))
 
-import HeadingBar from '../ui/components/heading-bar';
-storiesOf('HeadingBar', module)
-    .add('HeadingBar', () => ({
-        components: { HeadingBar },
-        data() {
-            return {
-                trueVal: true
-            }
-        },
-        template: `<heading-bar name="Heading" :showBackground="trueVal" :showArrows="trueVal"/>`
-    }))
 
 import NavigationAccount from '../ui/components/navigation/account';
 import NavigationAsset from '../ui/components/navigation/asset';
@@ -200,28 +165,28 @@ import NavigationSettings from '../ui/components/navigation/settings';
 import NavigationWallet from '../ui/components/navigation/wallet';
 storiesOf('Navigation', module)
     .add('account', () => ({
-        components: { NavigationAccount }, template: `<NavigationAccount />`
+        components: { NavigationAccount }, template: `<div class="col-2 py-3"><NavigationAccount /></div>`
     }))
     .add('asset', () => ({
-        components: { NavigationAsset }, template: `<NavigationAsset />`
+        components: { NavigationAsset }, template: `<div class="col-2 py-3"><NavigationAsset /></div>`
     }))
     .add('funding', () => ({
-        components: { NavigationFunding }, template: `<NavigationFunding />`
+        components: { NavigationFunding }, template: `<div class="col-2 py-3"><NavigationFunding /></div>`
     }))
     .add('help', () => ({
-        components: { NavigationHelp }, template: `<NavigationHelp />`
+        components: { NavigationHelp }, template: `<div class="col-2 py-3"><NavigationHelp /></div>`
     }))
     .add('product', () => ({
-        components: { NavigationProduct }, template: `<NavigationProduct />`
+        components: { NavigationProduct }, template: `<div class="col-2 py-3"><NavigationProduct /></div>`
     }))
     .add('project', () => ({
-        components: { NavigationProject }, template: `<NavigationProject />`
+        components: { NavigationProject }, template: `<div class="col-2 py-3"><NavigationProject /></div>`
     }))
     .add('settings', () => ({
-        components: { NavigationSettings }, template: `<NavigationSettings />`
+        components: { NavigationSettings }, template: `<div class="col-2 py-3"><NavigationSettings /></div>`
     }))
     .add('wallet', () => ({
-        components: { NavigationWallet }, template: `<NavigationWallet />`
+        components: { NavigationWallet }, template: `<div class="col-2 py-3"><NavigationWallet /></div>`
     }))
 
 
@@ -302,6 +267,8 @@ storiesOf('Projects', module)
         `
     }))
 
+import Tabs from '../ui/components/tab/tabs.vue'
+import Tab from '../ui/components/tab/tab.vue'
 storiesOf('Tabs', module)
     .add('default', () => ({
         components: {
@@ -332,6 +299,7 @@ storiesOf('Tabs', module)
     }))
 
 
+import MilestonesLine from '../ui/components/milestones-line/index.vue'
 storiesOf('Milestones Line', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
@@ -543,6 +511,7 @@ storiesOf('Sidebar Menu', module)
             </div>`
     }));;
 
+import Buttons from '../ui/components/buttons/index.vue'
 storiesOf('Buttons', module)
     .add('default', () => ({
         components: {
@@ -590,6 +559,7 @@ storiesOf('Buttons', module)
             </div>`
     }));
 
+import Links from '../ui/components/links/index.vue'
 storiesOf('Links', module)
     .add('default', () => ({
         components: {
@@ -637,6 +607,7 @@ storiesOf('Links', module)
             </div>`
     }));
 
+import MoneyInfo from '../ui/components/money-info/index.vue'
 storiesOf('Money Info', module)
     .add('default', () => ({
         components: {
@@ -649,6 +620,8 @@ storiesOf('Money Info', module)
         `
     }));
 
+import Checkbox from '../ui/components/checkbox/checbox.vue'
+import CheckboxGroup from '../ui/components/checkbox/checbox-group.vue'
 storiesOf('Checkbox', module)
     .add('Single checkbox', () => ({
         components: {
@@ -682,6 +655,7 @@ storiesOf('Checkbox', module)
         `
     }));
 
+import Tooltips from '../ui/components/tooltips/index.vue'
 storiesOf('Tooltips', module)
     .add('dark', () => ({
         components: {
@@ -742,6 +716,7 @@ storiesOf('Tooltips', module)
         `
     }))
 
+import ActivityChart from '../ui/components/activity-chart/index.vue'
 storiesOf('Activity Chart', module)
     .add('default', () => ({
         components: {
@@ -1836,6 +1811,7 @@ storiesOf('Activity Chart', module)
         `
     }))
 
+import PopUps from '../ui/components/popups/index.vue'
 storiesOf('Popups', module)
     .add('default', () => ({
         components: {
@@ -1996,6 +1972,7 @@ storiesOf('Popups', module)
         `
     }))
 
+import RangeSlider from '../ui/components/range-slider/index.vue'
 storiesOf('Range Slider', module)
     .add('single range slider', () => ({
         components: {
@@ -2062,6 +2039,7 @@ storiesOf('Range Slider', module)
         `
     }))
 
+import AssetsGrid from '../ui/components/assets-grid/index.vue'
 storiesOf('Assets Grid', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
@@ -2095,6 +2073,7 @@ storiesOf('Assets Grid', module)
         `
     }));
 
+import AssetsPopup from '../ui/components/asset-overview-popup/index.vue'
 storiesOf('Assets Overview Popup', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
@@ -2148,6 +2127,7 @@ storiesOf('Assets Overview Popup', module)
         `
     }));
 
+import Switch from '../ui/components/switch/index.vue'
 storiesOf('Switch', module)
     .addDecorator(withKnobs)
     .add('default', () => ({

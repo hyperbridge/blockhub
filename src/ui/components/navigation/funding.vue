@@ -1,24 +1,21 @@
 
 <template>
     <div class="navigation" id="navigation-default">
-        <h3>FUNDING</h3>
 
-        <ul>
-            <li class="title">General</li>
-            <li>
-                <a href="/#/projects">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">All Projects</span>
-                </a>
-            </li>
-        </ul>
+        <c-sidebar-menu title="FUNDING" sub_title="General" mClass="margin-bottom-20">
+            <c-sidebar-menu-link url="/#/projects" icon="fa fa-home" link_text="All Projects" />
+        </c-sidebar-menu>
+
     </div>
 </template>
 
 <script>
 export default {
-  components: {
-  },
+    components: {
+        'c-sidebar-menu-link': () => import('@/ui/components/sidebar-menu/menu_item'),
+        'c-sidebar-menu': () => import('@/ui/components/sidebar-menu/index'),
+        'c-searcher': () => import('@/ui/components/searcher')
+    },
   data() {
     return {}
   }
