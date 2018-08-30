@@ -101,7 +101,7 @@
             }
         },
         components: {
-            'c-tags-list': () => import('@/ui/components/product-tags'),
+            'c-tags-list': () => import('@/ui/components/tags'),
             'c-layout': () => import('@/ui/layouts/default')
         },
         methods: {

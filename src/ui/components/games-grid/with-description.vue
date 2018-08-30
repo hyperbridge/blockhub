@@ -38,8 +38,6 @@
 </template>
 
 <script>
-    import Tags from '../product-tags/index'
-
     export default {
         props: {
             items:{
@@ -69,8 +67,8 @@
                 type: String
             }
         },
-        components:{
-            'c-tags': Tags
+        components: {
+            'c-tags': () => import('@/ui/components/tags')
         }
     }
 </script>

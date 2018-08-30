@@ -23,7 +23,6 @@
 
 <script>
 export default {
-    name: 'dropdown-menu',
     props: {
         dropPosition: String,
         menuItems: {

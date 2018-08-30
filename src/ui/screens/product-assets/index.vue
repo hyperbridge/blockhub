@@ -69,7 +69,7 @@
         props: ['id'],
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
-            'c-tags-list': () => import('@/ui/components/product-tags'),
+            'c-tags-list': () => import('@/ui/components/tags'),
             'c-assets-grid': () => import('@/ui/components/assets-grid'),
             'c-assets-list-item': () => import('@/ui/components/assets-list-item')
         },

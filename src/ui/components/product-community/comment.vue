@@ -1,65 +1,40 @@
 <template>
     <div>
-        <div class="community-item__comment" :class="{ is_reply: reply }">
-            <comment-rate
+        <div class="community-item__comment" :class="{ 'is-reply': reply }">
+            <c-rate-item
                 :rate="comment.rate"
             />
             <div class="comment-container">
-                <dropdown-menu
+                <c-dropdown-menu
                     :dropPosition="right"
                     :style="{ right: '0px', top: '5px' }"
                 />
                 <div class="comment-content">
-                    <div class="user_info">
+                    <div class="user-info">
                         <img :src="comment.author.img"/>
-                        <div class="user_i">
+                        <div>
                             <h6>{{ comment.author.name }}</h6>
-                            <span class="time">3 years Ago</span>
+                            <span class="time">{{ comment.date | timeAgoShort }}</span>
                         </div>
                     </div>
                     <div class="text">{{ comment.text }}</div>
                 </div>
-                <div class="sub_comments_list">
-                    <slot />
+                <div class="sub-comments-list">
+                    <slot/>
                 </div>
             </div>
         </div>
 
-        <transition name="slide-top">
-            <div class="community-item__post-reply" v-if="reply">
-                <h4 class="mt-4 mb-2 text-left">Your Reply:</h4>
-                <div class="form-group">
-                    <textarea class="form-control" rows="6"></textarea>
-                </div>
-            </div>
-        </transition>
-
-
-        <div class="community-item__action text-right">
-            <template v-if="reply">
-                <a href="#3" class="btn btn-sm btn-danger" @click="reply = false">
-                    Cancel
-                </a>
-                <a href="#3" class="btn btn-sm btn-info" @click="reply = false">
-                    Submit
-                </a>
-            </template>
-            <template v-else>
-                <a href="#3" class="btn btn-sm btn-info" @click="reply = true">
-                    Reply
-                </a>
-            </template>
-        </div>
+        <c-reply
+            @replyMode="reply = $event"
+        />
 
     </div>
 </template>
 
 <script>
-
-    import DropdownMenu from '../dropdown-menu/index'
-    import CommentRate from '../product-community/comment-rate'
-
 export default {
+    name: 'comment',
     props: {
         comment: {
             type: Object,
@@ -67,8 +42,9 @@ export default {
         }
     },
     components: {
-        'dropdown-menu': DropdownMenu,
-        'comment-rate': CommentRate
+        'c-dropdown-menu': () => import('@/ui/components/dropdown-menu'),
+        'c-rate-item': () => import('@/ui/components/product-community/rate-item'),
+        'c-reply': () => import('@/ui/components/product-community/reply')
     },
     data() {
         return {
@@ -79,11 +55,7 @@ export default {
 </script>
 
 
-<style lang="scss">
-.is_reply {
-    background: rgba(255, 255, 255, .05);
-}
-
+<style lang="scss" scoped>
 .community-item__comment {
     display: flex;
     justify-content: space-between;
@@ -100,7 +72,7 @@ export default {
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
-            .user_info {
+            .user-info {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -131,58 +103,10 @@ export default {
                 line-height: 17px;
             }
         }
-        .sub_comments_list {
-            display: block;
-            width: 100%;
+        .sub-comments-list {
             border-top: 1px solid rgba(255, 255, 255, .1);
         }
     }
-}
-
-.community-item__action {
-    margin: 10px 7px;
-    .btn {
-        padding: 0px 7px;
-        text-transform: uppercase;
-        font-weight: bold;
-        margin: 0 3px;
-    }
-    .btn-icon {
-        color: #F75D5D;
-        font-size: 16px;
-    }
-    .btn-info {
-        background: #5D75F7;
-    }
-    .btn-danger {
-        background: #F75D5D;
-    }
-}
-
-.community-item__post-reply {
-    margin: 0 10px;
-    box-sizing: border-box;
-    width: calc(100% - 20px);
-    h4 {
-        font-weight: bold;
-    }
-    textarea {
-        background: rgba(0, 0, 0, .1);
-    }
-}
-
-.slide-top-enter-active, .slide-top-leave-active {
-    transition-property: opacity, transform;
-    transition-duration: .5s;
-    transition-timing-function: ease;
-}
-.slide-top-enter, .slide-top-leave-to {
-    opacity: 0;
-    transform: translateY(-50%);
-}
-.slide-top-leave-active {
-    position: absolute;
-    transition-duration: .25s;
 }
 </style>
 

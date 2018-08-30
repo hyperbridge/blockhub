@@ -41,7 +41,7 @@
                         </c-heading-bar>
 
                         <c-assets-list-item
-                            v-bind:items="assets"
+                            :items="assets"
                             itemInRow="2">
                         </c-assets-list-item>
 
@@ -57,12 +57,22 @@
 
 
                         <div class="home-tabs">
-                            <c-news-list-navigation
-                                :content_news="content_news"
-                            />
-                            <c-news-list-articles
-                                :content_news="content_news"
-                            />
+                            <ul class="nav custom-tabs w-100" id="myTab" role="tablist">
+                                <c-news-list-navigation
+                                    v-for="(news, index) in content_news"
+                                    :key="index"
+                                    :game="news.game"
+                                    :index="index+1"
+                                />
+                            </ul>
+                            <div class="tab-content">
+                                <c-news-list-articles
+                                    v-for="(news, index) in content_news"
+                                    :key="index"
+                                    :news="news"
+                                    :index="index+1"
+                                />
+                            </div>
                         </div>
                     </div>
                     <div class="col-12 margin-bottom-30">
@@ -417,4 +427,8 @@
             }
         }
     }
+
+.project-card__item {
+    margin-bottom: 30px;
+}
 </style>

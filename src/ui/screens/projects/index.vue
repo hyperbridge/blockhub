@@ -41,7 +41,7 @@
 export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default'),
-        'c-tags': () => import('@/ui/components/product-tags'),
+        'c-tags': () => import('@/ui/components/tags'),
     },
     computed: {
         projects() {

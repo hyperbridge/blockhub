@@ -21,33 +21,42 @@
 </template>
 
 <script>
-    import MoneyInfo from '../money-info/index.vue'
+import MoneyInfo from '../money-info/index.vue'
 
-    export default {
-        name: 'c-projects-card',
-        components: {
-            'c-money-info': MoneyInfo
+export default {
+    name: 'projects-card',
+    components: {
+        'c-money-info': MoneyInfo
+    },
+    props: {
+        project: {
+            type: Object,
+            required: true
         },
-        props: ['project', 'customClass'],
-        computed: {
-            goal_progress() {
-                const {obtained, goal} = this.project.funds;
-                return Math.floor(obtained / goal * 100);
-            }
-        },
-        filters: {
-            currency_sign(cur_name) {
-                switch (cur_name) {
-                    case 'EUR':
-                        return '€'
-                    case 'GBP':
-                        return '£'
-                    default:
-                        return '$'
-                }
+        customClass: {
+            type: String,
+            required: true
+        }
+    },
+    computed: {
+        goal_progress() {
+            const { obtained, goal } = this.project.funds;
+            return Math.floor(obtained / goal * 100);
+        }
+    },
+    filters: {
+        currency_sign(cur_name) {
+            switch(cur_name) {
+                case 'EUR':
+                    return '€'
+                case 'GBP':
+                    return '£'
+                default:
+                    return '$'
             }
         }
     }
+}
 </script>
 
 <style lang="scss">
