@@ -1,5 +1,4 @@
 <template>
-
     <div class="card invert rating-block" v-if="items">
         <div class="card-body">
             <h2 class="title">Rating</h2>
@@ -9,27 +8,40 @@
                         <span class="rating-block__name">{{ item.name }}</span>
                         <span class="rating-block__number">{{ item.number }}</span>
                     </div>
-                    <span class="rating-block__stars">
-                        <i class="fas fa-star" v-for="num in Math.floor(item.number)" :key="num"></i>
-                        <i class="fas fa-star-half"
-                            v-if="Number.isInteger(item.number) === false"></i>
-                    </span>
+                    <c-rating-stars
+                        :number="item.number"
+                        class="rating-block__stars"
+                    />
                 </li>
             </ul>
             <a :href="fullReviewsLink" class="btn btn-outline-white">See Full Reviews</a>
             <a :href="rateGameLink" class="btn btn-outline-white">Rate the game</a>
         </div>
     </div>
-
 </template>
 
-
 <script>
-    export default {
-        props: ['items', 'fullReviewsLink', 'rateGameLink']
+export default {
+    name: 'rating-block',
+    props: {
+        items: {
+            type: Array,
+            required: true
+        },
+        fullReviewsLink: {
+            type: String,
+            required: true
+        },
+        rateGameLink: {
+            type: String,
+            required: true
+        }
+    },
+    components: {
+        'c-rating-stars': () => import('../rating-stars')
     }
+}
 </script>
-
 
 <style lang="scss" scoped>
 

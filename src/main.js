@@ -37,6 +37,13 @@ Vue.filter('formatTime', function(value) {
 
 Vue.filter('timeAgo', (date) => moment(date).fromNow());
 
+Vue.filter('timeAgoShort', (date) => moment(date).fromNow().replace('ago', ''));
+
+Vue.component('c-layout', () => import('@/ui/layouts/default'));
+Vue.component('c-heading-bar', () => import('@/ui/components/heading-bar'));
+Vue.component('c-button', () => import('@/ui/components/button'));
+
+
 const overrideConsoleLog = () => {
   window.consoleLogMessages = []
 

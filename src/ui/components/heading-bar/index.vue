@@ -8,12 +8,14 @@
             <a :href="more" v-if="more" class="more">
                 MORE <i class="fas fa-angle-right"></i>
             </a>
-            <a href="#3" class="nav-prev" v-if="showArrows">
-                <i class="fas fa-arrow-left"></i>
-            </a>
-            <a href="#3" class="nav-next" v-if="showArrows">
-                <i class="fas fa-arrow-right"></i>
-            </a>
+            <template v-if="showArrows">
+                <a href="#3" class="nav-prev">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <a href="#3" class="nav-next">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </template>
         </div>
         <div class="heading-bar__line"></div>
     </div>
@@ -21,7 +23,13 @@
 
 <script>
 export default {
-    props: ['name', 'showBackground', 'showArrows', 'more']
+    name: 'heading-bar',
+    props: {
+        name: String,
+        showBackground: Boolean,
+        showArrows: Boolean,
+        more: Boolean
+    }
 }
 </script>
 

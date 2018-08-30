@@ -15,9 +15,12 @@
 
 
 <script>
-    export default {
-        props: ['main', 'items']
+export default {
+    props: {
+        main: String,
+        items: Array
     }
+}
 </script>
 
 

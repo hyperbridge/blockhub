@@ -58,7 +58,11 @@
                             </div>
 
                             <div class="navigation">
-                                <c-notification :notifications="ntf_messages" />
+                                <c-notification
+                                    v-for="(notif, index) in ntf_messages"
+                                    :key="index"
+                                    :notification="notif"
+                                />
                             </div>
 
                         </div>

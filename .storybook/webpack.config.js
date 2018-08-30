@@ -7,5 +7,7 @@ module.exports = (storybookBaseConfig, configType, defaultConfig) => {
         include: path.resolve(__dirname, "../src")
     })
 
-  return defaultConfig
+    defaultConfig.resolve.alias['@'] = path.resolve('src')
+
+    return defaultConfig
 }

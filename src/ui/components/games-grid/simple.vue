@@ -22,18 +22,17 @@
 </template>
 
 <script>
-    import Tags from '../product-tags/index'
-    export default {
-        props: {
-            items: Array,
-            itemInRow:{
-                default: '4'
-            }
-        },
-        components:{
-            'c-tags': Tags,
+export default {
+    props: {
+        items: Array,
+        itemInRow:{
+            default: '4'
         }
+    },
+    components: {
+        'c-tags': () => import('@/ui/components/tags')
     }
+}
 </script>
 
 <style lang="scss" scoped>

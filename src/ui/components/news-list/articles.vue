@@ -1,30 +1,29 @@
 <template>
-    <div class="tab-content">
-        <div
-            v-for="(news, index) in content_news"
-            :key="index"
-            class="tab-pane"
-            :class="[ index === 0 ? 'show active' : '' ]"
-            :id="`tab_${index}`"
-            :aria-labelledby="`tab_${index}-tab`"
-            role="tabpanel"
-        >
-            <div class="home-tabs__news-list">
-                <c-news-article v-for="(article, index) in news.articles" :key="index" :article="article"  />
-            </div>
-        </div>
-    </div>
+    <div
+        class="tab-pane"
+        :class="[ index === 1 ? 'show active' : '' ]"
+        :id="`tab_${index}`"
+        :aria-labelledby="`tab_${index}-tab`"
+        role="tabpanel"
+    >
+      <ul class="home-tabs__news-list">
+          <li v-for="(article, index) in news.articles" :key="index">
+              <h4>{{ article.heading }}</h4>
+              <div class="published_date mb-3">
+              </div>
+              <p>{{ article.content }}</p>
+              <a :href="`/${article.url}`" class="btn btn-link">
+                  Read More
+              </a>
+          </li>
+      </ul>
+  </div>
 </template>
 
 <script>
-import Article from '../news-list/article'
-
 export default {
     name: 'c-news-list-articles',
-    props: ['content_news'],
-    components:{
-        'c-news-article' : Article
-    }
+    props: ['news', 'index']
 }
 </script>
 

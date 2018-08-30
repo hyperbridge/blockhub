@@ -1,24 +1,31 @@
 <template>
     <div class="product-tags">
-        <a v-for="(tag, index) in tags"
+        <a
+            v-for="(tag, index) in tags"
             :href="`/#/store/tag/${tag}`"
             :key="index"
             @click="filterTag(tag)"
-            class="product-tags__link">
+            class="product-tags__link"
+        >
             {{ tag }}
         </a>
     </div>
 </template>
 
 <script>
-    export default {
-        props: ['tags'],
-        methods: {
-            filterTag(tagName) {
-                alert(tagName)
-            }
+export default {
+    props: {
+        tags: {
+            type: Array,
+            required: true
+        }
+    },
+    methods: {
+        filterTag(tagName) {
+            alert(tagName)
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -42,5 +49,4 @@
             margin: 0;
         }
     }
-
 </style>

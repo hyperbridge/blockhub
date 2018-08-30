@@ -30,10 +30,13 @@
                         <c-heading-bar name="New Releases" :showArrows="true" />
                     </div>
 
-                    <c-games-grid-simple
-                        :itemInRow=3
-                        :items="new_products"
-                    ></c-games-grid-simple>
+                    <div class="products-grid-wrapper">
+                        <c-game-card-dynamic
+                            v-for="(game, index) in demo_products"
+                            :key="index"
+                            :game="game"
+                        />
+                    </div>
                 </div>
 
                 <div class="row product-grid">
@@ -41,10 +44,11 @@
                         <c-heading-bar name="Summer Sale" :showArrows="true" :showBackground="true" />
                     </div>
 
-                    <c-games-grid-simple
-                        :itemInRow=3
-                        :items="sale_products"
-                    ></c-games-grid-simple>
+                    <c-game-card
+                        v-for="(game, index) in sale_products"
+                        :key="index"
+                        :game="game"
+                    />
                 </div>
 
                 <div class="row product-grid">
@@ -52,12 +56,28 @@
                         <c-heading-bar name="Crowdfund Projects" more="/#/projects" :showArrows="false" :showBackground="true" />
                     </div>
 
-                    <c-games-grid-simple
-                        :itemInRow=3
-                        :items="projects"
-                    ></c-games-grid-simple>
+                    <c-game-card
+                        v-for="(game, index) in projects"
+                        :key="index"
+                        :game="game"
+                    />
+                </div>
+
+                <div class="row curators-wrapper">
+                    <div class="col-12">
+                        <c-heading-bar name="From our curators" :showArrows="false" />
+                    </div>
+
+                    <div class="curators-wrapper__content">
+                        <c-curator-review
+                            v-for="(review, index) in curators_reviews"
+                            :key="index"
+                            :review="review"
+                        />
+                    </div>
 
                 </div>
+
             </div>
         </div>
     </c-layout>
@@ -74,9 +94,97 @@ const updateLandingImage = function() {
 export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default'),
-        'c-tags': () => import('@/ui/components/product-tags'),
+        'c-tags': () => import('@/ui/components/tags'),
         'c-heading-bar': () => import('@/ui/components/heading-bar'),
-        'c-games-grid-simple': () => import('@/ui/components/games-grid/simple')
+        'c-game-card': () => import('@/ui/components/store/game-card'),
+        'c-game-card-dynamic': () => import('@/ui/components/store/game-card-dynamic'),
+        'c-curator-review': () => import('@/ui/components/store/curator-review')
+    },
+    data() {
+        const curator_review = {
+            author: { name: 'SatoSan', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png' },
+            rate: 4.5,
+            game: { img: 'http://www.pixels-association.ch/wp-content/uploads/2017/11/no1.jpg' },
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mi arcu, viverra et efficitur luctus, tincidunt vel lacus. Morbi erat augue, posuere et sodales venenatis, tincidunt eu arcu. In sollicitudin purus quis sodales ornare. Cras tempus vestibulum elementum. Sed placerat, turpis id cursus cursus, augue enim molestie dui, elementum luctus lectus est vitae dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris vehicula mi a nunc cursus, id volutpat purus commodo. Duis consequat elementum varius. Suspendisse dui enim, rhoncus a molestie at, tristique ut urna. Praesent et consectetur dui. Pellentesque ut volutpat nunc, ut viverra nulla. Duis ultricies, sem sit amet laoreet lobortis, mauris est mollis orci, non eleifend urna leo quis lectus. Vestibulum sit amet volutpat est.',
+            more_reviews: [
+                {
+                    rate: 3.5,
+                    game: {
+                        title: 'Volgar the Viking',
+                        img: 'https://images-1.gog.com/54e9b9504af871d5a6ed67f9a9c439fc3a889ecd4e84d24173b10e49971db9c7.jpg'
+                    }
+                },
+                {
+                    rate: 5,
+                    game: {
+                        title: 'The Witcher 3: Wild Hunt',
+                        img: 'http://getwallpapers.com/wallpaper/full/6/f/7/22250.jpg'
+                    }
+                }
+            ]
+        }
+        return {
+            demo_products: [
+                {
+                    id: "8",
+                    name: "Gothic® 3",
+                    content: "<strong>A nameless hero becomes a legend!</strong><br><br>\t\t\t\t\tMyrtana, a world in upheaval: overrun by orcs from the dark lands in the north, King Rhobar is defending Vengard, the former stronghold of the humans, with his last troop of followers. Chaos reigns without: rebels are offering resistance, and the Hashishin of the south are openly collaborating with the orcs.<br><br>\t\t\t\t\tRumours that the nameless hero of Khorinis is on his way to the mainland spawn both hope and worry. Whose side will he take? Who will feel his wrath, who enjoy his favor? Only one thing is sure: his deeds are going to change Myrtana forever...<br><br>\t\t\t\t\tLiberation or annihilitaion &#x2013; the fate of the world of Gothic lies in your hands! Create your own individual gaming experience through different solution paths.<br><br>\t\t\t\t\tDynamic, action-packed combat system: choose between Fast Attacks, deadly whirlwind close combat, or shooting from a distance.<br>\t\t\t\t\tImmerse yourself in the most colorful and authentic fantasy world of all time &#x2013; Myrtana awaits you!<br><br>\t\t\t\t\t<ul><li>Specially designed easy combat system<br>\t\t\t\t\t</li><li>Clear main goals&#x2014;story driven yet dictated by player&#x2019;s choice<br>\t\t\t\t\t</li><li>Huge free&#x2013;roaming world&#x2014;virtually no boundaries<br>\t\t\t\t\t</li><li>Advanced human behavior AI for hundreds of individual characters with full audio dialogues<br>\t\t\t\t\t</li><li>Countless side&#x2013;quests for the player to choose from<br>\t\t\t\t\t</li><li>Over 50 different monsters and animals and dozens of human enemies<br>\t\t\t\t\t</li><li>Over 50 different powerful spells and over a hundred different weapons<br>\t\t\t\t\t</li><li>Unique class&#x2013;free character development</li></ul>",
+                    images: {
+                        header: "/static/img/products/gothic-3/gothic-3-01.jpg",
+                        medium_tile: "/static/img/products/gothic-3/g2-med-tile.png",
+                        main: "/static/img/products/gothic-3/gothic-3-03.jpg",
+                        preview: [
+                            "/static/img/products/gothic-3/gothic-3-02.jpg",
+                            "/static/img/products/gothic-3/gothic-3-05.jpg",
+                            "/static/img/products/gothic-3/gothic-3-06.jpg"
+                        ]
+                    },
+                    author: "Piranha Bytes",
+                    videos: ["/static/videos/products/gothic-3/gothic-3-01.mp4"],
+                    author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"],
+                    hover: false
+                },
+                {
+                    id: "9",
+                    name: "Gothic® 2",
+                    content: "<strong>A nameless hero becomes a legend!</strong><br><br>\t\t\t\t\tMyrtana, a world in upheaval: overrun by orcs from the dark lands in the north, King Rhobar is defending Vengard, the former stronghold of the humans, with his last troop of followers. Chaos reigns without: rebels are offering resistance, and the Hashishin of the south are openly collaborating with the orcs.<br><br>\t\t\t\t\tRumours that the nameless hero of Khorinis is on his way to the mainland spawn both hope and worry. Whose side will he take? Who will feel his wrath, who enjoy his favor? Only one thing is sure: his deeds are going to change Myrtana forever...<br><br>\t\t\t\t\tLiberation or annihilitaion &#x2013; the fate of the world of Gothic lies in your hands! Create your own individual gaming experience through different solution paths.<br><br>\t\t\t\t\tDynamic, action-packed combat system: choose between Fast Attacks, deadly whirlwind close combat, or shooting from a distance.<br>\t\t\t\t\tImmerse yourself in the most colorful and authentic fantasy world of all time &#x2013; Myrtana awaits you!<br><br>\t\t\t\t\t<ul><li>Specially designed easy combat system<br>\t\t\t\t\t</li><li>Clear main goals&#x2014;story driven yet dictated by player&#x2019;s choice<br>\t\t\t\t\t</li><li>Huge free&#x2013;roaming world&#x2014;virtually no boundaries<br>\t\t\t\t\t</li><li>Advanced human behavior AI for hundreds of individual characters with full audio dialogues<br>\t\t\t\t\t</li><li>Countless side&#x2013;quests for the player to choose from<br>\t\t\t\t\t</li><li>Over 50 different monsters and animals and dozens of human enemies<br>\t\t\t\t\t</li><li>Over 50 different powerful spells and over a hundred different weapons<br>\t\t\t\t\t</li><li>Unique class&#x2013;free character development</li></ul>",
+                    images: {
+                        header: "/static/img/products/gothic-3/gothic-3-01.jpg",
+                        medium_tile: "/static/img/products/gothic-3/g3-med-tile.png",
+                        main: "/static/img/products/gothic-3/gothic-3-03.jpg",
+                        preview: [
+                            "/static/img/products/gothic-3/gothic-3-02.jpg",
+                            "/static/img/products/gothic-3/gothic-3-05.jpg",
+                            "/static/img/products/gothic-3/gothic-3-06.jpg"
+                        ]
+                    },
+                    author: "Piranha Bytes",
+                    videos: ["/static/videos/products/gothic-3/gothic-3-01.mp4"],
+                    author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"],
+                    hover: false
+                },
+                {
+                    id: "9",
+                    name: "Gothic® 1",
+                    content: "<strong>A nameless hero becomes a legend!</strong><br><br>\t\t\t\t\tMyrtana, a world in upheaval: overrun by orcs from the dark lands in the north, King Rhobar is defending Vengard, the former stronghold of the humans, with his last troop of followers. Chaos reigns without: rebels are offering resistance, and the Hashishin of the south are openly collaborating with the orcs.<br><br>\t\t\t\t\tRumours that the nameless hero of Khorinis is on his way to the mainland spawn both hope and worry. Whose side will he take? Who will feel his wrath, who enjoy his favor? Only one thing is sure: his deeds are going to change Myrtana forever...<br><br>\t\t\t\t\tLiberation or annihilitaion &#x2013; the fate of the world of Gothic lies in your hands! Create your own individual gaming experience through different solution paths.<br><br>\t\t\t\t\tDynamic, action-packed combat system: choose between Fast Attacks, deadly whirlwind close combat, or shooting from a distance.<br>\t\t\t\t\tImmerse yourself in the most colorful and authentic fantasy world of all time &#x2013; Myrtana awaits you!<br><br>\t\t\t\t\t<ul><li>Specially designed easy combat system<br>\t\t\t\t\t</li><li>Clear main goals&#x2014;story driven yet dictated by player&#x2019;s choice<br>\t\t\t\t\t</li><li>Huge free&#x2013;roaming world&#x2014;virtually no boundaries<br>\t\t\t\t\t</li><li>Advanced human behavior AI for hundreds of individual characters with full audio dialogues<br>\t\t\t\t\t</li><li>Countless side&#x2013;quests for the player to choose from<br>\t\t\t\t\t</li><li>Over 50 different monsters and animals and dozens of human enemies<br>\t\t\t\t\t</li><li>Over 50 different powerful spells and over a hundred different weapons<br>\t\t\t\t\t</li><li>Unique class&#x2013;free character development</li></ul>",
+                    images: {
+                        header: "/static/img/products/gothic-3/gothic-3-01.jpg",
+                        medium_tile: "/static/img/products/gothic-3/g2-med-tile.png",
+                        main: "/static/img/products/gothic-3/gothic-3-03.jpg",
+                        preview: [
+                            "/static/img/products/gothic-3/gothic-3-02.jpg",
+                            "/static/img/products/gothic-3/gothic-3-05.jpg",
+                            "/static/img/products/gothic-3/gothic-3-06.jpg"
+                        ]
+                    },
+                    author: "Piranha Bytes",
+                    videos: [],
+                    author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"],
+                    hover: false
+                }
+            ],
+            curators_reviews: [curator_review, curator_review, curator_review]
+        }
     },
     computed: {
         projects() {
@@ -98,6 +206,9 @@ export default {
             updateLandingImage.bind(this)()
 
             return this.$store.state.marketplace.frontpage_product
+        },
+        dynamic_preview_product() {
+            return this.$store.state.marketplace.products[8];
         }
     },
     methods: {
@@ -114,118 +225,135 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .frontpage-product{
-        margin-bottom: 30px;
-    }
-    .frontpage-product__slider{
-        img{
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-    }
-    .frontpage-product__info{
-        h2{
-            font-size: 26px;
-            font-weight: bold;
-            margin: 0;
+@import '@/css/helpers/mixins.scss';
 
-            a {
-                color: #fff;
-            }
-        }
-        p{
-            margin: 15px 0;
-        }
+.frontpage-product{
+    margin-bottom: 30px;
+}
+.frontpage-product__slider{
+    img{
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
     }
-    .frontpage-product__footer{
-        .price-list{
-            margin-right: 15px;
-            display: inline-block;
-            float: left;
-            .price{
-                display: inline-block;
-                float: left;
-                margin-right: 15px;
-                font-size: 18px;
-                font-weight: bold;
-                text-transform: uppercase;
-                line-height: 32px;
-                position: relative;
-                overflow: hidden;
-                span{
-                    font-size: 13px;
-                }
-                &.old_price{
-                    &:before{
-                        position: absolute;
-                        height: 2px;
-                        left: 0;
-                        right: 0;
-                        top: 50%;
-                        width: 100%;
-                        background: red;
-                        content: "";
-                        display: inline-block;
-                        transform: rotate(20deg);
-                        opacity: 0.7;
-                    }
-                    &:after{
-                        position: absolute;
-                        height: 2px;
-                        left: 0;
-                        right: 0;
-                        top: 50%;
-                        width: 100%;
-                        background: red;
-                        content: "";
-                        display: inline-block;
-                        transform: rotate(-20deg);
-                        opacity: 0.7;
-                    }
-                }
-            }
-        }
-        a{
-            padding: 5px 10px;
-            text-transform: uppercase;
-            font-size: 16px;
-            font-weight: bold;
-            i{
-                margin-right: 5px;
-            }
-        }
-    }
+}
+.frontpage-product__info{
+    h2{
+        font-size: 26px;
+        font-weight: bold;
+        margin: 0;
 
-    .product-grid{
-        margin-top: 60px;
-
-    }
-    .product-grid__item{
-        padding: 8px 6px;
-        border-radius: 5px;
-
-        &:hover {
-            will-change: transform;
-            transform: perspective(300px) rotateX(0deg) rotateY(0deg) scale(1.03);
-            box-shadow: 0 0 35px rgba(0, 0, 0, .2);
-            transition: transform 200ms cubic-bezier(0.34, 1.01, 0.8, 0.24);
-        }
-        
-        h4{
+        a {
             color: #fff;
-            font-weight: bold;
-            font-size: 20px;
-            padding: 13px 0;
-            a{
-                color: #fff;
-                text-decoration: none;
-            }
-        }
-        .product-tags {
-            margin-top: 10px;
-            margin-bottom: 0;
         }
     }
+    p {
+        margin: 15px 0;
+    }
+}
+.frontpage-product__footer{
+    .price-list{
+        margin-right: 15px;
+        float: left;
+        .price{
+            float: left;
+            margin-right: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            line-height: 32px;
+            position: relative;
+            overflow: hidden;
+            span{
+                font-size: 13px;
+            }
+            &.old_price{
+                &:before{
+                    position: absolute;
+                    height: 2px;
+                    left: 0;
+                    right: 0;
+                    top: 50%;
+                    width: 100%;
+                    background: red;
+                    content: "";
+                    display: inline-block;
+                    transform: rotate(20deg);
+                    opacity: 0.7;
+                }
+                &:after{
+                    position: absolute;
+                    height: 2px;
+                    left: 0;
+                    right: 0;
+                    top: 50%;
+                    width: 100%;
+                    background: red;
+                    content: "";
+                    display: inline-block;
+                    transform: rotate(-20deg);
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
+    a{
+        padding: 5px 10px;
+        text-transform: uppercase;
+        font-size: 16px;
+        font-weight: bold;
+        i{
+            margin-right: 5px;
+        }
+    }
+}
+
+.products-grid-wrapper {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    @include width-max-lg {
+        flex-direction: column;
+    }
+}
+
+@include width-min-lg {
+    .products-grid-wrapper:hover {
+        .product-grid__item {
+            transform: translateX(-15%);
+        }
+
+        .product-grid__item:hover {
+            transform: scale(1.3);
+            ~ .product-grid__item {
+                transform: translateX(15%);
+            }
+        }
+    }
+}
+
+.curators-wrapper {
+    margin: 30px 0;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #24253B;
+    border-radius: 4px;
+    &__content {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        @include width-max-lg {
+            flex-direction: column;
+        }
+        @include width-min-lg {
+            .curator-review {
+                width: 33%;
+            }
+        }
+    }
+}
 </style>
 

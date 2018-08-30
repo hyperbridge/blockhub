@@ -129,9 +129,364 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-12">
+                        <div class="row">
+                            <c-heading-bar name="Reviews" :showArrows="true" :showBackground="false" />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <h2>Most helpful</h2>
+                                <c-review
+                                    v-for="(review, index) in reviews.helpful"
+                                    :key="index"
+                                    :review="review"
+                                />
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <h2>Most recent</h2>
+                                <c-review
+                                    v-for="(review, index) in reviews.recent"
+                                    :key="index"
+                                    :review="review"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="purchase-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog  modal-dialog-centered" role="document">
+                <div class="modal-content send-funds-modal">
+                    <h3>Sending Funds</h3>
+                    <div class="">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="step1-tab" data-toggle="tab" href="#agreement_tab" role="tab"
+                                   aria-controls="step1-tab" aria-expanded="true">Agreement</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="step2-tab" data-toggle="tab" href="#sending_tab" role="tab"
+                                   aria-controls="step2-tab">Sending</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="agreement_tab" role="tabpanel" aria-labelledby="agreement-tab">
+                                <div class="tab-container">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h4>Crowdfunding Campaign Agreement</h4>
+                                    </div>
+                                    <div class="terms_block">
+
+                                            <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span>
+                                            </h1>
+
+                                            <h2>Introduction</h2>
+
+                                            <p>These Website Standard Terms and Conditions written on this webpage shall
+                                                manage
+                                                your use of our website, <span class="highlight preview_website_name">BlockHub</span>
+                                                accessible at <span class="highlight preview_website_url">BlockHub.gg</span>.
+                                            </p>
+
+                                            <p>These Terms will be applied fully and affect to your use of this Website. By
+                                                using this Website, you agreed to accept all terms and conditions written in
+                                                here. You must not use this Website if you disagree with any of these
+                                                Website
+                                                Standard Terms and Conditions.</p>
+
+                                            <p>Minors or people below 18 years old are not allowed to use this Website.</p>
+
+                                            <h2>Intellectual Property Rights</h2>
+
+                                            <p>Other than the content you own, under these Terms, <span
+                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and/or its
+                                                licensors
+                                                own all the intellectual property rights and materials contained in this
+                                                Website.</p>
+
+                                            <p>You are granted limited license only for purposes of viewing the material
+                                                contained on this Website.</p>
+
+                                            <h2>Restrictions</h2>
+
+                                            <p>You are specifically restricted from all of the following:</p>
+
+                                            <ul>
+                                                <li>publishing any Website material in any other media;</li>
+                                                <li>selling, sublicensing and/or otherwise commercializing any Website
+                                                    material;
+                                                </li>
+                                                <li>publicly performing and/or showing any Website material;</li>
+                                                <li>using this Website in any way that is or may be damaging to this
+                                                    Website;
+                                                </li>
+                                                <li>using this Website in any way that impacts user access to this
+                                                    Website;
+                                                </li>
+                                                <li>using this Website contrary to applicable laws and regulations, or in
+                                                    any
+                                                    way may cause harm to the Website, or to any person or business entity;
+                                                </li>
+                                                <li>engaging in any data mining, data harvesting, data extracting or any
+                                                    other
+                                                    similar activity in relation to this Website;
+                                                </li>
+                                                <li>using this Website to engage in any advertising or marketing.</li>
+                                            </ul>
+
+                                            <p>Certain areas of this Website are restricted from being access by you and
+                                                <span
+                                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> may further
+                                                restrict
+                                                access by you to any areas of this Website, at any time, in absolute
+                                                discretion.
+                                                Any user ID and password you may have for this Website are confidential and
+                                                you
+                                                must maintain confidentiality as well.</p>
+
+                                            <h2>Your Content</h2>
+
+                                            <p>In these Website Standard Terms and Conditions, “Your Content” shall mean any
+                                                audio, video text, images or other material you choose to display on this
+                                                Website. By displaying Your Content, you grant <span
+                                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> a
+                                                non-exclusive,
+                                                worldwide irrevocable, sub licensable license to use, reproduce, adapt,
+                                                publish,
+                                                translate and distribute it in any and all media.</p>
+
+                                            <p>Your Content must be your own and must not be invading any third-party's
+                                                rights.
+                                                <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> reserves
+                                                the
+                                                right to remove any of Your Content from this Website at any time without
+                                                notice.</p>
+
+                                            <h2>No warranties</h2>
+
+                                            <p>This Website is provided “as is,” with all faults, and <span
+                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> express no
+                                                representations or warranties, of any kind related to this Website or the
+                                                materials contained on this Website. Also, nothing contained on this Website
+                                                shall be interpreted as advising you.</p>
+
+                                            <h2>Limitation of liability</h2>
+
+                                            <p>In no event shall <span
+                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span>, nor any of its
+                                                officers, directors and employees, shall be held liable for anything arising
+                                                out
+                                                of or in any way connected with your use of this Website whether such
+                                                liability
+                                                is under contract. &nbsp;<span class="highlight preview_company_name">Hyperbridge Technology Inc.</span>,
+                                                including its officers, directors and employees shall not be held liable for
+                                                any
+                                                indirect, consequential or special liability arising out of or in any way
+                                                related to your use of this Website.</p>
+
+                                            <h2>Indemnification<p></p>
+
+                                                <p>You hereby indemnify to the fullest extent <span
+                                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> from and
+                                                    against
+                                                    any and/or all liabilities, costs, demands, causes of action, damages
+                                                    and
+                                                    expenses arising in any way related to your breach of any of the
+                                                    provisions
+                                                    of these Terms.</p>
+
+                                            </h2>
+                                            <h2>Severability</h2>
+
+                                            <p>If any provision of these Terms is found to be invalid under any applicable
+                                                law,
+                                                such provisions shall be deleted without affecting the remaining provisions
+                                                herein.</p>
+
+                                            <h2>Variation of Terms</h2>
+
+                                            <p><span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is permitted
+                                                to
+                                                revise these Terms at any time as it sees fit, and by using this Website you
+                                                are
+                                                expected to review these Terms on a regular basis.</p>
+
+                                            <h2>Assignment</h2>
+
+                                            <p>The <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is
+                                                allowed
+                                                to assign, transfer, and subcontract its rights and/or obligations under
+                                                these
+                                                Terms without any notification. However, you are not allowed to assign,
+                                                transfer, or subcontract any of your rights and/or obligations under these
+                                                Terms.</p>
+
+                                            <h2>Entire Agreement</h2>
+
+                                            <p>These Terms constitute the entire agreement between <span
+                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and you in
+                                                relation
+                                                to your use of this Website, and supersede all prior agreements and
+                                                understandings.</p>
+
+                                            <h2>Governing Law &amp; Jurisdiction</h2>
+
+                                            <p>These Terms will be governed by and interpreted in accordance with the laws
+                                                of
+                                                the State of <span class="highlight preview_country">Country</span>, and you
+                                                submit to the non-exclusive jurisdiction of the state and federal courts
+                                                located
+                                                in <span class="highlight preview_country">Country</span> for the resolution
+                                                of
+                                                any disputes.</p>
+
+                                        </div>
+                                </div>
+                                <div class="action justify-content-between">
+                                    <div>
+                                        <label class="switch switch-sm">
+                                            <input type="checkbox" name="switch_9" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <span class="label">I agree with the terms.</span>
+                                    </div>
+                                    <div class="align-self-end">
+                                        <a href="#3" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
+                                        <a href="#3" class="btn btn-success"><i class="fas fa-arrow-right"></i> Next</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="sending_tab" role="tabpanel" aria-labelledby="sending-tab">
+                                <div class="tab-container">
+                                    <div class="sending-blk">
+                                        <div class="clmn-1">
+                                            <div class="grid">
+                                                <div class="grid-item">
+                                                    <div>
+                                                        <img src="https://www.touchtapplay.com/wp-content/uploads/2017/12/bitcoin-game-cheats-ketchapp.jpg"/>
+                                                    </div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                            </div>
+                                            <div class="info text-left">
+                                                <strong>SatoSama</strong>
+                                                <span class="float-right down">-$14.00</span>
+                                            </div>
+                                        </div>
+                                        <div class="clmn-2">
+                                            <div class="directions">
+                                                <div class="right-arrow">
+                                                    <div class="progress"></div>
+                                                </div>
+                                                <div class="left-arrow">
+                                                    <div class="progress" style="width: 45%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="time">
+                                                <i class="fas fa-clock"></i>
+                                                15 seconds
+                                            </div>
+                                            <div class="info text-center">
+                                                1 <strong>hbx</strong> - 0.02 <strong>usd</strong>
+                                            </div>
+                                        </div>
+                                        <div class="clmn-3">
+                                            <div class="grid">
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                                <div class="grid-item">
+                                                    <div></div>
+                                                </div>
+                                            </div>
+                                            <div class="info text-left">
+                                                <strong>SatoshiStudios</strong>
+                                                <span class="float-right up">+$14.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="action justify-content-end">
+                                    <div class="align-self-end">
+                                        <a href="#3" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
+                                        <a href="#3" class="btn btn-success"><i class="fas fa-check"></i> Complete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
     </c-layout>
 </template>
@@ -141,7 +496,7 @@
 
     const updateProduct = function () {
         let product = null
-        
+
         if (this.id === 'new') {
             product = this.$store.state.marketplace.default_product
         }
@@ -149,7 +504,7 @@
         if (this.$store.state.marketplace.products && this.$store.state.marketplace.products[this.id]) {
             product = this.$store.state.marketplace.products[this.id]
         }
-    
+
         if (product && product.images && product.images.header) {
             window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
         }
@@ -169,12 +524,18 @@
             'c-plan-list': () => import('@/ui/components/game-plans/list'),
             'c-screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
             'c-sale-box': () => import('@/ui/components/sale-box/box'),
-            'c-tags-list': () => import('@/ui/components/product-tags'),
+            'c-tags-list': () => import('@/ui/components/tags'),
             'c-rating-block': () => import('@/ui/components/rating-block'),
             'c-frequently-traded-assets': () => import('@/ui/components/frequently-traded-assets'),
-            'c-community-spotlight': () => import('@/ui/components/community-spotlight')
+            'c-community-spotlight': () => import('@/ui/components/community-spotlight'),
+            'c-heading-bar': () => import('@/ui/components/heading-bar'),
+            'c-review': () => import('@/ui/components/product-overview/review')
         },
         data() {
+            const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.';
+            const title = 'Good game with very nice graphics made by very smart people.';
+            const setup = { system: 'Windows 10', gpu: 'GTX 1080', cpu: 'Core i7 7980x', ram: '8 GB', storage: 'HyperX 1TB SSD' };
+            const author = { name: 'Nakatochi', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png' };
             return {
                 activeElement: {
                     name: false,
@@ -186,7 +547,19 @@
                     'adventure',
                     'racing',
                     'action'
-                ]
+                ],
+                reviews: {
+                    helpful: [
+                        { author, title: title, text, date: '2018-08-19T04:09:00.000Z', rating: 4.5, minutes_played: 1938, setup },
+                        { author, title: title, text, date: '2018-08-16T04:09:00.000Z', rating: 1.5, minutes_played: 414, setup },
+                        { author, title: title, text, date: '2018-08-18T04:09:00.000Z', rating: 3.5, minutes_played: 71, setup }
+                    ],
+                    recent: [
+                        { author, title: title, text, date: '2018-08-20T04:09:00.000Z', rating: 1.5, minutes_played: 13, setup },
+                        { author, title: title, text, date: '2018-03-21T04:09:00.000Z', rating: 5, minutes_played: 241, setup },
+                        { author, title: title, text, date: '2018-08-11T04:09:00.000Z', rating: 3, minutes_played: 2941, setup }
+                    ]
+                }
             }
         },
         methods: {
@@ -234,7 +607,7 @@
             $('#tag-editor').select2()
                 .on('select2:select', (e) => {
                     let data = e.params.data
-                    
+
                     if (!this.product.author_tags.includes(data.text)) {
                         this.product.author_tags.push(data.text)
                     }
