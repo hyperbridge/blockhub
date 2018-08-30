@@ -3173,12 +3173,22 @@ storiesOf('Gallery', module)
 
 import ProductCardDynamic from '@/ui/components/store/product-card-dynamic';
 import ProductCard from '@/ui/components/store/product-card';
-import ProductsCardsWrapper from '@/ui/components/store/products-cards-wrapper';
+import ProductsCards from '@/ui/components/store/products-cards';
 const productsCardsData = [
     {
         id: "8",
         name: "Gothic® 3",
-        images: { medium_tile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803" },
+        images: {
+            header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+            medium_tile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
+            main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+            preview: [
+                "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
+                "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
+                "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
+                "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
+            ]
+        },
         author: "Piranha Bytes",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/901191/movie480.webm?t=1490866901"],
         author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"]
@@ -3186,9 +3196,37 @@ const productsCardsData = [
     {
         id: "9",
         name: "The Witcher® 3: Wild Hunt",
-        images: { medium_tile: "https://steamcdn-a.akamaihd.net/steam/apps/292030/header.jpg?t=1529405012" },
+        images: {
+            header: "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_b74d60ee215337d765e4d20c8ca6710ae2362cc2.600x338.jpg?t=1529405012",
+            medium_tile: "https://steamcdn-a.akamaihd.net/steam/apps/292030/header.jpg?t=1529405012",
+            main: "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_b74d60ee215337d765e4d20c8ca6710ae2362cc2.600x338.jpg?t=1529405012",
+            preview: [
+                "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012",
+                "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_64eb760f9a2b67f6731a71cce3a8fb684b9af267.600x338.jpg?t=1529405012",
+                "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_eda99e7f705a113d04ab2a7a36068f3e7b343d17.600x338.jpg?t=1529405012",
+                "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_d5b80eb63c12a6484f26796f3e34410651bba068.600x338.jpg?t=1529405012"
+            ]
+        },
         author: "CD PROJEKT RED",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256658589/movie480.webm?t=1528288687"],
+        author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"]
+    },
+    {
+        id: "10",
+        name: "Fallout 4",
+        images: {
+            header: "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_c6b798424a93617b4b825aea3bcd9547c0b0a5ce.1920x1080.jpg?t=1533676954",
+            medium_tile: "https://steamcdn-a.akamaihd.net/steam/apps/377160/header.jpg?t=1533676954",
+            main: "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_c6b798424a93617b4b825aea3bcd9547c0b0a5ce.1920x1080.jpg?t=1533676954",
+            preview: [
+                "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_f7861bd71e6c0c218d8ff69fb1c626aec0d187cf.1920x1080.jpg?t=1533676954",
+                "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_910437ac708aed7c028f6e43a6224c633d086b0a.1920x1080.jpg?t=1533676954",
+                "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_f649b8e57749f380cca225db5074edbb1e06d7f5.1920x1080.jpg?t=1533676954",
+                "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_c310f858e6a7b02ffa21db984afb0dd1b24c1423.1920x1080.jpg?t=1533676954"
+            ]
+        },
+        author: "Bethesda",
+        videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256657338/movie480.webm?t=1447378505"],
         author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"]
     }
 ];
@@ -3222,14 +3260,50 @@ storiesOf('Product Card', module)
         `
     }))
     .add('wrapper', () => ({
-        components: { ProductsCardsWrapper },
+        components: { ProductsCards },
         data: () => ({ products: productsCardsData }),
         template: `
             <div>
                 <h1 style="text-align: center;">Hover transitions are enabled only for bigger screens</h1>
-                <products-cards-wrapper :products="products"/>
+                <products-cards :products="products"/>
             </div>
         `
+    }))
+
+import CuratorReview from '@/ui/components/store/curator-review';
+import CuratorsReviews from '@/ui/components/store/curators-reviews';
+const curatorReview = {
+    author: { name: 'SatoSan', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png' },
+    rate: 4.5,
+    game: { img: 'http://www.pixels-association.ch/wp-content/uploads/2017/11/no1.jpg' },
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mi arcu, viverra et efficitur luctus, tincidunt vel lacus. Morbi erat augue, posuere et sodales venenatis, tincidunt eu arcu. In sollicitudin purus quis sodales ornare. Cras tempus vestibulum elementum. Sed placerat, turpis id cursus cursus, augue enim molestie dui, elementum luctus lectus est vitae dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris vehicula mi a nunc cursus, id volutpat purus commodo. Duis consequat elementum varius. Suspendisse dui enim, rhoncus a molestie at, tristique ut urna. Praesent et consectetur dui. Pellentesque ut volutpat nunc, ut viverra nulla. Duis ultricies, sem sit amet laoreet lobortis, mauris est mollis orci, non eleifend urna leo quis lectus. Vestibulum sit amet volutpat est.',
+    more_reviews: [
+        {
+            rate: 3.5,
+            game: {
+                title: 'Volgar the Viking',
+                img: 'https://images-1.gog.com/54e9b9504af871d5a6ed67f9a9c439fc3a889ecd4e84d24173b10e49971db9c7.jpg'
+            }
+        },
+        {
+            rate: 5,
+            game: {
+                title: 'The Witcher 3: Wild Hunt',
+                img: 'http://getwallpapers.com/wallpaper/full/6/f/7/22250.jpg'
+            }
+        }
+    ]
+};
+storiesOf('Curators Reviews', module)
+    .add('review', () => ({
+        components: { CuratorReview },
+        data: () => ({ review: curatorReview }),
+        template: `<curator-review :review="review" class="col-3"/>`
+    }))
+    .add('reviews wrapper', () => ({
+        components: { CuratorsReviews },
+        data: () => ({ reviews: [curatorReview, curatorReview, curatorReview] }),
+        template: `<curators-reviews :reviews="reviews"/>`
     }))
 
 /*
