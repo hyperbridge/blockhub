@@ -57,14 +57,12 @@
 
 
                         <div class="home-tabs">
-                            <ul class="nav custom-tabs w-100" id="myTab" role="tablist">
                                 <c-news-list-navigation
                                     v-for="(news, index) in content_news"
                                     :key="index"
                                     :game="news.game"
                                     :index="index+1"
                                 />
-                            </ul>
                             <div class="tab-content">
                                 <c-news-list-articles
                                     v-for="(news, index) in content_news"
