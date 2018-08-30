@@ -1,27 +1,73 @@
 <template>
-    <button  :type="type" class="c-btn" :class="[ 'c-' + variant, c_class ]" @click="$emit('click')">
-        <i class="left-icon" :class="[ { 'm-0': !text }, icon]" v-if="icon_position == 'left'"></i>
-        {{ text }}
-        <i class="right-icon" :class="icon" v-if="icon_position == 'right'"></i>
-    </button>
+    <component
+        :is="tag"
+        :type="type"
+        class="c-btn"
+        :class="status"
+        @click="$emit('click')"
+    >
+        <i
+            v-if="(icon || inject_filter.length) && !icon_hide"
+            class="icon fas"
+            :class="[
+                icon ? 'fa-' + icon : inject_filter,
+                swap_order ? 'swap_order' : ''
+            ]"
+        ></i>
+        <span>
+            <slot/>
+        </span>
+    </component>
 </template>
 
 <script>
     export default {
+        name: 'button',
         props: {
-            type: { default: false },
-            variant : { default: 'default' },
-            text : { type: String },
-            icon : { default: false },
-            icon_position : { default: false},
-            c_class: { default: false }
+            tag: {
+                type: String,
+                default: 'a',
+            },
+            type: String,
+            icon: String,
+            icon_hide: Boolean,
+            status: {
+                type: String,
+                default: 'default'
+            },
+            swap_order: Boolean
+        },
+        computed: {
+            inject_filter() {
+                return this.$options.filters.statusIcon(this.status);
+            }
+        },
+        /* these filters are accessible via Vue instance, and were added only for storybook support */
+        filters: {
+            statusIcon(status) {
+                const getClass = status => {
+                    switch(status) {
+                        case 'info': return 'info';
+                        case 'success': return 'check';
+                        case 'success-circle': return 'check-circle';
+                        case 'warning': return 'exclamation';
+                        case 'danger': return 'exclamation-triangle';
+                        case 'danger-circle': return 'times-circle';
+                        case 'settings': return 'cog';
+                        default: return '';
+                    }
+                }
+                const statusClass = getClass(status);
+                return statusClass.length ?  'fa-' + statusClass : '';
+            }
         }
     }
 </script>
 
-<style lang="scss">
-    .c-btn{
-        display: inline-block;
+<style lang="scss" scoped>
+    .c-btn {
+        display: inline-flex;
+        align-items: center;
         padding: 0px 8px;
         line-height: 24px;
         font-size: 13px;
@@ -31,58 +77,38 @@
         box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
         text-transform: uppercase;
         cursor: pointer;
-        .m-0{
-            margin: 0;
-        }
-        .left-icon{
-            margin-right: 3px;
-        }
-        .right-icon{
-            margin-left: 3px;
-        }
         &:active,
-        &:focus{
+        &:focus {
             outline: none;
             box-shadow: none;
         }
-        &.c-default{
-            background: #fff;
-            color: #3D3E5D;
-            &:hover{
-                background: #363752;
-                color: #A2A3BE;
-            }
+        .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 3px;
         }
-        &.c-info{
-            background: #5D75F7;
-            color: #fff;
-            &:hover{
-                background: #586ee9;
-                color: #30304B;
-            }
+        .swap_order {
+            order: 2;
+            margin: 0 0 0 3px;
         }
-        &.c-success{
-            background: #5EA72B;
-            color: #fff;
-            &:hover{
-                background: #559727;
-                color: #30304B;
-            }
-        }
-        &.c-danger{
-            background: #F75D5D;
-            color: #fff;
-            &:hover{
-                background: #de5454;
-                color: #30304B;
-            }
-        }
-        &.c-warning{
-            background: #FADC72;
-            color: #3D3E5D;
-            &:hover{
-                background: #efd26d;
-                color: #32334c;
+
+        $statusColors: (
+            default: (#fff, #3D3E5D, #3D3E5D, #A2A3BE),
+            info: (#5D75F7, #fff, #586ee9, #30304B),
+            success: (#5EA72B, #fff, #559727, #30304B),
+            danger: (#F75D5D, #fff, #de5454, #30304B),
+            warning: (#FADC72, #3D3E5D, #efd26d, #32334c)
+        );
+
+        @each $status, $colorSet in $statusColors {
+            &.#{$status} {
+                background-color: nth($colorSet, 1);
+                color: nth($colorSet, 2);
+                &:hover {
+                    background: nth($colorSet, 3);
+                    color: nth($colorSet, 4);
+                }
             }
         }
     }

@@ -12,9 +12,18 @@
 <script>
     export default {
         props: {
-            name: { required: true },
-            selected: { default: false},
-            showFooter : { default: false}
+            name: {
+                type: String,
+                required: true
+            },
+            selected: {
+                type: Boolean,
+                default: false
+            },
+            showFooter : {
+                type: Boolean,
+                default: false
+            }
         },
         data() {
             return {

@@ -17,7 +17,6 @@ import Tabs from '../ui/components/tab/tabs.vue'
 import Tab from '../ui/components/tab/tab.vue'
 import MilestonesLine from '../ui/components/milestones-line/index.vue'
 import Buttons from '../ui/components/buttons/index.vue'
-import Links from '../ui/components/links/index.vue'
 import MoneyInfo from '../ui/components/money-info/index.vue'
 import Checkbox from '../ui/components/checkbox/checbox.vue'
 import CheckboxGroup from '../ui/components/checkbox/checbox-group.vue'
@@ -543,98 +542,74 @@ storiesOf('Sidebar Menu', module)
             </div>`
     }));;
 
+const injectButtonTemplate = code => `
+    <div class="row m-0 p-3">
+        <div class="col-12">
+            ${code}
+        </div>
+    </div>
+`;
 storiesOf('Buttons', module)
     .add('default', () => ({
-        components: {
-            'c-button': Buttons
-        },
+        components: { 'c-button': Buttons },
         methods: {
             testFunction: function () {
                 console.log('BOOOOOOOOOOOM!')
             }
         },
-        template: `<div class="row m-0 p-3">
-                <div class="col-12">
-                    <c-button text="default" @click="testFunction" type="submit" c_class="mx-1" />
-                </div>
-            </div>`
+        template: injectButtonTemplate(`
+            <c-button @click="testFunction">
+                default
+            </c-button>
+        `)
     }))
     .add('info', () => ({
-        components: {
-            'c-button': Buttons
-        },
-        template: `<div class="row m-0 p-3">
-                <div class="col-12">
-                    <c-button text="info" variant="info" c_class="mx-1" />
-                </div>
-            </div>`
+        components: { 'c-button': Buttons },
+        template: injectButtonTemplate(`
+            <c-button status="info">info</c-button>
+        `)
     }))
     .add('success', () => ({
-        components: {
-            'c-button': Buttons
-        },
-        template: `<div class="row m-0 p-3">
-                <div class="col-12">
-                    <c-button text="success" variant="success" icon="fas fa-check" icon_position="right" c_class="mx-1" />
-                </div>
-            </div>`
+        components: { 'c-button': Buttons },
+        template: injectButtonTemplate(`
+            <c-button status="success">success</c-button>
+        `)
     }))
     .add('danger', () => ({
-        components: {
-            'c-button': Buttons
-        },
-        template: `<div class="row m-0 p-3">
-                <div class="col-12">
-                    <c-button text="danger" variant="danger" icon="fas fa-exclamation-triangle" icon_position="left" c_class="mx-1" />
-                </div>
-            </div>`
-    }));
-
-storiesOf('Links', module)
-    .add('default', () => ({
-        components: {
-            'c-link': Links
-        },
-        methods: {
-            testFunction: function () {
-                console.log('BOOOOOOOOOOOM!')
-            }
-        },
-        template: `<div class="row m-0 p-3">
-                <div class="col-12">
-                    <c-link href="#3" text="default" @click="testFunction" type="submit" c_class="mx-1" />
-                </div>
-            </div>`
+        components: { 'c-button': Buttons },
+        template: injectButtonTemplate(`
+            <c-button status="danger">danger</c-button>
+        `)
     }))
-    .add('info', () => ({
-        components: {
-            'c-link': Links
-        },
-        template: `<div class="row m-0 p-3">
-                <div class="col-12">
-                    <c-link href="#3" text="info" variant="info" c_class="mx-1" />
-                </div>
-            </div>`
+    .add('[options] - swap order', () => ({
+        components: { 'c-button': Buttons },
+        template: injectButtonTemplate(`
+            <c-button status="success" swap_order>success</c-button>
+        `)
     }))
-    .add('success', () => ({
-        components: {
-            'c-link': Links
-        },
-        template: `<div class="row m-0 p-3">
-                <div class="col-12">
-                    <c-link href="#3" text="success" variant="success" icon="fas fa-check" icon_position="right" c_class="mx-1" />
-                </div>
-            </div>`
+    .add('[options] - hide icon', () => ({
+        components: { 'c-button': Buttons },
+        template: injectButtonTemplate(`
+            <c-button status="success" icon_hide>success</c-button>
+        `)
     }))
-    .add('danger', () => ({
-        components: {
-            'c-link': Links
-        },
-        template: `<div class="row m-0 p-3">
-                <div class="col-12">
-                    <c-link href="#3" text="danger" variant="danger" icon="fas fa-exclamation-triangle" icon_position="left" c_class="mx-1" />
-                </div>
-            </div>`
+    .add('[options] - emoji', () => ({
+        components: { 'c-button': Buttons },
+        template: injectButtonTemplate(`
+            <c-button status="success">Message 👺👻👽</c-button>
+        `)
+    }))
+    .add('[options] - custom icon', () => ({
+        components: { 'c-button': Buttons },
+        template: injectButtonTemplate(`
+            <c-button status="success" icon="anchor">success!</c-button>
+        `)
+    }))
+    .add('[options] - button tag', () => ({
+        components: { 'c-button': Buttons },
+        template: injectButtonTemplate(`
+            <c-button status="danger" tag="button">Im button</c-button>
+        `)
     }));
 
 storiesOf('Money Info', module)
@@ -3264,7 +3239,7 @@ storiesOf('Product Card', module)
         data: () => ({ products: productsCardsData }),
         template: `
             <div>
-                <h1 style="text-align: center;">Hover transitions are enabled only for bigger screens</h1>
+                <h1 style="text-align: center;">Hover transitions are enabled only on bigger screens</h1>
                 <products-cards :products="products"/>
             </div>
         `
@@ -3303,7 +3278,7 @@ storiesOf('Curators Reviews', module)
     .add('reviews wrapper', () => ({
         components: { CuratorsReviews },
         data: () => ({ reviews: [curatorReview, curatorReview, curatorReview] }),
-        template: `<curators-reviews :reviews="reviews"/>`
+        template: `<curators-reviews :reviews="reviews" class="col-8"/>`
     }))
 
 /*

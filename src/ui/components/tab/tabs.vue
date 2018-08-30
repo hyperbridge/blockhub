@@ -2,13 +2,21 @@
     <div>
         <div class="tabs-nav">
             <ul>
-                <li v-for="tab in tabs" class="nav-item">
-                    <a :href="tab.href" :class="{ 'active': tab.isActive }" @click="selectTab(tab)">{{ tab.name }}</a>
+                <li
+                    v-for="(tab, index) in tabs"
+                    :key="index"
+                    class="nav-item"
+                >
+                    <a
+                        :href="tab.href"
+                        :class="{ 'active': tab.isActive }"
+                        @click="selectTab(tab)"
+                    >{{ tab.name }}</a>
                 </li>
             </ul>
         </div>
         <div class="tabs-container">
-            <slot></slot>
+            <slot/>
         </div>
     </div>
 </template>
