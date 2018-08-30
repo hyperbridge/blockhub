@@ -57,8 +57,7 @@
     .sidebar-menu{
         h3{
             font-size: 30px;
-            color: #fff;
-            opacity: .8;
+            color: #fefeff;
             i{
                 margin-right: 5px;
             }
@@ -67,8 +66,7 @@
             font-size: 15px;
             font-weight: bold;
             text-transform: uppercase;
-            color: #fff;
-            opacity: .8;
+            color: #fefeff;
             i{
                 margin-right: 5px;
             }

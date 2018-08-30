@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <c-layout navigationKey="store-navigation">
         <div class="content" id="content">
             <div class="container-fluid" v-if="is_connected">
                 <div class="row">
@@ -57,12 +57,11 @@
 
 
                         <div class="home-tabs">
-                                <c-news-list-navigation
-                                    v-for="(news, index) in content_news"
-                                    :key="index"
-                                    :game="news.game"
-                                    :index="index+1"
-                                />
+                            <c-news-list-navigation
+                                :content_news="content_news"
+                                :key="index"
+                                :index="index+1"
+                            />
                             <div class="tab-content">
                                 <c-news-list-articles
                                     v-for="(news, index) in content_news"
