@@ -7,14 +7,6 @@ module.exports = (storybookBaseConfig, configType, defaultConfig) => {
         include: path.resolve(__dirname, "../src")
     });
 
-    defaultConfig.resolve = {
-        extensions: ['.js', '.vue', '.json'],
-        alias: {
-            ...defaultConfig.resolve.alias,
-            '@': path.resolve(__dirname, "../src"),
-        }
-    };
-
     defaultConfig.resolve.alias['@'] = path.resolve('src')
 
     return defaultConfig
