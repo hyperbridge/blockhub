@@ -91,6 +91,11 @@ const router = new Router({
             component: () => import('@/ui/screens/account-signout')
         },
         {
+            path: '/account/verification',
+            name: 'Account Verification',
+            component: () => import('@/ui/screens/account-verification')
+        },
+        {
             path: '/account/wallets',
             name: 'Wallets',
             component: () => import('@/ui/screens/account-wallets')
