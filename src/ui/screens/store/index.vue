@@ -30,7 +30,9 @@
                         <c-heading-bar name="New Releases" :showArrows="true" />
                     </div>
 
-                    <c-products-cards-wrapper :products="demo_products"/>
+                    <c-products-cards
+                        :products="demo_products"
+                    />
                 </div>
 
                 <div class="row product-grid">
@@ -45,33 +47,9 @@
                     />
                 </div>
 
-                <div class="row product-grid">
-                    <div class="col-12">
-                        <c-heading-bar name="Crowdfund Projects" more="/#/projects" :showArrows="false" :showBackground="true" />
-                    </div>
-
-                    <c-product-card
-                        v-for="(product, index) in sale_products"
-                        :key="index"
-                        :product="product"
-                    />
-                </div>
-
-                <div class="row curators-wrapper">
-                    <div class="col-12">
-                        <c-heading-bar name="From our curators" :showArrows="false" />
-                    </div>
-
-                    <div class="curators-wrapper__content">
-                        <c-curator-review
-                            v-for="(review, index) in curators_reviews"
-                            :key="index"
-                            :review="review"
-                        />
-                    </div>
-
-                </div>
-
+                <c-curators-reviews
+                    :reviews="curators_reviews"
+                />
             </div>
         </div>
     </c-layout>
@@ -91,8 +69,8 @@ export default {
         'c-tags': () => import('@/ui/components/tags'),
         'c-heading-bar': () => import('@/ui/components/heading-bar'),
         'c-product-card': () => import('@/ui/components/store/product-card'),
-        'c-products-cards-wrapper': () => import('@/ui/components/store/products-cards-wrapper'),
-        'c-curator-review': () => import('@/ui/components/store/curator-review')
+        'c-products-cards': () => import('@/ui/components/store/products-cards'),
+        'c-curators-reviews': () => import('@/ui/components/store/curators-reviews'),
     },
     data() {
         const curator_review = {
@@ -122,59 +100,56 @@ export default {
                 {
                     id: "8",
                     name: "Gothic® 3",
-                    content: "<strong>A nameless hero becomes a legend!</strong><br><br>\t\t\t\t\tMyrtana, a world in upheaval: overrun by orcs from the dark lands in the north, King Rhobar is defending Vengard, the former stronghold of the humans, with his last troop of followers. Chaos reigns without: rebels are offering resistance, and the Hashishin of the south are openly collaborating with the orcs.<br><br>\t\t\t\t\tRumours that the nameless hero of Khorinis is on his way to the mainland spawn both hope and worry. Whose side will he take? Who will feel his wrath, who enjoy his favor? Only one thing is sure: his deeds are going to change Myrtana forever...<br><br>\t\t\t\t\tLiberation or annihilitaion &#x2013; the fate of the world of Gothic lies in your hands! Create your own individual gaming experience through different solution paths.<br><br>\t\t\t\t\tDynamic, action-packed combat system: choose between Fast Attacks, deadly whirlwind close combat, or shooting from a distance.<br>\t\t\t\t\tImmerse yourself in the most colorful and authentic fantasy world of all time &#x2013; Myrtana awaits you!<br><br>\t\t\t\t\t<ul><li>Specially designed easy combat system<br>\t\t\t\t\t</li><li>Clear main goals&#x2014;story driven yet dictated by player&#x2019;s choice<br>\t\t\t\t\t</li><li>Huge free&#x2013;roaming world&#x2014;virtually no boundaries<br>\t\t\t\t\t</li><li>Advanced human behavior AI for hundreds of individual characters with full audio dialogues<br>\t\t\t\t\t</li><li>Countless side&#x2013;quests for the player to choose from<br>\t\t\t\t\t</li><li>Over 50 different monsters and animals and dozens of human enemies<br>\t\t\t\t\t</li><li>Over 50 different powerful spells and over a hundred different weapons<br>\t\t\t\t\t</li><li>Unique class&#x2013;free character development</li></ul>",
                     images: {
-                        header: "/static/img/products/gothic-3/gothic-3-01.jpg",
-                        medium_tile: "/static/img/products/gothic-3/g2-med-tile.png",
-                        main: "/static/img/products/gothic-3/gothic-3-03.jpg",
+                        header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
+                        medium_tile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
+                        main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
                         preview: [
-                            "/static/img/products/gothic-3/gothic-3-02.jpg",
-                            "/static/img/products/gothic-3/gothic-3-05.jpg",
-                            "/static/img/products/gothic-3/gothic-3-06.jpg"
+                            "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
+                            "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004034.1920x1080.jpg?t=1533039803",
+                            "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004035.1920x1080.jpg?t=1533039803",
+                            "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004037.1920x1080.jpg?t=1533039803"
                         ]
                     },
                     author: "Piranha Bytes",
-                    videos: ["/static/videos/products/gothic-3/gothic-3-01.mp4"],
-                    author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"],
-                    hover: false
+                    videos: ["https://steamcdn-a.akamaihd.net/steam/apps/901191/movie480.webm?t=1490866901"],
+                    author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"]
                 },
                 {
                     id: "9",
-                    name: "Gothic® 2",
-                    content: "<strong>A nameless hero becomes a legend!</strong><br><br>\t\t\t\t\tMyrtana, a world in upheaval: overrun by orcs from the dark lands in the north, King Rhobar is defending Vengard, the former stronghold of the humans, with his last troop of followers. Chaos reigns without: rebels are offering resistance, and the Hashishin of the south are openly collaborating with the orcs.<br><br>\t\t\t\t\tRumours that the nameless hero of Khorinis is on his way to the mainland spawn both hope and worry. Whose side will he take? Who will feel his wrath, who enjoy his favor? Only one thing is sure: his deeds are going to change Myrtana forever...<br><br>\t\t\t\t\tLiberation or annihilitaion &#x2013; the fate of the world of Gothic lies in your hands! Create your own individual gaming experience through different solution paths.<br><br>\t\t\t\t\tDynamic, action-packed combat system: choose between Fast Attacks, deadly whirlwind close combat, or shooting from a distance.<br>\t\t\t\t\tImmerse yourself in the most colorful and authentic fantasy world of all time &#x2013; Myrtana awaits you!<br><br>\t\t\t\t\t<ul><li>Specially designed easy combat system<br>\t\t\t\t\t</li><li>Clear main goals&#x2014;story driven yet dictated by player&#x2019;s choice<br>\t\t\t\t\t</li><li>Huge free&#x2013;roaming world&#x2014;virtually no boundaries<br>\t\t\t\t\t</li><li>Advanced human behavior AI for hundreds of individual characters with full audio dialogues<br>\t\t\t\t\t</li><li>Countless side&#x2013;quests for the player to choose from<br>\t\t\t\t\t</li><li>Over 50 different monsters and animals and dozens of human enemies<br>\t\t\t\t\t</li><li>Over 50 different powerful spells and over a hundred different weapons<br>\t\t\t\t\t</li><li>Unique class&#x2013;free character development</li></ul>",
+                    name: "The Witcher® 3: Wild Hunt",
                     images: {
-                        header: "/static/img/products/gothic-3/gothic-3-01.jpg",
-                        medium_tile: "/static/img/products/gothic-3/g3-med-tile.png",
-                        main: "/static/img/products/gothic-3/gothic-3-03.jpg",
+                        header: "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_b74d60ee215337d765e4d20c8ca6710ae2362cc2.600x338.jpg?t=1529405012",
+                        medium_tile: "https://steamcdn-a.akamaihd.net/steam/apps/292030/header.jpg?t=1529405012",
+                        main: "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_b74d60ee215337d765e4d20c8ca6710ae2362cc2.600x338.jpg?t=1529405012",
                         preview: [
-                            "/static/img/products/gothic-3/gothic-3-02.jpg",
-                            "/static/img/products/gothic-3/gothic-3-05.jpg",
-                            "/static/img/products/gothic-3/gothic-3-06.jpg"
+                            "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012",
+                            "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_64eb760f9a2b67f6731a71cce3a8fb684b9af267.600x338.jpg?t=1529405012",
+                            "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_eda99e7f705a113d04ab2a7a36068f3e7b343d17.600x338.jpg?t=1529405012",
+                            "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_d5b80eb63c12a6484f26796f3e34410651bba068.600x338.jpg?t=1529405012"
                         ]
                     },
-                    author: "Piranha Bytes",
-                    videos: ["/static/videos/products/gothic-3/gothic-3-01.mp4"],
-                    author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"],
-                    hover: false
+                    author: "CD PROJEKT RED",
+                    videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256658589/movie480.webm?t=1528288687"],
+                    author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"]
                 },
                 {
-                    id: "9",
-                    name: "Gothic® 1",
-                    content: "<strong>A nameless hero becomes a legend!</strong><br><br>\t\t\t\t\tMyrtana, a world in upheaval: overrun by orcs from the dark lands in the north, King Rhobar is defending Vengard, the former stronghold of the humans, with his last troop of followers. Chaos reigns without: rebels are offering resistance, and the Hashishin of the south are openly collaborating with the orcs.<br><br>\t\t\t\t\tRumours that the nameless hero of Khorinis is on his way to the mainland spawn both hope and worry. Whose side will he take? Who will feel his wrath, who enjoy his favor? Only one thing is sure: his deeds are going to change Myrtana forever...<br><br>\t\t\t\t\tLiberation or annihilitaion &#x2013; the fate of the world of Gothic lies in your hands! Create your own individual gaming experience through different solution paths.<br><br>\t\t\t\t\tDynamic, action-packed combat system: choose between Fast Attacks, deadly whirlwind close combat, or shooting from a distance.<br>\t\t\t\t\tImmerse yourself in the most colorful and authentic fantasy world of all time &#x2013; Myrtana awaits you!<br><br>\t\t\t\t\t<ul><li>Specially designed easy combat system<br>\t\t\t\t\t</li><li>Clear main goals&#x2014;story driven yet dictated by player&#x2019;s choice<br>\t\t\t\t\t</li><li>Huge free&#x2013;roaming world&#x2014;virtually no boundaries<br>\t\t\t\t\t</li><li>Advanced human behavior AI for hundreds of individual characters with full audio dialogues<br>\t\t\t\t\t</li><li>Countless side&#x2013;quests for the player to choose from<br>\t\t\t\t\t</li><li>Over 50 different monsters and animals and dozens of human enemies<br>\t\t\t\t\t</li><li>Over 50 different powerful spells and over a hundred different weapons<br>\t\t\t\t\t</li><li>Unique class&#x2013;free character development</li></ul>",
+                    id: "10",
+                    name: "Fallout 4",
                     images: {
-                        header: "/static/img/products/gothic-3/gothic-3-01.jpg",
-                        medium_tile: "/static/img/products/gothic-3/g2-med-tile.png",
-                        main: "/static/img/products/gothic-3/gothic-3-03.jpg",
+                        header: "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_c6b798424a93617b4b825aea3bcd9547c0b0a5ce.1920x1080.jpg?t=1533676954",
+                        medium_tile: "https://steamcdn-a.akamaihd.net/steam/apps/377160/header.jpg?t=1533676954",
+                        main: "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_c6b798424a93617b4b825aea3bcd9547c0b0a5ce.1920x1080.jpg?t=1533676954",
                         preview: [
-                            "/static/img/products/gothic-3/gothic-3-02.jpg",
-                            "/static/img/products/gothic-3/gothic-3-05.jpg",
-                            "/static/img/products/gothic-3/gothic-3-06.jpg"
+                            "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_f7861bd71e6c0c218d8ff69fb1c626aec0d187cf.1920x1080.jpg?t=1533676954",
+                            "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_910437ac708aed7c028f6e43a6224c633d086b0a.1920x1080.jpg?t=1533676954",
+                            "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_f649b8e57749f380cca225db5074edbb1e06d7f5.1920x1080.jpg?t=1533676954",
+                            "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_c310f858e6a7b02ffa21db984afb0dd1b24c1423.1920x1080.jpg?t=1533676954"
                         ]
                     },
-                    author: "Piranha Bytes",
-                    videos: [],
-                    author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"],
-                    hover: false
+                    author: "Bethesda",
+                    videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256657338/movie480.webm?t=1447378505"],
+                    author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"]
                 }
             ],
             curators_reviews: [curator_review, curator_review, curator_review]
@@ -219,8 +194,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/css/helpers/mixins.scss';
-
 .frontpage-product{
     margin-bottom: 30px;
 }
@@ -298,27 +271,6 @@ export default {
         font-weight: bold;
         i{
             margin-right: 5px;
-        }
-    }
-}
-
-.curators-wrapper {
-    margin: 30px 0;
-    box-sizing: border-box;
-    padding: 10px;
-    background-color: #24253B;
-    border-radius: 4px;
-    &__content {
-        width: 100%;
-        display: flex;
-        align-items: flex-start;
-        @include width-max-lg {
-            flex-direction: column;
-        }
-        @include width-min-lg {
-            .curator-review {
-                width: 33%;
-            }
         }
     }
 }
