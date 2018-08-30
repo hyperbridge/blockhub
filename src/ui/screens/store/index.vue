@@ -30,13 +30,7 @@
                         <c-heading-bar name="New Releases" :showArrows="true" />
                     </div>
 
-                    <div class="products-grid-wrapper">
-                        <c-game-card-dynamic
-                            v-for="(game, index) in demo_products"
-                            :key="index"
-                            :game="game"
-                        />
-                    </div>
+                    <c-products-cards-wrapper :products="demo_products"/>
                 </div>
 
                 <div class="row product-grid">
@@ -44,10 +38,10 @@
                         <c-heading-bar name="Summer Sale" :showArrows="true" :showBackground="true" />
                     </div>
 
-                    <c-game-card
-                        v-for="(game, index) in sale_products"
+                    <c-product-card
+                        v-for="(product, index) in sale_products"
                         :key="index"
-                        :game="game"
+                        :product="product"
                     />
                 </div>
 
@@ -56,10 +50,10 @@
                         <c-heading-bar name="Crowdfund Projects" more="/#/projects" :showArrows="false" :showBackground="true" />
                     </div>
 
-                    <c-game-card
-                        v-for="(game, index) in projects"
+                    <c-product-card
+                        v-for="(product, index) in sale_products"
                         :key="index"
-                        :game="game"
+                        :product="product"
                     />
                 </div>
 
@@ -96,8 +90,8 @@ export default {
         'c-layout': () => import('@/ui/layouts/default'),
         'c-tags': () => import('@/ui/components/tags'),
         'c-heading-bar': () => import('@/ui/components/heading-bar'),
-        'c-game-card': () => import('@/ui/components/store/game-card'),
-        'c-game-card-dynamic': () => import('@/ui/components/store/game-card-dynamic'),
+        'c-product-card': () => import('@/ui/components/store/product-card'),
+        'c-products-cards-wrapper': () => import('@/ui/components/store/products-cards-wrapper'),
         'c-curator-review': () => import('@/ui/components/store/curator-review')
     },
     data() {
@@ -304,33 +298,6 @@ export default {
         font-weight: bold;
         i{
             margin-right: 5px;
-        }
-    }
-}
-
-.products-grid-wrapper {
-    margin-top: 20px;
-    margin-bottom: 40px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    @include width-max-lg {
-        flex-direction: column;
-    }
-}
-
-@include width-min-lg {
-    .products-grid-wrapper:hover {
-        .product-grid__item {
-            transform: translateX(-15%);
-        }
-
-        .product-grid__item:hover {
-            transform: scale(1.3);
-            ~ .product-grid__item {
-                transform: translateX(15%);
-            }
         }
     }
 }

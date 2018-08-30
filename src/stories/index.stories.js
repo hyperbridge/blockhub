@@ -2016,7 +2016,7 @@ storiesOf('Range Slider', module)
         template: `
          <div class="row m-0 p-3">
             <div class="col-8">
-                <c-range-slider label="Single step slider" 
+                <c-range-slider label="Single step slider"
                  :min="1"
                  :max="10"
                  :step="1"
@@ -2033,9 +2033,9 @@ storiesOf('Range Slider', module)
         template: `
          <div class="row m-0 p-3">
             <div class="col-8">
-                <c-range-slider 
-                label="Double slider" 
-                :min="0" 
+                <c-range-slider
+                label="Double slider"
+                :min="0"
                 :from="25"
                 :to="67"
                 type="double" />
@@ -2050,9 +2050,9 @@ storiesOf('Range Slider', module)
         template: `
          <div class="row m-0 p-3">
             <div class="col-8">
-                <c-range-slider 
-                label="Double slider" 
-                :min="0" 
+                <c-range-slider
+                label="Double slider"
+                :min="0"
                 :from="25"
                 :to="67"
                 :grid="true"
@@ -2253,11 +2253,11 @@ storiesOf('Block', module)
         template: `
          <div class="row m-0 p-3">
              <c-block title="This is block title" bClass="col-8">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Suspendisse vel arcu sit amet erat vestibulum volutpat. 
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Suspendisse vel arcu sit amet erat vestibulum volutpat.
                 Ut volutpat enim vel augue luctus luctus</p>
-                <p>Curabitur et molestie eros. Duis sodales ante velit, 
-                ut fringilla turpis dictum sit amet. Praesent quis lacus 
+                <p>Curabitur et molestie eros. Duis sodales ante velit,
+                ut fringilla turpis dictum sit amet. Praesent quis lacus
                 ac tellus vehicula commodo sit amet sit amet ex.</p>
             </c-block>
          </div>
@@ -2394,7 +2394,7 @@ storiesOf('Game Plans', module)
         template: `
          <div class="row m-0 p-3">
             <div class="col-5">
-                <c-game-plans :items="plans" />     
+                <c-game-plans :items="plans" />
             </div>
          </div>
          `
@@ -2466,7 +2466,7 @@ storiesOf('Games Grid', module)
                             :items="games"
                             itemBg="transparent"
                             :hovered=true
-                        ></c-games-grid>  
+                        ></c-games-grid>
             </div>
          </div>
          `
@@ -2524,7 +2524,7 @@ storiesOf('Games Grid', module)
                 <c-games-grid-simple
                             :itemInRow="itemInRow"
                             :items="games"
-                        ></c-games-grid-simple>  
+                        ></c-games-grid-simple>
             </div>
          </div>
          `
@@ -2955,7 +2955,7 @@ storiesOf('Sending Funds(not finished)', module)
         <div class="row p-5">
             <div class="col-8">
                 <c-button text="Show Sending Funds Modal" @click="showModalHandler" variant="warning" icon="fas fa-check" icon_position="left" c_class="ml-1" />
-               
+
                 <c-send-funds :modalActive="modalActive">
                     <template slot="agreement_text">
                         <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span>
@@ -3153,6 +3153,7 @@ storiesOf('User Card(not finished)', module)
         </div>
         `
     }))
+
 import ScreenGallery from '../ui/components/screen-gallery/gallery';
 storiesOf('Gallery', module)
     .add('screen-gallery', () => ({
@@ -3170,11 +3171,65 @@ storiesOf('Gallery', module)
         template: `<screen-gallery :main="main" :items="items" class="col-6"/>`
     }))
 
-import GameCard from '../ui/components/store/game-card';
-storiesOf('Game Card', module)
-    .add('game-card', () => ({
-        components: { GameCard },
-        template: `<game-card/>`
+import ProductCardDynamic from '@/ui/components/store/product-card-dynamic';
+import ProductCard from '@/ui/components/store/product-card';
+import ProductsCardsWrapper from '@/ui/components/store/products-cards-wrapper';
+const productsCardsData = [
+    {
+        id: "8",
+        name: "Gothic® 3",
+        images: { medium_tile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803" },
+        author: "Piranha Bytes",
+        videos: ["https://steamcdn-a.akamaihd.net/steam/apps/901191/movie480.webm?t=1490866901"],
+        author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"]
+    },
+    {
+        id: "9",
+        name: "The Witcher® 3: Wild Hunt",
+        images: { medium_tile: "https://steamcdn-a.akamaihd.net/steam/apps/292030/header.jpg?t=1529405012" },
+        author: "CD PROJEKT RED",
+        videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256658589/movie480.webm?t=1528288687"],
+        author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"]
+    }
+];
+storiesOf('Product Card', module)
+    .add('basic', () => ({
+        components: { ProductCard },
+        data: () => ({ products: productsCardsData }),
+        template: `
+            <div class="row">
+                <product-card
+                    v-for="(product, index) in products"
+                    :product="product"
+                    :key="index"
+                    class="col-3"
+                />
+            </div>
+        `
+    }))
+    .add('dynamic', () => ({
+        components: { ProductCardDynamic },
+        data: () => ({ products: productsCardsData }),
+        template: `
+            <div class="row">
+                <product-card-dynamic
+                    v-for="(product, index) in products"
+                    :product="product"
+                    :key="index"
+                    class="col-3"
+                />
+            </div>
+        `
+    }))
+    .add('wrapper', () => ({
+        components: { ProductsCardsWrapper },
+        data: () => ({ products: productsCardsData }),
+        template: `
+            <div>
+                <h1 style="text-align: center;">Hover transitions are enabled only for bigger screens</h1>
+                <products-cards-wrapper :products="products"/>
+            </div>
+        `
     }))
 
 /*

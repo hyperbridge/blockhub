@@ -4,36 +4,36 @@
         @mouseover="show_preview(true)"
         @mouseout="show_preview(false)"
     >
-        <a :href="`/#/product/${game.id}`" class="card-img-top">
+        <a :href="`/#/product/${product.id}`" class="card-img-top">
             <transition name="fade">
-                <img v-if="!display_preview" class="card-img-top" :src="game.images.medium_tile" />
+                <img v-if="!display_preview" class="card-img-top" :src="product.images.medium_tile" />
                 <template v-else>
-                    <video v-if="game.videos.length" class="card-img-top" width="100%" autoplay>
-                        <source :src="game.videos[0]" type="video/mp4">
+                    <video v-if="product.videos.length" class="card-img-top" width="100%" autoplay>
+                        <source :src="product.videos[0]" type="video/mp4">
                     </video>
                     <transition-group tag="div" name="slide-left" v-else>
                         <img
-                            v-for="(image, index) in game.images.preview"
+                            v-for="(image, index) in product.images.preview"
                             v-if="index === current_image"
                             :key="image"
-                            :src="game.images.preview[index]"
+                            :src="product.images.preview[index]"
                             class="card-img-top"
                         />
                     </transition-group>
                 </template>
             </transition>
         </a>
-        <h4><a :href="`/#/product/${game.id}`">{{ game.name }}</a></h4>
-        <p class="card-text" hidden>{{ game.short_description }} </p>
-        <c-tags :tags="game.author_tags.slice(0,3)"/>
+        <h4><a :href="`/#/product/${product.id}`">{{ product.name }}</a></h4>
+        <p class="card-text" hidden>{{ product.short_description }} </p>
+        <c-tags :tags="product.author_tags.slice(0,3)"/>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'game-card-dynamic',
+    name: 'product-card-dynamic',
     props: {
-        game: {
+        product: {
             type: Object,
             required: true
         }
@@ -54,13 +54,13 @@ export default {
             clearTimeout(this.timeout);
             this.timeout = setTimeout(() => {
                 if (!status) clearInterval(this.interval);
-                if (status && !this.display_preview && !this.game.videos.length) this.slider();
+                if (status && !this.display_preview && !this.product.videos.length) this.slider();
                 this.display_preview = status;
             }, status ? 250 : 0);
         },
         slider() {
             this.interval = setInterval(() => {
-                const { current_image, game: { images }} = this;
+                const { current_image, product: { images }} = this;
                 this.current_image = current_image === images.preview.length - 1 ? 0 : current_image + 1;
             }, 1600);
         }
@@ -120,5 +120,4 @@ export default {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
-
 </style>
