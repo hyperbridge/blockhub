@@ -1,5 +1,5 @@
 <template>
-    <button  :type="type" class="c-btn" :class="[ 'c-' + variant, c_class ]" @click="$emit('click')">
+    <button  :type="type" class="c-btn" :class="[ 'c-' + variant, c_class, 'c-size-' + size ]" @click="$emit('click')">
         <i class="left-icon" :class="[ { 'm-0': !text }, icon]" v-if="icon_position == 'left'"></i>
         {{ text }}
         <i class="right-icon" :class="icon" v-if="icon_position == 'right'"></i>
@@ -14,7 +14,11 @@
             text : { type: String },
             icon : { default: false },
             icon_position : { default: false},
-            c_class: { default: false }
+            c_class: { default: false },
+            size: {
+                type: String,
+                default: 'sm'
+            }
         }
     }
 </script>
@@ -44,6 +48,17 @@
         &:focus{
             outline: none;
             box-shadow: none;
+        }
+        &.c-size-sm{
+            padding: 0px 8px;
+        }
+        &.c-size-md{
+            padding: 3px 13px;
+            font-size: 15px;
+        }
+        &.c-size-lg{
+            padding: 5px 15px;
+            font-size: 17px;
         }
         &.c-default{
             background: #fff;
