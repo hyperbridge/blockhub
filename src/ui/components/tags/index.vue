@@ -14,17 +14,17 @@
 
 <script>
 export default {
-props: {
-    tags: {
-        type: Array,
-        required: true
+    props: {
+        tags: {
+            type: Array,
+            required: true
+        }
+    },
+    methods: {
+        filterTag(tagName) {
+            alert(tagName)
+        }
     }
-},
-methods: {
-    filterTag(tagName) {
-        alert(tagName)
-    }
-}
 }
 </script>
 

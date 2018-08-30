@@ -2,20 +2,20 @@
     <div class="assets-grid">
         <div class="assets-grid__item-container" v-for="(item, index) in list" :key="index">
             <div class="assets-grid__item">
-                <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                <img :src="item.main_img" />
                 <div class="assets-grid__item-info">
                     <div class="assets-grid__item-thumb">
-                        <img src="https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png" />
+                        <img :src="item.sub_img" />
                     </div>
                     <div class="assets-grid__item-tooltip">
                         <h5>{{ item.name }}</h5>
                         <span class="float-left price">
                             <i class="fas fa-dollar-sign"></i>
-                            1.99
+                            {{ item.price }}
                         </span>
                         <span class="float-right box">
                             <i class="fas fa-box"></i>
-                            350. 000
+                            {{ item.count }}
                         </span>
                     </div>
                 </div>
@@ -51,11 +51,12 @@
         border: 1px solid #A2A3BE;
         border-radius: 5px;
         width: 100%;
+        height: 100%;
         position: relative;
         display: inline-block;
         float: left;
         padding: 10px;
-
+        color: #fff;
         &:before{
             content: "";
             padding-top: 100%;
@@ -108,6 +109,9 @@
         display: inline-block;
         width: 70%;
         float: right;
+        h5{
+            color: #fff;
+        }
         span{
             i{
                 margin-right: 5px;

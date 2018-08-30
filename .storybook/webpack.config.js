@@ -15,5 +15,7 @@ module.exports = (storybookBaseConfig, configType, defaultConfig) => {
         }
     };
 
-  return defaultConfig
+    defaultConfig.resolve.alias['@'] = path.resolve('src')
+
+    return defaultConfig
 }

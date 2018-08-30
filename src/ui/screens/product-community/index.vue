@@ -83,8 +83,7 @@
             'c-layout': () => import('@/ui/layouts/default'),
             'c-tags-list': () => import('@/ui/components/tags'),
             'c-item': () => import('@/ui/components/product-community/item'),
-            'c-post-comment': () => import('@/ui/components/product-community/comment'),
-            'dropdown-menu': () => import('@/ui/components/dropdown-menu'),
+            'c-post-comment': () => import('@/ui/components/product-community/comment')
         },
         data() {
             const authors = [

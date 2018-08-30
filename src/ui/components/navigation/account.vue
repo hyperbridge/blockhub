@@ -11,6 +11,11 @@
                 <a href="/#/">Legal Stuff</a>
             </li>
             <li>
+                <a href="/#/account/verification">
+                    Account Verification
+                </a>
+            </li>
+            <li>
                 <a href="/#/account/wallets">
                     Privacy Policy
                 </a>

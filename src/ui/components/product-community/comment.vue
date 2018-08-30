@@ -91,6 +91,7 @@ export default {
                     margin: 0;
                     font-weight: bold;
                     font-size: 14px;
+                    color: #fff;
                 }
                 .time {
                     float: right;

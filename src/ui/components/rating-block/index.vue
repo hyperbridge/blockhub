@@ -14,8 +14,8 @@
                     />
                 </li>
             </ul>
-            <a href="#reviews" class="btn btn-outline-white">See Full Reviews</a>
-            <a href="#reviews" class="btn btn-outline-white">Rate the game</a>
+            <a :href="fullReviewsLink" class="btn btn-outline-white">See Full Reviews</a>
+            <a :href="rateGameLink" class="btn btn-outline-white">Rate the game</a>
         </div>
     </div>
 </template>
@@ -27,10 +27,18 @@ export default {
         items: {
             type: Array,
             required: true
+        },
+        fullReviewsLink: {
+            type: String,
+            required: true
+        },
+        rateGameLink: {
+            type: String,
+            required: true
         }
     },
     components: {
-        'c-rating-stars': () => import('@/ui/components/rating-stars')
+        'c-rating-stars': () => import('../rating-stars')
     }
 }
 </script>

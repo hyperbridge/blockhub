@@ -1,69 +1,34 @@
 <template>
     <div class="navigation" id="navigation-default">
 
-        <h3 class="text-uppercase">STORE</h3>
-        <ul class="store-menu margin-bottom-15">
-            <li class="title">Store Home</li>
-            <li>
-                <a href="/#/store">
-                    My Store
-                </a>
-            </li>
-            <li>
-                <a href="/#/dashboard">
-                    Friends Store
-                </a>
-            </li>
-        </ul>
-        <ul class="genre-menu margin-bottom-15">
-            <li class="title">
-                <i class="fas fa-gamepad"></i>
-                Browse By Genre
-            </li>
-            <li>
-                <a onclick="filter({genre: 'action'})">
-                    Action
-                </a>
-            </li>
-            <li>
-                <a href="filter({genre: 'adventure'})">
-                    Adventure
-                </a>
-            </li>
-            <li>
-                <a href="filter({genre: 'rpg'})">
-                    RPG
-                </a>
-            </li>
-            <li>
-                <a href="filter({genre: 'racing'})">
-                    Racing
-                </a>
-            </li>
-            <li>
-                <a href="filter({genre: 'simulation'})">
-                    Simulation
-                </a>
-            </li>
-            <li>
-                <a href="filter({genre: 'fighting'})">
-                    Fighting
-                </a>
-            </li>
-            <li>
-                <a href="filter({genre: 'vr'})">
-                    VR
-                </a>
-            </li>
-            <li class="more">
-                <a href="#">
-                    MORE...
-                </a>
-            </li>
-        </ul>
+        <c-sidebar-menu title="STORE" sub_title="Store Home" mClass="margin-bottom-20">
+            <c-sidebar-menu-link url="/#/store" link_text="My Store" />
+            <c-sidebar-menu-link url="/#/dashboard" link_text="Friends Store" />
+        </c-sidebar-menu>
+
+        <c-sidebar-menu sub_title="Browse By Genre" sub_icon="fas fa-gamepad" mClass="margin-bottom-20">
+            <c-sidebar-menu-link url="#3" click="filter({genre: 'action'})" link_text="Action" />
+            <c-sidebar-menu-link url="#3" click="filter({genre: 'adventure'})" link_text="Adventure" />
+            <c-sidebar-menu-link url="#3" click="filter({genre: 'rpg'})" link_text="RPG" />
+            <c-sidebar-menu-link url="#3" click="filter({genre: 'racing'})" link_text="Racing" />
+            <c-sidebar-menu-link url="#3" click="filter({genre: 'fighting'})" link_text="Fighting" />
+            <c-sidebar-menu-link url="#3" click="filter({genre: 'vr'})" link_text="VR" />
+            <c-sidebar-menu-link url="#3" aClass="font-weight-bold" link_text="MORE ..." />
+        </c-sidebar-menu>
+
 
         <h3 class="text-uppercase">Search</h3>
         <div class="filter-blk">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                    <span class="input-group-text">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    </div>
+                </div>
+            </div>
             <c-searcher />
             <div class="form-group range-slider">
                 <label for="communitySize">Community size</label>
@@ -98,6 +63,7 @@
             </div>
         </div>
 
+
         <ul class="help-block">
             <li class="title">
                 <i class="fas fa-question-circle"></i>
@@ -122,10 +88,17 @@
 <script>
     export default {
         components: {
+            'c-sidebar-menu-link': () => import('@/ui/components/sidebar-menu/menu_item'),
+            'c-sidebar-menu': () => import('@/ui/components/sidebar-menu/index'),
             'c-searcher': () => import('@/ui/components/searcher')
         },
         data() {
             return {}
+        },
+        methods:{
+            filter: function () {
+                alert('Click')
+            }
         }
     }
 </script>

@@ -4,30 +4,7 @@
         <div class="card-body">
             <h2 class="title">Frequently Traded Assets</h2>
             <div class="traded-assets__filter">
-                <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
-                        id="mostMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        Most valuable
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
-                        id="rarityMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        Rarity
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
+                <slot name="filter"></slot>
             </div>
             <ul class="traded-assets__list">
                 <li class="traded-assets__item" v-for="(item, index) in items" :key="index">
@@ -80,38 +57,6 @@ export default {
     }
 
     .traded-assets__filter {
-        .dropdown {
-            display: inline-block;
-            float: left;
-            margin-right: 20px;
-            &:last-child {
-                margin-right: 0;
-            }
-            a.dropdown-toggle {
-                padding: 0;
-                background: transparent;
-                border: none;
-                font-size: 11px;
-                text-transform: uppercase;
-                &:active,
-                &:focus {
-                    box-shadow: none;
-                    border: none;
-                    background: transparent;
-                }
-                &:after {
-                    margin-left: 18px;
-                }
-            }
-            .dropdown-menu {
-                .dropdown-item {
-                    padding-left: 15px;
-                    &:after {
-                        display: none;
-                    }
-                }
-            }
-        }
     }
 
     .traded-assets__list {
@@ -135,5 +80,4 @@ export default {
             max-height: 100%;
         }
     }
-
 </style>

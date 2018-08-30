@@ -1,7 +1,7 @@
 <template>
     <div class="identity-block" :class="status">
         <div class="block-icon" :class="icon_color" v-if="user">
-            <i :class="icon_class"></i>
+            <i :class="`fas fa-${identity_icon}`"></i>
         </div>
         <div class="avatar" v-if="!user">
             <a href="#3" class="avatar_upload_btn">
@@ -74,9 +74,25 @@
 </template>
 
 <script>
-export default {
-    props: ['user', 'status','icon_color', 'icon_class']
-}
+    export default {
+        props: ['user', 'status','icon_color', 'icon_class'],
+        computed: {
+            identity_icon() {
+                switch(this.status) {
+                    case 'info':
+                        return 'info';
+                    case 'success':
+                        return 'check';
+                    case 'warning':
+                        return 'exclamation-triangle';
+                    case 'danger':
+                        return 'times';
+                    default:
+                        return 'cog';
+                }
+            }
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
@@ -89,6 +105,13 @@ export default {
         overflow: hidden;
         width: 100%;
         position: relative;
+        color: #fff;
+        input {
+            border: none;
+            box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
+            background: #303049;
+            color: rgba(255, 255, 255, .5);
+        }
         .block-icon {
             position: absolute;
             top: 10px;
@@ -100,13 +123,6 @@ export default {
             border-radius: 100%;
             width: 25px;
             height: 25px;
-            &.green {
-                background: #43C981;
-            }
-            &.red {
-                background: #ff6c5e;
-                font-size: 13px;
-            }
         }
         .avatar {
             width: 60px;
@@ -187,8 +203,11 @@ export default {
                 }
             }
         }
-        &.finish {
+        &.success {
             background: #1d2031;
+            .block-icon{
+                background: #43C981;
+            }
             input:read-only {
                 border: none;
                 background: transparent;
@@ -222,6 +241,9 @@ export default {
             button {
                 color: #fff;
             }
+        }
+        &.warning {
+            background: #ff5454;
         }
     }
 </style>
