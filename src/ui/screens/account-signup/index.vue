@@ -4,22 +4,8 @@
             <div class="container">
                 <div class="col-12">
 
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item layer1">
-                            <a class="nav-link active" id="step1-tab" data-toggle="tab" href="#step1" role="tab"
-                               aria-controls="step1-tab" aria-expanded="true">Step 1</a>
-                        </li>
-                        <li class="nav-item layer2">
-                            <a class="nav-link" id="step2-tab" data-toggle="tab" href="#step2" role="tab"
-                               aria-controls="step2-tab">Step 2</a>
-                        </li>
-                        <li class="nav-item layer3">
-                            <a class="nav-link" id="step3-tab" data-toggle="tab" href="#step3" role="tab"
-                               aria-controls="step3-tab">Step 3</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane show active" id="step1" role="tabpanel" aria-labelledby="step1-tab">
+                    <c-tabs>
+                        <c-tab name="Step 1" :selected="true" showFooter="true">
                             <div class="tab-container">
                                 <div class="tab-card">
                                     <h4>Personal Information</h4>
@@ -230,30 +216,25 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="action">
+                            <div class="d-flex justify-content-between align-items-center" slot="footer">
+                                <c-switch label="" label_position="right" size="sm" :customLabel="true">
+                                    <template slot="label">
+                                        I agree to the
+                                        <a href="#" data-toggle="modal" data-target="#terms-modal">terms</a> and
+                                        <a href="#" data-toggle="modal" data-target="#privacy-policy-modal">privacy policy</a>
+                                    </template>
+                                </c-switch>
+                                <c-switch label="" label_position="right" size="sm" :customLabel="true">
+                                    <template slot="label">
+                                        Sign up for our newsletter, get 100 HBX Bonus!
+                                    </template>
+                                </c-switch>
                                 <div>
-                                    <label class="switch switch-sm">
-                                        <input type="checkbox" name="switch_8" checked="" value="0">
-                                        <span></span>
-                                    </label>
-                                    <span class="label">I agree to the
-                                    <a href="#" data-toggle="modal" data-target="#terms-modal">terms</a> and
-                                    <a href="#" data-toggle="modal" data-target="#privacy-policy-modal">privacy policy</a> </span>
-                                </div>
-                                <div>
-                                    <label class="switch switch-sm">
-                                        <input type="checkbox" name="switch_9" checked="" value="0">
-                                        <span></span>
-                                    </label>
-                                    <span class="label">Sign up for our newsletter, get 100 HBX Bonus!</span>
-                                </div>
-                                <div>
-                                    <a href="#3" class="btn btn-success">Next step</a>
+                                    <c-button variant="success" text="Next step" icon="fas fa-angle-right" icon_position="right" />
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="tab-pane" id="step2" role="tabpanel" aria-labelledby="step2-tab">
+                        </c-tab>
+                        <c-tab name="Step 2" showFooter="true">
                             <div class="tab-container">
                                 <div class="padding-40">
                                     <h3>Welcome, UserName. Let's build your main identity.</h3>
@@ -368,13 +349,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="action justify-content-end">
-                                <div class="align-self-end">
-                                    <a href="#3" class="btn btn-success">Next step</a>
-                                </div>
+                            <div class="d-flex justify-content-end" slot="footer">
+                                <c-button variant="success" text="Next step" icon="fas fa-angle-right" icon_position="right" />
                             </div>
-                        </div>
-                        <div class="tab-pane" id="step3" role="tabpanel" aria-labelledby="step3-tab">
+                        </c-tab>
+                        <c-tab name="Step 3" showFooter="true">
                             <div class="tab-container">
                                 <div class="padding-20">
                                     <h3>Verify your identity (Optional)</h3>
@@ -505,37 +484,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="action justify-content-end">
-                                <div class="align-self-end">
-                                    <a href="#3" class="btn btn-success">Complete</a>
-                                </div>
+                            <div class="d-flex justify-content-end" slot="footer">
+                                <c-button variant="success" text="Complete" icon="fas fa-check" icon_position="right" />
                             </div>
-                        </div>
-                    </div>
+                        </c-tab>
+                    </c-tabs>
+
                 </div>
             </div>
         </div>
-        
-        <div class="modal fade" id="privacy-policy-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content invert">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Set Up Campaign</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </c-layout>
 </template>
 
@@ -543,161 +501,40 @@
 <script>
     export default {
         components: {
-            'c-layout': () => import('@/ui/layouts/default')
+            'c-layout': () => import('@/ui/layouts/default'),
+            'c-tab': () => import('@/ui/components/tab/tab'),
+            'c-tabs': () => import('@/ui/components/tab/tabs'),
+            'c-switch': () => import('@/ui/components/switch/index'),
+            'c-button': () => import('@/ui/components/buttons/index'),
         }
     }
 </script>
 
 
 <style lang="scss" scoped>
-
-    .nav-tabs {
-        border-bottom: none;
-        position: relative;
-        .nav-item {
-            border-radius: 8px 8px 0 0;
-            a {
-                color: #606079;
-                background: #393955;
-                padding: 0 15px;
-                font-size: 16px;
-                line-height: 32px;
-                border: none;
-                position: relative;
-                box-shadow: 0 -1px 10px rgba(0, 0, 0, .2);
-                &:before {
-                    content: "";
-                    position: absolute;
-                    height: 23px;
-                    bottom: 0;
-                    left: -30px;
-                    border: 15px solid transparent;
-                    border-bottom: 15px solid #393955;
-                    border-right: 15px solid #393955;
-                    -webkit-filter: drop-shadow(-5px 0px 3px rgba(0, 0, 0, .15));
-                    filter: drop-shadow(-5px 0px 3px rgba(0, 0, 0, .1));
-                }
-                &:after {
-                    content: "";
-                    position: absolute;
-                    height: 23px;
-                    bottom: 0;
-                    right: -30px;
-                    border: 15px solid transparent;
-                    border-bottom: 15px solid #393955;
-                    border-left: 15px solid #393955;
-                    -webkit-filter: drop-shadow(5px 0px 3px rgba(0, 0, 0, .15));
-                    filter: drop-shadow(5px 0px 3px rgba(0, 0, 0, .15));
-                }
-                &.active {
-                    border-bottom: none;
-                    background: #3e3e5c;
-                    z-index: 8 !important;
-                    &:before {
-                        border-bottom-color: #3e3e5c;
-                        border-right-color: #3e3e5c;
-                    }
-                    &:after {
-                        border-bottom-color: #3e3e5c;
-                        border-left-color: #3e3e5c;
-                    }
-                }
-            }
-            &.layer1 a {
-                z-index: 7;
-            }
-            &.layer2 a {
-                z-index: 6;
-            }
-            &.layer3 a {
-                z-index: 5;
-            }
-            &.layer4 a {
-                z-index: 4;
-            }
-            &:first-child {
-                a {
-                    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
-                    &:before {
-                        display: none;
-                    }
-                }
-            }
+    .tab-card {
+        background: #383853;
+        border-radius: 5px;
+        padding: 8px 10px;
+        border: 1px solid #373752;
+        margin-bottom: 15px;
+        &:last-child {
+            margin: 0;
         }
-    }
-
-    .tab-pane {
-        position: relative;
-        &:before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 15px;
-            height: 15px;
-            background: #3e3e5c;
-            z-index: 10;
+        input {
+            border: none;
+            box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
+            background: #303049;
         }
-        .tab-container {
-            background: #3e3e5c;
+        .terms_block {
+            background: #303049;
+            box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
             padding: 15px;
-            border-radius: 0 5px 5px 5px;
-            border-top: none;
-            box-shadow: 0 3px 20px rgba(0, 0, 0, .2);
-            .tab-card {
-                background: #383853;
-                border-radius: 5px;
-                padding: 8px 10px;
-                border: 1px solid #373752;
-                margin-bottom: 15px;
-                &:last-child {
-                    margin: 0;
-                }
-                input {
-                    border: none;
-                    box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
-                    background: #303049;
-                }
-                .terms_block {
-                    background: #303049;
-                    box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
-                    padding: 15px;
-                    border-radius: 5px;
-                    max-height: 250px;
-                    overflow-y: auto;
-                    h1, h2, h3, h4, h5 {
-                        font-size: 18px;
-                    }
-                }
-            }
-        }
-        .action {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: nowrap;
-            div {
-                display: flex;
-                align-items: center;
-                width: auto;
-                .switch {
-                    margin: 0;
-                }
-                .label {
-                    font-size: 16px;
-                    margin-left: 10px;
-                    a {
-                        color: #fff;
-                        text-decoration: underline;
-                    }
-                }
-                .btn {
-                    padding: 5px 10px;
-                    font-size: 15px;
-                    text-transform: uppercase;
-                    font-weight: bold;
-                }
+            border-radius: 5px;
+            max-height: 250px;
+            overflow-y: auto;
+            h1, h2, h3, h4, h5 {
+                font-size: 18px;
             }
         }
     }
