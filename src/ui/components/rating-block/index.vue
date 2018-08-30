@@ -16,8 +16,8 @@
                     </span>
                 </li>
             </ul>
-            <a href="#reviews" class="btn btn-outline-white">See Full Reviews</a>
-            <a href="#reviews" class="btn btn-outline-white">Rate the game</a>
+            <a :href="fullReviewsLink" class="btn btn-outline-white">See Full Reviews</a>
+            <a :href="rateGameLink" class="btn btn-outline-white">Rate the game</a>
         </div>
     </div>
 
@@ -26,7 +26,7 @@
 
 <script>
     export default {
-        props: ['items']
+        props: ['items', 'fullReviewsLink', 'rateGameLink']
     }
 </script>
 

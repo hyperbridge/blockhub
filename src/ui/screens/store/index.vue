@@ -30,17 +30,10 @@
                         <c-heading-bar name="New Releases" :showArrows="true" />
                     </div>
 
-                    <div class="col-12 col-lg-4" v-for="(item, index) in new_products" v-bind:key="index">
-                        <div class="card invert product-grid__item">
-                            <div class="card-body padding-0" v-if="frontpage_product.images">
-                                <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
-                                <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
-                                <p class="card-text" hidden>{{ item.short_description }} </p>
-
-                                <c-tags :tags="item.author_tags"></c-tags>
-                            </div>
-                        </div>
-                    </div>
+                    <c-games-grid-simple
+                        :itemInRow=3
+                        :items="new_products"
+                    ></c-games-grid-simple>
                 </div>
 
                 <div class="row product-grid">
@@ -48,18 +41,10 @@
                         <c-heading-bar name="Summer Sale" :showArrows="true" :showBackground="true" />
                     </div>
 
-                    <div class="col-12 col-lg-4" v-for="(item, index) in sale_products" v-bind:key="index">
-                        <div class="card invert product-grid__item">
-                            <div class="card-body padding-0" v-if="frontpage_product.images">
-                                <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
-                                <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
-                                <p class="card-text" hidden>{{ item.short_description }} </p>
-
-                                <c-tags :tags="item.author_tags"></c-tags>
-                            </div>
-                        </div>
-                    </div>
-
+                    <c-games-grid-simple
+                        :itemInRow=3
+                        :items="sale_products"
+                    ></c-games-grid-simple>
                 </div>
 
                 <div class="row product-grid">
@@ -67,17 +52,10 @@
                         <c-heading-bar name="Crowdfund Projects" more="/#/projects" :showArrows="false" :showBackground="true" />
                     </div>
 
-                    <div class="col-12 col-lg-4" v-for="(item, index) in projects" v-bind:key="index">
-                        <div class="card invert product-grid__item">
-                            <div class="card-body padding-0" v-if="frontpage_product.images">
-                                <a :href="`/#/project/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
-                                <h4><a :href="`/#/project/${item.id}`">{{ item.name }}</a></h4>
-                                <p class="card-text" hidden>{{ item.short_description }} </p>
-
-                                <c-tags :tags="item.author_tags"></c-tags>
-                            </div>
-                        </div>
-                    </div>
+                    <c-games-grid-simple
+                        :itemInRow=3
+                        :items="projects"
+                    ></c-games-grid-simple>
 
                 </div>
             </div>
@@ -97,7 +75,8 @@ export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default'),
         'c-tags': () => import('@/ui/components/product-tags'),
-        'c-heading-bar': () => import('@/ui/components/heading-bar')
+        'c-heading-bar': () => import('@/ui/components/heading-bar'),
+        'c-games-grid-simple': () => import('@/ui/components/games-grid/simple')
     },
     computed: {
         projects() {

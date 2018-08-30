@@ -120,10 +120,12 @@
 </template>
 
 <script>
+
+    import LoadingBar from '../loading-bar/index'
 export default {
     props: ['isLoader'],
     components: {
-        'c-loading-bar': () => import('@/ui/components/loading-bar')
+        'c-loading-bar': LoadingBar
     },
     data() {
         return {

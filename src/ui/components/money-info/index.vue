@@ -8,8 +8,13 @@
                 <span class="sr-only">{{ percent }}% Complete</span>
             </div>
         </div>
-        <div class="text">{{ label }}</div>
-        {{ currency_symbol }} {{ amount }} {{ currency }}
+        <div class="money-info__detail">
+            <div class="text">{{ label }}</div>
+            <div class="amount-detail">
+                {{ currency | currency_sign }}{{ amount }}
+                <span v-if="goal"> of {{ currency | currency_sign }}{{ goal }}</span>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -19,32 +24,45 @@
             percent: { required: true },
             amount : { required: true },
             currency : { default: 'USD' },
-            currency_symbol : { default: '$' },
-            label: { default: false }
+            label: { default: false },
+            goal : {}
+        },
+        filters: {
+            currency_sign(cur_name) {
+                switch(cur_name) {
+                    case 'EUR':
+                        return '€'
+                    case 'GBP':
+                        return '£'
+                    default:
+                        return '$'
+                }
+            }
         }
     }
 </script>
 
 <style lang="scss" scoped>
     .money-info {
-        width: 32%;
         margin-top: 10px;
         font-size: 15px;
         position: relative;
         color: #fff;
-        .text {
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
+        display: flex;
+        justify-content: space-between;
         .progress-bar-vertical {
             width: 5px;
-            min-height: calc(100% - 7px);
             display: flex;
             align-items: flex-end;
-            margin: 4px 8px 3px 0;
+            height: auto;
+            margin: 0;
             float: left;
             border-radius: 0;
             background: #fff;
+            position: absolute;
+            top: 4px;
+            left: 0;
+            bottom: 3px;
             .progress-bar {
                 width: 100%;
                 height: 0;
@@ -52,6 +70,14 @@
                 -o-transition: height 0.6s ease;
                 transition: height 0.6s ease;
             }
+        }
+    }
+    .money-info__detail{
+        width: 100%;
+        padding-left: 15px;
+        .text {
+            font-weight: bold;
+            margin-bottom: 4px;
         }
     }
 </style>

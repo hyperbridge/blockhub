@@ -15,8 +15,8 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="modal-body">
-                            <div class="d-flex w-100 justify-content-between">
+                        <div class="modal-body padding-0">
+                            <div class="custom-modal-body">
                                 <slot name="modal_body">
 
                                 </slot>
@@ -42,9 +42,9 @@
 
 <style lang="scss" scoped>
     .modal-content {
-        background: transparent !important;
+        background: transparent;
+        color: #fff;
     }
-
     .custom-modal-header {
         position: absolute;
         left: 0;
@@ -52,6 +52,8 @@
         top: 0;
         overflow: hidden;
         line-height: 30px;
+        border-radius: 5px 5px 0 0;
+        z-index: 30;
         &:before {
             position: absolute;
             background: #fff;
@@ -114,5 +116,14 @@
                 top: 0px;
             }
         }
+    }
+    .custom-modal-body{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        padding: 45px 15px 15px;
+        text-align: left;
+        background: rgba(255, 255, 255, .1);
+        border-radius: 0 0 5px 5px;
     }
 </style>

@@ -51,6 +51,7 @@
         border: 1px solid #A2A3BE;
         border-radius: 5px;
         width: 100%;
+        height: 100%;
         position: relative;
         display: inline-block;
         float: left;

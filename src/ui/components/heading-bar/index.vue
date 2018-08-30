@@ -5,8 +5,8 @@
             <slot name="additional-action"></slot>
         </div>
         <div class="heading-bar__nav">
-            <a :href="more" v-if="more">
-                <strong>MORE</strong>
+            <a :href="more" v-if="more" class="more">
+                MORE <i class="fas fa-angle-right"></i>
             </a>
             <a href="#3" class="nav-prev" v-if="showArrows">
                 <i class="fas fa-arrow-left"></i>
@@ -81,6 +81,15 @@ export default {
             float: left;
             line-height: 40px;
             font-size: 20px;
+            &.more{
+                font-size: 14px;
+                width: auto;
+                font-weight: bold;
+                float: right;
+                i{
+                    margin-left: 5px;
+                }
+            }
         }
     }
 
@@ -92,4 +101,6 @@ export default {
         float: left;
         margin-bottom: 20px;
     }
+
+
 </style>

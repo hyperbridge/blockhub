@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar-menu">
+    <div class="sidebar-menu" :class="mClass">
         <h3 v-if="title">
             <i :class="icon" v-if="icon"></i>
             {{ title }}
@@ -8,20 +8,48 @@
             <i :class="sub_icon" v-if="sub_icon"></i>
             {{ sub_title }}
         </h5>
-        <ul v-if="menu">
-            <li v-for="(item, index) in menu" :key="index">
-                <a :href="item.url" :target="item.target">
-                    <i :class="item.icon" v-if="item.icon"></i>
-                    {{ item.link_text }}
-                </a>
-            </li>
+        <ul class="sidebar-menu__list" v-if="menu">
+            <c-sidebar-menu-link v-for="(item, index) in menu"
+                                 :url="item.url"
+                                 :target="item.target"
+                                 :icon="item.icon"
+                                 :link_text="item.link_text"
+                                 :key="index">
+            </c-sidebar-menu-link>
+        </ul>
+        <ul class="sidebar-menu__list" v-else>
+            <slot></slot>
         </ul>
     </div>
 </template>
 
 <script>
+    import MenuLink from '../sidebar-menu/menu_item'
+
     export default {
-        props: ['menu', 'title', 'sub_title', 'icon', 'sub_icon']
+        props: {
+            menu: {
+                type: Array
+            },
+            icon:{
+                type: String
+            },
+            sub_icon:{
+                type: String
+            },
+            title:{
+                type: String
+            },
+            sub_title:{
+                type: String
+            },
+            mClass:{
+                type: String
+            }
+        },
+        components:{
+            'c-sidebar-menu-link': MenuLink
+        }
     }
 </script>
 
@@ -29,8 +57,7 @@
     .sidebar-menu{
         h3{
             font-size: 30px;
-            color: #fff;
-            opacity: .7;
+            color: #fefeff;
             i{
                 margin-right: 5px;
             }
@@ -44,32 +71,11 @@
                 margin-right: 5px;
             }
         }
-        ul{
+        .sidebar-menu__list{
             width: 100%;
             padding: 0;
             margin: 0;
             list-style: none;
-            li{
-                padding-right: 10px;
-                -moz-transition: all 200ms ease-in-out, color 200ms ease-in-out;
-                -o-transition: all 200ms ease-in-out, color 200ms ease-in-out;
-                -webkit-transition: all 200ms ease-in-out, color 200ms ease-in-out;
-                transition: all 200ms ease-in-out, color 200ms ease-in-out;
-                a{
-                    color: #fff;
-                    font-size: 14px;
-                    line-height: 22px;
-                    text-decoration: none;
-                    i{
-                        margin-right: 5px;
-                        font-size: 12px;
-                    }
-                }
-                &:hover{
-                    padding-left: 10px;
-                    padding-right: 0;
-                }
-            }
         }
     }
 </style>

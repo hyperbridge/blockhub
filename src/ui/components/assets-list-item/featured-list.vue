@@ -1,38 +1,22 @@
 <template>
     <div class="featured-assets__list">
-        <div class="featured-assets__list-item">
-            <div class="img">
-                <img src="https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de" />
+        <div class="featured-assets__item-container"
+             :style="{ width: 'calc( 100% / ' + itemInRow + ')'}"
+             v-for="(item, index) in items" :key="index">
+            <div class="featured-assets__list-item">
+                <div class="img">
+                    <img :src="item.img" />
+                </div>
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.sub_title }}</p>
             </div>
-            <h3>Magic Plate Armor</h3>
-            <p>Tibia MMORPG</p>
-        </div>
-        <div class="featured-assets__list-item">
-            <div class="img">
-                <img src="https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de" />
-            </div>
-            <h3>Magic Plate Armor</h3>
-            <p>Tibia MMORPG</p>
-        </div>
-        <div class="featured-assets__list-item">
-            <div class="img">
-                <img src="https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de" />
-            </div>
-            <h3>Magic Plate Armor</h3>
-            <p>Tibia MMORPG</p>
-        </div>
-        <div class="featured-assets__list-item">
-            <div class="img">
-                <img src="https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de" />
-            </div>
-            <h3>Magic Plate Armor</h3>
-            <p>Tibia MMORPG</p>
         </div>
     </div>
 </template>
 
 <script>
     export default {
+        props: ['items', 'itemInRow']
     }
 </script>
 
@@ -40,26 +24,31 @@
     .featured-assets__list{
         display: flex;
         width: 100%;
-        justify-content: space-between;
+    }
+    .featured-assets__item-container{
+        width: calc(100%/4);
+        padding: 5px;
     }
     .featured-assets__list-item{
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         padding: 25px;
-        width: 22%;
+        width: 100%;
+        height: 100%;
         border-radius: 5px;
         background: #27283E;
-        text-align: center;
         color: #C6C6D6;
-        margin-top: 2%;
+        text-align: center;
         .img{
             position: relative;
             margin-bottom: 20px;
             padding-bottom: 30px;
             display: inline-block;
             width: 100%;
-            max-width: 160px;
             img{
                 width: 100%;
+                max-width: 160px;
             }
             &:after{
                 position: absolute;
@@ -71,6 +60,11 @@
                 background: rgba(0, 0, 0, .2);
                 border-radius: 100%;
                 box-shadow: 0 0 20px rgba(0, 0, 0, .9);
+                -webkit-filter: blur(2px);
+                -moz-filter: blur(2px);
+                -o-filter: blur(2px);
+                -ms-filter: blur(2px);
+                filter: blur(2px);
             }
         }
         h3{
@@ -78,7 +72,7 @@
             font-size: 18px;
             color: #C6C6D6;
             padding: 0px;
-            margin: 0px;
+            margin: auto 0 0;
         }
         p{
             margin: 0;
