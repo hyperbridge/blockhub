@@ -760,7 +760,7 @@
         props: ['id'],
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
-            'c-plan-list': () => import('@/ui/components/game-plans/list'),
+            'c-game-plan': () => import('@/ui/components/game-plans/plan'),
             'c-block-1': () => import('@/ui/components/block-1'),
             'c-screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
             'c-tags-list': () => import('@/ui/components/tags'),

@@ -42,7 +42,7 @@
                 return this.$options.filters.statusIcon(this.status);
             }
         },
-        /* these filters are accessible via Vue instance, and were added only for storybook support */
+        /* these filters are accessible via Vue instance and were added only for storybook support */
         filters: {
             statusIcon(status) {
                 const getClass = status => {
@@ -58,7 +58,7 @@
                     }
                 }
                 const statusClass = getClass(status);
-                return statusClass.length ?  'fa-' + statusClass : '';
+                return statusClass.length ? 'fa-' + statusClass : '';
             }
         }
     }

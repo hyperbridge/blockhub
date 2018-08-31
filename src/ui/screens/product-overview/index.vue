@@ -79,7 +79,13 @@
                                     v-if="product.sale_box"
                                 />
 
-                                <c-plan-list :items="product.plans" />
+                                <div class="overflow-hidden">
+                                    <c-game-plan
+                                        v-for="(plan, index) in product.plans"
+                                        :key="index"
+                                        :plan="plan"
+                                    />
+                                </div>
 
                                 <div class="main-content" v-html="product.content" v-if="!editing">
                                     {{ product.content }}
@@ -521,7 +527,7 @@
         props: ['id'],
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
-            'c-plan-list': () => import('@/ui/components/game-plans/list'),
+            'c-game-plan': () => import('@/ui/components/game-plans/plan'),
             'c-screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
             'c-sale-box': () => import('@/ui/components/sale-box/box'),
             'c-tags-list': () => import('@/ui/components/tags'),
