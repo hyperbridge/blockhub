@@ -1,39 +1,25 @@
 
 <template>
     <div class="navigation" id="navigation-default">
-        <h3>GAME OVERVIEW</h3>
 
-        <ul>
-            <li class="title"><span class="icon fas fa-question-circle"></span> Help</li>
-            <li>
-                <a href="/#/">
-                    Suggesting Features
-                </a>
-            </li>
-            <li>
-                <a href="/#/">
-                    Voting and Curating Updates
-                </a>
-            </li>
-            <li class="more">
-                <a href="/#/">
-                    MORE...
-                </a>
-            </li>
-        </ul>
+        <c-sidebar-menu title="GAME OVERVIEW" sub_title="Help" sub_icon="fas fa-question-circle" mClass="margin-bottom-20">
+            <c-sidebar-menu-link url="/#/" link_text="Suggesting Features" />
+            <c-sidebar-menu-link url="/#/" link_text="Voting and Curating Updates" />
+            <c-sidebar-menu-link url="#3" aClass="font-weight-bold" link_text="MORE ..." />
+        </c-sidebar-menu>
+
     </div>
 </template>
 
 <script>
 export default {
   components: {
+      'c-sidebar-menu-link': () => import('@/ui/components/sidebar-menu/menu_item'),
+      'c-sidebar-menu': () => import('@/ui/components/sidebar-menu/index'),
+      'c-searcher': () => import('@/ui/components/searcher')
   },
   data() {
     return {}
   }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

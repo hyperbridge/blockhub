@@ -476,7 +476,7 @@
         min-width: 250px;
         .modal-title{
             text-align: left;
-            margin: 15px 0;
+            margin: 0 0 15px 0;
             h3{
                 padding: 0;
                 margin: 0 0 8px;

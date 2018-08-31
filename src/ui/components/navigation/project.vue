@@ -1,33 +1,17 @@
 
 <template>
     <div class="navigation" id="navigation-default">
-        <h3 style="margin-bottom: 58px">GAME</h3>
-        <ul>
-            <li class="title"><span class="icon fas fa-question-circle"></span>Help</li>
-            <li>
-                <a href="#">
-                    Building Communities
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Suggesting Features
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Voting &amp; Curating Updates
-                </a>
-            </li>
-            <li class="more">
-                <a href="#">
-                    MORE...
-                </a>
-            </li>
-        </ul>
+
+        <c-sidebar-menu title="GAME" sub_title="Help" sub_icon="fas fa-question-circle">
+            <c-sidebar-menu-link url="/#/" link_text="Building Communities" />
+            <c-sidebar-menu-link url="/#/" link_text="Suggesting Features" />
+            <c-sidebar-menu-link url="/#/" link_text="Voting &amp; Curating Updates" />
+            <c-sidebar-menu-link url="#3" aClass="font-weight-bold" link_text="MORE ..." />
+        </c-sidebar-menu>
+
 
         <div class="sidebar-card margin-top-40">
-            <h4>
+            <h4 class="success-ttl">
                 <i class="fas fa-check"></i>
                 Content curated
             </h4>
@@ -115,13 +99,16 @@
 </template>
 
 <script>
-export default {
-  components: {
-  },
-  data() {
-    return {}
-  }
-}
+    export default {
+        components: {
+            'c-sidebar-menu-link': () => import('@/ui/components/sidebar-menu/menu_item'),
+            'c-sidebar-menu': () => import('@/ui/components/sidebar-menu/index'),
+            'c-searcher': () => import('@/ui/components/searcher')
+        },
+        data() {
+            return {}
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
@@ -130,12 +117,16 @@ export default {
         width: 100%;
         float: left;
         overflow: hidden;
+        color: #fff;
         h4{
             font-weight: bold;
             font-size: 14px;
             margin-bottom: 5px;
             i{
                 margin-right: 5px;
+            }
+            &.success-ttl{
+                color: #43C981;
             }
             &.warning-ttl{
                 color: #FADC72;
@@ -173,6 +164,7 @@ export default {
         padding: 15px 15px 15px 30px;
         overflow: hidden;
         border-left: none;
+        color: #fff;
         h3{
             font-size: 21px;
             color: #FFFFFF;
