@@ -70,12 +70,11 @@
         align-items: center;
         padding: 0px 8px;
         line-height: 24px;
-        font-size: 13px;
         font-weight: bold;
-        border: none;
+        border-style: none;
         border-radius: 5px;
         box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
-        text-transform: uppercase;
+        text-decoration: none;
         cursor: pointer;
         &:active,
         &:focus {
