@@ -1,7 +1,6 @@
 <template>
     <component
         :is="tag"
-        :type="type"
         class="c-btn"
         :class="status"
         @click="$emit('click')"
@@ -28,7 +27,6 @@
                 type: String,
                 default: 'a',
             },
-            type: String,
             icon: String,
             icon_hide: Boolean,
             status: {

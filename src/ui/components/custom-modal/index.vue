@@ -36,6 +36,7 @@
 
 <script>
     export default {
+        name: 'modal',
         props:['id', 'title', 'modal_class']
     }
 </script>
