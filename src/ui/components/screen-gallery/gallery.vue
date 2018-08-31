@@ -1,8 +1,10 @@
 <template>
     <div class="screen-gallery">
         <div class="screen-gallery__main-img">
+            <i class="fas fa-expand"></i>
             <img
                 :src="images[active_item]"
+                @click="show_modal = true"
             />
         </div>
         <ul class="screen-gallery__thumb-nav">
@@ -17,6 +19,12 @@
                 />
             </li>
         </ul>
+        <c-modal-light v-if="show_modal" @close="show_modal=false">
+            <c-images-explorer
+                :images="images"
+                :start_from="active_item"
+            />
+        </c-modal-light>
     </div>
 </template>
 
@@ -34,9 +42,15 @@ export default {
             required: true
         }
     },
+    components: {
+        'c-modal-light': () => import('@/ui/components/modal-light'),
+        'c-images-explorer': () => import('@/ui/components/images-explorer')
+    },
     data() {
         return {
-            active_item: 0
+            active_item: 0,
+            show_modal: false,
+            show: true
         }
     },
     computed: {
@@ -49,7 +63,6 @@ export default {
 
 
 <style lang="scss" scoped>
-
     .screen-gallery{
         display: flex;
         background: rgba(0, 0, 0, 0.3);
@@ -59,12 +72,38 @@ export default {
         img {
             width: 100%;
             object-fit: cover;
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
     .screen-gallery__main-img{
         flex: 6;
+        position: relative;
+        .fas {
+            position: absolute;
+            left: calc(50% - 15px);
+            top: calc(50% - 15px);
+            width: 30px;
+            height: 30px;
+            font-size: 30px;
+            opacity: 0;
+            transition: opacity .3s ease .1s, transform .3s ease .1s;
+            transform: scale(0);
+            color: #fff;
+        }
         img {
             height: 245px;
+            transition: opacity .3s ease .1s;
+        }
+        &:hover {
+            .fas {
+                opacity: 1;
+                transform: scale(1);
+            }
+            img {
+                opacity: .75;
+            }
         }
     }
     .screen-gallery__thumb-nav{
@@ -82,9 +121,6 @@ export default {
             }
             img {
                 height: 75px;
-                &:hover {
-                    cursor: pointer;
-                }
             }
         }
     }
@@ -94,5 +130,4 @@ export default {
         filter: grayscale(50%);
         opacity: .5;
     }
-
 </style>
