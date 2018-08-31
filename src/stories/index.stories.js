@@ -29,7 +29,6 @@ import PopUps from '../ui/components/popups/index.vue'
 import AssetsGrid from '../ui/components/assets-grid/index.vue'
 import AssetsPopup from '../ui/components/asset-overview-popup/index.vue'
 import Switch from '../ui/components/switch/index.vue'
-import PlanList from '../ui/components/game-plans/list.vue'
 
 
 storiesOf('Welcome', module).add('to Storybook', () => ({
@@ -1174,12 +1173,12 @@ storiesOf('Frequently traded assets', module)
         `
     }))
 
-import GamePlans from '../ui/components/game-plans/list'
+import GamePlan from '@/ui/components/game-plans/plan'
 
 storiesOf('Game Plans', module)
     .add('default', () => ({
         components: {
-            'c-game-plans': GamePlans
+            'c-game-plan': GamePlan
         },
         data() {
             return object('Data', {
@@ -1207,7 +1206,11 @@ storiesOf('Game Plans', module)
         template: `
          <div class="row m-0 p-3">
             <div class="col-5">
-                <c-game-plans :items="plans" />
+                <c-game-plan
+                    v-for="(plan, index) in plans"
+                    :key="index"
+                    :plan="plan"
+                />
             </div>
          </div>
          `
@@ -1701,9 +1704,9 @@ storiesOf('Gallery', module)
             return {
                 main: 'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012',
                 items: [
-                    'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012',
-                    'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012',
-                    'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012',
+                    'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_64eb760f9a2b67f6731a71cce3a8fb684b9af267.1920x1080.jpg?t=1529405012',
+                    'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_eda99e7f705a113d04ab2a7a36068f3e7b343d17.1920x1080.jpg?t=1529405012',
+                    'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_d5b80eb63c12a6484f26796f3e34410651bba068.1920x1080.jpg?t=1529405012',
                 ]
             }
         },
@@ -1844,6 +1847,53 @@ storiesOf('Curators Reviews', module)
         data: () => ({ reviews: [curatorReview, curatorReview, curatorReview] }),
         template: `<curators-reviews :reviews="reviews" class="col-8"/>`
     }))
+
+
+import ModalLight from '@/ui/components/modal-light';
+storiesOf('Modal Light', module)
+    .add('default', () => ({
+        components: { 'c-modal-light': ModalLight },
+        template: `<c-modal-light/>`
+    }))
+    .add('image', () => ({
+        components: { 'c-modal-light': ModalLight },
+        template: `
+            <c-modal-light>
+                <img
+                    src="http://gamechanger.co.ke/wp-content/uploads/2016/09/The-Witcher-3-Wild-Hunt-Game-of-the-Year-Edition3.jpg"
+                />
+            </c-modal-light>
+        `
+    }))
+    .add('text', () => ({
+        components: { 'c-modal-light': ModalLight },
+        template: `
+            <c-modal-light>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn</p>
+            </c-modal-light>
+        `
+    }))
+
+import ImagesExplorer from '@/ui/components/images-explorer';
+storiesOf('Images Explorer', module)
+    .add('default', () => ({
+        components: { 'c-images-explorer': ImagesExplorer },
+        data: () => object('Data', data.ImagesExplorer),
+        template: `<c-images-explorer :images="images"/>`
+    }))
+    .add('in modal', () => ({
+        components: {
+            'c-images-explorer': ImagesExplorer,
+            'c-modal-light': ModalLight
+        },
+        data: () => object('Data', data.ImagesExplorer),
+        template: `
+            <c-modal-light>
+                <c-images-explorer :images="images"/>
+            </c-modal-light>
+        `
+    }))
+
 
 /*
      Dynamic import - test version
