@@ -1,7 +1,7 @@
 <template>
     <div
         class="tab-pane"
-        :class="[ index === 1 ? 'show active' : '' ]"
+        :class="[ index === 0 ? 'show active' : '' ]"
         :id="`tab_${index}`"
         :aria-labelledby="`tab_${index}-tab`"
         role="tabpanel"
@@ -16,7 +16,7 @@
 export default {
     name: 'c-news-list-articles',
     props: {
-        news: Array,
+        news: Object,
         index: Number
     },
     components:{

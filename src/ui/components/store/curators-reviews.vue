@@ -1,6 +1,6 @@
 <template>
     <div class="row curators-wrapper">
-        <div class="col-12">
+        <div class="col-12 p-0">
             <c-heading-bar name="From our curators" :showArrows="false" />
         </div>
 
@@ -36,11 +36,14 @@
 .curators-wrapper {
     margin: 30px 0;
     box-sizing: border-box;
-    padding: 10px;
-    background-color: #24253B;
+    padding: 5px;
     border-radius: 4px;
+    color: #fff;
     &__content {
         width: 100%;
+        background-color: #24253B;
+        padding: 15px;
+        margin-top: -20px;
         display: flex;
         align-items: flex-start;
         @include width-max-lg {
