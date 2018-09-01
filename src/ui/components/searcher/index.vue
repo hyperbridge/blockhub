@@ -1,5 +1,5 @@
 <template>
-    <div class="form-group">
+    <div class="form-group" :class="customClass">
         <div class="input-group">
             <input
                 type="text"
@@ -32,6 +32,7 @@
 <script>
 export default {
     name: 'searcher',
+    props: ['customClass'],
     data() {
         return {
             timeout: null,
@@ -66,6 +67,7 @@ export default {
     }
     input {
         border: none;
+        padding: 4px 9px;
         &:active,
         &:focus {
             border: unset;
