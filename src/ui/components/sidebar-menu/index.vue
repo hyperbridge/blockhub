@@ -66,7 +66,7 @@
             font-size: 15px;
             font-weight: bold;
             text-transform: uppercase;
-            color: #fff;
+            color: #fefeff;
             i{
                 margin-right: 5px;
             }

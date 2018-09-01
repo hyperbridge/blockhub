@@ -7,15 +7,7 @@
         role="tabpanel"
     >
       <ul class="home-tabs__news-list">
-          <li v-for="(article, index) in news.articles" :key="index">
-              <h4>{{ article.heading }}</h4>
-              <div class="published_date mb-3">
-              </div>
-              <p>{{ article.content }}</p>
-              <a :href="`/${article.url}`" class="btn btn-link">
-                  Read More
-              </a>
-          </li>
+          <c-news-article v-for="(article, index) in news.articles" :key="index" :article="article" />
       </ul>
   </div>
 </template>
@@ -23,7 +15,13 @@
 <script>
 export default {
     name: 'c-news-list-articles',
-    props: ['news', 'index']
+    props: {
+        news: Array,
+        index: Number
+    },
+    components:{
+        'c-news-article': () => import('@/ui/components/news-list/article')
+    }
 }
 </script>
 

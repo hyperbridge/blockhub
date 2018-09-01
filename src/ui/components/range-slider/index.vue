@@ -1,5 +1,5 @@
 <template>
-    <div class="c-range-slider">
+    <div class="c-range-slider" :class="sClass">
         <label v-if="label">{{ label }}</label>
         <p class="subtitle" v-if="description">{{ description }}</p>
         <input ref="rangeSlider"
@@ -89,7 +89,8 @@
                 type: Boolean,
                 default: false
             },
-            extraClasses: String
+            extraClasses: String,
+            sClass: String
 
         },
         mounted: function () {

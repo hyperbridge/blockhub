@@ -21,7 +21,7 @@
 
                                 </slot>
                             </div>
-                            <div class="modal-action d-flex w-100 justify-content-between align-items-center mt-3 flex-nowrap">
+                            <div class="modal-action d-flex w-100 justify-content-between align-items-center flex-nowrap">
                                 <slot name="modal_footer">
 
                                 </slot>
@@ -118,13 +118,14 @@
             }
         }
     }
+    .modal-action{
+        padding: 0 15px 15px;
+    }
     .custom-modal-body{
         display: flex;
         width: 100%;
-        flex-direction: column;
-        padding: 45px 15px 15px;
+        padding: 20px 15px 15px;
         text-align: left;
-        background: rgba(255, 255, 255, .1);
         border-radius: 0 0 5px 5px;
     }
 </style>

@@ -19,27 +19,12 @@
 
         <h3 class="text-uppercase">Search</h3>
         <div class="filter-blk">
-            <div class="form-group">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                    <span class="input-group-text">
-                        <i class="fas fa-search"></i>
-                    </span>
-                    </div>
-                </div>
-            </div>
             <c-searcher />
-            <div class="form-group range-slider">
-                <label for="communitySize">Community size</label>
-                <input type="range" class="form-control-range" id="communitySize">
-                <span class="result">Over 100.000 users</span>
-            </div>
-            <div class="form-group range-slider">
-                <label for="activityUser">Activity User</label>
-                <input type="range" class="form-control-range" id="activityUser">
-                <span class="result">38%</span>
-            </div>
+
+            <c-range-slider label="Community size" :min="1" :max="10000" sClass="margin-bottom-20" />
+
+            <c-range-slider label="Activity User" :min="1" :max="5000" sClass="margin-bottom-20" />
+
             <div class="form-group platform-chose">
                 <label>Platform Availability</label>
                 <a href="#3">
@@ -90,7 +75,8 @@
         components: {
             'c-sidebar-menu-link': () => import('@/ui/components/sidebar-menu/menu_item'),
             'c-sidebar-menu': () => import('@/ui/components/sidebar-menu/index'),
-            'c-searcher': () => import('@/ui/components/searcher')
+            'c-searcher': () => import('@/ui/components/searcher'),
+            'c-range-slider': () => import('@/ui/components/range-slider')
         },
         data() {
             return {}

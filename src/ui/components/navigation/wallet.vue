@@ -1,90 +1,39 @@
 
 <template>
     <div class="navigation" id="navigation-default">
-        <h3>MY WALLETS</h3>
 
-        <ul>
-            <li class="title">Wallet</li>
-            <li>
-                <a href="/#/account/new-wallet">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">Add New</span>
-                </a>
-            </li>
-            <li>
-                <a href="/#/account/export">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">Backup to Device</span>
-                </a>
-            </li>
-            <li class="title">Transactions</li>
-            <li>
-                <a href="/#/account/send">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">Send</span>
-                </a>
-            </li>
-            <li>
-                <a href="/#/account/receive">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">Receive</span>
-                </a>
-            </li>
-            <li>
-                <a href="/#/account/transactions">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">Transaction History</span>
-                </a>
-            </li>
-            <li class="title">Help</li>
-            <li>
-                <a href="/#/help/coin-vs-token">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">Coin vs Token</span>
-                </a>
-            </li>
-            <li>
-                <a href="/#/help/preeferred-payment-sources">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">Preferred Payment Sources</span>
-                </a>
-            </li>
-            <li>
-                <a href="/#/help/search-and-filters">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">Search and Filters</span>
-                </a>
-            </li>
-            <li>
-                <a href="/#/help/tokenized-assets">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">Tokenized Assets</span>
-                </a>
-            </li>
-            <li>
-                <a href="/#/help/sending-currency">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">Sending Currency</span>
-                </a>
-            </li>
-            <li>
-                <a href="/#/help">
-                    <span class="icon fa fa-home"></span>
-                    <span class="text">More...</span>
-                </a>
-            </li>
-        </ul>
+        <c-sidebar-menu title="MY WALLETS" sub_title="Wallet" mClass="margin-bottom-20">
+            <c-sidebar-menu-link url="/#/account/new-wallet" link_text="Add New" />
+            <c-sidebar-menu-link url="/#/account/export" link_text="Backup to Device" />
+        </c-sidebar-menu>
+        <c-sidebar-menu sub_title="Transactions" mClass="margin-bottom-20">
+            <c-sidebar-menu-link url="/#/account/send" link_text="Send" />
+            <c-sidebar-menu-link url="/#/account/receive" link_text="Receive" />
+            <c-sidebar-menu-link url="/#/account/transactions" link_text="Transaction History" />
+        </c-sidebar-menu>
+        <c-sidebar-menu sub_title="Help" >
+            <c-sidebar-menu-link url="/#/help/coin-vs-token" link_text="Coin vs Token" />
+            <c-sidebar-menu-link url="/#/help/preeferred-payment-sources" link_text="Preferred Payment Sources" />
+            <c-sidebar-menu-link url="/#/help/search-and-filters" link_text="Search and Filters" />
+            <c-sidebar-menu-link url="/#/help/tokenized-assets" link_text="Tokenized Assets" />
+            <c-sidebar-menu-link url="/#/help/sending-currency" link_text="Sending Currency" />
+            <c-sidebar-menu-link url="/#/help" aClass="font-weight-bold" link_text="MORE ..." />
+        </c-sidebar-menu>
+
     </div>
 </template>
 
 <script>
-export default {
-  components: {
-  },
-  data() {
-    return {}
-  }
-}
+    export default {
+        components: {
+            'c-sidebar-menu-link': () => import('@/ui/components/sidebar-menu/menu_item'),
+            'c-sidebar-menu': () => import('@/ui/components/sidebar-menu/index'),
+            'c-searcher': () => import('@/ui/components/searcher')
+        },
+        data() {
+            return {}
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
