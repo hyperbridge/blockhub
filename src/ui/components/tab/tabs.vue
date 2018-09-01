@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="tabs-nav">
+        <div class="tabs-nav" :class="variant">
             <ul>
                 <li
                     v-for="(tab, index) in tabs"
@@ -14,8 +14,10 @@
                     >{{ tab.name }}</a>
                 </li>
             </ul>
+            <slot name="tabs-nav">
+            </slot>
         </div>
-        <div class="tabs-container">
+        <div class="tabs-container" ref="tabs">
             <slot/>
         </div>
     </div>
@@ -23,10 +25,18 @@
 
 <script>
     export default {
+        name: 'c-tabs',
+        props:{
+            variant:{
+                type: String,
+                default: 'default'
+            }
+        },
         data() {
             return {tabs: [] };
         },
         created() {
+            console.log(this)
             this.tabs = this.$children;
         },
         methods: {
@@ -44,6 +54,8 @@
         border-bottom: none;
         position: relative;
         width: 100%;
+        display: flex;
+        justify-content: space-between;
         ul{
             padding: 0;
             margin: 0;
@@ -108,6 +120,38 @@
                         box-shadow: 0 0 20px rgba(0, 0, 0, .2);
                         &:before {
                             display: none;
+                        }
+                    }
+                }
+            }
+        }
+        &.type-2{
+            position: relative;
+            &:after{
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                right: 0;
+                height: 2px;
+                display: inline-block;
+                background: #fff;
+                content: "";
+            }
+            ul{
+                width: auto;
+                .nav-item{
+                    a{
+                        &.active{
+                            background: #fff;
+                            color: #3D3E5D;
+                            &:before{
+                                border-bottom-color: #fff;
+                                border-right-color: #fff;
+                            }
+                            &:after{
+                                border-bottom-color: #fff;
+                                border-left-color: #fff;
+                            }
                         }
                     }
                 }

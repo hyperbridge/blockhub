@@ -306,6 +306,34 @@ storiesOf('Tabs', module)
             </div>
             </div>`
     }))
+    .add('type-2', () => ({
+        components: {
+            'c-tabs': Tabs,
+            'c-tab': Tab,
+            'c-heading-bar-fields': BlockHeadersAddFields
+        },
+        data() {
+            return {}
+        },
+        template: `<div class="row m-0">
+            <div class="col-8 p-4">
+                <c-tabs variant="type-2">
+                    <c-tab name="Tab 1" :selected="true" :transparentBg="true" :showFooter="true">
+                        <p>This is first tab with footer content</p>
+                         <template slot="footer">
+                            <a href="#3" class="btn btn-sm btn-success float-right">Button</a>
+                        </template>
+                    </c-tab>
+                    <c-tab name="Tab 2" :transparentBg="true">
+                        <p>This is second tab</p>
+                    </c-tab>
+                    <c-tab name="Tab 3" :transparentBg="true">
+                        <p>This is third tab</p>
+                    </c-tab>
+                </c-tabs>
+            </div>
+            </div>`
+    }))
 
 
 import MilestonesLine from '../ui/components/milestones-line/index.vue'
