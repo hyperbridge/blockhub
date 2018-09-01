@@ -24,7 +24,6 @@
         width: auto;
         align-items: center;
         font-size: 14px;
-        margin-top: 6px;
         color: #fff;
         .text {
             margin-right: 5px;

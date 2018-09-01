@@ -1,23 +1,20 @@
 <template>
-    <div class="heading-bar w-100">
+    <div class="heading-bar">
         <h3 class="heading-bar__name" :class="{ 'heading-bar__name--with-bg': showBackground }">{{ name }}</h3>
         <div class="heading-bar__additional-action">
             <slot name="additional-action"></slot>
-        </div>
-        <div class="heading-bar__nav">
             <a :href="more" v-if="more" class="more">
                 MORE <i class="fas fa-angle-right"></i>
             </a>
-            <template v-if="showArrows">
+            <div class="heading-bar__nav" v-if="showArrows">
                 <a href="#3" class="nav-prev">
                     <i class="fas fa-arrow-left"></i>
                 </a>
                 <a href="#3" class="nav-next">
                     <i class="fas fa-arrow-right"></i>
                 </a>
-            </template>
+            </div>
         </div>
-        <div class="heading-bar__line"></div>
     </div>
 </template>
 
@@ -34,6 +31,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .heading-bar{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        border-bottom: 2px solid #fff;
+        margin-bottom: 20px;
+    }
 
     .heading-bar__name {
         color: #fff;
@@ -76,6 +80,12 @@ export default {
             }
         }
     }
+    .heading-bar__additional-action{
+        width: auto;
+        line-height: 40px;
+        display: flex;
+        align-items: center;
+    }
 
     .heading-bar__nav{
         display: inline-block;
@@ -99,15 +109,6 @@ export default {
                 }
             }
         }
-    }
-
-    .heading-bar__line{
-        display: inline-block;
-        width: 100%;
-        height: 2px;
-        background: #fff;
-        float: left;
-        margin-bottom: 20px;
     }
 
 

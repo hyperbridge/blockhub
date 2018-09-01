@@ -1,15 +1,12 @@
 <template>
     <div class="dropdown">
-        <a class="btn dropdown-toggle" href="#" role="button"
+        <a class="btn dropdown-toggle" :class="{ 'show-bg' : showBg}" href="#" role="button"
            :id="id" data-toggle="dropdown" aria-haspopup="true"
            aria-expanded="false">
             {{ name }}
         </a>
         <div class="dropdown-menu" :aria-labelledby="[ id + 'Button']">
-            <slot name="links"></slot>
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <slot></slot>
         </div>
     </div>
 </template>
@@ -18,7 +15,8 @@
     export default {
         props: {
             name: String,
-            id: String
+            id: String,
+            showBg: Boolean
         },
     }
 </script>
@@ -47,9 +45,14 @@
             &:after {
                 margin-left: 18px;
             }
+            &.show-bg{
+                background-color: #24253B;
+                padding: 4px 9px;
+                border-radius: 5px;
+            }
         }
         .dropdown-menu {
-            .dropdown-item {
+            .a {
                 padding-left: 15px;
                 &:after {
                     display: none;

@@ -27,7 +27,6 @@ export default {
 @import '@/css/helpers/mixins.scss';
 
 .products-grid-wrapper {
-    margin-top: 20px;
     margin-bottom: 40px;
     box-sizing: border-box;
     display: flex;
