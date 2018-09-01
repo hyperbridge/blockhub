@@ -150,10 +150,17 @@ storiesOf('Tags', module)
     }))
 
 import LoadingBar from '../ui/components/loading-bar';
+import LoadingLogo from '../ui/components/loading-bar/logo-loader';
 storiesOf('LoadingBar', module)
     .add('LoadingBar', () => ({
         components: { LoadingBar },
         template: `<loading-bar/>`
+    }))
+    .add('LoadingLogo', () => ({
+        components: {
+            'c-loading-logo': LoadingLogo
+        },
+        template: `<div class="p-5" style="width:300px;background: #fff"><c-loading-logo :isLoading="true"/></div>`
     }))
 
 

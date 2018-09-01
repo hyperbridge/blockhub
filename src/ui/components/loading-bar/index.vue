@@ -1,7 +1,6 @@
 <template>
     <div class="progress-container">
         <div class="progress" max="100" :value="percentage" v-if="percentage"></div>
-
         <div class="progress-materializecss">
             <div class="indeterminate"></div>
         </div>
@@ -48,6 +47,7 @@ export default {
         width: 100%;
         border-radius: 2px;
         overflow: hidden;
+        height: 5px;
 
         .indeterminate {
             &:before{
