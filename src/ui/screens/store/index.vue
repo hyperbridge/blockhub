@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row product-grid d-none">
+                <div class="row product-grid">
                     <div class="col-12">
                         <c-heading-bar name="New Releases" :showArrows="true" />
                     </div>
@@ -35,7 +35,7 @@
                     />
                 </div>
 
-                <div class="row product-grid d-none">
+                <div class="row product-grid">
                     <div class="col-12">
                         <c-heading-bar name="Summer Sale" :showArrows="true" :showBackground="true" />
                     </div>
@@ -49,7 +49,12 @@
 
                 <div class="row product-grid">
                     <div class="col-12">
-                        <c-heading-bar name="New Releases" :showArrows="false" :showBackground="true">
+                        <c-heading-bar>
+                            <template slot="heading-tabs">
+                                <a href="#3" class="active">New Releases</a>
+                                <a href="#3">Most Sold</a>
+                                <a href="#3">Upcoming</a>
+                            </template>
                             <template slot="additional-action">
                                 <span class="font-weight-bold">Sort by</span>
                                 <c-heading-bar-fields name="Date" icon="fas fa-calendar" @click_up=""  @click_down="" />
@@ -62,9 +67,9 @@
                         <div class="filter-blk">
                             <div class="d-flex align-items-center">
                                 <c-dropdown id="test" name="Filter by Genre" :showBg="true">
-                                    <a class="dropdown-item" href="#3">RPG</a>
-                                    <a class="dropdown-item" href="#3">ACTION</a>
-                                    <a class="dropdown-item" href="#3">Cars</a>
+                                    <a href="#3">RPG</a>
+                                    <a href="#3">ACTION</a>
+                                    <a href="#3">Cars</a>
                                 </c-dropdown>
                                 <c-searcher customClass="mb-0" />
                             </div>

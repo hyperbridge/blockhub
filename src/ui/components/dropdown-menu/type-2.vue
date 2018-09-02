@@ -52,10 +52,26 @@
             }
         }
         .dropdown-menu {
-            .a {
-                padding-left: 15px;
-                &:after {
-                    display: none;
+            background-color: #24253B;
+            border: 1px solid rgba(0, 0, 0, .4);
+            a {
+                padding: 5px 10px;
+                color: #fff;
+                display: block;
+                width: 100%;
+                outline: none;
+                position: relative;
+                -moz-transition: all 200ms ease-in-out;
+                -o-transition: all 200ms ease-in-out;
+                -webkit-transition: all 200ms ease-in-out;
+                transition: all 200ms ease-in-out;
+                border-bottom: 1px solid rgba(0, 0, 0, .2);
+                text-decoration: none;
+                &:hover{
+                    background: rgba(0, 0, 0, .1);
+                }
+                &:last-child {
+                    border: none;
                 }
             }
         }
