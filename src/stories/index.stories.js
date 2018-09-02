@@ -484,6 +484,7 @@ const injectButtonTemplate = code => `
 `;
 
 import Buttons from '../ui/components/buttons/index.vue'
+import LoadMore from '../ui/components/buttons/load-more'
 
 storiesOf('Buttons', module)
     .add('default', () => ({
@@ -546,7 +547,15 @@ storiesOf('Buttons', module)
         template: injectButtonTemplate(`
             <c-button status="danger" tag="button">Im button</c-button>
         `)
-    }));
+    }))
+    .add('read more', () => ({
+        components: {
+            'c-load-more': LoadMore
+        },
+        template: `
+            <div class="p-5" style="width: 400px"><c-load-more></c-load-more></div>
+        `
+    }))
 
 
 import MoneyInfo from '../ui/components/money-info/index.vue'
