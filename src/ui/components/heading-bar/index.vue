@@ -36,6 +36,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    $name_tab_bg: #44455d;
+
     .heading-bar{
         display: flex;
         width: 100%;
@@ -76,19 +78,19 @@ export default {
             line-height: 40px;
             font-weight: normal;
             &:after{
-                height: 36px;
+                height: 23px;
                 bottom: 0;
-                right: -34px;
-                border: 18px solid transparent;
-                border-bottom: 18px solid #fff;
-                border-left: 18px solid #fff;
+                right: -29px;
+                border: 17px solid transparent;
+                border-bottom: 20px solid #fff;
+                border-left: 15px solid #fff;
             }
         }
     }
     .heading-bar__tabs{
         a {
-            color: #606079;
-            background: #393955;
+            color: #ececed;
+            background: $name_tab_bg;
             padding: 0 20px;
             font-size: 21px;
             line-height: 40px;
@@ -110,8 +112,8 @@ export default {
                 bottom: 0;
                 left: -29px;
                 border: 17px solid transparent;
-                border-bottom: 20px solid #393955;
-                border-right: 15px solid #393955;
+                border-bottom: 20px solid $name_tab_bg;
+                border-right: 15px solid $name_tab_bg;
                 -webkit-filter: drop-shadow(-5px 0px 3px rgba(0, 0, 0, .15));
                 filter: drop-shadow(-5px 0px 3px rgba(0, 0, 0, .1));
             }
@@ -122,8 +124,8 @@ export default {
                 bottom: 0;
                 right: -29px;
                 border: 17px solid transparent;
-                border-bottom: 20px solid #393955;
-                border-left: 15px solid #393955;
+                border-bottom: 20px solid $name_tab_bg;
+                border-left: 15px solid $name_tab_bg;
                 -webkit-filter: drop-shadow(5px 0px 3px rgba(0, 0, 0, .15));
                 filter: drop-shadow(5px 0px 3px rgba(0, 0, 0, .15));
             }

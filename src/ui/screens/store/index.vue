@@ -35,7 +35,7 @@
                     />
                 </div>
 
-                <div class="row product-grid">
+                <div class="row product-grid margin-bottom-15">
                     <div class="col-12">
                         <c-heading-bar name="Summer Sale" :showArrows="true" :showBackground="true" />
                     </div>
@@ -82,6 +82,7 @@
                             v-bind:items="new_games"
                             itemBg="transparent"
                         ></c-game-grid>
+                        <c-load-more />
                     </div>
                 </div>
 
@@ -117,6 +118,7 @@ export default {
         'c-game-grid': () => import('@/ui/components/games-grid/with-description'),
         'c-dropdown': () => import('@/ui/components/dropdown-menu/type-2'),
         'c-searcher': () => import('@/ui/components/searcher'),
+        'c-load-more': () => import('@/ui/components/buttons/load-more'),
     },
     data() {
         const curator_review = {

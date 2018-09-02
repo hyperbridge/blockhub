@@ -27,12 +27,14 @@
         justify-content: center;
         width: 100%;
         overflow: hidden;
+        padding: 10px 0;
         a{
             color: #C6C6D6;
             text-transform: uppercase;
             padding: 0 15px;
             position: relative;
             font-weight: bold;
+            font-size: 16px;
             &:before{
                 position: absolute;
                 left: -90px;
