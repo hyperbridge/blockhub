@@ -12,6 +12,7 @@ import * as data from './components-data'
 //import '!style-loader!css-loader!./styles.scss'
 
 import SaleBox from '../ui/components/sale-box/box.vue'
+
 storiesOf('Sale Box', module)
     .add('default', () => ({
         components: {
@@ -29,6 +30,7 @@ storiesOf('Sale Box', module)
     }))
 
 import AssetsImporter from '../ui/components/asset-importer/index.vue'
+
 storiesOf('Assets Importer', module)
     .add('default', () => ({
         components: {
@@ -43,10 +45,11 @@ storiesOf('Assets Importer', module)
     }))
 
 import Notification from '../ui/components/notification/index.vue'
+
 storiesOf('Notifications', module)
     .add('default', () => ({
         components: {
-            'c-notification' : Notification
+            'c-notification': Notification
         },
         data() {
             return {
@@ -114,23 +117,26 @@ storiesOf('Notifications', module)
     }))
 
 import Searcher from '../ui/components/searcher';
+
 storiesOf('Searcher', module)
     .add('default', () => ({
-        components: { Searcher },
+        components: {Searcher},
         template: `<searcher />`
     }))
 
 import RatingStars from '../ui/components/rating-stars';
+
 storiesOf('Rating', module)
     .add('Stars', () => ({
-        components: { RatingStars },
+        components: {RatingStars},
         template: '<rating-stars :number="3.5"/>'
     }));
 
 import Author from '../ui/components/author';
+
 storiesOf('Author', module)
     .add('Author', () => ({
-        components: { Author },
+        components: {Author},
         data() {
             return {
                 author: {
@@ -143,17 +149,19 @@ storiesOf('Author', module)
     }))
 
 import Tags from '../ui/components/tags';
+
 storiesOf('Tags', module)
     .add('Tags', () => ({
-        components: { Tags },
+        components: {Tags},
         template: `<tags :tags="['RPG', 'Open-World']"/>`
     }))
 
 import LoadingBar from '../ui/components/loading-bar';
 import LoadingLogo from '../ui/components/loading-bar/logo-loader';
+
 storiesOf('LoadingBar', module)
     .add('LoadingBar', () => ({
-        components: { LoadingBar },
+        components: {LoadingBar},
         template: `<loading-bar/>`
     }))
     .add('LoadingLogo', () => ({
@@ -172,37 +180,39 @@ import NavigationProduct from '../ui/components/navigation/product';
 import NavigationProject from '../ui/components/navigation/project';
 import NavigationSettings from '../ui/components/navigation/settings';
 import NavigationWallet from '../ui/components/navigation/wallet';
+
 storiesOf('Navigation', module)
     .add('account', () => ({
-        components: { NavigationAccount }, template: `<div class="col-2 py-3"><NavigationAccount /></div>`
+        components: {NavigationAccount}, template: `<div class="col-2 py-3"><NavigationAccount /></div>`
     }))
     .add('asset', () => ({
-        components: { NavigationAsset }, template: `<div class="col-2 py-3"><NavigationAsset /></div>`
+        components: {NavigationAsset}, template: `<div class="col-2 py-3"><NavigationAsset /></div>`
     }))
     .add('funding', () => ({
-        components: { NavigationFunding }, template: `<div class="col-2 py-3"><NavigationFunding /></div>`
+        components: {NavigationFunding}, template: `<div class="col-2 py-3"><NavigationFunding /></div>`
     }))
     .add('help', () => ({
-        components: { NavigationHelp }, template: `<div class="col-2 py-3"><NavigationHelp /></div>`
+        components: {NavigationHelp}, template: `<div class="col-2 py-3"><NavigationHelp /></div>`
     }))
     .add('product', () => ({
-        components: { NavigationProduct }, template: `<div class="col-2 py-3"><NavigationProduct /></div>`
+        components: {NavigationProduct}, template: `<div class="col-2 py-3"><NavigationProduct /></div>`
     }))
     .add('project', () => ({
-        components: { NavigationProject }, template: `<div class="col-2 py-3"><NavigationProject /></div>`
+        components: {NavigationProject}, template: `<div class="col-2 py-3"><NavigationProject /></div>`
     }))
     .add('settings', () => ({
-        components: { NavigationSettings }, template: `<div class="col-2 py-3"><NavigationSettings /></div>`
+        components: {NavigationSettings}, template: `<div class="col-2 py-3"><NavigationSettings /></div>`
     }))
     .add('wallet', () => ({
-        components: { NavigationWallet }, template: `<div class="col-2 py-3"><NavigationWallet /></div>`
+        components: {NavigationWallet}, template: `<div class="col-2 py-3"><NavigationWallet /></div>`
     }))
 
 
 import Card from '../ui/components/projects/card';
+
 storiesOf('Projects', module)
     .add('card', () => ({
-        components: { Card },
+        components: {Card},
         data() {
             return {
                 projects: [
@@ -278,6 +288,7 @@ storiesOf('Projects', module)
 
 import Tabs from '../ui/components/tab/tabs.vue'
 import Tab from '../ui/components/tab/tab.vue'
+
 storiesOf('Tabs', module)
     .add('default', () => ({
         components: {
@@ -337,6 +348,7 @@ storiesOf('Tabs', module)
 
 
 import MilestonesLine from '../ui/components/milestones-line/index.vue'
+
 storiesOf('Milestones Line', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
@@ -376,6 +388,7 @@ storiesOf('Milestones Line', module)
 
 import SidebarMenu from '../ui/components/sidebar-menu/index.vue'
 import SidebarMenuLink from '../ui/components/sidebar-menu/menu_item'
+
 storiesOf('Sidebar Menu', module)
     .add('Main title', () => ({
         components: {
@@ -459,7 +472,8 @@ storiesOf('Sidebar Menu', module)
             </c-sidebar-menu-link>
                 </div>
             </div>`
-    }));;
+    }));
+;
 
 const injectButtonTemplate = code => `
     <div class="row m-0 p-3">
@@ -470,9 +484,10 @@ const injectButtonTemplate = code => `
 `;
 
 import Buttons from '../ui/components/buttons/index.vue'
+
 storiesOf('Buttons', module)
     .add('default', () => ({
-        components: { 'c-button': Buttons },
+        components: {'c-button': Buttons},
         methods: {
             testFunction: function () {
                 console.log('BOOOOOOOOOOOM!')
@@ -485,49 +500,49 @@ storiesOf('Buttons', module)
         `)
     }))
     .add('info', () => ({
-        components: { 'c-button': Buttons },
+        components: {'c-button': Buttons},
         template: injectButtonTemplate(`
             <c-button status="info">info</c-button>
         `)
     }))
     .add('success', () => ({
-        components: { 'c-button': Buttons },
+        components: {'c-button': Buttons},
         template: injectButtonTemplate(`
             <c-button status="success">success</c-button>
         `)
     }))
     .add('danger', () => ({
-        components: { 'c-button': Buttons },
+        components: {'c-button': Buttons},
         template: injectButtonTemplate(`
             <c-button status="danger">danger</c-button>
         `)
     }))
     .add('[options] - swap order', () => ({
-        components: { 'c-button': Buttons },
+        components: {'c-button': Buttons},
         template: injectButtonTemplate(`
             <c-button status="success" swap_order>success</c-button>
         `)
     }))
     .add('[options] - hide icon', () => ({
-        components: { 'c-button': Buttons },
+        components: {'c-button': Buttons},
         template: injectButtonTemplate(`
             <c-button status="success" icon_hide>success</c-button>
         `)
     }))
     .add('[options] - emoji', () => ({
-        components: { 'c-button': Buttons },
+        components: {'c-button': Buttons},
         template: injectButtonTemplate(`
             <c-button status="success">Message 👺👻👽</c-button>
         `)
     }))
     .add('[options] - custom icon', () => ({
-        components: { 'c-button': Buttons },
+        components: {'c-button': Buttons},
         template: injectButtonTemplate(`
             <c-button status="success" icon="anchor">success!</c-button>
         `)
     }))
     .add('[options] - button tag', () => ({
-        components: { 'c-button': Buttons },
+        components: {'c-button': Buttons},
         template: injectButtonTemplate(`
             <c-button status="danger" tag="button">Im button</c-button>
         `)
@@ -535,6 +550,7 @@ storiesOf('Buttons', module)
 
 
 import MoneyInfo from '../ui/components/money-info/index.vue'
+
 storiesOf('Money Info', module)
     .add('default', () => ({
         components: {
@@ -549,6 +565,7 @@ storiesOf('Money Info', module)
 
 import Checkbox from '../ui/components/checkbox/checbox.vue'
 import CheckboxGroup from '../ui/components/checkbox/checbox-group.vue'
+
 storiesOf('Checkbox', module)
     .add('Single checkbox', () => ({
         components: {
@@ -583,6 +600,7 @@ storiesOf('Checkbox', module)
     }));
 
 import Tooltips from '../ui/components/tooltips/index.vue'
+
 storiesOf('Tooltips', module)
     .add('dark', () => ({
         components: {
@@ -644,6 +662,7 @@ storiesOf('Tooltips', module)
     }))
 
 import ActivityChart from '../ui/components/activity-chart/index.vue'
+
 storiesOf('Activity Chart', module)
     .add('default', () => ({
         components: {
@@ -691,6 +710,7 @@ storiesOf('Activity Chart', module)
     }))
 
 import PopUps from '../ui/components/popups/index.vue'
+
 storiesOf('Popups', module)
     .add('default', () => ({
         components: {
@@ -852,6 +872,7 @@ storiesOf('Popups', module)
     }))
 
 import RangeSlider from '../ui/components/range-slider/index.vue'
+
 storiesOf('Range Slider', module)
     .add('single range slider', () => ({
         components: {
@@ -919,6 +940,7 @@ storiesOf('Range Slider', module)
     }))
 
 import AssetsGrid from '../ui/components/assets-grid/index.vue'
+
 storiesOf('Assets Grid', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
@@ -953,6 +975,7 @@ storiesOf('Assets Grid', module)
     }));
 
 import AssetsPopup from '../ui/components/asset-overview-popup/index.vue'
+
 storiesOf('Assets Overview Popup', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
@@ -1007,6 +1030,7 @@ storiesOf('Assets Overview Popup', module)
     }));
 
 import Switch from '../ui/components/switch/index.vue'
+
 storiesOf('Switch', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
@@ -1150,12 +1174,27 @@ storiesOf('Modal', module)
         `
     }))
 
-import Dropdown from '../ui/components/dropdown-menu/index'
+import Dropdown from '../ui/components/dropdown-menu/type-2'
+import DropdownSmall from '../ui/components/dropdown-menu/index'
 
 storiesOf('Dropdown', module)
     .add('default', () => ({
         components: {
             'c-dropdown': Dropdown
+        },
+        template: `
+         <div class="row m-0 p-3">
+            <c-dropdown id="test" name="Filter by Genre" :showBg="true">
+                <a href="#3">RPG</a>
+                <a href="#3">ACTION</a>
+                <a href="#3">Cars</a>
+            </c-dropdown>
+         </div>
+        `
+    }))
+    .add('small', () => ({
+        components: {
+            'c-dropdown': DropdownSmall
         },
         template: `
          <div class="row m-0 p-3">
@@ -1287,6 +1326,7 @@ storiesOf('Headers', module)
 
 import BlockHeaders from '../ui/components/heading-bar/index'
 import BlockHeadersAddFields from '../ui/components/heading-bar/additional-action'
+
 const injectHBarTemp = code => `
     <div class="row">
         <div class="col-8 p-5">
@@ -1327,7 +1367,7 @@ storiesOf('Block Title', module)
             <c-heading-bar name="This is the Title" more="#some_link"  />
         `)
     }))
-    .add('with custom content', () => ({
+    .add('with filters', () => ({
         components: {
             'c-heading-bar': BlockHeaders,
             'c-heading-bar-fields': BlockHeadersAddFields
@@ -1345,6 +1385,20 @@ storiesOf('Block Title', module)
                 <template slot="additional-action">
                     <c-heading-bar-fields name="Reviews" icon="fas fa-trophy" @click_up="upClick"  @click_down="downClick" />
                     <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" />
+                </template>
+            </c-heading-bar>
+        `)
+    }))
+    .add('with tabs', () => ({
+        components: {
+            'c-heading-bar': BlockHeaders
+        },
+        template: injectHBarTemp(`
+            <c-heading-bar>
+                <template slot="heading-tabs">
+                    <a href="#3">First tab</a>
+                    <a href="#3" class="active">Second tab</a>
+                    <a href="#3">Third tab</a>
                 </template>
             </c-heading-bar>
         `)
@@ -1664,9 +1718,10 @@ storiesOf('Rating Block', module)
 
 
 import SendingFundsPopup from '../ui/components/send-funds-popup/index'
+
 storiesOf('Sending Funds(not finished)', module)
     .add('default', () => ({
-        components:{
+        components: {
             'c-send-funds': SendingFundsPopup,
             'c-button': Buttons
         },
@@ -1684,10 +1739,11 @@ storiesOf('Sending Funds(not finished)', module)
     }))
 
 import UserCard from '../ui/components/user-card/index'
+
 storiesOf('User Card(not finished)', module)
     .add('default', () => ({
-        components:{
-            'c-user-card' : UserCard
+        components: {
+            'c-user-card': UserCard
         },
         template: `
         <div class="row p-5">
@@ -1698,8 +1754,8 @@ storiesOf('User Card(not finished)', module)
         `
     }))
     .add('done', () => ({
-        components:{
-            'c-user-card' : UserCard
+        components: {
+            'c-user-card': UserCard
         },
         template: `
         <div class="row p-5">
@@ -1711,9 +1767,10 @@ storiesOf('User Card(not finished)', module)
     }))
 
 import ScreenGallery from '../ui/components/screen-gallery/gallery';
+
 storiesOf('Gallery', module)
     .add('screen-gallery', () => ({
-        components: { ScreenGallery },
+        components: {ScreenGallery},
         data() {
             return {
                 main: 'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012',
@@ -1730,6 +1787,7 @@ storiesOf('Gallery', module)
 import ProductCardDynamic from '@/ui/components/store/product-card-dynamic';
 import ProductCard from '@/ui/components/store/product-card';
 import ProductsCards from '@/ui/components/store/products-cards';
+
 const productsCardsData = [
     {
         id: "8",
@@ -1747,7 +1805,7 @@ const productsCardsData = [
         },
         author: "Piranha Bytes",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/901191/movie480.webm?t=1490866901"],
-        author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"]
+        author_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     },
     {
         id: "9",
@@ -1765,7 +1823,7 @@ const productsCardsData = [
         },
         author: "CD PROJEKT RED",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256658589/movie480.webm?t=1528288687"],
-        author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"]
+        author_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     },
     {
         id: "10",
@@ -1783,13 +1841,13 @@ const productsCardsData = [
         },
         author: "Bethesda",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256657338/movie480.webm?t=1447378505"],
-        author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"]
+        author_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     }
 ];
 storiesOf('Product Card', module)
     .add('basic', () => ({
-        components: { ProductCard },
-        data: () => ({ products: productsCardsData }),
+        components: {ProductCard},
+        data: () => ({products: productsCardsData}),
         template: `
             <div class="row">
                 <product-card
@@ -1802,8 +1860,8 @@ storiesOf('Product Card', module)
         `
     }))
     .add('dynamic', () => ({
-        components: { ProductCardDynamic },
-        data: () => ({ products: productsCardsData }),
+        components: {ProductCardDynamic},
+        data: () => ({products: productsCardsData}),
         template: `
             <div class="row">
                 <product-card-dynamic
@@ -1816,8 +1874,8 @@ storiesOf('Product Card', module)
         `
     }))
     .add('wrapper', () => ({
-        components: { ProductsCards },
-        data: () => ({ products: productsCardsData }),
+        components: {ProductsCards},
+        data: () => ({products: productsCardsData}),
         template: `
             <div>
                 <h1 style="text-align: center;">Hover transitions are enabled only on bigger screens</h1>
@@ -1828,10 +1886,11 @@ storiesOf('Product Card', module)
 
 import CuratorReview from '@/ui/components/store/curator-review';
 import CuratorsReviews from '@/ui/components/store/curators-reviews';
+
 const curatorReview = {
-    author: { name: 'SatoSan', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png' },
+    author: {name: 'SatoSan', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'},
     rate: 4.5,
-    game: { img: 'http://www.pixels-association.ch/wp-content/uploads/2017/11/no1.jpg' },
+    game: {img: 'http://www.pixels-association.ch/wp-content/uploads/2017/11/no1.jpg'},
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mi arcu, viverra et efficitur luctus, tincidunt vel lacus. Morbi erat augue, posuere et sodales venenatis, tincidunt eu arcu. In sollicitudin purus quis sodales ornare. Cras tempus vestibulum elementum. Sed placerat, turpis id cursus cursus, augue enim molestie dui, elementum luctus lectus est vitae dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris vehicula mi a nunc cursus, id volutpat purus commodo. Duis consequat elementum varius. Suspendisse dui enim, rhoncus a molestie at, tristique ut urna. Praesent et consectetur dui. Pellentesque ut volutpat nunc, ut viverra nulla. Duis ultricies, sem sit amet laoreet lobortis, mauris est mollis orci, non eleifend urna leo quis lectus. Vestibulum sit amet volutpat est.',
     more_reviews: [
         {
@@ -1852,13 +1911,13 @@ const curatorReview = {
 };
 storiesOf('Curators Reviews', module)
     .add('review', () => ({
-        components: { CuratorReview },
-        data: () => ({ review: curatorReview }),
+        components: {CuratorReview},
+        data: () => ({review: curatorReview}),
         template: `<curator-review :review="review" class="col-3"/>`
     }))
     .add('reviews wrapper', () => ({
-        components: { CuratorsReviews },
-        data: () => ({ reviews: [curatorReview, curatorReview, curatorReview] }),
+        components: {CuratorsReviews},
+        data: () => ({reviews: [curatorReview, curatorReview, curatorReview]}),
         template: `<curators-reviews :reviews="reviews" class="col-8"/>`
     }))
 

@@ -1,6 +1,11 @@
 <template>
     <div class="heading-bar">
-        <h3 class="heading-bar__name" :class="{ 'heading-bar__name--with-bg': showBackground }">{{ name }}</h3>
+        <h3 class="heading-bar__name" :class="{ 'heading-bar__name--with-bg': showBackground }" v-if="name">
+            {{ name }}
+        </h3>
+        <div class="heading-bar__tabs" v-else>
+            <slot name="heading-tabs"></slot>
+        </div>
         <div class="heading-bar__additional-action">
             <slot name="additional-action"></slot>
             <a :href="more" v-if="more" class="more">
@@ -77,6 +82,74 @@ export default {
                 border: 18px solid transparent;
                 border-bottom: 18px solid #fff;
                 border-left: 18px solid #fff;
+            }
+        }
+    }
+    .heading-bar__tabs{
+        a {
+            color: #606079;
+            background: #393955;
+            padding: 0 20px;
+            font-size: 21px;
+            line-height: 40px;
+            border: none;
+            position: relative;
+            display: inline-block;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 -1px 10px rgba(0, 0, 0, .2);
+            margin: 0 10px;
+            text-decoration: none;
+            -moz-transition: all 200ms ease-in-out;
+            -o-transition: all 200ms ease-in-out;
+            -webkit-transition: all 200ms ease-in-out;
+            transition: all 200ms ease-in-out;
+            &:before {
+                content: "";
+                position: absolute;
+                height: 23px;
+                bottom: 0;
+                left: -29px;
+                border: 17px solid transparent;
+                border-bottom: 20px solid #393955;
+                border-right: 15px solid #393955;
+                -webkit-filter: drop-shadow(-5px 0px 3px rgba(0, 0, 0, .15));
+                filter: drop-shadow(-5px 0px 3px rgba(0, 0, 0, .1));
+            }
+            &:after {
+                content: "";
+                position: absolute;
+                height: 23px;
+                bottom: 0;
+                right: -29px;
+                border: 17px solid transparent;
+                border-bottom: 20px solid #393955;
+                border-left: 15px solid #393955;
+                -webkit-filter: drop-shadow(5px 0px 3px rgba(0, 0, 0, .15));
+                filter: drop-shadow(5px 0px 3px rgba(0, 0, 0, .15));
+            }
+            &:hover{
+                color: #8c8cb0;
+            }
+            &.active {
+                border-bottom: none;
+                background: #fff;
+                z-index: 8;
+                color: #3e3e5c;
+                &:before {
+                    border-bottom-color: #fff;
+                    border-right-color: #fff;
+                }
+                &:after {
+                    border-bottom-color: #fff;
+                    border-left-color: #fff;
+                }
+            }
+            &:first-child {
+                box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+                margin-left: 0;
+                &:before {
+                    display: none;
+                }
             }
         }
     }
