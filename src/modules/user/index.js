@@ -6,7 +6,8 @@ export default {
     state: {
         settings: {
             animations: true,
-            autoplay: true
+            autoplay: true,
+            pagination: true
         }
     },
     mutations: {

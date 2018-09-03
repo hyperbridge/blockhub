@@ -10,10 +10,7 @@
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
-                            <label class="switch switch-sm">
-                                <input type="checkbox" name="switch_8" checked="" value="0">
-                                <span></span>
-                            </label>
+                            <c-switch />
                             <div class="text">
                                 <h4>Open BlockHub on system startup</h4>
                                 <p>Turn on if you want the application to load automatically
@@ -23,10 +20,7 @@
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
-                            <label class="switch switch-sm">
-                                <input type="checkbox" name="switch_8" checked="" value="0">
-                                <span></span>
-                            </label>
+                            <c-switch />
                             <div class="text">
                                 <h4>Show system warnings</h4>
                                 <p>Queues for games that mickey nex to Ogopogo in freezie Serviette, eh?</p>
@@ -35,13 +29,22 @@
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
-                            <label class="switch switch-sm">
-                                <input type="checkbox" name="switch_8" checked="" value="0">
-                                <span></span>
-                            </label>
+                            <c-switch />
                             <div class="text">
                                 <h4>Enable Ethereum connection</h4>
                                 <p>Turn on if you want the application to enable Ethereum connection</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="settings_item">
+                            <c-switch
+                                :value="paginationMode"
+                                @change="updateSettings('pagination')"
+                            />
+                            <div class="text">
+                                <h4>Pagination Mode</h4>
+                                <p>Turn on if you want to switch between <i>pagination</i> or <i>load more</i> navigation mode</p>
                             </div>
                         </div>
                     </div>
@@ -52,6 +55,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default'),
@@ -61,9 +66,11 @@ export default {
         return {
         }
     },
-    created() {
-    },
-    beforeDestroy() {
+    methods: mapActions(['updateSettings']),
+    computed: {
+        paginationMode() {
+            return this.$store.state.user.settings.pagination;
+        }
     }
 }
 </script>

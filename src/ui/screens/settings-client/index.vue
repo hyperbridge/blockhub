@@ -120,7 +120,7 @@
                                             <td>
                                                 <c-switch
                                                     :value="status"
-                                                    @input="updateSettings(property)"
+                                                    @change="updateSettings(property)"
                                                 />
                                             </td>
                                             <td>{{ property | upperFirstChar }}</td>
