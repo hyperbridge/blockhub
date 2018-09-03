@@ -1,7 +1,7 @@
 <template>
     <c-layout navigationKey="settings-navigation">
         <div class="content" id="content">
-            <div class="container-fluid">  
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <h3>Client Settings</h3>
@@ -93,7 +93,47 @@
                                 </div>
                             </div>
                             <div class="">
-                                
+
+                            </div>
+                        </div>
+
+                        <div class="card invert">
+                            <div class="page-heading">
+                                <div class="page-heading__container">
+                                    <h1 class="title">Performance Settings</h1>
+                                    <p class="caption"></p>
+                                </div>
+                                <div class="page-heading__container float-right d-none d-md-block">
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-dark margin-bottom-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Change</th>
+                                            <th scope="col">Option</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(status, property) in settings" :key="property">
+                                            <td>
+                                                <c-switch
+                                                    :value="status"
+                                                    @input="updateSettings(property)"
+                                                />
+                                            </td>
+                                            <td>{{ property | upperFirstChar }}</td>
+                                            <td>
+                                                <span v-if="status" class="badge badge-success">Enabled</span>
+                                                <span v-else class="badge badge-warning">Disabled</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+
                             </div>
                         </div>
                     </div>
@@ -104,11 +144,13 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import FundingProtocol from 'funding-protocol'
 
 export default {
     components: {
-        'c-layout': () => import('@/ui/layouts/default')
+        'c-layout': () => import('@/ui/layouts/default'),
+        'c-switch': () => import('@/ui/components/switch')
     },
     data() {
         return {
@@ -293,9 +335,13 @@ export default {
                     ]
                 }
             ]
+        },
+        settings() {
+            return this.$store.state.user.settings;
         }
     },
     methods: {
+        ...mapActions(['updateSettings']),
         cleanDatabase() {
             this.$store.dispatch('database/clean')
         },
@@ -327,6 +373,11 @@ export default {
 
                 await this.$store.dispatch(protocolId + '/deployContract', { contractName })
             }
+        }
+    },
+    filters: {
+        upperFirstChar(value) {
+            return value.charAt(0).toUpperCase() + value.substring(1, value.length);
         }
     }
 }

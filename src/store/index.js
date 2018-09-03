@@ -12,6 +12,7 @@ import * as marketplace from '../modules/marketplace'
 import * as network from '../modules/network'
 import * as database from '../modules/database'
 import * as cache from '../modules/cache'
+import user from '@/modules/user';
 
 Vue.use(Vuex)
 
@@ -96,7 +97,8 @@ const store = new Vuex.Store({
             getters: network.getters,
             actions: network.actions,
             mutations: network.mutations
-        }
+        },
+        user
     }
 })
 

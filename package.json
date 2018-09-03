@@ -54,6 +54,7 @@
     "chalk": "^2.1.0",
     "chromedriver": "^2.33.1",
     "connect-history-api-fallback": "^1.4.0",
+    "cookie": "^0.3.1",
     "copy-webpack-plugin": "*",
     "cross-env": "^5.0.5",
     "cross-spawn": "^5.1.0",
