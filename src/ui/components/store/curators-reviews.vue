@@ -36,7 +36,7 @@
 .curators-wrapper {
     margin: 30px 0;
     box-sizing: border-box;
-    padding: 5px;
+    padding: 5px 0;
     border-radius: 4px;
     color: #fff;
     &__content {
