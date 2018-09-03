@@ -2,6 +2,7 @@
     <c-layout navigationKey="store-navigation">
         <div class="content" id="content">
             <div class="container-fluid">
+
                 <div class="row justify-content-center frontpage-product" v-if="frontpage_product">
                     <div class="col-12 col-lg-6 frontpage-product__slider" v-if="frontpage_product.images">
                         <img :src="frontpage_product.images.medium_tile" />
@@ -25,6 +26,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row product-grid">
                     <div class="col-12">
                         <c-heading-bar name="New Releases" :showArrows="true" />
@@ -45,6 +47,26 @@
                         :key="index"
                         :product="product"
                     />
+                </div>
+
+                <div class="row margin-bottom-70 margin-top-40 align-items-stretch">
+                    <div class="col-12 col-md-4">
+                        <div class="banner banner-1">
+                            <div class="banner-text">
+                                <h4 class="text-yellow">summer block</h4>
+                                <h3>Championship</h3>
+                                <p>You won't believe the prize!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="banner banner-2">
+                            <div class="banner-text align-items-start">
+                                <h3 class="text-yellow margin-bottom-5">top<br>curators</h3>
+                                <h4 class="text-capitalize">What are they<br>playing?</h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row product-grid margin-bottom-30">
@@ -84,6 +106,28 @@
                                 itemBg="transparent"
                             ></c-game-grid>
                             <c-load-more />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row margin-bottom-70 margin-top-40 align-items-stretch">
+                    <div class="col-12 col-md-8">
+                        <div class="banner banner-3">
+                            <div class="banner-text">
+                                <h3 class="text-yellow">Item Marketplace</h3>
+                                <p>You all in one spot for games assets</p>
+                            </div>
+                            <div class="banner-action">
+                                <c-button status="info" icon_hide size="lg">VISIT NOW</c-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="banner banner-4">
+                            <div class="banner-text">
+                                <h3 class="text-yellow margin-bottom-5">Top Collections</h3>
+                                <p>We curated the best ones for you</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -137,6 +181,27 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-12 margin-bottom-30">
+                        <c-heading-bar name="What's up with your content" />
+
+
+                        <div class="home-tabs">
+                            <c-news-list-navigation
+                                :content_news="content_news"
+                            />
+                            <div class="tab-content">
+                                <c-news-list-articles
+                                    v-for="(news, index) in content_news"
+                                    :key="index"
+                                    :news="news"
+                                    :index="index"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <c-curators-reviews
                     :reviews="curators_reviews"
@@ -172,6 +237,8 @@ export default {
         'c-searcher': () => import('@/ui/components/searcher'),
         'c-load-more': () => import('@/ui/components/buttons/load-more'),
         'c-assets-list-item': () => import('@/ui/components/assets-list-item/item'),
+        'c-news-list-navigation': () => import('@/ui/components/news-list/navigation'),
+        'c-news-list-articles': () => import('@/ui/components/news-list/articles')
     },
     data() {
         const curator_review = {
@@ -336,6 +403,59 @@ export default {
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 }
             ],
+            content_news: [
+                {
+                    game: {
+                        title: 'Diablo III',
+                        developer: 'Blizzard Entertainment',
+                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                    },
+                    articles: [
+                        {
+                            heading: 'New class and event coming next week!',
+                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
+                            url: 'article-url',
+                            date: '2018-07-24T04:09:00.000Z'
+                        }
+                    ]
+                },
+                {
+                    game: {
+                        title: 'Diablo I',
+                        developer: 'Blizzard Entertainment',
+                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                    },
+                    articles: [
+                        {
+                            heading: 'New class and event coming next week!',
+                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
+                            url: 'article-url',
+                            date: '2016-09-24T04:09:00.000Z'
+                        },
+                        {
+                            heading: 'New class and event coming next week!',
+                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
+                            url: 'article-url',
+                            date: '2014-03-24T04:09:00.000Z'
+                        }
+                    ]
+                },
+                {
+                    game: {
+                        title: 'Diablo II',
+                        developer: 'Blizzard Entertainment',
+                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
+                    },
+                    articles: [
+                        {
+                            heading: 'New class and event coming next week!',
+                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
+                            url: 'article-url',
+                            date: '2017-12-24T04:09:00.000Z'
+                        }
+                    ]
+                }
+            ],
         }
     },
     computed: {
@@ -377,107 +497,174 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.frontpage-product{
-    margin-bottom: 30px;
-}
-.frontpage-product__slider{
-    img{
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
+    .frontpage-product{
+        margin-bottom: 30px;
     }
-}
-.frontpage-product__info{
-    h2{
-        font-size: 26px;
-        font-weight: bold;
-        margin: 0;
-
-        a {
-            color: #fff;
+    .frontpage-product__slider{
+        img{
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
         }
     }
-    p {
-        margin: 15px 0;
-    }
-}
-.frontpage-product__footer{
-    .price-list{
-        margin-right: 15px;
-        float: left;
-        .price{
-            float: left;
-            margin-right: 15px;
-            font-size: 18px;
+    .frontpage-product__info{
+        h2{
+            font-size: 26px;
             font-weight: bold;
+            margin: 0;
+
+            a {
+                color: #fff;
+            }
+        }
+        p {
+            margin: 15px 0;
+        }
+    }
+    .frontpage-product__footer{
+        .price-list{
+            margin-right: 15px;
+            float: left;
+            .price{
+                float: left;
+                margin-right: 15px;
+                font-size: 18px;
+                font-weight: bold;
+                text-transform: uppercase;
+                line-height: 32px;
+                position: relative;
+                overflow: hidden;
+                span{
+                    font-size: 13px;
+                }
+                &.old_price{
+                    &:before{
+                        position: absolute;
+                        height: 2px;
+                        left: 0;
+                        right: 0;
+                        top: 50%;
+                        width: 100%;
+                        background: red;
+                        content: "";
+                        display: inline-block;
+                        transform: rotate(20deg);
+                        opacity: 0.7;
+                    }
+                    &:after{
+                        position: absolute;
+                        height: 2px;
+                        left: 0;
+                        right: 0;
+                        top: 50%;
+                        width: 100%;
+                        background: red;
+                        content: "";
+                        display: inline-block;
+                        transform: rotate(-20deg);
+                        opacity: 0.7;
+                    }
+                }
+            }
+        }
+        a{
+            padding: 5px 10px;
             text-transform: uppercase;
-            line-height: 32px;
-            position: relative;
-            overflow: hidden;
-            span{
-                font-size: 13px;
-            }
-            &.old_price{
-                &:before{
-                    position: absolute;
-                    height: 2px;
-                    left: 0;
-                    right: 0;
-                    top: 50%;
-                    width: 100%;
-                    background: red;
-                    content: "";
-                    display: inline-block;
-                    transform: rotate(20deg);
-                    opacity: 0.7;
-                }
-                &:after{
-                    position: absolute;
-                    height: 2px;
-                    left: 0;
-                    right: 0;
-                    top: 50%;
-                    width: 100%;
-                    background: red;
-                    content: "";
-                    display: inline-block;
-                    transform: rotate(-20deg);
-                    opacity: 0.7;
-                }
+            font-size: 16px;
+            font-weight: bold;
+            i{
+                margin-right: 5px;
             }
         }
     }
-    a{
-        padding: 5px 10px;
-        text-transform: uppercase;
-        font-size: 16px;
-        font-weight: bold;
-        i{
-            margin-right: 5px;
+
+    .block-bg{
+        background: rgba(0, 0, 0, .2);
+        margin: -20px 0 0;
+        width: 100%;
+        padding: 15px;
+        &.block-gradient{
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+88,000000+100&0.65+91,0+100 */
+            background: -moz-linear-gradient(top, rgba(0,0,0,0.2) 88%, rgba(0,0,0,0.2) 91%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, rgba(0,0,0,0.2) 88%,rgba(0,0,0,0.2) 91%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 88%,rgba(0,0,0,0.2) 91%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
         }
     }
-}
 
-.block-bg{
-    background: rgba(0, 0, 0, .2);
-    margin: -20px 0 0;
-    width: 100%;
-    padding: 15px;
-    &.block-gradient{
-        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+88,000000+100&0.65+91,0+100 */
-        background: -moz-linear-gradient(top, rgba(0,0,0,0.2) 88%, rgba(0,0,0,0.2) 91%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
-        background: -webkit-linear-gradient(top, rgba(0,0,0,0.2) 88%,rgba(0,0,0,0.2) 91%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(to bottom, rgba(0,0,0,0.2) 88%,rgba(0,0,0,0.2) 91%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+    .filter-blk{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
     }
-}
-
-.filter-blk{
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
+    .banner{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        padding: 25px;
+        overflow: hidden;
+        position: relative;
+        text-shadow: 0 0 2px rgba(0, 0, 0, .2);
+        justify-content: space-between;
+        align-items: center;
+        &.banner-1{
+            background: url("../../../assets/img/banners/banner-1.png") top right no-repeat;
+            background-size: cover;
+        }
+        &.banner-2{
+            background: url("../../../assets/img/banners/banner-2.png") top right no-repeat;
+            background-size: cover;
+        }
+        &.banner-3{
+            background: url("../../../assets/img/banners/banner-3.png") top right no-repeat;
+            background-size: cover;
+        }
+        &.banner-4{
+            background: url("../../../assets/img/banners/banner-4.png") top right no-repeat;
+            background-size: cover;
+        }
+        .text-yellow{
+            color: #FADC72;
+        }
+        .banner-text{
+            display: flex;
+            color: #fff;
+            flex-direction: column;
+            justify-content: center;
+            h3{
+                font-size: 2.5em;
+                text-transform: uppercase;
+                padding: 0;
+                margin: 5px 0;
+                font-weight: bold;
+            }
+            h4{
+                font-size: 1.5em;
+                text-transform: uppercase;
+                padding: 0;
+                margin: 0;
+                font-weight: bold;
+                line-height: 24px;
+            }
+            p{
+                font-size: 16px;
+                padding: 0;
+                margin: 0;
+            }
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        &.banner-2{
+            h3{
+                font-size: 2em;
+            }
+        }
+    }
 </style>
 
