@@ -35,7 +35,7 @@
                     />
                 </div>
 
-                <div class="row product-grid margin-bottom-15">
+                <div class="row product-grid margin-bottom-30">
                     <div class="col-12">
                         <c-heading-bar name="Summer Sale" :showArrows="true" :showBackground="true" />
                     </div>
@@ -47,7 +47,7 @@
                     />
                 </div>
 
-                <div class="row product-grid">
+                <div class="row product-grid margin-bottom-30">
                     <div class="col-12">
                         <c-heading-bar>
                             <template slot="heading-tabs">
@@ -64,27 +64,79 @@
                         </c-heading-bar>
                     </div>
                     <div class="col-12">
-                        <div class="filter-blk">
-                            <div class="d-flex align-items-center">
-                                <c-dropdown id="test" name="Filter by Genre" :showBg="true">
-                                    <a href="#3">RPG</a>
-                                    <a href="#3">ACTION</a>
-                                    <a href="#3">Cars</a>
-                                </c-dropdown>
-                                <c-searcher customClass="mb-0" />
+                        <div class="block-bg block-gradient">
+                            <div class="filter-blk">
+                                <div class="d-flex align-items-center">
+                                    <c-dropdown id="test" name="Filter by Genre" :showBg="true">
+                                        <a href="#3">RPG</a>
+                                        <a href="#3">ACTION</a>
+                                        <a href="#3">Cars</a>
+                                    </c-dropdown>
+                                    <c-searcher customClass="mb-0" />
+                                </div>
+                                <c-button status="info"  :icon_hide="true">All New Releases</c-button>
                             </div>
-                            <c-button status="info"  :icon_hide="true">All New Releases</c-button>
+                            <c-game-grid
+                                :itemInRow=2
+                                :showRating=false
+                                :showTime=true
+                                v-bind:items="new_games"
+                                itemBg="transparent"
+                            ></c-game-grid>
+                            <c-load-more />
                         </div>
-                        <c-game-grid
-                            :itemInRow=2
-                            :showRating=false
-                            :showTime=true
-                            v-bind:items="new_games"
-                            itemBg="transparent"
-                        ></c-game-grid>
-                        <c-load-more />
                     </div>
                 </div>
+
+                <div class="row margin-bottom-30">
+                    <div class="col-12">
+                        <c-heading-bar>
+                            <template slot="heading-tabs">
+                                <a href="#3" class="active">Top 10 Items</a>
+                                <a href="#3">Most Wanted</a>
+                                <a href="#3">Top 10 Prices</a>
+                            </template>
+                            <template slot="additional-action">
+                                <c-heading-bar-fields name="Trending" @click_up=""  @click_down="" />
+                                <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" @click_up=""  @click_down="" />
+                            </template>
+                        </c-heading-bar>
+                        <div class="block-bg">
+                            <div class="filter-blk">
+                                <div class="d-flex align-items-center">
+                                    <c-dropdown id="test2" name="Filter by Genre" :showBg="true">
+                                        <a href="#3">RPG</a>
+                                        <a href="#3">ACTION</a>
+                                        <a href="#3">Cars</a>
+                                    </c-dropdown>
+                                    <c-searcher customClass="mb-0" />
+                                </div>
+                                <c-button status="info"  :icon_hide="true">All New Releases</c-button>
+                            </div>
+                            <div class="d-flex justify-content-between flex-wrap">
+                                <div class="w-50" v-for="(item, index) in assets" :key="index">
+                                    <c-assets-list-item
+                                        :item="item"
+                                        :isTransparent="true">
+                                <span class="mr-3">
+                                    <i class="fas fa-box"></i>
+                                    {{ item.count }}
+                                </span>
+                                        <span class="mr-3">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    {{ item.price }}
+                                </span>
+                                        <span class="mr-3">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    3.45
+                                </span>
+                                    </c-assets-list-item>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <c-curators-reviews
                     :reviews="curators_reviews"
@@ -119,6 +171,7 @@ export default {
         'c-dropdown': () => import('@/ui/components/dropdown-menu/type-2'),
         'c-searcher': () => import('@/ui/components/searcher'),
         'c-load-more': () => import('@/ui/components/buttons/load-more'),
+        'c-assets-list-item': () => import('@/ui/components/assets-list-item/item'),
     },
     data() {
         const curator_review = {
@@ -231,6 +284,56 @@ export default {
                     },
                     starsCount: 4,
                     moreLink: "#3"
+                }
+            ],
+            assets: [
+                {
+                    title: 'Magic Plate Armor',
+                    price: '1.99',
+                    count: '350.00',
+                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
+                },
+                {
+                    title: 'Magic Plate Armor',
+                    price: '1.99',
+                    count: '350.00',
+                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
+                },
+                {
+                    title: 'Magic Plate Armor',
+                    price: '1.99',
+                    count: '350.00',
+                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
+                },
+                {
+                    title: 'Magic Plate Armor',
+                    price: '1.99',
+                    count: '350.00',
+                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
+                },
+                {
+                    title: 'Magic Plate Armor',
+                    price: '1.99',
+                    count: '350.00',
+                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
+                },
+                {
+                    title: 'Magic Plate Armor',
+                    price: '1.99',
+                    count: '350.00',
+                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
+                },
+                {
+                    title: 'Magic Plate Armor',
+                    price: '1.99',
+                    count: '350.00',
+                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
+                },
+                {
+                    title: 'Magic Plate Armor',
+                    price: '1.99',
+                    count: '350.00',
+                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 }
             ],
         }
@@ -355,12 +458,26 @@ export default {
     }
 }
 
-    .filter-blk{
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
+.block-bg{
+    background: rgba(0, 0, 0, .2);
+    margin: -20px 0 0;
+    width: 100%;
+    padding: 15px;
+    &.block-gradient{
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+88,000000+100&0.65+91,0+100 */
+        background: -moz-linear-gradient(top, rgba(0,0,0,0.2) 88%, rgba(0,0,0,0.2) 91%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(0,0,0,0.2) 88%,rgba(0,0,0,0.2) 91%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(0,0,0,0.2) 88%,rgba(0,0,0,0.2) 91%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
     }
+}
+
+.filter-blk{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
 </style>
 

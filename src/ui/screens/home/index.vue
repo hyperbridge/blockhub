@@ -70,7 +70,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 margin-bottom-30">
+                    <div class="col-12 margin-bottom-30 d-none">
                         <c-heading-bar name="Trending Projects" :showArrows="false"
                                        :showBackground="false"></c-heading-bar>
                         <div class="img_slider w-100">
