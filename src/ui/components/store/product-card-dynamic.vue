@@ -8,7 +8,7 @@
             <transition name="fade">
                 <img v-if="!display_preview" class="card-img-top" :src="product.images.medium_tile" />
                 <template v-else>
-                    <video v-if="product.videos.length" class="card-img-top" width="100%" autoplay>
+                    <video v-if="product.videos.length && autoplay" class="card-img-top" width="100%" autoplay>
                         <source :src="product.videos[0]" type="video/mp4">
                     </video>
                     <transition-group tag="div" name="slide-left" v-else>
@@ -54,7 +54,7 @@ export default {
             clearTimeout(this.timeout);
             this.timeout = setTimeout(() => {
                 if (!status) clearInterval(this.interval);
-                if (status && !this.display_preview && !this.product.videos.length) this.slider();
+                if (status && !this.display_preview && (!this.product.videos.length || !this.autoplay)) this.slider();
                 this.display_preview = status;
             }, status ? 250 : 0);
         },
@@ -63,6 +63,11 @@ export default {
                 const { current_image, product: { images }} = this;
                 this.current_image = current_image === images.preview.length - 1 ? 0 : current_image + 1;
             }, 1600);
+        }
+    },
+    computed: {
+        autoplay() {
+            return this.$store.state.user.settings.autoplay;
         }
     }
 }

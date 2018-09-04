@@ -1,7 +1,6 @@
 <template>
     <component
         :is="tag"
-        :type="type"
         class="c-btn"
         :class="[status, 'c-btn-' + size ]"
         @click="$emit('click')"
@@ -28,7 +27,6 @@
                 type: String,
                 default: 'a',
             },
-            type: String,
             icon: String,
             icon_hide: Boolean,
             status: {
@@ -46,7 +44,7 @@
                 return this.$options.filters.statusIcon(this.status);
             }
         },
-        /* these filters are accessible via Vue instance, and were added only for storybook support */
+        /* these filters are accessible via Vue instance and were added only for storybook support */
         filters: {
             statusIcon(status) {
                 const getClass = status => {
@@ -62,7 +60,7 @@
                     }
                 }
                 const statusClass = getClass(status);
-                return statusClass.length ?  'fa-' + statusClass : '';
+                return statusClass.length ? 'fa-' + statusClass : '';
             }
         }
     }
@@ -74,12 +72,11 @@
         align-items: center;
         padding: 0px 8px;
         line-height: 24px;
-        font-size: 13px;
         font-weight: bold;
-        border: none;
+        border-style: none;
         border-radius: 5px;
         box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
-        text-transform: uppercase;
+        text-decoration: none;
         cursor: pointer;
         &:active,
         &:focus {

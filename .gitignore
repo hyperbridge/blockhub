@@ -53,3 +53,5 @@ yarn-error.log*
 # System Files
 .DS_Store
 Thumbs.db
+.bitmap
+bit.json

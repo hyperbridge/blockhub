@@ -115,8 +115,8 @@
                                 :showTime=true
                                 v-bind:items="new_games"
                                 itemBg="transparent"
-                            ></c-game-grid>
-                            <c-load-more />
+                            />
+                            <c-content-navigation />
                         </div>
                     </div>
                 </div>
@@ -223,6 +223,8 @@
 </template>
 
 <script>
+import { Carousel, Slide } from 'vue-carousel';
+
 const updateLandingImage = function() {
     const frontpage_product = this.$store.state.marketplace.frontpage_product
 
@@ -246,10 +248,12 @@ export default {
         'c-game-grid': () => import('@/ui/components/games-grid/with-description'),
         'c-dropdown': () => import('@/ui/components/dropdown-menu/type-2'),
         'c-searcher': () => import('@/ui/components/searcher'),
-        'c-load-more': () => import('@/ui/components/buttons/load-more'),
+        'c-content-navigation': () => import('@/ui/components/content-navigation'),
         'c-assets-list-item': () => import('@/ui/components/assets-list-item/item'),
         'c-news-list-navigation': () => import('@/ui/components/news-list/navigation'),
-        'c-news-list-articles': () => import('@/ui/components/news-list/articles')
+        'c-news-list-articles': () => import('@/ui/components/news-list/articles'),
+        'c-carousel': Carousel,
+        'c-slide': Slide
     },
     data() {
         const curator_review = {
@@ -497,19 +501,6 @@ export default {
     methods: {
         filterTag(tagName) {
             alert(tagName)
-        },
-        prevClick(carousel){
-            carousel.goToPage(carousel.getPreviousPage());
-        },
-        nextClick(carousel){
-            carousel.goToPage(carousel.getNextPage());
-        },
-        showArrowsState(el, count){
-            if ( el.length > count){
-                return true
-            } else {
-                return false
-            }
         }
     },
     mounted: updateLandingImage,

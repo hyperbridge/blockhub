@@ -3,9 +3,13 @@
         <h5 class="sale-box__title">
             {{ sale_box.title }}
         </h5>
-        <a :href="sale_box.link" class="sale-box__link" data-toggle="modal" data-target="#purchase-modal">
-            Get for ${{ sale_box.price }}
-        </a>
+        <c-button
+            :href="sale_box.link"
+            status="success"
+            data-toggle="modal"
+            data-target="#purchase-modal"
+            icon_hide
+        >Get for ${{ sale_box.price }}</c-button>
     </div>
 </template>
 
@@ -13,7 +17,10 @@
 export default {
     name: 'sale-box',
     props: {
-        sale_box: Object
+        sale_box: {
+            type: Object,
+            required: true
+        }
     }
 }
 </script>
@@ -34,16 +41,8 @@ export default {
         padding: 0;
         margin: 0;
     }
-    .sale-box__link{
-        background: #5EA72B;
-        color: #fff;
+    .c-btn {
         font-size: 16px;
-        font-weight: bold;
-        border-radius: 5px;
-        padding: 8px 13px;
-        text-decoration: none;
-        &:hover{
-            background: #508e25
-        }
+        padding: 8px 13px !important;
     }
 </style>

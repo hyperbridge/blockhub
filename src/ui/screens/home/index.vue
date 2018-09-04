@@ -42,8 +42,9 @@
 
                         <c-assets-list-item
                             :items="assets"
-                            itemInRow="2">
-                        </c-assets-list-item>
+                            itemInRow="2"
+                        />
+                        <c-content-navigation/>
 
                     </div>
                     <div class="col-12 margin-bottom-30">
@@ -121,7 +122,8 @@
             'c-game-grid': () => import('@/ui/components/games-grid/with-description'),
             'c-projects-card': () => import('@/ui/components/projects/card'),
             'c-news-list-navigation': () => import('@/ui/components/news-list/navigation'),
-            'c-news-list-articles': () => import('@/ui/components/news-list/articles')
+            'c-news-list-articles': () => import('@/ui/components/news-list/articles'),
+            'c-content-navigation': () => import('@/ui/components/content-navigation')
         },
         data: () => ({
             assets: [

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{ 'disable-animations': !disableAnimations }">
     <router-view></router-view>
     <div class="fixed-panel invert" id="fixed_panel">
         <div class="fixed-panel__content scroll">
@@ -37,7 +37,7 @@
           </a>
 
           <a href="/#/profile/1/realms">See More...</a>
-          
+
           <hr />
 
           <a href="/#/developer">
@@ -86,7 +86,7 @@
               <span class="icon fa fa-list-alt"></span>
               <span class="text">Activity Log</span>
           </a>
-          
+
           <hr />
 
           <a href="/#/settings">
@@ -166,6 +166,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
   export default {
     name: 'app',
     props: ['data'],
@@ -186,12 +188,21 @@
         }
       })
     },
+    computed: {
+        disableAnimations() {
+            return this.$store.state.user.settings.animations;
+        }
+    },
+    methods: mapActions(['loadSettings']),
+    mounted() {
+        this.loadSettings();
+    },
     watch: {
       $route (to, from) {
           $('body').removeClass('show-sidebar')
           $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-cog')
       }
-    } 
+    }
   }
 </script>
 
@@ -289,5 +300,11 @@
 </style>
 
 <style lang="scss">
-
+    .disable-animations {
+        * {
+            transition: none !important;
+            transform: none !important;
+            animation: none !important;
+        }
+    }
 </style>
