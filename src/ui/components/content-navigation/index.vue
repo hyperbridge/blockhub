@@ -3,24 +3,26 @@
         <c-pagination v-if="paginationMode"
             pages="13"
         />
-        <div v-else>
-            <a
-                @click="$emit('loadMore')"
-                class="load-more"
-            >
-                <div class="load-more__line"></div>
-                <strong class="load-more__text">LOAD MORE</strong>
-                <div class="load-more__line"></div>
-            </a>
-        </div>
+        <c-load-more v-else
+            @click="$emit('loadMore')"
+        />
     </div>
 </template>
 
 <script>
     export default {
         name: 'content-navigation',
+        props: {
+            pagination: {
+                type: Object
+            },
+            load_more: {
+                type: Object
+            }
+        },
         components: {
-            'c-pagination': () => import('@/ui/components/pagination')
+            'c-pagination': () => import('@/ui/components/pagination'),
+            'c-load-more': () => import('@/ui/components/buttons/load-more')
         },
         computed: {
             paginationMode() {
@@ -33,26 +35,7 @@
 <style lang="scss" scoped>
     .content-navigation-wrapper {
         margin: 15px 0;
-    }
-
-    .load-more {
         display: flex;
-        align-items: center;
-        border-style: none;
-        background-color: transparent;
-        cursor: pointer;
-        &__line {
-            background-color: #A2A3BC;
-            height: 2px;
-            flex: 3;
-            width: 100%;
-        }
-        &__text {
-            flex: 2.5;
-            font-size: 15px;
-            color: #A2A3BC;
-            text-align: center;
-            margin: 0 5px;
-        }
+        justify-content: center;
     }
 </style>

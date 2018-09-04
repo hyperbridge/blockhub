@@ -105,8 +105,8 @@
                                 :showTime=true
                                 v-bind:items="new_games"
                                 itemBg="transparent"
-                            ></c-game-grid>
-                            <c-load-more />
+                            />
+                            <c-content-navigation />
                         </div>
                     </div>
                 </div>
@@ -178,6 +178,7 @@
                                     </c-assets-list-item>
                                 </div>
                             </div>
+                            <c-content-navigation />
                         </div>
                     </div>
                 </div>
@@ -236,7 +237,7 @@ export default {
         'c-game-grid': () => import('@/ui/components/games-grid/with-description'),
         'c-dropdown': () => import('@/ui/components/dropdown-menu/type-2'),
         'c-searcher': () => import('@/ui/components/searcher'),
-        'c-load-more': () => import('@/ui/components/buttons/load-more'),
+        'c-content-navigation': () => import('@/ui/components/content-navigation'),
         'c-assets-list-item': () => import('@/ui/components/assets-list-item/item'),
         'c-news-list-navigation': () => import('@/ui/components/news-list/navigation'),
         'c-news-list-articles': () => import('@/ui/components/news-list/articles')
