@@ -173,7 +173,14 @@
                     "id": "1",
                     "name": "aaa"
                 }
-            ]
+            ],
+            "settings": {
+                "client": {
+                    "animations": true,
+                    "autoplay": true,
+                    "pagination": true
+                }
+            }
         }
     },
     "funding": {

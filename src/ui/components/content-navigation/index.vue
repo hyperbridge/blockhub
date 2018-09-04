@@ -1,8 +1,7 @@
 <template>
     <div class="content-navigation-wrapper">
         <c-pagination v-if="paginationMode"
-            pages="4"
-            pages_show="3"
+            pages="13"
         />
         <div v-else>
             <a
