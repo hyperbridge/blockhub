@@ -23,6 +23,7 @@
     "node-sass": "^4.9.0",
     "ts-loader": "^4.4.1",
     "vue": "^2.5.2",
+    "vue-carousel": "^0.11.0",
     "vue-router": "^3.0.1",
     "vue-snotify": "^3.2.1"
   },

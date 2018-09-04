@@ -40,13 +40,14 @@
                 <div class="row product-grid margin-bottom-30">
                     <div class="col-12">
                         <c-heading-bar name="Summer Sale" :showArrows="true" :showBackground="true" />
+
+                        <carousel :perPage="3" :paginationEnabled="false">
+                            <slide v-for="(product, index) in sale_products" :key="index">
+                                <c-product-card :product="product" />
+                            </slide>
+                        </carousel>
                     </div>
 
-                    <c-product-card
-                        v-for="(product, index) in sale_products"
-                        :key="index"
-                        :product="product"
-                    />
                 </div>
 
                 <div class="row margin-bottom-70 margin-top-40 align-items-stretch">
@@ -665,6 +666,9 @@ export default {
                 font-size: 2em;
             }
         }
+    }
+    .VueCarousel {
+        width: 100%;
     }
 </style>
 

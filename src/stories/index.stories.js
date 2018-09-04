@@ -498,24 +498,36 @@ storiesOf('Buttons', module)
             <c-button @click="testFunction">
                 default
             </c-button>
+            <c-button size="md">
+                default
+            </c-button>
+            <c-button size="lg">
+                default
+            </c-button>
         `)
     }))
     .add('info', () => ({
         components: {'c-button': Buttons},
         template: injectButtonTemplate(`
             <c-button status="info">info</c-button>
+            <c-button status="info" size="md">info</c-button>
+            <c-button status="info" size="lg">info</c-button>
         `)
     }))
     .add('success', () => ({
         components: {'c-button': Buttons},
         template: injectButtonTemplate(`
             <c-button status="success">success</c-button>
+            <c-button status="success" size="md">success</c-button>
+            <c-button status="success" size="lg">success</c-button>
         `)
     }))
     .add('danger', () => ({
         components: {'c-button': Buttons},
         template: injectButtonTemplate(`
             <c-button status="danger">danger</c-button>
+            <c-button status="danger" size="md">danger</c-button>
+            <c-button status="danger" size="lg">danger</c-button>
         `)
     }))
     .add('[options] - swap order', () => ({

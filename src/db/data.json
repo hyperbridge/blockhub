@@ -767,7 +767,8 @@
                 "author": "0x0",
                 "system_tags": [
                     "game",
-                    "upcoming"
+                    "upcoming",
+                    "sale"
                 ],
                 "author_tags": [
                     "rpg"
@@ -820,7 +821,8 @@
                 "downloads": 20,
                 "system_tags": [
                     "game",
-                    "new"
+                    "new",
+                    "sale"
                 ],
                 "author": "0x0",
                 "author_tags": [
@@ -1098,7 +1100,8 @@
                 "system_tags": [
                     "game",
                     "featured",
-                    "frontpage"
+                    "frontpage",
+                    "sale"
                 ],
                 "author": "0x0",
                 "author_tags": [
