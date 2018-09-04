@@ -78,8 +78,15 @@ export default {
     border: 1px solid rgba(70, 70, 70, 0.5);
     padding: 7px;
     border-radius: 5px;
+    &:hover {
+        will-change: transform;
+        transform: perspective(300px) rotateX(0deg) rotateY(0deg) scale(1.05);
+        box-shadow: 0 0 35px rgba(0, 0, 0, .2);
+        transition: transform 200ms cubic-bezier(0.34, 1.01, 0.8, 0.24);
+    }
     a {
         color: #fff;
+        text-decoration: none;
         &.card-img-top {
             position: relative;
             display: block;

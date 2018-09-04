@@ -26,26 +26,34 @@ export default {
 
 <style lang="scss" scoped>
     .product-grid__item {
-        padding: 8px 6px;
+        transition: transform .3s ease;
+        flex: 0 0 calc(33% - 20px);
+        margin: 10px;
+        box-sizing: border-box;
+        background: rgba(0, 0, 0, 0.13);
+        border: 1px solid rgba(70, 70, 70, 0.5);
+        padding: 7px;
         border-radius: 5px;
         &:hover {
             will-change: transform;
-            transform: perspective(300px) rotateX(0deg) rotateY(0deg) scale(1.03);
+            transform: perspective(300px) rotateX(0deg) rotateY(0deg) scale(1.05);
             box-shadow: 0 0 35px rgba(0, 0, 0, .2);
             transition: transform 200ms cubic-bezier(0.34, 1.01, 0.8, 0.24);
         }
-        h4 {
+        a {
             color: #fff;
+            text-decoration: none;
+            &.card-img-top {
+                position: relative;
+                display: block;
+            }
+        }
+        h4 {
             font-weight: bold;
             font-size: 20px;
             padding: 13px 0;
-            a {
-                color: #fff;
-                text-decoration: none;
-            }
         }
         .product-tags {
-            margin-top: 10px;
             margin-bottom: 0;
         }
     }
