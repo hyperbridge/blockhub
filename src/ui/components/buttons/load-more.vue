@@ -1,7 +1,7 @@
 <template>
     <div class="load-more">
         <div class="load-more__btn">
-            <a :href="href" @click="emit('click')"><slot>Read More</slot></a>
+            <a :href="href" @click="$emit('click')"><slot>Read More</slot></a>
         </div>
     </div>
 </template>
