@@ -1419,16 +1419,37 @@ storiesOf('News List', module)
             </div>
         `
     }))
-import Pagination from '../ui/components/pagination/index'
 
-storiesOf('Pagination(not finished)', module)
+import Pagination from '@/ui/components/pagination/index';
+
+storiesOf('Pagination', module)
     .add('default', () => ({
         components: {
             'c-pagination': Pagination
         },
         template: `
             <div class="row m-0 p-5">
-                <c-pagination total_page="10" />
+                <c-pagination pages="15" />
+            </div>
+        `
+    }))
+    .add('Limited to 5 pages', () => ({
+        components: {
+            'c-pagination': Pagination
+        },
+        template: `
+            <div class="row m-0 p-5">
+                <c-pagination pages="15" pages_show="5"/>
+            </div>
+        `
+    }))
+    .add('Debouncer', () => ({
+        components: {
+            'c-pagination': Pagination
+        },
+        template: `
+            <div class="row m-0 p-5">
+                <c-pagination pages="15" debounce="1000"/>
             </div>
         `
     }))
