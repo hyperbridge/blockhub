@@ -36,11 +36,11 @@
                                        @nextClick="nextClick($refs.demo_products_sl)" />
                     </div>
 
-                    <carousel :perPage="3" :paginationEnabled="false" ref="demo_products_sl" :loop="true">
-                        <slide v-for="(product, index) in demo_products" :key="index">
+                    <c-carousel :perPage="3" :paginationEnabled="false" ref="demo_products_sl" :loop="true">
+                        <c-slide v-for="(product, index) in demo_products" :key="index">
                             <c-product-card-dynamic :product="product" />
-                        </slide>
-                    </carousel>
+                        </c-slide>
+                    </c-carousel>
                 </div>
 
                 <div class="row product-grid margin-bottom-30">
@@ -52,11 +52,11 @@
                                        @nextClick="nextClick($refs.summer_sale)" />
                     </div>
 
-                        <carousel :perPage="3" :paginationEnabled="false" ref="summer_sale" :loop="true">
-                            <slide v-for="(product, index) in sale_products" :key="index">
+                        <c-carousel :perPage="3" :paginationEnabled="false" ref="summer_sale" :loop="true">
+                            <c-slide v-for="(product, index) in sale_products" :key="index">
                                 <c-product-card :product="product" />
-                            </slide>
-                        </carousel>
+                            </c-slide>
+                        </c-carousel>
 
                 </div>
 
@@ -501,6 +501,19 @@ export default {
     methods: {
         filterTag(tagName) {
             alert(tagName)
+        },
+        prevClick(carousel){
+            carousel.goToPage(carousel.getPreviousPage());
+        },
+        nextClick(carousel){
+            carousel.goToPage(carousel.getNextPage());
+        },
+        showArrowsState(el, count){
+            if ( el.length > count){
+                return true
+            } else {
+                return false
+            }
         }
     },
     mounted: updateLandingImage,
