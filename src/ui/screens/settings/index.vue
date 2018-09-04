@@ -39,12 +39,40 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
                             <c-switch
-                                :value="paginationMode"
+                                :value="settings.pagination"
                                 @change="updateSettings('pagination')"
                             />
                             <div class="text">
                                 <h4>Pagination Mode</h4>
                                 <p>Turn on if you want to switch between <i>pagination</i> or <i>load more</i> navigation mode</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c-block-1>
+            <c-block-1 title="Performance Settings">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="settings_item">
+                            <c-switch
+                                @change="updateSettings('animations')"
+                                :value="settings.animations"
+                            />
+                            <div class="text">
+                                <h4>Enable animations</h4>
+                                <p>Turn on if you want to enable animations and transitions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="settings_item">
+                            <c-switch
+                                @change="updateSettings('autoplay')"
+                                :value="settings.autoplay"
+                            />
+                            <div class="text">
+                                <h4>Enable autoplay</h4>
+                                <p>Turn on if you want to play videos automatically</p>
                             </div>
                         </div>
                     </div>
@@ -68,8 +96,8 @@ export default {
     },
     methods: mapActions(['updateSettings']),
     computed: {
-        paginationMode() {
-            return this.$store.state.user.settings.pagination;
+        settings() {
+            return this.$store.state.user.settings;
         }
     }
 }

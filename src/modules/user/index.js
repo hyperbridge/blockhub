@@ -2,6 +2,7 @@ import cookie from 'cookie';
 import * as db from '@/db';
 
 let timeout = null;
+let previousProperty = '';
 
 export default {
     state: {
@@ -43,8 +44,10 @@ export default {
         updateSettings({ commit, state, rootState }, property) {
             commit('UPDATE_SETTINGS', property);
 
-            clearTimeout(timeout);
+            if (previousProperty === property) clearTimeout(timeout);
+
             timeout = setTimeout(() => {
+                previousProperty = property;
                 // WIP
                 if (rootState.network.signed_in) {
                     const [accountName] = Object.keys(rootState.network.account);
@@ -53,7 +56,7 @@ export default {
                 } else {
                     document.cookie = cookie.serialize('settings_' + property, state.settings[property], { maxAge: 60 * 60 * 24 * 7 });
                 }
-            }, 1000);
+            }, 600);
         }
     }
 }

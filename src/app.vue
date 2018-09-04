@@ -301,7 +301,7 @@ import { mapActions } from 'vuex';
 
 <style lang="scss">
     .disable-animations {
-        * {
+        *, *::before, *::after {
             transition: none !important;
             transform: none !important;
             animation: none !important;

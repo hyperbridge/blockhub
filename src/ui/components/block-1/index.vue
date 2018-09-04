@@ -8,13 +8,16 @@
 </template>
 
 <script>
-    import HeadingBar from '../heading-bar/index'
-export default {
-    props: ['title', 'bClass'],
-    components: {
-        'c-heading-bar': HeadingBar
+    export default {
+        name: 'block-1',
+        props: {
+            title: String,
+            bClass: String
+        },
+        components: {
+            'c-heading-bar': () => import('@/ui/components/heading-bar')
+        }
     }
-}
 </script>
 
 <style lang="scss" scoped>
@@ -25,6 +28,7 @@ export default {
         position: relative;
         color: #fff;
         overflow: hidden;
+        margin-bottom: 40px;
     }
     .block__content{
         overflow: hidden;

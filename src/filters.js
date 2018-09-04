@@ -33,4 +33,5 @@ Vue.filter('statusIcon', status => {
     return statusClass.length ?  'fa-' + statusClass : '';
 });
 
+Vue.filter('upperFirstChar', (value) => value.charAt(0).toUpperCase() + value.substring(1, value.length));
 
