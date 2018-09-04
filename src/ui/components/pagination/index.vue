@@ -61,6 +61,10 @@
                 type: Number,
                 default: 0
             },
+            pages_show: {
+                type: Number,
+                default: 8
+            },
             debounce: {
                 type: Number,
                 default: 0
@@ -91,19 +95,20 @@
         },
         computed: {
             visible_pages() {
-                const { active_page, pages, base_pages } = this;
+                const { active_page, pages, base_pages, pages_show } = this;
+                const mid_val = Math.round(pages_show / 2);
                 const numbers = [];
 
-                if (active_page > 4 && pages > 8) {
-                    let cur_page = active_page + 4 >= pages ? pages - 8 : active_page - 4;
-                    for (let i = 0; i < 8; i++) {
+                if (active_page > mid_val && pages > pages_show) {
+                    let cur_page = active_page + mid_val >= pages ? pages - pages_show : active_page - mid_val;
+                    for (let i = 0; i < pages_show; i++) {
                         cur_page++;
                         numbers.push(cur_page);
                     }
                 } else {
-                    const max_number = pages < 8 ? pages : 9;
-                    for (let i = 1; i < max_number; i++) {
-                        numbers.push(i);
+                    const max_number = pages < pages_show ? pages : pages_show;
+                    for (let i = 0; i < max_number; i++) {
+                        numbers.push(i + 1);
                     }
                 }
                 return numbers;
