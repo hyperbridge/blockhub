@@ -6,8 +6,8 @@ import Snotify, { SnotifyPosition } from 'vue-snotify'
 import app from './app'
 import router from './router'
 import store, { initializer } from './store'
-import VueCarousel from 'vue-carousel';
 import './filters.js';
+import './css/styles.scss';
 
 Vue.config.productionTip = false
 
@@ -17,9 +17,8 @@ Vue.use(Snotify, {
   }
 })
 
-Vue.use(VueCarousel);
 
-import './css/styles.scss'
+
 
 const data = {
   user: 'something'

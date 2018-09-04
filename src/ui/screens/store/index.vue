@@ -41,11 +41,11 @@
                     <div class="col-12">
                         <c-heading-bar name="Summer Sale" :showArrows="true" :showBackground="true" />
 
-                        <carousel :perPage="3" :paginationEnabled="false">
-                            <slide v-for="(product, index) in sale_products" :key="index">
+                        <c-carousel :perPage="3" :paginationEnabled="false">
+                            <c-slide v-for="(product, index) in sale_products" :key="index">
                                 <c-product-card :product="product" />
-                            </slide>
-                        </carousel>
+                            </c-slide>
+                        </c-carousel>
                     </div>
 
                 </div>
@@ -214,6 +214,8 @@
 </template>
 
 <script>
+import { Carousel, Slide } from 'vue-carousel';
+
 const updateLandingImage = function() {
     const frontpage_product = this.$store.state.marketplace.frontpage_product
 
@@ -240,7 +242,9 @@ export default {
         'c-content-navigation': () => import('@/ui/components/content-navigation'),
         'c-assets-list-item': () => import('@/ui/components/assets-list-item/item'),
         'c-news-list-navigation': () => import('@/ui/components/news-list/navigation'),
-        'c-news-list-articles': () => import('@/ui/components/news-list/articles')
+        'c-news-list-articles': () => import('@/ui/components/news-list/articles'),
+        'c-carousel': Carousel,
+        'c-slide': Slide
     },
     data() {
         const curator_review = {
