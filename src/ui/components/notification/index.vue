@@ -1,5 +1,6 @@
 <template>
     <transition name="custom-classes-transition"
+                mode="out-in"
                 leave-active-class="animated bounceOutRight">
         <div
             class="notif"
@@ -63,7 +64,6 @@
 </script>
 
 <style lang="scss" scoped>
-
 
     .notif {
         padding: 0;

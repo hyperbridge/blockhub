@@ -383,7 +383,7 @@ export default {
     }
 
     .owl-carousel .owl-stage {
-        transition: unset !important;
+        /*transition: unset !important;*/
     }
 
 </style>

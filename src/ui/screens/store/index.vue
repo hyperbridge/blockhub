@@ -213,7 +213,6 @@
                     </div>
                 </div>
 
-
                 <c-curators-reviews
                     :reviews="curators_reviews"
                 />
