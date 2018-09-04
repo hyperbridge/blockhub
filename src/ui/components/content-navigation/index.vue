@@ -1,6 +1,8 @@
 <template>
     <div class="content-navigation-wrapper">
-        <c-pagination v-if="paginationMode" />
+        <c-pagination v-if="paginationMode"
+            pages="10"
+        />
         <div v-else>
             <a
                 @click="$emit('loadMore')"
