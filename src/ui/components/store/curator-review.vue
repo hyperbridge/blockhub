@@ -12,7 +12,7 @@
             <p v-if="read_more" :key="1">{{ review.text }}</p>
             <p v-else>{{ review.text.substring(0, 240) }}...</p>
         </transition>
-        <a href="#" @click.prevent="read_more = !read_more">
+        <a href="#" @click.prevent="read_more = !read_more" class="text-white font-weight-bold">
             {{ read_more ? 'SHOW LESS' : 'MORE...' }}
         </a>
         <h4 class="curator-review__more-header">More curated by {{ review.author.name }}</h4>
@@ -25,9 +25,12 @@
                 <img :src="sub_review.game.img" class="sub-review__img"/>
                 <div class="sub-review__details">
                     <h5 class="margin-bottom-5">
-                        <a href="#">{{ sub_review.game.title }}</a>
+                        <a href="#" class="text-white font-weight-bold">{{ sub_review.game.title }}</a>
                     </h5>
-                    <div><c-rating-stars :number="sub_review.rate"/></div>
+                    <div class="text-white font-weight-bold">
+                        <!--<c-rating-stars :number="sub_review.rate"/>-->
+                        <span style="font-size: 22px">{{ sub_review.rate }}</span>
+                    </div>
                 </div>
             </li>
         </ul>
@@ -94,8 +97,8 @@ export default {
 
 .sub-review {
     display: flex;
-    align-items: center;
     margin: 7px 0;
+    align-items: flex-start;
 }
 
 .sub-review__img {

@@ -1,6 +1,5 @@
 <template>
     <header class="app-header">
-        <c-loading-bar class="app-header__loading" />
 
         <div class="app-header__top-bar desktop-draggable">
             <div class="app-header__buttons" v-if="is_desktop">
@@ -27,7 +26,9 @@
             </a>
         </div>
         <div class="app-header__shadow"></div>
-        <a class="app-header__bar-center" href="/#/home"><!-- add icons --></a>
+        <a class="app-header__bar-center" href="/#/home">
+            <c-loading-logo :isLoading="isLoader" />
+        </a>
         <div class="app-header__bar-right">
             <a href="javascript:;" data-action="fixedpanel-toggle">
                 <span class="fa fa-cog"></span>
@@ -121,11 +122,11 @@
 
 <script>
 
-    import LoadingBar from '../loading-bar/index'
+    import LoadingBar from '../loading-bar/logo-loader'
 export default {
     props: ['isLoader'],
     components: {
-        'c-loading-bar': LoadingBar
+        'c-loading-logo': LoadingBar
     },
     data() {
         return {
@@ -244,8 +245,6 @@ export default {
         font-weight: bold;
         font-size: 11px;
     }
-
-    
 
     .btn-block {
         position: relative;
@@ -579,7 +578,8 @@ export default {
         margin: 30px auto 0 auto;
         height: 50px;
         width: 258px;
-        background: url(../../../assets/SVG/logo.svg) no-repeat center center/135px, url(../../../assets/SVG/center-bar.svg) no-repeat top left;
+        padding: 0px 55px 0px;
+        background: url(../../../assets/SVG/center-bar.svg) no-repeat top left;
         z-index: 14;
     }
 

@@ -11,14 +11,16 @@
                 </div>
                 <div class="info">
                     <h5>{{ item.title }}</h5>
-                    <span class="float-left price">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    {{ item.price }}
-                                </span>
-                    <span class="float-right box">
-                                    <i class="fas fa-box"></i>
-                                    {{ item.count }}
-                                </span>
+                    <slot>
+                        <span class="float-left price">
+                            <i class="fas fa-dollar-sign"></i>
+                            {{ item.price }}
+                        </span>
+                        <span class="float-right box">
+                            <i class="fas fa-box"></i>
+                            {{ item.count }}
+                        </span>
+                    </slot>
                 </div>
             </div>
         </div>
@@ -27,7 +29,7 @@
 
 <script>
     export default {
-        props: ['items', 'itemInRow', 'showArrows']
+        props: ['items', 'itemInRow']
     }
 </script>
 
@@ -57,15 +59,14 @@
         .thumb {
             display: inline-block;
             float: left;
-            width: 25%;
             img {
-                width: 100%;
                 height: auto;
+                width: 60px;
             }
         }
         .info {
             display: inline-block;
-            width: 70%;
+            width: calc( 100% - 80px );
             float: right;
             h5{
                 color: #fff;

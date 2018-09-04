@@ -1,12 +1,10 @@
 <template>
-    <div class="col-12 col-lg-4">
-        <div class="card invert product-grid__item">
-            <div class="card-body padding-0">
-                <a :href="`/#/product/${product.id}`"><img class="card-img-top" :src="product.images.medium_tile" /></a>
-                <h4><a :href="`/#/product/${product.id}`">{{ product.name }}</a></h4>
-                <p class="card-text" hidden>{{ product.short_description }} </p>
-                <c-tags :tags="product.author_tags.slice(0,3)" />
-            </div>
+    <div class="product-grid__item">
+        <div class="card-body padding-0">
+            <a :href="`/#/product/${product.id}`"><img class="card-img-top" :src="product.images.medium_tile" /></a>
+            <h4><a :href="`/#/product/${product.id}`">{{ product.name }}</a></h4>
+            <p class="card-text" hidden>{{ product.short_description }} </p>
+            <c-tags :tags="product.author_tags.slice(0,3)" />
         </div>
     </div>
 </template>

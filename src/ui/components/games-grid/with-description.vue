@@ -86,7 +86,6 @@
         align-items: stretch;
         background: #27283E;
         color: #fff;
-        padding: 8px;
         border-radius: 5px;
         overflow: hidden;
         position: relative;
@@ -95,7 +94,7 @@
             position: absolute;
             width: auto;
             bottom: 25px;
-            left: 8px;
+            left: 0px;
             padding: 2px 3px;
             background: rgba(0, 0, 0, .3);
             border-radius: 0 5px 5px 0;

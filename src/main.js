@@ -6,6 +6,7 @@ import Snotify, { SnotifyPosition } from 'vue-snotify'
 import app from './app'
 import router from './router'
 import store, { initializer } from './store'
+import VueCarousel from 'vue-carousel';
 import './filters.js';
 
 Vue.config.productionTip = false
@@ -15,6 +16,8 @@ Vue.use(Snotify, {
     position: SnotifyPosition.rightBottom
   }
 })
+
+Vue.use(VueCarousel);
 
 import './css/styles.scss'
 

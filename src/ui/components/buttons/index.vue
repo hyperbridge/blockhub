@@ -2,7 +2,7 @@
     <component
         :is="tag"
         class="c-btn"
-        :class="status"
+        :class="[status, 'c-btn-' + size ]"
         @click="$emit('click')"
     >
         <i
@@ -33,7 +33,11 @@
                 type: String,
                 default: 'default'
             },
-            swap_order: Boolean
+            swap_order: Boolean,
+            size: {
+                type: String,
+                default: 'sm'
+            }
         },
         computed: {
             inject_filter() {
@@ -88,6 +92,15 @@
         .swap_order {
             order: 2;
             margin: 0 0 0 3px;
+        }
+
+        &.c-btn-md{
+            padding: 3px 10px;
+            font-size: 16px;
+        }
+        &.c-btn-lg{
+            padding: 5px 13px;
+            font-size: 18px;
         }
 
         $statusColors: (

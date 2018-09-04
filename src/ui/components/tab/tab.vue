@@ -1,5 +1,5 @@
 <template>
-    <div class="tab-item" v-show="isActive">
+    <div class="tab-item" v-show="isActive" :class="{'bg-transparent' : transparentBg}">
         <div class="tab-item__container">
             <slot></slot>
         </div>
@@ -11,6 +11,7 @@
 
 <script>
     export default {
+        name: 'c-tab',
         props: {
             name: {
                 type: String,
@@ -21,6 +22,10 @@
                 default: false
             },
             showFooter : {
+                type: Boolean,
+                default: false
+            },
+            transparentBg:{
                 type: Boolean,
                 default: false
             }
@@ -54,6 +59,14 @@
             height: 15px;
             background: #3e3e5c;
             z-index: 10;
+        }
+        &.bg-transparent{
+            &:before,
+            .tab-item__container{
+                background: transparent;
+                box-shadow: none;
+            }
+
         }
     }
     .tab-item__container {

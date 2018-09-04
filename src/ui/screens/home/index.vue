@@ -24,7 +24,7 @@
                         </c-heading-bar>
 
                         <c-game-grid
-                            itemInRow=1
+                            :itemInRow=1
                             :showRating=false
                             :showTime=true
                             v-bind:items="new_games"
@@ -60,20 +60,18 @@
                         <div class="home-tabs">
                             <c-news-list-navigation
                                 :content_news="content_news"
-                                :key="index"
-                                :index="index+1"
                             />
                             <div class="tab-content">
                                 <c-news-list-articles
                                     v-for="(news, index) in content_news"
                                     :key="index"
                                     :news="news"
-                                    :index="index+1"
+                                    :index="index"
                                 />
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 margin-bottom-30">
+                    <div class="col-12 margin-bottom-30 d-none">
                         <c-heading-bar name="Trending Projects" :showArrows="false"
                                        :showBackground="false"></c-heading-bar>
                         <div class="img_slider w-100">

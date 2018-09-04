@@ -2,7 +2,7 @@
     <div class="additional-action margin-left-20" :class="customClass">
         <div class="text">
             {{ name }}
-            <i :class="icon"></i>
+            <i :class="icon" v-if="icon"></i>
         </div>
         <div class="arrow_container">
             <i class="fas fa-sort-up" @click="$emit('click_up')"></i>
@@ -24,7 +24,6 @@
         width: auto;
         align-items: center;
         font-size: 14px;
-        margin-top: 6px;
         color: #fff;
         .text {
             margin-right: 5px;
