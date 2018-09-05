@@ -76,6 +76,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 benchmark">
+                        <p>Page was rendered in <b :class="perfResults.grade">{{ renderTime }}</b> ms.</p>
+                        <p>{{ perfResults.text }}</p>
+                        <c-button @click="autoUpdateSettings">UPDATE SETTINGS AUTOMATICALLY</c-button>
+                    </div>
                 </div>
             </c-block-1>
         </div>
@@ -88,18 +93,67 @@ import { mapActions } from 'vuex';
 export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default'),
-        'c-block-1': () => import('@/ui/components/block-1')
+        'c-block-1': () => import('@/ui/components/block-1'),
+        'c-benchmark': () => import('@/ui/components/benchmark')
     },
     data() {
         return {
+            renderTime: 0
         }
     },
-    methods: mapActions(['updateSettings']),
+    methods: {
+        ...mapActions(['updateSettings']),
+        autoUpdateSettings() {
+            const { grade } = this.perfResults;
+            const { settings } = this;
+
+            const perfProps = ['autoplay', 'animations'];
+            const enableAll = boolean => perfProps.forEach(prop => {
+                if (settings[prop] != boolean) this.updateSettings(prop);
+            });
+
+            if (grade == 'good') {
+                enableAll(true);
+            } else if (grade == 'avg') {
+                if (!settings.autoplay) this.updateSettings('autoplay');
+                if (settings.animations) this.updateSettings('animations');
+            } else {
+                enableAll(false);
+            }
+        }
+    },
     computed: {
         settings() {
             return this.$store.state.user.settings;
+        },
+        perfResults() {
+            const { renderTime } = this;
+            const results = {
+                text: renderTime > 25 ?
+                    `There is no need to lower your settings` :
+                    `Click on button below to update your settings for higher performance`
+            };
+
+            if (renderTime > 100 && renderTime < 200) {
+                results.grade = 'avg';
+            } else if (renderTime > 200) {
+                results.grade = 'bad';
+            } else {
+                results.grade = 'good';
+            }
+
+            return results;
         }
+    },
+    created() {
+        this.renderTime = performance.now();
+    },
+    mounted() {
+        this.$nextTick(() => {
+            this.renderTime = Math.floor(performance.now() - this.renderTime);
+        });
     }
+
 }
 </script>
 
@@ -127,6 +181,17 @@ export default {
                 color: #C6C6D6;
                 font-weight: bold;
             }
+        }
+    }
+    .benchmark {
+        .good {
+            color: #27ae60;
+        }
+        .avg {
+            color: #e67e22;
+        }
+        .bad {
+            color: #e74c3c;
         }
     }
 </style>
