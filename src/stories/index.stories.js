@@ -620,7 +620,9 @@ storiesOf('Checkbox', module)
         `
     }));
 
-import Tooltips from '../ui/components/tooltips/index.vue'
+import Tooltips from '@/ui/components/tooltips';
+import TooltipUniversal from '@/ui/components/tooltips/universal';
+
 
 storiesOf('Tooltips', module)
     .add('dark', () => ({
@@ -681,6 +683,21 @@ storiesOf('Tooltips', module)
             </div>
         `
     }))
+    .add('universal (Not finished)', () => ({
+        components: { 'c-tooltip-universal': TooltipUniversal },
+        template: `
+            <div class="row col-6">
+                <c-tooltip-universal>
+                    12 23 23 wewewewewe
+                    <template slot="tooltip">
+                        <h1>909090909090909090909</h1>
+                    </template>
+                </c-tooltip-universal>
+            </div>
+        `
+    }))
+
+
 
 import ActivityChart from '../ui/components/activity-chart/index.vue'
 
@@ -1539,7 +1556,7 @@ storiesOf('Pagination', module)
         },
         template: `
             <div class="row m-0 p-5">
-                <c-pagination pages="15" />
+                <c-pagination :pages="15" />
             </div>
         `
     }))
@@ -1549,7 +1566,7 @@ storiesOf('Pagination', module)
         },
         template: `
             <div class="row m-0 p-5">
-                <c-pagination pages="15" pages_show="5"/>
+                <c-pagination :pages="15" :pages_show="5"/>
             </div>
         `
     }))
@@ -1559,7 +1576,7 @@ storiesOf('Pagination', module)
         },
         template: `
             <div class="row m-0 p-5">
-                <c-pagination pages="15" debounce="1000"/>
+                <c-pagination :pages="15" :debounce="1000"/>
             </div>
         `
     }))
