@@ -16,7 +16,7 @@ const updateState = () => {
     }
 
     const normalizedData = normalize(rawData, {
-        account: schema.account,
+        account: [schema.account],
         wallets: [schema.wallet],
         identities: [schema.identity]
     })
@@ -97,7 +97,7 @@ export const actions = {
     },
     checkInternetConnection(store, payload) {
         console.log('[BlockHub] Connection status: ' + JSON.stringify(store.state.connection))
-        
+
         if (!navigator.onLine) {
             store.state.connection.internet = false
             store.state.connection_message = "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection."

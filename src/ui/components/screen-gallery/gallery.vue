@@ -1,11 +1,16 @@
 <template>
-    <div class="screen-gallery">
+    <div
+        class="screen-gallery"
+        @mouseover="enableSlideshow(false)"
+        @mouseout="enableSlideshow(true)"
+    >
         <div class="screen-gallery__main-img">
             <i class="fas fa-expand"></i>
             <img
                 :src="images[active_item]"
                 @click="show_modal = true"
             />
+            <div v-if="run_slideshow" class="screen-gallery__progress-bar"></div>
         </div>
         <ul class="screen-gallery__thumb-nav">
             <li
@@ -50,13 +55,32 @@ export default {
         return {
             active_item: 0,
             show_modal: false,
-            show: true
+            interval: null,
+            run_slideshow: true
+        }
+    },
+    methods: {
+        slideshow() {
+            this.interval = setInterval(() => {
+                this.active_item < this.images.length - 1 ? this.active_item++ : this.active_item = 0;
+            }, 4000);
+        },
+        enableSlideshow(status) {
+            clearInterval(this.interval);
+            this.run_slideshow = status;
+            if (status) this.slideshow();
         }
     },
     computed: {
         images() {
             return [this.main, ...this.items];
         }
+    },
+    mounted() {
+        this.slideshow();
+    },
+    beforeDestroy() {
+        this.enableSlideshow(false);
     }
 }
 </script>
@@ -96,6 +120,13 @@ export default {
             height: 245px;
             transition: opacity .3s ease .1s;
         }
+        .screen-gallery__progress-bar {
+            height: 3px;
+            animation: progress 4s linear infinite;
+            background-color: rgba(255,255,255,.4);
+            position: absolute;
+            bottom: 0;
+        }
         &:hover {
             .fas {
                 opacity: 1;
@@ -129,5 +160,18 @@ export default {
         box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
         filter: grayscale(50%);
         opacity: .5;
+    }
+
+    @keyframes progress {
+        0% {
+            width: 0;
+        }
+        80% {
+            opacity: 1;
+        }
+        100% {
+            width: 100%;
+            opacity: 0;
+        }
     }
 </style>
