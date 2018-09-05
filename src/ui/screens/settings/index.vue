@@ -93,8 +93,7 @@ import { mapActions } from 'vuex';
 export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default'),
-        'c-block-1': () => import('@/ui/components/block-1'),
-        'c-benchmark': () => import('@/ui/components/benchmark')
+        'c-block-1': () => import('@/ui/components/block-1')
     },
     data() {
         return {
@@ -129,7 +128,7 @@ export default {
         perfResults() {
             const { renderTime } = this;
             const results = {
-                text: renderTime > 25 ?
+                text: renderTime < 200 ?
                     `There is no need to lower your settings` :
                     `Click on button below to update your settings for higher performance`
             };

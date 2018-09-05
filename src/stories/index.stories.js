@@ -1581,87 +1581,58 @@ storiesOf('Pagination', module)
         `
     }))
 
-import ProductCommunity from '../ui/components/product-community/item'
+
+import ProductCommunity from '@/ui/components/product-community/item';
+import ProductCommunityComment from '@/ui/components/product-community/comment';
+import ProductCommunityRateItem from '@/ui/components/product-community/rate-item';
+import ProductCommunityReply from '@/ui/components/product-community/reply';
 
 storiesOf('Product Community', module)
     .add('post', () => ({
         components: {
             'c-post': ProductCommunity
         },
-        data() {
-            const authors = [
-                {name: 'Nakatochi', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'},
-                {
-                    name: 'Nakatochi',
-                    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL'
-                },
-                {
-                    name: 'SatoshiSan',
-                    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL'
-                },
-            ];
-            const placeholderText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non maximus tellus, eu lacinia justo. Cras semper vestibulum est. Donec a massa vitae nibh consectetur efficitur non in erat. Morbi id dapibus tortor. Praesent sit amet vulputate leo, eu posuere neque. In id ante scelerisque, commodo nisi non, eleifend mauris. Pellentesque massa elit, semper non libero nec, interdum aliquet dolor.';
-            return {
-                post: {
-                    title: `The previous title doesn't have it's single line aligned vertically because XD does not have this functionality.`,
-                    date: '',
-                    rate: 103,
-                    comments_count: 894391,
-                    status: 'starred',
-                    author: authors[0],
-                    content: {
-                        img: 'http://memesbams.com/wp-content/uploads/2017/08/2.3-Delightful-cheer-up-cat-meme.jpg',
-                        text: placeholderText,
-                        comments: [
-                            {author: authors[1], text: placeholderText, rate: 319},
-                            {
-                                author: authors[0], text: placeholderText, rate: 932, replies: [
-                                    {author: authors[1], text: placeholderText, rate: 318},
-                                    {author: authors[0], text: placeholderText, rate: -49},
-                                    {author: authors[1], text: placeholderText, rate: 442},
-                                    {author: authors[0], text: placeholderText, rate: 1239}
-                                ]
-                            },
-                            {author: authors[0], text: placeholderText, rate: -51}
-                        ]
-                    }
-                }
-            }
-        },
+        data: () => data.ProductCommunity,
         template: `
             <div class="row m-0 p-5">
                 <div class="col-10">
-                    <c-post :post="post" />
+                    <c-post :post="post"/>
                 </div>
             </div>
         `
     }))
+    .add('comment', () => ({
+        components: {
+            'c-comment': ProductCommunityComment
+                },
+        data: () => data.ProductCommunity,
+        template: `
+            <div class="padding-30">
+                <c-comment :comment="post.content.comments[0]"/>
+            </div>
+        `
+    }))
+    .add('rate item', () => ({
+        components: {
+            'c-rate-item': ProductCommunityRateItem
+                },
+        template: `
+            <div class="padding-30">
+                <c-rate-item :rate="625"/>
+            </div>
+        `
+    }))
+    .add('reply', () => ({
+        components: {
+            'c-reply': ProductCommunityReply
+        },
+        template: `
+            <div class="padding-30">
+                <c-reply/>
+            </div>
+        `
+    }))
 
-// import ProductTags from '../ui/components/product-tags/index'
-
-// storiesOf('Product Tags', module)
-//     .add('default', () => ({
-//         components: {
-//             'c-tags-list': ProductTags
-//         },
-//         data() {
-//             return {
-//                 tags: [
-//                     "adventure",
-//                     "rpg",
-//                     "mmorpg"
-//                 ],
-//             }
-//         },
-//         template: `
-//             <div class="row m-0 p-5">
-//                 <div class="col-12">
-//                     <h3 class="text-white d-block">Some title or name</h3>
-//                     <c-tags-list :tags="tags" />
-//                 </div>
-//             </div>
-//         `
-//     }))
 
 import ProjectCard from '../ui/components/projects/card'
 
