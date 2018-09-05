@@ -692,7 +692,7 @@ storiesOf('Activity Chart', module)
         data: () => data.ActivityChart,
         template: `
             <div class="col-6 py-4">
-                <c-activity-chart title="Activity Chart" :years="years" :head_months="head_months" />
+                <c-activity-chart title="Activity Chart" :years="years" />
             </div>
         `
     }))
@@ -703,7 +703,7 @@ storiesOf('Activity Chart', module)
         data: () => data.ActivityChart,
         template: `
             <div class="col-6 py-4">
-                <c-activity-chart title="Activity Chart" :years="years" :head_months="head_months" size="md" />
+                <c-activity-chart title="Activity Chart" :years="years" size="md" />
             </div>
         `
     }))
@@ -714,7 +714,7 @@ storiesOf('Activity Chart', module)
         data: () => data.ActivityChart,
         template: `
             <div class="col-6 py-4">
-                <c-activity-chart title="Activity Chart" :years="years" :head_months="head_months" size="sm" />
+                <c-activity-chart title="Activity Chart" :years="years" size="sm" />
             </div>
         `
     }))
@@ -725,7 +725,7 @@ storiesOf('Activity Chart', module)
         data: () => data.ActivityChart,
         template: `
             <div class="col-6 py-4">
-                <c-activity-chart title="Activity Chart" :years="years" :head_months="head_months" size="xs" />
+                <c-activity-chart title="Activity Chart" :years="years" size="xs" />
             </div>
         `
     }))

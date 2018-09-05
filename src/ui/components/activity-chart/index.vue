@@ -1,28 +1,25 @@
 <template>
-    <div>
-        <div class="activity-chart" :class="[ 'size-' + size ]">
-            <c-heading-bar :name="title" :showArrows="false" :showBackground="false" v-if="size != 'xs'" />
-            <h4 class="activity-chart-title" v-if="size == 'xs'">{{ title }}</h4>
-            <div class="activity-chart__head" :class="[ 'size-' + size ]">
-                <!--{{ head_months }}-->
-                <div v-for="(month, index) in head_months" :key="index">
-                    <span v-if="size != 'xs'">{{ month.short_name }}</span>
-                    <span v-else>{{ month.number }}</span>
-                </div>
+    <div class="activity-chart" :class="[ 'size-' + size ]">
+        <c-heading-bar :name="title" :showArrows="false" :showBackground="false" v-if="size != 'xs'" />
+        <h4 class="activity-chart-title" v-if="size == 'xs'">{{ title }}</h4>
+        <div class="activity-chart__head" :class="[ 'size-' + size ]">
+            <div v-for="month in 12" :key="month">
+                <span v-if="size == 'xs'">{{ month }}</span>
+                <span v-else>{{ month | monthName | cutLength }}</span>
             </div>
-            <div class="activity-chart__grid"  :class="[ 'size-' + size ]">
-                <div class="activity-chart__item" :class="[ 'size-' + size ]" v-for="(year, index) in years" :key="index">
-                    <div class="year">{{ year.title }}</div>
-                    <div class="year_row">
-                        <div class="year_month" v-for="(month, index) in year.months" :key="index">
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" :style="{ width: + month.percent +'%'}" :aria-valuenow="month.percent" aria-valuemin="0" aria-valuemax="100" v-if="size == 'lg'"></div>
-                                <div class="progress-bar" role="progressbar" :style="[ month.percent >= 50 ? {'width' : '100%' } : {'width' : '0%'} ]" :aria-valuenow="month.percent" aria-valuemin="0" aria-valuemax="100" v-else></div>
-                            </div>
-                            <div class="tooltips-info">
-                                <strong>{{ month.month }} {{ year.title }}</strong>
-                                <span>{{ month.text }}</span>
-                            </div>
+        </div>
+        <div class="activity-chart__grid"  :class="[ 'size-' + size ]">
+            <div class="activity-chart__item" :class="[ 'size-' + size ]" v-for="(year, index) in years" :key="index">
+                <div class="year">{{ year.title }}</div>
+                <div class="year_row">
+                    <div class="year_month" v-for="(month, index) in year.months" :key="index">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" :style="{ width: + month.percent +'%'}" :aria-valuenow="month.percent" aria-valuemin="0" aria-valuemax="100" v-if="size == 'lg'"></div>
+                            <div class="progress-bar" role="progressbar" :style="[ month.percent >= 50 ? {'width' : '100%' } : {'width' : '0%'} ]" :aria-valuenow="month.percent" aria-valuemin="0" aria-valuemax="100" v-else></div>
+                        </div>
+                        <div class="tooltips-info">
+                            <strong>{{ month.month }} {{ year.title }}</strong>
+                            <span>{{ month.text }}</span>
                         </div>
                     </div>
                 </div>
@@ -32,31 +29,43 @@
 </template>
 
 <script>
-    import HeadingBar from '../heading-bar/index.vue'
-
     export default {
-        components:{
-            'c-heading-bar': HeadingBar
+        name: 'activity-chart',
+        components: {
+            'c-heading-bar': () => import('@/ui/components/heading-bar')
         },
         props: {
             title: {
                 type: String
             },
-            years:{
+            years: {
                 required: true
             },
-            size:{
+            size: {
+                type: String,
                 default: 'lg'
-            },
-            head_months:{
-                type: Array
             }
         },
-        data() {
-            return {
-            };
-        },
-        methods: {
+        filters: {
+            monthName(number) {
+                switch(number) {
+                    case 1: return 'January';
+                    case 2: return 'February';
+                    case 3: return 'March';
+                    case 4: return 'April';
+                    case 5: return 'May';
+                    case 6: return 'June';
+                    case 7: return 'July';
+                    case 8: return 'August';
+                    case 9: return 'September';
+                    case 10: return 'October';
+                    case 11: return 'November';
+                    case 12: return 'December';
+                }
+            },
+            cutLength(value) {
+                return value.substring(0, 3);
+            }
         }
     }
 </script>
