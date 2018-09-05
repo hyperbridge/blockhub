@@ -2042,6 +2042,17 @@ storiesOf('Collection', module)
     }))
 
 
+import GameDescription from '@/ui/components/game-series/game-description'
+import GameIncludesList from '@/ui/components/game-series/game-includes-list'
+storiesOf('Game Series', module)
+    .add('description', () => ({
+        components:{
+            'c-game-description': GameDescription
+        },
+        template: `<div class="p-5" style="width: 900px"><c-game-description /></div>`
+    }))
+
+
 
 
 
