@@ -1,9 +1,12 @@
 <template>
     <div>
         <div class="community-item__comment" :class="{ 'is-reply': reply }">
-            <c-rate-item
-                :rate="comment.rate"
-            />
+            <c-button-arrows size="xl" colored>
+                <span :class="{
+                    'up': comment.rate > 400,
+                    'down': comment.rate < 0
+                }">{{ comment.rate }}</span>
+            </c-button-arrows>
             <div class="comment-container">
                 <c-dropdown-menu
                     :dropPosition="right"
@@ -44,7 +47,8 @@ export default {
     components: {
         'c-dropdown-menu': () => import('@/ui/components/dropdown-menu'),
         'c-rate-item': () => import('@/ui/components/product-community/rate-item'),
-        'c-reply': () => import('@/ui/components/product-community/reply')
+        'c-reply': () => import('@/ui/components/product-community/reply'),
+        'c-button-arrows': () => import('@/ui/components/buttons/arrows')
     },
     data() {
         return {
@@ -106,6 +110,12 @@ export default {
         .sub-comments-list {
             border-top: 1px solid rgba(255, 255, 255, .1);
         }
+    }
+    .up {
+        color: #43C981;
+    }
+    .down {
+        color: #F75D5D;
     }
 }
 </style>

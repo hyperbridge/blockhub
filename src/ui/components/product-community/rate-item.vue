@@ -8,7 +8,7 @@
         ></i>
         <span
             class="number"
-            :class="[ rate > 400 ? 'up' : rate < 0 ? 'down' : '' ]"
+
         >{{ rate }}</span>
         <i
             class="fas fa-sort-down"
@@ -80,12 +80,7 @@ export default {
     }
 }
 
-.up {
-    color: #43C981;
-}
-.down {
-    color: #F75D5D;
-}
+
 
 .animate-rate {
     animation: scale-fade .6s ease;

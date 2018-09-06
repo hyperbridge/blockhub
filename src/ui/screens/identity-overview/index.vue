@@ -65,9 +65,9 @@
                             <p>BlockHub is the best place for curated community-driven game development,
                                 digital assets and micro-licensing. Sugn up for your own account and build
                                 the future of gaming.</p>
-                            <a href="#3" class="btn btn-success">
+                            <c-button status="success" size="lg" icon_hide>
                                 Sign Up
-                            </a>
+                            </c-button>
                         </div>
                     </div>
                     <div class="col-12 margin-top-40">
@@ -78,60 +78,36 @@
                                         Trust
                                         <i class="fas fa-hand-holding-heart"></i>
                                     </div>
-                                    <div class="arrow_container">
-                                        <i class="fas fa-sort-up"></i>
-                                        <i class="fas fa-sort-down"></i>
-                                    </div>
+                                    <c-button-arrows/>
                                 </div>
                                 <div class="additional-action" slot="additional-action">
                                     <div class="text">
                                         Rating
                                         <i class="fas fa-trophy"></i>
                                     </div>
-                                    <div class="arrow_container">
-                                        <i class="fas fa-sort-up"></i>
-                                        <i class="fas fa-sort-down"></i>
-                                    </div>
+                                    <c-button-arrows/>
                                 </div>
                             </c-heading-bar>
                             <div class="badges__list">
-                                <div class="badges__item">
+                                <div
+                                    v-for="index in 4"
+                                    class="badges__item"
+                                    :key="index"
+                                >
                                     <div class="img">
-                                        <img src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108" />
+                                        <img :src="badge.img" />
                                     </div>
-                                    <h3>Protector of the Reign</h3>
-                                    <p>Product name</p>
-                                </div>
-                                <div class="badges__item">
-                                    <div class="img">
-                                        <img src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108" />
-                                    </div>
-                                    <h3>Protector of the Reign</h3>
-                                    <p>Product name</p>
-                                </div>
-                                <div class="badges__item">
-                                    <div class="img">
-                                        <img src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108" />
-                                    </div>
-                                    <h3>Protector of the Reign</h3>
-                                    <p>Product name</p>
-                                </div>
-                                <div class="badges__item">
-                                    <div class="img">
-                                        <img src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108" />
-                                    </div>
-                                    <h3>Protector of the Reign</h3>
-                                    <p>Product name</p>
+                                    <h3>{{ badge.title }}</h3>
+                                    <p>{{ badge.product }}</p>
                                 </div>
                             </div>
-                            <c-pagination></c-pagination>
+                            <c-content-navigation />
                         </div>
                     </div>
                     <div class="col-12 margin-top-40">
                         <div class="featured-assets">
-                            <c-heading-bar name="Featured Assets" :showArrows="false" :showBackground="false">
-                            </c-heading-bar>
-                            <c-featured-assets></c-featured-assets>
+                            <c-heading-bar name="Featured Assets" :showArrows="false" :showBackground="false" />
+                            <c-featured-assets />
                         </div>
                     </div>
                     <div class="col-12 margin-top-40">
@@ -142,26 +118,20 @@
                                         Value
                                         <i class="fas fa-dollar-sign"></i>
                                     </div>
-                                    <div class="arrow_container">
-                                        <i class="fas fa-sort-up"></i>
-                                        <i class="fas fa-sort-down"></i>
-                                    </div>
+                                    <c-button-arrows/>
                                 </div>
                                 <div class="additional-action" slot="additional-action">
                                     <div class="text">
                                         Rating
                                         <i class="fas fa-trophy"></i>
                                     </div>
-                                    <div class="arrow_container">
-                                        <i class="fas fa-sort-up"></i>
-                                        <i class="fas fa-sort-down"></i>
-                                    </div>
+                                    <c-button-arrows/>
                                 </div>
                             </c-heading-bar>
 
                             <c-assets-grid />
 
-                            <c-pagination />
+                            <c-content-navigation />
                         </div>
                     </div>
 
@@ -173,129 +143,59 @@
                                         Price
                                         <i class="fas fa-dollar-sign"></i>
                                     </div>
-                                    <div class="arrow_container">
-                                        <i class="fas fa-sort-up"></i>
-                                        <i class="fas fa-sort-down"></i>
-                                    </div>
+                                    <c-button-arrows/>
                                 </div>
                                 <div class="additional-action margin-left-20" slot="additional-action">
                                     <div class="text">
                                         Play Time
                                         <i class="fas fa-clock"></i>
                                     </div>
-                                    <div class="arrow_container">
-                                        <i class="fas fa-sort-up"></i>
-                                        <i class="fas fa-sort-down"></i>
-                                    </div>
+                                    <c-button-arrows/>
                                 </div>
                                 <div class="additional-action" slot="additional-action">
                                     <div class="text">
                                         Purchase Date
                                         <i class="fas fa-calendar"></i>
                                     </div>
-                                    <div class="arrow_container">
-                                        <i class="fas fa-sort-up"></i>
-                                        <i class="fas fa-sort-down"></i>
-                                    </div>
+                                    <c-button-arrows/>
                                 </div>
                             </c-heading-bar>
                             <div class="games-list__grid">
-                                <div class="games-list__grid-item">
+                                <div
+                                    v-for="index in 6"
+                                    :key="index"
+                                    class="games-list__grid-item"
+                                >
                                     <div class="img">
-                                        <img src="http://via.placeholder.com/350x150" />
+                                        <img :src="game.img" />
                                     </div>
                                     <div class="info">
-                                        <h4>Tibia MMORPG</h4>
-                                        <p>CipSoft Entertainment GmbH</p>
+                                        <h4>{{ game.title }}</h4>
+                                        <p>{{ game.developer }}</p>
                                         <div class="time">
                                             <i class="fas fa-clock"></i>
-                                            527h Played
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="games-list__grid-item">
-                                    <div class="img">
-                                        <img src="http://via.placeholder.com/350x150" />
-                                    </div>
-                                    <div class="info">
-                                        <h4>Tibia MMORPG</h4>
-                                        <p>CipSoft Entertainment GmbH</p>
-                                        <div class="time">
-                                            <i class="fas fa-clock"></i>
-                                            527h Played
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="games-list__grid-item">
-                                    <div class="img">
-                                        <img src="http://via.placeholder.com/350x150" />
-                                    </div>
-                                    <div class="info">
-                                        <h4>Tibia MMORPG</h4>
-                                        <p>CipSoft Entertainment GmbH</p>
-                                        <div class="time">
-                                            <i class="fas fa-clock"></i>
-                                            527h Played
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="games-list__grid-item">
-                                    <div class="img">
-                                        <img src="http://via.placeholder.com/350x150" />
-                                    </div>
-                                    <div class="info">
-                                        <h4>Tibia MMORPG</h4>
-                                        <p>CipSoft Entertainment GmbH</p>
-                                        <div class="time">
-                                            <i class="fas fa-clock"></i>
-                                            527h Played
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="games-list__grid-item">
-                                    <div class="img">
-                                        <img src="http://via.placeholder.com/350x150" />
-                                    </div>
-                                    <div class="info">
-                                        <h4>Tibia MMORPG</h4>
-                                        <p>CipSoft Entertainment GmbH</p>
-                                        <div class="time">
-                                            <i class="fas fa-clock"></i>
-                                            527h Played
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="games-list__grid-item">
-                                    <div class="img">
-                                        <img src="http://via.placeholder.com/350x150" />
-                                    </div>
-                                    <div class="info">
-                                        <h4>Tibia MMORPG</h4>
-                                        <p>CipSoft Entertainment GmbH</p>
-                                        <div class="time">
-                                            <i class="fas fa-clock"></i>
-                                            527h Played
+                                            {{ Math.round(game.minutes_played / 60) }}h played
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <c-pagination></c-pagination>
+                            <c-content-navigation />
                         </div>
                     </div>
 
                     <div class="col-12 margin-top-40 margin-bottom-40">
                         <div class="identity__user-notify-card">
                             <div>
-                                <c-user-card></c-user-card>
+                                <c-user-card />
                             </div>
                             <div class="text text-left">
                                 <h3>Create your BlockHub profile</h3>
                                 <p>BlockHub is the best place for curated community-driven game development,
-                                    digital assets and micro-licensing. Sugn up for your own account and build
+                                    digital assets and micro-licensing. Sign up for your own account and build
                                     the future of gaming.</p>
-                                <a href="#3" class="btn btn-success">
+                                <c-button status="success" size="lg" icon_hide>
                                     Sign Up
-                                </a>
+                                </c-button>
                             </div>
                         </div>
                     </div>
@@ -309,53 +209,30 @@
                                         Trust
                                         <i class="fas fa-hand-holding-heart"></i>
                                     </div>
-                                    <div class="arrow_container">
-                                        <i class="fas fa-sort-up"></i>
-                                        <i class="fas fa-sort-down"></i>
-                                    </div>
+                                    <c-button-arrows/>
                                 </div>
                                 <div class="additional-action" slot="additional-action">
                                     <div class="text">
                                         Rating
                                         <i class="fas fa-trophy"></i>
                                     </div>
-                                    <div class="arrow_container">
-                                        <i class="fas fa-sort-up"></i>
-                                        <i class="fas fa-sort-down"></i>
-                                    </div>
+                                    <c-button-arrows/>
                                 </div>
                             </c-heading-bar>
                             <div class="badges__list">
-                                <div class="badges__item">
+                                <div
+                                    v-for="index in 4"
+                                    class="badges__item"
+                                    :key="index"
+                                >
                                     <div class="img">
-                                        <img src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108" />
+                                        <img :src="badge.img" />
                                     </div>
-                                    <h3>Protector of the Reign</h3>
-                                    <p>Product name</p>
-                                </div>
-                                <div class="badges__item">
-                                    <div class="img">
-                                        <img src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108" />
-                                    </div>
-                                    <h3>Protector of the Reign</h3>
-                                    <p>Product name</p>
-                                </div>
-                                <div class="badges__item">
-                                    <div class="img">
-                                        <img src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108" />
-                                    </div>
-                                    <h3>Protector of the Reign</h3>
-                                    <p>Product name</p>
-                                </div>
-                                <div class="badges__item">
-                                    <div class="img">
-                                        <img src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108" />
-                                    </div>
-                                    <h3>Protector of the Reign</h3>
-                                    <p>Product name</p>
+                                    <h3>{{ badge.title }}</h3>
+                                    <p>{{ badge.product }}</p>
                                 </div>
                             </div>
-                            <c-pagination></c-pagination>
+                            <c-content-navigation />
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
@@ -376,12 +253,27 @@
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
             'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-pagination': () => import('@/ui/components/pagination'),
+            'c-content-navigation': () => import('@/ui/components/content-navigation'),
             'c-assets-grid': () => import('@/ui/components/assets-grid'),
             'c-featured-assets': () => import('@/ui/components/assets-list-item/featured-list'),
-            'c-user-card': () => import('@/ui/components/user-card')
+            'c-user-card': () => import('@/ui/components/user-card'),
+            'c-button-arrows': () => import('@/ui/components/buttons/arrows')
         },
-        data: () => ({}),
+        data() {
+            return {
+                badge: {
+                    img: 'https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Badges-and-Labels-PNG/Gold_Oval_Badge_Transparent_PNG_Clip_Art_Image.png?m=1507172108',
+                    title: 'Protector of the Reign',
+                    product: 'Product name'
+                },
+                game: {
+                    img: 'http://via.placeholder.com/350x150',
+                    title: 'Tibia MMORPG',
+                    developer: 'CipSoft Entertainment GmbH',
+                    minutes_played: 8931
+                }
+            }
+        },
         created() {
             $(".rating_readonly").raty({readOnly: true});
         }

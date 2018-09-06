@@ -1,7 +1,7 @@
 <template>
     <a class="load-more" @click.prevent="$emit('click')">
         <span class="load-more__text">
-            <slot>Read More</slot>
+            <slot>Load More</slot>
         </span>
     </a>
 </template>

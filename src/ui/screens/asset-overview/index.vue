@@ -339,6 +339,7 @@
         },
         computed: {
             asset: function () {
+                return this.$store.state.marketplace.assets[this.id] || null;
                 if (!this.$store.state.marketplace.assets)
                     return
 
