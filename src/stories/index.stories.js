@@ -621,8 +621,6 @@ storiesOf('Checkbox', module)
     }));
 
 import Tooltips from '@/ui/components/tooltips';
-import TooltipUniversal from '@/ui/components/tooltips/universal';
-
 
 storiesOf('Tooltips', module)
     .add('dark', () => ({
@@ -683,14 +681,145 @@ storiesOf('Tooltips', module)
             </div>
         `
     }))
-    .add('universal (Not finished)', () => ({
+
+import TooltipUniversal from '@/ui/components/tooltips/universal';
+
+storiesOf('Tooltip Universal', module)
+    .add('default', () => ({
         components: { 'c-tooltip-universal': TooltipUniversal },
         template: `
-            <div class="row col-6">
-                <c-tooltip-universal>
-                    12 23 23 wewewewewe
+            <div class="padding-50">
+                <c-tooltip-universal
+                    title="Some epic title!"
+                    text="Tooltip description goes here :) 👻👽"
+                    class="margin-top-50"
+                >
+                    This content was wrapped around 'tooltip-universal' component tags
+                </c-tooltip-universal>
+            </div>
+        `
+    }))
+    .add('themes', () => ({
+        components: { 'c-tooltip-universal': TooltipUniversal },
+        template: `
+            <div class="padding-50">
+                <div>
+                    <c-tooltip-universal
+                        title="Some epic title!"
+                        text="Tooltip description goes here :) 👻👽"
+                        position="bottom"
+                    >
+                        <h2>Light (by default)</h2>
+                    </c-tooltip-universal>
+                </div>
+                <div>
+                    <c-tooltip-universal
+                        title="Some epic title!"
+                        text="Tooltip description goes here :) 👻👽"
+                        theme="dark"
+                        position="bottom"
+                    >
+                        <h2>Dark</h2>
+                    </c-tooltip-universal>
+                </div>
+            </div>
+        `
+    }))
+    .add('positions', () => ({
+        components: { 'c-tooltip-universal': TooltipUniversal },
+        template: `
+            <div class="padding-50">
+                <div>
+                    <c-tooltip-universal
+                        title="Some epic title!"
+                        text="Tooltip description goes here :) 👻👽"
+                        class="margin-top-50"
+                    >
+                        <h2>Top (by default)</h2>
+                    </c-tooltip-universal>
+                </div>
+                <div>
+                    <c-tooltip-universal
+                        title="Some epic title!"
+                        text="Tooltip description goes here :) 👻👽"
+                        position="right"
+                    >
+                        <h2>Right</h2>
+                    </c-tooltip-universal>
+                </div>
+                <div>
+                    <c-tooltip-universal
+                        title="Some epic title!"
+                        text="Tooltip description goes here :) 👻👽"
+                        position="bottom"
+                    >
+                        <h2>Bottom</h2>
+                    </c-tooltip-universal>
+                </div>
+                <div>
+                    <c-tooltip-universal
+                        title="Some epic title!"
+                        text="Tooltip description goes here :) 👻👽"
+                        position="left"
+                    >
+                        <h2>Left</h2>
+                    </c-tooltip-universal>
+                </div>
+            </div>
+        `
+    }))
+    .add('without icon', () => ({
+        components: { 'c-tooltip-universal': TooltipUniversal },
+        template: `
+            <div class="padding-50">
+                <c-tooltip-universal
+                    title="Some epic title!"
+                    text="Tooltip description goes here :) 👻👽"
+                    position="bottom"
+                    icon_hide
+                >
+                    <h2>I have no questionmark icon</h2>
+                </c-tooltip-universal>
+            </div>
+        `
+    }))
+    .add('any content', () => ({
+        components: { 'c-tooltip-universal': TooltipUniversal },
+        template: `
+            <div class="padding-50">
+                <h2>Tooltip can take any content between its tags, like the image below or other components</h2>
+                <c-tooltip-universal
+                    title="Some epic title!"
+                    text="Tooltip description goes here :) 👻👽"
+                    position="bottom"
+                >
+                    <img
+                        width="150px"
+                        src="https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_eda99e7f705a113d04ab2a7a36068f3e7b343d17.1920x1080.jpg?t=1529405012"
+                    />
+                </c-tooltip-universal>
+            </div>
+        `
+    }))
+    .add('custom tooltip', () => ({
+        components: { 'c-tooltip-universal': TooltipUniversal },
+        template: `
+            <div class="padding-50">
+                <h2>You create custom tooltip with template slot</h2>
+                <c-tooltip-universal position="right">
+                    <img
+                        width="150px"
+                        src="https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_eda99e7f705a113d04ab2a7a36068f3e7b343d17.1920x1080.jpg?t=1529405012"
+                    />
                     <template slot="tooltip">
-                        <h1>909090909090909090909</h1>
+                        <div :style="{ backgroundColor: '#6365a0' }">
+                            This is custom tooltip content
+                            <img
+                                width="150px"
+                                src="https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012"
+                            />
+                            1234
+                        </div>
                     </template>
                 </c-tooltip-universal>
             </div>
