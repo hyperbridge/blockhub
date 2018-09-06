@@ -1,7 +1,10 @@
 <template>
     <div class="game-description">
         <div class="game-description__carousel">
-            <c-carousel :perPage="1" class="custom-dots-top carousel-full-height">
+            <div class="slider-dots">
+                <div class="swiper-pagination" slot="pagination"></div>
+            </div>
+            <c-swiper :options="sliderOptions" class="custom-dots-top carousel-full-height">
                 <c-slide>
                     <img src="https://images-2.gog.com/78485317312e881a175c686eaab8a988202b208942623acba641f35384f8dc12.jpg" />
                 </c-slide>
@@ -11,7 +14,7 @@
                 <c-slide>
                     <img src="https://cdn.igromania.ru/mnt/articles/5/8/0/6/0/6/25812/html/img/57b2557c741ba33b.jpg" />
                 </c-slide>
-            </c-carousel>
+            </c-swiper>
         </div>
         <div class="game-description__info">
             <h3>Dragon Age: Ultimate Edition + Dragon Age: Full Series Collection</h3>
@@ -36,7 +39,8 @@
 </template>
 
 <script>
-    import { Carousel, Slide } from 'vue-carousel';
+    import 'swiper/dist/css/swiper.css'
+    import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
     export default {
         name: 'game-description',
@@ -44,12 +48,20 @@
         components: {
 
             'c-tags': () => import('@/ui/components/tags'),
-            'c-carousel': Carousel,
-            'c-slide': Slide
+            'c-swiper': swiper,
+            'c-slide': swiperSlide
         },
         data(){
             return{
-                author_tags: ['RPG', 'ACTION', 'FULL Series']
+                author_tags: ['RPG', 'ACTION', 'FULL Series'],
+                sliderOptions:{
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true
+                    },
+                }
             }
         }
     }
@@ -65,17 +77,23 @@
     }
     .game-description__carousel{
         width: 47%;
-        .VueCarousel{
+        position: relative;
+        .swiper-container{
             height: 100%;
-            .VueCarousel-wrapper{
-                height: 100%;
+            .swiper-slide{
+                height: auto;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 5px;
+                }
             }
         }
-        img{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 5px;
+        .slider-dots{
+            position: absolute;
+            top: 15px;
+            right: 15px;
         }
     }
     .game-description__info{

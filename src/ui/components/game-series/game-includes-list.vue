@@ -48,6 +48,7 @@
             font-size: 21px;
             padding: 0;
             position: relative;
+            margin: 15px 0 5px;
             &:before,
             &:after{
                 content: "";
