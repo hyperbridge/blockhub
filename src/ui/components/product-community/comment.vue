@@ -46,7 +46,6 @@ export default {
     },
     components: {
         'c-dropdown-menu': () => import('@/ui/components/dropdown-menu'),
-        'c-rate-item': () => import('@/ui/components/product-community/rate-item'),
         'c-reply': () => import('@/ui/components/product-community/reply'),
         'c-button-arrows': () => import('@/ui/components/buttons/arrows')
     },

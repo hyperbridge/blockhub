@@ -485,6 +485,7 @@ const injectButtonTemplate = code => `
 
 import Buttons from '../ui/components/buttons/index.vue'
 import LoadMore from '../ui/components/buttons/load-more'
+import ButtonArrows from '@/ui/components/buttons/arrows'
 
 storiesOf('Buttons', module)
     .add('default', () => ({
@@ -566,6 +567,41 @@ storiesOf('Buttons', module)
         },
         template: `
             <div class="p-5" style="width: 400px"><c-load-more></c-load-more></div>
+        `
+    }))
+    .add('arrows', () => ({
+        components: {
+            'c-button-arrows': ButtonArrows
+        },
+        template: `
+            <div class="padding-50">
+                <c-button-arrows size="sm"/>
+                <c-button-arrows/>
+                <c-button-arrows size="lg"/>
+                <c-button-arrows size="xl"/>
+            </div>
+        `
+    }))
+    .add('arrows - colorized', () => ({
+        components: {
+            'c-button-arrows': ButtonArrows
+        },
+        template: `
+            <div class="padding-50">
+                <c-button-arrows colorized/>
+            </div>
+        `
+    }))
+    .add('arrows - content', () => ({
+        components: {
+            'c-button-arrows': ButtonArrows
+        },
+        template: `
+            <div class="padding-50">
+                <c-button-arrows colorized>
+                    +319
+                </c-button-arrows>
+            </div>
         `
     }))
 
@@ -1713,7 +1749,6 @@ storiesOf('Pagination', module)
 
 import ProductCommunity from '@/ui/components/product-community/item';
 import ProductCommunityComment from '@/ui/components/product-community/comment';
-import ProductCommunityRateItem from '@/ui/components/product-community/rate-item';
 import ProductCommunityReply from '@/ui/components/product-community/reply';
 
 storiesOf('Product Community', module)
@@ -1738,16 +1773,6 @@ storiesOf('Product Community', module)
         template: `
             <div class="padding-30">
                 <c-comment :comment="post.content.comments[0]"/>
-            </div>
-        `
-    }))
-    .add('rate item', () => ({
-        components: {
-            'c-rate-item': ProductCommunityRateItem
-                },
-        template: `
-            <div class="padding-30">
-                <c-rate-item :rate="625"/>
             </div>
         `
     }))
