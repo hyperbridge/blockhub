@@ -27,26 +27,42 @@
                     </div>
                 </div>
 
-                <div class="row product-grid">
+                <div class="row product-grid margin-bottom-30">
                     <div class="col-12">
-                        <c-heading-bar name="New Releases" :showArrows="true" />
+                        <c-heading-bar name="New Releases"
+                                       :showArrows="showArrowsState(demo_products, 3)"
+                                       :showBackground="true"
+                                       @prevClick="demo_products_sl.slidePrev()"
+                                       @nextClick="demo_products_sl.slideNext()" />
                     </div>
 
-                    <c-products-cards
-                        :products="demo_products"
-                    />
+                    <c-swiper :options="demoSlider" ref="demo_products_sl" class="w-100" v-if="demo_products.length>0">
+                        <c-slide v-for="(product, index) in demo_products" :key="index">
+                            <c-product-card-dynamic :product="product" />
+                        </c-slide>
+                    </c-swiper>
                 </div>
 
                 <div class="row product-grid margin-bottom-30">
                     <div class="col-12">
-                        <c-heading-bar name="Summer Sale" :showArrows="true" :showBackground="true" />
-
-                        <c-carousel :perPage="3" :paginationEnabled="false">
-                            <c-slide v-for="(product, index) in sale_products" :key="index">
-                                <c-product-card :product="product" />
-                            </c-slide>
-                        </c-carousel>
+                        <c-heading-bar name="Summer Sale"
+                                       :showArrows="showArrowsState(sale_products, 3)"
+                                       :showBackground="true"
+                                       @prevClick="summer_sale_sl.slidePrev()"
+                                       @nextClick="summer_sale_sl.slideNext()" />
                     </div>
+
+                    <c-swiper :options="saleSlider" ref="summer_sale_sl" class="w-100" v-if="sale_products.length>0">
+                        <c-slide v-for="(product, index) in sale_products" :key="index">
+                            <c-product-card-dynamic :product="product" />
+                        </c-slide>
+                    </c-swiper>
+
+                        <!--<c-carousel :perPage="3" :paginationEnabled="false" ref="summer_sale" :loop="true">-->
+                            <!--<c-slide v-for="(product, index) in sale_products" :key="index">-->
+                                <!--<c-product-card :product="product" />-->
+                            <!--</c-slide>-->
+                        <!--</c-carousel>-->
 
                 </div>
 
@@ -178,7 +194,6 @@
                                     </c-assets-list-item>
                                 </div>
                             </div>
-                            <c-content-navigation />
                         </div>
                     </div>
                 </div>
@@ -204,7 +219,6 @@
                     </div>
                 </div>
 
-
                 <c-curators-reviews
                     :reviews="curators_reviews"
                 />
@@ -214,7 +228,9 @@
 </template>
 
 <script>
-import { Carousel, Slide } from 'vue-carousel';
+import 'swiper/dist/css/swiper.css'
+
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 const updateLandingImage = function() {
     const frontpage_product = this.$store.state.marketplace.frontpage_product
@@ -243,8 +259,8 @@ export default {
         'c-assets-list-item': () => import('@/ui/components/assets-list-item/item'),
         'c-news-list-navigation': () => import('@/ui/components/news-list/navigation'),
         'c-news-list-articles': () => import('@/ui/components/news-list/articles'),
-        'c-carousel': Carousel,
-        'c-slide': Slide
+        'c-swiper': swiper,
+        'c-slide': swiperSlide
     },
     data() {
         const curator_review = {
@@ -462,6 +478,15 @@ export default {
                     ]
                 }
             ],
+            // Slider options
+            demoSlider: {
+                slidesPerView: 3,
+                spaceBetween: 0,
+            },
+            saleSlider: {
+                slidesPerView: 3,
+                spaceBetween: 0
+            }
         }
     },
     computed: {
@@ -487,11 +512,30 @@ export default {
         },
         dynamic_preview_product() {
             return this.$store.state.marketplace.products[8];
+        },
+        summer_sale_sl() {
+            return this.$refs.summer_sale_sl.swiper;
+        },
+        demo_products_sl() {
+            return this.$refs.demo_products_sl.swiper;
         }
     },
     methods: {
         filterTag(tagName) {
             alert(tagName)
+        },
+        prevClick(carousel){
+            carousel.slidePrev();
+        },
+        nextClick(carousel){
+            carousel.slideNext();
+        },
+        showArrowsState(el, count){
+            if ( el.length > count){
+                return true
+            } else {
+                return false
+            }
         }
     },
     mounted: updateLandingImage,

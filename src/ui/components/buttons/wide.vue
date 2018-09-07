@@ -28,6 +28,7 @@ export default {
     border-style: none;
     box-sizing: border-box;
     width: 100%;
+    line-height: 26px;
     &:hover {
         cursor: pointer;
     }
