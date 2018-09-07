@@ -96,7 +96,7 @@ export default {
     border-radius: 5px;
     border: 1px solid rgba(255, 255, 255, 0.13);
     color: #dfdfe9;
-    margin: 15px 0;
+    margin-bottom: 20px;
     background-color: rgba(0, 0, 0, 0.13);
     &__header {
         display: flex;
@@ -105,7 +105,6 @@ export default {
     }
 }
 .review__author {
-    text-align: right;
     &-name {
         font-size: 14px;
         margin: 0;
@@ -115,7 +114,6 @@ export default {
         margin-right: 10px;
     }
     &-date {
-
         font-size: 12px;
     }
 }

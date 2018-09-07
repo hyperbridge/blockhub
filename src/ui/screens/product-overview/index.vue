@@ -143,7 +143,7 @@
 
                         <div class="row">
                             <div class="col-md-6 col-12">
-                                <h2>Most helpful</h2>
+                                <h3 class="margin-vertical-20">Most helpful</h3>
                                 <c-review
                                     v-for="(review, index) in reviews.helpful"
                                     :key="index"
@@ -151,7 +151,7 @@
                                 />
                             </div>
                             <div class="col-md-6 col-12">
-                                <h2>Most recent</h2>
+                                <h3 class="margin-vertical-20">Most recent</h3>
                                 <c-review
                                     v-for="(review, index) in reviews.recent"
                                     :key="index"
@@ -535,7 +535,7 @@
             'c-frequently-traded-assets': () => import('@/ui/components/frequently-traded-assets'),
             'c-community-spotlight': () => import('@/ui/components/community-spotlight'),
             'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-review': () => import('@/ui/components/product-overview/review')
+            'c-review': () => import('@/ui/components/review')
         },
         data() {
             const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.';

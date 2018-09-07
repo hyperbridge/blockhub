@@ -88,6 +88,22 @@
 .margin-right-40{margin-right: 40px !important;}
 .margin-right-50{margin-right: 50px !important;}
 
+.margin-vertical-5{margin: 5px 0 !important;}
+.margin-vertical-10{margin: 10px 0 !important;}
+.margin-vertical-15{margin: 15px 0 !important;}
+.margin-vertical-20{margin: 20px 0 !important;}
+.margin-vertical-30{margin: 30px 0 !important;}
+.margin-vertical-40{margin: 40px 0 !important;}
+.margin-vertical-50{margin: 50px 0 !important;}
+
+.margin-horizontal-5{margin: 0 5px !important;}
+.margin-horizontal-10{margin: 0 10px !important;}
+.margin-horizontal-15{margin: 0 15px !important;}
+.margin-horizontal-20{margin: 0 20px !important;}
+.margin-horizontal-30{margin: 0 30px !important;}
+.margin-horizontal-40{margin: 0 40px !important;}
+.margin-horizontal-50{margin: 0 50px !important;}
+
 .padding-0{padding: 0px !important;}
 .padding-5{padding: 5px !important;}
 .padding-10{padding: 10px !important;}
@@ -149,23 +165,23 @@
 // bootstrap color backgrounds
 
 .bg-primary{
-    background-color: $primary-background !important;    
+    background-color: $primary-background !important;
     color: $primary-color;
 }
 .bg-secondary{
-    background-color: $secondary-background !important;    
+    background-color: $secondary-background !important;
     color: $secondary-color;
 }
 .bg-success{
-    background-color: $success-background !important;    
+    background-color: $success-background !important;
     color: $success-color;
 }
 .bg-info{
-    background-color: $info-background !important;    
+    background-color: $info-background !important;
     color: $info-color;
 }
 .bg-warning{
-    background-color: $warning-background !important;    
+    background-color: $warning-background !important;
     color: $warning-color;
 }
 .bg-danger{
@@ -185,13 +201,13 @@
 // backgrounds/gradients
 .bg-gradient-1{
 //    @include linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);
-    background: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%) !important;    
+    background: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%) !important;
 }
 .bg-gradient-2{
-    background: linear-gradient(to right, #108dc7, #ef8e38) !important;    
+    background: linear-gradient(to right, #108dc7, #ef8e38) !important;
 }
 .bg-gradient-3{
-    background: linear-gradient(to top, #88d3ce 0%, #6e45e2 100%) !important;    
+    background: linear-gradient(to top, #88d3ce 0%, #6e45e2 100%) !important;
 }
 .bg-gradient-4{
     background: linear-gradient(to right, #7b920a, #add100) !important;
@@ -215,20 +231,20 @@
     background: linear-gradient(45deg, #874da2 0%, #c43a30 100%) !important;
 }
 
-.bg-gradient-11{    
+.bg-gradient-11{
     background: linear-gradient(to right, #8e5c95 0%, #ff9297 100%) !important;
 }
-.bg-gradient-12{    
+.bg-gradient-12{
     background: linear-gradient(to right, #fd75ba 0%, #ff9297 100%) !important;
 }
 .bg-gradient-13{
-    background: linear-gradient(to right, #fc584a 0%, #f74072 100%) !important;    
+    background: linear-gradient(to right, #fc584a 0%, #f74072 100%) !important;
 }
 .bg-gradient-14{
-    background: linear-gradient(to right, #433c89 0%, #b63263 100%) !important;    
+    background: linear-gradient(to right, #433c89 0%, #b63263 100%) !important;
 }
 .bg-gradient-15{
-    background: linear-gradient(to right, #5c74ff 0%, #bb7aff 100%) !important;    
+    background: linear-gradient(to right, #5c74ff 0%, #bb7aff 100%) !important;
 }
 
 // bg 'story'

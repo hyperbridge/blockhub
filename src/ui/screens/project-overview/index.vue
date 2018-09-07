@@ -6,7 +6,7 @@
                     <div class="col-12" v-if="!project">
                         Project not found
                     </div>
-                    <div class="col-12 tab-content" v-if="project">
+                    <div class="col-12 tab-content" v-else>
                         <p class="errors" v-if="errors.length">
                             <strong>Please correct the following error(s):</strong>
                         <ul>
@@ -417,291 +417,23 @@
 
                         <div class="row reviews-blk margin-top-40">
                             <div class="col-12">
-                                <c-heading-bar name="Reviews" :showArrows="false" :showBackground="false">
-                                </c-heading-bar>
+                                <c-heading-bar name="Reviews" :showArrows="false" :showBackground="false"/>
                             </div>
                             <div class="col-12 col-lg-6">
-                                <h3 class="margin-top-20">Most Helpful</h3>
-                                <div class="review-item">
-                                    <div class="liked">
-                                        <i class="fas fa-thumbs-up"></i>
-                                    </div>
-                                    <div class="review-item__head">
-                                        <div class="author_info">
-                                            <div class="avatar">
-                                                <img
-                                                    src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
-                                            </div>
-                                            <div class="user_info">
-                                                <h5 class="user_name">Satoshi San</h5>
-                                                <span class="time">Yesterday</span>
-                                            </div>
-                                        </div>
-                                        <div class="review_info">
-                                            <div class="rating_number">
-                                                4.5
-                                            </div>
-                                            <div class="other_info">
-                                                <div class="rating_stars">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <div class="played_time">
-                                                    Played for 104h 15m
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="review-item__body">
-                                        <h5>
-                                            Good game very nice grapchics made by very smart people.
-                                        </h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eleifend
-                                            purus magna. Vestibulum sed commodo est. Duis lacinia, est vitae dictum
-                                            posuere, magna lorem mattis augue, a pulvinar justo velit at massa. Sed ac
-                                            mi purus. Maecenas cursus sodales lacus nec sagittis. Suspendisse dapibus
-                                            nulla vel ligula ultricies, sit amet vulputate eros eleifend. Ut aliquam
-                                            ipsum sit amet orci gravida accumsan. Curabitur at mi non urna faucibus
-                                            sollicitudin. Sed dui eros, elementum ut magna in, ultricies tempor nisi.
-                                            Integer malesuada orci interdum, fermentum tortor vehicula, mollis sem.
-                                            Donec nec elit sem.</p>
-                                    </div>
-                                    <div class="review-item__spec">
-                                        <div>
-                                            <strong>System</strong>
-                                            Windows 10
-                                        </div>
-                                        <div>
-                                            <strong>GPU</strong>
-                                            GF GTX 1080
-                                        </div>
-                                        <div>
-                                            <strong>CPU</strong>
-                                            Intel Core i9-7980XE
-                                        </div>
-                                        <div>
-                                            <strong>Storage</strong>
-                                            HyperX 2TB SSD
-                                        </div>
-                                        <div>
-                                            <strong>RAM</strong>
-                                            32 GB DDR5
-                                        </div>
-                                    </div>
-                                    <div class="review-item__footer">
-                                        <div class="emotions_action">
-                                            <a href="#3" class="btn-like">
-                                                <i class="fas fa-thumbs-up"></i>
-                                                Helpful
-                                            </a>
-                                            <a href="#3" class="btn-unlike">
-                                                <i class="fas fa-thumbs-down"></i>
-                                                Not Helpful
-                                            </a>
-                                        </div>
-                                        <a href="#3" class="btn btn-sm btn-link">
-                                            Continue Reading
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="review-item">
-                                    <div class="liked">
-                                        <i class="fas fa-thumbs-up"></i>
-                                    </div>
-                                    <div class="review-item__head">
-                                        <div class="author_info">
-                                            <div class="avatar">
-                                                <img
-                                                    src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
-                                            </div>
-                                            <div class="user_info">
-                                                <h5 class="user_name">Satoshi San</h5>
-                                                <span class="time">Yesterday</span>
-                                            </div>
-                                        </div>
-                                        <div class="review_info">
-                                            <div class="rating_number">
-                                                4.5
-                                            </div>
-                                            <div class="other_info">
-                                                <div class="rating_stars">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <div class="played_time">
-                                                    Played for 104h 15m
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="review-item__body">
-                                        <h5>
-                                            Good game very nice grapchics made by very smart people.
-                                        </h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eleifend
-                                            purus magna. Vestibulum sed commodo est. Duis lacinia, est vitae dictum
-                                            posuere, magna lorem mattis augue, a pulvinar justo velit at massa. Sed ac
-                                            mi purus. Maecenas cursus sodales lacus nec sagittis. Suspendisse dapibus
-                                            nulla vel ligula ultricies, sit amet vulputate eros eleifend. Ut aliquam
-                                            ipsum sit amet orci gravida accumsan. Curabitur at mi non urna faucibus
-                                            sollicitudin. Sed dui eros, elementum ut magna in, ultricies tempor nisi.
-                                            Integer malesuada orci interdum, fermentum tortor vehicula, mollis sem.
-                                            Donec nec elit sem.</p>
-                                    </div>
-                                    <div class="review-item__spec">
-                                        <div>
-                                            <strong>System</strong>
-                                            Windows 10
-                                        </div>
-                                        <div>
-                                            <strong>GPU</strong>
-                                            GF GTX 1080
-                                        </div>
-                                        <div>
-                                            <strong>CPU</strong>
-                                            Intel Core i9-7980XE
-                                        </div>
-                                        <div>
-                                            <strong>Storage</strong>
-                                            HyperX 2TB SSD
-                                        </div>
-                                        <div>
-                                            <strong>RAM</strong>
-                                            32 GB DDR5
-                                        </div>
-                                    </div>
-                                </div>
+                                <h3 class="margin-vertical-20">Most Helpful</h3>
+                                <c-review
+                                    v-for="index in 3"
+                                    :key="index"
+                                    :review="review"
+                                />
                             </div>
                             <div class="col-12 col-lg-6">
-                                <h3 class="margin-top-20">Most Recent</h3>
-                                <div class="review-item">
-                                    <div class="liked">
-                                        <i class="fas fa-thumbs-up"></i>
-                                    </div>
-                                    <div class="review-item__head">
-                                        <div class="author_info">
-                                            <div class="avatar">
-                                                <img
-                                                    src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
-                                            </div>
-                                            <div class="user_info">
-                                                <h5 class="user_name">Satoshi San</h5>
-                                                <span class="time">Yesterday</span>
-                                            </div>
-                                        </div>
-                                        <div class="review_info">
-                                            <div class="rating_number">
-                                                4.5
-                                            </div>
-                                            <div class="other_info">
-                                                <div class="rating_stars">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <div class="played_time">
-                                                    Played for 104h 15m
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="review-item__body">
-                                        <h5>
-                                            Good game very nice grapchics made by very smart people.
-                                        </h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eleifend
-                                            purus magna. Vestibulum sed commodo est. Duis lacinia, est vitae dictum
-                                            posuere, magna lorem mattis augue, a pulvinar justo velit at massa. Sed ac
-                                            mi purus. Maecenas cursus sodales lacus nec sagittis. Suspendisse dapibus
-                                            nulla vel ligula ultricies, sit amet vulputate eros eleifend. Ut aliquam
-                                            ipsum sit amet orci gravida accumsan. Curabitur at mi non urna faucibus
-                                            sollicitudin. Sed dui eros, elementum ut magna in, ultricies tempor nisi.
-                                            Integer malesuada orci interdum, fermentum tortor vehicula, mollis sem.
-                                            Donec nec elit sem.</p>
-                                    </div>
-                                    <div class="review-item__footer">
-                                        <div class="emotions_action">
-                                            <a href="#3" class="btn-like">
-                                                <i class="fas fa-thumbs-up"></i>
-                                                Helpful
-                                            </a>
-                                            <a href="#3" class="btn-unlike">
-                                                <i class="fas fa-thumbs-down"></i>
-                                                Not Helpful
-                                            </a>
-                                        </div>
-                                        <a href="#3" class="btn btn-sm btn-link">
-                                            Continue Reading
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="review-item">
-                                    <div class="liked">
-                                        <i class="fas fa-thumbs-up"></i>
-                                    </div>
-                                    <div class="review-item__head">
-                                        <div class="author_info">
-                                            <div class="avatar">
-                                                <img
-                                                    src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
-                                            </div>
-                                            <div class="user_info">
-                                                <h5 class="user_name">Satoshi San</h5>
-                                                <span class="time">Yesterday</span>
-                                            </div>
-                                        </div>
-                                        <div class="review_info">
-                                            <div class="rating_number">
-                                                4.5
-                                            </div>
-                                            <div class="other_info">
-                                                <div class="rating_stars">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <div class="played_time">
-                                                    Played for 104h 15m
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="review-item__body">
-                                        <h5>
-                                            Good game very nice grapchics made by very smart people.
-                                        </h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eleifend
-                                            purus magna. Vestibulum sed commodo est. Duis lacinia, est vitae dictum
-                                            posuere, magna lorem mattis augue, a pulvinar justo velit at massa. Sed ac
-                                            mi purus. Maecenas cursus sodales lacus nec sagittis. Suspendisse dapibus
-                                            nulla vel ligula ultricies, sit amet vulputate eros eleifend. Ut aliquam
-                                            ipsum sit amet orci gravida accumsan. Curabitur at mi non urna faucibus
-                                            sollicitudin. Sed dui eros, elementum ut magna in, ultricies tempor nisi.
-                                            Integer malesuada orci interdum, fermentum tortor vehicula, mollis sem.
-                                            Donec nec elit sem.</p>
-                                    </div>
-                                    <div class="review-item__footer">
-                                        <div class="emotions_action">
-                                            <a href="#3" class="btn-like">
-                                                <i class="fas fa-thumbs-up"></i>
-                                                Helpful
-                                            </a>
-                                            <a href="#3" class="btn-unlike">
-                                                <i class="fas fa-thumbs-down"></i>
-                                                Not Helpful
-                                            </a>
-                                        </div>
-                                        <a href="#3" class="btn btn-sm btn-link">
-                                            Continue Reading
-                                        </a>
-                                    </div>
-                                </div>
+                                <h3 class="margin-vertical-20">Most Recent</h3>
+                                <c-review
+                                    v-for="index in 3"
+                                    :key="index"
+                                    :review="review"
+                                />
                             </div>
                         </div>
                     </div>
@@ -768,6 +500,7 @@
             'c-frequently-traded-assets': () => import('@/ui/components/frequently-traded-assets'),
             'c-community-spotlight': () => import('@/ui/components/community-spotlight'),
             'c-heading-bar': () => import('@/ui/components/heading-bar'),
+            'c-review': () => import('@/ui/components/review')
         },
         data() {
             return {
@@ -784,7 +517,19 @@
                     'game',
                     'mod',
                     'other'
-                ]
+                ],
+                review: {
+                    author: {
+                        name: 'Satoshi San',
+                        img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1'
+                    },
+                    title: 'Good game with very nice graphics made by very smart people.',
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.',
+                    date: '2018-08-19T04:09:00.000Z',
+                    rating: 4.5,
+                    minutes_played: 1938,
+                    setup: { system: 'Windows 10', gpu: 'GTX 1080', cpu: 'Core i7 7980x', ram: '8 GB', storage: 'HyperX 1TB SSD' }
+                }
             }
         },
         methods: {
@@ -1301,150 +1046,4 @@
         }
     }
 
-</style>
-
-<style lang="scss" scoped>
-    .review-item{
-        display: inline-block;
-        width: 100%;
-        float: left;
-        overflow: hidden;
-        border-radius: 5px;
-        background: rgba(0, 0, 0, .13);
-        border: 1px solid rgba(255, 255, 255, .13);
-        padding: 15px;
-        position: relative;
-        margin: 15px 0;
-        .liked{
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 16px;
-        }
-    }
-    .review-item__head{
-        display: flex;
-        width: 100%;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: nowrap;
-        .author_info{
-            width: 40%;
-            .avatar{
-                display: inline-block;
-                float: left;
-                width: 35px;
-                margin-right: 10px;
-                img{
-                    width: 100%;
-                    height: auto;
-                }
-            }
-            .user_info{
-                display: inline-block;
-                width: auto;
-                float: left;
-                text-align: right;
-                h5{
-                    margin: 0;
-                    font-size: 14px;
-
-                }
-                .time{
-                    font-size: 12px;
-                }
-            }
-        }
-        .review_info{
-            display: flex;
-            width: 60%;
-            align-items: center;
-            justify-content: flex-end;
-            .rating_number{
-                font-size: 40px;
-                font-weight: 100;
-                width: 55px;
-                text-align: left;
-                margin-right: 10px;
-            }
-            .other_info{
-                width: 150px;
-                text-align: left;
-                .rating_stars{
-                    display: block;
-                    width: 100%;
-                    text-align: left;
-                    font-size: 15px;
-                    i{
-                        margin-right: 2px;
-                    }
-                }
-                .played_time{
-                    font-weight: bold;
-                    text-align: left;
-                    font-size: 14px;
-                }
-            }
-        }
-    }
-    .review-item__body{
-        display: inline-block;
-        float: left;
-        margin: 15px 0;
-    }
-    .review-item__spec{
-        display: flex;
-        width: 100%;
-        flex-wrap: wrap;
-        div{
-            width: calc( 100%/3 );
-            margin-bottom: 10px;
-            text-align: left;
-            strong{
-                width: 100%;
-                display: block;
-            }
-        }
-    }
-    .review-item__footer{
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 15px;
-        .emotions_action{
-            .btn-like{
-                display: inline-block;
-                float: left;
-                color: #fff;
-                margin-right: 25px;
-                font-size: 12px;
-                font-weight: bold;
-                text-transform: uppercase;
-                i{
-                    color: #43C981;
-                    margin-right: 5px;
-                }
-            }
-            .btn-unlike{
-                display: inline-block;
-                float: left;
-                color: #fff;
-                font-size: 12px;
-                font-weight: bold;
-                text-transform: uppercase;
-                i{
-                    color: #F75D5D;
-                    margin-right: 3px;
-                }
-            }
-        }
-        .btn-link{
-            color: #fff;
-            font-weight: bold;
-            font-size: 12px;
-            text-transform: uppercase;
-            padding-right: 0;
-        }
-    }
 </style>
