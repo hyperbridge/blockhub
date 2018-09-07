@@ -1,54 +1,53 @@
 <template>
-    <div class="card invert review">
-        <div class="card-body padding-0">
-            <div class="review__header">
-                <c-author :author="review.author"/>
-                <div class="review__rating">
-                    <i class="review__rating-score">{{ review.rating }}</i>
+    <div class="review">
+        <div class="review__header">
+            <img :src="review.author.img" class="review__author-img"/>
+            <div class="review__author">
+                <h5 class="review__author-name">{{ review.author.name }}</h5>
+                <span class="review__author-date">{{ review.date | timeAgo }}</span>
+            </div>
+            <div class="review__rating">
+                <i class="review__rating-score">{{ review.rating }}</i>
+                <div>
+                    <c-rating-stars :number="review.rating"/>
                     <div>
-                        <c-rating-stars
-                            :number="review.rating"
-                        />
-                        <div>
-                            <strong>Played for {{ time_played }}</strong>
-                        </div>
+                        <strong>Played for {{ time_played }}</strong>
                     </div>
                 </div>
             </div>
-            <p class="review__date">{{ review.date | timeAgo }}</p>
-            <h4>{{ review.title }}</h4>
+        </div>
+        <h4>{{ review.title }}</h4>
 
-            <transition name="fade-scale">
-                <p v-if="show_more" :key="show_more">{{ review.text }}</p>
-                <p v-else>{{ review.text.substring(0, 200) }}</p>
-            </transition>
+        <transition name="fade-scale">
+            <p v-if="show_more" :key="show_more">{{ review.text }}</p>
+            <p v-else>{{ review.text.substring(0, 200) }}</p>
+        </transition>
 
-            <transition name="fade-scale">
-                <div class="review__user-setup" v-if="show_more">
-                    <div
-                        v-for="(param, index) in setup_params"
-                        :key="index"
-                        class="param"
-                    >
-                        <h6 class="param-title">{{ param }}</h6>
-                        {{ review.setup[param.toLowerCase()] }}
-                    </div>
+        <transition name="fade-scale">
+            <div class="review__user-setup" v-if="show_more">
+                <div
+                    v-for="(param, index) in setup_params"
+                    :key="index"
+                    class="param"
+                >
+                    <strong class="param-title">{{ param }}</strong>
+                    {{ review.setup[param.toLowerCase()] }}
                 </div>
-            </transition>
+            </div>
+        </transition>
 
-            <div class="review__action">
-                <span class="review__action-rate">
-                    <a href="#">
-                        <i class="fas fa-thumbs-up up"></i>HELPFUL
-                    </a>
-                    <a href="#">
-                        <i class="fas fa-thumbs-down down"></i>NOT HELPFUL
-                    </a>
-                </span>
-                <a href="#" @click.prevent="show_more = !show_more">
-                    {{ show_more ? 'HIDE REVIEW' : 'READ MORE...' }}
+        <div class="review__action">
+            <span class="review__action-rate">
+                <a href="#">
+                    <i class="fas fa-thumbs-up up"></i>HELPFUL
                 </a>
-            </div>
+                <a href="#">
+                    <i class="fas fa-thumbs-down down"></i>NOT HELPFUL
+                </a>
+            </span>
+            <a href="#" @click.prevent="show_more = !show_more">
+                {{ show_more ? 'HIDE REVIEW' : 'READ MORE...' }}
+            </a>
         </div>
     </div>
 </template>
@@ -94,10 +93,30 @@ export default {
 .review {
     padding: 15px;
     box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    color: #dfdfe9;
+    margin: 15px 0;
+    background-color: rgba(0, 0, 0, 0.13);
     &__header {
         display: flex;
         align-items: center;
         margin-bottom: 10px;
+    }
+}
+.review__author {
+    text-align: right;
+    &-name {
+        font-size: 14px;
+        margin: 0;
+    }
+    &-img {
+        width: 35px;
+        margin-right: 10px;
+    }
+    &-date {
+
+        font-size: 12px;
     }
 }
 
@@ -129,6 +148,7 @@ export default {
         padding: 5px;
     }
     .param-title {
+        display: block;
         font-size: 14px;
         margin-bottom: 5px;
     }
