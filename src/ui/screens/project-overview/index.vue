@@ -329,41 +329,24 @@
                                                     <div class="text">Goal</div>
                                                     {{ project.funding.goal_amount }} USD
                                                 </div>
-                                                <div class="spent">
-                                                    <div class="progress progress-bar-vertical">
-                                                        <div class="progress-bar bg-success" role="progressbar"
-                                                             :aria-valuenow="project.funding.spent_amount['percent']"
-                                                             aria-valuemin="0" aria-valuemax="100"
-                                                             :style="{ height: project.funding.spent_amount['percent'] + '%' }">
-                                                            <span class="sr-only">{{ project.funding.spent_amount['percent'] }}% Complete</span>
-                                                        </div>
+                                                <div
+                                                    v-for="(prop, index) in crowdfunding_props"
+                                                    :key="index"
+                                                    :class="prop"
+                                                >
+                                                    <div class="progress-bar-vertical">
+                                                        <c-progress-bar
+                                                            :values="{
+                                                                reached: project.funding[prop + '_amount'],
+                                                                goal: project.funding.goal_amount
+                                                            }"
+                                                            direction="vertical"
+                                                        />
                                                     </div>
-                                                    <div class="text">Spent</div>
-                                                    {{ project.funding.spent_amount['amount'] }} USD
-                                                </div>
-                                                <div class="locked">
-                                                    <div class="progress progress-bar-vertical">
-                                                        <div class="progress-bar bg-success" role="progressbar"
-                                                             :aria-valuenow="project.funding.locked_amount['percent']"
-                                                             aria-valuemin="0" aria-valuemax="100"
-                                                             :style="{ height: project.funding.locked_amount['percent'] + '%' }">
-                                                            <span class="sr-only">{{ project.funding.locked_amount['percent'] }}% Complete</span>
-                                                        </div>
+                                                    <div>
+                                                        <p class="text"><strong>{{ prop | upperFirstChar }}</strong></p>
+                                                        {{ project.funding[prop + '_amount'] }} USD
                                                     </div>
-                                                    <div class="text">Locked</div>
-                                                    {{ project.funding.locked_amount['amount'] }} USD
-                                                </div>
-                                                <div class="overflow">
-                                                    <div class="progress progress-bar-vertical">
-                                                        <div class="progress-bar bg-success" role="progressbar"
-                                                             :aria-valuenow="project.funding.overflow_amount['percent']"
-                                                             aria-valuemin="0" aria-valuemax="100"
-                                                             :style="{ height: project.funding.overflow_amount['percent'] + '%' }">
-                                                            <span class="sr-only">{{ project.funding.overflow_amount['percent'] }}% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="text">Overflow</div>
-                                                    {{ project.funding.overflow_amount['amount'] }} USD
                                                 </div>
                                             </div>
                                             <div class="project__action">
@@ -500,7 +483,8 @@
             'c-frequently-traded-assets': () => import('@/ui/components/frequently-traded-assets'),
             'c-community-spotlight': () => import('@/ui/components/community-spotlight'),
             'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-review': () => import('@/ui/components/review')
+            'c-review': () => import('@/ui/components/review'),
+            'c-progress-bar': () => import('@/ui/components/progress-bar')
         },
         data() {
             return {
@@ -529,7 +513,8 @@
                     rating: 4.5,
                     minutes_played: 1938,
                     setup: { system: 'Windows 10', gpu: 'GTX 1080', cpu: 'Core i7 7980x', ram: '8 GB', storage: 'HyperX 1TB SSD' }
-                }
+                },
+                crowdfunding_props: ['spent', 'locked', 'overflow']
             }
         },
         methods: {
@@ -937,19 +922,20 @@
             margin-top: 10px;
             font-size: 15px;
             position: relative;
+            display: flex;
             .text {
-                font-weight: bold;
                 margin-bottom: 4px;
             }
             .progress-bar-vertical {
-                width: 5px;
+                width: 7px;
                 min-height: calc(100% - 7px);
                 display: flex;
+                border-radius: 4px;
                 align-items: flex-end;
-                margin: 4px 8px 3px 0;
-                float: left;
-                border-radius: 0;
-                background: #fff;
+                margin-right: 8px;
+                border-radius: 4px;
+                background-color: rgba(255,255,255,.3);
+                overflow: hidden;
                 .progress-bar {
                     width: 100%;
                     height: 0;

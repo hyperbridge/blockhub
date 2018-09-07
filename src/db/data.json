@@ -427,20 +427,11 @@
                             "text": "m6"
                         }
                     ],
-                    "funded_amount": "202,190.63",
-                    "goal_amount": "200,000.00",
-                    "spent_amount": {
-                        "amount": "32,000",
-                        "percent": "37"
-                    },
-                    "locked_amount": {
-                        "amount": "182,242",
-                        "percent": "71"
-                    },
-                    "overflow_amount": {
-                        "amount": "17,342",
-                        "percent": "12"
-                    }
+                    "funded_amount": "202190.63",
+                    "goal_amount": "200000.00",
+                    "spent_amount": "32000",
+                    "locked_amount": "182242",
+                    "overflow_amount": "17342"
                 },
                 "milestones": [
                     {

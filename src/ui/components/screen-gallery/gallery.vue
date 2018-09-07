@@ -77,7 +77,9 @@ export default {
         }
     },
     mounted() {
-        this.slideshow();
+        if (this.images) {
+            this.slideshow();
+        }
     },
     beforeDestroy() {
         this.enableSlideshow(false);
