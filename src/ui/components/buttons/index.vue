@@ -2,7 +2,7 @@
     <component
         :is="tag"
         class="c-btn"
-        :class="[status, 'c-btn-' + size ]"
+        :class="[status, 'c-btn-' + size , { 'swap-direction': swap_direction }]"
         @click="$emit('click')"
     >
         <i
@@ -10,7 +10,7 @@
             class="icon fas"
             :class="[
                 icon ? 'fa-' + icon : inject_filter,
-                swap_order ? 'swap_order' : ''
+                swap_order ? 'swap-order' : ''
             ]"
         ></i>
         <span>
@@ -34,6 +34,7 @@
                 default: 'default'
             },
             swap_order: Boolean,
+            swap_direction: Boolean,
             size: {
                 type: String,
                 default: 'sm'
@@ -89,9 +90,15 @@
             justify-content: center;
             margin-right: 3px;
         }
-        .swap_order {
+        .swap-order {
             order: 2;
             margin: 0 0 0 3px;
+        }
+        &.swap-direction {
+            flex-direction: column;
+            .icon {
+                margin-top: 3px;
+            }
         }
 
         &.c-btn-md{
@@ -108,7 +115,9 @@
             info: (#5D75F7, #fff, #586ee9, #30304B),
             success: (#5EA72B, #fff, #559727, #30304B),
             danger: (#F75D5D, #fff, #de5454, #30304B),
-            warning: (#FADC72, #3D3E5D, #efd26d, #32334c)
+            warning: (#FADC72, #3D3E5D, #efd26d, #32334c),
+            share: (#43B4C9, #fff, #43B4C9, #32334c),
+            support: (#43C981, #fff, #43C981, #30304B)
         );
 
         @each $status, $colorSet in $statusColors {

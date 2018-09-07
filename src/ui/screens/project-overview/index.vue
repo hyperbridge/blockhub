@@ -350,18 +350,9 @@
                                                 </div>
                                             </div>
                                             <div class="project__action">
-                                                <a href="#3" class="follow_link">
-                                                    <i class="fas fa-check"></i>
-                                                    Follow
-                                                </a>
-                                                <a href="#3" class="share_link">
-                                                    <i class="fas fa-share"></i>
-                                                    Share
-                                                </a>
-                                                <a href="#3" class="support_link">
-                                                    <i class="fas fa-life-ring"></i>
-                                                    Support
-                                                </a>
+                                                <c-button status="share" swap_direction>Share</c-button>
+                                                <c-button status="info" icon="check" swap_direction>Follow</c-button>
+                                                <c-button status="support" swap_direction>Support</c-button>
                                             </div>
                                         </div>
                                     </div>

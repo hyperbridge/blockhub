@@ -26,6 +26,8 @@ Vue.filter('statusIcon', status => {
             case 'danger': return 'exclamation-triangle';
             case 'danger-circle': return 'times-circle';
             case 'settings': return 'cog';
+            case 'support': return 'life-ring';
+            case 'share': return 'share';
             default: return '';
         }
     }
