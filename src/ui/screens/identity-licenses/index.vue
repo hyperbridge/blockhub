@@ -13,158 +13,37 @@
                             <c-heading-bar name="Owned Licenses" :showArrows="false" :showBackground="false">
                             </c-heading-bar>
                             <div class="licenses-list__container margin-top-30">
-                                <div class="licenses-list__item">
+                                <div
+                                    v-for="index in 6"
+                                    :key="index"
+                                    class="licenses-list__item"
+                                >
                                     <div class="icon">
-                                        <img src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240" />
+                                        <img :src="license.game.img" />
                                     </div>
                                     <div class="name">
-                                        <strong>Diablo III</strong>
-                                        <span>Blizzadr Entertainment Inc</span>
+                                        <strong>{{ license.game.name }}</strong>
+                                        <span>{{ license.game.developer }}</span>
                                     </div>
                                     <div class="expires_date">
                                         <strong>Expires date on</strong>
-                                        <span>July 8th 2021</span>
+                                        <span>{{ license.expiration_date }}</span>
                                     </div>
                                     <div class="sell_status">
                                         <strong>Sell</strong>
-                                        <span>Yes, publisher earns 5%</span>
+                                        <span>{{ license.sell }}</span>
                                     </div>
                                     <div class="trade_status">
                                         <strong>Trade</strong>
-                                        <span>No, </span>
+                                        <span>{{ license.trade }}</span>
                                     </div>
                                     <div class="price text-right">
                                         <strong>Purchace price</strong>
-                                        <span>$2999.00</span>
-                                    </div>
-                                </div>
-                                <div class="licenses-list__item">
-                                    <div class="icon">
-                                        <img src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240" />
-                                    </div>
-                                    <div class="name">
-                                        <strong>Diablo III</strong>
-                                        <span>Blizzadr Entertainment Inc</span>
-                                    </div>
-                                    <div class="expires_date">
-                                        <strong>Expires date on</strong>
-                                        <span>July 8th 2021</span>
-                                    </div>
-                                    <div class="sell_status">
-                                        <strong>Sell</strong>
-                                        <span>Yes, publisher earns 5%</span>
-                                    </div>
-                                    <div class="trade_status">
-                                        <strong>Trade</strong>
-                                        <span>No, </span>
-                                    </div>
-                                    <div class="price text-right">
-                                        <strong>Purchace price</strong>
-                                        <span>$2999.00</span>
-                                    </div>
-                                </div>
-                                <div class="licenses-list__item">
-                                    <div class="icon">
-                                        <img src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240" />
-                                    </div>
-                                    <div class="name">
-                                        <strong>Diablo III</strong>
-                                        <span>Blizzadr Entertainment Inc</span>
-                                    </div>
-                                    <div class="expires_date">
-                                        <strong>Expires date on</strong>
-                                        <span>July 8th 2021</span>
-                                    </div>
-                                    <div class="sell_status">
-                                        <strong>Sell</strong>
-                                        <span>Yes, publisher earns 5%</span>
-                                    </div>
-                                    <div class="trade_status">
-                                        <strong>Trade</strong>
-                                        <span>No, </span>
-                                    </div>
-                                    <div class="price text-right">
-                                        <strong>Purchace price</strong>
-                                        <span>$2999.00</span>
-                                    </div>
-                                </div>
-                                <div class="licenses-list__item">
-                                    <div class="icon">
-                                        <img src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240" />
-                                    </div>
-                                    <div class="name">
-                                        <strong>Diablo III</strong>
-                                        <span>Blizzadr Entertainment Inc</span>
-                                    </div>
-                                    <div class="expires_date">
-                                        <strong>Expires date on</strong>
-                                        <span>July 8th 2021</span>
-                                    </div>
-                                    <div class="sell_status">
-                                        <strong>Sell</strong>
-                                        <span>Yes, publisher earns 5%</span>
-                                    </div>
-                                    <div class="trade_status">
-                                        <strong>Trade</strong>
-                                        <span>No, </span>
-                                    </div>
-                                    <div class="price text-right">
-                                        <strong>Purchace price</strong>
-                                        <span>$2999.00</span>
-                                    </div>
-                                </div>
-                                <div class="licenses-list__item">
-                                    <div class="icon">
-                                        <img src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240" />
-                                    </div>
-                                    <div class="name">
-                                        <strong>Diablo III</strong>
-                                        <span>Blizzadr Entertainment Inc</span>
-                                    </div>
-                                    <div class="expires_date">
-                                        <strong>Expires date on</strong>
-                                        <span>July 8th 2021</span>
-                                    </div>
-                                    <div class="sell_status">
-                                        <strong>Sell</strong>
-                                        <span>Yes, publisher earns 5%</span>
-                                    </div>
-                                    <div class="trade_status">
-                                        <strong>Trade</strong>
-                                        <span>No, </span>
-                                    </div>
-                                    <div class="price text-right">
-                                        <strong>Purchace price</strong>
-                                        <span>$2999.00</span>
-                                    </div>
-                                </div>
-                                <div class="licenses-list__item">
-                                    <div class="icon">
-                                        <img src="https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240" />
-                                    </div>
-                                    <div class="name">
-                                        <strong>Diablo III</strong>
-                                        <span>Blizzadr Entertainment Inc</span>
-                                    </div>
-                                    <div class="expires_date">
-                                        <strong>Expires date on</strong>
-                                        <span>July 8th 2021</span>
-                                    </div>
-                                    <div class="sell_status">
-                                        <strong>Sell</strong>
-                                        <span>Yes, publisher earns 5%</span>
-                                    </div>
-                                    <div class="trade_status">
-                                        <strong>Trade</strong>
-                                        <span>No, </span>
-                                    </div>
-                                    <div class="price text-right">
-                                        <strong>Purchace price</strong>
-                                        <span>$2999.00</span>
+                                        <span>${{ license.price }}</span>
                                     </div>
                                 </div>
                             </div>
-                            <c-pagination></c-pagination>
+                            <c-content-navigation/>
                         </div>
                     </div>
                 </div>
@@ -177,12 +56,24 @@
     export default {
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
-            'c-pagination': () => import('@/ui/components/pagination'),
+            'c-content-navigation': () => import('@/ui/components/content-navigation'),
             'c-heading-bar': () => import('@/ui/components/heading-bar')
         },
-        data: () => ({
-            items: []
-        })
+        data() {
+            return {
+                license: {
+                    game: {
+                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240',
+                        name: 'Diablo III',
+                        developer: 'Blizzadr Entertainment Inc'
+                    },
+                    trade: true,
+                    expiration_date: 'July 8th 2021',
+                    sell: 'Yes, publisher earns 5%',
+                    price: '$2999.00'
+                }
+            }
+        }
     }
 </script>
 

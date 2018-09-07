@@ -30,11 +30,7 @@
                         </ul>
                         <div class="timeline-blk position-relative" v-if="timeline">
                             <div class="progress main_timeline" style="height: 15px;">
-                                <div class="progress-bar" role="progressbar"
-                                     :style="{ width: timeline.timeline_progress + '%' }"
-                                     :aria-valuenow="timeline.timeline_progress"
-                                     aria-valuemin="0"
-                                     aria-valuemax="100"></div>
+                                <c-progress-bar :percentages="timeline.timeline_progress"/>
                             </div>
                             <div class="period-container" v-if="timeline">
                                 <div v-for="(period, index) in timeline.timeline_periods" :key="index" class="period">
@@ -44,121 +40,30 @@
                                             {{ period.description }}
                                         </div>
                                         <div class="progress_line">
-                                            <div class="icon">
-                                                <i class="fas fa-clock"></i>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar"
-                                                     :style="{ width: period.progress['days_percent'] + '%' }"
-                                                     :aria-valuenow="period.progress['days_percent']"
-                                                     aria-valuemin="0"
-                                                     aria-valuemax="100"></div>
-                                            </div>
-                                            <div class="description">
-                                                {{ period.progress['days_amouth'] }} days left
-                                            </div>
+                                            <i class="fas fa-clock icon"></i>
+                                            <c-progress-bar :percentages="period.progress['days_percent']"/>
+                                            {{ period.progress['days_amouth'] }} days left
                                         </div>
                                         <div class="progress_line">
-                                            <div class="icon">
-                                                <i class="fas fa-check"></i>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar"
-                                                     :style="{ width: period.progress['done_percent'] + '%' }"
-                                                     :aria-valuenow="period.progress['done_percent']"
-                                                     aria-valuemin="0"
-                                                     aria-valuemax="100"></div>
-                                            </div>
-                                            <div class="description">
-                                                {{ period.progress['done_percent'] }}% Done
-                                            </div>
+                                            <i class="fas fa-check icon"></i>
+                                            <c-progress-bar :percentages="period.progress['done_percent']"/>
+                                            {{ period.progress['done_percent'] }}% Done
                                         </div>
                                         <div class="progress_line">
-                                            <div class="icon">
-                                                <i class="fas fa-dollar-sign"></i>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar"
-                                                     :style="{ width: period.progress['spent_percent'] + '%' }"
-                                                     :aria-valuenow="period.progress['spent_percent']"
-                                                     aria-valuemin="0"
-                                                     aria-valuemax="100"></div>
-                                            </div>
-                                            <div class="description">
-                                                {{ period.progress['spent_percent'] }}% Spent
-                                            </div>
+                                            <i class="fas fa-dollar-sign icon"></i>
+                                            <c-progress-bar :percentages="period.progress['spent_percent']"/>
+                                            {{ period.progress['spent_percent'] }}% Spent
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="milestones-list">
-                            <div class="milestones-list__item"
-                                 v-for="(milestone, index) in milestones"
-                                 :key="index"
-                            >
-                                <div class="thumb">
-                                    <img :src="milestone.img"/>
-                                </div>
-                                <div class="info">
-                                    <div class="head">
-                                        <div class="description">
-                                            <h4>{{ milestone.title }}</h4>
-                                            <p>{{ milestone.short_description}}</p>
-                                        </div>
-                                        <div class="milestones_progress">
-                                            <div class="progress_line">
-                                                <div class="icon">
-                                                    <i class="fas fa-clock"></i>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar" role="progressbar"
-                                                         :style="{ width: milestone.progress['days_percent'] + '%' }"
-                                                         :aria-valuenow="milestone.progress['days_percent']"
-                                                         aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
-                                                </div>
-                                                <div class="description">
-                                                    {{ milestone.progress['days_amouth'] }} days left
-                                                </div>
-                                            </div>
-                                            <div class="progress_line">
-                                                <div class="icon">
-                                                    <i class="fas fa-check"></i>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar" role="progressbar"
-                                                         :style="{ width: milestone.progress['done_percent'] + '%' }"
-                                                         :aria-valuenow="milestone.progress['done_percent']"
-                                                         aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
-                                                </div>
-                                                <div class="description">
-                                                    {{ milestone.progress['done_percent'] }}% Done
-                                                </div>
-                                            </div>
-                                            <div class="progress_line">
-                                                <div class="icon">
-                                                    <i class="fas fa-dollar-sign"></i>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar" role="progressbar"
-                                                         :style="{ width: milestone.progress['spent_percent'] + '%' }"
-                                                         :aria-valuenow="milestone.progress['spent_percent']"
-                                                         aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
-                                                </div>
-                                                <div class="description">
-                                                    {{ milestone.progress['spent_percent'] }}% Spent
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="text">
-                                        <p>{{ milestone.full_text}}</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <c-milestone
+                                v-for="(milestone, index) in milestones"
+                                :key="index"
+                                :milestone="milestone"
+                            />
                         </div>
                     </div>
                 </div>
@@ -262,7 +167,9 @@
             }
         },
         components: {
-            'c-layout': () => import('@/ui/layouts/default')
+            'c-layout': () => import('@/ui/layouts/default'),
+            'c-milestone': () => import('@/ui/components/projects/milestone'),
+            'c-progress-bar': () => import('@/ui/components/progress-bar'),
         },
         computed: {
             project: updateProject
@@ -284,15 +191,6 @@
             border-radius: 10px;
             background: #ffffff;
             z-index: 10;
-            .progress-bar {
-                height: 15px;
-                border-radius: 10px;
-                background: #2abaf3; /* Old browsers */
-                background: -moz-linear-gradient(left, #2abaf3 0%, #63ec48 100%); /* FF3.6-15 */
-                background: -webkit-linear-gradient(left, #2abaf3 0%, #63ec48 100%); /* Chrome10-25,Safari5.1-6 */
-                background: linear-gradient(to right, #2abaf3 0%, #63ec48 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2abaf3', endColorstr='#63ec48', GradientType=1); /* IE6-9 */
-            }
         }
         .period-container {
             display: flex;
@@ -344,134 +242,21 @@
                         font-size: 15px;
                     }
                     .progress_line {
-                        margin: 10px 0;
-                        &:last-child {
-                            margin-bottom: 0;
+                        display: flex;
+                        align-items: center;
+                        &:not(:last-child) {
+                            margin-bottom: 10px;
                         }
                         .icon {
-                            display: inline-block;
-                            width: 20px;
-                            float: left;
+                            min-width: 20px;
                             font-size: 20px;
-                            color: #fff;
-                            margin-right: 5px;
+                            margin-right: 15px;
                         }
-                        .progress {
-                            display: inline-block;
-                            width: calc(100% - 150px);
-                            background: #3e3e5c;
-                            border-radius: 4px;
-                            margin: 7px 0;
-                            height: 7px;
-                            .progress-bar {
-                                height: 7px;
-                                border-radius: 4px;
-                                background: #2abaf3; /* Old browsers */
-                                background: -moz-linear-gradient(left, #2abaf3 0%, #63ec48 100%); /* FF3.6-15 */
-                                background: -webkit-linear-gradient(left, #2abaf3 0%, #63ec48 100%); /* Chrome10-25,Safari5.1-6 */
-                                background: linear-gradient(to right, #2abaf3 0%, #63ec48 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-                                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2abaf3', endColorstr='#63ec48', GradientType=1); /* IE6-9 */
-                            }
+                        .progress-bar {
+                            margin-right: 15px;
                         }
-                        .description {
-                            display: inline-block;
-                            float: right;
-                            width: 100px;
-                            text-align: left;
-                        }
-
                     }
                 }
-            }
-        }
-    }
-    .milestones-list__item{
-        background: #2b2b41;
-        padding: 25px;
-        border: 1px solid #36364e;
-        border-radius: 5px;
-        margin-bottom: 50px;
-        display: inline-block;
-        float: left;
-        width: 100%;
-        &:last-child{
-            margin-bottom: 0;
-        }
-        .thumb{
-            display: inline-block;
-            float: left;
-            width: 25%;
-            img{
-                width: 100%;
-                height: auto;
-            }
-        }
-        .info{
-            display: inline-block;
-            float: right;
-            width: 73%;
-            .head{
-                display: flex;
-                flex-wrap: nowrap;
-                width: 100%;
-                justify-content: space-between;
-                margin-bottom: 30px;
-                .description{
-                    width: 68%;
-                    h4{
-                        font-size: 26px;
-                        font-weight: bold;
-                        margin-bottom: 15px;
-                    }
-                    p{
-                        font-size: 16px;
-                        font-weight: bold;
-                    }
-                }
-                .milestones_progress{
-                    width: 30%;
-                    .progress_line {
-                        margin: 0 0 5px 0;
-                        &:last-child {
-                            margin-bottom: 0;
-                        }
-                        .icon {
-                            display: inline-block;
-                            width: 20px;
-                            float: left;
-                            font-size: 18px;
-                            color: #fff;
-                            margin-right: 10px;
-                        }
-                        .progress {
-                            display: inline-block;
-                            width: calc(100% - 150px);
-                            background: #3e3e5c;
-                            border-radius: 4px;
-                            margin: 7px 0;
-                            height: 7px;
-                            .progress-bar {
-                                height: 7px;
-                                border-radius: 4px;
-                                background: #2abaf3; /* Old browsers */
-                                background: -moz-linear-gradient(left, #2abaf3 0%, #63ec48 100%); /* FF3.6-15 */
-                                background: -webkit-linear-gradient(left, #2abaf3 0%, #63ec48 100%); /* Chrome10-25,Safari5.1-6 */
-                                background: linear-gradient(to right, #2abaf3 0%, #63ec48 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-                                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2abaf3', endColorstr='#63ec48', GradientType=1); /* IE6-9 */
-                            }
-                        }
-                        .description {
-                            display: inline-block;
-                            float: right;
-                            width: 100px;
-                            text-align: left;
-                        }
-
-                    }
-                }
-            }
-            .text{
-                font-size: 15px;
             }
         }
     }
