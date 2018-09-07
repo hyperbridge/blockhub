@@ -22,7 +22,7 @@
                                     <span>usd</span>
                                 </div>
                             </div>
-                            <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> add to cart</a>
+                            <c-button status="success" icon="cart-plus">Add To Cart</c-button>
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                                     </c-dropdown>
                                     <c-searcher customClass="mb-0" />
                                 </div>
-                                <c-button status="info"  :icon_hide="true">All New Releases</c-button>
+                                <c-button status="info" icon_hide>All New Releases</c-button>
                             </div>
                             <c-game-grid
                                 :itemInRow=2

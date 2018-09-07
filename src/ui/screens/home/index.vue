@@ -10,7 +10,7 @@
                                 class="img-fluid"/>
                             <div class="d-flex justify-content-between w-100 align-items-center pt-3">
                                 <h3 class="p-0 m-0 font-weight-bold">Banner Heading or Game Title</h3>
-                                <a href="#3" class="btn btn-sm btn-success">Call to action</a>
+                                <c-button status="success" icon_hide>Call to action</c-button>
                             </div>
                         </div>
                     </div>

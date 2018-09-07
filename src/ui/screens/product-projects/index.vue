@@ -41,8 +41,7 @@
                                 </div>
                             </div>
                             <div>
-                                <a href="#3" class="btn btn-sm btn-info text-uppercase font-weight-bold">Submit
-                                    Project</a>
+                                <c-button status="info" icon_hide>Submit Project</c-button>
                             </div>
                         </div>
                     </div>

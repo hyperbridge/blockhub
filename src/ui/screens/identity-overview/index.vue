@@ -42,18 +42,9 @@
                             <span id="wallet_number">jbkjBhBJIBXIUi8plmPOJOnoNCYTcPSkSOsvsdf08Uhg7gBU</span>
                         </div>
                         <div class="identity__action-group">
-                            <a href="#3" class="btn btn-sm btn-info">
-                                <i class="fas fa-arrow-up"></i>
-                                Send funds
-                            </a>
-                            <a href="#3" class="btn btn-sm btn-info">
-                                <i class="fas fa-share"></i>
-                                Share
-                            </a>
-                            <a href="#3" class="btn btn-sm btn-danger">
-                                <i class="fas fa-times"></i>
-                                report
-                            </a>
+                            <c-button status="info" icon="arrow-up">Send funds</c-button>
+                            <c-button status="share">Share</c-button>
+                            <c-button status="danger">Report</c-button>
                         </div>
                     </div>
                     <div class="col-12">

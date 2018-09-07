@@ -1,11 +1,12 @@
 <template>
     <div class="games-list">
-        <div class="games-list__item"
-             :class="{ 'hovered' : hovered}"
-             v-for="(item, index) in items"
-             v-if="items"
-             :key="index"
-             :style="{ width: 'calc( 100% / ' + itemInRow + ')', background: itemBg }">
+        <div
+            v-for="(item, index) in items"
+            :key="index"
+            :class="{ 'hovered' : hovered }"
+            :style="{ width: 'calc( 100% / ' + itemInRow + ')', background: itemBg }"
+            class="games-list__item"
+        >
             <div v-if="item.price && showPrice" class="price">
                 <strong>{{ item.price }}</strong> USD
             </div>
@@ -22,26 +23,30 @@
                         <i class="fas fa-calendar-alt"></i>
                         {{ item.time }}
                     </div>
-                    <div class="rating_stars" v-if="item.starsCount && showRating">
-                        <i class="fas fa-star" v-for="num in Math.floor(item.starsCount)" :key="num"></i>
-                        <i class="fas fa-star-half"
-                           v-if="Number.isInteger(item.starsCount) === false"></i>
-                    </div>
-                    <a v-if="item.moreLink" :href="item.moreLink" class="btn btn-sm btn-success text-uppercase font-weight-bold">Buy Now</a>
+                    <c-rating-stars
+                        v-if="item.starsCount && showRating"
+                        :number="item.starsCount"
+                        class="rating_stars"
+                    />
+                    <c-button
+                        status="success"
+                        v-if="item.moreLink"
+                        :href="item.moreLink"
+                        icon_hide
+                    >Buy Now</c-button>
                 </div>
             </div>
-        </div>
-        <div v-else class="text-white">
-            Nothing to show
         </div>
     </div>
 </template>
 
 <script>
     export default {
+        name: 'games-grid-description',
         props: {
             items:{
-                type: Array
+                type: Array,
+                required: true
             },
             itemInRow: {
                 type: Number,
@@ -68,7 +73,8 @@
             }
         },
         components: {
-            'c-tags': () => import('@/ui/components/tags')
+            'c-tags': () => import('@/ui/components/tags'),
+            'c-rating-stars': () => import('@/ui/components/rating-stars')
         }
     }
 </script>

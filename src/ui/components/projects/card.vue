@@ -14,8 +14,8 @@
         <c-money-info label="Obtained Funds" :percent="goal_progress" :amount="project.funds.obtained"
                       :goal="project.funds.goal"/>
         <div class="item-action">
-            <a href="#3" class="btn btn-sm btn-info">Participate</a>
-            <a href="#3" class="btn btn-sm btn-success">Donate Funds</a>
+            <c-button status="info" icon_hide>Participate</c-button>
+            <c-button status="success" icon_hide>Donate Funds</c-button>
         </div>
     </div>
 </template>
@@ -41,7 +41,7 @@ export default {
     computed: {
         goal_progress() {
             const { obtained, goal } = this.project.funds;
-            return Math.floor(obtained / goal * 100);
+            return Math.round(obtained / goal * 100);
         }
     },
     filters: {
@@ -108,16 +108,10 @@ export default {
             font-size: 16px;
         }
         .item-action {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            flex-wrap: wrap;
             margin-top: 15px;
-            a {
-                margin-left: 10px;
-                font-weight: bold;
-                text-transform: uppercase;
-            }
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
     }
 </style>
