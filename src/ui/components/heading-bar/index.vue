@@ -12,10 +12,10 @@
                 MORE <i class="fas fa-angle-right"></i>
             </a>
             <div class="heading-bar__nav" v-if="showArrows">
-                <a href="#3" class="nav-prev">
+                <a href="#3" class="nav-prev" @click="$emit('prevClick')">
                     <i class="fas fa-arrow-left"></i>
                 </a>
-                <a href="#3" class="nav-next">
+                <a href="#3" class="nav-next" @click="$emit('nextClick')">
                     <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
@@ -174,6 +174,8 @@ export default {
             float: left;
             line-height: 40px;
             font-size: 20px;
+            cursor: pointer;
+            opacity: .7;
             &.more{
                 font-size: 14px;
                 width: auto;
@@ -182,6 +184,9 @@ export default {
                 i{
                     margin-left: 5px;
                 }
+            }
+            &:hover{
+                opacity: 1;
             }
         }
     }

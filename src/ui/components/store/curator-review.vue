@@ -3,7 +3,7 @@
         <img :src="review.game.img" class="curator-review__img"/>
         <div class="curator-review__header">
             <c-author :author="review.author"/>
-            <span>
+            <span style="font-size: 22px">
                 <i class="fas fa-star"></i>
                 <strong>{{ review.rate }}</strong>
             </span>
@@ -51,7 +51,8 @@ export default {
     },
     components: {
         'c-author': () => import('@/ui/components/author'),
-        'c-rating-stars': () => import('@/ui/components/rating-stars')
+        'c-rating-stars': () => import('@/ui/components/rating-stars'),
+        'c-button': () => import('@/ui/components/buttons/wide'),
     },
     data() {
         return {
@@ -69,6 +70,7 @@ export default {
     padding: 10px;
     margin: 5px;
     border-radius: 4px;
+    color: #fff;
     &__ {
         &img {
             width: 100%;
@@ -81,9 +83,16 @@ export default {
             align-items: center;
             justify-content: space-between;
             margin: 10px 0;
+            .author{
+                font-size: 22px;
+                font-weight: bold;
+            }
         }
         &more-header {
             margin-top: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
         }
     }
 }
@@ -103,8 +112,10 @@ export default {
 
 .sub-review__img {
     object-fit: cover;
-    width: 50%;
+    width: 45%;
     max-height: 80px;
+    height: 100%;
+    min-height: 60px;
     border-radius: 4px;
 }
 
