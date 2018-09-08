@@ -7,7 +7,7 @@
             <div class="game-includes__item-container" v-for="(item, index) of list" :key="index" >
                 <c-includes-item :item="item" />
             </div>
-            <div class="game-includes__list-more" v-if="list.length > showNumber">
+            <div class="game-includes__list-more" @click="showMore = true">
                 <i class="fas fa-chevron-right"></i>
                 <span>+{{ hiddenCount() }}</span>
             </div>
@@ -21,7 +21,8 @@
         props:['list', 'showNumber'],
         data(){
             return{
-                hiddenItems: ''
+                hiddenItems: '',
+                showMore: false
             }
         },
         components: {
@@ -30,6 +31,11 @@
         methods:{
             hiddenCount(){
                 return this.list.length - this.showNumber;
+            }
+        },
+        computed:{
+            limitedList() {
+                return this.showMore ? this.list : this.list.splice(3);
             }
         }
     }
@@ -83,6 +89,7 @@
         font-size: 26px;
         padding: 0 10px 0 15px;
         color: #fff;
+        cursor: pointer;
         i{
             font-size: 68px;
         }
