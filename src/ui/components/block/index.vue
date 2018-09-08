@@ -1,7 +1,7 @@
 <template>
     <div class="block" :class="{ 'bg-gradient' : bgGradient, 'bg-color' : bgColor, 'no-gutter' : noGutter, 'only-content-bg' : onlyContentBg}">
         <c-heading-bar :name="title" class="mb-0" :showArrows="false" v-if="title" />
-        <slot name="title"></slot>
+        <slot name="title" v-else></slot>
         <div class="block__content">
             <slot></slot>
         </div>
@@ -38,12 +38,11 @@
 
 <style lang="scss" scoped>
     .block {
-        padding: 15px 20px 20px;
+        padding: 10px 15px 15px;
         border-radius: 5px;
         position: relative;
         color: #fff;
         overflow: hidden;
-        margin-bottom: 40px;
         &:not(.only-content-bg){
             &.bg-color{
                 background: rgba(0, 0, 0, .13);
@@ -82,7 +81,6 @@
         }
     }
     .block__content{
-        overflow: hidden;
         width: 100%;
     }
 </style>
