@@ -127,5 +127,6 @@
         padding: 20px 15px 15px;
         text-align: left;
         border-radius: 0 0 5px 5px;
+        margin-top: 30px;
     }
 </style>
