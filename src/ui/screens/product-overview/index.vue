@@ -72,7 +72,7 @@
 
                         <div class="row">
                             <div class="col-7">
-                                <c-screen-gallery :main="product.images.main" :items="product.images.preview" />
+                                <c-screen-gallery :main="product.images.medium_tile" :items="product.images.preview" />
 
                                 <c-sale-box
                                     :sale_box="product.sale_box"
