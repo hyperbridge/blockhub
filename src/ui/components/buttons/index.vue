@@ -43,25 +43,6 @@
             inject_filter() {
                 return this.$options.filters.statusIcon(this.status);
             }
-        },
-        /* these filters are accessible via Vue instance and were added only for storybook support */
-        filters: {
-            statusIcon(status) {
-                const getClass = status => {
-                    switch(status) {
-                        case 'info': return 'info';
-                        case 'success': return 'check';
-                        case 'success-circle': return 'check-circle';
-                        case 'warning': return 'exclamation';
-                        case 'danger': return 'exclamation-triangle';
-                        case 'danger-circle': return 'times-circle';
-                        case 'settings': return 'cog';
-                        default: return '';
-                    }
-                }
-                const statusClass = getClass(status);
-                return statusClass.length ? 'fa-' + statusClass : '';
-            }
         }
     }
 </script>
