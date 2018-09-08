@@ -133,7 +133,7 @@
         width: auto;
         display: inline-block;
         position: relative;
-        background: #2E2F4A;
+        background: rgba(46, 47, 74, 0);
         border-radius: 5px 5px 0 0;
         &:after {
                 position: absolute;
@@ -142,8 +142,8 @@
                 bottom: 0;
                 right: -39px;
                 border: 21px solid transparent;
-                border-bottom: 21px solid #2E2F4A;
-                border-left: 21px solid #2E2F4A;
+                border-bottom: 21px solid rgba(46, 47, 74, 0);
+                border-left: 21px solid rgba(46, 47, 74, 0);
             }
         &:before {
                 position: absolute;
@@ -152,8 +152,8 @@
                 bottom: 0;
                 left: -39px;
                 border: 21px solid transparent;
-                border-bottom: 21px solid #2E2F4A;
-                border-right: 21px solid #2E2F4A;
+                border-bottom: 21px solid rgba(46, 47, 74, 0);
+                border-right: 21px solid rgba(46, 47, 74, 0);
             }
         ul{
             padding: 0;
