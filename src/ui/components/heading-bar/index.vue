@@ -53,7 +53,6 @@ export default {
         margin: 0;
         display: inline-block;
         font-size: 21px;
-        font-weight: bold;
         line-height: 36px;
         float: left;
         max-width: calc( 100% - 95px );

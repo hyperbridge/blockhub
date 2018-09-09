@@ -467,7 +467,7 @@
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
             'c-game-plan': () => import('@/ui/components/game-plans/plan'),
-            'c-block-1': () => import('@/ui/components/block-1'),
+            'c-block-1': () => import('@/ui/components/block'),
             'c-screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
             'c-tags-list': () => import('@/ui/components/tags'),
             'c-rating-block': () => import('@/ui/components/rating-block'),

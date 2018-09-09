@@ -14,8 +14,8 @@
                     />
                 </li>
             </ul>
-            <a :href="fullReviewsLink" class="btn btn-outline-white">See Full Reviews</a>
-            <a :href="rateGameLink" class="btn btn-outline-white">Rate the game</a>
+            <a :href="fullReviewsLink" class="btn btn-outline-white" v-if="fullReviewsLink">See Full Reviews</a>
+            <a :href="rateGameLink" class="btn btn-outline-white" v-if="rateGameLink">Rate the game</a>
         </div>
     </div>
 </template>
@@ -25,16 +25,13 @@ export default {
     name: 'rating-block',
     props: {
         items: {
-            type: Array,
-            required: true
+            type: Array
         },
         fullReviewsLink: {
-            type: String,
-            required: true
+            type: String
         },
         rateGameLink: {
-            type: String,
-            required: true
+            type: String
         }
     },
     components: {

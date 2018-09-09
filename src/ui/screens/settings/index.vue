@@ -97,7 +97,7 @@ import { mapActions } from 'vuex';
 export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default'),
-        'c-block-1': () => import('@/ui/components/block-1')
+        'c-block-1': () => import('@/ui/components/block')
     },
     data() {
         return {

@@ -1329,7 +1329,7 @@ storiesOf('Assets List', module)
     }))
 
 
-import Block from '../ui/components/block-1/index.vue'
+import Block from '../ui/components/block/index.vue'
 
 storiesOf('Block', module)
     .add('default', () => ({
@@ -1338,7 +1338,7 @@ storiesOf('Block', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-block title="This is block title" bClass="col-8">
+             <c-block title="This is block title" class="col-8">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Suspendisse vel arcu sit amet erat vestibulum volutpat.
                 Ut volutpat enim vel augue luctus luctus</p>
@@ -1349,7 +1349,40 @@ storiesOf('Block', module)
          </div>
         `
     }))
-
+    .add('gradient', () => ({
+        components: {
+            'c-block': Block
+        },
+        template: `
+             <div class="row m-0 p-3">
+                 <c-block title="This is block title" class="col-8" :bgGradient="true">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Suspendisse vel arcu sit amet erat vestibulum volutpat.
+                    Ut volutpat enim vel augue luctus luctus</p>
+                    <p>Curabitur et molestie eros. Duis sodales ante velit,
+                    ut fringilla turpis dictum sit amet. Praesent quis lacus
+                    ac tellus vehicula commodo sit amet sit amet ex.</p>
+                </c-block>
+             </div>
+            `
+    }))
+    .add('only content bg', () => ({
+        components: {
+            'c-block': Block
+        },
+        template: `
+             <div class="row m-0 p-3">
+                 <c-block title="This is block title" class="col-8" :bgGradient="true" :onlyContentBg="true">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Suspendisse vel arcu sit amet erat vestibulum volutpat.
+                    Ut volutpat enim vel augue luctus luctus</p>
+                    <p>Curabitur et molestie eros. Duis sodales ante velit,
+                    ut fringilla turpis dictum sit amet. Praesent quis lacus
+                    ac tellus vehicula commodo sit amet sit amet ex.</p>
+                </c-block>
+             </div>
+            `
+    }))
 import CustomModal from '../ui/components/custom-modal/index'
 
 storiesOf('Modal', module)
