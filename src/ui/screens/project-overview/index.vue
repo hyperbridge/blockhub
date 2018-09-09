@@ -9,9 +9,9 @@
                     <div class="col-12 tab-content" v-else>
                         <p class="errors" v-if="errors.length">
                             <strong>Please correct the following error(s):</strong>
-                        <ul>
-                            <li v-for="error in errors" :key="error">{{ error }}</li>
-                        </ul>
+                            <ul>
+                                <li v-for="error in errors" :key="error">{{ error }}</li>
+                            </ul>
                         </p>
 
                         <div class="row justify-content-between">
@@ -542,7 +542,7 @@
                     this.$store.dispatch('marketplace/setEditorMode', 'viewing')
                 }
             },
-            checkForm: function (e) {
+            checkForm(e) {
                 this.errors = []
 
                 if (this.project.name && this.project.description) {

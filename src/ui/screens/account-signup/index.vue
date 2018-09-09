@@ -3,7 +3,12 @@
         <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
-
+                    <p class="errors" v-if="errors.length">
+                        <strong>Please correct the following error(s):</strong>
+                        <ul>
+                            <li v-for="error in errors" :key="error">{{ error }}</li>
+                        </ul>
+                    </p>
                     <c-tabs>
                         <c-tab name="Step 1" :selected="true" showFooter="true">
                             <div class="tab-container">
@@ -15,14 +20,14 @@
                                                 <div class="form-group">
                                                     <label class="sr-only">First name</label>
                                                     <input type="text" class="form-control" placeholder="First name"
-                                                           name="first_name">
+                                                           name="first_name" v-model="account.first_name">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Last name</label>
                                                     <input type="text" class="form-control" placeholder="Last name"
-                                                           name="last_name">
+                                                           name="last_name" v-model="account.last_name">
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -40,7 +45,7 @@
                                                 <div class="form-group">
                                                     <label class="sr-only">Email</label>
                                                     <input type="email" class="form-control" placeholder="Email"
-                                                           name="email">
+                                                           name="email" v-model="account.email">
                                                 </div>
                                             </div>
                                         </div>
@@ -230,7 +235,7 @@
                                     </template>
                                 </c-switch>
                                 <div>
-                                    <c-button variant="success" text="Next step" icon="fas fa-angle-right" icon_position="right" />
+                                    <c-button variant="success" text="Next step" icon="fas fa-angle-right" icon_position="right" :click="nextStep" />
                                 </div>
                             </div>
                         </c-tab>
@@ -506,6 +511,60 @@
             'c-tabs': () => import('@/ui/components/tab/tabs'),
             'c-switch': () => import('@/ui/components/switch/index'),
             'c-button': () => import('@/ui/components/buttons/index'),
+        },
+        data() {
+            return {
+                current_step: 1,
+                errors: [],
+                account: {
+                    first_name: '',
+                    last_name: '',
+                    birthday: '',
+                    email: '',
+                    agreement: false,
+                    newsletter: false
+                }
+            }
+        },
+        methods: {
+            nextStep() {
+                if (!this.checkForm()) {
+                    return
+                }
+
+                // next step
+            },
+            checkForm(e) {
+                this.errors = []
+
+                if (this.current_step === 1) {
+                    if (this.account.first_name && this.account.last_name && this.account.email && this.account.agreement && this.account.newsletter) {
+                        this.current_step = 2
+
+                        return true
+                    }
+
+                    if (!this.account.first_name) {
+                        this.errors.push('First name required.')
+                    }
+                    if (!this.account.last_name) {
+                        this.errors.push('Last name required.')
+                    }
+                    if (!this.account.birthday) {
+                        this.errors.push('Birthday required.')
+                    }
+                    if (!this.account.email) {
+                        this.errors.push('Email required.')
+                    }
+                    if (!this.account.agreement) {
+                        this.errors.push('You must agree to the terms & conditions to use BlockHub.')
+                    }
+                } else if (this.current_step === 2) {
+                    
+                } else if (this.current_step === 3) {
+
+                }
+            }
         }
     }
 </script>
