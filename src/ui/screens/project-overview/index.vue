@@ -456,7 +456,7 @@
         }
 
         if (project && project.images && project.images.header) {
-            window.document.body.style['background-image'] = 'url(' + project.images.header + ')'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(' + project.images.header + ')'
         }
 
         return project
@@ -580,7 +580,7 @@
             //this.$store.dispatch('marketplace/setEditorMode', 'editing')
         },
         beforeDestroy() {
-            window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
         },
         updated() {
             $('#tag-editor').select2()

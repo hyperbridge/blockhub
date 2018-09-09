@@ -89,6 +89,9 @@
             return {
             }
         },
+        mounted() {
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/download-bg.png)'
+        }
     }
 </script>
 

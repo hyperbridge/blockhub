@@ -92,7 +92,7 @@
             return
 
         if (product.images && product.images.header)
-            window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(' + product.images.header + ')'
 
         if (!product.projects)
             product.projects = []
@@ -143,7 +143,7 @@
         mounted: updateProduct,
         created: updateProduct,
         beforeDestroy() {
-            window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
         }
     }
 </script>

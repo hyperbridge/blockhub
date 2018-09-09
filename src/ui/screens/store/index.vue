@@ -236,7 +236,7 @@ const updateLandingImage = function() {
     const frontpage_product = this.$store.state.marketplace.frontpage_product
 
     if (frontpage_product.images && frontpage_product.images.header)
-        window.document.body.style['background-image'] = 'url(' + frontpage_product.images.header + ')'
+        window.document.getElementById('header-bg').style['background-image'] = 'url(' + frontpage_product.images.header + ')'
 }
 
 export default {
@@ -541,7 +541,7 @@ export default {
     mounted: updateLandingImage,
     created: updateLandingImage,
     beforeDestroy() {
-        window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+        window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
     }
 }
 </script>
