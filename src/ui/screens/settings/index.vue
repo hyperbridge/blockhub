@@ -1,11 +1,6 @@
 <template>
     <c-layout navigationKey="settings-navigation">
         <div class="content" id="content">
-            <c-block-1 title="Settings">
-                <div class="console-log d-none" ref="consoleLog" v-html="consoleLogMessages">
-                    {{ consoleLogMessages }}
-                </div>
-            </c-block-1>
             <c-block-1 title="Client Settings">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-6">
@@ -83,6 +78,15 @@
                     </div>
                 </div>
             </c-block-1>
+            <c-block-1 title="Advanced">
+                <div class="row">
+                    <div class="col-12 benchmark">
+                        <p>Advanced settings can be managed here. These are primarily for developers @BlockHub.
+                            <br /><strong>Warning:</strong> Only use these if you know what you're doing.</p>
+                        <c-button @click="clearDatabase">DELETE DATABASE</c-button>
+                    </div>
+                </div>
+            </c-block-1>
         </div>
     </c-layout>
 </template>
@@ -118,6 +122,19 @@ export default {
                 if (settings.animations) this.updateSettings('animations');
             } else {
                 enableAll(false);
+            }
+        },
+        clearDatabase() {debugger
+            let DBDeleteRequest = window.indexedDB.deleteDatabase("LokiCatalog")
+
+            DBDeleteRequest.onerror = function(event) {
+                console.log("Error deleting database.")
+            }
+            
+            DBDeleteRequest.onsuccess = function(event) {
+                console.log("Database deleted successfully.")
+                    
+                console.log(event.result) // should be undefined
             }
         }
     },
