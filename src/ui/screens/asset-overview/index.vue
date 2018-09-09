@@ -135,7 +135,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <c-pagination :pages="5" :showBg="true">
+                            <c-pagination :pages="5">
                                 <template slot="left-content" class="text-left">
                                     <strong>245345</strong> Available on the market
                                 </template>

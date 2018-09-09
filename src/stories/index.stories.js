@@ -2653,6 +2653,21 @@ storiesOf('Product Review', module)
         `
     }))
 
+import Banner from '@/ui/components/banner'
+storiesOf('Banner', module)
+    .add('default', () =>({
+        components:{
+            'c-banner': Banner
+        },
+        data(){
+            return{
+                img: 'https://d2q63o9r0h0ohi.cloudfront.net/images/kobolds-and-catacombs/header-bg-backup-337031b146d6540bc3d2513f0fb11daa966398f512db7163c7e819120a62b2b17c2abaa893cfcef5c14e1f4a696ce45fa8d2e4d36a987029e563b449b402a115.jpg',
+                logo: 'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png'
+            }
+        },
+        template: `<div class="padding-50" style="width: 900px"><c-banner :imgSrc="img" :logoSrc="logo" /></div>`
+    }))
+
 
 
 
