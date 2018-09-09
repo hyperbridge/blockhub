@@ -5,7 +5,10 @@ import {action} from '@storybook/addon-actions'
 import {linkTo} from '@storybook/addon-links'
 import {withKnobs, text, boolean, number, object} from '@storybook/addon-knobs/vue'
 
+
 import '../css/styles.scss'
+import '@/filters';
+import '@/components';
 
 import * as data from './components-data'
 
@@ -531,10 +534,40 @@ storiesOf('Buttons', module)
             <c-button status="danger" size="lg">danger</c-button>
         `)
     }))
+    .add('share', () => ({
+        components: {'c-button': Buttons},
+        template: injectButtonTemplate(`
+            <c-button status="share">share</c-button>
+            <c-button status="share" size="md">share</c-button>
+            <c-button status="share" size="lg">share</c-button>
+        `)
+    }))
+    .add('support', () => ({
+        components: {'c-button': Buttons},
+        template: injectButtonTemplate(`
+            <c-button status="support">support</c-button>
+            <c-button status="support" size="md">support</c-button>
+            <c-button status="support" size="lg">support</c-button>
+        `)
+    }))
+    .add('[options] - swap direction', () => ({
+        components: {'c-button': Buttons},
+        template: injectButtonTemplate(`
+            <c-button status="info" swap_direction>direction swapped</c-button>
+            <c-button status="info" size="md" swap_direction>direction swapped</c-button>
+            <c-button status="info" size="lg" swap_direction>direction swapped</c-button>
+        `)
+    }))
     .add('[options] - swap order', () => ({
         components: {'c-button': Buttons},
         template: injectButtonTemplate(`
             <c-button status="success" swap_order>success</c-button>
+        `)
+    }))
+    .add('[options] - swap order & direction', () => ({
+        components: {'c-button': Buttons},
+        template: injectButtonTemplate(`
+            <c-button status="info" size="lg" swap_direction swap_order>order & direction swapped</c-button>
         `)
     }))
     .add('[options] - hide icon', () => ({
@@ -2486,6 +2519,138 @@ storiesOf('Game Series', module)
             }
         },
         template: `<div class="p-5" style="width: 900px"><c-game-includes-list :list="list" :showNumber="5" /></div>`
+    }))
+
+import ProgressBar from '@/ui/components/progress-bar';
+storiesOf('Progress Bar', module)
+    .add('default', () => ({
+        components: {
+            'c-progress-bar': ProgressBar
+        },
+        template: `
+            <div class="padding-50">
+                <c-progress-bar :percentages="74"/>
+            </div>
+        `
+    }))
+    .add('vertical', () => ({
+        components: {
+            'c-progress-bar': ProgressBar
+        },
+        template: `
+            <div class="padding-50" :style="{ height: '200px' }">
+                <c-progress-bar direction="vertical"/>
+            </div>
+        `
+    }))
+    .add('calculate percentages', () => ({
+        components: {
+            'c-progress-bar': ProgressBar
+        },
+        data() {
+            return {
+                values: { reached: 391, goal: 2490 }
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <h2 :style="{ color: '#fff' }">Progress bar can accept object prop and calculate percentages</h2>
+                <pre :style="{ color: '#fff' }">:values="{{ values }}"</pre>
+                <c-progress-bar :values="values"/>
+            </div>
+        `
+    }))
+    .add('show percentages', () => ({
+        components: {
+            'c-progress-bar': ProgressBar
+        },
+        template: `
+            <div class="padding-50">
+                <c-progress-bar :percentages="41" show_text/>
+            </div>
+        `
+    }))
+
+import ProjectMilestone from '@/ui/components/projects/milestone';
+storiesOf('Project Milestone', module)
+    .add('default', () => ({
+        components: {
+            'c-project-milestone': ProjectMilestone
+        },
+        data() {
+            return {
+                milestone: {
+                    img: 'http://via.placeholder.com/350x250',
+                    title: 'Milestone 1',
+                    short_description: `For far away, behind the word mountains, far from the countries Vokalia and Consonatia, there live.`,
+                    full_text: `Aenean eu tellus vel tortor tincidunt pharetra. Aenean mattis, sapien vel
+                        lacinia accumsan, justo mi venenatis justo, ut accumsan diam mauris sit amet
+                        ipsum. Vivamus iaculis lectus vel egestas vehicula. Phasellus in lacus nunc.
+                        Curabitur lobortis arcu neque, non rutrum elit placerat eget.`,
+                    progress: {
+                        days_amouth: "133",
+                        days_percent: 94,
+                        done_percent: 8,
+                        spent_percent: 95
+                    }
+                }
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-project-milestone :milestone="milestone"/>
+            </div>
+        `
+    }))
+
+import CommunitySpotlight from '@/ui/components/community-spotlight';
+storiesOf('Community Spotlight', module)
+    .add('default', () => ({
+        components: {
+            'c-community-spotlight': CommunitySpotlight
+        },
+        data() {
+            return {
+                discussions: [
+                    { link: '', name: 'Title', count: 98 },
+                    { link: '', name: 'Post name', count: 98 },
+                    { link: '', name: 'Discussion', count: 98 }
+                ]
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-community-spotlight
+                    :discussions="discussions"
+                />
+            </div>
+        `
+    }))
+
+import ProductReview from '@/ui/components/review';
+storiesOf('Product Review', module)
+    .add('default', () => ({
+        components: {
+            'c-review': ProductReview
+        },
+        data() {
+            return {
+                review: {
+                    author: { name: 'Nakatochi', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png' },
+                    title: 'Good game with very nice graphics made by very smart people.',
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.',
+                    date: '2018-08-19T04:09:00.000Z',
+                    rating: 4.5,
+                    minutes_played: 1938,
+                    setup: { system: 'Windows 10', gpu: 'GTX 1080', cpu: 'Core i7 7980x', ram: '8 GB', storage: 'HyperX 1TB SSD' }
+                }
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-review :review="review"/>
+            </div>
+        `
     }))
 
 

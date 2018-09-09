@@ -9,7 +9,7 @@
         aria-valuemax="100"
     >
         {{ show_text && progress > 8 ? progress : '' }}
-        <span v-if="sr" class="sr-only">{{ progress }}</span>
+        <span class="sr-only">{{ progress }}</span>
     </div>
 </template>
 
@@ -26,11 +26,7 @@ export default {
                 return ['horizontal', 'vertical'].includes(direction);
             }
         },
-        show_text: Boolean,
-        sr: {
-            type: Boolean,
-            default: true
-        }
+        show_text: Boolean
     },
     data() {
         return {
@@ -62,6 +58,7 @@ export default {
         }
         &.vertical {
             width: 7px;
+            height: 100%;
         }
     }
 </style>
