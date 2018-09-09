@@ -42,7 +42,6 @@
         border-radius: 5px;
         position: relative;
         color: #fff;
-        overflow: hidden;
         &:not(.only-content-bg){
             &.bg-color{
                 background: rgba(0, 0, 0, .13);

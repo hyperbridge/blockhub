@@ -29,41 +29,40 @@
 
                 <div class="row product-grid margin-bottom-30">
                     <div class="col-12">
-                        <c-heading-bar name="New Releases"
-                                       :showArrows="showArrowsState(demo_products, 3)"
-                                       :showBackground="true"
-                                       @prevClick="demo_products_sl.slidePrev()"
-                                       @nextClick="demo_products_sl.slideNext()" />
+                        <c-block class="margin-bottom-30" :onlyContentBg="true" :noGutter="true">
+                            <c-heading-bar  slot="title"
+                                            class="mb-0"
+                                            name="New Releases"
+                                            :showArrows="showArrowsState(demo_products, 3)"
+                                            :showBackground="true"
+                                            @prevClick="demo_products_sl.slidePrev()"
+                                            @nextClick="demo_products_sl.slideNext()" />
+
+                            <c-swiper :options="demoSlider" ref="demo_products_sl" style="margin: 0 -10px" v-if="demo_products.length>0">
+                                <c-slide v-for="(product, index) in demo_products" :key="index">
+                                    <c-product-card-dynamic :product="product" />
+                                </c-slide>
+                            </c-swiper>
+
+                        </c-block>
+
+                        <c-block class="margin-bottom-30" :onlyContentBg="true" :noGutter="true">
+                            <c-heading-bar  slot="title"
+                                            class="mb-0"
+                                            name="Summer Sale"
+                                            :showArrows="showArrowsState(sale_products, 3)"
+                                            :showBackground="true"
+                                            @prevClick="summer_sale_sl.slidePrev()"
+                                            @nextClick="summer_sale_sl.slideNext()" />
+
+                            <c-swiper :options="saleSlider" ref="summer_sale_sl" style="margin: 0 -10px" v-if="sale_products.length>0">
+                                <c-slide v-for="(product, index) in sale_products" :key="index">
+                                    <c-product-card-dynamic :product="product" />
+                                </c-slide>
+                            </c-swiper>
+
+                        </c-block>
                     </div>
-
-                    <c-swiper :options="demoSlider" ref="demo_products_sl" class="w-100" v-if="demo_products.length>0">
-                        <c-slide v-for="(product, index) in demo_products" :key="index">
-                            <c-product-card-dynamic :product="product" />
-                        </c-slide>
-                    </c-swiper>
-                </div>
-
-                <div class="row product-grid margin-bottom-30">
-                    <div class="col-12">
-                        <c-heading-bar name="Summer Sale"
-                                       :showArrows="showArrowsState(sale_products, 3)"
-                                       :showBackground="true"
-                                       @prevClick="summer_sale_sl.slidePrev()"
-                                       @nextClick="summer_sale_sl.slideNext()" />
-                    </div>
-
-                    <c-swiper :options="saleSlider" ref="summer_sale_sl" class="w-100" v-if="sale_products.length>0">
-                        <c-slide v-for="(product, index) in sale_products" :key="index">
-                            <c-product-card-dynamic :product="product" />
-                        </c-slide>
-                    </c-swiper>
-
-                        <!--<c-carousel :perPage="3" :paginationEnabled="false" ref="summer_sale" :loop="true">-->
-                            <!--<c-slide v-for="(product, index) in sale_products" :key="index">-->
-                                <!--<c-product-card :product="product" />-->
-                            <!--</c-slide>-->
-                        <!--</c-carousel>-->
-
                 </div>
 
                 <div class="row margin-bottom-70 margin-top-40 align-items-stretch">
@@ -87,8 +86,8 @@
                 </div>
 
                 <div class="row product-grid margin-bottom-30">
-                    <div class="col-12">
-                        <c-heading-bar>
+                    <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                        <c-heading-bar slot="title" class="mb-0">
                             <template slot="heading-tabs">
                                 <a href="#3" class="active">New Releases</a>
                                 <a href="#3">Most Sold</a>
@@ -101,30 +100,26 @@
                                 <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" @click_up=""  @click_down="" />
                             </template>
                         </c-heading-bar>
-                    </div>
-                    <div class="col-12">
-                        <div class="block-bg block-gradient">
-                            <div class="filter-blk">
-                                <div class="d-flex align-items-center">
-                                    <c-dropdown id="test" name="Filter by Genre" :showBg="true">
-                                        <a href="#3">RPG</a>
-                                        <a href="#3">ACTION</a>
-                                        <a href="#3">Cars</a>
-                                    </c-dropdown>
-                                    <c-searcher customClass="mb-0" />
-                                </div>
-                                <c-button status="info" icon_hide>All New Releases</c-button>
+                        <div class="filter-blk">
+                            <div class="d-flex align-items-center">
+                                <c-dropdown id="test" name="Filter by Genre" :showBg="true">
+                                    <a href="#3">RPG</a>
+                                    <a href="#3">ACTION</a>
+                                    <a href="#3">Cars</a>
+                                </c-dropdown>
+                                <c-searcher customClass="mb-0" />
                             </div>
-                            <c-game-grid
-                                :itemInRow=2
-                                :showRating=false
-                                :showTime=true
-                                v-bind:items="new_games"
-                                itemBg="transparent"
-                            />
-                            <c-content-navigation />
+                            <c-button status="info" icon_hide>All New Releases</c-button>
                         </div>
-                    </div>
+                        <c-game-grid
+                            :itemInRow=2
+                            :showRating=false
+                            :showTime=true
+                            v-bind:items="new_games"
+                            itemBg="transparent"
+                        />
+                        <c-content-navigation />
+                    </c-block>
                 </div>
 
                 <div class="row margin-bottom-70 margin-top-40 align-items-stretch">
@@ -151,18 +146,18 @@
 
                 <div class="row margin-bottom-30">
                     <div class="col-12">
-                        <c-heading-bar>
-                            <template slot="heading-tabs">
-                                <a href="#3" class="active">Top 10 Items</a>
-                                <a href="#3">Most Wanted</a>
-                                <a href="#3">Top 10 Prices</a>
-                            </template>
-                            <template slot="additional-action">
-                                <c-heading-bar-fields name="Trending" @click_up=""  @click_down="" />
-                                <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" @click_up=""  @click_down="" />
-                            </template>
-                        </c-heading-bar>
-                        <div class="block-bg">
+                        <c-block :noGutter="true" :onlyContentBg="true" class="margin-bottom-30">
+                            <c-heading-bar slot="title" class="mb-0">
+                                <template slot="heading-tabs">
+                                    <a href="#3" class="active">Top 10 Items</a>
+                                    <a href="#3">Most Wanted</a>
+                                    <a href="#3">Top 10 Prices</a>
+                                </template>
+                                <template slot="additional-action">
+                                    <c-heading-bar-fields name="Trending" @click_up=""  @click_down="" />
+                                    <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" @click_up=""  @click_down="" />
+                                </template>
+                            </c-heading-bar>
                             <div class="filter-blk">
                                 <div class="d-flex align-items-center">
                                     <c-dropdown id="test2" name="Filter by Genre" :showBg="true">
@@ -194,14 +189,9 @@
                                     </c-assets-list-item>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </c-block>
 
-                <div class="row">
-                    <div class="col-12 margin-bottom-30">
-                        <c-heading-bar name="What's up with your content" />
-
+                        <c-block :noGutter="true" :bgColor="false" title="What's up with your content">
 
                         <div class="home-tabs">
                             <c-news-list-navigation
@@ -216,6 +206,7 @@
                                 />
                             </div>
                         </div>
+                        </c-block>
                     </div>
                 </div>
 
@@ -259,6 +250,7 @@ export default {
         'c-assets-list-item': () => import('@/ui/components/assets-list-item/item'),
         'c-news-list-navigation': () => import('@/ui/components/news-list/navigation'),
         'c-news-list-articles': () => import('@/ui/components/news-list/articles'),
+        'c-block': () => import('@/ui/components/block'),
         'c-swiper': swiper,
         'c-slide': swiperSlide
     },
@@ -340,7 +332,25 @@ export default {
                     author: "Bethesda",
                     videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256657338/movie480.webm?t=1447378505"],
                     author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"]
-                }
+                },
+                {
+                    id: "9",
+                    name: "The Witcher® 3: Wild Hunt",
+                    images: {
+                        header: "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_b74d60ee215337d765e4d20c8ca6710ae2362cc2.600x338.jpg?t=1529405012",
+                        medium_tile: "https://steamcdn-a.akamaihd.net/steam/apps/292030/header.jpg?t=1529405012",
+                        main: "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_b74d60ee215337d765e4d20c8ca6710ae2362cc2.600x338.jpg?t=1529405012",
+                        preview: [
+                            "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012",
+                            "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_64eb760f9a2b67f6731a71cce3a8fb684b9af267.600x338.jpg?t=1529405012",
+                            "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_eda99e7f705a113d04ab2a7a36068f3e7b343d17.600x338.jpg?t=1529405012",
+                            "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_d5b80eb63c12a6484f26796f3e34410651bba068.600x338.jpg?t=1529405012"
+                        ]
+                    },
+                    author: "CD PROJEKT RED",
+                    videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256658589/movie480.webm?t=1528288687"],
+                    author_tags: ["RPG","Open World","Fantasy","Action","Atmospheric","Third Person"]
+                },
             ],
             curators_reviews: [curator_review, curator_review, curator_review],
             new_games: [
