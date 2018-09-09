@@ -1,7 +1,7 @@
 <template>
     <c-layout navigationKey="settings-navigation">
         <div class="content" id="content">
-            <c-block-1 title="Client Settings">
+            <c-block class="margin-bottom-30" title="Client Settings">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
@@ -44,8 +44,8 @@
                         </div>
                     </div>
                 </div>
-            </c-block-1>
-            <c-block-1 title="Performance Settings">
+            </c-block>
+            <c-block class="margin-bottom-30" title="Performance Settings">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
@@ -71,22 +71,30 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 benchmark">
-                        <p>Page was rendered in <b :class="perfResults.grade">{{ renderTime }}</b> ms.</p>
-                        <p>{{ perfResults.text }}</p>
-                        <c-button @click="autoUpdateSettings">UPDATE SETTINGS AUTOMATICALLY</c-button>
+                    <div class="col-12 benchmark d-flex justify-content-between align-items-center">
+                        <div>
+                            <div>Page was rendered in <b :class="perfResults.grade">{{ renderTime }}</b> ms.</div>
+                            <div>{{ perfResults.text }}</div>
+                        </div>
+                        <div>
+                            <c-button @click="autoUpdateSettings" status="success">UPDATE SETTINGS AUTOMATICALLY</c-button>
+                        </div>
                     </div>
                 </div>
-            </c-block-1>
-            <c-block-1 title="Advanced">
+            </c-block>
+            <c-block class="margin-bottom-30" title="Advanced">
                 <div class="row">
-                    <div class="col-12 benchmark">
-                        <p>Advanced settings can be managed here. These are primarily for developers @BlockHub.
-                            <br /><strong>Warning:</strong> Only use these if you know what you're doing.</p>
-                        <c-button @click="clearDatabase">DELETE DATABASE</c-button>
+                    <div class="col-12 benchmark d-flex justify-content-between align-items-center">
+                        <div>
+                            Advanced settings can be managed here. These are primarily for developers @BlockHub.
+                            <br /><strong>Warning:</strong> Only use these if you know what you're doing.
+                        </div>
+                        <div>
+                            <c-button @click="clearDatabase" status="warning">DELETE DATABASE</c-button>
+                        </div>
                     </div>
                 </div>
-            </c-block-1>
+            </c-block>
         </div>
     </c-layout>
 </template>
@@ -97,7 +105,7 @@ import { mapActions } from 'vuex';
 export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default'),
-        'c-block-1': () => import('@/ui/components/block')
+        'c-block': () => import('@/ui/components/block')
     },
     data() {
         return {
@@ -196,6 +204,7 @@ export default {
                 font-size: 21px;
                 color: #C6C6D6;
                 font-weight: bold;
+                margin-bottom: 5px;
             }
         }
     }
