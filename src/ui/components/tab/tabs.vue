@@ -5,7 +5,7 @@
                 <li
                     v-for="(tab, index) in tabs"
                     :key="index"
-                    class="nav-item"
+                    :class="`nav-item layer${index+1}`"
                 >
                     <a
                         :href="tab.href"
@@ -103,7 +103,7 @@
                     &.active {
                         border-bottom: none;
                         background: #3e3e5c;
-                        z-index: 8;
+                        z-index: 8 !important;
                         color: #fff;
                         &:before {
                             border-bottom-color: #3e3e5c;
@@ -114,6 +114,18 @@
                             border-left-color: #3e3e5c;
                         }
                     }
+                }
+                &.layer1 a {
+                    z-index: 7;
+                }
+                &.layer2 a {
+                    z-index: 6;
+                }
+                &.layer3 a {
+                    z-index: 5;
+                }
+                &.layer4 a {
+                    z-index: 4;
                 }
                 &:first-child {
                     a {
