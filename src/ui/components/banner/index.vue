@@ -1,8 +1,7 @@
 <template>
     <div class="main-banner text-white">
-        <div class="main-banner__content"
-             :class="{ 'bg-image' : image }"
-             :style="bannerImg">
+        <div class="main-banner__content">
+            <div class="image-bg" v-if="image" :style="bannerImg"></div>
             <div class="main-banner__content--logo" :class="[ logo.size ? 'logo-size-' + logo.size : 'logo-size-md', logo.position ]" :style="logoPosition">
                 <img :src="logo.src" alt="company-logo"/>
             </div>
@@ -21,21 +20,22 @@
         name: 'main-banner',
         props: {
             image: Object,
-            logo: Object
+            logo: Object,
+            video: Object
         },
         components:{
             'c-button': () => import('@/ui/components/buttons')
         },
         computed:{
             bannerImg(){
-                var img = this.image;
+                let img = this.image;
                 return{
                     'background-image': 'url(' + img.src + ')',
                     'background-position' : img.position
                 }
             },
             logoPosition(){
-                var logo = this.logo;
+                let logo = this.logo;
                 switch(logo.position){
                     // Top position
                     case 'left top':
@@ -78,12 +78,32 @@
         border-radius: 5px;
         min-height: 300px;
         display: flex;
-        &.bg-image{
+        .image-bg{
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background-size: cover;
+            z-index: 6;
+        }
+        .video-bg{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 4;
+            transform: translateX(-50%) translateY(-50%);
             background-size: cover;
         }
     }
     .main-banner__content--logo{
         padding: 25px;
+        position: relative;
+        z-index: 10;
         &.logo-size-xs{
             img{
                 max-height: 50px;

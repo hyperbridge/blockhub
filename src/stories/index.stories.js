@@ -2656,7 +2656,7 @@ storiesOf('Product Review', module)
 import Banner from '@/ui/components/banner'
 storiesOf('Banner', module)
     .addDecorator(withKnobs)
-    .add('default', () =>({
+    .add('image', () =>({
         components:{
             'c-banner': Banner
         },
@@ -2742,6 +2742,80 @@ storiesOf('Banner', module)
                         </div>
                     </div>
                     <c-banner :image="img" :logo="logo" />
+
+            </div>`
+    }))
+    .add('video', () => ({
+        components:{
+            'c-banner': Banner
+        },
+        data(){
+            return{
+                logoPosition: '',
+                logoSize: '',
+                videoSrc: '',
+                logo: {
+                    src: 'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png',
+                    position: '',
+                    size: ''
+                },
+                video:{
+                    src: 'http://localhost:6006/static/media/video_banner.66fe1bc2.webm'
+                }
+            }
+        },
+        watch:{
+            videoSrc(){
+                this.video['src'] = this.videoSrc
+            },
+            logoPosition(){
+                this.logo['position'] = this.logoPosition
+            },
+            logoSize(){
+                this.logo['size'] = this.logoSize
+            }
+        },
+        template: `<div class="padding-50" style="width: 900px">
+                    <div class="row mb-2">
+                        <div class="col-4">
+                        <label class="text-white">Background Position</label>
+                            <input type="text" class="form-control" v-model="videoSrc" />
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="text-white">Logo Position</label>
+                                <select class="form-control" id="logo_position" v-model="logoPosition">
+                                    <optgroup label="top">
+                                        <option value="left top">left top</option>
+                                        <option value="center top">center top</option>
+                                        <option value="right top">right top</option>
+                                    </optgroup>
+                                    <optgroup label="center">
+                                        <option value="left center">left center</option>
+                                        <option value="center center">center center</option>
+                                        <option value="right center">right center</option>
+                                    </optgroup>
+                                    <optgroup label="bottom">
+                                        <option value="left bottom">left bottom</option>
+                                        <option value="center bottom">center bottom</option>
+                                        <option value="right bottom">right bottom</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                        <div class="form-group">
+                            <label class="text-white">Logo Size</label>
+                            <select class="form-control" v-model="logoSize">
+                                    <option value="sm">sm</option>
+                                    <option value="md">md</option>
+                                    <option value="lg">lg</option>
+                                    <option value="xl">xl</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+                    <c-banner :video="video" :logo="logo" />
 
             </div>`
     }))
