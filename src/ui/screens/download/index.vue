@@ -15,13 +15,28 @@
                                     <h4>Blockchain Based Content Listening for the Masses</h4>
                                     <div class="action d-flex align-items-center">
                                         <div>
-                                            <a href="#3" class="btn btn-outline-success">
+                                            <a href="https://blockhub.gg/download/BlockHub-latest-windows.zip"
+                                               class="btn btn-outline-success"
+                                               v-if="this.user_agent == 'windows' || showAll ">
                                                 <strong>Download Now</strong>
-                                                <small>Windows 64-bit</small>
+                                                <small>for Windows 64-bit</small>
+                                            </a>
+                                            <a href="https://blockhub.gg/download/BlockHub-latest-mac.zip"
+                                               class="btn btn-outline-success"
+                                               :class="{ 'mx-3' : showAll }"
+                                               v-if="this.user_agent == 'macos' || showAll ">
+                                                <strong>Download Now</strong>
+                                                <small>for MacOS</small>
+                                            </a>
+                                            <a href="https://blockhub.gg/download/BlockHub-latest-linux.zip"
+                                               class="btn btn-outline-success"
+                                               v-if="this.user_agent == 'linux' || showAll ">
+                                                <strong>Download Now</strong>
+                                                <small>for Linux</small>
                                             </a>
                                         </div>
                                         <div class="download_info">
-                                            <h6>Using another OS?</h6>
+                                            <h6 @click="showAllPlatforms">Using another OS?</h6>
                                             <p>Download for Mac, Windows and Linux</p>
                                             <i class="fab fa-apple"></i>
                                             <i class="fab fa-linux"></i>
@@ -87,8 +102,41 @@
         },
         data() {
             return {
+                user_agent: '',
+                showAll: false
             }
         },
+        created(){
+            this.getOS()
+        },
+        methods:{
+            getOS() {
+                let userAgent = window.navigator.userAgent,
+                    platform = window.navigator.platform,
+                    macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+                    windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+                    iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+                    os = null;
+
+                if (macosPlatforms.indexOf(platform) !== -1) {
+                    this.user_agent = 'macos';
+                } else if (iosPlatforms.indexOf(platform) !== -1) {
+                    this.user_agent = 'ios';
+                } else if (windowsPlatforms.indexOf(platform) !== -1) {
+                    this.user_agent = 'windows';
+                } else if (/Android/.test(userAgent)) {
+                    this.user_agent = 'android';
+                } else if (!os && /Linux/.test(platform)) {
+                    this.user_agent = 'linux';
+                }
+            },
+            showAllPlatforms(){
+                this.showAll = !this.showAll;
+            }
+        },
+        mounted() {
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/download-bg.png)'
+        }
     }
 </script>
 
@@ -139,6 +187,7 @@
                             font-weight: bold;
                             font-size: 14px;
                             margin: 0;
+                            cursor: pointer;
                         }
                         p{
                             padding: 0;
@@ -148,7 +197,7 @@
                             margin-right: 5px;
                         }
                     }
-                    a{
+                    .btn-outline-success{
                         padding: 15px;
                         width: 200px;
                         color: #fff;

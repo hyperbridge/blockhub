@@ -72,7 +72,7 @@
             return
 
         if (product.images && product.images.header)
-            window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(' + product.images.header + ')'
 
         return product
     }
@@ -83,6 +83,7 @@
             'c-layout': () => import('@/ui/layouts/default'),
             'c-tags-list': () => import('@/ui/components/tags'),
             'c-item': () => import('@/ui/components/product-community/item'),
+            'c-post-comment': () => import('@/ui/components/product-community/comment'),
         },
         data() {
             const authors = [
@@ -174,7 +175,7 @@
         mounted: updateProduct,
         created: updateProduct,
         beforeDestroy() {
-            window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
         }
     }
 </script>

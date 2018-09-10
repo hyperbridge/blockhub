@@ -1362,7 +1362,7 @@ storiesOf('Assets List', module)
     }))
 
 
-import Block from '../ui/components/block-1/index.vue'
+import Block from '../ui/components/block/index.vue'
 
 storiesOf('Block', module)
     .add('default', () => ({
@@ -1371,7 +1371,7 @@ storiesOf('Block', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-block title="This is block title" bClass="col-8">
+             <c-block title="This is block title" class="col-8">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Suspendisse vel arcu sit amet erat vestibulum volutpat.
                 Ut volutpat enim vel augue luctus luctus</p>
@@ -1382,7 +1382,40 @@ storiesOf('Block', module)
          </div>
         `
     }))
-
+    .add('gradient', () => ({
+        components: {
+            'c-block': Block
+        },
+        template: `
+             <div class="row m-0 p-3">
+                 <c-block title="This is block title" class="col-8" :bgGradient="true">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Suspendisse vel arcu sit amet erat vestibulum volutpat.
+                    Ut volutpat enim vel augue luctus luctus</p>
+                    <p>Curabitur et molestie eros. Duis sodales ante velit,
+                    ut fringilla turpis dictum sit amet. Praesent quis lacus
+                    ac tellus vehicula commodo sit amet sit amet ex.</p>
+                </c-block>
+             </div>
+            `
+    }))
+    .add('only content bg', () => ({
+        components: {
+            'c-block': Block
+        },
+        template: `
+             <div class="row m-0 p-3">
+                 <c-block title="This is block title" class="col-8" :bgGradient="true" :onlyContentBg="true">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Suspendisse vel arcu sit amet erat vestibulum volutpat.
+                    Ut volutpat enim vel augue luctus luctus</p>
+                    <p>Curabitur et molestie eros. Duis sodales ante velit,
+                    ut fringilla turpis dictum sit amet. Praesent quis lacus
+                    ac tellus vehicula commodo sit amet sit amet ex.</p>
+                </c-block>
+             </div>
+            `
+    }))
 import CustomModal from '../ui/components/custom-modal/index'
 
 storiesOf('Modal', module)
@@ -2618,6 +2651,21 @@ storiesOf('Product Review', module)
                 <c-review :review="review"/>
             </div>
         `
+    }))
+
+import Banner from '@/ui/components/banner'
+storiesOf('Banner', module)
+    .add('default', () =>({
+        components:{
+            'c-banner': Banner
+        },
+        data(){
+            return{
+                img: 'https://d2q63o9r0h0ohi.cloudfront.net/images/kobolds-and-catacombs/header-bg-backup-337031b146d6540bc3d2513f0fb11daa966398f512db7163c7e819120a62b2b17c2abaa893cfcef5c14e1f4a696ce45fa8d2e4d36a987029e563b449b402a115.jpg',
+                logo: 'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png'
+            }
+        },
+        template: `<div class="padding-50" style="width: 900px"><c-banner :imgSrc="img" :logoSrc="logo" /></div>`
     }))
 
 

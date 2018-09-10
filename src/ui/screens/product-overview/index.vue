@@ -72,7 +72,7 @@
 
                         <div class="row">
                             <div class="col-7">
-                                <c-screen-gallery :main="product.images.main" :items="product.images.preview" />
+                                <c-screen-gallery :main="product.images.medium_tile" :items="product.images.preview" />
 
                                 <c-sale-box
                                     :sale_box="product.sale_box"
@@ -178,7 +178,7 @@
         }
 
         if (product && product.images && product.images.header) {
-            window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(' + product.images.header + ')'
         }
 
         if (!product.community)
@@ -273,7 +273,7 @@
         mounted: updateProduct,
         created: updateProduct,
         beforeDestroy() {
-            window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
         },
         updated() {
             $('#tag-editor').select2()

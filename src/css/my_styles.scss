@@ -13,12 +13,6 @@
 body {
     min-width: 1200px;
     overflow-x: hidden;
-
-    background: url(/static/img/products/default.png);
-    background-size: 100% 383px;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-
     font-family: 'Barlow', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -26,6 +20,34 @@ body {
 
 html, body, #app, .page {
     min-height: 100vh;
+}
+
+#header-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 383px;
+    content: ' ';
+    background: url(/static/img/products/default.png);
+    background-size: 100% 383px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: 0;
+    
+    &::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 926px;
+      background: url(/static/img/product-bg-fade.png);
+      background-size: contain;
+      background-position: 0 383px;
+      background-attachment: fixed;
+      z-index: 0;
+    }
 }
 
 .card {
@@ -119,23 +141,6 @@ a.btn-outline-white {
     }
 }
 
-
-
-  body {
-    &::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 926px;
-      background: url(/static/img/product-bg-fade.png);
-      background-size: contain;
-      background-position: 0 383px;
-      background-attachment: fixed;
-      z-index: 0;
-    }
-  }
 
   #fixed_panel {
     z-index: 12;

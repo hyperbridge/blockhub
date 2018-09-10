@@ -9,9 +9,9 @@
                     <div class="col-12 tab-content" v-else>
                         <p class="errors" v-if="errors.length">
                             <strong>Please correct the following error(s):</strong>
-                        <ul>
-                            <li v-for="error in errors" :key="error">{{ error }}</li>
-                        </ul>
+                            <ul>
+                                <li v-for="error in errors" :key="error">{{ error }}</li>
+                            </ul>
                         </p>
 
                         <div class="row justify-content-between">
@@ -456,7 +456,7 @@
         }
 
         if (project && project.images && project.images.header) {
-            window.document.body.style['background-image'] = 'url(' + project.images.header + ')'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(' + project.images.header + ')'
         }
 
         return project
@@ -467,7 +467,7 @@
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
             'c-game-plan': () => import('@/ui/components/game-plans/plan'),
-            'c-block-1': () => import('@/ui/components/block-1'),
+            'c-block-1': () => import('@/ui/components/block'),
             'c-screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
             'c-tags-list': () => import('@/ui/components/tags'),
             'c-rating-block': () => import('@/ui/components/rating-block'),
@@ -542,7 +542,7 @@
                     this.$store.dispatch('marketplace/setEditorMode', 'viewing')
                 }
             },
-            checkForm: function (e) {
+            checkForm(e) {
                 this.errors = []
 
                 if (this.project.name && this.project.description) {
@@ -580,7 +580,7 @@
             //this.$store.dispatch('marketplace/setEditorMode', 'editing')
         },
         beforeDestroy() {
-            window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
         },
         updated() {
             $('#tag-editor').select2()

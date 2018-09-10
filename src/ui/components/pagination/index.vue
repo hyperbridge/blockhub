@@ -1,55 +1,65 @@
 <template>
-    <nav class="pagination">
-        <ul>
-            <li>
-                <a
-                    href="#"
-                    class="first"
-                    @click.prevent="active_page = 1"
-                >
-                    <i class="fas fa-angle-double-left"></i>
-                </a>
-            </li>
-            <li>
-                <a
-                    href="#"
-                    class="prev"
-                    @click.prevent="change_page('prev')"
-                >
-                    <i class="fas fa-angle-left"></i>
-                </a>
-            </li>
+    <div class="pagination" >
+        <div class="pagination__slot text-left">
+            <slot name="left-content" />
+        </div>
 
-            <li
-                v-for="page in visible_pages"
-                :key="page"
-                :class="{ 'active': page == active_page }"
-            >
-                <a
-                    :href="`#${page}`"
-                    @click.prevent="change_page(page)"
-                >{{ page }}</a>
-            </li>
-            <li>
-                <a
-                    href="#3"
-                    class="next"
-                    @click.prevent="change_page('next')"
+        <nav class="pagination__nav" :class="{ 'show-bg' : showBg}">
+            <ul>
+                <li>
+                    <a
+                        href="#"
+                        class="first"
+                        @click.prevent="active_page = 1"
+                    >
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="#"
+                        class="prev"
+                        @click.prevent="change_page('prev')"
+                    >
+                        <i class="fas fa-angle-left"></i>
+                    </a>
+                </li>
+
+                <li
+                    v-for="page in visible_pages"
+                    :key="page"
+                    :class="{ 'active': page == active_page }"
                 >
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li>
-                <a
-                    href="#3"
-                    class="last"
-                    @click.prevent="active_page = pages"
-                >
-                    <i class="fas fa-angle-double-right"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
+                    <a
+                        :href="`#${page}`"
+                        @click.prevent="change_page(page)"
+                    >{{ page }}</a>
+                </li>
+                <li>
+                    <a
+                        href="#3"
+                        class="next"
+                        @click.prevent="change_page('next')"
+                    >
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="#3"
+                        class="last"
+                        @click.prevent="active_page = pages"
+                    >
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="pagination__slot text-right">
+            <slot name="right-content" />
+        </div>
+    </div>
 </template>
 
 
@@ -68,6 +78,10 @@
             debounce: {
                 type: Number,
                 default: 0
+            },
+            showBg:{
+                type: Boolean,
+                default: false
             }
         },
         data() {
@@ -126,35 +140,44 @@
 </script>
 
 <style lang="scss" scoped>
-
-    .pagination {
+    .pagination{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        margin-top: 25px;
+    }
+    .pagination__nav {
         padding: 10px;
         text-align: center;
         width: auto;
         display: inline-block;
         position: relative;
-        background: #2E2F4A;
-        border-radius: 5px 5px 0 0;
-        &:after {
+        &.show-bg{
+            background: #2f324e;
+            border-radius: 5px 5px 0 0;
+            &:after {
                 position: absolute;
                 content: "";
                 height: 42px;
                 bottom: 0;
                 right: -39px;
                 border: 21px solid transparent;
-                border-bottom: 21px solid #2E2F4A;
-                border-left: 21px solid #2E2F4A;
+                border-bottom: 21px solid #2f324e;
+                border-left: 21px solid #2f324e;
             }
-        &:before {
+            &:before {
                 position: absolute;
                 content: "";
                 height: 42px;
                 bottom: 0;
                 left: -39px;
                 border: 21px solid transparent;
-                border-bottom: 21px solid #2E2F4A;
-                border-right: 21px solid #2E2F4A;
+                border-bottom: 21px solid #2f324e;
+                border-right: 21px solid #2f324e;
             }
+        }
         ul{
             padding: 0;
             margin: 0;
@@ -195,5 +218,9 @@
                 }
             }
         }
+    }
+    .pagination__slot{
+        width: 25%;
+        padding-bottom: 10px;
     }
 </style>

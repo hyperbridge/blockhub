@@ -78,7 +78,7 @@
             return
 
         if (project.images && project.images.header)
-            window.document.body.style['background-image'] = 'url(' + project.images.header + ')'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(' + project.images.header + ')'
 
         return project
     }
@@ -115,7 +115,7 @@
         mounted: updateProject,
         created: updateProject,
         beforeDestroy() {
-            window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
         }
     }
 </script>
