@@ -2655,7 +2655,6 @@ storiesOf('Product Review', module)
 
 import Banner from '@/ui/components/banner'
 storiesOf('Banner', module)
-    .addDecorator(withKnobs)
     .add('image', () =>({
         components:{
             'c-banner': Banner
@@ -2678,13 +2677,13 @@ storiesOf('Banner', module)
         },
         watch:{
             bgPosition(){
-                this.img['position'] = this.bgPosition
+                this.img['position'] = this.bgPosition;
             },
             logoPosition(){
-                this.logo['position'] = this.logoPosition
+                this.logo['position'] = this.logoPosition;
             },
             logoSize(){
-                this.logo['size'] = this.logoSize
+                this.logo['size'] = this.logoSize;
             }
         },
         template: `<div class="padding-50" style="width: 900px">
@@ -2713,7 +2712,7 @@ storiesOf('Banner', module)
                         </div>
                         <div class="col-4">
                         <label class="text-white">Logo Size</label>
-                            <select class="form-control" v-model="logoSize">
+                            <select class="form-control" id="logo_size" v-model="logoSize">
                                     <option value="sm">sm</option>
                                     <option value="md">md</option>
                                     <option value="lg">lg</option>
@@ -2722,7 +2721,7 @@ storiesOf('Banner', module)
                         </div>
                         <div class="col-4">
                         <label class="text-white">Background Position</label>
-                            <select class="form-control" v-model="bgPosition">
+                            <select class="form-control" id="background_position" v-model="bgPosition">
                                 <optgroup label="top">
                                     <option value="left top">left top</option>
                                     <option value="center top">center top</option>
@@ -2742,7 +2741,6 @@ storiesOf('Banner', module)
                         </div>
                     </div>
                     <c-banner :image="img" :logo="logo" />
-
             </div>`
     }))
     .add('video', () => ({
