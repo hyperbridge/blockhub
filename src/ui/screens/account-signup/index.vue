@@ -10,7 +10,7 @@
                         </ul>
                     </p>
                     <c-tabs>
-                        <c-tab name="Step 1" :selected="true" showFooter="true">
+                        <c-tab name="Step 1" :selected="true" :showFooter="true">
                             <div class="tab-container">
                                 <div class="tab-card">
                                     <h4>Personal Information</h4>
@@ -33,13 +33,22 @@
                                             <div class="col">
                                                 <div class="input-group">
                                                     <label class="sr-only">Birthday</label>
-                                                    <input type="text" class="form-control" placeholder="Birthday">
+                                                    <c-datepicker
+                                                        v-model="account.birthday"
+                                                        placeholder="Birthday"
+                                                        input-class="invert form-control tab-card"
+                                                        name="birthday"
+                                                        calendar-class="form-calendar"
+                                                    >
+                                                    </c-datepicker>
+                                                    <!-- <input type="text" class="form-control" placeholder="Birthday"> -->
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">
                                                             <i class="fas fa-calendar-alt"></i>
                                                         </span>
                                                     </div>
                                                 </div>
+
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
@@ -222,24 +231,30 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between align-items-center" slot="footer">
-                                <c-switch label="" label_position="right" size="sm" :customLabel="true">
+                                <c-switch
+                                    :value="account.agreement"
+                                    @change="account.agreement = !account.agreement"
+                                    label_position="right"
+                                    :customLabel="true"
+                                >
                                     <template slot="label">
                                         I agree to the
                                         <a href="#" data-toggle="modal" data-target="#terms-modal">terms</a> and
                                         <a href="#" data-toggle="modal" data-target="#privacy-policy-modal">privacy policy</a>
                                     </template>
                                 </c-switch>
-                                <c-switch label="" label_position="right" size="sm" :customLabel="true">
-                                    <template slot="label">
-                                        Sign up for our newsletter, get 100 HBX Bonus!
-                                    </template>
-                                </c-switch>
+                                <c-switch
+                                    :value="account.newsletter"
+                                    @change="account.newsletter = !account.newsletter"
+                                    label="Sign up for our newsletter, get 100 HBX Bonus!"
+                                    label_position="right"
+                                />
                                 <div>
                                     <c-button variant="success" text="Next step" icon="fas fa-angle-right" icon_position="right" :click="nextStep" />
                                 </div>
                             </div>
                         </c-tab>
-                        <c-tab name="Step 2" showFooter="true">
+                        <c-tab name="Step 2" :showFooter="true">
                             <div class="tab-container">
                                 <div class="padding-40">
                                     <h3>Welcome, UserName. Let's build your main identity.</h3>
@@ -358,7 +373,7 @@
                                 <c-button variant="success" text="Next step" icon="fas fa-angle-right" icon_position="right" />
                             </div>
                         </c-tab>
-                        <c-tab name="Step 3" showFooter="true">
+                        <c-tab name="Step 3" :showFooter="true">
                             <div class="tab-container">
                                 <div class="padding-20">
                                     <h3>Verify your identity (Optional)</h3>
@@ -509,8 +524,7 @@
             'c-layout': () => import('@/ui/layouts/default'),
             'c-tab': () => import('@/ui/components/tab/tab'),
             'c-tabs': () => import('@/ui/components/tab/tabs'),
-            'c-switch': () => import('@/ui/components/switch/index'),
-            'c-button': () => import('@/ui/components/buttons/index'),
+            'c-datepicker': () => import('vuejs-datepicker')
         },
         data() {
             return {
@@ -560,7 +574,7 @@
                         this.errors.push('You must agree to the terms & conditions to use BlockHub.')
                     }
                 } else if (this.current_step === 2) {
-                    
+
                 } else if (this.current_step === 3) {
 
                 }
@@ -797,6 +811,23 @@
             display: inline-block;
             float: right;
             width: calc(100% - 45px);
+        }
+    }
+
+    .input-group {
+        display: flex;
+    }
+
+</style>
+
+<style lang="scss">
+    .form-calendar {
+        background: #27273A !important;
+        .day__month_btn:hover {
+            background: rgba(39,39,58, .1) !important;
+        }
+        .prev, .next {
+            color: #fff !important;
         }
     }
 </style>
