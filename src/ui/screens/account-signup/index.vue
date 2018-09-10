@@ -36,12 +36,10 @@
                                                     <c-datepicker
                                                         v-model="account.birthday"
                                                         placeholder="Birthday"
-                                                        input-class="invert form-control tab-card"
+                                                        input-class="form-control form-calendar__text"
                                                         name="birthday"
                                                         calendar-class="form-calendar"
-                                                    >
-                                                    </c-datepicker>
-                                                    <!-- <input type="text" class="form-control" placeholder="Birthday"> -->
+                                                    />
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">
                                                             <i class="fas fa-calendar-alt"></i>
@@ -815,19 +813,23 @@
     }
 
     .input-group {
-        display: flex;
+        flex-wrap: nowrap;
     }
 
 </style>
 
 <style lang="scss">
     .form-calendar {
-        background: #27273A !important;
-        .day__month_btn:hover {
-            background: rgba(39,39,58, .1) !important;
+        background-color: #27273A !important;
+        border-color: rgba(255,255,255,.2) !important;
+        box-shadow: 0 0 15px rgba(1, 1, 1, .35);
+        .up:hover, .up:focus {
+            color: black !important;
         }
-        .prev, .next {
-            color: #fff !important;
-        }
+    }
+    .form-calendar__text, .form-calendar__text:focus {
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.4) inset;
+        border: none !important;
+        background-color: #303049 !important;
     }
 </style>
