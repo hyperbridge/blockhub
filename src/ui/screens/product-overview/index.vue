@@ -33,7 +33,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <c-tags-list :tags="product.author_tags" v-if="!editing"></c-tags-list>
+                                    <c-tags-list :tags="product.developer_tags" v-if="!editing"></c-tags-list>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -72,7 +72,9 @@
 
                         <div class="row">
                             <div class="col-7">
-                                <c-screen-gallery :main="product.images.medium_tile" :items="product.images.preview" />
+                                <c-screen-gallery
+                                    :items="[product.images.medium_tile, ...product.images.preview]"
+                                />
 
                                 <c-sale-box
                                     :sale_box="product.sale_box"
@@ -104,13 +106,20 @@
 
                                 <div class="card invert system-requirements" v-if="product.system_requirements">
                                     <div class="card-body">
-                                        <h2 class="title">System Requirements <i class="fas fa-laptop title-icon"></i>
+                                        <h2 class="title">
+                                            System Requirements <i class="fas fa-laptop title-icon"></i>
                                         </h2>
-                                        <div class="system-requirements__item"
-                                             v-for="(item, index) in product.system_requirements" :key="index">
-                                            <h6>{{ item.system }} <i :class="item.icon"></i></h6>
-                                            <p>{{ item.requirements }}</p>
-                                        </div>
+                                        <ul class="system-requirements__list">
+                                            <li
+                                                v-for="(value, property) in product.system_requirements[0]"
+                                                v-if="value"
+                                                :key="property"
+                                                class="system-requirements__list-item"
+                                            >
+                                                <strong>{{ property | sysProp }}</strong>
+                                                <p class="system-requirements__value">{{ value | upperFirstChar }}</p>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
 
@@ -177,8 +186,10 @@
             product = this.$store.state.marketplace.products[this.id]
         }
 
-        if (product && product.images && product.images.header) {
-            window.document.getElementById('header-bg').style['background-image'] = 'url(' + product.images.header + ')'
+        if (product && product.images && product.images.preview.length) {
+            const header = window.document.getElementById('header-bg');
+            header.style['background-image'] = 'url(' + product.images.preview[0] + ')';
+            header.style['background-size'] = 'cover';
         }
 
         if (!product.community)
@@ -268,6 +279,11 @@
                 }
 
                 return this.$store.state.marketplace.editor_mode === 'editing'
+            }
+        },
+        filters: {
+            sysProp(val) {
+                return val.replace(/[\s_]+/g, ' ').toUpperCase();
             }
         },
         mounted: updateProduct,
@@ -379,7 +395,7 @@
         }
     }
 
-    .system-requirements__item {
+    .system-requirements__value {
         display: block;
         width: 100%;
         margin-bottom: 10px;
@@ -402,6 +418,16 @@
         p {
             margin: 0;
         }
+    }
+
+    .system-requirements__list {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .system-requirements__list-item {
+        margin-bottom: 10px;
     }
 
     .languages-list {
