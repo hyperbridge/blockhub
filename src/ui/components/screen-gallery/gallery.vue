@@ -7,14 +7,14 @@
         <div class="screen-gallery__main-img">
             <i class="fas fa-expand"></i>
             <img
-                :src="images[active_item]"
+                :src="items[active_item]"
                 @click="show_modal = true"
             />
             <div v-if="run_slideshow" class="screen-gallery__progress-bar"></div>
         </div>
         <ul class="screen-gallery__thumb-nav">
             <li
-                v-for="(url, index) in images"
+                v-for="(url, index) in items"
                 :key="index"
             >
                 <img
@@ -26,7 +26,7 @@
         </ul>
         <c-modal-light v-if="show_modal" @close="show_modal=false">
             <c-images-explorer
-                :images="images"
+                :images="items"
                 :start_from="active_item"
             />
         </c-modal-light>
@@ -45,7 +45,8 @@ export default {
         items: {
             type: Array,
             required: true
-        }
+        },
+        name_url: String,
     },
     components: {
         'c-modal-light': () => import('@/ui/components/modal-light'),
@@ -69,11 +70,6 @@ export default {
             clearInterval(this.interval);
             this.run_slideshow = status;
             if (status) this.slideshow();
-        }
-    },
-    computed: {
-        images() {
-            return [this.main, ...this.items];
         }
     },
     mounted() {
