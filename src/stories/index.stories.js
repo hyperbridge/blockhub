@@ -2655,17 +2655,167 @@ storiesOf('Product Review', module)
 
 import Banner from '@/ui/components/banner'
 storiesOf('Banner', module)
-    .add('default', () =>({
+    .add('image', () =>({
         components:{
             'c-banner': Banner
         },
         data(){
             return{
-                img: 'https://d2q63o9r0h0ohi.cloudfront.net/images/kobolds-and-catacombs/header-bg-backup-337031b146d6540bc3d2513f0fb11daa966398f512db7163c7e819120a62b2b17c2abaa893cfcef5c14e1f4a696ce45fa8d2e4d36a987029e563b449b402a115.jpg',
-                logo: 'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png'
+                logoPosition: '',
+                logoSize: '',
+                bgPosition: '',
+                img: {
+                    src: 'https://d2q63o9r0h0ohi.cloudfront.net/images/kobolds-and-catacombs/header-bg-backup-337031b146d6540bc3d2513f0fb11daa966398f512db7163c7e819120a62b2b17c2abaa893cfcef5c14e1f4a696ce45fa8d2e4d36a987029e563b449b402a115.jpg',
+                    position: 'center'
+                },
+                logo: {
+                    src: 'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png',
+                    position: '',
+                    size: ''
+                }
             }
         },
-        template: `<div class="padding-50" style="width: 900px"><c-banner :imgSrc="img" :logoSrc="logo" /></div>`
+        watch:{
+            bgPosition(){
+                this.img['position'] = this.bgPosition;
+            },
+            logoPosition(){
+                this.logo['position'] = this.logoPosition;
+            },
+            logoSize(){
+                this.logo['size'] = this.logoSize;
+            }
+        },
+        template: `<div class="padding-50" style="width: 900px">
+                    <div class="row mb-2">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="text-white">Logo Position</label>
+                                <select class="form-control" id="logo_position" v-model="logoPosition">
+                                    <optgroup label="top">
+                                        <option value="left top">left top</option>
+                                        <option value="center top">center top</option>
+                                        <option value="right top">right top</option>
+                                    </optgroup>
+                                    <optgroup label="center">
+                                        <option value="left center">left center</option>
+                                        <option value="center center">center center</option>
+                                        <option value="right center">right center</option>
+                                    </optgroup>
+                                    <optgroup label="bottom">
+                                        <option value="left bottom">left bottom</option>
+                                        <option value="center bottom">center bottom</option>
+                                        <option value="right bottom">right bottom</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                        <label class="text-white">Logo Size</label>
+                            <select class="form-control" id="logo_size" v-model="logoSize">
+                                    <option value="sm">sm</option>
+                                    <option value="md">md</option>
+                                    <option value="lg">lg</option>
+                                    <option value="xl">xl</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                        <label class="text-white">Background Position</label>
+                            <select class="form-control" id="background_position" v-model="bgPosition">
+                                <optgroup label="top">
+                                    <option value="left top">left top</option>
+                                    <option value="center top">center top</option>
+                                    <option value="right top">right top</option>
+                                </optgroup>
+                                <optgroup label="center">
+                                    <option value="left center">left center</option>
+                                    <option value="center center">center center</option>
+                                    <option value="right center">right center</option>
+                                </optgroup>
+                                <optgroup label="bottom">
+                                    <option value="left bottom">left bottom</option>
+                                    <option value="center bottom">center bottom</option>
+                                    <option value="right bottom">right bottom</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <c-banner :image="img" :logo="logo" />
+            </div>`
+    }))
+    .add('video', () => ({
+        components:{
+            'c-banner': Banner
+        },
+        data(){
+            return{
+                logoPosition: '',
+                logoSize: '',
+                videoSrc: '',
+                logo: {
+                    src: 'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png',
+                    position: '',
+                    size: ''
+                },
+                video:{
+                    src: 'http://localhost:6006/static/media/video_banner.66fe1bc2.webm'
+                }
+            }
+        },
+        watch:{
+            videoSrc(){
+                this.video['src'] = this.videoSrc
+            },
+            logoPosition(){
+                this.logo['position'] = this.logoPosition
+            },
+            logoSize(){
+                this.logo['size'] = this.logoSize
+            }
+        },
+        template: `<div class="padding-50" style="width: 900px">
+                    <div class="row mb-2">
+                        <div class="col-4">
+                        <label class="text-white">Background Position</label>
+                            <input type="text" class="form-control" v-model="videoSrc" />
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="text-white">Logo Position</label>
+                                <select class="form-control" id="logo_position" v-model="logoPosition">
+                                    <optgroup label="top">
+                                        <option value="left top">left top</option>
+                                        <option value="center top">center top</option>
+                                        <option value="right top">right top</option>
+                                    </optgroup>
+                                    <optgroup label="center">
+                                        <option value="left center">left center</option>
+                                        <option value="center center">center center</option>
+                                        <option value="right center">right center</option>
+                                    </optgroup>
+                                    <optgroup label="bottom">
+                                        <option value="left bottom">left bottom</option>
+                                        <option value="center bottom">center bottom</option>
+                                        <option value="right bottom">right bottom</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                        <div class="form-group">
+                            <label class="text-white">Logo Size</label>
+                            <select class="form-control" v-model="logoSize">
+                                    <option value="sm">sm</option>
+                                    <option value="md">md</option>
+                                    <option value="lg">lg</option>
+                                    <option value="xl">xl</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+                    <c-banner :video="video" :logo="logo" />
+
+            </div>`
     }))
 
 import TabsUniversal from '@/ui/components/tab/tab-universal';

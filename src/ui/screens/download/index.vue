@@ -15,20 +15,20 @@
                                     <h4>Blockchain Based Content Listening for the Masses</h4>
                                     <div class="action d-flex align-items-center">
                                         <div>
-                                            <a href="https://blockhub.gg/download/BlockHub-latest-windows.zip"
+                                            <a href="/#/download/desktop/windows"
                                                class="btn btn-outline-success"
                                                v-if="this.user_agent == 'windows' || showAll ">
                                                 <strong>Download Now</strong>
                                                 <small>for Windows 64-bit</small>
                                             </a>
-                                            <a href="https://blockhub.gg/download/BlockHub-latest-mac.zip"
+                                            <a href="/#/download/desktop/mac"
                                                class="btn btn-outline-success"
                                                :class="{ 'mx-3' : showAll }"
                                                v-if="this.user_agent == 'macos' || showAll ">
                                                 <strong>Download Now</strong>
                                                 <small>for MacOS</small>
                                             </a>
-                                            <a href="https://blockhub.gg/download/BlockHub-latest-linux.zip"
+                                            <a href="/#/download/desktop/linux"
                                                class="btn btn-outline-success"
                                                v-if="this.user_agent == 'linux' || showAll ">
                                                 <strong>Download Now</strong>
