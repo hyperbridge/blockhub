@@ -65,82 +65,80 @@
                     </div>
                 </div>
 
-                <div class="row margin-bottom-70 margin-top-40 align-items-stretch">
+                <div class="row margin-top-40 align-items-stretch">
                     <div class="col-12 col-md-4">
-                        <div class="banner banner-1">
-                            <div class="banner-text">
-                                <h4 class="text-yellow">summer block</h4>
-                                <h3>Championship</h3>
-                                <p>You won't believe the prize!</p>
-                            </div>
-                        </div>
+                        <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="#3">
+                            <h4 class="text-yellow">summer block</h4>
+                            <h3>Championship</h3>
+                            <p>You won't believe the prize!</p>
+                        </c-banner>
                     </div>
                     <div class="col-12 col-md-8">
-                        <div class="banner banner-2">
-                            <div class="banner-text align-items-start">
+                        <c-banner :imgSrc="'/static/img/banners/banner-2.png'" link="#3">
+                            <div class="align-items-start">
                                 <h3 class="text-yellow margin-bottom-5">top<br>curators</h3>
                                 <h4 class="text-capitalize">What are they<br>playing?</h4>
                             </div>
-                        </div>
+                        </c-banner>
                     </div>
-                </div>
 
-                <div class="row product-grid margin-bottom-30">
-                    <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                        <c-heading-bar slot="title" class="mb-0">
-                            <template slot="heading-tabs">
-                                <a href="#3" class="active">New Releases</a>
-                                <a href="#3">Most Sold</a>
-                                <a href="#3">Upcoming</a>
-                            </template>
-                            <template slot="additional-action">
-                                <span class="font-weight-bold">Sort by</span>
-                                <c-heading-bar-fields name="Date" icon="fas fa-calendar" @click_up=""  @click_down="" />
-                                <c-heading-bar-fields name="Best Reviews" icon="fas fa-star" @click_up=""  @click_down="" />
-                                <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" @click_up=""  @click_down="" />
-                            </template>
-                        </c-heading-bar>
-                        <div class="filter-blk">
-                            <div class="d-flex align-items-center">
-                                <c-dropdown id="test" name="Filter by Genre" :showBg="true">
-                                    <a href="#3">RPG</a>
-                                    <a href="#3">ACTION</a>
-                                    <a href="#3">Cars</a>
-                                </c-dropdown>
-                                <c-searcher customClass="mb-0" />
+                    <div class="col-12">
+                        <c-block :noGutter="true" class="margin-top-70 margin-bottom-30" :bgGradient="true" :onlyContentBg="true">
+                            <c-heading-bar slot="title" class="mb-0">
+                                <template slot="heading-tabs">
+                                    <a href="#3" class="active">New Releases</a>
+                                    <a href="#3">Most Sold</a>
+                                    <a href="#3">Upcoming</a>
+                                </template>
+                                <template slot="additional-action">
+                                    <span class="font-weight-bold">Sort by</span>
+                                    <c-heading-bar-fields name="Date" icon="fas fa-calendar" @click_up=""  @click_down="" />
+                                    <c-heading-bar-fields name="Best Reviews" icon="fas fa-star" @click_up=""  @click_down="" />
+                                    <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" @click_up=""  @click_down="" />
+                                </template>
+                            </c-heading-bar>
+                            <div class="filter-blk">
+                                <div class="d-flex align-items-center">
+                                    <c-dropdown id="test" name="Filter by Genre" :showBg="true">
+                                        <a href="#3">RPG</a>
+                                        <a href="#3">ACTION</a>
+                                        <a href="#3">Cars</a>
+                                    </c-dropdown>
+                                    <c-searcher customClass="mb-0" />
+                                </div>
+                                <c-button status="info" icon_hide>All New Releases</c-button>
                             </div>
-                            <c-button status="info" icon_hide>All New Releases</c-button>
-                        </div>
-                        <c-game-grid
-                            :itemInRow=2
-                            :showRating=false
-                            :showTime=true
-                            v-bind:items="new_games"
-                            itemBg="transparent"
-                        />
-                        <c-content-navigation />
-                    </c-block>
+                            <c-game-grid
+                                :itemInRow=2
+                                :showRating=false
+                                :showTime=true
+                                v-bind:items="new_games"
+                                itemBg="transparent"
+                            />
+                            <c-content-navigation />
+                        </c-block>
+                    </div>
                 </div>
 
                 <div class="row margin-bottom-70 margin-top-40 align-items-stretch">
                     <div class="col-12 col-md-8">
-                        <div class="banner banner-3">
-                            <div class="banner-text">
-                                <h3 class="text-yellow">Item Marketplace</h3>
-                                <p>You all in one spot for games assets</p>
+                        <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="#3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="text-yellow">Item Marketplace</h3>
+                                    <p>You all in one spot for games assets</p>
+                                </div>
+                                <div class="banner-action">
+                                    <c-button status="info" icon_hide size="lg">VISIT NOW</c-button>
+                                </div>
                             </div>
-                            <div class="banner-action">
-                                <c-button status="info" icon_hide size="lg">VISIT NOW</c-button>
-                            </div>
-                        </div>
+                        </c-banner>
                     </div>
                     <div class="col-12 col-md-4">
-                        <div class="banner banner-4">
-                            <div class="banner-text">
-                                <h3 class="text-yellow margin-bottom-5">Top Collections</h3>
-                                <p>We curated the best ones for you</p>
-                            </div>
-                        </div>
+                        <c-banner :imgSrc="'/static/img/banners/banner-4.png'" link="#3">
+                            <h3 class="text-yellow margin-bottom-5">Top Collections</h3>
+                            <p>We curated the best ones for you</p>
+                        </c-banner>
                     </div>
                 </div>
 
@@ -251,6 +249,7 @@ export default {
         'c-news-list-navigation': () => import('@/ui/components/news-list/navigation'),
         'c-news-list-articles': () => import('@/ui/components/news-list/articles'),
         'c-block': () => import('@/ui/components/block'),
+        'c-banner': () => import('@/ui/components/banner/simple'),
         'c-swiper': swiper,
         'c-slide': swiperSlide
     },
@@ -496,7 +495,7 @@ export default {
             saleSlider: {
                 slidesPerView: 3,
                 spaceBetween: 0
-            }
+            },
         }
     },
     computed: {
@@ -660,74 +659,29 @@ export default {
         margin-bottom: 20px;
     }
     .banner{
-        display: flex;
-        width: 100%;
-        height: 100%;
-        border-radius: 5px;
-        padding: 25px;
-        overflow: hidden;
-        position: relative;
-        text-shadow: 0 0 2px rgba(0, 0, 0, .2);
-        justify-content: space-between;
-        align-items: center;
-        &.banner-1{
-            background: url("../../../assets/img/banners/banner-1.png") top right no-repeat;
-            background-size: cover;
-        }
-        &.banner-2{
-            background: url("../../../assets/img/banners/banner-2.png") top right no-repeat;
-            background-size: cover;
-        }
-        &.banner-3{
-            background: url("../../../assets/img/banners/banner-3.png") top right no-repeat;
-            background-size: cover;
-        }
-        &.banner-4{
-            background: url("../../../assets/img/banners/banner-4.png") top right no-repeat;
-            background-size: cover;
-        }
         .text-yellow{
             color: #FADC72;
         }
-        .banner-text{
-            display: flex;
-            color: #fff;
-            flex-direction: column;
-            justify-content: center;
-            h3{
-                font-size: 2.5em;
-                text-transform: uppercase;
-                padding: 0;
-                margin: 5px 0;
-                font-weight: bold;
-            }
-            h4{
-                font-size: 1.5em;
-                text-transform: uppercase;
-                padding: 0;
-                margin: 0;
-                font-weight: bold;
-                line-height: 24px;
-            }
-            p{
-                font-size: 16px;
-                padding: 0;
-                margin: 0;
-            }
+        h3{
+            font-size: 2.5em;
+            text-transform: uppercase;
+            padding: 0;
+            margin: 5px 0;
+            font-weight: bold;
         }
-        img{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        h4{
+            font-size: 1.5em;
+            text-transform: uppercase;
+            padding: 0;
+            margin: 0;
+            font-weight: bold;
+            line-height: 24px;
         }
-        &.banner-2{
-            h3{
-                font-size: 2em;
-            }
+        p{
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
         }
-    }
-    .VueCarousel {
-        width: 100%;
     }
 </style>
 
