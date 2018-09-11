@@ -11,11 +11,15 @@
                 <strong>{{ item.price }}</strong> USD
             </div>
             <div class="img">
-                <img :src="item.images.medium_tile" />
+                <a :href="`/#/product/${item.id}`">
+                    <img :src="item.images.medium_tile" />
+                </a>
             </div>
             <div class="info">
                 <div class="text">
-                    <h4>{{ item.name }}</h4>
+                    <a :href="`/#/product/${item.id}`">
+                        <h4>{{ item.name }}</h4>
+                    </a>
                     <p>{{ item.description }}</p>
                 </div>
                 <div class="footer">
@@ -31,7 +35,7 @@
                     <c-button
                         status="success"
                         v-if="item.moreLink"
-                        :href="item.moreLink"
+                        :href="`/#/product/${item.id}`"
                         icon_hide
                     >Buy Now</c-button>
                 </div>
@@ -177,6 +181,9 @@
                 transition: all 200ms ease-in;
                 transform: scale(1.05);
             }
+        }
+        a{
+            text-decoration: none;
         }
     }
 </style>

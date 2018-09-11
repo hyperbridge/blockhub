@@ -354,6 +354,7 @@ export default {
             curators_reviews: [curator_review, curator_review, curator_review],
             new_games: [
                 {
+                    id: '1',
                     name: 'Game Title Here',
                     description: 'Developer name!',
                     price: '99.99',
@@ -364,6 +365,7 @@ export default {
                     },
                 },
                 {
+                    id: '2',
                     name: 'Game Title Here',
                     description: 'Developer name!',
                     price: '99.99',
@@ -373,6 +375,7 @@ export default {
                     },
                 },
                 {
+                    id: '3',
                     name: 'Game Title Here and two lines',
                     description: 'Developer or Studio name with two lines too!',
                     price: '12.99',
