@@ -5,7 +5,7 @@
            aria-expanded="false">
             {{ name }}
         </a>
-        <div class="dropdown-menu" :aria-labelledby="[ id + 'Button']">
+        <div class="dropdown-menu" :aria-labelledby="[ id + '_button']">
             <slot></slot>
         </div>
     </div>
