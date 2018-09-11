@@ -322,6 +322,24 @@ const router = new Router({
             component: () => import('@/ui/screens/unknown')
         },
         {
+            path: '/download/desktop/mac',
+            beforeEnter(to, from, next) {
+                window.location = 'https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v0.1.0/BlockHub-v0.1.0.dmg'
+            }
+        },
+        {
+            path: '/download/desktop/windows',
+            beforeEnter(to, from, next) {
+                window.location = 'https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v0.1.0/BlockHub-v0.1.0.exe'
+            }
+        },
+        {
+            path: '/download/desktop/linux',
+            beforeEnter(to, from, next) {
+                window.location = 'https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v0.1.0/BlockHub-v0.1.0-linux.zip'
+            }
+        },
+        {
             path: "*",
             component: () => import('@/ui/screens/not-found')
         }
