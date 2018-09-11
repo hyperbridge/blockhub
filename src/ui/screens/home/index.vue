@@ -128,49 +128,49 @@
         data: () => ({
             assets: [
                 {
-                    title: 'Magic Plate Armor',
+                    name: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 },
                 {
-                    title: 'Magic Plate Armor',
+                    name: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 },
                 {
-                    title: 'Magic Plate Armor',
+                    name: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 },
                 {
-                    title: 'Magic Plate Armor',
+                    name: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 },
                 {
-                    title: 'Magic Plate Armor',
+                    name: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 },
                 {
-                    title: 'Magic Plate Armor',
+                    name: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 },
                 {
-                    title: 'Magic Plate Armor',
+                    name: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 },
                 {
-                    title: 'Magic Plate Armor',
+                    name: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'

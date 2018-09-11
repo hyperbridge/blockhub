@@ -4,32 +4,17 @@
              v-for="(item, index) in items"
              :style="{ width: 'calc( 100% / ' + itemInRow + ')'}"
              :key="index">
-            <div class="assets-list__item">
-                <div class="thumb">
-                    <img
-                        :src="item.img"/>
-                </div>
-                <div class="info">
-                    <h5>{{ item.title }}</h5>
-                    <slot>
-                        <span class="float-left price">
-                            <i class="fas fa-dollar-sign"></i>
-                            {{ item.price }}
-                        </span>
-                        <span class="float-right box">
-                            <i class="fas fa-box"></i>
-                            {{ item.count }}
-                        </span>
-                    </slot>
-                </div>
-            </div>
+            <c-assets-item :item="item" />
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        props: ['items', 'itemInRow']
+        props: ['items', 'itemInRow'],
+        components:{
+            'c-assets-item': () => import('@/ui/components/assets-list-item/item')
+        }
     }
 </script>
 

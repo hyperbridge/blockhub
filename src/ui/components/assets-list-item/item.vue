@@ -5,10 +5,10 @@
     >
         <div class="thumb">
             <img
-                :src="item.img"/>
+                :src="item.image"/>
         </div>
         <div class="info">
-            <h5>{{ item.title }}</h5>
+            <h5>{{ item.name }}</h5>
             <slot>
                 <span class="float-left price">
                     <i class="fas fa-dollar-sign"></i>
