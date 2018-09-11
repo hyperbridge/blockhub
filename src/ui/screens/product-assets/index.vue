@@ -53,8 +53,11 @@
         if (!product)
             return
 
-        if (product.images && product.images.header)
-            window.document.getElementById('header-bg').style['background-image'] = 'url(' + product.images.header + ')'
+        if (product.images.preview && product.images.preview.length) {
+            const header = window.document.getElementById('header-bg');
+            header.style['background-image'] = 'url(' + product.images.preview[0] + ')';
+            header.style['background-size'] = 'cover';
+        }
 
         product.assets = [
             {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'},

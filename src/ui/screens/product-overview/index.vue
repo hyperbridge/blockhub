@@ -186,7 +186,7 @@
             product = this.$store.state.marketplace.products[this.id]
         }
 
-        if (product && product.images && product.images.preview.length) {
+        if (product.images.preview && product.images.preview.length) {
             const header = window.document.getElementById('header-bg');
             header.style['background-image'] = 'url(' + product.images.preview[0] + ')';
             header.style['background-size'] = 'cover';
