@@ -104,24 +104,7 @@
 
                                 <c-community-spotlight :discussions="product.community.discussions" :community_url="`/#/product/${product.id}/community`" />
 
-                                <div class="card invert system-requirements" v-if="product.system_requirements">
-                                    <div class="card-body">
-                                        <h2 class="title">
-                                            System Requirements <i class="fas fa-laptop title-icon"></i>
-                                        </h2>
-                                        <ul class="system-requirements__list">
-                                            <li
-                                                v-for="(value, property) in product.system_requirements[0]"
-                                                v-if="value"
-                                                :key="property"
-                                                class="system-requirements__list-item"
-                                            >
-                                                <strong>{{ property | sysProp }}</strong>
-                                                <p class="system-requirements__value">{{ value | upperFirstChar }}</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <c-system-requirements :requirements="product.system_requirements"/>
 
                                 <div class="card transparent languages-blk" v-if="product.language_support">
                                     <div class="card-body">
@@ -212,7 +195,8 @@
             'c-frequently-traded-assets': () => import('@/ui/components/frequently-traded-assets'),
             'c-community-spotlight': () => import('@/ui/components/community-spotlight'),
             'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-review': () => import('@/ui/components/review')
+            'c-review': () => import('@/ui/components/review'),
+            'c-system-requirements': () => import('@/ui/components/product-overview/system-requirements')
         },
         data() {
             const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.';
@@ -279,11 +263,6 @@
                 }
 
                 return this.$store.state.marketplace.editor_mode === 'editing'
-            }
-        },
-        filters: {
-            sysProp(val) {
-                return val.replace(/[\s_]+/g, ' ').toUpperCase();
             }
         },
         mounted: updateProduct,
@@ -393,41 +372,6 @@
             color: #1C2032;
             background: #FEEBCE;
         }
-    }
-
-    .system-requirements__value {
-        display: block;
-        width: 100%;
-        margin-bottom: 10px;
-        background: rgba(0, 0, 0, .13);
-        border: 1px solid rgba(70, 70, 70, 0.5);
-        border-radius: 5px;
-        padding: 5px;
-        position: relative;
-        &:last-child {
-            margin-bottom: 0;
-        }
-        h6 {
-            font-weight: bold;
-            font-size: 14px;
-            padding-bottom: 0;
-            i {
-                float: right;
-            }
-        }
-        p {
-            margin: 0;
-        }
-    }
-
-    .system-requirements__list {
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-    }
-
-    .system-requirements__list-item {
-        margin-bottom: 10px;
     }
 
     .languages-list {

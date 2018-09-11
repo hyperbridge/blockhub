@@ -2352,7 +2352,7 @@ storiesOf('Collection', module)
         },
         template: `
             <div class="p-5" style="width: 900px">
-                <c-collection-list title="Get Started" 
+                <c-collection-list title="Get Started"
                                     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet tellus in neque porttitor consequat."
                                     >
                     <c-swiper :options="sliderOptions" class="padding-10">
@@ -2666,6 +2666,19 @@ storiesOf('Banner', module)
             }
         },
         template: `<div class="padding-50" style="width: 900px"><c-banner :imgSrc="img" :logoSrc="logo" /></div>`
+    }))
+
+import TabsUniversal from '@/ui/components/tab/tab-universal';
+storiesOf('Tabs Universal', module)
+    .add('default', () => ({
+        components: { 'c-tabs-universal': TabsUniversal },
+        template: `
+            <div class="padding-50">
+                <c-tabs-universal style="color: #fff;">
+                    <div>123123123</div>
+                    <div>123123123</div>
+                </c-tabs-universal>
+            </div>`
     }))
 
 

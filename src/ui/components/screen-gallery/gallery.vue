@@ -63,7 +63,7 @@ export default {
     methods: {
         slideshow() {
             this.interval = setInterval(() => {
-                this.active_item < this.images.length - 1 ? this.active_item++ : this.active_item = 0;
+                this.active_item < this.items.length - 1 ? this.active_item++ : this.active_item = 0;
             }, 4000);
         },
         enableSlideshow(status) {
@@ -73,7 +73,7 @@ export default {
         }
     },
     mounted() {
-        if (this.images) {
+        if (this.items && this.items.length) {
             this.slideshow();
         }
     },
