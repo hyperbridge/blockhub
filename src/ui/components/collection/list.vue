@@ -15,7 +15,7 @@
 
 <script>
     export default {
-        name: '',
+        name: 'collection-list',
         props:['title', 'description']
     }
 </script>

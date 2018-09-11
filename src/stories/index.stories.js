@@ -502,10 +502,10 @@ storiesOf('Buttons', module)
             <c-button @click="testFunction">
                 default
             </c-button>
-            <c-button size="md">
+            <c-button size="md" @click="testFunction">
                 default
             </c-button>
-            <c-button size="lg">
+            <c-button size="lg" @click="testFunction">
                 default
             </c-button>
         `)
