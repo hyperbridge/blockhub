@@ -67,14 +67,14 @@
 
                 <div class="row margin-top-40 align-items-stretch">
                     <div class="col-12 col-md-4">
-                        <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="#3">
+                        <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="/#/home">
                             <h4 class="text-yellow">summer block</h4>
                             <h3>Championship</h3>
                             <p>You won't believe the prize!</p>
                         </c-banner>
                     </div>
                     <div class="col-12 col-md-8">
-                        <c-banner :imgSrc="'/static/img/banners/banner-2.png'" link="#3">
+                        <c-banner :imgSrc="'/static/img/banners/banner-2.png'" link="/#/home">
                             <div class="align-items-start">
                                 <h3 class="text-yellow margin-bottom-5">top<br>curators</h3>
                                 <h4 class="text-capitalize">What are they<br>playing?</h4>
@@ -122,7 +122,7 @@
 
                 <div class="row margin-bottom-70 margin-top-40 align-items-stretch">
                     <div class="col-12 col-md-8">
-                        <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="#3">
+                        <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/home">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h3 class="text-yellow">Item Marketplace</h3>
@@ -135,7 +135,7 @@
                         </c-banner>
                     </div>
                     <div class="col-12 col-md-4">
-                        <c-banner :imgSrc="'/static/img/banners/banner-4.png'" link="#3">
+                        <c-banner :imgSrc="'/static/img/banners/banner-4.png'" link="/#/home">
                             <h3 class="text-yellow margin-bottom-5">Top Collections</h3>
                             <p>We curated the best ones for you</p>
                         </c-banner>
@@ -172,18 +172,18 @@
                                     <c-assets-list-item
                                         :item="item"
                                         :isTransparent="true">
-                                <span class="mr-3">
-                                    <i class="fas fa-box"></i>
-                                    {{ item.count }}
-                                </span>
                                         <span class="mr-3">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    {{ item.price }}
-                                </span>
-                                        <span class="mr-3">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    3.45
-                                </span>
+                                            <i class="fas fa-box"></i>
+                                            {{ item.count }}
+                                        </span>
+                                                <span class="mr-3">
+                                            <i class="fas fa-dollar-sign"></i>
+                                            {{ item.price }}
+                                        </span>
+                                                <span class="mr-3">
+                                            <i class="fas fa-dollar-sign"></i>
+                                            3.45
+                                        </span>
                                     </c-assets-list-item>
                                 </div>
                             </div>
@@ -386,48 +386,56 @@ export default {
             ],
             assets: [
                 {
+                    id: '1',
                     title: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 },
                 {
+                    id: '1',
                     title: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 },
                 {
+                    id: '1',
                     title: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 },
                 {
+                    id: '1',
                     title: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 },
                 {
+                    id: '1',
                     title: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 },
                 {
+                    id: '1',
                     title: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 },
                 {
+                    id: '1',
                     title: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
                     img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
                 },
                 {
+                    id: '1',
                     title: 'Magic Plate Armor',
                     price: '1.99',
                     count: '350.00',
