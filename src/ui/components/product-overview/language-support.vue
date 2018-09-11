@@ -54,12 +54,13 @@ export default {
         width: 100%;
         th:not(:first-child), td:not(:first-child) {
             text-align: center;
+            width: 15%;
         }
         th:not(:first-child):not(:last-child) {
             padding: 0 5px;
         }
         tbody tr:nth-child(even) {
-            background-color: #363650;
+            background-color: #3c3c57;
         }
     }
 </style>

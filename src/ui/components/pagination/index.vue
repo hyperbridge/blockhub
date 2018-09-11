@@ -68,7 +68,7 @@
         name: 'pagination',
         props: {
             pages: {
-                type: Number,
+                type: [Number, String],
                 default: 0
             },
             pages_show: {

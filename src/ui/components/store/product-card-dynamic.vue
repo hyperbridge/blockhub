@@ -8,8 +8,8 @@
             <transition name="fade">
                 <img v-if="!display_preview" class="card-img-top" :src="product.images.medium_tile" />
                 <template v-else>
-                    <video v-if="product.videos.length && autoplay" class="card-img-top" width="100%" autoplay>
-                        <source :src="product.videos[0]" type="video/mp4">
+                    <video v-if="product.video && autoplay" class="card-img-top" width="100%" autoplay>
+                        <source :src="product.video" type="video/mp4">
                     </video>
                     <transition-group tag="div" name="slide-left" v-else>
                         <img
@@ -25,7 +25,7 @@
         </a>
         <h4><a :href="`/#/product/${product.id}`">{{ product.name }}</a></h4>
         <p class="card-text" hidden>{{ product.short_description }} </p>
-        <c-tags :tags="product.author_tags.slice(0,3)"/>
+        <c-tags :tags="product.developer_tags.slice(0,3)"/>
     </div>
 </template>
 
@@ -54,7 +54,7 @@ export default {
             clearTimeout(this.timeout);
             this.timeout = setTimeout(() => {
                 if (!status) clearInterval(this.interval);
-                if (status && !this.display_preview && (!this.product.videos.length || !this.autoplay)) this.slider();
+                if (status && !this.display_preview && (!this.product.video || !this.autoplay)) this.slider();
                 this.display_preview = status;
             }, status ? 250 : 0);
         },
@@ -84,10 +84,9 @@ export default {
     padding: 7px;
     border-radius: 5px;
     &:hover {
-        will-change: transform;
-        transform: perspective(300px) rotateX(0deg) rotateY(0deg) scale(1.05);
+        transform: scale(1.1);
         box-shadow: 0 0 35px rgba(0, 0, 0, .2);
-        transition: transform 200ms cubic-bezier(0.34, 1.01, 0.8, 0.24);
+        transition: transform .25s ease;
     }
     a {
         color: #fff;

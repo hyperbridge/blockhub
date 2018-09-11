@@ -714,6 +714,7 @@
             {
                 "id": 1,
                 "name": "Might & Magic: Heroes VI",
+                "price": 24.99,
                 "images": {
                   "header": null,
                   "medium_tile": "/static/img/products/might-&-magic-heroes-vi-4896/med-tile.jpg",
@@ -817,7 +818,9 @@
                     "special_info": "ATI® RADEON® HD 6000 Series"
                   }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "new"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -936,7 +939,7 @@
                      "/static/img/products/doom-20087/preview-06.jpg"
                   ]
                },
-               "video":"/static/videos/products/doom-20087/.mp4",
+               "video":"/static/videos/products/doom-20087/trailer.mp4",
                "genre":"Action",
                "release_date":"12 May, 2016",
                "developer":"id Software",
@@ -1024,7 +1027,12 @@
                   }
                ],
                "system_tags":[
-
+                    "new",
+                    "upcoming",
+                    "trending",
+                    "top_seller",
+                    "specials",
+                    "sale"
                ],
                "type":"game",
                "downloads":0,
@@ -1161,7 +1169,7 @@
                      "/static/img/products/teeworlds-20137/preview-05.jpg"
                   ]
                },
-               "video":"/static/videos/products/teeworlds-20137/.mp4",
+               "video":"/static/videos/products/teeworlds-20137/trailer.mp4",
                "genre":"Action",
                "release_date":"27 May, 2007",
                "developer":"Teeworlds Team",
@@ -1313,7 +1321,7 @@
                   }
                ],
                "system_tags":[
-
+                    "sale"
                ],
                "type":"game",
                "downloads":0,
@@ -1449,7 +1457,9 @@
                   "other": "INTERNET CONNECTION REQUIRED FOR ONLINE GAMING"
                 }
               ],
-              "system_tags": [],
+              "system_tags": [
+                  "sale"
+              ],
               "type": "game",
               "downloads": 0,
               "plans": [],
@@ -1484,7 +1494,7 @@
                   "/static/img/products/arcania-4380/preview-06.jpg"
                 ]
               },
-              "video": "/static/videos/products/arcania-4380/.mp4",
+              "video": "/static/videos/products/arcania-4380/trailer.mp4",
               "genre": "RPG",
               "release_date": "11 Oct, 2010",
               "developer": "Spellbound Studios",
@@ -1554,7 +1564,9 @@
                   "sound": "DirectX 8.1 compatible sound card"
                 }
               ],
-              "system_tags": [],
+              "system_tags": [
+                  "sale"
+              ],
               "type": "game",
               "downloads": 0,
               "plans": [],
@@ -1589,7 +1601,7 @@
                   "/static/img/products/pride-of-nations-4591/preview-06.jpg"
                 ]
               },
-              "video": "/static/videos/products/pride-of-nations-4591/.mp4",
+              "video": "/static/videos/products/pride-of-nations-4591/trailer.mp4",
               "genre": "Simulation",
               "release_date": "8 Jun, 2011",
               "developer": "Ageod",
@@ -1807,7 +1819,7 @@
                    "/static/img/products/kingdom-come-deliverance-20030/preview-06.jpg"
                 ]
              },
-             "video":"/static/videos/products/kingdom-come-deliverance-20030/.mp4",
+             "video":"/static/videos/products/kingdom-come-deliverance-20030/trailer.mp4",
              "genre":"Action",
              "release_date":"13 Feb, 2018",
              "developer":"Warhorse Studios",
@@ -1897,7 +1909,8 @@
                 }
              ],
              "system_tags":[
-
+                "new",
+                "top_seller"
              ],
              "type":"game",
              "downloads":0,
@@ -1943,7 +1956,7 @@
                    "/static/img/products/fishing-planet-20121/preview-06.jpg"
                 ]
              },
-             "video":"/static/videos/products/fishing-planet-20121/.mp4",
+             "video":"/static/videos/products/fishing-planet-20121/trailer.mp4",
              "genre":"Free to Play",
              "release_date":"11 Aug, 2015",
              "developer":"Fishing Planet LLC",
@@ -2053,7 +2066,7 @@
                 }
              ],
              "system_tags":[
-
+                "new"
              ],
              "type":"game",
              "downloads":0,
@@ -2204,7 +2217,7 @@
                   "/static/img/products/sniper-elite-v2-4275/preview-06.jpg"
                 ]
               },
-              "video": "/static/videos/products/sniper-elite-v2-4275/.mp4",
+              "video": "/static/videos/products/sniper-elite-v2-4275/trailer.mp4",
               "genre": "Action",
               "release_date": "3 May, 2012",
               "developer": "Rebellion",
@@ -2274,7 +2287,9 @@
                   "directx": "Microsoft® DirectX® 11.0"
                 }
               ],
-              "system_tags": [],
+              "system_tags": [
+                  "new"
+              ],
               "type": "game",
               "downloads": 0,
               "plans": [],
@@ -2506,7 +2521,9 @@
                   "storage": "10 GB available space"
                 }
               ],
-              "system_tags": [],
+              "system_tags": [
+                  "upcoming"
+              ],
               "type": "game",
               "downloads": 0,
               "plans": [],
@@ -2590,7 +2607,9 @@
                   "graphics": "NVIDIA GeForce 6 series, ATI 1300XT series"
                 }
               ],
-              "system_tags": [],
+              "system_tags": [
+                  "upcoming"
+              ],
               "type": "game",
               "downloads": 0,
               "plans": [],
@@ -2683,7 +2702,9 @@
                   "sound": "DirectX® 9.0c-compatible"
                 }
               ],
-              "system_tags": [],
+              "system_tags": [
+                  "upcoming"
+              ],
               "type": "game",
               "downloads": 0,
               "plans": [],
@@ -2783,7 +2804,9 @@
                   "other": "3D Vision-Ready Display"
                 }
               ],
-              "system_tags": [],
+              "system_tags": [
+                  "featured"
+              ],
               "type": "game",
               "downloads": 0,
               "plans": [],
@@ -2818,7 +2841,7 @@
                   "/static/img/products/portal-2-4841/preview-06.jpg"
                 ]
               },
-              "video": "/static/videos/portal-2-4841/.mp4",
+              "video": "/static/videos/portal-2-4841/trailer.mp4",
               "genre": "Action",
               "release_date": "18 Apr, 2011",
               "developer": "Valve",
@@ -2995,7 +3018,12 @@
                   "sound_card": "OpenAL Compatible Sound Card"
                 }
               ],
-              "system_tags": [],
+              "system_tags": [
+                  "new",
+                  "featured",
+                  "specials",
+                  "top_seller"
+              ],
               "type": "game",
               "downloads": 0,
               "plans": [],
@@ -3138,6 +3166,8 @@
             {
               "id": 22,
               "name": "The Witcher 2: Assassins of Kings Enhanced Edition",
+              "price": 39.99,
+              "old_price": 45.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/the-witcher-2-assassins-of-kings-enhanced-edition-4664/med-tile.jpg",
@@ -3268,7 +3298,9 @@
                   "hard_drive": "25 GB HD space"
                 }
               ],
-              "system_tags": [],
+              "system_tags": [
+                  "frontpage"
+              ],
               "type": "game",
               "downloads": 0,
               "plans": [],
@@ -3379,7 +3411,10 @@
                   "opengl": "2.1"
                 }
               ],
-              "system_tags": [],
+              "system_tags": [
+                "top_seller",
+                "specials"
+              ],
               "type": "game",
               "downloads": 0,
               "plans": [],
@@ -3473,7 +3508,10 @@
                   "other": "Internet connection required"
                 }
               ],
-              "system_tags": [],
+              "system_tags": [
+                  "top_seller",
+                  "trending"
+              ],
               "type": "game",
               "downloads": 0,
               "plans": [],
@@ -3600,7 +3638,9 @@
                   "disk_space": "Around 7 GB"
                 }
               ],
-              "system_tags": [],
+              "system_tags": [
+                  "top_seller"
+              ],
               "type": "game",
               "downloads": 0,
               "plans": [],

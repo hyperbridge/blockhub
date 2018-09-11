@@ -15,13 +15,16 @@
             </div>
             <div class="info">
                 <div class="text">
-                    <h4>{{ item.name }}</h4>
+                    <a
+                        :href="`/#/product/${item.id}`"
+                        :title="item.name + ' - product page'"
+                    ><h4>{{ item.name }}</h4></a>
                     <p>{{ item.description }}</p>
                 </div>
                 <div class="footer">
-                    <div class="time" v-if="item.time && showTime">
+                    <div class="time" v-if="item.release_date">
                         <i class="fas fa-calendar-alt"></i>
-                        {{ item.time }}
+                        {{ item.release_date }}
                     </div>
                     <c-rating-stars
                         v-if="item.starsCount && showRating"
