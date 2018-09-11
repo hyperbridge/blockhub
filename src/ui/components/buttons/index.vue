@@ -90,6 +90,7 @@
             font-size: 18px;
         }
 
+
         $statusColors: (
             default: (#fff, #3D3E5D, #3D3E5D, #A2A3BE),
             info: (#5D75F7, #fff, #586ee9, #30304B),
