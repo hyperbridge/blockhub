@@ -79,6 +79,11 @@ export default {
     },
     beforeDestroy() {
         this.enableSlideshow(false);
+    },
+    watch: {
+        $route() {
+            this.active_item = 0;
+        }
     }
 }
 </script>

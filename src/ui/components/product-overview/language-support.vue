@@ -60,7 +60,7 @@ export default {
             padding: 0 5px;
         }
         tbody tr:nth-child(even) {
-            background-color: #3c3c57;
+            background-color: #353551;
         }
     }
 </style>

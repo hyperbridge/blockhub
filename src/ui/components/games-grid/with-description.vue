@@ -19,6 +19,7 @@
                         :href="`/#/product/${item.id}`"
                         :title="item.name + ' - product page'"
                     ><h4>{{ item.name }}</h4></a>
+                    <p>{{ item.publisher }}</p>
                     <p>{{ item.description }}</p>
                 </div>
                 <div class="footer">
