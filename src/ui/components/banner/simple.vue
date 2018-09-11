@@ -42,6 +42,8 @@
     .block-link{
         width: 100%;
         text-decoration: none;
+        display: flex;
+        height: 100%;
     }
     .banner__text{
         display: flex;
