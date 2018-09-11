@@ -3,7 +3,7 @@
         :is="tag"
         class="c-btn"
         :class="[status, 'c-btn-' + size , { 'swap-direction': swap_direction }]"
-        v-on:click="click"
+        v-on:click="click ? click : function() {}"
     >
         <i
             v-if="(icon || inject_filter.length) && !icon_hide"
