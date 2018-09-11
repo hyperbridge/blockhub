@@ -93,7 +93,9 @@ export default {
     }
 
     .system-requirements__list-item {
-        margin-bottom: 10px;
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
         .fab {
             margin-left: 4px;
         }

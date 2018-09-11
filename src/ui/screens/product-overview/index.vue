@@ -106,24 +106,7 @@
 
                                 <c-system-requirements :requirements="product.system_requirements"/>
 
-                                <div class="card transparent languages-blk" v-if="product.language_support">
-                                    <div class="card-body">
-                                        <h2 class="title">Languages <i class="fas fa-laptop title-icon"></i></h2>
-                                        <ul class="languages-list">
-                                            <li class="languages-list__item"
-                                                v-for="(item, index) in product.language_support"
-                                                :key="index">
-                                                <span class="languages-list__name">{{ item.name }}</span>
-                                                <span class="languages-list__icon">
-                                                    <i class="fas fa-closed-captioning"
-                                                       v-if="item.closed_captioning"></i>
-                                                    <i class="fas fa-audio-description"
-                                                       v-if="item.audio_description"></i>
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <c-language-support :languages="product.language_support"/>
                             </div>
                         </div>
                         <div class="col-12">
@@ -196,7 +179,8 @@
             'c-community-spotlight': () => import('@/ui/components/community-spotlight'),
             'c-heading-bar': () => import('@/ui/components/heading-bar'),
             'c-review': () => import('@/ui/components/review'),
-            'c-system-requirements': () => import('@/ui/components/product-overview/system-requirements')
+            'c-system-requirements': () => import('@/ui/components/product-overview/system-requirements'),
+            'c-language-support': () => import('@/ui/components/product-overview/language-support')
         },
         data() {
             const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.';
@@ -371,34 +355,6 @@
         &.with_bg{
             color: #1C2032;
             background: #FEEBCE;
-        }
-    }
-
-    .languages-list {
-        padding: 0;
-    }
-    .languages-list__item {
-        list-style: none;
-        display: block;
-        margin: 5px 0;
-        width: 100%;
-        overflow: hidden;
-    }
-    .languages-list__name {
-        float: left;
-        max-width: 80%;
-        font-size: 14px;
-        font-weight: bold;
-    }
-    .languages-list__icon {
-        float: right;
-        max-width: 20%;
-        text-align: right;
-        i {
-            margin-right: 5px;
-            &:last-child {
-                margin-right: 0;
-            }
         }
     }
 </style>
