@@ -2831,6 +2831,97 @@ storiesOf('Tabs Universal', module)
             </div>`
     }))
 
+import LanguageSupport from '@/ui/components/product-overview/language-support';
+import SystemRequirements from '@/ui/components/product-overview/system-requirements';
+storiesOf('Product Overview', module)
+    .add('Language Support', () => ({
+        components: { 'c-language-support': LanguageSupport },
+        data() {
+            return {
+                languages: [
+                    {
+                        "name": "English",
+                        "interface": true,
+                        "full_audio": false,
+                        "subtitles": false
+                    },
+                    {
+                        "name": "Czech",
+                        "interface": true,
+                        "full_audio": true,
+                        "subtitles": false
+                    },
+                    {
+                        "name": "French",
+                        "interface": true,
+                        "full_audio": true,
+                        "subtitles": true
+                    },
+                    {
+                        "name": "German",
+                        "interface": true,
+                        "full_audio": false,
+                        "subtitles": false
+                    },
+                    {
+                        "name": "Hungarian",
+                        "interface": true,
+                        "full_audio": false,
+                        "subtitles": true
+                    }
+                ]
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-language-support
+                    style="color: white"
+                    :languages="languages"
+                />
+            </div>`
+    }))
+    .add('System Requirements', () => ({
+        components: { 'c-system-requirements': SystemRequirements },
+        data() {
+            return {
+                system_requirements: [
+                    {
+                      "os": "win",
+                      "system": "Windows XP/Vista/7",
+                      "processor": "Intel or AMD Quad-Core",
+                      "memory": "3 GB (Win XP), 4GB (Win Vista/Win 7)",
+                      "graphics": "GeForce 260 (1 GB) or Radeon HD 4850 (1 GB). Resolution 1440x900.",
+                      "directx": "DirectX 9.29 has to be installed.",
+                      "hard_drive": "25GB",
+                      "sound": ""
+                    },
+                    {
+                      "os": "mac",
+                      "system": "OS X 10.8.5 or higher",
+                      "processor": "Quad Core Intel",
+                      "memory": "8 GB RAM",
+                      "graphics": "GeForce GTX 675MX 1GB (on 1920x1080, medium), Radeon HD 6970M 1 GB (on 1920x1080, medium), Intel integrated graphics chipsets are not supported",
+                      "hard_drive": "25 GB HD space"
+                    },
+                    {
+                      "os": "linux",
+                      "system": "Ubuntu 14.04, Linux Mint 17, Steam OS",
+                      "processor": "Quad Core Intel",
+                      "memory": "4 GB RAM",
+                      "graphics": "GeForce GT 640 1GB (1440x900, medium)",
+                      "hard_drive": "25 GB HD space"
+                    }
+                ]
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-system-requirements
+                    style="color: white"
+                    :requirements="system_requirements"
+                />
+            </div>`
+    }))
 
 
 
