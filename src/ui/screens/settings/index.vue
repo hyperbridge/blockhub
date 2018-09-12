@@ -71,20 +71,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 benchmark d-flex justify-content-between align-items-center">
-                        <div>
-                            <div>Page was rendered in <b :class="perfResults.grade">{{ renderTime }}</b> ms.</div>
-                            <div>{{ perfResults.text }}</div>
-                        </div>
-                        <div>
-                            <c-button @click="autoUpdateSettings" status="success">UPDATE SETTINGS AUTOMATICALLY</c-button>
-                        </div>
-                    </div>
+                    <c-benchmark
+                        :settings="settings"
+                        class="col-12 d-flex justify-content-between align-items-center"
+                    />
                 </div>
             </c-block>
             <c-block class="margin-bottom-30" title="Advanced">
                 <div class="row">
-                    <div class="col-12 benchmark d-flex justify-content-between align-items-center">
+                    <div class="col-12 d-flex justify-content-between align-items-center">
                         <div>
                             Advanced settings can be managed here. These are primarily for developers @BlockHub.
                             <br /><strong>Warning:</strong> Only use these if you know what you're doing.
@@ -105,7 +100,8 @@ import { mapActions } from 'vuex';
 export default {
     components: {
         'c-layout': () => import('@/ui/layouts/default'),
-        'c-block': () => import('@/ui/components/block')
+        'c-block': () => import('@/ui/components/block'),
+        'c-benchmark': () => import('@/ui/components/benchmark')
     },
     data() {
         return {
@@ -114,34 +110,16 @@ export default {
     },
     methods: {
         ...mapActions(['updateSettings']),
-        autoUpdateSettings() {
-            const { grade } = this.perfResults;
-            const { settings } = this;
-
-            const perfProps = ['autoplay', 'animations'];
-            const enableAll = boolean => perfProps.forEach(prop => {
-                if (settings[prop] != boolean) this.updateSettings(prop);
-            });
-
-            if (grade == 'good') {
-                enableAll(true);
-            } else if (grade == 'avg') {
-                if (!settings.autoplay) this.updateSettings('autoplay');
-                if (settings.animations) this.updateSettings('animations');
-            } else {
-                enableAll(false);
-            }
-        },
         clearDatabase() {debugger
             let DBDeleteRequest = window.indexedDB.deleteDatabase("LokiCatalog")
 
             DBDeleteRequest.onerror = function(event) {
                 console.log("Error deleting database.")
             }
-            
+
             DBDeleteRequest.onsuccess = function(event) {
                 console.log("Database deleted successfully.")
-                    
+
                 console.log(event.result) // should be undefined
             }
         }
@@ -168,16 +146,7 @@ export default {
 
             return results;
         }
-    },
-    created() {
-        this.renderTime = performance.now();
-    },
-    mounted() {
-        this.$nextTick(() => {
-            this.renderTime = Math.floor(performance.now() - this.renderTime);
-        });
     }
-
 }
 </script>
 
@@ -206,17 +175,6 @@ export default {
                 font-weight: bold;
                 margin-bottom: 5px;
             }
-        }
-    }
-    .benchmark {
-        .good {
-            color: #27ae60;
-        }
-        .avg {
-            color: #e67e22;
-        }
-        .bad {
-            color: #e74c3c;
         }
     }
 </style>

@@ -260,3 +260,7 @@
 .bg-story-4{
     background: linear-gradient(to right, #C02425 0%, #0f0c29 100%) !important;
 }
+
+.avoid-clicks {
+    pointer-events: none;
+}
