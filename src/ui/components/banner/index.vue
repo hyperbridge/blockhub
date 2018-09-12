@@ -3,7 +3,7 @@
         <div class="main-banner__content">
             <div class="image-bg" v-if="image" :style="bannerImg"></div>
             <video autoplay playsinline loop muted v-if="video" class="video-bg">
-                <source :src="video.src" type="video/webm" />
+                <source :src="video.src" type="video/mp4" />
             </video>
             <div class="main-banner__content--logo" :class="[ logo.size ? 'logo-size-' + logo.size : 'logo-size-md', logo.position ]" :style="logoPosition">
                 <img :src="logo.src" alt="company-logo"/>

@@ -2758,14 +2758,11 @@ storiesOf('Banner', module)
                     size: ''
                 },
                 video:{
-                    src: 'http://localhost:6006/static/media/video_banner.66fe1bc2.webm'
+                    src: 'https://v.ftcdn.net/01/38/38/15/700_F_138381553_qnyzrhPi5l5TMI0koaObyjYg13AWKND1_ST.mp4'
                 }
             }
         },
         watch:{
-            videoSrc(){
-                this.video['src'] = this.videoSrc
-            },
             logoPosition(){
                 this.logo['position'] = this.logoPosition
             },
@@ -2775,10 +2772,6 @@ storiesOf('Banner', module)
         },
         template: `<div class="padding-50" style="width: 900px">
                     <div class="row mb-2">
-                        <div class="col-4">
-                        <label class="text-white">Background Position</label>
-                            <input type="text" class="form-control" v-model="videoSrc" />
-                        </div>
                         <div class="col-4">
                             <div class="form-group">
                                 <label class="text-white">Logo Position</label>
