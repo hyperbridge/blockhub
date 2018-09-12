@@ -841,6 +841,8 @@
             {
                 "id": 2,
                 "name": "Capsized",
+                "price": 34.99,
+                "old_price": 59.99,
                 "images": {
                   "header": null,
                   "medium_tile": "/static/img/products/capsized-5004/med-tile.jpg",
@@ -925,6 +927,8 @@
             {
                "id":3,
                "name":"DOOM",
+               "price": 34.99,
+               "old_price": 49.99,
                "images":{
                   "header":null,
                   "medium_tile":"/static/img/products/doom-20087/med-tile.jpg",
@@ -1064,6 +1068,8 @@
             {
                 "id": 4,
                 "name": "A Game of Thrones - Genesis",
+                "price": 9.99,
+                "old_price": 19.99,
                 "images": {
                   "header": null,
                   "medium_tile": "/static/img/products/a-game-of-thrones---genesis-4221/med-tile.jpg",
@@ -1156,6 +1162,8 @@
             {
                "id":5,
                "name":"Teeworlds",
+               "price": 9.99,
+               "old_price": 19.99,
                "images":{
                   "header":null,
                   "medium_tile":"/static/img/products/teeworlds-20137/med-tile.jpg",
@@ -1353,6 +1361,8 @@
             {
               "id": 6,
               "name": "Wargame: European Escalation",
+              "price": 4.99,
+              "old_price": 15.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/wargame-european-escalation-4226/med-tile.jpg",
@@ -1480,6 +1490,8 @@
             {
               "id": 7,
               "name": "ArcaniA",
+              "price": 19.99,
+              "old_price": 24.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/arcania-4380/med-tile.jpg",
@@ -1587,6 +1599,8 @@
             {
               "id": 8,
               "name": "Pride of Nations",
+              "price": 35.99,
+              "old_price": 39.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/pride-of-nations-4591/med-tile.jpg",
@@ -1675,6 +1689,8 @@
             {
              "id":9,
              "name":"Car Mechanic Simulator 2015 Demo",
+             "price": 35.99,
+             "old_price": 39.99,
              "images":{
                 "header":null,
                 "medium_tile":"/static/img/products/car-mechanic-simulator-2015-demo-20147/med-tile.jpg",
@@ -1773,7 +1789,7 @@
                 }
              ],
              "system_tags":[
-
+                "specials"
              ],
              "type":"game",
              "downloads":0,
@@ -1805,6 +1821,8 @@
             {
              "id":10,
              "name":"Kingdom Come: Deliverance",
+             "price": 45.99,
+             "old_price": 59.99,
              "images":{
                 "header":null,
                 "medium_tile":"/static/img/products/kingdom-come-deliverance-20030/med-tile.jpg",
@@ -1942,6 +1960,8 @@
             {
              "id":11,
              "name":"Fishing Planet",
+             "price": 45.99,
+             "old_price": 59.99,
              "images":{
                 "header":null,
                 "medium_tile":"/static/img/products/fishing-planet-20121/med-tile.jpg",
@@ -2098,6 +2118,8 @@
             {
               "id": 12,
               "name": "Men of War: Assault Squad",
+              "price": 25.99,
+              "old_price": 39.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/men-of-war-assault-squad-4305/med-tile.jpg",
@@ -2203,6 +2225,8 @@
             {
               "id": 13,
               "name": "Sniper Elite V2",
+              "price": 23.99,
+              "old_price": 28.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/sniper-elite-v2-4275/med-tile.jpg",
@@ -2310,6 +2334,8 @@
             {
               "id": 14,
               "name": "Chime",
+              "price": 14.99,
+              "old_price": 9.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/chime-4259/med-tile.jpg",
@@ -2396,6 +2422,8 @@
             {
               "id": 15,
               "name": "Who's That Flying?!",
+              "price": 4.99,
+              "old_price": 9.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/who's-that-flying!-4190/med-tile.jpg",
@@ -2461,6 +2489,8 @@
             {
               "id": 16,
               "name": "Fallout New Vegas: Dead Money",
+              "price": 16.99,
+              "old_price": 24.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/fallout-new-vegas-dead-money-4513/med-tile.jpg",
@@ -2544,6 +2574,8 @@
             {
               "id": 17,
               "name": "Fallout New Vegas: Honest Hearts",
+              "price": 16.99,
+              "old_price": 24.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/fallout-new-vegas-honest-hearts-4514/med-tile.jpg",
@@ -2630,6 +2662,8 @@
             {
               "id": 18,
               "name": "Call of Duty®: Black Ops",
+              "price": 49.99,
+              "old_price": 59.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/call-of-duty%C2%AE-black-ops-4930/med-tile.jpg",
@@ -2725,6 +2759,8 @@
             {
               "id": 19,
               "name": "Homefront",
+              "price": 39.99,
+              "old_price": 49.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/homefront-4059/med-tile.jpg",
@@ -2827,6 +2863,8 @@
             {
               "id": 20,
               "name": "Portal 2",
+              "price": 29.99,
+              "old_price": 35.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/portal-2-4841/med-tile.jpg",
@@ -3044,6 +3082,8 @@
             {
               "id": 21,
               "name": "Mafia II",
+              "price": 29.99,
+              "old_price": 35.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/mafia-ii-4001/med-tile.jpg",
@@ -3321,6 +3361,8 @@
             {
               "id": 23,
               "name": "Dungeon Defenders",
+              "price": 19.99,
+              "old_price": 25.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/dungeon-defenders-4398/med-tile.jpg",
@@ -3435,6 +3477,8 @@
             {
               "id": 24,
               "name": "Worms Ultimate Mayhem",
+              "price": 9.99,
+              "old_price": 19.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/worms-ultimate-mayhem-4439/med-tile.jpg",
@@ -3532,6 +3576,8 @@
             {
               "id": 25,
               "name": "Saints Row: The Third",
+              "price": 29.99,
+              "old_price": 39.99,
               "images": {
                 "header": null,
                 "medium_tile": "/static/img/products/saints-row-the-third-4089/med-tile.jpg",
