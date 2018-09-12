@@ -173,13 +173,13 @@
             transform: scale(1);
             &:hover {
                 -webkit-transition: all 200ms ease-in;
-                -webkit-transform: scale(1.05);
+                -webkit-transform: scale(1.03);
                 -ms-transition: all 200ms ease-in;
                 -ms-transform: scale(1.05);
                 -moz-transition: all 200ms ease-in;
-                -moz-transform: scale(1.05);
+                -moz-transform: scale(1.03);
                 transition: all 200ms ease-in;
-                transform: scale(1.05);
+                transform: scale(1.03);
             }
         }
         a{
