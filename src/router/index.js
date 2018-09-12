@@ -328,6 +328,11 @@ const router = new Router({
             component: () => import('@/ui/screens/search')
         },
         {
+            path: '/collection/:id',
+            name: 'Collection Page',
+            component: () => import('@/ui/screens/collection')
+        },
+        {
             path: '/download/desktop/mac',
             beforeEnter(to, from, next) {
                 window.location = 'https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v0.1.0/BlockHub-v0.1.0.dmg'

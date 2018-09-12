@@ -4,12 +4,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <c-block title="Collections">
-                            <div class="collections-container">
-                                <div class="collections-container__item"  v-for="(item, index) in collections" :key="index" v-if="index < 6">
-                                    <c-collection-item :item="item" />
-                                </div>
-                            </div>
+                        <c-block title="Items">
                             <c-pagination :pages="8" />
                         </c-block>
                     </div>
@@ -115,13 +110,4 @@
 </script>
 
 <style lang="scss" scoped>
-    .collections-container{
-        display: flex;
-        margin: 0 -5px;
-        flex-wrap: wrap;
-    }
-    .collections-container__item{
-        width: calc( 100%/3 );
-        padding: 5px;
-    }
 </style>
