@@ -155,9 +155,10 @@
         background: #1f202f;
         border-radius: 50%;
         border: 1px solid #1c1c2a;
-        margin-right: 10px;
+        margin-right: 15px;
         img {
             object-fit: cover;
+            max-height: 64px;
         }
         .user-data__avatar-upload-btn img {
             max-height: 32px;
@@ -170,6 +171,7 @@
     }
     .identity-block__unknown-blk {
         display: flex;
+        align-items: center;
         margin: 15px 0;
         .btn {
             width: 35px;

@@ -270,7 +270,7 @@
                                         <div class="col">
                                             <div class="tab-card">
                                                 <h4>Preview your identity</h4>
-                                                <c-user-card status="success"/>
+                                                <c-user-card status="success" :user="{}"/>
                                             </div>
                                         </div>
                                     </div>
