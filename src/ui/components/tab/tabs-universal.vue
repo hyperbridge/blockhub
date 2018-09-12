@@ -56,7 +56,7 @@
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .tabs-universal__list {
         margin: 0;
         padding: 0;

@@ -4,7 +4,15 @@
             {{ name }}
         </h3>
         <div class="heading-bar__tabs" v-else>
-            <slot name="heading-tabs"></slot>
+            <slot name="heading-tabs">
+                <a
+                    v-for="(tab, index) in headingTabs"
+                    :key="index"
+                    :class="{ 'active': index == activeTab }"
+                    href="#"
+                    @click.prevent="changeTab(index, tab.category)"
+                >{{ tab instanceof Object ? tab.title : tab }}</a>
+            </slot>
         </div>
         <div class="heading-bar__additional-action">
             <slot name="additional-action"></slot>
@@ -12,10 +20,10 @@
                 MORE <i class="fas fa-angle-right"></i>
             </a>
             <div class="heading-bar__nav" v-if="showArrows">
-                <a href="#3" class="nav-prev" @click="$emit('prevClick')">
+                <a href="#3" class="nav-prev" @click.prevent="$emit('prevClick')">
                     <i class="fas fa-arrow-left"></i>
                 </a>
-                <a href="#3" class="nav-next" @click="$emit('nextClick')">
+                <a href="#3" class="nav-next" @click.prevent="$emit('nextClick')">
                     <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
@@ -30,7 +38,19 @@ export default {
         name: String,
         showBackground: Boolean,
         showArrows: Boolean,
-        more: Boolean
+        more: Boolean,
+        headingTabs: Array
+    },
+    data() {
+        return {
+            activeTab: 0
+        }
+    },
+    methods: {
+        changeTab(i, category) {
+            this.activeTab = i;
+            this.$emit('changeTab', category);
+        }
     }
 }
 </script>
@@ -100,10 +120,6 @@ export default {
             box-shadow: 0 -1px 10px rgba(0, 0, 0, .2);
             margin: 0 10px;
             text-decoration: none;
-            -moz-transition: all 200ms ease-in-out;
-            -o-transition: all 200ms ease-in-out;
-            -webkit-transition: all 200ms ease-in-out;
-            transition: all 200ms ease-in-out;
             &:before {
                 content: "";
                 position: absolute;

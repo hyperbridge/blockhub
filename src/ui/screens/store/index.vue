@@ -87,12 +87,16 @@
 
                 <div class="row product-grid margin-bottom-30">
                     <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                        <c-heading-bar slot="title" class="mb-0">
-                            <template slot="heading-tabs">
-                                <a href="#3" class="active">Top Selling</a>
-                                <a href="#3">New Releases</a>
-                                <a href="#3">Upcoming</a>
-                            </template>
+                        <c-heading-bar
+                            slot="title"
+                            class="mb-0"
+                            :headingTabs="[
+                                { title: 'Top Selling', category: 'top_selling_products' },
+                                { title: 'New Releases', category: 'new_products' },
+                                { title: 'Upcoming', category: 'upcoming_products' }
+                            ]"
+                            @changeTab="itemsCategory = $event"
+                        >
                             <template slot="additional-action">
                                 <span class="font-weight-bold">Sort by</span>
                                 <c-heading-bar-fields name="Date" icon="fas fa-calendar" @click_up=""  @click_down="" />
@@ -115,7 +119,7 @@
                             :itemInRow=2
                             :showRating=false
                             :showTime=true
-                            :items="marketplace.top_selling_products"
+                            :items="marketplace[itemsCategory]"
                             itemBg="transparent"
                         />
                         <c-content-navigation />
@@ -147,12 +151,11 @@
                 <div class="row margin-bottom-30">
                     <div class="col-12">
                         <c-block :noGutter="true" :onlyContentBg="true" class="margin-bottom-30">
-                            <c-heading-bar slot="title" class="mb-0">
-                                <template slot="heading-tabs">
-                                    <a href="#3" class="active">Top 10 Items</a>
-                                    <a href="#3">Most Wanted</a>
-                                    <a href="#3">Top 10 Prices</a>
-                                </template>
+                            <c-heading-bar
+                                slot="title"
+                                class="mb-0"
+                                :headingTabs="['Top 10 Items', 'Most Wanted', 'Top 10 Prices']"
+                            >
                                 <template slot="additional-action">
                                     <c-heading-bar-fields name="Trending" @click_up=""  @click_down="" />
                                     <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" @click_up=""  @click_down="" />
@@ -278,6 +281,7 @@ export default {
             ]
         }
         return {
+            itemsCategory: 'top_selling_products',
             curators_reviews: [curator_review, curator_review, curator_review],
             assets: [
                 {

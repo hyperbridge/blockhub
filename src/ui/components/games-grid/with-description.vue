@@ -103,15 +103,14 @@
         .price{
             position: absolute;
             width: auto;
-            bottom: 25px;
+            bottom: 0px;
             left: 0px;
             padding: 2px 3px;
-            background: rgba(0, 0, 0, .3);
+            background: rgba(0, 0, 0, .6);
             border-radius: 0 5px 5px 0;
             font-size: 11px;
             strong{
                 font-size: 14px;
-                font-weight: bold;
             }
         }
         .img{
@@ -163,22 +162,22 @@
             }
         }
         &.hovered{
-            -webkit-transition: all 200ms ease-in;
+            -webkit-transition: transform 200ms ease;
             -webkit-transform: scale(1);
-            -ms-transition: all 200ms ease-in;
+            -ms-transition: transform 200ms ease;
             -ms-transform: scale(1);
-            -moz-transition: all 200ms ease-in;
+            -moz-transition: transform 200ms ease;
             -moz-transform: scale(1);
-            transition: all 200ms ease-in;
+            transition: transform 200ms ease;
             transform: scale(1);
             &:hover {
-                -webkit-transition: all 200ms ease-in;
+                -webkit-transition: transform 200ms ease;
                 -webkit-transform: scale(1.05);
-                -ms-transition: all 200ms ease-in;
+                -ms-transition: transform 200ms ease;
                 -ms-transform: scale(1.05);
-                -moz-transition: all 200ms ease-in;
+                -moz-transition: transform 200ms ease;
                 -moz-transform: scale(1.05);
-                transition: all 200ms ease-in;
+                transition: transform 200ms ease;
                 transform: scale(1.05);
             }
         }
