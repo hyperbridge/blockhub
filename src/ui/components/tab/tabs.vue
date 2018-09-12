@@ -10,7 +10,7 @@
                     <a
                         :href="tab.href"
                         :class="{ 'active': tab.isActive }"
-                        @click="selectTab(tab)"
+                        @click.prevent="selectTab(tab, index)"
                     >{{ tab.name }}</a>
                 </li>
             </ul>
@@ -26,24 +26,34 @@
 <script>
     export default {
         name: 'c-tabs',
-        props:{
-            variant:{
+        props: {
+            variant: {
                 type: String,
                 default: 'default'
-            }
+            },
+            lockedStep: Number
         },
         data() {
-            return {tabs: [] };
+            return {
+                tabs: []
+            }
         },
         created() {
-            console.log(this)
             this.tabs = this.$children;
         },
         methods: {
-            selectTab(selectedTab) {
-                this.tabs.forEach(tab => {
-                    tab.isActive = (tab.name == selectedTab.name);
-                });
+            selectTab(selectedTab, tabIndex) {
+                if (this.lockedStep) {
+                    if (tabIndex <= this.lockedStep) {
+                        this.tabs.forEach((tab, i) => {
+                            tab.isActive = tabIndex == i;
+                        });
+                    }
+                } else {
+                    this.tabs.forEach(tab => {
+                        tab.isActive = (tab.name == selectedTab.name);
+                    });
+                }
             }
         }
     }

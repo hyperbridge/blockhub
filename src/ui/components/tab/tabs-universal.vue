@@ -39,7 +39,7 @@
         },
         computed: {
             dynamic_tabs() {
-                return this.tab_names ? this.tab_names : this.tabs.map((tab, index) =>'TAB' + ++index);
+                return this.tab_names ? this.tab_names : this.tabs.map((tab, index) => 'TAB ' + ++index);
             }
         },
         provide() {

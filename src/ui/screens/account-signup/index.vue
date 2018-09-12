@@ -248,7 +248,10 @@
                                     label_position="right"
                                 />
                                 <div>
-                                    <c-button variant="success" text="Next step" icon="fas fa-angle-right" icon_position="right" :click="nextStep" />
+                                    <c-button
+                                        @click="nextStep"
+                                        icon="angle-right"
+                                    ></c-button>
                                 </div>
                             </div>
                         </c-tab>
@@ -527,6 +530,7 @@
         data() {
             return {
                 current_step: 1,
+                steps: 3,
                 errors: [],
                 account: {
                     first_name: '',
@@ -540,11 +544,10 @@
         },
         methods: {
             nextStep() {
-                if (!this.checkForm()) {
-                    return
+                const { current_step } = this;
+                if (this.checkForm()) {
+                    this.current_step = current_step == this.steps ? current_step : current_step + 1;
                 }
-
-                // next step
             },
             checkForm(e) {
                 this.errors = []
