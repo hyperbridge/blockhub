@@ -258,113 +258,19 @@
                         <c-tab name="Step 2" :showFooter="true">
                             <div class="tab-container">
                                 <div class="padding-40">
-                                    <h3>Welcome, UserName. Let's build your main identity.</h3>
+                                    <h3>Welcome, {{ account.first_name }}. Let's build your main identity.</h3>
                                     <p>Be aware that all your future identities will be tied to this one</p>
                                     <div class="row margin-top-40">
                                         <div class="col">
                                             <div class="tab-card">
                                                 <h4>Please complete</h4>
-                                                <div class="identity-block">
-                                                    <div class="avatar">
-                                                        <a href="#3" class="avatar_upload_btn">
-                                                            <img
-                                                                src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMxOS45ODIgMzE5Ljk4MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzE5Ljk4MiAzMTkuOTgyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjY0cHgiIGhlaWdodD0iNjRweCI+CjxnPgoJPHBhdGggZD0iTTIzNC45OTEsMzE5Ljk4MmMyLjYxOCwwLDUuMjItMS4wNzgsNy4wNzEtMi45MjlzMi45MjktNC40NTMsMi45MjktNy4wNzF2LTE0MGg2NSAgIGMzLjkyMi0wLjAwOCw3LjcyMS0yLjU1Miw5LjIyMS02LjE3NnMwLjYxLTguMTA5LTIuMTU5LTEwLjg4NmwtMTUwLTE1MEMxNjUuMjAyLDEuMDc0LDE2Mi42MDQsMCwxNTkuOTkxLDAgICBjLTIuNjE0LDAtNS4yMTIsMS4wNzQtNy4wNjIsMi45MmwtMTUwLDE1MGMtMi43NjksMi43NzctMy42NTksNy4yNjMtMi4xNTksMTAuODg2YzEuNSwzLjYyNCw1LjI5OSw2LjE2OCw5LjIyMSw2LjE3Nmg2NXYxNDAgICBjMCwyLjYxOCwxLjA3OCw1LjIyLDIuOTI5LDcuMDcxczQuNDUzLDIuOTI5LDcuMDcxLDIuOTI5SDIzNC45OTF6IiBmaWxsPSIjNjQ3M2Y0Ii8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg=="/>
-                                                        </a>
-                                                    </div>
-                                                    <div class="user_info">
-                                                        <div class="form-group margin-bottom-5">
-                                                            <input type="text"
-                                                                   class="form-control"
-                                                                   name="profile_name"
-                                                                   placeholder="Profile name"
-                                                            />
-                                                        </div>
-                                                        <p>User</p>
-                                                    </div>
-                                                    <div class="unknown_blk">
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                    </div>
-                                                    <div class="wallet_number">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" name="wallet_number"
-                                                                   placeholder="Wallet number"/>
-                                                        </div>
-                                                        <button>
-                                                            <i class="fas fa-redo-alt"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                                <c-user-card/>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="tab-card">
                                                 <h4>Preview your identity</h4>
-                                                <div class="identity-block finish">
-                                                    <div class="block-icon done">
-                                                        <i class="fas fa-check"></i>
-                                                    </div>
-                                                    <div class="avatar">
-                                                        <img
-                                                            src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
-                                                    </div>
-                                                    <div class="user_info">
-                                                        <div class="form-group margin-bottom-5">
-                                                            <input type="text"
-                                                                   class="form-control"
-                                                                   name="profile_name"
-                                                                   placeholder="Profile name"
-                                                                   readonly
-                                                            />
-                                                        </div>
-                                                        <p>User</p>
-                                                    </div>
-                                                    <div class="unknown_blk">
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <div class="counts">
-                                                            <span>
-                                                                0 <i class="fas fa-long-arrow-alt-down"></i>
-                                                            </span>
-                                                            <span>
-                                                                0 <i class="fas fa-long-arrow-alt-up"></i>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="wallet_number">
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                   class="form-control"
-                                                                   name="wallet_number"
-                                                                   placeholder="Wallet number"
-                                                                   readonly
-                                                            />
-                                                        </div>
-                                                        <button>
-                                                            <i class="fas fa-copy"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                                <c-user-card status="success"/>
                                             </div>
                                         </div>
                                     </div>
@@ -389,16 +295,16 @@
                                                     <i class="fas fa-exclamation-triangle"></i>
                                                 </div>
                                                 <div class="avatar">
-                                                    <img
-                                                        src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
+                                                    <img src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
                                                 </div>
                                                 <div class="user_info">
                                                     <div class="form-group margin-bottom-5">
-                                                        <input type="text"
-                                                               class="form-control"
-                                                               name="profile_name"
-                                                               placeholder="Profile name"
-                                                               readonly
+                                                        <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            name="profile_name"
+                                                            placeholder="Profile name"
+                                                            readonly
                                                         />
                                                     </div>
                                                     <p>User</p>
@@ -525,7 +431,8 @@
             'c-layout': () => import('@/ui/layouts/default'),
             'c-tab': () => import('@/ui/components/tab/tab'),
             'c-tabs': () => import('@/ui/components/tab/tabs'),
-            'c-datepicker': () => import('vuejs-datepicker')
+            'c-datepicker': () => import('vuejs-datepicker'),
+            'c-user-card': () => import('@/ui/components/user-card')
         },
         data() {
             return {
@@ -538,7 +445,8 @@
                     birthday: '',
                     email: '',
                     agreement: false,
-                    newsletter: false
+                    newsletter: false,
+                    img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1'
                 }
             }
         },

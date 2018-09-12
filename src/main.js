@@ -14,7 +14,7 @@ Vue.config.productionTip = false
 
 Vue.use(Snotify, {
   toast: {
-    position: SnotifyPosition.rightBottom
+    position: SnotifyPosition.leftBottom
   }
 })
 
