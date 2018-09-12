@@ -159,6 +159,12 @@ const router = new Router({
             component: () => import('@/ui/screens/identity-assets')
         },
         {
+            path: '/identity/:id/collections',
+            name: 'Identity Collections',
+            props: true,
+            component: () => import('@/ui/screens/identity-collection')
+        },
+        {
             path: '/settings',
             name: 'Settings',
             component: () => import('@/ui/screens/settings')
