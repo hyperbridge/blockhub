@@ -12,10 +12,11 @@
             />
             <div v-if="run_slideshow" class="screen-gallery__progress-bar"></div>
         </div>
-        <ul class="screen-gallery__thumb-nav">
+        <ul class="screen-gallery__thumb-nav" ref="thumb-nav">
             <li
                 v-for="(url, index) in items"
                 :key="index"
+                :ref="`thumb-${index}`"
             >
                 <img
                     :src="url"
@@ -35,6 +36,22 @@
 
 
 <script>
+const scrollParentToChild = (parent, child) => {
+  const parentRect = parent.getBoundingClientRect();
+
+  const parentViewableArea = {
+    height: parent.clientHeight,
+    width: parent.clientWidth
+  };
+
+  const childRect = child.getBoundingClientRect();
+  const isViewable = (childRect.top >= parentRect.top) && (childRect.top <= parentRect.top + parentViewableArea.height);
+
+  if (!isViewable) {
+    parent.scrollTop = (childRect.top + parent.scrollTop) - parentRect.top;
+  }
+}
+
 export default {
     name: 'screen-gallery',
     props: {
@@ -64,6 +81,9 @@ export default {
         slideshow() {
             this.interval = setInterval(() => {
                 this.active_item < this.items.length - 1 ? this.active_item++ : this.active_item = 0;
+                const [child] = this.$refs[`thumb-${this.active_item}`];
+                const parent = this.$refs['thumb-nav'];
+                scrollParentToChild(parent, child);
             }, 4000);
         },
         enableSlideshow(status) {
