@@ -17,6 +17,8 @@
                     class="form-control margin-bottom-5"
                     name="profile_name"
                     placeholder="Profile name"
+                    :value="user.name"
+                    @input="$emit('updateIdentity', 'name', $event.target.value)"
                     :readonly="previewMode"
                 />
                 <p>User</p>
@@ -43,6 +45,8 @@
                 class="form-control"
                 name="wallet_number"
                 placeholder="Wallet number"
+                :value="user.wallet"
+                @input="$emit('updateIdentity', 'wallet', $event.target.value)"
                 :readonly="previewMode"
             />
             <button>

@@ -264,13 +264,20 @@
                                         <div class="col">
                                             <div class="tab-card">
                                                 <h4>Please complete</h4>
-                                                <c-user-card/>
+                                                <c-user-card
+                                                    :user="account.identity"
+                                                    @updateIdentity="(prop, val) => account.identity[prop] = val"
+                                                />
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="tab-card">
                                                 <h4>Preview your identity</h4>
-                                                <c-user-card status="success" :user="{}" previewMode/>
+                                                <c-user-card
+                                                    status="success"
+                                                    :user="account.identity"
+                                                    previewMode
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -449,7 +456,11 @@
                     email: 'www',
                     agreement: true,
                     newsletter: false,
-                    img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1'
+                    identity: {
+                        name: '',
+                        img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                        wallet: ''
+                    }
                 }
             }
         },
