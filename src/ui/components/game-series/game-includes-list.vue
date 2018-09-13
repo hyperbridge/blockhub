@@ -3,11 +3,14 @@
         <div class="game-includes__title">
             <h3>What's included</h3>
         </div>
-        <div class="game-includes__list">
-            <div class="game-includes__item-container" v-for="(item, index) of list" :key="index" >
+        <div class="game-includes__list" :class="{ 'hidden-items' : showMore}">
+            <div class="game-includes__item-container"
+                 v-for="(item, index) of list"
+                 :key="index"
+                 :class="{ 'hide-item' : index > showNumber-1 }" >
                 <c-includes-item :item="item" />
             </div>
-            <div class="game-includes__list-more" @click="showMore = true">
+            <div class="game-includes__list-more" @click="showAll" v-if="showMore">
                 <i class="fas fa-chevron-right"></i>
                 <span>+{{ hiddenCount() }}</span>
             </div>
@@ -25,17 +28,26 @@
                 showMore: false
             }
         },
+        created(){
+            this.limitedList
+        },
         components: {
             'c-includes-item': () => import('@/ui/components/game-series/game-includes-item'),
         },
         methods:{
             hiddenCount(){
                 return this.list.length - this.showNumber;
+            },
+            showAll(){
+                this.showMore = false
             }
         },
         computed:{
             limitedList() {
-                return this.showMore ? this.list : this.list.splice(3);
+                if ( this.list.length > this.showNumber)
+                    this.showMore = true
+                else
+                    this.showMore = false
             }
         }
     }
@@ -80,6 +92,12 @@
         align-items: stretch;
         flex-wrap: wrap;
         margin: 0 -10px;
+        .hide-item{
+            display: none;
+        }
+        &.hidden-items{
+
+        }
     }
     .game-includes__list-more{
         width: 110px;

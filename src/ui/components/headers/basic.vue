@@ -27,7 +27,7 @@
         </div>
         <div class="app-header__shadow"></div>
         <a class="app-header__bar-center" href="/#/home">
-            <c-loading-logo :isLoading="isLoader" />
+            <c-loading-logo :isLoading="true" />
         </a>
         <div class="app-header__bar-right">
             <a href="javascript:;" data-action="fixedpanel-toggle">
