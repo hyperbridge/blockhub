@@ -43,11 +43,11 @@
 <style lang="scss" scoped>
     .collections-container{
         display: flex;
-        margin: 0 -5px;
+        margin: 0 -8px;
         flex-wrap: wrap;
     }
     .collections-container__item{
         width: calc( 100%/3 );
-        padding: 5px;
+        padding: 8px;
     }
 </style>

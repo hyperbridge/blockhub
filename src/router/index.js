@@ -330,6 +330,7 @@ const router = new Router({
         {
             path: '/collection/:id',
             name: 'Collection Page',
+            props: true,
             component: () => import('@/ui/screens/collection')
         },
         {

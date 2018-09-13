@@ -5,6 +5,7 @@
                 <div class="row">
                     <div class="col-12">
                         <c-block title="Items">
+                            <c-assets-grid :list="collection.assets" />
                             <c-pagination :pages="8" />
                         </c-block>
                     </div>
@@ -16,20 +17,21 @@
 
 <script>
     export default {
+        props: ['id'],
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
             'c-content-navigation': () => import('@/ui/components/content-navigation'),
             'c-block': () => import('@/ui/components/block'),
-            'c-collection-item': () => import('@/ui/components/collection/item'),
-            'c-pagination': () => import('@/ui/components/pagination')
+            'c-pagination': () => import('@/ui/components/pagination'),
+            'c-assets-grid': () => import('@/ui/components/assets-grid')
         },
         data() {
             return {
             }
         },
         computed: {
-            collections: function () {
-                return this.$store.state.marketplace.collections
+            collection: function () {
+                return this.$store.state.marketplace.collections[this.id - 1]
             }
         }
     }
