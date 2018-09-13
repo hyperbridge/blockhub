@@ -98,7 +98,8 @@
             danger: (#F75D5D, #fff, #de5454, #30304B),
             warning: (#FADC72, #3D3E5D, #efd26d, #32334c),
             share: (#43B4C9, #fff, #43B4C9, #32334c),
-            support: (#43C981, #fff, #43C981, #30304B)
+            support: (#43C981, #fff, #43C981, #30304B),
+            dark: (#3D3E5D, #fff, #3D3E5D, #fff)
         );
 
         @each $status, $colorSet in $statusColors {
