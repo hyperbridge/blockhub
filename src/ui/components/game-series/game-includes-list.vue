@@ -106,12 +106,7 @@
         align-items: stretch;
         flex-wrap: wrap;
         margin: 0 -10px;
-        .hide-item{
-            display: none;
-        }
-        &.hidden-items{
-
-        }
+        transition: all 200ms ease-in-out;
     }
     .game-includes__list-more{
         width: 110px;
