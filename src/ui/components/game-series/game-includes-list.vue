@@ -3,17 +3,23 @@
         <div class="game-includes__title">
             <h3>What's included</h3>
         </div>
-        <div class="game-includes__list" :class="{ 'hidden-items' : showMore}">
+        <div class="game-includes__list">
             <div class="game-includes__item-container"
-                 v-for="(item, index) of list"
-                 :key="index"
-                 :class="{ 'hide-item' : index > showNumber-1 }" >
+                 v-for="(item, index) of limitedList(limit)"
+                 :key="index" >
                 <c-includes-item :item="item" />
             </div>
-            <div class="game-includes__list-more" @click="showAll" v-if="showMore">
-                <i class="fas fa-chevron-right"></i>
-                <span>+{{ hiddenCount() }}</span>
-            </div>
+
+            <!--Show buttons-->
+            <c-load-more @click="showAll" v-if="showMore && list.length > showNumber - 1">
+                Load More <span class="ml-3">+{{ hiddenCount() }}</span>
+            </c-load-more>
+
+            <!--Hide buttons-->
+            <c-load-more v-if="!showMore" @click="hideAll">
+                Hide
+            </c-load-more>
+
         </div>
     </div>
 </template>
@@ -25,31 +31,40 @@
         data(){
             return{
                 hiddenItems: '',
-                showMore: false
+                limit: this.showNumber,
+                showMore: true
             }
-        },
-        created(){
-            this.limitedList
         },
         components: {
             'c-includes-item': () => import('@/ui/components/game-series/game-includes-item'),
+            'c-load-more': () => import('@/ui/components/buttons/load-more'),
         },
         methods:{
             hiddenCount(){
                 return this.list.length - this.showNumber;
             },
             showAll(){
-                this.showMore = false
+                this.limit = this.list.length;
+                this.limitedList(this.limit);
+                this.showMore = false;
+            },
+            hideAll(){
+                this.limit = this.showNumber;
+                this.limitedList(this.limit);
+                this.showMore = true;
+            },
+            limitedList(limit) {
+                let list = this.list,
+                    newList = [];
+                    list.forEach( function (item, i){
+                        if (i <= limit-1) {
+                            newList.push(item);
+                        }
+                    });
+
+                return newList
             }
         },
-        computed:{
-            limitedList() {
-                if ( this.list.length > this.showNumber)
-                    this.showMore = true
-                else
-                    this.showMore = false
-            }
-        }
     }
 </script>
 
