@@ -270,14 +270,18 @@
                                         <div class="col">
                                             <div class="tab-card">
                                                 <h4>Preview your identity</h4>
-                                                <c-user-card status="success" :user="{}"/>
+                                                <c-user-card status="success" :user="{}" previewMode/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end" slot="footer">
-                                <c-button variant="success" text="Next step" icon="fas fa-angle-right" icon_position="right" />
+                                <c-button
+                                    icon="angle-right"
+                                    icon_position="right"
+                                    @click="checkForm"
+                                />
                             </div>
                         </c-tab>
                         <c-tab name="Step 3" :showFooter="true">
@@ -412,11 +416,10 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end" slot="footer">
-                                <c-button variant="success" text="Complete" icon="fas fa-check" icon_position="right" />
+                                <c-button status="success" text="Complete" icon="fas fa-check" icon_position="right" />
                             </div>
                         </c-tab>
                     </c-tabs>
-
                 </div>
             </div>
         </div>
@@ -440,11 +443,11 @@
                 steps: 3,
                 errors: [],
                 account: {
-                    first_name: '',
-                    last_name: '',
-                    birthday: '',
-                    email: '',
-                    agreement: false,
+                    first_name: 'A',
+                    last_name: 'c',
+                    birthday: '03 Sep 2018',
+                    email: 'www',
+                    agreement: true,
                     newsletter: false,
                     img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1'
                 }

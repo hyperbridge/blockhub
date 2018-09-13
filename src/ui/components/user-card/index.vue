@@ -1,30 +1,24 @@
 <template>
     <div class="identity-block" :class="status">
         <div class="identity-block__user-data">
-            <div class="user-data__icon" :class="iconClass" v-if="user">
-                <i :class="`fas fa-${identity_icon}`"></i>
+            <div class="user-data__icon" :class="iconClass" v-if="previewMode">
+                <i class="fas" :class="status | statusIcon"></i>
             </div>
-            <div class="user-data__avatar" v-if="!user">
-                <a href="#3" class="user-data__avatar-upload-btn">
-                    <img
-                        src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMxOS45ODIgMzE5Ljk4MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzE5Ljk4MiAzMTkuOTgyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjY0cHgiIGhlaWdodD0iNjRweCI+CjxnPgoJPHBhdGggZD0iTTIzNC45OTEsMzE5Ljk4MmMyLjYxOCwwLDUuMjItMS4wNzgsNy4wNzEtMi45MjlzMi45MjktNC40NTMsMi45MjktNy4wNzF2LTE0MGg2NSAgIGMzLjkyMi0wLjAwOCw3LjcyMS0yLjU1Miw5LjIyMS02LjE3NnMwLjYxLTguMTA5LTIuMTU5LTEwLjg4NmwtMTUwLTE1MEMxNjUuMjAyLDEuMDc0LDE2Mi42MDQsMCwxNTkuOTkxLDAgICBjLTIuNjE0LDAtNS4yMTIsMS4wNzQtNy4wNjIsMi45MmwtMTUwLDE1MGMtMi43NjksMi43NzctMy42NTksNy4yNjMtMi4xNTksMTAuODg2YzEuNSwzLjYyNCw1LjI5OSw2LjE2OCw5LjIyMSw2LjE3Nmg2NXYxNDAgICBjMCwyLjYxOCwxLjA3OCw1LjIyLDIuOTI5LDcuMDcxczQuNDUzLDIuOTI5LDcuMDcxLDIuOTI5SDIzNC45OTF6IiBmaWxsPSIjNjQ3M2Y0Ii8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg=="/>
+            <div class="user-data__avatar">
+                <a v-if="!previewMode" href="#3" class="user-data__avatar-upload-btn">
+                    <img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMxOS45ODIgMzE5Ljk4MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzE5Ljk4MiAzMTkuOTgyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjY0cHgiIGhlaWdodD0iNjRweCI+CjxnPgoJPHBhdGggZD0iTTIzNC45OTEsMzE5Ljk4MmMyLjYxOCwwLDUuMjItMS4wNzgsNy4wNzEtMi45MjlzMi45MjktNC40NTMsMi45MjktNy4wNzF2LTE0MGg2NSAgIGMzLjkyMi0wLjAwOCw3LjcyMS0yLjU1Miw5LjIyMS02LjE3NnMwLjYxLTguMTA5LTIuMTU5LTEwLjg4NmwtMTUwLTE1MEMxNjUuMjAyLDEuMDc0LDE2Mi42MDQsMCwxNTkuOTkxLDAgICBjLTIuNjE0LDAtNS4yMTIsMS4wNzQtNy4wNjIsMi45MmwtMTUwLDE1MGMtMi43NjksMi43NzctMy42NTksNy4yNjMtMi4xNTksMTAuODg2YzEuNSwzLjYyNCw1LjI5OSw2LjE2OCw5LjIyMSw2LjE3Nmg2NXYxNDAgICBjMCwyLjYxOCwxLjA3OCw1LjIyLDIuOTI5LDcuMDcxczQuNDUzLDIuOTI5LDcuMDcxLDIuOTI5SDIzNC45OTF6IiBmaWxsPSIjNjQ3M2Y0Ii8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg=="/>
                 </a>
-            </div>
-            <div class="user-data__avatar" v-else>
-                <img
-                    src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
+                <img v-else src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
             </div>
 
             <div>
-                <div class="form-group margin-bottom-5">
-                    <input
-                        type="text"
-                        class="form-control"
-                        name="profile_name"
-                        placeholder="Profile name"
-                        :readonly="!!user"
-                    />
-                </div>
+                <input
+                    type="text"
+                    class="form-control margin-bottom-5"
+                    name="profile_name"
+                    placeholder="Profile name"
+                    :readonly="previewMode"
+                />
                 <p>User</p>
             </div>
         </div>
@@ -33,7 +27,7 @@
             <button v-for="index in 4" :key="index" class="btn">
                 <i class="fas fa-plus"></i>
             </button>
-            <div class="counts" v-if="user">
+            <div class="counts" v-if="previewMode">
                 <span>
                     0 <i class="fas fa-long-arrow-alt-down"></i>
                 </span>
@@ -44,17 +38,15 @@
         </div>
 
         <div class="wallet_number">
-            <div class="form-group">
-                <input
-                    type="text"
-                    class="form-control"
-                    name="wallet_number"
-                    placeholder="Wallet number"
-                    :readonly="!!user"
-                />
-            </div>
+            <input
+                type="text"
+                class="form-control"
+                name="wallet_number"
+                placeholder="Wallet number"
+                :readonly="previewMode"
+            />
             <button>
-                <i :class="`fas fa-${user ? 'fa-copy' : 'redo-alt'}`"></i>
+                <i :class="`fas fa-${previewMode ? 'copy' : 'redo-alt'}`"></i>
             </button>
         </div>
     </div>
@@ -72,23 +64,8 @@
                 }
             },
             iconColor: String,
-            iconClass: String
-        },
-        computed: {
-            identity_icon() {
-                switch(this.status) {
-                    case 'info':
-                        return 'info';
-                    case 'success':
-                        return 'check';
-                    case 'warning':
-                        return 'exclamation-triangle';
-                    case 'danger':
-                        return 'times';
-                    default:
-                        return 'cog';
-                }
-            }
+            iconClass: String,
+            previewMode: Boolean
         }
     }
 </script>
@@ -233,7 +210,7 @@
             }
         }
         button {
-            color: #fff;
+            color: #fff !important;
         }
     }
     .warning {
