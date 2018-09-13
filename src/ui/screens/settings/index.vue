@@ -103,11 +103,6 @@ export default {
         'c-block': () => import('@/ui/components/block'),
         'c-benchmark': () => import('@/ui/components/benchmark')
     },
-    data() {
-        return {
-            renderTime: 0
-        }
-    },
     methods: {
         ...mapActions(['updateSettings']),
         clearDatabase() {debugger
@@ -127,24 +122,6 @@ export default {
     computed: {
         settings() {
             return this.$store.state.user.settings;
-        },
-        perfResults() {
-            const { renderTime } = this;
-            const results = {
-                text: renderTime < 200 ?
-                    `There is no need to lower your settings` :
-                    `Click on button below to update your settings for higher performance`
-            };
-
-            if (renderTime > 100 && renderTime < 200) {
-                results.grade = 'avg';
-            } else if (renderTime > 200) {
-                results.grade = 'bad';
-            } else {
-                results.grade = 'good';
-            }
-
-            return results;
         }
     }
 }
