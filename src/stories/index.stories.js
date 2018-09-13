@@ -2818,16 +2818,167 @@ storiesOf('Banner', module)
             </div>`
     }))
 
-import TabsUniversal from '@/ui/components/tab/tab-universal';
+import TabsUniversal from '@/ui/components/tab/tabs-universal';
+import TabUniversal from '@/ui/components/tab/tab-universal';
 storiesOf('Tabs Universal', module)
     .add('default', () => ({
-        components: { 'c-tabs-universal': TabsUniversal },
+        components: {
+            'c-tabs-universal': TabsUniversal,
+            'c-tab-universal': TabUniversal
+        },
         template: `
             <div class="padding-50">
                 <c-tabs-universal style="color: #fff;">
-                    <div>123123123</div>
-                    <div>123123123</div>
+                    <c-tab-universal :tab_id="0">
+                        First tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="1">
+                        Wwww
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="2">
+                        12345
+                    </c-tab-universal>
                 </c-tabs-universal>
+            </div>`
+    }))
+    .add('Tabs Names', () => ({
+        components: {
+            'c-tabs-universal': TabsUniversal,
+            'c-tab-universal': TabUniversal
+        },
+        template: `
+            <div class="padding-50">
+                <c-tabs-universal
+                    style="color: #fff;"
+                    :tab_names="['Custom tab One', 'Second', 'Im third tab']"
+                >
+                    <c-tab-universal :tab_id="0">
+                        First tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="1">
+                        Wwww
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="2">
+                        12345
+                    </c-tab-universal>
+                </c-tabs-universal>
+            </div>`
+    }))
+    .add('Custom Navigation', () => ({
+        components: {
+            'c-tabs-universal': TabsUniversal,
+            'c-tab-universal': TabUniversal
+        },
+        data() {
+            return {
+                active_tab: 1
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-tabs-universal
+                    style="color: #fff;"
+                    :active_tab_prop="active_tab"
+                >
+                    <template slot="nav">
+                        <button @click="active_tab = 1">Tab 1</button>
+                        <button @click="active_tab = 2">Tab 2</button>
+                        <button @click="active_tab = 3">Tab 3</button>
+                        <button @click="active_tab = 4">Tab 4</button>
+                    </template>
+                    <c-tab-universal :tab_id="1">
+                        First tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="2">
+                        Wwww
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="3">
+                        12345
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="4">
+                        Fourth tab
+                    </c-tab-universal>
+                </c-tabs-universal>
+            </div>`
+    }))
+    .add('Locked Tab', () => ({
+        components: {
+            'c-tabs-universal': TabsUniversal,
+            'c-tab-universal': TabUniversal
+        },
+        data() {
+            return {
+                locked_step: 1,
+                locked_tab: 1
+            }
+        },
+        methods: {
+            changeLockedTab() {
+                this.locked_tab = Math.floor(Math.random() * 3);
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-tabs-universal
+                    style="color: #fff;"
+                    :locked_tab="locked_tab"
+                >
+                    <c-tab-universal :tab_id="0">
+                        First tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="1">
+                        Second tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="2">
+                        Third tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="3">
+                        Fourth tab
+                    </c-tab-universal>
+                </c-tabs-universal>
+                <button
+                    @click="changeLockedTab"
+                    class="margin-top-50"
+                >
+                    Change locked tab
+                </button>
+            </div>`
+    }))
+    .add('Locked Step', () => ({
+        components: {
+            'c-tabs-universal': TabsUniversal,
+            'c-tab-universal': TabUniversal
+        },
+        data() {
+            return {
+                locked_step: 1
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-tabs-universal
+                    style="color: #fff;"
+                    :locked_step="locked_step"
+                >
+                    <c-tab-universal :tab_id="0">
+                        First tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="1">
+                        Second tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="2">
+                        Third tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="3">
+                        Fourth tab
+                    </c-tab-universal>
+                </c-tabs-universal>
+                <button
+                    @click="locked_step++"
+                    class="margin-top-50"
+                >
+                    Unlock next step
+                </button>
             </div>`
     }))
 

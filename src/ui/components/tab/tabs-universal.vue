@@ -1,21 +1,26 @@
 <template>
     <div>
         <nav>
-            <ul class="tabs-universal__list">
-                <li
-                    v-for="(tab, index) in dynamic_tabs"
-                    :key="index"
-                    class="tabs-universal__list-item"
-                >
-                    <a
-                        :aria-selected="active_tab == index"
-                        class="list-item__link"
-                        :class="{ 'active': active_tab == index }"
-                        @click.prevent="active_tab = index"
-                        role="tab"
-                    >{{ tab }}</a>
-                </li>
-            </ul>
+            <slot name="nav">
+                <ul class="tabs-universal__list">
+                    <li
+                        v-for="(tab, index) in dynamic_tabs"
+                        :key="index"
+                        class="tabs-universal__list-item"
+                    >
+                        <a
+                            :aria-selected="active_tab == index"
+                            class="list-item__link"
+                            :class="{
+                                'active': active_tab == index,
+                                'avoid-clicks locked': is_tab_locked(index)
+                            }"
+                            @click.prevent="active_tab_data = index"
+                            role="tab"
+                        >{{ tab }}</a>
+                    </li>
+                </ul>
+            </slot>
         </nav>
         <div class="tabs-universal__content">
             <slot/>
@@ -27,19 +32,29 @@
     export default {
         name: 'tabs-universal',
         props: {
-            tab_names: {
-                type: Array
-            }
+            tab_names: Array,
+            active_tab_prop: [Number, String],
+            locked_step: Number,
+            locked_tab: Number
         },
         data() {
             return {
                 tabs: [],
-                active_tab: 0
+                active_tab_data: 0
+            }
+        },
+        methods: {
+            is_tab_locked(index) {
+                const { locked_step, locked_tab } = this;
+                return (locked_tab != null && locked_tab == index) || (locked_step != null && !(index < locked_step));
             }
         },
         computed: {
             dynamic_tabs() {
                 return this.tab_names ? this.tab_names : this.tabs.map((tab, index) => 'TAB ' + ++index);
+            },
+            active_tab() {
+                return this.active_tab_prop ? this.active_tab_prop : this.active_tab_data;
             }
         },
         provide() {
@@ -74,9 +89,12 @@
             min-width: 42px;
             min-height: 26px;
             text-align: center;
-        }
-        .active {
-            border-color: rgb(94, 96, 155);
+            &.active {
+                border-color: rgb(94, 96, 155);
+            }
+            &.locked {
+                color: rgba(255,255,255,.5);
+            }
         }
     }
 
