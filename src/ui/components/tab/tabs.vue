@@ -10,7 +10,7 @@
                     <a
                         :href="tab.href"
                         :class="{ 'active': tab.isActive }"
-                        @click.prevent="selectTab(tab, index)"
+                        @click.prevent="selectTab(tab.name, index)"
                     >{{ tab.name }}</a>
                 </li>
             </ul>
@@ -31,7 +31,7 @@
                 type: String,
                 default: 'default'
             },
-            lockedStep: Number
+            currentStep: [Number, String]
         },
         data() {
             return {
@@ -42,16 +42,18 @@
             this.tabs = this.$children;
         },
         methods: {
-            selectTab(selectedTab, tabIndex) {
-                if (this.lockedStep) {
-                    if (tabIndex <= this.lockedStep) {
+            selectTab(tabName, tabIndex) {
+                if (this.currentStep) {
+
+                    if (tabIndex + 1 <= this.currentStep) {
                         this.tabs.forEach((tab, i) => {
                             tab.isActive = tabIndex == i;
                         });
                     }
+
                 } else {
                     this.tabs.forEach(tab => {
-                        tab.isActive = (tab.name == selectedTab.name);
+                        tab.isActive = (tab.name == tabName);
                     });
                 }
             }

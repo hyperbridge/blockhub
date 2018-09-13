@@ -1,7 +1,7 @@
 <template>
     <div class="identity-block" :class="status">
         <div class="identity-block__user-data">
-            <div class="user-data__icon" :class="icon_color" v-if="user">
+            <div class="user-data__icon" :class="iconClass" v-if="user">
                 <i :class="`fas fa-${identity_icon}`"></i>
             </div>
             <div class="user-data__avatar" v-if="!user">

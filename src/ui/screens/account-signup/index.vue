@@ -9,7 +9,7 @@
                             <li v-for="error in errors" :key="error">{{ error }}</li>
                         </ul>
                     </p>
-                    <c-tabs>
+                    <c-tabs :currentStep="current_step">
                         <c-tab name="Step 1" :selected="true" :showFooter="true">
                             <div class="tab-container">
                                 <div class="tab-card">
@@ -249,7 +249,7 @@
                                 />
                                 <div>
                                     <c-button
-                                        @click="nextStep"
+                                        @click="checkForm"
                                         icon="angle-right"
                                     ></c-button>
                                 </div>
@@ -451,39 +451,33 @@
             }
         },
         methods: {
-            nextStep() {
-                const { current_step } = this;
-                if (this.checkForm()) {
-                    this.current_step = current_step == this.steps ? current_step : current_step + 1;
-                }
-            },
             checkForm(e) {
                 this.errors = []
 
                 if (this.current_step === 1) {
-                    if (this.account.first_name && this.account.last_name && this.account.email && this.account.agreement && this.account.newsletter) {
-                        this.current_step = 2
+                    if (this.account.first_name && this.account.last_name && this.account.email && this.account.agreement) {
+                        this.current_step = 2;
+                    } else {
 
-                        return true
-                    }
+                        if (!this.account.first_name) {
+                            this.errors.push('First name required.')
+                        }
+                        if (!this.account.last_name) {
+                            this.errors.push('Last name required.')
+                        }
+                        if (!this.account.birthday) {
+                            this.errors.push('Birthday required.')
+                        }
+                        if (!this.account.email) {
+                            this.errors.push('Email required.')
+                        }
+                        if (!this.account.agreement) {
+                            this.errors.push('You must agree to the terms & conditions to use BlockHub.')
+                        }
 
-                    if (!this.account.first_name) {
-                        this.errors.push('First name required.')
-                    }
-                    if (!this.account.last_name) {
-                        this.errors.push('Last name required.')
-                    }
-                    if (!this.account.birthday) {
-                        this.errors.push('Birthday required.')
-                    }
-                    if (!this.account.email) {
-                        this.errors.push('Email required.')
-                    }
-                    if (!this.account.agreement) {
-                        this.errors.push('You must agree to the terms & conditions to use BlockHub.')
                     }
                 } else if (this.current_step === 2) {
-
+                    this.current_step = 3;
                 } else if (this.current_step === 3) {
 
                 }
