@@ -3,24 +3,23 @@
         <div class="game-includes__title">
             <h3>What's included</h3>
         </div>
-        <div class="game-includes__list">
+        <transition-group name="list" tag="div" class="game-includes__list">
             <div class="game-includes__item-container"
                  v-for="(item, index) of limitedList(limit)"
                  :key="index" >
                 <c-includes-item :item="item" />
             </div>
+        </transition-group>
 
-            <!--Show buttons-->
-            <c-load-more @click="showAll" v-if="showMore && list.length > showNumber - 1">
-                Load More <span class="ml-3">+{{ hiddenCount() }}</span>
-            </c-load-more>
+        <!--Show buttons-->
+        <c-load-more @click="showAll" v-if="showMore && list.length > showNumber - 1">
+            Load More <span class="ml-3">+{{ hiddenCount() }}</span>
+        </c-load-more>
 
-            <!--Hide buttons-->
-            <c-load-more v-if="!showMore" @click="hideAll">
-                Hide
-            </c-load-more>
-
-        </div>
+        <!--Hide buttons-->
+        <c-load-more v-if="!showMore" @click="hideAll">
+            Hide
+        </c-load-more>
     </div>
 </template>
 
@@ -133,5 +132,12 @@
     .game-includes__item-container{
         width: calc(100%/5 - 20px);
         margin: 10px;
+    }
+    .list-enter-active, .list-leave-active {
+        transition: all 1s;
+    }
+    .list-enter, .list-leave-to /* .list-leave-active до версии 2.1.8 */ {
+        opacity: 0;
+        transform: translateY(30px);
     }
 </style>
