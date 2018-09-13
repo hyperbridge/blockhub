@@ -2,17 +2,34 @@
     <div
         class="screen-gallery"
         @mouseover="enableSlideshow(false)"
-        @mouseout="enableSlideshow(true)"
+        @mouseout="mouseOut()"
     >
         <div class="screen-gallery__main-img">
-            <i class="fas fa-expand"></i>
+            <i class="fas fa-expand" v-show="run_slideshow"></i>
             <img
+                v-if="!play_video"
                 :src="items[active_item]"
                 @click="show_modal = true"
             />
+            <video v-else-if="play_video" controls autoplay>
+                <source :src="video_url" type="video/mp4">
+            </video>
             <div v-if="run_slideshow" class="screen-gallery__progress-bar"></div>
         </div>
         <ul class="screen-gallery__thumb-nav" ref="thumb-nav">
+            <li
+                v-if="video_url"
+                class="thumb-nav__video-thumb"
+                :class="{ 'inactive-item': !play_video }"
+                :style="{
+
+                    backgroundSize: 'cover',
+                    background: `black url(${items[random_item]}) no-repeat center`
+                }"
+                @click="enableVideoPlay()"
+            >
+                <i class="fas fa-play"></i>
+            </li>
             <li
                 v-for="(url, index) in items"
                 :key="index"
@@ -20,8 +37,8 @@
             >
                 <img
                     :src="url"
-                    :class="{ 'inactive-item': index !== active_item }"
-                    @click="active_item = index"
+                    :class="{ 'inactive-item': index !== active_item || play_video }"
+                    @click="changeActiveItem(index)"
                 />
             </li>
         </ul>
@@ -64,6 +81,7 @@ export default {
             required: true
         },
         name_url: String,
+        video_url: String
     },
     components: {
         'c-modal-light': () => import('@/ui/components/modal-light'),
@@ -72,9 +90,11 @@ export default {
     data() {
         return {
             active_item: 0,
+            random_item: 0,
             show_modal: false,
             interval: null,
-            run_slideshow: true
+            run_slideshow: true,
+            play_video: false
         }
     },
     methods: {
@@ -89,12 +109,28 @@ export default {
         enableSlideshow(status) {
             clearInterval(this.interval);
             this.run_slideshow = status;
-            if (status) this.slideshow();
+            if (status && !this.play_video) this.slideshow();
+        },
+        enableVideoPlay() {
+            this.enableSlideshow(false);
+            this.play_video = true;
+        },
+        changeActiveItem(index) {
+            if (this.play_video) {
+                this.play_video = false;
+            }
+            this.active_item = index;
+        },
+        mouseOut() {
+            if (!this.play_video) this.enableSlideshow(true);
         }
     },
     mounted() {
         if (this.items && this.items.length) {
             this.slideshow();
+            if (this.video_url) {
+                this.random_item = Math.floor(Math.random() * this.items.length);
+            }
         }
     },
     beforeDestroy() {
@@ -103,6 +139,8 @@ export default {
     watch: {
         $route() {
             this.active_item = 0;
+            this.play_video = false;
+            this.enableSlideshow(true);
         }
     }
 }
@@ -124,9 +162,17 @@ export default {
             }
         }
     }
-    .screen-gallery__main-img{
+    .screen-gallery__main-img {
         flex: 6;
         position: relative;
+        display: flex;
+        align-items: center;
+        background-color: rgb(0, 0, 0);
+        video {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
         .fas {
             position: absolute;
             left: calc(50% - 15px);
@@ -173,10 +219,23 @@ export default {
             &:not(:last-child) {
                 margin-bottom: 10px;
             }
+            height: 75px;
             img {
                 height: 75px;
             }
         }
+    }
+
+    .thumb-nav__video-thumb {
+        background-color: rgb(0, 0, 0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        cursor: pointer;
     }
 
     .inactive-item:not(:hover) {

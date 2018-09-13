@@ -74,6 +74,7 @@
                             <div class="col-7">
                                 <c-screen-gallery
                                     :items="[product.images.medium_tile, ...product.images.preview]"
+                                    :video_url="product.video"
                                 />
 
                                 <c-sale-box
