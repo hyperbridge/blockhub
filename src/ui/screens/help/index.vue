@@ -19,16 +19,16 @@
                     <div class="col-12">
                         <c-block title="Trending articles" class="margin-bottom-30">
                             <div class="article-list">
-                                <c-article-item href="#3">
+                                <c-article-item link="#3">
                                     I'm still seeing "You password has expired"
                                 </c-article-item>
-                                <c-article-item href="#3">
+                                <c-article-item link="#3">
                                     Why am i seeing H12 request timeouts?
                                 </c-article-item>
-                                <c-article-item href="#3">
+                                <c-article-item link="#3">
                                     Performing Load Tests on BlockHub
                                 </c-article-item>
-                                <c-article-item href="#3">
+                                <c-article-item link="#3">
                                     More running applications articles ...
                                 </c-article-item>
                             </div>
@@ -36,65 +36,79 @@
 
                         <c-block title="Topics" class="margin-bottom-30">
                             <div class="topics-list">
-                                <c-topic-item href="#3" icon="cogs" class="padding-10">
+                                <c-topic-item link="#3" icon="cogs" class="padding-10">
                                     General Platform Features
                                 </c-topic-item>
-                                <c-topic-item href="#3" icon="play" class="padding-10">
+                                <c-topic-item link="#3" icon="play" class="padding-10">
                                     Running applications
                                 </c-topic-item>
-                                <c-topic-item href="#3" icon="user" class="padding-10">
+                                <c-topic-item link="#3" icon="user" class="padding-10">
                                     Account Management
                                 </c-topic-item>
-                                <c-topic-item href="#3" icon="lock" class="padding-10">
+                                <c-topic-item link="#3" icon="lock" class="padding-10">
                                     Security
                                 </c-topic-item>
-                                <c-topic-item href="#3" icon="credit-card" class="padding-10">
+                                <c-topic-item link="#3" icon="credit-card" class="padding-10">
                                     Billing & Payments
                                 </c-topic-item>
-                                <c-topic-item href="#3" icon="globe" class="padding-10">
+                                <c-topic-item link="#3" icon="globe" class="padding-10">
                                     Connect
                                 </c-topic-item>
-                                <c-topic-item href="#3" icon="window-restore" class="padding-10">
+                                <c-topic-item link="#3" icon="window-restore" class="padding-10">
                                     Tools
                                 </c-topic-item>
                             </div>
                         </c-block>
                     </div>
-                    <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-6 margin-bottom-30">
                         <c-block title="Changelog">
                             <div class="simple-list">
-                                <c-list-item href="#1">
+                                <c-list-item link="#1">
                                     Build result API endpoint removal
                                 </c-list-item>
-                                <c-list-item href="#1">
+                                <c-list-item link="#1">
                                     Private Space VPN and Internal Routing are now generally available
                                 </c-list-item>
-                                <c-list-item href="#1">
+                                <c-list-item link="#1">
                                     Default Stack
                                 </c-list-item>
-                                <c-list-item href="#1">
+                                <c-list-item link="#1">
+                                    Images Updated
+                                </c-list-item>
+                            </div>
+                        </c-block>
+                    </div>
+                    <div class="col-12 col-lg-6 margin-bottom-30">
+                        <c-block title="Common issues">
+                            <div class="simple-list">
+                                <c-list-item link="#1">
+                                    Build result API endpoint removal
+                                </c-list-item>
+                                <c-list-item link="#1">
+                                    Private Space VPN and Internal Routing are now generally available
+                                </c-list-item>
+                                <c-list-item link="#1">
+                                    Default Stack
+                                </c-list-item>
+                                <c-list-item link="#1">
                                     Images Updated
                                 </c-list-item>
                             </div>
                         </c-block>
                     </div>
                     <div class="col-12 col-lg-6">
-                        <c-block title="Common issues">
-                            <div class="simple-list">
-                                <c-list-item href="#1">
-                                    Build result API endpoint removal
-                                </c-list-item>
-                                <c-list-item href="#1">
-                                    Private Space VPN and Internal Routing are now generally available
-                                </c-list-item>
-                                <c-list-item href="#1">
-                                    Default Stack
-                                </c-list-item>
-                                <c-list-item href="#1">
-                                    Images Updated
-                                </c-list-item>
-                            </div>
-                        </c-block>
+                        <c-card class="text-center">
+                            <h4 class="h2">Community</h4>
+                            <p>Engage with a community of passionate experts to get the answers you need</p>
+                            <c-button icon_hide class="width-auto margin-top-10">Visit GitHub</c-button>
+                        </c-card>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <c-card class="text-center">
+                            <h4 class="h2">BlockHub Support</h4>
+                            <p>Create a support ticket and our support experts will get back to you</p>
+                            <c-button status="info" icon_hide class="width-auto margin-top-10">Create a ticket</c-button>
+                        </c-card>
                     </div>
 
                 </div>
@@ -111,6 +125,7 @@ export default {
       'c-article-item': () => import('@/ui/components/help/article-item'),
       'c-topic-item': () => import('@/ui/components/help/topic-item'),
       'c-list-item': () => import('@/ui/components/help/simple-item'),
+      'c-card': () => import('@/ui/components/help/help-card.vue'),
   },
   data: () => ({
   })
