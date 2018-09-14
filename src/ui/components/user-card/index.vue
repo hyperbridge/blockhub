@@ -10,7 +10,7 @@
             </div>
             <div class="user-data__avatar">
                 <a
-                    v-if="!previewMode"
+                    v-if="!user.img"
                     href="#3"
                     class="user-data__avatar-upload-btn"
                 >

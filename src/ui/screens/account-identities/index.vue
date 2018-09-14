@@ -46,24 +46,14 @@
                     <div class="col-12">
                         <c-heading-bar name="Profile Picker" :showArrows="false" :showBackground="false">
                             <div class="additional-action margin-left-20" slot="additional-action">
-                                <div class="text">
-                                    Value
-                                    <i class="fas fa-dollar-sign"></i>
-                                </div>
-                                <div class="arrow_container">
-                                    <i class="fas fa-sort-up"></i>
-                                    <i class="fas fa-sort-down"></i>
-                                </div>
+                                <span class="text">Value</span>
+                                <c-icon name="dollar-sign"/>
+                                <c-button-arrows/>
                             </div>
                             <div class="additional-action margin-left-20" slot="additional-action">
-                                <div class="text">
-                                    Rating
-                                    <i class="fas fa-trophy"></i>
-                                </div>
-                                <div class="arrow_container">
-                                    <i class="fas fa-sort-up"></i>
-                                    <i class="fas fa-sort-down"></i>
-                                </div>
+                                <span class="text">Rating</span>
+                                <c-icon name="trophy"/>
+                                <c-button-arrows/>
                             </div>
                             <div class="additional-action margin-left-20" slot="additional-action">
                                 <div class="form-group mb-0">
@@ -79,52 +69,73 @@
                                 </div>
                             </div>
                             <div class="additional-action" slot="additional-action">
-                                <a href="#3" class="btn btn-sm btn-info">
-                                    <i class="fas fa-user-plus"></i>
+                                <c-button status="info" icon="user-plus">
                                     Add new
-                                </a>
+                                </c-button>
                             </div>
                         </c-heading-bar>
                     </div>
-                    <div class="col-12 profile-picker">
-                        <div class="default">
-                            <div class="div_label">
-                                <i class="fas fa-check-square"></i>
-                                <span>
-                                    Default
-                                </span>
-                            </div>
+
+                    <div class="profile-picker">
+                        <div
+                            class="profile-picker__profile"
+                            v-for="(identity, index) in identities"
+                            :key="index"
+                        >
                             <c-user-card
-                                :user="user"
-                                status="finish"
-                                icon_color="green"
-                                icon_class="fas fa-check">
-                            </c-user-card>
-                        </div>
-                        <div class="wt_action">
-                            <c-user-card
-                                :user="user"
-                                class="defaults"
-                                status="finish"
-                                icon_color="green"
-                                icon_class="fas fa-check">
-                            </c-user-card>
-                            <div class="action">
-                                <a href="#3">
-                                    <i class="fas fa-check" style="color: #43C981"></i>
-                                    Set Default
-                                </a>
-                                <a href="#3">
-                                    <i class="fas fa-pen" style="color: #FADC72"></i>
-                                    Edit
-                                </a>
-                                <a href="#3">
-                                    <i class="fas fa-times" style="color: #F75D5D"></i>
-                                    Delete
-                                </a>
+                                :user="identity"
+                                :previewMode="!identity.edit"
+                                :class="{ 'default': identity.default }"
+                                @updateIdentity="(prop, val) => identity[prop] = val"
+                            />
+                            <div class="profile__action">
+                                <c-button
+                                    v-if="!identity.default"
+                                    status="info"
+                                    icon="check"
+                                    @click="setDefault(identity)"
+                                >Set default</c-button>
+                                <c-button
+                                    status="share"
+                                    icon="pen"
+                                    @click="identity.edit = !identity.edit"
+                                >
+                                    {{ identity.edit ? 'Save' : 'Edit' }}
+                                </c-button>
+                                <c-button
+                                    status="warning"
+                                    @click="deleteIdentity(identity)"
+                                >Delete</c-button>
                             </div>
                         </div>
                     </div>
+
+                    <c-modal-light
+                        v-if="removeIdentity"
+                        @close="removeIdentity = null"
+                    >
+                        <h4>Are you sure that you want to delete this identity?</h4>
+                        <p>This operation can not be reversed</p>
+                        <c-user-card
+                            :user="removeIdentity"
+                            previewMode
+                        />
+                        <div>
+                            <div class="profile-remove__buttons">
+                                <c-button
+                                    status="success"
+                                    size="md"
+                                    @click="deleteIdentity()"
+                                >Yes</c-button>
+                                <c-button
+                                    status="danger"
+                                    size="md"
+                                    @click="removeIdentity = null"
+                                >Cancel</c-button>
+                            </div>
+                        </div>
+                    </c-modal-light>
+
                 </div>
             </div>
         </div>
@@ -136,12 +147,48 @@
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
             'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-user-card': () => import('@/ui/components/user-card')
+            'c-user-card': () => import('@/ui/components/user-card'),
+            'c-button-arrows': () => import('@/ui/components/buttons/arrows'),
+            'c-modal-light': () => import('@/ui/components/modal-light')
         },
         data() {
             return {
                 wallets: [],
-                user: {}
+                user: {},
+                identities: [
+                    {
+                        name: 'Mr. Satoshi',
+                        wallet: '0x6cc5f688a315f3dc28a7781717a',
+                        img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                        default: false,
+                        edit: false
+                    },
+                    {
+                        name: 'Nakamoto',
+                        wallet: '0x233c5f688a315f3dc28a419189b',
+                        img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                        default: true,
+                        edit: false
+                    }
+                ],
+                removeIdentity: null
+            }
+        },
+        methods: {
+            setDefault(newIdentity) {
+                const currentIdentity = this.identities.find(identity => identity.default);
+                currentIdentity.default = false;
+                newIdentity.default = true;
+            },
+            deleteIdentity(identity) {
+                const { removeIdentity } = this;
+                if (removeIdentity) {
+                    const index = this.identities.indexOf(removeIdentity);
+                    this.identities.splice(index, 1);
+                    this.removeIdentity = null;
+                } else {
+                    this.removeIdentity = identity;
+                }
             }
         },
         computed: {
@@ -225,11 +272,6 @@
         }
     }
 
-    .identity-block {
-        width: 300px !important;
-        float: left!important;
-    }
-
     .verification-blk {
         width: 220px;
         color: #C6C6D6;
@@ -283,109 +325,59 @@
         }
     }
 
-    .profile-picker{
+    .profile-picker {
         display: flex;
-        align-items: center;
-        .default{
-            overflow: auto;
-            border: 1px solid #43C981;
-            border-radius: 5px;
-            background: #43C981;
-            padding-left: 25px;
-            width: 327px;
-            position: relative;
-            margin-right: 40px;
-            .div_label{
-                position: absolute;
-                top: 5px;
-                left: 5px;
-                font-size: 16px;
-                color: #1C2032;
-                span{
-                    display: inline-block;
-                    position: absolute;
-                    white-space: nowrap;
-                    left: -21px;
-                    width: 150px;
-                    text-align: right;
-                    top: 173px;
-                    text-transform: uppercase;
-                    font-weight: bold;
-                    /* this is for shity "non IE" browsers
-                       that dosn't support writing-mode */
-                    -webkit-transform: translate(1.1em,0) rotate(-90deg);
-                    -moz-transform: translate(1.1em,0) rotate(-90deg);
-                    -o-transform: translate(1.1em,0) rotate(-90deg);
-                    transform: translate(1.1em,0) rotate(-90deg);
-                    -webkit-transform-origin: 0 0;
-                    -moz-transform-origin: 0 0;
-                    -o-transform-origin: 0 0;
-                    transform-origin: 0 0;
-                    /* IE9+ */
-                    -ms-transform: none;
-                    -ms-transform-origin: none;
-                    /* IE8+ */
-                    -ms-writing-mode: tb-rl;
-                    /* IE7 and below */
-                    *writing-mode: tb-rl;
-                }
-            }
+        padding: 20px;
+    }
+
+    .profile-picker__profile {
+        position: relative;
+        margin-right: 40px;
+        width: 300px;
+        &:hover .profile__action {
+            display: flex;
         }
-        .wt_action{
-            position: relative;
-            overflow: visible;
-            .action{
-                display: none;
-                justify-content: space-around;
-                align-items: center;
+        .default {
+            $defColor: #43C981;
+            border-color: $defColor !important;
+            &:before {
+                content: "";
+                width: 26px;
                 position: absolute;
-                bottom: -20px;
-                width: 100%;
-                a{
-                    background: #151827;
-                    border-radius: 5px;
-                    color: #A2A3BE;
-                    padding: 5px 8px;
-                    font-weight: bold;
-                    box-shadow: 0 3px 6px rgba(0, 0, 0, .4);
-                    i{
-                        margin-right: 5px;
-                        font-size: 14px;
-                    }
-                }
+                border-radius: 5px 0 0 5px;
+                left: -22px;
+                bottom: -1px;
+                height: calc(100% + 2px);
+                background: $defColor;
             }
-            &:hover{
-                .action{
-                    display: flex;
-                }
+            &:after {
+                font-family: 'Font Awesome 5 Free', 'Barlow', sans-serif;
+                content: "DEFAULT \F14A";
+                color: #1C2032;
+                font-weight: bold;
+                font-size: 16px;
+                position: absolute;
+                transform: rotate(-90deg);
+                top: 40px;
+                left: -50px;
             }
         }
     }
 
-    .defaults {
-        $defColor: #43C981;
-        background: $defColor;
-        border-color: $defColor !important;
-        &:before {
-            content: "";
-            width: 26px;
-            position: absolute;
-            border-radius: 5px 0 0 5px;
-            left: -22px;
-            bottom: -1px;
-            height: calc(100% + 2px);
-            background: $defColor;
+    .profile__action {
+        display: none;
+        position: absolute;
+        justify-content: center;
+        bottom: -20px;
+        width: 100%;
+        .c-btn {
+            margin: 0 5px;
         }
-        &:after {
-            font-family: 'Font Awesome 5 Free', 'Barlow', sans-serif;
-            content: "DEFAULT \F14A";
-            color: #1C2032;
-            font-weight: bold;
-            font-size: 16px;
-            position: absolute;
-            transform: rotate(-90deg);
-            top: 40px;
-            left: -50px;
-        }
+    }
+
+    .profile-remove__buttons {
+        display: flex;
+        margin-top: 20px;
+        justify-content: space-between;
     }
 </style>

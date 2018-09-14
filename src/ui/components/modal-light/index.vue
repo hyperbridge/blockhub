@@ -24,7 +24,7 @@ export default {
         z-index: 1000;
         width: 100vw;
         height: 100vh;
-        background-color: rgba(1,1,1,.7);
+        background-color: rgba(1,1,1,.9);
         animation: opacity .5s ease;
         display: flex;
         align-items: center;
