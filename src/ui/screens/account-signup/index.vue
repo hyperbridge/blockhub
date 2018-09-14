@@ -274,7 +274,6 @@
                                             <div class="tab-card">
                                                 <h4>Preview your identity</h4>
                                                 <c-user-card
-                                                    status="success"
                                                     :user="account.identity"
                                                     previewMode
                                                 />
@@ -286,7 +285,6 @@
                             <div class="d-flex justify-content-end" slot="footer">
                                 <c-button
                                     icon="angle-right"
-                                    icon_position="right"
                                     @click="checkForm"
                                 />
                             </div>
@@ -300,63 +298,11 @@
                                         allowing you to reassure reviews of other user's proofs of identity.
                                         You can skip and finish later.</p>
                                     <div class="row margin-top-40">
-                                        <div class="col">
-                                            <div class="identity-block finish">
-                                                <div class="block-icon warning">
-                                                    <i class="fas fa-exclamation-triangle"></i>
-                                                </div>
-                                                <div class="avatar">
-                                                    <img src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
-                                                </div>
-                                                <div class="user_info">
-                                                    <div class="form-group margin-bottom-5">
-                                                        <input
-                                                            type="text"
-                                                            class="form-control"
-                                                            name="profile_name"
-                                                            placeholder="Profile name"
-                                                            readonly
-                                                        />
-                                                    </div>
-                                                    <p>User</p>
-                                                </div>
-                                                <div class="unknown_blk">
-                                                    <a href="#3">
-                                                        <i class="fas fa-plus"></i>
-                                                    </a>
-                                                    <a href="#3">
-                                                        <i class="fas fa-plus"></i>
-                                                    </a>
-                                                    <a href="#3">
-                                                        <i class="fas fa-plus"></i>
-                                                    </a>
-                                                    <a href="#3">
-                                                        <i class="fas fa-plus"></i>
-                                                    </a>
-                                                    <div class="counts">
-                                                            <span>
-                                                                0 <i class="fas fa-long-arrow-alt-down"></i>
-                                                            </span>
-                                                        <span>
-                                                                0 <i class="fas fa-long-arrow-alt-up"></i>
-                                                            </span>
-                                                    </div>
-                                                </div>
-                                                <div class="wallet_number">
-                                                    <div class="form-group">
-                                                        <input type="text"
-                                                               class="form-control"
-                                                               name="wallet_number"
-                                                               placeholder="Wallet number"
-                                                               readonly
-                                                        />
-                                                    </div>
-                                                    <button>
-                                                        <i class="fas fa-copy"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <c-user-card
+                                            class="col"
+                                            :user="account.identity"
+                                            previewMode
+                                        />
                                         <div class="col">
                                             <div class="tab-card margin-top-5 margin-bottom-15">
                                                 <div class="button_blk">
