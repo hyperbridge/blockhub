@@ -55,9 +55,12 @@
                     <div class="col-12">
                         <c-heading-bar name="Profile Picker" :showArrows="false" :showBackground="false">
                             <div class="additional-action margin-left-20" slot="additional-action">
-                                <span class="text">Value</span>
-                                <c-icon name="dollar-sign"/>
-                                <c-button-arrows/>
+                                <span class="text">Name</span>
+                                <c-icon name="user"/>
+                                <c-button-arrows
+                                    @clickUp="sortAsc = true"
+                                    @clickDown="sortAsc = false"
+                                />
                             </div>
                             <div class="additional-action margin-left-20" slot="additional-action">
                                 <span class="text">Rating</span>
@@ -68,7 +71,7 @@
                                 <div class="form-group mb-0">
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Search"
-                                               aria-label="Search">
+                                               aria-label="Search" v-model="filterPhrase">
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fas fa-search"></i>
@@ -80,11 +83,15 @@
                         </c-heading-bar>
                     </div>
 
-                    <div class="profile-picker">
+                    <transition-group
+                        tag="div"
+                        class="profile-picker"
+                        name="item"
+                    >
                         <div
                             class="profile-picker__profile"
-                            v-for="(identity, index) in identities"
-                            :key="index"
+                            v-for="identity in filteredIdentities"
+                            :key="identity.wallet"
                         >
                             <c-user-card
                                 :user="identity"
@@ -112,7 +119,8 @@
                                 >Delete</c-button>
                             </div>
                         </div>
-                    </div>
+                    </transition-group>
+
 
                     <c-modal-light
                         v-if="removeIdentity"
@@ -127,12 +135,12 @@
                         <div>
                             <div class="profile-remove__buttons">
                                 <c-button
-                                    status="success"
+                                    status="danger"
                                     size="md"
                                     @click="deleteIdentity()"
                                 >Yes</c-button>
                                 <c-button
-                                    status="danger"
+                                    status="success"
                                     size="md"
                                     @click="removeIdentity = null"
                                 >Cancel</c-button>
@@ -183,7 +191,9 @@
                     default: false,
                     edit: false
                 },
-                removeIdentity: null
+                removeIdentity: null,
+                filterPhrase: '',
+                sortAsc: true
             }
         },
         methods: {
@@ -220,6 +230,11 @@
             },
             defaultIdentity() {
                 return this.identities.find(identity => identity.default);
+            },
+            filteredIdentities() {
+                return this.identities
+                    .filter(identity => identity.name.toLowerCase().includes(this.filterPhrase))
+                    .sort((a, b) => a.name > b.name ? (this.sortAsc ? 1 : -1) : 0)
             }
         }
     }
@@ -349,6 +364,18 @@
             width: calc(100% - 540px);
             padding: 0 10px;
         }
+    }
+
+    .item-move {
+        transition: all 1s !important;
+    }
+    .item-enter {
+        transform: scale(0) !important;
+        opacity: 0;
+    }
+    .item-leave-active {
+        position: absolute !important;
+        opacity: 0;
     }
 
     .profile-picker {
