@@ -10,10 +10,9 @@
                     <div class="col-12 margin-bottom-40 my_identity">
                         <c-user-card
                             :user="user"
-                            status="finish"
                             icon_color="green"
-                            icon_class="fas fa-check">
-                        </c-user-card>
+                            icon_class="fas fa-check"
+                        />
                         <div class="user-info">
                             <h3>Mr. Satoshi Nakamoto</h3>
                             <h4>Osaka, Japan</h4>
@@ -105,6 +104,7 @@
                         <div class="wt_action">
                             <c-user-card
                                 :user="user"
+                                class="defaults"
                                 status="finish"
                                 icon_color="green"
                                 icon_class="fas fa-check">
@@ -138,16 +138,17 @@
             'c-heading-bar': () => import('@/ui/components/heading-bar'),
             'c-user-card': () => import('@/ui/components/user-card')
         },
-        computed: {
-            identities() {
-                console.log('aaa', this.$store.state.network)
-                return this.$store.state.network.identities
+        data() {
+            return {
+                wallets: [],
+                user: {}
             }
         },
-        data: () => ({
-            wallets: [],
-            user: {}
-        })
+        computed: {
+            identities() {
+                return this.$store.state.network.identities;
+            }
+        }
     }
 </script>
 
@@ -293,7 +294,7 @@
             padding-left: 25px;
             width: 327px;
             position: relative;
-            margin-right: 20px;
+            margin-right: 40px;
             .div_label{
                 position: absolute;
                 top: 5px;
@@ -332,6 +333,7 @@
         }
         .wt_action{
             position: relative;
+            overflow: visible;
             .action{
                 display: none;
                 justify-content: space-around;
@@ -357,6 +359,33 @@
                     display: flex;
                 }
             }
+        }
+    }
+
+    .defaults {
+        $defColor: #43C981;
+        background: $defColor;
+        border-color: $defColor !important;
+        &:before {
+            content: "";
+            width: 26px;
+            position: absolute;
+            border-radius: 5px 0 0 5px;
+            left: -22px;
+            bottom: -1px;
+            height: calc(100% + 2px);
+            background: $defColor;
+        }
+        &:after {
+            font-family: 'Font Awesome 5 Free', 'Barlow', sans-serif;
+            content: "DEFAULT \F14A";
+            color: #1C2032;
+            font-weight: bold;
+            font-size: 16px;
+            position: absolute;
+            transform: rotate(-90deg);
+            top: 40px;
+            left: -50px;
         }
     }
 </style>

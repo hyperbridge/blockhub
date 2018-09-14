@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
+    "mem": "node --max_old_space_size=4092 build/dev-server.js",
     "build": "node build/build.js",
     "push": "NODE_ENV=production npm run build && git add -A && git commit -m \"Rebuild\" && git push",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",

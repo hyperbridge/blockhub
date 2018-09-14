@@ -89,15 +89,14 @@
         background-color: #303046;
         border-radius: 5px;
         border: 1px solid #28273a;
-        overflow: hidden;
         width: 100%;
         position: relative;
         color: #fff;
         .wallet_number {
             display: flex;
             justify-content: space-between;
-            .form-group {
-                margin-bottom: 0;
+            .form-control {
+                margin-right: 10px;
             }
             button {
                 width: 30px;
