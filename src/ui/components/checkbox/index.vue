@@ -1,26 +1,36 @@
 <template>
     <div class="c-checkbox">
-        <input type="checkbox" v-bind:id="id" :checked="value" @change="$emit('input', $event.target.checked)">
-        <label v-bind:for="id">{{ label }}</label>
+        <input
+            type="checkbox"
+            :id="id"
+            :checked="value"
+            @change="$emit('input', !value)"
+        >
+        <label :for="id">
+            <slot/>
+        </label>
     </div>
 </template>
 
 <script>
     export default {
         props: {
-            id: { required: true },
-            label : { default: false },
-            value: { default: false }
+            id: {
+                type: [String, Number],
+                default() {
+                    return new Date().getUTCMilliseconds();
+                }
+            },
+            value: Boolean
         }
     }
 </script>
 
 <style lang="scss" scoped>
     .c-checkbox{
-        display: block;
-        width: 100%;
+        display: inline-flex;
         overflow: hidden;
-        input[type="checkbox"] {
+        input[type=checkbox] {
             display: none;
             & + label {
                 display: block;

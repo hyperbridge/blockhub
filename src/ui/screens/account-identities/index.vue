@@ -4,14 +4,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <c-heading-bar name="My identity" :showArrows="false" :showBackground="false">
-                        </c-heading-bar>
+                        <c-heading-bar name="My identity" :showArrows="false" :showBackground="false"/>
                     </div>
                     <div class="col-12 margin-bottom-40 my_identity">
                         <c-user-card
-                            :user="user"
-                            icon_color="green"
-                            icon_class="fas fa-check"
+                            :user="newIdentity"
+                            @updateIdentity="(prop, val) => newIdentity[prop] = val"
                         />
                         <div class="user-info">
                             <h3>Mr. Satoshi Nakamoto</h3>
@@ -44,6 +42,17 @@
                     </div>
 
                     <div class="col-12">
+                        <c-button
+                            status="info"
+                            icon="user-plus"
+                            @click="createIdentity"
+                        > Add new</c-button>
+                        <c-checkbox v-model="newIdentity.default">
+                            Set identity as default
+                        </c-checkbox>
+                    </div>
+
+                    <div class="col-12">
                         <c-heading-bar name="Profile Picker" :showArrows="false" :showBackground="false">
                             <div class="additional-action margin-left-20" slot="additional-action">
                                 <span class="text">Value</span>
@@ -67,11 +76,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="additional-action" slot="additional-action">
-                                <c-button status="info" icon="user-plus">
-                                    Add new
-                                </c-button>
                             </div>
                         </c-heading-bar>
                     </div>
@@ -149,7 +153,8 @@
             'c-heading-bar': () => import('@/ui/components/heading-bar'),
             'c-user-card': () => import('@/ui/components/user-card'),
             'c-button-arrows': () => import('@/ui/components/buttons/arrows'),
-            'c-modal-light': () => import('@/ui/components/modal-light')
+            'c-modal-light': () => import('@/ui/components/modal-light'),
+            'c-checkbox': () => import('@/ui/components/checkbox')
         },
         data() {
             return {
@@ -171,14 +176,20 @@
                         edit: false
                     }
                 ],
+                newIdentity: {
+                    name: '',
+                    wallet: '',
+                    img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                    default: false,
+                    edit: false
+                },
                 removeIdentity: null
             }
         },
         methods: {
-            setDefault(newIdentity) {
-                const currentIdentity = this.identities.find(identity => identity.default);
-                currentIdentity.default = false;
-                newIdentity.default = true;
+            setDefault(identity) {
+                if (this.defaultIdentity) this.defaultIdentity.default = false;
+                identity.default = true;
             },
             deleteIdentity(identity) {
                 const { removeIdentity } = this;
@@ -189,11 +200,26 @@
                 } else {
                     this.removeIdentity = identity;
                 }
+            },
+            createIdentity() {
+                const { newIdentity } = this;
+                if (!Object.values(newIdentity).some(val => val == null || !val.toString().length)) {
+                    if (newIdentity.default && this.defaultIdentity) {
+                        this.defaultIdentity.default = false;
+                    }
+                    this.identities.push({ ...newIdentity });
+                    this.newIdentity.name = '';
+                    this.newIdentity.wallet = '';
+                    this.newIdentity.default = false;
+                }
             }
         },
         computed: {
-            identities() {
+            identitiesC() {
                 return this.$store.state.network.identities;
+            },
+            defaultIdentity() {
+                return this.identities.find(identity => identity.default);
             }
         }
     }
@@ -327,12 +353,13 @@
 
     .profile-picker {
         display: flex;
+        flex-wrap: wrap;
         padding: 20px;
     }
 
     .profile-picker__profile {
         position: relative;
-        margin-right: 40px;
+        margin: 20px;
         width: 300px;
         &:hover .profile__action {
             display: flex;
