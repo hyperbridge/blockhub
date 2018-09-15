@@ -44,7 +44,7 @@
         z-index: 1000;
         width: 100vw;
         height: 100vh;
-        background: rgba(25, 25, 40, 0.9);
+        background: rgba(48, 48, 75, .9);
         animation: opacity .5s ease;
         display: flex;
         align-items: center;
@@ -53,7 +53,7 @@
     .modal-light__content {
         animation: slide-in .8s ease;
         position: relative;
-        background: #30314C;
+        background: #3e3e5c;
         color: #fff;
         border-radius: 0 0 5px 5px;
     }

@@ -2804,8 +2804,21 @@ storiesOf('Banner', module)
             </div>`
     }))
 
+storiesOf('Help', module)
+    .add('Help modal', () => ({
+        components:{
+            'c-modal': Modal
+        },
+        data(){
+            return{
 
-
+            }
+        },
+        template: `
+        <c-modal>
+            
+        </c-modal>`
+    }))
 
 
 
