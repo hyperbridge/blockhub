@@ -2,6 +2,7 @@
     <component
         :is="tag"
         class="c-btn"
+        @click="$emit('click')"
         :class="[status, 'c-btn-' + size , { 'swap-direction': swap_direction }]"
     >
         <i
@@ -20,7 +21,7 @@
 
 <script>
     export default {
-        name: 'button',
+        name: 'c-button',
         props: {
             tag: {
                 type: String,
