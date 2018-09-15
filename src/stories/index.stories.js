@@ -966,13 +966,13 @@ storiesOf('Popups', module)
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is dafault popup</h3>
-                <c-button text="Show modal" @click="showModalHandler" variant="default" icon="fas fa-check" icon_position="left" c_class="ml-1" />
-                <c-popup :activated="modalActive" ref="modal" title="Error" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                        text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
+                <c-button @click="showModalHandler">Show modal</c-button>
+                <c-popup :activated="modalActive" ref="modal" title="Default" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
-                            <c-button text="Cancel" variant="danger" icon="fas fa-times" icon_position="left" c_class="mx-1" />
-                            <c-button text="Confirm" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                            <c-button status="danger">Cancel</c-button>
+                            <c-button status="success">Confirm</c-button>
                         </div>
                     </template>
                 </c-popup>
@@ -1000,13 +1000,13 @@ storiesOf('Popups', module)
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is warning popup</h3>
-                <c-button text="Show modal" @click="showModalHandler" variant="warning" icon="fas fa-check" icon_position="left" c_class="ml-1" />
-                <c-popup :activated="modalActive" @close="close" ref="modal" title="Warning" type="warning" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                        text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
+                <c-button @click="showModalHandler">Show modal</c-button>
+                <c-popup :activated="modalActive" @close="close" ref="modal" title="Warning" type="warning" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
-                            <c-button text="Cancel" variant="danger" icon="fas fa-times" icon_position="left" c_class="mx-1" />
-                            <c-button text="Confirm" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                            <c-button status="danger">Cancel</c-button>
+                            <c-button status="success">Confirm</c-button>
                         </div>
                     </template>
                 </c-popup>
@@ -1031,13 +1031,13 @@ storiesOf('Popups', module)
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is danger popup</h3>
-                <c-button text="Show modal" @click="showModalHandler" variant="danger" icon="fas fa-check" icon_position="left" c_class="ml-1" />
-                <c-popup :activated="modalActive" ref="modal" title="Danger" type="danger" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                        text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
+                <c-button @click="showModalHandler">Show modal</c-button>
+                <c-popup :activated="modalActive" ref="modal" title="Danger" type="danger" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
-                            <c-button text="Cancel" variant="danger" icon="fas fa-times" icon_position="left" c_class="mx-1" />
-                            <c-button text="Confirm" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                            <c-button status="danger">Cancel</c-button>
+                            <c-button status="success">Confirm</c-button>
                         </div>
                     </template>
                 </c-popup>
@@ -1062,13 +1062,13 @@ storiesOf('Popups', module)
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is info popup</h3>
-                <c-button text="Show modal" @click="showModalHandler" variant="info" icon="fas fa-check" icon_position="left" c_class="ml-1" />
-                <c-popup :activated="modalActive" ref="modal" title="Info" type="info" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                        text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
+                <c-button @click="showModalHandler">Show modal</c-button>
+                <c-popup :activated="modalActive" ref="modal" title="Info" type="info" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
-                            <c-button text="Cancel" variant="danger" icon="fas fa-times" icon_position="left" c_class="mx-1" />
-                            <c-button text="Confirm" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                            <c-button status="danger">Cancel</c-button>
+                            <c-button status="success">Confirm</c-button>
                         </div>
                     </template>
                 </c-popup>
@@ -1093,7 +1093,7 @@ storiesOf('Popups', module)
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is success popup</h3>
-                <c-button text="Show modal" @click="showModalHandler" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                <c-button @click="showModalHandler">Show modal</c-button>
                 <c-popup :activated="modalActive" ref="modal" type="success" title="Success" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
                         text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
                     <template slot="footer">
@@ -1416,12 +1416,31 @@ storiesOf('Block', module)
              </div>
             `
     }))
-import CustomModal from '../ui/components/custom-modal/index'
+import CustomModal from '../ui/components/modal/custom'
+import Modal from '@/ui/components/modal/';
 
 storiesOf('Modal', module)
-    .add('default', () => ({
+    .add('image', () => ({
+        components: { 'c-modal': Modal },
+        template: `
+            <c-modal>
+                <img
+                    src="http://gamechanger.co.ke/wp-content/uploads/2016/09/The-Witcher-3-Wild-Hunt-Game-of-the-Year-Edition3.jpg"
+                />
+            </c-modal>
+        `
+    }))
+    .add('text', () => ({
+        components: { 'c-modal': Modal },
+        template: `
+            <c-modal>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn</p>
+            </c-modal>
+        `
+    }))
+    .add('custom', () => ({
         components: {
-            'c-modal': CustomModal
+            'c-custom-modal': CustomModal
         },
         template: `
          <div class="row m-0 p-3">
@@ -1430,7 +1449,7 @@ storiesOf('Modal', module)
                   Launch modal
                 </button>
             </div>
-            <c-modal id="exampleModal" title="Some modal title">
+            <c-custom-modal id="exampleModal" title="Some modal title">
                 <template slot="modal_body">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id rhoncus turpis.</p>
                     <p>Aliquam nec blandit mi. Integer sed neque urna.</p>
@@ -1438,7 +1457,7 @@ storiesOf('Modal', module)
                 <template slot="modal_footer">
                     <a href="#3" class="btn btn-sm btn-success">Some Link</a>
                 </template>
-            </c-modal>
+            </c-custom-modal>
          </div>
         `
     }))
@@ -2175,32 +2194,6 @@ storiesOf('Curators Reviews', module)
         template: `<curators-reviews :reviews="reviews" class="col-8"/>`
     }))
 
-
-import ModalLight from '@/ui/components/modal-light';
-storiesOf('Modal Light', module)
-    .add('default', () => ({
-        components: { 'c-modal-light': ModalLight },
-        template: `<c-modal-light/>`
-    }))
-    .add('image', () => ({
-        components: { 'c-modal-light': ModalLight },
-        template: `
-            <c-modal-light>
-                <img
-                    src="http://gamechanger.co.ke/wp-content/uploads/2016/09/The-Witcher-3-Wild-Hunt-Game-of-the-Year-Edition3.jpg"
-                />
-            </c-modal-light>
-        `
-    }))
-    .add('text', () => ({
-        components: { 'c-modal-light': ModalLight },
-        template: `
-            <c-modal-light>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn</p>
-            </c-modal-light>
-        `
-    }))
-
 import ImagesExplorer from '@/ui/components/images-explorer';
 storiesOf('Images Explorer', module)
     .add('default', () => ({
@@ -2211,7 +2204,7 @@ storiesOf('Images Explorer', module)
     .add('in modal', () => ({
         components: {
             'c-images-explorer': ImagesExplorer,
-            'c-modal-light': ModalLight
+            'c-modal-light': Modal
         },
         data: () => object('Data', data.ImagesExplorer),
         template: `

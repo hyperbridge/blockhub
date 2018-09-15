@@ -36,26 +36,13 @@
 
                         <c-block title="Topics" class="margin-bottom-30">
                             <div class="topics-list">
-                                <c-topic-item link="#3" icon="cogs" class="padding-10">
-                                    General Platform Features
-                                </c-topic-item>
-                                <c-topic-item link="#3" icon="play" class="padding-10">
-                                    Running applications
-                                </c-topic-item>
-                                <c-topic-item link="#3" icon="user" class="padding-10">
-                                    Account Management
-                                </c-topic-item>
-                                <c-topic-item link="#3" icon="lock" class="padding-10">
-                                    Security
-                                </c-topic-item>
-                                <c-topic-item link="#3" icon="credit-card" class="padding-10">
-                                    Billing & Payments
-                                </c-topic-item>
-                                <c-topic-item link="#3" icon="globe" class="padding-10">
-                                    Connect
-                                </c-topic-item>
-                                <c-topic-item link="#3" icon="window-restore" class="padding-10">
-                                    Tools
+                                <c-topic-item
+                                    v-for="(topic, index) in topics"
+                                    :key="index"
+                                    :link="`/#/help/${topic.id}`"
+                                    :icon="topic.icon"
+                                    class="padding-10">
+                                    {{ topic.label }}
                                 </c-topic-item>
                             </div>
                         </c-block>
@@ -100,7 +87,7 @@
                         <c-card class="text-center">
                             <h4 class="h2">Community</h4>
                             <p>Engage with a community of passionate experts to get the answers you need</p>
-                            <c-button icon_hide class="width-auto margin-top-10">Visit GitHub</c-button>
+                            <c-button icon_hide class="width-auto margin-top-10" href="https://github.com/hyperbridge" target="_blank">Visit GitHub</c-button>
                         </c-card>
                     </div>
                     <div class="col-12 col-lg-6">
@@ -110,7 +97,6 @@
                             <c-button status="info" icon_hide class="width-auto margin-top-10">Create a ticket</c-button>
                         </c-card>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -118,18 +104,23 @@
 </template>
 
 <script>
-export default {
-  components: {
-      'c-layout': () => import('@/ui/layouts/default'),
-      'c-block': () => import('@/ui/components/block'),
-      'c-article-item': () => import('@/ui/components/help/article-item'),
-      'c-topic-item': () => import('@/ui/components/help/topic-item'),
-      'c-list-item': () => import('@/ui/components/help/simple-item'),
-      'c-card': () => import('@/ui/components/help/help-card.vue'),
-  },
-  data: () => ({
-  })
-}
+    export default {
+        components: {
+            'c-layout': () => import('@/ui/layouts/default'),
+            'c-block': () => import('@/ui/components/block'),
+            'c-article-item': () => import('@/ui/components/help/article-item'),
+            'c-topic-item': () => import('@/ui/components/help/topic-item'),
+            'c-list-item': () => import('@/ui/components/help/simple-item'),
+            'c-card': () => import('@/ui/components/help/help-card.vue'),
+        },
+        data: () => ({
+        }),
+        computed: {
+            topics: function () {
+                return this.$store.state.marketplace.topics
+            }
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
