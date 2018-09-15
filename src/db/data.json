@@ -528,6 +528,7 @@
         "developer_enabled": true,
         "editor_mode": "viewing",
         "selected_product": null,
+        "first_product": true,
         "frontpage_product": {},
         "new_products": [],
         "sale_products": [],
