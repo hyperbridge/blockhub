@@ -24,12 +24,12 @@
                 />
             </li>
         </ul>
-        <c-modal-light v-if="show_modal" @close="show_modal=false">
+        <c-modal v-if="show_modal" @close="show_modal=false">
             <c-images-explorer
                 :images="items"
                 :start_from="active_item"
             />
-        </c-modal-light>
+        </c-modal>
     </div>
 </template>
 
@@ -49,7 +49,7 @@ export default {
         name_url: String,
     },
     components: {
-        'c-modal-light': () => import('@/ui/components/modal-light'),
+        'c-modal': () => import('@/ui/components/modal'),
         'c-images-explorer': () => import('@/ui/components/images-explorer')
     },
     data() {
