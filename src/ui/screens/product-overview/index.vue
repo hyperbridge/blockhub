@@ -257,7 +257,7 @@
                         { author, title: title, text, date: '2018-08-11T04:09:00.000Z', rating: 3, minutes_played: 2941, setup }
                     ]
                 },
-                savedState: ''
+                savedState: false
             }
         },
         methods: {
@@ -288,8 +288,10 @@
                 console.log('close')
                 this.$store.state.marketplace.first_product = false
             },
-            handler() {
-                alert('sdfdfsdfsd')
+            unsaved(){
+                console.log()
+                if (this.savedState === false && this.$store.state.marketplace.editor_mode === 'editing')
+                    return 'You really want to leave?'
             }
         },
         computed: {
@@ -300,7 +302,6 @@
                         this.activeElement[key] = false
                     }
                 }
-
                 return this.$store.state.marketplace.editor_mode === 'editing'
             },
             first_product(){
@@ -315,7 +316,7 @@
         mounted: updateProduct,
         created(){
             updateProduct;
-            window.addEventListener('beforeunload', this.handler)
+            window.onbeforeunload = this.unsaved
         },
         beforeDestroy() {
             window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
