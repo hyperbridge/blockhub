@@ -43,6 +43,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="settings_item">
+                            <c-switch
+                                :value="systemPermissions"
+                                @change="requestNotifPerm()"
+                            />
+                            <div class="text">
+                                <h4>System notifications</h4>
+                                <p>Enable system notifications from BlockHub App</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </c-block>
             <c-block class="margin-bottom-30" title="Performance Settings">
@@ -118,6 +130,20 @@ export default {
                 console.log(event.result) // should be undefined
             }
         }
+    },
+    data() {
+        return {
+            systemPermissions: false
+        }
+    },
+    methods: {
+        async requestNotifPerm() {
+            const permission = await Notification.requestPermission();
+            if (permission === 'granted') this.systemPermissions = true;
+        }
+    },
+    mounted() {
+        this.systemPermissions = Notification.permission === 'granted';
     },
     computed: {
         settings() {
