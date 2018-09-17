@@ -1,16 +1,16 @@
 <template>
     <span class="c-btn-arrows">
-        <i
-            class="fas fa-caret-up"
+        <c-icon
+            name="caret-up"
             :class="[{ 'up': colored }, size]"
             @click="$emit('clickUp')"
-        ></i>
+        />
         <slot/>
-        <i
-            class="fas fa-caret-down"
+        <c-icon
+            name="caret-down"
             :class="[{ 'down': colored }, size]"
             @click="$emit('clickDown')"
-        ></i>
+        />
     </span>
 </template>
 

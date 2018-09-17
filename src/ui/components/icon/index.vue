@@ -14,6 +14,7 @@
         render(h) {
             return h('i', {
                 class: `fas ${this.cat}-${this.name}`,
+                on: { click: () => this.$emit('click') }
             });
         }
     }

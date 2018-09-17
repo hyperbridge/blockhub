@@ -17,14 +17,14 @@
         <div class="heading-bar__additional-action">
             <slot name="additional-action"></slot>
             <a :href="more" v-if="more" class="more">
-                MORE <i class="fas fa-angle-right"></i>
+                MORE <c-icon name="angle-right"/>
             </a>
             <div class="heading-bar__nav" v-if="showArrows">
                 <a href="#3" class="nav-prev" @click.prevent="$emit('prevClick')">
-                    <i class="fas fa-arrow-left"></i>
+                   <c-icon name="arrow-left"/>
                 </a>
                 <a href="#3" class="nav-next" @click.prevent="$emit('nextClick')">
-                    <i class="fas fa-arrow-right"></i>
+                   <c-icon name="arrow-right"/>
                 </a>
             </div>
         </div>

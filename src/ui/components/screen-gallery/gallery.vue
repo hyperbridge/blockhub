@@ -53,28 +53,11 @@
 
 
 <script>
-const scrollParentToChild = (parent, child) => {
-  const parentRect = parent.getBoundingClientRect();
-
-  const parentViewableArea = {
-    height: parent.clientHeight,
-    width: parent.clientWidth
-  };
-
-  const childRect = child.getBoundingClientRect();
-  const isViewable = (childRect.top >= parentRect.top) && (childRect.top <= parentRect.top + parentViewableArea.height);
-
-  if (!isViewable) {
-    parent.scrollTop = (childRect.top + parent.scrollTop) - parentRect.top;
-  }
-}
-
 export default {
     name: 'screen-gallery',
     props: {
         main: {
-            type: String,
-            required: true
+            type: String
         },
         items: {
             type: Array,
@@ -103,7 +86,7 @@ export default {
                 this.active_item < this.items.length - 1 ? this.active_item++ : this.active_item = 0;
                 const [child] = this.$refs[`thumb-${this.active_item}`];
                 const parent = this.$refs['thumb-nav'];
-                scrollParentToChild(parent, child);
+                this.scrollParentToChild(parent, child);
             }, 4000);
         },
         enableSlideshow(status) {
@@ -123,6 +106,21 @@ export default {
         },
         mouseOut() {
             if (!this.play_video) this.enableSlideshow(true);
+        },
+        scrollParentToChild(parent, child) {
+            const parentRect = parent.getBoundingClientRect();
+
+            const parentViewableArea = {
+                height: parent.clientHeight,
+                width: parent.clientWidth
+            };
+
+            const childRect = child.getBoundingClientRect();
+            const isViewable = (childRect.top >= parentRect.top) && (childRect.top <= parentRect.top + parentViewableArea.height);
+
+            if (!isViewable) {
+                parent.scrollTop = (childRect.top + parent.scrollTop) - parentRect.top;
+            }
         }
     },
     mounted() {
