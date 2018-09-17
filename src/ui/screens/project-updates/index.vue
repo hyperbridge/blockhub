@@ -10,21 +10,45 @@
                 <div class="row" v-if="project">
                     <div class="col-12">
                         <div class="posts-timeline">
-                            <div class="posts-timeline__post-item">
-                                <div class="post-date">
-                                    September 12, 2018
+                            <div class="posts-timeline__post-item left-side">
+                                <div class="posts-timeline__post--content">
+                                    <a href="#3">
+                                        <h3>Thank you, friends!</h3>
+                                    </a>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor
+                                        feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex,
+                                        laoreet ut nunc eget, placerat molestie leo.</p>
+                                    <div class="d-flex align-items-center justify-content-between mt-4 w-100">
+                                        <div class="post-date">
+                                            September 12, 2018
+                                        </div>
+                                        <c-button status="info" icon_hide >Read more</c-button>
+                                    </div>
                                 </div>
-                                <a href="#3">
-                                    <h3>Thank you, friends!</h3>
-                                </a>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor
-                                    feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex,
-                                    laoreet ut nunc eget, placerat molestie leo.</p>
-                                <c-button status="info" icon_hide >Read more</c-button>
                             </div>
-                            <div class="posts-timeline__start">
-                                September 11, 2018
-                                <h3>Project launched</h3>
+                            <div class="posts-timeline__post-item right-side">
+                                <div class="posts-timeline__post--content">
+                                    <a href="#3">
+                                        <h3>Thank you, friends!</h3>
+                                    </a>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor
+                                        feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex,
+                                        laoreet ut nunc eget, placerat molestie leo.</p>
+                                    <div class="d-flex align-items-center justify-content-between mt-4 w-100">
+                                        <c-button status="info" icon_hide >Read more</c-button>
+                                        <div class="post-date">
+                                            September 11, 2018
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="posts-timeline__post-item centered">
+                                <div class="posts-timeline__post--content" style="background: #43C981">
+                                    <div class="post-date">
+                                        September 7, 2018
+                                    </div>
+                                    <h3>Project launched</h3>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -202,5 +226,107 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .posts-timeline{
+        display: flex;
+        flex-direction: column;
+    }
+    .posts-timeline__post-item{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        padding: 10px 0;
+        .post-date{
+            font-size: 13px;
+            font-weight: bold;
+            color: #fff;
+        }
+        h3{
+            font-size: 22px;
+        }
+        &:after{
+            content: "";
+            position: absolute;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 100%;
+            display: inline-block;
+        }
+        &:before{
+            content: "";
+            position: absolute;
+            top: 0px;
+            width: 2px;
+            bottom: 0;
+            background: rgba(255, 255, 255, .2);
+            border-radius: 0;
+            display: inline-block;
+        }
+        &.left-side{
+            text-align: right;
+            padding-right: 50px;
+            margin-right: -1px;
+            .c-btn{
+                margin-right: 0;
+            }
+            &:after{
+                right: -10px;
+            }
+            &:before{
+                right: -1px;
+            }
+        }
+        &.right-side{
+            text-align: left;
+            align-self: flex-end;
+            padding-left: 50px;
+            .c-btn{
+                margin-left: 0;
+            }
+            &:after{
+                left: -10px;
+            }
+            &:before{
+                left: -1px;
+            }
+        }
+        &.centered{
+            align-self: center;
+            padding: 40px;
+            text-align: center;
+            &:after{
+                left: calc(50% - 10px);
+            }
+            &:before{
+                content: "";
+                top: 0px;
+                left: calc( 50% - 1px);
+                height: 30px;
+                background: rgba(255, 255, 255, .2);
+                width: 2px;
+                position: absolute;
+                border-radius: 0;
+            }
+            .posts-timeline__post--content{
+                padding: 25px;
+                h3{
+                    padding: 15px 0 0;
+                }
+            }
+        }
+        a:hover{
+            text-decoration: none;
+        }
+    }
+    .posts-timeline__post--content{
+        padding: 15px;
+        background: rgba(0, 0, 0, .13);
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .2);
+        &:hover{
+            background: rgba(0, 0, 0, .2);
+        }
+    }
 </style>
