@@ -1992,29 +1992,35 @@ storiesOf('Sending Funds(not finished)', module)
         template: data.SendingFunds.template
     }))
 
-import UserCard from '../ui/components/user-card/index'
+import UserCard from '@/ui/components/user-card/index';
 
-storiesOf('User Card(not finished)', module)
+storiesOf('User Card', module)
     .add('default', () => ({
         components: {
             'c-user-card': UserCard
         },
-        template: `
-        <div class="row p-5">
-            <div class="col-4">
-                <c-user-card  />
-            </div>
-        </div>
-        `
-    }))
-    .add('done', () => ({
-        components: {
-            'c-user-card': UserCard
+        data() {
+            return {
+                user: {
+                    id: 1,
+                    name: 'Mr. Satoshi',
+                    wallet: '0x6cc5f688a315f3dc28a7781717a',
+                    img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                    default: false,
+                    edit: false
+                }
+            }
         },
         template: `
         <div class="row p-5">
             <div class="col-4">
-                <c-user-card status="success" :user="true"  />
+                <c-user-card
+                    :user="user"
+                    @updateIdentity="(prop, val) => user[prop] = val"
+                />
+            </div>
+            <div class="col-4">
+                <c-user-card :user="user" previewMode/>
             </div>
         </div>
         `
@@ -2059,7 +2065,7 @@ const productsCardsData = [
         },
         author: "Piranha Bytes",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/901191/movie480.webm?t=1490866901"],
-        author_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+        developer_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     },
     {
         id: "9",
@@ -2077,7 +2083,7 @@ const productsCardsData = [
         },
         author: "CD PROJEKT RED",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256658589/movie480.webm?t=1528288687"],
-        author_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+        developer_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     },
     {
         id: "10",
@@ -2095,7 +2101,7 @@ const productsCardsData = [
         },
         author: "Bethesda",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256657338/movie480.webm?t=1447378505"],
-        author_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+        developer_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     }
 ];
 storiesOf('Product Card', module)

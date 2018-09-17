@@ -4,7 +4,7 @@
             <a :href="`/#/product/${product.id}`"><img class="card-img-top" :src="product.images.medium_tile" /></a>
             <h4><a :href="`/#/product/${product.id}`">{{ product.name }}</a></h4>
             <p class="card-text" hidden>{{ product.short_description }} </p>
-            <c-tags :tags="product.author_tags.slice(0,3)" />
+            <c-tags :tags="product.developer_tags.slice(0,3)" />
         </div>
     </div>
 </template>

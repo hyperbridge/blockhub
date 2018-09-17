@@ -254,10 +254,13 @@
             defaultIdentity() {
                 return this.identities.find(identity => identity.default);
             },
+            isEditing() {
+                return this.identities.find(identity => identity.edit);
+            },
             filteredIdentities() {
                 return this.identities
                     .filter(identity => identity.name.toLowerCase().includes(this.filterPhrase.toLowerCase()))
-                    .sort((a, b) => a.name > b.name ? (this.sortAsc ? 1 : -1) : 0)
+                    .sort((a, b) => (a.name > b.name) && !this.isEditing ? (this.sortAsc ? 1 : -1) : 0)
             }
         }
     }
