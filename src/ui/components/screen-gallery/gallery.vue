@@ -40,7 +40,6 @@ export default {
     props: {
         main: {
             type: String,
-            required: true
         },
         items: {
             type: Array,

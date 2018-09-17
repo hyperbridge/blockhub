@@ -31,11 +31,9 @@ export default {
     props: {
         project: {
             type: Object,
-            required: true
         },
         customClass: {
             type: String,
-            required: true
         }
     },
     computed: {

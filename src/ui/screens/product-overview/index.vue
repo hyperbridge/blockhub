@@ -57,16 +57,16 @@
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
-                                <a class="nav-link active" :href="`/#/product/${product.id}`">Overview</a>
+                                <router-link :to="`/product/${product.id}`" class="nav-link active">Overview</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}/community`">Community</a>
+                                <router-link :to="`/product/${product.id}/community`" class="nav-link">Community</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}/projects`">Projects</a>
+                                <router-link :to="`/product/${product.id}/projects`" class="nav-link">Projects</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}/assets`">Assets</a>
+                                <router-link :to="`/product/${product.id}/assets`" class="nav-link">Assets</router-link>
                             </li>
                         </ul>
 
@@ -289,9 +289,8 @@
                 this.$store.state.marketplace.first_product = false
             },
             unsaved(){
-                console.log()
                 if (this.savedState === false && this.$store.state.marketplace.editor_mode === 'editing')
-                    return 'You really want to leave?'
+                    return 'ololololo'
             }
         },
         computed: {
@@ -316,7 +315,8 @@
         mounted: updateProduct,
         created(){
             updateProduct;
-            window.onbeforeunload = this.unsaved
+            window.onbeforeunload = this.unsaved;
+            // window.addEventListener('beforeunload', this.unsaved)
         },
         beforeDestroy() {
             window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
@@ -351,6 +351,14 @@
                 }
             });
 
+        },
+        beforeRouteUpdate (to, from, next) {
+            prompt("You really want leave?","");
+        },
+        watch: {
+            $route (to, from) {
+                prompt("You really want leave?","");
+            }
         }
     }
 </script>

@@ -9,8 +9,8 @@
             </c-button-arrows>
             <div class="comment-container">
                 <c-dropdown-menu
-                    :dropPosition="right"
-                    :style="{ right: '0px', top: '5px' }"
+                    dropPosition="right"
+                    style="right: 5px; top: 10px;"
                 />
                 <div class="comment-content">
                     <div class="user-info">
