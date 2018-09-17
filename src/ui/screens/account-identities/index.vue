@@ -91,7 +91,7 @@
                         <div
                             class="profile-picker__profile"
                             v-for="identity in filteredIdentities"
-                            :key="identity.wallet"
+                            :key="identity.id"
                         >
                             <c-user-card
                                 :user="identity"
@@ -106,15 +106,24 @@
                                     icon="check"
                                     @click="setDefault(identity)"
                                 >Set default</c-button>
+                                <template v-if="identity.edit">
+                                    <c-button
+                                        status="share"
+                                        icon="pen"
+                                        @click="editIdentity(false, identity)"
+                                    >{{ identity.edit ? 'Save' : 'Edit' }}</c-button>
+                                    <c-button @click="editIdentity(false, identity, 'cancel')">
+                                        Cancel
+                                    </c-button>
+                                </template>
                                 <c-button
+                                    v-else
                                     status="share"
                                     icon="pen"
-                                    @click="identity.edit = !identity.edit"
-                                >
-                                    {{ identity.edit ? 'Save' : 'Edit' }}
-                                </c-button>
+                                    @click="editIdentity(true, identity)"
+                                >Edit</c-button>
                                 <c-button
-                                    status="warning"
+                                    status="danger"
                                     @click="deleteIdentity(identity)"
                                 >Delete</c-button>
                             </div>
@@ -170,6 +179,7 @@
                 user: {},
                 identities: [
                     {
+                        id: 1,
                         name: 'Mr. Satoshi',
                         wallet: '0x6cc5f688a315f3dc28a7781717a',
                         img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
@@ -177,6 +187,7 @@
                         edit: false
                     },
                     {
+                        id: 2,
                         name: 'Nakamoto',
                         wallet: '0x233c5f688a315f3dc28a419189b',
                         img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
@@ -191,6 +202,7 @@
                     default: false,
                     edit: false
                 },
+                identityCopy: {},
                 removeIdentity: null,
                 filterPhrase: '',
                 sortAsc: true
@@ -200,6 +212,17 @@
             setDefault(identity) {
                 if (this.defaultIdentity) this.defaultIdentity.default = false;
                 identity.default = true;
+            },
+            editIdentity(status, identity, cancel) {
+                identity.edit = status ? true : false;
+
+                if (cancel) {
+                    for (let key in identity) {
+                        identity[key] = this.identityCopy[key];
+                    }
+                }
+
+                this.identityCopy = status || !cancel ? {...identity, edit: false } : {};
             },
             deleteIdentity(identity) {
                 const { removeIdentity } = this;
@@ -233,7 +256,7 @@
             },
             filteredIdentities() {
                 return this.identities
-                    .filter(identity => identity.name.toLowerCase().includes(this.filterPhrase))
+                    .filter(identity => identity.name.toLowerCase().includes(this.filterPhrase.toLowerCase()))
                     .sort((a, b) => a.name > b.name ? (this.sortAsc ? 1 : -1) : 0)
             }
         }
@@ -391,7 +414,7 @@
         &:hover .profile__action {
             display: flex;
         }
-        .default {
+        >.default {
             $defColor: #43C981;
             border-color: $defColor !important;
             &:before {
@@ -424,6 +447,7 @@
         justify-content: center;
         bottom: -20px;
         width: 100%;
+        height: 26px;
         .c-btn {
             margin: 0 5px;
         }

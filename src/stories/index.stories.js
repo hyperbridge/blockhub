@@ -653,8 +653,8 @@ storiesOf('Money Info', module)
         `
     }));
 
-import Checkbox from '../ui/components/checkbox/checbox.vue'
-import CheckboxGroup from '../ui/components/checkbox/checbox-group.vue'
+import Checkbox from '@/ui/components/checkbox';
+import CheckboxGroup from '@/ui/components/checkbox/group.vue';
 
 storiesOf('Checkbox', module)
     .add('Single checkbox', () => ({
