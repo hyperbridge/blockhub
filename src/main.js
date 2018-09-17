@@ -16,7 +16,34 @@ Vue.use(Snotify, {
   toast: {
     position: SnotifyPosition.leftBottom
   }
-})
+});
+
+Vue.prototype.$notif = async (data) => {
+    if (!("Notification" in window)) {
+        return;
+    } else {
+
+        const spawnNotif = () => {
+            const icon = require('./assets/logo.png');
+
+            if (typeof data === 'string') {
+                new Notification(data, { icon });
+            } else {
+                const { title, body } = data;
+                new Notification(title, { icon, body });
+            }
+        }
+
+        if (Notification.permission === 'granted') {
+            spawnNotif();
+        } else if (['denied', 'granted'].some(perm => !perm.includes(Notification.permission))) {
+            const permission = await Notification.requestPermission();
+            if (permission === 'granted') {
+                spawnNotif();
+            }
+        }
+    }
+}
 
 
 
