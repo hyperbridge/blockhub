@@ -316,7 +316,6 @@
         created(){
             updateProduct;
             window.onbeforeunload = this.unsaved;
-            // window.addEventListener('beforeunload', this.unsaved)
         },
         beforeDestroy() {
             window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
@@ -352,14 +351,6 @@
             });
 
         },
-        beforeRouteUpdate (to, from, next) {
-            prompt("You really want leave?","");
-        },
-        watch: {
-            $route (to, from) {
-                prompt("You really want leave?","");
-            }
-        }
     }
 </script>
 

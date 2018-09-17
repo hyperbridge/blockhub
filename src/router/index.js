@@ -303,6 +303,12 @@ const router = new Router({
             component: () => import('@/ui/screens/project-milestones')
         },
         {
+            path: '/project/:id/updates',
+            name: 'Project Updates',
+            props: true,
+            component: () => import('@/ui/screens/project-updates')
+        },
+        {
             path: '/curators',
             name: 'Curators',
             component: () => import('@/ui/screens/curators')
