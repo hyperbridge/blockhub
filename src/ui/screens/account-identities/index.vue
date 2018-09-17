@@ -67,18 +67,11 @@
                                 <c-icon name="trophy"/>
                                 <c-button-arrows/>
                             </div>
-                            <div class="additional-action margin-left-20" slot="additional-action">
-                                <div class="form-group mb-0">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search"
-                                               aria-label="Search" v-model="filterPhrase">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fas fa-search"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="additional-action margin-left-20 padding-10" slot="additional-action">
+                                <c-input-searcher
+                                    placeholder="Search"
+                                    v-model="filterPhrase"
+                                />
                             </div>
                         </c-heading-bar>
                     </div>
@@ -171,7 +164,8 @@
             'c-user-card': () => import('@/ui/components/user-card'),
             'c-button-arrows': () => import('@/ui/components/buttons/arrows'),
             'c-modal-light': () => import('@/ui/components/modal-light'),
-            'c-checkbox': () => import('@/ui/components/checkbox')
+            'c-checkbox': () => import('@/ui/components/checkbox'),
+            'c-input-searcher': () => import('@/ui/components/inputs/searcher')
         },
         data() {
             return {

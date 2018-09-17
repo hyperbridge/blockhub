@@ -21,7 +21,7 @@
 
 <script>
     export default {
-        name: 'button-basic',
+        name: 'c-button',
         props: {
             tag: {
                 type: String,
