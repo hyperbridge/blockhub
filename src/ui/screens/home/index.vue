@@ -17,9 +17,9 @@
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
                         <c-heading-bar name="New Releases" :showArrows="false" :showBackground="false">
                             <template slot="additional-action">
-                                <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" @click_up=""  @click_down="" />
-                                <c-heading-bar-fields name="Reviews" icon="fas fa-star" @click_up=""  @click_down="" />
-                                <c-heading-bar-fields name="Date" icon="fas fa-calendar" @click_up=""  @click_down="" />
+                                <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @click_down="" />
+                                <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
+                                <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
                             </template>
                         </c-heading-bar>
 
@@ -35,8 +35,8 @@
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
                         <c-heading-bar name="Top 20 Items" :showArrows="false" :showBackground="false">
                             <template slot="additional-action">
-                                <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" @click_up=""  @click_down="" />
-                                <c-heading-bar-fields name="Trading" icon="fas fa-star" @click_up=""  @click_down="" />
+                                <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
+                                <c-heading-bar-fields name="Trading" icon="star" @clickUp=""  @clickDown="" />
                             </template>
                         </c-heading-bar>
 
@@ -50,9 +50,9 @@
                     <div class="col-12 margin-bottom-30">
                         <c-heading-bar name="What's up with your content" :showArrows="false" :showBackground="false">
                             <template slot="additional-action">
-                                <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" @click_up=""  @click_down="" />
-                                <c-heading-bar-fields name="Reviews" icon="fas fa-star" @click_up=""  @click_down="" />
-                                <c-heading-bar-fields name="Date" icon="fas fa-calendar" @click_up=""  @click_down="" />
+                                <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
+                                <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
+                                <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
                             </template>
                         </c-heading-bar>
 
@@ -72,19 +72,24 @@
                         </div>
                     </div>
                     <div class="col-12 margin-bottom-30 d-none">
-                        <c-heading-bar name="Trending Projects" :showArrows="false"
-                                       :showBackground="false"></c-heading-bar>
+                        <c-heading-bar
+                            name="Trending Projects"
+                            :showArrows="false"
+                            :showBackground="false"
+                        />
                         <div class="img_slider w-100">
-                            <div class="owl-carousel"
-                                 ref="rangeSlider"
-                                 data-nav-dots="false"
-                                 data-nav-arrow="true"
-                                 data-items="4"
-                                 data-sm-items="1"
-                                 data-md-items="3"
-                                 data-lg-items="4"
-                                 data-loop="true"
-                                 data-autoplay="false">
+                            <div
+                                class="owl-carousel"
+                                ref="rangeSlider"
+                                data-nav-dots="false"
+                                data-nav-arrow="true"
+                                data-items="4"
+                                data-sm-items="1"
+                                data-md-items="3"
+                                data-lg-items="4"
+                                data-loop="true"
+                                data-autoplay="false"
+                            >
                                 <c-projects-card
                                     v-for="(project, index) in trending_projects"
                                     :key="index"

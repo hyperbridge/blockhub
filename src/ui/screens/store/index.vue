@@ -30,13 +30,15 @@
                 <div class="row product-grid margin-bottom-30">
                     <div class="col-12">
                         <c-block class="margin-bottom-30" :onlyContentBg="true" :noGutter="true">
-                            <c-heading-bar  slot="title"
-                                            class="mb-0"
-                                            name="New Releases"
-                                            :showArrows="showArrowsState(new_products, 3)"
-                                            :showBackground="true"
-                                            @prevClick="demo_products_sl.slidePrev()"
-                                            @nextClick="demo_products_sl.slideNext()" />
+                            <c-heading-bar
+                                slot="title"
+                                class="mb-0"
+                                name="New Releases"
+                                :showArrows="showArrowsState(new_products, 3)"
+                                :showBackground="true"
+                                @prevClick="demo_products_sl.slidePrev()"
+                                @nextClick="demo_products_sl.slideNext()"
+                            />
 
                             <c-swiper :options="demoSlider" ref="demo_products_sl" style="margin: 0 -10px">
                                 <c-slide v-for="product in new_products" :key="product.id">
@@ -47,13 +49,15 @@
                         </c-block>
 
                         <c-block class="margin-bottom-30" :onlyContentBg="true" :noGutter="true">
-                            <c-heading-bar  slot="title"
-                                            class="mb-0"
-                                            name="Summer Sale"
-                                            :showArrows="showArrowsState(sale_products, 3)"
-                                            :showBackground="true"
-                                            @prevClick="summer_sale_sl.slidePrev()"
-                                            @nextClick="summer_sale_sl.slideNext()" />
+                            <c-heading-bar
+                                slot="title"
+                                class="mb-0"
+                                name="Summer Sale"
+                                :showArrows="showArrowsState(sale_products, 3)"
+                                :showBackground="true"
+                                @prevClick="summer_sale_sl.slidePrev()"
+                                @nextClick="summer_sale_sl.slideNext()"
+                            />
 
                             <c-swiper :options="saleSlider" ref="summer_sale_sl" style="margin: 0 -10px" v-if="sale_products.length>0">
                                 <c-slide v-for="(product, index) in sale_products" :key="index">
@@ -99,9 +103,9 @@
                         >
                             <template slot="additional-action">
                                 <span class="font-weight-bold">Sort by</span>
-                                <c-heading-bar-fields name="Date" icon="fas fa-calendar" @click_up=""  @click_down="" />
-                                <c-heading-bar-fields name="Best Reviews" icon="fas fa-star" @click_up=""  @click_down="" />
-                                <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" @click_up=""  @click_down="" />
+                                <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
+                                <c-heading-bar-fields name="Best Reviews" icon="star" @clickUp=""  @clickDown="" />
+                                <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
                             </template>
                         </c-heading-bar>
                         <div class="filter-blk">
@@ -157,8 +161,8 @@
                                 :headingTabs="['Top 10 Items', 'Most Wanted', 'Top 10 Prices']"
                             >
                                 <template slot="additional-action">
-                                    <c-heading-bar-fields name="Trending" @click_up=""  @click_down="" />
-                                    <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" @click_up=""  @click_down="" />
+                                    <c-heading-bar-fields name="Trending" @clickUp=""  @clickDown=""/>
+                                    <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown=""/>
                                 </template>
                             </c-heading-bar>
                             <div class="filter-blk">
@@ -176,19 +180,17 @@
                                 <div class="w-50" v-for="(item, index) in assets" :key="index">
                                     <c-assets-list-item
                                         :item="item"
-                                        :isTransparent="true">
-                                <span class="mr-3">
-                                    <i class="fas fa-box"></i>
-                                    {{ item.count }}
-                                </span>
+                                        :isTransparent="true"
+                                    >
                                         <span class="mr-3">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    {{ item.price }}
-                                </span>
+                                            <c-icon name="box"/>{{ item.count }}
+                                        </span>
                                         <span class="mr-3">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    3.45
-                                </span>
+                                            <c-icon name="dollar-sign"/>{{ item.price }}
+                                        </span>
+                                        <span class="mr-3">
+                                            <c-icon name="dollar-sign"/>3.45
+                                        </span>
                                     </c-assets-list-item>
                                 </div>
                             </div>

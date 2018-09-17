@@ -10,11 +10,11 @@
             <h5>{{ item.title }}</h5>
             <slot>
                 <span class="float-left price">
-                    <i class="fas fa-dollar-sign"></i>
+                    <c-icon name="dollar-sign"/>
                     {{ item.price }}
                 </span>
                 <span class="float-right box">
-                    <i class="fas fa-box"></i>
+                    <c-icon name="box"/>
                     {{ item.count }}
                 </span>
             </slot>
@@ -24,6 +24,7 @@
 
 <script>
     export default {
+        name: 'assets-list-item',
         props: {
             item: Object,
             isTransparent:{
