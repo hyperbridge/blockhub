@@ -11,7 +11,7 @@ const router = new Router({
     linkActiveClass: 'is-active',
     routes: [
         {
-            path: '/home',
+            path: '/',
             name: 'Home',
             component: () => import('@/ui/screens/home')
         },
