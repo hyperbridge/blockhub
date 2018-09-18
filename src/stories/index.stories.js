@@ -3080,6 +3080,38 @@ storiesOf('Product Overview', module)
             </div>`
     }))
 
+import Input from '@/ui/components/inputs';
+import InputSearcher from '@/ui/components/inputs/searcher';
+storiesOf('Inputs', module)
+    .add('default', () => ({
+        components: { 'c-input': Input },
+        data() {
+            return {
+                text: ''
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-input v-model="text" placeholder="Start typing"/>
+                <span style="color: #fff">{{ text }}</span>
+            </div>
+        `
+    }))
+    .add('Searcher', () => ({
+        components: { 'c-input-searcher': InputSearcher },
+        data() {
+            return {
+                text: ''
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-input-searcher v-model="text"/>
+                <span style="color: #fff">{{ text }}</span>
+            </div>
+        `
+    }))
+
 
 
 
