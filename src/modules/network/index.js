@@ -15,7 +15,11 @@ const updateState = () => {
         ...db.network.config.data[0]
     }
 
-    state = { ...rawData }
+    const normalizedData = normalize(rawData, {
+    })
+
+    state = { ...rawData, ...normalizedData.entities }
+
 }
 
 updateState()

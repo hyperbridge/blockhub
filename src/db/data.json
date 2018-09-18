@@ -1345,7 +1345,11 @@
                         "special_info": "ATI® RADEON® HD 6000 Series"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "new",
+                    "featured",
+                    "upcoming"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -1429,7 +1433,10 @@
                         "video_card": "OpenGL 3.0+ support (2.1 with ARB extensions acceptable)"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "upcoming",
+                    "trending"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -1552,6 +1559,12 @@
                     }
                 ],
                 "system_tags": [
+                    "sale",
+                    "new",
+                    "featured",
+                    "trending",
+                    "top_seller",
+                    "specials"
                 ],
                 "type": "game",
                 "downloads": 0,
@@ -1649,7 +1662,10 @@
                         "internet": "INTERNET CONNECTION REQUIRED FOR ONLINE GAMING AND GAME ACTIVATION"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "top_seller",
+                    "specials"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -1835,6 +1851,8 @@
                     }
                 ],
                 "system_tags": [
+                    "new",
+                    "featured"
                 ],
                 "type": "game",
                 "downloads": 0,
@@ -1965,7 +1983,10 @@
                         "other": "INTERNET CONNECTION REQUIRED FOR ONLINE GAMING"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "trending",
+                    "top_seller"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -2070,7 +2091,10 @@
                         "sound": "DirectX 8.1 compatible sound card"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "sale",
+                    "specials"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -2158,7 +2182,9 @@
                         "additional": "Internet Connection required for multiplayer"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "upcoming"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -2277,6 +2303,9 @@
                     }
                 ],
                 "system_tags": [
+                    "sale",
+                    "new",
+                    "specials"
                 ],
                 "type": "game",
                 "downloads": 0,
@@ -2407,6 +2436,7 @@
                     }
                 ],
                 "system_tags": [
+                    "sale"
                 ],
                 "type": "game",
                 "downloads": 0,
@@ -2557,6 +2587,8 @@
                     }
                 ],
                 "system_tags": [
+                   "top_seller",
+                   "specials"
                 ],
                 "type": "game",
                 "downloads": 0,
@@ -2667,7 +2699,10 @@
                         "sound": "any OS compatible"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "new",
+                    "trending"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -2772,7 +2807,10 @@
                         "directx": "Microsoft® DirectX® 11.0"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "sale",
+                    "new"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -2858,7 +2896,9 @@
                         "os": "win"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "specials"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -2923,7 +2963,9 @@
                         "sound": "Windows compatible sound card"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "sale"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -3004,7 +3046,9 @@
                         "storage": "10 GB available space"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "sale"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -3088,7 +3132,9 @@
                         "graphics": "NVIDIA GeForce 6 series, ATI 1300XT series"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "sale"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -3283,7 +3329,10 @@
                         "other": "3D Vision-Ready Display"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "upcoming",
+                    "trending"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -3495,7 +3544,10 @@
                         "sound_card": "OpenAL Compatible Sound Card"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "top_seller",
+                    "specials"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -3617,7 +3669,9 @@
                         "special_info": "*    All MacBooks released since Early 2016"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "featured"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -3768,7 +3822,10 @@
                         "hard_drive": "25 GB HD space"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "sale",
+                    "frontpage"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -3879,7 +3936,9 @@
                         "opengl": "2.1"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "specials"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -3973,7 +4032,10 @@
                         "other": "Internet connection required"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "specials",
+                    "sale"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
@@ -4100,7 +4162,9 @@
                         "disk_space": "Around 7 GB"
                     }
                 ],
-                "system_tags": [],
+                "system_tags": [
+                    "sale"
+                ],
                 "type": "game",
                 "downloads": 0,
                 "plans": [],
