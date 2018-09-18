@@ -54,15 +54,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="badges-list">
-                            <div class="item">
-                                <i class="fas fa-trophy"></i>
-                            </div>
-                            <div class="item">
-                            </div>
-                            <div class="item">
-                            </div>
-                        </div>
+                        <c-badges :icons="['trophy','gem']" />
                     </div>
                     <div class="col-lg-4">
                         <div class="editor text-right" v-if="editing" style="margin-bottom: 30px">
@@ -237,6 +229,7 @@
             'c-layout': () => import('@/ui/layouts/default'),
             'c-block': () => import('@/ui/components/block'),
             'c-tags-list': () => import('@/ui/components/tags'),
+            'c-badges': () => import('@/ui/components/projects/badges.vue')
         },
         data() {
             return {
@@ -406,109 +399,6 @@
         &:after{
             top: unset;
             bottom: -20px;
-        }
-    }
-    .posts-timeline__post-item{
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        .post-date{
-            font-size: 13px;
-            font-weight: bold;
-            color: #fff;
-        }
-        h3{
-            font-size: 22px;
-        }
-        &:after{
-            content: "";
-            position: absolute;
-            top: 30px;
-            width: 20px;
-            height: 20px;
-            background: #fff;
-            border-radius: 100%;
-            display: inline-block;
-        }
-        &:before{
-            content: "";
-            position: absolute;
-            top: 0px;
-            width: 2px;
-            bottom: 0;
-            background: rgba(255, 255, 255, .2);
-            border-radius: 0;
-            display: inline-block;
-        }
-        &.left-side{
-            text-align: right;
-            padding-right: 50px;
-            margin-right: -1px;
-            .c-btn{
-                margin-right: 0;
-            }
-            &:after{
-                right: -10px;
-            }
-            &:before{
-                right: -1px;
-            }
-        }
-        &.right-side{
-            text-align: left;
-            align-self: flex-end;
-            padding-left: 50px;
-            .c-btn{
-                margin-left: 0;
-            }
-            &:after{
-                left: -10px;
-            }
-            &:before{
-                left: -1px;
-            }
-        }
-        &.centered{
-            align-self: center;
-            padding: 40px;
-            text-align: center;
-            &:after{
-                left: calc(50% - 10px);
-            }
-            &:before{
-                content: "";
-                top: 0px;
-                left: calc( 50% - 1px);
-                height: 30px;
-                background: rgba(255, 255, 255, .2);
-                width: 2px;
-                position: absolute;
-                border-radius: 0;
-            }
-            .posts-timeline__post--content{
-                padding: 25px;
-                h3{
-                    padding: 15px 0 0;
-                }
-            }
-        }
-        a:hover{
-            text-decoration: none;
-        }
-        &:hover{
-            &:after{
-                background-color: rgb(67, 201, 129);
-            }
-        }
-    }
-    .posts-timeline__post--content{
-        padding: 15px;
-        background: rgba(0, 0, 0, .13);
-        border-radius: 5px;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, .2);
-        &:hover{
-            background: rgba(0, 0, 0, .2);
         }
     }
 </style>

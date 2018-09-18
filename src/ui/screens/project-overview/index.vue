@@ -61,15 +61,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <div class="badges-list">
-                                    <div class="item">
-                                        <i class="fas fa-trophy"></i>
-                                    </div>
-                                    <div class="item">
-                                    </div>
-                                    <div class="item">
-                                    </div>
-                                </div>
+                                <c-badges :icons="['trophy','gem']" />
                             </div>
                             <div class="col-lg-4">
                                 <div class="editor text-right" v-if="editing" style="margin-bottom: 30px">
@@ -473,7 +465,8 @@
             'c-community-spotlight': () => import('@/ui/components/community-spotlight'),
             'c-heading-bar': () => import('@/ui/components/heading-bar'),
             'c-review': () => import('@/ui/components/review'),
-            'c-progress-bar': () => import('@/ui/components/progress-bar')
+            'c-progress-bar': () => import('@/ui/components/progress-bar'),
+            'c-badges': () => import('@/ui/components/projects/badges.vue')
         },
         data() {
             return {
@@ -752,31 +745,6 @@
     .project__description {
         padding: 15px;
         font-size: 16px;
-    }
-
-    .badges-list {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-top: 8px;
-        .item {
-            margin: 7px;
-            border-radius: 5px;
-            background: #FADC72;
-            width: 36px;
-            position: relative;
-            font-size: 24px;
-            text-align: center;
-            line-height: 36px;
-            color: #134269;
-            &:before {
-                content: "";
-                padding-top: 100%;
-                float: left;
-            }
-        }
-
     }
 
     .project__progress {
