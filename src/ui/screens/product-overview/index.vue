@@ -167,7 +167,8 @@
 
         if (product.images.preview && product.images.preview.length) {
             const header = window.document.getElementById('header-bg');
-            header.style['background-image'] = 'url(' + product.images.preview[0] + ')';
+            const randomImage = Math.floor(Math.random() * product.images.preview.length);
+            header.style['background-image'] = 'url(' + product.images.preview[randomImage] + ')';
             header.style['background-size'] = 'cover';
         }
 

@@ -1471,7 +1471,7 @@
                         "/static/img/products/doom-20087/preview-06.jpg"
                     ]
                 },
-                "video": "/static/videos/products/doom-20087/.mp4",
+                "video": "/static/videos/products/doom-20087/trailer.mp4",
                 "genre": "Action",
                 "release_date": "12 May, 2016",
                 "developer": "id Software",
@@ -1699,7 +1699,7 @@
                         "/static/img/products/teeworlds-20137/preview-05.jpg"
                     ]
                 },
-                "video": "/static/videos/products/teeworlds-20137/.mp4",
+                "video": "/static/videos/products/teeworlds-20137/trailer.mp4",
                 "genre": "Action",
                 "release_date": "27 May, 2007",
                 "developer": "Teeworlds Team",
@@ -2021,7 +2021,7 @@
                         "/static/img/products/arcania-4380/preview-06.jpg"
                     ]
                 },
-                "video": "/static/videos/products/arcania-4380/.mp4",
+                "video": "/static/videos/products/arcania-4380/trailer.mp4",
                 "genre": "RPG",
                 "release_date": "11 Oct, 2010",
                 "developer": "Spellbound Studios",
@@ -2129,7 +2129,7 @@
                         "/static/img/products/pride-of-nations-4591/preview-06.jpg"
                     ]
                 },
-                "video": "/static/videos/products/pride-of-nations-4591/.mp4",
+                "video": "/static/videos/products/pride-of-nations-4591/trailer.mp4",
                 "genre": "Simulation",
                 "release_date": "8 Jun, 2011",
                 "developer": "Ageod",
@@ -2346,7 +2346,7 @@
                         "/static/img/products/kingdom-come-deliverance-20030/preview-06.jpg"
                     ]
                 },
-                "video": "/static/videos/products/kingdom-come-deliverance-20030/.mp4",
+                "video": "/static/videos/products/kingdom-come-deliverance-20030/trailer.mp4",
                 "genre": "Action",
                 "release_date": "13 Feb, 2018",
                 "developer": "Warhorse Studios",
@@ -2477,7 +2477,7 @@
                         "/static/img/products/fishing-planet-20121/preview-06.jpg"
                     ]
                 },
-                "video": "/static/videos/products/fishing-planet-20121/.mp4",
+                "video": "/static/videos/products/fishing-planet-20121/trailer.mp4",
                 "genre": "Free to Play",
                 "release_date": "11 Aug, 2015",
                 "developer": "Fishing Planet LLC",
@@ -2737,7 +2737,7 @@
                         "/static/img/products/sniper-elite-v2-4275/preview-06.jpg"
                     ]
                 },
-                "video": "/static/videos/products/sniper-elite-v2-4275/.mp4",
+                "video": "/static/videos/products/sniper-elite-v2-4275/trailer.mp4",
                 "genre": "Action",
                 "release_date": "3 May, 2012",
                 "developer": "Rebellion",
@@ -3367,7 +3367,7 @@
                         "/static/img/products/portal-2-4841/preview-06.jpg"
                     ]
                 },
-                "video": "/static/videos/portal-2-4841/.mp4",
+                "video": "/static/videos/portal-2-4841/trailer.mp4",
                 "genre": "Action",
                 "release_date": "18 Apr, 2011",
                 "developer": "Valve",
@@ -3692,6 +3692,8 @@
             {
                 "id": 22,
                 "name": "The Witcher 2: Assassins of Kings Enhanced Edition",
+                "price": 29.99,
+                "old_price": 34.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/the-witcher-2-assassins-of-kings-enhanced-edition-4664/med-tile.jpg",

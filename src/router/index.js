@@ -16,6 +16,11 @@ const router = new Router({
             component: () => import('@/ui/screens/home')
         },
         {
+            path: '/home',
+            name: 'Home',
+            component: () => import('@/ui/screens/home')
+        },
+        {
             path: '/sitemap',
             name: 'Sitemap',
             component: () => import('@/ui/screens/sitemap')
