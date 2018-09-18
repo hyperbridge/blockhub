@@ -10,7 +10,7 @@
                         <c-block>
                             <c-heading-bar name="New Releases" :showArrows="false" :showBackground="false">
                                 <template slot="additional-action">
-                                    <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @click_down="" />
+                                    <!--<c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @click_down="" />-->
                                     <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
                                     <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
                                 </template>
@@ -23,14 +23,6 @@
                                 :items="marketplace.new_products.slice(0,5)"
                                 itemBg="transparent"
                             />
-
-                                <c-game-grid
-                                    :itemInRow=1
-                                    :showRating=false
-                                    :showTime=true
-                                    v-bind:items="new_games"
-                                    itemBg="transparent"
-                                ></c-game-grid>
                         </c-block>
                     </div>
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
@@ -47,12 +39,6 @@
                                 itemInRow="2"
                             />
                             <c-content-navigation/>
-
-                                <c-assets-list-item
-                                    :items="assets"
-                                    itemInRow="2"
-                                />
-                                <c-content-navigation/>
                         </c-block>
                     </div>
                     <div class="col-12 margin-bottom-30">
@@ -141,56 +127,6 @@
             'c-main-banner': () => import('@/ui/components/banner/index'),
         },
         data: () => ({
-            assets: [
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                }
-            ],
             content_news: [
                 {
                     game: {

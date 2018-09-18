@@ -27,7 +27,7 @@
                     </div>
                 </div>
 
-                <div class="row product-grid margin-bottom-30">
+                <div class="row">
                     <div class="col-12">
                         <c-block class="margin-bottom-30" :onlyContentBg="true" :noGutter="true">
                             <c-heading-bar
@@ -69,15 +69,15 @@
                     </div>
                 </div>
 
-                <div class="row margin-top-40 align-items-stretch">
-                    <div class="col-12 col-md-4">
+                <div class="row align-items-stretch">
+                    <div class="col-12 col-md-4 margin-bottom-30">
                         <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="/#/home">
                             <h4 class="text-yellow">summer block</h4>
                             <h3>Championship</h3>
                             <p>You won't believe the prize!</p>
                         </c-banner>
                     </div>
-                    <div class="col-12 col-md-8">
+                    <div class="col-12 col-md-8 margin-bottom-30">
                         <c-banner :imgSrc="'/static/img/banners/banner-2.png'" link="/#/home">
                             <div class="align-items-start">
                                 <h3 class="text-yellow margin-bottom-5">top<br>curators</h3>
@@ -86,48 +86,49 @@
                         </c-banner>
                     </div>
 
-                <div class="row product-grid margin-bottom-30">
-                    <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                        <c-heading-bar
-                            slot="title"
-                            class="mb-0"
-                            :headingTabs="[
+                    <div class="col-12 margin-bottom-30">
+                        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                            <c-heading-bar
+                                slot="title"
+                                class="mb-0"
+                                :headingTabs="[
                                 { title: 'Top Selling', category: 'top_selling_products' },
                                 { title: 'New Releases', category: 'new_products' },
                                 { title: 'Upcoming', category: 'upcoming_products' }
                             ]"
-                            @changeTab="itemsCategory = $event"
-                        >
-                            <template slot="additional-action">
-                                <span class="font-weight-bold">Sort by</span>
-                                <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
-                                <c-heading-bar-fields name="Best Reviews" icon="star" @clickUp=""  @clickDown="" />
-                                <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
-                            </template>
-                        </c-heading-bar>
-                        <div class="filter-blk">
-                            <div class="d-flex align-items-center">
-                                <c-dropdown id="test" name="Filter by Genre" :showBg="true">
-                                    <a href="#3">RPG</a>
-                                    <a href="#3">ACTION</a>
-                                    <a href="#3">Cars</a>
-                                </c-dropdown>
-                                <c-searcher customClass="mb-0" />
+                                @changeTab="itemsCategory = $event"
+                            >
+                                <template slot="additional-action">
+                                    <span class="font-weight-bold">Sort by</span>
+                                    <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
+                                    <c-heading-bar-fields name="Best Reviews" icon="star" @clickUp=""  @clickDown="" />
+                                    <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
+                                </template>
+                            </c-heading-bar>
+                            <div class="filter-blk">
+                                <div class="d-flex align-items-center">
+                                    <c-dropdown id="test" name="Filter by Genre" :showBg="true">
+                                        <a href="#3">RPG</a>
+                                        <a href="#3">ACTION</a>
+                                        <a href="#3">Cars</a>
+                                    </c-dropdown>
+                                    <c-searcher customClass="mb-0" />
+                                </div>
+                                <c-button status="info" icon_hide>All New Releases</c-button>
                             </div>
-                            <c-button status="info" icon_hide>All New Releases</c-button>
-                        </div>
-                        <c-game-grid
-                            :itemInRow=2
-                            :showRating=false
-                            :showTime=true
-                            :items="marketplace[itemsCategory]"
-                            itemBg="transparent"
-                        />
-                        <c-content-navigation />
-                    </c-block>
+                            <c-game-grid
+                                :itemInRow=2
+                                :showRating=false
+                                :showTime=true
+                                :items="marketplace[itemsCategory]"
+                                itemBg="transparent"
+                            />
+                            <c-content-navigation />
+                        </c-block>
+                    </div>
                 </div>
 
-                <div class="row margin-bottom-70 margin-top-40 align-items-stretch">
+                <div class="row margin-bottom-50 margin-top-20 align-items-stretch">
                     <div class="col-12 col-md-8">
                         <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/home">
                             <div class="d-flex justify-content-between align-items-center">
@@ -285,56 +286,6 @@ export default {
         return {
             itemsCategory: 'top_selling_products',
             curators_reviews: [curator_review, curator_review, curator_review],
-            assets: [
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                }
-            ],
             content_news: [
                 {
                     game: {
