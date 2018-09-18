@@ -216,6 +216,7 @@
                     :reviews="curators_reviews"
                 />
             </div>
+            </div>
         </div>
     </c-layout>
 </template>

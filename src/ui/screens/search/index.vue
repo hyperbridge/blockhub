@@ -101,8 +101,8 @@
     export default {
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
-            'c-checkbox': () => import('@/ui/components/checkbox/checbox.vue'),
-            'c-checkbox-group': () => import('@/ui/components/checkbox/checbox-group.vue'),
+            'c-checkbox': () => import('@/ui/components/checkbox/'),
+            'c-checkbox-group': () => import('@/ui/components/checkbox/group'),
             'c-block': () => import('@/ui/components/block'),
             'c-searcher': () => import('@/ui/components/searcher'),
         },
