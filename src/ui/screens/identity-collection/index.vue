@@ -6,7 +6,7 @@
                     <div class="col-12">
                         <c-block title="Collections">
                             <div class="collections-container">
-                                <div class="collections-container__item"  v-for="(item, index) in collections" :key="index" v-if="index < 6">
+                                <div class="collections-container__item" v-for="(item, index) in collections" :key="index" v-if="index < 6">
                                     <c-collection-item :item="item" />
                                 </div>
                             </div>
