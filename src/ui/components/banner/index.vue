@@ -27,7 +27,7 @@
             video: Object
         },
         components:{
-            'c-button': () => import('@/ui/components/buttons')
+            'c-button': () => import('@/ui/components/buttons'),
         },
         computed:{
             bannerImg(){

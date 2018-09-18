@@ -339,6 +339,12 @@ export default {
             navigationComponent: this.navigationKey || false
         }
     },
+    created(){
+        console.log('created state');
+        document.addEventListener('onerror', function(event) {
+            console.log('img err');
+        });
+    },
     updated() {
     },
     methods: {
@@ -364,6 +370,9 @@ export default {
             $('.js-go-lists').click(function() {
                 owl.trigger('to.owl.carousel', [3])
             })
+        },
+        brokenImg(event){
+            event.target.src = 'https://www.golositadelsalento.it/wp-content/uploads/2018/07/No_Image_Available-21-1.jpg'
         }
     },
     mounted: function () {
