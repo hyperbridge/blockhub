@@ -9,6 +9,7 @@
             <img
                 :src="items[active_item]"
                 @click="show_modal = true"
+                @error="brokenImg"
             />
             <div v-if="run_slideshow" class="screen-gallery__progress-bar"></div>
         </div>
@@ -21,6 +22,7 @@
                     :src="url"
                     :class="{ 'inactive-item': index !== active_item }"
                     @click="active_item = index"
+                    @error="brokenImg"
                 />
             </li>
         </ul>
@@ -69,6 +71,9 @@ export default {
             clearInterval(this.interval);
             this.run_slideshow = status;
             if (status) this.slideshow();
+        },
+        brokenImg(event){
+            event.target.src = 'https://www.golositadelsalento.it/wp-content/uploads/2018/07/No_Image_Available-21-1.jpg'
         }
     },
     mounted() {

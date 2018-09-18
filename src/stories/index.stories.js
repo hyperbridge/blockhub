@@ -2046,15 +2046,14 @@ storiesOf('Gallery', module)
         components: {ScreenGallery},
         data() {
             return {
-                main: 'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012',
                 items: [
-                    'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_64eb760f9a2b67f6731a71cce3a8fb684b9af267.1920x1080.jpg?t=1529405012',
+                    'https://steamcdn-a.akamaihd.net//apps/292030/ss_64eb760f9a2b67f6731a71cce3a8fb684b9af267.1920x1080.jpg?t=1529405012',
                     'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_eda99e7f705a113d04ab2a7a36068f3e7b343d17.1920x1080.jpg?t=1529405012',
                     'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_d5b80eb63c12a6484f26796f3e34410651bba068.1920x1080.jpg?t=1529405012',
                 ]
             }
         },
-        template: `<screen-gallery :main="main" :items="items" class="col-6"/>`
+        template: `<screen-gallery :items="items" class="col-6"/>`
     }))
 
 import ProductCardDynamic from '@/ui/components/store/product-card-dynamic';
