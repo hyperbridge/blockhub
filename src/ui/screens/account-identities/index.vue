@@ -8,9 +8,16 @@
                     </div>
                     <div class="col-12 margin-bottom-40 my_identity">
                         <c-user-card
-                            :user="newIdentity"
-                            @updateIdentity="(prop, val) => newIdentity[prop] = val"
+                            v-if="defaultIdentity"
+                            :user="defaultIdentity"
+                            @updateIdentity="(prop, val) => defaultIdentity[prop] = val"
                         />
+                        <p v-else-if="!identities.length">
+                            You don't have any identities. Create a new one.
+                        </p>
+                        <p v-else>
+                            You don't have default identity.
+                        </p>
                         <div class="user-info">
                             <h3>Mr. Satoshi Nakamoto</h3>
                             <h4>Osaka, Japan</h4>
@@ -47,9 +54,6 @@
                             icon="user-plus"
                             @click="createIdentity"
                         > Add new</c-button>
-                        <c-checkbox v-model="newIdentity.default">
-                            Set identity as default
-                        </c-checkbox>
                     </div>
 
                     <div class="col-12">
@@ -90,7 +94,7 @@
                                 :user="identity"
                                 :previewMode="!identity.edit"
                                 :class="{ 'default': identity.default }"
-                                @updateIdentity="(prop, val) => identity[prop] = val"
+                                @updateIdentity="(prop, val) => identityClone[prop] = val"
                             />
                             <div class="profile__action">
                                 <c-button
@@ -103,17 +107,17 @@
                                     <c-button
                                         status="share"
                                         icon="pen"
-                                        @click="editIdentity(false, identity)"
-                                    >{{ identity.edit ? 'Save' : 'Edit' }}</c-button>
-                                    <c-button @click="editIdentity(false, identity, 'cancel')">
-                                        Cancel
-                                    </c-button>
+                                        @click="saveIdentity(identity)"
+                                    >Save</c-button>
+                                    <c-button
+                                        @click="identity.edit = false"
+                                    >Cancel</c-button>
                                 </template>
                                 <c-button
                                     v-else
                                     status="share"
                                     icon="pen"
-                                    @click="editIdentity(true, identity)"
+                                    @click="editIdentity(identity)"
                                 >Edit</c-button>
                                 <c-button
                                     status="danger"
@@ -207,16 +211,21 @@
                 if (this.defaultIdentity) this.defaultIdentity.default = false;
                 identity.default = true;
             },
-            editIdentity(status, identity, cancel) {
-                identity.edit = status ? true : false;
-
-                if (cancel) {
-                    for (let key in identity) {
-                        identity[key] = this.identityCopy[key];
-                    }
+            editIdentity(identity) {
+                if (!this.editedIdentity) {
+                    identity.edit = true;
+                } else {
+                    this.$snotify.warning('Stop editing the current identity before editing next one');
                 }
+            },
+            saveIdentity(identity)  {
+                for (let key in identity) {
+                    identity[key] = this.identityClone[key];
+                }
+                identity.edit = false;
+            },
+            editIdent() {
 
-                this.identityCopy = status || !cancel ? {...identity, edit: false } : {};
             },
             deleteIdentity(identity) {
                 const { removeIdentity } = this;
@@ -230,6 +239,10 @@
             },
             createIdentity() {
                 const { newIdentity } = this;
+                this.identities.push({ ...newIdentity, id: Math.floor(Math.random() * 100) });
+                /*
+                    //  Form check logic
+
                 if (!Object.values(newIdentity).some(val => val == null || !val.toString().length)) {
                     if (newIdentity.default && this.defaultIdentity) {
                         this.defaultIdentity.default = false;
@@ -239,14 +252,21 @@
                     this.newIdentity.wallet = '';
                     this.newIdentity.default = false;
                 }
+                */
             }
         },
         computed: {
-            identitiesC() {
+            networkIdentites() {
                 return this.$store.state.network.identities;
             },
             defaultIdentity() {
                 return this.identities.find(identity => identity.default);
+            },
+            editedIdentity() {
+                return this.identities.find(identity => identity.edit);
+            },
+            identityClone() {
+                return this.editedIdentity ? { ...this.editedIdentity } : {};
             },
             isEditing() {
                 return this.identities.find(identity => identity.edit);
@@ -254,7 +274,7 @@
             filteredIdentities() {
                 return this.identities
                     .filter(identity => identity.name.toLowerCase().includes(this.filterPhrase.toLowerCase()))
-                    .sort((a, b) => (a.name > b.name) && !this.isEditing ? (this.sortAsc ? 1 : -1) : 0)
+                    .sort((a, b) => (a.name > b.name) ? (this.sortAsc ? 1 : -1) : 0)
             }
         }
     }
