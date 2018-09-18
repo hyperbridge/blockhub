@@ -370,35 +370,4 @@
 </script>
 
 <style lang="scss" scoped>
-    .posts-timeline{
-        display: flex;
-        flex-direction: column;
-    }
-    .post-timeline__year{
-        padding: 3px 20px;
-        border-radius: 5px;
-        background: #fff;
-        text-align: center;
-        color: #30304B;
-        margin: 20px auto;
-        font-weight: bold;
-        position: relative;
-        display: inline-flex;
-        &:after,
-        &:before{
-            content: "";
-            position: absolute;
-            left: 50%;
-            margin-left: -1px;
-            display: inline-block;
-            width: 2px;
-            background: rgba(255, 255, 255, .2);
-            height: 30px;
-            top: -20px;
-        }
-        &:after{
-            top: unset;
-            bottom: -20px;
-        }
-    }
 </style>

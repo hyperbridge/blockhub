@@ -3097,8 +3097,69 @@ storiesOf('Inputs', module)
         `
     }))
 
-
-
+import TimelineList from '@/ui/components/timeline/list.vue';
+import TimelineItem from '@/ui/components/timeline/item.vue';
+storiesOf('Timeline', module)
+    .add('item', () => ({
+        components:{
+            'c-timeline': TimelineList,
+            'c-timeline-item': TimelineItem
+        },
+        template: `<div class="row">
+                        <div class="col">
+                            <c-timeline-item />
+                        </div>
+                    </div>`
+    }))
+    .add('list', () => ({
+        components:{
+            'c-timeline': TimelineList,
+            'c-timeline-item': TimelineItem
+        },
+        data(){
+            return{
+                items:{
+                    "01":{
+                        posts:[
+                            {
+                                id: 1,
+                                title: 'Thank you, friends!',
+                                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                date: '09-19-2018',
+                            },
+                            {
+                                id: 2,
+                                title: 'This is second post!',
+                                text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                date: '09-29-2018',
+                            }
+                        ]
+                    },
+                    "02":{
+                        posts:[
+                            {
+                                id: 1,
+                                title: 'Thank you, friends!',
+                                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                date: '09-19-2018',
+                            },
+                            {
+                                id: 2,
+                                title: 'This is second post!',
+                                text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                date: '09-29-2018',
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        template: `<div class="row">
+                            <div class="col">
+                                <c-timeline :items="items" />
+                            </div>
+                        </div>`
+    }))
 
 /*
      Dynamic import - test version
