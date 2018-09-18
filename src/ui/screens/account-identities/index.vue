@@ -215,7 +215,7 @@
                 if (!this.editedIdentity) {
                     identity.edit = true;
                 } else {
-                    this.$snotify.warning('Stop editing the current identity before editing next one');
+                    this.$snotify.warning('Stop editing the current identity before editing the next one');
                 }
             },
             saveIdentity(identity)  {
@@ -223,9 +223,6 @@
                     identity[key] = this.identityClone[key];
                 }
                 identity.edit = false;
-            },
-            editIdent() {
-
             },
             deleteIdentity(identity) {
                 const { removeIdentity } = this;

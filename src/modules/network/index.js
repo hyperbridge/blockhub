@@ -16,9 +16,6 @@ const updateState = () => {
     }
 
     const normalizedData = normalize(rawData, {
-        account: [schema.account],
-        wallets: [schema.wallet],
-        identities: [schema.identity]
     })
 
     state = { ...rawData, ...normalizedData.entities }
