@@ -3,25 +3,36 @@ export default {
     name: 'c-img',
     props: {
         src: String,
-        alt: String
+        alt: String,
+        class: String
     },
     data() {
         return {
-            blank: 'https://www.golositadelsalento.it/wp-content/uploads/2018/07/No_Image_Available-21-1.jpg',
-            source: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif'
+            blank: '/static/img/no_img.jpg',
+            loader: '/static/img/loader.gif',
+            error: false,
+            loaded: false
         }
     },
     render(h) {
         return h('img', {
             on: {
-                error: () => this.source = this.blank,
-                load: () => this.source = this.src
+                error: () => {
+                    if (!this.error) this.error = true;
+                },
+                load: () => this.loaded = true
             },
             attrs: {
-                src: this.source,
-                alt: this.alt
+                src: this.dynamicSrc,
+                alt: this.alt,
+                class: this.class
             }
         });
+    },
+    computed: {
+        dynamicSrc() {
+            return !this.src || this.error ? (this.loaded ? this.blank : this.loader) : this.src;
+        }
     }
 }
 </script>
