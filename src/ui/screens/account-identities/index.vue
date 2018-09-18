@@ -62,6 +62,7 @@
                                 <span class="text">Name</span>
                                 <c-icon name="user"/>
                                 <c-button-arrows
+                                    :activeUp="sortAsc"
                                     @clickUp="sortAsc = true"
                                     @clickDown="sortAsc = false"
                                 />
