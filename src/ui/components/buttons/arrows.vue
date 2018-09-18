@@ -2,13 +2,21 @@
     <span class="c-btn-arrows">
         <c-icon
             name="caret-up"
-            :class="[{ 'up': colored }, size]"
+            :class="[
+                { 'up': colored },
+                { 'active' : activeUp === true },
+                size
+            ]"
             @click="$emit('clickUp')"
         />
         <slot/>
         <c-icon
             name="caret-down"
-            :class="[{ 'down': colored }, size]"
+            :class="[
+                { 'down': colored },
+                { 'active' : activeUp === false },
+                size
+            ]"
             @click="$emit('clickDown')"
         />
     </span>
@@ -20,9 +28,16 @@ export default {
     props: {
         size: {
             type: String,
-            default: 'md'
+            default: 'md',
+            validator(val) {
+                return ['sm', 'md', 'lg', 'xl'].includes(val);
+            }
         },
-        colored: Boolean
+        colored: Boolean,
+        activeUp: {
+            type: Boolean,
+            default: undefined
+        }
     }
 }
 </script>
@@ -49,8 +64,11 @@ export default {
                 font-size: 26px;
             }
         }
-        .fas:not(:hover) {
+        .fas:not(:hover):not(.active) {
             color: rgba(255,255,255,.6);
+        }
+        .active:before {
+            text-shadow: 0 0 5px rgba(255,255,255, .85);
         }
         .up:hover {
             color: #43C981;

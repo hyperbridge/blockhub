@@ -99,6 +99,6 @@ initializer().then(() => {
       components: {
         'app': app
       },
-  })
+  });
 
 })

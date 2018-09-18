@@ -26,7 +26,7 @@
             </a>
         </div>
         <div class="app-header__shadow"></div>
-        <a class="app-header__bar-center" href="/#/home">
+        <a class="app-header__bar-center" href="/#/">
             <c-loading-logo :isLoading="true" />
         </a>
         <div class="app-header__bar-right">
@@ -141,7 +141,7 @@ export default {
         is_editing() {
             return this.$store.state.marketplace.editor_mode === 'editing'
         },
-        signed_in() { 
+        signed_in() {
             return this.$store.state.network.signed_in
         },
         is_loading() {
@@ -533,7 +533,7 @@ export default {
         width: 400px;
         text-align: right;
     }
-    
+
     .app-header__nav-center {
         position: absolute;
         top: 20px;
