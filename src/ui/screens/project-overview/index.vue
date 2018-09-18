@@ -117,21 +117,19 @@
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
-                                <a class="nav-link active" :href="`/#/project/${project.id}`" data-toggle="pill"
-                                    role="tab" aria-controls="overview"
-                                   aria-selected="true">Overview</a>
+                                <router-link :to="`/project/${project.id}`" class="nav-link active">Overview</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/project/${project.id}/community`">Community</a>
+                                <router-link :to="`/project/${project.id}/community`" class="nav-link">Community</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/project/${project.id}/bounties`">Bounties</a>
+                                <router-link :to="`/project/${project.id}/bounties`" class="nav-link">Bounties</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/project/${project.id}/updates`">Updates</a>
+                                <router-link :to="`/project/${project.id}/updates`" class="nav-link">Updates</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/project/${project.id}/milestones`">Milestones</a>
+                                <router-link :to="`/project/${project.id}/milestones`" class="nav-link">Milestones</router-link>
                             </li>
                             <li class="nav-item" v-if="editing">
                                 <a class="nav-link" data-toggle="pill" href="#configure" role="tab"
