@@ -16,16 +16,16 @@
                         <c-tags-list :tags="product.author_tags"></c-tags-list>
                         <ul class="nav nav-tabs justify-content-between margin-bottom-30">
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}`">Overview</a>
+                                <router-link :to="`/product/${product.id}`" class="nav-link">Overview</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}/community`">Community</a>
+                                <router-link :to="`/product/${product.id}/community`" class="nav-link">Community</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}/projects`">Projects</a>
+                                <router-link :to="`/product/${product.id}/projects`" class="nav-link">Projects</router-link>
                             </li>
-                            <li class="nav-item mr-0">
-                                <a class="nav-link active" :href="`/#/product/${product.id}/assets`">Assets</a>
+                            <li class="nav-item">
+                                <router-link :to="`/product/${product.id}/assets`" class="nav-link active">Assets</router-link>
                             </li>
                         </ul>
                     </div>
@@ -86,7 +86,15 @@
             }
         },
         computed: {
-            product: updateProduct
+            product: updateProduct,
+            editing() {
+                if (!this.$store.state.marketplace.editor_mode) {
+                    for (let key in this.activeElement) {
+                        this.activeElement[key] = false
+                    }
+                }
+                return this.$store.state.marketplace.editor_mode === 'editing'
+            },
         },
         mounted: updateProduct,
         created: updateProduct,

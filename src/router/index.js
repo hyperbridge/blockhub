@@ -11,11 +11,6 @@ const router = new Router({
     linkActiveClass: 'is-active',
     routes: [
         {
-            path: '/',
-            name: 'Home',
-            component: () => import('@/ui/screens/home')
-        },
-        {
             path: '/home',
             name: 'Home',
             component: () => import('@/ui/screens/home')
@@ -29,6 +24,12 @@ const router = new Router({
             path: '/help',
             name: 'Help',
             component: () => import('@/ui/screens/help')
+        },
+        {
+            path: '/help/:id',
+            name: 'Topic',
+            props: true,
+            component: () => import('@/ui/screens/help-topic')
         },
         {
             path: '/support',
@@ -164,6 +165,12 @@ const router = new Router({
             component: () => import('@/ui/screens/identity-assets')
         },
         {
+            path: '/identity/:id/collections',
+            name: 'Identity Collections',
+            props: true,
+            component: () => import('@/ui/screens/identity-collection')
+        },
+        {
             path: '/settings',
             name: 'Settings',
             component: () => import('@/ui/screens/settings')
@@ -296,6 +303,12 @@ const router = new Router({
             component: () => import('@/ui/screens/project-milestones')
         },
         {
+            path: '/project/:id/updates',
+            name: 'Project Updates',
+            props: true,
+            component: () => import('@/ui/screens/project-updates')
+        },
+        {
             path: '/curators',
             name: 'Curators',
             component: () => import('@/ui/screens/curators')
@@ -320,6 +333,17 @@ const router = new Router({
             path: '/unknown',
             name: 'Unknown Layers',
             component: () => import('@/ui/screens/unknown')
+        },
+        {
+            path: '/search',
+            name: 'Search Page',
+            component: () => import('@/ui/screens/search')
+        },
+        {
+            path: '/collection/:id',
+            name: 'Collection Page',
+            props: true,
+            component: () => import('@/ui/screens/collection')
         },
         {
             path: '/download/desktop/mac',

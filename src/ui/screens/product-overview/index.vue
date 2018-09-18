@@ -57,16 +57,16 @@
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
-                                <a class="nav-link active" :href="`/#/product/${product.id}`">Overview</a>
+                                <router-link :to="`/product/${product.id}`" class="nav-link active">Overview</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}/community`">Community</a>
+                                <router-link :to="`/product/${product.id}/community`" class="nav-link">Community</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}/projects`">Projects</a>
+                                <router-link :to="`/product/${product.id}/projects`" class="nav-link">Projects</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}/assets`">Assets</a>
+                                <router-link :to="`/product/${product.id}/assets`" class="nav-link">Assets</router-link>
                             </li>
                         </ul>
 
@@ -138,6 +138,18 @@
                 </div>
             </div>
         </div>
+        <c-custom-modal title="Help Center" v-if="first_product && editing" @close="closeModal">
+            <div class="help-modal__content" slot="modal_body" style="width: 500px">
+                <h4 class="h2 mb-3">You are trying to create your first product?</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Etiam elementum ac ligula nec viverra. Nunc molestie augue a erat ultrices fermentum.</p>
+                <p>Curabitur non bibendum erat. Praesent nec vestibulum odio, vel euismod enim. Sed at tincidunt risus.
+                    Mauris ac facilisis metus. Proin venenatis neque posuere urna sagittis ultricies.</p>
+            </div>
+            <div slot="modal_footer" class="text-right w-100" >
+                <c-button status="info" size="md" href="/#/help" target="_blank">Help Center</c-button>
+            </div>
+        </c-custom-modal>
     </c-layout>
 </template>
 
@@ -165,7 +177,7 @@
             }
 
         return product
-    }
+    };
 
     export default {
         props: ['id'],
@@ -181,7 +193,9 @@
             'c-heading-bar': () => import('@/ui/components/heading-bar'),
             'c-review': () => import('@/ui/components/review'),
             'c-system-requirements': () => import('@/ui/components/product-overview/system-requirements'),
-            'c-language-support': () => import('@/ui/components/product-overview/language-support')
+            'c-language-support': () => import('@/ui/components/product-overview/language-support'),
+            'c-custom-modal': () => import('@/ui/components/modal/custom'),
+            'c-popup': () => import('@/ui/components/popups')
         },
         data() {
             const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.';
@@ -211,7 +225,8 @@
                         { author, title: title, text, date: '2018-03-21T04:09:00.000Z', rating: 5, minutes_played: 241, setup },
                         { author, title: title, text, date: '2018-08-11T04:09:00.000Z', rating: 3, minutes_played: 2941, setup }
                     ]
-                }
+                },
+                savedState: false
             }
         },
         methods: {
@@ -231,11 +246,20 @@
                 }, 10)
             },
             save() {
+                this.savedState = true;
                 if (this.id === 'new') {
                     this.$store.commit('marketplace/createProduct', this.product)
                 } else {
                     this.$store.dispatch('marketplace/updateProduct', this.product)
                 }
+            },
+            closeModal(){
+                console.log('close')
+                this.$store.state.marketplace.first_product = false
+            },
+            unsaved(){
+                if (this.savedState === false && this.$store.state.marketplace.editor_mode === 'editing')
+                    return 'ololololo'
             }
         },
         computed: {
@@ -246,12 +270,17 @@
                         this.activeElement[key] = false
                     }
                 }
-
                 return this.$store.state.marketplace.editor_mode === 'editing'
+            },
+            first_product(){
+                return this.$store.state.marketplace.first_product
             }
         },
         mounted: updateProduct,
-        created: updateProduct,
+        created(){
+            updateProduct;
+            window.onbeforeunload = this.unsaved;
+        },
         beforeDestroy() {
             window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
         },
@@ -285,7 +314,7 @@
                 }
             });
 
-        }
+        },
     }
 </script>
 

@@ -340,8 +340,6 @@ export default {
         }
     },
     updated() {
-
-        //$('.owl-controls').insertBefore('')
     },
     methods: {
         installOwlCarousel: function () {

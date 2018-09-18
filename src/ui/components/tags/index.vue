@@ -1,5 +1,5 @@
 <template>
-    <div class="product-tags">
+    <div class="product-tags" v-if="tags">
         <a
             v-for="(tag, index) in tags"
             :href="`/#/store/tag/${tag}`"
@@ -14,12 +14,7 @@
 
 <script>
 export default {
-    props: {
-        tags: {
-            type: Array,
-            required: true
-        }
-    },
+    props: ['tags'],
     methods: {
         filterTag(tagName) {
             alert(tagName)

@@ -18,9 +18,9 @@
                             {{ sub_title }}
                         </div>
                     </div>
-                    <div class="c-popup__content-body" v-if="text">
-                        <p class="m-0" v-if="text">
-                            {{ text }}
+                    <div class="c-popup__content-body">
+                        <p class="m-0">
+                            <slot />
                         </p>
                         <slot name="body"></slot>
                     </div>
@@ -47,9 +47,6 @@
                 type: String
             },
             sub_title: {
-                type: String
-            },
-            text: {
                 type: String
             },
             activated: {

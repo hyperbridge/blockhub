@@ -11,7 +11,9 @@
                 <strong>{{ item.price }}</strong> USD
             </div>
             <div class="img">
-                <img :src="item.images.medium_tile" />
+                <a :href="`/#/product/${item.id}`">
+                    <img :src="item.images.medium_tile" />
+                </a>
             </div>
             <div class="info">
                 <div class="text">
@@ -35,7 +37,7 @@
                     <c-button
                         status="success"
                         v-if="item.moreLink"
-                        :href="item.moreLink"
+                        :href="`/#/product/${item.id}`"
                         icon_hide
                     >Buy Now</c-button>
                 </div>
@@ -171,15 +173,18 @@
             transition: transform 200ms ease;
             transform: scale(1);
             &:hover {
-                -webkit-transition: transform 200ms ease;
-                -webkit-transform: scale(1.05);
-                -ms-transition: transform 200ms ease;
+                -webkit-transition: all 200ms ease-in;
+                -webkit-transform: scale(1.03);
+                -ms-transition: all 200ms ease-in;
                 -ms-transform: scale(1.05);
-                -moz-transition: transform 200ms ease;
-                -moz-transform: scale(1.05);
-                transition: transform 200ms ease;
-                transform: scale(1.05);
+                -moz-transition: all 200ms ease-in;
+                -moz-transform: scale(1.03);
+                transition: all 200ms ease-in;
+                transform: scale(1.03);
             }
+        }
+        a{
+            text-decoration: none;
         }
     }
 </style>

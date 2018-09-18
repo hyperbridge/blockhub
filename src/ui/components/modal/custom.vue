@@ -1,37 +1,32 @@
 <template>
-    <div class="modal fade" :id="id" tabindex="-1" role="dialog" :aria-labelledby="id"
-         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content justify-content-center">
-                <div class="text-center">
-                    <div :class="modal_class">
-                        <div class="custom-modal-header">
-                            <div class="name">
-                                {{ title }}
-                            </div>
-                            <div class="action">
-                                <button type="button" data-dismiss="modal" aria-label="Close">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="modal-body padding-0">
-                            <div class="custom-modal-body">
-                                <slot name="modal_body">
+    <div class="modal-light" @click.self="$emit('close')">
+        <div class="modal-light__content">
+            <div :class="modal_class">
+                <div class="custom-modal-header">
+                    <div class="name">
+                        {{ title }}
+                    </div>
+                    <div class="action">
+                        <button type="button" @click="$emit('close')" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body padding-0">
+                    <div class="custom-modal-body">
+                        <slot name="modal_body">
 
-                                </slot>
-                            </div>
-                            <div class="modal-action d-flex w-100 justify-content-between align-items-center flex-nowrap">
-                                <slot name="modal_footer">
+                        </slot>
+                    </div>
+                    <div class="modal-action d-flex w-100 justify-content-between align-items-center flex-nowrap">
+                        <slot name="modal_footer">
 
-                                </slot>
-                            </div>
-                        </div>
+                        </slot>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 </template>
 
 <script>
@@ -42,10 +37,44 @@
 </script>
 
 <style lang="scss" scoped>
-    .modal-content {
-        background: transparent;
-        color: #fff;
+    .modal-light {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 1000;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(33, 33, 51, 0.9);
+        animation: opacity .5s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+    .modal-light__content {
+        animation: slide-in .8s ease;
+        position: relative;
+        background: #3e3e5c;
+        color: #fff;
+        border-radius: 0 0 5px 5px;
+    }
+
+    @keyframes opacity {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slide-in {
+        0% {
+            transform: translateY(100vh) scale(0.8);
+        }
+        60% {
+            transform: translateY(-5vh);
+        }
+        100% {
+            transform: translateY(0) scale(1);
+        }
+    }
+
     .custom-modal-header {
         position: absolute;
         left: 0;
@@ -93,6 +122,7 @@
             position: relative;
             border-radius: 0 0 0 13px;
             width: 30px;
+            text-align: center;
             button {
                 color: #F75D5D;
                 border: none;

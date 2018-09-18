@@ -10,6 +10,7 @@
                 v-if="!play_video"
                 :src="items[active_item]"
                 @click="show_modal = true"
+                @error="brokenImg"
             />
             <video v-else-if="play_video" controls autoplay>
                 <source :src="video_url" type="video/mp4">
@@ -39,15 +40,16 @@
                     :src="url"
                     :class="{ 'inactive-item': index !== active_item || play_video }"
                     @click="changeActiveItem(index)"
+                    @error="brokenImg"
                 />
             </li>
         </ul>
-        <c-modal-light v-if="show_modal" @close="show_modal=false">
+        <c-modal v-if="show_modal" @close="show_modal=false">
             <c-images-explorer
                 :images="items"
                 :start_from="active_item"
             />
-        </c-modal-light>
+        </c-modal>
     </div>
 </template>
 
@@ -67,7 +69,7 @@ export default {
         video_url: String
     },
     components: {
-        'c-modal-light': () => import('@/ui/components/modal-light'),
+        'c-modal': () => import('@/ui/components/modal'),
         'c-images-explorer': () => import('@/ui/components/images-explorer')
     },
     data() {
@@ -121,6 +123,10 @@ export default {
             if (!isViewable) {
                 parent.scrollTop = (childRect.top + parent.scrollTop) - parentRect.top;
             }
+            if (status) this.slideshow();
+        },
+        brokenImg(event){
+            event.target.src = 'https://www.golositadelsalento.it/wp-content/uploads/2018/07/No_Image_Available-21-1.jpg'
         }
     },
     mounted() {

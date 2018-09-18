@@ -1,17 +1,18 @@
 <template>
     <div class="collection-item" v-bind:style="{ 'background-image': 'url(' + item.background + ')' }">
         <div class="collection-item__items-container">
-            <div v-for="(img, index) in item.images" :key="index">
-                <img :src="img"/>
-            </div>
+            <a v-for="(asset, index) in item.assets" :href="`/#/asset/${asset.id}`" :key="index" v-if="index < 4">
+                <img :src="asset.image"/>
+            </a>
         </div>
         <div class="collection-item__info">
-            <h4>{{ item.title }}</h4>
-            <h6>by {{ item.user }}</h6>
+            <a :href="`/#/collection/${item.id}`">
+                <h4>{{ item.name }}</h4>
+            </a>
+            <h6>by {{ item.author }}</h6>
             <div class="count">
-
                 <i class="fas fa-box"></i>
-                {{ item.count_number }} {{ item.count_number | count_label }}
+                {{ item.assets.length }} {{ item.assets.length | count_label }}
             </div>
         </div>
     </div>
@@ -89,7 +90,7 @@
         justify-content: center;
         margin-bottom: 10px;
         z-index: 3;
-        div{
+        a{
             width: 20%;
             background: rgba(255, 255, 255, .15);
             padding: 5px;
@@ -110,11 +111,19 @@
                 max-height: 100%;
                 max-width: 100%;
             }
+            &:hover{
+                cursor: pointer;
+                background: rgba(255, 255, 255, .3);
+                text-decoration: none;
+            }
         }
     }
     .collection-item__info{
         text-align: center;
         z-index: 3;
+        a{
+            text-decoration: none;
+        }
         h4{
             font-size: 15px;
             font-weight: bold;

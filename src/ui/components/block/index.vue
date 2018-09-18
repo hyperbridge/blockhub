@@ -38,7 +38,7 @@
 
 <style lang="scss" scoped>
     .block {
-        padding: 10px 15px 15px;
+        padding: 15px;
         border-radius: 5px;
         position: relative;
         color: #fff;

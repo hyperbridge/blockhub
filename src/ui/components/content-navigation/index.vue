@@ -1,7 +1,7 @@
 <template>
     <div class="content-navigation-wrapper">
         <c-pagination v-if="paginationMode"
-            pages="13"
+            :pages="13"
         />
         <c-load-more v-else
             @click="$emit('loadMore')"

@@ -23,7 +23,7 @@ Vue.filter('statusIcon', status => {
             case 'success': return 'check';
             case 'success-circle': return 'check-circle';
             case 'warning': return 'exclamation';
-            case 'danger': return 'exclamation-triangle';
+            case 'danger': return 'times';
             case 'danger-circle': return 'times-circle';
             case 'settings': return 'cog';
             case 'support': return 'life-ring';

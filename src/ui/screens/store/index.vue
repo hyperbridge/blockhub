@@ -69,25 +69,22 @@
                     </div>
                 </div>
 
-                <div class="row margin-bottom-70 margin-top-40 align-items-stretch">
+                <div class="row margin-top-40 align-items-stretch">
                     <div class="col-12 col-md-4">
-                        <div class="banner banner-1">
-                            <div class="banner-text">
-                                <h4 class="text-yellow">summer block</h4>
-                                <h3>Championship</h3>
-                                <p>You won't believe the prize!</p>
-                            </div>
-                        </div>
+                        <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="/#/home">
+                            <h4 class="text-yellow">summer block</h4>
+                            <h3>Championship</h3>
+                            <p>You won't believe the prize!</p>
+                        </c-banner>
                     </div>
                     <div class="col-12 col-md-8">
-                        <div class="banner banner-2">
-                            <div class="banner-text align-items-start">
+                        <c-banner :imgSrc="'/static/img/banners/banner-2.png'" link="/#/home">
+                            <div class="align-items-start">
                                 <h3 class="text-yellow margin-bottom-5">top<br>curators</h3>
                                 <h4 class="text-capitalize">What are they<br>playing?</h4>
                             </div>
-                        </div>
+                        </c-banner>
                     </div>
-                </div>
 
                 <div class="row product-grid margin-bottom-30">
                     <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
@@ -132,23 +129,23 @@
 
                 <div class="row margin-bottom-70 margin-top-40 align-items-stretch">
                     <div class="col-12 col-md-8">
-                        <div class="banner banner-3">
-                            <div class="banner-text">
-                                <h3 class="text-yellow">Item Marketplace</h3>
-                                <p>You all in one spot for games assets</p>
+                        <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/home">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="text-yellow">Item Marketplace</h3>
+                                    <p>You all in one spot for games assets</p>
+                                </div>
+                                <div class="banner-action">
+                                    <c-button status="info" icon_hide size="lg">VISIT NOW</c-button>
+                                </div>
                             </div>
-                            <div class="banner-action">
-                                <c-button status="info" icon_hide size="lg">VISIT NOW</c-button>
-                            </div>
-                        </div>
+                        </c-banner>
                     </div>
                     <div class="col-12 col-md-4">
-                        <div class="banner banner-4">
-                            <div class="banner-text">
-                                <h3 class="text-yellow margin-bottom-5">Top Collections</h3>
-                                <p>We curated the best ones for you</p>
-                            </div>
-                        </div>
+                        <c-banner :imgSrc="'/static/img/banners/banner-4.png'" link="/#/home">
+                            <h3 class="text-yellow margin-bottom-5">Top Collections</h3>
+                            <p>We curated the best ones for you</p>
+                        </c-banner>
                     </div>
                 </div>
 
@@ -231,8 +228,9 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 const updateLandingImage = function() {
     const frontpage_product = this.$store.state.marketplace.frontpage_product
 
-    if (frontpage_product.images && frontpage_product.images.header)
-        window.document.getElementById('header-bg').style['background-image'] = 'url(' + frontpage_product.images.header + ')'
+    if (frontpage_product)
+        if (frontpage_product.images && frontpage_product.images.header)
+            window.document.getElementById('header-bg').style['background-image'] = 'url(' + frontpage_product.images.header + ')'
 }
 
 export default {
@@ -256,6 +254,7 @@ export default {
         'c-news-list-navigation': () => import('@/ui/components/news-list/navigation'),
         'c-news-list-articles': () => import('@/ui/components/news-list/articles'),
         'c-block': () => import('@/ui/components/block'),
+        'c-banner': () => import('@/ui/components/banner/simple'),
         'c-swiper': swiper,
         'c-slide': swiperSlide
     },
@@ -396,7 +395,7 @@ export default {
             saleSlider: {
                 slidesPerView: 3,
                 spaceBetween: 0
-            }
+            },
         }
     },
     computed: {
@@ -428,6 +427,9 @@ export default {
         },
         demo_products_sl() {
             return this.$refs.demo_products_sl.swiper;
+        },
+        assets: function () {
+            return this.$store.state.marketplace.assets
         }
     },
     methods: {
@@ -560,74 +562,29 @@ export default {
         margin-bottom: 20px;
     }
     .banner{
-        display: flex;
-        width: 100%;
-        height: 100%;
-        border-radius: 5px;
-        padding: 25px;
-        overflow: hidden;
-        position: relative;
-        text-shadow: 0 0 2px rgba(0, 0, 0, .2);
-        justify-content: space-between;
-        align-items: center;
-        &.banner-1{
-            background: url("../../../assets/img/banners/banner-1.png") top right no-repeat;
-            background-size: cover;
-        }
-        &.banner-2{
-            background: url("../../../assets/img/banners/banner-2.png") top right no-repeat;
-            background-size: cover;
-        }
-        &.banner-3{
-            background: url("../../../assets/img/banners/banner-3.png") top right no-repeat;
-            background-size: cover;
-        }
-        &.banner-4{
-            background: url("../../../assets/img/banners/banner-4.png") top right no-repeat;
-            background-size: cover;
-        }
         .text-yellow{
             color: #FADC72;
         }
-        .banner-text{
-            display: flex;
-            color: #fff;
-            flex-direction: column;
-            justify-content: center;
-            h3{
-                font-size: 2.5em;
-                text-transform: uppercase;
-                padding: 0;
-                margin: 5px 0;
-                font-weight: bold;
-            }
-            h4{
-                font-size: 1.5em;
-                text-transform: uppercase;
-                padding: 0;
-                margin: 0;
-                font-weight: bold;
-                line-height: 24px;
-            }
-            p{
-                font-size: 16px;
-                padding: 0;
-                margin: 0;
-            }
+        h3{
+            font-size: 2.5em;
+            text-transform: uppercase;
+            padding: 0;
+            margin: 5px 0;
+            font-weight: bold;
         }
-        img{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        h4{
+            font-size: 1.5em;
+            text-transform: uppercase;
+            padding: 0;
+            margin: 0;
+            font-weight: bold;
+            line-height: 24px;
         }
-        &.banner-2{
-            h3{
-                font-size: 2em;
-            }
+        p{
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
         }
-    }
-    .VueCarousel {
-        width: 100%;
     }
 </style>
 
