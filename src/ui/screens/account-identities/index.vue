@@ -95,7 +95,8 @@
                                 :user="identity"
                                 :previewMode="!identity.edit"
                                 :class="{ 'default': identity.default }"
-                                @updateIdentity="(prop, val) => identityClone[prop] = val"
+                                v-omodel="identityClone"
+                                @click.native="alert(123)"
                             />
                             <div class="profile__action">
                                 <c-button
@@ -201,7 +202,7 @@
                     default: false,
                     edit: false
                 },
-                identityCopy: {},
+                identityCopy: { masno: 'nii' },
                 removeIdentity: null,
                 filterPhrase: '',
                 sortAsc: true

@@ -26,7 +26,7 @@
                     name="profile_name"
                     placeholder="Profile name"
                     :value="user.name"
-                    @input="$emit('updateIdentity', 'name', $event.target.value)"
+                    @input="$emit('inputs', 'name', $event.target.value)"
                     :readonly="previewMode"
                 />
                 <p>User</p>
@@ -54,7 +54,7 @@
                 name="wallet_number"
                 placeholder="Wallet number"
                 :value="user.wallet"
-                @input="$emit('updateIdentity', 'wallet', $event.target.value)"
+                @input="$emit('input', 'OBJ', $event.target.value)"
                 :readonly="previewMode"
             />
             <button>
