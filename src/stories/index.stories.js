@@ -1,14 +1,18 @@
 /* eslint-disable react/react-in-jsx-scope, react/no-this-in-sfc */
 
-import {storiesOf} from '@storybook/vue'
-import {action} from '@storybook/addon-actions'
-import {linkTo} from '@storybook/addon-links'
-import {withKnobs, text, boolean, number, object} from '@storybook/addon-knobs/vue'
+import Vue from 'vue'
+import { storiesOf, addDecorator } from '@storybook/vue'
+import { action } from '@storybook/addon-actions'
+import { linkTo } from '@storybook/addon-links'
+import { withViewport } from '@storybook/addon-viewport'
+import { withKnobs, text, boolean, number, object } from '@storybook/addon-knobs/vue'
 
+
+addDecorator(withViewport('desktop'))
 
 import '../css/styles.scss'
-import '@/filters';
-import '@/components';
+import '@/filters'
+import '@/components'
 
 import * as data from './components-data'
 
@@ -22,7 +26,7 @@ storiesOf('Sale Box', module)
             'c-sale-box': SaleBox
         },
         data() {
-            let title = 'test';
+            let title = 'test'
             return {
                 sale_box: {
                     title: title
@@ -1177,38 +1181,80 @@ storiesOf('Range Slider', module)
 
 import AssetsGrid from '../ui/components/assets-grid/index.vue'
 
+const assets_list = [
+    {
+        name: 'some item name',
+        price: '1.99',
+        count: '240.000',
+        main_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
+        sub_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
+    },
+    {
+        name: 'some another item name',
+        price: '99.99',
+        count: '824.000',
+        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+    },
+    {
+        name: 'some another item name',
+        price: '99.99',
+        count: '824.000',
+        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+    },
+    {
+        name: 'some another item name',
+        price: '99.99',
+        count: '824.000',
+        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+    },
+    {
+        name: 'some another item name',
+        price: '99.99',
+        count: '824.000',
+        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+    },
+    {
+        name: 'some another item name',
+        price: '99.99',
+        count: '824.000',
+        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+    }
+]
+
 storiesOf('Assets Grid', module)
     .addDecorator(withKnobs)
+    .addDecorator(withViewport())
     .add('default', () => ({
         components: {
             'c-assets-grid': AssetsGrid
         },
         data() {
             return object('Data', {
-                assets_list: [
-                    {
-                        name: 'some item name',
-                        price: '1.99',
-                        count: '240.000',
-                        main_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        sub_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                    },
-                    {
-                        name: 'some another item name',
-                        price: '99.99',
-                        count: '824.000',
-                        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
-                        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
-                    }
-                ]
+                assets_list: assets_list
             })
         },
         template: `
-         <div class="row m-0 p-3">
-             <c-assets-grid :list="assets_list" />
-         </div>
+        <c-assets-grid :list="assets_list" />
         `
-    }));
+    }), { viewport: 'desktop' })
+    .add('default (iPhone 6 Plus)', () => ({
+        components: {
+            'c-assets-grid': AssetsGrid
+        },
+        data() {
+            return object('Data', {
+                assets_list: assets_list
+            })
+        },
+        template: `
+        <c-assets-grid :list="assets_list" />
+        `
+    }), { viewport: 'iphone6p' })
 
 import AssetsPopup from '../ui/components/asset-overview-popup/index.vue'
 

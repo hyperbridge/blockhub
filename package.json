@@ -17,9 +17,6 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@storybook/addon-knobs": "^3.4.10",
-    "@storybook/addon-notes": "^3.4.10",
-    "@storybook/addon-viewport": "^3.4.10",
     "@veriff/js-sdk": "^0.3.4",
     "node-sass": "^4.9.0",
     "ts-loader": "^4.4.1",
@@ -30,6 +27,9 @@
     "vuejs-datepicker": "^1.5.3"
   },
   "devDependencies": {
+    "@storybook/addon-knobs": "^4.0.0-alpha.16",
+    "@storybook/addon-notes": "^4.0.0-alpha.16",
+    "@storybook/addon-viewport": "^4.0.0-alpha.16",
     "@storybook/addon-actions": "^4.0.0-alpha.16",
     "@storybook/addon-links": "^4.0.0-alpha.16",
     "@storybook/addons": "^4.0.0-alpha.16",
