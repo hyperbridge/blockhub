@@ -55,7 +55,7 @@ git clone git@github.com:hyperbridge/funding-protocol.git
 
 ## Setup
 
-Make sure you're running Node 8.11.1
+Make sure you're running Node 8.11.1 and you have Python installed. `node-gyp` can't use Python3.5.x, so please use another version.
 
 In `blockhub-web-client`, run `npm install` then:
 ```
