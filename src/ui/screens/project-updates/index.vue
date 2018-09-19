@@ -118,83 +118,7 @@
                         </ul>
                     </div>
                     <div class="col-12">
-                        <div class="posts-timeline">
-                            <div class="posts-timeline__post-item left-side">
-                                <div class="posts-timeline__post--content">
-                                    <a href="#3">
-                                        <h3>Thank you, friends!</h3>
-                                    </a>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor
-                                        feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex,
-                                        laoreet ut nunc eget, placerat molestie leo.</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-4 w-100">
-                                        <div class="post-date">
-                                            September 12, 2018
-                                        </div>
-                                        <c-button status="info" icon_hide >Read more</c-button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="posts-timeline__post-item right-side">
-                                <div class="posts-timeline__post--content">
-                                    <a href="#3">
-                                        <h3>Thank you, friends!</h3>
-                                    </a>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor
-                                        feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex,
-                                        laoreet ut nunc eget, placerat molestie leo.</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-4 w-100">
-                                        <c-button status="info" icon_hide >Read more</c-button>
-                                        <div class="post-date">
-                                            September 11, 2018
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-timeline__year">
-                                2018
-                            </div>
-                            <div class="posts-timeline__post-item left-side">
-                                <div class="posts-timeline__post--content">
-                                    <a href="#3">
-                                        <h3>Thank you, friends!</h3>
-                                    </a>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor
-                                        feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex,
-                                        laoreet ut nunc eget, placerat molestie leo.</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-4 w-100">
-                                        <div class="post-date">
-                                            September 12, 2018
-                                        </div>
-                                        <c-button status="info" icon_hide >Read more</c-button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="posts-timeline__post-item right-side">
-                                <div class="posts-timeline__post--content">
-                                    <a href="#3">
-                                        <h3>Thank you, friends!</h3>
-                                    </a>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor
-                                        feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex,
-                                        laoreet ut nunc eget, placerat molestie leo.</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-4 w-100">
-                                        <c-button status="info" icon_hide >Read more</c-button>
-                                        <div class="post-date">
-                                            September 11, 2018
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="posts-timeline__post-item centered">
-                                <div class="posts-timeline__post--content" style="background: #43C981">
-                                    <div class="post-date">
-                                        September 7, 2018
-                                    </div>
-                                    <h3>Project launched</h3>
-                                </div>
-                            </div>
-                        </div>
+                        <c-timeline :items="items" />
                     </div>
                 </div>
             </div>
@@ -229,7 +153,8 @@
             'c-layout': () => import('@/ui/layouts/default'),
             'c-block': () => import('@/ui/components/block'),
             'c-tags-list': () => import('@/ui/components/tags'),
-            'c-badges': () => import('@/ui/components/projects/badges.vue')
+            'c-badges': () => import('@/ui/components/projects/badges'),
+            'c-timeline': () => import('@/ui/components/timeline/list'),
         },
         data() {
             return {
@@ -259,7 +184,41 @@
                     minutes_played: 1938,
                     setup: { system: 'Windows 10', gpu: 'GTX 1080', cpu: 'Core i7 7980x', ram: '8 GB', storage: 'HyperX 1TB SSD' }
                 },
-                crowdfunding_props: ['spent', 'locked', 'overflow']
+                crowdfunding_props: ['spent', 'locked', 'overflow'],
+                items:{
+                    "01":{
+                        posts:[
+                            {
+                                id: 1,
+                                title: 'Thank you, friends!',
+                                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                date: '09-19-2018',
+                            },
+                            {
+                                id: 2,
+                                title: 'This is second post!',
+                                text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                date: '09-29-2018',
+                            }
+                        ]
+                    },
+                    "02":{
+                        posts:[
+                            {
+                                id: 1,
+                                title: 'Thank you, friends!',
+                                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                date: '09-19-2018',
+                            },
+                            {
+                                id: 2,
+                                title: 'This is second post!',
+                                text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                date: '09-29-2018',
+                            }
+                        ]
+                    }
+                }
             }
         },
         methods: {

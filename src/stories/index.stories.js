@@ -3118,40 +3118,98 @@ storiesOf('Timeline', module)
         },
         data(){
             return{
-                items:{
-                    "01":{
-                        posts:[
-                            {
+                items:[
+                    {
+                        year: 2018,
+                        months:{
+                            "01":{
                                 id: 1,
-                                title: 'Thank you, friends!',
-                                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                                date: '09-19-2018',
+                                posts:[
+                                    {
+                                        id: 1,
+                                        title: 'Thank you, friends!',
+                                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '01-19-2018',
+                                    },
+                                    {
+                                        id: 2,
+                                        title: 'This is second post!',
+                                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '01-29-2018',
+                                    }
+                                ]
                             },
-                            {
+                            "02":{
                                 id: 2,
-                                title: 'This is second post!',
-                                text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                                date: '09-29-2018',
+                                posts:[
+                                    {
+                                        id: 1,
+                                        title: 'Thank you, friends!',
+                                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '02-19-2018',
+                                    },
+                                    {
+                                        id: 2,
+                                        title: 'This is second post!',
+                                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '02-23-2018',
+                                    },
+                                    {
+                                        id: 2,
+                                        title: 'This is second post!',
+                                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '02-21-2018',
+                                    }
+                                ]
                             }
-                        ]
+                        }
                     },
-                    "02":{
-                        posts:[
-                            {
+                    {
+                        year: 2019,
+                        months:{
+                            "01":{
                                 id: 1,
-                                title: 'Thank you, friends!',
-                                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                                date: '09-19-2018',
+                                posts:[
+                                    {
+                                        id: 1,
+                                        title: 'Thank you, friends!',
+                                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '01-19-2018',
+                                    },
+                                    {
+                                        id: 2,
+                                        title: 'This is second post!',
+                                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '01-29-2018',
+                                    }
+                                ]
                             },
-                            {
+                            "02":{
                                 id: 2,
-                                title: 'This is second post!',
-                                text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                                date: '09-29-2018',
+                                posts:[
+                                    {
+                                        id: 1,
+                                        title: 'Thank you, friends!',
+                                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '02-19-2018',
+                                    },
+                                    {
+                                        id: 2,
+                                        title: 'This is second post!',
+                                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '02-23-2018',
+                                    },
+                                    {
+                                        id: 2,
+                                        title: 'This is second post!',
+                                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '02-21-2018',
+                                    }
+                                ]
                             }
-                        ]
+                        }
                     }
-                }
+                ]
             }
         },
         template: `<div class="row">
