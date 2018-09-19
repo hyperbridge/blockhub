@@ -19,7 +19,7 @@
                     <div class="col-12">
                         <c-block title="Trending articles" class="margin-bottom-30" v-if="topics['0']['articles']">
                             <div class="article-list">
-                                <c-article-item :link="`/#/help/article/${article.slug}`"
+                                <c-article-item :link="`/#/help/${topics['0']['id']}/article/${article.slug}`"
                                                 v-for="(article, index) in topics['0']['articles']"
                                                 :key="index"
                                                 :class="{'mb-0': topics['0']['articles'].length === index+1 }"
