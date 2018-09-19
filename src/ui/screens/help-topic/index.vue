@@ -22,19 +22,14 @@
                             </div>
                         </c-block>
 
-                        <c-block class="margin-bottom-30">
+                        <c-block class="margin-bottom-30" v-if="topic.articles">
                             <div class="article-list">
-                                <c-article-item link="#3">
-                                    I'm still seeing "You password has expired"
-                                </c-article-item>
-                                <c-article-item link="#3">
-                                    Why am i seeing H12 request timeouts?
-                                </c-article-item>
-                                <c-article-item link="#3">
-                                    Performing Load Tests on BlockHub
-                                </c-article-item>
-                                <c-article-item link="#3" class="margin-bottom-0">
-                                    More running applications articles ...
+                                <c-article-item :link="`/#/help/${topic.id}/article/${article.slug}`"
+                                                v-for="(article, index) in topic.articles"
+                                                :key="index"
+                                                :class="{'mb-0': topic.articles.length === index+1 }"
+                                >
+                                    {{ article.title }}
                                 </c-article-item>
                             </div>
                         </c-block>

@@ -37,6 +37,12 @@ const router = new Router({
             component: () => import('@/ui/screens/help-topic')
         },
         {
+            path: '/help/:id/article/:slug',
+            name: 'Help article',
+            props: true,
+            component: () => import('@/ui/screens/help-article')
+        },
+        {
             path: '/support',
             name: 'Support',
             component: () => import('@/ui/screens/support')
