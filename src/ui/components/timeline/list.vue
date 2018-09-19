@@ -1,13 +1,19 @@
 <template>
     <div class="posts-timeline">
-        <div class="posts-timeline__year-container" v-for="(year, index) in sortedByNumber(items)" :key="index">
-            <div class="posts-timeline__period-container"  v-for="(month, index) in year.months" :key="index">
-                <c-timeline-item v-for="(item, index) in sortedByDate(month.posts)" :item="item" :index="index" :key="index" />
-                <div class="post-timeline__period-info">
-                    {{ monthNumber(month.id) }} {{ year.year }}
-                </div>
+        <!--<div class="posts-timeline__year-container" v-for="(year, index) in sortedByNumber(items)" :key="index">-->
+            <!--<div class="posts-timeline__period-container"  v-for="(month, index) in year.months" :key="index">-->
+                <!--<c-timeline-item v-for="(item, index) in sortedByDate(month.posts)" :item="item" :index="index" :key="index" />-->
+                <!--<div class="post-timeline__period-info">-->
+                    <!--{{ monthNumber(month.id) }} {{ year.year }}-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <template  v-for="(item, index) in sortedItems" >
+            <c-timeline-item :item="item" :index="index" :key="index" v-if="item.type == 'post'" />
+            <div class="post-timeline__period-info" v-if="item.new_period">
+            {{ item.new_period }}
             </div>
-        </div>
+        </template>
     </div>
 </template>
 
@@ -17,24 +23,32 @@
     export default {
         name: 'timeline-list',
         props: ['items'],
+        data(){
+            return{
+                dateM: ''
+            }
+        },
         components:{
             'c-timeline-item': () => import('@/ui/components/timeline/item.vue')
         },
         methods:{
             monthNumber(month){
                 return moment(month, 'MM').format('MMMM');
-            },
-            sortedByDate(arr) {
+            }
+        },
+        computed: {
+            sortedItems: function() {
+                let arr = this.items;
                 arr.sort( ( a, b) => {
                     return new Date(a.date) - new Date(b.date);
                 });
-                return arr;
-            },
-            sortedByNumber(arr){
-                arr.sort( ( a, b) => {
-                    return new Date(a.date) - new Date(b.date);
-                });
-                return arr;
+                // let date_a = moment(a.date, 'YYY-MM').format('YY-MM'),
+                //     date_b = moment(b.date, 'YYY-MM').format('YY-MM');
+                // console.log(date_a + ' ' + date_b);
+                // if ( date_a > date_b)
+                //     console.log('write - ',date_a)
+                // a.new_period = date_a;
+                return arr.slice().reverse();
             }
         }
     }

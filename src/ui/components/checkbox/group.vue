@@ -27,6 +27,7 @@
         }
         .c-checkbox{
             margin-bottom: 5px;
+            display: flex;
             &:last-child{
                 margin: 0;
             }

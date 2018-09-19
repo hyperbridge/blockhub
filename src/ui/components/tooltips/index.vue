@@ -17,16 +17,13 @@
         name: 'tooltip',
         props: {
             name: {
-                required: true,
                 type: String
             },
             title: {
-                required: true,
                 type: String,
                 default: 'NOTES'
             },
             text: {
-                required: true,
                 type: String
             },
             position:{
