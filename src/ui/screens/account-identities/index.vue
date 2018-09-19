@@ -95,8 +95,7 @@
                                 :user="identity"
                                 :previewMode="!identity.edit"
                                 :class="{ 'default': identity.default }"
-                                v-omodel="identityClone"
-                                @click.native="alert(123)"
+                                v-bind.sync="identityClone"
                             />
                             <div class="profile__action">
                                 <c-button
