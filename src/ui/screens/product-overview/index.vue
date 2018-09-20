@@ -140,20 +140,23 @@
         </div>
         <c-custom-modal title="Help Center" v-if="first_product && editing" @close="closeModal">
             <div class="help-modal__content" slot="modal_body" style="width: 500px">
-                <h4 class="h2 mb-3">You are trying to create your first product?</h4>
+                <h4 class="h2 mb-3">Creating your first product?</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Etiam elementum ac ligula nec viverra. Nunc molestie augue a erat ultrices fermentum.</p>
                 <p>Curabitur non bibendum erat. Praesent nec vestibulum odio, vel euismod enim. Sed at tincidunt risus.
                     Mauris ac facilisis metus. Proin venenatis neque posuere urna sagittis ultricies.</p>
+                <p><a href="/#/help" target="_blank">Learn more about creating products</a></p>
             </div>
             <div slot="modal_footer" class="text-right w-100" >
-                <c-button status="info" size="md" href="/#/help" target="_blank">Help Center</c-button>
+                <c-button size="md" @click="closeModal">Got it</c-button>
             </div>
         </c-custom-modal>
     </c-layout>
 </template>
 
 <script>
+    import Vue from 'vue'
+    
     const updateProduct = function () {
         let product = null
 
@@ -176,6 +179,10 @@
             product.community = {
                 discussions: []
             }
+        
+        if (!product.author_tags) {
+            product.author_tags = []
+        }
 
         return product
     };
