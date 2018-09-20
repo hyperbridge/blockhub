@@ -1,6 +1,6 @@
 <template>
     <div class="heading-bar">
-        <h3 class="heading-bar__name" :class="{ 'heading-bar__name--with-bg': showBackground }" v-if="name">
+        <h3 class="heading-bar__name" :class="{ 'heading-bar__name--with-bg': showBackground }" v-if="name" jest="name">
             {{ name }}
         </h3>
         <div class="heading-bar__tabs" v-else>
@@ -11,6 +11,7 @@
                     :class="{ 'active': index == activeTab }"
                     href="#"
                     @click.prevent="changeTab(index, tab.category)"
+                    jest="tab-item"
                 >{{ tab instanceof Object ? tab.title : tab }}</a>
             </slot>
         </div>
