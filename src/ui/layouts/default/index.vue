@@ -30,233 +30,238 @@
             </div>
 
             <!-- PAGE ASIDE PANEL -->
-            <transition name="slideLeft">
                 <div class="page-aside invert" id="page-aside">
-                    <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}`"></component>
+                    <transition name="slideLeft">
+                        <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}`"></component>
+                    </transition>
                 </div>
-            </transition>
             <!-- //END PAGE ASIDE PANEL -->
-            <transition name="fade">
+            <transition name="fade" mode="out-in">
                 <slot></slot>
             </transition>
 
             <!-- SIDEPANEL -->
             <transition name="slideRight">
-                <div class="page-sidepanel invert text-right" id="page-sidepanel">
-                <div class="page-sidepanel__content">
-                    <div class="owl-carousel" data-nav-dots="true" data-nav-arrow="true" data-items="1" data-sm-items="1" data-lg-items="1" data-md-items="1" data-autoplay="false">
-                        <div class="item">
-                            <h3>NOTIFICATIONS</h3>
+                <c-sidepanel>
+                    <c-swiper :options="panelOption" ref="mySwiper">
+                        <c-slide>
+                            <div class="item">
+                                <h3>NOTIFICATION</h3>
 
-                            <div class="slide-chooser">
-                                <button class="btn active js-go-notifications">
-                                    <span class="icon fa fa-bell" />
-                                </button>
-                                <button class="btn js-go-messages">
-                                    <span class="icon fa fa-envelope" />
-                                </button>
-                                <button class="btn js-go-updates">
-                                    <span class="icon fa fa-star" />
-                                </button>
-                                <button class="btn js-go-lists">
-                                    <span class="icon fa fa-trophy" />
-                                </button>
-                            </div>
-
-                            <div class="navigation">
-                                <c-notification v-for="(notif, index) in notifs" :key="index" :notification="notif"/>
-                            </div>
-
-                        </div>
-                        <div class="item">
-                            <h3>MESSAGES</h3>
-
-                            <div class="slide-chooser">
-                                <button class="btn js-go-notifications">
-                                    <span class="icon fa fa-bell" />
-                                </button>
-                                <button class="btn active js-go-messages">
-                                    <span class="icon fa fa-envelope" />
-                                </button>
-                                <button class="btn js-go-updates">
-                                    <span class="icon fa fa-star" />
-                                </button>
-                                <button class="btn js-go-lists">
-                                    <span class="icon fa fa-trophy" />
-                                </button>
-                            </div>
-
-                            <div class="navigation">
-                                <div class="messages-action">
-                                    <a href="#3" class="btn">Quick Send</a>
-                                    <a href="#3" class="btn">Go to Messages</a>
+                                <div class="slide-chooser">
+                                    <c-button status="link" icon-hide @click="showSlide('notification')" style="box-shadow: none">
+                                        <i class="fa fa-bell" />
+                                    </c-button>
+                                    <c-button status="link" icon-hide @click="showSlide('messages')" style="box-shadow: none">
+                                        <i class="fa fa-envelope" />
+                                    </c-button>
+                                    <c-button status="link" icon-hide @click="showSlide('updates')" style="box-shadow: none">
+                                        <i class="fa fa-star" />
+                                    </c-button>
+                                    <c-button status="link" icon-hide @click="showSlide('top_lists')" style="box-shadow: none">
+                                        <i class="fa fa-trophy" />
+                                    </c-button>
                                 </div>
-                                <ul class="message-list">
-                                    <li class="message-list__item">
-                                        <i class="fas fa-reply"></i>
-                                        <h5>Username, 2 days ago:</h5>
-                                        <p>Maybe I ought to crank Morley Safer's poutine,
-                                            eh, that should to start them up.</p>
-                                    </li>
-                                    <li class="message-list__item">
-                                        <i class="fas fa-reply"></i>
-                                        <h5>Username, 2 days ago:</h5>
-                                        <p>Maybe I ought to crank Morley Safer's poutine,
-                                            eh, that should to start them up.</p>
-                                    </li>
-                                    <li class="message-list__item">
-                                        <i class="fas fa-reply"></i>
-                                        <h5>Username, 2 days ago:</h5>
-                                        <p>Maybe I ought to crank Morley Safer's poutine,
-                                            eh, that should to start them up.</p>
-                                    </li>
-                                    <li class="message-list__item">
-                                        <i class="fas fa-reply"></i>
-                                        <h5>Username, 2 days ago:</h5>
-                                        <p>Maybe I ought to crank Morley Safer's poutine,
-                                            eh, that should to start them up.</p>
-                                    </li>
-                                </ul>
-                            </div>
 
-                        </div>
-                        <div class="item">
-                            <h3>UPDATES</h3>
+                                <div class="navigation">
+                                    <c-notification v-for="(notif, index) in notifs" :key="index" :notification="notif"/>
+                                </div>
 
-                            <div class="slide-chooser">
-                                <button class="btn js-go-notifications">
-                                    <span class="icon fa fa-bell" />
-                                </button>
-                                <button class="btn js-go-messages">
-                                    <span class="icon fa fa-envelope" />
-                                </button>
-                                <button class="btn active js-go-updates">
-                                    <span class="icon fa fa-star" />
-                                </button>
-                                <button class="btn js-go-lists">
-                                    <span class="icon fa fa-trophy" />
-                                </button>
                             </div>
+                        </c-slide>
+                        <c-slide>
+                            <div class="item">
+                                <h3>MESSAGES</h3>
 
-                            <div class="navigation">
-                                <ul>
-                                    <li class="title">TOP 5</li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">BlockHub v1.0.15</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">With the last update, we bring lorem ipsum dolor sit amet and check the changelog.</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <br />
-                                        <button class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;"><span class="icon fa fa-sync" /> Relaunch</button>
-                                    </li>
-                                </ul>
-                            </div>
+                                <div class="slide-chooser">
+                                    <c-button status="link" icon-hide @click="showSlide('notification')" style="box-shadow: none">
+                                        <i class="fa fa-bell" />
+                                    </c-button>
+                                    <c-button status="link" icon-hide @click="showSlide('messages')" style="box-shadow: none">
+                                        <i class="fa fa-envelope" />
+                                    </c-button>
+                                    <c-button status="link" icon-hide @click="showSlide('updates')" style="box-shadow: none">
+                                        <i class="fa fa-star" />
+                                    </c-button>
+                                    <c-button status="link" icon-hide @click="showSlide('top_lists')" style="box-shadow: none">
+                                        <i class="fa fa-trophy" />
+                                    </c-button>
+                                </div>
 
-                        </div>
-                        <div class="item">
-                            <h3>TOP LISTS</h3>
+                                <div class="navigation">
+                                    <div class="messages-action">
+                                        <a href="#3" class="btn">Quick Send</a>
+                                        <a href="#3" class="btn">Go to Messages</a>
+                                    </div>
+                                    <ul class="message-list">
+                                        <li class="message-list__item">
+                                            <i class="fas fa-reply"></i>
+                                            <h5>Username, 2 days ago:</h5>
+                                            <p>Maybe I ought to crank Morley Safer's poutine,
+                                                eh, that should to start them up.</p>
+                                        </li>
+                                        <li class="message-list__item">
+                                            <i class="fas fa-reply"></i>
+                                            <h5>Username, 2 days ago:</h5>
+                                            <p>Maybe I ought to crank Morley Safer's poutine,
+                                                eh, that should to start them up.</p>
+                                        </li>
+                                        <li class="message-list__item">
+                                            <i class="fas fa-reply"></i>
+                                            <h5>Username, 2 days ago:</h5>
+                                            <p>Maybe I ought to crank Morley Safer's poutine,
+                                                eh, that should to start them up.</p>
+                                        </li>
+                                        <li class="message-list__item">
+                                            <i class="fas fa-reply"></i>
+                                            <h5>Username, 2 days ago:</h5>
+                                            <p>Maybe I ought to crank Morley Safer's poutine,
+                                                eh, that should to start them up.</p>
+                                        </li>
+                                    </ul>
+                                </div>
 
-                            <div class="slide-chooser">
-                                <button class="btn js-go-notifications">
-                                    <span class="icon fa fa-bell" />
-                                </button>
-                                <button class="btn js-go-messages">
-                                    <span class="icon fa fa-envelope" />
-                                </button>
-                                <button class="btn js-go-updates">
-                                    <span class="icon fa fa-star" />
-                                </button>
-                                <button class="btn active js-go-lists">
-                                    <span class="icon fa fa-trophy" />
-                                </button>
                             </div>
+                        </c-slide>
+                        <c-slide>
+                            <div class="item">
+                                <h3>UPDATES</h3>
 
-                            <div class="navigation">
-                                <ul>
-                                    <li class="title">TOP 5</li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Joe's Adventure</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">The Mission</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Gym with Tim</span>
-                                        </a>
-                                    </li>
-                                    <li class="more">
-                                        <a href="/#/">
-                                            <span class="text">MORE...</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <div class="slide-chooser">
+                                    <c-button status="link" icon-hide @click="showSlide('notification')" style="box-shadow: none">
+                                        <i class="fa fa-bell" />
+                                    </c-button>
+                                    <c-button status="link" icon-hide @click="showSlide('messages')" style="box-shadow: none">
+                                        <i class="fa fa-envelope" />
+                                    </c-button>
+                                    <c-button status="link" icon-hide @click="showSlide('updates')" style="box-shadow: none">
+                                        <i class="fa fa-star" />
+                                    </c-button>
+                                    <c-button status="link" icon-hide @click="showSlide('top_lists')" style="box-shadow: none">
+                                        <i class="fa fa-trophy" />
+                                    </c-button>
+                                </div>
+
+                                <div class="navigation">
+                                    <ul>
+                                        <li class="title">TOP 5</li>
+                                        <li>
+                                            <a href="/#/product/1">
+                                                <span class="text">BlockHub v1.0.15</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/#/product/1">
+                                                <span class="text">With the last update, we bring lorem ipsum dolor sit amet and check the changelog.</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <br />
+                                            <button class="btn btn-outline-info btn-sm" style="color: #fff;border: 2px solid #fff;"><span class="icon fa fa-sync" /> Relaunch</button>
+                                        </li>
+                                    </ul>
+                                </div>
+
                             </div>
-                            <div class="navigation">
-                                <ul>
-                                    <li class="title">TOP FREE</li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Joe's Adventure</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">The Mission</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Gym with Tim</span>
-                                        </a>
-                                    </li>
-                                    <li class="more">
-                                        <a href="/#/">
-                                            <span class="text">MORE...</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                        </c-slide>
+                        <c-slide>
+                            <div class="item">
+                                <h3>TOP LISTS</h3>
+
+                                <div class="slide-chooser">
+                                    <c-button status="link" icon-hide @click="showSlide('notification')" style="box-shadow: none">
+                                        <i class="fa fa-bell" />
+                                    </c-button>
+                                    <c-button status="link" icon-hide @click="showSlide('messages')" style="box-shadow: none">
+                                        <i class="fa fa-envelope" />
+                                    </c-button>
+                                    <c-button status="link" icon-hide @click="showSlide('updates')" style="box-shadow: none">
+                                        <i class="fa fa-star" />
+                                    </c-button>
+                                    <c-button status="link" icon-hide @click="showSlide('top_lists')" style="box-shadow: none">
+                                        <i class="fa fa-trophy" />
+                                    </c-button>
+                                </div>
+
+                                <div class="navigation">
+                                    <ul>
+                                        <li class="title">TOP 5</li>
+                                        <li>
+                                            <a href="/#/product/1">
+                                                <span class="text">Joe's Adventure</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/#/product/1">
+                                                <span class="text">The Mission</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/#/product/1">
+                                                <span class="text">Gym with Tim</span>
+                                            </a>
+                                        </li>
+                                        <li class="more">
+                                            <a href="/#/">
+                                                <span class="text">MORE...</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="navigation">
+                                    <ul>
+                                        <li class="title">TOP FREE</li>
+                                        <li>
+                                            <a href="/#/product/1">
+                                                <span class="text">Joe's Adventure</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/#/product/1">
+                                                <span class="text">The Mission</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/#/product/1">
+                                                <span class="text">Gym with Tim</span>
+                                            </a>
+                                        </li>
+                                        <li class="more">
+                                            <a href="/#/">
+                                                <span class="text">MORE...</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="navigation">
+                                    <ul>
+                                        <li class="title">MOST RENTABLE</li>
+                                        <li>
+                                            <a href="/#/product/1">
+                                                <span class="text">Joe's Adventure</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/#/product/1">
+                                                <span class="text">The Mission</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/#/product/1">
+                                                <span class="text">Gym with Tim</span>
+                                            </a>
+                                        </li>
+                                        <li class="more">
+                                            <a href="/#/">
+                                                <span class="text">MORE...</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="navigation">
-                                <ul>
-                                    <li class="title">MOST RENTABLE</li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Joe's Adventure</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">The Mission</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Gym with Tim</span>
-                                        </a>
-                                    </li>
-                                    <li class="more">
-                                        <a href="/#/">
-                                            <span class="text">MORE...</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="page-sidepanel__button page-sidepanel__button--lower" data-action="sidepanel-hide"><div></div></div>
-            </div>
+                        </c-slide>
+                    </c-swiper>
+                </c-sidepanel>
             </transition>
             <!-- //END SIDEPANEL -->
 
@@ -272,6 +277,10 @@
 
 
 <script>
+    import 'swiper/dist/css/swiper.css'
+
+    import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
 export default {
     props: [
         'navigationKey'
@@ -287,7 +296,10 @@ export default {
         'c-asset-navigation': (resolve) => require(['@/ui/components/navigation/asset'], resolve),
         'c-product-navigation': (resolve) => require(['@/ui/components/navigation/product'], resolve),
         'c-project-navigation': (resolve) => require(['@/ui/components/navigation/project'], resolve),
-        'c-notification': (resolve) => require(['@/ui/components/notification/index.vue'], resolve)
+        'c-notification': (resolve) => require(['@/ui/components/notification/index.vue'], resolve),
+        'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
+        'c-swiper': swiper,
+        'c-slide': swiperSlide
     },
     computed: {
         is_connected() {
@@ -298,6 +310,9 @@ export default {
         },
         user_submitted_connection_message() {
             return this.$store.state.network.user_submitted_connection_messages[0]
+        },
+        swiper() {
+            return this.$refs.mySwiper.swiper
         }
     },
     data() {
@@ -345,39 +360,36 @@ export default {
                     actionOnClose: '',
                     actionOnTextClick: ''
                 }
-            ]
+            ],
+            panelOption:{
+                spaceBetween: 10,
+                loop: false,
+            }
         }
     },
     updated() {
     },
     methods: {
-        installOwlCarousel: function () {
-            window.owlcarousel()
+        showSlide(sl){
+            switch(sl){
+                case 'notification':
+                    this.swiper.slideTo(0, 1000, false);
+                    break;
+                case 'messages':
+                    this.swiper.slideTo(1, 1000, false);
+                    break;
+                case 'updates':
+                    this.swiper.slideTo(2, 1000, false);
+                    break;
+                case 'top_lists':
+                    this.swiper.slideTo(3, 1000, false);
+                    break;
+            }
 
-            let owl = $('.owl-carousel').owlCarousel()
-
-            owl.trigger('to.owl.carousel', [3])
-
-            $('.js-go-notifications').click(function() {
-                owl.trigger('to.owl.carousel', [0])
-            })
-
-            $('.js-go-messages').click(function() {
-                owl.trigger('to.owl.carousel', [1])
-            })
-
-            $('.js-go-updates').click(function() {
-                owl.trigger('to.owl.carousel', [2])
-            })
-
-            $('.js-go-lists').click(function() {
-                owl.trigger('to.owl.carousel', [3])
-            })
         }
     },
     mounted: function () {
         this.$nextTick(() => {
-            this.installOwlCarousel()
             this.loadingState = false;
             console.log('ready')
         })
@@ -398,7 +410,9 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-
+    [v-cloak] {
+        display: none;
+    }
     .page-sidepanel {
         text-align: right;
         padding-right: 30px;
