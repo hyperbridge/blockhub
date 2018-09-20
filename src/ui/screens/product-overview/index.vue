@@ -183,20 +183,20 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default']),
-            'c-game-plan': (resolve) => require(['@/ui/components/game-plans/plan']),
-            'c-screen-gallery': (resolve) => require(['@/ui/components/screen-gallery/gallery']),
-            'c-sale-box': (resolve) => require(['@/ui/components/sale-box/box']),
-            'c-tags-list': (resolve) => require(['@/ui/components/tags']),
-            'c-rating-block': (resolve) => require(['@/ui/components/rating-block']),
-            'c-frequently-traded-assets': (resolve) => require(['@/ui/components/frequently-traded-assets']),
-            'c-community-spotlight': (resolve) => require(['@/ui/components/community-spotlight']),
-            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar']),
-            'c-review': (resolve) => require(['@/ui/components/review']),
-            'c-system-requirements': (resolve) => require(['@/ui/components/product-overview/system-requirements']),
-            'c-language-support': (resolve) => require(['@/ui/components/product-overview/language-support']),
-            'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom']),
-            'c-popup': (resolve) => require(['@/ui/components/popups'])
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-game-plan': (resolve) => require(['@/ui/components/game-plans/plan'], resolve),
+            'c-screen-gallery': (resolve) => require(['@/ui/components/screen-gallery/gallery'], resolve),
+            'c-sale-box': (resolve) => require(['@/ui/components/sale-box/box'], resolve),
+            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-rating-block': (resolve) => require(['@/ui/components/rating-block'], resolve),
+            'c-frequently-traded-assets': (resolve) => require(['@/ui/components/frequently-traded-assets'], resolve),
+            'c-community-spotlight': (resolve) => require(['@/ui/components/community-spotlight'], resolve),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+            'c-review': (resolve) => require(['@/ui/components/review'], resolve),
+            'c-system-requirements': (resolve) => require(['@/ui/components/product-overview/system-requirements'], resolve),
+            'c-language-support': (resolve) => require(['@/ui/components/product-overview/language-support'], resolve),
+            'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
+            'c-popup': (resolve) => require(['@/ui/components/popups'], resolve)
         },
         data() {
             const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.';

@@ -403,9 +403,9 @@
 <script>
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default']),
-            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar']),
-            'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'])
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+            'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve)
         },
         computed: {
             identityCount() {

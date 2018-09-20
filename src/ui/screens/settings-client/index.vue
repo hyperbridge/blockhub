@@ -107,8 +107,8 @@ import FundingProtocol from 'funding-protocol'
 
 export default {
     components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default']),
-        'c-switch': (resolve) => require(['@/ui/components/switch'])
+        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+        'c-switch': (resolve) => require(['@/ui/components/switch'], resolve)
     },
     data() {
         return {

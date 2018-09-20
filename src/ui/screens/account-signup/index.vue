@@ -384,11 +384,11 @@
 <script>
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default']),
-            'c-tab': (resolve) => require(['@/ui/components/tab/tab']),
-            'c-tabs': (resolve) => require(['@/ui/components/tab/tabs']),
-            'c-datepicker': (resolve) => require(['vuejs-datepicker']),
-            'c-user-card': (resolve) => require(['@/ui/components/user-card'])
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
+            'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
+            'c-datepicker': (resolve) => require(['vuejs-datepicker'], resolve),
+            'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve)
         },
         data() {
             return {

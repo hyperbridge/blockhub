@@ -3331,7 +3331,7 @@ const navigation = storiesOf('Navigation', module);
 
 ['account', 'asset', 'funding'].forEach(component => {
     navigation.add(component, () => ({
-        components: { [component]: (resolve) => require([`../ui/components/navigation/${component}`]) },
+        components: { [component]: (resolve) => require([`../ui/components/navigation/${component}`], resolve) },
         template: `<${component}/>`
     }))
 });

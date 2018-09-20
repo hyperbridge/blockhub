@@ -9,7 +9,7 @@ export default {
   components: {
   },
   components: {
-    'c-layout': (resolve) => require(['@/ui/layouts/default'])
+    'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
   },
   data: () => ({
     wallets: []

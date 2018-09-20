@@ -31,7 +31,7 @@ export default {
         }
     },
     components: {
-        'c-tags': (resolve) => require(['@/ui/components/tags'])
+        'c-tags': (resolve) => require(['@/ui/components/tags'], resolve)
     }
 }
 </script>

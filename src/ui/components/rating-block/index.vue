@@ -35,7 +35,7 @@ export default {
         }
     },
     components: {
-        'c-rating-stars': (resolve) => require(['../rating-stars'])
+        'c-rating-stars': (resolve) => require(['../rating-stars'], resolve)
     }
 }
 </script>

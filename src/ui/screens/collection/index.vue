@@ -55,13 +55,13 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default']),
-            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation']),
-            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar']),
-            'c-heading-bar-fields' : (resolve) => require(['@/ui/components/heading-bar/additional-action']),
-            'c-block': (resolve) => require(['@/ui/components/block']),
-            'c-pagination': (resolve) => require(['@/ui/components/pagination']),
-            'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid'])
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+            'c-heading-bar-fields' : (resolve) => require(['@/ui/components/heading-bar/additional-action'], resolve),
+            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
+            'c-pagination': (resolve) => require(['@/ui/components/pagination'], resolve),
+            'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid'], resolve)
         },
         data() {
             return {

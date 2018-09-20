@@ -9,8 +9,8 @@
 <script>
 export default {
     components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default']),
-        'c-block-1': (resolve) => require(['@/ui/components/block'])
+        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+        'c-block-1': (resolve) => require(['@/ui/components/block'], resolve)
     },
     data() {
         return {

@@ -152,17 +152,17 @@
 
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default']),
-            'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid']),
-            'c-assets-list': (resolve) => require(['@/ui/components/assets-list-item']),
-            'c-assets-item': (resolve) => require(['@/ui/components/assets-list-item/item']),
-            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar']),
-            'c-heading-bar-fields': (resolve) => require(['@/ui/components/heading-bar/additional-action']),
-            'c-pagination': (resolve) => require(['@/ui/components/pagination']),
-            'c-block': (resolve) => require(['@/ui/components/block']),
-            'c-collection-item': (resolve) => require(['@/ui/components/collection/item']),
-            'c-banner': (resolve) => require(['@/ui/components/banner/simple']),
-            'c-main-banner': (resolve) => require(['@/ui/components/banner/index']),
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid'], resolve),
+            'c-assets-list': (resolve) => require(['@/ui/components/assets-list-item'], resolve),
+            'c-assets-item': (resolve) => require(['@/ui/components/assets-list-item/item'], resolve),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+            'c-heading-bar-fields': (resolve) => require(['@/ui/components/heading-bar/additional-action'], resolve),
+            'c-pagination': (resolve) => require(['@/ui/components/pagination'], resolve),
+            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
+            'c-collection-item': (resolve) => require(['@/ui/components/collection/item'], resolve),
+            'c-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
+            'c-main-banner': (resolve) => require(['@/ui/components/banner/index'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide
         },

@@ -83,10 +83,10 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default']),
-            'c-tags-list': (resolve) => require(['@/ui/components/tags']),
-            'c-item': (resolve) => require(['@/ui/components/product-community/item']),
-            'c-post-comment': (resolve) => require(['@/ui/components/product-community/comment'])
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-item': (resolve) => require(['@/ui/components/product-community/item'], resolve),
+            'c-post-comment': (resolve) => require(['@/ui/components/product-community/comment'], resolve)
         },
         data() {
             const authors = [

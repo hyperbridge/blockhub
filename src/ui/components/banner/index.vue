@@ -27,7 +27,7 @@
             video: Object
         },
         components:{
-            'c-button': (resolve) => require(['@/ui/components/buttons']),
+            'c-button': (resolve) => require(['@/ui/components/buttons'], resolve),
         },
         computed:{
             bannerImg(){

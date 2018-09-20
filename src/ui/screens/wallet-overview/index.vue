@@ -23,7 +23,7 @@
 export default {
   props: ['id'],
   components: {
-    'c-layout': (resolve) => require(['@/ui/layouts/default'])
+    'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
   },
   data() {
     return {

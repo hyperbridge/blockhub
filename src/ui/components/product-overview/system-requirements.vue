@@ -44,8 +44,8 @@ export default {
         }
     },
     components: {
-        'c-tab-universal': (resolve) => require(['@/ui/components/tab/tab-universal']),
-        'c-tabs-universal': (resolve) => require(['@/ui/components/tab/tabs-universal'])
+        'c-tab-universal': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
+        'c-tabs-universal': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve)
     },
     computed: {
         tab_names() {

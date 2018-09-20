@@ -120,7 +120,7 @@ export default {
     ])
   },
   components: {
-    'c-layout': (resolve) => require(['@/ui/layouts/default'])
+    'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
   },
   created() {
 

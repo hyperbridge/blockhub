@@ -32,7 +32,7 @@
     export default {
         name: 'activity-chart',
         components: {
-            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'])
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve)
         },
         props: {
             title: {

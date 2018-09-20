@@ -14,7 +14,7 @@
         name: 'assets-list-items',
         props: ['items', 'itemInRow'],
         components:{
-            'c-assets-item': (resolve) => require(['@/ui/components/assets-list-item/item'])
+            'c-assets-item': (resolve) => require(['@/ui/components/assets-list-item/item'], resolve)
         }
     }
 </script>

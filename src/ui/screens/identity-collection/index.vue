@@ -22,11 +22,11 @@
 <script>
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default']),
-            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation']),
-            'c-block': (resolve) => require(['@/ui/components/block']),
-            'c-collection-item': (resolve) => require(['@/ui/components/collection/item']),
-            'c-pagination': (resolve) => require(['@/ui/components/pagination'])
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
+            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
+            'c-collection-item': (resolve) => require(['@/ui/components/collection/item'], resolve),
+            'c-pagination': (resolve) => require(['@/ui/components/pagination'], resolve)
         },
         data() {
             return {

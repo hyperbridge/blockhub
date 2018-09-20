@@ -73,10 +73,10 @@
 <script>
     export default {
         components: {
-            'c-sidebar-menu-link': (resolve) => require(['@/ui/components/sidebar-menu/menu_item']),
-            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index']),
-            'c-searcher': (resolve) => require(['@/ui/components/searcher']),
-            'c-range-slider': (resolve) => require(['@/ui/components/range-slider'])
+            'c-sidebar-menu-link': (resolve) => require(['@/ui/components/sidebar-menu/menu_item'], resolve),
+            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
+            'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
+            'c-range-slider': (resolve) => require(['@/ui/components/range-slider'], resolve)
         },
         data() {
             return {}

@@ -88,9 +88,9 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default']),
-            'c-tags-list': (resolve) => require(['@/ui/components/tags']),
-            'c-projects-card': (resolve) => require(['@/ui/components/projects/card'])
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-projects-card': (resolve) => require(['@/ui/components/projects/card'], resolve)
         },
         data() {
             return {

@@ -342,12 +342,12 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default']),
-            'c-block': (resolve) => require(['@/ui/components/block/index']),
-            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar']),
-            'c-heading-bar-fields' : (resolve) => require(['@/ui/components/heading-bar/additional-action']),
-            'c-pagination': (resolve) => require(['@/ui/components/pagination/index']),
-            'c-collection-item': (resolve) => require(['@/ui/components/collection/item']),
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+            'c-heading-bar-fields' : (resolve) => require(['@/ui/components/heading-bar/additional-action'], resolve),
+            'c-pagination': (resolve) => require(['@/ui/components/pagination/index'], resolve),
+            'c-collection-item': (resolve) => require(['@/ui/components/collection/item'], resolve),
         },
         data() {
             return {
