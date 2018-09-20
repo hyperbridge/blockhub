@@ -91,12 +91,12 @@
 <script>
     export default {
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-block': () => import('@/ui/components/block'),
-            'c-article-item': () => import('@/ui/components/help/article-item'),
-            'c-topic-item': () => import('@/ui/components/help/topic-item'),
-            'c-list-item': () => import('@/ui/components/help/simple-item'),
-            'c-card': () => import('@/ui/components/help/help-card.vue'),
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
+            'c-article-item': (resolve) => require(['@/ui/components/help/article-item'], resolve),
+            'c-topic-item': (resolve) => require(['@/ui/components/help/topic-item'], resolve),
+            'c-list-item': (resolve) => require(['@/ui/components/help/simple-item'], resolve),
+            'c-card': (resolve) => require(['@/ui/components/help/help-card.vue'], resolve),
         },
         data: () => ({
         }),

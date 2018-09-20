@@ -1,9 +1,17 @@
-import Vue from 'vue';
+import Vue from 'vue'
 
-Vue.component('c-layout', () => import('@/ui/layouts/default'));
-Vue.component('c-heading-bar', () => import('@/ui/components/heading-bar'));
-Vue.component('c-button', () => import('@/ui/components/buttons'));
-Vue.component('c-switch', () => import('@/ui/components/switch'));
-Vue.component('c-icon', () => import('@/ui/components/icon'));
-Vue.component('c-input', () => import('@/ui/components/inputs'));
-Vue.component('c-img', () => import('@/ui/components/img'));
+import Layout from '@/ui/layouts/default'
+import HeadingBar from '@/ui/components/heading-bar'
+import Button from '@/ui/components/buttons'
+import Switch from '@/ui/components/switch'
+import Icon from '@/ui/components/icon'
+import Input from '@/ui/components/inputs'
+import Img from '@/ui/components/img'
+
+Vue.component('c-layout', Layout)
+Vue.component('c-heading-bar', HeadingBar)
+Vue.component('c-button', Button)
+Vue.component('c-switch', Switch)
+Vue.component('c-icon', Icon)
+Vue.component('c-input', Input)
+Vue.component('c-img', Img)

@@ -242,13 +242,13 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-content-navigation': () => import('@/ui/components/content-navigation'),
-            'c-assets-grid': () => import('@/ui/components/assets-grid'),
-            'c-featured-assets': () => import('@/ui/components/assets-list-item/featured-list'),
-            'c-user-card': () => import('@/ui/components/user-card'),
-            'c-button-arrows': () => import('@/ui/components/buttons/arrows')
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
+            'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid'], resolve),
+            'c-featured-assets': (resolve) => require(['@/ui/components/assets-list-item/featured-list'], resolve),
+            'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
+            'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'], resolve)
         },
         data() {
             return {

@@ -79,8 +79,8 @@
             }
         },
         components: {
-            'c-tags': () => import('@/ui/components/tags'),
-            'c-rating-stars': () => import('@/ui/components/rating-stars')
+            'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-rating-stars': (resolve) => require(['@/ui/components/rating-stars'], resolve)
         }
     }
 </script>

@@ -455,18 +455,18 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-game-plan': () => import('@/ui/components/game-plans/plan'),
-            'c-block-1': () => import('@/ui/components/block'),
-            'c-screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
-            'c-tags-list': () => import('@/ui/components/tags'),
-            'c-rating-block': () => import('@/ui/components/rating-block'),
-            'c-frequently-traded-assets': () => import('@/ui/components/frequently-traded-assets'),
-            'c-community-spotlight': () => import('@/ui/components/community-spotlight'),
-            'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-review': () => import('@/ui/components/review'),
-            'c-progress-bar': () => import('@/ui/components/progress-bar'),
-            'c-badges': () => import('@/ui/components/projects/badges.vue')
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-game-plan': (resolve) => require(['@/ui/components/game-plans/plan'], resolve),
+            'c-block-1': (resolve) => require(['@/ui/components/block'], resolve),
+            'c-screen-gallery': (resolve) => require(['@/ui/components/screen-gallery/gallery'], resolve),
+            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-rating-block': (resolve) => require(['@/ui/components/rating-block'], resolve),
+            'c-frequently-traded-assets': (resolve) => require(['@/ui/components/frequently-traded-assets'], resolve),
+            'c-community-spotlight': (resolve) => require(['@/ui/components/community-spotlight'], resolve),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+            'c-review': (resolve) => require(['@/ui/components/review'], resolve),
+            'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar'], resolve),
+            'c-badges': (resolve) => require(['@/ui/components/projects/badges.vue'], resolve)
         },
         data() {
             return {

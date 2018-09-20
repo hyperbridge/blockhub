@@ -6,8 +6,9 @@ import Snotify, { SnotifyPosition } from 'vue-snotify'
 import app from './app'
 import router from './router'
 import store, { initializer } from './store'
-import './filters.js';
+import './filters';
 import './components';
+import './directives';
 import './css/styles.scss';
 
 Vue.config.productionTip = false

@@ -44,7 +44,7 @@
                 <p><span class="fa fa-check"></span> Publish</p>
             </button>
             <button class="exit-btn btn btn-secondary btn-block btn--icon btn--icon-left" @click="clickExit()" v-if="is_editing">
-                <p><span class="fa fa-times"></span> Preview</p>
+                <p><span class="fa fa-eye"></span> Preview</p>
             </button>
         </div>
         <nav class="app-header__nav" v-if="!signed_in || (signed_in && developer_enabled && !is_editing)">
@@ -528,7 +528,7 @@ export default {
 
     .app-header__options {
         position: absolute;
-        top: 0px;
+        top: 40px;
         right: 120px;
         width: 400px;
         text-align: right;

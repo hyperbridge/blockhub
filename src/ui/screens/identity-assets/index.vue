@@ -7,7 +7,7 @@
 <script>
 export default {
   components: {
-    'c-layout': () => import('@/ui/layouts/default')
+    'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
   },
   data: () => ({
     items: []

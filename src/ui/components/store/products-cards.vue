@@ -12,7 +12,7 @@
 export default {
     name: 'products-cards',
     components: {
-        'c-product-card-dynamic': () => import('@/ui/components/store/product-card-dynamic')
+        'c-product-card-dynamic': (resolve) => require(['@/ui/components/store/product-card-dynamic'], resolve)
     },
     props: {
         products: {

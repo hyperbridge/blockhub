@@ -58,11 +58,83 @@
                             </div>
 
                             <div class="navigation">
-                                <c-notification
-                                    v-for="(notif, index) in ntf_messages"
-                                    :key="index"
-                                    :notification="notif"
-                                />
+                                <ul class="notifications-list">
+                                    <li class="notifi_item info">
+                                        <div class="title">
+                                            <h5 class="text-left">
+                                                <i class="fas fa-info"></i>
+                                                You should know ...
+                                                <a href="#3" class="close">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div class="text">
+                                            Something is changed in our privace policy,
+                                            please view this notification. Click to view full.
+                                        </div>
+                                    </li>
+                                    <li class="notifi_item success">
+                                        <div class="title">
+                                            <h5 class="text-left">
+                                                <i class="fas fa-check-circle"></i>
+                                                You should know ...
+                                                <a href="#3" class="close">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div class="text">
+                                            Something is changed in our privace policy,
+                                            please view this notification. Click to view full.
+                                        </div>
+                                    </li>
+                                    <li class="notifi_item warning">
+                                        <div class="title">
+                                            <h5 class="text-left">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                                You should know ...
+                                                <a href="#3" class="close">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div class="text">
+                                            Something is changed in our privace policy,
+                                            please view this notification. Click to view full.
+                                        </div>
+                                    </li>
+                                    <li class="notifi_item danger">
+                                        <div class="title">
+                                            <h5 class="text-left">
+                                                <i class="fas fa-times-circle"></i>
+                                                You should know ...
+                                                <a href="#3" class="close">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div class="text">
+                                            Something is changed in our privace policy,
+                                            please view this notification. Click to view full.
+                                        </div>
+                                    </li>
+                                    <li class="notifi_item">
+                                        <div class="title">
+                                            <h5 class="text-left">
+                                                <i class="fas fa-cog"></i>
+                                                You should know ...
+                                                <a href="#3" class="close">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div class="text">
+                                            Something is changed in our privace policy,
+                                            please view this notification. Click to view full.
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
 
                         </div>
@@ -274,17 +346,16 @@ export default {
         'navigationKey'
     ],
     components: {
-        'c-header': () => import('@/ui/components/headers/basic'),
-        'c-wallet-navigation': () => import('@/ui/components/navigation/wallet'),
-        'c-account-navigation': () => import('@/ui/components/navigation/account'),
-        'c-settings-navigation': () => import('@/ui/components/navigation/settings'),
-        'c-help-navigation': () => import('@/ui/components/navigation/help'),
-        'c-funding-navigation': () => import('@/ui/components/navigation/funding'),
-        'c-store-navigation': () => import('@/ui/components/navigation/store'),
-        'c-asset-navigation': () => import('@/ui/components/navigation/asset'),
-        'c-product-navigation': () => import('@/ui/components/navigation/product'),
-        'c-project-navigation': () => import('@/ui/components/navigation/project'),
-        'c-notification': () => import('@/ui/components/notification'),
+        'c-header': (resolve) => require(['@/ui/components/headers/basic'], resolve),
+        'c-wallet-navigation': (resolve) => require(['@/ui/components/navigation/wallet'], resolve),
+        'c-account-navigation': (resolve) => require(['@/ui/components/navigation/account'], resolve),
+        'c-settings-navigation': (resolve) => require(['@/ui/components/navigation/settings'], resolve),
+        'c-help-navigation': (resolve) => require(['@/ui/components/navigation/help'], resolve),
+        'c-funding-navigation': (resolve) => require(['@/ui/components/navigation/funding'], resolve),
+        'c-store-navigation': (resolve) => require(['@/ui/components/navigation/store'], resolve),
+        'c-asset-navigation': (resolve) => require(['@/ui/components/navigation/asset'], resolve),
+        'c-product-navigation': (resolve) => require(['@/ui/components/navigation/product'], resolve),
+        'c-project-navigation': (resolve) => require(['@/ui/components/navigation/project'], resolve)
     },
     computed: {
         is_connected() {
@@ -299,53 +370,12 @@ export default {
     },
     data() {
         return {
-            ntf_messages: [
-                {
-                    type: 'info',
-                    title: 'Info message',
-                    text: 'Something is changed in our policy, please view this notification.Click to view full',
-                    actionOnClose: false,
-                    actionOnTextClick: true
-                },
-                {
-                    type: 'warning',
-                    title: 'Warning message',
-                    text: 'Something is changed in our policy, please view this notification.Click to view full',
-                    actionOnClose: '',
-                    actionOnTextClick: ''
-                },
-                {
-                    type: 'danger',
-                    title: 'Danger message',
-                    text: 'Something is changed in our policy, please view this notification.Click to view full',
-                    actionOnClose: '',
-                    actionOnTextClick: ''
-                },
-                {
-                    type: 'success',
-                    title: 'Success message',
-                    text: 'Something is changed in our policy, please view this notification.Click to view full',
-                    actionOnClose: '',
-                    actionOnTextClick: ''
-                },
-                {
-                    type: '',
-                    title: 'Other message',
-                    text: 'Something is changed in our policy, please view this notification.Click to view full',
-                    actionOnClose: '',
-                    actionOnTextClick: ''
-                },
-            ],
             navigationComponent: this.navigationKey || false
         }
     },
-    created(){
-        console.log('created state');
-        document.addEventListener('onerror', function(event) {
-            console.log('img err');
-        });
-    },
     updated() {
+
+        //$('.owl-controls').insertBefore('')
     },
     methods: {
         installOwlCarousel: function () {
@@ -370,9 +400,6 @@ export default {
             $('.js-go-lists').click(function() {
                 owl.trigger('to.owl.carousel', [3])
             })
-        },
-        brokenImg(event){
-            event.target.src = 'https://www.golositadelsalento.it/wp-content/uploads/2018/07/No_Image_Available-21-1.jpg'
         }
     },
     mounted: function () {
@@ -390,7 +417,7 @@ export default {
     }
 
     .owl-carousel .owl-stage {
-        /*transition: unset !important;*/
+        transition: unset !important;
     }
 
 </style>
@@ -404,24 +431,6 @@ export default {
 
     .navigation {
         margin-bottom: 50px;
-        max-height: calc( 100vh - 160px);
-        overflow-y: auto;
-        overflow-x: hidden;
-        padding-right: 10px;
-        &::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-            background-color: #272d46;
-        }
-
-        &::-webkit-scrollbar {
-            width: 6px;
-            background-color: #272d46;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: #181826;
-            border: none;
-        }
     }
 
     .navigation .text {

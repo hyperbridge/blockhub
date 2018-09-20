@@ -9,29 +9,31 @@
     "mem": "node --max_old_space_size=4092 build/dev-server.js",
     "build": "node build/build.js",
     "push": "NODE_ENV=production npm run build && git add -A && git commit -m \"Rebuild\" && git push",
-    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
+    "test": "NODE_ENV=test ./node_modules/.bin/jest",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@veriff/js-sdk": "^0.3.4",
+    "jest": "^23.6.0",
+    "jest-serializer-vue": "^2.0.2",
     "node-sass": "^4.9.0",
     "ts-loader": "^4.4.1",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^3.1.3",
+    "vue-jest": "^2.6.0",
     "vue-router": "^3.0.1",
     "vue-snotify": "^3.2.1",
     "vuejs-datepicker": "^1.5.3"
   },
   "devDependencies": {
-    "@storybook/addon-knobs": "^4.0.0-alpha.16",
-    "@storybook/addon-notes": "^4.0.0-alpha.16",
-    "@storybook/addon-viewport": "^4.0.0-alpha.16",
     "@storybook/addon-actions": "^4.0.0-alpha.16",
+    "@storybook/addon-knobs": "^4.0.0-alpha.16",
     "@storybook/addon-links": "^4.0.0-alpha.16",
+    "@storybook/addon-notes": "^4.0.0-alpha.16",
+    "@storybook/addon-storyshots": "^4.0.0-alpha.16",
+    "@storybook/addon-viewport": "^4.0.0-alpha.16",
     "@storybook/addons": "^4.0.0-alpha.16",
     "@storybook/vue": "^4.0.0-alpha.16",
     "@types/core-js": "^2.5.0",
@@ -39,12 +41,14 @@
     "@types/node": "^10.3.3",
     "@types/sinon": "^5.0.1",
     "@types/webpack-env": "^1.13.6",
+    "@vue/test-utils": "^1.0.0-beta.25",
     "autoprefixer": "^7.1.5",
     "awesome-typescript-loader": "^5.0.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-istanbul": "^4.1.5",
+    "babel-plugin-require-context-hook": "^1.0.0",
     "babel-plugin-transform-es2015-template-literals": "^6.22.0",
     "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -78,6 +82,7 @@
     "html-webpack-plugin": "^3.2.0",
     "http-proxy-middleware": "^0.17.4",
     "inject-loader": "^3.0.1",
+    "jest-vue-preprocessor": "^1.4.0",
     "js-md5": "^0.7.3",
     "json-loader": "^0.5.7",
     "karma": "^1.7.1",
@@ -131,5 +136,55 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "jest": {
+    "verbose": true,
+    "bail": true,
+    "moduleFileExtensions": [
+      "vue",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1",
+      "\\.(svg|woff2|css|scss)$": "<rootDir>/src/__mocks__/fileMock.js"
+    },
+    "transform": {
+      "^.+\\.jsx?$": "<rootDir>/node_modules/babel-jest",
+      ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(@storybook/.*\\.vue$))"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/jest-serializer-vue"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/docs/",
+      "<rootDir>/static/",
+      "<rootDir>/test/",
+      "<rootDir>/node_modules/"
+    ]
+  },
+  "babel": {
+    "env": {
+      "test": {
+        "presets": [
+          [
+            "env",
+            {
+              "targets": {
+                "node": "current"
+              }
+            }
+          ]
+        ],
+        "plugins": [
+          "require-context-hook"
+        ]
+      }
+    }
+  }
 }
