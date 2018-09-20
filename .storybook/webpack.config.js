@@ -9,5 +9,9 @@ module.exports = (storybookBaseConfig, configType, defaultConfig) => {
 
     defaultConfig.resolve.alias['@'] = path.resolve('src')
 
+    defaultConfig.node = {
+        fs: 'empty'
+    }
+
     return defaultConfig
 }
