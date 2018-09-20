@@ -22,16 +22,16 @@
                             </div>
                         </c-block>
 
-                        <c-block class="margin-bottom-30" v-if="topic.articles">
-                            <div class="article-list">
+                        <c-block class="margin-bottom-30 padding-bottom-5">
+                            <div class="article-list" v-if="showByTopic(articles, topic.id)">
                                 <c-article-item :link="`/#/help/${topic.id}/article/${article.slug}`"
-                                                v-for="(article, index) in topic.articles"
+                                                v-for="(article, index) in showByTopic(articles, topic.id)"
                                                 :key="index"
-                                                :class="{'mb-0': topic.articles.length === index+1 }"
                                 >
                                     {{ article.title }}
                                 </c-article-item>
                             </div>
+                            <h3 v-else>Nothing to show</h3>
                         </c-block>
 
                     </div>
@@ -39,14 +39,17 @@
                         <c-card class="text-center">
                             <h4 class="h2">Community</h4>
                             <p>Engage with a community of passionate experts to get the answers you need</p>
-                            <c-button icon_hide class="width-auto margin-top-10" href="https://github.com/hyperbridge" target="_blank">Visit GitHub</c-button>
+                            <c-button icon_hide class="width-auto margin-top-10" href="https://github.com/hyperbridge"
+                                      target="_blank">Visit GitHub
+                            </c-button>
                         </c-card>
                     </div>
                     <div class="col-12 col-lg-6">
                         <c-card class="text-center">
                             <h4 class="h2">BlockHub Support</h4>
                             <p>Create a support ticket and our support experts will get back to you</p>
-                            <c-button status="info" icon_hide class="width-auto margin-top-10">Create a ticket</c-button>
+                            <c-button status="info" icon_hide class="width-auto margin-top-10">Create a ticket
+                            </c-button>
                         </c-card>
                     </div>
                 </div>
@@ -57,7 +60,7 @@
 
 <script>
     export default {
-        props:['id'],
+        props: ['id'],
         components: {
             'c-layout': () => import('@/ui/layouts/default'),
             'c-block': () => import('@/ui/components/block'),
@@ -66,52 +69,74 @@
             'c-list-item': () => import('@/ui/components/help/simple-item'),
             'c-card': () => import('@/ui/components/help/help-card.vue'),
         },
-        data: () => ({}),
+        data: () => ({
+            showArticles: false,
+            topic_id: this.id
+        }),
+        methods: {
+            showByTopic(data, id) {
+                let results = [],
+                    key = 'topic';
+
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i][key].includes(id)) {
+                        results.push(data[i]);
+                    }
+                }
+                return results;
+            }
+        },
         computed: {
             topic: function () {
-                return this.$store.state.marketplace.topics[this.id]
+                return this.$store.state.marketplace.help.topics[this.id]
+            },
+            articles: function () {
+                return this.$store.state.marketplace.help.articles
             }
-        }
 
+        }
     }
 </script>
 
 <style lang="scss" scoped>
-    .topic-ttl{
+    .topic-ttl {
         display: flex;
         justify-content: flex-start;
         align-items: center;
         padding: 10px 0;
         font-size: 18px;
         color: #fff;
-        i{
+        i {
             margin-right: 20px;
             font-size: 24px;
         }
     }
-    .article-list{
+
+    .article-list {
         padding: 0;
         margin: 0;
     }
-    .topics-list{
+
+    .topics-list {
         margin: 0 -10px;
         padding: 0;
         display: flex;
         flex-wrap: wrap;
-        div{
-            width: calc( 100%/4 );
+        div {
+            width: calc(100% / 4);
         }
     }
-    .simple-list{
+
+    .simple-list {
         padding: 0;
         margin: 0;
         display: flex;
         flex-wrap: wrap;
-        li{
+        li {
             list-style: none;
             padding: 5px 0;
             width: 100%;
-            a{
+            a {
                 color: #fff;
             }
         }

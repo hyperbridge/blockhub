@@ -17,12 +17,12 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <c-block title="Trending articles" class="margin-bottom-30" v-if="topics['0']['articles']">
+                        <c-block title="Trending articles" class="margin-bottom-30" v-if="articles">
                             <div class="article-list">
-                                <c-article-item :link="`/#/help/${topics['0']['id']}/article/${article.slug}`"
-                                                v-for="(article, index) in topics['0']['articles']"
+                                <c-article-item :link="`/#/help/${0}/article/${article.slug}`"
+                                                v-for="(article, index) in showByTopic(articles, 0)"
                                                 :key="index"
-                                                :class="{'mb-0': topics['0']['articles'].length === index+1 }"
+                                                :class="{'mb-0': articles.length === index+1 }"
                                 >
                                     {{ article.title }}
                                 </c-article-item>
@@ -45,35 +45,25 @@
                     <div class="col-12 col-lg-6 margin-bottom-30">
                         <c-block title="Changelog">
                             <div class="simple-list">
-                                <c-list-item link="#1">
-                                    Build result API endpoint removal
-                                </c-list-item>
-                                <c-list-item link="#1">
-                                    Private Space VPN and Internal Routing are now generally available
-                                </c-list-item>
-                                <c-list-item link="#1">
-                                    Default Stack
-                                </c-list-item>
-                                <c-list-item link="#1">
-                                    Images Updated
-                                </c-list-item>
+                                <c-list-item :link="`/#/help/${5}/article/${article.slug}`"
+                                             v-for="(article, index) in showByTopic(articles, 5)"
+                                             :key="index"
+                                             :class="{'mb-0': articles.length === index+1 }"
+                                >
+                                    {{ article.title }}
+                                    </c-list-item>
                             </div>
                         </c-block>
                     </div>
                     <div class="col-12 col-lg-6 margin-bottom-30">
                         <c-block title="Common issues">
                             <div class="simple-list">
-                                <c-list-item link="#1">
-                                    Build result API endpoint removal
-                                </c-list-item>
-                                <c-list-item link="#1">
-                                    Private Space VPN and Internal Routing are now generally available
-                                </c-list-item>
-                                <c-list-item link="#1">
-                                    Default Stack
-                                </c-list-item>
-                                <c-list-item link="#1">
-                                    Images Updated
+                                <c-list-item :link="`/#/help/${7}/article/${article.slug}`"
+                                             v-for="(article, index) in showByTopic(articles, 7)"
+                                             :key="index"
+                                             :class="{'mb-0': articles.length === index+1 }"
+                                >
+                                    {{ article.title }}
                                 </c-list-item>
                             </div>
                         </c-block>
@@ -110,11 +100,27 @@
         },
         data: () => ({
         }),
+        methods:{
+            showByTopic(data, id){
+                let results = [],
+                    key = 'topic';
+
+                for(let i = 0; i < data.length; i++) {
+                    if( data[i][key].includes(id)) {
+                        results.push(data[i]);
+                    }
+                }
+                return results;
+            }
+        },
         computed: {
             topics: function () {
-                return this.$store.state.marketplace.topics
+                return this.$store.state.marketplace.help.topics
+            },
+            articles: function () {
+                return this.$store.state.marketplace.help.articles
             }
-        }
+        },
     }
 </script>
 
