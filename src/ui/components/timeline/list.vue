@@ -42,13 +42,7 @@
                 arr.sort( ( a, b) => {
                     return new Date(a.date) - new Date(b.date);
                 });
-                // let date_a = moment(a.date, 'YYY-MM').format('YY-MM'),
-                //     date_b = moment(b.date, 'YYY-MM').format('YY-MM');
-                // console.log(date_a + ' ' + date_b);
-                // if ( date_a > date_b)
-                //     console.log('write - ',date_a)
-                // a.new_period = date_a;
-                return arr.slice().reverse();
+                return arr.reverse();
             }
         }
     }

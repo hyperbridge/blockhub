@@ -2,7 +2,9 @@
     <!-- PAGE WRAPPER -->
     <div class="page page--w-header page--w-container">
         <!-- PAGE HEADER -->
-        <c-header />
+        <transition name="slide-fade">
+            <c-header :isLoader="loadingState" />
+        </transition>
         <!-- //END PAGE HEADER -->
 
         <!-- PAGE CONTENT WRAPPER -->
@@ -370,12 +372,11 @@ export default {
     },
     data() {
         return {
-            navigationComponent: this.navigationKey || false
+            navigationComponent: this.navigationKey || false,
+            loadingState: true
         }
     },
     updated() {
-
-        //$('.owl-controls').insertBefore('')
     },
     methods: {
         installOwlCarousel: function () {
@@ -405,6 +406,7 @@ export default {
     mounted: function () {
         this.$nextTick(() => {
             this.installOwlCarousel()
+            this.loadingState = false;
         })
     }
 }
@@ -677,5 +679,17 @@ export default {
                 }
             }
         }
+    }
+
+    .slide-fade-enter-active {
+        transition: all .3s ease;
+    }
+    .slide-fade-leave-active {
+        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    .slide-fade-enter, .slide-fade-leave-to
+        /* .slide-fade-leave-active до версии 2.1.8 */ {
+        transform: translateX(10px);
+        opacity: 0;
     }
 </style>
