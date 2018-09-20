@@ -1,24 +1,29 @@
 <template>
     <div class="posts-timeline__post-item" :class="itemPosition">
         <div class="posts-timeline__post--content">
+            <div class="post-date">
+                {{ dateFormat(item.date) }}
+            </div>
             <a href="#3">
                 <h3>{{ item.title }}</h3>
             </a>
             <p>{{ item.text }}</p>
-            <div class="d-flex align-items-center justify-content-between mt-4 w-100">
-                <div class="post-date">
-                    September 12, 2018
-                </div>
-                <c-button status="info" :href="['#link_' + item.id ]" icon_hide >Read more</c-button>
-            </div>
+            <c-button status="info" :href="['#link_' + item.id ]" icon_hide >Read more</c-button>
         </div>
     </div>
 </template>
 
 <script>
+    import moment from 'moment';
+
     export default {
         name: 'timeline-item',
         props: ['item', 'index'],
+        methods:{
+            dateFormat(date){
+                return moment(date).format('DD MMMM, YYYY');
+            }
+        },
         computed:{
             itemPosition(){
                 if ( this.index % 2 ){
@@ -42,6 +47,7 @@
             font-size: 13px;
             font-weight: bold;
             color: #fff;
+            margin-bottom: 10px;
         }
         h3{
             font-size: 22px;
