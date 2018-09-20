@@ -200,7 +200,7 @@
             }
         },
         components: {
-            'c-layout': () => import('@/ui/layouts/default')
+            'c-layout': (resolve) => require(['@/ui/layouts/default'])
         },
         data: () => ({}),
         created() {

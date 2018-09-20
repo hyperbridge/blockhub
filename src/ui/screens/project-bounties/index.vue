@@ -190,9 +190,9 @@
             }
         },
         components: {
-            'c-tags-list': () => import('@/ui/components/tags'),
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-badges': () => import('@/ui/components/projects/badges.vue')
+            'c-tags-list': (resolve) => require(['@/ui/components/tags']),
+            'c-layout': (resolve) => require(['@/ui/layouts/default']),
+            'c-badges': (resolve) => require(['@/ui/components/projects/badges.vue'])
         },
         methods: {
             save() {

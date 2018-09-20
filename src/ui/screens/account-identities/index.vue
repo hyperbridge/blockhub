@@ -164,13 +164,13 @@
 <script>
     export default {
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-user-card': () => import('@/ui/components/user-card'),
-            'c-button-arrows': () => import('@/ui/components/buttons/arrows'),
-            'c-modal-light': () => import('@/ui/components/modal-light'),
-            'c-checkbox': () => import('@/ui/components/checkbox'),
-            'c-input-searcher': () => import('@/ui/components/inputs/searcher')
+            'c-layout': (resolve) => require(['@/ui/layouts/default']),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar']),
+            'c-user-card': (resolve) => require(['@/ui/components/user-card']),
+            'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows']),
+            'c-modal-light': (resolve) => require(['@/ui/components/modal-light']),
+            'c-checkbox': (resolve) => require(['@/ui/components/checkbox']),
+            'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'])
         },
         data() {
             return {

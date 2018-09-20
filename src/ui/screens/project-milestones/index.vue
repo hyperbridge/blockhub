@@ -256,10 +256,10 @@
             }
         },
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-milestone': () => import('@/ui/components/projects/milestone'),
-            'c-progress-bar': () => import('@/ui/components/progress-bar'),
-            'c-badges': () => import('@/ui/components/projects/badges.vue')
+            'c-layout': (resolve) => require(['@/ui/layouts/default']),
+            'c-milestone': (resolve) => require(['@/ui/components/projects/milestone']),
+            'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar']),
+            'c-badges': (resolve) => require(['@/ui/components/projects/badges.vue'])
         },
         computed: {
             project: updateProject

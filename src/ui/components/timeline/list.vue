@@ -29,7 +29,7 @@
             }
         },
         components:{
-            'c-timeline-item': () => import('@/ui/components/timeline/item.vue')
+            'c-timeline-item': (resolve) => require(['@/ui/components/timeline/item.vue'])
         },
         methods:{
             monthNumber(month){

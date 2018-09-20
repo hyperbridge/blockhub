@@ -18,8 +18,8 @@
     export default {
         name: 'curators-reviews',
         components: {
-            'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-curator-review': () => import('@/ui/components/store/curator-review')
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar']),
+            'c-curator-review': (resolve) => require(['@/ui/components/store/curator-review'])
         },
         props: {
             reviews: {

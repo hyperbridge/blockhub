@@ -62,8 +62,8 @@ export default {
         }
     },
     components: {
-        'c-rating-stars': () => import('@/ui/components/rating-stars'),
-        'c-author': () => import('@/ui/components/author')
+        'c-rating-stars': (resolve) => require(['@/ui/components/rating-stars']),
+        'c-author': (resolve) => require(['@/ui/components/author'])
     },
     data() {
         return {

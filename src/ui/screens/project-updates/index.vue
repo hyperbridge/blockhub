@@ -150,11 +150,11 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-block': () => import('@/ui/components/block'),
-            'c-tags-list': () => import('@/ui/components/tags'),
-            'c-badges': () => import('@/ui/components/projects/badges'),
-            'c-timeline': () => import('@/ui/components/timeline/list'),
+            'c-layout': (resolve) => require(['@/ui/layouts/default']),
+            'c-block': (resolve) => require(['@/ui/components/block']),
+            'c-tags-list': (resolve) => require(['@/ui/components/tags']),
+            'c-badges': (resolve) => require(['@/ui/components/projects/badges']),
+            'c-timeline': (resolve) => require(['@/ui/components/timeline/list']),
         },
         data() {
             return {

@@ -47,7 +47,7 @@
         props:{},
         components: {
 
-            'c-tags': () => import('@/ui/components/tags'),
+            'c-tags': (resolve) => require(['@/ui/components/tags']),
             'c-swiper': swiper,
             'c-slide': swiperSlide
         },

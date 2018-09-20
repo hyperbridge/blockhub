@@ -21,8 +21,8 @@
             }
         },
         components: {
-            'c-pagination': () => import('@/ui/components/pagination'),
-            'c-load-more': () => import('@/ui/components/buttons/load-more')
+            'c-pagination': (resolve) => require(['@/ui/components/pagination']),
+            'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more'])
         },
         computed: {
             paginationMode() {

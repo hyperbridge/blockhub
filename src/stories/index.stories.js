@@ -7,9 +7,6 @@ import { linkTo } from '@storybook/addon-links'
 import { withViewport } from '@storybook/addon-viewport'
 import { withKnobs, text, boolean, number, object } from '@storybook/addon-knobs/vue'
 
-
-addDecorator(withViewport('desktop'))
-
 import '../css/styles.scss'
 import '@/filters'
 import '@/components'
@@ -19,6 +16,10 @@ import * as data from './components-data'
 //import '!style-loader!css-loader!./styles.scss'
 
 import SaleBox from '../ui/components/sale-box/box.vue'
+
+
+addDecorator(withViewport('desktop'))
+
 
 storiesOf('Sale Box', module)
     .add('default', () => ({
@@ -3330,7 +3331,7 @@ const navigation = storiesOf('Navigation', module);
 
 ['account', 'asset', 'funding'].forEach(component => {
     navigation.add(component, () => ({
-        components: { [component]: () => import(`../ui/components/navigation/${component}`) },
+        components: { [component]: (resolve) => require([`../ui/components/navigation/${component}`]) },
         template: `<${component}/>`
     }))
 });

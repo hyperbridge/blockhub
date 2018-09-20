@@ -9,7 +9,7 @@
     "mem": "node --max_old_space_size=4092 build/dev-server.js",
     "build": "node build/build.js",
     "push": "NODE_ENV=production npm run build && git add -A && git commit -m \"Rebuild\" && git push",
-    "test": "./node_modules/.bin/jest",
+    "test": "NODE_ENV=test ./node_modules/.bin/jest",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -32,6 +32,7 @@
     "@storybook/addon-knobs": "^4.0.0-alpha.16",
     "@storybook/addon-links": "^4.0.0-alpha.16",
     "@storybook/addon-notes": "^4.0.0-alpha.16",
+    "@storybook/addon-storyshots": "^4.0.0-alpha.16",
     "@storybook/addon-viewport": "^4.0.0-alpha.16",
     "@storybook/addons": "^4.0.0-alpha.16",
     "@storybook/vue": "^4.0.0-alpha.16",
@@ -47,6 +48,7 @@
     "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-istanbul": "^4.1.5",
+    "babel-plugin-require-context-hook": "^1.0.0",
     "babel-plugin-transform-es2015-template-literals": "^6.22.0",
     "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -80,6 +82,7 @@
     "html-webpack-plugin": "^3.2.0",
     "http-proxy-middleware": "^0.17.4",
     "inject-loader": "^3.0.1",
+    "jest-vue-preprocessor": "^1.4.0",
     "js-md5": "^0.7.3",
     "json-loader": "^0.5.7",
     "karma": "^1.7.1",
@@ -138,16 +141,23 @@
     "verbose": true,
     "bail": true,
     "moduleFileExtensions": [
+      "vue",
       "js",
-      "vue"
+      "jsx",
+      "json",
+      "node"
     ],
     "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/ui/components/$1"
+      "^@/(.*)$": "<rootDir>/src/$1",
+      "\\.(svg|woff2|css|scss)$": "<rootDir>/src/__mocks__/fileMock.js"
     },
     "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
-      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+      "^.+\\.jsx?$": "<rootDir>/node_modules/babel-jest",
+      ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor"
     },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(@storybook/.*\\.vue$))"
+    ],
     "snapshotSerializers": [
       "<rootDir>/node_modules/jest-serializer-vue"
     ],
@@ -165,11 +175,17 @@
           [
             "env",
             {
+              "modules": false,
               "targets": {
                 "node": "current"
               }
             }
-          ]
+          ],
+          "stage-0",
+          "vue"
+        ],
+        "plugins": [
+          "require-context-hook"
         ]
       }
     }

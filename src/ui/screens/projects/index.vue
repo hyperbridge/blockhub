@@ -40,8 +40,8 @@
 <script>
 export default {
     components: {
-        'c-layout': () => import('@/ui/layouts/default'),
-        'c-tags': () => import('@/ui/components/tags'),
+        'c-layout': (resolve) => require(['@/ui/layouts/default']),
+        'c-tags': (resolve) => require(['@/ui/components/tags']),
     },
     computed: {
         projects() {

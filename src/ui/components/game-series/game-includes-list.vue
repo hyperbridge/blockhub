@@ -35,8 +35,8 @@
             }
         },
         components: {
-            'c-includes-item': () => import('@/ui/components/game-series/game-includes-item'),
-            'c-load-more': () => import('@/ui/components/buttons/load-more'),
+            'c-includes-item': (resolve) => require(['@/ui/components/game-series/game-includes-item']),
+            'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more']),
         },
         methods:{
             hiddenCount(){

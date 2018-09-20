@@ -23,7 +23,7 @@
             customClass: String
         },
         components: {
-            'c-button-arrows': () => import('@/ui/components/buttons/arrows')
+            'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'])
         }
     }
 </script>

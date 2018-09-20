@@ -126,11 +126,11 @@
 <script>
     export default {
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-simple-game-grid': () => import('@/ui/components/games-grid/simple'),
-            'c-game-grid': () => import('@/ui/components/games-grid/with-description'),
-            'c-featured-assets': () => import('@/ui/components/assets-list-item/featured-list'),
+            'c-layout': (resolve) => require(['@/ui/layouts/default']),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar']),
+            'c-simple-game-grid': (resolve) => require(['@/ui/components/games-grid/simple']),
+            'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description']),
+            'c-featured-assets': (resolve) => require(['@/ui/components/assets-list-item/featured-list']),
         },
         data: () => ({
             wallets: []

@@ -100,11 +100,11 @@
 <script>
     export default {
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-checkbox': () => import('@/ui/components/checkbox/'),
-            'c-checkbox-group': () => import('@/ui/components/checkbox/group'),
-            'c-block': () => import('@/ui/components/block'),
-            'c-searcher': () => import('@/ui/components/searcher'),
+            'c-layout': (resolve) => require(['@/ui/layouts/default']),
+            'c-checkbox': (resolve) => require(['@/ui/components/checkbox/']),
+            'c-checkbox-group': (resolve) => require(['@/ui/components/checkbox/group']),
+            'c-block': (resolve) => require(['@/ui/components/block']),
+            'c-searcher': (resolve) => require(['@/ui/components/searcher']),
         },
         data: () => ({
             filters:{

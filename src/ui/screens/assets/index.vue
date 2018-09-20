@@ -152,17 +152,17 @@
 
     export default {
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-assets-grid': () => import('@/ui/components/assets-grid'),
-            'c-assets-list': () => import('@/ui/components/assets-list-item'),
-            'c-assets-item': () => import('@/ui/components/assets-list-item/item'),
-            'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-heading-bar-fields': () => import('@/ui/components/heading-bar/additional-action'),
-            'c-pagination': () => import('@/ui/components/pagination'),
-            'c-block': () => import('@/ui/components/block'),
-            'c-collection-item': () => import('@/ui/components/collection/item'),
-            'c-banner': () => import('@/ui/components/banner/simple'),
-            'c-main-banner': () => import('@/ui/components/banner/index'),
+            'c-layout': (resolve) => require(['@/ui/layouts/default']),
+            'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid']),
+            'c-assets-list': (resolve) => require(['@/ui/components/assets-list-item']),
+            'c-assets-item': (resolve) => require(['@/ui/components/assets-list-item/item']),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar']),
+            'c-heading-bar-fields': (resolve) => require(['@/ui/components/heading-bar/additional-action']),
+            'c-pagination': (resolve) => require(['@/ui/components/pagination']),
+            'c-block': (resolve) => require(['@/ui/components/block']),
+            'c-collection-item': (resolve) => require(['@/ui/components/collection/item']),
+            'c-banner': (resolve) => require(['@/ui/components/banner/simple']),
+            'c-main-banner': (resolve) => require(['@/ui/components/banner/index']),
             'c-swiper': swiper,
             'c-slide': swiperSlide
         },

@@ -69,8 +69,8 @@ export default {
         video_url: String
     },
     components: {
-        'c-modal': () => import('@/ui/components/modal'),
-        'c-images-explorer': () => import('@/ui/components/images-explorer')
+        'c-modal': (resolve) => require(['@/ui/components/modal']),
+        'c-images-explorer': (resolve) => require(['@/ui/components/images-explorer'])
     },
     data() {
         return {

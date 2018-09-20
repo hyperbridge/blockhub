@@ -111,9 +111,9 @@ import { mapActions } from 'vuex';
 
 export default {
     components: {
-        'c-layout': () => import('@/ui/layouts/default'),
-        'c-block': () => import('@/ui/components/block'),
-        'c-benchmark': () => import('@/ui/components/benchmark')
+        'c-layout': (resolve) => require(['@/ui/layouts/default']),
+        'c-block': (resolve) => require(['@/ui/components/block']),
+        'c-benchmark': (resolve) => require(['@/ui/components/benchmark'])
     },
     methods: {
         ...mapActions(['updateSettings']),

@@ -45,9 +45,9 @@ export default {
         }
     },
     components: {
-        'c-dropdown-menu': () => import('@/ui/components/dropdown-menu'),
-        'c-reply': () => import('@/ui/components/product-community/reply'),
-        'c-button-arrows': () => import('@/ui/components/buttons/arrows')
+        'c-dropdown-menu': (resolve) => require(['@/ui/components/dropdown-menu']),
+        'c-reply': (resolve) => require(['@/ui/components/product-community/reply']),
+        'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'])
     },
     data() {
         return {

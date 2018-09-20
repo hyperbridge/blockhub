@@ -113,18 +113,18 @@
 <script>
     export default {
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-heading-bar-fields' : () => import('@/ui/components/heading-bar/additional-action'),
-            'c-assets-list-item': () => import('@/ui/components/assets-list-item'),
-            'c-game-list-item': () => import('@/ui/components/assets-list-item'),
-            'c-game-grid': () => import('@/ui/components/games-grid/with-description'),
-            'c-projects-card': () => import('@/ui/components/projects/card'),
-            'c-news-list-navigation': () => import('@/ui/components/news-list/navigation'),
-            'c-news-list-articles': () => import('@/ui/components/news-list/articles'),
-            'c-content-navigation': () => import('@/ui/components/content-navigation'),
-            'c-block': () => import('@/ui/components/block'),
-            'c-main-banner': () => import('@/ui/components/banner/index'),
+            'c-layout': (resolve) => require(['@/ui/layouts/default']),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar']),
+            'c-heading-bar-fields' : (resolve) => require(['@/ui/components/heading-bar/additional-action']),
+            'c-assets-list-item': (resolve) => require(['@/ui/components/assets-list-item']),
+            'c-game-list-item': (resolve) => require(['@/ui/components/assets-list-item']),
+            'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description']),
+            'c-projects-card': (resolve) => require(['@/ui/components/projects/card']),
+            'c-news-list-navigation': (resolve) => require(['@/ui/components/news-list/navigation']),
+            'c-news-list-articles': (resolve) => require(['@/ui/components/news-list/articles']),
+            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation']),
+            'c-block': (resolve) => require(['@/ui/components/block']),
+            'c-main-banner': (resolve) => require(['@/ui/components/banner/index']),
         },
         data: () => ({
             content_news: [

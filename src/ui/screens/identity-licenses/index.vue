@@ -55,9 +55,9 @@
 <script>
     export default {
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-content-navigation': () => import('@/ui/components/content-navigation'),
-            'c-heading-bar': () => import('@/ui/components/heading-bar')
+            'c-layout': (resolve) => require(['@/ui/layouts/default']),
+            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation']),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'])
         },
         data() {
             return {
