@@ -33,20 +33,26 @@ html, body, #app, .page {
     background-size: 100% 383px;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-color: #30314c;
     z-index: 0;
-    
+
     &::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 926px;
-      background: url(/static/img/product-bg-fade.png);
-      background-size: contain;
-      background-position: 0 383px;
-      background-attachment: fixed;
-      z-index: 0;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 383px;
+        //background: url(/static/img/product-bg-fade.png);
+        //background-size: contain;
+        //background-position: 0 383px;
+        //background-attachment: fixed;
+        z-index: 0;
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#30314d+0,30314d+100&0.34+0,1+100 */
+        background: -moz-linear-gradient(top, rgba(48, 49, 77, 0.34) 0%, rgba(48, 49, 77, 1) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(48, 49, 77, 0.34) 0%, rgba(48, 49, 77, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(48, 49, 77, 0.34) 0%, rgba(48, 49, 77, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5730314d', endColorstr='#30314d', GradientType=0); /* IE6-9 */
     }
 }
 
@@ -111,13 +117,11 @@ a.btn-outline-white {
     height: 4px;
 }
 
-
 /* Track */
 ::-webkit-scrollbar-track {
     /*box-shadow: inset 0 0 11px grey;*/
     border-radius: 3px;
 }
-
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
@@ -126,12 +130,10 @@ a.btn-outline-white {
     border: 2px solid #fff;
 }
 
-
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #fbe17d;
 }
-
 
 .page-aside, .page-sidepanel {
     padding: 10px 10px 10px 30px;
@@ -141,8 +143,7 @@ a.btn-outline-white {
     }
 }
 
-
-  #fixed_panel {
+#fixed_panel {
     z-index: 12;
     background: #1C2032;
     border: 0 none;
@@ -150,68 +151,68 @@ a.btn-outline-white {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 
     .fixed-panel__content {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
 
-      padding-top: 60px;
+        padding-top: 60px;
 
-      > p {
-          color: #fff;
-      }
+        > p {
+            color: #fff;
+        }
 
-      > a {
-          display: block;
-          margin-left: 10px;
-          margin-bottom: 5px;
-          font-size: 15px;
-          color: #fff;
-      }
+        > a {
+            display: block;
+            margin-left: 10px;
+            margin-bottom: 5px;
+            font-size: 15px;
+            color: #fff;
+        }
 
-      h5 {
-          font-size: 15px;
-      }
+        h5 {
+            font-size: 15px;
+        }
 
-      hr {
-          border-top: 1px solid #fff !important;
-          width: 100%;
-          margin: 10px 0;
-      }
+        hr {
+            border-top: 1px solid #fff !important;
+            width: 100%;
+            margin: 10px 0;
+        }
     }
 
     body.show-sidebar & {
-      right: 0px;
+        right: 0px;
     }
-  }
+}
 
-  .icon {
+.icon {
     width: 20px;
     height: 20px;
     text-align: center;
     margin-right: 5px;
     float: left;
-  }
+}
 
-  .icon-letter-circle {
+.icon-letter-circle {
     background: #3f87b8;
     border-radius: 20px;
     color: #fff;
     font-weight: bold;
     font-size: 11px;
-  }
+}
 
-  #backdrop {
+#backdrop {
     z-index: 11;
     display: none;
     background: rgba(0, 0, 0, 0.5);
 
     body.show-sidebar & {
-      display: block;
+        display: block;
     }
-  }
+}
 
-  .page .page__content {
+.page .page__content {
     body.show-sidebar & {
-      filter: blur(5px);
+        filter: blur(5px);
     }
-  }
+}

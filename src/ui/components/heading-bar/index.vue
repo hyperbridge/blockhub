@@ -10,6 +10,7 @@
                     :key="index"
                     :class="{ 'active': index == activeTab }"
                     href="#"
+                    :style="{'z-index': 20 - index}"
                     @click.prevent="changeTab(index, tab.category)"
                     jest="tab-item"
                 >{{ tab instanceof Object ? tab.title : tab }}</a>
@@ -151,7 +152,7 @@ export default {
             &.active {
                 border-bottom: none;
                 background: #fff;
-                z-index: 8;
+                z-index: 20!important;
                 color: #3e3e5c;
                 &:before {
                     border-bottom-color: #fff;
