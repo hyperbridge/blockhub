@@ -62,7 +62,7 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
                             <c-switch
-                                @change="updateSettings('animations')"
+                                @change="UPDATE_CLIENT_SETTINGS('animations')"
                                 :value="settings.animations"
                             />
                             <div class="text">
@@ -74,7 +74,7 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
                             <c-switch
-                                @change="updateSettings('autoplay')"
+                                @change="UPDATE_CLIENT_SETTINGS('autoplay')"
                                 :value="settings.autoplay"
                             />
                             <div class="text">
@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapMutations } from 'vuex';
 
 export default {
     components: {
@@ -117,6 +117,7 @@ export default {
     },
     methods: {
         ...mapActions(['updateSettings']),
+        ...mapMutations(['UPDATE_CLIENT_SETTINGS']),
         clearDatabase() {debugger
             let DBDeleteRequest = window.indexedDB.deleteDatabase("LokiCatalog")
 
@@ -147,7 +148,7 @@ export default {
     },
     computed: {
         settings() {
-            return this.$store.state.user.settings;
+            return this.$store.state.network.account.settings.client;
         }
     }
 }

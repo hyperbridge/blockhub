@@ -18,9 +18,10 @@ const updateState = () => {
     const normalizedData = normalize(rawData, {
     })
 
-    state = { ...rawData, ...normalizedData.entities }
-
-}
+    state = {
+        ...rawData
+    };
+};
 
 updateState()
 
@@ -226,6 +227,8 @@ export const mutations = {
     submitTransaction(state, payload) {
         const success = (id) => {
         }
-
+    },
+    UPDATE_CLIENT_SETTINGS (state, property) {
+        state.settings.client[property] = !state.settings.client[property];
     }
 }
