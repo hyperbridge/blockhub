@@ -8,7 +8,7 @@
                 <h3>{{ item.title }}</h3>
             </a>
             <p>{{ item.text }}</p>
-            <c-button status="info" :href="['#link_' + item.id ]" icon_hide >Read more</c-button>
+            <c-button status="info" :href="`/#/project/${projectID}/updates/${item.id}`" icon_hide >Read more</c-button>
         </div>
     </div>
 </template>
@@ -18,7 +18,7 @@
 
     export default {
         name: 'timeline-item',
-        props: ['item', 'index'],
+        props: ['item', 'index', 'projectID'],
         methods:{
             dateFormat(date){
                 return moment(date).format('DD MMMM, YYYY');

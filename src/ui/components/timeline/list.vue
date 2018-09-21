@@ -1,7 +1,7 @@
 <template>
     <div class="posts-timeline">
         <template  v-for="(item, index) in sliced" >
-            <c-timeline-item :item="item" :index="index" :key="index" />
+            <c-timeline-item :item="item" :index="index" :key="index" :projectID="project_id" />
             <div class="post-timeline__period-info" v-if="item.period">
             {{ item.period }}
             </div>
@@ -19,7 +19,7 @@
 
     export default {
         name: 'timeline-list',
-        props: ['items'],
+        props: ['items', 'project_id'],
         data(){
             return{
                 show   : false, // display content after API request

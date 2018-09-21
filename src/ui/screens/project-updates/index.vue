@@ -118,7 +118,7 @@
                         </ul>
                     </div>
                     <div class="col-12">
-                        <c-timeline :items="items" />
+                        <c-timeline :items="project.updates" :project_id="project.id" />
                     </div>
                 </div>
             </div>
@@ -171,85 +171,6 @@
                     'game',
                     'mod',
                     'other'
-                ],
-                items:[
-                    {
-                        id: 1,
-                        type: 'post',
-                        title: 'Thank you, friends!',
-                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                        date: '2018-09-19',
-                    },
-                    {
-                        id: 2,
-                        type: 'post',
-                        title: 'This is second post!',
-                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                        date: '2018-04-28',
-                    },
-                    {
-                        id: 3,
-                        type: 'post',
-                        title: 'This is second post!',
-                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                        date: '2018-02-17',
-                    },
-                    {
-                        id: 4,
-                        type: 'post',
-                        title: 'This is second post!',
-                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                        date: '2018-01-11',
-                    },
-                    {
-                        id: 5,
-                        type: 'post',
-                        title: 'This is second post!',
-                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                        date: '2017-11-27',
-                    },
-                    {
-                        id: 6,
-                        type: 'post',
-                        title: 'This is second post!',
-                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                        date: '2017-11-23',
-                    },
-                    {
-                        id: 7,
-                        type: 'post',
-                        title: 'This is second post!',
-                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                        date: '2017-11-12',
-                    },
-                    {
-                        id: 8,
-                        type: 'post',
-                        title: 'This is second post!',
-                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                        date: '2019-04-03',
-                    },
-                    {
-                        id: 9,
-                        type: 'post',
-                        title: 'This is second post!',
-                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                        date: '2019-04-27',
-                    },
-                    {
-                        id: 10,
-                        type: 'post',
-                        title: 'This is second post!',
-                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                        date: '2019-04-13',
-                    },
-                    {
-                        id: 11,
-                        type: 'post',
-                        title: 'This is second post!',
-                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                        date: '2019-04-11',
-                    }
                 ]
             }
         },
