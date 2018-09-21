@@ -320,6 +320,12 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/project-updates'], resolve)
         },
         {
+            path: '/project/:id/community',
+            name: 'Project Community',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/project-community'], resolve)
+        },
+        {
             path: '/curators',
             name: 'Curators',
             component: (resolve) => require(['@/ui/screens/curators'], resolve)
