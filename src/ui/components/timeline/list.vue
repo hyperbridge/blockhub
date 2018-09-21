@@ -1,17 +1,9 @@
 <template>
     <div class="posts-timeline">
-        <!--<div class="posts-timeline__year-container" v-for="(year, index) in sortedByNumber(items)" :key="index">-->
-            <!--<div class="posts-timeline__period-container"  v-for="(month, index) in year.months" :key="index">-->
-                <!--<c-timeline-item v-for="(item, index) in sortedByDate(month.posts)" :item="item" :index="index" :key="index" />-->
-                <!--<div class="post-timeline__period-info">-->
-                    <!--{{ monthNumber(month.id) }} {{ year.year }}-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
         <template  v-for="(item, index) in sortedItems" >
-            <c-timeline-item :item="item" :index="index" :key="index" v-if="item.type == 'post'" />
-            <div class="post-timeline__period-info" v-if="item.new_period">
-            {{ item.new_period }}
+            <c-timeline-item :item="item" :index="index" :key="index" />
+            <div class="post-timeline__period-info" v-if="item.period">
+            {{ item.period }}
             </div>
         </template>
     </div>
@@ -32,18 +24,21 @@
             'c-timeline-item': (resolve) => require(['@/ui/components/timeline/item.vue'], resolve)
         },
         methods:{
-            monthNumber(month){
-                return moment(month, 'MM').format('MMMM');
-            }
         },
         computed: {
             sortedItems: function() {
                 let arr = this.items;
                 arr.sort( ( a, b) => {
                     return new Date(a.date) - new Date(b.date);
+                }).forEach( (o, i) => {
+                    let d1 = moment(o.date).format('MMMM YYYY'),
+                        d2 = arr[i-1] ? moment(arr[i-1].date).format('MMMM YYYY') : false;
+                    if ( !d2 || d1 != d2 ){
+                        o.period = moment(d1).format('MMMM, YYYY');
+                    }
                 });
-                return arr.reverse();
-            }
+                return arr.reverse()
+            },
         }
     }
 </script>
@@ -79,6 +74,9 @@
         &:after{
             top: unset;
             bottom: -30px;
+        }
+        &:last-child{
+
         }
     }
 </style>

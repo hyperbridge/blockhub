@@ -43,6 +43,7 @@
         flex-direction: column;
         position: relative;
         color: #fff;
+        padding: 10px 0;
         .post-date{
             font-size: 13px;
             font-weight: bold;
