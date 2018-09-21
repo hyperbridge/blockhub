@@ -154,7 +154,7 @@
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-badges': (resolve) => require(['@/ui/components/projects/badges'], resolve),
-            'c-timeline': (resolve) => require(['@/ui/components/timeline/list'], resolve),
+            'c-timeline': (resolve) => require(['@/ui/components/timeline/list'], resolve)
         },
         data() {
             return {
@@ -172,53 +172,85 @@
                     'mod',
                     'other'
                 ],
-                review: {
-                    author: {
-                        name: 'Satoshi San',
-                        img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1'
+                items:[
+                    {
+                        id: 1,
+                        type: 'post',
+                        title: 'Thank you, friends!',
+                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2018-09-19',
                     },
-                    title: 'Good game with very nice graphics made by very smart people.',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.',
-                    date: '2018-08-19T04:09:00.000Z',
-                    rating: 4.5,
-                    minutes_played: 1938,
-                    setup: { system: 'Windows 10', gpu: 'GTX 1080', cpu: 'Core i7 7980x', ram: '8 GB', storage: 'HyperX 1TB SSD' }
-                },
-                crowdfunding_props: ['spent', 'locked', 'overflow'],
-                items:{
-                    "01":{
-                        posts:[
-                            {
-                                id: 1,
-                                title: 'Thank you, friends!',
-                                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                                date: '09-19-2018',
-                            },
-                            {
-                                id: 2,
-                                title: 'This is second post!',
-                                text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                                date: '09-29-2018',
-                            }
-                        ]
+                    {
+                        id: 2,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2018-04-28',
                     },
-                    "02":{
-                        posts:[
-                            {
-                                id: 1,
-                                title: 'Thank you, friends!',
-                                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                                date: '09-19-2018',
-                            },
-                            {
-                                id: 2,
-                                title: 'This is second post!',
-                                text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
-                                date: '09-29-2018',
-                            }
-                        ]
+                    {
+                        id: 3,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2018-02-17',
+                    },
+                    {
+                        id: 4,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2018-01-11',
+                    },
+                    {
+                        id: 5,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2017-11-27',
+                    },
+                    {
+                        id: 6,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2017-11-23',
+                    },
+                    {
+                        id: 7,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2017-11-12',
+                    },
+                    {
+                        id: 8,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2019-04-03',
+                    },
+                    {
+                        id: 9,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2019-04-27',
+                    },
+                    {
+                        id: 10,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2019-04-13',
+                    },
+                    {
+                        id: 11,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2019-04-11',
                     }
-                }
+                ]
             }
         },
         methods: {
