@@ -637,5 +637,8 @@ export default {
             display: none;
         }
     }
+    .invert .horizontal-navigation > ul li {
+         background: transparent;
+    }
 
 </style>

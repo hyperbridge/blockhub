@@ -30,15 +30,13 @@
             </div>
 
             <!-- PAGE ASIDE PANEL -->
-                <div class="page-aside invert" id="page-aside">
+                <div class="page-aside invert left-sidebar" id="page-aside">
                     <transition name="slideLeft">
                         <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}`"></component>
                     </transition>
                 </div>
             <!-- //END PAGE ASIDE PANEL -->
-            <transition name="fade" mode="out-in">
                 <slot></slot>
-            </transition>
 
             <!-- SIDEPANEL -->
             <transition name="slideRight">
@@ -574,5 +572,11 @@ export default {
         .page-sidepanel{
             top: 100px;
         }
+    }
+
+    .left-sidebar{
+        overflow-x: auto;
+        height: calc(100% - 100px );
+        padding-bottom: 20px;
     }
 </style>

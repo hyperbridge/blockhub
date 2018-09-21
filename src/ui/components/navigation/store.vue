@@ -19,7 +19,7 @@
 
         <h3 class="text-uppercase">Search</h3>
         <div class="filter-blk">
-            <c-searcher />
+            <c-searcher class="margin-bottom-20" />
 
             <c-range-slider label="Community size" :min="1" :max="10000" sClass="margin-bottom-20" />
 
