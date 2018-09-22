@@ -27,7 +27,7 @@
                     </div>
                 </div>
 
-                <div class="row product-grid margin-bottom-30">
+                <div class="row">
                     <div class="col-12">
                         <c-block class="margin-bottom-30" :onlyContentBg="true" :noGutter="true">
                             <c-heading-bar
@@ -69,15 +69,15 @@
                     </div>
                 </div>
 
-                <div class="row margin-top-40 align-items-stretch">
-                    <div class="col-12 col-md-4">
+                <div class="row align-items-stretch">
+                    <div class="col-12 col-md-4 margin-bottom-30">
                         <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="/#/home">
                             <h4 class="text-yellow">summer block</h4>
                             <h3>Championship</h3>
                             <p>You won't believe the prize!</p>
                         </c-banner>
                     </div>
-                    <div class="col-12 col-md-8">
+                    <div class="col-12 col-md-8 margin-bottom-30">
                         <c-banner :imgSrc="'/static/img/banners/banner-2.png'" link="/#/home">
                             <div class="align-items-start">
                                 <h3 class="text-yellow margin-bottom-5">top<br>curators</h3>
@@ -88,7 +88,7 @@
 
                 <c-games-explorer/>
 
-                <div class="row margin-bottom-70 margin-top-40 align-items-stretch">
+                <div class="row margin-bottom-50 margin-top-20 align-items-stretch">
                     <div class="col-12 col-md-8">
                         <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/home">
                             <div class="d-flex justify-content-between align-items-center">
@@ -200,27 +200,27 @@ const updateLandingImage = function() {
 
 export default {
     components: {
-        'c-layout': () => import('@/ui/layouts/default'),
-        'c-button': () => import('@/ui/components/buttons/index.vue'),
-        'c-tags': () => import('@/ui/components/tags'),
-        'c-tab': () => import('@/ui/components/tab/tab'),
-        'c-tabs': () => import('@/ui/components/tab/tabs'),
-        'c-heading-bar': () => import('@/ui/components/heading-bar'),
-        'c-heading-bar-fields' : () => import('@/ui/components/heading-bar/additional-action'),
-        'c-product-card': () => import('@/ui/components/store/product-card'),
-        'c-product-card-dynamic': () => import('@/ui/components/store/product-card-dynamic'),
-        'c-products-cards': () => import('@/ui/components/store/products-cards'),
-        'c-curators-reviews': () => import('@/ui/components/store/curators-reviews'),
-        'c-game-grid': () => import('@/ui/components/games-grid/with-description'),
-        'c-dropdown': () => import('@/ui/components/dropdown-menu/type-2'),
-        'c-searcher': () => import('@/ui/components/searcher'),
-        'c-content-navigation': () => import('@/ui/components/content-navigation'),
-        'c-assets-list-item': () => import('@/ui/components/assets-list-item/item'),
-        'c-news-list-navigation': () => import('@/ui/components/news-list/navigation'),
-        'c-news-list-articles': () => import('@/ui/components/news-list/articles'),
-        'c-block': () => import('@/ui/components/block'),
-        'c-banner': () => import('@/ui/components/banner/simple'),
-        'c-games-explorer': () => import('@/ui/components/store/games-explorer'),
+        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+        'c-button': (resolve) => require(['@/ui/components/buttons/index.vue'], resolve),
+        'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
+        'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
+        'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
+        'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+        'c-heading-bar-fields' : (resolve) => require(['@/ui/components/heading-bar/additional-action'], resolve),
+        'c-product-card': (resolve) => require(['@/ui/components/store/product-card'], resolve),
+        'c-product-card-dynamic': (resolve) => require(['@/ui/components/store/product-card-dynamic'], resolve),
+        'c-products-cards': (resolve) => require(['@/ui/components/store/products-cards'], resolve),
+        'c-curators-reviews': (resolve) => require(['@/ui/components/store/curators-reviews'], resolve),
+        'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description'], resolve),
+        'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
+        'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
+        'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
+        'c-assets-list-item': (resolve) => require(['@/ui/components/assets-list-item/item'], resolve),
+        'c-news-list-navigation': (resolve) => require(['@/ui/components/news-list/navigation'], resolve),
+        'c-news-list-articles': (resolve) => require(['@/ui/components/news-list/articles'], resolve),
+        'c-block': (resolve) => require(['@/ui/components/block'], resolve),
+        'c-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
+        'c-games-explorer': (resolve) => require(['@/ui/components/store/games-explorer'], resolve),
         'c-swiper': swiper,
         'c-slide': swiperSlide
     },

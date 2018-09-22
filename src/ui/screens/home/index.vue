@@ -10,7 +10,7 @@
                         <c-block>
                             <c-heading-bar name="New Releases" :showArrows="false" :showBackground="false">
                                 <template slot="additional-action">
-                                    <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @click_down="" />
+                                    <!--<c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @click_down="" />-->
                                     <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
                                     <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
                                 </template>
@@ -23,14 +23,6 @@
                                 :items="marketplace.new_products.slice(0,5)"
                                 itemBg="transparent"
                             />
-
-                                <c-game-grid
-                                    :itemInRow=1
-                                    :showRating=false
-                                    :showTime=true
-                                    v-bind:items="new_games"
-                                    itemBg="transparent"
-                                ></c-game-grid>
                         </c-block>
                     </div>
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
@@ -47,12 +39,6 @@
                                 itemInRow="2"
                             />
                             <c-content-navigation/>
-
-                                <c-assets-list-item
-                                    :items="assets"
-                                    itemInRow="2"
-                                />
-                                <c-content-navigation/>
                         </c-block>
                     </div>
                     <div class="col-12 margin-bottom-30">
@@ -127,70 +113,20 @@
 <script>
     export default {
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-heading-bar-fields' : () => import('@/ui/components/heading-bar/additional-action'),
-            'c-assets-list-item': () => import('@/ui/components/assets-list-item'),
-            'c-game-list-item': () => import('@/ui/components/assets-list-item'),
-            'c-game-grid': () => import('@/ui/components/games-grid/with-description'),
-            'c-projects-card': () => import('@/ui/components/projects/card'),
-            'c-news-list-navigation': () => import('@/ui/components/news-list/navigation'),
-            'c-news-list-articles': () => import('@/ui/components/news-list/articles'),
-            'c-content-navigation': () => import('@/ui/components/content-navigation'),
-            'c-block': () => import('@/ui/components/block'),
-            'c-main-banner': () => import('@/ui/components/banner/index'),
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+            'c-heading-bar-fields' : (resolve) => require(['@/ui/components/heading-bar/additional-action'], resolve),
+            'c-assets-list-item': (resolve) => require(['@/ui/components/assets-list-item'], resolve),
+            'c-game-list-item': (resolve) => require(['@/ui/components/assets-list-item'], resolve),
+            'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description'], resolve),
+            'c-projects-card': (resolve) => require(['@/ui/components/projects/card'], resolve),
+            'c-news-list-navigation': (resolve) => require(['@/ui/components/news-list/navigation'], resolve),
+            'c-news-list-articles': (resolve) => require(['@/ui/components/news-list/articles'], resolve),
+            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
+            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
+            'c-main-banner': (resolve) => require(['@/ui/components/banner/index'], resolve),
         },
         data: () => ({
-            assets: [
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                },
-                {
-                    title: 'Magic Plate Armor',
-                    price: '1.99',
-                    count: '350.00',
-                    img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png'
-                }
-            ],
             content_news: [
                 {
                     game: {

@@ -1,14 +1,15 @@
 /* eslint-disable react/react-in-jsx-scope, react/no-this-in-sfc */
 
-import {storiesOf} from '@storybook/vue'
-import {action} from '@storybook/addon-actions'
-import {linkTo} from '@storybook/addon-links'
-import {withKnobs, text, boolean, number, object} from '@storybook/addon-knobs/vue'
-
+import Vue from 'vue'
+import { storiesOf, addDecorator } from '@storybook/vue'
+import { action } from '@storybook/addon-actions'
+import { linkTo } from '@storybook/addon-links'
+import { withViewport } from '@storybook/addon-viewport'
+import { withKnobs, text, boolean, number, object } from '@storybook/addon-knobs/vue'
 
 import '../css/styles.scss'
-import '@/filters';
-import '@/components';
+import '@/filters'
+import '@/components'
 
 import * as data from './components-data'
 
@@ -16,13 +17,17 @@ import * as data from './components-data'
 
 import SaleBox from '../ui/components/sale-box/box.vue'
 
+
+addDecorator(withViewport('desktop'))
+
+
 storiesOf('Sale Box', module)
     .add('default', () => ({
         components: {
             'c-sale-box': SaleBox
         },
         data() {
-            let title = 'test';
+            let title = 'test'
             return {
                 sale_box: {
                     title: title
@@ -668,7 +673,7 @@ storiesOf('Checkbox', module)
         },
         template: `
         <div class="row m-0 p-3">
-            <c-checkbox id="test_check" label="This is the test checkbox" v-model="value" />
+            <c-checkbox id="test_check" v-model="value">This is the test checkbox</c-checkbox>
         </div>
         `
     }))
@@ -680,10 +685,10 @@ storiesOf('Checkbox', module)
         template: `
         <div class="row m-0 p-3">
             <c-checkbox-group title="Group Title">
-                <c-checkbox id="test_check_1" label="This is the first checkbox" v-model="value" />
-                <c-checkbox id="test_check_2" label="This is the second checkbox with longer text" v-model="value" />
-                <c-checkbox id="test_check_3" label="This is the checkbox" v-model="value" />
-                <c-checkbox id="test_check_4" label="This is the test checkbox" v-model="value" />
+            <c-checkbox id="test_check_1">This is the test checkbox</c-checkbox>
+            <c-checkbox id="test_check_2">This is the test checkbox</c-checkbox>
+            <c-checkbox id="test_check_3">This is the test checkbox</c-checkbox>
+            <c-checkbox id="test_check_4">This is the test checkbox</c-checkbox>
             </c-checkbox-group>
         </div>
         `
@@ -1177,38 +1182,80 @@ storiesOf('Range Slider', module)
 
 import AssetsGrid from '../ui/components/assets-grid/index.vue'
 
+const assets_list = [
+    {
+        name: 'some item name',
+        price: '1.99',
+        count: '240.000',
+        main_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
+        sub_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
+    },
+    {
+        name: 'some another item name',
+        price: '99.99',
+        count: '824.000',
+        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+    },
+    {
+        name: 'some another item name',
+        price: '99.99',
+        count: '824.000',
+        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+    },
+    {
+        name: 'some another item name',
+        price: '99.99',
+        count: '824.000',
+        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+    },
+    {
+        name: 'some another item name',
+        price: '99.99',
+        count: '824.000',
+        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+    },
+    {
+        name: 'some another item name',
+        price: '99.99',
+        count: '824.000',
+        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+    }
+]
+
 storiesOf('Assets Grid', module)
     .addDecorator(withKnobs)
+    .addDecorator(withViewport())
     .add('default', () => ({
         components: {
             'c-assets-grid': AssetsGrid
         },
         data() {
             return object('Data', {
-                assets_list: [
-                    {
-                        name: 'some item name',
-                        price: '1.99',
-                        count: '240.000',
-                        main_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        sub_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                    },
-                    {
-                        name: 'some another item name',
-                        price: '99.99',
-                        count: '824.000',
-                        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
-                        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
-                    }
-                ]
+                assets_list: assets_list
             })
         },
         template: `
-         <div class="row m-0 p-3">
-             <c-assets-grid :list="assets_list" />
-         </div>
+        <c-assets-grid :list="assets_list" />
         `
-    }));
+    }), { viewport: 'desktop' })
+    .add('default (iPhone 6 Plus)', () => ({
+        components: {
+            'c-assets-grid': AssetsGrid
+        },
+        data() {
+            return object('Data', {
+                assets_list: assets_list
+            })
+        },
+        template: `
+        <c-assets-grid :list="assets_list" />
+        `
+    }), { viewport: 'iphone6p' })
 
 import AssetsPopup from '../ui/components/asset-overview-popup/index.vue'
 
@@ -3097,8 +3144,185 @@ storiesOf('Inputs', module)
         `
     }))
 
-
-
+import TimelineList from '@/ui/components/timeline/list.vue';
+import TimelineItem from '@/ui/components/timeline/item.vue';
+storiesOf('Timeline', module)
+    .add('item', () => ({
+        components:{
+            'c-timeline': TimelineList,
+            'c-timeline-item': TimelineItem
+        },
+        template: `<div class="row">
+                        <div class="col">
+                            <c-timeline-item />
+                        </div>
+                    </div>`
+    }))
+    .add('list', () => ({
+        components:{
+            'c-timeline': TimelineList,
+            'c-timeline-item': TimelineItem
+        },
+        data(){
+            return{
+                items:[
+                    {
+                        year: 2018,
+                        months:{
+                            "01":{
+                                id: 1,
+                                posts:[
+                                    {
+                                        id: 1,
+                                        title: 'Thank you, friends!',
+                                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '01-19-2018',
+                                    },
+                                    {
+                                        id: 2,
+                                        title: 'This is second post!',
+                                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '01-29-2018',
+                                    }
+                                ]
+                            },
+                            "02":{
+                                id: 2,
+                                posts:[
+                                    {
+                                        id: 1,
+                                        title: 'Thank you, friends!',
+                                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '02-19-2018',
+                                    },
+                                    {
+                                        id: 2,
+                                        title: 'This is second post!',
+                                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '02-23-2018',
+                                    },
+                                    {
+                                        id: 2,
+                                        title: 'This is second post!',
+                                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '02-21-2018',
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        year: 2019,
+                        months:{
+                            "01":{
+                                id: 1,
+                                posts:[
+                                    {
+                                        id: 1,
+                                        title: 'Thank you, friends!',
+                                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '01-19-2018',
+                                    },
+                                    {
+                                        id: 2,
+                                        title: 'This is second post!',
+                                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '01-29-2018',
+                                    }
+                                ]
+                            },
+                            "02":{
+                                id: 2,
+                                posts:[
+                                    {
+                                        id: 1,
+                                        title: 'Thank you, friends!',
+                                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '02-19-2018',
+                                    },
+                                    {
+                                        id: 2,
+                                        title: 'This is second post!',
+                                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '02-23-2018',
+                                    },
+                                    {
+                                        id: 2,
+                                        title: 'This is second post!',
+                                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                                        date: '02-21-2018',
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                items2:[
+                    {
+                        id: 1,
+                        type: 'post',
+                        title: 'Thank you, friends!',
+                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2018-09-19T18:25:43.511Z',
+                    },
+                    {
+                        id: 2,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2018-04-28T18:25:43.511Z',
+                    },
+                    {
+                        id: 3,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2018-02-17T18:25:43.511Z',
+                    },
+                    {
+                        id: 4,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2018-01-11T18:25:43.511Z',
+                    },
+                    {
+                        id: 5,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2017-11-27T18:25:43.511Z',
+                    },
+                    {
+                        id: 6,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2017-11-23T18:25:43.511Z',
+                    },
+                    {
+                        id: 7,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2017-11-12T18:25:43.511Z',
+                    },
+                    {
+                        id: 8,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2017-04-03T18:25:43.511Z',
+                    }
+                ]
+            }
+        },
+        template: `<div class="row">
+                            <div class="col p-5">
+                                <c-timeline :items="items2" />
+                            </div>
+                        </div>`
+    }))
 
 /*
      Dynamic import - test version
@@ -3107,7 +3331,7 @@ const navigation = storiesOf('Navigation', module);
 
 ['account', 'asset', 'funding'].forEach(component => {
     navigation.add(component, () => ({
-        components: { [component]: () => import(`../ui/components/navigation/${component}`) },
+        components: { [component]: (resolve) => require([`../ui/components/navigation/${component}`], resolve) },
         template: `<${component}/>`
     }))
 });

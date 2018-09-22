@@ -71,10 +71,10 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-tags-list': () => import('@/ui/components/tags'),
-            'c-assets-grid': () => import('@/ui/components/assets-grid'),
-            'c-assets-list-item': () => import('@/ui/components/assets-list-item')
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid'], resolve),
+            'c-assets-list-item': (resolve) => require(['@/ui/components/assets-list-item'], resolve)
         },
         data() {
             return {

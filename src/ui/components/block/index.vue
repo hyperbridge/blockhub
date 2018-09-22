@@ -31,7 +31,7 @@
             }
         },
         components: {
-            'c-heading-bar': () => import('@/ui/components/heading-bar')
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve)
         }
     }
 </script>

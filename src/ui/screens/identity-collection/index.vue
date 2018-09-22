@@ -6,7 +6,7 @@
                     <div class="col-12">
                         <c-block title="Collections">
                             <div class="collections-container">
-                                <div class="collections-container__item"  v-for="(item, index) in collections" :key="index" v-if="index < 6">
+                                <div class="collections-container__item" v-for="(item, index) in collections" :key="index" v-if="index < 6">
                                     <c-collection-item :item="item" />
                                 </div>
                             </div>
@@ -22,11 +22,11 @@
 <script>
     export default {
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-content-navigation': () => import('@/ui/components/content-navigation'),
-            'c-block': () => import('@/ui/components/block'),
-            'c-collection-item': () => import('@/ui/components/collection/item'),
-            'c-pagination': () => import('@/ui/components/pagination')
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
+            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
+            'c-collection-item': (resolve) => require(['@/ui/components/collection/item'], resolve),
+            'c-pagination': (resolve) => require(['@/ui/components/pagination'], resolve)
         },
         data() {
             return {

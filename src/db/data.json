@@ -6425,19 +6425,82 @@
                         "label": "Limmits",
                         "icon": "sliders-h"
                     }
+                ],
+                "articles": [
+                    {
+                        "id": 1,
+                        "slug": "test-slug-1",
+                        "title": "Why am I seeing H12 request timeout?",
+                        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+                    },
+                    {
+                        "id": 2,
+                        "slug": "test-slug-2",
+                        "title": "I'm still seeing 'Your password has expired'",
+                        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+                    },
+                    {
+                        "id": 3,
+                        "slug": "test-slug-3",
+                        "title": "Performing Load Test on BlockHub",
+                        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+                    }
                 ]
             },
             {
                 "id": 1,
                 "slug": "running-applications",
                 "label": "Running applications",
-                "icon": "play"
+                "icon": "play",
+                "articles": [
+                    {
+                        "id": 1,
+                        "slug": "test-slug-1",
+                        "title": "Why am I seeing H12 request timeout?",
+                        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+                    },
+                    {
+                        "id": 2,
+                        "slug": "test-slug-2",
+                        "title": "I'm still seeing 'Your password has expired'",
+                        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+                    },
+                    {
+                        "id": 3,
+                        "slug": "test-slug-3",
+                        "title": "Performing Load Test on BlockHub",
+                        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+                    }
+                ]
             },
             {
                 "id": 2,
                 "slug": "account-management",
                 "label": "Account Management",
-                "icon": "user"
+                "icon": "user",
+                "articles": [
+                    {
+                        "id": 1,
+                        "topic": ["1", "2", "6", "5"],
+                        "slug": "test-slug-1",
+                        "title": "Why am I seeing H12 request timeout?",
+                        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+                    },
+                    {
+                        "id": 2,
+                        "topic": ["3", "2", "5"],
+                        "slug": "test-slug-2",
+                        "title": "I'm still seeing 'Your password has expired'",
+                        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+                    },
+                    {
+                        "id": 3,
+                        "topic": ["0", "2", "6", "5"],
+                        "slug": "test-slug-3",
+                        "title": "Performing Load Test on BlockHub",
+                        "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+                    }
+                ]
             },
             {
                 "id": 3,
@@ -6463,6 +6526,101 @@
                 "label": "Tools",
                 "icon": "window-restore"
             }
-        ]
+        ],
+        "help":{
+            "topics": [
+                {
+                    "id": 0,
+                    "slug": "general",
+                    "label": "General Platform Features",
+                    "icon": "cogs",
+                    "sub_topics": [
+                        {
+                            "id": 0,
+                            "slug": "common-runtime",
+                            "label": "Common runtime",
+                            "icon": "lock"
+                        },
+                        {
+                            "id": 1,
+                            "slug": "add-ons",
+                            "label": "Add-ons",
+                            "icon": "desktop"
+                        },
+                        {
+                            "id": 2,
+                            "slug": "builds",
+                            "label": "Builds",
+                            "icon": "cubes"
+                        },
+                        {
+                            "id": 3,
+                            "slug": "limmits",
+                            "label": "Limmits",
+                            "icon": "sliders-h"
+                        }
+                    ]
+                },
+                {
+                    "id": 1,
+                    "slug": "running-applications",
+                    "label": "Running applications",
+                    "icon": "play"
+                },
+                {
+                    "id": 2,
+                    "slug": "account-management",
+                    "label": "Account Management",
+                    "icon": "user"
+                },
+                {
+                    "id": 3,
+                    "slug": "security",
+                    "label": "Security",
+                    "icon": "lock"
+                },
+                {
+                    "id": 4,
+                    "slug": "billing-and-payments",
+                    "label": "Billing & Payments",
+                    "icon": "credit-card"
+                },
+                {
+                    "id": 5,
+                    "slug": "connect",
+                    "label": "Connect",
+                    "icon": "globe"
+                },
+                {
+                    "id": 6,
+                    "slug": "tools",
+                    "label": "Tools",
+                    "icon": "window-restore"
+                }
+            ],
+            "articles": [
+                {
+                    "id": 1,
+                    "topic": ["1", "2", "6", "5"],
+                    "slug": "test-slug-1",
+                    "title": "Why am I seeing H12 request timeout?",
+                    "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+                },
+                {
+                    "id": 2,
+                    "topic": ["3", "2", "5"],
+                    "slug": "test-slug-2",
+                    "title": "I'm still seeing 'Your password has expired'",
+                    "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+                },
+                {
+                    "id": 3,
+                    "topic": ["0", "2", "6", "5"],
+                    "slug": "test-slug-3",
+                    "title": "Performing Load Test on BlockHub",
+                    "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
+                }
+            ]
+        }
     }
 }

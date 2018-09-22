@@ -22,19 +22,14 @@
                             </div>
                         </c-block>
 
-                        <c-block class="margin-bottom-30">
+                        <c-block class="margin-bottom-30" v-if="topic.articles">
                             <div class="article-list">
-                                <c-article-item link="#3">
-                                    I'm still seeing "You password has expired"
-                                </c-article-item>
-                                <c-article-item link="#3">
-                                    Why am i seeing H12 request timeouts?
-                                </c-article-item>
-                                <c-article-item link="#3">
-                                    Performing Load Tests on BlockHub
-                                </c-article-item>
-                                <c-article-item link="#3" class="margin-bottom-0">
-                                    More running applications articles ...
+                                <c-article-item :link="`/#/help/${topic.id}/article/${article.slug}`"
+                                                v-for="(article, index) in topic.articles"
+                                                :key="index"
+                                                :class="{'mb-0': topic.articles.length === index+1 }"
+                                >
+                                    {{ article.title }}
                                 </c-article-item>
                             </div>
                         </c-block>
@@ -64,12 +59,12 @@
     export default {
         props:['id'],
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-block': () => import('@/ui/components/block'),
-            'c-article-item': () => import('@/ui/components/help/article-item'),
-            'c-topic-item': () => import('@/ui/components/help/topic-item'),
-            'c-list-item': () => import('@/ui/components/help/simple-item'),
-            'c-card': () => import('@/ui/components/help/help-card.vue'),
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
+            'c-article-item': (resolve) => require(['@/ui/components/help/article-item'], resolve),
+            'c-topic-item': (resolve) => require(['@/ui/components/help/topic-item'], resolve),
+            'c-list-item': (resolve) => require(['@/ui/components/help/simple-item'], resolve),
+            'c-card': (resolve) => require(['@/ui/components/help/help-card.vue'], resolve),
         },
         data: () => ({}),
         computed: {
