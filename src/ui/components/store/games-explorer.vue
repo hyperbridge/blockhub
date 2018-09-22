@@ -37,6 +37,32 @@
                 </div>
                 <c-button status="info" icon_hide>All New Releases</c-button>
             </div>
+            <transition name="slide-in">
+                <div v-if="filtersActive" class="active-filters">
+                    Active filters:
+                    <div class="active-filters__content">
+                        <c-option-tag
+                            v-if="phrase.length"
+                            title="Name:"
+                            :text="phrase"
+                            @delete="phrase = ''"
+                        />
+                        <c-option-tag
+                            v-if="selectedGenres.length"
+                            title="Genres:"
+                            @delete="selectedGenres = []"
+                        >
+                            <c-option-tag
+                                v-for="(genre, index) in selectedGenres"
+                                :key="genre"
+                                :text="genre"
+                                @delete="selectedGenres.splice(index, 1)"
+                                isNested
+                            />
+                        </c-option-tag>
+                    </div>
+                </div>
+            </transition>
             <c-game-grid
                 v-if="filteredProducts.length"
                 :itemInRow="2"
@@ -45,7 +71,7 @@
                 showTime
                 itemBg="transparent"
             />
-            <div v-else-if="phrase.length || activeGenre">
+            <div v-else-if="filtersActive">
                 <p>No products were found for your filters</p>
                 <c-button
                     status="info"
@@ -72,13 +98,15 @@
             'c-input-searcher': () => import('@/ui/components/inputs/searcher'),
             'c-dropdown': () => import('@/ui/components/dropdown-menu/type-2'),
             'c-game-grid': () => import('@/ui/components/games-grid/with-description'),
-            'c-content-navigation': () => import('@/ui/components/content-navigation')
+            'c-content-navigation': () => import('@/ui/components/content-navigation'),
+            'c-option-tag': () => import('@/ui/components/option-tag')
         },
         data() {
             return {
                 category: 'top_selling_products',
                 phrase: '',
                 activeGenre: null,
+                selectedGenres: [],
                 sortBy: {
                     property: 'date',
                     desc: true
@@ -115,6 +143,10 @@
                     });
                     return tags;
                 }, []);
+            },
+            filtersActive() {
+                const { phrase, activeGenre } = this;
+                return phrase.length || activeGenre;
             }
         },
     }
@@ -139,5 +171,22 @@
     }
     .product-genre__btn--active {
         background: rgba(255,255,255,.1);
+    }
+
+    .slide-in-enter-active, .slide-in-active {
+        transition: transform .25s ease, opacity .25s ease;
+    }
+    .slide-in-enter, .slide-leave-to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    .active-filters {
+        margin: 20px 0;
+    }
+    .active-filters__content {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
     }
 </style>
