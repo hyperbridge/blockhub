@@ -77,10 +77,15 @@
                                     :video_url="product.video"
                                 />
 
-                                <c-sale-box
-                                    :sale_box="product.sale_box"
-                                    v-if="product.sale_box"
-                                />
+                                <div v-for="(promotions, section) in promotionSections" :key="section">
+                                    <h3 style="margin-top: 20px;" v-if="section">{{ section }}</h3>
+                                    <c-promotion-box
+                                        :title="promotion.title"
+                                        :price="promotion.price"
+                                        v-if="product.promotions"
+                                        v-for="(promotion, index) in promotions" :key="index"
+                                    />
+                                </div>
 
                                 <div class="overflow-hidden">
                                     <c-game-plan
@@ -157,6 +162,13 @@
 <script>
     import Vue from 'vue'
     
+    const groupBy = function(xs, key) {
+        return xs.reduce(function(rv, x) {
+            (rv[x[key]] = rv[x[key]] || []).push(x);
+            return rv;
+        }, {});
+    };
+
     const updateProduct = function () {
         let product = null
 
@@ -184,6 +196,10 @@
             product.author_tags = []
         }
 
+        if (product.promotions) {
+            this.promotionSections = groupBy(product.promotions, 'section')
+        }
+
         return product
     };
 
@@ -193,7 +209,7 @@
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-game-plan': (resolve) => require(['@/ui/components/game-plans/plan'], resolve),
             'c-screen-gallery': (resolve) => require(['@/ui/components/screen-gallery/gallery'], resolve),
-            'c-sale-box': (resolve) => require(['@/ui/components/sale-box/box'], resolve),
+            'c-promotion-box': (resolve) => require(['@/ui/components/promotion-box'], resolve),
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-rating-block': (resolve) => require(['@/ui/components/rating-block'], resolve),
             'c-frequently-traded-assets': (resolve) => require(['@/ui/components/frequently-traded-assets'], resolve),
@@ -234,6 +250,7 @@
                         { author, title: title, text, date: '2018-08-11T04:09:00.000Z', rating: 3, minutes_played: 2941, setup }
                     ]
                 },
+                promotionSections: null,
                 savedState: false
             }
         },
@@ -280,7 +297,7 @@
                 }
                 return this.$store.state.marketplace.editor_mode === 'editing'
             },
-            first_product(){
+            first_product() {
                 return this.$store.state.marketplace.first_product
             }
         },
