@@ -3,6 +3,7 @@
         :is="tag"
         class="c-btn"
         :class="[status, 'c-btn-' + size , { 'swap-direction': swap_direction }]"
+        @click="$emit('click')"
     >
         <i
             v-if="(icon || inject_filter.length) && !icon_hide"
@@ -20,7 +21,7 @@
 
 <script>
     export default {
-        name: 'button',
+        name: 'c-button',
         props: {
             tag: {
                 type: String,
@@ -42,25 +43,6 @@
         computed: {
             inject_filter() {
                 return this.$options.filters.statusIcon(this.status);
-            }
-        },
-        /* these filters are accessible via Vue instance and were added only for storybook support */
-        filters: {
-            statusIcon(status) {
-                const getClass = status => {
-                    switch(status) {
-                        case 'info': return 'info';
-                        case 'success': return 'check';
-                        case 'success-circle': return 'check-circle';
-                        case 'warning': return 'exclamation';
-                        case 'danger': return 'exclamation-triangle';
-                        case 'danger-circle': return 'times-circle';
-                        case 'settings': return 'cog';
-                        default: return '';
-                    }
-                }
-                const statusClass = getClass(status);
-                return statusClass.length ? 'fa-' + statusClass : '';
             }
         }
     }
@@ -109,6 +91,7 @@
             font-size: 18px;
         }
 
+
         $statusColors: (
             default: (#fff, #3D3E5D, #3D3E5D, #A2A3BE),
             info: (#5D75F7, #fff, #586ee9, #30304B),
@@ -116,7 +99,8 @@
             danger: (#F75D5D, #fff, #de5454, #30304B),
             warning: (#FADC72, #3D3E5D, #efd26d, #32334c),
             share: (#43B4C9, #fff, #43B4C9, #32334c),
-            support: (#43C981, #fff, #43C981, #30304B)
+            support: (#43C981, #fff, #43C981, #30304B),
+            dark: (#3D3E5D, #fff, #3D3E5D, #fff)
         );
 
         @each $status, $colorSet in $statusColors {

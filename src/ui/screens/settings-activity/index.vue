@@ -9,8 +9,8 @@
 <script>
 export default {
     components: {
-        'c-layout': () => import('@/ui/layouts/default'),
-        'c-block-1': () => import('@/ui/components/block-1')
+        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+        'c-block-1': (resolve) => require(['@/ui/components/block'], resolve)
     },
     data() {
         return {

@@ -5,12 +5,12 @@
                 <li
                     v-for="(tab, index) in tabs"
                     :key="index"
-                    class="nav-item"
+                    :class="`nav-item layer${index+1}`"
                 >
                     <a
                         :href="tab.href"
                         :class="{ 'active': tab.isActive }"
-                        @click="selectTab(tab)"
+                        @click.prevent="selectTab(tab.name, index)"
                     >{{ tab.name }}</a>
                 </li>
             </ul>
@@ -26,24 +26,36 @@
 <script>
     export default {
         name: 'c-tabs',
-        props:{
-            variant:{
+        props: {
+            variant: {
                 type: String,
                 default: 'default'
-            }
+            },
+            currentStep: [Number, String]
         },
         data() {
-            return {tabs: [] };
+            return {
+                tabs: []
+            }
         },
         created() {
-            console.log(this)
             this.tabs = this.$children;
         },
         methods: {
-            selectTab(selectedTab) {
-                this.tabs.forEach(tab => {
-                    tab.isActive = (tab.name == selectedTab.name);
-                });
+            selectTab(tabName, tabIndex) {
+                if (this.currentStep) {
+
+                    if (tabIndex + 1 <= this.currentStep) {
+                        this.tabs.forEach((tab, i) => {
+                            tab.isActive = tabIndex == i;
+                        });
+                    }
+
+                } else {
+                    this.tabs.forEach(tab => {
+                        tab.isActive = (tab.name == tabName);
+                    });
+                }
             }
         }
     }
@@ -103,7 +115,7 @@
                     &.active {
                         border-bottom: none;
                         background: #3e3e5c;
-                        z-index: 8;
+                        z-index: 8 !important;
                         color: #fff;
                         &:before {
                             border-bottom-color: #3e3e5c;
@@ -114,6 +126,18 @@
                             border-left-color: #3e3e5c;
                         }
                     }
+                }
+                &.layer1 a {
+                    z-index: 7;
+                }
+                &.layer2 a {
+                    z-index: 6;
+                }
+                &.layer3 a {
+                    z-index: 5;
+                }
+                &.layer4 a {
+                    z-index: 4;
                 }
                 &:first-child {
                     a {

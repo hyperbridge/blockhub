@@ -3,15 +3,23 @@
         <div class="game-includes__title">
             <h3>What's included</h3>
         </div>
-        <div class="game-includes__list">
-            <div class="game-includes__item-container" v-for="(item, index) of list" :key="index" >
+        <transition-group name="list" tag="div" class="game-includes__list">
+            <div class="game-includes__item-container"
+                 v-for="(item, index) of limitedList(limit)"
+                 :key="index" >
                 <c-includes-item :item="item" />
             </div>
-            <div class="game-includes__list-more" v-if="list.length > showNumber">
-                <i class="fas fa-chevron-right"></i>
-                <span>+{{ hiddenCount() }}</span>
-            </div>
-        </div>
+        </transition-group>
+
+        <!--Show buttons-->
+        <c-load-more @click="showAll" v-if="showMore && list.length > showNumber - 1">
+            Load More <span class="ml-3">+{{ hiddenCount() }}</span>
+        </c-load-more>
+
+        <!--Hide buttons-->
+        <c-load-more v-if="!showMore" @click="hideAll">
+            Hide
+        </c-load-more>
     </div>
 </template>
 
@@ -21,17 +29,41 @@
         props:['list', 'showNumber'],
         data(){
             return{
-                hiddenItems: ''
+                hiddenItems: '',
+                limit: this.showNumber,
+                showMore: true
             }
         },
         components: {
-            'c-includes-item': () => import('@/ui/components/game-series/game-includes-item'),
+            'c-includes-item': (resolve) => require(['@/ui/components/game-series/game-includes-item'], resolve),
+            'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more'], resolve),
         },
         methods:{
             hiddenCount(){
                 return this.list.length - this.showNumber;
+            },
+            showAll(){
+                this.limit = this.list.length;
+                this.limitedList(this.limit);
+                this.showMore = false;
+            },
+            hideAll(){
+                this.limit = this.showNumber;
+                this.limitedList(this.limit);
+                this.showMore = true;
+            },
+            limitedList(limit) {
+                let list = this.list,
+                    newList = [];
+                    list.forEach( function (item, i){
+                        if (i <= limit-1) {
+                            newList.push(item);
+                        }
+                    });
+
+                return newList
             }
-        }
+        },
     }
 </script>
 
@@ -74,6 +106,7 @@
         align-items: stretch;
         flex-wrap: wrap;
         margin: 0 -10px;
+        transition: all 200ms ease-in-out;
     }
     .game-includes__list-more{
         width: 110px;
@@ -83,6 +116,7 @@
         font-size: 26px;
         padding: 0 10px 0 15px;
         color: #fff;
+        cursor: pointer;
         i{
             font-size: 68px;
         }
@@ -93,5 +127,12 @@
     .game-includes__item-container{
         width: calc(100%/5 - 20px);
         margin: 10px;
+    }
+    .list-enter-active, .list-leave-active {
+        transition: all 1s;
+    }
+    .list-enter, .list-leave-to /* .list-leave-active до версии 2.1.8 */ {
+        opacity: 0;
+        transform: translateY(30px);
     }
 </style>

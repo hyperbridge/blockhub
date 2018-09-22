@@ -1,22 +1,32 @@
 <template>
     <div class="heading-bar">
-        <h3 class="heading-bar__name" :class="{ 'heading-bar__name--with-bg': showBackground }" v-if="name">
+        <h3 class="heading-bar__name" :class="{ 'heading-bar__name--with-bg': showBackground }" v-if="name" jest="name">
             {{ name }}
         </h3>
         <div class="heading-bar__tabs" v-else>
-            <slot name="heading-tabs"></slot>
+            <slot name="heading-tabs">
+                <a
+                    v-for="(tab, index) in headingTabs"
+                    :key="index"
+                    :class="{ 'active': index == activeTab }"
+                    href="#"
+                    :style="{'z-index': 20 - index}"
+                    @click.prevent="changeTab(index, tab.category)"
+                    jest="tab-item"
+                >{{ tab instanceof Object ? tab.title : tab }}</a>
+            </slot>
         </div>
         <div class="heading-bar__additional-action">
             <slot name="additional-action"></slot>
             <a :href="more" v-if="more" class="more">
-                MORE <i class="fas fa-angle-right"></i>
+                MORE <c-icon name="angle-right"/>
             </a>
             <div class="heading-bar__nav" v-if="showArrows">
-                <a href="#3" class="nav-prev" @click="$emit('prevClick')">
-                    <i class="fas fa-arrow-left"></i>
+                <a href="#3" class="nav-prev" @click.prevent="$emit('prevClick')">
+                   <c-icon name="arrow-left"/>
                 </a>
-                <a href="#3" class="nav-next" @click="$emit('nextClick')">
-                    <i class="fas fa-arrow-right"></i>
+                <a href="#3" class="nav-next" @click.prevent="$emit('nextClick')">
+                   <c-icon name="arrow-right"/>
                 </a>
             </div>
         </div>
@@ -30,7 +40,19 @@ export default {
         name: String,
         showBackground: Boolean,
         showArrows: Boolean,
-        more: Boolean
+        more: Boolean,
+        headingTabs: Array
+    },
+    data() {
+        return {
+            activeTab: 0
+        }
+    },
+    methods: {
+        changeTab(i, category) {
+            this.activeTab = i;
+            this.$emit('changeTab', category);
+        }
     }
 }
 </script>
@@ -53,7 +75,6 @@ export default {
         margin: 0;
         display: inline-block;
         font-size: 21px;
-        font-weight: bold;
         line-height: 36px;
         float: left;
         max-width: calc( 100% - 95px );
@@ -101,10 +122,6 @@ export default {
             box-shadow: 0 -1px 10px rgba(0, 0, 0, .2);
             margin: 0 10px;
             text-decoration: none;
-            -moz-transition: all 200ms ease-in-out;
-            -o-transition: all 200ms ease-in-out;
-            -webkit-transition: all 200ms ease-in-out;
-            transition: all 200ms ease-in-out;
             &:before {
                 content: "";
                 position: absolute;
@@ -135,7 +152,7 @@ export default {
             &.active {
                 border-bottom: none;
                 background: #fff;
-                z-index: 8;
+                z-index: 20!important;
                 color: #3e3e5c;
                 &:before {
                     border-bottom-color: #fff;

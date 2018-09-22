@@ -1,11 +1,17 @@
 <template>
-    <div class="switch-container" :class="sClass">
+    <div class="switch-container">
         <p v-if="!customLabel && label_position == 'left'" style="padding-right: 10px" :style="{ fontSize: label_size }">{{ label }}</p>
         <p v-else-if="customLabel && label_position == 'left'" style="padding-right: 10px" :style="{ fontSize: label_size }">
             <slot name="label"></slot>
         </p>
-        <label class="switch" :class="[ 'switch-' + size ]">
-            <input :type="type" :id="id" name="switch_1" :checked="value" @change="$emit('change', $event.target.checked)">
+        <label class="switch my-0" :class="[ 'switch-' + size ]">
+            <input
+                :type="type"
+                :id="id"
+                name="switch_1"
+                :checked="value"
+                @change="$emit('change', !value)"
+            />
             <span></span>
         </label>
         <p v-if="!customLabel && label_position == 'right'" style="padding-left: 10px" :style="{ fontSize: label_size }">{{ label }}</p>
@@ -22,7 +28,10 @@
             disabled: { default: false },
             name: { type: String },
             id: { type: String},
-            value: { default: false },
+            value: {
+                type: Boolean,
+                default: false
+            },
             size: {
                 type: String,
                 default: 'sm'
@@ -39,8 +48,7 @@
             label_size: {
                 type: String,
                 default: '14px'
-            },
-            sClass: String
+            }
         }
     }
 </script>

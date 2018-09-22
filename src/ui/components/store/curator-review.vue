@@ -50,9 +50,9 @@ export default {
         }
     },
     components: {
-        'c-author': () => import('@/ui/components/author'),
-        'c-rating-stars': () => import('@/ui/components/rating-stars'),
-        'c-button': () => import('@/ui/components/buttons/wide'),
+        'c-author': (resolve) => require(['@/ui/components/author'], resolve),
+        'c-rating-stars': (resolve) => require(['@/ui/components/rating-stars'], resolve),
+        'c-button': (resolve) => require(['@/ui/components/buttons/wide'], resolve),
     },
     data() {
         return {

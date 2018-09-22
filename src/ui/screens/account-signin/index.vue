@@ -10,7 +10,7 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade show active" id="step1" role="tabpanel" aria-labelledby="step1-tab">
+                        <div class="tab-pane show active" id="step1" role="tabpanel" aria-labelledby="step1-tab">
                             <div class="tab-container">
                                 <div class="tab-card">
                                     <h4>Account Information</h4>
@@ -51,7 +51,7 @@
 <script>
     export default {
         components: {
-            'c-layout': () => import('@/ui/layouts/default')
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
         },
         methods: {
           signIn() {

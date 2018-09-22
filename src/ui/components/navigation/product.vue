@@ -14,9 +14,9 @@
 <script>
 export default {
   components: {
-      'c-sidebar-menu-link': () => import('@/ui/components/sidebar-menu/menu_item'),
-      'c-sidebar-menu': () => import('@/ui/components/sidebar-menu/index'),
-      'c-searcher': () => import('@/ui/components/searcher')
+      'c-sidebar-menu-link': (resolve) => require(['@/ui/components/sidebar-menu/menu_item'], resolve),
+      'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
+      'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve)
   },
   data() {
     return {}

@@ -17,7 +17,7 @@
             item: Object
         },
         components: {
-            'c-rating': () => import('@/ui/components/rating-stars'),
+            'c-rating': (resolve) => require(['@/ui/components/rating-stars'], resolve),
         },
     }
 </script>

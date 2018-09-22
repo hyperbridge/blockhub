@@ -9,8 +9,8 @@
             </c-button-arrows>
             <div class="comment-container">
                 <c-dropdown-menu
-                    :dropPosition="right"
-                    :style="{ right: '0px', top: '5px' }"
+                    dropPosition="right"
+                    style="right: 5px; top: 10px;"
                 />
                 <div class="comment-content">
                     <div class="user-info">
@@ -45,9 +45,9 @@ export default {
         }
     },
     components: {
-        'c-dropdown-menu': () => import('@/ui/components/dropdown-menu'),
-        'c-reply': () => import('@/ui/components/product-community/reply'),
-        'c-button-arrows': () => import('@/ui/components/buttons/arrows')
+        'c-dropdown-menu': (resolve) => require(['@/ui/components/dropdown-menu'], resolve),
+        'c-reply': (resolve) => require(['@/ui/components/product-community/reply'], resolve),
+        'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'], resolve)
     },
     data() {
         return {

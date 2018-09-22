@@ -33,7 +33,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <c-tags-list :tags="product.author_tags" v-if="!editing"></c-tags-list>
+                                    <c-tags-list :tags="product.developer_tags" v-if="!editing"></c-tags-list>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -57,22 +57,25 @@
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
-                                <a class="nav-link active" :href="`/#/product/${product.id}`">Overview</a>
+                                <router-link :to="`/product/${product.id}`" class="nav-link active">Overview</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}/community`">Community</a>
+                                <router-link :to="`/product/${product.id}/community`" class="nav-link">Community</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}/projects`">Projects</a>
+                                <router-link :to="`/product/${product.id}/projects`" class="nav-link">Projects</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}/assets`">Assets</a>
+                                <router-link :to="`/product/${product.id}/assets`" class="nav-link">Assets</router-link>
                             </li>
                         </ul>
 
                         <div class="row">
                             <div class="col-7">
-                                <c-screen-gallery :main="product.images.main" :items="product.images.preview" />
+                                <c-screen-gallery
+                                    :items="[product.images.medium_tile, ...product.images.preview]"
+                                    :video_url="product.video"
+                                />
 
                                 <c-sale-box
                                     :sale_box="product.sale_box"
@@ -102,36 +105,9 @@
 
                                 <c-community-spotlight :discussions="product.community.discussions" :community_url="`/#/product/${product.id}/community`" />
 
-                                <div class="card invert system-requirements" v-if="product.system_requirements">
-                                    <div class="card-body">
-                                        <h2 class="title">System Requirements <i class="fas fa-laptop title-icon"></i>
-                                        </h2>
-                                        <div class="system-requirements__item"
-                                             v-for="(item, index) in product.system_requirements" :key="index">
-                                            <h6>{{ item.system }} <i :class="item.icon"></i></h6>
-                                            <p>{{ item.requirements }}</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <c-system-requirements :requirements="product.system_requirements"/>
 
-                                <div class="card transparent languages-blk" v-if="product.language_support">
-                                    <div class="card-body">
-                                        <h2 class="title">Languages <i class="fas fa-laptop title-icon"></i></h2>
-                                        <ul class="languages-list">
-                                            <li class="languages-list__item"
-                                                v-for="(item, index) in product.language_support"
-                                                :key="index">
-                                                <span class="languages-list__name">{{ item.name }}</span>
-                                                <span class="languages-list__icon">
-                                                    <i class="fas fa-closed-captioning"
-                                                       v-if="item.closed_captioning"></i>
-                                                    <i class="fas fa-audio-description"
-                                                       v-if="item.audio_description"></i>
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <c-language-support :languages="product.language_support"/>
                             </div>
                         </div>
                         <div class="col-12">
@@ -162,10 +138,25 @@
                 </div>
             </div>
         </div>
+        <c-custom-modal title="Help Center" v-if="first_product && editing" @close="closeModal">
+            <div class="help-modal__content" slot="modal_body" style="width: 500px">
+                <h4 class="h2 mb-3">Creating your first product?</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Etiam elementum ac ligula nec viverra. Nunc molestie augue a erat ultrices fermentum.</p>
+                <p>Curabitur non bibendum erat. Praesent nec vestibulum odio, vel euismod enim. Sed at tincidunt risus.
+                    Mauris ac facilisis metus. Proin venenatis neque posuere urna sagittis ultricies.</p>
+                <p><a href="/#/help" target="_blank">Learn more about creating products</a></p>
+            </div>
+            <div slot="modal_footer" class="text-right w-100" >
+                <c-button size="md" @click="closeModal">Got it</c-button>
+            </div>
+        </c-custom-modal>
     </c-layout>
 </template>
 
 <script>
+    import Vue from 'vue'
+    
     const updateProduct = function () {
         let product = null
 
@@ -177,31 +168,42 @@
             product = this.$store.state.marketplace.products[this.id]
         }
 
-        if (product && product.images && product.images.header) {
-            window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
+        if (product.images.preview && product.images.preview.length) {
+            const header = window.document.getElementById('header-bg');
+            const randomImage = Math.floor(Math.random() * product.images.preview.length);
+            header.style['background-image'] = 'url(' + product.images.preview[randomImage] + ')';
+            header.style['background-size'] = 'cover';
         }
 
         if (!product.community)
             product.community = {
                 discussions: []
             }
+        
+        if (!product.author_tags) {
+            product.author_tags = []
+        }
 
         return product
-    }
+    };
 
     export default {
         props: ['id'],
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-game-plan': () => import('@/ui/components/game-plans/plan'),
-            'c-screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
-            'c-sale-box': () => import('@/ui/components/sale-box/box'),
-            'c-tags-list': () => import('@/ui/components/tags'),
-            'c-rating-block': () => import('@/ui/components/rating-block'),
-            'c-frequently-traded-assets': () => import('@/ui/components/frequently-traded-assets'),
-            'c-community-spotlight': () => import('@/ui/components/community-spotlight'),
-            'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-review': () => import('@/ui/components/review')
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-game-plan': (resolve) => require(['@/ui/components/game-plans/plan'], resolve),
+            'c-screen-gallery': (resolve) => require(['@/ui/components/screen-gallery/gallery'], resolve),
+            'c-sale-box': (resolve) => require(['@/ui/components/sale-box/box'], resolve),
+            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-rating-block': (resolve) => require(['@/ui/components/rating-block'], resolve),
+            'c-frequently-traded-assets': (resolve) => require(['@/ui/components/frequently-traded-assets'], resolve),
+            'c-community-spotlight': (resolve) => require(['@/ui/components/community-spotlight'], resolve),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+            'c-review': (resolve) => require(['@/ui/components/review'], resolve),
+            'c-system-requirements': (resolve) => require(['@/ui/components/product-overview/system-requirements'], resolve),
+            'c-language-support': (resolve) => require(['@/ui/components/product-overview/language-support'], resolve),
+            'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
+            'c-popup': (resolve) => require(['@/ui/components/popups'], resolve)
         },
         data() {
             const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.';
@@ -231,7 +233,8 @@
                         { author, title: title, text, date: '2018-03-21T04:09:00.000Z', rating: 5, minutes_played: 241, setup },
                         { author, title: title, text, date: '2018-08-11T04:09:00.000Z', rating: 3, minutes_played: 2941, setup }
                     ]
-                }
+                },
+                savedState: false
             }
         },
         methods: {
@@ -251,11 +254,20 @@
                 }, 10)
             },
             save() {
+                this.savedState = true;
                 if (this.id === 'new') {
                     this.$store.commit('marketplace/createProduct', this.product)
                 } else {
                     this.$store.dispatch('marketplace/updateProduct', this.product)
                 }
+            },
+            closeModal(){
+                console.log('close')
+                this.$store.state.marketplace.first_product = false
+            },
+            unsaved(){
+                if (this.savedState === false && this.$store.state.marketplace.editor_mode === 'editing')
+                    return 'ololololo'
             }
         },
         computed: {
@@ -266,14 +278,19 @@
                         this.activeElement[key] = false
                     }
                 }
-
                 return this.$store.state.marketplace.editor_mode === 'editing'
+            },
+            first_product(){
+                return this.$store.state.marketplace.first_product
             }
         },
         mounted: updateProduct,
-        created: updateProduct,
+        created(){
+            updateProduct;
+            window.onbeforeunload = this.unsaved;
+        },
         beforeDestroy() {
-            window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
         },
         updated() {
             $('#tag-editor').select2()
@@ -305,7 +322,7 @@
                 }
             });
 
-        }
+        },
     }
 </script>
 
@@ -376,59 +393,6 @@
         &.with_bg{
             color: #1C2032;
             background: #FEEBCE;
-        }
-    }
-
-    .system-requirements__item {
-        display: block;
-        width: 100%;
-        margin-bottom: 10px;
-        background: rgba(0, 0, 0, .13);
-        border: 1px solid rgba(70, 70, 70, 0.5);
-        border-radius: 5px;
-        padding: 5px;
-        position: relative;
-        &:last-child {
-            margin-bottom: 0;
-        }
-        h6 {
-            font-weight: bold;
-            font-size: 14px;
-            padding-bottom: 0;
-            i {
-                float: right;
-            }
-        }
-        p {
-            margin: 0;
-        }
-    }
-
-    .languages-list {
-        padding: 0;
-    }
-    .languages-list__item {
-        list-style: none;
-        display: block;
-        margin: 5px 0;
-        width: 100%;
-        overflow: hidden;
-    }
-    .languages-list__name {
-        float: left;
-        max-width: 80%;
-        font-size: 14px;
-        font-weight: bold;
-    }
-    .languages-list__icon {
-        float: right;
-        max-width: 20%;
-        text-align: right;
-        i {
-            margin-right: 5px;
-            &:last-child {
-                margin-right: 0;
-            }
         }
     }
 </style>

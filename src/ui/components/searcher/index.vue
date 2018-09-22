@@ -1,6 +1,6 @@
 <template>
-    <div class="form-group" :class="customClass">
-        <div class="input-group">
+    <div class="form-group mb-0">
+        <div class="input-group" :class="['size-' + size]">
             <input
                 type="text"
                 class="form-control"
@@ -32,7 +32,12 @@
 <script>
 export default {
     name: 'searcher',
-    props: ['customClass'],
+    props: {
+        size:{
+            type: String,
+            default: 'md'
+        }
+    },
     data() {
         return {
             timeout: null,
@@ -67,11 +72,20 @@ export default {
     }
     input {
         border: none;
-        padding: 4px 9px;
         &:active,
         &:focus {
             border: unset;
             box-shadow: none;
+        }
+    }
+    &.size-md{
+        input{
+            padding: 4px 9px;
+        }
+    }
+    &.size-lg{
+        input{
+            padding: 9px 15px;
         }
     }
 }

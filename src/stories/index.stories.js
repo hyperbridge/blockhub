@@ -1,11 +1,15 @@
 /* eslint-disable react/react-in-jsx-scope, react/no-this-in-sfc */
 
-import {storiesOf} from '@storybook/vue'
-import {action} from '@storybook/addon-actions'
-import {linkTo} from '@storybook/addon-links'
-import {withKnobs, text, boolean, number, object} from '@storybook/addon-knobs/vue'
+import Vue from 'vue'
+import { storiesOf, addDecorator } from '@storybook/vue'
+import { action } from '@storybook/addon-actions'
+import { linkTo } from '@storybook/addon-links'
+import { withViewport } from '@storybook/addon-viewport'
+import { withKnobs, text, boolean, number, object } from '@storybook/addon-knobs/vue'
 
 import '../css/styles.scss'
+import '@/filters'
+import '@/components'
 
 import * as data from './components-data'
 
@@ -13,13 +17,17 @@ import * as data from './components-data'
 
 import SaleBox from '../ui/components/sale-box/box.vue'
 
+
+addDecorator(withViewport('desktop'))
+
+
 storiesOf('Sale Box', module)
     .add('default', () => ({
         components: {
             'c-sale-box': SaleBox
         },
         data() {
-            let title = 'test';
+            let title = 'test'
             return {
                 sale_box: {
                     title: title
@@ -499,10 +507,10 @@ storiesOf('Buttons', module)
             <c-button @click="testFunction">
                 default
             </c-button>
-            <c-button size="md">
+            <c-button size="md" @click="testFunction">
                 default
             </c-button>
-            <c-button size="lg">
+            <c-button size="lg" @click="testFunction">
                 default
             </c-button>
         `)
@@ -531,10 +539,40 @@ storiesOf('Buttons', module)
             <c-button status="danger" size="lg">danger</c-button>
         `)
     }))
+    .add('share', () => ({
+        components: {'c-button': Buttons},
+        template: injectButtonTemplate(`
+            <c-button status="share">share</c-button>
+            <c-button status="share" size="md">share</c-button>
+            <c-button status="share" size="lg">share</c-button>
+        `)
+    }))
+    .add('support', () => ({
+        components: {'c-button': Buttons},
+        template: injectButtonTemplate(`
+            <c-button status="support">support</c-button>
+            <c-button status="support" size="md">support</c-button>
+            <c-button status="support" size="lg">support</c-button>
+        `)
+    }))
+    .add('[options] - swap direction', () => ({
+        components: {'c-button': Buttons},
+        template: injectButtonTemplate(`
+            <c-button status="info" swap_direction>direction swapped</c-button>
+            <c-button status="info" size="md" swap_direction>direction swapped</c-button>
+            <c-button status="info" size="lg" swap_direction>direction swapped</c-button>
+        `)
+    }))
     .add('[options] - swap order', () => ({
         components: {'c-button': Buttons},
         template: injectButtonTemplate(`
             <c-button status="success" swap_order>success</c-button>
+        `)
+    }))
+    .add('[options] - swap order & direction', () => ({
+        components: {'c-button': Buttons},
+        template: injectButtonTemplate(`
+            <c-button status="info" size="lg" swap_direction swap_order>order & direction swapped</c-button>
         `)
     }))
     .add('[options] - hide icon', () => ({
@@ -620,8 +658,8 @@ storiesOf('Money Info', module)
         `
     }));
 
-import Checkbox from '../ui/components/checkbox/checbox.vue'
-import CheckboxGroup from '../ui/components/checkbox/checbox-group.vue'
+import Checkbox from '@/ui/components/checkbox';
+import CheckboxGroup from '@/ui/components/checkbox/group.vue';
 
 storiesOf('Checkbox', module)
     .add('Single checkbox', () => ({
@@ -635,7 +673,7 @@ storiesOf('Checkbox', module)
         },
         template: `
         <div class="row m-0 p-3">
-            <c-checkbox id="test_check" label="This is the test checkbox" v-model="value" />
+            <c-checkbox id="test_check" v-model="value">This is the test checkbox</c-checkbox>
         </div>
         `
     }))
@@ -647,10 +685,10 @@ storiesOf('Checkbox', module)
         template: `
         <div class="row m-0 p-3">
             <c-checkbox-group title="Group Title">
-                <c-checkbox id="test_check_1" label="This is the first checkbox" v-model="value" />
-                <c-checkbox id="test_check_2" label="This is the second checkbox with longer text" v-model="value" />
-                <c-checkbox id="test_check_3" label="This is the checkbox" v-model="value" />
-                <c-checkbox id="test_check_4" label="This is the test checkbox" v-model="value" />
+            <c-checkbox id="test_check_1">This is the test checkbox</c-checkbox>
+            <c-checkbox id="test_check_2">This is the test checkbox</c-checkbox>
+            <c-checkbox id="test_check_3">This is the test checkbox</c-checkbox>
+            <c-checkbox id="test_check_4">This is the test checkbox</c-checkbox>
             </c-checkbox-group>
         </div>
         `
@@ -933,13 +971,13 @@ storiesOf('Popups', module)
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is dafault popup</h3>
-                <c-button text="Show modal" @click="showModalHandler" variant="default" icon="fas fa-check" icon_position="left" c_class="ml-1" />
-                <c-popup :activated="modalActive" ref="modal" title="Error" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                        text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
+                <c-button @click="showModalHandler">Show modal</c-button>
+                <c-popup :activated="modalActive" ref="modal" title="Default" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
-                            <c-button text="Cancel" variant="danger" icon="fas fa-times" icon_position="left" c_class="mx-1" />
-                            <c-button text="Confirm" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                            <c-button status="danger">Cancel</c-button>
+                            <c-button status="success">Confirm</c-button>
                         </div>
                     </template>
                 </c-popup>
@@ -967,13 +1005,13 @@ storiesOf('Popups', module)
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is warning popup</h3>
-                <c-button text="Show modal" @click="showModalHandler" variant="warning" icon="fas fa-check" icon_position="left" c_class="ml-1" />
-                <c-popup :activated="modalActive" @close="close" ref="modal" title="Warning" type="warning" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                        text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
+                <c-button @click="showModalHandler">Show modal</c-button>
+                <c-popup :activated="modalActive" @close="close" ref="modal" title="Warning" type="warning" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
-                            <c-button text="Cancel" variant="danger" icon="fas fa-times" icon_position="left" c_class="mx-1" />
-                            <c-button text="Confirm" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                            <c-button status="danger">Cancel</c-button>
+                            <c-button status="success">Confirm</c-button>
                         </div>
                     </template>
                 </c-popup>
@@ -998,13 +1036,13 @@ storiesOf('Popups', module)
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is danger popup</h3>
-                <c-button text="Show modal" @click="showModalHandler" variant="danger" icon="fas fa-check" icon_position="left" c_class="ml-1" />
-                <c-popup :activated="modalActive" ref="modal" title="Danger" type="danger" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                        text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
+                <c-button @click="showModalHandler">Show modal</c-button>
+                <c-popup :activated="modalActive" ref="modal" title="Danger" type="danger" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
-                            <c-button text="Cancel" variant="danger" icon="fas fa-times" icon_position="left" c_class="mx-1" />
-                            <c-button text="Confirm" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                            <c-button status="danger">Cancel</c-button>
+                            <c-button status="success">Confirm</c-button>
                         </div>
                     </template>
                 </c-popup>
@@ -1029,13 +1067,13 @@ storiesOf('Popups', module)
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is info popup</h3>
-                <c-button text="Show modal" @click="showModalHandler" variant="info" icon="fas fa-check" icon_position="left" c_class="ml-1" />
-                <c-popup :activated="modalActive" ref="modal" title="Info" type="info" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                        text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
+                <c-button @click="showModalHandler">Show modal</c-button>
+                <c-popup :activated="modalActive" ref="modal" title="Info" type="info" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
-                            <c-button text="Cancel" variant="danger" icon="fas fa-times" icon_position="left" c_class="mx-1" />
-                            <c-button text="Confirm" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                            <c-button status="danger">Cancel</c-button>
+                            <c-button status="success">Confirm</c-button>
                         </div>
                     </template>
                 </c-popup>
@@ -1060,7 +1098,7 @@ storiesOf('Popups', module)
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is success popup</h3>
-                <c-button text="Show modal" @click="showModalHandler" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                <c-button @click="showModalHandler">Show modal</c-button>
                 <c-popup :activated="modalActive" ref="modal" type="success" title="Success" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
                         text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
                     <template slot="footer">
@@ -1144,38 +1182,80 @@ storiesOf('Range Slider', module)
 
 import AssetsGrid from '../ui/components/assets-grid/index.vue'
 
+const assets_list = [
+    {
+        name: 'some item name',
+        price: '1.99',
+        count: '240.000',
+        main_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
+        sub_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
+    },
+    {
+        name: 'some another item name',
+        price: '99.99',
+        count: '824.000',
+        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+    },
+    {
+        name: 'some another item name',
+        price: '99.99',
+        count: '824.000',
+        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+    },
+    {
+        name: 'some another item name',
+        price: '99.99',
+        count: '824.000',
+        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+    },
+    {
+        name: 'some another item name',
+        price: '99.99',
+        count: '824.000',
+        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+    },
+    {
+        name: 'some another item name',
+        price: '99.99',
+        count: '824.000',
+        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+    }
+]
+
 storiesOf('Assets Grid', module)
     .addDecorator(withKnobs)
+    .addDecorator(withViewport())
     .add('default', () => ({
         components: {
             'c-assets-grid': AssetsGrid
         },
         data() {
             return object('Data', {
-                assets_list: [
-                    {
-                        name: 'some item name',
-                        price: '1.99',
-                        count: '240.000',
-                        main_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                        sub_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-                    },
-                    {
-                        name: 'some another item name',
-                        price: '99.99',
-                        count: '824.000',
-                        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
-                        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
-                    }
-                ]
+                assets_list: assets_list
             })
         },
         template: `
-         <div class="row m-0 p-3">
-             <c-assets-grid :list="assets_list" />
-         </div>
+        <c-assets-grid :list="assets_list" />
         `
-    }));
+    }), { viewport: 'desktop' })
+    .add('default (iPhone 6 Plus)', () => ({
+        components: {
+            'c-assets-grid': AssetsGrid
+        },
+        data() {
+            return object('Data', {
+                assets_list: assets_list
+            })
+        },
+        template: `
+        <c-assets-grid :list="assets_list" />
+        `
+    }), { viewport: 'iphone6p' })
 
 import AssetsPopup from '../ui/components/asset-overview-popup/index.vue'
 
@@ -1329,7 +1409,7 @@ storiesOf('Assets List', module)
     }))
 
 
-import Block from '../ui/components/block-1/index.vue'
+import Block from '../ui/components/block/index.vue'
 
 storiesOf('Block', module)
     .add('default', () => ({
@@ -1338,7 +1418,7 @@ storiesOf('Block', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-block title="This is block title" bClass="col-8">
+             <c-block title="This is block title" class="col-8">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Suspendisse vel arcu sit amet erat vestibulum volutpat.
                 Ut volutpat enim vel augue luctus luctus</p>
@@ -1349,13 +1429,65 @@ storiesOf('Block', module)
          </div>
         `
     }))
-
-import CustomModal from '../ui/components/custom-modal/index'
+    .add('gradient', () => ({
+        components: {
+            'c-block': Block
+        },
+        template: `
+             <div class="row m-0 p-3">
+                 <c-block title="This is block title" class="col-8" :bgGradient="true">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Suspendisse vel arcu sit amet erat vestibulum volutpat.
+                    Ut volutpat enim vel augue luctus luctus</p>
+                    <p>Curabitur et molestie eros. Duis sodales ante velit,
+                    ut fringilla turpis dictum sit amet. Praesent quis lacus
+                    ac tellus vehicula commodo sit amet sit amet ex.</p>
+                </c-block>
+             </div>
+            `
+    }))
+    .add('only content bg', () => ({
+        components: {
+            'c-block': Block
+        },
+        template: `
+             <div class="row m-0 p-3">
+                 <c-block title="This is block title" class="col-8" :bgGradient="true" :onlyContentBg="true">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Suspendisse vel arcu sit amet erat vestibulum volutpat.
+                    Ut volutpat enim vel augue luctus luctus</p>
+                    <p>Curabitur et molestie eros. Duis sodales ante velit,
+                    ut fringilla turpis dictum sit amet. Praesent quis lacus
+                    ac tellus vehicula commodo sit amet sit amet ex.</p>
+                </c-block>
+             </div>
+            `
+    }))
+import CustomModal from '../ui/components/modal/custom'
+import Modal from '@/ui/components/modal/';
 
 storiesOf('Modal', module)
-    .add('default', () => ({
+    .add('image', () => ({
+        components: { 'c-modal': Modal },
+        template: `
+            <c-modal>
+                <img
+                    src="http://gamechanger.co.ke/wp-content/uploads/2016/09/The-Witcher-3-Wild-Hunt-Game-of-the-Year-Edition3.jpg"
+                />
+            </c-modal>
+        `
+    }))
+    .add('text', () => ({
+        components: { 'c-modal': Modal },
+        template: `
+            <c-modal>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn</p>
+            </c-modal>
+        `
+    }))
+    .add('custom', () => ({
         components: {
-            'c-modal': CustomModal
+            'c-custom-modal': CustomModal
         },
         template: `
          <div class="row m-0 p-3">
@@ -1364,7 +1496,7 @@ storiesOf('Modal', module)
                   Launch modal
                 </button>
             </div>
-            <c-modal id="exampleModal" title="Some modal title">
+            <c-custom-modal id="exampleModal" title="Some modal title">
                 <template slot="modal_body">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id rhoncus turpis.</p>
                     <p>Aliquam nec blandit mi. Integer sed neque urna.</p>
@@ -1372,7 +1504,7 @@ storiesOf('Modal', module)
                 <template slot="modal_footer">
                     <a href="#3" class="btn btn-sm btn-success">Some Link</a>
                 </template>
-            </c-modal>
+            </c-custom-modal>
          </div>
         `
     }))
@@ -1926,29 +2058,35 @@ storiesOf('Sending Funds(not finished)', module)
         template: data.SendingFunds.template
     }))
 
-import UserCard from '../ui/components/user-card/index'
+import UserCard from '@/ui/components/user-card/index';
 
-storiesOf('User Card(not finished)', module)
+storiesOf('User Card', module)
     .add('default', () => ({
         components: {
             'c-user-card': UserCard
         },
-        template: `
-        <div class="row p-5">
-            <div class="col-4">
-                <c-user-card  />
-            </div>
-        </div>
-        `
-    }))
-    .add('done', () => ({
-        components: {
-            'c-user-card': UserCard
+        data() {
+            return {
+                user: {
+                    id: 1,
+                    name: 'Mr. Satoshi',
+                    wallet: '0x6cc5f688a315f3dc28a7781717a',
+                    img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                    default: false,
+                    edit: false
+                }
+            }
         },
         template: `
         <div class="row p-5">
             <div class="col-4">
-                <c-user-card status="success" :user="true"  />
+                <c-user-card
+                    :user="user"
+                    @updateIdentity="(prop, val) => user[prop] = val"
+                />
+            </div>
+            <div class="col-4">
+                <c-user-card :user="user" previewMode/>
             </div>
         </div>
         `
@@ -1961,15 +2099,14 @@ storiesOf('Gallery', module)
         components: {ScreenGallery},
         data() {
             return {
-                main: 'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012',
                 items: [
-                    'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_64eb760f9a2b67f6731a71cce3a8fb684b9af267.1920x1080.jpg?t=1529405012',
+                    'https://steamcdn-a.akamaihd.net//apps/292030/ss_64eb760f9a2b67f6731a71cce3a8fb684b9af267.1920x1080.jpg?t=1529405012',
                     'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_eda99e7f705a113d04ab2a7a36068f3e7b343d17.1920x1080.jpg?t=1529405012',
                     'https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_d5b80eb63c12a6484f26796f3e34410651bba068.1920x1080.jpg?t=1529405012',
                 ]
             }
         },
-        template: `<screen-gallery :main="main" :items="items" class="col-6"/>`
+        template: `<screen-gallery :items="items" class="col-6"/>`
     }))
 
 import ProductCardDynamic from '@/ui/components/store/product-card-dynamic';
@@ -1993,7 +2130,7 @@ const productsCardsData = [
         },
         author: "Piranha Bytes",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/901191/movie480.webm?t=1490866901"],
-        author_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+        developer_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     },
     {
         id: "9",
@@ -2011,7 +2148,7 @@ const productsCardsData = [
         },
         author: "CD PROJEKT RED",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256658589/movie480.webm?t=1528288687"],
-        author_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+        developer_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     },
     {
         id: "10",
@@ -2029,7 +2166,7 @@ const productsCardsData = [
         },
         author: "Bethesda",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256657338/movie480.webm?t=1447378505"],
-        author_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+        developer_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     }
 ];
 storiesOf('Product Card', module)
@@ -2109,32 +2246,6 @@ storiesOf('Curators Reviews', module)
         template: `<curators-reviews :reviews="reviews" class="col-8"/>`
     }))
 
-
-import ModalLight from '@/ui/components/modal-light';
-storiesOf('Modal Light', module)
-    .add('default', () => ({
-        components: { 'c-modal-light': ModalLight },
-        template: `<c-modal-light/>`
-    }))
-    .add('image', () => ({
-        components: { 'c-modal-light': ModalLight },
-        template: `
-            <c-modal-light>
-                <img
-                    src="http://gamechanger.co.ke/wp-content/uploads/2016/09/The-Witcher-3-Wild-Hunt-Game-of-the-Year-Edition3.jpg"
-                />
-            </c-modal-light>
-        `
-    }))
-    .add('text', () => ({
-        components: { 'c-modal-light': ModalLight },
-        template: `
-            <c-modal-light>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn</p>
-            </c-modal-light>
-        `
-    }))
-
 import ImagesExplorer from '@/ui/components/images-explorer';
 storiesOf('Images Explorer', module)
     .add('default', () => ({
@@ -2145,7 +2256,7 @@ storiesOf('Images Explorer', module)
     .add('in modal', () => ({
         components: {
             'c-images-explorer': ImagesExplorer,
-            'c-modal-light': ModalLight
+            'c-modal-light': Modal
         },
         data: () => object('Data', data.ImagesExplorer),
         template: `
@@ -2286,7 +2397,7 @@ storiesOf('Collection', module)
         },
         template: `
             <div class="p-5" style="width: 900px">
-                <c-collection-list title="Get Started" 
+                <c-collection-list title="Get Started"
                                     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet tellus in neque porttitor consequat."
                                     >
                     <c-swiper :options="sliderOptions" class="padding-10">
@@ -2455,12 +2566,692 @@ storiesOf('Game Series', module)
         template: `<div class="p-5" style="width: 900px"><c-game-includes-list :list="list" :showNumber="5" /></div>`
     }))
 
+import ProgressBar from '@/ui/components/progress-bar';
+storiesOf('Progress Bar', module)
+    .add('default', () => ({
+        components: {
+            'c-progress-bar': ProgressBar
+        },
+        template: `
+            <div class="padding-50">
+                <c-progress-bar :percentages="74"/>
+            </div>
+        `
+    }))
+    .add('vertical', () => ({
+        components: {
+            'c-progress-bar': ProgressBar
+        },
+        template: `
+            <div class="padding-50" :style="{ height: '200px' }">
+                <c-progress-bar direction="vertical"/>
+            </div>
+        `
+    }))
+    .add('calculate percentages', () => ({
+        components: {
+            'c-progress-bar': ProgressBar
+        },
+        data() {
+            return {
+                values: { reached: 391, goal: 2490 }
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <h2 :style="{ color: '#fff' }">Progress bar can accept object prop and calculate percentages</h2>
+                <pre :style="{ color: '#fff' }">:values="{{ values }}"</pre>
+                <c-progress-bar :values="values"/>
+            </div>
+        `
+    }))
+    .add('show percentages', () => ({
+        components: {
+            'c-progress-bar': ProgressBar
+        },
+        template: `
+            <div class="padding-50">
+                <c-progress-bar :percentages="41" show_text/>
+            </div>
+        `
+    }))
 
+import ProjectMilestone from '@/ui/components/projects/milestone';
+storiesOf('Project Milestone', module)
+    .add('default', () => ({
+        components: {
+            'c-project-milestone': ProjectMilestone
+        },
+        data() {
+            return {
+                milestone: {
+                    img: 'http://via.placeholder.com/350x250',
+                    title: 'Milestone 1',
+                    short_description: `For far away, behind the word mountains, far from the countries Vokalia and Consonatia, there live.`,
+                    full_text: `Aenean eu tellus vel tortor tincidunt pharetra. Aenean mattis, sapien vel
+                        lacinia accumsan, justo mi venenatis justo, ut accumsan diam mauris sit amet
+                        ipsum. Vivamus iaculis lectus vel egestas vehicula. Phasellus in lacus nunc.
+                        Curabitur lobortis arcu neque, non rutrum elit placerat eget.`,
+                    progress: {
+                        days_amouth: "133",
+                        days_percent: 94,
+                        done_percent: 8,
+                        spent_percent: 95
+                    }
+                }
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-project-milestone :milestone="milestone"/>
+            </div>
+        `
+    }))
 
+import CommunitySpotlight from '@/ui/components/community-spotlight';
+storiesOf('Community Spotlight', module)
+    .add('default', () => ({
+        components: {
+            'c-community-spotlight': CommunitySpotlight
+        },
+        data() {
+            return {
+                discussions: [
+                    { link: '', name: 'Title', count: 98 },
+                    { link: '', name: 'Post name', count: 98 },
+                    { link: '', name: 'Discussion', count: 98 }
+                ]
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-community-spotlight
+                    :discussions="discussions"
+                />
+            </div>
+        `
+    }))
 
+import ProductReview from '@/ui/components/review';
+storiesOf('Product Review', module)
+    .add('default', () => ({
+        components: {
+            'c-review': ProductReview
+        },
+        data() {
+            return {
+                review: {
+                    author: { name: 'Nakatochi', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png' },
+                    title: 'Good game with very nice graphics made by very smart people.',
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.',
+                    date: '2018-08-19T04:09:00.000Z',
+                    rating: 4.5,
+                    minutes_played: 1938,
+                    setup: { system: 'Windows 10', gpu: 'GTX 1080', cpu: 'Core i7 7980x', ram: '8 GB', storage: 'HyperX 1TB SSD' }
+                }
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-review :review="review"/>
+            </div>
+        `
+    }))
 
+import Banner from '@/ui/components/banner'
+storiesOf('Banner', module)
+    .add('image', () =>({
+        components:{
+            'c-banner': Banner
+        },
+        data(){
+            return{
+                logoPosition: '',
+                logoSize: '',
+                bgPosition: '',
+                img: {
+                    src: 'https://d2q63o9r0h0ohi.cloudfront.net/images/kobolds-and-catacombs/header-bg-backup-337031b146d6540bc3d2513f0fb11daa966398f512db7163c7e819120a62b2b17c2abaa893cfcef5c14e1f4a696ce45fa8d2e4d36a987029e563b449b402a115.jpg',
+                    position: 'center'
+                },
+                logo: {
+                    src: 'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png',
+                    position: '',
+                    size: ''
+                }
+            }
+        },
+        watch:{
+            bgPosition(){
+                this.img['position'] = this.bgPosition;
+            },
+            logoPosition(){
+                this.logo['position'] = this.logoPosition;
+            },
+            logoSize(){
+                this.logo['size'] = this.logoSize;
+            }
+        },
+        template: `<div class="padding-50" style="width: 900px">
+                    <div class="row mb-2">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="text-white">Logo Position</label>
+                                <select class="form-control" id="logo_position" v-model="logoPosition">
+                                    <optgroup label="top">
+                                        <option value="left top">left top</option>
+                                        <option value="center top">center top</option>
+                                        <option value="right top">right top</option>
+                                    </optgroup>
+                                    <optgroup label="center">
+                                        <option value="left center">left center</option>
+                                        <option value="center center">center center</option>
+                                        <option value="right center">right center</option>
+                                    </optgroup>
+                                    <optgroup label="bottom">
+                                        <option value="left bottom">left bottom</option>
+                                        <option value="center bottom">center bottom</option>
+                                        <option value="right bottom">right bottom</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                        <label class="text-white">Logo Size</label>
+                            <select class="form-control" id="logo_size" v-model="logoSize">
+                                    <option value="sm">sm</option>
+                                    <option value="md">md</option>
+                                    <option value="lg">lg</option>
+                                    <option value="xl">xl</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                        <label class="text-white">Background Position</label>
+                            <select class="form-control" id="background_position" v-model="bgPosition">
+                                <optgroup label="top">
+                                    <option value="left top">left top</option>
+                                    <option value="center top">center top</option>
+                                    <option value="right top">right top</option>
+                                </optgroup>
+                                <optgroup label="center">
+                                    <option value="left center">left center</option>
+                                    <option value="center center">center center</option>
+                                    <option value="right center">right center</option>
+                                </optgroup>
+                                <optgroup label="bottom">
+                                    <option value="left bottom">left bottom</option>
+                                    <option value="center bottom">center bottom</option>
+                                    <option value="right bottom">right bottom</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <c-banner :image="img" :logo="logo" />
+            </div>`
+    }))
+    .add('video', () => ({
+        components:{
+            'c-banner': Banner
+        },
+        data(){
+            return{
+                logoPosition: '',
+                logoSize: '',
+                videoSrc: '',
+                logo: {
+                    src: 'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png',
+                    position: '',
+                    size: ''
+                },
+                video:{
+                    src: 'https://v.ftcdn.net/01/38/38/15/700_F_138381553_qnyzrhPi5l5TMI0koaObyjYg13AWKND1_ST.mp4'
+                }
+            }
+        },
+        watch:{
+            logoPosition(){
+                this.logo['position'] = this.logoPosition
+            },
+            logoSize(){
+                this.logo['size'] = this.logoSize
+            }
+        },
+        template: `<div class="padding-50" style="width: 900px">
+                    <div class="row mb-2">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="text-white">Logo Position</label>
+                                <select class="form-control" id="logo_position" v-model="logoPosition">
+                                    <optgroup label="top">
+                                        <option value="left top">left top</option>
+                                        <option value="center top">center top</option>
+                                        <option value="right top">right top</option>
+                                    </optgroup>
+                                    <optgroup label="center">
+                                        <option value="left center">left center</option>
+                                        <option value="center center">center center</option>
+                                        <option value="right center">right center</option>
+                                    </optgroup>
+                                    <optgroup label="bottom">
+                                        <option value="left bottom">left bottom</option>
+                                        <option value="center bottom">center bottom</option>
+                                        <option value="right bottom">right bottom</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                        <div class="form-group">
+                            <label class="text-white">Logo Size</label>
+                            <select class="form-control" v-model="logoSize">
+                                    <option value="sm">sm</option>
+                                    <option value="md">md</option>
+                                    <option value="lg">lg</option>
+                                    <option value="xl">xl</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+                    <c-banner :video="video" :logo="logo" />
 
+            </div>`
+    }))
 
+import TabsUniversal from '@/ui/components/tab/tabs-universal';
+import TabUniversal from '@/ui/components/tab/tab-universal';
+storiesOf('Tabs Universal', module)
+    .add('default', () => ({
+        components: {
+            'c-tabs-universal': TabsUniversal,
+            'c-tab-universal': TabUniversal
+        },
+        template: `
+            <div class="padding-50">
+                <c-tabs-universal style="color: #fff;">
+                    <c-tab-universal :tab_id="0">
+                        First tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="1">
+                        Wwww
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="2">
+                        12345
+                    </c-tab-universal>
+                </c-tabs-universal>
+            </div>`
+    }))
+    .add('Tabs Names', () => ({
+        components: {
+            'c-tabs-universal': TabsUniversal,
+            'c-tab-universal': TabUniversal
+        },
+        template: `
+            <div class="padding-50">
+                <c-tabs-universal
+                    style="color: #fff;"
+                    :tab_names="['Custom tab One', 'Second', 'Im third tab']"
+                >
+                    <c-tab-universal :tab_id="0">
+                        First tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="1">
+                        Wwww
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="2">
+                        12345
+                    </c-tab-universal>
+                </c-tabs-universal>
+            </div>`
+    }))
+    .add('Custom Navigation', () => ({
+        components: {
+            'c-tabs-universal': TabsUniversal,
+            'c-tab-universal': TabUniversal
+        },
+        data() {
+            return {
+                active_tab: 1
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-tabs-universal
+                    style="color: #fff;"
+                    :active_tab_prop="active_tab"
+                >
+                    <template slot="nav">
+                        <button @click="active_tab = 1">Tab 1</button>
+                        <button @click="active_tab = 2">Tab 2</button>
+                        <button @click="active_tab = 3">Tab 3</button>
+                        <button @click="active_tab = 4">Tab 4</button>
+                    </template>
+                    <c-tab-universal :tab_id="1">
+                        First tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="2">
+                        Wwww
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="3">
+                        12345
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="4">
+                        Fourth tab
+                    </c-tab-universal>
+                </c-tabs-universal>
+            </div>`
+    }))
+    .add('Locked Tab', () => ({
+        components: {
+            'c-tabs-universal': TabsUniversal,
+            'c-tab-universal': TabUniversal
+        },
+        data() {
+            return {
+                locked_step: 1,
+                locked_tab: 1
+            }
+        },
+        methods: {
+            changeLockedTab() {
+                this.locked_tab = Math.floor(Math.random() * 3);
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-tabs-universal
+                    style="color: #fff;"
+                    :locked_tab="locked_tab"
+                >
+                    <c-tab-universal :tab_id="0">
+                        First tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="1">
+                        Second tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="2">
+                        Third tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="3">
+                        Fourth tab
+                    </c-tab-universal>
+                </c-tabs-universal>
+                <button
+                    @click="changeLockedTab"
+                    class="margin-top-50"
+                >
+                    Change locked tab
+                </button>
+            </div>`
+    }))
+    .add('Locked Step', () => ({
+        components: {
+            'c-tabs-universal': TabsUniversal,
+            'c-tab-universal': TabUniversal
+        },
+        data() {
+            return {
+                locked_step: 1
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-tabs-universal
+                    style="color: #fff;"
+                    :locked_step="locked_step"
+                >
+                    <c-tab-universal :tab_id="0">
+                        First tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="1">
+                        Second tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="2">
+                        Third tab
+                    </c-tab-universal>
+                    <c-tab-universal :tab_id="3">
+                        Fourth tab
+                    </c-tab-universal>
+                </c-tabs-universal>
+                <button
+                    @click="locked_step++"
+                    class="margin-top-50"
+                >
+                    Unlock next step
+                </button>
+            </div>`
+    }))
+
+import LanguageSupport from '@/ui/components/product-overview/language-support';
+import SystemRequirements from '@/ui/components/product-overview/system-requirements';
+storiesOf('Product Overview', module)
+    .add('Language Support', () => ({
+        components: { 'c-language-support': LanguageSupport },
+        data() {
+            return {
+                languages: [
+                    {
+                        "name": "English",
+                        "interface": true,
+                        "full_audio": false,
+                        "subtitles": false
+                    },
+                    {
+                        "name": "Czech",
+                        "interface": true,
+                        "full_audio": true,
+                        "subtitles": false
+                    },
+                    {
+                        "name": "French",
+                        "interface": true,
+                        "full_audio": true,
+                        "subtitles": true
+                    },
+                    {
+                        "name": "German",
+                        "interface": true,
+                        "full_audio": false,
+                        "subtitles": false
+                    },
+                    {
+                        "name": "Hungarian",
+                        "interface": true,
+                        "full_audio": false,
+                        "subtitles": true
+                    }
+                ]
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-language-support
+                    style="color: white"
+                    :languages="languages"
+                />
+            </div>`
+    }))
+    .add('System Requirements', () => ({
+        components: { 'c-system-requirements': SystemRequirements },
+        data() {
+            return {
+                system_requirements: [
+                    {
+                      "os": "win",
+                      "system": "Windows XP/Vista/7",
+                      "processor": "Intel or AMD Quad-Core",
+                      "memory": "3 GB (Win XP), 4GB (Win Vista/Win 7)",
+                      "graphics": "GeForce 260 (1 GB) or Radeon HD 4850 (1 GB). Resolution 1440x900.",
+                      "directx": "DirectX 9.29 has to be installed.",
+                      "hard_drive": "25GB",
+                      "sound": ""
+                    },
+                    {
+                      "os": "mac",
+                      "system": "OS X 10.8.5 or higher",
+                      "processor": "Quad Core Intel",
+                      "memory": "8 GB RAM",
+                      "graphics": "GeForce GTX 675MX 1GB (on 1920x1080, medium), Radeon HD 6970M 1 GB (on 1920x1080, medium), Intel integrated graphics chipsets are not supported",
+                      "hard_drive": "25 GB HD space"
+                    },
+                    {
+                      "os": "linux",
+                      "system": "Ubuntu 14.04, Linux Mint 17, Steam OS",
+                      "processor": "Quad Core Intel",
+                      "memory": "4 GB RAM",
+                      "graphics": "GeForce GT 640 1GB (1440x900, medium)",
+                      "hard_drive": "25 GB HD space"
+                    }
+                ]
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-system-requirements
+                    style="color: white"
+                    :requirements="system_requirements"
+                />
+            </div>`
+    }))
+
+import Input from '@/ui/components/inputs';
+import InputSearcher from '@/ui/components/inputs/searcher';
+storiesOf('Inputs', module)
+    .add('default', () => ({
+        components: { 'c-input': Input },
+        data() {
+            return {
+                text: ''
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-input v-model="text" placeholder="Start typing"/>
+                <span style="color: #fff">{{ text }}</span>
+            </div>
+        `
+    }))
+    .add('Searcher', () => ({
+        components: { 'c-input-searcher': InputSearcher },
+        data() {
+            return {
+                text: ''
+            }
+        },
+        template: `
+            <div class="padding-50">
+                <c-input-searcher v-model="text"/>
+                <span style="color: #fff">{{ text }}</span>
+            </div>
+        `
+    }))
+
+import TimelineList from '@/ui/components/timeline/list.vue';
+import TimelineItem from '@/ui/components/timeline/item.vue';
+storiesOf('Timeline', module)
+    .add('item', () => ({
+        components:{
+            'c-timeline': TimelineList,
+            'c-timeline-item': TimelineItem
+        },
+        template: `<div class="row">
+                        <div class="col">
+                            <c-timeline-item />
+                        </div>
+                    </div>`
+    }))
+    .add('list', () => ({
+        components:{
+            'c-timeline': TimelineList,
+            'c-timeline-item': TimelineItem
+        },
+        data(){
+            return{
+                items:[
+                    {
+                        id: 1,
+                        type: 'post',
+                        title: 'Thank you, friends!',
+                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2018-09-19',
+                    },
+                    {
+                        id: 2,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2018-04-28',
+                    },
+                    {
+                        id: 3,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2018-02-17',
+                    },
+                    {
+                        id: 4,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2018-01-11',
+                    },
+                    {
+                        id: 5,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2017-11-27',
+                    },
+                    {
+                        id: 6,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2017-11-23',
+                    },
+                    {
+                        id: 7,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2017-11-12',
+                    },
+                    {
+                        id: 8,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2019-04-03',
+                    },
+                    {
+                        id: 9,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2019-04-27',
+                    },
+                    {
+                        id: 10,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2019-04-13',
+                    },
+                    {
+                        id: 11,
+                        type: 'post',
+                        title: 'This is second post!',
+                        text: ' Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                        date: '2019-04-11',
+                    }
+                ]
+            }
+        },
+        template: `<div class="row">
+                            <div class="col p-5">
+                                <c-timeline :items="items" />
+                            </div>
+                        </div>`
+    }))
 
 /*
      Dynamic import - test version
@@ -2469,7 +3260,7 @@ const navigation = storiesOf('Navigation', module);
 
 ['account', 'asset', 'funding'].forEach(component => {
     navigation.add(component, () => ({
-        components: { [component]: () => import(`../ui/components/navigation/${component}`) },
+        components: { [component]: (resolve) => require([`../ui/components/navigation/${component}`], resolve) },
         template: `<${component}/>`
     }))
 });

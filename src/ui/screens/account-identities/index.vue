@@ -4,16 +4,20 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <c-heading-bar name="My identity" :showArrows="false" :showBackground="false">
-                        </c-heading-bar>
+                        <c-heading-bar name="My identity" :showArrows="false" :showBackground="false"/>
                     </div>
                     <div class="col-12 margin-bottom-40 my_identity">
                         <c-user-card
-                            :user="user"
-                            status="finish"
-                            icon_color="green"
-                            icon_class="fas fa-check">
-                        </c-user-card>
+                            v-if="defaultIdentity"
+                            :user="defaultIdentity"
+                            @updateIdentity="(prop, val) => defaultIdentity[prop] = val"
+                        />
+                        <p v-else-if="!identities.length">
+                            You don't have any identities. Create a new one.
+                        </p>
+                        <p v-else>
+                            You don't have default identity.
+                        </p>
                         <div class="user-info">
                             <h3>Mr. Satoshi Nakamoto</h3>
                             <h4>Osaka, Japan</h4>
@@ -45,86 +49,112 @@
                     </div>
 
                     <div class="col-12">
+                        <c-button
+                            status="info"
+                            icon="user-plus"
+                            @click="createIdentity"
+                        > Add new</c-button>
+                    </div>
+
+                    <div class="col-12">
                         <c-heading-bar name="Profile Picker" :showArrows="false" :showBackground="false">
                             <div class="additional-action margin-left-20" slot="additional-action">
-                                <div class="text">
-                                    Value
-                                    <i class="fas fa-dollar-sign"></i>
-                                </div>
-                                <div class="arrow_container">
-                                    <i class="fas fa-sort-up"></i>
-                                    <i class="fas fa-sort-down"></i>
-                                </div>
+                                <span class="text">Name</span>
+                                <c-icon name="user"/>
+                                <c-button-arrows
+                                    :activeUp="sortAsc"
+                                    @clickUp="sortAsc = true"
+                                    @clickDown="sortAsc = false"
+                                />
                             </div>
                             <div class="additional-action margin-left-20" slot="additional-action">
-                                <div class="text">
-                                    Rating
-                                    <i class="fas fa-trophy"></i>
-                                </div>
-                                <div class="arrow_container">
-                                    <i class="fas fa-sort-up"></i>
-                                    <i class="fas fa-sort-down"></i>
-                                </div>
+                                <span class="text">Rating</span>
+                                <c-icon name="trophy"/>
+                                <c-button-arrows/>
                             </div>
-                            <div class="additional-action margin-left-20" slot="additional-action">
-                                <div class="form-group mb-0">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search"
-                                               aria-label="Search">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fas fa-search"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="additional-action" slot="additional-action">
-                                <a href="#3" class="btn btn-sm btn-info">
-                                    <i class="fas fa-user-plus"></i>
-                                    Add new
-                                </a>
+                            <div class="additional-action margin-left-20 padding-10" slot="additional-action">
+                                <c-input-searcher
+                                    placeholder="Search"
+                                    v-model="filterPhrase"
+                                />
                             </div>
                         </c-heading-bar>
                     </div>
-                    <div class="col-12 profile-picker">
-                        <div class="default">
-                            <div class="div_label">
-                                <i class="fas fa-check-square"></i>
-                                <span>
-                                    Default
-                                </span>
-                            </div>
+
+                    <transition-group
+                        tag="div"
+                        class="profile-picker"
+                        name="item"
+                    >
+                        <div
+                            class="profile-picker__profile"
+                            v-for="identity in filteredIdentities"
+                            :key="identity.id"
+                        >
                             <c-user-card
-                                :user="user"
-                                status="finish"
-                                icon_color="green"
-                                icon_class="fas fa-check">
-                            </c-user-card>
-                        </div>
-                        <div class="wt_action">
-                            <c-user-card
-                                :user="user"
-                                status="finish"
-                                icon_color="green"
-                                icon_class="fas fa-check">
-                            </c-user-card>
-                            <div class="action">
-                                <a href="#3">
-                                    <i class="fas fa-check" style="color: #43C981"></i>
-                                    Set Default
-                                </a>
-                                <a href="#3">
-                                    <i class="fas fa-pen" style="color: #FADC72"></i>
-                                    Edit
-                                </a>
-                                <a href="#3">
-                                    <i class="fas fa-times" style="color: #F75D5D"></i>
-                                    Delete
-                                </a>
+                                :user="identity"
+                                :previewMode="!identity.edit"
+                                :class="{ 'default': identity.default }"
+                                v-bind.sync="identityClone"
+                            />
+                            <div class="profile__action">
+                                <c-button
+                                    v-if="!identity.default"
+                                    status="info"
+                                    icon="check"
+                                    @click="setDefault(identity)"
+                                >Set default</c-button>
+                                <template v-if="identity.edit">
+                                    <c-button
+                                        status="share"
+                                        icon="pen"
+                                        @click="saveIdentity(identity)"
+                                    >Save</c-button>
+                                    <c-button
+                                        @click="identity.edit = false"
+                                    >Cancel</c-button>
+                                </template>
+                                <c-button
+                                    v-else
+                                    status="share"
+                                    icon="pen"
+                                    @click="editIdentity(identity)"
+                                >Edit</c-button>
+                                <c-button
+                                    status="danger"
+                                    @click="deleteIdentity(identity)"
+                                >Delete</c-button>
                             </div>
                         </div>
-                    </div>
+                    </transition-group>
+
+
+                    <c-modal-light
+                        v-if="removeIdentity"
+                        @close="removeIdentity = null"
+                    >
+                        <h4>Are you sure that you want to delete this identity?</h4>
+                        <p>This operation can not be reversed</p>
+                        <c-user-card
+                            :user="removeIdentity"
+                            previewMode
+                        />
+                        <div>
+                            <div class="profile-remove__buttons">
+                                <c-button
+                                    status="danger"
+                                    size="md"
+                                    @click="deleteIdentity()"
+                                >Yes</c-button>
+                                <c-button
+                                    status="success"
+                                    size="md"
+                                    @click="removeIdentity = null"
+                                >Cancel</c-button>
+                            </div>
+                        </div>
+                    </c-modal-light>
+
                 </div>
             </div>
         </div>
@@ -134,20 +164,117 @@
 <script>
     export default {
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-user-card': () => import('@/ui/components/user-card')
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+            'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
+            'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'], resolve),
+            'c-modal-light': (resolve) => require(['@/ui/components/modal-light'], resolve),
+            'c-checkbox': (resolve) => require(['@/ui/components/checkbox'], resolve),
+            'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve)
         },
-        computed: {
-            identities() {
-                console.log('aaa', this.$store.state.network)
-                return this.$store.state.network.identities
+        data() {
+            return {
+                wallets: [],
+                user: {},
+                identities: [
+                    {
+                        id: 1,
+                        name: 'Mr. Satoshi',
+                        wallet: '0x6cc5f688a315f3dc28a7781717a',
+                        img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                        default: false,
+                        edit: false
+                    },
+                    {
+                        id: 2,
+                        name: 'Nakamoto',
+                        wallet: '0x233c5f688a315f3dc28a419189b',
+                        img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                        default: true,
+                        edit: false
+                    }
+                ],
+                newIdentity: {
+                    name: '',
+                    wallet: '',
+                    img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                    default: false,
+                    edit: false
+                },
+                identityCopy: { masno: 'nii' },
+                removeIdentity: null,
+                filterPhrase: '',
+                sortAsc: true
             }
         },
-        data: () => ({
-            wallets: [],
-            user: {}
-        })
+        methods: {
+            setDefault(identity) {
+                if (this.defaultIdentity) this.defaultIdentity.default = false;
+                identity.default = true;
+            },
+            editIdentity(identity) {
+                if (!this.editedIdentity) {
+                    identity.edit = true;
+                } else {
+                    this.$snotify.warning('Stop editing the current identity before editing the next one');
+                }
+            },
+            saveIdentity(identity)  {
+                for (let key in identity) {
+                    identity[key] = this.identityClone[key];
+                }
+                identity.edit = false;
+            },
+            deleteIdentity(identity) {
+                const { removeIdentity } = this;
+                if (removeIdentity) {
+                    const index = this.identities.indexOf(removeIdentity);
+                    this.identities.splice(index, 1);
+                    this.removeIdentity = null;
+                } else {
+                    this.removeIdentity = identity;
+                }
+            },
+            createIdentity() {
+                const { newIdentity } = this;
+                this.identities.push({ ...newIdentity, id: Math.floor(Math.random() * 100) });
+                /*
+                    //  Form check logic
+
+                if (!Object.values(newIdentity).some(val => val == null || !val.toString().length)) {
+                    if (newIdentity.default && this.defaultIdentity) {
+                        this.defaultIdentity.default = false;
+                    }
+                    this.identities.push({ ...newIdentity });
+                    this.newIdentity.name = '';
+                    this.newIdentity.wallet = '';
+                    this.newIdentity.default = false;
+                }
+                */
+            }
+        },
+        computed: {
+            networkIdentites() {
+                return this.$store.state.network.identities;
+            },
+            defaultIdentity() {
+                return this.identities.find(identity => identity.default);
+            },
+            editedIdentity() {
+                return this.identities.find(identity => identity.edit);
+            },
+            identityClone() {
+                return this.editedIdentity ? { ...this.editedIdentity } : {};
+            },
+            isEditing() {
+                return this.identities.find(identity => identity.edit);
+            },
+            filteredIdentities() {
+                return this.identities
+                    .filter(identity => identity.name.toLowerCase().includes(this.filterPhrase.toLowerCase()))
+                    .sort((a, b) => (a.name > b.name) ? (this.sortAsc ? 1 : -1) : 0)
+            }
+        }
     }
 </script>
 
@@ -224,11 +351,6 @@
         }
     }
 
-    .identity-block {
-        width: 300px !important;
-        float: left!important;
-    }
-
     .verification-blk {
         width: 220px;
         color: #C6C6D6;
@@ -282,81 +404,73 @@
         }
     }
 
-    .profile-picker{
+    .item-move {
+        transition: all 1s !important;
+    }
+    .item-enter {
+        transform: scale(0) !important;
+        opacity: 0;
+    }
+    .item-leave-active {
+        position: absolute !important;
+        opacity: 0;
+    }
+
+    .profile-picker {
         display: flex;
-        align-items: center;
-        .default{
-            overflow: auto;
-            border: 1px solid #43C981;
-            border-radius: 5px;
-            background: #43C981;
-            padding-left: 25px;
-            width: 327px;
-            position: relative;
-            margin-right: 20px;
-            .div_label{
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+
+    .profile-picker__profile {
+        position: relative;
+        margin: 20px;
+        width: 300px;
+        &:hover .profile__action {
+            display: flex;
+        }
+        >.default {
+            $defColor: #43C981;
+            border-color: $defColor !important;
+            &:before {
+                content: "";
+                width: 26px;
                 position: absolute;
-                top: 5px;
-                left: 5px;
-                font-size: 16px;
+                border-radius: 5px 0 0 5px;
+                left: -22px;
+                bottom: -1px;
+                height: calc(100% + 2px);
+                background: $defColor;
+            }
+            &:after {
+                font-family: 'Font Awesome 5 Free', 'Barlow', sans-serif;
+                content: "DEFAULT \F14A";
                 color: #1C2032;
-                span{
-                    display: inline-block;
-                    position: absolute;
-                    white-space: nowrap;
-                    left: -21px;
-                    width: 150px;
-                    text-align: right;
-                    top: 173px;
-                    text-transform: uppercase;
-                    font-weight: bold;
-                    /* this is for shity "non IE" browsers
-                       that dosn't support writing-mode */
-                    -webkit-transform: translate(1.1em,0) rotate(-90deg);
-                    -moz-transform: translate(1.1em,0) rotate(-90deg);
-                    -o-transform: translate(1.1em,0) rotate(-90deg);
-                    transform: translate(1.1em,0) rotate(-90deg);
-                    -webkit-transform-origin: 0 0;
-                    -moz-transform-origin: 0 0;
-                    -o-transform-origin: 0 0;
-                    transform-origin: 0 0;
-                    /* IE9+ */
-                    -ms-transform: none;
-                    -ms-transform-origin: none;
-                    /* IE8+ */
-                    -ms-writing-mode: tb-rl;
-                    /* IE7 and below */
-                    *writing-mode: tb-rl;
-                }
-            }
-        }
-        .wt_action{
-            position: relative;
-            .action{
-                display: none;
-                justify-content: space-around;
-                align-items: center;
+                font-weight: bold;
+                font-size: 16px;
                 position: absolute;
-                bottom: -20px;
-                width: 100%;
-                a{
-                    background: #151827;
-                    border-radius: 5px;
-                    color: #A2A3BE;
-                    padding: 5px 8px;
-                    font-weight: bold;
-                    box-shadow: 0 3px 6px rgba(0, 0, 0, .4);
-                    i{
-                        margin-right: 5px;
-                        font-size: 14px;
-                    }
-                }
-            }
-            &:hover{
-                .action{
-                    display: flex;
-                }
+                transform: rotate(-90deg);
+                top: 40px;
+                left: -50px;
             }
         }
+    }
+
+    .profile__action {
+        display: none;
+        position: absolute;
+        justify-content: center;
+        bottom: -20px;
+        width: 100%;
+        height: 26px;
+        .c-btn {
+            margin: 0 5px;
+        }
+    }
+
+    .profile-remove__buttons {
+        display: flex;
+        margin-top: 20px;
+        justify-content: space-between;
     }
 </style>

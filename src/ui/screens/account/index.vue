@@ -192,16 +192,15 @@
                         </div>
                     </div>
                     <div class="col-12 ">
-                        <a href="#3" class="btn btn-info" data-toggle="modal" data-target="#send_money"
-                           @click="expert_mode = false">Simple modal</a>
-                        <a href="#3" class="btn btn-info" data-toggle="modal" data-target="#send_money"
-                           @click="expert_mode = true">Expert mode modal</a>
-                        <a href="#3" class="btn btn-info" data-toggle="modal" data-target="#login_modal">Login modal</a>
+                        <c-button @click="login_modal = true">Login</c-button>
+                        <c-button @click="money_modal = true">Send Money</c-button>
                     </div>
 
 
                     <!--Send Money Modal-->
                     <c-custom-modal title="Send money"
+                                    v-if="money_modal"
+                                    @close="money_modal = false"
                                     id="send_money"
                                     modal_class="send-money-modal">
                         <template slot="modal_body">
@@ -361,6 +360,8 @@
 
                     <!--Login Modal-->
                     <c-custom-modal title="Login"
+                                    v-if="login_modal"
+                                    @close="login_modal = false"
                                     id="login_modal"
                                     modal_class="login-modal">
                         <template slot="modal_body">
@@ -402,9 +403,9 @@
 <script>
     export default {
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-custom-modal': () => import('@/ui/components/custom-modal')
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+            'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve)
         },
         computed: {
             identityCount() {
@@ -413,17 +414,17 @@
         },
         data: () => ({
             wallets: [],
-            expert_mode: false
-        })
+            expert_mode: false,
+            money_modal: false,
+            login_modal: false
+        }),
     }
 </script>
 
 <style lang="scss">
     .send-money-modal {
-        background: #30314C;
         display: inline-block;
         width: auto !important;
-        padding: 30px 0 0;
         position: relative;
         min-width: 300px;
         .card {
@@ -468,10 +469,8 @@
         }
     }
     .login-modal{
-        background: #30314C;
         display: inline-block;
         width: auto !important;
-        padding: 30px 0 0;
         position: relative;
         min-width: 250px;
         .modal-title{

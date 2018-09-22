@@ -3,9 +3,14 @@
         <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
-
-                    <c-tabs>
-                        <c-tab name="Step 1" :selected="true" showFooter="true">
+                    <p class="errors" v-if="errors.length">
+                        <strong>Please correct the following error(s):</strong>
+                        <ul>
+                            <li v-for="error in errors" :key="error">{{ error }}</li>
+                        </ul>
+                    </p>
+                    <c-tabs :currentStep="current_step">
+                        <c-tab name="Step 1" :selected="true" :showFooter="true">
                             <div class="tab-container">
                                 <div class="tab-card">
                                     <h4>Personal Information</h4>
@@ -15,32 +20,39 @@
                                                 <div class="form-group">
                                                     <label class="sr-only">First name</label>
                                                     <input type="text" class="form-control" placeholder="First name"
-                                                           name="first_name">
+                                                           name="first_name" v-model="account.first_name">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Last name</label>
                                                     <input type="text" class="form-control" placeholder="Last name"
-                                                           name="last_name">
+                                                           name="last_name" v-model="account.last_name">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="input-group">
                                                     <label class="sr-only">Birthday</label>
-                                                    <input type="text" class="form-control" placeholder="Birthday">
+                                                    <c-datepicker
+                                                        v-model="account.birthday"
+                                                        placeholder="Birthday"
+                                                        input-class="form-control form-calendar__text"
+                                                        name="birthday"
+                                                        calendar-class="form-calendar"
+                                                    />
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">
                                                             <i class="fas fa-calendar-alt"></i>
                                                         </span>
                                                     </div>
                                                 </div>
+
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Email</label>
                                                     <input type="email" class="form-control" placeholder="Email"
-                                                           name="email">
+                                                           name="email" v-model="account.email">
                                                 </div>
                                             </div>
                                         </div>
@@ -217,143 +229,67 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between align-items-center" slot="footer">
-                                <c-switch label="" label_position="right" size="sm" :customLabel="true">
+                                <c-switch
+                                    :value="account.agreement"
+                                    @change="account.agreement = !account.agreement"
+                                    label_position="right"
+                                    :customLabel="true"
+                                >
                                     <template slot="label">
                                         I agree to the
                                         <a href="#" data-toggle="modal" data-target="#terms-modal">terms</a> and
                                         <a href="#" data-toggle="modal" data-target="#privacy-policy-modal">privacy policy</a>
                                     </template>
                                 </c-switch>
-                                <c-switch label="" label_position="right" size="sm" :customLabel="true">
-                                    <template slot="label">
-                                        Sign up for our newsletter, get 100 HBX Bonus!
-                                    </template>
-                                </c-switch>
+                                <c-switch
+                                    :value="account.newsletter"
+                                    @change="account.newsletter = !account.newsletter"
+                                    label="Sign up for our newsletter, get 100 HBX Bonus!"
+                                    label_position="right"
+                                />
                                 <div>
-                                    <c-button variant="success" text="Next step" icon="fas fa-angle-right" icon_position="right" />
+                                    <c-button
+                                        @click="checkForm"
+                                        icon="angle-right"
+                                    ></c-button>
                                 </div>
                             </div>
                         </c-tab>
-                        <c-tab name="Step 2" showFooter="true">
+                        <c-tab name="Step 2" :showFooter="true">
                             <div class="tab-container">
                                 <div class="padding-40">
-                                    <h3>Welcome, UserName. Let's build your main identity.</h3>
+                                    <h3>Welcome, {{ account.first_name }}. Let's build your main identity.</h3>
                                     <p>Be aware that all your future identities will be tied to this one</p>
                                     <div class="row margin-top-40">
                                         <div class="col">
                                             <div class="tab-card">
                                                 <h4>Please complete</h4>
-                                                <div class="identity-block">
-                                                    <div class="avatar">
-                                                        <a href="#3" class="avatar_upload_btn">
-                                                            <img
-                                                                src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMxOS45ODIgMzE5Ljk4MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzE5Ljk4MiAzMTkuOTgyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjY0cHgiIGhlaWdodD0iNjRweCI+CjxnPgoJPHBhdGggZD0iTTIzNC45OTEsMzE5Ljk4MmMyLjYxOCwwLDUuMjItMS4wNzgsNy4wNzEtMi45MjlzMi45MjktNC40NTMsMi45MjktNy4wNzF2LTE0MGg2NSAgIGMzLjkyMi0wLjAwOCw3LjcyMS0yLjU1Miw5LjIyMS02LjE3NnMwLjYxLTguMTA5LTIuMTU5LTEwLjg4NmwtMTUwLTE1MEMxNjUuMjAyLDEuMDc0LDE2Mi42MDQsMCwxNTkuOTkxLDAgICBjLTIuNjE0LDAtNS4yMTIsMS4wNzQtNy4wNjIsMi45MmwtMTUwLDE1MGMtMi43NjksMi43NzctMy42NTksNy4yNjMtMi4xNTksMTAuODg2YzEuNSwzLjYyNCw1LjI5OSw2LjE2OCw5LjIyMSw2LjE3Nmg2NXYxNDAgICBjMCwyLjYxOCwxLjA3OCw1LjIyLDIuOTI5LDcuMDcxczQuNDUzLDIuOTI5LDcuMDcxLDIuOTI5SDIzNC45OTF6IiBmaWxsPSIjNjQ3M2Y0Ii8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg=="/>
-                                                        </a>
-                                                    </div>
-                                                    <div class="user_info">
-                                                        <div class="form-group margin-bottom-5">
-                                                            <input type="text"
-                                                                   class="form-control"
-                                                                   name="profile_name"
-                                                                   placeholder="Profile name"
-                                                            />
-                                                        </div>
-                                                        <p>User</p>
-                                                    </div>
-                                                    <div class="unknown_blk">
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                    </div>
-                                                    <div class="wallet_number">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" name="wallet_number"
-                                                                   placeholder="Wallet number"/>
-                                                        </div>
-                                                        <button>
-                                                            <i class="fas fa-redo-alt"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                                <c-user-card
+                                                    :user="account.identity"
+                                                    @updateIdentity="(prop, val) => account.identity[prop] = val"
+                                                />
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="tab-card">
                                                 <h4>Preview your identity</h4>
-                                                <div class="identity-block finish">
-                                                    <div class="block-icon done">
-                                                        <i class="fas fa-check"></i>
-                                                    </div>
-                                                    <div class="avatar">
-                                                        <img
-                                                            src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
-                                                    </div>
-                                                    <div class="user_info">
-                                                        <div class="form-group margin-bottom-5">
-                                                            <input type="text"
-                                                                   class="form-control"
-                                                                   name="profile_name"
-                                                                   placeholder="Profile name"
-                                                                   readonly
-                                                            />
-                                                        </div>
-                                                        <p>User</p>
-                                                    </div>
-                                                    <div class="unknown_blk">
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="#3">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <div class="counts">
-                                                            <span>
-                                                                0 <i class="fas fa-long-arrow-alt-down"></i>
-                                                            </span>
-                                                            <span>
-                                                                0 <i class="fas fa-long-arrow-alt-up"></i>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="wallet_number">
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                   class="form-control"
-                                                                   name="wallet_number"
-                                                                   placeholder="Wallet number"
-                                                                   readonly
-                                                            />
-                                                        </div>
-                                                        <button>
-                                                            <i class="fas fa-copy"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                                <c-user-card
+                                                    :user="account.identity"
+                                                    previewMode
+                                                />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end" slot="footer">
-                                <c-button variant="success" text="Next step" icon="fas fa-angle-right" icon_position="right" />
+                                <c-button
+                                    icon="angle-right"
+                                    @click="checkForm"
+                                />
                             </div>
                         </c-tab>
-                        <c-tab name="Step 3" showFooter="true">
+                        <c-tab name="Step 3" :showFooter="true">
                             <div class="tab-container">
                                 <div class="padding-20">
                                     <h3>Verify your identity (Optional)</h3>
@@ -362,63 +298,11 @@
                                         allowing you to reassure reviews of other user's proofs of identity.
                                         You can skip and finish later.</p>
                                     <div class="row margin-top-40">
-                                        <div class="col">
-                                            <div class="identity-block finish">
-                                                <div class="block-icon warning">
-                                                    <i class="fas fa-exclamation-triangle"></i>
-                                                </div>
-                                                <div class="avatar">
-                                                    <img
-                                                        src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
-                                                </div>
-                                                <div class="user_info">
-                                                    <div class="form-group margin-bottom-5">
-                                                        <input type="text"
-                                                               class="form-control"
-                                                               name="profile_name"
-                                                               placeholder="Profile name"
-                                                               readonly
-                                                        />
-                                                    </div>
-                                                    <p>User</p>
-                                                </div>
-                                                <div class="unknown_blk">
-                                                    <a href="#3">
-                                                        <i class="fas fa-plus"></i>
-                                                    </a>
-                                                    <a href="#3">
-                                                        <i class="fas fa-plus"></i>
-                                                    </a>
-                                                    <a href="#3">
-                                                        <i class="fas fa-plus"></i>
-                                                    </a>
-                                                    <a href="#3">
-                                                        <i class="fas fa-plus"></i>
-                                                    </a>
-                                                    <div class="counts">
-                                                            <span>
-                                                                0 <i class="fas fa-long-arrow-alt-down"></i>
-                                                            </span>
-                                                        <span>
-                                                                0 <i class="fas fa-long-arrow-alt-up"></i>
-                                                            </span>
-                                                    </div>
-                                                </div>
-                                                <div class="wallet_number">
-                                                    <div class="form-group">
-                                                        <input type="text"
-                                                               class="form-control"
-                                                               name="wallet_number"
-                                                               placeholder="Wallet number"
-                                                               readonly
-                                                        />
-                                                    </div>
-                                                    <button>
-                                                        <i class="fas fa-copy"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <c-user-card
+                                            class="col"
+                                            :user="account.identity"
+                                            previewMode
+                                        />
                                         <div class="col">
                                             <div class="tab-card margin-top-5 margin-bottom-15">
                                                 <div class="button_blk">
@@ -485,11 +369,10 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end" slot="footer">
-                                <c-button variant="success" text="Complete" icon="fas fa-check" icon_position="right" />
+                                <c-button status="success" text="Complete" icon="fas fa-check" icon_position="right" />
                             </div>
                         </c-tab>
                     </c-tabs>
-
                 </div>
             </div>
         </div>
@@ -501,11 +384,64 @@
 <script>
     export default {
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-tab': () => import('@/ui/components/tab/tab'),
-            'c-tabs': () => import('@/ui/components/tab/tabs'),
-            'c-switch': () => import('@/ui/components/switch/index'),
-            'c-button': () => import('@/ui/components/buttons/index'),
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
+            'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
+            'c-datepicker': (resolve) => require(['vuejs-datepicker'], resolve),
+            'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve)
+        },
+        data() {
+            return {
+                current_step: 1,
+                steps: 3,
+                errors: [],
+                account: {
+                    first_name: 'A',
+                    last_name: 'c',
+                    birthday: '03 Sep 2018',
+                    email: 'www',
+                    agreement: true,
+                    newsletter: false,
+                    identity: {
+                        name: '',
+                        img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                        wallet: ''
+                    }
+                }
+            }
+        },
+        methods: {
+            checkForm(e) {
+                this.errors = []
+
+                if (this.current_step === 1) {
+                    if (this.account.first_name && this.account.last_name && this.account.email && this.account.agreement) {
+                        this.current_step = 2;
+                    } else {
+
+                        if (!this.account.first_name) {
+                            this.errors.push('First name required.')
+                        }
+                        if (!this.account.last_name) {
+                            this.errors.push('Last name required.')
+                        }
+                        if (!this.account.birthday) {
+                            this.errors.push('Birthday required.')
+                        }
+                        if (!this.account.email) {
+                            this.errors.push('Email required.')
+                        }
+                        if (!this.account.agreement) {
+                            this.errors.push('You must agree to the terms & conditions to use BlockHub.')
+                        }
+
+                    }
+                } else if (this.current_step === 2) {
+                    this.current_step = 3;
+                } else if (this.current_step === 3) {
+
+                }
+            }
         }
     }
 </script>
@@ -739,5 +675,26 @@
             float: right;
             width: calc(100% - 45px);
         }
+    }
+
+    .input-group {
+        flex-wrap: nowrap;
+    }
+
+</style>
+
+<style lang="scss">
+    .form-calendar {
+        background-color: #27273A !important;
+        border-color: rgba(255,255,255,.2) !important;
+        box-shadow: 0 0 15px rgba(1, 1, 1, .35);
+        .up:hover, .up:focus {
+            color: black !important;
+        }
+    }
+    .form-calendar__text, .form-calendar__text:focus {
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.4) inset;
+        border: none !important;
+        background-color: #303049 !important;
     }
 </style>

@@ -2,7 +2,6 @@
     <div
         class="dropdown dropmenu_container"
         :class="[ dropPosition ? 'drop' + dropPosition : '' ]"
-        :style="style"
     >
         <div class="rw-btn rw-btn--card" data-toggle="dropdown" aria-expanded="false">
             <div></div>

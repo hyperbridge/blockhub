@@ -6,16 +6,45 @@ import Snotify, { SnotifyPosition } from 'vue-snotify'
 import app from './app'
 import router from './router'
 import store, { initializer } from './store'
-import './filters.js';
+import './filters';
+import './components';
+import './directives';
 import './css/styles.scss';
 
 Vue.config.productionTip = false
 
 Vue.use(Snotify, {
   toast: {
-    position: SnotifyPosition.rightBottom
+    position: SnotifyPosition.leftBottom
   }
-})
+});
+
+Vue.prototype.$notif = async (data) => {
+    if (!("Notification" in window)) {
+        return;
+    } else {
+
+        const spawnNotif = () => {
+            const icon = require('./assets/logo.png');
+
+            if (typeof data === 'string') {
+                new Notification(data, { icon });
+            } else {
+                const { title, body } = data;
+                new Notification(title, { icon, body });
+            }
+        }
+
+        if (Notification.permission === 'granted') {
+            spawnNotif();
+        } else if (['denied', 'granted'].some(perm => !perm.includes(Notification.permission))) {
+            const permission = await Notification.requestPermission();
+            if (permission === 'granted') {
+                spawnNotif();
+            }
+        }
+    }
+}
 
 
 
@@ -26,10 +55,7 @@ const data = {
 
 const dataString = JSON.stringify(data).replace(/"/g, "'")
 
-Vue.component('c-layout', () => import('@/ui/layouts/default'));
-Vue.component('c-heading-bar', () => import('@/ui/components/heading-bar'));
-Vue.component('c-button', () => import('@/ui/components/buttons'));
-Vue.component('c-switch', () => import('@/ui/components/switch'));
+
 
 
 const overrideConsoleLog = () => {
@@ -74,6 +100,6 @@ initializer().then(() => {
       components: {
         'app': app
       },
-  })
+  });
 
 })

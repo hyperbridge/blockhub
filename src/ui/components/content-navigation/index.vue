@@ -1,7 +1,7 @@
 <template>
     <div class="content-navigation-wrapper">
         <c-pagination v-if="paginationMode"
-            pages="13"
+            :pages="13"
         />
         <c-load-more v-else
             @click="$emit('loadMore')"
@@ -21,8 +21,8 @@
             }
         },
         components: {
-            'c-pagination': () => import('@/ui/components/pagination'),
-            'c-load-more': () => import('@/ui/components/buttons/load-more')
+            'c-pagination': (resolve) => require(['@/ui/components/pagination'], resolve),
+            'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more'], resolve)
         },
         computed: {
             paginationMode() {

@@ -1,12 +1,7 @@
 <template>
     <c-layout navigationKey="settings-navigation">
         <div class="content" id="content">
-            <c-block-1 title="Settings">
-                <div class="console-log d-none" ref="consoleLog" v-html="consoleLogMessages">
-                    {{ consoleLogMessages }}
-                </div>
-            </c-block-1>
-            <c-block-1 title="Client Settings">
+            <c-block class="margin-bottom-30" title="Client Settings">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
@@ -48,9 +43,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="settings_item">
+                            <c-switch
+                                :value="systemPermissions"
+                                @change="requestNotifPerm()"
+                            />
+                            <div class="text">
+                                <h4>System notifications</h4>
+                                <p>Enable system notifications from BlockHub App</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </c-block-1>
-            <c-block-1 title="Performance Settings">
+            </c-block>
+            <c-block class="margin-bottom-30" title="Performance Settings">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
@@ -76,13 +83,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 benchmark">
-                        <p>Page was rendered in <b :class="perfResults.grade">{{ renderTime }}</b> ms.</p>
-                        <p>{{ perfResults.text }}</p>
-                        <c-button @click="autoUpdateSettings">UPDATE SETTINGS AUTOMATICALLY</c-button>
+                    <c-benchmark
+                        :settings="settings"
+                        class="col-12 d-flex justify-content-between align-items-center"
+                    />
+                </div>
+            </c-block>
+            <c-block class="margin-bottom-30" title="Advanced">
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-between align-items-center">
+                        <div>
+                            Advanced settings can be managed here. These are primarily for developers @BlockHub.
+                            <br /><strong>Warning:</strong> Only use these if you know what you're doing.
+                        </div>
+                        <div>
+                            <c-button @click="clearDatabase" status="warning">DELETE DATABASE</c-button>
+                        </div>
                     </div>
                 </div>
-            </c-block-1>
+            </c-block>
         </div>
     </c-layout>
 </template>
@@ -92,67 +111,45 @@ import { mapActions } from 'vuex';
 
 export default {
     components: {
-        'c-layout': () => import('@/ui/layouts/default'),
-        'c-block-1': () => import('@/ui/components/block-1')
-    },
-    data() {
-        return {
-            renderTime: 0
-        }
+        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+        'c-block': (resolve) => require(['@/ui/components/block'], resolve),
+        'c-benchmark': (resolve) => require(['@/ui/components/benchmark'], resolve)
     },
     methods: {
         ...mapActions(['updateSettings']),
-        autoUpdateSettings() {
-            const { grade } = this.perfResults;
-            const { settings } = this;
+        clearDatabase() {debugger
+            let DBDeleteRequest = window.indexedDB.deleteDatabase("LokiCatalog")
 
-            const perfProps = ['autoplay', 'animations'];
-            const enableAll = boolean => perfProps.forEach(prop => {
-                if (settings[prop] != boolean) this.updateSettings(prop);
-            });
+            DBDeleteRequest.onerror = function(event) {
+                console.log("Error deleting database.")
+            }
 
-            if (grade == 'good') {
-                enableAll(true);
-            } else if (grade == 'avg') {
-                if (!settings.autoplay) this.updateSettings('autoplay');
-                if (settings.animations) this.updateSettings('animations');
-            } else {
-                enableAll(false);
+            DBDeleteRequest.onsuccess = function(event) {
+                console.log("Database deleted successfully.")
+
+                console.log(event.result) // should be undefined
             }
         }
+    },
+    data() {
+        return {
+            systemPermissions: false
+        }
+    },
+    methods: {
+        async requestNotifPerm() {
+            const permission = await Notification.requestPermission();
+            if (permission === 'granted') this.systemPermissions = true;
+        }
+    },
+    mounted() {
+        this.systemPermissions = Notification.permission === 'granted';
     },
     computed: {
         settings() {
             return this.$store.state.user.settings;
-        },
-        perfResults() {
-            const { renderTime } = this;
-            const results = {
-                text: renderTime < 200 ?
-                    `There is no need to lower your settings` :
-                    `Click on button below to update your settings for higher performance`
-            };
-
-            if (renderTime > 100 && renderTime < 200) {
-                results.grade = 'avg';
-            } else if (renderTime > 200) {
-                results.grade = 'bad';
-            } else {
-                results.grade = 'good';
-            }
-
-            return results;
         }
-    },
-    created() {
-        this.renderTime = performance.now();
-    },
-    mounted() {
-        this.$nextTick(() => {
-            this.renderTime = Math.floor(performance.now() - this.renderTime);
-        });
     }
-
 }
 </script>
 
@@ -179,18 +176,8 @@ export default {
                 font-size: 21px;
                 color: #C6C6D6;
                 font-weight: bold;
+                margin-bottom: 5px;
             }
-        }
-    }
-    .benchmark {
-        .good {
-            color: #27ae60;
-        }
-        .avg {
-            color: #e67e22;
-        }
-        .bad {
-            color: #e74c3c;
         }
     }
 </style>

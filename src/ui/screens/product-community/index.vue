@@ -9,20 +9,20 @@
                     <div class="col-12" v-if="product">
                         <h1 class="title margin-top-10">{{ product.name }}</h1>
 
-                        <c-tags-list :tags="product.author_tags" v-if="!editor_mode"></c-tags-list>
+                        <c-tags-list :tags="product.author_tags" v-if="!editing || product.author_tags"></c-tags-list>
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}`">Overview</a>
+                                <router-link :to="`/product/${product.id}`" class="nav-link">Overview</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" :href="`/#/product/${product.id}/community`">Community</a>
+                                <router-link :to="`/product/${product.id}/community`" class="nav-link active">Community</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}/projects`">Projects</a>
+                                <router-link :to="`/product/${product.id}/projects`" class="nav-link">Projects</router-link>
                             </li>
-                            <li class="nav-item pr-0">
-                                <a class="nav-link" :href="`/#/product/${product.id}/assets`">Assets</a>
+                            <li class="nav-item">
+                                <router-link :to="`/product/${product.id}/assets`" class="nav-link">Assets</router-link>
                             </li>
                         </ul>
 
@@ -71,8 +71,11 @@
         if (!product)
             return
 
-        if (product.images && product.images.header)
-            window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
+        if (product.images.preview && product.images.preview.length) {
+            const header = window.document.getElementById('header-bg');
+            header.style['background-image'] = 'url(' + product.images.preview[0] + ')';
+            header.style['background-size'] = 'cover';
+        }
 
         return product
     }
@@ -80,10 +83,10 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-tags-list': () => import('@/ui/components/tags'),
-            'c-item': () => import('@/ui/components/product-community/item'),
-            'c-post-comment': () => import('@/ui/components/product-community/comment')
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-item': (resolve) => require(['@/ui/components/product-community/item'], resolve),
+            'c-post-comment': (resolve) => require(['@/ui/components/product-community/comment'], resolve)
         },
         data() {
             const authors = [
@@ -170,12 +173,23 @@
             }
         },
         computed: {
-            product: updateProduct
+            product: updateProduct,
+            editing() {
+                if (!this.$store.state.marketplace.editor_mode) {
+                    for (let key in this.activeElement) {
+                        this.activeElement[key] = false
+                    }
+                }
+                return this.$store.state.marketplace.editor_mode === 'editing'
+            },
+            first_product(){
+                return this.$store.state.marketplace.first_product
+            }
         },
         mounted: updateProduct,
         created: updateProduct,
         beforeDestroy() {
-            window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
         }
     }
 </script>

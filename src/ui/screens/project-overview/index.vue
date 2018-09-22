@@ -9,9 +9,9 @@
                     <div class="col-12 tab-content" v-else>
                         <p class="errors" v-if="errors.length">
                             <strong>Please correct the following error(s):</strong>
-                        <ul>
-                            <li v-for="error in errors" :key="error">{{ error }}</li>
-                        </ul>
+                            <ul>
+                                <li v-for="error in errors" :key="error">{{ error }}</li>
+                            </ul>
                         </p>
 
                         <div class="row justify-content-between">
@@ -61,15 +61,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <div class="badges-list">
-                                    <div class="item">
-                                        <i class="fas fa-trophy"></i>
-                                    </div>
-                                    <div class="item">
-                                    </div>
-                                    <div class="item">
-                                    </div>
-                                </div>
+                                <c-badges :icons="['trophy','gem']" />
                             </div>
                             <div class="col-lg-4">
                                 <div class="editor text-right" v-if="editing" style="margin-bottom: 30px">
@@ -117,21 +109,19 @@
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
-                                <a class="nav-link active" :href="`/#/project/${project.id}`" data-toggle="pill"
-                                    role="tab" aria-controls="overview"
-                                   aria-selected="true">Overview</a>
+                                <router-link :to="`/project/${project.id}`" class="nav-link active">Overview</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/project/${project.id}/community`">Community</a>
+                                <router-link :to="`/project/${project.id}/community`" class="nav-link">Community</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/project/${project.id}/bounties`">Bounties</a>
+                                <router-link :to="`/project/${project.id}/bounties`" class="nav-link">Bounties</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/project/${project.id}/updates`">Updates</a>
+                                <router-link :to="`/project/${project.id}/updates`" class="nav-link">Updates</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/project/${project.id}/milestones`">Milestones</a>
+                                <router-link :to="`/project/${project.id}/milestones`" class="nav-link">Milestones</router-link>
                             </li>
                             <li class="nav-item" v-if="editing">
                                 <a class="nav-link" data-toggle="pill" href="#configure" role="tab"
@@ -456,7 +446,7 @@
         }
 
         if (project && project.images && project.images.header) {
-            window.document.body.style['background-image'] = 'url(' + project.images.header + ')'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(' + project.images.header + ')'
         }
 
         return project
@@ -465,17 +455,18 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-game-plan': () => import('@/ui/components/game-plans/plan'),
-            'c-block-1': () => import('@/ui/components/block-1'),
-            'c-screen-gallery': () => import('@/ui/components/screen-gallery/gallery'),
-            'c-tags-list': () => import('@/ui/components/tags'),
-            'c-rating-block': () => import('@/ui/components/rating-block'),
-            'c-frequently-traded-assets': () => import('@/ui/components/frequently-traded-assets'),
-            'c-community-spotlight': () => import('@/ui/components/community-spotlight'),
-            'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-review': () => import('@/ui/components/review'),
-            'c-progress-bar': () => import('@/ui/components/progress-bar')
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-game-plan': (resolve) => require(['@/ui/components/game-plans/plan'], resolve),
+            'c-block-1': (resolve) => require(['@/ui/components/block'], resolve),
+            'c-screen-gallery': (resolve) => require(['@/ui/components/screen-gallery/gallery'], resolve),
+            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-rating-block': (resolve) => require(['@/ui/components/rating-block'], resolve),
+            'c-frequently-traded-assets': (resolve) => require(['@/ui/components/frequently-traded-assets'], resolve),
+            'c-community-spotlight': (resolve) => require(['@/ui/components/community-spotlight'], resolve),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+            'c-review': (resolve) => require(['@/ui/components/review'], resolve),
+            'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar'], resolve),
+            'c-badges': (resolve) => require(['@/ui/components/projects/badges.vue'], resolve)
         },
         data() {
             return {
@@ -542,7 +533,7 @@
                     this.$store.dispatch('marketplace/setEditorMode', 'viewing')
                 }
             },
-            checkForm: function (e) {
+            checkForm(e) {
                 this.errors = []
 
                 if (this.project.name && this.project.description) {
@@ -580,7 +571,7 @@
             //this.$store.dispatch('marketplace/setEditorMode', 'editing')
         },
         beforeDestroy() {
-            window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
         },
         updated() {
             $('#tag-editor').select2()
@@ -754,31 +745,6 @@
     .project__description {
         padding: 15px;
         font-size: 16px;
-    }
-
-    .badges-list {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-top: 8px;
-        .item {
-            margin: 7px;
-            border-radius: 5px;
-            background: #FADC72;
-            width: 36px;
-            position: relative;
-            font-size: 24px;
-            text-align: center;
-            line-height: 36px;
-            color: #134269;
-            &:before {
-                content: "";
-                padding-top: 100%;
-                float: left;
-            }
-        }
-
     }
 
     .project__progress {

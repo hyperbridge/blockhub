@@ -11,17 +11,23 @@
                 <strong>{{ item.price }}</strong> USD
             </div>
             <div class="img">
-                <img :src="item.images.medium_tile" />
+                <a :href="`/#/product/${item.id}`">
+                    <img :src="item.images.medium_tile" />
+                </a>
             </div>
             <div class="info">
                 <div class="text">
-                    <h4>{{ item.name }}</h4>
+                    <a
+                        :href="`/#/product/${item.id}`"
+                        :title="item.name + ' - product page'"
+                    ><h4>{{ item.name }}</h4></a>
+                    <p>{{ item.publisher }}</p>
                     <p>{{ item.description }}</p>
                 </div>
                 <div class="footer">
-                    <div class="time" v-if="item.time && showTime">
+                    <div class="time" v-if="item.release_date">
                         <i class="fas fa-calendar-alt"></i>
-                        {{ item.time }}
+                        {{ item.release_date }}
                     </div>
                     <c-rating-stars
                         v-if="item.starsCount && showRating"
@@ -31,7 +37,7 @@
                     <c-button
                         status="success"
                         v-if="item.moreLink"
-                        :href="item.moreLink"
+                        :href="`/#/product/${item.id}`"
                         icon_hide
                     >Buy Now</c-button>
                 </div>
@@ -73,8 +79,8 @@
             }
         },
         components: {
-            'c-tags': () => import('@/ui/components/tags'),
-            'c-rating-stars': () => import('@/ui/components/rating-stars')
+            'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-rating-stars': (resolve) => require(['@/ui/components/rating-stars'], resolve)
         }
     }
 </script>
@@ -99,15 +105,14 @@
         .price{
             position: absolute;
             width: auto;
-            bottom: 25px;
+            bottom: 0px;
             left: 0px;
             padding: 2px 3px;
-            background: rgba(0, 0, 0, .3);
+            background: rgba(0, 0, 0, .6);
             border-radius: 0 5px 5px 0;
             font-size: 11px;
             strong{
                 font-size: 14px;
-                font-weight: bold;
             }
         }
         .img{
@@ -159,24 +164,27 @@
             }
         }
         &.hovered{
-            -webkit-transition: all 200ms ease-in;
+            -webkit-transition: transform 200ms ease;
             -webkit-transform: scale(1);
-            -ms-transition: all 200ms ease-in;
+            -ms-transition: transform 200ms ease;
             -ms-transform: scale(1);
-            -moz-transition: all 200ms ease-in;
+            -moz-transition: transform 200ms ease;
             -moz-transform: scale(1);
-            transition: all 200ms ease-in;
+            transition: transform 200ms ease;
             transform: scale(1);
             &:hover {
                 -webkit-transition: all 200ms ease-in;
-                -webkit-transform: scale(1.05);
+                -webkit-transform: scale(1.03);
                 -ms-transition: all 200ms ease-in;
                 -ms-transform: scale(1.05);
                 -moz-transition: all 200ms ease-in;
-                -moz-transform: scale(1.05);
+                -moz-transform: scale(1.03);
                 transition: all 200ms ease-in;
-                transform: scale(1.05);
+                transform: scale(1.03);
             }
+        }
+        a{
+            text-decoration: none;
         }
     }
 </style>

@@ -42,7 +42,7 @@ export default {
         }
     },
     components: {
-        'c-progress-bar': () => import('@/ui/components/progress-bar')
+        'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar'], resolve)
     }
 }
 </script>

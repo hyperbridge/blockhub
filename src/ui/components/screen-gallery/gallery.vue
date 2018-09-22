@@ -2,34 +2,54 @@
     <div
         class="screen-gallery"
         @mouseover="enableSlideshow(false)"
-        @mouseout="enableSlideshow(true)"
+        @mouseout="mouseOut()"
     >
         <div class="screen-gallery__main-img">
-            <i class="fas fa-expand"></i>
+            <i class="fas fa-expand" v-show="run_slideshow"></i>
             <img
-                :src="images[active_item]"
+                v-if="!play_video"
+                :src="items[active_item]"
                 @click="show_modal = true"
+                @error="brokenImg"
             />
+            <video v-else-if="play_video" controls autoplay>
+                <source :src="video_url" type="video/mp4">
+            </video>
             <div v-if="run_slideshow" class="screen-gallery__progress-bar"></div>
         </div>
-        <ul class="screen-gallery__thumb-nav">
+        <ul class="screen-gallery__thumb-nav" ref="thumb-nav">
             <li
-                v-for="(url, index) in images"
+                v-if="video_url"
+                class="thumb-nav__video-thumb"
+                :class="{ 'inactive-item': !play_video }"
+                :style="{
+
+                    backgroundSize: 'cover',
+                    background: `black url(${items[random_item]}) no-repeat center`
+                }"
+                @click="enableVideoPlay()"
+            >
+                <i class="fas fa-play"></i>
+            </li>
+            <li
+                v-for="(url, index) in items"
                 :key="index"
+                :ref="`thumb-${index}`"
             >
                 <img
                     :src="url"
-                    :class="{ 'inactive-item': index !== active_item }"
-                    @click="active_item = index"
+                    :class="{ 'inactive-item': index !== active_item || play_video }"
+                    @click="changeActiveItem(index)"
+                    @error="brokenImg"
                 />
             </li>
         </ul>
-        <c-modal-light v-if="show_modal" @close="show_modal=false">
+        <c-modal v-if="show_modal" @close="show_modal=false">
             <c-images-explorer
-                :images="images"
+                :images="items"
                 :start_from="active_item"
             />
-        </c-modal-light>
+        </c-modal>
     </div>
 </template>
 
@@ -39,50 +59,93 @@ export default {
     name: 'screen-gallery',
     props: {
         main: {
-            type: String,
-            required: true
+            type: String
         },
         items: {
             type: Array,
             required: true
-        }
+        },
+        name_url: String,
+        video_url: String
     },
     components: {
-        'c-modal-light': () => import('@/ui/components/modal-light'),
-        'c-images-explorer': () => import('@/ui/components/images-explorer')
+        'c-modal': (resolve) => require(['@/ui/components/modal'], resolve),
+        'c-images-explorer': (resolve) => require(['@/ui/components/images-explorer'], resolve)
     },
     data() {
         return {
             active_item: 0,
+            random_item: 0,
             show_modal: false,
             interval: null,
-            run_slideshow: true
+            run_slideshow: true,
+            play_video: false
         }
     },
     methods: {
         slideshow() {
             this.interval = setInterval(() => {
-                this.active_item < this.images.length - 1 ? this.active_item++ : this.active_item = 0;
+                this.active_item < this.items.length - 1 ? this.active_item++ : this.active_item = 0;
+                const [child] = this.$refs[`thumb-${this.active_item}`];
+                const parent = this.$refs['thumb-nav'];
+                this.scrollParentToChild(parent, child);
             }, 4000);
         },
         enableSlideshow(status) {
             clearInterval(this.interval);
             this.run_slideshow = status;
+            if (status && !this.play_video) this.slideshow();
+        },
+        enableVideoPlay() {
+            this.enableSlideshow(false);
+            this.play_video = true;
+        },
+        changeActiveItem(index) {
+            if (this.play_video) {
+                this.play_video = false;
+            }
+            this.active_item = index;
+        },
+        mouseOut() {
+            if (!this.play_video) this.enableSlideshow(true);
+        },
+        scrollParentToChild(parent, child) {
+            const parentRect = parent.getBoundingClientRect();
+
+            const parentViewableArea = {
+                height: parent.clientHeight,
+                width: parent.clientWidth
+            };
+
+            const childRect = child.getBoundingClientRect();
+            const isViewable = (childRect.top >= parentRect.top) && (childRect.top <= parentRect.top + parentViewableArea.height);
+
+            if (!isViewable) {
+                parent.scrollTop = (childRect.top + parent.scrollTop) - parentRect.top;
+            }
             if (status) this.slideshow();
-        }
-    },
-    computed: {
-        images() {
-            return [this.main, ...this.items];
+        },
+        brokenImg(event){
+            event.target.src = 'https://www.golositadelsalento.it/wp-content/uploads/2018/07/No_Image_Available-21-1.jpg'
         }
     },
     mounted() {
-        if (this.images) {
+        if (this.items && this.items.length) {
             this.slideshow();
+            if (this.video_url) {
+                this.random_item = Math.floor(Math.random() * this.items.length);
+            }
         }
     },
     beforeDestroy() {
         this.enableSlideshow(false);
+    },
+    watch: {
+        $route() {
+            this.active_item = 0;
+            this.play_video = false;
+            this.enableSlideshow(true);
+        }
     }
 }
 </script>
@@ -103,9 +166,17 @@ export default {
             }
         }
     }
-    .screen-gallery__main-img{
+    .screen-gallery__main-img {
         flex: 6;
         position: relative;
+        display: flex;
+        align-items: center;
+        background-color: rgb(0, 0, 0);
+        video {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
         .fas {
             position: absolute;
             left: calc(50% - 15px);
@@ -152,10 +223,23 @@ export default {
             &:not(:last-child) {
                 margin-bottom: 10px;
             }
+            height: 75px;
             img {
                 height: 75px;
             }
         }
+    }
+
+    .thumb-nav__video-thumb {
+        background-color: rgb(0, 0, 0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        cursor: pointer;
     }
 
     .inactive-item:not(:hover) {

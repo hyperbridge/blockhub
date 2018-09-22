@@ -15,16 +15,16 @@
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}`">Overview</a>
+                                <router-link :to="`/product/${product.id}`" class="nav-link">Overview</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}/community`">Community</a>
+                                <router-link :to="`/product/${product.id}/community`" class="nav-link">Community</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" :href="`/#/product/${product.id}/projects`">Projects</a>
+                                <router-link :to="`/product/${product.id}/projects`" class="nav-link active">Projects</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/product/${product.id}/assets`">Assets</a>
+                                <router-link :to="`/product/${product.id}/assets`" class="nav-link">Assets</router-link>
                             </li>
                         </ul>
                     </div>
@@ -42,24 +42,6 @@
                             </div>
                             <div>
                                 <c-button status="info" icon_hide>Submit Project</c-button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card invert" v-if="!product.projects.length">
-                        No projects
-                    </div>
-
-                    <div class="row" v-if="product.projects.length">
-                        <div class="col-12 col-lg-4" v-for="(item, index) in product.projects" :key="index">
-                            <div class="card invert game-grid__item">
-                                <div class="card-body padding-0">
-                                    <a :href="`/#/project/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
-                                    <h4><a :href="`/#/project/${item.id}`">{{ item.name }}</a></h4>
-                                    <p class="card-text">{{ item.short_description }} </p>
-
-                                    <c-tags :tags="item.author_tags"></c-tags>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -91,8 +73,11 @@
         if (!product)
             return
 
-        if (product.images && product.images.header)
-            window.document.body.style['background-image'] = 'url(' + product.images.header + ')'
+        if (product.images.preview && product.images.preview.length) {
+            const header = window.document.getElementById('header-bg');
+            header.style['background-image'] = 'url(' + product.images.preview[0] + ')';
+            header.style['background-size'] = 'cover';
+        }
 
         if (!product.projects)
             product.projects = []
@@ -103,9 +88,9 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': () => import('@/ui/layouts/default'),
-            'c-tags-list': () => import('@/ui/components/tags'),
-            'c-projects-card': () => import('@/ui/components/projects/card')
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+            'c-projects-card': (resolve) => require(['@/ui/components/projects/card'], resolve)
         },
         data() {
             return {
@@ -138,12 +123,20 @@
             }
         },
         computed: {
-            product: updateProduct
+            product: updateProduct,
+            editing() {
+                if (!this.$store.state.marketplace.editor_mode) {
+                    for (let key in this.activeElement) {
+                        this.activeElement[key] = false
+                    }
+                }
+                return this.$store.state.marketplace.editor_mode === 'editing'
+            },
         },
         mounted: updateProduct,
         created: updateProduct,
         beforeDestroy() {
-            window.document.body.style['background-image'] = 'url(/static/img/products/default.png)'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
         }
     }
 </script>
