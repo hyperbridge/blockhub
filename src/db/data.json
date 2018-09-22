@@ -1370,11 +1370,11 @@
             "content": "<h2>An adventure of a lifetime...</h2>\n<p>Any new features or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.</p><p>Our store is hosted on Shopify Inc. They provide us with the online e-commerce platform that allows us to sell our products and services to you.</p> IMAGE LIST",
             "frequently_traded_assets": [
             ],
-            "sale_box": {
+            "promotions": [{
                 "title": "Example Sale or Promotion",
                 "price": "49.95",
                 "link": ""
-            },
+            }],
             "rating": [
                 {
                     "name": "Game",
@@ -1540,18 +1540,26 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
-                    "title": null,
-                    "price": 0,
-                    "link": null
-                },
+                "offers_purchases": true,
+                "promotions": [
+                    {
+                        "section": "Downloadable Content",
+                        "title": "Expedition Bundle",
+                        "price": "14.99",
+                        "link": null
+                    },
+                    {
+                        "section": "Downloadable Content",
+                        "title": "Journey to Avalot",
+                        "price": "9.99",
+                        "link": null
+                    }
+                ],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "might-&-magic-heroes-vi-4896",
-                "steam_id": 48220
+                }
             },
             {
                 "id": 2,
@@ -1627,18 +1635,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "capsized-5004",
-                "steam_id": 95300
+                }
             },
             {
                 "id": 3,
@@ -1758,11 +1764,20 @@
                 ],
                 "frequently_traded_assets": [
                 ],
-                "sale_box": {
-                    "title": null,
-                    "price": 0,
-                    "link": null
-                },
+                "promotions": [
+                    {
+                        "section": "Online Service",
+                        "title": "1 Month Subscription",
+                        "price": "4.99",
+                        "link": null
+                    },
+                    {
+                        "section": "Online Service",
+                        "title": "1 Year Subscription",
+                        "price": "39.99",
+                        "link": null
+                    }
+                ],
                 "rating": [
                 ],
                 "assets": [
@@ -1770,9 +1785,7 @@
                 "community": {
                     "discussions": [
                     ]
-                },
-                "name_url": "doom-20087",
-                "steam_id": 379720
+                }
             },
             {
                 "id": 4,
@@ -1856,18 +1869,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "a-game-of-thrones---genesis-4221",
-                "steam_id": 58550
+                }
             },
             {
                 "id": 5,
@@ -2046,11 +2057,11 @@
                 ],
                 "frequently_traded_assets": [
                 ],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [
                 ],
                 "assets": [
@@ -2058,9 +2069,7 @@
                 "community": {
                     "discussions": [
                     ]
-                },
-                "name_url": "teeworlds-20137",
-                "steam_id": 380840
+                }
             },
             {
                 "id": 6,
@@ -2177,18 +2186,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "wargame-european-escalation-4226",
-                "steam_id": 58610
+                }
             },
             {
                 "id": 7,
@@ -2285,18 +2292,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "arcania-4380",
-                "steam_id": 39690
+                }
             },
             {
                 "id": 8,
@@ -2375,18 +2380,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "pride-of-nations-4591",
-                "steam_id": 73190
+                }
             },
             {
                 "id": 9,
@@ -2499,11 +2502,11 @@
                 ],
                 "frequently_traded_assets": [
                 ],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [
                 ],
                 "assets": [
@@ -2511,9 +2514,7 @@
                 "community": {
                     "discussions": [
                     ]
-                },
-                "name_url": "car-mechanic-simulator-2015-demo-20147",
-                "steam_id": 380970
+                }
             },
             {
                 "id": 10,
@@ -2630,11 +2631,11 @@
                 ],
                 "frequently_traded_assets": [
                 ],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [
                 ],
                 "assets": [
@@ -2642,9 +2643,7 @@
                 "community": {
                     "discussions": [
                     ]
-                },
-                "name_url": "kingdom-come-deliverance-20030",
-                "steam_id": 379430
+                }
             },
             {
                 "id": 11,
@@ -2782,11 +2781,11 @@
                 ],
                 "frequently_traded_assets": [
                 ],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [
                 ],
                 "assets": [
@@ -2794,9 +2793,7 @@
                 "community": {
                     "discussions": [
                     ]
-                },
-                "name_url": "fishing-planet-20121",
-                "steam_id": 380600
+                }
             },
             {
                 "id": 12,
@@ -2893,18 +2890,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "men-of-war-assault-squad-4305",
-                "steam_id": 64000
+                }
             },
             {
                 "id": 13,
@@ -3001,18 +2996,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "sniper-elite-v2-4275",
-                "steam_id": 63380
+                }
             },
             {
                 "id": 14,
@@ -3089,18 +3082,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "chime-4259",
-                "steam_id": 62100
+                }
             },
             {
                 "id": 15,
@@ -3156,18 +3147,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "who's-that-flying!-4190",
-                "steam_id": 57700
+                }
             },
             {
                 "id": 16,
@@ -3239,18 +3228,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "fallout-new-vegas-dead-money-4513",
-                "steam_id": 72770
+                }
             },
             {
                 "id": 17,
@@ -3325,18 +3312,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "fallout-new-vegas-honest-hearts-4514",
-                "steam_id": 72771
+                }
             },
             {
                 "id": 18,
@@ -3420,18 +3405,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "call-of-duty%C2%AE-black-ops-4930",
-                "steam_id": 42700
+                }
             },
             {
                 "id": 19,
@@ -3523,233 +3506,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "homefront-4059",
-                "steam_id": 55100
-            },
-            {
-                "id": 20,
-                "name": "Portal 2",
-                "images": {
-                    "header": null,
-                    "medium_tile": "/static/img/products/portal-2-4841/med-tile.jpg",
-                    "main": null,
-                    "icon": "/static/img/products/portal-2-4841/icon.jpg",
-                    "preview": [
-                        "/static/img/products/portal-2-4841/preview-01.jpg",
-                        "/static/img/products/portal-2-4841/preview-02.jpg",
-                        "/static/img/products/portal-2-4841/preview-03.jpg",
-                        "/static/img/products/portal-2-4841/preview-04.jpg",
-                        "/static/img/products/portal-2-4841/preview-05.jpg",
-                        "/static/img/products/portal-2-4841/preview-06.jpg"
-                    ]
-                },
-                "video": "/static/videos/portal-2-4841/trailer.mp4",
-                "genre": "Action",
-                "release_date": "18 Apr, 2011",
-                "developer": "Valve",
-                "publisher": "Valve",
-                "content": "Portal 2 draws from the award-winning formula of innovative gameplay, story, and music that earned the original Portal over 70 industry accolades and created a cult following.<br><br>\t\t\t\t\t\t\t\t\t\tThe single-player portion of Portal 2 introduces a cast of dynamic new characters, a host of fresh puzzle elements, and a much larger set of devious test chambers. Players will explore never-before-seen areas of the Aperture Science Labs and be reunited with GLaDOS, the occasionally murderous computer companion who guided them through the original game.<br>\t\t\t\t\t\t\t\t\t\t<br>\t\t\t\t\t\t\t\t\t\tThe game&#x2019;s two-player cooperative mode features its own entirely separate campaign with a unique story, test chambers, and two new player characters. This new mode forces players to reconsider everything they thought they knew about portals. Success will require them to not just act cooperatively, but to think cooperatively.<br>\t\t\t\t\t\t\t\t\t\t<br>\t\t\t\t\t\t\t\t\t\t<strong>Product Features</strong><br>\t\t\t\t\t\t\t\t\t\t<ul><li><strong>Extensive single player:</strong> Featuring next generation gameplay and a wildly-engrossing story.<br>\t\t\t\t\t\t\t\t\t\t</li><li><strong>Complete two-person co-op:</strong> Multiplayer game featuring its own dedicated story, characters, and gameplay.<br>\t\t\t\t\t\t\t\t\t\t</li><li><strong>Advanced physics:</strong> Allows for the creation of a whole new range of interesting challenges, producing a much larger but not harder game.<br>\t\t\t\t\t\t\t\t\t\t</li><li><strong>Original music.</strong><br>\t\t\t\t\t\t\t\t\t\t</li><li><strong>Massive sequel:</strong> The original Portal was named 2007&apos;s Game of the Year by over 30 publications worldwide. <br>\t\t\t\t\t\t\t\t\t\t</li><li><strong>Editing Tools:</strong> Portal 2 editing tools will be included.<br>\t\t\t\t\t\t\t\t\t\t</li></ul>",
-                "developer_tags": [
-                    "Puzzle",
-                    "Co-op",
-                    "First-Person",
-                    "Sci-fi",
-                    "Comedy",
-                    "Singleplayer"
-                ],
-                "language_support": [
-                    {
-                        "name": "English",
-                        "interface": true,
-                        "full_audio": true,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "French",
-                        "interface": true,
-                        "full_audio": true,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "German",
-                        "interface": true,
-                        "full_audio": true,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Spanish",
-                        "interface": true,
-                        "full_audio": true,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Czech",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Danish",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Dutch",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Finnish",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Hungarian",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Italian",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Japanese",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Korean",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Norwegian",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Polish",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Portuguese",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Romanian",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Russian",
-                        "interface": true,
-                        "full_audio": true,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Simplified Chinese",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Swedish",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Thai",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Traditional Chinese",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    },
-                    {
-                        "name": "Turkish",
-                        "interface": true,
-                        "full_audio": false,
-                        "subtitles": false
-                    }
-                ],
-                "system_requirements": [
-                    {
-                        "os": "win",
-                        "system": "Windows 7 / Vista / XP",
-                        "processor": "3.0 GHz P4, Dual Core 2.0 (or higher) or AMD64X2 (or higher)",
-                        "memory": "2 GB RAM",
-                        "graphics": "Video card must be 128 MB or more and with support for Pixel Shader 2.0b (ATI Radeon X800 or higher / NVIDIA GeForce 7600 or higher / Intel HD Graphics 2000 or higher).",
-                        "directx": "Version 9.0c",
-                        "storage": "8 GB available space",
-                        "sound_card": "DirectX 9.0c compatible"
-                    },
-                    {
-                        "os": "mac",
-                        "system": "MAC OS X 10.6.7 or higher",
-                        "processor": "Intel Core Duo Processor (2GHz or better)",
-                        "memory": "2 GB RAM",
-                        "graphics": "ATI Radeon 2400 or higher / NVIDIA 8600M or higher / Intel HD Graphics 3000",
-                        "storage": "8 GB available space"
-                    },
-                    {
-                        "os": "linux",
-                        "system": "Ubuntu 12.04",
-                        "processor": "Dual core from Intel or AMD at 2.8 GHz",
-                        "memory": "2 GB RAM",
-                        "graphics": "nVidia GeForce 8600/9600GT, ATI/AMD Radeon HD2600/3600 (Graphic Drivers nVidia 310, AMD 12.11), OpenGL 2.1",
-                        "storage": "8 GB available space",
-                        "sound_card": "OpenAL Compatible Sound Card"
-                    }
-                ],
-                "system_tags": [
-                    "top_seller",
-                    "specials"
-                ],
-                "type": "game",
-                "downloads": 0,
-                "plans": [],
-                "frequently_traded_assets": [],
-                "sale_box": {
-                    "title": null,
-                    "price": 0,
-                    "link": null
-                },
-                "rating": [],
-                "assets": [],
-                "community": {
-                    "discussions": []
-                },
-                "name_url": "portal-2-4841",
-                "steam_id": 620
+                }
             },
             {
                 "id": 21,
@@ -3862,18 +3628,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "mafia-ii-4001",
-                "steam_id": 50130
+                }
             },
             {
                 "id": 22,
@@ -4018,18 +3782,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "the-witcher-2-assassins-of-kings-enhanced-edition-4664",
-                "steam_id": 20920
+                }
             },
             {
                 "id": 23,
@@ -4131,18 +3893,18 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
-                    "title": null,
-                    "price": 0,
-                    "link": null
-                },
+                "promotions": [
+                    {
+                        "title": "1 Year Subscription",
+                        "price": "9.99",
+                        "link": null
+                    }
+                ],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "dungeon-defenders-4398",
-                "steam_id": 65800
+                }
             },
             {
                 "id": 24,
@@ -4228,18 +3990,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "worms-ultimate-mayhem-4439",
-                "steam_id": 70600
+                }
             },
             {
                 "id": 25,
@@ -4357,18 +4117,16 @@
                 "downloads": 0,
                 "plans": [],
                 "frequently_traded_assets": [],
-                "sale_box": {
+                "promotions": [{
                     "title": null,
                     "price": 0,
                     "link": null
-                },
+                }],
                 "rating": [],
                 "assets": [],
                 "community": {
                     "discussions": []
-                },
-                "name_url": "saints-row-the-third-4089",
-                "steam_id": 55230
+                }
             }
         ],
         "collections": [

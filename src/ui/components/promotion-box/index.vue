@@ -1,32 +1,34 @@
 <template>
-    <div class="sale-box invert">
-        <h5 class="sale-box__title">
-            {{ sale_box.title }}
+    <div class="promotion-box invert">
+        <h5 class="promotion-box__title" v-if="title">
+            {{ title }}
         </h5>
         <c-button
-            :href="sale_box.link"
+            :href="link"
             status="success"
             data-toggle="modal"
             data-target="#purchase-modal"
             icon_hide
-        >Get for ${{ sale_box.price }}</c-button>
+        ><span v-if="price">Get it for ${{ price }}</span><span v-else>Free Download</span></c-button>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'sale-box',
+    name: 'promotion-box',
     props: {
-        sale_box: {
-            type: Object,
-            required: true
+        title: {
+            type: String
+        },
+        price: {
+            type: String
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-    .sale-box{
+    .promotion-box {
         border: 2px solid #fbe17d;
         border-radius: 5px;
         padding: 12px 20px;
@@ -35,7 +37,7 @@ export default {
         justify-content: space-between;
         align-items: center;
     }
-    .sale-box__title{
+    .promotion-box__title {
         font-size: 21px;
         font-weight: bold;
         padding: 0;
