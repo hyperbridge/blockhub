@@ -18,7 +18,7 @@ export default {
                 state.settings[key] = payload[key];
             }
         },
-        UPDATE_SETTINGZ (state, property) {
+        UPDATE_SETTINGS (state, property) {
             state.settings[property] = !state.settings[property];
         }
     },

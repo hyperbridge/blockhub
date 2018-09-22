@@ -229,6 +229,6 @@ export const mutations = {
         }
     },
     UPDATE_CLIENT_SETTINGS (state, property) {
-        state.settings.client[property] = !state.settings.client[property];
+        state.account.settings.client[property] = !state.account.settings.client[property];
     }
 }
