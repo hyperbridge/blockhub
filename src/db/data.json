@@ -6348,26 +6348,26 @@
                     "sub_topics": [
                         {
                             "id": 0,
-                            "slug": "common-runtime",
-                            "label": "Common runtime",
-                            "icon": "lock"
+                            "slug": "technical",
+                            "label": "Common Technical Issues",
+                            "icon": "question-circle"
                         },
                         {
                             "id": 1,
-                            "slug": "add-ons",
-                            "label": "Add-ons",
+                            "slug": "user-guide",
+                            "label": "User Guide",
                             "icon": "desktop"
                         },
                         {
                             "id": 2,
-                            "slug": "builds",
-                            "label": "Builds",
+                            "slug": "developer-guide",
+                            "label": "Developer Guide",
                             "icon": "cubes"
                         },
                         {
                             "id": 3,
-                            "slug": "limmits",
-                            "label": "Limmits",
+                            "slug": "configuration",
+                            "label": "Configuration",
                             "icon": "sliders-h"
                         }
                     ]
@@ -6419,8 +6419,8 @@
                 {
                     "id": 1,
                     "topic": [1, 5, 3, 0],
-                    "slug": "test-slug-1",
-                    "title": "Why am I seeing H12 request timeout?",
+                    "slug": "purchasing-with-cryptocurrency",
+                    "title": "Purchasing with Cryptocurrency",
                     "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
                 },
                 {

@@ -1,5 +1,5 @@
 <template>
-    <c-layout>
+    <c-layout navigationKey="help">
         <div class="content" id="content">
             <div class="container-fluid">
                 <h2>{{ article.title }}</h2>
