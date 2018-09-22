@@ -11,37 +11,36 @@
                                     <img src="../../../assets/img/monitor_temp.png" class="absolute_img" alt="Logo" />
                                 </div>
                                 <div class="info">
-                                    <h3 class="text-bold text-uppercase">Own what you pwn</h3>
+                                    <h3 class="text-bold text-uppercase">OWN WHAT YOU PWN</h3>
                                     <h4>Blockchain Based Content Listening for the Masses</h4>
                                     <div class="action d-flex align-items-center">
-                                        <div>
-                                            <a href="/#/download/desktop/windows"
-                                               class="btn btn-outline-success"
-                                               v-if="this.user_agent == 'windows' || showAll ">
-                                                <strong>Download Now</strong>
-                                                <small>for Windows 64-bit</small>
-                                            </a>
-                                            <a href="/#/download/desktop/mac"
-                                               class="btn btn-outline-success"
-                                               :class="{ 'mx-3' : showAll }"
-                                               v-if="this.user_agent == 'macos' || showAll ">
-                                                <strong>Download Now</strong>
-                                                <small>for MacOS</small>
-                                            </a>
-                                            <a href="/#/download/desktop/linux"
-                                               class="btn btn-outline-success"
-                                               v-if="this.user_agent == 'linux' || showAll ">
-                                                <strong>Download Now</strong>
-                                                <small>for Linux</small>
-                                            </a>
+                                        <a :href="defaultDownload.link"
+                                            class="btn btn-outline-success"
+                                            @click="startDownload(defaultDownload)"
+                                            v-if="!downloading">
+                                            <strong>Download Now</strong>
+                                            <small>for {{ defaultDownload.text }}</small>
+                                        </a>
+                                        <div v-if="downloading">
+                                            Downloading now. <a :href="downloading.link">Click here</a> if it doesn't start in 10 seconds.
                                         </div>
-                                        <div class="download_info">
-                                            <h6 @click="showAllPlatforms">Using another OS?</h6>
+                                        <div class="download_info" @click="showAllPlatforms">
+                                            <h6>Using another OS?</h6>
                                             <p>Download for Mac, Windows and Linux</p>
                                             <i class="fab fa-apple"></i>
                                             <i class="fab fa-linux"></i>
                                             <i class="fab fa-windows"></i>
                                         </div>
+                                    </div>
+                                </div>
+                                <div v-if="showAll">
+                                    <div v-for="(item, index) in downloads" :key="index">
+                                        <a :href="item.link"
+                                            class="btn"
+                                            v-for="(item, index) in item" :key="index">
+                                            <strong>{{ item.text }}</strong>
+                                            <small>{{ item.subtext }}</small>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +102,52 @@
         data() {
             return {
                 user_agent: '',
-                showAll: false
+                showAll: false,
+                downloading: null,
+                defaultDownload: null,
+                downloads: {
+                    'macos': {
+                        default: {
+                            text: 'MacOS',
+                            subtext: '64-bit',
+                            link: '/#/download/desktop/mac'
+                        }
+                    },
+                    'windows': {
+                        default: {
+                            text: 'Windows',
+                            subtext: '64-bit',
+                            link: '/#/download/desktop/windows'
+                        }
+                    },
+                    'linux': {
+                        default: {
+                            text: 'Linux',
+                            subtext: '64-bit',
+                            link: '/#/download/desktop/linux'
+                        },
+                        generic64: {
+                            text: 'Linux',
+                            subtext: '64-bit Generic',
+                            link: '/#/download/desktop/linux'
+                        },
+                        generic32: {
+                            text: 'Linux',
+                            subtext: '32-bit Generic',
+                            link: '/#/download/desktop/linux'
+                        },
+                        debian32: {
+                            text: 'Linux',
+                            subtext: '32-bit Debian',
+                            link: '/#/download/desktop/linux'
+                        },
+                        debian64: {
+                            text: 'Linux',
+                            subtext: '64-bit Debian',
+                            link: '/#/download/desktop/linux'
+                        }
+                    }
+                }
             }
         },
         created(){
@@ -129,9 +173,14 @@
                 } else if (!os && /Linux/.test(platform)) {
                     this.user_agent = 'linux';
                 }
+
+                this.defaultDownload = this.downloads[this.user_agent].default
             },
             showAllPlatforms(){
                 this.showAll = !this.showAll;
+            },
+            startDownload(item) {
+                this.downloading = item
             }
         },
         mounted() {
@@ -183,11 +232,12 @@
                     .download_info{
                         margin-left: 30px;
                         font-size: 14px;
+                        cursor: pointer;
+                        
                         h6{
                             font-weight: bold;
                             font-size: 14px;
                             margin: 0;
-                            cursor: pointer;
                         }
                         p{
                             padding: 0;
