@@ -92,14 +92,14 @@
     export default {
         name: 'games-explorer',
         components: {
-            'c-block': () => import('@/ui/components/block'),
-            'c-heading-bar': () => import('@/ui/components/heading-bar'),
-            'c-heading-bar-fields' : () => import('@/ui/components/heading-bar/additional-action'),
-            'c-input-searcher': () => import('@/ui/components/inputs/searcher'),
-            'c-dropdown': () => import('@/ui/components/dropdown-menu/type-2'),
-            'c-game-grid': () => import('@/ui/components/games-grid/with-description'),
-            'c-content-navigation': () => import('@/ui/components/content-navigation'),
-            'c-option-tag': () => import('@/ui/components/option-tag')
+            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+            'c-heading-bar-fields': (resolve) => require(['@/ui/components/heading-bar/additional-action'], resolve),
+            'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
+            'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
+            'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description'], resolve),
+            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
+            'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve)
         },
         data() {
             return {
