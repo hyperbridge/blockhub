@@ -10,7 +10,6 @@
             <h2 class="title">Community Spotlight
                 <a href="#3" class="title-icon">
                     <i class="fas fa-comments"></i>
-                    <i class="fas fa-arrow-up"></i>
                 </a>
             </h2>
             <ul class="community-spotlight__list">

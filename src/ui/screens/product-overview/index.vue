@@ -77,7 +77,7 @@
                                     :video_url="product.video"
                                 />
 
-                                <div v-for="(promotions, section) in promotionSections" :key="section">
+                                <div v-for="(promotions, section) in promotionSections" :key="section" v-if="promotionSections">
                                     <h3 style="margin-top: 20px;" v-if="section">{{ section }}</h3>
                                     <c-promotion-box
                                         :title="promotion.title"
@@ -104,6 +104,22 @@
                                 </div>
                             </div>
                             <div class="col-5">
+
+                                <div class="card invert purchase-block" hidden>
+                                    <div class="card-body">
+                                        <a class="tag">Pre-purchase <!-- New --></a> 
+                                        <p>$49.99</p>
+                                        <p>Eligible for up to HBX +100</p>
+                                        <p v-if="product.offers_purchases">Offers In-Game Purchases</p>
+                                        <p>Release date: 10/02/2018</p>
+                                        <a :href="purchaseLink" class="btn btn-outline-white" v-if="isReleased">Proceed to Purchase</a>
+                                        <a :href="purchaseLink" class="btn btn-outline-white" v-if="isReleased">Free Download</a>
+                                        <span v-if="isPurchased">Purchased</span>
+                                        <a :href="fullReviewsLink" class="btn btn-outline-white" v-if="hasDemo">Download Demo</a>
+                                        <a href="#">Add to Wishlist</a>
+                                    </div>
+                                </div>
+                                
                                 <c-rating-block :items="product.rating" :parent_url="`/#/product/${product.id}`" />
 
                                 <c-frequently-traded-assets :items="product.frequently_traded_assets" :assets_url="`/#/product/${product.id}/assets`" />
@@ -164,9 +180,10 @@
     
     const groupBy = function(xs, key) {
         return xs.reduce(function(rv, x) {
+            if (!x[key]) return rv;
             (rv[x[key]] = rv[x[key]] || []).push(x);
             return rv;
-        }, {});
+        }, {}) || null;
     };
 
     const updateProduct = function () {
