@@ -15459,7 +15459,121 @@ exports[`Storyshots Product Community post 1`] = `
   <div
     class="col-10"
   >
-    <!---->
+    <div
+      class="community-item"
+    >
+      <div
+        class="community-item__header"
+      >
+        <div
+          class="icon"
+        >
+          <i
+            class="fas fa-star"
+          />
+        </div>
+         
+        <div
+          class="text"
+        >
+          
+            The previous title doesn't have it's single line aligned vertically because XD does not have this functionality.
+
+            
+        
+        </div>
+         
+        <div
+          class="statistic"
+        >
+          <div
+            class="rating up"
+          >
+            <i
+              class="fas fa-chevron-up"
+            />
+            
+                103
+            
+          </div>
+           
+          <div
+            class="user"
+          >
+            <span
+              class="time"
+            >
+              25 min
+            </span>
+             
+            <img
+              src="https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png"
+            />
+             
+            <span
+              class="name"
+            >
+              Nakatochi
+            </span>
+          </div>
+           
+          <div
+            class="comments_count"
+          >
+            <i
+              class="fas fa-comment"
+            />
+            
+                894391
+            
+          </div>
+        </div>
+      </div>
+       
+      <div
+        class="community-item__post"
+      >
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non maximus tellus, eu lacinia justo. Cras semper vestibulum est. Donec a massa vitae nibh consectetur efficitur non in erat. Morbi id dapibus tortor. Praesent sit amet vulputate leo, eu posuere neque. In id ante scelerisque, commodo nisi non, eleifend mauris. Pellentesque massa elit, semper non libero nec, interdum aliquet dolor.
+        </p>
+         
+        <img
+          src="http://memesbams.com/wp-content/uploads/2017/08/2.3-Delightful-cheer-up-cat-meme.jpg"
+        />
+      </div>
+       
+      <!---->
+       
+      <div
+        class="community-item__action text-right"
+      >
+        <a
+          class="btn btn-sm btn-icon"
+          href="#3"
+        >
+          <i
+            class="fas fa-thumbs-down"
+          />
+        </a>
+         
+        <a
+          class="btn btn-sm btn-info"
+          href="#3"
+        >
+          
+                Reply
+            
+        </a>
+         
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+      <!---->
+      <!---->
+    </div>
   </div>
 </div>
 `;
@@ -16616,6 +16730,42 @@ exports[`Storyshots Projects card 1`] = `
 </div>
 `;
 
+exports[`Storyshots Promotion Box default 1`] = `
+<div
+  class="row"
+>
+  <div
+    class="col-6 p-5"
+  >
+    <div
+      class="promotion-box invert"
+    >
+      <h5
+        class="promotion-box__title"
+      >
+        
+        test
+    
+      </h5>
+       
+      <a
+        class="c-btn success c-btn-sm"
+        data-target="#purchase-modal"
+        data-toggle="modal"
+      >
+        <!---->
+         
+        <span>
+          <span>
+            Get for $10.00
+          </span>
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Range Slider double grid range slider 1`] = `
 <div
   class="row m-0 p-3"
@@ -16762,40 +16912,6 @@ exports[`Storyshots Rating Stars 1`] = `
     class="fas fa-star-half"
   />
 </span>
-`;
-
-exports[`Storyshots Sale Box default 1`] = `
-<div
-  class="row"
->
-  <div
-    class="col-6 p-5"
-  >
-    <div
-      class="sale-box invert"
-    >
-      <h5
-        class="sale-box__title"
-      >
-        
-        test
-    
-      </h5>
-       
-      <a
-        class="c-btn success c-btn-sm"
-        data-target="#purchase-modal"
-        data-toggle="modal"
-      >
-        <!---->
-         
-        <span>
-          Get for $
-        </span>
-      </a>
-    </div>
-  </div>
-</div>
 `;
 
 exports[`Storyshots Searcher default 1`] = `
