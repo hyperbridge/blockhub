@@ -1,6 +1,7 @@
 <template>
     <component
         :is="tag"
+        :href="href"
         class="c-btn"
         :class="[status, 'c-btn-' + size , { 'swap-direction': swap_direction }]"
         @click="$emit('click')"
@@ -26,6 +27,10 @@
             tag: {
                 type: String,
                 default: 'a',
+            },
+            href: {
+                type: String,
+                default: 'javascript:;',
             },
             icon: String,
             icon_hide: Boolean,

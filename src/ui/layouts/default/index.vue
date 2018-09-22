@@ -427,7 +427,7 @@ export default {
     .slide-chooser {
         margin-bottom: 10px;
 
-        .btn {
+        .c-btn {
             background: transparent;
             opacity: 0.5;
             color: #fff;

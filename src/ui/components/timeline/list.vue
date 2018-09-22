@@ -8,7 +8,7 @@
         </template>
         <transition name="fade-slow">
             <div class="posts-timeline__end" v-if="end">
-                <h3>No more resources!</h3>
+                <h3>End of updates</h3>
             </div>
         </transition>
     </div>
@@ -27,7 +27,7 @@
                 display: 5,     // initial items
                 trigger: 150,   // how far from the bottom to trigger infinite scroll
                 list  : [],    // server response data
-                end    : false, // no more resources
+                end    : false, // no more updates
             }
         },
         components:{
