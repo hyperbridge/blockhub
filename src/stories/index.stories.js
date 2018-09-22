@@ -3251,6 +3251,32 @@ storiesOf('Timeline', module)
                         </div>`
     }))
 
+import PurchaseBlock from '@/ui/components/purchase-block';
+storiesOf('Purchase block', module)
+    .add('default', () => ({
+        components:{
+            'c-purchase-block': PurchaseBlock
+        },
+        data(){
+            return{
+                product:{
+                    offers_purchases: '',
+                    purchaseLink: '',
+                    isReleased: true,
+                    isPurchased: true,
+                    isFree: true,
+                    hasDemo: true,
+                    inWishlist: false
+                }
+            }
+        },
+        template: `<div class="col-3 p-5"><c-purchase-block :product="product" /></div>`
+    }))
+
+
+
+
+
 /*
      Dynamic import - test version
 

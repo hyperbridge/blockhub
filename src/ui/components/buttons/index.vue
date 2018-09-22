@@ -89,6 +89,9 @@
         &.c-btn-lg{
             padding: 5px 13px;
             font-size: 18px;
+            i{
+                margin-right: 10px;
+            }
         }
 
 

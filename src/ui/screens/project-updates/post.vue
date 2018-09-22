@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h3>{{ id }}</h3>
+                        <h3>{{  }}</h3>
                     </div>
                 </div>
             </div>
@@ -14,7 +14,7 @@
 
 <script>
     export default {
-        props: ['id'],
+        props: [''],
         components: {
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
