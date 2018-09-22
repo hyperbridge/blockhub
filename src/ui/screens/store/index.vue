@@ -22,7 +22,7 @@
                                     <span>usd</span>
                                 </div>
                             </div>
-                            <c-button status="success" icon="cart-plus">Add To Cart</c-button>
+                            <c-button status="success" icon="cart-plus">Proceed to Purchase</c-button>
                         </div>
                     </div>
                 </div>
