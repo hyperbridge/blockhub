@@ -30,7 +30,10 @@ export const getters = {
         return [
             'edit'
         ]
-    }
+    },
+    getProductsByName: state => name => state.products.filter(product =>
+        product.name.toLowerCase().includes(name.toLowerCase())
+    )
 }
 
 export const actions = {
