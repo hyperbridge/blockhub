@@ -18,9 +18,10 @@ const updateState = () => {
     const normalizedData = normalize(rawData, {
     })
 
-    state = { ...rawData, ...normalizedData.entities }
-
-}
+    state = {
+        ...rawData
+    };
+};
 
 updateState()
 
@@ -29,7 +30,10 @@ export const getters = {
         return [
             'edit'
         ]
-    }
+    },
+    getProductsByName: state => name => state.products.filter(product =>
+        product.name.toLowerCase().includes(name.toLowerCase())
+    )
 }
 
 export const actions = {
@@ -226,6 +230,8 @@ export const mutations = {
     submitTransaction(state, payload) {
         const success = (id) => {
         }
-
+    },
+    UPDATE_CLIENT_SETTINGS (state, property) {
+        state.account.settings.client[property] = !state.account.settings.client[property];
     }
 }

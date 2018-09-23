@@ -86,47 +86,7 @@
                         </c-banner>
                     </div>
 
-                    <div class="col-12 margin-bottom-30">
-                        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                            <c-heading-bar
-                                slot="title"
-                                class="mb-0"
-                                :headingTabs="[
-                                { title: 'Top Selling', category: 'top_selling_products' },
-                                { title: 'New Releases', category: 'new_products' },
-                                { title: 'Upcoming', category: 'upcoming_products' }
-                            ]"
-                                @changeTab="itemsCategory = $event"
-                            >
-                                <template slot="additional-action">
-                                    <span class="font-weight-bold">Sort by</span>
-                                    <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
-                                    <c-heading-bar-fields name="Best Reviews" icon="star" @clickUp=""  @clickDown="" />
-                                    <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
-                                </template>
-                            </c-heading-bar>
-                            <div class="filter-blk">
-                                <div class="d-flex align-items-center">
-                                    <c-dropdown id="test" name="Filter by Genre" :showBg="true">
-                                        <a href="#3">RPG</a>
-                                        <a href="#3">ACTION</a>
-                                        <a href="#3">Cars</a>
-                                    </c-dropdown>
-                                    <c-searcher customClass="mb-0" />
-                                </div>
-                                <c-button status="info" icon_hide>All New Releases</c-button>
-                            </div>
-                            <c-game-grid
-                                :itemInRow=2
-                                :showRating=false
-                                :showTime=true
-                                :items="marketplace[itemsCategory]"
-                                itemBg="transparent"
-                            />
-                            <c-content-navigation />
-                        </c-block>
-                    </div>
-                </div>
+                <c-games-explorer/>
 
                 <div class="row margin-bottom-50 margin-top-20 align-items-stretch">
                     <div class="col-12 col-md-8">
@@ -259,6 +219,7 @@ export default {
         'c-news-list-articles': (resolve) => require(['@/ui/components/news-list/articles'], resolve),
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
+        'c-games-explorer': (resolve) => require(['@/ui/components/store/games-explorer'], resolve),
         'c-swiper': swiper,
         'c-slide': swiperSlide
     },
@@ -286,7 +247,6 @@ export default {
             ]
         }
         return {
-            itemsCategory: 'top_selling_products',
             curators_reviews: [curator_review, curator_review, curator_review],
             content_news: [
                 {
@@ -366,15 +326,15 @@ export default {
             return this.$store.state.marketplace;
         },
         new_products() {
-            return this.$store.state.marketplace.new_products
+            return this.marketplace.new_products;
         },
         sale_products() {
-            return this.$store.state.marketplace.sale_products
+            return this.marketplace.sale_products;
         },
         frontpage_product() {
             updateLandingImage.bind(this)()
 
-            return this.$store.state.marketplace.frontpage_product
+            return this.marketplace.frontpage_product;
         },
         summer_sale_sl() {
             return this.$refs.summer_sale_sl.swiper;
@@ -382,8 +342,8 @@ export default {
         demo_products_sl() {
             return this.$refs.demo_products_sl.swiper;
         },
-        assets: function () {
-            return this.$store.state.marketplace.assets
+        assets() {
+            return this.marketplace.assets;
         }
     },
     methods: {

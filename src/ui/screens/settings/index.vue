@@ -34,8 +34,8 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
                             <c-switch
-                                :value="settings.pagination"
-                                @change="updateSettings('pagination')"
+                                :value="settings.client.pagination"
+                                @change="updateClientSettings('pagination')"
                             />
                             <div class="text">
                                 <h4>Pagination Mode</h4>
@@ -62,8 +62,8 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
                             <c-switch
-                                @change="updateSettings('animations')"
-                                :value="settings.animations"
+                                @change="updateClientSettings('animations')"
+                                :value="settings.client.animations"
                             />
                             <div class="text">
                                 <h4>Enable animations</h4>
@@ -74,8 +74,8 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
                             <c-switch
-                                @change="updateSettings('autoplay')"
-                                :value="settings.autoplay"
+                                @change="updateClientSettings('autoplay')"
+                                :value="settings.client.autoplay"
                             />
                             <div class="text">
                                 <h4>Enable autoplay</h4>
@@ -107,7 +107,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapMutations } from 'vuex';
+import { debouncer } from '@/mixins';
 
 export default {
     components: {
@@ -115,8 +116,20 @@ export default {
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-benchmark': (resolve) => require(['@/ui/components/benchmark'], resolve)
     },
+    mixins: [debouncer],
+    data() {
+        return {
+            systemPermissions: false
+        }
+    },
     methods: {
-        ...mapActions(['updateSettings']),
+        ...mapMutations(['UPDATE_CLIENT_SETTINGS']),
+        updateClientSettings(prop) {
+            this.$store.commit('network/UPDATE_CLIENT_SETTINGS', prop);
+            this.debounce(() => {
+                window.BlockHub.db.save();
+            });
+        },
         clearDatabase() {debugger
             let DBDeleteRequest = window.indexedDB.deleteDatabase("LokiCatalog")
 
@@ -129,14 +142,7 @@ export default {
 
                 console.log(event.result) // should be undefined
             }
-        }
-    },
-    data() {
-        return {
-            systemPermissions: false
-        }
-    },
-    methods: {
+        },
         async requestNotifPerm() {
             const permission = await Notification.requestPermission();
             if (permission === 'granted') this.systemPermissions = true;
@@ -147,7 +153,7 @@ export default {
     },
     computed: {
         settings() {
-            return this.$store.state.user.settings;
+            return this.$store.state.network.account.settings;
         }
     }
 }

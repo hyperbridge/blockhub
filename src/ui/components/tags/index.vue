@@ -1,5 +1,5 @@
 <template>
-    <div class="product-tags" v-if="tags">
+    <div class="product-tags">
         <a
             v-for="(tag, index) in tags"
             :href="`/#/store/tag/${tag}`"
@@ -16,7 +16,8 @@
 export default {
     name: 'tags',
     props: {
-        tags: Array
+        tags: Array,
+        required: true
     },
     methods: {
         filterTag(tagName) {
