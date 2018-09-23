@@ -49,7 +49,7 @@
         </div>
 
 
-        <ul class="help-block">
+        <ul class="help-block" hidden>
             <li class="title">
                 <i class="fas fa-question-circle"></i>
                 Help

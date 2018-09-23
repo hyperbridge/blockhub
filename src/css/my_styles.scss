@@ -143,6 +143,11 @@ a.btn-outline-white {
     }
 }
 
+.page-aside::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+}
+
 #fixed_panel {
     z-index: 12;
     background: #1C2032;
@@ -216,3 +221,7 @@ a.btn-outline-white {
         filter: blur(5px);
     }
 }
+
+// .swiper-container {
+//     overflow: visible;
+// }
