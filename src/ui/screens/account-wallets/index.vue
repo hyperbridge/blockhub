@@ -109,7 +109,7 @@
                             </div>
 
                             <!--Add New Wallet Block Empty div-->
-                            <div class="wallet-item empty-item" @click="addNewWallet" v-if="!set_new_wallets">
+                            <div class="wallet-item empty-item new-wallet" @click="addNewWallet" v-if="!set_new_wallets">
                                 <div class="empty-overlay">
                                     <i class="fas fa-plus"></i>
                                     New Wallet
@@ -481,6 +481,9 @@
             .wallet-item__footer{
                 display: inline-block;
             }
+        }
+        &.new-wallet {
+            cursor: pointer;
         }
     }
     .wallet-item__info {

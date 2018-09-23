@@ -130,7 +130,7 @@
                                             $ {{ item.price }}
                                         </span>
                                         <a href="#3" class="btn btn-success float-right">
-                                            <i class="fas fa-cart-plus"></i> Add to cart
+                                            <i class="fas fa-cart-plus"></i> Proceed to Purchase
                                         </a>
                                     </div>
                                 </div>

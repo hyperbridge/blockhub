@@ -8,7 +8,7 @@
             >
                 {{ finished ? 'Try again' : running ? 'Running...' : 'Start' }}
             </c-button>
-            <p class="benchmark__status">STATUS: {{ running ? 'Running' : finished ? 'Finished' : 'Waiting for start' }}</p>
+            <p class="benchmark__status">STATUS: {{ running ? 'Running' : finished ? 'Finished' : 'Waiting to start' }}</p>
 
             <p v-if="running">FPS: {{ fps }}</p>
             <p v-else-if="finished">
@@ -24,8 +24,6 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
-
     export default {
         name: 'benchmark',
         props: {
@@ -45,7 +43,6 @@
             }
         },
         methods: {
-            ...mapActions(['updateSettings']),
             benchmark() {
                 this.running = true;
                 this.finished = false;
@@ -93,6 +90,9 @@
                 this.results.text = grade == 'good'
                     ? 'There is no need to lower your settings'
                     : 'You should consider lowering your settings (preferably by auto-update option)'
+            },
+            updateSettings(prop) {
+                this.$store.commit('UPDATE_CLIENT_SETTINGS', prop);
             },
             autoUpdateSettings() {
                 if (!this.finished || this.running) {

@@ -15,29 +15,27 @@ import * as data from './components-data'
 
 //import '!style-loader!css-loader!./styles.scss'
 
-import SaleBox from '../ui/components/sale-box/box.vue'
+import PromotionBox from '../ui/components/promotion-box'
 
 
 addDecorator(withViewport('desktop'))
 
 
-storiesOf('Sale Box', module)
+storiesOf('Promotion Box', module)
     .add('default', () => ({
         components: {
-            'c-sale-box': SaleBox
+            'c-promotion-box': PromotionBox
         },
         data() {
-            let title = 'test'
             return {
-                sale_box: {
-                    title: title
-                }
+                title: 'test',
+                price: '10.00'
             }
         },
-        template: '<div class="row"><div class="col-6 p-5"><c-sale-box :sale_box="sale_box"></c-sale-box></div></div>'
+        template: '<div class="row"><div class="col-6 p-5"><c-promotion-box :title="title" :price="price"></c-promotion-box></div></div>'
     }))
 
-import AssetsImporter from '../ui/components/asset-importer/index.vue'
+import AssetsImporter from '../ui/components/asset-importer'
 
 storiesOf('Assets Importer', module)
     .add('default', () => ({
@@ -52,7 +50,7 @@ storiesOf('Assets Importer', module)
         template: '<div class="row"><div class="col-8"><c-assets-importer show_skipped="show_skipped" /></div></div>'
     }))
 
-import Notification from '../ui/components/notification/index.vue'
+import Notification from '../ui/components/notification'
 
 storiesOf('Notifications', module)
     .add('default', () => ({
@@ -355,7 +353,7 @@ storiesOf('Tabs', module)
     }))
 
 
-import MilestonesLine from '../ui/components/milestones-line/index.vue'
+import MilestonesLine from '../ui/components/milestones-line'
 
 storiesOf('Milestones Line', module)
     .addDecorator(withKnobs)
@@ -394,7 +392,7 @@ storiesOf('Milestones Line', module)
     }))
 
 
-import SidebarMenu from '../ui/components/sidebar-menu/index.vue'
+import SidebarMenu from '../ui/components/sidebar-menu'
 import SidebarMenuLink from '../ui/components/sidebar-menu/menu_item'
 
 storiesOf('Sidebar Menu', module)
@@ -491,7 +489,7 @@ const injectButtonTemplate = code => `
     </div>
 `;
 
-import Buttons from '../ui/components/buttons/index.vue'
+import Buttons from '../ui/components/buttons'
 import LoadMore from '../ui/components/buttons/load-more'
 import ButtonArrows from '@/ui/components/buttons/arrows'
 
@@ -644,7 +642,7 @@ storiesOf('Buttons', module)
     }))
 
 
-import MoneyInfo from '../ui/components/money-info/index.vue'
+import MoneyInfo from '../ui/components/money-info'
 
 storiesOf('Money Info', module)
     .add('default', () => ({
@@ -902,7 +900,7 @@ storiesOf('Tooltip Universal', module)
 
 
 
-import ActivityChart from '../ui/components/activity-chart/index.vue'
+import ActivityChart from '../ui/components/activity-chart'
 
 storiesOf('Activity Chart', module)
     .add('default', () => ({
@@ -950,7 +948,7 @@ storiesOf('Activity Chart', module)
         `
     }))
 
-import PopUps from '../ui/components/popups/index.vue'
+import PopUps from '../ui/components/popups'
 
 storiesOf('Popups', module)
     .add('default', () => ({
@@ -1112,7 +1110,7 @@ storiesOf('Popups', module)
         `
     }))
 
-import RangeSlider from '../ui/components/range-slider/index.vue'
+import RangeSlider from '../ui/components/range-slider'
 
 storiesOf('Range Slider', module)
     .add('single range slider', () => ({
@@ -1180,7 +1178,7 @@ storiesOf('Range Slider', module)
         `
     }))
 
-import AssetsGrid from '../ui/components/assets-grid/index.vue'
+import AssetsGrid from '../ui/components/assets-grid'
 
 const assets_list = [
     {
@@ -1257,7 +1255,7 @@ storiesOf('Assets Grid', module)
         `
     }), { viewport: 'iphone6p' })
 
-import AssetsPopup from '../ui/components/asset-overview-popup/index.vue'
+import AssetsPopup from '../ui/components/asset-overview-popup'
 
 storiesOf('Assets Overview Popup', module)
     .addDecorator(withKnobs)
@@ -1312,7 +1310,7 @@ storiesOf('Assets Overview Popup', module)
         `
     }));
 
-import Switch from '../ui/components/switch/index.vue'
+import Switch from '../ui/components/switch'
 
 storiesOf('Switch', module)
     .addDecorator(withKnobs)
@@ -1349,7 +1347,7 @@ storiesOf('Switch', module)
 
 
 import AssetsList from '../ui/components/assets-list-item/featured-list.vue'
-import AssetsListDetail from '../ui/components/assets-list-item/index.vue'
+import AssetsListDetail from '../ui/components/assets-list-item'
 
 storiesOf('Assets List', module)
     .addDecorator(withKnobs)
@@ -1409,7 +1407,7 @@ storiesOf('Assets List', module)
     }))
 
 
-import Block from '../ui/components/block/index.vue'
+import Block from '../ui/components/block'
 
 storiesOf('Block', module)
     .add('default', () => ({
@@ -3252,6 +3250,32 @@ storiesOf('Timeline', module)
                             </div>
                         </div>`
     }))
+
+import PurchaseBlock from '@/ui/components/purchase-block';
+storiesOf('Purchase block', module)
+    .add('default', () => ({
+        components:{
+            'c-purchase-block': PurchaseBlock
+        },
+        data(){
+            return{
+                product:{
+                    offers_purchases: '',
+                    purchaseLink: '',
+                    isReleased: true,
+                    isPurchased: true,
+                    isFree: true,
+                    hasDemo: true,
+                    inWishlist: false
+                }
+            }
+        },
+        template: `<div class="col-3 p-5"><c-purchase-block :product="product" /></div>`
+    }))
+
+
+
+
 
 /*
      Dynamic import - test version

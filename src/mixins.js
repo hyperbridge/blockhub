@@ -1,14 +1,13 @@
 export const debouncer = {
     data() {
         return {
-            timeout: null,
-            debounceTime: 300
+            timeout: null
         }
     },
     methods: {
-        debounce(fn) {
-            clearTimeout(this.timeout);
-            this.timeout = setTimeout(fn, this.debounceTime);
+        debounce(fn, debounceTime = 250, timeout = this.timeout) {
+            clearTimeout(timeout);
+            timeout = setTimeout(fn, debounceTime);
         }
     }
 };

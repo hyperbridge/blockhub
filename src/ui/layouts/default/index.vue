@@ -275,9 +275,9 @@
 
 
 <script>
-    import 'swiper/dist/css/swiper.css'
+import 'swiper/dist/css/swiper.css'
 
-    import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 export default {
     props: [
@@ -427,7 +427,7 @@ export default {
     .slide-chooser {
         margin-bottom: 10px;
 
-        .btn {
+        .c-btn {
             background: transparent;
             opacity: 0.5;
             color: #fff;

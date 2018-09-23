@@ -82,7 +82,7 @@
               <span class="icon fa fa-users"></span>
               <span class="text">Contacts</span>
           </a>
-          <a href="/#/account/activity">
+          <a href="/#/settings/activity">
               <span class="icon fa fa-list-alt"></span>
               <span class="text">Activity Log</span>
           </a>

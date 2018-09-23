@@ -3,8 +3,9 @@
     <div class="navigation" id="navigation-default">
 
         <c-sidebar-menu title="SETTINGS" sub_title="General" >
+            <c-sidebar-menu-link url="/#/settings" link_text="All Settings" />
             <c-sidebar-menu-link url="/#/settings/client" link_text="Client" />
-            <c-sidebar-menu-link url="/#/fa fa-home" link_text="Profile" icon="fa fa-home"/>
+            <c-sidebar-menu-link url="/#/settings/activity" link_text="Activity Log" />
         </c-sidebar-menu>
 
     </div>

@@ -14,8 +14,8 @@
         <c-money-info label="Obtained Funds" :percent="goal_progress" :amount="project.funds.obtained"
                       :goal="project.funds.goal"/>
         <div class="item-action">
-            <c-button status="info" icon_hide>Participate</c-button>
-            <c-button status="success" icon_hide>Donate Funds</c-button>
+            <c-button status="info" href="/#/project/1" icon_hide>Participate</c-button>
+            <c-button status="success" href="/#/project/1" icon_hide>Donate Funds</c-button>
         </div>
     </div>
 </template>

@@ -31,7 +31,7 @@ export default {
         .input-searcher__icon {
             position: absolute;
             right: 8px;
-            top: calc(50% - 3.5px);
+            top: calc(50% - 6.5px);
         }
     }
 </style>

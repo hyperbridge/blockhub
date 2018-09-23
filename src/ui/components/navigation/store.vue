@@ -49,21 +49,21 @@
         </div>
 
 
-        <ul class="help-block">
+        <ul class="help-block" hidden>
             <li class="title">
                 <i class="fas fa-question-circle"></i>
                 Help
             </li>
             <li>
-                Buying with Cryptocurrency
-                Content Availability byCountry
-                Becoming a Store Curator
-                18+ Games and Indentity Proof
-                Report Misleading Content
+                <a href="/#/help/1/article/purchasing-with-cryptocurrency">Purchasing with Cryptocurrency</a>
+                <a href="/#/help/1/article/content-availability-by-country">Content Availability by Country</a>
+                <a href="/#/help/1/article/becoming-a-community-curator">Becoming a Community Curator</a>
+                <a href="/#/help/1/article/18-plus-games-and-verification">18+ Games and Verification</a>
+                <a href="/#/help/1/article/recporting-misleading-content">Reporting Misleading Content</a>
             </li>
             <li>
-                <a href="#3" class="btn btn-link">
-                    More ...
+                <a href="/#/help/1" class="btn btn-link">
+                    More...
                 </a>
             </li>
         </ul>
