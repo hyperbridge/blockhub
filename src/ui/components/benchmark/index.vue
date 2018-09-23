@@ -8,7 +8,7 @@
             >
                 {{ finished ? 'Try again' : running ? 'Running...' : 'Start' }}
             </c-button>
-            <p class="benchmark__status">STATUS: {{ running ? 'Running' : finished ? 'Finished' : 'Waiting for start' }}</p>
+            <p class="benchmark__status">STATUS: {{ running ? 'Running' : finished ? 'Finished' : 'Waiting to start' }}</p>
 
             <p v-if="running">FPS: {{ fps }}</p>
             <p v-else-if="finished">

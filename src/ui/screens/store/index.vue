@@ -85,6 +85,7 @@
                             </div>
                         </c-banner>
                     </div>
+                </div>
 
                 <c-games-explorer/>
 
