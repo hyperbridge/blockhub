@@ -1,14 +1,16 @@
 <script>
 export default {
     name: 'input-searcher',
-    props: ['value', 'placeholder'],
+    inheritAttrs: false,
+    props: ['value'],
     render(h) {
         return h('div', {
             staticClass: 'input-searcher'
         }, [
             h('c-input', {
-                on: { input: e => this.$emit('input', e) },
-                props: this.props
+                on: this.$listeners,
+                props: this.$props,
+                attrs: this.$attrs
             }),
             h('c-icon', {
                 staticClass: 'input-searcher__icon',
