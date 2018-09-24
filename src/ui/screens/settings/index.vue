@@ -34,7 +34,7 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
                             <c-switch
-                                :value="settings.client.pagination"
+                                :checked="settings.client.pagination"
                                 @change="updateClientSettings('pagination')"
                             />
                             <div class="text">
@@ -46,7 +46,7 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
                             <c-switch
-                                :value="systemPermissions"
+                                :checked="systemPermissions"
                                 @change="requestNotifPerm()"
                             />
                             <div class="text">
@@ -63,7 +63,7 @@
                         <div class="settings_item">
                             <c-switch
                                 @change="updateClientSettings('animations')"
-                                :value="settings.client.animations"
+                                :checked="settings.client.animations"
                             />
                             <div class="text">
                                 <h4>Enable animations</h4>
@@ -75,7 +75,7 @@
                         <div class="settings_item">
                             <c-switch
                                 @change="updateClientSettings('autoplay')"
-                                :value="settings.client.autoplay"
+                                :checked="settings.client.autoplay"
                             />
                             <div class="text">
                                 <h4>Enable autoplay</h4>
