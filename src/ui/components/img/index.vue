@@ -3,8 +3,7 @@ export default {
     name: 'c-img',
     props: {
         src: String,
-        alt: String,
-        class: String
+        alt: String
     },
     data() {
         return {
@@ -25,7 +24,6 @@ export default {
             attrs: {
                 src: this.dynamicSrc,
                 alt: this.alt,
-                class: this.class
             }
         });
     },
