@@ -6,11 +6,11 @@
             </h2>
             <c-tabs-universal :tab_names="tab_names">
                 <c-tab-universal
-                    v-for="(platform, index) in requirements"
+                    v-for="(platform, index) in newRequirements"
                     :key="index"
                     :tab_id="index"
                 >
-                    <ul class="system-requirements__list">
+                    <ul class="system-requirements__list" v-if="platform">
                         <li
                             v-for="(value, property) in platform"
                             v-if="value"
@@ -28,6 +28,7 @@
                             <p v-else class="system-requirements__value">{{ value | upperFirstChar }}</p>
                         </li>
                     </ul>
+                    <h4 v-else>Currently not supported</h4>
                 </c-tab-universal>
             </c-tabs-universal>
         </div>
@@ -43,13 +44,37 @@ export default {
             required: true
         }
     },
+    data(){
+        return {
+            newRequirements:[
+                {
+                    "os": "win"
+                },
+                {
+                    "os": "mac"
+                },
+                {
+                    "os": "linux"
+                }
+            ]
+        }
+    },
     components: {
         'c-tab-universal': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
         'c-tabs-universal': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve)
     },
-    computed: {
+    created(){
+        let requirements = this.requirements.sort(),
+            newRequirements = this.newRequirements.sort(),
+            finallyarray = [];
+            newRequirements.forEach( (o, i) => {
+                console.log(o,i)
+            })
+            this.newRequirements = finallyarray;
+    },
+    computed:{
         tab_names() {
-            return this.requirements.map(req => req.os.toUpperCase());
+            return this.newRequirements.map(req => req.os.toUpperCase());
         }
     },
     filters: {

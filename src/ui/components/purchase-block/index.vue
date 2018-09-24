@@ -6,7 +6,7 @@
         <div class="purchase-block__info">
             <div>Eligible for up to <i class="fas fa-coins mx-1" style="color: #FADC72"></i> HBX +{{ eligibleTokens }}</div>
             <div v-if="offers_purchases">Offers In-Game Purchases</div>
-            <div class="release-date">Release date: {{ releaseDate }}</div>
+            <div class="release-date">Release date: {{ dateFormat(releaseDate) }}</div>
 
             <div v-if="isPurchased" class="purchased-status">
                 <i class="fas fa-check"></i>
@@ -63,7 +63,8 @@
                 default: 100
             },
             releaseDate:{
-                type: String
+                type: String,
+                default: '8 Jun, 2011'
             },
             offers_purchases: {
                 type: Boolean,
@@ -96,7 +97,12 @@
         },
         components:{
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
-        }
+        },
+        methods: {
+            dateFormat(val) {
+                return moment(val.date).format('MM/DD/YYYY')
+            }
+        },
     }
 </script>
 
