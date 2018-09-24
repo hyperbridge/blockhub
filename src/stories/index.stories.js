@@ -3259,18 +3259,21 @@ storiesOf('Purchase block', module)
         },
         data(){
             return{
-                product:{
-                    offers_purchases: '',
-                    purchaseLink: '',
-                    isReleased: true,
-                    isPurchased: true,
-                    isFree: true,
-                    hasDemo: true,
-                    inWishlist: false
-                }
+                inWishlist: false
             }
         },
-        template: `<div class="p-5" style="width: 400px"><c-purchase-block :product="product" /></div>`
+        template: `<div class="p-5" style="width: 400px">
+                        <c-purchase-block 
+                        :tags="['top', 'new', 'purchased']"
+                        :price="49.99" 
+                        :eligibleTokens="300"
+                        releaseDate="8 Jun, 2018"
+                        :offers_purchases="true"
+                        :inWishlist="inWishlist"
+                        @addToWishlist="inWishlist = true"
+                        @removeFromWishlist="inWishlist = false"
+                        />
+                        </div>`
     }))
 
 

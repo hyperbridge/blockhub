@@ -1,6 +1,12 @@
 <template>
     <c-block :title="title" class="purchase-block">
 
+        <div class="purchase-block__tags" v-if="tags">
+            <div v-for="(tag, index) in tags" :key="index">
+                {{ tag }}
+            </div>
+        </div>
+
         <div class="purchase-block__price">${{ price }}</div>
 
         <div class="purchase-block__info">
@@ -32,14 +38,14 @@
                 Download Demo
             </c-button>
 
-            <a :href="addToWishlist" class="wishlist-btn" v-if="!inWishlist">
+            <button @click="$emit('addToWishlist')" class="wishlist-btn" v-if="!inWishlist">
                 <i class="far fa-heart mr-2"></i>
                 Add to Wishlist
-            </a>
-            <a :href="removeFromWishlist" class="wishlist-btn is-in" v-if="inWishlist">
+            </button>
+            <button @click="$emit('removeFromWishlist')" class="wishlist-btn is-in" v-if="inWishlist">
                 <i class="fas fa-heart mr-2"></i>
                 Remove from Wishlist
-            </a>
+            </button>
         </div>
     </c-block>
 </template>
@@ -50,6 +56,9 @@
     export default {
         name: 'purchase-block',
         props: {
+            tags:{
+                type: Array
+            },
             title:{
                 type: String,
                 default: 'Pre-purchase'
@@ -64,7 +73,6 @@
             },
             releaseDate:{
                 type: String,
-                default: '8 Jun, 2011'
             },
             offers_purchases: {
                 type: Boolean,
@@ -91,9 +99,7 @@
                 default: true
             },
             purchaseLink: String,
-            fullReviewsLink: String,
-            addToWishlist: String,
-            removeFromWishlist: String
+            fullReviewsLink: String
         },
         components:{
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
@@ -114,6 +120,21 @@
         padding: 0;
         margin: 0;
         display: inline-block;
+    }
+    .purchase-block__tags{
+        display: flex;
+        flex-wrap: wrap;
+        margin: -5px -3px 20px;
+        div{
+            padding: 0px 7px;
+            margin: 3px;
+            font-size: 13px;
+            border-radius: 5px;
+            color: #1C2032;
+            background: #FADC72;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
     }
     .purchase-block__info{
         display: flex;
@@ -152,14 +173,24 @@
         .wishlist-btn{
             color: #fff;
             opacity: .8;
-            margin-top: 15px;
+            background: transparent;
+            padding: 0;
+            border: none;
+            margin: 15px auto 0 0;
+            width: auto;
             &:hover,
             &.is-in{
                 text-decoration: none;
                 opacity: 1;
+                cursor: pointer;
                 i{
                     color: #F75D5D;
                 }
+            }
+            &:active,
+            &:focus{
+                outline: none;
+                box-shadow: none;
             }
         }
     }
