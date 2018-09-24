@@ -108,7 +108,6 @@
 
 <script>
 import { mapMutations } from 'vuex';
-import { debouncer } from '@/mixins';
 
 export default {
     components: {
@@ -116,7 +115,6 @@ export default {
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-benchmark': (resolve) => require(['@/ui/components/benchmark'], resolve)
     },
-    mixins: [debouncer],
     data() {
         return {
             systemPermissions: false
@@ -126,9 +124,6 @@ export default {
         ...mapMutations(['UPDATE_CLIENT_SETTINGS']),
         updateClientSettings(prop) {
             this.$store.commit('network/UPDATE_CLIENT_SETTINGS', prop);
-            this.debounce(() => {
-                window.BlockHub.db.save();
-            });
         },
         clearDatabase() {debugger
             let DBDeleteRequest = window.indexedDB.deleteDatabase("LokiCatalog")
