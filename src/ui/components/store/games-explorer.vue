@@ -66,6 +66,24 @@
                                 isNested
                             />
                         </c-option-tag>
+                        <c-option-tag
+                            v-if="sortBy.property"
+                            title="Sort by:"
+                            @delete="sortBy.property = null"
+                        >
+                            <c-option-tag
+                                title="Property:"
+                                :text="sortBy.property | upperFirstChar"
+                                @delete="sortBy.property = null"
+                                isNested
+                            />
+                            <c-option-tag
+                                title="Direction:"
+                                :text="sortBy.asc ? 'Ascending' : 'Descending'"
+                                @delete="sortBy.asc = !sortBy.asc"
+                                isNested
+                            />
+                        </c-option-tag>
                     </div>
                 </div>
             </transition>
@@ -132,14 +150,16 @@
             clearFilters() {
                 this.selectedGenres = [];
                 this.phrase = '';
+                this.sortBy.property = null;
+                this.sortBy.asc = true;
             },
             setSort(prop, direction) {
                 const { property, asc } = this.sortBy;
                 this.sortBy.property = property === prop && direction === asc
-                    ? null
-                    : prop
+                 ? null
+                 : prop
                 this.sortBy.asc = direction;
-            }
+            },
         },
         computed: {
             products() {
@@ -172,8 +192,8 @@
                 }, []);
             },
             filtersActive() {
-                const { phrase, selectedGenres } = this;
-                return phrase.length || selectedGenres.length;
+                const { phrase, selectedGenres, sortBy: { property } } = this;
+                return phrase.length || selectedGenres.length || property;
             }
         },
     }
@@ -200,7 +220,7 @@
         background: rgba(255,255,255,.1);
     }
 
-    .slide-in-enter-active, .slide-in-active {
+    .slide-in-enter-active {
         transition: transform .25s ease, opacity .25s ease;
     }
     .slide-in-enter, .slide-leave-to {
