@@ -26,7 +26,7 @@
         },
         computed: {
             paginationMode() {
-                return this.$store.state.user.settings.pagination;
+                return this.$store.state.network.account.settings.client.pagination;
             }
         }
     }

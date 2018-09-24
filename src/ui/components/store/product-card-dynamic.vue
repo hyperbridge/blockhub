@@ -67,7 +67,7 @@ export default {
     },
     computed: {
         autoplay() {
-            return this.$store.state.user.settings.autoplay;
+            return this.$store.state.network.account.settings.client.autoplay;
         }
     }
 }
