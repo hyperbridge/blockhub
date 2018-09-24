@@ -13,9 +13,15 @@
             >
                 <template slot="additional-action">
                     <span class="sort-title">Sort by:</span>
-                    <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
-                    <c-heading-bar-fields name="Best Reviews" icon="star" @clickUp=""  @clickDown="" />
-                    <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
+                    <c-heading-bar-fields
+                        v-for="(opt, index) in sortOptions"
+                        :key="index"
+                        :name="opt.title"
+                        :icon="opt.icon"
+                        @clickUp="setSort(opt.property, true)"
+                        @clickDown="setSort(opt.property, false)"
+                        :activeUp="sortBy.property === opt.property ? sortBy.asc : null"
+                    />
                 </template>
             </c-heading-bar>
             <div class="product-grid__filters">
@@ -26,7 +32,7 @@
                                 v-for="genre in availableGenres"
                                 :key="genre"
                                 :href="`#${genre}`"
-                                :class="{ 'product-genre__btn--active': genre === activeGenre }"
+                                :class="{ 'product-genre__btn--active': selectedGenres.includes(genre) }"
                                 @click.prevent="setGenre(genre)"
                             >{{ genre }}</a>
                         </div>
@@ -54,11 +60,46 @@
                         >
                             <c-option-tag
                                 v-for="(genre, index) in selectedGenres"
-                                :key="genre"
+                                :key="index"
                                 :text="genre"
                                 @delete="selectedGenres.splice(index, 1)"
                                 isNested
                             />
+                        </c-option-tag>
+                        <c-option-tag
+                            v-if="sortBy.property"
+                            title="Sort by:"
+                            @delete="sortBy.property = null"
+                        >
+                            <c-option-tag
+                                title="Property:"
+                                @delete="sortBy.property = null"
+                                isNested
+                            >
+                                <select v-model="sortBy.property">
+                                    <option
+                                        v-for="prop in sortProps"
+                                        :key="prop"
+                                        :value="prop"
+                                    >
+                                        {{ prop | upperFirstChar }}
+                                    </option>
+                                </select>
+                            </c-option-tag>
+                            <c-option-tag
+                                title="Direction:"
+                                @delete="sortBy.asc = !sortBy.asc"
+                                isNested
+                                hideButton
+                            >
+                                {{ sortBy.asc ? 'Ascending' : 'Descending' }}
+                                <c-icon
+                                    name="arrow-up"
+                                    class="sort-button"
+                                    :class="{ 'desc': !sortBy.asc }"
+                                    @click="sortBy.asc = !sortBy.asc"
+                                />
+                            </c-option-tag>
                         </c-option-tag>
                     </div>
                 </div>
@@ -105,36 +146,59 @@
             return {
                 category: 'top_selling_products',
                 phrase: '',
-                activeGenre: null,
                 selectedGenres: [],
                 sortBy: {
-                    property: 'date',
-                    desc: true
-                }
+                    property: null,
+                    asc: true
+                },
+                sortOptions: [
+                    { title: 'Name', property: 'name', icon: 'language' },
+                    { title: 'Price', property: 'price', icon: 'dollar-sign' },
+                ]
             }
         },
         methods: {
             setGenre(genre) {
-                this.activeGenre = this.activeGenre === genre ? null : genre;
+                const genreKey = this.selectedGenres.indexOf(genre);
+                genreKey > -1
+                 ? this.selectedGenres.splice(genreKey, 1)
+                 : this.selectedGenres.push(genre)
             },
             clearFilters() {
-                this.activeGenre = null;
+                this.selectedGenres = [];
                 this.phrase = '';
-            }
+                this.sortBy.property = null;
+                this.sortBy.asc = true;
+            },
+            setSort(prop, direction) {
+                const { property, asc } = this.sortBy;
+                this.sortBy.property = property === prop && direction === asc
+                 ? null
+                 : prop
+                this.sortBy.asc = direction;
+            },
         },
         computed: {
             products() {
                 return this.$store.state.marketplace[this.category];
             },
             filteredProducts() {
+                const { property, asc } = this.sortBy;
+                const sortDir = dir => asc ? dir : dir * -1;
                 return this.products
                     .filter(product =>
                         product.name.toLowerCase().includes(this.phrase.toLowerCase())
                     )
-                    .filter(product => this.activeGenre
-                        ? product.developer_tags.includes(this.activeGenre)
+                    .filter(product => this.selectedGenres.length
+                        ? product.developer_tags.some(genre => this.selectedGenres.includes(genre))
                         : true
                     )
+                    .sort((a, b) => property
+                        ? a[property] > b[property]
+                            ? sortDir(1)
+                            : a[property] < b[property] ? sortDir(-1) : 0
+                        : 0
+                    );
             },
             availableGenres() {
                 return this.products.reduce((tags, product) => {
@@ -145,8 +209,11 @@
                 }, []);
             },
             filtersActive() {
-                const { phrase, activeGenre } = this;
-                return phrase.length || activeGenre;
+                const { phrase, selectedGenres, sortBy: { property } } = this;
+                return phrase.length || selectedGenres.length || property;
+            },
+            sortProps() {
+                return this.sortOptions.map(option => option.property);
             }
         },
     }
@@ -173,7 +240,7 @@
         background: rgba(255,255,255,.1);
     }
 
-    .slide-in-enter-active, .slide-in-active {
+    .slide-in-enter-active {
         transition: transform .25s ease, opacity .25s ease;
     }
     .slide-in-enter, .slide-leave-to {
@@ -188,5 +255,15 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
+    }
+
+    .sort-button {
+        color: rgba(1,1,1,.8);
+        margin-left: 6px;
+        transition: transform .2s ease;
+        cursor: pointer;
+        &.desc {
+            transform: rotate(180deg);
+        }
     }
 </style>

@@ -25,13 +25,19 @@ export default {
     props: {
         position: {
             type: String,
-            default: 'top'
+            default: 'top',
+            validator(val) {
+                return ['top', 'right', 'bottom', 'left'].includes(val);
+            }
         },
         text: String,
         title: String,
         theme: {
             type: String,
-            default: 'light'
+            default: 'light',
+            validator(val) {
+                return ['light', 'dark'].includes(val);
+            }
         },
         icon_hide: Boolean,
         default_class: String

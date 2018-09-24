@@ -1,11 +1,7 @@
 <script>
 export default {
     name: 'c-img',
-    props: {
-        src: String,
-        alt: String,
-        class: String
-    },
+    props: ['src'],
     data() {
         return {
             blank: '/static/img/no_img.jpg',
@@ -23,9 +19,7 @@ export default {
                 load: () => this.loaded = true
             },
             attrs: {
-                src: this.dynamicSrc,
-                alt: this.alt,
-                class: this.class
+                src: this.dynamicSrc
             }
         });
     },

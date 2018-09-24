@@ -1,8 +1,8 @@
 <template>
-    <div class="games-list">
+    <transition-group tag="div" class="games-list" name="games-list">
         <div
-            v-for="(item, index) in items"
-            :key="index"
+            v-for="item in items"
+            :key="item.id"
             :class="{ 'hovered' : hovered }"
             :style="{ width: 'calc( 100% / ' + itemInRow + ')', background: itemBg }"
             class="games-list__item"
@@ -12,7 +12,7 @@
             </div>
             <div class="img">
                 <a :href="`/#/product/${item.id}`">
-                    <img :src="item.images.medium_tile" />
+                    <c-img :src="item.images.medium_tile"/>
                 </a>
             </div>
             <div class="info">
@@ -43,14 +43,14 @@
                 </div>
             </div>
         </div>
-    </div>
+    </transition-group>
 </template>
 
 <script>
     export default {
         name: 'games-grid-description',
         props: {
-            items:{
+            items: {
                 type: Array,
                 required: true
             },
@@ -74,9 +74,7 @@
                 type: Boolean,
                 default: true
             },
-            itemBg: {
-                type: String
-            }
+            itemBg: String
         },
         components: {
             'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
@@ -90,6 +88,17 @@
         display: flex;
         width: 100%;
         flex-wrap: wrap;
+    }
+    .games-list-move {
+        transition: transform 1s ease, opacity 1s ease !important;
+    }
+    .games-list-enter {
+        transform: scale(0);
+        opacity: 0;
+    }
+    .games-list-leave-active {
+        position: absolute !important;
+        opacity: 0;
     }
     .games-list__item{
         display: flex;
@@ -149,41 +158,31 @@
                 justify-content: space-between;
                 align-items: center;
                 padding-top: 10px;
-                .rating_stars{
+                .rating_stars {
                     color: #FADC72;
                     font-size: 15px;
                 }
-                .btn{
+                .btn {
                     padding: 0px 8px;
                 }
-                .time{
-                    i{
-                        margin-right: 5px;
-                    }
+                .time i {
+                    margin-right: 5px;
                 }
             }
         }
         &.hovered{
             -webkit-transition: transform 200ms ease;
-            -webkit-transform: scale(1);
             -ms-transition: transform 200ms ease;
-            -ms-transform: scale(1);
             -moz-transition: transform 200ms ease;
-            -moz-transform: scale(1);
             transition: transform 200ms ease;
-            transform: scale(1);
             &:hover {
-                -webkit-transition: all 200ms ease-in;
-                -webkit-transform: scale(1.03);
-                -ms-transition: all 200ms ease-in;
+                -webkit-transform: scale(1.05);
                 -ms-transform: scale(1.05);
-                -moz-transition: all 200ms ease-in;
-                -moz-transform: scale(1.03);
-                transition: all 200ms ease-in;
-                transform: scale(1.03);
+                -moz-transform: scale(1.05);
+                transform: scale(1.05);
             }
         }
-        a{
+        a {
             text-decoration: none;
         }
     }

@@ -4,13 +4,12 @@
         <p v-else-if="customLabel && label_position == 'left'" style="padding-right: 10px" :style="{ fontSize: label_size }">
             <slot name="label"></slot>
         </p>
-        <label class="switch my-0" :class="[ 'switch-' + size ]">
+        <label class="switch my-0" :class="`switch-${size}`">
             <input
-                :type="type"
-                :id="id"
-                name="switch_1"
-                :checked="value"
-                @change="$emit('change', !value)"
+                type="checkbox"
+                v-bind="$attrs"
+                :checked="checked"
+                @change="$emit('change', $event.target.checked)"
             />
             <span></span>
         </label>
@@ -23,43 +22,45 @@
 
 <script>
     export default {
+        name: 'switch',
+        inheritAttrs: false,
         props: {
-            type: { default: 'checkbox'},
-            disabled: { default: false },
-            name: { type: String },
-            id: { type: String},
-            value: {
-                type: Boolean,
-                default: false
-            },
+            checked: Boolean,
             size: {
                 type: String,
-                default: 'sm'
+                default: 'sm',
+                validator(val) {
+                    return ['sm', 'lg'].includes(val);
+                }
             },
-            customLabel:{
-                type: Boolean,
-                default: false
-            },
-            label: { type: String },
+            customLabel: Boolean,
+            label: String,
             label_position: {
                 type: String,
-                default: 'right'
+                default: 'right',
+                validator(val) {
+                    return ['right', 'left'].includes(val);
+                }
             },
             label_size: {
                 type: String,
                 default: '14px'
             }
+        },
+        model: {
+            prop: 'checked',
+            event: 'change'
         }
     }
 </script>
 
 <style lang="scss" scoped>
-    .switch-container{
+    .switch-container {
         display: flex;
         width: auto;
         align-items: center;
         color: #fff;
-        p{
+        p {
             margin-bottom: 0;
             padding-bottom: 0;
         }
