@@ -1242,6 +1242,8 @@
             {
                 "id": 1,
                 "name": "Might & Magic: Heroes VI",
+                "price": 13.99,
+                "old_price": 16.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/might-&-magic-heroes-vi-4896/med-tile.jpg",
@@ -1364,12 +1366,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "might-&-magic-heroes-vi-4896",
-                "steam_id": 48220
+                "name_url": "might-&-magic-heroes-vi-4896"
             },
             {
                 "id": 2,
                 "name": "Capsized",
+                "price": 4.99,
+                "old_price": 7.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/capsized-5004/med-tile.jpg",
@@ -1451,12 +1454,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "capsized-5004",
-                "steam_id": 95300
+                "name_url": "capsized-5004"
             },
             {
                 "id": 3,
                 "name": "DOOM",
+                "price": 39.99,
+                "old_price": 49.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/doom-20087/med-tile.jpg",
@@ -1585,12 +1589,13 @@
                     "discussions": [
                     ]
                 },
-                "name_url": "doom-20087",
-                "steam_id": 379720
+                "name_url": "doom-20087"
             },
             {
                 "id": 4,
                 "name": "A Game of Thrones - Genesis",
+                "price": 12.99,
+                "old_price": 14.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/a-game-of-thrones---genesis-4221/med-tile.jpg",
@@ -1680,12 +1685,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "a-game-of-thrones---genesis-4221",
-                "steam_id": 58550
+                "name_url": "a-game-of-thrones---genesis-4221"
             },
             {
                 "id": 5,
                 "name": "Teeworlds",
+                "price": 9.99,
+                "old_price": 14.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/teeworlds-20137/med-tile.jpg",
@@ -1873,12 +1879,13 @@
                     "discussions": [
                     ]
                 },
-                "name_url": "teeworlds-20137",
-                "steam_id": 380840
+                "name_url": "teeworlds-20137"
             },
             {
                 "id": 6,
                 "name": "Wargame: European Escalation",
+                "price": 14.99,
+                "old_price": 19.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/wargame-european-escalation-4226/med-tile.jpg",
@@ -2001,12 +2008,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "wargame-european-escalation-4226",
-                "steam_id": 58610
+                "name_url": "wargame-european-escalation-4226"
             },
             {
                 "id": 7,
                 "name": "ArcaniA",
+                "price": 7.99,
+                "old_price": 9.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/arcania-4380/med-tile.jpg",
@@ -2109,12 +2117,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "arcania-4380",
-                "steam_id": 39690
+                "name_url": "arcania-4380"
             },
             {
                 "id": 8,
                 "name": "Pride of Nations",
+                "price": 9.99,
+                "old_price": 14.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/pride-of-nations-4591/med-tile.jpg",
@@ -2199,12 +2208,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "pride-of-nations-4591",
-                "steam_id": 73190
+                "name_url": "pride-of-nations-4591"
             },
             {
                 "id": 9,
                 "name": "Car Mechanic Simulator 2015 Demo",
+                "price": 0,
+                "old_price": 4.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/car-mechanic-simulator-2015-demo-20147/med-tile.jpg",
@@ -2326,12 +2336,13 @@
                     "discussions": [
                     ]
                 },
-                "name_url": "car-mechanic-simulator-2015-demo-20147",
-                "steam_id": 380970
+                "name_url": "car-mechanic-simulator-2015-demo-20147"
             },
             {
                 "id": 10,
                 "name": "Kingdom Come: Deliverance",
+                "price": 39.99,
+                "old_price": 46.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/kingdom-come-deliverance-20030/med-tile.jpg",
@@ -2457,12 +2468,13 @@
                     "discussions": [
                     ]
                 },
-                "name_url": "kingdom-come-deliverance-20030",
-                "steam_id": 379430
+                "name_url": "kingdom-come-deliverance-20030"
             },
             {
                 "id": 11,
                 "name": "Fishing Planet",
+                "price": 13.99,
+                "old_price": 16.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/fishing-planet-20121/med-tile.jpg",
@@ -2609,12 +2621,13 @@
                     "discussions": [
                     ]
                 },
-                "name_url": "fishing-planet-20121",
-                "steam_id": 380600
+                "name_url": "fishing-planet-20121"
             },
             {
                 "id": 12,
                 "name": "Men of War: Assault Squad",
+                "price": 13.99,
+                "old_price": 16.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/men-of-war-assault-squad-4305/med-tile.jpg",
@@ -2717,12 +2730,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "men-of-war-assault-squad-4305",
-                "steam_id": 64000
+                "name_url": "men-of-war-assault-squad-4305"
             },
             {
                 "id": 13,
                 "name": "Sniper Elite V2",
+                "price": 24.99,
+                "old_price": 29.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/sniper-elite-v2-4275/med-tile.jpg",
@@ -2825,12 +2839,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "sniper-elite-v2-4275",
-                "steam_id": 63380
+                "name_url": "sniper-elite-v2-4275"
             },
             {
                 "id": 14,
                 "name": "Chime",
+                "price": 14.99,
+                "old_price": 19.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/chime-4259/med-tile.jpg",
@@ -2913,12 +2928,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "chime-4259",
-                "steam_id": 62100
+                "name_url": "chime-4259"
             },
             {
                 "id": 15,
                 "name": "Who's That Flying?!",
+                "price": 9.99,
+                "old_price": 14.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/who's-that-flying!-4190/med-tile.jpg",
@@ -2980,12 +2996,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "who's-that-flying!-4190",
-                "steam_id": 57700
+                "name_url": "who's-that-flying!-4190"
             },
             {
                 "id": 16,
                 "name": "Fallout New Vegas: Dead Money",
+                "price": 24.99,
+                "old_price": 29.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/fallout-new-vegas-dead-money-4513/med-tile.jpg",
@@ -3063,12 +3080,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "fallout-new-vegas-dead-money-4513",
-                "steam_id": 72770
+                "name_url": "fallout-new-vegas-dead-money-4513"
             },
             {
                 "id": 17,
                 "name": "Fallout New Vegas: Honest Hearts",
+                "price": 24.99,
+                "old_price": 29.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/fallout-new-vegas-honest-hearts-4514/med-tile.jpg",
@@ -3149,12 +3167,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "fallout-new-vegas-honest-hearts-4514",
-                "steam_id": 72771
+                "name_url": "fallout-new-vegas-honest-hearts-4514"
             },
             {
                 "id": 18,
                 "name": "Call of Duty®: Black Ops",
+                "price": 34.99,
+                "old_price": 39.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/call-of-duty%C2%AE-black-ops-4930/med-tile.jpg",
@@ -3244,12 +3263,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "call-of-duty%C2%AE-black-ops-4930",
-                "steam_id": 42700
+                "name_url": "call-of-duty%C2%AE-black-ops-4930"
             },
             {
                 "id": 19,
                 "name": "Homefront",
+                "price": 18.99,
+                "old_price": 22.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/homefront-4059/med-tile.jpg",
@@ -3347,12 +3367,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "homefront-4059",
-                "steam_id": 55100
+                "name_url": "homefront-4059"
             },
             {
                 "id": 20,
                 "name": "Portal 2",
+                "price": 24.99,
+                "old_price": 29.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/portal-2-4841/med-tile.jpg",
@@ -3562,12 +3583,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "portal-2-4841",
-                "steam_id": 620
+                "name_url": "portal-2-4841"
             },
             {
                 "id": 21,
                 "name": "Mafia II",
+                "price": 19.99,
+                "old_price": 24.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/mafia-ii-4001/med-tile.jpg",
@@ -3686,8 +3708,7 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "mafia-ii-4001",
-                "steam_id": 50130
+                "name_url": "mafia-ii-4001"
             },
             {
                 "id": 22,
@@ -3848,6 +3869,8 @@
             {
                 "id": 23,
                 "name": "Dungeon Defenders",
+                "price": 9.99,
+                "old_price": 14.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/dungeon-defenders-4398/med-tile.jpg",
@@ -3955,12 +3978,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "dungeon-defenders-4398",
-                "steam_id": 65800
+                "name_url": "dungeon-defenders-4398"
             },
             {
                 "id": 24,
                 "name": "Worms Ultimate Mayhem",
+                "price": 4.99,
+                "old_price": 9.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/worms-ultimate-mayhem-4439/med-tile.jpg",
@@ -4052,12 +4076,13 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "worms-ultimate-mayhem-4439",
-                "steam_id": 70600
+                "name_url": "worms-ultimate-mayhem-4439"
             },
             {
                 "id": 25,
                 "name": "Saints Row: The Third",
+                "price": 24.99,
+                "old_price": 29.99,
                 "images": {
                     "header": null,
                     "medium_tile": "/static/img/products/saints-row-the-third-4089/med-tile.jpg",
@@ -4181,8 +4206,7 @@
                 "community": {
                     "discussions": []
                 },
-                "name_url": "saints-row-the-third-4089",
-                "steam_id": 55230
+                "name_url": "saints-row-the-third-4089"
             }
         ],
         "collections": [
