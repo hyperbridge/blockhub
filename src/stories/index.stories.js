@@ -3270,7 +3270,7 @@ storiesOf('Purchase block', module)
                 }
             }
         },
-        template: `<div class="col-3 p-5"><c-purchase-block :product="product" /></div>`
+        template: `<div class="p-5" style="width: 400px"><c-purchase-block :product="product" /></div>`
     }))
 
 

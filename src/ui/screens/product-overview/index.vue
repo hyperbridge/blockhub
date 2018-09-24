@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
                                 
-                                <c-rating-block :items="product.rating" :parent_url="`/#/product/${product.id}`" />
+                                <c-rating-block :items="product.rating" :parent_url="`/#/product/${product.id}`" @goto="goToReviews" />
 
                                 <c-frequently-traded-assets :items="product.frequently_traded_assets" :assets_url="`/#/product/${product.id}/assets`" />
 
@@ -302,6 +302,9 @@
             unsaved(){
                 if (this.savedState === false && this.$store.state.marketplace.editor_mode === 'editing')
                     return 'ololololo'
+            },
+            goToReviews(){
+                alert('Go to somewhere')
             }
         },
         computed: {
