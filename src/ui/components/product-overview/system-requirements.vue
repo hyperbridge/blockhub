@@ -4,15 +4,14 @@
             <h2 class="title">
                 System Requirements <i class="fas fa-laptop title-icon"></i>
             </h2>
-            <c-tabs-universal :tab_names="tab_names">
+            <c-tabs-universal :tab_names="['Mac', 'Win', 'Linux']">
                 <c-tab-universal
-                    v-for="(platform, index) in newRequirements"
-                    :key="index"
+                    v-for="(os, index) in ['Mac', 'Win', 'Linux']"
                     :tab_id="index"
                 >
-                    <ul class="system-requirements__list" v-if="platform">
+                    <ul class="system-requirements__list" v-if="platform(os)">
                         <li
-                            v-for="(value, property) in platform"
+                            v-for="(value, property) in platform(os)"
                             v-if="value"
                             :key="property"
                             class="system-requirements__list-item"
@@ -44,37 +43,18 @@ export default {
             required: true
         }
     },
-    data(){
-        return {
-            newRequirements:[
-                {
-                    "os": "win"
-                },
-                {
-                    "os": "mac"
-                },
-                {
-                    "os": "linux"
-                }
-            ]
-        }
-    },
     components: {
         'c-tab-universal': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
         'c-tabs-universal': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve)
     },
-    created(){
-        let requirements = this.requirements.sort(),
-            newRequirements = this.newRequirements.sort(),
-            finallyarray = [];
-            newRequirements.forEach( (o, i) => {
-                console.log(o,i)
-            })
-            this.newRequirements = finallyarray;
-    },
-    computed:{
-        tab_names() {
-            return this.newRequirements.map(req => req.os.toUpperCase());
+    methods:{
+        platform(val){
+            return this.requirements.find( (obj) => {
+                if ( obj['os'] === val.toLowerCase())
+                    return obj
+                else
+                    return false;
+            });
         }
     },
     filters: {
