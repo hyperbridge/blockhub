@@ -9,6 +9,7 @@
         {{ text }}
         <slot/>
         <c-icon
+            v-if="!hideButton"
             name="times"
             class="option-tag__del-btn"
             @click="$emit('delete')"
@@ -22,7 +23,8 @@
         props: {
             title: String,
             text: String,
-            isNested: Boolean
+            isNested: Boolean,
+            hideButton: Boolean
         }
     }
 </script>

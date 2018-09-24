@@ -73,16 +73,33 @@
                         >
                             <c-option-tag
                                 title="Property:"
-                                :text="sortBy.property | upperFirstChar"
                                 @delete="sortBy.property = null"
                                 isNested
-                            />
+                            >
+                                <select v-model="sortBy.property">
+                                    <option
+                                        v-for="prop in sortProps"
+                                        :key="prop"
+                                        :value="prop"
+                                    >
+                                        {{ prop | upperFirstChar }}
+                                    </option>
+                                </select>
+                            </c-option-tag>
                             <c-option-tag
                                 title="Direction:"
-                                :text="sortBy.asc ? 'Ascending' : 'Descending'"
                                 @delete="sortBy.asc = !sortBy.asc"
                                 isNested
-                            />
+                                hideButton
+                            >
+                                {{ sortBy.asc ? 'Ascending' : 'Descending' }}
+                                <c-icon
+                                    name="arrow-up"
+                                    class="sort-button"
+                                    :class="{ 'desc': !sortBy.asc }"
+                                    @click="sortBy.asc = !sortBy.asc"
+                                />
+                            </c-option-tag>
                         </c-option-tag>
                     </div>
                 </div>
@@ -194,6 +211,9 @@
             filtersActive() {
                 const { phrase, selectedGenres, sortBy: { property } } = this;
                 return phrase.length || selectedGenres.length || property;
+            },
+            sortProps() {
+                return this.sortOptions.map(option => option.property);
             }
         },
     }
@@ -235,5 +255,15 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
+    }
+
+    .sort-button {
+        color: rgba(1,1,1,.8);
+        margin-left: 6px;
+        transition: transform .2s ease;
+        cursor: pointer;
+        &.desc {
+            transform: rotate(180deg);
+        }
     }
 </style>
