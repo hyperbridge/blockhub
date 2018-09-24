@@ -10,6 +10,7 @@
             @clickUp="$emit('clickUp')"
             @clickDown="$emit('clickDown')"
             class="additional-action__button"
+            :activeUp="activeUp"
         />
     </div>
 </template>
@@ -20,7 +21,11 @@
         props: {
             name: String,
             icon: String,
-            customClass: String
+            customClass: String,
+            activeUp: {
+                type: Boolean,
+                default: undefined
+            }
         },
         components: {
             'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'], resolve)
