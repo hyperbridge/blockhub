@@ -1,7 +1,7 @@
 <template>
 
-    <div class="card invert traded-assets" v-if="items">
-        <div class="card-body">
+    <div class="card invert traded-assets">
+        <div class="card-body" v-if="items.length > 0">
             <h2 class="title">Frequently Traded Assets</h2>
             <div class="traded-assets__filter">
                 <slot name="filter"></slot>
@@ -14,6 +14,10 @@
                 </li>
             </ul>
             <a :href="assets_url" class="btn btn-outline-white">Go To Assets</a>
+        </div>
+        <div class="card-body" v-else>
+            <h2 class="title">Frequently Traded Assets</h2>
+            <h4>No frequently traded assets yet.</h4>
         </div>
     </div>
 
