@@ -26,7 +26,7 @@
                                 v-for="genre in availableGenres"
                                 :key="genre"
                                 :href="`#${genre}`"
-                                :class="{ 'product-genre__btn--active': genre === activeGenre }"
+                                :class="{ 'product-genre__btn--active': selectedGenres.includes(genre) }"
                                 @click.prevent="setGenre(genre)"
                             >{{ genre }}</a>
                         </div>
@@ -115,10 +115,13 @@
         },
         methods: {
             setGenre(genre) {
-                this.activeGenre = this.activeGenre === genre ? null : genre;
+                const genreKey = this.selectedGenres.indexOf(genre);
+                genreKey > -1
+                 ? this.selectedGenres.splice(genreKey, 1)
+                 : this.selectedGenres.push(genre)
             },
             clearFilters() {
-                this.activeGenre = null;
+                this.selectedGenres = [];
                 this.phrase = '';
             }
         },
@@ -131,8 +134,8 @@
                     .filter(product =>
                         product.name.toLowerCase().includes(this.phrase.toLowerCase())
                     )
-                    .filter(product => this.activeGenre
-                        ? product.developer_tags.includes(this.activeGenre)
+                    .filter(product => this.selectedGenres.length
+                        ? product.developer_tags.some(genre => this.selectedGenres.includes(genre))
                         : true
                     )
             },
@@ -145,8 +148,8 @@
                 }, []);
             },
             filtersActive() {
-                const { phrase, activeGenre } = this;
-                return phrase.length || activeGenre;
+                const { phrase, selectedGenres } = this;
+                return phrase.length || selectedGenres.length;
             }
         },
     }

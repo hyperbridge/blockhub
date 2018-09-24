@@ -33,6 +33,7 @@
         border-radius: 3px;
         padding: 5px;
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         color: #000;
         &:not(:last-child) {
@@ -43,6 +44,7 @@
         }
         &.option-tag--shadow {
             box-shadow: 0 0 10px 0 rgba(1,1,1,.3);
+            margin: 4px 8px 4px 0;
         }
     }
     .option-tag__title {
