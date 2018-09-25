@@ -104,23 +104,14 @@
                                 </div>
                             </div>
                             <div class="col-5">
-
-                                <div class="card invert purchase-block" hidden>
-                                    <div class="card-body">
-                                        <a class="tag">Pre-purchase <!-- New --></a> 
-                                        <p>$49.99</p>
-                                        <p>Eligible for up to HBX +100</p>
-                                        <p v-if="product.offers_purchases">Offers In-Game Purchases</p>
-                                        <p>Release date: 10/02/2018</p>
-                                        <a :href="purchaseLink" class="btn btn-outline-white" v-if="isReleased">Proceed to Purchase</a>
-                                        <a :href="purchaseLink" class="btn btn-outline-white" v-if="isReleased">Free Download</a>
-                                        <span v-if="isPurchased">Purchased</span>
-                                        <a :href="fullReviewsLink" class="btn btn-outline-white" v-if="hasDemo">Download Demo</a>
-                                        <a href="#">Add to Wishlist</a>
-                                    </div>
-                                </div>
+                                <c-purchase-block
+                                    title="Purchase"
+                                    isReleased="true"
+                                    :price="product.price"
+                                    :tags="['New']"
+                                />
                                 
-                                <c-rating-block :items="product.rating" :parent_url="`/#/product/${product.id}`" @goto="goToReviews" />
+                                <c-rating-block :items="product.rating" :parent_url="`/#/product/${product.id}`" />
 
                                 <c-frequently-traded-assets :items="product.frequently_traded_assets" :assets_url="`/#/product/${product.id}/assets`" />
 
@@ -229,6 +220,7 @@
             'c-promotion-box': (resolve) => require(['@/ui/components/promotion-box'], resolve),
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-rating-block': (resolve) => require(['@/ui/components/rating-block'], resolve),
+            'c-purchase-block': (resolve) => require(['@/ui/components/purchase-block'], resolve),
             'c-frequently-traded-assets': (resolve) => require(['@/ui/components/frequently-traded-assets'], resolve),
             'c-community-spotlight': (resolve) => require(['@/ui/components/community-spotlight'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
@@ -302,9 +294,6 @@
             unsaved(){
                 if (this.savedState === false && this.$store.state.marketplace.editor_mode === 'editing')
                     return 'ololololo'
-            },
-            goToReviews(){
-                alert('Go to somewhere')
             }
         },
         computed: {

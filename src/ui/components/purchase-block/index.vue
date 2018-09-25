@@ -1,5 +1,5 @@
 <template>
-    <c-block :title="title" class="purchase-block">
+    <c-block :title="title" class="card invert purchase-block">
 
         <div class="purchase-block__tags" v-if="tags">
             <div v-for="(tag, index) in tags" :key="index">
@@ -7,12 +7,12 @@
             </div>
         </div>
 
-        <div class="purchase-block__price">${{ price }}</div>
+        <div class="purchase-block__price"><span v-if="price">${{ price }}</span><span v-else>$0.00</span></div>
 
         <div class="purchase-block__info">
-            <div>Eligible for up to <i class="fas fa-coins mx-1" style="color: #FADC72"></i> HBX +{{ eligibleTokens }}</div>
+            <div v-if="eligibleTokens">Eligible for up to <i class="fas fa-coins mx-1" style="color: #FADC72"></i> HBX +{{ eligibleTokens }}</div>
             <div v-if="offers_purchases">Offers In-Game Purchases</div>
-            <div class="release-date">Release date: {{ dateFormat(releaseDate) }}</div>
+            <div class="release-date" v-if="releaseDate">Release date: {{ dateFormat(releaseDate) }}</div>
 
             <div v-if="isPurchased" class="purchased-status">
                 <i class="fas fa-check"></i>
@@ -26,11 +26,11 @@
         </div>
 
         <div class="purchase-block__buttons-group">
-            <c-button status="success" :href="purchaseLink" icon="shopping-cart" size="lg" v-if="isReleased">
+            <c-button status="success" :href="purchaseLink" icon="shopping-cart" size="lg" v-if="isReleased && price">
                 Proceed to Purchase
             </c-button>
 
-            <c-button status="success" size="lg" icon="download" :href="purchaseLink" v-if="isPurchased">
+            <c-button status="success" size="lg" icon="download" :href="purchaseLink" v-if="!price">
                 Free Download
             </c-button>
 
@@ -61,42 +61,42 @@
             },
             title:{
                 type: String,
-                default: 'Pre-purchase'
+                default: null
             },
             price: {
                 type: Number,
-                default: 0.00
+                default: null
             },
             eligibleTokens: {
                 type: Number,
-                default: 100
+                default: 0
             },
-            releaseDate:{
+            releaseDate: {
                 type: String,
             },
             offers_purchases: {
                 type: Boolean,
-                default: true
+                default: false
             },
             isUnavailable: {
                 type: Boolean,
-                default: true
+                default: false
             },
             isPurchased: {
                 type: Boolean,
-                default: true
+                default: false
             },
             isReleased: {
                 type: Boolean,
-                default: true
+                default: false
             },
             hasDemo: {
                 type: Boolean,
-                default: true
+                default: false
             },
             inWishlist: {
                 type: Boolean,
-                default: true
+                default: false
             },
             purchaseLink: String,
             fullReviewsLink: String
@@ -105,8 +105,8 @@
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         },
         methods: {
-            dateFormat(val) {
-                return moment(val.date).format('MM/DD/YYYY')
+            dateFormat(date) {
+                return moment(date).format('MM/DD/YYYY')
             }
         },
     }
