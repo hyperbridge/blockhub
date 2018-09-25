@@ -60,6 +60,7 @@
                 }
             }
         ],
+        "active_modal": null,
         "account": {
             "private_key": "",
             "wallets": [

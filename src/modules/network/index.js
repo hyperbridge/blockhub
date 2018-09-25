@@ -231,6 +231,9 @@ export const mutations = {
         const success = (id) => {
         }
     },
+    activateModal(state, payload) {
+        state.active_modal = payload
+    },
     UPDATE_CLIENT_SETTINGS (state, property) {
         state.account.settings.client[property] = !state.account.settings.client[property];
     }
