@@ -1,6 +1,6 @@
 <template>
-    <div class="card invert rating-block" v-if="items">
-        <div class="card-body">
+    <div class="card invert rating-block">
+        <div class="card-body" v-if="items.length > 0">
             <h2 class="title">Rating</h2>
             <ul class="rating-block__list">
                 <li v-for="(item, index) in items" :key="index">
@@ -16,6 +16,11 @@
             </ul>
             <a :href="fullReviewsLink" class="btn btn-outline-white" v-if="fullReviewsLink">See Full Reviews</a>
             <a :href="rateGameLink" class="btn btn-outline-white" v-if="rateGameLink">Rate the game</a>
+        </div>
+        <div class="card-body" v-else>
+            <h2 class="title">Rating</h2>
+            <h4>No ratings yet.</h4>
+            <button @click="$emit('goto')" class="btn btn-sm btn-outline-white">Be the first!</button>
         </div>
     </div>
 </template>
@@ -76,6 +81,25 @@ export default {
         float: right;
         text-align: left;
         width: 80px;
+    }
+    button.btn-outline-white {
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #fff;
+        background: transparent;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        font-weight: bold;
+        display: inline-block;
+        float: left;
+        line-height: 24px;
+        padding: 0 8px;
+        width: auto;
+        margin: 5px 10px 3px 0;
+        &:hover{
+            color: #000;
+            background: #fff;
+        }
     }
 
 </style>

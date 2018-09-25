@@ -190,7 +190,7 @@ import { mapActions } from 'vuex';
     },
     computed: {
         disableAnimations() {
-            return this.$store.state.user.settings.animations;
+            return this.$store.state.network.account.settings.client.animations;
         }
     },
     methods: mapActions(['loadSettings']),

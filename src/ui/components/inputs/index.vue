@@ -1,20 +1,22 @@
 <script>
     export default {
         name: 'c-input',
-        props: [
-            'value',
-            'placeholder',
-            'type'
-        ],
+        props: ['value'],
         render(h) {
             return h('input', {
                 staticClass: 'c-input',
-                on: { input: e => this.$emit('input', e.target.value) },
-                attrs: {
-                    placeholder: this.placeholder ? this.placeholder : '',
-                    type: this.type ? this.type : 'text'
-                }
+                on: this.listeners,
+                attrs: this.$attrs,
+                props: this.$props
             });
+        },
+        computed: {
+            listeners() {
+                return {
+                    ...this.$listeners,
+                    input: e => this.$emit('input', e.target.value)
+                }
+            }
         }
     }
 </script>

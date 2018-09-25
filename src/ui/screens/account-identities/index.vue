@@ -201,7 +201,7 @@
                     default: false,
                     edit: false
                 },
-                identityCopy: { masno: 'nii' },
+                identityCopy: {},
                 removeIdentity: null,
                 filterPhrase: '',
                 sortAsc: true

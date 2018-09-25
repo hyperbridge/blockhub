@@ -59,11 +59,7 @@
             header.style['background-size'] = 'cover';
         }
 
-        product.assets = [
-            {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'},
-            {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'},
-            {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}, {name: 'Magic Plate Armor'}
-        ]
+        product.assets = []
 
         return product
     }

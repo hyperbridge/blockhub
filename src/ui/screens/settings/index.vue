@@ -34,7 +34,7 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
                             <c-switch
-                                :value="settings.client.pagination"
+                                :checked="settings.client.pagination"
                                 @change="updateClientSettings('pagination')"
                             />
                             <div class="text">
@@ -46,7 +46,7 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
                             <c-switch
-                                :value="systemPermissions"
+                                :checked="systemPermissions"
                                 @change="requestNotifPerm()"
                             />
                             <div class="text">
@@ -63,7 +63,7 @@
                         <div class="settings_item">
                             <c-switch
                                 @change="updateClientSettings('animations')"
-                                :value="settings.client.animations"
+                                :checked="settings.client.animations"
                             />
                             <div class="text">
                                 <h4>Enable animations</h4>
@@ -75,7 +75,7 @@
                         <div class="settings_item">
                             <c-switch
                                 @change="updateClientSettings('autoplay')"
-                                :value="settings.client.autoplay"
+                                :checked="settings.client.autoplay"
                             />
                             <div class="text">
                                 <h4>Enable autoplay</h4>
@@ -108,7 +108,6 @@
 
 <script>
 import { mapMutations } from 'vuex';
-import { debouncer } from '@/mixins';
 
 export default {
     components: {
@@ -116,7 +115,6 @@ export default {
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-benchmark': (resolve) => require(['@/ui/components/benchmark'], resolve)
     },
-    mixins: [debouncer],
     data() {
         return {
             systemPermissions: false
@@ -126,9 +124,6 @@ export default {
         ...mapMutations(['UPDATE_CLIENT_SETTINGS']),
         updateClientSettings(prop) {
             this.$store.commit('network/UPDATE_CLIENT_SETTINGS', prop);
-            this.debounce(() => {
-                window.BlockHub.db.save();
-            });
         },
         clearDatabase() {debugger
             let DBDeleteRequest = window.indexedDB.deleteDatabase("LokiCatalog")

@@ -26,11 +26,16 @@
             text: {
                 type: String
             },
-            position:{
+            position: {
+                type: String,
                 default: 'left'
             },
             type: {
-                default : 'hover'
+                type: String,
+                default : 'hover',
+                validator(val) {
+                    return ['hover', 'click'].includes(val);
+                }
             },
             lightStyle: {
                 type: Boolean,
@@ -43,7 +48,7 @@
             };
         },
         methods: {
-            clickHandler: function () {
+            clickHandler() {
                 this.showToolTip = !this.showToolTip;
             }
         }

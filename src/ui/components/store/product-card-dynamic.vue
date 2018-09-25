@@ -6,13 +6,13 @@
     >
         <a :href="`/#/product/${product.id}`" class="card-img-top">
             <transition name="fade">
-                <img v-if="!display_preview" class="card-img-top" :src="product.images.medium_tile" />
+                <c-img v-if="!display_preview" class="card-img-top" :src="product.images.medium_tile"/>
                 <template v-else>
                     <video v-if="product.video && autoplay" class="card-img-top" width="100%" autoplay>
                         <source :src="product.video" type="video/mp4">
                     </video>
                     <transition-group tag="div" name="slide-left" v-else>
-                        <img
+                        <c-img
                             v-for="(image, index) in product.images.preview"
                             v-if="index === current_image"
                             :key="image"
@@ -30,105 +30,107 @@
 </template>
 
 <script>
-export default {
-    name: 'product-card-dynamic',
-    props: {
-        product: {
-            type: Object,
-            required: true
-        }
-    },
-    components: {
-        'c-tags': (resolve) => require(['@/ui/components/tags'], resolve)
-    },
-    data() {
-        return {
-            display_preview: false,
-            timeout: null,
-            interval: null,
-            current_image: 0
-        }
-    },
-    methods: {
-        show_preview(status) {
-            clearTimeout(this.timeout);
-            this.timeout = setTimeout(() => {
-                if (!status) clearInterval(this.interval);
-                if (status && !this.display_preview && (!this.product.video || !this.autoplay)) this.slider();
-                this.display_preview = status;
-            }, status ? 250 : 0);
+    import { debouncer } from '@/mixins';
+
+    export default {
+        name: 'product-card-dynamic',
+        props: {
+            product: {
+                type: Object,
+                required: true
+            }
         },
-        slider() {
-            this.interval = setInterval(() => {
-                const { current_image, product: { images }} = this;
-                this.current_image = current_image === images.preview.length - 1 ? 0 : current_image + 1;
-            }, 1600);
-        }
-    },
-    computed: {
-        autoplay() {
-            return this.$store.state.user.settings.autoplay;
+        components: {
+            'c-tags': (resolve) => require(['@/ui/components/tags'], resolve)
+        },
+        mixins: [debouncer],
+        data() {
+            return {
+                display_preview: false,
+                interval: null,
+                current_image: 0
+            }
+        },
+        methods: {
+            show_preview(status) {
+                clearTimeout(this.timeout);
+                this.debounce(() => {
+                    if (!status) clearInterval(this.interval);
+                    if (status && !this.display_preview && (!this.product.video || !this.autoplay)) this.slider();
+                    this.display_preview = status;
+                }, status ? 250 : 0);
+            },
+            slider() {
+                this.interval = setInterval(() => {
+                    const { current_image, product: { images }} = this;
+                    this.current_image = current_image === images.preview.length - 1 ? 0 : current_image + 1;
+                }, 1600);
+            }
+        },
+        computed: {
+            autoplay() {
+                return this.$store.state.network.account.settings.client.autoplay;
+            }
         }
     }
-}
 </script>
 
 <style lang="scss" scoped>
-.product-grid__item {
-    transition: transform .3s ease;
-    flex: 0 0 calc(33% - 20px);
-    margin: 10px;
-    box-sizing: border-box;
-    background: rgba(0, 0, 0, 0.13);
-    border: 1px solid rgba(70, 70, 70, 0.5);
-    padding: 7px;
-    border-radius: 5px;
-    &:hover {
-        transform: scale(1.1);
-        box-shadow: 0 0 35px rgba(0, 0, 0, .2);
-        transition: transform .25s ease;
-    }
-    a {
-        color: #fff;
-        text-decoration: none;
-        &.card-img-top {
-            position: relative;
-            display: block;
+    .product-grid__item {
+        transition: transform .3s ease;
+        flex: 0 0 calc(33% - 20px);
+        margin: 10px;
+        box-sizing: border-box;
+        background: rgba(0, 0, 0, 0.13);
+        border: 1px solid rgba(70, 70, 70, 0.5);
+        padding: 7px;
+        border-radius: 5px;
+        &:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 35px rgba(0, 0, 0, .2);
+            transition: transform .25s ease;
+        }
+        a {
+            color: #fff;
+            text-decoration: none;
+            &.card-img-top {
+                position: relative;
+                display: block;
+            }
+        }
+        h4 {
+            font-weight: bold;
+            font-size: 20px;
+            padding: 13px 0;
+        }
+        .product-tags {
+            margin-bottom: 0;
         }
     }
-    h4 {
-        font-weight: bold;
-        font-size: 20px;
-        padding: 13px 0;
+
+    .slide-left-enter-active, .slide-left-leave-active {
+        transition: opacity .8s ease, transform .8s ease;
     }
-    .product-tags {
-        margin-bottom: 0;
+
+    .slide-left-leave-active {
+        position: absolute;
     }
-}
 
-.slide-left-enter-active, .slide-left-leave-active {
-    transition: opacity .8s ease, transform .8s ease;
-}
+    .slide-left-enter, .slide-left-leave-to {
+        opacity: 0;
+        transform: rotate(10deg) scale(.9);
+    }
 
-.slide-left-leave-active {
-    position: absolute;
-}
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity 1s ease;
+    }
 
-.slide-left-enter, .slide-left-leave-to {
-    opacity: 0;
-    transform: rotate(10deg) scale(.9);
-}
+    .fade-leave-active {
+        position: absolute;
+        width: 100%;
+    }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 1s ease;
-}
-
-.fade-leave-active {
-    position: absolute;
-    width: 100%;
-}
-
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
+    .fade-enter, .fade-leave-to {
+        opacity: 0;
+    }
 </style>

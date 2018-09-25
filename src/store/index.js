@@ -13,8 +13,9 @@ import * as network from '../modules/network'
 import * as database from '../modules/database'
 import * as cache from '../modules/cache'
 import user from '@/modules/user';
+import { saveDB } from './plugins';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 // Initial settings
 // Disable peer relaying by default (until we're somewhat stable)
@@ -54,7 +55,7 @@ const CheckDevelopmentMode = () => {
 const developmentMode = CheckDevelopmentMode()
 
 const store = new Vuex.Store({
-    plugins: [],
+    plugins: [saveDB],
     modules: {
         cache: {
             namespaced: true,
@@ -100,7 +101,7 @@ const store = new Vuex.Store({
         },
         user
     }
-})
+});
 
 export let initializer = () => {
     return new Promise((resolve, reject) => {

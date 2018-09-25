@@ -1,47 +1,114 @@
 <template>
-    <c-block title="Pre-purchase" class="purchase-block">
+    <c-block :title="title" class="card invert purchase-block">
 
-        <div class="purchase-block__price">$49.99</div>
+        <div class="purchase-block__tags" v-if="tags">
+            <div v-for="(tag, index) in tags" :key="index">
+                {{ tag }}
+            </div>
+        </div>
+
+        <div class="purchase-block__price"><span v-if="price">${{ price }}</span><span v-else>$0.00</span></div>
 
         <div class="purchase-block__info">
-            <div>Eligible for up to <i class="fas fa-coins mx-1" style="color: #FADC72"></i> HBX +100</div>
-            <div v-if="product.offers_purchases">Offers In-Game Purchases</div>
-            <div class="release-date">Release date: 10/02/2018</div>
+            <div v-if="eligibleTokens">Eligible for up to <i class="fas fa-coins mx-1" style="color: #FADC72"></i> HBX +{{ eligibleTokens }}</div>
+            <div v-if="offers_purchases">Offers In-Game Purchases</div>
+            <div class="release-date" v-if="releaseDate">Release date: {{ dateFormat(releaseDate) }}</div>
 
-            <div v-if="product.isPurchased" class="purchased-status">
+            <div v-if="isPurchased" class="purchased-status">
                 <i class="fas fa-check"></i>
                 Purchased
+            </div>
+
+            <div v-if="isUnavailable" class="unavailable-status">
+                <i class="fas fa-ban"></i>
+                Unavailable
             </div>
         </div>
 
         <div class="purchase-block__buttons-group">
-            <c-button status="success" :href="product.purchaseLink" icon="shopping-cart" size="lg" v-if="product.isReleased">
+            <c-button status="success" :href="purchaseLink" icon="shopping-cart" size="lg" v-if="isReleased && price">
                 Proceed to Purchase
             </c-button>
-            <c-button status="success" size="lg" icon="download" :href="product.purchaseLink" v-if="product.isPurchased">
+
+            <c-button status="success" size="lg" icon="download" :href="purchaseLink" v-if="!price">
                 Free Download
             </c-button>
 
-            <c-button icon_hide icon="download" :href="product.fullReviewsLink" v-if="product.hasDemo">
+            <c-button icon_hide icon="download" :href="fullReviewsLink" v-if="hasDemo">
                 Download Demo
             </c-button>
 
-            <a href="#3" class="wishlist-btn">
-                <i class="fas fa-heart" v-if="product.inWishlist"></i>
-                <i class="far fa-heart" v-else></i>
+            <button @click="$emit('addToWishlist')" class="wishlist-btn" v-if="!inWishlist">
+                <i class="far fa-heart mr-2"></i>
                 Add to Wishlist
-            </a>
+            </button>
+            <button @click="$emit('removeFromWishlist')" class="wishlist-btn is-in" v-if="inWishlist">
+                <i class="fas fa-heart mr-2"></i>
+                Remove from Wishlist
+            </button>
         </div>
     </c-block>
 </template>
 
 <script>
+    import moment from 'moment'
+
     export default {
         name: 'purchase-block',
-        props:['product'],
+        props: {
+            tags:{
+                type: Array
+            },
+            title:{
+                type: String,
+                default: null
+            },
+            price: {
+                type: Number,
+                default: null
+            },
+            eligibleTokens: {
+                type: Number,
+                default: 0
+            },
+            releaseDate: {
+                type: String,
+            },
+            offers_purchases: {
+                type: Boolean,
+                default: false
+            },
+            isUnavailable: {
+                type: Boolean,
+                default: false
+            },
+            isPurchased: {
+                type: Boolean,
+                default: false
+            },
+            isReleased: {
+                type: Boolean,
+                default: false
+            },
+            hasDemo: {
+                type: Boolean,
+                default: false
+            },
+            inWishlist: {
+                type: Boolean,
+                default: false
+            },
+            purchaseLink: String,
+            fullReviewsLink: String
+        },
         components:{
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
-        }
+        },
+        methods: {
+            dateFormat(date) {
+                return moment(date).format('MM/DD/YYYY')
+            }
+        },
     }
 </script>
 
@@ -54,17 +121,40 @@
         margin: 0;
         display: inline-block;
     }
+    .purchase-block__tags{
+        display: flex;
+        flex-wrap: wrap;
+        margin: -5px -3px 20px;
+        div{
+            padding: 0px 7px;
+            margin: 3px;
+            font-size: 13px;
+            border-radius: 5px;
+            color: #1C2032;
+            background: #FADC72;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+    }
     .purchase-block__info{
         display: flex;
         flex-direction: column;
         margin: 20px 0;
         .release-date{
             font-size: 16px;
-            margin-top: 5px;
+            margin-top: 15px;
         }
         .purchased-status{
             font-size: 20px;
             color: #43C981;
+            margin-top: 15px;
+            i{
+                margin-right: 8px;
+            }
+        }
+        .unavailable-status{
+            font-size: 20px;
+            color: #F75D5D;
             margin-top: 15px;
             i{
                 margin-right: 8px;
@@ -83,12 +173,24 @@
         .wishlist-btn{
             color: #fff;
             opacity: .8;
-            &:hover{
+            background: transparent;
+            padding: 0;
+            border: none;
+            margin: 15px auto 0 0;
+            width: auto;
+            &:hover,
+            &.is-in{
                 text-decoration: none;
                 opacity: 1;
+                cursor: pointer;
                 i{
                     color: #F75D5D;
                 }
+            }
+            &:active,
+            &:focus{
+                outline: none;
+                box-shadow: none;
             }
         }
     }

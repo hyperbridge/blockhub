@@ -6,11 +6,10 @@
     >
         <div class="screen-gallery__main-img">
             <i class="fas fa-expand" v-show="run_slideshow"></i>
-            <img
+            <c-img
                 v-if="!play_video"
                 :src="items[active_item]"
                 @click="show_modal = true"
-                @error="brokenImg"
             />
             <video v-else-if="play_video" controls autoplay>
                 <source :src="video_url" type="video/mp4">
@@ -23,7 +22,6 @@
                 class="thumb-nav__video-thumb"
                 :class="{ 'inactive-item': !play_video }"
                 :style="{
-
                     backgroundSize: 'cover',
                     background: `black url(${items[random_item]}) no-repeat center`
                 }"
@@ -36,11 +34,10 @@
                 :key="index"
                 :ref="`thumb-${index}`"
             >
-                <img
+                <c-img
                     :src="url"
                     :class="{ 'inactive-item': index !== active_item || play_video }"
                     @click="changeActiveItem(index)"
-                    @error="brokenImg"
                 />
             </li>
         </ul>
@@ -124,9 +121,6 @@ export default {
                 parent.scrollTop = (childRect.top + parent.scrollTop) - parentRect.top;
             }
             if (status) this.slideshow();
-        },
-        brokenImg(event){
-            event.target.src = 'https://www.golositadelsalento.it/wp-content/uploads/2018/07/No_Image_Available-21-1.jpg'
         }
     },
     mounted() {

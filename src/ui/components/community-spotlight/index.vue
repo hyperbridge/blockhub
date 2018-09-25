@@ -1,6 +1,6 @@
 <template>
-    <div class="card invert community-spotlight" v-if="discussions">
-        <div class="card-body">
+    <div class="card invert community-spotlight">
+        <div class="card-body" v-if="discussions.length > 0">
             <div class="editor-container editor-container--style-2" v-if="editing">
                 <p class="" v-if="!activeElement">
                     <i class="fas fa-cog"></i>
@@ -8,7 +8,7 @@
                 </p>
             </div>
             <h2 class="title">Community Spotlight
-                <a href="#3" class="title-icon">
+                <a :href="community_url" class="title-icon">
                     <i class="fas fa-comments"></i>
                 </a>
             </h2>
@@ -21,6 +21,14 @@
                 </li>
             </ul>
             <a :href="community_url" class="btn btn-outline-white">Go To Community</a>
+        </div>
+        <div class="card-body" v-else>
+            <h2 class="title">Community Spotlight
+                <a :href="community_url" class="title-icon">
+                    <i class="fas fa-comments"></i>
+                </a>
+            </h2>
+            <h4>No highlighted community activity yet.</h4>
         </div>
     </div>
 </template>
