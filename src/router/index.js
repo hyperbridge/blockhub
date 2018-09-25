@@ -320,7 +320,7 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/project-updates'], resolve)
         },
         {
-            path: '/project/:id/updates/:id',
+            path: '/project/:projectID/updates/:postID',
             name: 'Project Updates Post',
             props: true,
             component: (resolve) => require(['@/ui/screens/project-updates/post'], resolve)

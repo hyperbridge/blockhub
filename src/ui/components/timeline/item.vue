@@ -7,7 +7,7 @@
             <a href="#3">
                 <h3>{{ item.title }}</h3>
             </a>
-            <p>{{ item.text }}</p>
+            <p class="mb-4">{{ item.text | stringLength }}</p>
             <c-button status="info" :href="`/#/project/${projectID}/updates/${item.id}`" icon_hide >Read more</c-button>
         </div>
     </div>
@@ -30,6 +30,17 @@
                     return 'right-side'
                 } else {
                     return 'left-side'
+                }
+            }
+        },
+        filters:{
+            stringLength(str){
+                if (str.length > 250 ){
+                    let maxLength = 250,
+                        trimmedString = str.substr(0, maxLength);
+                    return trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))).concat('...')
+                } else {
+                    return str
                 }
             }
         }
