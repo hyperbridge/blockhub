@@ -109,6 +109,7 @@
                                     isReleased="true"
                                     :price="product.price"
                                     :tags="['New']"
+                                    :onClickPurchase="showPurchaseModal"
                                 />
                                 
                                 <c-rating-block :items="product.rating" :parent_url="`/#/product/${product.id}`" />
@@ -264,6 +265,9 @@
             }
         },
         methods: {
+            showPurchaseModal() {
+                this.$store.commit('network/activateModal', 'purchase')
+            },
             deactivateElement(key) {
                 this.activeElement[key] = false
             },

@@ -135,7 +135,6 @@
 
                                     <div class="row">
                                         <div class="col-md-6">
-
                                             <div class="form-group row">
                                                 <label class="switch switch-sm col-sm-3">
                                                     <label>Minimum Contribution Goal</label>
@@ -290,6 +289,12 @@
                                 </div>
                             </div>
                             <div class="col-md-5 col-xl-4">
+                                <c-block title="Contribute" class="card invert purchase-block">
+                                    <c-button size="lg" @click="showContributeModal">
+                                        Proceed to Purchase
+                                    </c-button>
+                                </c-block>
+
                                 <div class="card invert" v-if="project.funding">
                                     <div class="card-body">
                                         <a class="nav-link editor-container editor-container--style-2"
@@ -502,6 +507,13 @@
         methods: {
             showTab(name) {
                 $('.nav-tabs a[href="#' + name + '"]').tab('show')
+            },
+            showContributeModal() {
+                if (this.$store.state.network.signed_in) {
+                    this.$store.commit('network/activateModal', 'send-funds')
+                } else {
+                    this.$store.commit('network/activateModal', 'login')
+                }
             },
             deactivateElement(key) {
                 this.activeElement[key] = false

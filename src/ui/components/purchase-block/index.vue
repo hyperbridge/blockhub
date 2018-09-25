@@ -26,11 +26,11 @@
         </div>
 
         <div class="purchase-block__buttons-group">
-            <c-button status="success" :href="purchaseLink" icon="shopping-cart" size="lg" v-if="isReleased && price">
+            <c-button status="success" :href="purchaseLink" icon="shopping-cart" size="lg" v-if="isReleased && price" @click="onClickPurchase">
                 Proceed to Purchase
             </c-button>
 
-            <c-button status="success" size="lg" icon="download" :href="purchaseLink" v-if="!price">
+            <c-button status="success" size="lg" icon="download" :href="purchaseLink" v-if="!price" @click="onClickPurchase">
                 Free Download
             </c-button>
 
@@ -99,7 +99,8 @@
                 default: false
             },
             purchaseLink: String,
-            fullReviewsLink: String
+            fullReviewsLink: String,
+            onClickPurchase: Function
         },
         components:{
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),

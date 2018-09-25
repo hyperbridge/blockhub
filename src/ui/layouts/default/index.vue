@@ -266,6 +266,15 @@
             <div class="status-bar" hidden>
                 {{ connection_status.message }}
             </div>
+        
+            <c-send-funds-popup :activated="send_funds_modal_active" ref="modal" title="Default" sub_title="X">
+            </c-send-funds-popup>
+
+            <c-login-popup :activated="login_modal_active" ref="modal" title="Default" sub_title="X">
+            </c-login-popup>
+
+            <c-purchase-popup :activated="purchase_modal_active" ref="modal" title="Default" sub_title="X">
+            </c-purchase-popup>
         </div>
         <!-- //END PAGE CONTENT -->
 
@@ -295,6 +304,9 @@ export default {
         'c-product-navigation': (resolve) => require(['@/ui/components/navigation/product'], resolve),
         'c-project-navigation': (resolve) => require(['@/ui/components/navigation/project'], resolve),
         'c-notification': (resolve) => require(['@/ui/components/notification/index.vue'], resolve),
+        'c-login-popup': (resolve) => require(['@/ui/components/login-popup/index.vue'], resolve),
+        'c-send-funds-popup': (resolve) => require(['@/ui/components/send-funds-popup/index.vue'], resolve),
+        'c-purchase-popup': (resolve) => require(['@/ui/components/purchase-popup/index.vue'], resolve),
         'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
         'c-swiper': swiper,
         'c-slide': swiperSlide
@@ -311,6 +323,15 @@ export default {
         },
         swiper() {
             return this.$refs.mySwiper.swiper
+        },
+        send_funds_modal_active() {
+            return this.$store.state.network.active_modal === 'send-funds'
+        },
+        login_modal_active() {
+            return this.$store.state.network.active_modal === 'login'
+        },
+        purchase_modal_active() {
+            return this.$store.state.network.active_modal === 'purchase'
         }
     },
     data() {
