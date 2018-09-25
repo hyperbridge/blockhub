@@ -3276,7 +3276,21 @@ storiesOf('Purchase block', module)
                         </div>`
     }))
 
-
+import ContributeForm from '@/ui/components/contribute/form.vue'
+import ContributePledge from '@/ui/components/contribute/pledge.vue'
+storiesOf('Contribute', module)
+    .add('form', () => ({
+        components:{
+            'c-contribute-form': ContributeForm
+        },
+        template: `<div class="p-4" style="width: 400px"><c-contribute-form /></div>`
+    }))
+    .add('pledge', () => ({
+        components:{
+            'c-contribute-pledge': ContributePledge
+        },
+        template: `<div class="p-4" style="width: 400px"><c-contribute-pledge /></div>`
+    }))
 
 
 
