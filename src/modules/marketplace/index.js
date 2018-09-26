@@ -41,6 +41,8 @@ const updateState = () => {
 
 updateState()
 
+const sortDir = (dir, asc) => asc ? dir : dir * -1;
+
 export const getters = {
     productsArray: state => Object.values(state.products),
     productsTags: (state, getters) => getters.productsArray.reduce((tags, product) => {
@@ -51,7 +53,22 @@ export const getters = {
     }, []),
     getProductsByName: (state, getters) => name => getters.productsArray.filter(product =>
         product.name.toLowerCase().includes(name.toLowerCase())
-    )
+    ),
+    getProductsFiltered: (state, getters) => ({ name, tags, sortBy }) => getters.productsArray
+        .filter(product => name && name.length
+            ? product.name.toLowerCase().includes(name.toLowerCase())
+            : true
+        )
+        .filter(product => tags && tags.length
+            ? product.developer_tags.some(genre => this.selectedGenres.includes(genre))
+            : true
+        )
+        .sort((a, b) => sortBy
+            ? a[sortBy.property] > b[sortBy.property]
+                ? sortDir(1, sortBy.asc)
+                : a[sortBy.property] < b[sortBy.property] ? sortDir(-1, sortBy.asc) : 0
+            : 0
+        )
 };
 
 export const actions = {
