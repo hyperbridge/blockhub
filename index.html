@@ -73,12 +73,45 @@
     <link rel="stylesheet" href="https://unpkg.com/vue2-animate/dist/vue2-animate.min.css"/>
 </head>
 <body>
+
 <noscript>
-    BlockHub requires JavaScript enabled.
+  BlockHub requires JavaScript enabled.
 </noscript>
 
 <div id="header-bg"></div>
+
 <div id="app"></div>
+
+<div id="critical-error">
+  <p>A critical error occurred. You will likely need to clear all of your settings.</p><br />
+  <p>If you created an account on this computer, you should make sure you have an account file backup.</p>
+  <button onClick="window.downloadAccountFile()">Click here to download your account file backup</button><br /><br />
+  <button onClick="window.deleteSettings()">Click here to delete the settings on this computer.</button><br />
+</div>
+
+<script>
+window.downloadAccountFile = function() {
+  
+}
+
+window.deleteSettings = function() {
+  if (window.closeLokiDatabase) {
+    window.closeLokiDatabase()
+  }
+  
+  var req = indexedDB.deleteDatabase('LokiCatalog');
+  req.onsuccess = function () {
+    alert("Deleted settings successfully. The page will now reload.");
+    window.location.reload()
+  };
+  req.onerror = function () {
+    alert("ERR 301: Couldn't delete database");
+  };
+  req.onblocked = function (event) {
+    alert("ERR 302: Couldn't delete database due to the operation being blocked.");
+  };
+}
+</script>
 
 <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
 

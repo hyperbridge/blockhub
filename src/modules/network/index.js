@@ -101,8 +101,7 @@ export const actions = {
         console.log('[BlockHub] Connection status: ' + JSON.stringify(store.state.connection))
 
         if (!navigator.onLine) {
-            store.state.connection.internet = false
-            store.state.connection_message = "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection."
+            store.commit('setInternetConnection', { connected: false, message: "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection." })
             return
         }
 
@@ -116,11 +115,9 @@ export const actions = {
         function processRequest(e) {
             if (xhr.readyState == 4) {
                 if (xhr.status >= 200 && xhr.status < 304) {
-                    store.state.connection.internet = true
-                    store.state.connection_message = "Connected."
+                    store.commit('setInternetConnection', { connected: true, message: "Connected." })
                 } else {
-                    store.state.connection.internet = false
-                    store.state.connection_message = "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection."
+                    store.commit('setInternetConnection', { connected: false, message: "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection." })
                 }
             }
         }
@@ -220,6 +217,10 @@ export const mutations = {
 
         db.network.config.update(state)
         db.save()
+    },
+    setInternetConnection(state, payload) {
+        state.connection.internet = payload.connected
+        state.connection_message = payload.message
     },
     beforeLoadRoute(state, payload) {
         state.loading = true

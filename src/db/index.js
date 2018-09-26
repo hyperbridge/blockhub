@@ -41,6 +41,10 @@ export const init = () => {
         autosaveInterval: 4000
     })
 
+    window.closeLokiDatabase = function() {
+        loki.close()
+    }
+
     loadDefault()
 
     loki.loadDatabase({}, (result) => {

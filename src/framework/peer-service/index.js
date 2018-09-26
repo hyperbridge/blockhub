@@ -176,8 +176,6 @@ export const getPathState = async (path, params) => {
             })
         }
 
-        console.log('eee', results)
-
         // TODO: less stupid
         if (results.length) {
             console.log('Chosen peer', results[0])

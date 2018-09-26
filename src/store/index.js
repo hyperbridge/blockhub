@@ -214,5 +214,21 @@ export let initializer = () => {
     })
 }
 
+function isWhiteSpace(coords) {
+    var element = document.elementFromPoint(coords.x, coords.y);
+    var whitespace = $(document).add('body, html, #app, #header-bg');
+    return (whitespace.get().indexOf(element) > -1) ? true : false;
+}
+
+function bootChecker() {
+    const isLoaded = !isWhiteSpace({ x: 100, y: 100 })
+
+    if (isLoaded)
+        return
+
+    $('#critical-error').show()
+}
+
+setTimeout(bootChecker, 5 * 1000)
 
 export default store
