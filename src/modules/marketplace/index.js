@@ -45,12 +45,20 @@ const sortDir = (dir, asc) => asc ? dir : dir * -1;
 
 export const getters = {
     productsArray: state => Object.values(state.products),
-    productsTags: (state, getters) => getters.productsArray.reduce((tags, product) => {
-        product.developer_tags.forEach(tag => {
-            if (!tags.includes(tag)) tags.push(tag);
-        });
-        return tags;
-    }, []),
+    productsTags: (state, getters) => getters.productsArray
+        .reduce((tags, product) => {
+            product.developer_tags.forEach(tag => {
+                if (!tags.includes(tag)) tags.push(tag);
+            });
+            return tags;
+        }, []).sort(),
+    systemTags: (state, getters) => getters.productsArray
+        .reduce((tags, product) => {
+            product.system_tags.forEach(tag => {
+                if (!tags.includes(tag)) tags.push(tag);
+            });
+            return tags;
+        }, []).sort(),
     getProductsByName: (state, getters) => name => getters.productsArray.filter(product =>
         product.name.toLowerCase().includes(name.toLowerCase())
     ),

@@ -5,80 +5,37 @@
                 <div class="row">
                     <div class="col-12">
                         <c-block title="Search">
-                            <div class="row align-items-center">
-                                <div class="col-12 col-md-6 col-lg-8">
-                                    <c-input-searcher v-model="phrase" @input="search"/>
-                                </div>
-                                <div class="col-12 col-md-auto">
-                                    <c-button status="success" size="lg" icon="sliders-h" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="collapseFilters">
-                                        Filters
-                                    </c-button>
-                                </div>
+                            <div class="search__main">
+                                <c-input-searcher
+                                    v-model="phrase"
+                                    @input="search"
+                                    placeholder="Search for games"
+                                    aria-placeholder="Search for games"
+                                />
+                                <c-button
+                                    status="success"
+                                    size="lg"
+                                    icon="sliders-h"
+                                    data-toggle="collapse"
+                                    data-target="#expand-filters"
+                                    aria-expanded="false"
+                                    aria-controls="collapseFilters"
+                                >Filters</c-button>
                             </div>
-                            <div class="collapse" id="moreFilters">
-                                <hr>
-                                <!--Checkbox list-->
-                                <div class="row">
-                                    <div class="tab-card col-12 col-md-4 col-lg-3 mb-4">
-                                        <div class="checkbox-list">
-                                            <c-checkbox-group title="Game type">
-                                                <c-checkbox v-for="(item, index) in filters.game_type"
-                                                            :key="index"
-                                                            :id="'game_type_' + index"
-                                                            :label="item.label"
-                                                            v-model="item.value" />
-                                            </c-checkbox-group>
-                                        </div>
-                                    </div>
+
+                            <div class="collapse" id="expand-filters">
+                                <div>
+                                    <h4>Specials</h4>
+                                    <c-checkbox
+                                        v-for="(tag, index) in systemTags"
+                                        :key="index"
+                                        v-model="tag.selected"
+                                    >
+                                        {{ tag.value | replaceLoDash | upperFirstChar }}
+                                    </c-checkbox>
                                 </div>
-                                <!--Checkbox list End-->
-                                <!--Input row-->
+                                <h4>Genres</h4>
                                 <div class="row">
-                                    <div class="col-12 col-md-4 col-lg-3">
-                                        <div class="form-group">
-                                            <label>Search Title 1</label>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Search" aria-label="Search">
-                                                    <div class="input-group-append">
-                                                            <span class="input-group-text">
-                                                                <i class="fas fa-search"></i>
-                                                            </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4 col-lg-3">
-                                        <div class="form-group">
-                                            <label>Search Title 2</label>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Search" aria-label="Search">
-                                                    <div class="input-group-append">
-                                                            <span class="input-group-text">
-                                                                <i class="fas fa-search"></i>
-                                                            </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4 col-lg-3">
-                                        <div class="form-group">
-                                            <label>Search Title 3</label>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Search" aria-label="Search">
-                                                    <div class="input-group-append">
-                                                            <span class="input-group-text">
-                                                                <i class="fas fa-search"></i>
-                                                            </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <c-dropdown-list
                                         :list="selectableTags"
                                         @click="tag => tag.selected = !tag.selected"
@@ -86,14 +43,6 @@
                                 </div>
                             </div>
                         </c-block>
-                        <div class="filter-tags">
-                            <div class="filter-tags__item"
-                                 v-for="(item, index) in filters.game_type"
-                                 :key="index" v-if="item.value == true">
-                                {{ item.label }}
-                                <i class="fas fa-times-circle" @click="$emit('click')"></i>
-                            </div>
-                        </div>
                         <h3>Active filters</h3>
                         <div class="active-filters">
                             <c-option-tag
@@ -183,6 +132,15 @@
                         }
                     }
                 },
+                systemTags: [
+                    { value: "featured", selected: false },
+                    { value: "new", selected: false },
+                    { value: "sale", selected: false },
+                    { value: "specials", selected: false },
+                    { value: "top_seller", selected: false },
+                    { value: "trending", selected: false },
+                    { value: "upcoming", selected: false }
+                ],
                 phrase: '',
                 results: [],
                 isTyping: false,
@@ -215,35 +173,32 @@
         },
         mounted() {
             this.results = this.products;
-            this.selectableTags = this.productsTags.map(tag => ({ name: tag, selected: true }));
+            this.selectableTags = this.productsTags.map(tag => ({ name: tag, selected: false }));
+        },
+        filters: {
+            replaceLoDash(val) {
+                return val.replace(/_/g, ' ');
+            }
         }
     }
 </script>
 
 <style lang="scss" scoped>
-    .filter-tags {
+    .search__main {
         display: flex;
-        margin: 10px -4px;
-    }
-    .filter-tags__item {
-        background: #fae17d;
-        padding: 0px  3px 0 10px;
-        border-radius: 15px;
-        margin: 4px;
-        color: #30304B;
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 12px;
-        line-height: 20px;
-        i {
-            margin-left: 5px;
-            font-size: 16px;
-            &:hover {
-                color: #45456c;
-                cursor: pointer;
-            }
+        align-items: center;
+        .input-searcher {
+            margin-right: 30px;
+            width: 300px;
         }
+        margin-bottom: 40px;
     }
+
+    .c-checkbox {
+        display: block !important;
+        margin: 5px 0;
+    }
+
 
     .active-filters {
         display: flex;
