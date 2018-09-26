@@ -122,8 +122,8 @@
 </template>
 
 <script>
+import LoadingBar from '../loading-bar/logo-loader'
 
-    import LoadingBar from '../loading-bar/logo-loader'
 export default {
     props: ['isLoader'],
     components: {
