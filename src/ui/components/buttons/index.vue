@@ -98,6 +98,14 @@
                 margin-right: 10px;
             }
         }
+        &.c-btn-xl{
+            padding: 0px 15px;
+            line-height: 40px;
+            font-size: 18px;
+            i{
+                margin-right: 10px;
+            }
+        }
 
 
         $statusColors: (

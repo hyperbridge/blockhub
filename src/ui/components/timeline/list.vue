@@ -1,6 +1,6 @@
 <template>
     <div class="posts-timeline">
-        <template  v-for="(item, index) in sliced" >
+        <template  v-for="(item, index) in sliced" v-if="items">
             <c-timeline-item :item="item" :index="index" :key="index" :projectID="project_id" />
             <div class="post-timeline__period-info" v-if="item.period">
             {{ item.period }}
@@ -9,6 +9,11 @@
         <transition name="fade-slow">
             <div class="posts-timeline__end" v-if="end">
                 <h3>End of updates</h3>
+            </div>
+            <div class="posts-timeline__end no-updates" v-if="!items">
+                <h3>
+                    There is no updates yet.
+                </h3>
             </div>
         </transition>
     </div>
@@ -52,24 +57,27 @@
             },
         },
         created() {
-            let arr = this.items;
-            arr.sort( ( a, b) => {
-                return new Date(a.date) - new Date(b.date);
-            }).forEach( (o, i) => {
-                let d1 = moment(o.date).format('MMMM YYYY'),
-                    d2 = arr[i-1] ? moment(arr[i-1].date).format('MMMM YYYY') : false;
-                if ( !d2 || d1 != d2 ){
-                    o.period = moment(d1).format('MMMM, YYYY');
-                }
-            });
-            this.list = arr.reverse();
-            this.show = true;
+            if (this.items){
+                let arr = this.items;
+                arr.sort( ( a, b) => {
+                    return new Date(a.date) - new Date(b.date);
+                }).forEach( (o, i) => {
+                    let d1 = moment(o.date).format('MMMM YYYY'),
+                        d2 = arr[i-1] ? moment(arr[i-1].date).format('MMMM YYYY') : false;
+                    if ( !d2 || d1 != d2 ){
+                        o.period = moment(d1).format('MMMM, YYYY');
+                    }
+                });
+                this.list = arr.reverse();
+                this.show = true;
+            } else {
+                return false
+            }
             console.log('done create')
         },
         computed:{
             // slice the array of data to display
             sliced() {
-                console.log('done slice')
                 return this.list.slice(0, this.display);
             },
         },
@@ -151,6 +159,11 @@
         }
         &:after{
             left: calc(50% - 10px);
+        }
+        &.no-updates{
+            &:after{
+                display: none;
+            }
         }
     }
 </style>
