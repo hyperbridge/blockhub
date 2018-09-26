@@ -42,7 +42,11 @@ const updateState = () => {
 updateState()
 
 export const getters = {
-}
+    productsArray: state => Object.values(state.products),
+    getProductsByName: (state, getters) => name => getters.productsArray.filter(product =>
+        product.name.toLowerCase().includes(name.toLowerCase())
+    )
+};
 
 export const actions = {
     init(store, payload) {
@@ -172,7 +176,7 @@ export const mutations = {
             db.marketplace.config.update(state)
             db.save()
         })
-        
+
     }
 }
 
