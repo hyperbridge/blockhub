@@ -10,6 +10,7 @@ import './filters';
 import './components';
 import './directives';
 import './css/styles.scss';
+import migrations from './db/migrations';
 
 Vue.config.productionTip = false
 
@@ -31,7 +32,16 @@ Vue.prototype.$notif = async (data) => {
                 new Notification(data, { icon });
             } else {
                 const { title, body } = data;
-                new Notification(title, { icon, body });
+                const eventKey = Object.keys(data).find(key => key.includes('on'));
+
+                const notification = new Notification(title, { icon, body });
+
+                if (eventKey) {
+                    notification[eventKey] = e => {
+                        e.preventDefault();
+                        data[eventKey]();
+                    }
+                }
             }
         }
 
@@ -96,10 +106,11 @@ initializer().then(() => {
       el: '#app',
       router,
       store,
+      mixins: [migrations],
       template: `<app :data="${dataString}" />`,
       components: {
         'app': app
-      },
+      }
   });
 
 })
