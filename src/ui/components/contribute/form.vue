@@ -8,7 +8,7 @@
             </div>
             <input type="text" class="form-control" ref="input" placeholder="0.00" v-model="mutableValue" />
         </div>
-        <c-button status="success" class="justify-content-center" icon_hide size="xl">
+        <c-button status="success" class="justify-content-center" icon_hide size="xl" @click="$emit('click')">
             Continue
         </c-button>
     </div>
@@ -71,6 +71,12 @@
             background: rgba(0, 0, 0, .13);
             color: #fff;
             border-color: rgba(0, 0, 0, .4);
+            &:active,
+            &:focus{
+                outline: none;
+                box-shadow: none;
+                border-color: rgba(0, 0, 0, .4);
+            }
         }
         .input-group-text{
             background: #1d1e30;

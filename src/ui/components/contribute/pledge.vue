@@ -34,7 +34,7 @@
                 <div class="h6 font-weight-bold text-uppercase mb-3">
                     Pledge amount
                 </div>
-                <c-contribute-form v-model="toBePaid" :defaultValue="price" :active="true"/>
+                <c-contribute-form v-model="toBePaid" :defaultValue="price" :active="true" @click="$emit('click')" />
             </div>
         </transition>
     </div>
