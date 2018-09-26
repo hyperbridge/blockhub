@@ -111,6 +111,28 @@ window.deleteSettings = function() {
     alert("ERR 302: Couldn't delete database due to the operation being blocked.");
   };
 }
+
+function isWhiteSpace(coords) {
+  var element = document.elementFromPoint(coords.x, coords.y);
+  var whitespace = $(document).add('body, html, #app, #header-bg');
+  return (whitespace.get().indexOf(element) > -1) ? true : false;
+}
+
+function bootChecker() {
+  if (typeof($) == undefined) return
+
+  // If any of these randomly chosen coordinates is not a bottom layer element, then assume loading occurred properly
+  const isLoaded = !isWhiteSpace({ x: 100, y: 100 }) || !isWhiteSpace({ x: 200, y: 100 }) || !isWhiteSpace({ x: 400, y: 400 })
+
+  if (isLoaded) {
+    $('#critical-error').hide()
+    return
+  }
+
+  $('#critical-error').show()
+}
+
+setInterval(bootChecker, 5 * 1000)
 </script>
 
 <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
