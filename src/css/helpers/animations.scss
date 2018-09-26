@@ -108,3 +108,11 @@
     opacity: 0;
     transform: translateY(10%);
 }
+
+.slide-in-top-enter-active {
+    transition: transform .25s ease, opacity .25s ease;
+}
+.slide-in-top-enter, .slide-in-top-leave-to {
+    opacity: 0;
+    transform: translateY(-10%);
+}

@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <c-block title="Search">
+                        <c-block title="Search" class="searching-box">
                             <div class="search__main">
                                 <c-input-searcher
                                     v-model="phrase"
@@ -43,31 +43,35 @@
                                 </div>
                             </div>
                         </c-block>
-                        <h3>Active filters</h3>
-                        <div class="active-filters">
-                            <c-option-tag
-                                v-if="phrase.length"
-                                title="NAME:"
-                                :text="phrase"
-                                @delete="phrase = ''"
-                            />
-                            <c-option-tag
-                                v-if="selectedGenres.length"
-                                title="GENRES:"
-                                @delete="selectedGenres.forEach(genre => genre.selected = false)"
-                                isParent
-                            >
-                                <c-option-tag
-                                    v-for="(genre, index) in selectedGenres"
-                                    :key="index"
-                                    :text="genre.name"
-                                    @delete="genre.selected = false"
-                                    isChildren
-                                />
-                            </c-option-tag>
-                        </div>
-                        <div>
-                            <h3>Results</h3>
+                        <transition name="slide-in-top">
+                            <div class="active-filters" v-if="filtersActive">
+                                <h3>Active filters</h3>
+                                <div class="active-filters__content">
+                                    <c-option-tag
+                                        v-if="phrase.length"
+                                        title="NAME:"
+                                        :text="phrase"
+                                        @delete="phrase = ''"
+                                    />
+                                    <c-option-tag
+                                        v-if="selectedGenres.length"
+                                        title="GENRES:"
+                                        @delete="selectedGenres.forEach(genre => genre.selected = false)"
+                                        isParent
+                                    >
+                                        <c-option-tag
+                                            v-for="(genre, index) in selectedGenres"
+                                            :key="index"
+                                            :text="genre.name"
+                                            @delete="genre.selected = false"
+                                            isChildren
+                                        />
+                                    </c-option-tag>
+                                </div>
+                            </div>
+                        </transition>
+                        <h3>Results</h3>
+                        <div class="results">
                             <c-spinner v-if="isTyping"/>
                             <p v-else-if="!results.length">
                                 No results were found for provided filters
@@ -169,6 +173,9 @@
             },
             selectedGenres() {
                 return this.selectableTags.filter(tag => tag.selected);
+            },
+            filtersActive() {
+                return this.selectedGenres.length || this.phrase.length;
             }
         },
         mounted() {
@@ -194,16 +201,27 @@
         margin-bottom: 40px;
     }
 
+    .searching-box {
+        margin-bottom: 30px;
+    }
+
     .c-checkbox {
         display: block !important;
         margin: 5px 0;
     }
 
-
     .active-filters {
+        margin-bottom: 30px;
+    }
+    .active-filters__content {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
+    }
+
+    .results {
+        display: flex;
+        justify-content: center;
     }
 
     .input-group {
