@@ -7,7 +7,7 @@
                         <c-block title="Search">
                             <div class="row align-items-center">
                                 <div class="col-12 col-md-6 col-lg-8">
-                                    <c-searcher size="lg" />
+                                    <c-input-searcher @input="search"/>
                                 </div>
                                 <div class="col-12 col-md-auto">
                                     <c-button status="success" size="lg" icon="sliders-h" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="collapseFilters">
@@ -90,6 +90,25 @@
                                 <i class="fas fa-times-circle" @click="$emit('click')"></i>
                             </div>
                         </div>
+                        <h3>Active filters</h3>
+                        <div class="active-filters">
+                            <c-option-tag text="DOOM"/>
+                        </div>
+                        <div>
+                            <h3>Results</h3>
+                            <c-spinner v-if="isTyping"/>
+                            <p v-else-if="!results.length">
+                                No results were found for provided filters
+                            </p>
+                            <c-game-grid
+                                v-else
+                                :itemInRow="2"
+                                :showRating="false"
+                                :items="results"
+                                itemBg="transparent"
+                                showTime
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -98,6 +117,9 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
+    import { debouncer } from '@/mixins';
+
     export default {
         components: {
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
@@ -105,42 +127,74 @@
             'c-checkbox-group': (resolve) => require(['@/ui/components/checkbox/group'], resolve),
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
+            'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
+            'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description'], resolve),
+            'c-spinner': (resolve) => require(['@/ui/components/spinner'], resolve),
+            'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve),
         },
-        data: () => ({
-            filters:{
-                game_type:{
-                    simulator: {
-                        label: 'Simulator',
-                        value: false
-                    },
-                    action: {
-                        label: 'Action',
-                        value: true
-                    },
-                    real_time: {
-                        label: 'Real time',
-                        value: false
-                    },
-                    strategy: {
-                        label: 'Strategy',
-                        value: false
-                    },
-                    adventure: {
-                        label: 'Adventure',
-                        value: false
+        mixins: [debouncer],
+        data() {
+            return {
+                filters: {
+                    game_type: {
+                        simulator: {
+                            label: 'Simulator',
+                            value: false
+                        },
+                        action: {
+                            label: 'Action',
+                            value: true
+                        },
+                        real_time: {
+                            label: 'Real time',
+                            value: false
+                        },
+                        strategy: {
+                            label: 'Strategy',
+                            value: false
+                        },
+                        adventure: {
+                            label: 'Adventure',
+                            value: false
+                        }
                     }
-                }
+                },
+                results: [],
+                isTyping: false
             }
-        }),
+        },
+        methods: {
+            search(phrase) {
+                if (!this.isTyping) this.isTyping = true;
+
+                this.debounce(() => {
+                    this.isTyping = false;
+                    this.results = this.getProductsByName(phrase);
+                }, 400);
+            }
+        },
+        computed: {
+            ...mapGetters({
+                getProductsByName: 'marketplace/getProductsByName',
+                products: 'marketplace/productsArray',
+                productsTags: 'marketplace/productsTags'
+            }),
+            marketplace() {
+                return this.$store.state.marketplace;
+            }
+        },
+        mounted() {
+            this.results = this.products;
+        }
     }
 </script>
 
 <style lang="scss" scoped>
-    .filter-tags{
+    .filter-tags {
         display: flex;
         margin: 10px -4px;
     }
-    .filter-tags__item{
+    .filter-tags__item {
         background: #fae17d;
         padding: 0px  3px 0 10px;
         border-radius: 15px;
@@ -150,15 +204,20 @@
         text-transform: uppercase;
         font-size: 12px;
         line-height: 20px;
-        i{
+        i {
             margin-left: 5px;
             font-size: 16px;
-            &:hover{
+            &:hover {
                 color: #45456c;
                 cursor: pointer;
             }
         }
     }
+
+    .active-filters {
+        display: flex;
+    }
+
     .input-group {
         border-color: rgba(0, 0, 0, .7);
         border-radius: 5px;

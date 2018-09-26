@@ -43,6 +43,12 @@ updateState()
 
 export const getters = {
     productsArray: state => Object.values(state.products),
+    productsTags: (state, getters) => getters.productsArray.reduce((tags, product) => {
+        product.developer_tags.forEach(tag => {
+            if (!tags.includes(tag)) tags.push(tag);
+        });
+        return tags;
+    }, []),
     getProductsByName: (state, getters) => name => getters.productsArray.filter(product =>
         product.name.toLowerCase().includes(name.toLowerCase())
     )

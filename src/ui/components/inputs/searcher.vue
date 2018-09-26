@@ -2,7 +2,7 @@
 export default {
     name: 'input-searcher',
     inheritAttrs: false,
-    props: ['value'],
+    props: ['value', 'debounce'],
     render(h) {
         return h('div', {
             staticClass: 'input-searcher'
