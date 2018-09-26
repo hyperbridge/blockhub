@@ -7,7 +7,7 @@
                         <c-block title="Search">
                             <div class="row align-items-center">
                                 <div class="col-12 col-md-6 col-lg-8">
-                                    <c-input-searcher @input="search"/>
+                                    <c-input-searcher v-model="phrase" @input="search"/>
                                 </div>
                                 <div class="col-12 col-md-auto">
                                     <c-button status="success" size="lg" icon="sliders-h" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="collapseFilters">
@@ -24,7 +24,7 @@
                                             <c-checkbox-group title="Game type">
                                                 <c-checkbox v-for="(item, index) in filters.game_type"
                                                             :key="index"
-                                                            :id="['game_type_' + index]"
+                                                            :id="'game_type_' + index"
                                                             :label="item.label"
                                                             v-model="item.value" />
                                             </c-checkbox-group>
@@ -79,6 +79,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <c-dropdown-list
+                                        :list="selectableTags"
+                                        @click="tag => tag.selected = !tag.selected"
+                                    />
                                 </div>
                             </div>
                         </c-block>
@@ -92,7 +96,25 @@
                         </div>
                         <h3>Active filters</h3>
                         <div class="active-filters">
-                            <c-option-tag text="DOOM"/>
+                            <c-option-tag
+                                v-if="phrase.length"
+                                title="Name:"
+                                :text="phrase"
+                                @delete="phrase = ''"
+                            />
+                            <c-option-tag
+                                v-if="selectedGenres.length"
+                                title="Genres:"
+                                @delete="selectedGenres.forEach(genre => genre.selected = false)"
+                            >
+                                <c-option-tag
+                                    v-for="(genre, index) in selectedGenres"
+                                    :key="index"
+                                    :text="genre.name"
+                                    @delete="genre.selected = false"
+                                    isNested
+                                />
+                            </c-option-tag>
                         </div>
                         <div>
                             <h3>Results</h3>
@@ -131,6 +153,7 @@
             'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description'], resolve),
             'c-spinner': (resolve) => require(['@/ui/components/spinner'], resolve),
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve),
+            'c-dropdown-list': (resolve) => require(['@/ui/components/dropdown-menu/list'], resolve),
         },
         mixins: [debouncer],
         data() {
@@ -159,12 +182,15 @@
                         }
                     }
                 },
+                phrase: '',
                 results: [],
-                isTyping: false
+                isTyping: false,
+                selectableTags: []
             }
         },
         methods: {
             search(phrase) {
+                this.phrase = phrase;
                 if (!this.isTyping) this.isTyping = true;
 
                 this.debounce(() => {
@@ -181,10 +207,14 @@
             }),
             marketplace() {
                 return this.$store.state.marketplace;
+            },
+            selectedGenres() {
+                return this.selectableTags.filter(tag => tag.selected);
             }
         },
         mounted() {
             this.results = this.products;
+            this.selectableTags = this.productsTags.map(tag => ({ name: tag, selected: false }));
         }
     }
 </script>
@@ -216,6 +246,7 @@
 
     .active-filters {
         display: flex;
+        flex-wrap: wrap;
     }
 
     .input-group {
