@@ -6,11 +6,11 @@
             </div>
         </transition>
         <h3>Pledge US ${{ price }} or more</h3>
-        <h4>{{ name }}</h4>
+        <h4 v-if="name">{{ name }}</h4>
         <div class="pledge-item__text">
             <slot />
         </div>
-        <div class="pledge-item__includes" v-if="!form">
+        <div class="pledge-item__includes" v-if="!form && this.$slots.includes">
             <h6>Includes</h6>
             <slot name="includes" />
         </div>
@@ -34,7 +34,7 @@
                 <div class="h6 font-weight-bold text-uppercase mb-3">
                     Pledge amount
                 </div>
-                <c-contribute-form v-model="toBePaid" :defaultValue="price"/>
+                <c-contribute-form v-model="toBePaid" :defaultValue="price" :active="true"/>
             </div>
         </transition>
     </div>
