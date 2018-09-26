@@ -3285,7 +3285,7 @@ storiesOf('Contribute', module)
         },
         data(){
             return{
-                value: null
+                value: ''
             }
         },
         template: `<div class="p-4" style="width: 400px"><c-contribute-form v-model="value" defaultValue="15" /> <div class="mt-4 text-white">Value - {{ value }}</div></div>`
