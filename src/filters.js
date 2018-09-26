@@ -41,3 +41,23 @@ Vue.filter('staticImg', value => `/static/img/products/${value}`);
 
 Vue.filter('staticVideo', value => `/static/img/products/${value}`);
 
+Vue.filter('highlightPhrase', (value, phrase, tag = 'strong') => {
+    if (!phrase) return value;
+
+    const valueLowered = value.toLowerCase();
+    const phraseLowered = phrase.toLowerCase();
+
+    const cut = (start, end) => value.substring(start, end);
+
+    const firstCharIndex = valueLowered.indexOf(phraseLowered);
+    if (firstCharIndex < 0) return value;
+
+    const phraseEndPos = firstCharIndex + phrase.length;
+    let valueWithPhrase =
+        cut(0, firstCharIndex) +
+        `<${tag}>` + cut(firstCharIndex, phraseEndPos) + `</${tag}>` +
+        cut(phraseEndPos, value.length);
+
+    return valueWithPhrase;
+});
+
