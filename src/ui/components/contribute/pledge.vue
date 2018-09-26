@@ -1,35 +1,23 @@
 <template>
-    <div class="pledge-item">
+    <div class="pledge-item" @mouseover=" showToggle = true" @mouseleave=" showToggle = false ">
+        <transition name="fade">
+            <div class="pledge-form-toggle" v-if="showToggle && !form " @click="showFrom" style="animation-duration: 0.5s">
+                Select this reward
+            </div>
+        </transition>
         <h3>Pledge US ${{ price }} or more</h3>
         <h4>{{ name }}</h4>
         <div class="pledge-item__text">
-            <!--<slot name="text" />-->
-            Choose ONE Drabblecast "Best of" Audio Anthology:
-            "Best of Horror," "Best of Fantasy," "Best of Science Fiction,"
-            each with new and original intro commentary by Norm.
+            <slot />
         </div>
-        <div class="pledge-item__includes">
+        <div class="pledge-item__includes" v-if="!form">
             <h6>Includes</h6>
-            <ul>
-                <li class="list-disc">
-                    Drabblecast Glow in the Dark Pin
-                </li>
-                <li>
-                    (3) Audio Anthologies: Horror, Science Fiction AND Fantasy
-                </li>
-                <li>
-                    Original Lovecraft mythos audio story by Frank Key
-                </li>
-                <li>
-                    Digital Hugs, Name on Website
-                </li>
-            </ul>
-            <!--<slot name="includes" />-->
+            <slot name="includes" />
         </div>
         <div class="pledge-item__info">
             <div v-if="estimated_delivery">
                 <span class="h6">Estimated delivery</span>
-                {{ estimated_delivery }}
+                {{ date }}
             </div>
             <div v-if="ships_to">
                 <span class="h6">Ships to</span>
@@ -41,20 +29,49 @@
                 </span>
             </div>
         </div>
+        <transition name="fade" v-if="form">
+            <div class="mt-5">
+                <div class="h6 font-weight-bold text-uppercase mb-3">
+                    Pledge amount
+                </div>
+                <c-contribute-form v-model="toBePaid" :defaultValue="price"/>
+            </div>
+        </transition>
     </div>
 </template>
 
 <script>
+    import ContributeForm from '@/ui/components/contribute/form.vue'
+    import moment from 'moment'
+
     export default {
         name: '',
-        props: [],
+        props: {
+            price: Number,
+            name: String,
+            estimated_delivery: String,
+            ships_to: String,
+            backers: Number,
+        },
+        components:{
+            'c-contribute-form': ContributeForm
+        },
         data(){
             return{
-                price: '10',
-                name: 'BLUE-HAIRED CATS',
-                estimated_delivery: '12/01/2018',
-                ships_to: 'Anywhere in the world',
-                backers: 43
+                form: false,
+                showToggle: false,
+                toBePaid: ''
+            }
+        },
+        methods:{
+            showFrom() {
+                this.form = true;
+                this.showToggle = false;
+            }
+        },
+        computed:{
+            date(){
+                return moment(this.estimated_delivery).format('DD MMMM, YYYY')
             }
         }
     }
@@ -65,8 +82,10 @@
         padding: 15px;
         border-radius: 5px;
         position: relative;
+        overflow: hidden;
         color: #fff;
         background: rgba(0, 0, 0, .13);
+        margin-bottom: 30px;
         h3, h4{
             font-size: 24px;
             text-transform: uppercase;
@@ -129,5 +148,22 @@
         div{
             width: 48%;
         }
+    }
+    .pledge-form-toggle{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(93, 117, 247, .95);
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        cursor: pointer;
     }
 </style>
