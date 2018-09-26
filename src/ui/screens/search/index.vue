@@ -98,21 +98,22 @@
                         <div class="active-filters">
                             <c-option-tag
                                 v-if="phrase.length"
-                                title="Name:"
+                                title="NAME:"
                                 :text="phrase"
                                 @delete="phrase = ''"
                             />
                             <c-option-tag
                                 v-if="selectedGenres.length"
-                                title="Genres:"
+                                title="GENRES:"
                                 @delete="selectedGenres.forEach(genre => genre.selected = false)"
+                                isParent
                             >
                                 <c-option-tag
                                     v-for="(genre, index) in selectedGenres"
                                     :key="index"
                                     :text="genre.name"
                                     @delete="genre.selected = false"
-                                    isNested
+                                    isChildren
                                 />
                             </c-option-tag>
                         </div>
@@ -214,7 +215,7 @@
         },
         mounted() {
             this.results = this.products;
-            this.selectableTags = this.productsTags.map(tag => ({ name: tag, selected: false }));
+            this.selectableTags = this.productsTags.map(tag => ({ name: tag, selected: true }));
         }
     }
 </script>
@@ -246,6 +247,7 @@
 
     .active-filters {
         display: flex;
+        align-items: center;
         flex-wrap: wrap;
     }
 

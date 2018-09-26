@@ -49,32 +49,34 @@
                     <div class="active-filters__content">
                         <c-option-tag
                             v-if="phrase.length"
-                            title="Name:"
+                            title="NAME:"
                             :text="phrase"
                             @delete="phrase = ''"
                         />
                         <c-option-tag
                             v-if="selectedGenres.length"
-                            title="Genres:"
+                            title="GENRES:"
                             @delete="selectedGenres = []"
+                            isParent
                         >
                             <c-option-tag
                                 v-for="(genre, index) in selectedGenres"
                                 :key="index"
                                 :text="genre"
                                 @delete="selectedGenres.splice(index, 1)"
-                                isNested
+                                isChildren
                             />
                         </c-option-tag>
                         <c-option-tag
                             v-if="sortBy.property"
-                            title="Sort by:"
+                            title="SORT BY:"
                             @delete="sortBy.property = null"
+                            isParent
                         >
                             <c-option-tag
                                 title="Property:"
                                 @delete="sortBy.property = null"
-                                isNested
+                                isChildren
                             >
                                 <select v-model="sortBy.property">
                                     <option
@@ -89,7 +91,7 @@
                             <c-option-tag
                                 title="Direction:"
                                 @delete="sortBy.asc = !sortBy.asc"
-                                isNested
+                                isChildren
                                 hideButton
                             >
                                 {{ sortBy.asc ? 'Ascending' : 'Descending' }}
