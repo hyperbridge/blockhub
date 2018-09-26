@@ -12,8 +12,9 @@ import * as marketplace from '../modules/marketplace'
 import * as network from '../modules/network'
 import * as database from '../modules/database'
 import * as cache from '../modules/cache'
-import user from '@/modules/user';
-import { saveDB } from './plugins';
+import user from '@/modules/user'
+import { saveDB } from './plugins'
+import seed from '../db/seed'
 
 Vue.use(Vuex);
 
@@ -176,6 +177,17 @@ export let initializer = () => {
             }
         })
 
+        const monitorSimulatorMode = () => {
+            if (!store.state.network.simulatorMode) {
+                return setTimeout(monitorSimulatorMode, 1000)
+            }
+
+            // DO THINGS
+            store.state.network.account.notifications.push(seed.notifications[0])
+
+            setTimeout(monitorSimulatorMode, 1000)
+        }
+
         const monitorPathState = async () => {
             if (!store.state.network.connection.operator) {
                 return
@@ -201,6 +213,7 @@ export let initializer = () => {
             monitorPathState()
         }
 
+        monitorSimulatorMode()
         monitorPathState()
 
         if (!window.BlockHub)

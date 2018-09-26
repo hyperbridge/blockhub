@@ -232,6 +232,9 @@ export const mutations = {
         const success = (id) => {
         }
     },
+    setSimulatorMode(state, payload) {
+        state.simulatorMode = payload
+    },
     activateModal(state, payload) {
         state.active_modal = payload
     },

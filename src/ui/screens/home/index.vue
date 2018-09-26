@@ -3,6 +3,19 @@
         <div class="content" id="content">
             <div class="container-fluid" v-if="is_connected">
                 <div class="row">
+                    <div class="col-12 mb-4">
+                        <c-download-block />
+                    </div>
+                    <div class="col-12 mb-4">
+                        <div class="card invert">
+                            <div class="card-body">
+                                <h4>Want to see the future of BlockHub?</h4>
+                                <c-button @click="toggleSimulator()">Toggle Simulator</c-button> <span>Status: {{ simulatorMode ? 'ON' : 'OFF' }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-12">
                         <c-main-banner class="margin-bottom-30" :image="main_banner.img" :logo="main_banner.logo" />
                     </div>
@@ -260,12 +273,18 @@
             },
             assets() {
                 return this.$store.state.marketplace.assets;
+            },
+            simulatorMode() {
+                return this.$store.state.network.simulatorMode;
             }
         },
         mounted: function () {
             $(this.$refs.trendingSlider).ionRangeSlider();
         },
-        updated() {
+        methods: {
+            toggleSimulator() {
+                this.$store.commit('network/setSimulatorMode', !this.$store.state.network.simulatorMode)
+            }
         }
     }
 </script>

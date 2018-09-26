@@ -62,7 +62,8 @@
                                 </div>
 
                                 <div class="navigation">
-                                    <c-notification v-for="(notif, index) in notifs" :key="index" :notification="notif"/>
+                                    <c-notification v-for="(notif, index) in notifs" :key="index" :notification="notif" v-if="notifs" />
+                                    <p v-if="!notifs">All clear. Good work!</p>
                                 </div>
 
                             </div>
@@ -332,55 +333,16 @@ export default {
         },
         purchase_modal_active() {
             return this.$store.state.network.active_modal === 'purchase'
+        },
+        notifs() {
+            return this.$store.state.network.account.notifications
         }
     },
     data() {
         return {
             navigationComponent: this.navigationKey || false,
             loadingState: true,
-            notifs: [
-                {
-                    type: 'info',
-                    title: 'Info message',
-                    text: 'Something is changed in our policy, please view this notification.Click to view full',
-                    showCloseBtn: true,
-                    actionOnClose: false,
-                    actionOnTextClick: true
-                },
-                {
-                    type: 'warning',
-                    title: 'Warning message',
-                    text: 'Something is changed in our policy, please view this notification.Click to view full',
-                    showCloseBtn: false,
-                    actionOnClose: '',
-                    actionOnTextClick: ''
-                },
-                {
-                    type: 'danger',
-                    title: 'Danger message',
-                    text: 'Something is changed in our policy, please view this notification.Click to view full',
-                    showCloseBtn: true,
-                    actionOnClose: '',
-                    actionOnTextClick: ''
-                },
-                {
-                    type: 'success',
-                    title: 'Success message',
-                    text: 'Something is changed in our policy, please view this notification.Click to view full',
-                    showCloseBtn: true,
-                    actionOnClose: '',
-                    actionOnTextClick: ''
-                },
-                {
-                    type: '',
-                    title: 'Other message',
-                    text: 'Something is changed in our policy, please view this notification.Click to view full',
-                    showCloseBtn: true,
-                    actionOnClose: '',
-                    actionOnTextClick: ''
-                }
-            ],
-            panelOption:{
+            panelOption: {
                 spaceBetween: 10,
                 loop: false,
             }

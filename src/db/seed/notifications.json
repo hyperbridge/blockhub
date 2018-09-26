@@ -1,0 +1,42 @@
+[
+    {
+        "type": "info",
+        "title": "Info message",
+        "text": "Something is changed in our policy, please view this notification.Click to view full",
+        "showCloseBtn": true,
+        "actionOnClose": false,
+        "actionOnTextClick": true
+    },
+    {
+        "type": "warning",
+        "title": "Warning message",
+        "text": "Something is changed in our policy, please view this notification.Click to view full",
+        "showCloseBtn": false,
+        "actionOnClose": "",
+        "actionOnTextClick": ""
+    },
+    {
+        "type": "danger",
+        "title": "Danger message",
+        "text": "Something is changed in our policy, please view this notification.Click to view full",
+        "showCloseBtn": true,
+        "actionOnClose": "",
+        "actionOnTextClick": ""
+    },
+    {
+        "type": "success",
+        "title": "Success message",
+        "text": "Something is changed in our policy, please view this notification.Click to view full",
+        "showCloseBtn": true,
+        "actionOnClose": "",
+        "actionOnTextClick": ""
+    },
+    {
+        "type": "",
+        "title": "Other message",
+        "text": "Something is changed in our policy, please view this notification.Click to view full",
+        "showCloseBtn": true,
+        "actionOnClose": "",
+        "actionOnTextClick": ""
+    }
+]

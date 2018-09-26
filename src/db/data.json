@@ -2,6 +2,7 @@
     "network": {
         "signed_in": false,
         "loading": false,
+        "simulatorMode": false,
         "connection": {
             "internet": false,
             "datasource": true,
@@ -63,6 +64,7 @@
         "active_modal": null,
         "account": {
             "private_key": "",
+            "notifications": [],
             "wallets": [
                 {
                     "id": "1",
