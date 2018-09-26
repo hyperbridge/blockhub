@@ -66,11 +66,11 @@
 
                         <div class="home-tabs">
                             <c-news-list-navigation
-                                :content_news="content_news"
+                                :content_news="product_news"
                             />
                             <div class="tab-content">
                                 <c-news-list-articles
-                                    v-for="(news, index) in content_news"
+                                    v-for="(news, index) in product_news"
                                     :key="index"
                                     :news="news"
                                     :index="index"
@@ -141,128 +141,6 @@
             'c-main-banner': (resolve) => require(['@/ui/components/banner'], resolve),
         },
         data: () => ({
-            content_news: [
-                {
-                    game: {
-                        title: 'Diablo III',
-                        developer: 'Blizzard Entertainment',
-                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                    },
-                    articles: [
-                        {
-                            heading: 'New class and event coming next week!',
-                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
-                            url: 'article-url',
-                            date: '2018-07-24T04:09:00.000Z'
-                        }
-                    ]
-                },
-                {
-                    game: {
-                        title: 'Diablo I',
-                        developer: 'Blizzard Entertainment',
-                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                    },
-                    articles: [
-                        {
-                            heading: 'New class and event coming next week!',
-                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
-                            url: 'article-url',
-                            date: '2016-09-24T04:09:00.000Z'
-                        },
-                        {
-                            heading: 'New class and event coming next week!',
-                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
-                            url: 'article-url',
-                            date: '2014-03-24T04:09:00.000Z'
-                        }
-                    ]
-                },
-                {
-                    game: {
-                        title: 'Diablo II',
-                        developer: 'Blizzard Entertainment',
-                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                    },
-                    articles: [
-                        {
-                            heading: 'New class and event coming next week!',
-                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
-                            url: 'article-url',
-                            date: '2017-12-24T04:09:00.000Z'
-                        }
-                    ]
-                }
-            ],
-            trending_projects: [
-                {
-                    game: {
-                        title: 'Diablo III',
-                        developer: 'Blizzard Entertainment',
-                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                    },
-                    description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
-                    img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
-                    funds: {
-                        currency: 'USD',
-                        obtained: 2834,
-                        goal: 5000
-                    }
-                },
-                {
-                    game: {
-                        title: 'World of Warcraft',
-                        developer: 'Blizzard Entertainment',
-                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                    },
-                    description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
-                    img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
-                    funds: {
-                        currency: 'GBP',
-                        obtained: 7613,
-                        goal: 8500
-                    }
-                },
-                {
-                    game: {
-                        title: 'Diablo III',
-                        developer: 'Blizzard Entertainment',
-                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                    },
-                    description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
-                    img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
-                    funds: {
-                        currency: 'USD',
-                        obtained: 2834,
-                        goal: 5000
-                    }
-                },
-                {
-                    game: {
-                        title: 'Diablo III',
-                        developer: 'Blizzard Entertainment',
-                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                    },
-                    description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
-                    img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
-                    funds: {
-                        currency: 'USD',
-                        obtained: 2834,
-                        goal: 5000
-                    }
-                },
-            ],
-            main_banner:{
-                img: {
-                    src: 'https://d2q63o9r0h0ohi.cloudfront.net/images/kobolds-and-catacombs/header-bg-backup-337031b146d6540bc3d2513f0fb11daa966398f512db7163c7e819120a62b2b17c2abaa893cfcef5c14e1f4a696ce45fa8d2e4d36a987029e563b449b402a115.jpg',
-                    position: 'center'
-                },
-                logo: {
-                    src: 'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png',
-                    position: 'left bottom',
-                    size: 'lg'
-                }
-            }
         }),
         computed: {
             is_connected() {
@@ -273,6 +151,15 @@
             },
             assets() {
                 return this.$store.state.marketplace.assets;
+            },
+            trending_projects() {
+                return this.$store.state.network.trending_projects;
+            },
+            product_news() {
+                return this.$store.state.network.product_news;
+            },
+            main_banner() {
+                return this.$store.state.network.main_banner;
             },
             simulatorMode() {
                 return this.$store.state.network.simulatorMode;

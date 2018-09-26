@@ -114,7 +114,7 @@ window.deleteSettings = function() {
 
 function isWhiteSpace(coords) {
   var element = document.elementFromPoint(coords.x, coords.y);
-  var whitespace = $(document).add('body, html, #app, #header-bg');
+  var whitespace = $(document).add('body, html, #app, #header-bg, #critical-error');
   return (whitespace.get().indexOf(element) > -1) ? true : false;
 }
 
@@ -126,13 +126,13 @@ function bootChecker() {
 
   if (isLoaded) {
     $('#critical-error').hide()
-    return
+    return setTimeout(bootChecker, 1 * 1000)
   }
 
   $('#critical-error').show()
 }
 
-setInterval(bootChecker, 5 * 1000)
+setTimeout(bootChecker, 10 * 1000)
 </script>
 
 <%= htmlWebpackPlugin.options.serviceWorkerLoader %>

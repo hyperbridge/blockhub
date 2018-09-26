@@ -177,13 +177,42 @@ export let initializer = () => {
             }
         })
 
+        const actions = [
+            'add',
+            'remove',
+            'nothing'
+        ]
+
+        const chooseRandom = (list) => {
+            return list[Math.floor(Math.random() * list.length)]
+        }
+
+        const removeRandom = (list) => {
+            return list.splice(Math.floor(Math.random() * list.length), 1)
+        }
+
+        const randomAction = () => {
+            return actions[Math.floor(Math.random() * actions.length)]
+        }
+
         const monitorSimulatorMode = () => {
             if (!store.state.network.simulatorMode) {
                 return setTimeout(monitorSimulatorMode, 1000)
             }
 
-            // DO THINGS
-            store.state.network.account.notifications.push(seed.notifications[0])
+            const action = randomAction()
+
+            if (action === 'add') {
+                store.state.network.account.notifications.push(chooseRandom(seed.notifications))
+                store.state.network.trending_projects.push(chooseRandom(seed.trending_projects))
+                store.state.network.curator_reviews.push(chooseRandom(seed.curator_reviews))
+                store.state.network.product_news.push(chooseRandom(seed.product_news))
+            } else if (action === 'remove') {
+                store.state.network.account.notifications = removeRandom(store.state.network.account.notifications)
+                store.state.network.trending_projects = removeRandom(store.state.network.trending_projects)
+                store.state.network.curator_reviews = removeRandom(store.state.network.curator_reviews)
+                store.state.network.product_news = removeRandom(store.state.network.product_news)
+            }
 
             setTimeout(monitorSimulatorMode, 1000)
         }

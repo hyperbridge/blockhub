@@ -159,11 +159,11 @@
 
                         <div class="home-tabs">
                             <c-news-list-navigation
-                                :content_news="content_news"
+                                :content_news="product_news"
                             />
                             <div class="tab-content">
                                 <c-news-list-articles
-                                    v-for="(news, index) in content_news"
+                                    v-for="(news, index) in product_news"
                                     :key="index"
                                     :news="news"
                                     :index="index"
@@ -225,83 +225,7 @@ export default {
         'c-slide': swiperSlide
     },
     data() {
-        const curator_review = {
-            author: { name: 'SatoSan', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png' },
-            rate: 4.5,
-            game: { img: 'http://www.pixels-association.ch/wp-content/uploads/2017/11/no1.jpg' },
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mi arcu, viverra et efficitur luctus, tincidunt vel lacus. Morbi erat augue, posuere et sodales venenatis, tincidunt eu arcu. In sollicitudin purus quis sodales ornare. Cras tempus vestibulum elementum. Sed placerat, turpis id cursus cursus, augue enim molestie dui, elementum luctus lectus est vitae dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris vehicula mi a nunc cursus, id volutpat purus commodo. Duis consequat elementum varius. Suspendisse dui enim, rhoncus a molestie at, tristique ut urna. Praesent et consectetur dui. Pellentesque ut volutpat nunc, ut viverra nulla. Duis ultricies, sem sit amet laoreet lobortis, mauris est mollis orci, non eleifend urna leo quis lectus. Vestibulum sit amet volutpat est.',
-            more_reviews: [
-                {
-                    rate: 3.5,
-                    game: {
-                        title: 'Volgar the Viking',
-                        img: 'https://images-1.gog.com/54e9b9504af871d5a6ed67f9a9c439fc3a889ecd4e84d24173b10e49971db9c7.jpg'
-                    }
-                },
-                {
-                    rate: 5,
-                    game: {
-                        title: 'The Witcher 3: Wild Hunt',
-                        img: 'http://getwallpapers.com/wallpaper/full/6/f/7/22250.jpg'
-                    }
-                }
-            ]
-        }
         return {
-            curators_reviews: [curator_review, curator_review, curator_review],
-            content_news: [
-                {
-                    game: {
-                        title: 'Diablo III',
-                        developer: 'Blizzard Entertainment',
-                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                    },
-                    articles: [
-                        {
-                            heading: 'New class and event coming next week!',
-                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
-                            url: 'article-url',
-                            date: '2018-07-24T04:09:00.000Z'
-                        }
-                    ]
-                },
-                {
-                    game: {
-                        title: 'Diablo I',
-                        developer: 'Blizzard Entertainment',
-                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                    },
-                    articles: [
-                        {
-                            heading: 'New class and event coming next week!',
-                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
-                            url: 'article-url',
-                            date: '2016-09-24T04:09:00.000Z'
-                        },
-                        {
-                            heading: 'New class and event coming next week!',
-                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
-                            url: 'article-url',
-                            date: '2014-03-24T04:09:00.000Z'
-                        }
-                    ]
-                },
-                {
-                    game: {
-                        title: 'Diablo II',
-                        developer: 'Blizzard Entertainment',
-                        img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                    },
-                    articles: [
-                        {
-                            heading: 'New class and event coming next week!',
-                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
-                            url: 'article-url',
-                            date: '2017-12-24T04:09:00.000Z'
-                        }
-                    ]
-                }
-            ],
             // Slider options
             demoSlider: {
                 slidesPerView: 3,
@@ -342,6 +266,12 @@ export default {
         },
         demo_products_sl() {
             return this.$refs.demo_products_sl.swiper;
+        },
+        curators_reviews() {
+            return this.$store.state.network.curator_reviews;
+        },
+        product_news() {
+            return this.$store.state.network.product_news;
         },
         assets() {
             return this.marketplace.assets;
