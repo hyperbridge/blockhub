@@ -8,12 +8,12 @@
             },
             cat: {
                 type: String,
-                default: 'fa'
+                default: 'fas'
             }
         },
         render(h) {
             return h('i', {
-                class: `fas ${this.cat}-${this.name}`,
+                class: `${this.cat} fa-${this.name}`,
                 on: { click: () => this.$emit('click') }
             });
         }

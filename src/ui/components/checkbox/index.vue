@@ -3,8 +3,9 @@
         <input
             type="checkbox"
             :id="id"
-            :checked="value"
-            @change="$emit('input', !value)"
+            :checked="checked"
+            v-bind="$attrs"
+            @change="$emit('change', $event.target.checked)"
         >
         <label :for="id">
             <slot/>
@@ -14,20 +15,26 @@
 
 <script>
     export default {
+        name: 'c-checkbox',
+        model: {
+            prop: 'checked',
+            event: 'change'
+        },
+        inheritAttrs: false,
         props: {
             id: {
                 type: [String, Number],
                 default() {
-                    return new Date().getUTCMilliseconds();
+                    return 'checkbox-' + parseInt(Math.random() * new Date().getUTCMilliseconds() * 5);
                 }
             },
-            value: Boolean
+            checked: [Boolean, String]
         }
     }
 </script>
 
 <style lang="scss" scoped>
-    .c-checkbox{
+    .c-checkbox {
         display: inline-flex;
         overflow: hidden;
         input[type=checkbox] {
@@ -43,8 +50,6 @@
                 -webkit-user-select: none;
                 -moz-user-select: none;
                 -ms-user-select: none;
-
-
                 &:last-child {
                     margin-bottom: 0;
                 }

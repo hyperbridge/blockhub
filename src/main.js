@@ -10,6 +10,8 @@ import './filters';
 import './components';
 import './directives';
 import './css/styles.scss';
+import './prototypes';
+import migrations from './db/migrations';
 
 Vue.config.productionTip = false
 
@@ -18,35 +20,6 @@ Vue.use(Snotify, {
     position: SnotifyPosition.leftBottom
   }
 });
-
-Vue.prototype.$notif = async (data) => {
-    if (!("Notification" in window)) {
-        return;
-    } else {
-
-        const spawnNotif = () => {
-            const icon = require('./assets/logo.png');
-
-            if (typeof data === 'string') {
-                new Notification(data, { icon });
-            } else {
-                const { title, body } = data;
-                new Notification(title, { icon, body });
-            }
-        }
-
-        if (Notification.permission === 'granted') {
-            spawnNotif();
-        } else if (['denied', 'granted'].some(perm => !perm.includes(Notification.permission))) {
-            const permission = await Notification.requestPermission();
-            if (permission === 'granted') {
-                spawnNotif();
-            }
-        }
-    }
-}
-
-
 
 
 const data = {
@@ -96,10 +69,11 @@ initializer().then(() => {
       el: '#app',
       router,
       store,
+      mixins: [migrations],
       template: `<app :data="${dataString}" />`,
       components: {
         'app': app
-      },
+      }
   });
 
 })

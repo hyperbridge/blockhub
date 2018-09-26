@@ -7,19 +7,27 @@
         </c-sidebar-menu>
 
         <c-sidebar-menu sub_title="Browse By Genre" sub_icon="fas fa-gamepad" mClass="margin-bottom-20">
-            <c-sidebar-menu-link url="#3" click="filter({genre: 'action'})" link_text="Action" />
-            <c-sidebar-menu-link url="#3" click="filter({genre: 'adventure'})" link_text="Adventure" />
-            <c-sidebar-menu-link url="#3" click="filter({genre: 'rpg'})" link_text="RPG" />
-            <c-sidebar-menu-link url="#3" click="filter({genre: 'racing'})" link_text="Racing" />
-            <c-sidebar-menu-link url="#3" click="filter({genre: 'fighting'})" link_text="Fighting" />
-            <c-sidebar-menu-link url="#3" click="filter({genre: 'vr'})" link_text="VR" />
+            <c-sidebar-menu-link url="#3" @click="filter({genre: 'action'})" link_text="Action" />
+            <c-sidebar-menu-link url="#3" @click="filter({genre: 'adventure'})" link_text="Adventure" />
+            <c-sidebar-menu-link url="#3" @click="filter({genre: 'rpg'})" link_text="RPG" />
+            <c-sidebar-menu-link url="#3" @click="filter({genre: 'racing'})" link_text="Racing" />
+            <c-sidebar-menu-link url="#3" @click="filter({genre: 'fighting'})" link_text="Fighting" />
+            <c-sidebar-menu-link url="#3" @click="filter({genre: 'vr'})" link_text="VR" />
             <c-sidebar-menu-link url="#3" aClass="font-weight-bold" link_text="MORE ..." />
         </c-sidebar-menu>
 
 
         <h3 class="text-uppercase">Search</h3>
         <div class="filter-blk">
-            <c-searcher class="margin-bottom-20" />
+            <c-searcher
+                @input="search"
+                class="margin-bottom-20"
+                :results="filteredResults"
+                resultUrl="/product/"
+                resultUrlProp="id"
+                resultTextProp="name"
+                :resultsCount="filteredResults.length"
+            />
 
             <c-range-slider label="Community size" :min="1" :max="10000" sClass="margin-bottom-20" />
 
@@ -27,14 +35,21 @@
 
             <div class="form-group platform-chose">
                 <label>Platform Availability</label>
-                <a href="#3">
-                    <i class="fab fa-windows"></i>
-                </a>
-                <a href="#3">
-                    <i class="fab fa-apple"></i>
-                </a>
-                <a href="#3">
-                    <i class="fab fa-linux"></i>
+                <a
+                    v-for="os in platforms"
+                    :key="os.prop"
+                    href="#"
+                    @click.prevent="handleArray(os.prop, 'choosenPlatforms')"
+                >
+                    <c-icon
+                        cat="fab"
+                        class="platform-icon"
+                        :name="os.name"
+                        :class="[ choosenPlatforms.includes(os.prop)
+                            ? 'platform-icon--active'
+                            : 'platform-icon--inactive'
+                        ]"
+                    />
                 </a>
             </div>
             <div class="action">
@@ -71,19 +86,51 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
+    import { arrayHandler } from '@/mixins';
+
     export default {
         components: {
             'c-sidebar-menu-link': (resolve) => require(['@/ui/components/sidebar-menu/menu_item'], resolve),
             'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
-            'c-range-slider': (resolve) => require(['@/ui/components/range-slider'], resolve)
+            'c-range-slider': (resolve) => require(['@/ui/components/range-slider'], resolve),
+            'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
         },
+        mixins: [arrayHandler],
         data() {
-            return {}
+            return {
+                results: [],
+                platforms: [
+                    { name: 'windows', prop: 'win' },
+                    { name: 'apple', prop: 'mac' },
+                    { name: 'linux', prop: 'linux' }
+                ],
+                choosenPlatforms: []
+            }
         },
-        methods:{
-            filter: function () {
+        methods: {
+            filter() {
                 alert('Click')
+            },
+            search(phrase) {
+                this.results = phrase.length
+                    ? this.getProductsByName(phrase)
+                    : [];
+            }
+        },
+        computed: {
+            ...mapGetters({
+                getProductsByName: 'marketplace/getProductsByName'
+            }),
+            filteredResults() {
+                return this.choosenPlatforms.length
+                    ? this.results.filter(result =>
+                        result.system_requirements.some(req =>
+                            this.choosenPlatforms.includes(req.os)
+                        )
+                    )
+                    : this.results;
             }
         }
     }
@@ -181,5 +228,12 @@
                 }
             }
         }
+    }
+
+    .platform-icon--active {
+        text-shadow: 0 0 5px rgba(255,255,255, .7);
+    }
+    .platform-icon--inactive:not(:hover) {
+        opacity: .7;
     }
 </style>

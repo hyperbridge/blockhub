@@ -1,7 +1,10 @@
 <template>
     <div
         class="option-tag"
-        :class="[ isNested ? 'option-tag--shadow' : 'option-tag--margin']"
+        :class="[
+            isChildren ? 'option-tag--shadow' : 'option-tag--margin',
+            { 'option-tag--light': isParent }
+        ]"
     >
         <span v-if="title" class="option-tag__title">
             {{ title }}
@@ -10,7 +13,7 @@
         <slot/>
         <c-icon
             v-if="!hideButton"
-            name="times"
+            name="times-circle"
             class="option-tag__del-btn"
             @click="$emit('delete')"
         />
@@ -23,7 +26,8 @@
         props: {
             title: String,
             text: String,
-            isNested: Boolean,
+            isParent: Boolean,
+            isChildren: Boolean,
             hideButton: Boolean
         }
     }
@@ -31,13 +35,14 @@
 
 <style lang="scss" scoped>
     .option-tag {
-        background: rgba(251, 225, 125, .9);
-        border-radius: 3px;
+        color: #30304B;
+        background: #fae17d;
+        border-radius: 8px;
         padding: 5px;
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        color: #000;
+        font-weight: bold;
         &:not(:last-child) {
             margin-right: 8px;
         }
@@ -45,30 +50,26 @@
             margin-bottom: 8px;
         }
         &.option-tag--shadow {
-            box-shadow: 0 0 10px 0 rgba(1,1,1,.3);
+            box-shadow: 0 0 10px 0 rgba(1,1,1,.5);
             margin: 4px 8px 4px 0;
+        }
+        &.option-tag--light {
+            color: #fff;
+            background: rgba(255,255,255,.15);
+            > .option-tag__del-btn:hover {
+                color: rgba(255, 255, 255, .4);
+            }
         }
     }
     .option-tag__title {
-        margin-right: 7px;
-        font-weight: 500;
+        margin-right: 5px;
     }
     .option-tag__del-btn {
-        background: rgba(1,1,1,.4);
-        color: #fff;
-        margin-left: 6px;
-        width: 18px;
-        height: 18px;
+        margin-left: 5px;
+        font-size: 16px;
         cursor: pointer;
-        border-radius: 50%;
-        position: relative;
         &:hover {
-            background: rgba(1,1,1,.6);
-        }
-        &:before {
-            position: absolute;
-            top: 3px;
-            left: 4.5px;
+            color: #45456c;
         }
     }
 </style>

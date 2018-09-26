@@ -2,7 +2,7 @@
 export default {
     name: 'input-searcher',
     inheritAttrs: false,
-    props: ['value'],
+    props: ['value', 'debounce'],
     render(h) {
         return h('div', {
             staticClass: 'input-searcher'
@@ -27,8 +27,11 @@ export default {
     .input-searcher {
         position: relative;
         height: 36px;
+        display: flex;
+        align-items: center;
         .c-input {
             padding-right: 25px;
+            width: 100%;
         }
         .input-searcher__icon {
             position: absolute;
@@ -37,5 +40,3 @@ export default {
         }
     }
 </style>
-
-

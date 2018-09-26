@@ -198,6 +198,10 @@
                     "pagination": true
                 }
             }
+        },
+        "migrations": {
+            "latest": "1537948419066",
+            "current": ""
         }
     },
     "funding": {
