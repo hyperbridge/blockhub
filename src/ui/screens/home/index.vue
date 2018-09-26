@@ -124,7 +124,8 @@
             'c-news-list-articles': (resolve) => require(['@/ui/components/news-list/articles'], resolve),
             'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
-            'c-main-banner': (resolve) => require(['@/ui/components/banner/index'], resolve),
+            'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve),
+            'c-main-banner': (resolve) => require(['@/ui/components/banner'], resolve),
         },
         data: () => ({
             content_news: [
