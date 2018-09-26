@@ -15,7 +15,7 @@
 }
 @keyframes hideSidepanel {
     0% {width: $sidepanel-width;}
-    50%{width: $sidepanel-width;}    
+    50%{width: $sidepanel-width;}
     100%{width: 0px;}
 }
 
@@ -53,7 +53,7 @@
 }
 
 @keyframes fadeIn {
-    0% {opacity: 0;}    
+    0% {opacity: 0;}
     100% {opacity: 1;}
 }
 
@@ -61,7 +61,7 @@
     0% {
         box-shadow: 0 0 0 0 rgba(0,0,0,0);
     }
-    20% {    
+    20% {
         box-shadow: 0 0 0 0 rgba(0,0,0,0.4);
     }
     60% {
@@ -99,4 +99,12 @@
 }
 .spinMe{
     animation: rotate 1s infinite;
+}
+
+.slide-in-enter-active, .slide-in-leave-active {
+    transition: opacity .2s ease, transform .2s ease;
+}
+.slide-in-leave-to, .slide-in-enter {
+    opacity: 0;
+    transform: translateY(10%);
 }
