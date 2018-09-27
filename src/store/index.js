@@ -48,7 +48,7 @@ const CheckDevelopmentMode = () => {
         ChaosMonkey.config.FORCED = true
     }
 
-    window.location = '#/store'
+    window.location = '#/'
 
     return hash
 }
