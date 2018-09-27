@@ -200,7 +200,7 @@ export let initializer = () => {
         let simulatorInitialized = false
 
         const monitorSimulatorMode = () => {
-            if (!store.state.network.simulatorMode) {
+            if (!store.state.marketplace.simulator_mode) {
                 simulatorInitialized = false
                 return setTimeout(monitorSimulatorMode, 1000)
             }
