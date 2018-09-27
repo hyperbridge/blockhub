@@ -11,10 +11,11 @@
                         <div class="card invert">
                             <div class="card-body">
                                 <h4>Want to see the future of BlockHub?</h4>
-                                <p><c-button @click="toggleSimulator()">Toggle Simulator</c-button> <c-button @click="clearSimulatorData()">Clear Data</c-button> <span>Status: {{ simulator_mode ? 'ON' : 'OFF' }}</span></p>
-                                <p><c-button @click="toggleDesktopMode()">Toggle Desktop Mode</c-button> <span>Status: {{ desktop_mode ? 'ON' : 'OFF' }}</span></p>
-                                <p><c-button @click="toggleDeveloperMode()">Toggle Developer Mode</c-button> <span>Status: {{ developer_mode ? 'ON' : 'OFF' }}</span></p>
-                                <p><c-button @click="toggleSignedIn()">Toggle Signed In</c-button> <span>Status: {{ signed_in ? 'SIGNED IN' : 'SIGNED OUT' }}</span></p>
+                                <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button> 
+                                <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktop_mode ? 'ON' : 'OFF' }}</c-button> 
+                                <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button> 
+                                <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button> 
+                                <c-button @click="clearSimulatorData()">Clear Data</c-button>
                             </div>
                         </div>
                     </div>
@@ -447,6 +448,9 @@ export default {
         },
         main_banner() {
             return this.$store.state.network.main_banner;
+        },
+        signed_in() {
+            return this.$store.state.network.signed_in;
         },
         simulator_mode() {
             return this.$store.state.marketplace.simulator_mode;
