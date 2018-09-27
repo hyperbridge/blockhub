@@ -11,7 +11,7 @@
                         <div class="card invert">
                             <div class="card-body">
                                 <h4>Want to see the future of BlockHub?</h4>
-                                <c-button @click="toggleSimulator()">Toggle Simulator</c-button> <span>Status: {{ simulatorMode ? 'ON' : 'OFF' }}</span>
+                                <c-button @click="toggleSimulator()">Toggle Simulator</c-button> <c-button @click="clearSimulatorData()">Clear Data</c-button> <span>Status: {{ simulatorMode ? 'ON' : 'OFF' }}</span>
                             </div>
                         </div>
                     </div>
@@ -484,6 +484,12 @@ export default {
         },
         toggleSimulator() {
             this.$store.commit('network/setSimulatorMode', !this.$store.state.network.simulatorMode)
+        },
+        clearSimulatorData() {
+            this.$store.state.network.account.notifications = []
+            this.$store.state.network.trending_projects = []
+            this.$store.state.network.curator_reviews = []
+            this.$store.state.network.product_news = []
         }
     },
     mounted() {

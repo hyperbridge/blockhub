@@ -7,7 +7,7 @@
                         <c-download-block />
                     </div>
                     <div class="col-4">
-                        <div class="card py-3">
+                        <div class="card invert py-3">
                             <div class="card-body text-center">
                                 <h4 class="text-uppercase">
                                     Inter-Game Trading
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="card py-3">
+                        <div class="card invert py-3">
                             <div class="card-body text-center">
                                 <h4 class="text-uppercase">
                                     Empower Creators
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="card py-3">
+                        <div class="card invert py-3">
                             <div class="card-body text-center">
                                 <h4 class="text-uppercase">
                                     New Economies
