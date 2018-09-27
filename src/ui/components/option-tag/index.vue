@@ -24,9 +24,14 @@
     export default {
         name: 'option-tag',
         props: {
-            title: String,
-            text: String,
-            isParent: Boolean,
+            title: [String, Number],
+            text: [String, Number],
+            isParent: {
+                type: Boolean,
+                default() {
+                    return !!(this.$slots.default && this.$slots.default.length);
+                }
+            },
             isChildren: Boolean,
             hideButton: Boolean
         }

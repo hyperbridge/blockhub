@@ -41,18 +41,13 @@
                                 </div>
                                 <div class="filter-box">
                                     <h4>Price range:</h4>
+                                    <p class="margin-top-20">Minimum:</p>
                                     <c-range-slider
-                                        :min="1"
-                                        :max="300"
-                                        sClass="margin-bottom-20"
-                                    />
-                                    <p>Minimum:</p>
-                                    <c-range-slider-pure
                                         v-model.number="price.min"
                                         :max="300"
                                     />
-                                    <p>Maximum:</p>
-                                    <c-range-slider-pure
+                                    <p class="margin-top-20">Maximum:</p>
+                                    <c-range-slider
                                         v-model.number="price.max"
                                         :max="300"
                                     />
@@ -81,7 +76,6 @@
                                         v-if="selectedGenres.length"
                                         title="GENRES:"
                                         @delete="selectedGenres.forEach(genre => genre.selected = false)"
-                                        isParent
                                     >
                                         <c-option-tag
                                             v-for="(genre, index) in selectedGenres"
@@ -92,9 +86,9 @@
                                         />
                                     </c-option-tag>
                                     <c-option-tag
+                                        v-if="selectedSpecials.length"
                                         title="SPECIALS:"
                                         @delete="selectedGenres.forEach(genre => genre.selected = false)"
-                                        isParent
                                     >
                                         <c-option-tag
                                             v-for="(tag, index) in selectedSpecials"
@@ -108,7 +102,6 @@
                                         v-if="price.min > 0 || price.max > 0"
                                         title="PRICE RANGE:"
                                         @delete="price.min = 0; price.max = 0"
-                                        isParent
                                     >
                                         <c-option-tag
                                             v-if="price.min"
@@ -165,8 +158,7 @@
             'c-spinner': (resolve) => require(['@/ui/components/spinner'], resolve),
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve),
             'c-dropdown-list': (resolve) => require(['@/ui/components/dropdown-menu/list'], resolve),
-            'c-range-slider': (resolve) => require(['@/ui/components/range-slider'], resolve),
-            'c-range-slider-pure': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
+            'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
         },
         mixins: [debouncer],
         data() {
