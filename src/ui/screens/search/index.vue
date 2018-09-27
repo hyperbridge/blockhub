@@ -20,11 +20,16 @@
                                     data-target="#expand-filters"
                                     aria-expanded="false"
                                     aria-controls="collapseFilters"
+                                    @click="expandFilters = !expandFilters"
                                 >Filters</c-button>
                             </div>
 
-                            <div class="collapse" id="expand-filters">
-                                <div>
+                            <div
+                                id="expand-filters"
+                                v-if="expandFilters"
+                                class="search-filters__container"
+                            >
+                                <div class="filter-box">
                                     <h4>Specials</h4>
                                     <c-checkbox
                                         v-for="(tag, index) in systemTags"
@@ -34,19 +39,28 @@
                                         {{ tag.value | replaceLoDash | upperFirstChar }}
                                     </c-checkbox>
                                 </div>
-                                <div>
-                                    <h4>Select price range</h4>
+                                <div class="filter-box">
+                                    <h4>Price range:</h4>
                                     <c-range-slider
                                         :min="1"
                                         :max="300"
                                         sClass="margin-bottom-20"
                                     />
-                                    <c-range-slider-pure v-model.number="price" :max="300"/>
-                                    {{ price }}
+                                    <p>Minimum:</p>
+                                    <c-range-slider-pure
+                                        v-model.number="price.min"
+                                        :max="300"
+                                    />
+                                    <p>Maximum:</p>
+                                    <c-range-slider-pure
+                                        v-model.number="price.max"
+                                        :max="300"
+                                    />
                                 </div>
-                                <h4>Genres</h4>
-                                <div class="row">
+                                <div class="filter-box">
+                                    <h4>Genres:</h4>
                                     <c-dropdown-list
+                                        title="SELECT GENRES"
                                         :list="selectableTags"
                                         @click="tag => tag.selected = !tag.selected"
                                     />
@@ -90,7 +104,27 @@
                                             isChildren
                                         />
                                     </c-option-tag>
-
+                                    <c-option-tag
+                                        v-if="price.min > 0 || price.max > 0"
+                                        title="PRICE RANGE:"
+                                        @delete="price.min = 0; price.max = 0"
+                                        isParent
+                                    >
+                                        <c-option-tag
+                                            v-if="price.min"
+                                            title="Minimum:"
+                                            :text="price.min"
+                                            @delete="price.min = 0"
+                                            isChildren
+                                        />
+                                        <c-option-tag
+                                            v-if="price.max"
+                                            title="Maximum:"
+                                            :text="price.max"
+                                            isChildren
+                                            @delete="price.max = 0"
+                                        />
+                                    </c-option-tag>
                                 </div>
                             </div>
                         </transition>
@@ -174,7 +208,11 @@
                 results: [],
                 isTyping: false,
                 selectableTags: [],
-                price: 30
+                price: {
+                    min: 0,
+                    max: 0
+                },
+                expandFilters: false
             }
         },
         methods: {
@@ -204,7 +242,10 @@
                 return this.systemTags.filter(tag => tag.selected);
             },
             filtersActive() {
-                return this.selectedGenres.length || this.phrase.length || this.selectedSpecials.length;
+                return !!(this.selectedGenres.length ||
+                    this.phrase.length ||
+                    this.selectedSpecials.length ||
+                    this.price.max || this.price.min);
             },
             filtered() {
                 return this.marketplace.products.filter(product => {
@@ -233,6 +274,17 @@
             width: 300px;
         }
         margin-bottom: 40px;
+    }
+
+    .search-filters__container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .filter-box {
+        margin: 20px;
+        flex: 1;
+        min-width: 180px;
     }
 
     .searching-box {
