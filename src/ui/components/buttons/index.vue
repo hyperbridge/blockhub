@@ -2,6 +2,7 @@
     <component
         :is="tag"
         :href="href"
+        :target="target"
         class="c-btn"
         :class="[
             status, 'c-btn-' + size ,
@@ -34,6 +35,10 @@
             href: {
                 type: String,
                 default: 'javascript:;',
+            },
+            target: {
+                type: String,
+                default: '_self',
             },
             icon: String,
             icon_hide: Boolean,

@@ -8,12 +8,13 @@ let rawData = {}
 
 export let state = null
 
-const updateState = () => {
+const updateState = (savedData) => {
     rawData = {
         ...rawData,
-        ...db.marketplace.config.data[0],
+        ...savedData,
         assets: db.marketplace ? db.marketplace.assets.data : [],
         products: db.marketplace ? db.marketplace.products.data : [],
+        collections: [], // TODO
         frontpage_product: db.marketplace ? db.marketplace.products.findOne({ 'system_tags': { '$contains': ['frontpage'] } }) : {},
         sale_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['sale'] } }) : [],
         new_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['new'] } }) : [],
@@ -21,7 +22,8 @@ const updateState = () => {
         upcoming_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['upcoming'] } }) : [],
         trending_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['trending'] } }) : [],
         top_selling_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }) : [],
-        special_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : []
+        special_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : [],
+        desktop_mode: rawData.desktop_mode !== null ? rawData.desktop_mode : window && window.process && window.process.type
     }
 
     const normalizedData = normalize(rawData, {
@@ -39,12 +41,12 @@ const updateState = () => {
     state = { ...rawData, ...normalizedData.entities }
 }
 
-updateState()
+updateState(db.marketplace.config.data[0])
 
 const sortDir = (dir, asc) => asc ? dir : dir * -1;
 
 export const getters = {
-    productsArray: state => Object.values(state.products),
+    productsArray: state => typeof (state.products) === "object" ? Object.values(state.products) : state.products,
     productsTags: (state, getters) => getters.productsArray
         .reduce((tags, product) => {
             product.developer_tags.forEach(tag => {
@@ -95,7 +97,7 @@ export const actions = {
     init(store, payload) {
         console.log("[BlockHub][Marketplace] Initializing...")
 
-        updateState()
+        updateState(store.state)
 
         store.commit('updateState', state)
     },
@@ -113,7 +115,7 @@ export const actions = {
     updateState(store, payload) {
         console.log("[BlockHub][Marketplace] Updating store...")
 
-        updateState()
+        updateState(store.state)
 
         store.commit('updateState', state)
     },
@@ -203,6 +205,9 @@ export const mutations = {
     },
     submitProductForReviewResponse(state, product) {
         db.marketplace.products.update(product)
+    },
+    setSimulatorMode(state, payload) {
+        state.simulator_mode = payload
     },
     async deployContract(state, payload) {
         if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {

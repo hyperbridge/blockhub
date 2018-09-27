@@ -394,10 +394,10 @@
                 steps: 3,
                 errors: [],
                 account: {
-                    first_name: 'First name',
-                    last_name: 'Last name',
-                    birthday: '03 Sep 2018',
-                    email: 'test@email.com',
+                    first_name: '',
+                    last_name: '',
+                    birthday: '',
+                    email: '',
                     agreement: false,
                     newsletter: false,
                     identity: {

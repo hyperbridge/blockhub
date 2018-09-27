@@ -48,7 +48,7 @@ const CheckDevelopmentMode = () => {
         ChaosMonkey.config.FORCED = true
     }
 
-    window.location = '#/store'
+    window.location = '#/'
 
     return hash
 }
@@ -200,7 +200,7 @@ export let initializer = () => {
         let simulatorInitialized = false
 
         const monitorSimulatorMode = () => {
-            if (!store.state.network.simulatorMode) {
+            if (!store.state.marketplace.simulator_mode) {
                 simulatorInitialized = false
                 return setTimeout(monitorSimulatorMode, 1000)
             }
@@ -210,6 +210,16 @@ export let initializer = () => {
                 store.state.network.trending_projects = seed.trending_projects
                 store.state.network.curator_reviews = seed.curator_reviews.slice(seed.curator_reviews.length / 2)
                 store.state.network.product_news = seed.product_news.slice(seed.product_news.length / 2)
+                store.state.marketplace.products = seed.products.slice(seed.products.length / 2)
+                store.state.marketplace.assets = seed.assets.slice(seed.assets.length / 2)
+                store.state.marketplace.collections = seed.collections.slice(seed.collections.length / 2)
+                store.state.funding.projects = seed.projects.slice(seed.projects.length / 2)
+
+                db.marketplace.products.data = store.state.marketplace.products
+
+                store.dispatch('marketplace/updateState')
+
+                store.state.marketplace.products = Object.values(store.state.marketplace.products)
 
                 simulatorInitialized = true
             }
@@ -217,15 +227,21 @@ export let initializer = () => {
             const action = randomAction()
             const targets = [
                 [store.state.network.account.notifications, seed.notifications],
+                [store.state.network.account.wallets, seed.wallets],
                 [store.state.network.trending_projects, seed.trending_projects],
                 [store.state.network.curator_reviews, seed.curator_reviews],
                 [store.state.network.product_news, seed.product_news],
+                [store.state.marketplace.assets, seed.assets],
+                [store.state.marketplace.products, seed.products],
+                [store.state.marketplace.collections, seed.collections],
+                [store.state.funding.projects, seed.projects],
             ]
 
             if (action === 'add') {
                 const target = chooseRandom(targets)
 
                 if (target[1].length > 0) {
+                    console.log(target)
                     target[0].push(chooseRandom(target[1]))
                 }
             } else if (action === 'remove') {
