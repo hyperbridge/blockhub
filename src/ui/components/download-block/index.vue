@@ -79,14 +79,9 @@
                             subtext: '64-bit',
                             link: '/#/download/desktop/linux'
                         },
-                        generic64: {
-                            text: 'Linux',
-                            subtext: '64-bit Generic',
-                            link: '/#/download/desktop/linux-64bit'
-                        },
                         generic32: {
                             text: 'Linux',
-                            subtext: '32-bit Generic',
+                            subtext: '32-bit',
                             link: '/#/download/desktop/linux-32bit'
                         },
                         debian64: {
