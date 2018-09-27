@@ -11,7 +11,11 @@
                         <div class="card invert">
                             <div class="card-body">
                                 <h4>Want to see the future of BlockHub?</h4>
-                                <c-button @click="toggleSimulator()">Toggle Simulator</c-button> <span>Status: {{ simulatorMode ? 'ON' : 'OFF' }}</span>
+                                <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button> 
+                                <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktop_mode ? 'ON' : 'OFF' }}</c-button> 
+                                <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button> 
+                                <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button> 
+                                <c-button @click="clearSimulatorData()">Clear Data</c-button>
                             </div>
                         </div>
                     </div>
@@ -445,8 +449,17 @@ export default {
         main_banner() {
             return this.$store.state.network.main_banner;
         },
-        simulatorMode() {
-            return this.$store.state.network.simulatorMode;
+        signed_in() {
+            return this.$store.state.network.signed_in;
+        },
+        simulator_mode() {
+            return this.$store.state.marketplace.simulator_mode;
+        },
+        desktop_mode() {
+            return this.$store.state.marketplace.desktop_mode;
+        },
+        developer_mode() {
+            return this.$store.state.marketplace.developer_mode;
         }
     },
     methods: {
@@ -482,8 +495,23 @@ export default {
             };
             console.log('done scroll')
         },
+        toggleDesktopMode() {
+            this.$store.state.marketplace.desktop_mode = !this.$store.state.marketplace.desktop_mode
+        },
+        toggleSignedIn() {
+            this.$store.state.network.signed_in = !this.$store.state.network.signed_in
+        },
+        toggleDeveloperMode() {
+            this.$store.state.marketplace.developer_mode = !this.$store.state.marketplace.developer_mode
+        },
         toggleSimulator() {
-            this.$store.commit('network/setSimulatorMode', !this.$store.state.network.simulatorMode)
+            this.$store.commit('marketplace/setSimulatorMode', !this.$store.state.marketplace.simulator_mode)
+        },
+        clearSimulatorData() {
+            this.$store.state.network.account.notifications = []
+            this.$store.state.network.trending_projects = []
+            this.$store.state.network.curator_reviews = []
+            this.$store.state.network.product_news = []
         }
     },
     mounted() {

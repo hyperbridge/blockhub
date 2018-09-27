@@ -4,6 +4,7 @@ import store from '../store'
 
 Vue.use(Router)
 
+const appVersion = '0.2.0'
 
 const router = new Router({
     //mode: 'history',
@@ -371,19 +372,49 @@ const router = new Router({
         {
             path: '/download/desktop/mac',
             beforeEnter(to, from, next) {
-                window.location = 'https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v0.1.0/BlockHub-v0.1.0.dmg'
+                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-v${appVersion}.dmg`
             }
         },
         {
             path: '/download/desktop/windows',
             beforeEnter(to, from, next) {
-                window.location = 'https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v0.1.0/BlockHub-v0.1.0.exe'
+                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-v${appVersion}-win.zip`
+            }
+        },
+        {
+            path: '/download/desktop/windows-32bit',
+            beforeEnter(to, from, next) {
+                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-v${appVersion}-win-ia32.zip`
             }
         },
         {
             path: '/download/desktop/linux',
             beforeEnter(to, from, next) {
-                window.location = 'https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v0.1.0/BlockHub-v0.1.0-linux.zip'
+                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-v${appVersion}-linux.zip`
+            }
+        },
+        {
+            path: '/download/desktop/linux-64bit',
+            beforeEnter(to, from, next) {
+                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-v${appVersion}-linux.zip`
+            }
+        },
+        {
+            path: '/download/desktop/linux-32bit',
+            beforeEnter(to, from, next) {
+                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-v${appVersion}-linux-ia32.zip`
+            }
+        },
+        {
+            path: '/download/desktop/linux-64bit-debian',
+            beforeEnter(to, from, next) {
+                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-v${appVersion}-linux-ia32.zip`
+            }
+        },
+        {
+            path: '/download/desktop/linux-32bit-debian',
+            beforeEnter(to, from, next) {
+                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-v${appVersion}-linux-ia32.zip`
             }
         },
         {

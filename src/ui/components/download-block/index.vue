@@ -66,7 +66,12 @@
                             text: 'Windows',
                             subtext: '64-bit',
                             link: '/#/download/desktop/windows'
-                        }
+                        },
+                        generic32: {
+                            text: 'Windows',
+                            subtext: '32-bit',
+                            link: '/#/download/desktop/windows-32bit'
+                        },
                     },
                     'linux': {
                         default: {
@@ -74,25 +79,20 @@
                             subtext: '64-bit',
                             link: '/#/download/desktop/linux'
                         },
-                        generic64: {
-                            text: 'Linux',
-                            subtext: '64-bit Generic',
-                            link: '/#/download/desktop/linux'
-                        },
                         generic32: {
                             text: 'Linux',
-                            subtext: '32-bit Generic',
-                            link: '/#/download/desktop/linux'
-                        },
-                        debian32: {
-                            text: 'Linux',
-                            subtext: '32-bit Debian',
-                            link: '/#/download/desktop/linux'
+                            subtext: '32-bit',
+                            link: '/#/download/desktop/linux-32bit'
                         },
                         debian64: {
                             text: 'Linux',
                             subtext: '64-bit Debian',
-                            link: '/#/download/desktop/linux'
+                            link: '/#/download/desktop/linux-64bit-debian'
+                        },
+                        debian32: {
+                            text: 'Linux',
+                            subtext: '32-bit Debian',
+                            link: '/#/download/desktop/linux-32bit-debian'
                         }
                     }
                 }
