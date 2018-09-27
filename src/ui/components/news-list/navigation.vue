@@ -1,6 +1,6 @@
 <template>
     <ul class="nav custom-tabs w-100" id="myTab" role="tablist">
-        <li class="nav-item" v-for="(item, index) in news" :key="index">
+        <li class="nav-item" v-for="(item, index) in news" :key="index" v-if="index <= 3">
             <a
                 class="nav-link"
                 :class="[ index === 0 ? 'active' : '' ]"
