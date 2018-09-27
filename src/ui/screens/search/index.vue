@@ -23,9 +23,8 @@
                                     @click="expandFilters = !expandFilters"
                                 >Filters</c-button>
                             </div>
-
+                            <transition name="slide-in-top">
                             <div
-                                id="expand-filters"
                                 v-if="expandFilters"
                                 class="search-filters__container"
                             >
@@ -34,6 +33,7 @@
                                     <c-checkbox
                                         v-for="(tag, index) in systemTags"
                                         :key="index"
+                                        :id="`specials-${tag.value}`"
                                         v-model="tag.selected"
                                     >
                                         {{ tag.value | replaceLoDash | upperFirstChar }}
@@ -60,7 +60,16 @@
                                         @click="tag => tag.selected = !tag.selected"
                                     />
                                 </div>
+                                <div class="filter-box">
+                                    <h4>Languages:</h4>
+                                    <div>
+                                        <a v-for="(lang, index) in selectableLanguages" :key="index" @click="lang.selected = true">
+                                            {{ lang.name }}  -
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
+                            </transition>
                         </c-block>
                         <transition name="slide-in-top">
                             <div class="active-filters" v-if="filtersActive">
@@ -116,6 +125,19 @@
                                             :text="price.max"
                                             isChildren
                                             @delete="price.max = 0"
+                                        />
+                                    </c-option-tag>
+                                    <c-option-tag
+                                        v-if="selectedLanguages.length"
+                                        title="LANGUAGES:"
+                                        @delete="selectableLanguages.forEach(lang => lang.selected = false)"
+                                    >
+                                        <c-option-tag
+                                            v-for="(lang, index) in selectedLanguages"
+                                            :key="index"
+                                            :text="lang.name"
+                                            @delete="lang.selected = false"
+                                            isChildren
                                         />
                                     </c-option-tag>
                                 </div>
@@ -200,6 +222,7 @@
                 results: [],
                 isTyping: false,
                 selectableTags: [],
+                selectableLanguages: [],
                 price: {
                     min: 0,
                     max: 0
@@ -222,7 +245,8 @@
             ...mapGetters({
                 getProductsByName: 'marketplace/getProductsByName',
                 products: 'marketplace/productsArray',
-                productsTags: 'marketplace/productsTags'
+                productsTags: 'marketplace/productsTags',
+                languages: 'marketplace/productsLanguages'
             }),
             marketplace() {
                 return this.$store.state.marketplace;
@@ -233,11 +257,15 @@
             selectedSpecials() {
                 return this.systemTags.filter(tag => tag.selected);
             },
+            selectedLanguages() {
+                return this.selectableLanguages.filter(lang => lang.selected);
+            },
             filtersActive() {
                 return !!(this.selectedGenres.length ||
                     this.phrase.length ||
                     this.selectedSpecials.length ||
-                    this.price.max || this.price.min);
+                    this.price.max || this.price.min ||
+                    this.selectedLanguages.length);
             },
             filtered() {
                 return this.marketplace.products.filter(product => {
@@ -248,6 +276,7 @@
         mounted() {
             this.results = this.products;
             this.selectableTags = this.productsTags.map(tag => ({ name: tag, selected: false }));
+            this.selectableLanguages = this.languages.map(lang => ({ name: lang, selected: false }));
         },
         filters: {
             replaceLoDash(val) {
@@ -274,9 +303,12 @@
         justify-content: space-between;
     }
     .filter-box {
-        margin: 20px;
+        margin: 10px;
         flex: 1;
         min-width: 180px;
+        padding: 10px;
+        border-radius: 4px;
+        background: rgba(255,255,255,.03);
     }
 
     .searching-box {

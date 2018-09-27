@@ -51,14 +51,26 @@ export const getters = {
                 if (!tags.includes(tag)) tags.push(tag);
             });
             return tags;
-        }, []).sort(),
+        }, []).sort()
+    ,
     systemTags: (state, getters) => getters.productsArray
         .reduce((tags, product) => {
             product.system_tags.forEach(tag => {
                 if (!tags.includes(tag)) tags.push(tag);
             });
             return tags;
-        }, []).sort(),
+        }, []).sort()
+    ,
+    productsLanguages: (state, getters) => getters.productsArray
+        .reduce((languages, product) => [
+            ...languages,
+            ...product.language_support
+                .filter(lang =>
+                    !languages.includes(lang.name)
+                )
+                .map(lang => lang.name)
+        ], []).sort()
+    ,
     getProductsByName: (state, getters) => name => getters.productsArray.filter(product =>
         product.name.toLowerCase().includes(name.toLowerCase())
     ),
