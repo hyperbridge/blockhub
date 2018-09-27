@@ -24,7 +24,7 @@
                     />
                 </template>
             </c-heading-bar>
-            <div class="product-grid__filters">
+            <div class="product-grid__filters align-items-center">
                 <div class="d-flex align-items-center">
                     <c-dropdown id="products-genres" name="Filter by Genre" :showBg="true" class="product-genre">
                         <div class="product-genre__content">

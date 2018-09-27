@@ -9,6 +9,7 @@
                 v-for="(review, index) in reviews"
                 :key="index"
                 :review="review"
+                v-if="index <= 3"
             />
         </div>
     </div>
