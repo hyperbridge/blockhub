@@ -130,7 +130,7 @@
                         </ul>
 
                         <div class="row tab-pane fade" id="configure" role="tabpanel" aria-labelledby="configure-tab">
-                            <c-block-1 title="Campaign">
+                            <c-block title="Campaign">
                                 <form>
 
                                     <div class="row">
@@ -251,7 +251,7 @@
                                         </div>
                                     </div>
                                 </form>
-                            </c-block-1>
+                            </c-block>
                         </div>
 
                         <div class="row tab-pane fade active show" id="overview" role="tabpanel"
@@ -289,11 +289,6 @@
                                 </div>
                             </div>
                             <div class="col-md-5 col-xl-4">
-                                <c-block title="Contribute" class="card invert purchase-block">
-                                    <c-button size="lg" @click="showContributeModal">
-                                        Proceed to Purchase
-                                    </c-button>
-                                </c-block>
 
                                 <div class="card invert" v-if="project.funding">
                                     <div class="card-body">
@@ -381,6 +376,40 @@
                                 <c-community-spotlight :discussions="project.community.discussions"
                                                        :community_url="`/#/project/${project.id}`" :editing="editing"
                                                        :activeElement="activeElement['milestones']"/>
+
+                                <c-block title="Contribute" class="margin-bottom-30">
+                                    <c-contribute-form @click="showContributeModal" />
+                                </c-block>
+                                <c-contribute-pledge @click="showContributeModal" :price="10" name="Some awesome things" estimated_delivery="28.10.2018" ships_to="Anywhere in the world" :backers="37">
+
+                                    Choose ONE Drabblecast "Best of" Audio Anthology:
+                                    "Best of Horror," "Best of Fantasy," "Best of Science Fiction,"
+                                    each with new and original intro commentary by Norm.
+
+                                    <template slot="includes">
+                                        <ul>
+                                            <li class="list-disc">
+                                                Drabblecast Glow in the Dark Pin
+                                            </li>
+                                            <li>
+                                                (3) Audio Anthologies: Horror, Science Fiction AND Fantasy
+                                            </li>
+                                            <li>
+                                                Original Lovecraft mythos audio story by Frank Key
+                                            </li>
+                                            <li>
+                                                Digital Hugs, Name on Website
+                                            </li>
+                                        </ul>
+                                    </template>
+
+                                </c-contribute-pledge>
+                                <c-contribute-pledge @click="showContributeModal" :price="50" name="Wiggly people" estimated_delivery="03.12.2018" ships_to="Anywhere in the world" :backers="13">
+
+                                    Choose between TWO Drabblecast "Best of" Audio Anthologies, PLUS a Drabblecast Glow in the Dark Pin!
+
+                                </c-contribute-pledge>
+
                             </div>
                         </div>
 
@@ -405,28 +434,6 @@
                                 />
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="invertFormExampleModal" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content invert">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Set Up Campaign</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </div>
@@ -462,7 +469,7 @@
         components: {
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-game-plan': (resolve) => require(['@/ui/components/game-plans/plan'], resolve),
-            'c-block-1': (resolve) => require(['@/ui/components/block'], resolve),
+            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-screen-gallery': (resolve) => require(['@/ui/components/screen-gallery/gallery'], resolve),
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-rating-block': (resolve) => require(['@/ui/components/rating-block'], resolve),
@@ -471,7 +478,8 @@
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
             'c-review': (resolve) => require(['@/ui/components/review'], resolve),
             'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar'], resolve),
-            'c-badges': (resolve) => require(['@/ui/components/projects/badges.vue'], resolve)
+            'c-contribute-form': (resolve) => require(['@/ui/components/contribute/form.vue'], resolve),
+            'c-contribute-pledge': (resolve) => require(['@/ui/components/contribute/pledge.vue'], resolve)
         },
         data() {
             return {

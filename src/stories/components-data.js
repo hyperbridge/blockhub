@@ -305,7 +305,7 @@ export const SendingFunds = {
     template: `
         <div class="row p-5">
             <div class="col-8">
-                <c-button text="Show Sending Funds Modal" @click="showModalHandler" variant="warning" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                <c-button @click="showModalHandler" status="warning" c_class="ml-1">Show Sending Funds Modal</c-button>
 
                 <c-send-funds :modalActive="modalActive">
                     <template slot="agreement_text">
