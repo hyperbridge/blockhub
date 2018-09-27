@@ -21,7 +21,8 @@ const updateState = () => {
         upcoming_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['upcoming'] } }) : [],
         trending_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['trending'] } }) : [],
         top_selling_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }) : [],
-        special_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : []
+        special_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : [],
+        desktop_mode: rawData.desktop_mode !== null ? rawData.desktop_mode : window && window.process && window.process.type
     }
 
     const normalizedData = normalize(rawData, {
@@ -191,6 +192,9 @@ export const mutations = {
     },
     submitProductForReviewResponse(state, product) {
         db.marketplace.products.update(product)
+    },
+    setSimulatorMode(state, payload) {
+        state.simulator_mode = payload
     },
     async deployContract(state, payload) {
         if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {

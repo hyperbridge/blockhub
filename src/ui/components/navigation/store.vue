@@ -1,9 +1,11 @@
 <template>
     <div class="navigation" id="navigation-default">
 
-        <c-sidebar-menu title="STORE" sub_title="Store Home" mClass="margin-bottom-20">
-            <c-sidebar-menu-link url="/#/store" link_text="My Store" />
-            <c-sidebar-menu-link url="/#/dashboard" link_text="Friends Store" />
+        <c-sidebar-menu title="STORE" sub_title="General" mClass="margin-bottom-20">
+            <c-sidebar-menu-link url="/#/" link_text="Home" />
+            <c-sidebar-menu-link url="/#/curators" link_text="Browse Curators" />
+            <c-sidebar-menu-link url="/#/collections" link_text="Browse Collections" />
+            <c-sidebar-menu-link url="/#/items" link_text="Browse Items" />
         </c-sidebar-menu>
 
         <c-sidebar-menu sub_title="Browse By Genre" sub_icon="fas fa-gamepad" mClass="margin-bottom-20">

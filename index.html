@@ -83,7 +83,7 @@
 <div id="app"></div>
 
 <div id="critical-error">
-  <p>A critical error occurred. You will likely need to clear all of your settings.</p><br />
+  <p>A critical error occurred. If this doesn't disappear in 1 minute, you will likely need to clear all of your settings.</p><br />
   <p>If you created an account on this computer, you should make sure you have an account file backup.</p>
   <button onClick="window.downloadAccountFile()">Click here to download your account file backup</button><br /><br />
   <button onClick="window.deleteSettings()">Click here to delete the settings on this computer.</button><br />
@@ -119,6 +119,7 @@ function isWhiteSpace(coords) {
 }
 
 function bootChecker() {
+  if (document.location.pathname !== '/' || document.location.hash !== '#/') return
   if (typeof($) == undefined) return
 
   // If any of these randomly chosen coordinates is not a bottom layer element, then assume loading occurred properly

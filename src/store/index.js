@@ -48,7 +48,7 @@ const CheckDevelopmentMode = () => {
         ChaosMonkey.config.FORCED = true
     }
 
-    window.location = '#/store'
+    window.location = '#/'
 
     return hash
 }
@@ -197,9 +197,21 @@ export let initializer = () => {
             return actions[Math.floor(Math.random() * actions.length)]
         }
 
+        let simulatorInitialized = false
+
         const monitorSimulatorMode = () => {
-            if (!store.state.network.simulatorMode) {
+            if (!store.state.marketplace.simulator_mode) {
+                simulatorInitialized = false
                 return setTimeout(monitorSimulatorMode, 1000)
+            }
+
+            // Start out with some decent amount of content
+            if (!simulatorInitialized) {
+                store.state.network.trending_projects = seed.trending_projects
+                store.state.network.curator_reviews = seed.curator_reviews.slice(seed.curator_reviews.length / 2)
+                store.state.network.product_news = seed.product_news.slice(seed.product_news.length / 2)
+
+                simulatorInitialized = true
             }
 
             const action = randomAction()
