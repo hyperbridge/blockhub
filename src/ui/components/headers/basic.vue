@@ -51,7 +51,7 @@
                 <nav class="horizontal-navigation app-header__nav-left">
                     <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
                     <ul>
-                        <li class="app-header__create-account-btn" v-if="!signed_in">
+                        <li class="app-header__create-account-btn" v-if="is_desktop && !signed_in">
                             <a href="/#/account/signup" class="">
                                 <span class="text">CREATE ACCOUNT</span> <span class="fa fa-user-plus"></span>
                             </a>
@@ -96,7 +96,7 @@
                                 <span class="text">Contacts</span>
                             </a>
                         </li>
-                        <li v-if="!signed_in">
+                        <li v-if="is_desktop && !signed_in">
                             <a href="/#/account/signin">
                                 <span class="icon fa fa-sign-out-alt"></span>
                                 <span class="text">Sign In</span>
