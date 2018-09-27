@@ -66,7 +66,7 @@
 
                         <div class="home-tabs">
                             <c-news-list-navigation
-                                :content_news="product_news"
+                                :news="product_news"
                             />
                             <div class="tab-content">
                                 <c-news-list-articles

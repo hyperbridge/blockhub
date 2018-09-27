@@ -3,7 +3,7 @@
         <div class="content" id="content">
             <div class="container-fluid">
                 <template  v-for="(item, index) in sliced" v-if="sliced">
-                    <div class="row justify-content-center frontpage-product" v-if="item.type === 'frontpage_product'" :key="index">
+                    <div class="row justify-content-center frontpage-product" v-if="item.type === 'frontpage_product'" :key="`level-1-${index}`">
                         <div class="col-12 col-lg-6 frontpage-product__slider" v-if="item.data.images">
                             <img :src="item.data.images.medium_tile" />
                         </div>
@@ -27,7 +27,7 @@
                         </div>
                     </div>
 
-                    <div class="row" v-if="item.type === 'product_slider'" :key="index">
+                    <div class="row" v-if="item.type === 'product_slider'" :key="`level-1-${index}`">
                         <div class="col-12">
                             <c-block class="margin-bottom-30" :onlyContentBg="true" :noGutter="true">
                                 <c-heading-bar
@@ -51,7 +51,7 @@
                     </div>
 
 
-                    <div class="row align-items-stretch" v-if="item.type === 'banners'" :key="index">
+                    <div class="row align-items-stretch" v-if="item.type === 'banners'" :key="`level-1-${index}`">
                         <div class="col-12 col-md-4 margin-bottom-30">
                             <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="/#/home">
                                 <h4 class="text-yellow">summer block</h4>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
 
-                    <c-games-explorer v-if="item.type === 'games_explorer'" :key="index" />
+                    <c-games-explorer v-if="item.type === 'games_explorer'" :key="`level-1-${index}`" />
 
                     <div class="row margin-bottom-50 margin-top-20 align-items-stretch" v-if="item.type === 'banners'" :key="index">
                         <div class="col-12 col-md-8">
@@ -93,13 +93,13 @@
                         </div>
                     </div>
 
-                    <div class="row margin-bottom-30" v-if="item.type === 'product_grid'" :key="index">
+                    <div class="row margin-bottom-30" v-if="item.type === 'asset_grid'" :key="`level-1-${index}`">
                         <div class="col-12">
                             <c-block :noGutter="true" :onlyContentBg="true" class="margin-bottom-30">
                                 <c-heading-bar
                                     slot="title"
                                     class="mb-0"
-                                    :headingTabs="['Top 10 Items', 'Most Wanted', 'Top 10 Prices']"
+                                    :headingTabs="['Top 10 Items', 'Most Wanted', 'Best Deals']"
                                 >
                                     <template slot="additional-action">
                                         <c-heading-bar-fields name="Trending" @clickUp=""  @clickDown=""/>
@@ -139,12 +139,12 @@
                         </div>
                     </div>
 
-                    <div class="row margin-bottom-30" v-if="item.type === 'product_news'" :key="index">
+                    <div class="row margin-bottom-30" v-if="item.type === 'product_news'" :key="`level-1-${index}`">
                         <div class="col-12">
                             <c-block :noGutter="true" :bgColor="false" title="What's up with your content">
                                 <div class="home-tabs">
                                     <c-news-list-navigation
-                                        :content_news="item.data.news"
+                                        :news="item.data.news"
                                     />
                                     <div class="tab-content">
                                         <c-news-list-articles
@@ -161,15 +161,16 @@
 
                     <c-curators-reviews
                         :reviews="item.data.reviews"
-                        v-if="item.type === 'curator_reviews'" :key="index"
+                        v-if="item.type === 'curator_reviews'"
+                        :key="`level-1-${index}`"
                     />
                 </template>
 
                 <transition name="fade-slow">
-                    <div class="posts-timeline__end" v-if="end">
+                    <div class="" v-if="end">
                         <h3>You're all caught up!</h3>
                     </div>
-                    <div class="posts-timeline__end no-updates" v-if="!items">
+                    <div class="no-updates" v-if="!sliced">
                         <h3>
                             There is no updates yet.
                         </h3>
@@ -291,8 +292,10 @@ export default {
             })
 
             result.push({
-                type: 'product_grid',
-                data: {}
+                type: 'asset_grid',
+                data: {
+                    assets: this.marketplace.assets
+                }
             })
 
             result.push({
@@ -305,7 +308,7 @@ export default {
             result.push({
                 type: 'product_news',
                 data: {
-                    reviews: this.$store.state.network.product_news
+                    news: this.$store.state.network.product_news
                 }
             })
 
@@ -322,9 +325,6 @@ export default {
         },
         marketplace() {
             return this.$store.state.marketplace;
-        },
-        assets() {
-            return this.marketplace.assets;
         },
         // slice the array of data to display
         sliced() {

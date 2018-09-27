@@ -188,7 +188,9 @@ export let initializer = () => {
         }
 
         const removeRandom = (list) => {
-            return list.splice(Math.floor(Math.random() * list.length), 1)
+            list.splice(Math.floor(Math.random() * list.length), 1)
+
+            return list
         }
 
         const randomAction = () => {
@@ -201,20 +203,26 @@ export let initializer = () => {
             }
 
             const action = randomAction()
+            const targets = [
+                [store.state.network.account.notifications, seed.notifications],
+                [store.state.network.trending_projects, seed.trending_projects],
+                [store.state.network.curator_reviews, seed.curator_reviews],
+                [store.state.network.product_news, seed.product_news],
+            ]
 
             if (action === 'add') {
-                store.state.network.account.notifications.push(chooseRandom(seed.notifications))
-                store.state.network.trending_projects.push(chooseRandom(seed.trending_projects))
-                store.state.network.curator_reviews.push(chooseRandom(seed.curator_reviews))
-                store.state.network.product_news.push(chooseRandom(seed.product_news))
+                const target = chooseRandom(targets)
+
+                if (target[1].length > 0) {
+                    target[0].push(chooseRandom(target[1]))
+                }
             } else if (action === 'remove') {
-                store.state.network.account.notifications = removeRandom(store.state.network.account.notifications)
-                store.state.network.trending_projects = removeRandom(store.state.network.trending_projects)
-                store.state.network.curator_reviews = removeRandom(store.state.network.curator_reviews)
-                store.state.network.product_news = removeRandom(store.state.network.product_news)
+                const target = chooseRandom(targets)
+
+                removeRandom(target[0])
             }
 
-            setTimeout(monitorSimulatorMode, 1000)
+            setTimeout(monitorSimulatorMode, 200)
         }
 
         const monitorPathState = async () => {

@@ -1753,7 +1753,7 @@ storiesOf('News List', module)
         },
         data() {
             return {
-                content_news: [
+                news: [
                     {
                         game: {
                             title: 'Diablo III',
@@ -1811,10 +1811,10 @@ storiesOf('News List', module)
         template: `
         <div class="row m-0 p-5">
             <c-news-list-navigation
-                :content_news="content_news"
+                :news="news"
             />
             <c-news-list-articles
-                :content_news="content_news"
+                :news="news"
             />
         </div>
         `
