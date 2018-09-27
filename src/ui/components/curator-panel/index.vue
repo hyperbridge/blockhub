@@ -1,33 +1,18 @@
 <template>
     <div class="curator-panel">
-        <div class="sidebar-card margin-top-40">
-            <h4 class="success-ttl">
-                <i class="fas fa-check"></i>
-                Content curated
-            </h4>
+        <c-claim title="Content curated" type="success">
             <p>This page has been curatedby 2041 users</p>
             <a href="#3" class="btn btn-sm btn-outline-white">
                 Become a curator
             </a>
-        </div>
-        <div class="sidebar-card margin-top-40">
-            <h4 class="warning-ttl">
-                <i class="fas fa-exclamation-triangle"></i>
-                Unclaimed Page
-            </h4>
+        </c-claim>
+        <c-claim title="Unclaimed Page" type="warning">
             <p>This page has been curatedby 2041 users</p>
-            <a href="#3" class="btn btn-sm btn-warning">
-                Become a curator
-            </a>
-        </div>
-        <div class="sidebar-card margin-top-40">
-            <h4 class="danger-ttl">
-                <i class="fas fa-times"></i>
-                Unclaimed Page
-            </h4>
+            <c-switch label="Enable Curation Mode"/>
+        </c-claim>
+        <c-claim title="Some info">
             <p>This page has been curatedby 2041 users</p>
-            <c-switch label="Enable Curation Mode" label_position="right" />
-        </div>
+        </c-claim>
         <div class="sidebar-panel">
             <h3>Curator panel</h3>
             <p>Other 1023 curators have
@@ -84,54 +69,13 @@
 <script>
     export default {
         components: {
-            'c-switch': (resolve) => require(['@/ui/components/switch'], resolve)
+            'c-switch': (resolve) => require(['@/ui/components/switch'], resolve),
+            'c-claim': (resolve) => require(['@/ui/components/curator-panel/claim.vue'], resolve)
         },
     }
 </script>
 
 <style lang="scss" scoped>
-    .sidebar-card{
-        display: inline-block;
-        width: 100%;
-        float: left;
-        overflow: hidden;
-        color: #fff;
-        h4{
-            font-weight: bold;
-            font-size: 14px;
-            margin-bottom: 5px;
-            i{
-                margin-right: 5px;
-            }
-            &.success-ttl{
-                color: #43C981;
-            }
-            &.warning-ttl{
-                color: #FADC72;
-            }
-            &.danger-ttl{
-                color: #F75D5D;
-            }
-        }
-        p{
-            line-height: 18px;
-        }
-        .btn-sm{
-            padding: 2px 5px;
-            line-height: 16px;
-            font-size: 12px;
-        }
-        .btn-warning{
-            background: #FADC72;
-            color: #30304B;
-            font-weight: bold;
-            font-size: 13px;
-            &:hover{
-                background: #d2b95f;
-                color: #30304B;
-            }
-        }
-    }
     .sidebar-panel{
         display: inline-block;
         width: calc( 100% + 30px );
