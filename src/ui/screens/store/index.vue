@@ -2,181 +2,179 @@
     <c-layout navigationKey="store-navigation">
         <div class="content" id="content">
             <div class="container-fluid">
-
-                <div class="row justify-content-center frontpage-product" v-if="frontpage_product">
-                    <div class="col-12 col-lg-6 frontpage-product__slider" v-if="frontpage_product.images">
-                        <img :src="frontpage_product.images.medium_tile" />
-                    </div>
-                    <div class="col-12 col-lg-6 frontpage-product__info">
-                        <h2><a :href="`/#/product/${frontpage_product.id}`">{{ frontpage_product.name }}</a></h2>
-                        <p>{{ frontpage_product.short_description }}</p>
-                        <c-tags :tags="frontpage_product.author_tags"></c-tags>
-                        <div class="frontpage-product__footer">
-                            <div class="price-list">
-                                <div class="price old_price" v-if="frontpage_product.old_price">
-                                    {{ frontpage_product.old_price }}
-                                    <span>usd</span>
+                <template  v-for="(item, index) in sliced" v-if="sliced">
+                    <div class="row justify-content-center frontpage-product" v-if="item.type === 'frontpage_product'" :key="index">
+                        <div class="col-12 col-lg-6 frontpage-product__slider" v-if="item.data.images">
+                            <img :src="item.data.images.medium_tile" />
+                        </div>
+                        <div class="col-12 col-lg-6 frontpage-product__info">
+                            <h2><a :href="`/#/product/${item.data.id}`">{{ item.data.name }}</a></h2>
+                            <p>{{ item.data.short_description }}</p>
+                            <c-tags :tags="item.data.author_tags"></c-tags>
+                            <div class="frontpage-product__footer">
+                                <div class="price-list">
+                                    <div class="price old_price" v-if="item.data.old_price">
+                                        {{ item.data.old_price }}
+                                        <span>usd</span>
+                                    </div>
+                                    <div class="price">
+                                        {{ item.data.price }}
+                                        <span>usd</span>
+                                    </div>
                                 </div>
-                                <div class="price">
-                                    {{ frontpage_product.price }}
-                                    <span>usd</span>
-                                </div>
+                                <c-button status="success" icon="cart-plus">Proceed to Purchase</c-button>
                             </div>
-                            <c-button status="success" icon="cart-plus">Proceed to Purchase</c-button>
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <c-block class="margin-bottom-30" :onlyContentBg="true" :noGutter="true">
-                            <c-heading-bar
-                                slot="title"
-                                class="mb-0"
-                                name="New Releases"
-                                :showArrows="showArrowsState(new_products, 3)"
-                                :showBackground="true"
-                                @prevClick="demo_products_sl.slidePrev()"
-                                @nextClick="demo_products_sl.slideNext()"
-                            />
-
-                            <c-swiper :options="demoSlider" ref="demo_products_sl" style="margin: 0 -10px">
-                                <c-slide v-for="product in new_products" :key="product.id">
-                                    <c-product-card-dynamic :product="product"/>
-                                </c-slide>
-                            </c-swiper>
-
-                        </c-block>
-
-                        <c-block class="margin-bottom-30" :onlyContentBg="true" :noGutter="true">
-                            <c-heading-bar
-                                slot="title"
-                                class="mb-0"
-                                name="Summer Sale"
-                                :showArrows="showArrowsState(sale_products, 3)"
-                                :showBackground="true"
-                                @prevClick="summer_sale_sl.slidePrev()"
-                                @nextClick="summer_sale_sl.slideNext()"
-                            />
-
-                            <c-swiper :options="saleSlider" ref="summer_sale_sl" style="margin: 0 -10px" v-if="sale_products.length>0">
-                                <c-slide v-for="(product, index) in sale_products" :key="index">
-                                    <c-product-card-dynamic :product="product" />
-                                </c-slide>
-                            </c-swiper>
-
-                        </c-block>
-                    </div>
-                </div>
-
-                <div class="row align-items-stretch">
-                    <div class="col-12 col-md-4 margin-bottom-30">
-                        <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="/#/home">
-                            <h4 class="text-yellow">summer block</h4>
-                            <h3>Championship</h3>
-                            <p>You won't believe the prize!</p>
-                        </c-banner>
-                    </div>
-                    <div class="col-12 col-md-8 margin-bottom-30">
-                        <c-banner :imgSrc="'/static/img/banners/banner-2.png'" link="/#/home">
-                            <div class="align-items-start">
-                                <h3 class="text-yellow margin-bottom-5">top<br>curators</h3>
-                                <h4 class="text-capitalize">What are they<br>playing?</h4>
-                            </div>
-                        </c-banner>
-                    </div>
-                </div>
-
-                <c-games-explorer/>
-
-                <div class="row margin-bottom-50 margin-top-20 align-items-stretch">
-                    <div class="col-12 col-md-8">
-                        <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/home">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <h3 class="text-yellow">Item Marketplace</h3>
-                                    <p>You all in one spot for games assets</p>
-                                </div>
-                                <div class="banner-action">
-                                    <c-button status="info" icon_hide size="lg">VISIT NOW</c-button>
-                                </div>
-                            </div>
-                        </c-banner>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <c-banner :imgSrc="'/static/img/banners/banner-4.png'" link="/#/home">
-                            <h3 class="text-yellow margin-bottom-5">Top Collections</h3>
-                            <p>We curated the best ones for you</p>
-                        </c-banner>
-                    </div>
-                </div>
-
-                <div class="row margin-bottom-30">
-                    <div class="col-12">
-                        <c-block :noGutter="true" :onlyContentBg="true" class="margin-bottom-30">
-                            <c-heading-bar
-                                slot="title"
-                                class="mb-0"
-                                :headingTabs="['Top 10 Items', 'Most Wanted', 'Top 10 Prices']"
-                            >
-                                <template slot="additional-action">
-                                    <c-heading-bar-fields name="Trending" @clickUp=""  @clickDown=""/>
-                                    <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown=""/>
-                                </template>
-                            </c-heading-bar>
-                            <div class="filter-blk">
-                                <div class="d-flex align-items-center">
-                                    <c-dropdown id="test2" name="Filter by Genre" :showBg="true">
-                                        <a href="#3">RPG</a>
-                                        <a href="#3">ACTION</a>
-                                        <a href="#3">Cars</a>
-                                    </c-dropdown>
-                                    <c-searcher customClass="mb-0" />
-                                </div>
-                                <c-button status="info"  :icon_hide="true">All New Releases</c-button>
-                            </div>
-                            <div class="d-flex justify-content-between flex-wrap">
-                                <div class="w-50" v-for="(item, index) in assets" :key="index">
-                                    <c-assets-list-item
-                                        :item="item"
-                                        :isTransparent="true"
-                                    >
-                                        <span class="mr-3">
-                                            <c-icon name="box"/>{{ item.count }}
-                                        </span>
-                                        <span class="mr-3">
-                                            <c-icon name="dollar-sign"/>{{ item.price }}
-                                        </span>
-                                        <span class="mr-3">
-                                            <c-icon name="dollar-sign"/>3.45
-                                        </span>
-                                    </c-assets-list-item>
-                                </div>
-                            </div>
-                        </c-block>
-
-                        <c-block :noGutter="true" :bgColor="false" title="What's up with your content">
-
-                        <div class="home-tabs">
-                            <c-news-list-navigation
-                                :content_news="product_news"
-                            />
-                            <div class="tab-content">
-                                <c-news-list-articles
-                                    v-for="(news, index) in product_news"
-                                    :key="index"
-                                    :news="news"
-                                    :index="index"
+                    <div class="row" v-if="item.type === 'product_slider'" :key="index">
+                        <div class="col-12">
+                            <c-block class="margin-bottom-30" :onlyContentBg="true" :noGutter="true">
+                                <c-heading-bar
+                                    slot="title"
+                                    class="mb-0"
+                                    :name="item.data.title"
+                                    :showArrows="showArrowsState(item.data.products, 3)"
+                                    :showBackground="true"
+                                    @prevClick="item.data.swiper.slidePrev()"
+                                    @nextClick="item.data.swiper.slideNext()"
                                 />
-                            </div>
-                        </div>
-                        </c-block>
-                    </div>
-                </div>
 
-                <c-curators-reviews
-                    :reviews="curators_reviews"
-                />
+                                <c-swiper :options="item.data.options" :ref="item.data.ref" style="margin: 0 -10px">
+                                    <c-slide v-for="product in item.data.products" :key="product.id">
+                                        <c-product-card-dynamic :product="product"/>
+                                    </c-slide>
+                                </c-swiper>
+
+                            </c-block>
+                        </div>
+                    </div>
+
+
+                    <div class="row align-items-stretch" v-if="item.type === 'banners'" :key="index">
+                        <div class="col-12 col-md-4 margin-bottom-30">
+                            <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="/#/home">
+                                <h4 class="text-yellow">summer block</h4>
+                                <h3>Championship</h3>
+                                <p>You won't believe the prize!</p>
+                            </c-banner>
+                        </div>
+                        <div class="col-12 col-md-8 margin-bottom-30">
+                            <c-banner :imgSrc="'/static/img/banners/banner-2.png'" link="/#/curators">
+                                <div class="align-items-start">
+                                    <h3 class="text-yellow margin-bottom-5">top<br>curators</h3>
+                                    <h4 class="text-capitalize">What are they<br>playing?</h4>
+                                </div>
+                            </c-banner>
+                        </div>
+                    </div>
+
+                    <c-games-explorer v-if="item.type === 'games_explorer'" :key="index" />
+
+                    <div class="row margin-bottom-50 margin-top-20 align-items-stretch" v-if="item.type === 'banners'" :key="index">
+                        <div class="col-12 col-md-8">
+                            <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/marketplace">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h3 class="text-yellow">Item Marketplace</h3>
+                                        <p>You all in one spot for games assets</p>
+                                    </div>
+                                    <div class="banner-action">
+                                        <c-button status="info" icon_hide size="lg">VISIT NOW</c-button>
+                                    </div>
+                                </div>
+                            </c-banner>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <c-banner :imgSrc="'/static/img/banners/banner-4.png'" link="/#/collections">
+                                <h3 class="text-yellow margin-bottom-5">Top Collections</h3>
+                                <p>We curated the best ones for you</p>
+                            </c-banner>
+                        </div>
+                    </div>
+
+                    <div class="row margin-bottom-30" v-if="item.type === 'product_grid'" :key="index">
+                        <div class="col-12">
+                            <c-block :noGutter="true" :onlyContentBg="true" class="margin-bottom-30">
+                                <c-heading-bar
+                                    slot="title"
+                                    class="mb-0"
+                                    :headingTabs="['Top 10 Items', 'Most Wanted', 'Top 10 Prices']"
+                                >
+                                    <template slot="additional-action">
+                                        <c-heading-bar-fields name="Trending" @clickUp=""  @clickDown=""/>
+                                        <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown=""/>
+                                    </template>
+                                </c-heading-bar>
+                                <div class="filter-blk">
+                                    <div class="d-flex align-items-center">
+                                        <c-dropdown id="test2" name="Filter by Genre" :showBg="true">
+                                            <a href="#3">RPG</a>
+                                            <a href="#3">ACTION</a>
+                                            <a href="#3">Cars</a>
+                                        </c-dropdown>
+                                        <c-searcher customClass="mb-0" />
+                                    </div>
+                                    <c-button status="info" :icon_hide="true">All New Releases</c-button>
+                                </div>
+                                <div class="d-flex justify-content-between flex-wrap">
+                                    <div class="w-50" v-for="(item, index) in item.data.assets" :key="index">
+                                        <c-assets-list-item
+                                            :item="item"
+                                            :isTransparent="true"
+                                        >
+                                            <span class="mr-3">
+                                                <c-icon name="box"/>{{ item.count }}
+                                            </span>
+                                            <span class="mr-3">
+                                                <c-icon name="dollar-sign"/>{{ item.price }}
+                                            </span>
+                                            <span class="mr-3">
+                                                <c-icon name="dollar-sign"/>3.45
+                                            </span>
+                                        </c-assets-list-item>
+                                    </div>
+                                </div>
+                            </c-block>
+                        </div>
+                    </div>
+
+                    <div class="row margin-bottom-30" v-if="item.type === 'product_news'" :key="index">
+                        <div class="col-12">
+                            <c-block :noGutter="true" :bgColor="false" title="What's up with your content">
+                                <div class="home-tabs">
+                                    <c-news-list-navigation
+                                        :content_news="item.data.news"
+                                    />
+                                    <div class="tab-content">
+                                        <c-news-list-articles
+                                            v-for="(news, index) in item.data.news"
+                                            :key="index"
+                                            :news="news"
+                                            :index="index"
+                                        />
+                                    </div>
+                                </div>
+                            </c-block>
+                        </div>
+                    </div>
+
+                    <c-curators-reviews
+                        :reviews="item.data.reviews"
+                        v-if="item.type === 'curator_reviews'" :key="index"
+                    />
+                </template>
+
+                <transition name="fade-slow">
+                    <div class="posts-timeline__end" v-if="end">
+                        <h3>You're all caught up!</h3>
+                    </div>
+                    <div class="posts-timeline__end no-updates" v-if="!items">
+                        <h3>
+                            There is no updates yet.
+                        </h3>
+                    </div>
+                </transition>
             </div>
         </div>
     </c-layout>
@@ -235,9 +233,84 @@ export default {
                 slidesPerView: 3,
                 spaceBetween: 0
             },
+            show   : false, // display content after API request
+            offset : 3,     // items to display after scroll
+            display: 3,     // initial items
+            trigger: 150,   // how far from the bottom to trigger infinite scroll
+            end    : false, // no more updates
         }
     },
     computed: {
+        list() {
+            const result = []
+
+            updateLandingImage.bind(this)()
+
+            if (this.marketplace.frontpage_product) {
+                result.push({
+                    type: 'frontpage_product',
+                    data: this.marketplace.frontpage_product
+                })
+            }
+
+            result.push({
+                type: 'product_slider',
+                data: {
+                    title: 'New Releases',
+                    ref: 'demo_products_sl',
+                    swiper: this.$refs.demo_products_sl && this.$refs.demo_products_sl.swiper,
+                    options: this.demoSlider,
+                    products: this.marketplace.new_products
+                }
+            })
+
+            result.push({
+                type: 'product_slider',
+                data: {
+                    title: 'Summer Sale',
+                    ref: 'summer_sale_sl',
+                    swiper: this.$refs.summer_sale_sl && this.$refs.summer_sale_sl.swiper,
+                    options: this.saleSlider,
+                    products: this.marketplace.sale_products
+                }
+            })
+
+            result.push({
+                type: 'banners',
+                data: {}
+            })
+
+            result.push({
+                type: 'games_explorer',
+                data: {}
+            })
+
+            result.push({
+                type: 'banners',
+                data: {}
+            })
+
+            result.push({
+                type: 'product_grid',
+                data: {}
+            })
+
+            result.push({
+                type: 'curator_reviews',
+                data: {
+                    reviews: this.$store.state.network.curator_reviews
+                }
+            })
+
+            result.push({
+                type: 'product_news',
+                data: {
+                    reviews: this.$store.state.network.product_news
+                }
+            })
+
+            return result
+        },
         projects() {
             return this.$store.state.funding.projects
         },
@@ -250,53 +323,58 @@ export default {
         marketplace() {
             return this.$store.state.marketplace;
         },
-        new_products() {
-            return this.marketplace.new_products;
-        },
-        sale_products() {
-            return this.marketplace.sale_products;
-        },
-        frontpage_product() {
-            updateLandingImage.bind(this)()
-
-            return this.marketplace.frontpage_product;
-        },
-        summer_sale_sl() {
-            return this.$refs.summer_sale_sl.swiper;
-        },
-        demo_products_sl() {
-            return this.$refs.demo_products_sl.swiper;
-        },
-        curators_reviews() {
-            return this.$store.state.network.curator_reviews;
-        },
-        product_news() {
-            return this.$store.state.network.product_news;
-        },
         assets() {
             return this.marketplace.assets;
+        },
+        // slice the array of data to display
+        sliced() {
+            return this.list.slice(0, this.display);
         }
     },
     methods: {
         filterTag(tagName) {
             alert(tagName)
         },
-        prevClick(carousel){
+        prevClick(carousel) {
             carousel.slidePrev();
         },
-        nextClick(carousel){
+        nextClick(carousel) {
             carousel.slideNext();
         },
-        showArrowsState(el, count){
-            if ( el.length > count){
+        showArrowsState(el, count) {
+            if ( el.length > count) {
                 return true
             } else {
                 return false
             }
+        },
+        scroll() {
+            window.onscroll = ev => {
+                if (
+                    window.innerHeight + window.scrollY >=
+                    (document.body.offsetHeight - this.trigger)
+                ) {
+                    if (this.display < this.list.length) {
+                        this.display = this.display + this.offset;
+                    }
+                    else {
+                        this.end = true;
+                    }
+                }
+            };
+            console.log('done scroll')
         }
     },
-    mounted: updateLandingImage,
-    created: updateLandingImage,
+    mounted() {
+        updateLandingImage.call(this)
+
+        console.log('done mounted')
+
+        this.scroll();
+    },
+    created() {
+        updateLandingImage.call(this)
+    },
     beforeDestroy() {
         window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
     }
