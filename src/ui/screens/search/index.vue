@@ -320,7 +320,7 @@
         padding: 10px;
         border-radius: 4px;
         background: rgba(255,255,255,.03);
-        max-width: 50%;
+        // max-width: 50%;
     }
 
     .searching-box {

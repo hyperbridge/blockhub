@@ -18,7 +18,7 @@
             </slot>
         </div>
         <div class="tabs-container" ref="tabs">
-            <slot/>
+            <slot :tabs="tabs"/>
         </div>
     </div>
 </template>
