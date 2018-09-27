@@ -389,11 +389,6 @@ export default {
             })
 
             result.push({
-                type: 'banners',
-                data: {}
-            })
-
-            result.push({
                 type: 'asset_grid',
                 data: {
                     assets: this.marketplace.assets
