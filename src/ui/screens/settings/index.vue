@@ -102,6 +102,44 @@
                     </div>
                 </div>
             </c-block>
+            <c-block class="margin-bottom-30" title="Game Activity">
+                <c-inline-ntf type="warning">
+                    <div class="h4 font-weight-bold p-0 m-0">No game activity!</div>
+                    <div class="h5 p-0 m-0">What are you playing!?</div>
+                </c-inline-ntf>
+                <div class="h5 margin-top-20">
+                    Not seeing your game? <c-button status="link">Add it!</c-button>
+                </div>
+                <div class="margin-top-20">
+                    <c-switch label="Display currently running games as a status message" />
+                </div>
+            </c-block>
+
+            <c-block class="margin-bottom-30" title="Added games">
+                <div class="games-list">
+                    <div class="games-list__item">
+                        <div class="icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div>
+                            <h3 class="p-0 m-0">World of Warcraft</h3>
+                            <span>Last played 6 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="games-list__item">
+                        <div class="icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div>
+                            <h3 class="p-0 m-0">Might & Magic: Heroes VI</h3>
+                            <span>Last played 2 days ago</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="h5 d-none">
+                    No added games yet.
+                </div>
+            </c-block>
         </div>
     </c-layout>
 </template>
@@ -113,7 +151,9 @@ export default {
     components: {
         'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
-        'c-benchmark': (resolve) => require(['@/ui/components/benchmark'], resolve)
+        'c-benchmark': (resolve) => require(['@/ui/components/benchmark'], resolve),
+        'c-inline-ntf': (resolve) => require(['@/ui/components/notification/inline.vue'], resolve),
+        'c-switch': (resolve) => require(['@/ui/components/switch'], resolve),
     },
     data() {
         return {
@@ -179,6 +219,31 @@ export default {
                 font-weight: bold;
                 margin-bottom: 5px;
             }
+        }
+    }
+    .games-list{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .games-list__item{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
+        &:last-child{
+            padding-bottom: 0;
+            margin-bottom: 0;
+            border-bottom: unset;
+        }
+        .icon{
+            font-size: 30px;
+            color: #43C981;
+            margin-right: 15px;
+            width: auto;
+            height: auto;
         }
     }
 </style>
