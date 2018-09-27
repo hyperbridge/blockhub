@@ -21,6 +21,16 @@
             :value="value"
             @input="$emit('input', $event.target.value)"
         />
+        <span
+            class="range-slider__percentages"
+            :style="{ left: `calc(${percentages}% + 2px)`, transform: `translateX(${transform2})` }"
+        >{{ percentages }}</span>
+        <transition name="slide-in-top">
+            <span class="range-slider__range-min" v-show="percentages > 15">{{ min }}</span>
+        </transition>
+        <transition name="slide-in-top">
+            <span class="range-slider__range-max" v-show="percentages < 85">{{ max }}</span>
+        </transition>
     </div>
 </template>
 
@@ -58,7 +68,7 @@ export default {
 <style lang="scss" scoped>
     .range-slider__container {
         position: relative;
-        height: 20px;
+        height: 40px;
         &:before {
             content: "";
             position: absolute;
@@ -97,6 +107,20 @@ export default {
         top: -4.5px;
         z-index: 4;
     }
+
+    .range-slider__percentages, .range-slider__range-min, .range-slider__range-max {
+        position: relative;
+        top: 18px;
+        font-size: 15px;
+    }
+    .range-slider__percentages, .range-slider__range-max {
+        position: absolute;
+    }
+    .range-slider__range-max {
+        right: 0;
+    }
+
+
     // $sliderBg: #464759;
     $sliderBg: rgb(111, 113, 138);
     $sliderHeight: 7px;
