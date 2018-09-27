@@ -56,6 +56,7 @@
         &.option-tag--light {
             color: #fff;
             background: rgba(255,255,255,.15);
+            border: 2px dotted #fff;
             > .option-tag__del-btn:hover {
                 color: rgba(255, 255, 255, .4);
             }

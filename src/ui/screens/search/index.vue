@@ -34,6 +34,14 @@
                                         {{ tag.value | replaceLoDash | upperFirstChar }}
                                     </c-checkbox>
                                 </div>
+                                <div>
+                                    <h4>Select price range</h4>
+                                    <c-range-slider
+                                        :min="1"
+                                        :max="300"
+                                        sClass="margin-bottom-20"
+                                    />
+                                </div>
                                 <h4>Genres</h4>
                                 <div class="row">
                                     <c-dropdown-list
@@ -67,6 +75,20 @@
                                             isChildren
                                         />
                                     </c-option-tag>
+                                    <c-option-tag
+                                        title="SPECIALS:"
+                                        @delete="selectedGenres.forEach(genre => genre.selected = false)"
+                                        isParent
+                                    >
+                                        <c-option-tag
+                                            v-for="(tag, index) in selectedSpecials"
+                                            :key="index"
+                                            :text="tag.value | replaceLoDash | upperFirstChar"
+                                            @delete="tag.selected = false"
+                                            isChildren
+                                        />
+                                    </c-option-tag>
+
                                 </div>
                             </div>
                         </transition>
@@ -100,7 +122,6 @@
         components: {
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-checkbox': (resolve) => require(['@/ui/components/checkbox/'], resolve),
-            'c-checkbox-group': (resolve) => require(['@/ui/components/checkbox/group'], resolve),
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
             'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
@@ -108,6 +129,7 @@
             'c-spinner': (resolve) => require(['@/ui/components/spinner'], resolve),
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve),
             'c-dropdown-list': (resolve) => require(['@/ui/components/dropdown-menu/list'], resolve),
+            'c-range-slider': (resolve) => require(['@/ui/components/range-slider'], resolve),
         },
         mixins: [debouncer],
         data() {
@@ -174,8 +196,16 @@
             selectedGenres() {
                 return this.selectableTags.filter(tag => tag.selected);
             },
+            selectedSpecials() {
+                return this.systemTags.filter(tag => tag.selected);
+            },
             filtersActive() {
-                return this.selectedGenres.length || this.phrase.length;
+                return this.selectedGenres.length || this.phrase.length || this.selectedSpecials.length;
+            },
+            filtered() {
+                return this.marketplace.products.filter(product => {
+                    // product.
+                })
             }
         },
         mounted() {
