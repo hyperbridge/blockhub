@@ -413,27 +413,6 @@
                             </div>
                         </div>
 
-                        <div class="row reviews-blk margin-top-40">
-                            <div class="col-12">
-                                <c-heading-bar name="Reviews" :showArrows="false" :showBackground="false"/>
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                <h3 class="margin-vertical-20">Most Helpful</h3>
-                                <c-review
-                                    v-for="index in 3"
-                                    :key="index"
-                                    :review="review"
-                                />
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                <h3 class="margin-vertical-20">Most Recent</h3>
-                                <c-review
-                                    v-for="index in 3"
-                                    :key="index"
-                                    :review="review"
-                                />
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -476,7 +455,6 @@
             'c-frequently-traded-assets': (resolve) => require(['@/ui/components/frequently-traded-assets'], resolve),
             'c-community-spotlight': (resolve) => require(['@/ui/components/community-spotlight'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
-            'c-review': (resolve) => require(['@/ui/components/review'], resolve),
             'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar'], resolve),
             'c-contribute-form': (resolve) => require(['@/ui/components/contribute/form.vue'], resolve),
             'c-contribute-pledge': (resolve) => require(['@/ui/components/contribute/pledge.vue'], resolve)
@@ -497,18 +475,6 @@
                     'mod',
                     'other'
                 ],
-                review: {
-                    author: {
-                        name: 'Satoshi San',
-                        img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1'
-                    },
-                    title: 'Good game with very nice graphics made by very smart people.',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.',
-                    date: '2018-08-19T04:09:00.000Z',
-                    rating: 4.5,
-                    minutes_played: 1938,
-                    setup: { system: 'Windows 10', gpu: 'GTX 1080', cpu: 'Core i7 7980x', ram: '8 GB', storage: 'HyperX 1TB SSD' }
-                },
                 crowdfunding_props: ['spent', 'locked', 'overflow']
             }
         },
