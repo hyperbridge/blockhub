@@ -396,10 +396,10 @@
                 steps: 3,
                 errors: [],
                 account: {
-                    first_name: 'A',
-                    last_name: 'c',
-                    birthday: '03 Sep 2018',
-                    email: 'www',
+                    first_name: '',
+                    last_name: '',
+                    birthday: '',
+                    email: '',
                     agreement: true,
                     newsletter: false,
                     identity: {
