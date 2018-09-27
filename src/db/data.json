@@ -2,7 +2,6 @@
     "network": {
         "signed_in": false,
         "loading": false,
-        "simulatorMode": false,
         "connection": {
             "internet": false,
             "datasource": true,
@@ -668,7 +667,9 @@
             }
         },
         "current_ethereum_network": "local",
-        "developer_enabled": true,
+        "simulator_mode": false,
+        "desktop_mode": false,
+        "developer_mode": false,
         "editor_mode": "viewing",
         "selected_product": null,
         "first_product": true,

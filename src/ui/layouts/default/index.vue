@@ -336,13 +336,15 @@ export default {
         },
         notifs() {
             return this.$store.state.network.account.notifications
+        },
+        is_desktop() {
+            return this.$store.state.network.is_desktop
         }
     },
     data() {
         return {
             navigationComponent: this.navigationKey || false,
             loadingState: true,
-            is_desktop: window && window.process && window.process.type,
             panelOption: {
                 spaceBetween: 10,
                 loop: false,
