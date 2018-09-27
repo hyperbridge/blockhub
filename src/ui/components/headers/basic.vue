@@ -15,7 +15,7 @@
         </div>
         <div class="position-relative w-100" style="margin-top: -10px">
             <div class="app-header__bar-left">
-                <a href="/#/store">
+                <a href="/#/">
                     <span class="fa fa-home"></span>
                 </a>
                 <a @click="$router.go(-1)">
@@ -59,12 +59,6 @@
                         <li class="app-header__download-btn" v-if="!is_desktop">
                             <a href="/#/download" class="">
                                 <span class="text">DOWNLOAD</span> <span class="fa fa-download"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/#/store">
-                                <span class="icon fa fa-shopping-cart"></span>
-                                <span class="text">Store</span>
                             </a>
                         </li>
                         <li v-if="signed_in">
