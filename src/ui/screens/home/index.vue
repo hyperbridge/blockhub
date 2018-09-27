@@ -55,30 +55,6 @@
                             <c-content-navigation/>
                         </c-block>
                     </div>
-                    <div class="col-12 margin-bottom-30">
-                        <c-heading-bar name="What's up with your content" :showArrows="false" :showBackground="false">
-                            <template slot="additional-action">
-                                <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
-                                <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
-                                <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
-                            </template>
-                        </c-heading-bar>
-
-
-                        <div class="home-tabs">
-                            <c-news-list-navigation
-                                :news="product_news"
-                            />
-                            <div class="tab-content">
-                                <c-news-list-articles
-                                    v-for="(news, index) in product_news"
-                                    :key="index"
-                                    :news="news"
-                                    :index="index"
-                                />
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-12 margin-bottom-30 d-none">
                         <c-heading-bar
                             name="Trending Projects"
@@ -248,21 +224,27 @@
 
                     <div class="row margin-bottom-30" v-if="item.type === 'product_news'" :key="`level-1-${index}`">
                         <div class="col-12">
-                            <c-block :noGutter="true" :bgColor="false" title="What's up with your content">
-                                <div class="home-tabs">
-                                    <c-news-list-navigation
-                                        :news="item.data.news"
+                            <c-heading-bar name="What's up with your content" :showArrows="false" :showBackground="false">
+                                <template slot="additional-action">
+                                    <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
+                                    <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
+                                    <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
+                                </template>
+                            </c-heading-bar>
+
+                            <div class="home-tabs">
+                                <c-news-list-navigation
+                                    :news="item.data.news"
+                                />
+                                <div class="tab-content">
+                                    <c-news-list-articles
+                                        v-for="(news, index) in item.data.news"
+                                        :key="index"
+                                        :news="news"
+                                        :index="index"
                                     />
-                                    <div class="tab-content">
-                                        <c-news-list-articles
-                                            v-for="(news, index) in item.data.news"
-                                            :key="index"
-                                            :news="news"
-                                            :index="index"
-                                        />
-                                    </div>
                                 </div>
-                            </c-block>
+                            </div>
                         </div>
                     </div>
 
@@ -279,7 +261,7 @@
                     </div>
                     <div class="no-updates" v-if="!sliced">
                         <h3>
-                            There is no updates yet.
+                            There is no content yet.
                         </h3>
                     </div>
                 </transition>
@@ -718,13 +700,6 @@ export default {
         }
     }
 
-    .filter-blk{
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-    }
     .banner{
         .text-yellow{
             color: #FADC72;
