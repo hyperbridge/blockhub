@@ -41,6 +41,8 @@
                                         :max="300"
                                         sClass="margin-bottom-20"
                                     />
+                                    <c-range-slider-pure v-model.number="price" :max="300"/>
+                                    {{ price }}
                                 </div>
                                 <h4>Genres</h4>
                                 <div class="row">
@@ -130,6 +132,7 @@
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve),
             'c-dropdown-list': (resolve) => require(['@/ui/components/dropdown-menu/list'], resolve),
             'c-range-slider': (resolve) => require(['@/ui/components/range-slider'], resolve),
+            'c-range-slider-pure': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
         },
         mixins: [debouncer],
         data() {
@@ -170,7 +173,8 @@
                 phrase: '',
                 results: [],
                 isTyping: false,
-                selectableTags: []
+                selectableTags: [],
+                price: 30
             }
         },
         methods: {

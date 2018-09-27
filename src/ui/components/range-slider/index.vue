@@ -28,8 +28,6 @@
             :data-extra-classes="extraClasses"
             :id="id"
             :name="name"
-            :value="value"
-            @input="$emit('input', $event.target.value)"
         />
     </div>
 </template>
