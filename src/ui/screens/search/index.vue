@@ -29,7 +29,7 @@
                                 class="search-filters__container"
                             >
                                 <div class="filter-box">
-                                    <h4>Specials</h4>
+                                    <h4>Specials:</h4>
                                     <c-checkbox
                                         v-for="(tag, index) in systemTags"
                                         :key="index"
@@ -53,19 +53,30 @@
                                     />
                                 </div>
                                 <div class="filter-box">
-                                    <h4>Genres:</h4>
-                                    <c-dropdown-list
-                                        title="SELECT GENRES"
-                                        :list="selectableTags"
+                                    <h4>
+                                        Genres:
+                                        <span v-show="selectedGenres.length">
+                                            ({{ selectedGenres.length }})
+                                        </span>
+                                    </h4>
+                                    <c-list
+                                        :items="selectableTags"
                                         @click="tag => tag.selected = !tag.selected"
                                     />
                                 </div>
                                 <div class="filter-box">
-                                    <h4>Languages:</h4>
+                                    <h4>
+                                        Languages:
+                                        <span v-show="selectedLanguages.length">
+                                            ({{ selectedLanguages.length }})
+                                        </span>
+                                    </h4>
                                     <div>
-                                        <a v-for="(lang, index) in selectableLanguages" :key="index" @click="lang.selected = true">
-                                            {{ lang.name }}  -
-                                        </a>
+                                        <c-list
+                                            :items="selectableLanguages"
+                                            @click="item => item.selected = !item.selected"
+                                        >
+                                        </c-list>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +108,7 @@
                                     <c-option-tag
                                         v-if="selectedSpecials.length"
                                         title="SPECIALS:"
-                                        @delete="selectedGenres.forEach(genre => genre.selected = false)"
+                                        @delete="selectedSpecials.forEach(tag => tag.selected = false)"
                                     >
                                         <c-option-tag
                                             v-for="(tag, index) in selectedSpecials"
@@ -179,8 +190,8 @@
             'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description'], resolve),
             'c-spinner': (resolve) => require(['@/ui/components/spinner'], resolve),
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve),
-            'c-dropdown-list': (resolve) => require(['@/ui/components/dropdown-menu/list'], resolve),
             'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
+            'c-list': (resolve) => require(['@/ui/components/list'], resolve),
         },
         mixins: [debouncer],
         data() {
@@ -309,6 +320,7 @@
         padding: 10px;
         border-radius: 4px;
         background: rgba(255,255,255,.03);
+        max-width: 50%;
     }
 
     .searching-box {
