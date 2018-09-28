@@ -3,10 +3,11 @@ import schema from './schema'
 import MarketplaceProtocol from 'marketplace-protocol'
 import * as ethereum from '@/framework/ethereum'
 import * as db from '@/db'
+import filters from './filters';
 
-let rawData = {}
+let rawData = { ...filters.state };
 
-export let state = null
+export let state = {};
 
 const updateState = (savedData) => {
     rawData = {
@@ -46,22 +47,26 @@ updateState(db.marketplace.config.data[0])
 const sortDir = (dir, asc) => asc ? dir : dir * -1;
 
 export const getters = {
+    ...filters.getters,
+    getProductsQuery: state => query => state.marketplace.products.find(query),
     productsArray: state => typeof (state.products) === "object" ? Object.values(state.products) : state.products,
     productsTags: (state, getters) => getters.productsArray
-        .reduce((tags, product) => {
-            product.developer_tags.forEach(tag => {
-                if (!tags.includes(tag)) tags.push(tag);
-            });
-            return tags;
-        }, []).sort()
+        .reduce((tags, product) => [
+            ...tags,
+            ...product.developer_tags
+                .filter(tag =>
+                    !tags.includes(tag)
+                )
+        ], [])
     ,
     systemTags: (state, getters) => getters.productsArray
-        .reduce((tags, product) => {
-            product.system_tags.forEach(tag => {
-                if (!tags.includes(tag)) tags.push(tag);
-            });
-            return tags;
-        }, []).sort()
+        .reduce((tags, product) => [
+            ...tags,
+            ...product.system_tags
+                .filter(tag =>
+                    !tags.includes(tag)
+                )
+        ], []).sort()
     ,
     productsLanguages: (state, getters) => getters.productsArray
         .reduce((languages, product) => [
