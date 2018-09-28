@@ -32,14 +32,15 @@ export default {
         margin-bottom: 25px;
         display: flex;
         flex-wrap: wrap;
+        overflow: hidden;
     }
     .product-tags__link {
         background: #fbe17d;
         border-radius: 3px;
-        padding: 2px 5px;
+        padding: 0px 5px;
         margin-right: 8px;
         margin-bottom: 8px;
-        height: 24px;
+        height: 20px;
         color: #000;
         text-transform: lowercase;
         font-size: 13px;
