@@ -48,6 +48,9 @@
         margin-top: -20px;
         display: flex;
         align-items: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
         @include width-max-lg {
             flex-direction: column;
         }
