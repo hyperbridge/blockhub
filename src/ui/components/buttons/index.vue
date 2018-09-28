@@ -73,6 +73,9 @@
         box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
         text-decoration: none;
         cursor: pointer;
+        &.link{
+            box-shadow: unset;
+        }
         &:active,
         &:focus {
             outline: none;
@@ -125,7 +128,7 @@
             warning: (#FADC72, #3D3E5D, #efd26d, #32334c),
             share: (#43B4C9, #fff, #43B4C9, #32334c),
             support: (#43C981, #fff, #43C981, #30304B),
-            dark: (#3D3E5D, #fff, #3D3E5D, #fff)
+            dark: (#3D3E5D, #fff, #3D3E5D, #fff),
         );
 
         @each $status, $colorSet in $statusColors {

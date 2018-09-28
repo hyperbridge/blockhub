@@ -9,6 +9,7 @@
                 v-for="(review, index) in reviews"
                 :key="index"
                 :review="review"
+                v-if="index <= 3"
             />
             <p v-if="!reviews.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
         </div>
