@@ -1,37 +1,35 @@
 <template>
-    <div class="card invert system-requirements">
-        <div class="card-body">
-            <h2 class="title">
-                System Requirements <i class="fas fa-laptop title-icon"></i>
-            </h2>
-            <c-tabs-universal :tab_names="['Mac', 'Win', 'Linux']">
-                <c-tab-universal
-                    v-for="(os, index) in ['Mac', 'Win', 'Linux']"
-                    :tab_id="index"
-                >
-                    <ul class="system-requirements__list" v-if="platform(os)">
-                        <li
-                            v-for="(value, property) in platform(os)"
-                            v-if="value"
-                            :key="property"
-                            class="system-requirements__list-item"
-                        >
-                            <strong>{{ property | reqProp }}</strong>
-                            <p v-if="property == 'os'" class="system-requirements__value">
-                                {{ value | upperFirstChar }}
-                                <i
-                                    class="fab"
-                                    :class="`fa-${value == 'win' ? 'windows' : value == 'mac' ? 'apple' : 'linux'}`"
-                                ></i>
-                            </p>
-                            <p v-else class="system-requirements__value">{{ value | upperFirstChar }}</p>
-                        </li>
-                    </ul>
-                    <h4 v-else>Currently not supported</h4>
-                </c-tab-universal>
-            </c-tabs-universal>
-        </div>
-    </div>
+    <c-block title="System Requirements">
+        <template slot="heading-bar">
+            <i class="fas fa-laptop title-icon"></i>
+        </template>
+        <c-tabs-universal :tab_names="['Mac', 'Win', 'Linux']">
+            <c-tab-universal
+                v-for="(os, index) in ['Mac', 'Win', 'Linux']"
+                :tab_id="index"
+            >
+                <ul class="system-requirements__list" v-if="platform(os)">
+                    <li
+                        v-for="(value, property) in platform(os)"
+                        v-if="value"
+                        :key="property"
+                        class="system-requirements__list-item"
+                    >
+                        <strong>{{ property | reqProp }}</strong>
+                        <p v-if="property == 'os'" class="system-requirements__value">
+                            {{ value | upperFirstChar }}
+                            <i
+                                class="fab"
+                                :class="`fa-${value == 'win' ? 'windows' : value == 'mac' ? 'apple' : 'linux'}`"
+                            ></i>
+                        </p>
+                        <p v-else class="system-requirements__value">{{ value | upperFirstChar }}</p>
+                    </li>
+                </ul>
+                <h4 v-else>Currently not supported</h4>
+            </c-tab-universal>
+        </c-tabs-universal>
+    </c-block>
 </template>
 
 <script>
@@ -44,6 +42,7 @@ export default {
         }
     },
     components: {
+        'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-tab-universal': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
         'c-tabs-universal': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve)
     },

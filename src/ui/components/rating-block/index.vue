@@ -1,7 +1,6 @@
 <template>
-    <div class="card invert rating-block">
-        <div class="card-body" v-if="items.length > 0">
-            <h2 class="title">Rating</h2>
+    <c-block title="Rating">
+        <div class="w-100" v-if="items.length > 0">
             <ul class="rating-block__list">
                 <li v-for="(item, index) in items" :key="index">
                     <div class="rating-block__info">
@@ -17,12 +16,11 @@
             <a :href="fullReviewsLink" class="btn btn-outline-white" v-if="fullReviewsLink">See Full Reviews</a>
             <a :href="rateGameLink" class="btn btn-outline-white" v-if="rateGameLink">Rate the game</a>
         </div>
-        <div class="card-body" v-else>
-            <h2 class="title">Rating</h2>
+        <div v-else>
             <h4>No ratings yet.</h4>
             <button @click="$emit('goto')" class="btn btn-sm btn-outline-white">Be the first!</button>
         </div>
-    </div>
+    </c-block>
 </template>
 
 <script>
@@ -40,6 +38,7 @@ export default {
         }
     },
     components: {
+        'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-rating-stars': (resolve) => require(['../rating-stars'], resolve)
     }
 }
@@ -91,7 +90,6 @@ export default {
         border-radius: 5px;
         font-weight: bold;
         display: inline-block;
-        float: left;
         line-height: 24px;
         padding: 0 8px;
         width: auto;

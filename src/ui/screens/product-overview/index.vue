@@ -110,15 +110,16 @@
                                     :price="product.price"
                                     :tags="['New']"
                                     :onClickPurchase="showPurchaseModal"
+                                    class="margin-bottom-15"
                                 />
                                 
-                                <c-rating-block :items="product.rating" :parent_url="`/#/product/${product.id}`" />
+                                <c-rating-block class="margin-bottom-20" :items="product.rating" :parent_url="`/#/product/${product.id}`" />
 
-                                <c-frequently-traded-assets :items="product.frequently_traded_assets" :assets_url="`/#/product/${product.id}/assets`" />
+                                <c-frequently-traded-assets class="margin-bottom-20" :items="product.frequently_traded_assets" :assetsUrl="`/#/product/${product.id}/assets`" />
 
-                                <c-community-spotlight :discussions="product.community.discussions" :community_url="`/#/product/${product.id}/community`" />
+                                <c-community-spotlight class="margin-bottom-20" :discussions="product.community.discussions" :communityUrl="`/#/product/${product.id}/community`" />
 
-                                <c-system-requirements :requirements="product.system_requirements"/>
+                                <c-system-requirements class="margin-bottom-20" :requirements="product.system_requirements"/>
 
                                 <c-language-support :languages="product.language_support"/>
                             </div>

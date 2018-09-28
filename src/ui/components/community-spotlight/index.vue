@@ -1,17 +1,17 @@
 <template>
-    <div class="card invert community-spotlight">
-        <div class="card-body" v-if="discussions.length > 0">
+    <c-block title="Community Spotlight">
+        <template slot="heading-bar">
+            <a :href="communityUrl" class="title-icon text-white">
+                <i class="fas fa-comments" v-if="!activeElement"></i>
+                <i class="fas fa-cog" v-else></i>
+            </a>
+        </template>
+        <div class="w-100" v-if="discussions.length > 0">
             <div class="editor-container editor-container--style-2" v-if="editing">
                 <p class="" v-if="!activeElement">
-                    <i class="fas fa-cog"></i>
                     Set Up Community
                 </p>
             </div>
-            <h2 class="title">Community Spotlight
-                <a :href="community_url" class="title-icon">
-                    <i class="fas fa-comments"></i>
-                </a>
-            </h2>
             <ul class="community-spotlight__list">
                 <li v-for="(item, index) in discussions" :key="index">
                     <a :href="item.link">
@@ -20,17 +20,12 @@
                     </a>
                 </li>
             </ul>
-            <a :href="community_url" class="btn btn-outline-white">Go To Community</a>
+            <a :href="communityUrl" class="btn btn-outline-white">Go To Community</a>
         </div>
-        <div class="card-body" v-else>
-            <h2 class="title">Community Spotlight
-                <a :href="community_url" class="title-icon">
-                    <i class="fas fa-comments"></i>
-                </a>
-            </h2>
+        <div class="w-100" v-else>
             <h4>No highlighted community activity yet.</h4>
         </div>
-    </div>
+    </c-block>
 </template>
 
 
@@ -39,9 +34,12 @@ export default {
     name: 'community-spotlight',
     props: {
         discussions: Array,
-        community_url: String,
+        communityUrl: String,
         editing: Boolean,
         activateElement: Boolean
+    },
+    components:{
+        'c-block': (resolve) => require(['@/ui/components/block'], resolve),
     }
 }
 </script>
