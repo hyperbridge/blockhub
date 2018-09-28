@@ -8,7 +8,6 @@
                             <div class="search__main">
                                 <c-input-searcher
                                     v-model="phrase"
-                                    @input="search()"
                                     placeholder="Search for games"
                                     aria-placeholder="Search for games"
                                 />
@@ -40,7 +39,6 @@
                                         :key="index"
                                         :id="`specials-${tag.value}`"
                                         v-model="tag.selected"
-                                        @change="search()"
                                     >
                                         {{ tag.value | replaceLoDash | upperFirstChar }}
                                     </c-checkbox>
@@ -55,13 +53,11 @@
                                     <p class="margin-top-20">Minimum:</p>
                                     <c-range-slider
                                         v-model.number="price.min"
-                                        @input="search()"
-                                        :max="300"
+                                        :max="60"
                                     />
                                     <p class="margin-top-20">Maximum:</p>
                                     <c-range-slider
                                         v-model.number="price.max"
-                                        @input="search()"
                                         :max="300"
                                     />
                                 </div>
@@ -74,7 +70,7 @@
                                     </h4>
                                     <c-list
                                         :items="selectableTags"
-                                        @click="tag => { tag.selected = !tag.selected; search() }"
+                                        @click="tag => tag.selected = !tag.selected"
                                     />
                                 </div>
                                 <div class="filter-box">
@@ -87,7 +83,7 @@
                                     <div>
                                         <c-list
                                             :items="selectableLanguages"
-                                            @click="item => { item.selected = !item.selected; search() }"
+                                            @click="item => item.selected = !item.selected"
                                         >
                                         </c-list>
                                     </div>
@@ -171,9 +167,13 @@
                         <div class="results__container">
                             <div class="results">
                                 <c-spinner v-if="isTyping"/>
-                                <p v-else-if="!results.length">
-                                    No results were found for provided filters
-                                </p>
+                                <div v-else-if="!results.length">
+                                    <p>No results were found for provided filters</p>
+                                    <c-button
+                                        @click="clearFilters()"
+                                        status="info"
+                                    >Clear filters</c-button>
+                                </div>
                                 <c-game-grid
                                     v-else
                                     :itemInRow="2"
@@ -242,9 +242,20 @@
                         this.debounce(() => {
                             this.isTyping = false;
                             this.results = this.getProductsQuery(this.query);
-                        }, 500, 'timeout2');
+                        }, 250, 'timeout2');
+                    } else {
+                        this.isTyping = false;
+                        this.results = this.products;
                     }
                 }, 500);
+            },
+            clearFilters() {
+                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price } = this;
+                if (phrase.length) this.phrase = '';
+                if (selectedSpecials.length) this.selectedSpecials.forEach(tag => tag.selected = false);
+                if (selectedGenres.length) this.selectedGenres.forEach(tag => tag.selected = false);
+                if (selectedLanguages.length) this.selectedLanguages.forEach(lang => lang.selected = false);
+                if (price.min || price.max) { this.price.min = 0; this.price.max = 0; };
             }
         },
         computed: {
@@ -263,8 +274,18 @@
                 // if (selectedLanguages.length) query['language_support'] = {
                 //     '$contains': { name: selectedLanguages.map(lang => lang.name) }
                 // }
-                if (price.min || price.max) query['price'] = { '$between': [price.min, price.max] };
+                if (price.min || price.max) query['price'] = { '$between': [price.min, price.max | 300] };
                 return query;
+            },
+            searchingFilters() {
+                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price } = this;
+                return {
+                    phrase,
+                    selectedSpecials,
+                    selectedGenres,
+                    selectedLanguages,
+                    price
+                }
             },
             selectedGenres() {
                 return this.selectableTags.filter(tag => tag.selected);
@@ -288,6 +309,12 @@
             this.selectableTags = this.productsTags.map(tag => ({ name: tag, selected: false }));
             this.selectableLanguages = this.languages.map(lang => ({ name: lang, selected: false }));
         },
+        watch: {
+            searchingFilters: {
+                handler: 'search',
+                deep: true
+            }
+        },
         filters: {
             replaceLoDash(val) {
                 return val.replace(/_/g, ' ');
@@ -310,6 +337,7 @@
     .search-filters__container {
         display: flex;
         flex-wrap: wrap;
+        align-items: center;
         justify-content: space-between;
     }
     .filter-box {
