@@ -36,8 +36,12 @@ export default {
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
         li {
             width: 25%;
+            min-width: 200px;
             a {
                 display: flex;
                 width: 100%;
