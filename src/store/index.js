@@ -219,8 +219,6 @@ export let initializer = () => {
 
                 store.dispatch('marketplace/updateState')
 
-                store.state.marketplace.products = Object.values(store.state.marketplace.products)
-
                 simulatorInitialized = true
             }
 
@@ -242,7 +240,12 @@ export let initializer = () => {
 
                 if (target[1].length > 0) {
                     console.log(target)
-                    target[0].push(chooseRandom(target[1]))
+                    const random = chooseRandom(target[1])
+
+                    if (typeof(target[0]) === 'object')
+                        target[0][random.id] = random
+                    else 
+                        target[0].push(random)
                 }
             } else if (action === 'remove') {
                 const target = chooseRandom(targets)
