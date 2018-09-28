@@ -46,8 +46,8 @@ updateState(db.marketplace.config.data[0])
 const sortDir = (dir, asc) => asc ? dir : dir * -1;
 
 export const getters = {
-    assetsArray: state => typeof (state.assets) === "object" ? Object.values(state.assets) : state.assets,
-    productsArray: state => typeof (state.products) === "object" ? Object.values(state.products) : state.products,
+    assetsArray: state => Array.isArray(state.assets) ? state.assets : Object.values(state.assets),
+    productsArray: state => Array.isArray(state.products) ? state.products : Object.values(state.products),
     productsTags: (state, getters) => getters.productsArray
         .reduce((tags, product) => {
             product.developer_tags.forEach(tag => {

@@ -184,23 +184,23 @@ export let initializer = () => {
         ]
 
         const chooseRandom = (list) => {
-            if (typeof (list) === 'object') {
+            if (Array.isArray(list)) {
+                return list[Math.floor(Math.random() * list.length)]
+            } else {
                 const keys = Object.keys(list)
                 const randomKey = keys[Math.floor(Math.random() * keys.length)]
                 return list[randomKey]
-            } else {
-                return list[Math.floor(Math.random() * list.length)]
             }
         }
 
         const removeRandom = (list) => {
-            if (typeof (list) === 'object') {
+            if (Array.isArray(list)) {
+                list.splice(Math.floor(Math.random() * list.length), 1)
+            }
+            else {
                 const keys = Object.keys(list)
                 const randomKey = keys[Math.floor(Math.random() * keys.length)]
                 delete list[randomKey]
-            }
-            else {
-                list.splice(Math.floor(Math.random() * list.length), 1)
             }
 
             return list
@@ -229,6 +229,7 @@ export let initializer = () => {
                 store.state.funding.projects = seed.projects.slice(seed.projects.length / 2)
 
                 db.marketplace.products.data = store.state.marketplace.products
+                db.marketplace.assets.data = store.state.marketplace.assets
 
                 store.dispatch('marketplace/updateState')
 
@@ -254,10 +255,10 @@ export let initializer = () => {
                 if (target[1].length > 0) {
                     const random = chooseRandom(target[1])
 
-                    if (typeof(target[0]) === 'object')
-                        target[0][random ? random.id : random] = random
-                    else 
+                    if (Array.isArray(target[0]))
                         target[0].push(random)
+                    else 
+                        target[0][random ? random.id : random] = random
                 }
             } else if (action === 'remove') {
                 const target = chooseRandom(targets)
@@ -265,7 +266,12 @@ export let initializer = () => {
                 removeRandom(target[0])
             }
 
-            setTimeout(monitorSimulatorMode, 200)
+            // db.marketplace.products.data = store.state.marketplace.products
+            // db.marketplace.assets.data = store.state.marketplace.assets
+
+            // store.dispatch('marketplace/updateState')
+
+            setTimeout(monitorSimulatorMode, 100)
         }
 
         const monitorPathState = async () => {
