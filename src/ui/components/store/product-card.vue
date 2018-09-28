@@ -34,6 +34,8 @@ export default {
         border: 1px solid rgba(70, 70, 70, 0.5);
         padding: 7px;
         border-radius: 5px;
+        display: flex;
+        flex-direction: column;
         &:hover {
             will-change: transform;
             transform: perspective(300px) rotateX(0deg) rotateY(0deg) scale(1.05);
@@ -54,6 +56,7 @@ export default {
             padding: 13px 0;
         }
         .product-tags {
+            margin-top: auto;
             margin-bottom: 0;
         }
     }

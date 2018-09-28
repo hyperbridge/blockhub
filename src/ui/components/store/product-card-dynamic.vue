@@ -85,6 +85,8 @@
         border: 1px solid rgba(70, 70, 70, 0.5);
         padding: 7px;
         border-radius: 5px;
+        display: flex;
+        flex-direction: column;
         &:hover {
             transform: scale(1.1);
             box-shadow: 0 0 35px rgba(0, 0, 0, .2);
@@ -104,7 +106,8 @@
             padding: 13px 0;
         }
         .product-tags {
-            margin-bottom: 0;
+            margin-top: auto;
+            margin-bottom: 10px;
         }
     }
 

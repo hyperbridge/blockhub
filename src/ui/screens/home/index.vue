@@ -122,24 +122,7 @@
 
                     <div class="row" v-if="item.type === 'product_slider'" :key="`level-1-${index}`">
                         <div class="col-12">
-                            <c-block class="margin-bottom-30" :onlyContentBg="true" :noGutter="true">
-                                <c-heading-bar
-                                    slot="title"
-                                    class="mb-0"
-                                    :name="item.data.title"
-                                    :showArrows="showArrowsState(item.data.products, 3)"
-                                    :showBackground="true"
-                                    @prevClick="item.data.swiper.slidePrev()"
-                                    @nextClick="item.data.swiper.slideNext()"
-                                />
-
-                                <c-swiper :options="item.data.options" :ref="item.data.ref" style="margin: 0 -10px">
-                                    <c-slide v-for="product in item.data.products" :key="product.id">
-                                        <c-product-card-dynamic :product="product" />
-                                    </c-slide>
-                                </c-swiper>
-
-                            </c-block>
+                            <c-products-slider :products="item.data.products" :title="item.data.title" :maxPerView="3" />
                         </div>
                     </div>
 
@@ -319,6 +302,7 @@ export default {
         'c-product-card': (resolve) => require(['@/ui/components/store/product-card'], resolve),
         'c-product-card-dynamic': (resolve) => require(['@/ui/components/store/product-card-dynamic'], resolve),
         'c-products-cards': (resolve) => require(['@/ui/components/store/products-cards'], resolve),
+        'c-products-slider': (resolve) => require(['@/ui/components/store/product-slider'], resolve),
         'c-curators-reviews': (resolve) => require(['@/ui/components/store/curators-reviews'], resolve),
         'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description'], resolve),
         'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
