@@ -23,7 +23,7 @@ const updateState = (savedData) => {
         trending_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['trending'] } }) : [],
         top_selling_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }) : [],
         special_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : [],
-        desktop_mode: rawData.desktop_mode !== null ? rawData.desktop_mode : window && window.process && window.process.type
+        desktop_mode: rawData.desktop_mode != null ? rawData.desktop_mode : (window && window.process && window.process.type)
     }
 
     const normalizedData = normalize(rawData, {
@@ -97,6 +97,8 @@ export const getters = {
 export const actions = {
     init(store, payload) {
         console.log("[BlockHub][Marketplace] Initializing...")
+
+        store.state.desktop_mode = window.isElectron
 
         updateState(store.state)
 

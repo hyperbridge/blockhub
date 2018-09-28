@@ -16,6 +16,9 @@
                                 <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button> 
                                 <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button> 
                                 <c-button @click="clearSimulatorData()">Clear Data</c-button>
+                                <br /><br />
+                                <input ref="desktopMessage" type="text" /> 
+                                <c-button @click="sendDesktopMessage()">Send Message To Desktop</c-button>
                             </div>
                         </div>
                     </div>
@@ -524,6 +527,14 @@ export default {
             this.$store.state.marketplace.trending_projects = []
             this.$store.state.marketplace.curator_reviews = []
             this.$store.state.marketplace.product_news = []
+        },
+        sendDesktopMessage() {
+            if (!window.isElectron) {
+                return alert('Not on desktop')
+            }
+
+            window.desktopBridge.send('ping', this.$refs.desktopMessage.value)
+            window.desktopBridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
         }
     },
     mounted() {

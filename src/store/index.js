@@ -5,6 +5,7 @@ import router from '../router'
 import * as db from '../db'
 import * as ChaosMonkey from '../framework/chaos-monkey'
 import * as PeerService from '../framework/peer-service'
+import * as DesktopBridge from '../framework/desktop-bridge'
 import * as Ethereum from '../framework/ethereum'
 import * as funding from '../modules/funding'
 import * as news from '../modules/news'
@@ -110,6 +111,7 @@ export let initializer = () => {
 
         Ethereum.init()
         PeerService.init()
+        DesktopBridge.init()
 
         db.setInitCallback(async () => {
             // TODO: is this a race condition?

@@ -4,12 +4,7 @@
         <h3>NEW ACCOUNT</h3>
 
         <ul>
-            <li class="title">
-                <a href="/#/">Notice</a>
-            </li>
-            <li class="title">
-                <a href="/#/">Legal Stuff</a>
-            </li>
+            <li class="title">Legal</li>
             <li>
                 <a href="/#/account/verification">
                     Account Verification
@@ -51,12 +46,10 @@
                     Trading assets
                 </a>
             </li>
-            <li class="title">
-                <a href="/#/">Developer</a>
-            </li>
+            <li class="title">Developer</li>
             <li>
-                <a href="/#/account/wallets">
-                    Become a developer
+                <a href="/#/developer/new">
+                    Become a Developer
                 </a>
             </li>
             <li>
@@ -64,22 +57,18 @@
                     Developer Area
                 </a>
             </li>
-            <li class="title">
-                <a href="/#/">Wallets</a>
-            </li>
+            <li class="title">Wallets</li>
             <li>
                 <a href="/#/account/wallets">
                     Overview
                 </a>
             </li>
             <li>
-                <a href="/#/account/new-wallet">
+                <a href="/#/account/wallets">
                     New Wallet
                 </a>
             </li>
-            <li class="title">
-                <a href="/#/">Identities</a>
-            </li>
+            <li class="title">Identities</li>
             <li>
                 <a href="/#/account/identities">
                     Overview

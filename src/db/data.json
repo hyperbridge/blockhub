@@ -281,7 +281,7 @@
         },
         "current_ethereum_network": "local",
         "simulator_mode": false,
-        "desktop_mode": false,
+        "desktop_mode": null,
         "developer_mode": false,
         "editor_mode": "viewing",
         "selected_product": null,
