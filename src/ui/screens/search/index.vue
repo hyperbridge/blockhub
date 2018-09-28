@@ -8,7 +8,7 @@
                             <div class="search__main">
                                 <c-input-searcher
                                     v-model="phrase"
-                                    @input="search"
+                                    @input="search()"
                                     placeholder="Search for games"
                                     aria-placeholder="Search for games"
                                 />
@@ -40,6 +40,7 @@
                                         :key="index"
                                         :id="`specials-${tag.value}`"
                                         v-model="tag.selected"
+                                        @change="search()"
                                     >
                                         {{ tag.value | replaceLoDash | upperFirstChar }}
                                     </c-checkbox>
@@ -54,11 +55,13 @@
                                     <p class="margin-top-20">Minimum:</p>
                                     <c-range-slider
                                         v-model.number="price.min"
+                                        @input="search()"
                                         :max="300"
                                     />
                                     <p class="margin-top-20">Maximum:</p>
                                     <c-range-slider
                                         v-model.number="price.max"
+                                        @input="search()"
                                         :max="300"
                                     />
                                 </div>
@@ -71,7 +74,7 @@
                                     </h4>
                                     <c-list
                                         :items="selectableTags"
-                                        @click="tag => tag.selected = !tag.selected"
+                                        @click="tag => { tag.selected = !tag.selected; search() }"
                                     />
                                 </div>
                                 <div class="filter-box">
@@ -84,7 +87,7 @@
                                     <div>
                                         <c-list
                                             :items="selectableLanguages"
-                                            @click="item => item.selected = !item.selected"
+                                            @click="item => { item.selected = !item.selected; search() }"
                                         >
                                         </c-list>
                                     </div>
@@ -165,19 +168,21 @@
                             </div>
                         </transition>
                         <h3>Results</h3>
-                        <div class="results">
-                            <c-spinner v-if="isTyping"/>
-                            <p v-else-if="!results.length">
-                                No results were found for provided filters
-                            </p>
-                            <c-game-grid
-                                v-else
-                                :itemInRow="2"
-                                :showRating="false"
-                                :items="results"
-                                itemBg="transparent"
-                                showTime
-                            />
+                        <div class="results__container">
+                            <div class="results">
+                                <c-spinner v-if="isTyping"/>
+                                <p v-else-if="!results.length">
+                                    No results were found for provided filters
+                                </p>
+                                <c-game-grid
+                                    v-else
+                                    :itemInRow="2"
+                                    :showRating="false"
+                                    :items="results"
+                                    itemBg="transparent"
+                                    showTime
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -202,34 +207,11 @@
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve),
             'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
             'c-list': (resolve) => require(['@/ui/components/list'], resolve),
+            'c-active-filters': (resolve) => require(['@/ui/components/search/active-filters'], resolve),
         },
         mixins: [debouncer],
         data() {
             return {
-                filters: {
-                    game_type: {
-                        simulator: {
-                            label: 'Simulator',
-                            value: false
-                        },
-                        action: {
-                            label: 'Action',
-                            value: true
-                        },
-                        real_time: {
-                            label: 'Real time',
-                            value: false
-                        },
-                        strategy: {
-                            label: 'Strategy',
-                            value: false
-                        },
-                        adventure: {
-                            label: 'Adventure',
-                            value: false
-                        }
-                    }
-                },
                 systemTags: [
                     { value: "featured", selected: false },
                     { value: "new", selected: false },
@@ -248,29 +230,41 @@
                     min: 0,
                     max: 0
                 },
-                expandFilters: false
+                expandFilters: false,
+                timeout2: 0
             }
         },
         methods: {
-            search(phrase) {
-                this.phrase = phrase;
-                if (!this.isTyping) this.isTyping = true;
-
+            search() {
                 this.debounce(() => {
-                    this.isTyping = false;
-                    this.results = this.getProductsByName(phrase);
-                }, 400);
+                    if (!this.isTyping) this.isTyping = true;
+                    if (this.filtersActive) {
+                        this.debounce(() => {
+                            this.isTyping = false;
+                            this.results = this.getProductsQuery(this.query);
+                        }, 500, 'timeout2');
+                    }
+                }, 500);
             }
         },
         computed: {
             ...mapGetters({
-                getProductsByName: 'marketplace/getProductsByName',
+                getProductsQuery: 'marketplace/getProductsQuery',
                 products: 'marketplace/productsArray',
                 productsTags: 'marketplace/productsTags',
                 languages: 'marketplace/productsLanguages'
             }),
-            marketplace() {
-                return this.$store.state.marketplace;
+            query() {
+                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price } = this;
+                const query = {};
+                if (phrase.length) query['name'] = { '$eq': phrase };
+                if (selectedSpecials.length) query['system_tags'] = { '$contains': selectedSpecials.map(tag => tag.value) };
+                if (selectedGenres.length) query['developer_tags'] = { '$contains': selectedGenres.map(tag => tag.name) };
+                // if (selectedLanguages.length) query['language_support'] = {
+                //     '$contains': { name: selectedLanguages.map(lang => lang.name) }
+                // }
+                if (price.min || price.max) query['price'] = { '$between': [price.min, price.max] };
+                return query;
             },
             selectedGenres() {
                 return this.selectableTags.filter(tag => tag.selected);
@@ -287,11 +281,6 @@
                     this.selectedSpecials.length ||
                     this.price.max || this.price.min ||
                     this.selectedLanguages.length);
-            },
-            filtered() {
-                return this.marketplace.products.filter(product => {
-                    // product.
-                })
             }
         },
         mounted() {
@@ -347,10 +336,13 @@
     }
     .active-filters__content {
         display: flex;
-        align-items: center;
+        // align-items: center;
         flex-wrap: wrap;
     }
 
+    .results__container {
+        min-height: 800px;
+    }
     .results {
         display: flex;
         justify-content: center;

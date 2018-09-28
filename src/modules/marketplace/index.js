@@ -3,9 +3,8 @@ import schema from './schema'
 import MarketplaceProtocol from 'marketplace-protocol'
 import * as ethereum from '@/framework/ethereum'
 import * as db from '@/db'
-import filters from './filters';
 
-let rawData = { ...filters.state };
+let rawData = {};
 
 export let state = {};
 
@@ -47,8 +46,7 @@ updateState(db.marketplace.config.data[0])
 const sortDir = (dir, asc) => asc ? dir : dir * -1;
 
 export const getters = {
-    ...filters.getters,
-    getProductsQuery: state => query => state.marketplace.products.find(query),
+    getProductsQuery: state => query => db.marketplace.products.find(query),
     productsArray: state => typeof (state.products) === "object" ? Object.values(state.products) : state.products,
     productsTags: (state, getters) => getters.productsArray
         .reduce((tags, product) => [
