@@ -243,11 +243,16 @@
                         </div>
                     </div>
 
-                    <c-curators-reviews
-                        :reviews="item.data.reviews"
-                        v-if="item.type === 'curator_reviews'"
-                        :key="`level-1-${index}`"
-                    />
+
+                    <div class="row margin-bottom-30" v-if="item.type === 'curator_reviews'" :key="`level-1-${index}`">
+                        <div class="col-12">
+                            <c-block title="From our curators" :noGutter="true" :bgGradient="true" :onlyContentBg="true" class="margin-bottom-30">
+                                <c-curators-reviews
+                                    :reviews="item.data.reviews"
+                                />
+                            </c-block>
+                        </div>
+                    </div>
                 </template>
 
                 <transition name="fade-slow">
@@ -384,12 +389,12 @@ export default {
                 data: {}
             })
 
-            result.push({
-                type: 'asset_grid',
-                data: {
-                    assets: this.marketplace.assets
-                }
-            })
+            // result.push({
+            //     type: 'asset_grid',
+            //     data: {
+            //         assets: this.marketplace.assets
+            //     }
+            // })
 
             result.push({
                 type: 'curator_reviews',
@@ -415,9 +420,6 @@ export default {
                 return this.$store.state.cache.screens['/store'].products
 
             return this.$store.state.marketplace.products
-        },
-        marketplace() {
-            return this.$store.state.marketplace;
         },
         // slice the array of data to display
         sliced() {
