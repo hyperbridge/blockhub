@@ -38,7 +38,7 @@
                                 :itemInRow="1"
                                 :showRating="false"
                                 :showTime="true"
-                                :items="marketplace.new_products.slice(0,5)"
+                                :items="new_products.slice(0,5)"
                                 itemBg="transparent"
                             />
                         </c-block>
@@ -133,11 +133,13 @@
                                     @nextClick="item.data.swiper.slideNext()"
                                 />
 
-                                <c-swiper :options="item.data.options" :ref="item.data.ref" style="margin: 0 -10px">
+                                <c-swiper :options="item.data.options" :ref="item.data.ref" style="margin: 0 -10px" v-if="item.data.products.length">
                                     <c-slide v-for="product in item.data.products" :key="product.id">
                                         <c-product-card-dynamic :product="product" />
                                     </c-slide>
                                 </c-swiper>
+
+                                 <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
 
                             </c-block>
                         </div>
@@ -449,6 +451,9 @@ export default {
         },
         trending_projects() {
             return this.$store.state.marketplace.trending_projects;
+        },
+        new_products() {
+            return this.$store.state.marketplace.new_products;
         },
         product_news() {
             return this.$store.state.marketplace.product_news;
