@@ -359,7 +359,7 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/unknown'], resolve)
         },
         {
-            path: '/search',
+            path: '/search/:tags',
             name: 'Search Page',
             component: (resolve) => require(['@/ui/screens/search'], resolve)
         },
