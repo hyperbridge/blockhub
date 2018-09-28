@@ -10,6 +10,7 @@
                 :key="index"
                 :review="review"
             />
+            <p v-if="!reviews.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
         </div>
     </div>
 </template>

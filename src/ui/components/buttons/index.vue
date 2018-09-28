@@ -115,6 +115,7 @@
 
         $statusColors: (
             default: (#fff, #3D3E5D, #3D3E5D, #A2A3BE),
+            plain: (transparent, #fff, transparent, #ddd),
             info: (#5D75F7, #fff, #586ee9, #30304B),
             success: (#5EA72B, #fff, #559727, #30304B),
             danger: (#F75D5D, #fff, #de5454, #30304B),

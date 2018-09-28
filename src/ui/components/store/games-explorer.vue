@@ -5,7 +5,7 @@
                 slot="title"
                 class="mb-0"
                 :headingTabs="[
-                    { title: 'Top Selling', category: 'top_selling_products' },
+                    { title: 'Top Games', category: 'top_selling_products' },
                     { title: 'New Releases', category: 'new_products' },
                     { title: 'Upcoming', category: 'upcoming_products' }
                 ]"
