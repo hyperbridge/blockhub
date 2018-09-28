@@ -52,7 +52,7 @@
                                 </template>
                             </c-heading-bar>
 
-                            <c-assets-list-item
+                            <c-assets-list
                                 :items="assets"
                                 itemInRow="2"
                                 v-if="assets.length"
@@ -211,16 +211,17 @@
                                     <c-button status="info" :icon_hide="true" v-if="item.data.assets.length">View All</c-button>
                                 </div>
                                 <div class="d-flex justify-content-between flex-wrap">
-                                    <div class="w-50" v-for="(item, index) in item.data.assets" :key="index" v-if="item.data.assets.length">
+                                    <div class="w-50" v-for="(asset, index) in item.data.assets" :key="index" v-if="item.data.assets.length">
                                         <c-assets-list-item
-                                            :item="item"
+                                            :item="asset"
                                             :isTransparent="true"
+                                            v-if="asset"
                                         >
                                             <span class="mr-3">
-                                                <c-icon name="box"/>{{ item.count }}
+                                                <c-icon name="box"/>{{ asset.count }}
                                             </span>
                                             <span class="mr-3">
-                                                <c-icon name="dollar-sign"/>{{ item.price }}
+                                                <c-icon name="dollar-sign"/>{{ asset.price }}
                                             </span>
                                             <span class="mr-3">
                                                 <c-icon name="dollar-sign"/>3.45
@@ -262,8 +263,8 @@
 
                     <c-curators-reviews
                         :reviews="item.data.reviews"
-                        v-if="item.type === 'curator_reviews'"
                         :key="`level-1-${index}`"
+                        v-if="item.type === 'curator_reviews'"
                     />
                 </template>
 
@@ -292,6 +293,7 @@
 
 
 <script>
+import { mapGetters } from 'vuex'
 import 'swiper/dist/css/swiper.css'
 
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
@@ -330,7 +332,7 @@ export default {
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
         'c-games-explorer': (resolve) => require(['@/ui/components/store/games-explorer'], resolve),
-        'c-game-list-item': (resolve) => require(['@/ui/components/assets-list-item'], resolve),
+        'c-assets-list': (resolve) => require(['@/ui/components/assets-list-item'], resolve),
         'c-projects-card': (resolve) => require(['@/ui/components/projects/card'], resolve),
         'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve),
         'c-main-banner': (resolve) => require(['@/ui/components/banner'], resolve),
@@ -356,15 +358,18 @@ export default {
         }
     },
     computed: {
+        ...mapGetters({
+            assets: 'marketplace/assetsArray'
+        }),
         list() {
             const result = []
 
             updateLandingImage.bind(this)()
 
-            if (this.marketplace.frontpage_product) {
+            if (this.$store.state.marketplace.frontpage_product) {
                 result.push({
                     type: 'frontpage_product',
-                    data: this.marketplace.frontpage_product
+                    data: this.$store.state.marketplace.frontpage_product
                 })
             }
 
@@ -375,7 +380,7 @@ export default {
                     ref: 'demo_products_sl',
                     swiper: this.$refs.demo_products_sl && this.$refs.demo_products_sl.swiper,
                     options: this.demoSlider,
-                    products: this.marketplace.new_products
+                    products: this.$store.state.marketplace.new_products
                 }
             })
 
@@ -386,7 +391,7 @@ export default {
                     ref: 'summer_sale_sl',
                     swiper: this.$refs.summer_sale_sl && this.$refs.summer_sale_sl.swiper,
                     options: this.saleSlider,
-                    products: this.marketplace.sale_products
+                    products: this.$store.state.marketplace.sale_products
                 }
             })
 
@@ -403,21 +408,21 @@ export default {
             result.push({
                 type: 'asset_grid',
                 data: {
-                    assets: this.marketplace.assets
+                    assets: this.assets
                 }
             })
 
             result.push({
                 type: 'curator_reviews',
                 data: {
-                    reviews: this.$store.state.network.curator_reviews
+                    reviews: this.$store.state.marketplace.curator_reviews
                 }
             })
 
             result.push({
                 type: 'product_news',
                 data: {
-                    news: this.$store.state.network.product_news
+                    news: this.$store.state.marketplace.product_news
                 }
             })
 
@@ -442,20 +447,14 @@ export default {
         is_connected() {
             return this.$store.state.network.connection.datasource;
         },
-        marketplace() {
-            return this.$store.state.marketplace;
-        },
-        assets() {
-            return this.$store.state.marketplace.assets;
-        },
         trending_projects() {
-            return this.$store.state.network.trending_projects;
+            return this.$store.state.marketplace.trending_projects;
         },
         product_news() {
-            return this.$store.state.network.product_news;
+            return this.$store.state.marketplace.product_news;
         },
         main_banner() {
-            return this.$store.state.network.main_banner;
+            return this.$store.state.marketplace.main_banner;
         },
         signed_in() {
             return this.$store.state.network.signed_in;
@@ -517,9 +516,9 @@ export default {
         },
         clearSimulatorData() {
             this.$store.state.network.account.notifications = []
-            this.$store.state.network.trending_projects = []
-            this.$store.state.network.curator_reviews = []
-            this.$store.state.network.product_news = []
+            this.$store.state.marketplace.trending_projects = []
+            this.$store.state.marketplace.curator_reviews = []
+            this.$store.state.marketplace.product_news = []
         }
     },
     mounted() {

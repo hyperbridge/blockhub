@@ -184,11 +184,24 @@ export let initializer = () => {
         ]
 
         const chooseRandom = (list) => {
-            return list[Math.floor(Math.random() * list.length)]
+            if (typeof (list) === 'object') {
+                const keys = Object.keys(list)
+                const randomKey = keys[Math.floor(Math.random() * keys.length)]
+                return list[randomKey]
+            } else {
+                return list[Math.floor(Math.random() * list.length)]
+            }
         }
 
         const removeRandom = (list) => {
-            list.splice(Math.floor(Math.random() * list.length), 1)
+            if (typeof (list) === 'object') {
+                const keys = Object.keys(list)
+                const randomKey = keys[Math.floor(Math.random() * keys.length)]
+                delete list[randomKey]
+            }
+            else {
+                list.splice(Math.floor(Math.random() * list.length), 1)
+            }
 
             return list
         }
@@ -207,9 +220,9 @@ export let initializer = () => {
 
             // Start out with some decent amount of content
             if (!simulatorInitialized) {
-                store.state.network.trending_projects = seed.trending_projects
-                store.state.network.curator_reviews = seed.curator_reviews.slice(seed.curator_reviews.length / 2)
-                store.state.network.product_news = seed.product_news.slice(seed.product_news.length / 2)
+                store.state.marketplace.trending_projects = seed.trending_projects
+                store.state.marketplace.curator_reviews = seed.curator_reviews.slice(seed.curator_reviews.length / 2)
+                store.state.marketplace.product_news = seed.product_news.slice(seed.product_news.length / 2)
                 store.state.marketplace.products = seed.products.slice(seed.products.length / 2)
                 store.state.marketplace.assets = seed.assets.slice(seed.assets.length / 2)
                 store.state.marketplace.collections = seed.collections.slice(seed.collections.length / 2)
@@ -226,9 +239,9 @@ export let initializer = () => {
             const targets = [
                 [store.state.network.account.notifications, seed.notifications],
                 [store.state.network.account.wallets, seed.wallets],
-                [store.state.network.trending_projects, seed.trending_projects],
-                [store.state.network.curator_reviews, seed.curator_reviews],
-                [store.state.network.product_news, seed.product_news],
+                [store.state.marketplace.trending_projects, seed.trending_projects],
+                [store.state.marketplace.curator_reviews, seed.curator_reviews],
+                [store.state.marketplace.product_news, seed.product_news],
                 [store.state.marketplace.assets, seed.assets],
                 [store.state.marketplace.products, seed.products],
                 [store.state.marketplace.collections, seed.collections],
@@ -239,11 +252,10 @@ export let initializer = () => {
                 const target = chooseRandom(targets)
 
                 if (target[1].length > 0) {
-                    console.log(target)
                     const random = chooseRandom(target[1])
 
                     if (typeof(target[0]) === 'object')
-                        target[0][random.id] = random
+                        target[0][random ? random.id : random] = random
                     else 
                         target[0].push(random)
                 }
