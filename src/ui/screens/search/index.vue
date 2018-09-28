@@ -29,7 +29,12 @@
                                 class="search-filters__container"
                             >
                                 <div class="filter-box">
-                                    <h4>Specials:</h4>
+                                    <h4>
+                                        Specials:
+                                        <span v-show="selectedSpecials.length">
+                                            ({{ selectedSpecials.length }})
+                                        </span>
+                                    </h4>
                                     <c-checkbox
                                         v-for="(tag, index) in systemTags"
                                         :key="index"
@@ -40,7 +45,12 @@
                                     </c-checkbox>
                                 </div>
                                 <div class="filter-box">
-                                    <h4>Price range:</h4>
+                                    <h4>
+                                        Price range:
+                                        <span v-show="price.min && price.max">
+                                            ({{ price.min }} - {{ price.max }})
+                                        </span>
+                                    </h4>
                                     <p class="margin-top-20">Minimum:</p>
                                     <c-range-slider
                                         v-model.number="price.min"
