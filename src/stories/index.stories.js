@@ -1004,7 +1004,7 @@ storiesOf('Popups', module)
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is warning popup</h3>
                 <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" @close="close" ref="modal" title="Warning" type="warning" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                <c-popup :activated="modalActive" @onClose="close" ref="modal" title="Warning" type="warning" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
                 Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">

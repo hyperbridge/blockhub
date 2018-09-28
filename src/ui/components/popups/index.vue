@@ -61,10 +61,12 @@
                 mutableActived: false,
             }
         },
+        created(){
+            console.log(this.mutableActived)
+        },
         methods: {
             hidePopup: function () {
                 this.mutableActived = !this.mutableActived;
-                this.$emit('close')
             }
         },
         watch: {
