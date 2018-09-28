@@ -305,9 +305,26 @@
             }
         },
         mounted() {
-            this.results = this.products;
-            this.selectableTags = this.productsTags.map(tag => ({ name: tag, selected: false }));
-            this.selectableLanguages = this.languages.map(lang => ({ name: lang, selected: false }));
+            if (!Object.keys(this.$route.query).length) {
+                this.results = this.products;
+            } else {
+                this.isTyping = true;
+                const { tags, langs, name, priceMin, priceMax } = this.$route.query;
+
+                if (name) this.phrase = name;
+                if (priceMin) this.price.min = priceMin;
+                if (priceMax) this.price.max = priceMax;
+
+                this.selectableTags = this.productsTags.map(tag => {
+                    const t = tags.includes(tag) ? true : false
+                    return {
+                        name: tag, selected: tags && tags.includes(tag) ? true : false
+                    }
+                });
+                this.selectableLanguages = this.languages.map(lang => ({
+                    name: lang, selected: langs && langs.includes(tag) ? true : false
+                }));
+            }
         },
         watch: {
             searchingFilters: {
@@ -337,7 +354,6 @@
     .search-filters__container {
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
         justify-content: space-between;
     }
     .filter-box {
@@ -364,7 +380,7 @@
     }
     .active-filters__content {
         display: flex;
-        // align-items: center;
+        align-items: center;
         flex-wrap: wrap;
     }
 

@@ -55,7 +55,7 @@ export const getters = {
                 .filter(tag =>
                     !tags.includes(tag)
                 )
-        ], [])
+        ], []).sort()
     ,
     systemTags: (state, getters) => getters.productsArray
         .reduce((tags, product) => [

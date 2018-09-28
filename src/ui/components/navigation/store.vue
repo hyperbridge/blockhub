@@ -13,9 +13,9 @@
 
         <c-sidebar-menu sub_title="Browse By Genre" sub_icon="fas fa-gamepad" mClass="margin-bottom-20">
             <c-sidebar-menu-link
-                v-for="param in ['Action', 'Adventure', 'RPG', 'Racing', 'Fighting', 'VR']"
+                v-for="param in ['Action', 'Adventure', 'RPG', 'Co-op', 'Multiplayer', 'Sports']"
                 :key="param"
-                :to="{ name: 'Search Page', params: { tags: param } }"
+                :to="{ name: 'Search Page', query: { tags: param } }"
             >
                 {{ param }}
             </c-sidebar-menu-link>
