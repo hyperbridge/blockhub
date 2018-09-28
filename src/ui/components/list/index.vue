@@ -1,0 +1,49 @@
+<template>
+    <ul class="list-container">
+        <li v-for="(item, index) in items" :key="index">
+            <a
+                @click="$emit('click', item)"
+                class="item__link"
+                :class="{ 'item_link--active': item.selected | item.active }"
+            >
+                <slot :item="item">
+                        {{ item.name }}
+                </slot>
+            </a>
+        </li>
+    </ul>
+</template>
+
+<script>
+    export default {
+        name: 'list',
+        props: {
+            items: Array
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+    .list-container {
+        margin: 0;
+        padding: 0;
+        max-height: 160px;
+        list-style-type: none;
+        overflow-y: auto;
+        background: rgba(36, 37, 59, .8);
+        border-radius: 4px;
+    }
+    .item__link {
+        display: block;
+        padding: 10px;
+        cursor: pointer;
+        user-select: none;
+        &:hover:not(.item_link--active) {
+            background: rgba(255,255,255,.025);
+        }
+    }
+    .item_link--active {
+        background: rgba(1,1,1,.12);
+        text-shadow: 0 0 6px rgba(255,255,255, .4);
+    }
+</style>

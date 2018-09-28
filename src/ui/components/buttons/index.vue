@@ -4,7 +4,10 @@
         :href="href"
         :target="target"
         class="c-btn"
-        :class="[status, 'c-btn-' + size , { 'swap-direction': swap_direction }]"
+        :class="[
+            status, 'c-btn-' + size ,
+            { 'swap-direction': swap_direction }
+        ]"
         @click="$emit('click')"
     >
         <i

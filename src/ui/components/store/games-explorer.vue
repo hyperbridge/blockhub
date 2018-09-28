@@ -71,12 +71,12 @@
                             v-if="sortBy.property"
                             title="SORT BY:"
                             @delete="sortBy.property = null"
-                            isParent
                         >
                             <c-option-tag
                                 title="Property:"
                                 @delete="sortBy.property = null"
                                 isChildren
+                                :isParent="false"
                             >
                                 <select v-model="sortBy.property">
                                     <option
@@ -92,6 +92,7 @@
                                 title="Direction:"
                                 @delete="sortBy.asc = !sortBy.asc"
                                 isChildren
+                                :isParent="false"
                                 hideButton
                             >
                                 {{ sortBy.asc ? 'Ascending' : 'Descending' }}

@@ -2,38 +2,39 @@
     <div class="c-range-slider" :class="sClass">
         <label v-if="label">{{ label }}</label>
         <p class="subtitle" v-if="description">{{ description }}</p>
-        <input ref="rangeSlider"
-               :data-type="type"
-               :data-min="min"
-               :data-max="max"
-               :data-from="from"
-               :data-to="to"
-               :data-step="step"
-               :data-min-interval="minInterval"
-               :data-max-interval="maxInterval"
-               :data-from-fixed="fromFixed"
-               :data-from-min="fromMin"
-               :data-from-max="fromMax"
-               :data-to-fixed="toFixed"
-               :data-to-min="toMin"
-               :data-to-max="toMax"
-               :data-prefix="prefix"
-               :data-postfix="postfix"
-               :data-max-postfix="maxPostfix"
-               :data-grid="grid"
-               :data-grid-num="gridNum"
-               :data-disable="disable"
-               :data-block="block"
-               :data-extra-classes="extraClasses"
-               :id="id"
-               :name="name"
-               value="">
+        <input
+            ref="rangeSlider"
+            :data-type="type"
+            :data-min="min"
+            :data-max="max"
+            :data-from="from"
+            :data-to="to"
+            :data-step="step"
+            :data-min-interval="minInterval"
+            :data-max-interval="maxInterval"
+            :data-from-fixed="fromFixed"
+            :data-from-min="fromMin"
+            :data-from-max="fromMax"
+            :data-to-fixed="toFixed"
+            :data-to-min="toMin"
+            :data-to-max="toMax"
+            :data-prefix="prefix"
+            :data-postfix="postfix"
+            :data-max-postfix="maxPostfix"
+            :data-grid="grid"
+            :data-grid-num="gridNum"
+            :data-disable="disable"
+            :data-block="block"
+            :data-extra-classes="extraClasses"
+            :id="id"
+            :name="name"
+        />
     </div>
 </template>
 
 <script>
     export default {
-        props:{
+        props: {
             id: String,
             name: String,
             label: String,
@@ -73,19 +74,19 @@
             prefix: String,
             postfix: String,
             maxPostfix: String,
-            grid:{
+            grid: {
                 type: Boolean,
                 default: false
             },
-            gridNum:{
+            gridNum: {
                 type: Number,
                 default: 4
             },
-            disable:{
+            disable: {
                 type: Boolean,
                 default: false
             },
-            block:{
+            block: {
                 type: Boolean,
                 default: false
             },
@@ -93,7 +94,7 @@
             sClass: String
 
         },
-        mounted: function () {
+        mounted() {
             $(this.$refs.rangeSlider).ionRangeSlider();
         }
     }
