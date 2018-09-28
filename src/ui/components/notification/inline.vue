@@ -66,6 +66,7 @@
         }
         &.type-info {
             background: #5D75F7;
+            color: #fff;
         }
         &.type-success {
             background: #43C981;
