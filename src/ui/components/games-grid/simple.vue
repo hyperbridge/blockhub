@@ -1,10 +1,10 @@
 <template>
     <div class="product-grid__container">
         <div class="product-grid__item-container"
-             v-if="items"
+             v-if="items.length"
              v-for="(item, index) in items"
              v-bind:key="index"
-             :style="{ width: 'calc( 100% / ' + itemInRow + ')'}"
+             :style="{ width: 'calc(100% / ' + itemInRow + ')'}"
         >
             <div class="product-grid__item">
                 <div class="card-body padding-0">
@@ -15,9 +15,9 @@
                 </div>
             </div>
         </div>
-        <div v-else class="text-white">
-            Nothing to show
-        </div>
+        <p v-if="!items.length">
+            Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?
+        </p>
     </div>
 </template>
 
@@ -25,7 +25,10 @@
 export default {
     name: 'games-grid',
     props: {
-        items: Array,
+        items: {
+            type: Array,
+            require: true
+        },
         itemInRow:{
             default: '4'
         }

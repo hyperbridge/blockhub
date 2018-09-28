@@ -1,7 +1,7 @@
 <template>
     <div class="main-banner text-white">
         <div class="main-banner__content">
-            <div class="image-bg" v-if="image" :style="bannerImg"></div>
+            <c-img class="image-bg" :style="bannerImg" v-if="image" />
             <video autoplay playsinline loop muted v-if="video" class="video-bg">
                 <source :src="video.src" type="video/mp4" />
             </video>

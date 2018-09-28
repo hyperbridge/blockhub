@@ -24,9 +24,14 @@
     export default {
         name: 'option-tag',
         props: {
-            title: String,
-            text: String,
-            isParent: Boolean,
+            title: [String, Number],
+            text: [String, Number],
+            isParent: {
+                type: Boolean,
+                default() {
+                    return !!(this.$slots.default && this.$slots.default.length);
+                }
+            },
             isChildren: Boolean,
             hideButton: Boolean
         }
@@ -56,6 +61,7 @@
         &.option-tag--light {
             color: #fff;
             background: rgba(255,255,255,.15);
+            border: 2px dotted #fff;
             > .option-tag__del-btn:hover {
                 color: rgba(255, 255, 255, .4);
             }

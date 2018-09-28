@@ -55,8 +55,12 @@
                             <c-assets-list-item
                                 :items="assets"
                                 itemInRow="2"
+                                v-if="assets.length"
                             />
-                            <c-content-navigation/>
+                            
+                            <p v-if="!assets.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
+
+                            <c-content-navigation />
                         </c-block>
                     </div>
                     <div class="col-12 margin-bottom-30 d-none">
@@ -77,6 +81,7 @@
                                 data-lg-items="4"
                                 data-loop="true"
                                 data-autoplay="false"
+                                v-if="trending_projects.length"
                             >
                                 <c-projects-card
                                     v-for="(project, index) in trending_projects"
@@ -85,6 +90,7 @@
                                 />
 
                             </div>
+                            <p v-if="!trending_projects.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                         </div>
                     </div>
                 </div>
@@ -129,7 +135,7 @@
 
                                 <c-swiper :options="item.data.options" :ref="item.data.ref" style="margin: 0 -10px">
                                     <c-slide v-for="product in item.data.products" :key="product.id">
-                                        <c-product-card-dynamic :product="product"/>
+                                        <c-product-card-dynamic :product="product" />
                                     </c-slide>
                                 </c-swiper>
 
@@ -164,7 +170,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <h3 class="text-yellow">Item Marketplace</h3>
-                                        <p>You all in one spot for games assets</p>
+                                        <p>All-in-one spot for games assets</p>
                                     </div>
                                     <div class="banner-action">
                                         <c-button status="info" icon_hide size="lg">VISIT NOW</c-button>
@@ -175,7 +181,7 @@
                         <div class="col-12 col-md-4">
                             <c-banner :imgSrc="'/static/img/banners/banner-4.png'" link="/#/collections">
                                 <h3 class="text-yellow margin-bottom-5">Top Collections</h3>
-                                <p>We curated the best ones for you</p>
+                                <p>Our community has curated the best ones for you</p>
                             </c-banner>
                         </div>
                     </div>
@@ -186,7 +192,7 @@
                                 <c-heading-bar
                                     slot="title"
                                     class="mb-0"
-                                    :headingTabs="['Top 10 Items', 'Most Wanted', 'Best Deals']"
+                                    :headingTabs="['Top Items', 'Most Wanted', 'Best Deals']"
                                 >
                                     <template slot="additional-action">
                                         <c-heading-bar-fields name="Trending" @clickUp=""  @clickDown=""/>
@@ -202,10 +208,10 @@
                                         </c-dropdown>
                                         <c-searcher customClass="mb-0" />
                                     </div>
-                                    <c-button status="info" :icon_hide="true">All New Releases</c-button>
+                                    <c-button status="info" :icon_hide="true" v-if="item.data.assets.length">View All</c-button>
                                 </div>
                                 <div class="d-flex justify-content-between flex-wrap">
-                                    <div class="w-50" v-for="(item, index) in item.data.assets" :key="index">
+                                    <div class="w-50" v-for="(item, index) in item.data.assets" :key="index" v-if="item.data.assets.length">
                                         <c-assets-list-item
                                             :item="item"
                                             :isTransparent="true"
@@ -221,6 +227,7 @@
                                             </span>
                                         </c-assets-list-item>
                                     </div>
+                                    <p v-if="!item.data.assets.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                                 </div>
                             </c-block>
                         </div>
@@ -248,6 +255,7 @@
                                         :index="index"
                                     />
                                 </div>
+                                <p v-if="!item.data.news.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                             </div>
                         </div>
                     </div>

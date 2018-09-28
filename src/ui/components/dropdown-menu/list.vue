@@ -1,7 +1,7 @@
 <template>
     <c-dropdown
         :id="id"
-        name="Filter by Genre"
+        :name="title"
         class="product-genre"
         :showBg="true"
     >
@@ -28,6 +28,7 @@
                 type: String,
                 default: 'dropdown-list'
             },
+            title: String,
             list: Array,
             activeList: Array
         }

@@ -47,7 +47,7 @@
                     <p><span class="fa fa-eye"></span> Preview</p>
                 </button>
             </div>
-            <nav class="app-header__nav" v-if="!signed_in || (signed_in && developer_mode && !is_editing)">
+            <nav class="app-header__nav" v-if="!signed_in || (signed_in && !is_editing)">
                 <nav class="horizontal-navigation app-header__nav-left">
                     <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
                     <ul>

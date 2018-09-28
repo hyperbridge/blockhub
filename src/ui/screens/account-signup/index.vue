@@ -230,8 +230,7 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-center" slot="footer">
                                 <c-switch
-                                    :value="account.agreement"
-                                    @change="account.agreement = !account.agreement"
+                                    v-model="account.agreement"
                                     label_position="right"
                                     :customLabel="true"
                                 >
@@ -242,8 +241,7 @@
                                     </template>
                                 </c-switch>
                                 <c-switch
-                                    :value="account.newsletter"
-                                    @change="account.newsletter = !account.newsletter"
+                                    v-model="account.newsletter"
                                     label="Sign up for our newsletter, get 100 HBX Bonus!"
                                     label_position="right"
                                 />
@@ -400,7 +398,7 @@
                     last_name: '',
                     birthday: '',
                     email: '',
-                    agreement: true,
+                    agreement: false,
                     newsletter: false,
                     identity: {
                         name: '',
@@ -411,8 +409,8 @@
             }
         },
         methods: {
-            checkForm(e) {
-                this.errors = []
+            checkForm() {
+                this.errors = [];
 
                 if (this.current_step === 1) {
                     if (this.account.first_name && this.account.last_name && this.account.email && this.account.agreement) {

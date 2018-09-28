@@ -38,6 +38,7 @@
 
 <style lang="scss" scoped>
     .block {
+        width: 100%;
         padding: 15px;
         border-radius: 5px;
         position: relative;
