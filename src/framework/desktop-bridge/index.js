@@ -6,6 +6,18 @@ const local = {
     requests: {},
 }
 
+export const isConnected = () => {
+    return window.isElectron
+}
+
+export const ID = () => {
+    // Math.random should be unique because of its seeding algorithm.
+    // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+    // after the decimal.
+    return '_' + Math.random().toString(36).substr(2, 9);
+}
+
+
 
 export const sendCommand = async (key, data = {}, peer = null, responseId = null) => {
     const cmd = {
@@ -53,32 +65,6 @@ export const runCommand = async (cmd, meta = null) => {
             return resolve()
         }
 
-        if (cmd.key === 'pageContentHashRequest') {
-            if (!config.RELAY) return Promise.resolve()
-
-            const state = local.resolver(cmd)
-            const req = {
-                path: cmd.data.path,
-                hash: md5(JSON.stringify(state) + '')
-            }
-
-            return resolve(await sendCommand('pageContentHashResponse', req, meta.client, cmd.requestId))
-        } else if (cmd.key === 'pageContentDataRequest') {
-            if (!config.RELAY) return Promise.resolve()
-
-            const state = local.resolver(cmd)
-            const req = {
-                content: JSON.stringify(state)
-            }
-
-            return resolve(await sendCommand('pageContentDataResponse', req, meta.client, cmd.requestId))
-        } else if (cmd.key === 'addressBalanceRequest') {
-            if (!config.RELAY) return Promise.resolve()
-
-            const req = await addressBalanceRequest(cmd.address)
-
-            return resolve(await sendCommand('addressBalanceResponse', req, meta.client, cmd.requestId))
-        }
     })
 }
 
@@ -103,8 +89,8 @@ export const initCommandMonitor = () => {
 }
 
 export const init = () => {
-    if (!window.isElectron) {
-        console.log('[DesktopBridge] Not initializing. Reason: not in desktop app')
+    if (!isConnected()) {
+        console.log('[DesktopBridge] Not initializing. Reason: not connected to desktop app')
 
         return false
     }

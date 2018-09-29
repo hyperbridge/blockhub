@@ -275,7 +275,7 @@
 
                 <transition name="fade-slow">
                     <div class="" v-if="end">
-                        <h3>You're all caught up!</h3>
+                        <h3></h3>
                     </div>
                     <div class="no-updates" v-if="!sliced">
                         <h3>
