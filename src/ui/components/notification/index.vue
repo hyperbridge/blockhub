@@ -8,7 +8,7 @@
             v-if="show"
         >
             <div class="title">
-                <h5 class="text-left" @click="$emit('showPopup')">
+                <h5 class="text-left" @click.self="$emit('showPopup')">
                     <i :class="`fas fa-${notif_icon}`"></i>
                     {{ notification.title }}
                     <div class="close" @click="actionOnClose()">

@@ -318,7 +318,7 @@
                      :type="notifPopup.type"
                      :sub_title="notifPopup.text"
                      @close="closeNotifPopup"
-                     v-show="notifPopup.show_popup"
+                     v-if="notifPopup"
                      ref="notifpopup">
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ligula elit. Praesent sit amet tellus
