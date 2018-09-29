@@ -6,7 +6,7 @@
                     <div class="col-5">
                         <div class="identity__user-info">
                             <div class="user_avatar">
-                                <img
+                                <c-img
                                     src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png"/>
                                 <div class="us_icon">
                                     <i class="fas fa-lock"></i>
@@ -30,10 +30,10 @@
                     </div>
                     <div class="col-7">
                         <div class="identity__user-medal">
-                            <img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
-                            <img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
-                            <img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
-                            <img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
+                            <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
+                            <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
+                            <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
+                            <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
                         </div>
                     </div>
                     <div class="col-12 d-flex margin-top-30 justify-content-end">
@@ -86,7 +86,7 @@
                                     :key="index"
                                 >
                                     <div class="img">
-                                        <img :src="badge.img" />
+                                        <c-img :src="badge.img" />
                                     </div>
                                     <h3>{{ badge.title }}</h3>
                                     <p>{{ badge.product }}</p>
@@ -158,7 +158,7 @@
                                     class="games-list__grid-item"
                                 >
                                     <div class="img">
-                                        <img :src="game.img" />
+                                        <c-img :src="game.img" />
                                     </div>
                                     <div class="info">
                                         <h4>{{ game.title }}</h4>
@@ -217,7 +217,7 @@
                                     :key="index"
                                 >
                                     <div class="img">
-                                        <img :src="badge.img" />
+                                        <c-img :src="badge.img" />
                                     </div>
                                     <h3>{{ badge.title }}</h3>
                                     <p>{{ badge.product }}</p>

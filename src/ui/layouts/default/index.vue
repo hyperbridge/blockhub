@@ -11,9 +11,9 @@
         <div class="page__content page__content-invert invert" id="page-content">
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert left-sidebar" id="page-aside">
-                <transition name="slideLeft" v-if="initialized">
+                <!--<transition name="slideLeft" v-if="initialized">-->
                     <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}`"></component>
-                </transition>
+                <!--</transition>-->
             </div>
             <!-- //END PAGE ASIDE PANEL -->
             
@@ -46,7 +46,7 @@
             </div>
 
             <!-- SIDEPANEL -->
-            <transition name="slideRight" v-if="initialized">
+            <!--<transition name="slideRight" v-if="initialized">-->
                 <c-sidepanel>
                     <c-swiper :options="panelOption" ref="mySwiper">
                         <c-slide v-if="desktop_mode">
@@ -54,16 +54,16 @@
                                 <h3>NOTIFICATION</h3>
 
                                 <div class="slide-chooser">
-                                    <c-button status="link" icon-hide @click="showSlide('notification')" style="box-shadow: none" v-if="desktop_mode">
+                                    <c-button status="plain" icon-hide @click="showSlide('notification')" class="active" v-if="desktop_mode">
                                         <i class="fa fa-bell" />
                                     </c-button>
-                                    <c-button status="link" icon-hide @click="showSlide('messages')" style="box-shadow: none" v-if="desktop_mode">
+                                    <c-button status="plain" icon-hide @click="showSlide('messages')" style="box-shadow: none" v-if="desktop_mode">
                                         <i class="fa fa-envelope" />
                                     </c-button>
-                                    <c-button status="link" icon-hide @click="showSlide('updates')" style="box-shadow: none" v-if="desktop_mode">
+                                    <c-button status="plain" icon-hide @click="showSlide('updates')" style="box-shadow: none" v-if="desktop_mode">
                                         <i class="fa fa-star" />
                                     </c-button>
-                                    <c-button status="link" icon-hide @click="showSlide('top_lists')" style="box-shadow: none">
+                                    <c-button status="plain" icon-hide @click="showSlide('top_lists')" style="box-shadow: none">
                                         <i class="fa fa-trophy" />
                                     </c-button>
                                 </div>
@@ -80,16 +80,16 @@
                                 <h3>MESSAGES</h3>
 
                                 <div class="slide-chooser">
-                                    <c-button status="link" icon-hide @click="showSlide('notification')" style="box-shadow: none" v-if="desktop_mode">
+                                    <c-button status="plain" icon-hide @click="showSlide('notification')" style="box-shadow: none" v-if="desktop_mode">
                                         <i class="fa fa-bell" />
                                     </c-button>
-                                    <c-button status="link" icon-hide @click="showSlide('messages')" style="box-shadow: none" v-if="desktop_mode">
+                                    <c-button status="plain" icon-hide @click="showSlide('messages')" class="active" v-if="desktop_mode">
                                         <i class="fa fa-envelope" />
                                     </c-button>
-                                    <c-button status="link" icon-hide @click="showSlide('updates')" style="box-shadow: none" v-if="desktop_mode">
+                                    <c-button status="plain" icon-hide @click="showSlide('updates')" style="box-shadow: none" v-if="desktop_mode">
                                         <i class="fa fa-star" />
                                     </c-button>
-                                    <c-button status="link" icon-hide @click="showSlide('top_lists')" style="box-shadow: none">
+                                    <c-button status="plain" icon-hide @click="showSlide('top_lists')" style="box-shadow: none">
                                         <i class="fa fa-trophy" />
                                     </c-button>
                                 </div>
@@ -134,16 +134,16 @@
                                 <h3>UPDATES</h3>
 
                                 <div class="slide-chooser">
-                                    <c-button status="link" icon-hide @click="showSlide('notification')" style="box-shadow: none" v-if="desktop_mode">
+                                    <c-button status="plain" icon-hide @click="showSlide('notification')" style="box-shadow: none" v-if="desktop_mode">
                                         <i class="fa fa-bell" />
                                     </c-button>
-                                    <c-button status="link" icon-hide @click="showSlide('messages')" style="box-shadow: none" v-if="desktop_mode">
+                                    <c-button status="plain" icon-hide @click="showSlide('messages')" style="box-shadow: none" v-if="desktop_mode">
                                         <i class="fa fa-envelope" />
                                     </c-button>
-                                    <c-button status="link" icon-hide @click="showSlide('updates')" style="box-shadow: none" v-if="desktop_mode">
+                                    <c-button status="plain" icon-hide @click="showSlide('updates')" class="active" v-if="desktop_mode">
                                         <i class="fa fa-star" />
                                     </c-button>
-                                    <c-button status="link" icon-hide @click="showSlide('top_lists')" style="box-shadow: none">
+                                    <c-button status="plain" icon-hide @click="showSlide('top_lists')" style="box-shadow: none">
                                         <i class="fa fa-trophy" />
                                     </c-button>
                                 </div>
@@ -175,16 +175,16 @@
                                 <h3>TOP LISTS</h3>
 
                                 <div class="slide-chooser">
-                                    <c-button status="link" icon-hide @click="showSlide('notification')" style="box-shadow: none" v-if="desktop_mode">
+                                    <c-button status="plain" icon-hide @click="showSlide('notification')" style="box-shadow: none" v-if="desktop_mode">
                                         <i class="fa fa-bell" />
                                     </c-button>
-                                    <c-button status="link" icon-hide @click="showSlide('messages')" style="box-shadow: none" v-if="desktop_mode">
+                                    <c-button status="plain" icon-hide @click="showSlide('messages')" style="box-shadow: none" v-if="desktop_mode">
                                         <i class="fa fa-envelope" />
                                     </c-button>
-                                    <c-button status="link" icon-hide @click="showSlide('updates')" style="box-shadow: none" v-if="desktop_mode">
+                                    <c-button status="plain" icon-hide @click="showSlide('updates')" style="box-shadow: none" v-if="desktop_mode">
                                         <i class="fa fa-star" />
                                     </c-button>
-                                    <c-button status="link" icon-hide @click="showSlide('top_lists')" style="box-shadow: none">
+                                    <c-button status="plain" icon-hide @click="showSlide('top_lists')" class="active">
                                         <i class="fa fa-trophy" />
                                     </c-button>
                                 </div>
@@ -268,7 +268,7 @@
                         </c-slide>
                     </c-swiper>
                 </c-sidepanel>
-            </transition>
+            <!--</transition>-->
             <!-- //END SIDEPANEL -->
 
             <div class="status-bar" hidden>
@@ -371,12 +371,15 @@ export default {
                     this.swiper.slideTo(0, 1000, false);
                     break;
                 case 'messages':
+                    this.$el.classList.add("active");
                     this.swiper.slideTo(1, 1000, false);
                     break;
                 case 'updates':
+                    this.$el.classList.add("active");
                     this.swiper.slideTo(2, 1000, false);
                     break;
                 case 'top_lists':
+                    this.$el.classList.add("active");
                     this.swiper.slideTo(3, 1000, false);
                     break;
             }

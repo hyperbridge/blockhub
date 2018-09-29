@@ -14,7 +14,7 @@
                 />
                 <div class="comment-content">
                     <div class="user-info">
-                        <img :src="comment.author.img"/>
+                        <c-img :src="comment.author.img"/>
                         <div>
                             <h6>{{ comment.author.name }}</h6>
                             <span class="time">{{ comment.date | timeAgoShort }}</span>

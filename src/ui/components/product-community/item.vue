@@ -16,7 +16,7 @@
                 </div>
                 <div class="user">
                     <span class="time">25 min</span>
-                    <img :src="post.author.img"/>
+                    <c-img :src="post.author.img"/>
                     <span class="name">{{ post.author.name }}</span>
                 </div>
                 <div class="comments_count">
@@ -28,7 +28,7 @@
         <template v-if="post.content">
             <div class="community-item__post">
                 <p>{{ post.content.text }}</p>
-                <img :src="post.content.img"/>
+                <c-img :src="post.content.img"/>
             </div>
             <div class="community-item__post-reply" v-if="reply">
                 <h4 class="mt-4 mb-2 text-left">Your Reply:</h4>

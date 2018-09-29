@@ -1,7 +1,7 @@
 
 <template>
     <div class="game-includes__item">
-        <img :src="item.img" />
+        <c-img :src="item.img" />
         <h4>{{ item.title }}</h4>
         <p>{{ item.company }}</p>
         <div class="rating-stars">

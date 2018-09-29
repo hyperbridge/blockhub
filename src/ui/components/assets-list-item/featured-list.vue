@@ -5,7 +5,7 @@
              v-for="(item, index) in items" :key="index">
             <div class="featured-assets__list-item">
                 <div class="img">
-                    <img :src="item.img" />
+                    <c-img :src="item.img" />
                 </div>
                 <h3>{{ item.title }}</h3>
                 <p>{{ item.sub_title }}</p>

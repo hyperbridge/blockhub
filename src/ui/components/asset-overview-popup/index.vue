@@ -5,7 +5,7 @@
                 <i class="fas fa-link"></i>
             </div>
             <div class="img">
-                <img src="https://via.placeholder.com/250x250" />
+                <c-img src="https://via.placeholder.com/250x250" />
             </div>
             <div class="info">
                 <h4>Sword of Pain</h4>

@@ -2,14 +2,14 @@
     <div class="project-card__item" :class="customClass" v-if="project">
         <div class="head" v-if="project.game">
             <div class="img">
-                <img :src="project.game.img"/>
+                <c-img :src="project.game.img"/>
             </div>
             <div class="text">
                 <h4>{{ project.game.title }}</h4>
                 <p>{{ project.game.developer }}</p>
             </div>
         </div>
-        <img :src="project.img"/>
+        <c-img :src="project.img"/>
         <div class="description">{{ project.description }}</div>
         <c-money-info label="Obtained Funds" :percent="goal_progress" :amount="project.funds.obtained"
                       :goal="project.funds.goal"/>

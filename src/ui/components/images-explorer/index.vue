@@ -4,7 +4,7 @@
             <i class="fas fa-angle-left"></i>
         </button>
         <transition-group tag="div" name="fade-transform">
-            <img
+            <c-img
                 v-for="(image, index) in images"
                 v-if="index === active_item"
                 :key="image"

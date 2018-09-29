@@ -31,7 +31,7 @@
                             <div class="grid">
                                 <div class="grid-item">
                                     <div>
-                                        <img src="https://www.touchtapplay.com/wp-content/uploads/2017/12/bitcoin-game-cheats-ketchapp.jpg"/>
+                                        <c-img src="https://www.touchtapplay.com/wp-content/uploads/2017/12/bitcoin-game-cheats-ketchapp.jpg"/>
                                     </div>
                                 </div>
                                 <div class="grid-item">

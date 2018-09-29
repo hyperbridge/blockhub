@@ -24,16 +24,16 @@
                             <div class="img-slider position-relative">
                                 <c-swiper :options="imgSlider" style="border-radius: 5px" >
                                     <c-slide>
-                                        <img src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg" class="img-fluid" />
+                                        <c-img src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg" class="img-fluid" />
                                     </c-slide>
                                     <c-slide>
-                                        <img src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg" class="img-fluid" />
+                                        <c-img src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg" class="img-fluid" />
                                     </c-slide>
                                     <c-slide>
-                                        <img src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg" class="img-fluid" />
+                                        <c-img src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg" class="img-fluid" />
                                     </c-slide>
                                     <c-slide>
-                                        <img src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg" class="img-fluid" />
+                                        <c-img src="https://www.32red.com/blog/wp-content/uploads/2017/07/casBuil1000-1.jpg" class="img-fluid" />
                                     </c-slide>
                                 </c-swiper>
                                 <div class="slider-dots">

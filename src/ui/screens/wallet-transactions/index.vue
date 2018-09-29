@@ -64,7 +64,7 @@
                                     <i class="fas fa-angle-double-up"></i>
                                 </div>
                                 <div class="company">
-                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                                    <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
                                     Wallmart
                                 </div>
                                 <div class="purpose">
@@ -85,7 +85,7 @@
                                     <i class="fas fa-angle-double-down"></i>
                                 </div>
                                 <div class="company">
-                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                                    <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
                                     Wallmart
                                 </div>
                                 <div class="purpose">
@@ -106,7 +106,7 @@
                                     <i class="fas fa-angle-double-up"></i>
                                 </div>
                                 <div class="company">
-                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                                    <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
                                     Wallmart
                                 </div>
                                 <div class="purpose">
@@ -127,7 +127,7 @@
                                     <i class="fas fa-angle-double-up"></i>
                                 </div>
                                 <div class="company">
-                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                                    <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
                                     Wallmart
                                 </div>
                                 <div class="purpose">
@@ -148,7 +148,7 @@
                                     <i class="fas fa-angle-double-up"></i>
                                 </div>
                                 <div class="company">
-                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                                    <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
                                     Wallmart
                                 </div>
                                 <div class="purpose">
@@ -169,7 +169,7 @@
                                     <i class="fas fa-angle-double-up"></i>
                                 </div>
                                 <div class="company">
-                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                                    <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
                                     Wallmart
                                 </div>
                                 <div class="purpose">

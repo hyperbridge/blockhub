@@ -11,7 +11,7 @@
                 data-toggle="tab"
             >
                 <div class="img">
-                    <img :src="item.game.img"/>
+                    <c-img :src="item.game.img"/>
                 </div>
                 <div class="text">
                     <h4>{{ item.game.title }}</h4>

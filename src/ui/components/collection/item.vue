@@ -2,7 +2,7 @@
     <div class="collection-item" v-bind:style="{ 'background-image': 'url(' + item.background + ')' }">
         <div class="collection-item__items-container">
             <a v-for="(asset, index) in item.assets" :href="`/#/asset/${asset.id}`" :key="index" v-if="index < 4">
-                <img :src="asset.image"/>
+                <c-img :src="asset.image"/>
             </a>
         </div>
         <div class="collection-item__info">

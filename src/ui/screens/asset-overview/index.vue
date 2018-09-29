@@ -13,7 +13,7 @@
                         <div class="asset-head">
                             <div class="asset-head__asset-title">
                                 <div class="title-thumb">
-                                    <img
+                                    <c-img
                                         :src="asset.image"/>
                                 </div>
                                 <div class="title-text">
@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-12 col-lg-4 margin-bottom-15">
                         <div class="asset-head__company-logo">
-                            <img src="https://i.imgur.com/BngHC98.png"/>
+                            <c-img src="https://i.imgur.com/BngHC98.png"/>
                         </div>
                     </div>
 
@@ -116,7 +116,7 @@
                                      :key="index"
                                      class="list-item">
                                     <div class="item-name-img">
-                                        <img :src="item.image"/>
+                                        <c-img :src="item.image"/>
                                         <h4>{{ item.name }}</h4>
                                     </div>
                                     <div class="item-company text-center">
@@ -162,7 +162,7 @@
                                         <i class="fas fa-external-link-alt"></i>
                                     </a>
                                     <div class="item_thumb">
-                                        <img :src="item.image"/>
+                                        <c-img :src="item.image"/>
                                     </div>
                                     <div class="item_info">
                                         <h5>{{ item.name }}</h5>
@@ -192,7 +192,7 @@
                                     </a>
                                     <div class="asset-info d-flex justify-content-between align-items-stretch">
                                         <div class="thumb">
-                                            <img src="http://via.placeholder.com/150x150"/>
+                                            <c-img src="http://via.placeholder.com/150x150"/>
                                         </div>
                                         <div class="info">
                                             <div class="w-100 align-self-start">

@@ -6,13 +6,13 @@
             </div>
             <c-swiper :options="sliderOptions" class="custom-dots-top carousel-full-height">
                 <c-slide>
-                    <img src="https://images-2.gog.com/78485317312e881a175c686eaab8a988202b208942623acba641f35384f8dc12.jpg" />
+                    <c-img src="https://images-2.gog.com/78485317312e881a175c686eaab8a988202b208942623acba641f35384f8dc12.jpg" />
                 </c-slide>
                 <c-slide>
-                    <img src="http://www.rpgnuke.ru/wp-content/uploads/2017/10/6546356687567478-678x381.jpg" />
+                    <c-img src="http://www.rpgnuke.ru/wp-content/uploads/2017/10/6546356687567478-678x381.jpg" />
                 </c-slide>
                 <c-slide>
-                    <img src="https://cdn.igromania.ru/mnt/articles/5/8/0/6/0/6/25812/html/img/57b2557c741ba33b.jpg" />
+                    <c-img src="https://cdn.igromania.ru/mnt/articles/5/8/0/6/0/6/25812/html/img/57b2557c741ba33b.jpg" />
                 </c-slide>
             </c-swiper>
         </div>

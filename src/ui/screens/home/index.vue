@@ -12,19 +12,19 @@
                             <div class="card-body">
                                 <h4>Want to see the future of BlockHub?</h4>
                                 <div>
-                                    <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button>
-                                    <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="toggleSimulator()">Simulator is {{ simulator_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="toggleDesktopMode()">Desktop Mode is {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
                                     <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button>
-                                    <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="toggleDeveloperMode()">Developer Mode is {{ developer_mode ? 'ON' : 'OFF' }}</c-button>
                                     <c-button @click="clearSimulatorData()">Clear Data</c-button>
                                     <br /><br />
                                 </div>
                                 <div>
-                                    <c-button @click="$store.state.network.connection.auto = !$store.state.network.connection.auto">Auto Connect {{ $store.state.network.connection.auto ? 'ON' : 'OFF' }}</c-button>
-                                    <c-button @click="$store.state.network.connection.internet = !$store.state.network.connection.internet">Internet {{ $store.state.network.connection.internet ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
-                                    <c-button @click="$store.state.network.connection.datasource = !$store.state.network.connection.datasource">Datasource {{ $store.state.network.connection.datasource ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
-                                    <c-button @click="$store.state.network.connection.operator = !$store.state.network.connection.operator">Operator {{ $store.state.network.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
-                                    <c-button @click="$store.state.network.connection.ethereum = !$store.state.network.connection.ethereum">Ethereum {{ $store.state.network.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <c-button @click="$store.state.network.connection.auto = !$store.state.network.connection.auto">Auto Connect is {{ $store.state.network.connection.auto ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="$store.state.network.connection.internet = !$store.state.network.connection.internet">Internet is {{ $store.state.network.connection.internet ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <c-button @click="$store.state.network.connection.datasource = !$store.state.network.connection.datasource">Datasource is {{ $store.state.network.connection.datasource ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <c-button @click="$store.state.network.connection.operator = !$store.state.network.connection.operator">Operator is {{ $store.state.network.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <c-button @click="$store.state.network.connection.ethereum = !$store.state.network.connection.ethereum">Ethereum is {{ $store.state.network.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
                                     <br /><br />
                                 </div>
                                 <div v-if="desktop_mode">
@@ -75,7 +75,7 @@
                             
                             <p v-if="!assets.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
 
-                            <c-content-navigation />
+                            <c-content-navigation v-if="assets.length" />
                         </c-block>
                     </div>
                     <div class="col-12 margin-bottom-30 d-none">
@@ -113,7 +113,7 @@
                 <template  v-for="(item, index) in sliced" v-if="sliced">
                     <div class="row justify-content-center frontpage-product" v-if="item.type === 'frontpage_product'" :key="`level-1-${index}`">
                         <div class="col-12 col-lg-6 frontpage-product__slider" v-if="item.data.images">
-                            <img :src="item.data.images.medium_tile" />
+                            <c-img :src="item.data.images.medium_tile" />
                         </div>
                         <div class="col-12 col-lg-6 frontpage-product__info">
                             <h2><a :href="`/#/product/${item.data.id}`">{{ item.data.name }}</a></h2>
@@ -190,7 +190,7 @@
 
                     <div class="row margin-bottom-30" v-if="item.type === 'asset_grid'" :key="`level-1-${index}`">
                         <div class="col-12">
-                            <c-block :noGutter="true" :onlyContentBg="true" class="margin-bottom-30">
+                            <c-block :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                                 <c-heading-bar
                                     slot="title"
                                     class="mb-0"
@@ -266,7 +266,7 @@
 
                     <div class="row margin-bottom-30" v-if="item.type === 'curator_reviews'" :key="`level-1-${index}`">
                         <div class="col-12">
-                            <c-block title="From our curators" :noGutter="true" :bgGradient="true" :onlyContentBg="true" class="margin-bottom-30">
+                            <c-block title="From our curators" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                                 <c-curators-reviews
                                     :reviews="item.data.reviews"
                                 />
