@@ -130,7 +130,7 @@
                                         <span>usd</span>
                                     </div>
                                 </div>
-                                <c-button status="success" icon="cart-plus">Proceed to Purchase</c-button>
+                                <c-button status="success">Proceed to Purchase</c-button>
                             </div>
                         </div>
                     </div>
@@ -155,7 +155,6 @@
                                 </c-swiper>
 
                                  <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
-
                             </c-block>
                         </div>
                     </div>
@@ -385,6 +384,17 @@ export default {
             result.push({
                 type: 'product_slider',
                 data: {
+                    title: 'Featured',
+                    ref: 'featured_products_sl',
+                    swiper: this.$refs.featured_products_sl && this.$refs.featured_products_sl.swiper,
+                    options: this.demoSlider,
+                    products: this.$store.state.marketplace.featured_products
+                }
+            })
+
+            result.push({
+                type: 'product_slider',
+                data: {
                     title: 'New Releases',
                     ref: 'demo_products_sl',
                     swiper: this.$refs.demo_products_sl && this.$refs.demo_products_sl.swiper,
@@ -445,9 +455,6 @@ export default {
                 return this.$store.state.cache.screens['/store'].products
 
             return this.$store.state.marketplace.products
-        },
-        marketplace() {
-            return this.$store.state.marketplace;
         },
         // slice the array of data to display
         sliced() {

@@ -188,7 +188,7 @@
             filteredProducts() {
                 const { property, asc } = this.sortBy;
                 const sortDir = dir => asc ? dir : dir * -1;
-                return this.products
+                return this.$store.state.marketplace[this.category]
                     .filter(product =>
                         product.name.toLowerCase().includes(this.phrase.toLowerCase())
                     )
@@ -204,7 +204,7 @@
                     );
             },
             availableGenres() {
-                return this.products.reduce((tags, product) => {
+                return this.$store.state.marketplace[this.category].reduce((tags, product) => {
                     product.developer_tags.forEach(tag => {
                         if (!tags.includes(tag)) tags.push(tag);
                     });

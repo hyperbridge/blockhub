@@ -232,8 +232,9 @@ export let initializer = () => {
                 store.state.marketplace.collections = seed.collections.slice(seed.collections.length / 2)
                 store.state.funding.projects = seed.projects.slice(seed.projects.length / 2)
 
-                db.marketplace.products.data = store.state.marketplace.products
-                db.marketplace.assets.data = store.state.marketplace.assets
+                // TODO: figure out unique constraint
+                // db.marketplace.products.insert(store.state.marketplace.products)
+                // db.marketplace.assets.insert(store.state.marketplace.assets)
 
                 store.dispatch('marketplace/updateState')
 
@@ -270,10 +271,11 @@ export let initializer = () => {
                 removeRandom(target[0])
             }
 
-            // db.marketplace.products.data = store.state.marketplace.products
-            // db.marketplace.assets.data = store.state.marketplace.assets
+            // TODO: figure out unique constraint
+            // db.marketplace.products.insert(store.state.marketplace.products)
+            // db.marketplace.assets.insert(store.state.marketplace.assets)
 
-            // store.dispatch('marketplace/updateState')
+            // store.dispatch('marketplace/updateState') //, store.state.marketplace)
 
             setTimeout(monitorSimulatorMode, 100)
         }

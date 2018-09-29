@@ -106,7 +106,7 @@
                             <div class="col-5">
                                 <c-purchase-block
                                     title="Purchase"
-                                    isReleased="true"
+                                    :isReleased="true"
                                     :price="product.price"
                                     :tags="['New']"
                                     :onClickPurchase="showPurchaseModal"
