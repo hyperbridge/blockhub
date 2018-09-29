@@ -18,7 +18,6 @@
                 default: 'info'
             }
         },
-        data(){},
         filters: {
             icon(type) {
                 switch(type) {

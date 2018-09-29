@@ -2,7 +2,7 @@
     <c-block title="Community Spotlight">
         <template slot="heading-bar">
             <a :href="communityUrl" class="title-icon text-white">
-                <i class="fas fa-comments" v-if="!activeElement"></i>
+                <i class="fas fa-comments" v-if="!activateElement"></i>
                 <i class="fas fa-cog" v-else></i>
             </a>
         </template>
