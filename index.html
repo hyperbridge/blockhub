@@ -426,8 +426,8 @@ function isWhiteSpace(coords) {
 }
 
 function bootChecker() {
-  if (document.location.pathname !== '/' || document.location.hash !== '#/') return
-  if (typeof($) == undefined) return
+  if (document.location.pathname !== '/' || document.location.hash !== '#/') return setTimeout(bootChecker, 1000)
+  if (typeof($) == undefined) return setTimeout(bootChecker, 1000)
 
   // If any of these randomly chosen coordinates is not a bottom layer element, then assume loading occurred properly
   const isLoaded = !isWhiteSpace({ x: 100, y: 100 }) || !isWhiteSpace({ x: 200, y: 100 }) || !isWhiteSpace({ x: 400, y: 400 })
