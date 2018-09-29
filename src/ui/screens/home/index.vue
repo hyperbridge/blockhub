@@ -11,20 +11,26 @@
                         <div class="card invert">
                             <div class="card-body">
                                 <h4>Want to see the future of BlockHub?</h4>
-                                <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button> 
-                                <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktop_mode ? 'ON' : 'OFF' }}</c-button> 
-                                <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button> 
-                                <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button> 
-                                <c-button @click="clearSimulatorData()">Clear Data</c-button>
-                                <br /><br />
-                                <c-button @click="$store.state.network.connection.auto = !$store.state.network.connection.auto">Auto Connect {{ $store.state.network.connection.auto ? 'ON' : 'OFF' }}</c-button> 
-                                <c-button @click="$store.state.network.connection.internet = !$store.state.network.connection.internet">Internet {{ $store.state.network.connection.internet ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
-                                <c-button @click="$store.state.network.connection.datasource = !$store.state.network.connection.datasource">Datasource {{ $store.state.network.connection.datasource ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
-                                <c-button @click="$store.state.network.connection.operator = !$store.state.network.connection.operator">Operator {{ $store.state.network.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
-                                <c-button @click="$store.state.network.connection.ethereum = !$store.state.network.connection.ethereum">Ethereum {{ $store.state.network.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
-                                <br /><br />
-                                <input ref="desktopMessage" type="text" /> 
-                                <c-button @click="sendDesktopMessage()">Send Message To Desktop</c-button>
+                                <div>
+                                    <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button> 
+                                    <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktop_mode ? 'ON' : 'OFF' }}</c-button> 
+                                    <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button> 
+                                    <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button> 
+                                    <c-button @click="clearSimulatorData()">Clear Data</c-button>
+                                    <br /><br />
+                                </div>
+                                <div>
+                                    <c-button @click="$store.state.network.connection.auto = !$store.state.network.connection.auto">Auto Connect {{ $store.state.network.connection.auto ? 'ON' : 'OFF' }}</c-button> 
+                                    <c-button @click="$store.state.network.connection.internet = !$store.state.network.connection.internet">Internet {{ $store.state.network.connection.internet ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
+                                    <c-button @click="$store.state.network.connection.datasource = !$store.state.network.connection.datasource">Datasource {{ $store.state.network.connection.datasource ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
+                                    <c-button @click="$store.state.network.connection.operator = !$store.state.network.connection.operator">Operator {{ $store.state.network.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
+                                    <c-button @click="$store.state.network.connection.ethereum = !$store.state.network.connection.ethereum">Ethereum {{ $store.state.network.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
+                                    <br /><br />
+                                </div>
+                                <div v-if="desktop_mode">
+                                    <input ref="desktopMessage" type="text" /> 
+                                    <c-button @click="sendDesktopMessage()">Send Message To Desktop</c-button>
+                                </div>
                             </div>
                         </div>
                     </div>
