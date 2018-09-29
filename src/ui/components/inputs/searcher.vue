@@ -14,6 +14,8 @@ export default {
             }),
             h('c-icon', {
                 staticClass: 'input-searcher__icon',
+                on: this.$listeners,
+                attrs: this.$attrs,
                 props: {
                     name: 'search'
                 }
@@ -35,8 +37,10 @@ export default {
         }
         .input-searcher__icon {
             position: absolute;
-            right: 8px;
-            top: calc(50% - 6.5px);
+            right: 0px;
+            top: calc(50% - 11px);
+            padding: 7px 9px;
+            cursor: pointer;
         }
     }
 </style>
