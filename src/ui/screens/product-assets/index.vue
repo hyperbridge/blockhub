@@ -72,10 +72,6 @@
             'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid'], resolve),
             'c-assets-list-item': (resolve) => require(['@/ui/components/assets-list-item'], resolve)
         },
-        data() {
-            return {
-            }
-        },
         methods: {
             save() {
                 this.$store.dispatch('marketplace/updateProduct', this.product)

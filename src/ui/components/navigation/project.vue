@@ -60,9 +60,6 @@
             'c-claim': (resolve) => require(['@/ui/components/curator-panel/claim.vue'], resolve),
             'c-curator-panel': (resolve) => require(['@/ui/components/curator-panel'], resolve),
             'c-curator-info': (resolve) => require(['@/ui/components/curator-panel/info-card.vue'], resolve),
-        },
-        data() {
-            return {}
         }
     }
 </script>

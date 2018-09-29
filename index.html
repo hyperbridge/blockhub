@@ -426,11 +426,10 @@ function isWhiteSpace(coords) {
 }
 
 function bootChecker() {
-  if (document.location.pathname !== '/' || document.location.hash !== '#/') return setTimeout(bootChecker, 1000)
   if (typeof($) == undefined) return setTimeout(bootChecker, 1000)
 
   // If any of these randomly chosen coordinates is not a bottom layer element, then assume loading occurred properly
-  const isLoaded = !isWhiteSpace({ x: 100, y: 100 }) || !isWhiteSpace({ x: 200, y: 100 }) || !isWhiteSpace({ x: 400, y: 400 })
+  const isLoaded = !isWhiteSpace({ x: 100, y: 100 }) || !isWhiteSpace({ x: 200, y: 100 }) || !isWhiteSpace({ x: 300, y: 300 })
 
   if (isLoaded) {
     $('#critical-error').hide()
@@ -440,7 +439,7 @@ function bootChecker() {
   $('#critical-error').show()
 }
 
-setTimeout(bootChecker, 10 * 1000)
+//setTimeout(bootChecker, 10 * 1000)
 </script>
 
 <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
