@@ -1,7 +1,7 @@
 <template>
     <c-layout navigationKey="store-navigation">
         <div class="content" id="content">
-            <div class="container-fluid" v-if="is_connected">
+            <div class="container-fluid">
 
                 <div class="row">
                     <div class="col-12 mb-4">
@@ -11,11 +11,26 @@
                         <div class="card invert">
                             <div class="card-body">
                                 <h4>Want to see the future of BlockHub?</h4>
-                                <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button> 
-                                <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktop_mode ? 'ON' : 'OFF' }}</c-button> 
-                                <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button> 
-                                <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button> 
-                                <c-button @click="clearSimulatorData()">Clear Data</c-button>
+                                <div>
+                                    <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button> 
+                                    <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktop_mode ? 'ON' : 'OFF' }}</c-button> 
+                                    <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button> 
+                                    <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button> 
+                                    <c-button @click="clearSimulatorData()">Clear Data</c-button>
+                                    <br /><br />
+                                </div>
+                                <div>
+                                    <c-button @click="$store.state.network.connection.auto = !$store.state.network.connection.auto">Auto Connect {{ $store.state.network.connection.auto ? 'ON' : 'OFF' }}</c-button> 
+                                    <c-button @click="$store.state.network.connection.internet = !$store.state.network.connection.internet">Internet {{ $store.state.network.connection.internet ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
+                                    <c-button @click="$store.state.network.connection.datasource = !$store.state.network.connection.datasource">Datasource {{ $store.state.network.connection.datasource ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
+                                    <c-button @click="$store.state.network.connection.operator = !$store.state.network.connection.operator">Operator {{ $store.state.network.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
+                                    <c-button @click="$store.state.network.connection.ethereum = !$store.state.network.connection.ethereum">Ethereum {{ $store.state.network.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
+                                    <br /><br />
+                                </div>
+                                <div v-if="desktop_mode">
+                                    <input ref="desktopMessage" type="text" /> 
+                                    <c-button @click="sendDesktopMessage()">Send Message To Desktop</c-button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -38,7 +53,7 @@
                                 :itemInRow="1"
                                 :showRating="false"
                                 :showTime="true"
-                                :items="marketplace.new_products.slice(0,5)"
+                                :items="new_products.slice(0,5)"
                                 itemBg="transparent"
                             />
                         </c-block>
@@ -52,11 +67,15 @@
                                 </template>
                             </c-heading-bar>
 
-                            <c-assets-list-item
+                            <c-assets-list
                                 :items="assets"
                                 itemInRow="2"
+                                v-if="assets.length"
                             />
-                            <c-content-navigation/>
+                            
+                            <p v-if="!assets.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
+
+                            <c-content-navigation />
                         </c-block>
                     </div>
                     <div class="col-12 margin-bottom-30 d-none">
@@ -77,6 +96,7 @@
                                 data-lg-items="4"
                                 data-loop="true"
                                 data-autoplay="false"
+                                v-if="trending_projects.length"
                             >
                                 <c-projects-card
                                     v-for="(project, index) in trending_projects"
@@ -85,6 +105,7 @@
                                 />
 
                             </div>
+                            <p v-if="!trending_projects.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                         </div>
                     </div>
                 </div>
@@ -109,7 +130,7 @@
                                         <span>usd</span>
                                     </div>
                                 </div>
-                                <c-button status="success" icon="cart-plus">Proceed to Purchase</c-button>
+                                <c-button status="success">Proceed to Purchase</c-button>
                             </div>
                         </div>
                     </div>
@@ -127,12 +148,13 @@
                                     @nextClick="item.data.swiper.slideNext()"
                                 />
 
-                                <c-swiper :options="item.data.options" :ref="item.data.ref" style="margin: 0 -10px">
+                                <c-swiper :options="item.data.options" :ref="item.data.ref" style="margin: 0 -10px" v-if="item.data.products.length">
                                     <c-slide v-for="product in item.data.products" :key="product.id">
-                                        <c-product-card-dynamic :product="product"/>
+                                        <c-product-card-dynamic :product="product" />
                                     </c-slide>
                                 </c-swiper>
 
+                                 <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                             </c-block>
                         </div>
                     </div>
@@ -164,7 +186,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <h3 class="text-yellow">Item Marketplace</h3>
-                                        <p>You all in one spot for games assets</p>
+                                        <p>All-in-one spot for games assets</p>
                                     </div>
                                     <div class="banner-action">
                                         <c-button status="info" icon_hide size="lg">VISIT NOW</c-button>
@@ -175,7 +197,7 @@
                         <div class="col-12 col-md-4">
                             <c-banner :imgSrc="'/static/img/banners/banner-4.png'" link="/#/collections">
                                 <h3 class="text-yellow margin-bottom-5">Top Collections</h3>
-                                <p>We curated the best ones for you</p>
+                                <p>Our community has curated the best ones for you</p>
                             </c-banner>
                         </div>
                     </div>
@@ -186,15 +208,15 @@
                                 <c-heading-bar
                                     slot="title"
                                     class="mb-0"
-                                    :headingTabs="['Top 10 Items', 'Most Wanted', 'Best Deals']"
+                                    :headingTabs="['Top Items', 'Most Wanted', 'Best Deals']"
                                 >
                                     <template slot="additional-action">
                                         <c-heading-bar-fields name="Trending" @clickUp=""  @clickDown=""/>
                                         <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown=""/>
                                     </template>
                                 </c-heading-bar>
-                                <div class="filter-blk">
-                                    <div class="d-flex align-items-center">
+                                <div class="filter-blk d-flex justify-content-between align-items-center">
+                                    <div class="d-inline-flex align-items-center">
                                         <c-dropdown id="test2" name="Filter by Genre" :showBg="true">
                                             <a href="#3">RPG</a>
                                             <a href="#3">ACTION</a>
@@ -202,25 +224,27 @@
                                         </c-dropdown>
                                         <c-searcher customClass="mb-0" />
                                     </div>
-                                    <c-button status="info" :icon_hide="true">All New Releases</c-button>
+                                    <c-button status="info" :icon_hide="true" v-if="item.data.assets.length">View All</c-button>
                                 </div>
                                 <div class="d-flex justify-content-between flex-wrap">
-                                    <div class="w-50" v-for="(item, index) in item.data.assets" :key="index">
+                                    <div class="w-50" v-for="(asset, index) in item.data.assets" :key="index" v-if="item.data.assets.length">
                                         <c-assets-list-item
-                                            :item="item"
+                                            :item="asset"
                                             :isTransparent="true"
+                                            v-if="asset"
                                         >
                                             <span class="mr-3">
-                                                <c-icon name="box"/>{{ item.count }}
+                                                <c-icon name="box"/>{{ asset.count }}
                                             </span>
                                             <span class="mr-3">
-                                                <c-icon name="dollar-sign"/>{{ item.price }}
+                                                <c-icon name="dollar-sign"/>{{ asset.price }}
                                             </span>
                                             <span class="mr-3">
                                                 <c-icon name="dollar-sign"/>3.45
                                             </span>
                                         </c-assets-list-item>
                                     </div>
+                                    <p v-if="!item.data.assets.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                                 </div>
                             </c-block>
                         </div>
@@ -248,20 +272,21 @@
                                         :index="index"
                                     />
                                 </div>
+                                <p v-if="!item.data.news.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                             </div>
                         </div>
                     </div>
 
                     <c-curators-reviews
                         :reviews="item.data.reviews"
-                        v-if="item.type === 'curator_reviews'"
                         :key="`level-1-${index}`"
+                        v-if="item.type === 'curator_reviews'"
                     />
                 </template>
 
                 <transition name="fade-slow">
                     <div class="" v-if="end">
-                        <h3>You're all caught up!</h3>
+                        <h3></h3>
                     </div>
                     <div class="no-updates" v-if="!sliced">
                         <h3>
@@ -269,14 +294,6 @@
                         </h3>
                     </div>
                 </transition>
-                
-            </div>
-            <div class="container-fluid" v-if="!is_connected">
-                <div class="row">
-                    <div class="col-12">
-                        <h3>Oops, something went wrong! :(</h3>
-                    </div>
-                </div>
             </div>
         </div>
     </c-layout>
@@ -284,6 +301,7 @@
 
 
 <script>
+import { mapGetters } from 'vuex'
 import 'swiper/dist/css/swiper.css'
 
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
@@ -322,7 +340,7 @@ export default {
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
         'c-games-explorer': (resolve) => require(['@/ui/components/store/games-explorer'], resolve),
-        'c-game-list-item': (resolve) => require(['@/ui/components/assets-list-item'], resolve),
+        'c-assets-list': (resolve) => require(['@/ui/components/assets-list-item'], resolve),
         'c-projects-card': (resolve) => require(['@/ui/components/projects/card'], resolve),
         'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve),
         'c-main-banner': (resolve) => require(['@/ui/components/banner'], resolve),
@@ -348,17 +366,31 @@ export default {
         }
     },
     computed: {
+        ...mapGetters({
+            assets: 'marketplace/assetsArray'
+        }),
         list() {
             const result = []
 
             updateLandingImage.bind(this)()
 
-            if (this.marketplace.frontpage_product) {
+            if (this.$store.state.marketplace.frontpage_product) {
                 result.push({
                     type: 'frontpage_product',
-                    data: this.marketplace.frontpage_product
+                    data: this.$store.state.marketplace.frontpage_product
                 })
             }
+
+            result.push({
+                type: 'product_slider',
+                data: {
+                    title: 'Featured',
+                    ref: 'featured_products_sl',
+                    swiper: this.$refs.featured_products_sl && this.$refs.featured_products_sl.swiper,
+                    options: this.demoSlider,
+                    products: this.$store.state.marketplace.featured_products
+                }
+            })
 
             result.push({
                 type: 'product_slider',
@@ -367,7 +399,7 @@ export default {
                     ref: 'demo_products_sl',
                     swiper: this.$refs.demo_products_sl && this.$refs.demo_products_sl.swiper,
                     options: this.demoSlider,
-                    products: this.marketplace.new_products
+                    products: this.$store.state.marketplace.new_products
                 }
             })
 
@@ -378,7 +410,7 @@ export default {
                     ref: 'summer_sale_sl',
                     swiper: this.$refs.summer_sale_sl && this.$refs.summer_sale_sl.swiper,
                     options: this.saleSlider,
-                    products: this.marketplace.sale_products
+                    products: this.$store.state.marketplace.sale_products
                 }
             })
 
@@ -395,21 +427,21 @@ export default {
             result.push({
                 type: 'asset_grid',
                 data: {
-                    assets: this.marketplace.assets
+                    assets: this.assets
                 }
             })
 
             result.push({
                 type: 'curator_reviews',
                 data: {
-                    reviews: this.$store.state.network.curator_reviews
+                    reviews: this.$store.state.marketplace.curator_reviews
                 }
             })
 
             result.push({
                 type: 'product_news',
                 data: {
-                    news: this.$store.state.network.product_news
+                    news: this.$store.state.marketplace.product_news
                 }
             })
 
@@ -424,30 +456,21 @@ export default {
 
             return this.$store.state.marketplace.products
         },
-        marketplace() {
-            return this.$store.state.marketplace;
-        },
         // slice the array of data to display
         sliced() {
             return this.list.slice(0, this.display);
         },
-        is_connected() {
-            return this.$store.state.network.connection.datasource;
-        },
-        marketplace() {
-            return this.$store.state.marketplace;
-        },
-        assets() {
-            return this.$store.state.marketplace.assets;
-        },
         trending_projects() {
-            return this.$store.state.network.trending_projects;
+            return this.$store.state.marketplace.trending_projects;
+        },
+        new_products() {
+            return this.$store.state.marketplace.new_products;
         },
         product_news() {
-            return this.$store.state.network.product_news;
+            return this.$store.state.marketplace.product_news;
         },
         main_banner() {
-            return this.$store.state.network.main_banner;
+            return this.$store.state.marketplace.main_banner;
         },
         signed_in() {
             return this.$store.state.network.signed_in;
@@ -509,9 +532,17 @@ export default {
         },
         clearSimulatorData() {
             this.$store.state.network.account.notifications = []
-            this.$store.state.network.trending_projects = []
-            this.$store.state.network.curator_reviews = []
-            this.$store.state.network.product_news = []
+            this.$store.state.marketplace.trending_projects = []
+            this.$store.state.marketplace.curator_reviews = []
+            this.$store.state.marketplace.product_news = []
+        },
+        sendDesktopMessage() {
+            if (!window.isElectron) {
+                return alert('Not on desktop')
+            }
+
+            window.desktopBridge.send('ping', this.$refs.desktopMessage.value)
+            window.desktopBridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
         }
     },
     mounted() {

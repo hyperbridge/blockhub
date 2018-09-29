@@ -1,5 +1,5 @@
 <template>
-    <div class="block" :class="{ 'bg-gradient' : bgGradient, 'bg-color' : bgColor, 'no-gutter' : noGutter, 'only-content-bg' : onlyContentBg}">
+    <div class="block w-100" :class="{ 'bg-gradient' : bgGradient, 'bg-color' : bgColor, 'no-gutter' : noGutter, 'only-content-bg' : onlyContentBg}">
         <c-heading-bar :name="title" :class="{ 'mb-0' : onlyContentBg}" :showArrows="false" v-if="title" />
         <slot name="title" v-else></slot>
         <div class="block__content">
@@ -38,6 +38,7 @@
 
 <style lang="scss" scoped>
     .block {
+        width: 100%;
         padding: 15px;
         border-radius: 5px;
         position: relative;

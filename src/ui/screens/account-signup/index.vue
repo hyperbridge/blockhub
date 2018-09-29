@@ -230,8 +230,7 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-center" slot="footer">
                                 <c-switch
-                                    :value="account.agreement"
-                                    @change="account.agreement = !account.agreement"
+                                    v-model="account.agreement"
                                     label_position="right"
                                     :customLabel="true"
                                 >
@@ -242,8 +241,7 @@
                                     </template>
                                 </c-switch>
                                 <c-switch
-                                    :value="account.newsletter"
-                                    @change="account.newsletter = !account.newsletter"
+                                    v-model="account.newsletter"
                                     label="Sign up for our newsletter, get 100 HBX Bonus!"
                                     label_position="right"
                                 />
@@ -382,68 +380,82 @@
 
 
 <script>
-    export default {
-        components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-            'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
-            'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
-            'c-datepicker': (resolve) => require(['vuejs-datepicker'], resolve),
-            'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve)
-        },
-        data() {
-            return {
-                current_step: 1,
-                steps: 3,
-                errors: [],
-                account: {
-                    first_name: '',
-                    last_name: '',
-                    birthday: '',
-                    email: '',
-                    agreement: true,
-                    newsletter: false,
-                    identity: {
-                        name: '',
-                        img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
-                        wallet: ''
-                    }
-                }
-            }
-        },
-        methods: {
-            checkForm(e) {
-                this.errors = []
+import * as DesktopBridge from '@/framework/desktop-bridge'
 
-                if (this.current_step === 1) {
-                    if (this.account.first_name && this.account.last_name && this.account.email && this.account.agreement) {
-                        this.current_step = 2;
-                    } else {
-
-                        if (!this.account.first_name) {
-                            this.errors.push('First name required.')
-                        }
-                        if (!this.account.last_name) {
-                            this.errors.push('Last name required.')
-                        }
-                        if (!this.account.birthday) {
-                            this.errors.push('Birthday required.')
-                        }
-                        if (!this.account.email) {
-                            this.errors.push('Email required.')
-                        }
-                        if (!this.account.agreement) {
-                            this.errors.push('You must agree to the terms & conditions to use BlockHub.')
-                        }
-
-                    }
-                } else if (this.current_step === 2) {
-                    this.current_step = 3;
-                } else if (this.current_step === 3) {
-
+export default {
+    components: {
+        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+        'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
+        'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
+        'c-datepicker': (resolve) => require(['vuejs-datepicker'], resolve),
+        'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve)
+    },
+    data() {
+        return {
+            current_step: 1,
+            steps: 3,
+            errors: [],
+            account: {
+                first_name: '',
+                last_name: '',
+                birthday: '',
+                email: '',
+                agreement: false,
+                newsletter: false,
+                identity: {
+                    name: '',
+                    img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                    wallet: ''
                 }
             }
         }
+    },
+    methods: {
+        checkForm() {
+            this.errors = [];
+
+            // TEMP
+            if (DesktopBridge.isConnected()) {
+                // tell desktop to create an account and send it back
+                const data = {
+                    seed: 13891737193 // derived from input data + mouse movement
+                }
+
+                DesktopBridge.sendCommand('createAccountRequest', data)
+            } else {
+                // show download modal
+            }
+
+            if (this.current_step === 1) {
+                if (this.account.first_name && this.account.last_name && this.account.email && this.account.agreement) {
+                    this.current_step = 2;
+                } else {
+
+                    if (!this.account.first_name) {
+                        this.errors.push('First name required.')
+                    }
+                    if (!this.account.last_name) {
+                        this.errors.push('Last name required.')
+                    }
+                    if (!this.account.birthday) {
+                        this.errors.push('Birthday required.')
+                    }
+                    if (!this.account.email) {
+                        this.errors.push('Email required.')
+                    }
+                    if (!this.account.agreement) {
+                        this.errors.push('You must agree to the terms & conditions to use BlockHub.')
+                    }
+
+                }
+            } else if (this.current_step === 2) {
+                this.current_step = 3;
+            } else if (this.current_step === 3) {
+
+            }
+        }
     }
+}
 </script>
 
 

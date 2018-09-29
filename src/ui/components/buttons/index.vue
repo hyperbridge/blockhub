@@ -4,7 +4,10 @@
         :href="href"
         :target="target"
         class="c-btn"
-        :class="[status, 'c-btn-' + size , { 'swap-direction': swap_direction }]"
+        :class="[
+            status, 'c-btn-' + size ,
+            { 'swap-direction': swap_direction }
+        ]"
         @click="$emit('click')"
     >
         <i
@@ -70,6 +73,9 @@
         box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
         text-decoration: none;
         cursor: pointer;
+        &.link{
+            box-shadow: unset;
+        }
         &:active,
         &:focus {
             outline: none;
@@ -115,13 +121,14 @@
 
         $statusColors: (
             default: (#fff, #3D3E5D, #3D3E5D, #A2A3BE),
+            plain: (transparent, #fff, transparent, #ddd),
             info: (#5D75F7, #fff, #586ee9, #30304B),
             success: (#5EA72B, #fff, #559727, #30304B),
             danger: (#F75D5D, #fff, #de5454, #30304B),
             warning: (#FADC72, #3D3E5D, #efd26d, #32334c),
             share: (#43B4C9, #fff, #43B4C9, #32334c),
             support: (#43C981, #fff, #43C981, #30304B),
-            dark: (#3D3E5D, #fff, #3D3E5D, #fff)
+            dark: (#3D3E5D, #fff, #3D3E5D, #fff),
         );
 
         @each $status, $colorSet in $statusColors {

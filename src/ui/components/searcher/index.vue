@@ -14,7 +14,7 @@
             <div class="results__content">
                 <p v-if="isTyping" class="results__text">Searching...</p>
                 <p v-else-if="resultsCount != null && !resultsCount" class="results__text">
-                    No products were found
+                    Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?
                 </p>
                 <ul v-else class="results__list">
                     <slot>

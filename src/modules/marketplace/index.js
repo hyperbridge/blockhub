@@ -1,4 +1,5 @@
 import { normalize } from 'normalizr'
+import Vue from 'vue'
 import schema from './schema'
 import MarketplaceProtocol from 'marketplace-protocol'
 import * as ethereum from '@/framework/ethereum'
@@ -8,12 +9,14 @@ let rawData = {}
 
 export let state = null
 
-const updateState = () => {
+const updateState = (savedData, updatedState = {}) => {
     rawData = {
         ...rawData,
-        ...db.marketplace.config.data[0],
+        ...savedData,
+        ...updatedState,
         assets: db.marketplace ? db.marketplace.assets.data : [],
         products: db.marketplace ? db.marketplace.products.data : [],
+        collections: [], // TODO
         frontpage_product: db.marketplace ? db.marketplace.products.findOne({ 'system_tags': { '$contains': ['frontpage'] } }) : {},
         sale_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['sale'] } }) : [],
         new_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['new'] } }) : [],
@@ -22,7 +25,7 @@ const updateState = () => {
         trending_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['trending'] } }) : [],
         top_selling_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }) : [],
         special_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : [],
-        desktop_mode: rawData.desktop_mode !== null ? rawData.desktop_mode : window && window.process && window.process.type
+        desktop_mode: rawData.desktop_mode != null ? rawData.desktop_mode : (window && window.process && window.process.type)
     }
 
     const normalizedData = normalize(rawData, {
@@ -40,26 +43,39 @@ const updateState = () => {
     state = { ...rawData, ...normalizedData.entities }
 }
 
-updateState()
+updateState(db.marketplace.config.data[0])
 
 const sortDir = (dir, asc) => asc ? dir : dir * -1;
 
 export const getters = {
-    productsArray: state => Object.values(state.products),
+    assetsArray: state => Array.isArray(state.assets) ? state.assets : Object.values(state.assets),
+    productsArray: state => Array.isArray(state.products) ? state.products : Object.values(state.products),
     productsTags: (state, getters) => getters.productsArray
         .reduce((tags, product) => {
             product.developer_tags.forEach(tag => {
                 if (!tags.includes(tag)) tags.push(tag);
             });
             return tags;
-        }, []).sort(),
+        }, []).sort()
+    ,
     systemTags: (state, getters) => getters.productsArray
         .reduce((tags, product) => {
             product.system_tags.forEach(tag => {
                 if (!tags.includes(tag)) tags.push(tag);
             });
             return tags;
-        }, []).sort(),
+        }, []).sort()
+    ,
+    productsLanguages: (state, getters) => getters.productsArray
+        .reduce((languages, product) => [
+            ...languages,
+            ...product.language_support
+                .filter(lang =>
+                    !languages.includes(lang.name)
+                )
+                .map(lang => lang.name)
+        ], []).sort()
+    ,
     getProductsByName: (state, getters) => name => getters.productsArray.filter(product =>
         product.name.toLowerCase().includes(name.toLowerCase())
     ),
@@ -84,7 +100,9 @@ export const actions = {
     init(store, payload) {
         console.log("[BlockHub][Marketplace] Initializing...")
 
-        updateState()
+        store.state.desktop_mode = window.isElectron
+
+        updateState(store.state, {})
 
         store.commit('updateState', state)
     },
@@ -100,9 +118,9 @@ export const actions = {
         }
     },
     updateState(store, payload) {
-        console.log("[BlockHub][Marketplace] Updating store...")
+        //console.log("[BlockHub][Marketplace] Updating store...")
 
-        updateState()
+        updateState(store.state)
 
         store.commit('updateState', state)
     },
@@ -156,9 +174,9 @@ export const actions = {
 }
 
 export const mutations = {
-    updateState(s, payload) {
+    updateState(state, payload) {
         for (let x in payload) {
-            s[x] = payload[x]
+            Vue.set(state, x, payload[x])
         }
     },
     setEditorMode(state, payload) {
