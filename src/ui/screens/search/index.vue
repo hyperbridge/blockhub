@@ -242,11 +242,12 @@
                         this.debounce(() => {
                             this.isTyping = false;
                             this.results = this.getProductsQuery(this.query);
-                        }, 250, 'timeout2');
+                        }, 150, 'timeout2');
                     } else {
                         this.isTyping = false;
                         this.results = this.products;
                     }
+                    this.$router.replace({ name: 'Search Page', query: this.urlQuery });
                 }, 500);
             },
             clearFilters() {
@@ -302,6 +303,17 @@
                     this.selectedSpecials.length ||
                     this.price.max || this.price.min ||
                     this.selectedLanguages.length);
+            },
+            urlQuery() {
+                const urlQuery = {};
+                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price } = this;
+                if (phrase.length) urlQuery.name = phrase;
+                if (price.min) urlQuery.priceMin = price.min;
+                if (price.max) urlQuery.priceMax = price.max;
+                if (selectedSpecials.length) urlQuery.specials = selectedSpecials.map(tag => tag.value);
+                if (selectedGenres.length) urlQuery.tags = selectedGenres.map(tag => tag.name);
+                if (selectedLanguages.length) urlQuery.langs = selectedLanguages.map(tag => tag.name);
+                return urlQuery;
             }
         },
         mounted() {
@@ -309,20 +321,22 @@
                 this.results = this.products;
             } else {
                 this.isTyping = true;
-                const { tags, langs, name, priceMin, priceMax } = this.$route.query;
+                const { tags, langs, name, priceMin, priceMax, specials } = this.$route.query;
 
                 if (name) this.phrase = name;
                 if (priceMin) this.price.min = priceMin;
                 if (priceMax) this.price.max = priceMax;
 
                 this.selectableTags = this.productsTags.map(tag => {
-                    const t = tags.includes(tag) ? true : false
                     return {
                         name: tag, selected: tags && tags.includes(tag) ? true : false
                     }
                 });
                 this.selectableLanguages = this.languages.map(lang => ({
                     name: lang, selected: langs && langs.includes(tag) ? true : false
+                }));
+                this.systemTags = this.systemTags.map(tag => ({
+                    ...tag, selected: specials && specials.includes(tag)
                 }));
             }
         },
