@@ -116,7 +116,7 @@
                 itemBg="transparent"
             />
             <div v-else-if="filtersActive">
-                <p>No products were found for your filters</p>
+                <p>No products were found using these filters. Want to <c-button status="plain">Check for updates</c-button>?</p>
                 <c-button
                     status="info"
                     size="md"
@@ -125,7 +125,7 @@
                 >Clear filters</c-button>
             </div>
             <p v-else>
-                No products were found
+                Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?
             </p>
             <c-content-navigation />
         </c-block>

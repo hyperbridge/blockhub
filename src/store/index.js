@@ -5,6 +5,7 @@ import router from '../router'
 import * as db from '../db'
 import * as ChaosMonkey from '../framework/chaos-monkey'
 import * as PeerService from '../framework/peer-service'
+import * as DesktopBridge from '../framework/desktop-bridge'
 import * as Ethereum from '../framework/ethereum'
 import * as funding from '../modules/funding'
 import * as news from '../modules/news'
@@ -110,6 +111,7 @@ export let initializer = () => {
 
         Ethereum.init()
         PeerService.init()
+        DesktopBridge.init()
 
         db.setInitCallback(async () => {
             // TODO: is this a race condition?
@@ -184,11 +186,24 @@ export let initializer = () => {
         ]
 
         const chooseRandom = (list) => {
-            return list[Math.floor(Math.random() * list.length)]
+            if (Array.isArray(list)) {
+                return list[Math.floor(Math.random() * list.length)]
+            } else {
+                const keys = Object.keys(list)
+                const randomKey = keys[Math.floor(Math.random() * keys.length)]
+                return list[randomKey]
+            }
         }
 
         const removeRandom = (list) => {
-            list.splice(Math.floor(Math.random() * list.length), 1)
+            if (Array.isArray(list)) {
+                list.splice(Math.floor(Math.random() * list.length), 1)
+            }
+            else {
+                const keys = Object.keys(list)
+                const randomKey = keys[Math.floor(Math.random() * keys.length)]
+                delete list[randomKey]
+            }
 
             return list
         }
@@ -207,19 +222,18 @@ export let initializer = () => {
 
             // Start out with some decent amount of content
             if (!simulatorInitialized) {
-                store.state.network.trending_projects = seed.trending_projects
-                store.state.network.curator_reviews = seed.curator_reviews.slice(seed.curator_reviews.length / 2)
-                store.state.network.product_news = seed.product_news.slice(seed.product_news.length / 2)
+                store.state.marketplace.trending_projects = seed.trending_projects
+                store.state.marketplace.curator_reviews = seed.curator_reviews.slice(seed.curator_reviews.length / 2)
+                store.state.marketplace.product_news = seed.product_news.slice(seed.product_news.length / 2)
                 store.state.marketplace.products = seed.products.slice(seed.products.length / 2)
                 store.state.marketplace.assets = seed.assets.slice(seed.assets.length / 2)
                 store.state.marketplace.collections = seed.collections.slice(seed.collections.length / 2)
                 store.state.funding.projects = seed.projects.slice(seed.projects.length / 2)
 
                 db.marketplace.products.data = store.state.marketplace.products
+                db.marketplace.assets.data = store.state.marketplace.assets
 
                 store.dispatch('marketplace/updateState')
-
-                store.state.marketplace.products = Object.values(store.state.marketplace.products)
 
                 simulatorInitialized = true
             }
@@ -228,9 +242,9 @@ export let initializer = () => {
             const targets = [
                 [store.state.network.account.notifications, seed.notifications],
                 [store.state.network.account.wallets, seed.wallets],
-                [store.state.network.trending_projects, seed.trending_projects],
-                [store.state.network.curator_reviews, seed.curator_reviews],
-                [store.state.network.product_news, seed.product_news],
+                [store.state.marketplace.trending_projects, seed.trending_projects],
+                [store.state.marketplace.curator_reviews, seed.curator_reviews],
+                [store.state.marketplace.product_news, seed.product_news],
                 [store.state.marketplace.assets, seed.assets],
                 [store.state.marketplace.products, seed.products],
                 [store.state.marketplace.collections, seed.collections],
@@ -241,8 +255,12 @@ export let initializer = () => {
                 const target = chooseRandom(targets)
 
                 if (target[1].length > 0) {
-                    console.log(target)
-                    target[0].push(chooseRandom(target[1]))
+                    const random = chooseRandom(target[1])
+
+                    if (Array.isArray(target[0]))
+                        target[0].push(random)
+                    else 
+                        target[0][random ? random.id : random] = random
                 }
             } else if (action === 'remove') {
                 const target = chooseRandom(targets)
@@ -250,7 +268,12 @@ export let initializer = () => {
                 removeRandom(target[0])
             }
 
-            setTimeout(monitorSimulatorMode, 200)
+            // db.marketplace.products.data = store.state.marketplace.products
+            // db.marketplace.assets.data = store.state.marketplace.assets
+
+            // store.dispatch('marketplace/updateState')
+
+            setTimeout(monitorSimulatorMode, 100)
         }
 
         const monitorPathState = async () => {

@@ -1,11 +1,13 @@
 <template>
     <div class="assets-list">
-        <div class="assets-list__item-container"
-             v-for="(item, index) in items"
-             :style="{ width: 'calc( 100% / ' + itemInRow + ')'}"
-             :key="index">
-            <c-assets-item :item="item" />
-        </div>
+        <template v-for="(item, index) in items">
+            <div class="assets-list__item-container"
+                :style="{ width: 'calc( 100% / ' + itemInRow + ')'}"
+                :key="index"
+                v-if="item">
+                <c-assets-item :item="item" />
+            </div>
+        </template>
     </div>
 </template>
 

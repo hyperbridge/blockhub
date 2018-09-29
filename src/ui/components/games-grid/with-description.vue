@@ -1,18 +1,19 @@
 <template>
     <transition-group tag="div" class="games-list" name="games-list">
         <div
+            class="games-list__item"
             v-for="item in items"
             :key="item.id"
             :class="{ 'hovered' : hovered }"
             :style="{ width: 'calc( 100% / ' + itemInRow + ')', background: itemBg }"
-            class="games-list__item"
+            v-if="items.length"
         >
             <div v-if="item.price && showPrice" class="price">
                 <strong>{{ item.price }}</strong> USD
             </div>
             <div class="img">
                 <a :href="`/#/product/${item.id}`">
-                    <c-img :src="item.images.medium_tile"/>
+                    <c-img :src="item.images.medium_tile" />
                 </a>
             </div>
             <div class="info">
@@ -43,6 +44,7 @@
                 </div>
             </div>
         </div>
+        <p v-if="!items.length" key="nothing">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
     </transition-group>
 </template>
 

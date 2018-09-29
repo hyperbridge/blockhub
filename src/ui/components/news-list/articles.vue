@@ -5,6 +5,7 @@
         :id="`tab_${index}`"
         :aria-labelledby="`tab_${index}-tab`"
         role="tabpanel"
+        v-if="news && news.articles"
     >
       <ul class="home-tabs__news-list">
           <c-news-article v-for="(article, index) in news.articles" :key="index" :article="article" />
