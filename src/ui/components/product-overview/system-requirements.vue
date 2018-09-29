@@ -8,6 +8,7 @@
                 <c-tab-universal
                     v-for="(os, index) in ['Mac', 'Win', 'Linux']"
                     :tab_id="index"
+                    :key="index"
                 >
                     <ul class="system-requirements__list" v-if="platform(os)">
                         <li

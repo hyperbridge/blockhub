@@ -109,7 +109,6 @@ export let initializer = () => {
     return new Promise((resolve, reject) => {
         let initialized = false
 
-        Ethereum.init()
         PeerService.init()
         DesktopBridge.init()
 
@@ -121,6 +120,7 @@ export let initializer = () => {
             await store.dispatch('marketplace/initEthereum')
         })
 
+        store.dispatch('network/init')
         store.dispatch('marketplace/init')
         store.dispatch('funding/init')
 
@@ -171,7 +171,9 @@ export let initializer = () => {
                     console.log('BlockHub initialized.')
 
                     setInterval(() => {
-                        store.dispatch('network/checkInternetConnection')
+                        if (store.state.network.connection.auto) {
+                            store.dispatch('network/checkInternetConnection')
+                        }
                     }, 4000)
 
                     resolve()

@@ -1,7 +1,7 @@
 <template>
     <c-layout navigationKey="store-navigation">
         <div class="content" id="content">
-            <div class="container-fluid" v-if="is_connected">
+            <div class="container-fluid">
 
                 <div class="row">
                     <div class="col-12 mb-4">
@@ -16,6 +16,12 @@
                                 <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button> 
                                 <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button> 
                                 <c-button @click="clearSimulatorData()">Clear Data</c-button>
+                                <br /><br />
+                                <c-button @click="$store.state.network.connection.auto = !$store.state.network.connection.auto">Auto Connect {{ $store.state.network.connection.auto ? 'ON' : 'OFF' }}</c-button> 
+                                <c-button @click="$store.state.network.connection.internet = !$store.state.network.connection.internet">Internet {{ $store.state.network.connection.internet ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
+                                <c-button @click="$store.state.network.connection.datasource = !$store.state.network.connection.datasource">Datasource {{ $store.state.network.connection.datasource ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
+                                <c-button @click="$store.state.network.connection.operator = !$store.state.network.connection.operator">Operator {{ $store.state.network.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
+                                <c-button @click="$store.state.network.connection.ethereum = !$store.state.network.connection.ethereum">Ethereum {{ $store.state.network.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button> 
                                 <br /><br />
                                 <input ref="desktopMessage" type="text" /> 
                                 <c-button @click="sendDesktopMessage()">Send Message To Desktop</c-button>
@@ -283,14 +289,6 @@
                         </h3>
                     </div>
                 </transition>
-                
-            </div>
-            <div class="container-fluid" v-if="!is_connected">
-                <div class="row">
-                    <div class="col-12">
-                        <h3>Oops, something went wrong! :(</h3>
-                    </div>
-                </div>
             </div>
         </div>
     </c-layout>
@@ -448,9 +446,6 @@ export default {
         // slice the array of data to display
         sliced() {
             return this.list.slice(0, this.display);
-        },
-        is_connected() {
-            return this.$store.state.network.connection.datasource;
         },
         trending_projects() {
             return this.$store.state.marketplace.trending_projects;
