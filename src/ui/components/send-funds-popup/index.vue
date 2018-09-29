@@ -1,5 +1,5 @@
 <template>
-    <c-popup :activated="activated" type="custom" ref="modal" title="Sending Funds" width="650">
+    <c-popup :activated="activated" type="custom" ref="modal" title="Sending Funds" width="650"  @close="$emit('close')">
         <div class="send-funds-modal" slot="custom_content">
             <c-tabs>
                 <c-tab name="Agreement" :selected="agreement" :showFooter="true">

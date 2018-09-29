@@ -125,27 +125,11 @@
 
                     <div class="row" v-if="item.type === 'product_slider'" :key="`level-1-${index}`">
                         <div class="col-12">
-                            <c-block class="margin-bottom-30" :onlyContentBg="true" :noGutter="true">
-                                <c-heading-bar
-                                    slot="title"
-                                    class="mb-0"
-                                    :name="item.data.title"
-                                    :showArrows="showArrowsState(item.data.products, 3)"
-                                    :showBackground="true"
-                                    @prevClick="item.data.swiper.slidePrev()"
-                                    @nextClick="item.data.swiper.slideNext()"
-                                />
+                            <c-products-slider :products="item.data.products" :title="item.data.title" :maxPerView="3" v-if="item.data.products.length" />
 
-                                <c-swiper :options="item.data.options" :ref="item.data.ref" style="margin: 0 -10px" v-if="item.data.products.length">
-                                    <c-slide v-for="product in item.data.products" :key="product.id">
-                                        <c-product-card-dynamic :product="product" />
-                                    </c-slide>
-                                </c-swiper>
-
-                                 <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
-
+                            <c-block class="margin-bottom-30" :title="item.data.title" :onlyContentBg="true" :noGutter="true" v-else>
+                                <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                             </c-block>
-                            <c-products-slider :products="item.data.products" :title="item.data.title" :maxPerView="3" />
                         </div>
                     </div>
 

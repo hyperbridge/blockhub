@@ -269,13 +269,13 @@
                 {{ connection_status.message }}
             </div>
         
-            <c-send-funds-popup :activated="send_funds_modal_active" ref="modal" title="Default" sub_title="X">
+            <c-send-funds-popup :activated="send_funds_modal_active" @close="closePopup" ref="modal">
             </c-send-funds-popup>
 
-            <c-login-popup :activated="login_modal_active" ref="modal" title="Default" sub_title="X">
+            <c-login-popup :activated="login_modal_active" @close="closePopup" ref="modal">
             </c-login-popup>
 
-            <c-purchase-popup :activated="purchase_modal_active" ref="modal" title="Default" sub_title="X">
+            <c-purchase-popup :activated="purchase_modal_active" @close="closePopup" ref="modal">
             </c-purchase-popup>
         </div>
         <!-- //END PAGE CONTENT -->
@@ -371,6 +371,11 @@ export default {
                     break;
             }
 
+        },
+        closePopup() {
+            console.log('closePopup')
+            this.$store.state.network.active_modal = null
+            console.log(this.$store.state.network.active_modal)
         }
     },
     mounted: function () {

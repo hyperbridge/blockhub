@@ -1,5 +1,5 @@
 <template>
-    <c-popup :activated="activated" type="custom" ref="modal" title="Sending Funds" width="650">
+    <c-popup :activated="activated" type="custom" ref="modal" title="Sending Funds" width="350"  @close="$emit('close')">
         <!-- <c-custom-modal title="Login"
                         v-if="login_modal"
                         @close="login_modal = false"

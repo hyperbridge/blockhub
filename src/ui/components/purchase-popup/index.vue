@@ -1,8 +1,8 @@
 <template>
-    <c-popup :activated="activated" type="custom" ref="modal" title="Purchase" width="650">
+    <c-popup :activated="activated" type="custom" ref="modal" title="Purchase" width="650" @close="$emit('close')">
         <div class="purchase-modal" slot="custom_content">
             <c-tabs>
-                <c-tab name="Agreement" :selected="false" showFooter="true">
+                <c-tab name="Agreement" :selected="agreement" :showFooter="true">
                     <div>
                         <div class="d-flex justify-content-between align-items-center">
                             <h4>Purchase Agreement</h4>
@@ -183,7 +183,7 @@
                         </div>
                     </div>
                 </c-tab>
-                <c-tab name="Sending" :selected="true" showFooter="true">
+                <c-tab name="Sending" :selected="sending" :showFooter="true">
                     <div class="sending-blk">
                         <div class="clmn-1">
                             <div class="grid">
