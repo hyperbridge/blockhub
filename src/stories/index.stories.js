@@ -3288,7 +3288,7 @@ storiesOf('Contribute', module)
                 value: ''
             }
         },
-        template: `<div class="p-4" style="width: 400px"><c-contribute-form v-model="value" defaultValue="15" /> <div class="mt-4 text-white">Value - {{ value }}</div></div>`
+        template: `<div class="p-4" style="width: 400px"><c-contribute-form v-model="value" :defaultValue="15" /> <div class="mt-4 text-white">Value - {{ value }}</div></div>`
     }))
     .add('pledge', () => ({
         components:{
@@ -3331,6 +3331,16 @@ storiesOf('Contribute', module)
                     </div>`
     }))
 
+import CookiePolicy from '@/ui/components/cookie-policy'
+storiesOf('Cookie policy', module)
+    .add('default', () => ({
+        components:{
+            'c-cookie-policy': CookiePolicy
+        },
+        template: `<div class="p-5 position-relative" style="height: 500px;width: 700px">
+                        <c-cookie-policy />
+                    </div> `
+    }))
 
 
 /*
