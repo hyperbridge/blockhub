@@ -19,7 +19,7 @@
             <div class="text">
                 {{ notification.text }}
             </div>
-            <c-popup :activated="modalActive" ref="modal" :title="notification.title" :type="notification.type" :sub_title="notification.text">
+            <c-popup :activated="modalActive" @close="closePopup" ref="modal" :title="notification.title" :type="notification.type" :sub_title="notification.text">
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut enim tortor.
                     Phasellus dapibus malesuada dapibus. Praesent condimentum lobortis consectetur.
@@ -55,7 +55,9 @@
             },
             showPopup(){
                 this.modalActive = true;
-                console.log(this.modalActive)
+            },
+            closePopup(){
+                this.modalActive = false;
             }
         },
         computed: {
