@@ -277,6 +277,8 @@
 
             <c-purchase-popup :activated="purchase_modal_active" @close="closePopup" ref="modal">
             </c-purchase-popup>
+
+            <c-cookie-policy />
         </div>
         <!-- //END PAGE CONTENT -->
 
@@ -310,6 +312,7 @@ export default {
         'c-send-funds-popup': (resolve) => require(['@/ui/components/send-funds-popup/index.vue'], resolve),
         'c-purchase-popup': (resolve) => require(['@/ui/components/purchase-popup/index.vue'], resolve),
         'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
+        'c-cookie-policy': (resolve) => require(['@/ui/components/cookie-policy'], resolve),
         'c-swiper': swiper,
         'c-slide': swiperSlide
     },
