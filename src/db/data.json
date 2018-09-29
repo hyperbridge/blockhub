@@ -3,13 +3,14 @@
         "signed_in": false,
         "loading": false,
         "connection": {
+            "auto": true,
             "internet": false,
-            "datasource": true,
-            "operator": true,
-            "ethereum": true,
+            "datasource": false,
+            "operator": false,
+            "ethereum": false,
             "status": {
                 "code": null,
-                "message": "Establishing connection..."
+                "message": "Launching..."
             }
         },
         "ethereum": {

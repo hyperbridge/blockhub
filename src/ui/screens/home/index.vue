@@ -1,7 +1,7 @@
 <template>
     <c-layout navigationKey="store-navigation">
         <div class="content" id="content">
-            <div class="container-fluid" v-if="is_connected">
+            <div class="container-fluid">
 
                 <div class="row">
                     <div class="col-12 mb-4">
@@ -11,14 +11,26 @@
                         <div class="card invert">
                             <div class="card-body">
                                 <h4>Want to see the future of BlockHub?</h4>
-                                <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button> 
-                                <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktop_mode ? 'ON' : 'OFF' }}</c-button> 
-                                <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button> 
-                                <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button> 
-                                <c-button @click="clearSimulatorData()">Clear Data</c-button>
-                                <br /><br />
-                                <input ref="desktopMessage" type="text" />
-                                <c-button @click="sendDesktopMessage()">Send Message To Desktop</c-button>
+                                <div>
+                                    <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button>
+                                    <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="clearSimulatorData()">Clear Data</c-button>
+                                    <br /><br />
+                                </div>
+                                <div>
+                                    <c-button @click="$store.state.network.connection.auto = !$store.state.network.connection.auto">Auto Connect {{ $store.state.network.connection.auto ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="$store.state.network.connection.internet = !$store.state.network.connection.internet">Internet {{ $store.state.network.connection.internet ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <c-button @click="$store.state.network.connection.datasource = !$store.state.network.connection.datasource">Datasource {{ $store.state.network.connection.datasource ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <c-button @click="$store.state.network.connection.operator = !$store.state.network.connection.operator">Operator {{ $store.state.network.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <c-button @click="$store.state.network.connection.ethereum = !$store.state.network.connection.ethereum">Ethereum {{ $store.state.network.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <br /><br />
+                                </div>
+                                <div v-if="desktop_mode">
+                                    <input ref="desktopMessage" type="text" />
+                                    <c-button @click="sendDesktopMessage()">Send Message To Desktop</c-button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -118,7 +130,7 @@
                                         <span>usd</span>
                                     </div>
                                 </div>
-                                <c-button status="success" icon="cart-plus">Proceed to Purchase</c-button>
+                                <c-button status="success">Proceed to Purchase</c-button>
                             </div>
                         </div>
                     </div>
@@ -273,14 +285,6 @@
                         </h3>
                     </div>
                 </transition>
-                
-            </div>
-            <div class="container-fluid" v-if="!is_connected">
-                <div class="row">
-                    <div class="col-12">
-                        <h3>Oops, something went wrong! :(</h3>
-                    </div>
-                </div>
             </div>
         </div>
     </c-layout>
@@ -372,6 +376,17 @@ export default {
             result.push({
                 type: 'product_slider',
                 data: {
+                    title: 'Featured',
+                    ref: 'featured_products_sl',
+                    swiper: this.$refs.featured_products_sl && this.$refs.featured_products_sl.swiper,
+                    options: this.demoSlider,
+                    products: this.$store.state.marketplace.featured_products
+                }
+            })
+
+            result.push({
+                type: 'product_slider',
+                data: {
                     title: 'New Releases',
                     ref: 'demo_products_sl',
                     swiper: this.$refs.demo_products_sl && this.$refs.demo_products_sl.swiper,
@@ -436,9 +451,6 @@ export default {
         // slice the array of data to display
         sliced() {
             return this.list.slice(0, this.display);
-        },
-        is_connected() {
-            return this.$store.state.network.connection.datasource;
         },
         trending_projects() {
             return this.$store.state.marketplace.trending_projects;

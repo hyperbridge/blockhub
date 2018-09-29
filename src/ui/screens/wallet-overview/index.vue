@@ -25,10 +25,6 @@ export default {
   components: {
     'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
   },
-  data() {
-    return {
-    }
-  },
   computed: {
       wallet() {
         if (!this.$store.state.network.wallets)

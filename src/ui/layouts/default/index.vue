@@ -2,45 +2,51 @@
     <!-- PAGE WRAPPER -->
     <div class="page page--w-header page--w-container">
         <!-- PAGE HEADER -->
-        <transition name="slideDown">
+        <transition name="slideDown" v-if="initialized">
             <c-header :isLoader="loadingState" />
         </transition>
         <!-- //END PAGE HEADER -->
 
         <!-- PAGE CONTENT WRAPPER -->
         <div class="page__content page__content-invert invert" id="page-content">
-            <div class="loading loading--w-spinner" v-if="!is_connected">
-                <div>
-                    <div>
-                        <div class="loading-spinner"></div>
-                        <p class="loading__message">{{ user_submitted_connection_message.message }}</p>
-                        <p class="loading__user">Submitted by <a :href="`/#/identity/${user_submitted_connection_message.user.id}`">@{{ user_submitted_connection_message.user.name }}</a></p>
-                    </div>
-
-                    <h1 class="loading__status-code" v-if="connection_status.code">ERROR {{ connection_status.code }}</h1>
-
-                    <p class="loading__status-message">{{ connection_status.message }}</p>
-
-                    <div class="loading__links">
-                        <p>Connection problems? Let us know!</p>
-                        <a href="https://twitter.com/hyperbridge"><span class="fab fa-twitter"></span> Tweet Us</a>
-                        <a href="https://hyperbridge.org/status"><span class="fas fa-globe-americas"></span> Server Status</a>
-                    </div>
-                </div>
-            </div>
-
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert left-sidebar" id="page-aside">
-                <transition name="slideLeft">
+                <transition name="slideLeft" v-if="initialized">
                     <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}`"></component>
                 </transition>
             </div>
             <!-- //END PAGE ASIDE PANEL -->
             
-            <slot></slot>
+            <slot v-if="is_connected"></slot>
+
+            <div class="content" id="content" v-if="!is_connected">
+                <div class="loader-block loading loading--w-spinner" v-if="!is_connected">
+                    <div class="loader-block__container">
+                        <div>
+                            <div class="loading-spinner"></div>
+                            <p class="loader-block__message">{{ user_submitted_connection_message.message }}</p>
+                            <p class="loader-block__user">Submitted by <a :href="`/#/identity/${user_submitted_connection_message.user.id}`">@{{ user_submitted_connection_message.user.name }}</a></p>
+                        </div>
+
+                        <h1 class="loader-block__status-code" v-if="connection_status.code">ERROR {{ connection_status.code }}</h1>
+
+                        <div class="loader-block__status-message">
+                            <p>{{ connection_status.message }}</p>
+                            <div>Internet Connection <span class="fa" :class="{'fa-check-circle': $store.state.network.connection.internet, 'fa-times-circle': !$store.state.network.connection.internet }"></span></div>
+                            <div>Server Connection <span class="fa" :class="{'fa-check-circle': $store.state.network.connection.datasource, 'fa-times-circle': !$store.state.network.connection.datasource }"></span></div>
+                        </div>
+
+                        <div class="loader-block__links">
+                            <p>Connection problems? Let us know!</p>
+                            <a href="https://twitter.com/hyperbridge"><span class="fab fa-twitter"></span> Tweet Us</a>
+                            <a href="https://hyperbridge.org/status"><span class="fas fa-globe-americas"></span> Server Status</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- SIDEPANEL -->
-            <transition name="slideRight">
+            <transition name="slideRight" v-if="initialized">
                 <c-sidepanel>
                     <c-swiper :options="panelOption" ref="mySwiper">
                         <c-slide v-if="desktop_mode">
@@ -318,7 +324,7 @@ export default {
     },
     computed: {
         is_connected() {
-            return this.$store.state.network.connection.datasource
+            return this.$store.state.network.connection.internet && this.$store.state.network.connection.datasource
         },
         connection_status() {
             return this.$store.state.network.connection.status
@@ -349,6 +355,7 @@ export default {
         return {
             navigationComponent: this.navigationKey || false,
             loadingState: true,
+            initialized: BlockHub.initialized,
             panelOption: {
                 spaceBetween: 10,
                 loop: false,
@@ -383,8 +390,12 @@ export default {
     },
     mounted: function () {
         this.$nextTick(() => {
-            this.loadingState = false;
-            console.log('ready')
+            this.loadingState = false
+            setTimeout(() => {
+                document.getElementById('startup-loader').style.display = 'none'
+
+                this.initialized = BlockHub.initialized = true
+            }, 3000) // TODO: remove arbitrary delay
         })
     }
 }
@@ -454,7 +465,7 @@ export default {
         color: #fff;
     }
 
-    .loading > div {
+    .loader-block .loader-block__container {
         width: 100%;
         height: 100%;
         position: relative;
@@ -463,13 +474,13 @@ export default {
         font-size: 14px;
     }
 
-    .loading--w-spinner > div .loading-spinner {
+    .loader-block .loading-spinner {
         position: relative;
         zoom: 4;
         margin: 0 auto;
     }
 
-    .loading__message {
+    .loader-block__message {
         color: #fff;
         font-size: 20px;
         font-style: italic;
@@ -477,7 +488,7 @@ export default {
         margin-top: 40px;
     }
 
-    .loading__user {
+    .loader-block__user {
         color: #999;
         text-transform: uppercase;
 
@@ -487,18 +498,26 @@ export default {
         }
     }
 
-    .loading__status-code {
+    .loader-block__status-code {
         margin-top: 80px;
     }
 
-    .loading__status-message {
+    .loader-block__status-message {
         color: #ddd;
         font-size: 16px;
         margin-top: 30px;
-        text-transform: uppercase;
+
+        p {
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        div {
+            margin: 5px 0;
+        }
     }
 
-    .loading__links {
+    .loader-block__links {
         position: absolute;
         bottom: 30px;
         left: 0;

@@ -34,14 +34,19 @@ export const getters = {
 }
 
 export const actions = {
-    connect(store, payload) {
+    init(store, payload) {
         console.log('[BlockHub] Network connecting...')
+
+        store.state.connection.status.code = null
+        store.state.connection.status.message = "Establishing connection..."
 
         store.dispatch('checkInternetConnection')
         store.dispatch('checkEthereumConnection')
 
         setInterval(() => {
-            store.dispatch('checkEthereumConnection')
+            if (store.state.connection.auto) {
+                store.dispatch('checkEthereumConnection')
+            }
         }, 5000)
     },
     updateState(store, payload) {
@@ -86,13 +91,13 @@ export const actions = {
             store.state.connection.ethereum = true
             store.state.connection.datasource = true
 
-            store.state.connection.status.code = 344
-            store.state.connection.status.message = err
+            // store.state.connection.status.code = 344
+            // store.state.connection.status.message = err
 
             // TODO: fallback to peer datasource
         }
 
-        Ethereum.init().then(success, failure)
+        Ethereum.init().then(success, failure).catch(failure)
     },
     checkInternetConnection(store, payload) {
         console.log('[BlockHub] Connection status: ' + JSON.stringify(store.state.connection))
@@ -113,6 +118,7 @@ export const actions = {
             if (xhr.readyState == 4) {
                 if (xhr.status >= 200 && xhr.status < 304) {
                     store.commit('setInternetConnection', { connected: true, message: "Connected." })
+                    store.state.connection.datasource = true // TEMP
                 } else {
                     store.commit('setInternetConnection', { connected: false, message: "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection." })
                 }

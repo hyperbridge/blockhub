@@ -1,4 +1,5 @@
 import { normalize } from 'normalizr'
+import Vue from 'vue'
 import schema from './schema'
 import MarketplaceProtocol from 'marketplace-protocol'
 import * as ethereum from '@/framework/ethereum'
@@ -8,10 +9,11 @@ let rawData = {}
 
 export let state = null
 
-const updateState = (savedData) => {
+const updateState = (savedData, updatedState = {}) => {
     rawData = {
         ...rawData,
         ...savedData,
+        ...updatedState,
         assets: db.marketplace ? db.marketplace.assets.data : [],
         products: db.marketplace ? db.marketplace.products.data : [],
         collections: [], // TODO
@@ -100,7 +102,7 @@ export const actions = {
 
         store.state.desktop_mode = window.isElectron
 
-        updateState(store.state)
+        updateState(store.state, {})
 
         store.commit('updateState', state)
     },
@@ -116,7 +118,7 @@ export const actions = {
         }
     },
     updateState(store, payload) {
-        console.log("[BlockHub][Marketplace] Updating store...")
+        //console.log("[BlockHub][Marketplace] Updating store...")
 
         updateState(store.state)
 
@@ -172,9 +174,9 @@ export const actions = {
 }
 
 export const mutations = {
-    updateState(s, payload) {
+    updateState(state, payload) {
         for (let x in payload) {
-            s[x] = payload[x]
+            Vue.set(state, x, payload[x])
         }
     },
     setEditorMode(state, payload) {

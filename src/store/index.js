@@ -109,7 +109,6 @@ export let initializer = () => {
     return new Promise((resolve, reject) => {
         let initialized = false
 
-        Ethereum.init()
         PeerService.init()
         DesktopBridge.init()
 
@@ -121,6 +120,7 @@ export let initializer = () => {
             await store.dispatch('marketplace/initEthereum')
         })
 
+        store.dispatch('network/init')
         store.dispatch('marketplace/init')
         store.dispatch('funding/init')
 
@@ -171,7 +171,9 @@ export let initializer = () => {
                     console.log('BlockHub initialized.')
 
                     setInterval(() => {
-                        store.dispatch('network/checkInternetConnection')
+                        if (store.state.network.connection.auto) {
+                            store.dispatch('network/checkInternetConnection')
+                        }
                     }, 4000)
 
                     resolve()
@@ -230,8 +232,9 @@ export let initializer = () => {
                 store.state.marketplace.collections = seed.collections.slice(seed.collections.length / 2)
                 store.state.funding.projects = seed.projects.slice(seed.projects.length / 2)
 
-                db.marketplace.products.data = store.state.marketplace.products
-                db.marketplace.assets.data = store.state.marketplace.assets
+                // TODO: figure out unique constraint
+                // db.marketplace.products.insert(store.state.marketplace.products)
+                // db.marketplace.assets.insert(store.state.marketplace.assets)
 
                 store.dispatch('marketplace/updateState')
 
@@ -268,10 +271,11 @@ export let initializer = () => {
                 removeRandom(target[0])
             }
 
-            // db.marketplace.products.data = store.state.marketplace.products
-            // db.marketplace.assets.data = store.state.marketplace.assets
+            // TODO: figure out unique constraint
+            // db.marketplace.products.insert(store.state.marketplace.products)
+            // db.marketplace.assets.insert(store.state.marketplace.assets)
 
-            // store.dispatch('marketplace/updateState')
+            // store.dispatch('marketplace/updateState') //, store.state.marketplace)
 
             setTimeout(monitorSimulatorMode, 100)
         }
