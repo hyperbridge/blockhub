@@ -71,7 +71,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        z-index: 999;
+        z-index: 9999;
         background: rgba(48, 48, 75, .9);
     }
 
@@ -128,6 +128,7 @@
         justify-content: space-between;
         padding: 10px;
         border-radius: 5px;
+        text-align: left;
         &.c-popup-type-warning {
             background: #FADC72;
             color: #3D3E5D;

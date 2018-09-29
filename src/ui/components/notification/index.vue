@@ -7,8 +7,8 @@
             :class="notification.type"
             v-if="show"
         >
-            <div class="title" @click="showPopup">
-                <h5 class="text-left">
+            <div class="title">
+                <h5 class="text-left" @click="$emit('showPopup')">
                     <i :class="`fas fa-${notif_icon}`"></i>
                     {{ notification.title }}
                     <div class="close" @click="actionOnClose()">
@@ -19,14 +19,6 @@
             <div class="text">
                 {{ notification.text }}
             </div>
-            <c-popup :activated="modalActive" @close="closePopup" ref="modal" :title="notification.title" :type="notification.type" :sub_title="notification.text">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut enim tortor.
-                    Phasellus dapibus malesuada dapibus. Praesent condimentum lobortis consectetur.
-                    Morbi facilisis erat non lacus malesuada mollis. Curabitur quam tortor, finibus
-                    vel metus id, imperdiet viverra mi.
-                </p>
-            </c-popup>
         </div>
     </transition>
 </template>
@@ -40,25 +32,15 @@
                 required: true
             }
         },
-        components: {
-            'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
-        },
         data() {
             return {
                 show: true,
-                modalActive: false
             }
         },
         methods: {
             actionOnClose() {
                 this.show = false;
             },
-            showPopup(){
-                this.modalActive = true;
-            },
-            closePopup(){
-                this.modalActive = false;
-            }
         },
         computed: {
             notif_icon() {
