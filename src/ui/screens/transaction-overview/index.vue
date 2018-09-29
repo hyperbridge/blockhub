@@ -25,10 +25,6 @@ export default {
   components: {
     'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
   },
-  data() {
-    return {
-    }
-  },
   computed: {
       transaction() {
         if (!this.$store.state.network.transactions)

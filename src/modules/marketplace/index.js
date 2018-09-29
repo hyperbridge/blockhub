@@ -1,4 +1,5 @@
 import { normalize } from 'normalizr'
+import Vue from 'vue'
 import schema from './schema'
 import MarketplaceProtocol from 'marketplace-protocol'
 import * as ethereum from '@/framework/ethereum'
@@ -8,10 +9,11 @@ let rawData = {};
 
 export let state = {};
 
-const updateState = (savedData) => {
+const updateState = (savedData, updatedState = {}) => {
     rawData = {
         ...rawData,
         ...savedData,
+        ...updatedState,
         assets: db.marketplace ? db.marketplace.assets.data : [],
         products: db.marketplace ? db.marketplace.products.data : [],
         collections: [], // TODO
@@ -23,7 +25,7 @@ const updateState = (savedData) => {
         trending_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['trending'] } }) : [],
         top_selling_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }) : [],
         special_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : [],
-        desktop_mode: rawData.desktop_mode !== null ? rawData.desktop_mode : window && window.process && window.process.type
+        desktop_mode: rawData.desktop_mode != null ? rawData.desktop_mode : (window && window.process && window.process.type)
     }
 
     const normalizedData = normalize(rawData, {
@@ -46,8 +48,9 @@ updateState(db.marketplace.config.data[0])
 const sortDir = (dir, asc) => asc ? dir : dir * -1;
 
 export const getters = {
+    assetsArray: state => Array.isArray(state.assets) ? state.assets : Object.values(state.assets),
+    productsArray: state => state.products instanceof Array ? state.products : Object.values(state.products),
     getProductsQuery: state => query => db.marketplace.products.find(query),
-    productsArray: state => typeof (state.products) === "object" ? Object.values(state.products) : state.products,
     productsTags: (state, getters) => getters.productsArray
         .reduce((tags, product) => [
             ...tags,
@@ -100,7 +103,9 @@ export const actions = {
     init(store, payload) {
         console.log("[BlockHub][Marketplace] Initializing...")
 
-        updateState(store.state)
+        store.state.desktop_mode = window.isElectron
+
+        updateState(store.state, {})
 
         store.commit('updateState', state)
     },
@@ -116,7 +121,7 @@ export const actions = {
         }
     },
     updateState(store, payload) {
-        console.log("[BlockHub][Marketplace] Updating store...")
+        //console.log("[BlockHub][Marketplace] Updating store...")
 
         updateState(store.state)
 
@@ -172,9 +177,9 @@ export const actions = {
 }
 
 export const mutations = {
-    updateState(s, payload) {
+    updateState(state, payload) {
         for (let x in payload) {
-            s[x] = payload[x]
+            Vue.set(state, x, payload[x])
         }
     },
     setEditorMode(state, payload) {

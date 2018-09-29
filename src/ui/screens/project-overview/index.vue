@@ -257,7 +257,7 @@
                         <div class="row tab-pane fade active show" id="overview" role="tabpanel"
                              aria-labelledby="overview-tab">
                             <div class="col-md-7 col-xl-8">
-                                <c-screen-gallery></c-screen-gallery>
+                                <c-screen-gallery :items="project.images.preview"></c-screen-gallery>
 
                                 <div class="editor-container">
                                     <div class="editor" v-if="editing">

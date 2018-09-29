@@ -63,10 +63,6 @@
             'c-pagination': (resolve) => require(['@/ui/components/pagination'], resolve),
             'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid'], resolve)
         },
-        data() {
-            return {
-            }
-        },
         computed: {
             collection: function () {
                 return this.$store.state.marketplace.collections[this.id - 1]

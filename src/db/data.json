@@ -3,13 +3,14 @@
         "signed_in": false,
         "loading": false,
         "connection": {
+            "auto": true,
             "internet": false,
-            "datasource": true,
-            "operator": true,
-            "ethereum": true,
+            "datasource": false,
+            "operator": false,
+            "ethereum": false,
             "status": {
                 "code": null,
-                "message": "Establishing connection..."
+                "message": "Launching..."
             }
         },
         "ethereum": {
@@ -60,20 +61,6 @@
                 }
             }
         ],
-        "curator_reviews": [],
-        "product_news": [],
-        "trending_projects": [],
-        "main_banner": {
-            "img": {
-                "src": "https://d2q63o9r0h0ohi.cloudfront.net/images/kobolds-and-catacombs/header-bg-backup-337031b146d6540bc3d2513f0fb11daa966398f512db7163c7e819120a62b2b17c2abaa893cfcef5c14e1f4a696ce45fa8d2e4d36a987029e563b449b402a115.jpg",
-                "position": "center"
-            },
-            "logo": {
-                "src": "https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png",
-                "position": "left bottom",
-                "size": "lg"
-            }
-        },
         "active_modal": null,
         "account": {
             "private_key": "",
@@ -295,12 +282,14 @@
         },
         "current_ethereum_network": "local",
         "simulator_mode": false,
-        "desktop_mode": false,
+        "desktop_mode": null,
         "developer_mode": false,
         "editor_mode": "viewing",
         "selected_product": null,
         "first_product": true,
         "frontpage_product": {},
+        "product_news": [],
+        "trending_projects": [],
         "new_products": [],
         "sale_products": [],
         "upcoming_products": [],
@@ -310,6 +299,18 @@
         "assets": [],
         "products": [],
         "collections": [],
+        "curator_reviews": [],
+        "main_banner": {
+            "img": {
+                "src": "https://d2q63o9r0h0ohi.cloudfront.net/images/kobolds-and-catacombs/header-bg-backup-337031b146d6540bc3d2513f0fb11daa966398f512db7163c7e819120a62b2b17c2abaa893cfcef5c14e1f4a696ce45fa8d2e4d36a987029e563b449b402a115.jpg",
+                "position": "center"
+            },
+            "logo": {
+                "src": "https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png",
+                "position": "left bottom",
+                "size": "lg"
+            }
+        },
         "flags": [
             {
                 "key": "COLLECTIONS",

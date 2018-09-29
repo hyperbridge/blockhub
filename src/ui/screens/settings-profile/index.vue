@@ -16,9 +16,6 @@
 export default {
     components: {
         'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
-    },
-    data() {
-        return {}
     }
 }
 </script>

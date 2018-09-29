@@ -28,10 +28,6 @@
             'c-collection-item': (resolve) => require(['@/ui/components/collection/item'], resolve),
             'c-pagination': (resolve) => require(['@/ui/components/pagination'], resolve)
         },
-        data() {
-            return {
-            }
-        },
         computed:{
             collections: function () {
                 return this.$store.state.marketplace.collections

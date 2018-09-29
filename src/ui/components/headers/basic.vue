@@ -297,17 +297,6 @@ export default {
         padding: 0;
         z-index: 100;
         filter: drop-shadow(0 0px 15px rgba(48, 49, 76, 1));
-        transition: opacity 0.5s;
-        &.app-header--loader {
-            z-index: 101;
-            opacity: 1;
-            clip: rect(0px, 0vw, 200px, 0px);
-            transition: clip 8s;
-
-            &.app-header--loading {
-                clip: rect(0px, 100vw, 200px, 0px);
-            }
-        }
 
         a {
             color: #fff;

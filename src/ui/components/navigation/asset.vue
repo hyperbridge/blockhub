@@ -25,9 +25,6 @@
             'c-sidebar-menu-link': (resolve) => require(['@/ui/components/sidebar-menu/menu_item'], resolve),
             'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve)
-        },
-        data() {
-            return {}
         }
     }
 </script>

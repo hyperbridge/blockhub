@@ -90,10 +90,6 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'home',
-  data() {
-    return {
-    }
-  },
   computed: {
     product() {
       return this.$store.state.marketplace.products ? this.$store.state.marketplace.products['5'] : {}

@@ -5,7 +5,7 @@
                 slot="title"
                 class="mb-0"
                 :headingTabs="[
-                    { title: 'Top Selling', category: 'top_selling_products' },
+                    { title: 'Top Games', category: 'top_selling_products' },
                     { title: 'New Releases', category: 'new_products' },
                     { title: 'Upcoming', category: 'upcoming_products' }
                 ]"
@@ -24,7 +24,7 @@
                     />
                 </template>
             </c-heading-bar>
-            <div class="product-grid__filters">
+            <div class="product-grid__filters align-items-center">
                 <div class="d-flex align-items-center">
                     <c-dropdown id="products-genres" name="Filter by Genre" :showBg="true" class="product-genre">
                         <div class="product-genre__content">
@@ -116,7 +116,7 @@
                 itemBg="transparent"
             />
             <div v-else-if="filtersActive">
-                <p>No products were found for your filters</p>
+                <p>No products were found using these filters. Want to <c-button status="plain">Check for updates</c-button>?</p>
                 <c-button
                     status="info"
                     size="md"
@@ -125,7 +125,7 @@
                 >Clear filters</c-button>
             </div>
             <p v-else>
-                No products were found
+                Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?
             </p>
             <c-content-navigation />
         </c-block>
@@ -188,7 +188,7 @@
             filteredProducts() {
                 const { property, asc } = this.sortBy;
                 const sortDir = dir => asc ? dir : dir * -1;
-                return this.products
+                return this.$store.state.marketplace[this.category]
                     .filter(product =>
                         product.name.toLowerCase().includes(this.phrase.toLowerCase())
                     )
@@ -204,7 +204,7 @@
                     );
             },
             availableGenres() {
-                return this.products.reduce((tags, product) => {
+                return this.$store.state.marketplace[this.category].reduce((tags, product) => {
                     product.developer_tags.forEach(tag => {
                         if (!tags.includes(tag)) tags.push(tag);
                     });

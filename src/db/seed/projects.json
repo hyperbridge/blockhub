@@ -3,7 +3,9 @@
         "id": "1",
         "name": "Gym With Tim",
         "system_tags": [],
-        "images": {},
+        "images": {
+            "preview": []
+        },
         "author": "0x0",
         "author_tags": [
             "lifestyle",
@@ -228,7 +230,9 @@
         "id": "2",
         "name": "Blockcraft",
         "system_tags": [],
-        "images": {},
+        "images": {
+            "preview": []
+        },
         "author": "0x0",
         "author_tags": [
             "lifestyle",
@@ -249,7 +253,9 @@
         "id": "3",
         "name": "Lodge Builder 2000",
         "system_tags": [],
-        "images": {},
+        "images": {
+            "preview": []
+        },
         "author": "0x0",
         "author_tags": [
             "lifestyle",

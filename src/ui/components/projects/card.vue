@@ -1,5 +1,5 @@
 <template>
-    <div class="project-card__item" :class="customClass">
+    <div class="project-card__item" :class="customClass" v-if="project">
         <div class="head" v-if="project.game">
             <div class="img">
                 <img :src="project.game.img"/>
