@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { normalize } from 'normalizr'
 import schema from './schema'
 import * as Ethereum from '../../framework/ethereum'
@@ -9,21 +10,18 @@ let rawData = {}
 
 export let state = null
 
-const updateState = () => {
+const updateState = (savedData, updatedState = {}) => {
     rawData = {
         ...rawData,
-        ...db.network.config.data[0]
+        ...savedData,
+        ...updatedState
     }
 
     const normalizedData = normalize(rawData, {
     })
 
-    state = {
-        ...rawData
-    };
+    state = { ...rawData, ...normalizedData.entities }
 };
-
-updateState()
 
 export const getters = {
     privileges() {
@@ -37,8 +35,12 @@ export const actions = {
     init(store, payload) {
         console.log('[BlockHub] Network connecting...')
 
-        store.state.connection.status.code = null
-        store.state.connection.status.message = "Establishing connection..."
+        updateState(db.network.config.data[0], store.state)
+
+        state.connection.status.code = null
+        state.connection.status.message = "Establishing connection..."
+
+        store.commit('updateState', state)
 
         store.dispatch('checkInternetConnection')
         store.dispatch('checkEthereumConnection')
@@ -52,7 +54,7 @@ export const actions = {
     updateState(store, payload) {
         console.log('[BlockHub][Marketplace] Updating store...')
 
-        updateState()
+        updateState(store.state)
 
         store.commit('updateState', state)
     },
@@ -204,9 +206,9 @@ export const actions = {
 }
 
 export const mutations = {
-    updateState(s, payload) {
+    updateState(state, payload) {
         for (let x in payload) {
-            s[x] = payload[x]
+            Vue.set(state, x, payload[x])
         }
     },
     signIn(state, payload) {
@@ -239,6 +241,6 @@ export const mutations = {
         state.active_modal = payload
     },
     UPDATE_CLIENT_SETTINGS (state, property) {
-        state.account.settings.client[property] = !state.account.settings.client[property];
+        Vue.set(state.account.settings.client, property, !state.account.settings.client[property])
     }
 }

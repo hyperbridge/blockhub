@@ -24,9 +24,11 @@ const updateState = (savedData, updatedState = {}) => {
         upcoming_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['upcoming'] } }) : [],
         trending_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['trending'] } }) : [],
         top_selling_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }) : [],
-        special_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : [],
-        desktop_mode: rawData.desktop_mode != null ? rawData.desktop_mode : (window && window.process && window.process.type)
+        special_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : []
     }
+
+    if (rawData.desktop_mode == null)
+        rawData.desktop_mode = window.isElectron
 
     const normalizedData = normalize(rawData, {
         assets: [schema.asset],
@@ -40,10 +42,8 @@ const updateState = (savedData, updatedState = {}) => {
         special_products: [schema.product]
     })
 
-    state = { ...rawData, ...normalizedData.entities }
+    state = { ...rawData, ...normalizedData.entities } // ...normalizedData.result, 
 }
-
-updateState(db.marketplace.config.data[0])
 
 const sortDir = (dir, asc) => asc ? dir : dir * -1;
 
@@ -103,9 +103,7 @@ export const actions = {
     init(store, payload) {
         console.log("[BlockHub][Marketplace] Initializing...")
 
-        store.state.desktop_mode = window.isElectron
-
-        updateState(store.state, {})
+        updateState(db.marketplace.config.data[0], store.state)
 
         store.commit('updateState', state)
     },
