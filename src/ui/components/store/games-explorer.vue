@@ -127,7 +127,7 @@
             <p v-else>
                 Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?
             </p>
-            <c-content-navigation />
+            <c-content-navigation v-if="filteredProducts.length" />
         </c-block>
     </div>
 </template>
