@@ -82,36 +82,6 @@
                             <c-content-navigation v-if="assets.length" />
                         </c-block>
                     </div>
-                    <div class="col-12 margin-bottom-30 d-none">
-                        <c-heading-bar
-                            name="Trending Projects"
-                            :showArrows="false"
-                            :showBackground="false"
-                        />
-                        <div class="img_slider w-100">
-                            <div
-                                class="owl-carousel"
-                                ref="rangeSlider"
-                                data-nav-dots="false"
-                                data-nav-arrow="true"
-                                data-items="4"
-                                data-sm-items="1"
-                                data-md-items="3"
-                                data-lg-items="4"
-                                data-loop="true"
-                                data-autoplay="false"
-                                v-if="trending_projects.length"
-                            >
-                                <c-projects-card
-                                    v-for="(project, index) in trending_projects"
-                                    :key="index"
-                                    :project="project"
-                                />
-
-                            </div>
-                            <p v-if="!trending_projects.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
-                        </div>
-                    </div>
                 </div>
 
                 <template  v-for="(item, index) in sliced" v-if="sliced">
@@ -205,7 +175,7 @@
                                         <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown=""/>
                                     </template>
                                 </c-heading-bar>
-                                <div class="filter-blk d-flex justify-content-between align-items-center">
+                                <div class="filter-blk d-flex justify-content-between align-items-center margin-bottom-20">
                                     <div class="d-inline-flex align-items-center">
                                         <c-dropdown id="test2" name="Filter by Genre" :showBg="true">
                                             <a href="#3">RPG</a>
