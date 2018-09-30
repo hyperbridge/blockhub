@@ -178,8 +178,8 @@
                             <c-switch size="sm" :value="true" label="I agree with the terms" />
                         </div>
                         <div>
-                            <c-button text="Cancel" variant="danger" @click="" c_class="mx-1" icon="fas fa-times" icon_position="right" />
-                            <c-button text="Next" variant="success" @click="toggleSteps" c_class="mx-1" icon="fas fa-arrow-right" icon_position="right" />
+                            <c-button status="danger" @click="" c_class="mx-1">Cancel</c-button>
+                            <c-button variant="success" @click="toggleSteps">Next</c-button>
                         </div>
                     </div>
                 </c-tab>
@@ -295,8 +295,8 @@
                     </div>
                     <div slot="footer" class="d-flex align-items-center justify-content-end">
                         <div>
-                            <c-button text="Cancel" variant="danger" @click="" c_class="mx-1" icon="fas fa-times" icon_position="right" />
-                            <c-button text="Complete" variant="success" @click="" c_class="mx-1" icon="fas fa-check" icon_position="right" />
+                            <c-button status="danger" @click="">Cancel</c-button>
+                            <c-button variant="success" @click="">Complete</c-button>
                         </div>
                     </div>
                 </c-tab>
