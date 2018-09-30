@@ -19,6 +19,13 @@ import seed from '../db/seed'
 
 Vue.use(Vuex);
 
+if (!window.BlockHub)
+    window.BlockHub = {}
+
+window.BlockHub.ChaosMonkey = ChaosMonkey
+window.BlockHub.Ethereum = Ethereum
+window.BlockHub.PeerService = PeerService
+
 // Initial settings
 // Disable peer relaying by default (until we're somewhat stable)
 // Disable chaos monkey by default (until we're somewhat stable)
@@ -216,6 +223,18 @@ export let initializer = () => {
 
         let simulatorInitialized = false
 
+        window.BlockHub.importSeedData = () => {
+            store.state.network.account.notifications = seed.notifications
+            store.state.network.account.wallets = seed.wallets
+            store.state.marketplace.trending_projects = seed.trending_projects
+            store.state.marketplace.curator_reviews = seed.curator_reviews
+            store.state.marketplace.product_news = seed.product_news
+            store.state.marketplace.products = seed.products
+            store.state.marketplace.assets = seed.assets
+            store.state.marketplace.collections = seed.collections
+            store.state.funding.projects = seed.projects
+        }
+
         const monitorSimulatorMode = () => {
             if (!store.state.marketplace.simulator_mode) {
                 simulatorInitialized = false
@@ -308,14 +327,8 @@ export let initializer = () => {
         monitorSimulatorMode()
         monitorPathState()
 
-        if (!window.BlockHub)
-            window.BlockHub = {}
-
         window.BlockHub.store = store
         window.BlockHub.db = db
-        window.BlockHub.ChaosMonkey = ChaosMonkey
-        window.BlockHub.Ethereum = Ethereum
-        window.BlockHub.PeerService = PeerService
     })
 }
 

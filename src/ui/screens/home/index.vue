@@ -16,7 +16,11 @@
                                     <c-button @click="toggleDesktopMode()">Desktop Mode is {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
                                     <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button>
                                     <c-button @click="toggleDeveloperMode()">Developer Mode is {{ developer_mode ? 'ON' : 'OFF' }}</c-button>
-                                    <c-button @click="clearSimulatorData()">Clear Data</c-button>
+                                    <br /><br />
+                                </div>
+                                <div>
+                                    <c-button @click="importSeedData()">Import Seed Data</c-button>
+                                    <c-button @click="clearSeedData()">Clear All Data</c-button>
                                     <br /><br />
                                 </div>
                                 <div>
@@ -522,7 +526,10 @@ export default {
         toggleSimulator() {
             this.$store.commit('marketplace/setSimulatorMode', !this.$store.state.marketplace.simulator_mode)
         },
-        clearSimulatorData() {
+        importSeedData() {
+            window.BlockHub.importSeedData()
+        },
+        clearSeedData() {
             this.$store.state.network.account.notifications = []
             this.$store.state.marketplace.trending_projects = []
             this.$store.state.marketplace.curator_reviews = []
