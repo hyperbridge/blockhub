@@ -1,9 +1,9 @@
 <template>
     <div class="heading-bar">
-        <h3 class="heading-bar__name" :class="{ 'heading-bar__name--with-bg': showBackground }" v-if="name" jest="name">
+        <h3 class="heading-bar__name margin-right-40" :class="{ 'heading-bar__name--with-bg': showBackground }" v-if="name" jest="name">
             {{ name }}
         </h3>
-        <div class="heading-bar__tabs" v-else>
+        <div class="heading-bar__tabs margin-right-40" v-else>
             <slot name="heading-tabs">
                 <a
                     v-for="(tab, index) in headingTabs"
@@ -66,6 +66,9 @@ export default {
         justify-content: space-between;
         border-bottom: 2px solid #fff;
         margin-bottom: 20px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
     }
 
     .heading-bar__name {

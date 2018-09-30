@@ -1004,7 +1004,7 @@ storiesOf('Popups', module)
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is warning popup</h3>
                 <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" @close="close" ref="modal" title="Warning" type="warning" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                <c-popup :activated="modalActive" @onClose="close" ref="modal" title="Warning" type="warning" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
                 Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
@@ -3288,7 +3288,7 @@ storiesOf('Contribute', module)
                 value: ''
             }
         },
-        template: `<div class="p-4" style="width: 400px"><c-contribute-form v-model="value" defaultValue="15" /> <div class="mt-4 text-white">Value - {{ value }}</div></div>`
+        template: `<div class="p-4" style="width: 400px"><c-contribute-form v-model="value" :defaultValue="15" /> <div class="mt-4 text-white">Value - {{ value }}</div></div>`
     }))
     .add('pledge', () => ({
         components:{
@@ -3331,6 +3331,16 @@ storiesOf('Contribute', module)
                     </div>`
     }))
 
+import CookiePolicy from '@/ui/components/cookie-policy'
+storiesOf('Cookie policy', module)
+    .add('default', () => ({
+        components:{
+            'c-cookie-policy': CookiePolicy
+        },
+        template: `<div class="p-5 position-relative" style="height: 500px;width: 700px">
+                        <c-cookie-policy />
+                    </div> `
+    }))
 
 
 /*

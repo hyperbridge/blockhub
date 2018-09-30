@@ -4,7 +4,7 @@
        :href="`/#/asset/${item.id}`"
     >
         <div class="thumb">
-            <img
+            <c-img
                 :src="item.image"/>
         </div>
         <div class="info">

@@ -73,8 +73,10 @@
         box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
         text-decoration: none;
         cursor: pointer;
-        &.link{
+        &.plain{
             box-shadow: unset;
+            margin: 0 2px;
+            padding: 0;
         }
         &:active,
         &:focus {

@@ -76,7 +76,8 @@
                 "client": {
                     "animations": true,
                     "autoplay": true,
-                    "pagination": true
+                    "pagination": true,
+                    "cookie_policy_accepted": false
                 }
             }
         },

@@ -208,6 +208,11 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/settings-debug'], resolve)
         },
         {
+            path: '/settings/game-scanner',
+            name: 'Game Scanner',
+            component: (resolve) => require(['@/ui/screens/settings-game-scanner'], resolve)
+        },
+        {
             path: '/developer',
             name: 'Developer Area',
             component: (resolve) => require(['@/ui/screens/developer'], resolve)

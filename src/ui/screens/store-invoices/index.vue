@@ -44,7 +44,7 @@
                                     <div class="col-7">
                                         
                                         <div class="user user--rounded user--bordered">
-                                            <img src="http://via.placeholder.com/128x128">
+                                            <c-img src="http://via.placeholder.com/128x128" />
                                             <div class="user__name">
                                                 <strong>Dmitry Ivaniuk</strong>
                                             </div>
@@ -99,7 +99,7 @@
                                     <div class="col-7">
                                         
                                         <div class="user user--rounded user--bordered">
-                                            <img src="http://via.placeholder.com/128x128">
+                                            <c-img src="http://via.placeholder.com/128x128" />
                                             <div class="user__name">
                                                 <strong>Francisco Dero</strong>
                                             </div>
@@ -154,7 +154,7 @@
                                     <div class="col-7">
                                         
                                         <div class="user user--rounded user--bordered">
-                                            <img src="http://via.placeholder.com/128x128">
+                                            <c-img src="http://via.placeholder.com/128x128" />
                                             <div class="user__name">
                                                 <strong>Dmitry Ivaniuk</strong>
                                             </div>
@@ -209,7 +209,7 @@
                                     <div class="col-7">
                                         
                                         <div class="user user--rounded user--bordered">
-                                            <img src="http://via.placeholder.com/128x128">
+                                            <c-img src="http://via.placeholder.com/128x128" />
                                             <div class="user__name">
                                                 <strong>Alex Donorsky</strong>
                                             </div>
@@ -264,7 +264,7 @@
                                     <div class="col-7">
                                         
                                         <div class="user user--rounded user--bordered">
-                                            <img src="http://via.placeholder.com/128x128">
+                                            <c-img src="http://via.placeholder.com/128x128" />
                                             <div class="user__name">
                                                 <strong>Andrew Conor</strong>
                                             </div>
@@ -319,7 +319,7 @@
                                     <div class="col-7">
                                         
                                         <div class="user user--rounded user--bordered">
-                                            <img src="http://via.placeholder.com/128x128">
+                                            <c-img src="http://via.placeholder.com/128x128" />
                                             <div class="user__name">
                                                 <strong>Julia Comporova</strong>
                                             </div>
@@ -374,7 +374,7 @@
                                     <div class="col-7">
                                         
                                         <div class="user user--rounded user--bordered">
-                                            <img src="http://via.placeholder.com/128x128">
+                                            <c-img src="http://via.placeholder.com/128x128" />
                                             <div class="user__name">
                                                 <strong>Alex Donorsky</strong>
                                             </div>
@@ -429,7 +429,7 @@
                                     <div class="col-7">
                                         
                                         <div class="user user--rounded user--bordered">
-                                            <img src="http://via.placeholder.com/128x128">
+                                            <c-img src="http://via.placeholder.com/128x128" />
                                             <div class="user__name">
                                                 <strong>Dmitry Ivaniuk</strong>
                                             </div>
@@ -484,7 +484,7 @@
                                     <div class="col-7">
                                         
                                         <div class="user user--rounded user--bordered">
-                                            <img src="http://via.placeholder.com/128x128">
+                                            <c-img src="http://via.placeholder.com/128x128" />
                                             <div class="user__name">
                                                 <strong>Francisco Dero</strong>
                                             </div>
@@ -539,7 +539,7 @@
                                     <div class="col-7">
                                         
                                         <div class="user user--rounded user--bordered">
-                                            <img src="http://via.placeholder.com/128x128">
+                                            <c-img src="http://via.placeholder.com/128x128" />
                                             <div class="user__name">
                                                 <strong>Dmitry Ivaniuk</strong>
                                             </div>
@@ -594,7 +594,7 @@
                                     <div class="col-7">
                                         
                                         <div class="user user--rounded user--bordered">
-                                            <img src="http://via.placeholder.com/128x128">
+                                            <c-img src="http://via.placeholder.com/128x128" />
                                             <div class="user__name">
                                                 <strong>Julia Comporova</strong>
                                             </div>
@@ -649,7 +649,7 @@
                                     <div class="col-7">
                                         
                                         <div class="user user--rounded user--bordered">
-                                            <img src="http://via.placeholder.com/128x128">
+                                            <c-img src="http://via.placeholder.com/128x128" />
                                             <div class="user__name">
                                                 <strong>Dmitry Ivaniuk</strong>
                                             </div>

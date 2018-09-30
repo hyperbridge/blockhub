@@ -1,7 +1,7 @@
 <template>
     <div class="review">
         <div class="review__header">
-            <img :src="review.author.img" class="review__author-img"/>
+            <c-img :src="review.author.img" class="review__author-img"/>
             <div class="review__author">
                 <h5 class="review__author-name">{{ review.author.name }}</h5>
                 <span class="review__author-date">{{ review.date | timeAgo }}</span>

@@ -1,6 +1,6 @@
 <template>
     <div class="curator-review">
-        <img :src="review.game.img" class="curator-review__img"/>
+        <c-img :src="review.game.img" class="curator-review__img"/>
         <div class="curator-review__header">
             <c-author :author="review.author"/>
             <span style="font-size: 22px">
@@ -22,7 +22,7 @@
                 :key="index"
                 class="sub-review"
             >
-                <img :src="sub_review.game.img" class="sub-review__img"/>
+                <c-img :src="sub_review.game.img" class="sub-review__img"/>
                 <div class="sub-review__details">
                     <h5 class="margin-bottom-5">
                         <a href="#" class="text-white font-weight-bold">{{ sub_review.game.title }}</a>
@@ -71,6 +71,7 @@ export default {
     margin: 5px;
     border-radius: 4px;
     color: #fff;
+    min-width: 275px;
     &__ {
         &img {
             width: 100%;
@@ -94,6 +95,9 @@ export default {
             font-weight: bold;
             color: #fff;
         }
+    }
+    p{
+        white-space: normal;
     }
 }
 

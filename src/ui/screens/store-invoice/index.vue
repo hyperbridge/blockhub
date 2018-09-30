@@ -136,7 +136,7 @@
                                 <h4>John Doenson</h4>
                                 <p class="subtitle margin-bottom-20"><small>Director in THE RW</small></p>
                                 
-                                <p><img src="/static/img/logo.be79dbc.svg" alt="Signature" width="150" /></p>
+                                <p><c-img src="/static/img/logo.be79dbc.svg" alt="Signature" width="150" /></p>
                             </div>
                             
                         </div>

@@ -1,25 +1,23 @@
 <template>
 
-    <div class="card invert traded-assets">
-        <div class="card-body" v-if="items.length > 0">
-            <h2 class="title">Frequently Traded Assets</h2>
+    <c-block title="Traded Assets">
+        <div v-if="items.length > 0">
             <div class="traded-assets__filter">
                 <slot name="filter"></slot>
             </div>
             <ul class="traded-assets__list">
                 <li class="traded-assets__item" v-for="(item, index) in items" :key="index">
                     <a :href="`/#/asset/${item.id}`">
-                        <img :src="item.image_data" />
+                        <c-img :src="item.image_data" />
                     </a>
                 </li>
             </ul>
-            <a :href="assets_url" class="btn btn-outline-white">Go To Assets</a>
+            <a :href="assetsUrl" class="btn btn-outline-white">Go To Assets</a>
         </div>
-        <div class="card-body" v-else>
-            <h2 class="title">Frequently Traded Assets</h2>
+        <div v-else>
             <h4>No frequently traded assets yet.</h4>
         </div>
-    </div>
+    </c-block>
 
 </template>
 
@@ -28,7 +26,10 @@ export default {
     name: 'frequently-traded-assets',
     props: {
         items: Array,
-        assets_url: String
+        assetsUrl: String
+    },
+    components: {
+        'c-block': (resolve) => require(['@/ui/components/block'], resolve),
     }
 }
 </script>

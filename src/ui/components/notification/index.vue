@@ -8,7 +8,7 @@
             v-if="show"
         >
             <div class="title">
-                <h5 class="text-left">
+                <h5 class="text-left" @click.self="$emit('showPopup')">
                     <i :class="`fas fa-${notif_icon}`"></i>
                     {{ notification.title }}
                     <div class="close" @click="actionOnClose()">
@@ -34,15 +34,13 @@
         },
         data() {
             return {
-                show: true
+                show: true,
             }
         },
         methods: {
             actionOnClose() {
-                // console.log(this)
-                // this.$el.classList.add("notifi-remove");
                 this.show = false;
-            }
+            },
         },
         computed: {
             notif_icon() {

@@ -1,7 +1,7 @@
 <template>
     <div class="milestones-list__item">
         <div class="thumb">
-            <img :src="milestone.img"/>
+            <c-img :src="milestone.img"/>
         </div>
         <div class="info">
             <div class="head">

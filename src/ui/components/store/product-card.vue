@@ -1,7 +1,7 @@
 <template>
     <div class="product-grid__item">
         <div class="card-body padding-0">
-            <a :href="`/#/product/${product.id}`"><img class="card-img-top" :src="product.images.medium_tile" /></a>
+            <a :href="`/#/product/${product.id}`"><c-img class="card-img-top" :src="product.images.medium_tile" /></a>
             <h4><a :href="`/#/product/${product.id}`">{{ product.name }}</a></h4>
             <p class="card-text" hidden>{{ product.short_description }} </p>
             <c-tags :tags="product.developer_tags.slice(0,3)" />
@@ -34,6 +34,8 @@ export default {
         border: 1px solid rgba(70, 70, 70, 0.5);
         padding: 7px;
         border-radius: 5px;
+        display: flex;
+        flex-direction: column;
         &:hover {
             will-change: transform;
             transform: perspective(300px) rotateX(0deg) rotateY(0deg) scale(1.05);
@@ -54,6 +56,7 @@ export default {
             padding: 13px 0;
         }
         .product-tags {
+            margin-top: auto;
             margin-bottom: 0;
         }
     }

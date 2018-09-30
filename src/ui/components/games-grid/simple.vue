@@ -8,7 +8,7 @@
         >
             <div class="product-grid__item">
                 <div class="card-body padding-0">
-                    <a :href="`/#/product/${item.id}`"><img class="card-img-top" :src="item.images.medium_tile" /></a>
+                    <a :href="`/#/product/${item.id}`"><c-img class="card-img-top" :src="item.images.medium_tile" /></a>
                     <h4><a :href="`/#/product/${item.id}`">{{ item.name }}</a></h4>
                     <p class="card-text" hidden>{{ item.short_description }} </p>
                     <c-tags :tags="item.author_tags"></c-tags>

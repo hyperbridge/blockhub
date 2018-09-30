@@ -5,10 +5,10 @@
         </h4>
         <div class="assets-grid__item-container" v-for="(item, index) in list" :key="index" v-else>
             <div class="assets-grid__item">
-                <img :src="item.image" />
+                <c-img :src="item.image" />
                 <div class="assets-grid__item-info">
                     <div class="assets-grid__item-thumb">
-                        <img :src="item.image" />
+                        <c-img :src="item.image" />
                     </div>
                     <div class="assets-grid__item-tooltip">
                         <h5>{{ item.name }}</h5>

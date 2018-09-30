@@ -19,7 +19,7 @@
                                     class="licenses-list__item"
                                 >
                                     <div class="icon">
-                                        <img :src="license.game.img" />
+                                        <c-img :src="license.game.img" />
                                     </div>
                                     <div class="name">
                                         <strong>{{ license.game.name }}</strong>
