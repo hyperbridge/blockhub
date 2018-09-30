@@ -2,20 +2,23 @@
     <div class="navigation" id="navigation-default">
 
         <c-sidebar-menu title="STORE" sub_title="General" mClass="margin-bottom-20">
-            <c-sidebar-menu-link url="/#/" link_text="Home" />
-            <c-sidebar-menu-link url="/#/curators" link_text="Browse Curators" />
-            <c-sidebar-menu-link url="/#/collections" link_text="Browse Collections" />
-            <c-sidebar-menu-link url="/#/items" link_text="Browse Items" />
+            <c-sidebar-menu-link
+                v-for="page in ['Home', 'Curators', 'Collections', 'Items']"
+                :key="page"
+                :to="{ name: page }"
+            >
+                {{ page === 'Home' ? page : 'Browse ' + page }}
+            </c-sidebar-menu-link>
         </c-sidebar-menu>
 
         <c-sidebar-menu sub_title="Browse By Genre" sub_icon="fas fa-gamepad" mClass="margin-bottom-20">
-            <c-sidebar-menu-link url="#3" @click="filter({genre: 'action'})" link_text="Action" />
-            <c-sidebar-menu-link url="#3" @click="filter({genre: 'adventure'})" link_text="Adventure" />
-            <c-sidebar-menu-link url="#3" @click="filter({genre: 'rpg'})" link_text="RPG" />
-            <c-sidebar-menu-link url="#3" @click="filter({genre: 'racing'})" link_text="Racing" />
-            <c-sidebar-menu-link url="#3" @click="filter({genre: 'fighting'})" link_text="Fighting" />
-            <c-sidebar-menu-link url="#3" @click="filter({genre: 'vr'})" link_text="VR" />
-            <c-sidebar-menu-link url="#3" aClass="font-weight-bold" link_text="MORE ..." />
+            <c-sidebar-menu-link
+                v-for="param in ['Action', 'Adventure', 'RPG', 'Co-op', 'Multiplayer', 'Sports']"
+                :key="param"
+                :to="{ name: 'Search Page', query: { tags: param } }"
+            >
+                {{ param }}
+            </c-sidebar-menu-link>
         </c-sidebar-menu>
 
 

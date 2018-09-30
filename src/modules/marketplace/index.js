@@ -5,9 +5,9 @@ import MarketplaceProtocol from 'marketplace-protocol'
 import * as ethereum from '@/framework/ethereum'
 import * as db from '@/db'
 
-let rawData = {}
+let rawData = {};
 
-export let state = null
+export let state = {};
 
 const updateState = (savedData, updatedState = {}) => {
     rawData = {
@@ -49,22 +49,25 @@ const sortDir = (dir, asc) => asc ? dir : dir * -1;
 
 export const getters = {
     assetsArray: state => Array.isArray(state.assets) ? state.assets : Object.values(state.assets),
-    productsArray: state => Array.isArray(state.products) ? state.products : Object.values(state.products),
+    productsArray: state => state.products instanceof Array ? state.products : Object.values(state.products),
+    getProductsQuery: state => query => db.marketplace.products.find(query),
     productsTags: (state, getters) => getters.productsArray
-        .reduce((tags, product) => {
-            product.developer_tags.forEach(tag => {
-                if (!tags.includes(tag)) tags.push(tag);
-            });
-            return tags;
-        }, []).sort()
+        .reduce((tags, product) => [
+            ...tags,
+            ...product.developer_tags
+                .filter(tag =>
+                    !tags.includes(tag)
+                )
+        ], []).sort()
     ,
     systemTags: (state, getters) => getters.productsArray
-        .reduce((tags, product) => {
-            product.system_tags.forEach(tag => {
-                if (!tags.includes(tag)) tags.push(tag);
-            });
-            return tags;
-        }, []).sort()
+        .reduce((tags, product) => [
+            ...tags,
+            ...product.system_tags
+                .filter(tag =>
+                    !tags.includes(tag)
+                )
+        ], []).sort()
     ,
     productsLanguages: (state, getters) => getters.productsArray
         .reduce((languages, product) => [

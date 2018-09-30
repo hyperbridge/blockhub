@@ -8,7 +8,6 @@
                             <div class="search__main">
                                 <c-input-searcher
                                     v-model="phrase"
-                                    @input="search"
                                     placeholder="Search for games"
                                     aria-placeholder="Search for games"
                                 />
@@ -29,7 +28,12 @@
                                 class="search-filters__container"
                             >
                                 <div class="filter-box">
-                                    <h4>Specials:</h4>
+                                    <h4>
+                                        Specials:
+                                        <span v-show="selectedSpecials.length">
+                                            ({{ selectedSpecials.length }})
+                                        </span>
+                                    </h4>
                                     <c-checkbox
                                         v-for="(tag, index) in systemTags"
                                         :key="index"
@@ -40,11 +44,16 @@
                                     </c-checkbox>
                                 </div>
                                 <div class="filter-box">
-                                    <h4>Price range:</h4>
+                                    <h4>
+                                        Price range:
+                                        <span v-show="price.min && price.max">
+                                            ({{ price.min }} - {{ price.max }})
+                                        </span>
+                                    </h4>
                                     <p class="margin-top-20">Minimum:</p>
                                     <c-range-slider
                                         v-model.number="price.min"
-                                        :max="300"
+                                        :max="60"
                                     />
                                     <p class="margin-top-20">Maximum:</p>
                                     <c-range-slider
@@ -155,19 +164,25 @@
                             </div>
                         </transition>
                         <h3>Results</h3>
-                        <div class="results">
-                            <c-spinner v-if="isTyping"/>
-                            <p v-else-if="!results.length">
-                                No results were found for provided filters
-                            </p>
-                            <c-game-grid
-                                v-else
-                                :itemInRow="2"
-                                :showRating="false"
-                                :items="results"
-                                itemBg="transparent"
-                                showTime
-                            />
+                        <div class="results__container">
+                            <div class="results">
+                                <c-spinner v-if="isTyping"/>
+                                <div v-else-if="!results.length">
+                                    <p>No results were found for provided filters</p>
+                                    <c-button
+                                        @click="clearFilters()"
+                                        status="info"
+                                    >Clear filters</c-button>
+                                </div>
+                                <c-game-grid
+                                    v-else
+                                    :itemInRow="2"
+                                    :showRating="false"
+                                    :items="results"
+                                    itemBg="transparent"
+                                    showTime
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -192,34 +207,11 @@
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve),
             'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
             'c-list': (resolve) => require(['@/ui/components/list'], resolve),
+            'c-active-filters': (resolve) => require(['@/ui/components/search/active-filters'], resolve),
         },
         mixins: [debouncer],
         data() {
             return {
-                filters: {
-                    game_type: {
-                        simulator: {
-                            label: 'Simulator',
-                            value: false
-                        },
-                        action: {
-                            label: 'Action',
-                            value: true
-                        },
-                        real_time: {
-                            label: 'Real time',
-                            value: false
-                        },
-                        strategy: {
-                            label: 'Strategy',
-                            value: false
-                        },
-                        adventure: {
-                            label: 'Adventure',
-                            value: false
-                        }
-                    }
-                },
                 systemTags: [
                     { value: "featured", selected: false },
                     { value: "new", selected: false },
@@ -238,29 +230,63 @@
                     min: 0,
                     max: 0
                 },
-                expandFilters: false
+                expandFilters: false,
+                timeout2: 0
             }
         },
         methods: {
-            search(phrase) {
-                this.phrase = phrase;
-                if (!this.isTyping) this.isTyping = true;
-
+            search() {
                 this.debounce(() => {
-                    this.isTyping = false;
-                    this.results = this.getProductsByName(phrase);
-                }, 400);
+                    if (!this.isTyping) this.isTyping = true;
+                    if (this.filtersActive) {
+                        this.debounce(() => {
+                            this.isTyping = false;
+                            this.results = this.getProductsQuery(this.query);
+                        }, 150, 'timeout2');
+                    } else {
+                        this.isTyping = false;
+                        this.results = this.products;
+                    }
+                    this.$router.replace({ name: 'Search Page', query: this.urlQuery });
+                }, 500);
+            },
+            clearFilters() {
+                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price } = this;
+                if (phrase.length) this.phrase = '';
+                if (selectedSpecials.length) this.selectedSpecials.forEach(tag => tag.selected = false);
+                if (selectedGenres.length) this.selectedGenres.forEach(tag => tag.selected = false);
+                if (selectedLanguages.length) this.selectedLanguages.forEach(lang => lang.selected = false);
+                if (price.min || price.max) { this.price.min = 0; this.price.max = 0; };
             }
         },
         computed: {
             ...mapGetters({
-                getProductsByName: 'marketplace/getProductsByName',
+                getProductsQuery: 'marketplace/getProductsQuery',
                 products: 'marketplace/productsArray',
                 productsTags: 'marketplace/productsTags',
                 languages: 'marketplace/productsLanguages'
             }),
-            marketplace() {
-                return this.$store.state.marketplace;
+            query() {
+                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price } = this;
+                const query = {};
+                if (phrase.length) query['name'] = { '$eq': phrase };
+                if (selectedSpecials.length) query['system_tags'] = { '$contains': selectedSpecials.map(tag => tag.value) };
+                if (selectedGenres.length) query['developer_tags'] = { '$contains': selectedGenres.map(tag => tag.name) };
+                // if (selectedLanguages.length) query['language_support'] = {
+                //     '$contains': { name: selectedLanguages.map(lang => lang.name) }
+                // }
+                if (price.min || price.max) query['price'] = { '$between': [price.min, price.max | 300] };
+                return query;
+            },
+            searchingFilters() {
+                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price } = this;
+                return {
+                    phrase,
+                    selectedSpecials,
+                    selectedGenres,
+                    selectedLanguages,
+                    price
+                }
             },
             selectedGenres() {
                 return this.selectableTags.filter(tag => tag.selected);
@@ -278,16 +304,47 @@
                     this.price.max || this.price.min ||
                     this.selectedLanguages.length);
             },
-            filtered() {
-                return this.marketplace.products.filter(product => {
-                    // product.
-                })
+            urlQuery() {
+                const urlQuery = {};
+                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price } = this;
+                if (phrase.length) urlQuery.name = phrase;
+                if (price.min) urlQuery.priceMin = price.min;
+                if (price.max) urlQuery.priceMax = price.max;
+                if (selectedSpecials.length) urlQuery.specials = selectedSpecials.map(tag => tag.value);
+                if (selectedGenres.length) urlQuery.tags = selectedGenres.map(tag => tag.name);
+                if (selectedLanguages.length) urlQuery.langs = selectedLanguages.map(tag => tag.name);
+                return urlQuery;
             }
         },
         mounted() {
-            this.results = this.products;
-            this.selectableTags = this.productsTags.map(tag => ({ name: tag, selected: false }));
-            this.selectableLanguages = this.languages.map(lang => ({ name: lang, selected: false }));
+            if (!Object.keys(this.$route.query).length) {
+                this.results = this.products;
+            } else {
+                this.isTyping = true;
+                const { tags, langs, name, priceMin, priceMax, specials } = this.$route.query;
+
+                if (name) this.phrase = name;
+                if (priceMin) this.price.min = priceMin;
+                if (priceMax) this.price.max = priceMax;
+
+                this.selectableTags = this.productsTags.map(tag => {
+                    return {
+                        name: tag, selected: tags && tags.includes(tag) ? true : false
+                    }
+                });
+                this.selectableLanguages = this.languages.map(lang => ({
+                    name: lang, selected: langs && langs.includes(tag) ? true : false
+                }));
+                this.systemTags = this.systemTags.map(tag => ({
+                    ...tag, selected: specials && specials.includes(tag)
+                }));
+            }
+        },
+        watch: {
+            searchingFilters: {
+                handler: 'search',
+                deep: true
+            }
         },
         filters: {
             replaceLoDash(val) {
@@ -341,6 +398,9 @@
         flex-wrap: wrap;
     }
 
+    .results__container {
+        min-height: 800px;
+    }
     .results {
         display: flex;
         justify-content: center;
