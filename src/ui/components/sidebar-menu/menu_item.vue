@@ -23,12 +23,13 @@
     .item__link {
         color: #fff;
         font-size: 14px;
-        padding: 4px 0;
+        padding: 3px 0;
         text-decoration: none;
         display: block;
-        transition: transform 200ms ease-in-out;
+        transition: all 200ms ease-in-out;
+        opacity: .7;
         &:hover {
-            transform: translateX(10px);
+            opacity: 1;
         }
     }
 </style>
