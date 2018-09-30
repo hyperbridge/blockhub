@@ -20,7 +20,7 @@
                                 </div>
                                 <div>
                                     <c-button @click="importSeedData()">Import Seed Data</c-button>
-                                    <c-button @click="clearSeedData()">Clear All Data</c-button>
+                                    <c-button @click="resetSeedData()">Reset Seed Data</c-button>
                                     <br /><br />
                                 </div>
                                 <div>
@@ -29,6 +29,11 @@
                                     <c-button @click="$store.state.network.connection.datasource = !$store.state.network.connection.datasource">Datasource is {{ $store.state.network.connection.datasource ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
                                     <c-button @click="$store.state.network.connection.operator = !$store.state.network.connection.operator">Operator is {{ $store.state.network.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
                                     <c-button @click="$store.state.network.connection.ethereum = !$store.state.network.connection.ethereum">Ethereum is {{ $store.state.network.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <br /><br />
+                                </div>
+                                <div>
+                                    <c-button @click="saveSettings()">Save Settings</c-button>
+                                    <c-button @click="resetSettings()">Reset Settings</c-button>
                                     <br /><br />
                                 </div>
                                 <div v-if="desktop_mode">
@@ -529,11 +534,19 @@ export default {
         importSeedData() {
             window.BlockHub.importSeedData()
         },
-        clearSeedData() {
+        resetSeedData() {
             this.$store.state.network.account.notifications = []
             this.$store.state.marketplace.trending_projects = []
             this.$store.state.marketplace.curator_reviews = []
             this.$store.state.marketplace.product_news = []
+        },
+        saveSettings() {
+            window.BlockHub.saveDatabase()
+        },
+        resetSettings() {
+            this.$store.state.marketplace.desktop_mode = false
+            this.$store.state.network.signed_in = false
+            this.$store.state.marketplace.developer_mode = false
         },
         sendDesktopMessage() {
             if (!window.isElectron) {
