@@ -26,7 +26,7 @@
         </div>
 
         <div class="purchase-block__buttons-group">
-            <c-button status="success" :href="purchaseLink" icon="shopping-cart" size="lg" v-if="isReleased && price" @click="onClickPurchase">
+            <c-button status="custom" class="btn-outline-red" :href="purchaseLink" icon="shopping-cart" size="lg" v-if="isReleased && price" @click="onClickPurchase">
                 Proceed to Purchase
             </c-button>
 
@@ -193,6 +193,17 @@
                 outline: none;
                 box-shadow: none;
             }
+        }
+    }
+    .btn-outline-red{
+        background: transparent;
+        border: 1px solid #F75D5D;
+        padding: 8px 15px!important;
+        border-radius: 3px;
+        color: #F75D5D;
+        &:hover{
+            background: #F75D5D;
+            color: #30304b;
         }
     }
 </style>

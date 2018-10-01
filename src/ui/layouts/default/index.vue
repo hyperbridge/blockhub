@@ -10,11 +10,11 @@
         <!-- PAGE CONTENT WRAPPER -->
         <div class="page__content page__content-invert invert" id="page-content">
             <!-- PAGE ASIDE PANEL -->
-                <div class="page-aside invert left-sidebar" id="page-aside">
-                    <transition name="slideLeft" v-if="initialized">
-                        <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}`"></component>
-                    </transition>
-                </div>
+            <div class="page-aside invert left-sidebar" id="page-aside">
+                <!--<transition name="slideLeft" v-if="initialized">-->
+                <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}`"></component>
+                <!--</transition>-->
+            </div>
             <!-- //END PAGE ASIDE PANEL -->
 
             <slot v-if="is_connected"></slot>
@@ -323,7 +323,7 @@
                     vehicula.
                 </p>
             </c-popup>
-
+            
             <c-cookie-policy v-if="!desktop_mode" />
         </div>
         <!-- //END PAGE CONTENT -->
