@@ -53,6 +53,7 @@
                                     <p class="margin-top-20">Minimum:</p>
                                     <c-range-slider
                                         v-model.number="price.min"
+                                        :min="0"
                                         :max="60"
                                     />
                                     <p class="margin-top-20">Maximum:</p>

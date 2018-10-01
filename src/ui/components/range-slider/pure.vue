@@ -4,7 +4,7 @@
             class="range-slider__button"
             :style="{
                 left: `${percentages}%`,
-                transform: `translateX(${transform2})`
+                transform: `translateX(-${transform}px)`
             }"
         ></div>
         <div
@@ -23,43 +23,55 @@
         />
         <span
             class="range-slider__percentages"
-            :style="{ left: `calc(${percentages}% + 2px)`, transform: `translateX(${transform2})` }"
-        >{{ percentages }}</span>
+            :style="{ left: `calc(${percentages}% + 2px)`, transform: `translateX(-${transform}px)` }"
+        >{{ showPercentages ? percentagesSign(percentages) : value }}</span>
         <transition name="slide-in-top">
-            <span class="range-slider__range-min" v-show="percentages > 15">{{ min }}</span>
+            <span
+                class="range-slider__range-min"
+                v-show="percentages > 20"
+            >
+                {{ min }}
+            </span>
         </transition>
         <transition name="slide-in-top">
-            <span class="range-slider__range-max" v-show="percentages < 85">{{ max }}</span>
+            <span
+                class="range-slider__range-max"
+                v-show="percentages < (showPercentages ? 70 : 80)"
+            >
+                {{ max }}
+            </span>
         </transition>
     </div>
 </template>
 
 <script>
 export default {
+    name: 'range-slider',
     inheritAttrs: false,
     props: {
         min: {
-            type: Number,
+            type: [Number, String],
             default: 0
         },
         max: {
-            type: Number,
+            type: [Number, String],
             default: 100
         },
-        value: Number
+        showPercentages: Boolean,
+        value: [Number, String]
     },
     computed: {
         percentages() {
-            return Math.round(this.value / this.max * 100);
+            return Math.round((this.value - this.min) / this.max * 100);
         },
         transform() {
             const { percentages } = this;
-            return percentages < 25 ? '5px' : percentages > 75 ? '-10px' : '0'
-        },
-        transform2() {
-            // width: percentages + '%',
-            const { percentages } = this;
-            return percentages > 85 ? '-20px' : '0';
+            return 20 * (percentages / 100);
+        }
+    },
+    methods: {
+        percentagesSign(val) {
+            return val + '%';
         }
     }
 }
@@ -86,12 +98,9 @@ export default {
     }
     .range-slider__progress {
         background: linear-gradient(to right, rgba(14,194,248,1) 1%,rgba(230,40,237,1) 100%);
-        // background: red;
         height: 7px;
         position: absolute;
         border-radius: 4px;
-        // top: calc(50% - 3.5px);
-        // top: 3.5px;
         top: 1px;
         z-index: 3;
     }
@@ -100,9 +109,7 @@ export default {
         width: 20px;
         height: 20px;
         background-color: #fff;
-        // background-color: blue;
         border-radius: 10px;
-        // top: calc(50% - 10px);
         transform: translateX(-5px);
         top: -4.5px;
         z-index: 4;
