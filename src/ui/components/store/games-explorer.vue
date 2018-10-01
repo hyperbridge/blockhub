@@ -209,12 +209,12 @@
                     );
             },
             availableGenres() {
-                return this.$store.state.marketplace[this.category].reduce((tags, product) => {
-                    product.developer_tags.forEach(tag => {
-                        if (!tags.includes(tag)) tags.push(tag);
-                    });
-                    return tags;
-                }, []);
+                return this.products.reduce((tags, product) => [
+                    ...tags,
+                    ...product.developer_tags.filter(tag =>
+                        !tags.includes(tag)
+                    )
+                ], []).sort();
             },
             filtersActive() {
                 const { phrase, selectedGenres, sortBy: { property } } = this;
@@ -223,7 +223,7 @@
             sortProps() {
                 return this.sortOptions.map(option => option.property);
             }
-        },
+        }
     }
 </script>
 
