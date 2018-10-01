@@ -168,7 +168,7 @@
                         <div class="results__container">
                             <div class="results">
                                 <c-spinner v-if="isTyping"/>
-                                <div v-else-if="!results.length">
+                                <div v-else-if="!resultsFiltered.length">
                                     <p>No results were found for provided filters</p>
                                     <c-button
                                         @click="clearFilters()"
@@ -179,7 +179,7 @@
                                     v-else
                                     :itemInRow="2"
                                     :showRating="false"
-                                    :items="results"
+                                    :items="resultsFiltered"
                                     itemBg="transparent"
                                     showTime
                                 />
@@ -242,8 +242,8 @@
                     if (this.filtersActive) {
                         this.debounce(() => {
                             this.isTyping = false;
-                            this.results = this.getProductsQuery(this.query);
-                        }, 150, 'timeout2');
+                            this.results = [...this.getProductsQuery(this.query)];
+                        }, 200, 'timeout2');
                     } else {
                         this.isTyping = false;
                         this.results = this.products;
@@ -279,6 +279,15 @@
                 if (price.min || price.max) query['price'] = { '$between': [price.min, price.max | 300] };
                 return query;
             },
+            resultsFiltered() {
+                return this.selectedLanguagesNames.length
+                    ? this.results.filter(product =>
+                        product.language_support.filter(lang =>
+                            this.selectedLanguagesNames.includes(lang.name)
+                        ).length
+                      )
+                    : this.results
+            },
             searchingFilters() {
                 const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price } = this;
                 return {
@@ -297,6 +306,9 @@
             },
             selectedLanguages() {
                 return this.selectableLanguages.filter(lang => lang.selected);
+            },
+            selectedLanguagesNames() {
+                return this.selectedLanguages.map(lang => lang.name);
             },
             filtersActive() {
                 return !!(this.selectedGenres.length ||
