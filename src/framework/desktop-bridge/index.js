@@ -48,8 +48,16 @@ export const sendCommand = async (key, data = {}, peer = null, responseId = null
     return promise
 }
 
+export const initHeartbeat = () => {
+    local.bridge.on('heartbeat', (event, msg) => {
+        console.log('[DesktopBridge] Heartbeat')
 
-export const runCommand = async (cmd, meta = null) => {
+        local.bridge.send('heartbeat', 1)
+    })
+}
+
+
+export const runCommand = async (cmd, meta = {}) => {
     console.log('[DesktopBridge] Running command', cmd.key)
 
     return new Promise(async (resolve, reject) => {
@@ -68,23 +76,13 @@ export const runCommand = async (cmd, meta = null) => {
     })
 }
 
-export const initHeartbeat = () => {
-    local.bridge.on('heartbeat', (event, msg) => {
-        console.log('[DesktopBridge] Heartbeat')
-
-        local.bridge.send('heartbeat', 1)
-    })
-}
-
 export const initCommandMonitor = () => {
     local.bridge.on('command', (event, msg) => {
-        const request = JSON.parse(msg)
+        console.log('[DesktopBridge] Received command from desktop', msg)
 
-        const response = {
-            key: ''
-        }
+        const cmd = JSON.parse(msg)
 
-        local.bridge.send('command', JSON.stringify(response)) // send to web page
+        runCommand(cmd)
     })
 }
 
@@ -100,4 +98,6 @@ export const init = () => {
     local.bridge = window.desktopBridge
 
     setTimeout(() => local.bridge.send('init', 1), 1000)
+
+    initCommandMonitor()
 }

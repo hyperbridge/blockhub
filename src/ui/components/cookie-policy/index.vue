@@ -1,5 +1,5 @@
 <template>
-    <transition name="slideRight">
+    <transition name="slideDown">
         <div class="cookie-policy" v-if="!settings.client.cookie_policy_accepted">
             <p class="p-0 m-0">
                 By using this website you agree to our

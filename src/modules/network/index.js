@@ -3,7 +3,8 @@ import { normalize } from 'normalizr'
 import schema from './schema'
 import * as Ethereum from '../../framework/ethereum'
 import * as PeerService from '../../framework/peer-service'
-import * as db from '@/db'
+import * as DesktopBridge from '@/framework/desktop-bridge'
+import * as DB from '@/db'
 import Token from 'hyperbridge-token'
 
 let rawData = {}
@@ -31,11 +32,28 @@ export const getters = {
     }
 }
 
+export const initDesktop = (store) => {
+    if (!DesktopBridge.isConnected()) {
+        return
+    }
+    
+    // tell desktop to create an account and send it back
+    const data = {
+        seed: 13891737193 // derived from input data + mouse movement
+    }
+
+    DesktopBridge.sendCommand('getAccountRequest', data).then((res) => {
+        console.log('ssss', res)
+        store.state.account.email = res.account.email
+        store.state.account.public_address = res.account.public_address
+    })
+}
+
 export const actions = {
     init(store, payload) {
         console.log('[BlockHub] Network connecting...')
 
-        updateState(db.network.config.data[0], store.state)
+        updateState(DB.network.config.data[0], store.state)
 
         state.connection.status.code = null
         state.connection.status.message = "Establishing connection..."
@@ -50,6 +68,8 @@ export const actions = {
                 store.dispatch('checkEthereumConnection')
             }
         }, 5000)
+        
+        initDesktop(store)
     },
     updateState(store, payload) {
         console.log('[BlockHub][Marketplace] Updating store...')
@@ -165,8 +185,8 @@ export const actions = {
                 state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
                 state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = contract.address
 
-                db.funding.config.update(state)
-                db.save()
+                DB.funding.config.update(state)
+                DB.save()
 
                 if (payload.contractName === 'TBD') {
                 }
@@ -198,8 +218,8 @@ export const actions = {
                 state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
                 state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = res._address
 
-                db.network.config.update(state)
-                db.save()
+                DB.network.config.update(state)
+                DB.save()
             })
         })
     }
@@ -214,14 +234,14 @@ export const mutations = {
     signIn(state, payload) {
         state.signed_in = true
 
-        db.network.config.update(state)
-        db.save()
+        DB.network.config.update(state)
+        DB.save()
     },
     signOut(state, payload) {
         state.signed_in = false
 
-        db.network.config.update(state)
-        db.save()
+        DB.network.config.update(state)
+        DB.save()
     },
     setInternetConnection(state, payload) {
         state.connection.internet = payload.connected
