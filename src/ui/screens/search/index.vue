@@ -177,14 +177,22 @@
                                     <c-button
                                     >Check for updates</c-button>
                                 </div>
-                                <c-game-grid
+                                <c-content-navigation
                                     v-else
-                                    :itemInRow="2"
-                                    :showRating="false"
                                     :items="resultsFiltered"
-                                    itemBg="transparent"
-                                    showTime
-                                />
+                                    :setItemsLimit="12"
+                                    :setItemsPerPage="12"
+                                >
+                                    <template slot-scope="{ items }">
+                                        <c-game-grid
+                                            :itemInRow="2"
+                                            :showRating="false"
+                                            :items="items"
+                                            itemBg="transparent"
+                                            showTime
+                                        />
+                                    </template>
+                                </c-content-navigation>
                             </div>
                         </div>
                     </div>
@@ -210,7 +218,7 @@
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve),
             'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
             'c-list': (resolve) => require(['@/ui/components/list'], resolve),
-            'c-active-filters': (resolve) => require(['@/ui/components/search/active-filters'], resolve),
+            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
         },
         mixins: [debouncer],
         data() {
