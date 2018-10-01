@@ -107,14 +107,20 @@
                     </div>
                 </div>
             </transition>
-            <c-game-grid
+            <c-content-navigation
                 v-if="filteredProducts.length"
-                :itemInRow="2"
-                :showRating="false"
                 :items="filteredProducts"
-                showTime
-                itemBg="transparent"
-            />
+            >
+                <template slot-scope="slotProps">
+                    <c-game-grid
+                        :itemInRow="2"
+                        :showRating="false"
+                        :items="slotProps.items"
+                        showTime
+                        itemBg="transparent"
+                    />
+                </template>
+            </c-content-navigation>
             <div v-else-if="filtersActive">
                 <p>No products were found using these filters. Want to <c-button status="plain">Check for updates</c-button>?</p>
                 <c-button
@@ -127,7 +133,6 @@
             <p v-else>
                 Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?
             </p>
-            <c-content-navigation v-if="filteredProducts.length" />
         </c-block>
     </div>
 </template>

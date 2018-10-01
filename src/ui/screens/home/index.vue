@@ -77,7 +77,7 @@
                                 itemInRow="2"
                                 v-if="assets.length"
                             />
-                            
+
                             <p v-if="!assets.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
 
                             <c-content-navigation v-if="assets.length" />
@@ -418,7 +418,6 @@ export default {
 
             return this.$store.state.marketplace.products
         },
-        // slice the array of data to display
         sliced() {
             return this.list.slice(0, this.display);
         },

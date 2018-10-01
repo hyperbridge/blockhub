@@ -127,12 +127,12 @@
                     : [];
             },
             goToSearchPage() {
-                this.$router.replace({
+                this.$router.push({
                     name: 'Search Page',
                     query: this.phrase.length
                         ? { name: this.phrase }
                         : {}
-                })
+                });
             }
         },
         computed: {
