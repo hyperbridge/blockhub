@@ -1330,7 +1330,7 @@ storiesOf('Switch', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-switch size="sm" :value=true />
+             <c-switch size="sm" :checked=true />
          </div>
         `
     }))
@@ -1340,7 +1340,7 @@ storiesOf('Switch', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-switch size="lg" :value=true />
+             <c-switch size="lg" :checked=true />
          </div>
         `
     }));
