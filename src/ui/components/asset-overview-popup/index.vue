@@ -5,40 +5,39 @@
                 <i class="fas fa-link"></i>
             </div>
             <div class="img">
-                <c-img src="https://via.placeholder.com/250x250" />
+                <c-img :src="asset.image" />
             </div>
             <div class="info">
-                <h4>Sword of Pain</h4>
-                <h6>Diablo III</h6>
+                <h4>{{ asset.name }}</h4>
+                <h6>{{ asset.game_name }}</h6>
                 <div class="description">
-                    <h6>1512 GOV</h6>
+                    <h6>{{ asset.price['current'] }}$</h6>
                     <p>Based on 7461 other transactions</p>
-                    <p>Lowest: 32 GOV Highest: 7850 GOV</p>
+                    <p>Lowest: {{ asset.price['min'] }}$ Highest: {{ asset.price['max'] }}$</p>
                 </div>
             </div>
         </div>
         <div class="asset-overview-popup__action">
             <div class="button-line d-flex w-100 justify-content-between">
-                <c-button variant="danger"
-                          icon_position="left"
-                          icon="fas fa-trash-alt"
-                ></c-button>
+                <c-button status="danger" icon_hide>
+                    <i class="fas fa-trash-alt"></i>
+                </c-button>
                 <div class="text-right">
-                    <c-button variant="info"
-                              icon_position="right"
-                              text="Send"
-                              icon="fas fa-share"
-                    ></c-button>
-                    <c-button variant="success"
-                              icon_position="right"
-                              text="Use"
-                              icon="fas fa-chevron-down"
-                    ></c-button>
+                    <c-button status="share">
+                        Send
+                    </c-button>
+                    <c-button status="success">
+                        Use
+                    </c-button>
                 </div>
 
             </div>
             <div class="w-100 py-4">
-                <c-switch label="Accept offers for this item?" label_size="18px" size="sm" label_position="left" />
+                <c-switch label="Accept offers for this item?"
+                          :checked="asset.accept_offers"
+                          label_size="18px"
+                          size="sm"
+                          label_position="left" />
             </div>
         </div>
         <div class="asset-overview-popup__info-list">
@@ -84,8 +83,9 @@
         width: 550px;
         padding: 20px;
         border-radius: 5px;
-        background: rgba(0, 0, 0, .24);
+        background: #3e3e5c;
         box-shadow: 0 0 15px rgba(0, 0, 0, .6);
+        text-align: left;
     }
     .asset-overview-popup__head{
         display: flex;

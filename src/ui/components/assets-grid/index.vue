@@ -14,7 +14,7 @@
                         <h5>{{ item.name }}</h5>
                         <span class="float-left price">
                             <i class="fas fa-dollar-sign"></i>
-                            {{ item.price }}
+                            {{ item.price['current'] }}
                         </span>
                         <span class="float-right box">
                             <i class="fas fa-box"></i>

@@ -28,7 +28,7 @@
                                         <i class="fas fa-box"></i>
                                     </div>
                                     <div class="info">
-                                        <div class="h5 mb-0 font-weight-bold">{{ asset.inventory_count }}</div>
+                                        <div class="h5 mb-0 font-weight-bold">{{ asset.inventory_count | numeralFormat('0 a') }}</div>
                                         <p class="p-0">Your Inventory</p>
                                     </div>
                                 </div>
@@ -37,7 +37,7 @@
                                         <i class="fas fa-shopping-basket"></i>
                                     </div>
                                     <div class="info">
-                                        <div class="h5 mb-0 font-weight-bold">{{ asset.existing_count }}</div>
+                                        <div class="h5 mb-0 font-weight-bold">{{ asset.existing_count | numeralFormat('0.0 a') }}</div>
                                         <p class="p-0">For Sale</p>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                                         <i class="fas fa-globe"></i>
                                     </div>
                                     <div class="info">
-                                        <div class="h5 mb-0 font-weight-bold">{{ asset.for_sale_count }}</div>
+                                        <div class="h5 mb-0 font-weight-bold">{{ asset.for_sale_count | numeralFormat('0.0 a') }}</div>
                                         <p class="p-0">Existing</p>
                                     </div>
                                 </div>
@@ -127,7 +127,7 @@
                                             {{ item.user_name }}
                                         </span>
                                         <span class="price">
-                                            $ {{ item.price }}
+                                            $ {{ item.price['current'] }}
                                         </span>
                                         <a href="#3" class="btn btn-success float-right">
                                             <i class="fas fa-cart-plus"></i> Proceed to Purchase
@@ -158,24 +158,22 @@
                                 <div class="item"
                                      v-for="(item, index) in inventory"
                                      :key="index">
-                                    <a href="#3" data-toggle="modal" data-target="#assetModal">
+                                    <c-button status="plain" @click="openPopup(item)">
                                         <i class="fas fa-external-link-alt"></i>
-                                    </a>
+                                    </c-button>
                                     <div class="item_thumb">
                                         <c-img :src="item.image"/>
                                     </div>
                                     <div class="item_info">
                                         <h5>{{ item.name }}</h5>
                                         <span class="price">
-                                            $ {{ item.price }}
+                                            $ {{ item.price['current'] }}
                                         </span>
                                         <div class="switcher">
-                                            <span class="label">Accept offers</span>
-                                            <label class="switch switch-sm">
-                                                <input type="checkbox" v-model="item.offers_accept" name="switch_8"
-                                                       checked="" value="0">
-                                                <span></span>
-                                            </label>
+                                            <c-switch label="Accept offers"
+                                                      :checked="item.accept_offers"
+                                                      size="sm"
+                                                      label_position="left"/>
                                         </div>
                                     </div>
                                 </div>
@@ -198,10 +196,14 @@
                 </div>
             </div>
         </div>
+        <c-popup :activated="show_popup" @close="closePopup" :width="550">
+            <c-asset-popup :asset="tmpItem" slot="custom_content" />
+        </c-popup>
     </c-layout>
 </template>
 
 <script>
+
     export default {
         props: ['id'],
         components: {
@@ -211,6 +213,8 @@
             'c-heading-bar-fields' : (resolve) => require(['@/ui/components/heading-bar/additional-action'], resolve),
             'c-pagination': (resolve) => require(['@/ui/components/pagination/index'], resolve),
             'c-collection-item': (resolve) => require(['@/ui/components/collection/item'], resolve),
+            'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
+            'c-asset-popup': (resolve) => require(['@/ui/components/asset-overview-popup'], resolve)
         },
         data() {
             return {
@@ -309,11 +313,21 @@
                         ]
                     }
                 ],
+                show_popup: false,
+                tmpItem: {}
             }
         },
         methods: {
             numberFormat(value){
                 return Math.log(value) / Math.log(10)
+            },
+            closePopup(){
+                this.show_popup = false
+                this.tmpItem = {}
+            },
+            openPopup(obj){
+                this.tmpItem = obj
+                this.show_popup = true
             }
         },
         computed: {
@@ -325,23 +339,23 @@
                 return this.$store.state.marketplace.assets[this.id]
             },
             offers(){
-                var ids = this.$store.state.marketplace.assets[this.id].offers_list,
+                let ids = this.$store.state.marketplace.assets[this.id].offers_list,
                     list = this.$store.state.marketplace.assets,
                     arr = [];
                 ids.forEach( (id, i) => {
                     if (list[id])
                         arr.push(list[id])
-                })
+                });
                 return arr;
             },
             inventory(){
-                var ids = this.$store.state.marketplace.assets[this.id].inventory_list,
+                let ids = this.$store.state.marketplace.assets[this.id].inventory_list,
                     list = this.$store.state.marketplace.assets,
                     arr = [];
                 ids.forEach( (id, i) => {
                     if (list[id])
                         arr.push(list[id])
-                })
+                });
                 return arr;
             }
         }
