@@ -192,7 +192,7 @@
         components: {
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-            'c-badges': (resolve) => require(['@/ui/components/projects/badges.vue'], resolve)
+            'c-badges': (resolve) => require(['@/ui/components/project/badges.vue'], resolve)
         },
         methods: {
             save() {

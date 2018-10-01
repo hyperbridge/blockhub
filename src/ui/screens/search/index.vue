@@ -53,6 +53,7 @@
                                     <p class="margin-top-20">Minimum:</p>
                                     <c-range-slider
                                         v-model.number="price.min"
+                                        :min="0"
                                         :max="60"
                                     />
                                     <p class="margin-top-20">Maximum:</p>
@@ -167,21 +168,31 @@
                         <div class="results__container">
                             <div class="results">
                                 <c-spinner v-if="isTyping"/>
-                                <div v-else-if="!results.length">
+                                <div v-else-if="!resultsFiltered.length">
                                     <p>No results were found for provided filters</p>
                                     <c-button
                                         @click="clearFilters()"
                                         status="info"
                                     >Clear filters</c-button>
+                                    <c-button
+                                    >Check for updates</c-button>
                                 </div>
-                                <c-game-grid
+                                <c-content-navigation
                                     v-else
-                                    :itemInRow="2"
-                                    :showRating="false"
-                                    :items="results"
-                                    itemBg="transparent"
-                                    showTime
-                                />
+                                    :items="resultsFiltered"
+                                    :setItemsLimit="12"
+                                    :setItemsPerPage="12"
+                                >
+                                    <template slot-scope="{ items }">
+                                        <c-game-grid
+                                            :itemInRow="2"
+                                            :showRating="false"
+                                            :items="items"
+                                            itemBg="transparent"
+                                            showTime
+                                        />
+                                    </template>
+                                </c-content-navigation>
                             </div>
                         </div>
                     </div>
@@ -202,12 +213,12 @@
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
             'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
-            'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description'], resolve),
+            'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
             'c-spinner': (resolve) => require(['@/ui/components/spinner'], resolve),
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve),
             'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
             'c-list': (resolve) => require(['@/ui/components/list'], resolve),
-            'c-active-filters': (resolve) => require(['@/ui/components/search/active-filters'], resolve),
+            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
         },
         mixins: [debouncer],
         data() {
@@ -241,8 +252,8 @@
                     if (this.filtersActive) {
                         this.debounce(() => {
                             this.isTyping = false;
-                            this.results = this.getProductsQuery(this.query);
-                        }, 150, 'timeout2');
+                            this.results = [...this.getProductsQuery(this.query)];
+                        }, 200, 'timeout2');
                     } else {
                         this.isTyping = false;
                         this.results = this.products;
@@ -278,6 +289,15 @@
                 if (price.min || price.max) query['price'] = { '$between': [price.min, price.max | 300] };
                 return query;
             },
+            resultsFiltered() {
+                return this.selectedLanguagesNames.length
+                    ? this.results.filter(product =>
+                        product.language_support.filter(lang =>
+                            this.selectedLanguagesNames.includes(lang.name)
+                        ).length
+                      )
+                    : this.results
+            },
             searchingFilters() {
                 const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price } = this;
                 return {
@@ -296,6 +316,9 @@
             },
             selectedLanguages() {
                 return this.selectableLanguages.filter(lang => lang.selected);
+            },
+            selectedLanguagesNames() {
+                return this.selectedLanguages.map(lang => lang.name);
             },
             filtersActive() {
                 return !!(this.selectedGenres.length ||
@@ -320,6 +343,7 @@
             if (!Object.keys(this.$route.query).length) {
                 this.results = this.products;
             } else {
+
                 this.isTyping = true;
                 const { tags, langs, name, priceMin, priceMax, specials } = this.$route.query;
 
@@ -327,17 +351,19 @@
                 if (priceMin) this.price.min = priceMin;
                 if (priceMax) this.price.max = priceMax;
 
-                this.selectableTags = this.productsTags.map(tag => {
-                    return {
-                        name: tag, selected: tags && tags.includes(tag) ? true : false
-                    }
-                });
+                this.selectableTags = this.productsTags.map(tag => ({
+                    name: tag, selected: tags && tags.includes(tag)
+                }));
+
                 this.selectableLanguages = this.languages.map(lang => ({
-                    name: lang, selected: langs && langs.includes(tag) ? true : false
+                    name: lang, selected: !!(langs && langs.includes(lang))
                 }));
-                this.systemTags = this.systemTags.map(tag => ({
-                    ...tag, selected: specials && specials.includes(tag)
-                }));
+
+                if (specials) {
+                    this.systemTags.forEach(tag => {
+                        if (specials.includes(tag.value)) tag.selected = true;
+                    });
+                }
             }
         },
         watch: {

@@ -50,7 +50,7 @@
 
 <script>
     export default {
-        name: 'games-grid-description',
+        name: 'game-grid-description',
         props: {
             items: {
                 type: Array,

@@ -320,16 +320,21 @@ export let initializer = () => {
         db.setInitCallback(async () => {
             // TODO: is this a race condition?
             PeerService.init()
-            DesktopBridge.init()
+            DesktopBridge.init(store)
 
             store.dispatch('database/init')
             store.dispatch('network/init')
             store.dispatch('marketplace/init')
             store.dispatch('funding/init')
 
-            await store.dispatch('network/initEthereum')
-            await store.dispatch('funding/initEthereum')
-            await store.dispatch('marketplace/initEthereum')
+            try {
+                await store.dispatch('network/initEthereum')
+                await store.dispatch('funding/initEthereum')
+                await store.dispatch('marketplace/initEthereum')
+            } catch(err) {
+                console.log(err)
+            }
+
 
             initSubscribers()
             monitorSimulatorMode()

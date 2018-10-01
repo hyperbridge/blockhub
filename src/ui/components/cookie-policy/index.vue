@@ -32,51 +32,51 @@
 </template>
 
 <script>
-    import { mapMutations } from 'vuex';
-    export default {
-        name: 'cookie-policy',
-        components:{
-            'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
+import { mapMutations } from 'vuex';
+export default {
+    name: 'cookie-policy',
+    components:{
+        'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
+    },
+    data(){
+        return {
+            show: false
+        }
+    },
+    methods: {
+        ...mapMutations(['UPDATE_CLIENT_SETTINGS']),
+        updateClientSettings() {
+            this.$store.commit('network/UPDATE_CLIENT_SETTINGS', 'cookie_policy_accepted');
+            this.show = false;
         },
-        data(){
-            return{
-                show: false
-            }
+        showPopup(){
+            this.show = true;
         },
-        methods: {
-            ...mapMutations(['UPDATE_CLIENT_SETTINGS']),
-            updateClientSettings() {
-                this.$store.commit('network/UPDATE_CLIENT_SETTINGS', 'cookie_policy_accepted');
-                this.show = false;
-            },
-            showPopup(){
-                this.show = true;
-            },
-            closePopup(){
-                this.show = false;
-            }
-        },
-        computed: {
-            settings() {
-                return this.$store.state.network.account.settings;
-            }
+        closePopup(){
+            this.show = false;
+        }
+    },
+    computed: {
+        settings() {
+            return this.$store.state.network.account.settings;
         }
     }
+}
 </script>
 
 <style lang="scss">
-    .cookie-policy{
-        position: fixed;
-        right: 55px;
-        bottom: 20px;
-        background: rgba(0, 0, 0, 0.7);
-        color: #fff;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, .13);
-        border-radius: 5px;
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        z-index: 999;
-        justify-content: space-between;
-    }
+.cookie-policy{
+    position: fixed;
+    right: 55px;
+    bottom: 20px;
+    background: rgba(42, 43, 68, 0.7);
+    color: #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .13);
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    z-index: 999;
+    justify-content: space-between;
+}
 </style>

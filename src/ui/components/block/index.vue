@@ -5,7 +5,7 @@
                 <slot name="heading-bar"></slot>
             </template>
         </c-heading-bar>
-        <slot name="title" v-else></slot>
+        <slot name="title" v-if="!title"></slot>
         <div class="block__content">
             <slot></slot>
         </div>

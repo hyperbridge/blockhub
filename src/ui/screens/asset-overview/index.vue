@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="col-12 col-lg-6 margin-top-30 margin-bottom-15">
-                        <c-block class="padding-10 h-100">
+                        <c-block class="padding-10 h-100" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                             <c-heading-bar name="Attributes">
                                 <template slot="additional-action">
                                     <a href="#3" class="font-weight-bold text-uppercase text-white">
@@ -89,8 +89,7 @@
                     </div>
 
                     <div class="col-12 col-lg-6 margin-top-30 margin-bottom-15">
-                        <c-block class="padding-10 h-100">
-                            <c-heading-bar name="Sales">
+                        <c-block title="Sales" class="h-100" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                                 <template slot="additional-action">
                                     <a href="#3" class="font-weight-bold text-uppercase text-white">
                                         History
@@ -99,18 +98,15 @@
                                         Chart
                                     </a>
                                 </template>
-                            </c-heading-bar>
                         </c-block>
                     </div>
 
                     <div class="col-12 margin-top-15 margin-bottom-15">
-                        <c-block class="padding-bottom-0">
-                            <c-heading-bar name="Offers">
+                        <c-block title="Offers"  class="padding-bottom-0" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                                 <template slot="additional-action">
                                     <c-heading-bar-fields name="Rarity" icon="fas fa-trophy" @click_up=""  @click_down="" />
                                     <c-heading-bar-fields name="Value" icon="fas fa-dollar" @click_up=""  @click_down="" />
                                 </template>
-                            </c-heading-bar>
                             <div class="offers__list">
                                 <div v-for="(item, index) in offers"
                                      :key="index"
@@ -153,7 +149,7 @@
                     </div>
 
                     <div class="col-12 margin-top-15 margin-bottom-15">
-                        <c-block class="padding-bottom-0" title="Yours Inventory">
+                        <c-block class="padding-bottom-0" title="Yours Inventory" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                             <div class="my-assets__list">
                                 <div class="item"
                                      v-for="(item, index) in inventory"
@@ -184,7 +180,7 @@
                     </div>
 
                     <div class="col-12 margin-top-15 margin-bottom-15">
-                        <c-block title="Collections Containing this Item" class="pb-0">
+                        <c-block title="Collections Containing this Item" class="pb-0" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                             <div class="collections-container">
                                 <div class="item" v-for="(item, index) in collection_items" :key="index">
                                     <c-collection-item :item="item" />

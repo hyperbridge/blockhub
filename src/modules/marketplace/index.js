@@ -42,14 +42,14 @@ const updateState = (savedData, updatedState = {}) => {
         special_products: [schema.product]
     })
 
-    state = { ...rawData, ...normalizedData.entities } // ...normalizedData.result, 
+    state = { ...rawData, ...normalizedData.entities } // ...normalizedData.result,
 }
 
 const sortDir = (dir, asc) => asc ? dir : dir * -1;
 
 export const getters = {
     assetsArray: state => Array.isArray(state.assets) ? state.assets : Object.values(state.assets),
-    productsArray: state => state.products instanceof Array ? state.products : Object.values(state.products),
+    productsArray: state => Array.isArray(state.products) ? state.products : Object.values(state.products),
     getProductsQuery: state => query => db.marketplace.products.find(query),
     productsTags: (state, getters) => getters.productsArray
         .reduce((tags, product) => [

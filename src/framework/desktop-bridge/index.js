@@ -1,9 +1,12 @@
+import * as DB from '@/db'
 
 export let config = {
 }
 
 const local = {
     requests: {},
+    store: null,
+    unlockResolve: null
 }
 
 export const isConnected = () => {
@@ -17,7 +20,40 @@ export const ID = () => {
     return '_' + Math.random().toString(36).substr(2, 9);
 }
 
+export const createAccountRequest = async (data) => {
+    return await sendCommand('createAccountRequest', data)
+}
 
+export const resolvePromptPasswordRequest = async (password) => {
+    return new Promise(async (resolve) => {
+        const res = {
+            password
+        }
+
+        local.unlockResolve(res)
+    })
+}
+
+export const handlePromptPasswordRequest = async (data) => {
+    return new Promise(async (resolve) => {
+        local.store.commit('network/activateModal', 'unlock')
+
+        local.unlockResolve = resolve
+    })
+}
+
+export const handleSetAccountRequest = async (data) => {
+    return new Promise(async (resolve) => {
+        DB.network.config.data[0].account = {
+            ...DB.network.config.data[0].account,
+            ...data.account
+        }
+
+        DB.save()
+
+        local.store.commit('network/activateModal', null)
+    })
+}
 
 export const sendCommand = async (key, data = {}, peer = null, responseId = null) => {
     const cmd = {
@@ -73,6 +109,18 @@ export const runCommand = async (cmd, meta = {}) => {
             return resolve()
         }
 
+        if (cmd.key === 'promptPasswordRequest') {
+            const res = await handlePromptPasswordRequest(cmd.data)
+
+            return resolve(await sendCommand('promptPasswordResponse', res, meta.client, cmd.requestId))
+        } else if (cmd.key === 'setAccountRequest') {
+            const res = await handleSetAccountRequest(cmd.data)
+
+            return resolve(res)
+        } else {
+            console.log('[DesktopBridge] Unhandled command:', cmd)
+        }
+
     })
 }
 
@@ -86,7 +134,7 @@ export const initCommandMonitor = () => {
     })
 }
 
-export const init = () => {
+export const init = (store) => {
     if (!isConnected()) {
         console.log('[DesktopBridge] Not initializing. Reason: not connected to desktop app')
 
@@ -95,9 +143,10 @@ export const init = () => {
 
     console.log('[DesktopBridge] Initializing')
 
+    local.store = store
     local.bridge = window.desktopBridge
 
-    setTimeout(() => local.bridge.send('init', 1), 1000)
+    sendCommand('init')
 
     initCommandMonitor()
 }

@@ -18,7 +18,17 @@
             </c-sidebar-menu-link>
         </ul>
         <ul class="sidebar-menu__list" v-else>
-            <slot></slot>
+            <slot>
+                <c-sidebar-menu-link
+                    v-for="(link, index) in links"
+                    :key="index"
+                    :to="link.to"
+                >
+                    <slot name="link" :link="link">
+                        {{ link.title }}
+                    </slot>
+                </c-sidebar-menu-link>
+            </slot>
         </ul>
     </div>
 </template>
@@ -45,7 +55,8 @@
             },
             mClass:{
                 type: String
-            }
+            },
+            links: Array
         },
         components:{
             'c-sidebar-menu-link': MenuLink

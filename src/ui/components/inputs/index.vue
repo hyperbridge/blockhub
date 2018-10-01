@@ -6,8 +6,10 @@
             return h('input', {
                 staticClass: 'c-input',
                 on: this.listeners,
-                attrs: this.$attrs,
-                props: this.$props
+                attrs: {
+                    ...this.$attrs,
+                    ...this.$props
+                }
             });
         },
         computed: {
