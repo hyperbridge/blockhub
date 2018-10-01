@@ -4,12 +4,12 @@
         <div class="content-navigation-wrapper">
             <c-pagination
                 v-if="paginationMode"
-                :activePage="activePage"
+                :activePage="activePage + 1"
                 :pages="pagination.pages"
                 @pageChange="activePage = $event - 1"
             />
             <c-load-more v-else
-                @click="limitTo += setItemsLimit"
+                @click="loadMore()"
             />
         </div>
     </div>
@@ -45,6 +45,13 @@
                 itemsPerPage: this.setItemsPerPage
             }
         },
+        methods: {
+            loadMore() {
+                if (this.limitTo < this.items.length) {
+                    this.limitTo += this.setItemsLimit;
+                }
+            }
+        },
         computed: {
             paginationMode() {
                 return this.$store.state.network.account.settings.client.pagination;
@@ -56,7 +63,7 @@
                     start: startPage,
                     end: startPage + this.itemsPerPage,
                     pages
-                }
+                };
             },
             visibleItems() {
                 return this.paginationMode
