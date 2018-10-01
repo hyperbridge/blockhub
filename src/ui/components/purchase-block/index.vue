@@ -39,7 +39,7 @@
             </c-button>
 
             <button @click="$emit('addToWishlist')" class="wishlist-btn" v-if="!inWishlist">
-                <i class="far fa-heart mr-2"></i>
+                <i class="fas fa-heart mr-2"></i>
                 Add to Wishlist
             </button>
             <button @click="$emit('removeFromWishlist')" class="wishlist-btn is-in" v-if="inWishlist">
