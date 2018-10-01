@@ -1,37 +1,38 @@
 <template>
     <transition name="fade">
         <div class="c-popup" v-if="activated" @click.self.prevent="$emit('close')">
-            <span class="c-popup__close" @click="$emit('close')">
-                <c-img
-                    src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjMycHgiIGhlaWdodD0iMzJweCI+CjxnPgoJPGc+CgkJPHBhdGggZD0iTTUwNS45NDMsNi4wNThjLTguMDc3LTguMDc3LTIxLjE3Mi04LjA3Ny0yOS4yNDksMEw2LjA1OCw0NzYuNjkzYy04LjA3Nyw4LjA3Ny04LjA3NywyMS4xNzIsMCwyOS4yNDkgICAgQzEwLjA5Niw1MDkuOTgyLDE1LjM5LDUxMiwyMC42ODMsNTEyYzUuMjkzLDAsMTAuNTg2LTIuMDE5LDE0LjYyNS02LjA1OUw1MDUuOTQzLDM1LjMwNiAgICBDNTE0LjAxOSwyNy4yMyw1MTQuMDE5LDE0LjEzNSw1MDUuOTQzLDYuMDU4eiIgZmlsbD0iI0ZGRkZGRiIvPgoJPC9nPgo8L2c+CjxnPgoJPGc+CgkJPHBhdGggZD0iTTUwNS45NDIsNDc2LjY5NEwzNS4zMDYsNi4wNTljLTguMDc2LTguMDc3LTIxLjE3Mi04LjA3Ny0yOS4yNDgsMGMtOC4wNzcsOC4wNzYtOC4wNzcsMjEuMTcxLDAsMjkuMjQ4bDQ3MC42MzYsNDcwLjYzNiAgICBjNC4wMzgsNC4wMzksOS4zMzIsNi4wNTgsMTQuNjI1LDYuMDU4YzUuMjkzLDAsMTAuNTg3LTIuMDE5LDE0LjYyNC02LjA1N0M1MTQuMDE4LDQ5Ny44NjYsNTE0LjAxOCw0ODQuNzcxLDUwNS45NDIsNDc2LjY5NHoiIGZpbGw9IiNGRkZGRkYiLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K"/>
-            </span>
-            <div class="c-popup__item" v-if=" type != 'custom'">
+            <div class="c-popup__item" :style="{ 'width': + width + 'px'}">
                 <h3 v-if="title">{{ title }}</h3>
-                <div class="c-popup__content">
-                    <div class="c-popup__content-header" :class="[ 'c-popup-type-' + type ]" v-if="sub_title">
-                        <div class="popup-icon">
-                            <i class="fas fa-exclamation-triangle" v-if=" type == ['warning', 'danger'] "></i>
-                            <i class="fas fa-check" v-if=" type == 'success' "></i>
-                            <i class="fas fa-info-circle" v-else></i>
+                <div class="position-relative">
+                    <div class="c-popup__close" @click="$emit('close')" v-if="!customClose">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <slot name="custom_close" v-else></slot>
+
+                    <div class="c-popup__content" v-if=" type != 'custom'">
+                        <div class="c-popup__content-header" :class="[ 'c-popup-type-' + type ]" v-if="sub_title">
+                            <div class="popup-icon">
+                                <i class="fas fa-exclamation-triangle" v-if=" type == ['warning', 'danger'] "></i>
+                                <i class="fas fa-check" v-if=" type == 'success' "></i>
+                                <i class="fas fa-info-circle" v-else></i>
+                            </div>
+                            <div class="sub_title">
+                                {{ sub_title }}
+                            </div>
                         </div>
-                        <div class="sub_title">
-                            {{ sub_title }}
+                        <div class="c-popup__content-body">
+                            <p class="m-0">
+                                <slot />
+                            </p>
+                            <slot name="body"></slot>
+                        </div>
+                        <div class="c-popup__content-footer" v-if="this.$slots.footer">
+                            <slot name="footer"></slot>
                         </div>
                     </div>
-                    <div class="c-popup__content-body">
-                        <p class="m-0">
-                            <slot />
-                        </p>
-                        <slot name="body"></slot>
-                    </div>
-                    <div class="c-popup__content-footer" v-if="this.$slots.footer">
-                        <slot name="footer"></slot>
-                    </div>
+
+                    <slot name="custom_content" v-else></slot>
                 </div>
-            </div>
-            <div class="c-popup__item" v-if="type == 'custom'" :style="{ 'width': + width + 'px'}">
-                <h3 v-if="title">{{ title }}</h3>
-                <slot name="custom_content"></slot>
             </div>
         </div>
     </transition>
@@ -55,6 +56,11 @@
             width: {
                 default: '400'
             }
+        },
+        computed:{
+          customClose() {
+              return this.$slots.custom_close
+          }
         }
     }
 </script>
@@ -77,17 +83,19 @@
 
     .c-popup__close {
         position: absolute;
-        top: 25px;
-        right: 25px;
-        opacity: .4;
+        top: -25px;
+        right: 0px;
+        opacity: .7;
         -webkit-transition: 0.6s ease-out;
         -moz-transition:  0.6s ease-out;
         transition:  0.6s ease-out;
+        font-size: 22px;
+        z-index: 999;
         img {
             width: 24px;
         }
         &:hover {
-            opacity: .6;
+            opacity: 1;
             cursor: pointer;
             -webkit-transform: rotateZ(180deg);
             -moz-transform: rotateZ(180deg);

@@ -1,5 +1,8 @@
 <template>
     <c-popup :activated="activated" type="custom" ref="modal" title="Purchase" width="650" @close="$emit('close')">
+        <div class="c-popup__close" @click="$emit('close')" slot="custom_close">
+            <i class="fas fa-times"></i>
+        </div>
         <div class="purchase-modal" slot="custom_content">
             <c-tabs>
                 <c-tab name="Agreement" :selected="agreement" :showFooter="true">
@@ -178,8 +181,8 @@
                             <c-switch size="sm" :value="true" label="I agree with the terms" />
                         </div>
                         <div>
-                            <c-button text="Cancel" variant="danger" @click="" c_class="mx-1" icon="fas fa-times" icon_position="right" />
-                            <c-button text="Next" variant="success" @click="toggleSteps" c_class="mx-1" icon="fas fa-arrow-right" icon_position="right" />
+                            <c-button status="danger" @click="" c_class="mx-1">Cancel</c-button>
+                            <c-button status="success" @click="toggleSteps">Next</c-button>
                         </div>
                     </div>
                 </c-tab>
@@ -295,8 +298,8 @@
                     </div>
                     <div slot="footer" class="d-flex align-items-center justify-content-end">
                         <div>
-                            <c-button text="Cancel" variant="danger" @click="" c_class="mx-1" icon="fas fa-times" icon_position="right" />
-                            <c-button text="Complete" variant="success" @click="" c_class="mx-1" icon="fas fa-check" icon_position="right" />
+                            <c-button status="danger" @click="">Cancel</c-button>
+                            <c-button status="success" @click="">Complete</c-button>
                         </div>
                     </div>
                 </c-tab>
@@ -337,7 +340,7 @@
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .purchase-modal{
         background: transparent;
         color: #fff;
@@ -357,6 +360,7 @@
             border-radius: 5px;
             max-height: 250px;
             overflow-y: auto;
+            text-align: left;
             h1, h2, h3, h4, h5 {
                 font-size: 18px;
                 color: #C6C6D6;
@@ -492,5 +496,27 @@
             }
         }
 
+    }
+
+    .c-popup__close {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        opacity: .7;
+        -webkit-transition: 0.6s ease-out;
+        -moz-transition:  0.6s ease-out;
+        transition:  0.6s ease-out;
+        font-size: 22px;
+        z-index: 999;
+        img {
+            width: 24px;
+        }
+        &:hover {
+            opacity: 1;
+            cursor: pointer;
+            -webkit-transform: rotateZ(180deg);
+            -moz-transform: rotateZ(180deg);
+            transform: rotateZ(180deg);
+        }
     }
 </style>

@@ -87,6 +87,7 @@
                             <c-content-navigation v-if="assets.length" />
                         </c-block>
                     </div>
+
                     <div class="col-12 margin-bottom-30 d-none">
                         <c-heading-bar
                             name="Trending Projects"
@@ -210,7 +211,7 @@
                                         <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown=""/>
                                     </template>
                                 </c-heading-bar>
-                                <div class="filter-blk d-flex justify-content-between align-items-center">
+                                <div class="filter-blk d-flex justify-content-between align-items-center margin-bottom-20">
                                     <div class="d-inline-flex align-items-center">
                                         <c-dropdown id="test2" name="Filter by Genre" :showBg="true">
                                             <a href="#3">RPG</a>
