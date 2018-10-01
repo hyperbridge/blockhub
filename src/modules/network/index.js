@@ -1,29 +1,28 @@
+import Vue from 'vue'
 import { normalize } from 'normalizr'
-import schema from './schema'
-import * as Ethereum from '../../framework/ethereum'
-import * as PeerService from '../../framework/peer-service'
-import * as db from '@/db'
 import Token from 'hyperbridge-token'
+import * as Ethereum from '@/framework/ethereum'
+import * as PeerService from '@/framework/peer-service'
+import * as DesktopBridge from '@/framework/desktop-bridge'
+import * as DB from '@/db'
+import schema from './schema'
 
 let rawData = {}
 
 export let state = null
 
-const updateState = () => {
+const updateState = (savedData, updatedState = {}) => {
     rawData = {
         ...rawData,
-        ...db.network.config.data[0]
+        ...savedData,
+        ...updatedState
     }
 
     const normalizedData = normalize(rawData, {
     })
 
-    state = {
-        ...rawData
-    };
+    state = { ...rawData, ...normalizedData.entities }
 };
-
-updateState()
 
 export const getters = {
     privileges() {
@@ -33,12 +32,29 @@ export const getters = {
     }
 }
 
+export const initDesktop = (store) => {
+    if (!DesktopBridge.isConnected()) {
+        return
+    }
+
+    // DesktopBridge.getAccountRequest(data).then((res) => {
+    //     store.state.account.public_address = res.account.public_address
+
+    //     store.state.password_required = true
+    //     //store.state.signed_in = true
+    // })
+}
+
 export const actions = {
     init(store, payload) {
         console.log('[BlockHub] Network connecting...')
 
-        store.state.connection.status.code = null
-        store.state.connection.status.message = "Establishing connection..."
+        updateState(DB.network.config.data[0], store.state)
+
+        state.connection.status.code = null
+        state.connection.status.message = "Establishing connection..."
+
+        store.commit('updateState', state)
 
         store.dispatch('checkInternetConnection')
         store.dispatch('checkEthereumConnection')
@@ -48,13 +64,25 @@ export const actions = {
                 store.dispatch('checkEthereumConnection')
             }
         }, 5000)
+        
+        initDesktop(store)
     },
     updateState(store, payload) {
         console.log('[BlockHub][Marketplace] Updating store...')
 
-        updateState()
+        updateState(store.state)
 
         store.commit('updateState', state)
+    },
+    unlockAccount(state, payload) {
+        DesktopBridge.resolvePromptPasswordRequest(payload.password.value)
+
+        // DesktopBridge.sendCommand('getAccountRequest', data).then((res) => {
+        //     store.state.account.public_address = res.account.public_address
+
+        //     store.state.password_required = true
+        //     //store.state.signed_in = true
+        // })
     },
     async initEthereum(store, payload) {
         Token.api.ethereum.init(
@@ -163,8 +191,8 @@ export const actions = {
                 state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
                 state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = contract.address
 
-                db.funding.config.update(state)
-                db.save()
+                DB.funding.config.update(state)
+                DB.save()
 
                 if (payload.contractName === 'TBD') {
                 }
@@ -196,30 +224,30 @@ export const actions = {
                 state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
                 state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = res._address
 
-                db.network.config.update(state)
-                db.save()
+                DB.network.config.update(state)
+                DB.save()
             })
         })
     }
 }
 
 export const mutations = {
-    updateState(s, payload) {
+    updateState(state, payload) {
         for (let x in payload) {
-            s[x] = payload[x]
+            Vue.set(state, x, payload[x])
         }
     },
     signIn(state, payload) {
         state.signed_in = true
 
-        db.network.config.update(state)
-        db.save()
+        DB.network.config.update(state)
+        DB.save()
     },
     signOut(state, payload) {
         state.signed_in = false
 
-        db.network.config.update(state)
-        db.save()
+        DB.network.config.update(state)
+        DB.save()
     },
     setInternetConnection(state, payload) {
         state.connection.internet = payload.connected
@@ -239,6 +267,6 @@ export const mutations = {
         state.active_modal = payload
     },
     UPDATE_CLIENT_SETTINGS (state, property) {
-        state.account.settings.client[property] = !state.account.settings.client[property];
+        Vue.set(state.account.settings.client, property, !state.account.settings.client[property])
     }
 }

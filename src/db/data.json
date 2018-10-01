@@ -63,15 +63,15 @@
         ],
         "active_modal": null,
         "account": {
-            "private_key": "",
+            "public_key": null,
+            "first_name": null,
+            "last_name":  null,
+            "birthday": null,
+            "password": null,
+            "email": null,
             "notifications": [],
             "wallets": [],
-            "identities": [
-                {
-                    "id": "1",
-                    "name": "aaa"
-                }
-            ],
+            "identities": [],
             "settings": {
                 "client": {
                     "animations": true,

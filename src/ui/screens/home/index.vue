@@ -16,7 +16,11 @@
                                     <c-button @click="toggleDesktopMode()">Desktop Mode is {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
                                     <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button>
                                     <c-button @click="toggleDeveloperMode()">Developer Mode is {{ developer_mode ? 'ON' : 'OFF' }}</c-button>
-                                    <c-button @click="clearSimulatorData()">Clear Data</c-button>
+                                    <br /><br />
+                                </div>
+                                <div>
+                                    <c-button @click="importSeedData()">Import Seed Data</c-button>
+                                    <c-button @click="resetSeedData()">Reset Seed Data</c-button>
                                     <br /><br />
                                 </div>
                                 <div>
@@ -25,6 +29,11 @@
                                     <c-button @click="$store.state.network.connection.datasource = !$store.state.network.connection.datasource">Datasource is {{ $store.state.network.connection.datasource ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
                                     <c-button @click="$store.state.network.connection.operator = !$store.state.network.connection.operator">Operator is {{ $store.state.network.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
                                     <c-button @click="$store.state.network.connection.ethereum = !$store.state.network.connection.ethereum">Ethereum is {{ $store.state.network.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <br /><br />
+                                </div>
+                                <div>
+                                    <c-button @click="saveSettings()">Save Settings</c-button>
+                                    <c-button @click="resetSettings()">Reset Settings</c-button>
                                     <br /><br />
                                 </div>
                                 <div v-if="desktop_mode">
@@ -40,73 +49,40 @@
                         <c-main-banner class="margin-bottom-30" :image="main_banner.img" :logo="main_banner.logo" />
                     </div>
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
-                        <c-block>
-                            <c-heading-bar name="New Releases" :showArrows="false" :showBackground="false">
-                                <template slot="additional-action">
-                                    <!--<c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @click_down="" />-->
-                                    <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
-                                    <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
-                                </template>
-                            </c-heading-bar>
+                        <c-block title="New Releases" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                            <template slot="additional-action">
+                                <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
+                                <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
+                            </template>
 
                             <c-game-grid
-                                :itemInRow="1"
-                                :showRating="false"
-                                :showTime="true"
+                                :itemInRow="2"
+                                :showRating="true"
+                                :showDate="false"
+                                :showLink="true"
                                 :items="new_products.slice(0,5)"
                                 itemBg="transparent"
+                                pricePosition="right"
                             />
                         </c-block>
                     </div>
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
-                        <c-block>
-                            <c-heading-bar name="Top 20 Items" :showArrows="false" :showBackground="false">
-                                <template slot="additional-action">
-                                    <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
-                                    <c-heading-bar-fields name="Trading" icon="star" @clickUp=""  @clickDown="" />
-                                </template>
-                            </c-heading-bar>
+                        <c-block title="Top 20 Items" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                            <template slot="additional-action">
+                                <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
+                                <c-heading-bar-fields name="Trading" icon="star" @clickUp=""  @clickDown="" />
+                            </template>
 
                             <c-assets-list
                                 :items="assets"
                                 itemInRow="2"
                                 v-if="assets.length"
                             />
-                            
+
                             <p v-if="!assets.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
 
                             <c-content-navigation v-if="assets.length" />
                         </c-block>
-                    </div>
-                    <div class="col-12 margin-bottom-30 d-none">
-                        <c-heading-bar
-                            name="Trending Projects"
-                            :showArrows="false"
-                            :showBackground="false"
-                        />
-                        <div class="img_slider w-100">
-                            <div
-                                class="owl-carousel"
-                                ref="rangeSlider"
-                                data-nav-dots="false"
-                                data-nav-arrow="true"
-                                data-items="4"
-                                data-sm-items="1"
-                                data-md-items="3"
-                                data-lg-items="4"
-                                data-loop="true"
-                                data-autoplay="false"
-                                v-if="trending_projects.length"
-                            >
-                                <c-projects-card
-                                    v-for="(project, index) in trending_projects"
-                                    :key="index"
-                                    :project="project"
-                                />
-
-                            </div>
-                            <p v-if="!trending_projects.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
-                        </div>
                     </div>
                 </div>
 
@@ -137,9 +113,9 @@
 
                     <div class="row" v-if="item.type === 'product_slider'" :key="`level-1-${index}`">
                         <div class="col-12">
-                            <c-products-slider :products="item.data.products" :title="item.data.title" :maxPerView="3" v-if="item.data.products.length" />
+                            <c-product-slider :products="item.data.products" :title="item.data.title" :maxPerView="3" v-if="item.data.products.length" />
 
-                            <c-block class="margin-bottom-30" :title="item.data.title" :onlyContentBg="true" :noGutter="true" v-else>
+                            <c-block class="margin-bottom-30" :title="item.data.title" :noGutter="true" :onlyContentBg="true" :bgGradient="true" v-else>
                                 <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                             </c-block>
                         </div>
@@ -190,18 +166,13 @@
 
                     <div class="row margin-bottom-30" v-if="item.type === 'asset_grid'" :key="`level-1-${index}`">
                         <div class="col-12">
-                            <c-block :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                                <c-heading-bar
-                                    slot="title"
-                                    class="mb-0"
-                                    :headingTabs="['Top Items', 'Most Wanted', 'Best Deals']"
-                                >
-                                    <template slot="additional-action">
-                                        <c-heading-bar-fields name="Trending" @clickUp=""  @clickDown=""/>
-                                        <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown=""/>
-                                    </template>
-                                </c-heading-bar>
-                                <div class="filter-blk d-flex justify-content-between align-items-center">
+                            <c-block title="Top 20 Items" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+                                <template slot="additional-action">
+                                    <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
+                                    <c-heading-bar-fields name="Trading" icon="star" @clickUp=""  @clickDown="" />
+                                </template>
+
+                                <div class="filter-blk d-flex justify-content-between align-items-center margin-bottom-20">
                                     <div class="d-inline-flex align-items-center">
                                         <c-dropdown id="test2" name="Filter by Genre" :showBg="true">
                                             <a href="#3">RPG</a>
@@ -238,7 +209,7 @@
 
                     <div class="row margin-bottom-30" v-if="item.type === 'product_news'" :key="`level-1-${index}`">
                         <div class="col-12">
-                            <c-heading-bar name="What's up with your content" :showArrows="false" :showBackground="false">
+                            <c-heading-bar name="What's up with your content" class="mb-0" :showArrows="false" :showBackground="false">
                                 <template slot="additional-action">
                                     <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
                                     <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
@@ -267,7 +238,7 @@
                     <div class="row margin-bottom-30" v-if="item.type === 'curator_reviews'" :key="`level-1-${index}`">
                         <div class="col-12">
                             <c-block title="From our curators" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                                <c-curators-reviews
+                                <c-curator-reviews
                                     :reviews="item.data.reviews"
                                 />
                             </c-block>
@@ -319,10 +290,10 @@ export default {
         'c-heading-bar-fields' : (resolve) => require(['@/ui/components/heading-bar/additional-action'], resolve),
         'c-product-card': (resolve) => require(['@/ui/components/store/product-card'], resolve),
         'c-product-card-dynamic': (resolve) => require(['@/ui/components/store/product-card-dynamic'], resolve),
-        'c-products-cards': (resolve) => require(['@/ui/components/store/products-cards'], resolve),
-        'c-products-slider': (resolve) => require(['@/ui/components/store/product-slider'], resolve),
-        'c-curators-reviews': (resolve) => require(['@/ui/components/store/curators-reviews'], resolve),
-        'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description'], resolve),
+        'c-product-cards': (resolve) => require(['@/ui/components/store/product-cards'], resolve),
+        'c-product-slider': (resolve) => require(['@/ui/components/store/product-slider'], resolve),
+        'c-curator-reviews': (resolve) => require(['@/ui/components/store/curator-reviews'], resolve),
+        'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
         'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
         'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
         'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
@@ -333,7 +304,7 @@ export default {
         'c-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
         'c-games-explorer': (resolve) => require(['@/ui/components/store/games-explorer'], resolve),
         'c-assets-list': (resolve) => require(['@/ui/components/assets-list-item'], resolve),
-        'c-projects-card': (resolve) => require(['@/ui/components/projects/card'], resolve),
+        'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
         'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve),
         'c-main-banner': (resolve) => require(['@/ui/components/banner'], resolve),
         'c-swiper': swiper,
@@ -448,7 +419,6 @@ export default {
 
             return this.$store.state.marketplace.products
         },
-        // slice the array of data to display
         sliced() {
             return this.list.slice(0, this.display);
         },
@@ -522,11 +492,22 @@ export default {
         toggleSimulator() {
             this.$store.commit('marketplace/setSimulatorMode', !this.$store.state.marketplace.simulator_mode)
         },
-        clearSimulatorData() {
+        importSeedData() {
+            window.BlockHub.importSeedData()
+        },
+        resetSeedData() {
             this.$store.state.network.account.notifications = []
             this.$store.state.marketplace.trending_projects = []
             this.$store.state.marketplace.curator_reviews = []
             this.$store.state.marketplace.product_news = []
+        },
+        saveSettings() {
+            window.BlockHub.saveDatabase()
+        },
+        resetSettings() {
+            this.$store.state.marketplace.desktop_mode = false
+            this.$store.state.network.signed_in = false
+            this.$store.state.marketplace.developer_mode = false
         },
         sendDesktopMessage() {
             if (!window.isElectron) {

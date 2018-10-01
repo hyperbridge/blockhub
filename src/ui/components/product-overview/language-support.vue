@@ -1,31 +1,31 @@
 <template>
-    <div class="card transparent">
-        <div class="card-body">
-            <h2 class="title">Languages <i class="fas fa-laptop title-icon"></i></h2>
-            <table class="language-support__table">
-                <thead>
-                    <th>Name</th>
-                    <th>Interface</th>
-                    <th>Audio</th>
-                    <th>CC</th>
-                </thead>
-                <tbody>
-                    <tr v-for="lang in languages" :key="lang.name">
-                        <template v-for="(value, property) in lang">
-                            <td v-if="property == 'name'" :key="property">{{ value }}</td>
-                            <td v-else :key="property">
-                                <i
-                                    v-if="value"
-                                    class="fas"
-                                    :class="`fa-${options_icons[property]}`"
-                                ></i>
-                            </td>
-                        </template>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <c-block title="Language Support" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+        <template slot="heading-bar">
+            <i class="fas fa-laptop title-icon"></i>
+        </template>
+        <table class="language-support__table">
+            <thead>
+                <th>Name</th>
+                <th>Interface</th>
+                <th>Audio</th>
+                <th>CC</th>
+            </thead>
+            <tbody>
+                <tr v-for="lang in languages" :key="lang.name">
+                    <template v-for="(value, property) in lang">
+                        <td v-if="property == 'name'" :key="property">{{ value }}</td>
+                        <td v-else :key="property">
+                            <i
+                                v-if="value"
+                                class="fas"
+                                :class="`fa-${options_icons[property]}`"
+                            ></i>
+                        </td>
+                    </template>
+                </tr>
+            </tbody>
+        </table>
+    </c-block>
 </template>
 
 <script>
@@ -45,6 +45,9 @@ export default {
                 full_audio: 'volume-off'
             }
         }
+    },
+    components: {
+        'c-block': (resolve) => require(['@/ui/components/block'], resolve),
     }
 }
 </script>

@@ -405,7 +405,7 @@
 
     .main-content {
         margin-top: 15px;
-        padding: 15px;
+        padding: 0;
         border-radius: 5px;
         overflow: hidden;
         color: #C6C6D6;

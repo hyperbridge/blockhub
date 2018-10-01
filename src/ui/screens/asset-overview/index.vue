@@ -9,7 +9,7 @@
                 </div>
                 <div class="row" v-if="asset">
 
-                    <div class="col-12 col-lg-8 margin-bottom-15">
+                    <div class="col-12 col-lg-8 col-xl-9 margin-bottom-15">
                         <div class="asset-head">
                             <div class="asset-head__asset-title">
                                 <div class="title-thumb">
@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="title-text">
                                     <h1>{{ asset.name }}</h1>
-                                    <span><strong>Game title</strong></span>
+                                    <span><strong>{{ asset.game_name }}</strong></span>
                                     <span class="company">{{ asset.product_name }}</span>
                                 </div>
                             </div>
@@ -28,7 +28,7 @@
                                         <i class="fas fa-box"></i>
                                     </div>
                                     <div class="info">
-                                        <div class="h5 mb-0 font-weight-bold">54</div>
+                                        <div class="h5 mb-0 font-weight-bold">{{ asset.inventory_count }}</div>
                                         <p class="p-0">Your Inventory</p>
                                     </div>
                                 </div>
@@ -37,8 +37,8 @@
                                         <i class="fas fa-shopping-basket"></i>
                                     </div>
                                     <div class="info">
-                                        <div class="h5 mb-0 font-weight-bold">451k</div>
-                                        <p class="p-0">For Dale</p>
+                                        <div class="h5 mb-0 font-weight-bold">{{ asset.existing_count }}</div>
+                                        <p class="p-0">For Sale</p>
                                     </div>
                                 </div>
                                 <div class="icon_item">
@@ -46,21 +46,21 @@
                                         <i class="fas fa-globe"></i>
                                     </div>
                                     <div class="info">
-                                        <div class="h5 mb-0 font-weight-bold">13.5m</div>
+                                        <div class="h5 mb-0 font-weight-bold">{{ asset.for_sale_count }}</div>
                                         <p class="p-0">Existing</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-4 margin-bottom-15">
+                    <div class="col-12 col-lg-4 col-xl-3 margin-bottom-15">
                         <div class="asset-head__company-logo">
-                            <c-img src="https://i.imgur.com/BngHC98.png"/>
+                            <c-img src="https://i.imgur.com/BngHC98.png" class="img-fluid"/>
                         </div>
                     </div>
 
                     <div class="col-12 col-lg-6 margin-top-30 margin-bottom-15">
-                        <c-block class="padding-10 h-100">
+                        <c-block class="padding-10 h-100" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                             <c-heading-bar name="Attributes">
                                 <template slot="additional-action">
                                     <a href="#3" class="font-weight-bold text-uppercase text-white">
@@ -89,8 +89,7 @@
                     </div>
 
                     <div class="col-12 col-lg-6 margin-top-30 margin-bottom-15">
-                        <c-block class="padding-10 h-100">
-                            <c-heading-bar name="Sales">
+                        <c-block title="Sales" class="h-100" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                                 <template slot="additional-action">
                                     <a href="#3" class="font-weight-bold text-uppercase text-white">
                                         History
@@ -99,20 +98,17 @@
                                         Chart
                                     </a>
                                 </template>
-                            </c-heading-bar>
                         </c-block>
                     </div>
 
                     <div class="col-12 margin-top-15 margin-bottom-15">
-                        <c-block class="padding-bottom-0">
-                            <c-heading-bar name="Offers">
+                        <c-block title="Offers"  class="padding-bottom-0" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                                 <template slot="additional-action">
                                     <c-heading-bar-fields name="Rarity" icon="fas fa-trophy" @click_up=""  @click_down="" />
                                     <c-heading-bar-fields name="Value" icon="fas fa-dollar" @click_up=""  @click_down="" />
                                 </template>
-                            </c-heading-bar>
                             <div class="offers__list">
-                                <div v-for="(item, index) in asset.offers_list"
+                                <div v-for="(item, index) in offers"
                                      :key="index"
                                      class="list-item">
                                     <div class="item-name-img">
@@ -153,10 +149,10 @@
                     </div>
 
                     <div class="col-12 margin-top-15 margin-bottom-15">
-                        <c-block class="padding-bottom-0" title="Yours Inventory">
+                        <c-block class="padding-bottom-0" title="Yours Inventory" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                             <div class="my-assets__list">
                                 <div class="item"
-                                     v-for="(item, index) in my_assets"
+                                     v-for="(item, index) in inventory"
                                      :key="index">
                                     <a href="#3" data-toggle="modal" data-target="#assetModal">
                                         <i class="fas fa-external-link-alt"></i>
@@ -183,147 +179,10 @@
                             <c-pagination :pages="5" :showBg="true">
                             </c-pagination>
                         </c-block>
-                        <div class="modal fade asset-modal" id="assetModal" tabindex="-1" role="dialog"
-                             aria-labelledby="assetModal" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <a href="#3" class="asset-link">
-                                        <i class="fas fa-link"></i>
-                                    </a>
-                                    <div class="asset-info d-flex justify-content-between align-items-stretch">
-                                        <div class="thumb">
-                                            <c-img src="http://via.placeholder.com/150x150"/>
-                                        </div>
-                                        <div class="info">
-                                            <div class="w-100 align-self-start">
-                                                <h3>Sword of Pain</h3>
-                                                <h4>Diablo III</h4>
-                                            </div>
-                                            <div class="w-100 align-self-end">
-                                                <h4 class="mb-2">1512 GOV</h4>
-                                                <p>Based on 7461 other transactions</p>
-                                                <span class="mr-2">Lowest: 32 GOV</span>
-                                                <span>Highest: 7850 GOV</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="action text-right my-4">
-                                        <a href="#3" class="btn btn-sm btn-danger float-left">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
-                                        <a href="#3" class="btn btn-sm btn-info">
-                                            Send
-                                            <i class="fas fa-share"></i>
-                                        </a>
-                                        <a href="#3" class="btn btn-sm btn-success ml-2">
-                                            Use
-                                            <i class="fas fa-chevron-down"></i>
-                                        </a>
-                                    </div>
-                                    <div class="offer-switch d-flex w-100 align-items-center mb-4">
-                                        <h3 class="my-0">
-                                            Accept offers for this item?
-                                        </h3>
-                                        <label class="switch switch-sm py-0 my-0 ml-4">
-                                            <input type="checkbox" name="switch_modal" checked="" value="0">
-                                            <span></span>
-                                        </label>
-                                    </div>
-                                    <div class="threshold mt-1 mb-4">
-                                        <h3>
-                                            Price Trechold
-                                        </h3>
-                                        <input type="range" class="form-control-range" id="priceTrechold">
-                                        <div class="d-flex justify-content-between">
-                                            <div class="text-left">
-                                                <div>0%</div>
-                                                <div>0.00</div>
-                                            </div>
-                                            <div class="text-center">
-                                                <div>50%</div>
-                                                <div>250</div>
-                                            </div>
-                                            <div class="text-right">
-                                                <div>100%</div>
-                                                <div>500</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="game-metadata w-100">
-                                        <div class="metadata-line">
-                                            <div>
-                                                Type
-                                            </div>
-                                            <div>
-                                                Legendary Two Handed Sword
-                                            </div>
-                                        </div>
-                                        <div class="metadata-line">
-                                            <div>
-                                                Damage per Second
-                                            </div>
-                                            <div>
-                                                2.905.8
-                                            </div>
-                                        </div>
-                                        <div class="metadata-line">
-                                            <div>
-                                                Damage
-                                            </div>
-                                            <div>
-                                                2193-2880
-                                            </div>
-                                        </div>
-                                        <div class="metadata-line">
-                                            <div>
-                                                Attacks per Second
-                                            </div>
-                                            <div>
-                                                1.15
-                                            </div>
-                                        </div>
-                                        <div class="metadata-line">
-                                            <div>
-                                                Primary
-                                            </div>
-                                            <div>
-                                                +1379-1679 Damage, +9% Damage, +1121 Strenght,
-                                                Reduced Cooldown of all skills by 10%
-                                            </div>
-                                        </div>
-                                        <div class="metadata-line">
-                                            <div>
-                                                Secondary
-                                            </div>
-                                            <div>
-                                                Monster kills grant +151 experience, all condemned
-                                                enemies also trigger condemn's explosion
-                                            </div>
-                                        </div>
-                                        <div class="metadata-line">
-                                            <div>
-                                                Required Level
-                                            </div>
-                                            <div>
-                                                70
-                                            </div>
-                                        </div>
-                                        <div class="metadata-line">
-                                            <div>
-                                                Durability
-                                            </div>
-                                            <div>
-                                                40/41
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="col-12 margin-top-15 margin-bottom-15">
-                        <c-block title="Collections Containing this Item" class="pb-0">
+                        <c-block title="Collections Containing this Item" class="pb-0" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                             <div class="collections-container">
                                 <div class="item" v-for="(item, index) in collection_items" :key="index">
                                     <c-collection-item :item="item" />
@@ -448,14 +307,38 @@
                 ],
             }
         },
-        methods: {},
+        methods: {
+            numberFormat(value){
+                return Math.log(value) / Math.log(10)
+            }
+        },
         computed: {
-            asset: function () {
+            asset() {
                 return this.$store.state.marketplace.assets[this.id] || null;
                 if (!this.$store.state.marketplace.assets)
                     return
 
                 return this.$store.state.marketplace.assets[this.id]
+            },
+            offers(){
+                var ids = this.$store.state.marketplace.assets[this.id].offers_list,
+                    list = this.$store.state.marketplace.assets,
+                    arr = [];
+                ids.forEach( (id, i) => {
+                    if (list[id])
+                        arr.push(list[id])
+                })
+                return arr;
+            },
+            inventory(){
+                var ids = this.$store.state.marketplace.assets[this.id].inventory_list,
+                    list = this.$store.state.marketplace.assets,
+                    arr = [];
+                ids.forEach( (id, i) => {
+                    if (list[id])
+                        arr.push(list[id])
+                })
+                return arr;
             }
         }
     }
@@ -542,7 +425,7 @@
         img {
             width: auto;
             height: auto;
-            max-width: 300px;
+            max-width: 100%;
             max-height: 100%;
         }
     }

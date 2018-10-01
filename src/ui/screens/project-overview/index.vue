@@ -380,6 +380,7 @@
                                 <c-block title="Contribute" class="margin-bottom-30">
                                     <c-contribute-form @click="showContributeModal" />
                                 </c-block>
+                                
                                 <c-contribute-pledge @click="showContributeModal" :price="10" name="Some awesome things" estimated_delivery="28.10.2018" ships_to="Anywhere in the world" :backers="37">
 
                                     Choose ONE Drabblecast "Best of" Audio Anthology:

@@ -54,8 +54,8 @@
             </div>
 
             <!-- SIDEPANEL -->
-            <!--<transition name="slideRight" v-if="initialized">-->
-            <c-sidepanel>
+            <transition name="slideRight" v-if="initialized">
+                <c-sidepanel>
                 <c-swiper :options="panelOption" ref="mySwiper">
                     <c-slide v-if="desktop_mode">
                         <div class="item">
@@ -297,21 +297,17 @@
                     </c-slide>
                 </c-swiper>
             </c-sidepanel>
-            <!--</transition>-->
+            </transition>
             <!-- //END SIDEPANEL -->
 
             <div class="status-bar" hidden>
                 {{ connection_status.message }}
             </div>
 
-            <c-send-funds-popup :activated="send_funds_modal_active" @close="closePopup" ref="modal">
-            </c-send-funds-popup>
-
-            <c-login-popup :activated="login_modal_active" @close="closePopup" ref="modal">
-            </c-login-popup>
-
-            <c-purchase-popup :activated="purchase_modal_active" @close="closePopup" ref="modal">
-            </c-purchase-popup>
+            <c-unlock-popup :activated="unlock_modal_active" @close="closePopup" ref="unlock_modal_active"></c-unlock-popup>
+            <c-send-funds-popup :activated="send_funds_modal_active" @close="closePopup" ref="send_funds_modal_active"></c-send-funds-popup>
+            <c-login-popup :activated="login_modal_active" @close="closePopup" ref="login_modal_active"></c-login-popup>
+            <c-purchase-popup :activated="purchase_modal_active" @close="closePopup" ref="purchase_modal_active"></c-purchase-popup>
 
             <c-popup :activated="notifPopup.show_popup"
                      :title="notifPopup.title"
@@ -327,7 +323,8 @@
                     vehicula.
                 </p>
             </c-popup>
-            <c-cookie-policy/>
+            
+            <c-cookie-policy v-if="!desktop_mode" />
         </div>
         <!-- //END PAGE CONTENT -->
 
@@ -358,6 +355,7 @@
             'c-product-navigation': (resolve) => require(['@/ui/components/navigation/product'], resolve),
             'c-project-navigation': (resolve) => require(['@/ui/components/navigation/project'], resolve),
             'c-notification': (resolve) => require(['@/ui/components/notification/index.vue'], resolve),
+            'c-unlock-popup': (resolve) => require(['@/ui/components/unlock-popup/index.vue'], resolve),
             'c-login-popup': (resolve) => require(['@/ui/components/login-popup/index.vue'], resolve),
             'c-send-funds-popup': (resolve) => require(['@/ui/components/send-funds-popup/index.vue'], resolve),
             'c-purchase-popup': (resolve) => require(['@/ui/components/purchase-popup/index.vue'], resolve),
@@ -378,6 +376,9 @@
             },
             swiper() {
                 return this.$refs.mySwiper.swiper
+            },
+            unlock_modal_active() {
+                return this.$store.state.network.active_modal === 'unlock'
             },
             send_funds_modal_active() {
                 return this.$store.state.network.active_modal === 'send-funds'
@@ -648,5 +649,11 @@
         overflow-x: auto;
         height: calc(100% - 100px);
         padding-bottom: 20px;
+    }
+    .col-lg-6{
+        @media (max-width: 1500px){
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
     }
 </style>

@@ -30,7 +30,7 @@
                 <c-loading-logo :isLoading="isLoader" />
             </a>
             <div class="app-header__bar-right">
-                <a href="javascript:;" data-action="fixedpanel-toggle">
+                <a href="javascript:;" id="sidebar_toggle_btn" data-action="fixedpanel-toggle">
                     <span class="fa fa-cog"></span>
                 </a>
             </div>
@@ -90,7 +90,7 @@
                                 <span class="text">Satoshi</span>
                             </a>
                         </li>
-                        <li v-if="signed_in">
+                        <li v-if="signed_in && darklaunch.config.ACCOUNT_CONTACTS">
                             <a href="/#/identity/1/contacts">
                                 <span class="icon fa fa-users"></span>
                                 <span class="text">Contacts</span>
@@ -125,7 +125,12 @@ export default {
     },
     data() {
         return {
-            show_menu: false
+            show_menu: false,
+            darklaunch: {
+                config: {
+                    ACCOUNT_CONTACTS: false
+                }
+            }
         }
     },
     computed: {
@@ -551,6 +556,10 @@ export default {
             }
             &:last-of-type{
                 margin-left:5px;
+            }
+            &:hover{
+                color: #43B4C9;
+                cursor: pointer;
             }
         }
         .fa{

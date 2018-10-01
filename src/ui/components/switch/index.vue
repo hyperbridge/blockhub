@@ -22,7 +22,7 @@
 
 <script>
     export default {
-        name: 'switch',
+        name: 'c-switch',
         inheritAttrs: false,
         props: {
             checked: Boolean,

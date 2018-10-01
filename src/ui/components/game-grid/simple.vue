@@ -23,7 +23,7 @@
 
 <script>
 export default {
-    name: 'games-grid',
+    name: 'game-grid',
     props: {
         items: {
             type: Array,

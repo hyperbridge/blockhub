@@ -1,5 +1,5 @@
 <template>
-    <c-block :title="title" class="card invert purchase-block">
+    <c-block :title="title" class="purchase-block" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
 
         <div class="purchase-block__tags" v-if="tags">
             <div v-for="(tag, index) in tags" :key="index">
@@ -26,7 +26,7 @@
         </div>
 
         <div class="purchase-block__buttons-group">
-            <c-button status="success" :href="purchaseLink" icon="shopping-cart" size="lg" v-if="isReleased && price" @click="onClickPurchase">
+            <c-button status="custom" class="btn-outline-red" :href="purchaseLink" icon="shopping-cart" size="lg" v-if="isReleased && price" @click="onClickPurchase">
                 Proceed to Purchase
             </c-button>
 
@@ -39,7 +39,7 @@
             </c-button>
 
             <button @click="$emit('addToWishlist')" class="wishlist-btn" v-if="!inWishlist">
-                <i class="far fa-heart mr-2"></i>
+                <i class="fas fa-heart mr-2"></i>
                 Add to Wishlist
             </button>
             <button @click="$emit('removeFromWishlist')" class="wishlist-btn is-in" v-if="inWishlist">
@@ -193,6 +193,17 @@
                 outline: none;
                 box-shadow: none;
             }
+        }
+    }
+    .btn-outline-red{
+        background: transparent;
+        border: 1px solid #F75D5D;
+        padding: 8px 15px!important;
+        border-radius: 3px;
+        color: #F75D5D;
+        &:hover{
+            background: #F75D5D;
+            color: #30304b;
         }
     }
 </style>

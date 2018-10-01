@@ -1,6 +1,6 @@
 <template>
-    <div class="curators-wrapper">
-        <div class="curators-wrapper__content">
+    <div class="curator-reviews-wrapper">
+        <div class="curator-reviews-wrapper__content">
             <c-curator-review
                 v-for="(review, index) in reviews"
                 :key="index"
@@ -14,7 +14,7 @@
 
 <script>
     export default {
-        name: 'curators-reviews',
+        name: 'curator-reviews',
         components: {
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
             'c-curator-review': (resolve) => require(['@/ui/components/store/curator-review'], resolve)
@@ -31,7 +31,7 @@
 <style lang="scss" scoped>
 @import '@/css/helpers/mixins.scss';
 
-.curators-wrapper {
+.curator-reviews-wrapper {
     box-sizing: border-box;
     padding: 5px 0;
     border-radius: 4px;

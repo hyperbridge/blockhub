@@ -1,5 +1,5 @@
 <template>
-    <c-block title="System Requirements">
+    <c-block title="System Requirements" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
         <template slot="heading-bar">
             <i class="fas fa-laptop title-icon"></i>
         </template>

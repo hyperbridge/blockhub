@@ -4,31 +4,31 @@
             <slot name="left-content" />
         </div>
 
-        <nav class="pagination__nav" :class="{ 'show-bg' : showBg}">
+        <nav class="pagination__nav" :class="{ 'show-bg' : showBg }">
             <ul>
                 <li>
                     <a
-                        href="#"
+                        href="#first"
                         class="first"
-                        @click.prevent="active_page = 1"
+                        @click.prevent="$emit('pageChange', 1)"
                     >
-                        <i class="fas fa-angle-double-left"></i>
+                        <c-icon name="angle-double-left"/>
                     </a>
                 </li>
                 <li>
                     <a
-                        href="#"
+                        href="#prev"
                         class="prev"
                         @click.prevent="change_page('prev')"
                     >
-                        <i class="fas fa-angle-left"></i>
+                        <c-icon name="angle-left"/>
                     </a>
                 </li>
 
                 <li
                     v-for="page in visible_pages"
                     :key="page"
-                    :class="{ 'active': page == active_page }"
+                    :class="{ 'active': page === activePage }"
                 >
                     <a
                         :href="`#${page}`"
@@ -37,20 +37,20 @@
                 </li>
                 <li>
                     <a
-                        href="#3"
+                        href="#next"
                         class="next"
                         @click.prevent="change_page('next')"
                     >
-                        <i class="fas fa-angle-right"></i>
+                        <c-icon name="angle-right"/>
                     </a>
                 </li>
                 <li>
                     <a
-                        href="#3"
+                        href="#last"
                         class="last"
-                        @click.prevent="active_page = pages"
+                        @click.prevent="$emit('pageChange', pages)"
                     >
-                        <i class="fas fa-angle-double-right"></i>
+                        <c-icon name="angle-double-right"/>
                     </a>
                 </li>
             </ul>
@@ -71,50 +71,44 @@
                 type: [Number, String],
                 default: 0
             },
+            activePage: {
+                type: Number,
+                default: 1
+            },
             pages_show: {
                 type: Number,
                 default: 8
             },
-            debounce: {
-                type: Number,
-                default: 0
-            },
-            showBg:{
+            showBg: {
                 type: Boolean,
                 default: false
             }
         },
-        data() {
-            return {
-                active_page: 1,
-                timeout: null
-            }
-        },
         methods: {
             change_page(page) {
-                const { active_page, pages, debounce } = this;
+                const { activePage, pages } = this;
 
                 if (typeof page === 'number') {
-                    this.active_page = page;
+                    this.$emit('pageChange', page);
                 } else if (page === 'next') {
-                    if (active_page < pages) {
-                        this.active_page++;
+                    if (activePage < pages) {
+                        this.$emit('pageChange', page + 1);
                     }
                 } else if (page === 'prev') {
-                    if (active_page > 1) {
-                        this.active_page--;
+                    if (activePage > 1) {
+                        this.$emit('pageChange', page + -1);
                     }
                 }
             }
         },
         computed: {
             visible_pages() {
-                const { active_page, pages, base_pages, pages_show } = this;
+                const { activePage, pages, base_pages, pages_show } = this;
                 const mid_val = Math.round(pages_show / 2);
                 const numbers = [];
 
-                if (active_page > mid_val && pages > pages_show) {
-                    let cur_page = active_page + mid_val >= pages ? pages - pages_show : active_page - mid_val;
+                if (activePage > mid_val && pages > pages_show) {
+                    let cur_page = activePage + mid_val >= pages ? pages - pages_show : activePage - mid_val;
                     for (let i = 0; i < pages_show; i++) {
                         cur_page++;
                         numbers.push(cur_page);
@@ -126,14 +120,6 @@
                     }
                 }
                 return numbers;
-            }
-        },
-        watch: {
-            active_page(page) {
-                clearTimeout(this.timeout);
-                this.timeout = setTimeout(() => {
-                    this.$emit('pageChange', page);
-                }, this.debounce);
             }
         }
     }

@@ -26,6 +26,9 @@
         <div class="filter-blk">
             <c-searcher
                 @input="search"
+                @keyup.enter.native="goToSearchPage()"
+                @click="goToSearchPage()"
+                v-model="phrase"
                 class="margin-bottom-20"
                 :results="filteredResults"
                 resultUrl="/product/"
@@ -59,8 +62,7 @@
             </div>
             <div class="action">
                 <a href="#3" class="btn btn-filter">
-                    <i class="fas fa-filter"></i>
-                    Filter
+                    Search
                 </a>
                 <a href="#3" class="btn btn-link">
                     More filters ...
@@ -105,6 +107,7 @@
         mixins: [arrayHandler],
         data() {
             return {
+                phrase: '',
                 results: [],
                 platforms: [
                     { name: 'windows', prop: 'win' },
@@ -118,10 +121,18 @@
             filter() {
                 alert('Click')
             },
-            search(phrase) {
-                this.results = phrase.length
-                    ? this.getProductsByName(phrase)
+            search() {
+                this.results = this.phrase.length
+                    ? this.getProductsByName(this.phrase)
                     : [];
+            },
+            goToSearchPage() {
+                this.$router.push({
+                    name: 'Search Page',
+                    query: this.phrase.length
+                        ? { name: this.phrase }
+                        : {}
+                });
             }
         },
         computed: {

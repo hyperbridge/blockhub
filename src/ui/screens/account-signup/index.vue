@@ -9,25 +9,32 @@
                             <li v-for="error in errors" :key="error">{{ error }}</li>
                         </ul>
                     </p>
-                    <c-tabs :currentStep="current_step">
-                        <c-tab name="Step 1" :selected="true" :showFooter="true">
-                            <div class="tab-container">
-                                <div class="tab-card">
-                                    <h4>Personal Information</h4>
-                                    <form action="/" method="post">
+                    <form action="/" method="post">
+                        <c-tabs :currentStep="current_step">
+                            <c-tab name="Step 1" :selected="true" :showFooter="true">
+                                <div class="tab-container">
+                                    <div class="tab-card">
+                                        <h4>Personal Information</h4>
                                         <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Email</label>
+                                                    <input type="email" class="form-control" placeholder="Email"
+                                                            name="email" v-model="account.email">
+                                                </div>
+                                            </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">First name</label>
                                                     <input type="text" class="form-control" placeholder="First name"
-                                                           name="first_name" v-model="account.first_name">
+                                                            name="first_name" v-model="account.first_name">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Last name</label>
                                                     <input type="text" class="form-control" placeholder="Last name"
-                                                           name="last_name" v-model="account.last_name">
+                                                            name="last_name" v-model="account.last_name">
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -46,334 +53,668 @@
                                                         </span>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-card">
+                                        <h4>Security</h4>
 
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Password</label>
+                                                    <input type="password" class="form-control" placeholder="Password"
+                                                            name="password" v-model="account.password">
+                                                </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label class="sr-only">Email</label>
-                                                    <input type="email" class="form-control" placeholder="Email"
-                                                           name="email" v-model="account.email">
+                                                    <label class="sr-only">Repeat Password</label>
+                                                    <input type="password" class="form-control" placeholder="Password again"
+                                                            name="repeat_password" v-model="account.repeat_password">
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="tab-card">
-                                    <h4>Agreement</h4>
-                                    <div class="terms_block">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Secret Question</label>
+                                                    <!-- http://goodsecurityquestions.com/examples/ -->
+                                                    <select id="secret_question" name="secret_question" class="form-control" v-model="account.secret_question">
+                                                        <option value="" selected>Choose Secret Question</option>
+                                                        <option value="last_name_first_kissed">What is the first name of the person you first kissed?</option>
+                                                        <option value="first_name_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
+                                                        <option value="favorite_high_school_teacher">What is the last name of your favorite teacher in high school?</option>
+                                                        <option value="last_name_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
+                                                        <option value="wedding_reception">What is the name of the plac eyour wedding reception was held?</option>
+                                                        <option value="city_sibling_live">In what city or town does your nearest sibling live?</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Answer #1</label>
+                                                    <input type="text" class="form-control" placeholder="Your secret answer"
+                                                            name="secret_answer" v-model="account.secret_answer">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <p>If you ever need to recover your password, you will need the answer to this secret question AND your birthday. With these two you will be able to recover your password, which will allow you to recover your account. If your account is compromised, you should transfer your funds immediately.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-card">
+                                        <h4>Agreement</h4>
+                                        <div class="terms_block">
 
-                                        <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span>
-                                        </h1>
+                                            <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span>
+                                            </h1>
 
-                                        <h2>Introduction</h2>
+                                            <h2>Introduction</h2>
 
-                                        <p>These Website Standard Terms and Conditions written on this webpage shall
-                                            manage
-                                            your use of our website, <span class="highlight preview_website_name">BlockHub</span>
-                                            accessible at <span class="highlight preview_website_url">BlockHub.gg</span>.
-                                        </p>
+                                            <p>These Website Standard Terms and Conditions written on this webpage shall
+                                                manage
+                                                your use of our website, <span class="highlight preview_website_name">BlockHub</span>
+                                                accessible at <span class="highlight preview_website_url">BlockHub.gg</span>.
+                                            </p>
 
-                                        <p>These Terms will be applied fully and affect to your use of this Website. By
-                                            using this Website, you agreed to accept all terms and conditions written in
-                                            here. You must not use this Website if you disagree with any of these
-                                            Website
-                                            Standard Terms and Conditions.</p>
+                                            <p>These Terms will be applied fully and affect to your use of this Website. By
+                                                using this Website, you agreed to accept all terms and conditions written in
+                                                here. You must not use this Website if you disagree with any of these
+                                                Website
+                                                Standard Terms and Conditions.</p>
 
-                                        <p>Minors or people below 18 years old are not allowed to use this Website.</p>
+                                            <p>Minors or people below 18 years old are not allowed to use this Website.</p>
 
-                                        <h2>Intellectual Property Rights</h2>
+                                            <h2>Intellectual Property Rights</h2>
 
-                                        <p>Other than the content you own, under these Terms, <span
-                                            class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and/or its
-                                            licensors
-                                            own all the intellectual property rights and materials contained in this
-                                            Website.</p>
+                                            <p>Other than the content you own, under these Terms, <span
+                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and/or its
+                                                licensors
+                                                own all the intellectual property rights and materials contained in this
+                                                Website.</p>
 
-                                        <p>You are granted limited license only for purposes of viewing the material
-                                            contained on this Website.</p>
+                                            <p>You are granted limited license only for purposes of viewing the material
+                                                contained on this Website.</p>
 
-                                        <h2>Restrictions</h2>
+                                            <h2>Restrictions</h2>
 
-                                        <p>You are specifically restricted from all of the following:</p>
+                                            <p>You are specifically restricted from all of the following:</p>
 
-                                        <ul>
-                                            <li>publishing any Website material in any other media;</li>
-                                            <li>selling, sublicensing and/or otherwise commercializing any Website
-                                                material;
-                                            </li>
-                                            <li>publicly performing and/or showing any Website material;</li>
-                                            <li>using this Website in any way that is or may be damaging to this
-                                                Website;
-                                            </li>
-                                            <li>using this Website in any way that impacts user access to this
-                                                Website;
-                                            </li>
-                                            <li>using this Website contrary to applicable laws and regulations, or in
+                                            <ul>
+                                                <li>publishing any Website material in any other media;</li>
+                                                <li>selling, sublicensing and/or otherwise commercializing any Website
+                                                    material;
+                                                </li>
+                                                <li>publicly performing and/or showing any Website material;</li>
+                                                <li>using this Website in any way that is or may be damaging to this
+                                                    Website;
+                                                </li>
+                                                <li>using this Website in any way that impacts user access to this
+                                                    Website;
+                                                </li>
+                                                <li>using this Website contrary to applicable laws and regulations, or in
+                                                    any
+                                                    way may cause harm to the Website, or to any person or business entity;
+                                                </li>
+                                                <li>engaging in any data mining, data harvesting, data extracting or any
+                                                    other
+                                                    similar activity in relation to this Website;
+                                                </li>
+                                                <li>using this Website to engage in any advertising or marketing.</li>
+                                            </ul>
+
+                                            <p>Certain areas of this Website are restricted from being access by you and
+                                                <span
+                                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> may further
+                                                restrict
+                                                access by you to any areas of this Website, at any time, in absolute
+                                                discretion.
+                                                Any user ID and password you may have for this Website are confidential and
+                                                you
+                                                must maintain confidentiality as well.</p>
+
+                                            <h2>Your Content</h2>
+
+                                            <p>In these Website Standard Terms and Conditions, “Your Content” shall mean any
+                                                audio, video text, images or other material you choose to display on this
+                                                Website. By displaying Your Content, you grant <span
+                                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> a
+                                                non-exclusive,
+                                                worldwide irrevocable, sub licensable license to use, reproduce, adapt,
+                                                publish,
+                                                translate and distribute it in any and all media.</p>
+
+                                            <p>Your Content must be your own and must not be invading any third-party's
+                                                rights.
+                                                <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> reserves
+                                                the
+                                                right to remove any of Your Content from this Website at any time without
+                                                notice.</p>
+
+                                            <h2>No warranties</h2>
+
+                                            <p>This Website is provided “as is,” with all faults, and <span
+                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> express no
+                                                representations or warranties, of any kind related to this Website or the
+                                                materials contained on this Website. Also, nothing contained on this Website
+                                                shall be interpreted as advising you.</p>
+
+                                            <h2>Limitation of liability</h2>
+
+                                            <p>In no event shall <span
+                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span>, nor any of its
+                                                officers, directors and employees, shall be held liable for anything arising
+                                                out
+                                                of or in any way connected with your use of this Website whether such
+                                                liability
+                                                is under contract. &nbsp;<span class="highlight preview_company_name">Hyperbridge Technology Inc.</span>,
+                                                including its officers, directors and employees shall not be held liable for
                                                 any
-                                                way may cause harm to the Website, or to any person or business entity;
-                                            </li>
-                                            <li>engaging in any data mining, data harvesting, data extracting or any
-                                                other
-                                                similar activity in relation to this Website;
-                                            </li>
-                                            <li>using this Website to engage in any advertising or marketing.</li>
-                                        </ul>
+                                                indirect, consequential or special liability arising out of or in any way
+                                                related to your use of this Website.</p>
 
-                                        <p>Certain areas of this Website are restricted from being access by you and
-                                            <span
-                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> may further
-                                            restrict
-                                            access by you to any areas of this Website, at any time, in absolute
-                                            discretion.
-                                            Any user ID and password you may have for this Website are confidential and
-                                            you
-                                            must maintain confidentiality as well.</p>
+                                            <h2>Indemnification<p></p>
 
-                                        <h2>Your Content</h2>
+                                                <p>You hereby indemnify to the fullest extent <span
+                                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> from and
+                                                    against
+                                                    any and/or all liabilities, costs, demands, causes of action, damages
+                                                    and
+                                                    expenses arising in any way related to your breach of any of the
+                                                    provisions
+                                                    of these Terms.</p>
 
-                                        <p>In these Website Standard Terms and Conditions, “Your Content” shall mean any
-                                            audio, video text, images or other material you choose to display on this
-                                            Website. By displaying Your Content, you grant <span
-                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> a
-                                            non-exclusive,
-                                            worldwide irrevocable, sub licensable license to use, reproduce, adapt,
-                                            publish,
-                                            translate and distribute it in any and all media.</p>
+                                            </h2>
+                                            <h2>Severability</h2>
 
-                                        <p>Your Content must be your own and must not be invading any third-party's
-                                            rights.
-                                            <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> reserves
-                                            the
-                                            right to remove any of Your Content from this Website at any time without
-                                            notice.</p>
+                                            <p>If any provision of these Terms is found to be invalid under any applicable
+                                                law,
+                                                such provisions shall be deleted without affecting the remaining provisions
+                                                herein.</p>
 
-                                        <h2>No warranties</h2>
+                                            <h2>Variation of Terms</h2>
 
-                                        <p>This Website is provided “as is,” with all faults, and <span
-                                            class="highlight preview_company_name">Hyperbridge Technology Inc.</span> express no
-                                            representations or warranties, of any kind related to this Website or the
-                                            materials contained on this Website. Also, nothing contained on this Website
-                                            shall be interpreted as advising you.</p>
+                                            <p><span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is permitted
+                                                to
+                                                revise these Terms at any time as it sees fit, and by using this Website you
+                                                are
+                                                expected to review these Terms on a regular basis.</p>
 
-                                        <h2>Limitation of liability</h2>
+                                            <h2>Assignment</h2>
 
-                                        <p>In no event shall <span
-                                            class="highlight preview_company_name">Hyperbridge Technology Inc.</span>, nor any of its
-                                            officers, directors and employees, shall be held liable for anything arising
-                                            out
-                                            of or in any way connected with your use of this Website whether such
-                                            liability
-                                            is under contract. &nbsp;<span class="highlight preview_company_name">Hyperbridge Technology Inc.</span>,
-                                            including its officers, directors and employees shall not be held liable for
-                                            any
-                                            indirect, consequential or special liability arising out of or in any way
-                                            related to your use of this Website.</p>
+                                            <p>The <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is
+                                                allowed
+                                                to assign, transfer, and subcontract its rights and/or obligations under
+                                                these
+                                                Terms without any notification. However, you are not allowed to assign,
+                                                transfer, or subcontract any of your rights and/or obligations under these
+                                                Terms.</p>
 
-                                        <h2>Indemnification<p></p>
+                                            <h2>Entire Agreement</h2>
 
-                                            <p>You hereby indemnify to the fullest extent <span
-                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> from and
-                                                against
-                                                any and/or all liabilities, costs, demands, causes of action, damages
-                                                and
-                                                expenses arising in any way related to your breach of any of the
-                                                provisions
-                                                of these Terms.</p>
+                                            <p>These Terms constitute the entire agreement between <span
+                                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and you in
+                                                relation
+                                                to your use of this Website, and supersede all prior agreements and
+                                                understandings.</p>
 
-                                        </h2>
-                                        <h2>Severability</h2>
+                                            <h2>Governing Law &amp; Jurisdiction</h2>
 
-                                        <p>If any provision of these Terms is found to be invalid under any applicable
-                                            law,
-                                            such provisions shall be deleted without affecting the remaining provisions
-                                            herein.</p>
+                                            <p>These Terms will be governed by and interpreted in accordance with the laws
+                                                of
+                                                the State of <span class="highlight preview_country">Country</span>, and you
+                                                submit to the non-exclusive jurisdiction of the state and federal courts
+                                                located
+                                                in <span class="highlight preview_country">Country</span> for the resolution
+                                                of
+                                                any disputes.</p>
 
-                                        <h2>Variation of Terms</h2>
-
-                                        <p><span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is permitted
-                                            to
-                                            revise these Terms at any time as it sees fit, and by using this Website you
-                                            are
-                                            expected to review these Terms on a regular basis.</p>
-
-                                        <h2>Assignment</h2>
-
-                                        <p>The <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is
-                                            allowed
-                                            to assign, transfer, and subcontract its rights and/or obligations under
-                                            these
-                                            Terms without any notification. However, you are not allowed to assign,
-                                            transfer, or subcontract any of your rights and/or obligations under these
-                                            Terms.</p>
-
-                                        <h2>Entire Agreement</h2>
-
-                                        <p>These Terms constitute the entire agreement between <span
-                                            class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and you in
-                                            relation
-                                            to your use of this Website, and supersede all prior agreements and
-                                            understandings.</p>
-
-                                        <h2>Governing Law &amp; Jurisdiction</h2>
-
-                                        <p>These Terms will be governed by and interpreted in accordance with the laws
-                                            of
-                                            the State of <span class="highlight preview_country">Country</span>, and you
-                                            submit to the non-exclusive jurisdiction of the state and federal courts
-                                            located
-                                            in <span class="highlight preview_country">Country</span> for the resolution
-                                            of
-                                            any disputes.</p>
-
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center" slot="footer">
-                                <c-switch
-                                    v-model="account.agreement"
-                                    label_position="right"
-                                    :customLabel="true"
-                                >
-                                    <template slot="label">
-                                        I agree to the
-                                        <a href="#" data-toggle="modal" data-target="#terms-modal">terms</a> and
-                                        <a href="#" data-toggle="modal" data-target="#privacy-policy-modal">privacy policy</a>
-                                    </template>
-                                </c-switch>
-                                <c-switch
-                                    v-model="account.newsletter"
-                                    label="Sign up for our newsletter, get 100 HBX Bonus!"
-                                    label_position="right"
-                                />
-                                <div>
+                                <div class="d-flex justify-content-between align-items-center" slot="footer">
+                                    <c-switch
+                                        v-model="account.agreement"
+                                        label_position="right"
+                                        :customLabel="true"
+                                    >
+                                        <template slot="label">
+                                            I agree to the
+                                            <c-button status="plain" @click="terms = true">terms</c-button> and
+                                            <c-button status="plain"@click="privacy_policy = true">privacy policy</c-button>
+                                        </template>
+                                    </c-switch>
+                                    <c-switch
+                                        v-model="account.newsletter"
+                                        label="Sign up for our newsletter, get 100 HBX Bonus!"
+                                        label_position="right"
+                                    />
+                                    <div>
+                                        <c-button
+                                            @click="checkForm"
+                                            icon="angle-right"
+                                        >NEXT</c-button>
+                                    </div>
+                                </div>
+                            </c-tab>
+                            <c-tab name="Step 2" :showFooter="true">
+                                <div class="tab-container">
+                                    <div class="padding-40">
+                                        <h3>Welcome, {{ account.first_name }}. Let's build your main identity.</h3>
+                                        <p>Be aware that all your future identities will be tied to this one</p>
+                                        <div class="row margin-top-40">
+                                            <div class="col">
+                                                <div class="tab-card">
+                                                    <h4>Please complete</h4>
+                                                    <c-user-card
+                                                        :user="account.identity"
+                                                        @updateIdentity="(prop, val) => account.identity[prop] = val"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="tab-card">
+                                                    <h4>Preview your identity</h4>
+                                                    <c-user-card
+                                                        :user="account.identity"
+                                                        previewMode
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end" slot="footer">
                                     <c-button
-                                        @click="checkForm"
                                         icon="angle-right"
-                                    ></c-button>
+                                        @click="checkForm"
+                                    />
                                 </div>
-                            </div>
-                        </c-tab>
-                        <c-tab name="Step 2" :showFooter="true">
-                            <div class="tab-container">
-                                <div class="padding-40">
-                                    <h3>Welcome, {{ account.first_name }}. Let's build your main identity.</h3>
-                                    <p>Be aware that all your future identities will be tied to this one</p>
-                                    <div class="row margin-top-40">
-                                        <div class="col">
-                                            <div class="tab-card">
-                                                <h4>Please complete</h4>
-                                                <c-user-card
-                                                    :user="account.identity"
-                                                    @updateIdentity="(prop, val) => account.identity[prop] = val"
-                                                />
-                                            </div>
+                            </c-tab>
+                            <c-tab name="Step 3" :showFooter="true">
+                                <div class="tab-container">
+                                    <div class="padding-20">
+                                        <h3>Congratulations!</h3>
+                                        <p>That's it. You're now a member of BlockHub, and the future of decentralized protocols.</p>
+                                        <div class="verification-icon success">
+                                            <i class="fas fa-lock"></i>
                                         </div>
-                                        <div class="col">
-                                            <div class="tab-card">
-                                                <h4>Preview your identity</h4>
-                                                <c-user-card
-                                                    :user="account.identity"
-                                                    previewMode
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-end" slot="footer">
-                                <c-button
-                                    icon="angle-right"
-                                    @click="checkForm"
-                                />
-                            </div>
-                        </c-tab>
-                        <c-tab name="Step 3" :showFooter="true">
-                            <div class="tab-container">
-                                <div class="padding-20">
-                                    <h3>Verify your identity (Optional)</h3>
-                                    <p>Submit a proof of identity by your country of residence.<br>
-                                        This is optional but allows you to start with 1000 trust after verification,
-                                        allowing you to reassure reviews of other user's proofs of identity.
-                                        You can skip and finish later.</p>
-                                    <div class="row margin-top-40">
-                                        <c-user-card
-                                            class="col"
-                                            :user="account.identity"
-                                            previewMode
-                                        />
-                                        <div class="col">
-                                            <div class="tab-card margin-top-5 margin-bottom-15">
-                                                <div class="button_blk">
-                                                    <div class="button">
-                                                        select file
-                                                    </div>
-                                                    <div class="description">
-                                                        <h5>Govermment Issued ID</h5>
-                                                        <p>Maximum file size is 8mb</p>
-                                                    </div>
+                                        <p>Make sure to write down your keyphase, password, and secret answer and put it somewhere safe.</p>
+                                        <p>Next we will build your public identity.</p>
+
+                                        <h3>Now let's build your main identity. Don't worry, you can have more than one identity.</h3>
+                                        <div class="row margin-top-40">
+                                            <div class="col">
+                                                <div class="tab-card">
+                                                    <h4>Complete your identity</h4>
+                                                    <c-user-card
+                                                        :user="account.identity"
+                                                        @updateIdentity="(prop, val) => account.identity[prop] = val"
+                                                    />
                                                 </div>
                                             </div>
-                                            <div class="tab-card">
-                                                <div class="button_blk">
-                                                    <div class="button">
-                                                        select file
-                                                    </div>
-                                                    <div class="description">
-                                                        <h5>Govermment Issued ID</h5>
-                                                        <p>Maximum file size is 8mb</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row margin-top-40">
-                                        <div class="col">
-                                            <div class="verification-info">
-                                                <div class="verification-icon success">
-                                                    <i class="fas fa-lock"></i>
-                                                </div>
-                                                <div class="verification-text">
-                                                    <h4>ID Verification Pending</h4>
-                                                    <p>Identity Proof reviewed and approved by a high
-                                                        trust profile. Gains 15% more trust for interactions.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="verification-info">
-                                                <div class="verification-icon warning">
-                                                    <i class="fas fa-exclamation-triangle"></i>
-                                                </div>
-                                                <div class="verification-text">
-                                                    <h4>ID Verification Pending</h4>
-                                                    <p>Identity Proof submited but not yet reviewed. Trust bonus of 5%
-                                                        is activated</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="verification-info">
-                                                <div class="verification-icon danger">
-                                                    <i class="fas fa-exclamation-triangle"></i>
-                                                </div>
-                                                <div class="verification-text">
-                                                    <h4>ID Verification Pending</h4>
-                                                    <p>Identity Proof not submitted at all, trust must be gained by
-                                                        simple interactions</p>
+                                            <div class="col">
+                                                <div class="tab-card">
+                                                    <h4>Preview your identity</h4>
+                                                    <c-user-card
+                                                        :user="account.identity"
+                                                        previewMode
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="d-flex justify-content-end" slot="footer">
-                                <c-button status="success" text="Complete" icon="fas fa-check" icon_position="right" />
-                            </div>
-                        </c-tab>
-                    </c-tabs>
+                                <div class="d-flex justify-content-end" slot="footer">
+                                    <c-button status="success" text="Complete" icon="fas fa-check" icon_position="right" />
+                                </div>
+                            </c-tab>
+                        </c-tabs>
+                    </form>
                 </div>
             </div>
         </div>
+
+        <c-popup title="Terms" :activated="terms" @close="terms = false" width="800">
+            <div class="scroll_block">
+
+                <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span>
+                </h1>
+
+                <h2>Introduction</h2>
+
+                <p>These Website Standard Terms and Conditions written on this webpage shall
+                    manage
+                    your use of our website, <span class="highlight preview_website_name">BlockHub</span>
+                    accessible at <span class="highlight preview_website_url">BlockHub.gg</span>.
+                </p>
+
+                <p>These Terms will be applied fully and affect to your use of this Website. By
+                    using this Website, you agreed to accept all terms and conditions written in
+                    here. You must not use this Website if you disagree with any of these
+                    Website
+                    Standard Terms and Conditions.</p>
+
+                <p>Minors or people below 18 years old are not allowed to use this Website.</p>
+
+                <h2>Intellectual Property Rights</h2>
+
+                <p>Other than the content you own, under these Terms, <span
+                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and/or its
+                    licensors
+                    own all the intellectual property rights and materials contained in this
+                    Website.</p>
+
+                <p>You are granted limited license only for purposes of viewing the material
+                    contained on this Website.</p>
+
+                <h2>Restrictions</h2>
+
+                <p>You are specifically restricted from all of the following:</p>
+
+                <ul>
+                    <li>publishing any Website material in any other media;</li>
+                    <li>selling, sublicensing and/or otherwise commercializing any Website
+                        material;
+                    </li>
+                    <li>publicly performing and/or showing any Website material;</li>
+                    <li>using this Website in any way that is or may be damaging to this
+                        Website;
+                    </li>
+                    <li>using this Website in any way that impacts user access to this
+                        Website;
+                    </li>
+                    <li>using this Website contrary to applicable laws and regulations, or in
+                        any
+                        way may cause harm to the Website, or to any person or business entity;
+                    </li>
+                    <li>engaging in any data mining, data harvesting, data extracting or any
+                        other
+                        similar activity in relation to this Website;
+                    </li>
+                    <li>using this Website to engage in any advertising or marketing.</li>
+                </ul>
+
+                <p>Certain areas of this Website are restricted from being access by you and
+                    <span
+                        class="highlight preview_company_name">Hyperbridge Technology Inc.</span> may further
+                    restrict
+                    access by you to any areas of this Website, at any time, in absolute
+                    discretion.
+                    Any user ID and password you may have for this Website are confidential and
+                    you
+                    must maintain confidentiality as well.</p>
+
+                <h2>Your Content</h2>
+
+                <p>In these Website Standard Terms and Conditions, “Your Content” shall mean any
+                    audio, video text, images or other material you choose to display on this
+                    Website. By displaying Your Content, you grant <span
+                        class="highlight preview_company_name">Hyperbridge Technology Inc.</span> a
+                    non-exclusive,
+                    worldwide irrevocable, sub licensable license to use, reproduce, adapt,
+                    publish,
+                    translate and distribute it in any and all media.</p>
+
+                <p>Your Content must be your own and must not be invading any third-party's
+                    rights.
+                    <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> reserves
+                    the
+                    right to remove any of Your Content from this Website at any time without
+                    notice.</p>
+
+                <h2>No warranties</h2>
+
+                <p>This Website is provided “as is,” with all faults, and <span
+                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> express no
+                    representations or warranties, of any kind related to this Website or the
+                    materials contained on this Website. Also, nothing contained on this Website
+                    shall be interpreted as advising you.</p>
+
+                <h2>Limitation of liability</h2>
+
+                <p>In no event shall <span
+                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span>, nor any of its
+                    officers, directors and employees, shall be held liable for anything arising
+                    out
+                    of or in any way connected with your use of this Website whether such
+                    liability
+                    is under contract. &nbsp;<span class="highlight preview_company_name">Hyperbridge Technology Inc.</span>,
+                    including its officers, directors and employees shall not be held liable for
+                    any
+                    indirect, consequential or special liability arising out of or in any way
+                    related to your use of this Website.</p>
+
+                <h2>Indemnification<p></p>
+
+                    <p>You hereby indemnify to the fullest extent <span
+                        class="highlight preview_company_name">Hyperbridge Technology Inc.</span> from and
+                        against
+                        any and/or all liabilities, costs, demands, causes of action, damages
+                        and
+                        expenses arising in any way related to your breach of any of the
+                        provisions
+                        of these Terms.</p>
+
+                </h2>
+                <h2>Severability</h2>
+
+                <p>If any provision of these Terms is found to be invalid under any applicable
+                    law,
+                    such provisions shall be deleted without affecting the remaining provisions
+                    herein.</p>
+
+                <h2>Variation of Terms</h2>
+
+                <p><span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is permitted
+                    to
+                    revise these Terms at any time as it sees fit, and by using this Website you
+                    are
+                    expected to review these Terms on a regular basis.</p>
+
+                <h2>Assignment</h2>
+
+                <p>The <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is
+                    allowed
+                    to assign, transfer, and subcontract its rights and/or obligations under
+                    these
+                    Terms without any notification. However, you are not allowed to assign,
+                    transfer, or subcontract any of your rights and/or obligations under these
+                    Terms.</p>
+
+                <h2>Entire Agreement</h2>
+
+                <p>These Terms constitute the entire agreement between <span
+                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and you in
+                    relation
+                    to your use of this Website, and supersede all prior agreements and
+                    understandings.</p>
+
+                <h2>Governing Law &amp; Jurisdiction</h2>
+
+                <p>These Terms will be governed by and interpreted in accordance with the laws
+                    of
+                    the State of <span class="highlight preview_country">Country</span>, and you
+                    submit to the non-exclusive jurisdiction of the state and federal courts
+                    located
+                    in <span class="highlight preview_country">Country</span> for the resolution
+                    of
+                    any disputes.</p>
+
+            </div>
+        </c-popup>
+
+        <c-popup title="Privacy policy" :activated="privacy_policy" @close="privacy_policy = false" width="800">
+            <div class="scroll_block">
+
+                <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span>
+                </h1>
+
+                <h2>Introduction</h2>
+
+                <p>These Website Standard Terms and Conditions written on this webpage shall
+                    manage
+                    your use of our website, <span class="highlight preview_website_name">BlockHub</span>
+                    accessible at <span class="highlight preview_website_url">BlockHub.gg</span>.
+                </p>
+
+                <p>These Terms will be applied fully and affect to your use of this Website. By
+                    using this Website, you agreed to accept all terms and conditions written in
+                    here. You must not use this Website if you disagree with any of these
+                    Website
+                    Standard Terms and Conditions.</p>
+
+                <p>Minors or people below 18 years old are not allowed to use this Website.</p>
+
+                <h2>Intellectual Property Rights</h2>
+
+                <p>Other than the content you own, under these Terms, <span
+                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and/or its
+                    licensors
+                    own all the intellectual property rights and materials contained in this
+                    Website.</p>
+
+                <p>You are granted limited license only for purposes of viewing the material
+                    contained on this Website.</p>
+
+                <h2>Restrictions</h2>
+
+                <p>You are specifically restricted from all of the following:</p>
+
+                <ul>
+                    <li>publishing any Website material in any other media;</li>
+                    <li>selling, sublicensing and/or otherwise commercializing any Website
+                        material;
+                    </li>
+                    <li>publicly performing and/or showing any Website material;</li>
+                    <li>using this Website in any way that is or may be damaging to this
+                        Website;
+                    </li>
+                    <li>using this Website in any way that impacts user access to this
+                        Website;
+                    </li>
+                    <li>using this Website contrary to applicable laws and regulations, or in
+                        any
+                        way may cause harm to the Website, or to any person or business entity;
+                    </li>
+                    <li>engaging in any data mining, data harvesting, data extracting or any
+                        other
+                        similar activity in relation to this Website;
+                    </li>
+                    <li>using this Website to engage in any advertising or marketing.</li>
+                </ul>
+
+                <p>Certain areas of this Website are restricted from being access by you and
+                    <span
+                        class="highlight preview_company_name">Hyperbridge Technology Inc.</span> may further
+                    restrict
+                    access by you to any areas of this Website, at any time, in absolute
+                    discretion.
+                    Any user ID and password you may have for this Website are confidential and
+                    you
+                    must maintain confidentiality as well.</p>
+
+                <h2>Your Content</h2>
+
+                <p>In these Website Standard Terms and Conditions, “Your Content” shall mean any
+                    audio, video text, images or other material you choose to display on this
+                    Website. By displaying Your Content, you grant <span
+                        class="highlight preview_company_name">Hyperbridge Technology Inc.</span> a
+                    non-exclusive,
+                    worldwide irrevocable, sub licensable license to use, reproduce, adapt,
+                    publish,
+                    translate and distribute it in any and all media.</p>
+
+                <p>Your Content must be your own and must not be invading any third-party's
+                    rights.
+                    <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> reserves
+                    the
+                    right to remove any of Your Content from this Website at any time without
+                    notice.</p>
+
+                <h2>No warranties</h2>
+
+                <p>This Website is provided “as is,” with all faults, and <span
+                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> express no
+                    representations or warranties, of any kind related to this Website or the
+                    materials contained on this Website. Also, nothing contained on this Website
+                    shall be interpreted as advising you.</p>
+
+                <h2>Limitation of liability</h2>
+
+                <p>In no event shall <span
+                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span>, nor any of its
+                    officers, directors and employees, shall be held liable for anything arising
+                    out
+                    of or in any way connected with your use of this Website whether such
+                    liability
+                    is under contract. &nbsp;<span class="highlight preview_company_name">Hyperbridge Technology Inc.</span>,
+                    including its officers, directors and employees shall not be held liable for
+                    any
+                    indirect, consequential or special liability arising out of or in any way
+                    related to your use of this Website.</p>
+
+                <h2>Indemnification<p></p>
+
+                    <p>You hereby indemnify to the fullest extent <span
+                        class="highlight preview_company_name">Hyperbridge Technology Inc.</span> from and
+                        against
+                        any and/or all liabilities, costs, demands, causes of action, damages
+                        and
+                        expenses arising in any way related to your breach of any of the
+                        provisions
+                        of these Terms.</p>
+
+                </h2>
+                <h2>Severability</h2>
+
+                <p>If any provision of these Terms is found to be invalid under any applicable
+                    law,
+                    such provisions shall be deleted without affecting the remaining provisions
+                    herein.</p>
+
+                <h2>Variation of Terms</h2>
+
+                <p><span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is permitted
+                    to
+                    revise these Terms at any time as it sees fit, and by using this Website you
+                    are
+                    expected to review these Terms on a regular basis.</p>
+
+                <h2>Assignment</h2>
+
+                <p>The <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is
+                    allowed
+                    to assign, transfer, and subcontract its rights and/or obligations under
+                    these
+                    Terms without any notification. However, you are not allowed to assign,
+                    transfer, or subcontract any of your rights and/or obligations under these
+                    Terms.</p>
+
+                <h2>Entire Agreement</h2>
+
+                <p>These Terms constitute the entire agreement between <span
+                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and you in
+                    relation
+                    to your use of this Website, and supersede all prior agreements and
+                    understandings.</p>
+
+                <h2>Governing Law &amp; Jurisdiction</h2>
+
+                <p>These Terms will be governed by and interpreted in accordance with the laws
+                    of
+                    the State of <span class="highlight preview_country">Country</span>, and you
+                    submit to the non-exclusive jurisdiction of the state and federal courts
+                    located
+                    in <span class="highlight preview_country">Country</span> for the resolution
+                    of
+                    any disputes.</p>
+
+            </div>
+        </c-popup>
 
     </c-layout>
 </template>
@@ -388,7 +729,8 @@ export default {
         'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
         'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
         'c-datepicker': (resolve) => require(['vuejs-datepicker'], resolve),
-        'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve)
+        'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
+        'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
     },
     data() {
         return {
@@ -400,6 +742,10 @@ export default {
                 last_name: '',
                 birthday: '',
                 email: '',
+                password: '',
+                repeat_password: '',
+                secret_question: '',
+                secret_answer: '',
                 agreement: false,
                 newsletter: false,
                 identity: {
@@ -407,28 +753,45 @@ export default {
                     img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
                     wallet: ''
                 }
-            }
+            },
+            terms: false,
+            privacy_policy: false
         }
     },
     methods: {
         checkForm() {
             this.errors = [];
 
-            // TEMP
-            if (DesktopBridge.isConnected()) {
-                // tell desktop to create an account and send it back
-                const data = {
-                    seed: 13891737193 // derived from input data + mouse movement
-                }
-
-                DesktopBridge.sendCommand('createAccountRequest', data)
-            } else {
-                // show download modal
-            }
-
             if (this.current_step === 1) {
-                if (this.account.first_name && this.account.last_name && this.account.email && this.account.agreement) {
-                    this.current_step = 2;
+                if (
+                    this.account.first_name
+                    && this.account.last_name 
+                    && this.account.email 
+                    && this.account.birthday 
+                    && this.account.agreement 
+                    && this.account.secret_question 
+                    && this.account.secret_answer 
+                    && this.account.password 
+                    && this.account.repeat_password
+                    && this.account.password === this.account.repeat_password) {
+                    if (DesktopBridge.isConnected()) {
+                        DesktopBridge.createAccountRequest({
+                            seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
+                            first_name: this.account.first_name,
+                            last_name: this.account.last_name,
+                            email: this.account.email,
+                            password: this.account.password,
+                            birthday: this.account.birthday,
+                            secret_question: this.account.secret_question,
+                            secret_answer: this.account.secret_answer
+                        }).then((res) => {
+                            this.$store.state.account = { ...this.$store.state.account, ...res }
+
+                            this.$store.state.signed_in = true
+                            
+                            this.current_step = 2;
+                        })
+                    }
                 } else {
 
                     if (!this.account.first_name) {
@@ -446,14 +809,22 @@ export default {
                     if (!this.account.agreement) {
                         this.errors.push('You must agree to the terms & conditions to use BlockHub.')
                     }
-
+                    if (!this.account.password) {
+                        this.errors.push('Password required.')
+                    }
+                    if (!this.account.repeat_password) {
+                        this.errors.push('Repeat password required.')
+                    }
+                    if (this.account.password !== this.account.repeat_password) {
+                        this.errors.push('Passwords must match.')
+                    }
                 }
             } else if (this.current_step === 2) {
                 this.current_step = 3;
             } else if (this.current_step === 3) {
 
             }
-        }
+        },
     }
 }
 </script>
@@ -691,6 +1062,15 @@ export default {
 
     .input-group {
         flex-wrap: nowrap;
+    }
+
+    .c-popup{
+        .scroll_block{
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 20px;
+            text-align: left;
+        }
     }
 
 </style>

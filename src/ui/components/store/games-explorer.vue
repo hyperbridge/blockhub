@@ -26,7 +26,7 @@
             </c-heading-bar>
             <div class="product-grid__filters align-items-center">
                 <div class="d-flex align-items-center">
-                    <c-dropdown id="products-genres" name="Filter by Genre" :showBg="true" class="product-genre">
+                    <c-dropdown id="product-genres" name="Filter by Genre" :showBg="true" class="product-genre">
                         <div class="product-genre__content">
                             <a
                                 v-for="genre in availableGenres"
@@ -107,14 +107,20 @@
                     </div>
                 </div>
             </transition>
-            <c-game-grid
+            <c-content-navigation
                 v-if="filteredProducts.length"
-                :itemInRow="2"
-                :showRating="false"
                 :items="filteredProducts"
-                showTime
-                itemBg="transparent"
-            />
+            >
+                <template slot-scope="slotProps">
+                    <c-game-grid
+                        :itemInRow="2"
+                        :showRating="false"
+                        :items="slotProps.items"
+                        showTime
+                        itemBg="transparent"
+                    />
+                </template>
+            </c-content-navigation>
             <div v-else-if="filtersActive">
                 <p>No products were found using these filters. Want to <c-button status="plain">Check for updates</c-button>?</p>
                 <c-button
@@ -127,7 +133,6 @@
             <p v-else>
                 Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?
             </p>
-            <c-content-navigation />
         </c-block>
     </div>
 </template>
@@ -141,7 +146,7 @@
             'c-heading-bar-fields': (resolve) => require(['@/ui/components/heading-bar/additional-action'], resolve),
             'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
             'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
-            'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description'], resolve),
+            'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
             'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve)
         },
@@ -204,12 +209,12 @@
                     );
             },
             availableGenres() {
-                return this.$store.state.marketplace[this.category].reduce((tags, product) => {
-                    product.developer_tags.forEach(tag => {
-                        if (!tags.includes(tag)) tags.push(tag);
-                    });
-                    return tags;
-                }, []);
+                return this.products.reduce((tags, product) => [
+                    ...tags,
+                    ...product.developer_tags.filter(tag =>
+                        !tags.includes(tag)
+                    )
+                ], []).sort();
             },
             filtersActive() {
                 const { phrase, selectedGenres, sortBy: { property } } = this;
@@ -218,7 +223,7 @@
             sortProps() {
                 return this.sortOptions.map(option => option.property);
             }
-        },
+        }
     }
 </script>
 
