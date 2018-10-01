@@ -6,7 +6,9 @@
             </span>
         </transition>
         <c-input-searcher
+            :value="phrase"
             @input="search"
+            @click="$emit('click')"
             placeholder="Search"
             aria-label="Search"
         />
@@ -46,6 +48,7 @@
         components: {
             'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
         },
+        inheritAttrs: false,
         mixins: [debouncer],
         props: {
             size: {

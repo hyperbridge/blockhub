@@ -1,28 +1,39 @@
 <script>
-export default {
-    name: 'input-searcher',
-    inheritAttrs: false,
-    props: ['value', 'debounce'],
-    render(h) {
-        return h('div', {
-            staticClass: 'input-searcher'
-        }, [
-            h('c-input', {
-                on: this.$listeners,
-                props: this.$props,
-                attrs: this.$attrs
-            }),
-            h('c-icon', {
-                staticClass: 'input-searcher__icon',
-                on: this.$listeners,
-                attrs: this.$attrs,
-                props: {
-                    name: 'search'
-                }
-            })
-        ])
+    export default {
+        name: 'input-searcher',
+        inheritAttrs: false,
+        props: ['value'],
+        render(h) {
+            return h('div', {
+                staticClass: 'input-searcher'
+            }, [
+                h('c-input', {
+                    on: this.listeners,
+                    attrs: {
+                        ...this.$attrs,
+                        value: this.value
+                    },
+                    props: {
+                        value: this.value
+                    }
+                }),
+                h('c-icon', {
+                    staticClass: 'input-searcher__icon',
+                    on: { click: () => this.$emit('click') },
+                    props: {
+                        name: 'search'
+                    }
+                })
+            ])
+        },
+        computed: {
+            listeners() {
+                const listeners = { ...this.$listeners };
+                delete listeners.click;
+                return listeners;
+            }
+        }
     }
-}
 </script>
 
 <style lang="scss" scoped>
