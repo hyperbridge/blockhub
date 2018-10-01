@@ -204,7 +204,7 @@
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
             'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
-            'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description'], resolve),
+            'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
             'c-spinner': (resolve) => require(['@/ui/components/spinner'], resolve),
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve),
             'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),

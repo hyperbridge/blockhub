@@ -1,5 +1,5 @@
 <template>
-    <c-block title="Rating">
+    <c-block title="Rating" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
         <div class="w-100" v-if="items.length > 0">
             <ul class="rating-block__list">
                 <li v-for="(item, index) in items" :key="index">

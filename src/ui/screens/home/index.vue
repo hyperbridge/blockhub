@@ -107,7 +107,7 @@
                                 data-autoplay="false"
                                 v-if="trending_projects.length"
                             >
-                                <c-projects-card
+                                <c-project-card
                                     v-for="(project, index) in trending_projects"
                                     :key="index"
                                     :project="project"
@@ -331,7 +331,7 @@ export default {
         'c-product-cards': (resolve) => require(['@/ui/components/store/product-cards'], resolve),
         'c-product-slider': (resolve) => require(['@/ui/components/store/product-slider'], resolve),
         'c-curator-reviews': (resolve) => require(['@/ui/components/store/curator-reviews'], resolve),
-        'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description'], resolve),
+        'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
         'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
         'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
         'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
@@ -342,7 +342,7 @@ export default {
         'c-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
         'c-games-explorer': (resolve) => require(['@/ui/components/store/games-explorer'], resolve),
         'c-assets-list': (resolve) => require(['@/ui/components/assets-list-item'], resolve),
-        'c-projects-card': (resolve) => require(['@/ui/components/projects/card'], resolve),
+        'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
         'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve),
         'c-main-banner': (resolve) => require(['@/ui/components/banner'], resolve),
         'c-swiper': swiper,

@@ -214,7 +214,7 @@ storiesOf('Navigation', module)
     }))
 
 
-import Card from '../ui/components/projects/card';
+import Card from '../ui/components/project/card';
 
 storiesOf('Projects', module)
     .add('card', () => ({
@@ -1606,20 +1606,20 @@ storiesOf('Game Plans', module)
          `
     }))
 
-import GamesGrid from '../ui/components/games-grid/with-description'
-import GamesGridSimple from '../ui/components/games-grid/simple'
+import GamesGrid from '../ui/components/game-grid/with-description'
+import GamesGridSimple from '../ui/components/game-grid/simple'
 
 storiesOf('Games Grid', module)
     .addDecorator(withKnobs)
     .add('with description', () => ({
         components: {
-            'c-games-grid': GamesGrid
+            'c-game-grid': GamesGrid
         },
         data: () => object('Data', data.GamesGrid),
         template: `
          <div class="row m-0 p-3">
             <div class="col-12">
-                <c-games-grid
+                <c-game-grid
                     :showRating=false
                     :showTime=true
                     :showPrice=true
@@ -1634,13 +1634,13 @@ storiesOf('Games Grid', module)
     }))
     .add('simple', () => ({
         components: {
-            'c-games-grid-simple': GamesGridSimple
+            'c-game-grid-simple': GamesGridSimple
         },
         data: () => object('Data', data.GamesGrid),
         template: `
          <div class="row m-0 p-3">
             <div class="col-12">
-                <c-games-grid-simple
+                <c-game-grid-simple
                     :itemInRow="itemInRow"
                     :items="games"
                 />
@@ -1918,12 +1918,12 @@ storiesOf('Product Community', module)
     }))
 
 
-import ProjectCard from '../ui/components/projects/card'
+import ProjectCard from '../ui/components/project/card'
 
 storiesOf('Project Card', module)
     .add('default', () => ({
         components: {
-            'c-projects-card': ProjectCard
+            'c-project-card': ProjectCard
         },
         data() {
             return {
@@ -1990,7 +1990,7 @@ storiesOf('Project Card', module)
         template: `
             <div class="row m-0 p-5">
                 <div class="col-10">
-                    <c-projects-card v-for="(project, index) in trending_projects"
+                    <c-project-card v-for="(project, index) in trending_projects"
                                     :key="index"
                                     :project="project"
                                     customClass="margin-bottom-20"/>
@@ -2614,7 +2614,7 @@ storiesOf('Progress Bar', module)
         `
     }))
 
-import ProjectMilestone from '@/ui/components/projects/milestone';
+import ProjectMilestone from '@/ui/components/project/milestone';
 storiesOf('Project Milestone', module)
     .add('default', () => ({
         components: {

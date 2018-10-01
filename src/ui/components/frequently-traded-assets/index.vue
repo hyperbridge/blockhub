@@ -1,6 +1,5 @@
 <template>
-
-    <c-block title="Traded Assets">
+    <c-block title="Traded Assets" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
         <div v-if="items.length > 0">
             <div class="traded-assets__filter">
                 <slot name="filter"></slot>
@@ -18,7 +17,6 @@
             <h4>No frequently traded assets yet.</h4>
         </div>
     </c-block>
-
 </template>
 
 <script>

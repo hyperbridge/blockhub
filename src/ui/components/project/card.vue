@@ -24,7 +24,7 @@
 import MoneyInfo from '../money-info/index.vue'
 
 export default {
-    name: 'projects-card',
+    name: 'project-card',
     components: {
         'c-money-info': MoneyInfo
     },

@@ -1,5 +1,5 @@
 <template>
-    <c-block :title="title" class="card invert purchase-block">
+    <c-block :title="title" class="purchase-block" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
 
         <div class="purchase-block__tags" v-if="tags">
             <div v-for="(tag, index) in tags" :key="index">

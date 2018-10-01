@@ -141,7 +141,7 @@
             'c-heading-bar-fields': (resolve) => require(['@/ui/components/heading-bar/additional-action'], resolve),
             'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
             'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
-            'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description'], resolve),
+            'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
             'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve)
         },
