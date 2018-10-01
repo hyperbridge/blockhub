@@ -1,10 +1,7 @@
 <template>
     <c-block title="Language Support" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
         <template slot="heading-bar">
-            <a :href="communityUrl" class="title-icon text-white">
-                <i class="fas fa-comments" v-if="!activateElement"></i>
-                <i class="fas fa-cog" v-else></i>
-            </a>
+            <i class="fas fa-laptop title-icon"></i>
         </template>
         <table class="language-support__table">
             <thead>
