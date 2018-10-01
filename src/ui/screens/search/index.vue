@@ -173,6 +173,8 @@
                                         @click="clearFilters()"
                                         status="info"
                                     >Clear filters</c-button>
+                                    <c-button
+                                    >Check for updates</c-button>
                                 </div>
                                 <c-game-grid
                                     v-else

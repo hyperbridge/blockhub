@@ -1,5 +1,5 @@
 <template>
-    <div class="products-grid-wrapper">
+    <div class="product-grid-wrapper">
         <c-product-card-dynamic
             v-for="(product, index) in products"
             :key="index"
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-    name: 'products-cards',
+    name: 'product-cards',
     components: {
         'c-product-card-dynamic': (resolve) => require(['@/ui/components/store/product-card-dynamic'], resolve)
     },
@@ -26,7 +26,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/css/helpers/mixins.scss';
 
-.products-grid-wrapper {
+.product-grid-wrapper {
     margin-bottom: 40px;
     box-sizing: border-box;
     display: flex;
@@ -38,7 +38,7 @@ export default {
 }
 
 @include width-min-lg {
-    .products-grid-wrapper:hover {
+    .product-grid-wrapper:hover {
         .product-grid__item {
             transform: translateX(-15%);
         }

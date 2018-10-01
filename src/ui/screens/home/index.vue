@@ -49,7 +49,7 @@
                         <c-main-banner class="margin-bottom-30" :image="main_banner.img" :logo="main_banner.logo" />
                     </div>
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
-                        <c-block>
+                        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                             <c-heading-bar name="New Releases" :showArrows="false" :showBackground="false">
                                 <template slot="additional-action">
                                     <!--<c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @click_down="" />-->
@@ -68,7 +68,7 @@
                         </c-block>
                     </div>
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
-                        <c-block>
+                        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                             <c-heading-bar name="Top 20 Items" :showArrows="false" :showBackground="false">
                                 <template slot="additional-action">
                                     <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
@@ -146,7 +146,7 @@
 
                     <div class="row" v-if="item.type === 'product_slider'" :key="`level-1-${index}`">
                         <div class="col-12">
-                            <c-products-slider :products="item.data.products" :title="item.data.title" :maxPerView="3" v-if="item.data.products.length" />
+                            <c-product-slider :products="item.data.products" :title="item.data.title" :maxPerView="3" v-if="item.data.products.length" />
 
                             <c-block class="margin-bottom-30" :title="item.data.title" :onlyContentBg="true" :noGutter="true" v-else>
                                 <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
@@ -276,7 +276,7 @@
                     <div class="row margin-bottom-30" v-if="item.type === 'curator_reviews'" :key="`level-1-${index}`">
                         <div class="col-12">
                             <c-block title="From our curators" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                                <c-curators-reviews
+                                <c-curator-reviews
                                     :reviews="item.data.reviews"
                                 />
                             </c-block>
@@ -328,9 +328,9 @@ export default {
         'c-heading-bar-fields' : (resolve) => require(['@/ui/components/heading-bar/additional-action'], resolve),
         'c-product-card': (resolve) => require(['@/ui/components/store/product-card'], resolve),
         'c-product-card-dynamic': (resolve) => require(['@/ui/components/store/product-card-dynamic'], resolve),
-        'c-products-cards': (resolve) => require(['@/ui/components/store/products-cards'], resolve),
-        'c-products-slider': (resolve) => require(['@/ui/components/store/product-slider'], resolve),
-        'c-curators-reviews': (resolve) => require(['@/ui/components/store/curators-reviews'], resolve),
+        'c-product-cards': (resolve) => require(['@/ui/components/store/product-cards'], resolve),
+        'c-product-slider': (resolve) => require(['@/ui/components/store/product-slider'], resolve),
+        'c-curator-reviews': (resolve) => require(['@/ui/components/store/curator-reviews'], resolve),
         'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description'], resolve),
         'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
         'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),

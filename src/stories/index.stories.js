@@ -2109,7 +2109,7 @@ storiesOf('Gallery', module)
 
 import ProductCardDynamic from '@/ui/components/store/product-card-dynamic';
 import ProductCard from '@/ui/components/store/product-card';
-import ProductsCards from '@/ui/components/store/products-cards';
+import ProductsCards from '@/ui/components/store/product-cards';
 
 const productsCardsData = [
     {
@@ -2202,13 +2202,13 @@ storiesOf('Product Card', module)
         template: `
             <div>
                 <h1 style="text-align: center;">Hover transitions are enabled only on bigger screens</h1>
-                <products-cards :products="products"/>
+                <product-cards :products="products"/>
             </div>
         `
     }))
 
 import CuratorReview from '@/ui/components/store/curator-review';
-import CuratorsReviews from '@/ui/components/store/curators-reviews';
+import CuratorsReviews from '@/ui/components/store/curator-reviews';
 
 const curatorReview = {
     author: {name: 'SatoSan', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'},
@@ -2241,7 +2241,7 @@ storiesOf('Curators Reviews', module)
     .add('reviews wrapper', () => ({
         components: {CuratorsReviews},
         data: () => ({reviews: [curatorReview, curatorReview, curatorReview]}),
-        template: `<curators-reviews :reviews="reviews" class="col-8"/>`
+        template: `<curator-reviews :reviews="reviews" class="col-8"/>`
     }))
 
 import ImagesExplorer from '@/ui/components/images-explorer';
