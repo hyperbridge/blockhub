@@ -6,8 +6,6 @@ let loki = null
 let initCallback = null
 let initialized = false
 
-export let account = null
-
 export let network = {
     config: null
 }
@@ -33,7 +31,7 @@ export const init = () => {
 
     const idbAdapter = (new Loki()).getIndexedAdapter()
 
-    loki = new Loki('main.db', {
+    loki = window.loki = new Loki('main.db', {
         adapter: new idbAdapter('main.db'),
         autoload: false,
         //autoloadCallback: databaseInitialize,
@@ -51,7 +49,6 @@ export const init = () => {
         console.log('[BlockHub] Database loaded from IndexedDB')
 
         if (loki.getCollection('networkConfig')) {
-            account = loki.getCollection('account')
             network.config = loki.getCollection('networkConfig')
             marketplace.config = loki.getCollection('marketplaceConfig')
             marketplace.products = loki.getCollection('marketplaceProducts')
@@ -59,7 +56,6 @@ export const init = () => {
             funding.projects = loki.getCollection('fundingProjects')
             funding.config = loki.getCollection('fundingConfig')
         } else {
-            let accountData = account.data
             let networkConfigData = network.config.data
             let marketplaceConfigData = marketplace.config.data
             let marketplaceProductsData = marketplace.products.data
@@ -67,7 +63,6 @@ export const init = () => {
             let fundingProjectsData = funding.projects.data
             let fundingConfigData = funding.config.data
 
-            account.chain().remove()
             network.config.chain().remove()
             marketplace.config.chain().remove()
             marketplace.products.chain().remove()
@@ -75,25 +70,20 @@ export const init = () => {
             funding.projects.chain().remove()
             funding.config.chain().remove()
 
-            account = loki.addCollection('account')
             network.config = loki.addCollection('networkConfig')
             marketplace.config = loki.addCollection('marketplaceConfig')
             marketplace.products = loki.addCollection('marketplaceProducts')
             marketplace.assets = loki.addCollection('marketplaceAssets')
-            funding.projects = loki.addCollection('fundingProjects')
             funding.config = loki.addCollection('fundingConfig')
+            funding.projects = loki.addCollection('fundingProjects')
 
-            account.data = accountData
             network.config.data = networkConfigData
             marketplace.config.data = marketplaceConfigData
             marketplace.products.data = marketplaceProductsData
             marketplace.assets.data = marketplaceAssetsData
             funding.projects.data = fundingProjectsData
             funding.config.data = fundingConfigData
-
-            account.ensureId()
-            account.ensureAllIndexes(true)
-
+            
             network.config.ensureId()
             network.config.ensureAllIndexes(true)
 
@@ -115,13 +105,12 @@ export const instance = () => {
 }
 
 export const loadDefault = () => {
-    account = loki.addCollection('accountDefault')
     network.config = loki.addCollection('networkConfigDefault')
     marketplace.config = loki.addCollection('marketplaceConfigDefault')
     marketplace.products = loki.addCollection('marketplaceProductsDefault')
     marketplace.assets = loki.addCollection('marketplaceAssetsDefault')
-    funding.projects = loki.addCollection('fundingProjectsDefault')
     funding.config = loki.addCollection('fundingConfigDefault')
+    funding.projects = loki.addCollection('fundingProjectsDefault')
 
     data.marketplace.id = '1'
     data.funding.id = '1'
@@ -156,7 +145,6 @@ export const save = () => {
 }
 
 export const clean = () => {
-    account.chain().remove()
     network.config.chain().remove()
     marketplace.config.chain().remove()
     marketplace.products.chain().remove()

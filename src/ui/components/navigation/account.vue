@@ -1,9 +1,14 @@
 
 <template>
     <div class="navigation" id="navigation-default">
-        <h3>NEW ACCOUNT</h3>
+        <h3>ACCOUNT</h3>
 
         <ul>
+            <li>
+                <a href="/#/account">
+                    Account Overview
+                </a>
+            </li>
             <li class="title">Legal</li>
             <li>
                 <a href="/#/account/verification">

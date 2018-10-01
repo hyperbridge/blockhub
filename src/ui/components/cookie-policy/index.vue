@@ -2,7 +2,7 @@
     <transition name="fade">
         <div class="cookie-policy" v-if="!settings.client.cookie_policy_accepted">
             <p class="p-0 m-0">
-                By using this website you agree to our
+                By using this website, you agree to our
                 <c-button status="plain" class="p-0 m-0" @click="showPopup">cookie policy</c-button>
             </p>
             <c-button status="info" class="margin-left-20" icon_hide @click="updateClientSettings()">

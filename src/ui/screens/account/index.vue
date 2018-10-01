@@ -4,6 +4,33 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 margin-bottom-30">
+                        <c-block title="Campaign">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="form-group row">
+                                            <label class="switch switch-sm col-sm-3">
+                                                <label>Email Address</label>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Email" :value="account.email" readonly>
+                                                <span class="form-text">Your email address cannot be changed at this time.</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="switch switch-sm col-sm-3">
+                                                <label>Public Address</label>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Public address" :value="account.public_address" readonly>
+                                                <span class="form-text">Your account is an Ethereum wallet, and can be <a :href="`https://etherscan.io/address/${account.public_address}`">found on the blockchain using the Public Address</a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </c-block>
+                        
                         <div class="stat-card-container">
                             <c-heading-bar name="Account" :showArrows="false" :showBackground="false"></c-heading-bar>
                             <div class="stat-card-list">
@@ -201,19 +228,21 @@
     export default {
         components: {
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
             'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve)
         },
         computed: {
             identityCount() {
                 return Object.keys(this.$store.state.network.identities).length
+            },
+            account() {
+                return this.$store.state.network.account
             }
         },
         data: () => ({
             wallets: [],
-            expert_mode: false,
-            money_modal: false,
-            login_modal: false
+            expert_mode: false
         }),
     }
 </script>
