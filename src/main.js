@@ -13,6 +13,8 @@ import './css/styles.scss';
 import './prototypes';
 import migrations from './db/migrations';
 
+import VueNumerals from 'vue-numerals';
+
 Vue.config.productionTip = false
 
 Vue.use(Snotify, {
@@ -21,6 +23,7 @@ Vue.use(Snotify, {
   }
 });
 
+Vue.use(VueNumerals);
 
 const data = {
   user: 'something'
