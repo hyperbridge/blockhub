@@ -49,14 +49,12 @@
                         <c-main-banner class="margin-bottom-30" :image="main_banner.img" :logo="main_banner.logo" />
                     </div>
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
-                        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                            <c-heading-bar name="New Releases" :showArrows="false" :showBackground="false">
-                                <template slot="additional-action">
-                                    <!--<c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @click_down="" />-->
-                                    <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
-                                    <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
-                                </template>
-                            </c-heading-bar>
+                        <c-block title="New Releases" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                            <template slot="additional-action">
+                                <!--<c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @click_down="" />-->
+                                <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
+                                <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
+                            </template>
 
                             <c-game-grid
                                 :itemInRow="1"
@@ -68,13 +66,11 @@
                         </c-block>
                     </div>
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
-                        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                            <c-heading-bar name="Top 20 Items" :showArrows="false" :showBackground="false">
-                                <template slot="additional-action">
-                                    <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
-                                    <c-heading-bar-fields name="Trading" icon="star" @clickUp=""  @clickDown="" />
-                                </template>
-                            </c-heading-bar>
+                        <c-block title="Top 20 Items" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                            <template slot="additional-action">
+                                <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
+                                <c-heading-bar-fields name="Trading" icon="star" @clickUp=""  @clickDown="" />
+                            </template>
 
                             <c-assets-list
                                 :items="assets"
@@ -118,7 +114,7 @@
                         <div class="col-12">
                             <c-product-slider :products="item.data.products" :title="item.data.title" :maxPerView="3" v-if="item.data.products.length" />
 
-                            <c-block class="margin-bottom-30" :title="item.data.title" :onlyContentBg="true" :noGutter="true" v-else>
+                            <c-block class="margin-bottom-30" :title="item.data.title" :noGutter="true" :onlyContentBg="true" :bgGradient="true" v-else>
                                 <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                             </c-block>
                         </div>
@@ -169,17 +165,12 @@
 
                     <div class="row margin-bottom-30" v-if="item.type === 'asset_grid'" :key="`level-1-${index}`">
                         <div class="col-12">
-                            <c-block :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                                <c-heading-bar
-                                    slot="title"
-                                    class="mb-0"
-                                    :headingTabs="['Top Items', 'Most Wanted', 'Best Deals']"
-                                >
-                                    <template slot="additional-action">
-                                        <c-heading-bar-fields name="Trending" @clickUp=""  @clickDown=""/>
-                                        <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown=""/>
-                                    </template>
-                                </c-heading-bar>
+                            <c-block title="Top 20 Items" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+                                <template slot="additional-action">
+                                    <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
+                                    <c-heading-bar-fields name="Trading" icon="star" @clickUp=""  @clickDown="" />
+                                </template>
+
                                 <div class="filter-blk d-flex justify-content-between align-items-center margin-bottom-20">
                                     <div class="d-inline-flex align-items-center">
                                         <c-dropdown id="test2" name="Filter by Genre" :showBg="true">
