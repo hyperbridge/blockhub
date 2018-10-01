@@ -87,37 +87,6 @@
                             <c-content-navigation v-if="assets.length" />
                         </c-block>
                     </div>
-
-                    <div class="col-12 margin-bottom-30 d-none">
-                        <c-heading-bar
-                            name="Trending Projects"
-                            :showArrows="false"
-                            :showBackground="false"
-                        />
-                        <div class="img_slider w-100">
-                            <div
-                                class="owl-carousel"
-                                ref="rangeSlider"
-                                data-nav-dots="false"
-                                data-nav-arrow="true"
-                                data-items="4"
-                                data-sm-items="1"
-                                data-md-items="3"
-                                data-lg-items="4"
-                                data-loop="true"
-                                data-autoplay="false"
-                                v-if="trending_projects.length"
-                            >
-                                <c-project-card
-                                    v-for="(project, index) in trending_projects"
-                                    :key="index"
-                                    :project="project"
-                                />
-
-                            </div>
-                            <p v-if="!trending_projects.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
-                        </div>
-                    </div>
                 </div>
 
                 <template  v-for="(item, index) in sliced" v-if="sliced">
