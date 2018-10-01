@@ -1,17 +1,17 @@
 <template>
-    <transition-group tag="div" class="games-list" name="games-list">
+    <transition-group tag="div" class="games-list" ref="gameList" name="games-list">
         <div
             class="games-list__item"
             v-for="item in items"
             :key="item.id"
             :class="{ 'hovered' : hovered }"
-            :style="{ width: 'calc( 100% / ' + itemInRow + ')', background: itemBg }"
+            :style="{ width: itemWidth, background: itemBg }"
             v-if="items.length"
         >
-            <div v-if="item.price && showPrice" class="price">
-                <strong>{{ item.price }}</strong> USD
-            </div>
             <div class="img">
+                <div v-if="item.price && showPrice" class="price" :class="['price-position-' + pricePosition]">
+                    <strong>{{ item.price }}</strong> USD
+                </div>
                 <a :href="`/#/product/${item.id}`">
                     <c-img :src="item.images.medium_tile" />
                 </a>
@@ -26,21 +26,21 @@
                     <p>{{ item.description }}</p>
                 </div>
                 <div class="footer">
-                    <div class="time" v-if="item.release_date">
+                    <div class="time" v-if="item.release_date && showDate">
                         <i class="fas fa-calendar-alt"></i>
                         {{ item.release_date }}
                     </div>
                     <c-rating-stars
-                        v-if="item.starsCount && showRating"
-                        :number="item.starsCount"
+                        v-if="item.rating && showRating"
+                        :number="item.rating.overall"
                         class="rating_stars"
                     />
                     <c-button
                         status="success"
-                        v-if="item.moreLink"
+                        v-if="showLink"
                         :href="`/#/product/${item.id}`"
                         icon_hide
-                    >Buy Now</c-button>
+                    >More</c-button>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
                 type: Boolean,
                 default: true
             },
-            showTime: {
+            showDate: {
                 type: Boolean,
                 default: true
             },
@@ -72,15 +72,45 @@
                 type: Boolean,
                 default: true
             },
+            showLink:{
+                type: Boolean,
+                default: false
+            },
+            pricePosition: {
+                type: String,
+                default: 'left'
+            },
             hovered: {
                 type: Boolean,
                 default: true
             },
             itemBg: String
         },
+        data(){
+            return{
+                itemWidth: ''
+            }
+        },
         components: {
             'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-rating-stars': (resolve) => require(['@/ui/components/rating-stars'], resolve)
+        },
+        methods: {
+            checkWidth(){
+                let def_w = this.$el.offsetWidth / this.itemInRow
+                if ( def_w < 425)
+                    this.itemWidth = '100%'
+                else
+                    this.itemWidth = 100/this.itemInRow + '%'
+            }
+        },
+        mounted() {
+            this.$nextTick(function() {
+                window.addEventListener('resize', this.checkWidth);
+
+                //Init
+                this.checkWidth()
+            })
         }
     }
 </script>
@@ -88,8 +118,9 @@
 <style lang="scss" scoped>
     .games-list{
         display: flex;
-        width: 100%;
+        margin: 0 -5px;
         flex-wrap: wrap;
+        justify-content: space-between;
     }
     .games-list-move {
         transition: transform 1s ease, opacity 1s ease !important;
@@ -113,21 +144,30 @@
         overflow: hidden;
         position: relative;
         margin-bottom: 20px;
+        padding: 5px;
+        z-index: 9;
         .price{
             position: absolute;
             width: auto;
-            bottom: 0px;
-            left: 0px;
-            padding: 2px 3px;
-            background: rgba(0, 0, 0, .6);
-            border-radius: 0 5px 5px 0;
+            bottom: 20px;
+            padding: 4px 7px;
+            background: rgba(0, 0, 0, .8);
             font-size: 11px;
             strong{
-                font-size: 14px;
+                font-size: 16px;
+            }
+            &.price-position-left{
+                left: 0px;
+                border-radius: 0 5px 5px 0;
+            }
+            &.price-position-right{
+                right: 0px;
+                border-radius: 5px 0 0 5px;
             }
         }
         .img{
             width: 50%;
+            position: relative;
             img{
                 width: 100%;
                 height: 100%;
@@ -182,6 +222,7 @@
                 -ms-transform: scale(1.05);
                 -moz-transform: scale(1.05);
                 transform: scale(1.05);
+                z-index: 99;
             }
         }
         a {

@@ -4,25 +4,30 @@
         @mouseover="show_preview(true)"
         @mouseout="show_preview(false)"
     >
-        <a :href="`/#/product/${product.id}`" class="card-img-top">
-            <transition name="fade">
-                <c-img v-if="!display_preview" class="card-img-top" :src="product.images.medium_tile"/>
-                <template v-else>
-                    <video v-if="product.video && autoplay" class="card-img-top" width="100%" autoplay>
-                        <source :src="product.video" type="video/mp4">
-                    </video>
-                    <transition-group tag="div" name="slide-left" v-else>
-                        <c-img
-                            v-for="(image, index) in product.images.preview"
-                            v-if="index === current_image"
-                            :key="image"
-                            :src="product.images.preview[index]"
-                            class="card-img-top"
-                        />
-                    </transition-group>
-                </template>
-            </transition>
-        </a>
+        <div class="position-relative">
+            <div v-if="product.price" class="product-grid__item-price">
+                <strong>{{ product.price }}</strong> USD
+            </div>
+            <a :href="`/#/product/${product.id}`" class="card-img-top">
+                <transition name="fade">
+                    <c-img v-if="!display_preview" class="card-img-top" :src="product.images.medium_tile"/>
+                    <template v-else>
+                        <video v-if="product.video && autoplay" class="card-img-top" width="100%" autoplay>
+                            <source :src="product.video" type="video/mp4">
+                        </video>
+                        <transition-group tag="div" name="slide-left" v-else>
+                            <c-img
+                                v-for="(image, index) in product.images.preview"
+                                v-if="index === current_image"
+                                :key="image"
+                                :src="product.images.preview[index]"
+                                class="card-img-top"
+                            />
+                        </transition-group>
+                    </template>
+                </transition>
+            </a>
+        </div>
         <h4><a :href="`/#/product/${product.id}`">{{ product.name }}</a></h4>
         <p class="card-text" hidden>{{ product.short_description }} </p>
         <c-tags :tags="product.developer_tags.slice(0,3)"/>
@@ -108,6 +113,20 @@
         .product-tags {
             margin-top: auto;
             margin-bottom: 10px;
+        }
+    }
+    .product-grid__item-price {
+        position: absolute;
+        width: auto;
+        bottom: 20px;
+        padding: 4px 7px;
+        background: rgba(0, 0, 0, .8);
+        font-size: 11px;
+        right: 0px;
+        border-radius: 5px 0 0 5px;
+        z-index: 9;
+        strong {
+            font-size: 16px;
         }
     }
 
