@@ -1,7 +1,7 @@
 <template>
     <div>
         <slot :items="visibleItems"/>
-        <div class="content-navigation-wrapper">
+        <div class="content-navigation-wrapper" v-show="visibleItems.length">
             <c-pagination
                 v-if="paginationMode"
                 :activePage="activePage + 1"
