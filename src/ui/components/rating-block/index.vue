@@ -14,11 +14,11 @@
                 </li>
             </ul>
             <a :href="fullReviewsLink" class="btn btn-outline-white" v-if="fullReviewsLink">See Full Reviews</a>
-            <a :href="rateGameLink" class="btn btn-outline-white" v-if="rateGameLink">Rate the game</a>
+            <a :href="rateGameLink" class="btn btn-outline-white" v-if="rateGameLink">Rate this game</a>
         </div>
         <div v-else>
-            <h4>No ratings yet.</h4>
-            <button @click="$emit('goto')" class="btn btn-sm btn-outline-white">Be the first!</button>
+            <h4>No reviews yet.</h4>
+            <button @click="$emit('goto')" class="btn btn-sm btn-outline-white">Be the first reviewer</button>
         </div>
     </c-block>
 </template>

@@ -69,7 +69,7 @@ export default {
     position: fixed;
     right: 55px;
     bottom: 20px;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(42, 43, 68, 0.7);
     color: #fff;
     box-shadow: 0 3px 6px rgba(0, 0, 0, .13);
     border-radius: 5px;
