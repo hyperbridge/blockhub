@@ -327,7 +327,7 @@
                     vehicula.
                 </p>
             </c-popup>
-            <c-cookie-policy/>
+            <c-cookie-policy v-if="!desktop_mode" />
         </div>
         <!-- //END PAGE CONTENT -->
 

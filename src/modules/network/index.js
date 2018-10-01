@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import { normalize } from 'normalizr'
-import schema from './schema'
-import * as Ethereum from '../../framework/ethereum'
-import * as PeerService from '../../framework/peer-service'
+import Token from 'hyperbridge-token'
+import * as Ethereum from '@/framework/ethereum'
+import * as PeerService from '@/framework/peer-service'
 import * as DesktopBridge from '@/framework/desktop-bridge'
 import * as DB from '@/db'
-import Token from 'hyperbridge-token'
+import schema from './schema'
 
 let rawData = {}
 
@@ -43,9 +43,10 @@ export const initDesktop = (store) => {
     }
 
     DesktopBridge.sendCommand('getAccountRequest', data).then((res) => {
-        console.log('ssss', res)
         store.state.account.email = res.account.email
         store.state.account.public_address = res.account.public_address
+
+        store.state.signed_in = true
     })
 }
 

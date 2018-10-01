@@ -90,7 +90,7 @@
                                 <span class="text">Satoshi</span>
                             </a>
                         </li>
-                        <li v-if="signed_in">
+                        <li v-if="signed_in && darklaunch.config.ACCOUNT_CONTACTS">
                             <a href="/#/identity/1/contacts">
                                 <span class="icon fa fa-users"></span>
                                 <span class="text">Contacts</span>
@@ -125,7 +125,12 @@ export default {
     },
     data() {
         return {
-            show_menu: false
+            show_menu: false,
+            darklaunch: {
+                config: {
+                    ACCOUNT_CONTACTS: false
+                }
+            }
         }
     },
     computed: {

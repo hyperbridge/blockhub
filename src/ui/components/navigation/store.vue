@@ -59,8 +59,7 @@
             </div>
             <div class="action">
                 <a href="#3" class="btn btn-filter">
-                    <i class="fas fa-filter"></i>
-                    Filter
+                    Search
                 </a>
                 <a href="#3" class="btn btn-link">
                     More filters ...
