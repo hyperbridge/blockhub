@@ -98,7 +98,7 @@
         methods: {
             checkWidth(){
                 let def_w = this.$el.offsetWidth / this.itemInRow
-                if ( def_w < 425)
+                if ( def_w < 350)
                     this.itemWidth = '100%'
                 else
                     this.itemWidth = 100/this.itemInRow + '%'
