@@ -321,6 +321,7 @@
             if (!Object.keys(this.$route.query).length) {
                 this.results = this.products;
             } else {
+
                 this.isTyping = true;
                 const { tags, langs, name, priceMin, priceMax, specials } = this.$route.query;
 
@@ -328,17 +329,19 @@
                 if (priceMin) this.price.min = priceMin;
                 if (priceMax) this.price.max = priceMax;
 
-                this.selectableTags = this.productsTags.map(tag => {
-                    return {
-                        name: tag, selected: tags && tags.includes(tag) ? true : false
-                    }
-                });
+                this.selectableTags = this.productsTags.map(tag => ({
+                    name: tag, selected: tags && tags.includes(tag)
+                }));
+
                 this.selectableLanguages = this.languages.map(lang => ({
-                    name: lang, selected: langs && langs.includes(tag) ? true : false
+                    name: lang, selected: !!(langs && langs.includes(lang))
                 }));
-                this.systemTags = this.systemTags.map(tag => ({
-                    ...tag, selected: specials && specials.includes(tag)
-                }));
+
+                if (specials) {
+                    this.systemTags.forEach(tag => {
+                        if (specials.includes(tag.value)) tag.selected = true;
+                    });
+                }
             }
         },
         watch: {
