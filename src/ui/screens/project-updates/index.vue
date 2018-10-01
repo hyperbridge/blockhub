@@ -153,7 +153,7 @@
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
-            'c-badges': (resolve) => require(['@/ui/components/projects/badges'], resolve),
+            'c-badges': (resolve) => require(['@/ui/components/project/badges'], resolve),
             'c-timeline': (resolve) => require(['@/ui/components/timeline/list'], resolve)
         },
         data() {

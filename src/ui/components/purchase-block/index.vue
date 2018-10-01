@@ -1,5 +1,5 @@
 <template>
-    <c-block :title="title" class="card invert purchase-block">
+    <c-block :title="title" class="purchase-block" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
 
         <div class="purchase-block__tags" v-if="tags">
             <div v-for="(tag, index) in tags" :key="index">
@@ -39,7 +39,7 @@
             </c-button>
 
             <button @click="$emit('addToWishlist')" class="wishlist-btn" v-if="!inWishlist">
-                <i class="far fa-heart mr-2"></i>
+                <i class="fas fa-heart mr-2"></i>
                 Add to Wishlist
             </button>
             <button @click="$emit('removeFromWishlist')" class="wishlist-btn is-in" v-if="inWishlist">

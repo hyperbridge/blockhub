@@ -93,7 +93,7 @@
                         position: absolute;
                         height: 23px;
                         bottom: 0;
-                        left: -29px;
+                        left: -28px;
                         border: 15px solid transparent;
                         border-bottom: 15px solid #393955;
                         border-right: 15px solid #393955;
@@ -105,7 +105,7 @@
                         position: absolute;
                         height: 23px;
                         bottom: 0;
-                        right: -29px;
+                        right: -28px;
                         border: 15px solid transparent;
                         border-bottom: 15px solid #393955;
                         border-left: 15px solid #393955;

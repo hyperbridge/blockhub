@@ -1,11 +1,11 @@
 <template>
     <c-layout navigationKey="settings-navigation">
         <div class="content" id="content">
-            <c-block-1 title="Activity Log">
+            <c-block title="Activity Log">
                 <div class="console-log" ref="consoleLog" v-html="consoleLogMessages">
                     {{ consoleLogMessages }}
                 </div>
-            </c-block-1>
+            </c-block>
         </div>
     </c-layout>
 </template>
@@ -14,7 +14,7 @@
 export default {
     components: {
         'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-        'c-block-1': (resolve) => require(['@/ui/components/block'], resolve)
+        'c-block': (resolve) => require(['@/ui/components/block'], resolve)
     },
     data() {
         return {

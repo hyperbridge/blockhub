@@ -1,5 +1,5 @@
 <template>
-    <c-block class="margin-bottom-30" :onlyContentBg="true" :noGutter="true">
+    <c-block class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
         <c-heading-bar
             slot="title"
             class="mb-0"
@@ -21,51 +21,51 @@
 </template>
 
 <script>
-    import 'swiper/dist/css/swiper.css'
+import 'swiper/dist/css/swiper.css'
 
-    import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
-    export default {
-        name: 'product-slider',
-        components:{
-            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
-            'c-product-card': (resolve) => require(['@/ui/components/store/product-card'], resolve),
-            'c-product-card-dynamic': (resolve) => require(['@/ui/components/store/product-card-dynamic'], resolve),
-            'c-swiper': swiper,
-            'c-slide': swiperSlide,
-        },
-        props: {
-            products: Array,
-            title: String,
-            maxPerView: Number,
-            dynamic:{
-                type: Boolean,
-                default: true
-            }
-        },
-        data(){
-            return{
-                sliderOptions: {
-                    slidesPerView: this.maxPerView,
-                    spaceBetween: 15,
-                },
-            }
-        },
-        methods:{
-            showArrowsState(el, count) {
-                if ( el.length > count) {
-                    return true
-                } else {
-                    return false
-                }
-            },
-        },
-        computed:{
-            pr_slider() {
-                return this.$refs.pr_slider.swiper;
+export default {
+    name: 'product-slider',
+    components:{
+        'c-block': (resolve) => require(['@/ui/components/block'], resolve),
+        'c-product-card': (resolve) => require(['@/ui/components/store/product-card'], resolve),
+        'c-product-card-dynamic': (resolve) => require(['@/ui/components/store/product-card-dynamic'], resolve),
+        'c-swiper': swiper,
+        'c-slide': swiperSlide,
+    },
+    props: {
+        products: Array,
+        title: String,
+        maxPerView: Number,
+        dynamic:{
+            type: Boolean,
+            default: true
+        }
+    },
+    data(){
+        return{
+            sliderOptions: {
+                slidesPerView: this.maxPerView,
+                spaceBetween: 15,
             },
         }
+    },
+    methods:{
+        showArrowsState(el, count) {
+            if ( el.length > count) {
+                return true
+            } else {
+                return false
+            }
+        },
+    },
+    computed:{
+        pr_slider() {
+            return this.$refs.pr_slider.swiper;
+        },
     }
+}
 </script>
 
 <style lang="scss" scoped>

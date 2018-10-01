@@ -1,5 +1,5 @@
 <template>
-    <c-block title="Community Spotlight">
+    <c-block title="Community Spotlight" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
         <template slot="heading-bar">
             <a :href="communityUrl" class="title-icon text-white">
                 <i class="fas fa-comments" v-if="!activateElement"></i>

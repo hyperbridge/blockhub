@@ -26,7 +26,7 @@
             </c-heading-bar>
             <div class="product-grid__filters align-items-center">
                 <div class="d-flex align-items-center">
-                    <c-dropdown id="products-genres" name="Filter by Genre" :showBg="true" class="product-genre">
+                    <c-dropdown id="product-genres" name="Filter by Genre" :showBg="true" class="product-genre">
                         <div class="product-genre__content">
                             <a
                                 v-for="genre in availableGenres"
@@ -127,7 +127,7 @@
             <p v-else>
                 Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?
             </p>
-            <c-content-navigation />
+            <c-content-navigation v-if="filteredProducts.length" />
         </c-block>
     </div>
 </template>
@@ -141,7 +141,7 @@
             'c-heading-bar-fields': (resolve) => require(['@/ui/components/heading-bar/additional-action'], resolve),
             'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
             'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
-            'c-game-grid': (resolve) => require(['@/ui/components/games-grid/with-description'], resolve),
+            'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
             'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve)
         },

@@ -30,7 +30,7 @@
                 <c-loading-logo :isLoading="isLoader" />
             </a>
             <div class="app-header__bar-right">
-                <a href="javascript:;" data-action="fixedpanel-toggle">
+                <a href="javascript:;" id="sidebar_toggle_btn" data-action="fixedpanel-toggle">
                     <span class="fa fa-cog"></span>
                 </a>
             </div>
@@ -556,6 +556,10 @@ export default {
             }
             &:last-of-type{
                 margin-left:5px;
+            }
+            &:hover{
+                color: #43B4C9;
+                cursor: pointer;
             }
         }
         .fa{

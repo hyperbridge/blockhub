@@ -47,15 +47,14 @@
                     </div>
 
                     <div class="col-12">
-                        <div class="project-card__container">
-                            <h3>Top 3 Submissions</h3>
-                            <c-projects-card
+                        <c-block title="Top 3 Submissions" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                            <c-project-card
                                 v-for="(project, index) in projects"
                                 :key="index"
                                 :project="project"
                                 :showGame="false"
                             />
-                        </div>
+                        </c-block>
                     </div>
                 </div>
             </div>
@@ -64,81 +63,82 @@
 </template>
 
 <script>
-    const updateProduct = function () {
-        if (!this.$store.state.marketplace.products)
-            return
+const updateProduct = function () {
+    if (!this.$store.state.marketplace.products)
+        return
 
-        const product = this.$store.state.marketplace.products[this.id]
+    const product = this.$store.state.marketplace.products[this.id]
 
-        if (!product)
-            return
+    if (!product)
+        return
 
-        if (product.images.preview && product.images.preview.length) {
-            const header = window.document.getElementById('header-bg');
-            header.style['background-image'] = 'url(' + product.images.preview[0] + ')';
-            header.style['background-size'] = 'cover';
-        }
-
-        if (!product.projects)
-            product.projects = []
-
-        return product
+    if (product.images.preview && product.images.preview.length) {
+        const header = window.document.getElementById('header-bg');
+        header.style['background-image'] = 'url(' + product.images.preview[0] + ')';
+        header.style['background-size'] = 'cover';
     }
 
-    export default {
-        props: ['id'],
-        components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
-            'c-projects-card': (resolve) => require(['@/ui/components/projects/card'], resolve)
-        },
-        data() {
-            return {
-                projects: [
-                    {
-                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
-                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
-                        funds: {
-                            currency: 'USD',
-                            obtained: 2834,
-                            goal: 5000
-                        }
-                    },
-                    {
-                        description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
-                        img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
-                        funds: {
-                            currency: 'USD',
-                            obtained: 1234,
-                            goal: 16000
-                        }
-                    }
+    if (!product.projects)
+        product.projects = []
 
-                ]
-            }
-        },
-        methods: {
-            save() {
-                this.$store.dispatch('marketplace/updateProduct', this.product)
-            }
-        },
-        computed: {
-            product: updateProduct,
-            editing() {
-                if (!this.$store.state.marketplace.editor_mode) {
-                    for (let key in this.activeElement) {
-                        this.activeElement[key] = false
+    return product
+}
+
+export default {
+    props: ['id'],
+    components: {
+        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+        'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
+        'c-block': (resolve) => require(['@/ui/components/block'], resolve),
+        'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve)
+    },
+    data() {
+        return {
+            projects: [
+                {
+                    description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                    img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                    funds: {
+                        currency: 'USD',
+                        obtained: 2834,
+                        goal: 5000
+                    }
+                },
+                {
+                    description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
+                    img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
+                    funds: {
+                        currency: 'USD',
+                        obtained: 1234,
+                        goal: 16000
                     }
                 }
-                return this.$store.state.marketplace.editor_mode === 'editing'
-            },
-        },
-        mounted: updateProduct,
-        created: updateProduct,
-        beforeDestroy() {
-            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
+
+            ]
         }
+    },
+    methods: {
+        save() {
+            this.$store.dispatch('marketplace/updateProduct', this.product)
+        }
+    },
+    computed: {
+        product: updateProduct,
+        editing() {
+            if (!this.$store.state.marketplace.editor_mode) {
+                for (let key in this.activeElement) {
+                    this.activeElement[key] = false
+                }
+            }
+            return this.$store.state.marketplace.editor_mode === 'editing'
+        },
+    },
+    mounted: updateProduct,
+    created: updateProduct,
+    beforeDestroy() {
+        window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
     }
+}
 </script>
 
 <style lang="scss" scoped>
