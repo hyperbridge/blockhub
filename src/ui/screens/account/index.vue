@@ -3,8 +3,8 @@
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12 margin-bottom-30">
-                        <c-block title="Campaign">
+                    <div class="col-12">
+                        <c-block title="Account Information">
                             <form>
                                 <div class="row">
                                     <div class="col-md-10">
@@ -14,7 +14,16 @@
                                             </label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" placeholder="Email" :value="account.email" readonly>
-                                                <span class="form-text">Your email address cannot be changed at this time.</span>
+                                                <span class="form-text">This field cannot be changed at this time.</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="switch switch-sm col-sm-3">
+                                                <label>First Name</label>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="First name" :value="account.first_name" readonly>
+                                                <span class="form-text">This field cannot be changed at this time.</span>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -31,192 +40,98 @@
                             </form>
                         </c-block>
                         
-                        <div class="stat-card-container">
-                            <c-heading-bar name="Account" :showArrows="false" :showBackground="false"></c-heading-bar>
-                            <div class="stat-card-list">
-                                <div class="stat-card">
-                                    <div class="icon">
-                                        <i class="fas fa-id-card"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h4>Identities</h4>
-                                        <div class="stat">
-                                            <div>
-                                                12 on your account
-                                            </div>
+                        <c-block title="Overview">
+                            <div class="stat-card-container">
+                                <div class="stat-card-list">
+                                    <div class="stat-card">
+                                        <div class="icon">
+                                            <i class="fas fa-id-card"></i>
                                         </div>
-                                        <p>
-                                            Viev and Manage Identities on this account.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="icon">
-                                        <i class="fas fa-question-circle"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h4>Support Tickets</h4>
-                                        <div class="stat">
-                                            <div>
-                                                <i class="fa fa-clock"></i>
-                                                35
+                                        <div class="info">
+                                            <h4>Identities</h4>
+                                            <div class="stat">
+                                                <div>
+                                                    12 on your account
+                                                </div>
                                             </div>
-                                            <div>
-                                                <i class="fas fa-exclamation-triangle" style="color: #FADC72"></i>
-                                                12
-                                            </div>
-                                            <div>
-                                                <i class="fas fa-check" style="color: #43C981"></i>
-                                                5
-                                            </div>
+                                            <p>
+                                                Viev and Manage Identities on this account.
+                                            </p>
                                         </div>
-                                        <p>
-                                            Viev and Manage Identities on this account.
-                                        </p>
                                     </div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="icon">
-                                        <i class="fas fa-dollar-sign"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h4>Open Payments</h4>
-                                        <div class="stat">
-                                            <div>
-                                                $ 2,345,00 om 6 Payments
-                                            </div>
+                                    <div class="stat-card">
+                                        <div class="icon">
+                                            <i class="fas fa-question-circle"></i>
                                         </div>
-                                        <p>
-                                            Viev and Manage Identities on this account.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="icon">
-                                        <i class="fas fa-users"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h4>User Activity</h4>
-                                        <div class="stat">
-                                            <div>
-                                                <i class="fas fa-circle" style="color: #43C981"></i>
-                                                3
+                                        <div class="info">
+                                            <h4>Support Tickets</h4>
+                                            <div class="stat">
+                                                <div>
+                                                    <i class="fa fa-clock"></i>
+                                                    35
+                                                </div>
+                                                <div>
+                                                    <i class="fas fa-exclamation-triangle" style="color: #FADC72"></i>
+                                                    12
+                                                </div>
+                                                <div>
+                                                    <i class="fas fa-check" style="color: #43C981"></i>
+                                                    5
+                                                </div>
                                             </div>
-                                            <div>
-                                                <i class="fas fa-circle" style="color: #FADC72"></i>
-                                                1
-                                            </div>
-                                            <div>
-                                                <i class="fas fa-circle" style="color: #F75D5D"></i>
-                                                0
-                                            </div>
-                                            <div>
-                                                <i class="fas fa-circle" style="color: #A2A3BE"></i>
-                                                5
-                                            </div>
+                                            <p>
+                                                Viev and Manage Identities on this account.
+                                            </p>
                                         </div>
-                                        <p>
-                                            Viev and Manage Identities on this account.
-                                        </p>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="icon">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </div>
+                                        <div class="info">
+                                            <h4>Open Payments</h4>
+                                            <div class="stat">
+                                                <div>
+                                                    $ 2,345,00 om 6 Payments
+                                                </div>
+                                            </div>
+                                            <p>
+                                                Viev and Manage Identities on this account.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="icon">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <div class="info">
+                                            <h4>User Activity</h4>
+                                            <div class="stat">
+                                                <div>
+                                                    <i class="fas fa-circle" style="color: #43C981"></i>
+                                                    3
+                                                </div>
+                                                <div>
+                                                    <i class="fas fa-circle" style="color: #FADC72"></i>
+                                                    1
+                                                </div>
+                                                <div>
+                                                    <i class="fas fa-circle" style="color: #F75D5D"></i>
+                                                    0
+                                                </div>
+                                                <div>
+                                                    <i class="fas fa-circle" style="color: #A2A3BE"></i>
+                                                    5
+                                                </div>
+                                            </div>
+                                            <p>
+                                                Viev and Manage Identities on this account.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-12 margin-bottom-30">
-                        <div class="stat-card-container">
-                            <c-heading-bar name="Section" :showArrows="false" :showBackground="false"></c-heading-bar>
-                            <div class="stat-card-list">
-                                <div class="stat-card">
-                                    <div class="icon">
-                                        <i class="fas fa-id-card"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h4>Identities</h4>
-                                        <p>
-                                            Control panel item description should be written inside this space.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="icon">
-                                        <i class="fas fa-id-card"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h4>Identities</h4>
-                                        <p>
-                                            Control panel item description should be written inside this space.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="icon">
-                                        <i class="fas fa-id-card"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h4>Identities</h4>
-                                        <p>
-                                            Control panel item description should be written inside this space.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="icon">
-                                        <i class="fas fa-id-card"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h4>Identities</h4>
-                                        <p>
-                                            Control panel item description should be written inside this space.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="icon">
-                                        <i class="fas fa-id-card"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h4>Identities</h4>
-                                        <p>
-                                            Control panel item description should be written inside this space.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="icon">
-                                        <i class="fas fa-id-card"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h4>Identities</h4>
-                                        <p>
-                                            Control panel item description should be written inside this space.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="icon">
-                                        <i class="fas fa-id-card"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h4>Identities</h4>
-                                        <p>
-                                            Control panel item description should be written inside this space.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="icon">
-                                        <i class="fas fa-id-card"></i>
-                                    </div>
-                                    <div class="info">
-                                        <h4>Identities</h4>
-                                        <p>
-                                            Control panel item description should be written inside this space.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </c-block>
                     </div>
                 </div>
             </div>
@@ -357,10 +272,7 @@
 <style lang="scss" scoped>
     .stat-card-container {
         position: relative;
-        border-radius: 5px;
-        background: rgba(28, 32, 59, .5);
         overflow: hidden;
-        padding: 20px 20px 5px;
         .stat-card-list {
             display: flex;
             margin: 0 -1%;
@@ -370,14 +282,14 @@
                 width: 31%;
                 margin: 0 1% 2%;
                 border-radius: 5px;
-                background: rgba(28, 32, 59, .5);
+                background: rgba(27, 29, 45, 0.5);
                 padding: 10px;
                 display: flex;
                 flex-wrap: nowrap;
                 justify-content: space-between;
                 .icon {
                     font-size: 48px;
-                    color: #5D75F7;
+                    color: #fff;
                     width: 60px;
                 }
                 .info {

@@ -36,18 +36,13 @@ export const initDesktop = (store) => {
     if (!DesktopBridge.isConnected()) {
         return
     }
-    
-    // tell desktop to create an account and send it back
-    const data = {
-        seed: 13891737193 // derived from input data + mouse movement
-    }
 
-    DesktopBridge.sendCommand('getAccountRequest', data).then((res) => {
-        store.state.account.email = res.account.email
-        store.state.account.public_address = res.account.public_address
+    // DesktopBridge.getAccountRequest(data).then((res) => {
+    //     store.state.account.public_address = res.account.public_address
 
-        store.state.signed_in = true
-    })
+    //     store.state.password_required = true
+    //     //store.state.signed_in = true
+    // })
 }
 
 export const actions = {
@@ -78,6 +73,16 @@ export const actions = {
         updateState(store.state)
 
         store.commit('updateState', state)
+    },
+    unlockAccount(state, payload) {
+        DesktopBridge.resolvePromptPasswordRequest(payload.password.value)
+
+        // DesktopBridge.sendCommand('getAccountRequest', data).then((res) => {
+        //     store.state.account.public_address = res.account.public_address
+
+        //     store.state.password_required = true
+        //     //store.state.signed_in = true
+        // })
     },
     async initEthereum(store, payload) {
         Token.api.ethereum.init(

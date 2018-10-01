@@ -320,7 +320,7 @@ export let initializer = () => {
         db.setInitCallback(async () => {
             // TODO: is this a race condition?
             PeerService.init()
-            DesktopBridge.init()
+            DesktopBridge.init(store)
 
             store.dispatch('database/init')
             store.dispatch('network/init')
