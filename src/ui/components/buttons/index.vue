@@ -6,7 +6,8 @@
         class="c-btn"
         :class="[
             status, 'c-btn-' + size ,
-            { 'swap-direction': swap_direction }
+            { 'swap-direction': swap_direction },
+            { 'no-shadow' : !shadow}
         ]"
         @click="$emit('click')"
     >
@@ -51,6 +52,10 @@
             size: {
                 type: String,
                 default: 'sm'
+            },
+            shadow: {
+                type: Boolean,
+                default: true
             }
         },
         computed: {
@@ -77,6 +82,9 @@
             box-shadow: unset;
             margin: 0 2px;
             padding: 0;
+        }
+        &.no-shadow{
+            box-shadow: unset;
         }
         &:active,
         &:focus {

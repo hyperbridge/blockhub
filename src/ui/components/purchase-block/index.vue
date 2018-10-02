@@ -26,7 +26,7 @@
         </div>
 
         <div class="purchase-block__buttons-group">
-            <c-button status="outline-success" :href="purchaseLink" icon_hide size="xl" v-if="isReleased && price" @click="onClickPurchase">
+            <c-button status="outline-success" :href="purchaseLink" icon_hide size="xl" :shadow="false" v-if="isReleased && price" @click="onClickPurchase">
                 Proceed to Purchase
             </c-button>
 
