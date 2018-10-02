@@ -1,94 +1,53 @@
-
 <template>
     <div class="navigation" id="navigation-default">
-        <h3>ACCOUNT</h3>
 
-        <ul>
-            <li>
-                <a href="/#/account">
-                    Account Overview
-                </a>
-            </li>
-            <li class="title">Legal</li>
-            <li>
-                <a href="/#/account/verification">
-                    Account Verification
-                </a>
-            </li>
-            <li>
-                <a href="/#/account/wallets">
-                    Privacy Policy
-                </a>
-            </li>
-            <li>
-                <a href="/#/account/wallets">
-                    Terms
-                </a>
-            </li>
-            <li class="title"><span class="icon fas fa-question-circle"></span> Help</li>
-            <li>
-                <a href="/#/account/wallets">
-                    Creating an account
-                </a>
-            </li>
-            <li>
-                <a href="/#/account/wallets">
-                    Blockchain gaming
-                </a>
-            </li>
-            <li>
-                <a href="/#/account/wallets">
-                    BlockHub interface
-                </a>
-            </li>
-            <li>
-                <a href="/#/account/wallets">
-                    HBX token
-                </a>
-            </li>
-            <li>
-                <a href="/#/account/wallets">
-                    Trading assets
-                </a>
-            </li>
-            <li class="title">Developer</li>
-            <li>
-                <a href="/#/developer/new">
-                    Become a Developer
-                </a>
-            </li>
-            <li>
-                <a href="/#/developer">
-                    Developer Area
-                </a>
-            </li>
-            <li class="title">Wallets</li>
-            <li>
-                <a href="/#/account/wallets">
-                    Overview
-                </a>
-            </li>
-            <li>
-                <a href="/#/account/wallets">
-                    New Wallet
-                </a>
-            </li>
-            <li class="title">Identities</li>
-            <li>
-                <a href="/#/account/identities">
-                    Overview
-                </a>
-            </li>
-            <li>
-                <a href="/#/account/new-identity">
-                    New Identity
-                </a>
-            </li>
-        </ul>
+        <c-sidebar-menu title="ACCOUNT" :links="links.account"/>
+        <c-sidebar-menu sub_title="Legal" :links="links.legal"/>
+        <c-sidebar-menu sub_title="Help" :links="links.help"/>
+        <c-sidebar-menu sub_title="Developer" :links="links.developer"/>
+        <c-sidebar-menu sub_title="Wallets" :links="links.wallets"/>
+        <c-sidebar-menu sub_title="Identities" :links="links.identities"/>
     </div>
 </template>
 
 <script>
-export default {
-}
+    export default {
+        components: {
+            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve)
+        },
+        data() {
+            return {
+                links: {
+                    account: [
+                        { to: { path: '/account' }, title: 'Account overview' }
+                    ],
+                    legal: [
+                        { to: { path: '/account/verification' }, title: 'Account Verification' },
+                        { to: { path: '/account' }, title: 'Account Overview' },
+                        { to: { path: '/account/wallets' }, title: 'Terms' }
+                    ],
+                    help: [
+                        { to: { path: '/account/wallets' }, title: 'Creating an account' },
+                        { to: { path: '/account/wallets' }, title: 'Blockchain gaming' },
+                        { to: { path: '/account/wallets' }, title: 'BlockHub interface' },
+                        { to: { path: '/account/wallets' }, title: 'HBX token' },
+                        { to: { path: '/account/wallets' }, title: 'Trading assets' }
+                    ],
+                    developer: [
+                        { to: { path: '/developer/new' }, title: 'Become a Developer' },
+                        { to: { path: '/developer' }, title: 'Developer Area' },
+                        { to: { path: '/account/wallets' }, title: 'Trading assets' }
+                    ],
+                    wallets: [
+                        { to: { path: '/account/wallets' }, title: 'Overview' },
+                        { to: { path: '/account/wallets' }, title: 'New Wallet' }
+                    ],
+                    identities: [
+                        { to: { path: '/account/identities' }, title: 'Overview' },
+                        { to: { path: '/account/new-identity' }, title: 'New Identity' }
+                    ]
+                }
+            }
+        }
+    }
 </script>
