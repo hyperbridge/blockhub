@@ -41,7 +41,7 @@
                                     <c-button status="info" icon="filter">More filters</c-button>
                                 </div>
                             </div>
-                            <c-assets-grid :list="collection.assets" />
+                            <c-assets-grid :list="getAssets" />
                             <c-pagination :pages="8" />
                         </c-block>
                     </div>
@@ -64,8 +64,16 @@
             'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid'], resolve)
         },
         computed: {
-            collection: function () {
-                return this.$store.state.marketplace.collections[this.id - 1]
+            getAssets(){
+                let ids = this.$store.state.marketplace.collections[this.id].assets,
+                    list = this.$store.state.marketplace.assets,
+                    arr = [];
+                if (ids)
+                    ids.forEach( (id, i) => {
+                        if (list[id])
+                            arr.push(list[id])
+                    });
+                return arr;
             }
         }
     }

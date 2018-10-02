@@ -1,15 +1,14 @@
 <template>
     <div class="collection-item" v-bind:style="{ 'background-image': 'url(' + item.background + ')' }">
         <div class="collection-item__items-container">
-            <a v-for="(asset, index) in getAsset" :href="`/#/asset/${asset.id}`" :key="index" v-if="index < 4">
-                {{ asset }}
-                <c-img :src="asset.image"/>
-            </a>
+                <router-link v-for="(asset, index) in getAsset" :to="{ name: 'Asset', params: {id: asset.id } }" :key="index" v-if="index < 4">
+                    <c-img :src="asset.image"/>
+                </router-link>
         </div>
         <div class="collection-item__info">
-            <a :href="`/#/collection/${item.id}`">
+            <router-link :to="{ name: 'Collection Page', params: {id: item.id } }">
                 <h4>{{ item.name }}</h4>
-            </a>
+            </router-link>
             <h6>by {{ item.author }}</h6>
             <div class="count">
                 <i class="fas fa-box"></i>
@@ -33,11 +32,12 @@
              let ids = this.item.assets,
                  list = this.$store.state.marketplace.assets,
                  arr = [];
-             ids.forEach( (id, i) => {
-                 if (list[id])
-                     arr.push(list[id])
-             });
-             return arr;
+             if (ids)
+                 ids.forEach( (id, i) => {
+                     if (list[id])
+                         arr.push(list[id])
+                 });
+                return arr;
          }
      },
      filters: {
