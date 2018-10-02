@@ -493,7 +493,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -682,7 +704,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -811,7 +855,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -920,7 +986,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -1011,7 +1099,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -1134,7 +1244,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -1261,7 +1393,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -1409,7 +1563,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -1518,7 +1694,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -1627,7 +1825,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -1716,7 +1936,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -1784,7 +2026,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -1868,7 +2132,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -1955,7 +2241,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -2051,7 +2359,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -2155,7 +2485,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -2280,7 +2632,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -2435,7 +2809,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -2550,7 +2946,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -2648,7 +3066,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
@@ -2778,7 +3218,29 @@
             "price": 0,
             "link": null
         },
-        "rating": [],
+        "rating": {
+            "overall": 3.5,
+            "items": [
+                {
+                    "name": "Dan Dyer",
+                    "number": 3
+                },
+                {
+                    "name": "Jake Clark",
+                    "number": 4.5
+                },
+                {
+                    "name": "Victoria Jones",
+                    "number": 1.5
+                },
+                {
+                    "name": "Anne Bower",
+                    "number": 1
+                }
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
         "assets": [],
         "community": {
             "discussions": []
