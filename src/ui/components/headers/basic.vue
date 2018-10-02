@@ -1,27 +1,24 @@
 <template>
-    <header class="app-header">
-        <div class="app-header__top-bar desktop-draggable">
-            <div class="app-header__buttons" v-if="desktop_mode">
-                <div class="app-header__close-button">
-                    <a href="#" @click.prevent="closeWindow"><span>&times;</span></a>
-                </div>
-                <div class="app-header__minimize-button">
-                    <a href="#" @click.prevent="minimizeWindow"><span>&ndash;</span></a>
-                </div>
-                <div class="app-header__maximize-button">
-                    <a href="#" @click.prevent="maximizeWindow"><span>+</span></a>
-                </div>
-            </div>
-        </div>
+    <header class="app-header desktop-draggable">
+        <div class="app-header__top-bar"></div>
         <div class="position-relative w-100" style="margin-top: -10px">
             <div class="app-header__bar-left">
-                <a href="/#/">
+                <div class="app-header__close-button" v-if="desktop_mode">
+                    <a href="#" @click.prevent="closeWindow">&times;</a>
+                </div>
+                <div class="app-header__minimize-button" v-if="desktop_mode">
+                    <a href="#" @click.prevent="minimizeWindow">&ndash;</a>
+                </div>
+                <div class="app-header__maximize-button" v-if="desktop_mode">
+                    <a href="#" @click.prevent="maximizeWindow">+</a>
+                </div>
+                <a class="app-header__bar-left-link" href="/#/" v-if="!desktop_mode">
                     <span class="fa fa-home"></span>
                 </a>
-                <a @click="$router.go(-1)">
+                <a class="app-header__bar-left-link" @click="$router.go(-1)" v-if="!desktop_mode">
                     <span class="fa fa-arrow-left"></span>
                 </a>
-                <a @click="$router.go(+1)">
+                <a class="app-header__bar-left-link" @click="$router.go(+1)" v-if="!desktop_mode">
                     <span class="fa fa-arrow-right"></span>
                 </a>
             </div>
@@ -30,7 +27,7 @@
                 <c-loading-logo :isLoading="isLoader" />
             </a>
             <div class="app-header__bar-right">
-                <a href="javascript:;" id="sidebar_toggle_btn" data-action="fixedpanel-toggle">
+                <a class="app-header__bar-left-link" href="javascript:;" id="sidebar_toggle_btn" data-action="fixedpanel-toggle">
                     <span class="fa fa-cog"></span>
                 </a>
             </div>
@@ -440,19 +437,29 @@ export default {
     .app-header__close-button {
         background: #ff5c5c;
         font-size: 17px;
+        line-height: 0;
+        width: 15px;
+        height: 15px;
+        margin-left: 6px;
+        margin-top: 5px;
+        padding-top: 5px;
         border: 1px solid #e33e41;
         border-radius: 50%;
         display: inline-block;
+        text-align: center;
+        font-weight: bold;
 
         a {
+            display: none;
             color: #820005;
         }
 
-        &:active {
+        &:active, &:hover {
             background: #c14645;
             border: 1px solid #b03537;
 
             a {
+                display: block;
                 color: #4e0002;
             }
         }
@@ -461,20 +468,29 @@ export default {
     .app-header__minimize-button {
         background: #ffbd4c;
         font-size: 17px;
+        line-height: 0;
         margin-left: 6px;
+        width: 15px;
+        height: 15px;
+        margin-top: 5px;
+        padding-top: 5px;
         border: 1px solid #e09e3e;
         border-radius: 50%;
         display: inline-block;
+        text-align: center;
+        font-weight: bold;
 
         a {
+            display: none;
             color: #9a5518;
         }
 
-        &:active {
+        &:active, &:hover {
             background: #c08e38;
             border: 1px solid #af7c33;
 
             a {
+                display: block;
                 color: #5a2607;
             }
         }
@@ -484,20 +500,29 @@ export default {
     .app-header__maximize-button {
         background: #00ca56;
         font-size: 17px;
+        line-height: 0;
         margin-left: 6px;
+        width: 15px;
+        height: 15px;
+        margin-top: 5px;
+        padding-top: 5px;
         border: 1px solid #14ae46;
         border-radius: 50%;
+        text-align: center;
+        font-weight: bold;
         display: inline-block;
 
         a {
+            display: none;
             color: #006519;
         }
 
-        &:active {
+        &:active, &:hover {
             background: #029740;
             border: 1px solid #128435;
 
             a {
+                display: block;
                 color: #003107;
             }
         }
@@ -547,20 +572,18 @@ export default {
         z-index: 13;
     }
 
-    .app-header__bar-left, .app-header__bar-right {
-        a{
-            color:#30314C;
-            display: inline-block;
-            &:first-of-type{
-                margin-right:15px;
-            }
-            &:last-of-type{
-                margin-left:5px;
-            }
-            &:hover{
-                color: #43B4C9;
-                cursor: pointer;
-            }
+    a.app-header__bar-left-link {
+        color:#30314C;
+        display: inline-block;
+        &:first-of-type{
+            margin-right:15px;
+        }
+        &:last-of-type{
+            margin-left:5px;
+        }
+        &:hover{
+            color: #43B4C9;
+            cursor: pointer;
         }
         .fa{
             line-height: 30px;

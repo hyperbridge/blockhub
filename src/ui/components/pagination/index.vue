@@ -132,7 +132,7 @@
         align-items: center;
         justify-content: space-between;
         flex-wrap: nowrap;
-        margin-top: 25px;
+        margin-top: 15px;
     }
     .pagination__nav {
         padding: 10px;
