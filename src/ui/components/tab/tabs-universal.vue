@@ -1,19 +1,20 @@
 <template>
-    <div>
-        <nav>
+    <div class="tabs-universal" :class="`tabs-universal--${styled ? 'styled' : 'default'}`">
+        <nav class="tabs-universal__nav">
             <slot name="nav">
                 <ul class="tabs-universal__list">
                     <li
-                        v-for="(tab, index) in dynamic_tabs"
+                        v-for="(tab, index) in dynamicTabs"
                         :key="index"
                         class="tabs-universal__list-item"
+                        :class="'layer' + (index + 1)"
                     >
                         <a
                             :aria-selected="active_tab == index"
                             class="list-item__link"
                             :class="{
                                 'active': active_tab == index,
-                                'avoid-clicks locked': is_tab_locked(index)
+                                'avoid-clicks locked': isTabLocked(index),
                             }"
                             @click.prevent="active_tab_data = index"
                             role="tab"
@@ -22,9 +23,7 @@
                 </ul>
             </slot>
         </nav>
-        <div class="tabs-universal__content">
-            <slot/>
-        </div>
+        <slot/>
     </div>
 </template>
 
@@ -32,10 +31,12 @@
     export default {
         name: 'tabs-universal',
         props: {
-            tab_names: Array,
+            tabNames: Array,
+            tabText: String,
             active_tab_prop: [Number, String],
             locked_step: Number,
-            locked_tab: Number
+            locked_tab: Number,
+            styled: Boolean
         },
         data() {
             return {
@@ -44,17 +45,22 @@
             }
         },
         methods: {
-            is_tab_locked(index) {
+            isTabLocked(index) {
                 const { locked_step, locked_tab } = this;
                 return (locked_tab != null && locked_tab == index) || (locked_step != null && !(index < locked_step));
             }
         },
         computed: {
-            dynamic_tabs() {
-                return this.tab_names ? this.tab_names : this.tabs.map((tab, index) => 'TAB ' + ++index);
+            dynamicTabs() {
+                return this.tabNames ? this.tabNames : this.tabs.map((tab, index) =>
+                    (this.tabText ? this.tabText + ' ' :  'TAB ') + ++index
+                );
             },
             active_tab() {
                 return this.active_tab_prop ? this.active_tab_prop : this.active_tab_data;
+            },
+            activeStyle() {
+                return this.styled ? '--styled' : '--default';
             }
         },
         provide() {
@@ -77,18 +83,33 @@
         padding: 0;
         display: flex;
         list-style-type: none;
-        justify-content: center;
     }
 
     .tabs-universal__list-item {
-        margin: 0 15px;
         .list-item__link {
-            border-bottom: 2px solid transparent;
             cursor: pointer;
             display: block;
-            min-width: 42px;
-            min-height: 26px;
+            font-size: 15px;
+            padding: 6px 15px;
             text-align: center;
+            position: relative;
+        }
+    }
+
+    /deep/ .tabs-universal__content {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .tabs-universal--default {
+        .tabs-universal__list {
+            justify-content: center;
+        }
+        .tabs-universal__list-item {
+            margin: 0 15px;
+        }
+        .list-item__link {
+            border-bottom: 2px solid transparent;
             &.active {
                 border-color: rgb(94, 96, 155);
             }
@@ -96,21 +117,91 @@
                 color: rgba(255,255,255,.5);
             }
         }
+        .tabs-universal__content {
+            margin-top: 15px;
+        }
     }
 
-    .tabs-universal__content {
-        margin-top: 15px;
-        position: relative;
-        overflow: hidden;
-        .tab-universal-enter-active, .tab-universal-leave-active {
-            transition: opacity .4s ease, transform .4s ease;
+    .tabs-universal--styled {
+        .tabs-universal__nav {
+            position: relative;
         }
-        .tab-universal-leave-active {
+        .tabs-universal__nav:after {
+            content: "";
             position: absolute;
+            left: 0;
+            top: 32px;
+            right: 15px;
+            height: 15px;
+            background: #3e3e5c;
+            z-index: 10;
         }
-        .tab-universal-enter, .tab-universal-leave-to {
-            opacity: 0;
-            transform: translateX(20px);
+        .tabs-universal__list-item {
+            margin-right: 20px;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            &:not(:first-child) {
+                .list-item__link:before {
+                    content: "";
+                    position: absolute;
+                    height: 23px;
+                    bottom: 0;
+                    right: calc(100% - 2px);
+                    border: 15px solid transparent;
+                    border-bottom: 15px solid #393955;
+                    border-right: 15px solid #393955;
+                    -webkit-filter: drop-shadow(-5px 0px 3px rgba(0, 0, 0, .15));
+                    filter: drop-shadow(-5px 0px 3px rgba(0, 0, 0, .1));
+                }
+            }
+            .list-item__link {
+                border-radius: 8px 8px 0 0;
+                background-color: #393955;
+                color: #606079;
+                &.active {
+                    background-color: #3E3E5C;
+                    color: #fff;
+                    z-index: 8;
+                    &:after {
+                        border-bottom-color: #3e3e5c;
+                        border-left-color: #3e3e5c;
+                    }
+                    &:before {
+                        border-bottom-color: #3e3e5c;
+                        border-right-color: #3e3e5c;
+                    }
+                }
+                &:after {
+                    content: "";
+                    position: absolute;
+                    height: 23px;
+                    bottom: 0;
+                    left: calc(100% - 2px);
+                    border: 15px solid transparent;
+                    border-bottom: 15px solid #393955;
+                    border-left: 15px solid #393955;
+                    -webkit-filter: drop-shadow(5px -2px 3px rgba(0, 0, 0, 0.15));
+                    filter: drop-shadow(5px -2px 3px rgba(0, 0, 0, 0.14));
+                }
+            }
+        }
+        /deep/ .tabs-universal__content {
+            background-color: #3E3E5C;
+            border-radius: 0 5px 5px 5px;
+            box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+        }
+        .layer1 a {
+            z-index: 7;
+        }
+        .layer2 a {
+            z-index: 6;
+        }
+        .layer3 a {
+            z-index: 5;
+        }
+        .layer4 a {
+            z-index: 4;
         }
     }
 </style>

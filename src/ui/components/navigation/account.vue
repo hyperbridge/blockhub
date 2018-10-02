@@ -1,6 +1,5 @@
 <template>
     <div class="navigation" id="navigation-default">
-
         <c-sidebar-menu title="ACCOUNT" :links="links.account"/>
         <c-sidebar-menu sub_title="Legal" :links="links.legal"/>
         <c-sidebar-menu sub_title="Help" :links="links.help"/>
