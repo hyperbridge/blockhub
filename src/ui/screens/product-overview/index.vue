@@ -197,10 +197,11 @@
             header.style['background-size'] = 'cover';
         }
 
-        if (!product.community)
+        if (!product.community) {
             product.community = {
                 discussions: []
             }
+        }
         
         if (!product.author_tags) {
             product.author_tags = []
@@ -405,7 +406,7 @@
 
     .main-content {
         margin-top: 15px;
-        padding: 15px;
+        padding: 0;
         border-radius: 5px;
         overflow: hidden;
         color: #C6C6D6;

@@ -238,6 +238,67 @@ a {
     background-color: transparent;
 }
 
+#left-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 247px;
+    height: 100%;
+    content: ' ';
+    background: url(/static/img/body-left-bg.png);
+    background-size: 247px 100%;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+#right-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 247px;
+    height: 100%;
+    content: ' ';
+    background: url(/static/img/body-right-bg.png);
+    background-size: 247px 100%;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+#header-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 383px;
+    content: ' ';
+    background: url(/static/img/products/default.png);
+    background-size: 100% 383px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #30314c;
+    z-index: 0;
+}
+
+#header-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 383px;
+    z-index: 0;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#30314d+0,30314d+100&0.34+0,1+100 */
+    background: -moz-linear-gradient(top, rgba(48, 49, 77, 0.34) 0%, rgba(48, 49, 77, 1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(48, 49, 77, 0.34) 0%, rgba(48, 49, 77, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(48, 49, 77, 0.34) 0%, rgba(48, 49, 77, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5730314d', endColorstr='#30314d', GradientType=0); /* IE6-9 */
+}
+
+#app {
+    z-index: 2;
+    position: relative;
+}
+
 #critical-error {
     display: none;
     position: fixed;
@@ -368,6 +429,8 @@ a {
   BlockHub requires JavaScript enabled.
 </noscript>
 
+<div id="left-bg"></div>
+<div id="right-bg"></div>
 <div id="header-bg"></div>
 
 <div id="app"></div>

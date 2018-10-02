@@ -51,17 +51,18 @@
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
                         <c-block title="New Releases" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                             <template slot="additional-action">
-                                <!--<c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @click_down="" />-->
                                 <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
                                 <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
                             </template>
 
                             <c-game-grid
-                                :itemInRow="1"
-                                :showRating="false"
-                                :showTime="true"
+                                :itemInRow="2"
+                                :showRating="true"
+                                :showDate="false"
+                                :showLink="true"
                                 :items="new_products.slice(0,5)"
                                 itemBg="transparent"
+                                pricePosition="right"
                             />
                         </c-block>
                     </div>
@@ -208,13 +209,13 @@
 
                     <div class="row margin-bottom-30" v-if="item.type === 'product_news'" :key="`level-1-${index}`">
                         <div class="col-12">
-                            <c-heading-bar name="What's up with your content" :showArrows="false" :showBackground="false">
+                            <!-- <c-heading-bar name="What's up with your content" class="mb-0" :showArrows="false" :showBackground="false">
                                 <template slot="additional-action">
                                     <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
                                     <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
                                     <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
                                 </template>
-                            </c-heading-bar>
+                            </c-heading-bar> -->
 
                             <div class="home-tabs">
                                 <c-news-list-navigation

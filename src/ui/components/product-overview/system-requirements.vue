@@ -26,7 +26,7 @@
                         <p v-else class="system-requirements__value">{{ value | upperFirstChar }}</p>
                     </li>
                 </ul>
-                <h4 v-else>Currently not supported</h4>
+                <h4 v-else>Not currently supported.</h4>
             </c-tab-universal>
         </c-tabs-universal>
     </c-block>

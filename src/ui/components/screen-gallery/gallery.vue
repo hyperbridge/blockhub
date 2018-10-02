@@ -152,10 +152,9 @@ export default {
 <style lang="scss" scoped>
     .screen-gallery{
         display: flex;
-        background: rgba(0, 0, 0, 0.3);
         border-radius: 6px;
         margin-bottom: 10px;
-        padding: 10px;
+        padding: 0;
         img {
             width: 100%;
             object-fit: cover;
@@ -170,6 +169,7 @@ export default {
         display: flex;
         align-items: center;
         background-color: rgb(0, 0, 0);
+        border-radius: 6px;
         video {
             width: 100%;
             height: auto;
@@ -223,6 +223,7 @@ export default {
             }
             height: 75px;
             img {
+                border-radius: 6px;
                 height: 75px;
             }
         }

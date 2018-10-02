@@ -8,8 +8,7 @@
                         <i class="fas fa-times"></i>
                     </div>
                     <slot name="custom_close" v-else></slot>
-
-                    <div class="c-popup__content" v-if=" type != 'custom'">
+                    <div class="c-popup__content" v-if="!this.$slots.custom_content">
                         <div class="c-popup__content-header" :class="[ 'c-popup-type-' + type ]" v-if="sub_title">
                             <div class="popup-icon">
                                 <i class="fas fa-exclamation-triangle" v-if=" type == ['warning', 'danger'] "></i>

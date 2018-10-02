@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import { normalize } from 'normalizr'
-import * as ethereum from '@/framework/ethereum'
 import * as db from '@/db'
 
 let rawData = {
