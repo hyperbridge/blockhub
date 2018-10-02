@@ -1,9 +1,8 @@
-import { normalize } from 'normalizr'
 import Vue from 'vue'
+import { normalize } from 'normalizr'
 import schema from './schema'
-import MarketplaceProtocol from 'marketplace-protocol'
-import * as ethereum from '@/framework/ethereum'
-import * as db from '@/db'
+import * as DB from '@/db'
+import * as DesktopBridge from '@/framework/desktop-bridge'
 
 let rawData = {};
 
@@ -14,17 +13,17 @@ const updateState = (savedData, updatedState = {}) => {
         ...rawData,
         ...savedData,
         ...updatedState,
-        assets: db.marketplace ? db.marketplace.assets.data : [],
-        products: db.marketplace ? db.marketplace.products.data : [],
+        assets: DB.marketplace ? DB.marketplace.assets.data : [],
+        products: DB.marketplace ? DB.marketplace.products.data : [],
         collections: [], // TODO
-        frontpage_product: db.marketplace ? db.marketplace.products.findOne({ 'system_tags': { '$contains': ['frontpage'] } }) : {},
-        sale_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['sale'] } }) : [],
-        new_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['new'] } }) : [],
-        featured_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['featured'] } }) : [],
-        upcoming_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['upcoming'] } }) : [],
-        trending_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['trending'] } }) : [],
-        top_selling_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }) : [],
-        special_products: db.marketplace ? db.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : []
+        frontpage_product: DB.marketplace ? DB.marketplace.products.findOne({ 'system_tags': { '$contains': ['frontpage'] } }) : {},
+        sale_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['sale'] } }) : [],
+        new_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['new'] } }) : [],
+        featured_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['featured'] } }) : [],
+        upcoming_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['upcoming'] } }) : [],
+        trending_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['trending'] } }) : [],
+        top_selling_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }) : [],
+        special_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : []
     }
 
     if (rawData.desktop_mode == null)
@@ -50,7 +49,7 @@ const sortDir = (dir, asc) => asc ? dir : dir * -1;
 export const getters = {
     assetsArray: state => Array.isArray(state.assets) ? state.assets : Object.values(state.assets),
     productsArray: state => Array.isArray(state.products) ? state.products : Object.values(state.products),
-    getProductsQuery: state => query => db.marketplace.products.find(query),
+    getProductsQuery: state => query => DB.marketplace.products.find(query),
     productsTags: (state, getters) => getters.productsArray
         .reduce((tags, product) => [
             ...tags,
@@ -103,20 +102,15 @@ export const actions = {
     init(store, payload) {
         console.log("[BlockHub][Marketplace] Initializing...")
 
-        updateState(db.marketplace.config.data[0], store.state)
+        updateState(DB.marketplace.config.data[0], store.state)
 
         store.commit('updateState', state)
     },
-    async initEthereum(store, payload) {
-        if (store.state.ethereum[store.state.current_ethereum_network].contracts.Marketplace
-            && store.state.ethereum[store.state.current_ethereum_network].contracts.Marketplace.address) {
-            MarketplaceProtocol.Ethereum.Models.Marketplace.init(
-                MarketplaceProtocol.Ethereum.Contracts.Marketplace,
-                store.state.ethereum[store.state.current_ethereum_network].contracts.Marketplace.address,
-                store.state.ethereum[store.state.current_ethereum_network].user_from_address,
-                store.state.ethereum[store.state.current_ethereum_network].user_to_address
-            )
-        }
+    initEthereum(store, payload) {
+        DesktopBridge.initProtocol('marketplace').then((err, config) => {
+            store.state.ethereum[store.state.current_ethereum_network] = config
+            store.dispatch('updateState')
+        })
     },
     updateState(store, payload) {
         //console.log("[BlockHub][Marketplace] Updating store...")
@@ -139,12 +133,12 @@ export const actions = {
         // })
 
         const success = () => {
-            const product = db.marketplace.products.findOne({ 'id': id })
+            const product = DB.marketplace.products.findOne({ 'id': id })
 
             Object.assign(product, payload)
 
-            db.marketplace.products.update(product)
-            db.save()
+            DB.marketplace.products.update(product)
+            DB.save()
 
             store.commit('updateProduct', { id, data: product })
         }
@@ -165,7 +159,7 @@ export const actions = {
         // payload = name, version, category, files, checksum, permissions
 
         MarketplaceProtocol.Ethereum.Models.Marketplace.submitAppForReview(payload).then((res) => {
-            const product = db.marketplace.products.findOne({ 'name': product.name })
+            const product = DB.marketplace.products.findOne({ 'name': product.name })
             product.id = res[0]
             // TODO: assign rest of props
 
@@ -188,12 +182,12 @@ export const mutations = {
     },
     createProduct(state, payload) {
         const success = (id) => {
-            const product = db.marketplace.products.insert({ id, ...payload })
+            const product = DB.marketplace.products.insert({ id, ...payload })
 
             Object.assign(product, payload)
 
-            db.marketplace.products.update(product)
-            db.save()
+            DB.marketplace.products.update(product)
+            DB.save()
 
             Vue.set(state.products, id, product)
         }
@@ -210,7 +204,7 @@ export const mutations = {
         })
     },
     submitProductForReviewResponse(state, product) {
-        db.marketplace.products.update(product)
+        DB.marketplace.products.update(product)
     },
     setSimulatorMode(state, payload) {
         state.simulator_mode = payload
@@ -227,8 +221,8 @@ export const mutations = {
             state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
             state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = res._address
 
-            db.marketplace.config.update(state)
-            db.save()
+            DB.marketplace.config.update(state)
+            DB.save()
         })
 
     }

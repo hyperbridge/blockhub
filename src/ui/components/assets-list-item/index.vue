@@ -34,12 +34,9 @@
     }
     .assets-list__item {
         border-radius: 5px;
-        border: 1px solid rgba(255, 255, 255, 0.07);
-        background: rgba(0, 0, 0, .33);
         padding: 10px;
         width: 100%;
         height: 100%;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
         display: flex;
         justify-content: space-between;
         align-items: center;

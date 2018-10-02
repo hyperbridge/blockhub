@@ -441,6 +441,12 @@
             window.document.getElementById('header-bg').style['background-image'] = 'url(' + project.images.header + ')'
         }
 
+        if (project && !project.community) {
+            project.community = {
+                discussions: []
+            }
+        }
+
         return project
     }
 

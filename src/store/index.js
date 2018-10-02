@@ -4,9 +4,7 @@ import Vuex from 'vuex'
 import router from '../router'
 import * as db from '../db'
 import * as ChaosMonkey from '../framework/chaos-monkey'
-import * as PeerService from '../framework/peer-service'
 import * as DesktopBridge from '../framework/desktop-bridge'
-import * as Ethereum from '../framework/ethereum'
 import * as funding from '../modules/funding'
 import * as news from '../modules/news'
 import * as marketplace from '../modules/marketplace'
@@ -25,7 +23,6 @@ if (!window.BlockHub)
 // Initial settings
 // Disable peer relaying by default (until we're somewhat stable)
 // Disable chaos monkey by default (until we're somewhat stable)
-PeerService.config.RELAY = false
 ChaosMonkey.config.ENABLED = false
 
 /* Usage:
@@ -45,9 +42,9 @@ const CheckDevelopmentMode = () => {
     if (hash.slice(0, 3) !== 'mode') return false
 
     if (hash === 'mode1') {
-        PeerService.config.RELAY = true
+        //PeerService.config.RELAY = true
     } else if (hash === 'mode2') {
-        PeerService.config.RELAY = false
+        //PeerService.config.RELAY = false
     } else if (hash === 'mode3') {
         ChaosMonkey.config.FORCED = true
     }
@@ -110,8 +107,6 @@ const store = new Vuex.Store({
 
 
 window.BlockHub.ChaosMonkey = ChaosMonkey
-window.BlockHub.Ethereum = Ethereum
-window.BlockHub.PeerService = PeerService
 window.BlockHub.store = store
 window.BlockHub.db = db
 window.BlockHub.seed = seed
@@ -136,6 +131,7 @@ window.BlockHub.saveDatabase = () => {
     db.marketplace.config.data = [store.state.marketplace]
 
     db.funding.config.data = [store.state.funding]
+    db.funding.projects.data = store.state.funding.projects
 
     db.save()
 }
@@ -157,27 +153,28 @@ const initSubscribers = () => {
                 store.dispatch('database/clean')
             }
         } else if (mutation.type === 'database/updateState') {
-            PeerService.setResolver((cmd) => {
-                if (cmd.key = 'pageContentHashRequest' || cmd.key === 'pageContentDataRequest') {
-                    const computedState = {}
+            // TODO: hook up to desktop
+            // PeerService.setResolver((cmd) => {
+            //     if (cmd.key = 'pageContentHashRequest' || cmd.key === 'pageContentDataRequest') {
+            //         const computedState = {}
 
-                    try {
-                        if (router.matcher.match(cmd.data.path).matched.length && router.matcher.match(cmd.data.path).matched[0].components.default.computed) {
-                            for (let x in router.matcher.match(cmd.data.path).matched[0].components.default.computed) {
-                                computedState[x] = router.matcher.match(cmd.data.path).matched[0].components.default.computed[x].bind(new function FakeStore() { this.$store = store; })()
-                            }
-                        }
-                    } catch (e) {
-                        console.log("Problem encountered computing vue state", e)
-                    }
+            //         try {
+            //             if (router.matcher.match(cmd.data.path).matched.length && router.matcher.match(cmd.data.path).matched[0].components.default.computed) {
+            //                 for (let x in router.matcher.match(cmd.data.path).matched[0].components.default.computed) {
+            //                     computedState[x] = router.matcher.match(cmd.data.path).matched[0].components.default.computed[x].bind(new function FakeStore() { this.$store = store; })()
+            //                 }
+            //             }
+            //         } catch (e) {
+            //             console.log("Problem encountered computing vue state", e)
+            //         }
 
-                    console.log('[BlockHub] Computed vue state', computedState)
+            //         console.log('[BlockHub] Computed vue state', computedState)
 
-                    return computedState
-                }
+            //         return computedState
+            //     }
 
-                return {}
-            })
+            //     return {}
+            // })
 
             store.dispatch('marketplace/updateState')
             store.dispatch('funding/updateState')
@@ -286,30 +283,31 @@ const monitorSimulatorMode = () => {
     setTimeout(monitorSimulatorMode, 100)
 }
 
-const monitorPathState = async () => {
-    if (!store.state.network.connection.operator) {
-        return
-    }
+// TODO
+// const monitorPathState = async () => {
+//     if (!store.state.network.connection.operator) {
+//         return
+//     }
 
-    const path = document.location.hash.replace('#', '')
+//     const path = document.location.hash.replace('#', '')
 
-    console.log("[BlockHub] Checking peers for state changes on path", path)
+//     console.log("[BlockHub] Checking peers for state changes on path", path)
 
-    // Send request for latest hash of current pages data
-    // TODO: compare timestamp
-    const state = await PeerService.getPathState(path)
+//     // Send request for latest hash of current pages data
+//     // TODO: compare timestamp
+//     const state = await PeerService.getPathState(path)
 
-    console.log('[BlockHub] Received peer state', state)
+//     console.log('[BlockHub] Received peer state', state)
 
-    if (state) {
-        store.dispatch('cache/updateScreenState', { path, state })
-    }
+//     if (state) {
+//         store.dispatch('cache/updateScreenState', { path, state })
+//     }
 
-    // Do it all over again
-    await new Promise(r => setTimeout(r, 5000))
+//     // Do it all over again
+//     await new Promise(r => setTimeout(r, 5000))
 
-    monitorPathState()
-}
+//     monitorPathState()
+// }
 
 
 
@@ -319,7 +317,7 @@ export let initializer = () => {
 
         db.setInitCallback(async () => {
             // TODO: is this a race condition?
-            PeerService.init()
+            //TODO: PeerService.init()
             DesktopBridge.init(store)
 
             store.dispatch('database/init')
@@ -328,9 +326,9 @@ export let initializer = () => {
             store.dispatch('funding/init')
 
             try {
-                await store.dispatch('network/initEthereum')
-                await store.dispatch('funding/initEthereum')
-                await store.dispatch('marketplace/initEthereum')
+                store.dispatch('network/initEthereum')
+                store.dispatch('funding/initEthereum')
+                store.dispatch('marketplace/initEthereum')
             } catch(err) {
                 console.log(err)
             }
@@ -338,7 +336,7 @@ export let initializer = () => {
 
             initSubscribers()
             monitorSimulatorMode()
-            monitorPathState()
+            //monitorPathState()
 
             // if (!initialized) {
             //     initialized = true

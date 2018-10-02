@@ -1,10 +1,7 @@
 import Vue from 'vue'
 import { normalize } from 'normalizr'
-import Token from 'hyperbridge-token'
-import * as Ethereum from '@/framework/ethereum'
-import * as PeerService from '@/framework/peer-service'
-import * as DesktopBridge from '@/framework/desktop-bridge'
 import * as DB from '@/db'
+import * as DesktopBridge from '@/framework/desktop-bridge'
 import schema from './schema'
 
 let rawData = {}
@@ -84,27 +81,11 @@ export const actions = {
         //     //store.state.signed_in = true
         // })
     },
-    async initEthereum(store, payload) {
-        Token.api.ethereum.init(
-            store.state.ethereum[store.state.current_ethereum_network].user_from_address,
-            store.state.ethereum[store.state.current_ethereum_network].user_to_address
-        )
-
-        for (let contractName in store.state.ethereum[store.state.current_ethereum_network].contracts) {
-            const contract = store.state.ethereum[store.state.current_ethereum_network].contracts[contractName]
-
-            if (contract.address) {
-                await Token.api.ethereum.setContractAddress(contractName, contract.address)
-                    .catch(() => {
-                        store.state.ethereum[store.state.current_ethereum_network].contracts[contractName].address = null
-                        store.state.ethereum[store.state.current_ethereum_network].contracts[contractName].created_at = null
-
-                        store.dispatch('updateState')
-                    })
-            } else {
-                store.state.ethereum[store.state.current_ethereum_network].contracts[contractName].created_at = null
-            }
-        }
+    initEthereum(store, payload) {
+        DesktopBridge.initProtocol('token').then((err, config) => {
+            store.state.ethereum[store.state.current_ethereum_network] = config
+            store.dispatch('updateState')
+        })
     },
     checkEthereumConnection(store, payload) {
         const success = () => {
@@ -125,7 +106,8 @@ export const actions = {
             // TODO: fallback to peer datasource
         }
 
-        Ethereum.init().then(success, failure).catch(failure)
+        // TODO
+        // Ethereum.init().then(success, failure).catch(failure)
     },
     checkInternetConnection(store, payload) {
         console.log('[BlockHub] Connection status: ' + JSON.stringify(store.state.connection))
@@ -205,28 +187,28 @@ export const actions = {
     },
     async deployContract(store, payload) {
         return new Promise((resolve, reject) => {
-            if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {
-                state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = {
-                    created_at: null,
-                    address: null
-                }
-            }
+            // if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {
+            //     state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = {
+            //         created_at: null,
+            //         address: null
+            //     }
+            // }
 
-            const meta = Token.Ethereum.Contracts[payload.contractName]
-            const contract = new window.web3.eth.Contract(meta.abi)
+            // const meta = Token.Ethereum.Contracts[payload.contractName]
+            // const contract = new window.web3.eth.Contract(meta.abi)
 
-            contract.deploy({
-                data: meta.bytecode
-            }).send({
-                from: state.ethereum[state.current_ethereum_network].user_from_address,
-                gas: 4500000
-            }).then((res) => {
-                state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
-                state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = res._address
+            // contract.deploy({
+            //     data: meta.bytecode
+            // }).send({
+            //     from: state.ethereum[state.current_ethereum_network].user_from_address,
+            //     gas: 4500000
+            // }).then((res) => {
+            //     state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
+            //     state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = res._address
 
-                DB.network.config.update(state)
-                DB.save()
-            })
+            //     DB.network.config.update(state)
+            //     DB.save()
+            // })
         })
     }
 }
