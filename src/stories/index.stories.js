@@ -1183,42 +1183,66 @@ import AssetsGrid from '../ui/components/assets-grid'
 const assets_list = [
     {
         name: 'some item name',
-        price: '1.99',
+        price: {
+            "min": 0.99,
+            "max": 9.99,
+            "current": 2.99
+        },
         count: '240.000',
         main_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
         sub_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
     },
     {
         name: 'some another item name',
-        price: '99.99',
+        price: {
+            "min": 0.99,
+            "max": 9.99,
+            "current": 2.99
+        },
         count: '824.000',
         main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
         sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
     },
     {
         name: 'some another item name',
-        price: '99.99',
+        price: {
+            "min": 0.99,
+            "max": 9.99,
+            "current": 2.99
+        },
         count: '824.000',
         main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
         sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
     },
     {
         name: 'some another item name',
-        price: '99.99',
+        price: {
+            "min": 0.99,
+            "max": 9.99,
+            "current": 2.99
+        },
         count: '824.000',
         main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
         sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
     },
     {
         name: 'some another item name',
-        price: '99.99',
+        price: {
+            "min": 0.99,
+            "max": 9.99,
+            "current": 2.99
+        },
         count: '824.000',
         main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
         sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
     },
     {
         name: 'some another item name',
-        price: '99.99',
+        price: {
+            "min": 0.99,
+            "max": 9.99,
+            "current": 2.99
+        },
         count: '824.000',
         main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
         sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
@@ -1299,7 +1323,12 @@ storiesOf('Assets Overview Popup', module)
                             "label": "Item Durability",
                             "text": "40/41"
                         }
-                    ]
+                    ],
+                    price: {
+                        "min": 0.99,
+                        "max": 9.99,
+                        "current": 2.99
+                    }
                 }
             })
         },
@@ -1387,13 +1416,21 @@ storiesOf('Assets List', module)
                     {
                         img: 'https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de',
                         title: 'Magic Plate Armor',
-                        price: '4.99',
+                        price: {
+                            "min": 0.99,
+                            "max": 9.99,
+                            "current": 2.99
+                        },
                         count: '350.000'
                     },
                     {
                         img: 'https://vignette.wikia.nocookie.net/angrybirds-fiction/images/8/8b/Toons_assets_chuck_01.png/revision/latest?cb=20150120103056&path-prefix=ru',
                         title: 'Magic Chuck',
-                        price: '19.99',
+                        price: {
+                            "min": 0.99,
+                            "max": 9.99,
+                            "current": 2.99
+                        },
                         count: '50.000'
                     }
                 ]

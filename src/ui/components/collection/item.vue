@@ -1,7 +1,8 @@
 <template>
     <div class="collection-item" v-bind:style="{ 'background-image': 'url(' + item.background + ')' }">
         <div class="collection-item__items-container">
-            <a v-for="(asset, index) in item.assets" :href="`/#/asset/${asset.id}`" :key="index" v-if="index < 4">
+            <a v-for="(asset, index) in getAsset" :href="`/#/asset/${asset.id}`" :key="index" v-if="index < 4">
+                {{ asset }}
                 <c-img :src="asset.image"/>
             </a>
         </div>
@@ -25,6 +26,18 @@
      data(){
          return{
              label: ''
+         }
+     },
+     computed:{
+         getAsset(){
+             let ids = this.item.assets,
+                 list = this.$store.state.marketplace.assets,
+                 arr = [];
+             ids.forEach( (id, i) => {
+                 if (list[id])
+                     arr.push(list[id])
+             });
+             return arr;
          }
      },
      filters: {
