@@ -142,28 +142,6 @@
 
                         <c-games-explorer v-if="item.type === 'games_explorer'" :key="`level-1-${index}`" />
 
-                        <div class="row margin-bottom-50 margin-top-20 align-items-stretch" v-if="item.type === 'banners'" :key="index">
-                            <div class="col-12 col-md-8">
-                                <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/marketplace">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h3 class="text-yellow">Item Marketplace</h3>
-                                            <p>All-in-one spot for games assets</p>
-                                        </div>
-                                        <div class="banner-action">
-                                            <c-button status="info" icon_hide size="lg">VISIT NOW</c-button>
-                                        </div>
-                                    </div>
-                                </c-banner>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <c-banner :imgSrc="'/static/img/banners/banner-4.png'" link="/#/collections">
-                                    <h3 class="text-yellow margin-bottom-5">Top Collections</h3>
-                                    <p>Our community has curated the best ones for you</p>
-                                </c-banner>
-                            </div>
-                        </div>
-
                         <div class="row margin-bottom-30" v-if="item.type === 'asset_grid'" :key="`level-1-${index}`">
                             <div class="col-12">
                                 <c-block title="Top 20 Items" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
@@ -218,6 +196,28 @@
                             </div>
                         </div>
 
+                        <div class="row margin-bottom-50 margin-top-20 align-items-stretch" v-if="item.type === 'banners'" :key="index">
+                            <div class="col-12 col-md-8">
+                                <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/marketplace">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h3 class="text-yellow">Item Marketplace</h3>
+                                            <p>All-in-one spot for games assets</p>
+                                        </div>
+                                        <div class="banner-action">
+                                            <c-button status="info" icon_hide size="lg">VISIT NOW</c-button>
+                                        </div>
+                                    </div>
+                                </c-banner>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <c-banner :imgSrc="'/static/img/banners/banner-4.png'" link="/#/collections">
+                                    <h3 class="text-yellow margin-bottom-5">Top Collections</h3>
+                                    <p>Our community has curated the best ones for you</p>
+                                </c-banner>
+                            </div>
+                        </div>
+
                         <div class="row margin-bottom-30" v-if="item.type === 'curator_reviews'" :key="`level-1-${index}`">
                             <div class="col-12">
                                 <c-block title="From our curators" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
@@ -256,6 +256,22 @@
                                 </c-game-series>
                             </div>
                         </div>
+
+                        <div class="row margin-bottom-30" v-if="item.type === 'collections_list'" :key="`level-1-${index}`">
+                            <div class="col-12">
+                                <c-collection-list title="Get Started"
+                                                   description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                   Integer sit amet tellus in neque porttitor consequat."
+                                >
+                                    <c-swiper :options="item.data.options" class="padding-10">
+                                        <c-slide v-for="(collection, index) in item.data.collections_list" :key="index">
+                                            <c-collection-item :item="collection" />
+                                        </c-slide>
+                                    </c-swiper>
+                                </c-collection-list>
+                            </div>
+                        </div>
+
                     </transition-group>
                 </template>
 
@@ -325,7 +341,9 @@ export default {
         'c-slide': swiperSlide,
         'c-game-series': (resolve) => require(['@/ui/components/game-series'], resolve),
         'c-game-description': (resolve) => require(['@/ui/components/game-series/game-description'], resolve),
-        'c-game-includes-list': (resolve) => require(['@/ui/components/game-series/game-includes-list'], resolve)
+        'c-game-includes-list': (resolve) => require(['@/ui/components/game-series/game-includes-list'], resolve),
+        'c-collection-list': (resolve) => require(['@/ui/components/collection/list'], resolve),
+        'c-collection-item': (resolve) => require(['@/ui/components/collection/item'], resolve),
     },
     data() {
         return {
@@ -364,6 +382,23 @@ export default {
             })
 
             result.push({
+                type: 'collections_list',
+                data: {
+                    collections_list: this.$store.state.marketplace.collections,
+                    ref: 'collections_sl',
+                    swiper: this.$refs.collections_sl && this.$refs.collections_sl.swiper,
+                    options: {
+                        slidesPerView: 4,
+                        spaceBetween: 10,
+                        pagination: {
+                            el: '.swiper-pagination',
+                            clickable: true
+                        }
+                    },
+                }
+            })
+
+            result.push({
                 type: 'product_slider',
                 data: {
                     title: 'New Releases',
@@ -378,6 +413,16 @@ export default {
             })
 
             result.push({
+                type: 'banners',
+                data: {}
+            })
+
+            result.push({
+                type: 'games_explorer',
+                data: {}
+            })
+
+            result.push({
                 type: 'product_slider',
                 data: {
                     title: 'Summer Sale',
@@ -389,16 +434,6 @@ export default {
                     },
                     products: this.$store.state.marketplace.sale_products
                 }
-            })
-
-            result.push({
-                type: 'banners',
-                data: {}
-            })
-
-            result.push({
-                type: 'games_explorer',
-                data: {}
             })
 
             result.push({
