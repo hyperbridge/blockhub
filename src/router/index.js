@@ -8,7 +8,10 @@ const appVersion = '0.2.0'
 
 const router = new Router({
     //mode: 'history',
-    scrollBehavior: () => ({y: 0}),
+    scrollBehavior: (to, from, savedPosition) => to.name === 'Search Page'
+        ? savedPosition
+        : ({ y: 0 })
+    ,
     linkActiveClass: 'is-active',
     routes: [
         {
