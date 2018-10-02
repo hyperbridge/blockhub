@@ -143,5 +143,26 @@
                 }
             }
         }
+
+        $outlineColor: (
+            outline-info: (#5D75F7, #fff),
+            outline-success: (#5EA72B, #fff),
+            outline-danger: (#F75D5D, #fff),
+            outline-warning: (#FADC72, #30304B),
+            outline-share: (#43B4C9, #fff),
+            outline-support: (#43C981, #fff),
+        );
+
+        @each $status, $colorSet in $outlineColor {
+        &.#{$status} {
+            background: transparent;
+            color: nth($colorSet, 1);
+            border: 2px solid nth($colorSet, 1);
+            &:hover {
+                background: nth($colorSet, 1);
+                color: nth($colorSet, 2);
+            }
+        }
+    }
     }
 </style>
