@@ -16,15 +16,16 @@ This is the main web client for BlockHub, built primarily with Web3.js and Vue.j
 
 ## Quick Links
 
-- [Site](http://blockhub.gg/)
+- 🌐 [Site](http://blockhub.gg/)
 - 📺 [Demo](http://beta.blockhub.gg/)
 - 📖 [Docs](http://docs.hyperbridge.org/blockhub)
-- [EIPs](https://github.com/hyperbridge/EIPs)
-- [Desktop Client](https://github.com/hyperbridge/blockhub-desktop-client)
-- [Node Operator](https://github.com/hyperbridge/blockhub-node-operator)
-- [Token](https://github.com/hyperbridge/token)
-- [Funding Protocol](https://github.com/hyperbridge/funding-protocol)
-- [Marketplace Protocol](https://github.com/hyperbridge/marketplace-protocol)
+- 📓 [EIPs](https://github.com/hyperbridge/EIPs)
+- 💻 [Web Client](https://github.com/hyperbridge/blockhub-web-client)
+- 💻 [Desktop Client](https://github.com/hyperbridge/blockhub-desktop-client)
+- 🛡 [Node Operator](https://github.com/hyperbridge/blockhub-node-operator)
+- 🔗 [Token](https://github.com/hyperbridge/token)
+- 🔗 [Funding Protocol](https://github.com/hyperbridge/funding-protocol)
+- 🔗 [Marketplace Protocol](https://github.com/hyperbridge/marketplace-protocol)
 
 ## Install
 
