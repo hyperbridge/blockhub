@@ -451,9 +451,10 @@ a {
     <!---->
     <p class="startup-loader__status-message">Launching...</p>
     <div id="critical-error">
-      <p>A critical error may have occurred. If you're connected to the internet and BlockHub doesn't load in 1 minute, your settings are corrupt and will need to be reset.</p>
+      <p>A critical error may have occurred. If BlockHub doesn't load in 1 minute, and your internet connection is fine, then either this page is broken, or your settings are corrupt.</p>
       <br />
-      <button onClick="window.deleteSettings()">Reset settings</button>
+      <button onClick="window.deleteSettings()">Reset settings</button> 
+      <button onClick="window.location = 'https://hyperbridge.org/#contact'">Contact us</button>
       <br />
     </div>
     <div class="startup-loader__links">
