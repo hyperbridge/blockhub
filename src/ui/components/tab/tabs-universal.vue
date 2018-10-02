@@ -4,21 +4,21 @@
             <slot name="nav">
                 <ul class="tabs-universal__list">
                     <li
-                        v-for="(tab, index) in dynamicTabs"
-                        :key="index"
+                        v-for="tab in dynamicTabs"
+                        :key="tab.id"
                         class="tabs-universal__list-item"
-                        :class="'layer' + (index + 1)"
+                        :class="'layer' + tab.id"
                     >
                         <a
-                            :aria-selected="active_tab == index"
+                            :aria-selected="active_tab == tab.id"
                             class="list-item__link"
                             :class="{
-                                'active': active_tab == index,
-                                'avoid-clicks locked': isTabLocked(index),
+                                'active': active_tab == tab.id,
+                                'locked': isTabLocked(tab.id),
                             }"
-                            @click.prevent="active_tab_data = index"
+                            @click.prevent="tabClick(tab.id)"
                             role="tab"
-                        >{{ tab }}</a>
+                        >{{ tab.name }}</a>
                     </li>
                 </ul>
             </slot>
@@ -34,7 +34,7 @@
             tabNames: Array,
             tabText: String,
             active_tab_prop: [Number, String],
-            locked_step: Number,
+            lockedStep: Number,
             locked_tab: Number,
             styled: Boolean
         },
@@ -46,18 +46,25 @@
         },
         methods: {
             isTabLocked(index) {
-                const { locked_step, locked_tab } = this;
-                return (locked_tab != null && locked_tab == index) || (locked_step != null && !(index < locked_step));
+                const { lockedStep, locked_tab } = this;
+                return (locked_tab != null && locked_tab == index) || (lockedStep != null && !(index < lockedStep));
+            },
+            tabClick(index) {
+                this.active_tab_data = index;
+                this.$emit('click', index);
             }
         },
         computed: {
             dynamicTabs() {
-                return this.tabNames ? this.tabNames : this.tabs.map((tab, index) =>
-                    (this.tabText ? this.tabText + ' ' :  'TAB ') + ++index
-                );
+                return this.tabNames
+                    ? this.tabNames.map((name, index) => ({ id: index + 1, name }))
+                    : this.tabs.map((tab, index) => ({
+                        name: (this.tabText ? this.tabText + ' ' :  'TAB ') +  (index + 1),
+                        id: index + 1
+                      }));
             },
             active_tab() {
-                return this.active_tab_prop ? this.active_tab_prop : this.active_tab_data;
+                return this.active_tab_prop != null ? this.active_tab_prop : this.active_tab_data;
             },
             activeStyle() {
                 return this.styled ? '--styled' : '--default';
@@ -117,7 +124,7 @@
                 color: rgba(255,255,255,.5);
             }
         }
-        .tabs-universal__content {
+        /deep/ .tabs-universal__content {
             margin-top: 15px;
         }
     }

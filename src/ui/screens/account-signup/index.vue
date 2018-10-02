@@ -9,8 +9,14 @@
                             <li v-for="error in errors" :key="error">{{ error }}</li>
                         </ul>
                     </p>
-                    <c-tabs-universal styled tabText="Step">
-                        <c-tab-universal :tab_id="0">
+                    <c-tabs-universal
+                        :active_tab_prop="currentStep"
+                        :lockedStep="finishedStep"
+                        @click="changeTab($event)"
+                        tabText="Step"
+                        styled
+                    >
+                        <c-tab-universal :tab_id="1">
                             <div class="tab-card">
                                 <h4>Personal Information</h4>
                                 <form action="/" method="post">
@@ -251,7 +257,7 @@
                                 </div>
                             </div>
                         </c-tab-universal>
-                        <c-tab-universal :tab_id="1">
+                        <c-tab-universal :tab_id="2">
                             <div class="tab-container">
                                 <div class="padding-40">
                                     <h3>Welcome, {{ account.first_name }}. Let's build your main identity.</h3>
@@ -262,7 +268,7 @@
                                                 <h4>Please complete</h4>
                                                 <c-user-card
                                                     :user="account.identity"
-                                                    @updateIdentity="(prop, val) => account.identity[prop] = val"
+                                                    v-bind.sync="account.identity"
                                                 />
                                             </div>
                                         </div>
@@ -285,7 +291,7 @@
                                 />
                             </div>
                         </c-tab-universal>
-                        <c-tab-universal :tab_id="2">
+                        <c-tab-universal :tab_id="3">
                             <div class="tab-container">
                                 <div class="padding-20">
                                     <h3>Verify your identity (Optional)</h3>
@@ -731,7 +737,8 @@ export default {
     },
     data() {
         return {
-            current_step: 1,
+            currentStep: 1,
+            finishedStep: 1,
             steps: 3,
             errors: [],
             account: {
@@ -767,9 +774,10 @@ export default {
                 // show download modal
             }
 
-            if (this.current_step === 1) {
+            if (this.currentStep === 1) {
                 if (this.account.first_name && this.account.last_name && this.account.email && this.account.agreement) {
-                    this.current_step = 2;
+                    this.finishedStep = 2;
+                    this.currentStep = 2;
                 } else {
 
                     if (!this.account.first_name) {
@@ -789,12 +797,29 @@ export default {
                     }
 
                 }
-            } else if (this.current_step === 2) {
-                this.current_step = 3;
-            } else if (this.current_step === 3) {
+            } else if (this.currentStep === 2) {
+                if (this.account.identity.wallet.length && this.account.identity.name.length) {
+                    this.finishedStep = 3;
+                    this.currentStep = 3;
+                } else {
+                    if (!this.account.identity.wallet.length) {
+                        this.errors.push('Wallet number required.');
+                    }
+                    if (!this.account.identity.name.length) {
+                        this.errors.push('Identity name required.');
+                    }
+                }
+            } else if (this.currentStep === 3) {
 
             }
         },
+        changeTab(step) {
+            if (step > this.currentStep) {
+                this.checkForm();
+            } else {
+                this.currentStep = step;
+            }
+        }
     }
 }
 </script>
