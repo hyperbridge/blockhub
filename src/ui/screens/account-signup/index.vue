@@ -807,7 +807,7 @@ export default {
                         this.errors.push('Email required.')
                     }
                     if (!this.account.agreement) {
-                        this.errors.push('You must agree to the terms & conditions to use BlockHub.')
+                        this.errors.push('To continue using BlockHub, you will need to review and agree to the Terms & Service Agreement.')
                     }
                     if (!this.account.password) {
                         this.errors.push('Password required.')

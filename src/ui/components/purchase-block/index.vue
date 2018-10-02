@@ -26,7 +26,7 @@
         </div>
 
         <div class="purchase-block__buttons-group">
-            <c-button status="custom" class="btn-outline-red" :href="purchaseLink" icon="shopping-cart" size="lg" v-if="isReleased && price" @click="onClickPurchase">
+            <c-button status="custom" class="btn-outline-green" :href="purchaseLink" icon="shopping-cart" size="lg" v-if="isReleased && price" @click="onClickPurchase">
                 Proceed to Purchase
             </c-button>
 
