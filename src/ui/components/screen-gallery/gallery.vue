@@ -5,7 +5,7 @@
         @mouseout="mouseOut()"
     >
         <div class="screen-gallery__main-img">
-            <i class="fas fa-expand" v-show="run_slideshow"></i>
+            <c-icon name="expand" v-show="!run_slideshow && !play_video"/>
             <c-img
                 v-if="!play_video"
                 :src="items[active_item]"
@@ -14,7 +14,7 @@
             <video v-else-if="play_video" controls autoplay>
                 <source :src="video_url" type="video/mp4">
             </video>
-            <div v-if="run_slideshow" class="screen-gallery__progress-bar"></div>
+            <div v-show="run_slideshow" class="screen-gallery__progress-bar"></div>
         </div>
         <ul class="screen-gallery__thumb-nav" ref="thumb-nav">
             <li
