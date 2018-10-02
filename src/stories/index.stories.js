@@ -2445,14 +2445,14 @@ storiesOf('Collection', module)
         `
     }))
 
-import GameStories from '@/ui/components/game-series/index'
+import GameSeries from '@/ui/components/game-series/index'
 import GameDescription from '@/ui/components/game-series/game-description'
 import GameIncludesList from '@/ui/components/game-series/game-includes-list'
 import GameIncludesItem from '@/ui/components/game-series/game-includes-item'
 storiesOf('Game Series', module)
     .add('default', () => ({
         components:{
-            'c-game-stories': GameStories,
+            'c-game-series': GameSeries,
             'c-game-description': GameDescription,
             'c-game-includes-list': GameIncludesList
         },
@@ -2511,10 +2511,10 @@ storiesOf('Game Series', module)
             }
         },
         template: `<div class="p-5" style="width: 900px">
-                    <c-game-stories>
+                    <c-game-series>
                         <c-game-description />
                         <c-game-includes-list :list="list" :showNumber="5" />
-                    </c-game-stories>
+                    </c-game-series>
                     </div>`
     }))
     .add('description', () => ({
