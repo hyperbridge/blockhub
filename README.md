@@ -42,6 +42,8 @@ nvm install 8.11.1
 
 If you get `nvm: command not found`, simply close your current terminal, open a new terminal, and try again. Please see the [NVM readme](https://github.com/creationix/nvm) if you have any issues.
 
+If you encounter an issue with `node-sass`, run this command: `npm rebuild node-sass`. Also try deleting your `node_modules` folder, and running `npm install` again. This usually occurs when you've installed with a different version of NPM, so be careful!
+
 
 Then, clone these repos:
 

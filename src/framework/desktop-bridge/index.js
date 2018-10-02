@@ -24,6 +24,22 @@ export const createAccountRequest = async (data) => {
     return await sendCommand('createAccountRequest', data)
 }
 
+export const initProtocol = async (data) => {
+    return await sendCommand('initProtocol', data)
+}
+
+export const createFundingProject = async (data) => {
+    return await sendCommand('createFundingProject', data)
+}
+
+export const updateFundingProject = async (data) => {
+    return await sendCommand('updateFundingProject', data)
+}
+
+export const deployContract = async (data) => {
+    return await sendCommand('deployContract', data)
+}
+
 export const resolvePromptPasswordRequest = async (password) => {
     return new Promise(async (resolve) => {
         const res = {
@@ -56,6 +72,12 @@ export const handleSetAccountRequest = async (data) => {
 }
 
 export const sendCommand = async (key, data = {}, peer = null, responseId = null) => {
+    if (!isConnected()) {
+        console.log('[DesktopBridge] Cant send command. Reason: not connected to desktop app')
+
+        return false
+    }
+
     const cmd = {
         key: key,
         responseId: responseId,
