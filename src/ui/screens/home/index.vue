@@ -4,7 +4,7 @@
             <div class="container-fluid">
 
                 <div class="row">
-                    <div class="col-12 mb-4">
+                    <div class="col-12 mb-4" v-if="!desktop_mode">
                         <c-download-block />
                     </div>
                     <div class="col-12 mb-4">

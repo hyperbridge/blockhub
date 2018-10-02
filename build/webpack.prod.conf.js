@@ -12,6 +12,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const VueLoader = require('vue-loader')
 const loadMinified = require('./load-minified')
 
@@ -21,6 +22,7 @@ const env = process.env.NODE_ENV === 'testing'
 
 
 const webpackConfig = merge(baseWebpackConfig, {
+  mode: 'production',
   optimization: {
     splitChunks: {
       chunks: 'async',
@@ -41,7 +43,20 @@ const webpackConfig = merge(baseWebpackConfig, {
           reuseExistingChunk: true
         }
       }
-    }
+    },
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          ecma: 6,
+          compress: true,
+          output: {
+            comments: false,
+            beautify: false
+          }
+        }
+      })
+    ]
   },
   module: {
     rules: utils.styleLoaders({
@@ -58,7 +73,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
-      'process.env': env
+      'process.env': JSON.stringify('production')
     }),
     // extract css into its own file
     new ExtractTextPlugin({
@@ -138,7 +153,7 @@ if (config.build.productionGzip) {
 
   webpackConfig.plugins.push(
     new CompressionWebpackPlugin({
-      asset: '[path].gz[query]',
+      //asset: '[path].gz[query]',
       algorithm: 'gzip',
       test: new RegExp(
         '\\.(' +
