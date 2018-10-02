@@ -27,7 +27,7 @@
                 }"
                 @click="enableVideoPlay()"
             >
-                <i class="fas fa-play"></i>
+                <c-icon name="play"/>
             </li>
             <li
                 v-for="(url, index) in items"
@@ -230,7 +230,6 @@ export default {
     }
 
     .thumb-nav__video-thumb {
-        background-color: rgb(0, 0, 0);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -239,6 +238,10 @@ export default {
         background-repeat: no-repeat;
         background-position: center center;
         cursor: pointer;
+        border-radius: 6px;
+        .fas {
+            text-shadow: 0px 0px 6px #000;
+        }
     }
 
     .inactive-item:not(:hover) {

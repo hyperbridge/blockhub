@@ -8,7 +8,7 @@ const appVersion = '0.2.0'
 
 const router = new Router({
     //mode: 'history',
-    scrollBehavior: (to, from, savedPosition) => to.name === 'Search Page'
+    scrollBehavior: (to, from, savedPosition) => to.name === 'Search Page' && from.name === 'Search Page'
         ? savedPosition
         : ({ y: 0 })
     ,
