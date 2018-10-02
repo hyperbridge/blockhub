@@ -41,7 +41,7 @@
         data() {
             return {
                 tabs: [],
-                active_tab_data: 0
+                active_tab_data: 1
             }
         },
         methods: {
