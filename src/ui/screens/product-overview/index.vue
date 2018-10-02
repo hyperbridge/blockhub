@@ -268,7 +268,11 @@
         },
         methods: {
             showPurchaseModal() {
-                this.$store.commit('network/activateModal', 'purchase')
+                if (this.$store.state.marketplace.desktop_mode) {
+                    this.$store.commit('network/activateModal', 'purchase')
+                } else {
+                    this.$store.commit('network/activateModal', 'download')
+                }
             },
             deactivateElement(key) {
                 this.activeElement[key] = false

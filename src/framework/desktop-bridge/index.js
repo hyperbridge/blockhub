@@ -139,8 +139,10 @@ export const runCommand = async (cmd, meta = {}) => {
             const res = await handleSetAccountRequest(cmd.data)
 
             return resolve(res)
+        } else if (cmd.key === 'systemError') {
+            console.warn('[DesktopBridge] Received system error from desktop', cmd.message)
         } else {
-            console.log('[DesktopBridge] Unhandled command:', cmd)
+            console.warn('[DesktopBridge] Unhandled command:', cmd)
         }
 
     })
