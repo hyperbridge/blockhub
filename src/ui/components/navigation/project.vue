@@ -1,13 +1,12 @@
-
 <template>
     <div class="navigation" id="navigation-default">
 
-        <c-sidebar-menu title="GAME" sub_title="Help" sub_icon="fas fa-question-circle">
-            <c-sidebar-menu-link url="/#/" link_text="Building Communities" />
-            <c-sidebar-menu-link url="/#/" link_text="Suggesting Features" />
-            <c-sidebar-menu-link url="/#/" link_text="Voting &amp; Curating Updates" />
-            <c-sidebar-menu-link url="#3" aClass="font-weight-bold" link_text="MORE ..." />
-        </c-sidebar-menu>
+        <c-sidebar-menu
+            title="GAME"
+            sub_title="Help"
+            sub_icon="fas fa-question-circle"
+            :links="links.game"
+        />
 
         <c-curator-panel>
             <c-claim title="Content curated" type="success">
@@ -54,12 +53,23 @@
 <script>
     export default {
         components: {
-            'c-sidebar-menu-link': (resolve) => require(['@/ui/components/sidebar-menu/menu_item'], resolve),
             'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
             'c-claim': (resolve) => require(['@/ui/components/curator-panel/claim.vue'], resolve),
             'c-curator-panel': (resolve) => require(['@/ui/components/curator-panel'], resolve),
             'c-curator-info': (resolve) => require(['@/ui/components/curator-panel/info-card.vue'], resolve),
+        },
+        data() {
+            return {
+                links: {
+                    game: [
+                        { to: { path: '/' }, title: 'Building Communities' },
+                        { to: { path: '/' }, title: 'Suggesting Features' },
+                        { to: { path: '/' }, title: 'Voting & Curating Updates' },
+                        { to: { path: '/' }, title: 'MORE ...' }
+                    ]
+                }
+            }
         }
     }
 </script>

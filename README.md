@@ -16,15 +16,16 @@ This is the main web client for BlockHub, built primarily with Web3.js and Vue.j
 
 ## Quick Links
 
-- [Site](http://blockhub.gg/)
+- 🌐 [Site](http://blockhub.gg/)
 - 📺 [Demo](http://beta.blockhub.gg/)
 - 📖 [Docs](http://docs.hyperbridge.org/blockhub)
-- [EIPs](https://github.com/hyperbridge/EIPs)
-- [Desktop Client](https://github.com/hyperbridge/blockhub-desktop-client)
-- [Node Operator](https://github.com/hyperbridge/blockhub-node-operator)
-- [Token](https://github.com/hyperbridge/token)
-- [Funding Protocol](https://github.com/hyperbridge/funding-protocol)
-- [Marketplace Protocol](https://github.com/hyperbridge/marketplace-protocol)
+- 📓 [EIPs](https://github.com/hyperbridge/EIPs)
+- 💻 [Web Client](https://github.com/hyperbridge/blockhub-web-client)
+- 💻 [Desktop Client](https://github.com/hyperbridge/blockhub-desktop-client)
+- 🛡 [Node Operator](https://github.com/hyperbridge/blockhub-node-operator)
+- 🔗 [Token](https://github.com/hyperbridge/token)
+- 🔗 [Funding Protocol](https://github.com/hyperbridge/funding-protocol)
+- 🔗 [Marketplace Protocol](https://github.com/hyperbridge/marketplace-protocol)
 
 ## Install
 
@@ -42,41 +43,25 @@ nvm install 8.11.1
 
 If you get `nvm: command not found`, simply close your current terminal, open a new terminal, and try again. Please see the [NVM readme](https://github.com/creationix/nvm) if you have any issues.
 
-If you encounter an issue with `node-sass`, run this command: `npm rebuild node-sass`. Also try deleting your `node_modules` folder, and running `npm install` again. This usually occurs when you've installed with a different version of NPM, so be careful!
-
-
-Then, clone these repos:
 
 ```bash
-git clone git@github.com:hyperbridge/blockhub-web-client.git
-git clone git@github.com:hyperbridge/token.git
-git clone git@github.com:hyperbridge/marketplace-protocol.git
-git clone git@github.com:hyperbridge/funding-protocol.git
+# Clone this repository
+git clone https://github.com/hyperbridge/blockhub-desktop-client
+# Go into the main repo
+cd blockhub-web-client
+# Install deps
+npm install
+# Run the local web server
+npm start
+# Build the static files
+npm run build
 ```
-
-
-## Setup
-
-Make sure you're running Node 8.11.1 and you have Python installed. `node-gyp` can't use Python3.5.x, so please use another version.
-
-In `blockhub-web-client`, run `npm install` then:
-```
-npm link ../token ../funding-protocol ../marketplace-protocol
-```
-
-Then run `npm start`
 
 It should open `http://localhost:8000/` with the web app
 
+If you encounter an issue with `node-sass`, run this command: `npm rebuild node-sass`. Also try deleting your `node_modules` folder, and running `npm install` again. This usually occurs when you've installed with a different version of NPM, so be careful!
 
-```bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8000
-npm start
-
-```
+Make sure you're running Node 8.11.1 and you have Python installed. `node-gyp` can't use Python3.5.x, so please use another version.
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 

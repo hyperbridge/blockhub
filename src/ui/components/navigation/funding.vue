@@ -1,4 +1,3 @@
-
 <template>
     <div class="navigation" id="navigation-default">
         <c-sidebar-menu

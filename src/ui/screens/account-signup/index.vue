@@ -10,8 +10,14 @@
                         </ul>
                     </p>
                     <form action="/" method="post">
-                        <c-tabs :currentStep="current_step">
-                            <c-tab name="Step 1" :selected="true" :showFooter="true">
+                        <c-tabs
+                            :active_tab_prop="currentStep"
+                            :lockedStep="finishedStep"
+                            @click="changeTab($event)"
+                            tabText="Step"
+                            styled
+                        >
+                            <c-tab :tab_id="1" :selected="true" :showFooter="true">
                                 <div class="tab-container">
                                     <div class="tab-card">
                                         <h4>Personal Information</h4>
@@ -37,21 +43,21 @@
                                                             name="last_name" v-model="account.last_name">
                                                 </div>
                                             </div>
-                                            <div class="col">
-                                                <div class="input-group">
-                                                    <label class="sr-only">Birthday</label>
-                                                    <c-datepicker
-                                                        v-model="account.birthday"
-                                                        placeholder="Birthday"
-                                                        input-class="form-control form-calendar__text"
-                                                        name="birthday"
-                                                        calendar-class="form-calendar"
-                                                    />
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">
-                                                            <i class="fas fa-calendar-alt"></i>
-                                                        </span>
-                                                    </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <label class="sr-only">Birthday</label>
+                                                <c-datepicker
+                                                    v-model="account.birthday"
+                                                    placeholder="Birthday"
+                                                    input-class="form-control form-calendar__text"
+                                                    name="birthday"
+                                                    calendar-class="form-calendar"
+                                                />
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">
+                                                        <i class="fas fa-calendar-alt"></i>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -275,7 +281,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center" slot="footer">
+                                <div class="d-flex justify-content-between align-items-center margin-top-20" slot="footer">
                                     <c-switch
                                         v-model="account.agreement"
                                         label_position="right"
@@ -284,7 +290,7 @@
                                         <template slot="label">
                                             I agree to the
                                             <c-button status="plain" @click="terms = true">terms</c-button> and
-                                            <c-button status="plain"@click="privacy_policy = true">privacy policy</c-button>
+                                            <c-button status="plain" @click="privacy_policy = true">privacy policy</c-button>
                                         </template>
                                     </c-switch>
                                     <c-switch
@@ -294,13 +300,13 @@
                                     />
                                     <div>
                                         <c-button
-                                            @click="checkForm"
+                                            @click="checkForm()"
                                             icon="angle-right"
                                         >NEXT</c-button>
                                     </div>
                                 </div>
                             </c-tab>
-                            <c-tab name="Step 2" :showFooter="true">
+                            <c-tab :tab_id="2" :showFooter="true">
                                 <div class="tab-container">
                                     <div class="padding-40">
                                         <h3>Welcome, {{ account.first_name }}. Let's build your main identity.</h3>
@@ -311,7 +317,7 @@
                                                     <h4>Please complete</h4>
                                                     <c-user-card
                                                         :user="account.identity"
-                                                        @updateIdentity="(prop, val) => account.identity[prop] = val"
+                                                        v-bind.sync="account.identity"
                                                     />
                                                 </div>
                                             </div>
@@ -327,14 +333,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-end" slot="footer">
+                                <div class="d-flex justify-content-end margin-top-20" slot="footer">
                                     <c-button
+                                        @click="checkForm()"
                                         icon="angle-right"
-                                        @click="checkForm"
-                                    />
+                                    >NEXT</c-button>
                                 </div>
                             </c-tab>
-                            <c-tab name="Step 3" :showFooter="true">
+                            <c-tab :tab_id="3">
                                 <div class="tab-container">
                                     <div class="padding-20">
                                         <h3>Congratulations!</h3>
@@ -352,7 +358,7 @@
                                                     <h4>Complete your identity</h4>
                                                     <c-user-card
                                                         :user="account.identity"
-                                                        @updateIdentity="(prop, val) => account.identity[prop] = val"
+                                                        v-bind.sync="account.identity"
                                                     />
                                                 </div>
                                             </div>
@@ -368,8 +374,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-end" slot="footer">
-                                    <c-button status="success" text="Complete" icon="fas fa-check" icon_position="right" />
+                                <div class="d-flex justify-content-end margin-top-20" slot="footer">
+                                    <c-button
+                                        status="success"
+                                        icon="check"
+                                        icon_position="right"
+                                    >COMPLETE</c-button>
                                 </div>
                             </c-tab>
                         </c-tabs>
@@ -731,10 +741,13 @@ export default {
         'c-datepicker': (resolve) => require(['vuejs-datepicker'], resolve),
         'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
+        'c-tabs': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve),
+        'c-tab': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
     },
     data() {
         return {
-            current_step: 1,
+            currentStep: 1,
+            finishedStep: 1,
             steps: 3,
             errors: [],
             account: {
@@ -762,18 +775,20 @@ export default {
         checkForm() {
             this.errors = [];
 
-            if (this.current_step === 1) {
+            if (this.currentStep === 1) {
                 if (
                     this.account.first_name
-                    && this.account.last_name 
-                    && this.account.email 
-                    && this.account.birthday 
-                    && this.account.agreement 
-                    && this.account.secret_question 
-                    && this.account.secret_answer 
-                    && this.account.password 
+                    && this.account.last_name
+                    && this.account.email
+                    && this.account.birthday
+                    && this.account.agreement
+                    && this.account.secret_question
+                    && this.account.secret_answer
+                    && this.account.password
                     && this.account.repeat_password
                     && this.account.password === this.account.repeat_password) {
+                        this.currentStep = 2;
+                        this.finishedStep = 2;
                     if (DesktopBridge.isConnected()) {
                         DesktopBridge.createAccountRequest({
                             seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
@@ -788,7 +803,6 @@ export default {
                             this.$store.state.account = { ...this.$store.state.account, ...res }
 
                             this.$store.state.signed_in = true
-                            
                             this.current_step = 2;
                         })
                     }
@@ -819,12 +833,29 @@ export default {
                         this.errors.push('Passwords must match.')
                     }
                 }
-            } else if (this.current_step === 2) {
-                this.current_step = 3;
-            } else if (this.current_step === 3) {
+            } else if (this.currentStep === 2) {
+                if (this.account.identity.wallet && this.account.identity.name) {
+                    this.finishedStep = 3;
+                    this.currentStep = 3;
+                } else {
+                    if (!this.account.identity.wallet) {
+                        this.errors.push('Wallet number required.');
+                    }
+                    if (!this.account.identity.name) {
+                        this.errors.push('Identity name required.');
+                    }
+                }
+            } else if (this.currentStep === 3) {
 
             }
         },
+        changeTab(step) {
+            if (step > this.currentStep) {
+                this.checkForm();
+            } else {
+                this.currentStep = step;
+            }
+        }
     }
 }
 </script>

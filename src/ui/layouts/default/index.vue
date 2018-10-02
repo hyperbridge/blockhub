@@ -304,6 +304,7 @@
                 {{ connection_status.message }}
             </div>
 
+            <c-download-popup :activated="download_modal_active" @close="closePopup" ref="download_modal_active"></c-download-popup>
             <c-unlock-popup :activated="unlock_modal_active" @close="closePopup" ref="unlock_modal_active"></c-unlock-popup>
             <c-send-funds-popup :activated="send_funds_modal_active" @close="closePopup" ref="send_funds_modal_active"></c-send-funds-popup>
             <c-login-popup :activated="login_modal_active" @close="closePopup" ref="login_modal_active"></c-login-popup>
@@ -355,6 +356,7 @@
             'c-product-navigation': (resolve) => require(['@/ui/components/navigation/product'], resolve),
             'c-project-navigation': (resolve) => require(['@/ui/components/navigation/project'], resolve),
             'c-notification': (resolve) => require(['@/ui/components/notification/index.vue'], resolve),
+            'c-download-popup': (resolve) => require(['@/ui/components/download-popup/index.vue'], resolve),
             'c-unlock-popup': (resolve) => require(['@/ui/components/unlock-popup/index.vue'], resolve),
             'c-login-popup': (resolve) => require(['@/ui/components/login-popup/index.vue'], resolve),
             'c-send-funds-popup': (resolve) => require(['@/ui/components/send-funds-popup/index.vue'], resolve),
@@ -388,6 +390,9 @@
             },
             purchase_modal_active() {
                 return this.$store.state.network.active_modal === 'purchase'
+            },
+            download_modal_active() {
+                return this.$store.state.network.active_modal === 'download'
             },
             notifs() {
                 return this.$store.state.network.account.notifications

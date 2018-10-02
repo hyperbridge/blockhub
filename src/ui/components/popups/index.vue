@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <transition name="fade" :duration="100">
         <div class="c-popup" v-if="activated" @click.self.prevent="$emit('close')">
             <div class="c-popup__item" :style="{ 'width': + width + 'px'}">
                 <h3 v-if="title">{{ title }}</h3>
@@ -77,7 +77,7 @@
         right: 0;
         bottom: 0;
         z-index: 9999;
-        background: rgba(48, 48, 75, .9);
+        background: rgba(0, 0, 0, 0.7);
     }
 
     .c-popup__close {
@@ -85,9 +85,9 @@
         top: -25px;
         right: 0px;
         opacity: .7;
-        -webkit-transition: 0.6s ease-out;
-        -moz-transition:  0.6s ease-out;
-        transition:  0.6s ease-out;
+        -webkit-transition: 0.1s ease-out;
+        -moz-transition:  0.1s ease-out;
+        transition:  0.1s ease-out;
         font-size: 22px;
         z-index: 999;
         img {
@@ -180,7 +180,7 @@
     }
 
     .fade-enter-active, .fade-leave-active {
-        transition: opacity .3s;
+        transition: opacity .1s;
     }
 
     .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */

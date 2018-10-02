@@ -89,6 +89,19 @@
                                         </c-list>
                                     </div>
                                 </div>
+                                <div class="filter-box">
+                                    <h4>Community:</h4>
+                                    <p class="margin-top-20">Community Size:</p>
+                                    <c-range-slider
+                                        v-model.number="communitySize"
+                                        :max="1000"
+                                    />
+                                    <p class="margin-top-20">Active Users:</p>
+                                    <c-range-slider
+                                        v-model.number="activeUsers"
+                                        :max="5000"
+                                    />
+                                </div>
                             </div>
                             </transition>
                         </c-block>
@@ -158,6 +171,26 @@
                                             :key="index"
                                             :text="lang.name"
                                             @delete="lang.selected = false"
+                                            isChildren
+                                        />
+                                    </c-option-tag>
+                                    <c-option-tag
+                                        v-if="communitySize || activeUsers"
+                                        title="COMMUNITY:"
+                                        @delete="communitySize = 0; activeUsers = 0"
+                                    >
+                                        <c-option-tag
+                                            v-if="communitySize"
+                                            title="Size:"
+                                            :text="communitySize"
+                                            @delete="communitySize = 0"
+                                            isChildren
+                                        />
+                                        <c-option-tag
+                                            v-if="activeUsers"
+                                            title="Active users:"
+                                            :text="activeUsers"
+                                            @delete="activeUsers = 0"
                                             isChildren
                                         />
                                     </c-option-tag>
@@ -242,7 +275,9 @@
                     max: 0
                 },
                 expandFilters: false,
-                timeout2: 0
+                timeout2: 0,
+                communitySize: 0,
+                activeUsers: 0
             }
         },
         methods: {
@@ -262,12 +297,13 @@
                 }, 500);
             },
             clearFilters() {
-                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price } = this;
+                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price, communitySize, activeUsers } = this;
                 if (phrase.length) this.phrase = '';
                 if (selectedSpecials.length) this.selectedSpecials.forEach(tag => tag.selected = false);
                 if (selectedGenres.length) this.selectedGenres.forEach(tag => tag.selected = false);
                 if (selectedLanguages.length) this.selectedLanguages.forEach(lang => lang.selected = false);
                 if (price.min || price.max) { this.price.min = 0; this.price.max = 0; };
+                if (communitySize || activeUsers) { this.communitySize = 0; this.activeUsers = 0; }
             }
         },
         computed: {
@@ -298,16 +334,6 @@
                       )
                     : this.results
             },
-            searchingFilters() {
-                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price } = this;
-                return {
-                    phrase,
-                    selectedSpecials,
-                    selectedGenres,
-                    selectedLanguages,
-                    price
-                }
-            },
             selectedGenres() {
                 return this.selectableTags.filter(tag => tag.selected);
             },
@@ -325,17 +351,20 @@
                     this.phrase.length ||
                     this.selectedSpecials.length ||
                     this.price.max || this.price.min ||
-                    this.selectedLanguages.length);
+                    this.selectedLanguages.length ||
+                    this.communitySize || this.activeUsers);
             },
             urlQuery() {
                 const urlQuery = {};
-                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price } = this;
+                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price, communitySize, activeUsers } = this;
                 if (phrase.length) urlQuery.name = phrase;
                 if (price.min) urlQuery.priceMin = price.min;
                 if (price.max) urlQuery.priceMax = price.max;
                 if (selectedSpecials.length) urlQuery.specials = selectedSpecials.map(tag => tag.value);
                 if (selectedGenres.length) urlQuery.tags = selectedGenres.map(tag => tag.name);
                 if (selectedLanguages.length) urlQuery.langs = selectedLanguages.map(tag => tag.name);
+                if (communitySize) urlQuery.communitySize = communitySize;
+                if (activeUsers) urlQuery.activeUsers = activeUsers;
                 return urlQuery;
             }
         },
@@ -345,7 +374,7 @@
             } else {
 
                 this.isTyping = true;
-                const { tags, langs, name, priceMin, priceMax, specials } = this.$route.query;
+                const { tags, langs, name, priceMin, priceMax, specials, showFilters, activeUsers, communitySize } = this.$route.query;
 
                 if (name) this.phrase = name;
                 if (priceMin) this.price.min = priceMin;
@@ -359,6 +388,10 @@
                     name: lang, selected: !!(langs && langs.includes(lang))
                 }));
 
+                if (showFilters) this.expandFilters = true;
+                if (activeUsers) this.activeUsers = activeUsers;
+                if (communitySize) this.communitySize = communitySize;
+
                 if (specials) {
                     this.systemTags.forEach(tag => {
                         if (specials.includes(tag.value)) tag.selected = true;
@@ -367,7 +400,7 @@
             }
         },
         watch: {
-            searchingFilters: {
+            urlQuery: {
                 handler: 'search',
                 deep: true
             }

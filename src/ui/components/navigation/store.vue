@@ -37,11 +37,19 @@
                 :resultsCount="filteredResults.length"
             />
 
-            <c-range-slider label="Community size" :min="1" :max="10000" sClass="margin-bottom-20" />
+            <h4 class="margin-vertical-20">Community Size</h4>
+            <c-range-slider
+                v-model.number="communitySize"
+                :max="1000"
+            />
 
-            <c-range-slider label="Activity User" :min="1" :max="5000" sClass="margin-bottom-20" />
+            <h4 class="margin-vertical-20">Active Users</h4>
+            <c-range-slider
+                v-model.number="activeUsers"
+                :max="5000"
+            />
 
-            <div class="form-group platform-chose">
+            <div class="form-group platform-chose margin-vertical-20">
                 <label>Platform Availability</label>
                 <a
                     v-for="os in platforms"
@@ -61,12 +69,21 @@
                 </a>
             </div>
             <div class="action">
-                <a href="#3" class="btn btn-filter">
+                <router-link
+                    :to="{ name: 'Search Page', query }"
+                    class="btn btn-filter"
+                >
                     Search
-                </a>
-                <a href="#3" class="btn btn-link">
+                </router-link>
+                <router-link
+                    :to="{
+                        name: 'Search Page',
+                        query: { showFilters: true }
+                    }"
+                    class="btn btn-link"
+                >
                     More filters ...
-                </a>
+                </router-link>
             </div>
         </div>
 
@@ -101,7 +118,7 @@
             'c-sidebar-menu-link': (resolve) => require(['@/ui/components/sidebar-menu/menu_item'], resolve),
             'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
-            'c-range-slider': (resolve) => require(['@/ui/components/range-slider'], resolve),
+            'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
             'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
         },
         mixins: [arrayHandler],
@@ -114,7 +131,9 @@
                     { name: 'apple', prop: 'mac' },
                     { name: 'linux', prop: 'linux' }
                 ],
-                choosenPlatforms: []
+                choosenPlatforms: [],
+                communitySize: 0,
+                activeUsers: 0
             }
         },
         methods: {
@@ -147,6 +166,17 @@
                         )
                     )
                     : this.results;
+            },
+            query() {
+                const { phrase, choosenPlatforms, communitySize, activeUsers } = this;
+                const query = {};
+
+                if (phrase.length) query.name = phrase;
+                if (choosenPlatforms.length) query.platforms = choosenPlatforms;
+                if (communitySize) query.communitySize = communitySize;
+                if (activeUsers) query.activeUsers = activeUsers;
+
+                return query;
             }
         }
     }

@@ -3,10 +3,10 @@
         <template slot="heading-bar">
             <i class="fas fa-laptop title-icon"></i>
         </template>
-        <c-tabs-universal :tab_names="['Mac', 'Win', 'Linux']">
+        <c-tabs-universal :tabNames="['Mac', 'Win', 'Linux']">
             <c-tab-universal
                 v-for="(os, index) in ['Mac', 'Win', 'Linux']"
-                :tab_id="index"
+                :tab_id="index + 1"
                 :key="index">
                 <ul class="system-requirements__list" v-if="platform(os)">
                     <li

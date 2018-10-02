@@ -1,6 +1,5 @@
 <template>
     <div class="navigation" id="navigation-default">
-
         <c-sidebar-menu
             title="ASSET MANAGER"
             mClass="margin-bottom-20"

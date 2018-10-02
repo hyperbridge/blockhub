@@ -103,7 +103,6 @@
 </template>
 
 <script>
-import FundingProtocol from 'funding-protocol'
 
 export default {
     components: {
@@ -183,112 +182,112 @@ export default {
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/FundingStorage.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.FundingStorage.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.FundingStorage.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.FundingStorage.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.FundingStorage.links
                         },
                         {
                             name: 'DeveloperStorageAccess',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/DeveloperStorageAccess.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.DeveloperStorageAccess.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.DeveloperStorageAccess.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.DeveloperStorageAccess.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.DeveloperStorageAccess.links
                         },
                         {
                             name: 'ContributionStorageAccess',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/ContributionStorageAccess.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ContributionStorageAccess.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ContributionStorageAccess.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.ContributionStorageAccess.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.ContributionStorageAccess.links
                         },
                         {
                             name: 'ProjectStorageAccess',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/ProjectStorageAccess.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectStorageAccess.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectStorageAccess.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.ProjectStorageAccess.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.ProjectStorageAccess.links
                         },
                         {
                             name: 'CurationStorageAccess',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/CurationStorageAccess.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.CurationStorageAccess.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.CurationStorageAccess.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.CurationStorageAccess.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.CurationStorageAccess.links
                         },
                         {
                             name: 'FundingVault',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/FundingVault.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.FundingVault.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.FundingVault.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.FundingVault.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.FundingVault.links
                         },
                         {
                             name: 'Developer',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/Developer.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.Developer.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.Developer.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.Developer.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.Developer.links
                         },
                         {
                             name: 'Contribution',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/Contribution.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.Contribution.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.Contribution.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.Contribution.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.Contribution.links
                         },
                         {
                             name: 'ProjectTimeline',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/ProjectTimeline.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectTimeline.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectTimeline.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.ProjectTimeline.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.ProjectTimeline.links
                         },
                         {
                             name: 'ProjectTimelineHelpersLibrary',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/libraries/ProjectTimelineHelpersLibrary.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectTimelineHelpersLibrary.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectTimelineHelpersLibrary.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.ProjectTimelineHelpersLibrary.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.ProjectTimelineHelpersLibrary.links
                         },
                         {
                             name: 'ProjectTimelineProposal',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/ProjectTimelineProposal.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectTimelineProposal.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectTimelineProposal.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.ProjectTimelineProposal.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.ProjectTimelineProposal.links
                         },
                         {
                             name: 'ProjectContributionTierHelpersLibrary',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/libraries/ProjectContributionTierHelpersLibrary.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectContributionTierHelpersLibrary.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectContributionTierHelpersLibrary.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.ProjectContributionTierHelpersLibrary.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.ProjectContributionTierHelpersLibrary.links
                         },
                         {
                             name: 'ProjectMilestoneCompletion',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/libraries/ProjectMilestoneCompletion.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectMilestoneCompletion.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectMilestoneCompletion.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.ProjectMilestoneCompletion.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.ProjectMilestoneCompletion.links
                         },
                         {
                             name: 'ProjectRegistrationHelpersLibrary',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/ProjectRegistrationHelpersLibrary.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectRegistrationHelpersLibrary.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectRegistrationHelpersLibrary.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.ProjectRegistrationHelpersLibrary.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.ProjectRegistrationHelpersLibrary.links
                         },
                         {
                             name: 'ProjectRegistration',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/ProjectRegistration.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectRegistration.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.ProjectRegistration.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.ProjectRegistration.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.ProjectRegistration.links
                         },
                         {
                             name: 'Curation',
                             link: 'https://github.com/hyperbridge/funding-protocol/blob/master/smart-contracts/ethereum/contracts/Curation.sol',
                             created_at: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.Curation.created_at,
                             address: this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts.Curation.address,
-                            links: FundingProtocol.api.ethereum.state.contracts.Curation.links
+                            links: [] //FundingProtocol.api.ethereum.state.contracts.Curation.links
                         },
                     ]
                 }

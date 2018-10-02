@@ -301,17 +301,23 @@ a {
 
 #critical-error {
     display: none;
-    position: fixed;
-    z-index: 100000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    text-align: left;
-    background-color: #fff;
-    color: #000;
     padding: 10px;
-    font-size: 13px;
+    font-size: 15px;
+    color: #ddd;
+    width: 500px;
+    margin: 0 auto;
+    background: rgba(10, 2, 2, 0.3);
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#critical-error button {
+    background: transparent;
+    color: #fff;
+    border-radius: 4px;
+    padding: 6px;
+    font-size: 15px;
 }
 
 .startup-loader {
@@ -440,23 +446,23 @@ a {
     <div>
       <div class="startup-loader__spinner"></div>
       <p class="startup-loader__message">wubba lubba dub dubbbb</p>
-      <p class="startup-loader__user">Submitted by <a href="/#/identity/0x0">@fr0stbyte</a></p>
+      <p class="startup-loader__user">Submitted by <a href="/#/identity/1">@fr0stbyte</a></p>
     </div>
     <!---->
     <p class="startup-loader__status-message">Launching...</p>
+    <div id="critical-error">
+      <p>A critical error may have occurred. If BlockHub doesn't load in 1 minute, and your internet connection is fine, then either this page is broken, or your settings are corrupt.</p>
+      <br />
+      <button onClick="window.deleteSettings()">Reset settings</button> 
+      <button onClick="window.location = 'https://hyperbridge.org/#contact'">Contact us</button>
+      <br />
+    </div>
     <div class="startup-loader__links">
       <p>Connection problems? Let us know!</p> <a href="https://twitter.com/hyperbridge"><span
           class="fab fa-twitter"></span> Tweet Us</a> <a href="https://hyperbridge.org/status"><span
           class="fas fa-globe-americas"></span> Server Status</a>
     </div>
   </div>
-</div>
-
-<div id="critical-error">
-  <p>A critical error occurred. If this doesn't disappear in 1 minute, you will likely need to clear all of your settings.</p><br />
-  <p>If you created an account on this computer, you should make sure you have an account file backup.</p>
-  <button onClick="window.downloadAccountFile()">Click here to download your account file backup</button><br /><br />
-  <button onClick="window.deleteSettings()">Click here to delete the settings on this computer.</button><br />
 </div>
 
 <script>
@@ -471,20 +477,21 @@ window.deleteSettings = function() {
   
   var req = indexedDB.deleteDatabase('LokiCatalog');
   req.onsuccess = function () {
-    alert("Deleted settings successfully. The page will now reload.");
-    window.location.reload()
+    //alert("Deleted settings successfully. The page will now reload.");
+    window.location = window.location.href.replace(window.location.hash, '')
   };
   req.onerror = function () {
-    alert("ERR 301: Couldn't delete database");
+    //alert("ERR 301: Couldn't delete database");
   };
   req.onblocked = function (event) {
-    alert("ERR 302: Couldn't delete database due to the operation being blocked.");
+    //alert("ERR 302: Couldn't delete database due to the operation being blocked.");
+    window.location = window.location.href.replace(window.location.hash, '')
   };
 }
 
 function isWhiteSpace(coords) {
   var element = document.elementFromPoint(coords.x, coords.y);
-  var whitespace = $(document).add('body, html, #app, #header-bg, #startup-loader, #critical-error');
+  var whitespace = $(document).add('body, html, #app, #header-bg, #startup-loader, #critical-error, #left-bg, #right-bg, .startup-loader__container');
   return (whitespace.get().indexOf(element) > -1) ? true : false;
 }
 
@@ -495,14 +502,16 @@ function bootChecker() {
   const isLoaded = !isWhiteSpace({ x: 100, y: 100 }) || !isWhiteSpace({ x: 200, y: 100 }) || !isWhiteSpace({ x: 300, y: 300 })
 
   if (isLoaded) {
-    $('#critical-error').hide()
+    $('#startup-loader, #critical-error').hide()
     return setTimeout(bootChecker, 1 * 1000)
   }
 
-  $('#critical-error').show()
+  $('#startup-loader, #critical-error').show()
+
+  return setTimeout(bootChecker, 1000)
 }
 
-//setTimeout(bootChecker, 10 * 1000)
+setTimeout(bootChecker, 10 * 1000)
 </script>
 
 <%= htmlWebpackPlugin.options.serviceWorkerLoader %>

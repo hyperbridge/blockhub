@@ -86,8 +86,6 @@
         flex: 0 0 calc(33% - 20px);
         margin: 10px;
         box-sizing: border-box;
-        background: rgba(0, 0, 0, 0.13);
-        border: 1px solid rgba(70, 70, 70, 0.5);
         padding: 7px;
         border-radius: 5px;
         display: flex;
