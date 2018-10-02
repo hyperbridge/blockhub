@@ -5,7 +5,7 @@
         @mouseout="mouseOut()"
     >
         <div class="screen-gallery__main-img">
-            <i class="fas fa-expand" v-show="run_slideshow"></i>
+            <c-icon name="expand" v-show="!run_slideshow && !play_video"/>
             <c-img
                 v-if="!play_video"
                 :src="items[active_item]"
@@ -14,7 +14,7 @@
             <video v-else-if="play_video" controls autoplay>
                 <source :src="video_url" type="video/mp4">
             </video>
-            <div v-if="run_slideshow" class="screen-gallery__progress-bar"></div>
+            <div v-show="run_slideshow" class="screen-gallery__progress-bar"></div>
         </div>
         <ul class="screen-gallery__thumb-nav" ref="thumb-nav">
             <li
@@ -27,7 +27,7 @@
                 }"
                 @click="enableVideoPlay()"
             >
-                <i class="fas fa-play"></i>
+                <c-icon name="play"/>
             </li>
             <li
                 v-for="(url, index) in items"
@@ -121,25 +121,29 @@ export default {
                 parent.scrollTop = (childRect.top + parent.scrollTop) - parentRect.top;
             }
             if (status) this.slideshow();
+        },
+        restartGallery() {
+            this.active_item = 0;
+            this.play_video = false;
+
+            setTimeout(() => {
+                if (this.video_url) {
+                    this.random_item = Math.floor(Math.random() * this.items.length);
+                    this.enableVideoPlay();
+                } else {
+                    this.enableSlideshow(true);
+                }
+            }, 50);
         }
     },
     mounted() {
-        if (this.items && this.items.length) {
-            this.slideshow();
-            if (this.video_url) {
-                this.random_item = Math.floor(Math.random() * this.items.length);
-            }
-        }
+        this.restartGallery();
     },
     beforeDestroy() {
         this.enableSlideshow(false);
     },
     watch: {
-        $route() {
-            this.active_item = 0;
-            this.play_video = false;
-            this.enableSlideshow(true);
-        }
+        $route: 'restartGallery'
     }
 }
 </script>
@@ -226,7 +230,6 @@ export default {
     }
 
     .thumb-nav__video-thumb {
-        background-color: rgb(0, 0, 0);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -235,6 +238,10 @@ export default {
         background-repeat: no-repeat;
         background-position: center center;
         cursor: pointer;
+        border-radius: 6px;
+        .fas {
+            text-shadow: 0px 0px 6px #000;
+        }
     }
 
     .inactive-item:not(:hover) {

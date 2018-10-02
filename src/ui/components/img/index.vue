@@ -12,12 +12,7 @@ export default {
     },
     render(h) {
         return h('img', {
-            on: {
-                error: () => {
-                    if (!this.error) this.error = true;
-                },
-                load: () => this.loaded = true
-            },
+            on: this.listeners,
             attrs: {
                 src: this.dynamicSrc
             }
@@ -26,6 +21,15 @@ export default {
     computed: {
         dynamicSrc() {
             return !this.src || this.error ? (this.loaded ? this.blank : this.loader) : this.src;
+        },
+        listeners() {
+            return {
+                ...this.$listeners,
+                error: () => {
+                    if (!this.error) this.error = true;
+                },
+                load: () => this.loaded = true
+            }
         }
     }
 }

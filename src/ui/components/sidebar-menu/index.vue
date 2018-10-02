@@ -4,20 +4,11 @@
             <i :class="icon" v-if="icon"></i>
             {{ title }}
         </h3>
-        <h5 v-if="sub_title">
+        <h5 v-if="sub_title" class="sidebar-menu__subtitle">
             <i :class="sub_icon" v-if="sub_icon"></i>
             {{ sub_title }}
         </h5>
-        <ul class="sidebar-menu__list" v-if="menu">
-            <c-sidebar-menu-link v-for="(item, index) in menu"
-                                 :url="item.url"
-                                 :target="item.target"
-                                 :icon="item.icon"
-                                 :link_text="item.link_text"
-                                 :key="index">
-            </c-sidebar-menu-link>
-        </ul>
-        <ul class="sidebar-menu__list" v-else>
+        <ul class="sidebar-menu__list">
             <slot>
                 <c-sidebar-menu-link
                     v-for="(link, index) in links"
@@ -34,32 +25,17 @@
 </template>
 
 <script>
-    import MenuLink from '../sidebar-menu/menu_item'
-
     export default {
         props: {
-            menu: {
-                type: Array
-            },
-            icon:{
-                type: String
-            },
-            sub_icon:{
-                type: String
-            },
-            title:{
-                type: String
-            },
-            sub_title:{
-                type: String
-            },
-            mClass:{
-                type: String
-            },
+            icon: String,
+            sub_icon: String,
+            title: String,
+            sub_title: String,
+            mClass: String,
             links: Array
         },
-        components:{
-            'c-sidebar-menu-link': MenuLink
+        components: {
+            'c-sidebar-menu-link': (resolve) => require(['@/ui/components/sidebar-menu/menu_item'], resolve)
         }
     }
 </script>
@@ -87,6 +63,9 @@
             padding: 0;
             margin: 0;
             list-style: none;
+        }
+        .sidebar-menu__subtitle {
+            margin: 10px 0;
         }
     }
 </style>
