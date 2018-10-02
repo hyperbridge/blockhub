@@ -209,13 +209,6 @@
 
                     <div class="row margin-bottom-30" v-if="item.type === 'product_news'" :key="`level-1-${index}`">
                         <div class="col-12">
-                            <!-- <c-heading-bar name="What's up with your content" class="mb-0" :showArrows="false" :showBackground="false">
-                                <template slot="additional-action">
-                                    <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
-                                    <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
-                                    <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
-                                </template>
-                            </c-heading-bar> -->
 
                             <div class="home-tabs">
                                 <c-news-list-navigation
@@ -241,6 +234,26 @@
                                 <c-curator-reviews
                                     :reviews="item.data.reviews"
                                 />
+                            </c-block>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 margin-bottom-30" v-if="item.type === 'trending_projects_row'" :key="`level-1-${index}`">
+                            <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                                <c-heading-bar
+                                    slot="title"
+                                    class="mb-0"
+                                    :name="item.data.title"
+                                    :showArrows="showArrowsState(item.data.trending_projects, 3)"
+                                    @prevClick="item.data.ref.slidePrev()"
+                                    @nextClick="item.data.ref.slideNext()"
+                                />
+                                <c-swiper :options="item.data.options" :ref="item.data.ref">
+                                    <c-slide v-for="(project, index) in item.data.trending_projects" :key="index">
+                                        <c-projects-card :project="project" />
+                                    </c-slide>
+                                </c-swiper>
                             </c-block>
                         </div>
                     </div>
@@ -292,6 +305,7 @@ export default {
         'c-product-card-dynamic': (resolve) => require(['@/ui/components/store/product-card-dynamic'], resolve),
         'c-product-cards': (resolve) => require(['@/ui/components/store/product-cards'], resolve),
         'c-product-slider': (resolve) => require(['@/ui/components/store/product-slider'], resolve),
+        'c-projects-card': (resolve) => require(['@/ui/components/project/card'], resolve),
         'c-curator-reviews': (resolve) => require(['@/ui/components/store/curator-reviews'], resolve),
         'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
         'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
@@ -312,17 +326,8 @@ export default {
     },
     data() {
         return {
-            // Slider options
-            demoSlider: {
-                slidesPerView: 3,
-                spaceBetween: 0,
-            },
-            saleSlider: {
-                slidesPerView: 3,
-                spaceBetween: 0
-            },
             show   : false, // display content after API request
-            offset : 3,     // items to display after scroll
+            offset : 2,     // items to display after scroll
             display: 3,     // initial items
             trigger: 150,   // how far from the bottom to trigger infinite scroll
             end    : false, // no more updates
@@ -361,7 +366,10 @@ export default {
                     title: 'New Releases',
                     ref: 'demo_products_sl',
                     swiper: this.$refs.demo_products_sl && this.$refs.demo_products_sl.swiper,
-                    options: this.demoSlider,
+                    options: {
+                        slidesPerView: 3,
+                        spaceBetween: 0,
+                    },
                     products: this.$store.state.marketplace.new_products
                 }
             })
@@ -372,7 +380,10 @@ export default {
                     title: 'Summer Sale',
                     ref: 'summer_sale_sl',
                     swiper: this.$refs.summer_sale_sl && this.$refs.summer_sale_sl.swiper,
-                    options: this.saleSlider,
+                    options: {
+                        slidesPerView: 3,
+                        spaceBetween: 0
+                    },
                     products: this.$store.state.marketplace.sale_products
                 }
             })
@@ -408,6 +419,20 @@ export default {
                 }
             })
 
+            result.push({
+                type: 'trending_projects_row',
+                data: {
+                    title: 'Trending projects',
+                    ref: 'demo_products_sl',
+                    swiper: this.$refs.trending_projects_sl && this.$refs.trending_projects_sl.swiper,
+                    options: {
+                        slidesPerView: 3,
+                        spaceBetween: 15,
+                    },
+                    trending_projects: this.$store.state.marketplace.trending_projects
+                }
+            })
+
             return result
         },
         projects() {
@@ -422,9 +447,9 @@ export default {
         sliced() {
             return this.list.slice(0, this.display);
         },
-        trending_projects() {
-            return this.$store.state.marketplace.trending_projects;
-        },
+        // trending_projects() {
+        //     return this.$store.state.marketplace.trending_projects;
+        // },
         new_products() {
             return this.$store.state.marketplace.new_products;
         },
@@ -450,12 +475,6 @@ export default {
     methods: {
         filterTag(tagName) {
             alert(tagName)
-        },
-        prevClick(carousel) {
-            carousel.slidePrev();
-        },
-        nextClick(carousel) {
-            carousel.slideNext();
         },
         showArrowsState(el, count) {
             if ( el.length > count) {
