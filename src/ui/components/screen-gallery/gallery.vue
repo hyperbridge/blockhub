@@ -121,25 +121,29 @@ export default {
                 parent.scrollTop = (childRect.top + parent.scrollTop) - parentRect.top;
             }
             if (status) this.slideshow();
+        },
+        restartGallery() {
+            this.active_item = 0;
+            this.play_video = false;
+
+            setTimeout(() => {
+                if (this.video_url) {
+                    this.random_item = Math.floor(Math.random() * this.items.length);
+                    this.enableVideoPlay();
+                } else {
+                    this.enableSlideshow(true);
+                }
+            }, 50);
         }
     },
     mounted() {
-        if (this.items && this.items.length) {
-            this.slideshow();
-            if (this.video_url) {
-                this.random_item = Math.floor(Math.random() * this.items.length);
-            }
-        }
+        this.restartGallery();
     },
     beforeDestroy() {
         this.enableSlideshow(false);
     },
     watch: {
-        $route() {
-            this.active_item = 0;
-            this.play_video = false;
-            this.enableSlideshow(true);
-        }
+        $route: 'restartGallery'
     }
 }
 </script>
