@@ -20,11 +20,12 @@ export default {
     computed: {
         stars() {
             const stars = [];
-            const parsed_number = Math.floor(this.number).toString();
+            let number = Number(this.number)
+            const parsed_number = Math.floor(number).toString();
             for (let i = 0; i < parsed_number; i++) {
                 stars.push('star');
             }
-            return Number.isInteger(this.number) ? stars : [...stars, 'star-half'];
+            return Number.isInteger(number) ? stars : [...stars, 'star-half'];
         }
     }
 }
