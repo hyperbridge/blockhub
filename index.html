@@ -248,8 +248,7 @@ a {
     background: url(/static/img/body-left-bg.png);
     background-size: 247px 100%;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    z-index: 0;
+    z-index: 1;
 }
 
 #right-bg {
@@ -259,11 +258,10 @@ a {
     width: 247px;
     height: 100%;
     content: ' ';
-    background: url(/static/img/body-left-bg.png);
+    background: url(/static/img/body-right-bg.png);
     background-size: 247px 100%;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    z-index: 0;
+    z-index: 1;
 }
 
 #header-bg {
@@ -294,6 +292,11 @@ a {
     background: -webkit-linear-gradient(top, rgba(48, 49, 77, 0.34) 0%, rgba(48, 49, 77, 1) 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom, rgba(48, 49, 77, 0.34) 0%, rgba(48, 49, 77, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5730314d', endColorstr='#30314d', GradientType=0); /* IE6-9 */
+}
+
+#app {
+    z-index: 2;
+    position: relative;
 }
 
 #critical-error {
