@@ -190,15 +190,6 @@
                                             :isTransparent="true"
                                             v-if="asset"
                                         >
-                                            <span class="mr-3">
-                                                <c-icon name="box"/>{{ asset.count }}
-                                            </span>
-                                            <span class="mr-3">
-                                                <c-icon name="dollar-sign"/>{{ asset.price }}
-                                            </span>
-                                            <span class="mr-3">
-                                                <c-icon name="dollar-sign"/>3.45
-                                            </span>
                                         </c-assets-list-item>
                                     </div>
                                     <p v-if="!item.data.assets.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
