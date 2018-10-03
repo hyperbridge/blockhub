@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import router from '../router'
-import * as db from '../db'
+import * as DB from '../db'
 import * as ChaosMonkey from '../framework/chaos-monkey'
 import * as DesktopBridge from '../framework/desktop-bridge'
 import * as funding from '../modules/funding'
@@ -108,32 +108,39 @@ const store = new Vuex.Store({
 
 window.BlockHub.ChaosMonkey = ChaosMonkey
 window.BlockHub.store = store
-window.BlockHub.db = db
+window.BlockHub.DB = DB
 window.BlockHub.seed = seed
 
 window.BlockHub.importSeedData = () => {
-    store.state.network.account.notifications = seed.notifications
-    store.state.network.account.wallets = seed.wallets
-    store.state.marketplace.trending_projects = seed.trending_projects
-    store.state.marketplace.curator_reviews = seed.curator_reviews
-    store.state.marketplace.product_news = seed.product_news
-    store.state.marketplace.products = seed.products
-    store.state.marketplace.assets = seed.assets
-    store.state.marketplace.collections = seed.collections
-    store.state.funding.projects = seed.projects
+    DB.network.config.data[0].account.notifications = seed.notifications
+    DB.network.config.data[0].account.wallets = seed.wallets
+
+    DB.marketplace.config.data[0].trending_projects = seed.trending_projects
+    DB.marketplace.config.data[0].curator_reviews = seed.curator_reviews
+    DB.marketplace.config.data[0].product_news = seed.product_news
+    DB.marketplace.config.data[0].collections = seed.collections
+
+    DB.marketplace.products.data = seed.products
+    DB.marketplace.assets.data = seed.assets
+
+    DB.funding.projects.data = seed.projects
+
+    store.dispatch('marketplace/updateState')
+    store.dispatch('funding/updateState')
+    store.dispatch('network/updateState')
 }
 
 window.BlockHub.saveDatabase = () => {
-    db.network.config.data = [store.state.network]
+    DB.network.config.data = [store.state.network]
 
-    db.marketplace.products.data = store.state.marketplace.products
-    db.marketplace.assets.data = store.state.marketplace.assets
-    db.marketplace.config.data = [store.state.marketplace]
+    DB.marketplace.products.data = store.state.marketplace.products
+    DB.marketplace.assets.data = store.state.marketplace.assets
+    DB.marketplace.config.data = [store.state.marketplace]
 
-    db.funding.config.data = [store.state.funding]
-    db.funding.projects.data = store.state.funding.projects
+    DB.funding.config.data = [store.state.funding]
+    DB.funding.projects.data = store.state.funding.projects
 
-    db.save()
+    DB.save()
 }
 
 
@@ -236,8 +243,8 @@ const monitorSimulatorMode = () => {
         store.state.funding.projects = seed.projects.slice(seed.projects.length / 2)
 
         // TODO: figure out unique constraint
-        // db.marketplace.products.insert(store.state.marketplace.products)
-        // db.marketplace.assets.insert(store.state.marketplace.assets)
+        // DB.marketplace.products.insert(store.state.marketplace.products)
+        // DB.marketplace.assets.insert(store.state.marketplace.assets)
 
         store.dispatch('marketplace/updateState')
 
@@ -275,8 +282,8 @@ const monitorSimulatorMode = () => {
     }
 
     // TODO: figure out unique constraint
-    // db.marketplace.products.insert(store.state.marketplace.products)
-    // db.marketplace.assets.insert(store.state.marketplace.assets)
+    // DB.marketplace.products.insert(store.state.marketplace.products)
+    // DB.marketplace.assets.insert(store.state.marketplace.assets)
 
     // store.dispatch('marketplace/updateState') //, store.state.marketplace)
 
@@ -315,7 +322,7 @@ export let initializer = () => {
     return new Promise((resolve, reject) => {
         //let initialized = false
 
-        db.setInitCallback(async () => {
+        DB.setInitCallback(async () => {
             // TODO: is this a race condition?
             //TODO: PeerService.init()
             DesktopBridge.init(store)
