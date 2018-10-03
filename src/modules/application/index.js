@@ -12,10 +12,15 @@ const updateState = (savedData, updatedState = {}) => {
     rawData = {
         ...rawData,
         ...savedData,
-        ...updatedState
+        ...updatedState,
+        account: DB.application.config.data[0].account,
+        darklaunch_flags: DB.application.config.data[0].darklaunch_flags,
     }
 
-    const normalizedData = normalize(rawData, {
+    if (rawData.desktop_mode == null)
+        rawData.desktop_mode = window.isElectron
+
+        const normalizedData = normalize(rawData, {
     })
 
     state = { ...rawData, ...normalizedData.entities }
@@ -46,7 +51,7 @@ export const actions = {
     init(store, payload) {
         console.log('[BlockHub] Network connecting...')
 
-        updateState(DB.network.config.data[0], store.state)
+        updateState(DB.application.config.data[0], store.state)
 
         state.connection.status.code = null
         state.connection.status.message = "Establishing connection..."
@@ -71,6 +76,17 @@ export const actions = {
 
         store.commit('updateState', state)
     },
+    activateModal(store, payload) {
+        if (store.state.desktop_mode) {
+            if (store.state.signed_in) {
+                store.commit('activateModal', payload)
+            } else {
+                store.commit('activateModal', 'login')
+            }
+        } else {
+            store.commit('activateModal', 'download')
+        }
+    },
     unlockAccount(state, payload) {
         DesktopBridge.resolvePromptPasswordRequest(payload.password.value)
 
@@ -82,7 +98,7 @@ export const actions = {
         // })
     },
     initEthereum(store, payload) {
-        DesktopBridge.initProtocol({ protocolName: 'network' }).then((err, config) => {
+        DesktopBridge.initProtocol({ protocolName: 'application' }).then((err, config) => {
             store.state.ethereum[store.state.current_ethereum_network] = config
             store.dispatch('updateState')
         })
@@ -206,7 +222,7 @@ export const actions = {
             //     state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
             //     state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = res._address
 
-            //     DB.network.config.update(state)
+            //     DB.application.config.update(state)
             //     DB.save()
             // })
         })
@@ -222,13 +238,13 @@ export const mutations = {
     signIn(state, payload) {
         state.signed_in = true
 
-        DB.network.config.update(state)
+        DB.application.config.update(state)
         DB.save()
     },
     signOut(state, payload) {
         state.signed_in = false
 
-        DB.network.config.update(state)
+        DB.application.config.update(state)
         DB.save()
     },
     setInternetConnection(state, payload) {

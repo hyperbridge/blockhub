@@ -1,75 +1,46 @@
 <template>
-    <c-popup :activated="activated" type="custom" ref="modal" title="Sending Funds" width="350"  @close="$emit('close')">
-        <!-- <c-custom-modal title="Login"
-                        v-if="login_modal"
-                        @close="login_modal = false"
-                        id="login_modal"
-                        modal_class="login-modal">
-            <template slot="modal_body">
-                <div class="w-100">
-                    <div class="modal-title">
-                        <h3>Welcome to BlockHub</h3>
-                        <h5>Please enter your login details</h5>
+    <c-popup :activated="activated" type="custom" ref="modal" width="550" @close="$emit('close')">
+        <div slot="custom_close" hidden></div>
+        <div class="download-modal" slot="custom_content">
+            <c-tabs>
+                <c-tab name="Sign In" :selected="true" :showFooter="true">
+                    <div>
+                        Sign in here // @signIn()
                     </div>
-                    <div class="card">
-                        <form action="">
-                            <div class="form-group">
-                                <label>Username</label>
-                                <input type="text" class="form-control" placeholder="Username" />
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" placeholder="Password" />
-                            </div>
-                        </form>
+                    <div slot="footer" class="d-flex align-items-center justify-content-end">
+                        <div>
+                            <c-button @click="$emit('close')">Close</c-button>
+                        </div>
                     </div>
-                </div>
-            </template>
-            <template slot="modal_footer">
-                <div>
-                    <a href="#3" class="btn btn-sm btn-link">Recover Password</a><br>
-                    <a href="#3" class="btn btn-sm btn-link">Create Account</a>
-                </div>
-                <div>
-                    <a href="#3" class="btn btn-sm btn-success text-uppercase font-weight-bold">Log-in <i class="fas fa-angle-double-right"></i></a>
-                </div>
-            </template>
-        </c-custom-modal> -->
+                </c-tab>
+            </c-tabs>
+        </div>
     </c-popup>
 </template>
 
 <script>
-    import Tabs from '../tab/tabs.vue'
-    import Tab from '../tab/tab.vue'
-    import Switch from '../switch/index'
-    import Buttons from '../buttons/index.vue'
-    import PopUp from '../popups/index'
-
     export default {
         props: ['activated'],
         components: {
-            'c-tab': Tab,
-            'c-tabs': Tabs,
-            'c-switch': Switch,
-            'c-button': Buttons,
-            'c-popup': PopUp,
+            'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
+            'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
+            'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
         },
         data() {
             return {
-                agreement: true,
-                sending: false
             }
         },
         methods: {
-            toggleSteps: function () {
-                this.agreement = false;
-                this.sending = true;
+            signIn() {
+                this.$store.dispatch('application/signIn', { password: this.$refs.password })
             }
         }
     }
-
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scoped>
+    .c-popup__content {
+        background: transparent;
+        color: #fff;
+    }
 </style>

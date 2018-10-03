@@ -13,7 +13,7 @@ const migrations = {
         }
     },
     mounted() {
-        const { current, latest } = this.$store.state.network.migrations;
+        const { current, latest } = this.$store.state.application.migrations;
 
         // if (!current.length || current < latest) {
         //     this.$notif({

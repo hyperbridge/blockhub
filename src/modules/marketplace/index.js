@@ -28,9 +28,6 @@ const updateState = (savedData, updatedState = {}) => {
         special_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : []
     }
 
-    if (rawData.desktop_mode == null)
-        rawData.desktop_mode = window.isElectron
-
     const normalizedData = normalize(rawData, {
         assets: [schema.asset],
         products: [schema.product],

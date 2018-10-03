@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="product-navigation">
+    <c-layout navigationKey="product-navigation" :showSidepanel="false">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
@@ -268,15 +268,7 @@
         },
         methods: {
             showPurchaseModal() {
-                if (this.$store.state.marketplace.desktop_mode) {
-                    if (this.$store.state.network.signed_in) {
-                        this.$store.commit('network/activateModal', 'purchase')
-                    } else {
-                        this.$store.commit('network/activateModal', 'login')
-                    }
-                } else {
-                    this.$store.commit('network/activateModal', 'download')
-                }
+                this.$store.dispatch('application/activateModal', 'purchase')
             },
             deactivateElement(key) {
                 this.activeElement[key] = false

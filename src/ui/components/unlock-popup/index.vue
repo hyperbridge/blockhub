@@ -32,7 +32,7 @@
         },
         methods: {
             unlock() {
-                this.$store.dispatch('network/unlockAccount', { password: this.$refs.password })
+                this.$store.dispatch('application/unlockAccount', { password: this.$refs.password })
             }
         }
     }

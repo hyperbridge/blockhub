@@ -55,7 +55,7 @@
         },
         methods: {
           signIn() {
-            this.$store.dispatch('network/signIn')
+            this.$store.dispatch('application/signIn')
 
             this.$router.push('/')
           }

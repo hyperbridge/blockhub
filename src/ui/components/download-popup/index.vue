@@ -33,7 +33,7 @@
         },
         methods: {
             download() {
-                this.$store.dispatch('network/downloadAccount', { password: this.$refs.password })
+                this.$store.dispatch('application/downloadAccount', { password: this.$refs.password })
             }
         }
     }

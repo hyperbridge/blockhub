@@ -52,7 +52,7 @@ export const resolvePromptPasswordRequest = async (password) => {
 
 export const handlePromptPasswordRequest = async (data) => {
     return new Promise(async (resolve) => {
-        local.store.commit('network/activateModal', 'unlock')
+        local.store.commit('application/activateModal', 'unlock')
 
         local.unlockResolve = resolve
     })
@@ -60,14 +60,14 @@ export const handlePromptPasswordRequest = async (data) => {
 
 export const handleSetAccountRequest = async (data) => {
     return new Promise(async (resolve) => {
-        DB.network.config.data[0].account = {
-            ...DB.network.config.data[0].account,
+        DB.application.config.data[0].account = {
+            ...DB.application.config.data[0].account,
             ...data.account
         }
 
         DB.save()
 
-        local.store.commit('network/activateModal', null)
+        local.store.commit('application/activateModal', null)
     })
 }
 

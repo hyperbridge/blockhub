@@ -174,8 +174,7 @@
                 <div class="row margin-bottom-30" v-if="item.type === 'collections_list'" :key="`level-1-${index}`">
                     <div class="col-12">
                         <c-collection-list title="Get Started"
-                                            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                            Integer sit amet tellus in neque porttitor consequat."
+                                            description="Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain."
                         >
                             <c-swiper :options="item.data.options" class="padding-10">
                                 <c-slide v-for="(collection, index) in item.data.collections_list" :key="index">
@@ -351,16 +350,16 @@ export default {
             return this.$store.state.marketplace.main_banner;
         },
         signed_in() {
-            return this.$store.state.network.signed_in;
+            return this.$store.state.application.signed_in;
         },
         simulator_mode() {
-            return this.$store.state.marketplace.simulator_mode;
+            return this.$store.state.application.simulator_mode;
         },
         desktop_mode() {
-            return this.$store.state.marketplace.desktop_mode;
+            return this.$store.state.application.desktop_mode;
         },
         developer_mode() {
-            return this.$store.state.marketplace.developer_mode;
+            return this.$store.state.application.developer_mode;
         }
     },
     methods: {

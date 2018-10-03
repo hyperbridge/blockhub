@@ -149,10 +149,10 @@
         },
         computed: {
             identityCount() {
-                return Object.keys(this.$store.state.network.identities).length
+                return Object.keys(this.$store.state.application.identities).length
             },
             account() {
-                return this.$store.state.network.account
+                return this.$store.state.application.account
             }
         },
         data: () => ({

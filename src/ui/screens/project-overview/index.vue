@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="project-navigation">
+    <c-layout navigationKey="project-navigation" :showSidepanel="false">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
@@ -490,11 +490,7 @@
                 $('.nav-tabs a[href="#' + name + '"]').tab('show')
             },
             showContributeModal() {
-                if (this.$store.state.network.signed_in) {
-                    this.$store.commit('network/activateModal', 'send-funds')
-                } else {
-                    this.$store.commit('network/activateModal', 'login')
-                }
+                this.$store.dispatch('application/activateModal', 'send-funds')
             },
             deactivateElement(key) {
                 this.activeElement[key] = false
@@ -619,6 +615,20 @@
     .content-editor .note-editor.note-frame .note-statusbar {
         background: transparent;
         border: 0 none;
+    }
+
+    #content > .container-fluid {
+        padding-top: 0;
+    }
+
+    .page__content > .content {
+        width: calc(100% - 250px);
+        padding-top: 0;
+        margin: 0 0 0 auto;
+    }
+
+    #page-sidepanel {
+        display: none;
     }
 </style>
 

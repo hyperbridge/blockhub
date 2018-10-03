@@ -1,8 +1,8 @@
-import cookie from 'cookie';
-import * as db from '@/db';
+import cookie from 'cookie'
+import * as DB from '@/db'
 
-let timeout = null;
-let previousProperty = '';
+let timeout = null
+let previousProperty = ''
 
 export default {
     state: {
@@ -15,48 +15,48 @@ export default {
     mutations: {
         LOAD_SETTINGS (state, payload) {
             for (let key in payload) {
-                state.settings[key] = payload[key];
+                state.settings[key] = payload[key]
             }
         },
         UPDATE_SETTINGS (state, property) {
-            state.settings[property] = !state.settings[property];
+            state.settings[property] = !state.settings[property]
         }
     },
     actions: {
         loadSettings({ commit, state, rootState }) {
-            if (rootState.network.signed_in && rootState.network.account.settings) {
-                const accountSettings = rootState.network.account.settings.client;
-                commit('LOAD_SETTINGS', accountSettings);
+            if (rootState.application.signed_in && rootState.application.account.settings) {
+                const accountSettings = rootState.application.account.settings.client
+                commit('LOAD_SETTINGS', accountSettings)
             } else {
-                const cookies = cookie.parse(document.cookie);
-                const cookiesSettings = {};
+                const cookies = cookie.parse(document.cookie)
+                const cookiesSettings = {}
 
                 for (let key in cookies) {
                     if (key.includes('settings_')) {
                         const [,cookieName] = key.split('_')
-                        cookiesSettings[cookieName] = cookies[key] == 'true';
+                        cookiesSettings[cookieName] = cookies[key] == 'true'
                     }
                 }
 
-                commit('LOAD_SETTINGS', cookiesSettings);
+                commit('LOAD_SETTINGS', cookiesSettings)
             }
         },
         updateSettings({ commit, state, rootState }, property) {
-            commit('UPDATE_SETTINGS', property);
+            commit('UPDATE_SETTINGS', property)
 
-            if (previousProperty === property) clearTimeout(timeout);
+            if (previousProperty === property) clearTimeout(timeout)
 
             timeout = setTimeout(() => {
-                previousProperty = property;
+                previousProperty = property
                 // WIP
-                if (rootState.network.signed_in) {
-                    const [accountName] = Object.keys(rootState.network.account);
-                    rootState.network.account[accountName].settings.client[property] = state.settings[property];
-                    db.save();
+                if (rootState.application.signed_in) {
+                    const [accountName] = Object.keys(rootState.application.account)
+                    rootState.application.account[accountName].settings.client[property] = state.settings[property]
+                    DB.save()
                 } else {
-                    document.cookie = cookie.serialize('settings_' + property, state.settings[property], { maxAge: 60 * 60 * 24 * 7 });
+                    document.cookie = cookie.serialize('settings_' + property, state.settings[property], { maxAge: 60 * 60 * 24 * 7 })
                 }
-            }, 600);
+            }, 600)
         }
     }
 }

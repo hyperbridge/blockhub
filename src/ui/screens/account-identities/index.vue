@@ -255,7 +255,7 @@
         },
         computed: {
             networkIdentites() {
-                return this.$store.state.network.identities;
+                return this.$store.state.application.identities;
             },
             defaultIdentity() {
                 return this.identities.find(identity => identity.default);

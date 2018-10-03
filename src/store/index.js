@@ -8,7 +8,7 @@ import * as DesktopBridge from '../framework/desktop-bridge'
 import * as funding from '../modules/funding'
 import * as news from '../modules/news'
 import * as marketplace from '../modules/marketplace'
-import * as network from '../modules/network'
+import * as application from '../modules/application'
 import * as database from '../modules/database'
 import * as cache from '../modules/cache'
 import user from '@/modules/user'
@@ -94,12 +94,12 @@ const store = new Vuex.Store({
             actions: news.actions,
             mutations: news.mutations
         },
-        network: {
+        application: {
             namespaced: true,
-            state: network.state,
-            getters: network.getters,
-            actions: network.actions,
-            mutations: network.mutations
+            state: application.state,
+            getters: application.getters,
+            actions: application.actions,
+            mutations: application.mutations
         },
         user
     }
@@ -112,8 +112,8 @@ window.BlockHub.DB = DB
 window.BlockHub.seed = seed
 
 window.BlockHub.importSeedData = () => {
-    DB.network.config.data[0].account.notifications = seed.notifications
-    DB.network.config.data[0].account.wallets = seed.wallets
+    DB.application.config.data[0].account.notifications = seed.notifications
+    DB.application.config.data[0].account.wallets = seed.wallets
 
     DB.marketplace.config.data[0].curator_reviews = seed.curator_reviews
     DB.marketplace.config.data[0].product_news = seed.product_news
@@ -127,12 +127,12 @@ window.BlockHub.importSeedData = () => {
 
     store.dispatch('marketplace/updateState')
     store.dispatch('funding/updateState')
-    store.dispatch('network/updateState')
+    store.dispatch('application/updateState')
 }
 
 window.BlockHub.resetSeedData = () => {
-    DB.network.config.data[0].account.notifications = []
-    DB.network.config.data[0].account.wallets = []
+    DB.application.config.data[0].account.notifications = []
+    DB.application.config.data[0].account.wallets = []
 
     DB.marketplace.config.data[0].curator_reviews = []
     DB.marketplace.config.data[0].product_news = []
@@ -146,11 +146,11 @@ window.BlockHub.resetSeedData = () => {
 
     store.dispatch('marketplace/updateState')
     store.dispatch('funding/updateState')
-    store.dispatch('network/updateState')
+    store.dispatch('application/updateState')
 }
 
 window.BlockHub.saveDatabase = () => {
-    DB.network.config.data = [store.state.network]
+    DB.application.config.data = [store.state.application]
 
     DB.marketplace.products.data = store.state.marketplace.products
     DB.marketplace.assets.data = store.state.marketplace.assets
@@ -204,7 +204,7 @@ const initSubscribers = () => {
 
             store.dispatch('marketplace/updateState')
             store.dispatch('funding/updateState')
-            store.dispatch('network/updateState')
+            store.dispatch('application/updateState')
 
         }
     })
@@ -246,7 +246,7 @@ const randomAction = () => {
 let simulatorInitialized = false
 
 const monitorSimulatorMode = () => {
-    if (!store.state.marketplace.simulator_mode) {
+    if (!store.state.application.simulator_mode) {
         simulatorInitialized = false
         return setTimeout(monitorSimulatorMode, 1000)
     }
@@ -272,8 +272,8 @@ const monitorSimulatorMode = () => {
 
     const action = randomAction()
     const targets = [
-        [store.state.network.account.notifications, seed.notifications],
-        [store.state.network.account.wallets, seed.wallets],
+        [store.state.application.account.notifications, seed.notifications],
+        [store.state.application.account.wallets, seed.wallets],
         [store.state.marketplace.trending_projects, seed.trending_projects],
         [store.state.marketplace.curator_reviews, seed.curator_reviews],
         [store.state.marketplace.product_news, seed.product_news],
@@ -311,7 +311,7 @@ const monitorSimulatorMode = () => {
 
 // TODO
 // const monitorPathState = async () => {
-//     if (!store.state.network.connection.operator) {
+//     if (!store.state.application.connection.operator) {
 //         return
 //     }
 
@@ -347,12 +347,12 @@ export let initializer = () => {
             DesktopBridge.init(store)
 
             store.dispatch('database/init')
-            store.dispatch('network/init')
+            store.dispatch('application/init')
             store.dispatch('marketplace/init')
             store.dispatch('funding/init')
 
             try {
-                store.dispatch('network/initEthereum')
+                store.dispatch('application/initEthereum')
                 store.dispatch('funding/initEthereum')
                 store.dispatch('marketplace/initEthereum')
             } catch(err) {
@@ -370,8 +370,8 @@ export let initializer = () => {
                 console.log('BlockHub initialized.')
 
                 setInterval(() => {
-                    if (store.state.network.connection.auto) {
-                        store.dispatch('network/checkInternetConnection')
+                    if (store.state.application.connection.auto) {
+                        store.dispatch('application/checkInternetConnection')
                     }
                 }, 4000)
 

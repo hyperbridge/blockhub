@@ -131,29 +131,29 @@ export default {
         protocols() {
             return [
                 {
-                    id: 'network',
+                    id: 'application',
                     name: 'Token',
                     link: 'https://github.com/hyperbridge/token',
                     contracts: [
                         {
                             name: 'Token',
                             link: 'https://github.com/hyperbridge/token/blob/master/smart-contracts/ethereum/contracts/Token.sol',
-                            created_at: this.$store.state.network.ethereum[this.$store.state.network.current_ethereum_network].contracts.Token.created_at,
-                            address: this.$store.state.network.ethereum[this.$store.state.network.current_ethereum_network].contracts.Token.address,
+                            created_at: this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts.Token.created_at,
+                            address: this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts.Token.address,
                             links: []
                         },
                         {
                             name: 'TokenDelegate',
                             link: 'https://github.com/hyperbridge/token/blob/master/smart-contracts/ethereum/contracts/TokenDelegate.sol',
-                            created_at: this.$store.state.network.ethereum[this.$store.state.network.current_ethereum_network].contracts.TokenDelegate.created_at,
-                            address: this.$store.state.network.ethereum[this.$store.state.network.current_ethereum_network].contracts.TokenDelegate.address,
+                            created_at: this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts.TokenDelegate.created_at,
+                            address: this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts.TokenDelegate.address,
                             links: []
                         },
                         {
                             name: 'EternalStorage',
                             link: 'https://github.com/hyperbridge/token/blob/master/smart-contracts/ethereum/contracts/EternalStorage.sol',
-                            created_at: this.$store.state.network.ethereum[this.$store.state.network.current_ethereum_network].contracts.EternalStorage.created_at,
-                            address: this.$store.state.network.ethereum[this.$store.state.network.current_ethereum_network].contracts.EternalStorage.address,
+                            created_at: this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts.EternalStorage.created_at,
+                            address: this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts.EternalStorage.address,
                             links: []
                         }
                     ]

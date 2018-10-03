@@ -27,10 +27,10 @@ export default {
   },
   computed: {
       wallet() {
-        if (!this.$store.state.network.wallets)
+        if (!this.$store.state.application.wallets)
             return
         
-        const wallet = this.$store.state.network.wallets[this.id]
+        const wallet = this.$store.state.application.wallets[this.id]
 
         if (!wallet)
             return
