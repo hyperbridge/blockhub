@@ -95,6 +95,12 @@ export const getters = {
                 : a[sortBy.property] < b[sortBy.property] ? sortDir(-1, sortBy.asc) : 0
             : 0
         )
+    ,
+    assetsProducts: (state, getters) => getters.assetsArray.reduce((products, asset) =>
+        products.includes(asset.product_name)
+            ? products
+            : [ ...products, asset.product_name ]
+        , []).sort()
 };
 
 export const actions = {

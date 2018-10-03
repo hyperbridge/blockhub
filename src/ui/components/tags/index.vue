@@ -1,14 +1,13 @@
 <template>
     <div class="product-tags">
-        <a
+        <router-link
             v-for="(tag, index) in tags"
-            :href="`/#/store/tag/${tag}`"
             :key="index"
-            @click="filterTag(tag)"
+            :to="{ name: 'Search Page', query: { tags: [tag] }}"
             class="product-tags__link"
         >
             {{ tag }}
-        </a>
+        </router-link>
     </div>
 </template>
 
@@ -16,12 +15,9 @@
 export default {
     name: 'tags',
     props: {
-        tags: Array,
-        required: true
-    },
-    methods: {
-        filterTag(tagName) {
-            alert(tagName)
+        tags: {
+            type: Array,
+            required: true
         }
     }
 }

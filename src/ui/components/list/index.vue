@@ -1,15 +1,17 @@
 <template>
     <ul class="list-container">
         <li v-for="(item, index) in items" :key="index">
-            <a
-                @click="$emit('click', item)"
-                class="item__link"
-                :class="{ 'item_link--active': item.selected | item.active }"
-            >
-                <slot :item="item">
+            <slot name="item" :item="item">
+                <a
+                    @click="$emit('click', item)"
+                    class="item__link"
+                    :class="{ 'item_link--active': item.selected | item.active }"
+                >
+                    <slot :item="item">
                         {{ item.name }}
-                </slot>
-            </a>
+                    </slot>
+                </a>
+            </slot>
         </li>
     </ul>
 </template>
@@ -31,6 +33,7 @@
         list-style-type: none;
         overflow-y: auto;
         background: rgba(36, 37, 59, .8);
+        background: #27283D;
         border-radius: 4px;
     }
     .item__link {

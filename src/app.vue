@@ -3,24 +3,24 @@
         <router-view></router-view>
         <div class="fixed-panel invert" id="fixed_panel">
             <div class="fixed-panel__content scroll">
-                <h5 v-darklaunch="REALMS">Your Realms</h5>
+                <h5 v-darklaunch="'REALMS'">Your Realms</h5>
 
-                <a href="/#/realm/1" v-darklaunch="REALMS">
+                <a href="/#/realm/1" v-darklaunch="'REALMS'">
                     <span class="icon icon-letter-circle">C</span>
                     <span class="text">Continuum</span>
                 </a>
-                <a href="/#/realm/1" v-darklaunch="REALMS">
+                <a href="/#/realm/1" v-darklaunch="'REALMS'">
                     <span class="icon icon-letter-circle">H</span>
                     <span class="text">Hyperbridge</span>
                 </a>
-                <a href="/#/realm/1" v-darklaunch="REALMS">
+                <a href="/#/realm/1" v-darklaunch="'REALMS'">
                     <span class="icon icon-letter-circle">R</span>
                     <span class="text">Ready Block One</span>
                 </a>
 
-                <a href="/#/profile/1/realms" v-darklaunch="REALMS">See More...</a>
+                <a href="/#/profile/1/realms" v-darklaunch="'REALMS'">See More...</a>
 
-                <hr v-darklaunch="REALMS" />
+                <hr v-darklaunch="'REALMS'" />
 
                 <h5>Your Products</h5>
                 <a href="/#/product/1">
@@ -44,7 +44,7 @@
                     <span class="icon fa fa-wrench"></span>
                     <span class="text">Developer Area</span>
                 </a>
-                <a href="/#/realm/new" v-darklaunch="REALMS">
+                <a href="/#/realm/new" v-darklaunch="'REALMS'">
                     <span class="icon fa fa-plus"></span>
                     <span class="text">New Realm</span>
                 </a>
