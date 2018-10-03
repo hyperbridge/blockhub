@@ -147,41 +147,7 @@
 
                         <c-games-explorer v-if="item.type === 'games_explorer'" :key="`level-1-${index}`" />
 
-                        <div class="row margin-bottom-30" v-if="item.type === 'asset_grid'" :key="`level-1-${index}`">
-                            <div class="col-12">
-                                <c-block title="Top 20 Items" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                                    <template slot="additional-action">
-                                        <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
-                                        <c-heading-bar-fields name="Trading" icon="star" @clickUp=""  @clickDown="" />
-                                    </template>
-
-                                    <div class="filter-blk d-flex justify-content-between align-items-center margin-bottom-20">
-                                        <div class="d-inline-flex align-items-center">
-                                            <c-dropdown id="test2" name="Filter by Genre" :showBg="true">
-                                                <a href="#3">RPG</a>
-                                                <a href="#3">ACTION</a>
-                                                <a href="#3">Cars</a>
-                                            </c-dropdown>
-                                            <c-searcher customClass="mb-0" />
-                                        </div>
-                                        <c-button status="info" :icon_hide="true" v-if="item.data.assets.length">View All</c-button>
-                                    </div>
-                                    <c-content-navigation
-                                        v-if="item.data.assets.length"
-                                        :items="item.data.assets"
-                                    >
-                                        <c-assets-list
-                                            slot-scope="{ items }"
-                                            :items="items"
-                                            :itemInRow="2"
-                                        />
-                                    </c-content-navigation>
-                                    <p v-else>
-                                        Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?
-                                    </p>
-                                </c-block>
-                            </div>
-                        </div>
+                        <c-assets-explorer v-if="item.type === 'asset_grid'" :key="`level-1-${index}`" :assets="assets"/>
 
                         <div class="row margin-bottom-30" v-if="item.type === 'product_news'" :key="`level-1-${index}`">
                             <div class="col-12">
@@ -351,6 +317,7 @@ export default {
         'c-game-includes-list': (resolve) => require(['@/ui/components/game-series/game-includes-list'], resolve),
         'c-collection-list': (resolve) => require(['@/ui/components/collection/list'], resolve),
         'c-collection-item': (resolve) => require(['@/ui/components/collection/item'], resolve),
+        'c-assets-explorer': (resolve) => require(['@/ui/components/store/assets-explorer'], resolve)
     },
     data() {
         return {
