@@ -378,6 +378,12 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/collection'], resolve)
         },
         {
+            path: '/discussion/',
+            name: 'Discussions Page',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/discussion'], resolve)
+        },
+        {
             path: '/download/desktop/mac',
             beforeEnter(to, from, next) {
                 window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-v${appVersion}.dmg`
