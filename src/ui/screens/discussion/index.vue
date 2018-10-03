@@ -73,6 +73,7 @@
                             </div>
                         </div>
                     </div>
+                    <c-pagination :pages="6" />
                 </c-block>
                 <c-block title="General" class="margin-top-30" :noGutter="true" :onlyContentBg="true">
                     <div class="community-item" v-for="(post, index) in posts" :key="index">
@@ -102,6 +103,7 @@
                             </div>
                         </div>
                     </div>
+                    <c-pagination :pages="6" />
                 </c-block>
             </div>
         </div>
@@ -116,6 +118,7 @@
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+            'c-pagination': (resolve) => require(['@/ui/components/pagination'], resolve),
         },
         data() {
             return {
