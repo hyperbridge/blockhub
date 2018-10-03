@@ -36,25 +36,25 @@
 </template>
 
 <script>
-export default {
-    name: 'comment',
-    props: {
-        comment: {
-            type: Object,
-            required: true
-        }
-    },
-    components: {
-        'c-dropdown-menu': (resolve) => require(['@/ui/components/dropdown-menu'], resolve),
-        'c-reply': (resolve) => require(['@/ui/components/product-community/reply'], resolve),
-        'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'], resolve)
-    },
-    data() {
-        return {
-            reply: false
+    export default {
+        name: 'comment',
+        props: {
+            comment: {
+                type: Object,
+                required: true
+            }
+        },
+        components: {
+            'c-dropdown-menu': (resolve) => require(['@/ui/components/dropdown-menu'], resolve),
+            'c-reply': (resolve) => require(['@/ui/components/product-community/reply'], resolve),
+            'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'], resolve)
+        },
+        data() {
+            return {
+                reply: false
+            }
         }
     }
-}
 </script>
 
 
