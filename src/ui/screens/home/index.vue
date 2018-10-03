@@ -73,11 +73,16 @@
                                 <c-heading-bar-fields name="Trading" icon="star" @clickUp=""  @clickDown="" />
                             </template>
 
-                            <c-assets-list
-                                :items="assets"
-                                itemInRow="2"
+                            <c-content-navigation
                                 v-if="assets.length"
-                            />
+                                :items="assets"
+                            >
+                                <c-assets-list
+                                    slot-scope="{ items }"
+                                    :items="items"
+                                    :itemInRow="2"
+                                />
+                            </c-content-navigation>
 
                             <p v-if="!assets.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
 
@@ -161,17 +166,19 @@
                                         </div>
                                         <c-button status="info" :icon_hide="true" v-if="item.data.assets.length">View All</c-button>
                                     </div>
-                                    <div class="d-flex justify-content-between flex-wrap">
-                                        <div class="w-50" v-for="(asset, index) in item.data.assets" :key="index" v-if="item.data.assets.length">
-                                            <c-assets-list-item
-                                                :item="asset"
-                                                :isTransparent="true"
-                                                v-if="asset"
-                                            >
-                                            </c-assets-list-item>
-                                        </div>
-                                        <p v-if="!item.data.assets.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
-                                    </div>
+                                    <c-content-navigation
+                                        v-if="item.data.assets.length"
+                                        :items="item.data.assets"
+                                    >
+                                        <c-assets-list
+                                            slot-scope="{ items }"
+                                            :items="items"
+                                            :itemInRow="2"
+                                        />
+                                    </c-content-navigation>
+                                    <p v-else>
+                                        Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?
+                                    </p>
                                 </c-block>
                             </div>
                         </div>

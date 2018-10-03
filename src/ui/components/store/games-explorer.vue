@@ -111,15 +111,14 @@
                 v-if="filteredProducts.length"
                 :items="filteredProducts"
             >
-                <template slot-scope="slotProps">
-                    <c-game-grid
-                        :itemInRow="2"
-                        :showRating="false"
-                        :items="slotProps.items"
-                        showTime
-                        itemBg="transparent"
-                    />
-                </template>
+                <c-game-grid
+                    slot-scope="{ items }"
+                    :itemInRow="2"
+                    :showRating="false"
+                    :items="items"
+                    showTime
+                    itemBg="transparent"
+                />
             </c-content-navigation>
             <div v-else-if="filtersActive">
                 <p>No products were found using these filters. Want to <c-button status="plain">Check for updates</c-button>?</p>

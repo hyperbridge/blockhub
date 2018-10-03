@@ -216,15 +216,14 @@
                                     :setItemsLimit="12"
                                     :setItemsPerPage="12"
                                 >
-                                    <template slot-scope="{ items }">
-                                        <c-game-grid
-                                            :itemInRow="2"
-                                            :showRating="false"
-                                            :items="items"
-                                            itemBg="transparent"
-                                            showTime
-                                        />
-                                    </template>
+                                    <c-game-grid
+                                        slot-scope="{ items }"
+                                        :itemInRow="2"
+                                        :showRating="false"
+                                        :items="items"
+                                        itemBg="transparent"
+                                        showTime
+                                    />
                                 </c-content-navigation>
                             </div>
                         </div>

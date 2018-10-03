@@ -92,11 +92,11 @@
                     this.$emit('pageChange', page);
                 } else if (page === 'next') {
                     if (activePage < pages) {
-                        this.$emit('pageChange', page + 1);
+                        this.$emit('pageChange', activePage + 1);
                     }
                 } else if (page === 'prev') {
                     if (activePage > 1) {
-                        this.$emit('pageChange', page + -1);
+                        this.$emit('pageChange', activePage - 1);
                     }
                 }
             }
