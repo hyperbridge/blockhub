@@ -46,7 +46,7 @@
         },
         components: {
             'c-dropdown-menu': (resolve) => require(['@/ui/components/dropdown-menu'], resolve),
-            'c-reply': (resolve) => require(['@/ui/components/product-community/reply'], resolve),
+            'c-reply': (resolve) => require(['@/ui/components/community/reply'], resolve),
             'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'], resolve)
         },
         data() {

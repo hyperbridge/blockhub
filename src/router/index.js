@@ -256,6 +256,18 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/community'], resolve)
         },
         {
+            path: '/community/forum/:id',
+            name: 'Community forum',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/community-forum'], resolve)
+        },
+        {
+            path: '/community/discussion/:id',
+            name: 'Community discussion',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/community-discussion'], resolve)
+        },
+        {
             path: '/community/chat',
             name: 'Chat',
             component: (resolve) => require(['@/ui/screens/community-chat'], resolve)

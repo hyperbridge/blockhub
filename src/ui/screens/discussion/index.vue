@@ -16,94 +16,8 @@
                     </c-heading-bar>
 
                     <div class="discussions-list">
-                        <div class="discussions-list__item">
-                            <div class="icon">
-                                <i class="fab fa-angellist"></i>
-                            </div>
-                            <div class="title">
-                                New to BlockHub
-                            </div>
-                            <div class="last-post">
-                                Just Now
-                            </div>
-                            <div class="discussion">
-                                65 000
-                            </div>
-                        </div>
-                        <div class="discussions-list__item">
-                            <div class="icon">
-                                <i class="fab fa-angellist"></i>
-                            </div>
-                            <div class="title">
-                                New to BlockHub
-                            </div>
-                            <div class="last-post">
-                                Just Now
-                            </div>
-                            <div class="discussion">
-                                65 000
-                            </div>
-                        </div>
-                        <div class="discussions-list__item">
-                            <div class="icon">
-                                <i class="fab fa-angellist"></i>
-                            </div>
-                            <div class="title">
-                                New to BlockHub
-                            </div>
-                            <div class="last-post">
-                                Just Now
-                            </div>
-                            <div class="discussion">
-                                65 000
-                            </div>
-                        </div>
-                        <div class="discussions-list__item">
-                            <div class="icon">
-                                <i class="fab fa-angellist"></i>
-                            </div>
-                            <div class="title">
-                                New to BlockHub
-                            </div>
-                            <div class="last-post">
-                                Just Now
-                            </div>
-                            <div class="discussion">
-                                65 000
-                            </div>
-                        </div>
-                    </div>
-                    <c-pagination :pages="6" />
-                </c-block>
-                <c-block title="General" class="margin-top-30" :noGutter="true" :onlyContentBg="true">
-                    <div class="community-item" v-for="(post, index) in posts" :key="index">
-                        <div class="community-item__header">
-                            <div class="icon">
-                                <i class="fas" :class="post_icon"></i>
-                            </div>
-                            <div class="text">
-                                {{ post.title }}
 
-                                {{ post.title.status }}
-                            </div>
-                            <div class="statistic">
-                                <div class="rating" :class="[ post.rate < 0 ? 'down' : 'up' ]">
-                                    <i class="fas" :class="[ post.rate < 0 ? 'fa-chevron-down' : 'fa-chevron-up' ]"></i>
-                                    {{ post.rate < 0 ? post.rate * -1 : post.rate }}
-                                </div>
-                                <div class="user">
-                                    <span class="time">25 min</span>
-                                    <c-img :src="post.author.img"/>
-                                    <span class="name">{{ post.author.name }}</span>
-                                </div>
-                                <div class="comments_count">
-                                    <i class="fas fa-comment"></i>
-                                    {{ post.comments_count }}
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <c-pagination :pages="6" />
                 </c-block>
             </div>
         </div>
@@ -118,7 +32,7 @@
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
-            'c-pagination': (resolve) => require(['@/ui/components/pagination'], resolve),
+            'c-community-item': (resolve) => require(['@/ui/components/pagination'], resolve)
         },
         data() {
             return {
