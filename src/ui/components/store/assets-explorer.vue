@@ -9,17 +9,21 @@
 
                 <div class="filter-blk d-flex justify-content-between align-items-center margin-bottom-20">
                     <div class="d-inline-flex align-items-center">
-                        <c-dropdown-menu title="FILTER BY GENRE">
-                            <c-list
-                                :items="selectableGenres"
-                                @click="item => item.selected = !item.selected"
-                            />
-                        </c-dropdown-menu>
                         <c-dropdown-menu
+                            class="margin-right-10"
                             title="FILTER BY PRODUCTS"
                         >
                             <c-list
                                 :items="selectableProducts"
+                                @click="item => item.selected = !item.selected"
+                            />
+                        </c-dropdown-menu>
+                        <c-dropdown-menu
+                            class="margin-right-10"
+                            title="FILTER BY GENRE"
+                        >
+                            <c-list
+                                :items="selectableGenres"
                                 @click="item => item.selected = !item.selected"
                             />
                         </c-dropdown-menu>
@@ -34,9 +38,50 @@
                         icon_hide
                     >View All</c-button>
                 </div>
+                <transition name="slide-in-top">
+                    <div v-if="filtersActive">
+                        Active filters:
+                        <div class="flex-center-wrap">
+                            <c-option-tag
+                                v-if="phrase"
+                                title="Name:"
+                                :text="phrase"
+                                @delete="phrase = ''"
+                            />
+                            <c-option-tag
+                                v-if="selectedProducts.length"
+                                title="PRODUCTS:"
+                                @delete="selectedProducts.forEach(product => product.selected = false)"
+                            >
+                                <c-option-tag
+                                    v-for="(product, index) in selectedProducts"
+                                    :key="index"
+                                    :text="product.name"
+                                    @delete="product.selected = false"
+                                    isChildren
+                                />
+                            </c-option-tag>
+                            <c-option-tag
+                                v-if="selectedGenres.length"
+                                title="GENRES:"
+                                @delete="selectedGenres.forEach(genre => genre.selected = false)"
+                            >
+                                <c-option-tag
+                                    v-for="(genre, index) in selectedGenres"
+                                    :key="index"
+                                    :text="genre.name"
+                                    @delete="genre.selected = false"
+                                    isChildren
+                                />
+                            </c-option-tag>
+                            <c-option-tag >
+                            </c-option-tag>
+                        </div>
+                    </div>
+                </transition>
                 <c-content-navigation
-                    v-if="assets.length"
-                    :items="assets"
+                    v-if="filteredAssets.length"
+                    :items="filteredAssets"
                 >
                     <c-assets-list
                         slot-scope="{ items }"
@@ -44,6 +89,15 @@
                         :itemInRow="2"
                     />
                 </c-content-navigation>
+                <div v-else-if="filtersActive">
+                    <p>No products were found using these filters. Want to <c-button status="plain">Check for updates</c-button>?</p>
+                    <c-button
+                        status="info"
+                        size="md"
+                        icon_hide
+                        @click="clearFilters()"
+                    >Clear filters</c-button>
+                </div>
                 <p v-else>
                     Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?
                 </p>
@@ -54,7 +108,6 @@
 
 <script>
     import { mapGetters } from 'vuex';
-    import { arrayHandler } from '@/mixins';
 
     export default {
         name: 'assets-explorer',
@@ -73,19 +126,69 @@
             'c-assets-list': (resolve) => require(['@/ui/components/assets-list-item'], resolve),
             'c-dropdown-menu': (resolve) => require(['@/ui/components/dropdown-menu/type-3'], resolve),
             'c-list': (resolve) => require(['@/ui/components/list'], resolve),
+            'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve)
         },
         data() {
             return {
                 phrase: '',
                 selectableGenres: [],
-                selectableProducts: []
+                selectableProducts: [],
+                sortBy: {
+                    property: '',
+                    asc: true
+                }
+            }
+        },
+        methods: {
+            clearFilters() {
+                this.phrase = '';
+                this.sortBy.property = '';
+                this.sortBy.asc = true;
+                this.selectedProducts.forEach(product => product.selected = false);
+                this.selectedGenres.forEach(genre => genre.selected = false);
             }
         },
         computed: {
             ...mapGetters({
                 'genres': 'marketplace/productsTags',
                 'products': 'marketplace/assetsProducts'
-            })
+            }),
+            selectedProducts() {
+                return this.selectableProducts.filter(product => product.selected);
+            },
+            selectedProductsNames() {
+                return this.selectedProducts.map(product => product.name);
+            },
+            selectedGenres() {
+                return this.selectableGenres.filter(genre => genre.selected);
+            },
+            filtersActive() {
+                return !!(this.selectedProducts.length
+                    || this.phrase
+                    || this.selectedGenres.length
+                    || this.sortBy.property);
+            },
+            filteredAssets() {
+                const { property, asc } = this.sortBy;
+                const { phrase, selectedProductsNames } = this;
+                const sortDir = dir => asc ? dir : dir * -1;
+
+                return this.assets
+                    .filter(asset => phrase
+                        ? asset.name.toLowerCase().includes(phrase.toLowerCase())
+                        : true
+                    )
+                    .filter(asset => selectedProductsNames.length
+                        ? selectedProductsNames.includes(asset.product_name)
+                        : true
+                    )
+                    .sort((a, b) => property
+                        ? a[property] > b[property]
+                            ? sortDir(1)
+                            : a[property] < b[property] ? sortDir(-1) : 0
+                        : 0
+                    );
+            }
         },
         mounted() {
             this.selectableGenres = this.genres.map(name => ({ name, selected: false }));

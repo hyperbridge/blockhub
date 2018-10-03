@@ -1,12 +1,17 @@
 <template>
     <div class="dropdown-vue">
         <button
-            class="dropdown-vue__button"
             type="button"
+            class="dropdown-vue__button"
+            :class="{ 'dropdown-vue__button--active': showMenu }"
             @click="showMenu = !showMenu"
         >
             {{ title }}
-            <c-icon name="caret-down"/>
+            <c-icon
+                name="caret-down"
+                class="dropdown-vue__icon"
+                :class="{ 'dropdown-vue__icon--active': showMenu }"
+            />
         </button>
         <transition name="slide-in-top">
             <div v-if="showMenu" class="dropdown-vue__content">
@@ -38,6 +43,7 @@
         position: relative;
     }
     .dropdown-vue__button {
+        cursor: pointer;
         border-style: none;
         border-radius: 6px;
         background: rgba(53, 55, 87, 0.7);
@@ -45,9 +51,15 @@
         min-width: 140px;
         color: #fff;
         font-size: 11px;
-        margin: 5px;
-        .fas {
-            margin-left: 4px;
+        &.dropdown-vue__button--active {
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+        }
+    }
+    .dropdown-vue__icon {
+        margin-left: 4px;
+        transition: transform .2s ease;
+        &.dropdown-vue__icon--active {
+            transform: rotate(180deg);
         }
     }
     .dropdown-vue__content {
@@ -56,8 +68,8 @@
         width: 170px;
         z-index: 30;
         position: absolute;
-        top: 40px;
-        left: 5px;
+        top: 35px;
+        left: 0;
         box-shadow: 0 0 10px 0 rgba(27, 28, 48, 0.7);
     }
 </style>

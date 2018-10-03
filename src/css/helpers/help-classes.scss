@@ -270,3 +270,9 @@
     margin: 0;
     padding: 0;
 }
+
+.flex-center-wrap {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
