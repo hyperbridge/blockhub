@@ -1,7 +1,7 @@
 <template>
     <ul class="list-container">
         <li v-for="(item, index) in items" :key="index">
-            <slot name="link">
+            <slot name="item" :item="item">
                 <a
                     @click="$emit('click', item)"
                     class="item__link"
@@ -33,6 +33,7 @@
         list-style-type: none;
         overflow-y: auto;
         background: rgba(36, 37, 59, .8);
+        background: #27283D;
         border-radius: 4px;
     }
     .item__link {

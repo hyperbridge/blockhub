@@ -10,20 +10,29 @@
                 <div class="filter-blk d-flex justify-content-between align-items-center margin-bottom-20">
                     <div class="d-inline-flex align-items-center">
                         <c-dropdown-menu title="FILTER BY GENRE">
+                            <c-list
+                                :items="selectableGenres"
+                                @click="item => item.selected = !item.selected"
+                            />
                         </c-dropdown-menu>
-                        <c-dropdown-menu title="FILTER BY PRODUCTS" :items="products">
-                            <template slot-scope="{ item }">
-                                {{ item }}
-                            </template>
+                        <c-dropdown-menu
+                            title="FILTER BY PRODUCTS"
+                        >
+                            <c-list
+                                :items="selectableProducts"
+                                @click="item => item.selected = !item.selected"
+                            />
                         </c-dropdown-menu>
-                        <c-dropdown id="test2" name="Filter by Genre" :showBg="true">
-                            <a href="#3">RPG</a>
-                            <a href="#3">ACTION</a>
-                            <a href="#3">Cars</a>
-                        </c-dropdown>
-                        <c-searcher customClass="mb-0" />
+                        <c-input-searcher
+                            class="assets-explorer__input-searcher"
+                            v-model="phrase"
+                        />
                     </div>
-                    <c-button status="info" :icon_hide="true" v-if="assets.length">View All</c-button>
+                    <c-button
+                        v-if="assets.length"
+                        status="info"
+                        icon_hide
+                    >View All</c-button>
                 </div>
                 <c-content-navigation
                     v-if="assets.length"
@@ -45,6 +54,7 @@
 
 <script>
     import { mapGetters } from 'vuex';
+    import { arrayHandler } from '@/mixins';
 
     export default {
         name: 'assets-explorer',
@@ -59,19 +69,33 @@
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-heading-bar-fields' : (resolve) => require(['@/ui/components/heading-bar/additional-action'], resolve),
             'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
-            'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
+            'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
             'c-assets-list': (resolve) => require(['@/ui/components/assets-list-item'], resolve),
             'c-dropdown-menu': (resolve) => require(['@/ui/components/dropdown-menu/type-3'], resolve),
+            'c-list': (resolve) => require(['@/ui/components/list'], resolve),
+        },
+        data() {
+            return {
+                phrase: '',
+                selectableGenres: [],
+                selectableProducts: []
+            }
         },
         computed: {
             ...mapGetters({
                 'genres': 'marketplace/productsTags',
                 'products': 'marketplace/assetsProducts'
             })
+        },
+        mounted() {
+            this.selectableGenres = this.genres.map(name => ({ name, selected: false }));
+            this.selectableProducts = this.products.map(name => ({ name, selected: false }));
         }
     }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+    .assets-explorer__input-searcher {
+        margin-left: 5px;
+    }
 </style>
