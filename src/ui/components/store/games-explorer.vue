@@ -80,11 +80,11 @@
                             >
                                 <select v-model="sortBy.property">
                                     <option
-                                        v-for="prop in sortProps"
-                                        :key="prop"
-                                        :value="prop"
+                                        v-for="opt in sortOptions"
+                                        :key="opt.property"
+                                        :value="opt.property"
                                     >
-                                        {{ prop | upperFirstChar }}
+                                        {{ opt.title }}
                                     </option>
                                 </select>
                             </c-option-tag>
@@ -217,10 +217,7 @@
             },
             filtersActive() {
                 const { phrase, selectedGenres, sortBy: { property } } = this;
-                return phrase.length || selectedGenres.length || property;
-            },
-            sortProps() {
-                return this.sortOptions.map(option => option.property);
+                return !!(phrase.length || selectedGenres.length || property);
             }
         }
     }

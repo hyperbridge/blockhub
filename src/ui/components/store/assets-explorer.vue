@@ -3,8 +3,16 @@
         <div class="col-12">
             <c-block title="Top 20 Items" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                 <template slot="additional-action">
-                    <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
-                    <c-heading-bar-fields name="Trading" icon="star" @clickUp=""  @clickDown="" />
+                    <span class="margin-right-15">Sort by:</span>
+                    <c-heading-bar-fields
+                        v-for="(opt, index) in sortOptions"
+                        :key="index"
+                        :name="opt.title"
+                        :icon="opt.icon"
+                        @clickUp="setSort(opt.property, true)"
+                        @clickDown="setSort(opt.property, false)"
+                        :activeUp="sortBy.property === opt.property ? sortBy.asc : null"
+                    />
                 </template>
 
                 <div class="filter-blk d-flex justify-content-between align-items-center margin-bottom-20">
@@ -74,7 +82,42 @@
                                     isChildren
                                 />
                             </c-option-tag>
-                            <c-option-tag >
+                            <c-option-tag
+                                v-if="sortBy.property"
+                                title="SORT BY:"
+                                @delete="sortBy.property = ''; sortBy.asc = true"
+                            >
+                                <c-option-tag
+                                    title="Property:"
+                                    @delete="sortBy.property = ''"
+                                    isChildren
+                                    :isParent="false"
+                                >
+                                    <select v-model="sortBy.property">
+                                        <option
+                                            v-for="opt in sortOptions"
+                                            :key="opt.property"
+                                            :value="opt.property"
+                                        >
+                                            {{ opt.title }}
+                                        </option>
+                                    </select>
+                                </c-option-tag>
+                                <c-option-tag
+                                    title="Direction:"
+                                    @delete="sortBy.asc = !sortBy.asc"
+                                    isChildren
+                                    :isParent="false"
+                                    hideButton
+                                >
+                                    {{ sortBy.asc ? 'Ascending' : 'Descending' }}
+                                    <c-icon
+                                        name="arrow-up"
+                                        class="sort-button"
+                                        :class="{ 'desc': !sortBy.asc }"
+                                        @click="sortBy.asc = !sortBy.asc"
+                                    />
+                                </c-option-tag>
                             </c-option-tag>
                         </div>
                     </div>
@@ -136,7 +179,11 @@
                 sortBy: {
                     property: '',
                     asc: true
-                }
+                },
+                sortOptions: [
+                    { title: 'Name', property: 'name', icon: 'language' },
+                    { title: 'Price', property: 'price', icon: 'dollar-sign' },
+                ]
             }
         },
         methods: {
@@ -146,6 +193,13 @@
                 this.sortBy.asc = true;
                 this.selectedProducts.forEach(product => product.selected = false);
                 this.selectedGenres.forEach(genre => genre.selected = false);
+            },
+            setSort(prop, direction) {
+                const { property, asc } = this.sortBy;
+                this.sortBy.property = property === prop && direction === asc
+                 ? null
+                 : prop
+                this.sortBy.asc = direction;
             }
         },
         computed: {
@@ -200,5 +254,13 @@
 <style lang="scss" scoped>
     .assets-explorer__input-searcher {
         margin-left: 5px;
+    }
+    .sort-button {
+        cursor: pointer;
+        margin-left: 4px;
+        transition: transform .2s ease;
+        &.desc {
+            transform: rotate(180deg);
+        }
     }
 </style>
