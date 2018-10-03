@@ -269,7 +269,11 @@
         methods: {
             showPurchaseModal() {
                 if (this.$store.state.marketplace.desktop_mode) {
-                    this.$store.commit('network/activateModal', 'purchase')
+                    if (this.$store.state.network.signed_in) {
+                        this.$store.commit('network/activateModal', 'purchase')
+                    } else {
+                        this.$store.commit('network/activateModal', 'login')
+                    }
                 } else {
                     this.$store.commit('network/activateModal', 'download')
                 }
