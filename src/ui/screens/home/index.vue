@@ -27,8 +27,8 @@
                                     <c-button @click="$store.state.network.connection.auto = !$store.state.network.connection.auto">Auto Connect is {{ $store.state.network.connection.auto ? 'ON' : 'OFF' }}</c-button>
                                     <c-button @click="$store.state.network.connection.internet = !$store.state.network.connection.internet">Internet is {{ $store.state.network.connection.internet ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
                                     <c-button @click="$store.state.network.connection.datasource = !$store.state.network.connection.datasource">Datasource is {{ $store.state.network.connection.datasource ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
-                                    <c-button @click="$store.state.network.connection.operator = !$store.state.network.connection.operator">Operator is {{ $store.state.network.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
-                                    <c-button @click="$store.state.network.connection.ethereum = !$store.state.network.connection.ethereum">Ethereum is {{ $store.state.network.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <c-button @click="$store.state.network.connection.operator = !$store.state.network.connection.operator" v-if="desktop_mode">Operator is {{ $store.state.network.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <c-button @click="$store.state.network.connection.ethereum = !$store.state.network.connection.ethereum" v-if="desktop_mode">Ethereum is {{ $store.state.network.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
                                     <br /><br />
                                 </div>
                                 <div>
