@@ -85,7 +85,7 @@ export default {
                     title: 'Featured',
                     ref: 'featured_products_sl',
                     swiper: this.$refs.featured_products_sl && this.$refs.featured_products_sl.swiper,
-                    options: this.demoSlider,
+                    slidesPerView: 3,
                     products: this.$store.state.marketplace.featured_products
                 }
             })
@@ -111,10 +111,7 @@ export default {
                 type: 'product_slider',
                 data: {
                     title: 'New Releases',
-                    options: {
-                        slidesPerView: 3,
-                        spaceBetween: 0,
-                    },
+                    slidesPerView: 3,
                     products: this.$store.state.marketplace.new_products
                 }
             })
@@ -133,10 +130,7 @@ export default {
                 type: 'product_slider',
                 data: {
                     title: 'Summer Sale',
-                    options: {
-                        slidesPerView: 3,
-                        spaceBetween: 0
-                    },
+                    slidesPerView: 3,
                     products: this.$store.state.marketplace.sale_products
                 }
             })
@@ -151,6 +145,13 @@ export default {
             result.push({
                 type: 'curator_reviews',
                 data: {
+                    title: 'From our curators',
+                    ref: 'curator_reviews_sl',
+                    swiper: this.$refs.curator_reviews_sl && this.$refs.curator_reviews_sl.swiper,
+                    options: {
+                        slidesPerView: 3,
+                        spaceBetween: 0
+                    },
                     reviews: this.$store.state.marketplace.curator_reviews
                 }
             })

@@ -134,10 +134,20 @@
 
                 <div class="row margin-bottom-30" v-if="item.type === 'curator_reviews'" :key="`level-1-${index}`">
                     <div class="col-12">
-                        <c-block title="From Our Curators" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                            <c-curator-reviews
-                                :reviews="item.data.reviews"
+                        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                            <c-heading-bar
+                                slot="title"
+                                class="mb-0"
+                                :name="item.data.title"
+                                :showArrows="showArrowsState(item.data.reviews, 3)"
+                                :prevClick="() => this.$refs['swiper-' + index].swiper.slidePrev()"
+                                :nextClick="() => this.$refs['swiper-' + index].swiper.slideNext()"
                             />
+                            <c-swiper :options="item.data.options" :ref="`swiper-${index}`">
+                                <c-slide v-for="(review, index) in item.data.reviews" :key="index">
+                                    <c-curator-review  :review="review" />
+                                </c-slide>
+                            </c-swiper>
                         </c-block>
                     </div>
                 </div>
@@ -288,7 +298,7 @@ export default {
         'c-product-cards': (resolve) => require(['@/ui/components/store/product-cards'], resolve),
         'c-product-slider': (resolve) => require(['@/ui/components/store/product-slider'], resolve),
         'c-projects-card': (resolve) => require(['@/ui/components/project/card'], resolve),
-        'c-curator-reviews': (resolve) => require(['@/ui/components/store/curator-reviews'], resolve),
+        'c-curator-review': (resolve) => require(['@/ui/components/store/curator-review'], resolve),
         'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
         'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
         'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),

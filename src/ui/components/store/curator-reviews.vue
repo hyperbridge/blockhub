@@ -17,9 +17,9 @@
         name: 'curator-reviews',
         components: {
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
-            'c-curator-review': (resolve) => require(['@/ui/components/store/curator-review'], resolve)
+            'c-curator-review': (resolve) => require(['@/ui/components/store/curator-review'], resolve),
             'c-swiper': swiper,
-            'c-slide': swiperSlide,
+            'c-slide': swiperSlide
         },
         props: {
             reviews: {
