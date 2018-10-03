@@ -1,56 +1,54 @@
 <template>
     <div class="curator-reviews-wrapper">
-        <div class="curator-reviews-wrapper__content">
-            <c-curator-review
-                v-for="(review, index) in reviews"
-                :key="index"
-                :review="review"
-                v-if="index <= 3"
-            />
-            <p v-if="!reviews.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
-        </div>
+        <c-swiper v-if="reviews.length">
+            <c-slide v-for="(review, index) in reviews" :key="index">
+                <c-curator-review :review="review" />
+            </c-slide>
+        </c-swiper>
+        <p v-if="!reviews.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
     </div>
 </template>
 
 <script>
+    import 'swiper/dist/css/swiper.css'
+    import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
     export default {
         name: 'curator-reviews',
         components: {
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
             'c-curator-review': (resolve) => require(['@/ui/components/store/curator-review'], resolve)
+            'c-swiper': swiper,
+            'c-slide': swiperSlide,
         },
         props: {
             reviews: {
                 type: Array,
                 require: true
             }
+        },
+        data(){
+            return{
+                sliderOptions: {
+                    slidesPerView: this.maxPerView,
+                    spaceBetween: 15,
+                },
+            }
+        },
+        methods:{
+            showArrowsState(el, count) {
+                if ( el.length > count) {
+                    return true
+                } else {
+                    return false
+                }
+            },
+        },
+        computed:{
+            pr_slider() {
+                return this.$refs.pr_slider.swiper;
+            },
         }
     }
 </script>
 
-<style lang="scss" scoped>
-@import '@/css/helpers/mixins.scss';
-
-.curator-reviews-wrapper {
-    box-sizing: border-box;
-    padding: 5px 0;
-    border-radius: 4px;
-    color: #fff;
-    &__content {
-        width: 100%;
-        display: flex;
-        align-items: flex-start;
-        overflow-x: auto;
-        overflow-y: hidden;
-        white-space: nowrap;
-        @include width-max-lg {
-            flex-direction: column;
-        }
-        @include width-min-lg {
-            .curator-review {
-                width: 33%;
-            }
-        }
-    }
-}
-</style>
