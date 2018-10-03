@@ -145,7 +145,7 @@
         "image": "http://www.tosbase.com/content/img/icons/items/icon_item_shirts_neo_black.png",
         "price": {
             "min": 100.99,
-            "max": 3339.99,
+            "max": 20.99,
             "current": 209.99
         },
         "count": "5.00",
@@ -211,7 +211,7 @@
         "image": "https://tos.neet.tv/images/equip/icon_item_9rank_iorn_02_amor.png",
         "price": {
             "min": 0.99,
-            "max": 9.99,
+            "max": 100.99,
             "current": 2.99
         },
         "count": "50.00",
@@ -479,7 +479,7 @@
         "image": "https://tos.neet.tv/images/equip/icon_item_iorn_shirt_1.png",
         "price": {
             "min": 0.99,
-            "max": 9.99,
+            "max": 59.99,
             "current": 2.99
         },
         "count": "450.00",

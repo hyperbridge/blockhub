@@ -104,6 +104,22 @@
                                     </select>
                                 </c-option-tag>
                                 <c-option-tag
+                                    v-if="sortBy.property === 'price'"
+                                    title="Price:"
+                                    :isParent="false"
+                                    isChildren
+                                >
+                                    <select v-model="sortBy.priceProp">
+                                        <option
+                                            v-for="priceProp in priceProps"
+                                            :key="priceProp"
+                                            :value="priceProp"
+                                        >
+                                            {{ priceProp | upperFirstChar }}
+                                        </option>
+                                    </select>
+                                </c-option-tag>
+                                <c-option-tag
                                     title="Direction:"
                                     @delete="sortBy.asc = !sortBy.asc"
                                     isChildren
@@ -178,6 +194,7 @@
                 selectableProducts: [],
                 sortBy: {
                     property: '',
+                    priceProp: 'current',
                     asc: true
                 },
                 sortOptions: [
@@ -223,7 +240,7 @@
                     || this.sortBy.property);
             },
             filteredAssets() {
-                const { property, asc } = this.sortBy;
+                const { property, asc, priceProp } = this.sortBy;
                 const { phrase, selectedProductsNames } = this;
                 const sortDir = dir => asc ? dir : dir * -1;
 
@@ -237,11 +254,18 @@
                         : true
                     )
                     .sort((a, b) => property
-                        ? a[property] > b[property]
-                            ? sortDir(1)
-                            : a[property] < b[property] ? sortDir(-1) : 0
+                        ? property === 'price'
+                            ? a.price[priceProp] > b.price[priceProp]
+                                ? sortDir(1)
+                                : a.price[priceProp] < b.price[priceProp] ? sortDir(-1) : 0
+                            : a[property] > b[property]
+                                ? sortDir(1)
+                                : a[property] < b[property] ? sortDir(-1) : 0
                         : 0
                     );
+            },
+            priceProps() {
+                return Object.keys(this.assets[0].price);
             }
         },
         mounted() {
