@@ -728,7 +728,7 @@ export default {
     methods: {
         ...mapMutations(['UPDATE_CLIENT_SETTINGS']),
         updateClientSettings(prop) {
-            this.$store.commit('network/UPDATE_CLIENT_SETTINGS', prop);
+            this.$store.commit('application/UPDATE_CLIENT_SETTINGS', prop);
         },
         clearDatabase() {debugger
             let DBDeleteRequest = window.indexedDB.deleteDatabase("LokiCatalog")
@@ -753,7 +753,7 @@ export default {
     },
     computed: {
         settings() {
-            return this.$store.state.network.account.settings;
+            return this.$store.state.application.account.settings;
         }
     }
 }

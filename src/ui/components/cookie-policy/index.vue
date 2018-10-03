@@ -46,7 +46,7 @@ export default {
     methods: {
         ...mapMutations(['UPDATE_CLIENT_SETTINGS']),
         updateClientSettings() {
-            this.$store.commit('network/UPDATE_CLIENT_SETTINGS', 'cookie_policy_accepted');
+            this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'cookie_policy_accepted');
             this.show = false;
         },
         showPopup(){
@@ -58,7 +58,7 @@ export default {
     },
     computed: {
         settings() {
-            return this.$store.state.network.account.settings;
+            return this.$store.state.application.account.settings;
         }
     }
 }

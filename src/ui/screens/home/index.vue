@@ -24,11 +24,11 @@
                                     <br /><br />
                                 </div>
                                 <div>
-                                    <c-button @click="$store.state.network.connection.auto = !$store.state.network.connection.auto">Auto Connect is {{ $store.state.network.connection.auto ? 'ON' : 'OFF' }}</c-button>
-                                    <c-button @click="$store.state.network.connection.internet = !$store.state.network.connection.internet">Internet is {{ $store.state.network.connection.internet ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
-                                    <c-button @click="$store.state.network.connection.datasource = !$store.state.network.connection.datasource">Datasource is {{ $store.state.network.connection.datasource ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
-                                    <c-button @click="$store.state.network.connection.operator = !$store.state.network.connection.operator" v-if="desktop_mode">Operator is {{ $store.state.network.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
-                                    <c-button @click="$store.state.network.connection.ethereum = !$store.state.network.connection.ethereum" v-if="desktop_mode">Ethereum is {{ $store.state.network.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <c-button @click="$store.state.application.connection.auto = !$store.state.application.connection.auto">Auto Connect is {{ $store.state.application.connection.auto ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="$store.state.application.connection.internet = !$store.state.application.connection.internet">Internet is {{ $store.state.application.connection.internet ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <c-button @click="$store.state.application.connection.datasource = !$store.state.application.connection.datasource">Datasource is {{ $store.state.application.connection.datasource ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <c-button @click="$store.state.application.connection.operator = !$store.state.application.connection.operator" v-if="desktop_mode">Operator is {{ $store.state.application.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                                    <c-button @click="$store.state.application.connection.ethereum = !$store.state.application.connection.ethereum" v-if="desktop_mode">Ethereum is {{ $store.state.application.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
                                     <br /><br />
                                 </div>
                                 <div>
@@ -39,6 +39,17 @@
                                 <div v-if="desktop_mode">
                                     <input ref="desktopMessage" type="text" />
                                     <c-button @click="sendDesktopMessage()">Send Message To Desktop</c-button>
+                                </div>
+                                <div v-if="developer_mode">
+                                    <h4>Darklaunch Manager</h4>
+                                    <select id="darklaunch-editor" class="form-control" multiple="multiple">
+                                        <option v-for="(flag, index) in $store.state.application.darklaunch_flags.map(flag => flag.key)"
+                                            :key="index"
+                                            :selected="$store.state.application.account.darklaunch_flags.map(flag => flag.enabled ? flag.key : null).includes(flag)"
+                                        >
+                                            {{ flag }}
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +108,7 @@ export default {
                     ref: 'collections_sl',
                     swiper: this.$refs.collections_sl && this.$refs.collections_sl.swiper,
                     options: {
-                        slidesPerView: 4,
+                        slidesPerView: 3,
                         spaceBetween: 10,
                         pagination: {
                             el: '.swiper-pagination',
@@ -252,30 +263,30 @@ export default {
             return this.$store.state.marketplace.main_banner;
         },
         signed_in() {
-            return this.$store.state.network.signed_in;
+            return this.$store.state.application.signed_in;
         },
         simulator_mode() {
-            return this.$store.state.marketplace.simulator_mode;
+            return this.$store.state.application.simulator_mode;
         },
         desktop_mode() {
-            return this.$store.state.marketplace.desktop_mode;
+            return this.$store.state.application.desktop_mode;
         },
         developer_mode() {
-            return this.$store.state.marketplace.developer_mode;
+            return this.$store.state.application.developer_mode;
         }
     },
     methods: {
         toggleDesktopMode() {
-            this.$store.state.marketplace.desktop_mode = !this.$store.state.marketplace.desktop_mode
+            this.$store.state.application.desktop_mode = !this.$store.state.application.desktop_mode
         },
         toggleSignedIn() {
-            this.$store.state.network.signed_in = !this.$store.state.network.signed_in
+            this.$store.state.application.signed_in = !this.$store.state.application.signed_in
         },
         toggleDeveloperMode() {
-            this.$store.state.marketplace.developer_mode = !this.$store.state.marketplace.developer_mode
+            this.$store.state.application.developer_mode = !this.$store.state.application.developer_mode
         },
         toggleSimulator() {
-            this.$store.commit('marketplace/setSimulatorMode', !this.$store.state.marketplace.simulator_mode)
+            this.$store.commit('marketplace/setSimulatorMode', !this.$store.state.application.simulator_mode)
         },
         importSeedData() {
             window.BlockHub.importSeedData()

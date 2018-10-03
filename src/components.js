@@ -7,6 +7,7 @@ import Switch from '@/ui/components/switch'
 import Icon from '@/ui/components/icon'
 import Input from '@/ui/components/inputs'
 import Img from '@/ui/components/img'
+import Darklaunch from '@/ui/components/darklaunch'
 
 Vue.component('c-layout', Layout)
 Vue.component('c-heading-bar', HeadingBar)
@@ -15,3 +16,4 @@ Vue.component('c-switch', Switch)
 Vue.component('c-icon', Icon)
 Vue.component('c-input', Input)
 Vue.component('c-img', Img)
+Vue.component('c-darklaunch', Darklaunch)

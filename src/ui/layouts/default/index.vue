@@ -36,10 +36,10 @@
                         <div class="loader-block__status-message">
                             <p>{{ connection_status.message }}</p>
                             <div>Internet Connection <span class="fa"
-                                                           :class="{'fa-check-circle': $store.state.network.connection.internet, 'fa-times-circle': !$store.state.network.connection.internet }"></span>
+                                                           :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }"></span>
                             </div>
                             <div>Server Connection <span class="fa"
-                                                         :class="{'fa-check-circle': $store.state.network.connection.datasource, 'fa-times-circle': !$store.state.network.connection.datasource }"></span>
+                                                         :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }"></span>
                             </div>
                         </div>
 
@@ -54,7 +54,7 @@
             </div>
 
             <!-- SIDEPANEL -->
-            <transition name="slideRight" v-if="initialized">
+            <transition name="slideRight" v-if="initialized && showSidepanel">
                 <c-sidepanel>
                 <c-swiper :options="panelOption" ref="mySwiper">
                     <c-slide v-if="desktop_mode">
@@ -335,14 +335,22 @@
 
 
 <script>
+    import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
     import 'swiper/dist/css/swiper.css'
 
-    import {swiper, swiperSlide} from 'vue-awesome-swiper'
-
     export default {
-        props: [
-            'navigationKey'
-        ],
+        props: {
+            navigationKey: {
+                type: String,
+                required: true
+            },
+            showSidepanel: {
+                type: Boolean,
+                default: true,
+                required: false
+            }
+        },
         components: {
             'c-header': (resolve) => require(['@/ui/components/headers/basic'], resolve),
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
@@ -368,37 +376,37 @@
         },
         computed: {
             is_connected() {
-                return this.$store.state.network.connection.internet && this.$store.state.network.connection.datasource
+                return this.$store.state.application.connection.internet && this.$store.state.application.connection.datasource
             },
             connection_status() {
-                return this.$store.state.network.connection.status
+                return this.$store.state.application.connection.status
             },
             user_submitted_connection_message() {
-                return this.$store.state.network.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.network.user_submitted_connection_messages.length))]
+                return this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))]
             },
             swiper() {
                 return this.$refs.mySwiper.swiper
             },
             unlock_modal_active() {
-                return this.$store.state.network.active_modal === 'unlock'
+                return this.$store.state.application.active_modal === 'unlock'
             },
             send_funds_modal_active() {
-                return this.$store.state.network.active_modal === 'send-funds'
+                return this.$store.state.application.active_modal === 'send-funds'
             },
             login_modal_active() {
-                return this.$store.state.network.active_modal === 'login'
+                return this.$store.state.application.active_modal === 'login'
             },
             purchase_modal_active() {
-                return this.$store.state.network.active_modal === 'purchase'
+                return this.$store.state.application.active_modal === 'purchase'
             },
             download_modal_active() {
-                return this.$store.state.network.active_modal === 'download'
+                return this.$store.state.application.active_modal === 'download'
             },
             notifs() {
-                return this.$store.state.network.account.notifications
+                return this.$store.state.application.account.notifications
             },
             desktop_mode() {
-                return this.$store.state.marketplace.desktop_mode
+                return this.$store.state.application.desktop_mode
             }
         },
         data() {
@@ -437,7 +445,7 @@
 
             },
             closePopup() {
-                this.$store.state.network.active_modal = null
+                this.$store.state.application.active_modal = null
             },
             closeNotifPopup() {
                 this.notifPopup = {};

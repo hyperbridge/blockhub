@@ -304,7 +304,7 @@
         },
         computed: {
             wallets() {
-                return this.$store.state.network.wallets
+                return this.$store.state.application.wallets
             }
         },
         methods: {

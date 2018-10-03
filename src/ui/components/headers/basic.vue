@@ -132,19 +132,19 @@ export default {
     },
     computed: {
         developer_mode() {
-            return this.$store.state.marketplace.developer_mode
+            return this.$store.state.application.developer_mode
         },
         is_editing() {
             return this.$store.state.marketplace.editor_mode === 'editing'
         },
         signed_in() {
-            return this.$store.state.network.signed_in
+            return this.$store.state.application.signed_in
         },
         is_loading() {
-            return this.$store.state.network.loading
+            return this.$store.state.application.loading
         },
         desktop_mode() {
-            return this.$store.state.marketplace.desktop_mode
+            return this.$store.state.application.desktop_mode
         }
     },
     methods: {
@@ -161,7 +161,7 @@ export default {
             this.$store.dispatch('marketplace/setEditorMode', 'viewing')
         },
         signOut() {
-            this.$store.dispatch('network/signOut')
+            this.$store.dispatch('application/signOut')
 
             this.is_loading = true
         },

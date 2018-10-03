@@ -1,11 +1,24 @@
 <template>
-    <div class="block w-100" :class="{ 'bg-gradient' : bgGradient, 'bg-color' : bgColor, 'no-gutter' : noGutter, 'only-content-bg' : onlyContentBg}">
-        <c-heading-bar :name="title" :class="{ 'mb-0' : onlyContentBg}" :showArrows="false" v-if="title">
+    <div
+        class="block w-100"
+        :class="{
+            'bg-gradient': bgGradient,
+            'bg-color': bgColor,
+            'no-gutter': noGutter,
+            'only-content-bg': onlyContentBg
+        }"
+    >
+        <c-heading-bar
+            v-if="title"
+            :name="title"
+            :class="{ 'mb-0' : onlyContentBg }"
+            :showArrows="false"
+        >
             <template slot="additional-action">
-                <slot name="heading-bar"></slot>
+                <slot name="additional-action"/>
             </template>
         </c-heading-bar>
-        <slot name="title" v-if="!title"></slot>
+        <slot name="title"/>
         <div class="block__content">
             <slot></slot>
         </div>

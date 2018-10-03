@@ -2,7 +2,7 @@
     <div class="navigation" id="navigation-default">
 
         <c-sidebar-menu
-            title="GAME"
+            title="CROWDFUND PROJECT"
             sub_title="Help"
             sub_icon="fas fa-question-circle"
             :links="links.game"

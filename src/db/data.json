@@ -1,7 +1,11 @@
 {
-    "network": {
+    "application": {
         "signed_in": false,
         "loading": false,
+        "simulator_mode": false,
+        "desktop_mode": null,
+        "developer_mode": false,
+        "editor_mode": "viewing",
         "connection": {
             "auto": true,
             "internet": false,
@@ -65,7 +69,7 @@
         "account": {
             "public_key": null,
             "first_name": null,
-            "last_name":  null,
+            "last_name": null,
             "birthday": null,
             "password": null,
             "email": null,
@@ -79,8 +83,48 @@
                     "pagination": true,
                     "cookie_policy_accepted": false
                 }
-            }
+            },
+            "darklaunch_flags": [
+                {
+                    "code": "COLLECTIONS",
+                    "enabled": true
+                },
+                {
+                    "code": "CURATORS",
+                    "enabled": true
+                },
+                {
+                    "code": "REALMS",
+                    "enabled": true
+                },
+                {
+                    "code": "BATTLE_PASS",
+                    "enabled": false
+                }
+            ]
         },
+        "darklaunch_flags": [
+            {
+                "code": "COLLECTIONS",
+                "description": "",
+                "type": "boolean"
+            },
+            {
+                "code": "CURATORS",
+                "description": "",
+                "type": "boolean"
+            },
+            {
+                "code": "BATTLE_PASS",
+                "description": "",
+                "type": "boolean"
+            },
+            {
+                "code": "REALMS",
+                "description": "",
+                "type": "boolean"
+            }
+        ],
         "migrations": {
             "latest": "1537948419066",
             "current": ""
@@ -283,10 +327,6 @@
             }
         },
         "current_ethereum_network": "local",
-        "simulator_mode": false,
-        "desktop_mode": null,
-        "developer_mode": false,
-        "editor_mode": "viewing",
         "selected_product": null,
         "first_product": true,
         "frontpage_product": {},
@@ -311,23 +351,6 @@
                 "size": "lg"
             }
         },
-        "flags": [
-            {
-                "key": "COLLECTIONS",
-                "description": "",
-                "type": "boolean"
-            },
-            {
-                "key": "CURATORS",
-                "description": "",
-                "type": "boolean"
-            },
-            {
-                "key": "BATTLE_PASS",
-                "description": "",
-                "type": "boolean"
-            }
-        ],
         "default_product": {
             "name": "My Product Name",
             "images": {

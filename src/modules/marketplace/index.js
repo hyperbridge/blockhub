@@ -28,9 +28,6 @@ const updateState = (savedData, updatedState = {}) => {
         special_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : []
     }
 
-    if (rawData.desktop_mode == null)
-        rawData.desktop_mode = window.isElectron
-
     const normalizedData = normalize(rawData, {
         assets: [schema.asset],
         products: [schema.product],
@@ -98,6 +95,12 @@ export const getters = {
                 : a[sortBy.property] < b[sortBy.property] ? sortDir(-1, sortBy.asc) : 0
             : 0
         )
+    ,
+    assetsProducts: (state, getters) => getters.assetsArray.reduce((products, asset) =>
+        products.includes(asset.product_name)
+            ? products
+            : [ ...products, asset.product_name ]
+        , []).sort()
 };
 
 export const actions = {

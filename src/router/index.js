@@ -448,7 +448,7 @@ export const Auth = {
     return true
   },
   accessGate(permission = false) {
-    const privileges = store.getters['network/privileges']
+      const privileges = store.getters['application/privileges']
     if (!permission) {
       return true
     }

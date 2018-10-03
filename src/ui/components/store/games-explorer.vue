@@ -80,11 +80,11 @@
                             >
                                 <select v-model="sortBy.property">
                                     <option
-                                        v-for="prop in sortProps"
-                                        :key="prop"
-                                        :value="prop"
+                                        v-for="opt in sortOptions"
+                                        :key="opt.property"
+                                        :value="opt.property"
                                     >
-                                        {{ prop | upperFirstChar }}
+                                        {{ opt.title }}
                                     </option>
                                 </select>
                             </c-option-tag>
@@ -111,15 +111,14 @@
                 v-if="filteredProducts.length"
                 :items="filteredProducts"
             >
-                <template slot-scope="slotProps">
-                    <c-game-grid
-                        :itemInRow="2"
-                        :showRating="false"
-                        :items="slotProps.items"
-                        showTime
-                        itemBg="transparent"
-                    />
-                </template>
+                <c-game-grid
+                    slot-scope="{ items }"
+                    :itemInRow="2"
+                    :showRating="false"
+                    :items="items"
+                    showTime
+                    itemBg="transparent"
+                />
             </c-content-navigation>
             <div v-else-if="filtersActive">
                 <p>No products were found using these filters. Want to <c-button status="plain">Check for updates</c-button>?</p>
@@ -218,10 +217,7 @@
             },
             filtersActive() {
                 const { phrase, selectedGenres, sortBy: { property } } = this;
-                return phrase.length || selectedGenres.length || property;
-            },
-            sortProps() {
-                return this.sortOptions.map(option => option.property);
+                return !!(phrase.length || selectedGenres.length || property);
             }
         }
     }
