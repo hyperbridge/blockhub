@@ -37,7 +37,10 @@ export default {
     props: {
         products: Array,
         title: String,
-        maxPerView: Number,
+        maxPerView: {
+            type: Number,
+            default: 3
+        },
         dynamic:{
             type: Boolean,
             default: true
