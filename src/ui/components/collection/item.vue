@@ -30,7 +30,7 @@
      computed:{
          getAsset(){
              let ids = this.item.assets,
-                 list = this.$store.state.marketplace.assets,
+                 list = this.$store.state.marketplace.assets || {},
                  arr = [];
              if (ids)
                  ids.forEach( (id, i) => {

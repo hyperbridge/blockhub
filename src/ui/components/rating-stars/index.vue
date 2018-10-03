@@ -9,25 +9,25 @@
 </template>
 
 <script>
-    export default {
-        name: 'rating-stars',
-        props: {
-            number: {
-                type: Number,
-                required: true
+export default {
+    name: 'rating-stars',
+    props: {
+        number: {
+            required: true
+        }
+    },
+    computed: {
+        stars() {
+            const stars = [];
+            let number = Number(this.number)
+            const parsed_number = Math.floor(number).toString();
+            for (let i = 0; i < parsed_number; i++) {
+                stars.push('star');
             }
-        },
-        computed: {
-            stars() {
-                const stars = [];
-                const parsed_number = Math.floor(this.number).toString();
-                for (let i = 0; i < parsed_number; i++) {
-                    stars.push('star');
-                }
-                return Number.isInteger(this.number) ? stars : [...stars, 'star-half'];
-            }
+            return Number.isInteger(number) ? stars : [...stars, 'star-half'];
         }
     }
+}
 </script>
 
 
