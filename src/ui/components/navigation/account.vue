@@ -1,5 +1,5 @@
 <template>
-    <div class="navigation" id="navigation-default">
+    <div class="navigation" id="navigation-default" v-if="signed_in">
         <c-sidebar-menu title="ACCOUNT" :links="links.account"/>
         <c-sidebar-menu sub_title="Legal" :links="links.legal"/>
         <c-sidebar-menu sub_title="Help" :links="links.help"/>
@@ -13,6 +13,9 @@
     export default {
         components: {
             'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve)
+        },
+        computed: {
+            signed_in() { return this.$store.state.application.signed_in; }
         },
         data() {
             return {

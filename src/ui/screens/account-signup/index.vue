@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="account-navigation">
+    <c-layout navigationKey="account-navigation" :showSidepanel="false">
         <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
@@ -308,35 +308,50 @@
                             </c-tab>
                             <c-tab :tab_id="2" :showFooter="true">
                                 <div class="tab-container">
-                                    <div class="padding-40">
-                                        <h3>Welcome, {{ account.first_name }}. Let's build your main identity.</h3>
-                                        <p>Be aware that all your future identities will be tied to this one</p>
-                                        <div class="row margin-top-40">
-                                            <div class="col">
-                                                <div class="tab-card">
-                                                    <h4>Please complete</h4>
-                                                    <c-user-card
-                                                        :user="account.identity"
-                                                        v-bind.sync="account.identity"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="tab-card">
-                                                    <h4>Preview your identity</h4>
-                                                    <c-user-card
-                                                        :user="account.identity"
-                                                        previewMode
-                                                    />
-                                                </div>
-                                            </div>
+                                    <div class="padding-40 loading-process" style="position: relative" v-if="!account.passphrase">
+                                        <div class="loading loading--w-spinner"><div><div class="loading-spinner"></div></div></div>
+                                    </div>
+                                    <div class="padding-40" v-else>
+                                        <h3>Welcome, {{ account.first_name }}!</h3>
+                                        <p>Make sure to write down your keyphase, password, and secret answer and put it somewhere safe.</p>
+
+                                        <br />
+                                        <p v-if="!verifyingPassphrase">Lets verify you've stored your passphrase somewhere safely.</p>
+                                        <p v-if="verifyingPassphrase">Please fill in the missing blanks below.</p>
+
+                                        <br />
+                                        <div class="passphrase" v-if="account.passphrase && !verifyingPassphrase">
+                                            <input type="text" class="form-control" v-for="(word, index) in account.passphrase.split(' ')" :key="index" :value="word" disabled />
                                         </div>
+                                        <div class="passphrase" ref="passphraseVerification" v-if="account.passphrase && verifyingPassphrase">
+                                            <input type="text" class="form-control" v-for="(word, index) in account.passphrase.split(' ')" :key="index" :value="[2, 4, 8, 13].includes(index) ? '' : word" />
+                                        </div>
+
+                                        <br />
+                                        <c-button class="c-btn-lg" v-if="!verifyingPassphrase" @click="verifyPassphrase()">Verify Now</c-button>
+                                        <c-button class="c-btn-lg" v-if="verifyingPassphrase" @click="showPassphrase()">Show Passphrase Again</c-button>
+
+                                        <br /><br />
+                                        <p v-if="verifyingPassphrase">When you're ready proceed to the next step where we will build your public identity. After that you're off to the races!</p>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-end margin-top-20" slot="footer">
+                                <div class="d-flex justify-content-between align-items-center margin-top-20" slot="footer">
+                                    <c-switch
+                                        v-model="account.stored_passphrase"
+                                        label="I have safely stored my passphrase"
+                                        label_position="right"
+                                        v-if="verifyingPassphrase"
+                                    />
+                                    <c-switch
+                                        v-model="account.encrypt_passphrase"
+                                        label="I want to encrypt my passphrase with my password"
+                                        label_position="right"
+                                        v-if="verifyingPassphrase"
+                                    />
                                     <c-button
                                         @click="checkForm()"
                                         icon="angle-right"
+                                        v-if="verifyingPassphrase"
                                     >NEXT</c-button>
                                 </div>
                             </c-tab>
@@ -348,14 +363,12 @@
                                         <div class="verification-icon success">
                                             <i class="fas fa-lock"></i>
                                         </div>
-                                        <p>Make sure to write down your keyphase, password, and secret answer and put it somewhere safe.</p>
-                                        <p>Next we will build your public identity.</p>
 
                                         <h3>Now let's build your main identity. Don't worry, you can have more than one identity.</h3>
                                         <div class="row margin-top-40">
                                             <div class="col">
                                                 <div class="tab-card">
-                                                    <h4>Complete your identity</h4>
+                                                    <h4>Setup your identity</h4>
                                                     <c-user-card
                                                         :user="account.identity"
                                                         v-bind.sync="account.identity"
@@ -364,7 +377,7 @@
                                             </div>
                                             <div class="col">
                                                 <div class="tab-card">
-                                                    <h4>Preview your identity</h4>
+                                                    <h4>Preview</h4>
                                                     <c-user-card
                                                         :user="account.identity"
                                                         previewMode
@@ -746,21 +759,25 @@ export default {
     },
     data() {
         return {
+            verifyingPassphrase: false,
             currentStep: 1,
             finishedStep: 1,
             steps: 3,
             errors: [],
             account: {
-                first_name: '',
-                last_name: '',
-                birthday: '',
-                email: '',
-                password: '',
-                repeat_password: '',
-                secret_question: '',
-                secret_answer: '',
-                agreement: false,
+                first_name: 'Eric',
+                last_name: 'Muyser',
+                birthday: '03 Mar 1987',
+                email: 'eric@muyser.com',
+                password: '1234',
+                repeat_password: '1234',
+                secret_question: 'first_name_favorite_aunt_uncle',
+                secret_answer: 'shelly',
+                agreement: true,
                 newsletter: false,
+                passphrase: null,
+                stored_passphrase: false,
+                encrypt_passphrase: true,
                 identity: {
                     name: '',
                     img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
@@ -786,28 +803,24 @@ export default {
                     && this.account.secret_answer
                     && this.account.password
                     && this.account.repeat_password
-                    && this.account.password === this.account.repeat_password) {
+                    && this.account.password === this.account.repeat_password
+                ) {
+                    DesktopBridge.createAccountRequest({
+                        seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
+                        first_name: this.account.first_name,
+                        last_name: this.account.last_name,
+                        email: this.account.email,
+                        password: this.account.password,
+                        birthday: this.account.birthday,
+                        secret_question: this.account.secret_question,
+                        secret_answer: this.account.secret_answer
+                    }).then((res) => {
+                        this.account = { ...this.account, ...res.account }
+
+                        this.finishedStep = 1;
                         this.currentStep = 2;
-                        this.finishedStep = 2;
-                    if (DesktopBridge.isConnected()) {
-                        DesktopBridge.createAccountRequest({
-                            seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
-                            first_name: this.account.first_name,
-                            last_name: this.account.last_name,
-                            email: this.account.email,
-                            password: this.account.password,
-                            birthday: this.account.birthday,
-                            secret_question: this.account.secret_question,
-                            secret_answer: this.account.secret_answer
-                        }).then((res) => {
-                            this.$store.state.account = { ...this.$store.state.account, ...res }
-
-                            this.$store.state.signed_in = true
-                            this.current_step = 2;
-                        })
-                    }
+                    })
                 } else {
-
                     if (!this.account.first_name) {
                         this.errors.push('First name required.')
                     }
@@ -834,6 +847,28 @@ export default {
                     }
                 }
             } else if (this.currentStep === 2) {
+                const passphraseVerification = $.map($(this.$refs.passphraseVerification).find('input'), (item) => $(item).val()).join(' ')
+
+                if (this.account.passphrase === passphraseVerification) {
+                    DesktopBridge.updateAccountRequest({
+                        passphrase: this.account.passphrase,
+                        encrypt_passphrase: this.account.encrypt_passphrase,
+                    }).then((res) => {
+                        this.finishedStep = 2;
+                        this.currentStep = 3;
+
+                        this.account.passphrase = 'HIDDEN'
+
+                        this.$store.state.application.account = { ...this.$store.state.application.account, ...this.account }
+                        this.$store.state.application.signed_in = true
+                    })
+                }
+
+                if (this.account.passphrase !== passphraseVerification) {
+                    this.errors.push('Passphrase does not match.')
+                }
+                
+            } else if (this.currentStep === 3) {
                 if (this.account.identity.wallet && this.account.identity.name) {
                     this.finishedStep = 3;
                     this.currentStep = 3;
@@ -845,8 +880,6 @@ export default {
                         this.errors.push('Identity name required.');
                     }
                 }
-            } else if (this.currentStep === 3) {
-
             }
         },
         changeTab(step) {
@@ -855,6 +888,12 @@ export default {
             } else {
                 this.currentStep = step;
             }
+        },
+        showPassphrase() {
+            this.verifyingPassphrase = false
+        },
+        verifyPassphrase() {
+            this.verifyingPassphrase = true
         }
     }
 }
@@ -1101,6 +1140,15 @@ export default {
             overflow-y: auto;
             padding: 20px;
             text-align: left;
+        }
+    }
+
+    .passphrase {
+        input {
+            display: inline;
+            margin-right: 5px;
+            margin-top: 5px;
+            width: 80px;
         }
     }
 

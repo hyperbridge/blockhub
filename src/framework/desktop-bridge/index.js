@@ -24,6 +24,10 @@ export const createAccountRequest = async (data) => {
     return await sendCommand('createAccountRequest', data)
 }
 
+export const updateAccountRequest = async (data) => {
+    return await sendCommand('updateAccountRequest', data)
+}
+
 export const initProtocol = async (data) => {
     return await sendCommand('initProtocol', data)
 }
