@@ -59,11 +59,9 @@ export default {
 
 <style lang="scss">
     .project-card__item {
-        background: rgba(0, 0, 0, .13);
         padding: 15px;
         border-radius: 5px;
         width: 100%;
-        border: 1px solid rgba(255, 255, 255, .1);
         color: #fff;
         .head {
             display: flex;

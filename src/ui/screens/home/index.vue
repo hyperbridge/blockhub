@@ -220,7 +220,7 @@
 
                         <div class="row margin-bottom-30" v-if="item.type === 'curator_reviews'" :key="`level-1-${index}`">
                             <div class="col-12">
-                                <c-block title="From our curators" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                                <c-block title="From Our Curators" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                                     <c-curator-reviews
                                         :reviews="item.data.reviews"
                                     />
@@ -460,7 +460,7 @@ export default {
             result.push({
                 type: 'trending_projects_row',
                 data: {
-                    title: 'Trending projects',
+                    title: 'Trending Projects',
                     ref: 'demo_products_sl',
                     swiper: this.$refs.trending_projects_sl && this.$refs.trending_projects_sl.swiper,
                     options: {

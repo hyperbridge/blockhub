@@ -374,7 +374,7 @@
                 return this.$store.state.network.connection.status
             },
             user_submitted_connection_message() {
-                return this.$store.state.network.user_submitted_connection_messages[0]
+                return this.$store.state.network.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.network.user_submitted_connection_messages.length))]
             },
             swiper() {
                 return this.$refs.mySwiper.swiper

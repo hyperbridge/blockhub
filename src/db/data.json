@@ -20,7 +20,7 @@
                     "TokenDelegate": {},
                     "EternalStorage": {}
                 },
-                "user_from_address": "0x66fb0ff9a23e90f3f205a406fd3253532919fb69",
+                "user_from_address": null,
                 "user_to_address": null
             },
             "local": {
@@ -38,25 +38,25 @@
                         "created_at": null
                     }
                 },
-                "user_from_address": "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
+                "user_from_address": null,
                 "user_to_address": null
             }
         },
         "current_ethereum_network": "local",
         "user_submitted_connection_messages": [
             {
-                "id": "1",
+                "id": 1,
                 "message": "wubba lubba dub dubbbb",
                 "user": {
-                    "id": "0x0",
+                    "id": 1,
                     "name": "fr0stbyte"
                 }
             },
             {
-                "id": "2",
+                "id": 2,
                 "message": "LOADING SIMULATION",
                 "user": {
-                    "id": "0x0",
+                    "id": 2,
                     "name": "GymTim"
                 }
             }
@@ -89,12 +89,12 @@
     "funding": {
         "ethereum": {
             "ropsten": {
-                "user_from_address": "0x66fb0ff9a23e90f3f205a406fd3253532919fb69",
+                "user_from_address": null,
                 "user_to_address": null,
                 "contracts": {}
             },
             "local": {
-                "user_from_address": "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
+                "user_from_address": null,
                 "user_to_address": null,
                 "contracts": {
                     "FundingStorage": {
@@ -270,14 +270,14 @@
                 "contracts": {
                     "Marketplace": {}
                 },
-                "user_from_address": "0x66fb0ff9a23e90f3f205a406fd3253532919fb69",
+                "user_from_address": null,
                 "user_to_address": null
             },
             "local": {
                 "contracts": {
                     "Marketplace": {}
                 },
-                "user_from_address": "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
+                "user_from_address": null,
                 "user_to_address": null
             }
         },

@@ -214,12 +214,10 @@ export default {
         }
     }
     .project-card__item {
-        background: rgba(0, 0, 0, .13);
         padding: 15px;
         border-radius: 5px;
         width: calc(100%/3 - 20px);
         margin: 10px;
-        border: 1px solid rgba(255, 255, 255, .1);
         img {
             width: 100%;
             height: 170px;
