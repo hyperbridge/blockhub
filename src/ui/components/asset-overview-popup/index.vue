@@ -78,7 +78,7 @@
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .asset-overview-popup{
         width: 550px;
         padding: 20px;

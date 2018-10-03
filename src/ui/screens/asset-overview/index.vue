@@ -60,8 +60,7 @@
                     </div>
 
                     <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">
-                        <c-block class="h-100" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                            <c-heading-bar name="Attributes">
+                        <c-block title="Attributes" class="h-100" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                                 <template slot="additional-action">
                                     <a href="#3" class="font-weight-bold text-uppercase text-white">
                                         Game View
@@ -70,9 +69,8 @@
                                         Chart
                                     </a>
                                 </template>
-                            </c-heading-bar>
 
-                            <div class="metadata__table">
+                            <div class="metadata__table padding-bottom-10">
                                 <div class="item-row"
                                      v-for="(item, index) in asset.metadata"
                                      :key="index">
@@ -536,82 +534,6 @@
                     }
                     .switch {
                         margin: 0;
-                    }
-                }
-            }
-        }
-    }
-
-    .asset-modal {
-        .modal-content {
-            background: #27283E;
-            border-radius: 5px;
-            padding: 20px;
-            position: relative;
-            .asset-link {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                font-size: 16px;
-                color: #C6C6D6;
-            }
-            .asset-info {
-                .thumb {
-                    width: 150px;
-                    img {
-                        width: 100%;
-                        height: auto;
-                    }
-                }
-                .info {
-                    width: calc(100% - 165px);
-                    display: flex;
-                    justify-content: space-between;
-                    flex-wrap: wrap;
-                    h3,
-                    h4,
-                    h5 {
-                        padding: 0;
-                        margin: 0;
-                    }
-                    h3 {
-                        font-size: 23px;
-                    }
-                    h4 {
-                        font-size: 17px;
-                    }
-                    p {
-                        margin-bottom: 0px;
-                    }
-                }
-            }
-            .action {
-                a {
-                    font-size: 12px;
-                    padding: 0 5px;
-                    i {
-                        font-size: 14px;
-                    }
-                }
-            }
-            .metadata-line {
-                display: inline-block;
-                float: left;
-                width: 100%;
-                padding: 3px 10px;
-                border-bottom: 1px solid rgba(255, 255, 255, .3);
-                div {
-                    display: inline-block;
-                    &:first-child {
-                        float: left;
-                        width: 30%;
-                        font-weight: bold;
-                    }
-                    &:last-child {
-                        float: right;
-                        padding-left: 10px;
-                        width: 70%;
-                        text-align: left;
                     }
                 }
             }
