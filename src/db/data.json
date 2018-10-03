@@ -1,5 +1,6 @@
 {
     "application": {
+        "locked": false,
         "signed_in": false,
         "loading": false,
         "simulator_mode": false,
@@ -67,7 +68,6 @@
         ],
         "active_modal": null,
         "account": {
-            "public_key": null,
             "first_name": null,
             "last_name": null,
             "birthday": null,
@@ -104,6 +104,11 @@
             ]
         },
         "darklaunch_flags": [
+            {
+                "code": "CONTACTS",
+                "description": "",
+                "type": "boolean"
+            },
             {
                 "code": "COLLECTIONS",
                 "description": "",

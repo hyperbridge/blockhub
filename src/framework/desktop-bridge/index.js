@@ -1,5 +1,6 @@
 import * as DB from '@/db'
 
+
 export let config = {
 }
 
@@ -54,15 +55,19 @@ export const resolvePromptPasswordRequest = async (password) => {
     })
 }
 
-export const handlePromptPasswordRequest = async (data) => {
+export const promptPasswordRequest = async (data) => {
     return new Promise(async (resolve) => {
+        if (data.error) {
+
+        }
+
         local.store.commit('application/activateModal', 'unlock')
 
         local.unlockResolve = resolve
     })
 }
 
-export const handleSetAccountRequest = async (data) => {
+export const setAccountRequest = async (data) => {
     return new Promise(async (resolve) => {
         DB.application.config.data[0].account = {
             ...DB.application.config.data[0].account,
@@ -71,6 +76,10 @@ export const handleSetAccountRequest = async (data) => {
 
         DB.save()
 
+        local.store.commit('application/updateState', {
+            locked: false,
+            signed_in: true
+        })
         local.store.commit('application/activateModal', null)
     })
 }
@@ -136,11 +145,11 @@ export const runCommand = async (cmd, meta = {}) => {
         }
 
         if (cmd.key === 'promptPasswordRequest') {
-            const res = await handlePromptPasswordRequest(cmd.data)
+            const res = await promptPasswordRequest(cmd.data)
 
             return resolve(await sendCommand('promptPasswordResponse', res, meta.client, cmd.requestId))
         } else if (cmd.key === 'setAccountRequest') {
-            const res = await handleSetAccountRequest(cmd.data)
+            const res = await setAccountRequest(cmd.data)
 
             return resolve(res)
         } else if (cmd.key === 'systemError') {
@@ -170,6 +179,9 @@ export const init = (store) => {
     }
 
     console.log('[DesktopBridge] Initializing')
+
+    // store.state.application.locked = true
+    // store.state.application.signed_in = false
 
     local.store = store
     local.bridge = window.desktopBridge

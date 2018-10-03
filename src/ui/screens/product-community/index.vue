@@ -176,12 +176,12 @@
         computed: {
             product: updateProduct,
             editing() {
-                if (!this.$store.state.marketplace.editor_mode) {
+                if (!this.$store.state.application.editor_mode) {
                     for (let key in this.activeElement) {
                         this.activeElement[key] = false
                     }
                 }
-                return this.$store.state.marketplace.editor_mode === 'editing'
+                return this.$store.state.application.editor_mode === 'editing'
             },
             first_product(){
                 return this.$store.state.marketplace.first_product

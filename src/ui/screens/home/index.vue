@@ -308,7 +308,7 @@ export default {
             window.desktopBridge.send('ping', this.$refs.desktopMessage.value)
             window.desktopBridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
         }
-    }
+    },
 }
 </script>
 

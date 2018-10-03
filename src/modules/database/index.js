@@ -26,7 +26,7 @@ export const getters = {}
 
 export const actions = {
     init(store, payload) {
-        console.log('[BlockHub] Database initializing...')
+        console.log('[BlockHub][Database] Initializing...')
 
         store.commit('initialized')
 

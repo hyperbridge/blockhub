@@ -14,7 +14,11 @@ const updateState = (savedData, updatedState = {}) => {
         ...savedData,
         ...updatedState,
         account: DB.application.config.data[0].account,
-        darklaunch_flags: DB.application.config.data[0].darklaunch_flags,
+        darklaunch_flags: DB.application.config.data[0].darklaunch_flags
+    }
+    
+    if (updatedState.locked !== undefined) {
+        rawData.locked = updatedState.locked
     }
 
     if (rawData.desktop_mode == null)
@@ -34,22 +38,11 @@ export const getters = {
     }
 }
 
-export const initDesktop = (store) => {
-    if (!DesktopBridge.isConnected()) {
-        return
-    }
-
-    // DesktopBridge.getAccountRequest(data).then((res) => {
-    //     store.state.account.public_address = res.account.public_address
-
-    //     store.state.password_required = true
-    //     //store.state.signed_in = true
-    // })
-}
-
 export const actions = {
     init(store, payload) {
-        console.log('[BlockHub] Network connecting...')
+        console.log('[BlockHub][Application] Initializing...')
+        
+        DesktopBridge.init(store)
 
         updateState(DB.application.config.data[0], store.state)
 
@@ -66,11 +59,9 @@ export const actions = {
                 store.dispatch('checkEthereumConnection')
             }
         }, 5000)
-        
-        initDesktop(store)
     },
     updateState(store, payload) {
-        console.log('[BlockHub][Marketplace] Updating store...')
+        console.log('[BlockHub][Application] Updating store...')
 
         updateState(store.state)
 
@@ -86,6 +77,9 @@ export const actions = {
         } else {
             store.commit('activateModal', 'download')
         }
+    },
+    setEditorMode(store, payload) {
+        store.commit('setEditorMode', payload)
     },
     unlockAccount(state, payload) {
         DesktopBridge.resolvePromptPasswordRequest(payload.password.value)
@@ -158,74 +152,6 @@ export const actions = {
     },
     signOut(store, payload) {
         store.commit('signOut', payload)
-    },
-    async deployContract(store, payload) {
-        return new Promise((resolve, reject) => {
-            if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {
-                state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = {
-                    created_at: null,
-                    address: null
-                }
-            }
-
-            let links = []
-            let params = []
-
-            if (payload.contractName !== 'EternalStorage') {
-                params = [
-                    state.ethereum[state.current_ethereum_network].contracts.EternalStorage.address
-                ]
-            }
-
-            if (Token.api.ethereum.state.contracts[payload.contractName].links) {
-                links = Token.api.ethereum.state.contracts[payload.contractName].links
-
-                for (let i in links) {
-                    links[i].address = state.ethereum[state.current_ethereum_network].contracts[links[i].name].address
-                }
-            }
-
-            Token.api.ethereum.deployContract(payload.contractName, links, params).then(async (contract) => {
-                state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
-                state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = contract.address
-
-                DB.funding.config.update(state)
-                DB.save()
-
-                if (payload.contractName === 'TBD') {
-                }
-
-                store.dispatch('updateState')
-
-                resolve(contract)
-            })
-        })
-    },
-    async deployContract(store, payload) {
-        return new Promise((resolve, reject) => {
-            // if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {
-            //     state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = {
-            //         created_at: null,
-            //         address: null
-            //     }
-            // }
-
-            // const meta = Token.Ethereum.Contracts[payload.contractName]
-            // const contract = new window.web3.eth.Contract(meta.abi)
-
-            // contract.deploy({
-            //     data: meta.bytecode
-            // }).send({
-            //     from: state.ethereum[state.current_ethereum_network].user_from_address,
-            //     gas: 4500000
-            // }).then((res) => {
-            //     state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
-            //     state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = res._address
-
-            //     DB.application.config.update(state)
-            //     DB.save()
-            // })
-        })
     }
 }
 
@@ -250,6 +176,9 @@ export const mutations = {
     setInternetConnection(state, payload) {
         state.connection.internet = payload.connected
         state.connection_message = payload.message
+    },
+    setSimulatorMode(state, payload) {
+        state.simulator_mode = payload
     },
     beforeLoadRoute(state, payload) {
         state.loading = true

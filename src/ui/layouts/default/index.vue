@@ -9,8 +9,40 @@
 
         <!-- PAGE CONTENT WRAPPER -->
         <div class="page__content page__content-invert invert" id="page-content">
+            <div class="loader-block loading loading--w-spinner" v-if="!is_connected">
+                <div class="loader-block__container">
+                    <div>
+                        <div class="loading-spinner"></div>
+                        <p class="loader-block__message">{{ user_submitted_connection_message.message }}</p>
+                        <p class="loader-block__user">Submitted by <a
+                            :href="`/#/identity/${user_submitted_connection_message.user.id}`">@{{
+                            user_submitted_connection_message.user.name }}</a></p>
+                    </div>
+
+                    <h1 class="loader-block__status-code" v-if="connection_status.code">ERROR {{
+                        connection_status.code }}</h1>
+
+                    <div class="loader-block__status-message">
+                        <p>{{ connection_status.message }}</p>
+                        <div>Internet Connection <span class="fa"
+                                                        :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }"></span>
+                        </div>
+                        <div>Server Connection <span class="fa"
+                                                        :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }"></span>
+                        </div>
+                    </div>
+
+                    <div class="loader-block__links">
+                        <p>Connection problems? Let us know!</p>
+                        <a href="https://twitter.com/hyperbridge"><span class="fab fa-twitter"></span> Tweet Us</a>
+                        <a href="https://hyperbridge.org/status"><span class="fas fa-globe-americas"></span> Server
+                            Status</a>
+                    </div>
+                </div>
+            </div>
+            
             <!-- PAGE ASIDE PANEL -->
-            <div class="page-aside invert left-sidebar" id="page-aside">
+            <div class="page-aside invert left-sidebar" id="page-aside" v-if="showLeftPanel">
                 <!--<transition name="slideLeft" v-if="initialized">-->
                 <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}`"></component>
                 <!--</transition>-->
@@ -19,42 +51,10 @@
 
             <slot v-if="is_connected"></slot>
 
-            <div class="content" id="content" v-if="!is_connected">
-                <div class="loader-block loading loading--w-spinner" v-if="!is_connected">
-                    <div class="loader-block__container">
-                        <div>
-                            <div class="loading-spinner"></div>
-                            <p class="loader-block__message">{{ user_submitted_connection_message.message }}</p>
-                            <p class="loader-block__user">Submitted by <a
-                                :href="`/#/identity/${user_submitted_connection_message.user.id}`">@{{
-                                user_submitted_connection_message.user.name }}</a></p>
-                        </div>
-
-                        <h1 class="loader-block__status-code" v-if="connection_status.code">ERROR {{
-                            connection_status.code }}</h1>
-
-                        <div class="loader-block__status-message">
-                            <p>{{ connection_status.message }}</p>
-                            <div>Internet Connection <span class="fa"
-                                                           :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }"></span>
-                            </div>
-                            <div>Server Connection <span class="fa"
-                                                         :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }"></span>
-                            </div>
-                        </div>
-
-                        <div class="loader-block__links">
-                            <p>Connection problems? Let us know!</p>
-                            <a href="https://twitter.com/hyperbridge"><span class="fab fa-twitter"></span> Tweet Us</a>
-                            <a href="https://hyperbridge.org/status"><span class="fas fa-globe-americas"></span> Server
-                                Status</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="content" id="content" v-if="!is_connected"></div>
 
             <!-- SIDEPANEL -->
-            <transition name="slideRight" v-if="initialized && showSidepanel">
+            <transition name="slideRight" v-if="initialized && showRightPanel">
                 <c-sidepanel>
                 <c-swiper :options="panelOption" ref="mySwiper">
                     <c-slide v-if="desktop_mode">
@@ -345,7 +345,12 @@
                 type: String,
                 required: true
             },
-            showSidepanel: {
+            showLeftPanel: {
+                type: Boolean,
+                default: true,
+                required: false
+            },
+            showRightPanel: {
                 type: Boolean,
                 default: true,
                 required: false

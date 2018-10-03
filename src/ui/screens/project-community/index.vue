@@ -282,7 +282,7 @@
         watch: {
         },
         created() {
-            //this.$store.dispatch('marketplace/setEditorMode', 'editing')
+            //this.$store.dispatch('application/setEditorMode', 'editing')
         },
         beforeDestroy() {
             window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'

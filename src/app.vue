@@ -168,7 +168,7 @@
 
 <script>
     import { mapActions } from 'vuex'
-
+    
     export default {
         name: 'app',
         props: ['data'],
@@ -203,6 +203,10 @@
             $route(to, from) {
                 $('body').removeClass('show-sidebar')
                 $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-cog')
+
+                if (to.path !== '/welcome' && this.$store.state.application.locked) {
+                    this.$router.push({ path: '/welcome' })
+                }
             }
         }
     }

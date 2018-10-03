@@ -195,17 +195,17 @@
             },
             save() {
                 if (!this.checkForm()) {
-                    this.$store.dispatch('marketplace/setEditorMode', 'editing')
+                    this.$store.dispatch('application/setEditorMode', 'editing')
 
                     return
                 }
 
                 if (this.id === 'new') {
                     this.$store.commit('funding/createProject', this.project)
-                    this.$store.dispatch('marketplace/setEditorMode', 'viewing')
+                    this.$store.dispatch('application/setEditorMode', 'viewing')
                 } else {
                     this.$store.dispatch('funding/updateProject', this.project)
-                    this.$store.dispatch('marketplace/setEditorMode', 'viewing')
+                    this.$store.dispatch('application/setEditorMode', 'viewing')
                 }
             },
             checkForm(e) {
@@ -226,24 +226,24 @@
         computed: {
             project: updateProject,
             editing() {
-                if (!this.$store.state.marketplace.editor_mode) {
+                if (!this.$store.state.application.editor_mode) {
                     for (let key in this.activeElement) {
                         this.activeElement[key] = false
                     }
                 }
 
-                return this.$store.state.marketplace.editor_mode === 'editing'
+                return this.$store.state.application.editor_mode === 'editing'
             }
         },
         watch: {
             editing(newVal, oldVal) {
-                if (this.$store.state.marketplace.editor_mode === 'publishing') {
+                if (this.$store.state.application.editor_mode === 'publishing') {
                     this.save()
                 }
             }
         },
         created() {
-            //this.$store.dispatch('marketplace/setEditorMode', 'editing')
+            //this.$store.dispatch('application/setEditorMode', 'editing')
         },
         beforeDestroy() {
             window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'

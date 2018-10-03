@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import router from '../router'
 import * as DB from '../db'
 import * as ChaosMonkey from '../framework/chaos-monkey'
-import * as DesktopBridge from '../framework/desktop-bridge'
+//import * as DesktopBridge from '../framework/desktop-bridge'
 import * as funding from '../modules/funding'
 import * as news from '../modules/news'
 import * as marketplace from '../modules/marketplace'
@@ -344,8 +344,7 @@ export let initializer = () => {
         DB.setInitCallback(async () => {
             // TODO: is this a race condition?
             //TODO: PeerService.init()
-            DesktopBridge.init(store)
-
+            
             store.dispatch('database/init')
             store.dispatch('application/init')
             store.dispatch('marketplace/init')

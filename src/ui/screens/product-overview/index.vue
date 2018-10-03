@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="product-navigation" :showSidepanel="false">
+    <c-layout navigationKey="product-navigation" :showRightPanel="false">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
@@ -298,19 +298,19 @@
                 this.$store.state.marketplace.first_product = false
             },
             unsaved(){
-                if (this.savedState === false && this.$store.state.marketplace.editor_mode === 'editing')
+                if (this.savedState === false && this.$store.state.application.editor_mode === 'editing')
                     return 'ololololo'
             }
         },
         computed: {
             product: updateProduct,
             editing() {
-                if (!this.$store.state.marketplace.editor_mode) {
+                if (!this.$store.state.application.editor_mode) {
                     for (let key in this.activeElement) {
                         this.activeElement[key] = false
                     }
                 }
-                return this.$store.state.marketplace.editor_mode === 'editing'
+                return this.$store.state.application.editor_mode === 'editing'
             },
             first_product() {
                 return this.$store.state.marketplace.first_product

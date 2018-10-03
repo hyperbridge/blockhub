@@ -124,19 +124,10 @@ export const actions = {
 
         store.commit('updateState', state)
     },
-    setEditorMode(store, payload) {
-        store.commit('setEditorMode', payload)
-    },
     viewProduct(id) {
         console.log('viewProduct', id)
     },
     updateProduct(store, payload) {
-        // ethereum.getUserBalance().then((balance) => {
-        //     payload.name = payload.name + ' ' + balance // Test
-
-        //     store.commit('updateProduct', payload)
-        // })
-
         const success = () => {
             const product = DB.marketplace.products.findOne({ 'id': id })
 
@@ -210,26 +201,6 @@ export const mutations = {
     },
     submitProductForReviewResponse(state, product) {
         DB.marketplace.products.update(product)
-    },
-    setSimulatorMode(state, payload) {
-        state.simulator_mode = payload
-    },
-    async deployContract(state, payload) {
-        if (!state.ethereum[state.current_ethereum_network].contracts[payload.contractName]) {
-            state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = {
-                created_at: null,
-                address: null
-            }
-        }
-
-        MarketplaceProtocol.ethereum.modules.marketplace.deployContract(payload.contractName, state.ethereum[state.current_ethereum_network].user_from_address).then((res) => {
-            state.ethereum[state.current_ethereum_network].contracts[payload.contractName].created_at = Date.now()
-            state.ethereum[state.current_ethereum_network].contracts[payload.contractName].address = res._address
-
-            DB.marketplace.config.update(state)
-            DB.save()
-        })
-
     }
 }
 

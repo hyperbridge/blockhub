@@ -3,6 +3,7 @@
         <div class="app-header__top-bar"></div>
         <div class="position-relative w-100" style="margin-top: -10px">
             <div class="app-header__bar-left">
+                {{ is_locked }}
                 <div class="app-header__close-button" v-if="desktop_mode">
                     <a href="#" @click.prevent="closeWindow">&times;</a>
                 </div>
@@ -23,11 +24,11 @@
                 </a>
             </div>
             <div class="app-header__shadow"></div>
-            <a class="app-header__bar-center" href="/#/">
+            <a class="app-header__bar-center" :href="is_locked ? '#' : '#/'">
                 <c-loading-logo :isLoading="isLoader" />
             </a>
             <div class="app-header__bar-right">
-                <a class="app-header__bar-left-link" href="javascript:;" id="sidebar_toggle_btn" data-action="fixedpanel-toggle">
+                <a class="app-header__bar-left-link" href="javascript:;" id="sidebar_toggle_btn" data-action="fixedpanel-toggle" v-if="!is_locked">
                     <span class="fa fa-cog"></span>
                 </a>
             </div>
@@ -48,7 +49,7 @@
                 <nav class="horizontal-navigation app-header__nav-left">
                     <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
                     <ul>
-                        <li class="app-header__create-account-btn" v-if="desktop_mode && !signed_in">
+                        <li class="app-header__create-account-btn" v-if="desktop_mode && !signed_in && !is_locked">
                             <a href="/#/account/signup" class="">
                                 <span class="text">CREATE ACCOUNT</span> <span class="fa fa-user-plus"></span>
                             </a>
@@ -87,19 +88,19 @@
                                 <span class="text">Satoshi</span>
                             </a>
                         </li>
-                        <li v-if="signed_in && darklaunch.config.ACCOUNT_CONTACTS">
+                        <li v-if="signed_in" v-darklaunch="'CONTACTS'">
                             <a href="/#/identity/1/contacts">
                                 <span class="icon fa fa-users"></span>
                                 <span class="text">Contacts</span>
                             </a>
                         </li>
-                        <li v-if="desktop_mode && !signed_in">
+                        <li v-if="desktop_mode && !signed_in && !is_locked">
                             <a href="/#/account/signin">
                                 <span class="icon fa fa-sign-out-alt"></span>
                                 <span class="text">Sign In</span>
                             </a>
                         </li>
-                        <li>
+                        <li v-if="!is_locked">
                             <a href="/#/help">
                                 <span class="icon fa fa-question-circle"></span>
                                 <span class="text">Help</span>
@@ -122,26 +123,24 @@ export default {
     },
     data() {
         return {
-            show_menu: false,
-            darklaunch: {
-                config: {
-                    ACCOUNT_CONTACTS: false
-                }
-            }
+            show_menu: false
         }
     },
     computed: {
-        developer_mode() {
-            return this.$store.state.application.developer_mode
-        },
-        is_editing() {
-            return this.$store.state.marketplace.editor_mode === 'editing'
-        },
-        signed_in() {
-            return this.$store.state.application.signed_in
+        is_locked() {
+            return this.$store.state.application.locked
         },
         is_loading() {
             return this.$store.state.application.loading
+        },
+        is_editing() {
+            return this.$store.state.application.editor_mode === 'editing'
+        },
+        developer_mode() {
+            return this.$store.state.application.developer_mode
+        },
+        signed_in() {
+            return this.$store.state.application.signed_in
         },
         desktop_mode() {
             return this.$store.state.application.desktop_mode
@@ -149,16 +148,16 @@ export default {
     },
     methods: {
         clickEdit() {
-            this.$store.dispatch('marketplace/setEditorMode', 'editing')
+            this.$store.dispatch('application/setEditorMode', 'editing')
         },
         clickRemove() {
 
         },
         clickPublish() {
-            this.$store.dispatch('marketplace/setEditorMode', 'publishing')
+            this.$store.dispatch('application/setEditorMode', 'publishing')
         },
         clickExit() {
-            this.$store.dispatch('marketplace/setEditorMode', 'viewing')
+            this.$store.dispatch('application/setEditorMode', 'viewing')
         },
         signOut() {
             this.$store.dispatch('application/signOut')
@@ -188,8 +187,6 @@ export default {
             let browserWindow = BrowserWindow.getFocusedWindow()
             browserWindow.minimize()
         }
-    },
-    created() {
     }
 }
 </script>
