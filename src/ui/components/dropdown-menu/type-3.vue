@@ -4,7 +4,7 @@
             type="button"
             class="dropdown-vue__button"
             :class="{ 'dropdown-vue__button--active': showMenu }"
-            @click="showMenu = !showMenu"
+            @click.stop="showMenu = !showMenu"
         >
             {{ title }}
             <c-icon
@@ -14,7 +14,12 @@
             />
         </button>
         <transition name="slide-in-top">
-            <div v-if="showMenu" class="dropdown-vue__content">
+            <div
+                v-if="showMenu"
+                class="dropdown-vue__content"
+                v-click-outside.bool="showMenu"
+                :data-title="title"
+            >
                 <slot/>
             </div>
         </transition>
@@ -33,6 +38,11 @@
         data() {
             return {
                 showMenu: false
+            }
+        },
+        methods: {
+            closeMenu() {
+                this.showMenu = false;
             }
         }
     }
