@@ -1,14 +1,14 @@
 <template>
-    <div class="assets-list">
-        <template v-for="(item, index) in items">
-            <div class="assets-list__item-container"
-                :style="{ width: 'calc( 100% / ' + itemInRow + ')'}"
-                :key="index"
-                v-if="item">
-                <c-assets-item :item="item" />
-            </div>
-        </template>
-    </div>
+    <transition-group class="assets-list" name="assets-list" tag="div">
+        <div
+            v-for="item in items"
+            :key="item.id"
+            class="assets-list__item-container"
+            :style="{ width: 'calc( 100% / ' + itemInRow + ')'}"
+        >
+            <c-assets-item :item="item" />
+        </div>
+    </transition-group>
 </template>
 
 <script>
@@ -22,14 +22,21 @@
 </script>
 
 <style lang="scss" scoped>
-    .assets-list{
+    .assets-list {
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
         margin: 0 -10px;
         width: calc( 100% + 20px );
     }
-    .assets-list__item-container{
+    .assets-list-leave-active {
+        position: absolute !important;
+        opacity: 0;
+    }
+    .assets-list-move {
+        transition: transform 1s ease, opacity 1s ease !important;
+    }
+    .assets-list__item-container {
         padding: 10px;
     }
     .assets-list__item {
