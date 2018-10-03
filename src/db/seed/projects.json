@@ -41,6 +41,11 @@
                 }
             ]
         },
+        "funds": {
+            "currency": "USD",
+            "obtained": 7613,
+            "goal": 8500
+        },
         "funding": {
             "stages": [
                 {
@@ -243,6 +248,11 @@
             "created": 1531430916082,
             "version": 0
         },
+        "funds": {
+            "currency": "USD",
+            "obtained": 7613,
+            "goal": 8500
+        },
         "content": "",
         "likes": 1000,
         "comments": [],
@@ -265,6 +275,11 @@
             "revision": 0,
             "created": 1531430916082,
             "version": 0
+        },
+        "funds": {
+            "currency": "USD",
+            "obtained": 7613,
+            "goal": 8500
         },
         "content": "",
         "likes": 1000,
