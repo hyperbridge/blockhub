@@ -609,18 +609,13 @@ export default {
             window.BlockHub.importSeedData()
         },
         resetSeedData() {
-            this.$store.state.network.account.notifications = []
-            this.$store.state.marketplace.trending_projects = []
-            this.$store.state.marketplace.curator_reviews = []
-            this.$store.state.marketplace.product_news = []
+            window.BlockHub.resetSeedData()
         },
         saveSettings() {
             window.BlockHub.saveDatabase()
         },
         resetSettings() {
-            this.$store.state.marketplace.desktop_mode = false
-            this.$store.state.network.signed_in = false
-            this.$store.state.marketplace.developer_mode = false
+            window.resetSettings()
         },
         sendDesktopMessage() {
             if (!window.isElectron) {

@@ -130,6 +130,25 @@ window.BlockHub.importSeedData = () => {
     store.dispatch('network/updateState')
 }
 
+window.BlockHub.resetSeedData = () => {
+    DB.network.config.data[0].account.notifications = []
+    DB.network.config.data[0].account.wallets = []
+
+    DB.marketplace.config.data[0].trending_projects = []
+    DB.marketplace.config.data[0].curator_reviews = []
+    DB.marketplace.config.data[0].product_news = []
+    DB.marketplace.config.data[0].collections = []
+
+    DB.marketplace.products.data = []
+    DB.marketplace.assets.data = []
+
+    DB.funding.projects.data = []
+
+    store.dispatch('marketplace/updateState')
+    store.dispatch('funding/updateState')
+    store.dispatch('network/updateState')
+}
+
 window.BlockHub.saveDatabase = () => {
     DB.network.config.data = [store.state.network]
 
