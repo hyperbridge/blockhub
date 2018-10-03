@@ -262,7 +262,8 @@
                 }
             ]
         },
-        "projects": []
+        "projects": [],
+        "trending_products": []
     },
     "marketplace": {
         "ethereum": {
@@ -290,11 +291,9 @@
         "first_product": true,
         "frontpage_product": {},
         "product_news": [],
-        "trending_projects": [],
         "new_products": [],
         "sale_products": [],
         "upcoming_products": [],
-        "trending_products": [],
         "top_selling_products": [],
         "special_products": [],
         "assets": [],
