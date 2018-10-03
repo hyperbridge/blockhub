@@ -249,6 +249,8 @@ a {
     background-size: 247px 100%;
     background-repeat: no-repeat;
     z-index: 1;
+    opacity: 0.7;
+    animation: pulse-opacity ease-in-out 2s infinite alternate;
 }
 
 #right-bg {
@@ -262,6 +264,8 @@ a {
     background-size: 247px 100%;
     background-repeat: no-repeat;
     z-index: 1;
+    opacity: 0.7;
+    animation: pulse-opacity ease-in-out 2s infinite alternate;
 }
 
 #header-bg {
@@ -271,7 +275,7 @@ a {
     width: 100%;
     height: 383px;
     content: ' ';
-    background: url(/static/img/products/default.png);
+    background: url(/static/img/backgrounds/1.jpg);
     background-size: 100% 383px;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -417,6 +421,15 @@ a {
   border-radius: 7px;
   border-right-color: transparent;
 }
+
+@keyframes pulse-opacity {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
     </style>
 
     <% for (var chunk of webpack.chunks) {
@@ -453,7 +466,7 @@ a {
     <div id="critical-error">
       <p>A critical error may have occurred. If BlockHub doesn't load in 1 minute, and your internet connection is fine, then either this page is broken, or your settings are corrupt.</p>
       <br />
-      <button onClick="window.deleteSettings()">Reset settings</button> 
+      <button onClick="window.resetSettings()">Reset settings</button> 
       <button onClick="window.location = 'https://hyperbridge.org/#contact'">Contact us</button>
       <br />
     </div>
@@ -466,11 +479,7 @@ a {
 </div>
 
 <script>
-window.downloadAccountFile = function() {
-  
-}
-
-window.deleteSettings = function() {
+window.resetSettings = function() {
   if (window.closeLokiDatabase) {
     window.closeLokiDatabase()
   }

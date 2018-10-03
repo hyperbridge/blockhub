@@ -2,7 +2,9 @@
     <c-layout navigationKey="funding-navigation">
         <div class="content" id="content">
             <div class="container-fluid">
-                <div class="row game-grid">
+                <c-infinite-content :list="list" />
+
+                <!-- <div class="row game-grid">
                     <div class="col-12">
                         <h3>Top Projects</h3>
                         <div class="sl_nav">
@@ -31,7 +33,7 @@
                             <h4><a :href="`/#/project/new`">NEW PROJECT</a></h4>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </c-layout>
@@ -41,14 +43,25 @@
 export default {
     components: {
         'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-        'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
+        'c-infinite-content': (resolve) => require(['@/ui/components/infinite-content'], resolve),
     },
     computed: {
-        projects() {
-            if (!this.$store.state.funding.projects)
-                return
+        list() {
+            const result = []
 
-            return this.$store.state.funding.projects
+            result.push({
+                type: 'trending_projects_row',
+                data: {
+                    title: 'Trending Projects',
+                    options: {
+                        slidesPerView: 3,
+                        spaceBetween: 15,
+                    },
+                    projects: this.$store.state.funding.projects
+                }
+            })
+
+            return result
         }
     }
 }

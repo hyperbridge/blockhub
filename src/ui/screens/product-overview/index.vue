@@ -269,7 +269,11 @@
         methods: {
             showPurchaseModal() {
                 if (this.$store.state.marketplace.desktop_mode) {
-                    this.$store.commit('network/activateModal', 'purchase')
+                    if (this.$store.state.network.signed_in) {
+                        this.$store.commit('network/activateModal', 'purchase')
+                    } else {
+                        this.$store.commit('network/activateModal', 'login')
+                    }
                 } else {
                     this.$store.commit('network/activateModal', 'download')
                 }
@@ -326,7 +330,7 @@
             window.onbeforeunload = this.unsaved;
         },
         beforeDestroy() {
-            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'
         },
         updated() {
             $('#tag-editor').select2()

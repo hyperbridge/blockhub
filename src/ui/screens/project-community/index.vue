@@ -285,7 +285,7 @@
             //this.$store.dispatch('marketplace/setEditorMode', 'editing')
         },
         beforeDestroy() {
-            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/products/default.png)'
+            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'
         },
         updated() {
         }

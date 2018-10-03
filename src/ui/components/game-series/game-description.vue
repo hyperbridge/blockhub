@@ -44,9 +44,8 @@
 
     export default {
         name: 'game-description',
-        props:{},
+        props: {},
         components: {
-
             'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide

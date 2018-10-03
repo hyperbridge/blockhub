@@ -3,7 +3,7 @@
 
         <c-sidebar-menu title="STORE" sub_title="General" mClass="margin-bottom-20">
             <c-sidebar-menu-link
-                v-for="page in ['Home', 'Curators', 'Collections', 'Items']"
+                v-for="page in ['Home', 'Projects', 'Curators', 'Collections', 'Items']"
                 :key="page"
                 :to="{ name: page }"
             >

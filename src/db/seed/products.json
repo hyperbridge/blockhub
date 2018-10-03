@@ -368,7 +368,6 @@
         ],
         "system_tags": [
             "sale",
-            "new",
             "featured",
             "trending",
             "top_seller",
@@ -693,7 +692,7 @@
         ],
         "system_tags": [
             "new",
-            "featured"
+            "trending"
         ],
         "type": "game",
         "downloads": 0,
