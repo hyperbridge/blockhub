@@ -467,7 +467,7 @@ export default {
                         slidesPerView: 3,
                         spaceBetween: 15,
                     },
-                    trending_projects: this.$store.state.marketplace.trending_projects
+                    trending_projects: this.$store.state.funding.trending_projects
                 }
             })
 

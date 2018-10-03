@@ -14,7 +14,8 @@ const updateState = (savedData, updatedState = {}) => {
         ...rawData,
         ...savedData,
         ...updatedState,
-        projects: DB.funding ? DB.funding.projects.data : []
+        projects: DB.funding ? DB.funding.projects.data : [],
+        trending_projects: DB.funding.config.data[0].trending_projects,
     }
 
     const normalizedData = normalize(rawData, {

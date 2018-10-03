@@ -115,7 +115,6 @@ window.BlockHub.importSeedData = () => {
     DB.network.config.data[0].account.notifications = seed.notifications
     DB.network.config.data[0].account.wallets = seed.wallets
 
-    DB.marketplace.config.data[0].trending_projects = seed.trending_projects
     DB.marketplace.config.data[0].curator_reviews = seed.curator_reviews
     DB.marketplace.config.data[0].product_news = seed.product_news
     DB.marketplace.config.data[0].collections = seed.collections
@@ -124,6 +123,7 @@ window.BlockHub.importSeedData = () => {
     DB.marketplace.assets.data = seed.assets
 
     DB.funding.projects.data = seed.projects
+    DB.funding.config.data[0].trending_projects = seed.trending_projects
 
     store.dispatch('marketplace/updateState')
     store.dispatch('funding/updateState')
@@ -134,7 +134,6 @@ window.BlockHub.resetSeedData = () => {
     DB.network.config.data[0].account.notifications = []
     DB.network.config.data[0].account.wallets = []
 
-    DB.marketplace.config.data[0].trending_projects = []
     DB.marketplace.config.data[0].curator_reviews = []
     DB.marketplace.config.data[0].product_news = []
     DB.marketplace.config.data[0].collections = []
@@ -143,6 +142,7 @@ window.BlockHub.resetSeedData = () => {
     DB.marketplace.assets.data = []
 
     DB.funding.projects.data = []
+    DB.funding.config.data[0].trending_projects = []
 
     store.dispatch('marketplace/updateState')
     store.dispatch('funding/updateState')
