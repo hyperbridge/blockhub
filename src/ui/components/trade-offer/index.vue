@@ -1,5 +1,13 @@
 <template>
     <div class="trade-offer">
+        <div class="trade-offer__date">
+            <span>
+                {{ offer.date | formatDate }} - {{ offer.date | timeAgo }}
+            </span>
+            <span>
+                Expires {{ offer.date | expIn | timeAgo }}
+            </span>
+        </div>
         <div class="trade-offer__content" @click="showDetails = !showDetails">
             <c-author :author="offer.author"/>
             <span>
@@ -82,6 +90,8 @@
 </template>
 
 <script>
+    import moment from 'moment';
+
     export default {
         props: {
             offer: {
@@ -111,6 +121,11 @@
             finalBalance() {
                 return Math.round(this.totalValue.yours - this.totalValue.their * 100) / 100;
             }
+        },
+        filters: {
+            expIn(date) {
+                return moment(date).add(2, 'weeks');
+            }
         }
     }
 </script>
@@ -118,10 +133,17 @@
 <style lang="scss" scoped>
     .trade-offer {
         margin-bottom: 25px;
-        background: rgba(1,1,1,.25);
         border-radius: 4px;
     }
+    .trade-offer__date {
+        color: rgba(255,255,255,.6);
+        font-size: 13px;
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: space-between;
+    }
     .trade-offer__content {
+        background: rgba(1,1,1,.25);
         padding: 20px;
         display: flex;
         justify-content: space-between;
