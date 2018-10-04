@@ -69,7 +69,7 @@
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
-            'c-community-item': (resolve) => require(['@/ui/components/community/item'], resolve),
+            'c-community-item': (resolve) => require(['@/ui/components/community/post-item'], resolve),
             'c-search': (resolve) => require(['@/ui/components/searcher'], resolve)
         },
         data() {
@@ -130,6 +130,7 @@
             border-radius: 0;
             border-bottom: 0;
             transition: transform 400ms ease-in-out;
+            background: rgba(0, 0, 0, .1);
             &:first-child{
                 border-radius: 5px 5px 0 0;
             }
@@ -138,7 +139,7 @@
                 border-radius: 0 0 5px 5px;
             }
             &:nth-child(even){
-                background: rgba(0, 0, 0, .26);
+                background: rgba(0, 0, 0, .2);
             }
             &:hover{
                 background: rgba(0, 0, 0, .25);

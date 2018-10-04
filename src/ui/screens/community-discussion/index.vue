@@ -69,7 +69,7 @@
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
-            'c-community-item': (resolve) => require(['@/ui/components/community/item'], resolve),
+            'c-community-item': (resolve) => require(['@/ui/components/community/post-item'], resolve),
             'c-search': (resolve) => require(['@/ui/components/searcher'], resolve)
         },
         data() {

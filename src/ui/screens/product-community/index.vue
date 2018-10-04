@@ -85,7 +85,7 @@
         components: {
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
-            'c-item': (resolve) => require(['@/ui/components/community/item'], resolve),
+            'c-item': (resolve) => require(['@/ui/components/community/post-item'], resolve),
             'c-post-comment': (resolve) => require(['@/ui/components/community/comment'], resolve)
         },
         data() {

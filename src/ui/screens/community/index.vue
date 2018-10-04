@@ -52,8 +52,20 @@
                     >
                     </c-heading-bar>
 
-                    <div class="community-list">
-                        <c-community-item v-for="(post, index) in posts" :key="index" :post="post" />
+                    <div class="forums-list">
+                        <div class="forums-list__head">
+                            <div>
+                                Title
+                            </div>
+                            <div>
+                                Last Post
+                            </div>
+                            <div>
+                                Discussions
+                            </div>
+                        </div>
+
+                        <c-community-forum v-for="(forum, index) in forums" :key="index" :forum="forum" />
                     </div>
                 </c-block>
             </div>
@@ -69,51 +81,52 @@
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
-            'c-community-item': (resolve) => require(['@/ui/components/community/item'], resolve),
-            'c-search': (resolve) => require(['@/ui/components/searcher'], resolve)
+            'c-search': (resolve) => require(['@/ui/components/searcher'], resolve),
+            'c-community-forum': (resolve) => require(['@/ui/components/community/forum-item.vue'], resolve)
         },
         data() {
             return {
-                posts: [
+                forums: [
                     {
                         id: 1,
                         title: "New to BlockHub",
-                        rate: "43",
-                        comments_count: "8234",
-                        status: "pinned",
-                        author: {
-                            name: "Alan Walker"
-                        }
+                        last_post_time: "2018-07-24T04:09:00.000Z",
+                        discussions_count: "8234"
                     },
                     {
                         id: 2,
-                        title: "New to BlockHub",
-                        rate: "43",
-                        comments_count: "8234",
-                        status: "locked",
-                        author: {
-                            name: "Alan Walker"
-                        }
+                        title: "Help and Tips",
+                        last_post_time: "2018-07-24T04:09:00.000Z",
+                        discussions_count: "34"
                     },
                     {
                         id: 3,
-                        title: "New to BlockHub",
-                        rate: "43",
-                        comments_count: "8234",
-                        status: "starred",
-                        author: {
-                            name: "Alan Walker"
-                        }
+                        title: "Suggestions ans Ideas",
+                        last_post_time: "2018-07-24T04:09:00.000Z",
+                        discussions_count: "127",
+                        icon: "fas fa-life-ring"
                     },
                     {
                         id: 4,
-                        title: "New to BlockHub",
-                        rate: "43",
-                        comments_count: "8234",
-                        author: {
-                            name: "Alan Walker"
-                        }
-                    }
+                        title: "BlockHub for Mac",
+                        last_post_time: "2018-07-24T04:09:00.000Z",
+                        discussions_count: "37",
+                        icon: "fab fa-apple"
+                    },
+                    {
+                        id: 5,
+                        title: "BlockHub for Windows",
+                        last_post_time: "2018-07-24T04:09:00.000Z",
+                        discussions_count: "328",
+                        icon: "fab fa-windows"
+                    },
+                    {
+                        id: 4,
+                        title: "BlockHub for Linux",
+                        last_post_time: "2018-07-24T04:09:00.000Z",
+                        discussions_count: "41",
+                        icon: "fab fa-linux"
+                    },
                 ]
             }
         }
@@ -121,12 +134,9 @@
 </script>
 
 <style lang="scss" scoped>
-    .community-list {
+    .forums-list {
         border-radius: 5px;
-        .c-input{
-            padding: 8px;
-        }
-        .community-item{
+        .forum-item{
             border-radius: 0;
             border-bottom: 0;
             transition: transform 400ms ease-in-out;
@@ -143,6 +153,26 @@
             &:hover{
                 background: rgba(0, 0, 0, .25);
                 transform: scale(1.02);
+            }
+        }
+    }
+    .forums-list__head{
+        display: flex;
+        margin-bottom: 5px;
+        div{
+            &:nth-child(1){
+                width: calc(60% - 70px);
+                margin-left: 70px;
+            }
+            &:nth-child(2){
+                width: 20%;
+                text-align: right;
+                padding-right: 10px;
+            }
+            &:nth-child(3){
+                width: 20%;
+                text-align: right;
+                padding-right: 10px;
             }
         }
     }
