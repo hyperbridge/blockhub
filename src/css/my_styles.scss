@@ -90,6 +90,28 @@ a.btn-outline-white {
     background: #fbe17d;
 }
 
+#app {
+    ::-webkit-scrollbar-track {
+        /* background: rgba(0, 0, 0, .3);
+        border-radius: 0 4px 4px 0; */
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #eee;
+        border-radius: 8px;
+        border: 3px solid #27283c;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 4px;
+    }
+}
+
+
+
+
+
 .page-aside, .page-sidepanel {
     padding: 10px 10px 10px 30px;
     h3 {
