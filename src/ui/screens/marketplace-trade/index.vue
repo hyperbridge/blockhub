@@ -44,6 +44,7 @@
                                             :offer="offer"
                                             @wasSeen="offer.new = false"
                                         />
+                                        <p v-if="!offers.length">No offers were found</p>
                                     </c-tab>
                                 </c-tabs>
                             </div>
@@ -81,7 +82,8 @@
                         { id: 2, author, assets: { their: [assets[2], assets[1]] , yours: [assets[0], assets[4]] }, date: "2018-10-03T04:09:00.000Z" },
                         { id: 3, author, assets: { their: [assets[2], assets[1]] , yours: [assets[0], assets[4]] }, date: "2018-10-01T04:09:00.000Z" },
                         { id: 4, author, assets: { their: [assets[2], assets[1]] , yours: [assets[0], assets[4]] }, date: "2018-09-25T04:09:00.000Z" }
-                    ]
+                    ],
+                    closed: []
                 },
                 activeTab: 1
             }

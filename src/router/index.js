@@ -394,6 +394,11 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/marketplace-trade'], resolve)
         },
         {
+            path: '/marketplace/trade/:tradeId',
+            name: 'Marketplace Trade Transaction',
+            component: (resolve) => require(['@/ui/screens/marketplace-trade-transaction'], resolve)
+        },
+        {
             path: '/download/desktop/mac',
             beforeEnter(to, from, next) {
                 window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-v${appVersion}.dmg`
