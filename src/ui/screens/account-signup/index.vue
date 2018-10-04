@@ -31,15 +31,15 @@
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label class="sr-only">First name</label>
-                                                    <input type="text" class="form-control" placeholder="First name"
+                                                    <label class="sr-only">First Name</label>
+                                                    <input type="text" class="form-control" placeholder="First Name"
                                                             name="first_name" v-model="account.first_name">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label class="sr-only">Last name</label>
-                                                    <input type="text" class="form-control" placeholder="Last name"
+                                                    <label class="sr-only">Last Name</label>
+                                                    <input type="text" class="form-control" placeholder="Last Name"
                                                             name="last_name" v-model="account.last_name">
                                                 </div>
                                             </div>

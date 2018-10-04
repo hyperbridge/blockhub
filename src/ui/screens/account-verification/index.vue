@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="account-navigation">
+    <c-layout navigationKey="account-navigation" :showLeftPanel="false" :showRightPanel="false">
         <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
@@ -14,19 +14,68 @@
                             <div class="tab-container">
                                 <div class="tab-card padding-20">
                                     <h3>Verify your identity (KYC)</h3>
-                                    <p>
-                                        Submit a proof of identity by providing your legal name, country of residence, and government identification number.<br />
-                                        KYC stands for Know Your Customer. BlockHub is required by law to collect this information, so that we know the source of money (money laundering prevention).
-                                    </p>
                                     <div v-if="!verificationLink">
-                                        <p>Please fill in the fields below. Afterward you will be taken to our partner Veriff to complete your identity verification. For "Id number" use the same government ID number you will use for the next step.</p>
-                                        <div id="veriff-root"></div>
+                                        <p>
+                                            Submit proof of identity by providing your legal name, country of residence, and documentation.<br />
+                                            KYC means Know Your Customer. BlockHub is required by law to collect this information, so that we know the source of money (money laundering prevention). This is important particularly because we're working with cryptocurrencies, with unknown account holders.
+                                        </p>
+                                        <p>Please fill in the fields below. Afterward you will be taken to our partner Veriff to complete your identity verification. You will need to use the same information as you've used here.</p>
+                                        <br /><br />
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">First Name</label>
+                                                    <input type="text" class="form-control" placeholder="First Name"
+                                                            name="first_name" v-model="account.first_name">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Last Name</label>
+                                                    <input type="text" class="form-control" placeholder="Last Name"
+                                                            name="last_name" v-model="account.last_name">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Document Type</label>
+                                                    <select id="document_type" name="document_type" class="form-control" v-model="account.document_type">
+                                                        <option value="" selected>Choose Document Type</option>
+                                                        <option value="government_id">Government ID</option>
+                                                        <option value="passport">Passport</option>
+                                                        <option value="drivers_license">Drivers License</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Document Number</label>
+                                                    <input type="text" class="form-control" placeholder="Document Number"
+                                                            name="documentNumber" v-model="account.document_number">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Ethereum Public Address</label>
+                                                    <input type="text" class="form-control" placeholder="Ethereum Public Address"
+                                                            name="public_address" v-model="account.public_address">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <br /><br />
+                                        <c-button
+                                            @click="startVerification()"
+                                        >Start Verification</c-button>
                                     </div>
                                     <div v-if="verificationLink">
+                                        <p>Great. We've told Veriff you're coming!</p>
+
                                         <c-button
                                             :href="verificationLink"
-                                            target="_blank"
-                                            icon="angle-right"
                                             v-if="verificationLink"
                                         >Continue to Veriff</c-button>
                                     </div>
@@ -43,6 +92,7 @@
 
 <script>
     import Veriff from '@veriff/js-sdk'
+    import axios from 'axios'
 
     export default {
         components: {
@@ -53,8 +103,11 @@
         data() {
             return {
                 errors: [],
-                installed: {
-                    veriff: false
+                account: {
+                    first_name: '',
+                    last_name: '',
+                    document_type: '',
+                    document_number: ''
                 },
                 verificationLink: null
             }
@@ -65,31 +118,64 @@
 
                 this.$router.push('/')
             },
-            installVeriff() {
-                if (this.installed.veriff) return
-
-                const veriff = Veriff({
-                    env: 'production', // or 'staging'
-                    apiKey: 'ceba96be-5fd6-48ed-87d6-e5aaf80f9718',
-                    parentId: 'veriff-root',
-                    onSession: (err, response) => {
-                        if (!response || err) {
-                            this.errors.push('Could not contact verification service. Please contact support. ' + JSON.stringify(err))
+            startVerification() {
+                if (
+                    this.account.first_name
+                    && this.account.last_name
+                    && this.account.document_type
+                    && this.account.document_number
+                    && this.account.public_address
+                ) {
+                    const data = {
+                        verification: {
+                            features: [ 'selfid' ],
+                            person: {
+                                firstName: this.account.first_name,
+                                lastName: this.account.last_name,
+                                idNumber: this.account.document_number
+                            },
+                            additionalData: {
+                                eth: this.account.public_address
+                            },
+                            timestamp: (new Date).toISOString()
                         }
-
-                        this.verificationLink = response.verification.url
                     }
-                })
 
-                veriff.mount()
+                    axios({
+                        method: 'post',
+                        url: 'https://magic.veriff.me/v1/sessions',
+                        data: data,
+                        headers: {
+                            'x-auth-client': 'ceba96be-5fd6-48ed-87d6-e5aaf80f9718',
+                            Accept: 'application/json, text/plain, */*'
+                        }
+                    })
+                    .then((response) => {
+                        this.verificationLink = response.data.verification.url
+                    })
+                    .catch((err) => {
+                        this.errors.push('Could not contact verification service. Please contact support. ' + JSON.stringify(err))
+                    })
 
-                this.installed.veriff = true
+                    return
+                }
+
+                if (!this.account.first_name) {
+                    this.errors.push('First Name required.')
+                }
+                if (!this.account.last_name) {
+                    this.errors.push('Last Name required.')
+                }
+                if (!this.account.document_type) {
+                    this.errors.push('Document Type required.')
+                }
+                if (!this.account.document_number) {
+                    this.errors.push('Document Number required.')
+                }
+                if (!this.account.public_address) {
+                    this.errors.push('Ethereum Public Address required.')
+                }
             }
-        },
-        updated: function () {
-            this.$nextTick(() => {
-                this.installVeriff()
-            })
         }
     }
 </script>
