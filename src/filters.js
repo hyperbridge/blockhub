@@ -6,6 +6,8 @@ Vue.filter('formatDate', function(value) {
     }
 });
 
+Vue.filter('customDate', (val, dateFormat = 'MMMM D, YYYY') => moment(val).format(dateFormat));
+
 Vue.filter('formatTime', function(value) {
     if (value) {
         return moment(value).format('hh:mm:ss') + ' GMT'

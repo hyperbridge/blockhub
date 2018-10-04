@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="filter-box">
                                     <h4>Community:</h4>
-                                    <p class="margin-top-20">Community Size:</p>
+                                    <p class="margin-top-20">Size:</p>
                                     <c-range-slider
                                         v-model.number="communitySize"
                                         :max="1000"
@@ -101,6 +101,26 @@
                                         v-model.number="activeUsers"
                                         :max="5000"
                                     />
+                                </div>
+                                <div class="filter-box">
+                                    <h4>System:</h4>
+                                    <c-checkbox
+                                        v-for="os in platforms"
+                                        :key="os.prop"
+                                        :id="`specials-${os.prop}`"
+                                        v-model="os.selected"
+                                    >
+                                        <c-icon
+                                            cat="fab"
+                                            class="platform-icon"
+                                            :name="os.icon"
+                                            :class="[ os.selected
+                                                ? 'icon--active'
+                                                : 'icon--inactive'
+                                            ]"
+                                        />
+                                        {{ os.name }}
+                                    </c-checkbox>
                                 </div>
                             </div>
                             </transition>
@@ -194,6 +214,19 @@
                                             isChildren
                                         />
                                     </c-option-tag>
+                                    <c-option-tag
+                                        v-if="selectedPlatforms.length"
+                                        title="PLATFORMS:"
+                                        @delete="selectedPlatforms.forEach(os => os.selected = false)"
+                                    >
+                                        <c-option-tag
+                                            v-for="(os, index) in selectedPlatforms"
+                                            :key="index"
+                                            :text="os.name | upperFirstChar"
+                                            @delete="os.selected = false"
+                                            isChildren
+                                        />
+                                    </c-option-tag>
                                 </div>
                             </div>
                         </transition>
@@ -276,7 +309,12 @@
                 expandFilters: false,
                 timeout2: 0,
                 communitySize: 0,
-                activeUsers: 0
+                activeUsers: 0,
+                platforms: [
+                    { prop: 'win', icon: 'windows', name: 'Windows', selected: false },
+                    { prop: 'mac', icon: 'apple', name: 'macOS', selected: false },
+                    { prop: 'linux', icon: 'linux', name: 'Linux', selected: false }
+                ],
             }
         },
         methods: {
@@ -287,7 +325,7 @@
                         this.debounce(() => {
                             this.isTyping = false;
                             this.results = [...this.getProductsQuery(this.query)];
-                        }, 200, 'timeout2');
+                        }, 250, 'timeout2');
                     } else {
                         this.isTyping = false;
                         this.results = this.products;
@@ -296,13 +334,23 @@
                 }, 500);
             },
             clearFilters() {
-                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price, communitySize, activeUsers } = this;
+                const {
+                    phrase,
+                    selectedSpecials,
+                    selectedGenres,
+                    selectedLanguages,
+                    price,
+                    communitySize,
+                    activeUsers,
+                    selectedPlatforms
+                } = this;
                 if (phrase.length) this.phrase = '';
                 if (selectedSpecials.length) this.selectedSpecials.forEach(tag => tag.selected = false);
                 if (selectedGenres.length) this.selectedGenres.forEach(tag => tag.selected = false);
                 if (selectedLanguages.length) this.selectedLanguages.forEach(lang => lang.selected = false);
                 if (price.min || price.max) { this.price.min = 0; this.price.max = 0; };
                 if (communitySize || activeUsers) { this.communitySize = 0; this.activeUsers = 0; }
+                if (selectedPlatforms.length) this.selectedPlatforms.forEach(platform => platform.selected = false);
             }
         },
         computed: {
@@ -325,13 +373,21 @@
                 return query;
             },
             resultsFiltered() {
-                return this.selectedLanguagesNames.length
-                    ? this.results.filter(product =>
-                        product.language_support.filter(lang =>
-                            this.selectedLanguagesNames.includes(lang.name)
-                        ).length
-                      )
-                    : this.results
+                const { selectedLanguagesNames, selectedPlatformsNames } = this;
+
+                return this.results
+                    .filter(product => selectedLanguagesNames.length
+                        ? product.language_support.filter(lang =>
+                            selectedLanguagesNames.includes(lang.name)
+                          ).length
+                        : true
+                    )
+                    .filter(product => selectedPlatformsNames.length
+                        ? product.system_requirements.filter(req =>
+                            selectedPlatformsNames.includes(req.os)
+                          ).length
+                        : true
+                    );
             },
             selectedGenres() {
                 return this.selectableTags.filter(tag => tag.selected);
@@ -345,25 +401,43 @@
             selectedLanguagesNames() {
                 return this.selectedLanguages.map(lang => lang.name);
             },
+            selectedPlatforms() {
+                return this.platforms.filter(platform => platform.selected);
+            },
+            selectedPlatformsNames() {
+                return this.selectedPlatforms.map(platform => platform.prop);
+            },
             filtersActive() {
                 return !!(this.selectedGenres.length ||
                     this.phrase.length ||
                     this.selectedSpecials.length ||
                     this.price.max || this.price.min ||
                     this.selectedLanguages.length ||
-                    this.communitySize || this.activeUsers);
+                    this.communitySize || this.activeUsers ||
+                    this.selectedPlatforms.length);
             },
             urlQuery() {
                 const urlQuery = {};
-                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price, communitySize, activeUsers } = this;
+                const {
+                    phrase,
+                    selectedSpecials,
+                    selectedGenres,
+                    selectedLanguages,
+                    price,
+                    communitySize,
+                    activeUsers,
+                    selectedPlatforms
+                } = this;
+
                 if (phrase.length) urlQuery.name = phrase;
                 if (price.min) urlQuery.priceMin = price.min;
                 if (price.max) urlQuery.priceMax = price.max;
                 if (selectedSpecials.length) urlQuery.specials = selectedSpecials.map(tag => tag.value);
                 if (selectedGenres.length) urlQuery.tags = selectedGenres.map(tag => tag.name);
-                if (selectedLanguages.length) urlQuery.langs = selectedLanguages.map(tag => tag.name);
+                if (selectedLanguages.length) urlQuery.langs = this.selectedLanguagesNames;
                 if (communitySize) urlQuery.communitySize = communitySize;
                 if (activeUsers) urlQuery.activeUsers = activeUsers;
+                if (selectedPlatforms.length) urlQuery.platforms = this.selectedPlatformsNames;
                 return urlQuery;
             }
         },
@@ -373,7 +447,18 @@
             } else {
 
                 this.isTyping = true;
-                const { tags, langs, name, priceMin, priceMax, specials, showFilters, activeUsers, communitySize } = this.$route.query;
+                const {
+                    tags,
+                    langs,
+                    name,
+                    priceMin,
+                    priceMax,
+                    specials,
+                    showFilters,
+                    activeUsers,
+                    communitySize,
+                    platforms
+                } = this.$route.query;
 
                 if (name) this.phrase = name;
                 if (priceMin) this.price.min = priceMin;
@@ -390,6 +475,9 @@
                 if (showFilters) this.expandFilters = true;
                 if (activeUsers) this.activeUsers = activeUsers;
                 if (communitySize) this.communitySize = communitySize;
+                if (platforms) this.platforms.forEach(platform => {
+                    if (platforms.includes(platform.prop)) platform.selected = true;
+                });
 
                 if (specials) {
                     this.systemTags.forEach(tag => {
@@ -482,5 +570,9 @@
                 box-shadow: none;
             }
         }
+    }
+    .platform-icon {
+        font-size: 18px;
+        margin-right: 5px;
     }
 </style>
