@@ -6,7 +6,7 @@ Vue.filter('formatDate', function(value) {
     }
 });
 
-Vue.filter('formatDate2', val => moment(val).format('MM / DDD'))
+Vue.filter('customDate', (val, dateFormat = 'MMMM D, YYYY') => moment(val).format(dateFormat));
 
 Vue.filter('formatTime', function(value) {
     if (value) {

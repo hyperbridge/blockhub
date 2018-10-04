@@ -1,14 +1,18 @@
 <template>
-    <div class="trade-offer">
+    <div class="trade-offer" :class="{ 'trade-offer--new': offer.new }">
         <div class="trade-offer__date">
             <span>
+                <span class="trade-offer__status" v-if="offer.new">NEW</span>
                 {{ offer.date | formatDate }} - {{ offer.date | timeAgo }}
             </span>
             <span>
                 Expires {{ offer.date | expIn | timeAgo }}
             </span>
         </div>
-        <div class="trade-offer__content" @click="showDetails = !showDetails">
+        <div
+            class="trade-offer__content"
+            @click="expandDetails()"
+        >
             <c-author :author="offer.author"/>
             <span>
                 Trade {{ offer.assets.their.length }} for {{ offer.assets.yours.length }} assets
@@ -108,6 +112,12 @@
                 showDetails: false
             }
         },
+        methods: {
+            expandDetails() {
+                this.showDetails = !this.showDetails;
+                if (this.offer.new) this.$emit('wasSeen');
+            }
+        },
         computed: {
             totalValue() {
                 const { assets } = this.offer;
@@ -135,6 +145,19 @@
         margin-bottom: 25px;
         border-radius: 4px;
     }
+    $new: #5D75F7;
+    .trade-offer__status {
+        background: $new;
+        font-size: 11px;
+        border-radius: 4px;
+        padding: 2px;
+        font-weight: bold;
+        color: #fff;
+        margin-right: 4px;
+    }
+    .trade-offer--new .trade-offer__content {
+        border-color: $new;
+    }
     .trade-offer__date {
         color: rgba(255,255,255,.6);
         font-size: 13px;
@@ -144,6 +167,7 @@
     }
     .trade-offer__content {
         background: rgba(1,1,1,.25);
+        border: 1px solid transparent;
         padding: 20px;
         display: flex;
         justify-content: space-between;
