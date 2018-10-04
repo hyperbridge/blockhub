@@ -3,26 +3,17 @@
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row margin-bottom-50">
-                    <div class="col-12 col-lg-8">
-                        <div class="h2 margin-top-5">Welcome to the BlockHub discussion</div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Fusce vulputate, arcu at dictum imperdiet, metus tellus cursus tortor,
-                            pharetra feugiat mauris risus sed risus. Integer viverra mauris eget urna
-                            pretium, et lacinia elit molestie. In sodales condimentum felis,
-                            in volutpat augue sagittis a.
-                        </p>
-                        <p>
-                            Vivamus nec scelerisque tellus. Fusce ornare blandit ante,
-                            sit amet sollicitudin risus pulvinar quis.
-                            Vivamus ac dignissim turpis. Sed sit amet justo quis sem
-                            sodales aliquet eu eu massa.
-                        </p>
-                        <c-search size="lg" />
+                    <div class="col-12 col-lg-8 col-xl-9">
+                        <c-block title="General" :noGutter="true" :onlyContentBg="true">
+                            <div class="community-list">
+                                <c-community-item v-for="(post, index) in posts" :key="index" :post="post" />
+                            </div>
+                        </c-block>
                     </div>
-                    <div class="col-12 col-lg-4">
+                    <div class="col-12 col-lg-4 col-xl-3">
                         <c-block title="Links & Resources" :noGutter="true" :onlyContentBg="true">
                             <div class="d-flex flex-column">
+                                <c-search class="mb-2" />
                                 <c-button status="plain" class="my-1">
                                     <i class="fas fa-info-circle"></i> View Discussion Guidelines
                                 </c-button>
@@ -39,23 +30,6 @@
                         </c-block>
                     </div>
                 </div>
-                <c-block :noGutter="true" :onlyContentBg="true">
-                    <c-heading-bar
-                        slot="title"
-                        class="mb-0"
-                        :headingTabs="[
-                    { title: 'General', category: 'general_forum' },
-                    { title: 'Game Forums', category: 'game_forums_forum' },
-                    { title: 'Support', category: 'support_forum' }
-                ]"
-                        @changeTab="category = $event;"
-                    >
-                    </c-heading-bar>
-
-                    <div class="community-list">
-                        <c-community-item v-for="(post, index) in posts" :key="index" :post="post" />
-                    </div>
-                </c-block>
             </div>
         </div>
     </c-layout>

@@ -64,7 +64,6 @@
                                 Discussions
                             </div>
                         </div>
-
                         <c-community-forum v-for="(forum, index) in forums" :key="index" :forum="forum" />
                     </div>
                 </c-block>

@@ -5,7 +5,7 @@
                 <i :class="icon"></i>
             </div>
             <div class="text">
-                <router-link :to="{ name: 'Community discussion', params: {id: forum.id } }">
+                <router-link :to="{ name: 'Community forum', params: {id: forum.id } }">
                     {{ forum.title }}
                 </router-link>
             </div>
@@ -13,7 +13,6 @@
                 {{ forum.last_post_time }}
             </div>
             <div class="discussions-count">
-                <!--<i class="fas fa-comment"></i>-->
                 {{ forum.discussions_count }}
             </div>
         </div>

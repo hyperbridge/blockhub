@@ -2,60 +2,25 @@
     <c-layout navigationKey="store-navigation">
         <div class="content" id="content">
             <div class="container-fluid">
-                <div class="row margin-bottom-50">
-                    <div class="col-12 col-lg-8">
-                        <div class="h2 margin-top-5">Welcome to the BlockHub discussion</div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Fusce vulputate, arcu at dictum imperdiet, metus tellus cursus tortor,
-                            pharetra feugiat mauris risus sed risus. Integer viverra mauris eget urna
-                            pretium, et lacinia elit molestie. In sodales condimentum felis,
-                            in volutpat augue sagittis a.
-                        </p>
-                        <p>
-                            Vivamus nec scelerisque tellus. Fusce ornare blandit ante,
-                            sit amet sollicitudin risus pulvinar quis.
-                            Vivamus ac dignissim turpis. Sed sit amet justo quis sem
-                            sodales aliquet eu eu massa.
-                        </p>
-                        <c-search size="lg" />
-                    </div>
-                    <div class="col-12 col-lg-4">
-                        <c-block title="Links & Resources" :noGutter="true" :onlyContentBg="true">
-                            <div class="d-flex flex-column">
-                                <c-button status="plain" class="my-1">
-                                    <i class="fas fa-info-circle"></i> View Discussion Guidelines
-                                </c-button>
-                                <c-button status="plain" class="my-1">
-                                    <i class="fas fa-info-circle"></i> Discussion Rules
-                                </c-button>
-                                <c-button status="plain" class="my-1">
-                                    <i class="fas fa-question-circle"></i> FAQ
-                                </c-button>
-                                <c-button status="success" icon="plus" class="margin-top-20" style="margin-right: auto">
-                                    New discussion
-                                </c-button>
-                            </div>
-                        </c-block>
+                <div class="col-12">
+                    <div class="community-wrapper">
+
+                        <c-item :post="post"/>
+
+                        <c-post-comment
+                            v-for="(comment, index) in post.content.comments"
+                            :key="index"
+                            :comment="comment"
+                        >
+                            <c-post-comment
+                                v-for="(subcomment, index) in comment.replies"
+                                :key="index"
+                                :comment="subcomment"
+                            />
+                        </c-post-comment>
+
                     </div>
                 </div>
-                <c-block :noGutter="true" :onlyContentBg="true">
-                    <c-heading-bar
-                        slot="title"
-                        class="mb-0"
-                        :headingTabs="[
-                    { title: 'General', category: 'general_forum' },
-                    { title: 'Game Forums', category: 'game_forums_forum' },
-                    { title: 'Support', category: 'support_forum' }
-                ]"
-                        @changeTab="category = $event;"
-                    >
-                    </c-heading-bar>
-
-                    <div class="community-list">
-                        <c-community-item v-for="(post, index) in posts" :key="index" :post="post" />
-                    </div>
-                </c-block>
             </div>
         </div>
     </c-layout>
@@ -68,53 +33,50 @@
         components: {
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
-            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
-            'c-community-item': (resolve) => require(['@/ui/components/community/post-item'], resolve),
+            'c-item': (resolve) => require(['@/ui/components/community/post-item'], resolve),
+            'c-post-comment': (resolve) => require(['@/ui/components/community/comment'], resolve),
             'c-search': (resolve) => require(['@/ui/components/searcher'], resolve)
         },
         data() {
+            const authors = [
+                { name: 'Nakatochi', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png' },
+                { name: 'Nakatochi', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL' },
+                { name: 'SatoshiSan', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL' },
+            ];
+            const dates = [
+                '2018-07-24T04:09:00.000Z',
+                '2017-07-24T04:09:00.000Z',
+                '2018-08-12T04:09:00.000Z',
+                '2018-08-14T04:09:00.000Z',
+                '2018-04-14T04:09:00.000Z',
+                '2018-04-17T04:09:00.000Z',
+            ];
+            const placeholderText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non maximus tellus, eu lacinia justo. Cras semper vestibulum est. Donec a massa vitae nibh consectetur efficitur non in erat. Morbi id dapibus tortor. Praesent sit amet vulputate leo, eu posuere neque. In id ante scelerisque, commodo nisi non, eleifend mauris. Pellentesque massa elit, semper non libero nec, interdum aliquet dolor.';
+
             return {
-                posts: [
-                    {
-                        id: 1,
-                        title: "New to BlockHub",
-                        rate: "43",
-                        comments_count: "8234",
-                        status: "pinned",
-                        author: {
-                            name: "Alan Walker"
-                        }
-                    },
-                    {
-                        id: 2,
-                        title: "New to BlockHub",
-                        rate: "43",
-                        comments_count: "8234",
-                        status: "locked",
-                        author: {
-                            name: "Alan Walker"
-                        }
-                    },
-                    {
-                        id: 3,
-                        title: "New to BlockHub",
-                        rate: "43",
-                        comments_count: "8234",
-                        status: "starred",
-                        author: {
-                            name: "Alan Walker"
-                        }
-                    },
-                    {
-                        id: 4,
-                        title: "New to BlockHub",
-                        rate: "43",
-                        comments_count: "8234",
-                        author: {
-                            name: "Alan Walker"
-                        }
+                post: {
+                    objectId: '192u81i218j2812j8',
+                    title: `The previous title doesn't have it's single line aligned vertically because XD does not have this functionality.`,
+                    date: dates[3],
+                    rate: 1391,
+                    comments_count: 894391,
+                    status: 'starred',
+                    author: authors[0],
+                    content: {
+                        img: 'http://memesbams.com/wp-content/uploads/2017/08/2.3-Delightful-cheer-up-cat-meme.jpg',
+                        text: placeholderText,
+                        comments: [
+                            { author: authors[1], text: placeholderText, rate: 319, date: dates[4] },
+                            { author: authors[0], text: placeholderText, rate: 932, date: dates[1], replies: [
+                                    { author: authors[1], text: placeholderText, rate: 318, date: dates[0] },
+                                    { author: authors[0], text: placeholderText, rate: -49, date: dates[2] },
+                                    { author: authors[1], text: placeholderText, rate: 442, date: dates[1] },
+                                    { author: authors[0], text: placeholderText, rate: 1239, date: dates[5] }
+                                ]},
+                            { author: authors[0], text: placeholderText, rate: -51, date: dates[2] }
+                        ]
                     }
-                ]
+                }
             }
         }
     }
