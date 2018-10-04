@@ -107,7 +107,10 @@
                 margin-top: 3px;
             }
         }
-
+        &.c-btn-sm{
+            padding: 1px 5px;
+            font-size: 13px;
+        }
         &.c-btn-md{
             padding: 3px 10px;
             font-size: 16px;
