@@ -84,9 +84,9 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label class="sr-only">Secret Question</label>
+                                                    <label class="sr-only">Secret Question #1</label>
                                                     <!-- http://goodsecurityquestions.com/examples/ -->
-                                                    <select id="secret_question" name="secret_question" class="form-control" v-model="account.secret_question">
+                                                    <select id="secret_question_1" name="secret_question_1" class="form-control" v-model="account.secret_question_1">
                                                         <option value="" selected>Choose Secret Question</option>
                                                         <option value="last_name_first_kissed">What is the first name of the person you first kissed?</option>
                                                         <option value="first_name_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
@@ -100,14 +100,36 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Answer #1</label>
-                                                    <input type="text" class="form-control" placeholder="Your secret answer"
-                                                            name="secret_answer" v-model="account.secret_answer">
+                                                    <input type="text" class="form-control" placeholder="Secret Answer #1"
+                                                            name="secret_answer_1" v-model="account.secret_answer_1">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Secret Question #2</label>
+                                                    <!-- http://goodsecurityquestions.com/examples/ -->
+                                                    <select id="secret_question_2" name="secret_question_2" class="form-control" v-model="account.secret_question_2">
+                                                        <option value="" selected>Choose Secret Question</option>
+                                                        <option value="last_name_first_kissed">What is the first name of the person you first kissed?</option>
+                                                        <option value="first_name_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
+                                                        <option value="favorite_high_school_teacher">What is the last name of your favorite teacher in high school?</option>
+                                                        <option value="last_name_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
+                                                        <option value="wedding_reception">What is the name of the plac eyour wedding reception was held?</option>
+                                                        <option value="city_sibling_live">In what city or town does your nearest sibling live?</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Answer #2</label>
+                                                    <input type="text" class="form-control" placeholder="Secret Answer #2"
+                                                            name="secret_answer_2" v-model="account.secret_answer_2">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                <p>If you ever need to recover your password, you will need the answer to this secret question AND your birthday. With these two you will be able to recover your password, which will allow you to recover your account. If your account is compromised, you should transfer your funds immediately.</p>
+                                                <p>If you ever need to recover your password, you will need the answer to your secret question AND your birthday. With these two you will be able to recover your password, which will allow you to recover your account. If your account is compromised, you should transfer your funds immediately.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -301,7 +323,6 @@
                                     <div>
                                         <c-button
                                             @click="checkForm()"
-                                            icon="angle-right"
                                         >NEXT</c-button>
                                     </div>
                                 </div>
@@ -350,20 +371,24 @@
                                     />
                                     <c-button
                                         @click="checkForm()"
-                                        icon="angle-right"
                                         v-if="verifyingPassphrase"
                                     >NEXT</c-button>
                                 </div>
                             </c-tab>
                             <c-tab :tab_id="3">
                                 <div class="tab-container">
-                                    <div class="padding-20">
-                                        <h3>Congratulations!</h3>
-                                        <p>That's it. You're now a member of BlockHub, and the future of decentralized protocols.</p>
-                                        <div class="verification-icon success">
-                                            <i class="fas fa-lock"></i>
-                                        </div>
+                                    <div class="padding-20" v-if="finishedStep === 3">
+                                        <p>That's it. You're now a member of BlockHub, and the future of decentralized protocols.<br />
+                                        We hope you enjoy many years of success with BlockHub and the Hyperbridge family!</p>
 
+                                        <br />
+                                        <c-button
+                                            class="c-btn-lg outline-green"
+                                            @click="checkForm()"
+                                        >Continue to BlockHub</c-button>
+                                    </div>
+                                    <div class="padding-20" v-if="finishedStep < 3">
+                                        <h3>Congratulations!</h3>
                                         <h3>Now let's build your main identity. Don't worry, you can have more than one identity.</h3>
                                         <div class="row margin-top-40">
                                             <div class="col">
@@ -387,11 +412,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-end margin-top-20" slot="footer">
+                                <div class="d-flex justify-content-end margin-top-20" slot="footer" v-if="finishedStep < 3">
                                     <c-button
                                         status="success"
                                         icon="check"
                                         icon_position="right"
+                                        @click="checkForm()"
                                     >COMPLETE</c-button>
                                 </div>
                             </c-tab>
@@ -771,8 +797,10 @@ export default {
                 email: 'eric@muyser.com',
                 password: '1234',
                 repeat_password: '1234',
-                secret_question: 'first_name_favorite_aunt_uncle',
-                secret_answer: 'shelly',
+                secret_question_1: 'first_name_favorite_aunt_uncle',
+                secret_question_2: 'first_name_favorite_aunt_uncle',
+                secret_answer_1: 'shelly',
+                secret_answer_2: 'shelly',
                 agreement: true,
                 newsletter: false,
                 passphrase: null,
@@ -799,8 +827,10 @@ export default {
                     && this.account.email
                     && this.account.birthday
                     && this.account.agreement
-                    && this.account.secret_question
-                    && this.account.secret_answer
+                    && this.account.secret_question_1
+                    && this.account.secret_answer_1
+                    && this.account.secret_question_2
+                    && this.account.secret_answer_2
                     && this.account.password
                     && this.account.repeat_password
                     && this.account.password === this.account.repeat_password
@@ -812,8 +842,10 @@ export default {
                         email: this.account.email,
                         password: this.account.password,
                         birthday: this.account.birthday,
-                        secret_question: this.account.secret_question,
-                        secret_answer: this.account.secret_answer
+                        secret_question_1: this.account.secret_question_1,
+                        secret_answer_1: this.account.secret_answer_1,
+                        secret_question_2: this.account.secret_question_2,
+                        secret_answer_2: this.account.secret_answer_2
                     }).then((res) => {
                         this.account = { ...this.account, ...res.account }
 
@@ -845,6 +877,18 @@ export default {
                     if (this.account.password !== this.account.repeat_password) {
                         this.errors.push('Passwords must match.')
                     }
+                    if (!this.account.secret_question_1) {
+                        this.errors.push('Secret Question 1 required.')
+                    }
+                    if (!this.account.secret_answer_1) {
+                        this.errors.push('Secret Answer 1 required.')
+                    }
+                    if (!this.account.secret_question_2) {
+                        this.errors.push('Secret Question 2 required.')
+                    }
+                    if (!this.account.secret_answer_2) {
+                        this.errors.push('Secret Answer 2 required.')
+                    }
                 }
             } else if (this.currentStep === 2) {
                 const passphraseVerification = $.map($(this.$refs.passphraseVerification).find('input'), (item) => $(item).val()).join(' ')
@@ -870,8 +914,12 @@ export default {
                 
             } else if (this.currentStep === 3) {
                 if (this.account.identity.wallet && this.account.identity.name) {
-                    this.finishedStep = 3;
-                    this.currentStep = 3;
+                    if (this.finishedStep === 3) {
+                        this.$router.push('/')
+                    } else {
+                        this.finishedStep = 3;
+                        this.currentStep = 3;
+                    }
                 } else {
                     if (!this.account.identity.wallet) {
                         this.errors.push('Wallet number required.');

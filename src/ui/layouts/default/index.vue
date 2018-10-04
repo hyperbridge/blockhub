@@ -458,7 +458,6 @@
             showNotifPopup(ntf) {
                 this.notifPopup = ntf;
                 this.notifPopup.show_popup = true;
-                console.log(this.notifPopup)
             }
         },
         mounted: function () {

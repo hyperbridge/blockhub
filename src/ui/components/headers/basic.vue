@@ -3,7 +3,6 @@
         <div class="app-header__top-bar"></div>
         <div class="position-relative w-100" style="margin-top: -10px">
             <div class="app-header__bar-left">
-                {{ is_locked }}
                 <div class="app-header__close-button" v-if="desktop_mode">
                     <a href="#" @click.prevent="closeWindow">&times;</a>
                 </div>

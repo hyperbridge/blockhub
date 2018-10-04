@@ -20,16 +20,10 @@
                             <c-tab :tab_id="1" :selected="true" :showFooter="true">
                                 <div class="tab-container">
                                     <div class="tab-card">
-                                        <h4>Welcome</h4>
                                         <p>Already have an account?</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center margin-top-20" slot="footer">
-                                    <div>
-                                        <c-button
-                                            @click="checkForm()"
-                                            icon="angle-right"
-                                        >NEXT</c-button>
+                                        <c-button class="c-btn-lg outline-success" @click="$router.push('/account/signin')">Sign In</c-button>
+                                        <p>Otherwise you can create an account here:</p>
+                                        <c-button class="c-btn-lg outline-success" @click="$router.push('/account/signup')">Create Account</c-button>
                                     </div>
                                 </div>
                             </c-tab>

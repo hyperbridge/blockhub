@@ -195,18 +195,30 @@
                 return this.$store.state.application.account.settings.client.animations
             }
         },
-        methods: mapActions(['loadSettings']),
+        methods: {
+            ...mapActions(['loadSettings']),
+            ensureDesktopWelcome(to) {
+                if (this.$store.state.application.desktop_mode
+                && !this.$store.state.application.signed_in
+                && (!to ? true : (
+                    to.path !== '/account/signup'
+                    && to.path !== '/account/signin'
+                    && to.path !== '/welcome'
+                ))) {
+                    this.$router.push({ path: '/welcome' })
+                }
+            }
+        },
         mounted() {
             this.loadSettings()
+            this.ensureDesktopWelcome()
         },
         watch: {
             $route(to, from) {
                 $('body').removeClass('show-sidebar')
                 $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-cog')
 
-                if (to.path !== '/welcome' && this.$store.state.application.locked) {
-                    this.$router.push({ path: '/welcome' })
-                }
+                this.ensureDesktopWelcome(to)
             }
         }
     }

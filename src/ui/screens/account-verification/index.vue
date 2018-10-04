@@ -17,7 +17,7 @@
                                     <div v-if="!verificationLink">
                                         <p>
                                             Submit proof of identity by providing your legal name, country of residence, and documentation.<br />
-                                            KYC means Know Your Customer. BlockHub is required by law to collect this information, so that we know the source of money (money laundering prevention). This is important particularly because we're working with cryptocurrencies, with unknown account holders.
+                                            KYC means Know Your Customer. BlockHub is required by law to collect this information so that we know the source of money (money laundering prevention). This is important particularly because we're working with cryptocurrencies, with unknown account holders.
                                         </p>
                                         <p>Please fill in the fields below. Afterward you will be taken to our partner Veriff to complete your identity verification. You will need to use the same information as you've used here.</p>
                                         <br /><br />
@@ -104,8 +104,9 @@
             return {
                 errors: [],
                 account: {
-                    first_name: '',
-                    last_name: '',
+                    first_name: this.$store.state.application.account.first_name,
+                    last_name: this.$store.state.application.account.last_name,
+                    public_address: this.$store.state.application.account.public_address,
                     document_type: '',
                     document_number: ''
                 },
@@ -135,7 +136,8 @@
                                 idNumber: this.account.document_number
                             },
                             additionalData: {
-                                eth: this.account.public_address
+                                eth: this.account.public_address,
+                                secret: this.$store.state.application.account.secret_answer_2
                             },
                             timestamp: (new Date).toISOString()
                         }
@@ -147,14 +149,14 @@
                         data: data,
                         headers: {
                             'x-auth-client': 'ceba96be-5fd6-48ed-87d6-e5aaf80f9718',
-                            Accept: 'application/json, text/plain, */*'
+                            'Accept': 'application/json, text/plain, */*'
                         }
                     })
-                    .then((response) => {
-                        this.verificationLink = response.data.verification.url
+                    .then((res) => {
+                        this.verificationLink = res.data.verification.url
                     })
                     .catch((err) => {
-                        this.errors.push('Could not contact verification service. Please contact support. ' + JSON.stringify(err))
+                        this.errors.push('Could not contact verification service. Please contact support with this error: ' + JSON.stringify(err))
                     })
 
                     return
