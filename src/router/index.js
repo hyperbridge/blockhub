@@ -69,67 +69,110 @@ const router = new Router({
         {
             path: '/store/cart',
             name: 'Store Cart',
-            component: (resolve) => require(['@/ui/screens/store-cart'], resolve)
+            component: (resolve) => require(['@/ui/screens/store-cart'], resolve),
+            meta: {
+                auth: true
+            }
         },
         {
             path: '/store/checkout',
             name: 'Store Checkout',
-            component: (resolve) => require(['@/ui/screens/store-checkout'], resolve)
+            component: (resolve) => require(['@/ui/screens/store-checkout'], resolve),
+            meta: {
+                auth: true
+            }
         },
         {
             path: '/store/invoices',
             name: 'Store Invoices',
-            component: (resolve) => require(['@/ui/screens/store-invoices'], resolve)
+            component: (resolve) => require(['@/ui/screens/store-invoices'], resolve),
+            meta: {
+                auth: true
+            }
         },
         {
             path: '/store/invoice/:id',
             name: 'Store Invoice',
-            component: (resolve) => require(['@/ui/screens/store-invoice'], resolve)
+            component: (resolve) => require(['@/ui/screens/store-invoice'], resolve),
+            meta: {
+                auth: true
+            }
         },
         {
             path: '/account',
             name: 'Account',
-            component: (resolve) => require(['@/ui/screens/account'], resolve)
+            component: (resolve) => require(['@/ui/screens/account'], resolve),
+            meta: {
+                auth: true,
+                permission: 'desktop'
+            }
         },
         {
             path: '/account/signup',
             name: 'Sign Up',
-            component: (resolve) => require(['@/ui/screens/account-signup'], resolve)
+            component: (resolve) => require(['@/ui/screens/account-signup'], resolve),
+            meta: {
+                permission: 'desktop'
+            }
         },
         {
             path: '/account/signin',
             name: 'Sign In',
-            component: (resolve) => require(['@/ui/screens/account-signin'], resolve)
+            component: (resolve) => require(['@/ui/screens/account-signin'], resolve),
+            meta: {
+                permission: 'desktop'
+            }
         },
         {
             path: '/account/signout',
             name: 'Sign Out',
-            component: (resolve) => require(['@/ui/screens/account-signout'], resolve)
+            component: (resolve) => require(['@/ui/screens/account-signout'], resolve),
+            meta: {
+                auth: true,
+                permission: 'desktop'
+            }
         },
         {
             path: '/account/verification',
             name: 'Account Verification',
-            component: (resolve) => require(['@/ui/screens/account-verification'], resolve)
+            component: (resolve) => require(['@/ui/screens/account-verification'], resolve),
+            meta: {
+                auth: true,
+                permission: 'desktop'
+            }
         },
         {
             path: '/account/wallets',
             name: 'Wallets',
-            component: (resolve) => require(['@/ui/screens/account-wallets'], resolve)
+            component: (resolve) => require(['@/ui/screens/account-wallets'], resolve),
+            meta: {
+                auth: true,
+                permission: 'desktop'
+            }
         },
         {
             path: '/account/new-wallet',
             name: 'New Wallet',
-            component: (resolve) => require(['@/ui/screens/account-new-wallet'], resolve)
+            component: (resolve) => require(['@/ui/screens/account-new-wallet'], resolve),
+            meta: {
+                permission: 'desktop'
+            }
         },
         {
             path: '/account/identities',
             name: 'Identities',
-            component: (resolve) => require(['@/ui/screens/account-identities'], resolve)
+            component: (resolve) => require(['@/ui/screens/account-identities'], resolve),
+            meta: {
+                permission: 'desktop'
+            }
         },
         {
             path: '/account/new-identity',
             name: 'New Identity',
-            component: (resolve) => require(['@/ui/screens/account-new-identity'], resolve)
+            component: (resolve) => require(['@/ui/screens/account-new-identity'], resolve),
+            meta: {
+                permission: 'desktop'
+            }
         },
         {
             path: '/wallet/:id',
@@ -188,43 +231,66 @@ const router = new Router({
         {
             path: '/settings',
             name: 'Settings',
-            component: (resolve) => require(['@/ui/screens/settings'], resolve)
+            component: (resolve) => require(['@/ui/screens/settings'], resolve),
+            meta: {
+                auth: true
+            }
         },
         {
             path: '/settings/profile',
             name: 'Profile',
-            component: (resolve) => require(['@/ui/screens/settings-profile'], resolve)
+            component: (resolve) => require(['@/ui/screens/settings-profile'], resolve),
+            meta: {
+                auth: true
+            }
         },
         {
             path: '/settings/client',
             name: 'Client Settings',
-            component: (resolve) => require(['@/ui/screens/settings-client'], resolve)
+            component: (resolve) => require(['@/ui/screens/settings-client'], resolve),
+            meta: {
+                auth: true
+            }
         },
         {
             path: '/settings/activity',
             name: 'Activity Settings',
-            component: (resolve) => require(['@/ui/screens/settings-activity'], resolve)
+            component: (resolve) => require(['@/ui/screens/settings-activity'], resolve),
+            meta: {
+                auth: true
+            }
         },
         {
             path: '/settings/debug',
             name: 'Debug Settings',
-            component: (resolve) => require(['@/ui/screens/settings-debug'], resolve)
+            component: (resolve) => require(['@/ui/screens/settings-debug'], resolve),
+            meta: {
+                auth: true
+            }
         },
         {
             path: '/settings/game-scanner',
             name: 'Game Scanner',
-            component: (resolve) => require(['@/ui/screens/settings-game-scanner'], resolve)
+            component: (resolve) => require(['@/ui/screens/settings-game-scanner'], resolve),
+            meta: {
+                auth: true
+            }
         },
         {
             path: '/developer',
             name: 'Developer Area',
-            component: (resolve) => require(['@/ui/screens/developer'], resolve)
+            component: (resolve) => require(['@/ui/screens/developer'], resolve),
+            meta: {
+                auth: true
+            }
         },
         {
             path: '/developer/new-product',
             name: 'New Product',
             component: (resolve) => require(['@/ui/screens/product-overview'], resolve),
-            props: {id: 'new'}
+            props: {
+                id: 'new'
+            }
         },
         {
             path: '/product/:id',
@@ -445,10 +511,10 @@ router.afterEach((to, from) => {
 
 export const Auth = {
   loggedIn() {
-    return true
+    return store.state.application.signed_in
   },
   accessGate(permission = false) {
-      const privileges = store.getters['application/privileges']
+    const privileges = store.getters['application/privileges']
     if (!permission) {
       return true
     }
@@ -460,13 +526,14 @@ export const Auth = {
 
 
 router.beforeEach((to, from, next) => {
-    $('body').addClass('screen-loading')
+  $('body').addClass('screen-loading')
 
   if (!Auth.loggedIn() && !!to.meta.auth) {
     next({
-      path: '/login',
+      path: '/account/signin',
       query: { redirect: to.fullPath }
     })
+    return
   }
 
   if (!Auth.accessGate(to.meta.permission)) {

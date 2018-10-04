@@ -31,10 +31,16 @@ const updateState = (savedData, updatedState = {}) => {
 };
 
 export const getters = {
-    privileges() {
-        return [
-            'edit'
-        ]
+    privileges(state) {
+        const result = []
+
+        result.push('edit')
+
+        if (state.desktop_mode) {
+            result.push('desktop')
+        }
+
+        return result
     }
 }
 
