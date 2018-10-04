@@ -276,3 +276,10 @@
     align-items: center;
     flex-wrap: wrap;
 }
+
+.icon--active {
+    text-shadow: 0 0 5px rgba(255,255,255, .7);
+}
+.icon--inactive:not(:hover) {
+    opacity: .7;
+}

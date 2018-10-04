@@ -60,7 +60,7 @@
                     <c-icon
                         cat="fab"
                         class="platform-icon"
-                        :name="os.name"
+                        :name="os.icon"
                         :class="[ choosenPlatforms.includes(os.prop)
                             ? 'platform-icon--active'
                             : 'platform-icon--inactive'
@@ -127,9 +127,9 @@
                 phrase: '',
                 results: [],
                 platforms: [
-                    { name: 'windows', prop: 'win' },
-                    { name: 'apple', prop: 'mac' },
-                    { name: 'linux', prop: 'linux' }
+                    { prop: 'win', icon: 'windows', name: 'Windows' },
+                    { prop: 'mac', icon: 'apple', name: 'macOS' },
+                    { prop: 'linux', icon: 'linux', name: 'Linux' }
                 ],
                 choosenPlatforms: [],
                 communitySize: 0,
@@ -137,9 +137,6 @@
             }
         },
         methods: {
-            filter() {
-                alert('Click')
-            },
             search() {
                 this.results = this.phrase.length
                     ? this.getProductsByName(this.phrase)
@@ -148,9 +145,7 @@
             goToSearchPage() {
                 this.$router.push({
                     name: 'Search Page',
-                    query: this.phrase.length
-                        ? { name: this.phrase }
-                        : {}
+                    query: this.query
                 });
             }
         },
@@ -159,13 +154,15 @@
                 getProductsByName: 'marketplace/getProductsByName'
             }),
             filteredResults() {
-                return this.choosenPlatforms.length
-                    ? this.results.filter(result =>
-                        result.system_requirements.some(req =>
-                            this.choosenPlatforms.includes(req.os)
-                        )
+                const { choosenPlatforms } = this;
+
+                return this.results
+                    .filter(result => choosenPlatforms.length
+                        ? result.system_requirements.some(req =>
+                            choosenPlatforms.includes(req.os)
+                          )
+                        : true
                     )
-                    : this.results;
             },
             query() {
                 const { phrase, choosenPlatforms, communitySize, activeUsers } = this;
