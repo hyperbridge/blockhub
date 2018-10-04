@@ -115,35 +115,14 @@
 
                             <div class="navigation">
                                 <div class="messages-action">
-                                    <a href="#3" class="btn">Quick Send</a>
-                                    <a href="#3" class="btn">Go to Messages</a>
+                                    <!--<a href="#3" class="btn">Quick Send</a>-->
+                                    <!--<a href="#3" class="btn">Go to Messages</a>-->
+                                    <c-button status="info" icon="angle-double-right" size="sm">Quick Send</c-button>
+                                    <c-button status="info" icon="envelope" size="sm">View All</c-button>
                                 </div>
-                                <ul class="message-list">
-                                    <li class="message-list__item">
-                                        <i class="fas fa-reply"></i>
-                                        <h5>Username, 2 days ago:</h5>
-                                        <p>Maybe I ought to crank Morley Safer's poutine,
-                                            eh, that should to start them up.</p>
-                                    </li>
-                                    <li class="message-list__item">
-                                        <i class="fas fa-reply"></i>
-                                        <h5>Username, 2 days ago:</h5>
-                                        <p>Maybe I ought to crank Morley Safer's poutine,
-                                            eh, that should to start them up.</p>
-                                    </li>
-                                    <li class="message-list__item">
-                                        <i class="fas fa-reply"></i>
-                                        <h5>Username, 2 days ago:</h5>
-                                        <p>Maybe I ought to crank Morley Safer's poutine,
-                                            eh, that should to start them up.</p>
-                                    </li>
-                                    <li class="message-list__item">
-                                        <i class="fas fa-reply"></i>
-                                        <h5>Username, 2 days ago:</h5>
-                                        <p>Maybe I ought to crank Morley Safer's poutine,
-                                            eh, that should to start them up.</p>
-                                    </li>
-                                </ul>
+                                <div class="message-list">
+                                    <c-message v-for="(msg, index) in messages" :key="index" :msg="msg" />
+                                </div>
                             </div>
 
                         </div>
@@ -371,6 +350,7 @@
             'c-purchase-popup': (resolve) => require(['@/ui/components/purchase-popup/index.vue'], resolve),
             'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
             'c-cookie-policy': (resolve) => require(['@/ui/components/cookie-policy'], resolve),
+            'c-message': (resolve) => require(['@/ui/components/message'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide
         },
@@ -410,6 +390,18 @@
             }
         },
         data() {
+            const authors = [
+                {name: 'Nakatochi', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'},
+                {
+                    name: 'Nakatochi',
+                    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL'
+                },
+                {
+                    name: 'SatoshiSan',
+                    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL'
+                },
+            ];
+
             return {
                 navigationComponent: this.navigationKey || false,
                 loadingState: true,
@@ -418,7 +410,39 @@
                     spaceBetween: 10,
                     loop: false,
                 },
-                notifPopup: {}
+                notifPopup: {},
+                messages: [
+                    {
+                        id: 1,
+                        author: authors[0],
+                        time: '2014-11-05 16:02:21 -02:00',
+                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non maximus tellus'
+                    },
+                    {
+                        id: 2,
+                        author: authors[1],
+                        time: '2014-11-05 4:35:21 -02:00',
+                        text: 'Pellentesque in massa nec dui eleifend rhoncus. Etiam vitae est sit amet magna ornare ultrices'
+                    },
+                    {
+                        id: 3,
+                        author: authors[2],
+                        time: '2014-11-05 19:12:21 -02:00',
+                        text: 'Donec aliquet eros eu sapien pulvinar vulputate.'
+                    },
+                    {
+                        id: 4,
+                        author: authors[0],
+                        time: '2014-11-05 6:09:21 -02:00',
+                        text: 'Duis orci enim, blandit et libero a, luctus accumsan elit.'
+                    },
+                    {
+                        id: 5,
+                        author: authors[1],
+                        time: '2014-11-05 11:58:21 -02:00',
+                        text: 'Praesent porta vulputate velit, sit amet scelerisque mauris suscipit eget. Aenean vel mi non metus consequat commodo quis vitae nibh.'
+                    }
+                ]
             }
         },
         updated() {
