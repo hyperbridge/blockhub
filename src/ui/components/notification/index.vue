@@ -46,7 +46,7 @@
             notif_icon() {
                 switch (this.notification.type) {
                     case 'info':
-                        return 'info';
+                        return 'info-circle';
                     case 'success':
                         return 'check-circle';
                     case 'warning':
@@ -65,34 +65,34 @@
 
     .notif {
         padding: 0;
-        border: 1px solid #C6C6D6;
-        background: #C6C6D6;
-        border-radius: 5px;
         margin-bottom: 15px;
-        color: #3D3E5D;
         overflow: hidden;
         height: auto;
         display: inline-block;
         transition: all 500ms ease-in-out;
+        color: #fff;
         .title {
             width: 100%;
             display: inline-block;
-            padding: 3px 20px 3px 8px;
-            background: rgba(39, 40, 62, .9);
-            border-radius: 5px 5px 0 0;
+            padding: 0 15px 6px 0;
             position: relative;
             color: #fff;
-            margin-bottom: 0;
+            margin-bottom: 5px;
             font-size: 13px;
             font-weight: bold;
+            border-bottom: 2px solid #fff;
             h5 {
                 padding: 0;
                 margin: 0;
                 line-height: 17px;
                 color: #fff;
+                font-weight: bold;
+                font-size: 14px;
                 i {
-                    margin-right: 10px;
-                    color: #C6C6D6;
+                    width: 15px;
+                    font-size: 15px;
+                    text-align: center;
+                    margin-right: 5px;
                 }
             }
             .close {
@@ -101,18 +101,27 @@
                 float: right;
                 position: absolute;
                 top: 4px;
-                right: 7px;
+                right: 0;
                 font-size: 16px;
+                -webkit-transition: 0.3s ease-out;
+                -moz-transition:  0.3s ease-out;
+                transition:  0.3s ease-out;
                 i {
                     margin: 0;
                     color: #fff !important;
+                }
+                &:hover {
+                    cursor: pointer;
+                    -webkit-transform: rotateZ(180deg);
+                    -moz-transform: rotateZ(180deg);
+                    transform: rotateZ(180deg);
                 }
             }
         }
         .text {
             display: inline-block;
             width: 100%;
-            padding: 5px 8px;
+            padding: 5px 3px;
             text-align: left;
             line-height: 16px;
         }
@@ -123,15 +132,11 @@
         $name: nth($status, 1);
         $color: nth($status, 2);
         &.#{$name} {
-            background: $color;
-            border-color: $color;
-            @if $name == warning {
-                color: #000;
-            } @else {
-                color: #fff;
-            }
-            .title i {
-                color: $color;
+            .title{
+                border-color: $color;
+                i {
+                    color: $color;
+                }
             }
         }
     }
