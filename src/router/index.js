@@ -391,7 +391,7 @@ const router = new Router({
         {
             path: '/marketplace/trade',
             name: 'Marketplace Trade',
-            component: (resolve) => require(['@/ui/screens/marketplace'], resolve)
+            component: (resolve) => require(['@/ui/screens/marketplace-trade'], resolve)
         },
         {
             path: '/download/desktop/mac',

@@ -1,6 +1,6 @@
 <template>
     <div class="tabs-universal" :class="`tabs-universal--${styled ? 'styled' : 'default'}`">
-        <nav class="tabs-universal__nav">
+        <nav class="tabs-universal__nav" v-if="!disableMenu">
             <slot name="nav">
                 <ul class="tabs-universal__list">
                     <li
@@ -36,7 +36,8 @@
             active_tab_prop: [Number, String],
             lockedStep: Number,
             locked_tab: Number,
-            styled: Boolean
+            styled: Boolean,
+            disableMenu: Boolean
         },
         data() {
             return {
@@ -85,6 +86,10 @@
 </script>
 
 <style lang="scss" scoped>
+    .tabs-universal {
+        width: 100%;
+    }
+
     .tabs-universal__list {
         margin: 0;
         padding: 0;

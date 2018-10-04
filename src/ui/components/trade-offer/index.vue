@@ -1,0 +1,175 @@
+<template>
+    <div class="trade-offer">
+        <div class="trade-offer__content">
+            <c-author :author="offer.author"/>
+            <span>
+                Trade {{ offer.assets.their.length }} for {{ offer.assets.yours.length }} assets
+            </span>
+            <div>
+                <c-button status="success" icon_hide>Accept</c-button>
+                <c-button status="danger" icon_hide>Decline</c-button>
+            </div>
+        </div>
+        <div class="trade-offer__details">
+            <h4>Offer details</h4>
+            <table
+                v-for="(assets, assetsKey) in offer.assets"
+                :key="assetsKey"
+                class="trade-offer__assets-table"
+            >
+                <thead>
+                    <th>{{ assetsKey | upperFirstChar }} items</th>
+                    <th>Total value ${{ totalValue[assetsKey] }}</th>
+                </thead>
+                <tbody>
+                    <tr v-for="asset in assets" :key="asset.id">
+                        <td>
+                            <div class="asset__info">
+                                <c-img :src="asset.image" class="asset__image"/>
+                                {{ asset.name }}
+                            </div>
+                        </td>
+                        <td>${{ asset.price.current }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="trade-offer__summary-table">
+                <thead>
+                    <tr>
+                        <th colspan="2">Summary:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Their items:</td>
+                        <td>- {{ totalValue.their }}$</td>
+                    </tr>
+                    <tr>
+                        <td>Yours items:</td>
+                        <td>+ {{ totalValue.yours }}$</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Final balance:</td>
+                        <td>
+                            <span
+                                class="total-balance"
+                                :class="[ finalBalance > 0
+                                    ? 'total-balance--positive'
+                                    : finalBalance < 0
+                                        ? 'total-balance--negative'
+                                        : ''
+                                ]"
+                            >
+                                {{ finalBalance > 0 ? '+' : '' }}
+                                {{ finalBalance }}$
+                            </span>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        props: {
+            offer: {
+                type: Object
+            }
+        },
+        components: {
+            'c-author': (resolve) => require(['@/ui/components/author'], resolve),
+        },
+        computed: {
+            totalValue() {
+                const { assets } = this.offer;
+                return Object.keys(assets).reduce((total, assetsKey) => ({
+                    ...total,
+                    [assetsKey]: assets[assetsKey].reduce((totalPrice, asset) =>
+                        totalPrice += asset.price.current
+                    , 0)
+                }), {});
+            },
+            finalBalance() {
+                return Math.round(this.totalValue.yours - this.totalValue.their * 100) / 100;
+            }
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+    .trade-offer {
+        margin-bottom: 40px;
+        background: rgba(1,1,1,.25);
+
+        // border-radius: 4px 4px 0 0;
+        border-radius: 4px;
+    }
+    .trade-offer__content {
+        // background: rgba(1,1,1,.25);
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 4px;
+        &:hover {
+            background: rgba(1,1,1,.15);
+        }
+    }
+    .trade-offer__details {
+        border-top: 1px solid rgba(255,255,255,.1);
+        padding: 20px;
+        background-image: linear-gradient(to bottom, #2c2e47, #404363);
+        border-radius: 0 0 4px 4px;
+    }
+    .trade-offer__assets-table {
+        width: 100%;
+        margin: 30px 0;
+        th {
+            padding: 5px 0;
+        }
+        td {
+            color: rgba(255,255,255,.6);
+        }
+        td:last-child, th:last-child {
+            text-align: right;
+        }
+        .asset__info {
+            display: flex;
+            align-items: center;
+        }
+        .asset__image {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            margin-right: 6px;
+        }
+    }
+    .trade-offer__summary-table {
+        margin-top: 40px;
+        td:first-child {
+            min-width: 100px;
+        }
+        td {
+            color: rgba(255,255,255,.6);
+            padding: 4px 0;
+        }
+        tfoot td {
+            border-top: 1px solid #535673;
+        }
+    }
+    .total-balance {
+        color: #fff;
+        &.total-balance--negative {
+            color: #F75D5D;
+        }
+        &.total-balance--positive {
+            color: #41ba5d;
+        }
+    }
+
+</style>

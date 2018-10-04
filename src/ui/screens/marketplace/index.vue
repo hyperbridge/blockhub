@@ -5,7 +5,6 @@
                 <div class="row">
                     <div class="col-12">
                         Marketplace
-
                         <h2>Recently sold</h2>
                         <!-- <table class="assets-table">
                             <thead>
