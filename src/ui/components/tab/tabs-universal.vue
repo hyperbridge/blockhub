@@ -110,7 +110,7 @@
 
     /deep/ .tabs-universal__content {
         position: relative;
-        overflow: hidden;
+        // overflow: hidden;
     }
 
     .tabs-universal--default {

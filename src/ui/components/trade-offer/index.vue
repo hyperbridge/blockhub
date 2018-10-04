@@ -1,6 +1,6 @@
 <template>
     <div class="trade-offer">
-        <div class="trade-offer__content">
+        <div class="trade-offer__content" @click="showDetails = !showDetails">
             <c-author :author="offer.author"/>
             <span>
                 Trade {{ offer.assets.their.length }} for {{ offer.assets.yours.length }} assets
@@ -10,66 +10,74 @@
                 <c-button status="danger" icon_hide>Decline</c-button>
             </div>
         </div>
-        <div class="trade-offer__details">
-            <h4>Offer details</h4>
-            <table
-                v-for="(assets, assetsKey) in offer.assets"
-                :key="assetsKey"
-                class="trade-offer__assets-table"
-            >
-                <thead>
-                    <th>{{ assetsKey | upperFirstChar }} items</th>
-                    <th>Total value ${{ totalValue[assetsKey] }}</th>
-                </thead>
-                <tbody>
-                    <tr v-for="asset in assets" :key="asset.id">
-                        <td>
-                            <div class="asset__info">
-                                <c-img :src="asset.image" class="asset__image"/>
-                                {{ asset.name }}
-                            </div>
-                        </td>
-                        <td>${{ asset.price.current }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="trade-offer__summary-table">
-                <thead>
-                    <tr>
-                        <th colspan="2">Summary:</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Their items:</td>
-                        <td>- {{ totalValue.their }}$</td>
-                    </tr>
-                    <tr>
-                        <td>Yours items:</td>
-                        <td>+ {{ totalValue.yours }}$</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td>Final balance:</td>
-                        <td>
-                            <span
-                                class="total-balance"
-                                :class="[ finalBalance > 0
-                                    ? 'total-balance--positive'
-                                    : finalBalance < 0
-                                        ? 'total-balance--negative'
-                                        : ''
-                                ]"
-                            >
-                                {{ finalBalance > 0 ? '+' : '' }}
-                                {{ finalBalance }}$
-                            </span>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
+        <transition name="slide-in-top">
+            <div class="trade-offer__details" v-if="showDetails">
+                <h4>Offer details</h4>
+                <table
+                    v-for="(assets, assetsKey) in offer.assets"
+                    :key="assetsKey"
+                    class="trade-offer__assets-table"
+                >
+                    <thead>
+                        <th>{{ assetsKey | upperFirstChar }} items</th>
+                        <th>Total value ${{ totalValue[assetsKey] }}</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="asset in assets" :key="asset.id">
+                            <td>
+                                <c-tooltip>
+                                    <c-asset-preview
+                                        slot="tooltip"
+                                        :asset="asset"
+                                    />
+                                    <div class="asset__info">
+                                        <c-img :src="asset.image" class="asset__image"/>
+                                        {{ asset.name }}
+                                    </div>
+                                </c-tooltip>
+                            </td>
+                            <td>${{ asset.price.current }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="trade-offer__summary-table">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Summary:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Their items:</td>
+                            <td>- {{ totalValue.their }}$</td>
+                        </tr>
+                        <tr>
+                            <td>Yours items:</td>
+                            <td>+ {{ totalValue.yours }}$</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>Final balance:</td>
+                            <td>
+                                <span
+                                    class="total-balance"
+                                    :class="[ finalBalance > 0
+                                        ? 'total-balance--positive'
+                                        : finalBalance < 0
+                                            ? 'total-balance--negative'
+                                            : ''
+                                    ]"
+                                >
+                                    {{ finalBalance > 0 ? '+' : '' }}
+                                    {{ finalBalance }}$
+                                </span>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -82,6 +90,13 @@
         },
         components: {
             'c-author': (resolve) => require(['@/ui/components/author'], resolve),
+            'c-tooltip': (resolve) => require(['@/ui/components/tooltips/universal'], resolve),
+            'c-asset-preview': (resolve) => require(['@/ui/components/asset-preview'], resolve),
+        },
+        data() {
+            return {
+                showDetails: false
+            }
         },
         computed: {
             totalValue() {
@@ -102,14 +117,11 @@
 
 <style lang="scss" scoped>
     .trade-offer {
-        margin-bottom: 40px;
+        margin-bottom: 25px;
         background: rgba(1,1,1,.25);
-
-        // border-radius: 4px 4px 0 0;
         border-radius: 4px;
     }
     .trade-offer__content {
-        // background: rgba(1,1,1,.25);
         padding: 20px;
         display: flex;
         justify-content: space-between;
@@ -133,6 +145,7 @@
             padding: 5px 0;
         }
         td {
+            padding: 5px 0;
             color: rgba(255,255,255,.6);
         }
         td:last-child, th:last-child {
@@ -146,7 +159,7 @@
             width: 24px;
             height: 24px;
             border-radius: 4px;
-            margin-right: 6px;
+            margin-right: 10px;
         }
     }
     .trade-offer__summary-table {
@@ -165,7 +178,7 @@
     .total-balance {
         color: #fff;
         &.total-balance--negative {
-            color: #F75D5D;
+            color: rgb(255, 118, 118);
         }
         &.total-balance--positive {
             color: #41ba5d;

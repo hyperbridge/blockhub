@@ -2,7 +2,7 @@
     <div class="tooltip-universal__wrapper">
         <div
             class="tooltip-universal__content"
-            @mouseover="show_tooltip = true"
+            @mouseover="debounce(() => show_tooltip = true, delay)"
             @mouseout="show_tooltip = false"
         >
             <slot/>
@@ -20,34 +20,41 @@
 </template>
 
 <script>
-export default {
-    name: 'tooltip-universal',
-    props: {
-        position: {
-            type: String,
-            default: 'top',
-            validator(val) {
-                return ['top', 'right', 'bottom', 'left'].includes(val);
+    import { debouncer } from '@/mixins';
+
+    export default {
+        name: 'tooltip-universal',
+        mixins: [debouncer],
+        props: {
+            position: {
+                type: String,
+                default: 'top',
+                validator(val) {
+                    return ['top', 'right', 'bottom', 'left'].includes(val);
+                }
+            },
+            text: String,
+            title: String,
+            theme: {
+                type: String,
+                default: 'light',
+                validator(val) {
+                    return ['light', 'dark'].includes(val);
+                }
+            },
+            icon_hide: Boolean,
+            default_class: String,
+            delay: {
+                type: Number,
+                default: 0
             }
         },
-        text: String,
-        title: String,
-        theme: {
-            type: String,
-            default: 'light',
-            validator(val) {
-                return ['light', 'dark'].includes(val);
+        data() {
+            return {
+                show_tooltip: false
             }
-        },
-        icon_hide: Boolean,
-        default_class: String
-    },
-    data() {
-        return {
-            show_tooltip: false
         }
     }
-}
 </script>
 
 <style lang="scss" scoped>
