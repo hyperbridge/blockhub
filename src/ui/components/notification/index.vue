@@ -9,7 +9,8 @@
         >
             <div class="title">
                 <h5 class="text-left" @click.self="$emit('showPopup')">
-                    <i :class="`fas fa-${notif_icon}`"></i>
+                    <c-img :src="icon" v-if="icon" />
+                    <i :class="`fas fa-${notif_icon}`" v-else></i>
                     {{ notification.title }}
                     <div class="close" @click="actionOnClose()">
                         <i class="fas fa-times"></i>
@@ -93,6 +94,11 @@
                     font-size: 15px;
                     text-align: center;
                     margin-right: 5px;
+                }
+                img{
+                    width: 15px;
+                    height: 15px;
+                    object-fit: cover;
                 }
             }
             .close {
