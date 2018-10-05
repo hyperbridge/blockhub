@@ -62,6 +62,11 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/news'], resolve)
         },
         {
+            path: '/redeem',
+            name: 'Redeem',
+            component: (resolve) => require(['@/ui/screens/redeem'], resolve)
+        },
+        {
             path: '/store',
             name: 'Store',
             component: (resolve) => require(['@/ui/screens/store'], resolve)
