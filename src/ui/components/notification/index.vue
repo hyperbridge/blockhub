@@ -72,6 +72,7 @@
         display: inline-block;
         transition: all 500ms ease-in-out;
         color: #fff;
+        text-shadow: 0 3px 3px rgba(0, 0, 0, .5);
         .title {
             width: 100%;
             display: inline-block;
