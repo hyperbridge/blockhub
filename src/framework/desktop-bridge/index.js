@@ -119,15 +119,6 @@ export const sendCommand = async (key, data = {}, peer = null, responseId = null
     return promise
 }
 
-export const initHeartbeat = () => {
-    local.bridge.on('heartbeat', (event, msg) => {
-        console.log('[DesktopBridge] Heartbeat')
-
-        local.bridge.send('heartbeat', 1)
-    })
-}
-
-
 export const runCommand = async (cmd, meta = {}) => {
     console.log('[DesktopBridge] Running command', cmd.key)
 
@@ -144,7 +135,13 @@ export const runCommand = async (cmd, meta = {}) => {
             return resolve()
         }
 
-        if (cmd.key === 'promptPasswordRequest') {
+        if (cmd.key === 'heartbeat') {
+            console.log('[DesktopBridge] Heartbeat')
+
+            setTimeout(() => {
+                sendCommand('heartbeat', 1)
+            }, 1000)
+        } else if (cmd.key === 'promptPasswordRequest') {
             const res = await promptPasswordRequest(cmd.data)
 
             return resolve(await sendCommand('promptPasswordResponse', res, meta.client, cmd.requestId))
@@ -152,6 +149,8 @@ export const runCommand = async (cmd, meta = {}) => {
             const res = await setAccountRequest(cmd.data)
 
             return resolve(res)
+        } else if (cmd.key === 'setMode') {
+            local.store.state.application.mode = cmd.data
         } else if (cmd.key === 'systemError') {
             console.warn('[DesktopBridge] Received system error from desktop', cmd.message)
         } else {
@@ -186,7 +185,7 @@ export const init = (store) => {
     local.store = store
     local.bridge = window.desktopBridge
 
-    sendCommand('init')
+    sendCommand('init', 1)
 
     initCommandMonitor()
 }
