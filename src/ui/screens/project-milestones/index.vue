@@ -257,6 +257,7 @@
         },
         components: {
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-milestone': (resolve) => require(['@/ui/components/project/milestone'], resolve),
             'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar'], resolve),
             'c-badges': (resolve) => require(['@/ui/components/project/badges.vue'], resolve)

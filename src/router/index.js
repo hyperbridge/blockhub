@@ -372,7 +372,7 @@ const router = new Router({
         },
         {
             path: '/projects',
-            name: 'Projects',
+            name: 'Crowdfunds',
             component: (resolve) => require(['@/ui/screens/projects'], resolve)
         },
         {

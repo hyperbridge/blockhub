@@ -5,7 +5,7 @@
             <c-sidebar-menu-link :key="Home" :to="{ name: 'Home' }">Home</c-sidebar-menu-link>
             <c-sidebar-menu-link :key="Community" :to="{ name: 'Community' }">Community</c-sidebar-menu-link>
             <c-sidebar-menu-link
-                v-for="page in ['Projects', 'Curators', 'Collections', 'Items']"
+                v-for="page in ['Crowdfunds', 'Curators', 'Collections', 'Items']"
                 :key="page"
                 :to="{ name: page }"
             >

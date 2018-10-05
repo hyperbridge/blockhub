@@ -173,7 +173,7 @@ export default {
             result.push({
                 type: 'trending_projects_row',
                 data: {
-                    title: 'Trending Projects',
+                    title: 'Trending Crowdfunds',
                     options: {
                         slidesPerView: 3,
                         spaceBetween: 15,

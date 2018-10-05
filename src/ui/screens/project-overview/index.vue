@@ -464,7 +464,8 @@
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
             'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar'], resolve),
             'c-contribute-form': (resolve) => require(['@/ui/components/contribute/form.vue'], resolve),
-            'c-contribute-pledge': (resolve) => require(['@/ui/components/contribute/pledge.vue'], resolve)
+            'c-contribute-pledge': (resolve) => require(['@/ui/components/contribute/pledge.vue'], resolve),
+            'c-badges': (resolve) => require(['@/ui/components/project/badges.vue'], resolve)
         },
         data() {
             return {
