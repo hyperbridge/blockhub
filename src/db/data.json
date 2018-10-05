@@ -1,5 +1,6 @@
 {
     "application": {
+        "mode": "local",
         "locked": false,
         "signed_in": false,
         "loading": false,

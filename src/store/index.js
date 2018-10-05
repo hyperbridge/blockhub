@@ -36,25 +36,29 @@ ChaosMonkey.config.ENABLED = false
     - Best used to mode fault-tolerance, ie. does this thing behave appropriately when problems occur
     - Permanent chaos monkey
 */
-const CheckDevelopmentMode = () => {
+const CheckDevConfig = () => {
     let hash = document.location.hash.replace('#/', '')
 
-    if (hash.slice(0, 3) !== 'mode') return false
+    if (hash.slice(0, 5) !== 'conf=') return false
 
-    if (hash === 'mode1') {
+    let conf = hash.replace('conf=', '')
+
+    if (conf === 'relayOn') {
         //PeerService.config.RELAY = true
-    } else if (hash === 'mode2') {
+    }
+
+    if (conf === 'relayOff') {
         //PeerService.config.RELAY = false
-    } else if (hash === 'mode3') {
+    }
+
+    if (conf === 'chaosForced') {
         ChaosMonkey.config.FORCED = true
     }
 
-    window.location = '#/'
-
-    return hash
+    return conf
 }
 
-const developmentMode = CheckDevelopmentMode()
+const devConfig = CheckDevConfig()
 
 const store = new Vuex.Store({
     plugins: [saveDB],
@@ -175,7 +179,7 @@ const initSubscribers = () => {
                 store.dispatch('database/clean')
             }
 
-            if (developmentMode === 'mode2') {
+            if (devConfig === 'clean') {
                 store.dispatch('database/clean')
             }
         } else if (mutation.type === 'database/updateState') {
@@ -337,11 +341,34 @@ const monitorSimulatorMode = () => {
 
 
 
+const GetMode = () => {
+    const hostname = window.location.hostname
+    let hash = document.location.hash.replace('#/', '')
+
+    if (hash.slice(0, 5) === 'mode=') {
+        return hash.replace('mode=', '')
+    }
+
+    if (hostname === 'blockhub.gg') {
+        return 'production'
+    } else if (hostname === 'staging.blockhub.gg') {
+        return 'staging'
+    } else if (hostname === 'beta.blockhub.gg') {
+        return 'beta'
+    } else if (hostname === 'preview.blockhub.gg') {
+        return 'preview'
+    } else {
+        return 'local'
+    }
+}
+
 export let initializer = () => {
     return new Promise((resolve, reject) => {
         //let initialized = false
 
         DB.setInitCallback(async () => {
+            store.state.application.mode = BlockHub.mode = GetMode()
+
             // TODO: is this a race condition?
             //TODO: PeerService.init()
             
@@ -350,7 +377,14 @@ export let initializer = () => {
             store.dispatch('marketplace/init')
             store.dispatch('funding/init')
 
-            try {
+            if (store.state.application.mode === 'preview') {
+                BlockHub.importSeedData()
+
+                store.state.application.signed_in = true
+                store.state.application.simulator_mode = true
+            }
+
+            try { // TODO: we dont need this do we?
                 store.dispatch('application/initEthereum')
                 store.dispatch('funding/initEthereum')
                 store.dispatch('marketplace/initEthereum')
@@ -358,24 +392,19 @@ export let initializer = () => {
                 console.log(err)
             }
 
-
             initSubscribers()
             monitorSimulatorMode()
             //monitorPathState()
 
-            // if (!initialized) {
-            //     initialized = true
+            console.log('BlockHub initialized.')
 
-                console.log('BlockHub initialized.')
+            setInterval(() => {
+                if (store.state.application.connection.auto) {
+                    store.dispatch('application/checkInternetConnection')
+                }
+            }, 4000)
 
-                setInterval(() => {
-                    if (store.state.application.connection.auto) {
-                        store.dispatch('application/checkInternetConnection')
-                    }
-                }, 4000)
-
-                resolve()
-            //}
+            resolve()
         })
     })
 }
