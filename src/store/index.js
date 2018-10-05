@@ -380,8 +380,9 @@ export let initializer = () => {
             if (store.state.application.mode === 'preview') {
                 BlockHub.importSeedData()
 
+                store.state.application.desktop_mode = true
                 store.state.application.signed_in = true
-                store.state.application.simulator_mode = true
+                //store.state.application.simulator_mode = true
             }
 
             try { // TODO: we dont need this do we?
