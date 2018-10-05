@@ -216,6 +216,8 @@ body {
     line-height: 20px;
     color: #323c47;
     background: #30314c;
+    -webkit-font-smoothing: subpixel-antialiased; /* fix for blur? */
+    text-rendering:optimizeSpeed; /* fix for blur? */
 }
 
 
@@ -227,6 +229,10 @@ html, body, #app, .page {
 *, *::before, *::after {
     box-sizing: border-box;
 }
+
+
+
+
 
 p {
     margin-bottom: 10px;

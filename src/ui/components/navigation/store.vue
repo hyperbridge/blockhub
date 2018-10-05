@@ -2,12 +2,14 @@
     <div class="navigation" id="navigation-default">
 
         <c-sidebar-menu title="STORE" sub_title="General" mClass="margin-bottom-20">
+            <c-sidebar-menu-link :key="Home" :to="{ name: 'Home' }">Home</c-sidebar-menu-link>
+            <c-sidebar-menu-link :key="Community" :to="{ name: 'Community' }">Community</c-sidebar-menu-link>
             <c-sidebar-menu-link
-                v-for="page in ['Home', 'Projects', 'Curators', 'Collections', 'Items']"
+                v-for="page in ['Projects', 'Curators', 'Collections', 'Items']"
                 :key="page"
                 :to="{ name: page }"
             >
-                {{ page === 'Home' ? page : 'Browse ' + page }}
+                Browse {{ page }}
             </c-sidebar-menu-link>
         </c-sidebar-menu>
 

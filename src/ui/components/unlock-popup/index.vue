@@ -1,30 +1,39 @@
 <template>
-    <c-popup :activated="activated" type="custom" ref="modal" title="Unlock" width="350"  @close="$emit('close')">
-        <div class="c-popup__close" @click="$emit('close')" slot="custom_close">
-            <i class="fas fa-times"></i>
-        </div>
+    <c-popup :activated="activated" type="custom" ref="modal" width="350">
+        <div slot="custom_close" hidden></div>
         <div class="unlock-modal" slot="custom_content">
-            <input type="password" name="password" ref="password" placeholder="Account password" />
-            <c-button @click="unlock()">Unlock</c-button>
+            <c-tabs>
+                <c-tab name="Account" :selected="true" :showFooter="true">
+                    <div class="tab-container">
+                        <div class="tab-card">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="sr-only">Password</label>
+                                        <input type="password" name="password" ref="password" placeholder="Password" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div slot="footer" class="d-flex align-items-center justify-content-end">
+                        <div>
+                            <c-button @click="unlock()">Unlock</c-button>
+                        </div>
+                    </div>
+                </c-tab>
+            </c-tabs>
         </div>
     </c-popup>
 </template>
 
 <script>
-    import Tabs from '../tab/tabs.vue'
-    import Tab from '../tab/tab.vue'
-    import Switch from '../switch/index'
-    import Buttons from '../buttons/index.vue'
-    import PopUp from '../popups/index'
-
     export default {
         props: ['activated'],
         components: {
-            'c-tab': Tab,
-            'c-tabs': Tabs,
-            'c-switch': Switch,
-            'c-button': Buttons,
-            'c-popup': PopUp,
+            'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
+            'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
+            'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
         },
         data() {
             return {
@@ -36,12 +45,26 @@
             }
         }
     }
-
 </script>
 
 <style lang="scss" scoped>
     .unlock-modal{
         background: transparent;
         color: #fff;
+    }
+    .tab-card {
+        background: #383853;
+        border-radius: 5px;
+        padding: 8px 10px;
+        border: 1px solid #373752;
+        margin-bottom: 15px;
+        &:last-child {
+            margin: 0;
+        }
+        input {
+            border: none;
+            box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
+            background: #303049;
+        }
     }
 </style>

@@ -7,6 +7,7 @@ export let config = {
 const local = {
     requests: {},
     store: null,
+    router: null,
     unlockResolve: null
 }
 
@@ -61,6 +62,11 @@ export const promptPasswordRequest = async (data) => {
 
         }
 
+        local.store.commit('application/updateState', {
+            locked: true,
+            signed_in: false
+        })
+
         local.store.commit('application/activateModal', 'unlock')
 
         local.unlockResolve = resolve
@@ -80,7 +86,12 @@ export const setAccountRequest = async (data) => {
             locked: false,
             signed_in: true
         })
+
         local.store.commit('application/activateModal', null)
+
+        local.router.push('/')
+
+        resolve()
     })
 }
 
@@ -148,9 +159,12 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'setAccountRequest') {
             const res = await setAccountRequest(cmd.data)
 
-            return resolve(res)
+            return resolve(await sendCommand('setAccountRequestResponse', res, meta.client, cmd.requestId))
         } else if (cmd.key === 'setMode') {
             local.store.state.application.mode = cmd.data
+
+            // store.state.application.locked = true
+            // store.state.application.signed_in = false
         } else if (cmd.key === 'systemError') {
             console.warn('[DesktopBridge] Received system error from desktop', cmd.message)
         } else {
@@ -170,7 +184,16 @@ export const initCommandMonitor = () => {
     })
 }
 
-export const init = (store) => {
+export const initResizeMonitor = () => {
+    window.addEventListener('resize', function () {
+        sendCommand('resize', {
+            width: window.innerWidth,
+            height: window.innerHeight
+        })
+    }, true)
+}
+
+export const init = (store, router) => {
     if (!isConnected()) {
         console.log('[DesktopBridge] Not initializing. Reason: not connected to desktop app')
 
@@ -179,13 +202,12 @@ export const init = (store) => {
 
     console.log('[DesktopBridge] Initializing')
 
-    // store.state.application.locked = true
-    // store.state.application.signed_in = false
-
     local.store = store
+    local.router = router
     local.bridge = window.desktopBridge
 
     sendCommand('init', 1)
 
     initCommandMonitor()
+    initResizeMonitor()
 }

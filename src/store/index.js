@@ -372,7 +372,7 @@ export let initializer = () => {
             // TODO: is this a race condition?
             //TODO: PeerService.init()
 
-            DesktopBridge.init(store)
+            DesktopBridge.init(store, router)
 
             store.dispatch('database/init')
             store.dispatch('application/init')

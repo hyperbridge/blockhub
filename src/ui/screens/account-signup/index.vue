@@ -340,10 +340,10 @@
 
                                         <br />
                                         <div class="passphrase" v-if="account.passphrase && writtenDown && !verifyingPassphrase">
-                                            <input type="text" class="form-control" v-for="(word, index) in account.passphrase.split(' ')" :key="index" :value="word" disabled />
+                                            <input type="text" class="form-control" v-for="(word, index) in passphrase" :key="index" :value="word" disabled />
                                         </div>
                                         <div class="passphrase" ref="passphraseVerification" v-if="account.passphrase && writtenDown && verifyingPassphrase">
-                                            <input type="text" class="form-control" v-for="(word, index) in account.passphrase.split(' ')" :key="index" :value="[2, 4, 8, 13].includes(index) ? '' : word" />
+                                            <input type="text" class="form-control" v-for="(word, index) in repeatPassphrase" :key="index" :value="word" @keyup="repeatPassphrase[index] = $event.target.value" />
                                         </div>
 
                                         <br />
@@ -357,7 +357,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center margin-top-20" slot="footer">
                                     <c-switch
-                                        v-model="storedPassphrase"
+                                        v-model="agreeStoredPassphrase"
                                         label="I have safely stored my passphrase"
                                         label_position="right"
                                         v-if="verifyingPassphrase"
@@ -786,10 +786,12 @@ export default {
         return {
             writtenDown: false,
             verifyingPassphrase: false,
-            storedPassphrase: false,
+            agreeStoredPassphrase: false,
             currentStep: 1,
             finishedStep: 1,
             steps: 3,
+            passphrase: [],
+            repeatPassphrase: [],
             errors: [],
             account: {
                 first_name: 'Eric',
@@ -805,6 +807,7 @@ export default {
                 agreement: true,
                 newsletter: false,
                 passphrase: null,
+                repeat_passphrase: null,
                 encrypt_passphrase: true,
                 identity: {
                     name: '',
@@ -848,6 +851,11 @@ export default {
                         secret_answer_2: this.account.secret_answer_2
                     }).then((res) => {
                         this.account = { ...this.account, ...res.account }
+                        this.passphrase = this.account.passphrase.split(' ')
+                        this.repeatPassphrase = this.account.passphrase.split(' ')
+                        this.repeatPassphrase[2] = ''
+                        this.repeatPassphrase[4] = ''
+                        this.repeatPassphrase[8] = ''
 
                         this.finishedStep = 1;
                         this.currentStep = 2;
@@ -891,9 +899,10 @@ export default {
                     }
                 }
             } else if (this.currentStep === 2) {
-                const passphraseVerification = $.map($(this.$refs.passphraseVerification).find('input'), (item) => $(item).val()).join(' ')
+                const passphraseOriginal = this.passphrase.join(' ')
+                const passphraseVerification = this.repeatPassphrase.join(' ')//$.map($(this.$refs.passphraseVerification).find('input'), (item) => $(item).val()).join(' ')
 
-                if (this.storedPassphrase && this.account.passphrase === passphraseVerification) {
+                if (this.agreeStoredPassphrase && passphraseOriginal === passphraseVerification) {
                     DesktopBridge.updateAccountRequest({
                         passphrase: this.account.passphrase,
                         encrypt_passphrase: this.account.encrypt_passphrase,
@@ -908,7 +917,7 @@ export default {
                     })
                 }
 
-                if (!this.storedPassphrase) {
+                if (!this.agreeStoredPassphrase) {
                     this.errors.push('Please agree that you\'ve stored your passphrase somewhere safe.')
                 }
 
