@@ -43,21 +43,21 @@
                                                             name="last_name" v-model="account.last_name">
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="input-group">
-                                                <label class="sr-only">Birthday</label>
-                                                <c-datepicker
-                                                    v-model="account.birthday"
-                                                    placeholder="Birthday"
-                                                    input-class="form-control form-calendar__text"
-                                                    name="birthday"
-                                                    calendar-class="form-calendar"
-                                                />
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">
-                                                        <i class="fas fa-calendar-alt"></i>
-                                                    </span>
+                                            <div class="col">
+                                                <div class="input-group">
+                                                    <label class="sr-only">Birthday</label>
+                                                    <c-datepicker
+                                                        v-model="account.birthday"
+                                                        placeholder="Birthday"
+                                                        input-class="form-control form-calendar__text"
+                                                        name="birthday"
+                                                        calendar-class="form-calendar"
+                                                    />
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-calendar-alt"></i>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -75,15 +75,6 @@
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label class="sr-only">Repeat Password</label>
-                                                    <input type="password" class="form-control" placeholder="Password again"
-                                                            name="repeat_password" v-model="account.repeat_password">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
                                                     <label class="sr-only">Secret Question #1</label>
                                                     <!-- http://goodsecurityquestions.com/examples/ -->
                                                     <select id="secret_question_1" name="secret_question_1" class="form-control" v-model="account.secret_question_1">
@@ -99,13 +90,6 @@
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label class="sr-only">Answer #1</label>
-                                                    <input type="text" class="form-control" placeholder="Secret Answer #1"
-                                                            name="secret_answer_1" v-model="account.secret_answer_1">
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
                                                     <label class="sr-only">Secret Question #2</label>
                                                     <!-- http://goodsecurityquestions.com/examples/ -->
                                                     <select id="secret_question_2" name="secret_question_2" class="form-control" v-model="account.secret_question_2">
@@ -117,6 +101,22 @@
                                                         <option value="wedding_reception">What is the name of the plac eyour wedding reception was held?</option>
                                                         <option value="city_sibling_live">In what city or town does your nearest sibling live?</option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Repeat Password</label>
+                                                    <input type="password" class="form-control" placeholder="Password again"
+                                                            name="repeat_password" v-model="account.repeat_password">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Answer #1</label>
+                                                    <input type="text" class="form-control" placeholder="Secret Answer #1"
+                                                            name="secret_answer_1" v-model="account.secret_answer_1">
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -334,23 +334,22 @@
                                     </div>
                                     <div class="padding-40" v-else>
                                         <h3>Welcome, {{ account.first_name }}!</h3>
-                                        <p>Make sure to write down your keyphase, password, and secret answer and put it somewhere safe.</p>
+                                        <p v-if="!writtenDown">Make sure to write down your passphase, password, and secret answers and put it somewhere safe.</p>
+                                        <p v-if="writtenDown && !verifyingPassphrase">Now lets verify you've stored your passphrase somewhere safely.</p>
+                                        <p v-if="writtenDown && verifyingPassphrase">Please fill in the missing blanks below.</p>
 
                                         <br />
-                                        <p v-if="!verifyingPassphrase">Lets verify you've stored your passphrase somewhere safely.</p>
-                                        <p v-if="verifyingPassphrase">Please fill in the missing blanks below.</p>
-
-                                        <br />
-                                        <div class="passphrase" v-if="account.passphrase && !verifyingPassphrase">
+                                        <div class="passphrase" v-if="account.passphrase && writtenDown && !verifyingPassphrase">
                                             <input type="text" class="form-control" v-for="(word, index) in account.passphrase.split(' ')" :key="index" :value="word" disabled />
                                         </div>
-                                        <div class="passphrase" ref="passphraseVerification" v-if="account.passphrase && verifyingPassphrase">
+                                        <div class="passphrase" ref="passphraseVerification" v-if="account.passphrase && writtenDown && verifyingPassphrase">
                                             <input type="text" class="form-control" v-for="(word, index) in account.passphrase.split(' ')" :key="index" :value="[2, 4, 8, 13].includes(index) ? '' : word" />
                                         </div>
 
                                         <br />
-                                        <c-button class="c-btn-lg" v-if="!verifyingPassphrase" @click="verifyPassphrase()">Verify Now</c-button>
-                                        <c-button class="c-btn-lg" v-if="verifyingPassphrase" @click="showPassphrase()">Show Passphrase Again</c-button>
+                                        <c-button class="c-btn-lg" v-if="!writtenDown" @click="writeDown()">Got it</c-button>
+                                        <c-button class="c-btn-lg" v-if="writtenDown && !verifyingPassphrase" @click="verifyPassphrase()">Verify Now</c-button>
+                                        <c-button class="c-btn-lg" v-if="writtenDown && verifyingPassphrase" @click="showPassphrase()">Show Passphrase Again</c-button>
 
                                         <br /><br />
                                         <p v-if="verifyingPassphrase">When you're ready proceed to the next step where we will build your public identity. After that you're off to the races!</p>
@@ -358,7 +357,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center margin-top-20" slot="footer">
                                     <c-switch
-                                        v-model="account.stored_passphrase"
+                                        v-model="storedPassphrase"
                                         label="I have safely stored my passphrase"
                                         label_position="right"
                                         v-if="verifyingPassphrase"
@@ -378,7 +377,8 @@
                             <c-tab :tab_id="3">
                                 <div class="tab-container">
                                     <div class="padding-20" v-if="finishedStep === 3">
-                                        <p>That's it. You're now a member of BlockHub, and the future of decentralized protocols.<br />
+                                        <h3>Congratulations!</h3>
+                                        <p>That's it! You're now a member of BlockHub, and the future of decentralized protocols.<br />
                                         We hope you enjoy many years of success with BlockHub and the Hyperbridge family!</p>
 
                                         <br />
@@ -388,7 +388,6 @@
                                         >Continue to BlockHub</c-button>
                                     </div>
                                     <div class="padding-20" v-if="finishedStep < 3">
-                                        <h3>Congratulations!</h3>
                                         <h3>Now let's build your main identity. Don't worry, you can have more than one identity.</h3>
                                         <div class="row margin-top-40">
                                             <div class="col">
@@ -785,7 +784,9 @@ export default {
     },
     data() {
         return {
+            writtenDown: false,
             verifyingPassphrase: false,
+            storedPassphrase: false,
             currentStep: 1,
             finishedStep: 1,
             steps: 3,
@@ -804,7 +805,6 @@ export default {
                 agreement: true,
                 newsletter: false,
                 passphrase: null,
-                stored_passphrase: false,
                 encrypt_passphrase: true,
                 identity: {
                     name: '',
@@ -893,7 +893,7 @@ export default {
             } else if (this.currentStep === 2) {
                 const passphraseVerification = $.map($(this.$refs.passphraseVerification).find('input'), (item) => $(item).val()).join(' ')
 
-                if (this.account.passphrase === passphraseVerification) {
+                if (this.storedPassphrase && this.account.passphrase === passphraseVerification) {
                     DesktopBridge.updateAccountRequest({
                         passphrase: this.account.passphrase,
                         encrypt_passphrase: this.account.encrypt_passphrase,
@@ -906,6 +906,10 @@ export default {
                         this.$store.state.application.account = { ...this.$store.state.application.account, ...this.account }
                         this.$store.state.application.signed_in = true
                     })
+                }
+
+                if (!this.storedPassphrase) {
+                    this.errors.push('Please agree that you\'ve stored your passphrase somewhere safe.')
                 }
 
                 if (this.account.passphrase !== passphraseVerification) {
@@ -936,6 +940,9 @@ export default {
             } else {
                 this.currentStep = step;
             }
+        },
+        writeDown() {
+            this.writtenDown = true
         },
         showPassphrase() {
             this.verifyingPassphrase = false
