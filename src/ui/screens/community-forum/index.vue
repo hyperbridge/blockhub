@@ -103,7 +103,7 @@
         .community-item{
             border-radius: 0;
             border-bottom: 0;
-            transition: transform 400ms ease-in-out;
+            transition: transform 200ms ease-in-out;
             background: rgba(0, 0, 0, .1);
             &:first-child{
                 border-radius: 5px 5px 0 0;

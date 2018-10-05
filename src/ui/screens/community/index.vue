@@ -18,11 +18,11 @@
                             Vivamus ac dignissim turpis. Sed sit amet justo quis sem
                             sodales aliquet eu eu massa.
                         </p>
-                        <c-search size="lg" />
                     </div>
                     <div class="col-12 col-lg-4">
                         <c-block title="Links & Resources" :noGutter="true" :onlyContentBg="true">
                             <div class="d-flex flex-column">
+                                <c-search class="mb-2"/>
                                 <c-button status="plain" class="my-1">
                                     <i class="fas fa-info-circle"></i> View Discussion Guidelines
                                 </c-button>
@@ -64,7 +64,7 @@
                                 Discussions
                             </div>
                         </div>
-                        <c-community-forum v-for="(forum, index) in forums" :key="index" :forum="forum" />
+                        <c-community-forum v-for="(forum, index) in forums" :key="index" :forum="forum"/>
                     </div>
                 </c-block>
             </div>
@@ -89,19 +89,19 @@
                     {
                         id: 1,
                         title: "New to BlockHub",
-                        last_post_time: "2018-07-24T04:09:00.000Z",
+                        last_post_time: "2018-08-01T04:09:00.000Z",
                         discussions_count: "8234"
                     },
                     {
                         id: 2,
                         title: "Help and Tips",
-                        last_post_time: "2018-07-24T04:09:00.000Z",
+                        last_post_time: "2018-02-13T04:09:00.000Z",
                         discussions_count: "34"
                     },
                     {
                         id: 3,
                         title: "Suggestions ans Ideas",
-                        last_post_time: "2018-07-24T04:09:00.000Z",
+                        last_post_time: "2017-11-04T04:09:00.000Z",
                         discussions_count: "127",
                         icon: "fas fa-life-ring"
                     },
@@ -115,14 +115,14 @@
                     {
                         id: 5,
                         title: "BlockHub for Windows",
-                        last_post_time: "2018-07-24T04:09:00.000Z",
+                        last_post_time: "2018-03-21T04:09:00.000Z",
                         discussions_count: "328",
                         icon: "fab fa-windows"
                     },
                     {
                         id: 4,
                         title: "BlockHub for Linux",
-                        last_post_time: "2018-07-24T04:09:00.000Z",
+                        last_post_time: "2016-07-24T04:09:00.000Z",
                         discussions_count: "41",
                         icon: "fab fa-linux"
                     },
@@ -135,40 +135,41 @@
 <style lang="scss" scoped>
     .forums-list {
         border-radius: 5px;
-        .forum-item{
+        .forum-item {
             border-radius: 0;
             border-bottom: 0;
-            transition: transform 400ms ease-in-out;
-            &:first-child{
+            transition: transform 200ms ease-in-out;
+            &:first-child {
                 border-radius: 5px 5px 0 0;
             }
-            &:last-child{
+            &:last-child {
                 border-bottom: 1px solid rgba(112, 112, 112, .2);
                 border-radius: 0 0 5px 5px;
             }
-            &:nth-child(even){
+            &:nth-child(even) {
                 background: rgba(0, 0, 0, .26);
             }
-            &:hover{
+            &:hover {
                 background: rgba(0, 0, 0, .25);
                 transform: scale(1.02);
             }
         }
     }
-    .forums-list__head{
+
+    .forums-list__head {
         display: flex;
         margin-bottom: 5px;
-        div{
-            &:nth-child(1){
+        div {
+            &:nth-child(1) {
                 width: calc(60% - 70px);
                 margin-left: 70px;
             }
-            &:nth-child(2){
+            &:nth-child(2) {
                 width: 20%;
                 text-align: right;
                 padding-right: 10px;
             }
-            &:nth-child(3){
+            &:nth-child(3) {
                 width: 20%;
                 text-align: right;
                 padding-right: 10px;
