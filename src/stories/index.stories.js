@@ -1914,9 +1914,9 @@ storiesOf('Pagination', module)
     }))
 
 
-import ProductCommunity from '@/ui/components/product-community/item';
-import ProductCommunityComment from '@/ui/components/product-community/comment';
-import ProductCommunityReply from '@/ui/components/product-community/reply';
+import ProductCommunity from '@/ui/components/community/post-item';
+import ProductCommunityComment from '@/ui/components/community/comment';
+import ProductCommunityReply from '@/ui/components/community/reply';
 
 storiesOf('Product Community', module)
     .add('post', () => ({

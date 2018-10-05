@@ -5,7 +5,9 @@
                 <i class="fas" :class="post_icon"></i>
             </div>
             <div class="text">
-                {{ post.title }}
+                <router-link :to="{ name: 'Community discussion', params: {id: post.id } }">
+                    {{ post.title }}
+                </router-link>
 
                 {{ post.title.status }}
             </div>
@@ -14,14 +16,16 @@
                     <i class="fas" :class="[ post.rate < 0 ? 'fa-chevron-down' : 'fa-chevron-up' ]"></i>
                     {{ post.rate < 0 ? post.rate * -1 : post.rate }}
                 </div>
-                <div class="user">
-                    <span class="time">25 min</span>
-                    <c-img :src="post.author.img"/>
-                    <span class="name">{{ post.author.name }}</span>
-                </div>
                 <div class="comments_count">
                     <i class="fas fa-comment"></i>
                     {{ post.comments_count }}
+                </div>
+                <div class="user">
+                    <div>
+                        <c-img :src="post.author.img"/>
+                        <span class="name">{{ post.author.name }}</span>
+                    </div>
+                    <div class="time">25 min</div>
                 </div>
             </div>
         </div>
@@ -76,7 +80,7 @@
 </template>
 
 <script>
-    import Comment from '../product-community/comment'
+    import Comment from '../community/comment'
     export default {
         props: ['post'],
         components: {
@@ -108,7 +112,6 @@
     .community-item {
         background: rgba(0, 0, 0, .16);
         border: 1px solid rgba(112, 112, 112, .2);
-        margin-bottom: 15px;
         border-radius: 5px;
         color: #fff;
         &.is_reply {
@@ -185,6 +188,9 @@
             width: calc(70% - 70px);
             font-weight: bold;
             font-size: 16px;
+            a{
+                color: #fff;
+            }
         }
         .statistic {
             width: 30%;
@@ -207,13 +213,18 @@
                 }
             }
             .user {
-                text-align: center;
+                display: inline-flex;
+                flex-direction: column;
+                text-align: right;
                 img {
                     width: 20px;
                     height: 20px;
                     border-radius: 100%;
                     margin: 0 5px;
                     float: unset;
+                }
+                .time{
+                    line-height: 16px;
                 }
             }
             .comments_count {

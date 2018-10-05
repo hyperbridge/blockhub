@@ -45,6 +45,10 @@
         .c-input {
             padding-right: 25px;
             width: 100%;
+            &:focus{
+                outline: none;
+                box-shadow: none;
+            }
         }
         .input-searcher__icon {
             position: absolute;
