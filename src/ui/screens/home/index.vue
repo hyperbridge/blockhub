@@ -7,10 +7,10 @@
                     <div class="col-12 mb-4" v-if="!desktop_mode">
                         <c-download-block />
                     </div>
-                    <div class="col-12 mb-4">
+                    <div class="col-12 mb-4" v-if="['preview', 'staging', 'local'].includes(mode)">
                         <div class="card invert">
                             <div class="card-body">
-                                <h4>Want to see the future of BlockHub?</h4>
+                                <h4>Play around with the future of BlockHub:</h4>
                                 <div>
                                     <c-button @click="toggleSimulator()">Simulator is {{ simulator_mode ? 'ON' : 'OFF' }}</c-button>
                                     <c-button @click="toggleDesktopMode()">Desktop Mode is {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
@@ -71,10 +71,6 @@ export default {
         'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
         'c-infinite-content': (resolve) => require(['@/ui/components/infinite-content'], resolve),
         'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve),
-    },
-    data() {
-        return {
-        }
     },
     computed: {
         ...mapGetters({
@@ -243,6 +239,9 @@ export default {
             })
 
             return result
+        },
+        mode() {
+            return this.$store.state.application.mode;
         },
         projects() {
             return this.$store.state.funding.projects
