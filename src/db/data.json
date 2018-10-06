@@ -74,6 +74,9 @@
             "birthday": null,
             "password": null,
             "email": null,
+            "current_identity": {
+                "developer_id": null
+            },
             "notifications": [],
             "wallets": [],
             "identities": [],

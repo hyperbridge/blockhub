@@ -4,12 +4,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h3>Client Settings</h3>
+                        <h3>Protocol Settings</h3>
 
                         <div class="card invert">
                             <div class="page-heading">
                                 <div class="page-heading__container">
-                                    <h1 class="title">Protocol Settings</h1>
+                                    <h1 class="title">Protocols</h1>
                                     <p class="caption">Select protocol contracts to deploy</p>
                                 </div>
                                 <div class="page-heading__container float-right d-none d-md-block">

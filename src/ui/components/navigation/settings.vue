@@ -18,8 +18,8 @@
             return {
                 links: {
                     settings: [
-                        { to: { path: '/settings' }, title: 'All Settings' },
-                        { to: { path: '/settings/client' }, title: 'Client' },
+                        { to: { path: '/settings' }, title: 'Overview' },
+                        { to: { path: '/settings/protocol' }, title: 'Protocol Settings' },
                         { to: { path: '/settings/activity' }, title: 'Activity Log' }
                     ]
                 }

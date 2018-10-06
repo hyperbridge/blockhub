@@ -250,9 +250,9 @@ const router = new Router({
             }
         },
         {
-            path: '/settings/client',
-            name: 'Client Settings',
-            component: (resolve) => require(['@/ui/screens/settings-client'], resolve),
+            path: '/settings/protocol',
+            name: 'Protocol Settings',
+            component: (resolve) => require(['@/ui/screens/settings-protocol'], resolve),
             meta: {
                 auth: true
             }
