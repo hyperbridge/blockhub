@@ -1,28 +1,22 @@
 <template>
-    <c-popup :activated="activated" type="custom" ref="modal" width="350">
+    <c-popup :activated="activated" type="custom" ref="modal" width="250">
         <div slot="custom_close" hidden></div>
         <div class="unlock-modal" slot="custom_content">
-            <c-tabs>
-                <c-tab name="Account" :selected="true" :showFooter="true">
-                    <div class="tab-container">
-                        <div class="tab-card">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label class="sr-only">Password</label>
-                                        <input type="password" name="password" ref="password" placeholder="Password" class="form-control" />
-                                    </div>
-                                </div>
+            <div class="tab-container">
+                <div class="tab-card">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <h3>Password</h3>
+                                <label class="sr-only">Password</label>
+                                <input type="password" name="password" ref="password" placeholder="Password" class="form-control" />
+                                <br />
+                                <c-button class="c-btn-lg" @click="unlock()">Unlock</c-button>
                             </div>
                         </div>
                     </div>
-                    <div slot="footer" class="d-flex align-items-center justify-content-end">
-                        <div>
-                            <c-button @click="unlock()">Unlock</c-button>
-                        </div>
-                    </div>
-                </c-tab>
-            </c-tabs>
+                </div>
+            </div>
         </div>
     </c-popup>
 </template>
@@ -48,6 +42,9 @@
 </script>
 
 <style lang="scss" scoped>
+    .c-popup {
+        background: #383853 !important;
+    }
     .unlock-modal{
         background: transparent;
         color: #fff;

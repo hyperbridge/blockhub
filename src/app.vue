@@ -197,6 +197,7 @@
                     to.path !== '/account/signup'
                     && to.path !== '/account/signin'
                     && to.path !== '/welcome'
+                    && to.path !== '/unlock'
                 ))) {
                     this.$router.push({ path: '/welcome' })
                 }

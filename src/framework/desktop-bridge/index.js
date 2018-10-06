@@ -62,6 +62,8 @@ export const promptPasswordRequest = async (data) => {
 
         }
 
+        local.router.push('/unlock')
+
         local.store.commit('application/updateState', {
             locked: true,
             signed_in: false

@@ -20,6 +20,11 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/home'], resolve)
         },
         {
+            path: '/unlock',
+            name: 'Unlock',
+            component: (resolve) => require(['@/ui/screens/unlock'], resolve)
+        },
+        {
             path: '/welcome',
             name: 'Welcome',
             component: (resolve) => require(['@/ui/screens/welcome'], resolve)
