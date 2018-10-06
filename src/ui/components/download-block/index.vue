@@ -157,6 +157,7 @@
                     max-width: calc( 47% );
                     height: auto;
                     width: auto;
+                    filter: contrast(1.2) brightness(1.2);
                     &.absolute_img{
                         position: absolute;
                         top: -30%;

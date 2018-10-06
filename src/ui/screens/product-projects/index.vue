@@ -21,7 +21,7 @@
                                 <router-link :to="`/product/${product.id}/community`" class="nav-link">Community</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link :to="`/product/${product.id}/projects`" class="nav-link active">Projects</router-link>
+                                <router-link :to="`/product/${product.id}/projects`" class="nav-link active">Crowdfunding</router-link>
                             </li>
                             <li class="nav-item">
                                 <router-link :to="`/product/${product.id}/assets`" class="nav-link">Assets</router-link>

@@ -48,8 +48,6 @@ export const actions = {
     init(store, payload) {
         console.log('[BlockHub][Application] Initializing...')
         
-        DesktopBridge.init(store)
-
         updateState(DB.application.config.data[0], store.state)
 
         state.connection.status.code = null

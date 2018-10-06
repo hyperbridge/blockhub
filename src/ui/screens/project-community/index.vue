@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="store-navigation">
+    <c-layout navigationKey="project-navigation">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row" v-if="!project">

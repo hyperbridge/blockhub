@@ -12,8 +12,10 @@
 
                 <div class="row" v-if="product">
                     <div class="col-12">
-                        <h1 class="title margin-top-10 margin-bottom-15">{{ product.name }}</h1>
+                        <h1 class="title margin-top-10">{{ product.name }}</h1>
+
                         <c-tags-list :tags="product.author_tags"></c-tags-list>
+
                         <ul class="nav nav-tabs justify-content-between margin-bottom-30">
                             <li class="nav-item">
                                 <router-link :to="`/product/${product.id}`" class="nav-link">Overview</router-link>
@@ -22,7 +24,7 @@
                                 <router-link :to="`/product/${product.id}/community`" class="nav-link">Community</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link :to="`/product/${product.id}/projects`" class="nav-link">Projects</router-link>
+                                <router-link :to="`/product/${product.id}/projects`" class="nav-link">Crowdfunding</router-link>
                             </li>
                             <li class="nav-item">
                                 <router-link :to="`/product/${product.id}/assets`" class="nav-link active">Assets</router-link>
