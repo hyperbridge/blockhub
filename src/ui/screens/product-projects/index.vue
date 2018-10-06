@@ -48,12 +48,15 @@
 
                     <div class="col-12">
                         <c-block title="Top 3 Submissions" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                            <c-project-card
-                                v-for="(project, index) in projects"
-                                :key="index"
-                                :project="project"
-                                :showGame="false"
-                            />
+                            <div class="d-flex flex-wrap" style="margin: -10px">
+                                <c-project-card
+                                    v-for="(project, index) in projects"
+                                    :key="index"
+                                    :project="project"
+                                    :showGame="false"
+                                    class="margin-0"
+                                />
+                            </div>
                         </c-block>
                     </div>
                 </div>
