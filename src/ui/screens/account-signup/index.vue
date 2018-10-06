@@ -914,7 +914,6 @@ export default {
 
                 if (this.agreeStoredPassphrase && passphraseOriginal === passphraseVerification) {
                     DesktopBridge.updateAccountRequest({
-                        passphrase: this.account.passphrase,
                         encrypt_passphrase: this.account.encrypt_passphrase,
                     }).then((res) => {
                         this.finishedStep = 2;

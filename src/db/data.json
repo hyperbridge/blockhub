@@ -69,13 +69,23 @@
         ],
         "active_modal": null,
         "account": {
+            "public_address": null,
             "first_name": null,
             "last_name": null,
             "birthday": null,
             "password": null,
             "email": null,
             "current_identity": {
-                "developer_id": null
+                "id": null,
+                "name": null,
+                "developer_id": null,
+                "badges": [],
+                "assets": [],
+                "licenses": [],
+                "products": [],
+                "public_address": null,
+                "passphrase": null,
+                "private_key": null
             },
             "notifications": [],
             "wallets": [],
@@ -488,8 +498,8 @@
                         },
                         {
                             "id": 3,
-                            "slug": "limmits",
-                            "label": "Limmits",
+                            "slug": "limits",
+                            "label": "Limits",
                             "icon": "sliders-h"
                         }
                     ]

@@ -67,7 +67,7 @@
                     <span class="icon fa fa-id-card"></span>
                     <span class="text">Identities</span>
                 </a>
-                <a href="/#/account/wallets">
+                <a href="/#/account/wallets" v-darklaunch="'WALLETS'">
                     <span class="icon fa fa-credit-card"></span>
                     <span class="text">Wallets</span>
                 </a>
@@ -76,7 +76,7 @@
 
                 <a href="/#/identity/1">
                     <span class="icon fa fa-user"></span>
-                    <span class="text">Current Profile</span>
+                    <span class="text">Current Identity</span>
                 </a>
                 <a href="/#/identity/1/contacts" v-darklaunch="'CONTACTS'">
                     <span class="icon fa fa-users"></span>
