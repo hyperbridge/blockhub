@@ -285,7 +285,7 @@ export default {
             this.$store.state.application.developer_mode = !this.$store.state.application.developer_mode
         },
         toggleSimulator() {
-            this.$store.commit('marketplace/setSimulatorMode', !this.$store.state.application.simulator_mode)
+            this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulator_mode)
         },
         importSeedData() {
             window.BlockHub.importSeedData()
