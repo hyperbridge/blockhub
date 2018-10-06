@@ -13,7 +13,7 @@
 
                         <c-tags-list :tags="product.author_tags" v-if="!editing"></c-tags-list>
 
-                        <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
+                        <ul class="nav nav-tabs margin-bottom-30 justify-content-between">
                             <li class="nav-item">
                                 <router-link :to="`/product/${product.id}`" class="nav-link">Overview</router-link>
                             </li>
