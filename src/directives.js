@@ -22,6 +22,14 @@ Vue.directive('darklaunch', {
     bind(el, binding, vnode, oldVnode) {
         const { value } = binding
 
+        if (!store.state.application.darklaunch_flags.map(flag => flag.code).includes(value)) {
+            store.state.application.darklaunch_flags.push({
+                code: value,
+                description: 'Undefined',
+                type: 'undefined'
+            })
+        }
+
         if (value &&
             store.state.application.darklaunch_flags &&
             store.state.application.account.darklaunch_flags &&

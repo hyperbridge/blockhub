@@ -59,7 +59,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="stat-card">
+                                    <div class="stat-card" v-darklaunch="'TICKETS'">
                                         <div class="icon">
                                             <i class="fas fa-question-circle"></i>
                                         </div>
@@ -84,7 +84,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="stat-card">
+                                    <div class="stat-card" v-darklaunch="'PAYMENTS'">
                                         <div class="icon">
                                             <i class="fas fa-dollar-sign"></i>
                                         </div>
@@ -100,7 +100,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="stat-card">
+                                    <div class="stat-card" v-darklaunch="'USER_ACTIVITY'">
                                         <div class="icon">
                                             <i class="fas fa-users"></i>
                                         </div>

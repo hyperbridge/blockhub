@@ -43,11 +43,11 @@
                                 <div v-if="developer_mode">
                                     <h4>Darklaunch Manager</h4>
                                     <select id="darklaunch-editor" class="form-control" multiple="multiple">
-                                        <option v-for="(flag, index) in $store.state.application.darklaunch_flags.map(flag => flag.key)"
+                                        <option v-for="(flag, index) in $store.state.application.darklaunch_flags"
                                             :key="index"
-                                            :selected="$store.state.application.account.darklaunch_flags.map(flag => flag.enabled ? flag.key : null).includes(flag)"
+                                            :selected="$store.state.application.account.darklaunch_flags.map(flag => flag.enabled ? flag.code : null).includes(flag.code)"
                                         >
-                                            {{ flag }}
+                                            {{ flag.code }} - {{ flag.description }}
                                         </option>
                                     </select>
                                 </div>
