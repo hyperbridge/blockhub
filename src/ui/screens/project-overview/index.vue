@@ -621,19 +621,15 @@
     #content > .container-fluid {
         padding-top: 0;
     }
+</style>
 
+<style lang="scss" scoped>
     .page__content > .content {
         width: calc(100% - 250px);
         padding-top: 0;
         margin: 0 0 0 auto;
     }
 
-    #page-sidepanel {
-        display: none;
-    }
-</style>
-
-<style lang="scss" scoped>
     .tab-content > .row.active {
         display: flex;
     }

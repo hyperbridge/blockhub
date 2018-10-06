@@ -71,7 +71,7 @@
                         </ul>
 
                         <div class="row">
-                            <div class="col-7">
+                            <div class="col-8">
                                 <c-screen-gallery
                                     :items="[product.images.medium_tile, ...product.images.preview]"
                                     :video_url="product.video"
@@ -103,7 +103,7 @@
                                     <div id="summernote" v-html="product.content">{{ product.content }}</div>
                                 </div>
                             </div>
-                            <div class="col-5">
+                            <div class="col-4">
                                 <c-purchase-block
                                     title="Purchase"
                                     :isReleased="true"
@@ -426,5 +426,11 @@
             color: #1C2032;
             background: #FEEBCE;
         }
+    }
+
+    .page__content > .content {
+        width: calc(100% - 250px);
+        padding-top: 0;
+        margin: 0 0 0 auto;
     }
 </style>
