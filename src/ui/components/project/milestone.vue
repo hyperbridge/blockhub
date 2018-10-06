@@ -12,22 +12,22 @@
                 <div class="milestones_progress">
                     <div class="progress_line">
                         <i class="fas fa-clock icon"></i>
-                        <c-progress-bar :percentages="milestone.progress['days_percent']"/>
-                        {{ milestone.progress['days_amouth'] }} days left
+                        <c-progress-bar :percentages="milestone.progress['percent_days']"/>
+                        {{ milestone.progress['days_left'] }} days left
                     </div>
                     <div class="progress_line">
                         <i class="fas fa-check icon"></i>
-                        <c-progress-bar :percentages="milestone.progress['done_percent']"/>
-                        {{ milestone.progress['done_percent'] }}% Done
+                        <c-progress-bar :percentages="milestone.progress['percent_done']"/>
+                        {{ milestone.progress['percent_done'] }}% Done
                     </div>
                     <div class="progress_line">
                         <i class="fas fa-dollar-sign icon"></i>
-                        <c-progress-bar :percentages="milestone.progress['spent_percent']"/>
-                        {{ milestone.progress['spent_percent'] }}% Spent
+                        <c-progress-bar :percentages="milestone.progress['percent_spent']"/>
+                        {{ milestone.progress['percent_spent'] }}% Spent
                     </div>
                 </div>
             </div>
-            <p class="text">{{ milestone.full_text }}</p>
+            <p class="text">{{ milestone.text }}</p>
         </div>
     </div>
 </template>

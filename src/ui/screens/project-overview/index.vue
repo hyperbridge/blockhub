@@ -357,16 +357,16 @@
                                         </a>
                                         <h2 class="title">Milestones</h2>
                                         <ul class="milestones__list">
-                                            <li v-for="(item, index) in project.milestones"
-                                                v-bind:class="{ done: item.status }" :key="index">
-                                                <div class="step_number" v-if="item.step_number">
-                                                    {{ item.step_number }}
-                                                </div>
-                                                <div class="status_done" v-else>
+                                            <li v-for="(item, index) in project.milestones.items"
+                                                v-bind:class="{ done: item.status === 'done' }" :key="index">
+                                                <div class="step_number" v-if="item.status === 'done'">
                                                     <i class="fas fa-check"></i>
                                                 </div>
+                                                <div class="step_number" v-else>
+                                                    {{ item.step_number }}
+                                                </div>
                                                 <div class="text">
-                                                    {{ item.text }}
+                                                    {{ item.title }}
                                                 </div>
                                             </li>
                                         </ul>
@@ -943,6 +943,9 @@
             }
             &.done {
                 border: 2px solid #5EA72B;
+                i{
+                    color: #5EA72B;
+                }
             }
             .text {
                 flex-basis: calc(100% - 40px);
