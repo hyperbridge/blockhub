@@ -153,15 +153,27 @@ window.BlockHub.resetSeedData = () => {
     store.dispatch('application/updateState')
 }
 
+const updateContainer = (container, item) => {
+    if (Array.isArray(item)) {
+        for(let i in item) {
+            item[i]['$loki'] = undefined
+        }
+    } else {
+        item['$loki'] = undefined
+    }
+
+    container.insert(item)
+}
+
 window.BlockHub.saveDatabase = () => {
-    DB.application.config.data = [store.state.application]
+    DB.clean()
 
-    DB.marketplace.products.data = store.state.marketplace.products
-    DB.marketplace.assets.data = store.state.marketplace.assets
-    DB.marketplace.config.data = [store.state.marketplace]
-
-    DB.funding.config.data = [store.state.funding]
-    DB.funding.projects.data = store.state.funding.projects
+    updateContainer(DB.application.config, store.state.application)
+    updateContainer(DB.marketplace.products, Object.values(store.state.marketplace.products))
+    updateContainer(DB.marketplace.assets, Object.values(store.state.marketplace.assets))
+    updateContainer(DB.marketplace.config, store.state.marketplace)
+    updateContainer(DB.funding.config, store.state.funding)
+    updateContainer(DB.funding.projects, Object.values(store.state.funding.projects))
 
     DB.save()
 }
