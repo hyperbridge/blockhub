@@ -107,8 +107,8 @@
                     <div class="text">
                         <h3>Are you a developer?</h3>
                         <p>Start developing for blockchain with BlockHub SDK</p>
-                        <c-button status="info" href="#link_here" icon_hide>Start Developing</c-button>
-                        <c-button status="dark" href="#link_here" icon_hide>Start Developing</c-button>
+                        <c-button status="info" href="/#/developer/apply" icon_hide>Start Developing</c-button>
+                        <c-button status="dark" href="/#/developer/learn" icon_hide>Learn More</c-button>
                     </div>
                 </div>
                 <div class="d-flex justify-content-start">

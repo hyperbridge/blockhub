@@ -47,7 +47,7 @@
                             <c-button status="danger">Report</c-button>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12" v-if="!signed_in">
                         <div class="identity__user-notify">
                             <a href="#3" class="btn-close">
                                 <i class="fas fa-times"></i>
@@ -179,12 +179,12 @@
                             <div>
                                 <c-user-card />
                             </div>
-                            <div class="text text-left">
+                            <div class="text text-left" v-if="!signed_in">
                                 <h3>Create your BlockHub profile</h3>
                                 <p>BlockHub is the best place for curated community-driven game development,
                                     digital assets and micro-licensing. Sign up for your own account and build
                                     the future of gaming.</p>
-                                <c-button status="success" size="lg" icon_hide>
+                                <c-button href="/#/download" status="success" size="lg" icon_hide>
                                     Sign Up
                                 </c-button>
                             </div>
@@ -264,6 +264,9 @@
                     minutes_played: 8931
                 }
             }
+        },
+        computed: {
+            signed_in() { return this.$store.state.application.signed_in }
         },
         created() {
             $(".rating_readonly").raty({readOnly: true});
