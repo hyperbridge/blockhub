@@ -9,7 +9,7 @@
             {
                 "heading": "New class and event coming next week!",
                 "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                "url": "article-url",
+                "url": "/#/post/1",
                 "date": "2018-07-24T04:09:00.000Z"
             }
         ]
@@ -24,13 +24,13 @@
             {
                 "heading": "New class and event coming next week!",
                 "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                "url": "article-url",
+                "url": "/#/post/1",
                 "date": "2016-09-24T04:09:00.000Z"
             },
             {
                 "heading": "New class and event coming next week!",
                 "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                "url": "article-url",
+                "url": "/#/post/1",
                 "date": "2014-03-24T04:09:00.000Z"
             }
         ]
@@ -45,7 +45,7 @@
             {
                 "heading": "New class and event coming next week!",
                 "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                "url": "article-url",
+                "url": "/#/post/1",
                 "date": "2017-12-24T04:09:00.000Z"
             }
         ]

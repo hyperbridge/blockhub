@@ -40,11 +40,22 @@
                             v-model="phrase"
                         />
                     </div>
-                    <c-button
-                        v-if="assets.length"
-                        status="info"
-                        icon_hide
-                    >View All</c-button>
+                    <router-link 
+                        tag="div"
+                        :to="{
+                            name: 'Marketplace',
+                            query: { showFilters: true }
+                        }"
+                    >
+                        <c-button
+                            tag="div"
+                            status="info"
+                            icon_hide
+                            v-if="assets.length"
+                        >
+                        View All
+                        </c-button>
+                    </router-link>
                 </div>
                 <transition name="slide-in-top">
                     <div v-if="filtersActive">

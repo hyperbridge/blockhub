@@ -151,6 +151,7 @@
                 &:hover {
                     background: nth($colorSet, 3);
                     color: nth($colorSet, 4);
+                    text-decoration: none;
                 }
             }
         }

@@ -42,6 +42,7 @@ export default {
         li {
             width: 25%;
             min-width: 200px;
+            overflow: hidden;
             a {
                 display: flex;
                 width: 100%;

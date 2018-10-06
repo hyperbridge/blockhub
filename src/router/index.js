@@ -109,6 +109,11 @@ const router = new Router({
             }
         },
         {
+            path: '/collections',
+            name: 'Collections',
+            component: (resolve) => require(['@/ui/screens/collections'], resolve)
+        },
+        {
             path: '/account',
             name: 'Account',
             component: (resolve) => require(['@/ui/screens/account'], resolve),
@@ -427,6 +432,12 @@ const router = new Router({
             name: 'Project Community',
             props: true,
             component: (resolve) => require(['@/ui/screens/project-community'], resolve)
+        },
+        {
+            path: '/battlepass/:id',
+            name: 'Battle Pass',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/battle-pass'], resolve)
         },
         {
             path: '/curators',

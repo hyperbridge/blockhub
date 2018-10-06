@@ -38,7 +38,7 @@
 
                 <div class="row align-items-stretch" v-if="item.type === 'banners'" :key="`level-1-${index}`">
                     <div class="col-12 col-md-4 margin-bottom-30">
-                        <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="/#/home">
+                        <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="/#/battlepass/1">
                             <h4 class="text-yellow">summer block</h4>
                             <h3>Championship</h3>
                             <p>You won't believe the prize!</p>
