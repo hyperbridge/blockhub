@@ -375,41 +375,14 @@
 
                                 <c-community-spotlight :discussions="project.community.discussions"
                                                        :community_url="`/#/project/${project.id}`" :editing="editing"
-                                                       :activeElement="activeElement['milestones']"/>
+                                                       :activeElement="activeElement['milestones']"
+                                                        class="margin-bottom-30"/>
 
                                 <c-block title="Contribute" class="margin-bottom-30">
                                     <c-contribute-form @click="showContributeModal" />
                                 </c-block>
                                 
-                                <c-contribute-pledge @click="showContributeModal" :price="10" name="Some awesome things" estimated_delivery="28.10.2018" ships_to="Anywhere in the world" :backers="37">
-
-                                    Choose ONE Drabblecast "Best of" Audio Anthology:
-                                    "Best of Horror," "Best of Fantasy," "Best of Science Fiction,"
-                                    each with new and original intro commentary by Norm.
-
-                                    <template slot="includes">
-                                        <ul>
-                                            <li class="list-disc">
-                                                Drabblecast Glow in the Dark Pin
-                                            </li>
-                                            <li>
-                                                (3) Audio Anthologies: Horror, Science Fiction AND Fantasy
-                                            </li>
-                                            <li>
-                                                Original Lovecraft mythos audio story by Frank Key
-                                            </li>
-                                            <li>
-                                                Digital Hugs, Name on Website
-                                            </li>
-                                        </ul>
-                                    </template>
-
-                                </c-contribute-pledge>
-                                <c-contribute-pledge @click="showContributeModal" :price="50" name="Wiggly people" estimated_delivery="03.12.2018" ships_to="Anywhere in the world" :backers="13">
-
-                                    Choose between TWO Drabblecast "Best of" Audio Anthologies, PLUS a Drabblecast Glow in the Dark Pin!
-
-                                </c-contribute-pledge>
+                                <c-contribute-pledge @click="showContributeModal" v-for="(pledge, index) in project.pledges" :key="index" :pledge="pledge" />
 
                             </div>
                         </div>

@@ -162,6 +162,7 @@
             outline-warning: (#FADC72, #30304B),
             outline-share: (#43B4C9, #fff),
             outline-support: (#43C981, #fff),
+            outline-white: (#fff, #000),
         );
 
         @each $status, $colorSet in $outlineColor {

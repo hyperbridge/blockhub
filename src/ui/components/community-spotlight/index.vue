@@ -20,7 +20,9 @@
                     </a>
                 </li>
             </ul>
-            <a :href="communityUrl" class="btn btn-outline-white">Go To Community</a>
+            <c-button status="outline-white" :href="communityUrl" hide_icon>
+                Go To Community
+            </c-button>
         </div>
         <div class="w-100" v-else>
             <h4>No highlighted community activity yet.</h4>
@@ -75,31 +77,6 @@ export default {
 
     .editor-container--style-2 ~ * {
         opacity: 0.3;
-    }
-
-    .community-spotlight {
-        a.btn-outline-white {
-            font-size: 12px;
-            text-transform: uppercase;
-            color: #fff;
-            border: 1px solid #fff;
-            border-radius: 5px;
-            font-weight: bold;
-            display: inline-block;
-            float: left;
-            line-height: 24px;
-            padding: 0 8px;
-            width: auto;
-            margin: 5px 10px 3px 0;
-            &:last-child {
-                margin-right: 0;
-            }
-            &:hover {
-                background: #fff;
-                color: #000;
-                text-decoration: none;
-            }
-        }
     }
 
     .community-spotlight__list {
