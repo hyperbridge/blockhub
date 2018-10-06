@@ -5,27 +5,31 @@
                 Select this reward
             </div>
         </transition>
-        <h3>Pledge US ${{ price }} or more</h3>
-        <h4 v-if="name">{{ name }}</h4>
+        <h3>Pledge US ${{ pledge.min_price }} or more</h3>
+        <h4 v-if="pledge.title">{{ pledge.title }}</h4>
         <div class="pledge-item__text">
-            <slot />
+            {{ pledge.description }}
         </div>
-        <div class="pledge-item__includes" v-if="!form && this.$slots.includes">
+        <div class="pledge-item__includes" v-if="!form && pledge.includes.length > 0">
             <h6>Includes</h6>
-            <slot name="includes" />
+            <ul>
+                <li v-for="(itm, index) in pledge.includes" :key="index">
+                    {{ itm.text }}
+                </li>
+            </ul>
         </div>
         <div class="pledge-item__info">
-            <div v-if="estimated_delivery">
+            <div v-if="pledge.delivery_date">
                 <span class="h6">Estimated delivery</span>
                 {{ date }}
             </div>
-            <div v-if="ships_to">
+            <div v-if="pledge.ships_to">
                 <span class="h6">Ships to</span>
-                {{ ships_to }}
+                {{ pledge.ships_to }}
             </div>
-            <div class="w-100 mt-5" v-if="backers">
+            <div class="w-100 mt-5" v-if="pledge.backers">
                 <span class="h6">
-                    {{ backers }} backers
+                    {{ pledge.backers }} backers
                 </span>
             </div>
         </div>
@@ -34,7 +38,7 @@
                 <div class="h6 font-weight-bold text-uppercase mb-3">
                     Pledge amount
                 </div>
-                <c-contribute-form v-model="toBePaid" :defaultValue="price" :active="true" @click="$emit('click')" />
+                <c-contribute-form v-model="toBePaid" :defaultValue="pledge.min_price" :active="true" @click="$emit('click')" />
             </div>
         </transition>
     </div>
@@ -46,13 +50,7 @@
 
     export default {
         name: '',
-        props: {
-            price: Number,
-            name: String,
-            estimated_delivery: String,
-            ships_to: String,
-            backers: Number,
-        },
+        props: ['pledge'],
         components:{
             'c-contribute-form': ContributeForm
         },
@@ -71,7 +69,7 @@
         },
         computed:{
             date(){
-                return moment(this.estimated_delivery).format('DD MMMM, YYYY')
+                return moment(this.pledge.delivery_date).format('DD MMMM, YYYY')
             }
         }
     }

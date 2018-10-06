@@ -229,6 +229,52 @@
                 "text": "Ex amet minim cupidatat elit reprehenderit elit Lorem ad tempor est in aliqua. Labore quis sint commodo duis officia commodo aute elit eu consectetur ea esse ut officia. Cupidatat incididunt est proident amet voluptate nostrud amet. Cillum quis deserunt quis ea. Exercitation cupidatat est labore consectetur incididunt ea non incididunt magna ipsum. Culpa reprehenderit aliqua aute id do aute.\r\nQui ipsum consectetur exercitation sunt aute proident minim sint esse exercitation deserunt eiusmod dolore Lorem. Cupidatat minim cillum culpa sunt minim excepteur cupidatat eu consequat exercitation duis sint. Deserunt est voluptate adipisicing aliquip excepteur in pariatur commodo reprehenderit officia fugiat laborum officia culpa. Officia culpa nisi ex sunt aute laboris laboris proident et nostrud tempor magna nulla nulla. Ut sit commodo culpa ex et ad exercitation pariatur esse officia amet elit occaecat est.\r\n",
                 "date": "2017-11-03"
             }
+        ],
+        "pledges": [
+            {
+                "id": 1,
+                "title": "Some awesome Things",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a sapien luctus, placerat massa pellentesque, consectetur ante. Nam dui est, cursus at consequat quis, malesuada eget eros. ",
+                "includes": [],
+                "delivery_date": "2019-01-12 03:46:26 -03:00",
+                "ships_to": "USA",
+                "backers": "39",
+                "min_price": 10
+            },
+            {
+                "id": 2,
+                "title": "Wiggly Peaple",
+                "description": "Maecenas a sapien luctus, placerat massa pellentesque, consectetur ante. Nam dui est, cursus at consequat quis, malesuada eget eros. ",
+                "includes": [
+                    {
+                        "text": "Morbi vitae orci lacus"
+                    }
+                ],
+                "delivery_date": "2018-12-15 03:46:26 -03:00",
+                "ships_to": "Canada",
+                "backers": "27",
+                "min_price": 15
+            },
+            {
+                "id": 3,
+                "title": "Praesent venenatis semper magna",
+                "description": "Maecenas a sapien luctus, placerat massa pellentesque, consectetur ante. Nam dui est, cursus at consequat quis, malesuada eget eros. ",
+                "includes": [
+                    {
+                        "text": "Morbi vitae orci lacus"
+                    },
+                    {
+                        "text": "Praesent rhoncus tellus vel dapibus auctor"
+                    },
+                    {
+                        "text": "Morbi vitae orci lacus"
+                    }
+                ],
+                "delivery_date": "2019-04-25 03:46:26 -03:00",
+                "ships_to": "Anywhere in the world",
+                "backers": "15",
+                "min_price": 20
+            }
         ]
     },
     {

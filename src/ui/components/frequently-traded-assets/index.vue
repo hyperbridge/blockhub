@@ -43,7 +43,7 @@ export default {
             border-radius: 5px;
             font-weight: bold;
             display: inline-block;
-            float: left;
+            /*float: left;*/
             line-height: 24px;
             padding: 0 8px;
             width: auto;
