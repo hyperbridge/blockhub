@@ -99,7 +99,7 @@
                 },
                 {
                     "id": 3,
-                    "title": "Create the base game with 2 dungeons",
+                    "title": "Lorem ipsum dolor sit amet",
                     "short_description": "Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
                     "text": "Proin sollicitudin faucibus mauris non pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce efficitur imperdiet urna, mollis vulputate risus feugiat sit amet. Ut turpis nulla, ultricies a ultricies eget, bibendum eu orci. In in suscipit nisl. Sed bibendum, mauris a convallis rhoncus, enim libero condimentum enim, in ultrices ligula orci ac nisl. Nunc vestibulum purus vitae lorem porta, eget aliquam nibh rhoncus.",
                     "img": "http://via.placeholder.com/350x250",
@@ -114,11 +114,11 @@
                 },
                 {
                     "id": 2,
-                    "title": "Create the base game with 2 dungeons",
+                    "title": "Praesent eu fringilla nisl",
                     "short_description": "Aenean aliquam erat quis tortor varius convallis. Suspendisse finibus orci at nibh pharetra, vel ullamcorper tellus mattis.",
                     "text": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac, sollicitudin lacinia arcu. Phasellus vehicula arcu tristique nunc lacinia facilisis. Nunc egestas congue massa a euismod. Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
                     "img": "http://via.placeholder.com/350x250",
-                    "status": "done",
+                    "status": "in_progress",
                     "step_number": 2,
                     "progress":{
                         "percent_days": 91,
@@ -129,11 +129,11 @@
                 },
                 {
                     "id": 4,
-                    "title": "Create the base game with 2 dungeons",
+                    "title": "In hac habitasse platea dictumst",
                     "short_description": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac",
                     "text": "Praesent eu fringilla nisl. Nullam iaculis odio non est ornare sodales non a massa. Sed sollicitudin nibh et ipsum sollicitudin blandit. Quisque vel enim congue, semper leo vitae, luctus nibh.",
                     "img": "http://via.placeholder.com/350x250",
-                    "status": "done",
+                    "status": "in_progress",
                     "step_number": 4,
                     "progress":{
                         "percent_days": 85,
