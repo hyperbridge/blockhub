@@ -344,6 +344,49 @@
         "special_products": [],
         "assets": [],
         "products": [],
+        "game_series": [
+            {
+                "id": 1,
+                "price": "32.00",
+                "expires": "2019Z43Z324",
+                "images":[
+                    "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/med-tile.jpg",
+                    "https://cdn.hyperbridge.org/blockhub/images/products/capsized-5004/med-tile.jpg",
+                    "https://cdn.hyperbridge.org/blockhub/images/products/doom-20087/med-tile.jpg",
+                    "https://cdn.hyperbridge.org/blockhub/images/products/a-game-of-thrones---genesis-4221/med-tile.jpg"
+                ],
+                "title": "Dragon Age: Ultimate Edition + Dragon Age: Full Series Collection",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra gravida odio eget consectetur. Vestibulum mattis ut dui sit amet maximus. Cras nec enim auctor, eleifend urna congue",
+                "tags": ["RPG", "ACTION", "FULL Series"],
+                "products_ids": [
+                    {
+                        "id": 1,
+                        "primaryProduct": true
+                    },
+                    {
+                        "id": 2,
+                        "primaryProduct": false
+                    },
+                    {
+                        "id": 3,
+                        "primaryProduct": false
+                    },
+                    {
+                        "id": 4,
+                        "primaryProduct": false
+                    },
+                    {
+                        "id": 5,
+                        "primaryProduct": false
+                    },
+                    {
+                        "id": 6,
+                        "primaryProduct": false
+                    }
+                ]
+            }
+
+        ],
         "collections": [],
         "curator_reviews": [],
         "main_banner": {

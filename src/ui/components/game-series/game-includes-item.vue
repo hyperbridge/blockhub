@@ -1,9 +1,9 @@
 
 <template>
     <div class="game-includes__item">
-        <c-img :src="item.img" />
-        <h4>{{ item.title }}</h4>
-        <p>{{ item.company }}</p>
+        <c-img :src="item.images.medium_tile" />
+        <h4>{{ item.name }}</h4>
+        <p>{{ item.developer }}</p>
         <div class="rating-stars">
             <c-rating :number="item.stars" />
         </div>
@@ -26,7 +26,7 @@
     .game-includes__item{
         display: flex;
         flex-direction: column;
-        max-width: 250px;
+        max-width: 350px;
         color: #fff;
         width: 100%;
         min-width: 140px;

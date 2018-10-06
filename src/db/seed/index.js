@@ -7,5 +7,6 @@ export default {
     collections: require('./collections.json'),
     assets: require('./assets.json'),
     projects: require('./projects.json'),
-    wallets: require('./wallets.json')
+    wallets: require('./wallets.json'),
+    game_series: require('./game-series.json')
 }

@@ -141,9 +141,9 @@
 
                 <div class="row margin-bottom-30" v-if="item.type === 'game_series'" :key="`level-1-${index}`">
                     <div class="col-12">
-                        <c-game-series>
-                            <c-game-description />
-                            <c-game-includes-list :list="item.data.series_list" :showNumber="5" />
+                        <c-game-series v-for="(game, index) in item.data.game_series_data" :key="index">
+                            <c-game-description :game="game" />
+                            <c-game-includes-list :list="game.products_ids" :showNumber="item.data.showNumber" />
                         </c-game-series>
                     </div>
                 </div>

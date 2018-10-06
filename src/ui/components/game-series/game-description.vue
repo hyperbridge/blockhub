@@ -5,31 +5,23 @@
                 <div class="swiper-pagination" slot="pagination"></div>
             </div>
             <c-swiper :options="sliderOptions" class="custom-dots-top carousel-full-height">
-                <c-slide>
-                    <c-img src="https://images-2.gog.com/78485317312e881a175c686eaab8a988202b208942623acba641f35384f8dc12.jpg" />
-                </c-slide>
-                <c-slide>
-                    <c-img src="http://www.rpgnuke.ru/wp-content/uploads/2017/10/6546356687567478-678x381.jpg" />
-                </c-slide>
-                <c-slide>
-                    <c-img src="https://cdn.igromania.ru/mnt/articles/5/8/0/6/0/6/25812/html/img/57b2557c741ba33b.jpg" />
+                <c-slide v-for="(img, index) in game.images" :key="index">
+                    <c-img :src="img" />
                 </c-slide>
             </c-swiper>
         </div>
         <div class="game-description__info">
-            <h3>Dragon Age: Ultimate Edition + Dragon Age: Full Series Collection</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra
-                gravida odio eget consectetur. Vestibulum mattis ut dui sit amet maximus.
-                Cras nec enim auctor, eleifend urna congue</p>
-            <c-tags :tags="author_tags"></c-tags>
+            <h3>{{ game.title }}</h3>
+            <p>{{ game.description }}</p>
+            <c-tags :tags="game.tags"></c-tags>
             <div class="game-description__info--bottom">
                 <div class="text">
                     <h4>Get all for only</h4>
-                    <small>Expires Jan 1st 2019</small>
+                    <small>Expires {{ expires_date }}</small>
                 </div>
                 <div>
                     <a href="#3" class="btn-price">
-                        <span class="price">$32</span>
+                        <span class="price">${{ game.price }}</span>
                         <span class="name">BUY NOW</span>
                     </a>
                 </div>
@@ -41,10 +33,11 @@
 <script>
     import 'swiper/dist/css/swiper.css'
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
+    import moment from 'moment'
 
     export default {
         name: 'game-description',
-        props: {},
+        props: ['game'],
         components: {
             'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-swiper': swiper,
@@ -52,7 +45,6 @@
         },
         data(){
             return{
-                author_tags: ['RPG', 'ACTION', 'FULL Series'],
                 sliderOptions:{
                     slidesPerView: 1,
                     spaceBetween: 0,
@@ -61,6 +53,11 @@
                         clickable: true
                     },
                 }
+            }
+        },
+        computed:{
+            expires_date(){
+                return
             }
         }
     }

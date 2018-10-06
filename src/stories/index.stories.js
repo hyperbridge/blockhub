@@ -2458,6 +2458,9 @@ storiesOf('Game Series', module)
         },
         data(){
             return{
+                product:{
+
+                },
                 list:[
                     {
                         img: 'https://b.scdn.gr/images/sku_main_images/004815/4815361/20161114100542_dragon_age_inquisition_pc.jpeg',
@@ -2512,7 +2515,7 @@ storiesOf('Game Series', module)
         },
         template: `<div class="p-5" style="width: 900px">
                     <c-game-series>
-                        <c-game-description />
+                        <c-game-description :product="product" />
                         <c-game-includes-list :list="list" :showNumber="5" />
                     </c-game-series>
                     </div>`

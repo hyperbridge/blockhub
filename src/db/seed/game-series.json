@@ -1,0 +1,36 @@
+[
+    {
+        "id": 1,
+        "price": "32.00",
+        "expires": "2019Z43Z324",
+        "title": "Dragon Age: Ultimate Edition + Dragon Age: Full Series Collection",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra gravida odio eget consectetur. Vestibulum mattis ut dui sit amet maximus. Cras nec enim auctor, eleifend urna congue",
+        "products": [
+            {
+                "id": 1,
+                "primaryProduct": true
+            },
+            {
+                "id": 2,
+                "primaryProduct": false
+            },
+            {
+                "id": 3,
+                "primaryProduct": false
+            },
+            {
+                "id": 4,
+                "primaryProduct": false
+            },
+            {
+                "id": 5,
+                "primaryProduct": false
+            },
+            {
+                "id": 6,
+                "primaryProduct": false
+            }
+        ]
+    }
+
+]
