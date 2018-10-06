@@ -117,31 +117,31 @@
                                 <router-link :to="`/project/${project.id}/milestones`" class="nav-link active">Milestones</router-link>
                             </li>
                         </ul>
-                        <div class="timeline-blk position-relative" v-if="timeline">
+                        <div class="timeline-blk position-relative">
                             <div class="progress main_timeline" style="height: 15px;">
-                                <c-progress-bar :percentages="timeline.timeline_progress"/>
+                                <c-progress-bar :percentages="project.milestones.overall_progress"/>
                             </div>
-                            <div class="period-container" v-if="timeline">
-                                <div v-for="(period, index) in timeline.timeline_periods" :key="index" class="period">
-                                    <div class="number">{{ period.number }}</div>
+                            <div class="period-container" v-if="milestones">
+                                <div v-for="(milestone, index) in milestones" :key="index" class="period">
+                                    <div class="number">{{ milestone.step_number }}</div>
                                     <div class="info">
                                         <div class="title">
-                                            {{ period.description }}
+                                            {{ milestone.short_description }}
                                         </div>
                                         <div class="progress_line">
                                             <i class="fas fa-clock icon"></i>
-                                            <c-progress-bar :percentages="period.progress['days_percent']"/>
-                                            {{ period.progress['days_amouth'] }} days left
+                                            <c-progress-bar :percentages="milestone.progress['percent_days']"/>
+                                            {{ milestone.progress['days_left'] }} days left
                                         </div>
                                         <div class="progress_line">
                                             <i class="fas fa-check icon"></i>
-                                            <c-progress-bar :percentages="period.progress['done_percent']"/>
-                                            {{ period.progress['done_percent'] }}% Done
+                                            <c-progress-bar :percentages="milestone.progress['percent_done']"/>
+                                            {{ milestone.progress['percent_done'] }}% Done
                                         </div>
                                         <div class="progress_line">
                                             <i class="fas fa-dollar-sign icon"></i>
-                                            <c-progress-bar :percentages="period.progress['spent_percent']"/>
-                                            {{ period.progress['spent_percent'] }}% Spent
+                                            <c-progress-bar :percentages="milestone.progress['percent_spent']"/>
+                                            {{ milestone.progress['percent_spent'] }}% Spent
                                         </div>
                                     </div>
                                 </div>
@@ -178,83 +178,6 @@
     }
     export default {
         props: ['id'],
-        data: function () {
-            return {
-                timeline: {
-                    timeline_progress: 24,
-                    timeline_periods: [
-                        {
-                            number: "1",
-                            description: "some text about this period",
-                            progress: {
-                                days_amouth: "97",
-                                days_percent: 15,
-                                done_percent: 38,
-                                spent_percent: 25
-                            }
-                        },
-                        {
-                            number: "2",
-                            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
-                            "Proin efficitur consequat turpis, ac tincidunt turpis " +
-                            "venenatis fermentum. Suspendisse dignissim scelerisque nisi et rutrum.",
-                            progress: {
-                                days_amouth: "133",
-                                days_percent: 94,
-                                done_percent: 8,
-                                spent_percent: 95
-                            }
-                        },
-                        {
-                            number: "3",
-                            description: "Curabitur eget felis nulla. Aliquam erat volutpat. Suspendisse dictum sed nisi quis placerat.",
-                            progress: {
-                                days_amouth: "92",
-                                days_percent: 29,
-                                done_percent: 58,
-                                spent_percent: 75
-                            }
-                        }
-                    ]
-                },
-                milestones:[
-                    {
-                        img: 'http://via.placeholder.com/350x250',
-                        title: 'Milestone 1',
-                        short_description: 'For far away, behind the word mountains, far from the countries Vokalia\n' +
-                        '                                                and Consonatia, there live.',
-                        full_text: 'Aenean eu tellus vel tortor tincidunt pharetra. Aenean mattis, sapien vel\n' +
-                        '                                            lacinia accumsan, justo mi venenatis justo, ut accumsan diam mauris sit amet\n' +
-                        '                                            ipsum. Vivamus iaculis lectus vel egestas vehicula. Phasellus in lacus nunc.\n' +
-                        '                                            Curabitur lobortis arcu neque, non rutrum elit placerat eget.',
-                        progress: {
-                            days_amouth: "133",
-                            days_percent: 94,
-                            done_percent: 8,
-                            spent_percent: 95
-                        }
-
-                    },
-                    {
-                        img: 'http://via.placeholder.com/350x250',
-                        title: 'Milestone 2',
-                        short_description: 'For far away, behind the word mountains, far from the countries Vokalia\n' +
-                        '                                                and Consonatia, there live.',
-                        full_text: 'Aenean eu tellus vel tortor tincidunt pharetra. Aenean mattis, sapien vel\n' +
-                        '                                            lacinia accumsan, justo mi venenatis justo, ut accumsan diam mauris sit amet\n' +
-                        '                                            ipsum. Vivamus iaculis lectus vel egestas vehicula. Phasellus in lacus nunc.\n' +
-                        '                                            Curabitur lobortis arcu neque, non rutrum elit placerat eget.',
-                        progress: {
-                            days_amouth: "171",
-                            days_percent: 4,
-                            done_percent: 38,
-                            spent_percent: 61
-                        }
-
-                    }
-                ]
-            }
-        },
         components: {
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
@@ -263,7 +186,11 @@
             'c-badges': (resolve) => require(['@/ui/components/project/badges.vue'], resolve)
         },
         computed: {
-            project: updateProject
+            project: updateProject,
+            milestones(){
+                let arr = this.project.milestones.items;
+                return arr.sort() ;
+            }
         },
         beforeDestroy() {
             window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'

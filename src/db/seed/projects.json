@@ -79,24 +79,71 @@
             "locked_amount": "182242",
             "overflow_amount": "17342"
         },
-        "milestones": [
-            {
-                "text": "Create the base game with 2 dungeons",
-                "status": "done"
-            },
-            {
-                "text": "New Class, storyline and weapons type",
-                "status": "done"
-            },
-            {
-                "text": "Level cap updated to 90 with new set of armors and weapons.",
-                "step_number": "3"
-            },
-            {
-                "text": "Add 3 extra dungeons",
-                "step_number": "4"
-            }
-        ],
+        "milestones": {
+            "overall_progress": 32,
+            "items": [
+                {
+                    "id": 1,
+                    "title": "Create the base game with 2 dungeons",
+                    "short_description": "Maecenas faucibus tincidunt consectetur. Phasellus ac malesuada quam, vitae vulputate quam. Nulla dui ipsum, suscipit sed laoreet auctor, sagittis et mauris.",
+                    "text": "Aenean eu tellus vel tortor tincidunt pharetra. Aenean mattis, sapien vel lacinia accumsan, justo mi venenatis justo, ut accumsan diam mauris sit amet ipsum. Vivamus iaculis lectus vel egestas vehicula. Phasellus in lacus nunc. Curabitur lobortis arcu neque, non rutrum elit placerat eget.",
+                    "img": "http://via.placeholder.com/350x250",
+                    "status": "done",
+                    "step_number": 1,
+                    "progress":{
+                        "percent_days": 45,
+                        "days_left": 97,
+                        "percent_done": 17,
+                        "percent_spent": 83
+                    }
+                },
+                {
+                    "id": 3,
+                    "title": "Create the base game with 2 dungeons",
+                    "short_description": "Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
+                    "text": "Proin sollicitudin faucibus mauris non pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce efficitur imperdiet urna, mollis vulputate risus feugiat sit amet. Ut turpis nulla, ultricies a ultricies eget, bibendum eu orci. In in suscipit nisl. Sed bibendum, mauris a convallis rhoncus, enim libero condimentum enim, in ultrices ligula orci ac nisl. Nunc vestibulum purus vitae lorem porta, eget aliquam nibh rhoncus.",
+                    "img": "http://via.placeholder.com/350x250",
+                    "status": "done",
+                    "step_number": 3,
+                    "progress":{
+                        "percent_days": 34,
+                        "days_left": 125,
+                        "percent_done": 3,
+                        "percent_spent": 80
+                    }
+                },
+                {
+                    "id": 2,
+                    "title": "Create the base game with 2 dungeons",
+                    "short_description": "Aenean aliquam erat quis tortor varius convallis. Suspendisse finibus orci at nibh pharetra, vel ullamcorper tellus mattis.",
+                    "text": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac, sollicitudin lacinia arcu. Phasellus vehicula arcu tristique nunc lacinia facilisis. Nunc egestas congue massa a euismod. Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
+                    "img": "http://via.placeholder.com/350x250",
+                    "status": "done",
+                    "step_number": 2,
+                    "progress":{
+                        "percent_days": 91,
+                        "days_left": 4,
+                        "percent_done": 97,
+                        "percent_spent": 99
+                    }
+                },
+                {
+                    "id": 4,
+                    "title": "Create the base game with 2 dungeons",
+                    "short_description": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac",
+                    "text": "Praesent eu fringilla nisl. Nullam iaculis odio non est ornare sodales non a massa. Sed sollicitudin nibh et ipsum sollicitudin blandit. Quisque vel enim congue, semper leo vitae, luctus nibh.",
+                    "img": "http://via.placeholder.com/350x250",
+                    "status": "done",
+                    "step_number": 4,
+                    "progress":{
+                        "percent_days": 85,
+                        "days_left": 45,
+                        "percent_done": 37,
+                        "percent_spent": 84
+                    }
+                }
+            ]
+        },
         "bounties": [
             {
                 "title": "Find a bug, behind the word mountains, far from the countries Vokalia and Consonantia, there live.",
@@ -331,6 +378,52 @@
         "likes": 1000,
         "comments": [],
         "contributors": [],
-        "moderators": []
+        "moderators": [],
+        "pledges": [
+            {
+                "id": 1,
+                "title": "Some awesome Things",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a sapien luctus, placerat massa pellentesque, consectetur ante. Nam dui est, cursus at consequat quis, malesuada eget eros. ",
+                "includes": [],
+                "delivery_date": "2019-01-12 03:46:26 -03:00",
+                "ships_to": "USA",
+                "backers": "39",
+                "min_price": 10
+            },
+            {
+                "id": 2,
+                "title": "Wiggly Peaple",
+                "description": "Maecenas a sapien luctus, placerat massa pellentesque, consectetur ante. Nam dui est, cursus at consequat quis, malesuada eget eros. ",
+                "includes": [
+                    {
+                        "text": "Morbi vitae orci lacus"
+                    }
+                ],
+                "delivery_date": "2018-12-15 03:46:26 -03:00",
+                "ships_to": "Canada",
+                "backers": "27",
+                "min_price": 15
+            },
+            {
+                "id": 3,
+                "title": "Praesent venenatis semper magna",
+                "description": "Maecenas a sapien luctus, placerat massa pellentesque, consectetur ante. Nam dui est, cursus at consequat quis, malesuada eget eros. ",
+                "includes": [
+                    {
+                        "text": "Morbi vitae orci lacus"
+                    },
+                    {
+                        "text": "Praesent rhoncus tellus vel dapibus auctor"
+                    },
+                    {
+                        "text": "Morbi vitae orci lacus"
+                    }
+                ],
+                "delivery_date": "2019-04-25 03:46:26 -03:00",
+                "ships_to": "Anywhere in the world",
+                "backers": "15",
+                "min_price": 20
+            }
+        ]
     }
 ]
