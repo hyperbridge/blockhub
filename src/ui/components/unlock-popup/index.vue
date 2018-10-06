@@ -9,7 +9,7 @@
                             <div class="form-group">
                                 <h3>Password</h3>
                                 <label class="sr-only">Password</label>
-                                <input type="password" name="password" ref="password" placeholder="Password" class="form-control" />
+                                <input type="password" name="password" ref="password" placeholder="Password" class="form-control" @keyup.enter="unlock()" v-focus />
                                 <br />
                                 <c-button class="c-btn-lg" @click="unlock()">Unlock</c-button>
                             </div>

@@ -14,6 +14,12 @@ Vue.directive('omodel', {
     }
 })
 
+Vue.directive('focus', {
+    inserted: function (el) {
+        el.focus()
+    }
+})
+
 function isVisible(availableFlags, userFlags, code, variant, data) {
     return availableFlags.map(flag => flag.code).includes(code) && userFlags.map(flag => flag.enabled ? flag.code : null).includes(code)
 }
