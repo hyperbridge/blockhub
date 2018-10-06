@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="settings-navigation">
+    <c-layout navigationKey="settings">
         <div class="content" id="content">
             <c-block class="margin-bottom-30" title="Client Settings">
                 <div class="row">

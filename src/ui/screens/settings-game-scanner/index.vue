@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="settings-navigation">
+    <c-layout navigationKey="settings">
         <div class="content" id="content">
             <c-block title="Scan for Game">
                 <p class="mb-0">We found the following games on your system.</p>

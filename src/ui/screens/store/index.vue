@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="store-navigation">
+    <c-layout navigationKey="store">
         <div class="content" id="content">
             <div class="container-fluid">
                 Nothing to see here

@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="help-navigation">
+    <c-layout navigationKey="help">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row justify-content-center">

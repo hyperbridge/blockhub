@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="funding-navigation">
+    <c-layout navigationKey="funding">
         <div class="content" id="content">
             <div class="container-fluid">
                 <c-infinite-content :list="list" />

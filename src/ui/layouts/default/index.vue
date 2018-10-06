@@ -44,7 +44,7 @@
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert left-sidebar" id="page-aside" v-if="showLeftPanel">
                 <!--<transition name="slideLeft" v-if="initialized">-->
-                <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}`"></component>
+                <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}-navigation`"></component>
                 <!--</transition>-->
             </div>
             <!-- //END PAGE ASIDE PANEL -->

@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="asset-navigation">
+    <c-layout navigationKey="asset">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row" v-if="!asset">

@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="settings-navigation">
+    <c-layout navigationKey="settings">
         <div class="content" id="content">
             <c-block title="Activity Log">
                 <div class="console-log" ref="consoleLog" v-html="consoleLogMessages">

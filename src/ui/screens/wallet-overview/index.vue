@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="wallet-navigation">
+    <c-layout navigationKey="wallet">
         <div class="content" id="content">
             <div class="container-fluid">  
                 <div class="row">
