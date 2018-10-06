@@ -84,7 +84,7 @@
                         <li v-if="signed_in">
                             <a href="/#/identity/1">
                                 <span class="icon fa fa-user"></span>
-                                <span class="text">Satoshi</span>
+                                <span class="text">{{ identity.name }}</span>
                             </a>
                         </li>
                         <li v-if="signed_in" v-darklaunch="'CONTACTS'">
@@ -143,6 +143,11 @@ export default {
         },
         desktop_mode() {
             return this.$store.state.application.desktop_mode
+        },
+        identity() {
+            return {
+                name: 'Satoshi'
+            }
         }
     },
     methods: {
