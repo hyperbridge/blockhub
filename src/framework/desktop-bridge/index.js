@@ -8,8 +8,40 @@ const local = {
     requests: {},
     store: null,
     router: null,
-    unlockResolve: null
+    unlockResolve: null,
+    events: {},
 }
+
+export const on = (event, listener) => {
+    if (typeof local.events[event] !== 'object') {
+        local.events[event] = [];
+    }
+    local.events[event].push(listener);
+    return () => removeListener(event, listener);
+}
+
+export const removeListener = (event, listener) => {
+    if (typeof local.events[event] === 'object') {
+        const idx = local.events[event].indexOf(listener);
+        if (idx > -1) {
+            local.events[event].splice(idx, 1);
+        }
+    }
+}
+
+export const emit = (event, ...args) => {console.log(event, local.events)
+    if (typeof local.events[event] === 'object') {
+        local.events[event].forEach(listener => listener.apply(this, args));
+    }
+}
+
+export const once = (event, listener) => {
+    const remove = on(event, (...args) => {
+        remove();
+        listener.apply(this, args);
+    });
+}
+
 
 export const isConnected = () => {
     return window.isElectron
@@ -136,6 +168,8 @@ export const runCommand = async (cmd, meta = {}) => {
     console.log('[DesktopBridge] Running command', cmd.key)
 
     return new Promise(async (resolve, reject) => {
+        emit(cmd.key, cmd.data ? cmd.data : undefined)
+
         if (cmd.responseId) {
             if (local.requests[cmd.responseId]) {
                 console.log('[DesktopBridge] Running response callback', cmd.responseId)
@@ -167,12 +201,15 @@ export const runCommand = async (cmd, meta = {}) => {
 
             // store.state.application.locked = true
             // store.state.application.signed_in = false
+        } else if (cmd.key === 'updateReady') {
+            console.log(cmd.data)
+
+            await sendCommand('quitAndInstall')
         } else if (cmd.key === 'systemError') {
             console.warn('[DesktopBridge] Received system error from desktop', cmd.message)
         } else {
             console.warn('[DesktopBridge] Unhandled command:', cmd)
         }
-
     })
 }
 
