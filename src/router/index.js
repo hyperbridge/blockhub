@@ -4,7 +4,7 @@ import store from '../store'
 
 Vue.use(Router)
 
-const appVersion = '0.3.0'
+const appVersion = '0.5.4'
 
 const router = new Router({
     //mode: 'history',
@@ -28,6 +28,11 @@ const router = new Router({
             path: '/welcome',
             name: 'Welcome',
             component: (resolve) => require(['@/ui/screens/welcome'], resolve)
+        },
+        {
+            path: '/streams',
+            name: 'Streams',
+            component: (resolve) => require(['@/ui/screens/streams'], resolve)
         },
         {
             path: '/stash',
