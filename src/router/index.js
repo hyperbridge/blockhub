@@ -30,6 +30,11 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/welcome'], resolve)
         },
         {
+            path: '/stash',
+            name: 'Stash',
+            component: (resolve) => require(['@/ui/screens/stash'], resolve)
+        },
+        {
             path: '/sitemap',
             name: 'Sitemap',
             component: (resolve) => require(['@/ui/screens/sitemap'], resolve)

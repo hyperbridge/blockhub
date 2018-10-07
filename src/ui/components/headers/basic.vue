@@ -65,6 +65,12 @@
                             </a>
                         </li>
                         <li v-if="signed_in">
+                            <a href="/#/stash">
+                                <span class="icon fa fa-box-open"></span>
+                                <span class="text">Stash</span>
+                            </a>
+                        </li>
+                        <li v-if="signed_in">
                             <a href="/#/account/identities">
                                 <span class="icon fa fa-id-card"></span>
                                 <span class="text">Identities</span>
