@@ -1,11 +1,15 @@
 
 <template>
     <div class="game-includes__item">
-        <c-img :src="item.img" />
-        <h4>{{ item.title }}</h4>
-        <p>{{ item.company }}</p>
+        <router-link :to="{ name: 'Product', params: {id: item.id } }">
+            <c-img :src="item.images.medium_tile" />
+        </router-link>
+        <router-link :to="{ name: 'Product', params: {id: item.id } }">
+            <h4>{{ item.name }}</h4>
+        </router-link>
+        <p>{{ item.developer }}</p>
         <div class="rating-stars">
-            <c-rating :number="item.stars" />
+            <c-rating :number="item.rating.overall" />
         </div>
     </div>
 </template>
@@ -26,7 +30,7 @@
     .game-includes__item{
         display: flex;
         flex-direction: column;
-        max-width: 250px;
+        max-width: 350px;
         color: #fff;
         width: 100%;
         min-width: 140px;

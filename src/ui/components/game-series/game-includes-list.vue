@@ -6,6 +6,7 @@
         <transition-group name="list" tag="div" class="game-includes__list">
             <div class="game-includes__item-container"
                  v-for="(item, index) of limitedList(limit)"
+                 :style="{ width: 'calc(100% / ' + showNumber + ')'}"
                  :key="index" >
                 <c-includes-item :item="item" />
             </div>
@@ -53,7 +54,7 @@
                 this.showMore = true;
             },
             limitedList(limit) {
-                let list = this.list,
+                let list = this.getProducts,
                     newList = [];
                     list.forEach( function (item, i){
                         if (i <= limit-1) {
@@ -64,6 +65,19 @@
                 return newList
             }
         },
+        computed:{
+            getProducts(){
+                let ids = this.list,
+                    list = this.$store.state.marketplace.products || {},
+                    arr = [];
+                if (ids)
+                    ids.forEach( (a, i) => {
+                        if (list[a.id])
+                            arr.push(list[a.id])
+                    });
+                return arr;
+            }
+        }
     }
 </script>
 
@@ -126,12 +140,12 @@
     }
     .game-includes__item-container{
         width: calc(100%/5 - 20px);
-        margin: 10px;
+        padding: 10px;
     }
     .list-enter-active, .list-leave-active {
         transition: all 1s;
     }
-    .list-enter, .list-leave-to /* .list-leave-active до версии 2.1.8 */ {
+    .list-enter, .list-leave-to{
         opacity: 0;
         transform: translateY(30px);
     }
