@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="product-navigation" :showRightPanel="false">
+    <c-layout navigationKey="product" :showRightPanel="false">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">

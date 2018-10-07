@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="account-navigation" :showLeftPanel="false" :showRightPanel="false">
+    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false">
         <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
@@ -794,16 +794,17 @@ export default {
             repeatPassphrase: [],
             errors: [],
             account: {
-                first_name: null,
-                last_name: null,
-                birthday: null,
-                email: null,
-                password: null,
-                repeat_password: null,
-                secret_question_1: null,
-                secret_question_2: null,
-                secret_answer_1: null,
-                secret_answer_2: null,
+                first_name: '',
+                last_name: '',
+                birthday: '',
+                email: '',
+                password: '',
+                repeat_password: '',
+                secret_question_1: '',
+                secret_question_2: '',
+                secret_answer_1: '',
+                secret_answer_2: '',
+                agreement: false,
                 // first_name: 'Eric',
                 // last_name: 'Muyser',
                 // birthday: '03 Mar 1987',
@@ -814,8 +815,8 @@ export default {
                 // secret_question_2: 'first_name_favorite_aunt_uncle',
                 // secret_answer_1: 'shelly',
                 // secret_answer_2: 'shelly',
-                agreement: true,
-                newsletter: false,
+                // agreement: true,
+                newsletter: true,
                 passphrase: null,
                 repeat_passphrase: null,
                 encrypt_passphrase: true,
