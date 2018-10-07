@@ -57,7 +57,7 @@
         },
         computed:{
             expires_date(){
-                return
+                return moment(this.game.expires).format("Do MMM YYYY")
             }
         }
     }
