@@ -11,7 +11,7 @@
                                 <label class="sr-only">Password</label>
                                 <input type="password" name="password" ref="password" placeholder="Password" class="form-control" @keyup.enter="unlock()" v-focus />
                                 <br />
-                                <c-button class="c-btn-lg" @click="unlock()">Unlock</c-button>
+                                <c-button ref="submit" class="c-btn-lg" @click="unlock()">Unlock</c-button>
                             </div>
                         </div>
                     </div>
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+    import * as DesktopBridge from '@/framework/desktop-bridge'
+
     export default {
         props: ['activated'],
         components: {
@@ -35,8 +37,17 @@
         },
         methods: {
             unlock() {
+                $(this.$refs.submit.$el).removeClass('wrong')
+
                 this.$store.dispatch('application/unlockAccount', { password: this.$refs.password })
             }
+        },
+        created() {
+            DesktopBridge.on('promptPasswordRequest', (data) => {
+                if (data.error) {console.log(this.$refs.submit.$el, $(this.$refs.submit.$el))
+                    $(this.$refs.submit.$el).addClass('wrong')
+                }
+            })
         }
     }
 </script>
@@ -63,5 +74,19 @@
             box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
             background: #303049;
         }
+        .c-btn {
+            &.wrong {
+                position: relative;
+                left: 0;
+                border: 2px solid #ed1c24;
+                animation: wrong-log 0.3s;
+            }
+        }
+    }
+
+    @keyframes wrong-log {
+        0%, 100% {left: 0px;}
+        20%, 60% {left: 15px;}
+        40% , 80% {left: -15px;}
     }
 </style>
