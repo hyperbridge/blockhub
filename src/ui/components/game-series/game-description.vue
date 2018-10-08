@@ -13,7 +13,7 @@
         <div class="game-description__info">
             <h3>{{ game.title }}</h3>
             <p>{{ game.description }}</p>
-            <c-tags :tags="game.tags"></c-tags>
+            <c-tags :tags="game.tags || []"></c-tags>
             <div class="game-description__info--bottom">
                 <div class="text">
                     <h4>Get all for only</h4>
