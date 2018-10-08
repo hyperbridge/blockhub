@@ -45,6 +45,12 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/sitemap'], resolve)
         },
         {
+            path: '/go/:code',
+            name: 'Go',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/go'], resolve)
+        },
+        {
             path: '/help',
             name: 'Help',
             component: (resolve) => require(['@/ui/screens/help'], resolve)
