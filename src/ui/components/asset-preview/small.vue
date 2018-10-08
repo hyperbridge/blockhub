@@ -5,6 +5,7 @@
             :src="asset.image"
         />
         <span>{{ asset.name }}</span>
+        <span class="asset-preview-small__price"> - {{ asset.price.current }}$</span>
     </div>
 </template>
 
@@ -35,5 +36,9 @@
         height: 30px;
         min-height: 30px;
         margin-right: 5px;
+    }
+    .asset-preview-small__price {
+        font-size: 11px;
+        color: rgba(255,255,255,.7);
     }
 </style>

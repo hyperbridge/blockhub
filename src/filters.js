@@ -63,3 +63,5 @@ Vue.filter('highlightPhrase', (value, phrase, tag = 'strong') => {
     return valueWithPhrase;
 });
 
+Vue.filter('roundNum', num => Math.round(num * 100) / 100);
+
