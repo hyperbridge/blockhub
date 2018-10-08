@@ -509,6 +509,12 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/discussion'], resolve)
         },
         {
+            path: '/game-library/',
+            name: 'Game Library',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/game-library'], resolve)
+        },
+        {
             path: '/marketplace',
             name: 'Marketplace',
             component: (resolve) => require(['@/ui/screens/marketplace'], resolve)

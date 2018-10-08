@@ -2,40 +2,8 @@
     <c-layout>
         <div class="content identity" id="content">
             <div class="container-fluid">
+                <c-user-head />
                 <div class="row justify-content-between align-items-center">
-                    <div class="col-5">
-                        <div class="identity__user-info">
-                            <div class="user_avatar">
-                                <c-img
-                                    src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png"/>
-                                <div class="us_icon">
-                                    <i class="fas fa-lock"></i>
-                                </div>
-                            </div>
-                            <div class="user_info">
-                                <h2 class="user_name">MrMoody</h2>
-                                <div class="user_status">Trusted User</div>
-                                <div class="user_statistic">
-                                <span>
-                                    12
-                                    <i class="fas fa-arrow-up"></i>
-                                </span>
-                                    <span>
-                                    193
-                                    <i class="fas fa-arrow-down"></i>
-                                </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-7">
-                        <div class="identity__user-medal">
-                            <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
-                            <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
-                            <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
-                            <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
-                        </div>
-                    </div>
                     <div class="col-12 d-flex margin-top-30 justify-content-end">
                         <div class="identity__wallet">
                             <i class="fas fa-copy"></i>
@@ -248,7 +216,8 @@
             'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid'], resolve),
             'c-featured-assets': (resolve) => require(['@/ui/components/assets-list-item/featured-list'], resolve),
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
-            'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'], resolve)
+            'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'], resolve),
+            'c-user-head': (resolve) => require(['@/ui/components/user/header'], resolve)
         },
         data() {
             return {
@@ -276,67 +245,6 @@
 
 <style lang="scss" scoped>
 
-    .identity__user-info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .user_avatar {
-            width: 114px;
-            position: relative;
-            img {
-                width: 100%;
-                border-radius: 100%;
-            }
-            .us_icon {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                border-radius: 100%;
-                width: 32px;
-                height: 32px;
-                text-align: center;
-                line-height: 31px;
-                font-size: 19px;
-                background: #43C981;
-                color: #1C2032;
-            }
-        }
-        .user_info {
-            width: calc(100% - 130px);
-            text-align: left;
-            .user_name {
-                font-size: 32px;
-                padding: 0;
-                margin: 0;
-            }
-            .user_status {
-                font-size: 14px;
-                font-weight: bold;
-            }
-            .user_statistic {
-                font-size: 24px;
-                text-align: left;
-                margin-top: 13px;
-                span {
-                    margin-right: 10px;
-                    i {
-                        margin-left: 3px;
-                    }
-                }
-            }
-        }
-    }
-    .identity__user-medal{
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        flex-wrap: nowrap;
-        img{
-            height: 40px;
-            margin-left: 20px;
-            width: auto;
-        }
-    }
     .identity__wallet{
         width: auto;
         line-height: 30px;
