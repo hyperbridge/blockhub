@@ -366,9 +366,6 @@
             connection_status() {
                 return this.$store.state.application.connection.status
             },
-            user_submitted_connection_message() {
-                return this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))]
-            },
             swiper() {
                 return this.$refs.mySwiper.swiper
             },
@@ -405,7 +402,8 @@
                     name: 'SatoshiSan',
                     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL'
                 },
-            ];
+            ]
+
             if (this.navigationKey !== 'store') {
                 this.showRightPanel = false
             }
@@ -414,6 +412,7 @@
                 navigationComponent: this.navigationKey || false,
                 loadingState: true,
                 initialized: BlockHub.initialized,
+                user_submitted_connection_message: null,
                 panelOption: {
                     spaceBetween: 10,
                     loop: false,
@@ -454,6 +453,7 @@
             }
         },
         updated() {
+            this.user_submitted_connection_message = this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))]
         },
         methods: {
             showSlide(sl) {
