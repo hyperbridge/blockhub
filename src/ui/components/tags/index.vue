@@ -1,10 +1,10 @@
 <template>
-    <div class="product-tags">
+    <div class="tags">
         <router-link
             v-for="(tag, index) in tags"
             :key="index"
             :to="{ name: 'Search Page', query: { tags: [tag] }}"
-            class="product-tags__link"
+            class="tags__link"
         >
             {{ tag }}
         </router-link>
@@ -24,13 +24,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .product-tags {
+    .tags {
         margin-bottom: 25px;
         display: flex;
         flex-wrap: wrap;
         overflow: hidden;
     }
-    .product-tags__link {
+    .tags__link {
         background: #fbe17d;
         border-radius: 3px;
         padding: 0px 5px;

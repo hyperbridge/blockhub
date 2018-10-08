@@ -142,6 +142,7 @@
                 "assets": [],
                 "licenses": [],
                 "products": [],
+                "messages": [],
                 "public_address": null,
                 "passphrase": null,
                 "private_key": null
