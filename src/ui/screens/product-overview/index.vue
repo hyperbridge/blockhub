@@ -29,7 +29,7 @@
                                     <div class="" v-if="editing">
                                         <div class="form-group">
                                             <select id="tag-editor" class="form-control" multiple="multiple">
-                                                <option v-for="(tag, index) in author_tag_options" :key="index" :selected="product.author_tags.includes(tag)">{{ tag }}</option>
+                                                <option v-for="(tag, index) in author_tag_options" :key="index" :selected="product.developer_tags.includes(tag)">{{ tag }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -202,8 +202,8 @@
             }
         }
         
-        if (!product.author_tags) {
-            product.author_tags = []
+        if (!product.developer_tags) {
+            product.developer_tags = []
         }
 
         if (product.promotions) {
@@ -328,18 +328,18 @@
                 .on('select2:select', (e) => {
                     let data = e.params.data
 
-                    if (!this.product.author_tags.includes(data.text)) {
-                        this.product.author_tags.push(data.text)
+                    if (!this.product.developer_tags.includes(data.text)) {
+                        this.product.developer_tags.push(data.text)
                     }
 
-                    Vue.set(this.product, 'author_tags', this.product.author_tags)
+                    Vue.set(this.product, 'developer_tags', this.product.developer_tags)
                 })
                 .on('select2:unselect', (e) => {
                     let data = e.params.data
 
-                    this.product.author_tags = this.product.author_tags.filter(e => e !== data.text)
+                    this.product.developer_tags = this.product.developer_tags.filter(e => e !== data.text)
 
-                    Vue.set(this.product, 'author_tags', this.product.author_tags)
+                    Vue.set(this.product, 'developer_tags', this.product.developer_tags)
                 })
 
             $('#summernote').summernote({

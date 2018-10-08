@@ -24,7 +24,7 @@
                                 <h4><a :href="`/#/project/${item.id}`">{{ item.name }}</a></h4>
                                 <p class="card-text">{{ item.short_description }} </p>
 
-                                <c-tags :tags="item.author_tags"></c-tags>
+                                <c-tags :tags="item.developer_tags"></c-tags>
                             </div>
                         </div>
                     </div>

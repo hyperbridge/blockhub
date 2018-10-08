@@ -9,7 +9,7 @@
                     <div class="col-12 col-lg-6 frontpage-product__info">
                         <h2><a :href="`/#/product/${item.data.id}`">{{ item.data.name }}</a></h2>
                         <p>{{ item.data.short_description }}</p>
-                        <c-tags :tags="item.data.author_tags"></c-tags>
+                        <c-tags :tags="item.data.developer_tags"></c-tags>
                         <div class="frontpage-product__footer">
                             <div class="price-list">
                                 <div class="price old_price" v-if="item.data.old_price">

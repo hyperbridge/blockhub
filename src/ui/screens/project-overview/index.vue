@@ -38,26 +38,26 @@
                                 <div class="editor-container">
                                     <div class="editor" v-if="editing">
                                         <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                                @click="activateElement('author_tags')"
-                                                v-if="!activeElement['author_tags']" style="margin-bottom: 20px">Change
+                                                @click="activateElement('developer_tags')"
+                                                v-if="!activeElement['developer_tags']" style="margin-bottom: 20px">Change
                                             Tags <span class="fa fa-edit"></span></button>
                                         <div class="form-control-element form-control-element--right"
-                                             v-if="activeElement['author_tags']">
+                                             v-if="activeElement['developer_tags']">
                                             <select id="tag-editor" class="form-control" multiple="multiple">
                                                 <option v-for="(tag, index) in author_tag_options" :key="index"
-                                                        :selected="project.author_tags.includes(tag)">{{ tag }}
+                                                        :selected="project.developer_tags.includes(tag)">{{ tag }}
                                                 </option>
                                             </select>
                                             <div
                                                 class="form-control-element__box form-control-element__box--pretify bg-secondary"
                                                 style="">
                                                 <span class="fa fa-check"
-                                                      @click="deactivateElement('author_tags')"></span>
+                                                      @click="deactivateElement('developer_tags')"></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <c-tags-list :tags="project.author_tags"
-                                                 v-if="!editing || !activeElement['author_tags']"></c-tags-list>
+                                    <c-tags-list :tags="project.developer_tags"
+                                                 v-if="!editing || !activeElement['developer_tags']"></c-tags-list>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -447,7 +447,7 @@
                     name: false,
                     background_image: false,
                     store_image: false,
-                    author_tags: false,
+                    developer_tags: false,
                     description: false,
                     content: false
                 },
@@ -541,18 +541,18 @@
                 .on('select2:select', (e) => {
                     let data = e.params.data
 
-                    if (!this.project.author_tags.includes(data.text)) {
-                        this.project.author_tags.push(data.text)
+                    if (!this.project.developer_tags.includes(data.text)) {
+                        this.project.developer_tags.push(data.text)
                     }
 
-                    Vue.set(this.project, 'author_tags', this.project.author_tags)
+                    Vue.set(this.project, 'developer_tags', this.project.developer_tags)
                 })
                 .on('select2:unselect', (e) => {
                     let data = e.params.data
 
-                    this.project.author_tags = this.project.author_tags.filter(e => e !== data.text)
+                    this.project.developer_tags = this.project.developer_tags.filter(e => e !== data.text)
 
-                    Vue.set(this.project, 'author_tags', this.project.author_tags)
+                    Vue.set(this.project, 'developer_tags', this.project.developer_tags)
                 })
 
             $('#summernote').summernote({

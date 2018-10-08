@@ -14,7 +14,7 @@
                     <div class="col-12">
                         <h1 class="title margin-top-10">{{ product.name }}</h1>
 
-                        <c-tags-list :tags="product.author_tags"></c-tags-list>
+                        <c-tags-list :tags="product.developer_tags"></c-tags-list>
 
                         <ul class="nav nav-tabs justify-content-between margin-bottom-30">
                             <li class="nav-item">

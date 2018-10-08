@@ -9,7 +9,7 @@
                     <div class="col-12" v-if="product">
                         <h1 class="title margin-top-10">{{ product.name }}</h1>
 
-                        <c-tags-list :tags="product.author_tags" v-if="!editing || product.author_tags"></c-tags-list>
+                        <c-tags-list :tags="product.developer_tags" v-if="!editing || product.developer_tags"></c-tags-list>
 
                         <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
                             <li class="nav-item">
