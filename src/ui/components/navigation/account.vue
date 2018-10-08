@@ -1,7 +1,7 @@
 <template>
     <div class="navigation" id="navigation-default" v-if="signed_in">
         <c-sidebar-menu title="ACCOUNT" :links="links.account" />
-        <c-sidebar-menu sub_title="Wallets" :links="links.wallets" />
+        <c-sidebar-menu sub_title="Wallets" :links="links.wallets" v-darklaunch="'WALLETS'" />
         <c-sidebar-menu sub_title="Identities" :links="links.identities" />
         <c-sidebar-menu sub_title="Developer" :links="links.developer" />
         <c-sidebar-menu sub_title="Help" :links="links.help" />
@@ -16,14 +16,14 @@
         },
         computed: {
             signed_in() { return this.$store.state.application.signed_in },
-            is_developer() { return this.$store.state.application.account.current_identity.developer_id }
+            is_developer() { return this.$store.state.application.account && this.$store.state.application.account.current_identity && this.$store.state.application.account.current_identity.developer_id }
         },
         data() {
             return {
                 links: {
                     account: [
-                        { to: { path: '/account' }, title: 'Account Overview' },
-                        { to: { path: '/account/verification' }, title: 'Account Verification' }
+                        { to: { path: '/account' }, title: 'Overview' },
+                        { to: { path: '/account/verification' }, title: 'Verification' }
                     ],
                     wallets: [
                         { to: { path: '/account/wallets' }, title: 'Overview' },
