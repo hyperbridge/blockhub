@@ -1,15 +1,15 @@
 
 <template>
     <div class="game-includes__item">
-        <router-link :to="{ name: 'Product', params: {id: item.id } }">
-            <c-img :src="item.images.medium_tile" />
+        <router-link :to="{ name: 'Product', params: {id: id } }">
+            <c-img :src="image" />
         </router-link>
-        <router-link :to="{ name: 'Product', params: {id: item.id } }">
-            <h4>{{ item.name }}</h4>
+        <router-link :to="{ name: 'Product', params: {id: id } }">
+            <h4>{{ name }}</h4>
         </router-link>
-        <p>{{ item.developer }}</p>
+        <p>{{ developer }}</p>
         <div class="rating-stars">
-            <c-rating :number="item.rating.overall" />
+            <c-rating :number="rating" />
         </div>
     </div>
 </template>
@@ -17,8 +17,12 @@
 <script>
     export default {
         name: 'game-includes-item',
-        props:{
-            item: Object
+        props: {
+            id: Number,
+            name: String,
+            developer: String,
+            rating: Number,
+            image: String
         },
         components: {
             'c-rating': (resolve) => require(['@/ui/components/rating-stars'], resolve),

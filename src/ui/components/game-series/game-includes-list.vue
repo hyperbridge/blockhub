@@ -8,10 +8,9 @@
                  v-for="(item, index) of limitedList(limit)"
                  :style="{ width: 'calc(100% / ' + showNumber + ')'}"
                  :key="index" >
-                <c-includes-item :item="item" />
+                <c-includes-item :id="item.id" :name="item.name" :developer="item.developer" :rating="item.rating.overall" :image="item.images.medium_tile" />
             </div>
         </transition-group>
-
         <!--Show buttons-->
         <c-load-more @click="showAll" v-if="showMore && list.length > showNumber - 1">
             Load More <span class="ml-3">+{{ hiddenCount() }}</span>
