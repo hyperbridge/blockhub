@@ -3,7 +3,7 @@
         <div
             class="tooltip-universal__content"
             @mouseover="debounce(() => show_tooltip = true, delay)"
-            @mouseout="show_tooltip = false"
+            @mouseout="debounce(() => show_tooltip = false, delay + 1)"
         >
             <slot/>
             <c-icon v-if="!iconHide" name="question-circle"/>

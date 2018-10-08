@@ -7,45 +7,47 @@
                         Marketplace
                         <h2>Trade transaction</h2>
                         <c-block :title="'Transaction: ' + $route.params.tradeId" class="transaction">
-                            <div class="transaction__headings">
-                                <h4>Yours selling offer</h4>
-                                <h4>Yours inventory</h4>
-                            </div>
-                            <div class="transaction__management">
-                                <div class="management__selected-assets">
-                                    <div class="assets-grid">
-                                        <div
-                                            v-for="(asset, index) in yoursOffer"
-                                            :key="asset"
-                                            class="assets-grid__asset"
-                                            @click="yoursOffer.splice(index, 1)"
-                                        >
-                                            <c-tooltip v-show="asset.id" iconHide>
-                                                <c-asset-preview
-                                                    slot="tooltip"
-                                                    :asset="asset"
-                                                />
-                                                <c-img :src="asset.image" class="asset__image"/>
-                                                <span class="asset__price">{{ asset.price.current }}$</span>
-                                            </c-tooltip>
+                            <div class="transaction__block">
+                                <div class="transaction__headings">
+                                    <h4>Yours selling offer</h4>
+                                    <h4>Yours inventory</h4>
+                                </div>
+                                <div class="transaction__management">
+                                    <div class="management__selected-assets">
+                                        <div class="assets-grid">
+                                            <div
+                                                v-for="(asset, index) in yoursOffer"
+                                                :key="asset"
+                                                class="assets-grid__asset"
+                                                @click="yoursOffer.splice(index, 1)"
+                                            >
+                                                <c-tooltip v-show="asset.id" :delay="30" iconHide>
+                                                    <c-asset-preview
+                                                        slot="tooltip"
+                                                        :asset="asset"
+                                                    />
+                                                    <c-img :src="asset.image" class="asset__image"/>
+                                                    <span class="asset__price">{{ asset.price.current }}$</span>
+                                                </c-tooltip>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="management__inventory-explorer">
-                                    <c-list
-                                        :items="transaction.me.user.inventory"
-                                        @click="yoursOffer.push($event)"
-                                    >
-                                        <c-asset-preview-small
-                                            slot-scope="{ item }"
-                                            :asset="item"
-                                        />
-                                    </c-list>
-                                    <c-list-submenu :items="inventory.yours">
-                                        <template slot-scope="{ item }">
-                                            {{ item.name }}
-                                        </template>
-                                    </c-list-submenu>
+                                    <div class="management__inventory-explorer">
+                                        <c-list
+                                            :items="transaction.me.user.inventory"
+                                            @click="yoursOffer.push($event)"
+                                        >
+                                            <c-asset-preview-small
+                                                slot-scope="{ item }"
+                                                :asset="item"
+                                            />
+                                        </c-list>
+                                        <!-- <c-list-submenu :items="inventory.yours">
+                                            <template slot-scope="{ item }">
+                                                {{ item.name }}
+                                            </template>
+                                        </c-list-submenu> -->
+                                    </div>
                                 </div>
                             </div>
                             <c-exchange-bar
@@ -53,41 +55,43 @@
                                 :yours="yoursOffer.length"
                                 :their="theirOffer.length"
                             />
-                            <div class="transaction__headings">
-                                <h4>{{ transaction.contractor.user.name }}'s selling offer</h4>
-                                <c-author :author="transaction.contractor.user"/>
-                                <h4>{{ transaction.contractor.user.name }}'s inventory</h4>
-                            </div>
-                            <div class="transaction__management">
-                                <div class="management__selected-assets">
-                                    <div class="assets-grid">
-                                        <div
-                                            v-for="(asset, index) in theirOffer"
-                                            :key="asset"
-                                            class="assets-grid__asset"
-                                            @click="theirOffer.splice(index, 1)"
-                                        >
-                                            <c-tooltip v-show="asset.id" iconHide>
-                                                <c-asset-preview
-                                                    slot="tooltip"
-                                                    :asset="asset"
-                                                />
-                                                <c-img :src="asset.image" class="asset__image"/>
-                                                <span class="asset__price">{{ asset.price.current }}$</span>
-                                            </c-tooltip>
+                            <div class="transaction__block">
+                                <div class="transaction__headings">
+                                    <h4>{{ transaction.contractor.user.name }}'s selling offer</h4>
+                                    <c-author :author="transaction.contractor.user"/>
+                                    <h4>{{ transaction.contractor.user.name }}'s inventory</h4>
+                                </div>
+                                <div class="transaction__management">
+                                    <div class="management__selected-assets">
+                                        <div class="assets-grid">
+                                            <div
+                                                v-for="(asset, index) in theirOffer"
+                                                :key="asset"
+                                                class="assets-grid__asset"
+                                                @click="theirOffer.splice(index, 1)"
+                                            >
+                                                <c-tooltip v-show="asset.id" :delay="30" iconHide>
+                                                    <c-asset-preview
+                                                        slot="tooltip"
+                                                        :asset="asset"
+                                                    />
+                                                    <c-img :src="asset.image" class="asset__image"/>
+                                                    <span class="asset__price">{{ asset.price.current }}$</span>
+                                                </c-tooltip>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="management__inventory-explorer">
-                                    <c-list
-                                        :items="transaction.me.user.inventory"
-                                        @click="theirOffer.push($event)"
-                                    >
-                                        <c-asset-preview-small
-                                            slot-scope="{ item }"
-                                            :asset="item"
-                                        />
-                                    </c-list>
+                                    <div class="management__inventory-explorer">
+                                        <c-list
+                                            :items="transaction.me.user.inventory"
+                                            @click="theirOffer.push($event)"
+                                        >
+                                            <c-asset-preview-small
+                                                slot-scope="{ item }"
+                                                :asset="item"
+                                            />
+                                        </c-list>
+                                    </div>
                                 </div>
                             </div>
                         </c-block>
@@ -212,6 +216,11 @@
         h4 { margin: 0; }
         margin-bottom: 20px;
     }
+    .transaction__block {
+        background: rgba(55, 57, 86, .35);
+        border-radius: 4px;
+        padding: 15px;
+    }
     .transaction__management {
         display: flex;
         .management__selected-assets {
@@ -219,6 +228,10 @@
         }
         .management__inventory-explorer {
             flex: 3;
+            .list-container {
+                // box-shadow: 0 0 25px 0 rgba(1,1,1,.25);
+                // border: 1px solid rgba(255,255,255,.1);
+            }
         }
     }
 
@@ -241,6 +254,7 @@
         border: 1px solid rgba(255,255,255,.25);
         position: relative;
         padding: 4px;
+        animation: rotate-in .2s ease;
         .tooltip-universal__wrapper {
             width: 100%;
         }
@@ -261,6 +275,16 @@
             margin: 0 auto;
             text-align: center;
             font-size: 11px;
+        }
+        @keyframes rotate-in {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(80deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0);
+            }
         }
     }
 </style>
