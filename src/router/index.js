@@ -134,7 +134,7 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/account'], resolve),
             meta: {
                 auth: true,
-                permission: 'desktop'
+                permission: 'signed_in'
             }
         },
         {
@@ -142,7 +142,7 @@ const router = new Router({
             name: 'Sign Up',
             component: (resolve) => require(['@/ui/screens/account-signup'], resolve),
             meta: {
-                permission: 'desktop'
+                permission: 'desktop_mode'
             }
         },
         {
@@ -150,7 +150,7 @@ const router = new Router({
             name: 'Sign In',
             component: (resolve) => require(['@/ui/screens/account-signin'], resolve),
             meta: {
-                permission: 'desktop'
+                permission: 'desktop_mode'
             }
         },
         {
@@ -159,7 +159,7 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/account-signout'], resolve),
             meta: {
                 auth: true,
-                permission: 'desktop'
+                permission: 'signed_in'
             }
         },
         {
@@ -168,7 +168,7 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/account-verification'], resolve),
             meta: {
                 auth: true,
-                permission: 'desktop'
+                permission: 'signed_in'
             }
         },
         {
@@ -177,7 +177,7 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/account-wallets'], resolve),
             meta: {
                 auth: true,
-                permission: 'desktop'
+                permission: 'signed_in'
             }
         },
         {
@@ -185,7 +185,7 @@ const router = new Router({
             name: 'New Wallet',
             component: (resolve) => require(['@/ui/screens/account-new-wallet'], resolve),
             meta: {
-                permission: 'desktop'
+                permission: 'signed_in'
             }
         },
         {
@@ -193,7 +193,7 @@ const router = new Router({
             name: 'Identities',
             component: (resolve) => require(['@/ui/screens/account-identities'], resolve),
             meta: {
-                permission: 'desktop'
+                permission: 'signed_in'
             }
         },
         {
@@ -201,7 +201,7 @@ const router = new Router({
             name: 'New Identity',
             component: (resolve) => require(['@/ui/screens/account-new-identity'], resolve),
             meta: {
-                permission: 'desktop'
+                permission: 'signed_in'
             }
         },
         {

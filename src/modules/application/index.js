@@ -39,7 +39,11 @@ export const getters = {
         result.push('edit')
 
         if (state.desktop_mode) {
-            result.push('desktop')
+            result.push('desktop_mode')
+        }
+
+        if (state.signed_in) {
+            result.push('signed_in')
         }
 
         return result
