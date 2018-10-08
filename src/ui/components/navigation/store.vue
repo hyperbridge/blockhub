@@ -5,12 +5,13 @@
             <c-sidebar-menu-link :to="{ name: 'Home' }">Home</c-sidebar-menu-link>
             <c-sidebar-menu-link :to="{ name: 'Community' }">Community</c-sidebar-menu-link>
             <c-sidebar-menu-link
-                v-for="page in ['Crowdfunds', 'Realms', 'Curators', 'Collections', 'Items']"
+                v-for="page in ['Crowdfunds', 'Realms', 'Curators', 'Collections']"
                 :key="`${page}`"
                 :to="{ name: page }"
             >
                 Browse {{ page }}
             </c-sidebar-menu-link>
+            <c-sidebar-menu-link :to="{ name: 'Marketplace' }">Browse Items</c-sidebar-menu-link>
         </c-sidebar-menu>
 
         <c-sidebar-menu sub_title="Browse By Genre" sub_icon="fas fa-gamepad" mClass="margin-bottom-20">

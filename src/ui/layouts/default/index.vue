@@ -408,7 +408,7 @@
                 navigationComponent: this.navigationKey || false,
                 loadingState: true,
                 initialized: BlockHub.initialized,
-                user_submitted_connection_message: null,
+                user_submitted_connection_message: this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))],
                 panelOption: {
                     spaceBetween: 10,
                     loop: false,
