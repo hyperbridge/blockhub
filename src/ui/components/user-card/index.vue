@@ -4,9 +4,9 @@
             <div
                 v-if="previewMode"
                 class="user-data__icon"
-                :class="iconClass"
+                :class="{ 'verified': user.verified }"
             >
-                <i class="fas" :class="status | statusIcon"></i>
+                <i class="fas" :class="{ 'fa-check': user.verified, 'fa-times': !user.verified }"></i>
             </div>
             <div class="user-data__avatar">
                 <a
@@ -28,12 +28,13 @@
                     :value="user.name"
                     @input="$emit('update:name', $event.target.value)"
                     :readonly="previewMode"
+                    v-focus
                 />
-                <p>User</p>
+                <p v-darklaunch="'BADGES'">User</p>
             </div>
         </div>
 
-        <div class="identity-block__unknown-blk">
+        <div class="identity-block__unknown-blk" v-darklaunch="'BADGES'">
             <button v-for="index in 4" :key="index" class="btn">
                 <i class="fas fa-plus"></i>
             </button>
@@ -55,7 +56,7 @@
                 placeholder="Wallet number"
                 :value="user.wallet"
                 @input="$emit('update:wallet', $event.target.value)"
-                :readonly="previewMode"
+                readonly="readonly"
             />
             <button>
                 <i :class="`fas fa-${previewMode ? 'copy' : 'redo-alt'}`"></i>
@@ -68,7 +69,11 @@
     export default {
         name: 'user-card',
         props: {
-            user: Object,
+            user: {
+                img: String,
+                name: String,
+                wallet: String
+            },
             status: {
                 type: String,
                 default: 'success',
@@ -123,6 +128,7 @@
     .identity-block__user-data {
         display: flex;
         align-items: center;
+        margin-bottom: 5px;
     }
     .user-data__icon {
         position: absolute;
@@ -137,9 +143,9 @@
         height: 25px;
     }
     .user-data__avatar {
-        min-width: 60px;
-        width: 60px;
-        height: 60px;
+        min-width: 64px;
+        width: 64px;
+        height: 64px;
         box-sizing: border-box;
         font-size: 60px;
         text-align: center;
@@ -187,18 +193,21 @@
             }
         }
     }
+    input:read-only {
+        border: none;
+        background: transparent;
+        box-shadow: none;
+        color: #fff;
+        padding: 9px 0;
+    }
 
     .preview-mode {
         background: #1d2031;
         .user-data__icon {
-            background: #43C981;
-        }
-        input:read-only {
-            border: none;
-            background: transparent;
-            box-shadow: none;
-            color: #fff;
-            padding: 9px 0;
+            background: #c94343;
+            &.verified {
+                background: #43C981;
+            }
         }
         .identity-block__unknown-blk {
             a {
