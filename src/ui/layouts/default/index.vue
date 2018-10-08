@@ -386,6 +386,9 @@
             notifs() {
                 return this.$store.state.application.account.notifications
             },
+            updates() {
+                return this.$store.state.application.updates
+            },
             desktop_mode() {
                 return this.$store.state.application.desktop_mode
             },

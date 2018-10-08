@@ -509,7 +509,17 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/discussion'], resolve)
         },
         {
-            path: '/game-library/',
+            path: '/updates',
+            name: 'Updates',
+            component: (resolve) => require(['@/ui/screens/updates'], resolve)
+        },
+        {
+            path: '/updates/:id',
+            name: 'Update',
+            component: (resolve) => require(['@/ui/screens/updates'], resolve)
+        },
+        {
+            path: '/game-library',
             name: 'Game Library',
             props: true,
             component: (resolve) => require(['@/ui/screens/game-library'], resolve)

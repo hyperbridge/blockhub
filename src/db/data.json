@@ -123,6 +123,7 @@
                 }
             }
         ],
+        "updates": [],
         "active_modal": null,
         "account": {
             "public_address": null,
