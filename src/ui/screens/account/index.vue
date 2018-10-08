@@ -43,7 +43,7 @@
                         <c-block title="Overview">
                             <div class="stat-card-container">
                                 <div class="stat-card-list">
-                                    <div class="stat-card">
+                                    <router-link tag="div" to="/account/identities" class="route stat-card">
                                         <div class="icon">
                                             <i class="fas fa-id-card"></i>
                                         </div>
@@ -51,14 +51,14 @@
                                             <h4>Identities</h4>
                                             <div class="stat">
                                                 <div>
-                                                    12 on your account
+                                                    12 owned by your account
                                                 </div>
                                             </div>
                                             <p>
-                                                Viev and Manage Identities on this account.
+                                                View and manage identities on this account.
                                             </p>
                                         </div>
-                                    </div>
+                                    </router-link>
                                     <div class="stat-card" v-darklaunch="'TICKETS'">
                                         <div class="icon">
                                             <i class="fas fa-question-circle"></i>
