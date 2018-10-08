@@ -6,37 +6,38 @@
                     <div class="col-12">
                         Marketplace
                         <h2>Trade transaction</h2>
-                        <c-block :title="'Transaction: ' + $route.params.tradeId" class="transaction__block">
-                            <div class="my-inventory">
-                                <div class="choosen-assets">
-                                    <h2>Choosen assets</h2>
+                        <c-block :title="'Transaction: ' + $route.params.tradeId" class="transaction">
+                            <div class="transaction__headings">
+                                <h4>Yours selling offer</h4>
+                                <h4>Yours inventory</h4>
+                            </div>
+                            <div class="transaction__management">
+                                <div class="management__selected-assets">
                                     <div class="assets-grid">
                                         <div
-                                            v-for="(asset, index) in selectedAssets"
+                                            v-for="(asset, index) in transaction.me.selling"
                                             :key="asset"
                                             class="assets-grid__asset"
                                             @click="selectedAssets.splice(index, 1)"
                                         >
-                                            <c-tooltip v-show="asset.id">
+                                            <c-tooltip v-show="asset.id" iconHide>
                                                 <c-asset-preview
                                                     slot="tooltip"
                                                     :asset="asset"
-                                                    :iconHide="true"
                                                 />
                                                 <c-img :src="asset.image" class="asset__image"/>
-                                                <!-- <p class="asset__name">{{ asset.name }}</p> -->
+                                                <span class="asset__price">{{ asset.price.current }}$</span>
                                             </c-tooltip>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="inventory-explorer">
-                                    <h2>My inventory</h2>
+                                <div class="management__inventory-explorer">
                                     <c-list
-                                        :items="assets"
+                                        :items="transaction.me.user.inventory"
+                                        @click="addAsset($event)"
                                     >
                                         <c-asset-preview-small
                                             slot-scope="{ item }"
-                                            @click.native="addAsset(item)"
                                             :asset="item"
                                         />
                                     </c-list>
@@ -46,6 +47,43 @@
                                 :sumTransaction="sumTransaction"
                                 :assetsLength="selectedAssets.length"
                             />
+                            <div class="transaction__headings">
+                                <h4>{{ transaction.contractor.user.name }}'s buying offer</h4>
+                                <c-author :author="transaction.contractor.user"/>
+                                <h4>{{ transaction.contractor.user.name }}'s inventory</h4>
+                            </div>
+                            <div class="transaction__management">
+                                <div class="management__selected-assets">
+                                    <div class="assets-grid">
+                                        <div
+                                            v-for="(asset, index) in transaction.me.selling"
+                                            :key="asset"
+                                            class="assets-grid__asset"
+                                            @click="selectedAssets.splice(index, 1)"
+                                        >
+                                            <c-tooltip v-show="asset.id" iconHide>
+                                                <c-asset-preview
+                                                    slot="tooltip"
+                                                    :asset="asset"
+                                                />
+                                                <c-img :src="asset.image" class="asset__image"/>
+                                                <span class="asset__price">{{ asset.price.current }}$</span>
+                                            </c-tooltip>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="management__inventory-explorer">
+                                    <c-list
+                                        :items="transaction.me.user.inventory"
+                                        @click="addAsset($event)"
+                                    >
+                                        <c-asset-preview-small
+                                            slot-scope="{ item }"
+                                            :asset="item"
+                                        />
+                                    </c-list>
+                                </div>
+                            </div>
                         </c-block>
                     </div>
                 </div>
@@ -56,6 +94,7 @@
 
 <script>
     import { mapGetters } from 'vuex';
+    import assets from '@/db/seed/assets';
 
     export default {
         components: {
@@ -65,11 +104,33 @@
             'c-asset-preview': (resolve) => require(['@/ui/components/asset-preview'], resolve),
             'c-asset-preview-small': (resolve) => require(['@/ui/components/asset-preview/small'], resolve),
             'c-exchange-bar': (resolve) => require(['@/ui/components/exchange-bar'], resolve),
+            'c-author': (resolve) => require(['@/ui/components/author'], resolve),
         },
         data() {
             return {
                 selectedAssets: [
-                ]
+                ],
+                transaction: {
+                    id: 31,
+                    me: {
+                        selling: [assets[1]],
+                        user: {
+                            name: 'San',
+                            img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png',
+                            inventory: assets.slice(3, assets.length)
+                        }
+                    },
+                    contractor: {
+                        selling: [assets[2]],
+                        user: {
+                            name: 'Satoshi',
+                            img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png',
+                            inventory: assets.slice(0, assets.length - 4)
+                        }
+                    },
+                    updatedAt: '',
+                    createdAt: ''
+                }
             }
         },
         methods: {
@@ -99,19 +160,26 @@
 </script>
 
 <style lang="scss" scoped>
-    .transaction__block {
+    .transaction {
         margin-bottom: 100px;
     }
-    .my-inventory {
+    .transaction__headings {
         display: flex;
-        margin-bottom: 50px;
+        justify-content: space-between;
+        align-items: center;
+        h4 { margin: 0; }
+        margin-bottom: 20px;
     }
-    .choosen-assets {
-        flex: 5;
+    .transaction__management {
+        display: flex;
+        .management__selected-assets {
+            flex: 5;
+        }
+        .management__inventory-explorer {
+            flex: 3;
+        }
     }
-    .inventory-explorer {
-        flex: 3;
-    }
+
     .assets-grid {
         background: rgba(1,1,1,.1);
         box-shadow: 0 0 20px 0 rgba(1,1,1,.25);
@@ -137,6 +205,15 @@
         .asset__image {
             width: 100%;
             height: 100%;
+        }
+        .asset__price {
+            font-size: 11px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: rgba(1,1,1,.35);
+            padding: 0 2px;
+            border-radius: 4px;
         }
         .asset__name {
             margin: 0 auto;
