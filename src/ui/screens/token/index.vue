@@ -1,33 +1,34 @@
 <template>
-    <c-layout navigationKey="help">
+    <c-layout navigationKey="help" :showLeftPanel="false" :showRightPanel="false">
         <div class="content" id="content">
-            <div class="page-heading">
-                <div class="page-heading__container">
-                    <h1 class="title">Token</h1>
-                    <p class="caption">Let us know if you need further help.</p>
-                </div>
-                <c-heading />
-            </div>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
-                        <p>What is HBX?</p>
+                    <div class="col-12 mb-4">
+                        <h2>What is HBX?</h2>
                         <p>
                             Built by Hyperbridge, HBX tokens are used to fuel the decentralized protocols underlying BlockHub. 
                             BlockHub is the first economy built on these protocols. HBX tokens will let you:
                         
                             <ul>
-                                <li>* Utilize the funding protocol to contribute to crowdfund projects</li>
-                                <li>* Receive 10% discount on all transactions</li>
+                                <li>Utilize the funding protocol to contribute to crowdfund projects</li>
+                                <li>Receive 10% discount on all transactions</li>
                             </ul>
 
-                            For the game developers, if you choose to accept HBX, your fees will be reduced by 50%.
+                            For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees of 50%.
                         </p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
-
+                    <div class="col-12" v-if="desktop_mode">
+                        <p>Choose your identity to purchase with:</p>
+                        <p>---profile boxs---</p>
+                        <p>How many?</p>
+                        <p>--input box--</p>
+                        <p>Continue to Purchase</p>
+                    </div>
+                    <div class="col-12 text-center" v-if="!desktop_mode">
+                        <c-button class="c-btn c-btn-lg btn-outline-red" href="/#/download">You must use the BlockHub app to participate.</c-button>
+                        <c-download-block :minimal="true" />
                     </div>
                 </div>
             </div>
@@ -38,13 +39,20 @@
 <script>
 export default {
   components: {
-    'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
+    'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+    'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve)
   },
-  data: () => ({
-  })
+  computed: {
+    desktop_mode() {
+        return this.$store.state.application.desktop_mode;
+    },
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-
+    .card {
+        background: none !important;
+        border: 0 none !important;
+    }
 </style>
