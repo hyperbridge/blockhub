@@ -65,11 +65,70 @@
                     "id": 2,
                     "name": "GymTim"
                 }
+            },
+            {
+                "id": 3,
+                "message": "Leeroooooy Jeeeenkiiiiins!",
+                "user": {
+                    "id": 2,
+                    "name": "fr0stbyte"
+                }
+            },
+            {
+                "id": 4,
+                "message": "Well, at least I have chicken!",
+                "user": {
+                    "id": 2,
+                    "name": "fr0stbyte"
+                }
+            },
+            {
+                "id": 6,
+                "message": "Your lack of faith is disturbing",
+                "user": {
+                    "id": 2,
+                    "name": "fr0stbyte"
+                }
+            },
+            {
+                "id": 7,
+                "message": "Many whelps. Handle it! Who was that!? That's a 50 DKP minus!!",
+                "user": {
+                    "id": 2,
+                    "name": "fr0stbyte"
+                }
+            },
+            {
+                "id": 8,
+                "message": "Maybe Elon was right",
+                "user": {
+                    "id": 2,
+                    "name": "fr0stbyte"
+                }
+            },
+            {
+                "id": 9,
+                "message": "I can dance all day, try to hit me, come on, try to hit me",
+                "user": {
+                    "id": 2,
+                    "name": "fr0stbyte"
+                }
+            },
+            {
+                "id": 10,
+                "message": "My hands are shaking, but I'm still shooting, still getting headshots like BOOM headshot BOOM HEADSHOT!",
+                "user": {
+                    "id": 2,
+                    "name": "fr0stbyte"
+                }
             }
         ],
         "active_modal": null,
         "account": {
             "public_address": null,
+            "verification_timestamp": null,
+            "is_verified": false,
+            "is_verifying": false,
             "first_name": null,
             "last_name": null,
             "birthday": null,
