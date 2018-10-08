@@ -57,17 +57,17 @@
             <transition name="slideRight" v-if="initialized && showRightPanel">
                 <c-sidepanel>
                 <c-swiper :options="panelOption" ref="mySwiper">
-                    <c-slide v-if="desktop_mode">
+                    <c-slide v-if="signed_in">
                         <div class="item">
                             <h3>NOTIFICATION</h3>
 
                             <div class="slide-chooser">
                                 <c-button status="plain" icon-hide @click="showSlide('notification')" class="active"
-                                          v-if="desktop_mode">
+                                          v-if="signed_in">
                                     <i class="fa fa-bell"/>
                                 </c-button>
                                 <c-button status="plain" icon-hide @click="showSlide('messages')"
-                                          style="box-shadow: none" v-if="desktop_mode">
+                                          style="box-shadow: none" v-if="signed_in">
                                     <i class="fa fa-envelope"/>
                                 </c-button>
                                 <c-button status="plain" icon-hide @click="showSlide('updates')"
@@ -90,17 +90,17 @@
 
                         </div>
                     </c-slide>
-                    <c-slide v-if="desktop_mode">
+                    <c-slide v-if="signed_in">
                         <div class="item">
                             <h3>MESSAGES</h3>
 
                             <div class="slide-chooser">
                                 <c-button status="plain" icon-hide @click="showSlide('notification')"
-                                          style="box-shadow: none" v-if="desktop_mode">
+                                          style="box-shadow: none" v-if="signed_in">
                                     <i class="fa fa-bell"/>
                                 </c-button>
                                 <c-button status="plain" icon-hide @click="showSlide('messages')" class="active"
-                                          v-if="desktop_mode">
+                                          v-if="signed_in">
                                     <i class="fa fa-envelope"/>
                                 </c-button>
                                 <c-button status="plain" icon-hide @click="showSlide('updates')"
@@ -133,11 +133,11 @@
 
                             <div class="slide-chooser">
                                 <c-button status="plain" icon-hide @click="showSlide('notification')"
-                                          style="box-shadow: none" v-if="desktop_mode">
+                                          style="box-shadow: none" v-if="signed_in">
                                     <i class="fa fa-bell"/>
                                 </c-button>
                                 <c-button status="plain" icon-hide @click="showSlide('messages')"
-                                          style="box-shadow: none" v-if="desktop_mode">
+                                          style="box-shadow: none" v-if="signed_in">
                                     <i class="fa fa-envelope"/>
                                 </c-button>
                                 <c-button status="plain" icon-hide @click="showSlide('updates')" class="active"
@@ -152,17 +152,16 @@
 
                             <div class="navigation">
                                 <ul>
-                                    <li class="title">TOP 5</li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">BlockHub v1.0.15</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">With the last update, we bring lorem ipsum dolor sit amet and check the changelog.</span>
-                                        </a>
-                                    </li>
+                                    <template v-for="(update,  index) in updates">
+                                        <li class="title" :key="index">
+                                            <a :href="update.link">
+                                                <span class="text">{{ update.title }}</span>
+                                            </a>
+                                        </li>
+                                        <li :key="index">
+                                            <span class="text">{{ update.info }}</span>
+                                        </li>
+                                    </template>
                                     <li>
                                         <br/>
                                         <button class="btn btn-outline-info btn-sm"
@@ -181,11 +180,11 @@
 
                             <div class="slide-chooser">
                                 <c-button status="plain" icon-hide @click="showSlide('notification')"
-                                          style="box-shadow: none" v-if="desktop_mode">
+                                          style="box-shadow: none" v-if="signed_in">
                                     <i class="fa fa-bell"/>
                                 </c-button>
                                 <c-button status="plain" icon-hide @click="showSlide('messages')"
-                                          style="box-shadow: none" v-if="desktop_mode">
+                                          style="box-shadow: none" v-if="signed_in">
                                     <i class="fa fa-envelope"/>
                                 </c-button>
                                 <c-button status="plain" icon-hide @click="showSlide('updates')"
@@ -389,21 +388,18 @@
             },
             desktop_mode() {
                 return this.$store.state.application.desktop_mode
+            },
+            signed_in() {
+                return this.$store.state.application.signed_in
+            },
+            current_identity()  {
+                return this.$store.state.application.account && this.$store.state.application.account.current_identity
+            },
+            messages() {
+                return this.current_identity && this.current_identity.messages
             }
         },
         data() {
-            const authors = [
-                {name: 'Nakatochi', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'},
-                {
-                    name: 'Nakatochi',
-                    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL'
-                },
-                {
-                    name: 'SatoshiSan',
-                    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL'
-                },
-            ]
-
             if (this.navigationKey !== 'store') {
                 this.showRightPanel = false
             }
@@ -417,39 +413,7 @@
                     spaceBetween: 10,
                     loop: false,
                 },
-                notifPopup: {},
-                messages: [
-                    {
-                        id: 1,
-                        author: authors[0],
-                        time: '2014-11-05 16:02:21 -02:00',
-                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non maximus tellus'
-                    },
-                    {
-                        id: 2,
-                        author: authors[1],
-                        time: '2014-11-05 4:35:21 -02:00',
-                        text: 'Pellentesque in massa nec dui eleifend rhoncus. Etiam vitae est sit amet magna ornare ultrices'
-                    },
-                    {
-                        id: 3,
-                        author: authors[2],
-                        time: '2014-11-05 19:12:21 -02:00',
-                        text: 'Donec aliquet eros eu sapien pulvinar vulputate.'
-                    },
-                    {
-                        id: 4,
-                        author: authors[0],
-                        time: '2014-11-05 6:09:21 -02:00',
-                        text: 'Duis orci enim, blandit et libero a, luctus accumsan elit.'
-                    },
-                    {
-                        id: 5,
-                        author: authors[1],
-                        time: '2014-11-05 11:58:21 -02:00',
-                        text: 'Praesent porta vulputate velit, sit amet scelerisque mauris suscipit eget. Aenean vel mi non metus consequat commodo quis vitae nibh.'
-                    }
-                ]
+                notifPopup: {}
             }
         },
         updated() {
