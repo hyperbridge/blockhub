@@ -65,8 +65,8 @@
                             </a>
                         </li>
                         <li v-if="signed_in">
-                            <a href="/#/streams">
-                                <span class="icon fa fa-box-open"></span>
+                            <a href="/#/">
+                                <span class="icon fa fa-shopping-cart"></span>
                                 <span class="text">Store</span>
                             </a>
                         </li>
@@ -85,7 +85,7 @@
                         </li>
                         <li v-if="signed_in">
                             <a href="/#/community">
-                                <span class="icon fa fa-global"></span>
+                                <span class="icon fa fa-globe-americas"></span>
                                 <span class="text">Community</span>
                             </a>
                         </li>
@@ -101,9 +101,9 @@
                             </button>
                         </li>
                         <li v-if="signed_in">
-                            <a href="/#/identity/1">
+                            <a href="/#/account">
                                 <span class="icon fa fa-user"></span>
-                                <span class="text">{{ identity.name }}</span>
+                                <span class="text">Account</span>
                             </a>
                         </li>
                         <li v-if="signed_in" v-darklaunch="'CONTACTS'">
