@@ -59,41 +59,41 @@
 
                 <hr v-if="is_developer" />
 
-                <a href="/#/account">
+                <a v-if="signed_in" href="/#/account">
                     <span class="icon fa fa-user"></span>
                     <span class="text">Account</span>
                 </a>
-                <a href="/#/account/identities">
+                <a v-if="signed_in" href="/#/account/identities">
                     <span class="icon fa fa-id-card"></span>
                     <span class="text">Identities</span>
                 </a>
-                <a href="/#/account/wallets" v-darklaunch="'WALLETS'">
+                <a v-if="signed_in" href="/#/account/wallets" v-darklaunch="'WALLETS'">
                     <span class="icon fa fa-credit-card"></span>
                     <span class="text">Wallets</span>
                 </a>
 
-                <hr/>
+                <hr v-if="signed_in" />
 
-                <a href="/#/identity/1">
+                <a v-if="signed_in" href="/#/identity/1">
                     <span class="icon fa fa-user"></span>
                     <span class="text">Current Identity</span>
                 </a>
-                <a href="/#/identity/1/contacts" v-darklaunch="'CONTACTS'">
+                <a v-if="signed_in" href="/#/identity/1/contacts" v-darklaunch="'CONTACTS'">
                     <span class="icon fa fa-users"></span>
                     <span class="text">Contacts</span>
                 </a>
-                <a href="/#/settings/activity">
+                <a v-if="signed_in" href="/#/settings/activity">
                     <span class="icon fa fa-list-alt"></span>
                     <span class="text">Activity Log</span>
                 </a>
 
-                <hr/>
+                <hr v-if="signed_in" />
 
-                <a href="/#/settings">
+                <a v-if="signed_in" href="/#/settings">
                     <span class="icon fa fa-cog"></span>
                     <span class="text">Settings</span>
                 </a>
-                <a href="/#/account/signout">
+                <a v-if="signed_in" href="/#/account/signout">
                     <span class="icon fa fa-sign-out-alt"></span>
                     <span class="text">Sign Out</span>
                 </a>
@@ -186,7 +186,9 @@
         },
         computed: {
             disableAnimations() { return this.$store.state.application.account.settings.client.animations },
-            is_developer() { return this.$store.state.application.account.current_identity.developer_id }
+            is_developer() { return this.$store.state.application.account && this.$store.state.application.account.current_identity && this.$store.state.application.account.current_identity.developer_id },
+            desktop_mode() { return this.$store.state.application.desktop_mode },
+            signed_in() { return this.$store.state.application.signed_in }
         },
         methods: {
             ...mapActions(['loadSettings']),
