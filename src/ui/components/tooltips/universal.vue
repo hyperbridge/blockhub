@@ -3,10 +3,10 @@
         <div
             class="tooltip-universal__content"
             @mouseover="debounce(() => show_tooltip = true, delay)"
-            @mouseout="show_tooltip = false"
+            @mouseout="debounce(() => show_tooltip = false, delay + 1)"
         >
             <slot/>
-            <i v-if="!icon_hide" class="fas fa-question-circle"></i>
+            <c-icon v-if="!iconHide" name="question-circle"/>
         </div>
         <div class="tooltip-universal" :class="position" v-if="show_tooltip">
             <slot name="tooltip">
@@ -42,7 +42,7 @@
                     return ['light', 'dark'].includes(val);
                 }
             },
-            icon_hide: Boolean,
+            iconHide: Boolean,
             default_class: String,
             delay: {
                 type: Number,

@@ -36,7 +36,7 @@
         background: #27283D;
         border-radius: 4px;
     }
-    .item__link {
+    /deep/ .item__link {
         display: block;
         padding: 10px;
         cursor: pointer;
@@ -45,7 +45,7 @@
             background: rgba(255,255,255,.025);
         }
     }
-    .item_link--active {
+    /deep/ .item_link--active {
         background: rgba(1,1,1,.12);
         text-shadow: 0 0 6px rgba(255,255,255, .4);
     }
