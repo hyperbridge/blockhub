@@ -15,10 +15,10 @@
                                 <div class="management__selected-assets">
                                     <div class="assets-grid">
                                         <div
-                                            v-for="(asset, index) in transaction.me.selling"
+                                            v-for="(asset, index) in yoursOffer"
                                             :key="asset"
                                             class="assets-grid__asset"
-                                            @click="selectedAssets.splice(index, 1)"
+                                            @click="yoursOffer.splice(index, 1)"
                                         >
                                             <c-tooltip v-show="asset.id" iconHide>
                                                 <c-asset-preview
@@ -34,7 +34,7 @@
                                 <div class="management__inventory-explorer">
                                     <c-list
                                         :items="transaction.me.user.inventory"
-                                        @click="addAsset($event)"
+                                        @click="yoursOffer.push($event)"
                                     >
                                         <c-asset-preview-small
                                             slot-scope="{ item }"
@@ -45,10 +45,12 @@
                             </div>
                             <c-exchange-bar
                                 :sumTransaction="sumTransaction"
-                                :assetsLength="selectedAssets.length"
+                                :price="price"
+                                :yours="yoursOffer.length"
+                                :their="theirOffer.length"
                             />
                             <div class="transaction__headings">
-                                <h4>{{ transaction.contractor.user.name }}'s buying offer</h4>
+                                <h4>{{ transaction.contractor.user.name }}'s selling offer</h4>
                                 <c-author :author="transaction.contractor.user"/>
                                 <h4>{{ transaction.contractor.user.name }}'s inventory</h4>
                             </div>
@@ -56,10 +58,10 @@
                                 <div class="management__selected-assets">
                                     <div class="assets-grid">
                                         <div
-                                            v-for="(asset, index) in transaction.me.selling"
+                                            v-for="(asset, index) in theirOffer"
                                             :key="asset"
                                             class="assets-grid__asset"
-                                            @click="selectedAssets.splice(index, 1)"
+                                            @click="theirOffer.splice(index, 1)"
                                         >
                                             <c-tooltip v-show="asset.id" iconHide>
                                                 <c-asset-preview
@@ -75,7 +77,7 @@
                                 <div class="management__inventory-explorer">
                                     <c-list
                                         :items="transaction.me.user.inventory"
-                                        @click="addAsset($event)"
+                                        @click="theirOffer.push($event)"
                                     >
                                         <c-asset-preview-small
                                             slot-scope="{ item }"
@@ -113,7 +115,7 @@
                 transaction: {
                     id: 31,
                     me: {
-                        selling: [assets[1]],
+                        selling: [assets[1], assets[0]],
                         user: {
                             name: 'San',
                             img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png',
@@ -121,7 +123,7 @@
                         }
                     },
                     contractor: {
-                        selling: [assets[2]],
+                        selling: [assets[2], assets[4], assets[5]],
                         user: {
                             name: 'Satoshi',
                             img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png',
@@ -130,31 +132,39 @@
                     },
                     updatedAt: '',
                     createdAt: ''
-                }
+                },
+                yoursOffer: [],
+                theirOffer: []
             }
         },
         methods: {
-            addAsset(asset) {
-                const emptyAssetIndex = this.selectedAssets.findIndex(asset =>
-                    !Object.keys(asset).length
-                );
-                if (emptyAssetIndex === -1) this.selectedAssets.push(asset);
-                else this.selectedAssets.splice(emptyAssetIndex, 1, asset);
-            }
         },
         computed: {
             ...mapGetters({
                 'assets': 'marketplace/assetsArray'
             }),
-            sumTransaction() {
-                return Math.floor(
-                    this.selectedAssets.reduce((price, asset) => price += asset.price.current, 0)
-                    * 100
-                ) / 100;
+            price() {
+                const { yoursOffer, theirOffer } = this;
+                const round = num => Math.round(num * 100) / 100;
+                const yours = round(
+                    yoursOffer.reduce((price, asset) => price += asset.price.current, 0)
+                );
+                const their = round(
+                    theirOffer.reduce((price, asset) => price += asset.price.current, 0)
+                );
+                return {
+                    yours,
+                    their,
+                    sum: round(yours - their)
+                };
             },
             assetss() {
                 return this.$store.getters['marketplace/assetsArray'];
             }
+        },
+        mounted() {
+            this.yoursOffer = this.transaction.me.selling;
+            this.theirOffer = this.transaction.contractor.selling;
         }
     }
 </script>

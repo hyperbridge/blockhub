@@ -1,26 +1,31 @@
 <template>
     <div class="transaction__exchange">
         <div class="exchange__data">
-            <p>Sell {{ assetsLength }} assets for</p>
-            <span class="data__price">{{ sumTransaction }}$</span>
+            <p>Sell {{ yours }} assets for</p>
+            <span class="data__price">{{ price.yours }}$</span>
         </div>
         <div class="exchange__sum">
             <div class="sum__circle">
                 <span
-                    v-show="sumTransaction"
+                    v-show="price.sum || price.yours || price.their"
                     class="circle__price"
-                    :class="[ sumTransaction - 400 ? 'positive' : 'negative' ]"
-                >{{ sumTransaction && '+' }}{{ sumTransaction }}$</span>
+                    :class="[ price.sum > 0
+                        ? 'positive'
+                        : price.sum < 0
+                            ? 'negative'
+                            : ''
+                    ]"
+                >{{ price.sum > 0 ? '+' : '' }}{{ price.sum }}$</span>
                 <c-icon
                     name="exchange-alt"
                     class="circle__icon"
-                    :class="{ 'circle__icon--small': sumTransaction }"
+                    :class="{ 'circle__icon--small': price.sum || price.yours || price.their }"
                 />
             </div>
         </div>
         <div class="exchange__data">
-            <p>Buy {{ assetsLength }} assets for</p>
-            <span class="data__price">{{ sumTransaction }}$</span>
+            <p>Buy {{ their }} assets for</p>
+            <span class="data__price">{{ price.their }}$</span>
         </div>
     </div>
 </template>
@@ -28,7 +33,14 @@
 <script>
     export default {
         name: 'exchange-bar',
-        props: ['assetsLength', 'sumTransaction']
+        props: {
+            price: {
+                type: Object,
+                required: true
+            },
+            yours: Number,
+            their: Number
+        }
     }
 </script>
 
