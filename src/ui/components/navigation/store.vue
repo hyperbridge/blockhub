@@ -2,11 +2,11 @@
     <div class="navigation" id="navigation-default">
 
         <c-sidebar-menu title="STORE" sub_title="General" mClass="margin-bottom-20">
-            <c-sidebar-menu-link :key="Home" :to="{ name: 'Home' }">Home</c-sidebar-menu-link>
-            <c-sidebar-menu-link :key="Community" :to="{ name: 'Community' }">Community</c-sidebar-menu-link>
+            <c-sidebar-menu-link :to="{ name: 'Home' }">Home</c-sidebar-menu-link>
+            <c-sidebar-menu-link :to="{ name: 'Community' }">Community</c-sidebar-menu-link>
             <c-sidebar-menu-link
-                v-for="page in ['Crowdfunds', 'Curators', 'Collections', 'Items']"
-                :key="page"
+                v-for="page in ['Crowdfunds', 'Realms', 'Curators', 'Collections', 'Items']"
+                :key="`${page}`"
                 :to="{ name: page }"
             >
                 Browse {{ page }}
