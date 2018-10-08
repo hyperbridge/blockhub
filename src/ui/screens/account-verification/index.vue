@@ -12,7 +12,40 @@
                     <c-tabs :currentStep="current_step">
                         <c-tab name="Account Verification" :selected="true" :showFooter="true">
                             <div class="tab-container">
-                                <div class="tab-card padding-20">
+                                <div class="tab-card padding-20" v-if="account.is_verified">
+                                    <p>Your account has been verified!</p>
+                                    <p>You can request approval for your identities below.</p>
+
+                                    <div
+                                        class="profile-picker__profile"
+                                        v-for="identity in identities"
+                                        :key="identity.id"
+                                    >
+                                        <c-user-card
+                                            :user="identity"
+                                            :previewMode="true"
+                                            :class="{ 'default': identity.chosen }"
+                                        />
+                                        <div class="profile__action">
+                                            <c-button
+                                                status="info"
+                                                icon="check"
+                                                @click="chooseIdentity(identity)"
+                                                v-if="!identity.chosen"
+                                            >Choose</c-button>
+                                        </div>
+                                    </div>
+
+                                    <c-button @click="verifyIdentity">
+                                        Send Verification Request
+                                    </c-button>
+                                </div>
+                                <div class="tab-card padding-20" v-if="account.is_verifying">
+                                    <p>Your account is undergoing verification!</p>
+                                    <p v-if="!been1hour">Something wrong? You can submit again in 1 hour</p>
+                                    <p v-if="been1hour">Something wrong? <c-button @click="overrideForm">Show Form</c-button></p>
+                                </div>
+                                <div class="tab-card padding-20" v-if="!(account.is_verified || account.is_verifying) || !manual_override">
                                     <h3>Verify your identity (KYC)</h3>
                                     <div v-if="!verificationLink">
                                         <p>
@@ -68,7 +101,7 @@
 
                                         <br /><br />
                                         <c-button
-                                            @click="startVerification()"
+                                            @click="verifyAccount()"
                                         >Start Verification</c-button>
                                     </div>
                                     <div v-if="verificationLink">
@@ -98,28 +131,48 @@
         components: {
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
-            'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve)
+            'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
+            'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         },
         data() {
+            let been1hour = true
+
+            if (this.$store.state.application.account.verification_timestamp) {
+                been1hour = (Math.abs(new Date() - new Date(this.$store.state.application.account.verification_timestamp)) / 36e5) > 1
+            }
+been1hour = true
             return {
                 errors: [],
+                identities: {...this.$store.state.application.identities},
+                chosenIdentity: null,
+                manual_override: false,
+                been1hour: been1hour,
                 account: {
                     first_name: this.$store.state.application.account.first_name,
                     last_name: this.$store.state.application.account.last_name,
                     public_address: this.$store.state.application.account.public_address,
                     document_type: '',
-                    document_number: ''
+                    document_number: '',
+                    is_verified: true, //this.$store.state.application.account.is_verified,
+                    is_verifying: this.$store.state.application.account.is_verifying,
+                    verification_timestamp: this.$store.state.application.account.verification_timestamp
                 },
                 verificationLink: null
             }
         },
         methods: {
-            signIn() {
-                this.$store.dispatch('application/signIn')
-
-                this.$router.push('/')
+            overrideForm() {
+                this.manual_override = true
             },
-            startVerification() {
+            chooseIdentity(identity) {
+                if (this.chosenIdentity) this.chosenIdentity.chosen = false;
+                identity.chosen = true;
+            },
+            verifyIdentity() {
+                // send a contract call
+                // encrypt identity with the secret answer #2
+            },
+            verifyAccount() {
                 if (
                     this.account.first_name
                     && this.account.last_name
@@ -130,6 +183,7 @@
                     const data = {
                         verification: {
                             features: [ 'selfid' ],
+                            callback: window.location.href + '',
                             person: {
                                 firstName: this.account.first_name,
                                 lastName: this.account.last_name,
@@ -137,7 +191,8 @@
                             },
                             additionalData: {
                                 eth: this.account.public_address,
-                                secret: this.$store.state.application.account.secret_answer_2
+                                secret: this.$store.state.application.account.secret_answer_2,
+                                identity1: this.$store.state.application.account.current_identity && this.$store.state.application.account.current_identity.public_address
                             },
                             timestamp: (new Date).toISOString()
                         }
@@ -153,6 +208,10 @@
                         }
                     })
                     .then((res) => {
+                        BlockHub.DB.application.config.data[0].account.is_verifying = true
+                        BlockHub.DB.application.config.data[0].account.verification_timestamp = new Date()
+                        BlockHub.DB.save()
+
                         this.verificationLink = res.data.verification.url
                     })
                     .catch((err) => {
