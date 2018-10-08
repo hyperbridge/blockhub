@@ -41,10 +41,14 @@
                                             :asset="item"
                                         />
                                     </c-list>
+                                    <c-list-submenu :items="inventory.yours">
+                                        <template slot-scope="{ item }">
+                                            {{ item.name }}
+                                        </template>
+                                    </c-list-submenu>
                                 </div>
                             </div>
                             <c-exchange-bar
-                                :sumTransaction="sumTransaction"
                                 :price="price"
                                 :yours="yoursOffer.length"
                                 :their="theirOffer.length"
@@ -102,6 +106,7 @@
         components: {
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-list': (resolve) => require(['@/ui/components/list'], resolve),
+            'c-list-submenu': (resolve) => require(['@/ui/components/list-submenu'], resolve),
             'c-tooltip': (resolve) => require(['@/ui/components/tooltips/universal'], resolve),
             'c-asset-preview': (resolve) => require(['@/ui/components/asset-preview'], resolve),
             'c-asset-preview-small': (resolve) => require(['@/ui/components/asset-preview/small'], resolve),
@@ -143,6 +148,33 @@
             ...mapGetters({
                 'assets': 'marketplace/assetsArray'
             }),
+            inventory() {
+                const extractor = target => {
+                    const reduced = this.transaction[target].user.inventory
+                        .reduce((inventory, asset) => {
+                            const { product_name } = asset;
+                            if (inventory[product_name]) inventory[product_name].push(asset);
+                            else inventory[product_name] = [asset];
+                            return inventory;
+                        }, {});
+
+                    return Object.keys(reduced)
+                        .reduce((inventory, productKey) => {
+                            inventory[productKey] = reduced[productKey].reduce((assets, asset) => {
+                                const { name } = asset;
+                                if (assets[name]) assets[name].push(asset);
+                                else assets[name] = [asset];
+                                return assets;
+                            }, {});
+                            return inventory;
+                        }, {});
+                }
+
+                return {
+                    yours: extractor('me'),
+                    their: extractor('contractor')
+                };
+            },
             price() {
                 const { yoursOffer, theirOffer } = this;
                 const round = num => Math.round(num * 100) / 100;
