@@ -406,6 +406,9 @@
                     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaeGUxfoKhj7XC5BMdwz8dQ9QbavjCMgk6ZXkn2biteSN1c7nL'
                 },
             ];
+            if (this.navigationKey !== 'store') {
+                this.showRightPanel = false
+            }
 
             return {
                 navigationComponent: this.navigationKey || false,
