@@ -124,6 +124,7 @@ window.BlockHub.importSeedData = () => {
     DB.marketplace.config.data[0].curator_reviews = seed.curator_reviews
     DB.marketplace.config.data[0].product_news = seed.product_news
     DB.marketplace.config.data[0].collections = seed.collections
+    DB.marketplace.config.data[0].game_series = seed.game_series
 
     DB.marketplace.products.data = seed.products
     DB.marketplace.assets.data = seed.assets

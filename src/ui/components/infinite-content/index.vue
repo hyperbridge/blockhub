@@ -143,7 +143,7 @@
                     <div class="col-12">
                         <c-game-series v-for="(game, index) in item.data.game_series_data" :key="index">
                             <c-game-description :game="game" />
-                            <c-game-includes-list :list="game.products_ids" :showNumber="item.data.showNumber" />
+                            <c-game-includes-list :list="game.products" :showNumber="item.data.showNumber" />
                         </c-game-series>
                     </div>
                 </div>

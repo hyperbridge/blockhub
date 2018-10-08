@@ -54,7 +54,7 @@
                 this.showMore = true;
             },
             limitedList(limit) {
-                let list = this.getProducts,
+                let list = this.products,
                     newList = [];
                     list.forEach( function (item, i){
                         if (i <= limit-1) {
@@ -65,17 +65,9 @@
                 return newList
             }
         },
-        computed:{
-            getProducts(){
-                let ids = this.list,
-                    list = this.$store.state.marketplace.products || {},
-                    arr = [];
-                if (ids)
-                    ids.forEach( (a, i) => {
-                        if (list[a.id])
-                            arr.push(list[a.id])
-                    });
-                return arr;
+        computed: {
+            products() {
+                return this.list.map(item => this.$store.state.marketplace.products[item])
             }
         }
     }
