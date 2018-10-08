@@ -1,7 +1,7 @@
 <template>
     <c-layout navigationKey="help">
         <div class="content" id="content">
-            <div class="container-fluid">
+            <div class="container-fluid" v-if="topic">
                 <div class="row">
                     <div class="col-12">
                         <h3 class="topic-ttl margin-bottom-30">
@@ -53,6 +53,9 @@
                         </c-card>
                     </div>
                 </div>
+            </div>
+            <div v-if="!article">
+                Oh no! That topic was not found!
             </div>
         </div>
     </c-layout>

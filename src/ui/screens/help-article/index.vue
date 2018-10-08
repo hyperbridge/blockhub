@@ -1,11 +1,14 @@
 <template>
     <c-layout navigationKey="help">
         <div class="content" id="content">
-            <div class="container-fluid">
+            <div class="container-fluid" v-if="article">
                 <h2>{{ article.title }}</h2>
                 <div class="article-content">
                     <div v-html="article.text" />
                 </div>
+            </div>
+            <div v-if="!article">
+                Oh now! That article was not found!
             </div>
         </div>
     </c-layout>
@@ -33,6 +36,7 @@
                         results = data[i]
                     }
                 }
+                
                 return results;
             }
         }
