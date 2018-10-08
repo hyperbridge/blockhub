@@ -118,6 +118,8 @@ window.BlockHub.seed = seed
 window.BlockHub.importSeedData = () => {
     DB.application.config.data[0].account.notifications = seed.notifications
     DB.application.config.data[0].account.wallets = seed.wallets
+    DB.application.config.data[0].account.identities = seed.identities
+    DB.application.config.data[0].account.current_identity = seed.identities[0]
 
     DB.marketplace.config.data[0].curator_reviews = seed.curator_reviews
     DB.marketplace.config.data[0].product_news = seed.product_news
