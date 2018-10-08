@@ -477,6 +477,11 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/download'], resolve)
         },
         {
+            path: '/realms',
+            name: 'Realms',
+            component: (resolve) => require(['@/ui/screens/realms'], resolve)
+        },
+        {
             path: '/realm/:id',
             name: 'Realm',
             component: (resolve) => require(['@/ui/screens/realm'], resolve)
