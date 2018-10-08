@@ -2,6 +2,21 @@
     <c-layout navigationKey="store">
         <div class="content" id="content">
             <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/token">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="text-yellow">Launch Sale</h3>
+                                    <p>Hyperbridge will begin selling the HBX token on November 11, 2018</p>
+                                </div>
+                                <div class="banner-action">
+                                    <c-button tag="div" tatus="info" icon_hide size="lg">JOIN NOW</c-button>
+                                </div>
+                            </div>
+                        </c-banner>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-12 mb-4" v-if="!desktop_mode">
@@ -70,6 +85,7 @@ export default {
     components: {
         'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
         'c-infinite-content': (resolve) => require(['@/ui/components/infinite-content'], resolve),
+        'c-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
         'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve),
     },
     computed: {
