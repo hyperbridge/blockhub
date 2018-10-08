@@ -4,60 +4,56 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
+                        <c-breadcrumb :links="[
+                            { to: { path: '/' }, title: 'Home' },
+                            { to: { path: '/account' }, title: 'Account' },
+                            { to: { path: '/account/identities' }, title: 'Identities' }
+                        ]" />
                         <c-heading-bar name="My identity" :showArrows="false" :showBackground="false"/>
                     </div>
-                    <div class="col-12 margin-bottom-40 my_identity">
+                    <div class="col-6 margin-bottom-40 my_identity">
                         <c-user-card
                             v-if="defaultIdentity"
                             :user="defaultIdentity"
                             @updateIdentity="(prop, val) => defaultIdentity[prop] = val"
                         />
                         <p v-else-if="!identities.length">
-                            You don't have any identities. Create a new one.
+                            You don't have any identities yet.
                         </p>
                         <p v-else>
-                            You don't have default identity.
+                            You don't have a default identity.
                         </p>
-                        <div class="user-info">
-                            <h3>Mr. Satoshi Nakamoto</h3>
-                            <h4>Osaka, Japan</h4>
-                        </div>
-                        <div>
-                            <div class="verification-blk">
-                                <h3>Verify Your Identity</h3>
-                                <div class="status">
-                                    <i class="fas fa-check"></i>
-                                    Approved
-                                </div>
-                                <div class="date">
-                                    Valid Until
-                                    Jul 2021
-                                </div>
+                    </div>
+                    <div class="col-6" v-if="defaultIdentity">
+                        <div class="verification-blk">
+                            <h3>Verify Your Identity</h3>
+                            <div class="status" v-if="defaultIdentity.is_verified">
+                                <i class="fas fa-check"></i>
+                                Verified
                             </div>
-                            <div class="verification-blk">
-                                <h3>Verify Your Location</h3>
-                                <div class="status">
-                                    <i class="fas fa-check"></i>
-                                    Approved
-                                </div>
-                                <div class="date">
-                                    Valid Until
-                                    Jul 2021
-                                </div>
+                            <div class="status" v-else-if="defaultIdentity.is_verifying">
+                                <i class="fas fa-hourglass"></i>
+                                Verifying
+                            </div>
+                            <router-link to="/account/verification" v-else>
+                                Click here to verify
+                            </router-link>
+                            <div class="date" v-if="defaultIdentity.is_verified">
+                                Valid Up To $10,000 USD
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 mb-4">
                         <c-button
                             status="info"
                             icon="user-plus"
                             @click="createIdentity"
-                        > Add new</c-button>
+                        > New Identity</c-button>
                     </div>
 
                     <div class="col-12">
-                        <c-heading-bar name="Profile Picker" :showArrows="false" :showBackground="false">
+                        <c-heading-bar name="All Identities" :showArrows="false" :showBackground="false">
                             <div class="additional-action margin-left-20" slot="additional-action">
                                 <span class="text">Name</span>
                                 <c-icon name="user"/>
@@ -67,12 +63,12 @@
                                     @clickDown="sortAsc = false"
                                 />
                             </div>
-                            <div class="additional-action margin-left-20" slot="additional-action">
+                            <div class="additional-action margin-left-20" slot="additional-action" v-darklaunch="'REPUTATION'">
                                 <span class="text">Rating</span>
                                 <c-icon name="trophy"/>
                                 <c-button-arrows/>
                             </div>
-                            <div class="additional-action margin-left-20 padding-10" slot="additional-action">
+                            <div class="additional-action margin-left-20 padding-5" slot="additional-action">
                                 <c-input-searcher
                                     placeholder="Search"
                                     v-model="filterPhrase"
@@ -85,9 +81,11 @@
                         tag="div"
                         class="profile-picker"
                         name="item"
+                        :duration="100"
                     >
                         <div
                             class="profile-picker__profile"
+                            :class="{ 'edit': identity.edit }"
                             v-for="identity in filteredIdentities"
                             :key="identity.id"
                         >
@@ -99,31 +97,34 @@
                             />
                             <div class="profile__action">
                                 <c-button
-                                    v-if="!identity.default"
                                     status="info"
                                     icon="check"
                                     @click="setDefault(identity)"
+                                    v-if="!identity.default && !identity.edit"
                                 >Set default</c-button>
-                                <template v-if="identity.edit">
-                                    <c-button
-                                        status="share"
-                                        icon="pen"
-                                        @click="saveIdentity(identity)"
-                                    >Save</c-button>
-                                    <c-button
-                                        @click="identity.edit = false"
-                                    >Cancel</c-button>
-                                </template>
                                 <c-button
-                                    v-else
                                     status="share"
                                     icon="pen"
                                     @click="editIdentity(identity)"
+                                    v-if="!identity.edit"
                                 >Edit</c-button>
                                 <c-button
+                                    status="share"
+                                    icon="pen"
+                                    @click="saveIdentity(identity)"
+                                    v-if="identity.edit"
+                                >Save</c-button>
+                                <c-button
                                     status="danger"
+                                    icon="trash"
                                     @click="deleteIdentity(identity)"
+                                    v-if="identity.edit"
                                 >Delete</c-button>
+                                <c-button
+                                    @click="identity.edit = false"
+                                    icon="times"
+                                    v-if="identity.edit"
+                                >Cancel</c-button>
                             </div>
                         </div>
                     </transition-group>
@@ -176,28 +177,11 @@
             return {
                 wallets: [],
                 user: {},
-                identities: [
-                    {
-                        id: 1,
-                        name: 'Mr. Satoshi',
-                        wallet: '0x6cc5f688a315f3dc28a7781717a',
-                        img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
-                        default: false,
-                        edit: false
-                    },
-                    {
-                        id: 2,
-                        name: 'Nakamoto',
-                        wallet: '0x233c5f688a315f3dc28a419189b',
-                        img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
-                        default: true,
-                        edit: false
-                    }
-                ],
+                identities: this.$store.state.application.identities || [],
                 newIdentity: {
                     name: '',
                     wallet: '',
-                    img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+                    img: '/static/img/new-identity.png',
                     default: false,
                     edit: false
                 },
@@ -216,7 +200,7 @@
                 if (!this.editedIdentity) {
                     identity.edit = true;
                 } else {
-                    this.$snotify.warning('Stop editing the current identity before editing the next one');
+                    this.$snotify.warning('You must finish editing the current identity');
                 }
             },
             saveIdentity(identity)  {
@@ -237,7 +221,8 @@
             },
             createIdentity() {
                 const { newIdentity } = this;
-                this.identities.push({ ...newIdentity, id: Math.floor(Math.random() * 100) });
+
+                this.identities.push({ ...newIdentity, id: Math.floor(Math.random() * 100), edit: true });
                 /*
                     //  Form check logic
 
@@ -286,7 +271,6 @@
         width: auto;
         align-items: center;
         font-size: 14px;
-        margin-top: 6px;
         .text {
             margin-right: 5px;
             i {
@@ -352,7 +336,7 @@
     }
 
     .verification-blk {
-        width: 220px;
+        width: 260px;
         color: #C6C6D6;
         display: flex;
         flex-wrap: wrap;
@@ -384,7 +368,7 @@
             }
         }
         .date {
-            width: 70px;
+            width: 90px;
         }
 
     }
@@ -426,7 +410,7 @@
         position: relative;
         margin: 20px;
         width: 300px;
-        &:hover .profile__action {
+        &:hover .profile__action, &.edit .profile__action {
             display: flex;
         }
         >.default {
