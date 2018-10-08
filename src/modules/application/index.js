@@ -130,7 +130,7 @@ export const actions = {
         // Ethereum.init().then(success, failure).catch(failure)
     },
     checkInternetConnection(store, payload) {
-        console.log('[BlockHub] Connection status: ' + JSON.stringify(store.state.connection))
+        //console.log('[BlockHub] Connection status: ' + JSON.stringify(store.state.connection))
 
         if (!navigator.onLine) {
             store.commit('setInternetConnection', { connected: false, message: "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection." })
