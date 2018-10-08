@@ -199,6 +199,23 @@ a.btn-outline-white {
     }
 }
 
+.page-heading {
+    margin-bottom: 10px;
+}
+
+.page-heading .breadcrumb .breadcrumb-item a {
+    font-size: 15px;
+}
+
+.page-heading .breadcrumb .breadcrumb-item+.breadcrumb-item:before {
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+}
+
+.route {
+    cursor: pointer;
+}
+
 // .swiper-container {
 //     overflow: visible;
 // }

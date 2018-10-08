@@ -6,6 +6,7 @@ import Button from '@/ui/components/buttons'
 import Switch from '@/ui/components/switch'
 import Icon from '@/ui/components/icon'
 import Input from '@/ui/components/inputs'
+import Breadcrumb from '@/ui/components/breadcrumb'
 import Img from '@/ui/components/img'
 import Darklaunch from '@/ui/components/darklaunch'
 
@@ -15,5 +16,6 @@ Vue.component('c-button', Button)
 Vue.component('c-switch', Switch)
 Vue.component('c-icon', Icon)
 Vue.component('c-input', Input)
+Vue.component('c-breadcrumb', Breadcrumb)
 Vue.component('c-img', Img)
 Vue.component('c-darklaunch', Darklaunch)
