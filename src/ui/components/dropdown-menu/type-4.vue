@@ -74,7 +74,7 @@ export default {
             background: transparent;
             &:before{
                 content: '';
-                background: rgba(0, 0, 0, .7);
+                background: rgba(0, 0, 0, .85);
                 opacity: .9;
                 position: absolute;
                 left: -25px;

@@ -38,9 +38,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="row align-items-stretch">
+                <div class="row align-items-stretch margin-top-30">
                     <div class="col-12 col-xl-3 py-3" v-for="(game, index) in games" :key="index" >
-                        <c-game :game="game" />
+                        <c-game :game="game" :isLoading="(index == 2 ) ? true : false" />
                     </div>
                 </div>
             </div>

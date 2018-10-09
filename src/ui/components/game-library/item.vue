@@ -1,6 +1,12 @@
 <template>
     <div class="game-library__item">
-        <c-img :src="game.images.medium_tile"/>
+        <div class="item-img loading--w-spinner">
+            <c-img :src="game.images.medium_tile"/>
+            <div class="loader-block" v-if="isLoading">
+                <div class="loading-spinner">
+                </div>
+            </div>
+        </div>
         <div class="item-name">
             {{ game.name }}
         </div>
@@ -19,7 +25,7 @@
                     <i class="fas fa-play"></i>
                 </span>
             </div>
-            <div style="height: 20px; width: 20px">
+            <div style="height: 20px; width: 20px;margin-right: -5px">
                 <c-dropdown>
                     <ul class="item-dropdown">
                         <li>
@@ -69,7 +75,7 @@
 <script>
     export default {
         name: 'game-library-item',
-        props: ['game'],
+        props: ['game', 'isLoading'],
         components: {
             'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve)
         }
@@ -85,11 +91,33 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        img {
-            width: 100%;
-            height: 12rem;
-            object-fit: cover;
-            border-radius: 5px 5px 0 0;
+        .item-img{
+            position: relative;
+            img {
+                width: 100%;
+                height: 12rem;
+                object-fit: cover;
+                border-radius: 5px 5px 0 0;
+            }
+            .loader-block{
+                background: rgba(28, 32, 50, .7);
+                color: #1C2032;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                display: flex;
+                .loading-spinner{
+                    margin: auto;
+                    position: relative;
+                    zoom: 4;
+                    &:before{
+                        border-color: #fff;
+                        border-right-color: transparent;
+                    }
+                }
+            }
         }
         .item-name {
             padding: 5px 10px;
@@ -97,7 +125,7 @@
         }
         .item-action {
             background: rgba(255, 255, 255, .02);
-            padding: 5px 0 5px 10px;
+            padding: 5px 10px 5px 10px;
             margin-top: auto;
             display: flex;
             justify-content: space-between;
@@ -113,7 +141,6 @@
             }
         }
     }
-
     .item-dropdown {
         padding: 0 4px;
         margin: 0;
