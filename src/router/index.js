@@ -509,6 +509,11 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/discussion'], resolve)
         },
         {
+            path: '/meta',
+            name: 'Meta',
+            component: (resolve) => require(['@/ui/screens/meta'], resolve)
+        },
+        {
             path: '/updates',
             name: 'Updates',
             component: (resolve) => require(['@/ui/screens/updates'], resolve)
