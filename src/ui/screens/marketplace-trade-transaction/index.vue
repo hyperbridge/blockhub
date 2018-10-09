@@ -33,15 +33,6 @@
                                         </div>
                                     </div>
                                     <div class="management__inventory-explorer">
-                                        <c-list
-                                            :items="transaction.me.user.inventory"
-                                            @click="yoursOffer.push($event)"
-                                        >
-                                            <c-asset-preview-small
-                                                slot-scope="{ item }"
-                                                :asset="item"
-                                            />
-                                        </c-list>
                                         <c-list-submenu :items="inventory.yours" isParent>
                                             <c-list-submenu
                                                 slot="sublist"
@@ -54,6 +45,7 @@
                                                     slot-scope="{ list }"
                                                 >
                                                     <c-asset-preview-small
+                                                        slot="item-content"
                                                         :asset="list[0]"
                                                     />
                                                     {{ list.length > 1 ? list.length : '' }}
@@ -141,7 +133,7 @@
                         user: {
                             name: 'San',
                             img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png',
-                            inventory: assets.slice(3, assets.length)
+                            inventory: [...assets.slice(3, assets.length), assets[3], assets[4]]
                         }
                     },
                     contractor: {
@@ -166,8 +158,9 @@
                 'assets': 'marketplace/assetsArray'
             }),
             inventory() {
-                const extractor = target => {
-                    const reduced = this.transaction[target].user.inventory
+                const extractor = (target, offer) => {
+                    const { inventory: originalInv } = this.transaction[target].user;
+                    const reduced = originalInv
                         .reduce((inventory, asset) => {
                             const { product_name } = asset;
                             if (inventory[product_name]) inventory[product_name].push(asset);
@@ -177,10 +170,19 @@
 
                     return Object.keys(reduced)
                         .reduce((inventory, productKey) => {
-                            inventory[productKey] = reduced[productKey].reduce((assets, asset) => {
+                            inventory[productKey] = reduced[productKey].reduce((assets, asset, productAssets) => {
                                 const { name } = asset;
-                                if (assets[name]) assets[name].push(asset);
-                                else assets[name] = [asset];
+
+                                const offerAssets = this[offer].filter(offAsset => offAsset.id === asset.id);
+                                const invAssets = originalInv.filter(invAsset => invAsset.id === asset.id);
+
+                                if (assets[name] && !this[offer].includes(asset)) {
+                                    assets[name].push(asset);
+                                }
+                                else if (offerAssets.length !== invAssets.length) {
+                                    assets[name] = [asset];
+                                }
+
                                 return assets;
                             }, {});
                             return inventory;
@@ -188,8 +190,8 @@
                 }
 
                 return {
-                    yours: extractor('me'),
-                    their: extractor('contractor')
+                    yours: extractor('me', 'yoursOffer'),
+                    their: extractor('contractor', 'theirOffer')
                 };
             },
             price() {
@@ -246,9 +248,9 @@
                 align-items: center;
                 justify-content: space-between;
             }
-            .list-container {
+            >.list-container {
                 // box-shadow: 0 0 25px 0 rgba(1,1,1,.25);
-                // border: 1px solid rgba(255,255,255,.1);
+                border: 1px solid rgba(255,255,255,.1);
             }
         }
     }
@@ -274,6 +276,7 @@
         position: relative;
         padding: 4px;
         animation: rotate-in .2s ease;
+        user-select: none;
         .tooltip-universal__wrapper {
             width: 100%;
         }

@@ -10,17 +10,24 @@
                     }"
                 >
                     <slot :list="list">
-                        <c-icon
-                            name="arrow-right"
-                            class="arrow"
-                            :class="{ 'arrow--opened': title === subItem }"
-                        />
-                        <span
-                            class="title"
-                            :class="{ 'title--opened': title === subItem }"
-                        >
-                            {{ title }}
-                        </span>
+                        <div class="item__container">
+                            <span>
+                                <slot name="item-content">
+                                    <c-icon
+                                        name="arrow-right"
+                                        class="arrow"
+                                        :class="{ 'arrow--opened': title === subItem }"
+                                    />
+                                    <span
+                                        class="title"
+                                        :class="{ 'title--opened': title === subItem }"
+                                    >
+                                        {{ title }}
+                                    </span>
+                                </slot>
+                            </span>
+                            <c-tag-count :number="listLength(list)"/>
+                        </div>
                     </slot>
                 </a>
             </slot>
@@ -37,7 +44,14 @@
 
 <script>
     export default {
-        props: ['items', 'isParent'],
+        name: 'list-submenu',
+        components: {
+            'c-tag-count': (resolve) => require(['@/ui/components/tags/count'], resolve)
+        },
+        props: {
+            items: Object,
+            isParent: Boolean
+        },
         data() {
             return {
                 subItem: null
@@ -48,6 +62,11 @@
                 this.$emit('click', item);
                 if (this.subItem && this.subItem === title) this.subItem = null;
                 else this.subItem = title;
+            },
+            listLength(list) {
+                return Object.keys(list).length;
+                const length = Object.keys(list).length;
+                return length > 0 ? length : 0;
             }
         }
     }
@@ -65,6 +84,7 @@
         background: rgba(39, 40, 61, .8);
         border-radius: 4px;
         margin-left: 5px;
+        margin-bottom: 5px;
         &.list-container--parent {
             height: 250px;
         }
@@ -74,11 +94,12 @@
         padding: 10px;
         cursor: pointer;
         user-select: none;
+        color: rgba(255,255,255,.1);
         &:hover:not(.item_link--active):not(.item__link-opened) {
             background: rgba(255,255,255,.025);
         }
     }
-    .item__link-opened {
+    .item__link--opened {
         @extend .item__link;
         background: rgba(1,1,1,.1);
         display: flex;
@@ -94,33 +115,20 @@
         display: inline-block;
         transition: transform .2s ease;
         &.title--opened {
-            transform: translateX(15px);
+            transform: translateX(10px);
         }
     }
     .arrow {
         transition: transform .2s ease;
-        transform: translateX(-30px);
+        transform: translateX(-25px);
         &.arrow--opened {
             transform: translateX(5px);
         }
-
     }
 
-    @keyframes arrow {
-        0% {
-            transform: translateX(0);
-            opacity: 0;
-        }
-        25% {
-            opacity: 1;
-        }
-        75% {
-            opacity: 1;
-        }
-        100% {
-            transform: translateX(100px);
-            opacity: 0;
-        }
+    .item__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
-
 </style>
