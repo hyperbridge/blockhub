@@ -334,11 +334,14 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #30314c;
-    padding: 10px;
     display: block;
     font-family: "Roboto", sans-serif;
     font-weight: 400;
+    background: url(/static/img/backgrounds/1.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #30314c;
 }
 
 .startup-loader .startup-loader__container {
@@ -348,6 +351,7 @@ a {
     text-align: center;
     padding-top: 100px;
     font-size: 14px;
+    background: rgba(47, 47, 72, 0.6);
 }
 
 .startup-loader__message {
@@ -504,6 +508,7 @@ window.resetSettings = function() {
 function isWhiteSpace(coords) {
   var element = document.elementFromPoint(coords.x, coords.y);
   var whitespace = $(document).add('body, html, #app, #header-bg, #startup-loader, #critical-error, #left-bg, #right-bg, .startup-loader__container');
+
   return (whitespace.get().indexOf(element) > -1) ? true : false;
 }
 
@@ -511,7 +516,7 @@ function bootChecker() {
   if (typeof($) == undefined) return setTimeout(bootChecker, 1000)
 
   // If any of these randomly chosen coordinates is not a bottom layer element, then assume loading occurred properly
-  const isLoaded = !isWhiteSpace({ x: 100, y: 100 }) || !isWhiteSpace({ x: 200, y: 100 }) || !isWhiteSpace({ x: 300, y: 300 })
+  const isLoaded = !isWhiteSpace({ x: 50, y: 50 })
 
   if (isLoaded) {
     $('#startup-loader, #critical-error').hide()
