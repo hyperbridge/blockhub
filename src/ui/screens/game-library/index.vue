@@ -40,7 +40,12 @@
                 </div>
                 <div class="row align-items-stretch margin-top-30">
                     <div class="col-12 col-xl-3 py-3" v-for="(game, index) in games" :key="index" >
-                        <c-game :game="game" :isLoading="(index == 2 ) ? true : false" />
+                        <c-game-card :game="game" :isLoading="(index == 2 ) ? true : false" />
+                    </div>
+                </div>
+                <div class="row align-items-stretch margin-top-30">
+                    <div class="col-12 games-list">
+                        <c-game-list v-for="(game, index) in games" :key="index" :game="game" :isLoading="(index == 2 ) ? true : false" />
                     </div>
                 </div>
             </div>
@@ -60,7 +65,8 @@
             'c-dropdown-menu': (resolve) => require(['@/ui/components/dropdown-menu/type-3'], resolve),
             'c-list': (resolve) => require(['@/ui/components/list'], resolve),
             'c-user-head': (resolve) => require(['@/ui/components/user/header'], resolve),
-            'c-game': (resolve) => require(['@/ui/components/game-library/item'], resolve)
+            'c-game-card': (resolve) => require(['@/ui/components/game-library/card-item'], resolve),
+            'c-game-list': (resolve) => require(['@/ui/components/game-library/list-item'], resolve)
         },
         computed:{
             selectableCategory(){
@@ -75,4 +81,20 @@
 </script>
 
 <style lang="scss" scoped>
+    .games-list{
+        display: flex;
+        flex-direction: column;
+        .game-library__item{
+            background: rgba(0, 0, 0, .25);
+            &:nth-child(even){
+                background: rgba(0, 0, 0, .15);
+            }
+            &:first-child{
+                border-radius: 5px 5px 0 0;
+            }
+            &:last-child{
+                border-radius: 0 0 5px 5px;
+            }
+        }
+    }
 </style>
