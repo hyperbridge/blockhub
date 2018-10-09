@@ -201,6 +201,14 @@ a.btn-outline-white {
 
 .page-heading {
     margin-bottom: 10px;
+    background: none !important;
+    border: 0 none !important;
+}
+
+.page-heading .breadcrumb {
+    background: none !important;
+    border: 0 none !important;
+    padding: 0;
 }
 
 .page-heading .breadcrumb .breadcrumb-item a {
