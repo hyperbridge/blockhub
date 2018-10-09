@@ -109,6 +109,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="transaction__actions">
+                                <c-button
+                                    status="info"
+                                    icon_hide
+                                >Update transaction</c-button>
+                            </div>
                         </c-block>
                         <c-block v-else :title="'Transaction: ' + tradeId" class="transaction">
                             <p>Transaction with id <i>{{ tradeId }}</i> doesn't exist</p>
@@ -139,6 +145,10 @@
             }
         },
         methods: {
+            addTransactionAsset(asset, target) {
+                const { tradeId } = this;
+                this.$store.commit('addTransactionAsset', { asset, target, tradeId });
+            }
         },
         computed: {
             inventory() {
@@ -201,7 +211,7 @@
                     .find(transaction =>
                         transaction.id === this.tradeId
                     );
-            }
+            },
         },
         mounted() {
             this.yoursOffer = this.transaction.me.selling;
@@ -298,5 +308,10 @@
                 transform: scale(1) rotate(0);
             }
         }
+    }
+
+    .transaction__actions {
+        margin: 20px 0;
+        display: flex;
     }
 </style>
