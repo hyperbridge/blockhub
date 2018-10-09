@@ -12,7 +12,7 @@
         </div>
         <div class="item-action">
             <div>
-                <span>
+                <span class="has-new">
                     <i class="fas fa-cog"></i>
                 </span>
                 <span>
@@ -91,6 +91,16 @@
         position: relative;
         display: flex;
         flex-direction: column;
+        transition: transform .3s ease;
+        z-index: 15;
+        &:hover{
+            cursor: pointer;
+            will-change: transform;
+            transform: perspective(300px) rotateX(0deg) rotateY(0deg) scale(1.03);
+            box-shadow: 0 0 35px rgba(0, 0, 0, .2);
+            transition: transform 200ms cubic-bezier(0.34, 1.01, 0.8, 0.24);
+            z-index: 20;
+        }
         .item-img{
             position: relative;
             img {
@@ -131,9 +141,20 @@
             justify-content: space-between;
             align-items: center;
             span {
-                padding: 0 10px 0 4px;
+                margin: 0 10px 0 4px;
                 color: #C6C6D6;
                 font-size: 14px;
+                position: relative;
+                &.has-new{
+                    &:after{
+                        content: "";
+                        position: absolute;
+                        width: 5px;
+                        height: 5px;
+                        border-radius: 5px;
+                        background: #F75D5D;
+                    }
+                }
                 &:hover {
                     color: #fff;
                     cursor: pointer;
