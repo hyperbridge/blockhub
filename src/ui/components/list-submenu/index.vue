@@ -75,7 +75,6 @@
 <style lang="scss" scoped>
     .list-container {
         margin: 0;
-        padding: 0;
         max-height: 250px;
         list-style-type: none;
         overflow-y: auto;
@@ -83,9 +82,9 @@
         background: #27283D;
         background: rgba(39, 40, 61, .8);
         border-radius: 4px;
+        padding: 0;
         &:not(.list-container--parent) {
             margin-left: 5px;
-            margin-bottom: 5px;
         }
         &.list-container--parent {
             height: 250px;

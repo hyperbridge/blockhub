@@ -9,7 +9,7 @@ const transactions = [
             user: users[0]
         },
         contractor: {
-            selling: [assets[2], assets[4], assets[5]],
+            selling: [assets[4]],
             user: users[1]
         },
         status: 'unseen',

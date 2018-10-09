@@ -39,7 +39,33 @@
                 required: true
             },
             yours: Number,
-            their: Number
+            their: Number,
+            interval: null
+        },
+        data() {
+            return {
+                displayedPrice: 0
+            }
+        },
+        computed: {
+            mainPrice() {
+                return this.price.sum;
+            }
+        },
+        watch: {
+            mainPrice(val) {
+                clearInterval(this.interval);
+
+                if (val === this.displayedPrice) return;
+
+                this.interval = setInterval(() => {
+                    if (this.displayedPrice !== this.mainPrice) {
+                        const change = (this.mainPrice - this.displayedPrice) / 10;
+                        this.displayedPrice += change;
+                    }
+                }, 20);
+
+            }
         }
     }
 </script>
