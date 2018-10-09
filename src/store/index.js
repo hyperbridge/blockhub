@@ -13,6 +13,7 @@ import * as database from '../modules/database'
 import * as cache from '../modules/cache'
 import user from '@/modules/user'
 import { saveDB } from './plugins'
+import assets from '@/modules/assets'
 import seed from '../db/seed'
 
 Vue.use(Vuex);
@@ -105,7 +106,8 @@ const store = new Vuex.Store({
             actions: application.actions,
             mutations: application.mutations
         },
-        user
+        user,
+        assets
     }
 });
 

@@ -46,7 +46,7 @@
             default_class: String,
             delay: {
                 type: Number,
-                default: 0
+                default: 50
             }
         },
         data() {
