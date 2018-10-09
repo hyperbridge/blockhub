@@ -552,7 +552,7 @@
         font-size: 20px;
         font-style: italic;
         text-transform: uppercase;
-        margin-top: 40px;
+        margin: 40px auto 10px;
     }
 
     .loader-block__user {

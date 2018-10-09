@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row margin-bottom-50">
                     <div class="col-12 col-lg-8">
-                        <div class="h2 margin-top-5">Welcome to the BlockHub discussion</div>
+                        <div class="h2 margin-top-5">Welcome to the BlockHub community</div>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                             Fusce vulputate, arcu at dictum imperdiet, metus tellus cursus tortor,
