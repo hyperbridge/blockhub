@@ -83,8 +83,10 @@
         background: #27283D;
         background: rgba(39, 40, 61, .8);
         border-radius: 4px;
-        margin-left: 5px;
-        margin-bottom: 5px;
+        &:not(.list-container--parent) {
+            margin-left: 5px;
+            margin-bottom: 5px;
+        }
         &.list-container--parent {
             height: 250px;
         }

@@ -6,7 +6,7 @@
                     <div class="col-12">
                         Marketplace
                         <h2>Trade transaction</h2>
-                        <c-block :title="'Transaction: ' + $route.params.tradeId" class="transaction">
+                        <c-block  v-if="transaction" :title="'Transaction: ' + $route.params.tradeId" class="transaction">
                             <div class="transaction__block">
                                 <div class="transaction__headings">
                                     <h4>Yours selling offer</h4>
@@ -21,7 +21,7 @@
                                                 class="assets-grid__asset"
                                                 @click="yoursOffer.splice(index, 1)"
                                             >
-                                                <c-tooltip v-show="asset.id" :delay="30" iconHide>
+                                                <c-tooltip :delay="30" iconHide>
                                                     <c-asset-preview
                                                         slot="tooltip"
                                                         :asset="asset"
@@ -87,18 +87,31 @@
                                         </div>
                                     </div>
                                     <div class="management__inventory-explorer">
-                                        <c-list
-                                            :items="transaction.me.user.inventory"
-                                            @click="theirOffer.push($event)"
-                                        >
-                                            <c-asset-preview-small
-                                                slot-scope="{ item }"
-                                                :asset="item"
-                                            />
-                                        </c-list>
+                                        <c-list-submenu :items="inventory.their" isParent>
+                                            <c-list-submenu
+                                                slot="sublist"
+                                                slot-scope="{ sublist }"
+                                                :items="sublist"
+                                                @click="theirOffer.push($event)"
+                                            >
+                                                <div
+                                                    class="sublist-menu__assets"
+                                                    slot-scope="{ list }"
+                                                >
+                                                    <c-asset-preview-small
+                                                        slot="item-content"
+                                                        :asset="list[0]"
+                                                    />
+                                                    {{ list.length > 1 ? list.length : '' }}
+                                                </div>
+                                            </c-list-submenu>
+                                        </c-list-submenu>
                                     </div>
                                 </div>
                             </div>
+                        </c-block>
+                        <c-block v-else :title="'Transaction: ' + $route.params.tradeId" class="transaction">
+                            <p>Transaction with id {{ $route.params.tradeId }} doesn't exist</p>
                         </c-block>
                     </div>
                 </div>
@@ -108,7 +121,6 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
     import assets from '@/db/seed/assets';
 
     export default {
@@ -120,12 +132,10 @@
             'c-asset-preview': (resolve) => require(['@/ui/components/asset-preview'], resolve),
             'c-asset-preview-small': (resolve) => require(['@/ui/components/asset-preview/small'], resolve),
             'c-exchange-bar': (resolve) => require(['@/ui/components/exchange-bar'], resolve),
-            'c-author': (resolve) => require(['@/ui/components/author'], resolve),
+            'c-author': (resolve) => require(['@/ui/components/author'], resolve)
         },
         data() {
             return {
-                selectedAssets: [
-                ],
                 transaction: {
                     id: 31,
                     me: {
@@ -154,9 +164,6 @@
         methods: {
         },
         computed: {
-            ...mapGetters({
-                'assets': 'marketplace/assetsArray'
-            }),
             inventory() {
                 const extractor = (target, offer) => {
                     const { inventory: originalInv } = this.transaction[target].user;
@@ -209,7 +216,7 @@
                     sum: round(yours - their)
                 };
             },
-            assetss() {
+            assets() {
                 return this.$store.getters['marketplace/assetsArray'];
             }
         },
@@ -249,7 +256,7 @@
                 justify-content: space-between;
             }
             >.list-container {
-                // box-shadow: 0 0 25px 0 rgba(1,1,1,.25);
+                box-shadow: 0 0 25px 0 rgba(1,1,1,.25);
                 border: 1px solid rgba(255,255,255,.1);
             }
         }
