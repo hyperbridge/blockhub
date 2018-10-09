@@ -17,7 +17,7 @@
                                         <div class="assets-grid">
                                             <div
                                                 v-for="(asset, index) in yoursOffer"
-                                                :key="asset"
+                                                :key="index"
                                                 class="assets-grid__asset"
                                                 @click="yoursOffer.splice(index, 1)"
                                             >
@@ -42,11 +42,24 @@
                                                 :asset="item"
                                             />
                                         </c-list>
-                                        <!-- <c-list-submenu :items="inventory.yours">
-                                            <template slot-scope="{ item }">
-                                                {{ item.name }}
-                                            </template>
-                                        </c-list-submenu> -->
+                                        <c-list-submenu :items="inventory.yours" isParent>
+                                            <c-list-submenu
+                                                slot="sublist"
+                                                slot-scope="{ sublist }"
+                                                :items="sublist"
+                                                @click="yoursOffer.push($event)"
+                                            >
+                                                <div
+                                                    class="sublist-menu__assets"
+                                                    slot-scope="{ list }"
+                                                >
+                                                    <c-asset-preview-small
+                                                        :asset="list[0]"
+                                                    />
+                                                    {{ list.length > 1 ? list.length : '' }}
+                                                </div>
+                                            </c-list-submenu>
+                                        </c-list-submenu>
                                     </div>
                                 </div>
                             </div>
@@ -228,6 +241,11 @@
         }
         .management__inventory-explorer {
             flex: 3;
+            .sublist-menu__assets {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
             .list-container {
                 // box-shadow: 0 0 25px 0 rgba(1,1,1,.25);
                 // border: 1px solid rgba(255,255,255,.1);
@@ -242,6 +260,7 @@
         border-radius: 4px;
         display: flex;
         flex-wrap: wrap;
+        align-content: flex-start;
         padding: 5px;
         margin-right: 30px;
         min-height: 100%;

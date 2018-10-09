@@ -12,6 +12,7 @@
                     </slot>
                 </a>
             </slot>
+            <slot name="sublist"/>
         </li>
     </ul>
 </template>
