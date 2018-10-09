@@ -6,7 +6,7 @@
                     <div class="col-12">
                         Marketplace
                         <h2>Trade transaction</h2>
-                        <c-block  v-if="transaction" :title="'Transaction: ' + $route.params.tradeId" class="transaction">
+                        <c-block  v-if="transaction" :title="'Transaction: ' + tradeId" class="transaction">
                             <div class="transaction__block">
                                 <div class="transaction__headings">
                                     <h4>Yours selling offer</h4>
@@ -110,8 +110,8 @@
                                 </div>
                             </div>
                         </c-block>
-                        <c-block v-else :title="'Transaction: ' + $route.params.tradeId" class="transaction">
-                            <p>Transaction with id {{ $route.params.tradeId }} doesn't exist</p>
+                        <c-block v-else :title="'Transaction: ' + tradeId" class="transaction">
+                            <p>Transaction with id <i>{{ tradeId }}</i> doesn't exist</p>
                         </c-block>
                     </div>
                 </div>
@@ -121,8 +121,6 @@
 </template>
 
 <script>
-    import assets from '@/db/seed/assets';
-
     export default {
         components: {
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
@@ -136,27 +134,6 @@
         },
         data() {
             return {
-                transaction: {
-                    id: 31,
-                    me: {
-                        selling: [assets[1], assets[0]],
-                        user: {
-                            name: 'San',
-                            img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png',
-                            inventory: [...assets.slice(3, assets.length), assets[3], assets[4]]
-                        }
-                    },
-                    contractor: {
-                        selling: [assets[2], assets[4], assets[5]],
-                        user: {
-                            name: 'Satoshi',
-                            img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png',
-                            inventory: assets.slice(0, assets.length - 4)
-                        }
-                    },
-                    updatedAt: '',
-                    createdAt: ''
-                },
                 yoursOffer: [],
                 theirOffer: []
             }
@@ -216,8 +193,14 @@
                     sum: round(yours - their)
                 };
             },
-            assets() {
-                return this.$store.getters['marketplace/assetsArray'];
+            tradeId() {
+                return this.$route.params.tradeId;
+            },
+            transaction() {
+                return this.$store.state.assets.transactions
+                    .find(transaction =>
+                        transaction.id === this.tradeId
+                    );
             }
         },
         mounted() {
