@@ -1,6 +1,5 @@
 import * as DB from '@/db'
 
-
 export let config = {
 }
 
@@ -206,7 +205,14 @@ export const runCommand = async (cmd, meta = {}) => {
 
             await sendCommand('quitAndInstall')
         } else if (cmd.key === 'systemError') {
-            console.warn('[DesktopBridge] Received system error from desktop', cmd.message)
+            console.warn('[DesktopBridge] Received system error from desktop', cmd.data)
+
+            BlockHub.Notifications.error(cmd.data, 'Desktop Error', {
+                timeout: 5000,
+                pauseOnHover: true
+            })
+        } else if (cmd.key === 'navigate') {
+            local.router.push(cmd.data)
         } else {
             console.warn('[DesktopBridge] Unhandled command:', cmd)
         }
