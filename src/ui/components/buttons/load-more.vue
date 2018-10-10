@@ -8,7 +8,7 @@
 
 <script>
     export default {
-        name: 'read-more'
+        name: 'load-more'
     }
 </script>
 
