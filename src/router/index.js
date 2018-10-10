@@ -318,6 +318,11 @@ const router = new Router({
             }
         },
         {
+            path: '/monitor',
+            name: 'Monitor',
+            component: (resolve) => require(['@/ui/screens/monitor'], resolve)
+        },
+        {
             path: '/developer',
             name: 'Developer Area',
             component: (resolve) => require(['@/ui/screens/developer'], resolve),
