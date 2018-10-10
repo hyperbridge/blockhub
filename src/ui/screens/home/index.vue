@@ -215,43 +215,28 @@ export default {
                         slidesPerView: 3,
                         spaceBetween: 15,
                     },
-                    projects: this.$store.state.funding.projects
+                    projects: this.$store.state.funding.trending_projects
                 }
             })
 
             result.push({
                 type: 'game_series',
                 data: {
-                    game_series_data: this.$store.state.marketplace.game_series,
+                    list: this.$store.state.marketplace.game_series,
                     showNumber: 3
                 }
             })
 
             return result
         },
+        // products() {
+        //     if (this.$store.state.cache.screens['/store'] && this.$store.state.cache.screens['/store'].products)
+        //         return this.$store.state.cache.screens['/store'].products
+
+        //     return this.$store.state.marketplace.products
+        // },
         mode() {
             return this.$store.state.application.mode;
-        },
-        projects() {
-            return this.$store.state.funding.projects
-        },
-        products() {
-            if (this.$store.state.cache.screens['/store'] && this.$store.state.cache.screens['/store'].products)
-                return this.$store.state.cache.screens['/store'].products
-
-            return this.$store.state.marketplace.products
-        },
-        new_products() {
-            return this.$store.state.marketplace.new_products;
-        },
-        game_series() {
-            return this.$store.state.marketplace.game_series;
-        },
-        product_news() {
-            return this.$store.state.marketplace.product_news;
-        },
-        main_banner() {
-            return this.$store.state.marketplace.main_banner;
         },
         signed_in() {
             return this.$store.state.application.signed_in;

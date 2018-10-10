@@ -55,7 +55,9 @@
                                     :image="project.images.medium_tile"
                                     :description="project.description"
                                     :funds="project.funds"
-                                    :product="product"
+                                    :productImage="product.images.medium_tile"
+                                    :productName="product.name"
+                                    :productDeveloper="product.developer"
                                     :showGame="false"
                                     class="margin-0"
                                 />
@@ -99,7 +101,8 @@ export default {
             return this.$store.state.marketplace.products[this.id]
         },
         projects() {
-            return this.product.projects ? this.product.projects.map(id => this.$store.state.funding.projects[id]) : []
+            return BlockHub.DB.funding.projects.find({ 'target_id': { '$eq': this.product.id } }) || []
+            //return this.product.projects ? this.product.projects.map(id => this.$store.state.funding.projects[id]) : []
         },
         editing() {
             if (!this.$store.state.application.editor_mode) {

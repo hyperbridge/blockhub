@@ -1,12 +1,12 @@
 <template>
     <div class="project-card__item" :class="customClass">
-        <div class="head" v-if="product">
-            <div class="img">
-                <c-img :src="product.image" />
+        <div class="head" v-if="productName">
+            <div class="img" v-if="productImage">
+                <c-img :src="productImage" />
             </div>
             <div class="text">
-                <h4>{{ product.title }}</h4>
-                <p>{{ product.developer }}</p>
+                <h4>{{ productName }}</h4>
+                <p v-if="productDeveloper">{{ productDeveloper }}</p>
             </div>
         </div>
         <c-img :src="image" />
@@ -36,11 +36,9 @@ export default {
             obtained: Number,
             goal: Number
         },
-        product: {
-            image: String,
-            title: String,
-            developer: String
-        },
+        productImage: String,
+        productName: String,
+        productDeveloper: String,
         customClass: {
             type: String,
         }
