@@ -4,6 +4,7 @@
         <!-- PAGE HEADER -->
         <transition name="slideDown" v-if="initialized">
             <c-header :isLoader="loadingState"/>
+            <!--<c-slim-header :isLoader="loadingState"/>-->
         </transition>
         <!-- //END PAGE HEADER -->
 
@@ -336,6 +337,7 @@
         },
         components: {
             'c-header': (resolve) => require(['@/ui/components/headers/basic'], resolve),
+            'c-slim-header': (resolve) => require(['@/ui/components/headers/slim'], resolve),
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
             'c-wallet-navigation': (resolve) => require(['@/ui/components/navigation/wallet'], resolve),
             'c-account-navigation': (resolve) => require(['@/ui/components/navigation/account'], resolve),

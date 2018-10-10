@@ -1,12 +1,10 @@
 <template>
-    <div
-        class="dropdown dropmenu_container"
-        :class="[ dropPosition ? 'drop' + dropPosition : '' ]"
-    >
+    <div class="dropdown dropmenu_container">
         <div class="rw-btn rw-btn--card" data-toggle="dropdown" aria-expanded="false">
             <div></div>
         </div>
-        <div class="dropdown-menu">
+        <div class="dropdown-menu"
+             :class="[ 'dropdown-menu-' + dropPosition ]">
             <!--<frosted-glass-container>-->
                 <!--<frosted-glass>-->
             <div class="position-relative" style="z-index: 4">
@@ -22,7 +20,10 @@
     // import { frostedGlassContainer, frostedGlass } from 'frosted-glass/dist/frostedglass.js';
 export default {
     props: {
-        dropPosition: String,
+        dropPosition: {
+            type: String,
+            default: 'left'
+        }
     },
     components:{
         // 'frosted-glass-container': frostedGlassContainer,
@@ -74,7 +75,7 @@ export default {
             background: transparent;
             &:before{
                 content: '';
-                background: rgba(0, 0, 0, .7);
+                background: rgba(0, 0, 0, .85);
                 opacity: .9;
                 position: absolute;
                 left: -25px;

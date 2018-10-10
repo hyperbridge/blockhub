@@ -422,7 +422,6 @@ export default {
         right: 0;
     }
 
-
     .app-header__buttons {
         padding-left: 8px;
         padding-top: 11px;
