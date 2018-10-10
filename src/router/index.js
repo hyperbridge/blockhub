@@ -30,6 +30,16 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/welcome'], resolve)
         },
         {
+            path: '/terms',
+            name: 'Terms & Conditions',
+            component: (resolve) => require(['@/ui/screens/terms'], resolve)
+        },
+        {
+            path: '/privacy',
+            name: 'Privacy Policy',
+            component: (resolve) => require(['@/ui/screens/privacy'], resolve)
+        },
+        {
             path: '/streams',
             name: 'Streams',
             component: (resolve) => require(['@/ui/screens/streams'], resolve)
