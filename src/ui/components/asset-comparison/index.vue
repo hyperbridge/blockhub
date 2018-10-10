@@ -21,7 +21,7 @@
                                 {{ prop | parseProp | upperFirstChar }}
                             </td>
                             <td v-if="typeof asset.metadata[prop] ===  'object'">
-                                <ul class="reset-list">
+                                <ul class="margin-bottom-0">
                                     <li v-for="(subprop, subval, index) in asset.metadata[prop]" :key="index">
                                         {{ subprop }} {{ subval }}
                                     </li>
@@ -46,6 +46,9 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="comparison__add-asset">
+                <c-icon name="plus-circle"/>
             </div>
         </div>
     </div>
@@ -169,9 +172,26 @@
         background: #1D1E2E;
         margin: 10px;
     }
+    .comparison__add-asset {
+        @extend .comparison__item;
+        min-width: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 50px;
+        .fas {
+            cursor: pointer;
+            &:not(:hover) {
+                color: rgba(255,255,255,.6);
+            }
+        }
+    }
     .comparison__table {
         td, th {
             padding: 5px;
+        }
+        td:last-child {
+            width: 25%;
         }
         tr:nth-child(odd) td {
             background: rgba(255,255,255,.01);

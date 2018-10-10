@@ -537,7 +537,13 @@ const router = new Router({
         {
             path: '/marketplace/inventory',
             name: 'Marketplace Inventory',
-            component: (resolve) => require(['@/ui/screens/marketplace-inventory'], resolve)
+            component: (resolve) => require(['@/ui/screens/marketplace-inventory'], resolve),
+            children: [
+                {
+                    path: 'compare',
+                    component: (resolve) => require(['@/ui/screens/marketplace-inventory/compare'], resolve),
+                }
+            ]
         },
         {
             path: '/marketplace/trade',

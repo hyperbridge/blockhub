@@ -6,6 +6,9 @@
                     <div class="col-12">
                         Marketplace
                         <h2>Inventory</h2>
+                        <a @click="$router.push('/marketplace/inventory')">Inventory</a>
+                        <a @click="$router.push('/marketplace/inventory/compare')">Compare</a>
+                        <router-view/>
                         <c-block>
                             <div>
                                 <c-button
@@ -13,7 +16,6 @@
                                 >
                                     Un/Select all</c-button>
                             </div>
-                            <c-asset-comparison :assets="assets.slice(0, 2)"/>
                             <div class="assets-grid">
                                 <div
                                     v-if="assets.length"
