@@ -31,7 +31,7 @@
                     ],
                     identities: [
                         { to: { path: '/account/identities' }, title: 'Overview' },
-                        { to: { path: '/account/new-identity' }, title: 'New Identity' }
+                        { to: { path: '/account/identities' }, title: 'New Identity' }
                     ],
                     developer: this.is_developer ? [ { to: { path: '/developer' }, title: 'Developer Area' } ] : [ { to: { path: '/developer/new' }, title: 'Become a Developer' } ],
                     help: [

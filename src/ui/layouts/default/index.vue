@@ -42,7 +42,21 @@
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert left-sidebar" id="page-aside" v-if="showLeftPanel">
                 <!--<transition name="slideLeft" v-if="initialized">-->
-                <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}-navigation`"></component>
+                <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
+                    <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}-navigation`" ref="scroll_sidebar_content"></component>
+                </div>
+                <c-load-more @click="scrollSidebarDown" v-if="scrollMoreDirection == 'down'">
+                    <div class="load-more-slot">
+                        More
+                        <i class="fas fa-sort-down"></i>
+                    </div>
+                </c-load-more>
+                <c-load-more @click="scrollSidebarUp" v-if="scrollMoreDirection == 'up'">
+                    <div class="load-more-slot">
+                        <i class="fas fa-sort-up"></i>
+                        Up
+                    </div>
+                </c-load-more>
                 <!--</transition>-->
             </div>
             <!-- //END PAGE ASIDE PANEL -->
@@ -54,7 +68,7 @@
             <!-- SIDEPANEL -->
             <transition name="slideRight" v-if="initialized && showRightPanel">
                 <c-sidepanel>
-                <c-swiper :options="panelOption" ref="mySwiper">
+                    <c-swiper :options="panelOption" ref="mySwiper">
                     <c-slide v-if="signed_in">
                         <div class="item">
                             <h3>NOTIFICATION</h3>
@@ -227,7 +241,7 @@
                         </div>
                     </c-slide>
                 </c-swiper>
-            </c-sidepanel>
+                </c-sidepanel>
             </transition>
             <!-- //END SIDEPANEL -->
 
@@ -309,6 +323,7 @@
             'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
             'c-cookie-policy': (resolve) => require(['@/ui/components/cookie-policy'], resolve),
             'c-message': (resolve) => require(['@/ui/components/message'], resolve),
+            'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more.vue'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide
         },
@@ -370,7 +385,8 @@
                     spaceBetween: 10,
                     loop: false,
                 },
-                notifPopup: {}
+                notifPopup: {},
+                scrollMoreDirection: ''
             }
         },
         updated() {
@@ -406,6 +422,24 @@
             showNotifPopup(ntf) {
                 this.notifPopup = ntf;
                 this.notifPopup.show_popup = true;
+            },
+            scrollSidebarDown(){
+                $('#scroll_sidebar').animate({scrollTop: '+=100', duration: '150'});
+                if($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight() >= $('#scroll_sidebar')[0].scrollHeight) {
+                    this.scrollMoreDirection = 'up';
+                }
+            },
+            scrollSidebarUp(){
+                $('#scroll_sidebar').animate({scrollTop: '-=500', duration: '150'});
+                if($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight() <= $('#scroll_sidebar')[0].scrollHeight) {
+                    this.scrollMoreDirection = 'down';
+                }
+            },
+            checkScrollButton(){
+                if (this.$refs.scroll_sidebar.scrollHeight > this.$refs.scroll_sidebar.offsetHeight)
+                    this.scrollMoreDirection = 'down';
+                else
+                    this.scrollMoreDirection = null;
             }
         },
         mounted: function () {
@@ -415,6 +449,9 @@
                     document.getElementById('startup-loader').style.display = 'none'
 
                     this.initialized = BlockHub.initialized = true
+
+                    // check sidebar button
+                    this.checkScrollButton()
                 }, 3000) // TODO: remove arbitrary delay
             })
         }
@@ -641,9 +678,21 @@
     }
 
     .left-sidebar {
-        overflow-x: auto;
+        overflow: hidden;
         height: calc(100% - 100px);
         padding-bottom: 20px;
+        background: url("../../../assets/img/left-fade.png") bottom left no-repeat;
+        background-size: 100% auto;
+        .load-more-slot{
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 18px;
+        }
+    }
+    .left-sidebar__content{
+        overflow: hidden;
+        height: calc(100% - 40px);
     }
     .col-lg-6{
         @media (max-width: 1500px){
