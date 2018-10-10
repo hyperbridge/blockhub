@@ -136,7 +136,9 @@
                                         :image="project.images.medium_tile" 
                                         :description="project.description" 
                                         :funds="project.funds" 
-                                        :product="project.product" 
+                                        :productName="project.product.name" 
+                                        :productDeveloper="project.product.developer" 
+                                        :productImage="project.product.images.medium_tile" 
                                     />
                                 </c-slide>
                             </c-swiper>
@@ -147,7 +149,7 @@
 
                 <div class="row margin-bottom-30" v-if="item.type === 'game_series'" :key="`level-1-${index}`">
                     <div class="col-12">
-                        <c-game-series v-for="(game, index) in item.data.game_series_data" :key="index">
+                        <c-game-series v-for="(game, index) in item.data.list" :key="index">
                             <c-game-description :game="game" />
                             <c-game-includes-list :list="game.products" :showNumber="item.data.showNumber" />
                         </c-game-series>
@@ -156,8 +158,9 @@
 
                 <div class="row margin-bottom-30" v-if="item.type === 'collections_list'" :key="`level-1-${index}`">
                     <div class="col-12">
-                        <c-collection-list title="Get Started"
-                                            description="Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain."
+                        <c-collection-list 
+                            title="Get Started"
+                            description="Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain."
                         >
                             <c-swiper :options="item.data.options" class="padding-10">
                                 <c-slide v-for="(collection, index) in item.data.collections_list" :key="index">
@@ -306,43 +309,10 @@ export default {
         ...mapGetters({
             assets: 'marketplace/assetsArray'
         }),
-        projects() {
-            return this.$store.state.funding.projects
-        },
-        products() {
-            if (this.$store.state.cache.screens['/store'] && this.$store.state.cache.screens['/store'].products)
-                return this.$store.state.cache.screens['/store'].products
-
-            return this.$store.state.marketplace.products
-        },
         sliced() {
             updateLandingImage.bind(this)()
 
             return this.list.slice(0, this.display);
-        },
-        // trending_projects() {
-        //     return this.$store.state.marketplace.trending_projects;
-        // },
-        new_products() {
-            return this.$store.state.marketplace.new_products;
-        },
-        product_news() {
-            return this.$store.state.marketplace.product_news;
-        },
-        main_banner() {
-            return this.$store.state.marketplace.main_banner;
-        },
-        signed_in() {
-            return this.$store.state.application.signed_in;
-        },
-        simulator_mode() {
-            return this.$store.state.application.simulator_mode;
-        },
-        desktop_mode() {
-            return this.$store.state.application.desktop_mode;
-        },
-        developer_mode() {
-            return this.$store.state.application.developer_mode;
         }
     },
     methods: {
