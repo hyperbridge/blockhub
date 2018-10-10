@@ -162,7 +162,7 @@
 
 <script>
     import { mapActions } from 'vuex'
-    
+
     export default {
         name: 'app',
         props: ['data'],
@@ -206,6 +206,7 @@
             }
         },
         mounted() {
+            this.$store.commit('loadTransactions');
             this.loadSettings()
             this.ensureDesktopWelcome()
         },

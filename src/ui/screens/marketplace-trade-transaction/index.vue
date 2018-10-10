@@ -6,7 +6,7 @@
                     <div class="col-12">
                         Marketplace
                         <h2>Trade transaction</h2>
-                        <c-block :title="'Transaction: ' + $route.params.tradeId" class="transaction">
+                        <c-block  v-if="transaction" :title="'Transaction: ' + tradeId" class="transaction">
                             <div class="transaction__block">
                                 <div class="transaction__headings">
                                     <h4>Yours selling offer</h4>
@@ -17,11 +17,11 @@
                                         <div class="assets-grid">
                                             <div
                                                 v-for="(asset, index) in yoursOffer"
-                                                :key="asset"
+                                                :key="index"
                                                 class="assets-grid__asset"
                                                 @click="yoursOffer.splice(index, 1)"
                                             >
-                                                <c-tooltip v-show="asset.id" :delay="30" iconHide>
+                                                <c-tooltip :delay="30" iconHide>
                                                     <c-asset-preview
                                                         slot="tooltip"
                                                         :asset="asset"
@@ -33,20 +33,25 @@
                                         </div>
                                     </div>
                                     <div class="management__inventory-explorer">
-                                        <c-list
-                                            :items="transaction.me.user.inventory"
-                                            @click="yoursOffer.push($event)"
-                                        >
-                                            <c-asset-preview-small
-                                                slot-scope="{ item }"
-                                                :asset="item"
-                                            />
-                                        </c-list>
-                                        <!-- <c-list-submenu :items="inventory.yours">
-                                            <template slot-scope="{ item }">
-                                                {{ item.name }}
-                                            </template>
-                                        </c-list-submenu> -->
+                                        <c-list-submenu :items="inventory.yours" isParent>
+                                            <c-list-submenu
+                                                slot="sublist"
+                                                slot-scope="{ sublist }"
+                                                :items="sublist"
+                                                @click="yoursOffer.push($event)"
+                                            >
+                                                <div
+                                                    class="sublist-menu__assets"
+                                                    slot-scope="{ list }"
+                                                >
+                                                    <c-asset-preview-small
+                                                        slot="item-content"
+                                                        :asset="list[0]"
+                                                    />
+                                                    {{ list.length > 1 ? list.length : '' }}
+                                                </div>
+                                            </c-list-submenu>
+                                        </c-list-submenu>
                                     </div>
                                 </div>
                             </div>
@@ -82,18 +87,37 @@
                                         </div>
                                     </div>
                                     <div class="management__inventory-explorer">
-                                        <c-list
-                                            :items="transaction.me.user.inventory"
-                                            @click="theirOffer.push($event)"
-                                        >
-                                            <c-asset-preview-small
-                                                slot-scope="{ item }"
-                                                :asset="item"
-                                            />
-                                        </c-list>
+                                        <c-list-submenu :items="inventory.their" isParent>
+                                            <c-list-submenu
+                                                slot="sublist"
+                                                slot-scope="{ sublist }"
+                                                :items="sublist"
+                                                @click="theirOffer.push($event)"
+                                            >
+                                                <div
+                                                    class="sublist-menu__assets"
+                                                    slot-scope="{ list }"
+                                                >
+                                                    <c-asset-preview-small
+                                                        slot="item-content"
+                                                        :asset="list[0]"
+                                                    />
+                                                    {{ list.length > 1 ? list.length : '' }}
+                                                </div>
+                                            </c-list-submenu>
+                                        </c-list-submenu>
                                     </div>
                                 </div>
                             </div>
+                            <div class="transaction__actions">
+                                <c-button
+                                    status="info"
+                                    icon_hide
+                                >Update transaction</c-button>
+                            </div>
+                        </c-block>
+                        <c-block v-else :title="'Transaction: ' + tradeId" class="transaction">
+                            <p>Transaction with id <i>{{ tradeId }}</i> doesn't exist</p>
                         </c-block>
                     </div>
                 </div>
@@ -103,9 +127,6 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
-    import assets from '@/db/seed/assets';
-
     export default {
         components: {
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
@@ -115,46 +136,25 @@
             'c-asset-preview': (resolve) => require(['@/ui/components/asset-preview'], resolve),
             'c-asset-preview-small': (resolve) => require(['@/ui/components/asset-preview/small'], resolve),
             'c-exchange-bar': (resolve) => require(['@/ui/components/exchange-bar'], resolve),
-            'c-author': (resolve) => require(['@/ui/components/author'], resolve),
+            'c-author': (resolve) => require(['@/ui/components/author'], resolve)
         },
         data() {
             return {
-                selectedAssets: [
-                ],
-                transaction: {
-                    id: 31,
-                    me: {
-                        selling: [assets[1], assets[0]],
-                        user: {
-                            name: 'San',
-                            img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png',
-                            inventory: assets.slice(3, assets.length)
-                        }
-                    },
-                    contractor: {
-                        selling: [assets[2], assets[4], assets[5]],
-                        user: {
-                            name: 'Satoshi',
-                            img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png',
-                            inventory: assets.slice(0, assets.length - 4)
-                        }
-                    },
-                    updatedAt: '',
-                    createdAt: ''
-                },
                 yoursOffer: [],
                 theirOffer: []
             }
         },
         methods: {
+            addTransactionAsset(asset, target) {
+                const { tradeId } = this;
+                this.$store.commit('addTransactionAsset', { asset, target, tradeId });
+            }
         },
         computed: {
-            ...mapGetters({
-                'assets': 'marketplace/assetsArray'
-            }),
             inventory() {
-                const extractor = target => {
-                    const reduced = this.transaction[target].user.inventory
+                const extractor = (target, offer) => {
+                    const { inventory: originalInv } = this.transaction[target].user;
+                    const reduced = originalInv
                         .reduce((inventory, asset) => {
                             const { product_name } = asset;
                             if (inventory[product_name]) inventory[product_name].push(asset);
@@ -164,10 +164,19 @@
 
                     return Object.keys(reduced)
                         .reduce((inventory, productKey) => {
-                            inventory[productKey] = reduced[productKey].reduce((assets, asset) => {
+                            inventory[productKey] = reduced[productKey].reduce((assets, asset, productAssets) => {
                                 const { name } = asset;
-                                if (assets[name]) assets[name].push(asset);
-                                else assets[name] = [asset];
+
+                                const offerAssets = this[offer].filter(offAsset => offAsset.id === asset.id);
+                                const invAssets = originalInv.filter(invAsset => invAsset.id === asset.id);
+
+                                if (assets[name] && !this[offer].includes(asset)) {
+                                    assets[name].push(asset);
+                                }
+                                else if (offerAssets.length !== invAssets.length) {
+                                    assets[name] = [asset];
+                                }
+
                                 return assets;
                             }, {});
                             return inventory;
@@ -175,8 +184,8 @@
                 }
 
                 return {
-                    yours: extractor('me'),
-                    their: extractor('contractor')
+                    yours: extractor('me', 'yoursOffer'),
+                    their: extractor('contractor', 'theirOffer')
                 };
             },
             price() {
@@ -194,9 +203,15 @@
                     sum: round(yours - their)
                 };
             },
-            assetss() {
-                return this.$store.getters['marketplace/assetsArray'];
-            }
+            tradeId() {
+                return this.$route.params.tradeId;
+            },
+            transaction() {
+                return this.$store.state.assets.transactions
+                    .find(transaction =>
+                        transaction.id === this.tradeId
+                    );
+            },
         },
         mounted() {
             this.yoursOffer = this.transaction.me.selling;
@@ -228,9 +243,14 @@
         }
         .management__inventory-explorer {
             flex: 3;
-            .list-container {
-                // box-shadow: 0 0 25px 0 rgba(1,1,1,.25);
-                // border: 1px solid rgba(255,255,255,.1);
+            .sublist-menu__assets {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            >.list-container {
+                box-shadow: 0 0 25px 0 rgba(1,1,1,.25);
+                border: 1px solid rgba(255,255,255,.1);
             }
         }
     }
@@ -242,6 +262,7 @@
         border-radius: 4px;
         display: flex;
         flex-wrap: wrap;
+        align-content: flex-start;
         padding: 5px;
         margin-right: 30px;
         min-height: 100%;
@@ -255,6 +276,7 @@
         position: relative;
         padding: 4px;
         animation: rotate-in .2s ease;
+        user-select: none;
         .tooltip-universal__wrapper {
             width: 100%;
         }
@@ -286,5 +308,10 @@
                 transform: scale(1) rotate(0);
             }
         }
+    }
+
+    .transaction__actions {
+        margin: 20px 0;
+        display: flex;
     }
 </style>
