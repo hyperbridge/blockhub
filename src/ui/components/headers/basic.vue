@@ -694,10 +694,10 @@ export default {
 
         &:hover {
             .token__count:before {
-                animation: badgeGlimmer ease-out 1;
+                animation: badgeGlimmer ease-out infinite;
                 animation-fill-mode: forwards;
-                animation-duration: .7s;
-                animation-delay: .1s
+                animation-duration: 1s;
+                animation-delay: .2s
             }
         }
     }
@@ -718,8 +718,8 @@ export default {
             display: block;
             position: absolute;
             background: rgba(255,170,50,.5);
-            background: linear-gradient(to right,rgba(255,245,214,0) 0,rgba(255,251,240,.51) 85%,rgba(255,252,244,0) 100%);
-            width: 10px;
+            background: linear-gradient(to right,rgba(255,245,214,0) 0,rgba(255,251,240,.61) 85%,rgba(255,252,244,0) 100%);
+            width: 20px;
             height: 200%;
             top: -10px;
             left: -20px;
