@@ -136,9 +136,9 @@
                                         :image="project.images.medium_tile" 
                                         :description="project.description" 
                                         :funds="project.funds" 
-                                        :productName="project.product.name" 
-                                        :productDeveloper="project.product.developer" 
-                                        :productImage="project.product.images.medium_tile" 
+                                        :productName="project.product && project.product.name" 
+                                        :productDeveloper="project.product && project.product.developer" 
+                                        :productImage="project.product && project.product.images.medium_tile" 
                                     />
                                 </c-slide>
                             </c-swiper>
