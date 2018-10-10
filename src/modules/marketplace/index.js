@@ -28,7 +28,7 @@ const updateState = (savedData, updatedState = {}) => {
         trending_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['trending'] } }) : [],
         top_selling_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }) : [],
         special_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : [],
-        product_news: DB.marketplace ? DB.marketplace.posts.find({ 'target': 'product', 'system_tags': { '$contains': ['news'] } }) : [],
+        product_news: DB.marketplace ? DB.marketplace.posts.find({ 'target': { '$eq': ['product'] }, 'system_tags': { '$contains': ['news'] } }) : [],
     }
 
     const normalizedData = normalize(rawData, {

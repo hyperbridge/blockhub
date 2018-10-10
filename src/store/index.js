@@ -124,13 +124,12 @@ window.BlockHub.importSeedData = () => {
     DB.application.config.data[0].account.current_identity = seed.identities[0]
     DB.application.config.data[0].updates = seed.updates
 
-    DB.marketplace.config.data[0].posts = seed.posts
     DB.marketplace.config.data[0].curator_reviews = seed.curator_reviews
-    DB.marketplace.config.data[0].product_news = seed.product_news
     DB.marketplace.config.data[0].collections = seed.collections
     DB.marketplace.config.data[0].game_series = seed.game_series
     DB.marketplace.assets.data = seed.assets
     DB.marketplace.products.data = seed.products
+    DB.marketplace.posts.data = seed.posts
     // DB.marketplace.config.data[0].top_products = [
     //     seed.products[1],
     //     seed.products[4],
@@ -139,12 +138,12 @@ window.BlockHub.importSeedData = () => {
     // ]
 
     DB.funding.projects.data = seed.projects
-    DB.funding.config.data[0].trending_projects = [
-        seed.projects[1], 
-        seed.projects[4], 
-        seed.projects[2], 
-        seed.projects[3]
-    ]
+    // DB.funding.config.data[0].trending_projects = [
+    //     seed.projects[1], 
+    //     seed.projects[4], 
+    //     seed.projects[2], 
+    //     seed.projects[3]
+    // ]
 
     store.dispatch('marketplace/updateState')
     store.dispatch('funding/updateState')
