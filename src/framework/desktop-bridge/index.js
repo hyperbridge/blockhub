@@ -245,13 +245,23 @@ export const initContextMenuHandler = () => {
 
         let node = e.target
 
-        while (node) {
-            if (node.nodeName.match(/^(input|textarea|p)$/i) || node.isContentEditable) {
-                sendCommand('showContextMenuRequest')
-                break
-            }
-            node = node.parentNode
-        }
+        sendCommand('showContextMenuRequest', {
+            x: e.clientX,
+            y: e.clientY,
+            nodeName: node.nodeName
+        })
+        
+        // while (node) {
+        //     if (node.nodeName.match(/^(input|textarea|p)$/i) || node.isContentEditable) {
+        //         sendCommand('showContextMenuRequest', {
+        //             x: e.clientX,
+        //             y: e.clientY,
+        //             nodeName: node.nodeName
+        //         })
+        //         break
+        //     }
+        //     node = node.parentNode
+        // }
     })
 }
 
