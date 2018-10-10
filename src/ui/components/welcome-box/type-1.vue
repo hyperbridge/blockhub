@@ -5,7 +5,12 @@
         </div>
         <div class="welcome-block__download-block">
             <div class="info">
-                <h4>Blockchain Based Creations for the Masses</h4>
+                <h4 class="font-weight-bold text-uppercase h3">This requires our desktop version</h4>
+                <p class="h4">
+                    Creating an account may not be safe within a browser,
+                    so we build BlockHub it's own fortress,
+                    safer environment for you to o much more!
+                </p>
                 <div class="action d-flex align-items-center">
                     <a :href="defaultDownload.link"
                        class="btn btn-outline-success"
@@ -15,7 +20,7 @@
                         <small>for {{ defaultDownload.text }}</small>
                     </a>
                     <div v-if="downloading">
-                        Downloading now. <a :href="downloading.link">Click here</a> if it doesn't start in 10 seconds.
+                        Downloading now. <a :href="downloading.link">Click here</a><br> if it doesn't start in 10 seconds.
                     </div>
                     <div class="download_info" @click="showAllPlatforms">
                         <h6>Using another OS?</h6>
@@ -150,12 +155,11 @@
     }
     .welcome-block__download-block{
         background: #3D3E5D;
-        padding: 20px;
+        padding: 30px;
         border-radius: 0 0 5px 5px;
         .info{
-            padding: 0 10px 10px;
             text-align: left;
-            max-width: 50%;
+            max-width: 45%;
             h3{
                 font-weight: bold;
                 font-size: 28px;
@@ -208,7 +212,8 @@
     .welcome-block__screen{
         position: absolute;
         top: 0;
-        right: -30px;
+        bottom: 0;
+        right: -50px;
         left: 50%;
         padding: 20px 0 20px 20px;
         display: flex;
