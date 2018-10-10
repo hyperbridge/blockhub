@@ -154,7 +154,7 @@
         }
     }
     .welcome-block__download-block{
-        background: #3D3E5D;
+        background: #3E415C;
         padding: 30px;
         border-radius: 0 0 5px 5px;
         .info{
