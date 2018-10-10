@@ -10,26 +10,23 @@
 
         <!-- PAGE CONTENT WRAPPER -->
         <div class="page__content page__content-invert invert" id="page-content">
-            <div class="loader-block loading loading--w-spinner" v-if="!is_connected">
+            <div class="loader-block" v-if="!is_connected">
                 <div class="loader-block__container">
-                    <div>
-                        <div class="loading-spinner"></div>
-                        <p class="loader-block__message">{{ user_submitted_connection_message.message }}</p>
-                        <p class="loader-block__user">Submitted by <a
-                            :href="`/#/identity/${user_submitted_connection_message.user.id}`">@{{
-                            user_submitted_connection_message.user.name }}</a></p>
-                    </div>
+                    <div class="loader-block__spinner"></div>
 
-                    <h1 class="loader-block__status-code" v-if="connection_status.code">ERROR {{
-                        connection_status.code }}</h1>
+                    <p class="loader-block__message">{{ user_submitted_connection_message.message }}</p>
+                    <p class="loader-block__user">Submitted by <a
+                        :href="`/#/identity/${user_submitted_connection_message.user.id}`">@{{ user_submitted_connection_message.user.name }}</a></p>
 
-                    <div class="loader-block__status-message">
-                        <p>{{ connection_status.message }}</p>
+                    <h1 class="loader-block__status-code" v-if="connection_status.code">ERROR {{ connection_status.code }}</h1>
+
+                    <div class="loader-block__status-message" v-if="connection_status.message">
+                        <p hidden>{{ connection_status.message }}</p>
                         <div>Internet Connection <span class="fa"
-                                                        :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }"></span>
+                            :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }"></span>
                         </div>
                         <div>Server Connection <span class="fa"
-                                                        :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }"></span>
+                            :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }"></span>
                         </div>
                     </div>
 
@@ -534,6 +531,20 @@
         color: #fff;
     }
 
+    .loader-block {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0px;
+        top: 0px;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #dfdfe9;
+        background: rgba(0, 0, 0, 0.3);
+    }
+
     .loader-block .loader-block__container {
         width: 100%;
         height: 100%;
@@ -543,10 +554,26 @@
         font-size: 14px;
     }
 
-    .loader-block .loading-spinner {
+    .loader-block .loader-block__spinner {
+        left: 0px;
+        top: 0px;
+        width: 20px;
+        height: 20px;
+        animation: rotate 500ms infinite linear;
         position: relative;
         zoom: 4;
         margin: 0 auto;
+        &:before{
+            position: absolute;
+            left: 3px;
+            top: 3px;
+            content: " ";
+            width: 14px;
+            height: 14px;
+            border: 2px solid #fff;
+            border-right-color: transparent;
+            border-radius: 7px;
+        }
     }
 
     .loader-block__message {
