@@ -8,10 +8,10 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h3 class="text-yellow">Launch Sale</h3>
-                                    <p>Hyperbridge will begin selling the HBX token on November 11, 2018</p>
+                                    <p>BlockHub will begin selling the HBX token on November 10, 2018</p>
                                 </div>
                                 <div class="banner-action">
-                                    <c-button tag="div" tatus="info" icon_hide size="lg">JOIN NOW</c-button>
+                                    <c-button tag="div" tatus="info" icon_hide size="lg" href="/#/token">JOIN NOW</c-button>
                                 </div>
                             </div>
                         </c-banner>

@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div v-if="!article">
-                Oh now! That article was not found!
+                Oh no, that post wasn't found! Would you <a href="/#/post/create">like to create it</a>?
             </div>
         </div>
     </c-layout>

@@ -33,16 +33,13 @@
                         { to: { path: '/account/identities' }, title: 'Overview' },
                         { to: { path: '/account/new-identity' }, title: 'New Identity' }
                     ],
-                    developer: [
-                        !this.is_developer && { to: { path: '/developer/new' }, title: 'Become a Developer' },
-                        this.is_developer && { to: { path: '/developer' }, title: 'Developer Area' }
-                    ],
+                    developer: this.is_developer ? [ { to: { path: '/developer' }, title: 'Developer Area' } ] : [ { to: { path: '/developer/new' }, title: 'Become a Developer' } ],
                     help: [
-                        { to: { path: '/account/wallets' }, title: 'Creating an account' },
-                        { to: { path: '/account/wallets' }, title: 'Blockchain gaming' },
-                        { to: { path: '/account/wallets' }, title: 'BlockHub interface' },
-                        { to: { path: '/account/wallets' }, title: 'HBX token' },
-                        { to: { path: '/account/wallets' }, title: 'Trading assets' }
+                        { to: { path: '/help/0/article/creating-an-account' }, title: 'Creating an account' },
+                        { to: { path: '/help/0/article/blockchain-gaming' }, title: 'Blockchain gaming' },
+                        { to: { path: '/help/0/article/blockhub-interface' }, title: 'BlockHub interface' },
+                        { to: { path: '/help/0/article/hbx-token' }, title: 'HBX token' },
+                        { to: { path: '/help/0/article/trading-assets' }, title: 'Trading assets' }
                     ],
                     legal: [
                         { to: { path: '/terms' }, title: 'Terms & Conditions' },

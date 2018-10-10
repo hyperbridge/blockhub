@@ -684,6 +684,21 @@ export default {
             color: #fce893;
             margin-left: 3px;
             font-weight: bold;
+            vertical-align: super;
+        }
+
+        &:hover .token__count {
+            background: #f8d553;
+            color: #000 !important;
+        }
+
+        &:hover {
+            .token__count:before {
+                animation: badgeGlimmer ease-out 1;
+                animation-fill-mode: forwards;
+                animation-duration: .7s;
+                animation-delay: .1s
+            }
         }
     }
 
@@ -695,9 +710,20 @@ export default {
         font-size: 16px;
         color: #333;
         font-weight: bold;
-
-        &:hover {
-            color: #000;
+        overflow: hidden;
+        position: relative;
+        
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            background: rgba(255,170,50,.5);
+            background: linear-gradient(to right,rgba(255,245,214,0) 0,rgba(255,251,240,.51) 85%,rgba(255,252,244,0) 100%);
+            width: 10px;
+            height: 200%;
+            top: -10px;
+            left: -20px;
+            transform: rotate(45deg);
         }
     }
 
@@ -709,6 +735,18 @@ export default {
     }
     .invert .horizontal-navigation > ul li {
          background: transparent;
+    }
+
+    @keyframes badgeGlimmer {
+        0% {
+            left: -100%;
+            opacity: .3
+        }
+
+        100% {
+            left: 200%;
+            opacity: 1
+        }
     }
 
 </style>

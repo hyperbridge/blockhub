@@ -1,10 +1,10 @@
 
 <template>
     <div class="game-includes__item">
-        <router-link :to="{ name: 'Product', params: {id: id } }">
+        <router-link :to="{ name: 'Product', params: { id: id } }">
             <c-img :src="image" />
         </router-link>
-        <router-link :to="{ name: 'Product', params: {id: id } }">
+        <router-link :to="{ name: 'Product', params: { id: id } }">
             <h4>{{ name }}</h4>
         </router-link>
         <p>{{ developer }}</p>
