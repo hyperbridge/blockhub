@@ -81,6 +81,18 @@
 <script>
 import { mapGetters } from 'vuex'
 
+
+const updateLandingImage = function() {
+    const frontpage_product = this.$store.state.marketplace.frontpage_product
+
+    if (frontpage_product && frontpage_product.images) {
+        const header = window.document.getElementById('header-bg');
+        const randomImage = Math.floor(Math.random() * frontpage_product.images.preview.length);
+        header.style['background-image'] = 'url(' + frontpage_product.images.preview[randomImage] + ')';
+        header.style['background-size'] = 'cover';
+    }
+}
+
 export default {
     components: {
         'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
@@ -95,7 +107,7 @@ export default {
         list() {
             const result = []
 
-            if (this.$store.state.marketplace.frontpage_product) {
+            if (this.$store.state.marketplace.frontpage_product && this.$store.state.marketplace.frontpage_product.id) {
                 result.push({
                     type: 'frontpage_product',
                     data: this.$store.state.marketplace.frontpage_product
@@ -103,12 +115,11 @@ export default {
             }
 
             result.push({
-                type: 'product_slider',
+                type: 'featured_product_gallery',
                 data: {
                     title: 'Featured',
-                    ref: 'featured_products_sl',
-                    swiper: this.$refs.featured_products_sl && this.$refs.featured_products_sl.swiper,
-                    slidesPerView: 3,
+                    ref: 'featured_product_gallery_sl',
+                    swiper: this.$refs.featured_product_gallery_sl && this.$refs.featured_product_gallery_sl.swiper,
                     products: this.$store.state.marketplace.featured_products
                 }
             })
@@ -285,6 +296,15 @@ export default {
             window.desktopBridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
         }
     },
+    mounted() {
+        updateLandingImage.call(this)
+    },
+    created() {
+        updateLandingImage.call(this)
+    },
+    beforeDestroy() {
+        window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'
+    }
 }
 </script>
 
