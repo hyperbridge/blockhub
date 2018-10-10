@@ -238,6 +238,23 @@ export const initResizeMonitor = () => {
     }, true)
 }
 
+export const initContextMenuHandler = () => {
+    document.body.addEventListener('contextmenu', (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+
+        let node = e.target
+
+        while (node) {
+            if (node.nodeName.match(/^(input|textarea|p)$/i) || node.isContentEditable) {
+                sendCommand('showContextMenuRequest')
+                break
+            }
+            node = node.parentNode
+        }
+    })
+}
+
 export const init = (store, router) => {
     if (!isConnected()) {
         console.log('[DesktopBridge] Not initializing. Reason: not connected to desktop app')
@@ -255,4 +272,5 @@ export const init = (store, router) => {
 
     initCommandMonitor()
     initResizeMonitor()
+    initContextMenuHandler()
 }
