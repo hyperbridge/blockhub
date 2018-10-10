@@ -62,17 +62,16 @@
 
                         <div class="home-tabs">
                             <c-news-list-navigation
-                                :news="item.data.news"
+                                :list="item.data.headings"
                             />
                             <div class="tab-content">
                                 <c-news-list-articles
-                                    v-for="(news, index) in item.data.news"
+                                    v-for="(list, index) in item.data.lists"
                                     :key="index"
-                                    :news="news"
+                                    :articles="list"
                                     :index="index"
                                 />
                             </div>
-                            <p v-if="!item.data.news.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                         </div>
                     </div>
                 </div>
@@ -115,6 +114,7 @@
                                     <c-curator-review  :review="review" />
                                 </c-slide>
                             </c-swiper>
+                            <p v-if="!item.data.reviews.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                         </c-block>
                     </div>
                 </div>
@@ -132,9 +132,15 @@
                             />
                             <c-swiper :options="item.data.options" :ref="`swiper-${index}`">
                                 <c-slide v-for="(project, index) in item.data.projects" :key="index">
-                                    <c-projects-card :project="project" />
+                                    <c-project-card 
+                                        :image="project.images.medium_tile" 
+                                        :description="project.description" 
+                                        :funds="project.funds" 
+                                        :product="project.product" 
+                                    />
                                 </c-slide>
                             </c-swiper>
+                            <p v-if="!item.data.projects.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                         </c-block>
                     </div>
                 </div>
@@ -263,7 +269,7 @@ export default {
         'c-product-card-dynamic': (resolve) => require(['@/ui/components/store/product-card-dynamic'], resolve),
         'c-product-cards': (resolve) => require(['@/ui/components/store/product-cards'], resolve),
         'c-product-slider': (resolve) => require(['@/ui/components/store/product-slider'], resolve),
-        'c-projects-card': (resolve) => require(['@/ui/components/project/card'], resolve),
+        'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
         'c-curator-review': (resolve) => require(['@/ui/components/store/curator-review'], resolve),
         'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
         'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
@@ -277,7 +283,6 @@ export default {
         'c-games-explorer': (resolve) => require(['@/ui/components/store/games-explorer'], resolve),
         'c-assets-explorer': (resolve) => require(['@/ui/components/store/assets-explorer'], resolve),
         'c-assets-list': (resolve) => require(['@/ui/components/assets-list-item'], resolve),
-        'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
         'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve),
         'c-main-banner': (resolve) => require(['@/ui/components/banner'], resolve),
         'c-swiper': swiper,

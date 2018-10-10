@@ -179,10 +179,31 @@ export default {
                 }
             })
 
+            const groupBy = function(xs, key) {
+                return xs.reduce(function(rv, x) {
+                    if (!x[key]) return rv;
+                    (rv[x[key]] = rv[x[key]] || []).push(x);
+                    return rv;
+                }, {}) || null;
+            };
+            
             result.push({
                 type: 'product_news',
                 data: {
-                    news: this.$store.state.marketplace.product_news
+                    headings: Object.values(groupBy(this.$store.state.marketplace.posts, 'target_id')).map(post => {
+                        if (post[0].target_type === 'product') {
+                            const target = this.$store.state.marketplace.products[post[0].target_id]
+
+                            return {
+                                image: target.images.medium_tile,
+                                title: target.name,
+                                developer: target.developer
+                            }
+                        } else {
+                            return undefined
+                        }
+                    }),
+                    lists: Object.values(groupBy(this.$store.state.marketplace.posts, 'target_id'))
                 }
             })
 

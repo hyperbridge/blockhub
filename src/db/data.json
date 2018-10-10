@@ -386,8 +386,7 @@
                 }
             ]
         },
-        "projects": [],
-        "trending_products": []
+        "projects": []
     },
     "marketplace": {
         "ethereum": {
@@ -418,6 +417,7 @@
         "special_products": [],
         "assets": [],
         "products": [],
+        "posts": [],
         "game_series": [],
         "collections": [],
         "curator_reviews": [],

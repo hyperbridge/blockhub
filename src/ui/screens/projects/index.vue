@@ -3,37 +3,6 @@
         <div class="content" id="content">
             <div class="container-fluid">
                 <c-infinite-content :list="list" />
-
-                <!-- <div class="row game-grid">
-                    <div class="col-12">
-                        <h3>Top Projects</h3>
-                        <div class="sl_nav">
-                            <a href="#3" class="nav-prev">
-                                <i class="fas fa-arrow-left"></i>
-                            </a>
-                            <a href="#3" class="nav-next">
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                        <div class="line"></div>
-                    </div>
-                    <div class="col-12 col-lg-4" v-for="(item, index) in projects" v-bind:key="index">
-                        <div class="card invert game-grid__item">
-                            <div class="card-body padding-0">
-                                <a :href="`/#/project/${item.id}`"><c-img class="card-img-top" :src="item.images.medium_tile" /></a>
-                                <h4><a :href="`/#/project/${item.id}`">{{ item.name }}</a></h4>
-                                <p class="card-text">{{ item.short_description }} </p>
-
-                                <c-tags :tags="item.developer_tags"></c-tags>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card invert game-grid__item">
-                        <div class="card-body padding-0">
-                            <h4><a :href="`/#/project/new`">NEW PROJECT</a></h4>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </c-layout>
@@ -57,7 +26,55 @@ export default {
                         slidesPerView: 3,
                         spaceBetween: 15,
                     },
-                    projects: this.$store.state.funding.projects
+                    projects: this.$store.state.funding.trending_projects || []
+                }
+            })
+
+            result.push({
+                type: 'trending_projects_row',
+                data: {
+                    title: 'Top Game Ideas',
+                    options: {
+                        slidesPerView: 3,
+                        spaceBetween: 15,
+                    },
+                    projects: this.$store.state.funding.top_game_ideas || []
+                }
+            })
+
+            result.push({
+                type: 'trending_projects_row',
+                data: {
+                    title: 'Top Content Suggestions',
+                    options: {
+                        slidesPerView: 3,
+                        spaceBetween: 15,
+                    },
+                    projects: this.$store.state.funding.top_content_suggestions || []
+                }
+            })
+
+            result.push({
+                type: 'trending_projects_row',
+                data: {
+                    title: 'Top Item Suggestions',
+                    options: {
+                        slidesPerView: 3,
+                        spaceBetween: 15,
+                    },
+                    projects: this.$store.state.funding.top_item_suggestions || []
+                }
+            })
+
+            result.push({
+                type: 'trending_projects_row',
+                data: {
+                    title: 'Most Popular Games',
+                    options: {
+                        slidesPerView: 3,
+                        spaceBetween: 15,
+                    },
+                    projects: this.$store.state.funding.most_popular_games || []
                 }
             })
 

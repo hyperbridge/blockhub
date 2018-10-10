@@ -1,18 +1,21 @@
 <template>
-    <div class="project-card__item" :class="customClass" v-if="project">
-        <div class="head" v-if="project.game">
+    <div class="project-card__item" :class="customClass">
+        <div class="head" v-if="product">
             <div class="img">
-                <c-img :src="project.game.img"/>
+                <c-img :src="product.image" />
             </div>
             <div class="text">
-                <h4>{{ project.game.title }}</h4>
-                <p>{{ project.game.developer }}</p>
+                <h4>{{ product.title }}</h4>
+                <p>{{ product.developer }}</p>
             </div>
         </div>
-        <c-img :src="project.img"/>
-        <div class="description">{{ project.description }}</div>
-        <c-money-info label="Obtained Funds" :percent="goal_progress" :amount="project.funds.obtained"
-                      :goal="project.funds.goal"/>
+        <c-img :src="image" />
+        <div class="description">{{ description }}</div>
+        <c-money-info label="Obtained Funds" 
+            :percent="goal_progress" 
+            :amount="funds.obtained"
+            :goal="funds.goal"
+        />
         <div class="item-action">
             <c-button status="info" href="/#/project/1" icon_hide>Participate</c-button>
             <c-button status="success" href="/#/project/1" icon_hide>Donate Funds</c-button>
@@ -21,16 +24,22 @@
 </template>
 
 <script>
-import MoneyInfo from '../money-info/index.vue'
-
 export default {
     name: 'project-card',
     components: {
-        'c-money-info': MoneyInfo
+        'c-money-info': (resolve) => require(['@/ui/components/money-info'], resolve),
     },
     props: {
-        project: {
-            type: Object,
+        image: String,
+        description: String,
+        funds: {
+            obtained: Number,
+            goal: Number
+        },
+        product: {
+            image: String,
+            title: String,
+            developer: String
         },
         customClass: {
             type: String,
@@ -38,7 +47,7 @@ export default {
     },
     computed: {
         goal_progress() {
-            const { obtained, goal } = this.project.funds;
+            const { obtained, goal } = this.funds;
             return Math.round(obtained / goal * 100);
         }
     },

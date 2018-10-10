@@ -13,7 +13,8 @@ export let application = {
 export let marketplace = {
     config: null,
     products: null,
-    assets: null
+    assets: null,
+    posts: null
 }
 
 export let funding = {
@@ -53,6 +54,7 @@ export const init = () => {
             marketplace.config = loki.getCollection('marketplaceConfig')
             marketplace.products = loki.getCollection('marketplaceProducts')
             marketplace.assets = loki.getCollection('marketplaceAssets')
+            marketplace.posts = loki.getCollection('marketplacePosts')
             funding.projects = loki.getCollection('fundingProjects')
             funding.config = loki.getCollection('fundingConfig')
         } else {
@@ -60,6 +62,7 @@ export const init = () => {
             let marketplaceConfigData = marketplace.config.data
             let marketplaceProductsData = marketplace.products.data
             let marketplaceAssetsData = marketplace.assets.data
+            let marketplacePostsData = marketplace.posts.data
             let fundingProjectsData = funding.projects.data
             let fundingConfigData = funding.config.data
 
@@ -67,6 +70,7 @@ export const init = () => {
             marketplace.config.chain().remove()
             marketplace.products.chain().remove()
             marketplace.assets.chain().remove()
+            marketplace.posts.chain().remove()
             funding.projects.chain().remove()
             funding.config.chain().remove()
 
@@ -74,6 +78,7 @@ export const init = () => {
             marketplace.config = loki.addCollection('marketplaceConfig')
             marketplace.products = loki.addCollection('marketplaceProducts')
             marketplace.assets = loki.addCollection('marketplaceAssets')
+            marketplace.posts = loki.addCollection('marketplacePosts')
             funding.config = loki.addCollection('fundingConfig')
             funding.projects = loki.addCollection('fundingProjects')
 
@@ -81,6 +86,7 @@ export const init = () => {
             marketplace.config.data = marketplaceConfigData
             marketplace.products.data = marketplaceProductsData
             marketplace.assets.data = marketplaceAssetsData
+            marketplace.posts.data = marketplacePostsData
             funding.projects.data = fundingProjectsData
             funding.config.data = fundingConfigData
             
@@ -109,6 +115,7 @@ export const loadDefault = () => {
     marketplace.config = loki.addCollection('marketplaceConfigDefault')
     marketplace.products = loki.addCollection('marketplaceProductsDefault')
     marketplace.assets = loki.addCollection('marketplaceAssetsDefault')
+    marketplace.posts = loki.addCollection('marketplacePostsDefault')
     funding.config = loki.addCollection('fundingConfigDefault')
     funding.projects = loki.addCollection('fundingProjectsDefault')
 
@@ -121,6 +128,7 @@ export const loadDefault = () => {
         updateCollection(marketplace.config, data.marketplace)
         updateCollection(marketplace.products, data.marketplace.products)
         updateCollection(marketplace.assets, data.marketplace.assets)
+        updateCollection(marketplace.posts, data.marketplace.posts)
         updateCollection(funding.projects, data.funding.projects)
         updateCollection(funding.config, data.funding)
     }
@@ -149,6 +157,7 @@ export const clean = () => {
     marketplace.config.chain().remove()
     marketplace.products.chain().remove()
     marketplace.assets.chain().remove()
+    marketplace.posts.chain().remove()
     funding.projects.chain().remove()
     funding.config.chain().remove()
 }

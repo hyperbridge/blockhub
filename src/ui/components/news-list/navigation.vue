@@ -1,6 +1,6 @@
 <template>
     <ul class="nav custom-tabs w-100" id="myTab" role="tablist">
-        <li class="nav-item" v-for="(item, index) in news" :key="index" v-if="index <= 3">
+        <li class="nav-item" v-for="(item, index) in list" :key="index" v-if="index <= 3">
             <a
                 class="nav-link"
                 :class="[ index === 0 ? 'active' : '' ]"
@@ -11,11 +11,11 @@
                 data-toggle="tab"
             >
                 <div class="img">
-                    <c-img :src="item.game.img"/>
+                    <c-img :src="item.image" />
                 </div>
                 <div class="text">
-                    <h4>{{ item.game.title }}</h4>
-                    <p>{{ item.game.developer }}</p>
+                    <h4>{{ item.title }}</h4>
+                    <p>{{ item.developer }}</p>
                 </div>
             </a>
         </li>
@@ -26,7 +26,7 @@
 export default {
     name: 'c-news-list-navigation',
     props: {
-        news : Array
+        list: Array
     }
 }
 </script>
