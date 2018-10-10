@@ -274,7 +274,7 @@
         props: {
             navigationKey: {
                 type: String,
-                required: true
+                required: false
             },
             showLeftPanel: {
                 type: Boolean,
