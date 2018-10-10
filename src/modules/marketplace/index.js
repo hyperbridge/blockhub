@@ -21,7 +21,6 @@ const updateState = (savedData, updatedState = {}) => {
         posts: DB.marketplace.config.data[0].posts,
         game_series: DB.marketplace.config.data[0].game_series,
         frontpage_product: DB.marketplace ? DB.marketplace.products.findOne({ 'system_tags': { '$contains': ['frontpage'] } }) : {},
-        frontpage_product: DB.marketplace ? DB.marketplace.products.findOne({ 'system_tags': { '$contains': ['frontpage'] } }) : {},
         new_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['new'] } }) : [],
         featured_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['featured'] } }) : [],
         upcoming_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['upcoming'] } }) : [],

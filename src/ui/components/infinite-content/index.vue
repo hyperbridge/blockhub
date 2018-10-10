@@ -26,6 +26,23 @@
                     </div>
                 </div>
 
+                <div class="row margin-bottom-30" v-if="item.type === 'featured_product_gallery'" :key="`level-1-${index}`">
+                    <div class="col-12">
+                        <c-main-banner class="margin-bottom-30" 
+                            :image="{ src: item.data.products[0].images.preview[0], position: 'center' }" 
+                            :logo="{ src: item.data.products[0].images.icon, position: 'left bottom', size: 'lg' }" 
+                            :title="item.data.products[0].name"
+                            :href="`/#/product/${item.data.products[0].id}`"
+                            buttonText="Check it out"
+                            v-if="item.data.products.length" 
+                        />
+
+                        <c-block class="margin-bottom-30" :title="item.data.title" :noGutter="true" :onlyContentBg="true" :bgGradient="true" v-else>
+                            <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
+                        </c-block>
+                    </div>
+                </div>
+
                 <div class="row" v-if="item.type === 'product_slider'" :key="`level-1-${index}`">
                     <div class="col-12">
                         <c-product-slider :products="item.data.products" :title="item.data.title" :maxPerView="item.data.slidesPerView" v-if="item.data.products.length" />
@@ -172,12 +189,6 @@
                 </div>
 
 
-                <div class="row margin-bottom-30" v-if="item.type === 'main_banner'" :key="`level-1-${index}`">
-                    <div class="col-12">
-                        <c-main-banner class="margin-bottom-30" :image="main_banner.img" :logo="main_banner.logo" />
-                    </div>
-                </div>
-
                 <div class="row margin-bottom-30" v-if="item.type === 'new_releases_grid'" :key="`level-1-${index}`">
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
                         <c-block title="New Releases" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
@@ -242,17 +253,6 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 import 'swiper/dist/css/swiper.css'
 
-const updateLandingImage = function() {
-    const frontpage_product = this.$store.state.marketplace.frontpage_product
-
-    if (frontpage_product && frontpage_product.images) {
-        const header = window.document.getElementById('header-bg');
-        const randomImage = Math.floor(Math.random() * frontpage_product.images.preview.length);
-        header.style['background-image'] = 'url(' + frontpage_product.images.preview[randomImage] + ')';
-        header.style['background-size'] = 'cover';
-    }
-}
-
 export default {
     props: {
         list: {
@@ -310,8 +310,6 @@ export default {
             assets: 'marketplace/assetsArray'
         }),
         sliced() {
-            updateLandingImage.bind(this)()
-
             return this.list.slice(0, this.display);
         }
     },
@@ -337,22 +335,13 @@ export default {
                     }
                 }
             };
-            console.log('done scroll')
         }
     },
     mounted() {
         $(this.$refs.trendingSlider).ionRangeSlider();
 
-        updateLandingImage.call(this)
-
         this.scroll();
     },
-    created() {
-        updateLandingImage.call(this)
-    },
-    beforeDestroy() {
-        window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'
-    }
 }
 </script>
 
