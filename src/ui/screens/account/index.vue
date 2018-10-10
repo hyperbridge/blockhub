@@ -55,7 +55,7 @@
                                             <h4>Identities</h4>
                                             <div class="stat">
                                                 <div>
-                                                    12 owned by your account
+                                                    {{ account.identities.length }} owned by your account
                                                 </div>
                                             </div>
                                             <p>
