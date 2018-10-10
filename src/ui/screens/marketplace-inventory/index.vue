@@ -13,6 +13,7 @@
                                 >
                                     Un/Select all</c-button>
                             </div>
+                            <c-asset-comparison :assets="assets.slice(0, 2)"/>
                             <div class="assets-grid">
                                 <div
                                     v-if="assets.length"
@@ -49,7 +50,8 @@
         components: {
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-tooltip': (resolve) => require(['@/ui/components/tooltips/universal'], resolve),
-            'c-asset-preview': (resolve) => require(['@/ui/components/asset-preview'], resolve)
+            'c-asset-preview': (resolve) => require(['@/ui/components/asset-preview'], resolve),
+            'c-asset-comparison': (resolve) => require(['@/ui/components/asset-comparison'], resolve),
         },
         data() {
             return {
