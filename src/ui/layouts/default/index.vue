@@ -16,12 +16,11 @@
                         <div class="loading-spinner"></div>
                         <p class="loader-block__message">{{ user_submitted_connection_message.message }}</p>
                         <p class="loader-block__user">Submitted by <a
-                            :href="`/#/identity/${user_submitted_connection_message.user.id}`">@{{
-                            user_submitted_connection_message.user.name }}</a></p>
+                            :href="`/#/identity/${user_submitted_connection_message.user.id}`">
+                            @{{ user_submitted_connection_message.user.name }}</a></p>
                     </div>
 
-                    <h1 class="loader-block__status-code" v-if="connection_status.code">ERROR {{
-                        connection_status.code }}</h1>
+                    <h1 class="loader-block__status-code" v-if="connection_status.code">ERROR {{ connection_status.code }}</h1>
 
                     <div class="loader-block__status-message">
                         <p>{{ connection_status.message }}</p>

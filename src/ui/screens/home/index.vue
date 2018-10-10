@@ -20,7 +20,8 @@
 
                 <div class="row">
                     <div class="col-12 mb-4" v-if="!desktop_mode">
-                        <c-download-block />
+                        <!--<c-download-block />-->
+                        <c-welcome-box />
                     </div>
                     <div class="col-12 mb-4" v-if="['preview', 'staging', 'local'].includes(mode)">
                         <div class="card invert">
@@ -87,6 +88,7 @@ export default {
         'c-infinite-content': (resolve) => require(['@/ui/components/infinite-content'], resolve),
         'c-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
         'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve),
+        'c-welcome-box': (resolve) => require(['@/ui/components/welcome-box/type-1'], resolve)
     },
     computed: {
         ...mapGetters({
