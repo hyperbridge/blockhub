@@ -540,7 +540,12 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/marketplace-inventory'], resolve),
             children: [
                 {
+                    path: '',
+                    component: (resolve) => require(['@/ui/screens/marketplace-inventory/main'], resolve),
+                },
+                {
                     path: 'compare',
+                    name: 'Compare Assets',
                     component: (resolve) => require(['@/ui/screens/marketplace-inventory/compare'], resolve),
                 }
             ]
