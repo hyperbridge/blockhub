@@ -178,6 +178,11 @@ const router = new Router({
             }
         },
         {
+            path: '/account/verification/callback',
+            name: 'Account Verification',
+            component: (resolve) => require(['@/ui/screens/account-verification-callback'], resolve)
+        },
+        {
             path: '/account/wallets',
             name: 'Wallets',
             component: (resolve) => require(['@/ui/screens/account-wallets'], resolve),
