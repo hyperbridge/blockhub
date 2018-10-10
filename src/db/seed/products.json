@@ -116,11 +116,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 4,
             "items": [
@@ -226,11 +221,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -377,11 +367,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 5,
             "items": [
@@ -487,11 +472,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -524,7 +504,7 @@
     {
         "id": 5,
         "name": "Teeworlds",
-        "price": 9.99,
+        "price": 0,
         "old_price": 14.99,
         "images": {
             "header": null,
@@ -698,11 +678,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -849,11 +824,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -980,11 +950,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -1093,11 +1058,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -1238,11 +1198,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -1387,11 +1342,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -1557,13 +1507,8 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
-            "overall": 3.5,
+            "overall": 5,
             "items": [
                 {
                     "name": "Dan Dyer",
@@ -1688,11 +1633,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -1819,11 +1759,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -1930,11 +1865,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2020,11 +1950,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2126,11 +2051,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2235,11 +2155,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2353,11 +2268,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2479,11 +2389,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2626,11 +2531,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2803,11 +2703,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2940,11 +2835,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -3060,11 +2950,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [
@@ -3212,11 +3097,6 @@
         "downloads": 0,
         "plans": [],
         "frequently_traded_assets": [],
-        "sale_box": {
-            "title": null,
-            "price": 0,
-            "link": null
-        },
         "rating": {
             "overall": 3.5,
             "items": [

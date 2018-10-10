@@ -197,23 +197,13 @@
                             <div class="navigation">
                                 <ul>
                                     <li class="title">TOP 5</li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Joe's Adventure</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">The Mission</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Gym with Tim</span>
+                                    <li v-for="(product, index) in $store.state.marketplace.top_5" :key="index">
+                                        <a :href="`/#/product/${product.id}`">
+                                            <span class="text">{{ product.name }}</span>
                                         </a>
                                     </li>
                                     <li class="more">
-                                        <a href="/#/">
+                                        <a href="/#/search">
                                             <span class="text">MORE...</span>
                                         </a>
                                     </li>
@@ -222,48 +212,13 @@
                             <div class="navigation">
                                 <ul>
                                     <li class="title">TOP FREE</li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Joe's Adventure</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">The Mission</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Gym with Tim</span>
+                                    <li v-for="(product, index) in $store.state.marketplace.top_free" :key="index">
+                                        <a :href="`/#/product/${product.id}`">
+                                            <span class="text">{{ product.name }}</span>
                                         </a>
                                     </li>
                                     <li class="more">
-                                        <a href="/#/">
-                                            <span class="text">MORE...</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="navigation">
-                                <ul>
-                                    <li class="title">TOP RATED</li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Joe's Adventure</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">The Mission</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Gym with Tim</span>
-                                        </a>
-                                    </li>
-                                    <li class="more">
-                                        <a href="/#/">
+                                        <a href="/#/search">
                                             <span class="text">MORE...</span>
                                         </a>
                                     </li>
