@@ -100,6 +100,14 @@
                                 <p><span class="fa fa-edit"></span>Edit</p>
                             </button>
                         </li>
+                        <li v-if="signed_in" class="token">
+                            <a href="/#/token">
+                                <span class="token__count">
+                                    0 <span class="icon fa fa-coins"></span>
+                                </span>
+                                <span class="text">Tokens</span>
+                            </a>
+                        </li>
                         <li v-if="signed_in">
                             <a href="/#/account">
                                 <span class="icon fa fa-user"></span>
@@ -664,6 +672,33 @@ export default {
         padding: 0;
         margin-right: 20px;
         font-weight: 100;
+    }
+
+    .token {
+        .fa { 
+            color: #333 !important;
+        }
+
+        .text {
+            float: none;
+            color: #fce893;
+            margin-left: 3px;
+            font-weight: bold;
+        }
+    }
+
+    .token__count {
+        display: inline-block;
+        background: #fce488;
+        border-radius: 10px;
+        padding: 1px 8px;
+        font-size: 16px;
+        color: #333;
+        font-weight: bold;
+
+        &:hover {
+            color: #000;
+        }
     }
 
 
