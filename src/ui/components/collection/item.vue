@@ -113,6 +113,32 @@
             display: flex;
             justify-content: center;
             align-items: center;
+
+            overflow: hidden;
+            position: relative;
+            
+            &:hover {
+                &:after {
+                    animation: badgeGlimmer ease-out infinite;
+                    animation-fill-mode: forwards;
+                    animation-duration: 0.8s;
+                    animation-delay: .2s
+                }
+            }
+
+            &:after {
+                content: "";
+                display: block;
+                position: absolute;
+                background: rgba(255,170,50,.5);
+                background: linear-gradient(to right,rgba(255,245,214,0) 0,rgba(255,251,240,.41) 85%,rgba(255,252,244,0) 100%);
+                width: 20px;
+                height: 200%;
+                top: -50%;
+                left: -100%;
+                transform: rotate(45deg);
+            }
+
             &:before{
                 content: "";
                 padding-top: 100%;
@@ -154,6 +180,19 @@
             i{
                 margin-right: 5px;
             }
+        }
+    }
+
+
+    @keyframes badgeGlimmer {
+        0% {
+            left: -100%;
+            opacity: .3
+        }
+
+        100% {
+            left: 200%;
+            opacity: 1
         }
     }
 </style>
