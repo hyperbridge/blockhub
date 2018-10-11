@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="welcome-block__screen">
-            <c-img src="/static/img/welcome-preview.png" />
+            <c-img src="/static/img/welcome-box.png" />
         </div>
     </div>
 </template>
@@ -164,12 +164,12 @@
         }
     }
     .welcome-block__download-block{
-        background: #3E415C;
-        padding: 30px;
         border-radius: 0 0 5px 5px;
+        overflow: hidden;
         .info{
             text-align: left;
-            max-width: 45%;
+            background: #3E415C;
+            padding: 30px 50% 30px 30px;
             h3{
                 font-weight: bold;
                 font-size: 28px;
@@ -217,6 +217,8 @@
         }
         .other_options {
             text-align: left;
+            background: #393b54;
+            padding: 20px;
         }
     }
     .welcome-block__screen{
