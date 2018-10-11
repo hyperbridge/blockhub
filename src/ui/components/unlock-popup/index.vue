@@ -1,5 +1,5 @@
 <template>
-    <c-popup :activated="activated" type="custom" ref="modal" width="250">
+    <c-popup :activated="activated" type="custom" ref="modal" width="250" @close="quit()">
         <div slot="custom_close" hidden></div>
         <div class="unlock-modal" slot="custom_content">
             <div class="tab-container">
@@ -30,10 +30,6 @@
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
             'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
             'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
-        },
-        data() {
-            return {
-            }
         },
         methods: {
             unlock() {

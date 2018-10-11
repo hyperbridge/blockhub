@@ -5,7 +5,7 @@
             {{ title }}
         </div>
         <div class="app-header__bar-right">
-            <button type="button" @click="$emit('close')" aria-label="Close">
+            <button type="button" @click.prevent="closeWindow" aria-label="Close">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -16,10 +16,17 @@
     export default {
         name: 'slim-header',
         props: {
-            title:{
+            title: {
                 type: String,
                 default: 'BlockHub'
             }
+        },
+        methods: {
+            closeWindow() {
+                const { BrowserWindow } = window.require('electron').remote
+                let browserWindow = BrowserWindow.getFocusedWindow()
+                browserWindow.close()
+            },
         }
     }
 </script>
@@ -36,7 +43,7 @@
     }
     .app-header__top-bar {
         max-height: 60px;
-        min-height: 15px;
+        min-height: 11px;
         padding-bottom: 10px;
         height: auto;
         width: 100vw;
@@ -54,10 +61,9 @@
         left: 0;
         height: 30px;
         line-height: 30px;
-        font-weight: bold;
         min-width: 60px;
         padding: 0 10px 0 35px;
-        font-size: 15px;
+        font-size: 17px;
         color: #3D3E5D;
         z-index: 13;
         background: url("../../../assets/img/slim-logo.png") no-repeat #fff;

@@ -3,8 +3,8 @@
     <div class="page page--w-header page--w-container">
         <!-- PAGE HEADER -->
         <transition name="slideDown" v-if="initialized">
-            <c-header :isLoader="loadingState"/>
-            <!--<c-slim-header :isLoader="loadingState"/>-->
+            <c-header :isLoader="loadingState" v-if="!slimMode" />
+            <c-slim-header :isLoader="loadingState" v-if="slimMode" :title="headerText" />
         </transition>
         <!-- //END PAGE HEADER -->
 
@@ -300,6 +300,16 @@
             showRightPanel: {
                 type: Boolean,
                 default: true,
+                required: false
+            },
+            slimMode: {
+                type: Boolean,
+                default: false,
+                required: false
+            },
+            headerText: {
+                type: String,
+                default: 'BlockHub',
                 required: false
             }
         },
