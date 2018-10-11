@@ -281,6 +281,7 @@
 
 <script>
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
+    import { debouncer } from '@/mixins'
 
     import 'swiper/dist/css/swiper.css'
 
@@ -301,6 +302,7 @@
                 required: false
             }
         },
+        mixins: [debouncer],
         components: {
             'c-header': (resolve) => require(['@/ui/components/headers/basic'], resolve),
             'c-slim-header': (resolve) => require(['@/ui/components/headers/slim'], resolve),
@@ -386,7 +388,7 @@
                     loop: false,
                 },
                 notifPopup: {},
-                scrollMoreDirection: ''
+                scrollMoreDirection: 'down'
             }
         },
         updated() {
@@ -425,21 +427,19 @@
             },
             scrollSidebarDown(){
                 $('#scroll_sidebar').animate({scrollTop: '+=100', duration: '150'});
-                if($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight() >= $('#scroll_sidebar')[0].scrollHeight) {
-                    this.scrollMoreDirection = 'up';
-                }
+                this.checkScrollButton()
             },
             scrollSidebarUp(){
                 $('#scroll_sidebar').animate({scrollTop: '-=500', duration: '150'});
-                if($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight() <= $('#scroll_sidebar')[0].scrollHeight) {
-                    this.scrollMoreDirection = 'down';
-                }
+                this.checkScrollButton()
             },
             checkScrollButton(){
-                if (this.$refs.scroll_sidebar.scrollHeight > this.$refs.scroll_sidebar.offsetHeight)
+                // Change the scroll direction when it hits the last 10px of the sidebar
+                if(($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight()) >= ($('#scroll_sidebar')[0].scrollHeight - 10)) {
+                    this.scrollMoreDirection = 'up';
+                } else {
                     this.scrollMoreDirection = 'down';
-                else
-                    this.scrollMoreDirection = null;
+                }
             }
         },
         mounted: function () {
@@ -451,7 +451,11 @@
                     this.initialized = BlockHub.initialized = true
 
                     // check sidebar button
-                    this.checkScrollButton()
+                    $(this.$refs.scroll_sidebar).scroll(() => {
+                        this.debounce(() => {
+                            this.checkScrollButton()
+                        }, 250)
+                    })
                 }, 3000) // TODO: remove arbitrary delay
             })
         }
