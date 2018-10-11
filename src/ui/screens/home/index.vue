@@ -8,10 +8,10 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h3 class="text-yellow">Launch Sale</h3>
-                                    <p>Hyperbridge will begin selling the HBX token on November 11, 2018</p>
+                                    <p>BlockHub will begin selling the HBX token on November 10, 2018</p>
                                 </div>
                                 <div class="banner-action">
-                                    <c-button tag="div" tatus="info" icon_hide size="lg">JOIN NOW</c-button>
+                                    <c-button tag="div" tatus="info" icon_hide size="lg" href="/#/token">JOIN NOW</c-button>
                                 </div>
                             </div>
                         </c-banner>
@@ -20,7 +20,7 @@
 
                 <div class="row">
                     <div class="col-12 mb-4" v-if="!desktop_mode">
-                        <c-download-block />
+                        <c-welcome-box />
                     </div>
                     <div class="col-12 mb-4" v-if="['preview', 'staging', 'local'].includes(mode)">
                         <div class="card invert">
@@ -81,12 +81,25 @@
 <script>
 import { mapGetters } from 'vuex'
 
+
+const updateLandingImage = function() {
+    const frontpage_product = this.$store.state.marketplace.frontpage_product
+
+    if (frontpage_product && frontpage_product.images) {
+        const header = window.document.getElementById('header-bg');
+        const randomImage = Math.floor(Math.random() * frontpage_product.images.preview.length);
+        header.style['background-image'] = 'url(' + frontpage_product.images.preview[randomImage] + ')';
+        header.style['background-size'] = 'cover';
+    }
+}
+
 export default {
     components: {
         'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
         'c-infinite-content': (resolve) => require(['@/ui/components/infinite-content'], resolve),
         'c-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
         'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve),
+        'c-welcome-box': (resolve) => require(['@/ui/components/welcome-box'], resolve)
     },
     computed: {
         ...mapGetters({
@@ -95,7 +108,7 @@ export default {
         list() {
             const result = []
 
-            if (this.$store.state.marketplace.frontpage_product) {
+            if (this.$store.state.marketplace.frontpage_product && this.$store.state.marketplace.frontpage_product.id) {
                 result.push({
                     type: 'frontpage_product',
                     data: this.$store.state.marketplace.frontpage_product
@@ -103,12 +116,11 @@ export default {
             }
 
             result.push({
-                type: 'product_slider',
+                type: 'featured_product_gallery',
                 data: {
                     title: 'Featured',
-                    ref: 'featured_products_sl',
-                    swiper: this.$refs.featured_products_sl && this.$refs.featured_products_sl.swiper,
-                    slidesPerView: 3,
+                    ref: 'featured_product_gallery_sl',
+                    swiper: this.$refs.featured_product_gallery_sl && this.$refs.featured_product_gallery_sl.swiper,
                     products: this.$store.state.marketplace.featured_products
                 }
             })
@@ -215,43 +227,28 @@ export default {
                         slidesPerView: 3,
                         spaceBetween: 15,
                     },
-                    projects: this.$store.state.funding.projects
+                    projects: this.$store.state.funding.trending_projects
                 }
             })
 
             result.push({
                 type: 'game_series',
                 data: {
-                    game_series_data: this.$store.state.marketplace.game_series,
+                    list: this.$store.state.marketplace.game_series,
                     showNumber: 3
                 }
             })
 
             return result
         },
+        // products() {
+        //     if (this.$store.state.cache.screens['/store'] && this.$store.state.cache.screens['/store'].products)
+        //         return this.$store.state.cache.screens['/store'].products
+
+        //     return this.$store.state.marketplace.products
+        // },
         mode() {
             return this.$store.state.application.mode;
-        },
-        projects() {
-            return this.$store.state.funding.projects
-        },
-        products() {
-            if (this.$store.state.cache.screens['/store'] && this.$store.state.cache.screens['/store'].products)
-                return this.$store.state.cache.screens['/store'].products
-
-            return this.$store.state.marketplace.products
-        },
-        new_products() {
-            return this.$store.state.marketplace.new_products;
-        },
-        game_series() {
-            return this.$store.state.marketplace.game_series;
-        },
-        product_news() {
-            return this.$store.state.marketplace.product_news;
-        },
-        main_banner() {
-            return this.$store.state.marketplace.main_banner;
         },
         signed_in() {
             return this.$store.state.application.signed_in;
@@ -300,6 +297,15 @@ export default {
             window.desktopBridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
         }
     },
+    mounted() {
+        updateLandingImage.call(this)
+    },
+    created() {
+        updateLandingImage.call(this)
+    },
+    beforeDestroy() {
+        window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'
+    }
 }
 </script>
 

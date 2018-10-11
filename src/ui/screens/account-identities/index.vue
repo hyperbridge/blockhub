@@ -175,9 +175,6 @@
         },
         data() {
             return {
-                wallets: [],
-                user: {},
-                identities: this.$store.state.application.identities || [],
                 newIdentity: {
                     name: '',
                     wallet: '',
@@ -239,8 +236,8 @@
             }
         },
         computed: {
-            networkIdentites() {
-                return this.$store.state.application.identities;
+            identities() {
+                return this.$store.state.application.account.identities;
             },
             defaultIdentity() {
                 return this.identities.find(identity => identity.default);

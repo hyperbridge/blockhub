@@ -13,6 +13,10 @@ const updateState = (savedData, updatedState = {}) => {
         ...rawData,
         ...savedData,
         ...updatedState,
+        status: {
+            code: null,
+            message: null
+        },
         account: DB.application.config.data[0].account,
         darklaunch_flags: DB.application.config.data[0].darklaunch_flags
     }
@@ -85,7 +89,7 @@ export const actions = {
                 store.commit('activateModal', 'login')
             }
         } else {
-            store.commit('activateModal', 'download')
+            store.commit('activateModal', 'welcome')
         }
     },
     setEditorMode(store, payload) {
@@ -146,11 +150,16 @@ export const actions = {
 
         function processRequest(e) {
             if (xhr.readyState == 4) {
+                try {
                 if (xhr.status >= 200 && xhr.status < 304) {
                     store.commit('setInternetConnection', { connected: true, message: "Connected." })
                     store.state.connection.datasource = true // TEMP
                 } else {
                     store.commit('setInternetConnection', { connected: false, message: "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection." })
+                    }
+
+                } catch (e) {
+                    
                 }
             }
         }
@@ -185,7 +194,7 @@ export const mutations = {
     },
     setInternetConnection(state, payload) {
         state.connection.internet = payload.connected
-        state.connection_message = payload.message
+        state.connection.status.message = payload.message
     },
     setSimulatorMode(state, payload) {
         state.simulator_mode = payload

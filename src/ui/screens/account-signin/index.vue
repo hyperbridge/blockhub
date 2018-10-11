@@ -39,6 +39,8 @@
                                     <a href="#" class="btn btn-success" @click="signIn()">Go</a>
                                 </div>
                             </div>
+                                        <c-button @click="exportAccountFile">Download Account File</c-button>
+                                        <c-button @click="importAccountFile">Import Account File</c-button>
                         </div>
                     </div>
                 </div>
@@ -49,16 +51,21 @@
 
 
 <script>
+    import * as DesktopBridge from '@/framework/desktop-bridge'
+
     export default {
         components: {
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
         },
         methods: {
-          signIn() {
-            this.$store.dispatch('application/signIn')
+            signIn() {
+                this.$store.dispatch('application/signIn')
 
-            this.$router.push('/')
-          }
+                this.$router.push('/')
+            },
+            importAccountFile() {
+                DesktopBridge.sendCommand('importAccountFileRequest')
+            }
         }
     }
 </script>

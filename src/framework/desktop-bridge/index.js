@@ -1,6 +1,5 @@
 import * as DB from '@/db'
 
-
 export let config = {
 }
 
@@ -131,7 +130,12 @@ export const setAccountRequest = async (data) => {
 
 export const sendCommand = async (key, data = {}, peer = null, responseId = null) => {
     if (!isConnected()) {
-        console.log('[DesktopBridge] Cant send command. Reason: not connected to desktop app')
+        console.log('[DesktopBridge] Cant send command. Reason: not connected to desktop app', key)
+
+        // Ignore startup commands
+        if (key !== 'initProtocol') {
+            local.store.commit('application/activateModal', 'welcome')
+        }
 
         return false
     }
@@ -206,7 +210,14 @@ export const runCommand = async (cmd, meta = {}) => {
 
             await sendCommand('quitAndInstall')
         } else if (cmd.key === 'systemError') {
-            console.warn('[DesktopBridge] Received system error from desktop', cmd.message)
+            console.warn('[DesktopBridge] Received system error from desktop', cmd.data)
+
+            BlockHub.Notifications.error(cmd.data, 'Desktop Error', {
+                timeout: 5000,
+                pauseOnHover: true
+            })
+        } else if (cmd.key === 'navigate') {
+            local.router.push(cmd.data)
         } else {
             console.warn('[DesktopBridge] Unhandled command:', cmd)
         }
@@ -232,7 +243,38 @@ export const initResizeMonitor = () => {
     }, true)
 }
 
+export const initContextMenuHandler = () => {
+    document.body.addEventListener('contextmenu', (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+
+        let node = e.target
+
+        sendCommand('showContextMenuRequest', {
+            x: e.clientX,
+            y: e.clientY,
+            nodeName: node.nodeName
+        })
+        
+        // while (node) {
+        //     if (node.nodeName.match(/^(input|textarea|p)$/i) || node.isContentEditable) {
+        //         sendCommand('showContextMenuRequest', {
+        //             x: e.clientX,
+        //             y: e.clientY,
+        //             nodeName: node.nodeName
+        //         })
+        //         break
+        //     }
+        //     node = node.parentNode
+        // }
+    })
+}
+
 export const init = (store, router) => {
+    local.store = store
+    local.router = router
+    local.bridge = window.desktopBridge
+
     if (!isConnected()) {
         console.log('[DesktopBridge] Not initializing. Reason: not connected to desktop app')
 
@@ -241,12 +283,9 @@ export const init = (store, router) => {
 
     console.log('[DesktopBridge] Initializing')
 
-    local.store = store
-    local.router = router
-    local.bridge = window.desktopBridge
-
     sendCommand('init', 1)
 
     initCommandMonitor()
     initResizeMonitor()
+    initContextMenuHandler()
 }

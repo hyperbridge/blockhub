@@ -31,10 +31,6 @@
             'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
             'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
         },
-        data() {
-            return {
-            }
-        },
         methods: {
             unlock() {
                 $(this.$refs.submit.$el).removeClass('wrong')

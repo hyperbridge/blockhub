@@ -36,6 +36,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-12">
+                                        <c-button @click="exportAccountFile">Download Account File</c-button>
+                                        <c-button @click="importAccountFile">Import Account File</c-button>
+                                    </div>
                                 </div>
                             </form>
                         </c-block>
@@ -51,7 +55,7 @@
                                             <h4>Identities</h4>
                                             <div class="stat">
                                                 <div>
-                                                    12 owned by your account
+                                                    {{ account.identities.length }} owned by your account
                                                 </div>
                                             </div>
                                             <p>
@@ -140,6 +144,8 @@
 </template>
 
 <script>
+    import * as DesktopBridge from '@/framework/desktop-bridge'
+
     export default {
         components: {
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
@@ -159,6 +165,14 @@
             wallets: [],
             expert_mode: false
         }),
+        methods: {
+            exportAccountFile() {
+                DesktopBridge.sendCommand('exportAccountFileRequest')
+            },
+            importAccountFile() {
+                DesktopBridge.sendCommand('importAccountFileRequest')
+            }
+        }
     }
 </script>
 

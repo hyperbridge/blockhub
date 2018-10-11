@@ -68,7 +68,7 @@ initializer().then(() => {
   console.log('[BlockHub] Loading app...')
 
   /* eslint-disable no-new */
-  new Vue({
+  BlockHub.Vue = new Vue({
       el: '#app',
       router,
       store,
@@ -77,6 +77,7 @@ initializer().then(() => {
       components: {
         'app': app
       }
-  });
+  })
 
+  BlockHub.Notifications = BlockHub.Vue.$snotify
 })

@@ -110,19 +110,21 @@ a.btn-outline-white {
 
 
 
-
+.page-aside .navigation, .page-sidepanel .navigation {
+    padding: 10px 10px 10px 30px;
+}
 
 .page-aside, .page-sidepanel {
-    padding: 10px 10px 10px 30px;
+    padding: 0;
     h3 {
         font-size: 30px;
         opacity: 0.4;
     }
 }
 
-.page-aside::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border: none;
+#scroll_sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0) !important;
+    border: 0 none !important;
 }
 
 #fixed_panel {

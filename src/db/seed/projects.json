@@ -328,7 +328,7 @@
         "id": 2,
         "name": "Blockcraft",
         "system_tags": [
-            "Trending"
+            "trending"
         ],
         "images": {
             "preview": []
@@ -358,9 +358,10 @@
         "id": 4,
         "name": "Desert canyon",
         "system_tags": [
-            "Trending"
+            "trending"
         ],
-        "product": 1,
+        "target_type": "product",
+        "target_id": 1,
         "description": "Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.",
         "images": {
             "medium_tile": "https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"
@@ -373,7 +374,8 @@
     },
     {
         "id": 5,
-        "product": 22,
+        "target_type": "product",
+        "target_id": 4,
         "description": "Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.",
         "images": {
             "medium_tile": "https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"
@@ -387,7 +389,9 @@
     {
         "id": 3,
         "name": "Lodge Builder 2000",
-        "system_tags": ["Trending"],
+        "system_tags": [
+            "trending"
+        ],
         "images": {
             "preview": []
         },

@@ -16,8 +16,10 @@ This is the main web client for BlockHub, built primarily with Web3.js and Vue.j
 
 ## Quick Links
 
-- 🌐 [Site](http://blockhub.gg/)
-- 📺 [Demo](http://beta.blockhub.gg/)
+- 🌐 [Site - Production](https://blockhub.gg/)
+- 📺 [Site - Preview](https://preview.blockhub.gg/)
+- 📺 [Site - Beta](https://beta.blockhub.gg/)
+- 📺 [Site - Staging](https://staging.blockhub.gg/)
 - 📖 [Docs](http://docs.hyperbridge.org/blockhub)
 - 📓 [EIPs](https://github.com/hyperbridge/EIPs)
 - 💻 [Web Client](https://github.com/hyperbridge/blockhub-web-client)

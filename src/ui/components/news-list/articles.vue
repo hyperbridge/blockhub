@@ -20,7 +20,7 @@ export default {
             type: Array,
             required: true
         },
-        index: String
+        index: Number
     },
     components:{
         'c-news-article': (resolve) => require(['@/ui/components/news-list/article'], resolve)

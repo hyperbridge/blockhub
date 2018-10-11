@@ -3,33 +3,30 @@
     <div class="page page--w-header page--w-container">
         <!-- PAGE HEADER -->
         <transition name="slideDown" v-if="initialized">
-            <c-header :isLoader="loadingState"/>
-            <!--<c-slim-header :isLoader="loadingState"/>-->
+            <c-header :isLoader="loadingState" v-if="!slimMode" />
+            <c-slim-header :isLoader="loadingState" v-if="slimMode" :title="headerText" />
         </transition>
         <!-- //END PAGE HEADER -->
 
         <!-- PAGE CONTENT WRAPPER -->
         <div class="page__content page__content-invert invert" id="page-content">
-            <div class="loader-block loading loading--w-spinner" v-if="!is_connected">
+            <div class="loader-block" v-if="!is_connected">
                 <div class="loader-block__container">
-                    <div>
-                        <div class="loading-spinner"></div>
-                        <p class="loader-block__message">{{ user_submitted_connection_message.message }}</p>
-                        <p class="loader-block__user">Submitted by <a
-                            :href="`/#/identity/${user_submitted_connection_message.user.id}`">@{{
-                            user_submitted_connection_message.user.name }}</a></p>
-                    </div>
+                    <div class="loader-block__spinner"></div>
 
-                    <h1 class="loader-block__status-code" v-if="connection_status.code">ERROR {{
-                        connection_status.code }}</h1>
+                    <p class="loader-block__message">{{ user_submitted_connection_message.message }}</p>
+                    <p class="loader-block__user">Submitted by <a
+                        :href="`/#/identity/${user_submitted_connection_message.user.id}`">@{{ user_submitted_connection_message.user.name }}</a></p>
 
-                    <div class="loader-block__status-message">
-                        <p>{{ connection_status.message }}</p>
+                    <h1 class="loader-block__status-code" v-if="connection_status.code">ERROR {{ connection_status.code }}</h1>
+
+                    <div class="loader-block__status-message" v-if="connection_status.message">
+                        <p hidden>{{ connection_status.message }}</p>
                         <div>Internet Connection <span class="fa"
-                                                        :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }"></span>
+                            :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }"></span>
                         </div>
                         <div>Server Connection <span class="fa"
-                                                        :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }"></span>
+                            :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }"></span>
                         </div>
                     </div>
 
@@ -45,7 +42,21 @@
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert left-sidebar" id="page-aside" v-if="showLeftPanel">
                 <!--<transition name="slideLeft" v-if="initialized">-->
-                <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}-navigation`"></component>
+                <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
+                    <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}-navigation`" ref="scroll_sidebar_content"></component>
+                </div>
+                <c-load-more @click="scrollSidebarDown" :fixed="true" v-if="scrollMoreDirection == 'down'">
+                    <div class="load-more-slot">
+                        More
+                        <i class="fas fa-sort-down"></i>
+                    </div>
+                </c-load-more>
+                <c-load-more @click="scrollSidebarUp" :fixed="true" v-if="scrollMoreDirection == 'up'">
+                    <div class="load-more-slot">
+                        <i class="fas fa-sort-up"></i>
+                        Up
+                    </div>
+                </c-load-more>
                 <!--</transition>-->
             </div>
             <!-- //END PAGE ASIDE PANEL -->
@@ -57,7 +68,7 @@
             <!-- SIDEPANEL -->
             <transition name="slideRight" v-if="initialized && showRightPanel">
                 <c-sidepanel>
-                <c-swiper :options="panelOption" ref="mySwiper">
+                    <c-swiper :options="panelOption" ref="mySwiper">
                     <c-slide v-if="signed_in">
                         <div class="item">
                             <h3>NOTIFICATION</h3>
@@ -154,12 +165,12 @@
                             <div class="navigation">
                                 <ul>
                                     <template v-for="(update,  index) in updates">
-                                        <li class="title" :key="index">
+                                        <li class="title" :key="`title-${index}`">
                                             <a :href="update.link">
                                                 <span class="text">{{ update.title }}</span>
                                             </a>
                                         </li>
-                                        <li :key="index">
+                                        <li :key="`info-${index}`">
                                             <span class="text">{{ update.info }}</span>
                                         </li>
                                     </template>
@@ -200,23 +211,13 @@
                             <div class="navigation">
                                 <ul>
                                     <li class="title">TOP 5</li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Joe's Adventure</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">The Mission</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Gym with Tim</span>
+                                    <li v-for="(product, index) in $store.state.marketplace.top_5" :key="index">
+                                        <a :href="`/#/product/${product.id}`">
+                                            <span class="text">{{ product.name }}</span>
                                         </a>
                                     </li>
                                     <li class="more">
-                                        <a href="/#/">
+                                        <a href="/#/search">
                                             <span class="text">MORE...</span>
                                         </a>
                                     </li>
@@ -225,48 +226,13 @@
                             <div class="navigation">
                                 <ul>
                                     <li class="title">TOP FREE</li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Joe's Adventure</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">The Mission</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Gym with Tim</span>
+                                    <li v-for="(product, index) in $store.state.marketplace.top_free" :key="index">
+                                        <a :href="`/#/product/${product.id}`">
+                                            <span class="text">{{ product.name }}</span>
                                         </a>
                                     </li>
                                     <li class="more">
-                                        <a href="/#/">
-                                            <span class="text">MORE...</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="navigation">
-                                <ul>
-                                    <li class="title">TOP RATED</li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Joe's Adventure</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">The Mission</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Gym with Tim</span>
-                                        </a>
-                                    </li>
-                                    <li class="more">
-                                        <a href="/#/">
+                                        <a href="/#/search">
                                             <span class="text">MORE...</span>
                                         </a>
                                     </li>
@@ -275,7 +241,7 @@
                         </div>
                     </c-slide>
                 </c-swiper>
-            </c-sidepanel>
+                </c-sidepanel>
             </transition>
             <!-- //END SIDEPANEL -->
 
@@ -283,6 +249,7 @@
                 {{ connection_status.message }}
             </div>
 
+            <c-welcome-popup :activated="welcome_modal_active" @close="closePopup" ref="welcome_modal_active"></c-welcome-popup>
             <c-download-popup :activated="download_modal_active" @close="closePopup" ref="download_modal_active"></c-download-popup>
             <c-unlock-popup :activated="unlock_modal_active" @close="closePopup" ref="unlock_modal_active"></c-unlock-popup>
             <c-send-funds-popup :activated="send_funds_modal_active" @close="closePopup" ref="send_funds_modal_active"></c-send-funds-popup>
@@ -315,6 +282,7 @@
 
 <script>
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
+    import { debouncer } from '@/mixins'
 
     import 'swiper/dist/css/swiper.css'
 
@@ -322,7 +290,7 @@
         props: {
             navigationKey: {
                 type: String,
-                required: true
+                required: false
             },
             showLeftPanel: {
                 type: Boolean,
@@ -333,8 +301,19 @@
                 type: Boolean,
                 default: true,
                 required: false
+            },
+            slimMode: {
+                type: Boolean,
+                default: false,
+                required: false
+            },
+            headerText: {
+                type: String,
+                default: 'BlockHub',
+                required: false
             }
         },
+        mixins: [debouncer],
         components: {
             'c-header': (resolve) => require(['@/ui/components/headers/basic'], resolve),
             'c-slim-header': (resolve) => require(['@/ui/components/headers/slim'], resolve),
@@ -349,6 +328,7 @@
             'c-product-navigation': (resolve) => require(['@/ui/components/navigation/product'], resolve),
             'c-project-navigation': (resolve) => require(['@/ui/components/navigation/project'], resolve),
             'c-notification': (resolve) => require(['@/ui/components/notification/index.vue'], resolve),
+            'c-welcome-popup': (resolve) => require(['@/ui/components/welcome-popup/index.vue'], resolve),
             'c-download-popup': (resolve) => require(['@/ui/components/download-popup/index.vue'], resolve),
             'c-unlock-popup': (resolve) => require(['@/ui/components/unlock-popup/index.vue'], resolve),
             'c-login-popup': (resolve) => require(['@/ui/components/login-popup/index.vue'], resolve),
@@ -357,6 +337,7 @@
             'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
             'c-cookie-policy': (resolve) => require(['@/ui/components/cookie-policy'], resolve),
             'c-message': (resolve) => require(['@/ui/components/message'], resolve),
+            'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more.vue'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide
         },
@@ -384,6 +365,9 @@
             },
             download_modal_active() {
                 return this.$store.state.application.active_modal === 'download'
+            },
+            welcome_modal_active() {
+                return this.$store.state.application.active_modal === 'welcome'
             },
             notifs() {
                 return this.$store.state.application.account.notifications
@@ -418,7 +402,8 @@
                     spaceBetween: 10,
                     loop: false,
                 },
-                notifPopup: {}
+                notifPopup: {},
+                scrollMoreDirection: null
             }
         },
         updated() {
@@ -454,16 +439,52 @@
             showNotifPopup(ntf) {
                 this.notifPopup = ntf;
                 this.notifPopup.show_popup = true;
+            },
+            scrollSidebarDown(){
+                $('#scroll_sidebar').animate({scrollTop: '+=100', duration: '150'});
+                this.checkScrollButton()
+            },
+            scrollSidebarUp(){
+                $('#scroll_sidebar').animate({scrollTop: '-=500', duration: '150'});
+                this.checkScrollButton()
+            },
+            checkScrollButton(){
+                try {
+                    if ($('#scroll_sidebar').children().height() > $('#scroll_sidebar').height()) {
+                        // Change the scroll direction when it hits the last 10px of the sidebar
+                        if(($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight()) >= ($('#scroll_sidebar')[0].scrollHeight - 10)) {
+                            this.scrollMoreDirection = 'up';
+                        }
+                        else {
+                            this.scrollMoreDirection = 'down';
+                        }
+                    } else {
+                        this.scrollMoreDirection = null
+                    }
+                } catch(e) {
+
+                }
             }
         },
-        mounted: function () {
+        mounted() {
             this.$nextTick(() => {
                 this.loadingState = false
                 setTimeout(() => {
                     document.getElementById('startup-loader').style.display = 'none'
 
                     this.initialized = BlockHub.initialized = true
+
+                    // check sidebar button
+                    $(this.$refs.scroll_sidebar).scroll(() => {
+                        this.debounce(() => {
+                            this.checkScrollButton()
+                        }, 250)
+                    })
                 }, 3000) // TODO: remove arbitrary delay
+
+                setInterval(() => {
+                    this.checkScrollButton()
+                }, 500)
             })
         }
     }
@@ -534,6 +555,20 @@
         color: #fff;
     }
 
+    .loader-block {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0px;
+        top: 0px;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #dfdfe9;
+        background: rgba(0, 0, 0, 0.3);
+    }
+
     .loader-block .loader-block__container {
         width: 100%;
         height: 100%;
@@ -543,10 +578,26 @@
         font-size: 14px;
     }
 
-    .loader-block .loading-spinner {
+    .loader-block .loader-block__spinner {
+        left: 0px;
+        top: 0px;
+        width: 20px;
+        height: 20px;
+        animation: rotate 500ms infinite linear;
         position: relative;
         zoom: 4;
         margin: 0 auto;
+        &:before{
+            position: absolute;
+            left: 3px;
+            top: 3px;
+            content: " ";
+            width: 14px;
+            height: 14px;
+            border: 2px solid #fff;
+            border-right-color: transparent;
+            border-radius: 7px;
+        }
     }
 
     .loader-block__message {
@@ -602,6 +653,7 @@
             margin-right: 20px;
             font-size: 18px;
             font-weight: bold;
+            color: #fff;
 
             span {
                 color: #fff;
@@ -659,9 +711,49 @@
     }
 
     .left-sidebar {
-        overflow-x: auto;
+        overflow: hidden;
         height: calc(100% - 100px);
-        padding-bottom: 20px;
+        .load-more-slot{
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 18px;
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            z-index: 1;
+            background: linear-gradient(to top, rgba(48, 49, 77, 1) 60%, rgba(48, 49, 77, 0) 100%);
+            transform: rotate(0deg);
+            pointer-events: none;
+        }
+        
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 246px;
+            height: 182px;
+            z-index: 1;
+            background: url("../../../assets/img/left-fade.png") bottom left no-repeat;
+            background-size: 100% auto;
+            pointer-events: none;
+        }
+
+        .navigation {
+            padding-bottom: 80px;
+        }
+    }
+    .left-sidebar__content{
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: calc(100% - 40px);
     }
     .col-lg-6{
         @media (max-width: 1500px){
