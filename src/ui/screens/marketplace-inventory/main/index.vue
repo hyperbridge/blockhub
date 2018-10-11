@@ -13,24 +13,30 @@
             </div>
         </div>
         <c-modal title="Sell assets" v-if="openModal" @close="openModal = false">
-            <form slot="modal_body" class="sell-assets__form">
-                <div
-                    v-for="(asset, index) in selectedAssets"
-                    :key="index"
-                    class="sell-assets__asset"
-                >
-                    <c-asset-preview-basic :asset="asset" size="sm"/>
-                    <div class="sell-assets__market-price">
-                        <c-input v-model.number="asset.marketPrice"/>
-                        <span>
-                            Sell asset for <strong>{{ asset.marketPrice }}</strong> $
-                        </span>
-                        <c-range-slider
-                            v-model.number="asset.marketPrice"
-                            :max="Math.round(asset.price.max * 2)"
-                        />
+            <form slot="modal_body">
+                <div class="sell-assets__assets-wrapper">
+                    <div
+                        v-for="(asset, index) in selectedAssets"
+                        :key="index"
+                        class="sell-assets__asset"
+                    >
+                        <c-asset-preview-basic :asset="asset" size="sm"/>
+                        <div class="sell-assets__market-price">
+                            <c-input v-model.number="asset.marketPrice"/>
+                            <span>
+                                Sell asset for <strong>{{ asset.marketPrice }}</strong> $
+                            </span>
+                            <c-range-slider
+                                v-model.number="asset.marketPrice"
+                                :max="Math.round(asset.price.max * 2)"
+                            />
+                        </div>
                     </div>
                 </div>
+                <span class="sell-assets__summary">
+                    You are selling <strong> {{ sellSummary.count }} </strong> assets
+                    for <strong> {{ sellSummary.price | roundNum }} </strong> $
+                </span>
                 <div class="flex-center-between">
                     <c-button status="danger" @click="openModal = false">
                         Cancel
@@ -145,13 +151,21 @@
         },
         computed: {
             labelText() {
-                return `${this.allowSelect ? 'Disable' : 'Enable'} assets selecting`;
+                return `${this.allowSelect ? 'Disable' : 'Enable'} selecting assets`;
             },
             selectedAssets() {
                 return this.selectableAssets.filter(asset => asset.selected);
             },
             everySelected() {
                 return !(!!(this.selectableAssets.length - this.selectedAssets.length));
+            },
+            sellSummary() {
+                return {
+                    count: this.selectedAssets.length,
+                    price: this.selectedAssets.reduce((price, asset) =>
+                        price += asset.marketPrice
+                    , 0)
+                }
             }
         },
         mounted() {
@@ -236,10 +250,6 @@
         display: flex;
     }
 
-    .sell-assets__form {
-        max-height: 500px;
-        overflow-y: auto;
-    }
     .sell-assets__market-price {
         display: flex;
         flex-direction: column;
@@ -249,19 +259,26 @@
             width: 100%;
         }
     }
+    .sell-assets__summary {
+        display: block;
+        margin: 15px 0;
+    }
+    .sell-assets__assets-wrapper {
+        max-height: 500px;
+        overflow-y: auto;
+        // box-shadow: 0 -12px 40px -18px rgba(1,1,1,.7) inset;
+    }
     .sell-assets__asset {
-        display: flex;
         padding: 10px;
         background: rgba(255,255,255,.025);
         border-radius: 4px;
+        display: flex;
+        margin-bottom: 25px;
         .asset-preview-basic {
             margin-right: 5px;
         }
         div {
             width: 50%;
-        }
-        &:not(:last-child) {
-            margin-bottom: 25px;
         }
     }
 </style>
