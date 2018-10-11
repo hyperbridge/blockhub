@@ -100,6 +100,14 @@
                                 <p><span class="fa fa-edit"></span>Edit</p>
                             </button>
                         </li>
+                        <li v-if="signed_in" class="token">
+                            <a href="/#/token">
+                                <span class="token__count">
+                                    0 <span class="icon fa fa-coins"></span>
+                                </span>
+                                <span class="text">Tokens</span>
+                            </a>
+                        </li>
                         <li v-if="signed_in">
                             <a href="/#/account">
                                 <span class="icon fa fa-user"></span>
@@ -422,7 +430,6 @@ export default {
         right: 0;
     }
 
-
     .app-header__buttons {
         padding-left: 8px;
         padding-top: 11px;
@@ -667,6 +674,59 @@ export default {
         font-weight: 100;
     }
 
+    .token {
+        .fa { 
+            color: #333 !important;
+        }
+
+        .text {
+            float: none;
+            color: #fce893;
+            margin-left: 3px;
+            font-weight: bold;
+            vertical-align: super;
+        }
+
+        &:hover .token__count {
+            background: #f8d553;
+            color: #000 !important;
+        }
+
+        &:hover {
+            .token__count:before {
+                animation: badgeGlimmer ease-out infinite;
+                animation-fill-mode: forwards;
+                animation-duration: 1s;
+                animation-delay: .2s
+            }
+        }
+    }
+
+    .token__count {
+        display: inline-block;
+        background: #fce488;
+        border-radius: 10px;
+        padding: 1px 8px;
+        font-size: 16px;
+        color: #333;
+        font-weight: bold;
+        overflow: hidden;
+        position: relative;
+        
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            background: rgba(255,170,50,.5);
+            background: linear-gradient(to right,rgba(255,245,214,0) 0,rgba(255,251,240,.61) 85%,rgba(255,252,244,0) 100%);
+            width: 20px;
+            height: 200%;
+            top: -10px;
+            left: -20px;
+            transform: rotate(45deg);
+        }
+    }
+
 
     @media screen and (max-width: 1140px) {
         .app-header__nav-item span {
@@ -675,6 +735,18 @@ export default {
     }
     .invert .horizontal-navigation > ul li {
          background: transparent;
+    }
+
+    @keyframes badgeGlimmer {
+        0% {
+            left: -100%;
+            opacity: .3
+        }
+
+        100% {
+            left: 200%;
+            opacity: 1
+        }
     }
 
 </style>

@@ -3,19 +3,19 @@
         <div class="trade-offer__date">
             <span>
                 <span class="trade-offer__status" v-if="offer.new">NEW</span>
-                {{ offer.date | formatDate }} - {{ offer.date | timeAgo }}
+                {{ offer.createdAt | formatDate }} - {{ offer.createdAt | timeAgo }}
             </span>
             <span>
-                Expires {{ offer.date | expIn | timeAgo }}
+                Expires {{ offer.createdAt | expIn | timeAgo }}
             </span>
         </div>
         <div
             class="trade-offer__content"
             @click="expandDetails()"
         >
-            <c-author :author="offer.author"/>
+            <c-author :author="offer.contractor.user"/>
             <span>
-                Trade {{ offer.assets.their.length }} for {{ offer.assets.yours.length }} assets
+                Trade {{ offer.me.selling.length }} for {{ offer.contractor.selling.length }} assets
             </span>
             <div>
                 <c-button status="success" icon_hide>Accept</c-button>
@@ -26,7 +26,7 @@
             <div class="trade-offer__details" v-if="showDetails">
                 <h4>Offer details</h4>
                 <table
-                    v-for="(assets, assetsKey) in offer.assets"
+                    v-for="(assets, assetsKey) in assets"
                     :key="assetsKey"
                     class="trade-offer__assets-table"
                 >
@@ -48,7 +48,7 @@
                                     </div>
                                 </c-tooltip>
                             </td>
-                            <td>${{ asset.price.current }}</td>
+                            <td>{{ asset.price.current }}$</td>
                         </tr>
                     </tbody>
                 </table>
@@ -88,6 +88,19 @@
                         </tr>
                     </tfoot>
                 </table>
+                <div class="trade-offer__action">
+                    <c-button
+                        status="info"
+                        icon_hide
+                        @click="$router.push({
+                            path: '/marketplace/trade/' + offer.id
+                        })"
+                    >Go to transaction</c-button>
+                    <span>
+                        <c-button status="success" icon_hide>Accept</c-button>
+                        <c-button status="danger" icon_hide>Decline</c-button>
+                    </span>
+                </div>
             </div>
         </transition>
     </div>
@@ -116,20 +129,31 @@
             expandDetails() {
                 this.showDetails = !this.showDetails;
                 if (this.offer.new) this.$emit('wasSeen');
+            },
+            round(num) {
+                return Math.floor(num * 100) / 100;
             }
         },
         computed: {
             totalValue() {
-                const { assets } = this.offer;
+                const { assets, round } = this;
                 return Object.keys(assets).reduce((total, assetsKey) => ({
                     ...total,
-                    [assetsKey]: assets[assetsKey].reduce((totalPrice, asset) =>
-                        totalPrice += asset.price.current
-                    , 0)
+                    [assetsKey]: round(
+                        assets[assetsKey].reduce((totalPrice, asset) =>
+                            totalPrice += asset.price.current
+                        , 0)
+                    )
                 }), {});
             },
             finalBalance() {
-                return Math.round(this.totalValue.yours - this.totalValue.their * 100) / 100;
+                return this.round(this.totalValue.yours - this.totalValue.their);
+            },
+            assets() {
+                return {
+                    yours: this.offer.me.selling,
+                    their: this.offer.contractor.selling
+                }
             }
         },
         filters: {
@@ -210,6 +234,7 @@
     }
     .trade-offer__summary-table {
         margin-top: 40px;
+        margin-bottom: 30px;
         td:first-child {
             min-width: 100px;
         }
@@ -220,6 +245,10 @@
         tfoot td {
             border-top: 1px solid #535673;
         }
+    }
+    .trade-offer__action {
+        display: flex;
+        justify-content: space-between;
     }
     .total-balance {
         color: #fff;

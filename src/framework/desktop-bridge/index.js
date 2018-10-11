@@ -1,6 +1,5 @@
 import * as DB from '@/db'
 
-
 export let config = {
 }
 
@@ -206,7 +205,14 @@ export const runCommand = async (cmd, meta = {}) => {
 
             await sendCommand('quitAndInstall')
         } else if (cmd.key === 'systemError') {
-            console.warn('[DesktopBridge] Received system error from desktop', cmd.message)
+            console.warn('[DesktopBridge] Received system error from desktop', cmd.data)
+
+            BlockHub.Notifications.error(cmd.data, 'Desktop Error', {
+                timeout: 5000,
+                pauseOnHover: true
+            })
+        } else if (cmd.key === 'navigate') {
+            local.router.push(cmd.data)
         } else {
             console.warn('[DesktopBridge] Unhandled command:', cmd)
         }
@@ -232,6 +238,33 @@ export const initResizeMonitor = () => {
     }, true)
 }
 
+export const initContextMenuHandler = () => {
+    document.body.addEventListener('contextmenu', (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+
+        let node = e.target
+
+        sendCommand('showContextMenuRequest', {
+            x: e.clientX,
+            y: e.clientY,
+            nodeName: node.nodeName
+        })
+        
+        // while (node) {
+        //     if (node.nodeName.match(/^(input|textarea|p)$/i) || node.isContentEditable) {
+        //         sendCommand('showContextMenuRequest', {
+        //             x: e.clientX,
+        //             y: e.clientY,
+        //             nodeName: node.nodeName
+        //         })
+        //         break
+        //     }
+        //     node = node.parentNode
+        // }
+    })
+}
+
 export const init = (store, router) => {
     if (!isConnected()) {
         console.log('[DesktopBridge] Not initializing. Reason: not connected to desktop app')
@@ -249,4 +282,5 @@ export const init = (store, router) => {
 
     initCommandMonitor()
     initResizeMonitor()
+    initContextMenuHandler()
 }

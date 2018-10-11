@@ -3383,6 +3383,17 @@ storiesOf('Cookie policy', module)
     }))
 
 
+import WelcomeBox from '@/ui/components/welcome-box/type-1'
+storiesOf('Welcome Box', module)
+    .add('default', () => ({
+        components:{
+            'c-welcome-box': WelcomeBox
+        },
+        template: `<div class="p-5 position-relative" style="height: 900px;width: 700px">
+                        <c-welcome-box />
+                    </div> `
+    }))
+
 /*
      Dynamic import - test version
 

@@ -8,7 +8,7 @@
 
 <script>
     export default {
-        name: 'read-more'
+        name: 'load-more'
     }
 </script>
 
@@ -16,9 +16,14 @@
     .load-more {
         display: block;
         text-align: center;
-        width: 100%;
+        width: 230px;
         overflow: hidden;
-        margin: 10px 0;
+        margin: 10px 20px;
+        position: fixed;
+        bottom: 0;
+        z-index: 1;
+        left: 0;
+        user-select: none;
     }
 
     .load-more__text {

@@ -30,6 +30,16 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/welcome'], resolve)
         },
         {
+            path: '/terms',
+            name: 'Terms & Conditions',
+            component: (resolve) => require(['@/ui/screens/terms'], resolve)
+        },
+        {
+            path: '/privacy',
+            name: 'Privacy Policy',
+            component: (resolve) => require(['@/ui/screens/privacy'], resolve)
+        },
+        {
             path: '/streams',
             name: 'Streams',
             component: (resolve) => require(['@/ui/screens/streams'], resolve)
@@ -178,6 +188,11 @@ const router = new Router({
             }
         },
         {
+            path: '/account/verification/callback',
+            name: 'Account Verification',
+            component: (resolve) => require(['@/ui/screens/account-verification-callback'], resolve)
+        },
+        {
             path: '/account/wallets',
             name: 'Wallets',
             component: (resolve) => require(['@/ui/screens/account-wallets'], resolve),
@@ -311,6 +326,11 @@ const router = new Router({
             meta: {
                 auth: true
             }
+        },
+        {
+            path: '/monitor',
+            name: 'Monitor',
+            component: (resolve) => require(['@/ui/screens/monitor'], resolve)
         },
         {
             path: '/developer',
@@ -507,6 +527,11 @@ const router = new Router({
             name: 'Discussions Page',
             props: true,
             component: (resolve) => require(['@/ui/screens/discussion'], resolve)
+        },
+        {
+            path: '/meta',
+            name: 'Meta',
+            component: (resolve) => require(['@/ui/screens/meta'], resolve)
         },
         {
             path: '/updates',

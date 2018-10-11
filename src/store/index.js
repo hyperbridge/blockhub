@@ -13,6 +13,7 @@ import * as database from '../modules/database'
 import * as cache from '../modules/cache'
 import user from '@/modules/user'
 import { saveDB } from './plugins'
+import assets from '@/modules/assets'
 import seed from '../db/seed'
 
 Vue.use(Vuex);
@@ -105,7 +106,8 @@ const store = new Vuex.Store({
             actions: application.actions,
             mutations: application.mutations
         },
-        user
+        user,
+        assets
     }
 });
 
@@ -123,15 +125,25 @@ window.BlockHub.importSeedData = () => {
     DB.application.config.data[0].updates = seed.updates
 
     DB.marketplace.config.data[0].curator_reviews = seed.curator_reviews
-    DB.marketplace.config.data[0].product_news = seed.product_news
     DB.marketplace.config.data[0].collections = seed.collections
     DB.marketplace.config.data[0].game_series = seed.game_series
-
-    DB.marketplace.products.data = seed.products
     DB.marketplace.assets.data = seed.assets
+    DB.marketplace.products.data = seed.products
+    DB.marketplace.posts.data = seed.posts
+    // DB.marketplace.config.data[0].top_products = [
+    //     seed.products[1],
+    //     seed.products[4],
+    //     seed.products[2],
+    //     seed.products[3]
+    // ]
 
     DB.funding.projects.data = seed.projects
-    DB.funding.config.data[0].trending_projects = seed.trending_projects
+    // DB.funding.config.data[0].trending_projects = [
+    //     seed.projects[1], 
+    //     seed.projects[4], 
+    //     seed.projects[2], 
+    //     seed.projects[3]
+    // ]
 
     store.dispatch('marketplace/updateState')
     store.dispatch('funding/updateState')
@@ -185,7 +197,9 @@ window.BlockHub.saveDatabase = () => {
 
 const initSubscribers = () => {
     store.subscribe((mutation, state) => {
-        console.info('[BlockHub] Mutation: ' + mutation.type, state)
+        if (mutation.type !== 'application/setInternetConnection') {
+            console.info('[BlockHub] Mutation: ' + mutation.type, state)
+        }
 
         if (mutation.type === 'database/initialized') {
             if (ChaosMonkey.random()) {
@@ -275,7 +289,7 @@ const monitorSimulatorMode = () => {
     if (!simulatorInitialized) {
         store.state.marketplace.trending_projects = seed.trending_projects
         store.state.marketplace.curator_reviews = seed.curator_reviews.slice(seed.curator_reviews.length / 2)
-        store.state.marketplace.product_news = seed.product_news.slice(seed.product_news.length / 2)
+        store.state.marketplace.posts = seed.posts.slice(seed.posts.length / 2)
         store.state.marketplace.products = seed.products.slice(seed.products.length / 2)
         store.state.marketplace.assets = seed.assets.slice(seed.assets.length / 2)
         store.state.marketplace.collections = seed.collections.slice(seed.collections.length / 2)

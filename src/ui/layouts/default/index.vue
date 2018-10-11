@@ -4,31 +4,29 @@
         <!-- PAGE HEADER -->
         <transition name="slideDown" v-if="initialized">
             <c-header :isLoader="loadingState"/>
+            <!--<c-slim-header :isLoader="loadingState"/>-->
         </transition>
         <!-- //END PAGE HEADER -->
 
         <!-- PAGE CONTENT WRAPPER -->
         <div class="page__content page__content-invert invert" id="page-content">
-            <div class="loader-block loading loading--w-spinner" v-if="!is_connected">
+            <div class="loader-block" v-if="!is_connected">
                 <div class="loader-block__container">
-                    <div>
-                        <div class="loading-spinner"></div>
-                        <p class="loader-block__message">{{ user_submitted_connection_message.message }}</p>
-                        <p class="loader-block__user">Submitted by <a
-                            :href="`/#/identity/${user_submitted_connection_message.user.id}`">@{{
-                            user_submitted_connection_message.user.name }}</a></p>
-                    </div>
+                    <div class="loader-block__spinner"></div>
 
-                    <h1 class="loader-block__status-code" v-if="connection_status.code">ERROR {{
-                        connection_status.code }}</h1>
+                    <p class="loader-block__message">{{ user_submitted_connection_message.message }}</p>
+                    <p class="loader-block__user">Submitted by <a
+                        :href="`/#/identity/${user_submitted_connection_message.user.id}`">@{{ user_submitted_connection_message.user.name }}</a></p>
 
-                    <div class="loader-block__status-message">
-                        <p>{{ connection_status.message }}</p>
+                    <h1 class="loader-block__status-code" v-if="connection_status.code">ERROR {{ connection_status.code }}</h1>
+
+                    <div class="loader-block__status-message" v-if="connection_status.message">
+                        <p hidden>{{ connection_status.message }}</p>
                         <div>Internet Connection <span class="fa"
-                                                        :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }"></span>
+                            :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }"></span>
                         </div>
                         <div>Server Connection <span class="fa"
-                                                        :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }"></span>
+                            :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }"></span>
                         </div>
                     </div>
 
@@ -44,7 +42,21 @@
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert left-sidebar" id="page-aside" v-if="showLeftPanel">
                 <!--<transition name="slideLeft" v-if="initialized">-->
-                <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}-navigation`"></component>
+                <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
+                    <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}-navigation`" ref="scroll_sidebar_content"></component>
+                </div>
+                <c-load-more @click="scrollSidebarDown" v-if="scrollMoreDirection == 'down'">
+                    <div class="load-more-slot">
+                        More
+                        <i class="fas fa-sort-down"></i>
+                    </div>
+                </c-load-more>
+                <c-load-more @click="scrollSidebarUp" v-if="scrollMoreDirection == 'up'">
+                    <div class="load-more-slot">
+                        <i class="fas fa-sort-up"></i>
+                        Up
+                    </div>
+                </c-load-more>
                 <!--</transition>-->
             </div>
             <!-- //END PAGE ASIDE PANEL -->
@@ -56,7 +68,7 @@
             <!-- SIDEPANEL -->
             <transition name="slideRight" v-if="initialized && showRightPanel">
                 <c-sidepanel>
-                <c-swiper :options="panelOption" ref="mySwiper">
+                    <c-swiper :options="panelOption" ref="mySwiper">
                     <c-slide v-if="signed_in">
                         <div class="item">
                             <h3>NOTIFICATION</h3>
@@ -199,23 +211,13 @@
                             <div class="navigation">
                                 <ul>
                                     <li class="title">TOP 5</li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Joe's Adventure</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">The Mission</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Gym with Tim</span>
+                                    <li v-for="(product, index) in $store.state.marketplace.top_5" :key="index">
+                                        <a :href="`/#/product/${product.id}`">
+                                            <span class="text">{{ product.name }}</span>
                                         </a>
                                     </li>
                                     <li class="more">
-                                        <a href="/#/">
+                                        <a href="/#/search">
                                             <span class="text">MORE...</span>
                                         </a>
                                     </li>
@@ -224,48 +226,13 @@
                             <div class="navigation">
                                 <ul>
                                     <li class="title">TOP FREE</li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Joe's Adventure</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">The Mission</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Gym with Tim</span>
+                                    <li v-for="(product, index) in $store.state.marketplace.top_free" :key="index">
+                                        <a :href="`/#/product/${product.id}`">
+                                            <span class="text">{{ product.name }}</span>
                                         </a>
                                     </li>
                                     <li class="more">
-                                        <a href="/#/">
-                                            <span class="text">MORE...</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="navigation">
-                                <ul>
-                                    <li class="title">TOP RATED</li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Joe's Adventure</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">The Mission</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/#/product/1">
-                                            <span class="text">Gym with Tim</span>
-                                        </a>
-                                    </li>
-                                    <li class="more">
-                                        <a href="/#/">
+                                        <a href="/#/search">
                                             <span class="text">MORE...</span>
                                         </a>
                                     </li>
@@ -274,7 +241,7 @@
                         </div>
                     </c-slide>
                 </c-swiper>
-            </c-sidepanel>
+                </c-sidepanel>
             </transition>
             <!-- //END SIDEPANEL -->
 
@@ -321,7 +288,7 @@
         props: {
             navigationKey: {
                 type: String,
-                required: true
+                required: false
             },
             showLeftPanel: {
                 type: Boolean,
@@ -336,6 +303,7 @@
         },
         components: {
             'c-header': (resolve) => require(['@/ui/components/headers/basic'], resolve),
+            'c-slim-header': (resolve) => require(['@/ui/components/headers/slim'], resolve),
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
             'c-wallet-navigation': (resolve) => require(['@/ui/components/navigation/wallet'], resolve),
             'c-account-navigation': (resolve) => require(['@/ui/components/navigation/account'], resolve),
@@ -355,6 +323,7 @@
             'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
             'c-cookie-policy': (resolve) => require(['@/ui/components/cookie-policy'], resolve),
             'c-message': (resolve) => require(['@/ui/components/message'], resolve),
+            'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more.vue'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide
         },
@@ -416,7 +385,8 @@
                     spaceBetween: 10,
                     loop: false,
                 },
-                notifPopup: {}
+                notifPopup: {},
+                scrollMoreDirection: ''
             }
         },
         updated() {
@@ -452,6 +422,24 @@
             showNotifPopup(ntf) {
                 this.notifPopup = ntf;
                 this.notifPopup.show_popup = true;
+            },
+            scrollSidebarDown(){
+                $('#scroll_sidebar').animate({scrollTop: '+=100', duration: '150'});
+                if($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight() >= $('#scroll_sidebar')[0].scrollHeight) {
+                    this.scrollMoreDirection = 'up';
+                }
+            },
+            scrollSidebarUp(){
+                $('#scroll_sidebar').animate({scrollTop: '-=500', duration: '150'});
+                if($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight() <= $('#scroll_sidebar')[0].scrollHeight) {
+                    this.scrollMoreDirection = 'down';
+                }
+            },
+            checkScrollButton(){
+                if (this.$refs.scroll_sidebar.scrollHeight > this.$refs.scroll_sidebar.offsetHeight)
+                    this.scrollMoreDirection = 'down';
+                else
+                    this.scrollMoreDirection = null;
             }
         },
         mounted: function () {
@@ -461,6 +449,9 @@
                     document.getElementById('startup-loader').style.display = 'none'
 
                     this.initialized = BlockHub.initialized = true
+
+                    // check sidebar button
+                    this.checkScrollButton()
                 }, 3000) // TODO: remove arbitrary delay
             })
         }
@@ -532,6 +523,20 @@
         color: #fff;
     }
 
+    .loader-block {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0px;
+        top: 0px;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #dfdfe9;
+        background: rgba(0, 0, 0, 0.3);
+    }
+
     .loader-block .loader-block__container {
         width: 100%;
         height: 100%;
@@ -541,10 +546,26 @@
         font-size: 14px;
     }
 
-    .loader-block .loading-spinner {
+    .loader-block .loader-block__spinner {
+        left: 0px;
+        top: 0px;
+        width: 20px;
+        height: 20px;
+        animation: rotate 500ms infinite linear;
         position: relative;
         zoom: 4;
         margin: 0 auto;
+        &:before{
+            position: absolute;
+            left: 3px;
+            top: 3px;
+            content: " ";
+            width: 14px;
+            height: 14px;
+            border: 2px solid #fff;
+            border-right-color: transparent;
+            border-radius: 7px;
+        }
     }
 
     .loader-block__message {
@@ -552,7 +573,7 @@
         font-size: 20px;
         font-style: italic;
         text-transform: uppercase;
-        margin-top: 40px;
+        margin: 40px auto 10px;
     }
 
     .loader-block__user {
@@ -600,6 +621,7 @@
             margin-right: 20px;
             font-size: 18px;
             font-weight: bold;
+            color: #fff;
 
             span {
                 color: #fff;
@@ -657,9 +679,49 @@
     }
 
     .left-sidebar {
-        overflow-x: auto;
+        overflow: hidden;
         height: calc(100% - 100px);
-        padding-bottom: 20px;
+        .load-more-slot{
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 18px;
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            z-index: 1;
+            background: linear-gradient(to top, rgba(48, 49, 77, 1) 60%, rgba(48, 49, 77, 0) 100%);
+            transform: rotate(0deg);
+            pointer-events: none;
+        }
+        
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 246px;
+            height: 182px;
+            z-index: 1;
+            background: url("../../../assets/img/left-fade.png") bottom left no-repeat;
+            background-size: 100% auto;
+            pointer-events: none;
+        }
+
+        .navigation {
+            padding-bottom: 80px;
+        }
+    }
+    .left-sidebar__content{
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 100%;
     }
     .col-lg-6{
         @media (max-width: 1500px){

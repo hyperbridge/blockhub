@@ -1,11 +1,11 @@
 <template>
     <div class="article-item" :style="{ width: 'calc( 100% / ' + itemInRow + ')'}">
-        <h4>{{ article.heading }}</h4>
+        <h4>{{ heading }}</h4>
         <div class="published_date mb-3">
-            Published {{ article.date | parse_date }}
+            Published {{ date | parse_date }}
         </div>
-        <p>{{ article.content }}</p>
-        <a :href="`/${article.url}`" class="btn btn-link">
+        <p>{{ content }}</p>
+        <a :href="`/${url}`" class="btn btn-link">
             Read More
         </a>
     </div>
@@ -15,7 +15,10 @@
     import moment from 'moment';
     export default {
         props: {
-            article: Object,
+            heading: String,
+            date: String,
+            content: String,
+            url: String,
             itemInRow: {
                 default: 3
             }

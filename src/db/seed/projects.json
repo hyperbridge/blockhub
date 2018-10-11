@@ -1,6 +1,6 @@
 [
     {
-        "id": "1",
+        "id": 1,
         "name": "Gym With Tim",
         "system_tags": [],
         "images": {
@@ -325,9 +325,11 @@
         ]
     },
     {
-        "id": "2",
+        "id": 2,
         "name": "Blockcraft",
-        "system_tags": [],
+        "system_tags": [
+            "trending"
+        ],
         "images": {
             "preview": []
         },
@@ -353,9 +355,43 @@
         "moderators": []
     },
     {
-        "id": "3",
+        "id": 4,
+        "name": "Desert canyon",
+        "system_tags": [
+            "trending"
+        ],
+        "target_type": "product",
+        "target_id": 1,
+        "description": "Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.",
+        "images": {
+            "medium_tile": "https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"
+        },
+        "funds": {
+            "currency": "USD",
+            "obtained": 2834,
+            "goal": 5000
+        }
+    },
+    {
+        "id": 5,
+        "target_type": "product",
+        "target_id": 4,
+        "description": "Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.",
+        "images": {
+            "medium_tile": "https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"
+        },
+        "funds": {
+            "currency": "USD",
+            "obtained": 2834,
+            "goal": 5000
+        }
+    },
+    {
+        "id": 3,
         "name": "Lodge Builder 2000",
-        "system_tags": [],
+        "system_tags": [
+            "trending"
+        ],
         "images": {
             "preview": []
         },

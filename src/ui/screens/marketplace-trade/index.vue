@@ -21,12 +21,7 @@
                                                 @click="activeTab = index + 1"
                                             >
                                                 {{ title | upperFirstChar }}
-                                                <span
-                                                    v-if="notifsCount[title]"
-                                                    class="item__notif-count"
-                                                >
-                                                    {{ notifsCount[title] }}
-                                                </span>
+                                                <c-tag-count :number="offers[title].length"/>
                                             </a>
                                         </li>
                                     </ul>
@@ -57,54 +52,46 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
-    import assets from '@/db/seed/assets';
-
     export default {
         components: {
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-tabs': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve),
             'c-tab': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
             'c-trade-offer': (resolve) => require(['@/ui/components/trade-offer'], resolve),
+            'c-tag-count': (resolve) => require(['@/ui/components/tags/count'], resolve),
         },
         data() {
-            const author = { name: 'The mission', img: 'http://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png' };
             return {
-                offers: {
-                    received: [
-                        { id: 1, author, new: true, assets: { their: [assets[2], assets[1]] , yours: [assets[0], assets[4]] }, date: "2018-10-04T04:09:00.000Z" },
-                        { id: 2, author, new: true, assets: { their: [assets[2], assets[1]] , yours: [assets[0], assets[4]] }, date: "2018-10-03T04:09:00.000Z" },
-                        { id: 3, author, assets: { their: [assets[2], assets[1]] , yours: [assets[0], assets[4]] }, date: "2018-10-01T04:09:00.000Z" },
-                        { id: 4, author, assets: { their: [assets[2], assets[1]] , yours: [assets[0], assets[4]] }, date: "2018-09-25T04:09:00.000Z" }
-                    ],
-                    sent: [
-                        { id: 1, author, new: true, assets: { their: [assets[2], assets[1]] , yours: [assets[0], assets[4]] }, date: "2018-10-04T04:09:00.000Z" },
-                        { id: 2, author, assets: { their: [assets[2], assets[1]] , yours: [assets[0], assets[4]] }, date: "2018-10-03T04:09:00.000Z" },
-                        { id: 3, author, assets: { their: [assets[2], assets[1]] , yours: [assets[0], assets[4]] }, date: "2018-10-01T04:09:00.000Z" },
-                        { id: 4, author, assets: { their: [assets[2], assets[1]] , yours: [assets[0], assets[4]] }, date: "2018-09-25T04:09:00.000Z" }
-                    ],
-                    closed: []
-                },
                 activeTab: 1
             }
         },
         computed: {
-            ...mapGetters({
-                assets: 'marketplace/assetsArray'
-            }),
             notifsCount() {
+                return {};
+                /* WIP */
                 return {
                     received: this.offers.received.filter(offer => offer.new).length,
                     sent: this.offers.sent.filter(offer => offer.new).length,
                 }
+            },
+            offers() {
+                const { transactions } = this.$store.state.assets;
+                return transactions.reduce((offers, transaction) => {
+                    const { createdBy, status } = transaction;
+                    const target = createdBy !== 1
+                        ? status === 'closed'
+                            ? 'closed'
+                            : 'received'
+                        : 'sent';
+                    offers[target].push(transaction);
+                    return offers;
+                }, { received: [], sent: [], closed: [] });
             }
         }
     }
 </script>
 
 <style lang="scss" scoped>
-
-
     .trade-block {
         display: flex;
     }
@@ -127,19 +114,9 @@
                    background: rgba(1,1,1,.1);
                 }
             }
-            .item__notif-count {
-                background: rgba(255,255,255,.1);
-                border-radius: 4px;
-                width: 18px;
-                height: 18px;
-                font-size: 13px;
-                text-align: center;
-            }
         }
     }
     .trade-block__offers-tab {
         padding: 20px;
     }
-
-
 </style>

@@ -100,7 +100,7 @@
             },
             {
                 "id": 8,
-                "message": "Maybe Elon was right",
+                "message": "Maybe Elon was right about AI",
                 "user": {
                     "id": 2,
                     "name": "fr0stbyte"
@@ -386,8 +386,7 @@
                 }
             ]
         },
-        "projects": [],
-        "trending_products": []
+        "projects": []
     },
     "marketplace": {
         "ethereum": {
@@ -418,20 +417,10 @@
         "special_products": [],
         "assets": [],
         "products": [],
+        "posts": [],
         "game_series": [],
         "collections": [],
         "curator_reviews": [],
-        "main_banner": {
-            "img": {
-                "src": "https://d2q63o9r0h0ohi.cloudfront.net/images/kobolds-and-catacombs/header-bg-backup-337031b146d6540bc3d2513f0fb11daa966398f512db7163c7e819120a62b2b17c2abaa893cfcef5c14e1f4a696ce45fa8d2e4d36a987029e563b449b402a115.jpg",
-                "position": "center"
-            },
-            "logo": {
-                "src": "https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png",
-                "position": "left bottom",
-                "size": "lg"
-            }
-        },
         "default_product": {
             "name": "My Product Name",
             "images": {
@@ -446,6 +435,8 @@
             },
             "type": "game",
             "downloads": 20,
+            "price": 0,
+            "old_price": 0,
             "system_tags": [
                 "game",
                 "new"
@@ -478,11 +469,6 @@
             "content": "<h2>An adventure of a lifetime...</h2>\n<p>Any new features or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.</p><p>Our store is hosted on Shopify Inc. They provide us with the online e-commerce platform that allows us to sell our products and services to you.</p> IMAGE LIST",
             "frequently_traded_assets": [
             ],
-            "sale_box": {
-                "title": "Example Sale or Promotion",
-                "price": "49.95",
-                "link": ""
-            },
             "rating": [
                 {
                     "name": "Game",

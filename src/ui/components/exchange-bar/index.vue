@@ -39,7 +39,33 @@
                 required: true
             },
             yours: Number,
-            their: Number
+            their: Number,
+            interval: null
+        },
+        data() {
+            return {
+                displayedPrice: 0
+            }
+        },
+        computed: {
+            mainPrice() {
+                return this.price.sum;
+            }
+        },
+        watch: {
+            mainPrice(val) {
+                clearInterval(this.interval);
+
+                if (val === this.displayedPrice) return;
+
+                this.interval = setInterval(() => {
+                    if (this.displayedPrice !== this.mainPrice) {
+                        const change = (this.mainPrice - this.displayedPrice) / 10;
+                        this.displayedPrice += change;
+                    }
+                }, 20);
+
+            }
         }
     }
 </script>
@@ -59,13 +85,14 @@
     .exchange__data {
         text-align: center;
         font-size: 12px;
+        width: 90px;
         p { margin-bottom: 7px; }
         .data__price {
             font-size: 20px;
         }
     }
     .exchange__sum {
-        width: 35px;
+        width: 100px;
         height: 35px;
         position: relative;
         .sum__circle {
@@ -73,7 +100,7 @@
             width: 100px;
             height: 100px;
             top: calc(-50% - 25px / 2);
-            left: -25px;
+            left: -25px / 2;
             background: rgb(50, 52, 78);
             box-shadow: 0 0 40px -1px rgb(31, 32, 51);
             border-radius: 50%;

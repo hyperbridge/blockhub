@@ -1,39 +1,72 @@
 <template>
-    <ul class="list-container">
-        <li
-            v-if="subItem"
-            @click="subItem = null"
-            class="item__link-opened"
-        >
-            {{ subItem }}
-            <c-icon name="arrow-left"/>
-        </li>
-        <li
-            v-if="!subItem"
-            v-for="(subList, title) in items"
-            :key="title+2"
-            @click="subItem = title"
-            class="item__link"
-        >
-            {{ title }}
-        </li>
-        <li
-            v-for="(item, title) in items[subItem]"
-            :key="item.id"
-            v-else
-            class="item__link"
-        >
-            {{ title }} <span >{{ items[subItem][title].length }}</span>
+    <ul class="list-container" :class="{ 'list-container--parent': isParent }">
+        <li v-for="(list, title, index) in items" :key="index">
+            <slot name="item">
+                <a
+                    @click="itemClick(title, list[0])"
+                    class="item__link"
+                    :class="{
+                        'item_link--active': title > 100
+                    }"
+                >
+                    <slot :list="list">
+                        <div class="item__container">
+                            <span>
+                                <slot name="item-content">
+                                    <c-icon
+                                        name="arrow-right"
+                                        class="arrow"
+                                        :class="{ 'arrow--opened': title === subItem }"
+                                    />
+                                    <span
+                                        class="title"
+                                        :class="{ 'title--opened': title === subItem }"
+                                    >
+                                        {{ title }}
+                                    </span>
+                                </slot>
+                            </span>
+                            <c-tag-count :number="listLength(list)"/>
+                        </div>
+                    </slot>
+                </a>
+            </slot>
+            <transition name="slide-in-top">
+                <slot
+                    v-if="subItem === title"
+                    name="sublist"
+                    :sublist="list"
+                />
+            </transition>
         </li>
     </ul>
 </template>
 
 <script>
     export default {
-        props: ['items'],
+        name: 'list-submenu',
+        components: {
+            'c-tag-count': (resolve) => require(['@/ui/components/tags/count'], resolve)
+        },
+        props: {
+            items: Object,
+            isParent: Boolean
+        },
         data() {
             return {
                 subItem: null
+            }
+        },
+        methods: {
+            itemClick(title, item) {
+                this.$emit('click', item);
+                if (this.subItem && this.subItem === title) this.subItem = null;
+                else this.subItem = title;
+            },
+            listLength(list) {
+                return Object.keys(list).length;
+                const length = Object.keys(list).length;
+                return length > 0 ? length : 0;
             }
         }
     }
@@ -42,24 +75,32 @@
 <style lang="scss" scoped>
     .list-container {
         margin: 0;
-        padding: 0;
-        max-height: 160px;
+        max-height: 250px;
         list-style-type: none;
         overflow-y: auto;
         background: rgba(36, 37, 59, .8);
         background: #27283D;
+        background: rgba(39, 40, 61, .8);
         border-radius: 4px;
+        padding: 0;
+        &:not(.list-container--parent) {
+            margin-left: 5px;
+        }
+        &.list-container--parent {
+            height: 250px;
+        }
     }
     /deep/ .item__link {
         display: block;
         padding: 10px;
         cursor: pointer;
         user-select: none;
+        color: rgba(255,255,255,.1);
         &:hover:not(.item_link--active):not(.item__link-opened) {
             background: rgba(255,255,255,.025);
         }
     }
-    .item__link-opened {
+    .item__link--opened {
         @extend .item__link;
         background: rgba(1,1,1,.1);
         display: flex;
@@ -69,5 +110,26 @@
     /deep/ .item_link--active {
         background: rgba(1,1,1,.12);
         text-shadow: 0 0 6px rgba(255,255,255, .4);
+    }
+
+    .title {
+        display: inline-block;
+        transition: transform .2s ease;
+        &.title--opened {
+            transform: translateX(10px);
+        }
+    }
+    .arrow {
+        transition: transform .2s ease;
+        transform: translateX(-25px);
+        &.arrow--opened {
+            transform: translateX(5px);
+        }
+    }
+
+    .item__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 </style>

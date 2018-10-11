@@ -52,7 +52,12 @@
                                 <c-project-card
                                     v-for="(project, index) in projects"
                                     :key="index"
-                                    :project="project"
+                                    :image="project.images.medium_tile"
+                                    :description="project.description"
+                                    :funds="project.funds"
+                                    :productImage="product.images.medium_tile"
+                                    :productName="product.name"
+                                    :productDeveloper="product.developer"
                                     :showGame="false"
                                     class="margin-0"
                                 />
@@ -67,24 +72,14 @@
 
 <script>
 const updateProduct = function () {
-    if (!this.$store.state.marketplace.products)
+    if (!this.product)
         return
 
-    const product = this.$store.state.marketplace.products[this.id]
-
-    if (!product)
-        return
-
-    if (product.images.preview && product.images.preview.length) {
+    if (this.product.images.preview && this.product.images.preview.length) {
         const header = window.document.getElementById('header-bg');
-        header.style['background-image'] = 'url(' + product.images.preview[0] + ')';
+        header.style['background-image'] = 'url(' + this.product.images.preview[0] + ')';
         header.style['background-size'] = 'cover';
     }
-
-    if (!product.projects)
-        product.projects = []
-
-    return product
 }
 
 export default {
@@ -95,31 +90,6 @@ export default {
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve)
     },
-    data() {
-        return {
-            projects: [
-                {
-                    description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
-                    img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
-                    funds: {
-                        currency: 'USD',
-                        obtained: 2834,
-                        goal: 5000
-                    }
-                },
-                {
-                    description: 'Add new desert canyon themed area with 15 new monsters, 4 bosses and 2 dungeons.',
-                    img: 'https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg',
-                    funds: {
-                        currency: 'USD',
-                        obtained: 1234,
-                        goal: 16000
-                    }
-                }
-
-            ]
-        }
-    },
     methods: {
         save() {
             this.$store.dispatch('marketplace/updateProduct', this.product)
@@ -127,6 +97,13 @@ export default {
     },
     computed: {
         product: updateProduct,
+        product() {
+            return this.$store.state.marketplace.products[this.id]
+        },
+        projects() {
+            return BlockHub.DB.funding.projects.find({ 'target_id': { '$eq': this.product.id } }) || []
+            //return this.product.projects ? this.product.projects.map(id => this.$store.state.funding.projects[id]) : []
+        },
         editing() {
             if (!this.$store.state.application.editor_mode) {
                 for (let key in this.activeElement) {

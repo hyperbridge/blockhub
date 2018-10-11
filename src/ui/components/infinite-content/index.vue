@@ -26,6 +26,23 @@
                     </div>
                 </div>
 
+                <div class="row margin-bottom-30" v-if="item.type === 'featured_product_gallery'" :key="`level-1-${index}`">
+                    <div class="col-12">
+                        <c-main-banner class="margin-bottom-30" 
+                            :image="{ src: item.data.products[0].images.preview[0], position: 'center' }" 
+                            :logo="{ src: item.data.products[0].images.icon, position: 'left bottom', size: 'lg' }" 
+                            :title="item.data.products[0].name"
+                            :href="`/#/product/${item.data.products[0].id}`"
+                            buttonText="Check it out"
+                            v-if="item.data.products.length" 
+                        />
+
+                        <c-block class="margin-bottom-30" :title="item.data.title" :noGutter="true" :onlyContentBg="true" :bgGradient="true" v-else>
+                            <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
+                        </c-block>
+                    </div>
+                </div>
+
                 <div class="row" v-if="item.type === 'product_slider'" :key="`level-1-${index}`">
                     <div class="col-12">
                         <c-product-slider :products="item.data.products" :title="item.data.title" :maxPerView="item.data.slidesPerView" v-if="item.data.products.length" />
@@ -62,17 +79,16 @@
 
                         <div class="home-tabs">
                             <c-news-list-navigation
-                                :news="item.data.news"
+                                :list="item.data.headings"
                             />
                             <div class="tab-content">
                                 <c-news-list-articles
-                                    v-for="(news, index) in item.data.news"
+                                    v-for="(list, index) in item.data.lists"
                                     :key="index"
-                                    :news="news"
+                                    :articles="list"
                                     :index="index"
                                 />
                             </div>
-                            <p v-if="!item.data.news.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                         </div>
                     </div>
                 </div>
@@ -115,6 +131,7 @@
                                     <c-curator-review  :review="review" />
                                 </c-slide>
                             </c-swiper>
+                            <p v-if="!item.data.reviews.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                         </c-block>
                     </div>
                 </div>
@@ -132,16 +149,24 @@
                             />
                             <c-swiper :options="item.data.options" :ref="`swiper-${index}`">
                                 <c-slide v-for="(project, index) in item.data.projects" :key="index">
-                                    <c-projects-card :project="project" />
+                                    <c-project-card 
+                                        :image="project.images.medium_tile" 
+                                        :description="project.description" 
+                                        :funds="project.funds" 
+                                        :productName="project.product && project.product.name" 
+                                        :productDeveloper="project.product && project.product.developer" 
+                                        :productImage="project.product && project.product.images.medium_tile" 
+                                    />
                                 </c-slide>
                             </c-swiper>
+                            <p v-if="!item.data.projects.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                         </c-block>
                     </div>
                 </div>
 
                 <div class="row margin-bottom-30" v-if="item.type === 'game_series'" :key="`level-1-${index}`">
                     <div class="col-12">
-                        <c-game-series v-for="(game, index) in item.data.game_series_data" :key="index">
+                        <c-game-series v-for="(game, index) in item.data.list" :key="index">
                             <c-game-description :game="game" />
                             <c-game-includes-list :list="game.products" :showNumber="item.data.showNumber" />
                         </c-game-series>
@@ -150,8 +175,9 @@
 
                 <div class="row margin-bottom-30" v-if="item.type === 'collections_list'" :key="`level-1-${index}`">
                     <div class="col-12">
-                        <c-collection-list title="Get Started"
-                                            description="Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain."
+                        <c-collection-list 
+                            title="Get Started"
+                            description="Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain."
                         >
                             <c-swiper :options="item.data.options" class="padding-10">
                                 <c-slide v-for="(collection, index) in item.data.collections_list" :key="index">
@@ -162,12 +188,6 @@
                     </div>
                 </div>
 
-
-                <div class="row margin-bottom-30" v-if="item.type === 'main_banner'" :key="`level-1-${index}`">
-                    <div class="col-12">
-                        <c-main-banner class="margin-bottom-30" :image="main_banner.img" :logo="main_banner.logo" />
-                    </div>
-                </div>
 
                 <div class="row margin-bottom-30" v-if="item.type === 'new_releases_grid'" :key="`level-1-${index}`">
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
@@ -233,17 +253,6 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 import 'swiper/dist/css/swiper.css'
 
-const updateLandingImage = function() {
-    const frontpage_product = this.$store.state.marketplace.frontpage_product
-
-    if (frontpage_product && frontpage_product.images) {
-        const header = window.document.getElementById('header-bg');
-        const randomImage = Math.floor(Math.random() * frontpage_product.images.preview.length);
-        header.style['background-image'] = 'url(' + frontpage_product.images.preview[randomImage] + ')';
-        header.style['background-size'] = 'cover';
-    }
-}
-
 export default {
     props: {
         list: {
@@ -263,7 +272,7 @@ export default {
         'c-product-card-dynamic': (resolve) => require(['@/ui/components/store/product-card-dynamic'], resolve),
         'c-product-cards': (resolve) => require(['@/ui/components/store/product-cards'], resolve),
         'c-product-slider': (resolve) => require(['@/ui/components/store/product-slider'], resolve),
-        'c-projects-card': (resolve) => require(['@/ui/components/project/card'], resolve),
+        'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
         'c-curator-review': (resolve) => require(['@/ui/components/store/curator-review'], resolve),
         'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
         'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
@@ -277,7 +286,6 @@ export default {
         'c-games-explorer': (resolve) => require(['@/ui/components/store/games-explorer'], resolve),
         'c-assets-explorer': (resolve) => require(['@/ui/components/store/assets-explorer'], resolve),
         'c-assets-list': (resolve) => require(['@/ui/components/assets-list-item'], resolve),
-        'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
         'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve),
         'c-main-banner': (resolve) => require(['@/ui/components/banner'], resolve),
         'c-swiper': swiper,
@@ -301,43 +309,8 @@ export default {
         ...mapGetters({
             assets: 'marketplace/assetsArray'
         }),
-        projects() {
-            return this.$store.state.funding.projects
-        },
-        products() {
-            if (this.$store.state.cache.screens['/store'] && this.$store.state.cache.screens['/store'].products)
-                return this.$store.state.cache.screens['/store'].products
-
-            return this.$store.state.marketplace.products
-        },
         sliced() {
-            updateLandingImage.bind(this)()
-
             return this.list.slice(0, this.display);
-        },
-        // trending_projects() {
-        //     return this.$store.state.marketplace.trending_projects;
-        // },
-        new_products() {
-            return this.$store.state.marketplace.new_products;
-        },
-        product_news() {
-            return this.$store.state.marketplace.product_news;
-        },
-        main_banner() {
-            return this.$store.state.marketplace.main_banner;
-        },
-        signed_in() {
-            return this.$store.state.application.signed_in;
-        },
-        simulator_mode() {
-            return this.$store.state.application.simulator_mode;
-        },
-        desktop_mode() {
-            return this.$store.state.application.desktop_mode;
-        },
-        developer_mode() {
-            return this.$store.state.application.developer_mode;
         }
     },
     methods: {
@@ -362,22 +335,13 @@ export default {
                     }
                 }
             };
-            console.log('done scroll')
         }
     },
     mounted() {
         $(this.$refs.trendingSlider).ionRangeSlider();
 
-        updateLandingImage.call(this)
-
         this.scroll();
     },
-    created() {
-        updateLandingImage.call(this)
-    },
-    beforeDestroy() {
-        window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'
-    }
 }
 </script>
 

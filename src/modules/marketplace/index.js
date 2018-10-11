@@ -15,18 +15,21 @@ const updateState = (savedData, updatedState = {}) => {
         ...updatedState,
         assets: DB.marketplace ? DB.marketplace.assets.data : [],
         products: DB.marketplace ? DB.marketplace.products.data : [],
+        posts: DB.marketplace ? DB.marketplace.posts.data : [],
         collections: DB.marketplace.config.data[0].collections,
         curator_reviews: DB.marketplace.config.data[0].curator_reviews,
-        product_news: DB.marketplace.config.data[0].product_news,
+        posts: DB.marketplace.config.data[0].posts,
         game_series: DB.marketplace.config.data[0].game_series,
         frontpage_product: DB.marketplace ? DB.marketplace.products.findOne({ 'system_tags': { '$contains': ['frontpage'] } }) : {},
-        sale_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['sale'] } }) : [],
         new_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['new'] } }) : [],
         featured_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['featured'] } }) : [],
         upcoming_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['upcoming'] } }) : [],
         trending_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['trending'] } }) : [],
         top_selling_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }) : [],
-        special_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : []
+        special_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : [],
+        product_news: DB.marketplace ? DB.marketplace.posts.find({ 'target': { '$eq': ['product'] }, 'system_tags': { '$contains': ['news'] } }) : [],
+        top_free: DB.marketplace ? DB.marketplace.products.find({ 'price': { '$eq': 0 } }) : [],
+        top_5: DB.marketplace ? DB.marketplace.products.find({ 'rating.overall': { '$gte': 5 } }) : [],
     }
 
     const normalizedData = normalize(rawData, {

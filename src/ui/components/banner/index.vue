@@ -6,14 +6,14 @@
                 <source :src="video.src" type="video/mp4" />
             </video>
             <div class="main-banner__content--logo" :class="[ logo.size ? 'logo-size-' + logo.size : 'logo-size-md', logo.position ]" :style="logoPosition">
-                <c-img :src="logo.src" alt="company-logo"/>
+                <c-img :src="logo.src" :alt="title" />
             </div>
         </div>
         <div class="main-banner__footer">
             <h4>
-                Banner Headline or Game title
+                {{ title }}
             </h4>
-            <c-button status="success">Call To Action</c-button>
+            <c-button :href="href">{{ buttonText }}</c-button>
         </div>
     </div>
 </template>
@@ -22,6 +22,9 @@
     export default {
         name: 'main-banner',
         props: {
+            title: String,
+            buttonText: String,
+            href: String,
             image: Object,
             logo: Object,
             video: Object
