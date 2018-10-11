@@ -212,13 +212,13 @@
     .welcome-block__screen{
         position: absolute;
         top: 0;
-        bottom: 0;
         right: -50px;
-        left: 50%;
         padding: 20px 0 20px 20px;
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        max-height: 370px;
+        max-width: 510px;
         img{
             width: auto;
             height: 100%;
