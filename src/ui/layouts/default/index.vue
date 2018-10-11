@@ -621,6 +621,7 @@
             margin-right: 20px;
             font-size: 18px;
             font-weight: bold;
+            color: #fff;
 
             span {
                 color: #fff;
@@ -680,19 +681,47 @@
     .left-sidebar {
         overflow: hidden;
         height: calc(100% - 100px);
-        padding-bottom: 20px;
-        background: url("../../../assets/img/left-fade.png") bottom left no-repeat;
-        background-size: 100% auto;
         .load-more-slot{
             display: inline-flex;
             flex-direction: column;
             align-items: center;
             line-height: 18px;
         }
+
+        &:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            z-index: 1;
+            background: linear-gradient(to top, rgba(48, 49, 77, 1) 60%, rgba(48, 49, 77, 0) 100%);
+            transform: rotate(0deg);
+            pointer-events: none;
+        }
+        
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 246px;
+            height: 182px;
+            z-index: 1;
+            background: url("../../../assets/img/left-fade.png") bottom left no-repeat;
+            background-size: 100% auto;
+            pointer-events: none;
+        }
+
+        .navigation {
+            padding-bottom: 80px;
+        }
     }
     .left-sidebar__content{
-        overflow: hidden;
-        height: calc(100% - 40px);
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 100%;
     }
     .col-lg-6{
         @media (max-width: 1500px){
