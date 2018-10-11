@@ -45,6 +45,8 @@
         .c-input {
             padding-right: 25px;
             width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
             &:focus{
                 outline: none;
                 box-shadow: none;
