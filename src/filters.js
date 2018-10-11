@@ -65,3 +65,5 @@ Vue.filter('highlightPhrase', (value, phrase, tag = 'strong') => {
 
 Vue.filter('roundNum', num => Math.round(num * 100) / 100);
 
+Vue.filter('space', val => val.replace(/_/g, ' ').replace(/-/g, ' '));
+
