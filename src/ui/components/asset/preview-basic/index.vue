@@ -3,6 +3,7 @@
         <h5 class="">{{ asset.name }}</h5>
         <c-img
             class="asset-preview-basic__image"
+            :class="size"
             :src="asset.image"
         />
         <h5>{{ asset.product_name }}</h5>
@@ -19,7 +20,7 @@
             },
             size: {
                 type: String,
-                default: 'md',
+                default: 'lg',
                 validator(val) {
                     return ['sm', 'md', 'lg'].includes(val);
                 }
@@ -34,8 +35,17 @@
         align-items: center;
         flex-direction: column;
         .asset-preview-basic__image {
-            width: 140px;
-            height: 140px;
+            padding: 5px;
+            background-color: rgba(255,255,255,.05);
+            border-radius: 4px;
+            &.sm {
+                width: 40px;
+                height: 40px;
+            }
+            &.lg {
+                width: 140px;
+                height: 140px;
+            }
         }
         h5 {
             margin: 5px 0;
@@ -44,9 +54,6 @@
 
         }
         &.md {
-
-        }
-        &.lg {
 
         }
         &.asset-preview-basic--row {

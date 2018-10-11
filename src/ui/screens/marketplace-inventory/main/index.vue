@@ -7,11 +7,40 @@
                 <c-button status="info" @click="selectAll()" icon="hand-pointer">
                     {{ everySelected ? 'Unselect all' : 'Select all' }}
                 </c-button>
-                <c-button status="info" icon="dollar-sign">
+                <c-button status="info" icon="dollar-sign" @click="openModal = true">
                     Sell selected in market
                 </c-button>
             </div>
         </div>
+        <c-modal title="Sell assets" v-if="openModal" @close="openModal = false">
+            <form slot="modal_body" class="sell-assets__form">
+                <div
+                    v-for="(asset, index) in selectedAssets"
+                    :key="index"
+                    class="sell-assets__asset"
+                >
+                    <c-asset-preview-basic :asset="asset" size="sm"/>
+                    <div class="sell-assets__market-price">
+                        <c-input v-model.number="asset.marketPrice"/>
+                        <span>
+                            Sell asset for <strong>{{ asset.marketPrice }}</strong> $
+                        </span>
+                        <c-range-slider
+                            v-model.number="asset.marketPrice"
+                            :max="Math.round(asset.price.max * 2)"
+                        />
+                    </div>
+                </div>
+                <div class="flex-center-between">
+                    <c-button status="danger" @click="openModal = false">
+                        Cancel
+                    </c-button>
+                    <c-button status="success">
+                        Confirm sell
+                    </c-button>
+                </div>
+            </form>
+        </c-modal>
         <div class="inventory-explorer">
             <c-content-navigation
                 :items="selectableAssets"
@@ -74,10 +103,10 @@
             'c-asset-preview-basic': (resolve) => require(['@/ui/components/asset/preview-basic'], resolve),
             'c-asset-preview': (resolve) => require(['@/ui/components/asset/preview'], resolve),
             'c-asset': (resolve) => require(['@/ui/components/assets-grid-inventory/asset'], resolve),
-            'c-asset': (resolve) => require(['@/ui/components/assets-grid-inventory/asset'], resolve),
             'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
-            'c-checkbox': (resolve) => require(['@/ui/components/checkbox'], resolve),
             'c-switch': (resolve) => require(['@/ui/components/switch'], resolve),
+            'c-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
+            'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
         },
         data() {
             return {
@@ -97,7 +126,8 @@
                     durability: "40/41"
                 },
                 selectableAssets: [],
-                allowSelect: false
+                allowSelect: true,
+                openModal: false,
             }
         },
         methods: {
@@ -126,7 +156,11 @@
         },
         mounted() {
             this.previewAsset = this.assets[0];
-            this.selectableAssets = this.assets.map(asset => ({ ...asset, selected: false }));
+            this.selectableAssets = this.assets.map(asset =>({
+                ...asset,
+                selected: false,
+                marketPrice: 0
+            }));
         }
     }
 </script>
@@ -152,6 +186,7 @@
         display: flex;
         flex-wrap: wrap;
         align-content: flex-start;
+        justify-content: center;
         padding: 10px;
         background: rgba(29, 30, 46, .65);
         margin: 10px;
@@ -199,5 +234,34 @@
 
     .inventory-explorer {
         display: flex;
+    }
+
+    .sell-assets__form {
+        max-height: 500px;
+        overflow-y: auto;
+    }
+    .sell-assets__market-price {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        .range-slider__container {
+            width: 100%;
+        }
+    }
+    .sell-assets__asset {
+        display: flex;
+        padding: 10px;
+        background: rgba(255,255,255,.025);
+        border-radius: 4px;
+        .asset-preview-basic {
+            margin-right: 5px;
+        }
+        div {
+            width: 50%;
+        }
+        &:not(:last-child) {
+            margin-bottom: 25px;
+        }
     }
 </style>

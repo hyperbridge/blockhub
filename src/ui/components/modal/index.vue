@@ -5,7 +5,9 @@
             class="modal-light__btn"
         >&times;</button>
         <div class="modal-light__content">
-            <slot />
+            <slot>
+
+            </slot>
         </div>
     </div>
 </template>
@@ -24,7 +26,8 @@ export default {
         z-index: 1000;
         width: 100vw;
         height: 100vh;
-        background-color: rgba(1,1,1,.9);
+        // background-color: rgba(1,1,1,.9);
+        background: rgba(33, 33, 51, 0.9);
         animation: opacity .5s ease;
         display: flex;
         align-items: center;
