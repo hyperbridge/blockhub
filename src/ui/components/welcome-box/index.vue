@@ -158,6 +158,7 @@
         background-size: cover;
         padding: 15px 30px;
         border-radius: 5px 5px 0 0;
+        text-align: left;
         img{
             width: 300px;
             max-width: 40%;

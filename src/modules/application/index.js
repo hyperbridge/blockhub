@@ -89,7 +89,7 @@ export const actions = {
                 store.commit('activateModal', 'login')
             }
         } else {
-            store.commit('activateModal', 'download')
+            store.commit('activateModal', 'welcome')
         }
     },
     setEditorMode(store, payload) {

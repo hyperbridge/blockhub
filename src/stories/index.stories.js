@@ -3383,7 +3383,7 @@ storiesOf('Cookie policy', module)
     }))
 
 
-import WelcomeBox from '@/ui/components/welcome-box/type-1'
+import WelcomeBox from '@/ui/components/welcome-box'
 storiesOf('Welcome Box', module)
     .add('default', () => ({
         components:{

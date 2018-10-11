@@ -12,6 +12,7 @@
                             
                             <ul>
                                 <li>Selling game items</li>
+                                <li>Curating game information in the store</li>
                                 <li>Bug reporting</li>
                                 <li>Game promotion</li>
                                 <li>Product testing</li>

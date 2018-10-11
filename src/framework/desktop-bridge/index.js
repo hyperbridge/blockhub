@@ -130,7 +130,12 @@ export const setAccountRequest = async (data) => {
 
 export const sendCommand = async (key, data = {}, peer = null, responseId = null) => {
     if (!isConnected()) {
-        console.log('[DesktopBridge] Cant send command. Reason: not connected to desktop app')
+        console.log('[DesktopBridge] Cant send command. Reason: not connected to desktop app', key)
+
+        // Ignore startup commands
+        if (key !== 'initProtocol') {
+            local.store.commit('application/activateModal', 'welcome')
+        }
 
         return false
     }
@@ -266,6 +271,10 @@ export const initContextMenuHandler = () => {
 }
 
 export const init = (store, router) => {
+    local.store = store
+    local.router = router
+    local.bridge = window.desktopBridge
+
     if (!isConnected()) {
         console.log('[DesktopBridge] Not initializing. Reason: not connected to desktop app')
 
@@ -273,10 +282,6 @@ export const init = (store, router) => {
     }
 
     console.log('[DesktopBridge] Initializing')
-
-    local.store = store
-    local.router = router
-    local.bridge = window.desktopBridge
 
     sendCommand('init', 1)
 
