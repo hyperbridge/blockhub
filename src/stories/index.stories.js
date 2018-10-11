@@ -15,16 +15,17 @@ import * as data from './components-data'
 
 //import '!style-loader!css-loader!./styles.scss'
 
-import PromotionBox from '../ui/components/promotion-box'
 
 
 addDecorator(withViewport('desktop'))
 
 
+import PromotionItem from '../ui/components/promotion-box/item'
+import PromotionList from '../ui/components/promotion-box/list'
 storiesOf('Promotion Box', module)
-    .add('default', () => ({
+    .add('item', () => ({
         components: {
-            'c-promotion-box': PromotionBox
+            'c-promotion-item': PromotionItem
         },
         data() {
             return {
@@ -32,7 +33,41 @@ storiesOf('Promotion Box', module)
                 price: '10.00'
             }
         },
-        template: '<div class="row"><div class="col-6 p-5"><c-promotion-box :title="title" :price="price"></c-promotion-box></div></div>'
+        template: '<div class="row"><div class="col-6 p-5"><c-promotion-item :title="title" :price="price"></c-promotion-item></div></div>'
+    }))
+    .add('list', () => ({
+        components: {
+            'c-promotion-list': PromotionList,
+            'c-promotion-item': PromotionItem
+        },
+        data() {
+            return {
+                promotions:[
+                    {
+                        title: 'Game + Standard Founder Pack',
+                        price: '10.00',
+                        basic: true
+                    },
+                    {
+                        title: 'Game + Deluxe Founder Pack',
+                        price: '10.00',
+                        basic: false
+                    },
+                    {
+                        title: 'Game + Collectors Founder Packst',
+                        price: '10.00',
+                        basic: false
+                    }
+                ]
+            }
+        },
+        template: `<div class="row"><div class="col-6 p-5">
+                        <c-promotion-list title="Packages" >
+                            <template v-for="(promotion, index) in promotions">
+                                <c-promotion-item :title="promotion.title" :price="promotion.price" :basic="promotion.basic"></c-promotion-item>
+                            </template>
+                        </c-promotion-list>
+                    </div></div>`
     }))
 
 import AssetsImporter from '../ui/components/asset-importer'
