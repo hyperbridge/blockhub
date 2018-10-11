@@ -5,33 +5,35 @@
             :assets="assets"
             @click="previewAsset = $event"
         />
-        <div v-if="previewAsset" class="preview-asset">
-            <c-icon
-                name="times"
-                class="preview-asset__close-btn"
-                @click="previewAsset = null"
-            />
-            <c-asset-preview-basic
-                :asset="previewAsset"
-                class="preview-asset__box"
-            />
-            <div class="preview-asset__box">
-                <h4>Price history</h4>
-                <ul class="reset-list">
-                    <li v-for="(val, prop) in previewAsset.price" :key="prop">
-                        {{ prop | upperFirstChar }}: {{ val }}$
-                    </li>
-                </ul>
-            </div>
-            <div class="preview-asset__box">
-                <table>
-                    <tbody>
-                        <tr v-for="(val, prop) in metadata" :key="prop">
-                            <td>{{ prop | space | upperFirstChar }}</td>
-                            <td>{{ val }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div v-if="previewAsset" class="preview-asset__wrapper">
+            <div class="preview-asset">
+                <c-icon
+                    name="times"
+                    class="preview-asset__close-btn"
+                    @click="previewAsset = null"
+                />
+                <c-asset-preview-basic
+                    :asset="previewAsset"
+                    class="preview-asset__box"
+                />
+                <div class="preview-asset__box">
+                    <h4>Price history</h4>
+                    <ul class="reset-list">
+                        <li v-for="(val, prop) in previewAsset.price" :key="prop">
+                            {{ prop | upperFirstChar }}: {{ val }}$
+                        </li>
+                    </ul>
+                </div>
+                <div class="preview-asset__box">
+                    <table>
+                        <tbody>
+                            <tr v-for="(val, prop) in metadata" :key="prop">
+                                <td>{{ prop | space | upperFirstChar }}</td>
+                                <td>{{ val }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -67,13 +69,20 @@
 </script>
 
 <style lang="scss" scoped>
+    .preview-asset__wrapper {
+        left: 0;
+        bottom: 0;
+        position: fixed;
+        width: 100%;
+    }
     .preview-asset {
         background: #1D1E2E;
-        position: fixed;
-        bottom: 0;
         display: flex;
+        margin: 0 auto;
+        position: relative;
+        max-width: 600px;
         align-items: center;
-        padding: 20px;
+        padding: 25px;
         border-radius: 4px 4px 0 0;
         animation: slidein .3s ease;
         justify-content: space-between;
