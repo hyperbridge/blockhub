@@ -6,7 +6,7 @@
                     <div class="col-12">
                         Marketplace
                         <h2>Recently sold</h2>
-                        <!-- <table class="assets-table">
+                        <table class="assets-table">
                             <thead>
                                 <th>Item</th>
                                 <th>Seller</th>
@@ -32,8 +32,8 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table> -->
-                        <ul class="assets-list">
+                        </table>
+                        <!-- <ul class="assets-list">
                             <li
                                 v-for="asset in assets"
                                 :key="asset.id"
@@ -52,7 +52,7 @@
                                 <span>{{ asset.user_name }}</span>
                                 <span>{{ asset.price.current }} $</span>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </div>

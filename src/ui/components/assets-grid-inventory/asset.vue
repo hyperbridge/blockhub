@@ -5,7 +5,11 @@
         @click="$emit('click', asset)"
     >
         <slot>
-            <c-tooltip :delay="3000" iconHide class="asset__wrapper">
+            <c-tooltip
+                v-if="showTooltip"
+                class="asset__wrapper"
+                iconHide
+            >
                 <c-asset-preview
                     slot="tooltip"
                     :asset="asset"
@@ -13,6 +17,10 @@
                 <c-img :src="asset.image" class="asset__image"/>
                 <span class="asset__price">{{ asset.price.current }}$</span>
             </c-tooltip>
+            <div v-else>
+                <c-img :src="asset.image" class="asset__image"/>
+                <span class="asset__price">{{ asset.price.current }}$</span>
+            </div>
         </slot>
     </div>
 </template>
@@ -20,7 +28,8 @@
 <script>
     export default {
         props: {
-            asset: Object
+            asset: Object,
+            showTooltip: Boolean
         },
         components: {
             'c-tooltip': (resolve) => require(['@/ui/components/tooltips/universal'], resolve),
@@ -34,18 +43,20 @@
         width: 100px;
         height: 100px;
         margin: 5px;
-        background: rgba(1,1,1,.2);
-        border: 1px solid rgba(255,255,255,.25);
+        background: #1C1E2D;
+        border: 1px solid #43445D;
+        background-image: radial-gradient(#30314C, #1C1E2D);
+        border-radius: 4px;
         position: relative;
         padding: 4px;
         animation: rotate-in .2s ease;
         user-select: none;
         &.assets-grid__asset--selected {
             border: 1px dotted #b565d4;
+            background-image: radial-gradient(#b565d4, #1C1E2D);
             .asset__image {
                 filter: drop-shadow(0 0 2px rgba(155, 89, 182, 1));
             }
-            // box-shadow: 0 0 20px -3px #9b59b6;
         }
         .asset__wrapper {
             height: 100%;

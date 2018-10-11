@@ -2,10 +2,14 @@
     <div>
         <h2>Explore</h2>
         <div class="inventory-explorer">
-            <c-assets-grid-inventory
-                :assets="assets"
-                @click="previewAsset = $event"
-            />
+            <div class="assets-grid">
+                <c-asset
+                    v-for="(asset, index) in selectableAssets"
+                    :key="index"
+                    :asset="asset"
+                    @click="previewAsset = $event; asset.selected = !asset.selected"
+                />
+            </div>
             <c-asset-preview
                 v-if="previewAsset"
                 :asset="previewAsset"
@@ -52,6 +56,8 @@
             'c-assets-grid-inventory': (resolve) => require(['@/ui/components/assets-grid-inventory'], resolve),
             'c-asset-preview-basic': (resolve) => require(['@/ui/components/asset/preview-basic'], resolve),
             'c-asset-preview': (resolve) => require(['@/ui/components/asset/preview'], resolve),
+            'c-asset': (resolve) => require(['@/ui/components/assets-grid-inventory/asset'], resolve),
+            'c-asset': (resolve) => require(['@/ui/components/assets-grid-inventory/asset'], resolve),
         },
         data() {
             return {
@@ -69,11 +75,13 @@
                     bonus_2: "Monster kills grant +151 experience",
                     level_requirement: 70,
                     durability: "40/41"
-                }
+                },
+                selectableAssets: []
             }
         },
         mounted() {
             this.previewAsset = this.assets[0];
+            this.selectableAssets = this.assets.map(asset => ({ ...asset, selected: false }));
         }
     }
 </script>
@@ -84,6 +92,18 @@
         bottom: 0;
         position: fixed;
         width: 100%;
+    }
+    .assets-grid {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        padding: 10px;
+        background: rgba(29, 30, 46, .65);
+        margin: 10px;
+        border-radius: 4px;
+        > div {
+            cursor: pointer;
+        }
     }
     .preview-asset {
         background: #1D1E2E;
