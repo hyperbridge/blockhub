@@ -1,5 +1,5 @@
 <template>
-    <c-popup :activated="activated" type="custom" ref="modal" width="250" @close="quit()">
+    <c-popup :activated="activated" type="custom" ref="modal" width="250">
         <div slot="custom_close" hidden></div>
         <div class="unlock-modal" slot="custom_content">
             <div class="tab-container">

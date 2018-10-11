@@ -1,5 +1,5 @@
 <template>
-    <div class="app-header slim-header">
+    <div class="app-header slim-header desktop-draggable">
         <div class="app-header__top-bar"></div>
         <div class="app-header__bar-left">
             {{ title }}
@@ -30,6 +30,12 @@
         }
     }
 </script>
+
+<style>
+    .desktop-draggable {
+        -webkit-app-region: drag;
+    }
+</style>
 
 <style lang="scss" scoped>
     .app-header {
@@ -70,6 +76,8 @@
         background-size: 22px;
         background-position: 5px 5px;
         border-radius: 0 0 13px 0;
+        user-select: none;
+        -webkit-app-region: drag;
         &:after {
             content: "";
             border-style: solid;
