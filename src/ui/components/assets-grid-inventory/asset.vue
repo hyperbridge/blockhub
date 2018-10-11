@@ -5,7 +5,7 @@
         @click="$emit('click', asset)"
     >
         <slot>
-            <c-tooltip :delay="3000" iconHide>
+            <c-tooltip :delay="3000" iconHide class="asset__wrapper">
                 <c-asset-preview
                     slot="tooltip"
                     :asset="asset"
@@ -46,6 +46,10 @@
                 filter: drop-shadow(0 0 2px rgba(155, 89, 182, 1));
             }
             // box-shadow: 0 0 20px -3px #9b59b6;
+        }
+        .asset__wrapper {
+            height: 100%;
+            width: 100%;
         }
         .tooltip-universal__wrapper {
             width: 100%;

@@ -1,7 +1,6 @@
 <template>
     <div>
         <h2>Compare assets</h2>
-        <p>Drop at least 2 assets to compare them</p>
         <div class="comparison">
             <div
                 v-for="(asset, assetKey) in assetsc"

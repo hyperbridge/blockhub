@@ -1,11 +1,17 @@
 <template>
     <div>
         <h2>Explore</h2>
-        <c-assets-grid-inventory
-            :assets="assets"
-            @click="previewAsset = $event"
-        />
-        <div v-if="previewAsset" class="preview-asset__wrapper">
+        <div class="inventory-explorer">
+            <c-assets-grid-inventory
+                :assets="assets"
+                @click="previewAsset = $event"
+            />
+            <c-asset-preview
+                v-if="previewAsset"
+                :asset="previewAsset"
+            />
+        </div>
+        <!-- <div v-if="previewAsset" class="preview-asset__wrapper">
             <div class="preview-asset">
                 <c-icon
                     name="times"
@@ -35,7 +41,7 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -45,6 +51,7 @@
         components: {
             'c-assets-grid-inventory': (resolve) => require(['@/ui/components/assets-grid-inventory'], resolve),
             'c-asset-preview-basic': (resolve) => require(['@/ui/components/asset/preview-basic'], resolve),
+            'c-asset-preview': (resolve) => require(['@/ui/components/asset/preview'], resolve),
         },
         data() {
             return {
@@ -64,6 +71,9 @@
                     durability: "40/41"
                 }
             }
+        },
+        mounted() {
+            this.previewAsset = this.assets[0];
         }
     }
 </script>
@@ -108,5 +118,9 @@
         right: 14px;
         font-size: 16px;
         cursor: pointer;
+    }
+
+    .inventory-explorer {
+        display: flex;
     }
 </style>
