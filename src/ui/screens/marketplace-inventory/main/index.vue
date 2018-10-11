@@ -1,15 +1,32 @@
 <template>
     <div>
         <h2>Explore</h2>
-        <div class="inventory-explorer">
-            <div class="assets-grid">
-                <c-asset
-                    v-for="(asset, index) in selectableAssets"
-                    :key="index"
-                    :asset="asset"
-                    @click="previewAsset = $event; asset.selected = !asset.selected"
-                />
+        <div class="inventory-navigation">
+            <c-switch :label="labelText" v-model="allowSelect"/>
+            <div>
+                <c-button status="info" @click="selectAll()" icon="hand-pointer">
+                    {{ everySelected ? 'Unselect all' : 'Select all' }}
+                </c-button>
+                <c-button status="info" icon="dollar-sign">
+                    Sell selected in market
+                </c-button>
             </div>
+        </div>
+        <div class="inventory-explorer">
+            <c-content-navigation
+                :items="selectableAssets"
+                :setItemsPerPage="12"
+                :setItemsLimit="12"
+            >
+                <div class="assets-grid" slot-scope="props">
+                    <c-asset
+                        v-for="(asset, index) in props.items"
+                        :key="index"
+                        :asset="asset"
+                        @click="selectAsset($event)"
+                    />
+                </div>
+            </c-content-navigation>
             <c-asset-preview
                 v-if="previewAsset"
                 :asset="previewAsset"
@@ -58,6 +75,9 @@
             'c-asset-preview': (resolve) => require(['@/ui/components/asset/preview'], resolve),
             'c-asset': (resolve) => require(['@/ui/components/assets-grid-inventory/asset'], resolve),
             'c-asset': (resolve) => require(['@/ui/components/assets-grid-inventory/asset'], resolve),
+            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
+            'c-checkbox': (resolve) => require(['@/ui/components/checkbox'], resolve),
+            'c-switch': (resolve) => require(['@/ui/components/switch'], resolve),
         },
         data() {
             return {
@@ -76,7 +96,32 @@
                     level_requirement: 70,
                     durability: "40/41"
                 },
-                selectableAssets: []
+                selectableAssets: [],
+                allowSelect: false
+            }
+        },
+        methods: {
+            selectAsset(asset) {
+                this.previewAsset = asset;
+                if (this.allowSelect) asset.selected = !asset.selected;
+            },
+            selectAll() {
+                if (this.allowSelect) {
+                    this.selectableAssets.forEach(asset =>
+                        asset.selected = !asset.selected
+                    );
+                }
+            }
+        },
+        computed: {
+            labelText() {
+                return `${this.allowSelect ? 'Disable' : 'Enable'} assets selecting`;
+            },
+            selectedAssets() {
+                return this.selectableAssets.filter(asset => asset.selected);
+            },
+            everySelected() {
+                return !(!!(this.selectableAssets.length - this.selectedAssets.length));
             }
         },
         mounted() {
@@ -87,6 +132,16 @@
 </script>
 
 <style lang="scss" scoped>
+    .inventory-navigation {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 4px;
+        background: rgba(1,1,1,.4);
+        border-bottom: 1px solid #fff;
+        margin: 10px 0;
+        padding: 10px;
+    }
     .preview-asset__wrapper {
         left: 0;
         bottom: 0;
@@ -101,6 +156,8 @@
         background: rgba(29, 30, 46, .65);
         margin: 10px;
         border-radius: 4px;
+        height: 100%;
+        min-width: 350px;
         > div {
             cursor: pointer;
         }
