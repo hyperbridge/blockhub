@@ -165,12 +165,12 @@
                             <div class="navigation">
                                 <ul>
                                     <template v-for="(update,  index) in updates">
-                                        <li class="title" :key="index">
+                                        <li class="title" :key="`title-${index}`">
                                             <a :href="update.link">
                                                 <span class="text">{{ update.title }}</span>
                                             </a>
                                         </li>
-                                        <li :key="index">
+                                        <li :key="`info-${index}`">
                                             <span class="text">{{ update.info }}</span>
                                         </li>
                                     </template>
