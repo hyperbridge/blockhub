@@ -1,5 +1,5 @@
 <template>
-    <a class="load-more" @click.prevent="$emit('click')">
+    <a class="load-more" :class="{ 'fixed': fixed }" @click.prevent="$emit('click')">
         <span class="load-more__text">
             <slot>Load More</slot>
         </span>
@@ -8,7 +8,13 @@
 
 <script>
     export default {
-        name: 'load-more'
+        name: 'load-more',
+        props: {
+            fixed: {
+                type: Boolean,
+                default: false
+            }
+        }
     }
 </script>
 
@@ -16,14 +22,18 @@
     .load-more {
         display: block;
         text-align: center;
-        width: 230px;
         overflow: hidden;
         margin: 10px 20px;
-        position: fixed;
-        bottom: 0;
-        z-index: 1;
-        left: 0;
         user-select: none;
+        width: 100%;
+
+        &.fixed {
+            position: fixed;
+            bottom: 0;
+            z-index: 1;
+            left: 0;
+            width: 230px;
+        }
     }
 
     .load-more__text {

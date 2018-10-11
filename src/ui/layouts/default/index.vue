@@ -45,13 +45,13 @@
                 <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
                     <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}-navigation`" ref="scroll_sidebar_content"></component>
                 </div>
-                <c-load-more @click="scrollSidebarDown" v-if="scrollMoreDirection == 'down'">
+                <c-load-more @click="scrollSidebarDown" :fixed="true" v-if="scrollMoreDirection == 'down'">
                     <div class="load-more-slot">
                         More
                         <i class="fas fa-sort-down"></i>
                     </div>
                 </c-load-more>
-                <c-load-more @click="scrollSidebarUp" v-if="scrollMoreDirection == 'up'">
+                <c-load-more @click="scrollSidebarUp" :fixed="true" v-if="scrollMoreDirection == 'up'">
                     <div class="load-more-slot">
                         <i class="fas fa-sort-up"></i>
                         Up
