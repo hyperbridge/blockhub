@@ -3382,7 +3382,6 @@ storiesOf('Cookie policy', module)
                     </div> `
     }))
 
-
 import WelcomeBox from '@/ui/components/welcome-box'
 storiesOf('Welcome Box', module)
     .add('default', () => ({
@@ -3391,6 +3390,65 @@ storiesOf('Welcome Box', module)
         },
         template: `<div class="p-5 position-relative" style="height: 900px;width: 700px">
                         <c-welcome-box />
+                    </div> `
+    }))
+
+import Share from '@/ui/components/share/type-1'
+storiesOf('Share', module)
+    .add('type 1', () => ({
+        components:{
+            'c-share': Share
+        },
+        data(){
+            return{
+                online:[
+                    {
+                        "name": "Sally Hamilton",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Poole Wise",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Frye Nash",
+                        "img": "http://placehold.it/32x32"
+                    }
+                ],
+                favorites:[
+                    {
+                        "name": "Nixon Love",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Richards Langley",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Jill Medina",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Callahan Ballard",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Zamora Simmons",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Jenkins Ruiz",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Kemp Christian",
+                        "img": "http://placehold.it/32x32"
+                    }
+                ]
+            }
+        },
+        template: `<div class="p-5 position-relative" style="height: 300px;width: 300px">
+                        <c-share :onlineList="online" :favoritesList="favorites" />
                     </div> `
     }))
 
