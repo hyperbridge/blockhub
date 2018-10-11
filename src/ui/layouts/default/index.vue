@@ -403,7 +403,7 @@
                     loop: false,
                 },
                 notifPopup: {},
-                scrollMoreDirection: 'down'
+                scrollMoreDirection: null
             }
         },
         updated() {
@@ -449,15 +449,24 @@
                 this.checkScrollButton()
             },
             checkScrollButton(){
-                // Change the scroll direction when it hits the last 10px of the sidebar
-                if(($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight()) >= ($('#scroll_sidebar')[0].scrollHeight - 10)) {
-                    this.scrollMoreDirection = 'up';
-                } else {
-                    this.scrollMoreDirection = 'down';
+                try {
+                    if ($('#scroll_sidebar').children().height() > $('#scroll_sidebar').height()) {
+                        // Change the scroll direction when it hits the last 10px of the sidebar
+                        if(($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight()) >= ($('#scroll_sidebar')[0].scrollHeight - 10)) {
+                            this.scrollMoreDirection = 'up';
+                        }
+                        else {
+                            this.scrollMoreDirection = 'down';
+                        }
+                    } else {
+                        this.scrollMoreDirection = null
+                    }
+                } catch(e) {
+
                 }
             }
         },
-        mounted: function () {
+        mounted() {
             this.$nextTick(() => {
                 this.loadingState = false
                 setTimeout(() => {
@@ -472,6 +481,10 @@
                         }, 250)
                     })
                 }, 3000) // TODO: remove arbitrary delay
+
+                setInterval(() => {
+                    this.checkScrollButton()
+                }, 500)
             })
         }
     }
@@ -740,7 +753,7 @@
     .left-sidebar__content{
         overflow-y: scroll;
         overflow-x: hidden;
-        height: 100%;
+        height: calc(100% - 40px);
     }
     .col-lg-6{
         @media (max-width: 1500px){
