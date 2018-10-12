@@ -148,7 +148,7 @@
             &.#{$status} {
                 background-color: nth($colorSet, 1);
                 color: nth($colorSet, 2);
-                &:hover {
+                &:not([disabled]):hover {
                     background: nth($colorSet, 3);
                     color: nth($colorSet, 4);
                     text-decoration: none;
@@ -171,10 +171,18 @@
             background: transparent;
             color: nth($colorSet, 1);
             border: 2px solid nth($colorSet, 1);
-            &:hover {
+            &:not([disabled]):hover {
                 background: nth($colorSet, 1);
                 color: nth($colorSet, 2);
             }
+        }
+
+        &[disabled] {
+            background: #bfbfbf !important;
+        }
+
+        &.disabled {
+            background: #bfbfbf !important;
         }
     }
     }

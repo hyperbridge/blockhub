@@ -102,7 +102,7 @@
                                     <p>All-in-one spot for games assets</p>
                                 </div>
                                 <div class="banner-action">
-                                    <c-button status="info" icon_hide size="lg">VISIT NOW</c-button>
+                                    <c-button status="info" icon_hide size="lg">GAME ON</c-button>
                                 </div>
                             </div>
                         </c-banner>

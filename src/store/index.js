@@ -370,7 +370,6 @@ const monitorSimulatorMode = () => {
 // }
 
 
-
 const GetMode = () => {
     const hostname = window.location.hostname
     let hash = document.location.hash.replace('#/', '')
