@@ -149,7 +149,7 @@ window.BlockHub.resetSeedData = () => {
         DB.application.config.data[0].account.identities = []
         DB.application.config.data[0].account.current_identity = null
     }
-    
+
     DB.application.config.data[0].account.notifications = []
 
     DB.marketplace.config.data[0].curator_reviews = []

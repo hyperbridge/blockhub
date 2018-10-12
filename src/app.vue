@@ -206,7 +206,7 @@
             }
         },
         mounted() {
-            this.$store.commit('loadTransactions');
+            this.$store.commit('assets/loadTransactions');
             this.loadSettings()
             this.ensureDesktopWelcome()
         },
