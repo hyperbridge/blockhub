@@ -2,8 +2,14 @@
     <c-layout navigationKey="help" :showLeftPanel="false" :showRightPanel="false">
         <div class="content" id="content">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12 mb-4">
+                <p class="errors" v-if="errors.length">
+                    <strong>Please correct the following error(s):</strong>
+                    <ul>
+                        <li v-for="error in errors" :key="error">{{ error }}</li>
+                    </ul>
+                </p>
+                <div class="row" style="">
+                    <div class="col-6 mb-4">
                         <h2>What is HBX?</h2>
                         <p>
                             Built by Hyperbridge, HBX tokens are used to fuel the decentralized protocols underlying BlockHub. 
@@ -18,9 +24,11 @@
                                 <li>Product testing</li>
                                 <li>Polls/Questionnaires</li>
                             </ul>
-
-                            HBX tokens can be used to:
-                        
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <h2>What can HBX be used for?</h2>
+                        <p>
                             <ul>
                                 <li>Contribute to crowdfund projects</li>
                                 <li>Purchase products within the store</li>
@@ -33,16 +41,261 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12" v-if="desktop_mode">
-                        <p>Choose your identity to purchase with:</p>
-                        <p>---profile boxs---</p>
-                        <p>How many?</p>
-                        <p>--input box--</p>
-                        <p>Continue to Purchase</p>
+                    <div class="col-6" v-if="desktop_mode">
+                        <c-block title="Purchase" class="margin-bottom-30">
+                            <p>Each HBX token is <strong>${{ tokenPriceUSD }} USD</strong>, and can be purchased with ETH at the current price of <strong>{{ (1/ETH2USD).toString().slice(0, 6) }} ETH</strong> per HBX. (Based on a locked conversion of {{ ETH2USD }} ETH to USD). How many would you like?</p>
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        ETH
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" ref="input" placeholder="0.00" v-model="purchaseETH" @keyup="calcHBX" />
+                            </div>
+                            <p>Roughly equal to:</p>
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        HBX
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" ref="input" placeholder="0.00" v-model="purchaseHBX" readonly />
+                            </div>
+                        </c-block>
                     </div>
+
+                    <div class="col-6" v-if="desktop_mode">
+                        <c-block title="Payment Profile" class="margin-bottom-30">
+                            <div class="profile-picker">
+                                <div
+                                    class="profile-picker__profile"
+                                    v-for="identity in identities"
+                                    :key="identity.id"
+                                >
+                                    <c-user-card
+                                        :user="identity"
+                                        :previewMode="true"
+                                        :class="{ 'default': identity.id == chosenIdentity.id }"
+                                    />
+                                    <div class="profile__action">
+                                        <c-button
+                                            status="info"
+                                            icon="check"
+                                            @click="chooseIdentity(identity)"
+                                            v-if="identity.id != chosenIdentity.id"
+                                        >Choose</c-button>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <p>BlockHub will purchase tokens for this profile:</p>
+                            <p><a :href="`https://etherscan.io/address/${chosenIdentity.public_address}`"><strong>{{ chosenIdentity.public_address }}</strong></a></p>
+
+                            <!-- <br />
+
+                            <p>BlockHub will send a payment of {{ purchaseETH }} ETH to this contract address:</p>
+                            <p><a :href="`https://etherscan.io/address/${tokenContractAddress}`"><strong>{{ tokenContractAddress }}</strong></a></p> -->
+                        </c-block>
+                    </div>
+
                     <div class="col-12 text-center" v-if="!desktop_mode">
-                        <c-button class="c-btn c-btn-lg btn-outline-red" href="/#/download">You must use the BlockHub app to participate.</c-button>
-                        <c-download-block :minimal="true" />
+                        <h2>You must use the BlockHub app to participate.</h2>
+                        <c-welcome-box />
+                    </div>
+
+                    <div class="col-8 offset-2" v-if="!account.is_verified && !account.is_verifying" style="text-align: center">
+                        <h2 style="text-align: center">Oops, you haven't verified your account yet. <br />You'll need to do this to participate.</h2>
+                        <br />
+                        <c-button class="c-btn-lg" href="/#/account/verification" style="margin: 0 auto">Verify Account</c-button>
+                    </div>
+
+                    <div class="col-8 offset-2" v-if="!account.is_verified && account.is_verifying" style="text-align: center">
+                        <p>Your account is currently being verified. You'll need to wait until it's finished to participate.</p>
+                        <p>Please check back later. If you've been waiting too long or have problems, please email support@hyperbridge.org</p>
+                    </div>
+                    
+                    <div v-if="account.is_verified" style="text-align: center">
+                        <div class="col-10 offset-1 tab-card">
+                            <h4>Token Sale Agreement</h4>
+                            <div class="terms_block">
+                                <h2>Introduction</h2>
+
+                                <p>These Website Standard Terms and Conditions written on this webpage shall
+                                    manage
+                                    your use of our website, <span class="highlight preview_website_name">BlockHub</span>
+                                    accessible at <span class="highlight preview_website_url">BlockHub.gg</span>.
+                                </p>
+
+                                <p>These Terms will be applied fully and affect to your use of this Website. By
+                                    using this Website, you agreed to accept all terms and conditions written in
+                                    here. You must not use this Website if you disagree with any of these
+                                    Website
+                                    Standard Terms and Conditions.</p>
+
+                                <p>Minors or people below 18 years old are not allowed to use this Website.</p>
+
+                                <h2>Intellectual Property Rights</h2>
+
+                                <p>Other than the content you own, under these Terms, <span
+                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and/or its
+                                    licensors
+                                    own all the intellectual property rights and materials contained in this
+                                    Website.</p>
+
+                                <p>You are granted limited license only for purposes of viewing the material
+                                    contained on this Website.</p>
+
+                                <h2>Restrictions</h2>
+
+                                <p>You are specifically restricted from all of the following:</p>
+
+                                <ul>
+                                    <li>publishing any Website material in any other media;</li>
+                                    <li>selling, sublicensing and/or otherwise commercializing any Website
+                                        material;
+                                    </li>
+                                    <li>publicly performing and/or showing any Website material;</li>
+                                    <li>using this Website in any way that is or may be damaging to this
+                                        Website;
+                                    </li>
+                                    <li>using this Website in any way that impacts user access to this
+                                        Website;
+                                    </li>
+                                    <li>using this Website contrary to applicable laws and regulations, or in
+                                        any
+                                        way may cause harm to the Website, or to any person or business entity;
+                                    </li>
+                                    <li>engaging in any data mining, data harvesting, data extracting or any
+                                        other
+                                        similar activity in relation to this Website;
+                                    </li>
+                                    <li>using this Website to engage in any advertising or marketing.</li>
+                                </ul>
+
+                                <p>Certain areas of this Website are restricted from being access by you and
+                                    <span
+                                        class="highlight preview_company_name">Hyperbridge Technology Inc.</span> may further
+                                    restrict
+                                    access by you to any areas of this Website, at any time, in absolute
+                                    discretion.
+                                    Any user ID and password you may have for this Website are confidential and
+                                    you
+                                    must maintain confidentiality as well.</p>
+
+                                <h2>Your Content</h2>
+
+                                <p>In these Website Standard Terms and Conditions, “Your Content” shall mean any
+                                    audio, video text, images or other material you choose to display on this
+                                    Website. By displaying Your Content, you grant <span
+                                        class="highlight preview_company_name">Hyperbridge Technology Inc.</span> a
+                                    non-exclusive,
+                                    worldwide irrevocable, sub licensable license to use, reproduce, adapt,
+                                    publish,
+                                    translate and distribute it in any and all media.</p>
+
+                                <p>Your Content must be your own and must not be invading any third-party's
+                                    rights.
+                                    <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> reserves
+                                    the
+                                    right to remove any of Your Content from this Website at any time without
+                                    notice.</p>
+
+                                <h2>No warranties</h2>
+
+                                <p>This Website is provided “as is,” with all faults, and <span
+                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> express no
+                                    representations or warranties, of any kind related to this Website or the
+                                    materials contained on this Website. Also, nothing contained on this Website
+                                    shall be interpreted as advising you.</p>
+
+                                <h2>Limitation of liability</h2>
+
+                                <p>In no event shall <span
+                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span>, nor any of its
+                                    officers, directors and employees, shall be held liable for anything arising
+                                    out
+                                    of or in any way connected with your use of this Website whether such
+                                    liability
+                                    is under contract. &nbsp;<span class="highlight preview_company_name">Hyperbridge Technology Inc.</span>,
+                                    including its officers, directors and employees shall not be held liable for
+                                    any
+                                    indirect, consequential or special liability arising out of or in any way
+                                    related to your use of this Website.</p>
+
+                                <h2>Indemnification<p></p>
+
+                                    <p>You hereby indemnify to the fullest extent <span
+                                        class="highlight preview_company_name">Hyperbridge Technology Inc.</span> from and
+                                        against
+                                        any and/or all liabilities, costs, demands, causes of action, damages
+                                        and
+                                        expenses arising in any way related to your breach of any of the
+                                        provisions
+                                        of these Terms.</p>
+
+                                </h2>
+                                <h2>Severability</h2>
+
+                                <p>If any provision of these Terms is found to be invalid under any applicable
+                                    law,
+                                    such provisions shall be deleted without affecting the remaining provisions
+                                    herein.</p>
+
+                                <h2>Variation of Terms</h2>
+
+                                <p><span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is permitted
+                                    to
+                                    revise these Terms at any time as it sees fit, and by using this Website you
+                                    are
+                                    expected to review these Terms on a regular basis.</p>
+
+                                <h2>Assignment</h2>
+
+                                <p>The <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is
+                                    allowed
+                                    to assign, transfer, and subcontract its rights and/or obligations under
+                                    these
+                                    Terms without any notification. However, you are not allowed to assign,
+                                    transfer, or subcontract any of your rights and/or obligations under these
+                                    Terms.</p>
+
+                                <h2>Entire Agreement</h2>
+
+                                <p>These Terms constitute the entire agreement between <span
+                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and you in
+                                    relation
+                                    to your use of this Website, and supersede all prior agreements and
+                                    understandings.</p>
+
+                                <h2>Governing Law &amp; Jurisdiction</h2>
+
+                                <p>These Terms will be governed by and interpreted in accordance with the laws
+                                    of
+                                    the State of <span class="highlight preview_country">Country</span>, and you
+                                    submit to the non-exclusive jurisdiction of the state and federal courts
+                                    located
+                                    in <span class="highlight preview_country">Country</span> for the resolution
+                                    of
+                                    any disputes.</p>
+
+                            </div>
+                        </div>
+
+                        <div class="col-8 offset-2">
+                            <c-checkbox
+                                id="sss"
+                                :checked="false"
+                                v-model="tokenSaleAgreement"
+                            >
+                                By checking this box, you agree to the Purchase Agreement.
+                            </c-checkbox>
+
+                            <br /><br /><br />
+                            <c-button status="success" class="justify-content-center" icon_hide size="xl" @click="$emit('click')">
+                                Proceed to Purchase
+                            </c-button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,22 +304,153 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  components: {
-    'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-    'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve)
-  },
-  computed: {
-    desktop_mode() {
-        return this.$store.state.application.desktop_mode;
+    components: {
+        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+        'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
+        'c-block': (resolve) => require(['@/ui/components/block'], resolve),
+        'c-welcome-box': (resolve) => require(['@/ui/components/welcome-box'], resolve)
     },
-  }
+    data() {
+        return {
+            account: this.$store.state.application.account,
+            identities: this.$store.state.application.account.identities,
+            chosenIdentity: this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id),
+            purchaseETH: null,
+            purchaseHBX: null,
+            tokenContractAddress: "0x627306090abab3a6e1400e9345bc60c78a8bef57",
+            ETH2USD: 220.10,
+            tokenPriceUSD: 0.055,
+            tokenSaleAgreement: false,
+            errors: []
+        }
+    },
+    computed: {
+        desktop_mode() {
+            return this.$store.state.application.desktop_mode;
+        },
+    },
+    methods: {
+        calcHBX() {
+            this.purchaseHBX = (this.purchaseETH * this.ETH2USD) / 0.055
+        },
+        chooseIdentity(identity) {
+            this.chosenIdentity = identity
+        }
+    },
+    created() {
+        // axios({
+        //     method: 'get',
+        //     url: 'https://api.coinmarketcap.com/v1/ticker/ethereum/'
+        // })
+        // .then((res) => {
+        //     this.ETH2USD = res.data[0].price_usd
+        // })
+        // .catch((err) => {
+        //     this.errors.push('Could not get price from coinmarketcap. Please contact support with this error: ' + JSON.stringify(err))
+        // })
+    }
 }
 </script>
 
 <style lang="scss" scoped>
+    .page__content > .content {
+        width: calc(100%);
+        padding: 0 100px;
+    }
+
     .card {
         background: none !important;
         border: 0 none !important;
+    }
+
+
+    .profile-picker {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-picker__profile {
+        position: relative;
+        margin: 10px 2%;
+        width: 46%;
+        &:hover .profile__action, &.edit .profile__action {
+            display: flex;
+        }
+        >.default {
+            $defColor: #43C981;
+            border-color: $defColor !important;
+            &:before {
+                content: "";
+                width: 26px;
+                position: absolute;
+                border-radius: 5px 0 0 5px;
+                left: -22px;
+                bottom: -1px;
+                height: calc(100% + 2px);
+                background: $defColor;
+            }
+            &:after {
+                font-family: 'Font Awesome 5 Free', 'Barlow', sans-serif;
+                content: "CHOSEN \F14A";
+                color: #1C2032;
+                font-weight: bold;
+                font-size: 16px;
+                position: absolute;
+                transform: rotate(-90deg);
+                top: 40px;
+                left: -50px;
+            }
+        }
+    }
+
+    .profile__action {
+        display: none;
+        position: absolute;
+        justify-content: center;
+        bottom: -20px;
+        width: 100%;
+        height: 26px;
+        .c-btn {
+            margin: 0 5px;
+        }
+    }
+
+    p {
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .tab-card {
+        background: #383853;
+        border-radius: 5px;
+        padding: 8px 10px;
+        border: 1px solid #373752;
+        margin-bottom: 15px;
+        &:last-child {
+            margin: 0;
+        }
+        input {
+            border: none;
+            box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
+            background: #303049;
+        }
+        .terms_block {
+            background: #303049;
+            box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
+            padding: 15px;
+            border-radius: 5px;
+            max-height: 400px;
+            overflow-y: auto;
+            text-align: left;
+            h1, h2, h3, h4, h5 {
+                font-size: 18px;
+            }
+        }
     }
 </style>
