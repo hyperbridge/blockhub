@@ -70,7 +70,7 @@
                 "id": 3,
                 "message": "Leeroooooy Jeeeenkiiiiins!",
                 "user": {
-                    "id": 2,
+                    "id": 1,
                     "name": "fr0stbyte"
                 }
             },
@@ -78,7 +78,7 @@
                 "id": 4,
                 "message": "Well, at least I have chicken!",
                 "user": {
-                    "id": 2,
+                    "id": 1,
                     "name": "fr0stbyte"
                 }
             },
@@ -86,7 +86,7 @@
                 "id": 6,
                 "message": "Your lack of faith is disturbing",
                 "user": {
-                    "id": 2,
+                    "id": 1,
                     "name": "fr0stbyte"
                 }
             },
@@ -94,7 +94,7 @@
                 "id": 7,
                 "message": "Many whelps. Handle it! Who was that!? That's a 50 DKP minus!!",
                 "user": {
-                    "id": 2,
+                    "id": 1,
                     "name": "fr0stbyte"
                 }
             },
@@ -102,7 +102,7 @@
                 "id": 8,
                 "message": "Maybe Elon was right about AI",
                 "user": {
-                    "id": 2,
+                    "id": 1,
                     "name": "fr0stbyte"
                 }
             },
@@ -110,7 +110,7 @@
                 "id": 9,
                 "message": "I can dance all day, try to hit me, come on, try to hit me",
                 "user": {
-                    "id": 2,
+                    "id": 1,
                     "name": "fr0stbyte"
                 }
             },
@@ -118,8 +118,24 @@
                 "id": 10,
                 "message": "My hands are shaking, but I'm still shooting, still getting headshots like BOOM headshot BOOM HEADSHOT!",
                 "user": {
-                    "id": 2,
+                    "id": 1,
                     "name": "fr0stbyte"
+                }
+            },
+            {
+                "id": 11,
+                "message": "Drinking too much will make chuck sick",
+                "user": {
+                    "id": 4,
+                    "name": "Spyder"
+                }
+            },
+            {
+                "id": 12,
+                "message": "The cake is a lie.",
+                "user": {
+                    "id": 5,
+                    "name": "JordoBrooks"
                 }
             }
         ],
