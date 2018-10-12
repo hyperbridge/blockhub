@@ -90,18 +90,18 @@
                         <c-welcome-box />
                     </div>
 
-                    <div class="col-8 offset-2" v-if="!account.is_verified && !account.is_verifying" style="text-align: center">
+                    <div class="col-8 offset-2" v-if="desktop_mode && !account.is_verified && !account.is_verifying" style="text-align: center">
                         <h2 style="text-align: center">Oops, you haven't verified your account yet. <br />You'll need to do this to participate.</h2>
                         <br />
                         <c-button class="c-btn-lg" href="/#/account/verification" style="margin: 0 auto">Verify Account</c-button>
                     </div>
 
-                    <div class="col-8 offset-2" v-if="!account.is_verified && account.is_verifying" style="text-align: center">
+                    <div class="col-8 offset-2" v-if="desktop_mode && !account.is_verified && account.is_verifying" style="text-align: center">
                         <p>Your account is currently being verified. You'll need to wait until it's finished to participate.</p>
                         <p>Please check back later. If you've been waiting too long or have problems, please email support@hyperbridge.org</p>
                     </div>
                     
-                    <div v-if="account.is_verified" style="text-align: center">
+                    <div v-if="desktop_mode && account.is_verified" style="text-align: center">
                         <div class="col-10 offset-1 tab-card">
                             <h4>Token Sale Agreement</h4>
                             <div class="terms_block">
