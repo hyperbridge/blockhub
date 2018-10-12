@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="product">
+    <c-layout navigationKey="product" navigationTitle="GAME COMMUNITY">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">

@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="product">
+    <c-layout navigationKey="product" navigationTitle="GAME INVENTORY">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row" v-if="!product">

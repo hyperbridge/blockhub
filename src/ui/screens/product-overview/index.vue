@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="product" :showRightPanel="false">
+    <c-layout navigationKey="product" :showRightPanel="false" navigationTitle="GAME OVERVIEW">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
@@ -66,7 +66,7 @@
                                 <router-link :to="`/product/${product.id}/projects`" class="nav-link">Crowdfunding</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link :to="`/product/${product.id}/assets`" class="nav-link">Assets</router-link>
+                                <router-link :to="`/product/${product.id}/assets`" class="nav-link">Inventory</router-link>
                             </li>
                         </ul>
 
