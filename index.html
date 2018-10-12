@@ -474,6 +474,7 @@ a {
     <div id="critical-error">
       <p>A critical error may have occurred. If BlockHub doesn't load in 1 minute, and your internet connection is fine, then either this page is broken, or your settings are corrupt.</p>
       <br />
+      <button onClick="window.goHome()">Go home</button>
       <button onClick="window.resetSettings()">Reset settings</button> 
       <button onClick="window.location = 'https://hyperbridge.org/#contact'">Contact us</button>
       <br />
@@ -487,6 +488,10 @@ a {
 </div>
 
 <script>
+window.goHome = function() {
+  window.location = "/"
+}
+
 window.resetSettings = function() {
   if (window.closeLokiDatabase) {
     window.closeLokiDatabase()
