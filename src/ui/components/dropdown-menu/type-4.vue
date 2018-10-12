@@ -1,41 +1,40 @@
 <template>
-    <div class="dropdown dropmenu_container">
-        <div class="rw-btn rw-btn--card" data-toggle="dropdown" aria-expanded="false">
+    <div class="dropdown dropmenu_container" :class="{'show' : show}">
+        <div class="rw-btn rw-btn--card" @click="toggleMenu">
             <div></div>
         </div>
-        <div class="dropdown-menu"
-             :class="[ 'dropdown-menu-' + dropPosition ]">
-            <!--<frosted-glass-container>-->
-                <!--<frosted-glass>-->
+        <div class="dropdown-menu dropdown-menu-left"
+             :class="{'show' : show}">
             <div class="position-relative" style="z-index: 4">
                 <slot />
             </div>
-                <!--</frosted-glass>-->
-            <!--</frosted-glass-container>-->
         </div>
     </div>
 </template>
 
 <script>
-    // import { frostedGlassContainer, frostedGlass } from 'frosted-glass/dist/frostedglass.js';
-export default {
-    props: {
-        dropPosition: {
-            type: String,
-            default: 'left'
+    export default {
+        data(){
+            return{
+                show: false
+            }
+        },
+        methods:{
+            toggleMenu(){
+                this.show = !this.show
+            },
+            closeMenu(){
+                this.show = false
+            }
         }
-    },
-    components:{
-        // 'frosted-glass-container': frostedGlassContainer,
-        // 'frosted-glass': frostedGlass
     }
-}
 </script>
 
 
 <style lang="scss" scoped>
     .dropmenu_container {
         position: absolute;
+        display: inline-block;
         .rw-btn--card {
             padding: 0;
             border: none;
@@ -70,20 +69,9 @@ export default {
             width: auto;
             padding: 10px;
             border-radius: 5px;
-            overflow: hidden;
+            /*overflow: hidden;*/
             border: none;
-            background: transparent;
-            &:before{
-                content: '';
-                background: rgba(0, 0, 0, .85);
-                opacity: .9;
-                position: absolute;
-                left: -25px;
-                right: -25px;
-                top: -25px;
-                bottom: -25px;
-                z-index: 1;
-            }
+            background: rgba(255, 255, 255, .75);
         }
     }
 </style>

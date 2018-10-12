@@ -1,7 +1,7 @@
 <template>
-    <div class="promotion-item">
+    <div class="promotion-item" :class="{ 'bottom-border': border}">
         <div class="promotion-item__icon">
-            <i :class="['fas fa-' + icon]"></i>
+            <i :class="['fas fa-' + icon]" :style="['color: #' + iconColor]"></i>
         </div>
         <h5 class="promotion-item__title" v-if="title">
             {{ title }}
@@ -43,9 +43,16 @@ export default {
             type: Boolean,
             default: false
         },
+        border:{
+            type: Boolean,
+            default: false
+        },
         icon:{
             type: String,
             default: 'shopping-cart'
+        },
+        iconColor:{
+            type: String,
         }
     }
 }
@@ -55,11 +62,21 @@ export default {
     .promotion-item {
         /*border: 2px solid #fbe17d;*/
         border-radius: 5px;
-        padding: 8px 10px;
-        margin-bottom: 15px;
+        padding: 5px 10px 15px 10px;
+        margin-bottom: 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        &.bottom-border{
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
+        }
+    }
+    .promotion-item__icon{
+        font-size: 18px;
+        color: #fff;
+        opacity: .4;
+        width: 30px;
+        text-align: left;
     }
     .promotion-item__title {
         font-size: 21px;
@@ -68,13 +85,6 @@ export default {
         margin: 0;
         color: #fff;
         width: calc(80% - 40px);
-    }
-    .promotion-item__icon{
-        font-size: 18px;
-        color: #fff;
-        opacity: .4;
-        width: 40px;
-        text-align: left;
     }
     .c-btn {
         font-size: 16px;

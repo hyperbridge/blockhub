@@ -16,9 +16,6 @@
 </script>
 
 <style lang="scss" scoped>
-    .promotion-item{
-        border-bottom: 1px solid rgba(255, 255, 255, .1);
-    }
     .block__content{
         padding: 0!important;
     }
