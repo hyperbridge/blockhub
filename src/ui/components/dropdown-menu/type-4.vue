@@ -1,7 +1,10 @@
 <template>
     <div class="dropdown dropmenu_container" :class="{'show' : show}">
-        <div class="rw-btn rw-btn--card" @click="toggleMenu">
+        <div class="rw-btn rw-btn--card" @click="toggleMenu" v-if="!$slots.title">
             <div></div>
+        </div>
+        <div class="dropdown__title" @click="toggleMenu" v-else>
+            <slot name="title" />
         </div>
         <div class="dropdown-menu dropdown-menu-left"
              :class="{'show' : show}">
@@ -33,7 +36,7 @@
 
 <style lang="scss" scoped>
     .dropmenu_container {
-        position: absolute;
+        position: relative;
         display: inline-block;
         .rw-btn--card {
             padding: 0;
@@ -50,6 +53,10 @@
             &:hover {
                 background: transparent;
             }
+        }
+        .dropdown__title{
+            color: #fff;
+            white-space: nowrap;
         }
         &.show {
             .rw-btn--card {
