@@ -33,6 +33,9 @@
                         </div>
                     </div>
                 </div>
+                <p v-for="(error, index) in errors" :key="index">
+                    {{ error }}
+                </p>
                 <span class="sell-assets__summary">
                     You are selling <strong> {{ sellSummary.count }} </strong> assets
                     for <strong> {{ sellSummary.price | roundNum }} </strong> $
@@ -41,7 +44,7 @@
                     <c-button status="danger" @click="openModal = false">
                         Cancel
                     </c-button>
-                    <c-button status="success">
+                    <c-button status="success" @click="sellAssets()">
                         Confirm sell
                     </c-button>
                 </div>
@@ -117,23 +120,10 @@
         data() {
             return {
                 previewAsset: null,
-                metadata: {
-                    type: "Legendary Two Handed Sword",
-                    average_dps: 2903.6,
-                    damage_range_min: 2193,
-                    damage_range_max: 2880,
-                    attack_speed: 1.15,
-                    bonus_1: {
-                        damage: '+9%',
-                        strength: '+1381',
-                    },
-                    bonus_2: "Monster kills grant +151 experience",
-                    level_requirement: 70,
-                    durability: "40/41"
-                },
                 selectableAssets: [],
                 allowSelect: true,
                 openModal: false,
+                errors: []
             }
         },
         methods: {
@@ -142,16 +132,31 @@
                 if (this.allowSelect) asset.selected = !asset.selected;
             },
             selectAll() {
-                if (this.allowSelect) {
-                    this.selectableAssets.forEach(asset =>
-                        asset.selected = !asset.selected
-                    );
+                const { everySelected } = this;
+                this.selectableAssets.forEach(asset =>
+                    asset.selected = !everySelected
+                );
+            },
+            sellAssets() {
+                const { selectedAssets } = this;
+                this.errors = [];
+
+                if (!selectedAssets.length) {
+                    return;
+                } else if (selectedAssets.some(asset => asset.marketPrice <= 0)) {
+                    this.errors.push(`You can't sell asset for no price`);
+                } else {
+                    this.$snotify.success('Assets have been placed in the market', 'Confirmed', {
+                        timeout: 2500,
+                        pauseOnHover: true
+                    });
+                    this.openModal = false;
                 }
             }
         },
         computed: {
             labelText() {
-                return `${this.allowSelect ? 'Disable' : 'Enable'} selecting assets`;
+                return `${this.allowSelect ? 'Disable' : 'Enable'} on click selection`;
             },
             selectedAssets() {
                 return this.selectableAssets.filter(asset => asset.selected);
@@ -264,9 +269,9 @@
         margin: 15px 0;
     }
     .sell-assets__assets-wrapper {
+        min-width: 360px;
         max-height: 500px;
         overflow-y: auto;
-        // box-shadow: 0 -12px 40px -18px rgba(1,1,1,.7) inset;
     }
     .sell-assets__asset {
         padding: 10px;
