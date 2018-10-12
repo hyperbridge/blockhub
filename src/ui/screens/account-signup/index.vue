@@ -63,77 +63,6 @@
                                         </div>
                                     </div>
                                     <div class="tab-card">
-                                        <h4>Security</h4>
-
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label class="sr-only">Password</label>
-                                                    <input type="password" class="form-control" placeholder="Password"
-                                                            name="password" v-model="account.password">
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label class="sr-only">Secret Question #1</label>
-                                                    <!-- http://goodsecurityquestions.com/examples/ -->
-                                                    <select id="secret_question_1" name="secret_question_1" class="form-control" v-model="account.secret_question_1">
-                                                        <option value="" selected>Choose Secret Question</option>
-                                                        <option value="last_name_first_kissed">What is the first name of the person you first kissed?</option>
-                                                        <option value="first_name_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
-                                                        <option value="favorite_high_school_teacher">What is the last name of your favorite teacher in high school?</option>
-                                                        <option value="last_name_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
-                                                        <option value="wedding_reception">What is the name of the plac eyour wedding reception was held?</option>
-                                                        <option value="city_sibling_live">In what city or town does your nearest sibling live?</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label class="sr-only">Secret Question #2</label>
-                                                    <!-- http://goodsecurityquestions.com/examples/ -->
-                                                    <select id="secret_question_2" name="secret_question_2" class="form-control" v-model="account.secret_question_2">
-                                                        <option value="" selected>Choose Secret Question</option>
-                                                        <option value="last_name_first_kissed">What is the first name of the person you first kissed?</option>
-                                                        <option value="first_name_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
-                                                        <option value="favorite_high_school_teacher">What is the last name of your favorite teacher in high school?</option>
-                                                        <option value="last_name_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
-                                                        <option value="wedding_reception">What is the name of the plac eyour wedding reception was held?</option>
-                                                        <option value="city_sibling_live">In what city or town does your nearest sibling live?</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label class="sr-only">Repeat Password</label>
-                                                    <input type="password" class="form-control" placeholder="Password again"
-                                                            name="repeat_password" v-model="account.repeat_password">
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label class="sr-only">Answer #1</label>
-                                                    <input type="text" class="form-control" placeholder="Secret Answer #1"
-                                                            name="secret_answer_1" v-model="account.secret_answer_1">
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label class="sr-only">Answer #2</label>
-                                                    <input type="text" class="form-control" placeholder="Secret Answer #2"
-                                                            name="secret_answer_2" v-model="account.secret_answer_2">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <p>If you ever need to recover your password, you will need the answer to your secret question AND your birthday. With these two you will be able to recover your password, which will allow you to recover your account. If your account is compromised, you should transfer your funds immediately.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-card">
                                         <h4>Agreement</h4>
                                         <div class="terms_block">
 
@@ -329,54 +258,125 @@
                             </c-tab>
                             <c-tab :tab_id="2" :showFooter="true">
                                 <div class="tab-container">
-                                    <div class="padding-40 loading-process" style="position: relative" v-if="!account.passphrase">
+                                    <div class="padding-40 loading-process" style="position: relative" v-if="!passphrase">
                                         <div class="loading loading--w-spinner"><div><div class="loading-spinner"></div></div></div>
                                     </div>
-                                    <div class="padding-40" v-else>
-                                        <h3>Welcome, {{ account.first_name }}!</h3>
-                                        <p v-if="!writtenDown">Make sure to write down your passphase, password, and secret answers and put it somewhere safe.</p>
-                                        <p v-if="writtenDown && !verifyingPassphrase">Now lets verify you've stored your passphrase somewhere safely.</p>
-                                        <p v-if="writtenDown && verifyingPassphrase">Please fill in the missing blanks below.</p>
-
-                                        <br />
-                                        <div class="passphrase" v-if="account.passphrase && writtenDown && !verifyingPassphrase">
-                                            <input type="text" class="form-control" v-for="(word, index) in passphrase" :key="index" :value="word" disabled />
+                                    <div class="tab-card" v-if="passphrase">
+                                        <h4>Security</h4>
+                                        
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Password</label>
+                                                    <input type="password" class="form-control" placeholder="Password"
+                                                            name="password" v-model="account.password">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Secret Question #1</label>
+                                                    <!-- http://goodsecurityquestions.com/examples/ -->
+                                                    <select id="secret_question_1" name="secret_question_1" class="form-control" v-model="account.secret_question_1">
+                                                        <option value="" selected>Choose Secret Question</option>
+                                                        <option value="last_name_first_kissed">What is the first name of the person you first kissed?</option>
+                                                        <option value="first_name_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
+                                                        <option value="favorite_high_school_teacher">What is the last name of your favorite teacher in high school?</option>
+                                                        <option value="last_name_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
+                                                        <option value="wedding_reception">What is the name of the plac eyour wedding reception was held?</option>
+                                                        <option value="city_sibling_live">In what city or town does your nearest sibling live?</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Secret Question #2</label>
+                                                    <!-- http://goodsecurityquestions.com/examples/ -->
+                                                    <select id="secret_question_2" name="secret_question_2" class="form-control" v-model="account.secret_question_2">
+                                                        <option value="" selected>Choose Secret Question</option>
+                                                        <option value="last_name_first_kissed">What is the first name of the person you first kissed?</option>
+                                                        <option value="first_name_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
+                                                        <option value="favorite_high_school_teacher">What is the last name of your favorite teacher in high school?</option>
+                                                        <option value="last_name_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
+                                                        <option value="wedding_reception">What is the name of the plac eyour wedding reception was held?</option>
+                                                        <option value="city_sibling_live">In what city or town does your nearest sibling live?</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="passphrase" ref="passphraseVerification" v-if="account.passphrase && writtenDown && verifyingPassphrase">
-                                            <input type="text" class="form-control" v-for="(word, index) in repeatPassphrase" :key="index" :value="word" @keyup="repeatPassphrase[index] = $event.target.value" />
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Repeat Password</label>
+                                                    <input type="password" class="form-control" placeholder="Password again"
+                                                            name="repeat_password" v-model="account.repeat_password">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Answer #1</label>
+                                                    <input type="text" class="form-control" placeholder="Secret Answer #1"
+                                                            name="secret_answer_1" v-model="account.secret_answer_1">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Answer #2</label>
+                                                    <input type="text" class="form-control" placeholder="Secret Answer #2"
+                                                            name="secret_answer_2" v-model="account.secret_answer_2">
+                                                </div>
+                                            </div>
                                         </div>
-
-                                        <br />
-                                        <c-button class="c-btn-lg" v-if="!writtenDown" @click="writeDown()">Got it</c-button>
-                                        <c-button class="c-btn-lg" v-if="writtenDown && !verifyingPassphrase" @click="verifyPassphrase()">Verify Now</c-button>
-                                        <c-button class="c-btn-lg" v-if="writtenDown && verifyingPassphrase" @click="showPassphrase()">Show Passphrase Again</c-button>
-
-                                        <br /><br />
-                                        <p v-if="verifyingPassphrase">When you're ready proceed to the next step where we will build your public identity. After that you're off to the races!</p>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center margin-top-20" slot="footer">
+                                <div class="tab-card" v-if="!verifyingPassphrase">
+                                    <p>We've generated a passphrase for you. This is used to encrypt your account, password, etc. If you ever need to recover it, you can use your password. If you forget your password, you can use your secret question AND your birthday. We do this to protect you against hackers, however don't lose them, otherwise it will be impossible to recover the account.</p>
+
+                                    <p>Make sure to write down your passphase, password, and secret answers and put it somewhere safe.</p>
+
+                                    <div class="passphrase">
+                                        <input type="text" class="form-control" v-for="(word, index) in passphrase" :key="index" :value="word" @keyup="passphrase[index] = $event.target.value" />
+                                    </div>
+
+                                    <br />
+
+                                    <c-button class="c-btn-lg" @click="startVerification()">Got it</c-button>
+                                </div>
+                                <div class="tab-card" v-if="verifyingPassphrase">
+                                    <p>We've generated a passphrase for you. This is used to encrypt your account, password, etc. If you ever need to recover it, you can use your password. If you forget your password, you can use your secret question AND your birthday. We do this to protect you against hackers, however don't lose them, otherwise it will be impossible to recover the account.</p>
+
+                                    <p>Make sure to write down your passphase, password, and secret answers and put it somewhere safe.</p>
+
+                                    <div class="passphrase" ref="passphraseVerification">
+                                        <input type="text" class="form-control" v-for="(word, index) in repeatPassphrase" :key="index" :value="word" @keyup="repeatPassphrase[index] = $event.target.value" />
+                                    </div>
+
+                                    <c-button class="plain" @click="showPassphrase()" v-if="verifyingPassphrase">Show Passphrase Again</c-button> 
+                                    <br /><br />
+
+                                    <c-button class="c-btn-lg" @click="confirmVerification()" v-if="verifyingPassphrase">Verify Now</c-button>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center margin-top-20" slot="footer" v-if="verifiedPassphrase">
                                     <c-switch
                                         v-model="agreeStoredPassphrase"
                                         label="I have safely stored my passphrase"
                                         label_position="right"
-                                        v-if="verifyingPassphrase"
+                                        v-if="verifiedPassphrase"
                                     />
                                     <c-switch
                                         v-model="account.encrypt_passphrase"
                                         label="I want to encrypt my passphrase with my password"
                                         label_position="right"
-                                        v-if="verifyingPassphrase"
+                                        v-if="verifiedPassphrase"
                                     />
                                     <c-button
                                         @click="checkForm()"
-                                        v-if="verifyingPassphrase"
-                                    >NEXT</c-button>
+                                        v-if="verifiedPassphrase"
+                                    >CONTINUE</c-button>
                                 </div>
                             </c-tab>
                             <c-tab :tab_id="3">
                                 <div class="tab-container">
-                                    <div class="padding-20" v-if="finishedStep === 3">
+                                    <div class="tab-card">
                                         <h3>Congratulations!</h3>
                                         <p>That's it! You're now a member of BlockHub, and the future of decentralized protocols.<br />
                                         We hope you enjoy many years of success with BlockHub and the Hyperbridge family!</p>
@@ -387,37 +387,6 @@
                                             @click="checkForm()"
                                         >Continue to BlockHub</c-button>
                                     </div>
-                                    <div class="padding-20" v-if="finishedStep < 3">
-                                        <h3>Now let's build your main identity. Don't worry, you can have more than one identity.</h3>
-                                        <div class="row margin-top-40">
-                                            <div class="col">
-                                                <div class="tab-card">
-                                                    <h4>Setup your identity</h4>
-                                                    <c-user-card
-                                                        :user="account.identity"
-                                                        v-bind.sync="account.identity"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="tab-card">
-                                                    <h4>Preview</h4>
-                                                    <c-user-card
-                                                        :user="account.identity"
-                                                        previewMode
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-end margin-top-20" slot="footer" v-if="finishedStep < 3">
-                                    <c-button
-                                        status="success"
-                                        icon="check"
-                                        icon_position="right"
-                                        @click="checkForm()"
-                                    >COMPLETE</c-button>
                                 </div>
                             </c-tab>
                         </c-tabs>
@@ -786,6 +755,7 @@ export default {
         return {
             writtenDown: false,
             verifyingPassphrase: false,
+            verifiedPassphrase: false,
             agreeStoredPassphrase: false,
             currentStep: 1,
             finishedStep: 1,
@@ -843,29 +813,12 @@ export default {
                     && this.account.email
                     && this.account.birthday
                     && this.account.agreement
-                    && this.account.secret_question_1
-                    && this.account.secret_answer_1
-                    && this.account.secret_question_2
-                    && this.account.secret_answer_2
-                    && this.account.password
-                    && this.account.repeat_password
-                    && this.account.password === this.account.repeat_password
                 ) {
-                    DesktopBridge.createAccountRequest({
+                    DesktopBridge.getPassphraseRequest({
                         seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
-                        first_name: this.account.first_name,
-                        last_name: this.account.last_name,
-                        email: this.account.email,
-                        password: this.account.password,
-                        birthday: this.account.birthday,
-                        secret_question_1: this.account.secret_question_1,
-                        secret_answer_1: this.account.secret_answer_1,
-                        secret_question_2: this.account.secret_question_2,
-                        secret_answer_2: this.account.secret_answer_2
                     }).then((res) => {
-                        this.account = { ...this.account, ...res.account }
-                        this.passphrase = this.account.passphrase.split(' ')
-                        this.repeatPassphrase = this.account.passphrase.split(' ')
+                        this.passphrase = res.split(' ')
+                        this.repeatPassphrase = res.split(' ')
                         this.repeatPassphrase[2] = ''
                         this.repeatPassphrase[4] = ''
                         this.repeatPassphrase[8] = ''
@@ -889,6 +842,48 @@ export default {
                     if (!this.account.agreement) {
                         this.errors.push('To continue using BlockHub, you will need to review and agree to the Terms & Service Agreement.')
                     }
+                    
+                }
+            } else if (this.currentStep === 2) {
+                const passphraseOriginal = this.passphrase.join(' ')
+                const passphraseVerification = this.repeatPassphrase.join(' ')//$.map($(this.$refs.passphraseVerification).find('input'), (item) => $(item).val()).join(' ')
+
+                if (this.account.secret_question_1
+                    && this.account.secret_answer_1
+                    && this.account.secret_question_2
+                    && this.account.secret_answer_2
+                    && this.account.password
+                    && this.account.repeat_password
+                    && this.account.password === this.account.repeat_password
+                    && this.agreeStoredPassphrase
+                    && !this.passphrase.includes('')
+                    && !this.repeatPassphrase.includes('')
+                    && passphraseOriginal === passphraseVerification) {
+                        DesktopBridge.createAccountRequest({
+                            seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
+                            passphrase: passphraseOriginal,
+                            encrypt_passphrase: this.account.encrypt_passphrase,
+                            first_name: this.account.first_name,
+                            last_name: this.account.last_name,
+                            email: this.account.email,
+                            password: this.account.password,
+                            birthday: this.account.birthday,
+                            secret_question_1: this.account.secret_question_1,
+                            secret_answer_1: this.account.secret_answer_1,
+                            secret_question_2: this.account.secret_question_2,
+                            secret_answer_2: this.account.secret_answer_2
+                        }).then((res) => {
+                            //this.account = { ...this.account, ...res.account }
+
+                            this.finishedStep = 2;
+                            this.currentStep = 3;
+
+                            this.$store.dispatch('application/updateState', {
+                                account: { ...this.$store.state.application.account, ...res.account },
+                                signed_in: true
+                            })
+                        })
+                } else {
                     if (!this.account.password) {
                         this.errors.push('Password required.')
                     }
@@ -910,49 +905,20 @@ export default {
                     if (!this.account.secret_answer_2) {
                         this.errors.push('Secret Answer 2 required.')
                     }
-                }
-            } else if (this.currentStep === 2) {
-                const passphraseOriginal = this.passphrase.join(' ')
-                const passphraseVerification = this.repeatPassphrase.join(' ')//$.map($(this.$refs.passphraseVerification).find('input'), (item) => $(item).val()).join(' ')
-
-                if (this.agreeStoredPassphrase && passphraseOriginal === passphraseVerification) {
-                    DesktopBridge.updateAccountRequest({
-                        encrypt_passphrase: this.account.encrypt_passphrase,
-                    }).then((res) => {
-                        this.finishedStep = 2;
-                        this.currentStep = 3;
-
-                        this.account.passphrase = 'HIDDEN'
-
-                        this.$store.state.application.account = { ...this.$store.state.application.account, ...this.account }
-                        this.$store.state.application.signed_in = true
-                    })
-                }
-
-                if (!this.agreeStoredPassphrase) {
-                    this.errors.push('Please agree that you\'ve stored your passphrase somewhere safe.')
-                }
-
-                if (this.account.passphrase !== passphraseVerification) {
-                    this.errors.push('Passphrase does not match.')
+                    if (!this.agreeStoredPassphrase) {
+                        this.errors.push('Please agree that you\'ve stored your passphrase somewhere safe.')
+                    }
+                    if (this.passphrase.includes('') || this.repeatPassphrase.includes('')) {
+                        this.errors.push('Passphrase must be filled in.')
+                    }
+                    if (passphraseOriginal !== passphraseVerification) {
+                        this.errors.push('Passphrase does not match.')
+                    }
                 }
                 
             } else if (this.currentStep === 3) {
-                if (this.account.identity.wallet && this.account.identity.name) {
-                    if (this.finishedStep === 3) {
-                        this.$router.push('/')
-                    } else {
-                        this.finishedStep = 3;
-                        this.currentStep = 3;
-                    }
-                } else {
-                    if (!this.account.identity.wallet) {
-                        this.errors.push('Wallet number required.');
-                    }
-                    if (!this.account.identity.name) {
-                        this.errors.push('Identity name required.');
-                    }
-                }
+                this.finishedStep = 3;
+                this.$router.push('/')
             }
         },
         changeTab(step) {
@@ -962,14 +928,35 @@ export default {
                 this.currentStep = step;
             }
         },
-        writeDown() {
-            this.writtenDown = true
-        },
         showPassphrase() {
+            this.errors = []
+
             this.verifyingPassphrase = false
         },
-        verifyPassphrase() {
+        startVerification() {
+            this.errors = []
+
             this.verifyingPassphrase = true
+        },
+        confirmVerification() {
+            this.errors = []
+
+            const passphraseOriginal = this.passphrase.join(' ')
+            const passphraseVerification = this.repeatPassphrase.join(' ')//$.map($(this.$refs.passphraseVerification).find('input'), (item) => $(item).val()).join(' ')
+
+            if (!this.passphrase.includes('')
+                && !this.repeatPassphrase.includes('')
+                && passphraseOriginal === passphraseVerification) {
+                this.verifiedPassphrase = true
+                return
+            }
+
+            if (this.passphrase.includes('') || this.repeatPassphrase.includes('')) {
+                this.errors.push('Passphrase must be filled in.')
+            }
+            if (passphraseOriginal !== passphraseVerification) {
+                this.errors.push('Passphrase does not match.')
+            }
         }
     }
 }

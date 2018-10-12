@@ -92,7 +92,7 @@
                             <c-user-card
                                 :user="identity"
                                 :previewMode="!identity.edit"
-                                :class="{ 'default': identity.default }"
+                                :class="{ 'default': identity.id == defaultIdentity.id }"
                                 v-bind.sync="identityClone"
                             />
                             <div class="profile__action">
@@ -100,7 +100,7 @@
                                     status="info"
                                     icon="check"
                                     @click="setDefault(identity)"
-                                    v-if="!identity.default && !identity.edit"
+                                    v-if="identity.id != defaultIdentity.id && !identity.edit"
                                 >Set default</c-button>
                                 <c-button
                                     status="share"
@@ -190,8 +190,9 @@
         },
         methods: {
             setDefault(identity) {
-                if (this.defaultIdentity) this.defaultIdentity.default = false;
-                identity.default = true;
+                this.$store.state.application.account.current_identity = identity
+                // if (this.defaultIdentity) this.defaultIdentity.default = false;
+                // identity.default = true;
             },
             editIdentity(identity) {
                 if (!this.editedIdentity) {
@@ -240,7 +241,7 @@
                 return this.$store.state.application.account.identities;
             },
             defaultIdentity() {
-                return this.identities.find(identity => identity.default);
+                return this.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id);
             },
             editedIdentity() {
                 return this.identities.find(identity => identity.edit);

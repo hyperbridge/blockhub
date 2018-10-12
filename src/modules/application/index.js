@@ -12,13 +12,13 @@ const updateState = (savedData, updatedState = {}) => {
     rawData = {
         ...rawData,
         ...savedData,
-        ...updatedState,
         status: {
             code: null,
             message: null
         },
         account: DB.application.config.data[0].account,
-        darklaunch_flags: DB.application.config.data[0].darklaunch_flags
+        darklaunch_flags: DB.application.config.data[0].darklaunch_flags,
+        ...updatedState
     }
     
     if (updatedState.locked !== undefined) {
@@ -77,7 +77,7 @@ export const actions = {
     updateState(store, payload) {
         console.log('[BlockHub][Application] Updating store...')
 
-        updateState(store.state)
+        updateState(store.state, payload)
 
         store.commit('updateState', state)
     },
@@ -179,6 +179,9 @@ export const mutations = {
         for (let x in payload) {
             Vue.set(state, x, payload[x])
         }
+
+        DB.application.config.update(state)
+        DB.save()
     },
     signIn(state, payload) {
         state.signed_in = true
@@ -191,6 +194,9 @@ export const mutations = {
 
         DB.application.config.update(state)
         DB.save()
+    },
+    setEditorMode(state, payload) {
+        state.editor_mode = payload
     },
     setInternetConnection(state, payload) {
         state.connection.internet = payload.connected

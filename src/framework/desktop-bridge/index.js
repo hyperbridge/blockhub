@@ -53,6 +53,11 @@ export const ID = () => {
     return '_' + Math.random().toString(36).substr(2, 9);
 }
 
+
+export const getPassphraseRequest = async (data) => {
+    return await sendCommand('getPassphraseRequest', data)
+}
+
 export const createAccountRequest = async (data) => {
     return await sendCommand('createAccountRequest', data)
 }
@@ -115,14 +120,25 @@ export const setAccountRequest = async (data) => {
 
         DB.save()
 
-        local.store.commit('application/updateState', {
-            locked: false,
-            signed_in: true
-        })
+        if (data.account.public_address) {
+            local.store.commit('application/updateState', {
+                locked: false,
+                signed_in: true
+            })
 
-        local.store.commit('application/activateModal', null)
+            local.store.commit('application/activateModal', null)
 
-        local.router.push('/')
+            local.router.push('/')
+        } else {
+            local.store.commit('application/updateState', {
+                locked: true,
+                signed_in: false
+            })
+
+            local.store.commit('application/activateModal', null)
+
+            local.router.push('/welcome')
+        }
 
         resolve()
     })
