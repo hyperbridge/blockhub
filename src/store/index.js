@@ -125,6 +125,7 @@ window.BlockHub.importSeedData = () => {
         DB.application.config.data[0].account.current_identity = seed.identities[0]
     }
 
+    DB.application.config.data[0].account.is_verified = true
     DB.application.config.data[0].account.notifications = seed.notifications
     DB.application.config.data[0].updates = seed.updates
 
@@ -150,19 +151,19 @@ window.BlockHub.resetSeedData = () => {
         DB.application.config.data[0].account.identities = []
         DB.application.config.data[0].account.current_identity = null
     }
-    
+
+    DB.application.config.data[0].account.is_verified = false
     DB.application.config.data[0].account.notifications = []
 
     DB.marketplace.config.data[0].curator_reviews = []
     DB.marketplace.config.data[0].product_news = []
     DB.marketplace.config.data[0].collections = []
     DB.marketplace.config.data[0].realms = []
-
     DB.marketplace.products.data = []
     DB.marketplace.assets.data = []
 
-    DB.funding.projects.data = []
     DB.funding.config.data[0].trending_projects = []
+    DB.funding.projects.data = []
 
     store.dispatch('marketplace/updateState')
     store.dispatch('funding/updateState')

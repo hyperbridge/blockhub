@@ -6,7 +6,7 @@
                     <div class="col-6 mb-4">
                         <h2>What is HBX?</h2>
                         <p>
-                            Built by Hyperbridge, HBX tokens are used to fuel the decentralized protocols underlying BlockHub. 
+                            Built by <c-button status="underline" size="md" href="https://hyperbridge.org">Hyperbridge</c-button>, HBX tokens are used to fuel the decentralized protocols underlying BlockHub. 
                             BlockHub is the first economy built on these protocols, designed to let players and game developers productively interact in mutually beneficial ways. 
                             HBX tokens can be earned or purchased:
                             
@@ -30,7 +30,7 @@
                                 <li>Receive 10% discount on all transactions</li>
                             </ul>
 
-                            For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees by 50%.
+                            For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees by 50%. To learn more, please see the <c-button status="underline" size="md" href="https://hyperbridge.org/whitepaper">whitepaper</c-button>.
                         </p>
                     </div>
                 </div>
@@ -315,30 +315,58 @@
         </div>
 
         <c-popup :activated="purchasePopup.show"
-            :title="purchasePopup.title"
+            width="800"
             :type="purchasePopup.type"
             :sub_title="purchasePopup.text"
             @close="closePurchasePopup"
             v-if="purchasePopup.show"
             ref="purchasePopup"
         >
-            <p>BlockHub will purchase tokens for this profile:</p>
-            <p><a :href="`https://etherscan.io/address/${chosenIdentity.public_address}`"><strong>{{ chosenIdentity.public_address }}</strong></a></p>
+            <div slot="custom_close" hidden></div>
+            <div class="purchase-modal" slot="custom_content">
+                <c-tabs>
+                    <c-tab name="Confirm Purchase" :selected="true" :showFooter="true">
+                        <div>
+                            <div class="tab-card" v-if="this.purchaseSuccessful">
+                                Great!
+                            </div>
+                            <div class="tab-card" v-if="!this.purchaseSuccessful">
+                                <div class="" v-if="this.purchaseError">
+                                    An error occurred with the purchase: {{ this.purchaseError }}
+                                </div>
 
-            <br />
+                                <p>BlockHub will purchase tokens for this profile:</p>
+                                <p><a :href="`https://etherscan.io/address/${chosenIdentity.public_address}`"><strong>{{ chosenIdentity.public_address }}</strong></a></p>
 
-            <p>BlockHub will send a payment of {{ purchaseETH }} ETH to this contract address:</p>
-            <p><a :href="`https://etherscan.io/address/${tokenContractAddress}`"><strong>{{ tokenContractAddress }}</strong></a></p>
+                                <br />
 
-            <p>
+                                <p>BlockHub will send a payment of {{ purchaseETH }} ETH to this contract address:</p>
+                                <p><a :href="`https://etherscan.io/address/${tokenContractAddress}`"><strong>{{ tokenContractAddress }}</strong></a></p>
 
-            </p>
+                                <div>
+                                    Purchasing 1000 HBX in exchange for 10 ETH.
+                                </div>
+                                <br /><br />
+                                <c-button status="success" class="justify-content-center" icon_hide size="xl" @click="confirmPurchase">
+                                    Confirm Purchase
+                                </c-button>
+                            </div>
+                        </div>
+                        <div slot="footer" class="d-flex align-items-center justify-content-end">
+                            <div>
+                                <c-button @click="$emit('close')">Cancel</c-button>
+                            </div>
+                        </div>
+                    </c-tab>
+                </c-tabs>
+            </div>
         </c-popup>
     </c-layout>
 </template>
 
 <script>
 import axios from 'axios'
+import * as DesktopBridge from '@/framework/desktop-bridge'
 
 export default {
     components: {
@@ -346,6 +374,8 @@ export default {
         'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
+        'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
+        'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
         'c-welcome-box': (resolve) => require(['@/ui/components/welcome-box'], resolve)
     },
     data() {
@@ -365,8 +395,10 @@ export default {
             purchasePopup: {
                 title: 'Purchase',
                 text: '',
+                type: 'custom',
                 show: false
             },
+            transactionData: null,
             errors: []
         }
     },
@@ -391,10 +423,26 @@ export default {
             this.chosenIdentity = identity
         },
         closePurchasePopup() {
-            this.purchasePopup = {};
+            this.purchasePopup.show = false
+            this.transactionData = null
         },
         showPurchasePopup(ntf) {
-            this.purchasePopup.show = true;
+            this.purchasePopup.show = true
+        },
+        confirmPurchase() {
+            DesktopBridge.sendTransactionRequest({
+                fromAddress: this.chosenIdentity.public_address,
+                toAddress: this.tokenContractAddress,
+                amount: this.purchaseETH
+            }).then((res) => {
+                if (res.success) {
+                    this.purchaseSuccessful = true
+                } else {
+                    this.purchaseSuccessful = false
+                    this.purchaseError = res.message
+                }
+            })
+
         },
         proceed() {
             this.errors = []
@@ -406,10 +454,10 @@ export default {
             }
 
             if (!this.purchaseETH) {
-                this.errors.push('ETH purchase total required.')
+                this.errors.push('You must specify how many HBX to purchase.')
             }
             if (!this.chosenIdentity || !this.chosenIdentity.public_address) {
-                this.errors.push('Please choose a payment profile')
+                this.errors.push('You must choose a payment profile (Ethereum wallet).')
             }
             if (!this.tokenSaleAgreement) {
                 this.errors.push('You must agree to the token sale agreement terms to continue.')
@@ -456,6 +504,11 @@ export default {
         ul {
             list-style: none;
         }
+    }
+
+    .c-popup__content {
+        background: transparent;
+        color: #fff;
     }
 
     .c-checkbox {

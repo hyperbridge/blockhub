@@ -83,6 +83,22 @@
             margin: 0 2px;
             padding: 0;
         }
+        &.underline{
+            box-shadow: unset;
+            padding: 0 !important;
+            margin: 0;
+            color: #fece00;
+            border-bottom: 1px solid #fece00;
+            border-radius: 0;
+            font-weight: normal;
+            background: none !important;
+
+            &:hover {
+                background: none !important;
+                color: #fff;
+                border-bottom: 1px solid #fff;
+            }
+        }
         &.no-shadow{
             box-shadow: unset;
         }

@@ -53,6 +53,13 @@ export const ID = () => {
     return '_' + Math.random().toString(36).substr(2, 9);
 }
 
+export const createTransactionRequest = async (data) => {
+    return await sendCommand('createTransactionRequest', data)
+}
+
+export const sendTransactionRequest = async (data) => {
+    return await sendCommand('sendTransactionRequest', data)
+}
 
 export const getPassphraseRequest = async (data) => {
     return await sendCommand('getPassphraseRequest', data)
