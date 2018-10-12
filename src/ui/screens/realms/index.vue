@@ -18,6 +18,17 @@ export default {
         list() {
             const result = []
 
+            result.push({
+                type: 'realms_row',
+                data: {
+                    title: 'Realms',
+                    options: {
+                        slidesPerView: 3,
+                        spaceBetween: 15,
+                    },
+                    realms: this.$store.state.marketplace.realms
+                }
+            })
 
             return result
         }

@@ -6,6 +6,7 @@ export default {
     collections: require('./collections.json'),
     assets: require('./assets.json'),
     projects: require('./projects.json'),
+    realms: require('./realms.json'),
     identities: require('./identities.json'),
     updates: require('./updates.json'),
     wallets: require('./wallets.json'),

@@ -134,6 +134,7 @@ const router = new Router({
         {
             path: '/store/invoice/:id',
             name: 'Store Invoice',
+            props: true,
             component: (resolve) => require(['@/ui/screens/store-invoice'], resolve),
             meta: {
                 auth: true
@@ -143,6 +144,12 @@ const router = new Router({
             path: '/collections',
             name: 'Collections',
             component: (resolve) => require(['@/ui/screens/collections'], resolve)
+        },
+        {
+            path: '/collection/:id',
+            name: 'Collection Page',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/collection'], resolve)
         },
         {
             path: '/account',
@@ -504,6 +511,7 @@ const router = new Router({
         {
             path: '/realm/:id',
             name: 'Realm',
+            props: true,
             component: (resolve) => require(['@/ui/screens/realm'], resolve)
         },
         {
@@ -515,12 +523,6 @@ const router = new Router({
             path: '/search',
             name: 'Search Page',
             component: (resolve) => require(['@/ui/screens/search'], resolve)
-        },
-        {
-            path: '/collection/:id',
-            name: 'Collection Page',
-            props: true,
-            component: (resolve) => require(['@/ui/screens/collection'], resolve)
         },
         {
             path: '/discussion/',
@@ -541,6 +543,7 @@ const router = new Router({
         {
             path: '/updates/:id',
             name: 'Update',
+            props: true,
             component: (resolve) => require(['@/ui/screens/updates'], resolve)
         },
         {

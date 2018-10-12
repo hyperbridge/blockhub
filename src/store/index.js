@@ -129,6 +129,7 @@ window.BlockHub.importSeedData = () => {
     DB.application.config.data[0].updates = seed.updates
 
     DB.marketplace.config.data[0].curator_reviews = seed.curator_reviews
+    DB.marketplace.config.data[0].realms = seed.realms
     DB.marketplace.config.data[0].collections = seed.collections
     DB.marketplace.config.data[0].game_series = seed.game_series
     DB.marketplace.assets.data = seed.assets
@@ -155,6 +156,7 @@ window.BlockHub.resetSeedData = () => {
     DB.marketplace.config.data[0].curator_reviews = []
     DB.marketplace.config.data[0].product_news = []
     DB.marketplace.config.data[0].collections = []
+    DB.marketplace.config.data[0].realms = []
 
     DB.marketplace.products.data = []
     DB.marketplace.assets.data = []
