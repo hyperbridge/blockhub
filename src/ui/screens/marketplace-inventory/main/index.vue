@@ -12,6 +12,26 @@
                 </c-button>
             </div>
         </div>
+        <div class="inventory-explorer">
+            <c-content-navigation
+                :items="assets"
+                :setItemsPerPage="12"
+                :setItemsLimit="12"
+            >
+                <div class="assets-grid" slot-scope="props">
+                    <c-asset
+                        v-for="(asset, index) in props.items"
+                        :key="index"
+                        :asset="asset"
+                        @click="selectAsset($event)"
+                    />
+                </div>
+            </c-content-navigation>
+            <c-asset-preview
+                v-if="previewAsset"
+                :asset="previewAsset"
+            />
+        </div>
         <c-modal title="Sell assets" v-if="openModal" @close="openModal = false">
             <form slot="modal_body">
                 <div class="sell-assets__assets-wrapper">
@@ -22,12 +42,15 @@
                     >
                         <c-asset-preview-basic :asset="asset" size="sm"/>
                         <div class="sell-assets__market-price">
-                            <c-input v-model.number="asset.marketPrice"/>
+                            <c-input
+                                :value="asset.market_price"
+                                @input="updateAsset(asset.id, { market_price: parseFloat($event) })"
+                            />
                             <span>
-                                Sell asset for <strong>{{ asset.marketPrice }}</strong> $
+                                Sell asset for <strong>{{ asset.market_price }}</strong> $
                             </span>
                             <c-range-slider
-                                v-model.number="asset.marketPrice"
+                                v-model.number="asset.market_price"
                                 :max="Math.round(asset.price.max * 2)"
                             />
                         </div>
@@ -50,26 +73,6 @@
                 </div>
             </form>
         </c-modal>
-        <div class="inventory-explorer">
-            <c-content-navigation
-                :items="selectableAssets"
-                :setItemsPerPage="12"
-                :setItemsLimit="12"
-            >
-                <div class="assets-grid" slot-scope="props">
-                    <c-asset
-                        v-for="(asset, index) in props.items"
-                        :key="index"
-                        :asset="asset"
-                        @click="selectAsset($event)"
-                    />
-                </div>
-            </c-content-navigation>
-            <c-asset-preview
-                v-if="previewAsset"
-                :asset="previewAsset"
-            />
-        </div>
     </div>
 </template>
 
@@ -98,7 +101,10 @@
         methods: {
             selectAsset(asset) {
                 this.previewAsset = asset;
-                if (this.allowSelect) asset.selected = !asset.selected;
+                if (this.allowSelect) {
+                    this.updateAsset(asset.id, { selected: !asset.selected });
+                    asset.selected = !asset.selected
+                };
             },
             selectAll() {
                 const { everySelected } = this;
@@ -115,12 +121,23 @@
                 } else if (selectedAssets.some(asset => asset.marketPrice <= 0)) {
                     this.errors.push(`You can't sell asset for no price`);
                 } else {
+                    selectedAssets.forEach(asset => {
+                        const { id } = asset;
+                        this.$store.commit('assets/updateAsset', {
+                            id,
+                            data: { for_sale: true, selected: false }
+                        });
+                    });
                     this.$snotify.success('Assets have been placed in the market', 'Confirmed', {
                         timeout: 2500,
                         pauseOnHover: true
                     });
                     this.openModal = false;
                 }
+            },
+            updateAsset(id, data) {
+                console.log('data', data)
+                this.$store.commit('assets/updateAsset', { id, data });
             }
         },
         computed: {
@@ -128,7 +145,7 @@
                 return `${this.allowSelect ? 'Disable' : 'Enable'} on click selection`;
             },
             selectedAssets() {
-                return this.selectableAssets.filter(asset => asset.selected);
+                return this.assets.filter(asset => asset.selected);
             },
             everySelected() {
                 return !(!!(this.selectableAssets.length - this.selectedAssets.length));

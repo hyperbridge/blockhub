@@ -11,20 +11,22 @@ const assets = {
         assets: assetsData.reduce((assets, asset) => {
             assets[asset.id] = {
                 ...asset,
+                market_price: 0,
                 selected: false,
-                forSale: false
+                for_sale: false,
             };
             return assets;
         }, {})
     },
     mutations: {
-        addAssetsGeneric(state, { prop, data }) {
+        addAsset(state, { prop = 'assets', data }) {
             state[prop] = { ...state[prop], [data.id]: data };
         },
-        updateAssetsGeneric(state, { prop, id, data }) {
+        updateAsset(state, { prop = 'assets', id, data }) {
+            // Payload could be written in format => { 'id_28313': { ...payload data } }
             state[prop][id] = { ...state[prop][id], ...data };
         },
-        deleteAssetsGeneric(state, { prop, id }) {
+        deleteAsset(state, { prop = 'assets', id }) {
             // delete state[prop][id];
             Vue.delete(state[prop][id]);
         },
@@ -56,7 +58,7 @@ const assets = {
     getters: {
         assetsArray: state => Object.values(state.assets),
         inventoryAssets: (state, getters) => getters.assetsArray
-            .filter(asset => !asset.forSale)
+            .filter(asset => !asset.for_sale)
     }
 }
 

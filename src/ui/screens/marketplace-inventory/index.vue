@@ -24,8 +24,6 @@
 </template>
 
 <script>
-    import assets from '@/db/seed/assets';
-
     export default {
         components: {
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
@@ -35,11 +33,15 @@
         data() {
             return {
                 yoursOffer: [],
-                assets: assets.map(asset => ({ ...asset, selected: false })),
                 links: [
                    { url: '/marketplace/inventory', title: 'Explore' },
                    { url: '/marketplace/inventory/compare', title: 'Compare assets' }
                 ]
+            }
+        },
+        computed: {
+            assets() {
+                return this.$store.getters['assets/inventoryAssets'];
             }
         }
     }
