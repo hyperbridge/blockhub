@@ -1,7 +1,10 @@
 <template>
     <div
         class="assets-grid__asset"
-        :class="{ 'assets-grid__asset--selected': asset.selected }"
+        :class="{
+            'assets-grid__asset--selected': asset.selected,
+            'assets-grid__asset--sold': showSold
+        }"
         @click="$emit('click', asset)"
     >
         <slot>
@@ -22,6 +25,9 @@
                 <span class="asset__price">{{ asset.price.current }}$</span>
             </div>
         </slot>
+        <div class="asset__show-sold" v-show="showSold">
+            <i class="fas fa-check-circle"></i>
+        </div>
     </div>
 </template>
 
@@ -29,7 +35,8 @@
     export default {
         props: {
             asset: Object,
-            showTooltip: Boolean
+            showTooltip: Boolean,
+            showSold: Boolean
         },
         components: {
             'c-tooltip': (resolve) => require(['@/ui/components/tooltips/universal'], resolve),
@@ -51,6 +58,36 @@
         padding: 4px;
         animation: rotate-in .2s ease;
         user-select: none;
+        &.assets-grid__asset--sold {
+            .asset__show-sold {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(33, 33, 51, 0.9);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .fas {
+                font-size: 45px;
+                animation: jumpin .5s ease, jumpin .5s 2.5s reverse ease;
+            }
+            @keyframes jumpin {
+                0% {
+                    transform: scale(0);
+                    opacity: 0;
+                }
+                60% {
+                    transform: scale(1.2);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+        }
         &.assets-grid__asset--selected {
             border: 1px dotted #b565d4;
             background-image: radial-gradient(#b565d4, #1C1E2D);

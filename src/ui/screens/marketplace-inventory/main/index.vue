@@ -23,6 +23,7 @@
                         v-for="(asset, index) in props.items"
                         :key="index"
                         :asset="asset"
+                        :showSold="showSold && asset.selected"
                         @click="selectAsset($event)"
                     />
                 </div>
@@ -44,13 +45,14 @@
                         <div class="sell-assets__market-price">
                             <c-input
                                 :value="asset.market_price"
-                                @input="updateAsset(asset.id, { market_price: parseFloat($event) })"
+                                @input="updateAsset(asset.id, { market_price: parseFloat($event) || 0 })"
                             />
                             <span>
                                 Sell asset for <strong>{{ asset.market_price }}</strong> $
                             </span>
                             <c-range-slider
-                                v-model.number="asset.market_price"
+                                :value="asset.market_price"
+                                @input="updateAsset(asset.id, { market_price: parseFloat($event) })"
                                 :max="Math.round(asset.price.max * 2)"
                             />
                         </div>
@@ -95,6 +97,7 @@
                 selectableAssets: [],
                 allowSelect: true,
                 openModal: false,
+                showSold: false,
                 errors: []
             }
         },
@@ -118,16 +121,20 @@
 
                 if (!selectedAssets.length) {
                     return;
-                } else if (selectedAssets.some(asset => asset.marketPrice <= 0)) {
+                } else if (selectedAssets.some(asset => asset.market_price <= 0)) {
                     this.errors.push(`You can't sell asset for no price`);
                 } else {
-                    selectedAssets.forEach(asset => {
-                        const { id } = asset;
-                        this.$store.commit('assets/updateAsset', {
-                            id,
-                            data: { for_sale: true, selected: false }
+                    this.showSold = true;
+                    setTimeout(() => {
+                        this.showSold = false;
+                        selectedAssets.forEach(asset => {
+                            const { id } = asset;
+                            this.$store.commit('assets/updateAsset', {
+                                id,
+                                data: { for_sale: true, selected: false }
+                            });
                         });
-                    });
+                    }, 3000);
                     this.$snotify.success('Assets have been placed in the market', 'Confirmed', {
                         timeout: 2500,
                         pauseOnHover: true
@@ -136,7 +143,6 @@
                 }
             },
             updateAsset(id, data) {
-                console.log('data', data)
                 this.$store.commit('assets/updateAsset', { id, data });
             }
         },
@@ -154,7 +160,7 @@
                 return {
                     count: this.selectedAssets.length,
                     price: this.selectedAssets.reduce((price, asset) =>
-                        price += asset.marketPrice
+                        price += asset.market_price
                     , 0)
                 }
             }
