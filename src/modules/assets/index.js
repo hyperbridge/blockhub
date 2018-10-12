@@ -69,8 +69,12 @@ const assets = {
     },
     getters: {
         assetsArray: state => Object.values(state.assets),
-        inventoryAssets: (state, getters) => getters.assetsArray
-            .filter(asset => !asset.for_sale)
+        inventoryAssets: (state, { assetsArray }) => assetsArray
+            .filter(asset => !asset.for_sale),
+        selectedAssets: (state, { assetsArray }) => assetsArray
+            .filter(asset => asset.selected),
+        forSaleAssets: (state, { assetsArray }) => assetsArray
+            .filter(asset => asset.for_sale)
     }
 }
 

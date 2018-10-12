@@ -152,7 +152,7 @@
                 return this.assets.filter(asset => asset.selected);
             },
             everySelected() {
-                return !(!!(this.assets.length - this.selectedAssets.length));
+                return !(this.assets.length - this.selectedAssets.length);
             },
             sellSummary() {
                 return {
