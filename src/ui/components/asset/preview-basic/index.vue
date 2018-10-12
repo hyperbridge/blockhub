@@ -1,12 +1,15 @@
 <template>
-    <div class="asset-preview-basic">
-        <h5 class="">{{ asset.name }}</h5>
+    <div class="asset-preview-basic" :class="size">
+        <h5 class="asset-preview-basic__text">
+            {{ asset.name }}
+        </h5>
         <c-img
             class="asset-preview-basic__image"
-            :class="size"
             :src="asset.image"
         />
-        <h5>{{ asset.product_name }}</h5>
+        <p class="asset-preview-basic__text">
+            {{ asset.product_name }}
+        </p>
     </div>
 </template>
 
@@ -38,28 +41,31 @@
             padding: 5px;
             background-color: rgba(255,255,255,.05);
             border-radius: 4px;
-            &.sm {
-                width: 40px;
-                height: 40px;
-            }
-            &.lg {
-                width: 140px;
-                height: 140px;
-            }
         }
-        h5 {
+        .asset-preview-basic__text {
+            text-align: center;
             margin: 5px 0;
-        }
-        &.sm {
-
-        }
-        &.md {
-
         }
         &.asset-preview-basic--row {
             flex-direction: row;
             .asset-preview-basic__image {
                 order: -1;
+            }
+        }
+        &.sm {
+            .asset-preview-basic__image {
+                width: 40px;
+                height: 40px;
+            }
+            .asset-preview-basic__text {
+                font-size: 12px;
+            }
+        }
+        &.md {}
+        &.lg {
+            .asset-preview-basic__image {
+                width: 140px;
+                height: 140px;
             }
         }
     }
