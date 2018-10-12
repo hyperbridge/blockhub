@@ -40,12 +40,12 @@
                 </div>
                 <div class="row align-items-stretch margin-top-30">
                     <div class="col-12 col-xl-3 py-3" v-for="(game, index) in games" :key="index" >
-                        <c-game-card :game="game" :isLoading="(index == 2 ) ? true : false" />
+                        <c-game-card :game="game" :online="online" :favorites="favorites" :isLoading="(index == 2 ) ? true : false" />
                     </div>
                 </div>
                 <div class="row align-items-stretch margin-top-30">
                     <div class="col-12 games-list">
-                        <c-game-list v-for="(game, index) in games" :key="index" :game="game" :isLoading="(index == 2 ) ? true : false" />
+                        <c-game-list v-for="(game, index) in games" :online="online" :favorites="favorites" :key="index" :game="game" :isLoading="(index == 2 ) ? true : false" />
                     </div>
                 </div>
             </div>
@@ -67,6 +67,54 @@
             'c-user-head': (resolve) => require(['@/ui/components/user/header'], resolve),
             'c-game-card': (resolve) => require(['@/ui/components/game-library/card-item'], resolve),
             'c-game-list': (resolve) => require(['@/ui/components/game-library/list-item'], resolve)
+        },
+        data(){
+            return{
+                online:[
+                    {
+                        "name": "Sally Hamilton",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Poole Wise",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Frye Nash",
+                        "img": "http://placehold.it/32x32"
+                    }
+                ],
+                favorites:[
+                    {
+                        "name": "Nixon Love",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Richards Langley",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Jill Medina",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Callahan Ballard",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Zamora Simmons",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Jenkins Ruiz",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Kemp Christian",
+                        "img": "http://placehold.it/32x32"
+                    }
+                ]
+            }
         },
         computed:{
             selectableCategory(){

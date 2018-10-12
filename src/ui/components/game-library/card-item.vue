@@ -47,11 +47,12 @@
                             </a>
                         </li>
                         <hr>
-                        <li>
-                            <a href="#3">
+                        <li class="position-relative">
+                            <span @click="toggleList">
                                 <i class="fas fa-share"></i>
                                 Share
-                            </a>
+                            </span>
+                            <c-share-list :onlineList="online" :favoritesList="favorites" :show="show" />
                         </li>
                         <li>
                             <a href="#3">
@@ -75,9 +76,20 @@
 <script>
     export default {
         name: 'game-library-item',
-        props: ['game', 'isLoading'],
+        props: ['game', 'isLoading', 'online','favorites' ],
+        data(){
+            return{
+                show: false
+            }
+        },
         components: {
-            'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve)
+            'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve),
+            'c-share-list': (resolve) => require(['@/ui/components/share/type-1'], resolve)
+        },
+        methods:{
+            toggleList(){
+                this.show = !this.show
+            }
         }
     }
 </script>
