@@ -2,10 +2,24 @@
     <div class="navigation" id="navigation-default">
 
         <c-sidebar-menu
-            title="CROWDFUND PROJECT"
-            sub_title="Help"
-            sub_icon="fas fa-question-circle"
-            :links="links.game"
+            title="CROWDFUND"
+            :links="links.crowdfund"
+        />
+
+        <c-sidebar-menu
+            title="BOUNTIES"
+            :links="links.bounties"
+            v-darklaunch="'BOUNTIES'"
+        />
+
+        <c-sidebar-menu
+            title="DISCUSSIONS"
+            :links="links.discussions"
+        />
+
+        <c-sidebar-menu
+            title="HELP"
+            :links="links.help"
         />
 
         <c-curator-panel>
@@ -53,7 +67,7 @@
 <script>
     export default {
         components: {
-            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
+            'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
             'c-claim': (resolve) => require(['@/ui/components/curator-panel/claim.vue'], resolve),
             'c-curator-panel': (resolve) => require(['@/ui/components/curator-panel'], resolve),
@@ -62,7 +76,17 @@
         data() {
             return {
                 links: {
-                    game: [
+                    crowdfund: [
+                        { to: { path: '/project/1' }, title: 'Project Page', icon: 'fas fa-gamepad' }
+                    ],
+                    bounties: [
+                        { to: { path: '/project/1/bounties' }, title: 'My Submissions', icon: 'fa fa-trophy' }
+                    ],
+                    discussions: [
+                        { to: { path: '/project/1/community/new' }, title: 'New Post', icon: 'fa fa-comment' },
+                        { to: { path: '/project/1/community/top' }, title: 'Top Posts', icon: 'fa fa-star' }
+                    ],
+                    help: [
                         { to: { path: '/help/1/article/building-communities' }, title: 'Building Communities' },
                         { to: { path: '/help/1/article/suggesting-features' }, title: 'Suggesting Features' },
                         { to: { path: '/help/1/article/voting-and-curating-updates' }, title: 'Voting & Curating Updates' },

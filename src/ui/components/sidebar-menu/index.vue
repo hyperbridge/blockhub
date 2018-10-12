@@ -16,6 +16,7 @@
                     :to="link.to"
                 >
                     <slot name="link" :link="link">
+                        <i :class="link.icon" v-if="link.icon"></i>
                         {{ link.title }}
                     </slot>
                 </c-sidebar-menu-link>
@@ -42,6 +43,8 @@
 
 <style lang="scss" scoped>
     .sidebar-menu{
+        margin-bottom: 20px;
+
         h3{
             font-size: 30px;
             color: #fefeff;
@@ -58,14 +61,17 @@
                 margin-right: 5px;
             }
         }
-        .sidebar-menu__list{
-            width: 100%;
-            padding: 0;
-            margin: 0;
-            list-style: none;
+    }
+    .sidebar-menu__list{
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        i {
+            margin-right: 4px;
         }
-        .sidebar-menu__subtitle {
-            margin: 10px 0;
-        }
+    }
+    .sidebar-menu__subtitle {
+        margin: 10px 0;
     }
 </style>

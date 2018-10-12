@@ -1,7 +1,7 @@
 <template>
     <div class="navigation" id="navigation-default">
         <c-sidebar-menu
-            title="GAME OVERVIEW"
+            :title="title"
             sub_title="Help"
             sub_icon="fas fa-question-circle"
             mClass="margin-bottom-20"
@@ -52,6 +52,13 @@
 
 <script>
     export default {
+        props: {
+            title: {
+                type: String,
+                default: 'GAME OVERVIEW',
+                required: false
+            }
+        },
         components: {
             'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),

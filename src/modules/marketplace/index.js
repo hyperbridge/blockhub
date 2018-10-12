@@ -174,9 +174,6 @@ export const mutations = {
             Vue.set(state, x, payload[x])
         }
     },
-    setEditorMode(state, payload) {
-        state.editor_mode = payload
-    },
     updateProduct(state, payload) {
         Vue.set(state.products, payload.id, payload.data)
     },
