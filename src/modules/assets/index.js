@@ -30,6 +30,18 @@ const assets = {
             // delete state[prop][id];
             Vue.delete(state[prop][id]);
         },
+        updateAssets(state, { prop = 'assets', data, ids }) {
+            if (!ids) {
+                for (let id in state[prop]) {
+                    state[prop][id] = { ...state[prop][id], ...data };
+                }
+            } else {
+                for (let id of ids) {
+                    const payloadData = data[id] || data;
+                    state[prop][id] = { ...state[prop][id], ...payloadData };
+                }
+            }
+        },
         loadTransactions(state, payload = transactions) {
             state.transactions = payload
                 .map((transaction, index) => ({

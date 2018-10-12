@@ -111,9 +111,7 @@
             },
             selectAll() {
                 const { everySelected } = this;
-                this.selectableAssets.forEach(asset =>
-                    asset.selected = !everySelected
-                );
+                this.updateAssets({ selected: !everySelected });
             },
             sellAssets() {
                 const { selectedAssets } = this;
@@ -127,13 +125,10 @@
                     this.showSold = true;
                     setTimeout(() => {
                         this.showSold = false;
-                        selectedAssets.forEach(asset => {
-                            const { id } = asset;
-                            this.$store.commit('assets/updateAsset', {
-                                id,
-                                data: { for_sale: true, selected: false }
-                            });
-                        });
+                        this.updateAssets(
+                            { for_sale: true, selected: false },
+                            selectedAssets.map(asset => asset.id)
+                        );
                     }, 3000);
                     this.$snotify.success('Assets have been placed in the market', 'Confirmed', {
                         timeout: 2500,
@@ -144,6 +139,9 @@
             },
             updateAsset(id, data) {
                 this.$store.commit('assets/updateAsset', { id, data });
+            },
+            updateAssets(data, ids) {
+                this.$store.commit('assets/updateAssets', { data, ids });
             }
         },
         computed: {
@@ -154,7 +152,7 @@
                 return this.assets.filter(asset => asset.selected);
             },
             everySelected() {
-                return !(!!(this.selectableAssets.length - this.selectedAssets.length));
+                return !(!!(this.assets.length - this.selectedAssets.length));
             },
             sellSummary() {
                 return {
