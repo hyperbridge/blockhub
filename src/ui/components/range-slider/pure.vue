@@ -62,7 +62,8 @@ export default {
     },
     computed: {
         percentages() {
-            return Math.round((this.value - this.min) / this.max * 100);
+            const percentages = Math.round((this.value - this.min) / this.max * 100);
+            return percentages > 100 ? 100 : percentages;
         },
         transform() {
             const { percentages } = this;

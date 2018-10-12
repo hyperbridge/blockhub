@@ -60,6 +60,7 @@
 <style lang="scss" scoped>
     .tooltip-universal__content {
         position: relative;
+        width: 100%;
         .fa-question-circle {
             position: absolute;
             font-size: 10px;

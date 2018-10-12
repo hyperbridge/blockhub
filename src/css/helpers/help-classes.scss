@@ -277,6 +277,18 @@
     flex-wrap: wrap;
 }
 
+.flex-center-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-center-around {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
 .icon--active {
     text-shadow: 0 0 5px rgba(255,255,255, .7);
 }

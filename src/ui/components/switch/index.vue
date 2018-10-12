@@ -2,10 +2,11 @@
     <div class="switch-container">
         <p v-if="!customLabel && label_position == 'left'" style="padding-right: 10px" :style="{ fontSize: label_size }">{{ label }}</p>
         <p v-else-if="customLabel && label_position == 'left'" style="padding-right: 10px" :style="{ fontSize: label_size }">
-            <slot name="label"></slot>
+            <slot name="label"/>
         </p>
         <label class="switch my-0" :class="`switch-${size}`">
             <input
+                :id="id"
                 type="checkbox"
                 v-bind="$attrs"
                 :checked="checked"
@@ -13,9 +14,21 @@
             />
             <span></span>
         </label>
-        <p v-if="!customLabel && label_position == 'right'" style="padding-left: 10px" :style="{ fontSize: label_size }">{{ label }}</p>
-        <p v-else-if="customLabel && label_position == 'right'" style="padding-left: 10px" :style="{ fontSize: label_size }">
-            <slot name="label"></slot>
+        <p
+            v-if="!customLabel && label_position == 'right'"
+            style="padding-left: 10px"
+            :style="{ fontSize: label_size }"
+        >
+            <label :for="id">
+                {{ label }}
+            </label>
+        </p>
+        <p
+            v-else-if="customLabel && label_position == 'right'"
+            style="padding-left: 10px"
+            :style="{ fontSize: label_size }"
+        >
+            <slot name="label"/>
         </p>
     </div>
 </template>
@@ -25,6 +38,12 @@
         name: 'c-switch',
         inheritAttrs: false,
         props: {
+            id: {
+                type: [String, Number],
+                default() {
+                    return 'checkbox-' + parseInt(Math.random() * new Date().getUTCMilliseconds() * 5);
+                }
+            },
             checked: Boolean,
             size: {
                 type: String,

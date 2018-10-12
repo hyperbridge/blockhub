@@ -10,7 +10,9 @@
             />
             <c-load-more v-else
                 @click="loadMore()"
-            />
+            >
+               {{ itemsLeft ? 'Load More +' + itemsLeft : 'Show Less' }}
+            </c-load-more>
         </div>
     </div>
 </template>
@@ -49,6 +51,8 @@
             loadMore() {
                 if (this.limitTo < this.items.length) {
                     this.limitTo += this.setItemsLimit;
+                } else {
+                    this.limitTo -= this.setItemsLimit;
                 }
             }
         },
@@ -72,6 +76,9 @@
             },
             visibleItemsLength() {
                 return this.visibleItems.length;
+            },
+            itemsLeft() {
+                return this.items.length - this.visibleItemsLength;
             }
         },
         watch: {
