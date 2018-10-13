@@ -102,7 +102,7 @@
                                     <p>All-in-one spot for games assets</p>
                                 </div>
                                 <div class="banner-action">
-                                    <c-button status="info" icon_hide size="lg">VISIT NOW</c-button>
+                                    <c-button status="info" icon_hide size="lg">GAME ON</c-button>
                                 </div>
                             </div>
                         </c-banner>
@@ -160,6 +160,27 @@
                                 </c-slide>
                             </c-swiper>
                             <p v-if="!item.data.projects.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
+                        </c-block>
+                    </div>
+                </div>
+
+                <div class="row margin-bottom-30" v-if="item.type === 'realms_row'" :key="`level-1-${index}`">
+                    <div class="col-12">
+                        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                            <c-heading-bar
+                                slot="title"
+                                class="mb-0"
+                                :name="item.data.title"
+                                :showArrows="showArrowsState(item.data.realms, 3)"
+                                :prevClick="() => this.$refs['swiper-' + index].swiper.slidePrev()"
+                                :nextClick="() => this.$refs['swiper-' + index].swiper.slideNext()"
+                            />
+                            <c-swiper :options="item.data.options" :ref="`swiper-${index}`">
+                                <c-slide v-for="(realm, index) in item.data.realms" :key="index">
+                                    <c-button :href="`/#/realm/${realm.id}`">{{ realm.name }}</c-button>
+                                </c-slide>
+                            </c-swiper>
+                            <p v-if="!item.data.realms.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                         </c-block>
                     </div>
                 </div>

@@ -2,17 +2,11 @@
     <c-layout navigationKey="help" :showLeftPanel="false" :showRightPanel="false">
         <div class="content" id="content">
             <div class="container-fluid">
-                <p class="errors" v-if="errors.length">
-                    <strong>Please correct the following error(s):</strong>
-                    <ul>
-                        <li v-for="error in errors" :key="error">{{ error }}</li>
-                    </ul>
-                </p>
                 <div class="row" style="">
                     <div class="col-6 mb-4">
                         <h2>What is HBX?</h2>
                         <p>
-                            Built by Hyperbridge, HBX tokens are used to fuel the decentralized protocols underlying BlockHub. 
+                            Built by <c-button status="underline" size="md" href="https://hyperbridge.org">Hyperbridge</c-button>, HBX tokens are used to fuel the decentralized protocols underlying BlockHub. 
                             BlockHub is the first economy built on these protocols, designed to let players and game developers productively interact in mutually beneficial ways. 
                             HBX tokens can be earned or purchased:
                             
@@ -36,14 +30,14 @@
                                 <li>Receive 10% discount on all transactions</li>
                             </ul>
 
-                            For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees of 50%.
+                            For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees by 50%. To learn more, please see the <c-button status="underline" size="md" href="https://hyperbridge.org/whitepaper">whitepaper</c-button>.
                         </p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6" v-if="desktop_mode">
                         <c-block title="Purchase" class="margin-bottom-30">
-                            <p>Each HBX token is <strong>${{ tokenPriceUSD }} USD</strong>, and can be purchased with ETH at the current price of <strong>{{ (1/ETH2USD).toString().slice(0, 6) }} ETH</strong> per HBX. (Based on a locked conversion of {{ ETH2USD }} ETH to USD). How many would you like?</p>
+                            <p>Each HBX token is <strong>${{ tokenPriceUSD }} USD</strong>, and can be purchased with ETH at the current price of <strong>{{ (1/ETH2USD).toString().slice(0, 6) }} ETH</strong> per HBX <em>(Based on a locked conversion of ${{ ETH2USD }} USD per 1 ETH)</em>.</p>
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -52,7 +46,7 @@
                                 </div>
                                 <input type="text" class="form-control" ref="input" placeholder="0.00" v-model="purchaseETH" @keyup="calcHBX" />
                             </div>
-                            <p>Roughly equal to:</p>
+                            <p>Estimated purchase:</p>
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -61,6 +55,7 @@
                                 </div>
                                 <input type="text" class="form-control" ref="input" placeholder="0.00" v-model="purchaseHBX" readonly />
                             </div>
+                            <strong>Note:</strong> Personal cap is {{ (maxPurchaseUSD / ETH2USD).toString().slice(0, 2) }} ETH (${{ maxPurchaseUSD }} USD equivalent).
                         </c-block>
                     </div>
 
@@ -87,15 +82,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <br />
-
-                            <p>BlockHub will purchase tokens for this profile:</p>
-                            <p><a :href="`https://etherscan.io/address/${chosenIdentity.public_address}`"><strong>{{ chosenIdentity.public_address }}</strong></a></p>
-
-                            <!-- <br />
-
-                            <p>BlockHub will send a payment of {{ purchaseETH }} ETH to this contract address:</p>
-                            <p><a :href="`https://etherscan.io/address/${tokenContractAddress}`"><strong>{{ tokenContractAddress }}</strong></a></p> -->
                         </c-block>
                     </div>
 
@@ -104,18 +90,18 @@
                         <c-welcome-box />
                     </div>
 
-                    <div class="col-8 offset-2" v-if="!account.is_verified && !account.is_verifying" style="text-align: center">
+                    <div class="col-8 offset-2" v-if="desktop_mode && !account.is_verified && !account.is_verifying" style="text-align: center">
                         <h2 style="text-align: center">Oops, you haven't verified your account yet. <br />You'll need to do this to participate.</h2>
                         <br />
                         <c-button class="c-btn-lg" href="/#/account/verification" style="margin: 0 auto">Verify Account</c-button>
                     </div>
 
-                    <div class="col-8 offset-2" v-if="!account.is_verified && account.is_verifying" style="text-align: center">
+                    <div class="col-8 offset-2" v-if="desktop_mode && !account.is_verified && account.is_verifying" style="text-align: center">
                         <p>Your account is currently being verified. You'll need to wait until it's finished to participate.</p>
                         <p>Please check back later. If you've been waiting too long or have problems, please email support@hyperbridge.org</p>
                     </div>
                     
-                    <div v-if="account.is_verified" style="text-align: center">
+                    <div v-if="desktop_mode && account.is_verified" style="text-align: center">
                         <div class="col-10 offset-1 tab-card">
                             <h4>Token Sale Agreement</h4>
                             <div class="terms_block">
@@ -280,19 +266,46 @@
                                     any disputes.</p>
 
                             </div>
+
+                            <c-checkbox
+                                id="tokenSaleAgreement"
+                                :checked="false"
+                                style="square"
+                                v-model="tokenSaleAgreement"
+                            >
+                                I confirm that I understand and agree with the terms of the Token Sale Agreement.
+                            </c-checkbox>
+
+                            <c-checkbox
+                                id="jurisdictionAgreement"
+                                :checked="false"
+                                style="square"
+                                v-model="jurisdictionAgreement"
+                            >
+                                I confirm that I am not a resident of any jurisdiction that forbids token sales.
+                            </c-checkbox>
+
+                            <c-checkbox
+                                id="residentAgreement"
+                                :checked="false"
+                                style="square"
+                                v-model="residentAgreement"
+                            >
+                                I confirm that I am not a resident of China, United States, or Canada.
+                            </c-checkbox>
+
                         </div>
 
                         <div class="col-8 offset-2">
-                            <c-checkbox
-                                id="sss"
-                                :checked="false"
-                                v-model="tokenSaleAgreement"
-                            >
-                                By checking this box, you agree to the Purchase Agreement.
-                            </c-checkbox>
-
-                            <br /><br /><br />
-                            <c-button status="success" class="justify-content-center" icon_hide size="xl" @click="$emit('click')">
+                            <p class="errors" v-if="errors.length">
+                                <strong>Please correct the following error(s):</strong>
+                                <ul>
+                                    <li v-for="error in errors" :key="error">{{ error }}</li>
+                                </ul>
+                            </p>
+                            
+                            <br /><br />
+                            <c-button status="success" class="justify-content-center" icon_hide size="xl" @click="proceed" :class="{'disabled': !canContinue }">
                                 Proceed to Purchase
                             </c-button>
                         </div>
@@ -300,17 +313,69 @@
                 </div>
             </div>
         </div>
+
+        <c-popup :activated="purchasePopup.show"
+            width="800"
+            :type="purchasePopup.type"
+            :sub_title="purchasePopup.text"
+            @close="closePurchasePopup"
+            v-if="purchasePopup.show"
+            ref="purchasePopup"
+        >
+            <div slot="custom_close" hidden></div>
+            <div class="purchase-modal" slot="custom_content">
+                <c-tabs>
+                    <c-tab name="Confirm Purchase" :selected="true" :showFooter="true">
+                        <div>
+                            <div class="tab-card" v-if="this.purchaseSuccessful">
+                                Great!
+                            </div>
+                            <div class="tab-card" v-if="!this.purchaseSuccessful">
+                                <div class="" v-if="this.purchaseError">
+                                    An error occurred with the purchase: {{ this.purchaseError }}
+                                </div>
+
+                                <p>BlockHub will purchase tokens for this profile:</p>
+                                <p><a :href="`https://etherscan.io/address/${chosenIdentity.public_address}`"><strong>{{ chosenIdentity.public_address }}</strong></a></p>
+
+                                <br />
+
+                                <p>BlockHub will send a payment of {{ purchaseETH }} ETH to this contract address:</p>
+                                <p><a :href="`https://etherscan.io/address/${tokenContractAddress}`"><strong>{{ tokenContractAddress }}</strong></a></p>
+
+                                <div>
+                                    Purchasing 1000 HBX in exchange for 10 ETH.
+                                </div>
+                                <br /><br />
+                                <c-button status="success" class="justify-content-center" icon_hide size="xl" @click="confirmPurchase">
+                                    Confirm Purchase
+                                </c-button>
+                            </div>
+                        </div>
+                        <div slot="footer" class="d-flex align-items-center justify-content-end">
+                            <div>
+                                <c-button @click="$emit('close')">Cancel</c-button>
+                            </div>
+                        </div>
+                    </c-tab>
+                </c-tabs>
+            </div>
+        </c-popup>
     </c-layout>
 </template>
 
 <script>
 import axios from 'axios'
+import * as DesktopBridge from '@/framework/desktop-bridge'
 
 export default {
     components: {
         'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
         'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
+        'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
+        'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
+        'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
         'c-welcome-box': (resolve) => require(['@/ui/components/welcome-box'], resolve)
     },
     data() {
@@ -322,8 +387,18 @@ export default {
             purchaseHBX: null,
             tokenContractAddress: "0x627306090abab3a6e1400e9345bc60c78a8bef57",
             ETH2USD: 220.10,
+            maxPurchaseUSD: 7500,
             tokenPriceUSD: 0.055,
             tokenSaleAgreement: false,
+            jurisdictionAgreement: false,
+            residentAgreement: false,
+            purchasePopup: {
+                title: 'Purchase',
+                text: '',
+                type: 'custom',
+                show: false
+            },
+            transactionData: null,
             errors: []
         }
     },
@@ -331,6 +406,14 @@ export default {
         desktop_mode() {
             return this.$store.state.application.desktop_mode;
         },
+        canContinue() {
+            return this.purchaseETH
+            && (this.chosenIdentity && this.chosenIdentity.public_address)
+            && this.tokenSaleAgreement
+            && this.jurisdictionAgreement
+            && this.residentAgreement
+            && this.purchaseETH <= (this.maxPurchaseUSD / this.ETH2USD)
+        }
     },
     methods: {
         calcHBX() {
@@ -338,6 +421,56 @@ export default {
         },
         chooseIdentity(identity) {
             this.chosenIdentity = identity
+        },
+        closePurchasePopup() {
+            this.purchasePopup.show = false
+            this.transactionData = null
+        },
+        showPurchasePopup(ntf) {
+            this.purchasePopup.show = true
+        },
+        confirmPurchase() {
+            DesktopBridge.sendTransactionRequest({
+                fromAddress: this.chosenIdentity.public_address,
+                toAddress: this.tokenContractAddress,
+                amount: this.purchaseETH
+            }).then((res) => {
+                if (res.success) {
+                    this.purchaseSuccessful = true
+                } else {
+                    this.purchaseSuccessful = false
+                    this.purchaseError = res.message
+                }
+            })
+
+        },
+        proceed() {
+            this.errors = []
+
+            if (this.canContinue) {
+                this.showPurchasePopup()
+
+                return
+            }
+
+            if (!this.purchaseETH) {
+                this.errors.push('You must specify how many HBX to purchase.')
+            }
+            if (!this.chosenIdentity || !this.chosenIdentity.public_address) {
+                this.errors.push('You must choose a payment profile (Ethereum wallet).')
+            }
+            if (!this.tokenSaleAgreement) {
+                this.errors.push('You must agree to the token sale agreement terms to continue.')
+            }
+            if (!this.jurisdictionAgreement) {
+                this.errors.push('You must agree to the jurisdiction terms to continue.')
+            }
+            if (!this.residentAgreement) {
+                this.errors.push('You must agree to the resident terms to continue.')
+            }
+            if (!(this.purchaseETH <= (this.maxPurchaseUSD / this.ETH2USD))) {
+                this.errors.push('The purchase amount exceeds the personal cap of $7,500 USD. Please lower your purchase amount.')
+            }
         }
     },
     created() {
@@ -366,6 +499,22 @@ export default {
         border: 0 none !important;
     }
 
+    .errors {
+        margin-top: 20px;
+        ul {
+            list-style: none;
+        }
+    }
+
+    .c-popup__content {
+        background: transparent;
+        color: #fff;
+    }
+
+    .c-checkbox {
+        width: 100%;
+        margin: 3px;
+    }
 
     .profile-picker {
         display: flex;
@@ -448,6 +597,7 @@ export default {
             max-height: 400px;
             overflow-y: auto;
             text-align: left;
+            margin-bottom: 20px;
             h1, h2, h3, h4, h5 {
                 font-size: 18px;
             }

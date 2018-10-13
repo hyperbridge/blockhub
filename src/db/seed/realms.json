@@ -1,0 +1,107 @@
+[
+    {
+        "id": 1,
+        "name": "BlockHub",
+        "images": {
+            "logo": "/static/img/realms/1/logo.png",
+            "news": "/static/img/realms/1/news.png",
+            "follow": "/static/img/realms/1/follow.png"
+        },
+        "nav": {
+            "items": [
+                {
+                    "title": "Home"
+                },
+                {
+                    "title": "News"
+                },
+                {
+                    "title": "Community"
+                },
+                {
+                    "title": "Crowdfunds"
+                }
+            ]
+        },
+        "widgets": [
+            {
+                "code": "news",
+                "data": [
+                    {
+                        "title": "something"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Hyperbridge",
+        "images": {
+            "logo": "/static/img/realms/1/logo.png",
+            "news": "/static/img/realms/1/news.png",
+            "follow": "/static/img/realms/1/follow.png"
+        },
+        "nav": {
+            "items": [
+                {
+                    "title": "Home"
+                },
+                {
+                    "title": "News"
+                },
+                {
+                    "title": "Community"
+                },
+                {
+                    "title": "Crowdfunds"
+                }
+            ]
+        },
+        "widgets": [
+            {
+                "code": "news",
+                "data": [
+                    {
+                        "title": "something"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Blizzard",
+        "images": {
+            "logo": "/static/img/realms/3/logo.png",
+            "news": "/static/img/realms/3/news.png",
+            "follow": "/static/img/realms/3/follow.png"
+        },
+        "nav": {
+            "items": [
+                {
+                    "title": "Home"
+                },
+                {
+                    "title": "News"
+                },
+                {
+                    "title": "Community"
+                },
+                {
+                    "title": "Crowdfunds"
+                }
+            ]
+        },
+        "widgets": [
+            {
+                "code": "news",
+                "data": [
+                    {
+                        "title": "something"
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -252,7 +252,8 @@
                                     <div>
                                         <c-button
                                             @click="checkForm()"
-                                        >NEXT</c-button>
+                                            :class="{'disabled': !account.agreement}"
+                                        >CONTINUE</c-button>
                                     </div>
                                 </div>
                             </c-tab>
@@ -764,29 +765,29 @@ export default {
             repeatPassphrase: [],
             errors: [],
             account: {
-                // first_name: '',
-                // last_name: '',
-                // birthday: '',
-                // email: '',
-                // password: '',
-                // repeat_password: '',
-                // secret_question_1: '',
-                // secret_question_2: '',
-                // secret_answer_1: '',
-                // secret_answer_2: '',
-                // agreement: false,
+                first_name: '',
+                last_name: '',
+                birthday: '',
+                email: '',
+                password: '',
+                repeat_password: '',
+                secret_question_1: '',
+                secret_question_2: '',
+                secret_answer_1: '',
+                secret_answer_2: '',
+                agreement: false,
 
-                first_name: 'Eric',
-                last_name: 'Muyser',
-                birthday: '26 Mar 1952',
-                email: 'eric@muyser.com',
-                password: '1234',
-                repeat_password: '1234',
-                secret_question_1: 'first_name_favorite_aunt_uncle',
-                secret_question_2: 'first_name_favorite_aunt_uncle',
-                secret_answer_1: 'larry',
-                secret_answer_2: 'larry',
-                agreement: true,
+                // first_name: 'Eric',
+                // last_name: 'Muyser',
+                // birthday: '26 Mar 1952',
+                // email: 'eric@muyser.com',
+                // password: '1234',
+                // repeat_password: '1234',
+                // secret_question_1: 'first_name_favorite_aunt_uncle',
+                // secret_question_2: 'first_name_favorite_aunt_uncle',
+                // secret_answer_1: 'larry',
+                // secret_answer_2: 'larry',
+                // agreement: true,
 
                 newsletter: true,
                 passphrase: null,
@@ -861,13 +862,13 @@ export default {
                     && passphraseOriginal === passphraseVerification) {
                         DesktopBridge.createAccountRequest({
                             seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
-                            passphrase: passphraseOriginal,
-                            encrypt_passphrase: this.account.encrypt_passphrase,
                             first_name: this.account.first_name,
                             last_name: this.account.last_name,
                             email: this.account.email,
-                            password: this.account.password,
                             birthday: this.account.birthday,
+                            password: this.account.password,
+                            passphrase: passphraseOriginal,
+                            encrypt_passphrase: this.account.encrypt_passphrase,
                             secret_question_1: this.account.secret_question_1,
                             secret_answer_1: this.account.secret_answer_1,
                             secret_question_2: this.account.secret_question_2,

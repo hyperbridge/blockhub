@@ -53,6 +53,13 @@ export const ID = () => {
     return '_' + Math.random().toString(36).substr(2, 9);
 }
 
+export const createTransactionRequest = async (data) => {
+    return await sendCommand('createTransactionRequest', data)
+}
+
+export const sendTransactionRequest = async (data) => {
+    return await sendCommand('sendTransactionRequest', data)
+}
 
 export const getPassphraseRequest = async (data) => {
     return await sendCommand('getPassphraseRequest', data)
@@ -219,6 +226,13 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'setMode') {
             local.store.state.application.mode = cmd.data
 
+            // Import seed data for now
+            if (local.store.state.application.mode === 'production') {
+                BlockHub.importSeedData()
+
+                store.state.application.desktop_mode = true
+                store.state.application.signed_in = true
+            }
             // store.state.application.locked = true
             // store.state.application.signed_in = false
         } else if (cmd.key === 'updateReady') {

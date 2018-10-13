@@ -12,11 +12,11 @@ const updateState = (savedData, updatedState = {}) => {
     rawData = {
         ...rawData,
         ...savedData,
-        ...updatedState,
         assets: DB.marketplace ? DB.marketplace.assets.data : [],
         products: DB.marketplace ? DB.marketplace.products.data : [],
         posts: DB.marketplace ? DB.marketplace.posts.data : [],
         collections: DB.marketplace.config.data[0].collections,
+        realms: DB.marketplace.config.data[0].realms,
         curator_reviews: DB.marketplace.config.data[0].curator_reviews,
         posts: DB.marketplace.config.data[0].posts,
         game_series: DB.marketplace.config.data[0].game_series,
@@ -30,6 +30,7 @@ const updateState = (savedData, updatedState = {}) => {
         product_news: DB.marketplace ? DB.marketplace.posts.find({ 'target': { '$eq': ['product'] }, 'system_tags': { '$contains': ['news'] } }) : [],
         top_free: DB.marketplace ? DB.marketplace.products.find({ 'price': { '$eq': 0 } }) : [],
         top_5: DB.marketplace ? DB.marketplace.products.find({ 'rating.overall': { '$gte': 5 } }) : [],
+        ...updatedState,
     }
 
     const normalizedData = normalize(rawData, {

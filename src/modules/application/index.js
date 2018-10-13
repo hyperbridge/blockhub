@@ -29,8 +29,6 @@ const updateState = (savedData, updatedState = {}) => {
         rawData.desktop_mode = window.isElectron
 
     const normalizedData = normalize(rawData, {
-        current_identity: schema.Identity,
-        identities: [schema.Identity]
     })
 
     state = { ...rawData, ...normalizedData.entities }
