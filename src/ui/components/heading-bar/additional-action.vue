@@ -9,7 +9,6 @@
         <c-button-arrows
             @clickUp="$emit('clickUp')"
             @clickDown="$emit('clickDown')"
-            size="lg"
             class="additional-action__button"
             :activeUp="activeUp"
         />
