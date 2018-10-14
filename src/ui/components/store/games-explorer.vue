@@ -118,6 +118,7 @@
                     :items="items"
                     showTime
                     itemBg="transparent"
+                    pricePosition="right"
                 />
             </c-content-navigation>
             <div v-else-if="filtersActive">

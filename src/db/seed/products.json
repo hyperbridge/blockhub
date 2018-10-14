@@ -143,7 +143,11 @@
         "community": {
             "discussions": []
         },
-        "name_url": "might-&-magic-heroes-vi-4896"
+        "name_url": "might-&-magic-heroes-vi-4896",
+        "crowdfund": true,
+        "state_tag": "trending",
+        "followers": 591,
+        "players": 12
     },
     {
         "id": 2,
@@ -248,7 +252,11 @@
         "community": {
             "discussions": []
         },
-        "name_url": "capsized-5004"
+        "name_url": "capsized-5004",
+        "crowdfund": false,
+        "state_tag": "trending",
+        "followers": 163,
+        "players": 43
     },
     {
         "id": 3,
@@ -386,7 +394,11 @@
         "community": {
             "discussions": []
         },
-        "name_url": "doom-20087"
+        "name_url": "doom-20087",
+        "crowdfund": false,
+        "state_tag": "trending",
+        "followers": 91,
+        "players": 34
     },
     {
         "id": 4,
@@ -499,7 +511,9 @@
         "community": {
             "discussions": []
         },
-        "name_url": "a-game-of-thrones---genesis-4221"
+        "name_url": "a-game-of-thrones---genesis-4221",
+        "followers": 591,
+        "players": 12
     },
     {
         "id": 5,
@@ -705,7 +719,9 @@
         "community": {
             "discussions": []
         },
-        "name_url": "teeworlds-20137"
+        "name_url": "teeworlds-20137",
+        "followers": 9037,
+        "players": 101
     },
     {
         "id": 6,

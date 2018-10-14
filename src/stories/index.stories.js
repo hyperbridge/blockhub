@@ -735,7 +735,7 @@ storiesOf('Tooltips', module)
             'c-tooltips': Tooltips
         },
         template: `
-            <div class="row">
+            <div class="row padding-50">
                 <div class="col-4 text-center">
                             <c-tooltips name="Hover Me(left Position)!" position="left" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='false' />
                 </div>
