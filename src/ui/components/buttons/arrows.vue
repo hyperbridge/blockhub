@@ -48,20 +48,24 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        min-width: 35px;
+        min-width: 15px;
         .fas {
             cursor: pointer;
             &.sm {
                 font-size: 14px;
+                line-height: 10px;
             }
             &.md {
                 font-size: 18px;
+                line-height: 13px;
             }
             &.lg {
                 font-size: 22px;
+                line-height: 12px;
             }
             &.xl {
                 font-size: 26px;
+                line-height: 14px;
             }
         }
         .fas:not(:hover):not(.active) {
