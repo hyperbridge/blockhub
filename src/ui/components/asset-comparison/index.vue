@@ -1,5 +1,20 @@
 <template>
     <div>
+        <div class="comparisonable-properties" v-if="assets.length">
+            <div
+                class="properties__list"
+                v-if="compareProps[title + 'Props'].length"
+                v-for="title in ['comparable', 'calculable']"
+                :key="title"
+            >
+                <h4>{{ title | upperFirstChar }} properties</h4>
+                <ul>
+                    <li v-for="prop in compareProps[title + 'Props']" :key="prop">
+                        {{ prop | parseProp | upperFirstChar }}
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div class="comparison">
             <div class="comparison__add-asset">
                 <c-icon
@@ -108,6 +123,13 @@
                     }
                     return diffs;
                 });
+            },
+            compareProps() {
+                const { comparableProps, calculableProps } = this;
+                return {
+                    comparableProps,
+                    calculableProps
+                };
             }
         },
         filters: {
@@ -120,7 +142,7 @@
 <style lang="scss" scoped>
     .comparison {
         display: flex;
-        flex-wrap: wrap;
+        overflow-x: auto;
     }
     .comparison__del-btn {
         position: absolute;
@@ -177,6 +199,16 @@
         margin-right: 4px;
         &--down {
             transform: rotate(180deg);
+        }
+    }
+
+    .comparisonable-properties {
+        display: flex;
+        padding: 20px;
+        background: rgba(1,1,1,.1);
+        border-radius: 4px;
+        .properties__list {
+            margin-right: 30px;
         }
     }
 </style>
