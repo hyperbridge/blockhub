@@ -3351,6 +3351,64 @@ storiesOf('Purchase block', module)
                         </div>`
     }))
 
+import PurchaseOptions from '@/ui/components/purchase-option';
+import PurchaseOption from '@/ui/components/purchase-option/single-option.vue';
+storiesOf('Purchase Option', module)
+    .add('single', () => ({
+        components:{
+            'c-purchase-option' : PurchaseOption
+        },
+        template: `
+            <div class="p-4" style="width: 600px">
+                <c-purchase-option />
+            </div>
+        `
+    }))
+    .add('list', () => ({
+        data(){
+            return{
+                options:[
+                    {
+                        id: 1,
+                        old_price: '22.99',
+                        price: '16.99',
+                        tag: 'Game Only',
+                        title: 'Standard Edition'
+                    },
+                    {
+                        id: 2,
+                        old_price: '19.99',
+                        price: '12.99',
+                        tag: 'Super Nice Expansion Pack',
+                        title: 'Standard Edition'
+                    },
+                    {
+                        id: 3,
+                        old_price: '9.99',
+                        price: '0.69',
+                        tag: 'Super Nice Expansion Pack',
+                        title: 'Game + All Expansion'
+                    },
+                ]
+            }
+        },
+        components:{
+            'c-purchase-option' : PurchaseOption,
+            'c-purchase-options' : PurchaseOptions
+        },
+        template: `
+            <c-purchase-options>
+                <c-purchase-option v-for="(option, index) in options" 
+                :key="index" 
+                :price="option.price"
+                :oldPrice="option.old_price"
+                :gameTag="option.tag"
+                :title="option.title"
+                :id="option.id"
+                />
+            </c-purchase-options>
+        `
+    }))
 import ContributeForm from '@/ui/components/contribute/form.vue'
 import ContributePledge from '@/ui/components/contribute/pledge.vue'
 storiesOf('Contribute', module)

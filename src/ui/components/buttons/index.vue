@@ -9,6 +9,8 @@
             { 'swap-direction': swap_direction },
             { 'no-shadow' : !shadow}
         ]"
+        style="font-size: 14px"
+        :style="{ 'font-size': fontSize + 'px' }"
         @click="$emit('click')"
     >
         <i
@@ -56,6 +58,9 @@
             shadow: {
                 type: Boolean,
                 default: true
+            },
+            fontSize: {
+                type: String
             }
         },
         computed: {
@@ -111,7 +116,9 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-right: 3px;
+            margin-right: 5px;
+            width: auto;
+            height: auto;
         }
         .swap-order {
             order: 2;
@@ -122,6 +129,10 @@
             .icon {
                 margin-top: 3px;
             }
+        }
+        &.c-btn-xs{
+            padding: 0px 5px;
+            font-size: 12px;
         }
         &.c-btn-sm{
             padding: 1px 5px;
@@ -151,13 +162,13 @@
         $statusColors: (
             default: (#fff, #3D3E5D, #3D3E5D, #A2A3BE),
             plain: (transparent, #fff, transparent, #ddd),
-            info: (#5D75F7, #fff, #586ee9, #30304B),
+            info: (#5D75F7, #fff, #5165d5, #30304B),
             success: (#5EA72B, #fff, #559727, #30304B),
             danger: (#F75D5D, #fff, #de5454, #30304B),
             warning: (#FADC72, #3D3E5D, #efd26d, #32334c),
-            share: (#43B4C9, #fff, #43B4C9, #32334c),
-            support: (#43C981, #fff, #43C981, #30304B),
-            dark: (#3D3E5D, #fff, #3D3E5D, #fff),
+            share: (#43B4C9, #fff, #3b9fb1, #32334c),
+            support: (#43C981, #fff, #3db876, #30304B),
+            dark: (#3D3E5D, #fff, #2e2f47, #fff),
         );
 
         @each $status, $colorSet in $statusColors {
