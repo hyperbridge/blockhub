@@ -44,7 +44,7 @@ export const actions = {
     initEthereum(store, payload) {
         DesktopBridge
             .initProtocol({ protocolName: 'funding' })
-            .then((err, config) => {
+            .then((config) => {
                 store.state.ethereum[store.state.current_ethereum_network] = config
                 store.dispatch('updateState')
             })
@@ -89,7 +89,7 @@ export const actions = {
     deployContract(store, payload) {
         return new Promise((resolve, reject) => {
             DesktopBridge
-                .deployContract('funding', payload.contractName)
+                .deployContract({ protocolName: 'funding', contractName: payload.contractName })
                 .then((err, contract) => {
                     state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = contract
                     store.dispatch('updateState')

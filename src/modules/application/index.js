@@ -104,7 +104,7 @@ export const actions = {
         // })
     },
     initEthereum(store, payload) {
-        DesktopBridge.initProtocol({ protocolName: 'application' }).then((err, config) => {
+        DesktopBridge.initProtocol({ protocolName: 'application' }).then((config) => {
             store.state.ethereum[store.state.current_ethereum_network] = config
             store.dispatch('updateState')
         })
