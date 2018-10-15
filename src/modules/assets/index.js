@@ -71,16 +71,17 @@ const assets = {
 
     },
     getters: {
-        assets: ({ assets }) => Object.values(assets)
+        assets: ({ assets }, getters, { marketplace: { collections }}) => Object.values(assets)
             .reduce((populated, asset) => ({
                 ...populated,
                 [asset.id]: {
                     ...asset,
                     offers_list: asset.offers_list.map(id => assets[id]),
-                    inventory_list: asset.inventory_list.map(id => assets[id])
+                    inventory_list: asset.inventory_list.map(id => assets[id]),
+                    collections: asset.collections.map(id => collections[id])
                 }
             }), {}),
-        assetsArr: (state, { assets }) => Object.values(assets),
+        array: (state, { assets }) => Object.values(assets),
         assetsArray: state => Object.values(state.assets),
         inventoryAssets: (state, { assetsArray }) => assetsArray
             .filter(asset => !asset.for_sale),
