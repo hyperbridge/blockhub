@@ -71,6 +71,16 @@ const assets = {
 
     },
     getters: {
+        assets: ({ assets }) => Object.values(assets)
+            .reduce((populated, asset) => ({
+                ...populated,
+                [asset.id]: {
+                    ...asset,
+                    offers_list: asset.offers_list.map(id => assets[id]),
+                    inventory_list: asset.inventory_list.map(id => assets[id])
+                }
+            }), {}),
+        assetsArr: (state, { assets }) => Object.values(assets),
         assetsArray: state => Object.values(state.assets),
         inventoryAssets: (state, { assetsArray }) => assetsArray
             .filter(asset => !asset.for_sale),
@@ -80,9 +90,6 @@ const assets = {
             .filter(asset => asset.for_sale)
     }
 }
-
-// import Vue from 'vue';
-// import assetsData from '@/db/seed/assets';
 
 // const assets = {
 //     namespaced: true,

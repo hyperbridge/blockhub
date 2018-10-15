@@ -241,11 +241,15 @@
         },
         computed: {
             asset() {
+                // return this.$store.state.assets.assets[this.id] || null;
                 return this.$store.state.marketplace.assets[this.id] || null;
                 if (!this.$store.state.marketplace.assets)
                     return
 
                 return this.$store.state.marketplace.assets[this.id]
+            },
+            assetC() {
+                return this.$store.state.assets.assets[this.id];
             },
             offers(){
                 let ids = this.$store.state.marketplace.assets[this.id].offers_list,
