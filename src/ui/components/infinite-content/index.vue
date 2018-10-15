@@ -94,23 +94,21 @@
                 </div>
 
                 <div class="row margin-bottom-50 margin-top-20 align-items-stretch" v-if="item.type === 'banners'" :key="index">
-                    <div class="col-12 col-md-8">
-                        <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/marketplace">
+                    <div :class="banner.class" v-for="(banner, index) in item.data.banners" :key="index">
+                        <c-banner :imgSrc="banner.image" :link="banner.link" v-if="item.type == 3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h3 class="text-yellow">Item Marketplace</h3>
-                                    <p>All-in-one spot for games assets</p>
+                                    <h3 class="text-yellow">{{ banner.title }}</h3>
+                                    <p>{{ banner.subtitle }}</p>
                                 </div>
                                 <div class="banner-action">
-                                    <c-button status="info" icon_hide size="lg">GAME ON</c-button>
+                                    <c-button status="info" icon_hide size="lg">{{ banner.buttonText }}</c-button>
                                 </div>
                             </div>
                         </c-banner>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <c-banner :imgSrc="'/static/img/banners/banner-4.png'" link="/#/collections">
-                            <h3 class="text-yellow margin-bottom-5">Top Collections</h3>
-                            <p>Our community has curated the best ones for you</p>
+                        <c-banner :imgSrc="banner.imagee" :link="banner.link" v-if="item.type == 4">
+                            <h3 class="text-yellow margin-bottom-5">{{ banner.title }}</h3>
+                            <p>{{ banner.subtitle }}</p>
                         </c-banner>
                     </div>
                 </div>

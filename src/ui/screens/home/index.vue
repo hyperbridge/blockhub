@@ -154,7 +154,27 @@ export default {
 
             result.push({
                 type: 'banners',
-                data: {}
+                data: {
+                    banners: [
+                        {
+                            type: 3,
+                            class: 'col-12 col-md-8',
+                            image: '/static/img/banners/banner-3.png',
+                            title: 'Item Marketplace',
+                            subtitle: 'All-in-one spot for games assets',
+                            buttonText: 'GAME ON',
+                            link: '/#/marketplace'
+                        },
+                        {
+                            type: 4,
+                            class: 'col-12 col-md-4',
+                            image: '/static/img/banners/banner-4.png',
+                            title: 'Top Collections',
+                            subtitle: 'Our community has curated the best ones for you',
+                            link: '/#/collections'
+                        },
+                    ]
+                }
             })
 
             result.push({
