@@ -100,7 +100,7 @@
                     </div>
                     <div class="col-12">
 
-                        <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
+                        <ul class="nav nav-tabs margin-bottom-20 justify-content-between">
                             <li class="nav-item">
                                 <router-link :to="`/project/${project.id}`" class="nav-link">Overview</router-link>
                             </li>
@@ -117,6 +117,40 @@
                                 <router-link :to="`/project/${project.id}/milestones`" class="nav-link active">Milestones</router-link>
                             </li>
                         </ul>
+                        <div class="milestones-header margin-bottom-20">
+                            <div class="milestones-header__info">
+                                <div class="h3 text-white font-weight-bold mb-0">
+                                    {{ project.milestones.overall_progress }}% Project Completion
+                                </div>
+                                {{ doneMilestones }} of {{ project.milestones.items.length }} Milestones Completed
+                            </div>
+                            <div class="milestones-header__stat">
+                                <c-icon-block icon="check">
+                                    <div class="h6 p-0 m-0 text-white font-weight-bold">
+                                        Completed
+                                    </div>
+                                    {{ doneMilestones }} Milestones
+                                </c-icon-block>
+                                <c-icon-block icon="th">
+                                    <div class="h6 p-0 m-0 text-white font-weight-bold">
+                                        Total
+                                    </div>
+                                    {{ project.milestones.items.length }} Milestones
+                                </c-icon-block>
+                                <c-icon-block icon="file-alt">
+                                    <div class="h6 p-0 m-0 text-white font-weight-bold">
+                                        Total Spent
+                                    </div>
+                                    $ {{ project.funding.spent_amount | numeralFormat('0,0') }}
+                                </c-icon-block>
+                                <c-icon-block icon="hand-holding-usd">
+                                    <div class="h6 p-0 m-0 text-white font-weight-bold">
+                                        Project Budget
+                                    </div>
+                                    $ {{ project.funding.funded_amount | numeralFormat('0,0')  }}
+                                </c-icon-block>
+                            </div>
+                        </div>
                         <div class="timeline-blk position-relative">
                             <div class="progress main_timeline" style="height: 15px;">
                                 <c-progress-bar :percentages="project.milestones.overall_progress"/>
@@ -183,13 +217,33 @@
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-milestone': (resolve) => require(['@/ui/components/project/milestone'], resolve),
             'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar'], resolve),
-            'c-badges': (resolve) => require(['@/ui/components/project/badges.vue'], resolve)
+            'c-badges': (resolve) => require(['@/ui/components/project/badges'], resolve),
+            'c-icon-block': (resolve) => require(['@/ui/components/block/with-icon'], resolve)
         },
         computed: {
             project: updateProject,
+            editing() {
+                if (!this.$store.state.application.editor_mode) {
+                    for (let key in this.activeElement) {
+                        this.activeElement[key] = false
+                    }
+                }
+
+                return this.$store.state.application.editor_mode === 'editing'
+            },
             milestones(){
                 let arr = this.project.milestones.items;
                 return arr.sort() ;
+            },
+            doneMilestones(){
+                let arr = this.project.milestones.items,
+                    count = 0;
+                arr.forEach( (obj, i) => {
+                    console.log(obj)
+                    if (obj.status === 'done')
+                        count += 1;
+                });
+                return count;
             }
         },
         beforeDestroy() {
@@ -199,6 +253,17 @@
 </script>
 
 <style lang="scss" scoped>
+    .milestones-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+    .milestones-header__stat{
+        display: flex;
+        width: 65%;
+        justify-content: space-between;
+    }
     .timeline-blk {
         margin-bottom: 50px;
         .main_timeline {

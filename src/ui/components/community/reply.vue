@@ -4,7 +4,7 @@
             <div class="community-item__post-reply" v-if="replyMode">
                 <h4 class="mt-4 mb-2 text-left">Your Reply:</h4>
                 <div class="form-group">
-                    <textarea class="form-control" rows="6"></textarea>
+                    <textarea class="form-control" rows="6" v-focus></textarea>
                 </div>
             </div>
         </transition>
@@ -40,6 +40,13 @@ export default {
         changeReplyMode() {
             this.replyMode = !this.replyMode;
             this.$emit('replyMode', this.replyMode);
+        }
+    },
+    directives: {
+        focus: {
+            inserted: function (el) {
+                el.focus()
+            }
         }
     }
 }

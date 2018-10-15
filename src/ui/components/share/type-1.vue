@@ -49,12 +49,12 @@
     }
     .share-block{
         position: absolute;
-        width: 250px;
+        width: 200px;
         top: 0;
-        transform: translateY(-50%);
-        right: -270px;
+        transform: translateY(-48%);
+        right: -220px;
         padding: 15px;
-        background: #3E415C;
+        background: rgba(0, 0, 0, .85);
         color: #fff;
         border-radius: 5px;
         z-index: 8;
@@ -67,11 +67,12 @@
             z-index: 7;
             border-style: solid;
             border-width: 0 15px 15px 15px;
-            border-color: transparent transparent #3E415C transparent;
+            border-color: transparent transparent rgba(0, 0, 0, .85) transparent;
         }
     }
     .share-block__users{
-        height: 200px;
+        height: auto;
+        max-height: calc( 100% - 50px);
         overflow-x: hidden;
         overflow-y: auto;
         h5{

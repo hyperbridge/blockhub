@@ -54,7 +54,7 @@ storiesOf('Promotion Box', module)
                         basic: false
                     },
                     {
-                        title: 'Game + Collectors Founder Packst',
+                        title: 'Game + Collectors Founder Pack',
                         price: '10.00',
                         basic: false
                     }
@@ -64,7 +64,7 @@ storiesOf('Promotion Box', module)
         template: `<div class="row"><div class="col-6 p-5">
                         <c-promotion-list title="Packages" >
                             <template v-for="(promotion, index) in promotions">
-                                <c-promotion-item :title="promotion.title" :price="promotion.price" :basic="promotion.basic"></c-promotion-item>
+                                <c-promotion-item :title="promotion.title" :price="promotion.price" :basic="promotion.basic" :border="true"></c-promotion-item>
                             </template>
                         </c-promotion-list>
                     </div></div>`
@@ -735,7 +735,7 @@ storiesOf('Tooltips', module)
             'c-tooltips': Tooltips
         },
         template: `
-            <div class="row">
+            <div class="row padding-50">
                 <div class="col-4 text-center">
                             <c-tooltips name="Hover Me(left Position)!" position="left" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='false' />
                 </div>
@@ -3482,8 +3482,8 @@ storiesOf('Share', module)
                 ]
             }
         },
-        template: `<div class="p-5 position-relative" style="height: 300px;width: 300px">
-                        <c-share :onlineList="online" :favoritesList="favorites" />
+        template: `<div class="p-5 position-relative" style="height: 300px;width: 300px; margin-top: 300px">
+                        <c-share :onlineList="online" :favoritesList="favorites" :show="true" />
                     </div> `
     }))
 

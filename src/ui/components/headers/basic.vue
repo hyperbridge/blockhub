@@ -109,10 +109,47 @@
                             </a>
                         </li>
                         <li v-if="signed_in">
-                            <a href="/#/account">
-                                <span class="icon fa fa-user"></span>
-                                <span class="text">Account</span>
-                            </a>
+                            <c-dropdown class="ml-4 account-menu" style="z-index: 12">
+                                <template slot="title">
+                                    <div class="__title">
+                                        <i class="fa fa-user"></i> Account
+                                    </div>
+                                </template>
+                                <ul class="item-dropdown">
+                                    <li>
+                                        <a href="#3">
+                                            <i class="fas fa-user"></i>
+                                            Account Info
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#3">
+                                            <i class="fas fa-credit-card"></i>
+                                            My Wallets
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#3">
+                                            <i class="fas fa-users"></i>
+                                            Profile Manager
+                                        </a>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <a href="#3">
+                                            <i class="fas fa-comments"></i>
+                                            Chat Settings
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#3">
+                                            <i class="fas fa-info-circle"></i>
+                                            FAQ
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </c-dropdown>
                         </li>
                         <li v-if="signed_in" v-darklaunch="'CONTACTS'">
                             <a href="/#/identity/1/contacts">
@@ -145,7 +182,8 @@ import LoadingBar from '../loading-bar/logo-loader'
 export default {
     props: ['isLoader'],
     components: {
-        'c-loading-logo': LoadingBar
+        'c-loading-logo': LoadingBar,
+        'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve)
     },
     data() {
         return {
@@ -724,6 +762,57 @@ export default {
             top: -10px;
             left: -20px;
             transform: rotate(45deg);
+        }
+    }
+    .account-menu{
+        .__title{
+            cursor: pointer;
+            i{
+                font-size: 16px;
+            }
+            &:hover{
+                color: #f9da5d!important;
+            }
+        }
+        .item-dropdown {
+            padding: 0 4px;
+            margin: 0;
+            min-width: auto;
+            background: transparent;
+            position: relative;
+            display: inline-block!important;
+            left: 0;
+            width: 100%;
+            border: none;
+            hr {
+                margin: 5px 0;
+                border-color: rgba(0, 0, 0, .2);
+            }
+            li {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                font-size: 15px;
+                color: #2e3546;
+                padding: 4px 0;
+                background: transparent;
+                border: none;
+                float: unset;
+                a {
+                    cursor: pointer;
+                    color: #000;
+                    padding: 0;
+                    font-size: 15px;
+                    border: none;
+                    &:hover{
+                        text-decoration: none;
+                    }
+                }
+                i {
+                    margin-right: 10px;
+                    color: #4f5079;
+                }
+            }
         }
     }
 

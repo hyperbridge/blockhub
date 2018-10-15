@@ -31,7 +31,7 @@
             </span>
         </div>
         <div class="dropdown-container">
-            <c-dropdown dropPosition="right">
+            <c-dropdown :class="{'no-right-border' : shareList}">
                 <ul class="item-dropdown">
                     <li>
                         <a href="#3">
@@ -52,11 +52,10 @@
                         </a>
                     </li>
                     <hr>
-                    <li>
-                        <a href="#3">
-                            <i class="fas fa-share"></i>
-                            Share
-                        </a>
+                    <li @click="toggleList">
+                        <i class="fas fa-share"></i>
+                        Share
+                        <c-share-list class="in-dropdown" :onlineList="online" :favoritesList="favorites" :show="show" />
                     </li>
                     <li>
                         <a href="#3">
@@ -82,9 +81,22 @@
 <script>
     export default {
         name: 'game-library-item',
-        props: ['game', 'isLoading'],
+        props: ['game', 'isLoading', 'online','favorites'],
+        data(){
+            return{
+                show: false,
+                shareList: false
+            }
+        },
         components: {
-            'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve)
+            'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve),
+            'c-share-list': (resolve) => require(['@/ui/components/share/type-1'], resolve)
+        },
+        methods:{
+            toggleList(){
+                this.show = !this.show
+                this.shareList = !this.shareList
+            }
         }
     }
 </script>
@@ -187,27 +199,38 @@
             margin: 0;
             hr {
                 margin: 5px 0;
-                border-color: rgba(255, 255, 255, .2);
+                border-color: rgba(0, 0, 0, .2);
             }
             li {
                 display: flex;
                 align-items: center;
                 width: 100%;
                 font-size: 15px;
-                color: #fff;
+                color: #2e3546;
                 padding: 4px 0;
                 a {
                     cursor: pointer;
-                    color: #fff;
+                    color: #000;
                     &:hover{
                         text-decoration: none;
                     }
                 }
                 i {
                     margin-right: 10px;
-                    color: #A2A3BE;
+                    color: #4f5079;
                 }
             }
+        }
+    }
+    .share-block.in-dropdown{
+        top: -11px;
+        left: calc(100% + 10px );
+        bottom: -11px;
+        height: auto;
+        transform: translateY(0);
+        border-radius: 0 5px 5px 0;
+        &:before{
+            top: calc( 50% + 12px);
         }
     }
     .loader-block{
