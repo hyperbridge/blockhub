@@ -116,7 +116,9 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-right: 3px;
+            margin-right: 5px;
+            width: auto;
+            height: auto;
         }
         .swap-order {
             order: 2;
@@ -127,6 +129,10 @@
             .icon {
                 margin-top: 3px;
             }
+        }
+        &.c-btn-xs{
+            padding: 0px 5px;
+            font-size: 12px;
         }
         &.c-btn-sm{
             padding: 1px 5px;
