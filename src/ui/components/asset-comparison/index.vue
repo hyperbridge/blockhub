@@ -2,7 +2,7 @@
     <div>
         <div class="comparisonable-properties" v-if="assets.length">
             <div
-                class="properties__list"
+                class="properties-list"
                 v-if="compareProps[title + 'Props'].length"
                 v-for="title in ['comparable', 'calculable']"
                 :key="title"
@@ -32,7 +32,7 @@
                     class="comparison__del-btn"
                     @click="$emit('delete', asset)"
                 />
-                <c-img :src="asset.image" class="comparison__asset-image"/>
+                <c-asset-preview :asset="asset"/>
                 <table class="comparison__table">
                     <thead>
                         <th>Property</th>
@@ -83,6 +83,9 @@
                 type: Array,
                 default: () => [{ metadata: {} }]
             }
+        },
+        components: {
+            'c-asset-preview': (resolve) => require(['@/ui/components/asset-preview'], resolve),
         },
         methods: {
             colorClass: num => num >= 100 ? 'positive' : 'negative'
@@ -146,8 +149,8 @@
     }
     .comparison__del-btn {
         position: absolute;
-        top: 12px;
-        right: 12px;
+        top: 18px;
+        right: 18px;
         font-size: 18px;
         cursor: pointer;
         &:not(:hover) {
@@ -207,7 +210,7 @@
         padding: 20px;
         background: rgba(1,1,1,.1);
         border-radius: 4px;
-        .properties__list {
+        .properties-list {
             margin-right: 30px;
         }
     }
