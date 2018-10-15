@@ -3351,8 +3351,7 @@ storiesOf('Purchase block', module)
                         </div>`
     }))
 
-import PurchaseOptions from '@/ui/components/purchase-option';
-import PurchaseOption from '@/ui/components/purchase-option/single-option.vue';
+import PurchaseOption from '@/ui/components/purchase-option';
 storiesOf('Purchase Option', module)
     .add('single', () => ({
         components:{
@@ -3360,7 +3359,13 @@ storiesOf('Purchase Option', module)
         },
         template: `
             <div class="p-4" style="width: 600px">
-                <c-purchase-option />
+                <c-purchase-option 
+                :price="44"
+                :oldPrice="55"
+                :gameTag="SOME TAG"
+                :title="SOME TITLE"
+                :id="4"
+                 />
             </div>
         `
     }))
@@ -3394,10 +3399,11 @@ storiesOf('Purchase Option', module)
         },
         components:{
             'c-purchase-option' : PurchaseOption,
-            'c-purchase-options' : PurchaseOptions
+            'c-block': Block
         },
         template: `
-            <c-purchase-options>
+        <div class="p-5">
+            <c-block title="Purchase Options" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                 <c-purchase-option v-for="(option, index) in options" 
                 :key="index" 
                 :price="option.price"
@@ -3405,10 +3411,89 @@ storiesOf('Purchase Option', module)
                 :gameTag="option.tag"
                 :title="option.title"
                 :id="option.id"
+                :inList="(index < options.length-1) ? true : false"
                 />
-            </c-purchase-options>
+            </c-block>
+        </div>
         `
     }))
+
+import ParticipationTier from '@/ui/components/participation-tiers'
+storiesOf('Participation Tiers', module)
+    .add('default', () => ({
+        data(){
+            return{
+                id: 1,
+                price: '29',
+                sold: '222',
+                left: '9',
+                tag: 'Combo',
+                title: 'Game Standard Edition'
+            }
+        },
+        components:{
+            'c-participation-tier' : ParticipationTier,
+        },
+        template: `
+            <div class="p-5">
+                <c-participation-tier :id="id" :price="price" :sold="sold" :left="left" :title="title" :tag="tag" />
+            </div>
+        `
+    }))
+    .add('list', () => ({
+        data(){
+            return{
+                items:[
+                    {
+                        id: 1,
+                        price: '29',
+                        sold: '222',
+                        left: '9',
+                        tag: 'Combo',
+                        title: 'Game Standard Edition'
+                    },
+                    {
+                        id: 2,
+                        price: '219',
+                        sold: '32',
+                        left: '1',
+                        tag: 'Combo',
+                        title: 'Game Standard Edition'
+                    },
+                    {
+                        id: 3,
+                        price: '9',
+                        sold: '981',
+                        left: '1',
+                        tag: 'Combo',
+                        title: 'Game Standard Edition'
+                    }
+                ]
+            }
+        },
+        components:{
+            'c-participation-tier' : ParticipationTier ,
+            'c-block': Block
+
+        },
+        template: `
+            <div class="p-5">
+                <c-block title="Participation Tier" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+                    <c-participation-tier v-for="(item, index) in items" 
+                    :key="index"
+                    :id="item.id" 
+                    :price="item.price" 
+                    :sold="item.sold" 
+                    :left="item.left" 
+                    :title="item.title" 
+                    :tag="item.tag"
+                    :inList="(index < items.length-1) ? true : false"
+                 />
+                </c-block>
+            </div>
+        `
+    }))
+
 import ContributeForm from '@/ui/components/contribute/form.vue'
 import ContributePledge from '@/ui/components/contribute/pledge.vue'
 storiesOf('Contribute', module)
