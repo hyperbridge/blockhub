@@ -31,6 +31,7 @@
                                     <c-button @click="toggleDesktopMode()">Desktop Mode is {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
                                     <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button>
                                     <c-button @click="toggleDeveloperMode()">Developer Mode is {{ developer_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="rotateOperatingSystem()">Operating System is {{ operating_system === 'mac' ? 'MAC' : (operating_system === 'windows' ? 'WINDOWS' : 'LINUX' ) }}</c-button>
                                     <c-button @click="$store.state.application.account.is_verified = !$store.state.application.account.is_verified">Account is {{ $store.state.application.account.is_verified ? 'VERIFIED' : 'NOT VERIFIED' }}</c-button>
                                     <br /><br />
                                 </div>
@@ -269,19 +270,22 @@ export default {
         //     return this.$store.state.marketplace.products
         // },
         mode() {
-            return this.$store.state.application.mode;
+            return this.$store.state.application.mode
         },
         signed_in() {
-            return this.$store.state.application.signed_in;
+            return this.$store.state.application.signed_in
         },
         simulator_mode() {
-            return this.$store.state.application.simulator_mode;
+            return this.$store.state.application.simulator_mode
         },
         desktop_mode() {
-            return this.$store.state.application.desktop_mode;
+            return this.$store.state.application.desktop_mode
         },
         developer_mode() {
-            return this.$store.state.application.developer_mode;
+            return this.$store.state.application.developer_mode
+        },
+        operating_system() {
+            return this.$store.state.application.operating_system
         }
     },
     methods: {
@@ -296,6 +300,15 @@ export default {
         },
         toggleSimulator() {
             this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulator_mode)
+        },
+        rotateOperatingSystem() {
+            if (this.$store.state.application.operating_system === 'mac') {
+                this.$store.state.application.operating_system = 'windows'
+            } else if (this.$store.state.application.operating_system === 'windows') {
+                this.$store.state.application.operating_system = 'linux'
+            } else {
+                this.$store.state.application.operating_system = 'mac'
+            }
         },
         importSeedData() {
             window.BlockHub.importSeedData()
