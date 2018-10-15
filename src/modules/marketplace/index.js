@@ -129,6 +129,18 @@ export const actions = {
 
         store.commit('updateState', state)
     },
+    deployContract(store, payload) {
+        return new Promise((resolve, reject) => {
+            DesktopBridge
+                .deployContract({ protocolName: 'marketplace', contractName: payload.contractName })
+                .then((contract) => {
+                    state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = contract
+                    store.dispatch('updateState')
+
+                    resolve(contract)
+                })
+        })
+    },
     viewProduct(id) {
         console.log('viewProduct', id)
     },

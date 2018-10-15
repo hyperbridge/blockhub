@@ -169,6 +169,18 @@ export const actions = {
     },
     signOut(store, payload) {
         store.commit('signOut', payload)
+    },
+    deployContract(store, payload) {
+        return new Promise((resolve, reject) => {
+            DesktopBridge
+                .deployContract({ protocolName: 'application', contractName: payload.contractName })
+                .then((contract) => {
+                    state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = contract
+                    store.dispatch('updateState')
+
+                    resolve(contract)
+                })
+        })
     }
 }
 

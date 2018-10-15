@@ -730,18 +730,8 @@ export default {
         updateClientSettings(prop) {
             this.$store.commit('application/UPDATE_CLIENT_SETTINGS', prop);
         },
-        clearDatabase() {debugger
-            let DBDeleteRequest = window.indexedDB.deleteDatabase("LokiCatalog")
-
-            DBDeleteRequest.onerror = function(event) {
-                console.log("Error deleting database.")
-            }
-
-            DBDeleteRequest.onsuccess = function(event) {
-                console.log("Database deleted successfully.")
-
-                console.log(event.result) // should be undefined
-            }
+        clearDatabase() {
+            window.resetSettings()
         },
         async requestNotifPerm() {
             const permission = await Notification.requestPermission();
