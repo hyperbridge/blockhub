@@ -30,6 +30,9 @@ const assets = {
             // delete state[prop][id];
             Vue.delete(state[prop][id]);
         },
+        negateValue(state, { prop = 'assets', id, iprop }) {
+            state[prop][id][iprop] = !state[prop][id][iprop];
+        },
         updateAssets(state, { prop = 'assets', data, ids }) {
             if (!ids) {
                 for (let id in state[prop]) {

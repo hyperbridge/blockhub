@@ -1,9 +1,14 @@
 <template>
     <div>
-        <h2>Compare assets</h2>
         <div class="comparison">
+            <div class="comparison__add-asset">
+                <c-icon
+                    name="plus-circle"
+                    @click="$emit('addMore')"
+                />
+            </div>
             <div
-                v-for="(asset, assetKey) in assetsc"
+                v-for="(asset, assetKey) in assets"
                 :key="asset.id"
                 class="comparison__item"
             >
@@ -45,9 +50,6 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="comparison__add-asset">
-                <c-icon name="plus-circle"/>
             </div>
         </div>
     </div>
@@ -115,13 +117,13 @@
                 return this.assets.map((asset, index) => ({ ...asset, metadata: metadata[index] }));
             },
             comparableProps() {
-                const { metadata } = this.assetsc[0];
+                const { metadata } = this.assets[0];
                 return Object.keys(metadata).filter(metaProp =>
-                    this.assetsc.every(asset => asset.metadata[metaProp] != null)
+                    this.assets.every(asset => asset.metadata[metaProp] != null)
                 );
             },
             calculableProps() {
-                const { metadata } = this.assetsc[0];
+                const { metadata } = this.assets[0];
                 return this.comparableProps.reduce((props, prop) =>
                     typeof metadata[prop] === 'number'
                         ? [...props, prop]
@@ -129,15 +131,18 @@
                 , []);
             },
             calculateDiffs() {
-                const { assetsc, calculableProps } = this;
+                const { assets, calculableProps } = this;
 
-                return assetsc.map((asset, index) => {
+                return assets.map((asset, index) => {
                     const diffs = {};
-                    const otherAssets = assetsc.filter((asset, i) => i !== index);
+                    const otherAssets = assets.filter((asset, i) => i !== index);
 
                     for (let key of calculableProps) {
                         diffs[key] = Math.round(
-                            asset.metadata[key] / assetsc[1].metadata[key] * 100
+                            asset.metadata[key] / (
+                                otherAssets.reduce((avg, asset) => avg += asset.metadata[key], 0) /
+                                otherAssets.length
+                            ) * 100
                         );
                     }
                     return diffs;
@@ -158,6 +163,7 @@
 <style lang="scss" scoped>
     .comparison {
         display: flex;
+        flex-wrap: wrap;
     }
     .comparison__asset-image {
         height: 100px;
