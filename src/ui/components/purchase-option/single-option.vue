@@ -6,7 +6,7 @@
             </s>
             {{ price }}
         </div>
-        <div class="purchase-option__img">
+        <div class="purchase-option__img" v-if="img">
             <c-img :src="img" />
         </div>
         <div class="purchase-option__info">
@@ -40,7 +40,7 @@
             img: String,
             gameTag: String,
             title: String,
-            id: String,
+            id: Number,
         }
     }
 </script>
