@@ -4,6 +4,7 @@
         <c-asset-comparison
             :assets="selectedAssets"
             @addMore="addMore = true"
+            @delete="negateValue"
         />
         <c-modal
             v-if="addMore"
@@ -13,9 +14,8 @@
             <c-asset-grid
                 :assets="assets"
                 slot="modal_body"
-                @click="$store.commit('assets/negateValue', { id: $event.id, iprop: 'selected' })"
+                @click="negateValue"
             />
-
         </c-modal>
     </div>
 </template>
@@ -34,6 +34,11 @@
         data() {
             return {
                 addMore: false
+            }
+        },
+        methods: {
+            negateValue({ id }, iprop = 'selected') {
+                this.$store.commit('assets/negateValue', { id, iprop });
             }
         },
         computed: {

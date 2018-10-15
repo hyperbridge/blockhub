@@ -12,6 +12,11 @@
                 :key="asset.id"
                 class="comparison__item"
             >
+                <c-icon
+                    name="times"
+                    class="comparison__del-btn"
+                    @click="$emit('delete', asset)"
+                />
                 <c-img :src="asset.image" class="comparison__asset-image"/>
                 <table class="comparison__table">
                     <thead>
@@ -165,6 +170,16 @@
         display: flex;
         flex-wrap: wrap;
     }
+    .comparison__del-btn {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        font-size: 18px;
+        cursor: pointer;
+        &:not(:hover) {
+            color: rgba(255,255,255,.6);
+        }
+    }
     .comparison__asset-image {
         height: 100px;
         width: 100px;
@@ -176,6 +191,7 @@
         border-radius: 4px;
         background: #1D1E2E;
         margin: 10px;
+        position: relative;
     }
     .comparison__add-asset {
         @extend .comparison__item;
