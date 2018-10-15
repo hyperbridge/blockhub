@@ -4,11 +4,17 @@
         <div class="content-navigation-wrapper" v-show="visibleItems.length">
             <c-pagination
                 v-if="paginationMode"
+                v-bind="$attrs"
                 :activePage="activePage + 1"
                 :pages="pagination.pages"
                 @pageChange="activePage = $event - 1"
-            />
-            <c-load-more v-else
+            >
+                <slot name="left-content" slot="left-content"/>
+                <slot name="right-content" slot="right-content"/>
+            </c-pagination>
+            <c-load-more
+                v-else
+                v-bind="$attrs"
                 @click="loadMore()"
             >
                {{ itemsLeft ? 'Load More +' + itemsLeft : 'Show Less' }}
@@ -20,12 +26,11 @@
 <script>
     export default {
         name: 'content-navigation',
+        inheritAttrs: false,
         props: {
             items: {
                 type: Array,
-                default() {
-                    return [];
-                }
+                default: () => []
             },
             setItemsLimit: {
                 type: Number,
@@ -34,7 +39,8 @@
             setItemsPerPage: {
                 type: Number,
                 default: 6
-            }
+            },
+            setLimits: Number
         },
         components: {
             'c-pagination': (resolve) => require(['@/ui/components/pagination'], resolve),
@@ -43,8 +49,8 @@
         data() {
             return {
                 activePage: 0,
-                limitTo: this.setItemsLimit,
-                itemsPerPage: this.setItemsPerPage
+                limitTo: this.setLimits || this.setItemsLimit,
+                itemsPerPage: this.setLimits || this.setItemsPerPage
             }
         },
         methods: {

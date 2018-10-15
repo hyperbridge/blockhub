@@ -15,7 +15,8 @@ const updateState = (savedData, updatedState = {}) => {
         assets: DB.marketplace ? DB.marketplace.assets.data : [],
         products: DB.marketplace ? DB.marketplace.products.data : [],
         posts: DB.marketplace ? DB.marketplace.posts.data : [],
-        collections: DB.marketplace.config.data[0].collections,
+        collections: DB.marketplace.config.data[0].collections
+            .reduce((collections, collection) => ({ ...collections, [collection.id]: collection }) ,{}),
         realms: DB.marketplace.config.data[0].realms,
         curator_reviews: DB.marketplace.config.data[0].curator_reviews,
         posts: DB.marketplace.config.data[0].posts,

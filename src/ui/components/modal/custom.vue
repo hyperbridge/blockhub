@@ -56,6 +56,7 @@
         background: #3e3e5c;
         color: #fff;
         border-radius: 0 0 5px 5px;
+        max-width: 1000px;
     }
 
     @keyframes opacity {

@@ -2,14 +2,14 @@
     <div class="asset-overview-popup">
         <div class="asset-overview-popup__head">
             <div class="link">
-                <i class="fas fa-link"></i>
+                <c-icon name="link"/>
             </div>
             <div class="img">
-                <c-img :src="asset.image" />
+                <c-img :src="asset.image"/>
             </div>
             <div class="info">
                 <h4>{{ asset.name }}</h4>
-                <h6>{{ asset.game_name }}</h6>
+                <h6>{{ asset.product_name }}</h6>
                 <div class="description">
                     <h6>{{ asset.price['current'] }}$</h6>
                     <p>Based on 7461 other transactions</p>
@@ -20,7 +20,7 @@
         <div class="asset-overview-popup__action">
             <div class="button-line d-flex w-100 justify-content-between">
                 <c-button status="danger" icon_hide>
-                    <i class="fas fa-trash-alt"></i>
+                    <c-icon name="trash-alt"/>
                 </c-button>
                 <div class="text-right">
                     <c-button status="share">
@@ -30,51 +30,60 @@
                         Use
                     </c-button>
                 </div>
-
             </div>
             <div class="w-100 py-4">
-                <c-switch label="Accept offers for this item?"
-                          :checked="asset.accept_offers"
-                          label_size="18px"
-                          size="sm"
-                          label_position="left" />
+                <c-switch
+                    label="Accept offers for this item?"
+                    :checked="asset.accept_offers"
+                    label_size="18px"
+                    size="sm"
+                    label_position="left"
+                    @change="$store.commit('assets/negateValue', { id: asset.id, iprop: 'accept_offers' })"
+                />
             </div>
         </div>
         <div class="asset-overview-popup__info-list">
             <div class="metadata">
-                <c-heading-bar name="Game Metadata" :showArrows="false" :showBackground="false">
-                </c-heading-bar>
-                <div class="metadata__table">
-                    <div class="item-row"
-                         v-for="(item, index) in asset.metadata"
-                         :key="index">
+                <c-heading-bar name="Game Metadata" :showArrows="false" :showBackground="false"/>
+                <div class="metadata__table padding-bottom-10">
+                    <div
+                        v-for="(value, prop, index) in asset.metadata"
+                        :key="index"
+                        class="item-row"
+                    >
                         <div class="item-label">
                             <i class="fas fa-file"></i>
-                            {{ item.label }}
+                            {{ prop | space | upperFirstChar }}
                         </div>
                         <div class="item-description">
-                            {{ item.text }}
+                            <ul v-if="typeof value === 'object'" class="margin-0">
+                                <li v-for="(value, prop, index) in value" :key="index">
+                                    {{ prop | space | upperFirstChar }}: {{ value }}
+                                </li>
+                            </ul>
+                            <span v-else>
+                                {{ value }}
+                            </span>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import Buttons from '../buttons/index';
-    import Switch from '../switch/index';
-    import HeadingBar from '../heading-bar/index';
-
     export default {
-        props: ['asset'],
-        components:{
-            'c-button': Buttons,
-            'c-switch': Switch,
-            'c-heading-bar': HeadingBar
+        name: 'asset-overview-popup',
+        props: {
+            asset: {
+                type: Object,
+                required: true
+            }
         },
+        components:{
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+        }
     }
 </script>
 
