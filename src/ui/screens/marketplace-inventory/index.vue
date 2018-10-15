@@ -32,7 +32,6 @@
         },
         data() {
             return {
-                yoursOffer: [],
                 links: [
                    { url: '/marketplace/inventory', title: 'Explore' },
                    { url: '/marketplace/inventory/compare', title: 'Compare assets' }

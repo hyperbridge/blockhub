@@ -21,8 +21,6 @@
 </template>
 
 <script>
-    import assets from '@/db/seed/assets';
-
     export default {
         props: ['assets'],
         components: {
