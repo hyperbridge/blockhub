@@ -197,16 +197,25 @@
                     </div>
 
                     <div class="col-12 margin-top-15 margin-bottom-15">
-                        <c-block title="Collections Containing this Item" class="pb-0" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                            <div class="collections-container">
-                                <div class="item" v-for="(item, index) in collections" :key="index" v-if="collections">
-                                    <c-collection-item :item="item" />
+                        <c-block title="Collections Containing this Item" class="pb-0" noGutter onlyContentBg bgGradient>
+                            <c-content-navigation
+                                v-if="assetG.collections.length"
+                                :items="assetG.collections"
+                                :setLimits="3"
+                            >
+                                <div class="collections-container" slot-scope="props">
+                                    <div
+                                        v-for="(item, index) in props.items"
+                                        :key="index"
+                                        class="item"
+                                    >
+                                        <c-collection-item :item="item"/>
+                                    </div>
                                 </div>
-                                <p v-else>
-                                    Nothing to show for now
-                                </p>
-                            </div>
-                            <c-pagination :pages="5" :showBg="false" v-if="collections"/>
+                            </c-content-navigation>
+                            <p v-else>
+                                Nothing to show for now
+                            </p>
                         </c-block>
                     </div>
                 </div>
