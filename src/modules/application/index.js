@@ -170,6 +170,12 @@ export const actions = {
     signOut(store, payload) {
         store.commit('signOut', payload)
     },
+    enableDarklaunch(store, payload) {
+        store.commit('enableDarklaunch', payload)
+    },
+    disableDarklaunch(store, payload) {
+        store.commit('disableDarklaunch', payload)
+    },
     deployContract(store, payload) {
         return new Promise((resolve, reject) => {
             DesktopBridge
@@ -214,6 +220,30 @@ export const mutations = {
     },
     setSimulatorMode(state, payload) {
         state.simulator_mode = payload
+    },
+    enableDarklaunch(state, payload) {
+        const darklaunch = state.account.darklaunch_flags.find(darklaunch => darklaunch.code === payload)
+        
+        if (darklaunch) {
+            darklaunch.enabled = true
+        } else {
+            state.account.darklaunch_flags.push({
+                code: payload,
+                enabled: true
+            })
+        }
+    },
+    disableDarklaunch(state, payload) {
+        const darklaunch = state.account.darklaunch_flags.find(darklaunch => darklaunch.code === payload)
+
+        if (darklaunch) {
+            darklaunch.enabled = false
+        } else {
+            state.account.darklaunch_flags.push({
+                code: payload,
+                enabled: false
+            })
+        }
     },
     beforeLoadRoute(state, payload) {
         state.loading = true

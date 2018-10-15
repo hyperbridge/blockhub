@@ -311,6 +311,14 @@ const router = new Router({
             }
         },
         {
+            path: '/settings/darklaunch',
+            name: 'Darklaunch Settings',
+            component: (resolve) => require(['@/ui/screens/settings-darklaunch'], resolve),
+            meta: {
+                auth: true
+            }
+        },
+        {
             path: '/settings/activity',
             name: 'Activity Settings',
             component: (resolve) => require(['@/ui/screens/settings-activity'], resolve),

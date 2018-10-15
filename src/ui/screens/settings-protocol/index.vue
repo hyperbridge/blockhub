@@ -12,7 +12,6 @@
                                 </div>
                                 <div class="page-heading__container float-right d-none d-md-block">
                                     <button class="btn btn-outline-secondary" v-if="selected.length" @click="deploySelected">Deploy selected</button>
-                                    <button class="btn btn-outline-secondary" @click="deployAll">Deploy all</button>
                                 </div>
                             </div>
                             <div class="">
@@ -137,21 +136,21 @@ export default {
         deployContract(protocolId, contractName) {
             this.$store.dispatch(protocolId + '/deployContract', { contractName })
         },
-        async deployAll() {
-            for (let i in this.protocols) {
-                const protocol = this.protocols[i]
+        // async deployAll() {
+        //     for (let i in this.protocols) {
+        //         const protocol = this.protocols[i]
 
-                for (let j in protocol.contracts) {
-                    const contract = this.protocols[i].contracts[j]
+        //         for (let j in protocol.contracts) {
+        //             const contract = this.protocols[i].contracts[j]
 
-                    try {
-                        let _ = await this.$store.dispatch(protocol.id + '/deployContract', { contractName: contract.name })
-                    } catch(e) {
+        //             try {
+        //                 let _ = await this.$store.dispatch(protocol.id + '/deployContract', { contractName: contract.name })
+        //             } catch(e) {
 
-                    }
-                }
-            }
-        },
+        //             }
+        //         }
+        //     }
+        // },
         async deploySelected() {
             for (let i in this.selected) {
                 const protocolId = this.selected[i].split('.')[0]
