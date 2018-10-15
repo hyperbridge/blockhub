@@ -96,7 +96,7 @@
                     </div>
 
                     <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">
-                        <c-block title="Sales" class="h-100" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+                        <c-block title="Sales" class="h-100" noGutter onlyContentBg bgGradient>
                                 <template slot="additional-action">
                                     <a href="#3" class="font-weight-bold text-uppercase text-white">
                                         History
@@ -106,7 +106,6 @@
                                     </a>
                                 </template>
                             <div v-if="sales">
-
                             </div>
                             <p v-else>
                                 Nothing to show for now

@@ -3,20 +3,25 @@ import moment from 'moment';
 
 import transactions from '@/db/seed/asset-transactions';
 import assetsData from '@/db/seed/assets';
+import collectionsData from '@/db/seed/collections';
 
 const assets = {
     namespaced: true,
     state: {
         transactions: [],
-        assets: assetsData.reduce((assets, asset) => {
-            assets[asset.id] = {
+        assets: assetsData.reduce((assets, asset) => ({
+            ...assets,
+            [asset.id]: {
                 ...asset,
                 market_price: 0,
                 selected: false,
                 for_sale: false,
-            };
-            return assets;
-        }, {})
+            }
+        }), {}),
+        collections: collectionsData.reduce((collections, collection) => ({
+            ...collections,
+            [collection.id]: collection
+        }), {})
     },
     mutations: {
         addAsset(state, { prop = 'assets', data }) {
@@ -88,7 +93,16 @@ const assets = {
         selectedAssets: (state, { assetsArray }) => assetsArray
             .filter(asset => asset.selected),
         forSaleAssets: (state, { assetsArray }) => assetsArray
-            .filter(asset => asset.for_sale)
+            .filter(asset => asset.for_sale),
+        collections: ({ assets, collections }) => Object.values(collections)
+            .reduce((populated, collection) => ({
+                ...populated,
+                [collection.id]: {
+                    ...collection,
+                    assets: collection.assets.map(id => assets[id])
+                }
+            }), {}),
+        collectionsArray: (state, { collections }) => Object.values(collections),
     }
 }
 
