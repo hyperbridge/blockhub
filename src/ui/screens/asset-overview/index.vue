@@ -71,15 +71,24 @@
                                 </template>
 
                             <div class="metadata__table padding-bottom-10">
-                                <div class="item-row"
-                                     v-for="(item, index) in asset.metadata"
-                                     :key="index">
+                                <div
+                                    v-for="(value, prop, index) in asset.metadata"
+                                    :key="index"
+                                    class="item-row"
+                                >
                                     <div class="item-label">
                                         <i class="fas fa-file"></i>
-                                        {{ item.label }}
+                                        {{ prop | space | upperFirstChar }}
                                     </div>
                                     <div class="item-description">
-                                        {{ item.text }}
+                                        <ul v-if="typeof value === 'object'" class="margin-0">
+                                            <li v-for="(value, prop, index) in value" :key="index">
+                                                {{ prop | space | upperFirstChar }}: {{ value }}
+                                            </li>
+                                        </ul>
+                                        <span v-else>
+                                            {{ value }}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -111,33 +120,34 @@
                                 <c-heading-bar-fields name="Rarity" icon="trophy"/>
                                 <c-heading-bar-fields name="Value" icon="dollar"/>
                             </template>
-                            <div class="offers__list">
-                                <div
-                                    v-for="(item, index) in assetG.offers_list"
-                                    :key="index"
-                                    class="list-item"
-                                >
-                                    <div class="item-name-img">
-                                        <c-img :src="item.image"/>
-                                        <h4>{{ item.name }}</h4>
-                                    </div>
-                                    <div class="item-company text-center">
-                                        {{ item.company_name }}
-                                    </div>
-                                    <div class="item-info">
-                                        <span class="user_name">
-                                            {{ item.user_name }}
-                                        </span>
-                                        <span class="price">
-                                            $ {{ item.price.current }}
-                                        </span>
-                                        <a href="#3" class="btn btn-success float-right">
-                                            <i class="fas fa-cart-plus"></i> Proceed to Purchase
-                                        </a>
+                            <c-content-navigation :items="assetG.offers_list" :setLimits="4">
+                                <div class="offers__list" slot-scope="props">
+                                    <div
+                                        v-for="(item, index) in props.items"
+                                        :key="index"
+                                        class="list-item"
+                                    >
+                                        <div class="item-name-img">
+                                            <c-img :src="item.image"/>
+                                            <h4>{{ item.name }}</h4>
+                                        </div>
+                                        <div class="item-company text-center">
+                                            {{ item.company_name }}
+                                        </div>
+                                        <div class="item-info">
+                                            <span class="user_name">
+                                                {{ item.user_name }}
+                                            </span>
+                                            <span class="price">
+                                                $ {{ item.price.current }}
+                                            </span>
+                                            <a href="#3" class="btn btn-success float-right">
+                                                <c-icon name="cart-plus"/>
+                                                Proceed to Purchase
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <c-pagination :pages="5" :showBg="false">
                                 <template slot="left-content" class="text-left">
                                     <strong>245345</strong> Available on the market
                                 </template>
@@ -150,7 +160,7 @@
                                         <i class="fas fa-bookmark"></i>
                                     </a>
                                 </template>
-                            </c-pagination >
+                            </c-content-navigation>
                         </c-block>
                     </div>
 

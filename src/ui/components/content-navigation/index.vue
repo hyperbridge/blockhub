@@ -9,7 +9,8 @@
                 :pages="pagination.pages"
                 @pageChange="activePage = $event - 1"
             >
-                <slot name="pagination"/>
+                <slot name="left-content" slot="left-content"/>
+                <slot name="right-content" slot="right-content"/>
             </c-pagination>
             <c-load-more
                 v-else
