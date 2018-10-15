@@ -62,73 +62,28 @@
 
 <script>
     export default {
-        props: ['assets'],
-        data() {
-            const metadata = {
-                type: "Legendary Two Handed Sword",
-                average_dps: 2903.6,
-                damage_range_min: 2193,
-                damage_range_max: 2880,
-                attack_speed: 1.15,
-                bonus_1: {
-                    damage: '+9%',
-                    strength: '+1381',
-                },
-                bonus_2: "Monster kills grant +151 experience",
-                level_requirement: 70,
-                durability: "40/41"
-            }
-            return {
-                assetsd: []
+        name: 'asset-comparison',
+        props: {
+            assets: {
+                type: Array,
+                default: () => [{ metadata: {} }]
             }
         },
         methods: {
-            colorClass(num) {
-                return num >= 100 ? 'positive' : 'negative';
-            }
+            colorClass: num => num >= 100 ? 'positive' : 'negative'
         },
         computed: {
-            assetsc() {
-                const metadata = [
-                    {
-                        type: "Legendary Two Handed Sword",
-                        average_dps: 2903.6,
-                        damage_range_min: 2193,
-                        damage_range_max: 2880,
-                        attack_speed: 1.15,
-                        bonus_1: {
-                            damage: '+9%',
-                            strength: '+1381',
-                        },
-                        bonus_2: "Monster kills grant +151 experience",
-                        level_requirement: 70,
-                        durability: "40/41"
-                    },
-                    {
-                        type: "Legendary Two Handed Sword",
-                        average_dps: 103.6,
-                        damage_range_min: 1193,
-                        damage_range_max: 4880,
-                        attack_speed: 1.1,
-                        bonus_1: {
-                            damage: '+9%',
-                            strength: '+1381',
-                        },
-                        bonus_2: "Monster kills grant +151 experience",
-                        level_requirement: 10,
-                        durability: "40/41"
-                    },
-                ];
-                return this.assets.map((asset, index) => ({ ...asset, metadata: metadata[index] }));
+            firstAsset() {
+                return this.assets.length ? this.assets[0] : { metadata: {} };
             },
             comparableProps() {
-                const { metadata } = this.assets[0];
+                const { metadata } = this.firstAsset;
                 return Object.keys(metadata).filter(metaProp =>
                     this.assets.every(asset => asset.metadata[metaProp] != null)
                 );
             },
             calculableProps() {
-                const { metadata } = this.assets[0];
+                const { metadata } = this.firstAsset;
                 return this.comparableProps.reduce((props, prop) =>
                     typeof metadata[prop] === 'number'
                         ? [...props, prop]
@@ -137,16 +92,17 @@
             },
             calculateDiffs() {
                 const { assets, calculableProps } = this;
+                if (assets.length < 2) return [{}];
 
                 return assets.map((asset, index) => {
                     const diffs = {};
-                    const otherAssets = assets.filter((asset, i) => i !== index);
+                    const restAssets = assets.filter((asset, i) => i !== index);
 
                     for (let key of calculableProps) {
                         diffs[key] = Math.round(
                             asset.metadata[key] / (
-                                otherAssets.reduce((avg, asset) => avg += asset.metadata[key], 0) /
-                                otherAssets.length
+                                restAssets.reduce((avg, asset) => avg += asset.metadata[key], 0) /
+                                restAssets.length
                             ) * 100
                         );
                     }
@@ -155,12 +111,8 @@
             }
         },
         filters: {
-            parseProp(val) {
-                return val.replace(/_/g, ' ');
-            },
-            percentages(num) {
-                return num >= 100 ? `+ ${num}%` : `- ${num}%`;
-            }
+            parseProp: val => val.replace(/_/g, ' '),
+            percentages: num => num >= 100 ? `+ ${num}%` : `- ${num}%`
         }
     }
 </script>
