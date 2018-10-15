@@ -11,7 +11,7 @@
 
         <div class="purchase-block__info">
             <div v-if="eligibleTokens">Eligible for up to <i class="fas fa-coins mx-1" style="color: #FADC72"></i> HBX +{{ eligibleTokens }}</div>
-            <div v-if="offers_purchases">Offers In-Game Purchases</div>
+            <div v-if="offersPurchases">Offers In-Game Purchases</div>
             <div class="release-date" v-if="releaseDate">Release date: {{ dateFormat(releaseDate) }}</div>
 
             <div v-if="isPurchased" class="purchased-status">
@@ -74,7 +74,7 @@
             releaseDate: {
                 type: String,
             },
-            offers_purchases: {
+            offersPurchases: {
                 type: Boolean,
                 default: false
             },
