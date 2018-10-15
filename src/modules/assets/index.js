@@ -92,23 +92,4 @@ const assets = {
     }
 }
 
-// const assets = {
-//     namespaced: true,
-//     state: {
-//         inventory: {}
-//     },
-//     mutations: {
-//         loadAssets(state) {
-//             state.inventory = assetsData.reduce((assets, asset) => {
-//                 assets[asset.id] = {
-//                     ...asset,
-//                     selected: false
-//                 };
-//                 return assets;
-//             }, {});
-//         }
-//     }
-// };
-
-
 export default assets;

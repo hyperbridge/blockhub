@@ -115,12 +115,12 @@
                     </div>
 
                     <div class="col-12 margin-top-15 margin-bottom-15">
-                        <c-block title="Offers"  class="padding-bottom-0" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+                        <c-block title="Offers" class="padding-bottom-0" noGutter onlyContentBg bgGradient>
                             <template slot="additional-action">
                                 <c-heading-bar-fields name="Rarity" icon="trophy"/>
                                 <c-heading-bar-fields name="Value" icon="dollar"/>
                             </template>
-                            <c-content-navigation :items="assetG.offers_list" :setLimits="4">
+                            <c-content-navigation :items="asset.offers_list" :setLimits="4">
                                 <div class="offers__list" slot-scope="props">
                                     <div
                                         v-for="(item, index) in props.items"
@@ -166,7 +166,7 @@
 
                     <div class="col-12 margin-top-15 margin-bottom-15">
                         <c-block class="padding-bottom-0" title="Yours Inventory" noGutter onlyContentBg bgGradient>
-                            <c-content-navigation :items="assetG.inventory_list" :setLimits="4">
+                            <c-content-navigation :items="asset.inventory_list" :setLimits="4">
                                 <div class="my-assets__list" slot-scope="props">
                                     <div
                                         v-for="(item, index) in props.items"
@@ -209,8 +209,8 @@
                     <div class="col-12 margin-top-15 margin-bottom-15">
                         <c-block title="Collections Containing this Item" class="pb-0" noGutter onlyContentBg bgGradient>
                             <c-content-navigation
-                                v-if="assetG.collections.length"
-                                :items="assetG.collections"
+                                v-if="asset.collections.length"
+                                :items="asset.collections"
                                 :setLimits="3"
                             >
                                 <div class="collections-container" slot-scope="props">
@@ -275,48 +275,7 @@
         },
         computed: {
             asset() {
-                // return this.$store.state.assets.assets[this.id] || null;
-                return this.$store.state.marketplace.assets[this.id] || null;
-                if (!this.$store.state.marketplace.assets)
-                    return
-
-                return this.$store.state.marketplace.assets[this.id]
-            },
-            assetG() {
                 return this.$store.getters['assets/assets'][this.id];
-            },
-            offers(){
-                let ids = this.$store.state.marketplace.assets[this.id].offers_list,
-                    list = this.$store.state.marketplace.assets,
-                    arr = [];
-                ids.forEach( (id, i) => {
-                    if (list[id])
-                        arr.push(list[id])
-                });
-                return arr;
-            },
-            inventory(){
-                let ids = this.$store.state.marketplace.assets[this.id].inventory_list,
-                    list = this.$store.state.marketplace.assets,
-                    arr = [];
-                ids.forEach( (id, i) => {
-                    if (list[id])
-                        arr.push(list[id])
-                });
-                return arr;
-            },
-            collections(){
-                let ids = this.$store.state.marketplace.assets[this.id].collections,
-                    list = this.$store.state.marketplace.collections,
-                    arr = [];
-                console.log(ids)
-                console.log('-------')
-                console.log(list)
-                ids.forEach( (id, i) => {
-                    if (list[id])
-                        arr.push(list[id])
-                });
-                return arr;
             }
         }
     }
