@@ -365,6 +365,7 @@ export default {
         padding: 0;
         z-index: 100;
         filter: drop-shadow(0 0px 15px rgba(48, 49, 76, 1));
+        user-select: none;
 
         a {
             color: #fff;
