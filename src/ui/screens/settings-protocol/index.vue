@@ -34,8 +34,18 @@
                                         <tbody>
                                             <template v-for="protocol in protocols">
                                                 <tr v-bind:key="protocol.id">
-                                                    <td class="margin-top-0 margin-bottom-0" colspan="5" style="background: rgba(255, 255, 255, 0.01);">
+                                                    <td class="margin-top-0 margin-bottom-0" colspan="4" style="background: rgba(255, 255, 255, 0.01);">
                                                         <a :href="protocol.link"><strong>{{ protocol.name }}</strong></a>
+                                                        <div class="row" v-if="protocolData[protocol.id].visible">
+                                                            <div class="col-12">
+                                                                <textarea v-model="protocolData[protocol.id].data" style="width: 100%; height: 300px;"></textarea>
+                                                                <c-button @click="saveRawData(protocol.id)" v-if="protocolData[protocol.id].visible">Save</c-button>
+                                                                <c-button @click="toggleRawData(protocol.id)" v-if="protocolData[protocol.id].visible">Hide</c-button>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td style="background: rgba(255, 255, 255, 0.01);">
+                                                        <c-button @click="toggleRawData(protocol.id)" v-if="!protocolData[protocol.id].visible">Raw</c-button>
                                                     </td>
                                                 </tr>
                                                 <tr v-for="contract in protocol.contracts" :key="contract.name">
@@ -92,7 +102,21 @@ export default {
     },
     data() {
         return {
-            selected: []
+            selected: [],
+            protocolData: {
+                application: {
+                    data: '',
+                    visible: false
+                },
+                marketplace: {
+                    data: '',
+                    visible: false
+                },
+                funding: {
+                    data: '',
+                    visible: false
+                }
+            }
         }
     },
     computed: {
@@ -110,6 +134,10 @@ export default {
             }
         },
         protocols() {
+            this.protocolData.application.data = JSON.stringify(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network])
+            this.protocolData.marketplace.data = JSON.stringify(this.$store.state.marketplace.ethereum[this.$store.state.marketplace.current_ethereum_network])
+            this.protocolData.funding.data = JSON.stringify(this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network])
+
             return [
                 {
                     id: 'application',
@@ -133,6 +161,12 @@ export default {
         }
     },
     methods: {
+        toggleRawData(protocolId) {
+            this.protocolData[protocolId].visible = !this.protocolData[protocolId].visible
+        },
+        saveRawData(protocolId) {
+            this.$store.state[protocolId].ethereum[this.$store.state.application.current_ethereum_network] = JSON.parse(this.protocolData[protocolId].data)
+        },
         deployContract(protocolId, contractName) {
             this.$store.dispatch(protocolId + '/deployContract', { contractName })
         },

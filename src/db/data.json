@@ -9,6 +9,12 @@
         "developer_mode": false,
         "operating_system": null,
         "editor_mode": "viewing",
+        "current_ethereum_network": "local",
+        "ethereum": {
+            "local": {
+                "contracts": {}
+            }
+        },
         "connection": {
             "auto": true,
             "internet": false,
@@ -198,6 +204,12 @@
         }
     },
     "funding": {
+        "current_ethereum_network": "local",
+        "ethereum": {
+            "local": {
+                "contracts": {}
+            }
+        },
         "default_project": {
             "name": "My Project Name",
             "system_tags": [],
@@ -297,6 +309,11 @@
         "current_ethereum_network": "local",
         "selected_product": null,
         "first_product": true,
+        "ethereum": {
+            "local": {
+                "contracts": {}
+            }
+        },
         "frontpage_product": {},
         "product_news": [],
         "new_products": [],

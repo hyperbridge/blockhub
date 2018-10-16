@@ -150,7 +150,7 @@
                           <li><a href="#/marketplace">Marketplace</a></li>
                           <li><a href="#/marketplace/inventory">Marketplace Inventory</a></li>
                           <li><a href="#/marketplace/trade">Marketplace Trade</a></li>
-                          <li><a href="#/marketplace/trade/1">Marketplace Trade #1</a></li>
+                          <li><a href="#/marketplace/trade/507f191e810c19729de860ea">Marketplace Trade ID 507f191e810c19729de860ea</a></li>
                         </ul>
                     </div>
                     <div class="col">

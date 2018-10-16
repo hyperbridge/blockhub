@@ -124,7 +124,6 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
             'c-simple-game-grid': (resolve) => require(['@/ui/components/game-grid/simple'], resolve),
             'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
