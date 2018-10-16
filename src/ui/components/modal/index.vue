@@ -5,14 +5,19 @@
             class="modal-light__btn"
         >&times;</button>
         <div class="modal-light__content">
-            <slot name="content">
+            <slot>
                 <div class="content__wrapper">
                     <div class="content__header">
                         <span class="title">{{ title }}</span>
-                        <c-icon name="times"/>
+                        <a
+                            class="close-btn"
+                            @click.prevent="$emit('close')"
+                        >
+                            <c-icon name="times"/>
+                        </a>
                     </div>
                     <div class="content__body">
-                        <slot/>
+                        <slot name="body"/>
                     </div>
                 </div>
             </slot>
@@ -35,7 +40,6 @@ export default {
         z-index: 1000;
         width: 100vw;
         height: 100vh;
-        // background-color: rgba(1,1,1,.9);
         background: rgba(33, 33, 51, 0.9);
         animation: opacity .5s ease;
         display: flex;
@@ -88,16 +92,14 @@ export default {
     .content__wrapper {
         background: #3E3E5C;
         max-width: 800px;
+        min-width: 100px;
         border-radius: 4px;
         .content__body {
             padding: 20px;
         }
         .content__header {
-            // background: #fff;
-            // height: 20px;
             display: flex;
             justify-content: space-between;
-            // padding: 5px 10px;
             position: relative;
             .title {
                 font-size: 18px;
@@ -110,20 +112,32 @@ export default {
                 &:after {
                     content: "";
                     position: absolute;
-                    border-width: 26px 0 26px 0;
+                    border-width: 26px 26px 0 0;
                     border-style: solid;
-                    border-color: #fff;
-                    left: 100%;
-                    top: 10px;
+                    border-color: #ffffff transparent transparent transparent;
+                    right: -22px;
+                    top: 0;
                 }
             }
-            .fas {
+            .close-btn {
                 background: #fff;
                 padding: 6px;
                 border-radius: 0 4px 0 18px;
                 color: #F75D5D;
                 font-size: 20px;
+                position: relative;
+                width: 35px;
+                text-align: center;
                 cursor: pointer;
+                &:before {
+                    content: "";
+                    position: absolute;
+                    border-width: 0 26px 26px 0;
+                    border-style: solid;
+                    border-color: transparent #fff transparent transparent;
+                    left: -22px;
+                    top: 0;
+                }
             }
             &:before {
                 border-radius: 4px 4px 0 0;
