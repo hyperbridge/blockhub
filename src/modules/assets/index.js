@@ -23,8 +23,8 @@ const assets = {
             [collection.id]: collection
         }), {}),
         snipers: {
-            1: { id: 1, asset: 4, priceMin: 31, priceMax: 59, expDate: "2018-12-15T14:29:47+02:00", edit: false },
-            3: { id: 3, asset: 6, priceMin: 11, priceMax: 89, expDate: "2018-11-14T14:29:47+02:00", edit: false },
+            1: { id: 1, asset: 4, priceMin: 31, priceMax: 59, expDate: "2018-12-15T14:29:47+02:00" },
+            3: { id: 3, asset: 6, priceMin: 11, priceMax: 89, expDate: "2018-11-14T14:29:47+02:00" }
         }
     },
     mutations: {
@@ -40,6 +40,10 @@ const assets = {
         },
         update(state, { prop = 'assets', id, data }) {
             state[prop][id] = { ...state[prop][id], ...data };
+        },
+        delete(state, { prop = 'assets', id }) {
+            const { [id]: value, ...values } = state[prop];
+            state[prop] = values;
         },
         deleteAsset(state, { prop = 'assets', id }) {
             // delete state[prop][id];
