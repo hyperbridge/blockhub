@@ -5,6 +5,10 @@
                 <div class="row">
                     <div class="col-12">
                         Marketplace
+                        <ul>
+                            <li><router-link :to="'/marketplace'">Home</router-link></li>
+                            <li><router-link :to="'/marketplace/search'">Search</router-link></li>
+                        </ul>
                         <c-block title="Marketplace" noGutter onlyContentBg bgGradient v-if="block">
                             <router-view/>
                         </c-block>
@@ -28,7 +32,7 @@
         },
         data() {
             return {
-                block: false
+                block: true
             }
         }
     }

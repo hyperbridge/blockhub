@@ -1,6 +1,12 @@
 <template>
     <div>
-        <c-block
+        <c-content-navigation :items="assets" class="assets-block">
+            <c-asset-list
+                slot-scope="props"
+                :assets="props.items"
+            />
+        </c-content-navigation>
+        <!-- <c-block
             title="Recently Sold"
             noGutter
             onlyContentBg
@@ -12,7 +18,7 @@
                     :assets="props.items"
                 />
             </c-content-navigation>
-        </c-block>
+        </c-block> -->
     </div>
 </template>
 

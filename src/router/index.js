@@ -568,6 +568,20 @@ const router = new Router({
                 {
                     path: '',
                     component: (resolve) => require(['@/ui/screens/marketplace/home'], resolve),
+                },
+                {
+                    path: 'search',
+                    component: (resolve) => require(['@/ui/screens/marketplace/search'], resolve),
+                    children: [
+                        {
+                            path: '',
+                            component: (resolve) => require(['@/ui/screens/marketplace/search/home'], resolve),
+                        },
+                        {
+                            path: 'sniper',
+                            component: (resolve) => require(['@/ui/screens/marketplace/search/sniper'], resolve),
+                        }
+                    ]
                 }
             ]
         },

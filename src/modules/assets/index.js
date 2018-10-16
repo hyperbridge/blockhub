@@ -21,10 +21,14 @@ const assets = {
         collections: collectionsData.reduce((collections, collection) => ({
             ...collections,
             [collection.id]: collection
-        }), {})
+        }), {}),
+        snipers: {}
     },
     mutations: {
         addAsset(state, { prop = 'assets', data }) {
+            state[prop] = { ...state[prop], [data.id]: data };
+        },
+        create(state, { prop = 'assets', data }) {
             state[prop] = { ...state[prop], [data.id]: data };
         },
         updateAsset(state, { prop = 'assets', id, data }) {
