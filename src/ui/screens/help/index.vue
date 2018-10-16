@@ -91,15 +91,11 @@
 <script>
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-article-item': (resolve) => require(['@/ui/components/help/article-item'], resolve),
             'c-topic-item': (resolve) => require(['@/ui/components/help/topic-item'], resolve),
             'c-list-item': (resolve) => require(['@/ui/components/help/simple-item'], resolve),
             'c-card': (resolve) => require(['@/ui/components/help/help-card.vue'], resolve),
         },
-        data: () => ({
-        }),
         methods:{
             showByTopic(data, id){
                 let results = [],

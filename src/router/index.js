@@ -393,14 +393,19 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/community'], resolve)
         },
         {
+            path: '/community/forums',
+            name: 'Community Forums',
+            component: (resolve) => require(['@/ui/screens/community-forums'], resolve)
+        },
+        {
             path: '/community/forum/:id',
-            name: 'Community forum',
+            name: 'Community Forum',
             props: true,
             component: (resolve) => require(['@/ui/screens/community-forum'], resolve)
         },
         {
             path: '/community/discussion/:id',
-            name: 'Community discussion',
+            name: 'Community Discussion',
             props: true,
             component: (resolve) => require(['@/ui/screens/community-discussion'], resolve)
         },
