@@ -28,14 +28,7 @@
 
                 <div class="row margin-bottom-30" v-if="item.type === 'featured_product_gallery'" :key="`level-1-${index}`">
                     <div class="col-12">
-                        <c-main-banner class="margin-bottom-30" 
-                            :image="{ src: item.data.products[0].images.preview[0], position: 'center' }" 
-                            :logo="{ src: item.data.products[0].images.icon, position: 'left bottom', size: 'lg' }" 
-                            :title="item.data.products[0].name"
-                            :href="`/#/product/${item.data.products[0].id}`"
-                            buttonText="Check it out"
-                            v-if="item.data.products.length" 
-                        />
+                        <c-main-banner class="margin-bottom-30" :slides="item.data.slides" v-if="item.data.slides"/>
 
                         <c-block class="margin-bottom-30" :title="item.data.title" :noGutter="true" :onlyContentBg="true" :bgGradient="true" v-else>
                             <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
@@ -147,7 +140,8 @@
                             />
                             <c-swiper :options="item.data.options" :ref="`swiper-${index}`">
                                 <c-slide v-for="(project, index) in item.data.projects" :key="index">
-                                    <c-project-card 
+                                    <c-project-card
+                                        class="p-2"
                                         :image="project.images.medium_tile" 
                                         :description="project.description" 
                                         :funds="project.funds" 
@@ -197,13 +191,8 @@
                         <c-collection-list 
                             title="Get Started"
                             description="Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain."
-                        >
-                            <c-swiper :options="item.data.options" class="padding-10">
-                                <c-slide v-for="(collection, index) in item.data.collections_list" :key="index">
-                                    <c-collection-item :item="collection" />
-                                </c-slide>
-                            </c-swiper>
-                        </c-collection-list>
+                            :collections="item.data.collections_list"
+                        />
                     </div>
                 </div>
 
