@@ -1,13 +1,38 @@
 <template>
     <div>
-        <h2>Compare assets</h2>
-        <div class="comparison">
+        <div class="comparisonable-properties" v-if="assets.length">
             <div
-                v-for="(asset, assetKey) in assetsc"
+                class="properties-list"
+                v-if="compareProps[title + 'Props'].length"
+                v-for="title in ['comparable', 'calculable']"
+                :key="title"
+            >
+                <h4>{{ title | upperFirstChar }} properties</h4>
+                <ul>
+                    <li v-for="prop in compareProps[title + 'Props']" :key="prop">
+                        {{ prop | parseProp | upperFirstChar }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="comparison">
+            <div class="comparison__add-asset">
+                <c-icon
+                    name="plus-circle"
+                    @click="$emit('addMore')"
+                />
+            </div>
+            <div
+                v-for="(asset, assetKey) in assets"
                 :key="asset.id"
                 class="comparison__item"
             >
-                <c-img :src="asset.image" class="comparison__asset-image"/>
+                <c-icon
+                    name="times"
+                    class="comparison__del-btn"
+                    @click="$emit('delete', asset)"
+                />
+                <c-asset-preview :asset="asset"/>
                 <table class="comparison__table">
                     <thead>
                         <th>Property</th>
@@ -46,82 +71,37 @@
                     </tbody>
                 </table>
             </div>
-            <div class="comparison__add-asset">
-                <c-icon name="plus-circle"/>
-            </div>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        props: ['assets'],
-        data() {
-            const metadata = {
-                type: "Legendary Two Handed Sword",
-                average_dps: 2903.6,
-                damage_range_min: 2193,
-                damage_range_max: 2880,
-                attack_speed: 1.15,
-                bonus_1: {
-                    damage: '+9%',
-                    strength: '+1381',
-                },
-                bonus_2: "Monster kills grant +151 experience",
-                level_requirement: 70,
-                durability: "40/41"
+        name: 'asset-comparison',
+        props: {
+            assets: {
+                type: Array,
+                default: () => [{ metadata: {} }]
             }
-            return {
-                assetsd: []
-            }
+        },
+        components: {
+            'c-asset-preview': (resolve) => require(['@/ui/components/asset-preview'], resolve),
         },
         methods: {
-            colorClass(num) {
-                return num >= 100 ? 'positive' : 'negative';
-            }
+            colorClass: num => num >= 100 ? 'positive' : 'negative'
         },
         computed: {
-            assetsc() {
-                const metadata = [
-                    {
-                        type: "Legendary Two Handed Sword",
-                        average_dps: 2903.6,
-                        damage_range_min: 2193,
-                        damage_range_max: 2880,
-                        attack_speed: 1.15,
-                        bonus_1: {
-                            damage: '+9%',
-                            strength: '+1381',
-                        },
-                        bonus_2: "Monster kills grant +151 experience",
-                        level_requirement: 70,
-                        durability: "40/41"
-                    },
-                    {
-                        type: "Legendary Two Handed Sword",
-                        average_dps: 103.6,
-                        damage_range_min: 1193,
-                        damage_range_max: 4880,
-                        attack_speed: 1.1,
-                        bonus_1: {
-                            damage: '+9%',
-                            strength: '+1381',
-                        },
-                        bonus_2: "Monster kills grant +151 experience",
-                        level_requirement: 10,
-                        durability: "40/41"
-                    },
-                ];
-                return this.assets.map((asset, index) => ({ ...asset, metadata: metadata[index] }));
+            firstAsset() {
+                return this.assets.length ? this.assets[0] : { metadata: {} };
             },
             comparableProps() {
-                const { metadata } = this.assetsc[0];
+                const { metadata } = this.firstAsset;
                 return Object.keys(metadata).filter(metaProp =>
-                    this.assetsc.every(asset => asset.metadata[metaProp] != null)
+                    this.assets.every(asset => asset.metadata[metaProp] != null)
                 );
             },
             calculableProps() {
-                const { metadata } = this.assetsc[0];
+                const { metadata } = this.firstAsset;
                 return this.comparableProps.reduce((props, prop) =>
                     typeof metadata[prop] === 'number'
                         ? [...props, prop]
@@ -129,28 +109,35 @@
                 , []);
             },
             calculateDiffs() {
-                const { assetsc, calculableProps } = this;
+                const { assets, calculableProps } = this;
+                if (assets.length < 2) return [{}];
 
-                return assetsc.map((asset, index) => {
+                return assets.map((asset, index) => {
                     const diffs = {};
-                    const otherAssets = assetsc.filter((asset, i) => i !== index);
+                    const restAssets = assets.filter((asset, i) => i !== index);
 
                     for (let key of calculableProps) {
                         diffs[key] = Math.round(
-                            asset.metadata[key] / assetsc[1].metadata[key] * 100
+                            asset.metadata[key] / (
+                                restAssets.reduce((avg, asset) => avg += asset.metadata[key], 0) /
+                                restAssets.length
+                            ) * 100
                         );
                     }
                     return diffs;
                 });
+            },
+            compareProps() {
+                const { comparableProps, calculableProps } = this;
+                return {
+                    comparableProps,
+                    calculableProps
+                };
             }
         },
         filters: {
-            parseProp(val) {
-                return val.replace(/_/g, ' ');
-            },
-            percentages(num) {
-                return num >= 100 ? `+ ${num}%` : `- ${num}%`;
-            }
+            parseProp: val => val.replace(/_/g, ' '),
+            percentages: num => num >= 100 ? `+ ${num}%` : `- ${num}%`
         }
     }
 </script>
@@ -158,6 +145,17 @@
 <style lang="scss" scoped>
     .comparison {
         display: flex;
+        overflow-x: auto;
+    }
+    .comparison__del-btn {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        font-size: 18px;
+        cursor: pointer;
+        &:not(:hover) {
+            color: rgba(255,255,255,.6);
+        }
     }
     .comparison__asset-image {
         height: 100px;
@@ -170,6 +168,7 @@
         border-radius: 4px;
         background: #1D1E2E;
         margin: 10px;
+        position: relative;
     }
     .comparison__add-asset {
         @extend .comparison__item;
@@ -203,6 +202,16 @@
         margin-right: 4px;
         &--down {
             transform: rotate(180deg);
+        }
+    }
+
+    .comparisonable-properties {
+        display: flex;
+        padding: 20px;
+        background: rgba(1,1,1,.1);
+        border-radius: 4px;
+        .properties-list {
+            margin-right: 30px;
         }
     }
 </style>

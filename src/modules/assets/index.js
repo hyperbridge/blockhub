@@ -3,20 +3,25 @@ import moment from 'moment';
 
 import transactions from '@/db/seed/asset-transactions';
 import assetsData from '@/db/seed/assets';
+import collectionsData from '@/db/seed/collections';
 
 const assets = {
     namespaced: true,
     state: {
         transactions: [],
-        assets: assetsData.reduce((assets, asset) => {
-            assets[asset.id] = {
+        assets: assetsData.reduce((assets, asset) => ({
+            ...assets,
+            [asset.id]: {
                 ...asset,
                 market_price: 0,
                 selected: false,
                 for_sale: false,
-            };
-            return assets;
-        }, {})
+            }
+        }), {}),
+        collections: collectionsData.reduce((collections, collection) => ({
+            ...collections,
+            [collection.id]: collection
+        }), {})
     },
     mutations: {
         addAsset(state, { prop = 'assets', data }) {
@@ -29,6 +34,9 @@ const assets = {
         deleteAsset(state, { prop = 'assets', id }) {
             // delete state[prop][id];
             Vue.delete(state[prop][id]);
+        },
+        negateValue(state, { prop = 'assets', id, iprop }) {
+            state[prop][id][iprop] = !state[prop][id][iprop];
         },
         updateAssets(state, { prop = 'assets', data, ids }) {
             if (!ids) {
@@ -68,36 +76,34 @@ const assets = {
 
     },
     getters: {
+        assets: ({ assets }, getters, { marketplace: { collections }}) => Object.values(assets)
+            .reduce((populated, asset) => ({
+                ...populated,
+                [asset.id]: {
+                    ...asset,
+                    offers_list: asset.offers_list.map(id => assets[id]),
+                    inventory_list: asset.inventory_list.map(id => assets[id]),
+                    collections: asset.collections.map(id => collections[id])
+                }
+            }), {}),
+        array: (state, { assets }) => Object.values(assets),
         assetsArray: state => Object.values(state.assets),
         inventoryAssets: (state, { assetsArray }) => assetsArray
             .filter(asset => !asset.for_sale),
         selectedAssets: (state, { assetsArray }) => assetsArray
             .filter(asset => asset.selected),
         forSaleAssets: (state, { assetsArray }) => assetsArray
-            .filter(asset => asset.for_sale)
+            .filter(asset => asset.for_sale),
+        collections: ({ assets, collections }) => Object.values(collections)
+            .reduce((populated, collection) => ({
+                ...populated,
+                [collection.id]: {
+                    ...collection,
+                    assets: collection.assets.map(id => assets[id])
+                }
+            }), {}),
+        collectionsArray: (state, { collections }) => Object.values(collections),
     }
 }
-
-// import Vue from 'vue';
-// import assetsData from '@/db/seed/assets';
-
-// const assets = {
-//     namespaced: true,
-//     state: {
-//         inventory: {}
-//     },
-//     mutations: {
-//         loadAssets(state) {
-//             state.inventory = assetsData.reduce((assets, asset) => {
-//                 assets[asset.id] = {
-//                     ...asset,
-//                     selected: false
-//                 };
-//                 return assets;
-//             }, {});
-//         }
-//     }
-// };
-
 
 export default assets;

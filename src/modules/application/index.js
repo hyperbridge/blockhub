@@ -8,6 +8,29 @@ let rawData = {}
 
 export let state = null
 
+const getOS = () => {
+    let userAgent = window.navigator.userAgent,
+        platform = window.navigator.platform,
+        macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+        windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+        iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+        os = null
+
+    if (macosPlatforms.indexOf(platform) !== -1) {
+        return 'macos'
+    } else if (iosPlatforms.indexOf(platform) !== -1) {
+        return 'ios'
+    } else if (windowsPlatforms.indexOf(platform) !== -1) {
+        return 'windows'
+    } else if (/Android/.test(userAgent)) {
+        return 'android'
+    } else if (!os && /Linux/.test(platform)) {
+        return 'linux'
+    } else {
+        return 'unknown'
+    }
+}
+
 const updateState = (savedData, updatedState = {}) => {
     rawData = {
         ...rawData,
@@ -16,6 +39,7 @@ const updateState = (savedData, updatedState = {}) => {
             code: null,
             message: null
         },
+        operating_system: getOS(),
         account: DB.application.config.data[0].account,
         darklaunch_flags: DB.application.config.data[0].darklaunch_flags,
         ...updatedState
@@ -104,10 +128,10 @@ export const actions = {
         // })
     },
     initEthereum(store, payload) {
-        DesktopBridge.initProtocol({ protocolName: 'application' }).then((config) => {
-            store.state.ethereum[store.state.current_ethereum_network] = config
-            store.dispatch('updateState')
-        })
+        // DesktopBridge.initProtocol({ protocolName: 'application' }).then((config) => {
+        //     store.state.ethereum[store.state.current_ethereum_network] = config
+        //     store.dispatch('updateState')
+        // })
     },
     checkEthereumConnection(store, payload) {
         const success = () => {
@@ -169,6 +193,24 @@ export const actions = {
     },
     signOut(store, payload) {
         store.commit('signOut', payload)
+    },
+    enableDarklaunch(store, payload) {
+        store.commit('enableDarklaunch', payload)
+    },
+    disableDarklaunch(store, payload) {
+        store.commit('disableDarklaunch', payload)
+    },
+    deployContract(store, payload) {
+        return new Promise((resolve, reject) => {
+            DesktopBridge
+                .deployContract({ protocolName: 'application', contractName: payload.contractName })
+                .then((contract) => {
+                    state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = contract
+                    store.dispatch('updateState')
+
+                    resolve(contract)
+                })
+        })
     }
 }
 
@@ -202,6 +244,30 @@ export const mutations = {
     },
     setSimulatorMode(state, payload) {
         state.simulator_mode = payload
+    },
+    enableDarklaunch(state, payload) {
+        const darklaunch = state.account.darklaunch_flags.find(darklaunch => darklaunch.code === payload)
+        
+        if (darklaunch) {
+            darklaunch.enabled = true
+        } else {
+            state.account.darklaunch_flags.push({
+                code: payload,
+                enabled: true
+            })
+        }
+    },
+    disableDarklaunch(state, payload) {
+        const darklaunch = state.account.darklaunch_flags.find(darklaunch => darklaunch.code === payload)
+
+        if (darklaunch) {
+            darklaunch.enabled = false
+        } else {
+            state.account.darklaunch_flags.push({
+                code: payload,
+                enabled: false
+            })
+        }
     },
     beforeLoadRoute(state, payload) {
         state.loading = true

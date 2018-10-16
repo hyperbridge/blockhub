@@ -1,7 +1,7 @@
 <template>
     <div class="pagination" >
         <div class="pagination__slot text-left">
-            <slot name="left-content" />
+            <slot name="left-content"/>
         </div>
 
         <nav class="pagination__nav" :class="{ 'show-bg' : showBg }">
@@ -57,7 +57,7 @@
         </nav>
 
         <div class="pagination__slot text-right">
-            <slot name="right-content" />
+            <slot name="right-content"/>
         </div>
     </div>
 </template>

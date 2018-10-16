@@ -3339,11 +3339,53 @@ storiesOf('Purchase block', module)
         },
         template: `<div class="p-5" style="width: 400px">
                         <c-purchase-block 
-                        :tags="['top', 'new', 'purchased']"
+                        :tags="['top', 'new']"
                         :price="49.99" 
                         :eligibleTokens="300"
+                        :isReleased="true"
+                        :offersPurchases="true"
+                        :inWishlist="inWishlist"
+                        @addToWishlist="inWishlist = true"
+                        @removeFromWishlist="inWishlist = false"
+                        />
+                        </div>`
+    }))
+    .add('demo', () => ({
+        components: {
+            'c-purchase-block': PurchaseBlock
+        },
+        data() {
+            return {
+                inWishlist: false
+            }
+        },
+        template: `<div class="p-5" style="width: 400px">
+                        <c-purchase-block 
+                        :tags="['top', 'new']"
+                        :price="49.99"
                         releaseDate="8 Jun, 2018"
-                        :offers_purchases="true"
+                        :hasDemo="true"
+                        :offersPurchases="true"
+                        :inWishlist="inWishlist"
+                        @addToWishlist="inWishlist = true"
+                        @removeFromWishlist="inWishlist = false"
+                        />
+                        </div>`
+    }))
+    .add('unavailable', () => ({
+        components: {
+            'c-purchase-block': PurchaseBlock
+        },
+        data() {
+            return {
+                inWishlist: false
+            }
+        },
+        template: `<div class="p-5" style="width: 400px">
+                        <c-purchase-block 
+                        :tags="['new']"
+                        :price="49.99" 
+                        :isUnavailable="true"
                         :inWishlist="inWishlist"
                         @addToWishlist="inWishlist = true"
                         @removeFromWishlist="inWishlist = false"

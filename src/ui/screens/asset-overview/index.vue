@@ -71,15 +71,24 @@
                                 </template>
 
                             <div class="metadata__table padding-bottom-10">
-                                <div class="item-row"
-                                     v-for="(item, index) in asset.metadata"
-                                     :key="index">
+                                <div
+                                    v-for="(value, prop, index) in asset.metadata"
+                                    :key="index"
+                                    class="item-row"
+                                >
                                     <div class="item-label">
                                         <i class="fas fa-file"></i>
-                                        {{ item.label }}
+                                        {{ prop | space | upperFirstChar }}
                                     </div>
                                     <div class="item-description">
-                                        {{ item.text }}
+                                        <ul v-if="typeof value === 'object'" class="margin-0">
+                                            <li v-for="(value, prop, index) in value" :key="index">
+                                                {{ prop | space | upperFirstChar }}: {{ value }}
+                                            </li>
+                                        </ul>
+                                        <span v-else>
+                                            {{ value }}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +96,7 @@
                     </div>
 
                     <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">
-                        <c-block title="Sales" class="h-100" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+                        <c-block title="Sales" class="h-100" noGutter onlyContentBg bgGradient>
                                 <template slot="additional-action">
                                     <a href="#3" class="font-weight-bold text-uppercase text-white">
                                         History
@@ -97,7 +106,6 @@
                                     </a>
                                 </template>
                             <div v-if="sales">
-
                             </div>
                             <p v-else>
                                 Nothing to show for now
@@ -106,36 +114,39 @@
                     </div>
 
                     <div class="col-12 margin-top-15 margin-bottom-15">
-                        <c-block title="Offers"  class="padding-bottom-0" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                                <template slot="additional-action">
-                                    <c-heading-bar-fields name="Rarity" icon="fas fa-trophy" @click_up=""  @click_down="" />
-                                    <c-heading-bar-fields name="Value" icon="fas fa-dollar" @click_up=""  @click_down="" />
-                                </template>
-                            <div class="offers__list">
-                                <div v-for="(item, index) in offers"
-                                     :key="index"
-                                     class="list-item">
-                                    <div class="item-name-img">
-                                        <c-img :src="item.image"/>
-                                        <h4>{{ item.name }}</h4>
-                                    </div>
-                                    <div class="item-company text-center">
-                                        {{ item.company_name }}
-                                    </div>
-                                    <div class="item-info">
-                                        <span class="user_name">
-                                            {{ item.user_name }}
-                                        </span>
-                                        <span class="price">
-                                            $ {{ item.price['current'] }}
-                                        </span>
-                                        <a href="#3" class="btn btn-success float-right">
-                                            <i class="fas fa-cart-plus"></i> Proceed to Purchase
-                                        </a>
+                        <c-block title="Offers" class="padding-bottom-0" noGutter onlyContentBg bgGradient>
+                            <template slot="additional-action">
+                                <c-heading-bar-fields name="Rarity" icon="trophy"/>
+                                <c-heading-bar-fields name="Value" icon="dollar"/>
+                            </template>
+                            <c-content-navigation :items="asset.offers_list" :setLimits="4">
+                                <div class="offers__list" slot-scope="props">
+                                    <div
+                                        v-for="(item, index) in props.items"
+                                        :key="index"
+                                        class="list-item"
+                                    >
+                                        <div class="item-name-img">
+                                            <c-img :src="item.image"/>
+                                            <h4>{{ item.name }}</h4>
+                                        </div>
+                                        <div class="item-company text-center">
+                                            {{ item.company_name }}
+                                        </div>
+                                        <div class="item-info">
+                                            <span class="user_name">
+                                                {{ item.user_name }}
+                                            </span>
+                                            <span class="price">
+                                                $ {{ item.price.current }}
+                                            </span>
+                                            <a href="#3" class="btn btn-success float-right">
+                                                <c-icon name="cart-plus"/>
+                                                Proceed to Purchase
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <c-pagination :pages="5" :showBg="false">
                                 <template slot="left-content" class="text-left">
                                     <strong>245345</strong> Available on the market
                                 </template>
@@ -148,51 +159,72 @@
                                         <i class="fas fa-bookmark"></i>
                                     </a>
                                 </template>
-                            </c-pagination >
+                            </c-content-navigation>
                         </c-block>
                     </div>
 
                     <div class="col-12 margin-top-15 margin-bottom-15">
-                        <c-block class="padding-bottom-0" title="Yours Inventory" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                            <div class="my-assets__list">
-                                <div class="item"
-                                     v-for="(item, index) in inventory"
-                                     :key="index">
-                                    <c-button status="plain" @click="openPopup(item)">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </c-button>
-                                    <div class="item_thumb">
-                                        <c-img :src="item.image"/>
-                                    </div>
-                                    <div class="item_info">
-                                        <h5>{{ item.name }}</h5>
-                                        <span class="price">
-                                            $ {{ item.price['current'] }}
-                                        </span>
-                                        <div class="switcher">
-                                            <c-switch label="Accept offers"
-                                                      :checked="item.accept_offers"
-                                                      size="sm"
-                                                      label_position="left"/>
+                        <c-block class="padding-bottom-0" title="Yours Inventory" noGutter onlyContentBg bgGradient>
+                            <c-content-navigation :items="asset.inventory_list" :setLimits="4">
+                                <div class="my-assets__list" slot-scope="props">
+                                    <div
+                                        v-for="(item, index) in props.items"
+                                        :key="index"
+                                        class="item"
+                                    >
+                                        <c-button status="plain" @click="openPopup(item)">
+                                            <i class="fas fa-external-link-alt"></i>
+                                        </c-button>
+                                        <div class="item_thumb">
+                                            <c-img :src="item.image"/>
+                                        </div>
+                                        <div class="item_info">
+                                            <h5>{{ item.name }}</h5>
+                                            <span class="price">
+                                                $ {{ item.price.current }}
+                                            </span>
+                                            <div class="switcher">
+                                                <c-switch
+                                                    label="Accept offers"
+                                                    :checked="item.accept_offers"
+                                                    @change="$store.commit('assets/negateValue', {
+                                                        id: item.id,
+                                                        iprop: 'accept_offers'
+                                                    })"
+                                                    @changev2="$store.commit('assets/negateValue', {
+                                                        ['id'+item.id]: 'accept_offers'
+                                                    })"
+                                                    size="sm"
+                                                    label_position="left"
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <c-pagination :pages="5" :showBg="false" />
+                            </c-content-navigation>
                         </c-block>
                     </div>
 
                     <div class="col-12 margin-top-15 margin-bottom-15">
-                        <c-block title="Collections Containing this Item" class="pb-0" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                            <div class="collections-container">
-                                <div class="item" v-for="(item, index) in collections" :key="index" v-if="collections">
-                                    <c-collection-item :item="item" />
+                        <c-block title="Collections Containing this Item" class="pb-0" noGutter onlyContentBg bgGradient>
+                            <c-content-navigation
+                                v-if="asset.collections.length"
+                                :items="asset.collections"
+                                :setLimits="3"
+                            >
+                                <div class="collections-container" slot-scope="props">
+                                    <div
+                                        v-for="(item, index) in props.items"
+                                        :key="index"
+                                        class="item"
+                                    >
+                                        <c-collection-item :item="item"/>
+                                    </div>
                                 </div>
-                                <p v-else>
-                                    Nothing to show for now
-                                </p>
-                            </div>
-                            <c-pagination :pages="5" :showBg="false" v-if="collections"/>
+                            </c-content-navigation>
+                            <p v-else>
+                                Nothing to show for now
+                            </p>
                         </c-block>
                     </div>
                 </div>
@@ -216,7 +248,8 @@
             'c-pagination': (resolve) => require(['@/ui/components/pagination/index'], resolve),
             'c-collection-item': (resolve) => require(['@/ui/components/collection/item'], resolve),
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
-            'c-asset-popup': (resolve) => require(['@/ui/components/asset-overview-popup'], resolve)
+            'c-asset-popup': (resolve) => require(['@/ui/components/asset-overview-popup'], resolve),
+            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
         },
         data() {
             return {
@@ -241,44 +274,7 @@
         },
         computed: {
             asset() {
-                return this.$store.state.marketplace.assets[this.id] || null;
-                if (!this.$store.state.marketplace.assets)
-                    return
-
-                return this.$store.state.marketplace.assets[this.id]
-            },
-            offers(){
-                let ids = this.$store.state.marketplace.assets[this.id].offers_list,
-                    list = this.$store.state.marketplace.assets,
-                    arr = [];
-                ids.forEach( (id, i) => {
-                    if (list[id])
-                        arr.push(list[id])
-                });
-                return arr;
-            },
-            inventory(){
-                let ids = this.$store.state.marketplace.assets[this.id].inventory_list,
-                    list = this.$store.state.marketplace.assets,
-                    arr = [];
-                ids.forEach( (id, i) => {
-                    if (list[id])
-                        arr.push(list[id])
-                });
-                return arr;
-            },
-            collections(){
-                let ids = this.$store.state.marketplace.assets[this.id].collections,
-                    list = this.$store.state.marketplace.collections,
-                    arr = [];
-                console.log(ids)
-                console.log('-------')
-                console.log(list)
-                ids.forEach( (id, i) => {
-                    if (list[id])
-                        arr.push(list[id])
-                });
-                return arr;
+                return this.$store.getters['assets/assets'][this.id];
             }
         }
     }

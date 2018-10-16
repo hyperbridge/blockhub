@@ -7,7 +7,14 @@
         "simulator_mode": false,
         "desktop_mode": null,
         "developer_mode": false,
+        "operating_system": null,
         "editor_mode": "viewing",
+        "current_ethereum_network": "local",
+        "ethereum": {
+            "local": {
+                "contracts": {}
+            }
+        },
         "connection": {
             "auto": true,
             "internet": false,
@@ -19,36 +26,6 @@
                 "message": "Launching..."
             }
         },
-        "ethereum": {
-            "ropsten": {
-                "contracts": {
-                    "Token": {},
-                    "TokenDelegate": {},
-                    "EternalStorage": {}
-                },
-                "user_from_address": null,
-                "user_to_address": null
-            },
-            "local": {
-                "contracts": {
-                    "Token": {
-                        "address": null,
-                        "created_at": null
-                    },
-                    "TokenDelegate": {
-                        "address": null,
-                        "created_at": null
-                    },
-                    "EternalStorage": {
-                        "address": null,
-                        "created_at": null
-                    }
-                },
-                "user_from_address": null,
-                "user_to_address": null
-            }
-        },
-        "current_ethereum_network": "local",
         "user_submitted_connection_messages": [
             {
                 "id": 1,
@@ -227,88 +204,12 @@
         }
     },
     "funding": {
+        "current_ethereum_network": "local",
         "ethereum": {
-            "ropsten": {
-                "user_from_address": null,
-                "user_to_address": null,
-                "contracts": {}
-            },
             "local": {
-                "user_from_address": null,
-                "user_to_address": null,
-                "contracts": {
-                    "FundingStorage": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "DeveloperStorageAccess": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ContributionStorageAccess": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectStorageAccess": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "CurationStorageAccess": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "FundingVault": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "Developer": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "Contribution": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectBase": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectTimeline": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectTimelineHelpersLibrary": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectTimelineProposal": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectContributionTierHelpersLibrary": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectMilestoneCompletion": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectRegistrationHelpersLibrary": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectRegistration": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "Curation": {
-                        "created_at": null,
-                        "address": null
-                    }
-                }
+                "contracts": {}
             }
         },
-        "current_ethereum_network": "local",
         "default_project": {
             "name": "My Project Name",
             "system_tags": [],
@@ -405,25 +306,14 @@
         "projects": []
     },
     "marketplace": {
-        "ethereum": {
-            "ropsten": {
-                "contracts": {
-                    "Marketplace": {}
-                },
-                "user_from_address": null,
-                "user_to_address": null
-            },
-            "local": {
-                "contracts": {
-                    "Marketplace": {}
-                },
-                "user_from_address": null,
-                "user_to_address": null
-            }
-        },
         "current_ethereum_network": "local",
         "selected_product": null,
         "first_product": true,
+        "ethereum": {
+            "local": {
+                "contracts": {}
+            }
+        },
         "frontpage_product": {},
         "product_news": [],
         "new_products": [],

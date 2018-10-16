@@ -15,7 +15,8 @@ const updateState = (savedData, updatedState = {}) => {
         assets: DB.marketplace ? DB.marketplace.assets.data : [],
         products: DB.marketplace ? DB.marketplace.products.data : [],
         posts: DB.marketplace ? DB.marketplace.posts.data : [],
-        collections: DB.marketplace.config.data[0].collections,
+        collections: DB.marketplace.config.data[0].collections
+            .reduce((collections, collection) => ({ ...collections, [collection.id]: collection }) ,{}),
         realms: DB.marketplace.config.data[0].realms,
         curator_reviews: DB.marketplace.config.data[0].curator_reviews,
         posts: DB.marketplace.config.data[0].posts,
@@ -117,10 +118,10 @@ export const actions = {
         store.commit('updateState', state)
     },
     initEthereum(store, payload) {
-        DesktopBridge.initProtocol({ protocolName: 'marketplace' }).then((config) => {
-            store.state.ethereum[store.state.current_ethereum_network] = config
-            store.dispatch('updateState')
-        })
+        // DesktopBridge.initProtocol({ protocolName: 'marketplace' }).then((config) => {
+        //     store.state.ethereum[store.state.current_ethereum_network] = config
+        //     store.dispatch('updateState')
+        // })
     },
     updateState(store, payload) {
         //console.log("[BlockHub][Marketplace] Updating store...")
@@ -128,6 +129,18 @@ export const actions = {
         updateState(store.state)
 
         store.commit('updateState', state)
+    },
+    deployContract(store, payload) {
+        return new Promise((resolve, reject) => {
+            DesktopBridge
+                .deployContract({ protocolName: 'marketplace', contractName: payload.contractName })
+                .then((contract) => {
+                    state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = contract
+                    store.dispatch('updateState')
+
+                    resolve(contract)
+                })
+        })
     },
     viewProduct(id) {
         console.log('viewProduct', id)

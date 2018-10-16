@@ -1,7 +1,7 @@
 <template>
     <c-layout navigationKey="settings">
         <div class="content" id="content">
-            <c-block class="margin-bottom-30" title="Client Settings">
+            <c-block class="margin-bottom-30" title="Client Settings" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </c-block>
-            <c-block class="margin-bottom-30" title="Performance Settings">
+            <c-block class="margin-bottom-30" title="Performance Settings" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
@@ -89,11 +89,11 @@
                     />
                 </div>
             </c-block>
-            <c-block class="margin-bottom-30" title="Advanced">
+            <c-block class="margin-bottom-30" title="Advanced" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                 <div class="row">
                     <div class="col-12 d-flex justify-content-between align-items-center">
                         <div>
-                            Advanced settings can be managed here. These are primarily for developers @BlockHub.
+                            Advanced settings can be managed here. These are primarily for @BlockHub developers.
                             <br /><strong>Warning:</strong> Only use these if you know what you're doing.
                         </div>
                         <div>
@@ -102,7 +102,7 @@
                     </div>
                 </div>
             </c-block>
-            <c-block class="margin-bottom-30" title="Game Activity">
+            <c-block class="margin-bottom-30" title="Game Activity" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                 <c-inline-ntf type="warning">
                     <div class="h4 font-weight-bold p-0 m-0">No game activity!</div>
                     <div class="h5 p-0 m-0">What are you playing!?</div>
@@ -114,7 +114,7 @@
                     <c-switch label="Display currently running games as a status message" />
                 </div>
             </c-block>
-            <c-block class="margin-bottom-30" title="Added games">
+            <c-block class="margin-bottom-30" title="Added games" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                 <div class="games-list">
                     <div class="games-list__item">
                         <div class="icon">
@@ -139,7 +139,7 @@
                     No added games yet.
                 </div>
             </c-block>
-            <c-block class="margin-bottom-30" title="Language Preferences">
+            <c-block class="margin-bottom-30" title="Language Preferences" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                 <h3>Primary language</h3>
                 <p>
                     When possible, display content in this language:
@@ -730,18 +730,8 @@ export default {
         updateClientSettings(prop) {
             this.$store.commit('application/UPDATE_CLIENT_SETTINGS', prop);
         },
-        clearDatabase() {debugger
-            let DBDeleteRequest = window.indexedDB.deleteDatabase("LokiCatalog")
-
-            DBDeleteRequest.onerror = function(event) {
-                console.log("Error deleting database.")
-            }
-
-            DBDeleteRequest.onsuccess = function(event) {
-                console.log("Database deleted successfully.")
-
-                console.log(event.result) // should be undefined
-            }
+        clearDatabase() {
+            window.resetSettings()
         },
         async requestNotifPerm() {
             const permission = await Notification.requestPermission();

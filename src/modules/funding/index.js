@@ -42,12 +42,12 @@ export const actions = {
         store.commit('updateState', state)
     },
     initEthereum(store, payload) {
-        DesktopBridge
-            .initProtocol({ protocolName: 'funding' })
-            .then((config) => {
-                store.state.ethereum[store.state.current_ethereum_network] = config
-                store.dispatch('updateState')
-            })
+        // DesktopBridge
+        //     .initProtocol({ protocolName: 'funding' })
+        //     .then((config) => {
+        //         store.state.ethereum[store.state.current_ethereum_network] = config
+        //         store.dispatch('updateState')
+        //     })
     },
     updateState(store, payload) {
         console.log('[BlockHub][Funding] Updating store...')
@@ -63,12 +63,12 @@ export const actions = {
         return new Promise((resolve, reject) => {
             DesktopBridge
                 .createFundingProject({ title: payload.name, description: payload.description, about: payload.content })
-                .then((err, project) => {
+                .then((project) => {
                     store.state.projects[project.id] = project
 
                     store.dispatch('updateState')
 
-                    resolve(err, project)
+                    resolve(project)
                 })
         })
     },
@@ -78,11 +78,11 @@ export const actions = {
 
             DesktopBridge
                 .updateFundingProject({ id: project.id, data: payload })
-                .then((err, project) => {
+                .then((project) => {
                     store.state.projects[payload.id] = project
                     store.dispatch('updateState')
 
-                    resolve(err, project)
+                    resolve(project)
                 })
         })
     },
@@ -90,11 +90,11 @@ export const actions = {
         return new Promise((resolve, reject) => {
             DesktopBridge
                 .deployContract({ protocolName: 'funding', contractName: payload.contractName })
-                .then((err, contract) => {
+                .then((contract) => {
                     state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = contract
                     store.dispatch('updateState')
 
-                    resolve(err, contract)
+                    resolve(contract)
                 })
         })
     }

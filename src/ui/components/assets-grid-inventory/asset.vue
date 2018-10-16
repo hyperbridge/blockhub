@@ -47,6 +47,7 @@
 
 <style lang="scss" scoped>
     .assets-grid__asset {
+        cursor: pointer;
         width: 100px;
         height: 100px;
         margin: 5px;

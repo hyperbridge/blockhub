@@ -3,13 +3,13 @@
         <div class="app-header__top-bar"></div>
         <div class="position-relative w-100" style="margin-top: -10px">
             <div class="app-header__bar-left">
-                <div class="app-header__close-button" v-if="desktop_mode">
+                <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'mac'">
                     <a href="#" @click.prevent="closeWindow">&times;</a>
                 </div>
-                <div class="app-header__minimize-button" v-if="desktop_mode">
+                <div class="app-header__minimize-button" v-if="desktop_mode && operating_system === 'mac'">
                     <a href="#" @click.prevent="minimizeWindow">&ndash;</a>
                 </div>
-                <div class="app-header__maximize-button" v-if="desktop_mode">
+                <div class="app-header__maximize-button" v-if="desktop_mode && operating_system === 'mac'">
                     <a href="#" @click.prevent="maximizeWindow">+</a>
                 </div>
                 <a class="app-header__bar-left-link" href="/#/" v-if="!desktop_mode">
@@ -209,6 +209,9 @@ export default {
         desktop_mode() {
             return this.$store.state.application.desktop_mode
         },
+        operating_system() {
+            return this.$store.state.application.operating_system
+        },
         identity() {
             return {
                 name: 'Satoshi'
@@ -365,6 +368,7 @@ export default {
         padding: 0;
         z-index: 100;
         filter: drop-shadow(0 0px 15px rgba(48, 49, 76, 1));
+        user-select: none;
 
         a {
             color: #fff;

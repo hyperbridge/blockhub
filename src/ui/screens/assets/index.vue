@@ -267,8 +267,8 @@
 
         },
         computed: {
-            assets: function () {
-                return this.$store.state.marketplace.assets
+            assets() {
+                return this.$store.getters['assets/assets'];
             }
         }
     }

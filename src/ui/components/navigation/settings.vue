@@ -19,6 +19,7 @@
                 links: {
                     settings: [
                         { to: { path: '/settings' }, title: 'Overview' },
+                        { to: { path: '/settings/darklaunch' }, title: 'Darklaunch Settings' },
                         { to: { path: '/settings/protocol' }, title: 'Protocol Settings' },
                         { to: { path: '/settings/activity' }, title: 'Activity Log' }
                     ]

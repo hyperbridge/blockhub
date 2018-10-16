@@ -1,7 +1,7 @@
 <template>
     <c-layout navigationKey="settings">
         <div class="content" id="content">
-            <c-block title="Activity Log">
+            <c-block title="Activity Log" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                 <div class="console-log" ref="consoleLog" v-html="consoleLogMessages">
                     {{ consoleLogMessages }}
                 </div>
@@ -12,10 +12,6 @@
 
 <script>
 export default {
-    components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-        'c-block': (resolve) => require(['@/ui/components/block'], resolve)
-    },
     data() {
         return {
             consoleLogMessages: '',

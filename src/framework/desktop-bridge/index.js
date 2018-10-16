@@ -219,6 +219,11 @@ export const runCommand = async (cmd, meta = {}) => {
             const res = await promptPasswordRequest(cmd.data)
 
             return resolve(await sendCommand('promptPasswordResponse', res, meta.client, cmd.requestId))
+        } else if (cmd.key === 'setProtocolConfig') {
+            const { currentNetwork, protocolName, config } = cmd.data
+        
+            local.store.state[protocolName].ethereum[currentNetwork] = config
+            local.store.dispatch(protocolName + '/updateState')
         } else if (cmd.key === 'setAccountRequest') {
             const res = await setAccountRequest(cmd.data)
 
@@ -250,7 +255,11 @@ export const runCommand = async (cmd, meta = {}) => {
             local.router.push(cmd.data)
         } else {
             console.warn('[DesktopBridge] Unhandled command:', cmd)
+
+            return reject()
         }
+
+        return resolve(await sendCommand('response', null, meta.client, cmd.requestId))
     })
 }
 

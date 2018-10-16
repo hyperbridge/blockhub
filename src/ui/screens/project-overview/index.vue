@@ -426,9 +426,7 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-game-plan': (resolve) => require(['@/ui/components/game-plans/plan'], resolve),
-            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-screen-gallery': (resolve) => require(['@/ui/components/screen-gallery/gallery'], resolve),
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-rating-block': (resolve) => require(['@/ui/components/rating-block'], resolve),
