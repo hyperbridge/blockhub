@@ -2,7 +2,7 @@
     <div>
         <h2>Create new asset auction sniper</h2>
 
-        <c-tabs tabText="Step" class="margin-bottom-70" :setActiveTab="activeStep" @click="createSniper">
+        <c-tabs tabText="Step" class="margin-bottom-100" :setActiveTab="activeStep" @click="createSniper">
 
             <c-tab :tab_id="1">
                 <p>Select asset from market that you are going to buy</p>
@@ -31,22 +31,43 @@
 
         </c-tabs>
 
-        <h2>Created snipers</h2>
-        <table>
+        <h2>Created auction snipers</h2>
+        <table class="snipers-table">
             <thead>
                 <th>ID</th>
                 <th>Asset</th>
                 <th>Minimum price</th>
                 <th>Maximum price</th>
                 <th>Expiration date</th>
+                <th>Edit</th>
             </thead>
             <tbody>
-                <tr v-for="sniper in snipers" :key="sniper.id">
-                    <td>{{ sniper.id }}</td>
-                    <td><c-asset-preview :asset="sniper.asset"/></td>
-                    <td>{{ sniper.priceMin }} $</td>
-                    <td>{{ sniper.priceMax }} $</td>
-                    <td>{{ sniper.expDate }}</td>
+                <tr v-for="(sniper, id) in snipers" :key="id">
+                    <template v-if="edited.id !== id">
+                        <td>{{ id }}</td>
+                        <td><c-asset-preview :asset="sniper.asset" size="sm"/></td>
+                        <td>{{ sniper.priceMin }} $</td>
+                        <td>{{ sniper.priceMax }} $</td>
+                        <td>{{ sniper.expDate | timeAgo }}</td>
+                        <td>
+                            <c-button
+                                status="info"
+                                icon="edit"
+                                @click="setEdited(sniper)"
+                            >Edit</c-button>
+                        </td>
+                    </template>
+                    <template v-else>
+                        <td>{{ id }}</td>
+                        <td>{{ asset.name }}</td>
+                        <td><c-input :value="edited.priceMin"/></td>
+                        <td><c-input :value="edited.priceMax"/></td>
+                        <td><c-input :value="edited.expDate"/></td>
+                        <td>
+                            <c-button status="danger">Cancel</c-button>
+                            <c-button status="success">Save</c-button>
+                        </td>
+                    </template>
                 </tr>
             </tbody>
         </table>
@@ -71,6 +92,7 @@
                     priceMax: 0,
                     expDate: ''
                 },
+                edited: {},
                 activeStep: 1,
                 invalidVals: []
             }
@@ -98,11 +120,14 @@
                     };
                     this.$store.dispatch('assets/create', newSniper);
                 }
+            },
+            setEdited(sniper) {
+                this.edited = { ...sniper };
             }
         },
         computed: {
             snipers() {
-                return [];
+                return this.$store.getters['assets/snipers'];
             },
             assets() {
                 return this.$store.getters['assets/assetsArray'];
@@ -112,6 +137,15 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .snipers-table {
+        width: 100%;
+        margin-bottom: 50px;
+        th, td {
+            text-align: center;
+        }
+        tr:nth-child(even) td {
+            background: rgba(1,1,1,.05);
+        }
+    }
 </style>
 

@@ -22,7 +22,10 @@ const assets = {
             ...collections,
             [collection.id]: collection
         }), {}),
-        snipers: {}
+        snipers: {
+            1: { id: 1, asset: 4, priceMin: 31, priceMax: 59, expDate: "2018-12-15T14:29:47+02:00", edit: false },
+            3: { id: 3, asset: 6, priceMin: 11, priceMax: 89, expDate: "2018-11-14T14:29:47+02:00", edit: false },
+        }
     },
     mutations: {
         addAsset(state, { prop = 'assets', data }) {
@@ -110,6 +113,14 @@ const assets = {
                 }
             }), {}),
         collectionsArray: (state, { collections }) => Object.values(collections),
+        snipers: ({ snipers, assets }) => Object.values(snipers)
+            .reduce((populated, sniper) => ({
+                ...populated,
+                [sniper.id]: {
+                    ...sniper,
+                    asset: assets[sniper.asset]
+                }
+            }), {})
     }
 }
 
