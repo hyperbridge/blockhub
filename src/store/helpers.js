@@ -1,6 +1,6 @@
 export const mapElement = ({ name, module, prop = module, id }) => {
 
-    if (!name || !module || !id) {
+    if (name == null || module == null || id == null) {
         throw new Error(`Map element method requires these properties: 'name, module, id'`);
     }
 
@@ -24,5 +24,4 @@ export const mapElement = ({ name, module, prop = module, id }) => {
         module: 'assets',
         id: 3
     })
-
 */

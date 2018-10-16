@@ -21,42 +21,29 @@
                         <span>{{ asset.product_name }}</span>
                     </div>
                 </div>
-                <span>{{ asset.user_name }}</span>
-                <span>{{ asset.price.current }} $</span>
+                <div class="flex-center-between">
+                    <span v-if="asset.user_name" class="asset__user">
+                        <c-icon
+                            name="user"
+                            class="margin-right-5"
+                        />
+                        {{ asset.user_name }}
+                    </span>
+                    <span class="asset__price">{{ asset.price.current }} $</span>
+                    <c-button status="success" icon="cart-plus">
+                        Proceed to Purchase
+                    </c-button>
+                </div>
             </li>
         </ul>
-        <!-- <table class="assets-table">
-            <thead>
-                <th>Item</th>
-                <th>Seller</th>
-                <th>Price</th>
-            </thead>
-            <tbody>
-                <tr v-for="asset in assets" :key="asset.id" class="asset">
-                    <td class="asset__info">
-                        <c-img
-                            :src="asset.image"
-                            class="asset__image"
-                        />
-                        <div class="asset__meta">
-                            <p>{{ asset.name }}</p>
-                            <span>{{ asset.product_name }}</span>
-                        </div>
-                    </td>
-                    <td>
-                        {{ asset.user_name }}
-                    </td>
-                    <td>
-                        {{ asset.price.current }}$
-                    </td>
-                </tr>
-            </tbody>
-        </table> -->
     </div>
 </template>
 
 <script>
 export default {
+    components: {
+        'c-asset-preview': (resolve) => require(['@/ui/components/asset/preview-basic'], resolve),
+    },
     computed: {
         assets() {
             return this.$store.getters['assets/assetsArray'];
@@ -72,14 +59,26 @@ export default {
         padding: 0;
     }
     .asset {
-        background: rgb(58, 60, 88);
+        background: #343555;
         padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 8px;
+        margin-bottom: 15px;
+        border-radius: 5px;
         display: flex;
         justify-content: space-between;
-        box-shadow: 0 0 20px -2px rgb(38, 39, 59);
         align-items: center;
+        font-size: 14px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        .asset__user {
+            display: block;
+            transform: translateY(-50px);
+            transition: transform .2s ease;
+        }
+        &:hover {
+            .asset__user {
+                transform: translateY(0);
+            }
+        }
     }
     .asset__info {
         display: flex;
@@ -94,39 +93,15 @@ export default {
     .asset__meta {
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
+        padding: 5px 0;
         margin-left: 14px;
     }
-    // .assets-table {
-    //     width: 100%;
-    //     td, th {
-    //         padding: 10px;
-    //     }
-    //     // border-collapse: separate;
-    //     // border-spacing: 5em;
-    //     box-shadow: 0 0 20px -2px rgb(38, 39, 59);
-    //     $radius: 10px;
-    //     td { border-bottom: solid 10px #30314C; }
-    //     tr:first-child td:first-child { border-top-left-radius: 10px; }
-    //     tr:first-child td:last-child { border-top-right-radius: 10px; }
-    //     tr:last-child td:first-child { border-bottom-left-radius: 10px; }
-    //     tr:last-child td:last-child { border-bottom-right-radius: 10px; }
-    // }
-    // .asset {
-    //     border-radius: 8px;
-    //     background: rgb(72, 74, 107);
-    //     background: rgb(58, 60, 88);
-    //     margin-bottom: 10px;
-    // }
-    // .asset__info {
-    //     display: flex;
-    // }
-    // .asset__meta {
-    //     display: flex;
-    //     flex-direction: column;
-    //     margin-left: 14px;
-    // }
-    // .asset__image {
-    //     width: 50px;
-    //     height: 50px;
-    // }
+    .asset__price {
+        background: rgba(1,1,1,.15);
+        border-radius: 4px;
+        padding: 10px;
+        margin: 0 10px;
+        box-shadow: inset 0 0 13px 0 rgba(1,1,1,.2);
+    }
 </style>
