@@ -31,6 +31,9 @@ const assets = {
             // Payload could be written in format => { 'id_28313': { ...payload data } }
             state[prop][id] = { ...state[prop][id], ...data };
         },
+        update(state, { prop = 'assets', id, data }) {
+            state[prop][id] = { ...state[prop][id], ...data };
+        },
         deleteAsset(state, { prop = 'assets', id }) {
             // delete state[prop][id];
             Vue.delete(state[prop][id]);

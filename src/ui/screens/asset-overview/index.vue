@@ -18,6 +18,7 @@
                                 </div>
                                 <div class="title-text">
                                     <h1>{{ asset.name }}</h1>
+                                    <input type="text" @input="assett = { name: $event.target.value }"/>
                                     <span><strong>{{ asset.game_name }}</strong></span>
                                     <span class="company">{{ asset.product_name }}</span>
                                 </div>
@@ -237,7 +238,6 @@
 </template>
 
 <script>
-
     export default {
         props: ['id'],
         components: {
@@ -256,7 +256,7 @@
                 totalOwned: 3,
                 show_popup: false,
                 tmpItem: {},
-                sales: false //ToDo
+                sales: false, //ToDo
             }
         },
         methods: {
