@@ -124,50 +124,50 @@ export default {
                         ref: 'featured_product_gallery_sl',
                         swiper: this.$refs.featured_product_gallery_sl && this.$refs.featured_product_gallery_sl.swiper,
                         products: this.$store.state.marketplace.featured_products,
-                        slides:[
-                            {
-                                image:  {
-                                    src:  this.$store.state.marketplace.featured_products[0].images.preview[0],
-                                    position: 'center'
-                                },
-                                logo: {
-                                    src:  this.$store.state.marketplace.featured_products[0].images.icon,
-                                    position: 'left bottom',
-                                    size: 'lg',
-                                },
-                                title:  this.$store.state.marketplace.featured_products[0].name,
-                                buttonText: 'Check it out',
-                                id:  this.$store.state.marketplace.featured_products[0].id
-                            },
-                            {
-                                image:  {
-                                    src:  this.$store.state.marketplace.featured_products[1].images.preview[0],
-                                    position: 'center'
-                                },
-                                logo: {
-                                    src:  this.$store.state.marketplace.featured_products[1].images.icon,
-                                    position: 'left bottom',
-                                    size: 'lg',
-                                },
-                                title:  this.$store.state.marketplace.featured_products[1].name,
-                                buttonText: 'Check it out',
-                                id:  this.$store.state.marketplace.featured_products[1].id
-                            },
-                            {
-                                image:  {
-                                    src:  this.$store.state.marketplace.featured_products[2].images.preview[0],
-                                    position: 'center'
-                                },
-                                logo: {
-                                    src:  this.$store.state.marketplace.featured_products[2].images.icon,
-                                    position: 'left bottom',
-                                    size: 'lg',
-                                },
-                                title:  this.$store.state.marketplace.featured_products[2].name,
-                                buttonText: 'Check it out',
-                                id:  this.$store.state.marketplace.featured_products[2].id
-                            }
-                        ]
+                        // slides:[
+                        //     {
+                        //         image:  {
+                        //             src:  this.$store.state.marketplace.featured_products[0].images.preview[0],
+                        //             position: 'center'
+                        //         },
+                        //         logo: {
+                        //             src:  this.$store.state.marketplace.featured_products[0].images.icon,
+                        //             position: 'left bottom',
+                        //             size: 'lg',
+                        //         },
+                        //         title:  this.$store.state.marketplace.featured_products[0].name,
+                        //         buttonText: 'Check it out',
+                        //         id:  this.$store.state.marketplace.featured_products[0].id
+                        //     },
+                        //     {
+                        //         image:  {
+                        //             src:  this.$store.state.marketplace.featured_products[1].images.preview[0],
+                        //             position: 'center'
+                        //         },
+                        //         logo: {
+                        //             src:  this.$store.state.marketplace.featured_products[1].images.icon,
+                        //             position: 'left bottom',
+                        //             size: 'lg',
+                        //         },
+                        //         title:  this.$store.state.marketplace.featured_products[1].name,
+                        //         buttonText: 'Check it out',
+                        //         id:  this.$store.state.marketplace.featured_products[1].id
+                        //     },
+                        //     {
+                        //         image:  {
+                        //             src:  this.$store.state.marketplace.featured_products[2].images.preview[0],
+                        //             position: 'center'
+                        //         },
+                        //         logo: {
+                        //             src:  this.$store.state.marketplace.featured_products[2].images.icon,
+                        //             position: 'left bottom',
+                        //             size: 'lg',
+                        //         },
+                        //         title:  this.$store.state.marketplace.featured_products[2].name,
+                        //         buttonText: 'Check it out',
+                        //         id:  this.$store.state.marketplace.featured_products[2].id
+                        //     }
+                        // ]
                     }
                 })
             }
