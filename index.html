@@ -55,6 +55,17 @@
 
         gtag('config', 'UA-110820930-3');
     </script>
+        
+    <script>
+        document.addEventListener('dragover', event => {
+            event.preventDefault()
+            return false
+        })
+        document.addEventListener('drop', event => {
+            event.preventDefault()
+            return false
+        })
+    </script>
 
     <link rel="apple-touch-icon"
           href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/apple-touch-icon-152x152.png"/>
