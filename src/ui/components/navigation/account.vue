@@ -2,7 +2,7 @@
     <div class="navigation" id="navigation-default" v-if="signed_in">
         <c-sidebar-menu title="ACCOUNT" :links="links.account" />
         <c-sidebar-menu sub_title="Wallets" :links="links.wallets" v-darklaunch="'WALLETS'" />
-        <c-sidebar-menu sub_title="Identities" :links="links.identities" />
+        <c-sidebar-menu sub_title="Profiles" :links="links.identities" />
         <c-sidebar-menu sub_title="Developer" :links="links.developer" />
         <c-sidebar-menu sub_title="Help" :links="links.help" />
         <c-sidebar-menu sub_title="Legal" :links="links.legal" />
@@ -31,7 +31,7 @@
                     ],
                     identities: [
                         { to: { path: '/account/identities' }, title: 'Overview' },
-                        { to: { path: '/account/identities' }, title: 'New Identity' }
+                        { to: { path: '/account/identities' }, title: 'New Profile' }
                     ],
                     developer: this.is_developer ? [ { to: { path: '/developer' }, title: 'Developer Area' } ] : [ { to: { path: '/developer/new' }, title: 'Become a Developer' } ],
                     help: [
