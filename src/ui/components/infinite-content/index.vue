@@ -28,14 +28,7 @@
 
                 <div class="row margin-bottom-30" v-if="item.type === 'featured_product_gallery'" :key="`level-1-${index}`">
                     <div class="col-12">
-                        <c-main-banner class="margin-bottom-30" 
-                            :image="{ src: item.data.products[0].images.preview[0], position: 'center' }" 
-                            :logo="{ src: item.data.products[0].images.icon, position: 'left bottom', size: 'lg' }" 
-                            :title="item.data.products[0].name"
-                            :href="`/#/product/${item.data.products[0].id}`"
-                            buttonText="Check it out"
-                            v-if="item.data.products.length" 
-                        />
+                        <c-main-banner class="margin-bottom-30" :slides="item.data.slides" v-if="item.data.slides"/>
 
                         <c-block class="margin-bottom-30" :title="item.data.title" :noGutter="true" :onlyContentBg="true" :bgGradient="true" v-else>
                             <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
@@ -94,23 +87,21 @@
                 </div>
 
                 <div class="row margin-bottom-50 margin-top-20 align-items-stretch" v-if="item.type === 'banners'" :key="index">
-                    <div class="col-12 col-md-8">
-                        <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/marketplace">
+                    <div :class="banner.class" v-for="(banner, index) in item.data.banners" :key="index">
+                        <c-banner :imgSrc="banner.image" :link="banner.link" v-if="item.type == 3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h3 class="text-yellow">Item Marketplace</h3>
-                                    <p>All-in-one spot for games assets</p>
+                                    <h3 class="text-yellow">{{ banner.title }}</h3>
+                                    <p>{{ banner.subtitle }}</p>
                                 </div>
                                 <div class="banner-action">
-                                    <c-button status="info" icon_hide size="lg">VISIT NOW</c-button>
+                                    <c-button status="info" icon_hide size="lg">{{ banner.buttonText }}</c-button>
                                 </div>
                             </div>
                         </c-banner>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <c-banner :imgSrc="'/static/img/banners/banner-4.png'" link="/#/collections">
-                            <h3 class="text-yellow margin-bottom-5">Top Collections</h3>
-                            <p>Our community has curated the best ones for you</p>
+                        <c-banner :imgSrc="banner.imagee" :link="banner.link" v-if="item.type == 4">
+                            <h3 class="text-yellow margin-bottom-5">{{ banner.title }}</h3>
+                            <p>{{ banner.subtitle }}</p>
                         </c-banner>
                     </div>
                 </div>
@@ -149,7 +140,8 @@
                             />
                             <c-swiper :options="item.data.options" :ref="`swiper-${index}`">
                                 <c-slide v-for="(project, index) in item.data.projects" :key="index">
-                                    <c-project-card 
+                                    <c-project-card
+                                        class="p-2"
                                         :image="project.images.medium_tile" 
                                         :description="project.description" 
                                         :funds="project.funds" 
@@ -162,6 +154,31 @@
                             <p v-if="!item.data.projects.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                         </c-block>
                     </div>
+                </div>
+
+                <div v-if="item.type === 'realms_row'" :key="`level-1-${index}`">
+                        <c-swiper :options="item.data.options" class="padding-10">
+                            <c-slide v-for="(realm, index) in item.data.realms" :key="index">
+                                <c-collection-item :item="realm" />
+                            </c-slide>
+                        </c-swiper>
+
+                        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                            <c-heading-bar
+                                slot="title"
+                                class="mb-0"
+                                :name="item.data.title"
+                                :showArrows="showArrowsState(item.data.realms, 3)"
+                                :prevClick="() => this.$refs['swiper-' + index].swiper.slidePrev()"
+                                :nextClick="() => this.$refs['swiper-' + index].swiper.slideNext()"
+                            />
+                            <c-swiper :options="item.data.options" :ref="`swiper-${index}`">
+                                <c-slide v-for="(realm, index) in item.data.realms" :key="index">
+                                    <c-button :href="`/#/realm/${realm.id}`">{{ realm.name }}</c-button>
+                                </c-slide>
+                            </c-swiper>
+                            <p v-if="!item.data.realms.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
+                        </c-block>
                 </div>
 
                 <div class="row margin-bottom-30" v-if="item.type === 'game_series'" :key="`level-1-${index}`">
@@ -178,13 +195,8 @@
                         <c-collection-list 
                             title="Get Started"
                             description="Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain."
-                        >
-                            <c-swiper :options="item.data.options" class="padding-10">
-                                <c-slide v-for="(collection, index) in item.data.collections_list" :key="index">
-                                    <c-collection-item :item="collection" />
-                                </c-slide>
-                            </c-swiper>
-                        </c-collection-list>
+                            :collections="item.data.collections_list"
+                        />
                     </div>
                 </div>
 

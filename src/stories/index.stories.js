@@ -15,16 +15,17 @@ import * as data from './components-data'
 
 //import '!style-loader!css-loader!./styles.scss'
 
-import PromotionBox from '../ui/components/promotion-box'
 
 
 addDecorator(withViewport('desktop'))
 
 
+import PromotionItem from '../ui/components/promotion-box/item'
+import PromotionList from '../ui/components/promotion-box/list'
 storiesOf('Promotion Box', module)
-    .add('default', () => ({
+    .add('item', () => ({
         components: {
-            'c-promotion-box': PromotionBox
+            'c-promotion-item': PromotionItem
         },
         data() {
             return {
@@ -32,7 +33,41 @@ storiesOf('Promotion Box', module)
                 price: '10.00'
             }
         },
-        template: '<div class="row"><div class="col-6 p-5"><c-promotion-box :title="title" :price="price"></c-promotion-box></div></div>'
+        template: '<div class="row"><div class="col-6 p-5"><c-promotion-item :title="title" :price="price"></c-promotion-item></div></div>'
+    }))
+    .add('list', () => ({
+        components: {
+            'c-promotion-list': PromotionList,
+            'c-promotion-item': PromotionItem
+        },
+        data() {
+            return {
+                promotions:[
+                    {
+                        title: 'Game + Standard Founder Pack',
+                        price: '10.00',
+                        basic: true
+                    },
+                    {
+                        title: 'Game + Deluxe Founder Pack',
+                        price: '10.00',
+                        basic: false
+                    },
+                    {
+                        title: 'Game + Collectors Founder Pack',
+                        price: '10.00',
+                        basic: false
+                    }
+                ]
+            }
+        },
+        template: `<div class="row"><div class="col-6 p-5">
+                        <c-promotion-list title="Packages" >
+                            <template v-for="(promotion, index) in promotions">
+                                <c-promotion-item :title="promotion.title" :price="promotion.price" :basic="promotion.basic" :border="true"></c-promotion-item>
+                            </template>
+                        </c-promotion-list>
+                    </div></div>`
     }))
 
 import AssetsImporter from '../ui/components/asset-importer'
@@ -700,7 +735,7 @@ storiesOf('Tooltips', module)
             'c-tooltips': Tooltips
         },
         template: `
-            <div class="row">
+            <div class="row padding-50">
                 <div class="col-4 text-center">
                             <c-tooltips name="Hover Me(left Position)!" position="left" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='false' />
                 </div>
@@ -3304,16 +3339,201 @@ storiesOf('Purchase block', module)
         },
         template: `<div class="p-5" style="width: 400px">
                         <c-purchase-block 
-                        :tags="['top', 'new', 'purchased']"
+                        :tags="['top', 'new']"
                         :price="49.99" 
                         :eligibleTokens="300"
-                        releaseDate="8 Jun, 2018"
-                        :offers_purchases="true"
+                        :isReleased="true"
+                        :offersPurchases="true"
                         :inWishlist="inWishlist"
                         @addToWishlist="inWishlist = true"
                         @removeFromWishlist="inWishlist = false"
                         />
                         </div>`
+    }))
+    .add('demo', () => ({
+        components: {
+            'c-purchase-block': PurchaseBlock
+        },
+        data() {
+            return {
+                inWishlist: false
+            }
+        },
+        template: `<div class="p-5" style="width: 400px">
+                        <c-purchase-block 
+                        :tags="['top', 'new']"
+                        :price="49.99"
+                        releaseDate="8 Jun, 2018"
+                        :hasDemo="true"
+                        :offersPurchases="true"
+                        :inWishlist="inWishlist"
+                        @addToWishlist="inWishlist = true"
+                        @removeFromWishlist="inWishlist = false"
+                        />
+                        </div>`
+    }))
+    .add('unavailable', () => ({
+        components: {
+            'c-purchase-block': PurchaseBlock
+        },
+        data() {
+            return {
+                inWishlist: false
+            }
+        },
+        template: `<div class="p-5" style="width: 400px">
+                        <c-purchase-block 
+                        :tags="['new']"
+                        :price="49.99" 
+                        :isUnavailable="true"
+                        :inWishlist="inWishlist"
+                        @addToWishlist="inWishlist = true"
+                        @removeFromWishlist="inWishlist = false"
+                        />
+                        </div>`
+    }))
+
+import PurchaseOption from '@/ui/components/purchase-option';
+storiesOf('Purchase Option', module)
+    .add('single', () => ({
+        components:{
+            'c-purchase-option' : PurchaseOption
+        },
+        template: `
+            <div class="p-4" style="width: 600px">
+                <c-purchase-option 
+                :price="44"
+                :oldPrice="55"
+                :gameTag="SOME TAG"
+                :title="SOME TITLE"
+                :id="4"
+                 />
+            </div>
+        `
+    }))
+    .add('list', () => ({
+        data(){
+            return{
+                options:[
+                    {
+                        id: 1,
+                        old_price: '22.99',
+                        price: '16.99',
+                        tag: 'Game Only',
+                        title: 'Standard Edition'
+                    },
+                    {
+                        id: 2,
+                        old_price: '19.99',
+                        price: '12.99',
+                        tag: 'Super Nice Expansion Pack',
+                        title: 'Standard Edition'
+                    },
+                    {
+                        id: 3,
+                        old_price: '9.99',
+                        price: '0.69',
+                        tag: 'Super Nice Expansion Pack',
+                        title: 'Game + All Expansion'
+                    },
+                ]
+            }
+        },
+        components:{
+            'c-purchase-option' : PurchaseOption,
+            'c-block': Block
+        },
+        template: `
+        <div class="p-5">
+            <c-block title="Purchase Options" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+                <c-purchase-option v-for="(option, index) in options" 
+                :key="index" 
+                :price="option.price"
+                :oldPrice="option.old_price"
+                :gameTag="option.tag"
+                :title="option.title"
+                :id="option.id"
+                :inList="(index < options.length-1) ? true : false"
+                />
+            </c-block>
+        </div>
+        `
+    }))
+
+import ParticipationTier from '@/ui/components/participation-tiers'
+storiesOf('Participation Tiers', module)
+    .add('default', () => ({
+        data(){
+            return{
+                id: 1,
+                price: '29',
+                sold: '222',
+                left: '9',
+                tag: 'Combo',
+                title: 'Game Standard Edition'
+            }
+        },
+        components:{
+            'c-participation-tier' : ParticipationTier,
+        },
+        template: `
+            <div class="p-5">
+                <c-participation-tier :id="id" :price="price" :sold="sold" :left="left" :title="title" :tag="tag" />
+            </div>
+        `
+    }))
+    .add('list', () => ({
+        data(){
+            return{
+                items:[
+                    {
+                        id: 1,
+                        price: '29',
+                        sold: '222',
+                        left: '9',
+                        tag: 'Combo',
+                        title: 'Game Standard Edition'
+                    },
+                    {
+                        id: 2,
+                        price: '219',
+                        sold: '32',
+                        left: '1',
+                        tag: 'Combo',
+                        title: 'Game Standard Edition'
+                    },
+                    {
+                        id: 3,
+                        price: '9',
+                        sold: '981',
+                        left: '1',
+                        tag: 'Combo',
+                        title: 'Game Standard Edition'
+                    }
+                ]
+            }
+        },
+        components:{
+            'c-participation-tier' : ParticipationTier ,
+            'c-block': Block
+
+        },
+        template: `
+            <div class="p-5">
+                <c-block title="Participation Tier" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+                    <c-participation-tier v-for="(item, index) in items" 
+                    :key="index"
+                    :id="item.id" 
+                    :price="item.price" 
+                    :sold="item.sold" 
+                    :left="item.left" 
+                    :title="item.title" 
+                    :tag="item.tag"
+                    :inList="(index < items.length-1) ? true : false"
+                 />
+                </c-block>
+            </div>
+        `
     }))
 
 import ContributeForm from '@/ui/components/contribute/form.vue'
@@ -3382,8 +3602,7 @@ storiesOf('Cookie policy', module)
                     </div> `
     }))
 
-
-import WelcomeBox from '@/ui/components/welcome-box/type-1'
+import WelcomeBox from '@/ui/components/welcome-box'
 storiesOf('Welcome Box', module)
     .add('default', () => ({
         components:{
@@ -3391,6 +3610,65 @@ storiesOf('Welcome Box', module)
         },
         template: `<div class="p-5 position-relative" style="height: 900px;width: 700px">
                         <c-welcome-box />
+                    </div> `
+    }))
+
+import Share from '@/ui/components/share/type-1'
+storiesOf('Share', module)
+    .add('type 1', () => ({
+        components:{
+            'c-share': Share
+        },
+        data(){
+            return{
+                online:[
+                    {
+                        "name": "Sally Hamilton",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Poole Wise",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Frye Nash",
+                        "img": "http://placehold.it/32x32"
+                    }
+                ],
+                favorites:[
+                    {
+                        "name": "Nixon Love",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Richards Langley",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Jill Medina",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Callahan Ballard",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Zamora Simmons",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Jenkins Ruiz",
+                        "img": "http://placehold.it/32x32"
+                    },
+                    {
+                        "name": "Kemp Christian",
+                        "img": "http://placehold.it/32x32"
+                    }
+                ]
+            }
+        },
+        template: `<div class="p-5 position-relative" style="height: 300px;width: 300px; margin-top: 300px">
+                        <c-share :onlineList="online" :favoritesList="favorites" :show="true" />
                     </div> `
     }))
 

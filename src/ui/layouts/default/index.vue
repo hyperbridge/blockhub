@@ -3,8 +3,8 @@
     <div class="page page--w-header page--w-container">
         <!-- PAGE HEADER -->
         <transition name="slideDown" v-if="initialized">
-            <c-header :isLoader="loadingState"/>
-            <!--<c-slim-header :isLoader="loadingState"/>-->
+            <c-header :isLoader="loadingState" v-if="!slimMode" />
+            <c-slim-header :isLoader="loadingState" v-if="slimMode" :title="headerText" />
         </transition>
         <!-- //END PAGE HEADER -->
 
@@ -43,15 +43,15 @@
             <div class="page-aside invert left-sidebar" id="page-aside" v-if="showLeftPanel">
                 <!--<transition name="slideLeft" v-if="initialized">-->
                 <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
-                    <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}-navigation`" ref="scroll_sidebar_content"></component>
+                    <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}-navigation`" ref="scroll_sidebar_content" :title="navigationTitle"></component>
                 </div>
-                <c-load-more @click="scrollSidebarDown" v-if="scrollMoreDirection == 'down'">
+                <c-load-more @click="scrollSidebarDown" :fixed="true" v-if="scrollMoreDirection == 'down'">
                     <div class="load-more-slot">
                         More
                         <i class="fas fa-sort-down"></i>
                     </div>
                 </c-load-more>
-                <c-load-more @click="scrollSidebarUp" v-if="scrollMoreDirection == 'up'">
+                <c-load-more @click="scrollSidebarUp" :fixed="true" v-if="scrollMoreDirection == 'up'">
                     <div class="load-more-slot">
                         <i class="fas fa-sort-up"></i>
                         Up
@@ -165,12 +165,12 @@
                             <div class="navigation">
                                 <ul>
                                     <template v-for="(update,  index) in updates">
-                                        <li class="title" :key="index">
+                                        <li class="title" :key="`title-${index}`">
                                             <a :href="update.link">
                                                 <span class="text">{{ update.title }}</span>
                                             </a>
                                         </li>
-                                        <li :key="index">
+                                        <li :key="`info-${index}`">
                                             <span class="text">{{ update.info }}</span>
                                         </li>
                                     </template>
@@ -249,6 +249,7 @@
                 {{ connection_status.message }}
             </div>
 
+            <c-welcome-popup :activated="welcome_modal_active" @close="closePopup" ref="welcome_modal_active"></c-welcome-popup>
             <c-download-popup :activated="download_modal_active" @close="closePopup" ref="download_modal_active"></c-download-popup>
             <c-unlock-popup :activated="unlock_modal_active" @close="closePopup" ref="unlock_modal_active"></c-unlock-popup>
             <c-send-funds-popup :activated="send_funds_modal_active" @close="closePopup" ref="send_funds_modal_active"></c-send-funds-popup>
@@ -281,12 +282,17 @@
 
 <script>
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
+    import { debouncer } from '@/mixins'
 
     import 'swiper/dist/css/swiper.css'
 
     export default {
         props: {
             navigationKey: {
+                type: String,
+                required: false
+            },
+            navigationTitle: {
                 type: String,
                 required: false
             },
@@ -299,8 +305,19 @@
                 type: Boolean,
                 default: true,
                 required: false
+            },
+            slimMode: {
+                type: Boolean,
+                default: false,
+                required: false
+            },
+            headerText: {
+                type: String,
+                default: 'BlockHub',
+                required: false
             }
         },
+        mixins: [debouncer],
         components: {
             'c-header': (resolve) => require(['@/ui/components/headers/basic'], resolve),
             'c-slim-header': (resolve) => require(['@/ui/components/headers/slim'], resolve),
@@ -315,6 +332,7 @@
             'c-product-navigation': (resolve) => require(['@/ui/components/navigation/product'], resolve),
             'c-project-navigation': (resolve) => require(['@/ui/components/navigation/project'], resolve),
             'c-notification': (resolve) => require(['@/ui/components/notification/index.vue'], resolve),
+            'c-welcome-popup': (resolve) => require(['@/ui/components/welcome-popup/index.vue'], resolve),
             'c-download-popup': (resolve) => require(['@/ui/components/download-popup/index.vue'], resolve),
             'c-unlock-popup': (resolve) => require(['@/ui/components/unlock-popup/index.vue'], resolve),
             'c-login-popup': (resolve) => require(['@/ui/components/login-popup/index.vue'], resolve),
@@ -352,6 +370,9 @@
             download_modal_active() {
                 return this.$store.state.application.active_modal === 'download'
             },
+            welcome_modal_active() {
+                return this.$store.state.application.active_modal === 'welcome'
+            },
             notifs() {
                 return this.$store.state.application.account.notifications
             },
@@ -364,8 +385,8 @@
             signed_in() {
                 return this.$store.state.application.signed_in
             },
-            current_identity()  {
-                return this.$store.state.application.account && this.$store.state.application.account.current_identity
+            current_identity() {
+                return this.$store.state.application.account && this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
             },
             messages() {
                 return this.current_identity && this.current_identity.messages
@@ -386,7 +407,7 @@
                     loop: false,
                 },
                 notifPopup: {},
-                scrollMoreDirection: ''
+                scrollMoreDirection: null
             }
         },
         updated() {
@@ -425,24 +446,31 @@
             },
             scrollSidebarDown(){
                 $('#scroll_sidebar').animate({scrollTop: '+=100', duration: '150'});
-                if($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight() >= $('#scroll_sidebar')[0].scrollHeight) {
-                    this.scrollMoreDirection = 'up';
-                }
+                this.checkScrollButton()
             },
             scrollSidebarUp(){
                 $('#scroll_sidebar').animate({scrollTop: '-=500', duration: '150'});
-                if($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight() <= $('#scroll_sidebar')[0].scrollHeight) {
-                    this.scrollMoreDirection = 'down';
-                }
+                this.checkScrollButton()
             },
             checkScrollButton(){
-                if (this.$refs.scroll_sidebar.scrollHeight > this.$refs.scroll_sidebar.offsetHeight)
-                    this.scrollMoreDirection = 'down';
-                else
-                    this.scrollMoreDirection = null;
+                try {
+                    if ($('#scroll_sidebar').children().height() > $('#scroll_sidebar').height()) {
+                        // Change the scroll direction when it hits the last 10px of the sidebar
+                        if(($('#scroll_sidebar').scrollTop() + $('#scroll_sidebar').innerHeight()) >= ($('#scroll_sidebar')[0].scrollHeight - 10)) {
+                            this.scrollMoreDirection = 'up';
+                        }
+                        else {
+                            this.scrollMoreDirection = 'down';
+                        }
+                    } else {
+                        this.scrollMoreDirection = null
+                    }
+                } catch(e) {
+
+                }
             }
         },
-        mounted: function () {
+        mounted() {
             this.$nextTick(() => {
                 this.loadingState = false
                 setTimeout(() => {
@@ -451,8 +479,16 @@
                     this.initialized = BlockHub.initialized = true
 
                     // check sidebar button
-                    this.checkScrollButton()
+                    $(this.$refs.scroll_sidebar).scroll(() => {
+                        this.debounce(() => {
+                            this.checkScrollButton()
+                        }, 250)
+                    })
                 }, 3000) // TODO: remove arbitrary delay
+
+                setInterval(() => {
+                    this.checkScrollButton()
+                }, 500)
             })
         }
     }
@@ -721,7 +757,7 @@
     .left-sidebar__content{
         overflow-y: scroll;
         overflow-x: hidden;
-        height: 100%;
+        height: calc(100% - 40px);
     }
     .col-lg-6{
         @media (max-width: 1500px){

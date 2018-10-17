@@ -33,44 +33,24 @@
                 "name": "Some short title"
             }
         ],
-        "metadata": [
-            {
-                "label": "type",
-                "text": "Legendary Two Handed Sword"
+        "metadata": {
+            "type": "Legendary Two Handed Sword",
+            "average_dps": 2903.6,
+            "damage_range_min": 2193,
+            "damage_range_max": 2880,
+            "attack_speed": 1.15,
+            "bonus_1": {
+                "damage": "+9%",
+                "strength": "+1381"
             },
-            {
-                "label": "average dps",
-                "text": "2,903.6"
-            },
-            {
-                "label": "Damage Range",
-                "text": "2193-2880"
-            },
-            {
-                "label": "Attack speed",
-                "text": "1.15"
-            },
-            {
-                "label": "Bonus 1",
-                "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
-            },
-            {
-                "label": "Bonus 2",
-                "text": "Monster kills grant +151 experiance"
-            },
-            {
-                "label": "Level Requirement",
-                "text": "70"
-            },
-            {
-                "label": "Item Durability",
-                "text": "40/41"
-            }
-        ],
+            "bonus_2": "Monster kills grant +151 experience",
+            "level_requirement": 70,
+            "durability": "40/41"
+        },
         "accept_offers": false,
-        "collections": [1, 2, 3, 4, 5, 6],
-        "inventory_list": ["4", "6", "5", "7"],
-        "offers_list": ["1", "2", "3", "4"]
+        "collections": [1, 2, 3, 5],
+        "inventory_list": [4, 6, 5, 7],
+        "offers_list": [1, 2, 3, 4]
     },
     {
         "id": 2,
@@ -100,43 +80,23 @@
                 "name": "Some short title"
             }
         ],
-        "metadata": [
-            {
-                "label": "type",
-                "text": "Legendary Two Handed Sword"
+        "metadata": {
+            "type": "Legendary Two Handed Sword",
+            "average_dps": 1420.6,
+            "damage_range_min": 1421,
+            "damage_range_max": 4512,
+            "attack_speed": 1.25,
+            "bonus_1": {
+                "damage": "+9%",
+                "strength": "+1381"
             },
-            {
-                "label": "average dps",
-                "text": "2,903.6"
-            },
-            {
-                "label": "Damage Range",
-                "text": "2193-2880"
-            },
-            {
-                "label": "Attack speed",
-                "text": "1.15"
-            },
-            {
-                "label": "Bonus 1",
-                "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
-            },
-            {
-                "label": "Bonus 2",
-                "text": "Monster kills grant +151 experiance"
-            },
-            {
-                "label": "Level Requirement",
-                "text": "70"
-            },
-            {
-                "label": "Item Durability",
-                "text": "40/41"
-            }
-        ],
-        "collections": [1, 2, 3, 4, 5, 6],
-        "inventory_list": ["4", "6", "5", "7"],
-        "offers_list": ["1", "2", "3", "4"]
+            "bonus_2": "Monster kills grant +151 experience",
+            "level_requirement": 40,
+            "durability": "40/41"
+        },
+        "collections": [3, 5],
+        "inventory_list": [4, 1, 3, 4, 5],
+        "offers_list": [4, 6, 1, 2]
     },
     {
         "id": 3,
@@ -166,43 +126,23 @@
                 "name": "Some short title"
             }
         ],
-        "metadata": [
-            {
-                "label": "type",
-                "text": "Legendary Two Handed Sword"
+        "metadata": {
+            "type": "Legendary Two Handed Sword",
+            "average_dps": 1142.6,
+            "damage_range_min": 1241,
+            "damage_range_max": 3134,
+            "attack_speed": 1.35,
+            "bonus_1": {
+                "damage": "+9%",
+                "strength": "+1381"
             },
-            {
-                "label": "average dps",
-                "text": "2,903.6"
-            },
-            {
-                "label": "Damage Range",
-                "text": "2193-2880"
-            },
-            {
-                "label": "Attack speed",
-                "text": "1.15"
-            },
-            {
-                "label": "Bonus 1",
-                "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
-            },
-            {
-                "label": "Bonus 2",
-                "text": "Monster kills grant +151 experiance"
-            },
-            {
-                "label": "Level Requirement",
-                "text": "70"
-            },
-            {
-                "label": "Item Durability",
-                "text": "40/41"
-            }
-        ],
-        "collections": [1, 2, 3, 4, 5, 6],
-        "inventory_list": ["4", "6", "5", "7"],
-        "offers_list": ["1", "2", "3", "4"]
+            "bonus_2": "Monster kills grant +151 experience",
+            "level_requirement": 60,
+            "durability": "40/41"
+        },
+        "collections": [1, 2, 3, 5],
+        "inventory_list": [4, 1, 3, 4, 5],
+        "offers_list": [4, 6, 1, 2]
     },
     {
         "id": 4,
@@ -233,43 +173,23 @@
                 "name": "Some short title"
             }
         ],
-        "metadata": [
-            {
-                "label": "type",
-                "text": "Legendary Two Handed Sword"
+        "metadata": {
+            "type": "Legendary Two Handed Sword",
+            "average_dps": 1142.6,
+            "damage_range_min": 1241,
+            "damage_range_max": 1334,
+            "attack_speed": 1.15,
+            "bonus_1": {
+                "damage": "+9%",
+                "strength": "+1381"
             },
-            {
-                "label": "average dps",
-                "text": "2,903.6"
-            },
-            {
-                "label": "Damage Range",
-                "text": "2193-2880"
-            },
-            {
-                "label": "Attack speed",
-                "text": "1.15"
-            },
-            {
-                "label": "Bonus 1",
-                "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
-            },
-            {
-                "label": "Bonus 2",
-                "text": "Monster kills grant +151 experiance"
-            },
-            {
-                "label": "Level Requirement",
-                "text": "70"
-            },
-            {
-                "label": "Item Durability",
-                "text": "40/41"
-            }
-        ],
-        "collections": [1, 2, 3, 4, 5, 6],
-        "inventory_list": ["4", "6", "5", "7"],
-        "offers_list": ["1", "2", "3", "4"]
+            "bonus_2": "Monster kills grant +151 experience",
+            "level_requirement": 35,
+            "durability": "40/41"
+        },
+        "collections": [1, 2, 3, 5],
+        "inventory_list": [4, 1, 3, 4, 5],
+        "offers_list": [4, 6, 1, 2]
     },
     {
         "id": 5,
@@ -300,43 +220,23 @@
                 "name": "Some short title"
             }
         ],
-        "metadata": [
-            {
-                "label": "type",
-                "text": "Legendary Two Handed Sword"
+        "metadata": {
+            "type": "Legendary Two Handed Sword",
+            "average_dps": 1442.6,
+            "damage_range_min": 230,
+            "damage_range_max": 324,
+            "attack_speed": 2.15,
+            "bonus_1": {
+                "damage": "+9%",
+                "strength": "+1381"
             },
-            {
-                "label": "average dps",
-                "text": "2,903.6"
-            },
-            {
-                "label": "Damage Range",
-                "text": "2193-2880"
-            },
-            {
-                "label": "Attack speed",
-                "text": "1.15"
-            },
-            {
-                "label": "Bonus 1",
-                "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
-            },
-            {
-                "label": "Bonus 2",
-                "text": "Monster kills grant +151 experiance"
-            },
-            {
-                "label": "Level Requirement",
-                "text": "70"
-            },
-            {
-                "label": "Item Durability",
-                "text": "40/41"
-            }
-        ],
-        "collections": [1, 2, 3, 4, 5, 6],
-        "inventory_list": ["4", "6", "5", "7"],
-        "offers_list": ["1", "2", "3", "4"]
+            "bonus_2": "Monster kills grant +151 experience",
+            "level_requirement": 82,
+            "durability": "40/41"
+        },
+        "collections": [1, 2, 3, 5],
+        "inventory_list": [4, 1, 3, 4, 5],
+        "offers_list": [4, 6, 1, 2]
     },
     {
         "id": 6,
@@ -367,43 +267,23 @@
                 "name": "Some short title"
             }
         ],
-        "metadata": [
-            {
-                "label": "type",
-                "text": "Legendary Two Handed Sword"
+        "metadata": {
+            "type": "Legendary Two Handed Sword",
+            "average_dps": 1230.6,
+            "damage_range_min": 132,
+            "damage_range_max": 424,
+            "attack_speed": 1.15,
+            "bonus_1": {
+                "damage": "+9%",
+                "strength": "+1381"
             },
-            {
-                "label": "average dps",
-                "text": "2,903.6"
-            },
-            {
-                "label": "Damage Range",
-                "text": "2193-2880"
-            },
-            {
-                "label": "Attack speed",
-                "text": "1.15"
-            },
-            {
-                "label": "Bonus 1",
-                "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
-            },
-            {
-                "label": "Bonus 2",
-                "text": "Monster kills grant +151 experiance"
-            },
-            {
-                "label": "Level Requirement",
-                "text": "70"
-            },
-            {
-                "label": "Item Durability",
-                "text": "40/41"
-            }
-        ],
-        "collections": [1, 2, 3, 4, 5, 6],
-        "inventory_list": ["4", "6", "5", "7"],
-        "offers_list": ["1", "2", "3", "4"]
+            "bonus_2": "Monster kills grant +151 experience",
+            "level_requirement": 62,
+            "durability": "40/41"
+        },
+        "collections": [1, 2, 3, 5],
+        "inventory_list": [4, 1, 3, 4, 5],
+        "offers_list": [4, 6, 1, 2]
     },
     {
         "id": 7,
@@ -434,43 +314,23 @@
                 "name": "Some short title"
             }
         ],
-        "metadata": [
-            {
-                "label": "type",
-                "text": "Legendary Two Handed Sword"
+        "metadata": {
+            "type": "Legendary Two Handed Sword",
+            "average_dps": 1441.6,
+            "damage_range_min": 139,
+            "damage_range_max": 1349,
+            "attack_speed": 1.65,
+            "bonus_1": {
+                "damage": "+9%",
+                "strength": "+1381"
             },
-            {
-                "label": "average dps",
-                "text": "2,903.6"
-            },
-            {
-                "label": "Damage Range",
-                "text": "2193-2880"
-            },
-            {
-                "label": "Attack speed",
-                "text": "1.15"
-            },
-            {
-                "label": "Bonus 1",
-                "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
-            },
-            {
-                "label": "Bonus 2",
-                "text": "Monster kills grant +151 experiance"
-            },
-            {
-                "label": "Level Requirement",
-                "text": "70"
-            },
-            {
-                "label": "Item Durability",
-                "text": "40/41"
-            }
-        ],
-        "collections": [1, 2, 3, 4, 5, 6],
-        "inventory_list": ["4", "6", "5", "7"],
-        "offers_list": ["1", "2", "3", "4"]
+            "bonus_2": "Monster kills grant +151 experience",
+            "level_requirement": 122,
+            "durability": "40/41"
+        },
+        "collections": [1, 2, 3, 5],
+        "inventory_list": [4, 1, 3, 4, 5],
+        "offers_list": [4, 6, 1, 2]
     },
     {
         "id": 8,
@@ -500,42 +360,169 @@
                 "name": "Some short title"
             }
         ],
-        "metadata": [
-            {
-                "label": "type",
-                "text": "Legendary Two Handed Sword"
-            },
-            {
-                "label": "average dps",
-                "text": "2,903.6"
-            },
-            {
-                "label": "Damage Range",
-                "text": "2193-2880"
-            },
-            {
-                "label": "Attack speed",
-                "text": "1.15"
-            },
-            {
-                "label": "Bonus 1",
-                "text": "+1379-1679 Damage, +9% Damage, +1121 strenght"
-            },
-            {
-                "label": "Bonus 2",
-                "text": "Monster kills grant +151 experiance"
-            },
-            {
-                "label": "Level Requirement",
-                "text": "70"
-            },
-            {
-                "label": "Item Durability",
-                "text": "40/41"
-            }
-        ],
+        "metadata": {
+            "type": "Legendary Two Handed Sword",
+            "average_dps": 2341.6,
+            "damage_range_min": 2439,
+            "damage_range_max": 4149,
+            "attack_speed": 0.15,
+            "bonus_1": "Monster kills grant +151 experience",
+            "level_requirement": 172,
+            "durability": "40/41"
+        },
         "collections": [1, 2, 3, 4, 5, 6],
         "inventory_list": ["4", "6", "5", "7"],
         "offers_list": ["1", "2", "3", "4"]
+    },
+    {
+        "id": 9,
+        "name": "Cystallised Skull",
+        "product_name": "Path of Exile",
+        "image": "https://cdn.hyperbridge.org/blockhub/assets/poe-cystallised%2520skull.png",
+        "price": {
+            "min": 1.99,
+            "max": 7.43,
+            "current": 4.48
+        },
+        "count": "450.00",
+        "top_picks_list": [],
+        "metadata": {
+            "type": "Magic weapon",
+            "average_dps": 141.6,
+            "shield": 242,
+            "magic_shield": 149,
+            "fire_damage": 441,
+            "bonus_1": "Monster kills grant +151 experience",
+            "level_requirement": 314,
+            "durability": "10/41"
+        },
+        "collections": [1, 2, 3, 5],
+        "inventory_list": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        "offers_list": [4, 6, 1, 2]
+    },
+    {
+        "id": 10,
+        "name": "Engraved Skull",
+        "product_name": "Path of Exile",
+        "image": "https://cdn.hyperbridge.org/blockhub/assets/poe-engraved%2520skull.png",
+        "price": {
+            "min": 2.99,
+            "max": 8.43,
+            "current": 7.48
+        },
+        "count": "450.00",
+        "top_picks_list": [],
+        "metadata": {
+            "type": "Magic weapon",
+            "average_dps": 141.6,
+            "shield": 142,
+            "magic_shield": 249,
+            "fire_damage": 41,
+            "bonus_1": "Monster kills grant +151 experience",
+            "level_requirement": 172,
+            "durability": "40/41"
+        },
+        "collections": [1, 2, 3, 5],
+        "inventory_list": [7, 8, 9, 10, 11, 12],
+        "offers_list": [4, 6, 1, 2]
+    },
+    {
+        "id": 11,
+        "name": "Turquoise Mask",
+        "product_name": "Path of Exile",
+        "image": "https://cdn.hyperbridge.org/blockhub/assets/poe-turquoise%2520imp%2520mask.png",
+        "price": {
+            "min": 1.99,
+            "max": 7.43,
+            "current": 4.48
+        },
+        "count": "450.00",
+        "top_picks_list": [],
+        "metadata": {
+            "type": "Armor",
+            "shield": 231,
+            "magic_shield": 213,
+            "physical_shield": 149,
+            "fire_shield": 41,
+            "bonus_1": "Monster kills grant +151 experience",
+            "level_requirement": 38,
+            "durability": "10/21"
+        },
+        "collections": [1, 2, 3, 5],
+        "inventory_list": [7, 8, 9, 10, 11, 12],
+        "offers_list": [4, 6, 1, 2]
+    },
+    {
+        "id": 12,
+        "name": "Gold AKM",
+        "product_name": "Playerunknown's Battlegrounds",
+        "image": "https://cdn.hyperbridge.org/blockhub/assets/pubg-Gold%2520Plate%2520-%2520AKM.png",
+        "price": {
+            "min": 27.21,
+            "max": 45.13,
+            "current": 37.98
+        },
+        "count": "450.00",
+        "top_picks_list": [],
+        "metadata": {
+            "type": "Weapon",
+            "ammo_type": "Light Bullets",
+            "fire_rate": 312,
+            "damage": 41,
+            "headshot_damage": 142,
+            "magazine_size": 32,
+            "bonus_1": "Headshot kills grant +151 experience"
+        },
+        "collections": [1, 2, 3, 5],
+        "inventory_list": [7, 8, 9, 10, 11, 12],
+        "offers_list": [4, 6, 1, 2]
+    },
+    {
+        "id": 13,
+        "name": "Jungle Digital SKS",
+        "product_name": "Playerunknown's Battlegrounds",
+        "image": "https://cdn.hyperbridge.org/blockhub/assets/pubg-Jungle%2520Digital%2520-%2520SKS.png",
+        "price": {
+            "min": 3.29,
+            "max": 14.43,
+            "current": 8.48
+        },
+        "count": "450.00",
+        "top_picks_list": [],
+        "metadata": {
+            "type": "Weapon",
+            "ammo_type": "Light Bullets",
+            "fire_rate": 112,
+            "damage": 26,
+            "headshot_damage": 112,
+            "magazine_size": 46,
+            "bonus_1": "Headshot kills grant +41 experience"
+        },
+        "collections": [1, 2, 3, 5],
+        "inventory_list": [7, 8, 9, 10, 11, 12],
+        "offers_list": [4, 6, 1, 2]
+    },
+    {
+        "id": 14,
+        "name": "Leather Hoodie White",
+        "product_name": "Playerunknown's Battlegrounds",
+        "image": "https://cdn.hyperbridge.org/blockhub/assets/pubg-Jungle%2520Digital%2520-%2520SKS.png",
+        "price": {
+            "min": 1.9,
+            "max": 6,
+            "current": 4.71
+        },
+        "count": "450.00",
+        "top_picks_list": [],
+        "metadata": {
+            "type": "Armor",
+            "shield": 412,
+            "physical_shield": 142,
+            "damage_resistance": 14,
+            "bonus_1": "Grant +41 invisibility points"
+        },
+        "collections": [1, 2, 3, 5],
+        "inventory_list": [7, 8, 9, 10, 11, 12],
+        "offers_list": [4, 6, 1, 2]
     }
 ]

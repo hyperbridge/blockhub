@@ -53,6 +53,18 @@ export const ID = () => {
     return '_' + Math.random().toString(36).substr(2, 9);
 }
 
+export const createTransactionRequest = async (data) => {
+    return await sendCommand('createTransactionRequest', data)
+}
+
+export const sendTransactionRequest = async (data) => {
+    return await sendCommand('sendTransactionRequest', data)
+}
+
+export const getPassphraseRequest = async (data) => {
+    return await sendCommand('getPassphraseRequest', data)
+}
+
 export const createAccountRequest = async (data) => {
     return await sendCommand('createAccountRequest', data)
 }
@@ -115,14 +127,25 @@ export const setAccountRequest = async (data) => {
 
         DB.save()
 
-        local.store.commit('application/updateState', {
-            locked: false,
-            signed_in: true
-        })
+        if (data.account.public_address) {
+            local.store.commit('application/updateState', {
+                locked: false,
+                signed_in: true
+            })
 
-        local.store.commit('application/activateModal', null)
+            local.store.commit('application/activateModal', null)
 
-        local.router.push('/')
+            local.router.push('/')
+        } else {
+            local.store.commit('application/updateState', {
+                locked: true,
+                signed_in: false
+            })
+
+            local.store.commit('application/activateModal', null)
+
+            local.router.push('/welcome')
+        }
 
         resolve()
     })
@@ -130,7 +153,12 @@ export const setAccountRequest = async (data) => {
 
 export const sendCommand = async (key, data = {}, peer = null, responseId = null) => {
     if (!isConnected()) {
-        console.log('[DesktopBridge] Cant send command. Reason: not connected to desktop app')
+        console.log('[DesktopBridge] Cant send command. Reason: not connected to desktop app', key)
+
+        // Ignore startup commands
+        if (key !== 'initProtocol') {
+            local.store.commit('application/activateModal', 'welcome')
+        }
 
         return false
     }
@@ -191,6 +219,11 @@ export const runCommand = async (cmd, meta = {}) => {
             const res = await promptPasswordRequest(cmd.data)
 
             return resolve(await sendCommand('promptPasswordResponse', res, meta.client, cmd.requestId))
+        } else if (cmd.key === 'setProtocolConfig') {
+            const { currentNetwork, protocolName, config } = cmd.data
+        
+            local.store.state[protocolName].ethereum[currentNetwork] = config
+            local.store.dispatch(protocolName + '/updateState')
         } else if (cmd.key === 'setAccountRequest') {
             const res = await setAccountRequest(cmd.data)
 
@@ -198,6 +231,13 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'setMode') {
             local.store.state.application.mode = cmd.data
 
+            // Import seed data for now
+            if (local.store.state.application.mode === 'production') {
+                BlockHub.importSeedData()
+
+                store.state.application.desktop_mode = true
+                store.state.application.signed_in = true
+            }
             // store.state.application.locked = true
             // store.state.application.signed_in = false
         } else if (cmd.key === 'updateReady') {
@@ -215,7 +255,11 @@ export const runCommand = async (cmd, meta = {}) => {
             local.router.push(cmd.data)
         } else {
             console.warn('[DesktopBridge] Unhandled command:', cmd)
+
+            return reject()
         }
+
+        return resolve(await sendCommand('response', null, meta.client, cmd.requestId))
     })
 }
 
@@ -266,6 +310,10 @@ export const initContextMenuHandler = () => {
 }
 
 export const init = (store, router) => {
+    local.store = store
+    local.router = router
+    local.bridge = window.desktopBridge
+
     if (!isConnected()) {
         console.log('[DesktopBridge] Not initializing. Reason: not connected to desktop app')
 
@@ -273,10 +321,6 @@ export const init = (store, router) => {
     }
 
     console.log('[DesktopBridge] Initializing')
-
-    local.store = store
-    local.router = router
-    local.bridge = window.desktopBridge
 
     sendCommand('init', 1)
 

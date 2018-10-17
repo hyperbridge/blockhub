@@ -15,20 +15,63 @@
                 <a :href="`/#/product/${item.id}`">
                     <c-img :src="item.images.medium_tile" />
                 </a>
+                <div class="crowdfund-icon" v-if="item.crowdfund">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
             </div>
             <div class="info">
                 <div class="text">
-                    <a
-                        :href="`/#/product/${item.id}`"
+                    <div class="state-tag">
+                        <template v-if="item.state_tag == 'trending'">
+                            <span style="color: #F75D5D">
+                                <i class="fas fa-fire"></i> Trending
+                            </span>
+                        </template>
+                        <template v-else-if="item.state_tag == 'pre-release'">
+                            <i class="fas fa-bolt" style="color: #FADC72"></i> {{ item.prerelease_count }}
+                            <span class="ml-4" style="color: #499fd3">Pre Release</span>
+                        </template>
+                    </div>
+                    <a  :href="`/#/product/${item.id}`"
                         :title="item.name + ' - product page'"
-                    ><h4>{{ item.name }}</h4></a>
-                    <p>{{ item.publisher }}</p>
-                    <p>{{ item.description }}</p>
+                    >
+                        <h4>{{ item.name }}</h4>
+                    </a>
+                    <div class="crowdfund-tag" v-if="item.crowdfund">
+                        Crowdfund Campaign
+                    </div>
+                    <p v-if="item.publisher">{{ item.publisher }}</p>
+                    <p v-if="item.description">{{ item.description }}</p>
                 </div>
                 <div class="footer">
-                    <div class="time" v-if="item.release_date && showDate">
-                        <i class="fas fa-calendar-alt"></i>
-                        {{ item.release_date }}
+                    <div class="d-flex flex-nowrap">
+                        <div class="time mr-3" v-if="item.release_date && showDate">
+                            <i class="fas fa-calendar-alt"></i>
+                            <c-tooltip :name="calculateSince(item.release_date)" position="center">
+                                <div class="text-center" style="white-space: nowrap">
+                                    <strong>Released</strong><br>
+                                    {{ formatDate(item.release_date) }}
+                                </div>
+                            </c-tooltip>
+                        </div>
+                        <div class="followers mr-3" v-if="item.followers">
+                            <i class="fas fa-eye"></i>
+                            <c-tooltip :name="item.followers" position="center">
+                                <div class="text-center" style="white-space: nowrap">
+                                    <strong>Followers</strong><br>
+                                    {{ item.followers }}
+                                </div>
+                            </c-tooltip>
+                        </div>
+                        <div class="players" v-if="item.players">
+                            <i class="fas fa-user"></i>
+                            <c-tooltip :name="item.players" position="center">
+                                <div class="text-center" style="white-space: nowrap">
+                                    <strong>Players</strong><br>
+                                    {{ item.players }}
+                                </div>
+                            </c-tooltip>
+                        </div>
                     </div>
                     <c-rating-stars
                         v-if="item.rating && showRating"
@@ -49,6 +92,7 @@
 </template>
 
 <script>
+    import moment from 'moment'
     export default {
         name: 'game-grid-description',
         props: {
@@ -93,7 +137,8 @@
         },
         components: {
             'c-tags': (resolve) => require(['@/ui/components/tags'], resolve),
-            'c-rating-stars': (resolve) => require(['@/ui/components/rating-stars'], resolve)
+            'c-rating-stars': (resolve) => require(['@/ui/components/rating-stars'], resolve),
+            'c-tooltip': (resolve) => require(['@/ui/components/tooltips'], resolve),
         },
         methods: {
             checkWidth(){
@@ -102,12 +147,29 @@
                     this.itemWidth = '100%'
                 else
                     this.itemWidth = 100/this.itemInRow + '%'
+            },
+            formatDate(date){
+                return moment(date).format('DD MMMM, YYYY');
+            },
+            calculateSince(date) {
+                // let tTime = new Date(date),
+                //     cTime = new Date(),
+                //     sinceMin = Math.round((cTime - tTime) / 60000),
+                //     since, sinceHr, sinceDay;
+                // if (sinceMin < 1440) {
+                //     sinceHr = Math.round(sinceMin / 60);
+                //     since = '' + sinceHr + 'h';
+                // }
+                // else {
+                //     sinceDay = Math.round(sinceMin / 1440);
+                //     since = sinceDay + 'd';
+                // }
+                return moment(date).fromNow();
             }
         },
         mounted() {
             this.$nextTick(function() {
                 window.addEventListener('resize', this.checkWidth);
-
                 //Init
                 this.checkWidth()
             })
@@ -168,6 +230,8 @@
         .img{
             width: 50%;
             position: relative;
+            border-radius: 8px;
+            overflow: hidden;
             img{
                 width: 100%;
                 height: 100%;
@@ -211,6 +275,30 @@
                     margin-right: 5px;
                 }
             }
+        }
+        .state-tag{
+            margin-bottom: 3px;
+            i{
+                font-size: 15px;
+                margin-right: 5px;
+            }
+        }
+        .crowdfund-tag{
+            color: #FADC72;
+        }
+        .crowdfund-icon{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            padding: 8px;
+            text-align: right;
+            font-size: 25px;
+            color: #FADC72;
+            background: #3D3E5D;
+            -webkit-clip-path: polygon(100% 0, 0 0, 100% 100%);
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
         }
         &.hovered{
             -webkit-transition: transform 200ms ease;

@@ -7,7 +7,14 @@
         "simulator_mode": false,
         "desktop_mode": null,
         "developer_mode": false,
+        "operating_system": null,
         "editor_mode": "viewing",
+        "current_ethereum_network": "local",
+        "ethereum": {
+            "local": {
+                "contracts": {}
+            }
+        },
         "connection": {
             "auto": true,
             "internet": false,
@@ -19,36 +26,6 @@
                 "message": "Launching..."
             }
         },
-        "ethereum": {
-            "ropsten": {
-                "contracts": {
-                    "Token": {},
-                    "TokenDelegate": {},
-                    "EternalStorage": {}
-                },
-                "user_from_address": null,
-                "user_to_address": null
-            },
-            "local": {
-                "contracts": {
-                    "Token": {
-                        "address": null,
-                        "created_at": null
-                    },
-                    "TokenDelegate": {
-                        "address": null,
-                        "created_at": null
-                    },
-                    "EternalStorage": {
-                        "address": null,
-                        "created_at": null
-                    }
-                },
-                "user_from_address": null,
-                "user_to_address": null
-            }
-        },
-        "current_ethereum_network": "local",
         "user_submitted_connection_messages": [
             {
                 "id": 1,
@@ -70,7 +47,7 @@
                 "id": 3,
                 "message": "Leeroooooy Jeeeenkiiiiins!",
                 "user": {
-                    "id": 2,
+                    "id": 1,
                     "name": "fr0stbyte"
                 }
             },
@@ -78,7 +55,7 @@
                 "id": 4,
                 "message": "Well, at least I have chicken!",
                 "user": {
-                    "id": 2,
+                    "id": 1,
                     "name": "fr0stbyte"
                 }
             },
@@ -86,7 +63,7 @@
                 "id": 6,
                 "message": "Your lack of faith is disturbing",
                 "user": {
-                    "id": 2,
+                    "id": 1,
                     "name": "fr0stbyte"
                 }
             },
@@ -94,7 +71,7 @@
                 "id": 7,
                 "message": "Many whelps. Handle it! Who was that!? That's a 50 DKP minus!!",
                 "user": {
-                    "id": 2,
+                    "id": 1,
                     "name": "fr0stbyte"
                 }
             },
@@ -102,7 +79,7 @@
                 "id": 8,
                 "message": "Maybe Elon was right about AI",
                 "user": {
-                    "id": 2,
+                    "id": 1,
                     "name": "fr0stbyte"
                 }
             },
@@ -110,7 +87,7 @@
                 "id": 9,
                 "message": "I can dance all day, try to hit me, come on, try to hit me",
                 "user": {
-                    "id": 2,
+                    "id": 1,
                     "name": "fr0stbyte"
                 }
             },
@@ -118,8 +95,24 @@
                 "id": 10,
                 "message": "My hands are shaking, but I'm still shooting, still getting headshots like BOOM headshot BOOM HEADSHOT!",
                 "user": {
-                    "id": 2,
+                    "id": 1,
                     "name": "fr0stbyte"
+                }
+            },
+            {
+                "id": 11,
+                "message": "Drinking too much will make chuck sick",
+                "user": {
+                    "id": 4,
+                    "name": "Spyder"
+                }
+            },
+            {
+                "id": 12,
+                "message": "The cake is a lie.",
+                "user": {
+                    "id": 5,
+                    "name": "JordoBrooks"
                 }
             }
         ],
@@ -211,88 +204,12 @@
         }
     },
     "funding": {
+        "current_ethereum_network": "local",
         "ethereum": {
-            "ropsten": {
-                "user_from_address": null,
-                "user_to_address": null,
-                "contracts": {}
-            },
             "local": {
-                "user_from_address": null,
-                "user_to_address": null,
-                "contracts": {
-                    "FundingStorage": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "DeveloperStorageAccess": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ContributionStorageAccess": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectStorageAccess": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "CurationStorageAccess": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "FundingVault": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "Developer": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "Contribution": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectBase": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectTimeline": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectTimelineHelpersLibrary": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectTimelineProposal": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectContributionTierHelpersLibrary": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectMilestoneCompletion": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectRegistrationHelpersLibrary": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "ProjectRegistration": {
-                        "created_at": null,
-                        "address": null
-                    },
-                    "Curation": {
-                        "created_at": null,
-                        "address": null
-                    }
-                }
+                "contracts": {}
             }
         },
-        "current_ethereum_network": "local",
         "default_project": {
             "name": "My Project Name",
             "system_tags": [],
@@ -389,25 +306,14 @@
         "projects": []
     },
     "marketplace": {
-        "ethereum": {
-            "ropsten": {
-                "contracts": {
-                    "Marketplace": {}
-                },
-                "user_from_address": null,
-                "user_to_address": null
-            },
-            "local": {
-                "contracts": {
-                    "Marketplace": {}
-                },
-                "user_from_address": null,
-                "user_to_address": null
-            }
-        },
         "current_ethereum_network": "local",
         "selected_product": null,
         "first_product": true,
+        "ethereum": {
+            "local": {
+                "contracts": {}
+            }
+        },
         "frontpage_product": {},
         "product_news": [],
         "new_products": [],
@@ -669,6 +575,7 @@
                     "text": "<h4>Danish carrot cake jelly-o bonbon chupa</h4><p>Cheesecake gummies cake dessert. Cake liquorice pudding cheesecake gingerbread danish. Danish jelly sweet roll gummi bears. Gummi bears jelly beans I love oat cake sweet I love cake pastry gingerbread. Marshmallow jujubes sesame snaps jelly beans donut.</p><p>Jelly lollipop topping sweet roll brownie. Marzipan sweet pudding oat cake bear claw biscuit soufflé dessert. Sweet roll I love I love sweet roll chocolate bar I love I love candy. Ice cream sesame snaps lemon drops I love cookie sweet roll. Jujubes macaroon sesame snaps biscuit tiramisu cheesecake.</p>"
                 }
             ]
-        }
+        },
+        "community": []
     }
 }

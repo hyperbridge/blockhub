@@ -39,6 +39,7 @@
                                     <div class="col-12">
                                         <c-button @click="exportAccountFile">Download Account File</c-button>
                                         <c-button @click="importAccountFile">Import Account File</c-button>
+                                        <c-button @click="deleteAccount">Delete Account</c-button>
                                     </div>
                                 </div>
                             </form>
@@ -171,6 +172,9 @@
             },
             importAccountFile() {
                 DesktopBridge.sendCommand('importAccountFileRequest')
+            },
+            deleteAccount() {
+                DesktopBridge.sendCommand('deleteAccountRequest')
             }
         }
     }

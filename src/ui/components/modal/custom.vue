@@ -32,7 +32,7 @@
 <script>
     export default {
         name: 'modal',
-        props:['id', 'title', 'modal_class']
+        props: ['id', 'title', 'modal_class']
     }
 </script>
 
@@ -56,6 +56,7 @@
         background: #3e3e5c;
         color: #fff;
         border-radius: 0 0 5px 5px;
+        max-width: 1000px;
     }
 
     @keyframes opacity {

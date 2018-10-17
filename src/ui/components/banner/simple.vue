@@ -27,7 +27,6 @@
         border-radius: 10px;
         overflow: hidden;
         position: relative;
-        padding: 25px;
         text-shadow: 0 0 2px rgba(0, 0, 0, .2);
         align-items: center;
         background-size: cover;
@@ -44,6 +43,7 @@
         text-decoration: none;
         display: flex;
         height: 100%;
+        padding: 25px;
     }
     .banner__text{
         display: flex;

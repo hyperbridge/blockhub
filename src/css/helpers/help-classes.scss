@@ -40,6 +40,7 @@
     color: $color-secondary;
 }
 
+.margin-auto { margin: 0 auto; }
 .margin-0{margin: 0px !important;}
 .margin-top-0{margin-top: 0px !important;}
 .margin-top-5{margin-top: 5px !important;}
@@ -277,6 +278,18 @@
     flex-wrap: wrap;
 }
 
+.flex-center-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-center-around {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
 .icon--active {
     text-shadow: 0 0 5px rgba(255,255,255, .7);
 }
@@ -296,4 +309,15 @@
 
 .positive {
     color: #41ba5d;
+}
+
+.half-width {
+    width: 50%;
+}
+.full-width {
+    width: 100%;
+}
+
+.text-align-center {
+    text-align: center;
 }

@@ -2,13 +2,21 @@
     <span class="c-tooltips">
         <span v-on:mouseover="showToolTip=true" v-on:mouseleave="showToolTip=false" v-if="type == 'hover'">{{ name }}</span>
         <span @click="clickHandler" v-if="type == 'click'">{{ name }}</span>
-        <div class="c-tooltips__content" v-if="showToolTip" :class="{ 'left-position' : position == 'left', 'right-position' : position == 'right', 'center-position' : position == 'center', 'light-style' : lightStyle == true }">
-            <div class="c-tooltips__content-default">
-                <h4 v-if="title">{{ title }}</h4>
-                <p v-if="title">{{ text }}</p>
-                <slot></slot>
+        <transition name="fade">
+            <div class="c-tooltips__content" v-if="showToolTip"
+                 :class="{
+                 'left-position' : position == 'left',
+                 'right-position' : position == 'right',
+                 'center-position' : position == 'center',
+                 'light-style' : lightStyle == true
+                 }"
+                 style="animation-duration: 0.25s"
+            >
+                <div class="c-tooltips__content-default">
+                    <slot></slot>
+                </div>
             </div>
-        </div>
+        </transition>
     </span>
 </template>
 
@@ -17,13 +25,6 @@
         name: 'tooltip',
         props: {
             name: {
-                type: String
-            },
-            title: {
-                type: String,
-                default: 'NOTES'
-            },
-            text: {
                 type: String
             },
             position: {
@@ -64,19 +65,21 @@
     }
     .c-tooltips__content{
         position: absolute;
-        width: 360px;
+        max-width: 360px;
+        min-width: 50px;
+        width: auto;
         border-radius: 5px;
         background: #1C2032;
         box-shadow: 0 0 5px rgba(0, 0, 0, .7);
-        padding: 15px 25px;
-        margin-top: 10px;
+        padding: 5px 10px;
+        top: -12px;
         text-align: left;
         z-index: 999;
         &:before{
             width: 16px;
             height: 16px;
             position: absolute;
-            top: -8px;
+            bottom: -8px;
             content: "";
             display: inline-block;
             background: #1C2032;
@@ -88,12 +91,14 @@
         }
         &.left-position{
             left: 0;
+            transform: translateY(-100%);
             &:before{
                 left: 15px;
             }
         }
         &.right-position{
             right: 0;
+            transform: translateY(-100%);
             &:before{
                 left: unset;
                 right: 15px;
@@ -101,7 +106,7 @@
         }
         &.center-position{
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate3d(-50%, -100%, 0);
             &:before{
                 left: calc( 50% - 8px );
             }

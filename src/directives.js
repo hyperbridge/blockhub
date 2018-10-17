@@ -48,10 +48,10 @@ Vue.directive('darklaunch', {
 Vue.directive('click-outside', {
     bind(el, binding, vnode) {
         el.clickOutsideEvent = event => {
-            console.log('el', el)
-            console.log('binding', binding)
-            console.log('vnode', vnode)
-            console.log(event)
+            // console.log('el', el)
+            // console.log('binding', binding)
+            // console.log('vnode', vnode)
+            // console.log(event)
 
             /* Add support for multiple data title // && el.target.data.title */
 

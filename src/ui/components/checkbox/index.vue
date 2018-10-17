@@ -5,6 +5,7 @@
             :id="id"
             :checked="checked"
             v-bind="$attrs"
+            :class="{'circle': style == 'circle', 'square': style == 'square' }"
             @change="$emit('change', $event.target.checked)"
         >
         <label :for="id">
@@ -28,7 +29,8 @@
                     return 'checkbox-' + parseInt(Math.random() * new Date().getUTCMilliseconds() * 5);
                 }
             },
-            checked: [Boolean, String]
+            checked: [Boolean, String],
+            style: 'circle'
         }
     }
 </script>
@@ -59,7 +61,6 @@
                     width: 15px;
                     height: 15px;
                     border: 1px solid #fff;
-                    border-radius: 100%;
                     position: absolute;
                     left: 0;
                     top: 3px;
@@ -71,12 +72,18 @@
                     display: block;
                     width: 7px;
                     height: 7px;
-                    border-radius: 100%;
                     position: absolute;
                     left: 4px;
                     top: 7px;
                     -webkit-transition: all .12s, border-color .08s;
                     transition: all .12s, border-color .08s;
+                }
+            }
+            &.circle {
+                & + label {
+                    &:before, &:after {
+                        border-radius: 100%;
+                    }
                 }
             }
             &:checked + label{

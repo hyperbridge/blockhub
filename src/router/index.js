@@ -4,7 +4,7 @@ import store from '../store'
 
 Vue.use(Router)
 
-const appVersion = '0.5.4'
+const appVersion = '0.6.1'
 
 const router = new Router({
     //mode: 'history',
@@ -134,6 +134,7 @@ const router = new Router({
         {
             path: '/store/invoice/:id',
             name: 'Store Invoice',
+            props: true,
             component: (resolve) => require(['@/ui/screens/store-invoice'], resolve),
             meta: {
                 auth: true
@@ -143,6 +144,12 @@ const router = new Router({
             path: '/collections',
             name: 'Collections',
             component: (resolve) => require(['@/ui/screens/collections'], resolve)
+        },
+        {
+            path: '/collection/:id',
+            name: 'Collection Page',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/collection'], resolve)
         },
         {
             path: '/account',
@@ -304,6 +311,14 @@ const router = new Router({
             }
         },
         {
+            path: '/settings/darklaunch',
+            name: 'Darklaunch Settings',
+            component: (resolve) => require(['@/ui/screens/settings-darklaunch'], resolve),
+            meta: {
+                auth: true
+            }
+        },
+        {
             path: '/settings/activity',
             name: 'Activity Settings',
             component: (resolve) => require(['@/ui/screens/settings-activity'], resolve),
@@ -378,14 +393,19 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/community'], resolve)
         },
         {
+            path: '/community/forums',
+            name: 'Community Forums',
+            component: (resolve) => require(['@/ui/screens/community-forums'], resolve)
+        },
+        {
             path: '/community/forum/:id',
-            name: 'Community forum',
+            name: 'Community Forum',
             props: true,
             component: (resolve) => require(['@/ui/screens/community-forum'], resolve)
         },
         {
             path: '/community/discussion/:id',
-            name: 'Community discussion',
+            name: 'Community Discussion',
             props: true,
             component: (resolve) => require(['@/ui/screens/community-discussion'], resolve)
         },
@@ -504,6 +524,7 @@ const router = new Router({
         {
             path: '/realm/:id',
             name: 'Realm',
+            props: true,
             component: (resolve) => require(['@/ui/screens/realm'], resolve)
         },
         {
@@ -515,12 +536,6 @@ const router = new Router({
             path: '/search',
             name: 'Search Page',
             component: (resolve) => require(['@/ui/screens/search'], resolve)
-        },
-        {
-            path: '/collection/:id',
-            name: 'Collection Page',
-            props: true,
-            component: (resolve) => require(['@/ui/screens/collection'], resolve)
         },
         {
             path: '/discussion/',
@@ -541,6 +556,7 @@ const router = new Router({
         {
             path: '/updates/:id',
             name: 'Update',
+            props: true,
             component: (resolve) => require(['@/ui/screens/updates'], resolve)
         },
         {
@@ -552,7 +568,43 @@ const router = new Router({
         {
             path: '/marketplace',
             name: 'Marketplace',
-            component: (resolve) => require(['@/ui/screens/marketplace'], resolve)
+            component: (resolve) => require(['@/ui/screens/marketplace'], resolve),
+            children: [
+                {
+                    path: '',
+                    component: (resolve) => require(['@/ui/screens/marketplace/home'], resolve),
+                },
+                {
+                    path: 'search',
+                    component: (resolve) => require(['@/ui/screens/marketplace/search'], resolve),
+                    children: [
+                        {
+                            path: '',
+                            component: (resolve) => require(['@/ui/screens/marketplace/search/home'], resolve),
+                        },
+                        {
+                            path: 'sniper',
+                            component: (resolve) => require(['@/ui/screens/marketplace/search/sniper'], resolve),
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            path: '/marketplace/inventory',
+            name: 'Marketplace Inventory',
+            component: (resolve) => require(['@/ui/screens/marketplace-inventory'], resolve),
+            children: [
+                {
+                    path: '',
+                    component: (resolve) => require(['@/ui/screens/marketplace-inventory/main'], resolve),
+                },
+                {
+                    path: 'compare',
+                    name: 'Compare Assets',
+                    component: (resolve) => require(['@/ui/screens/marketplace-inventory/compare'], resolve),
+                }
+            ]
         },
         {
             path: '/marketplace/trade',

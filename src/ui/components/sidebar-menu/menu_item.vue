@@ -27,7 +27,7 @@
         text-decoration: none;
         display: block;
         transition: all 200ms ease-in-out;
-        opacity: .7;
+        opacity: .9;
         &:hover {
             opacity: 1;
         }

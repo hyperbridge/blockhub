@@ -72,7 +72,7 @@
                         <c-card class="text-center">
                             <h4 class="h2">Community</h4>
                             <p>Engage with a community of passionate experts to get the answers you need</p>
-                            <c-button icon_hide class="width-auto margin-top-10" href="https://github.com/hyperbridge" target="_blank">Visit GitHub</c-button>
+                            <c-button icon_hide class="width-auto margin-top-10" href="https://github.com/hyperbridge/blockhub-desktop-client" target="_blank">Visit GitHub</c-button>
                         </c-card>
                     </div>
                     <div class="col-12 col-lg-6">
@@ -91,15 +91,11 @@
 <script>
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-article-item': (resolve) => require(['@/ui/components/help/article-item'], resolve),
             'c-topic-item': (resolve) => require(['@/ui/components/help/topic-item'], resolve),
             'c-list-item': (resolve) => require(['@/ui/components/help/simple-item'], resolve),
             'c-card': (resolve) => require(['@/ui/components/help/help-card.vue'], resolve),
         },
-        data: () => ({
-        }),
         methods:{
             showByTopic(data, id){
                 let results = [],

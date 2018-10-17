@@ -39,11 +39,13 @@
         align-items: center;
         font-size: 14px;
         color: #fff;
+        height: 30px;
+        margin-left: 10px;
         .additional-action__icon {
-            margin-left: 9px;
+            margin-left: 8px;
         }
         .additional-action__button {
-            margin-right: 8px;
+            margin: 0 0 0 5px;
         }
     }
 </style>

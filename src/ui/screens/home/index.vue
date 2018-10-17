@@ -20,7 +20,6 @@
 
                 <div class="row">
                     <div class="col-12 mb-4" v-if="!desktop_mode">
-                        <!--<c-download-block />-->
                         <c-welcome-box />
                     </div>
                     <div class="col-12 mb-4" v-if="['preview', 'staging', 'local'].includes(mode)">
@@ -32,6 +31,8 @@
                                     <c-button @click="toggleDesktopMode()">Desktop Mode is {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
                                     <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button>
                                     <c-button @click="toggleDeveloperMode()">Developer Mode is {{ developer_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="rotateOperatingSystem()">Operating System is {{ operating_system === 'mac' ? 'MAC' : (operating_system === 'windows' ? 'WINDOWS' : 'LINUX' ) }}</c-button>
+                                    <c-button @click="$store.state.application.account.is_verified = !$store.state.application.account.is_verified">Account is {{ $store.state.application.account.is_verified ? 'VERIFIED' : 'NOT VERIFIED' }}</c-button>
                                     <br /><br />
                                 </div>
                                 <div>
@@ -100,7 +101,7 @@ export default {
         'c-infinite-content': (resolve) => require(['@/ui/components/infinite-content'], resolve),
         'c-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
         'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve),
-        'c-welcome-box': (resolve) => require(['@/ui/components/welcome-box/type-1'], resolve)
+        'c-welcome-box': (resolve) => require(['@/ui/components/welcome-box'], resolve)
     },
     computed: {
         ...mapGetters({
@@ -115,16 +116,61 @@ export default {
                     data: this.$store.state.marketplace.frontpage_product
                 })
             }
-
-            result.push({
-                type: 'featured_product_gallery',
-                data: {
-                    title: 'Featured',
-                    ref: 'featured_product_gallery_sl',
-                    swiper: this.$refs.featured_product_gallery_sl && this.$refs.featured_product_gallery_sl.swiper,
-                    products: this.$store.state.marketplace.featured_products
-                }
-            })
+            if ( this.$store.state.marketplace.featured_products ) {
+                result.push({
+                    type: 'featured_product_gallery',
+                    data: {
+                        title: 'Featured',
+                        ref: 'featured_product_gallery_sl',
+                        swiper: this.$refs.featured_product_gallery_sl && this.$refs.featured_product_gallery_sl.swiper,
+                        products: this.$store.state.marketplace.featured_products,
+                        // slides:[
+                        //     {
+                        //         image:  {
+                        //             src:  this.$store.state.marketplace.featured_products[0].images.preview[0],
+                        //             position: 'center'
+                        //         },
+                        //         logo: {
+                        //             src:  this.$store.state.marketplace.featured_products[0].images.icon,
+                        //             position: 'left bottom',
+                        //             size: 'lg',
+                        //         },
+                        //         title:  this.$store.state.marketplace.featured_products[0].name,
+                        //         buttonText: 'Check it out',
+                        //         id:  this.$store.state.marketplace.featured_products[0].id
+                        //     },
+                        //     {
+                        //         image:  {
+                        //             src:  this.$store.state.marketplace.featured_products[1].images.preview[0],
+                        //             position: 'center'
+                        //         },
+                        //         logo: {
+                        //             src:  this.$store.state.marketplace.featured_products[1].images.icon,
+                        //             position: 'left bottom',
+                        //             size: 'lg',
+                        //         },
+                        //         title:  this.$store.state.marketplace.featured_products[1].name,
+                        //         buttonText: 'Check it out',
+                        //         id:  this.$store.state.marketplace.featured_products[1].id
+                        //     },
+                        //     {
+                        //         image:  {
+                        //             src:  this.$store.state.marketplace.featured_products[2].images.preview[0],
+                        //             position: 'center'
+                        //         },
+                        //         logo: {
+                        //             src:  this.$store.state.marketplace.featured_products[2].images.icon,
+                        //             position: 'left bottom',
+                        //             size: 'lg',
+                        //         },
+                        //         title:  this.$store.state.marketplace.featured_products[2].name,
+                        //         buttonText: 'Check it out',
+                        //         id:  this.$store.state.marketplace.featured_products[2].id
+                        //     }
+                        // ]
+                    }
+                })
+            }
 
             result.push({
                 type: 'collections_list',
@@ -132,14 +178,6 @@ export default {
                     collections_list: this.$store.state.marketplace.collections,
                     ref: 'collections_sl',
                     swiper: this.$refs.collections_sl && this.$refs.collections_sl.swiper,
-                    options: {
-                        slidesPerView: 3,
-                        spaceBetween: 10,
-                        pagination: {
-                            el: '.swiper-pagination',
-                            clickable: true
-                        }
-                    },
                 }
             })
 
@@ -154,7 +192,27 @@ export default {
 
             result.push({
                 type: 'banners',
-                data: {}
+                data: {
+                    banners: [
+                        {
+                            type: 3,
+                            class: 'col-12 col-md-8',
+                            image: '/static/img/banners/banner-3.png',
+                            title: 'Item Marketplace',
+                            subtitle: 'All-in-one spot for games assets',
+                            buttonText: 'GAME ON',
+                            link: '/#/marketplace'
+                        },
+                        {
+                            type: 4,
+                            class: 'col-12 col-md-4',
+                            image: '/static/img/banners/banner-4.png',
+                            title: 'Top Collections',
+                            subtitle: 'Our community has curated the best ones for you',
+                            link: '/#/collections'
+                        },
+                    ]
+                }
             })
 
             result.push({
@@ -249,19 +307,22 @@ export default {
         //     return this.$store.state.marketplace.products
         // },
         mode() {
-            return this.$store.state.application.mode;
+            return this.$store.state.application.mode
         },
         signed_in() {
-            return this.$store.state.application.signed_in;
+            return this.$store.state.application.signed_in
         },
         simulator_mode() {
-            return this.$store.state.application.simulator_mode;
+            return this.$store.state.application.simulator_mode
         },
         desktop_mode() {
-            return this.$store.state.application.desktop_mode;
+            return this.$store.state.application.desktop_mode
         },
         developer_mode() {
-            return this.$store.state.application.developer_mode;
+            return this.$store.state.application.developer_mode
+        },
+        operating_system() {
+            return this.$store.state.application.operating_system
         }
     },
     methods: {
@@ -276,6 +337,15 @@ export default {
         },
         toggleSimulator() {
             this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulator_mode)
+        },
+        rotateOperatingSystem() {
+            if (this.$store.state.application.operating_system === 'mac') {
+                this.$store.state.application.operating_system = 'windows'
+            } else if (this.$store.state.application.operating_system === 'windows') {
+                this.$store.state.application.operating_system = 'linux'
+            } else {
+                this.$store.state.application.operating_system = 'mac'
+            }
         },
         importSeedData() {
             window.BlockHub.importSeedData()

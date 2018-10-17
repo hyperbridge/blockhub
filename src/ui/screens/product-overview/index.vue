@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="product" :showRightPanel="false">
+    <c-layout navigationKey="product" :showRightPanel="false" navigationTitle="GAME OVERVIEW">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
@@ -66,7 +66,7 @@
                                 <router-link :to="`/product/${product.id}/projects`" class="nav-link">Crowdfunding</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link :to="`/product/${product.id}/assets`" class="nav-link">Assets</router-link>
+                                <router-link :to="`/product/${product.id}/assets`" class="nav-link">Inventory</router-link>
                             </li>
                         </ul>
 
@@ -219,7 +219,7 @@
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-game-plan': (resolve) => require(['@/ui/components/game-plans/plan'], resolve),
             'c-screen-gallery': (resolve) => require(['@/ui/components/screen-gallery/gallery'], resolve),
-            'c-promotion-box': (resolve) => require(['@/ui/components/promotion-box'], resolve),
+            'c-promotion-box': (resolve) => require(['@/ui/components/promotion-box/item'], resolve),
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-rating-block': (resolve) => require(['@/ui/components/rating-block'], resolve),
             'c-purchase-block': (resolve) => require(['@/ui/components/purchase-block'], resolve),
