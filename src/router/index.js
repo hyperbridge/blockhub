@@ -390,13 +390,26 @@ const router = new Router({
         {
             path: '/community',
             name: 'Community',
-            component: (resolve) => require(['@/ui/screens/community'], resolve)
+            component: (resolve) => require(['@/ui/screens/community'], resolve),
+            meta: {
+                breadcrumb: [
+                    { name: 'Home', link: '/' },
+                    { name: 'Community', link: '' }
+                ]
+            }
         },
         {
             path: '/community/forum/:id',
             name: 'Community forum',
             props: true,
-            component: (resolve) => require(['@/ui/screens/community-forum'], resolve)
+            component: (resolve) => require(['@/ui/screens/community-forum'], resolve),
+            meta: {
+                breadcrumb: [
+                    { name: 'Home', link: '/' },
+                    { name: 'Community', link: '/community' },
+                    { name: 'Community forum', link: '' }
+                ]
+            }
         },
         {
             path: '/community/discussion/:id',

@@ -40,7 +40,7 @@
             </div>
             
             <!-- PAGE ASIDE PANEL -->
-            <div class="page-aside invert left-sidebar" id="page-aside" v-if="showLeftPanel">
+            <div class="page-aside invert left-sidebar" style="max-width: 250px" id="page-aside" v-if="showLeftPanel">
                 <!--<transition name="slideLeft" v-if="initialized">-->
                 <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
                     <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}-navigation`" ref="scroll_sidebar_content" :title="navigationTitle"></component>
@@ -60,13 +60,20 @@
                 <!--</transition>-->
             </div>
             <!-- //END PAGE ASIDE PANEL -->
+            <!--<div class="">-->
+            <div class="content" id="content" v-if="is_connected">
+                <div class="margin-left-20 d-flex">
+                    <c-breadcrumb :links="breadcrumbLinks" v-if="breadcrumbLinks && defaultBreadcrumb" ref="breadcrumb" />
+                    <c-breadcrumb-2 v-if="!defaultBreadcrumb" ref="breadcrumb" />
+                </div>
+                <slot />
+            </div>
+            <!--</div>-->
 
-            <slot v-if="is_connected"></slot>
-
-            <div class="content" id="content" v-if="!is_connected"></div>
+            <!--<div class="content" id="content" v-if="!is_connected"></div>-->
 
             <!-- SIDEPANEL -->
-            <transition name="slideRight" v-if="initialized && showRightPanel">
+            <transition name="slideRight" style="max-width: 250px" v-if="initialized && showRightPanel">
                 <c-sidepanel>
                     <c-swiper :options="panelOption" ref="mySwiper">
                     <c-slide v-if="signed_in">
@@ -315,6 +322,13 @@
                 type: String,
                 default: 'BlockHub',
                 required: false
+            },
+            breadcrumbLinks:{
+                type: Array
+            },
+            defaultBreadcrumb: {
+                type: Boolean,
+                default: true
             }
         },
         mixins: [debouncer],
