@@ -1,8 +1,18 @@
 <template>
     <div>
-        <div class="margin-bottom-40">
-            <c-asset-store-card :asset="assets[0]"/>
-        </div>
+        <c-carousel-3d
+            :items="assets"
+            :limitTo="3"
+            class="margin-bottom-40"
+        >
+            <template slot-scope="props">
+                <c-asset-store-card
+                    v-for="(item, index) in props.items"
+                    :key="index"
+                    :asset="item"
+                />
+            </template>
+        </c-carousel-3d>
         <c-block title="Recently sold" class="margin-bottom-40">
             <c-asset-list :assets="recentlySold" :transition="true"/>
         </c-block>
@@ -25,6 +35,7 @@ export default {
         'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
         'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
         'c-asset-store-card': (resolve) => require(['@/ui/components/asset/store-card'], resolve),
+        'c-carousel-3d': (resolve) => require(['@/ui/components/carousel-3d'], resolve),
     },
     data() {
         return {

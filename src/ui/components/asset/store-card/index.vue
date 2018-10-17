@@ -65,7 +65,7 @@ export default {
         .store-card__price {
             background: rgba(1,1,1,.13);
             padding: 6px;
-            font-size: 30px;
+            font-size: 25px;
             .price__dollar-sign {
                 font-size: 12px;
             }
