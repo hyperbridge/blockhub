@@ -1,47 +1,66 @@
 <template>
     <div class="main-banner text-white">
-        <div class="main-banner__content">
-            <div class="image-bg" :style="bannerImg" v-if="image" />
-            <video autoplay playsinline loop muted v-if="video" class="video-bg">
-                <source :src="video.src" type="video/mp4" />
-            </video>
-            <div class="main-banner__content--logo" :class="[ logo.size ? 'logo-size-' + logo.size : 'logo-size-md', logo.position ]" :style="logoPosition">
-                <c-img :src="logo.src" :alt="title" />
-            </div>
-        </div>
-        <div class="main-banner__footer">
-            <h4>
-                {{ title }}
-            </h4>
-            <c-button :href="href">{{ buttonText }}</c-button>
-        </div>
+        <c-swiper :options="sliderOptions">
+            <c-slide v-for="(slide, index) in slides" :key="index">
+                <div class="main-banner__content">
+                    <div class="image-bg" :style="bannerImg(slide.image)"></div>
+                    <div class="main-banner__content--logo" :class="[ slide.logo['size'] ? 'logo-size-' + slide.logo['size'] : 'logo-size-md', slide.logo['position'] ]" :style="logoPosition(slide.logo)">
+                        <c-img :src="slide.logo.src" :alt="slide.title" />
+                    </div>
+                </div>
+                <div class="main-banner__footer">
+                    <h4>
+                        {{ slide.title }}
+                    </h4>
+                    <div class="main-banner__footer-actions">
+                        <div class="slider-dots" ref="sliderDots" v-if="slides.length > 1">
+                            <div class="main-banner-swiper-pagination swiper-pagination" slot="pagination"></div>
+                        </div>
+                        <c-button status="success" size="md" icon_hide :href="`/#/product/${slide.id}`">
+                            {{ slide.buttonText }}
+                        </c-button>
+                    </div>
+                </div>
+            </c-slide>
+        </c-swiper>
     </div>
 </template>
 
 <script>
+    import 'swiper/dist/css/swiper.css'
+
+    import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
     export default {
         name: 'main-banner',
         props: {
-            title: String,
-            buttonText: String,
-            href: String,
-            image: Object,
-            logo: Object,
-            video: Object
+            slides: Array
         },
         components:{
             'c-button': (resolve) => require(['@/ui/components/buttons'], resolve),
+            'c-swiper': swiper,
+            'c-slide': swiperSlide,
         },
-        computed:{
-            bannerImg(){
-                let img = this.image;
+        data(){
+            return{
+                sliderOptions: {
+                    slidesPerView: 1,
+                    spaceBetween: 15,
+                    pagination: {
+                        el: '.main-banner-swiper-pagination',
+                        clickable: true
+                    }
+                },
+            }
+        },
+        methods:{
+            bannerImg(image){
                 return{
-                    'background-image': 'url(' + img.src + ')',
-                    'background-position' : img.position
+                    'background-image': 'url(' + image.src + ')',
+                    'background-position' : image.position
                 }
             },
-            logoPosition(){
-                let logo = this.logo;
+            logoPosition(logo){
                 switch(logo.position){
                     // Top position
                     case 'left top':
@@ -152,6 +171,13 @@
             font-size: 22px;
             font-weight: bold;
             margin: 0;
+        }
+    }
+    .main-banner__footer-actions{
+        display: flex;
+        align-items: center;
+        .slider-dots{
+            margin: 0 25px 0 0;
         }
     }
 </style>

@@ -4,19 +4,44 @@
             <h3>{{ title }}</h3>
             <div>{{ description }}</div>
             <div class="slider-dots">
-                <div class="swiper-pagination" slot="pagination"></div>
+                <div class="collection-swiper-pagination swiper-pagination" ref="sliderDots" slot="pagination"></div>
             </div>
         </div>
         <div class="collection-list__container">
-            <slot />
+            <c-swiper :options="options" class="padding-10">
+                <c-slide v-for="(collection, index) in collections" :key="index">
+                    <c-collection-item :item="collection" />
+                </c-slide>
+            </c-swiper>
         </div>
     </div>
 </template>
 
 <script>
+    import 'swiper/dist/css/swiper.css'
+
+    import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
     export default {
         name: 'collection-list',
-        props:['title', 'description']
+        props:['title', 'description', 'collections'],
+        components:{
+            'c-swiper': swiper,
+            'c-slide': swiperSlide,
+            'c-collection-item': (resolve) => require(['@/ui/components/collection/item'], resolve),
+        },
+        data(){
+            return{
+                options: {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                    pagination: {
+                        el: '.collection-swiper-pagination',
+                        clickable: true
+                    }
+                }
+            }
+        }
     }
 </script>
 
