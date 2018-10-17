@@ -60,14 +60,11 @@
                 <!--</transition>-->
             </div>
             <!-- //END PAGE ASIDE PANEL -->
-            <!--<div class="">-->
-            <div class="content" id="content" v-if="is_connected">
+            
+            <div class="content" id="content">
                 <c-breadcrumb :links="breadcrumbLinks" ref="breadcrumb" style="padding-left: 20px; padding-top: 20px;" />
-                <slot />
+                <slot v-if="is_connected" />
             </div>
-            <!--</div>-->
-
-            <!--<div class="content" id="content" v-if="!is_connected"></div>-->
 
             <!-- SIDEPANEL -->
             <transition name="slideRight" style="max-width: 250px" v-if="initialized && showRightPanel">
