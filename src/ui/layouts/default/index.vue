@@ -765,4 +765,29 @@
             max-width: 100%;
         }
     }
+
+
+
+
+    @media (max-width: 575px) {
+
+    }
+
+    @media (max-width: 768px) {
+        #page-aside, #page-sidepanel {
+            display: none;
+        }
+
+        #content {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 991px) {
+
+    }
+
+    @media (max-width: 1200px) {
+        
+    }
 </style>
