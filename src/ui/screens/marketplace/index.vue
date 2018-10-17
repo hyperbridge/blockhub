@@ -12,7 +12,9 @@
                             <!-- <li><router-link :to="'/marketplace'">Home</router-link></li>
                             <li><router-link :to="'/marketplace/search'">Search</router-link></li> -->
                         </ul>
-                        <router-view/>
+                        <transition name="page">
+                            <router-view/>
+                        </transition>
                     </div>
                 </div>
             </div>
@@ -46,6 +48,20 @@
 </script>
 
 <style lang="scss" scoped>
+    .page-enter-active {
+        transition: opacity .6s, transform .6s ease;
+    }
+    .page-leave-active {
+        transition: opacity .3s, transform .3s ease;
+    }
+    .page-enter, .page-leave-to {
+        opacity: 0;
+        transform: translateY(5vh);
+    }
+    .page-leave-active {
+        position: absolute;
+        width: calc(100% - 30px);
+    }
 </style>
 
 
