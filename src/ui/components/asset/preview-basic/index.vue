@@ -1,7 +1,12 @@
 <template>
-    <div class="asset-preview-basic" :class="size">
+    <div
+        class="asset-preview-basic"
+        :class="[{ 'horizontal': horizontal }, size]"
+    >
         <h5 class="asset-preview-basic__text">
-            {{ asset.name }}
+            <router-link :to="`/asset/${asset.id}`">
+                {{ asset.name }}
+            </router-link>
         </h5>
         <c-img
             class="asset-preview-basic__image"
@@ -21,6 +26,7 @@
                 type: Object,
                 required: true
             },
+            horizontal: Boolean,
             size: {
                 type: String,
                 default: 'lg',
@@ -44,7 +50,7 @@
         }
         .asset-preview-basic__text {
             text-align: center;
-            margin: 5px 0;
+            margin: 5px;
         }
         &.asset-preview-basic--row {
             flex-direction: row;
@@ -61,11 +67,30 @@
                 font-size: 12px;
             }
         }
-        &.md {}
+        &.md {
+            .asset-preview-basic__image {
+                width: 60px;
+                height: 60px;
+                min-width: 60px;
+                min-height: 60px;
+            }
+            .asset-preview-basic__text {
+                font-size: 13px;
+            }
+        }
         &.lg {
             .asset-preview-basic__image {
                 width: 140px;
                 height: 140px;
+            }
+        }
+        &.horizontal {
+            flex-direction: row;
+            .asset-preview-basic__image {
+                order: -1;
+            }
+            .asset-preview-basic__text {
+                margin: 10px;
             }
         }
     }

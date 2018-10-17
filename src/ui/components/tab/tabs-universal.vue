@@ -32,6 +32,7 @@
         name: 'tabs-universal',
         props: {
             tabNames: Array,
+            setActiveTab: [Number, String],
             tabText: String,
             active_tab_prop: [Number, String],
             lockedStep: Number,
@@ -65,7 +66,12 @@
                       }));
             },
             active_tab() {
-                return this.active_tab_prop != null ? this.active_tab_prop : this.active_tab_data;
+                const { setActiveTab, active_tab_prop, active_tab_data } = this;
+                return setActiveTab == null
+                    ? active_tab_prop == null
+                        ? active_tab_data
+                        : active_tab_prop
+                    : setActiveTab;
             },
             activeStyle() {
                 return this.styled ? '--styled' : '--default';

@@ -237,7 +237,6 @@
 </template>
 
 <script>
-
     export default {
         props: ['id'],
         components: {
@@ -256,7 +255,8 @@
                 totalOwned: 3,
                 show_popup: false,
                 tmpItem: {},
-                sales: false //ToDo
+                sales: false, //ToDo
+                assetId: this.id
             }
         },
         methods: {
