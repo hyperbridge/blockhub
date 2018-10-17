@@ -5,6 +5,8 @@ import transactions from '@/db/seed/asset-transactions';
 import assetsData from '@/db/seed/assets';
 import collectionsData from '@/db/seed/collections';
 
+const rand = () => Math.floor(Math.random() * 100);
+
 const assets = {
     namespaced: true,
     state: {
@@ -31,8 +33,8 @@ const assets = {
         addAsset(state, { prop = 'assets', data }) {
             state[prop] = { ...state[prop], [data.id]: data };
         },
-        create(state, { prop = 'assets', data }) {
-            state[prop] = { ...state[prop], [data.id]: data };
+        create(state, { prop = 'assets', data, id }) {
+            state[prop] = { ...state[prop], [id]: data };
         },
         updateAsset(state, { prop = 'assets', id, data }) {
             // Payload could be written in format => { 'id_28313': { ...payload data } }
@@ -87,7 +89,10 @@ const assets = {
         }
     },
     actions: {
-
+        create({ commit }, payload) {
+            const id = rand();
+            commit('create', { ...payload, id, data: { ...payload.data, id }});
+        }
     },
     getters: {
         assets: ({ assets }, getters, { marketplace: { collections }}) => Object.values(assets)

@@ -1,6 +1,14 @@
 <template>
     <div>
         <h2>Create new asset auction sniper</h2>
+        <template v-if="errors.length">
+            <p>Correct following error(s):</p>
+            <ul>
+                <li v-for="(error, index) in errors" :key="index">
+                    {{ error }}
+                </li>
+            </ul>
+        </template>
 
         <c-tabs tabText="Step" class="margin-bottom-100" :setActiveTab="activeStep" @click="createSniper">
 
@@ -118,31 +126,34 @@
                 },
                 edited: {},
                 activeStep: 1,
-                invalidVals: []
+                errors: []
             }
         },
         methods: {
             createSniper(tabId) {
                 const { activeStep } = this;
-                const { priceMin, priceMax, expDate } = this.newSniper;
-                const invalidVals = Object.values(this.newSniper).filter(val => !val);
+                const { asset, ...rest } = this.newSniper;
+                this.errors = [];
+                const push = msg => this.errors.push(msg);
 
                 if (activeStep === 1) {
-
+                    if (asset == null) push('Select an asset first.');
+                    else this.activeStep = 2;
                 } else {
-                    if (tabId < activeStep) {
+                    if (tabId && tabId < activeStep) {
                         this.activeStep = tabId;
+                    } else {
+                        if (Object.values(rest).some(val => !val)) {
+                            const { priceMin, priceMax, expDate } = rest;
+                            if (!priceMin) push('Invalid minimum price range.');
+                            if (!priceMax) push('Invalid maximum price range.');
+                            if (!expDate) push('Invalid expiration date.');
+                        } else {
+                            this.$store.dispatch('assets/create', { prop: 'snipers', data: { ...this.newSniper }});
+                            this.$snotify.success('Auction sniper has been successfully created', 'Created');
+                            this.cancelCreation();
+                        }
                     }
-                }
-
-                if (invalidVals.length) {
-
-                } else {
-                    const newSniper = {
-                        id: Math.floor(Math.random() * 100),
-                        ...this.newSniper
-                    };
-                    this.$store.dispatch('assets/create', newSniper);
                 }
             },
             setEdited(sniper) {

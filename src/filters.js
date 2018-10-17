@@ -39,10 +39,6 @@ Vue.filter('statusIcon', status => {
 
 Vue.filter('upperFirstChar', (value) => value.charAt(0).toUpperCase() + value.substring(1, value.length));
 
-Vue.filter('staticImg', value => `/static/img/products/${value}`);
-
-Vue.filter('staticVideo', value => `/static/img/products/${value}`);
-
 Vue.filter('highlightPhrase', (value, phrase, tag = 'strong') => {
     if (!phrase) return value;
 
