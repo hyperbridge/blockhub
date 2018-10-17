@@ -38,6 +38,12 @@
                     pagination: {
                         el: '.collection-swiper-pagination',
                         clickable: true
+                    },
+                    breakpoints: {
+                        768: {
+                            slidesPerView: 1,
+                            spaceBetween: 0
+                        },
                     }
                 }
             }
@@ -69,6 +75,17 @@
     }
     .collection-list__container{
         margin: 0px -10px -10px;
+    }
+    @media (max-width: 768px) {
+        .collection-list__header{
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+            text-align: center;
+            .slider-dots{
+                margin: 10px 0 0;
+            }
+        }
     }
 </style>
 

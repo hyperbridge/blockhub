@@ -78,4 +78,9 @@
             margin: 0;
         }
     }
+    @media (max-width: 768px) {
+        .featured-assets__item-container{
+            width: 100%!important;
+        }
+    }
 </style>

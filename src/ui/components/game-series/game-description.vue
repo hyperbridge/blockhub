@@ -140,6 +140,23 @@
             }
         }
     }
+    @media (max-width: 768px) {
+        .game-description{
+            flex-direction: column;
+        }
+        .game-description__carousel{
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .game-description__info{
+            width: 100%;
+        }
+        .btn-price{
+            span{
+                padding: 10px;
+            }
+        }
+    }
 </style>
 
 

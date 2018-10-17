@@ -52,7 +52,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-4 col-xl-3 margin-bottom-15">
+                    <div class="col-12 d-none d-lg-block col-lg-4 col-xl-3 margin-bottom-15">
                         <div class="asset-head__company-logo">
                             <c-img src="https://i.imgur.com/BngHC98.png" class="img-fluid"/>
                         </div>

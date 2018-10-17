@@ -114,7 +114,7 @@ export default {
                     data: this.$store.state.marketplace.frontpage_product
                 })
             }
-            if ( this.$store.state.marketplace.featured_products ) {
+            if ( this.$store.state.marketplace.featured_products.length ) {
                 result.push({
                     type: 'featured_product_gallery',
                     data: {
@@ -122,50 +122,50 @@ export default {
                         ref: 'featured_product_gallery_sl',
                         swiper: this.$refs.featured_product_gallery_sl && this.$refs.featured_product_gallery_sl.swiper,
                         products: this.$store.state.marketplace.featured_products,
-                        // slides:[
-                        //     {
-                        //         image:  {
-                        //             src:  this.$store.state.marketplace.featured_products[0].images.preview[0],
-                        //             position: 'center'
-                        //         },
-                        //         logo: {
-                        //             src:  this.$store.state.marketplace.featured_products[0].images.icon,
-                        //             position: 'left bottom',
-                        //             size: 'lg',
-                        //         },
-                        //         title:  this.$store.state.marketplace.featured_products[0].name,
-                        //         buttonText: 'Check it out',
-                        //         id:  this.$store.state.marketplace.featured_products[0].id
-                        //     },
-                        //     {
-                        //         image:  {
-                        //             src:  this.$store.state.marketplace.featured_products[1].images.preview[0],
-                        //             position: 'center'
-                        //         },
-                        //         logo: {
-                        //             src:  this.$store.state.marketplace.featured_products[1].images.icon,
-                        //             position: 'left bottom',
-                        //             size: 'lg',
-                        //         },
-                        //         title:  this.$store.state.marketplace.featured_products[1].name,
-                        //         buttonText: 'Check it out',
-                        //         id:  this.$store.state.marketplace.featured_products[1].id
-                        //     },
-                        //     {
-                        //         image:  {
-                        //             src:  this.$store.state.marketplace.featured_products[2].images.preview[0],
-                        //             position: 'center'
-                        //         },
-                        //         logo: {
-                        //             src:  this.$store.state.marketplace.featured_products[2].images.icon,
-                        //             position: 'left bottom',
-                        //             size: 'lg',
-                        //         },
-                        //         title:  this.$store.state.marketplace.featured_products[2].name,
-                        //         buttonText: 'Check it out',
-                        //         id:  this.$store.state.marketplace.featured_products[2].id
-                        //     }
-                        // ]
+                        slides:[
+                            {
+                                image:  {
+                                    src:  this.$store.state.marketplace.featured_products[0].images.preview[0],
+                                    position: 'center'
+                                },
+                                logo: {
+                                    src:  this.$store.state.marketplace.featured_products[0].images.icon,
+                                    position: 'left bottom',
+                                    size: 'lg',
+                                },
+                                title:  this.$store.state.marketplace.featured_products[0].name,
+                                buttonText: 'Check it out',
+                                id:  this.$store.state.marketplace.featured_products[0].id
+                            },
+                            {
+                                image:  {
+                                    src:  this.$store.state.marketplace.featured_products[1].images.preview[0],
+                                    position: 'center'
+                                },
+                                logo: {
+                                    src:  this.$store.state.marketplace.featured_products[1].images.icon,
+                                    position: 'left bottom',
+                                    size: 'lg',
+                                },
+                                title:  this.$store.state.marketplace.featured_products[1].name,
+                                buttonText: 'Check it out',
+                                id:  this.$store.state.marketplace.featured_products[1].id
+                            },
+                            {
+                                image:  {
+                                    src:  this.$store.state.marketplace.featured_products[2].images.preview[0],
+                                    position: 'center'
+                                },
+                                logo: {
+                                    src:  this.$store.state.marketplace.featured_products[2].images.icon,
+                                    position: 'left bottom',
+                                    size: 'lg',
+                                },
+                                title:  this.$store.state.marketplace.featured_products[2].name,
+                                buttonText: 'Check it out',
+                                id:  this.$store.state.marketplace.featured_products[2].id
+                            }
+                        ]
                     }
                 })
             }
@@ -194,7 +194,7 @@ export default {
                     banners: [
                         {
                             type: 3,
-                            class: 'col-12 col-md-8',
+                            class: 'col-12 col-md-7 col-lg-8',
                             image: '/static/img/banners/banner-3.png',
                             title: 'Item Marketplace',
                             subtitle: 'All-in-one spot for games assets',
@@ -203,7 +203,7 @@ export default {
                         },
                         {
                             type: 4,
-                            class: 'col-12 col-md-4',
+                            class: 'col-12 col-md-5 col-lg-7',
                             image: '/static/img/banners/banner-4.png',
                             title: 'Top Collections',
                             subtitle: 'Our community has curated the best ones for you',
@@ -242,7 +242,13 @@ export default {
                     swiper: this.$refs.curator_reviews_sl && this.$refs.curator_reviews_sl.swiper,
                     options: {
                         slidesPerView: 3,
-                        spaceBetween: 0
+                        spaceBetween: 0,
+                        breakpoints: {
+                            768: {
+                                slidesPerView: 1,
+                                spaceBetween: 0
+                            },
+                        }
                     },
                     reviews: this.$store.state.marketplace.curator_reviews
                 }
@@ -283,6 +289,12 @@ export default {
                     options: {
                         slidesPerView: 3,
                         spaceBetween: 15,
+                        breakpoints: {
+                            768: {
+                                slidesPerView: 1,
+                                spaceBetween: 0
+                            },
+                        }
                     },
                     projects: this.$store.state.funding.trending_projects
                 }
