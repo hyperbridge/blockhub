@@ -40,7 +40,7 @@
             </div>
             
             <!-- PAGE ASIDE PANEL -->
-            <div class="page-aside invert left-sidebar" id="page-aside" v-if="showLeftPanel">
+            <div class="page-aside invert left-sidebar" style="max-width: 250px" id="page-aside" v-if="showLeftPanel">
                 <!--<transition name="slideLeft" v-if="initialized">-->
                 <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
                     <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}-navigation`" ref="scroll_sidebar_content" :title="navigationTitle"></component>
@@ -60,13 +60,19 @@
                 <!--</transition>-->
             </div>
             <!-- //END PAGE ASIDE PANEL -->
+            <!--<div class="">-->
+            <div class="content" id="content" v-if="is_connected">
+                <div class="margin-left-20 d-flex">
+                    <c-breadcrumb :links="breadcrumbLinks" ref="breadcrumb" />
+                </div>
+                <slot />
+            </div>
+            <!--</div>-->
 
-            <slot v-if="is_connected"></slot>
-
-            <div class="content" id="content" v-if="!is_connected"></div>
+            <!--<div class="content" id="content" v-if="!is_connected"></div>-->
 
             <!-- SIDEPANEL -->
-            <transition name="slideRight" v-if="initialized && showRightPanel">
+            <transition name="slideRight" style="max-width: 250px" v-if="initialized && showRightPanel">
                 <c-sidepanel>
                     <c-swiper :options="panelOption" ref="mySwiper">
                     <c-slide v-if="signed_in">
@@ -315,6 +321,9 @@
                 type: String,
                 default: 'BlockHub',
                 required: false
+            },
+            breadcrumbLinks: {
+                type: Array
             }
         },
         mixins: [debouncer],
@@ -385,8 +394,8 @@
             signed_in() {
                 return this.$store.state.application.signed_in
             },
-            current_identity()  {
-                return this.$store.state.application.account && this.$store.state.application.account.current_identity
+            current_identity() {
+                return this.$store.state.application.account && this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
             },
             messages() {
                 return this.current_identity && this.current_identity.messages
@@ -764,5 +773,30 @@
             flex: 0 0 100%;
             max-width: 100%;
         }
+    }
+
+
+
+
+    @media (max-width: 575px) {
+
+    }
+
+    @media (max-width: 768px) {
+        #page-aside, #page-sidepanel {
+            display: none;
+        }
+
+        #content {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 991px) {
+
+    }
+
+    @media (max-width: 1200px) {
+        
     }
 </style>

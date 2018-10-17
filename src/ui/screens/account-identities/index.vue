@@ -7,26 +7,27 @@
                         <c-breadcrumb :links="[
                             { to: { path: '/' }, title: 'Home' },
                             { to: { path: '/account' }, title: 'Account' },
-                            { to: { path: '/account/identities' }, title: 'Identities' }
+                            { to: { path: '/account/identities' }, title: 'Profiles' }
                         ]" />
-                        <c-heading-bar name="My identity" :showArrows="false" :showBackground="false"/>
+                        <c-heading-bar name="My Profile" :showArrows="false" :showBackground="false"/>
                     </div>
                     <div class="col-6 margin-bottom-40 my_identity">
                         <c-user-card
                             v-if="defaultIdentity"
                             :user="defaultIdentity"
                             @updateIdentity="(prop, val) => defaultIdentity[prop] = val"
+                            :previewMode="true"
                         />
                         <p v-else-if="!identities.length">
-                            You don't have any identities yet.
+                            You don't have any profiles yet.
                         </p>
                         <p v-else>
-                            You don't have a default identity.
+                            You don't have a default profile.
                         </p>
                     </div>
                     <div class="col-6" v-if="defaultIdentity">
                         <div class="verification-blk">
-                            <h3>Verify Your Identity</h3>
+                            <h3>Verify Your Profile</h3>
                             <div class="status" v-if="defaultIdentity.is_verified">
                                 <i class="fas fa-check"></i>
                                 Verified
@@ -49,14 +50,13 @@
                             status="info"
                             icon="user-plus"
                             @click="createIdentity"
-                        > New Identity</c-button>
+                        > New Profile</c-button>
                     </div>
 
                     <div class="col-12">
                         <c-heading-bar name="All Identities" :showArrows="false" :showBackground="false">
                             <div class="additional-action margin-left-20" slot="additional-action">
-                                <span class="text">Name</span>
-                                <c-icon name="user"/>
+                                <span class="text">Name <c-icon name="user" /></span>
                                 <c-button-arrows
                                     :activeUp="sortAsc"
                                     @clickUp="sortAsc = true"
@@ -64,9 +64,8 @@
                                 />
                             </div>
                             <div class="additional-action margin-left-20" slot="additional-action" v-darklaunch="'REPUTATION'">
-                                <span class="text">Rating</span>
-                                <c-icon name="trophy"/>
-                                <c-button-arrows/>
+                                <span class="text">Rating <c-icon name="trophy" /></span>
+                                <c-button-arrows />
                             </div>
                             <div class="additional-action margin-left-20 padding-5" slot="additional-action">
                                 <c-input-searcher
@@ -92,7 +91,7 @@
                             <c-user-card
                                 :user="identity"
                                 :previewMode="!identity.edit"
-                                :class="{ 'default': identity.id == defaultIdentity.id }"
+                                :class="{ 'default': identity.id == (defaultIdentity && defaultIdentity.id) }"
                                 v-bind.sync="identityClone"
                             />
                             <div class="profile__action">
@@ -100,7 +99,7 @@
                                     status="info"
                                     icon="check"
                                     @click="setDefault(identity)"
-                                    v-if="identity.id != defaultIdentity.id && !identity.edit"
+                                    v-if="!identity.edit && identity.id != (defaultIdentity && defaultIdentity.id)"
                                 >Set default</c-button>
                                 <c-button
                                     status="share"
@@ -134,7 +133,7 @@
                         v-if="removeIdentity"
                         @close="removeIdentity = null"
                     >
-                        <h4>Are you sure that you want to delete this identity?</h4>
+                        <h4>Are you sure that you want to delete this profile?</h4>
                         <p>This operation can not be reversed</p>
                         <c-user-card
                             :user="removeIdentity"
@@ -143,15 +142,13 @@
                         <div>
                             <div class="profile-remove__buttons">
                                 <c-button
-                                    status="danger"
-                                    size="md"
-                                    @click="deleteIdentity()"
-                                >Yes</c-button>
-                                <c-button
-                                    status="success"
                                     size="md"
                                     @click="removeIdentity = null"
                                 >Cancel</c-button>
+                                <c-button
+                                    size="md"
+                                    @click="deleteIdentity()"
+                                >Confirm</c-button>
                             </div>
                         </div>
                     </c-modal-light>
@@ -163,6 +160,8 @@
 </template>
 
 <script>
+    import * as DesktopBridge from '@/framework/desktop-bridge'
+
     export default {
         components: {
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
@@ -191,66 +190,84 @@
         methods: {
             setDefault(identity) {
                 this.$store.state.application.account.current_identity = identity
-                // if (this.defaultIdentity) this.defaultIdentity.default = false;
-                // identity.default = true;
+                // if (this.defaultIdentity) this.defaultIdentity.default = false
+                // identity.default = true
+
+                this.saveIdentities()
             },
             editIdentity(identity) {
                 if (!this.editedIdentity) {
-                    identity.edit = true;
+                    identity.edit = true
                 } else {
-                    this.$snotify.warning('You must finish editing the current identity');
+                    this.$snotify.warning('You must finish editing the current profile')
                 }
             },
             saveIdentity(identity)  {
                 for (let key in identity) {
-                    identity[key] = this.identityClone[key];
+                    identity[key] = this.identityClone[key]
                 }
-                identity.edit = false;
+
+                identity.edit = false
+
+                this.saveIdentities()
             },
             deleteIdentity(identity) {
-                const { removeIdentity } = this;
+                const { removeIdentity } = this
                 if (removeIdentity) {
-                    const index = this.identities.indexOf(removeIdentity);
-                    this.identities.splice(index, 1);
-                    this.removeIdentity = null;
+                    const index = this.identities.indexOf(removeIdentity)
+                    this.identities.splice(index, 1)
+                    this.removeIdentity = null
                 } else {
-                    this.removeIdentity = identity;
+                    this.removeIdentity = identity
                 }
+
+                this.saveIdentities()
             },
             createIdentity() {
-                const { newIdentity } = this;
+                const { newIdentity } = this
 
-                this.identities.push({ ...newIdentity, id: Math.floor(Math.random() * 100), edit: true });
+                const id = Math.floor(Math.random() * 100)
+
+                DesktopBridge.sendCommand('createIdentityRequest').then((identity) => {
+                    newIdentity.id = identity.id
+                    newIdentity.public_address = identity.public_address
+
+                    this.identities.push({ ...newIdentity, edit: true })
+                })
                 /*
                     //  Form check logic
 
                 if (!Object.values(newIdentity).some(val => val == null || !val.toString().length)) {
                     if (newIdentity.default && this.defaultIdentity) {
-                        this.defaultIdentity.default = false;
+                        this.defaultIdentity.default = false
                     }
-                    this.identities.push({ ...newIdentity });
-                    this.newIdentity.name = '';
-                    this.newIdentity.wallet = '';
-                    this.newIdentity.default = false;
+                    this.identities.push({ ...newIdentity })
+                    this.newIdentity.name = ''
+                    this.newIdentity.wallet = ''
+                    this.newIdentity.default = false
                 }
                 */
+            },
+            saveIdentities() {
+                this.$store.state.application.account.identities = this.identities
+                this.$store.dispatch('application/updateState')
             }
         },
         computed: {
             identities() {
-                return this.$store.state.application.account.identities;
+                return this.$store.state.application.account.identities
             },
             defaultIdentity() {
-                return this.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id);
+                return this.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
             },
             editedIdentity() {
-                return this.identities.find(identity => identity.edit);
+                return this.identities.find(identity => identity.edit)
             },
             identityClone() {
-                return this.editedIdentity ? { ...this.editedIdentity } : {};
+                return this.editedIdentity ? { ...this.editedIdentity } : {}
             },
             isEditing() {
-                return this.identities.find(identity => identity.edit);
+                return this.identities.find(identity => identity.edit)
             },
             filteredIdentities() {
                 return this.identities
@@ -274,6 +291,7 @@
             i {
                 font-size: 16px;
                 margin-left: 5px;
+                margin-right: 3px;
             }
         }
         .arrow_container {

@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="product" :showRightPanel="false" navigationTitle="GAME OVERVIEW">
+    <c-layout navigationKey="product" :showRightPanel="false" navigationTitle="GAME OVERVIEW" :breadcrumbLinks="breadcrumbLinks">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
@@ -313,12 +313,19 @@
             },
             first_product() {
                 return this.$store.state.marketplace.first_product
+            },
+            breadcrumbLinks() {
+                return [
+                    { to: { path: '/' }, title: 'Store' },
+                    { to: { path: '' }, title: this.product.name }
+                ]
             }
         },
         mounted: updateProduct,
         created(){
             updateProduct;
             window.onbeforeunload = this.unsaved;
+            console.log(this)
         },
         beforeDestroy() {
             window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'

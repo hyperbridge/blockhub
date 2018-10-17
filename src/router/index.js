@@ -4,7 +4,7 @@ import store from '../store'
 
 Vue.use(Router)
 
-const appVersion = '0.6.0'
+const appVersion = '0.6.1'
 
 const router = new Router({
     //mode: 'history',
@@ -390,17 +390,35 @@ const router = new Router({
         {
             path: '/community',
             name: 'Community',
-            component: (resolve) => require(['@/ui/screens/community'], resolve)
+            component: (resolve) => require(['@/ui/screens/community'], resolve),
+            meta: {
+                breadcrumb: [
+                    { to: 'Home', title: 'Home' },
+                    { to: 'Community', title: 'Community' }
+                ]
+            }
+        },
+        {
+            path: '/community/forums',
+            name: 'Community Forums',
+            component: (resolve) => require(['@/ui/screens/community-forums'], resolve)
         },
         {
             path: '/community/forum/:id',
-            name: 'Community forum',
+            name: 'Community Forum',
             props: true,
-            component: (resolve) => require(['@/ui/screens/community-forum'], resolve)
+            component: (resolve) => require(['@/ui/screens/community-forum'], resolve),
+            meta: {
+                breadcrumb: [
+                    { name: 'Home', link: '/' },
+                    { name: 'Community', link: '/community' },
+                    { name: 'Community forum', link: '' }
+                ]
+            }
         },
         {
             path: '/community/discussion/:id',
-            name: 'Community discussion',
+            name: 'Community Discussion',
             props: true,
             component: (resolve) => require(['@/ui/screens/community-discussion'], resolve)
         },

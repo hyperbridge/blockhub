@@ -116,16 +116,61 @@ export default {
                     data: this.$store.state.marketplace.frontpage_product
                 })
             }
-
-            result.push({
-                type: 'featured_product_gallery',
-                data: {
-                    title: 'Featured',
-                    ref: 'featured_product_gallery_sl',
-                    swiper: this.$refs.featured_product_gallery_sl && this.$refs.featured_product_gallery_sl.swiper,
-                    products: this.$store.state.marketplace.featured_products
-                }
-            })
+            if ( this.$store.state.marketplace.featured_products ) {
+                result.push({
+                    type: 'featured_product_gallery',
+                    data: {
+                        title: 'Featured',
+                        ref: 'featured_product_gallery_sl',
+                        swiper: this.$refs.featured_product_gallery_sl && this.$refs.featured_product_gallery_sl.swiper,
+                        products: this.$store.state.marketplace.featured_products,
+                        // slides:[
+                        //     {
+                        //         image:  {
+                        //             src:  this.$store.state.marketplace.featured_products[0].images.preview[0],
+                        //             position: 'center'
+                        //         },
+                        //         logo: {
+                        //             src:  this.$store.state.marketplace.featured_products[0].images.icon,
+                        //             position: 'left bottom',
+                        //             size: 'lg',
+                        //         },
+                        //         title:  this.$store.state.marketplace.featured_products[0].name,
+                        //         buttonText: 'Check it out',
+                        //         id:  this.$store.state.marketplace.featured_products[0].id
+                        //     },
+                        //     {
+                        //         image:  {
+                        //             src:  this.$store.state.marketplace.featured_products[1].images.preview[0],
+                        //             position: 'center'
+                        //         },
+                        //         logo: {
+                        //             src:  this.$store.state.marketplace.featured_products[1].images.icon,
+                        //             position: 'left bottom',
+                        //             size: 'lg',
+                        //         },
+                        //         title:  this.$store.state.marketplace.featured_products[1].name,
+                        //         buttonText: 'Check it out',
+                        //         id:  this.$store.state.marketplace.featured_products[1].id
+                        //     },
+                        //     {
+                        //         image:  {
+                        //             src:  this.$store.state.marketplace.featured_products[2].images.preview[0],
+                        //             position: 'center'
+                        //         },
+                        //         logo: {
+                        //             src:  this.$store.state.marketplace.featured_products[2].images.icon,
+                        //             position: 'left bottom',
+                        //             size: 'lg',
+                        //         },
+                        //         title:  this.$store.state.marketplace.featured_products[2].name,
+                        //         buttonText: 'Check it out',
+                        //         id:  this.$store.state.marketplace.featured_products[2].id
+                        //     }
+                        // ]
+                    }
+                })
+            }
 
             result.push({
                 type: 'collections_list',
@@ -133,14 +178,6 @@ export default {
                     collections_list: this.$store.state.marketplace.collections,
                     ref: 'collections_sl',
                     swiper: this.$refs.collections_sl && this.$refs.collections_sl.swiper,
-                    options: {
-                        slidesPerView: 3,
-                        spaceBetween: 10,
-                        pagination: {
-                            el: '.swiper-pagination',
-                            clickable: true
-                        }
-                    },
                 }
             })
 

@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="store">
+    <c-layout navigationKey="store" :defaultBreadcrumb="false">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row margin-bottom-50">
