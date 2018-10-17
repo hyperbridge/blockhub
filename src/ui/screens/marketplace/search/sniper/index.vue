@@ -27,9 +27,18 @@
                     <c-input v-model="newSniper.priceMin" class="half-width"/>
                 </div>
                 <p>Select maximum price</p>
-                <div class="flex-center-between margin-bottom-40">
+                <div class="flex-center-between margin-bottom-20">
                     <c-range-slider v-model="newSniper.priceMax" class="half-width margin-right-20"/>
                     <c-input v-model="newSniper.priceMax" class="half-width"/>
+                </div>
+                <p>Select expiration date</p>
+                <div class="flex-center margin-bottom-40">
+                    <c-datepicker
+                        v-model="newSniper.expDate"
+                        placeholder="Expiration date"
+                        input-class="form-control form-calendar__text"
+                        calendar-class="form-calendar"
+                    />
                 </div>
                 <div class="flex-center-between">
                     <c-button status="warning" @click="cancelCreation()" icon="trash-alt" size="lg">
@@ -96,7 +105,8 @@
             'c-asset-grid': (resolve) => require(['@/ui/components/assets-grid-inventory'], resolve),
             'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
             'c-tab': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
-            'c-tabs': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve)
+            'c-tabs': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve),
+            'c-datepicker': (resolve) => require(['vuejs-datepicker'], resolve),
         },
         data() {
             return {
@@ -172,6 +182,8 @@
 </script>
 
 <style lang="scss" scoped>
+    @import "@/css/helpers/mixins.scss";
+
     .snipers-table {
         width: 100%;
         margin-bottom: 50px;
@@ -187,4 +199,20 @@
         }
     }
 </style>
+
+<style lang="scss">
+    .form-calendar {
+        background-color: #27273A !important;
+        border-color: rgba(255,255,255,.2) !important;
+        box-shadow: 0 0 15px rgba(1, 1, 1, .35);
+        .up:hover, .up:focus {
+            color: black !important;
+        }
+    }
+    .form-calendar__text, .form-calendar__text:focus {
+        // border: none !important;
+        background-color: #303049 !important;
+    }
+</style>
+
 
