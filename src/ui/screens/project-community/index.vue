@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="project" :breadcrumbLinks="breadcrumbLinks">
-        <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row" v-if="!project">
                     <div class="col-12">
@@ -137,7 +136,6 @@
                     </div>
                 </div>
             </div>
-        </div>
 
         <div class="modal fade" id="invertFormExampleModal" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -1,9 +1,6 @@
 <template>
     <c-layout>
-        <div class="content" id="content">
             <div class="container">  
-                
-                
                 <div class="card invert">
                     <div class="card-body padding-top-50 padding-bottom-30">
                         
@@ -143,10 +140,7 @@
                     </div>
                     
                 </div>
-                
-                
             </div>
-        </div>
     </c-layout>
 </template>
 

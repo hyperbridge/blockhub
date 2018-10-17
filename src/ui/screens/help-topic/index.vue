@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="help">
-        <div class="content" id="content">
             <div class="container-fluid" v-if="topic">
                 <div class="row">
                     <div class="col-12">
@@ -57,7 +56,6 @@
             <div v-if="!article">
                 Oh no! That topic was not found!
             </div>
-        </div>
     </c-layout>
 </template>
 

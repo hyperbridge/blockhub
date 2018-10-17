@@ -1,6 +1,6 @@
 <template>
     <!-- PAGE WRAPPER -->
-    <div class="page page--w-header page--w-container">
+    <div class="page page--w-header page--w-container" :class="{'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel }">
         <!-- PAGE HEADER -->
         <transition name="slideDown" v-if="initialized">
             <c-header :isLoader="loadingState" v-if="!slimMode" />
@@ -62,9 +62,7 @@
             <!-- //END PAGE ASIDE PANEL -->
             <!--<div class="">-->
             <div class="content" id="content" v-if="is_connected">
-                <div class="margin-left-20 d-flex">
-                    <c-breadcrumb :links="breadcrumbLinks" ref="breadcrumb" />
-                </div>
+                <c-breadcrumb :links="breadcrumbLinks" ref="breadcrumb" style="padding-left: 20px; padding-top: 20px;" />
                 <slot />
             </div>
             <!--</div>-->
@@ -796,6 +794,22 @@
             flex: 0 0 100%;
             max-width: 100%;
         }
+    }
+    
+    #content {
+        width: 100%;
+        padding-top: 0;
+        margin: 0 auto;
+    }
+
+    .page.left-sidebar #content, .page.right-sidebar #content {
+        width: calc(100% - 250px);
+        margin: 0 0 0 auto;
+    }
+
+    .page.left-sidebar.right-sidebar #content {
+        width: calc(100% - 500px);
+        margin: 0 auto;
     }
 
 

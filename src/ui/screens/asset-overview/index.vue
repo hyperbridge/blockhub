@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="asset">
-        <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row" v-if="!asset">
                     <div class="col-12">
@@ -229,7 +228,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         <c-popup :activated="show_popup" @close="closePopup" :width="550">
             <c-asset-popup :asset="tmpItem" slot="custom_content" />
         </c-popup>

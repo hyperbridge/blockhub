@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="settings">
-        <div class="content" id="content">
             <c-block class="margin-bottom-30" title="Protocol Settings" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                 <div class="row">
                     <div class="col-12" style="padding: 0;">
@@ -89,7 +88,6 @@
                     </div>
                 </div>
             </c-block>
-        </div>
     </c-layout>
 </template>
 

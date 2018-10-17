@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="product" :showRightPanel="false" navigationTitle="GAME OVERVIEW" :breadcrumbLinks="breadcrumbLinks">
-        <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12" v-if="!product">
@@ -150,7 +149,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         <c-custom-modal title="Help Center" v-if="first_product && editing" @close="closeModal">
             <div class="help-modal__content" slot="modal_body" style="width: 500px">
                 <h4 class="h2 mb-3">Creating your first product?</h4>
@@ -432,11 +430,5 @@
             color: #1C2032;
             background: #FEEBCE;
         }
-    }
-
-    .page__content > .content {
-        width: calc(100% - 250px);
-        padding-top: 0;
-        margin: 0 0 0 auto;
     }
 </style>

@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="product" navigationTitle="GAME INVENTORY">
-        <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row" v-if="!product">
                     <div class="col-12">
@@ -41,7 +40,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 

@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="account">
-        <div class="content" id="content">
             <div class="page-heading">
                 <div class="page-heading__container">
                     <h1 class="title">Sign Out</h1>
@@ -12,7 +11,6 @@
                 <div class="row">
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 

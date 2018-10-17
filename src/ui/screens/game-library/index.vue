@@ -1,6 +1,5 @@
 <template>
     <c-layout>
-        <div class="content" id="content">
             <div class="container-fluid">
                 <c-user-head />
                 <div class="row margin-top-50">
@@ -49,7 +48,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 

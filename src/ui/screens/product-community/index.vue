@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="product" navigationTitle="GAME COMMUNITY" :breadcrumbLinks="breadcrumbLinks">
-        <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12" v-if="!product">
@@ -57,7 +56,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 

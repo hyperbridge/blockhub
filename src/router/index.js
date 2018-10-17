@@ -526,7 +526,7 @@ const router = new Router({
         },
         {
             path: '/download',
-            name: 'Download Page',
+            name: 'Download',
             component: (resolve) => require(['@/ui/screens/download'], resolve)
         },
         {

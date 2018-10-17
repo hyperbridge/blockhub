@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="help" :showLeftPanel="false" :showRightPanel="false">
-        <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row" style="">
                     <div class="col-6 mb-4">
@@ -312,7 +311,6 @@
                     </div>
                 </div>
             </div>
-        </div>
 
         <c-popup :activated="purchasePopup.show"
             width="800"

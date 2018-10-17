@@ -98,6 +98,11 @@
                     <span class="text">Sign Out</span>
                 </a>
 
+                <a href="/#/sitemap">
+                    <span class="icon fa fa-list-alt"></span>
+                    <span class="text">Sitemap</span>
+                </a>
+
                 <!--Global Bottom banner-->
                 <div class="developer_banner" v-if="!is_developer">
                     <div class="img">

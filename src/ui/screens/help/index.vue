@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="help">
-        <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-12 text-center">
@@ -84,7 +83,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 

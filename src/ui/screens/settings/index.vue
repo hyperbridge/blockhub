@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="settings">
-        <div class="content" id="content">
             <c-block class="margin-bottom-30" title="Client Settings" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-6">
@@ -165,7 +164,6 @@
                     </c-button>
                 </div>
             </c-block>
-        </div>
     </c-layout>
 </template>
 

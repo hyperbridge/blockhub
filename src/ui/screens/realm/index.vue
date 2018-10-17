@@ -1,6 +1,5 @@
 <template>
     <c-layout>
-        <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row realm_page_header margin-bottom-30">
                     <div class="col-3">
@@ -116,7 +115,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 

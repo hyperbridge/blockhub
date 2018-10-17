@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="store">
-        <div class="content" id="content">
             <div class="container-fluid">
                 <div class="col-12">
                     <div class="community-wrapper">
@@ -22,7 +21,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 
