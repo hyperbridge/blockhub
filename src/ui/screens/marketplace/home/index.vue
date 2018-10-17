@@ -1,9 +1,12 @@
 <template>
     <div>
+        <div class="margin-bottom-40">
+            <c-asset-store-card :asset="assets[0]"/>
+        </div>
         <c-block title="Recently sold" class="margin-bottom-40">
             <c-asset-list :assets="recentlySold" :transition="true"/>
         </c-block>
-        <c-block title="Explore featured items" noGutter onlyContentBg bgGradient>
+        <c-block title="Explore available assets" noGutter onlyContentBg bgGradient>
             <c-content-navigation :items="assets" class="assets-block">
                 <c-asset-list
                     slot-scope="props"
@@ -21,6 +24,7 @@ export default {
         'c-asset-list': (resolve) => require(['@/ui/components/asset/list'], resolve),
         'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
         'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
+        'c-asset-store-card': (resolve) => require(['@/ui/components/asset/store-card'], resolve),
     },
     data() {
         return {
