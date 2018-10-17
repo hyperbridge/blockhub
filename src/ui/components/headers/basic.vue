@@ -3,13 +3,31 @@
         <div class="app-header__top-bar"></div>
         <div class="position-relative w-100" style="margin-top: -10px">
             <div class="app-header__bar-left">
-                <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'mac'">
+                <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'macos'">
                     <a href="#" @click.prevent="closeWindow">&times;</a>
                 </div>
-                <div class="app-header__minimize-button" v-if="desktop_mode && operating_system === 'mac'">
+                <div class="app-header__minimize-button" v-if="desktop_mode && operating_system === 'macos'">
                     <a href="#" @click.prevent="minimizeWindow">&ndash;</a>
                 </div>
-                <div class="app-header__maximize-button" v-if="desktop_mode && operating_system === 'mac'">
+                <div class="app-header__maximize-button" v-if="desktop_mode && operating_system === 'macos'">
+                    <a href="#" @click.prevent="maximizeWindow">+</a>
+                </div>
+                <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'windows'">
+                    <a href="#" @click.prevent="closeWindow">&times;</a>
+                </div>
+                <div class="app-header__minimize-button" v-if="desktop_mode && operating_system === 'windows'">
+                    <a href="#" @click.prevent="minimizeWindow">&ndash;</a>
+                </div>
+                <div class="app-header__maximize-button" v-if="desktop_mode && operating_system === 'windows'">
+                    <a href="#" @click.prevent="maximizeWindow">+</a>
+                </div>
+                <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'linux'">
+                    <a href="#" @click.prevent="closeWindow">&times;</a>
+                </div>
+                <div class="app-header__minimize-button" v-if="desktop_mode && operating_system === 'linux'">
+                    <a href="#" @click.prevent="minimizeWindow">&ndash;</a>
+                </div>
+                <div class="app-header__maximize-button" v-if="desktop_mode && operating_system === 'linux'">
                     <a href="#" @click.prevent="maximizeWindow">+</a>
                 </div>
                 <a class="app-header__bar-left-link" href="/#/" v-if="!desktop_mode">
