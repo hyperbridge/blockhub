@@ -3,11 +3,6 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <c-breadcrumb :links="[
-                            { to: { path: '/' }, title: 'Home' },
-                            { to: { path: '/account' }, title: 'Account' },
-                            { to: { path: '/account/identities' }, title: 'Profiles' }
-                        ]" />
                         <c-heading-bar name="My Profile" :showArrows="false" :showBackground="false"/>
                     </div>
                     <div class="col-6 margin-bottom-40 my_identity">

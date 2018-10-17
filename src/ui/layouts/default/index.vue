@@ -60,7 +60,7 @@
                 <!--</transition>-->
             </div>
             <!-- //END PAGE ASIDE PANEL -->
-            
+
             <div class="content" id="content">
                 <c-breadcrumb :links="breadcrumbLinks" ref="breadcrumb" style="padding-left: 20px; padding-top: 20px;" />
                 <slot v-if="is_connected" />
@@ -756,7 +756,7 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 100%;
+            width: 246px;
             height: 100px;
             z-index: 1;
             background: linear-gradient(to top, rgba(48, 49, 77, 1) 60%, rgba(48, 49, 77, 0) 100%);

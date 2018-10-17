@@ -328,7 +328,7 @@
                         this.isTyping = false;
                         this.results = this.products;
                     }
-                    this.$router.replace({ name: 'Search Page', query: this.urlQuery });
+                    this.$router.replace({ name: 'Search', query: this.urlQuery });
                 }, 500);
             },
             clearFilters() {
