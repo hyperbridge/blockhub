@@ -1,7 +1,7 @@
 <template>
     <header class="app-header desktop-draggable">
         <div class="app-header__top-bar"></div>
-        <div class="position-relative w-100" style="margin-top: -10px">
+        <div class="position-relative w-100" style="margin-top: -10px; zoom: 0.9;">
             <div class="app-header__bar-left">
                 <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'macos'">
                     <a href="#" @click.prevent="closeWindow">&times;</a>

@@ -323,7 +323,9 @@
                 required: false
             },
             breadcrumbLinks: {
-                type: Array
+                type: Array,
+                default: [],
+                required: false
             }
         },
         mixins: [debouncer],
@@ -477,9 +479,16 @@
                 } catch(e) {
 
                 }
+            },
+            updateBreadcrumbLinks() {
+                if (this.breadcrumbLinks.length === 0 && this.$route.meta.breadcrumb) {
+                    this.breadcrumbLinks = this.$route.meta.breadcrumb
+                }
             }
         },
         mounted() {
+            this.updateBreadcrumbLinks()
+
             this.$nextTick(() => {
                 this.loadingState = false
                 setTimeout(() => {
@@ -499,6 +508,11 @@
                     this.checkScrollButton()
                 }, 500)
             })
+        },
+        watch: {
+            '$route'() {
+                this.updateBreadcrumbLinks()
+            }
         }
     }
 </script>

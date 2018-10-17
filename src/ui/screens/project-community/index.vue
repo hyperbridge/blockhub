@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="project">
+    <c-layout navigationKey="project" :breadcrumbLinks="breadcrumbLinks">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row" v-if="!project">
@@ -278,6 +278,14 @@
         },
         computed: {
             project: updateProject,
+            breadcrumbLinks() {
+                return [
+                    { to: { path: '/' }, title: 'Home' },
+                    { to: { path: '/projects' }, title: 'Crowdfunds' },
+                    { to: { path: '/project/' + this.project.id }, title: this.project.name },
+                    { to: { path: '' }, title: 'Community' }
+                ]
+            }
         },
         watch: {
         },

@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="product" navigationTitle="GAME COMMUNITY">
+    <c-layout navigationKey="product" navigationTitle="GAME COMMUNITY" :breadcrumbLinks="breadcrumbLinks">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
@@ -183,8 +183,15 @@
                 }
                 return this.$store.state.application.editor_mode === 'editing'
             },
-            first_product(){
+            first_product() {
                 return this.$store.state.marketplace.first_product
+            },
+            breadcrumbLinks() {
+                return [
+                    { to: { path: '/' }, title: 'Store' },
+                    { to: { path: '/product/' + this.product.id }, title: this.product.name },
+                    { to: { path: '' }, title: 'Community' }
+                ]
             }
         },
         mounted: updateProduct,
