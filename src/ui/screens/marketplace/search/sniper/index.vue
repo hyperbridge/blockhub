@@ -14,7 +14,7 @@
 
             <c-tab :tab_id="1">
                 <p>Select asset that you are going to buy</p>
-                <c-content-navigation :items="assets" :setLimits="10">
+                <c-content-navigation :items="assetsArray" :setLimits="10">
                     <c-asset-grid
                         slot-scope="props"
                         :assets="props.items"
@@ -31,12 +31,20 @@
                 />
                 <p>Select minimum price</p>
                 <div class="flex-center-between margin-bottom-20">
-                    <c-range-slider v-model="newSniper.priceMin" class="half-width margin-right-20"/>
+                    <c-range-slider
+                        v-model="newSniper.priceMin"
+                        class="half-width margin-right-20"
+                        :max="getPrice(assets[newSniper.asset], 'min')"
+                    />
                     <c-input v-model="newSniper.priceMin" class="half-width"/>
                 </div>
                 <p>Select maximum price</p>
                 <div class="flex-center-between margin-bottom-20">
-                    <c-range-slider v-model="newSniper.priceMax" class="half-width margin-right-20"/>
+                    <c-range-slider
+                        v-model="newSniper.priceMax"
+                        class="half-width margin-right-20"
+                        :max="getPrice(assets[newSniper.asset], 'max')"
+                    />
                     <c-input v-model="newSniper.priceMax" class="half-width"/>
                 </div>
                 <p>Select expiration date</p>
@@ -179,13 +187,18 @@
                     priceMax: 0,
                     expDate: ''
                 };
-            }
+                this.errors = [];
+            },
+            getPrice: (asset, target) => asset && Math.round(asset.price[target] * 2)
         },
         computed: {
             snipers() {
                 return this.$store.getters['assets/snipers'];
             },
             assets() {
+                return this.$store.getters['assets/assets'];
+            },
+            assetsArray() {
                 return this.$store.getters['assets/assetsArray'];
             }
         }
