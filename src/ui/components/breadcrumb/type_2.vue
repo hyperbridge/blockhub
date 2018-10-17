@@ -1,21 +1,42 @@
 <template>
     <ul class="breadcrumb">
-        <li v-for="(link, index) in links" class="breadcrumb-item" :class="{ 'active': index == links.length-1 }" :key="index">
-            <router-link :to="link.to.path">{{ link.title }}</router-link>
+        <li
+            v-for="(breadcrumb, idx) in breadcrumbList"
+            :key="idx"
+            class="breadcrumb-item">
+            <router-link :to="breadcrumb.link">
+                {{ breadcrumb.name }}
+            </router-link>
         </li>
     </ul>
 </template>
 
 <script>
-export default {
-    props: {
-        links: Array
+    export default {
+        name: 'Breadcrumb',
+        data() {
+            return {
+                breadcrumbList: []
+            }
+        },
+        mounted() {
+            this.updateList()
+        },
+        watch: {
+            '$route'() {
+                this.updateList()
+            }
+        },
+        methods: {
+            updateList() {
+                this.breadcrumbList = this.$route.meta.breadcrumb
+            }
+        }
     }
-}
 </script>
 
 <style lang="scss" scoped>
-    .breadcrumb{
+    .breadcrumb {
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -23,15 +44,15 @@ export default {
         overflow: hidden;
         padding: 0;
         background: transparent;
-        li{
+        li {
             background: rgba(255, 255, 255, .3);
             height: 20px;
             position: relative;
             padding: 0 3px;
-            &:before{
+            &:before {
                 display: none;
             }
-            &:after{
+            &:after {
                 width: 2px;
                 position: absolute;
                 background: #32314a;
@@ -43,7 +64,7 @@ export default {
                 transform: rotate(25deg);
                 z-index: 10;
             }
-            a{
+            a {
                 color: #fff;
                 text-transform: uppercase;
                 font-size: 10px;
@@ -54,18 +75,18 @@ export default {
                 white-space: nowrap;
                 display: inline-block;
             }
-            &:first-child{
+            &:first-child {
                 border-radius: 15px 0 0 15px;
             }
-            &:last-child{
+            &:last-child {
                 border-radius: 0 15px 15px 0;
                 background: #2d2c43;
                 padding-left: 0;
                 z-index: 11;
-                &:after{
+                &:after {
                     display: none;
                 }
-                &:before{
+                &:before {
                     display: inline-block;
                     content: "";
                     position: absolute;

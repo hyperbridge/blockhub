@@ -10,6 +10,7 @@ import InfiniteContent from '@/ui/components/infinite-content'
 import Icon from '@/ui/components/icon'
 import Input from '@/ui/components/inputs'
 import Breadcrumb from '@/ui/components/breadcrumb'
+import Breadcrumb2 from '@/ui/components/breadcrumb/type_2'
 import Img from '@/ui/components/img'
 import Darklaunch from '@/ui/components/darklaunch'
 
@@ -23,5 +24,6 @@ Vue.component('c-infinite-content', InfiniteContent)
 Vue.component('c-icon', Icon)
 Vue.component('c-input', Input)
 Vue.component('c-breadcrumb', Breadcrumb)
+Vue.component('c-breadcrumb-2', Breadcrumb2)
 Vue.component('c-img', Img)
 Vue.component('c-darklaunch', Darklaunch)
