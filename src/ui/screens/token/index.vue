@@ -8,7 +8,7 @@
                         <p>
                             Built by <c-button status="underline" size="md" href="https://hyperbridge.org">Hyperbridge</c-button>, HBX tokens are used to fuel the decentralized protocols underlying BlockHub. 
                             BlockHub is the first economy built on these protocols, designed to let players and game developers productively interact in mutually beneficial ways. 
-                            HBX tokens can be earned or purchased:
+                            HBX tokens can be purchased or received by:
                             
                             <ul>
                                 <li>Selling game items</li>

@@ -5,7 +5,10 @@
             :src="asset.image"
         />
         <span>{{ asset.name }}</span>
-        <span class="asset-preview-small__price"> - {{ asset.price.current }}$</span>
+        <span
+            v-if="showPrice"
+            class="asset-preview-small__price"
+        > - {{ asset.price.current }}$</span>
     </div>
 </template>
 
@@ -16,7 +19,8 @@
             asset: {
                 type: Object,
                 required: true
-            }
+            },
+            showPrice: Boolean
         }
     }
 </script>
@@ -28,7 +32,6 @@
     }
     .asset-preview-small__image {
         padding: 5px;
-        // background: #4B4E74;
         background: rgba(255,255,255,.05);
         border: 1px solid rgba(255,255,255,.2);
         border-radius: 2px;

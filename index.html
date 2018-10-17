@@ -395,6 +395,7 @@ a {
 }
 
 .startup-loader__links {
+    display: none;
     position: absolute;
     bottom: 30px;
     left: 0;
@@ -483,7 +484,7 @@ a {
     <!---->
     <p class="startup-loader__status-message">Launching...</p>
     <div id="critical-error">
-      <p>A critical error may have occurred. If BlockHub doesn't load in 1 minute, and your internet connection is fine, then either this page is broken, or your settings are corrupt.</p>
+      <p>BlockHub is taking a while to load. If it's been longer than one minute and your internet connection is fine, this page may be broken, or your settings may be corrupt. Here are some options:</p>
       <br />
       <button onClick="window.goHome()">Go home</button>
       <button onClick="window.resetSettings()">Reset settings</button> 
@@ -545,7 +546,7 @@ function bootChecker() {
   return setTimeout(bootChecker, 1000)
 }
 
-setTimeout(bootChecker, 10 * 1000)
+setTimeout(bootChecker, 20 * 1000)
 </script>
 
 <%= htmlWebpackPlugin.options.serviceWorkerLoader %>

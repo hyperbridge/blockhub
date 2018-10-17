@@ -10,10 +10,6 @@
 
 <script>
 export default {
-    components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-        'c-infinite-content': (resolve) => require(['@/ui/components/infinite-content'], resolve),
-    },
     computed: {
         list() {
             const result = []
@@ -22,9 +18,15 @@ export default {
                 type: 'realms_row',
                 data: {
                     title: 'Realms',
+                    ref: 'realms_sl',
+                    swiper: this.$refs.realms_sl && this.$refs.realms_sl.swiper,
                     options: {
                         slidesPerView: 3,
-                        spaceBetween: 15,
+                        spaceBetween: 10,
+                        pagination: {
+                            el: '.swiper-pagination',
+                            clickable: true
+                        }
                     },
                     realms: this.$store.state.marketplace.realms
                 }

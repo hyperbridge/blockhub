@@ -156,8 +156,13 @@
                     </div>
                 </div>
 
-                <div class="row margin-bottom-30" v-if="item.type === 'realms_row'" :key="`level-1-${index}`">
-                    <div class="col-12">
+                <div v-if="item.type === 'realms_row'" :key="`level-1-${index}`">
+                        <c-swiper :options="item.data.options" class="padding-10">
+                            <c-slide v-for="(realm, index) in item.data.realms" :key="index">
+                                <c-collection-item :item="realm" />
+                            </c-slide>
+                        </c-swiper>
+
                         <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                             <c-heading-bar
                                 slot="title"
@@ -174,7 +179,6 @@
                             </c-swiper>
                             <p v-if="!item.data.realms.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
                         </c-block>
-                    </div>
                 </div>
 
                 <div class="row margin-bottom-30" v-if="item.type === 'game_series'" :key="`level-1-${index}`">

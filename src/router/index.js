@@ -4,7 +4,7 @@ import store from '../store'
 
 Vue.use(Router)
 
-const appVersion = '0.6.0'
+const appVersion = '0.6.1'
 
 const router = new Router({
     //mode: 'history',
@@ -399,8 +399,13 @@ const router = new Router({
             }
         },
         {
+            path: '/community/forums',
+            name: 'Community Forums',
+            component: (resolve) => require(['@/ui/screens/community-forums'], resolve)
+        },
+        {
             path: '/community/forum/:id',
-            name: 'Community forum',
+            name: 'Community Forum',
             props: true,
             component: (resolve) => require(['@/ui/screens/community-forum'], resolve),
             meta: {
@@ -413,7 +418,7 @@ const router = new Router({
         },
         {
             path: '/community/discussion/:id',
-            name: 'Community discussion',
+            name: 'Community Discussion',
             props: true,
             component: (resolve) => require(['@/ui/screens/community-discussion'], resolve)
         },
@@ -581,6 +586,20 @@ const router = new Router({
                 {
                     path: '',
                     component: (resolve) => require(['@/ui/screens/marketplace/home'], resolve),
+                },
+                {
+                    path: 'search',
+                    component: (resolve) => require(['@/ui/screens/marketplace/search'], resolve),
+                    children: [
+                        {
+                            path: '',
+                            component: (resolve) => require(['@/ui/screens/marketplace/search/home'], resolve),
+                        },
+                        {
+                            path: 'sniper',
+                            component: (resolve) => require(['@/ui/screens/marketplace/search/sniper'], resolve),
+                        }
+                    ]
                 }
             ]
         },

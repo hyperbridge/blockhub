@@ -2,9 +2,9 @@
     <div>
         <div class="comparisonable-properties" v-if="assets.length">
             <div
-                class="properties-list"
-                v-if="compareProps[title + 'Props'].length"
                 v-for="title in ['comparable', 'calculable']"
+                v-if="compareProps[title + 'Props'].length"
+                class="properties-list"
                 :key="title"
             >
                 <h4>{{ title | upperFirstChar }} properties</h4>

@@ -3,13 +3,31 @@
         <div class="app-header__top-bar"></div>
         <div class="position-relative w-100" style="margin-top: -10px">
             <div class="app-header__bar-left">
-                <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'mac'">
+                <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'macos'">
                     <a href="#" @click.prevent="closeWindow">&times;</a>
                 </div>
-                <div class="app-header__minimize-button" v-if="desktop_mode && operating_system === 'mac'">
+                <div class="app-header__minimize-button" v-if="desktop_mode && operating_system === 'macos'">
                     <a href="#" @click.prevent="minimizeWindow">&ndash;</a>
                 </div>
-                <div class="app-header__maximize-button" v-if="desktop_mode && operating_system === 'mac'">
+                <div class="app-header__maximize-button" v-if="desktop_mode && operating_system === 'macos'">
+                    <a href="#" @click.prevent="maximizeWindow">+</a>
+                </div>
+                <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'windows'">
+                    <a href="#" @click.prevent="closeWindow">&times;</a>
+                </div>
+                <div class="app-header__minimize-button" v-if="desktop_mode && operating_system === 'windows'">
+                    <a href="#" @click.prevent="minimizeWindow">&ndash;</a>
+                </div>
+                <div class="app-header__maximize-button" v-if="desktop_mode && operating_system === 'windows'">
+                    <a href="#" @click.prevent="maximizeWindow">+</a>
+                </div>
+                <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'linux'">
+                    <a href="#" @click.prevent="closeWindow">&times;</a>
+                </div>
+                <div class="app-header__minimize-button" v-if="desktop_mode && operating_system === 'linux'">
+                    <a href="#" @click.prevent="minimizeWindow">&ndash;</a>
+                </div>
+                <div class="app-header__maximize-button" v-if="desktop_mode && operating_system === 'linux'">
                     <a href="#" @click.prevent="maximizeWindow">+</a>
                 </div>
                 <a class="app-header__bar-left-link" href="/#/" v-if="!desktop_mode">
@@ -112,37 +130,37 @@
                             <c-dropdown class="ml-4 account-menu" style="z-index: 12">
                                 <template slot="title">
                                     <div class="__title">
-                                        <i class="fa fa-user"></i> Account
+                                        <i class="fa fa-user"></i> {{ current_identity.name }}
                                     </div>
                                 </template>
                                 <ul class="item-dropdown">
                                     <li>
-                                        <a href="#3">
+                                        <a href="/#/account">
                                             <i class="fas fa-user"></i>
                                             Account Info
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#3">
+                                    <li v-darklaunch="'WALLETS'">
+                                        <a href="/#/account/wallets">
                                             <i class="fas fa-credit-card"></i>
                                             My Wallets
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#3">
+                                        <a href="/#/account/identities">
                                             <i class="fas fa-users"></i>
                                             Profile Manager
                                         </a>
                                     </li>
                                     <hr>
-                                    <li>
-                                        <a href="#3">
+                                    <li v-darklaunch="'CHAT'">
+                                        <a href="/#/settings/chat">
                                             <i class="fas fa-comments"></i>
                                             Chat Settings
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#3">
+                                        <a href="/#/help">
                                             <i class="fas fa-info-circle"></i>
                                             FAQ
                                         </a>
@@ -191,6 +209,12 @@ export default {
         }
     },
     computed: {
+        account() {
+            return this.$store.state.application.account
+        },
+        current_identity() {
+            return this.$store.state.application.account && this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
+        },
         is_locked() {
             return this.$store.state.application.locked
         },
@@ -211,11 +235,6 @@ export default {
         },
         operating_system() {
             return this.$store.state.application.operating_system
-        },
-        identity() {
-            return {
-                name: 'Satoshi'
-            }
         }
     },
     methods: {
@@ -813,7 +832,7 @@ export default {
                     }
                 }
                 i {
-                    margin-right: 10px;
+                    width: 17px;
                     color: #4f5079;
                 }
             }
