@@ -314,13 +314,11 @@
             first_product() {
                 return this.$store.state.marketplace.first_product
             },
-            breadcrumbLinks(){
-                let arr = [
+            breadcrumbLinks() {
+                return [
                     { to: { path: '/' }, title: 'Store' },
                     { to: { path: '' }, title: this.product.name }
                 ]
-
-                return arr;
             }
         },
         mounted: updateProduct,

@@ -63,8 +63,7 @@
             <!--<div class="">-->
             <div class="content" id="content" v-if="is_connected">
                 <div class="margin-left-20 d-flex">
-                    <c-breadcrumb :links="breadcrumbLinks" v-if="breadcrumbLinks && defaultBreadcrumb" ref="breadcrumb" />
-                    <c-breadcrumb-2 v-if="!defaultBreadcrumb" ref="breadcrumb" />
+                    <c-breadcrumb :links="breadcrumbLinks" ref="breadcrumb" />
                 </div>
                 <slot />
             </div>
@@ -323,12 +322,8 @@
                 default: 'BlockHub',
                 required: false
             },
-            breadcrumbLinks:{
+            breadcrumbLinks: {
                 type: Array
-            },
-            defaultBreadcrumb: {
-                type: Boolean,
-                default: true
             }
         },
         mixins: [debouncer],

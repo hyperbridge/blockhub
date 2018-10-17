@@ -393,8 +393,8 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/community'], resolve),
             meta: {
                 breadcrumb: [
-                    { name: 'Home', link: '/' },
-                    { name: 'Community', link: '' }
+                    { to: 'Home', title: 'Home' },
+                    { to: 'Community', title: 'Community' }
                 ]
             }
         },
