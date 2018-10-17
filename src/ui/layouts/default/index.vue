@@ -385,8 +385,8 @@
             signed_in() {
                 return this.$store.state.application.signed_in
             },
-            current_identity()  {
-                return this.$store.state.application.account && this.$store.state.application.account.current_identity
+            current_identity() {
+                return this.$store.state.application.account && this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
             },
             messages() {
                 return this.current_identity && this.current_identity.messages

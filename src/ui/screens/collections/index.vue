@@ -10,10 +10,6 @@
 
 <script>
 export default {
-    components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-        'c-infinite-content': (resolve) => require(['@/ui/components/infinite-content'], resolve),
-    },
     computed: {
         list() {
             const result = []
