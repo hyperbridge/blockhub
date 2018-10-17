@@ -6,13 +6,13 @@
                     <div class="col-12">
                         Marketplace
                         <ul>
-                            <li><router-link :to="'/marketplace'">Home</router-link></li>
-                            <li><router-link :to="'/marketplace/search'">Search</router-link></li>
+                            <li v-for="(link, index) in marketRoutes" :key="index">
+                                <router-link :to="{ name: link.name }">{{ link.name | cut }}</router-link>
+                            </li>
+                            <!-- <li><router-link :to="'/marketplace'">Home</router-link></li>
+                            <li><router-link :to="'/marketplace/search'">Search</router-link></li> -->
                         </ul>
-                        <c-block title="Marketplace" noGutter onlyContentBg bgGradient v-if="block">
-                            <router-view/>
-                        </c-block>
-                        <router-view v-else/>
+                        <router-view/>
                     </div>
                 </div>
             </div>
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+    import router from '@/router';
+
     export default {
         components: {
             'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
@@ -32,8 +34,13 @@
         },
         data() {
             return {
-                block: true
             }
+        },
+        computed: {
+            marketRoutes: () => router.options.routes.find(route => route.name === 'Marketplace').children
+        },
+        filters: {
+            cut: val => val.replace('Marketplace ', '')
         }
     }
 </script>

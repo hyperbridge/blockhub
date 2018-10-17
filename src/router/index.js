@@ -585,21 +585,18 @@ const router = new Router({
             children: [
                 {
                     path: '',
+                    name: 'Marketplace Home',
                     component: (resolve) => require(['@/ui/screens/marketplace/home'], resolve),
                 },
                 {
+                    path: 'snipers',
+                    name: 'Marketplace Snipers',
+                    component: (resolve) => require(['@/ui/screens/marketplace/snipers'], resolve),
+                },
+                {
                     path: 'search',
+                    name: 'Marketplace Search',
                     component: (resolve) => require(['@/ui/screens/marketplace/search'], resolve),
-                    children: [
-                        {
-                            path: '',
-                            component: (resolve) => require(['@/ui/screens/marketplace/search/home'], resolve),
-                        },
-                        {
-                            path: 'sniper',
-                            component: (resolve) => require(['@/ui/screens/marketplace/search/sniper'], resolve),
-                        }
-                    ]
                 }
             ]
         },
@@ -682,7 +679,7 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/not-found'], resolve)
         }
     ]
-})
+});
 
 router.afterEach((to, from) => {
     // Complete the animation of the route progress bar.

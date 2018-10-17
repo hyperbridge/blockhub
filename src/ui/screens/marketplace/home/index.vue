@@ -1,24 +1,13 @@
 <template>
     <div>
-        <c-content-navigation :items="assets" class="assets-block">
-            <c-asset-list
-                slot-scope="props"
-                :assets="props.items"
-            />
-        </c-content-navigation>
-        <!-- <c-block
-            title="Recently Sold"
-            noGutter
-            onlyContentBg
-            bgGradient
-        >
+        <c-block title="Recently sold" noGutter onlyContentBg bgGradient>
             <c-content-navigation :items="assets" class="assets-block">
                 <c-asset-list
                     slot-scope="props"
                     :assets="props.items"
                 />
             </c-content-navigation>
-        </c-block> -->
+        </c-block>
     </div>
 </template>
 
