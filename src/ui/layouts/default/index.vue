@@ -61,7 +61,7 @@
             </div>
             <!-- //END PAGE ASIDE PANEL -->
 
-            <div class="content" id="content">
+            <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
                 <c-breadcrumb :links="breadcrumbLinks" ref="breadcrumb" style="padding-left: 20px;" />
                 <slot v-if="is_connected" />
             </div>
