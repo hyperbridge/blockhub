@@ -197,11 +197,7 @@ const router = new Router({
         {
             path: '/account/verification',
             name: 'Account Verification',
-            component: (resolve) => require(['@/ui/screens/account-verification'], resolve),
-            meta: {
-                auth: true,
-                permission: 'signed_in'
-            }
+            component: (resolve) => require(['@/ui/screens/account-verification'], resolve)
         },
         {
             path: '/account/verification/callback',
