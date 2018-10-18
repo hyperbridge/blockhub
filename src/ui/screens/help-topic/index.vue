@@ -1,61 +1,65 @@
 <template>
     <c-layout navigationKey="help">
-            <div class="container-fluid" v-if="topic">
-                <div class="row">
-                    <div class="col-12">
-                        <h3 class="topic-ttl margin-bottom-30">
-                            <i :class="['fas fa-' + topic.icon ]"></i>
-                            {{ topic.label }}
-                        </h3>
+        <div class="container-fluid" v-if="topic">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="topic-ttl margin-bottom-30">
+                        <i :class="['fas fa-' + topic.icon ]"></i>
+                        {{ topic.label }}
+                    </h3>
 
-                        <c-block class="margin-bottom-30 padding-top-5 padding-bottom-5" v-if="topic.sub_topics">
-                            <div class="topics-list">
-                                <c-topic-item
-                                    v-for="(topic, index) in topic.sub_topics"
-                                    :key="index"
-                                    :link="`/#/help/${topic.id}`"
-                                    :icon="topic.icon"
-                                    class="padding-10">
-                                    {{ topic.label }}
-                                </c-topic-item>
-                            </div>
-                        </c-block>
+                    <c-block class="margin-bottom-30 padding-top-5 padding-bottom-5" v-if="topic.sub_topics">
+                        <div class="topics-list">
+                            <c-topic-item
+                                v-for="(topic, index) in topic.sub_topics"
+                                :key="index"
+                                :link="`/#/help/${topic.id}`"
+                                :icon="topic.icon"
+                                class="padding-10">
+                                {{ topic.label }}
+                            </c-topic-item>
+                        </div>
+                    </c-block>
 
-                        <c-block class="margin-bottom-30 padding-bottom-5">
-                            <div class="article-list" v-if="showByTopic(articles, topic.id)">
-                                <c-article-item :link="`/#/help/${topic.id}/article/${article.slug}`"
-                                                v-for="(article, index) in showByTopic(articles, topic.id)"
-                                                :key="index"
-                                >
-                                    {{ article.title }}
-                                </c-article-item>
-                            </div>
-                            <h3 v-else>Nothing to show</h3>
-                        </c-block>
+                    <c-block class="margin-bottom-30 padding-bottom-5">
+                        <div class="article-list" v-if="showByTopic(articles, topic.id)">
+                            <c-article-item :link="`/#/help/${topic.id}/article/${article.slug}`"
+                                            v-for="(article, index) in showByTopic(articles, topic.id)"
+                                            :key="index"
+                            >
+                                {{ article.title }}
+                            </c-article-item>
+                        </div>
+                        <h3 v-else>Nothing to show</h3>
+                    </c-block>
 
-                    </div>
-                    <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-                        <c-card class="text-center">
-                            <h4 class="h2">Community</h4>
-                            <p>Engage with a community of passionate experts to get the answers you need</p>
-                            <c-button icon_hide class="width-auto margin-top-10" href="https://github.com/hyperbridge/blockhub-desktop-client"
-                                      target="_blank">Visit GitHub
-                            </c-button>
-                        </c-card>
-                    </div>
-                    <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-                        <c-card class="text-center">
-                            <h4 class="h2">BlockHub Support</h4>
-                            <p>Create a support ticket and our support experts will get back to you</p>
-                            <c-button status="info" icon_hide class="width-auto margin-top-10">Create a ticket
-                            </c-button>
-                        </c-card>
-                    </div>
+                </div>
+                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                    <c-card class="text-center">
+                        <h4 class="h2">Community</h4>
+                        <p>Engage with a community of passionate experts to get the answers you need</p>
+                        <c-button icon_hide class="width-auto margin-top-10" href="https://github.com/hyperbridge/blockhub-desktop-client"
+                                    target="_blank">Visit GitHub
+                        </c-button>
+                    </c-card>
+                </div>
+                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                    <c-card class="text-center">
+                        <h4 class="h2">BlockHub Support</h4>
+                        <p>Create a support ticket and our support experts will get back to you</p>
+                        <c-button href="https://hyperbridge.zendesk.com/" status="info" icon_hide class="width-auto margin-top-10">Create a ticket
+                        </c-button>
+                    </c-card>
                 </div>
             </div>
-            <div v-if="!article">
-                Oh no! That topic was not found!
+        </div>
+        <div class="container-fluid" v-if="!article">
+            <div class="row">
+                <div class="col-12">
+                    <p>Oh no! That topic was not found!</p>
+                </div>
             </div>
+        </div>
     </c-layout>
 </template>
 
@@ -63,8 +67,6 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-article-item': (resolve) => require(['@/ui/components/help/article-item'], resolve),
             'c-topic-item': (resolve) => require(['@/ui/components/help/topic-item'], resolve),
             'c-list-item': (resolve) => require(['@/ui/components/help/simple-item'], resolve),

@@ -9,6 +9,10 @@
             </div>
             <div class="container-fluid">
                 <div class="row">
+                    <ul>
+                        <li>E-mail: <a href="mailto:support@hyperbridge.zendesk.com">support@hyperbridge.zendesk.com</a></li>
+                        <li>Support Desk: <a href="https://hyperbridge.zendesk.com/">https://hyperbridge.zendesk.com/</a></li>
+                    </ul>
                 </div>
             </div>
     </c-layout>

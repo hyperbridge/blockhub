@@ -80,7 +80,7 @@
                         <c-card class="text-center">
                             <h4 class="h2">BlockHub Support</h4>
                             <p>Create a support ticket and our support experts will get back to you</p>
-                            <c-button status="info" icon_hide class="width-auto margin-top-10">Create a ticket
+                            <c-button href="https://hyperbridge.zendesk.com/" status="info" icon_hide class="width-auto margin-top-10">Create a ticket
                             </c-button>
                         </c-card>
                     </div>
