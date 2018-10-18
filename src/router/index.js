@@ -361,7 +361,7 @@ const router = new Router({
         {
             path: '/developer/new-product',
             name: 'New Product',
-            component: (resolve) => require(['@/ui/screens/product-overview'], resolve),
+            component: (resolve) => require(['@/ui/screens/product'], resolve),
             props: {
                 id: 'new'
             }
@@ -370,25 +370,37 @@ const router = new Router({
             path: '/product/:id',
             name: 'Product',
             props: true,
-            component: (resolve) => require(['@/ui/screens/product-overview'], resolve)
+            component: (resolve) => require(['@/ui/screens/product'], resolve),
+            meta: {
+                section: 'overview'
+            }
         },
         {
             path: '/product/:id/community',
             name: 'Product Community',
             props: true,
-            component: (resolve) => require(['@/ui/screens/product-community'], resolve)
+            component: (resolve) => require(['@/ui/screens/product'], resolve),
+            meta: {
+                section: 'community'
+            }
         },
         {
             path: '/product/:id/projects',
             name: 'Product Projects',
             props: true,
-            component: (resolve) => require(['@/ui/screens/product-projects'], resolve)
+            component: (resolve) => require(['@/ui/screens/product'], resolve),
+            meta: {
+                section: 'projects'
+            }
         },
         {
             path: '/product/:id/assets',
             name: 'Product Assets',
             props: true,
-            component: (resolve) => require(['@/ui/screens/product-assets'], resolve)
+            component: (resolve) => require(['@/ui/screens/product'], resolve),
+            meta: {
+                section: 'assets'
+            }
         },
         {
             path: '/community',
