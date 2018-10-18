@@ -1,5 +1,6 @@
 <template>
     <div class="store-card">
+        <span class="badge-offer">FEATURED</span>
         <c-img :src="asset.image" class="store-card__image"/>
         <div class="store-card__info">
             <span class="store-card__name">{{ asset.name }}</span>
@@ -26,10 +27,12 @@ export default {
         border-radius: 6px;
         position: relative;
 
+        $status: (
+
+        );
+
         $border-size: 1px;
-        $border-color: #eca71c;
         $border-color: #dd9c1b;
-        $border-color-lighter: #ffdb92;
         $border-color-lighter: #ffcd6a;
 
         box-shadow: 0 5px 25px -5px rgba(255, 204, 103, .5);
@@ -41,6 +44,33 @@ export default {
         background-size: $border-size 100%;
         background-position: 0 0, 100% 0;
         background-repeat: no-repeat;
+
+        .badge-offer {
+            display: block;
+            background-color: $border-color;
+            border: 1px solid $border-color-lighter;
+            box-shadow: 0 0 5px 0 rgba(1,1,1,.1);
+            color: #f8dfac;
+            font-size: 10px;
+            padding: 1px 3px;
+            text-shadow: 0 0 4px #000;
+            height: 23px;
+            border-radius: 3px 0 0 3px;
+            z-index: 5;
+            text-align: center;
+            position: absolute;
+            transform: rotate(90deg);
+            left: -5px;
+            top: 5px;
+            &:after {
+                content: "";
+                position: absolute;
+                left: 100%;
+                top: -1.5px;
+                border: 11.5px solid transparent;
+                border-left-color: $border-color;
+            }
+        }
 
         &:after {
             position: absolute;
@@ -59,15 +89,19 @@ export default {
         }
         .store-card__name {
             text-align: center;
-            font-size: 19px;
+            font-size: 18px;
             text-shadow: 0 0 7px #000;
+            margin-right: 3px;
         }
         .store-card__price {
             background: rgba(1,1,1,.13);
+            text-shadow: 0 0 8px #000;
             padding: 6px;
-            font-size: 25px;
+            font-size: 23px;
+            display: flex;
             .price__dollar-sign {
                 font-size: 12px;
+                margin-left: 3px;
             }
         }
         .store-card__info {
