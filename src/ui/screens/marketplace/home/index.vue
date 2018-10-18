@@ -5,10 +5,19 @@
             :limitTo="3"
             class="margin-bottom-40"
         >
+            <!-- <transition-group name="simple" class="carousel-3d__content" tag="div" slot-scope="props">
+                <c-asset-store-card
+                    v-for="(item, index) in props.items"
+                    :class="props.css[index]"
+                    :key="item.id"
+                    :asset="item"
+                />
+            </transition-group> -->
             <template slot-scope="props">
                 <c-asset-store-card
                     v-for="(item, index) in props.items"
-                    :key="index"
+                    :class="props.css[index]"
+                    :key="item.id"
                     :asset="item"
                 />
             </template>
@@ -72,5 +81,19 @@ export default {
     }
     .sold-list-move {
         transition: transform 1s;
+    }
+    .simple {
+
+    }
+    .carousel-3d__transition {
+        // @extend .carousel-3d__content;
+        &-enter, &-leave-to {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        &-leave-active {
+            position: absolute;
+            width: 100%;
+        }
     }
 </style>

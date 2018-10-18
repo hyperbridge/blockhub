@@ -2,7 +2,7 @@
     <div class="carousel-3d">
         <c-icon name="arrow-left" @click="focusedItem--"/>
         <div class="carousel-3d__content">
-            <slot :items="visibleItems"/>
+            <slot :items="visibleItems" :css="css"/>
         </div>
         <c-icon name="arrow-right" @click="focusedItem++"/>
     </div>
@@ -72,6 +72,26 @@
                     : items.slice(focused + 1, focused + 1 + itemsPerSide)
 
                 return [...start, items[focused], ...end];
+            },
+            itemsV2() {
+                return this.items.map(item => ({
+                    ...item,
+                    visible: !!this.visibleItems.filter(vitem => vitem.id === item.id).length
+                }));
+            },
+            css() {
+                const { visibleItems } = this;
+                const { length } = visibleItems;
+                const midIndex = (length - 1) / 2;
+
+                return visibleItems.map((item, index) => {
+                    let className = 'carousel-3d__item--';
+                    if (index < midIndex) className += midIndex - index + ' left';
+                    else if (index === midIndex) className += 'main';
+                    else className += index - midIndex + ' right';
+
+                    return 'carousel-3d__item ' + className;
+                });
             }
         }
     }
@@ -81,9 +101,58 @@
     .carousel-3d {
         display: flex;
         align-items: center;
-        // justify-content:
     }
-    .carousel-3d__content {
+
+    /deep/.carousel-3d__item {
+        // position: absolute !important;
+        // transition: transform .2s ease;
+        &.left {
+            // transform: translateX(-50%);
+        }
+        &.right {
+            // transform: translateX(50%);
+        }
+        &--main {
+            // transform:
+        }
+        &--1 {
+            // animation: fade-in .2s ease;
+            transform: scale(.9);
+        }
+        &--2 {
+            // animation: fade-in .2s ease;
+            transform: scale(.8);
+        }
+        @keyframes fade-in {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    }
+    /deep/.carousel-3d__content {
+        position: relative;
         display: flex;
+        justify-content: center;
+        height: 100%;
+    }
+
+    /deep/.carousel-3d__transition {
+        &-enter, &-leave-to {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        &-leave-active {
+            position: absolute;
+            width: 100%;
+        }
+    }
+
+    .assets-list-enter, .assets-list-leave-to {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    .assets-list-leave-active {
+        position: absolute;
+        width: calc(100% - 30px);
     }
 </style>
+
