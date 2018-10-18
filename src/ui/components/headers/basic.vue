@@ -3,51 +3,48 @@
         <div class="app-header__top-bar"></div>
         <div class="position-relative w-100" style="margin-top: -10px; zoom: 0.9;">
             <div class="app-header__bar-left">
-                <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'macos'">
-                    <a href="#" @click.prevent="closeWindow">&times;</a>
+                <div v-if="desktop_mode && operating_system === 'mac'" class="mac-icons">
+                    <a class="close_w" href="#" @click.prevent="closeWindow"></a>
+                    <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
+                    <a class="maximize" href="#" @click.prevent="minimizeWindow"></a>
                 </div>
-                <div class="app-header__minimize-button" v-if="desktop_mode && operating_system === 'macos'">
-                    <a href="#" @click.prevent="minimizeWindow">&ndash;</a>
+                <div v-if="desktop_mode && operating_system === 'linux'" class="linux-icons">
+                    <a class="close_w" href="#" @click.prevent="closeWindow"></a>
+                    <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
+                    <a class="maximize" href="#" @click.prevent="minimizeWindow"></a>
                 </div>
-                <div class="app-header__maximize-button" v-if="desktop_mode && operating_system === 'macos'">
-                    <a href="#" @click.prevent="maximizeWindow">+</a>
+                <div v-if="desktop_mode && operating_system === 'windows'">
+                    <a class="app-header__bar-left-link margin-right-0 margin-left-10" href="javascript:;" data-action="fixedpanel-toggle" v-if="!is_locked">
+                        <span class="fas fa-bars"></span>
+                    </a>
                 </div>
-                <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'windows'">
-                    <a href="#" @click.prevent="closeWindow">&times;</a>
+                <div v-if="!desktop_mode">
+                    <a class="app-header__bar-left-link" href="/#/">
+                        <span class="fa fa-home"></span>
+                    </a>
+                    <a class="app-header__bar-left-link" @click="$router.go(-1)">
+                        <span class="fa fa-arrow-left"></span>
+                    </a>
+                    <a class="app-header__bar-left-link" @click="$router.go(+1)">
+                        <span class="fa fa-arrow-right"></span>
+                    </a>
                 </div>
-                <div class="app-header__minimize-button" v-if="desktop_mode && operating_system === 'windows'">
-                    <a href="#" @click.prevent="minimizeWindow">&ndash;</a>
-                </div>
-                <div class="app-header__maximize-button" v-if="desktop_mode && operating_system === 'windows'">
-                    <a href="#" @click.prevent="maximizeWindow">+</a>
-                </div>
-                <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'linux'">
-                    <a href="#" @click.prevent="closeWindow">&times;</a>
-                </div>
-                <div class="app-header__minimize-button" v-if="desktop_mode && operating_system === 'linux'">
-                    <a href="#" @click.prevent="minimizeWindow">&ndash;</a>
-                </div>
-                <div class="app-header__maximize-button" v-if="desktop_mode && operating_system === 'linux'">
-                    <a href="#" @click.prevent="maximizeWindow">+</a>
-                </div>
-                <a class="app-header__bar-left-link" href="/#/" v-if="!desktop_mode">
-                    <span class="fa fa-home"></span>
-                </a>
-                <a class="app-header__bar-left-link" @click="$router.go(-1)" v-if="!desktop_mode">
-                    <span class="fa fa-arrow-left"></span>
-                </a>
-                <a class="app-header__bar-left-link" @click="$router.go(+1)" v-if="!desktop_mode">
-                    <span class="fa fa-arrow-right"></span>
-                </a>
             </div>
             <div class="app-header__shadow"></div>
             <a class="app-header__bar-center" :href="is_locked ? '#' : '#/'">
                 <c-loading-logo :isLoading="isLoader" />
             </a>
             <div class="app-header__bar-right">
-                <a class="app-header__bar-left-link" href="javascript:;" id="sidebar_toggle_btn" data-action="fixedpanel-toggle" v-if="!is_locked">
-                    <span class="fas fa-bars"></span>
-                </a>
+                <div v-if="desktop_mode && operating_system === 'windows'" class="windows-icons margin-right-5">
+                    <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
+                    <a class="maximize" href="#" @click.prevent="minimizeWindow"></a>
+                    <a class="close_w" href="#" @click.prevent="closeWindow"></a>
+                </div>
+                <div v-else>
+                    <a class="app-header__bar-left-link" href="javascript:;" data-action="fixedpanel-toggle" v-if="!is_locked">
+                        <span class="fas fa-bars"></span>
+                    </a>
+                </div>
             </div>
             <div class="app-header__options" v-if="signed_in && developer_mode">
                 <button class="remove-btn btn btn-secondary btn-block btn--icon btn--icon-left" @click="clickRemove()" v-if="is_editing">
@@ -300,11 +297,9 @@ export default {
         background: #1C2032;
         padding: 10px;
         margin: 0 0 15px;
-        width: calc( 33% - 8px );
         box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
         display: flex;
         justify-content: space-between;
-        align-items: left;
         flex-direction: column;
         position: absolute;
         width: 170px;
@@ -526,100 +521,6 @@ export default {
         }
     }
 
-    .app-header__close-button {
-        background: #ff5c5c;
-        font-size: 17px;
-        line-height: 0;
-        width: 15px;
-        height: 15px;
-        margin-left: 6px;
-        margin-top: 5px;
-        padding-top: 5px;
-        border: 1px solid #e33e41;
-        border-radius: 50%;
-        display: inline-block;
-        text-align: center;
-        font-weight: bold;
-
-        a {
-            display: none;
-            color: #820005;
-        }
-
-        &:active, &:hover {
-            background: #c14645;
-            border: 1px solid #b03537;
-
-            a {
-                display: block;
-                color: #4e0002;
-            }
-        }
-    }
-
-    .app-header__minimize-button {
-        background: #ffbd4c;
-        font-size: 17px;
-        line-height: 0;
-        margin-left: 6px;
-        width: 15px;
-        height: 15px;
-        margin-top: 5px;
-        padding-top: 5px;
-        border: 1px solid #e09e3e;
-        border-radius: 50%;
-        display: inline-block;
-        text-align: center;
-        font-weight: bold;
-
-        a {
-            display: none;
-            color: #9a5518;
-        }
-
-        &:active, &:hover {
-            background: #c08e38;
-            border: 1px solid #af7c33;
-
-            a {
-                display: block;
-                color: #5a2607;
-            }
-        }
-    }
-
-
-    .app-header__maximize-button {
-        background: #00ca56;
-        font-size: 17px;
-        line-height: 0;
-        margin-left: 6px;
-        width: 15px;
-        height: 15px;
-        margin-top: 5px;
-        padding-top: 5px;
-        border: 1px solid #14ae46;
-        border-radius: 50%;
-        text-align: center;
-        font-weight: bold;
-        display: inline-block;
-
-        a {
-            display: none;
-            color: #006519;
-        }
-
-        &:active, &:hover {
-            background: #029740;
-            border: 1px solid #128435;
-
-            a {
-                display: block;
-                color: #003107;
-            }
-        }
-    }
-
     .app-header__shadow {
         position: absolute;
         top: 0px;
@@ -654,13 +555,27 @@ export default {
 
     .app-header__bar-left {
         position: absolute;
-        top: 00px;
+        top: 0;
         left: 0;
         height: 30px;
-        width: 118px;
-        padding-left: 10px;
-        background: url(../../../assets/SVG/left-bar.svg) no-repeat top left;
+        min-width: 35px;
+        background: #fff;
+        text-align: right;
         z-index: 13;
+        padding: 4px 10px 4px 5px;
+        border-radius: 0 0 13px 0;
+        display: flex;
+        align-items: center;
+        /*justify-content: center;*/
+        &:before {
+            content: "";
+            border-style: solid;
+            border-width: 26px 26px 0 0;
+            border-color: #ffffff transparent transparent transparent;
+            position: absolute;
+            right: -23px;
+            top: 0px;
+        }
     }
 
     a.app-header__bar-left-link {
@@ -698,10 +613,24 @@ export default {
         top: 0;
         right: 0;
         height: 30px;
-        width: 66px;
-        background: url(../../../assets/SVG/right-bar.svg) no-repeat top right;
+        min-width: 35px;
+        background: #fff;
         text-align: right;
         z-index: 13;
+        padding: 4px 5px;
+        border-radius: 0 0 0 13px;
+        display: flex;
+        align-items: center;
+        /*justify-content: center;*/
+        &:before {
+            content: "";
+            border-style: solid;
+            border-width: 0 26px 26px 0;
+            border-color: transparent #ffffff transparent transparent;
+            position: absolute;
+            left: -22px;
+            top: 0px;
+        }
     }
 
     .app-header__nav {
@@ -729,7 +658,7 @@ export default {
 
     .app-header__nav-right {
         float: right;
-        margin: 0 65px 0 0;
+        margin: 0 90px 0 0;
     }
 
     .app-header__nav-item {
@@ -740,7 +669,7 @@ export default {
     }
 
     .token {
-        .fa { 
+        .fa {
             color: #333 !important;
         }
 
@@ -777,7 +706,7 @@ export default {
         font-weight: bold;
         overflow: hidden;
         position: relative;
-        
+
         &:before {
             content: "";
             display: block;
@@ -838,6 +767,245 @@ export default {
                 i {
                     width: 17px;
                     color: #4f5079;
+                }
+            }
+        }
+    }
+    .windows-icons{
+        //colors
+        $color_1: #383838;
+        $color_2: #222;
+        %extend_1 {
+            top: 20%;
+            right: 20%;
+            bottom: 20%;
+            left: 20%;
+            content: " ";
+            position: absolute;
+            border-color: $color_1;
+            border-style: solid;
+            border-width: 0 0 2px 0;
+        }
+        a {
+            position: relative;
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin: 0 1px;
+            &:before {
+                @extend %extend_1;
+            }
+            &:after {
+                @extend %extend_1;
+            }
+            &:hover {
+                &:after {
+                    border-color: $color_2;
+                }
+                &:before {
+                    border-color: $color_2;
+                }
+            }
+            &.close_w {
+                width: 26px;
+                height: 26px;
+
+                &:before {
+                    bottom: 50%;
+                    top: 50%;
+                    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+                    transform: rotate(45deg);
+                    opacity: 1;
+                }
+                &:after {
+                    bottom: 50%;
+                    top: 50%;
+                    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+                    transform: rotate(-45deg);
+                }
+            }
+            &.minimize{
+                &:before {
+                    border-bottom-width: 2px;
+                }
+            }
+            &.maximize{
+                &:before {
+                    border-width: 1px 1px 2px 1px;
+                }
+            }
+        }
+    }
+    .mac-icons{
+        //colors
+        $color_1: #383838;
+        $color_2: #222;
+        %extend_1 {
+            top: 25%;
+            right: 25%;
+            bottom: 25%;
+            left: 25%;
+            content: " ";
+            position: absolute;
+            border-color: $color_1;
+            border-style: solid;
+            border-width: 0 0 1px 0;
+        }
+        a {
+            position: relative;
+            float: left;
+            width: 15px;
+            height: 15px;
+            margin: 0 2px;
+            &:before {
+                @extend %extend_1;
+                opacity: 0;
+            }
+            &:after {
+                @extend %extend_1;
+                opacity: 0;
+            }
+            &:hover {
+                &:after {
+                    border-color: $color_2;
+                }
+                &:before {
+                    border-color: $color_2;
+                }
+            }
+            &.close_w {
+                background: #ff6159;
+                border-radius: 100%;
+                &:before {
+                    bottom: 55%;
+                    top: 45%;
+                    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+                    transform: rotate(45deg);
+                    width: 8px;
+                    left: 25%;
+                }
+                &:after {
+                    bottom: 55%;
+                    top: 45%;
+                    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+                    transform: rotate(-45deg);
+                    width: 8px;
+                    left: 25%;
+                }
+            }
+            &.minimize{
+                background: #ffc434;
+                border-radius: 100%;
+                &:before {
+                    bottom: 40%;
+                    border-bottom-width: 2px;
+                }
+                &:after{
+                    display: none;
+                }
+            }
+            &.maximize{
+                background: #2dd04a;
+                border-radius: 100%;
+                &:before {
+                    border-width: 1px 1px 2px 1px;
+                }
+            }
+        }
+        &:hover{
+            a{
+                &:before {
+                    opacity: 1;
+                }
+                &:after {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    .linux-icons{
+        //colors
+        $color_1: #383838;
+        $color_2: #222;
+        %extend_1 {
+            top: 25%;
+            right: 25%;
+            bottom: 25%;
+            left: 25%;
+            content: " ";
+            position: absolute;
+            border-color: $color_1;
+            border-style: solid;
+            border-width: 0 0 1px 0;
+        }
+        a {
+            position: relative;
+            float: left;
+            width: 15px;
+            height: 15px;
+            margin: 0 2px;
+            &:before {
+                @extend %extend_1;
+                opacity: 0;
+            }
+            &:after {
+                @extend %extend_1;
+                opacity: 0;
+            }
+            &:hover {
+                &:after {
+                    border-color: $color_2;
+                }
+                &:before {
+                    border-color: $color_2;
+                }
+            }
+            &.close_w {
+                background: #ff6159;
+                border-radius: 100%;
+                &:before {
+                    bottom: 55%;
+                    top: 45%;
+                    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+                    transform: rotate(45deg);
+                    width: 8px;
+                    left: 25%;
+                }
+                &:after {
+                    bottom: 55%;
+                    top: 45%;
+                    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+                    transform: rotate(-45deg);
+                    width: 8px;
+                    left: 25%;
+                }
+            }
+            &.minimize{
+                background: #ffc434;
+                border-radius: 100%;
+                &:before {
+                    bottom: 40%;
+                    border-bottom-width: 2px;
+                }
+                &:after{
+                    display: none;
+                }
+            }
+            &.maximize{
+                background: #2dd04a;
+                border-radius: 100%;
+                &:before {
+                    border-width: 1px 1px 2px 1px;
+                }
+            }
+        }
+        &:hover{
+            a{
+                &:before {
+                    opacity: 1;
+                }
+                &:after {
+                    opacity: 1;
                 }
             }
         }
