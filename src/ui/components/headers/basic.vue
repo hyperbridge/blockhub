@@ -1,17 +1,17 @@
 <template>
-    <header class="app-header desktop-draggable">
-        <div class="app-header__top-bar"></div>
+    <header class="app-header">
+        <div class="app-header__top-bar draggable"></div>
         <div class="position-relative w-100" style="margin-top: -10px; zoom: 0.9;">
             <div class="app-header__bar-left">
                 <div v-if="desktop_mode && operating_system === 'mac'" class="mac-icons">
                     <a class="close_w" href="#" @click.prevent="closeWindow"></a>
                     <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
-                    <a class="maximize" href="#" @click.prevent="minimizeWindow"></a>
+                    <a class="maximize" href="#" @click.prevent="maximizeWindow"></a>
                 </div>
                 <div v-if="desktop_mode && operating_system === 'linux'" class="linux-icons">
                     <a class="close_w" href="#" @click.prevent="closeWindow"></a>
                     <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
-                    <a class="maximize" href="#" @click.prevent="minimizeWindow"></a>
+                    <a class="maximize" href="#" @click.prevent="maximizeWindow"></a>
                 </div>
                 <div v-if="desktop_mode && operating_system === 'windows'">
                     <a class="app-header__bar-left-link margin-right-0 margin-left-10" href="javascript:;" data-action="fixedpanel-toggle" v-if="!is_locked">
@@ -30,14 +30,14 @@
                     </a>
                 </div>
             </div>
-            <div class="app-header__shadow"></div>
+            <div class="app-header__shadow draggable"></div>
             <a class="app-header__bar-center" :href="is_locked ? '#' : '#/'">
                 <c-loading-logo :isLoading="isLoader" />
             </a>
             <div class="app-header__bar-right">
                 <div v-if="desktop_mode && operating_system === 'windows'" class="windows-icons margin-right-5">
                     <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
-                    <a class="maximize" href="#" @click.prevent="minimizeWindow"></a>
+                    <a class="maximize" href="#" @click.prevent="maximizeWindow"></a>
                     <a class="close_w" href="#" @click.prevent="closeWindow"></a>
                 </div>
                 <div v-else>
@@ -280,11 +280,11 @@ export default {
 </script>
 
 <style>
-    .desktop-draggable {
+    .draggable {
         -webkit-app-region: drag;
     }
 
-    .app-header a {
+    .undraggable {
         -webkit-app-region: no-drag;
     }
 </style>
@@ -854,14 +854,6 @@ export default {
             width: 15px;
             height: 15px;
             margin: 0 2px;
-            &:before {
-                @extend %extend_1;
-                opacity: 0;
-            }
-            &:after {
-                @extend %extend_1;
-                opacity: 0;
-            }
             &:hover {
                 &:after {
                     border-color: $color_2;
@@ -874,6 +866,8 @@ export default {
                 background: #ff6159;
                 border-radius: 100%;
                 &:before {
+                    @extend %extend_1;
+                    opacity: 0;
                     bottom: 55%;
                     top: 45%;
                     //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
@@ -882,6 +876,8 @@ export default {
                     left: 25%;
                 }
                 &:after {
+                    @extend %extend_1;
+                    opacity: 0;
                     bottom: 55%;
                     top: 45%;
                     //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
@@ -894,18 +890,55 @@ export default {
                 background: #ffc434;
                 border-radius: 100%;
                 &:before {
+                    @extend %extend_1;
+                    opacity: 0;
                     bottom: 40%;
                     border-bottom-width: 2px;
                 }
                 &:after{
+                    @extend %extend_1;
+                    opacity: 0;
                     display: none;
                 }
             }
             &.maximize{
                 background: #2dd04a;
                 border-radius: 100%;
+
                 &:before {
-                    border-width: 1px 1px 2px 1px;
+                    content: '';
+                    position: absolute;
+                    border-radius: 1px;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    margin: auto;
+                    opacity: 0;
+                    background-color: #006500;
+                    width: 7px;
+                    height: 7px;
+                }
+                &:after {
+                    content: '';
+                    position: absolute;
+                    border-radius: 1px;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    margin: auto;
+                    opacity: 0;
+                    background-color: #28c941;
+                    width: 10px;
+                    height: 2px;
+                    transform: rotate(45deg);
+                }
+                &:active:hover:before {
+                    background-color: #003200;
+                }
+                &:active:hover:after {
+                    background-color: #1d9730;
                 }
             }
         }
