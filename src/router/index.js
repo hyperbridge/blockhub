@@ -592,10 +592,10 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/updates'], resolve)
         },
         {
-            path: '/game-library',
-            name: 'Game Library',
+            path: '/chest',
+            name: 'Chest',
             props: true,
-            component: (resolve) => require(['@/ui/screens/game-library'], resolve)
+            component: (resolve) => require(['@/ui/screens/chest'], resolve)
         },
         {
             path: '/marketplace',
