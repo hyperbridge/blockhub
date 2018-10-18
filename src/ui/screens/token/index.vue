@@ -326,11 +326,16 @@
                     <c-tab name="Confirm Purchase" :selected="true" :showFooter="true">
                         <div>
                             <div class="tab-card" v-if="this.purchaseSuccessful">
-                                Great!
+                                Great! Here's your transaction hash: {{ this.transactionHash }}
                             </div>
                             <div class="tab-card" v-if="!this.purchaseSuccessful">
                                 <div class="" v-if="this.purchaseError">
                                     An error occurred with the purchase: {{ this.purchaseError }}
+                                </div>
+                                
+                                <div>
+                                    <p>Purchasing 1000 HBX in exchange for 10 ETH.</p>
+                                    <br />
                                 </div>
 
                                 <p>BlockHub will purchase tokens for this profile:</p>
@@ -339,11 +344,9 @@
                                 <br />
 
                                 <p>BlockHub will send a payment of {{ purchaseETH }} ETH to this contract address:</p>
-                                <p><a :href="`https://etherscan.io/address/${tokenContractAddress}`"><strong>{{ tokenContractAddress }}</strong></a></p>
+                                <p v-if="tokenContractAddress"><a :href="`https://etherscan.io/address/${tokenContractAddress}`"><strong>{{ tokenContractAddress }}</strong></a></p>
+                                <p v-if="!tokenContractAddress" class="alert alert-warning">No contract address. Check your <c-button href="/#/settings/protocol">Protocol Settings</c-button></p>
 
-                                <div>
-                                    Purchasing 1000 HBX in exchange for 10 ETH.
-                                </div>
                                 <br /><br />
                                 <c-button status="success" class="justify-content-center" icon_hide size="xl" @click="confirmPurchase">
                                     Confirm Purchase
@@ -383,7 +386,7 @@ export default {
             chosenIdentity: this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id),
             purchaseETH: null,
             purchaseHBX: null,
-            tokenContractAddress: "0x627306090abab3a6e1400e9345bc60c78a8bef57",
+            tokenContractAddress: this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts.TokenSale && this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts.TokenSale.address,
             ETH2USD: 220.10,
             maxPurchaseUSD: 7500,
             tokenPriceUSD: 0.055,
@@ -397,6 +400,8 @@ export default {
                 show: false
             },
             transactionData: null,
+            purchaseSuccessful: false,
+            transactionHash: null,
             errors: []
         }
     },
@@ -435,6 +440,7 @@ export default {
             }).then((res) => {
                 if (res.success) {
                     this.purchaseSuccessful = true
+                    this.transactionHash = res.transactionHash
                 } else {
                     this.purchaseSuccessful = false
                     this.purchaseError = res.message
