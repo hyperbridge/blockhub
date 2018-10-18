@@ -46,7 +46,7 @@
             </a>
             <div class="app-header__bar-right">
                 <a class="app-header__bar-left-link" href="javascript:;" id="sidebar_toggle_btn" data-action="fixedpanel-toggle" v-if="!is_locked">
-                    <span class="fa fa-cog"></span>
+                    <span class="fas fa-bars"></span>
                 </a>
             </div>
             <div class="app-header__options" v-if="signed_in && developer_mode">
@@ -89,9 +89,9 @@
                             </a>
                         </li>
                         <li v-if="signed_in">
-                            <a href="/#/stash">
+                            <a href="/#/chest">
                                 <span class="icon fa fa-box-open"></span>
-                                <span class="text">Stash</span>
+                                <span class="text">Chest</span>
                             </a>
                         </li>
                         <li v-if="signed_in">

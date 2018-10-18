@@ -163,7 +163,7 @@
                         <h2>Stash</h2>
                         <ul>
                           <li><a href="#/stash">Stash</a></li>
-                          <li><a href="#/game-library">Game Library</a></li>
+                          <li><a href="#/chest">Chest</a></li>
                         </ul>
                     </div>
                     <div class="col">
