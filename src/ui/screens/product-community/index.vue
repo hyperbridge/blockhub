@@ -32,7 +32,7 @@
 
 <script>
     export default {
-        props: ['id'],
+        props: ['product'],
         components: {
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-item': (resolve) => require(['@/ui/components/community/post-item'], resolve),
