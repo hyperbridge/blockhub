@@ -139,19 +139,19 @@ export default {
             return [
                 {
                     id: 'application',
-                    name: 'Token',
+                    name: 'Application',
                     link: 'https://github.com/hyperbridge/protocol/tree/master/packages/token',
                     contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts)
                 },
                 {
                     id: 'marketplace',
-                    name: 'Marketplace Protocol',
+                    name: 'Marketplace',
                     link: 'https://github.com/hyperbridge/protocol/tree/master/packages/marketplace',
                     contracts: Object.values(this.$store.state.marketplace.ethereum[this.$store.state.marketplace.current_ethereum_network].contracts)
                 },
                 {
                     id: 'funding',
-                    name: 'Funding Protocol',
+                    name: 'Funding',
                     link: 'https://github.com/hyperbridge/protocol/tree/master/packages/funding',
                     contracts: Object.values(this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts)
                 }
