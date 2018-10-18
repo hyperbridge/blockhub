@@ -187,7 +187,7 @@
 
                         </div>
                     </c-slide>
-                    <c-slide>
+                    <c-slide v-if="this.navigationKey === 'store'">
                         <div class="item">
                             <h3>TOP LISTS</h3>
 
@@ -399,10 +399,6 @@
             }
         },
         data() {
-            if (this.navigationKey !== 'store') {
-                this.showRightPanel = false
-            }
-
             return {
                 navigationComponent: this.navigationKey || false,
                 loadingState: true,
