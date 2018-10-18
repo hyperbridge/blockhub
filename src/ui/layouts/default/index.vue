@@ -793,18 +793,18 @@
         }
     }
     
-    #content {
+    .content {
         width: 100%;
         padding-top: 0;
         margin: 0 auto;
     }
 
-    .page.left-sidebar #content, .page.right-sidebar #content {
+    .page.left-sidebar .content, .page.right-sidebar .content {
         width: calc(100% - 250px);
         margin: 0 0 0 auto;
     }
 
-    .page.left-sidebar.right-sidebar #content {
+    .page.left-sidebar.right-sidebar .content {
         width: calc(100% - 500px);
         margin: 0 auto;
     }
@@ -817,13 +817,6 @@
     }
 
     @media (max-width: 768px) {
-        #page-aside, #page-sidepanel {
-            display: none;
-        }
-
-        #content {
-            width: 100%;
-        }
     }
 
     @media (max-width: 991px) {
@@ -831,6 +824,16 @@
     }
 
     @media (max-width: 1200px) {
+        .page .page__content{
+            padding-top: 50px!important;
+        }
+        #page-aside, #page-sidepanel {
+            display: none;
+        }
+
+        .content {
+            width: 100%!important;
+        }
         
     }
 </style>

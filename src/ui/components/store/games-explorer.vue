@@ -271,4 +271,9 @@
             transform: rotate(180deg);
         }
     }
+    @media (max-width: 768px) {
+        .product-grid__filters{
+            display: none;
+        }
+    }
 </style>

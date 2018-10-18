@@ -51,6 +51,12 @@ export default {
             sliderOptions: {
                 slidesPerView: this.maxPerView,
                 spaceBetween: 15,
+                breakpoints: {
+                    768: {
+                        slidesPerView: 1,
+                        spaceBetween: 0
+                    },
+                }
             },
         }
     },
@@ -84,5 +90,11 @@ export default {
     }
     .product-grid__item{
         height: 100%;
+    }
+    @media (max-width: 768px) {
+        .swiper-container{
+            margin: 0;
+            padding: 0;
+        }
     }
 </style>

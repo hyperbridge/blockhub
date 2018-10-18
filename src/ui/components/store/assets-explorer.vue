@@ -298,4 +298,9 @@
             transform: rotate(180deg);
         }
     }
+    @media (max-width: 768px) {
+        .filter-blk{
+            display: none!important;
+        }
+    }
 </style>
