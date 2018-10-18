@@ -1,8 +1,13 @@
 <template>
     <div class="store-card">
-        <div class="store-card__badges" v-if="asset.system_tags">
+        <div class="store-card__badges" v-if="system_tags.length">
+            <c-badge-card
+                v-for="(tag, index) in system_tags"
+                class="store-card__single-badge"
+                :key="index"
+                :title="tag"
+            />
         </div>
-        <c-badge-card title="featured"/>
         <c-img :src="asset.image" class="store-card__image"/>
         <div class="store-card__info">
             <span class="store-card__name">{{ asset.name }}</span>
@@ -19,6 +24,11 @@ export default {
     props: ['asset'],
     components: {
         'c-badge-card': (resolve) => require(['@/ui/components/badge-card'], resolve),
+    },
+    data() {
+        return {
+            system_tags: ['featured']
+        }
     }
 }
 </script>
@@ -31,6 +41,7 @@ export default {
         padding: 10px;
         border-radius: 6px;
         position: relative;
+        z-index: 4;
 
         $status: (
 
@@ -47,10 +58,13 @@ export default {
 
         .store-card__badges {
             position: absolute;
-            left: -5px;
-            top: 5px;
+            left: 13px;
+            top: -13px;
             display: flex;
             align-items: center;
+            .store-card__single-badge {
+
+            }
         }
 
         &:after {

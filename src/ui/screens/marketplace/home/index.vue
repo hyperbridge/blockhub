@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="text-align-center margin-bottom-10">Top weekly picks</h2>
+        <h2 class="text-align-center margin-bottom-10">Picks of the week</h2>
         <div class="carousel-wrapper">
             <c-carousel-3d
                 :items="assets"

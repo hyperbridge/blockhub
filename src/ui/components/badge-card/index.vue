@@ -2,7 +2,7 @@
     <div class="badge-card">
         <span class="badge-card__text">
             {{ props.title }}
-            <span class="store-card__triangle--behind"></span>
+            <!-- <span class="store-card__triangle--behind"></span> -->
         </span>
         <div class="badge-card__triangle"></div>
     </div>
@@ -16,7 +16,7 @@
 
     .badge-card {
         position: relative;
-        // background: blue;
+        margin-right: 10px;
         z-index: 5;
         box-shadow: 0 0 5px 0 rgba(1,1,1,.1);
     }
@@ -36,11 +36,19 @@
         z-index: -1;
     }
     .store-card__triangle--behind {
-        @extend %triangle;
-        background: darken($border-color, 20%);
+        // @extend %triangle;
+        // background: darken($border-color, 20%);
+        // position: absolute;
+        // right: -8px;
+        // // top: 3px;
+        // top: 30px;
+        // z-index: -1;
         position: absolute;
+        border: 16px solid transparent;
         right: -8px;
         top: 3px;
+        border-bottom-color: darken($border-color, 20%);
+        z-index: -1;
     }
     .badge-card__text {
         display: block;
@@ -57,5 +65,16 @@
         position: relative;
         writing-mode: vertical-rl;
         text-transform: uppercase;
+        position: relative;
+        // z-index: 5;
+        &:after {
+            position: absolute;
+            content: "";
+            right: -11px;
+            top: -11px;
+            border: 11px solid transparent;
+            border-bottom-color: darken($border-color, 22%);
+            z-index: -1;
+        }
     }
 </style>
