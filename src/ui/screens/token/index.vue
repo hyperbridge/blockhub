@@ -117,14 +117,18 @@
 
                 <div class="col-6 offset-3" v-if="!ethereum_connected" style="text-align: center; width: 100%">
                     <h2>Alternative: MetaMask</h2>
-                    <p>The BlockHub desktop client is the recommended way to load up on tokens, but you can also purchase using the MetaMask web wallet. Come back to this page within BlockHub, or when you've installed MetaMask.</p>
 
                     <br />
+
                     <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en">
                         <img src="/static/img/metamask.png" style="max-width: 350px;margin: 0 auto" />
                     </a>
 
                     <br /><br />
+
+                    <p>The BlockHub desktop client is the recommended way to load up on tokens, but you can also purchase using the MetaMask web wallet. Come back to this page within BlockHub, or when you've installed MetaMask.</p>
+
+                    <br />
                 </div>
 
                 <div class="col-12" v-if="ethereum_connected && !ethereum_unlocked">
@@ -133,33 +137,36 @@
 
                 <div class="col-6 offset-3" v-if="ethereum_connected && !ethereum_unlocked && !desktop_mode" style="text-align: center; width: 100%; margin-top: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
                     <h2>Alternative: MetaMask</h2>
-                    <p>The BlockHub desktop client is the recommended way to load up on tokens, but if you'd like to purchase with MetaMask, open the extension to unlock your web wallet.</p>
 
                     <br />
 
                     <img src="/static/img/metamask-logo.png" style="max-width: 150px;margin: 0 auto;opacity: 0.3; filter: grayscale(1);" />
+
+                    <br /><br />
+
+                    <p>The BlockHub desktop client is the recommended way to load up on tokens, but if you'd like to purchase with MetaMask, open the extension to unlock your web wallet.</p>
                 </div>
                 
                 <div class="col-6 offset-3" v-if="ethereum_connected && ethereum_unlocked && !desktop_mode" style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
-                    <h2>Connected to MetaMask <span class="fa fa-check-circle" /></h2>
-                    
-                    <br />
-
                     <img src="/static/img/metamask-logo.png" style="max-width: 150px;margin: 0 auto;" />
+
+                    <br /><br />
+
+                    <h2>Connected to MetaMask <span class="fa fa-check-circle" /></h2>
                 </div>
 
-                <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && !account.is_verified && !account.is_verifying" style="text-align: center">
+                <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && desktop_mode && (!account.is_verified && !account.is_verifying)" style="text-align: center">
                     <h2 style="text-align: center">Oops, you haven't verified your account yet. <br />You'll need to do this to participate.</h2>
                     <br />
                     <c-button class="c-btn-lg" href="/#/account/verification" style="margin: 0 auto">Verify Account</c-button>
                 </div>
 
-                <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && !account.is_verified && account.is_verifying" style="text-align: center">
+                <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && desktop_mode && !account.is_verified && account.is_verifying" style="text-align: center">
                     <p>Your account is currently being verified. You'll need to wait until it's finished to participate.</p>
                     <p>Please check back later. If you've been waiting too long or have problems, please email support@hyperbridge.org</p>
                 </div>
                 
-                <div v-if="ethereum_connected && ethereum_unlocked && account.is_verified" style="text-align: center">
+                <div v-if="ethereum_connected && ethereum_unlocked && (!desktop_mode || account.is_verified)" style="text-align: center">
                     <div class="col-10 offset-1 tab-card">
                         <h4>Token Sale Agreement</h4>
                         <div class="terms_block">
@@ -462,6 +469,7 @@ export default {
 
                             window.web3.eth.getAccounts((err, accounts) => {
                                 this.purchaseAddress = accounts[0]
+                                this.account.public_address = accounts[0] // save for verification screen
                             })
                         })
                     } catch (error) {
