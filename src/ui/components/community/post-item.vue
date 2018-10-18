@@ -5,7 +5,7 @@
                 <i class="fas" :class="post_icon"></i>
             </div>
             <div class="text">
-                <router-link :to="{ name: 'Community discussion', params: {id: post.id } }">
+                <router-link :to="{ name: 'Community Discussion', params: {id: post.id } }">
                     {{ post.title }}
                 </router-link>
 
