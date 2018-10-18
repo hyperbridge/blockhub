@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false">
+    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false" :breadcrumbLinks="false">
         <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
@@ -7,28 +7,31 @@
                         <c-tab name="Account Verification" :selected="true" :showFooter="true">
                             <div class="tab-container">
                                 <div class="tab-card padding-20" v-if="is_verified">
-                                    <p>Your account has been verified!</p>
-                                    <p>You can request approval for your profiles below.</p>
+                                    <p>Your account has been verified. You can request approval for additional profiles below.</p>
 
-                                    <div
-                                        class="profile-picker__profile"
-                                        v-for="identity in identities"
-                                        :key="identity.id"
-                                    >
-                                        <c-user-card
-                                            :user="identity"
-                                            :previewMode="true"
-                                            :class="{ 'default': identity.chosen }"
-                                        />
-                                        <div class="profile__action">
-                                            <c-button
-                                                status="info"
-                                                icon="check"
-                                                @click="chooseIdentity(identity)"
-                                                v-if="!identity.chosen"
-                                            >Choose</c-button>
+                                    <div class="profile-picker">
+                                        <div
+                                            class="profile-picker__profile"
+                                            v-for="identity in identities"
+                                            :key="identity.id"
+                                        >
+                                            <c-user-card
+                                                :user="identity"
+                                                :previewMode="true"
+                                                :class="{ 'default': identity.chosen }"
+                                            />
+                                            <div class="profile__action">
+                                                <c-button
+                                                    status="info"
+                                                    icon="check"
+                                                    @click="chooseIdentity(identity)"
+                                                    v-if="!identity.chosen"
+                                                >Choose</c-button>
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <br />
 
                                     <c-button @click="verifyIdentity">
                                         Send Verification Request
@@ -43,7 +46,7 @@
                                     <div v-if="!verificationLink">
                                         <p>
                                             Submit proof of identity for KYC by providing your legal name, country of residence, and documentation.<br />
-                                            KYC means Know Your Customer. BlockHub is required by law to collect this information so that we know the source of money (money laundering prevention). This is important particularly because we're working with cryptocurrencies, with unknown account holders.
+                                            KYC means Know Your Customer. BlockHub is required by law to collect this information so that we know the source of money and comply with anti-money laundering laws. This is important because we handle cryptocurrencies, where account holders are unknown without KYC procedures.
                                         </p>
                                         <p>Please fill in the fields below. Afterward you will be taken to our partner Veriff to complete your identity verification. You will need to use the same information as you've used here.</p>
                                         <br /><br />
@@ -277,6 +280,61 @@
     p {
         font-size: 14px;
         line-height: 18px;
+    }
+
+
+    .profile-picker {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-picker__profile {
+        position: relative;
+        margin: 10px 2%;
+        width: 46%;
+        &:hover .profile__action, &.edit .profile__action {
+            display: flex;
+        }
+        >.default {
+            $defColor: #43C981;
+            border-color: $defColor !important;
+            &:before {
+                content: "";
+                width: 26px;
+                position: absolute;
+                border-radius: 5px 0 0 5px;
+                left: -22px;
+                bottom: -1px;
+                height: calc(100% + 2px);
+                background: $defColor;
+            }
+            &:after {
+                font-family: 'Font Awesome 5 Free', 'Barlow', sans-serif;
+                content: "CHOSEN \F14A";
+                color: #1C2032;
+                font-weight: bold;
+                font-size: 16px;
+                position: absolute;
+                transform: rotate(-90deg);
+                top: 40px;
+                left: -50px;
+            }
+        }
+    }
+
+    .profile__action {
+        display: none;
+        position: absolute;
+        justify-content: center;
+        bottom: -20px;
+        width: 100%;
+        height: 26px;
+        .c-btn {
+            margin: 0 5px;
+        }
     }
 
 </style>
