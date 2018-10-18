@@ -594,6 +594,12 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/chest'], resolve)
         },
         {
+            path: '/business',
+            name: 'Business',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/business'], resolve)
+        },
+        {
             path: '/marketplace',
             name: 'Marketplace',
             component: (resolve) => require(['@/ui/screens/marketplace'], resolve),
