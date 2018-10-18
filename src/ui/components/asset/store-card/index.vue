@@ -1,6 +1,8 @@
 <template>
     <div class="store-card">
-        <span class="badge-offer">FEATURED</span>
+        <div class="store-card__badges" v-if="asset.system_tags">
+        </div>
+        <span class="badge-card">featured</span>
         <c-img :src="asset.image" class="store-card__image"/>
         <div class="store-card__info">
             <span class="store-card__name">{{ asset.name }}</span>
@@ -45,7 +47,15 @@ export default {
         background-position: 0 0, 100% 0;
         background-repeat: no-repeat;
 
-        .badge-offer {
+        .store-card__badges {
+            position: absolute;
+            left: -5px;
+            top: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .badge-card {
             display: block;
             background-color: $border-color;
             border: 1px solid $border-color-lighter;
@@ -62,6 +72,7 @@ export default {
             transform: rotate(90deg);
             left: -5px;
             top: 5px;
+            text-transform: uppercase;
             &:after {
                 content: "";
                 position: absolute;

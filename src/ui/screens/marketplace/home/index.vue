@@ -1,27 +1,29 @@
 <template>
     <div>
-        <c-carousel-3d
-            :items="assets"
-            :limitTo="3"
-            class="margin-bottom-40"
-        >
-            <!-- <transition-group name="simple" class="carousel-3d__content" tag="div" slot-scope="props">
-                <c-asset-store-card
-                    v-for="(item, index) in props.items"
-                    :class="props.css[index]"
-                    :key="item.id"
-                    :asset="item"
-                />
-            </transition-group> -->
-            <template slot-scope="props">
-                <c-asset-store-card
-                    v-for="(item, index) in props.items"
-                    :class="props.css[index]"
-                    :key="item.id"
-                    :asset="item"
-                />
-            </template>
-        </c-carousel-3d>
+        <h2 class="text-align-center margin-bottom-10">Top weekly picks</h2>
+        <div class="carousel-wrapper">
+            <c-carousel-3d
+                :items="assets"
+                :limitTo="3"
+            >
+                <!-- <transition-group name="simple" class="carousel-3d__content" tag="div" slot-scope="props">
+                    <c-asset-store-card
+                        v-for="(item, index) in props.items"
+                        :class="props.css[index]"
+                        :key="item.id"
+                        :asset="item"
+                    />
+                </transition-group> -->
+                <template slot-scope="props">
+                    <c-asset-store-card
+                        v-for="(item, index) in props.items"
+                        :class="props.css[index]"
+                        :key="item.id"
+                        :asset="item"
+                    />
+                </template>
+            </c-carousel-3d>
+        </div>
         <c-block title="Recently sold" class="margin-bottom-40">
             <c-asset-list :assets="recentlySold" :transition="true"/>
         </c-block>
@@ -82,11 +84,13 @@ export default {
     .sold-list-move {
         transition: transform 1s;
     }
-    .simple {
-
+    .carousel-wrapper {
+        padding-top: 10px;
+        background: #ffffff15;
+        margin-bottom: 40px;
+        background: radial-gradient(ellipse at top, rgba(255,255,255,.07), transparent 50%);
     }
     .carousel-3d__transition {
-        // @extend .carousel-3d__content;
         &-enter, &-leave-to {
             opacity: 0;
             transform: translateY(30px);
