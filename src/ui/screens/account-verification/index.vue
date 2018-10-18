@@ -54,18 +54,27 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label class="sr-only">First Name</label>
-                                                    <input type="text" class="form-control" placeholder="First Name"
+                                                    <label class="sr-only">Given Name</label>
+                                                    <input type="text" class="form-control" placeholder="Given Name"
                                                             name="first_name" v-model="first_name">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label class="sr-only">Last Name</label>
-                                                    <input type="text" class="form-control" placeholder="Last Name"
+                                                    <label class="sr-only">Family Name</label>
+                                                    <input type="text" class="form-control" placeholder="Family Name"
                                                             name="last_name" v-model="last_name">
                                                 </div>
                                             </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">E-mail</label>
+                                                    <input type="text" class="form-control" placeholder="E-mail"
+                                                            name="email" v-model="email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Document Type</label>
@@ -157,6 +166,7 @@
                 been1hour: been1hour,
                 document_type: '',
                 document_number: '',
+                email: account.email,
                 first_name: account.first_name,
                 last_name: account.last_name,
                 public_address: account.public_address,
@@ -183,6 +193,7 @@
                 if (
                     this.first_name
                     && this.last_name
+                    && this.email
                     && this.document_type
                     && this.document_number
                     && this.public_address
@@ -198,7 +209,7 @@
                             },
                             additionalData: {
                                 eth: this.public_address,
-                                email: this.account.email,
+                                email: this.email,
                                 secret: this.account.secret_answer_2,
                                 identity: this.account.current_identity && this.account.current_identity.public_address
                             },

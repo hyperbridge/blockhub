@@ -62,7 +62,7 @@
             <!-- //END PAGE ASIDE PANEL -->
 
             <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
-                <c-breadcrumb :links="breadcrumbLinks" ref="breadcrumb" style="padding-left: 20px;" />
+                <c-breadcrumb :links="breadcrumbLinks" ref="breadcrumb" style="padding-left: 20px;" v-if="is_connected" />
                 <slot v-if="is_connected" />
             </div>
 
@@ -321,7 +321,7 @@
             },
             breadcrumbLinks: {
                 type: Array,
-                default: [],
+                default: () => ([]),
                 required: false
             }
         },
