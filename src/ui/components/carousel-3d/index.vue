@@ -1,10 +1,18 @@
 <template>
     <div class="carousel-3d">
-        <c-icon name="arrow-left" @click="focusedItem--"/>
+        <c-icon
+            name="arrow-circle-left"
+            class="carousel-3d__btn"
+            @click="focusedItem--"
+        />
         <div class="carousel-3d__content">
             <slot :items="visibleItems" :css="css"/>
         </div>
-        <c-icon name="arrow-right" @click="focusedItem++"/>
+        <c-icon
+            name="arrow-circle-right"
+            class="carousel-3d__btn"
+            @click="focusedItem++"
+        />
     </div>
 </template>
 
@@ -103,6 +111,12 @@
         align-items: center;
     }
 
+    .carousel-3d__btn {
+        cursor: pointer;
+        font-size: 35px;
+        color: rgba(255,255,255,.6);
+    }
+
     /deep/.carousel-3d__item {
         // position: absolute !important;
         // transition: transform .2s ease;
@@ -129,7 +143,8 @@
         }
     }
     /deep/.carousel-3d__content {
-        position: relative;
+        user-select: none;
+        width: 100%;
         display: flex;
         justify-content: center;
         height: 100%;
