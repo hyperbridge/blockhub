@@ -273,6 +273,8 @@
             </c-popup>
             
             <c-cookie-policy v-if="!desktop_mode" />
+
+            <c-clock />
         </div>
         <!-- //END PAGE CONTENT -->
 
@@ -338,6 +340,7 @@
             'c-product-navigation': (resolve) => require(['@/ui/components/navigation/product'], resolve),
             'c-project-navigation': (resolve) => require(['@/ui/components/navigation/project'], resolve),
             'c-notification': (resolve) => require(['@/ui/components/notification/index.vue'], resolve),
+            'c-clock': (resolve) => require(['@/ui/components/clock/index.vue'], resolve),
             'c-welcome-popup': (resolve) => require(['@/ui/components/welcome-popup/index.vue'], resolve),
             'c-download-popup': (resolve) => require(['@/ui/components/download-popup/index.vue'], resolve),
             'c-unlock-popup': (resolve) => require(['@/ui/components/unlock-popup/index.vue'], resolve),
@@ -582,6 +585,12 @@
         color: #fff;
     }
 
+    .clock {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+    }
+
     .loader-block {
         position: absolute;
         width: 100%;
@@ -788,6 +797,7 @@
             max-width: 100%;
         }
     }
+
     
     .content {
         width: 100%;
