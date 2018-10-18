@@ -20,6 +20,7 @@
     .logo-loader{
         display: inline-block;
         width: 100%;
+        -webkit-app-region: no-drag;
         img {
             width: 147px;
             filter: brightness(1.2);

@@ -286,6 +286,10 @@ export default {
     .desktop-draggable {
         -webkit-app-region: drag;
     }
+
+    .app-header a {
+        -webkit-app-region: no-drag;
+    }
 </style>
 
 <style lang="scss" scoped>
