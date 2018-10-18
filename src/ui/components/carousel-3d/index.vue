@@ -1,10 +1,10 @@
 <template>
     <div class="carousel-3d">
-        <c-icon name="arrow-left" @click="changeItem(-1)"/>
+        <c-icon name="arrow-left" @click="focusedItem--"/>
         <div class="carousel-3d__content">
             <slot :items="visibleItems"/>
         </div>
-        <c-icon name="arrow-right" @click="changeItem(1)"/>
+        <c-icon name="arrow-right" @click="focusedItem++"/>
     </div>
 </template>
 
@@ -19,26 +19,13 @@
         },
         data() {
             return {
-                focusItem: 1
+                focusedItem: 1
             }
         },
         methods: {
-            changeItem(dir) {
-                const { items, focusItem } = this;
-
-                if (dir) {
-                    if (focusItem === items.length - 1) {
-                        this.focusItem = 1;
-                    } else {
-                        this.focusItem++;
-                    }
-                } else {
-
-                }
-            }
         },
         computed: {
-            visibleItems() {
+            visItemsOld() {
                 return 4;
                 const { items, focusItem } = this;
                 const visible = [];
@@ -67,22 +54,22 @@
                 const focused = focusItem
                 return [focusItem, focusItem + 1, focusItem + 2];
             },
-            activeItems() {
-                const { items, focusItem, limitTo } = this;
+            visibleItems() {
+                const { items, focusedItem, limitTo } = this;
                 const { length } = items;
 
-                let focused = focusItem % length;
-                if (focused < 0) focused *= -1;
+                let focused = focusedItem % length;
+                if (focused < 0) focused = length + focused;
 
                 const itemsPerSide = (limitTo - 1) / 2;
 
                 const start = focused - itemsPerSide < 0
-                    ? assets.slice(length + focused - itemsPerSide, length)
-                    : assets.slice(focused - itemsPerSide, focused);
+                    ? items.slice(length - itemsPerSide, length)
+                    : items.slice(focused - itemsPerSide, focused)
 
-                const end = focused + 1 >= length
-                    ? assets.slice(0, length - focused)
-                    : assets.slice(focused + 1, focused + itemsPerSide + 1)  ;
+                const end = focused + 1 === length
+                    ? items.slice(0, itemsPerSide)
+                    : items.slice(focused + 1, focused + 1 + itemsPerSide)
 
                 return [...start, items[focused], ...end];
             }
