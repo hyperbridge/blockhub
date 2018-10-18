@@ -481,8 +481,8 @@
                     } else {
                         if (this.$route.name !== 'Home') {
                             this.breadcrumbLinks = [
-                                { title: 'Home' },
-                                { title: this.$route.name }
+                                { to: { path: '/' }, title: 'Home' },
+                                { to: { path: this.$route.path }, title: this.$route.name }
                             ]
                         }
                     }

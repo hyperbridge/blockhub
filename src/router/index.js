@@ -697,6 +697,7 @@ const router = new Router({
         },
         {
             path: "*",
+            name: 'Not Found',
             component: (resolve) => require(['@/ui/screens/not-found'], resolve)
         }
     ]
