@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="settings">
-        <div class="content" id="content">
             <c-block class="margin-bottom-30" title="Sitemap" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                 <div class="row">
                     <div class="col">
@@ -164,7 +163,7 @@
                         <h2>Stash</h2>
                         <ul>
                           <li><a href="#/stash">Stash</a></li>
-                          <li><a href="#/game-library">Game Library</a></li>
+                          <li><a href="#/chest">Chest</a></li>
                         </ul>
                     </div>
                     <div class="col">
@@ -183,7 +182,6 @@
                     </div>
                 </div>
             </c-block>
-        </div>
     </c-layout>
 </template>
 

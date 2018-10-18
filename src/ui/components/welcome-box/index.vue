@@ -237,4 +237,14 @@
             height: 100%;
         }
     }
+    @media (max-width: 768px){
+        .welcome-block__download-block{
+            .info{
+                padding: 30px;
+            }
+        }
+        .welcome-block__screen{
+            display: none;
+        }
+    }
 </style>

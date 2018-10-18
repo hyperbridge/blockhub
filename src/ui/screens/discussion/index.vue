@@ -1,6 +1,6 @@
 <template>
     <c-layout navigationKey="store">
-        <div class="content" id="content">
+
             <div class="container-fluid">
                 <c-block :noGutter="true" :onlyContentBg="true">
                     <c-heading-bar
@@ -20,7 +20,6 @@
                     </div>
                 </c-block>
             </div>
-        </div>
     </c-layout>
 </template>
 

@@ -220,10 +220,10 @@ export const runCommand = async (cmd, meta = {}) => {
 
             return resolve(await sendCommand('promptPasswordResponse', res, meta.client, cmd.requestId))
         } else if (cmd.key === 'setProtocolConfig') {
-            const { currentNetwork, protocolName, config } = cmd.data
+            const { currentNetwork, protocolName, moduleName, config } = cmd.data
         
-            local.store.state[protocolName].ethereum[currentNetwork] = config
-            local.store.dispatch(protocolName + '/updateState')
+            local.store.state[moduleName].ethereum[currentNetwork] = config
+            local.store.dispatch(moduleName + '/updateState')
         } else if (cmd.key === 'setAccountRequest') {
             const res = await setAccountRequest(cmd.data)
 
@@ -247,10 +247,17 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'systemError') {
             console.warn('[DesktopBridge] Received system error from desktop', cmd.data)
 
-            BlockHub.Notifications.error(cmd.data, 'Desktop Error', {
+            BlockHub.Notifications.error(cmd.data, 'System Error', {
                 timeout: 5000,
                 pauseOnHover: true
             })
+
+            // Don't let promise callbacks get stuck
+            for(let i in local.requests) {
+                local.requests[i].reject()
+
+                delete local.requests[i]
+            }
         } else if (cmd.key === 'navigate') {
             local.router.push(cmd.data)
         } else {

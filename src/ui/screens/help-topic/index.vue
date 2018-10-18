@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="help">
-        <div class="content" id="content">
             <div class="container-fluid" v-if="topic">
                 <div class="row">
                     <div class="col-12">
@@ -35,7 +34,7 @@
                         </c-block>
 
                     </div>
-                    <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                         <c-card class="text-center">
                             <h4 class="h2">Community</h4>
                             <p>Engage with a community of passionate experts to get the answers you need</p>
@@ -44,7 +43,7 @@
                             </c-button>
                         </c-card>
                     </div>
-                    <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                         <c-card class="text-center">
                             <h4 class="h2">BlockHub Support</h4>
                             <p>Create a support ticket and our support experts will get back to you</p>
@@ -57,7 +56,6 @@
             <div v-if="!article">
                 Oh no! That topic was not found!
             </div>
-        </div>
     </c-layout>
 </template>
 

@@ -78,5 +78,11 @@ export default {
     align-items: center;
     z-index: 999;
     justify-content: space-between;
+    @media (max-width: 768px) {
+        right: 0;
+        left: 0;
+        bottom: 0;
+        border-radius: 0;
+    }
 }
 </style>

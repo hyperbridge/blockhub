@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="help" :showLeftPanel="false" :showRightPanel="false">
-        <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 mb-4">
@@ -18,7 +17,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 

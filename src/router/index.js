@@ -8,7 +8,7 @@ const appVersion = '0.6.1'
 
 const router = new Router({
     //mode: 'history',
-    scrollBehavior: (to, from, savedPosition) => to.name === 'Search Page' && from.name === 'Search Page'
+    scrollBehavior: (to, from, savedPosition) => to.name === 'Search' && from.name === 'Search'
         ? savedPosition
         : ({ y: 0 })
     ,
@@ -128,7 +128,11 @@ const router = new Router({
             name: 'Store Invoices',
             component: (resolve) => require(['@/ui/screens/store-invoices'], resolve),
             meta: {
-                auth: true
+                auth: true,
+                breadcrumb: [
+                    { title: 'Store' },
+                    { title: 'Store Invoices' }
+                ]
             }
         },
         {
@@ -137,7 +141,12 @@ const router = new Router({
             props: true,
             component: (resolve) => require(['@/ui/screens/store-invoice'], resolve),
             meta: {
-                auth: true
+                auth: true,
+                breadcrumb: [
+                    { title: 'Store' },
+                    { title: 'Store Invoices' },
+                    { title: 'Store Invoice' }
+                ]
             }
         },
         {
@@ -188,11 +197,7 @@ const router = new Router({
         {
             path: '/account/verification',
             name: 'Account Verification',
-            component: (resolve) => require(['@/ui/screens/account-verification'], resolve),
-            meta: {
-                auth: true,
-                permission: 'signed_in'
-            }
+            component: (resolve) => require(['@/ui/screens/account-verification'], resolve)
         },
         {
             path: '/account/verification/callback',
@@ -205,31 +210,25 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/account-wallets'], resolve),
             meta: {
                 auth: true,
-                permission: 'signed_in'
-            }
-        },
-        {
-            path: '/account/new-wallet',
-            name: 'New Wallet',
-            component: (resolve) => require(['@/ui/screens/account-new-wallet'], resolve),
-            meta: {
-                permission: 'signed_in'
+                permission: 'signed_in',
+                breadcrumb: [
+                    { title: 'Home' },
+                    { title: 'Account' },
+                    { title: 'Wallets' }
+                ]
             }
         },
         {
             path: '/account/identities',
-            name: 'Identities',
+            name: 'Profiles',
             component: (resolve) => require(['@/ui/screens/account-identities'], resolve),
             meta: {
-                permission: 'signed_in'
-            }
-        },
-        {
-            path: '/account/new-identity',
-            name: 'New Identity',
-            component: (resolve) => require(['@/ui/screens/account-new-identity'], resolve),
-            meta: {
-                permission: 'signed_in'
+                permission: 'signed_in',
+                breadcrumb: [
+                    { title: 'Home' },
+                    { title: 'Account' },
+                    { title: 'Profiles' }
+                ]
             }
         },
         {
@@ -252,37 +251,37 @@ const router = new Router({
         },
         {
             path: '/identity/:id',
-            name: 'Identity',
+            name: 'Profile',
             props: true,
             component: (resolve) => require(['@/ui/screens/identity-overview'], resolve)
         },
         {
             path: '/identity/:id/contacts',
-            name: 'Identity Contacts',
+            name: 'Profile Contacts',
             props: true,
             component: (resolve) => require(['@/ui/screens/identity-contacts'], resolve)
         },
         {
             path: '/identity/:id/projects',
-            name: 'Identity Projects',
+            name: 'Profile Projects',
             props: true,
             component: (resolve) => require(['@/ui/screens/identity-projects'], resolve)
         },
         {
             path: '/identity/:id/licenses',
-            name: 'Identity licenses',
+            name: 'Profile licenses',
             props: true,
             component: (resolve) => require(['@/ui/screens/identity-licenses'], resolve)
         },
         {
             path: '/identity/:id/assets',
-            name: 'Identity Assets',
+            name: 'Profile Assets',
             props: true,
             component: (resolve) => require(['@/ui/screens/identity-assets'], resolve)
         },
         {
             path: '/identity/:id/collections',
-            name: 'Identity Collections',
+            name: 'Profile Collections',
             props: true,
             component: (resolve) => require(['@/ui/screens/identity-collection'], resolve)
         },
@@ -358,7 +357,7 @@ const router = new Router({
         {
             path: '/developer/new-product',
             name: 'New Product',
-            component: (resolve) => require(['@/ui/screens/product-overview'], resolve),
+            component: (resolve) => require(['@/ui/screens/product'], resolve),
             props: {
                 id: 'new'
             }
@@ -367,25 +366,37 @@ const router = new Router({
             path: '/product/:id',
             name: 'Product',
             props: true,
-            component: (resolve) => require(['@/ui/screens/product-overview'], resolve)
+            component: (resolve) => require(['@/ui/screens/product'], resolve),
+            meta: {
+                section: 'overview'
+            }
         },
         {
             path: '/product/:id/community',
             name: 'Product Community',
             props: true,
-            component: (resolve) => require(['@/ui/screens/product-community'], resolve)
+            component: (resolve) => require(['@/ui/screens/product'], resolve),
+            meta: {
+                section: 'community'
+            }
         },
         {
             path: '/product/:id/projects',
             name: 'Product Projects',
             props: true,
-            component: (resolve) => require(['@/ui/screens/product-projects'], resolve)
+            component: (resolve) => require(['@/ui/screens/product'], resolve),
+            meta: {
+                section: 'projects'
+            }
         },
         {
             path: '/product/:id/assets',
             name: 'Product Assets',
             props: true,
-            component: (resolve) => require(['@/ui/screens/product-assets'], resolve)
+            component: (resolve) => require(['@/ui/screens/product'], resolve),
+            meta: {
+                section: 'assets'
+            }
         },
         {
             path: '/community',
@@ -393,8 +404,8 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/community'], resolve),
             meta: {
                 breadcrumb: [
-                    { to: 'Home', title: 'Home' },
-                    { to: 'Community', title: 'Community' }
+                    { title: 'Home' },
+                    { title: 'Community' }
                 ]
             }
         },
@@ -410,9 +421,9 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/community-forum'], resolve),
             meta: {
                 breadcrumb: [
-                    { name: 'Home', link: '/' },
-                    { name: 'Community', link: '/community' },
-                    { name: 'Community forum', link: '' }
+                    { title: 'Home' },
+                    { title: 'Community' },
+                    { title: 'Community Forum' }
                 ]
             }
         },
@@ -457,7 +468,11 @@ const router = new Router({
         {
             path: '/projects',
             name: 'Crowdfunds',
-            component: (resolve) => require(['@/ui/screens/projects'], resolve)
+            component: (resolve) => require(['@/ui/screens/projects'], resolve),
+            breadcrumb: [
+                { title: 'Home' },
+                { title: 'Crowdfunds' }
+            ]
         },
         {
             path: '/project/:id',
@@ -526,7 +541,7 @@ const router = new Router({
         },
         {
             path: '/download',
-            name: 'Download Page',
+            name: 'Download',
             component: (resolve) => require(['@/ui/screens/download'], resolve)
         },
         {
@@ -547,12 +562,12 @@ const router = new Router({
         },
         {
             path: '/search',
-            name: 'Search Page',
+            name: 'Search',
             component: (resolve) => require(['@/ui/screens/search'], resolve)
         },
         {
-            path: '/discussion/',
-            name: 'Discussions Page',
+            path: '/discussion',
+            name: 'Discussion',
             props: true,
             component: (resolve) => require(['@/ui/screens/discussion'], resolve)
         },
@@ -573,10 +588,10 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/updates'], resolve)
         },
         {
-            path: '/game-library',
-            name: 'Game Library',
+            path: '/chest',
+            name: 'Chest',
             props: true,
-            component: (resolve) => require(['@/ui/screens/game-library'], resolve)
+            component: (resolve) => require(['@/ui/screens/chest'], resolve)
         },
         {
             path: '/marketplace',

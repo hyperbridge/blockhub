@@ -1,6 +1,5 @@
 <template>
-    <c-layout navigationKey="project">
-        <div class="content" id="content">
+    <c-layout navigationKey="project" :breadcrumbLinks="breadcrumbLinks">
             <div class="container-fluid">
                 <div class="row" v-if="!project">
                     <div class="col-12">
@@ -137,7 +136,6 @@
                     </div>
                 </div>
             </div>
-        </div>
 
         <div class="modal fade" id="invertFormExampleModal" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -278,6 +276,14 @@
         },
         computed: {
             project: updateProject,
+            breadcrumbLinks() {
+                return [
+                    { to: { path: '/' }, title: 'Home' },
+                    { to: { path: '/projects' }, title: 'Crowdfunds' },
+                    { to: { path: '/project/' + this.project.id }, title: this.project.name },
+                    { to: { path: '' }, title: 'Community' }
+                ]
+            }
         },
         watch: {
         },

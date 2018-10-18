@@ -317,4 +317,13 @@
             text-decoration: none;
         }
     }
+    @media (max-width: 768px) {
+        .games-list__item{
+            flex-direction: column;
+            .img,
+            .info{
+                width: 100%;
+            }
+        }
+    }
 </style>

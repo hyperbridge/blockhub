@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="store">
-        <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row margin-bottom-50">
                     <div class="col-12 col-lg-8">
@@ -68,7 +67,6 @@
                     </div>
                 </c-block>
             </div>
-        </div>
     </c-layout>
 </template>
 

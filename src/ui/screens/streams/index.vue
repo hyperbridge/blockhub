@@ -1,11 +1,9 @@
 <template>
     <c-layout navigationKey="store">
-        <div class="content" id="content">
             <div class="container-fluid">
                 <h2>Streams</h2>
                 <c-infinite-content :list="list" />
             </div>
-        </div>
     </c-layout>
 </template>
 

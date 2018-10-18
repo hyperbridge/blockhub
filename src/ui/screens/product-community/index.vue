@@ -1,89 +1,39 @@
 <template>
-    <c-layout navigationKey="product" navigationTitle="GAME COMMUNITY">
-        <div class="content" id="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12" v-if="!product">
-                        Product not found
-                    </div>
-                    <div class="col-12" v-if="product">
-                        <h1 class="title margin-top-10">{{ product.name }}</h1>
+    <div class="row">
+        <div v-if="community_1">
+            <c-item
+                v-for="(post, index) in posts"
+                :key="index"
+                :post="post"
+            />
+        </div>
 
-                        <c-tags-list :tags="product.developer_tags" v-if="!editing || product.developer_tags"></c-tags-list>
+        <div v-if="community_2">
+            <div class="community-wrapper">
 
-                        <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
-                            <li class="nav-item">
-                                <router-link :to="`/product/${product.id}`" class="nav-link">Overview</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/product/${product.id}/community`" class="nav-link active">Community</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/product/${product.id}/projects`" class="nav-link">Crowdfunding</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/product/${product.id}/assets`" class="nav-link">Assets</router-link>
-                            </li>
-                        </ul>
+                <c-item :post="post"/>
 
-                        <div v-if="community_1">
-                            <c-item
-                                v-for="(post, index) in posts"
-                                :key="index"
-                                :post="post"
-                            />
-                        </div>
+                <c-post-comment
+                    v-for="(comment, index) in post.content.comments"
+                    :key="index"
+                    :comment="comment"
+                >
+                    <c-post-comment
+                        v-for="(subcomment, index) in comment.replies"
+                        :key="index"
+                        :comment="subcomment"
+                    />
+                </c-post-comment>
 
-                        <div v-if="community_2">
-                            <div class="community-wrapper">
-
-                                <c-item :post="post"/>
-
-                                <c-post-comment
-                                    v-for="(comment, index) in post.content.comments"
-                                    :key="index"
-                                    :comment="comment"
-                                >
-                                    <c-post-comment
-                                        v-for="(subcomment, index) in comment.replies"
-                                        :key="index"
-                                        :comment="subcomment"
-                                    />
-                                </c-post-comment>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
             </div>
         </div>
-    </c-layout>
+    </div>
 </template>
 
 <script>
-    const updateProduct = function () {
-        if (!this.$store.state.marketplace.products)
-            return
-
-        const product = this.$store.state.marketplace.products[this.id]
-
-        if (!product)
-            return
-
-        if (product.images.preview && product.images.preview.length) {
-            const header = window.document.getElementById('header-bg');
-            header.style['background-image'] = 'url(' + product.images.preview[0] + ')';
-            header.style['background-size'] = 'cover';
-        }
-
-        return product
-    }
-
     export default {
-        props: ['id'],
+        props: ['product'],
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-item': (resolve) => require(['@/ui/components/community/post-item'], resolve),
             'c-post-comment': (resolve) => require(['@/ui/components/community/comment'], resolve)
@@ -168,29 +118,17 @@
                 }
             }
         },
-        methods: {
-            save() {
-                this.$store.dispatch('marketplace/updateProduct', this.product)
-            }
-        },
         computed: {
-            product: updateProduct,
-            editing() {
-                if (!this.$store.state.application.editor_mode) {
-                    for (let key in this.activeElement) {
-                        this.activeElement[key] = false
-                    }
-                }
-                return this.$store.state.application.editor_mode === 'editing'
-            },
-            first_product(){
+            first_product() {
                 return this.$store.state.marketplace.first_product
+            },
+            breadcrumbLinks() {
+                return [
+                    { to: { path: '/' }, title: 'Store' },
+                    { to: { path: '/product/' + this.product.id }, title: this.product.name },
+                    { to: { path: '' }, title: 'Community' }
+                ]
             }
-        },
-        mounted: updateProduct,
-        created: updateProduct,
-        beforeDestroy() {
-            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'
         }
     }
 </script>

@@ -1,99 +1,23 @@
 <template>
-    <c-layout navigationKey="product" navigationTitle="GAME INVENTORY">
-        <div class="content" id="content">
-            <div class="container-fluid">
-                <div class="row" v-if="!product">
-                    <div class="col-12">
-                        Product not found
-                    </div>
-                </div>
-
-
-
-                <div class="row" v-if="product">
-                    <div class="col-12">
-                        <h1 class="title margin-top-10">{{ product.name }}</h1>
-
-                        <c-tags-list :tags="product.developer_tags"></c-tags-list>
-
-                        <ul class="nav nav-tabs justify-content-between margin-bottom-30">
-                            <li class="nav-item">
-                                <router-link :to="`/product/${product.id}`" class="nav-link">Overview</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/product/${product.id}/community`" class="nav-link">Community</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/product/${product.id}/projects`" class="nav-link">Crowdfunding</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/product/${product.id}/assets`" class="nav-link active">Assets</router-link>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-12 d-flex justify-content-between flex-wrap assets-list margin-bottom-30">
-                        <div class="assets-list__item-container">
-                            <c-assets-list-item></c-assets-list-item>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <c-assets-grid :list="product.assets" />
-                    </div>
-                </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-between flex-wrap assets-list margin-bottom-30">
+            <div class="assets-list__item-container">
+                <c-assets-list-item></c-assets-list-item>
             </div>
         </div>
-    </c-layout>
+        <div class="col-12">
+            <c-assets-grid :list="product.assets" />
+        </div>
+    </div>
 </template>
 
 <script>
-    const updateProduct = function() {
-        if (!this.$store.state.marketplace.products)
-            return
-
-        const product = this.$store.state.marketplace.products[this.id]
-
-        if (!product)
-            return
-
-        if (product.images.preview && product.images.preview.length) {
-            const header = window.document.getElementById('header-bg');
-            header.style['background-image'] = 'url(' + product.images.preview[0] + ')';
-            header.style['background-size'] = 'cover';
-        }
-
-        product.assets = []
-
-        return product
-    }
-
     export default {
-        props: ['id'],
+        props: ['product'],
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid'], resolve),
             'c-assets-list-item': (resolve) => require(['@/ui/components/assets-list-item'], resolve)
-        },
-        methods: {
-            save() {
-                this.$store.dispatch('marketplace/updateProduct', this.product)
-            }
-        },
-        computed: {
-            product: updateProduct,
-            editing() {
-                if (!this.$store.state.application.editor_mode) {
-                    for (let key in this.activeElement) {
-                        this.activeElement[key] = false
-                    }
-                }
-                return this.$store.state.application.editor_mode === 'editing'
-            },
-        },
-        mounted: updateProduct,
-        created: updateProduct,
-        beforeDestroy() {
-            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'
         }
     }
 </script>
