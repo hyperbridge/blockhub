@@ -807,9 +807,6 @@ export default {
                 }
             }
             &.close_w {
-                width: 26px;
-                height: 26px;
-
                 &:before {
                     bottom: 50%;
                     top: 50%;

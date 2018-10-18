@@ -227,6 +227,10 @@
 </script>
 
 <style lang="scss" scoped>
+    #app {
+        -webkit-user-select: none;
+    }
+    
     .fixed-panel {
         width: 540px;
         right: -540px;
