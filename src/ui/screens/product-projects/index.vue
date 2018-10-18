@@ -40,13 +40,13 @@
                                 </div>
                             </div>
                             <div>
-                                <c-button status="info" icon_hide>Submit Project</c-button>
+                                <c-button status="info" icon_hide>Suggest Idea</c-button>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12">
-                        <c-block title="Top 3 Submissions" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                        <c-block title="Top 3 Ideas" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                             <div class="d-flex flex-wrap" style="margin: -10px">
                                 <c-project-card
                                     v-for="(project, index) in projects"
