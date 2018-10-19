@@ -3,13 +3,17 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        Marketplace
+                        <h1>Marketplace</h1>
+                        <transition name="slider">
+                            <h2 :key="$route.name">
+                                {{ $route.name | cut }}
+                            </h2>
+                        </transition>
+
                         <ul>
-                            <li v-for="(link, index) in marketRoutes" :key="index">
-                                <router-link :to="{ name: link.name }">{{ link.name | cut }}</router-link>
+                            <li v-for="(link, index) in links" :key="index">
+                                <router-link :to="{ name: link }">{{ link | cut }}</router-link>
                             </li>
-                            <!-- <li><router-link :to="'/marketplace'">Home</router-link></li>
-                            <li><router-link :to="'/marketplace/search'">Search</router-link></li> -->
                         </ul>
                         <transition name="page">
                             <router-view/>
@@ -34,10 +38,19 @@
         },
         data() {
             return {
+                links: [
+                    'Marketplace',
+                    'Marketplace Trade Manager',
+                    'Marketplace Snipers',
+                    'Marketplace Search'
+                ]
             }
         },
         computed: {
-            marketRoutes: () => router.options.routes.find(route => route.name === 'Marketplace').children
+            marketRoutes: () => {
+                return []
+                router.options.routes.find(route => route.name === 'Marketplace').children
+            }
         },
         filters: {
             cut: val => val.replace('Marketplace ', '')
@@ -59,6 +72,27 @@
     .page-leave-active {
         position: absolute;
         width: calc(100% - 30px);
+    }
+
+    .slider {
+        &-leave-active {
+            transition: opacity .35s ease, transform .35s ease;
+        }
+        &-enter-active {
+            transition: opacity .6s ease, transform .6s ease;
+        }
+        &-enter, &-leave-to {
+            opacity: 0;
+        }
+        &-enter {
+            transform: translateY(-30px);
+        }
+        &-leave-to {
+            transform: translateY(25px);
+        }
+        &-leave-active {
+            position: absolute;
+        }
     }
 </style>
 

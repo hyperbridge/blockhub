@@ -623,13 +623,28 @@ const router = new Router({
         },
         {
             path: '/marketplace',
-            name: 'Marketplace',
             component: (resolve) => require(['@/ui/screens/marketplace'], resolve),
             children: [
                 {
                     path: '',
-                    name: 'Marketplace Home',
+                    name: 'Marketplace',
                     component: (resolve) => require(['@/ui/screens/marketplace/home'], resolve),
+                },
+                {
+                    path: 'trade',
+                    component: (resolve) => require(['@/ui/screens/marketplace/trade'], resolve),
+                    children: [
+                        {
+                            path: '',
+                            name: 'Marketplace Trade Manager',
+                            component: (resolve) => require(['@/ui/screens/marketplace/trade/home'], resolve),
+                        },
+                        {
+                            path: ':id',
+                            name: 'Marketplace Trade',
+                            component: (resolve) => require(['@/ui/screens/marketplace/trade/_id'], resolve)
+                        }
+                    ]
                 },
                 {
                     path: 'snipers',
@@ -658,11 +673,6 @@ const router = new Router({
                     component: (resolve) => require(['@/ui/screens/marketplace-inventory/compare'], resolve),
                 }
             ]
-        },
-        {
-            path: '/marketplace/trade',
-            name: 'Marketplace Trade',
-            component: (resolve) => require(['@/ui/screens/marketplace-trade'], resolve)
         },
         {
             path: '/marketplace/trade/:tradeId',
