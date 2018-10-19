@@ -1,5 +1,5 @@
 <template>
-    <c-layout :breadcrumbLinks="[]">
+    <c-layout>
         <div class="container-fluid">
             <div class="row" style="">
                 <div class="col-6 mb-4">

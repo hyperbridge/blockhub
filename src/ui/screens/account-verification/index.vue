@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false" :breadcrumbLinks="[]">
+    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false">
         <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
@@ -50,8 +50,9 @@
                                     <div v-if="!verificationLink">
                                         <p>
                                             Submit proof of identity for KYC by providing your legal name, country of residence, and documentation.<br /><br />
-                                            KYC means Know Your Customer. BlockHub is required by law to collect this information so that we know the source of money and comply with anti-money laundering laws. This is important because we handle cryptocurrencies, where account holders are unknown without KYC procedures.<br /><br />
-                                            Please fill in the fields below. Afterward you will be taken to our partner Veriff to complete your identity verification. You will need to use the same information as you've used here.
+                                            KYC stands for Know Your Customer. BlockHub is required by law to collect this information so that we know the source of money and comply with anti-money laundering laws by assessing potential risks of illegal intentions. As we are handling cryptocurrencies, account holders are entirely unknown, and we want to be very safe by following strict KYC procedure. We do anticipate these procedures can be relaxed post-launch, and will work with our lawyers on that, as our token represents the same utility as many existing point systems.<br /><br />
+                                            Please fill in the fields below. Afterward you will be taken to our partner Veriff to complete your identity verification. You will need to use the same information as you've used here.<br /><br />
+                                            <strong>Disclaimer:</strong> We're working with our lawyers in multiple jurisdictions to determine which countries can purchase. As of this moment we know for certain these countries cannot participate: China, Canada. We're very sorry and hope we can extend support worldwide in the future.
                                         </p>
                                         <br /><br />
 
@@ -192,6 +193,8 @@
             verifyIdentity() {
                 // send a contract call
                 // encrypt identity with the secret answer #2
+                // manual override for now lol
+                this.manual_override = true
             },
             verifyAccount() {
                 if (

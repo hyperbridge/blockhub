@@ -95,7 +95,10 @@ const router = new Router({
         {
             path: '/token',
             name: 'Token',
-            component: (resolve) => require(['@/ui/screens/token'], resolve)
+            component: (resolve) => require(['@/ui/screens/token'], resolve),
+            meta: {
+                breadcrumb: false
+            }
         },
         {
             path: '/redeem',
@@ -197,12 +200,18 @@ const router = new Router({
         {
             path: '/account/verification',
             name: 'Account Verification',
-            component: (resolve) => require(['@/ui/screens/account-verification'], resolve)
+            component: (resolve) => require(['@/ui/screens/account-verification'], resolve),
+            meta: {
+                breadcrumb: false
+            }
         },
         {
             path: '/account/verification/callback',
             name: 'Account Verification',
-            component: (resolve) => require(['@/ui/screens/account-verification-callback'], resolve)
+            component: (resolve) => require(['@/ui/screens/account-verification-callback'], resolve),
+            meta: {
+                breadcrumb: false
+            }
         },
         {
             path: '/account/wallets',
@@ -234,7 +243,10 @@ const router = new Router({
         {
             path: '/kyc',
             name: 'KYC',
-            component: (resolve) => require(['@/ui/screens/kyc'], resolve)
+            component: (resolve) => require(['@/ui/screens/kyc'], resolve),
+            meta: {
+                breadcrumb: false
+            }
         },
         {
             path: '/wallet/:id',

@@ -478,6 +478,8 @@
                 if (this.breadcrumbLinks.length === 0) {
                     if (this.$route.meta.breadcrumb) {
                         this.breadcrumbLinks = this.$route.meta.breadcrumb
+                    } else if (this.$route.meta.breadcrumb === false) {
+                        this.breadcrumbLinks = []
                     } else {
                         if (this.$route.name !== 'Home') {
                             this.breadcrumbLinks = [

@@ -1,6 +1,6 @@
 <template>
     <c-layout navigationKey="product" :showRightPanel="false" navigationTitle="GAME OVERVIEW"
-              :breadcrumbLinks="breadcrumbLinks">
+              :breadcrumbLinks="editing ? [] : breadcrumbLinks">
         <div class="container-fluid">
             <div class="row" v-if="!product">
                 <div class="col-12">
