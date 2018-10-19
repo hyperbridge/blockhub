@@ -208,6 +208,9 @@
                 ))) {
                     this.$router.push({ path: '/welcome' })
                 }
+            },
+            updateEditorMode() {
+                this.$store.state.application.editor_mode = 'viewing'
             }
         },
         mounted() {
@@ -220,6 +223,7 @@
                 $('body').removeClass('show-sidebar')
                 $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-cog')
 
+                this.updateEditorMode()
                 this.ensureDesktopWelcome(to)
             }
         }

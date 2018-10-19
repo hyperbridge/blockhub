@@ -30,6 +30,7 @@
                                     <c-button @click="toggleDesktopMode()">Desktop Mode is {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
                                     <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button>
                                     <c-button @click="toggleDeveloperMode()">Developer Mode is {{ developer_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="rotateEditorMode()">Editor Mode is {{ $store.state.application.editor_mode }}</c-button>
                                     <c-button @click="rotateOperatingSystem()">Operating System is {{ operating_system === 'mac' ? 'MAC' : (operating_system === 'windows' ? 'WINDOWS' : 'LINUX' ) }}</c-button>
                                     <c-button @click="$store.state.application.account.is_verified = !$store.state.application.account.is_verified">Account is {{ $store.state.application.account.is_verified ? 'VERIFIED' : 'NOT VERIFIED' }}</c-button>
                                     <br /><br />
@@ -347,6 +348,15 @@ export default {
         },
         toggleSimulator() {
             this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulator_mode)
+        },
+        rotateEditorMode() {
+            if (this.$store.state.application.editor_mode === 'editing') {
+                this.$store.state.application.editor_mode = 'viewing'
+            } else if (this.$store.state.application.editor_mode === 'viewing') {
+                this.$store.state.application.editor_mode = 'publishing'
+            } else {
+                this.$store.state.application.editor_mode = 'editing'
+            }
         },
         rotateOperatingSystem() {
             if (this.$store.state.application.operating_system === 'mac') {

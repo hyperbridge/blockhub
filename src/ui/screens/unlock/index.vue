@@ -4,8 +4,5 @@
 
 <script>
 export default {
-    components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-    }
 }
 </script>
