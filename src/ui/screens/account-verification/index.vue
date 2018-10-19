@@ -38,11 +38,15 @@
                                     </c-button>
                                 </div>
                                 <div class="tab-card padding-20" v-if="is_verifying">
-                                    <p>Your account is undergoing verification!</p>
-                                    <p v-if="!been1hour">Something wrong? You can submit again in 1 hour</p>
-                                    <p v-if="been1hour">Something wrong? <c-button @click="overrideForm">Show Form</c-button></p>
+                                    <div class="col-12 mb-4 text-center">
+                                        <h2><img src="/static/img/success.png" style="max-width: 40px;" /> Account Verification Requested</h2>
+                                        <p>Account is undergoing verification. You can now close this browser tab.</p>
+                                        <br />
+                                        <p v-if="!been1hour">Something wrong? You can submit again in 1 hour</p>
+                                        <p v-if="been1hour">Something wrong? <c-button @click="overrideForm">Show Form</c-button></p>
+                                    </div>
                                 </div>
-                                <div class="tab-card padding-20" v-if="!(is_verified || is_verifying) || !manual_override">
+                                <div class="tab-card padding-20" v-if="!(is_verified || is_verifying) || been1hour || manual_override">
                                     <div v-if="!verificationLink">
                                         <p>
                                             Submit proof of identity for KYC by providing your legal name, country of residence, and documentation.<br /><br />
@@ -152,7 +156,7 @@
         data() {
             const account = this.$store.state.application.account
 
-            let been1hour = true
+            let been1hour = false
 
             if (account.verification_timestamp) {
                 been1hour = (Math.abs(new Date() - new Date(account.verification_timestamp)) / 36e5) > 1
@@ -172,7 +176,7 @@
                 public_address: account.public_address,
                 account: account,
                 is_verified: account.is_verified, //account.is_verified,
-                is_verifying: account.is_verifying,
+                is_verifying: true,
                 verification_timestamp: account.verification_timestamp,
                 verificationLink: null
             }
