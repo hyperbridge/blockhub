@@ -2,6 +2,7 @@
     <c-layout navigationKey="store">
             <div class="container-fluid">
                 <c-infinite-content :list="list" />
+                <p>No curators yet. Stay tuned!</p>
             </div>
     </c-layout>
 </template>

@@ -199,10 +199,20 @@
                 return this.$store.state.marketplace.first_product
             },
             breadcrumbLinks() {
-                return [
-                    {to: {path: '/'}, title: 'Store'},
-                    {to: {path: ''}, title: this.product.name}
+                const links = [
+                    { to: { path: '/' }, title: 'Store' },
+                    { to: { path: '/product/' + this.product.id }, title: this.product.name }
                 ]
+
+                if (this.section === 'community') {
+                    links.push({ to: { path: '' }, title: 'Community' })
+                } else if (this.section === 'projects') {
+                    links.push({ to: { path: '' }, title: 'Crowdfunding' })
+                } else if (this.section === 'assets') {
+                    links.push({ to: { path: '' }, title: 'Inventory' })
+                }
+
+                return links
             }
         },
         mounted: updateProduct,

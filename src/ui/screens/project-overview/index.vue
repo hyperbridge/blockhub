@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="project" :showRightPanel="false">
+    <c-layout navigationKey="project" :showRightPanel="false" :breadcrumbLinks="breadcrumbLinks">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12" v-if="!project">
@@ -247,6 +247,15 @@
                                                     <span class="form-text">Projects with No Contribution Period will be open for contribution until the project is completed, allowing for contributions during the project.</span>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            Choose your governance system
+                                        </div>
+                                        <div class="col-4">
+                                            <i class="fas first-order" />
                                         </div>
                                     </div>
                                 </form>
@@ -515,6 +524,24 @@
                 }
 
                 return this.$store.state.application.editor_mode === 'editing'
+            },
+            breadcrumbLinks() {
+                const links = [
+                    { to: { path: '/' }, title: 'Store' },
+                    { to: { path: '/project/' + this.project.id }, title: this.project.name }
+                ]
+
+                if (this.section === 'community') {
+                    links.push({ to: { path: '' }, title: 'Community' })
+                } else if (this.section === 'bounties') {
+                    links.push({ to: { path: '' }, title: 'Bounties' })
+                } else if (this.section === 'updates') {
+                    links.push({ to: { path: '' }, title: 'Updates' })
+                } else if (this.section === 'milestones') {
+                    links.push({ to: { path: '' }, title: 'Milestones' })
+                }
+
+                return links
             }
         },
         watch: {
