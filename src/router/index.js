@@ -360,6 +360,11 @@ const router = new Router({
             }
         },
         {
+            path: '/developer/apply',
+            name: 'Developer Application',
+            component: (resolve) => require(['@/ui/screens/developer-application'], resolve)
+        },
+        {
             path: '/developer/new-product',
             name: 'New Product',
             component: (resolve) => require(['@/ui/screens/product'], resolve),
