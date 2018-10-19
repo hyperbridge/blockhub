@@ -1,5 +1,5 @@
 <template>
-    <c-layout :showLeftPanel="false" :showRightPanel="false">
+    <c-layout :showLeftPanel="false" :showRightPanel="false" :breadcrumbLinks="[]">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 mb-4 text-center">
