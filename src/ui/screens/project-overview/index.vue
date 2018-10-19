@@ -86,7 +86,7 @@
                                 <div class="editor text-right" v-if="editing">
                                     <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
                                             @click="activateElement('store_image')"
-                                            v-if="!activeElement['store_image']">Change Store Image <span
+                                            v-if="!activeElement['store_image']">Change Project Image <span
                                         class="fa fa-edit"></span></button>
 
                                     <div class="" v-if="activeElement['store_image']">
@@ -409,6 +409,8 @@
 
         if (this.id === 'new') {
             project = this.$store.state.funding.default_project
+            
+            this.$store.dispatch('application/setEditorMode', 'editing')
         }
 
         if (this.$store.state.funding.projects && this.$store.state.funding.projects[this.id]) {
