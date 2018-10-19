@@ -82,6 +82,8 @@ export default {
     methods: {
         slideshow() {
             this.interval = setInterval(() => {
+                if (!this.items || !this.items.length) return
+
                 this.active_item < this.items.length - 1 ? this.active_item++ : this.active_item = 0;
                 const [child] = this.$refs[`thumb-${this.active_item}`];
                 const parent = this.$refs['thumb-nav'];
