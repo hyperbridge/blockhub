@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false" :breadcrumbLinks="false">
+    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false" :breadcrumbLinks="[]">
         <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
@@ -45,10 +45,10 @@
                                 <div class="tab-card padding-20" v-if="!(is_verified || is_verifying) || !manual_override">
                                     <div v-if="!verificationLink">
                                         <p>
-                                            Submit proof of identity for KYC by providing your legal name, country of residence, and documentation.<br />
-                                            KYC means Know Your Customer. BlockHub is required by law to collect this information so that we know the source of money and comply with anti-money laundering laws. This is important because we handle cryptocurrencies, where account holders are unknown without KYC procedures.
+                                            Submit proof of identity for KYC by providing your legal name, country of residence, and documentation.<br /><br />
+                                            KYC means Know Your Customer. BlockHub is required by law to collect this information so that we know the source of money and comply with anti-money laundering laws. This is important because we handle cryptocurrencies, where account holders are unknown without KYC procedures.<br /><br />
+                                            Please fill in the fields below. Afterward you will be taken to our partner Veriff to complete your identity verification. You will need to use the same information as you've used here.
                                         </p>
-                                        <p>Please fill in the fields below. Afterward you will be taken to our partner Veriff to complete your identity verification. You will need to use the same information as you've used here.</p>
                                         <br /><br />
 
                                         <div class="row">

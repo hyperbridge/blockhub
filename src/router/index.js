@@ -232,6 +232,11 @@ const router = new Router({
             }
         },
         {
+            path: '/kyc',
+            name: 'KYC',
+            component: (resolve) => require(['@/ui/screens/kyc'], resolve)
+        },
+        {
             path: '/wallet/:id',
             name: 'Wallet',
             props: true,

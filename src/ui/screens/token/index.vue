@@ -102,7 +102,7 @@
                             </div>
                             <input type="text" class="form-control" ref="input" placeholder="Public Ethereum address...." v-model="purchaseAddress" />
                         </div>
-                        <p>Haven't verified yet? You'll need to do that! <c-button class="" href="/#/account/verification" style="margin: 0 auto">Verify Account</c-button></p>
+                        <p>Haven't verified yet? You'll need to do that! <c-button class="" href="/#/kyc" style="margin: 0 auto">Verify Account</c-button></p>
                     </c-block>
                 </div>
 
@@ -335,7 +335,7 @@
                         <c-checkbox
                             id="tokenSaleAgreement"
                             :checked="false"
-                            style="square"
+                            type="square"
                             v-model="tokenSaleAgreement"
                         >
                             I confirm that I understand and agree with the terms of the Token Sale Agreement.
@@ -344,7 +344,7 @@
                         <c-checkbox
                             id="jurisdictionAgreement"
                             :checked="false"
-                            style="square"
+                            type="square"
                             v-model="jurisdictionAgreement"
                         >
                             I confirm that I am not a resident of any jurisdiction that forbids token sales.
@@ -353,7 +353,7 @@
                         <c-checkbox
                             id="residentAgreement"
                             :checked="false"
-                            style="square"
+                            type="square"
                             v-model="residentAgreement"
                         >
                             I confirm that I am not a resident of China, United States, or Canada.
@@ -400,6 +400,7 @@
                                 </div>
                                 
                                 <div>
+                                    
                                     <p>Purchasing 1000 HBX in exchange for 10 ETH.</p>
                                     <br />
                                 </div>
