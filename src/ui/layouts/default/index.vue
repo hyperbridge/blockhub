@@ -274,7 +274,7 @@
             
             <c-cookie-policy v-if="!desktop_mode" />
 
-            <c-clock />
+            <c-clock v-if="desktop_mode" />
         </div>
         <!-- //END PAGE CONTENT -->
 
