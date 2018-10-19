@@ -120,32 +120,36 @@ export const promptPasswordRequest = async (data) => {
 
 export const setAccountRequest = async (data) => {
     return new Promise(async (resolve) => {
+
+        if (data.account.public_address) {
+            local.store.commit('application/activateModal', null)
+
+            // We were locked
+            if (DB.application.config.data[0].locked) {
+                local.router.push('/')
+            }
+
+            local.store.commit('application/updateState', {
+                locked: false,
+                signed_in: true
+            })
+        } else {
+            local.store.commit('application/activateModal', null)
+
+            local.router.push('/welcome')
+            
+            local.store.commit('application/updateState', {
+                locked: true,
+                signed_in: false
+            })
+        }
+
         DB.application.config.data[0].account = {
             ...DB.application.config.data[0].account,
             ...data.account
         }
 
         DB.save()
-
-        if (data.account.public_address) {
-            local.store.commit('application/updateState', {
-                locked: false,
-                signed_in: true
-            })
-
-            local.store.commit('application/activateModal', null)
-
-            local.router.push('/')
-        } else {
-            local.store.commit('application/updateState', {
-                locked: true,
-                signed_in: false
-            })
-
-            local.store.commit('application/activateModal', null)
-
-            local.router.push('/welcome')
-        }
 
         resolve()
     })
