@@ -176,7 +176,7 @@
                 public_address: account.public_address,
                 account: account,
                 is_verified: account.is_verified, //account.is_verified,
-                is_verifying: true,
+                is_verifying: account.is_verifying,
                 verification_timestamp: account.verification_timestamp,
                 verificationLink: null
             }
