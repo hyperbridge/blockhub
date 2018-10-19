@@ -11,9 +11,11 @@ import './components';
 import './directives';
 import './css/styles.scss';
 import './prototypes';
-import migrations from './db/migrations';
+import migrations from './db/migrations'
 
-import VueNumerals from 'vue-numerals';
+import VueNumerals from 'vue-numerals'
+
+const debounce = require('debounce')
 
 Vue.config.productionTip = false
 
@@ -38,11 +40,18 @@ const overrideConsoleLog = () => {
   window.consoleLogMessages = []
 
   var oldLog = console.log
-  console.log = function (message) {
+  console.log = debounce(function (message) {
     window.consoleLogMessages.push(message)
 
+    if (message.toString().indexOf('TypeError') !== -1) {
+      BlockHub.Notifications.error(message, 'UI Error', {
+        timeout: 5000,
+        pauseOnHover: true
+      })
+    }
+
     oldLog.apply(console, arguments)
-  }
+  }, 300)
 
   var oldWarn = console.log
   console.warn = function (message) {
