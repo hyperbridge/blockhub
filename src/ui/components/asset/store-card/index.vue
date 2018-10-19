@@ -130,7 +130,7 @@ export default {
             &.#{'store-card--' + $tag} {
                 @if $tag == extremely_rare {
                     box-shadow: 0 5px 35px -3px #9796ff;
-                    border: 1px solid #9796ff;
+                    border: 1px solid #b8b7ff;
                 } @else {
                     box-shadow: 0 5px 25px -5px $rgba;
                     border: 1px solid $hex;
@@ -142,7 +142,8 @@ export default {
             .#{'badge-card--' + $tag} {
                 .badge-card__text, .badge-card__triangle {
                     background-color: darken($hex, 14%);
-                    border-color: lighten($hex, 10%);
+                    @if $tag == extremely_rare { border-color: #b8b7ff; }
+                    @else { border-color: lighten($hex, 10%); }
                 }
                 .badge-card__text {
                     &:after {
