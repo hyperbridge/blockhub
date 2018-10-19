@@ -203,7 +203,7 @@ export const actions = {
     deployContract(store, payload) {
         return new Promise((resolve, reject) => {
             DesktopBridge
-                .deployContract({ protocolName: 'token', contractName: payload.contractName })
+                .deployContract({ protocolId: payload.protocolId, contractName: payload.contractName })
                 .then((contract) => {
                     state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = contract
                     store.dispatch('updateState')

@@ -224,10 +224,10 @@ export const runCommand = async (cmd, meta = {}) => {
 
             return resolve(await sendCommand('promptPasswordResponse', res, meta.client, cmd.requestId))
         } else if (cmd.key === 'setProtocolConfig') {
-            const { currentNetwork, protocolName, moduleName, config } = cmd.data
+            const { currentNetwork, protocolName, config } = cmd.data
         
-            local.store.state[moduleName].ethereum[currentNetwork] = config
-            local.store.dispatch(moduleName + '/updateState')
+            local.store.state.application.ethereum[currentNetwork].packages[protocolName] = config
+            local.store.dispatch('application/updateState')
         } else if (cmd.key === 'setAccountRequest') {
             const res = await setAccountRequest(cmd.data)
 

@@ -12,7 +12,20 @@
         "current_ethereum_network": "local",
         "ethereum": {
             "local": {
-                "contracts": {}
+                "packages": {
+                    "token": {
+                        "contracts": {}
+                    },
+                    "reserve": {
+                        "contracts": {}
+                    },
+                    "marketplace": {
+                        "contracts": {}
+                    },
+                    "funding": {
+                        "contracts": {}
+                    }
+                }
             }
         },
         "connection": {

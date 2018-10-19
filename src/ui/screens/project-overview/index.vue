@@ -265,7 +265,7 @@
                         <div class="row tab-pane fade active show" id="overview" role="tabpanel"
                              aria-labelledby="overview-tab">
                             <div class="col-md-7 col-xl-8">
-                                <c-screen-gallery :items="project.images.preview"></c-screen-gallery>
+                                <c-screen-gallery :items="project.images.preview" v-if="project.images.preview"></c-screen-gallery>
 
                                 <div class="editor-container">
                                     <div class="editor" v-if="editing">
@@ -410,6 +410,7 @@
         if (this.id === 'new') {
             project = this.$store.state.funding.default_project
             
+            this.$store.state.application.developer_mode = true
             this.$store.dispatch('application/setEditorMode', 'editing')
         }
 
@@ -494,11 +495,20 @@
                 }
 
                 if (this.id === 'new') {
-                    this.$store.commit('funding/createProject', this.project)
-                    this.$store.dispatch('application/setEditorMode', 'viewing')
+                    this.$store.dispatch('application/setEditorMode', 'publishing')
+
+                    BlockHub.DesktopBridge
+                        .createFundingProject({ title: this.project.name, description: this.project.description, about: this.project.content })
+                        .then((project) => {
+                            store.state.projects[project.id] = project
+
+                            store.dispatch('updateState')
+
+                            this.$store.dispatch('application/setEditorMode', 'viewing')
+                        })
                 } else {
                     this.$store.dispatch('funding/updateProject', this.project)
-                    this.$store.dispatch('application/setEditorMode', 'viewing')
+                    this.$store.dispatch('application/setEditorMode', 'publishing')
                 }
             },
             checkForm(e) {

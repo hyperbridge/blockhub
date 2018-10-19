@@ -94,15 +94,15 @@
 <script>
 
 export default {
-    components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-        'c-switch': (resolve) => require(['@/ui/components/switch'], resolve)
-    },
     data() {
         return {
             selected: [],
             protocolData: {
-                application: {
+                token: {
+                    data: '',
+                    visible: false
+                },
+                reserve: {
                     data: '',
                     visible: false
                 },
@@ -132,41 +132,48 @@ export default {
             }
         },
         protocols() {
-            this.protocolData.application.data = JSON.stringify(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network])
-            this.protocolData.marketplace.data = JSON.stringify(this.$store.state.marketplace.ethereum[this.$store.state.marketplace.current_ethereum_network])
-            this.protocolData.funding.data = JSON.stringify(this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network])
+            this.protocolData.token.data = JSON.stringify(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.token)
+            this.protocolData.reserve.data = JSON.stringify(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve)
+            this.protocolData.marketplace.data = JSON.stringify(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.marketplace)
+            this.protocolData.funding.data = JSON.stringify(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.funding)
 
             return [
                 {
-                    id: 'application',
-                    name: 'Application',
+                    id: 'reserve',
+                    name: 'Reserve',
+                    link: 'https://github.com/hyperbridge/protocol/tree/master/packages/reserve',
+                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve.contracts)
+                },
+                {
+                    id: 'token',
+                    name: 'Token',
                     link: 'https://github.com/hyperbridge/protocol/tree/master/packages/token',
-                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts)
+                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.token.contracts)
                 },
                 {
                     id: 'marketplace',
                     name: 'Marketplace',
                     link: 'https://github.com/hyperbridge/protocol/tree/master/packages/marketplace',
-                    contracts: Object.values(this.$store.state.marketplace.ethereum[this.$store.state.marketplace.current_ethereum_network].contracts)
+                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.marketplace.contracts)
                 },
                 {
                     id: 'funding',
                     name: 'Funding',
                     link: 'https://github.com/hyperbridge/protocol/tree/master/packages/funding',
-                    contracts: Object.values(this.$store.state.funding.ethereum[this.$store.state.funding.current_ethereum_network].contracts)
+                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.funding.contracts)
                 }
             ]
         }
     },
     methods: {
-        toggleRawData(protocolId) {
-            this.protocolData[protocolId].visible = !this.protocolData[protocolId].visible
+        toggleRawData(packageId) {
+            this.protocolData[packageId].visible = !this.protocolData[packageId].visible
         },
-        saveRawData(protocolId) {
-            this.$store.state[protocolId].ethereum[this.$store.state.application.current_ethereum_network] = JSON.parse(this.protocolData[protocolId].data)
+        saveRawData(packageId) {
+            this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages[packageId] = JSON.parse(this.protocolData[packageId].data)
         },
-        deployContract(protocolId, contractName) {
-            this.$store.dispatch(protocolId + '/deployContract', { contractName })
+        deployContract(packageId, contractName) {
+            this.$store.dispatch('application/deployContract', { packageId, contractName })
         },
         // async deployAll() {
         //     for (let i in this.protocols) {
@@ -188,7 +195,7 @@ export default {
                 const protocolId = this.selected[i].split('.')[0]
                 const contractName = this.selected[i].split('.')[1]
 
-                await this.$store.dispatch(protocolId + '/deployContract', { contractName })
+                await this.$store.dispatch('application/deployContract', { protocolId, contractName })
             }
         }
     }

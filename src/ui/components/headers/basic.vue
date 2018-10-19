@@ -127,7 +127,7 @@
                             <c-dropdown class="ml-4 account-menu" style="z-index: 12">
                                 <template slot="title">
                                     <div class="__title">
-                                        <i class="fa fa-user"></i> {{ current_identity.name }}
+                                        <i class="fa fa-user"></i> {{ current_identity && current_identity.name }}
                                     </div>
                                 </template>
                                 <ul class="item-dropdown">

@@ -384,8 +384,8 @@ export default {
                 return alert('Not on desktop')
             }
 
-            window.desktopBridge.send('ping', this.$refs.desktopMessage.value)
-            window.desktopBridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
+            BlockHub.DesktopBridge.send('ping', this.$refs.desktopMessage.value)
+            BlockHub.DesktopBridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
         }
     },
     mounted() {
