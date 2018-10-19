@@ -1,80 +1,6 @@
 <template>
     <c-business-layout>
 
-        <div slot="left">
-
-            <div class="user user--bordered user--huge user--centred margin-bottom-20">
-                <img src="http://via.placeholder.com/128x128">
-                <div class="user__name">
-                    <strong>Tracey Newman</strong><br>
-                    <span>Global administrator</span>
-                </div>
-            </div>
-
-            <c-button status="outline-success" size="md" class="my-2 w-100 text-center justify-content-center">
-                Our Clients
-            </c-button>
-            <c-button status="outline-success" size="md" class="my-2 w-100 text-center justify-content-center">
-                Recent projects
-            </c-button>
-            <c-button status="outline-success" size="md" class="my-2 w-100 text-center justify-content-center">
-                Company operators
-            </c-button>
-
-            <div class="divider"></div>
-
-            <div class="h6 margin-bottom-20">Current projects progress</div>
-
-            <p class="margin-bottom-15"><a href="#" class="text-secondary"><strong>1442-1:</strong> Logo design for Company</a></p>
-            <div class="user user--bordered user--lg margin-bottom-10">
-                <img src="http://via.placeholder.com/128x128">
-                <div class="user__name">
-                    <strong>Dmitry Ivaniuk</strong><br>
-                    <div class="rw-progress rw-progress--sm rw-progress--secondary" data-value="50" style="width: 150px;"></div>
-                </div>
-            </div>
-            <div class="user user--bordered user--lg margin-bottom-30">
-                <img src="http://via.placeholder.com/128x128">
-                <div class="user__name">
-                    <strong>Alexy Torenov</strong><br>
-                    <div class="rw-progress rw-progress--sm rw-progress--secondary" data-value="40" style="width: 150px;"></div>
-                </div>
-            </div>
-
-            <p class="margin-bottom-15"><a href="#" class="text-secondary"><strong>1435:</strong> Marketing strategy</a></p>
-            <div class="user user--bordered user--lg margin-bottom-10">
-                <img src="http://via.placeholder.com/128x128">
-                <div class="user__name">
-                    <strong>Julia Venchees</strong><br>
-                    <div class="rw-progress rw-progress--sm rw-progress--secondary" data-value="70" style="width: 150px;"></div>
-                </div>
-            </div>
-            <div class="user user--bordered user--lg margin-bottom-10">
-                <img src="http://via.placeholder.com/128x128">
-                <div class="user__name">
-                    <strong>Alexa Monrow</strong><br>
-                    <div class="rw-progress rw-progress--sm rw-progress--secondary" data-value="90" style="width: 150px;"></div>
-                </div>
-            </div>
-            <div class="user user--bordered user--lg margin-bottom-30">
-                <img src="http://via.placeholder.com/128x128">
-                <div class="user__name">
-                    <strong>John Doenson</strong><br>
-                    <div class="rw-progress rw-progress--sm rw-progress--secondary" data-value="20" style="width: 150px;"></div>
-                </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="form-row">
-                <div class="col-12">
-                    <c-button status="outline-danger" size="md" class="w-100 justify-content-center">
-                        Change account / Log off
-                    </c-button>
-                </div>
-            </div>
-        </div>
-
         <div>
             <!-- PAGE HEADING -->
             <div class="page-heading">
@@ -211,12 +137,14 @@
 
                             </div>
                             <div class="col-6 col-lg-2 d-none d-md-block">
-                                <button class="btn btn-secondary btn-block">New project</button>
+                                <c-button status="dark" icon="plus" size="mg" class="w-100 justify-content-center h-100">
+                                    New project
+                                </c-button>
                             </div>
                         </div>
 
-                        <div class="table-responsive margin-top-20">
-                            <table class="table table-striped table-bordered margin-bottom-20" style="min-width: 800px;">
+                        <div class="table-responsive margin-top-20 margin-bottom-0">
+                            <table class="table table-striped table-bordered margin-bottom-0" style="min-width: 800px;">
                                 <thead>
                                 <tr>
                                     <th width="30">
@@ -548,45 +476,6 @@
                                 </tr>
                                 </tbody>
                             </table>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-6 col-lg-2">
-
-                                <select class="form-control actionWithSelected" tabindex="-1" aria-hidden="true">
-                                    <option></option>
-                                    <option value="1">Set as readed</option>
-                                    <option value="2">Remove</option>
-                                </select>
-
-                            </div>
-                            <div class="col-6 col-lg-2 d-none d-md-block">
-
-                                <select class="form-control customPeriod" tabindex="-1" aria-hidden="true">
-                                    <option></option>
-                                    <option value="1">This month</option>
-                                    <option value="2">Prev month</option>
-                                    <option value="3">Other</option>
-                                </select>
-
-                            </div>
-                            <div class="col-6 col-lg-4 d-none d-md-block">
-
-                            </div>
-                            <div class="col-6 col-lg-2">
-
-                                <select class="form-control orderByStatus" tabindex="-1" aria-hidden="true">
-                                    <option></option>
-                                    <option value="1">New</option>
-                                    <option value="2">Active</option>
-                                    <option value="3">Closed</option>
-                                    <option value="3">Denied</option>
-                                </select>
-
-                            </div>
-                            <div class="col-6 col-lg-2 d-none d-md-block">
-                                <button class="btn btn-secondary btn-block">New project</button>
-                            </div>
                         </div>
 
                     </div>
