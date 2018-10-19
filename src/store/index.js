@@ -112,6 +112,7 @@ const store = new Vuex.Store({
 });
 
 
+window.BlockHub.DesktopBridge = DesktopBridge
 window.BlockHub.ChaosMonkey = ChaosMonkey
 window.BlockHub.store = store
 window.BlockHub.DB = DB
