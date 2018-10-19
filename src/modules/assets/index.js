@@ -113,6 +113,13 @@ const assets = {
             .filter(asset => asset.selected),
         forSaleAssets: (state, { assetsArray }) => assetsArray
             .filter(asset => asset.for_sale),
+        assetsTags: (state, { assetsArray }) => assetsArray
+            .reduce((tags, asset) => [
+                ...tags,
+                ...asset.system_tags.filter(tag =>
+                    !tags.includes(tag)
+                )
+            ], []),
         collections: ({ assets, collections }) => Object.values(collections)
             .reduce((populated, collection) => ({
                 ...populated,

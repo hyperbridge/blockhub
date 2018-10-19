@@ -1,8 +1,8 @@
 <template>
-    <div class="store-card" :class="'store-card--' + system_tags[asset.id][0]">
-        <div class="store-card__badges" v-if="system_tags[asset.id]">
+    <div class="store-card" :class="'store-card--' + asset.system_tags[0]">
+        <div class="store-card__badges" v-if="asset.system_tags.length">
             <c-badge-card
-                v-for="(tag, index) in system_tags[asset.id]"
+                v-for="(tag, index) in asset.system_tags"
                 class="store-card__single-badge"
                 :key="index"
                 :title="tag | space"
@@ -25,15 +25,6 @@ export default {
     props: ['asset'],
     components: {
         'c-badge-card': (resolve) => require(['@/ui/components/badge-card'], resolve),
-    },
-    data() {
-        return {
-            system_tags: {
-                1: ['top_seller', 'special'],
-                2: ['discount'],
-                3: ['special']
-            }
-        }
     }
 }
 </script>
@@ -58,7 +49,6 @@ export default {
             content: "";
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0,0,0,0), rgba(255, 205, 106, 0.5));
             left: 0;
             top: 0;
         }
@@ -110,23 +100,41 @@ export default {
             height: 100%;
             left: 0;
             top: 0;
+            background: linear-gradient(rgba(0,0,0,0), rgba(255,255,255,.3));
         }
+        border: 1px solid rgba(255,255,255,.8);
+        box-shadow: 0 5px 25px -5px rgba(255,255,255,.3);
 
         // Colors
-        // #1abc9c  #e056fd #2ecc71 #9b59b6 #D6A2E8 #7d5fff #c56cf0 #18dcff #808e9b #706fd3
+        // #1abc9c #e056fd #2ecc71 #9b59b6 #D6A2E8 #7d5fff #c56cf0 #18dcff #808e9b #706fd3
+        //  #9b59b6 #D6A2E8    #c56cf0  #808e9b #706fd3
+
         $tags: (
             top_seller: #9980FA,
             special: #1abc9c,
             discount: #74b9ff,
-            epic: #ECB448
+            epic: #ffda79,
+            mythic: #1abc9c,
+            trending: #c56cf0,
+            upcoming: #2ecc71,
+            specials: #B33771,
+            heroic: #18dcff,
+            extremely_rare: #40407a,
+            popular: #b8e994,
+            legendary: #57606f
         );
 
         @each $tag, $hex in $tags {
             $rgba: rgba($hex, .5);
 
             &.#{'store-card--' + $tag} {
-                box-shadow: 0 5px 25px -5px $rgba;
-                border: 1px solid $hex;
+                @if $tag == extremely_rare {
+                    box-shadow: 0 5px 35px -3px #9796ff;
+                    border: 1px solid #9796ff;
+                } @else {
+                    box-shadow: 0 5px 25px -5px $rgba;
+                    border: 1px solid $hex;
+                }
                 &:after {
                     background: linear-gradient(rgba(0,0,0,0), $rgba);
                 }
