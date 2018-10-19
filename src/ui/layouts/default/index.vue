@@ -507,7 +507,7 @@
                             this.checkScrollButton()
                         }, 250)
                     })
-                }, 3000) // TODO: remove arbitrary delay
+                }, 1000) // TODO: remove arbitrary delay
 
                 setInterval(() => {
                     this.checkScrollButton()
