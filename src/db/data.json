@@ -322,11 +322,6 @@
         "current_ethereum_network": "local",
         "selected_product": null,
         "first_product": true,
-        "ethereum": {
-            "local": {
-                "contracts": {}
-            }
-        },
         "frontpage_product": {},
         "product_news": [],
         "new_products": [],
