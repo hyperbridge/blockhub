@@ -1,124 +1,133 @@
 <template>
-    <c-layout>
-            <div class="container-fluid">
-                <div class="row realm_page_header margin-bottom-30">
-                    <div class="col-3">
-                        <div class="logo">
-                            <c-img class="img-fluid" :src="realm.images.logo" />
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="widget--box">
-                            <h3>Widget Title</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Integer gravida in dui tempus mattis. Class aptent taciti sociosqu ad
-                                litora torquent per conubia nostra, per inceptos himenaeos.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="widget--box">
-                            <h3>Widget Title</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Integer gravida in dui tempus mattis. Class aptent taciti sociosqu ad
-                                litora torquent per conubia nostra, per inceptos himenaeos.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="widget--box">
-                            <h3>Widget Title</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Integer gravida in dui tempus mattis. Class aptent taciti sociosqu ad
-                                litora torquent per conubia nostra, per inceptos himenaeos.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <ul class="nav">
-                            <li class="nav-item active">
-                                <a href="#3" class="nav-link">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#3" class="nav-link">News</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#3" class="nav-link">Community</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#3" class="nav-link">Games</a>
-                            </li>
-                        </ul>
+    <c-layout :breadcrumbLinks="false">
+        <div class="container-fluid">
+            <div class="row realm_page_header margin-bottom-30">
+                <div class="col-3">
+                    <div class="logo">
+                        <c-img class="img-fluid" :src="realm.images.logo" />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="banner-line margin-bottom-40">
-                            <div class="banner-md">
-                                <div class="img">
-                                    <c-img :src="realm.images.news" />
-                                </div>
-                                <div class="text">
-                                    <h4>Announcing: The Boomsday Project</h4>
-                                    <p>Sed pulvinar nibh id interdum tempus. Nam id massa sit amet dolor tincidunt bibendum.
-                                        Nullam ante nunc, dapibus et mauris ut, sodales accumsan lorem.</p>
-                                    <a href="/#/project/1">Read More</a>
-                                </div>
+                <div class="col-3">
+                    <div class="widget--box">
+                        <h3>Widget Title</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Integer gravida in dui tempus mattis. Class aptent taciti sociosqu ad
+                            litora torquent per conubia nostra, per inceptos himenaeos.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="widget--box">
+                        <h3>Widget Title</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Integer gravida in dui tempus mattis. Class aptent taciti sociosqu ad
+                            litora torquent per conubia nostra, per inceptos himenaeos.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="widget--box">
+                        <h3>Widget Title</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Integer gravida in dui tempus mattis. Class aptent taciti sociosqu ad
+                            litora torquent per conubia nostra, per inceptos himenaeos.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <ul class="nav">
+                        <li class="nav-item active">
+                            <a href="#3" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#3" class="nav-link">News</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#3" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#3" class="nav-link">Games</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="banner-line margin-bottom-40">
+                        <div class="banner-md">
+                            <div class="img">
+                                <c-img :src="realm.images.news" />
                             </div>
-                            <div class="banner-sm">
-                                <div class="img">
-                                    <c-img :src="realm.images.follow" />
-                                </div>
-                                <div class="text">
-                                    <a href="#3" class="btn btn-sm btn-info">Follow Us</a>
-                                    <h4>Get the news first!</h4>
-                                </div>
+                            <div class="text">
+                                <h4>Announcing: The Boomsday Project</h4>
+                                <p>Sed pulvinar nibh id interdum tempus. Nam id massa sit amet dolor tincidunt bibendum.
+                                    Nullam ante nunc, dapibus et mauris ut, sodales accumsan lorem.</p>
+                                <a href="/#/project/1">Read More</a>
                             </div>
                         </div>
+                        <div class="banner-sm">
+                            <div class="img">
+                                <c-img :src="realm.images.follow" />
+                            </div>
+                            <div class="text">
+                                <a href="#3" class="btn btn-sm btn-info">Follow Us</a>
+                                <h4>Get the news first!</h4>
+                            </div>
+                        </div>
+                    </div>
 
-                        <div class="product-grid">
-                            <c-heading-bar name="Featured Games" :showArrows="false" :showBackground="false" />
-                        </div>
-                        <div class="featured-assets">
-                            <c-heading-bar name="Featured Assets" :showArrows="false" :showBackground="false">
-                            </c-heading-bar>
-                            <c-featured-assets></c-featured-assets>
-                        </div>
-                        <div class="games-container">
-                            <c-heading-bar name="Games" :showArrows="false" :showBackground="false">
-                                <div class="additional-action margin-left-20" slot="additional-action">
-                                    <div class="text">
-                                        Price
-                                        <i class="fas fa-dollar-sign"></i>
-                                    </div>
-                                    <div class="arrow_container">
-                                        <i class="fas fa-sort-up"></i>
-                                        <i class="fas fa-sort-down"></i>
-                                    </div>
+                    <div class="product-grid">
+                        <c-heading-bar name="Featured Games" :showArrows="false" :showBackground="false" />
+                    </div>
+                    <div class="featured-assets">
+                        <c-heading-bar name="Featured Assets" :showArrows="false" :showBackground="false">
+                        </c-heading-bar>
+                        <c-featured-assets></c-featured-assets>
+                    </div>
+                    <div class="games-container">
+                        <c-heading-bar name="Games" :showArrows="false" :showBackground="false">
+                            <div class="additional-action margin-left-20" slot="additional-action">
+                                <div class="text">
+                                    Price
+                                    <i class="fas fa-dollar-sign"></i>
                                 </div>
-                                <div class="additional-action" slot="additional-action">
-                                    <div class="text">
-                                        Rating
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="arrow_container">
-                                        <i class="fas fa-sort-up"></i>
-                                        <i class="fas fa-sort-down"></i>
-                                    </div>
+                                <div class="arrow_container">
+                                    <i class="fas fa-sort-up"></i>
+                                    <i class="fas fa-sort-down"></i>
                                 </div>
-                            </c-heading-bar>
-                            <c-game-grid></c-game-grid>
-                        </div>
+                            </div>
+                            <div class="additional-action" slot="additional-action">
+                                <div class="text">
+                                    Rating
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="arrow_container">
+                                    <i class="fas fa-sort-up"></i>
+                                    <i class="fas fa-sort-down"></i>
+                                </div>
+                            </div>
+                        </c-heading-bar>
+                        <c-game-grid></c-game-grid>
                     </div>
                 </div>
             </div>
+        </div>
     </c-layout>
 </template>
 
 <script>
+function hexToRgb(hex) {
+    var bigint = parseInt(hex, 16);
+    var r = (bigint >> 16) & 255;
+    var g = (bigint >> 8) & 255;
+    var b = bigint & 255;
+
+    return r + "," + g + "," + b;
+}
+
     export default {
         props: ['id'],
         components: {
@@ -131,6 +140,15 @@
             realm() {
                 return this.$store.state.marketplace.realms.find(realm => realm.id == this.id)
             }
+        },
+        mounted() {
+            this.$nextTick(() => {
+                document.body.style.backgroundColor = this.realm.theme.background_color
+                $('#header-bg').css({ 'background-image': `url(${this.realm.images.background})`, 'background-size': this.realm.theme.header.background_size || 'cover' })
+                $('.header-bg__layer-1').css({ 'background': `linear-gradient(to bottom, rgba(${hexToRgb(this.realm.theme.background_color.slice(1))}, 0.34) 0%, rgba(${hexToRgb(this.realm.theme.background_color.slice(1))}, 1) 100%)` })
+                $('.header-bg__layer-2').css({ 'position': 'fixed', 'background': 'rgba(255, 255, 255, 0.2)', 'height': '47px' })
+                $('#page-aside').hide()
+            })
         }
     }
 </script>
