@@ -200,12 +200,12 @@ export const actions = {
     disableDarklaunch(store, payload) {
         store.commit('disableDarklaunch', payload)
     },
-    deployContract(store, payload) {
+    deployContract(store, { protocolName, contractName }) {
         return new Promise((resolve, reject) => {
             DesktopBridge
-                .deployContract({ protocolId: payload.protocolId, contractName: payload.contractName })
+                .deployContract({ protocolName, contractName })
                 .then((contract) => {
-                    state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = contract
+                    state.ethereum[state.current_ethereum_network].packages[protocolName].contracts[contractName] = contract
                     store.dispatch('updateState')
 
                     resolve(contract)

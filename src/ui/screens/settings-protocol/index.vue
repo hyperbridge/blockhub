@@ -166,14 +166,14 @@ export default {
         }
     },
     methods: {
-        toggleRawData(packageId) {
-            this.protocolData[packageId].visible = !this.protocolData[packageId].visible
+        toggleRawData(protocolName) {
+            this.protocolData[protocolName].visible = !this.protocolData[protocolName].visible
         },
-        saveRawData(packageId) {
-            this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages[packageId] = JSON.parse(this.protocolData[packageId].data)
+        saveRawData(protocolName) {
+            this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages[protocolName] = JSON.parse(this.protocolData[protocolName].data)
         },
-        deployContract(packageId, contractName) {
-            this.$store.dispatch('application/deployContract', { packageId, contractName })
+        deployContract(protocolName, contractName) {
+            this.$store.dispatch('application/deployContract', { protocolName, contractName })
         },
         // async deployAll() {
         //     for (let i in this.protocols) {
@@ -192,10 +192,10 @@ export default {
         // },
         async deploySelected() {
             for (let i in this.selected) {
-                const protocolId = this.selected[i].split('.')[0]
+                const protocolName = this.selected[i].split('.')[0]
                 const contractName = this.selected[i].split('.')[1]
 
-                await this.$store.dispatch('application/deployContract', { protocolId, contractName })
+                await this.$store.dispatch('application/deployContract', { protocolName, contractName })
             }
         }
     }
