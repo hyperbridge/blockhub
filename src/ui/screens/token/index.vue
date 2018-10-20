@@ -33,7 +33,7 @@
                     </p>
                 </div>
             </div>
-            <div v-if="desktop_mode && !ethereum_connected">
+            <div v-if="!desktop_mode && !ethereum_connected">
                 <div class="col-12 text-center alert alert-info">
                     <p>The BlockHub desktop app is the recommended way to load up on tokens.</p>
                 </div>
@@ -70,18 +70,19 @@
                                 class="profile-picker__profile"
                                 v-for="identity in identities"
                                 :key="identity.id"
+                                v-if="identities && identities.length"
                             >
                                 <c-user-card
                                     :user="identity"
                                     :previewMode="true"
-                                    :class="{ 'default': identity.id == chosenIdentity.id }"
+                                    :class="{ 'default': chosenIdentity && identity.id == chosenIdentity.id }"
                                 />
                                 <div class="profile__action">
                                     <c-button
                                         status="info"
                                         icon="check"
                                         @click="chooseIdentity(identity)"
-                                        v-if="identity.id != chosenIdentity.id"
+                                        v-if="!chosenIdentity || identity.id != chosenIdentity.id"
                                     >Choose</c-button>
                                 </div>
                             </div>
@@ -381,7 +382,7 @@
             :type="purchasePopup.type"
             :sub_title="purchasePopup.text"
             @close="closePurchasePopup"
-            v-if="purchasePopup.show"
+            v-if="purchasePopup && purchasePopup.show"
             ref="purchasePopup"
         >
             <div slot="custom_close" hidden></div>
@@ -389,12 +390,12 @@
                 <c-tabs>
                     <c-tab name="Confirm Purchase" :selected="true" :showFooter="true">
                         <div>
-                            <div class="tab-card" v-if="this.purchaseSuccessful">
-                                Great! Here's your transaction hash: {{ this.transactionHash }}
+                            <div class="tab-card" v-if="purchaseSuccessful">
+                                Great! Here's your transaction hash: {{ transactionHash }}
                             </div>
-                            <div class="tab-card" v-if="!this.purchaseSuccessful">
-                                <div class="" v-if="this.purchaseError">
-                                    An error occurred with the purchase: {{ this.purchaseError }}
+                            <div class="tab-card" v-if="!purchaseSuccessful">
+                                <div class="" v-if="purchaseError">
+                                    An error occurred with the purchase: {{ purchaseError }}
                                 </div>
                                 
                                 <div>
@@ -452,7 +453,7 @@ export default {
             }
 
             if (typeof window.web3 !== 'undefined') {
-                window.web3.eth.getAccounts((err, accounts) => {
+                window.web3.eth.getAccounts((err, accounts) => {debugger
                     this.ethereum_unlocked = accounts.length > 0
                 })
             }
@@ -491,13 +492,21 @@ export default {
 
         const chosenIdentity = this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
 
-        return {
+        let tokenContractAddress = null
+
+        try {
+            tokenContractAddress = this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts.TokenSale.address
+        } catch (e) {
+
+        }
+
+        const result = {
             account: this.$store.state.application.account,
             identities: this.$store.state.application.account.identities,
             chosenIdentity: chosenIdentity,
             purchaseETH: null,
             purchaseHBX: null,
-            tokenContractAddress: this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network] && this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts.TokenSale && this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts.TokenSale.address,
+            tokenContractAddress: tokenContractAddress,
             ETH2USD: 220.10,
             maxPurchaseUSD: 7500,
             tokenPriceUSD: 0.055,
@@ -518,6 +527,8 @@ export default {
             transactionHash: null,
             errors: []
         }
+debugger
+        return result
     },
     computed: {
         desktop_mode() {
