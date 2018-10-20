@@ -44,7 +44,7 @@ const overrideConsoleLog = () => {
     window.consoleLogMessages.push(message)
 
     if (message.toString().indexOf('TypeError') !== -1) {
-      BlockHub.Notifications.error(message, 'UI Error', {
+      BlockHub.Notifications.error(message.toString(), 'UI Error', {
         timeout: 5000,
         pauseOnHover: true
       })
