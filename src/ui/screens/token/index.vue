@@ -527,7 +527,7 @@ export default {
             transactionHash: null,
             errors: []
         }
-debugger
+
         return result
     },
     computed: {

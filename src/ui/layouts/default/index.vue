@@ -1,6 +1,6 @@
 <template>
     <!-- PAGE WRAPPER -->
-    <div class="page page--w-header page--w-container" :class="{'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel }">
+    <div class="page page--w-header page--w-container" :class="{'page__with-left-sidebar': showLeftPanel, 'page__with-right-sidebar': showRightPanel }">
         <!-- PAGE HEADER -->
         <transition name="slideDown" v-if="initialized">
             <c-header :isLoader="loadingState" v-if="!slimMode" />
@@ -807,12 +807,12 @@
         margin: 0 auto;
     }
 
-    .page.left-sidebar .content, .page.right-sidebar .content {
+    .page__with-left-sidebar .content, .page__with-right-sidebar .content {
         width: calc(100% - 250px);
         margin: 0 0 0 auto;
     }
 
-    .page.left-sidebar.right-sidebar .content {
+    .page__with-left-sidebar.page__with-right-sidebar .content {
         width: calc(100% - 500px);
         margin: 0 auto;
     }

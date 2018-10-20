@@ -136,6 +136,16 @@ function hexToRgb(hex) {
             'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
             'c-featured-assets': (resolve) => require(['@/ui/components/assets-list-item/featured-list'], resolve),
         },
+        data() {
+            return {
+                css: {
+                    bodyBgColor: null,
+                    headerBg: {},
+                    headerBgLayer1: {},
+                    headerBgLayer2: {}
+                }
+            }
+        },
         computed: {
             realm() {
                 return this.$store.state.marketplace.realms.find(realm => realm.id == this.id)
@@ -143,14 +153,44 @@ function hexToRgb(hex) {
         },
         mounted() {
             this.$nextTick(() => {
+                this.css.bodyBgColor = document.body.style.backgroundColor
+                this.css.headerBg = $('#header-bg')[0].style
+                this.css.headerBgLayer1 = $('.header-bg__layer-1')[0].style
+                this.css.headerBgLayer2 = $('.header-bg__layer-2')[0].style
+
                 document.body.style.backgroundColor = this.realm.theme.background_color
                 $('#header-bg').css({ 'background-image': `url(${this.realm.images.background})`, 'background-size': this.realm.theme.header.background_size || 'cover' })
                 $('.header-bg__layer-1').css({ 'background': `linear-gradient(to bottom, rgba(${hexToRgb(this.realm.theme.background_color.slice(1))}, 0.34) 0%, rgba(${hexToRgb(this.realm.theme.background_color.slice(1))}, 1) 100%)` })
-                $('.header-bg__layer-2').css({ 'position': 'fixed', 'background': 'rgba(255, 255, 255, 0.2)', 'height': '47px' })
+                $('.header-bg__layer-2').css({ 'position': 'fixed', 'background': 'rgba(255, 255, 255, 0.2)', 'height': '48px' })
+                $('.app-header__shadow').hide()
                 $('#page-aside').hide()
+
             })
+        },
+        beforeDestroy() {
+            document.body.style.backgroundColor = this.css.bodyBgColor
+
+            $('#header-bg')[0].style = this.css.headerBg
+            $('.header-bg__layer-1')[0].style = this.css.headerBgLayer1
+            $('.header-bg__layer-2')[0].style = this.css.headerBgLayer2
+            $('.app-header__shadow').show()
+            $('#page-aside').show()
         }
     }
+
+    // z-index: 3;
+
+    // position: fixed;
+    // /* background: rgba(255, 255, 255, 0.2); */
+    // height: 47px;
+    // filter: brightness(2) blur(5px);
+    // background-image: url(/static/img/backgrounds/1.jpg);
+    // background-size: cover;
+    // overflow: hidden;
+
+    // position: fixed;
+    // background: rgba(255, 255, 255, 0.2);
+    // height: 47px;
 </script>
 
 <style lang="scss" scoped>

@@ -5,7 +5,7 @@
         "theme": {
             "background_color": "#3F2797",
             "header": {
-                "background_size": "contain"
+                "background_size": "cover"
             }
         },
         "images": {
