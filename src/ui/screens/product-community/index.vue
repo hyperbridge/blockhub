@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div>
         <div v-if="community_1">
             <c-item
                 v-for="(post, index) in posts"

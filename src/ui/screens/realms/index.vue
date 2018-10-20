@@ -1,8 +1,6 @@
 <template>
     <c-layout navigationKey="store">
-            <div class="container-fluid">
-                <c-infinite-content :list="list" />
-            </div>
+        <c-infinite-content :list="list" />
     </c-layout>
 </template>
 

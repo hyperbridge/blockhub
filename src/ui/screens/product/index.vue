@@ -1,99 +1,97 @@
 <template>
     <c-layout navigationKey="product" :showRightPanel="false" navigationTitle="GAME OVERVIEW"
               :breadcrumbLinks="editing ? [] : breadcrumbLinks">
-        <div class="container-fluid">
-            <div class="row" v-if="!product">
-                <div class="col-12">
-                    Product not found
-                </div>
+        <div class="row" v-if="!product">
+            <div class="col-12">
+                Product not found
             </div>
-            <div class="row" v-if="product">
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="editor-container">
-                                <div class="editor" v-if="editing">
-                                    <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                            @click="activateElement('name')" v-if="!activeElement['name']">Change
-                                        Product Name <span class="fa fa-edit"></span></button>
-
-                                    <div class="form-group" v-if="activeElement['name']">
-                                        <div class="form-control-element form-control-element--right">
-                                            <input ref="name" name="name" type="text" class="form-control"
-                                                   placeholder="Product name..." v-model="product.name"/>
-                                            <div
-                                                class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                                <span class="fa fa-check" @click="deactivateElement('name')"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h1 class="title margin-top-10 margin-bottom-15">{{ product.name }}</h1>
-                            </div>
-
-                            <div class="editor-container">
-                                <div class="" v-if="editing">
-                                    <div class="form-group">
-                                        <select id="tag-editor" class="form-control" multiple="multiple">
-                                            <option v-for="(tag, index) in author_tag_options" :key="index"
-                                                    :selected="product.developer_tags.includes(tag)">{{ tag }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <c-tags-list :tags="product.developer_tags" v-if="!editing"></c-tags-list>
-                            </div>
-                        </div>
-                        <div class="col-4">
+        </div>
+        <div class="row" v-if="product">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="editor-container">
                             <div class="editor" v-if="editing">
                                 <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                        @click="activateElement('background_image')"
-                                        v-if="!activeElement['background_image']">Change Background Image <span
-                                    class="fa fa-edit"></span></button>
+                                        @click="activateElement('name')" v-if="!activeElement['name']">Change
+                                    Product Name <span class="fa fa-edit"></span></button>
 
-                                <div class="form-group" v-if="activeElement['background_image']">
+                                <div class="form-group" v-if="activeElement['name']">
                                     <div class="form-control-element form-control-element--right">
-                                        <input ref="background_image" name="background_image" type="text"
-                                               class="form-control" placeholder="Background image URL..."
-                                               v-model="product.images.header"/>
+                                        <input ref="name" name="name" type="text" class="form-control"
+                                                placeholder="Product name..." v-model="product.name"/>
                                         <div
                                             class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                            <span class="fa fa-check"
-                                                  @click="deactivateElement('background_image')"></span>
+                                            <span class="fa fa-check" @click="deactivateElement('name')"></span>
                                         </div>
                                     </div>
                                 </div>
-
-                                <br/>
-                                <label>RECOMMENDED SIZE: 1120 x 524px</label>
                             </div>
+                            <h1 class="title margin-top-10 margin-bottom-15">{{ product.name }}</h1>
+                        </div>
+
+                        <div class="editor-container">
+                            <div class="" v-if="editing">
+                                <div class="form-group">
+                                    <select id="tag-editor" class="form-control" multiple="multiple">
+                                        <option v-for="(tag, index) in author_tag_options" :key="index"
+                                                :selected="product.developer_tags.includes(tag)">{{ tag }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <c-tags-list :tags="product.developer_tags" v-if="!editing"></c-tags-list>
                         </div>
                     </div>
+                    <div class="col-4">
+                        <div class="editor" v-if="editing">
+                            <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                    @click="activateElement('background_image')"
+                                    v-if="!activeElement['background_image']">Change Background Image <span
+                                class="fa fa-edit"></span></button>
 
-                    <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
-                        <li class="nav-item">
-                            <router-link :to="`/product/${id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="`/product/${id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community
-                            </router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="`/product/${id}/projects`" class="nav-link" :class="{ 'active': section === 'projects' }">Crowdfunding
-                            </router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="`/product/${id}/assets`" class="nav-link" :class="{ 'active': section === 'assets' }">Inventory</router-link>
-                        </li>
-                    </ul>
+                            <div class="form-group" v-if="activeElement['background_image']">
+                                <div class="form-control-element form-control-element--right">
+                                    <input ref="background_image" name="background_image" type="text"
+                                            class="form-control" placeholder="Background image URL..."
+                                            v-model="product.images.header"/>
+                                    <div
+                                        class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                        <span class="fa fa-check"
+                                                @click="deactivateElement('background_image')"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br/>
+                            <label>RECOMMENDED SIZE: 1120 x 524px</label>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="col-12">
-                    <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
-                    <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
-                    <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
-                    <c-product-projects :product="product" v-if="section === 'projects'" :editing="editing" />
-                </div>
+                <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
+                    <li class="nav-item">
+                        <router-link :to="`/product/${id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link :to="`/product/${id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link :to="`/product/${id}/projects`" class="nav-link" :class="{ 'active': section === 'projects' }">Crowdfunding
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link :to="`/product/${id}/assets`" class="nav-link" :class="{ 'active': section === 'assets' }">Inventory</router-link>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-12">
+                <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
+                <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
+                <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
+                <c-product-projects :product="product" v-if="section === 'projects'" :editing="editing" />
             </div>
         </div>
         <c-custom-modal title="Help Center" v-if="first_product && editing" @close="closeModal">

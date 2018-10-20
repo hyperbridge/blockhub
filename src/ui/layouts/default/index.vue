@@ -63,7 +63,13 @@
 
             <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
                 <c-breadcrumb :links="breadcrumbLinks" ref="breadcrumb" style="padding-left: 20px;" v-if="is_connected" />
-                <slot v-if="is_connected" />
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <slot v-if="is_connected" />
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- SIDEPANEL -->
