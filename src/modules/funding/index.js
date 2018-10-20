@@ -85,18 +85,6 @@ export const actions = {
                     resolve(project)
                 })
         })
-    },
-    deployContract(store, payload) {
-        return new Promise((resolve, reject) => {
-            DesktopBridge
-                .deployContract({ protocolName: 'funding', contractName: payload.contractName })
-                .then((contract) => {
-                    state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = contract
-                    store.dispatch('updateState')
-
-                    resolve(contract)
-                })
-        })
     }
 }
 
