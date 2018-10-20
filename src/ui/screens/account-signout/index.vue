@@ -1,27 +1,27 @@
 <template>
     <c-layout navigationKey="account">
-            <div class="page-heading">
-                <div class="page-heading__container">
-                    <h1 class="title">Sign Out</h1>
-                    <p class="caption">Are you sure you want to sign out?</p>
-                </div>
-                <c-heading />
-            </div>
-            <div class="container-fluid">
-                <div class="row">
+            <div class="container">
+                <div class="row" style="text-align: center">
+                    <div class="col">
+                        <p>The only way to do this right now is to delete your account. Are you sure?</p>
+                        
+                        <c-button @click="deleteAccount">Delete Account</c-button>
+                    </div>
                 </div>
             </div>
     </c-layout>
 </template>
 
 <script>
-export default {
-  components: {
-    'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
-  },
-  data: () => ({
-  })
-}
+    import * as DesktopBridge from '@/framework/desktop-bridge'
+
+    export default {
+        methods: {
+            deleteAccount() {
+                DesktopBridge.sendCommand('deleteAccountRequest')
+            }
+        }
+    }
 </script>
 
 <style lang="scss" scoped>

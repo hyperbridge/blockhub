@@ -65,7 +65,7 @@
                 </a>
                 <a v-if="signed_in" href="/#/account/identities">
                     <span class="icon fa fa-id-card"></span>
-                    <span class="text">Identities</span>
+                    <span class="text">Profiles</span>
                 </a>
                 <a v-if="signed_in" href="/#/account/wallets" v-darklaunch="'WALLETS'">
                     <span class="icon fa fa-credit-card"></span>
@@ -76,7 +76,7 @@
 
                 <a v-if="signed_in" href="/#/identity/1">
                     <span class="icon fa fa-user"></span>
-                    <span class="text">Current Identity</span>
+                    <span class="text">Current Profile</span>
                 </a>
                 <a v-if="signed_in" href="/#/identity/1/contacts" v-darklaunch="'CONTACTS'">
                     <span class="icon fa fa-users"></span>
@@ -93,14 +93,15 @@
                     <span class="icon fa fa-cog"></span>
                     <span class="text">Settings</span>
                 </a>
-                <a v-if="signed_in" href="/#/account/signout">
-                    <span class="icon fa fa-sign-out-alt"></span>
-                    <span class="text">Sign Out</span>
-                </a>
 
                 <a href="/#/sitemap">
                     <span class="icon fa fa-list-alt"></span>
                     <span class="text">Sitemap</span>
+                </a>
+
+                <a v-if="signed_in" href="/#/account/signout">
+                    <span class="icon fa fa-sign-out-alt"></span>
+                    <span class="text">Sign Out</span>
                 </a>
 
                 <!--Global Bottom banner-->
