@@ -1,5 +1,6 @@
 {
     "application": {
+        "version": "0.7.0rc1",
         "mode": "local",
         "locked": false,
         "signed_in": false,

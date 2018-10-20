@@ -275,6 +275,8 @@
             <c-cookie-policy v-if="!desktop_mode" />
 
             <c-clock v-if="desktop_mode" />
+
+            <div class="version" v-if="desktop_mode">v{{ $store.state.application.version }}</div>
         </div>
         <!-- //END PAGE CONTENT -->
 
@@ -537,6 +539,15 @@
 <style lang="scss" scoped>
     [v-cloak] {
         display: none;
+    }
+
+    .version {
+        position: fixed;
+        bottom: 10px;
+        right: 24px;
+        font-size: 16px;
+        font-family: 'Barlow', sans-serif;
+        color: rgba(255, 255, 255, 0.2);
     }
 
     .page-sidepanel {

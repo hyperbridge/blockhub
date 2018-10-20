@@ -1,7 +1,7 @@
 <template>
     <div class="navigation" id="navigation-default">
         <c-sidebar-menu
-            title="FUNDING"
+            title="CROWD FUNDING"
             sub_title="General"
             mClass="margin-bottom-20"
             :links="links.general"
