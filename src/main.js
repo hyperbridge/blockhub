@@ -43,6 +43,10 @@ const overrideConsoleLog = () => {
   console.log = debounce(function (message) {
     window.consoleLogMessages.push(message)
 
+    if (message.toString().indexOf('Error') !== -1) {
+      BlockHub.Bridge.sendCommand('error', { message: message.toString() })
+    }
+
     if (message.toString().indexOf('TypeError') !== -1) {
       BlockHub.Notifications.error(message.toString(), 'UI Error', {
         timeout: 5000,

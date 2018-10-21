@@ -497,7 +497,7 @@
                 if (this.id === 'new') {
                     this.$store.dispatch('application/setEditorMode', 'publishing')
 
-                    BlockHub.DesktopBridge
+                    BlockHub.Bridge
                         .createFundingProject({ title: this.project.name, description: this.project.description, about: this.project.content })
                         .then((project) => {
                             store.state.projects[project.id] = project

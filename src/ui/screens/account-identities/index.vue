@@ -153,7 +153,7 @@
 </template>
 
 <script>
-    import * as DesktopBridge from '@/framework/desktop-bridge'
+    import * as Bridge from '@/framework/desktop-bridge'
 
     export default {
         components: {
@@ -221,7 +221,7 @@
 
                 const id = Math.floor(Math.random() * 100)
 
-                DesktopBridge.sendCommand('createIdentityRequest').then((identity) => {
+                Bridge.sendCommand('createIdentityRequest').then((identity) => {
                     newIdentity.id = identity.id
                     newIdentity.public_address = identity.public_address
 

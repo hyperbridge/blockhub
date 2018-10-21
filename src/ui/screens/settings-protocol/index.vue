@@ -133,16 +133,16 @@ export default {
 
             return [
                 {
-                    id: 'reserve',
-                    name: 'Reserve',
-                    link: 'https://github.com/hyperbridge/protocol/tree/master/packages/reserve',
-                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve.contracts)
-                },
-                {
                     id: 'token',
                     name: 'Token',
                     link: 'https://github.com/hyperbridge/protocol/tree/master/packages/token',
                     contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.token.contracts)
+                },
+                {
+                    id: 'reserve',
+                    name: 'Reserve',
+                    link: 'https://github.com/hyperbridge/protocol/tree/master/packages/reserve',
+                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve.contracts)
                 },
                 {
                     id: 'marketplace',

@@ -343,6 +343,9 @@ export default {
         toggleSignedIn() {
             this.$store.state.application.signed_in = !this.$store.state.application.signed_in
         },
+        toggleDeveloper() {
+            this.$store.state.application.is_developer = !this.$store.state.application.is_developer
+        },
         toggleDeveloperMode() {
             this.$store.state.application.developer_mode = !this.$store.state.application.developer_mode
         },
@@ -384,8 +387,8 @@ export default {
                 return alert('Not on desktop')
             }
 
-            BlockHub.DesktopBridge.send('ping', this.$refs.desktopMessage.value)
-            BlockHub.DesktopBridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
+            BlockHub.Bridge.sendCommand('ping', this.$refs.desktopMessage.value)
+            BlockHub.Bridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
         }
     },
     mounted() {

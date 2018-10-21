@@ -8,6 +8,36 @@
         </div>
         <div class="row" v-if="product">
             <div class="col-12">
+                <div class="row" v-if="editing" style="margin-bottom: 70px;">
+                    <c-button @click="showImporter" v-if="!importing">Import from Steam, GOG, etc.</c-button>
+                    <div class="" v-if="importing">
+                        Choose source: 
+                        <br />
+                        <div class="row">
+                            <div class="col">
+                                Steam
+                            </div>
+                            <div class="col">
+                                GOG.com
+                            </div>
+                            <div class="col">
+                                Itch
+                            </div>
+                        </div>
+                        <br />
+                        Enter URL:
+                        <br />
+                        <input ref="importUrl" type="text" value="https://store.steampowered.com/app/441830/I_am_Setsuna/" />
+                        <br />
+                        <c-button @click="startImport">Go</c-button>
+                        <br />
+                        <div>Importing...</div>
+                        Results:
+                        <br />
+                        <textarea ref="importResults"></textarea>
+                        <div>Submission Cost: 10 HBX</div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-8">
                         <div class="editor-container">
@@ -21,8 +51,9 @@
                                         <input ref="name" name="name" type="text" class="form-control"
                                                 placeholder="Product name..." v-model="product.name"/>
                                         <div
-                                            class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                            <span class="fa fa-check" @click="deactivateElement('name')"></span>
+                                            class="form-control-element__box form-control-element__box--pretify bg-secondary"
+                                            @click="deactivateElement('name')">
+                                            <span class="fa fa-check"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -56,9 +87,9 @@
                                             class="form-control" placeholder="Background image URL..."
                                             v-model="product.images.header"/>
                                     <div
-                                        class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                        <span class="fa fa-check"
-                                                @click="deactivateElement('background_image')"></span>
+                                        class="form-control-element__box form-control-element__box--pretify bg-secondary"
+                                        @click="deactivateElement('background_image')">
+                                        <span class="fa fa-check"></span>
                                     </div>
                                 </div>
                             </div>
@@ -112,6 +143,8 @@
 
 <script>
     import Vue from 'vue'
+    import * as Brdge from '@/framework/desktop-bridge'
+    import * as DB from '@/db'
 
     const groupBy = function (xs, key) {
         return xs.reduce(function (rv, x) {
@@ -126,6 +159,8 @@
 
         if (this.id === 'new') {
             product = this.$store.state.marketplace.default_product
+            
+            this.$store.dispatch('application/setEditorMode', 'editing')
         }
 
         if (this.$store.state.marketplace.products && this.$store.state.marketplace.products[this.id]) {
@@ -180,11 +215,15 @@
                     'racing',
                     'action'
                 ],
+                importing: false,
                 savedState: false
             }
         },
         computed: {
             product: updateProduct,
+            editor_mode() {
+                return this.$store.state.application.editor_mode
+            },
             editing() {
                 if (!this.$store.state.application.editor_mode) {
                     for (let key in this.activeElement) {
@@ -244,19 +283,44 @@
                 }, 10)
             },
             save() {
-                this.savedState = true;
                 if (this.id === 'new') {
-                    this.$store.commit('marketplace/createProduct', this.product)
+                    this.product.type = 'game'
+
+                    Brdge.sendCommand('createProduct', this.product).then((data) => {
+                        const product = DB.marketplace.products.insert(data)
+                        DB.save()
+
+                        Vue.set(this.$store.state.marketplace.products, product.id, product)
+
+                        this.savedState = true
+                    })
                 } else {
-                    this.$store.dispatch('marketplace/updateProduct', this.product)
+                    const product = this.product
+
+                    Vue.set(this.$store.state.marketplace.products, product.id, product)
+
+                    DB.marketplace.products.update(product) 
+                    DB.save()
+
+                    this.savedState = true
                 }
             },
             unsaved() {
                 if (this.savedState === false && this.$store.state.application.editor_mode === 'editing')
-                    return 'ololololo'
+                    return true
             },
             closeModal() {
                 this.$store.state.marketplace.first_product = false
+            },
+            showImporter() {
+                this.importing = true
+            },
+            startImport() {
+                Brdge.sendCommand('getWebData', {
+                    url: this.$refs.importUrl
+                }).then((data) => {
+                    this.product.name = data.productTitle
+                })
             },
         },
         updated() {
@@ -293,6 +357,13 @@
         watch: {
             '$route'() {
                 this.updateSection()
+            },
+            editor_mode (newMode, oldMode) {
+                if (oldMode === 'editing' && newMode === 'publishing') {
+                    this.save()
+
+                    this.$store.dispatch('application/setEditorMode', 'viewing')
+                }
             }
         }
     }

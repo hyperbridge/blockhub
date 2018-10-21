@@ -18,10 +18,19 @@
                                         </div>
                                         <div class="form-group row">
                                             <label class="switch switch-sm col-sm-3">
-                                                <label>First Name</label>
+                                                <label>Given Name</label>
                                             </label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="First name" :value="account.first_name" readonly>
+                                                <input type="text" class="form-control" placeholder="Given name" :value="account.first_name" readonly>
+                                                <span class="form-text">This field cannot be changed at this time.</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="switch switch-sm col-sm-3">
+                                                <label>Family Name</label>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Family name" :value="account.last_name" readonly>
                                                 <span class="form-text">This field cannot be changed at this time.</span>
                                             </div>
                                         </div>
@@ -52,14 +61,14 @@
                                             <i class="fas fa-id-card"></i>
                                         </div>
                                         <div class="info">
-                                            <h4>Identities</h4>
+                                            <h4>Profiles</h4>
                                             <div class="stat">
                                                 <div>
                                                     {{ account.identities.length }} owned by your account
                                                 </div>
                                             </div>
                                             <p>
-                                                View and manage identities on this account.
+                                                View and manage profiles on this account.
                                             </p>
                                         </div>
                                     </router-link>
@@ -84,7 +93,7 @@
                                                 </div>
                                             </div>
                                             <p>
-                                                Viev and Manage Identities on this account.
+                                                Viev and Manage Profiles on this account.
                                             </p>
                                         </div>
                                     </div>
@@ -100,7 +109,7 @@
                                                 </div>
                                             </div>
                                             <p>
-                                                Viev and Manage Identities on this account.
+                                                Viev and Manage Profiles on this account.
                                             </p>
                                         </div>
                                     </div>
@@ -129,7 +138,7 @@
                                                 </div>
                                             </div>
                                             <p>
-                                                Viev and Manage Identities on this account.
+                                                Viev and Manage Profiles on this account.
                                             </p>
                                         </div>
                                     </div>
@@ -143,7 +152,7 @@
 </template>
 
 <script>
-    import * as DesktopBridge from '@/framework/desktop-bridge'
+    import * as Bridge from '@/framework/desktop-bridge'
 
     export default {
         components: {
@@ -166,13 +175,13 @@
         }),
         methods: {
             exportAccountFile() {
-                DesktopBridge.sendCommand('exportAccountFileRequest')
+                Bridge.sendCommand('exportAccountFileRequest')
             },
             importAccountFile() {
-                DesktopBridge.sendCommand('importAccountFileRequest')
+                Bridge.sendCommand('importAccountFileRequest')
             },
             deleteAccount() {
-                DesktopBridge.sendCommand('deleteAccountRequest')
+                Bridge.sendCommand('deleteAccountRequest')
             }
         }
     }

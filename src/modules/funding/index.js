@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { normalize } from 'normalizr'
 import schema from './schema'
 import * as DB from '@/db'
-import * as DesktopBridge from '@/framework/desktop-bridge'
+import * as Bridge from '@/framework/desktop-bridge'
 
 
 let rawData = {}
@@ -42,7 +42,7 @@ export const actions = {
         store.commit('updateState', state)
     },
     initEthereum(store, payload) {
-        // DesktopBridge
+        // Bridge
         //     .initProtocol({ protocolName: 'funding' })
         //     .then((config) => {
         //         store.state.ethereum[store.state.current_ethereum_network] = config
@@ -61,7 +61,7 @@ export const actions = {
     },
     createProject(store, payload) {
         return new Promise((resolve, reject) => {
-            DesktopBridge
+            Bridge
                 .createFundingProject({ title: payload.name, description: payload.description, about: payload.content })
                 .then((project) => {
                     store.state.projects[project.id] = project
@@ -76,7 +76,7 @@ export const actions = {
         return new Promise((resolve, reject) => {
             const project = DB.funding.projects.findOne({ 'id': payload.id })
 
-            DesktopBridge
+            Bridge
                 .updateFundingProject({ id: project.id, data: payload })
                 .then((project) => {
                     store.state.projects[payload.id] = project

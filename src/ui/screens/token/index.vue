@@ -158,6 +158,9 @@
                     <h2 style="text-align: center">Oops, you haven't verified your account yet. <br />You'll need to do this to participate.</h2>
                     <br />
                     <c-button class="c-btn-lg" href="/#/account/verification" style="margin: 0 auto">Verify Account</c-button>
+                    <br /><br />
+                    <c-button status="underline" size="sm" @click="manualOverride">Click here if you're pretty sure you've verified</c-button>
+                    <br /><br />
                 </div>
 
                 <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && desktop_mode && !account.is_verified && account.is_verifying" style="text-align: center">
@@ -165,7 +168,7 @@
                     <p>Please check back later. If you've been waiting too long or have problems, please email support@hyperbridge.org</p>
                 </div>
                 
-                <div v-if="ethereum_connected && ethereum_unlocked && (!desktop_mode || account.is_verified)" style="text-align: center">
+                <div v-if="ethereum_connected && ethereum_unlocked && (!desktop_mode || account.is_verified || override)" style="text-align: center">
                     <div class="col-10 offset-1 tab-card">
                         <h4>Token Sale Agreement</h4>
                         <div class="terms_block">
@@ -399,8 +402,7 @@
                                 </div>
                                 
                                 <div>
-                                    
-                                    <p>Purchasing 1000 HBX in exchange for 10 ETH.</p>
+                                    <p>Purchasing {{ purchaseHBX }} HBX in exchange for {{ purchaseETH}} ETH.</p>
                                     <br />
                                 </div>
 
@@ -433,7 +435,7 @@
 
 <script>
 import axios from 'axios'
-import * as DesktopBridge from '@/framework/desktop-bridge'
+import * as Bridge from '@/framework/desktop-bridge'
 import { setInterval } from 'core-js';
 
 export default {
@@ -490,14 +492,10 @@ export default {
 
         setInterval(checkEthereumConnection, 2000)
 
-        const chosenIdentity = this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
+        let chosenIdentity = this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
 
-        let tokenContractAddress = null
-
-        try {
-            tokenContractAddress = this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts.TokenSale.address
-        } catch (e) {
-
+        if (!chosenIdentity && this.$store.state.application.account.identities.length) {
+            chosenIdentity = this.$store.state.application.account.identities[0]
         }
 
         const result = {
@@ -506,7 +504,6 @@ export default {
             chosenIdentity: chosenIdentity,
             purchaseETH: null,
             purchaseHBX: null,
-            tokenContractAddress: tokenContractAddress,
             ETH2USD: 220.10,
             maxPurchaseUSD: 7500,
             tokenPriceUSD: 0.055,
@@ -516,6 +513,7 @@ export default {
             ethereum_unlocked: this.$store.state.application.desktop_mode,
             ethereum_connected: this.$store.state.application.desktop_mode,
             purchaseAddress: chosenIdentity ? chosenIdentity.public_address : null,
+            override: false,
             purchasePopup: {
                 title: 'Purchase',
                 text: '',
@@ -534,9 +532,16 @@ export default {
         desktop_mode() {
             return this.$store.state.application.desktop_mode
         },
+        tokenContractAddress() {
+            try {
+                return this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve.contracts.TokenSale.address
+            } catch (e) {
+
+            }
+        },
         canContinue() {
             return this.purchaseETH
-            && (this.chosenIdentity && this.chosenIdentity.public_address)
+            && this.purchaseAddress
             && this.tokenSaleAgreement
             && this.jurisdictionAgreement
             && this.residentAgreement
@@ -546,6 +551,9 @@ export default {
     methods: {
         calcHBX() {
             this.purchaseHBX = (this.purchaseETH * this.ETH2USD) / 0.055
+        },
+        manualOverride() {
+            this.override = true
         },
         chooseIdentity(identity) {
             this.chosenIdentity = identity
@@ -560,7 +568,7 @@ export default {
         },
         confirmPurchase() {
             if (this.desktop_mode) {
-                DesktopBridge.sendTransactionRequest({
+                Bridge.sendTransactionRequest({
                     fromAddress: this.purchaseAddress,
                     toAddress: this.tokenContractAddress,
                     amount: this.purchaseETH

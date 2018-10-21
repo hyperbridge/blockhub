@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { normalize } from 'normalizr'
 import * as DB from '@/db'
-import * as DesktopBridge from '@/framework/desktop-bridge'
+import * as Bridge from '@/framework/desktop-bridge'
 import schema from './schema'
 
 let rawData = {}
@@ -42,6 +42,7 @@ const updateState = (savedData, updatedState = {}) => {
         operating_system: getOS(),
         account: DB.application.config.data[0].account,
         darklaunch_flags: DB.application.config.data[0].darklaunch_flags,
+        developer_mode: savedData.developer_mode !== null ? savedData.developer_mode : DB.application.config.data[0].account && DB.application.config.data[0].account.current_identity && DB.application.config.data[0].account.current_identity.developer_id,
         ...updatedState
     }
     
@@ -118,9 +119,9 @@ export const actions = {
         store.commit('setEditorMode', payload)
     },
     unlockAccount(state, payload) {
-        DesktopBridge.resolvePromptPasswordRequest(payload.password.value)
+        Bridge.resolvePromptPasswordRequest(payload.password.value)
 
-        // DesktopBridge.sendCommand('getAccountRequest', data).then((res) => {
+        // Bridge.sendCommand('getAccountRequest', data).then((res) => {
         //     store.state.account.public_address = res.account.public_address
 
         //     store.state.password_required = true
@@ -128,7 +129,7 @@ export const actions = {
         // })
     },
     initEthereum(store, payload) {
-        // DesktopBridge.initProtocol({ protocolName: 'application' }).then((config) => {
+        // Bridge.initProtocol({ protocolName: 'application' }).then((config) => {
         //     store.state.ethereum[store.state.current_ethereum_network] = config
         //     store.dispatch('updateState')
         // })
@@ -173,15 +174,14 @@ export const actions = {
         function processRequest(e) {
             if (xhr.readyState == 4) {
                 try {
-                if (xhr.status >= 200 && xhr.status < 304) {
-                    store.commit('setInternetConnection', { connected: true, message: "Connected." })
-                    store.state.connection.datasource = true // TEMP
-                } else {
-                    store.commit('setInternetConnection', { connected: false, message: "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection." })
+                    if (xhr.status >= 200 && xhr.status < 304) {
+                        store.commit('setInternetConnection', { connected: true, message: "Connected." })
+                        store.state.connection.datasource = true // TEMP
+                    } else {
+                        store.commit('setInternetConnection', { connected: false, message: "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection." })
                     }
-
                 } catch (e) {
-                    
+                    console.log(e)
                 }
             }
         }
@@ -202,7 +202,7 @@ export const actions = {
     },
     deployContract(store, { protocolName, contractName }) {
         return new Promise((resolve, reject) => {
-            DesktopBridge
+            Bridge
                 .deployContract({ protocolName, contractName })
                 .then((contract) => {
                     state.ethereum[state.current_ethereum_network].packages[protocolName].contracts[contractName] = contract

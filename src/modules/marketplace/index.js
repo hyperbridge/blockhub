@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { normalize } from 'normalizr'
 import schema from './schema'
 import * as DB from '@/db'
-import * as DesktopBridge from '@/framework/desktop-bridge'
+import * as Bridge from '@/framework/desktop-bridge'
 
 let rawData = {};
 
@@ -118,7 +118,7 @@ export const actions = {
         store.commit('updateState', state)
     },
     initEthereum(store, payload) {
-        // DesktopBridge.initProtocol({ protocolName: 'marketplace' }).then((config) => {
+        // Bridge.initProtocol({ protocolName: 'marketplace' }).then((config) => {
         //     store.state.ethereum[store.state.current_ethereum_network] = config
         //     store.dispatch('updateState')
         // })
@@ -175,35 +175,6 @@ export const mutations = {
         for (let x in payload) {
             Vue.set(state, x, payload[x])
         }
-    },
-    updateProduct(state, payload) {
-        Vue.set(state.products, payload.id, payload.data)
-    },
-    createProduct(state, payload) {
-        const success = (id) => {
-            const product = DB.marketplace.products.insert({ id, ...payload })
-
-            Object.assign(product, payload)
-
-            DB.marketplace.products.update(product)
-            DB.save()
-
-            Vue.set(state.products, id, product)
-        }
-
-        MarketplaceProtocol.ethereum.modules.marketplace.createProduct({
-            name: payload.name,
-            version: '1',
-            category: '1',
-            files: '1',
-            checksum: '1',
-            permissions: '1'
-        }).then((res) => {
-            success(res[0])
-        })
-    },
-    submitProductForReviewResponse(state, product) {
-        DB.marketplace.products.update(product)
     }
 }
 

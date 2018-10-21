@@ -742,7 +742,7 @@
 
 
 <script>
-import * as DesktopBridge from '@/framework/desktop-bridge'
+import * as Bridge from '@/framework/desktop-bridge'
 
 export default {
     components: {
@@ -818,7 +818,7 @@ export default {
                     && this.account.birthday
                     && this.account.agreement
                 ) {
-                    DesktopBridge.getPassphraseRequest({
+                    Bridge.getPassphraseRequest({
                         seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
                     }).then((res) => {
                         this.passphrase = res.split(' ')
@@ -863,7 +863,7 @@ export default {
                     && !this.passphrase.includes('')
                     && !this.repeatPassphrase.includes('')
                     && passphraseOriginal === passphraseVerification) {
-                        DesktopBridge.createAccountRequest({
+                        Bridge.createAccountRequest({
                             seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
                             first_name: this.account.first_name,
                             last_name: this.account.last_name,
