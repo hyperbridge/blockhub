@@ -70,7 +70,7 @@
             }
         }
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         .assets-list__item-container{
             width: 100%!important;
             padding: 0;

@@ -140,7 +140,7 @@
         opacity: 0;
         transform: translateY(30px);
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         .game-includes__list{
             flex-direction: column;
         }

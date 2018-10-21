@@ -14,15 +14,15 @@
             />
             <span></span>
         </label>
-        <p
+        <span
             v-if="!customLabel && label_position == 'right'"
             style="padding-left: 10px"
             :style="{ fontSize: label_size }"
         >
-            <label :for="id">
+            <label :for="id" class="mb-0">
                 {{ label }}
             </label>
-        </p>
+        </span>
         <p
             v-else-if="customLabel && label_position == 'right'"
             style="padding-left: 10px"
@@ -75,10 +75,11 @@
 
 <style lang="scss" scoped>
     .switch-container {
-        display: flex;
+        /*display: flex;*/
+        display: inline-flex;
         width: auto;
         align-items: center;
-        color: #fff;
+        /*color: #fff;*/
         p {
             margin-bottom: 0;
             padding-bottom: 0;

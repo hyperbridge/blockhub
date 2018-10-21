@@ -264,7 +264,7 @@
 
                         <div class="row tab-pane fade active show" id="overview" role="tabpanel"
                              aria-labelledby="overview-tab">
-                            <div class="col-md-7 col-xl-8">
+                            <div class="col-12 col-lg-7 col-xl-8">
                                 <c-screen-gallery :items="project.images.preview" v-if="project.images.preview"></c-screen-gallery>
 
                                 <div class="editor-container">
@@ -296,7 +296,7 @@
                                     <div id="summernote" v-html="project.content">{{ project.content }}</div>
                                 </div>
                             </div>
-                            <div class="col-md-5 col-xl-4">
+                            <div class="col-12 col-lg-5 col-xl-4">
 
                                 <div class="card invert" v-if="project.funding">
                                     <div class="card-body">

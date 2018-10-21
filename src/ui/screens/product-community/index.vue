@@ -141,8 +141,8 @@
     border-radius: 5px;
 }
 
-.is-reply {
-    transition: background-color .3s ease;
-    background: rgba(255, 255, 255, .1);
-}
+/*.is-reply {*/
+    /*transition: background-color .3s ease;*/
+    /*background: rgba(255, 255, 255, .1);*/
+/*}*/
 </style>

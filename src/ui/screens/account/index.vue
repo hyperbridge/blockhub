@@ -1,144 +1,146 @@
 <template>
     <c-layout navigationKey="account">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <c-block title="Account Information">
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <div class="form-group row">
-                                            <label class="switch switch-sm col-sm-3">
-                                                <label>Email Address</label>
-                                            </label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Email" :value="account.email" readonly>
-                                                <span class="form-text">This field cannot be changed at this time.</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="switch switch-sm col-sm-3">
-                                                <label>First Name</label>
-                                            </label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="First name" :value="account.first_name" readonly>
-                                                <span class="form-text">This field cannot be changed at this time.</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="switch switch-sm col-sm-3">
-                                                <label>Public Address</label>
-                                            </label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Public address" :value="account.public_address" readonly>
-                                                <span class="form-text">Your account is an Ethereum wallet, and can be <a :href="`https://etherscan.io/address/${account.public_address}`">found on the blockchain using the Public Address</a></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <c-button @click="exportAccountFile">Download Account File</c-button>
-                                        <c-button @click="importAccountFile">Import Account File</c-button>
-                                        <c-button @click="deleteAccount">Delete Account</c-button>
+        <div class="row">
+            <div class="col-12">
+                <c-block title="Account Information">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group row">
+                                    <label class="switch switch-sm col-sm-3">
+                                        <label>Email Address</label>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" placeholder="Email"
+                                               :value="account.email" readonly>
+                                        <span class="form-text">This field cannot be changed at this time.</span>
                                     </div>
                                 </div>
-                            </form>
-                        </c-block>
-                        
-                        <c-block title="Overview">
-                            <div class="stat-card-container">
-                                <div class="stat-card-list">
-                                    <router-link tag="div" to="/account/identities" class="route stat-card">
-                                        <div class="icon">
-                                            <i class="fas fa-id-card"></i>
-                                        </div>
-                                        <div class="info">
-                                            <h4>Identities</h4>
-                                            <div class="stat">
-                                                <div>
-                                                    {{ account.identities.length }} owned by your account
-                                                </div>
-                                            </div>
-                                            <p>
-                                                View and manage identities on this account.
-                                            </p>
-                                        </div>
-                                    </router-link>
-                                    <div class="stat-card" v-darklaunch="'TICKETS'">
-                                        <div class="icon">
-                                            <i class="fas fa-question-circle"></i>
-                                        </div>
-                                        <div class="info">
-                                            <h4>Support Tickets</h4>
-                                            <div class="stat">
-                                                <div>
-                                                    <i class="fa fa-clock"></i>
-                                                    35
-                                                </div>
-                                                <div>
-                                                    <i class="fas fa-exclamation-triangle" style="color: #FADC72"></i>
-                                                    12
-                                                </div>
-                                                <div>
-                                                    <i class="fas fa-check" style="color: #43C981"></i>
-                                                    5
-                                                </div>
-                                            </div>
-                                            <p>
-                                                Viev and Manage Identities on this account.
-                                            </p>
-                                        </div>
+                                <div class="form-group row">
+                                    <label class="switch switch-sm col-sm-3">
+                                        <label>First Name</label>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" placeholder="First name"
+                                               :value="account.first_name" readonly>
+                                        <span class="form-text">This field cannot be changed at this time.</span>
                                     </div>
-                                    <div class="stat-card" v-darklaunch="'PAYMENTS'">
-                                        <div class="icon">
-                                            <i class="fas fa-dollar-sign"></i>
-                                        </div>
-                                        <div class="info">
-                                            <h4>Open Payments</h4>
-                                            <div class="stat">
-                                                <div>
-                                                    $ 2,345,00 om 6 Payments
-                                                </div>
-                                            </div>
-                                            <p>
-                                                Viev and Manage Identities on this account.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="stat-card" v-darklaunch="'USER_ACTIVITY'">
-                                        <div class="icon">
-                                            <i class="fas fa-users"></i>
-                                        </div>
-                                        <div class="info">
-                                            <h4>User Activity</h4>
-                                            <div class="stat">
-                                                <div>
-                                                    <i class="fas fa-circle" style="color: #43C981"></i>
-                                                    3
-                                                </div>
-                                                <div>
-                                                    <i class="fas fa-circle" style="color: #FADC72"></i>
-                                                    1
-                                                </div>
-                                                <div>
-                                                    <i class="fas fa-circle" style="color: #F75D5D"></i>
-                                                    0
-                                                </div>
-                                                <div>
-                                                    <i class="fas fa-circle" style="color: #A2A3BE"></i>
-                                                    5
-                                                </div>
-                                            </div>
-                                            <p>
-                                                Viev and Manage Identities on this account.
-                                            </p>
-                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="switch switch-sm col-sm-3">
+                                        <label>Public Address</label>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" placeholder="Public address"
+                                               :value="account.public_address" readonly>
+                                        <span class="form-text">Your account is an Ethereum wallet, and can be <a
+                                            :href="`https://etherscan.io/address/${account.public_address}`">found on the blockchain using the Public Address</a></span>
                                     </div>
                                 </div>
                             </div>
-                        </c-block>
+                            <div class="col-12">
+                                <c-button @click="exportAccountFile">Download Account File</c-button>
+                                <c-button @click="importAccountFile">Import Account File</c-button>
+                                <c-button @click="deleteAccount">Delete Account</c-button>
+                            </div>
+                        </div>
+                    </form>
+                </c-block>
+
+                <c-block title="Overview">
+                    <div class="stat-card-container">
+                        <div class="stat-card-list">
+                            <router-link tag="div" to="/account/identities" class="route stat-card">
+                                <div class="icon">
+                                    <i class="fas fa-id-card"></i>
+                                </div>
+                                <div class="info">
+                                    <h4>Identities</h4>
+                                    <div class="stat">
+                                        <div>
+                                            {{ account.identities.length }} owned by your account
+                                        </div>
+                                    </div>
+                                    <p>
+                                        View and manage identities on this account.
+                                    </p>
+                                </div>
+                            </router-link>
+                            <div class="stat-card" v-darklaunch="'TICKETS'">
+                                <div class="icon">
+                                    <i class="fas fa-question-circle"></i>
+                                </div>
+                                <div class="info">
+                                    <h4>Support Tickets</h4>
+                                    <div class="stat">
+                                        <div>
+                                            <i class="fa fa-clock"></i>
+                                            35
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-exclamation-triangle" style="color: #FADC72"></i>
+                                            12
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-check" style="color: #43C981"></i>
+                                            5
+                                        </div>
+                                    </div>
+                                    <p>
+                                        Viev and Manage Identities on this account.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="stat-card" v-darklaunch="'PAYMENTS'">
+                                <div class="icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <div class="info">
+                                    <h4>Open Payments</h4>
+                                    <div class="stat">
+                                        <div>
+                                            $ 2,345,00 om 6 Payments
+                                        </div>
+                                    </div>
+                                    <p>
+                                        Viev and Manage Identities on this account.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="stat-card" v-darklaunch="'USER_ACTIVITY'">
+                                <div class="icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="info">
+                                    <h4>User Activity</h4>
+                                    <div class="stat">
+                                        <div>
+                                            <i class="fas fa-circle" style="color: #43C981"></i>
+                                            3
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-circle" style="color: #FADC72"></i>
+                                            1
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-circle" style="color: #F75D5D"></i>
+                                            0
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-circle" style="color: #A2A3BE"></i>
+                                            5
+                                        </div>
+                                    </div>
+                                    <p>
+                                        Viev and Manage Identities on this account.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </c-block>
             </div>
+        </div>
     </c-layout>
 </template>
 
@@ -225,20 +227,21 @@
             }
         }
     }
-    .login-modal{
+
+    .login-modal {
         display: inline-block;
         width: auto !important;
         position: relative;
         min-width: 250px;
-        .modal-title{
+        .modal-title {
             text-align: left;
             margin: 0 0 15px 0;
-            h3{
+            h3 {
                 padding: 0;
                 margin: 0 0 8px;
                 font-size: 21px;
             }
-            h5{
+            h5 {
                 font-size: 14px;
                 font-weight: bold;
             }
@@ -261,15 +264,15 @@
                 padding: 0;
                 text-align: left;
             }
-            .form-group{
-                &:last-child{
+            .form-group {
+                &:last-child {
                     margin-bottom: 0;
                 }
             }
         }
-        .modal-action{
-            .btn{
-                &.btn-link{
+        .modal-action {
+            .btn {
+                &.btn-link {
                     display: inline-block;
                     line-height: 14px;
                     padding: 0;

@@ -1,34 +1,34 @@
 <template>
     <!-- PAGE WRAPPER -->
     <div class="page page--w-header page--w-container">
-        <div class="page-top-bar">
+        <div class="page-top-bar" :class="{'invert' : darkMode}">
             <div class="logo-holder">
-                <c-img src="/static/img/logo.svg" alt="Logo" />
+                <c-img src="/static/img/logo-white.svg" alt="Logo" v-if="darkMode" />
+                <c-img src="/static/img/logo.svg" alt="Logo" v-else />
             </div>
             <div class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
                 Business Manager
             </div>
             <div class="mb-0 float-right h5" style="margin-left: auto">
-                User Name
+                User Name | {{ darkMode }}
             </div>
         </div>
         <!-- PAGE LEFT PANEL -->
-        <div class="page-aside left-sidebar" id="page-aside" v-if="showLeftPanel">
+        <div class="page-aside left-sidebar" id="page-aside" v-if="showLeftPanel" :class="{'invert' : darkMode}">
             <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
                 <c-business-sidebar />
-                <slot name="left" />
             </div>
         </div>
         <!---->
 
         <!-- PAGE CONTENT -->
-        <div class="content" id="content" :class="{'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel }">
+        <div class="content" id="content" :class="{'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel, 'invert' : darkMode }">
             <slot />
         </div>
         <!---->
 
         <!-- PAGE RIGHT PANEL -->
-        <div class="page-sidepanel text-right" id="page-sidepanel" v-if="showRightPanel">
+        <div class="page-sidepanel text-right" id="page-sidepanel" v-if="showRightPanel" :class="{'invert' : darkMode}">
             <div class="page-sidepanel__content">
                 <slot name="right" />
             </div>
@@ -56,6 +56,7 @@
         data(){
             return{
                 loadingState: true,
+                darkMode: false
             }
         },
         mounted() {
@@ -63,8 +64,8 @@
                 this.loadingState = false
                 document.getElementById('startup-loader').style.display = 'none'
             })
-            let body = document.body;
 
+            let body = document.body;
             body.classList.add("light");
         },
         beforeDestroy(){
@@ -86,9 +87,10 @@
     }
 </style>
 <style lang="scss" scoped>
-    body{
-        background: #f7f6f7!important;
-    }
+    $light_color_1: #fff;
+    $dark_color_1: #30304d;
+    $dark_color_2: #202133;
+
     .page{
         display: flex;
         width: 100%;
@@ -121,6 +123,11 @@
                 height: 50px;
             }
         }
+        &.invert{
+            background: $dark_color_2;
+            color: #fff;
+            box-shadow: unset;
+        }
     }
     .page-sidepanel,
     .page-aside{
@@ -132,6 +139,13 @@
         background: #fff;
         .divider{
             opacity: .3;
+        }
+        &.invert{
+            background: $dark_color_2;
+            color: #fff;
+            .text-secondary{
+                color: #5D75F7!important;
+            }
         }
     }
     .content{
@@ -145,6 +159,23 @@
         }
         &.left-sidebar.right-sidebar{
             width: calc( 100% - 500px );
+        }
+        &.invert{
+            background: $dark_color_1;
+            color: #fff;
+            .page-heading{
+                background: transparent!important;
+            }
+            .widget{
+                background: rgba(0, 0, 0, .1);
+                color: #fff!important;
+            }
+            .card{
+                background: rgba(0, 0, 0, .1);
+            }
+            .text-secondary{
+                color: #5D75F7!important;
+            }
         }
     }
 </style>

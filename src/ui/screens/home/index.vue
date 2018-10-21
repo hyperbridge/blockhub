@@ -1,6 +1,6 @@
 <template>
     <c-layout navigationKey="store">
-            <div class="container-fluid">
+        <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 mb-4">
                         <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/token">

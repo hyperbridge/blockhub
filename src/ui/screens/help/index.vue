@@ -133,6 +133,12 @@
         flex-wrap: wrap;
         div{
             width: calc( 100%/4 );
+            @media (max-width: 1024px){
+                width: calc( 100%/3 );
+            }
+            @media (max-width: 767px){
+                width: calc( 100%/2 );
+            }
         }
     }
     .simple-list{

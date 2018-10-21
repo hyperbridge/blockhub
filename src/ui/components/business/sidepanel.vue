@@ -6,6 +6,13 @@
             <div class="user__name">
                 <strong>Tracey Newman</strong><br>
                 <span>Global administrator</span>
+                <center class="mt-3">
+                    <c-switch @change="toggleColorMode"
+                              label="Dark Mode"
+                              v-model="darkMode"
+                              class="text-white"
+                    />
+                </center>
             </div>
         </div>
 
@@ -75,7 +82,26 @@
 </template>
 
 <script>
-
+    export default {
+        name: 'business-sidebar',
+        components:{
+            'c-switch': (resolve) => require(['@/ui/components/switch'], resolve)
+        },
+        data(){
+            return{
+                darkMode: false
+            }
+        },
+        methods:{
+            toggleColorMode(){
+                console.log(this.$parent.$root.darkMode)
+                if (this.darkMode)
+                    this.$parent.$root.darkMode = true
+                else
+                    this.$parent.$root.darkMode = false
+            }
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
