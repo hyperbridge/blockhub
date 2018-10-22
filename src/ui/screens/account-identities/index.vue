@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="account">
-            <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <c-heading-bar name="My Profile" :showArrows="false" :showBackground="false"/>
@@ -34,7 +33,7 @@
                                 Click here to verify
                             </router-link>
                             <div class="date" v-if="defaultIdentity.is_verified">
-                                Valid Up To $10,000 USD
+                                Valid up to $7,500 USD
                             </div>
                         </div>
                     </div>
@@ -114,7 +113,7 @@
                                     v-if="identity.edit"
                                 >Delete</c-button>
                                 <c-button
-                                    @click="identity.edit = false"
+                                    @click="cancelEditIdentity(identity)"
                                     icon="times"
                                     v-if="identity.edit"
                                 >Cancel</c-button>
@@ -148,7 +147,6 @@
                     </c-modal-light>
 
                 </div>
-            </div>
     </c-layout>
 </template>
 
@@ -157,7 +155,6 @@
 
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
             'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'], resolve),
@@ -175,6 +172,7 @@
                     edit: false
                 },
                 identityCopy: {},
+                editedIdentity: null,
                 removeIdentity: null,
                 filterPhrase: '',
                 sortAsc: true
@@ -188,24 +186,31 @@
 
                 this.saveIdentities()
             },
-            editIdentity(identity) {
+            editIdentity(identity) {console.log(identity, this.editedIdentity, this.filteredIdentities)
                 if (!this.editedIdentity) {
                     identity.edit = true
+                    this.editedIdentity = identity
                 } else {
                     this.$snotify.warning('You must finish editing the current profile')
                 }
             },
-            saveIdentity(identity)  {
+            cancelEditIdentity(identity) {
+                identity.edit = false
+                this.editedIdentity = null
+            },
+            saveIdentity(identity) {
                 for (let key in identity) {
                     identity[key] = this.identityClone[key]
                 }
 
                 identity.edit = false
+                this.editedIdentity = null
 
                 this.saveIdentities()
             },
             deleteIdentity(identity) {
                 const { removeIdentity } = this
+
                 if (removeIdentity) {
                     const index = this.identities.indexOf(removeIdentity)
                     this.identities.splice(index, 1)
@@ -213,6 +218,9 @@
                 } else {
                     this.removeIdentity = identity
                 }
+
+                identity.edit = false
+                this.editedIdentity = null
 
                 this.saveIdentities()
             },
@@ -225,7 +233,14 @@
                     newIdentity.id = identity.id
                     newIdentity.public_address = identity.public_address
 
+                    if (!newIdentity.name)
+                        newIdentity.name = 'Default'
+
                     this.identities.push({ ...newIdentity, edit: true })
+
+                    this.editedIdentity = newIdentity
+
+                    this.saveIdentities()
                 })
                 /*
                     //  Form check logic
@@ -248,13 +263,15 @@
         },
         computed: {
             identities() {
+                for(let i in this.$store.state.application.account.identities) {
+                    if (!this.$store.state.application.account.identities[i].name)
+                        this.$store.state.application.account.identities[i].name = 'Default'
+                }
+                
                 return this.$store.state.application.account.identities
             },
             defaultIdentity() {
-                return this.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
-            },
-            editedIdentity() {
-                return this.identities.find(identity => identity.edit)
+                return this.identities.find(identity => this.$store.state.application.account.current_identity ? identity.id == this.$store.state.application.account.current_identity.id : null)
             },
             identityClone() {
                 return this.editedIdentity ? { ...this.editedIdentity } : {}
@@ -264,7 +281,7 @@
             },
             filteredIdentities() {
                 return this.identities
-                    .filter(identity => identity.name.toLowerCase().includes(this.filterPhrase.toLowerCase()))
+                    .filter(identity => !identity.name || identity.name.toLowerCase().includes(this.filterPhrase.toLowerCase()))
                     .sort((a, b) => (a.name > b.name) ? (this.sortAsc ? 1 : -1) : 0)
             }
         }

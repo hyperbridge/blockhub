@@ -440,7 +440,6 @@ import { setInterval } from 'core-js';
 
 export default {
     components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
         'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),

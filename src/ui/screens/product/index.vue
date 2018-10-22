@@ -286,7 +286,7 @@
                 if (this.id === 'new') {
                     this.product.type = 'game'
 
-                    Brdge.sendCommand('createProduct', this.product).then((data) => {
+                    Brdge.sendCommand('createMarketplaceProductRequest', this.product).then((data) => {
                         const product = DB.marketplace.products.insert(data)
                         DB.save()
 
@@ -316,7 +316,7 @@
                 this.importing = true
             },
             startImport() {
-                Brdge.sendCommand('getWebData', {
+                Brdge.sendCommand('fetchPageDataRequest', {
                     url: this.$refs.importUrl
                 }).then((data) => {
                     this.product.name = data.productTitle

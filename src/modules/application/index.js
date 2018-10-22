@@ -73,6 +73,18 @@ export const getters = {
             result.push('signed_in')
         }
 
+        if (state.developer_mode) {
+            result.push('developer_mode')
+        }
+
+        if (state.verified_account) {
+            result.push('verified_account')
+        }
+
+        if (state.hyperbridge_account) {
+            result.push('hyperbridge_account')
+        }
+
         return result
     }
 }

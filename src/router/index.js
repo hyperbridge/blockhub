@@ -382,6 +382,9 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/product'], resolve),
             props: {
                 id: 'new'
+            },
+            meta: {
+                permission: 'developer_mode'
             }
         },
         {
