@@ -54,6 +54,10 @@ const assets = {
         update(state, { prop = 'assets', id, data }) {
             state[prop][id] = { ...state[prop][id], ...data };
         },
+        updatev2(state, payload) {
+            const [prop, id] = Object.keys(payload)[0].split('_');
+            state[prop][id] = { ...state[prop][id], ...payload };
+        },
         delete(state, { prop = 'assets', id }) {
             const { [id]: value, ...values } = state[prop];
             state[prop] = values;
@@ -107,9 +111,9 @@ const assets = {
         createAuction({ state, commit }, { offerId, ...payload }) {
             const newId = rand();
 
-            // ['offers_' + id]: {
+            // commit('updatev2', { ['offers_'+ offerId]: {
             //     auctions: [...state.offers[id].auctions, newId]
-            // }
+            // }});
 
             commit('create', { id: newId, prop: 'auctions', data: payload });
             commit('update', {
