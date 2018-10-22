@@ -30,7 +30,10 @@ const assets = {
         },
         offers: {
             1: { id: 1, auctions: [1, 2], buyout: 42, marketValue: 45, seller: { id: 2, name: 'Tenseii' }, expDate: moment().add(24, 'hours') },
-            2: { id: 2, auctions: [1, 2], buyout: 42, marketValue: 45, seller: { id: 1, name: 'Tomeh' }, expDate: moment().add(12, 'hours') }
+            2: { id: 2, auctions: [1, 2], buyout: 42, marketValue: 45, seller: { id: 1, name: 'Tomeh' }, expDate: moment().add(12, 'hours') },
+            3: { id: 3, auctions: [1, 2], buyout: 42, marketValue: 45, seller: { id: 1, name: 'Tomeh' }, expDate: moment().add(3, 'hours') },
+            4: { id: 4, auctions: [1, 2], buyout: 42, marketValue: 45, seller: { id: 1, name: 'Tomeh' }, expDate: moment().add(11, 'hours') },
+            5: { id: 5, auctions: [1, 2], buyout: 42, marketValue: 45, seller: { id: 1, name: 'Tomeh' }, expDate: moment().add(2, 'hours') }
         },
         auctions: {
             1: { id: 1, bid: 12.9, user: { name: 'Predda' }, date: moment().add(-1, 'day') },
@@ -100,6 +103,20 @@ const assets = {
         create({ commit }, payload) {
             const id = rand();
             commit('create', { ...payload, id, data: { ...payload.data, id }});
+        },
+        createAuction({ state, commit }, { offerId, ...payload }) {
+            const newId = rand();
+
+            // ['offers_' + id]: {
+            //     auctions: [...state.offers[id].auctions, newId]
+            // }
+
+            commit('create', { id: newId, prop: 'auctions', data: payload });
+            commit('update', {
+                id: offerId,
+                prop: 'offers',
+                data: { auctions: [...state.offers[offerId].auctions, newId] }
+            });
         }
     },
     getters: {

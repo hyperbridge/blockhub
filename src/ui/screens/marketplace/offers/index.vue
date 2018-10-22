@@ -16,7 +16,7 @@
                     <template v-if="openedOffer != offer.id">
                         <td>
                             <c-asset-preview-basic
-                                :asset="asset"
+                                :asset="assets[id]"
                                 size="sm"
                                 horizontal
                                 hideGame
@@ -61,7 +61,7 @@
                                         <td colspan="3">
                                             <div class="auctions-table__bid-asset">
                                                 <c-input v-model="bidValue"/>
-                                                <c-button status="success" icon="gavel">
+                                                <c-button status="success" icon="gavel" @click="createAuction(offer.id)">
                                                     Bid the asset for {{ bidValue }}$
                                                 </c-button>
                                             </div>
@@ -101,11 +101,26 @@ export default {
             if (this.bidValue != 0) this.bidValue = 0;
             if (this.openedOffer == id) this.openedOffer = null;
             else this.openedOffer = id;
+        },
+        createAuction(offerId) {
+            const { bidValue: bid } = this;
+
+            if (bid) {
+                const newAuction = {
+                    offerId,
+                    bid,
+                    user: { name: 'Me' },
+                    date: moment()
+                };
+                this.$store.dispatch('assets/createAuction', newAuction);
+                this.$snotify.success(`You have successfully created an auction bid for ${bid} $`, 'Created');
+                this.bidValue = 0;
+            }
         }
     },
     computed: {
-        asset() {
-            return this.$store.state.assets.assets[2];
+        assets() {
+            return this.$store.getters['assets/assetsArray'];
         },
         offers() {
             return this.$store.getters['assets/offers'];
@@ -131,14 +146,13 @@ export default {
             background: #46476d;
         }
         td {
-            padding: 5px;
+            padding: 8px;
             &:not(.offers-table--opened) {
                 background: #343555;
-                &:nth-child(even) {
-                    background: #494b75;
-                }
             }
-
+        }
+        tr:nth-child(even) td, .offers-table--opened {
+            background: #404166;
         }
     }
 
