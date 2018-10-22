@@ -500,13 +500,19 @@ const router = new Router({
             path: '/project/:id',
             name: 'Project',
             props: true,
-            component: (resolve) => require(['@/ui/screens/project-overview'], resolve)
+            component: (resolve) => require(['@/ui/screens/project'], resolve),
+            meta: {
+                section: 'overview'
+            }
         },
         {
             path: '/project/:id/bounties',
             name: 'Project Bounties',
             props: true,
-            component: (resolve) => require(['@/ui/screens/project-bounties'], resolve)
+            component: (resolve) => require(['@/ui/screens/project'], resolve),
+            meta: {
+                section: 'bounties'
+            }
         },
         {
             path: '/project/:id/contributors',
@@ -524,13 +530,19 @@ const router = new Router({
             path: '/project/:id/milestones',
             name: 'Project Milestones',
             props: true,
-            component: (resolve) => require(['@/ui/screens/project-milestones'], resolve)
+            component: (resolve) => require(['@/ui/screens/project'], resolve),
+            meta: {
+                section: 'milestones'
+            }
         },
         {
             path: '/project/:id/updates',
             name: 'Project Updates',
             props: true,
-            component: (resolve) => require(['@/ui/screens/project-updates'], resolve)
+            component: (resolve) => require(['@/ui/screens/project'], resolve),
+            meta: {
+                section: 'updates'
+            }
         },
         {
             path: '/project/:projectID/updates/:postID',
@@ -542,7 +554,10 @@ const router = new Router({
             path: '/project/:id/community',
             name: 'Project Community',
             props: true,
-            component: (resolve) => require(['@/ui/screens/project-community'], resolve)
+            component: (resolve) => require(['@/ui/screens/project'], resolve),
+            meta: {
+                section: 'community'
+            }
         },
         {
             path: '/battlepass/:id',

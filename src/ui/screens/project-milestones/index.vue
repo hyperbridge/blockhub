@@ -1,234 +1,88 @@
 <template>
-    <c-layout navigationKey="project">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12" v-if="!project">
-                        Project not found
+    <div class="col-12">
+            <div class="milestones-header margin-bottom-20">
+                <div class="milestones-header__info">
+                    <div class="h3 text-white font-weight-bold mb-0">
+                        {{ project.milestones.overall_progress }}% Project Completion
                     </div>
+                    {{ doneMilestones }} of {{ project.milestones.items.length }} Milestones Completed
                 </div>
-                <div class="row" v-if="project">
-                    <div class="col-lg-4">
-                        <div class="editor-container">
-                            <div class="editor" v-if="editing">
-                                <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                        @click="activateElement('name')" v-if="!activeElement['name']">Change
-                                    Project Name <span class="fa fa-edit"></span></button>
-
-                                <div class="form-control-element form-control-element--right"
-                                     v-if="activeElement['name']">
-                                    <input ref="name" name="name" type="text" class="form-control"
-                                           placeholder="Project name..." v-model="project.name"/>
-                                    <div
-                                        class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                        <span class="fa fa-check" @click="deactivateElement('name')"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <h1 class="title margin-top-10 margin-bottom-15">{{ project.name }}</h1>
+                <div class="milestones-header__stat">
+                    <c-icon-block icon="check">
+                        <div class="h6 p-0 m-0 text-white font-weight-bold">
+                            Completed
                         </div>
-
-                        <div class="editor-container">
-                            <div class="editor" v-if="editing">
-                                <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                        @click="activateElement('developer_tags')"
-                                        v-if="!activeElement['developer_tags']" style="margin-bottom: 20px">Change
-                                    Tags <span class="fa fa-edit"></span></button>
-                                <div class="form-control-element form-control-element--right"
-                                     v-if="activeElement['developer_tags']">
-                                    <select id="tag-editor" class="form-control" multiple="multiple">
-                                        <option v-for="(tag, index) in author_tag_options" :key="index"
-                                                :selected="project.developer_tags.includes(tag)">{{ tag }}
-                                        </option>
-                                    </select>
-                                    <div
-                                        class="form-control-element__box form-control-element__box--pretify bg-secondary"
-                                        style="">
-                                                <span class="fa fa-check"
-                                                      @click="deactivateElement('developer_tags')"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <c-tags-list :tags="project.developer_tags"
-                                         v-if="!editing || !activeElement['developer_tags']"></c-tags-list>
+                        {{ doneMilestones }} Milestones
+                    </c-icon-block>
+                    <c-icon-block icon="th">
+                        <div class="h6 p-0 m-0 text-white font-weight-bold">
+                            Total
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <c-badges :icons="['trophy','gem']" />
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="editor text-right" v-if="editing" style="margin-bottom: 30px">
-                            <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                    @click="activateElement('background_image')"
-                                    v-if="!activeElement['background_image']">Change Background Image <span
-                                class="fa fa-edit"></span></button>
-
-                            <div class="" v-if="activeElement['background_image']">
-                                <div class="form-control-element form-control-element--right">
-                                    <input ref="background_image" name="background_image" type="text"
-                                           class="form-control" placeholder="Background image URL..."
-                                           v-model="project.images.header"/>
-                                    <div
-                                        class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                                <span class="fa fa-check"
-                                                      @click="deactivateElement('background_image')"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <label style="display: block">RECOMMENDED SIZE: 1120 x 524px</label>
+                        {{ project.milestones.items.length }} Milestones
+                    </c-icon-block>
+                    <c-icon-block icon="file-alt">
+                        <div class="h6 p-0 m-0 text-white font-weight-bold">
+                            Total Spent
                         </div>
-                        <div class="editor text-right" v-if="editing">
-                            <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                    @click="activateElement('store_image')"
-                                    v-if="!activeElement['store_image']">Change Store Image <span
-                                class="fa fa-edit"></span></button>
-
-                            <div class="" v-if="activeElement['store_image']">
-                                <div class="form-control-element form-control-element--right">
-                                    <input ref="store_image" name="store_image" type="text" class="form-control"
-                                           placeholder="Background image URL..."
-                                           v-model="project.images.header"/>
-                                    <div
-                                        class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                                <span class="fa fa-check"
-                                                      @click="deactivateElement('store_image')"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <label style="display: block">RECOMMENDED SIZE: 2140 x 680px</label>
+                        $ {{ project.funding.spent_amount | numeralFormat('0,0') }}
+                    </c-icon-block>
+                    <c-icon-block icon="hand-holding-usd">
+                        <div class="h6 p-0 m-0 text-white font-weight-bold">
+                            Project Budget
                         </div>
-                    </div>
-                    <div class="col-12">
-
-                        <ul class="nav nav-tabs margin-bottom-20 justify-content-between">
-                            <li class="nav-item">
-                                <router-link :to="`/project/${project.id}`" class="nav-link">Overview</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/project/${project.id}/community`" class="nav-link">Community</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/project/${project.id}/bounties`" class="nav-link">Bounties</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/project/${project.id}/updates`" class="nav-link">Updates</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/project/${project.id}/milestones`" class="nav-link active">Milestones</router-link>
-                            </li>
-                        </ul>
-                        <div class="milestones-header margin-bottom-20">
-                            <div class="milestones-header__info">
-                                <div class="h3 text-white font-weight-bold mb-0">
-                                    {{ project.milestones.overall_progress }}% Project Completion
-                                </div>
-                                {{ doneMilestones }} of {{ project.milestones.items.length }} Milestones Completed
+                        $ {{ project.funding.funded_amount | numeralFormat('0,0')  }}
+                    </c-icon-block>
+                </div>
+            </div>
+            <div class="timeline-blk position-relative">
+                <div class="progress main_timeline" style="height: 15px;">
+                    <c-progress-bar :percentages="project.milestones.overall_progress"/>
+                </div>
+                <div class="period-container" v-if="milestones">
+                    <div v-for="(milestone, index) in milestones" :key="index" class="period">
+                        <div class="number">{{ milestone.step_number }}</div>
+                        <div class="info">
+                            <div class="title">
+                                {{ milestone.short_description }}
                             </div>
-                            <div class="milestones-header__stat">
-                                <c-icon-block icon="check">
-                                    <div class="h6 p-0 m-0 text-white font-weight-bold">
-                                        Completed
-                                    </div>
-                                    {{ doneMilestones }} Milestones
-                                </c-icon-block>
-                                <c-icon-block icon="th">
-                                    <div class="h6 p-0 m-0 text-white font-weight-bold">
-                                        Total
-                                    </div>
-                                    {{ project.milestones.items.length }} Milestones
-                                </c-icon-block>
-                                <c-icon-block icon="file-alt">
-                                    <div class="h6 p-0 m-0 text-white font-weight-bold">
-                                        Total Spent
-                                    </div>
-                                    $ {{ project.funding.spent_amount | numeralFormat('0,0') }}
-                                </c-icon-block>
-                                <c-icon-block icon="hand-holding-usd">
-                                    <div class="h6 p-0 m-0 text-white font-weight-bold">
-                                        Project Budget
-                                    </div>
-                                    $ {{ project.funding.funded_amount | numeralFormat('0,0')  }}
-                                </c-icon-block>
+                            <div class="progress_line">
+                                <i class="fas fa-clock icon"></i>
+                                <c-progress-bar :percentages="milestone.progress['percent_days']"/>
+                                {{ milestone.progress['days_left'] }} days left
                             </div>
-                        </div>
-                        <div class="timeline-blk position-relative">
-                            <div class="progress main_timeline" style="height: 15px;">
-                                <c-progress-bar :percentages="project.milestones.overall_progress"/>
+                            <div class="progress_line">
+                                <i class="fas fa-check icon"></i>
+                                <c-progress-bar :percentages="milestone.progress['percent_done']"/>
+                                {{ milestone.progress['percent_done'] }}% Done
                             </div>
-                            <div class="period-container" v-if="milestones">
-                                <div v-for="(milestone, index) in milestones" :key="index" class="period">
-                                    <div class="number">{{ milestone.step_number }}</div>
-                                    <div class="info">
-                                        <div class="title">
-                                            {{ milestone.short_description }}
-                                        </div>
-                                        <div class="progress_line">
-                                            <i class="fas fa-clock icon"></i>
-                                            <c-progress-bar :percentages="milestone.progress['percent_days']"/>
-                                            {{ milestone.progress['days_left'] }} days left
-                                        </div>
-                                        <div class="progress_line">
-                                            <i class="fas fa-check icon"></i>
-                                            <c-progress-bar :percentages="milestone.progress['percent_done']"/>
-                                            {{ milestone.progress['percent_done'] }}% Done
-                                        </div>
-                                        <div class="progress_line">
-                                            <i class="fas fa-dollar-sign icon"></i>
-                                            <c-progress-bar :percentages="milestone.progress['percent_spent']"/>
-                                            {{ milestone.progress['percent_spent'] }}% Spent
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="progress_line">
+                                <i class="fas fa-dollar-sign icon"></i>
+                                <c-progress-bar :percentages="milestone.progress['percent_spent']"/>
+                                {{ milestone.progress['percent_spent'] }}% Spent
                             </div>
-                        </div>
-                        <div class="milestones-list">
-                            <c-milestone
-                                v-for="(milestone, index) in milestones"
-                                :key="index"
-                                :milestone="milestone"
-                            />
                         </div>
                     </div>
                 </div>
             </div>
-    </c-layout>
+            <div class="milestones-list">
+                <c-milestone
+                    v-for="(milestone, index) in milestones"
+                    :key="index"
+                    :milestone="milestone"
+                />
+            </div>
+        </div>
 </template>
 
 <script>
-    const updateProject = function () {
-        if (!this.$store.state.funding.projects)
-            return
-
-        const project = this.$store.state.funding.projects[this.id]
-
-        if (!project)
-            return
-
-        if (project.images && project.images.header)
-            window.document.getElementById('header-bg').style['background-image'] = 'url(' + project.images.header + ')'
-
-        return project
-    }
     export default {
-        props: ['id'],
+        props: ['project', 'editing'],
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-milestone': (resolve) => require(['@/ui/components/project/milestone'], resolve),
-            'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar'], resolve),
-            'c-badges': (resolve) => require(['@/ui/components/project/badges'], resolve),
-            'c-icon-block': (resolve) => require(['@/ui/components/block/with-icon'], resolve)
+            'c-icon-block': (resolve) => require(['@/ui/components/block/with-icon'], resolve),
+            'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar'], resolve)
         },
         computed: {
-            project: updateProject,
-            editing() {
-                if (!this.$store.state.application.editor_mode) {
-                    for (let key in this.activeElement) {
-                        this.activeElement[key] = false
-                    }
-                }
-
-                return this.$store.state.application.editor_mode === 'editing'
-            },
             milestones(){
                 let arr = this.project.milestones.items;
                 return arr.sort() ;
@@ -243,9 +97,6 @@
                 });
                 return count;
             }
-        },
-        beforeDestroy() {
-            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'
         }
     }
 </script>
@@ -256,6 +107,22 @@
         justify-content: space-between;
         align-items: center;
         flex-wrap: nowrap;
+        @media (max-width: 767px) {
+            flex-wrap: wrap;
+            .milestones-header__info{
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .milestones-header__stat{
+                flex-wrap: wrap;
+                width: 100%;
+                justify-content: space-between;
+                div{
+                    width: 50%;
+                    margin: 5px 0;
+                }
+            }
+        }
     }
     .milestones-header__stat{
         display: flex;
@@ -264,6 +131,9 @@
     }
     .timeline-blk {
         margin-bottom: 50px;
+        @media (max-width: 767px) {
+            display: none;
+        }
         .main_timeline {
             position: absolute;
             top: 20px;
