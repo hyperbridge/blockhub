@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert left-sidebar" style="max-width: 250px" id="page-aside" v-if="showLeftPanel">
                 <!--<transition name="slideLeft" v-if="initialized">-->
@@ -273,7 +273,7 @@
                     vehicula.
                 </p>
             </c-popup>
-
+            
             <c-cookie-policy v-if="!desktop_mode" />
 
             <c-clock v-if="desktop_mode" />
@@ -613,6 +613,7 @@
         position: fixed;
         bottom: 20px;
         right: 20px;
+        z-index: -1;
     }
 
     .loader-block {
@@ -792,7 +793,7 @@
             transform: rotate(0deg);
             pointer-events: none;
         }
-
+        
         &:after {
             content: '';
             position: absolute;
@@ -822,7 +823,7 @@
         }
     }
 
-
+    
     .content {
         width: 100%;
         padding-top: 0;

@@ -397,7 +397,7 @@
                                 Great! Here's your transaction hash: {{ transactionHash }}
                             </div>
                             <div class="tab-card" v-if="!purchaseSuccessful">
-                                <div class="" v-if="purchaseError">
+                                <div class="alert alert-warning" v-if="purchaseError">
                                     An error occurred with the purchase: {{ purchaseError }}
                                 </div>
                                 
@@ -423,7 +423,7 @@
                         </div>
                         <div slot="footer" class="d-flex align-items-center justify-content-end">
                             <div>
-                                <c-button @click="$emit('close')">Cancel</c-button>
+                                <c-button @click="closePurchasePopup">Cancel</c-button>
                             </div>
                         </div>
                     </c-tab>
@@ -521,6 +521,7 @@ export default {
             },
             transactionData: null,
             purchaseSuccessful: false,
+            purchaseError: null,
             transactionHash: null,
             errors: []
         }
@@ -571,13 +572,13 @@ export default {
                     fromAddress: this.purchaseAddress,
                     toAddress: this.tokenContractAddress,
                     amount: this.purchaseETH
-                }).then((res) => {
-                    if (res.success) {
+                }).then((data) => {
+                    if (data.success) {
                         this.purchaseSuccessful = true
-                        this.transactionHash = res.transactionHash
+                        this.transactionHash = data.transactionHash
                     } else {
                         this.purchaseSuccessful = false
-                        this.purchaseError = res.message
+                        this.purchaseError = data.message
                     }
                 })
             } else {console.log({

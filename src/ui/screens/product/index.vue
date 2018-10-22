@@ -11,7 +11,7 @@
                 <div class="row" v-if="editing" style="margin-bottom: 70px;">
                     <c-button @click="showImporter" v-if="!importing">Import from Steam, GOG, etc.</c-button>
                     <div class="" v-if="importing">
-                        Choose source:
+                        Choose source: 
                         <br />
                         <div class="row">
                             <div class="col">
@@ -264,7 +264,7 @@
                 if (this.id === 'new') {
                     this.product.type = 'game'
 
-                    Brdge.sendCommand('createMarketplaceProductRequest', this.product).then((data) => {
+                    Brdge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.account.current_identity, product: this.product }).then((data) => {
                         const product = DB.marketplace.products.insert(data)
                         DB.save()
 
@@ -277,7 +277,7 @@
 
                     Vue.set(this.$store.state.marketplace.products, product.id, product)
 
-                    DB.marketplace.products.update(product)
+                    DB.marketplace.products.update(product) 
                     DB.save()
 
                     this.savedState = true
@@ -294,10 +294,106 @@
                 this.importing = true
             },
             startImport() {
+                const onWindowLoad = `function onWindowLoad(requestId) {
+                    const script = document.createElement('script');
+                    script.src = 'https://code.jquery.com/jquery-2.2.4.min.js';
+                    script.type = 'text/javascript';
+
+                    script.onload = script.onreadystatechange = function () {
+                        const monitor = function() {
+                            try {
+                                if (!$('.game_area_description').length) return setTimeout(monitor, 500);
+
+                                const fetchers = {
+                                    steam: () => {
+                                        return {
+                                            title: $('.apphub_AppName').text().trim(),
+                                            description: $('.game_description_snippet').text().trim(),
+                                            about: $('#game_area_description').html().trim(),
+                                            developers: Object.values($('#developers_list a').map((i, el) => $(el).text().trim()).get()),
+                                            publishers: Object.values($('#developers_list').parent().next().find('a').map((i, el) => $(el).text().trim()).get()),
+                                            tags: Object.values($('.popular_tags a').map((i, el) => $(el).text().trim()).get()),
+                                            releaseDate: $('.release_date .date').text().trim(),
+                                            images: {
+                                                preview: Object.values($('.highlight_strip_item.highlight_strip_screenshot').map((i, el) => $(el).find('img').attr('src')).get())
+                                            },
+                                            videos: Object.values($('.highlight_strip_item.highlight_strip_movie').map((i, el) => ({
+                                                preview: $(el).find('img').attr('src'),
+                                                url: 'https://cdn.hyperbridge.org/blockhub/videos/products/doom-20087/trailer.mp4'
+                                            })).get())
+                                        }
+                                    },
+                                    gog: () => {
+
+                                    },
+                                    itch: () => {
+
+                                    }
+                                };
+
+                                let fetcherType = null;
+
+                                if (window.location.hostname.indexOf('steampowered.com'))
+                                    fetcherType = 'steam';
+                                else if (window.location.hostname.indexOf('gog.com'))
+                                    fetcherType = 'gog';
+                                else if (window.location.hostname.indexOf('itch.io'))
+                                    fetcherType = 'itch';
+                                else {
+                                    // fail
+                                }
+
+                                const fetcher = fetchers[fetcherType];
+
+                                const cmd = {
+                                    key: 'resolveCallback',
+                                    responseId: requestId,
+                                    data: fetcher()
+                                };
+
+                                window.desktopBridge.send('command', JSON.stringify(cmd));
+                            }
+                            catch (e) {
+                                const cmd = {
+                                    key: 'resolveCallback',
+                                    responseId: requestId,
+                                    data: {
+                                        error: true,
+                                        message: 'Error in script: ' + e
+                                    }
+                                };
+
+                                window.desktopBridge.send('command', JSON.stringify(cmd));
+                            }
+                        }
+
+                        monitor();
+                    };
+
+                    document.body.appendChild(script);
+                }`
+                
                 Brdge.sendCommand('fetchPageDataRequest', {
-                    url: this.$refs.importUrl
+                    url: this.$refs.importUrl.value,
+                    script: onWindowLoad
                 }).then((data) => {
-                    this.product.name = data.productTitle
+                    if (data.error) {
+                        return console.log(data.message)
+                    }
+
+                    console.log('Import response: ', data)
+
+                    this.product.type = 'game'
+                    //this.product.rating.overall = 0
+                    this.product.system_tags = ['imported']
+                    this.product.author_tags = data.tags
+                    this.product.name = data.title
+                    this.product.release_date = data.releaseDate
+                    this.product.description = data.description
+                    this.product.content = data.about
+                    this.product.genre = ''
+                    this.product.developer = data.developers && data.developers[0]
+                    this.product.publisher = data.publishers && data.publishers[0]
                 })
             },
         },

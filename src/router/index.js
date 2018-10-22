@@ -384,6 +384,7 @@ const router = new Router({
                 id: 'new'
             },
             meta: {
+                section: 'overview',
                 permission: 'developer_mode'
             }
         },
