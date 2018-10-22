@@ -44,7 +44,8 @@
                     'Marketplace',
                     'Marketplace Trade Manager',
                     'Marketplace Snipers',
-                    'Marketplace Search'
+                    'Marketplace Search',
+                    'Marketplace Offers',
                 ]
             }
         },

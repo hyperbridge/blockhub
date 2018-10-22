@@ -12,7 +12,7 @@
             class="asset-preview-basic__image"
             :src="asset.image"
         />
-        <p class="asset-preview-basic__text">
+        <p v-if="!hideGame" class="asset-preview-basic__text">
             {{ asset.product_name }}
         </p>
     </div>
@@ -27,6 +27,7 @@
                 required: true
             },
             horizontal: Boolean,
+            hideGame: Boolean,
             size: {
                 type: String,
                 default: 'lg',

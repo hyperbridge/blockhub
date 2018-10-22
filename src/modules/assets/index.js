@@ -27,6 +27,14 @@ const assets = {
         snipers: {
             1: { id: 1, asset: 4, priceMin: 31, priceMax: 59, expDate: "2018-12-15T14:29:47+02:00" },
             3: { id: 3, asset: 6, priceMin: 11, priceMax: 89, expDate: "2018-11-14T14:29:47+02:00" }
+        },
+        offers: {
+            1: { id: 1, auctions: [1, 2], buyout: 42, marketValue: 45, seller: { id: 2, name: 'Tenseii' }, expDate: moment().add(24, 'hours') },
+            2: { id: 2, auctions: [1, 2], buyout: 42, marketValue: 45, seller: { id: 1, name: 'Tomeh' }, expDate: moment().add(12, 'hours') }
+        },
+        auctions: {
+            1: { id: 1, bid: 12.9, user: { name: 'Predda' }, date: moment().add(-1, 'day') },
+            2: { id: 2, bid: 18.1, user: { name: 'Dalmyra' }, date: moment().add(-14, 'hours') }
         }
     },
     mutations: {
@@ -136,7 +144,16 @@ const assets = {
                     ...sniper,
                     asset: assets[sniper.asset]
                 }
-            }), {})
+            }), {}),
+        offers: ({ offers, auctions }) => Object.values(offers)
+            .reduce((populated, offer) => ({
+                ...populated,
+                [offer.id]: {
+                    ...offer,
+                    auctions: offer.auctions.map(id => auctions[id])
+                }
+            }), {}),
+        offersArray: (state, { offers }) => Object.values(offers)
     }
 }
 

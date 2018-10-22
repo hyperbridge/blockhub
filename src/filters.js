@@ -16,7 +16,14 @@ Vue.filter('formatTime', function(value) {
 
 Vue.filter('timeAgo', (date) => moment(date).fromNow());
 
-Vue.filter('timeAgoShort', (date) => moment(date).fromNow().replace('ago', ''));
+Vue.filter('timeAgoShort', (date) => moment(date).fromNow().replace(/ ago|in /, ''));
+
+Vue.filter('timeAgoSShort', date => moment(date).fromNow()
+    .replace(/ ago|in /, '')
+    .replace('hours', 'hrs')
+    .replace('minutes', 'mins')
+    .replace('years', 'yrs')
+);
 
 Vue.filter('statusIcon', status => {
     const getClass = status => {

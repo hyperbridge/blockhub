@@ -647,6 +647,11 @@ const router = new Router({
                     ]
                 },
                 {
+                    path: 'offers',
+                    name: 'Marketplace Offers',
+                    component: (resolve) => require(['@/ui/screens/marketplace/offers'], resolve)
+                },
+                {
                     path: 'snipers',
                     name: 'Marketplace Snipers',
                     component: (resolve) => require(['@/ui/screens/marketplace/snipers'], resolve),
