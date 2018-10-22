@@ -159,7 +159,7 @@ const router = new Router({
         },
         {
             path: '/collection/:id',
-            name: 'Collection Page',
+            name: 'Collection',
             props: true,
             component: (resolve) => require(['@/ui/screens/collection'], resolve)
         },
@@ -382,6 +382,9 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/product'], resolve),
             props: {
                 id: 'new'
+            },
+            meta: {
+                permission: 'developer_mode'
             }
         },
         {

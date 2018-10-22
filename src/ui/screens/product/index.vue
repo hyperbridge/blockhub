@@ -1,98 +1,128 @@
 <template>
     <c-layout navigationKey="product" :showRightPanel="false" navigationTitle="GAME OVERVIEW"
               :breadcrumbLinks="editing ? [] : breadcrumbLinks">
-        <div class="container-fluid">
-            <div class="row" v-if="!product">
-                <div class="col-12">
-                    Product not found
-                </div>
+        <div class="row" v-if="!product">
+            <div class="col-12">
+                Product not found
             </div>
-            <div class="row" v-if="product">
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="editor-container">
-                                <div class="editor" v-if="editing">
-                                    <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                            @click="activateElement('name')" v-if="!activeElement['name']">Change
-                                        Product Name <span class="fa fa-edit"></span></button>
-
-                                    <div class="form-group" v-if="activeElement['name']">
-                                        <div class="form-control-element form-control-element--right">
-                                            <input ref="name" name="name" type="text" class="form-control"
-                                                   placeholder="Product name..." v-model="product.name"/>
-                                            <div
-                                                class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                                <span class="fa fa-check" @click="deactivateElement('name')"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h1 class="title margin-top-10 margin-bottom-15">{{ product.name }}</h1>
+        </div>
+        <div class="row" v-if="product">
+            <div class="col-12 col-md-12">
+                <div class="row" v-if="editing" style="margin-bottom: 70px;">
+                    <c-button @click="showImporter" v-if="!importing">Import from Steam, GOG, etc.</c-button>
+                    <div class="" v-if="importing">
+                        Choose source:
+                        <br />
+                        <div class="row">
+                            <div class="col">
+                                Steam
                             </div>
-
-                            <div class="editor-container">
-                                <div class="" v-if="editing">
-                                    <div class="form-group">
-                                        <select id="tag-editor" class="form-control" multiple="multiple">
-                                            <option v-for="(tag, index) in author_tag_options" :key="index"
-                                                    :selected="product.developer_tags.includes(tag)">{{ tag }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <c-tags-list :tags="product.developer_tags" v-if="!editing"></c-tags-list>
+                            <div class="col">
+                                GOG.com
+                            </div>
+                            <div class="col">
+                                Itch
                             </div>
                         </div>
-                        <div class="col-4">
+                        <br />
+                        Enter URL:
+                        <br />
+                        <input ref="importUrl" type="text" value="https://store.steampowered.com/app/441830/I_am_Setsuna/" />
+                        <br />
+                        <c-button @click="startImport">Go</c-button>
+                        <br />
+                        <div>Importing...</div>
+                        Results:
+                        <br />
+                        <textarea ref="importResults"></textarea>
+                        <div>Submission Cost: 10 HBX</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="editor-container">
                             <div class="editor" v-if="editing">
                                 <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                        @click="activateElement('background_image')"
-                                        v-if="!activeElement['background_image']">Change Background Image <span
-                                    class="fa fa-edit"></span></button>
+                                        @click="activateElement('name')" v-if="!activeElement['name']">Change
+                                    Product Name <span class="fa fa-edit"></span></button>
 
-                                <div class="form-group" v-if="activeElement['background_image']">
+                                <div class="form-group" v-if="activeElement['name']">
                                     <div class="form-control-element form-control-element--right">
-                                        <input ref="background_image" name="background_image" type="text"
-                                               class="form-control" placeholder="Background image URL..."
-                                               v-model="product.images.header"/>
+                                        <input ref="name" name="name" type="text" class="form-control"
+                                                placeholder="Product name..." v-model="product.name"/>
                                         <div
-                                            class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                            <span class="fa fa-check"
-                                                  @click="deactivateElement('background_image')"></span>
+                                            class="form-control-element__box form-control-element__box--pretify bg-secondary"
+                                            @click="deactivateElement('name')">
+                                            <span class="fa fa-check"></span>
                                         </div>
                                     </div>
                                 </div>
-
-                                <br/>
-                                <label>RECOMMENDED SIZE: 1120 x 524px</label>
                             </div>
+                            <h1 class="title margin-top-10 margin-bottom-15">{{ product.name }}</h1>
+                        </div>
+
+                        <div class="editor-container">
+                            <div class="" v-if="editing">
+                                <div class="form-group">
+                                    <select id="tag-editor" class="form-control" multiple="multiple">
+                                        <option v-for="(tag, index) in author_tag_options" :key="index"
+                                                :selected="product.developer_tags.includes(tag)">{{ tag }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <c-tags-list :tags="product.developer_tags" v-if="!editing"></c-tags-list>
                         </div>
                     </div>
+                    <div class="col-12 col-md-4">
+                        <div class="editor" v-if="editing">
+                            <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                    @click="activateElement('background_image')"
+                                    v-if="!activeElement['background_image']">Change Background Image <span
+                                class="fa fa-edit"></span></button>
 
-                    <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
-                        <li class="nav-item">
-                            <router-link :to="`/product/${id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="`/product/${id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community
-                            </router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="`/product/${id}/projects`" class="nav-link" :class="{ 'active': section === 'projects' }">Crowdfunding
-                            </router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="`/product/${id}/assets`" class="nav-link" :class="{ 'active': section === 'assets' }">Inventory</router-link>
-                        </li>
-                    </ul>
-                </div>
+                            <div class="form-group" v-if="activeElement['background_image']">
+                                <div class="form-control-element form-control-element--right">
+                                    <input ref="background_image" name="background_image" type="text"
+                                            class="form-control" placeholder="Background image URL..."
+                                            v-model="product.images.header"/>
+                                    <div
+                                        class="form-control-element__box form-control-element__box--pretify bg-secondary"
+                                        @click="deactivateElement('background_image')">
+                                        <span class="fa fa-check"></span>
+                                    </div>
+                                </div>
+                            </div>
 
-                <div class="col-12">
-                    <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
-                    <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
-                    <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
-                    <c-product-projects :product="product" v-if="section === 'projects'" :editing="editing" />
+                            <br/>
+                            <label>RECOMMENDED SIZE: 1120 x 524px</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <ul class="nav nav-tabs margin-bottom-30 justify-content-between">
+                            <li class="nav-item">
+                                <router-link :to="`/product/${id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="`/product/${id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="`/product/${id}/projects`" class="nav-link" :class="{ 'active': section === 'projects' }">Crowdfunding
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="`/product/${id}/assets`" class="nav-link" :class="{ 'active': section === 'assets' }">Inventory</router-link>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-12">
+                        <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
+                        <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
+                        <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
+                        <c-product-projects :product="product" v-if="section === 'projects'" :editing="editing" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -114,6 +144,8 @@
 
 <script>
     import Vue from 'vue'
+    import * as Brdge from '@/framework/desktop-bridge'
+    import * as DB from '@/db'
 
     const groupBy = function (xs, key) {
         return xs.reduce(function (rv, x) {
@@ -147,6 +179,7 @@
                     'racing',
                     'action'
                 ],
+                importing: false,
                 savedState: false
             }
         },
@@ -156,6 +189,9 @@
             },
             product() {
                 return this.id === 'new' ? this.marketplace.default_product : this.marketplace.products[this.id];
+            },
+            editor_mode() {
+                return this.$store.state.application.editor_mode
             },
             editing() {
                 if (!this.$store.state.application.editor_mode) {
@@ -224,19 +260,44 @@
                 }, 10)
             },
             save() {
-                this.savedState = true;
                 if (this.id === 'new') {
-                    this.$store.commit('marketplace/createProduct', this.product)
+                    this.product.type = 'game'
+
+                    Brdge.sendCommand('createMarketplaceProductRequest', this.product).then((data) => {
+                        const product = DB.marketplace.products.insert(data)
+                        DB.save()
+
+                        Vue.set(this.$store.state.marketplace.products, product.id, product)
+
+                        this.savedState = true
+                    })
                 } else {
-                    this.$store.dispatch('marketplace/updateProduct', this.product)
+                    const product = this.product
+
+                    Vue.set(this.$store.state.marketplace.products, product.id, product)
+
+                    DB.marketplace.products.update(product)
+                    DB.save()
+
+                    this.savedState = true
                 }
             },
             unsaved() {
                 if (this.savedState === false && this.$store.state.application.editor_mode === 'editing')
-                    return 'ololololo'
+                    return true
             },
             closeModal() {
                 this.$store.state.marketplace.first_product = false
+            },
+            showImporter() {
+                this.importing = true
+            },
+            startImport() {
+                Brdge.sendCommand('fetchPageDataRequest', {
+                    url: this.$refs.importUrl
+                }).then((data) => {
+                    this.product.name = data.productTitle
+                })
             },
         },
         updated() {
@@ -273,6 +334,13 @@
         watch: {
             '$route'() {
                 this.updateSection()
+            },
+            editor_mode (newMode, oldMode) {
+                if (oldMode === 'editing' && newMode === 'publishing') {
+                    this.save()
+
+                    this.$store.dispatch('application/setEditorMode', 'viewing')
+                }
             }
         }
     }

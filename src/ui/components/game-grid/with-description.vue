@@ -6,7 +6,7 @@
             :key="item.id"
             :class="{ 'hovered' : hovered }"
             :style="{ width: itemWidth, background: itemBg }"
-            v-if="items.length"
+            v-if="items && items.length"
         >
             <div class="img">
                 <div v-if="item.price && showPrice" class="price" :class="['price-position-' + pricePosition]">
@@ -87,7 +87,7 @@
                 </div>
             </div>
         </div>
-        <p v-if="!items.length" key="nothing">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
+        <p v-if="!items || !items.length" key="nothing">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
     </transition-group>
 </template>
 

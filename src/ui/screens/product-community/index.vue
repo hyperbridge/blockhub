@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div>
         <div v-if="community_1">
             <c-item
                 v-for="(post, index) in posts"
@@ -141,8 +141,8 @@
     border-radius: 5px;
 }
 
-.is-reply {
-    transition: background-color .3s ease;
-    background: rgba(255, 255, 255, .1);
-}
+/*.is-reply {*/
+    /*transition: background-color .3s ease;*/
+    /*background: rgba(255, 255, 255, .1);*/
+/*}*/
 </style>

@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import * as DesktopBridge from '@/framework/desktop-bridge'
+import * as Bridge from '@/framework/desktop-bridge'
 import { setInterval } from 'core-js';
 
 export default {

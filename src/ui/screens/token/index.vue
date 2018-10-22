@@ -33,11 +33,9 @@
                     </p>
                 </div>
             </div>
-            <div v-if="desktop_mode && !ethereum_connected">
-
+            <div v-if="!desktop_mode && !ethereum_connected">
                 <div class="col-12 text-center alert alert-info">
                     <p>The BlockHub desktop app is the recommended way to load up on tokens.</p>
-                    
                 </div>
             </div>
             <div class="row">
@@ -72,18 +70,19 @@
                                 class="profile-picker__profile"
                                 v-for="identity in identities"
                                 :key="identity.id"
+                                v-if="identities && identities.length"
                             >
                                 <c-user-card
                                     :user="identity"
                                     :previewMode="true"
-                                    :class="{ 'default': identity.id == chosenIdentity.id }"
+                                    :class="{ 'default': chosenIdentity && identity.id == chosenIdentity.id }"
                                 />
                                 <div class="profile__action">
                                     <c-button
                                         status="info"
                                         icon="check"
                                         @click="chooseIdentity(identity)"
-                                        v-if="identity.id != chosenIdentity.id"
+                                        v-if="!chosenIdentity || identity.id != chosenIdentity.id"
                                     >Choose</c-button>
                                 </div>
                             </div>
@@ -159,6 +158,9 @@
                     <h2 style="text-align: center">Oops, you haven't verified your account yet. <br />You'll need to do this to participate.</h2>
                     <br />
                     <c-button class="c-btn-lg" href="/#/account/verification" style="margin: 0 auto">Verify Account</c-button>
+                    <br /><br />
+                    <c-button status="underline" size="sm" @click="manualOverride">Click here if you're pretty sure you've verified</c-button>
+                    <br /><br />
                 </div>
 
                 <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && desktop_mode && !account.is_verified && account.is_verifying" style="text-align: center">
@@ -166,7 +168,7 @@
                     <p>Please check back later. If you've been waiting too long or have problems, please email support@hyperbridge.org</p>
                 </div>
                 
-                <div v-if="ethereum_connected && ethereum_unlocked && (!desktop_mode || account.is_verified)" style="text-align: center">
+                <div v-if="ethereum_connected && ethereum_unlocked && (!desktop_mode || account.is_verified || override)" style="text-align: center">
                     <div class="col-10 offset-1 tab-card">
                         <h4>Token Sale Agreement</h4>
                         <div class="terms_block">
@@ -383,7 +385,7 @@
             :type="purchasePopup.type"
             :sub_title="purchasePopup.text"
             @close="closePurchasePopup"
-            v-if="purchasePopup.show"
+            v-if="purchasePopup && purchasePopup.show"
             ref="purchasePopup"
         >
             <div slot="custom_close" hidden></div>
@@ -391,17 +393,16 @@
                 <c-tabs>
                     <c-tab name="Confirm Purchase" :selected="true" :showFooter="true">
                         <div>
-                            <div class="tab-card" v-if="this.purchaseSuccessful">
-                                Great! Here's your transaction hash: {{ this.transactionHash }}
+                            <div class="tab-card" v-if="purchaseSuccessful">
+                                Great! Here's your transaction hash: {{ transactionHash }}
                             </div>
-                            <div class="tab-card" v-if="!this.purchaseSuccessful">
-                                <div class="" v-if="this.purchaseError">
-                                    An error occurred with the purchase: {{ this.purchaseError }}
+                            <div class="tab-card" v-if="!purchaseSuccessful">
+                                <div class="" v-if="purchaseError">
+                                    An error occurred with the purchase: {{ purchaseError }}
                                 </div>
                                 
                                 <div>
-                                    
-                                    <p>Purchasing 1000 HBX in exchange for 10 ETH.</p>
+                                    <p>Purchasing {{ purchaseHBX }} HBX in exchange for {{ purchaseETH}} ETH.</p>
                                     <br />
                                 </div>
 
@@ -434,12 +435,11 @@
 
 <script>
 import axios from 'axios'
-import * as DesktopBridge from '@/framework/desktop-bridge'
+import * as Bridge from '@/framework/desktop-bridge'
 import { setInterval } from 'core-js';
 
 export default {
     components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
         'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
@@ -454,7 +454,7 @@ export default {
             }
 
             if (typeof window.web3 !== 'undefined') {
-                window.web3.eth.getAccounts((err, accounts) => {
+                window.web3.eth.getAccounts((err, accounts) => {debugger
                     this.ethereum_unlocked = accounts.length > 0
                 })
             }
@@ -491,15 +491,18 @@ export default {
 
         setInterval(checkEthereumConnection, 2000)
 
-        const chosenIdentity = this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
+        let chosenIdentity = this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
 
-        return {
+        if (!chosenIdentity && this.$store.state.application.account.identities.length) {
+            chosenIdentity = this.$store.state.application.account.identities[0]
+        }
+
+        const result = {
             account: this.$store.state.application.account,
             identities: this.$store.state.application.account.identities,
             chosenIdentity: chosenIdentity,
             purchaseETH: null,
             purchaseHBX: null,
-            tokenContractAddress: this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network] && this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts.TokenSale && this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].contracts.TokenSale.address,
             ETH2USD: 220.10,
             maxPurchaseUSD: 7500,
             tokenPriceUSD: 0.055,
@@ -509,6 +512,7 @@ export default {
             ethereum_unlocked: this.$store.state.application.desktop_mode,
             ethereum_connected: this.$store.state.application.desktop_mode,
             purchaseAddress: chosenIdentity ? chosenIdentity.public_address : null,
+            override: false,
             purchasePopup: {
                 title: 'Purchase',
                 text: '',
@@ -520,14 +524,23 @@ export default {
             transactionHash: null,
             errors: []
         }
+
+        return result
     },
     computed: {
         desktop_mode() {
             return this.$store.state.application.desktop_mode
         },
+        tokenContractAddress() {
+            try {
+                return this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve.contracts.TokenSale.address
+            } catch (e) {
+
+            }
+        },
         canContinue() {
             return this.purchaseETH
-            && (this.chosenIdentity && this.chosenIdentity.public_address)
+            && this.purchaseAddress
             && this.tokenSaleAgreement
             && this.jurisdictionAgreement
             && this.residentAgreement
@@ -537,6 +550,9 @@ export default {
     methods: {
         calcHBX() {
             this.purchaseHBX = (this.purchaseETH * this.ETH2USD) / 0.055
+        },
+        manualOverride() {
+            this.override = true
         },
         chooseIdentity(identity) {
             this.chosenIdentity = identity
@@ -551,7 +567,7 @@ export default {
         },
         confirmPurchase() {
             if (this.desktop_mode) {
-                DesktopBridge.sendTransactionRequest({
+                Bridge.sendTransactionRequest({
                     fromAddress: this.purchaseAddress,
                     toAddress: this.tokenContractAddress,
                     amount: this.purchaseETH

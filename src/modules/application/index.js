@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { normalize } from 'normalizr'
 import * as DB from '@/db'
-import * as DesktopBridge from '@/framework/desktop-bridge'
+import * as Bridge from '@/framework/desktop-bridge'
 import schema from './schema'
 
 let rawData = {}
@@ -32,6 +32,8 @@ const getOS = () => {
 }
 
 const updateState = (savedData, updatedState = {}) => {
+    let developerIdentity = DB.application.config.data[0].account && DB.application.config.data[0].account.identities.find(identity => identity.developer_id !== undefined)
+
     rawData = {
         ...rawData,
         ...savedData,
@@ -42,6 +44,7 @@ const updateState = (savedData, updatedState = {}) => {
         operating_system: getOS(),
         account: DB.application.config.data[0].account,
         darklaunch_flags: DB.application.config.data[0].darklaunch_flags,
+        developer_mode: savedData.developer_mode !== null ? savedData.developer_mode : !!developerIdentity,
         ...updatedState
     }
     
@@ -70,6 +73,18 @@ export const getters = {
 
         if (state.signed_in) {
             result.push('signed_in')
+        }
+
+        if (state.developer_mode) {
+            result.push('developer_mode')
+        }
+
+        if (state.verified_account) {
+            result.push('verified_account')
+        }
+
+        if (state.hyperbridge_account) {
+            result.push('hyperbridge_account')
         }
 
         return result
@@ -118,9 +133,9 @@ export const actions = {
         store.commit('setEditorMode', payload)
     },
     unlockAccount(state, payload) {
-        DesktopBridge.resolvePromptPasswordRequest(payload.password.value)
+        Bridge.resolvePromptPasswordRequest(payload.password.value)
 
-        // DesktopBridge.sendCommand('getAccountRequest', data).then((res) => {
+        // Bridge.sendCommand('getAccountRequest', data).then((res) => {
         //     store.state.account.public_address = res.account.public_address
 
         //     store.state.password_required = true
@@ -128,7 +143,7 @@ export const actions = {
         // })
     },
     initEthereum(store, payload) {
-        // DesktopBridge.initProtocol({ protocolName: 'application' }).then((config) => {
+        // Bridge.initProtocol({ protocolName: 'application' }).then((config) => {
         //     store.state.ethereum[store.state.current_ethereum_network] = config
         //     store.dispatch('updateState')
         // })
@@ -173,15 +188,14 @@ export const actions = {
         function processRequest(e) {
             if (xhr.readyState == 4) {
                 try {
-                if (xhr.status >= 200 && xhr.status < 304) {
-                    store.commit('setInternetConnection', { connected: true, message: "Connected." })
-                    store.state.connection.datasource = true // TEMP
-                } else {
-                    store.commit('setInternetConnection', { connected: false, message: "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection." })
+                    if (xhr.status >= 200 && xhr.status < 304) {
+                        store.commit('setInternetConnection', { connected: true, message: "Connected." })
+                        store.state.connection.datasource = true // TEMP
+                    } else {
+                        store.commit('setInternetConnection', { connected: false, message: "Could not connect to the internet. Some features may not be available. Please check your firewall or internet connection." })
                     }
-
                 } catch (e) {
-                    
+                    console.log(e)
                 }
             }
         }
@@ -200,12 +214,12 @@ export const actions = {
     disableDarklaunch(store, payload) {
         store.commit('disableDarklaunch', payload)
     },
-    deployContract(store, payload) {
+    deployContract(store, { protocolName, contractName }) {
         return new Promise((resolve, reject) => {
-            DesktopBridge
-                .deployContract({ protocolName: 'application', contractName: payload.contractName })
+            Bridge
+                .deployContract({ protocolName, contractName })
                 .then((contract) => {
-                    state.ethereum[state.current_ethereum_network].contracts[payload.contractName] = contract
+                    state.ethereum[state.current_ethereum_network].packages[protocolName].contracts[contractName] = contract
                     store.dispatch('updateState')
 
                     resolve(contract)

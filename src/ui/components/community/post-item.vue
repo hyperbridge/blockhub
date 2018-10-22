@@ -191,6 +191,9 @@
             a{
                 color: #fff;
             }
+            @media (max-width: 767px) {
+                width: calc( 100% - 60px);
+            }
         }
         .statistic {
             width: 30%;
@@ -199,6 +202,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            @media (max-width: 767px) {
+                width: 100%;
+                margin: 15px 0 0;
+            }
             .rating {
                 width: 40px;
                 text-align: center;
@@ -234,6 +241,10 @@
                     margin-right: 5px;
                 }
             }
+        }
+        @media (max-width: 767px) {
+            flex-wrap: wrap;
+            padding-bottom: 0;
         }
     }
     .community-item__post {

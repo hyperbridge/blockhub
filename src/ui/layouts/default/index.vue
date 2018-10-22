@@ -1,6 +1,6 @@
 <template>
     <!-- PAGE WRAPPER -->
-    <div class="page page--w-header page--w-container" :class="{'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel }">
+    <div class="page page--w-header page--w-container" :class="{'page__with-left-sidebar': showLeftPanel, 'page__with-right-sidebar': showRightPanel }">
         <!-- PAGE HEADER -->
         <transition name="slideDown" v-if="initialized">
             <c-header :isLoader="loadingState" v-if="!slimMode" />
@@ -62,8 +62,10 @@
             <!-- //END PAGE ASIDE PANEL -->
 
             <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
-                <c-breadcrumb :links="breadcrumbLinks" ref="breadcrumb" style="padding-left: 20px;" v-if="is_connected" />
-                <slot v-if="is_connected" />
+                <c-breadcrumb :links="breadcrumbLinks" ref="breadcrumb" v-if="is_connected" />
+                <div class="container-fluid">
+                    <slot v-if="is_connected" />
+                </div>
             </div>
 
             <!-- SIDEPANEL -->
@@ -275,13 +277,14 @@
             <c-cookie-policy v-if="!desktop_mode" />
 
             <c-clock v-if="desktop_mode" />
+
+            <div class="version" v-if="desktop_mode">v{{ $store.state.application.version }}</div>
         </div>
         <!-- //END PAGE CONTENT -->
 
     </div>
     <!-- //END PAGE WRAPPER -->
 </template>
-
 
 <script>
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
@@ -307,11 +310,6 @@
             showRightPanel: {
                 type: Boolean,
                 default: true,
-                required: false
-            },
-            slimMode: {
-                type: Boolean,
-                default: false,
                 required: false
             },
             headerText: {
@@ -418,11 +416,12 @@
                 initialized: BlockHub.initialized,
                 user_submitted_connection_message: this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))],
                 panelOption: {
-                    spaceBetween: 10,
+                    spaceBetween: 0,
                     loop: false,
                 },
                 notifPopup: {},
-                scrollMoreDirection: null
+                scrollMoreDirection: null,
+                slimMode: false
             }
         },
         updated() {
@@ -499,11 +498,22 @@
                         }
                     }
                 }
+            },
+            handleResize(event) {
+                if ( document.documentElement.clientWidth < 768 )
+                    this.slimMode = true
+                    // console.log(true)
+                else
+                    this.slimMode = false
+                    // console.log(false)
             }
+        },
+        created(){
+            window.addEventListener('resize', this.handleResize())
+            this.handleResize();
         },
         mounted() {
             this.updateBreadcrumbLinks()
-
             this.$nextTick(() => {
                 this.loadingState = false
                 setTimeout(() => {
@@ -532,21 +542,23 @@
     }
 </script>
 
-<style lang="scss">
-
-    .owl-controls {
-        display: none !important;
-    }
-
-    .owl-carousel .owl-stage {
-        transition: unset !important;
-    }
-
-</style>
-
 <style lang="scss" scoped>
     [v-cloak] {
         display: none;
+    }
+    .content{
+        padding: 20px;
+        .container-fluid{
+            padding: 0!important;
+        }
+    }
+    .version {
+        position: fixed;
+        bottom: 10px;
+        right: 24px;
+        font-size: 16px;
+        font-family: 'Barlow', sans-serif;
+        color: rgba(255, 255, 255, 0.2);
     }
 
     .page-sidepanel {
@@ -817,12 +829,12 @@
         margin: 0 auto;
     }
 
-    .page.left-sidebar .content, .page.right-sidebar .content {
+    .page__with-left-sidebar .content, .page__with-right-sidebar .content {
         width: calc(100% - 250px);
         margin: 0 0 0 auto;
     }
 
-    .page.left-sidebar.right-sidebar .content {
+    .page__with-left-sidebar.page__with-right-sidebar .content {
         width: calc(100% - 500px);
         margin: 0 auto;
     }
@@ -848,10 +860,47 @@
         #page-aside, #page-sidepanel {
             display: none;
         }
-
         .content {
             width: 100%!important;
+            .container-fluid{
+                padding: 20px;
+            }
         }
 
+    }
+    @media (max-width: 1400px) {
+        .page-aside,
+        .page-sidepanel{
+            width: 200px!important;
+        }
+        .page-aside .navigation{
+            padding-left: 15px;
+        }
+        .page-sidepanel{
+            padding-right: 15px;
+            .page-sidepanel{
+                width: 100%!important;
+            }
+        }
+        .content {
+            width: 100%;
+        }
+
+        .page__with-left-sidebar .content, .page__with-right-sidebar .content {
+            width: calc(100% - 200px);
+            margin: 0 0 0 auto;
+        }
+
+        .page__with-left-sidebar.page__with-right-sidebar .content {
+            width: calc(100% - 400px);
+            margin: 0 auto;
+        }
+        .load-more.fixed{
+            width: 180px!important;
+            margin: 10px!important;
+            span{
+                font-size: 14px!important;
+            }
+        }
     }
 </style>

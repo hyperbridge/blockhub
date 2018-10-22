@@ -1,12 +1,12 @@
 <template>
     <div class="collection-item" v-bind:style="{ 'background-image': 'url(' + item.background + ')' }">
         <div class="collection-item__items-container">
-                <router-link v-for="(asset, index) in getAsset" :to="{ name: 'Asset', params: {id: asset.id } }" :key="index" v-if="index < 4">
-                    <c-img :src="asset.image"/>
-                </router-link>
+            <router-link v-for="(asset, index) in getAsset" :to="{ name: 'Asset', params: { id: asset.id } }" :key="index" v-if="index < 4">
+                <c-img :src="asset.image" />
+            </router-link>
         </div>
         <div class="collection-item__info">
-            <router-link :to="{ name: 'Collection Page', params: {id: item.id } }">
+            <router-link :to="{ name: 'Collection', params: { id: item.id } }">
                 <h4>{{ item.name }}</h4>
             </router-link>
             <h6>by {{ item.author }}</h6>

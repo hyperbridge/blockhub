@@ -7,13 +7,13 @@
             <div class="info">
                 <h4 class="font-weight-bold text-uppercase h3" v-if="prompt">This requires our desktop version</h4>
                 <p class="h4" v-if="prompt">
-                    Creating an account is not safe within a browser,
+                    Some actions are not safe within a browser,
                     so we built BlockHub it's own fortress,
-                    safer environment for you to do much more!
+                    a safer environment for you to do much more!
                 </p>
                 <h4 class="font-weight-bold text-uppercase h3" v-if="!prompt">DO MORE WITH OUR DESKTOP CLIENT</h4>
                 <p class="h4" v-if="!prompt">
-                    Some actions are not safe within a browser, so we have built BlockHub it’s own fortress, a safer environment for you to do much more!
+                    Some actions are not safe within a browser, so we built BlockHub it's own fortress, a safer environment for you to do much more!
                 </p>
                 <div class="action d-flex align-items-center">
                     <a :href="defaultDownload.link"
@@ -245,6 +245,21 @@
         }
         .welcome-block__screen{
             display: none;
+        }
+    }
+    @media (max-width: 512px){
+        .welcome-block__download-block{
+            .action{
+                margin-top: 20px;
+                flex-direction: column;
+                .btn{
+                    margin-bottom: 20px;
+                }
+                .download_info{
+                    text-align: center;
+                    margin-left: 0!important;
+                }
+            }
         }
     }
 </style>

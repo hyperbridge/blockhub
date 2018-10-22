@@ -26,13 +26,13 @@
                             <div class="card-body">
                                 <h4>Play around with the future of BlockHub:</h4>
                                 <div>
-                                    <c-button @click="toggleSimulator()">Simulator is {{ simulator_mode ? 'ON' : 'OFF' }}</c-button>
-                                    <c-button @click="toggleDesktopMode()">Desktop Mode is {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
                                     <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button>
-                                    <c-button @click="toggleDeveloperMode()">Developer Mode is {{ developer_mode ? 'ON' : 'OFF' }}</c-button>
-                                    <c-button @click="rotateEditorMode()">Editor Mode is {{ $store.state.application.editor_mode }}</c-button>
-                                    <c-button @click="rotateOperatingSystem()">Operating System is {{ operating_system === 'mac' ? 'MAC' : (operating_system === 'windows' ? 'WINDOWS' : 'LINUX' ) }}</c-button>
-                                    <c-button @click="$store.state.application.account.is_verified = !$store.state.application.account.is_verified">Account is {{ $store.state.application.account.is_verified ? 'VERIFIED' : 'NOT VERIFIED' }}</c-button>
+                                    <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="rotateEditorMode()">Editor Mode {{ $store.state.application.editor_mode.toUpperCase() }}</c-button>
+                                    <c-button @click="rotateOperatingSystem()">Operating System {{ operating_system === 'mac' ? 'MAC' : (operating_system === 'windows' ? 'WINDOWS' : 'LINUX' ) }}</c-button>
+                                    <c-button @click="$store.state.application.account.is_verified = !$store.state.application.account.is_verified">Account {{ $store.state.application.account.is_verified ? 'VERIFIED' : 'NOT VERIFIED' }}</c-button>
                                     <br /><br />
                                 </div>
                                 <div>
@@ -343,6 +343,9 @@ export default {
         toggleSignedIn() {
             this.$store.state.application.signed_in = !this.$store.state.application.signed_in
         },
+        toggleDeveloper() {
+            this.$store.state.application.is_developer = !this.$store.state.application.is_developer
+        },
         toggleDeveloperMode() {
             this.$store.state.application.developer_mode = !this.$store.state.application.developer_mode
         },
@@ -384,8 +387,8 @@ export default {
                 return alert('Not on desktop')
             }
 
-            window.desktopBridge.send('ping', this.$refs.desktopMessage.value)
-            window.desktopBridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
+            BlockHub.Bridge.sendCommand('ping', this.$refs.desktopMessage.value)
+            BlockHub.Bridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
         }
     },
     mounted() {

@@ -109,6 +109,10 @@ export default {
             if (!this.play_video) this.enableSlideshow(true);
         },
         scrollParentToChild(parent, child) {
+            if (!parent) {
+                return
+            }
+            
             const parentRect = parent.getBoundingClientRect();
 
             const parentViewableArea = {
