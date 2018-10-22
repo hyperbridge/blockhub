@@ -10,11 +10,15 @@
                             </h2>
                         </transition>
 
-                        <ul>
+                        <ul class="marketplace-menu reset-list">
                             <li v-for="(link, index) in links" :key="index">
-                                <router-link :to="{ name: link }">{{ link | cut }}</router-link>
+                                <router-link
+                                    class="marketplace-menu__link"
+                                    :to="{ name: link }"
+                                >{{ link | cut }}</router-link>
                             </li>
                         </ul>
+
                         <transition name="page">
                             <router-view/>
                         </transition>
@@ -25,8 +29,6 @@
 </template>
 
 <script>
-    import router from '@/router';
-
     export default {
         components: {
             'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
@@ -46,12 +48,6 @@
                 ]
             }
         },
-        computed: {
-            marketRoutes: () => {
-                return []
-                router.options.routes.find(route => route.name === 'Marketplace').children
-            }
-        },
         filters: {
             cut: val => val.replace('Marketplace ', '')
         }
@@ -59,19 +55,40 @@
 </script>
 
 <style lang="scss" scoped>
-    .page-enter-active {
-        transition: opacity .6s, transform .6s ease;
+    .marketplace-menu {
+        border-bottom: 1px solid #dee2e6;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 60px;
+        margin-top: 40px;
+        .marketplace-menu__link {
+            display: block;
+            &.router-link-exact-active {
+                border-color: #fff;
+            }
+            color: #fff;
+            text-decoration: none;
+            padding: 9px 0;
+            font-size: 21px;
+            border-bottom: 5px solid transparent;
+        }
     }
-    .page-leave-active {
-        transition: opacity .3s, transform .3s ease;
-    }
-    .page-enter, .page-leave-to {
-        opacity: 0;
-        transform: translateY(5vh);
-    }
-    .page-leave-active {
-        position: absolute;
-        width: calc(100% - 30px);
+
+    .page {
+        &-enter-active {
+            transition: opacity .6s, transform .6s ease;
+        }
+        &-leave-active {
+            transition: opacity .3s, transform .3s ease;
+        }
+        &-enter, &-leave-to {
+            opacity: 0;
+            transform: translateY(5vh);
+        }
+        &-leave-active {
+            position: absolute;
+            width: calc(100% - 30px);
+        }
     }
 
     .slider {
