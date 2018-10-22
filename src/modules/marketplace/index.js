@@ -175,6 +175,9 @@ export const mutations = {
         for (let x in payload) {
             Vue.set(state, x, payload[x])
         }
+    },
+    update(state, { prop = 'products', id, data }) {
+        state[prop][id] = { ...state[prop][id], ...data };
     }
 }
 

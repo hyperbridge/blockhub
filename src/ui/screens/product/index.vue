@@ -223,7 +223,8 @@
         },
         mounted() {
             const { product } = this;
-            if (product.images.preview && product.images.preview.length) {
+            if (product && product.images.preview && product.images.preview.length) {
+                this.promotionSections = groupBy(product.promotions, 'section');
                 const header = window.document.getElementById('header-bg');
                 const randomImage = Math.floor(Math.random() * product.images.preview.length);
                 header.style['background-image'] = 'url(' + product.images.preview[randomImage] + ')';
