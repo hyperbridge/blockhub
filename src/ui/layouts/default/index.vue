@@ -397,6 +397,16 @@
             },
             messages() {
                 return this.current_identity && this.current_identity.messages
+            },
+            dynamicLinks() {
+                const [empty, ...links] = this.$route.path.split('/');
+                // const names = links.filter()
+                const names = links;
+
+                return names.map((name, i) => ({
+                    title: this.$options.filters.upperFirstChar(name),
+                    to: names.reduce((to, name, index) => (index < i + 1) ? to += '/' + name : to, '')
+                }));
             }
         },
         data() {

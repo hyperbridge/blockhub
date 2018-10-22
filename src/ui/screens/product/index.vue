@@ -155,43 +155,6 @@
         }, {}) || null;
     };
 
-    const updateProduct = function () {
-        let product = null
-
-        if (this.id === 'new') {
-            product = this.$store.state.marketplace.default_product
-            
-            this.$store.dispatch('application/setEditorMode', 'editing')
-        }
-
-        if (this.$store.state.marketplace.products && this.$store.state.marketplace.products[this.id]) {
-            product = this.$store.state.marketplace.products[this.id]
-        }
-
-        if (product.images.preview && product.images.preview.length) {
-            const header = window.document.getElementById('header-bg');
-            const randomImage = Math.floor(Math.random() * product.images.preview.length);
-            header.style['background-image'] = 'url(' + product.images.preview[randomImage] + ')';
-            header.style['background-size'] = 'cover';
-        }
-
-        if (!product.community) {
-            product.community = {
-                discussions: []
-            }
-        }
-
-        if (!product.developer_tags) {
-            product.developer_tags = []
-        }
-
-        if (product.promotions) {
-            this.promotionSections = groupBy(product.promotions, 'section')
-        }
-
-        return product
-    };
-
     export default {
         props: ['id', 'section'],
         components: {
@@ -221,7 +184,12 @@
             }
         },
         computed: {
-            product: updateProduct,
+            marketplace() {
+                return this.$store.state.marketplace;
+            },
+            product() {
+                return this.id === 'new' ? this.marketplace.default_product : this.marketplace.products[this.id];
+            },
             editor_mode() {
                 return this.$store.state.application.editor_mode
             },
@@ -253,7 +221,15 @@
                 return links
             }
         },
-        mounted: updateProduct,
+        mounted() {
+            const { product } = this;
+            if (product.images.preview && product.images.preview.length) {
+                const header = window.document.getElementById('header-bg');
+                const randomImage = Math.floor(Math.random() * product.images.preview.length);
+                header.style['background-image'] = 'url(' + product.images.preview[randomImage] + ')';
+                header.style['background-size'] = 'cover';
+            }
+        },
         created() {
             window.onbeforeunload = this.unsaved
 

@@ -27,6 +27,17 @@ const assets = {
         snipers: {
             1: { id: 1, asset: 4, priceMin: 31, priceMax: 59, expDate: "2018-12-15T14:29:47+02:00" },
             3: { id: 3, asset: 6, priceMin: 11, priceMax: 89, expDate: "2018-11-14T14:29:47+02:00" }
+        },
+        offers: {
+            1: { id: 1, auctions: [1, 2], buyout: 42, marketValue: 45, seller: { id: 2, name: 'Tenseii' }, expDate: moment().add(24, 'hours') },
+            2: { id: 2, auctions: [1, 2], buyout: 42, marketValue: 45, seller: { id: 1, name: 'Tomeh' }, expDate: moment().add(12, 'hours') },
+            3: { id: 3, auctions: [1, 2], buyout: 42, marketValue: 45, seller: { id: 1, name: 'Tomeh' }, expDate: moment().add(3, 'hours') },
+            4: { id: 4, auctions: [1, 2], buyout: 42, marketValue: 45, seller: { id: 1, name: 'Tomeh' }, expDate: moment().add(11, 'hours') },
+            5: { id: 5, auctions: [1, 2], buyout: 42, marketValue: 45, seller: { id: 1, name: 'Tomeh' }, expDate: moment().add(2, 'hours') }
+        },
+        auctions: {
+            1: { id: 1, bid: 12.9, user: { name: 'Predda' }, date: moment().add(-1, 'day') },
+            2: { id: 2, bid: 18.1, user: { name: 'Dalmyra' }, date: moment().add(-14, 'hours') }
         }
     },
     mutations: {
@@ -42,6 +53,10 @@ const assets = {
         },
         update(state, { prop = 'assets', id, data }) {
             state[prop][id] = { ...state[prop][id], ...data };
+        },
+        updatev2(state, payload) {
+            const [prop, id] = Object.keys(payload)[0].split('_');
+            state[prop][id] = { ...state[prop][id], ...payload };
         },
         delete(state, { prop = 'assets', id }) {
             const { [id]: value, ...values } = state[prop];
@@ -92,6 +107,20 @@ const assets = {
         create({ commit }, payload) {
             const id = rand();
             commit('create', { ...payload, id, data: { ...payload.data, id }});
+        },
+        createAuction({ state, commit }, { offerId, ...payload }) {
+            const newId = rand();
+
+            // commit('updatev2', { ['offers_'+ offerId]: {
+            //     auctions: [...state.offers[id].auctions, newId]
+            // }});
+
+            commit('create', { id: newId, prop: 'auctions', data: payload });
+            commit('update', {
+                id: offerId,
+                prop: 'offers',
+                data: { auctions: [...state.offers[offerId].auctions, newId] }
+            });
         }
     },
     getters: {
@@ -113,6 +142,13 @@ const assets = {
             .filter(asset => asset.selected),
         forSaleAssets: (state, { assetsArray }) => assetsArray
             .filter(asset => asset.for_sale),
+        assetsTags: (state, { assetsArray }) => assetsArray
+            .reduce((tags, asset) => [
+                ...tags,
+                ...asset.system_tags.filter(tag =>
+                    !tags.includes(tag)
+                )
+            ], []),
         collections: ({ assets, collections }) => Object.values(collections)
             .reduce((populated, collection) => ({
                 ...populated,
@@ -129,7 +165,16 @@ const assets = {
                     ...sniper,
                     asset: assets[sniper.asset]
                 }
-            }), {})
+            }), {}),
+        offers: ({ offers, auctions }) => Object.values(offers)
+            .reduce((populated, offer) => ({
+                ...populated,
+                [offer.id]: {
+                    ...offer,
+                    auctions: offer.auctions.map(id => auctions[id])
+                }
+            }), {}),
+        offersArray: (state, { offers }) => Object.values(offers)
     }
 }
 

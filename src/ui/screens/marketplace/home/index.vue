@@ -63,15 +63,17 @@ export default {
     mounted() {
         const { assets, counter } = this;
         this.recentlySold = assets.slice(0, counter);
+        const rand = num => Math.floor(Math.random() * num);
 
         this.interval = setInterval(() => {
-            if (assets[this.counter]) {
-                this.recentlySold.splice(0, 1);
-                this.recentlySold.push(assets[this.counter]);
-                this.counter++;
-            } else {
-                clearInterval(this.interval);
+            this.recentlySold.splice(0, 1);
+
+            if (this.counter === assets.length - 1) {
+                this.counter = 1;
             }
+
+            this.recentlySold.push(assets[this.counter]);
+            this.counter++;
         }, 2000);
     }
 }
