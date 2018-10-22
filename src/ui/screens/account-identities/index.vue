@@ -203,10 +203,15 @@
                     identity[key] = this.identityClone[key]
                 }
 
+                if (!identity.name)
+                    identity.name = 'Default'
+
                 identity.edit = false
                 this.editedIdentity = null
-
-                this.saveIdentities()
+                
+                Bridge.sendCommand('saveIdentityRequest', identity).then((identity) => {
+                    this.saveIdentities()
+                })
             },
             deleteIdentity(identity) {
                 const { removeIdentity } = this
@@ -229,7 +234,7 @@
 
                 const id = Math.floor(Math.random() * 100)
 
-                Bridge.sendCommand('createIdentityRequest').then((identity) => {
+                Bridge.sendCommand('createIdentityRequest', newIdentity).then((identity) => {
                     newIdentity.id = identity.id
                     newIdentity.public_address = identity.public_address
 

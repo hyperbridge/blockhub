@@ -149,6 +149,9 @@ export const setAccountRequest = async (data) => {
             ...data.account
         }
 
+        DB.application.config.data[0].developer_mode = !!data.account.identities.find(identity => identity.developer_id !== undefined)
+
+
         DB.save()
 
         resolve()

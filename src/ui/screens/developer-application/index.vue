@@ -41,13 +41,15 @@
                             <c-button href="/#/account/identities">New Profile</c-button>
                         </c-block>
 
-                        <br />
+                        <br /><br />
 
                         <c-button @click="convertIdentity">Convert to Developer</c-button>
                     </div>
                     <div v-if="developerIdentity">
-                        Congratulations, your developer profile is all setup.
-                        <br />
+                        Congratulations, your developer profile is all setup. You are Developer #{{ this.chosenIdentity.developer_id }}
+
+                        <br /><br />
+
                         <c-button href="/#/developer">Go to dashboard</c-button>
                     </div>
                 </div>
@@ -64,7 +66,7 @@
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         },
         data() {
-            let developerIdentity = this.$store.state.application.account.identities.find(identity => identity.developerId !== undefined)
+            let developerIdentity = this.$store.state.application.account.identities.find(identity => identity.developer_id !== undefined)
             let chosenIdentity = this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
 
             if (!chosenIdentity && this.$store.state.application.account.identities.length) {
@@ -81,8 +83,9 @@
         methods: {
             convertIdentity() {
                 Bridge.sendCommand('createDeveloperRequest', this.chosenIdentity).then((data) => {
-                    this.chosenIdentity.developerId = data.developerId
+                    this.chosenIdentity.developer_id = data
                     this.developerIdentity = this.chosenIdentity
+                    this.$store.state.application.developer_mode = true
                 })
             },
             chooseIdentity(identity) {
