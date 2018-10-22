@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="row" v-if="product">
-            <div class="col-12">
+            <div class="col-12 col-md-12">
                 <div class="row" v-if="editing" style="margin-bottom: 70px;">
                     <c-button @click="showImporter" v-if="!importing">Import from Steam, GOG, etc.</c-button>
                     <div class="" v-if="importing">
@@ -74,7 +74,7 @@
                             <c-tags-list :tags="product.developer_tags" v-if="!editing"></c-tags-list>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-12 col-md-4">
                         <div class="editor" v-if="editing">
                             <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
                                     @click="activateElement('background_image')"
@@ -98,31 +98,32 @@
                             <label>RECOMMENDED SIZE: 1120 x 524px</label>
                         </div>
                     </div>
+                    <div class="col-12">
+                        <ul class="nav nav-tabs margin-bottom-30 justify-content-between">
+                            <li class="nav-item">
+                                <router-link :to="`/product/${id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="`/product/${id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="`/product/${id}/projects`" class="nav-link" :class="{ 'active': section === 'projects' }">Crowdfunding
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="`/product/${id}/assets`" class="nav-link" :class="{ 'active': section === 'assets' }">Inventory</router-link>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-12">
+                        <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
+                        <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
+                        <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
+                        <c-product-projects :product="product" v-if="section === 'projects'" :editing="editing" />
+                    </div>
                 </div>
-
-                <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
-                    <li class="nav-item">
-                        <router-link :to="`/product/${id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="`/product/${id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="`/product/${id}/projects`" class="nav-link" :class="{ 'active': section === 'projects' }">Crowdfunding
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="`/product/${id}/assets`" class="nav-link" :class="{ 'active': section === 'assets' }">Inventory</router-link>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-12">
-                <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
-                <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
-                <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
-                <c-product-projects :product="product" v-if="section === 'projects'" :editing="editing" />
             </div>
         </div>
         <c-custom-modal title="Help Center" v-if="first_product && editing" @close="closeModal">

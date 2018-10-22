@@ -247,4 +247,19 @@
             display: none;
         }
     }
+    @media (max-width: 512px){
+        .welcome-block__download-block{
+            .action{
+                margin-top: 20px;
+                flex-direction: column;
+                .btn{
+                    margin-bottom: 20px;
+                }
+                .download_info{
+                    text-align: center;
+                    margin-left: 0!important;
+                }
+            }
+        }
+    }
 </style>

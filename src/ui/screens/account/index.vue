@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="account">
-            <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <c-block title="Account Information">
@@ -12,7 +11,8 @@
                                                 <label>Email Address</label>
                                             </label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Email" :value="account.email" readonly>
+                                        <input type="text" class="form-control" placeholder="Email"
+                                               :value="account.email" readonly>
                                                 <span class="form-text">This field cannot be changed at this time.</span>
                                             </div>
                                         </div>
@@ -39,8 +39,10 @@
                                                 <label>Public Address</label>
                                             </label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Public address" :value="account.public_address" readonly>
-                                                <span class="form-text">Your account is an Ethereum wallet, and can be <a :href="`https://etherscan.io/address/${account.public_address}`">found on the blockchain using the Public Address</a></span>
+                                        <input type="text" class="form-control" placeholder="Public address"
+                                               :value="account.public_address" readonly>
+                                        <span class="form-text">Your account is an Ethereum wallet, and can be <a
+                                            :href="`https://etherscan.io/address/${account.public_address}`">found on the blockchain using the Public Address</a></span>
                                             </div>
                                         </div>
                                     </div>
@@ -147,7 +149,6 @@
                         </c-block>
                     </div>
                 </div>
-            </div>
     </c-layout>
 </template>
 
@@ -234,6 +235,7 @@
             }
         }
     }
+
     .login-modal{
         display: inline-block;
         width: auto !important;

@@ -1,10 +1,11 @@
 <template>
     <div class="row">
-        <div class="col-12 d-flex justify-content-between flex-wrap assets-list margin-bottom-30">
-            <div class="assets-list__item-container">
-                <c-assets-list-item></c-assets-list-item>
-            </div>
-        </div>
+        <!--I don't know if we need this-->
+        <!--<div class="col-12 d-flex justify-content-between flex-wrap assets-list margin-bottom-30">-->
+            <!--<div class="assets-list__item-container">-->
+                <!--<c-assets-list-item></c-assets-list-item>-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="col-12">
             <c-assets-grid :list="product.assets" />
         </div>
