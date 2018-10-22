@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert left-sidebar" style="max-width: 250px" id="page-aside" v-if="showLeftPanel">
                 <!--<transition name="slideLeft" v-if="initialized">-->
@@ -271,7 +271,7 @@
                     vehicula.
                 </p>
             </c-popup>
-            
+
             <c-cookie-policy v-if="!desktop_mode" />
 
             <c-clock v-if="desktop_mode" />
@@ -399,6 +399,16 @@
             },
             messages() {
                 return this.current_identity && this.current_identity.messages
+            },
+            dynamicLinks() {
+                const [empty, ...links] = this.$route.path.split('/');
+                // const names = links.filter()
+                const names = links;
+
+                return names.map((name, i) => ({
+                    title: this.$options.filters.upperFirstChar(name),
+                    to: names.reduce((to, name, index) => (index < i + 1) ? to += '/' + name : to, '')
+                }));
             }
         },
         data() {
@@ -770,7 +780,7 @@
             transform: rotate(0deg);
             pointer-events: none;
         }
-        
+
         &:after {
             content: '';
             position: absolute;
@@ -800,7 +810,7 @@
         }
     }
 
-    
+
     .content {
         width: 100%;
         padding-top: 0;
@@ -842,6 +852,6 @@
         .content {
             width: 100%!important;
         }
-        
+
     }
 </style>
