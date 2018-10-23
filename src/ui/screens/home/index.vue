@@ -77,10 +77,10 @@
                 <c-infinite-content :list="list" />
             </div>
 
-            <c-custom-modal title="Welcome" v-if="showWelcomeModal" @close="closeModal">
+            <c-custom-modal title="BlockHub Preview" v-if="showWelcomeModal" @close="closeModal">
                 <div class="help-modal__content" slot="modal_body" style="max-width: 500px">
-                    <h4 class="h2 mb-3">BlockHub Preview</h4>
-                    <p>Welcome to the the nightly preview build of BlockHub. All features are enabled, with or without bugs. Gotta catch 'em all! 🐛</p>
+                    <h4 class="h2 mb-3">Welcome</h4>
+                    <p>Welcome to the the nightly BlockHub Preview Build. All features are enabled, with or without bugs. Gotta catch 'em all! 🐛</p>
                     <p>These features are still in active development, and may not functional properly and may not make it into production.</p>
                     <p>Enjoy your stay, and send us your feedback!</p>
                     <p hidden>We're a platform built by the community, for the community.</p>
