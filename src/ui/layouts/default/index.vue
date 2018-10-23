@@ -875,7 +875,7 @@
             min-height: 100%;
             top: 0!important;
             padding-top: 120px;
-            display: none;
+            display: none!important;
         }
         .content {
             width: 100%!important;

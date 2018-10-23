@@ -3,7 +3,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 margin-bottom-30">
-                        <c-main-banner class="margin-bottom-30" :image="main_banner.img" :logo="main_banner.logo" />
+                        <c-main-banner class="margin-bottom-30" :image="main_banner.img" :logo="main_banner.logo" v-if="main_banner" />
 
                         <c-block>
                             <c-heading-bar name="Item LookUp" :showArrows="false" :showBackground="false">
@@ -45,7 +45,7 @@
                                     march 21st, up to 90% OFF on selected game assets</div>
                             </div>
                             <div class="d-flex flex-wrap" style="margin: 0 -5px">
-                                <div class="w-50 padding-5" v-for="(item, index) in assets" :key="index" v-if="index < 7">
+                                <div class="assets-item__container padding-5" v-for="(item, index) in assets" :key="index" v-if="index < 7">
                                     <c-assets-item :item="item" />
                                 </div>
                             </div>
@@ -247,6 +247,12 @@
                 pagination: {
                     el: '.assets-swiper-pagination',
                     clickable: true
+                },
+                breakpoints: {
+                    768: {
+                        slidesPerView: 1,
+                        spaceBetween: 0
+                    },
                 }
             },
             main_banner:{
@@ -309,6 +315,8 @@
             background: #2a2c43;
             border-radius: 12px 12px 0 0;
             padding: 0 10px;
+            display: inline-flex;
+            align-items: center;
             &:after {
                 position: absolute;
                 content: "";
@@ -364,6 +372,12 @@
             padding: 0 5px;
             line-height: 28px;
             height: 28px!important;
+        }
+    }
+    .assets-item__container{
+        width: 50%;
+        @media (max-width: 767px) {
+            width: 100%;
         }
     }
 </style>
