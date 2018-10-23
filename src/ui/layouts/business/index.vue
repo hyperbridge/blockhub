@@ -1,11 +1,11 @@
 <template>
     <!-- PAGE WRAPPER -->
     <div class="page page--w-header page--w-container">
-        <div class="page-top-bar" :class="{'invert' : darkMode}">
-            <div class="logo-holder">
+        <div class="page-top-bar draggable" :class="{'invert' : darkMode}">
+            <a class="logo-holder undraggable" href="/#/">
                 <c-img src="/static/img/logo-white.svg" alt="Logo" v-if="darkMode" />
                 <c-img src="/static/img/logo.svg" alt="Logo" v-else />
-            </div>
+            </a>
             <div class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
                 Business Manager
             </div>
@@ -36,6 +36,7 @@
         <!---->
     </div>
 </template>
+
 
 <script>
     export default {
@@ -74,6 +75,18 @@
         }
     }
 </script>
+
+
+<style>
+    .draggable {
+        -webkit-app-region: drag;
+    }
+
+    .undraggable {
+        -webkit-app-region: no-drag;
+    }
+</style>
+
 <style lang="scss">
     body{
         &.light{
@@ -86,6 +99,7 @@
         }
     }
 </style>
+
 <style lang="scss" scoped>
     $light_color_1: #fff;
     $dark_color_1: #30304d;
