@@ -1,8 +1,7 @@
 <template functional>
-    <div class="badge-card">
+    <div class="badge-card" :class="'badge-card--' + props.tag">
         <span class="badge-card__text">
             {{ props.title }}
-            <!-- <span class="store-card__triangle--behind"></span> -->
         </span>
         <div class="badge-card__triangle"></div>
     </div>
@@ -18,7 +17,6 @@
         position: relative;
         margin-right: 10px;
         z-index: 5;
-        box-shadow: 0 0 5px 0 rgba(1,1,1,.1);
     }
     %triangle {
         width: 16px;
@@ -35,25 +33,11 @@
         left: 4px;
         z-index: -1;
     }
-    .store-card__triangle--behind {
-        // @extend %triangle;
-        // background: darken($border-color, 20%);
-        // position: absolute;
-        // right: -8px;
-        // // top: 3px;
-        // top: 30px;
-        // z-index: -1;
-        position: absolute;
-        border: 16px solid transparent;
-        right: -8px;
-        top: 3px;
-        border-bottom-color: darken($border-color, 20%);
-        z-index: -1;
-    }
     .badge-card__text {
         display: block;
         background-color: $border-color;
-        color: #f8dfac;
+        // color: #f8dfac;
+        color: #fff;
         font-size: 10px;
         padding: 3px 1px;
         text-shadow: 0 0 4px #000;

@@ -44,7 +44,7 @@
                                         <c-button @click="toggleRawData(protocol.id)" v-if="!protocolData[protocol.id].visible">Raw</c-button>
                                     </td>
                                 </tr>
-                                <tr v-for="contract in protocol.contracts" :key="contract.name">
+                                <tr v-for="(contract) in protocol.contracts" :key="contract.name">
                                     <td>
                                         <label class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" v-model="selected" :value="`${protocol.id}.${contract.name}`" number />
@@ -133,16 +133,16 @@ export default {
 
             return [
                 {
-                    id: 'reserve',
-                    name: 'Reserve',
-                    link: 'https://github.com/hyperbridge/protocol/tree/master/packages/reserve',
-                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve.contracts)
-                },
-                {
                     id: 'token',
                     name: 'Token',
                     link: 'https://github.com/hyperbridge/protocol/tree/master/packages/token',
                     contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.token.contracts)
+                },
+                {
+                    id: 'reserve',
+                    name: 'Reserve',
+                    link: 'https://github.com/hyperbridge/protocol/tree/master/packages/reserve',
+                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve.contracts)
                 },
                 {
                     id: 'marketplace',

@@ -1,11 +1,12 @@
 <template>
-    <div class="store-card">
-        <div class="store-card__badges" v-if="system_tags.length">
+    <div class="store-card" :class="'store-card--' + asset.system_tags[0]">
+        <div class="store-card__badges" v-if="asset.system_tags.length">
             <c-badge-card
-                v-for="(tag, index) in system_tags"
+                v-for="(tag, index) in asset.system_tags"
                 class="store-card__single-badge"
                 :key="index"
-                :title="tag"
+                :title="tag | space"
+                :tag="tag"
             />
         </div>
         <c-img :src="asset.image" class="store-card__image"/>
@@ -24,11 +25,6 @@ export default {
     props: ['asset'],
     components: {
         'c-badge-card': (resolve) => require(['@/ui/components/badge-card'], resolve),
-    },
-    data() {
-        return {
-            system_tags: ['featured']
-        }
     }
 }
 </script>
@@ -37,34 +33,15 @@ export default {
     .store-card {
         margin: 10px;
         background-color: rgb(30, 31, 49);
-        // background-color: #2A2B42;
         padding: 10px;
         border-radius: 6px;
         position: relative;
         z-index: 4;
-
-        $status: (
-
-        );
-
-        $border-size: 1px;
-        $border-color: #dd9c1b;
-        $border-color-lighter: #ffcd6a;
-        $border-col: #ECB448;
-
-        box-shadow: 0 5px 25px -5px rgba(255, 204, 103, .5);
-        // box-shadow: 0 5px 25px -5px darker()
-        border: 1px solid $border-col;
-
         .store-card__badges {
             position: absolute;
             left: 13px;
             top: -13px;
             display: flex;
-            align-items: center;
-            .store-card__single-badge {
-
-            }
         }
 
         &:after {
@@ -72,7 +49,6 @@ export default {
             content: "";
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0,0,0,0), rgba(255, 205, 106, 0.5));
             left: 0;
             top: 0;
         }
@@ -81,6 +57,7 @@ export default {
             margin: 0 auto;
             width: 180px;
             height: 180px;
+            filter: drop-shadow(0 0 10px rgb(24, 26, 39));
         }
         .store-card__name {
             text-align: center;
@@ -111,9 +88,71 @@ export default {
             color: #fff;
             padding: 10px;
         }
-        .store-card__image {
-            filter: drop-shadow(0 0 10px rgb(24, 26, 39));
+    }
+</style>
+
+<style lang="scss">
+    .store-card {
+        &:after {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background: linear-gradient(rgba(0,0,0,0), rgba(255,255,255,.3));
+        }
+        border: 1px solid rgba(255,255,255,.8);
+        box-shadow: 0 5px 25px -5px rgba(255,255,255,.3);
+
+        // Colors
+        // #1abc9c #e056fd #2ecc71 #9b59b6 #D6A2E8 #7d5fff #c56cf0 #18dcff #808e9b #706fd3
+        //  #9b59b6 #D6A2E8    #c56cf0  #808e9b #706fd3
+
+        $tags: (
+            top_seller: #9980FA,
+            special: #1abc9c,
+            discount: #74b9ff,
+            epic: #ffda79,
+            mythic: #1abc9c,
+            trending: #c56cf0,
+            upcoming: #2ecc71,
+            specials: #B33771,
+            heroic: #18dcff,
+            extremely_rare: #40407a,
+            popular: #b8e994,
+            legendary: #57606f
+        );
+
+        @each $tag, $hex in $tags {
+            $rgba: rgba($hex, .5);
+
+            &.#{'store-card--' + $tag} {
+                @if $tag == extremely_rare {
+                    box-shadow: 0 5px 35px -3px #9796ff;
+                    border: 1px solid #b8b7ff;
+                } @else {
+                    box-shadow: 0 5px 25px -5px $rgba;
+                    border: 1px solid $hex;
+                }
+                &:after {
+                    background: linear-gradient(rgba(0,0,0,0), $rgba);
+                }
+            }
+            .#{'badge-card--' + $tag} {
+                .badge-card__text, .badge-card__triangle {
+                    background-color: darken($hex, 14%);
+                    @if $tag == extremely_rare { border-color: #b8b7ff; }
+                    @else { border-color: lighten($hex, 10%); }
+                }
+                .badge-card__text {
+                    &:after {
+                        border-bottom-color: darken($hex, 20%);
+                    }
+                }
+            }
         }
     }
 </style>
+
 

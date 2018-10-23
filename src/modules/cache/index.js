@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import { normalize } from 'normalizr'
-import * as db from '@/db'
 
 let rawData = {
     initial: true,

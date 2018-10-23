@@ -364,7 +364,7 @@
 
 
 <script>
-import * as DesktopBridge from '@/framework/desktop-bridge'
+import * as Bridge from '@/framework/desktop-bridge'
 
 export default {
     components: {

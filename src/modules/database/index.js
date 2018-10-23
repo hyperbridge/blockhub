@@ -1,5 +1,5 @@
 import { normalize } from 'normalizr'
-import * as db from '@/db'
+import * as DB from '@/db'
 
 let rawData = {
     initialized: true
@@ -37,14 +37,14 @@ export const actions = {
     clean(store, payload) {
         console.log('[BlockHub] Cleaning database...')
 
-        db.clean()
+        DB.clean()
 
         store.commit('updateState', state)
     },
     reload(store, payload) {
         console.log('[BlockHub] Reloading database...')
 
-        db.reload()
+        DB.reload()
 
         store.commit('updateState', state)
     }

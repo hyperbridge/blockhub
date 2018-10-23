@@ -13,12 +13,12 @@
 </template>
 
 <script>
-    import * as DesktopBridge from '@/framework/desktop-bridge'
+    import * as Bridge from '@/framework/desktop-bridge'
 
     export default {
         methods: {
             deleteAccount() {
-                DesktopBridge.sendCommand('deleteAccountRequest')
+                Bridge.sendCommand('deleteAccountRequest')
             }
         }
     }

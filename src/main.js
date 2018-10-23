@@ -34,24 +34,30 @@ const data = {
 const dataString = JSON.stringify(data).replace(/"/g, "'")
 
 
+const notifyError = debounce(function (message) {
+  if (message.indexOf('Error') !== -1) {
+    BlockHub.Bridge.sendCommand('error', { message: message })
+  }
 
+  if (message.indexOf('TypeError') !== -1) {
+    BlockHub.Notifications.error(message, 'UI Error', {
+      timeout: 5000,
+      pauseOnHover: true
+    })
+  }
+}, 500)
 
 const overrideConsoleLog = () => {
   window.consoleLogMessages = []
 
   var oldLog = console.log
-  console.log = debounce(function (message) {
+  console.log = function (message) {
     window.consoleLogMessages.push(message)
 
-    if (message.toString().indexOf('TypeError') !== -1) {
-      BlockHub.Notifications.error(message.toString(), 'UI Error', {
-        timeout: 5000,
-        pauseOnHover: true
-      })
-    }
+    notifyError(message.toString())
 
     oldLog.apply(console, arguments)
-  }, 300)
+  }
 
   var oldWarn = console.log
   console.warn = function (message) {

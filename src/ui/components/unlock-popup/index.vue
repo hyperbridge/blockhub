@@ -22,7 +22,7 @@
 </template>
 
 <script>
-    import * as DesktopBridge from '@/framework/desktop-bridge'
+    import * as Bridge from '@/framework/desktop-bridge'
 
     export default {
         props: ['activated'],
@@ -39,7 +39,7 @@
             }
         },
         created() {
-            DesktopBridge.on('promptPasswordRequest', (data) => {
+            Bridge.on('promptPasswordRequest', (data) => {
                 if (data.error) {console.log(this.$refs.submit.$el, $(this.$refs.submit.$el))
                     $(this.$refs.submit.$el).addClass('wrong')
                 }

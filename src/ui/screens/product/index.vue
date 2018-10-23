@@ -7,88 +7,123 @@
             </div>
         </div>
         <div class="row" v-if="product">
-            <div class="col-12 col-md-8">
-                <div class="editor-container">
-                    <div class="editor" v-if="editing">
-                        <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                @click="activateElement('name')" v-if="!activeElement['name']">Change
-                            Product Name <span class="fa fa-edit"></span></button>
+            <div class="col-12 col-md-12">
+                <div class="row" v-if="editing" style="margin-bottom: 70px;">
+                    <c-button @click="showImporter" v-if="!importing">Import from Steam, GOG, etc.</c-button>
+                    <div class="" v-if="importing">
+                        Choose source: 
+                        <br />
+                        <div class="row">
+                            <div class="col">
+                                Steam
+                            </div>
+                            <div class="col">
+                                GOG.com
+                            </div>
+                            <div class="col">
+                                Itch
+                            </div>
+                        </div>
+                        <br />
+                        Enter URL:
+                        <br />
+                        <input ref="importUrl" type="text" value="https://store.steampowered.com/app/441830/I_am_Setsuna/" />
+                        <br />
+                        <c-button @click="startImport">Go</c-button>
+                        <br />
+                        <div>Importing...</div>
+                        Results:
+                        <br />
+                        <textarea ref="importResults"></textarea>
+                        <div>Submission Cost: 10 HBX</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="editor-container">
+                            <div class="editor" v-if="editing">
+                                <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                        @click="activateElement('name')" v-if="!activeElement['name']">Change
+                                    Product Name <span class="fa fa-edit"></span></button>
 
-                        <div class="form-group" v-if="activeElement['name']">
-                            <div class="form-control-element form-control-element--right">
-                                <input ref="name" name="name" type="text" class="form-control"
-                                        placeholder="Product name..." v-model="product.name"/>
-                                <div
-                                    class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                    <span class="fa fa-check" @click="deactivateElement('name')"></span>
+                                <div class="form-group" v-if="activeElement['name']">
+                                    <div class="form-control-element form-control-element--right">
+                                        <input ref="name" name="name" type="text" class="form-control"
+                                                placeholder="Product name..." v-model="product.name"/>
+                                        <div
+                                            class="form-control-element__box form-control-element__box--pretify bg-secondary"
+                                            @click="deactivateElement('name')">
+                                            <span class="fa fa-check"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <h1 class="title margin-top-10 margin-bottom-15">{{ product.name }}</h1>
                         </div>
-                    </div>
-                    <h1 class="title margin-top-10 margin-bottom-15">{{ product.name }}</h1>
-                </div>
 
-                <div class="editor-container">
-                    <div class="" v-if="editing">
-                        <div class="form-group">
-                            <select id="tag-editor" class="form-control" multiple="multiple">
-                                <option v-for="(tag, index) in author_tag_options" :key="index"
-                                        :selected="product.developer_tags.includes(tag)">{{ tag }}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <c-tags-list :tags="product.developer_tags" v-if="!editing"></c-tags-list>
-                </div>
-            </div>
-            <div class="col-12 col-md-4">
-                <div class="editor" v-if="editing">
-                    <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                            @click="activateElement('background_image')"
-                            v-if="!activeElement['background_image']">Change Background Image <span
-                        class="fa fa-edit"></span></button>
-
-                    <div class="form-group" v-if="activeElement['background_image']">
-                        <div class="form-control-element form-control-element--right">
-                            <input ref="background_image" name="background_image" type="text"
-                                    class="form-control" placeholder="Background image URL..."
-                                    v-model="product.images.header"/>
-                            <div
-                                class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                <span class="fa fa-check"
-                                        @click="deactivateElement('background_image')"></span>
+                        <div class="editor-container">
+                            <div class="" v-if="editing">
+                                <div class="form-group">
+                                    <select id="tag-editor" class="form-control" multiple="multiple">
+                                        <option v-for="(tag, index) in author_tag_options" :key="index"
+                                                :selected="product.developer_tags.includes(tag)">{{ tag }}
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
+                            <c-tags-list :tags="product.developer_tags" v-if="!editing"></c-tags-list>
                         </div>
                     </div>
+                    <div class="col-12 col-md-4">
+                        <div class="editor" v-if="editing">
+                            <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                    @click="activateElement('background_image')"
+                                    v-if="!activeElement['background_image']">Change Background Image <span
+                                class="fa fa-edit"></span></button>
 
-                    <br/>
-                    <label>RECOMMENDED SIZE: 1120 x 524px</label>
+                            <div class="form-group" v-if="activeElement['background_image']">
+                                <div class="form-control-element form-control-element--right">
+                                    <input ref="background_image" name="background_image" type="text"
+                                            class="form-control" placeholder="Background image URL..."
+                                            v-model="product.images.header"/>
+                                    <div
+                                        class="form-control-element__box form-control-element__box--pretify bg-secondary"
+                                        @click="deactivateElement('background_image')">
+                                        <span class="fa fa-check"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br/>
+                            <label>RECOMMENDED SIZE: 1120 x 524px</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <ul class="nav nav-tabs margin-bottom-30 justify-content-between">
+                            <li class="nav-item">
+                                <router-link :to="`/product/${id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="`/product/${id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="`/product/${id}/projects`" class="nav-link" :class="{ 'active': section === 'projects' }">Crowdfunding
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="`/product/${id}/assets`" class="nav-link" :class="{ 'active': section === 'assets' }">Inventory</router-link>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-12">
+                        <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
+                        <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
+                        <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
+                        <c-product-projects :product="product" v-if="section === 'projects'" :editing="editing" />
+                    </div>
                 </div>
-            </div>
-            <div class="col-12">
-                <ul class="nav nav-tabs margin-bottom-30 justify-content-between">
-                    <li class="nav-item">
-                        <router-link :to="`/product/${id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="`/product/${id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="`/product/${id}/projects`" class="nav-link" :class="{ 'active': section === 'projects' }">Crowdfunding
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="`/product/${id}/assets`" class="nav-link" :class="{ 'active': section === 'assets' }">Inventory</router-link>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-12">
-                <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
-                <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
-                <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
-                <c-product-projects :product="product" v-if="section === 'projects'" :editing="editing" />
             </div>
         </div>
         <c-custom-modal title="Help Center" v-if="first_product && editing" @close="closeModal">
@@ -109,6 +144,8 @@
 
 <script>
     import Vue from 'vue'
+    import * as Brdge from '@/framework/desktop-bridge'
+    import * as DB from '@/db'
 
     const groupBy = function (xs, key) {
         return xs.reduce(function (rv, x) {
@@ -116,41 +153,6 @@
             (rv[x[key]] = rv[x[key]] || []).push(x);
             return rv;
         }, {}) || null;
-    };
-
-    const updateProduct = function () {
-        let product = null
-
-        if (this.id === 'new') {
-            product = this.$store.state.marketplace.default_product
-        }
-
-        if (this.$store.state.marketplace.products && this.$store.state.marketplace.products[this.id]) {
-            product = this.$store.state.marketplace.products[this.id]
-        }
-
-        if (product.images.preview && product.images.preview.length) {
-            const header = window.document.getElementById('header-bg');
-            const randomImage = Math.floor(Math.random() * product.images.preview.length);
-            header.style['background-image'] = 'url(' + product.images.preview[randomImage] + ')';
-            header.style['background-size'] = 'cover';
-        }
-
-        if (!product.community) {
-            product.community = {
-                discussions: []
-            }
-        }
-
-        if (!product.developer_tags) {
-            product.developer_tags = []
-        }
-
-        if (product.promotions) {
-            this.promotionSections = groupBy(product.promotions, 'section')
-        }
-
-        return product
     };
 
     export default {
@@ -177,11 +179,20 @@
                     'racing',
                     'action'
                 ],
+                importing: false,
                 savedState: false
             }
         },
         computed: {
-            product: updateProduct,
+            marketplace() {
+                return this.$store.state.marketplace;
+            },
+            product() {
+                return this.id === 'new' ? this.marketplace.default_product : this.marketplace.products[this.id];
+            },
+            editor_mode() {
+                return this.$store.state.application.editor_mode
+            },
             editing() {
                 if (!this.$store.state.application.editor_mode) {
                     for (let key in this.activeElement) {
@@ -210,7 +221,16 @@
                 return links
             }
         },
-        mounted: updateProduct,
+        mounted() {
+            const { product } = this;
+            if (product && product.images.preview && product.images.preview.length) {
+                this.promotionSections = groupBy(product.promotions, 'section');
+                const header = window.document.getElementById('header-bg');
+                const randomImage = Math.floor(Math.random() * product.images.preview.length);
+                header.style['background-image'] = 'url(' + product.images.preview[randomImage] + ')';
+                header.style['background-size'] = 'cover';
+            }
+        },
         created() {
             window.onbeforeunload = this.unsaved
 
@@ -241,19 +261,140 @@
                 }, 10)
             },
             save() {
-                this.savedState = true;
                 if (this.id === 'new') {
-                    this.$store.commit('marketplace/createProduct', this.product)
+                    this.product.type = 'game'
+
+                    Brdge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.account.current_identity, product: this.product }).then((data) => {
+                        const product = DB.marketplace.products.insert(data)
+                        DB.save()
+
+                        Vue.set(this.$store.state.marketplace.products, product.id, product)
+
+                        this.savedState = true
+                    })
                 } else {
-                    this.$store.dispatch('marketplace/updateProduct', this.product)
+                    const product = this.product
+
+                    Vue.set(this.$store.state.marketplace.products, product.id, product)
+
+                    DB.marketplace.products.update(product) 
+                    DB.save()
+
+                    this.savedState = true
                 }
             },
             unsaved() {
                 if (this.savedState === false && this.$store.state.application.editor_mode === 'editing')
-                    return 'ololololo'
+                    return true
             },
             closeModal() {
                 this.$store.state.marketplace.first_product = false
+            },
+            showImporter() {
+                this.importing = true
+            },
+            startImport() {
+                const onWindowLoad = `function onWindowLoad(requestId) {
+                    const script = document.createElement('script');
+                    script.src = 'https://code.jquery.com/jquery-2.2.4.min.js';
+                    script.type = 'text/javascript';
+
+                    script.onload = script.onreadystatechange = function () {
+                        const monitor = function() {
+                            try {
+                                if (!$('.game_area_description').length) return setTimeout(monitor, 500);
+
+                                const fetchers = {
+                                    steam: () => {
+                                        return {
+                                            title: $('.apphub_AppName').text().trim(),
+                                            description: $('.game_description_snippet').text().trim(),
+                                            about: $('#game_area_description').html().trim(),
+                                            developers: Object.values($('#developers_list a').map((i, el) => $(el).text().trim()).get()),
+                                            publishers: Object.values($('#developers_list').parent().next().find('a').map((i, el) => $(el).text().trim()).get()),
+                                            tags: Object.values($('.popular_tags a').map((i, el) => $(el).text().trim()).get()),
+                                            releaseDate: $('.release_date .date').text().trim(),
+                                            images: {
+                                                preview: Object.values($('.highlight_strip_item.highlight_strip_screenshot').map((i, el) => $(el).find('img').attr('src')).get())
+                                            },
+                                            videos: Object.values($('.highlight_strip_item.highlight_strip_movie').map((i, el) => ({
+                                                preview: $(el).find('img').attr('src'),
+                                                url: 'https://cdn.hyperbridge.org/blockhub/videos/products/doom-20087/trailer.mp4'
+                                            })).get())
+                                        }
+                                    },
+                                    gog: () => {
+
+                                    },
+                                    itch: () => {
+
+                                    }
+                                };
+
+                                let fetcherType = null;
+
+                                if (window.location.hostname.indexOf('steampowered.com'))
+                                    fetcherType = 'steam';
+                                else if (window.location.hostname.indexOf('gog.com'))
+                                    fetcherType = 'gog';
+                                else if (window.location.hostname.indexOf('itch.io'))
+                                    fetcherType = 'itch';
+                                else {
+                                    // fail
+                                }
+
+                                const fetcher = fetchers[fetcherType];
+
+                                const cmd = {
+                                    key: 'resolveCallback',
+                                    responseId: requestId,
+                                    data: fetcher()
+                                };
+
+                                window.desktopBridge.send('command', JSON.stringify(cmd));
+                            }
+                            catch (e) {
+                                const cmd = {
+                                    key: 'resolveCallback',
+                                    responseId: requestId,
+                                    data: {
+                                        error: true,
+                                        message: 'Error in script: ' + e
+                                    }
+                                };
+
+                                window.desktopBridge.send('command', JSON.stringify(cmd));
+                            }
+                        }
+
+                        monitor();
+                    };
+
+                    document.body.appendChild(script);
+                }`
+                
+                Brdge.sendCommand('fetchPageDataRequest', {
+                    url: this.$refs.importUrl.value,
+                    script: onWindowLoad
+                }).then((data) => {
+                    if (data.error) {
+                        return console.log(data.message)
+                    }
+
+                    console.log('Import response: ', data)
+
+                    this.product.type = 'game'
+                    //this.product.rating.overall = 0
+                    this.product.system_tags = ['imported']
+                    this.product.author_tags = data.tags
+                    this.product.name = data.title
+                    this.product.release_date = data.releaseDate
+                    this.product.description = data.description
+                    this.product.content = data.about
+                    this.product.genre = ''
+                    this.product.developer = data.developers && data.developers[0]
+                    this.product.publisher = data.publishers && data.publishers[0]
+                })
             },
         },
         updated() {
@@ -290,6 +431,13 @@
         watch: {
             '$route'() {
                 this.updateSection()
+            },
+            editor_mode (newMode, oldMode) {
+                if (oldMode === 'editing' && newMode === 'publishing') {
+                    this.save()
+
+                    this.$store.dispatch('application/setEditorMode', 'viewing')
+                }
             }
         }
     }
