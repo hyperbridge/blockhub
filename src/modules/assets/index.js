@@ -135,7 +135,7 @@ const assets = {
                 }
             }), {}),
         array: (state, { assets }) => Object.values(assets),
-        assetsArray: state => Object.values(state.assets),
+        assetsArray: (state, { assets}) => Object.values(assets),
         inventoryAssets: (state, { assetsArray }) => assetsArray
             .filter(asset => !asset.for_sale),
         selectedAssets: (state, { assetsArray }) => assetsArray
@@ -147,6 +147,13 @@ const assets = {
                 ...tags,
                 ...asset.system_tags.filter(tag =>
                     !tags.includes(tag)
+                )
+            ], []),
+        assetsAttributes: (state, { assetsArray }) => assetsArray
+            .reduce((attributes, asset) => [
+                ...attributes,
+                ...Object.keys(asset.metadata).filter(attr =>
+                    !attributes.includes(attr)
                 )
             ], []),
         assetsByName: (state, { assetsArray }) => name => assetsArray
