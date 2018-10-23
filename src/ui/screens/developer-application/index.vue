@@ -9,7 +9,7 @@
 
                     <br />
 
-                    <div v-if="!developerIdentity">
+                    <div v-if="!chosenIdentity.developer_id">
                         <p>Choose a profile to convert:</p>
 
                         <br />
@@ -45,7 +45,7 @@
 
                         <c-button @click="convertIdentity">Convert to Developer</c-button>
                     </div>
-                    <div v-if="developerIdentity">
+                    <div v-if="chosenIdentity.developer_id">
                         Congratulations, your developer profile is all setup. You are Developer #{{ this.chosenIdentity.developer_id }}
 
                         <br /><br />
@@ -66,25 +66,28 @@
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         },
         data() {
-            let developerIdentity = this.$store.state.application.account.identities.find(identity => identity.developer_id !== undefined)
-            let chosenIdentity = this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
-
-            if (!chosenIdentity && this.$store.state.application.account.identities.length) {
-                chosenIdentity = this.$store.state.application.account.identities[0]
-            }
-
             return {
-                identities: this.$store.state.application.account.identities,
-                chosenIdentity: chosenIdentity,
-                developerIdentity: developerIdentity,
                 errors: []
+            }
+        },
+        computed: {
+            identities() {
+                return this.$store.state.application.account.identities
+            },
+            chosenIdentity() {
+                let chosenIdentity = this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
+
+                if (!chosenIdentity && this.$store.state.application.account.identities.length) {
+                    chosenIdentity = this.$store.state.application.account.identities[0]
+                }
+
+                return chosenIdentity
             }
         },
         methods: {
             convertIdentity() {
                 Bridge.sendCommand('createDeveloperRequest', this.chosenIdentity).then((data) => {
                     this.chosenIdentity.developer_id = data
-                    this.developerIdentity = this.chosenIdentity
                     this.$store.state.application.developer_mode = true
                 })
             },

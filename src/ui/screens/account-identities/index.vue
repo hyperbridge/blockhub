@@ -182,6 +182,7 @@
         methods: {
             setDefault(identity) {
                 this.$store.state.application.account.current_identity = identity
+                this.$store.state.application.developer_mode = !!identity.developer_id
                 // if (this.defaultIdentity) this.defaultIdentity.default = false
                 // identity.default = true
 
