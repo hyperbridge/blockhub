@@ -1,5 +1,5 @@
 <template>
-    <c-layout :breadcrumbLinks="false">
+    <c-layout>
         <div class="container-fluid">
             <div class="row realm_page_header margin-bottom-30">
                 <div class="col-3">

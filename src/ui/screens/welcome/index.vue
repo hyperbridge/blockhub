@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false" :breadcrumbLinks="false">
+    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false">
         <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
