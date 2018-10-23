@@ -848,7 +848,7 @@
     }
     .right-sidebar,
     .left-sidebar{
-        z-index: 99;
+        z-index: 98;
     }
 
     @media (max-width: 575px) {
