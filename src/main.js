@@ -11,9 +11,11 @@ import './components';
 import './directives';
 import './css/styles.scss';
 import './prototypes';
-import migrations from './db/migrations';
+import migrations from './db/migrations'
 
-import VueNumerals from 'vue-numerals';
+import VueNumerals from 'vue-numerals'
+
+const debounce = require('debounce')
 
 Vue.config.productionTip = false
 
@@ -32,7 +34,18 @@ const data = {
 const dataString = JSON.stringify(data).replace(/"/g, "'")
 
 
+const notifyError = debounce(function (message) {
+  if (message.indexOf('Error') !== -1) {
+    BlockHub.Bridge.sendCommand('error', { message: message })
+  }
 
+  if (message.indexOf('TypeError') !== -1) {
+    BlockHub.Notifications.error(message, 'UI Error', {
+      timeout: 5000,
+      pauseOnHover: true
+    })
+  }
+}, 500)
 
 const overrideConsoleLog = () => {
   window.consoleLogMessages = []
@@ -40,6 +53,8 @@ const overrideConsoleLog = () => {
   var oldLog = console.log
   console.log = function (message) {
     window.consoleLogMessages.push(message)
+
+    notifyError(message.toString())
 
     oldLog.apply(console, arguments)
   }

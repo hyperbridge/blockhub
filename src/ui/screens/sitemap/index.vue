@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="settings">
-        <div class="content" id="content">
             <c-block class="margin-bottom-30" title="Sitemap" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                 <div class="row">
                     <div class="col">
@@ -30,6 +29,7 @@
                           <li><a href="#/account">Account</a></li>
                           <li><a href="#/account/signup">Account > Sign Up</a></li>
                           <li><a href="#/account/signin">Account > Sign In</a></li>
+                          <li><a href="#/account/backup">Account > Backup</a></li>
                           <li><a href="#/account/wallets">Account > Wallets</a></li>
                           <li><a href="#/account/new-wallet">Account > New Wallet</a></li>
                           <li><a href="#/account/identities">Account > Identities</a></li>
@@ -126,6 +126,7 @@
                         <ul>
                           <li><a href="#/curators">Curators</a></li>
                           <li><a href="#/curator/1">Curator #1</a></li>
+                          <li><a href="#/curator/application">Curator Application</a></li>
                           <li><a href="#/meta">Meta</a></li>
                         </ul>
                     </div>
@@ -164,7 +165,7 @@
                         <h2>Stash</h2>
                         <ul>
                           <li><a href="#/stash">Stash</a></li>
-                          <li><a href="#/game-library">Game Library</a></li>
+                          <li><a href="#/chest">Chest</a></li>
                         </ul>
                     </div>
                     <div class="col">
@@ -183,7 +184,6 @@
                     </div>
                 </div>
             </c-block>
-        </div>
     </c-layout>
 </template>
 

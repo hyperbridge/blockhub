@@ -1,8 +1,6 @@
 <template>
     <c-layout navigationKey="help" :showLeftPanel="false" :showRightPanel="false">
-        <div class="content" id="content">
-            <div class="container-fluid">
-                <div class="row">
+        <div class="row">
                     <div class="col-12 mb-4">
                         <h1>Privacy Policy for <span class="highlight preview_company_name">BlockHub</span>
                         </h1>
@@ -169,8 +167,6 @@
 
                     </div>
                 </div>
-            </div>
-        </div>
     </c-layout>
 </template>
 

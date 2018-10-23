@@ -8,11 +8,12 @@
             </div>
         </div>
         <div class="collection-list__container">
-            <c-swiper :options="options" class="padding-10">
+            <c-swiper :options="options" class="padding-10" v-if="collections.length">
                 <c-slide v-for="(collection, index) in collections" :key="index">
                     <c-collection-item :item="collection" />
                 </c-slide>
             </c-swiper>
+            <p v-if="!collections.length" style="padding: 20px; text-align: center;">No collections yet.</p>
         </div>
     </div>
 </template>
@@ -38,6 +39,12 @@
                     pagination: {
                         el: '.collection-swiper-pagination',
                         clickable: true
+                    },
+                    breakpoints: {
+                        768: {
+                            slidesPerView: 1,
+                            spaceBetween: 0
+                        },
                     }
                 }
             }
@@ -69,6 +76,17 @@
     }
     .collection-list__container{
         margin: 0px -10px -10px;
+    }
+    @media (max-width: 768px) {
+        .collection-list__header{
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+            text-align: center;
+            .slider-dots{
+                margin: 10px 0 0;
+            }
+        }
     }
 </style>
 

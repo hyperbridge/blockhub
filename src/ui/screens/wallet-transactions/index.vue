@@ -1,7 +1,5 @@
 <template>
     <c-layout navigationKey="account">
-        <!-- PAGE CONTENT CONTAINER -->
-        <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
@@ -186,8 +184,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- //END PAGE CONTENT CONTAINER -->
     </c-layout>
 </template>
 

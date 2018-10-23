@@ -18,7 +18,7 @@
             <c-sidebar-menu-link
                 v-for="param in ['Action', 'Adventure', 'RPG', 'Co-op', 'Multiplayer', 'Sports']"
                 :key="param"
-                :to="{ name: 'Search Page', query: { tags: param } }"
+                :to="{ name: 'Search', query: { tags: param } }"
             >
                 {{ param }}
             </c-sidebar-menu-link>
@@ -73,14 +73,14 @@
             </div>
             <div class="action">
                 <router-link
-                    :to="{ name: 'Search Page', query }"
+                    :to="{ name: 'Search', query }"
                     class="btn btn-filter"
                 >
                     Search
                 </router-link>
                 <router-link
                     :to="{
-                        name: 'Search Page',
+                        name: 'Search',
                         query: { showFilters: true }
                     }"
                     class="btn btn-link"
@@ -147,7 +147,7 @@
             },
             goToSearchPage() {
                 this.$router.push({
-                    name: 'Search Page',
+                    name: 'Search',
                     query: this.query
                 });
             }

@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false">
+    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false" :breadcrumbLinks="false">
         <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
@@ -51,7 +51,7 @@
 
 
 <script>
-    import * as DesktopBridge from '@/framework/desktop-bridge'
+    import * as Bridge from '@/framework/desktop-bridge'
 
     export default {
         components: {
@@ -64,7 +64,7 @@
                 this.$router.push('/')
             },
             importAccountFile() {
-                DesktopBridge.sendCommand('importAccountFileRequest')
+                Bridge.sendCommand('importAccountFileRequest')
             }
         }
     }

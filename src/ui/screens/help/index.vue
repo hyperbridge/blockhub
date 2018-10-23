@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="help">
-        <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-12 text-center">
@@ -68,23 +67,25 @@
                             </div>
                         </c-block>
                     </div>
-                    <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                         <c-card class="text-center">
                             <h4 class="h2">Community</h4>
                             <p>Engage with a community of passionate experts to get the answers you need</p>
-                            <c-button icon_hide class="width-auto margin-top-10" href="https://github.com/hyperbridge/blockhub-desktop-client" target="_blank">Visit GitHub</c-button>
+                            <c-button icon_hide class="width-auto margin-top-10" href="https://github.com/hyperbridge/blockhub-desktop-client"
+                                      target="_blank">Visit GitHub
+                            </c-button>
                         </c-card>
                     </div>
-                    <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                         <c-card class="text-center">
                             <h4 class="h2">BlockHub Support</h4>
                             <p>Create a support ticket and our support experts will get back to you</p>
-                            <c-button status="info" icon_hide class="width-auto margin-top-10">Create a ticket</c-button>
+                            <c-button href="https://hyperbridge.zendesk.com/" status="info" icon_hide class="width-auto margin-top-10">Create a ticket
+                            </c-button>
                         </c-card>
                     </div>
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 
@@ -132,6 +133,12 @@
         flex-wrap: wrap;
         div{
             width: calc( 100%/4 );
+            @media (max-width: 1024px){
+                width: calc( 100%/3 );
+            }
+            @media (max-width: 767px){
+                width: calc( 100%/2 );
+            }
         }
     }
     .simple-list{

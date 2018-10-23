@@ -69,7 +69,7 @@ export default {
     position: fixed;
     right: 55px;
     bottom: 20px;
-    background: rgba(42, 43, 68, 0.7);
+    background: #1c1d30;
     color: #fff;
     box-shadow: 0 3px 6px rgba(0, 0, 0, .13);
     border-radius: 5px;
@@ -78,5 +78,15 @@ export default {
     align-items: center;
     z-index: 999;
     justify-content: space-between;
+    @media (max-width: 1400px) {
+        right: 15px;
+        bottom: 15px;
+    }
+    @media (max-width: 767px) {
+        right: 0;
+        left: 0;
+        bottom: 0;
+        border-radius: 0;
+    }
 }
 </style>

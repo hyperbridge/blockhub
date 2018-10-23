@@ -1,14 +1,7 @@
 <template>
     <c-layout navigationKey="store">
-        <div class="content" id="content">
             <div class="container-fluid">
                 <div class="col-12">
-                    <c-breadcrumb :links="[
-                            { to: { path: '/' }, title: 'Home' },
-                            { to: { path: '/community' }, title: 'Community' },
-                            { to: { path: `/community/forum/{id}` }, title: 'Forum' },
-                            { to: { path: `/community/forum/{id}` }, title: post.title }
-                        ]" />
                     <div class="community-wrapper">
 
                         <c-item :post="post"/>
@@ -28,7 +21,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 

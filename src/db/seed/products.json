@@ -143,7 +143,6 @@
         "community": {
             "discussions": []
         },
-        "name_url": "might-&-magic-heroes-vi-4896",
         "crowdfund": true,
         "state_tag": "trending",
         "followers": 591,
@@ -252,7 +251,6 @@
         "community": {
             "discussions": []
         },
-        "name_url": "capsized-5004",
         "crowdfund": false,
         "state_tag": "trending",
         "followers": 163,
@@ -394,7 +392,6 @@
         "community": {
             "discussions": []
         },
-        "name_url": "doom-20087",
         "crowdfund": false,
         "state_tag": "trending",
         "followers": 91,
@@ -511,7 +508,6 @@
         "community": {
             "discussions": []
         },
-        "name_url": "a-game-of-thrones---genesis-4221",
         "followers": 591,
         "players": 12
     },
@@ -719,7 +715,6 @@
         "community": {
             "discussions": []
         },
-        "name_url": "teeworlds-20137",
         "followers": 9037,
         "players": 101
     },
@@ -866,8 +861,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "wargame-european-escalation-4226"
+        }
     },
     {
         "id": 7,
@@ -992,8 +986,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "arcania-4380"
+        }
     },
     {
         "id": 8,
@@ -1100,8 +1093,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "pride-of-nations-4591"
+        }
     },
     {
         "id": 9,
@@ -1240,8 +1232,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "car-mechanic-simulator-2015-demo-20147"
+        }
     },
     {
         "id": 10,
@@ -1384,8 +1375,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "kingdom-come-deliverance-20030"
+        }
     },
     {
         "id": 11,
@@ -1549,8 +1539,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "fishing-planet-20121"
+        }
     },
     {
         "id": 12,
@@ -1675,8 +1664,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "men-of-war-assault-squad-4305"
+        }
     },
     {
         "id": 13,
@@ -1801,8 +1789,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "sniper-elite-v2-4275"
+        }
     },
     {
         "id": 14,
@@ -1907,8 +1894,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "chime-4259"
+        }
     },
     {
         "id": 15,
@@ -1992,8 +1978,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "who's-that-flying!-4190"
+        }
     },
     {
         "id": 16,
@@ -2093,8 +2078,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "fallout-new-vegas-dead-money-4513"
+        }
     },
     {
         "id": 17,
@@ -2197,8 +2181,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "fallout-new-vegas-honest-hearts-4514"
+        }
     },
     {
         "id": 18,
@@ -2310,8 +2293,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "call-of-duty%C2%AE-black-ops-4930"
+        }
     },
     {
         "id": 19,
@@ -2431,8 +2413,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "homefront-4059"
+        }
     },
     {
         "id": 21,
@@ -2573,8 +2554,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "mafia-ii-4001"
+        }
     },
     {
         "id": 22,
@@ -2746,7 +2726,6 @@
         "community": {
             "discussions": []
         },
-        "name_url": "the-witcher-2-assassins-of-kings-enhanced-edition-4664",
         "steam_id": 20920
     },
     {
@@ -2877,8 +2856,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "dungeon-defenders-4398"
+        }
     },
     {
         "id": 24,
@@ -2992,8 +2970,7 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "worms-ultimate-mayhem-4439"
+        }
     },
     {
         "id": 25,
@@ -3139,7 +3116,6 @@
         "assets": [],
         "community": {
             "discussions": []
-        },
-        "name_url": "saints-row-the-third-4089"
+        }
     }
 ]

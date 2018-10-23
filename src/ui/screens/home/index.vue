@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="store">
-        <div class="content" id="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 mb-4">
@@ -22,17 +21,19 @@
                     <div class="col-12 mb-4" v-if="!desktop_mode">
                         <c-welcome-box />
                     </div>
-                    <div class="col-12 mb-4" v-if="['preview', 'staging', 'local'].includes(mode)">
+                    <div class="col-12 mb-4" v-if="showPreviewPanel">
                         <div class="card invert">
                             <div class="card-body">
                                 <h4>Play around with the future of BlockHub:</h4>
                                 <div>
-                                    <c-button @click="toggleSimulator()">Simulator is {{ simulator_mode ? 'ON' : 'OFF' }}</c-button>
-                                    <c-button @click="toggleDesktopMode()">Desktop Mode is {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="rotateOperatingSystem()">Operating System {{ operating_system === 'mac' ? 'MAC' : (operating_system === 'windows' ? 'WINDOWS' : 'LINUX' ) }}</c-button>
+                                    <c-button @click="rotateEnvironmentMode()">Environment Mode {{ environment_mode.toUpperCase() }}</c-button>
                                     <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button>
-                                    <c-button @click="toggleDeveloperMode()">Developer Mode is {{ developer_mode ? 'ON' : 'OFF' }}</c-button>
-                                    <c-button @click="rotateOperatingSystem()">Operating System is {{ operating_system === 'mac' ? 'MAC' : (operating_system === 'windows' ? 'WINDOWS' : 'LINUX' ) }}</c-button>
-                                    <c-button @click="$store.state.application.account.is_verified = !$store.state.application.account.is_verified">Account is {{ $store.state.application.account.is_verified ? 'VERIFIED' : 'NOT VERIFIED' }}</c-button>
+                                    <c-button @click="$store.state.application.account.is_verified = !$store.state.application.account.is_verified">Account {{ $store.state.application.account.is_verified ? 'VERIFIED' : 'NOT VERIFIED' }}</c-button>
+                                    <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="rotateEditorMode()">Editor Mode {{ $store.state.application.editor_mode.toUpperCase() }}</c-button>
+                                    <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button>
                                     <br /><br />
                                 </div>
                                 <div>
@@ -75,7 +76,20 @@
 
                 <c-infinite-content :list="list" />
             </div>
-        </div>
+
+            <c-custom-modal title="Welcome" v-if="showWelcomeModal" @close="closeModal">
+                <div class="help-modal__content" slot="modal_body" style="max-width: 500px">
+                    <h4 class="h2 mb-3">BlockHub Preview</h4>
+                    <p>Welcome to the the nightly preview build of BlockHub. All features are enabled, with or without bugs. Gotta catch 'em all! 🐛</p>
+                    <p>These features are still in active development, and may not functional properly and may not make it into production.</p>
+                    <p>Enjoy your stay, and send us your feedback!</p>
+                    <p hidden>We're a platform built by the community, for the community.</p>
+                    <p hidden><a href="/#/help" target="_blank">Check out the BlockHub crowdfund</a></p>
+                </div>
+                <div slot="modal_footer" class="text-right w-100">
+                    <c-button size="md" @click="closeModal">Got it</c-button>
+                </div>
+            </c-custom-modal>
     </c-layout>
 </template>
 
@@ -97,11 +111,16 @@ const updateLandingImage = function() {
 
 export default {
     components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-        'c-infinite-content': (resolve) => require(['@/ui/components/infinite-content'], resolve),
         'c-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
+        'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
         'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve),
         'c-welcome-box': (resolve) => require(['@/ui/components/welcome-box'], resolve)
+    },
+    data() {
+        return {
+            showWelcomeModal: this.$store.state.application.environment_mode === 'preview',
+            showPreviewPanel: true //['preview', 'staging', 'local'].includes(BlockHub.environment_mode)
+        }
     },
     computed: {
         ...mapGetters({
@@ -116,7 +135,7 @@ export default {
                     data: this.$store.state.marketplace.frontpage_product
                 })
             }
-            if ( this.$store.state.marketplace.featured_products ) {
+            if ( this.$store.state.marketplace.featured_products.length ) {
                 result.push({
                     type: 'featured_product_gallery',
                     data: {
@@ -124,50 +143,50 @@ export default {
                         ref: 'featured_product_gallery_sl',
                         swiper: this.$refs.featured_product_gallery_sl && this.$refs.featured_product_gallery_sl.swiper,
                         products: this.$store.state.marketplace.featured_products,
-                        // slides:[
-                        //     {
-                        //         image:  {
-                        //             src:  this.$store.state.marketplace.featured_products[0].images.preview[0],
-                        //             position: 'center'
-                        //         },
-                        //         logo: {
-                        //             src:  this.$store.state.marketplace.featured_products[0].images.icon,
-                        //             position: 'left bottom',
-                        //             size: 'lg',
-                        //         },
-                        //         title:  this.$store.state.marketplace.featured_products[0].name,
-                        //         buttonText: 'Check it out',
-                        //         id:  this.$store.state.marketplace.featured_products[0].id
-                        //     },
-                        //     {
-                        //         image:  {
-                        //             src:  this.$store.state.marketplace.featured_products[1].images.preview[0],
-                        //             position: 'center'
-                        //         },
-                        //         logo: {
-                        //             src:  this.$store.state.marketplace.featured_products[1].images.icon,
-                        //             position: 'left bottom',
-                        //             size: 'lg',
-                        //         },
-                        //         title:  this.$store.state.marketplace.featured_products[1].name,
-                        //         buttonText: 'Check it out',
-                        //         id:  this.$store.state.marketplace.featured_products[1].id
-                        //     },
-                        //     {
-                        //         image:  {
-                        //             src:  this.$store.state.marketplace.featured_products[2].images.preview[0],
-                        //             position: 'center'
-                        //         },
-                        //         logo: {
-                        //             src:  this.$store.state.marketplace.featured_products[2].images.icon,
-                        //             position: 'left bottom',
-                        //             size: 'lg',
-                        //         },
-                        //         title:  this.$store.state.marketplace.featured_products[2].name,
-                        //         buttonText: 'Check it out',
-                        //         id:  this.$store.state.marketplace.featured_products[2].id
-                        //     }
-                        // ]
+                        slides:[
+                            {
+                                image:  {
+                                    src:  this.$store.state.marketplace.featured_products[0].images.preview[0],
+                                    position: 'center'
+                                },
+                                logo: {
+                                    src:  this.$store.state.marketplace.featured_products[0].images.icon,
+                                    position: 'left bottom',
+                                    size: 'lg',
+                                },
+                                title:  this.$store.state.marketplace.featured_products[0].name,
+                                buttonText: 'Check it out',
+                                id:  this.$store.state.marketplace.featured_products[0].id
+                            },
+                            {
+                                image:  {
+                                    src:  this.$store.state.marketplace.featured_products[1].images.preview[0],
+                                    position: 'center'
+                                },
+                                logo: {
+                                    src:  this.$store.state.marketplace.featured_products[1].images.icon,
+                                    position: 'left bottom',
+                                    size: 'lg',
+                                },
+                                title:  this.$store.state.marketplace.featured_products[1].name,
+                                buttonText: 'Check it out',
+                                id:  this.$store.state.marketplace.featured_products[1].id
+                            },
+                            {
+                                image:  {
+                                    src:  this.$store.state.marketplace.featured_products[2].images.preview[0],
+                                    position: 'center'
+                                },
+                                logo: {
+                                    src:  this.$store.state.marketplace.featured_products[2].images.icon,
+                                    position: 'left bottom',
+                                    size: 'lg',
+                                },
+                                title:  this.$store.state.marketplace.featured_products[2].name,
+                                buttonText: 'Check it out',
+                                id:  this.$store.state.marketplace.featured_products[2].id
+                            }
+                        ]
                     }
                 })
             }
@@ -196,7 +215,7 @@ export default {
                     banners: [
                         {
                             type: 3,
-                            class: 'col-12 col-md-8',
+                            class: 'col-12 col-md-7 col-lg-8',
                             image: '/static/img/banners/banner-3.png',
                             title: 'Item Marketplace',
                             subtitle: 'All-in-one spot for games assets',
@@ -205,7 +224,7 @@ export default {
                         },
                         {
                             type: 4,
-                            class: 'col-12 col-md-4',
+                            class: 'col-12 col-md-5 col-lg-7',
                             image: '/static/img/banners/banner-4.png',
                             title: 'Top Collections',
                             subtitle: 'Our community has curated the best ones for you',
@@ -244,7 +263,13 @@ export default {
                     swiper: this.$refs.curator_reviews_sl && this.$refs.curator_reviews_sl.swiper,
                     options: {
                         slidesPerView: 3,
-                        spaceBetween: 0
+                        spaceBetween: 0,
+                        breakpoints: {
+                            768: {
+                                slidesPerView: 1,
+                                spaceBetween: 0
+                            },
+                        }
                     },
                     reviews: this.$store.state.marketplace.curator_reviews
                 }
@@ -285,6 +310,12 @@ export default {
                     options: {
                         slidesPerView: 3,
                         spaceBetween: 15,
+                        breakpoints: {
+                            768: {
+                                slidesPerView: 1,
+                                spaceBetween: 0
+                            },
+                        }
                     },
                     projects: this.$store.state.funding.trending_projects
                 }
@@ -306,9 +337,6 @@ export default {
 
         //     return this.$store.state.marketplace.products
         // },
-        mode() {
-            return this.$store.state.application.mode
-        },
         signed_in() {
             return this.$store.state.application.signed_in
         },
@@ -323,6 +351,9 @@ export default {
         },
         operating_system() {
             return this.$store.state.application.operating_system
+        },
+        environment_mode() {
+            return this.$store.state.application.environment_mode
         }
     },
     methods: {
@@ -332,11 +363,23 @@ export default {
         toggleSignedIn() {
             this.$store.state.application.signed_in = !this.$store.state.application.signed_in
         },
+        toggleDeveloper() {
+            this.$store.state.application.is_developer = !this.$store.state.application.is_developer
+        },
         toggleDeveloperMode() {
             this.$store.state.application.developer_mode = !this.$store.state.application.developer_mode
         },
         toggleSimulator() {
             this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulator_mode)
+        },
+        rotateEditorMode() {
+            if (this.$store.state.application.editor_mode === 'editing') {
+                this.$store.state.application.editor_mode = 'viewing'
+            } else if (this.$store.state.application.editor_mode === 'viewing') {
+                this.$store.state.application.editor_mode = 'publishing'
+            } else {
+                this.$store.state.application.editor_mode = 'editing'
+            }
         },
         rotateOperatingSystem() {
             if (this.$store.state.application.operating_system === 'mac') {
@@ -345,6 +388,19 @@ export default {
                 this.$store.state.application.operating_system = 'linux'
             } else {
                 this.$store.state.application.operating_system = 'mac'
+            }
+        },
+        rotateEnvironmentMode() {
+            if (this.$store.state.application.environment_mode === 'production') {
+                this.$store.state.application.environment_mode = 'staging'
+            } else if (this.$store.state.application.environment_mode === 'staging') {
+                this.$store.state.application.environment_mode = 'beta'
+            } else if (this.$store.state.application.environment_mode === 'beta') {
+                this.$store.state.application.environment_mode = 'preview'
+            } else if (this.$store.state.application.environment_mode === 'preview') {
+                this.$store.state.application.environment_mode = 'local'
+            } else {
+                this.$store.state.application.environment_mode = 'production'
             }
         },
         importSeedData() {
@@ -359,13 +415,16 @@ export default {
         resetSettings() {
             window.resetSettings()
         },
+        closeModal() {
+            this.showWelcomeModal = false
+        },
         sendDesktopMessage() {
             if (!window.isElectron) {
                 return alert('Not on desktop')
             }
 
-            window.desktopBridge.send('ping', this.$refs.desktopMessage.value)
-            window.desktopBridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
+            BlockHub.Bridge.sendCommand('ping', this.$refs.desktopMessage.value)
+            BlockHub.Bridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
         }
     },
     mounted() {

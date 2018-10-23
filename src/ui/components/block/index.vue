@@ -19,7 +19,7 @@
             </template>
         </c-heading-bar>
         <slot name="title"/>
-        <div class="block__content">
+        <div class="block__content" :class="{'no-padding': noPadding }">
             <slot></slot>
         </div>
     </div>
@@ -43,6 +43,10 @@
                 default: false
             },
             onlyContentBg: {
+                type: Boolean,
+                default: false
+            },
+            noPadding: {
                 type: Boolean,
                 default: false
             }
@@ -99,6 +103,9 @@
     }
     .block__content{
         width: 100%;
+        &.no-padding{
+            padding: 0 !important;
+        }
     }
 </style>
 

@@ -120,32 +120,39 @@ export const promptPasswordRequest = async (data) => {
 
 export const setAccountRequest = async (data) => {
     return new Promise(async (resolve) => {
+
+        if (data.account.public_address) {
+            local.store.commit('application/activateModal', null)
+
+            // We were locked
+            if (DB.application.config.data[0].locked) {
+                local.router.push('/')
+            }
+
+            local.store.commit('application/updateState', {
+                locked: false,
+                signed_in: true
+            })
+        } else {
+            local.store.commit('application/activateModal', null)
+
+            local.router.push('/welcome')
+            
+            local.store.commit('application/updateState', {
+                locked: true,
+                signed_in: false
+            })
+        }
+
         DB.application.config.data[0].account = {
             ...DB.application.config.data[0].account,
             ...data.account
         }
 
+        DB.application.config.data[0].developer_mode = !!data.account.identities.find(identity => identity.developer_id !== undefined)
+
+
         DB.save()
-
-        if (data.account.public_address) {
-            local.store.commit('application/updateState', {
-                locked: false,
-                signed_in: true
-            })
-
-            local.store.commit('application/activateModal', null)
-
-            local.router.push('/')
-        } else {
-            local.store.commit('application/updateState', {
-                locked: true,
-                signed_in: false
-            })
-
-            local.store.commit('application/activateModal', null)
-
-            local.router.push('/welcome')
-        }
 
         resolve()
     })
@@ -153,7 +160,7 @@ export const setAccountRequest = async (data) => {
 
 export const sendCommand = async (key, data = {}, peer = null, responseId = null) => {
     if (!isConnected()) {
-        console.log('[DesktopBridge] Cant send command. Reason: not connected to desktop app', key)
+        console.log('[Bridge] Cant send command. Reason: not connected to desktop app', key)
 
         // Ignore startup commands
         if (key !== 'initProtocol') {
@@ -170,10 +177,10 @@ export const sendCommand = async (key, data = {}, peer = null, responseId = null
         data: data
     }
 
-    console.log('[DesktopBridge] Sending command', cmd)
+    console.log('[Bridge] Sending command', cmd)
 
     if (!local.bridge) {
-        console.warn('[DesktopBridge] Not connected to bridge. This shouldnt happen.')
+        console.warn('[Bridge] Not connected to bridge. This shouldnt happen.')
     }
 
     let _resolve, _reject
@@ -192,14 +199,14 @@ export const sendCommand = async (key, data = {}, peer = null, responseId = null
 }
 
 export const runCommand = async (cmd, meta = {}) => {
-    console.log('[DesktopBridge] Running command', cmd.key)
+    console.log('[Bridge] Running command', cmd.key)
 
     return new Promise(async (resolve, reject) => {
         emit(cmd.key, cmd.data ? cmd.data : undefined)
 
         if (cmd.responseId) {
             if (local.requests[cmd.responseId]) {
-                console.log('[DesktopBridge] Running response callback', cmd.responseId)
+                console.log('[Bridge] Running response callback', cmd.responseId)
 
                 local.requests[cmd.responseId].resolve(cmd.data)
 
@@ -210,7 +217,7 @@ export const runCommand = async (cmd, meta = {}) => {
         }
 
         if (cmd.key === 'heartbeat') {
-            console.log('[DesktopBridge] Heartbeat')
+            console.log('[Bridge] Heartbeat')
 
             setTimeout(() => {
                 sendCommand('heartbeat', 1)
@@ -222,8 +229,8 @@ export const runCommand = async (cmd, meta = {}) => {
         } else if (cmd.key === 'setProtocolConfig') {
             const { currentNetwork, protocolName, config } = cmd.data
         
-            local.store.state[protocolName].ethereum[currentNetwork] = config
-            local.store.dispatch(protocolName + '/updateState')
+            local.store.state.application.ethereum[currentNetwork].packages[protocolName] = config
+            local.store.dispatch('application/updateState')
         } else if (cmd.key === 'setAccountRequest') {
             const res = await setAccountRequest(cmd.data)
 
@@ -245,16 +252,23 @@ export const runCommand = async (cmd, meta = {}) => {
 
             await sendCommand('quitAndInstall')
         } else if (cmd.key === 'systemError') {
-            console.warn('[DesktopBridge] Received system error from desktop', cmd.data)
+            console.warn('[Bridge] Received system error from desktop', cmd.data)
 
-            BlockHub.Notifications.error(cmd.data, 'Desktop Error', {
+            BlockHub.Notifications.error(cmd.data, 'System Error', {
                 timeout: 5000,
                 pauseOnHover: true
             })
+
+            // Don't let promise callbacks get stuck
+            for(let i in local.requests) {
+                local.requests[i].reject()
+
+                delete local.requests[i]
+            }
         } else if (cmd.key === 'navigate') {
             local.router.push(cmd.data)
         } else {
-            console.warn('[DesktopBridge] Unhandled command:', cmd)
+            console.warn('[Bridge] Unhandled command:', cmd)
 
             return reject()
         }
@@ -265,7 +279,7 @@ export const runCommand = async (cmd, meta = {}) => {
 
 export const initCommandMonitor = () => {
     local.bridge.on('command', (event, msg) => {
-        console.log('[DesktopBridge] Received command from desktop', msg)
+        console.log('[Bridge] Received command from desktop', msg)
 
         const cmd = JSON.parse(msg)
 
@@ -315,12 +329,12 @@ export const init = (store, router) => {
     local.bridge = window.desktopBridge
 
     if (!isConnected()) {
-        console.log('[DesktopBridge] Not initializing. Reason: not connected to desktop app')
+        console.log('[Bridge] Not initializing. Reason: not connected to desktop app')
 
         return false
     }
 
-    console.log('[DesktopBridge] Initializing')
+    console.log('[Bridge] Initializing')
 
     sendCommand('init', 1)
 

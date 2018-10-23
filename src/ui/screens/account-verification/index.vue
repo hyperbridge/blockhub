@@ -7,62 +7,79 @@
                         <c-tab name="Account Verification" :selected="true" :showFooter="true">
                             <div class="tab-container">
                                 <div class="tab-card padding-20" v-if="is_verified">
-                                    <p>Your account has been verified!</p>
-                                    <p>You can request approval for your profiles below.</p>
+                                    <p>Your account has been verified. You can request approval for additional profiles below.</p>
 
-                                    <div
-                                        class="profile-picker__profile"
-                                        v-for="identity in identities"
-                                        :key="identity.id"
-                                    >
-                                        <c-user-card
-                                            :user="identity"
-                                            :previewMode="true"
-                                            :class="{ 'default': identity.chosen }"
-                                        />
-                                        <div class="profile__action">
-                                            <c-button
-                                                status="info"
-                                                icon="check"
-                                                @click="chooseIdentity(identity)"
-                                                v-if="!identity.chosen"
-                                            >Choose</c-button>
+                                    <div class="profile-picker">
+                                        <div
+                                            class="profile-picker__profile"
+                                            v-for="identity in identities"
+                                            :key="identity.id"
+                                        >
+                                            <c-user-card
+                                                :user="identity"
+                                                :previewMode="true"
+                                                :class="{ 'default': identity.chosen }"
+                                            />
+                                            <div class="profile__action">
+                                                <c-button
+                                                    status="info"
+                                                    icon="check"
+                                                    @click="chooseIdentity(identity)"
+                                                    v-if="!identity.chosen"
+                                                >Choose</c-button>
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <br />
 
                                     <c-button @click="verifyIdentity">
                                         Send Verification Request
                                     </c-button>
                                 </div>
                                 <div class="tab-card padding-20" v-if="is_verifying">
-                                    <p>Your account is undergoing verification!</p>
-                                    <p v-if="!been1hour">Something wrong? You can submit again in 1 hour</p>
-                                    <p v-if="been1hour">Something wrong? <c-button @click="overrideForm">Show Form</c-button></p>
+                                    <div class="col-12 mb-4 text-center">
+                                        <h2><img src="/static/img/success.png" style="max-width: 40px;" /> Account Verification Requested</h2>
+                                        <p>Account is undergoing verification. You can now close this browser tab.</p>
+                                        <br />
+                                        <p v-if="!been1hour">Something wrong? You can submit again in 1 hour</p>
+                                        <p v-if="been1hour">Something wrong? <c-button @click="overrideForm">Show Form</c-button></p>
+                                    </div>
                                 </div>
-                                <div class="tab-card padding-20" v-if="!(is_verified || is_verifying) || !manual_override">
+                                <div class="tab-card padding-20" v-if="!(is_verified || is_verifying) || been1hour || manual_override">
                                     <div v-if="!verificationLink">
                                         <p>
-                                            Submit proof of identity for KYC by providing your legal name, country of residence, and documentation.<br />
-                                            KYC means Know Your Customer. BlockHub is required by law to collect this information so that we know the source of money (money laundering prevention). This is important particularly because we're working with cryptocurrencies, with unknown account holders.
+                                            Submit proof of identity for KYC by providing your legal name, country of residence, and documentation.<br /><br />
+                                            KYC stands for Know Your Customer. BlockHub is required by law to collect this information so that we know the source of money and comply with anti-money laundering laws by assessing potential risks of illegal intentions. As we are handling cryptocurrencies, account holders are entirely unknown, and we want to be very safe by following strict KYC procedure. We do anticipate these procedures can be relaxed post-launch, and will work with our lawyers on that, as our token represents the same utility as many existing point systems.<br /><br />
+                                            Please fill in the fields below. Afterward you will be taken to our partner Veriff to complete your identity verification. You will need to use the same information as you've used here.<br /><br />
+                                            <strong>Disclaimer:</strong> We're working with our lawyers in multiple jurisdictions to determine which countries can purchase. As of this moment we know for certain these countries cannot participate: China, Canada. We're very sorry and hope we can extend support worldwide in the future.
                                         </p>
-                                        <p>Please fill in the fields below. Afterward you will be taken to our partner Veriff to complete your identity verification. You will need to use the same information as you've used here.</p>
                                         <br /><br />
 
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label class="sr-only">First Name</label>
-                                                    <input type="text" class="form-control" placeholder="First Name"
+                                                    <label class="sr-only">Given Name</label>
+                                                    <input type="text" class="form-control" placeholder="Given Name"
                                                             name="first_name" v-model="first_name">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label class="sr-only">Last Name</label>
-                                                    <input type="text" class="form-control" placeholder="Last Name"
+                                                    <label class="sr-only">Family Name</label>
+                                                    <input type="text" class="form-control" placeholder="Family Name"
                                                             name="last_name" v-model="last_name">
                                                 </div>
                                             </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label class="sr-only">E-mail</label>
+                                                    <input type="text" class="form-control" placeholder="E-mail"
+                                                            name="email" v-model="email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Document Type</label>
@@ -140,7 +157,7 @@
         data() {
             const account = this.$store.state.application.account
 
-            let been1hour = true
+            let been1hour = false
 
             if (account.verification_timestamp) {
                 been1hour = (Math.abs(new Date() - new Date(account.verification_timestamp)) / 36e5) > 1
@@ -154,6 +171,7 @@
                 been1hour: been1hour,
                 document_type: '',
                 document_number: '',
+                email: account.email,
                 first_name: account.first_name,
                 last_name: account.last_name,
                 public_address: account.public_address,
@@ -175,11 +193,14 @@
             verifyIdentity() {
                 // send a contract call
                 // encrypt identity with the secret answer #2
+                // manual override for now lol
+                this.manual_override = true
             },
             verifyAccount() {
                 if (
                     this.first_name
                     && this.last_name
+                    && this.email
                     && this.document_type
                     && this.document_number
                     && this.public_address
@@ -195,7 +216,7 @@
                             },
                             additionalData: {
                                 eth: this.public_address,
-                                email: this.account.email,
+                                email: this.email,
                                 secret: this.account.secret_answer_2,
                                 identity: this.account.current_identity && this.account.current_identity.public_address
                             },
@@ -208,7 +229,7 @@
                         url: 'https://magic.veriff.me/v1/sessions',
                         data: data,
                         headers: {
-                            'x-auth-client': 'ceba96be-5fd6-48ed-87d6-e5aaf80f9718',
+                            'x-auth-client': 'a5464742-28a4-42d0-8105-4ef414341214',
                             'Accept': 'application/json, text/plain, */*'
                         }
                     })
@@ -277,6 +298,61 @@
     p {
         font-size: 14px;
         line-height: 18px;
+    }
+
+
+    .profile-picker {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-picker__profile {
+        position: relative;
+        margin: 10px 2%;
+        width: 46%;
+        &:hover .profile__action, &.edit .profile__action {
+            display: flex;
+        }
+        >.default {
+            $defColor: #43C981;
+            border-color: $defColor !important;
+            &:before {
+                content: "";
+                width: 26px;
+                position: absolute;
+                border-radius: 5px 0 0 5px;
+                left: -22px;
+                bottom: -1px;
+                height: calc(100% + 2px);
+                background: $defColor;
+            }
+            &:after {
+                font-family: 'Font Awesome 5 Free', 'Barlow', sans-serif;
+                content: "CHOSEN \F14A";
+                color: #1C2032;
+                font-weight: bold;
+                font-size: 16px;
+                position: absolute;
+                transform: rotate(-90deg);
+                top: 40px;
+                left: -50px;
+            }
+        }
+    }
+
+    .profile__action {
+        display: none;
+        position: absolute;
+        justify-content: center;
+        bottom: -20px;
+        width: 100%;
+        height: 26px;
+        .c-btn {
+            margin: 0 5px;
+        }
     }
 
 </style>

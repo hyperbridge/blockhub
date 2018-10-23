@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import router from '../router'
 import * as DB from '../db'
 import * as ChaosMonkey from '../framework/chaos-monkey'
-import * as DesktopBridge from '../framework/desktop-bridge'
+import * as Bridge from '../framework/desktop-bridge'
 import * as funding from '../modules/funding'
 import * as news from '../modules/news'
 import * as marketplace from '../modules/marketplace'
@@ -112,6 +112,7 @@ const store = new Vuex.Store({
 });
 
 
+window.BlockHub.Bridge = Bridge
 window.BlockHub.ChaosMonkey = ChaosMonkey
 window.BlockHub.store = store
 window.BlockHub.DB = DB
@@ -122,7 +123,9 @@ window.BlockHub.importSeedData = () => {
     if (!DB.application.config.data[0].account.public_address) {
         DB.application.config.data[0].account.wallets = seed.wallets
         DB.application.config.data[0].account.identities = seed.identities
-        DB.application.config.data[0].account.current_identity = seed.identities[0]
+        DB.application.config.data[0].account.current_identity = {
+            id: seed.identities[0].id
+        }
     }
 
     DB.application.config.data[0].account.is_verified = true
@@ -149,7 +152,7 @@ window.BlockHub.resetSeedData = () => {
     if (!DB.application.config.data[0].account.public_address) {
         DB.application.config.data[0].account.wallets = []
         DB.application.config.data[0].account.identities = []
-        DB.application.config.data[0].account.current_identity = null
+        DB.application.config.data[0].account.current_identity = { id: null }
     }
 
     DB.application.config.data[0].account.is_verified = false
@@ -371,7 +374,7 @@ const monitorSimulatorMode = () => {
 // }
 
 
-const GetMode = () => {
+BlockHub.GetMode = () => {
     const hostname = window.location.hostname
     let hash = document.location.hash.replace('#/', '')
 
@@ -397,19 +400,19 @@ export let initializer = () => {
         //let initialized = false
 
         DB.setInitCallback(async () => {
-            store.state.application.mode = BlockHub.mode = GetMode()
-
+            console.log('DB init callback')
+            BlockHub.environment_mode = store.state.application.environment_mode
             // TODO: is this a race condition?
             //TODO: PeerService.init()
 
-            DesktopBridge.init(store, router)
+            Bridge.init(store, router)
 
             store.dispatch('database/init')
             store.dispatch('application/init')
             store.dispatch('marketplace/init')
             store.dispatch('funding/init')
 
-            if (store.state.application.mode === 'preview') {
+            if (store.state.application.environment_mode === 'preview') {
                 BlockHub.importSeedData()
 
                 store.state.application.desktop_mode = true

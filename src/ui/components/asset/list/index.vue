@@ -1,9 +1,14 @@
 <template functional>
-    <ul class="assets-list">
+    <transition-group
+        :name="props.transition ? 'assets-list' : 'no-transition'"
+        class="assets-list"
+        tag="ul"
+    >
         <li
             v-for="asset in props.assets"
             :key="asset.id"
             class="asset"
+            :class="{ 'asset--transitioned': props.transition }"
         >
             <div class="asset__info">
                 <c-img
@@ -33,7 +38,7 @@
                 </c-button>
             </div>
         </li>
-    </ul>
+    </transition-group>
 </template>
 
 <style lang="scss" scoped>
@@ -42,8 +47,16 @@
         margin: 0 0 50px 0;
         padding: 0;
     }
+    .assets-list-enter, .assets-list-leave-to {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    .assets-list-leave-active {
+        position: absolute;
+        width: calc(100% - 30px);
+    }
     .asset {
-        background: #343555;
+        background-color: #343555;
         padding: 10px;
         margin-bottom: 15px;
         border-radius: 5px;
@@ -53,6 +66,9 @@
         font-size: 14px;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         overflow: hidden;
+        &--transitioned {
+            transition: transform 1s, opacity 1s;
+        }
         .asset__user {
             display: block;
             transform: translateY(-50px);

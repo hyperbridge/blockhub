@@ -1,9 +1,6 @@
 <template>
     <c-layout>
-        <div class="content" id="content">
             <div class="container-fluid">  
-                
-                
                 <div class="form-row">
                     <div class="col-12 col-lg-3">
                         
@@ -667,7 +664,6 @@
                     </div>                            
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 

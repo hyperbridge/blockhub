@@ -1,7 +1,7 @@
 <template>
-    <div class="app-header slim-header desktop-draggable">
-        <div class="app-header__top-bar"></div>
-        <div class="app-header__bar-left">
+    <div class="app-header slim-header">
+        <div class="app-header__top-bar draggable"></div>
+        <div class="app-header__bar-left draggable">
             {{ title }}
         </div>
         <div class="app-header__bar-right">
@@ -32,8 +32,12 @@
 </script>
 
 <style>
-    .desktop-draggable {
+    .draggable {
         -webkit-app-region: drag;
+    }
+
+    .undraggable {
+        -webkit-app-region: no-drag;
     }
 </style>
 
@@ -77,7 +81,6 @@
         background-position: 5px 5px;
         border-radius: 0 0 13px 0;
         user-select: none;
-        -webkit-app-region: drag;
         &:after {
             content: "";
             border-style: solid;

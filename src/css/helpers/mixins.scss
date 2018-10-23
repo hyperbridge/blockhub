@@ -96,3 +96,20 @@
         @content;
     }
 }
+
+
+@mixin calendar {
+    .form-calendar {
+        background-color: #27273A !important;
+        border-color: rgba(255,255,255,.2) !important;
+        box-shadow: 0 0 15px rgba(1, 1, 1, .35);
+        .up:hover, .up:focus {
+            color: black !important;
+        }
+    }
+    .form-calendar__text, .form-calendar__text:focus {
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.4) inset;
+        border: none !important;
+        background-color: #303049 !important;
+    }
+}

@@ -1,6 +1,5 @@
 <template>
     <c-layout>
-        <div class="content" id="content">
             <div class="container">
                 <div class="col-12">
                     <h3>Pending - Harder, Better, Faster, Stronger</h3>
@@ -42,7 +41,6 @@
                     </ul>
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 

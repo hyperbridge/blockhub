@@ -31,6 +31,10 @@
             notification: {
                 type: Object,
                 required: true
+            },
+            icon: {
+                type: String,
+                require: false
             }
         },
         data() {

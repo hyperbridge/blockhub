@@ -1,6 +1,5 @@
 <template>
-    <c-layout navigationKey="store">
-        <div class="content" id="content">
+    <c-layout navigationKey="store" :defaultBreadcrumb="false">
             <div class="container-fluid">
                 <div class="row margin-bottom-50">
                     <div class="col-12 col-lg-8 col-xl-9">
@@ -31,7 +30,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 

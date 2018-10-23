@@ -1,64 +1,61 @@
 <template>
-    <header class="app-header desktop-draggable">
-        <div class="app-header__top-bar"></div>
-        <div class="position-relative w-100" style="margin-top: -10px">
+    <header class="app-header">
+        <div class="app-header__top-bar draggable"></div>
+        <div class="position-relative w-100" style="margin-top: -10px; zoom: 0.9;">
             <div class="app-header__bar-left">
-                <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'macos'">
-                    <a href="#" @click.prevent="closeWindow">&times;</a>
+                <div v-if="desktop_mode && operating_system === 'mac'" class="mac-icons">
+                    <a class="close_w" href="#" @click.prevent="closeWindow"></a>
+                    <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
+                    <a class="maximize" href="#" @click.prevent="maximizeWindow"></a>
                 </div>
-                <div class="app-header__minimize-button" v-if="desktop_mode && operating_system === 'macos'">
-                    <a href="#" @click.prevent="minimizeWindow">&ndash;</a>
+                <div v-if="desktop_mode && operating_system === 'linux'" class="linux-icons">
+                    <a class="close_w" href="#" @click.prevent="closeWindow"></a>
+                    <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
+                    <a class="maximize" href="#" @click.prevent="maximizeWindow"></a>
                 </div>
-                <div class="app-header__maximize-button" v-if="desktop_mode && operating_system === 'macos'">
-                    <a href="#" @click.prevent="maximizeWindow">+</a>
+                <div v-if="desktop_mode && operating_system === 'windows'">
+                    <a class="app-header__bar-left-link margin-right-0 margin-left-10" href="javascript:;" data-action="fixedpanel-toggle" v-if="!is_locked">
+                        <span class="fas fa-bars"></span>
+                    </a>
                 </div>
-                <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'windows'">
-                    <a href="#" @click.prevent="closeWindow">&times;</a>
+                <div v-if="!desktop_mode">
+                    <a class="app-header__bar-left-link" href="/#/">
+                        <span class="fa fa-home"></span>
+                    </a>
+                    <a class="app-header__bar-left-link" @click="$router.go(-1)">
+                        <span class="fa fa-arrow-left"></span>
+                    </a>
+                    <a class="app-header__bar-left-link" @click="$router.go(+1)">
+                        <span class="fa fa-arrow-right"></span>
+                    </a>
                 </div>
-                <div class="app-header__minimize-button" v-if="desktop_mode && operating_system === 'windows'">
-                    <a href="#" @click.prevent="minimizeWindow">&ndash;</a>
-                </div>
-                <div class="app-header__maximize-button" v-if="desktop_mode && operating_system === 'windows'">
-                    <a href="#" @click.prevent="maximizeWindow">+</a>
-                </div>
-                <div class="app-header__close-button" v-if="desktop_mode && operating_system === 'linux'">
-                    <a href="#" @click.prevent="closeWindow">&times;</a>
-                </div>
-                <div class="app-header__minimize-button" v-if="desktop_mode && operating_system === 'linux'">
-                    <a href="#" @click.prevent="minimizeWindow">&ndash;</a>
-                </div>
-                <div class="app-header__maximize-button" v-if="desktop_mode && operating_system === 'linux'">
-                    <a href="#" @click.prevent="maximizeWindow">+</a>
-                </div>
-                <a class="app-header__bar-left-link" href="/#/" v-if="!desktop_mode">
-                    <span class="fa fa-home"></span>
-                </a>
-                <a class="app-header__bar-left-link" @click="$router.go(-1)" v-if="!desktop_mode">
-                    <span class="fa fa-arrow-left"></span>
-                </a>
-                <a class="app-header__bar-left-link" @click="$router.go(+1)" v-if="!desktop_mode">
-                    <span class="fa fa-arrow-right"></span>
-                </a>
             </div>
-            <div class="app-header__shadow"></div>
+            <div class="app-header__shadow draggable"></div>
             <a class="app-header__bar-center" :href="is_locked ? '#' : '#/'">
                 <c-loading-logo :isLoading="isLoader" />
             </a>
             <div class="app-header__bar-right">
-                <a class="app-header__bar-left-link" href="javascript:;" id="sidebar_toggle_btn" data-action="fixedpanel-toggle" v-if="!is_locked">
-                    <span class="fa fa-cog"></span>
-                </a>
+                <div v-if="desktop_mode && operating_system === 'windows'" class="windows-icons margin-right-5">
+                    <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
+                    <a class="maximize" href="#" @click.prevent="maximizeWindow"></a>
+                    <a class="close_w" href="#" @click.prevent="closeWindow"></a>
+                </div>
+                <div v-else>
+                    <a class="app-header__bar-left-link" href="javascript:;" data-action="fixedpanel-toggle" v-if="!is_locked">
+                        <span class="fas fa-bars"></span>
+                    </a>
+                </div>
             </div>
             <div class="app-header__options" v-if="signed_in && developer_mode">
-                <button class="remove-btn btn btn-secondary btn-block btn--icon btn--icon-left" @click="clickRemove()" v-if="is_editing">
+                <button class="remove-btn btn btn-secondary btn-block btn--icon btn--icon-left" @click="clickRemove()" v-if="editor_mode !== 'viewing'">
                     <c-img src="data:image/png;base64,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" />
                     <p><span class="fa fa-trash"></span> Remove</p>
                 </button>
-                <button class="publish-btn btn btn-secondary btn-block btn--icon btn--icon-left" @click="clickPublish()" v-if="is_editing">
+                <button class="publish-btn btn btn-secondary btn-block btn--icon btn--icon-left" @click="clickPublish()" v-if="editor_mode !== 'viewing'">
                     <c-img src="data:image/png;base64,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" />
                     <p><span class="fa fa-check"></span> Publish</p>
                 </button>
-                <button class="exit-btn btn btn-secondary btn-block btn--icon btn--icon-left" @click="clickExit()" v-if="is_editing">
+                <button class="exit-btn btn btn-secondary btn-block btn--icon btn--icon-left" @click="clickExit()" v-if="editor_mode !== 'viewing'">
                     <p><span class="fa fa-eye"></span> Preview</p>
                 </button>
             </div>
@@ -89,9 +86,9 @@
                             </a>
                         </li>
                         <li v-if="signed_in">
-                            <a href="/#/stash">
+                            <a href="/#/chest">
                                 <span class="icon fa fa-box-open"></span>
-                                <span class="text">Stash</span>
+                                <span class="text">Chest</span>
                             </a>
                         </li>
                         <li v-if="signed_in">
@@ -130,7 +127,7 @@
                             <c-dropdown class="ml-4 account-menu" style="z-index: 12">
                                 <template slot="title">
                                     <div class="__title">
-                                        <i class="fa fa-user"></i> {{ current_identity.name }}
+                                        <i class="fa fa-user"></i> {{ current_identity && current_identity.name }}
                                     </div>
                                 </template>
                                 <ul class="item-dropdown">
@@ -224,6 +221,9 @@ export default {
         is_editing() {
             return this.$store.state.application.editor_mode === 'editing'
         },
+        editor_mode() {
+            return this.$store.state.application.editor_mode
+        },
         developer_mode() {
             return this.$store.state.application.developer_mode
         },
@@ -259,12 +259,12 @@ export default {
             this.show_menu = !this.show_menu
         },
         closeWindow() {
-            const { BrowserWindow } = window.require('electron').remote
+            const { BrowserWindow } = window.specialRequire('electron').remote
             let browserWindow = BrowserWindow.getFocusedWindow()
             browserWindow.close()
         },
         maximizeWindow() {
-            const { BrowserWindow } = window.require('electron').remote
+            const { BrowserWindow } = window.specialRequire('electron').remote
 
             let browserWindow = BrowserWindow.getFocusedWindow()
             if (browserWindow.isMaximized()) {
@@ -274,7 +274,7 @@ export default {
             }
         },
         minimizeWindow() {
-            const { BrowserWindow } = window.require('electron').remote
+            const { BrowserWindow } = window.specialRequire('electron').remote
             let browserWindow = BrowserWindow.getFocusedWindow()
             browserWindow.minimize()
         }
@@ -283,8 +283,12 @@ export default {
 </script>
 
 <style>
-    .desktop-draggable {
+    .draggable {
         -webkit-app-region: drag;
+    }
+
+    .undraggable {
+        -webkit-app-region: no-drag;
     }
 </style>
 
@@ -296,11 +300,9 @@ export default {
         background: #1C2032;
         padding: 10px;
         margin: 0 0 15px;
-        width: calc( 33% - 8px );
         box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
         display: flex;
         justify-content: space-between;
-        align-items: left;
         flex-direction: column;
         position: absolute;
         width: 170px;
@@ -522,100 +524,6 @@ export default {
         }
     }
 
-    .app-header__close-button {
-        background: #ff5c5c;
-        font-size: 17px;
-        line-height: 0;
-        width: 15px;
-        height: 15px;
-        margin-left: 6px;
-        margin-top: 5px;
-        padding-top: 5px;
-        border: 1px solid #e33e41;
-        border-radius: 50%;
-        display: inline-block;
-        text-align: center;
-        font-weight: bold;
-
-        a {
-            display: none;
-            color: #820005;
-        }
-
-        &:active, &:hover {
-            background: #c14645;
-            border: 1px solid #b03537;
-
-            a {
-                display: block;
-                color: #4e0002;
-            }
-        }
-    }
-
-    .app-header__minimize-button {
-        background: #ffbd4c;
-        font-size: 17px;
-        line-height: 0;
-        margin-left: 6px;
-        width: 15px;
-        height: 15px;
-        margin-top: 5px;
-        padding-top: 5px;
-        border: 1px solid #e09e3e;
-        border-radius: 50%;
-        display: inline-block;
-        text-align: center;
-        font-weight: bold;
-
-        a {
-            display: none;
-            color: #9a5518;
-        }
-
-        &:active, &:hover {
-            background: #c08e38;
-            border: 1px solid #af7c33;
-
-            a {
-                display: block;
-                color: #5a2607;
-            }
-        }
-    }
-
-
-    .app-header__maximize-button {
-        background: #00ca56;
-        font-size: 17px;
-        line-height: 0;
-        margin-left: 6px;
-        width: 15px;
-        height: 15px;
-        margin-top: 5px;
-        padding-top: 5px;
-        border: 1px solid #14ae46;
-        border-radius: 50%;
-        text-align: center;
-        font-weight: bold;
-        display: inline-block;
-
-        a {
-            display: none;
-            color: #006519;
-        }
-
-        &:active, &:hover {
-            background: #029740;
-            border: 1px solid #128435;
-
-            a {
-                display: block;
-                color: #003107;
-            }
-        }
-    }
-
     .app-header__shadow {
         position: absolute;
         top: 0px;
@@ -650,13 +558,27 @@ export default {
 
     .app-header__bar-left {
         position: absolute;
-        top: 00px;
+        top: 0;
         left: 0;
         height: 30px;
-        width: 118px;
-        padding-left: 10px;
-        background: url(../../../assets/SVG/left-bar.svg) no-repeat top left;
+        min-width: 35px;
+        background: #fff;
+        text-align: right;
         z-index: 13;
+        padding: 4px 10px 4px 5px;
+        border-radius: 0 0 13px 0;
+        display: flex;
+        align-items: center;
+        /*justify-content: center;*/
+        &:before {
+            content: "";
+            border-style: solid;
+            border-width: 26px 26px 0 0;
+            border-color: #ffffff transparent transparent transparent;
+            position: absolute;
+            right: -23px;
+            top: 0px;
+        }
     }
 
     a.app-header__bar-left-link {
@@ -694,10 +616,24 @@ export default {
         top: 0;
         right: 0;
         height: 30px;
-        width: 66px;
-        background: url(../../../assets/SVG/right-bar.svg) no-repeat top right;
+        min-width: 35px;
+        background: #fff;
         text-align: right;
         z-index: 13;
+        padding: 4px 5px;
+        border-radius: 0 0 0 13px;
+        display: flex;
+        align-items: center;
+        /*justify-content: center;*/
+        &:before {
+            content: "";
+            border-style: solid;
+            border-width: 0 26px 26px 0;
+            border-color: transparent #ffffff transparent transparent;
+            position: absolute;
+            left: -22px;
+            top: 0px;
+        }
     }
 
     .app-header__nav {
@@ -725,7 +661,7 @@ export default {
 
     .app-header__nav-right {
         float: right;
-        margin: 0 65px 0 0;
+        margin: 0 90px 0 0;
     }
 
     .app-header__nav-item {
@@ -736,7 +672,7 @@ export default {
     }
 
     .token {
-        .fa { 
+        .fa {
             color: #333 !important;
         }
 
@@ -773,7 +709,7 @@ export default {
         font-weight: bold;
         overflow: hidden;
         position: relative;
-        
+
         &:before {
             content: "";
             display: block;
@@ -834,6 +770,275 @@ export default {
                 i {
                     width: 17px;
                     color: #4f5079;
+                }
+            }
+        }
+    }
+    .windows-icons{
+        //colors
+        $color_1: #383838;
+        $color_2: #222;
+        %extend_1 {
+            top: 20%;
+            right: 20%;
+            bottom: 20%;
+            left: 20%;
+            content: " ";
+            position: absolute;
+            border-color: $color_1;
+            border-style: solid;
+            border-width: 0 0 2px 0;
+        }
+        a {
+            position: relative;
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin: 0 1px;
+            &:before {
+                @extend %extend_1;
+            }
+            &:after {
+                @extend %extend_1;
+            }
+            &:hover {
+                &:after {
+                    border-color: $color_2;
+                }
+                &:before {
+                    border-color: $color_2;
+                }
+            }
+            &.close_w {
+                &:before {
+                    bottom: 50%;
+                    top: 50%;
+                    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+                    transform: rotate(45deg);
+                    opacity: 1;
+                }
+                &:after {
+                    bottom: 50%;
+                    top: 50%;
+                    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+                    transform: rotate(-45deg);
+                }
+            }
+            &.minimize{
+                &:before {
+                    border-bottom-width: 2px;
+                }
+            }
+            &.maximize{
+                &:before {
+                    border-width: 1px 1px 2px 1px;
+                }
+            }
+        }
+    }
+    .mac-icons{
+        //colors
+        $color_1: #383838;
+        $color_2: #222;
+        %extend_1 {
+            top: 25%;
+            right: 25%;
+            bottom: 25%;
+            left: 25%;
+            content: " ";
+            position: absolute;
+            border-color: $color_1;
+            border-style: solid;
+            border-width: 0 0 1px 0;
+        }
+        a {
+            position: relative;
+            float: left;
+            width: 15px;
+            height: 15px;
+            margin: 0 2px;
+            &:hover {
+                &:after {
+                    border-color: $color_2;
+                }
+                &:before {
+                    border-color: $color_2;
+                }
+            }
+            &.close_w {
+                background: #ff6159;
+                border-radius: 100%;
+                &:before {
+                    @extend %extend_1;
+                    opacity: 0;
+                    bottom: 55%;
+                    top: 45%;
+                    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+                    transform: rotate(45deg);
+                    width: 8px;
+                    left: 25%;
+                }
+                &:after {
+                    @extend %extend_1;
+                    opacity: 0;
+                    bottom: 55%;
+                    top: 45%;
+                    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+                    transform: rotate(-45deg);
+                    width: 8px;
+                    left: 25%;
+                }
+            }
+            &.minimize{
+                background: #ffc434;
+                border-radius: 100%;
+                &:before {
+                    @extend %extend_1;
+                    opacity: 0;
+                    bottom: 40%;
+                    border-bottom-width: 2px;
+                }
+                &:after{
+                    @extend %extend_1;
+                    opacity: 0;
+                    display: none;
+                }
+            }
+            &.maximize{
+                background: #2dd04a;
+                border-radius: 100%;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    border-radius: 1px;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    margin: auto;
+                    opacity: 0;
+                    background-color: #006500;
+                    width: 7px;
+                    height: 7px;
+                }
+                &:after {
+                    content: '';
+                    position: absolute;
+                    border-radius: 1px;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    margin: auto;
+                    opacity: 0;
+                    background-color: #28c941;
+                    width: 10px;
+                    height: 2px;
+                    transform: rotate(45deg);
+                }
+                &:active:hover:before {
+                    background-color: #003200;
+                }
+                &:active:hover:after {
+                    background-color: #1d9730;
+                }
+            }
+        }
+        &:hover{
+            a{
+                &:before {
+                    opacity: 1;
+                }
+                &:after {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    .linux-icons{
+        //colors
+        $color_1: #383838;
+        $color_2: #222;
+        %extend_1 {
+            top: 25%;
+            right: 25%;
+            bottom: 25%;
+            left: 25%;
+            content: " ";
+            position: absolute;
+            border-color: $color_1;
+            border-style: solid;
+            border-width: 0 0 1px 0;
+        }
+        a {
+            position: relative;
+            float: left;
+            width: 15px;
+            height: 15px;
+            margin: 0 2px;
+            &:before {
+                @extend %extend_1;
+                opacity: 0;
+            }
+            &:after {
+                @extend %extend_1;
+                opacity: 0;
+            }
+            &:hover {
+                &:after {
+                    border-color: $color_2;
+                }
+                &:before {
+                    border-color: $color_2;
+                }
+            }
+            &.close_w {
+                background: #ff6159;
+                border-radius: 100%;
+                &:before {
+                    bottom: 55%;
+                    top: 45%;
+                    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+                    transform: rotate(45deg);
+                    width: 8px;
+                    left: 25%;
+                }
+                &:after {
+                    bottom: 55%;
+                    top: 45%;
+                    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+                    transform: rotate(-45deg);
+                    width: 8px;
+                    left: 25%;
+                }
+            }
+            &.minimize{
+                background: #ffc434;
+                border-radius: 100%;
+                &:before {
+                    bottom: 40%;
+                    border-bottom-width: 2px;
+                }
+                &:after{
+                    display: none;
+                }
+            }
+            &.maximize{
+                background: #2dd04a;
+                border-radius: 100%;
+                &:before {
+                    border-width: 1px 1px 2px 1px;
+                }
+            }
+        }
+        &:hover{
+            a{
+                &:before {
+                    opacity: 1;
+                }
+                &:after {
+                    opacity: 1;
                 }
             }
         }

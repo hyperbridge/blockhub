@@ -1,6 +1,6 @@
 <template>
     <!-- PAGE WRAPPER -->
-    <div class="page page--w-header page--w-container">
+    <div class="page page--w-header page--w-container" :class="{'page__with-left-sidebar': showLeftPanel, 'page__with-right-sidebar': showRightPanel }">
         <!-- PAGE HEADER -->
         <transition name="slideDown" v-if="initialized">
             <c-header :isLoader="loadingState" v-if="!slimMode" />
@@ -40,7 +40,7 @@
             </div>
             
             <!-- PAGE ASIDE PANEL -->
-            <div class="page-aside invert left-sidebar" id="page-aside" v-if="showLeftPanel">
+            <div class="page-aside invert left-sidebar" style="max-width: 250px" id="page-aside" v-if="showLeftPanel">
                 <!--<transition name="slideLeft" v-if="initialized">-->
                 <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
                     <component v-if="navigationComponent" v-bind:is="`c-${navigationComponent}-navigation`" ref="scroll_sidebar_content" :title="navigationTitle"></component>
@@ -61,13 +61,16 @@
             </div>
             <!-- //END PAGE ASIDE PANEL -->
 
-            <slot v-if="is_connected"></slot>
-
-            <div class="content" id="content" v-if="!is_connected"></div>
+            <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
+                <c-breadcrumb :links="breadcrumbLinks" ref="breadcrumb" v-if="is_connected" />
+                <div class="container-fluid">
+                    <slot v-if="is_connected" />
+                </div>
+            </div>
 
             <!-- SIDEPANEL -->
-            <transition name="slideRight" v-if="initialized && showRightPanel">
-                <c-sidepanel>
+            <transition name="slideRight" style="max-width: 250px" v-if="initialized && showRightPanel">
+                <c-sidepanel class="right-sidebar">
                     <c-swiper :options="panelOption" ref="mySwiper">
                     <c-slide v-if="signed_in">
                         <div class="item">
@@ -186,7 +189,7 @@
 
                         </div>
                     </c-slide>
-                    <c-slide>
+                    <c-slide v-if="this.navigationKey === 'store'">
                         <div class="item">
                             <h3>TOP LISTS</h3>
 
@@ -272,13 +275,16 @@
             </c-popup>
             
             <c-cookie-policy v-if="!desktop_mode" />
+
+            <c-clock v-if="desktop_mode" />
+
+            <div class="version" v-if="desktop_mode">v{{ $store.state.application.version }}</div>
         </div>
         <!-- //END PAGE CONTENT -->
 
     </div>
     <!-- //END PAGE WRAPPER -->
 </template>
-
 
 <script>
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
@@ -306,14 +312,14 @@
                 default: true,
                 required: false
             },
-            slimMode: {
-                type: Boolean,
-                default: false,
-                required: false
-            },
             headerText: {
                 type: String,
                 default: 'BlockHub',
+                required: false
+            },
+            breadcrumbLinks: {
+                type: Array,
+                default: () => ([]),
                 required: false
             }
         },
@@ -332,6 +338,7 @@
             'c-product-navigation': (resolve) => require(['@/ui/components/navigation/product'], resolve),
             'c-project-navigation': (resolve) => require(['@/ui/components/navigation/project'], resolve),
             'c-notification': (resolve) => require(['@/ui/components/notification/index.vue'], resolve),
+            'c-clock': (resolve) => require(['@/ui/components/clock/index.vue'], resolve),
             'c-welcome-popup': (resolve) => require(['@/ui/components/welcome-popup/index.vue'], resolve),
             'c-download-popup': (resolve) => require(['@/ui/components/download-popup/index.vue'], resolve),
             'c-unlock-popup': (resolve) => require(['@/ui/components/unlock-popup/index.vue'], resolve),
@@ -390,30 +397,45 @@
             },
             messages() {
                 return this.current_identity && this.current_identity.messages
+            },
+            dynamicLinks() {
+                const [empty, ...links] = this.$route.path.split('/');
+                // const names = links.filter()
+                const names = links;
+
+                return names.map((name, i) => ({
+                    title: this.$options.filters.upperFirstChar(name),
+                    to: names.reduce((to, name, index) => (index < i + 1) ? to += '/' + name : to, '')
+                }));
             }
         },
         data() {
-            if (this.navigationKey !== 'store') {
-                this.showRightPanel = false
-            }
-
             return {
                 navigationComponent: this.navigationKey || false,
                 loadingState: true,
                 initialized: BlockHub.initialized,
                 user_submitted_connection_message: this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))],
                 panelOption: {
-                    spaceBetween: 10,
+                    spaceBetween: 0,
                     loop: false,
                 },
                 notifPopup: {},
-                scrollMoreDirection: null
+                scrollMoreDirection: null,
+                slimMode: false
             }
         },
         updated() {
             this.user_submitted_connection_message = this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))]
         },
         methods: {
+            onSwipeLeft(){
+                console.log('left swipe')
+                this.showRightPanel = true
+            },
+            onSwipeRight(){
+                console.log('right swipe')
+                this.showLeftPanel = true
+            },
             showSlide(sl) {
                 switch (sl) {
                     case 'notification':
@@ -468,9 +490,37 @@
                 } catch(e) {
 
                 }
+            },
+            updateBreadcrumbLinks() {
+                if (this.breadcrumbLinks.length === 0) {
+                    if (this.$route.meta.breadcrumb) {
+                        this.breadcrumbLinks = this.$route.meta.breadcrumb
+                    } else if (this.$route.meta.breadcrumb === false) {
+                        this.breadcrumbLinks = []
+                    } else {
+                        if (this.$route.name !== 'Home') {
+                            this.breadcrumbLinks = [
+                                { to: { path: '/' }, title: 'Home' },
+                                { to: { path: this.$route.path }, title: this.$route.name }
+                            ]
+                        }
+                    }
+                }
+            },
+            handleResize(event) {
+                if ( document.documentElement.clientWidth < 768 ){
+
+                }
+                    // this.showRightPanel = false;
+                    // this.showLeftPanel = false;
             }
         },
+        created(){
+            window.addEventListener('resize', this.handleResize())
+            this.handleResize();
+        },
         mounted() {
+            this.updateBreadcrumbLinks()
             this.$nextTick(() => {
                 this.loadingState = false
                 setTimeout(() => {
@@ -484,31 +534,38 @@
                             this.checkScrollButton()
                         }, 250)
                     })
-                }, 3000) // TODO: remove arbitrary delay
+                }, 1000) // TODO: remove arbitrary delay
 
                 setInterval(() => {
                     this.checkScrollButton()
                 }, 500)
             })
+        },
+        watch: {
+            '$route'() {
+                this.updateBreadcrumbLinks()
+            }
         }
     }
 </script>
 
-<style lang="scss">
-
-    .owl-controls {
-        display: none !important;
-    }
-
-    .owl-carousel .owl-stage {
-        transition: unset !important;
-    }
-
-</style>
-
 <style lang="scss" scoped>
     [v-cloak] {
         display: none;
+    }
+    .content{
+        padding: 20px;
+        .container-fluid{
+            padding: 0!important;
+        }
+    }
+    .version {
+        position: fixed;
+        bottom: 10px;
+        right: 24px;
+        font-size: 16px;
+        font-family: 'Barlow', sans-serif;
+        color: rgba(255, 255, 255, 0.2);
     }
 
     .page-sidepanel {
@@ -557,6 +614,13 @@
         background: #48171D;
         border-top: 2px solid #48171D;
         color: #fff;
+    }
+
+    .clock {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: -1;
     }
 
     .loader-block {
@@ -729,7 +793,7 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 100%;
+            width: 246px;
             height: 100px;
             z-index: 1;
             background: linear-gradient(to top, rgba(48, 49, 77, 1) 60%, rgba(48, 49, 77, 0) 100%);
@@ -763,6 +827,94 @@
         @media (max-width: 1500px){
             flex: 0 0 100%;
             max-width: 100%;
+        }
+    }
+
+    
+    .content {
+        width: 100%;
+        padding-top: 0;
+        margin: 0 auto;
+    }
+
+    .page__with-left-sidebar .content, .page__with-right-sidebar .content {
+        width: calc(100% - 250px);
+        margin: 0 0 0 auto;
+    }
+
+    .page__with-left-sidebar.page__with-right-sidebar .content {
+        width: calc(100% - 500px);
+        margin: 0 auto;
+    }
+    .right-sidebar,
+    .left-sidebar{
+        z-index: 98;
+    }
+
+    @media (max-width: 575px) {
+
+    }
+
+    @media (max-width: 768px) {
+    }
+
+    @media (max-width: 991px) {
+
+    }
+
+    @media (max-width: 1200px) {
+        .page .page__content{
+            padding-top: 50px!important;
+        }
+        .right-sidebar,
+        .left-sidebar{
+            background: #30314b!important;
+            min-height: 100%;
+            top: 0!important;
+            padding-top: 120px;
+            display: none;
+        }
+        .content {
+            width: 100%!important;
+            .container-fluid{
+                padding: 20px;
+            }
+        }
+
+    }
+    @media (max-width: 1400px) {
+        .page-aside,
+        .page-sidepanel{
+            width: 200px!important;
+        }
+        .page-aside .navigation{
+            padding-left: 15px;
+        }
+        .page-sidepanel{
+            padding-right: 15px;
+            .page-sidepanel{
+                width: 100%!important;
+            }
+        }
+        .content {
+            width: 100%;
+        }
+
+        .page__with-left-sidebar .content, .page__with-right-sidebar .content {
+            width: calc(100% - 200px);
+            margin: 0 0 0 auto;
+        }
+
+        .page__with-left-sidebar.page__with-right-sidebar .content {
+            width: calc(100% - 400px);
+            margin: 0 auto;
+        }
+        .load-more.fixed{
+            width: 180px!important;
+            margin: 10px!important;
+            span{
+                font-size: 14px!important;
+            }
         }
     }
 </style>

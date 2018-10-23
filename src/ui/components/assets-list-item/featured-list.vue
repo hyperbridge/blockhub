@@ -2,7 +2,9 @@
     <div class="featured-assets__list">
         <div class="featured-assets__item-container"
              :style="{ width: 'calc( 100% / ' + itemInRow + ')'}"
-             v-for="(item, index) in items" :key="index">
+             v-for="(item, index) in items" :key="index"
+             v-if="items && items.length"
+        >
             <div class="featured-assets__list-item">
                 <div class="img">
                     <c-img :src="item.img" />
@@ -76,6 +78,11 @@
         }
         p{
             margin: 0;
+        }
+    }
+    @media (max-width: 768px) {
+        .featured-assets__item-container{
+            width: 100%!important;
         }
     }
 </style>

@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="help">
-        <div class="content" id="content">
             <div class="container-fluid" v-if="article">
                 <h2>{{ article.title }}</h2>
                 <div class="article-content">
@@ -10,7 +9,6 @@
             <div v-if="!article">
                 Oh no, that post wasn't found! Would you <a href="/#/post/create">like to create it</a>?
             </div>
-        </div>
     </c-layout>
 </template>
 

@@ -16,7 +16,14 @@ Vue.filter('formatTime', function(value) {
 
 Vue.filter('timeAgo', (date) => moment(date).fromNow());
 
-Vue.filter('timeAgoShort', (date) => moment(date).fromNow().replace('ago', ''));
+Vue.filter('timeAgoShort', (date) => moment(date).fromNow().replace(/ ago|in /, ''));
+
+Vue.filter('timeAgoSShort', date => moment(date).fromNow()
+    .replace(/ ago|in /, '')
+    .replace('hours', 'hrs')
+    .replace('minutes', 'mins')
+    .replace('years', 'yrs')
+);
 
 Vue.filter('statusIcon', status => {
     const getClass = status => {
@@ -38,10 +45,6 @@ Vue.filter('statusIcon', status => {
 });
 
 Vue.filter('upperFirstChar', (value) => value.charAt(0).toUpperCase() + value.substring(1, value.length));
-
-Vue.filter('staticImg', value => `/static/img/products/${value}`);
-
-Vue.filter('staticVideo', value => `/static/img/products/${value}`);
 
 Vue.filter('highlightPhrase', (value, phrase, tag = 'strong') => {
     if (!phrase) return value;

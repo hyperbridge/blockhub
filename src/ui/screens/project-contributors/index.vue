@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="project">
-        <div class="content" id="content">
             <div class="container-fluid">  
                 <div class="row">
                     <div class="col-12">
@@ -11,7 +10,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 

@@ -2,7 +2,14 @@
     {
         "id": 1,
         "name": "BlockHub",
+        "theme": {
+            "background_color": "#3F2797",
+            "header": {
+                "background_size": "cover"
+            }
+        },
         "images": {
+            "background": "/static/img/realms/1/bg.png",
             "logo": "/static/img/realms/1/logo.png",
             "news": "/static/img/realms/1/news.png",
             "follow": "/static/img/realms/1/follow.png"
@@ -37,10 +44,17 @@
     {
         "id": 2,
         "name": "Hyperbridge",
+        "theme": {
+            "background_color": "#0086FF",
+            "header": {
+                "background_size": "contain"
+            }
+        },
         "images": {
-            "logo": "/static/img/realms/1/logo.png",
-            "news": "/static/img/realms/1/news.png",
-            "follow": "/static/img/realms/1/follow.png"
+            "background": "/static/img/realms/2/bg.png",
+            "logo": "/static/img/realms/2/logo.png",
+            "news": "/static/img/realms/2/news.png",
+            "follow": "/static/img/realms/2/follow.png"
         },
         "nav": {
             "items": [
@@ -72,7 +86,14 @@
     {
         "id": 3,
         "name": "Blizzard",
+        "theme": {
+            "background_color": "#2878C0",
+            "header": {
+                "background_size": "contain"
+            }
+        },
         "images": {
+            "background": "/static/img/realms/3/bg.png",
             "logo": "/static/img/realms/3/logo.png",
             "news": "/static/img/realms/3/news.png",
             "follow": "/static/img/realms/3/follow.png"

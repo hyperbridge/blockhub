@@ -39,7 +39,8 @@
                     :readonly="previewMode"
                     v-focus
                 />
-                <p v-darklaunch="'BADGES'">User</p>
+                <p v-if="type === 'user'"><em>Gamer</em></p>
+                <p v-if="type === 'developer'"><em>Developer</em></p>
             </div>
         </div>
 
@@ -79,6 +80,7 @@
         name: 'user-card',
         props: {
             id: String,
+            type: String,
             user: {
                 img: String,
                 name: String,

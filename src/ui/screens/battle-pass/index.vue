@@ -1,10 +1,9 @@
 <template>
     <c-layout navigationKey="store">
-        <div class="content" id="content">
             <div class="container-fluid">
                 <c-infinite-content :list="list" />
+                <p>No battle passes yet. Stay tuned!</p>
             </div>
-        </div>
     </c-layout>
 </template>
 

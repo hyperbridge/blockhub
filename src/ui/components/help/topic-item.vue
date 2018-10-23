@@ -29,6 +29,7 @@
             background: rgba(0, 0, 0, .13);
             border-radius: 5px;
             box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+            cursor: pointer;
             i{
                 font-size: 22px;
                 margin-bottom: 15px;

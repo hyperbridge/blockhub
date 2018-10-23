@@ -70,4 +70,16 @@
             }
         }
     }
+    @media (max-width: 767px) {
+        .assets-list__item-container{
+            width: 100%!important;
+            padding: 0;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
+            &:last-child{
+                margin: 0;
+                border: unset;
+            }
+        }
+    }
 </style>

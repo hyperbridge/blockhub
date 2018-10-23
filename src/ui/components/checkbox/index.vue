@@ -5,7 +5,7 @@
             :id="id"
             :checked="checked"
             v-bind="$attrs"
-            :class="{'circle': style == 'circle', 'square': style == 'square' }"
+            :class="type"
             @change="$emit('change', $event.target.checked)"
         >
         <label :for="id">
@@ -30,7 +30,11 @@
                 }
             },
             checked: [Boolean, String],
-            style: 'circle'
+            type: {
+                type: String,
+                default: 'circle',
+                validator: val => ['circle', 'square'].includes(val)
+            }
         }
     }
 </script>

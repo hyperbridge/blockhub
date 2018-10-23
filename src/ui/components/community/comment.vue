@@ -71,10 +71,18 @@
         background: rgba(0, 0, 0, .16);
         border: 1px solid rgba(112, 112, 112, .4);
         position: relative;
+        @media (max-width: 767px) {
+            width: 100%;
+            margin-left: 15px;
+            flex-direction: column;
+        }
         .comment-content{
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
+            @media (max-width: 767px) {
+                flex-direction: column;
+            }
             .user-info {
                 display: flex;
                 justify-content: space-between;
@@ -98,6 +106,9 @@
                 }
                 .time {
                     float: right;
+                }
+                @media (max-width: 767px) {
+                    margin-bottom: 10px;
                 }
             }
             .text {

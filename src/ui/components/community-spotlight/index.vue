@@ -8,7 +8,7 @@
         </template>
         <div class="w-100" v-if="discussions.length > 0">
             <div class="editor-container editor-container--style-2" v-if="editing">
-                <p class="" v-if="!activeElement">
+                <p class="">
                     Set Up Community
                 </p>
             </div>

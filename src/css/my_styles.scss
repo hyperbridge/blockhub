@@ -7,7 +7,7 @@
     Last change:    17/05/18 [Release]
 
     We recommend you to use this file for your stylesheets.
-    
+
 -------------------------------------------------------------------*/
 
 
@@ -95,7 +95,7 @@ a.btn-outline-white {
         /* background: rgba(0, 0, 0, .3);
         border-radius: 0 4px 4px 0; */
     }
-    
+
     ::-webkit-scrollbar-thumb {
         background: #eee;
         border-radius: 8px;
@@ -125,6 +125,15 @@ a.btn-outline-white {
 #scroll_sidebar::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0) !important;
     border: 0 none !important;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0) !important;
+    border: 0 none !important;
+}
+
+body::-webkit-scrollbar {
+    display: none !important;
 }
 
 #fixed_panel {
@@ -208,18 +217,21 @@ a.btn-outline-white {
 }
 
 .page-heading .breadcrumb {
-    background: none !important;
-    border: 0 none !important;
-    padding: 0;
+//    background: none !important;
+//    border: 0 none !important;
+//    padding: 0;
+    font-size: 14px;
 }
 
+.page-heading .breadcrumb .breadcrumb-item,
 .page-heading .breadcrumb .breadcrumb-item a {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .page-heading .breadcrumb .breadcrumb-item+.breadcrumb-item:before {
     content: "\f105";
     font-family: "Font Awesome 5 Free";
+    font-size: 14px;
 }
 
 .route {

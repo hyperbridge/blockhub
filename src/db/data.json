@@ -1,18 +1,33 @@
 {
     "application": {
-        "mode": "local",
+        "version": "0.7.0rc2",
+        "environment_mode": null,
         "locked": false,
         "signed_in": false,
         "loading": false,
         "simulator_mode": false,
         "desktop_mode": null,
-        "developer_mode": false,
+        "developer_mode": null,
         "operating_system": null,
+        "is_developer": false,
         "editor_mode": "viewing",
         "current_ethereum_network": "local",
         "ethereum": {
             "local": {
-                "contracts": {}
+                "packages": {
+                    "token": {
+                        "contracts": {}
+                    },
+                    "reserve": {
+                        "contracts": {}
+                    },
+                    "marketplace": {
+                        "contracts": {}
+                    },
+                    "funding": {
+                        "contracts": {}
+                    }
+                }
             }
         },
         "connection": {
@@ -309,11 +324,6 @@
         "current_ethereum_network": "local",
         "selected_product": null,
         "first_product": true,
-        "ethereum": {
-            "local": {
-                "contracts": {}
-            }
-        },
         "frontpage_product": {},
         "product_news": [],
         "new_products": [],

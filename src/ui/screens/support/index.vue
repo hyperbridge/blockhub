@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="help">
-        <div class="content" id="content">
             <div class="page-heading">
                 <div class="page-heading__container">
                     <h1 class="title">Support</h1>
@@ -10,9 +9,12 @@
             </div>
             <div class="container-fluid">
                 <div class="row">
+                    <ul>
+                        <li>E-mail: <a href="mailto:support@hyperbridge.zendesk.com">support@hyperbridge.zendesk.com</a></li>
+                        <li>Support Desk: <a href="https://hyperbridge.zendesk.com/">https://hyperbridge.zendesk.com/</a></li>
+                    </ul>
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 

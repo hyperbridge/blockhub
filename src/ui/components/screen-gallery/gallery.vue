@@ -82,6 +82,8 @@ export default {
     methods: {
         slideshow() {
             this.interval = setInterval(() => {
+                if (!this.items || !this.items.length) return
+
                 this.active_item < this.items.length - 1 ? this.active_item++ : this.active_item = 0;
                 const [child] = this.$refs[`thumb-${this.active_item}`];
                 const parent = this.$refs['thumb-nav'];
@@ -107,6 +109,10 @@ export default {
             if (!this.play_video) this.enableSlideshow(true);
         },
         scrollParentToChild(parent, child) {
+            if (!parent) {
+                return
+            }
+            
             const parentRect = parent.getBoundingClientRect();
 
             const parentViewableArea = {

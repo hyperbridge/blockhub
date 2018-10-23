@@ -1,12 +1,11 @@
 <template>
-    <c-layout>
-        <div class="content" id="content">
-            <div class="container-fluid">
+    <c-layout navigationKey="store">
+            <!--<div class="container-fluid">-->
                 <div class="row">
                     <div class="col-12 mb-4">
                         <c-download-block />
                     </div>
-                    <div class="col-4">
+                    <div class="col-12 col-md-4 margin-bottom-10">
                         <div class="card invert py-3">
                             <div class="card-body text-center">
                                 <h4 class="text-uppercase">
@@ -20,7 +19,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-12 col-md-4 margin-bottom-10">
                         <div class="card invert py-3">
                             <div class="card-body text-center">
                                 <h4 class="text-uppercase">
@@ -34,7 +33,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-12 col-md-4 margin-bottom-10">
                         <div class="card invert py-3">
                             <div class="card-body text-center">
                                 <h4 class="text-uppercase">
@@ -49,8 +48,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            <!--</div>-->
     </c-layout>
 </template>
 

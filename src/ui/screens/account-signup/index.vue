@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false">
+    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false" :breadcrumbLinks="false">
         <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
@@ -31,15 +31,15 @@
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label class="sr-only">First Name</label>
-                                                    <input type="text" class="form-control" placeholder="First Name"
+                                                    <label class="sr-only">Given Name</label>
+                                                    <input type="text" class="form-control" placeholder="Given Name"
                                                             name="first_name" v-model="account.first_name">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label class="sr-only">Last Name</label>
-                                                    <input type="text" class="form-control" placeholder="Last Name"
+                                                    <label class="sr-only">Family Name</label>
+                                                    <input type="text" class="form-control" placeholder="Family Name"
                                                             name="last_name" v-model="account.last_name">
                                                 </div>
                                             </div>
@@ -52,6 +52,9 @@
                                                         input-class="form-control form-calendar__text"
                                                         name="birthday"
                                                         calendar-class="form-calendar"
+                                                        minimumView="day" 
+                                                        maximumView="year" 
+                                                        initialView="year"
                                                     />
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">
@@ -739,7 +742,7 @@
 
 
 <script>
-import * as DesktopBridge from '@/framework/desktop-bridge'
+import * as Bridge from '@/framework/desktop-bridge'
 
 export default {
     components: {
@@ -815,7 +818,7 @@ export default {
                     && this.account.birthday
                     && this.account.agreement
                 ) {
-                    DesktopBridge.getPassphraseRequest({
+                    Bridge.getPassphraseRequest({
                         seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
                     }).then((res) => {
                         this.passphrase = res.split(' ')
@@ -847,7 +850,7 @@ export default {
                 }
             } else if (this.currentStep === 2) {
                 const passphraseOriginal = this.passphrase.join(' ')
-                const passphraseVerification = this.repeatPassphrase.join(' ')//$.map($(this.$refs.passphraseVerification).find('input'), (item) => $(item).val()).join(' ')
+                const passphraseVerification = this.repeatPassphrase.join(' ')
 
                 if (this.account.secret_question_1
                     && this.account.secret_answer_1
@@ -860,7 +863,7 @@ export default {
                     && !this.passphrase.includes('')
                     && !this.repeatPassphrase.includes('')
                     && passphraseOriginal === passphraseVerification) {
-                        DesktopBridge.createAccountRequest({
+                        Bridge.createAccountRequest({
                             seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
                             first_name: this.account.first_name,
                             last_name: this.account.last_name,
@@ -874,13 +877,12 @@ export default {
                             secret_question_2: this.account.secret_question_2,
                             secret_answer_2: this.account.secret_answer_2
                         }).then((res) => {
-                            //this.account = { ...this.account, ...res.account }
-
                             this.finishedStep = 2;
                             this.currentStep = 3;
 
                             this.$store.dispatch('application/updateState', {
                                 account: { ...this.$store.state.application.account, ...res.account },
+                                locked: false,
                                 signed_in: true
                             })
                         })
