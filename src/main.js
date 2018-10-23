@@ -35,6 +35,8 @@ const dataString = JSON.stringify(data).replace(/"/g, "'")
 
 
 const notifyError = debounce(function (message) {
+  if (!message) return
+  
   if (message.indexOf('Error') !== -1) {
     BlockHub.Bridge.sendCommand('error', { message: message })
   }
