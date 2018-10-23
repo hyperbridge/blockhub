@@ -259,12 +259,12 @@ export default {
             this.show_menu = !this.show_menu
         },
         closeWindow() {
-            const { BrowserWindow } = window.require('electron').remote
+            const { BrowserWindow } = window.specialRequire('electron').remote
             let browserWindow = BrowserWindow.getFocusedWindow()
             browserWindow.close()
         },
         maximizeWindow() {
-            const { BrowserWindow } = window.require('electron').remote
+            const { BrowserWindow } = window.specialRequire('electron').remote
 
             let browserWindow = BrowserWindow.getFocusedWindow()
             if (browserWindow.isMaximized()) {
@@ -274,7 +274,7 @@ export default {
             }
         },
         minimizeWindow() {
-            const { BrowserWindow } = window.require('electron').remote
+            const { BrowserWindow } = window.specialRequire('electron').remote
             let browserWindow = BrowserWindow.getFocusedWindow()
             browserWindow.minimize()
         }
