@@ -1,7 +1,7 @@
 {
     "application": {
-        "version": "0.7.0rc1",
-        "mode": "local",
+        "version": "0.7.0rc2",
+        "environment_mode": null,
         "locked": false,
         "signed_in": false,
         "loading": false,

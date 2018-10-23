@@ -21,18 +21,19 @@
                     <div class="col-12 mb-4" v-if="!desktop_mode">
                         <c-welcome-box />
                     </div>
-                    <div class="col-12 mb-4" v-if="['preview', 'staging', 'local'].includes(mode)">
+                    <div class="col-12 mb-4" v-if="showPreviewPanel">
                         <div class="card invert">
                             <div class="card-body">
                                 <h4>Play around with the future of BlockHub:</h4>
                                 <div>
-                                    <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button>
                                     <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
+                                    <c-button @click="rotateOperatingSystem()">Operating System {{ operating_system === 'mac' ? 'MAC' : (operating_system === 'windows' ? 'WINDOWS' : 'LINUX' ) }}</c-button>
+                                    <c-button @click="rotateEnvironmentMode()">Environment Mode {{ environment_mode.toUpperCase() }}</c-button>
                                     <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button>
+                                    <c-button @click="$store.state.application.account.is_verified = !$store.state.application.account.is_verified">Account {{ $store.state.application.account.is_verified ? 'VERIFIED' : 'NOT VERIFIED' }}</c-button>
                                     <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button>
                                     <c-button @click="rotateEditorMode()">Editor Mode {{ $store.state.application.editor_mode.toUpperCase() }}</c-button>
-                                    <c-button @click="rotateOperatingSystem()">Operating System {{ operating_system === 'mac' ? 'MAC' : (operating_system === 'windows' ? 'WINDOWS' : 'LINUX' ) }}</c-button>
-                                    <c-button @click="$store.state.application.account.is_verified = !$store.state.application.account.is_verified">Account {{ $store.state.application.account.is_verified ? 'VERIFIED' : 'NOT VERIFIED' }}</c-button>
+                                    <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button>
                                     <br /><br />
                                 </div>
                                 <div>
@@ -75,6 +76,20 @@
 
                 <c-infinite-content :list="list" />
             </div>
+
+            <c-custom-modal title="Welcome" v-if="showWelcomeModal" @close="closeModal">
+                <div class="help-modal__content" slot="modal_body" style="max-width: 500px">
+                    <h4 class="h2 mb-3">BlockHub Preview</h4>
+                    <p>Welcome to the the nightly preview build of BlockHub. All features are enabled, with or without bugs. Gotta catch 'em all! 🐛</p>
+                    <p>These features are still in active development, and may not functional properly and may not make it into production.</p>
+                    <p>Enjoy your stay, and send us your feedback!</p>
+                    <p hidden>We're a platform built by the community, for the community.</p>
+                    <p hidden><a href="/#/help" target="_blank">Check out the BlockHub crowdfund</a></p>
+                </div>
+                <div slot="modal_footer" class="text-right w-100">
+                    <c-button size="md" @click="closeModal">Got it</c-button>
+                </div>
+            </c-custom-modal>
     </c-layout>
 </template>
 
@@ -96,11 +111,16 @@ const updateLandingImage = function() {
 
 export default {
     components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-        'c-infinite-content': (resolve) => require(['@/ui/components/infinite-content'], resolve),
         'c-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
+        'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
         'c-download-block': (resolve) => require(['@/ui/components/download-block'], resolve),
         'c-welcome-box': (resolve) => require(['@/ui/components/welcome-box'], resolve)
+    },
+    data() {
+        return {
+            showWelcomeModal: this.$store.state.application.environment_mode === 'preview',
+            showPreviewPanel: true //['preview', 'staging', 'local'].includes(BlockHub.environment_mode)
+        }
     },
     computed: {
         ...mapGetters({
@@ -317,9 +337,6 @@ export default {
 
         //     return this.$store.state.marketplace.products
         // },
-        mode() {
-            return this.$store.state.application.mode
-        },
         signed_in() {
             return this.$store.state.application.signed_in
         },
@@ -334,6 +351,9 @@ export default {
         },
         operating_system() {
             return this.$store.state.application.operating_system
+        },
+        environment_mode() {
+            return this.$store.state.application.environment_mode
         }
     },
     methods: {
@@ -370,6 +390,19 @@ export default {
                 this.$store.state.application.operating_system = 'mac'
             }
         },
+        rotateEnvironmentMode() {
+            if (this.$store.state.application.environment_mode === 'production') {
+                this.$store.state.application.environment_mode = 'staging'
+            } else if (this.$store.state.application.environment_mode === 'staging') {
+                this.$store.state.application.environment_mode = 'beta'
+            } else if (this.$store.state.application.environment_mode === 'beta') {
+                this.$store.state.application.environment_mode = 'preview'
+            } else if (this.$store.state.application.environment_mode === 'preview') {
+                this.$store.state.application.environment_mode = 'local'
+            } else {
+                this.$store.state.application.environment_mode = 'production'
+            }
+        },
         importSeedData() {
             window.BlockHub.importSeedData()
         },
@@ -381,6 +414,9 @@ export default {
         },
         resetSettings() {
             window.resetSettings()
+        },
+        closeModal() {
+            this.showWelcomeModal = false
         },
         sendDesktopMessage() {
             if (!window.isElectron) {

@@ -45,6 +45,7 @@ const updateState = (savedData, updatedState = {}) => {
         account: DB.application.config.data[0].account,
         darklaunch_flags: DB.application.config.data[0].darklaunch_flags,
         developer_mode: savedData.developer_mode !== null ? savedData.developer_mode : !!developerIdentity,
+        environment_mode: savedData.environment_mode !== null ? savedData.environment_mode : BlockHub.GetMode(),
         ...updatedState
     }
     
@@ -59,13 +60,11 @@ const updateState = (savedData, updatedState = {}) => {
     })
 
     state = { ...rawData, ...normalizedData.entities }
-};
+}
 
 export const getters = {
     privileges(state) {
         const result = []
-
-        result.push('edit')
 
         if (state.desktop_mode) {
             result.push('desktop_mode')
