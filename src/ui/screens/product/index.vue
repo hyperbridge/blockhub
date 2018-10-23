@@ -127,7 +127,7 @@
             </div>
         </div>
         <c-custom-modal title="Help Center" v-if="first_product && editing" @close="closeModal">
-            <div class="help-modal__content" slot="modal_body" style="width: 500px">
+            <div class="help-modal__content" slot="modal_body" style="max-width: 500px">
                 <h4 class="h2 mb-3">Creating your first product?</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Etiam elementum ac ligula nec viverra. Nunc molestie augue a erat ultrices fermentum.</p>
@@ -223,8 +223,26 @@
         },
         mounted() {
             const { product } = this;
-            if (product && product.images.preview && product.images.preview.length) {
+
+            if (this.id === 'new') {
+                this.$store.dispatch('application/setEditorMode', 'editing')
+            }
+        
+            if (!product.community) {
+                product.community = {
+                    discussions: []
+                }
+            }
+
+            if (!product.developer_tags) {
+                product.developer_tags = []
+            }
+
+            if (product.promotions) {
                 this.promotionSections = groupBy(product.promotions, 'section');
+            }
+
+            if (product && product.images.preview && product.images.preview.length) {
                 const header = window.document.getElementById('header-bg');
                 const randomImage = Math.floor(Math.random() * product.images.preview.length);
                 header.style['background-image'] = 'url(' + product.images.preview[randomImage] + ')';
