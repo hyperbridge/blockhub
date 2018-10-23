@@ -1,7 +1,13 @@
 <template>
     <c-layout navigationKey="help">
-        <div class="container-fluid" v-if="topic">
-            <div class="row">
+            <div class="row margin-bottom-30" v-if="!article">
+                <div class="col-12">
+                    <c-card class="text-center">
+                        <p>Oh no! That topic was not found!</p>
+                    </c-card>
+                </div>
+            </div>
+            <div class="row" v-if="topic">
                 <div class="col-12">
                     <h3 class="topic-ttl margin-bottom-30">
                         <i :class="['fas fa-' + topic.icon ]"></i>
@@ -52,14 +58,6 @@
                     </c-card>
                 </div>
             </div>
-        </div>
-        <div class="container-fluid" v-if="!article">
-            <div class="row">
-                <div class="col-12">
-                    <p>Oh no! That topic was not found!</p>
-                </div>
-            </div>
-        </div>
     </c-layout>
 </template>
 
