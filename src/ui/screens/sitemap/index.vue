@@ -29,6 +29,7 @@
                           <li><a href="#/account">Account</a></li>
                           <li><a href="#/account/signup">Account > Sign Up</a></li>
                           <li><a href="#/account/signin">Account > Sign In</a></li>
+                          <li><a href="#/account/backup">Account > Backup</a></li>
                           <li><a href="#/account/wallets">Account > Wallets</a></li>
                           <li><a href="#/account/new-wallet">Account > New Wallet</a></li>
                           <li><a href="#/account/identities">Account > Identities</a></li>

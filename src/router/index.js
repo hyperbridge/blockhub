@@ -206,6 +206,14 @@ const router = new Router({
             }
         },
         {
+            path: '/account/backup',
+            name: 'Account Backup',
+            component: (resolve) => require(['@/ui/screens/account-backup'], resolve),
+            meta: {
+                breadcrumb: false
+            }
+        },
+        {
             path: '/account/verification',
             name: 'Account Verification',
             component: (resolve) => require(['@/ui/screens/account-verification'], resolve),
