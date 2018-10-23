@@ -119,7 +119,7 @@ export default {
     data() {
         return {
             showWelcomeModal: this.$store.state.application.environment_mode === 'preview',
-            showPreviewPanel: true //['preview', 'staging', 'local'].includes(BlockHub.environment_mode)
+            showPreviewPanel: ['preview', 'staging', 'local'].includes(this.$store.state.application.environment_mode)
         }
     },
     computed: {
