@@ -421,7 +421,8 @@
                 },
                 notifPopup: {},
                 scrollMoreDirection: null,
-                slimMode: false
+                slimMode: false,
+                mobileMode: false
             }
         },
         updated() {
@@ -509,7 +510,9 @@
             },
             handleResize(event) {
                 if ( document.documentElement.clientWidth < 768 ){
-
+                    this.mobileMode = true
+                } else {
+                    this.mobileMode = false
                 }
                     // this.showRightPanel = false;
                     // this.showLeftPanel = false;

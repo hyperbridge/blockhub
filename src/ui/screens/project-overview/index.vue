@@ -167,6 +167,11 @@
                 ],
                 crowdfunding_props: ['spent', 'locked', 'overflow']
             }
+        },
+        methods:{
+            showContributeModal() {
+                this.$store.dispatch('application/activateModal', 'send-funds')
+            }
         }
     }
 </script>
