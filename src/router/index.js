@@ -22,12 +22,18 @@ const router = new Router({
         {
             path: '/unlock',
             name: 'Unlock',
-            component: (resolve) => require(['@/ui/screens/unlock'], resolve)
+            component: (resolve) => require(['@/ui/screens/unlock'], resolve),
+            meta: {
+                auth: false
+            }
         },
         {
             path: '/welcome',
             name: 'Welcome',
-            component: (resolve) => require(['@/ui/screens/welcome'], resolve)
+            component: (resolve) => require(['@/ui/screens/welcome'], resolve),
+            meta: {
+                auth: false
+            }
         },
         {
             path: '/terms',
@@ -177,6 +183,7 @@ const router = new Router({
             name: 'Sign Up',
             component: (resolve) => require(['@/ui/screens/account-signup'], resolve),
             meta: {
+                auth: false,
                 permission: 'desktop_mode'
             }
         },
@@ -185,6 +192,7 @@ const router = new Router({
             name: 'Sign In',
             component: (resolve) => require(['@/ui/screens/account-signin'], resolve),
             meta: {
+                auth: false,
                 permission: 'desktop_mode'
             }
         },
@@ -782,6 +790,14 @@ export const Auth = {
 
 router.beforeEach((to, from, next) => {
   $('body').addClass('screen-loading')
+
+  if (Auth.loggedIn() && to.meta.auth === false) {
+      next({
+          path: '/',
+          query: { redirect: to.fullPath }
+      })
+      return
+  }
 
   if (!Auth.loggedIn() && !!to.meta.auth) {
     next({
