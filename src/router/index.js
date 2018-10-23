@@ -597,6 +597,12 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/curator-overview'], resolve)
         },
         {
+            path: '/curator/application',
+            name: 'Curator Application',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/curator-application'], resolve)
+        },
+        {
             path: '/download',
             name: 'Download',
             component: (resolve) => require(['@/ui/screens/download'], resolve)

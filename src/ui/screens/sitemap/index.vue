@@ -126,6 +126,7 @@
                         <ul>
                           <li><a href="#/curators">Curators</a></li>
                           <li><a href="#/curator/1">Curator #1</a></li>
+                          <li><a href="#/curator/application">Curator Application</a></li>
                           <li><a href="#/meta">Meta</a></li>
                         </ul>
                     </div>
