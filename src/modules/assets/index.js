@@ -149,6 +149,8 @@ const assets = {
                     !tags.includes(tag)
                 )
             ], []),
+        assetsByName: (state, { assetsArray }) => name => assetsArray
+            .filter(asset => asset.name.toLowerCase().includes(name.toLowerCase())),
         collections: ({ assets, collections }) => Object.values(collections)
             .reduce((populated, collection) => ({
                 ...populated,
