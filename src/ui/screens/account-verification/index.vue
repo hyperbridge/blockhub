@@ -229,7 +229,7 @@
                         url: 'https://magic.veriff.me/v1/sessions',
                         data: data,
                         headers: {
-                            'x-auth-client': 'ceba96be-5fd6-48ed-87d6-e5aaf80f9718',
+                            'x-auth-client': 'a5464742-28a4-42d0-8105-4ef414341214',
                             'Accept': 'application/json, text/plain, */*'
                         }
                     })
