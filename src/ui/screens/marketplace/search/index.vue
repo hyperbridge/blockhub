@@ -24,9 +24,31 @@
             horizontal
             size="sm"
         />
-        <!-- <c-input v-model=""/> -->
+
+        <h3>Search for assets with:</h3>
+        <div class="filter-box">
+            <p>Phrase:
+                <span v-if="newFilter.phrase">
+                    ({{ newFilter.phrase }})
+                </span>
+            </p>
+            <c-input v-model="newFilter.phrase"/>
+        </div>
+        <div class="filter-box">
+            <p>Minimum price: ({{ newFilter.priceMin }})</p>
+            <c-range-slider v-model="newFilter.priceMin"/>
+        </div>
+        <div class="filter-box">
+            <p>Maximum price: ({{ newFilter.priceMax }})</p>
+            <c-range-slider v-model="newFilter.priceMax"/>
+        </div>
+        <c-button status="info" icon_hide size="md">
+            Create filter
+        </c-button>
+
         <select>
-            <option v-for="(filters, index) in savedFilters" :key="index">
+            <option v-for="(filter, index) in savedFilters" :key="index">
+                {{ filter.phrase }} {{ filter.priceMax }}
             </option>
         </select>
         <c-block title="">
@@ -41,7 +63,8 @@ export default {
         'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
         'c-asset-list': (resolve) => require(['@/ui/components/asset/list'], resolve),
         'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
-        'c-asset-preview': (resolve) => require(['@/ui/components/asset/preview-basic'], resolve)
+        'c-asset-preview': (resolve) => require(['@/ui/components/asset/preview-basic'], resolve),
+        'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve)
     },
     computed: {
         assets() {
@@ -58,7 +81,10 @@ export default {
                 { name: '', phrase: 'Skull', priceMin: 0, priceMax: 32, attributes: { shield: '' } }
             ],
             newFilter: {
-                asset: null
+                asset: null,
+                phrase: '',
+                priceMin: 0,
+                priceMax: 0
             }
         }
     },
@@ -67,6 +93,12 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+    .filter-box {
+        padding: 8px;
+        border-radius: 4px;
+        background: rgba(255,255,255,.05);
+        margin-bottom: 10px;
+    }
 </style>
+
