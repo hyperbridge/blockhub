@@ -484,9 +484,9 @@
                 }
             })
 
-            $('#ise_default').ionRangeSlider({
-                from: 15
-            })
+            // $('#ise_default').ionRangeSlider({
+            //     from: 15
+            // })
         }
     }
 </script>

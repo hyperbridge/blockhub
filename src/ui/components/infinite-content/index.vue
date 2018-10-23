@@ -350,7 +350,7 @@ export default {
         }
     },
     mounted() {
-        $(this.$refs.trendingSlider).ionRangeSlider();
+        //$(this.$refs.trendingSlider).ionRangeSlider();
 
         this.scroll();
     },

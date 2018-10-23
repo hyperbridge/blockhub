@@ -40,7 +40,6 @@
 @import "vendors/font-awesome/fontawesome.scss";
     @import "vendors/font-awesome/fa-solid.scss";
     @import "vendors/font-awesome/fa-brands.scss";
-@import "vendors/lightbox/lightbox";
 
 
 /*-----
@@ -63,18 +62,8 @@
     9. Summernote
     10. Raty
 -----*/
-@import "vendors/datetimepicker/bootstrap-datetimepicker-build";
-@import "vendors/daterangepicker/daterangepicker";
 @import "vendors/select2/core";
-@import "vendors/datatables/datatables";
-@import "vendors/ionrangeslider/ion.rangeSlider";
-@import "vendors/ionrangeslider/ion.rangeSlider.skinModern";
-@import "vendors/smartwizard/smart_wizard";
-@import "vendors/dropzone/basic";
-@import "vendors/dropzone/dropzone";
-@import "vendors/fullcalendar/fullcalendar";
 @import "vendors/summernote/summernote-bs4";
-@import "vendors/raty/jquery.raty";
 
 
 /*-----
