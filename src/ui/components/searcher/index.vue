@@ -22,7 +22,7 @@
                     <slot name="list">
                         <li v-for="(result, index) in results" :key="index" class="list__result">
                             <slot :result="result">
-                                <router-link
+                                <!-- <router-link
                                     v-if="disableDecoration"
                                     :to="`${resultUrl}${result[resultUrlProp]}`"
                                 >
@@ -32,7 +32,7 @@
                                     v-else
                                     :to="`${resultUrl}${result[resultUrlProp]}`"
                                     v-html="$options.filters.highlightPhrase(result[resultTextProp], phrase, 'u')"
-                                />
+                                /> -->
                             </slot>
                         </li>
                     </slot>
