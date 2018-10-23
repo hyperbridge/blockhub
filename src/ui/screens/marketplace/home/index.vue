@@ -1,6 +1,14 @@
 <template>
     <div>
         <h2 class="text-align-center margin-bottom-10">Picks of the week</h2>
+        <!-- <carousel-3d-v2 :items="assets">
+            <template slot-scope="props">
+                <c-asset-store-card
+                    v-for="item in props.items" :key="item.id"
+                    :asset="item"
+                />
+            </template>
+        </carousel-3d-v2> -->
         <div class="carousel-wrapper">
             <c-carousel-3d
                 :items="assets"
@@ -47,6 +55,7 @@ export default {
         'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
         'c-asset-store-card': (resolve) => require(['@/ui/components/asset/store-card'], resolve),
         'c-carousel-3d': (resolve) => require(['@/ui/components/carousel-3d'], resolve),
+        'carousel-3d-v2': (resolve) => require(['@/ui/components/carousel-3d/v2'], resolve),
     },
     data() {
         return {
