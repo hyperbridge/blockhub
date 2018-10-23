@@ -1,6 +1,6 @@
 <template>
-    <c-layout>
-            <div class="container-fluid">
+    <c-layout navigationKey="store">
+            <!--<div class="container-fluid">-->
                 <div class="row">
                     <div class="col-12 mb-4">
                         <c-download-block />
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            <!--</div>-->
     </c-layout>
 </template>
 

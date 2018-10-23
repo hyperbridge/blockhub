@@ -1,196 +1,28 @@
 <template>
-    <c-layout navigationKey="project" :breadcrumbLinks="breadcrumbLinks">
-            <div class="container-fluid">
-                <div class="row" v-if="!project">
-                    <div class="col-12">
-                        Project not found
-                    </div>
-                </div>
-                <div class="row" v-else>
-                    <div class="col-lg-4">
-                        <div class="editor-container">
-                            <div class="editor" v-if="editing">
-                                <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                        @click="activateElement('name')" v-if="!activeElement['name']">Change
-                                    Project Name <span class="fa fa-edit"></span></button>
-
-                                <div class="form-control-element form-control-element--right"
-                                     v-if="activeElement['name']">
-                                    <input ref="name" name="name" type="text" class="form-control"
-                                           placeholder="Project name..." v-model="project.name"/>
-                                    <div
-                                        class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                        <span class="fa fa-check" @click="deactivateElement('name')"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <h1 class="title margin-top-10 margin-bottom-15">{{ project.name }}</h1>
-                        </div>
-
-                        <div class="editor-container">
-                            <div class="editor" v-if="editing">
-                                <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                        @click="activateElement('developer_tags')"
-                                        v-if="!activeElement['developer_tags']" style="margin-bottom: 20px">Change
-                                    Tags <span class="fa fa-edit"></span></button>
-                                <div class="form-control-element form-control-element--right"
-                                     v-if="activeElement['developer_tags']">
-                                    <select id="tag-editor" class="form-control" multiple="multiple">
-                                        <option v-for="(tag, index) in author_tag_options" :key="index"
-                                                :selected="project.developer_tags.includes(tag)">{{ tag }}
-                                        </option>
-                                    </select>
-                                    <div
-                                        class="form-control-element__box form-control-element__box--pretify bg-secondary"
-                                        style="">
-                                                <span class="fa fa-check"
-                                                      @click="deactivateElement('developer_tags')"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <c-tags-list :tags="project.developer_tags"
-                                         v-if="!editing || !activeElement['developer_tags']"></c-tags-list>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <c-badges :icons="['trophy','gem']" />
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="editor text-right" v-if="editing" style="margin-bottom: 30px">
-                            <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                    @click="activateElement('background_image')"
-                                    v-if="!activeElement['background_image']">Change Background Image <span
-                                class="fa fa-edit"></span></button>
-
-                            <div class="" v-if="activeElement['background_image']">
-                                <div class="form-control-element form-control-element--right">
-                                    <input ref="background_image" name="background_image" type="text"
-                                           class="form-control" placeholder="Background image URL..."
-                                           v-model="project.images.header"/>
-                                    <div
-                                        class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                                <span class="fa fa-check"
-                                                      @click="deactivateElement('background_image')"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <label style="display: block">RECOMMENDED SIZE: 1120 x 524px</label>
-                        </div>
-                        <div class="editor text-right" v-if="editing">
-                            <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                    @click="activateElement('store_image')"
-                                    v-if="!activeElement['store_image']">Change Store Image <span
-                                class="fa fa-edit"></span></button>
-
-                            <div class="" v-if="activeElement['store_image']">
-                                <div class="form-control-element form-control-element--right">
-                                    <input ref="store_image" name="store_image" type="text" class="form-control"
-                                           placeholder="Background image URL..."
-                                           v-model="project.images.header"/>
-                                    <div
-                                        class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                                <span class="fa fa-check"
-                                                      @click="deactivateElement('store_image')"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <label style="display: block">RECOMMENDED SIZE: 2140 x 680px</label>
-                        </div>
-                    </div>
-                    <div class="col-12 tab-content">
-                        <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
-                            <li class="nav-item">
-                                <router-link :to="`/project/${project.id}`" class="nav-link">Overview</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/project/${project.id}/community`" class="nav-link active">Community</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/project/${project.id}/bounties`" class="nav-link">Bounties</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/project/${project.id}/updates`" class="nav-link">Updates</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/project/${project.id}/milestones`" class="nav-link">Milestones</router-link>
-                            </li>
-                            <li class="nav-item" v-if="editing">
-                                <a class="nav-link" data-toggle="pill" href="#configure" role="tab"
-                                   aria-controls="configure" aria-selected="true">Configure</a>
-                            </li>
-                        </ul>
-
-                        <div v-if="community_1">
-                            <c-item
-                                v-for="(post, index) in posts"
-                                :key="index"
-                                :post="post"
-                            />
-                        </div>
-
-                        <div v-else-if="community_2">
-                            <c-item :post="post"/>
-                        </div>
-
-
-                    </div>
-                </div>
+    <div class="col-12">
+            <div v-if="community_1">
+                <c-item
+                    v-for="(post, index) in posts"
+                    :key="index"
+                    :post="post"
+                />
             </div>
 
-        <div class="modal fade" id="invertFormExampleModal" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content invert">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Set Up Campaign</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
+            <div v-else-if="community_2">
+                <c-item :post="post"/>
             </div>
+
+
         </div>
-    </c-layout>
-
-
 </template>
 
 <script>
 
-    const updateProject = function () {
-        let project = null
-
-        if (this.id === 'new') {
-            project = this.$store.state.funding.default_project
-        }
-
-        if (this.$store.state.funding.projects && this.$store.state.funding.projects[this.id]) {
-            project = this.$store.state.funding.projects[this.id]
-        }
-
-        if (project && project.images && project.images.header) {
-            window.document.getElementById('header-bg').style['background-image'] = 'url(' + project.images.header + ')'
-        }
-
-        return project
-    }
-
     export default {
-        props: ['id'],
+
+        props: ['project', 'editing'],
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-            'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
-            'c-badges': (resolve) => require(['@/ui/components/project/badges.vue'], resolve),
-            'c-item': (resolve) => require(['@/ui/components/community/post-item'], resolve),
-            'c-post-comment': (resolve) => require(['@/ui/components/community/comment'], resolve)
+            'c-item': (resolve) => require(['@/ui/components/community/post-item'], resolve)
         },
         data() {
             const authors = [
@@ -271,29 +103,6 @@
                     }
                 }
             }
-        },
-        methods: {
-        },
-        computed: {
-            project: updateProject,
-            breadcrumbLinks() {
-                return [
-                    { to: { path: '/' }, title: 'Home' },
-                    { to: { path: '/projects' }, title: 'Crowdfunds' },
-                    { to: { path: '/project/' + this.project.id }, title: this.project.name },
-                    { to: { path: '' }, title: 'Community' }
-                ]
-            }
-        },
-        watch: {
-        },
-        created() {
-            //this.$store.dispatch('application/setEditorMode', 'editing')
-        },
-        beforeDestroy() {
-            window.document.getElementById('header-bg').style['background-image'] = 'url(/static/img/backgrounds/1.jpg)'
-        },
-        updated() {
         }
     }
 </script>

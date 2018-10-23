@@ -9,26 +9,14 @@
                             <li v-for="error in errors" :key="error">{{ error }}</li>
                         </ul>
                     </p>
-                    <form action="/" method="post">
-                        <c-tabs
-                            :active_tab_prop="currentStep"
-                            :lockedStep="finishedStep"
-                            @click="changeTab($event)"
-                            tabText="Welcome"
-                            styled
-                        >
-                            <c-tab :tab_id="1" :selected="true" :showFooter="true">
-                                <div class="tab-container">
-                                    <div class="tab-card">
-                                        <p>Already have an account?</p>
-                                        <c-button class="c-btn-lg outline-success" @click="$router.push('/account/signin')">Sign In</c-button>
-                                        <p>Otherwise you can create an account here:</p>
-                                        <c-button class="c-btn-lg outline-success" @click="$router.push('/account/signup')">Create Account</c-button>
-                                    </div>
-                                </div>
-                            </c-tab>
-                        </c-tabs>
-                    </form>
+                    <div class="chosen-box">
+                        <div class="chosen-box__container">
+                            <div class="h1 mb-4">Already have an account?</div>
+                            <c-button status="outline-success" size="lg" @click="$router.push('/account/signin')">Sign In</c-button>
+                            <div class="h5 my-4">Otherwise you can create an account here:</div>
+                            <c-button status="outline-success" size="lg" @click="$router.push('/account/signup')">Create Account</c-button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -397,19 +385,21 @@ export default {
 
 
 <style lang="scss" scoped>
-    .tab-card {
-        background: #383853;
+    .chosen-box{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .chosen-box__container {
+        background: #3D3E5D;
         border-radius: 5px;
-        padding: 8px 10px;
+        padding: 40px;
         border: 1px solid #373752;
         margin-bottom: 15px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .16);
         &:last-child {
             margin: 0;
-        }
-        input {
-            border: none;
-            box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
-            background: #303049;
         }
     }
 

@@ -70,7 +70,7 @@
 
             <!-- SIDEPANEL -->
             <transition name="slideRight" style="max-width: 250px" v-if="initialized && showRightPanel">
-                <c-sidepanel>
+                <c-sidepanel class="right-sidebar">
                     <c-swiper :options="panelOption" ref="mySwiper">
                     <c-slide v-if="signed_in">
                         <div class="item">
@@ -428,6 +428,14 @@
             this.user_submitted_connection_message = this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))]
         },
         methods: {
+            onSwipeLeft(){
+                console.log('left swipe')
+                this.showRightPanel = true
+            },
+            onSwipeRight(){
+                console.log('right swipe')
+                this.showLeftPanel = true
+            },
             showSlide(sl) {
                 switch (sl) {
                     case 'notification':
@@ -500,12 +508,11 @@
                 }
             },
             handleResize(event) {
-                if ( document.documentElement.clientWidth < 768 )
-                    this.slimMode = true
-                    // console.log(true)
-                else
-                    this.slimMode = false
-                    // console.log(false)
+                if ( document.documentElement.clientWidth < 768 ){
+
+                }
+                    // this.showRightPanel = false;
+                    // this.showLeftPanel = false;
             }
         },
         created(){
@@ -839,9 +846,10 @@
         width: calc(100% - 500px);
         margin: 0 auto;
     }
-
-
-
+    .right-sidebar,
+    .left-sidebar{
+        z-index: 99;
+    }
 
     @media (max-width: 575px) {
 
@@ -858,7 +866,12 @@
         .page .page__content{
             padding-top: 50px!important;
         }
-        #page-aside, #page-sidepanel {
+        .right-sidebar,
+        .left-sidebar{
+            background: #30314b!important;
+            min-height: 100%;
+            top: 0!important;
+            padding-top: 120px;
             display: none;
         }
         .content {
