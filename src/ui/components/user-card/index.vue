@@ -37,7 +37,6 @@
                     :value="user.name"
                     @input="$emit('update:name', $event.target.value)"
                     :readonly="previewMode"
-                    v-focus
                 />
                 <p v-if="type === 'user'"><em>Gamer</em></p>
                 <p v-if="type === 'developer'"><em>Developer</em></p>
