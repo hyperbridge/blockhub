@@ -284,9 +284,9 @@
 
         <a id="powered-by" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
 
-        <transition name="slideDown">
+        <!--<transition name="slideDown">-->
             <c-profile-chooser v-if="profile_chooser && signed_in" />
-        </transition>
+        <!--</transition>-->
     </div>
     <!-- //END PAGE WRAPPER -->
 </template>
