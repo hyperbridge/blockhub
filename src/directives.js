@@ -1,18 +1,36 @@
 import Vue from 'vue'
 import store from './store'
 
-Vue.directive('omodel', {
-    bind(el, binding, vnode) {
-        const { value } = binding
-        console.log(value)
+Vue.directive('xmodel', {
+    bind(el, binding, { context: ctx }) {
+        const { arg: event = 'input', expression, modifiers } = binding;
 
-        el.addEventListener('input', e => {
-            console.log(e)
-            console.log(vnode)
-            // value[prop] = val
-        })
+        const [element, prop] = expression.split('.');
+        const modifierKeys = Object.keys(modifiers);
+        const debounce = modifierKeys.find(key => key.includes('debounce'));
+        let timeout = null;
+
+        el.updateValue = e => {
+            let value = (e.target && e.target.value) || e;
+            if (modifiers.number) Number(value);
+
+            if (debounce) {
+                const [, time] = debounce.split('-');
+                timeout = setTimeout(() => {
+                    ctx[element] = { [prop]: value };
+                }, time * 100 || 300);
+            } else {
+                ctx[element] = { [prop]: value };
+            }
+            console.log(ctx[element][prop])
+        };
+
+        el.addEventListener(event, el.updateValue);
+    },
+    unbind(el, { arg: event = 'input' }) {
+        el.removeEventListener(event, el.updateValue);
     }
-})
+});
 
 Vue.directive('focus', {
     inserted: function (el) {
@@ -73,4 +91,4 @@ Vue.directive('click-outside', {
     unbind(el) {
         document.body.removeEventListener('click', el.clickOutsideEvent)
     }
-})
+});

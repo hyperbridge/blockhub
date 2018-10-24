@@ -1,17 +1,19 @@
 <template>
-    <div class="messages-bar__wrapper">
-        <h4 v-if="status === 'error'" class="messages-bar__title">
-            Please correct following
-            {{ title }}<span v-show="messages.length > 1">s</span>:
-            <span class="messages-bar__count">({{ messages.length }})</span>
-        </h4>
-        <c-message-bar
-            v-for="(message, index) in messages"
-            :key="index"
-            :text="message.text || message"
-            :status="message.status || status"
-        />
-    </div>
+    <transition name="slide-in-top">
+        <div class="messages-bar__wrapper" v-if="messages.length">
+            <h4 v-if="status === 'error'" class="messages-bar__title">
+                Please correct following
+                {{ title }}<span v-show="messages.length > 1">s</span>:
+                <span class="messages-bar__count">({{ messages.length }})</span>
+            </h4>
+            <c-message-bar
+                v-for="(message, index) in messages"
+                :key="index"
+                :text="message.text || message"
+                :status="message.status || status"
+            />
+        </div>
+    </transition>
 </template>
 
 <script>

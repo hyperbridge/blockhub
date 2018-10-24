@@ -126,7 +126,8 @@
                     <c-range-slider
                         v-model="newFilter.priceMin"
                         :max="25"
-                        @input="debounce(e => selectedFilter = { phrase: e }, 350, 'timeout2')"
+                        @input="debounce(() => selectedFilter = { phrase: $event }, 350, 'timeout2')"
+                        v-xmodel.number.debounce-2="newFilter.priceMin"
                     />
                 </div>
             </div>
@@ -177,6 +178,9 @@
             }
         },
         methods: {
+            runIt(e) {
+                console.log(e)
+            },
             createFilter() {
 
                 this.$store.dispatch('assets/create', { prop: 'filters', data: this.newFilter });
