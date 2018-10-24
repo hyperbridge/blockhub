@@ -36,7 +36,7 @@
         </div>
         <div class="filter-box">
             <p>Minimum price: ({{ newFilter.priceMin }})</p>
-            <c-range-slider v-model="newFilter.priceMin"/>
+            <c-range-slider v-model="newFilter.priceMin" :max="25"/>
         </div>
         <div class="filter-box">
             <p>Maximum price: ({{ newFilter.priceMax }})</p>
@@ -57,15 +57,15 @@
                 :value="filter.id"
                 :key="index"
             >
-                [{{ index+1 }}] {{ filter.phrase }} - {{ filter.priceMin }} < {{ filter.priceMax }}
+                [{{ index+1 }}] {{ filter.phrase }} - {{ filter.priceMin }} -> {{ filter.priceMax }}
             </option>
             <option disabled>You have no filters saved</option>
         </select>
 
         {{ choosenFilter }}
 
-        <c-block title="">
-            <c-asset-list :assets="assets" :transition="true"/>
+        <c-block title="Filtered assets">
+            <c-asset-list :assets="filteredAssets" :transition="true"/>
         </c-block>
     </div>
 </template>
@@ -77,7 +77,8 @@ export default {
         'c-asset-list': (resolve) => require(['@/ui/components/asset/list'], resolve),
         'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
         'c-asset-preview': (resolve) => require(['@/ui/components/asset/preview-basic'], resolve),
-        'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve)
+        'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
+        'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve)
     },
     data() {
         return {
@@ -95,6 +96,7 @@ export default {
     },
     methods: {
         createFilter() {
+
             this.$store.dispatch('assets/create', { prop: 'filters', data: this.newFilter });
             this.newFiler = { phrase: '', priceMin: 0, priceMax: 0 };
         }
@@ -104,10 +106,22 @@ export default {
             return this.$store.getters['assets/assetsArray'];
         },
         filters() {
+            return this.$store.state.assets.filters;
             return this.$store.getters['assets/filters'];
         },
         assetsFiltered() {
             return this.$store.getters['assets/assetsByName'](this.phrase);
+        },
+        activeFilter() {
+            return this.filters[this.choosenFilter] || {};
+        },
+        filteredAssets() {
+            const filter = this.activeFilter;
+            return this.$store.getters['assets/assetsByName'](filter.phrase || '')
+                .filter(({ price, ...asset }) => this.choosenFilter
+                    ? price.current > filter.priceMin && price.current < filter.priceMax
+                    : true
+                );
         }
     },
 }
@@ -119,6 +133,9 @@ export default {
         border-radius: 4px;
         background: rgba(255,255,255,.05);
         margin-bottom: 10px;
+    }
+    .assets-wrapper {
+        min-height: 445px;
     }
 </style>
 

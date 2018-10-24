@@ -41,7 +41,7 @@ const assets = {
             2: { id: 2, bid: 18.1, user: { name: 'Dalmyra' }, date: moment().add(-14, 'hours') }
         },
         filters: {
-
+            1: { id: 1, name: null, phrase: 'Armor', priceMin: 1, priceMax: 52 }
         }
     },
     mutations: {
