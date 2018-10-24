@@ -124,10 +124,8 @@
                 <div class="filter-box">
                     <p>Minimum price: ({{ selectedFilter.priceMin }})</p>
                     <c-range-slider
-                        v-model="newFilter.priceMin"
                         :max="25"
-                        @input="debounce(() => selectedFilter = { phrase: $event }, 350, 'timeout2')"
-                        v-xmodel.number.debounce-2="newFilter.priceMin"
+                        v-xmodel.number.debounce-10="selectedFilter.priceMin"
                     />
                 </div>
             </div>

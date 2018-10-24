@@ -2,7 +2,8 @@ import Vue from 'vue'
 import store from './store'
 
 Vue.directive('xmodel', {
-    bind(el, binding, { context: ctx }) {
+    bind(el, binding, vnode) {
+        const { context: ctx } = vnode;
         const { arg: event = 'input', expression, modifiers } = binding;
 
         const [element, prop] = expression.split('.');
@@ -10,19 +11,32 @@ Vue.directive('xmodel', {
         const debounce = modifierKeys.find(key => key.includes('debounce'));
         let timeout = null;
 
+        // vnode.componentOptions.propsData = ctx[element][prop + 'Clone'];
+        // console.log(ctx)
+
         el.updateValue = e => {
             let value = (e.target && e.target.value) || e;
-            if (modifiers.number) Number(value);
+            if (modifiers.number) value = Number(value);
 
             if (debounce) {
                 const [, time] = debounce.split('-');
-                timeout = setTimeout(() => {
-                    ctx[element] = { [prop]: value };
-                }, time * 100 || 300);
+                clearTimeout(timeout);
+                timeout = setTimeout(() =>
+                    ctx[element] = { [prop]: value },
+                    time * 100 || 300
+                );
             } else {
                 ctx[element] = { [prop]: value };
             }
-            console.log(ctx[element][prop])
+
+
+            // ctx[element + 'Clone'][prop] = value;
+
+            // el.target.value = value;
+            // vnode.componentOptions.propsData.value = value;
+            // vnode.componentInstance.value = value;
+
+            console.log(vnode)
         };
 
         el.addEventListener(event, el.updateValue);
@@ -33,10 +47,10 @@ Vue.directive('xmodel', {
 });
 
 Vue.directive('focus', {
-    inserted: function (el) {
-        el.focus()
+    inserted(el) {
+        el.focus();
     }
-})
+});
 
 function isVisible(availableFlags, userFlags, code, variant, data) {
     return availableFlags.map(flag => flag.code).includes(code) && userFlags.map(flag => flag.enabled ? flag.code : null).includes(code)

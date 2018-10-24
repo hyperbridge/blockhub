@@ -18,6 +18,9 @@ export const mapElement = ({ name, module, prop = module, id, action = false, se
                 const id = id || this[name + 'Id'] || this.id;
                 return this.$store.state[module][prop][id];
             }
+        },
+        [name + 'Clone']() {
+            return { ...this[name] };
         }
     };
 };
