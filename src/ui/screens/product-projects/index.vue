@@ -21,7 +21,7 @@
         <div class="col-12">
             <c-block title="Top 3 Ideas" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                 <div class="row">
-                    <div class="col-12 col-md-6 col-lg-3">
+                    <div class="col-12 col-md-6 col-lg-3" v-if="projects.length">
                         <c-project-card
                             v-for="(project, index) in projects"
                             :key="index"
@@ -34,6 +34,9 @@
                             :showGame="false"
                             class="margin-0 w-100"
                         />
+                    </div>
+                    <div class="col-12" v-else>
+                        Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?
                     </div>
                 </div>
             </c-block>
