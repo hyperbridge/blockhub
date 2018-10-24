@@ -47,7 +47,7 @@ const updateState = (savedData, updatedState = {}) => {
         developer_mode: savedData.developer_mode !== null ? savedData.developer_mode : !!developerIdentity,
         ...updatedState
     }
-    
+
     if (updatedState.locked !== undefined) {
         rawData.locked = updatedState.locked
     }
@@ -94,7 +94,7 @@ export const getters = {
 export const actions = {
     init(store, payload) {
         console.log('[BlockHub][Application] Initializing...')
-        
+
         updateState(DB.application.config.data[0], store.state)
 
         state.connection.status.code = null
@@ -261,7 +261,7 @@ export const mutations = {
     },
     enableDarklaunch(state, payload) {
         const darklaunch = state.account.darklaunch_flags.find(darklaunch => darklaunch.code === payload)
-        
+
         if (darklaunch) {
             darklaunch.enabled = true
         } else {

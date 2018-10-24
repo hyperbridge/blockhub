@@ -1,6 +1,8 @@
 <template>
     <div>
 
+        <c-messages-bar :messages="errors"/>
+
         <h4>Saved filters</h4>
         <c-searcher
             @input="phrase = $event"
@@ -150,6 +152,7 @@
             'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
             'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve),
             'c-modal': (resolve) => require(['@/ui/components/modal'], resolve),
+            'c-messages-bar': (resolve) => require(['@/ui/components/message-bar/wrapper'], resolve),
         },
         mixins: [debouncer],
         data() {
@@ -167,7 +170,10 @@
                 autofilterId: 3,
                 selectedFilterId: null,
                 editedFilter: null,
-                timeout2: null
+                timeout2: null,
+                errors: [
+                    'Minimum price cannot be bigger than maximum.'
+                ]
             }
         },
         methods: {
