@@ -1,21 +1,18 @@
 <template>
-    <c-layout>
+    <c-layout :showLeftPanel="false" :showRightPanel="false">
         <div class="container-fluid">
             <div class="row" style="">
-                <div class="col-6 offset-3 mb-4">
+                <div class="col-md-6 offset-md-3 col-sm-12 offset-sm-0 mb-4">
                     <c-block title="KYC" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                        <p>Welcome to the KYC portal. The BlockHub desktop app is the recommended way to load up on tokens. Alternatively, you can input your Ethereum address you would like to verify below. </p>
+                        <p>Welcome to the KYC portal. BlockHub Desktop is the recommended way to KYC, purchase &amp; use tokens. You can also KYC on web and create your account in BlockHub later.</p>
 
                         <div v-if="!desktop_mode">
-                            <div class="text-center alert alert-info">
-                                <p>The BlockHub desktop app is the recommended way to load up on tokens. <c-button href="/#/download" class="outline-white">Download it now</c-button></p>
+                            <div class="text-center alert alert-info" style="font-weight: bold; font-size: 11px;">
+                                <p> BlockHub, the first platform powered by Hyperbridge protocols has been released. <c-button href="/#/download" class="outline-white">Download it now</c-button></p>
                             </div>
                         </div>
                     </c-block>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6 offset-3">
+                    <br /><br />
                     <c-block title="Your Address" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                         <p>Enter your Ethereum public address:</p>
 

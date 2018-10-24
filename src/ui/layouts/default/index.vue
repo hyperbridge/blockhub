@@ -282,6 +282,7 @@
         </div>
         <!-- //END PAGE CONTENT -->
 
+        <a id="powered-by" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
     </div>
     <!-- //END PAGE WRAPPER -->
 </template>
@@ -582,6 +583,18 @@
 
     .navigation .text {
         float: right;
+    }
+
+    #powered-by {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        width: 200px;
+        height: 50px;
+    }
+
+    .cookie-policy {
+        display: none !important;
     }
 
     .slide-chooser {
