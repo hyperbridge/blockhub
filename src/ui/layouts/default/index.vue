@@ -560,10 +560,11 @@
             },
             profile_chooser(){
                 console.log(this.profile_chooser)
-                if (this.profile_chooser)
-                    this.bluredBg = true
-                else
-                    this.bluredBg = false
+                if (this.signed_in)
+                    if (this.profile_chooser)
+                        this.bluredBg = true
+                    else
+                        this.bluredBg = false
             }
         }
     }
