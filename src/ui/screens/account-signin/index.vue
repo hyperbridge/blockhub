@@ -3,6 +3,24 @@
         <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
+                    <p class="errors" v-if="errors.length">
+                        <strong>Please correct the following error(s):</strong>
+                        <ul>
+                            <li v-for="error in errors" :key="error">{{ error }}</li>
+                        </ul>
+                    </p>
+                    <div class="chosen-box">
+                        <div class="chosen-box__container">
+                            <div class="h1 mb-4">Already have an account?</div>
+                            <c-button status="outline-success" size="lg" @click="importAccountFile">Import Account</c-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="content login-container" id="content">
+            <div class="container">
+                <div class="col-12">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="step1-tab" data-toggle="tab" href="#step1" role="tab"
@@ -45,7 +63,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </c-layout>
 </template>
 
@@ -64,7 +82,9 @@
                 this.$router.push('/')
             },
             importAccountFile() {
-                Bridge.sendCommand('importAccountFileRequest')
+                Bridge.sendCommand('importAccountFileRequest').then(() => {
+                    window.location.reload()
+                })
             }
         }
     }

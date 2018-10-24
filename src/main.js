@@ -38,7 +38,7 @@ const notifyError = debounce(function (message) {
   if (!message) return
   
   if (message.indexOf('Error') !== -1) {
-    BlockHub.Bridge.sendCommand('error', { message: message })
+    BlockHub.Bridge.sendCommand('error', { message: message.slice(0, 250) })
   }
 
   if (message.indexOf('TypeError') !== -1) {
