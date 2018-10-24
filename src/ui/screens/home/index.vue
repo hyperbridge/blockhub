@@ -1,7 +1,7 @@
 <template>
     <c-layout navigationKey="store">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row" v-if="this.$store.state.application.environment_mode !== 'production'">
                     <div class="col-12 mb-4">
                         <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/token">
                             <div class="d-flex justify-content-between align-items-center">
