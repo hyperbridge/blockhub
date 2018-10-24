@@ -41,7 +41,8 @@ const assets = {
             2: { id: 2, bid: 18.1, user: { name: 'Dalmyra' }, date: moment().add(-14, 'hours') }
         },
         filters: {
-            1: { id: 1, name: null, phrase: 'Armor', priceMin: 1, priceMax: 52 }
+            1: { id: 1, name: null, phrase: 'Armor', priceMin: 1, priceMax: 52 },
+            2: { id: 2, name: 'Cheap armors', phrase: 'Armors', priceMin: 0, priceMax: 10 }
         }
     },
     mutations: {
@@ -111,6 +112,10 @@ const assets = {
         create({ commit }, payload) {
             const id = rand();
             commit('create', { ...payload, id, data: { ...payload.data, id }});
+        },
+        update({ commit }, payload) {
+            // async call
+            commit('update', payload);
         },
         createFilter({ commit }, payload) {
             const id = rand();
