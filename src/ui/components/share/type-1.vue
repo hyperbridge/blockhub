@@ -30,15 +30,15 @@
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
             'c-author': (resolve) => require(['@/ui/components/author'], resolve)
         },
-        data(){
-            return{
-                show: this.show
-            }
-        },
+        // data(){
+        //     return{
+        //         show: this.show
+        //     }
+        // },
         methods:{
-            toggleList(){
-                this.show = !this.show
-            }
+            // toggleList(){
+            //     this.show = !this.show
+            // }
         }
     }
 </script>
