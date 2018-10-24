@@ -282,7 +282,7 @@
         </div>
         <!-- //END PAGE CONTENT -->
 
-        <a id="powered-by" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
+        <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
     </div>
     <!-- //END PAGE WRAPPER -->
 </template>
@@ -544,6 +544,10 @@
                     this.checkScrollButton()
                 }, 500)
             })
+
+            setTimeout(() => {
+                $(this.$refs.poweredBy).fadeOut(400)
+            }, 10 * 1000)
         },
         watch: {
             '$route'() {
@@ -591,6 +595,8 @@
         right: 10px;
         width: 200px;
         height: 50px;
+        opacity: 0.85;
+        z-index: 100;
     }
 
     .cookie-policy {

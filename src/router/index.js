@@ -74,7 +74,10 @@ const router = new Router({
         {
             path: '/help',
             name: 'Help',
-            component: (resolve) => require(['@/ui/screens/help'], resolve)
+            component: (resolve) => require(['@/ui/screens/help'], resolve),
+            meta: {
+                breadcrumb: false
+            }
         },
         {
             path: '/help/:id',
