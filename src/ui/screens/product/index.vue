@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-12 col-md-8">
                         <div class="editor-container">
                             <div class="editor" v-if="editing">
                                 <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
@@ -99,22 +99,27 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <ul class="nav nav-tabs margin-bottom-30 justify-content-between">
-                            <li class="nav-item">
-                                <router-link :to="`/product/${id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/product/${id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community
-                                </router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/product/${id}/projects`" class="nav-link" :class="{ 'active': section === 'projects' }">Crowdfunding
-                                </router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="`/product/${id}/assets`" class="nav-link" :class="{ 'active': section === 'assets' }">Inventory</router-link>
-                            </li>
-                        </ul>
+                        <c-button status="dark" class="w-100 d-flex d-md-none justify-content-center my-4" size="lg" data-toggle="collapse" data-target="#product_nav" aria-expanded="false" aria-controls="product_nav">
+                            Menu
+                        </c-button>
+                        <div class="collapse product_nav" id="product_nav">
+                            <ul class="nav nav-tabs margin-bottom-30 justify-content-between">
+                                <li class="nav-item">
+                                    <router-link :to="`/product/${id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link :to="`/product/${id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community
+                                    </router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link :to="`/product/${id}/projects`" class="nav-link" :class="{ 'active': section === 'projects' }">Crowdfunding
+                                    </router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link :to="`/product/${id}/assets`" class="nav-link" :class="{ 'active': section === 'assets' }">Inventory</router-link>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="col-12">
@@ -528,6 +533,21 @@
 
     .editor-container {
         position: relative;
+    }
+    @media (min-width: 768px){
+        .product_nav{
+            display: block;
+        }
+    }
+    @media (max-width: 767px) {
+        .product_nav{
+            ul{
+                flex-direction: column;
+                li{
+                    margin-right: auto;
+                }
+            }
+        }
     }
 
 </style>

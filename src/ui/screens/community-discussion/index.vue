@@ -1,26 +1,26 @@
 <template>
     <c-layout navigationKey="store">
-            <div class="container-fluid">
-                <div class="col-12">
-                    <div class="community-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <div class="community-wrapper">
 
-                        <c-item :post="post"/>
+                    <c-item :post="post"/>
 
+                    <c-post-comment
+                        v-for="(comment, index) in post.content.comments"
+                        :key="index"
+                        :comment="comment"
+                    >
                         <c-post-comment
-                            v-for="(comment, index) in post.content.comments"
+                            v-for="(subcomment, index) in comment.replies"
                             :key="index"
-                            :comment="comment"
-                        >
-                            <c-post-comment
-                                v-for="(subcomment, index) in comment.replies"
-                                :key="index"
-                                :comment="subcomment"
-                            />
-                        </c-post-comment>
+                            :comment="subcomment"
+                        />
+                    </c-post-comment>
 
-                    </div>
                 </div>
             </div>
+        </div>
     </c-layout>
 </template>
 

@@ -2,12 +2,12 @@
     <c-layout>
         <div class="container-fluid">
             <div class="row realm_page_header margin-bottom-30">
-                <div class="col-3">
+                <div class="col-10 col-md-3">
                     <div class="logo">
                         <c-img class="img-fluid" :src="realm.images.logo" />
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-12 col-md-3 mb-4 mb-md-0">
                     <div class="widget--box">
                         <h3>Widget Title</h3>
                         <p>
@@ -17,7 +17,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col--12 col-md-3 mb-4 mb-md-0">
                     <div class="widget--box">
                         <h3>Widget Title</h3>
                         <p>
@@ -27,7 +27,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col--12 col-md-3 mb-4 mb-md-0">
                     <div class="widget--box">
                         <h3>Widget Title</h3>
                         <p>
@@ -56,7 +56,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="banner-line margin-bottom-40">
+                    <div class="banner-line margin-bottom-30">
                         <div class="banner-md">
                             <div class="img">
                                 <c-img :src="realm.images.news" />
@@ -177,20 +177,6 @@ function hexToRgb(hex) {
             $('#page-aside').show()
         }
     }
-
-    // z-index: 3;
-
-    // position: fixed;
-    // /* background: rgba(255, 255, 255, 0.2); */
-    // height: 47px;
-    // filter: brightness(2) blur(5px);
-    // background-image: url(/static/img/backgrounds/1.jpg);
-    // background-size: cover;
-    // overflow: hidden;
-
-    // position: fixed;
-    // background: rgba(255, 255, 255, 0.2);
-    // height: 47px;
 </script>
 
 <style lang="scss" scoped>
@@ -198,6 +184,10 @@ function hexToRgb(hex) {
         .logo {
             img {
                 max-width: 150px;
+                @media (max-width: 767px) {
+                    max-width: 300px;
+                    margin-bottom: 30px;
+                }
             }
         }
     }
@@ -205,6 +195,9 @@ function hexToRgb(hex) {
     .banner-line{
         display: flex;
         justify-content: space-between;
+        @media (max-width: 767px) {
+            flex-direction: column;
+        }
     }
     .banner-md{
         display: flex;
@@ -245,6 +238,16 @@ function hexToRgb(hex) {
                 font-weight: bold;
             }
         }
+        @media (max-width: 767px) {
+            width: 100%;
+            margin-bottom: 30px;
+            .img{
+                display: none;
+            }
+            .text{
+                width: 100%;
+            }
+        }
     }
     .banner-sm{
         width: calc( 30% - 15px );
@@ -252,11 +255,15 @@ function hexToRgb(hex) {
         padding: 8px;
         background: rgba(0, 0, 0, .1);
         border-radius: 5px;
-        img{
+        .img{
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            border-radius: 5px;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 5px;
+            }
         }
         .text{
             position: absolute;
@@ -273,6 +280,9 @@ function hexToRgb(hex) {
                 margin: 0;
                 padding: 0;
             }
+        }
+        @media (max-width: 767px) {
+            width: 100%;
         }
     }
 
@@ -384,24 +394,4 @@ function hexToRgb(hex) {
     }
 </style>
 
-<!--
-<style lang="scss">
-    .custom_gradient{
-        background-image: url('../../../assets/img/realm_bg.jpg');
-        background-position: top center;
-        background-repeat: no-repeat;
-        background-size: 100% auto;
-        background-color: #2878c1;
-        #app{
-            &:before{
-                /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,2878c1+46,2878c1+46&0+0,1+62 */
-                background: -moz-linear-gradient(top, rgba(30,87,153,0) 0%, rgba(40,120,193,0.74) 46%, rgba(40,120,193,1) 62%); /* FF3.6-15 */
-                background: -webkit-linear-gradient(top, rgba(30,87,153,0) 0%,rgba(40,120,193,0.74) 46%,rgba(40,120,193,1) 62%); /* Chrome10-25,Safari5.1-6 */
-                background: linear-gradient(to bottom, rgba(30,87,153,0) 0%,rgba(40,120,193,0.74) 46%,rgba(40,120,193,1) 62%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#001e5799', endColorstr='#2878c1',GradientType=0 ); /* IE6-9 */
-            }
-        }
-    }
-</style>
--->
 

@@ -59,7 +59,7 @@
                     <p><span class="fa fa-eye"></span> Preview</p>
                 </button>
             </div>
-            <nav class="app-header__nav" v-if="!signed_in || (signed_in && is_viewing)">
+            <nav class="app-header__nav hide-on-mobile" v-if="!signed_in || (signed_in && is_viewing)">
                 <nav class="horizontal-navigation app-header__nav-left">
                     <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
                     <ul>
@@ -1047,6 +1047,11 @@ export default {
 
     @media screen and (max-width: 1140px) {
         .app-header__nav-item span {
+            display: none;
+        }
+    }
+    @media screen and (max-width: 767px) {
+        .hide-on-mobile {
             display: none;
         }
     }

@@ -113,6 +113,9 @@
         transition: transform .3s ease;
         z-index: 15;
         padding: 8px 50px 8px 8px;
+        @media (max-width: 767px) {
+            flex-wrap: wrap;
+        }
         &:hover{
             cursor: pointer;
             will-change: transform;
@@ -155,6 +158,22 @@
                     color: #C6C6D6;
                 }
             }
+            @media (max-width: 767px) {
+                width: calc(100% - 40px);
+                flex-wrap: wrap;
+                div{
+                    text-align: left!important;
+                    &:nth-child(1){
+                        width: 100%;
+                    }
+                    &:nth-child(2),
+                    &:nth-child(3){
+                        font-size: 12px;
+                        width: 50%;
+                        margin: 5px 0 0;
+                    }
+                }
+            }
         }
         .item-action {
             display: flex;
@@ -162,6 +181,10 @@
             align-items: center;
             width: 140px;
             text-align: center;
+            @media (max-width: 767px) {
+                width: 100%;
+                margin-top: 15px;
+            }
             span {
                 margin: 0 8px;
                 color: #C6C6D6;
