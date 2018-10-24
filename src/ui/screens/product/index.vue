@@ -534,9 +534,13 @@
     .editor-container {
         position: relative;
     }
+    
     @media (min-width: 768px){
         .product_nav{
             display: block!important;
+        }
+        .nav-tabs {
+            border-bottom: 0 none;
         }
     }
     @media (max-width: 767px) {
