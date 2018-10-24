@@ -8,6 +8,7 @@
         "simulator_mode": false,
         "desktop_mode": null,
         "developer_mode": null,
+        "profile_chooser": false,
         "operating_system": null,
         "is_developer": false,
         "editor_mode": "viewing",
