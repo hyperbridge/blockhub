@@ -874,10 +874,15 @@
     }
 
     @media (max-width: 575px) {
-
+        #content {
+            padding-top: 50px;
+        }
     }
 
     @media (max-width: 768px) {
+        .clock {
+            display: none;
+        }
     }
 
     @media (max-width: 991px) {
