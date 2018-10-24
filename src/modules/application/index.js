@@ -213,10 +213,10 @@ export const actions = {
     disableDarklaunch(store, payload) {
         store.commit('disableDarklaunch', payload)
     },
-    deployContract(store, { protocolName, contractName }) {
+    deployContract(store, { protocolName, contractName, oldContractAddress }) {
         return new Promise((resolve, reject) => {
             Bridge
-                .deployContract({ protocolName, contractName })
+                .deployContract({ protocolName, contractName, oldContractAddress })
                 .then((contract) => {
                     state.ethereum[state.current_ethereum_network].packages[protocolName].contracts[contractName] = contract
                     store.dispatch('updateState')
