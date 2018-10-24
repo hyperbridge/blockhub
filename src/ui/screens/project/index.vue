@@ -613,7 +613,7 @@
     }
     @media (min-width: 768px){
         .project_nav{
-            display: block;
+            display: block!important;
         }
     }
     @media (max-width: 767px) {
