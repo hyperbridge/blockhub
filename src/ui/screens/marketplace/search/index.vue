@@ -96,6 +96,8 @@
             </c-option-tag>
         </div>
 
+        <c-button @click="autofilter = { name: 'SilverBird' }">Map element</c-button>
+
 
         <c-block title="Filtered assets" class="assets-wrapper">
             <c-asset-list :assets="filteredAssets" :transition="true"/>
@@ -105,6 +107,7 @@
 
 <script>
     import { debouncer } from '@/mixins';
+    import { mapElement } from '@/store/helpers';
 
     export default {
         components: {
@@ -128,7 +131,8 @@
                     priceMax: 0
                 },
                 choosenFilter: null,
-                id: 2
+                id: 2,
+                autofilterId: 3
             }
         },
         methods: {
@@ -171,7 +175,12 @@
                         ? price.current > filter.priceMin && price.current < filter.priceMax
                         : true
                     );
-            }
+            },
+            ...mapElement({
+                name: 'autofilter',
+                prop: 'filters',
+                module: 'assets',
+            })
         },
     }
 </script>
