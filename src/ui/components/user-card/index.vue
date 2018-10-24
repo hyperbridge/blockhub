@@ -229,7 +229,7 @@
             max-height: 64px;
         }
         .user-data__avatar-upload-btn img {
-            max-height: 32px;
+            max-height: 42px;
         }
     }
     .user-data__avatar, .user-data__avatar-upload-btn {
@@ -269,7 +269,7 @@
         background: transparent;
         box-shadow: none;
         color: #fff;
-        padding: 9px 0;
+        padding: 4px 0;
     }
     .warning {
         background: #ff5454;
