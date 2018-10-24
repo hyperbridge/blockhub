@@ -6,6 +6,7 @@ import assetsData from '@/db/seed/assets';
 import collectionsData from '@/db/seed/collections';
 
 const rand = () => Math.floor(Math.random() * 100);
+const assignId = (id, object) => ({ ...object, data: { ...object.data, id }, id });
 
 const assets = {
     namespaced: true,
@@ -38,6 +39,9 @@ const assets = {
         auctions: {
             1: { id: 1, bid: 12.9, user: { name: 'Predda' }, date: moment().add(-1, 'day') },
             2: { id: 2, bid: 18.1, user: { name: 'Dalmyra' }, date: moment().add(-14, 'hours') }
+        },
+        filters: {
+
         }
     },
     mutations: {
@@ -107,6 +111,10 @@ const assets = {
         create({ commit }, payload) {
             const id = rand();
             commit('create', { ...payload, id, data: { ...payload.data, id }});
+        },
+        createFilter({ commit }, payload) {
+            const id = rand();
+            commit('create', assignId(payload));
         },
         createAuction({ state, commit }, { offerId, ...payload }) {
             const newId = rand();
@@ -183,7 +191,8 @@ const assets = {
                     auctions: offer.auctions.map(id => auctions[id])
                 }
             }), {}),
-        offersArray: (state, { offers }) => Object.values(offers)
+        offersArray: (state, { offers }) => Object.values(offers),
+        filters: ({ filters }) => Object.values(filters)
     }
 }
 

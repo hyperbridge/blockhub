@@ -42,15 +42,28 @@
             <p>Maximum price: ({{ newFilter.priceMax }})</p>
             <c-range-slider v-model="newFilter.priceMax"/>
         </div>
-        <c-button status="info" icon_hide size="md">
+        <c-button
+            status="info"
+            icon_hid
+            size="md"
+            @click="createFilter()"
+        >
             Create filter
         </c-button>
 
-        <select>
-            <option v-for="(filter, index) in savedFilters" :key="index">
-                {{ filter.phrase }} {{ filter.priceMax }}
+        <select name="Select saved filter" v-model="choosenFilter">
+            <option
+                v-for="(filter, index) in filters"
+                :value="filter.id"
+                :key="index"
+            >
+                [{{ index+1 }}] {{ filter.phrase }} - {{ filter.priceMin }} < {{ filter.priceMax }}
             </option>
+            <option disabled>You have no filters saved</option>
         </select>
+
+        {{ choosenFilter }}
+
         <c-block title="">
             <c-asset-list :assets="assets" :transition="true"/>
         </c-block>
@@ -66,14 +79,6 @@ export default {
         'c-asset-preview': (resolve) => require(['@/ui/components/asset/preview-basic'], resolve),
         'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve)
     },
-    computed: {
-        assets() {
-            return this.$store.getters['assets/assetsArray'];
-        },
-        assetsFiltered() {
-            return this.$store.getters['assets/assetsByName'](this.phrase);
-        }
-    },
     data() {
         return {
             phrase: '',
@@ -81,15 +86,30 @@ export default {
                 { name: '', phrase: 'Skull', priceMin: 0, priceMax: 32, attributes: { shield: '' } }
             ],
             newFilter: {
-                asset: null,
                 phrase: '',
                 priceMin: 0,
                 priceMax: 0
-            }
+            },
+            choosenFilter: null
         }
     },
     methods: {
-    }
+        createFilter() {
+            this.$store.dispatch('assets/create', { prop: 'filters', data: this.newFilter });
+            this.newFiler = { phrase: '', priceMin: 0, priceMax: 0 };
+        }
+    },
+    computed: {
+        assets() {
+            return this.$store.getters['assets/assetsArray'];
+        },
+        filters() {
+            return this.$store.getters['assets/filters'];
+        },
+        assetsFiltered() {
+            return this.$store.getters['assets/assetsByName'](this.phrase);
+        }
+    },
 }
 </script>
 
