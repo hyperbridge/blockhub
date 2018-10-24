@@ -182,6 +182,7 @@
         methods: {
             setDefault(identity) {
                 this.$store.state.application.account.current_identity = identity
+                this.$store.state.application.developer_mode = !!identity.developer_id
                 // if (this.defaultIdentity) this.defaultIdentity.default = false
                 // identity.default = true
 
@@ -215,17 +216,19 @@
                 })
             },
             deleteIdentity(identity) {
-                const { removeIdentity } = this
+                if (this.removeIdentity) {
+                    Bridge.sendCommand('removeIdentityRequest', this.removeIdentity).then(() => {
+                        const index = this.identities.indexOf(this.removeIdentity)
+                        this.identities.splice(index, 1)
+                        this.removeIdentity.edit = false
+                        this.removeIdentity = null
 
-                if (removeIdentity) {
-                    const index = this.identities.indexOf(removeIdentity)
-                    this.identities.splice(index, 1)
-                    this.removeIdentity = null
+                        this.saveIdentities()
+                    })
                 } else {
                     this.removeIdentity = identity
                 }
 
-                identity.edit = false
                 this.editedIdentity = null
 
                 this.saveIdentities()

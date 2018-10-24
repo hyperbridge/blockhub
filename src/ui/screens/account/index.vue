@@ -2,7 +2,7 @@
     <c-layout navigationKey="account">
                 <div class="row">
                     <div class="col-12">
-                        <c-block title="Account Information">
+                        <c-block title="Account Information" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                             <form>
                                 <div class="row">
                                     <div class="col-md-10">
@@ -47,15 +47,15 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <c-button @click="exportAccountFile">Download Account File</c-button>
-                                        <c-button @click="importAccountFile">Import Account File</c-button>
-                                        <c-button @click="deleteAccount">Delete Account</c-button>
+                                        <c-button @click="exportAccountFile" hidden>Download Account File</c-button>
+                                        <c-button @click="importAccountFile" hidden>Import Account File</c-button>
+                                        <c-button class="outline-danger" @click="deleteAccount">Delete Account</c-button>
                                     </div>
                                 </div>
                             </form>
                         </c-block>
                         
-                        <c-block title="Overview">
+                        <c-block title="Overview" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                             <div class="stat-card-container">
                                 <div class="stat-card-list">
                                     <router-link tag="div" to="/account/identities" class="route stat-card">

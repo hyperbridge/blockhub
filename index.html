@@ -492,11 +492,11 @@ a {
     <!---->
     <p class="startup-loader__status-message">Launching...</p>
     <div id="critical-error">
-      <p>BlockHub is taking a while to load. If it's been longer than one minute and your internet connection is fine, this page may be broken, or your settings may be corrupt. Here are some options:</p>
+      <p>BlockHub is taking a while to load. If it's been longer than one minute and your internet connection is fine, this page may be broken, or you may need to reset your settings.</p>
       <br />
-      <button onClick="window.goHome()">Go home</button>
-      <button onClick="window.resetSettings()">Reset settings</button> 
-      <button onClick="window.location = 'https://hyperbridge.org/#contact'">Contact us</button>
+      <button onClick="window.goHome()">Go Home</button>
+      <button onClick="window.resetSettings()">Reset Settings</button> 
+      <button onClick="window.location = 'https://hyperbridge.org/#contact'">Contact Us</button>
       <br />
     </div>
     <div class="startup-loader__links">
@@ -554,7 +554,7 @@ function bootChecker() {
   return setTimeout(bootChecker, 1000)
 }
 
-setTimeout(bootChecker, 20 * 1000)
+setTimeout(bootChecker, 15 * 1000)
 
 function setStatusMessage() {
   if (typeof ($) == 'undefined') return setTimeout(setStatusMessage, 100)
@@ -669,7 +669,6 @@ setStatusMessage()
 }</script>
 
 <!-- IMPORTANT SCRIPTS -->
-<script type="text/javascript" src="/static/js/vendors/web3/web3.js"></script>
 <script type="text/javascript" src="/static/js/vendors/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/vendors/jquery/jquery-migrate.min.js"></script>
 <script type="text/javascript" src="/static/js/vendors/bootstrap/bootstrap.bundle.min.js"></script>
@@ -678,11 +677,7 @@ setStatusMessage()
 <!-- THIS PAGE SCRIPTS ONLY -->
 <script type="text/javascript" src="/static/js/vendors/moment/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="/static/js/vendors/select2/select2.min.js"></script>
-<script type="text/javascript" src="/static/js/vendors/daterangepicker/daterangepicker.js"></script>
-<script type="text/javascript" src="/static/js/vendors/raty/jquery.raty.js"></script>
 <script type="text/javascript" src="/static/js/vendors/summernote/summernote-bs4.min.js"></script>
-<script type="text/javascript" src="/static/js/vendors/owlcarousel/owl.carousel.min.js"></script>
-<script type="text/javascript" src="/static/js/vendors/ionrangeslider/ion.rangeSlider.min.js"></script>
 <!-- //END THIS PAGE SCRIPTS ONLY -->
 
 <script>if (window.module) module = window.module;</script>

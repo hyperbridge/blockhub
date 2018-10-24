@@ -120,8 +120,15 @@
             top: unset;
             bottom: -30px;
         }
-        &:last-child{
-
+        @media (max-width: 767px) {
+            text-align: right;
+            margin-left: auto;
+            margin-right: 0;
+            &:after,
+            &:before{
+                right: 9px;
+                left: unset;
+            }
         }
     }
     .posts-timeline__end{
@@ -163,6 +170,15 @@
         &.no-updates{
             &:after{
                 display: none;
+            }
+        }
+        @media (max-width: 767px) {
+            text-align: right;
+            margin-left: auto;
+            margin-right: 0;
+            &:after{
+                right: 0px;
+                left: unset;
             }
         }
     }

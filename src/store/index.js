@@ -374,7 +374,7 @@ const monitorSimulatorMode = () => {
 // }
 
 
-const GetMode = () => {
+BlockHub.GetMode = () => {
     const hostname = window.location.hostname
     let hash = document.location.hash.replace('#/', '')
 
@@ -400,8 +400,8 @@ export let initializer = () => {
         //let initialized = false
 
         DB.setInitCallback(async () => {
-            store.state.application.mode = BlockHub.mode = GetMode()
-
+            console.log('DB init callback')
+            BlockHub.environment_mode = store.state.application.environment_mode
             // TODO: is this a race condition?
             //TODO: PeerService.init()
 
@@ -412,7 +412,7 @@ export let initializer = () => {
             store.dispatch('marketplace/init')
             store.dispatch('funding/init')
 
-            if (store.state.application.mode === 'preview') {
+            if (store.state.application.environment_mode === 'preview') {
                 BlockHub.importSeedData()
 
                 store.state.application.desktop_mode = true

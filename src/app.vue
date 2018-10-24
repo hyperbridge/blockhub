@@ -246,6 +246,10 @@
         font-size: 14px;
         margin: 25px 0;
         overflow: hidden;
+        @media (max-width: 767px) {
+            flex-direction: column;
+            width: 100%;
+        }
         .img {
             margin-right: 15px;
             img {
@@ -324,5 +328,8 @@
             transform: none !important;
             animation: none !important;
         }
+    }
+    .fixed-panel{
+        max-width: 90%;
     }
 </style>

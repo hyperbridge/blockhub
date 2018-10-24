@@ -184,5 +184,8 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+    .note-toolbar {
+        z-index: 95 !important;
+    }
 </style>

@@ -16,14 +16,12 @@
         },
         computed: {
             signed_in() { return this.$store.state.application.signed_in },
-            is_developer() { return this.$store.state.application.account && this.$store.state.application.account.current_identity && this.$store.state.application.account.current_identity.developer_id }
-        },
-        data() {
-            return {
-                links: {
+            links() {
+                return {
                     account: [
                         { to: { path: '/account' }, title: 'Overview' },
-                        { to: { path: '/account/verification' }, title: 'Verification' }
+                        { to: { path: '/account/verification' }, title: 'Verification' },
+                        { to: { path: '/account/backup' }, title: 'Backup' }
                     ],
                     wallets: [
                         { to: { path: '/account/wallets' }, title: 'Overview' },
@@ -33,7 +31,7 @@
                         { to: { path: '/account/identities' }, title: 'Overview' },
                         { to: { path: '/account/identities' }, title: 'New Profile' }
                     ],
-                    developer: this.is_developer ? [ { to: { path: '/developer' }, title: 'Developer Area' } ] : [ { to: { path: '/developer/new' }, title: 'Become a Developer' } ],
+                    developer: this.$store.state.application.developer_mode ? [ { to: { path: '/developer' }, title: 'Developer Area' } ] : [ { to: { path: '/developer/apply' }, title: 'Become a Developer' } ],
                     help: [
                         { to: { path: '/help/0/article/creating-an-account' }, title: 'Creating an account' },
                         { to: { path: '/help/0/article/blockchain-gaming' }, title: 'Blockchain gaming' },

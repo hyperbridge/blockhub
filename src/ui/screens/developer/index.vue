@@ -3,7 +3,18 @@
             <div class="container-fluid">  
                 <div class="row">
                     <div class="col-12">
-                        <a href="/#/developer/new-product">New Product</a>
+                        <c-block title="Developer Area" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                            <div class="row">
+                                <div class="topics-list col-3">
+                                    <c-topic-item
+                                        link="/#/developer/new-product"
+                                        icon="fas fa-window-restore"
+                                        class="padding-10">
+                                        New Product
+                                    </c-topic-item>
+                                </div>
+                            </div>
+                        </c-block>
                     </div>
                 </div>
             </div>
@@ -13,7 +24,7 @@
 <script>
 export default {
     components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
+        'c-topic-item': (resolve) => require(['@/ui/components/help/topic-item'], resolve),
     }
 }
 </script>

@@ -23,23 +23,9 @@
         />
 
         <c-curator-panel>
-            <c-claim title="Content curated" type="success" v-darklaunch="'CURATORS'">
-                <p>This page has been curatedby 2041 users</p>
-                <a href="#3" class="btn btn-sm btn-outline-white">
-                    Become a curator
-                </a>
-            </c-claim>
-            <c-claim title="Unclaimed Page" type="warning" v-darklaunch="'CURATORS'">
-                <p>This page has been curatedby 2041 users</p>
-                <c-switch label="Enable Curation Mode"/>
-            </c-claim>
-            <c-claim title="Some info" v-darklaunch="'CURATORS'">
-                <p>This page has been curatedby 2041 users</p>
-            </c-claim>
-
             <c-curator-info title="Curator panel" v-darklaunch="'CURATORS'">
-                <p>Other 1023 curators have
-                    curated this products.</p>
+                <p>1023 people have
+                    curated this crowdfund.</p>
                 <ul>
                     <li>
                         <strong>492</strong>

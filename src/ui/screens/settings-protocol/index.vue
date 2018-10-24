@@ -73,7 +73,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <button class="btn btn-light btn-sm" @click.prevent="deployContract(protocol.id, contract.name)">Deploy</button>
+                                        <button class="btn btn-light btn-sm" @click.prevent="deployContract(protocol.id, contract.name, contract.address)">Deploy</button>
                                     </td>
                                 </tr>
                             </template>
@@ -166,8 +166,8 @@ export default {
         saveRawData(protocolName) {
             this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages[protocolName] = JSON.parse(this.protocolData[protocolName].data)
         },
-        deployContract(protocolName, contractName) {
-            this.$store.dispatch('application/deployContract', { protocolName, contractName })
+        deployContract(protocolName, contractName, oldContractAddress) {
+            this.$store.dispatch('application/deployContract', { protocolName, contractName, oldContractAddress })
         },
         // async deployAll() {
         //     for (let i in this.protocols) {

@@ -70,7 +70,7 @@
 
             <!-- SIDEPANEL -->
             <transition name="slideRight" style="max-width: 250px" v-if="initialized && showRightPanel">
-                <c-sidepanel>
+                <c-sidepanel class="right-sidebar">
                     <c-swiper :options="panelOption" ref="mySwiper">
                     <c-slide v-if="signed_in">
                         <div class="item">
@@ -282,6 +282,7 @@
         </div>
         <!-- //END PAGE CONTENT -->
 
+        <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
     </div>
     <!-- //END PAGE WRAPPER -->
 </template>
@@ -393,7 +394,7 @@
                 return this.$store.state.application.signed_in
             },
             current_identity() {
-                return this.$store.state.application.account && this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
+                return this.$store.state.application.account && this.$store.state.application.account.current_identity
             },
             messages() {
                 return this.current_identity && this.current_identity.messages
@@ -421,13 +422,22 @@
                 },
                 notifPopup: {},
                 scrollMoreDirection: null,
-                slimMode: false
+                slimMode: false,
+                mobileMode: false
             }
         },
         updated() {
             this.user_submitted_connection_message = this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))]
         },
         methods: {
+            onSwipeLeft(){
+                console.log('left swipe')
+                this.showRightPanel = true
+            },
+            onSwipeRight(){
+                console.log('right swipe')
+                this.showLeftPanel = true
+            },
             showSlide(sl) {
                 switch (sl) {
                     case 'notification':
@@ -500,12 +510,13 @@
                 }
             },
             handleResize(event) {
-                if ( document.documentElement.clientWidth < 768 )
-                    this.slimMode = true
-                    // console.log(true)
-                else
-                    this.slimMode = false
-                    // console.log(false)
+                if ( document.documentElement.clientWidth < 768 ){
+                    this.mobileMode = true
+                } else {
+                    this.mobileMode = false
+                }
+                    // this.showRightPanel = false;
+                    // this.showLeftPanel = false;
             }
         },
         created(){
@@ -533,6 +544,10 @@
                     this.checkScrollButton()
                 }, 500)
             })
+
+            setTimeout(() => {
+                $(this.$refs.poweredBy).fadeOut(400)
+            }, 10 * 1000)
         },
         watch: {
             '$route'() {
@@ -572,6 +587,20 @@
 
     .navigation .text {
         float: right;
+    }
+
+    #powered-by {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        width: 200px;
+        height: 50px;
+        opacity: 0.85;
+        z-index: 100;
+    }
+
+    .cookie-policy {
+        display: none !important;
     }
 
     .slide-chooser {
@@ -839,15 +868,21 @@
         width: calc(100% - 500px);
         margin: 0 auto;
     }
-
-
-
+    .right-sidebar,
+    .left-sidebar{
+        z-index: 98;
+    }
 
     @media (max-width: 575px) {
-
+        #content {
+            padding-top: 50px;
+        }
     }
 
     @media (max-width: 768px) {
+        .clock {
+            display: none;
+        }
     }
 
     @media (max-width: 991px) {
@@ -858,8 +893,13 @@
         .page .page__content{
             padding-top: 50px!important;
         }
-        #page-aside, #page-sidepanel {
-            display: none;
+        .right-sidebar,
+        .left-sidebar{
+            background: #30314b!important;
+            min-height: 100%;
+            top: 0!important;
+            padding-top: 120px;
+            display: none!important;
         }
         .content {
             width: 100%!important;

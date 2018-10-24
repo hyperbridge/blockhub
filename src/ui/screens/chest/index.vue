@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="row align-items-stretch margin-top-30">
-                <div class="col-12 col-xl-3 py-3" v-for="(game, index) in games" :key="index" >
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3 py-3" v-for="(game, index) in games" :key="index" >
                     <c-game-card :game="game" :online="online" :favorites="favorites" :isLoading="(index == 2 ) ? true : false" />
                 </div>
             </div>

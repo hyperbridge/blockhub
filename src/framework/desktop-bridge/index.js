@@ -149,8 +149,9 @@ export const setAccountRequest = async (data) => {
             ...data.account
         }
 
-        DB.application.config.data[0].developer_mode = !!data.account.identities.find(identity => identity.developer_id !== undefined)
+        DB.application.config.data[0].account.current_identity = data.account.identities.find(i => i.id === data.account.current_identity.id)
 
+        DB.application.config.data[0].developer_mode = !!DB.application.config.data[0].account.current_identity.developer_id
 
         DB.save()
 
@@ -163,7 +164,7 @@ export const sendCommand = async (key, data = {}, peer = null, responseId = null
         console.log('[Bridge] Cant send command. Reason: not connected to desktop app', key)
 
         // Ignore startup commands
-        if (key !== 'initProtocol') {
+        if (key !== 'initProtocol' && key !== 'error') {
             local.store.commit('application/activateModal', 'welcome')
         }
 

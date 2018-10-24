@@ -2,13 +2,13 @@
     <c-layout>
         <div class="container-fluid">
             <div class="row" style="">
-                <div class="col-6 mb-4">
+                <div class="col-12 col-md-6 mb-4">
                     <h2>What is HBX?</h2>
                     <p>
                         Built by <c-button status="underline" size="md" href="https://hyperbridge.org">Hyperbridge</c-button>, HBX tokens are used to fuel the decentralized protocols underlying BlockHub. 
                         BlockHub is the first economy built on these protocols, designed to let players and game developers productively interact in mutually beneficial ways. 
                         HBX tokens can be purchased or received by:
-                        
+                        <br /><br />
                         <ul>
                             <li>Selling game items</li>
                             <li>Curating game information in the store</li>
@@ -18,8 +18,9 @@
                             <li>Polls/Questionnaires</li>
                         </ul>
                     </p>
+
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     <h2>What can HBX be used for?</h2>
                     <p>
                         <ul>
@@ -28,7 +29,7 @@
                             <li>Vote for the direct of game development (staking)</li>
                             <li>Receive 10% discount on all transactions</li>
                         </ul>
-
+                        <br />
                         For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees by 50%. To learn more, please see the <c-button status="underline" size="md" href="https://hyperbridge.org/whitepaper">whitepaper</c-button>.
                     </p>
                 </div>
@@ -39,7 +40,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6" v-if="ethereum_connected && ethereum_unlocked">
+                <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked">
                     <c-block title="Purchase" class="margin-bottom-30">
                         <p>Each HBX token is <strong>${{ tokenPriceUSD }} USD</strong>, and can be purchased with ETH at the current price of <strong>{{ (1/ETH2USD).toString().slice(0, 6) }} ETH</strong> per HBX <em>(Based on a locked conversion of ${{ ETH2USD }} USD per 1 ETH)</em>.</p>
                         <div class="input-group mb-4">
@@ -63,7 +64,7 @@
                     </c-block>
                 </div>
 
-                <div class="col-6" v-if="ethereum_connected && ethereum_unlocked && desktop_mode">
+                <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked && desktop_mode">
                     <c-block title="Payment Profile" class="margin-bottom-30">
                         <div class="profile-picker">
                             <div
@@ -90,7 +91,7 @@
                     </c-block>
                 </div>
 
-                <div class="col-6" v-if="ethereum_connected && ethereum_unlocked && !desktop_mode">
+                <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked && !desktop_mode">
                     <c-block title="Payment Profile" class="margin-bottom-30">
                         <p>Input your KYC verified Ethereum address:</p>
                         <div class="input-group mb-4">
@@ -114,7 +115,7 @@
                     <br /><br />
                 </div>
 
-                <div class="col-6 offset-3" v-if="!ethereum_connected" style="text-align: center; width: 100%">
+                <div class="col-12 col-md-6 offset-md-3" v-if="!ethereum_connected" style="text-align: center; width: 100%">
                     <h2>Alternative: MetaMask</h2>
 
                     <br />
@@ -454,7 +455,7 @@ export default {
             }
 
             if (typeof window.web3 !== 'undefined') {
-                window.web3.eth.getAccounts((err, accounts) => {debugger
+                window.web3.eth.getAccounts((err, accounts) => {
                     this.ethereum_unlocked = accounts.length > 0
                 })
             }

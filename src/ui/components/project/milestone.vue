@@ -13,17 +13,23 @@
                     <div class="progress_line">
                         <i class="fas fa-clock icon"></i>
                         <c-progress-bar :percentages="milestone.progress['percent_days']"/>
-                        {{ milestone.progress['days_left'] }} days left
+                        <span class="ml-auto">
+                            {{ milestone.progress['days_left'] }} days left
+                        </span>
                     </div>
                     <div class="progress_line">
                         <i class="fas fa-check icon"></i>
                         <c-progress-bar :percentages="milestone.progress['percent_done']"/>
-                        {{ milestone.progress['percent_done'] }}% Done
+                        <span class="ml-auto">
+                            {{ milestone.progress['percent_done'] }}% Done
+                        </span>
                     </div>
                     <div class="progress_line">
                         <i class="fas fa-dollar-sign icon"></i>
                         <c-progress-bar :percentages="milestone.progress['percent_spent']"/>
-                        {{ milestone.progress['percent_spent'] }}% Spent
+                        <span class="ml-auto">
+                            {{ milestone.progress['percent_spent'] }}% Spent
+                        </span>
                     </div>
                 </div>
             </div>
@@ -57,6 +63,9 @@ export default {
         display: inline-block;
         float: left;
         width: 100%;
+        @media (max-width: 767px) {
+            margin-bottom: 20px;
+        }
         .thumb{
             display: inline-block;
             float: left;
@@ -65,23 +74,37 @@ export default {
                 width: 100%;
                 height: auto;
             }
+            @media (max-width: 767px) {
+                width: 100%;
+            }
         }
         .info{
             display: inline-block;
             float: right;
             width: 73%;
+            @media (max-width: 767px) {
+                width: 100%;
+                margin-top: 15px;
+            }
             .head{
                 display: flex;
                 flex-wrap: nowrap;
                 width: 100%;
                 justify-content: space-between;
                 margin-bottom: 30px;
+                @media (max-width: 767px) {
+                    flex-direction: column-reverse;
+                }
                 .description{
                     width: 68%;
+                    @media (max-width: 767px) {
+                        width: 100%;
+                    }
                     h4{
                         font-size: 26px;
                         font-weight: bold;
                         margin-bottom: 15px;
+                        line-height: 28px;
                     }
                     p{
                         font-size: 16px;
@@ -90,9 +113,14 @@ export default {
                 }
                 .milestones_progress {
                     width: 30%;
+                    @media (max-width: 767px) {
+                        width: 100%;
+                        margin-bottom: 15px;
+                    }
                     .progress_line {
                         display: flex;
                         align-items: center;
+                        white-space: nowrap;
                         &:not(:last-child) {
                             margin-bottom: 10px;
                         }

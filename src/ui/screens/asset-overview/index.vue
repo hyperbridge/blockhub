@@ -348,6 +348,10 @@
                 border-radius: 100%;
                 margin: auto 15px auto 5px;
             }
+            @media (max-width: 767px) {
+                width: 100%;
+                margin: 10px 0;
+            }
         }
     }
 
@@ -371,6 +375,9 @@
         .item{
             width: calc( 100%/ 3 - 20px);
             margin: 10px;
+            @media (max-width: 767px) {
+                width: 100%;
+            }
         }
     }
 
@@ -459,6 +466,9 @@
                     margin-right: 10px;
                     font-size: 15px;
                 }
+                @media (max-width: 767px) {
+                    width: 100%;
+                }
             }
             .item-description {
                 line-height: 22px;
@@ -469,6 +479,12 @@
                 width: calc(100% - 160px);
                 padding-left: 15px;
                 max-width: 80%;
+                @media (max-width: 767px) {
+                    width: 100%;
+                    max-width: unset;
+                    padding: 0;
+                    margin: 5px 0 10px;
+                }
             }
         }
     }
@@ -530,6 +546,9 @@
                         margin: 0;
                     }
                 }
+            }
+            @media (max-width: 767px) {
+                width: 100%;
             }
         }
     }
