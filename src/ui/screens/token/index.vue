@@ -8,27 +8,28 @@
                         Built by <c-button status="underline" size="md" href="https://hyperbridge.org">Hyperbridge</c-button>, HBX tokens are used to fuel the decentralized protocols underlying BlockHub. 
                         BlockHub is the first economy built on these protocols, designed to let players and game developers productively interact in mutually beneficial ways. 
                         HBX tokens can be purchased or received by:
+                        <br /><br />
+                        <ul>
+                            <li>Selling game items</li>
+                            <li>Curating game information in the store</li>
+                            <li>Bug reporting</li>
+                            <li>Game promotion</li>
+                            <li>Product testing</li>
+                            <li>Polls/Questionnaires</li>
+                        </ul>
                     </p>
 
-                    <ul>
-                        <li>Selling game items</li>
-                        <li>Curating game information in the store</li>
-                        <li>Bug reporting</li>
-                        <li>Game promotion</li>
-                        <li>Product testing</li>
-                        <li>Polls/Questionnaires</li>
-                    </ul>
                 </div>
                 <div class="col-12 col-md-6">
                     <h2>What can HBX be used for?</h2>
-                    <ul>
-                        <li>Contribute to crowdfund projects</li>
-                        <li>Purchase products within the store</li>
-                        <li>Vote for the direct of game development (staking)</li>
-                        <li>Receive 10% discount on all transactions</li>
-                    </ul>
-
                     <p>
+                        <ul>
+                            <li>Contribute to crowdfund projects</li>
+                            <li>Purchase products within the store</li>
+                            <li>Vote for the direct of game development (staking)</li>
+                            <li>Receive 10% discount on all transactions</li>
+                        </ul>
+                        <br />
                         For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees by 50%. To learn more, please see the <c-button status="underline" size="md" href="https://hyperbridge.org/whitepaper">whitepaper</c-button>.
                     </p>
                 </div>

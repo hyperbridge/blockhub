@@ -96,6 +96,8 @@ export default {
     },
     data() {
         const checkEthereumConnection = () => {
+            if (!this.useMetamask) return
+
             if (this.desktop_mode || (typeof web3 !== 'undefined' && web3.currentProvider.isMetaMask === true)) {
                 this.ethereum_connected = true
             }
