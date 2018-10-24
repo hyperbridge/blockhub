@@ -393,7 +393,7 @@
                 return this.$store.state.application.signed_in
             },
             current_identity() {
-                return this.$store.state.application.account && this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
+                return this.$store.state.application.account && this.$store.state.application.account.current_identity
             },
             messages() {
                 return this.current_identity && this.current_identity.messages

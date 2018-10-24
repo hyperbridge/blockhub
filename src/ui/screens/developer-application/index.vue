@@ -10,44 +10,28 @@
                         <p>You might initially think that community-driven feature development could lead to bad game design. And in ordinary circumstances you may be right. But don't worry, BlockHub is not an ordinary platform. We know the reason why forum feedback is often mostly negative. It's because people enjoying the game aren't there, THEY'RE PLAYING THE GAME. That's why we need to use COMPARISON metrics to determine the state of your feedback to other games. This, along with the reputations system, will greatly improve the feedback loop to your internal testers. Ultimately you do decide, but we want to make it super easy to understand your community. For the growth of your game, both the developer and the community need to work together, it's a symbiotic relationship. And we're to help nurture it.</p>
                     </c-block>
 
-                    <div v-if="!chosenIdentity.developer_id" style="text-align:center">
-                        <c-block title="Choose Profile" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                            <div class="profile-picker">
-                                <div
-                                    class="profile-picker__profile"
-                                    v-for="identity in identities"
-                                    :key="identity.id"
-                                    v-if="identities && identities.length"
-                                >
-                                    <c-user-card
-                                        :user="identity"
-                                        :previewMode="true"
-                                        :class="{ 'default': chosenIdentity && identity.id == chosenIdentity.id }"
-                                    />
-                                    <div class="profile__action">
-                                        <c-button
-                                            status="info"
-                                            icon="check"
-                                            @click="chooseIdentity(identity)"
-                                            v-if="!chosenIdentity || identity.id != chosenIdentity.id"
-                                        >Choose</c-button>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <c-button href="/#/account/identities">New Profile</c-button>
-                        </c-block>
+                    <div v-if="!developer_mode" style="text-align: center">
+                        <c-user-card
+                            class="col-3 margin-auto"
+                            :user="chosenIdentity"
+                            :previewMode="true"
+                            :class="{ 'default': true }"
+                        />
+                        <br />
+                        <c-button class="basic" href="/#/account/identities">Choose Different Profile</c-button>
 
                         <br /><br />
 
-                        <c-button class="c-btn-lg outline-success" @click="convertIdentity">Convert to Developer</c-button>
+                        <c-button class="c-btn-lg outline-white" @click="convertIdentity">Convert to Developer</c-button>
                     </div>
-                    <div v-if="chosenIdentity.developer_id">
-                        Congratulations, your developer profile is all setup. You are Developer #{{ this.chosenIdentity.developer_id }}
+                    <div v-if="developer_mode">
+                        <c-block title="Congratulations" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                            Your profile is all setup. You are Developer #{{ chosenIdentity.developer_id }}
 
-                        <br /><br />
+                            <br /><br />
 
-                        <c-button href="/#/developer">Go to dashboard</c-button>
+                            <c-button href="/#/developer">Go to dashboard</c-button>
+                        </c-block>
                     </div>
                 </div>
             </div>
@@ -77,6 +61,9 @@
         computed: {
             identities() {
                 return this.$store.state.application.account.identities
+            },
+            developer_mode() {
+                return this.$store.state.application.developer_mode
             }
         },
         methods: {
