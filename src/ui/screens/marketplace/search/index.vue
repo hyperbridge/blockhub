@@ -1,8 +1,6 @@
 <template>
     <div>
-
         <c-messages-bar :messages="errors"/>
-
         <h4>Saved filters</h4>
         <c-searcher
             @input="phrase = $event"
