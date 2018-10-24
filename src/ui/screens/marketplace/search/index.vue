@@ -39,7 +39,6 @@
             <c-range-slider
                 v-model="newFilter.priceMin"
                 :max="25"
-                @input="debounceUpdate({ priceMin: Number($event) })"
             />
         </div>
         <div class="filter-box">
@@ -55,7 +54,7 @@
             Create filter
         </c-button>
 
-        <select name="Select saved filter" v-model="choosenFilter">
+        <select name="Select saved filter" v-model="selectedFilterId">
             <option
                 v-for="(filter, index) in filters"
                 :value="filter.id"
@@ -67,7 +66,7 @@
             <option :value="null">Disable filters</option>
         </select>
 
-        {{ choosenFilter }}
+        {{ selectedFilterId }}
         <div v-if="choosenFilter">
             <c-option-tag
                 v-if="activeFilter.phrase"
@@ -98,6 +97,39 @@
 
         <c-button @click="autofilter = { name: 'SilverBird' }">Map element</c-button>
 
+        <c-button
+            @click="editedFilter = selectedFilterId"
+            v-show="selectedFilterId"
+            status="info"
+            icon="edit"
+        >
+            Edit selected filter
+        </c-button>
+
+        <c-modal v-if="editedFilter" @close="editedFilter = null">
+            <div slot="body">
+                <div class="filter-box">
+                    <p>Phrase:
+                        <span>
+                            ({{ selectedFilter.phrase }})
+                        </span>
+                    </p>
+                    <c-input
+                        :value="selectedFilter.phrase"
+                        @change="selectedFilter = { phrase: $event.target.value }"
+                    />
+                </div>
+                <div class="filter-box">
+                    <p>Minimum price: ({{ selectedFilter.priceMin }})</p>
+                    <c-range-slider
+                        v-model="newFilter.priceMin"
+                        :max="25"
+                        @input="debounce(e => selectedFilter = { phrase: e }, 350, 'timeout2')"
+                    />
+                </div>
+            </div>
+        </c-modal>
+
 
         <c-block title="Filtered assets" class="assets-wrapper">
             <c-asset-list :assets="filteredAssets" :transition="true"/>
@@ -116,7 +148,8 @@
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
             'c-asset-preview': (resolve) => require(['@/ui/components/asset/preview-basic'], resolve),
             'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
-            'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve)
+            'c-option-tag': (resolve) => require(['@/ui/components/option-tag'], resolve),
+            'c-modal': (resolve) => require(['@/ui/components/modal'], resolve),
         },
         mixins: [debouncer],
         data() {
@@ -131,8 +164,10 @@
                     priceMax: 0
                 },
                 choosenFilter: null,
-                id: 2,
-                autofilterId: 3
+                autofilterId: 3,
+                selectedFilterId: null,
+                editedFilter: null,
+                timeout2: null
             }
         },
         methods: {
@@ -177,9 +212,9 @@
                     );
             },
             ...mapElement({
-                name: 'autofilter',
+                name: 'selectedFilter',
                 prop: 'filters',
-                module: 'assets',
+                module: 'assets'
             })
         },
     }

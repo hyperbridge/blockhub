@@ -1,8 +1,8 @@
 export const mapElement = ({ name, module, prop = module, id, action = false, setFn = 'update' }) => {
 
     if (name == null || module == null) {
-        throw new Error(`Map element method requires at least these properties: 'name, module, id':
-            • Name - Name of the computed property
+        throw new Error(`Map element method requires these properties: 'name, module, id'.
+            • Name - Name of the computed property that will evaluate to
             • Module - Vuex module
             • Id - Saved in data property (in format like 'name + Id' eg. productId: 3), or as 'id' prop, or hardcoded to mapElement method.
         `);
