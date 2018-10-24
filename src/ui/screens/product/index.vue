@@ -536,7 +536,7 @@
     }
     @media (min-width: 768px){
         .product_nav{
-            display: block;
+            display: block!important;
         }
     }
     @media (max-width: 767px) {
