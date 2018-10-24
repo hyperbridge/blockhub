@@ -13,7 +13,7 @@
             return {
                 links: [
                     { title: 'Offers', to: '/marketplace/trade' },
-                    { title: 'History', to: '/marketplace/trade/history' },
+                    { title: 'History', to: { name: 'Marketplace Trade History' }},
                 ]
             }
         }
