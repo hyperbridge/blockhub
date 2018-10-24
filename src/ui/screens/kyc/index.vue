@@ -2,22 +2,24 @@
     <c-layout>
         <div class="container-fluid">
             <div class="row" style="">
-                <div class="col-6 mb-4">
-                    <h2>KYC</h2>
-                    <p>Welcome to the KYC portal. The BlockHub desktop app is the recommended way to load up on tokens. Alternatively, you can input your Ethereum address you would like to verify below. </p>
-                </div>
-            </div>
-            <div v-if="desktop_mode && !ethereum_connected">
-                <div class="col-12 text-center alert alert-info">
-                    <p>The BlockHub desktop app is the recommended way to load up on tokens.</p>
+                <div class="col-6 offset-3 mb-4">
+                    <c-block title="KYC" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                        <p>Welcome to the KYC portal. The BlockHub desktop app is the recommended way to load up on tokens. Alternatively, you can input your Ethereum address you would like to verify below. </p>
+
+                        <div v-if="!desktop_mode">
+                            <div class="text-center alert alert-info">
+                                <p>The BlockHub desktop app is the recommended way to load up on tokens. <c-button href="/#/download" class="outline-white">Download it now</c-button></p>
+                            </div>
+                        </div>
+                    </c-block>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6 offset-3">
-                    <c-block title="Verification" class="margin-bottom-30">
+                    <c-block title="Your Address" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                         <p>Enter your Ethereum public address:</p>
 
-                        <div class="input-group mb-4">
+                        <div class="input-group mb-4 margin-bottom-10">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
                                     Public Address
@@ -25,6 +27,8 @@
                             </div>
                             <input type="text" class="form-control" ref="input" placeholder="Public Ethereum address...." v-model="purchaseAddress" />
                         </div>
+
+                            <p><em>Tip: it looks something like this - 0x04AE72Cd525b66bc3D1241a311EE6990AD1F64a9</em></p>
 
                         <c-checkbox
                             id="useMetamask"
@@ -102,6 +106,7 @@ export default {
             if (typeof window.web3 !== 'undefined') {
                 window.web3.eth.getAccounts((err, accounts) => {
                     this.ethereum_unlocked = accounts.length > 0
+                    this.purchaseAddress = accounts[0]
                 })
             }
         }
@@ -114,10 +119,7 @@ export default {
                         window.ethereum.enable().then(() => {
                             window.web3 = new Web3(window.ethereum)
 
-                            window.web3.eth.getAccounts((err, accounts) => {
-                                this.purchaseAddress = accounts[0]
-                                this.account.public_address = accounts[0] // save for verification screen
-                            })
+                            checkEthereumConnection()
                         })
                     } catch (error) {
                         // User denied account access...
@@ -126,9 +128,7 @@ export default {
                 else if (window.web3) {
                     window.web3 = new Web3(window.web3.currentProvider)
 
-                    window.web3.eth.getAccounts((err, accounts) => {
-                        this.purchaseAddress = accounts[0]
-                    })
+                    checkEthereumConnection()
                 }
             }
         }
@@ -158,6 +158,8 @@ export default {
             this.errors = []
 
             if (this.canContinue) {
+                this.$store.state.application.account.public_address = this.purchaseAddress  // save for verification screen
+
                 this.$router.push('/account/verification')
 
                 return
