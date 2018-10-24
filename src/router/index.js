@@ -24,7 +24,8 @@ const router = new Router({
             name: 'Unlock',
             component: (resolve) => require(['@/ui/screens/unlock'], resolve),
             meta: {
-                auth: false
+                auth: false,
+                breadcrumb: false
             }
         },
         {
@@ -32,7 +33,8 @@ const router = new Router({
             name: 'Welcome',
             component: (resolve) => require(['@/ui/screens/welcome'], resolve),
             meta: {
-                auth: false
+                auth: false,
+                breadcrumb: false
             }
         },
         {
@@ -64,7 +66,10 @@ const router = new Router({
             path: '/go/:code',
             name: 'Go',
             props: true,
-            component: (resolve) => require(['@/ui/screens/go'], resolve)
+            component: (resolve) => require(['@/ui/screens/go'], resolve),
+            meta: {
+                breadcrumb: false
+            }
         },
         {
             path: '/help',
@@ -184,7 +189,8 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/account-signup'], resolve),
             meta: {
                 auth: false,
-                permission: 'desktop_mode'
+                permission: 'desktop_mode',
+                breadcrumb: false
             }
         },
         {
@@ -193,7 +199,8 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/account-signin'], resolve),
             meta: {
                 auth: false,
-                permission: 'desktop_mode'
+                permission: 'desktop_mode',
+                breadcrumb: false
             }
         },
         {
@@ -616,7 +623,10 @@ const router = new Router({
             path: '/realm/:id',
             name: 'Realm',
             props: true,
-            component: (resolve) => require(['@/ui/screens/realm'], resolve)
+            component: (resolve) => require(['@/ui/screens/realm'], resolve),
+            meta: {
+                breadcrumb: false
+            }
         },
         {
             path: '/unknown',

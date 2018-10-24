@@ -454,7 +454,7 @@ export default {
             }
 
             if (typeof window.web3 !== 'undefined') {
-                window.web3.eth.getAccounts((err, accounts) => {debugger
+                window.web3.eth.getAccounts((err, accounts) => {
                     this.ethereum_unlocked = accounts.length > 0
                 })
             }

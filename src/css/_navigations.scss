@@ -391,15 +391,6 @@
 .page__content{
     .navigation--minimized,.page-aside--minimized{
         
-        // mcustomscrollbar support
-        .mCustomScrollBox{
-            overflow: visible;
-            .mCSB_container{
-                overflow: visible;
-            }
-        }
-        // end 
-        
         .navigation{
             // keep condensed navigation looks like default
             &--condensed{

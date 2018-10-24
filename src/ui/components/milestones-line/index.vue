@@ -23,7 +23,7 @@
         ],
         mounted() {
             let finished_el = document.getElementsByClassName('done')
-            debugger
+
             if (!finished_el.length) return
             let last_el = finished_el[finished_el.length - 1]
             last_el.className += " last-done-el"

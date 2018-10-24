@@ -32,7 +32,7 @@ const getOS = () => {
 }
 
 const updateState = (savedData, updatedState = {}) => {
-    let developerIdentity = DB.application.config.data[0].account && DB.application.config.data[0].account.identities.find(identity => identity.developer_id !== undefined)
+    //let developerIdentity = DB.application.config.data[0].account && DB.application.config.data[0].account.identities.find(identity => identity.developer_id !== undefined)
 
     rawData = {
         ...rawData,
@@ -44,7 +44,7 @@ const updateState = (savedData, updatedState = {}) => {
         operating_system: getOS(),
         account: DB.application.config.data[0].account,
         darklaunch_flags: DB.application.config.data[0].darklaunch_flags,
-        developer_mode: savedData.developer_mode !== null ? savedData.developer_mode : !!developerIdentity,
+        developer_mode: savedData.developer_mode !== null ? savedData.developer_mode : DB.application.config.data[0].account && !!DB.application.config.data[0].account.current_identity.developer_id,
         environment_mode: savedData.environment_mode !== null ? savedData.environment_mode : BlockHub.GetMode(),
         ...updatedState
     }
@@ -213,10 +213,10 @@ export const actions = {
     disableDarklaunch(store, payload) {
         store.commit('disableDarklaunch', payload)
     },
-    deployContract(store, { protocolName, contractName }) {
+    deployContract(store, { protocolName, contractName, oldContractAddress }) {
         return new Promise((resolve, reject) => {
             Bridge
-                .deployContract({ protocolName, contractName })
+                .deployContract({ protocolName, contractName, oldContractAddress })
                 .then((contract) => {
                     state.ethereum[state.current_ethereum_network].packages[protocolName].contracts[contractName] = contract
                     store.dispatch('updateState')

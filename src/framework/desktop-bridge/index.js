@@ -163,7 +163,7 @@ export const sendCommand = async (key, data = {}, peer = null, responseId = null
         console.log('[Bridge] Cant send command. Reason: not connected to desktop app', key)
 
         // Ignore startup commands
-        if (key !== 'initProtocol') {
+        if (key !== 'initProtocol' && key !== 'error') {
             local.store.commit('application/activateModal', 'welcome')
         }
 

@@ -2,19 +2,16 @@
     <c-layout navigationKey="store">
             <div class="row">
                 <div class="col-12">
-                    <p>We're still working on our Business Manager. In the meantime, you can contact us directly at <a href="mailto:devs@hyperbridge.org">devs@hyperbridge.org</a></p>
+                    <c-block title="Business Manager" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                        <p>We're still working on our Business Manager. In the meantime, you can contact us directly at <a href="mailto:business@hyperbridge.org"><strong>business@hyperbridge.org</strong></a></p>
+                    </c-block>
 
-                    <h2>Community-Driven Development</h2>
-                    <p>You might immediately think that community-driven feature development could lead to bad game design. And in ordinary circumstances you may be right. But don't worry, BlockHub is not an ordinary platform. We know the reason why forum feedback is often mostly negative. It's because people enjoying the game aren't there, THEY'RE PLAYING THE GAME. That's why we need to use COMPARISON metrics to determine the state of your feedback to other games. This, along with the reputations system, will greatly improve the feedback loop to your internal testers. Ultimately you do decide, but we want to make it super easy to understand your community. For the growth of your game, both the developer and the community need to work together, it's a symbiotic relationship. And we're to help nurture it.</p>
+                    <c-block title="Why Community-Driven Development?" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                        <p>You might initially think that community-driven feature development could lead to bad game design. And in ordinary circumstances you may be right. But don't worry, BlockHub is not an ordinary platform. We know the reason why forum feedback is often mostly negative. It's because people enjoying the game aren't there, THEY'RE PLAYING THE GAME. That's why we need to use COMPARISON metrics to determine the state of your feedback to other games. This, along with the reputations system, will greatly improve the feedback loop to your internal testers. Ultimately you do decide, but we want to make it super easy to understand your community. For the growth of your game, both the developer and the community need to work together, it's a symbiotic relationship. And we're to help nurture it.</p>
+                    </c-block>
 
-                    <br />
-
-                    <div v-if="!developerIdentity">
-                        <p>Choose a profile to convert:</p>
-
-                        <br />
-
-                        <c-block title="Choose Profile" class="margin-bottom-30">
+                    <div v-if="!chosenIdentity.developer_id" style="text-align:center">
+                        <c-block title="Choose Profile" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                             <div class="profile-picker">
                                 <div
                                     class="profile-picker__profile"
@@ -43,9 +40,9 @@
 
                         <br /><br />
 
-                        <c-button @click="convertIdentity">Convert to Developer</c-button>
+                        <c-button class="c-btn-lg outline-success" @click="convertIdentity">Convert to Developer</c-button>
                     </div>
-                    <div v-if="developerIdentity">
+                    <div v-if="chosenIdentity.developer_id">
                         Congratulations, your developer profile is all setup. You are Developer #{{ this.chosenIdentity.developer_id }}
 
                         <br /><br />
@@ -66,7 +63,6 @@
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         },
         data() {
-            let developerIdentity = this.$store.state.application.account.identities.find(identity => identity.developer_id !== undefined)
             let chosenIdentity = this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
 
             if (!chosenIdentity && this.$store.state.application.account.identities.length) {
@@ -74,18 +70,22 @@
             }
 
             return {
-                identities: this.$store.state.application.account.identities,
-                chosenIdentity: chosenIdentity,
-                developerIdentity: developerIdentity,
-                errors: []
+                errors: [],
+                chosenIdentity
+            }
+        },
+        computed: {
+            identities() {
+                return this.$store.state.application.account.identities
             }
         },
         methods: {
             convertIdentity() {
                 Bridge.sendCommand('createDeveloperRequest', this.chosenIdentity).then((data) => {
                     this.chosenIdentity.developer_id = data
-                    this.developerIdentity = this.chosenIdentity
                     this.$store.state.application.developer_mode = true
+
+                    // TODO: just redirect here?
                 })
             },
             chooseIdentity(identity) {

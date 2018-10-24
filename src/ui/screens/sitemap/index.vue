@@ -2,7 +2,7 @@
     <c-layout navigationKey="settings">
             <c-block class="margin-bottom-30" title="Sitemap" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>General</h2>
                         <ul>
                           <li><a href="#/download">Download</a></li>
@@ -23,7 +23,7 @@
                           <li><a href="#/unknown">Unknown</a></li>
                         </ul>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Account</h2>
                         <ul>
                           <li><a href="#/account">Account</a></li>
@@ -38,7 +38,7 @@
                           <li><a href="#/account/verification/callback">Account > Verification Callback</a></li>
                         </ul>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Settings</h2>
                         <ul>
                           <li><a href="#/settings">Settings</a></li>
@@ -50,7 +50,7 @@
                           <li><a href="#/settings/game-scanner">Settings > Game Scanner</a></li>
                         </ul>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Wallets</h2>
                         <ul>
                           <li><a href="#/wallet/1">Wallet #1</a></li>
@@ -60,7 +60,7 @@
                           <li><a href="#/wallet/1/receive">Wallet #1 > Receive</a></li>
                         </ul>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Identities</h2>
                         <ul>
                           <li><a href="#/identity/1">Identity #1</a></li>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Store</h2>
                         <ul>
                           <li><a href="#/store">Store</a></li>
@@ -82,14 +82,14 @@
                           <li><a href="#/store/invoice/1">Store Invoice #1</a></li>
                         </ul>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Realms</h2>
                         <ul>
                           <li><a href="#/realms">Realms</a></li>
                           <li><a href="#/realm/1">Realm #1</a></li>
                         </ul>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Products</h2>
                         <ul>
                           <li><a href="#/product/1">Product #1</a></li>
@@ -98,7 +98,7 @@
                           <li><a href="#/product/1/assets">Product #1 > Assets</a></li>
                         </ul>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Projects</h2>
                         <ul>
                           <li><a href="#/projects">Projects</a></li>
@@ -112,7 +112,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Community</h2>
                         <ul>
                           <li><a href="#/community">Community</a></li>
@@ -121,7 +121,7 @@
                           <li><a href="#/community/chat">Community > Chat</a></li>
                         </ul>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Curators</h2>
                         <ul>
                           <li><a href="#/curators">Curators</a></li>
@@ -130,14 +130,14 @@
                           <li><a href="#/meta">Meta</a></li>
                         </ul>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Collections</h2>
                         <ul>
                           <li><a href="#/collections">Collections</a></li>
                           <li><a href="#/collection/1">Collection #1</a></li>
                         </ul>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Streams</h2>
                         <ul>
                           <li><a href="#/streams">Streams</a></li>
@@ -145,7 +145,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Marketplace</h2>
                         <ul>
                           <li><a href="#/marketplace">Marketplace</a></li>
@@ -154,21 +154,21 @@
                           <li><a href="#/marketplace/trade/507f191e810c19729de860ea">Marketplace Trade ID 507f191e810c19729de860ea</a></li>
                         </ul>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Digital Assets</h2>
                         <ul>
                           <li><a href="#/assets">Digital Assets</a></li>
                           <li><a href="#/asset/1">Digital Asset #1</a></li>
                         </ul>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Stash</h2>
                         <ul>
                           <li><a href="#/stash">Stash</a></li>
                           <li><a href="#/chest">Chest</a></li>
                         </ul>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Developer Area</h2>
                         <ul>
                           <li><a href="#/developer">Developer Area</a></li>
@@ -176,7 +176,7 @@
                           <li><a href="#/developer/new-asset">Developer > New Digital Asset</a></li>
                         </ul>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-4">
                         <h2>Business Manager</h2>
                         <ul>
                           <li><a href="#/business">Business Manager</a></li>

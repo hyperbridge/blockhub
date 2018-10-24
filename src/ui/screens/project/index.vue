@@ -104,28 +104,32 @@
                             </div>
                         </div>
                     </div>
-
-                    <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
-                        <li class="nav-item">
-                            <router-link :to="`/project/${project.id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="`/project/${project.id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="`/project/${project.id}/bounties`" class="nav-link" :class="{ 'active': section === 'bounties' }">Bounties</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="`/project/${project.id}/updates`" class="nav-link" :class="{ 'active': section === 'updates' }">Updates</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="`/project/${project.id}/milestones`" class="nav-link" :class="{ 'active': section === 'milestones' }">Milestones</router-link>
-                        </li>
-                        <li class="nav-item" v-if="editing">
-                            <a class="nav-link" data-toggle="pill" href="#configure" role="tab"
-                               aria-controls="configure" aria-selected="true">Configure</a>
-                        </li>
-                    </ul>
+                    <c-button status="dark" class="w-100 d-flex d-md-none justify-content-center my-4" size="lg" data-toggle="collapse" data-target="#project_nav" aria-expanded="false" aria-controls="project_nav">
+                        Menu
+                    </c-button>
+                    <div class="collapse project_nav" id="project_nav">
+                        <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
+                            <li class="nav-item">
+                                <router-link :to="`/project/${project.id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="`/project/${project.id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="`/project/${project.id}/bounties`" class="nav-link" :class="{ 'active': section === 'bounties' }">Bounties</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="`/project/${project.id}/updates`" class="nav-link" :class="{ 'active': section === 'updates' }">Updates</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="`/project/${project.id}/milestones`" class="nav-link" :class="{ 'active': section === 'milestones' }">Milestones</router-link>
+                            </li>
+                            <li class="nav-item" v-if="editing">
+                                <a class="nav-link" data-toggle="pill" href="#configure" role="tab"
+                                   aria-controls="configure" aria-selected="true">Configure</a>
+                            </li>
+                        </ul>
+                    </div>
 
                     <div class="row tab-pane fade" id="configure" role="tabpanel" aria-labelledby="configure-tab">
                         <c-block title="Campaign">
@@ -448,7 +452,7 @@
         },
         created() {
             //this.$store.dispatch('application/setEditorMode', 'editing')
-
+            console.log(this, this.$parent)
             this.updateSection()
         },
         beforeDestroy() {
@@ -484,9 +488,9 @@
                 }
             })
 
-            $('#ise_default').ionRangeSlider({
-                from: 15
-            })
+            // $('#ise_default').ionRangeSlider({
+            //     from: 15
+            // })
         }
     }
 </script>
@@ -607,10 +611,23 @@
     .editor-container--style-2 ~ * {
         opacity: 0.3;
     }
+    @media (min-width: 768px){
+        .project_nav{
+            display: block;
+        }
+    }
     @media (max-width: 767px) {
         .tags{
             justify-content: center;
             margin-bottom: 5px;
+        }
+        .project_nav{
+            ul{
+                flex-direction: column;
+                li{
+                    margin-right: auto;
+                }
+            }
         }
     }
 </style>

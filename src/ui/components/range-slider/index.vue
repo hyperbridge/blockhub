@@ -95,7 +95,7 @@
 
         },
         mounted() {
-            $(this.$refs.rangeSlider).ionRangeSlider();
+            //$(this.$refs.rangeSlider).ionRangeSlider();
         }
     }
 </script>

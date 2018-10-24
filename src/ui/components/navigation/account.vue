@@ -15,11 +15,9 @@
             'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve)
         },
         computed: {
-            signed_in() { return this.$store.state.application.signed_in }
-        },
-        data() {
-            return {
-                links: {
+            signed_in() { return this.$store.state.application.signed_in },
+            links() {
+                return {
                     account: [
                         { to: { path: '/account' }, title: 'Overview' },
                         { to: { path: '/account/verification' }, title: 'Verification' },

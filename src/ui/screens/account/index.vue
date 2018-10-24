@@ -2,7 +2,7 @@
     <c-layout navigationKey="account">
                 <div class="row">
                     <div class="col-12">
-                        <c-block title="Account Information">
+                        <c-block title="Account Information" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                             <form>
                                 <div class="row">
                                     <div class="col-md-10">
@@ -55,7 +55,7 @@
                             </form>
                         </c-block>
                         
-                        <c-block title="Overview">
+                        <c-block title="Overview" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                             <div class="stat-card-container">
                                 <div class="stat-card-list">
                                     <router-link tag="div" to="/account/identities" class="route stat-card">
