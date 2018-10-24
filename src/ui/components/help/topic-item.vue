@@ -1,5 +1,5 @@
 <template>
-    <div class="topic-list-item">
+    <div class="topic-list-item" :class="['block-size-' + size]">
         <a :href="link">
             <i :class="['fas fa-' + icon ]"></i>
             <slot />
@@ -10,7 +10,7 @@
 <script>
     export default {
         name: 'topic-list-item',
-        props:['link', 'icon']
+        props:['link', 'icon', 'size']
     }
 </script>
 
@@ -37,6 +37,14 @@
             &:hover{
                 text-decoration: none;
                 background-color: rgba(0, 0, 0, .3);
+            }
+        }
+        &.block-size-lg{
+            a{
+                font-size: 18px;
+                i{
+                    font-size: 32px;
+                }
             }
         }
     }
