@@ -46,9 +46,12 @@ const assets = {
             1: { id: 1, name: null, phrase: 'Armor', priceMin: 1, priceMax: 52 },
             2: { id: 2, name: 'Cheap armors', phrase: 'Armors', priceMin: 0, priceMax: 10 }
         },
-        trxs: trxsData.reduce((transactions, trx) => ({
+        trxs: trxsData.reduce((transactions, trx, index) => ({
             ...transactions,
-            [trx.id]: trx
+            [trx.id]: {
+                ...trx,
+                createdAt: moment().add(-index, 'days')
+            }
         }), {}),
         users: usersData.reduce((users, user) => ({
             ...users,

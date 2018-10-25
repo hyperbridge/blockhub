@@ -21,7 +21,13 @@
                 </div>
             </div>
             <p class="trade-offer__bar">
-                Trade accepted Dec 10 - {{ trx.id }}
+                Trade {{ trx.accepted ? 'accepted' : 'received' }} on
+                {{ trx.createdAt | customDate('MMM D') }}
+                <span>
+                    On hold until
+                    {{ trx.createdAt | addTime('days', 5) | customDate('MMM D') }}
+                </span>
+                <span>{{ trx.id }}</span>
             </p>
             <div class="trade-offer__items">
                 <div class="trade-offer__user">
@@ -89,6 +95,9 @@
         transform: rotate(45deg);
     }
     .trade-offer__bar {
+        display: flex;
+        // align-items: center;
+        justify-content: space-between;
         margin: 10px 0;
         padding: 4px 15px;
         position: relative;

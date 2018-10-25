@@ -14,6 +14,8 @@ Vue.filter('formatTime', function(value) {
     }
 });
 
+Vue.filter('addTime', (val, type = 'days', number) => moment(val).add(type, number));
+
 Vue.filter('timeAgo', (date) => moment(date).fromNow());
 
 Vue.filter('timeAgoShort', (date) => moment(date).fromNow().replace(/ ago|in /, ''));
