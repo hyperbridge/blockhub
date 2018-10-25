@@ -10,7 +10,7 @@
                           <li><a href="#/help">Help</a></li>
                           <li><a href="#/search">Search</a></li>
                           <li><a href="#/support">Support</a></li>
-                          <li><a href="#/changelog">Changelog</a></li>
+                          <li><a href="#/updates">Updates</a></li>
                           <li><a href="#/welcome">Welcome</a></li>
                           <li><a href="#/redeem">Redeem</a></li>
                           <li><a href="#/token">Token</a></li>

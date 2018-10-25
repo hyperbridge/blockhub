@@ -16,7 +16,7 @@
                 >{{ tab instanceof Object ? tab.title : tab }}</a>
             </slot>
         </div>
-        <div class="heading-bar__additional-action">
+        <div class="heading-bar__additional-action" v-if="showActions">
             <slot name="additional-action"></slot>
             <a :href="more" v-if="more" class="more">
                 MORE <c-icon name="angle-right"/>
@@ -41,6 +41,7 @@ export default {
         showBackground: Boolean,
         showArrows: Boolean,
         more: Boolean,
+        showActions: Boolean,
         headingTabs: Array
     },
     data() {
@@ -112,6 +113,8 @@ export default {
         }
     }
     .heading-bar__tabs{
+        overflow: hidden;
+        width: 100%;
         a {
             color: #ececed;
             background: $name_tab_bg;
@@ -177,9 +180,18 @@ export default {
     }
     .heading-bar__additional-action{
         width: auto;
+        min-width: 235px;
         line-height: 40px;
         display: flex;
-        align-items: center;
+        flex-direction: row;
+        justify-content: flex-end;
+        overflow: hidden;
+
+        @media (max-width: 575px) {
+            & {
+                display: none;
+            }
+        }
     }
 
     .heading-bar__nav{

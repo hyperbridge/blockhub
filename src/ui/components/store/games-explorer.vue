@@ -10,6 +10,7 @@
                     { title: 'Upcoming', category: 'upcoming_products' }
                 ]"
                 @changeTab="category = $event; clearFilters()"
+                showActions="true"
             >
                 <template slot="additional-action">
                     <span class="sort-title">Sort by:</span>

@@ -170,8 +170,8 @@
         },
         methods:{
             showContributeModal() {
-                this.$store.state.application.profile_chooser = true;
-                this.$store.dispatch('application/activateModal', 'send-funds')
+                this.$store.commit('application/showProfileChooser', true)
+                //this.$store.dispatch('application/activateModal', 'send-funds')
             },
         }
     }

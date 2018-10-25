@@ -6,7 +6,7 @@
                         <c-main-banner class="margin-bottom-30" :image="main_banner.img" :logo="main_banner.logo" v-if="main_banner" />
 
                         <c-block>
-                            <c-heading-bar name="Item LookUp" :showArrows="false" :showBackground="false">
+                            <c-heading-bar name="Item LookUp" :showArrows="false" :showBackground="false" :showActions="true">
                                 <template slot="additional-action">
                                     <div class="assets-swiper-pagination swiper-pagination" slot="pagination"></div>
                                 </template>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="col-12 col-lg-6 margin-bottom-30 d-flex flex-column">
                         <c-block class="margin-bottom-30">
-                            <c-heading-bar name="Featured">
+                            <c-heading-bar name="Featured" :showActions="true">
                                 <template slot="additional-action">
                                     <c-heading-bar-fields name="Rarity" icon="fas fa-trophy" />
                                     <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" />
@@ -76,7 +76,7 @@
                     </div>
                     <div class="col-12">
                         <c-block class="margin-bottom-30">
-                            <c-heading-bar name="Get Started" :showArrows="false" :showBackground="false">
+                            <c-heading-bar name="Get Started" :showArrows="false" :showBackground="false" :showActions="true">
                                 <template slot="additional-action">
                                     <div class="assets-swiper-pagination swiper-pagination" slot="pagination"></div>
                                 </template>
@@ -89,7 +89,7 @@
                         </c-block>
 
                         <c-block class="margin-bottom-30">
-                            <c-heading-bar name="Yours" :showArrows="false" :showBackground="false">
+                            <c-heading-bar name="Yours" :showArrows="false" :showBackground="false" :showActions="true">
                                 <template slot="additional-action">
                                     <c-heading-bar-fields name="Rarity" icon="fas fa-trophy" />
                                     <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" />
