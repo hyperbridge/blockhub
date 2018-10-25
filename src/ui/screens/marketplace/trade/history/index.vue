@@ -1,6 +1,11 @@
 <template>
     <div>
-        <div v-for="trx in transactions" :key="trx.id" class="trade-offer">
+        <div
+            v-for="(trx, index) in transactions"
+            :key="trx.id"
+            class="trade-offer"
+            :class="'trade-offer--status-' + index"
+        >
             <div class="trade-offer__items">
                 <div class="trade-offer__user">
                     <img class="trade-offer__user-image" :src="trx.you.img"/>
@@ -55,7 +60,7 @@
         padding: 10px;
         background: rgba(85, 86, 86, .1);
         border: 1px solid rgba(#fff, .2);
-        margin-bottom: 50px;
+        margin-bottom: 70px;
     }
     .trade-offer__items {
         padding: 10px;
@@ -79,20 +84,15 @@
     %triangle {
         content: "";
         position: absolute;
-        background: #f0932b;
         width: 20px;
         height: 20px;
         transform: rotate(45deg);
     }
     .trade-offer__bar {
-        background: #f0932b;
         margin: 10px 0;
         padding: 4px 15px;
-        box-shadow: 0 0 5px 0 rgba(150, 90, 24, .8);
         position: relative;
         font-size: 15px;
-        text-shadow: 0 1px 0px#965a18cc;
-        text-shadow: 0 1.45px 4px#3f2408cc;
         &:before {
             @extend %triangle;
             left: -10px;
@@ -100,6 +100,30 @@
         &:after {
             @extend %triangle;
             right: -10px;
+        }
+    }
+    $statuses: (
+       0: #f0932b,
+       1: #686de0,
+       2: #badc58,
+       3: #f0932b
+    );
+    @each $status, $hex in $statuses {
+        $darker: darken($hex, 30%);
+        &.#{"trade-offer--status-" + $status} {
+            .trade-offer__bar {
+                background: $hex;
+                box-shadow: 0 0 5px 0 rgba($darker, .8);
+                @if $status == 2 {
+                    color: #4b5a22;
+                    text-shadow: 0 1.45px 4px darken($hex, 15%);
+                } @else {
+                    text-shadow: 0 1.45px 4px $darker;
+                }
+                &:before, &:after {
+                    background: $hex;
+                }
+            }
         }
     }
     .trade-offer__assets {
