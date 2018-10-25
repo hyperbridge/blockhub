@@ -904,7 +904,7 @@
     }
 
     @media (max-width: 768px) {
-        .clock {
+        .clock, .version {
             display: none;
         }
     }
