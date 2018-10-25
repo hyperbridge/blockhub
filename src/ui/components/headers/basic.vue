@@ -30,7 +30,7 @@
                     </a>
                 </div>
             </div>
-            <div class="app-header__shadow draggable"></div>
+            <div class="app-header__shadow"></div>
             <a class="app-header__bar-center" :href="is_locked ? '#' : '#/'">
                 <c-loading-logo :isLoading="isLoader" />
             </a>
@@ -795,6 +795,7 @@ export default {
             width: 20px;
             height: 20px;
             margin: 0 1px;
+            -webkit-app-region: no-drag;
             &:before {
                 @extend %extend_1;
             }

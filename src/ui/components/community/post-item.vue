@@ -34,31 +34,13 @@
                 <p>{{ post.content.text }}</p>
                 <c-img :src="post.content.img"/>
             </div>
-            <div class="community-item__post-reply" v-if="reply">
-                <h4 class="mt-4 mb-2 text-left">Your Reply:</h4>
-                <div class="form-group">
-                    <textarea class="form-control" rows="6"></textarea>
-                </div>
-            </div>
             <div class="community-item__action text-right">
                 <a href="#3" class="btn btn-sm btn-icon" v-if="!reply">
                     <i class="fas fa-thumbs-down"></i>
                 </a>
-                <a href="#3" class="btn btn-sm btn-info"
-                   v-if="!reply"
-                   @click="reply = true">
-                    Reply
-                </a>
-                <a href="#3" class="btn btn-sm btn-danger"
-                   @click="reply = false"
-                   v-if="reply">
-                    Cancel
-                </a>
-                <a href="#3" class="btn btn-sm btn-info"
-                   @click="reply = false"
-                   v-if="reply">
-                    Submit
-                </a>
+                <c-reply :class="{'w-100' : reply}"
+                    @replyMode="reply = $event"
+                />
             </div>
 
             <c-post-comment
@@ -84,7 +66,8 @@
     export default {
         props: ['post'],
         components: {
-            'c-post-comment': Comment
+            'c-post-comment': Comment,
+            'c-reply': (resolve) => require(['@/ui/components/community/reply'], resolve),
         },
         data() {
             return {
@@ -115,7 +98,7 @@
         border-radius: 5px;
         color: #fff;
         &.is_reply {
-            background: rgba(255, 255, 255, .1);
+            /*background: rgba(255, 255, 255, .1);*/
         }
     }
     .community-item__header {
@@ -348,21 +331,12 @@
     }
     .community-item__action {
         margin: 10px 7px;
-        .btn {
-            padding: 0px 7px;
-            text-transform: uppercase;
-            font-weight: bold;
-            margin: 0 3px;
-        }
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
         .btn-icon {
             color: #F75D5D;
             font-size: 16px;
-        }
-        .btn-info {
-            background: #5D75F7;
-        }
-        .btn-danger {
-            background: #F75D5D;
         }
     }
     .community-item__post-reply {

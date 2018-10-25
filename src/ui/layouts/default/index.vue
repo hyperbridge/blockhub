@@ -9,7 +9,7 @@
         <!-- //END PAGE HEADER -->
 
         <!-- PAGE CONTENT WRAPPER -->
-        <div class="page__content page__content-invert invert" id="page-content">
+        <div class="page__content page__content-invert invert" :class="{'make-it-blur': bluredBg}" id="page-content">
             <div class="loader-block" v-if="!is_connected">
                 <div class="loader-block__container">
                     <div class="loader-block__spinner"></div>
@@ -283,6 +283,10 @@
         <!-- //END PAGE CONTENT -->
 
         <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
+
+        <transition name="slideDown">
+            <c-profile-chooser v-if="profile_chooser && signed_in" />
+        </transition>
     </div>
     <!-- //END PAGE WRAPPER -->
 </template>
@@ -351,7 +355,25 @@
             'c-message': (resolve) => require(['@/ui/components/message'], resolve),
             'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more.vue'], resolve),
             'c-swiper': swiper,
-            'c-slide': swiperSlide
+            'c-slide': swiperSlide,
+            'c-profile-chooser': (resolve) => require(['@/ui/components/profile-chooser'], resolve),
+        },
+        data() {
+            return {
+                navigationComponent: this.navigationKey || false,
+                loadingState: true,
+                initialized: BlockHub.initialized,
+                user_submitted_connection_message: this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))],
+                panelOption: {
+                    spaceBetween: 0,
+                    loop: false,
+                },
+                notifPopup: {},
+                scrollMoreDirection: null,
+                slimMode: false,
+                mobileMode: false,
+                bluredBg: false
+            }
         },
         computed: {
             is_connected() {
@@ -408,22 +430,9 @@
                     title: this.$options.filters.upperFirstChar(name),
                     to: names.reduce((to, name, index) => (index < i + 1) ? to += '/' + name : to, '')
                 }));
-            }
-        },
-        data() {
-            return {
-                navigationComponent: this.navigationKey || false,
-                loadingState: true,
-                initialized: BlockHub.initialized,
-                user_submitted_connection_message: this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))],
-                panelOption: {
-                    spaceBetween: 0,
-                    loop: false,
-                },
-                notifPopup: {},
-                scrollMoreDirection: null,
-                slimMode: false,
-                mobileMode: false
+            },
+            profile_chooser(){
+                return this.$store.state.application.profile_chooser
             }
         },
         updated() {
@@ -552,6 +561,14 @@
         watch: {
             '$route'() {
                 this.updateBreadcrumbLinks()
+            },
+            profile_chooser(){
+                console.log(this.profile_chooser)
+                if (this.signed_in)
+                    if (this.profile_chooser)
+                        this.bluredBg = true
+                    else
+                        this.bluredBg = false
             }
         }
     }
@@ -560,6 +577,10 @@
 <style lang="scss" scoped>
     [v-cloak] {
         display: none;
+    }
+    .make-it-blur{
+        filter: blur(5px);
+
     }
     .content{
         padding: 20px;

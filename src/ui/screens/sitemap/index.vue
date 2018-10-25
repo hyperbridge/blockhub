@@ -19,6 +19,7 @@
                           <li><a href="#/terms">Terms &amp; Conditions</a></li>
                           <li><a href="#/unlock">Unlock</a></li>
                           <li><a href="#/monitor">Monitor</a></li>
+                          <li><a href="#/verification-assistant">Verification Assistant</a></li>
                           <li><a href="#/not-found">Not Found</a></li>
                           <li><a href="#/unknown">Unknown</a></li>
                         </ul>

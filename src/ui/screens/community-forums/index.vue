@@ -96,7 +96,7 @@
                     },
                     {
                         id: 3,
-                        title: "Suggestions ans Ideas",
+                        title: "Proposals and Ideas",
                         last_post_time: "2017-11-04T04:09:00.000Z",
                         discussions_count: "127",
                         icon: "fas fa-life-ring"

@@ -390,6 +390,11 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/monitor'], resolve)
         },
         {
+            path: '/verification-assistant',
+            name: 'Verification Assistant',
+            component: (resolve) => require(['@/ui/screens/verification-assistant'], resolve)
+        },
+        {
             path: '/developer',
             name: 'Developer Area',
             component: (resolve) => require(['@/ui/screens/developer'], resolve),
