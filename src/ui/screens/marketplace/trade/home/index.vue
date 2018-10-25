@@ -1,48 +1,44 @@
 <template>
-    <c-block>
-        <div class="trade-block">
-            <nav class="trade-block__nav">
-                <h3>Offers</h3>
-                <ul class="trade-block__menu-list reset-list">
-                    <li
-                        v-for="(title, index) in ['received', 'sent', 'closed']"
-                        :key="index"
-                    >
-                        <a
-                            class="menu-list__item"
-                            :class="{ 'menu-list__item--active': activeTab === index + 1}"
-                            @click="activeTab = index + 1"
-                        >
-                            {{ title | upperFirstChar }}
-                            <c-tag-count :number="offers[title].length"/>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <c-tabs :active_tab_prop="activeTab" disableMenu>
-                <c-tab
-                    v-for="(offers, offersKey, index) in offers"
-                    :key="offersKey"
-                    :tab_id="index + 1"
-                    class="trade-block__offers-tab"
+    <div class="trade-block">
+        <nav class="trade-block__nav">
+            <ul class="trade-block__menu-list reset-list">
+                <li
+                    v-for="(title, index) in ['received', 'sent', 'closed']"
+                    :key="index"
                 >
-                    <c-trade-offer
-                        v-for="offer in offers"
-                        :key="offer.id"
-                        :offer="offer"
-                        @wasSeen="offer.new = false"
-                    />
-                    <p v-if="!offers.length">No offers were found</p>
-                </c-tab>
-            </c-tabs>
-        </div>
-    </c-block>
+                    <a
+                        class="menu-list__item"
+                        :class="{ 'menu-list__item--active': activeTab === index + 1}"
+                        @click="activeTab = index + 1"
+                    >
+                        {{ title | upperFirstChar }}
+                        <c-tag-count :number="offers[title].length"/>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <c-tabs :active_tab_prop="activeTab" disableMenu>
+            <c-tab
+                v-for="(offers, offersKey, index) in offers"
+                :key="offersKey"
+                :tab_id="index + 1"
+                class="trade-block__offers-tab"
+            >
+                <c-trade-offer
+                    v-for="offer in offers"
+                    :key="offer.id"
+                    :offer="offer"
+                    @wasSeen="offer.new = false"
+                />
+                <p v-if="!offers.length">No offers were found</p>
+            </c-tab>
+        </c-tabs>
+    </div>
 </template>
 
 <script>
     export default {
         components: {
-            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-tabs': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve),
             'c-tab': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
             'c-trade-offer': (resolve) => require(['@/ui/components/trade-offer'], resolve),

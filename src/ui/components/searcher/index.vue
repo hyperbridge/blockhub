@@ -19,19 +19,21 @@
                     Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?
                 </p>
                 <ul v-else class="results__list">
-                    <slot>
+                    <slot name="list">
                         <li v-for="(result, index) in results" :key="index" class="list__result">
-                            <router-link
-                                v-if="disableDecoration"
-                                :to="`${resultUrl}${result[resultUrlProp]}`"
-                            >
-                                {{ result[resultTextProp] }}
-                            </router-link>
-                            <router-link
-                                v-else
-                                :to="`${resultUrl}${result[resultUrlProp]}`"
-                                v-html="$options.filters.highlightPhrase(result[resultTextProp], phrase, 'u')"
-                            />
+                            <slot :result="result">
+                                <!-- <router-link
+                                    v-if="disableDecoration"
+                                    :to="`${resultUrl}${result[resultUrlProp]}`"
+                                >
+                                    {{ result[resultTextProp] }}
+                                </router-link>
+                                <router-link
+                                    v-else
+                                    :to="`${resultUrl}${result[resultUrlProp]}`"
+                                    v-html="$options.filters.highlightPhrase(result[resultTextProp], phrase, 'u')"
+                                /> -->
+                            </slot>
                         </li>
                     </slot>
                 </ul>
@@ -67,7 +69,7 @@
             resultUrl: String,
             resultUrlProp: String,
             resultTextProp: String,
-            disableDecoration: Boolean
+            disableDecoration: Boolean,
         },
         data() {
             return {
