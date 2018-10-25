@@ -51,8 +51,8 @@ const updateState = (savedData, updatedState = {}) => {
 const sortDir = (dir, asc) => asc ? dir : dir * -1;
 
 export const getters = {
-    assetsArray: state => Array.isArray(state.assets) ? state.assets : Object.values(state.assets),
-    productsArray: state => Array.isArray(state.products) ? state.products : Object.values(state.products),
+    assetsArray: state => !state.assets || Array.isArray(state.assets) ? state.assets : Object.values(state.assets),
+    productsArray: state => !state.assets || Array.isArray(state.products) ? state.products : Object.values(state.products),
     getProductsQuery: state => query => DB.marketplace.products.find(query),
     productsTags: (state, getters) => getters.productsArray
         .reduce((tags, product) => [

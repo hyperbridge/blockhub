@@ -162,7 +162,7 @@ const assets = {
                 }
             }), {}),
         array: (state, { assets }) => Object.values(assets),
-        assetsArray: (state, { assets}) => Object.values(assets),
+        assetsArray: (state, { assets }) => Object.values(assets),
         users: ({ users }, { assets }) => Object.values(users)
             .reduce((populated, user) => ({
                 ...populated,
@@ -174,14 +174,26 @@ const assets = {
         transactions: ({ trxs }, { users, assets }) => Object.values(trxs)
             .reduce((populated, trx) => ({
                 ...populated,
-                [trx.id]: {
-                    ...trx,
-                    you: users[trx.you],
-                    contractor: users[trx.contractor],
-                    contractorOffer: trx.contractorOffer.map(id => assets[id]),
-                    yourOffer: trx.yourOffer.map(id => assets[id])
-                }
+                [trx.id]: trx
+                // [trx.id]: {
+                //     ...trx,
+                //     you: users[trx.you],
+                //     contractor: users[trx.contractor],
+                //     contractorOffer: trx.contractorOffer.map(id => assets[id]),
+                //     yourOffer: trx.yourOffer.map(id => assets[id])
+                // }
             }), {}),
+        // inventoryGrouped: user.inventory.reduce((grouped, id) => {
+        //     return {};
+
+        //     // return {
+        //     //     ...grouped,
+        //     //     [name]: [
+        //     //         ...grouped[name],
+        //     //         assets[id]
+        //     //     ]
+        //     // };
+        // }, {})
         transactionsArray: (state, { transactions }) => Object.values(transactions),
         inventoryAssets: (state, { assetsArray }) => assetsArray
             .filter(asset => !asset.for_sale),
