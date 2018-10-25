@@ -4,7 +4,7 @@
                     <div class="col-12">
                         <c-heading-bar name="My Profile" :showArrows="false" :showBackground="false"/>
                     </div>
-                    <div class="col-6 margin-bottom-40 my_identity">
+                    <div class="col-12 col-md-6 col-lg-4 margin-bottom-40 my_identity">
                         <c-user-card
                             v-if="defaultIdentity"
                             :user="defaultIdentity"
@@ -18,7 +18,7 @@
                             You don't have a default profile.
                         </p>
                     </div>
-                    <div class="col-6" v-if="defaultIdentity">
+                    <div class="col-12 col-md-6 offset-lg-2" v-if="defaultIdentity">
                         <div class="verification-blk">
                             <h3>Verify Your Profile</h3>
                             <div class="status" v-if="defaultIdentity.is_verified">
@@ -77,7 +77,7 @@
                     >
                         <div
                             class="profile-picker__profile"
-                            :class="{ 'edit': identity.edit }"
+                            :class="{ 'edit': identity.edit, 'default-type': identity.id == (defaultIdentity && defaultIdentity.id) }"
                             v-for="identity in filteredIdentities"
                             :key="identity.id"
                         >
@@ -85,6 +85,7 @@
                                 :user="identity"
                                 :previewMode="!identity.edit"
                                 :type="identity.developer_id ? 'developer' : 'user'"
+                                class="margin-bottom-30"
                                 :class="{ 'default': identity.id == (defaultIdentity && defaultIdentity.id) }"
                                 v-bind.sync="identityClone"
                             />
@@ -438,13 +439,13 @@
     .profile-picker {
         display: flex;
         flex-wrap: wrap;
-        padding: 20px;
+        width: 100%;
     }
 
     .profile-picker__profile {
         position: relative;
-        margin: 20px;
-        width: 300px;
+        padding: 0 15px;
+        width: calc( 100% / 3 );
         &:hover .profile__action, &.edit .profile__action {
             display: flex;
         }
@@ -479,7 +480,7 @@
         display: none;
         position: absolute;
         justify-content: center;
-        bottom: -20px;
+        bottom: 18px;
         width: 100%;
         height: 26px;
         .c-btn {

@@ -9,7 +9,7 @@
         <!-- //END PAGE HEADER -->
 
         <!-- PAGE CONTENT WRAPPER -->
-        <div class="page__content page__content-invert invert" id="page-content">
+        <div class="page__content page__content-invert invert" :class="{'make-it-blur': bluredBg}" id="page-content">
             <div class="loader-block" v-if="!is_connected">
                 <div class="loader-block__container">
                     <div class="loader-block__spinner"></div>
@@ -72,177 +72,175 @@
             <transition name="slideRight" style="max-width: 250px" v-if="initialized && showRightPanel">
                 <c-sidepanel class="right-sidebar">
                     <c-swiper :options="panelOption" ref="mySwiper">
-                    <c-slide v-if="signed_in">
-                        <div class="item">
-                            <h3>NOTIFICATION</h3>
+                        <c-slide v-if="signed_in">
+                            <div class="item">
+                                <h3>NOTIFICATION</h3>
 
-                            <div class="slide-chooser">
-                                <c-button status="plain" icon-hide @click="showSlide('notification')" class="active"
-                                          v-if="signed_in">
-                                    <i class="fa fa-bell"/>
-                                </c-button>
-                                <c-button status="plain" icon-hide @click="showSlide('messages')"
-                                          style="box-shadow: none" v-if="signed_in">
-                                    <i class="fa fa-envelope"/>
-                                </c-button>
-                                <c-button status="plain" icon-hide @click="showSlide('updates')"
-                                          style="box-shadow: none" v-if="desktop_mode">
-                                    <i class="fa fa-star"/>
-                                </c-button>
-                                <c-button status="plain" icon-hide @click="showSlide('top_lists')"
-                                          style="box-shadow: none">
-                                    <i class="fa fa-trophy"/>
-                                </c-button>
-                            </div>
-
-                            <div class="navigation">
-                                <div v-if="notifs.length > 0">
-                                    <c-notification v-for="(notif, index) in notifs" @showPopup="showNotifPopup(notif)"
-                                                    :key="index" :notification="notif"/>
+                                <div class="slide-chooser">
+                                    <c-button status="plain" icon-hide @click="showSlide('notification')" class="active"
+                                              v-if="signed_in">
+                                        <i class="fa fa-bell"/>
+                                    </c-button>
+                                    <c-button status="plain" icon-hide @click="showSlide('messages')"
+                                              style="box-shadow: none" v-if="signed_in">
+                                        <i class="fa fa-envelope"/>
+                                    </c-button>
+                                    <c-button status="plain" icon-hide @click="showSlide('updates')"
+                                              style="box-shadow: none" v-if="desktop_mode">
+                                        <i class="fa fa-star"/>
+                                    </c-button>
+                                    <c-button status="plain" icon-hide v-if="this.navigationKey === 'store'" @click="showSlide('top_lists')"
+                                              style="box-shadow: none">
+                                        <i class="fa fa-trophy"/>
+                                    </c-button>
                                 </div>
-                                <div v-else>All clear. Good work!</div>
-                            </div>
 
-                        </div>
-                    </c-slide>
-                    <c-slide v-if="signed_in">
-                        <div class="item">
-                            <h3>MESSAGES</h3>
-
-                            <div class="slide-chooser">
-                                <c-button status="plain" icon-hide @click="showSlide('notification')"
-                                          style="box-shadow: none" v-if="signed_in">
-                                    <i class="fa fa-bell"/>
-                                </c-button>
-                                <c-button status="plain" icon-hide @click="showSlide('messages')" class="active"
-                                          v-if="signed_in">
-                                    <i class="fa fa-envelope"/>
-                                </c-button>
-                                <c-button status="plain" icon-hide @click="showSlide('updates')"
-                                          style="box-shadow: none" v-if="desktop_mode">
-                                    <i class="fa fa-star"/>
-                                </c-button>
-                                <c-button status="plain" icon-hide @click="showSlide('top_lists')"
-                                          style="box-shadow: none">
-                                    <i class="fa fa-trophy"/>
-                                </c-button>
-                            </div>
-
-                            <div class="navigation">
-                                <div class="messages-action">
-                                    <!--<a href="#3" class="btn">Quick Send</a>-->
-                                    <!--<a href="#3" class="btn">Go to Messages</a>-->
-                                    <c-button status="info" icon="angle-double-right" size="sm">Quick Send</c-button>
-                                    <c-button status="info" icon="envelope" size="sm">View All</c-button>
+                                <div class="navigation">
+                                    <div v-if="notifs.length > 0">
+                                        <c-notification v-for="(notif, index) in notifs" @showPopup="showNotifPopup(notif)"
+                                                        :key="index" :notification="notif"/>
+                                    </div>
+                                    <div v-else>All clear. Good work!</div>
                                 </div>
-                                <div class="message-list">
-                                    <c-message v-for="(msg, index) in messages" :key="index" :msg="msg" />
+
+                            </div>
+                        </c-slide>
+                        <c-slide v-if="signed_in">
+                            <div class="item">
+                                <h3>MESSAGES</h3>
+
+                                <div class="slide-chooser">
+                                    <c-button status="plain" icon-hide @click="showSlide('notification')"
+                                              style="box-shadow: none" v-if="signed_in">
+                                        <i class="fa fa-bell"/>
+                                    </c-button>
+                                    <c-button status="plain" icon-hide @click="showSlide('messages')" class="active"
+                                              v-if="signed_in">
+                                        <i class="fa fa-envelope"/>
+                                    </c-button>
+                                    <c-button status="plain" icon-hide @click="showSlide('updates')"
+                                              style="box-shadow: none" v-if="desktop_mode">
+                                        <i class="fa fa-star"/>
+                                    </c-button>
+                                    <c-button status="plain" v-if="this.navigationKey === 'store'" icon-hide @click="showSlide('top_lists')"
+                                              style="box-shadow: none">
+                                        <i class="fa fa-trophy"/>
+                                    </c-button>
                                 </div>
+
+                                <div class="navigation">
+                                    <div class="messages-action">
+                                        <c-button status="info" icon="angle-double-right" size="sm">Quick Send</c-button>
+                                        <c-button status="info" icon="envelope" size="sm">View All</c-button>
+                                    </div>
+                                    <div class="message-list">
+                                        <c-message v-for="(msg, index) in messages" :key="index" :msg="msg" />
+                                    </div>
+                                </div>
+
                             </div>
+                        </c-slide>
+                        <c-slide v-if="desktop_mode">
+                            <div class="item">
+                                <h3>UPDATES</h3>
 
-                        </div>
-                    </c-slide>
-                    <c-slide v-if="desktop_mode">
-                        <div class="item">
-                            <h3>UPDATES</h3>
+                                <div class="slide-chooser">
+                                    <c-button status="plain" icon-hide @click="showSlide('notification')"
+                                              style="box-shadow: none" v-if="signed_in">
+                                        <i class="fa fa-bell"/>
+                                    </c-button>
+                                    <c-button status="plain" icon-hide @click="showSlide('messages')"
+                                              style="box-shadow: none" v-if="signed_in">
+                                        <i class="fa fa-envelope"/>
+                                    </c-button>
+                                    <c-button status="plain" icon-hide @click="showSlide('updates')" class="active"
+                                              v-if="desktop_mode">
+                                        <i class="fa fa-star"/>
+                                    </c-button>
+                                    <c-button status="plain" v-if="this.navigationKey === 'store'" icon-hide @click="showSlide('top_lists')"
+                                              style="box-shadow: none">
+                                        <i class="fa fa-trophy"/>
+                                    </c-button>
+                                </div>
 
-                            <div class="slide-chooser">
-                                <c-button status="plain" icon-hide @click="showSlide('notification')"
-                                          style="box-shadow: none" v-if="signed_in">
-                                    <i class="fa fa-bell"/>
-                                </c-button>
-                                <c-button status="plain" icon-hide @click="showSlide('messages')"
-                                          style="box-shadow: none" v-if="signed_in">
-                                    <i class="fa fa-envelope"/>
-                                </c-button>
-                                <c-button status="plain" icon-hide @click="showSlide('updates')" class="active"
-                                          v-if="desktop_mode">
-                                    <i class="fa fa-star"/>
-                                </c-button>
-                                <c-button status="plain" icon-hide @click="showSlide('top_lists')"
-                                          style="box-shadow: none">
-                                    <i class="fa fa-trophy"/>
-                                </c-button>
+                                <div class="navigation">
+                                    <ul>
+                                        <template v-for="(update,  index) in updates">
+                                            <li class="title" :key="`title-${index}`">
+                                                <a :href="update.link">
+                                                    <span class="text">{{ update.title }}</span>
+                                                </a>
+                                            </li>
+                                            <li :key="`info-${index}`">
+                                                <span class="text">{{ update.info }}</span>
+                                            </li>
+                                        </template>
+                                        <li>
+                                            <br/>
+                                            <button class="btn btn-outline-info btn-sm"
+                                                    style="color: #fff;border: 2px solid #fff;"><span
+                                                class="icon fa fa-sync"/> Relaunch
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+
                             </div>
+                        </c-slide>
+                        <c-slide v-if="this.navigationKey === 'store'">
+                            <div class="item">
+                                <h3>TOP LISTS</h3>
 
-                            <div class="navigation">
-                                <ul>
-                                    <template v-for="(update,  index) in updates">
-                                        <li class="title" :key="`title-${index}`">
-                                            <a :href="update.link">
-                                                <span class="text">{{ update.title }}</span>
+                                <div class="slide-chooser">
+                                    <c-button status="plain" icon-hide @click="showSlide('notification')"
+                                              style="box-shadow: none" v-if="signed_in">
+                                        <i class="fa fa-bell"/>
+                                    </c-button>
+                                    <c-button status="plain" icon-hide @click="showSlide('messages')"
+                                              style="box-shadow: none" v-if="signed_in">
+                                        <i class="fa fa-envelope"/>
+                                    </c-button>
+                                    <c-button status="plain" icon-hide @click="showSlide('updates')"
+                                              style="box-shadow: none" v-if="desktop_mode">
+                                        <i class="fa fa-star"/>
+                                    </c-button>
+                                    <c-button status="plain" icon-hide @click="showSlide('top_lists')" class="active">
+                                        <i class="fa fa-trophy"/>
+                                    </c-button>
+                                </div>
+
+                                <div class="navigation">
+                                    <ul>
+                                        <li class="title">TOP 5</li>
+                                        <li v-for="(product, index) in $store.state.marketplace.top_5" :key="index">
+                                            <a :href="`/#/product/${product.id}`">
+                                                <span class="text">{{ product.name }}</span>
                                             </a>
                                         </li>
-                                        <li :key="`info-${index}`">
-                                            <span class="text">{{ update.info }}</span>
+                                        <li class="more">
+                                            <a href="/#/search">
+                                                <span class="text">MORE...</span>
+                                            </a>
                                         </li>
-                                    </template>
-                                    <li>
-                                        <br/>
-                                        <button class="btn btn-outline-info btn-sm"
-                                                style="color: #fff;border: 2px solid #fff;"><span
-                                            class="icon fa fa-sync"/> Relaunch
-                                        </button>
-                                    </li>
-                                </ul>
+                                    </ul>
+                                </div>
+                                <div class="navigation">
+                                    <ul>
+                                        <li class="title">TOP FREE</li>
+                                        <li v-for="(product, index) in $store.state.marketplace.top_free" :key="index">
+                                            <a :href="`/#/product/${product.id}`">
+                                                <span class="text">{{ product.name }}</span>
+                                            </a>
+                                        </li>
+                                        <li class="more">
+                                            <a href="/#/search">
+                                                <span class="text">MORE...</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-
-                        </div>
-                    </c-slide>
-                    <c-slide v-if="this.navigationKey === 'store'">
-                        <div class="item">
-                            <h3>TOP LISTS</h3>
-
-                            <div class="slide-chooser">
-                                <c-button status="plain" icon-hide @click="showSlide('notification')"
-                                          style="box-shadow: none" v-if="signed_in">
-                                    <i class="fa fa-bell"/>
-                                </c-button>
-                                <c-button status="plain" icon-hide @click="showSlide('messages')"
-                                          style="box-shadow: none" v-if="signed_in">
-                                    <i class="fa fa-envelope"/>
-                                </c-button>
-                                <c-button status="plain" icon-hide @click="showSlide('updates')"
-                                          style="box-shadow: none" v-if="desktop_mode">
-                                    <i class="fa fa-star"/>
-                                </c-button>
-                                <c-button status="plain" icon-hide @click="showSlide('top_lists')" class="active">
-                                    <i class="fa fa-trophy"/>
-                                </c-button>
-                            </div>
-
-                            <div class="navigation">
-                                <ul>
-                                    <li class="title">TOP 5</li>
-                                    <li v-for="(product, index) in $store.state.marketplace.top_5" :key="index">
-                                        <a :href="`/#/product/${product.id}`">
-                                            <span class="text">{{ product.name }}</span>
-                                        </a>
-                                    </li>
-                                    <li class="more">
-                                        <a href="/#/search">
-                                            <span class="text">MORE...</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="navigation">
-                                <ul>
-                                    <li class="title">TOP FREE</li>
-                                    <li v-for="(product, index) in $store.state.marketplace.top_free" :key="index">
-                                        <a :href="`/#/product/${product.id}`">
-                                            <span class="text">{{ product.name }}</span>
-                                        </a>
-                                    </li>
-                                    <li class="more">
-                                        <a href="/#/search">
-                                            <span class="text">MORE...</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </c-slide>
+                        </c-slide>
                 </c-swiper>
                 </c-sidepanel>
             </transition>
@@ -282,6 +280,11 @@
         </div>
         <!-- //END PAGE CONTENT -->
 
+        <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
+
+        <!--<transition name="slideDown">-->
+            <c-profile-chooser v-if="profile_chooser && signed_in" />
+        <!--</transition>-->
     </div>
     <!-- //END PAGE WRAPPER -->
 </template>
@@ -350,7 +353,25 @@
             'c-message': (resolve) => require(['@/ui/components/message'], resolve),
             'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more.vue'], resolve),
             'c-swiper': swiper,
-            'c-slide': swiperSlide
+            'c-slide': swiperSlide,
+            'c-profile-chooser': (resolve) => require(['@/ui/components/profile-chooser'], resolve),
+        },
+        data() {
+            return {
+                navigationComponent: this.navigationKey || false,
+                loadingState: true,
+                initialized: BlockHub.initialized,
+                user_submitted_connection_message: this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))],
+                panelOption: {
+                    spaceBetween: 0,
+                    loop: false,
+                },
+                notifPopup: {},
+                scrollMoreDirection: null,
+                slimMode: false,
+                mobileMode: false,
+                bluredBg: false
+            }
         },
         computed: {
             is_connected() {
@@ -393,7 +414,7 @@
                 return this.$store.state.application.signed_in
             },
             current_identity() {
-                return this.$store.state.application.account && this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
+                return this.$store.state.application.account && this.$store.state.application.account.current_identity
             },
             messages() {
                 return this.current_identity && this.current_identity.messages
@@ -407,22 +428,9 @@
                     title: this.$options.filters.upperFirstChar(name),
                     to: names.reduce((to, name, index) => (index < i + 1) ? to += '/' + name : to, '')
                 }));
-            }
-        },
-        data() {
-            return {
-                navigationComponent: this.navigationKey || false,
-                loadingState: true,
-                initialized: BlockHub.initialized,
-                user_submitted_connection_message: this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))],
-                panelOption: {
-                    spaceBetween: 0,
-                    loop: false,
-                },
-                notifPopup: {},
-                scrollMoreDirection: null,
-                slimMode: false,
-                mobileMode: false
+            },
+            profile_chooser(){
+                return this.$store.state.application.profile_chooser
             }
         },
         updated() {
@@ -543,10 +551,21 @@
                     this.checkScrollButton()
                 }, 500)
             })
+
+            setTimeout(() => {
+                $(this.$refs.poweredBy).fadeOut(400)
+            }, 10 * 1000)
         },
         watch: {
             '$route'() {
                 this.updateBreadcrumbLinks()
+            },
+            profile_chooser(){
+                if (this.signed_in)
+                    if (this.profile_chooser)
+                        this.bluredBg = true
+                    else
+                        this.bluredBg = false
             }
         }
     }
@@ -555,6 +574,10 @@
 <style lang="scss" scoped>
     [v-cloak] {
         display: none;
+    }
+    .make-it-blur{
+        filter: blur(5px);
+
     }
     .content{
         padding: 20px;
@@ -582,6 +605,20 @@
 
     .navigation .text {
         float: right;
+    }
+
+    #powered-by {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        width: 200px;
+        height: 50px;
+        opacity: 0.85;
+        z-index: 100;
+    }
+
+    .cookie-policy {
+        display: none !important;
     }
 
     .slide-chooser {
@@ -747,6 +784,12 @@
                 background: #5065d4;
             }
         }
+        @media (max-width: 1400px) {
+            flex-direction: column;
+            a:nth-child(1){
+                margin-bottom: 10px;
+            }
+        }
     }
 
     .message-list__item {
@@ -855,10 +898,15 @@
     }
 
     @media (max-width: 575px) {
-
+        #content {
+            padding-top: 50px;
+        }
     }
 
     @media (max-width: 768px) {
+        .clock {
+            display: none;
+        }
     }
 
     @media (max-width: 991px) {

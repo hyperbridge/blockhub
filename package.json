@@ -12,7 +12,7 @@
     "deploy-beta": "cp -R dist/ ../beta.blockhub.gg && cd ../beta.blockhub.gg && rm CNAME && echo 'beta.blockhub.gg' >> CNAME && git add -A && git commit -m \"Rebuild\" && git push && cd ../blockhub-web-client",
     "deploy-preview": "cp -R dist/ ../preview.blockhub.gg && cd ../preview.blockhub.gg && rm CNAME && echo 'preview.blockhub.gg' >> CNAME && git add -A && git commit -m \"Rebuild\" && git push && cd ../blockhub-web-client",
     "deploy-staging": "cp -R dist/ ../staging.blockhub.gg && cd ../staging.blockhub.gg && rm CNAME && echo 'staging.blockhub.gg' >> CNAME && git add -A && git commit -m \"Rebuild\" && git push && cd ../blockhub-web-client",
-    "deploy-production": "cp -R dist/ ../blockhub.gg && cd ../blockhub.gg && rm CNAME && echo 'blockhub.gg' >> CNAME && echo '<script>window.location = \"https://blockhub.gg/#/redeem\"</script>' >> redeem/index.html && git add -A && git commit -m \"Rebuild\" && git push && cd ../blockhub-web-client",
+    "deploy-production": "cp -R dist/ ../blockhub.gg && cd ../blockhub.gg && rm CNAME && echo 'blockhub.gg' >> CNAME && mkdir -p redeem && echo '<script>window.location = \"https://blockhub.gg/#/redeem\"</script>' >> redeem/index.html && mkdir -p kyc && echo '<script>window.location = \"https://blockhub.gg/#/kyc\"</script>' >> kyc/index.html && git add -A && git commit -m \"Rebuild\" && git push && cd ../blockhub-web-client",
     "deploy": "npm run deploy-beta && npm run deploy-staging && npm run deploy-preview && npm run deploy-production",
     "test": "NODE_ENV=test ./node_modules/.bin/jest",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",

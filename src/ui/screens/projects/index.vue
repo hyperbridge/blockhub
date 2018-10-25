@@ -62,7 +62,7 @@ export default {
             result.push({
                 type: 'trending_projects_row',
                 data: {
-                    title: 'Top Content Suggestions',
+                    title: 'Top Content Proposals',
                     options: {
                         slidesPerView: 3,
                         spaceBetween: 15,
@@ -80,7 +80,7 @@ export default {
             result.push({
                 type: 'trending_projects_row',
                 data: {
-                    title: 'Top Item Suggestions',
+                    title: 'Top Item Proposals',
                     options: {
                         slidesPerView: 3,
                         spaceBetween: 15,

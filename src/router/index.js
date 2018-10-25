@@ -74,7 +74,10 @@ const router = new Router({
         {
             path: '/help',
             name: 'Help',
-            component: (resolve) => require(['@/ui/screens/help'], resolve)
+            component: (resolve) => require(['@/ui/screens/help'], resolve),
+            meta: {
+                breadcrumb: false
+            }
         },
         {
             path: '/help/:id',
@@ -387,6 +390,11 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/monitor'], resolve)
         },
         {
+            path: '/verification-assistant',
+            name: 'Verification Assistant',
+            component: (resolve) => require(['@/ui/screens/verification-assistant'], resolve)
+        },
+        {
             path: '/developer',
             name: 'Developer Area',
             component: (resolve) => require(['@/ui/screens/developer'], resolve),
@@ -689,6 +697,11 @@ const router = new Router({
                             path: '',
                             name: 'Marketplace Trade Manager',
                             component: (resolve) => require(['@/ui/screens/marketplace/trade/home'], resolve),
+                        },
+                        {
+                            path: 'history',
+                            name: 'Marketplace Trade History',
+                            component: (resolve) => require(['@/ui/screens/marketplace/trade/history'], resolve),
                         },
                         {
                             path: ':id',

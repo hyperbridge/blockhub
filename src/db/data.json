@@ -1,6 +1,6 @@
 {
     "application": {
-        "version": "0.7.0rc2",
+        "version": "0.7.0rc3",
         "environment_mode": null,
         "locked": false,
         "signed_in": false,
@@ -8,6 +8,7 @@
         "simulator_mode": false,
         "desktop_mode": null,
         "developer_mode": null,
+        "profile_chooser": false,
         "operating_system": null,
         "is_developer": false,
         "editor_mode": "viewing",

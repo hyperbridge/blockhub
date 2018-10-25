@@ -6,6 +6,7 @@ import assetsData from '@/db/seed/assets';
 import collectionsData from '@/db/seed/collections';
 
 const rand = () => Math.floor(Math.random() * 100);
+const assignId = (id, object) => ({ ...object, data: { ...object.data, id }, id });
 
 const assets = {
     namespaced: true,
@@ -38,6 +39,10 @@ const assets = {
         auctions: {
             1: { id: 1, bid: 12.9, user: { name: 'Predda' }, date: moment().add(-1, 'day') },
             2: { id: 2, bid: 18.1, user: { name: 'Dalmyra' }, date: moment().add(-14, 'hours') }
+        },
+        filters: {
+            1: { id: 1, name: null, phrase: 'Armor', priceMin: 1, priceMax: 52 },
+            2: { id: 2, name: 'Cheap armors', phrase: 'Armors', priceMin: 0, priceMax: 10 }
         }
     },
     mutations: {
@@ -108,6 +113,14 @@ const assets = {
             const id = rand();
             commit('create', { ...payload, id, data: { ...payload.data, id }});
         },
+        update({ commit }, payload) {
+            // async call
+            commit('update', payload);
+        },
+        createFilter({ commit }, payload) {
+            const id = rand();
+            commit('create', assignId(payload));
+        },
         createAuction({ state, commit }, { offerId, ...payload }) {
             const newId = rand();
 
@@ -135,7 +148,7 @@ const assets = {
                 }
             }), {}),
         array: (state, { assets }) => Object.values(assets),
-        assetsArray: state => Object.values(state.assets),
+        assetsArray: (state, { assets}) => Object.values(assets),
         inventoryAssets: (state, { assetsArray }) => assetsArray
             .filter(asset => !asset.for_sale),
         selectedAssets: (state, { assetsArray }) => assetsArray
@@ -149,6 +162,15 @@ const assets = {
                     !tags.includes(tag)
                 )
             ], []),
+        assetsAttributes: (state, { assetsArray }) => assetsArray
+            .reduce((attributes, asset) => [
+                ...attributes,
+                ...Object.keys(asset.metadata).filter(attr =>
+                    !attributes.includes(attr)
+                )
+            ], []),
+        assetsByName: (state, { assetsArray }) => name => assetsArray
+            .filter(asset => asset.name.toLowerCase().includes(name.toLowerCase())),
         collections: ({ assets, collections }) => Object.values(collections)
             .reduce((populated, collection) => ({
                 ...populated,
@@ -174,7 +196,8 @@ const assets = {
                     auctions: offer.auctions.map(id => auctions[id])
                 }
             }), {}),
-        offersArray: (state, { offers }) => Object.values(offers)
+        offersArray: (state, { offers }) => Object.values(offers),
+        filters: ({ filters }) => Object.values(filters)
     }
 }
 

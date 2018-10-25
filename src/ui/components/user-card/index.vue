@@ -129,6 +129,66 @@
                 }
             }
         }
+        &.preview-mode {
+            background: #1d2031;
+            .user-data__icon {
+                background: #c94343;
+                &.verified {
+                    background: #43C981;
+                }
+            }
+            .identity-block__unknown-blk {
+                a {
+                    border-color: #404354;
+                    color: #404354;
+                }
+                .counts {
+                    display: inline-block;
+                    float: right;
+                    span {
+                        width: 45px;
+                        font-size: 15px;
+                        color: #fff;
+                        line-height: 45px;
+                        display: inline-block;
+                        text-align: right;
+                        i {
+                            font-size: 18px;
+                            margin-left: 5px;
+                        }
+
+                    }
+                }
+            }
+            button {
+                color: #fff !important;
+            }
+        }
+        &.default {
+            $defColor: #43C981;
+            border-color: $defColor !important;
+            &:before {
+                content: "";
+                width: 26px;
+                position: absolute;
+                border-radius: 5px 0 0 5px;
+                left: -22px;
+                bottom: -1px;
+                height: calc(100% + 2px);
+                background: $defColor;
+            }
+            &:after {
+                font-family: 'Font Awesome 5 Free', 'Barlow', sans-serif;
+                content: "DEFAULT \F14A";
+                color: #1C2032;
+                font-weight: bold;
+                font-size: 16px;
+                position: absolute;
+                transform: rotate(-90deg);
+                top: 40px;
+                left: -50px;
+            }
+        }
     }
     .identity-block__text {
         border: none;
@@ -169,7 +229,7 @@
             max-height: 64px;
         }
         .user-data__avatar-upload-btn img {
-            max-height: 32px;
+            max-height: 42px;
         }
     }
     .user-data__avatar, .user-data__avatar-upload-btn {
@@ -209,43 +269,7 @@
         background: transparent;
         box-shadow: none;
         color: #fff;
-        padding: 9px 0;
-    }
-
-    .preview-mode {
-        background: #1d2031;
-        .user-data__icon {
-            background: #c94343;
-            &.verified {
-                background: #43C981;
-            }
-        }
-        .identity-block__unknown-blk {
-            a {
-                border-color: #404354;
-                color: #404354;
-            }
-            .counts {
-                display: inline-block;
-                float: right;
-                span {
-                    width: 45px;
-                    font-size: 15px;
-                    color: #fff;
-                    line-height: 45px;
-                    display: inline-block;
-                    text-align: right;
-                    i {
-                        font-size: 18px;
-                        margin-left: 5px;
-                    }
-
-                }
-            }
-        }
-        button {
-            color: #fff !important;
-        }
+        padding: 4px 0;
     }
     .warning {
         background: #ff5454;

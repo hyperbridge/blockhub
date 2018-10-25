@@ -22,15 +22,15 @@
                     <a class="app-header__bar-left-link" href="/#/">
                         <span class="fa fa-home"></span>
                     </a>
-                    <a class="app-header__bar-left-link" @click="$router.go(-1)">
+                    <a class="app-header__bar-left-link hide-on-mobile" @click="$router.go(-1)">
                         <span class="fa fa-arrow-left"></span>
                     </a>
-                    <a class="app-header__bar-left-link" @click="$router.go(+1)">
+                    <a class="app-header__bar-left-link hide-on-mobile" @click="$router.go(+1)">
                         <span class="fa fa-arrow-right"></span>
                     </a>
                 </div>
             </div>
-            <div class="app-header__shadow draggable"></div>
+            <div class="app-header__shadow"></div>
             <a class="app-header__bar-center" :href="is_locked ? '#' : '#/'">
                 <c-loading-logo :isLoading="isLoader" />
             </a>
@@ -620,7 +620,7 @@ export default {
         background: #fff;
         text-align: right;
         z-index: 13;
-        padding: 4px 5px;
+        padding: 4px 5px 4px 10px;
         border-radius: 0 0 0 13px;
         display: flex;
         align-items: center;
@@ -795,6 +795,7 @@ export default {
             width: 20px;
             height: 20px;
             margin: 0 1px;
+            -webkit-app-region: no-drag;
             &:before {
                 @extend %extend_1;
             }
@@ -1052,7 +1053,7 @@ export default {
     }
     @media screen and (max-width: 767px) {
         .hide-on-mobile {
-            display: none;
+            display: none !important;
         }
     }
     .invert .horizontal-navigation > ul li {

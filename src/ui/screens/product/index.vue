@@ -102,7 +102,7 @@
                         <c-button status="dark" class="w-100 d-flex d-md-none justify-content-center my-4" size="lg" data-toggle="collapse" data-target="#product_nav" aria-expanded="false" aria-controls="product_nav">
                             Menu
                         </c-button>
-                        <div class="collapse product_nav" id="product_nav">
+                        <div class="collapse show product_nav" id="product_nav">
                             <ul class="nav nav-tabs margin-bottom-30 justify-content-between">
                                 <li class="nav-item">
                                     <router-link :to="`/product/${id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
@@ -534,9 +534,13 @@
     .editor-container {
         position: relative;
     }
+    
     @media (min-width: 768px){
         .product_nav{
-            display: block;
+            display: block!important;
+        }
+        .nav-tabs {
+            border-bottom: 0 none;
         }
     }
     @media (max-width: 767px) {

@@ -12,7 +12,7 @@
 
         <div class="community-item__action text-right">
             <template v-if="replyMode">
-                <a href="#3" class="btn btn-sm btn-danger" @click.prevent="changeReplyMode">
+                <a href="#3" class="btn btn-sm btn-danger" @click.prevent="cancelReply">
                     Cancel
                 </a>
                 <a href="#3" class="btn btn-sm btn-info" @click.prevent="changeReplyMode">
@@ -40,6 +40,11 @@ export default {
         changeReplyMode() {
             this.replyMode = !this.replyMode;
             this.$emit('replyMode', this.replyMode);
+            this.$store.state.application.profile_chooser = true;
+        },
+        cancelReply(){
+            this.replyMode = !this.replyMode;
+            this.$store.state.application.profile_chooser = false;
         }
     },
     directives: {
