@@ -8,8 +8,9 @@ app.use(bodyParser.json());
 
 let server = require('http').Server(app);
 
-const API_SECRET = process.env.API_SECRET;
-const WEBHOOK_PORT = process.env.WEBHOOK_PORT;
+const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
+const VERIFF_API_SECRET = process.env.VERIFF_API_SECRET;
+const VERIFF_WEBHOOK_PORT = process.env.PORT;
 
 function isSignatureValid(data) {
     const { signature, secret } = data;
@@ -28,11 +29,36 @@ function isSignatureValid(data) {
     return digest === signature.toLowerCase();
 }
 
+function addEmailToList(listId, firstName, lastName, email, tags) {
+    // *********************************************
+    // add a new member to the list
+    var add_new_member = {
+        method: 'post',
+        path: `/lists/${listId}/members`,
+        body: {
+            email_address: email,
+            FNAME: '',
+            LNAME: '',
+            PADDRESS: '',
+            BTYPE: 'Ethereum',
+            status: 'subscribed',
+            tags: tags,
+            location: {
+                country_code: ''
+            }
+        }
+    }
+
+    mailchimp.request(add_new_member, callback)
+}
+
+// {"email_address": "test2@muyser.com", "status": "subscribed"}
+
 app.post('/verification/', (req, res) => {
     console.log('Received a webhook');
 
     const signature = req.get('x-signature');
-    const secret = API_SECRET;
+    const secret = VERIFF_API_SECRET;
     const payload = req.body;
 
     const isValid = isSignatureValid({ signature, secret, payload })
@@ -40,8 +66,29 @@ app.post('/verification/', (req, res) => {
     console.log('Validated signature:', isValid);
 
     if (isValid) {
-        // Send email
         console.log('Payload', JSON.stringify(payload, null, 4));
+
+        const listId = 'b2c67f22d5';
+
+        mailchimp.request({
+            method: 'post',
+            path: `/lists/${listId}/members`,
+            body: {
+                email_address: payload.verification.additionalData.email,
+                FNAME: payload.verification.person.firstName,
+                LNAME: payload.verification.person.lastName,
+                PADDRESS: payload.verification.additionalData.eth,
+                PIDENTITY: payload.verification.additionalData.identity,
+                BTYPE: 'Ethereum',
+                status: 'subscribed',
+                tags: ['veriff', payload.verification.status],
+                location: {
+                    country_code: payload.verification.document.country
+                }
+            }
+        }, function() {
+            console.log("Successfully subscribed");
+        });
 
         res.json({ status: 'success' });
     }
@@ -51,4 +98,4 @@ app.post('/verification/', (req, res) => {
     process.exit();
 })
 
-server.listen(WEBHOOK_PORT);
+server.listen(VERIFF_WEBHOOK_PORT);
