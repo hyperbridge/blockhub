@@ -1,5 +1,5 @@
 <template>
-    <div class="game-library__item">
+    <div class="game-library__item" :class="{'is-active': active}">
         <div class="item-img loading--w-spinner">
             <c-img :src="game.images.medium_tile"/>
             <div class="loader-block" v-if="isLoading">
@@ -26,7 +26,7 @@
                 </span>
             </div>
             <div style="height: 20px; width: 20px;margin-right: -5px">
-                <c-dropdown :class="{'no-right-border' : shareList}">
+                <c-dropdown :class="{'no-right-border' : shareList}" @click="activeMenu">
                     <ul class="item-dropdown">
                         <li>
                             <a href="#3">
@@ -50,7 +50,7 @@
                         <li @click="toggleList">
                             <i class="fas fa-share"></i>
                             Share
-                            <c-share-list class="in-dropdown" :onlineList="online" :favoritesList="favorites" :show="show" />
+                            <c-share-list class="in-dropdown" :onlineList="online" :favoritesList="favorites" :show="shareList" />
                         </li>
                         <li>
                             <a href="#3">
@@ -77,8 +77,8 @@
         props: ['game', 'isLoading', 'online','favorites' ],
         data(){
             return{
-                show: false,
-                shareList: false
+                shareList: false,
+                active: false
             }
         },
         components: {
@@ -87,8 +87,17 @@
         },
         methods:{
             toggleList(){
-                this.show = !this.show
-                this.shareList = !this.shareList
+                this.shareList = !this.shareList;
+            },
+            activeMenu(){
+                console.log(this.active)
+                this.active = !this.active
+            }
+        },
+        watch:{
+            active(){
+                if (!this.active)
+                    this.shareList = false
             }
         }
     }
@@ -117,6 +126,9 @@
             box-shadow: 0 0 35px rgba(0, 0, 0, .2);
             transition: transform 200ms cubic-bezier(0.34, 1.01, 0.8, 0.24);
             z-index: 20;
+        }
+        &.is-active{
+            z-index: 21;
         }
         .item-img{
             position: relative;

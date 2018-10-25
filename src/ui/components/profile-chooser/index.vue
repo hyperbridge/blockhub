@@ -13,13 +13,14 @@
                         <c-slide
                             v-for="identity in identities"
                             :key="identity.id">
-                            <c-user-card
-                                :user="identity"
-                                :previewMode="!identity.edit"
-                                :type="identity.developer_id ? 'developer' : 'user'"
-                                :class="{ 'default': identity.id == (defaultIdentity && defaultIdentity.id) }"
-                                @click.prevent="acceptIdentitiy"
-                            />
+                            <a href="#3" class="user-card__container-link" @click="setDefault(identity)">
+                                <c-user-card
+                                    :user="identity"
+                                    :previewMode="!identity.edit"
+                                    :type="identity.developer_id ? 'developer' : 'user'"
+                                    :class="{ 'default': identity.id == (defaultIdentity && defaultIdentity.id) }"
+                                />
+                            </a>
                         </c-slide>
                     </c-swiper>
                     <div class="swiper-button-prev" slot="button-prev"></div>
@@ -73,17 +74,38 @@
             },
             defaultIdentity() {
                 return this.identities.find(identity => this.$store.state.application.account.current_identity ? identity.id == this.$store.state.application.account.current_identity.id : null)
-            }
+            },
+            identityClone() {
+                return this.editedIdentity ? { ...this.editedIdentity } : {}
+            },
         },
         methods:{
             closeProfileChooser(){
                 this.$store.state.application.profile_chooser = false
             },
-            acceptIdentitiy(){
-                console.log('selected identity')
-                this.closeProfileChooser()
+            setDefault(identity) {
+                console.log('setDefault')
+                this.$store.state.application.account.current_identity = identity
+                this.$store.state.application.developer_mode = !!identity.developer_id
                 this.$store.state.application.profile_chooser = false
-            }
+
+                // if (this.defaultIdentity) this.defaultIdentity.default = false
+                // identity.default = true
+
+                this.saveIdentities()
+            },
+            saveIdentity(identity) {
+                for (let key in identity) {
+                    identity[key] = this.identityClone[key]
+                }
+
+                if (!identity.name)
+                    identity.name = 'Default'
+
+                Bridge.sendCommand('saveIdentityRequest', identity).then((identity) => {
+                    this.saveIdentities()
+                })
+            },
         }
     }
 </script>
@@ -96,7 +118,7 @@
         right: 0;
         bottom: 0;
         z-index: 99;
-        background: rgba(0, 0, 0, .7);
+        background: rgba(0, 0, 0, .5);
     }
     .profile-chooser__wrapper{
         position: fixed;
@@ -117,15 +139,25 @@
             position: relative;
             padding: 0 40px;
             .swiper-slide{
-                padding: 20px;
+                padding: 15px;
                 .identity-block{
                     transition: transform .2s ease;
+                    z-index: 8;
+                    &.default{
+                        width: calc( 100% - 22px );
+                        float: right;
+                    }
                     &:hover{
-                        transform: scale(1.1);
+                        transform: scale(1.05);
                         cursor: pointer;
+                        z-index: 9;
                     }
                 }
             }
         }
+    }
+    .user-card__container-link{
+        text-decoration: none;
+        color: #fff;
     }
 </style>
