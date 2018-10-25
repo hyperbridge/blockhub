@@ -97,11 +97,6 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/support'], resolve)
         },
         {
-            path: '/changelog',
-            name: 'Changelog',
-            component: (resolve) => require(['@/ui/screens/changelog'], resolve)
-        },
-        {
             path: '/news',
             name: 'News',
             component: (resolve) => require(['@/ui/screens/news'], resolve)

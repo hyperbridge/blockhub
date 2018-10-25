@@ -13,6 +13,7 @@
             :name="title"
             :class="{ 'mb-0' : onlyContentBg }"
             :showArrows="false"
+            :showActions="showActions"
         >
             <template slot="additional-action">
                 <slot name="additional-action"/>
@@ -47,6 +48,10 @@
                 default: false
             },
             noPadding: {
+                type: Boolean,
+                default: false
+            },
+            showActions: {
                 type: Boolean,
                 default: false
             }

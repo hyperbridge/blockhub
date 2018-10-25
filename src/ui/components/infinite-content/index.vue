@@ -203,7 +203,7 @@
 
                 <div class="row margin-bottom-30" v-if="item.type === 'new_releases_grid'" :key="`level-1-${index}`">
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
-                        <c-block title="New Releases" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                        <c-block title="New Releases" :noGutter="true" :bgGradient="true" :onlyContentBg="true" showActions>
                             <template slot="additional-action">
                                 <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
                                 <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
@@ -224,7 +224,7 @@
 
                 <div class="row margin-bottom-30" v-if="item.type === 'top_items_grid'" :key="`level-1-${index}`">
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
-                        <c-block title="Top 20 Items" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                        <c-block title="Top 20 Items" :noGutter="true" :bgGradient="true" :onlyContentBg="true" showActions>
                             <template slot="additional-action">
                                 <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
                                 <c-heading-bar-fields name="Trading" icon="star" @clickUp=""  @clickDown="" />
