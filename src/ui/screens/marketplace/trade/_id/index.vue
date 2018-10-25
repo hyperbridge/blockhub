@@ -3,28 +3,15 @@
         <c-block  v-if="transaction" :title="'Transaction: ' + tradeId" class="transaction">
             <div class="transaction__block">
                 <div class="transaction__headings">
-                    <h4>Yours selling offer</h4>
-                    <h4>Yours inventory</h4>
+                    <h4>You offered</h4>
+                    <h4>Your inventory</h4>
                 </div>
                 <div class="transaction__management">
                     <div class="management__selected-assets">
-                        <div class="assets-grid">
-                            <div
-                                v-for="(asset, index) in yoursOffer"
-                                :key="index"
-                                class="assets-grid__asset"
-                                @click="yoursOffer.splice(index, 1)"
-                            >
-                                <c-tooltip :delay="30" iconHide>
-                                    <c-asset-preview
-                                        slot="tooltip"
-                                        :asset="asset"
-                                    />
-                                    <c-img :src="asset.image" class="asset__image"/>
-                                    <span class="asset__price">{{ asset.price.current }}$</span>
-                                </c-tooltip>
-                            </div>
-                        </div>
+                        <c-assets-grid
+                            class="management__assets-grid"
+                            :assets="trx.yourOffer"
+                        />
                     </div>
                     <div class="management__inventory-explorer">
                         <c-list-submenu :items="inventory.yours" isParent>
@@ -56,29 +43,16 @@
             />
             <div class="transaction__block">
                 <div class="transaction__headings">
-                    <h4>{{ transaction.contractor.user.name }}'s selling offer</h4>
-                    <c-author :author="transaction.contractor.user"/>
-                    <h4>{{ transaction.contractor.user.name }}'s inventory</h4>
+                    <h4>For {{ trx.contractor.name }}'s</h4>
+                    <c-author :author="trx.contractor"/>
+                    <h4>{{ trx.contractor.name }}'s inventory</h4>
                 </div>
                 <div class="transaction__management">
                     <div class="management__selected-assets">
-                        <div class="assets-grid">
-                            <div
-                                v-for="(asset, index) in theirOffer"
-                                :key="asset"
-                                class="assets-grid__asset"
-                                @click="theirOffer.splice(index, 1)"
-                            >
-                                <c-tooltip v-show="asset.id" :delay="30" iconHide>
-                                    <c-asset-preview
-                                        slot="tooltip"
-                                        :asset="asset"
-                                    />
-                                    <c-img :src="asset.image" class="asset__image"/>
-                                    <span class="asset__price">{{ asset.price.current }}$</span>
-                                </c-tooltip>
-                            </div>
-                        </div>
+                        <c-assets-grid
+                            class="management__assets-grid"
+                            :assets="trx.contractorOffer"
+                        />
                     </div>
                     <div class="management__inventory-explorer">
                         <c-list-submenu :items="inventory.their" isParent>
@@ -111,7 +85,7 @@
             </div>
         </c-block>
         <c-block v-else :title="'Transaction: ' + tradeId" class="transaction">
-            <p>Transaction with id <i>{{ tradeId }}</i> doesn't exist</p>
+            <p>Transaction with id <i>{{ id }}</i> doesn't exist</p>
         </c-block>
     </div>
 </template>
@@ -119,6 +93,7 @@
 
 <script>
     export default {
+        props: ['id'],
         components: {
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-list': (resolve) => require(['@/ui/components/list'], resolve),
@@ -127,7 +102,8 @@
             'c-asset-preview': (resolve) => require(['@/ui/components/asset-preview'], resolve),
             'c-asset-preview-small': (resolve) => require(['@/ui/components/asset-preview/small'], resolve),
             'c-exchange-bar': (resolve) => require(['@/ui/components/exchange-bar'], resolve),
-            'c-author': (resolve) => require(['@/ui/components/author'], resolve)
+            'c-author': (resolve) => require(['@/ui/components/author'], resolve),
+            'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid-inventory'], resolve)
         },
         data() {
             return {
@@ -143,6 +119,7 @@
         },
         computed: {
             inventory() {
+                return {}
                 const extractor = (target, offer) => {
                     const { inventory: originalInv } = this.transaction[target].user;
                     const reduced = originalInv
@@ -180,8 +157,11 @@
                 };
             },
             price() {
+                return {};
                 const { yoursOffer, theirOffer } = this;
                 const round = num => Math.round(num * 100) / 100;
+
+                // const {  }
                 const yours = round(
                     yoursOffer.reduce((price, asset) => price += asset.price.current, 0)
                 );
@@ -198,15 +178,11 @@
                 return this.$route.params.tradeId;
             },
             transaction() {
-                return this.$store.state.assets.transactions
-                    .find(transaction =>
-                        transaction.id === this.tradeId
-                    );
+                return this.$store.getters['assets/transactions'][this.id];
             },
-        },
-        mounted() {
-            this.yoursOffer = this.transaction.me.selling;
-            this.theirOffer = this.transaction.contractor.selling;
+            trx() {
+                return this.transaction;
+            }
         }
     }
 </script>
@@ -244,6 +220,10 @@
                 border: 1px solid rgba(255,255,255,.1);
             }
         }
+    }
+
+    .management__assets-grid {
+        height: 100%;
     }
 
     .assets-grid {

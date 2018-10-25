@@ -25,7 +25,7 @@
                 {{ trx.createdAt | customDate('MMM D') }}
                 <span>
                     On hold until
-                    {{ trx.createdAt | addTime('days', 5) | customDate('MMM D') }}
+                    {{ trx.createdAt | addTime(5, days) | customDate('MMM D') }}
                 </span>
                 <span>{{ trx.id }}</span>
             </p>
