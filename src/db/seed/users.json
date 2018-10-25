@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "San",
+        "img": "https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png",
+        "inventory": [1, 2, 3, 4, 5, 6, 11, 12, 13, 14]
+    },
+    {
+        "id": 2,
+        "name": "Satoshi",
+        "img": "https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png",
+        "inventory": [1, 2, 3, 3, 3, 4, 9]
+    },
+    {
+        "id": 3,
+        "name": "Tomeh",
+        "img": "https://d.facdn.net/art/echofireant/1420800644/1420800644.echofireant_sniper_avatar.jpg",
+        "inventory": [11, 12, 13, 14]
+    },
+    {
+        "id": 4,
+        "name": "Predda",
+        "img": "https://pbs.twimg.com/profile_images/794107415876747264/g5fWe6Oh.jpg",
+        "inventory": [1, 2, 3, 3, 3, 4, 9]
+    }
+]

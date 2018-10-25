@@ -1,0 +1,38 @@
+[
+    {
+        "id": "507f191e810c19729de860ea",
+        "contractor": 2,
+        "you": 1,
+        "contractorOffer": [1, 6, 14, 2],
+        "yourOffer": [2, 4, 3, 3],
+        "status": ["unseen"],
+        "author": 1
+    },
+    {
+        "id": "31317f1we110c19729de8660",
+        "contractor": 2,
+        "you": 1,
+        "contractorOffer": [2, 3, 4, 5],
+        "yourOffer": [6, 7, 8],
+        "status": [],
+        "author": 2
+    },
+    {
+        "id": "651f1ew1312729de860e228a",
+        "contractor": 3,
+        "you": 1,
+        "contractorOffer": [9, 10],
+        "yourOffer": [11, 12, 13],
+        "status": [],
+        "author": 3
+    },
+    {
+        "id": "312f191e810c19729de860ea",
+        "contractor": 4,
+        "you": 1,
+        "contractorOffer": [5, 6, 12],
+        "yourOffer": [9, 4, 1, 7],
+        "status": ["high profit"],
+        "author": 1
+    }
+]
