@@ -1,20 +1,21 @@
-const fs = require('fs');
-const crypto = require('crypto');
-const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
+var fs = require('fs');
+var crypto = require('crypto');
+var express = require('express');
+var bodyParser = require('body-parser');
+var app = express();
 
 app.use(bodyParser.json());
 
-let server = require('http').Server(app);
+var server = require('http').Server(app);
 
-const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
-const VERIFF_API_SECRET = process.env.VERIFF_API_SECRET;
-const VERIFF_WEBHOOK_PORT = process.env.PORT;
+var MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
+var VERIFF_API_SECRET = process.env.VERIFF_API_SECRET;
+var VERIFF_WEBHOOK_PORT = process.env.PORT;
 
 function isSignatureValid(data) {
-    const { signature, secret } = data;
-    let { payload } = data;
+    var signature = data.signature;
+    var secret = data.secret;
+    var payload = data.payload;
 
     if (data.payload.constructor === Object) {
         payload = JSON.stringify(data.payload);
@@ -22,53 +23,30 @@ function isSignatureValid(data) {
     if (payload.constructor !== Buffer) {
         payload = new Buffer(payload, 'utf8');
     }
-    const hash = crypto.createHash('sha256');
+    var hash = crypto.createHash('sha256');
     hash.update(payload);
     hash.update(new Buffer(secret));
-    const digest = hash.digest('hex');
+    var digest = hash.digest('hex');
     return digest === signature.toLowerCase();
-}
-
-function addEmailToList(listId, firstName, lastName, email, tags) {
-    // *********************************************
-    // add a new member to the list
-    var add_new_member = {
-        method: 'post',
-        path: `/lists/${listId}/members`,
-        body: {
-            email_address: email,
-            FNAME: '',
-            LNAME: '',
-            PADDRESS: '',
-            BTYPE: 'Ethereum',
-            status: 'subscribed',
-            tags: tags,
-            location: {
-                country_code: ''
-            }
-        }
-    }
-
-    mailchimp.request(add_new_member, callback)
 }
 
 // {"email_address": "test2@muyser.com", "status": "subscribed"}
 
-app.post('/verification/', (req, res) => {
+app.post('/verification/', function (req, res) {
     console.log('Received a webhook');
 
-    const signature = req.get('x-signature');
-    const secret = VERIFF_API_SECRET;
-    const payload = req.body;
+    var signature = req.get('x-signature');
+    var secret = VERIFF_API_SECRET;
+    var payload = req.body;
 
-    const isValid = isSignatureValid({ signature, secret, payload })
+    var isValid = isSignatureValid({ signature: signature, secret: secret, payload: payload })
 
     console.log('Validated signature:', isValid);
 
     if (isValid) {
         console.log('Payload', JSON.stringify(payload, null, 4));
 
-        const listId = 'b2c67f22d5';
+        var listId = 'b2c67f22d5';
 
         mailchimp.request({
             method: 'post',

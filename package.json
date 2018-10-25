@@ -1,17 +1,19 @@
 {
-    "name": "verification-service",
-    "description": "",
-    "version": "1.0.0",
-    "license": "UNLICENSED",
-    "private": true,
-    "engines": {
-        "node": "8.11.1"
-    },
-    "scripts": {
-        "start": "./index.js"
-    },
-    "dependencies": {
-    },
-    "devDependencies": {
-    }
+  "name": "verification-service",
+  "description": "",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": "8.11.1"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {}
 }
