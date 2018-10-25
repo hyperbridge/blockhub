@@ -1,0 +1,17 @@
+{
+    "name": "verification-service",
+    "description": "",
+    "version": "1.0.0",
+    "license": "UNLICENSED",
+    "private": true,
+    "engines": {
+        "node": "8.11.1"
+    },
+    "scripts": {
+        "start": "./index.js"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+    }
+}
