@@ -150,19 +150,20 @@ const assets = {
         }
     },
     getters: {
-        assets: ({ assets }, getters, { marketplace: { collections }}) => Object.values(assets)
+        assets: ({ assets }, getters, { marketplace: { collections, products }}) => Object.values(assets)
             .reduce((populated, asset) => ({
                 ...populated,
                 [asset.id]: {
                     ...asset,
                     offers_list: asset.offers_list.map(id => assets[id]),
                     inventory_list: asset.inventory_list.map(id => assets[id]),
-                    collections: asset.collections.map(id => collections[id])
+                    collections: asset.collections.map(id => collections[id]),
+                    product: products[asset.product]
                 }
             }), {}),
         array: (state, { assets }) => Object.values(assets),
         assetsArray: (state, { assets}) => Object.values(assets),
-        users: ({ users, assets }) => Object.values(users)
+        users: ({ users }, { assets }) => Object.values(users)
             .reduce((populated, user) => ({
                 ...populated,
                 [user.id]: {
@@ -170,7 +171,7 @@ const assets = {
                     inventory: user.inventory.map(id => assets[id])
                 }
             }), {}),
-        transactions: ({ trxs, assets }, { users }) => Object.values(trxs)
+        transactions: ({ trxs }, { users, assets }) => Object.values(trxs)
             .reduce((populated, trx) => ({
                 ...populated,
                 [trx.id]: {

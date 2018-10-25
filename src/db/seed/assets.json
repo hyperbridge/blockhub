@@ -3,6 +3,7 @@
         "id": 1,
         "name": "Magic Plate Armor",
         "product_name": "Tibia",
+        "product": 3,
         "game_name": "This is Game Name",
         "logo": "https://i.imgur.com/BngHC98.png",
         "image": "https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png",
@@ -58,6 +59,7 @@
         "id": 2,
         "name": "Silver Plate Armor",
         "product_name": "Tibia",
+        "product": 3,
         "image": "http://www.tosbase.com/content/img/icons/items/icon_item_shirts_sr.png",
         "price": {
             "min": 10.99,
@@ -106,6 +108,7 @@
         "id": 3,
         "name": "Blue Spion Leather",
         "product_name": "Tibia",
+        "product": 3,
         "image": "http://www.tosbase.com/content/img/icons/items/icon_item_shirts_neo_black.png",
         "price": {
             "min": 100.99,
@@ -154,6 +157,7 @@
         "id": 4,
         "name": "Ausura Plate Armor",
         "product_name": "Tibia",
+        "product": 1,
         "image": "https://tos.neet.tv/images/equip/icon_item_9rank_iorn_02_amor.png",
         "price": {
             "min": 0.99,
@@ -203,6 +207,7 @@
         "id": 5,
         "name": "Magic Shirts",
         "product_name": "Tree of Savior Fan Base",
+        "product": 1,
         "image": "https://www.tosbase.com/content/img/icons/items/icon_item_shirts_pilgrim.png",
         "price": {
             "min": 0.99,
@@ -252,6 +257,7 @@
         "id": 6,
         "name": "Hard Leather Armor",
         "product_name": "Tree of Savior Fan Base",
+        "product": 1,
         "image": "http://www.tosbase.com/content/img/icons/items/icon_item_shirts_bube_blue.png",
         "price": {
             "min": 0.99,
@@ -301,6 +307,7 @@
         "id": 7,
         "name": "Magic heand",
         "product_name": "Tree of Savior Fan Base",
+        "product": 2,
         "image": "https://i.pinimg.com/originals/06/21/b5/0621b518d7baa2cd742b182b5b03fbe9.png",
         "price": {
             "min": 0.99,
@@ -350,6 +357,7 @@
         "id": 8,
         "name": "New Rank Booster",
         "product_name": "Tree of Savior Fan Base",
+        "product": 2,
         "image": "https://tos.neet.tv/images/equip/icon_item_iorn_shirt_1.png",
         "price": {
             "min": 0.99,
@@ -394,6 +402,7 @@
         "id": 9,
         "name": "Cystallised Skull",
         "product_name": "Path of Exile",
+        "product": 7,
         "image": "https://cdn.hyperbridge.org/blockhub/assets/poe-cystallised%2520skull.png",
         "price": {
             "min": 1.99,
@@ -422,6 +431,7 @@
         "id": 10,
         "name": "Engraved Skull",
         "product_name": "Path of Exile",
+        "product": 7,
         "image": "https://cdn.hyperbridge.org/blockhub/assets/poe-engraved%2520skull.png",
         "price": {
             "min": 2.99,
@@ -450,6 +460,7 @@
         "id": 11,
         "name": "Turquoise Mask",
         "product_name": "Path of Exile",
+        "product": 7,
         "image": "https://cdn.hyperbridge.org/blockhub/assets/poe-turquoise%2520imp%2520mask.png",
         "price": {
             "min": 1.99,
@@ -478,6 +489,7 @@
         "id": 12,
         "name": "Gold AKM",
         "product_name": "Playerunknown's Battlegrounds",
+        "product": 6,
         "image": "https://cdn.hyperbridge.org/blockhub/assets/pubg-Gold%2520Plate%2520-%2520AKM.png",
         "price": {
             "min": 27.21,
@@ -505,6 +517,7 @@
         "id": 13,
         "name": "Jungle Digital SKS",
         "product_name": "Playerunknown's Battlegrounds",
+        "product": 6,
         "image": "https://cdn.hyperbridge.org/blockhub/assets/pubg-Jungle%2520Digital%2520-%2520SKS.png",
         "price": {
             "min": 3.29,
@@ -532,7 +545,8 @@
         "id": 14,
         "name": "Leather Hoodie White",
         "product_name": "Playerunknown's Battlegrounds",
-        "image": "https://cdn.hyperbridge.org/blockhub/assets/pubg-Jungle%2520Digital%2520-%2520SKS.png",
+        "product": 6,
+        "image": "https://cdn.hyperbridge.org/blockhub/assets/pubg-Leather%2520Hoodie%2520%2528White%2529.png",
         "price": {
             "min": 1.9,
             "max": 6,
