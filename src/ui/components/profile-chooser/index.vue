@@ -4,10 +4,12 @@
         </div>
         <div class="profile-chooser__wrapper">
             <div class="profile-chooser__content">
-                <div class="h4 text-uppercase text-white text-left">
-                    Choose your account
-                </div>
-                <hr />
+                <c-heading-bar
+                    slot="title"
+                    class="mb-0"
+                    name="Choose Profile"
+                    :showBackground="false"
+                />
                 <div class="profile-slider">
                     <c-swiper :options="options">
                         <c-slide
@@ -25,6 +27,16 @@
                     </c-swiper>
                     <div class="swiper-button-prev" slot="button-prev"></div>
                     <div class="swiper-button-next" slot="button-next"></div>
+                </div>
+                <c-heading-bar
+                    slot="title"
+                    class="mb-0"
+                    name=""
+                    :showBackground="false"
+                />
+                <div class="profile-chooser__actions">
+                    <c-button class="profile-chooser__back-button c-btn-lg outline-white" @click="closeProfileChooser">Back</c-button>
+                    <c-button class="profile-chooser__ok-button c-btn-lg outline-white" @click="closeProfileChooser">OK</c-button>
                 </div>
             </div>
         </div>
@@ -74,38 +86,16 @@
             },
             defaultIdentity() {
                 return this.identities.find(identity => this.$store.state.application.account.current_identity ? identity.id == this.$store.state.application.account.current_identity.id : null)
-            },
-            identityClone() {
-                return this.editedIdentity ? { ...this.editedIdentity } : {}
-            },
+            }
         },
         methods:{
-            closeProfileChooser(){
-                this.$store.state.application.profile_chooser = false
+            closeProfileChooser() {
+                this.$store.commit('application/showProfileChooser', false)
             },
             setDefault(identity) {
-                console.log('setDefault')
                 this.$store.state.application.account.current_identity = identity
                 this.$store.state.application.developer_mode = !!identity.developer_id
-                this.$store.state.application.profile_chooser = false
-
-                // if (this.defaultIdentity) this.defaultIdentity.default = false
-                // identity.default = true
-
-                this.saveIdentities()
-            },
-            saveIdentity(identity) {
-                for (let key in identity) {
-                    identity[key] = this.identityClone[key]
-                }
-
-                if (!identity.name)
-                    identity.name = 'Default'
-
-                Bridge.sendCommand('saveIdentityRequest', identity).then((identity) => {
-                    this.saveIdentities()
-                })
-            },
+            }
         }
     }
 </script>
@@ -118,23 +108,21 @@
         right: 0;
         bottom: 0;
         z-index: 99;
-        background: rgba(0, 0, 0, .5);
+        background: rgba(0, 0, 0, 0.2);
     }
     .profile-chooser__wrapper{
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        padding: 30px 0 10px;
-        background: #30314C;
+        background: rgba(0, 0, 0, 0.85);
         z-index: 130;
         display: flex;
         justify-content: center;
+        padding: 20px 30px;
     }
     .profile-chooser__content{
-        flex-direction: column;
-        width: 90%;
-        max-width: 1000px;
+        width: 100%;
         .profile-slider{
             position: relative;
             padding: 0 40px;
@@ -156,8 +144,21 @@
             }
         }
     }
+    .profile-chooser__actions {
+        height: 50px;
+        padding: 20px 0;
+    }
+    .profile-chooser__back-button {
+        float: left;
+    }
+    .profile-chooser__ok-button {
+        float: right;
+    }
     .user-card__container-link{
         text-decoration: none;
         color: #fff;
+    }
+    .swiper-button-prev, .swiper-button-next {
+        filter: brightness(10) grayscale(1);
     }
 </style>

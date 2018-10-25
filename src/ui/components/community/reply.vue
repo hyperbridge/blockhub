@@ -40,11 +40,10 @@ export default {
         changeReplyMode() {
             this.replyMode = !this.replyMode;
             this.$emit('replyMode', this.replyMode);
-            this.$store.state.application.profile_chooser = true;
+            this.$store.commit('application/showProfileChooser', true)
         },
         cancelReply(){
             this.replyMode = !this.replyMode;
-            this.$store.state.application.profile_chooser = false;
         }
     },
     directives: {
