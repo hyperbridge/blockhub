@@ -3,14 +3,17 @@ var crypto = require('crypto');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+var Mailchimp = require('mailchimp-api-v3');
+
+var MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
+var VERIFF_API_SECRET = process.env.VERIFF_API_SECRET;
+var VERIFF_WEBHOOK_PORT = process.env.PORT;
 
 app.use(bodyParser.json());
 
 var server = require('http').Server(app);
 
-var MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
-var VERIFF_API_SECRET = process.env.VERIFF_API_SECRET;
-var VERIFF_WEBHOOK_PORT = process.env.PORT;
+var mailchimp = new Mailchimp(MAILCHIMP_API_KEY);
 
 function isSignatureValid(data) {
     var signature = data.signature;

@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mailchimp-api-v3": "^1.12.0"
   },
   "devDependencies": {}
 }
