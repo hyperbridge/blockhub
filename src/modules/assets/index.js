@@ -172,7 +172,7 @@ const assets = {
                 ...populated,
                 [trx.id]: {
                     ...trx,
-                    you: users[trx.author],
+                    you: users[trx.you],
                     contractor: users[trx.contractor],
                     contractorOffer: trx.contractorOffer.map(id => assets[id]),
                     yourOffer: trx.yourOffer.map(id => assets[id])

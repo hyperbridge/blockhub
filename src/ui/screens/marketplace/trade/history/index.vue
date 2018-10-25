@@ -79,7 +79,7 @@
         border-radius: 50%;
         width: 25px;
         height: 25px;
-        margin-right: 4px;
+        margin-right: 5px;
     }
     %triangle {
         content: "";

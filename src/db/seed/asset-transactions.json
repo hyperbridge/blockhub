@@ -10,7 +10,7 @@
     },
     {
         "id": "31317f1we110c19729de8660",
-        "contractor": 2,
+        "contractor": 4,
         "you": 1,
         "contractorOffer": [2, 3, 4, 5],
         "yourOffer": [6, 7, 8],
@@ -28,7 +28,7 @@
     },
     {
         "id": "312f191e810c19729de860ea",
-        "contractor": 4,
+        "contractor": 2,
         "you": 1,
         "contractorOffer": [5, 6, 12],
         "yourOffer": [9, 4, 1, 7],
