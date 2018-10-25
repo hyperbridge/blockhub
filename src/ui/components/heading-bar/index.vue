@@ -112,6 +112,8 @@ export default {
         }
     }
     .heading-bar__tabs{
+        overflow: hidden;
+        width: 100%;
         a {
             color: #ececed;
             background: $name_tab_bg;
@@ -177,9 +179,18 @@ export default {
     }
     .heading-bar__additional-action{
         width: auto;
+        min-width: 235px;
         line-height: 40px;
         display: flex;
-        align-items: center;
+        flex-direction: row;
+        justify-content: flex-end;
+        overflow: hidden;
+
+        @media (max-width: 575px) {
+            & {
+                display: none;
+            }
+        }
     }
 
     .heading-bar__nav{
