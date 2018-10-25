@@ -8,9 +8,9 @@
                 </div>
                 <div class="trade-offer__assets">
                     <c-asset
-                        v-for="asset in trx.yourOffer"
+                        v-for="(asset, index) in trx.yourOffer"
                         :asset="asset"
-                        :key="asset.id"
+                        :key="index"
                         showTooltip
                     />
                 </div>
@@ -25,9 +25,10 @@
                 </div>
                 <div class="trade-offer__assets">
                     <c-asset
-                        v-for="asset in trx.contractorOffer"
+                        v-for="(asset, index) in trx.contractorOffer"
                         :asset="asset"
-                        :key="asset.id"
+                        :key="index"
+                        showTooltip
                     />
                 </div>
             </div>
@@ -37,14 +38,8 @@
 
 <script>
     export default {
-        data() {
-            return {
-                you: 1
-            }
-        },
         components: {
             'c-asset': (resolve) => require(['@/ui/components/assets-grid-inventory/asset'], resolve),
-            'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid-inventory'], resolve),
         },
         computed: {
             transactions() {
@@ -60,25 +55,19 @@
         padding: 10px;
         background: rgba(85, 86, 86, .1);
         border: 1px solid rgba(#fff, .2);
-        margin-bottom: 30px;
+        margin-bottom: 50px;
     }
     .trade-offer__items {
         padding: 10px;
         position: relative;
-        &:hover:after {
-            opacity: 0;
-        }
-        &:after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(1,1,1,.2);
-            background: rgba(#2b1b08, .4);
-            border-radius: 4px;
-            transition: opacity .3s ease .25s;
+        background: rgba(1,1,1,.3);
+        opacity: .5;
+        transition: opacity .25s ease, background-color .25s ease;
+        transition-delay: .15s;
+        border-radius: 4px;
+        &:hover {
+            opacity: 1;
+            background: transparent;
         }
     }
     .trade-offer__user-image {
