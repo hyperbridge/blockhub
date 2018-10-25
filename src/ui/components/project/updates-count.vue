@@ -13,11 +13,11 @@
 <style lang="scss" scoped>
     .updates-count{
         display: inline-flex;
-        padding: 3px 8px;
+        padding: 0px 8px;
         /*background: rgba(0, 0, 0, .2);*/
         background: #43C981;
         color: #30304B;
-        border-radius: 14px;
+        border-radius: 12px;
         font-weight: bold;
         min-width: 25px;
         text-align: center;

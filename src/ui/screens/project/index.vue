@@ -648,4 +648,9 @@
             }
         }
     }
+    .nav-tabs{
+        a{
+            min-height: 45px;
+        }
+    }
 </style>
