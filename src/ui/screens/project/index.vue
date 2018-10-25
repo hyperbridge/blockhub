@@ -6,6 +6,7 @@
                     Project not found
                 </div>
                 <div class="col-12 tab-content" v-else>
+
                     <div class="errors" v-if="errors.length">
                         <strong>Please correct the following error(s):</strong>
                         <ul>
@@ -108,21 +109,37 @@
                         Menu
                     </c-button>
                     <div class="collapse show project_nav" id="project_nav">
-                        <ul class="nav nav-tabs margin-bottom-50 justify-content-between">
+                        <ul class="nav nav-tabs margin-bottom-40 justify-content-between">
                             <li class="nav-item">
-                                <router-link :to="`/project/${project.id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
+                                <router-link :to="`/project/${project.id}`" class="nav-link" :class="{ 'active': section === 'overview' }">
+                                    Overview
+                                </router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link :to="`/project/${project.id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community</router-link>
+                                <router-link :to="`/project/${project.id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">
+                                    Community
+                                    <c-updates-count>
+                                        13
+                                    </c-updates-count>
+                                </router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link :to="`/project/${project.id}/bounties`" class="nav-link" :class="{ 'active': section === 'bounties' }">Bounties</router-link>
+                                <router-link :to="`/project/${project.id}/bounties`" class="nav-link" :class="{ 'active': section === 'bounties' }">
+                                    Bounties
+                                </router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link :to="`/project/${project.id}/updates`" class="nav-link" :class="{ 'active': section === 'updates' }">Updates</router-link>
+                                <router-link :to="`/project/${project.id}/updates`" class="nav-link" :class="{ 'active': section === 'updates' }">
+                                    Updates
+                                    <c-updates-count>
+                                        348
+                                    </c-updates-count>
+                                </router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link :to="`/project/${project.id}/milestones`" class="nav-link" :class="{ 'active': section === 'milestones' }">Milestones</router-link>
+                                <router-link :to="`/project/${project.id}/milestones`" class="nav-link" :class="{ 'active': section === 'milestones' }">
+                                    Milestones
+                                </router-link>
                             </li>
                             <li class="nav-item" v-if="editing">
                                 <a class="nav-link" data-toggle="pill" href="#configure" role="tab"
@@ -324,6 +341,7 @@
             'c-project-community': (resolve) => require(['@/ui/screens/project-community'], resolve),
             'c-project-bounties': (resolve) => require(['@/ui/screens/project-bounties'], resolve),
             'c-project-updates': (resolve) => require(['@/ui/screens/project-updates'], resolve),
+            'c-updates-count': (resolve) => require(['@/ui/components/project/updates-count'], resolve),
         },
         data() {
             return {
