@@ -1,6 +1,6 @@
 <template>
     <div>
-        <c-block  v-if="transaction" :title="'Transaction: ' + tradeId" class="transaction">
+        <c-block  v-if="transaction" :title="'Transaction: ' + this.id" class="transaction">
             <div class="transaction__block">
                 <div class="transaction__headings">
                     <h4>You offered</h4>
@@ -45,34 +45,35 @@
             />
             <div class="transaction__block">
                 <div class="transaction__headings">
-                    <h4>For {{ trx.contractor.name }}'s</h4>
-                    <c-author :author="trx.contractor"/>
-                    <h4>{{ trx.contractor.name }}'s inventory</h4>
+                    <h4>For {{ users.contractor.name }}'s</h4>
+                    <c-author :author="users.contractor"/>
+                    <h4>{{ users.contractor.name }}'s inventory</h4>
                 </div>
                 <div class="transaction__management">
                     <div class="management__selected-assets">
                         <c-assets-grid
                             class="management__assets-grid"
-                            :assets="trx.contractorOffer"
+                            :assets="theirOffer"
+                            @click="handleArray($event, 'theirOffer')"
                         />
                     </div>
                     <div class="management__inventory-explorer">
-                        <c-list-submenu :items="inventory.their" isParent>
+                        <c-list-submenu :items="users.contractor.inventoryGrouped" isParent>
                             <c-list-submenu
                                 slot="sublist"
                                 slot-scope="{ sublist }"
                                 :items="sublist"
-                                @click="theirOffer.push($event)"
                             >
                                 <div
                                     class="sublist-menu__assets"
-                                    slot-scope="{ list }"
+                                    slot-scope="props"
                                 >
                                     <c-asset-preview-small
                                         slot="item-content"
-                                        :asset="list[0]"
+                                        :asset="props.list"
+                                        @click.native="theirOffer.push(props.list)"
                                     />
-                                    {{ list.length > 1 ? list.length : '' }}
+                                    <!-- {{ list.length > 1 ? list.length : '' }} -->
                                 </div>
                             </c-list-submenu>
                         </c-list-submenu>
@@ -220,7 +221,6 @@
                 };
             },
             price() {
-                return {};
                 const { yoursOffer, theirOffer } = this;
                 const round = num => Math.round(num * 100) / 100;
 
@@ -267,6 +267,7 @@
         display: flex;
         .management__selected-assets {
             flex: 5;
+            margin-right: 20px;
         }
         .management__inventory-explorer {
             flex: 3;
