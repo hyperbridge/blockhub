@@ -10,26 +10,28 @@
                     <div class="management__selected-assets">
                         <c-assets-grid
                             class="management__assets-grid"
-                            :assets="trx.yourOffer"
+                            :assets="yoursOffer"
+                            @click="handleArray($event, 'yoursOffer')"
                         />
                     </div>
                     <div class="management__inventory-explorer">
-                        <c-list-submenu :items="inventory.yours" isParent>
+                        <c-list-submenu :items="users.you.inventoryGrouped" isParent>
                             <c-list-submenu
                                 slot="sublist"
                                 slot-scope="{ sublist }"
                                 :items="sublist"
-                                @click="yoursOffer.push($event)"
                             >
                                 <div
                                     class="sublist-menu__assets"
-                                    slot-scope="{ list }"
+                                    slot-scope="props"
                                 >
+                                <!-- {{ Array.isArray(props.list) }} -->
                                     <c-asset-preview-small
                                         slot="item-content"
-                                        :asset="list[0]"
+                                        :asset="props.list"
+                                        @click.native="yoursOffer.push(props.list)"
                                     />
-                                    {{ list.length > 1 ? list.length : '' }}
+                                    <!-- {{ list.length > 1 ? list.length : '' }} -->
                                 </div>
                             </c-list-submenu>
                         </c-list-submenu>
@@ -92,8 +94,12 @@
 
 
 <script>
+    import { arrayHandler } from '@/mixins';
+    // import getters from '@/store/temporary-getters';
+
     export default {
         props: ['id'],
+        mixins: [arrayHandler],
         components: {
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-list': (resolve) => require(['@/ui/components/list'], resolve),
@@ -112,9 +118,15 @@
             }
         },
         methods: {
+            checkClick(e) {
+                console.log(e)
+            },
             addTransactionAsset(asset, target) {
                 const { tradeId } = this;
                 this.$store.commit('addTransactionAsset', { asset, target, tradeId });
+            },
+            deleteAsset(target, asset) {
+                this[target + 'Offer'].splice()
             }
         },
         computed: {
@@ -156,8 +168,56 @@
                     their: extractor('contractor', 'theirOffer')
                 };
             },
-            inv() {
-                return {};
+            assetsStore() {
+                return this.$store.state.assets;
+            },
+            assets() {
+                return this.assetsStore.assets;
+            },
+            transaction() {
+                return this.$store.state.assets.trxs[this.id];
+            },
+            products() {
+                return this.$store.state.marketplace.products;
+            },
+            users() {
+                const { assets, transaction, products } = this;
+                const { users } = this.$store.state.assets;
+
+                const you = users[transaction.you];
+                const yourInventory = you.inventory.map(id => assets[id]);
+
+                const contractor = users[transaction.contractor];
+                const contractorsInventory = contractor.inventory.map(id => assets[id]);
+
+                return {
+                    you: {
+                        ...you,
+                        inventory: yourInventory,
+                        inventoryGrouped: yourInventory.reduce((grouped, asset) => {
+                            const product = products[asset.product];
+                            grouped[product.name] = grouped[product.name] || [];
+                            grouped[product.name] = [...grouped[product.name], asset];
+                            return grouped;
+                        }, {})
+                    },
+                    contractor: {
+                        ...contractor,
+                        inventory: contractorsInventory,
+                        inventoryGrouped: contractorsInventory.reduce((grouped, asset) => {
+                            const product = products[asset.product];
+                            grouped[product.name] = grouped[product.name] || [];
+                            grouped[product.name] = [...grouped[product.name], asset];
+                            return grouped;
+                        }, {})
+                    }
+                };
+            },
+            tr() {
+                const trx = this.$store.state.assets.trxs[this.id];
+                return {
+                    ...trx
+                };
             },
             price() {
                 return {};
@@ -179,9 +239,6 @@
             },
             tradeId() {
                 return this.$route.params.tradeId;
-            },
-            transaction() {
-                return this.$store.getters['assets/transactions'][this.id];
             },
             trx() {
                 return this.transaction;
