@@ -3691,7 +3691,7 @@ storiesOf('Stream', module)
         },
         template: `
         <div class="row p-5">
-            <div class="col-4">
+            <div class="col-5">
                 <c-stream-item />
             </div>
         </div>
