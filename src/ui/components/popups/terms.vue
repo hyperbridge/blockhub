@@ -110,7 +110,7 @@
 
     .c-terms-popup__content {
         background: #1C2032;
-        padding: 10px;
+        padding: 20px;
         border-radius: 5px;
         width: 100%;
         box-shadow: 0 0 10px rgba(0, 0, 0, .3);
@@ -142,6 +142,7 @@
     .c-terms-popup__footer{
         display: flex;
         justify-content: flex-end;
+        margin-top: 30px;
         .c-btn{
             margin-left: 10px;
             &.not-accept{

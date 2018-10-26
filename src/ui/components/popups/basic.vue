@@ -31,7 +31,10 @@
                 type: Boolean,
                 default: false
             },
-            width: String
+            width: {
+                type: String,
+                default: '500'
+            }
         }
     }
 </script>
@@ -90,7 +93,7 @@
 
     .c-basic-popup__content {
         background: #1C2032;
-        padding: 10px;
+        padding: 20px;
         border-radius: 5px;
         width: 100%;
         box-shadow: 0 0 10px rgba(0, 0, 0, .3);
