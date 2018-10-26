@@ -2,6 +2,8 @@ import Vue from 'vue';
 import moment from 'moment';
 
 import transactions from '@/db/seed/asset-transactions';
+import trxsData from '@/db/seed/asset-transactions.json';
+import usersData from '@/db/seed/users.json';
 import assetsData from '@/db/seed/assets';
 import collectionsData from '@/db/seed/collections';
 
@@ -43,7 +45,18 @@ const assets = {
         filters: {
             1: { id: 1, name: null, phrase: 'Armor', priceMin: 1, priceMax: 52 },
             2: { id: 2, name: 'Cheap armors', phrase: 'Armors', priceMin: 0, priceMax: 10 }
-        }
+        },
+        trxs: trxsData.reduce((transactions, trx, index) => ({
+            ...transactions,
+            [trx.id]: {
+                ...trx,
+                createdAt: moment().add(-index, 'days')
+            }
+        }), {}),
+        users: usersData.reduce((users, user) => ({
+            ...users,
+            [user.id]: user
+        }), {})
     },
     mutations: {
         addAsset(state, { prop = 'assets', data }) {
@@ -137,18 +150,51 @@ const assets = {
         }
     },
     getters: {
-        assets: ({ assets }, getters, { marketplace: { collections }}) => Object.values(assets)
+        assets: ({ assets }, getters, { marketplace: { collections, products }}) => Object.values(assets)
             .reduce((populated, asset) => ({
                 ...populated,
                 [asset.id]: {
                     ...asset,
                     offers_list: asset.offers_list.map(id => assets[id]),
                     inventory_list: asset.inventory_list.map(id => assets[id]),
-                    collections: asset.collections.map(id => collections[id])
+                    collections: asset.collections.map(id => collections[id]),
+                    product: products[asset.product]
                 }
             }), {}),
         array: (state, { assets }) => Object.values(assets),
-        assetsArray: (state, { assets}) => Object.values(assets),
+        assetsArray: (state, { assets }) => Object.values(assets),
+        users: ({ users }, { assets }) => Object.values(users)
+            .reduce((populated, user) => ({
+                ...populated,
+                [user.id]: {
+                    ...user,
+                    inventory: user.inventory.map(id => assets[id])
+                }
+            }), {}),
+        transactions: ({ trxs }, { users, assets }) => Object.values(trxs)
+            .reduce((populated, trx) => ({
+                ...populated,
+                [trx.id]: trx
+                // [trx.id]: {
+                //     ...trx,
+                //     you: users[trx.you],
+                //     contractor: users[trx.contractor],
+                //     contractorOffer: trx.contractorOffer.map(id => assets[id]),
+                //     yourOffer: trx.yourOffer.map(id => assets[id])
+                // }
+            }), {}),
+        // inventoryGrouped: user.inventory.reduce((grouped, id) => {
+        //     return {};
+
+        //     // return {
+        //     //     ...grouped,
+        //     //     [name]: [
+        //     //         ...grouped[name],
+        //     //         assets[id]
+        //     //     ]
+        //     // };
+        // }, {})
+        transactionsArray: (state, { transactions }) => Object.values(transactions),
         inventoryAssets: (state, { assetsArray }) => assetsArray
             .filter(asset => !asset.for_sale),
         selectedAssets: (state, { assetsArray }) => assetsArray
