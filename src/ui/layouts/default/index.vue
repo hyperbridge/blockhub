@@ -84,6 +84,7 @@
             <c-send-funds-popup :activated="send_funds_modal_active" @close="closePopup" ref="send_funds_modal_active"></c-send-funds-popup>
             <c-login-popup :activated="login_modal_active" @close="closePopup" ref="login_modal_active"></c-login-popup>
             <c-purchase-popup :activated="purchase_modal_active" @close="closePopup" ref="purchase_modal_active"></c-purchase-popup>
+            <c-claim-popup :activated="claim_modal_active" @close="closePopup" ref="claim_modal_active"></c-claim-popup>
 
             <c-popup :activated="notifPopup.show_popup"
                      :title="notifPopup.title"
@@ -172,6 +173,7 @@
             'c-welcome-popup': (resolve) => require(['@/ui/components/welcome-popup/index.vue'], resolve),
             'c-download-popup': (resolve) => require(['@/ui/components/download-popup/index.vue'], resolve),
             'c-unlock-popup': (resolve) => require(['@/ui/components/unlock-popup/index.vue'], resolve),
+            'c-claim-popup': (resolve) => require(['@/ui/components/claim-popup/index.vue'], resolve),
             'c-login-popup': (resolve) => require(['@/ui/components/login-popup/index.vue'], resolve),
             'c-send-funds-popup': (resolve) => require(['@/ui/components/send-funds-popup/index.vue'], resolve),
             'c-purchase-popup': (resolve) => require(['@/ui/components/purchase-popup/index.vue'], resolve),
@@ -217,6 +219,9 @@
             },
             purchase_modal_active() {
                 return this.$store.state.application.active_modal === 'purchase'
+            },
+            claim_modal_active() {
+                return this.$store.state.application.active_modal === 'claim'
             },
             download_modal_active() {
                 return this.$store.state.application.active_modal === 'download'
