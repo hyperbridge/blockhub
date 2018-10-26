@@ -34,11 +34,17 @@
                     </p>
                 </div>
             </div>
-            <div v-if="!desktop_mode && !ethereum_connected">
+
+            <div class="col-12 text-center alert alert-info">
+                <p><strong>If you haven't already, KYC &amp; whitelist your address <c-button href="/#/kyc">click here</c-button></strong></p>
+            </div>
+
+            <!-- <div v-if="!desktop_mode && !ethereum_connected">
                 <div class="col-12 text-center alert alert-info">
                     <p>The BlockHub desktop app is the recommended way to load up on tokens.</p>
                 </div>
-            </div>
+            </div> -->
+
             <div class="row">
                 <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked">
                     <c-block title="Purchase" class="margin-bottom-30">
