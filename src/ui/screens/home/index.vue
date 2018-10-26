@@ -118,7 +118,7 @@ export default {
     },
     data() {
         return {
-            showWelcomeModal: ['preview', 'staging', 'local'].includes(this.$store.state.application.environment_mode),
+            showWelcomeModal: ['preview', 'staging', 'local'].includes(this.$store.state.application.environment_mode) && !this.$store.state.application.account.settings.client.hide_welcome_modal,
             showPreviewPanel: ['preview', 'staging', 'local'].includes(this.$store.state.application.environment_mode)
         }
     },
@@ -417,6 +417,7 @@ export default {
         },
         closeModal() {
             this.showWelcomeModal = false
+            this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_welcome_modal', true);
         },
         sendDesktopMessage() {
             if (!window.isElectron) {
