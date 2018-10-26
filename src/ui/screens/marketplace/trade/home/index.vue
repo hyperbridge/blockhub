@@ -37,6 +37,8 @@
 </template>
 
 <script>
+    import getters from '@/store/temporary-getters';
+
     export default {
         components: {
             'c-tabs': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve),
@@ -46,7 +48,7 @@
         },
         data() {
             return {
-                activeTab: 1
+                activeTab: 1,
             }
         },
         computed: {
