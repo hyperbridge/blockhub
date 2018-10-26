@@ -333,7 +333,7 @@
                                     </div>
                                 </div>
                                 <div class="tab-card" v-if="!verifyingPassphrase">
-                                    <p>We've generated a passphrase for you. This is used to encrypt your account, password, etc. If you ever need to recover it, you can use your password. If you forget your password, you can use your secret question AND your birthday. We do this to protect you against hackers, however don't lose them, otherwise it will be impossible to recover the account.</p>
+                                    <p>We've generated a passphrase for you. You can change it, but it's not recommended. This is used to encrypt your account, password, etc. If you ever need to recover it, you can use your password. If you forget your password, you can use your secret question AND your birthday. We do this to protect you against hackers, however don't lose them, otherwise it will be impossible to recover the account.</p>
 
                                     <p>Make sure to write down your passphase, password, and secret answers and put it somewhere safe.</p>
 
