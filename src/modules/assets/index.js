@@ -10,6 +10,20 @@ import collectionsData from '@/db/seed/collections';
 const rand = () => Math.floor(Math.random() * 100);
 const assignId = (id, object) => ({ ...object, data: { ...object.data, id }, id });
 
+const extract = (object, props) => ['id', 'name', ...props]
+    .reduce((extracted, prop) => object[prop]
+        ? { ...extracted, [prop]: object[prop] }
+        : extracted
+    , {});
+
+const skip = (object, props) => {
+    const copy = { ...object };
+    for (let prop in props) {
+        delete copy[prop];
+    }
+    return copy;
+};
+
 const assets = {
     namespaced: true,
     state: {
@@ -168,7 +182,8 @@ const assets = {
                 ...populated,
                 [user.id]: {
                     ...user,
-                    inventory: user.inventory.map(id => assets[id])
+                    // inventory: user.inventory.map(id => assets[id]),
+                    inventory: user.inventory.map(id => extract(assets[id], ['image', 'price']))
                 }
             }), {}),
         transactions: ({ trxs }) => trxs,
