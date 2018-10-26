@@ -1734,6 +1734,7 @@ storiesOf('Headers', module)
     }))
 
 import BlockHeaders from '../ui/components/heading-bar/index'
+import BlockHeadersColor from '../ui/components/heading-bar/simple-colored.vue'
 import BlockHeadersAddFields from '../ui/components/heading-bar/additional-action'
 
 const injectHBarTemp = code => `
@@ -1810,6 +1811,16 @@ storiesOf('Block Title', module)
                     <a href="#3">Third tab</a>
                 </template>
             </c-heading-bar>
+        `)
+    }))
+    .add('colored', () => ({
+        components: {
+            'c-heading-bar-color': BlockHeadersColor
+        },
+        template: injectHBarTemp(`
+            <c-heading-bar-color colorCode="f60" textAlign="center">
+                <strong>This is the Title</strong>
+            </c-heading-bar-color>
         `)
     }))
 
@@ -3671,6 +3682,44 @@ storiesOf('Share', module)
                         <c-share :onlineList="online" :favoritesList="favorites" :show="true" />
                     </div> `
     }))
+
+import StreamItem from '@/ui/components/stream'
+storiesOf('Stream', module)
+    .add('default', () =>({
+        components:{
+            'c-stream-item': StreamItem
+        },
+        template: `
+        <div class="row p-5">
+            <div class="col-4">
+                <c-stream-item />
+            </div>
+        </div>
+        
+        `
+    }))
+
+
+storiesOf('Changelog Popup', module)
+    .add('default', () =>({
+        components:{
+            'c-popup': PopUps,
+        },
+        template: `
+        <div class="row p-5">
+            <div class="col-4">
+                <c-popup :activated="true">
+                    sdfsdfsdsfdsfd
+                </c-popup>
+            </div>
+        </div>
+        
+        `
+    }))
+
+
+
+
 
 /*
      Dynamic import - test version
