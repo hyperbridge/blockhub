@@ -97,11 +97,6 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/support'], resolve)
         },
         {
-            path: '/changelog',
-            name: 'Changelog',
-            component: (resolve) => require(['@/ui/screens/changelog'], resolve)
-        },
-        {
             path: '/news',
             name: 'News',
             component: (resolve) => require(['@/ui/screens/news'], resolve)
@@ -706,7 +701,8 @@ const router = new Router({
                         {
                             path: ':id',
                             name: 'Marketplace Trade',
-                            component: (resolve) => require(['@/ui/screens/marketplace/trade/_id'], resolve)
+                            component: (resolve) => require(['@/ui/screens/marketplace/trade/_id'], resolve),
+                            props: true
                         }
                     ]
                 },
@@ -742,11 +738,6 @@ const router = new Router({
                     component: (resolve) => require(['@/ui/screens/marketplace-inventory/compare'], resolve),
                 }
             ]
-        },
-        {
-            path: '/marketplace/trade/:tradeId',
-            name: 'Marketplace Trade Transaction',
-            component: (resolve) => require(['@/ui/screens/marketplace-trade-transaction'], resolve)
         },
         {
             path: '/download/desktop/mac',

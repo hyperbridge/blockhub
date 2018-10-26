@@ -16,7 +16,7 @@
                 >{{ tab instanceof Object ? tab.title : tab }}</a>
             </slot>
         </div>
-        <div class="heading-bar__additional-action">
+        <div class="heading-bar__additional-action" v-if="showActions">
             <slot name="additional-action"></slot>
             <a :href="more" v-if="more" class="more">
                 MORE <c-icon name="angle-right"/>
@@ -41,6 +41,7 @@ export default {
         showBackground: Boolean,
         showArrows: Boolean,
         more: Boolean,
+        showActions: Boolean,
         headingTabs: Array
     },
     data() {

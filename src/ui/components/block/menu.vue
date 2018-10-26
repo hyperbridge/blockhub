@@ -40,7 +40,7 @@
         font-size: 20px;
         font-weight: 500;
         display: block;
-        margin-right: 25px;
+        margin-right: 35px;
         padding: 5px 0 10px 0;
         position: relative;
         text-decoration: none;

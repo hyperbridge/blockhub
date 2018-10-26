@@ -6,6 +6,7 @@ let previousProperty = ''
 
 export default {
     state: {
+        id: 1,
         settings: {
             animations: true,
             autoplay: true,
