@@ -3,8 +3,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 mb-4 text-center">
-                        <h2><img src="/static/img/success.png" style="max-width: 40px;" /> Account Verification Requested</h2>
-                        <p>Account verification complete. You can now close this browser tab.</p>
+                        <h2><img src="/static/img/success.png" style="max-width: 40px;" /> Verification Sent</h2>
+                        <p>We're working to verify your address and will email you when completed. You can now close this browser tab.</p>
                     </div>
                 </div>
             </div>

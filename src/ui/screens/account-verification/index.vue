@@ -34,7 +34,7 @@
                                     <br />
 
                                     <c-button @click="verifyIdentity">
-                                        Send Verification Request
+                                        Send Again
                                     </c-button>
                                 </div>
                                 <div class="tab-card padding-20" v-if="is_verifying">
@@ -176,7 +176,7 @@
                 last_name: account.last_name,
                 public_address: account.public_address,
                 account: account,
-                is_verified: account.is_verified, //account.is_verified,
+                is_verified: account.is_verified,
                 is_verifying: account.is_verifying,
                 verification_timestamp: account.verification_timestamp,
                 verificationLink: null
@@ -208,7 +208,7 @@
                     const data = {
                         verification: {
                             features: [ 'selfid' ],
-                            callback: window.location.href + '',
+                            callback: 'https://blockhub.gg/#/account/verification/callback',
                             person: {
                                 firstName: this.first_name,
                                 lastName: this.last_name,
