@@ -1,205 +1,201 @@
 <template>
     <c-layout>
-        <div class="content identity" id="content">
-            <div class="container-fluid">
-                <c-user-head />
-                <div class="row justify-content-between align-items-center">
-                    <div class="col-12 d-flex margin-top-30 justify-content-end">
-                        <div class="identity__wallet">
-                            <i class="fas fa-copy"></i>
-                            <span id="wallet_number">jbkjBhBJIBXIUi8plmPOJOnoNCYTcPSkSOsvsdf08Uhg7gBU</span>
+        <c-user-head />
+        <div class="row justify-content-between align-items-center">
+            <div class="col-12 d-flex margin-top-30 justify-content-end">
+                <div class="identity__wallet">
+                    <i class="fas fa-copy"></i>
+                    <span id="wallet_number">jbkjBhBJIBXIUi8plmPOJOnoNCYTcPSkSOsvsdf08Uhg7gBU</span>
+                </div>
+                <div class="identity__action-group">
+                    <c-button status="info" icon="arrow-up">Send funds</c-button>
+                    <c-button status="share">Share</c-button>
+                    <c-button status="danger">Report</c-button>
+                </div>
+            </div>
+            <div class="col-12" v-if="!signed_in">
+                <div class="identity__user-notify">
+                    <a href="#3" class="btn-close">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <h3>Create your BlockHub Profile</h3>
+                    <p>BlockHub is the best place for curated community-driven game development,
+                        digital assets and micro-licensing. Sugn up for your own account and build
+                        the future of gaming.</p>
+                    <c-button status="success" size="lg" icon_hide>
+                        Sign Up
+                    </c-button>
+                </div>
+            </div>
+            <div class="col-12 margin-top-40">
+                <div class="badges">
+                    <c-heading-bar name="Badges" :showArrows="false" :showBackground="false">
+                        <div class="additional-action margin-left-20" slot="additional-action">
+                            <div class="text">
+                                Trust
+                                <i class="fas fa-hand-holding-heart"></i>
+                            </div>
+                            <c-button-arrows/>
                         </div>
-                        <div class="identity__action-group">
-                            <c-button status="info" icon="arrow-up">Send funds</c-button>
-                            <c-button status="share">Share</c-button>
-                            <c-button status="danger">Report</c-button>
+                        <div class="additional-action" slot="additional-action">
+                            <div class="text">
+                                Rating
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <c-button-arrows/>
+                        </div>
+                    </c-heading-bar>
+                    <div class="badges__list">
+                        <div
+                            v-for="index in 4"
+                            class="badges__item"
+                            :key="index"
+                        >
+                            <div class="img">
+                                <c-img :src="badge.img" />
+                            </div>
+                            <h3>{{ badge.title }}</h3>
+                            <p>{{ badge.product }}</p>
                         </div>
                     </div>
-                    <div class="col-12" v-if="!signed_in">
-                        <div class="identity__user-notify">
-                            <a href="#3" class="btn-close">
-                                <i class="fas fa-times"></i>
-                            </a>
-                            <h3>Create your BlockHub Profile</h3>
-                            <p>BlockHub is the best place for curated community-driven game development,
-                                digital assets and micro-licensing. Sugn up for your own account and build
-                                the future of gaming.</p>
-                            <c-button status="success" size="lg" icon_hide>
-                                Sign Up
-                            </c-button>
+                    <c-content-navigation />
+                </div>
+            </div>
+            <div class="col-12 margin-top-40">
+                <div class="featured-assets">
+                    <c-heading-bar name="Featured Assets" :showArrows="false" :showBackground="false" />
+                    <c-featured-assets />
+                </div>
+            </div>
+            <div class="col-12 margin-top-40">
+                <div class="assets">
+                    <c-heading-bar name="Assets" :showArrows="false" :showBackground="false">
+                        <div class="additional-action margin-left-20" slot="additional-action">
+                            <div class="text">
+                                Value
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <c-button-arrows/>
                         </div>
-                    </div>
-                    <div class="col-12 margin-top-40">
-                        <div class="badges">
-                            <c-heading-bar name="Badges" :showArrows="false" :showBackground="false">
-                                <div class="additional-action margin-left-20" slot="additional-action">
-                                    <div class="text">
-                                        Trust
-                                        <i class="fas fa-hand-holding-heart"></i>
-                                    </div>
-                                    <c-button-arrows/>
-                                </div>
-                                <div class="additional-action" slot="additional-action">
-                                    <div class="text">
-                                        Rating
-                                        <i class="fas fa-trophy"></i>
-                                    </div>
-                                    <c-button-arrows/>
-                                </div>
-                            </c-heading-bar>
-                            <div class="badges__list">
-                                <div
-                                    v-for="index in 4"
-                                    class="badges__item"
-                                    :key="index"
-                                >
-                                    <div class="img">
-                                        <c-img :src="badge.img" />
-                                    </div>
-                                    <h3>{{ badge.title }}</h3>
-                                    <p>{{ badge.product }}</p>
+                        <div class="additional-action" slot="additional-action">
+                            <div class="text">
+                                Rating
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <c-button-arrows/>
+                        </div>
+                    </c-heading-bar>
+
+                    <c-assets-grid />
+
+                    <c-content-navigation />
+                </div>
+            </div>
+
+            <div class="col-12 margin-top-40">
+                <div class="games-list">
+                    <c-heading-bar name="Games" :showArrows="false" :showBackground="false">
+                        <div class="additional-action margin-left-20" slot="additional-action">
+                            <div class="text">
+                                Price
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <c-button-arrows/>
+                        </div>
+                        <div class="additional-action margin-left-20" slot="additional-action">
+                            <div class="text">
+                                Play Time
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <c-button-arrows/>
+                        </div>
+                        <div class="additional-action" slot="additional-action">
+                            <div class="text">
+                                Purchase Date
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <c-button-arrows/>
+                        </div>
+                    </c-heading-bar>
+                    <div class="games-list__grid">
+                        <div
+                            v-for="index in 6"
+                            :key="index"
+                            class="games-list__grid-item"
+                        >
+                            <div class="img">
+                                <c-img :src="game.img" />
+                            </div>
+                            <div class="info">
+                                <h4>{{ game.title }}</h4>
+                                <p>{{ game.developer }}</p>
+                                <div class="time">
+                                    <i class="fas fa-clock"></i>
+                                    {{ Math.round(game.minutes_played / 60) }}h played
                                 </div>
                             </div>
-                            <c-content-navigation />
                         </div>
                     </div>
-                    <div class="col-12 margin-top-40">
-                        <div class="featured-assets">
-                            <c-heading-bar name="Featured Assets" :showArrows="false" :showBackground="false" />
-                            <c-featured-assets />
-                        </div>
+                    <c-content-navigation />
+                </div>
+            </div>
+
+            <div class="col-12 margin-top-40 margin-bottom-40">
+                <div class="identity__user-notify-card">
+                    <div>
+                        <c-user-card />
                     </div>
-                    <div class="col-12 margin-top-40">
-                        <div class="assets">
-                            <c-heading-bar name="Assets" :showArrows="false" :showBackground="false">
-                                <div class="additional-action margin-left-20" slot="additional-action">
-                                    <div class="text">
-                                        Value
-                                        <i class="fas fa-dollar-sign"></i>
-                                    </div>
-                                    <c-button-arrows/>
-                                </div>
-                                <div class="additional-action" slot="additional-action">
-                                    <div class="text">
-                                        Rating
-                                        <i class="fas fa-trophy"></i>
-                                    </div>
-                                    <c-button-arrows/>
-                                </div>
-                            </c-heading-bar>
-
-                            <c-assets-grid />
-
-                            <c-content-navigation />
-                        </div>
-                    </div>
-
-                    <div class="col-12 margin-top-40">
-                        <div class="games-list">
-                            <c-heading-bar name="Games" :showArrows="false" :showBackground="false">
-                                <div class="additional-action margin-left-20" slot="additional-action">
-                                    <div class="text">
-                                        Price
-                                        <i class="fas fa-dollar-sign"></i>
-                                    </div>
-                                    <c-button-arrows/>
-                                </div>
-                                <div class="additional-action margin-left-20" slot="additional-action">
-                                    <div class="text">
-                                        Play Time
-                                        <i class="fas fa-clock"></i>
-                                    </div>
-                                    <c-button-arrows/>
-                                </div>
-                                <div class="additional-action" slot="additional-action">
-                                    <div class="text">
-                                        Purchase Date
-                                        <i class="fas fa-calendar"></i>
-                                    </div>
-                                    <c-button-arrows/>
-                                </div>
-                            </c-heading-bar>
-                            <div class="games-list__grid">
-                                <div
-                                    v-for="index in 6"
-                                    :key="index"
-                                    class="games-list__grid-item"
-                                >
-                                    <div class="img">
-                                        <c-img :src="game.img" />
-                                    </div>
-                                    <div class="info">
-                                        <h4>{{ game.title }}</h4>
-                                        <p>{{ game.developer }}</p>
-                                        <div class="time">
-                                            <i class="fas fa-clock"></i>
-                                            {{ Math.round(game.minutes_played / 60) }}h played
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <c-content-navigation />
-                        </div>
-                    </div>
-
-                    <div class="col-12 margin-top-40 margin-bottom-40">
-                        <div class="identity__user-notify-card">
-                            <div>
-                                <c-user-card />
-                            </div>
-                            <div class="text text-left" v-if="!signed_in">
-                                <h3>Create your BlockHub profile</h3>
-                                <p>BlockHub is the best place for curated community-driven game development,
-                                    digital assets and micro-licensing. Sign up for your own account and build
-                                    the future of gaming.</p>
-                                <c-button href="/#/download" status="success" size="lg" icon_hide>
-                                    Sign Up
-                                </c-button>
-                            </div>
-                        </div>
+                    <div class="text text-left" v-if="!signed_in">
+                        <h3>Create your BlockHub profile</h3>
+                        <p>BlockHub is the best place for curated community-driven game development,
+                            digital assets and micro-licensing. Sign up for your own account and build
+                            the future of gaming.</p>
+                        <c-button href="/#/download" status="success" size="lg" icon_hide>
+                            Sign Up
+                        </c-button>
                     </div>
                 </div>
-                <div class="row align-items-stretch">
-                    <div class="col-12 col-md-8">
-                        <div class="badges">
-                            <c-heading-bar name="Badges" :showArrows="false" :showBackground="false">
-                                <div class="additional-action margin-left-20" slot="additional-action">
-                                    <div class="text">
-                                        Trust
-                                        <i class="fas fa-hand-holding-heart"></i>
-                                    </div>
-                                    <c-button-arrows/>
-                                </div>
-                                <div class="additional-action" slot="additional-action">
-                                    <div class="text">
-                                        Rating
-                                        <i class="fas fa-trophy"></i>
-                                    </div>
-                                    <c-button-arrows/>
-                                </div>
-                            </c-heading-bar>
-                            <div class="badges__list">
-                                <div
-                                    v-for="index in 4"
-                                    class="badges__item"
-                                    :key="index"
-                                >
-                                    <div class="img">
-                                        <c-img :src="badge.img" />
-                                    </div>
-                                    <h3>{{ badge.title }}</h3>
-                                    <p>{{ badge.product }}</p>
-                                </div>
+            </div>
+        </div>
+        <div class="row align-items-stretch">
+            <div class="col-12 col-md-8">
+                <div class="badges">
+                    <c-heading-bar name="Badges" :showArrows="false" :showBackground="false">
+                        <div class="additional-action margin-left-20" slot="additional-action">
+                            <div class="text">
+                                Trust
+                                <i class="fas fa-hand-holding-heart"></i>
                             </div>
-                            <c-content-navigation />
+                            <c-button-arrows/>
+                        </div>
+                        <div class="additional-action" slot="additional-action">
+                            <div class="text">
+                                Rating
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <c-button-arrows/>
+                        </div>
+                    </c-heading-bar>
+                    <div class="badges__list">
+                        <div
+                            v-for="index in 4"
+                            class="badges__item"
+                            :key="index"
+                        >
+                            <div class="img">
+                                <c-img :src="badge.img" />
+                            </div>
+                            <h3>{{ badge.title }}</h3>
+                            <p>{{ badge.product }}</p>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4">
-                        <div class="basic-info">
-                            <c-heading-bar name="Basic Information" :showArrows="false" :showBackground="false">
-                            </c-heading-bar>
-                        </div>
-                    </div>
+                    <c-content-navigation />
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="basic-info">
+                    <c-heading-bar name="Basic Information" :showArrows="false" :showBackground="false">
+                    </c-heading-bar>
                 </div>
             </div>
         </div>

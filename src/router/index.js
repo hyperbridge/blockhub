@@ -291,7 +291,10 @@ const router = new Router({
             path: '/identity/:id',
             name: 'Profile',
             props: true,
-            component: (resolve) => require(['@/ui/screens/identity-overview'], resolve)
+            component: (resolve) => require(['@/ui/screens/identity-overview'], resolve),
+            meta: {
+                auth: false
+            }
         },
         {
             path: '/identity/:id/contacts',
