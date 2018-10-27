@@ -4,7 +4,7 @@
             <div class="stream-item__img">
                 <c-img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQirZ7XcXSa1fX6SLff2k21LqAcfF-2uNUwlPKtl93ZSdm-Rw6UWQ" />
                 <a href="#3" class="stream-item__run-btn">
-                    <i class="far fa-play-circle"></i>
+                    <i class="fas fa-play-circle"></i>
                 </a>
             </div>
             <div class="stream-item__info">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="stream-item__viewers">
-                    <i class="far fa-eye"></i>
+                    <i class="fas fa-eye"></i>
                     91823
                 </div>
             </div>
