@@ -383,6 +383,14 @@ const router = new Router({
             }
         },
         {
+            path: '/settings/extensions',
+            name: 'Extensions',
+            component: (resolve) => require(['@/ui/screens/settings-extensions'], resolve),
+            meta: {
+                auth: true
+            }
+        },
+        {
             path: '/monitor',
             name: 'Monitor',
             component: (resolve) => require(['@/ui/screens/monitor'], resolve)
@@ -654,6 +662,11 @@ const router = new Router({
             path: '/meta',
             name: 'Meta',
             component: (resolve) => require(['@/ui/screens/meta'], resolve)
+        },
+        {
+            path: '/meta/presets',
+            name: 'Presets',
+            component: (resolve) => require(['@/ui/screens/meta-presets'], resolve)
         },
         {
             path: '/updates',
