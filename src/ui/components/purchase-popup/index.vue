@@ -1,5 +1,5 @@
 <template>
-    <c-popup :activated="activated" type="custom" ref="modal" title="Purchase" width="650" @close="$emit('close')">
+    <c-popup :activated="activated" type="custom" ref="modal" title="" width="650" @close="$emit('close')">
         <div class="c-popup__close" @click="$emit('close')" slot="custom_close">
             <i class="fas fa-times"></i>
         </div>

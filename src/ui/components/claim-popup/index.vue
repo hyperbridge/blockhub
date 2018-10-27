@@ -66,6 +66,14 @@
                                 <p>By continuing you agree to the following Terms and Services and Privacy Policy</p>
                             </div>
                         </div>
+
+                        <p class="errors" v-if="errors.length">
+                            <br />
+                            <strong>Please correct the following error(s):</strong>
+                            <ul>
+                                <li v-for="error in errors" :key="error">{{ error }}</li>
+                            </ul>
+                        </p>
                     </div>
                     <div slot="footer" class="d-flex align-items-center justify-content-end">
                         <div class="text-right w-100">
@@ -172,46 +180,66 @@
                 }
             },
             nextStep() {
-                if (this.currentStep === 2) {
-                    const bodyFormData = new FormData()
+                this.errors = []
 
-                    bodyFormData.set('entry.524169597', this.companyName)
-                    bodyFormData.set('entry.399172045', this.productName)
-                    bodyFormData.set('entry.1527852888', this.contactName)
-                    bodyFormData.set('entry.903832048', this.contactNumber)
-                    bodyFormData.set('entry.2146275482', this.contactEmail)
-                    bodyFormData.set('entry.817087000', this.companyWebsite)
-                    bodyFormData.set('entry.199140031', this.developerProfileAddres)
+                if (this.currentStep === 1) {
+                    if (this.companyName
+                    && this.productName) {
+                        this.currentStep = 2
+                        return
+                    }
 
-                    axios({
-                        method: 'post',
-                        url: 'https://docs.google.com/forms/d/1X0LukIIimTL9egE9dbtHYECXG9W-y3HFj_kGRKk7cww/formResponse',
-                        data: bodyFormData,
-                        config: { headers: {'Content-Type': 'multipart/form-data' } }
-                    })
-                    .then((res) => {
-                        this.complete = true
-                    })
-                    .catch((err) => {
-                        this.errors.push('An error occurred. Please check your input or try again later.')
-                    })
+                    this.errors.push('Missing fields.')
+                } else if (this.currentStep === 2) {
+                    if (this.companyName
+                    && this.productName
+                    && this.contactName
+                    && this.contactNumber
+                    && this.contactEmail
+                    && this.companyWebsite
+                    && this.developerProfileAddres) {
+                        const bodyFormData = new FormData()
 
-                    // $.ajax({
-                    //     url: "https://docs.google.com/forms/d/1X0LukIIimTL9egE9dbtHYECXG9W-y3HFj_kGRKk7cww/formResponse",
-                    //     data: data,
-                    //     type: "POST",
-                    //     dataType: "xml",
-                    //     statusCode: {
-                    //         0: function() {
-                    //             //Success message
-                    //         },
-                    //         200: function() {
-                    //             //Success Message
-                    //         }
-                    //     }
-                    // });
-                } else {
-                    this.currentStep += 1
+                        bodyFormData.set('entry.524169597', this.companyName)
+                        bodyFormData.set('entry.399172045', this.productName)
+                        bodyFormData.set('entry.1527852888', this.contactName)
+                        bodyFormData.set('entry.903832048', this.contactNumber)
+                        bodyFormData.set('entry.2146275482', this.contactEmail)
+                        bodyFormData.set('entry.817087000', this.companyWebsite)
+                        bodyFormData.set('entry.199140031', this.developerProfileAddres)
+
+                        axios({
+                            method: 'post',
+                            url: 'https://docs.google.com/forms/d/1X0LukIIimTL9egE9dbtHYECXG9W-y3HFj_kGRKk7cww/formResponse',
+                            data: bodyFormData,
+                            config: { headers: {'Content-Type': 'multipart/form-data' } }
+                        })
+                        .then((res) => {
+                            this.complete = true
+                        })
+                        .catch((err) => {
+                            this.errors.push('An error occurred. Please check your input or try again later.')
+                        })
+
+                        // $.ajax({
+                        //     url: "https://docs.google.com/forms/d/1X0LukIIimTL9egE9dbtHYECXG9W-y3HFj_kGRKk7cww/formResponse",
+                        //     data: data,
+                        //     type: "POST",
+                        //     dataType: "xml",
+                        //     statusCode: {
+                        //         0: function() {
+                        //             //Success message
+                        //         },
+                        //         200: function() {
+                        //             //Success Message
+                        //         }
+                        //     }
+                        // });
+
+                        return
+                    }
+
+                    this.errors.push('Missing fields.')
                 }
             }
         }

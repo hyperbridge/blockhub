@@ -55,7 +55,7 @@
             <c-language-support :languages="product.language_support"/>
         </div>
         <div class="col-12">
-            <c-block title="Streams for this game"
+            <c-block :title="`TWITCH STREAMS - ${product.name}`"
                      :noGutter="true"
                      :bgGradient="true"
                      :onlyContentBg="true"
