@@ -2,21 +2,14 @@
     <c-layout navigationKey="store">
             <div class="container-fluid">
                 <div class="row margin-bottom-50">
-                    <div class="col-12 col-lg-8">
+                    <div class="col-12 col-lg-8" v-if="developer_mode">
                         <div class="h2 margin-top-5">Welcome to the BlockHub community</div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Fusce vulputate, arcu at dictum imperdiet, metus tellus cursus tortor,
-                            pharetra feugiat mauris risus sed risus. Integer viverra mauris eget urna
-                            pretium, et lacinia elit molestie. In sodales condimentum felis,
-                            in volutpat augue sagittis a.
-                        </p>
-                        <p>
-                            Vivamus nec scelerisque tellus. Fusce ornare blandit ante,
-                            sit amet sollicitudin risus pulvinar quis.
-                            Vivamus ac dignissim turpis. Sed sit amet justo quis sem
-                            sodales aliquet eu eu massa.
-                        </p>
+                        <p><strong>BlockHub Community</strong> allows you to engage your audience through crowdfunding campaigns, discussion forums, and a dedicated help centre for your product. You can now be in direct contact with your end users, answer their questions, address their concerns, and improve your approval rating on our platform. </p>
+                        <p>For more questions on BlockHub Community visit our help centre or email help@hyperbridge.org. </p>
+                    </div>
+                    <div class="col-12 col-lg-8" v-if="!developer_mode">
+                        <div class="h2 margin-top-5">Welcome to the BlockHub community</div>
+                        <p><strong>BlockHub Community</strong> allows you to engage with other gamers and the game developers for an enhanced community-driven gaming experience. You can ask questions on technical issues, post your feedback on the gameplay, and suggest improvements to the game. </p>
                     </div>
                     <div class="col-12 col-lg-4">
                         <c-block title="Links & Resources" :noGutter="true" :onlyContentBg="true">
