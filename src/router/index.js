@@ -293,7 +293,7 @@ const router = new Router({
             props: true,
             component: (resolve) => require(['@/ui/screens/identity-overview'], resolve),
             meta: {
-                auth: false
+                breadcrumb: false
             }
         },
         {

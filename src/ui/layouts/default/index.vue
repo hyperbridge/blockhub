@@ -86,6 +86,27 @@
             <c-purchase-popup :activated="purchase_modal_active" @close="closePopup" ref="purchase_modal_active"></c-purchase-popup>
             <c-claim-popup :activated="claim_modal_active" @close="closePopup" ref="claim_modal_active"></c-claim-popup>
 
+            <c-basic-popup 
+                :activated="$store.state.application.editor_mode && $store.state.application.account.settings.client.hide_editor_welcome_modal"
+                @close="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_editor_welcome_modal', true)"
+            >
+                <div class="h4" slot="header">Welcome to the editor</div>
+                <template slot="body">
+                    <p v-if="!voteCasted">
+                        The goal of BlockHub is everything is editable and curatable through community vote. Like a super-charged Wikipedia-style entertainment platform. But this isn't yet!
+                    </p>
+                    <p v-if="!voteCasted">
+                        Want this to be the next section we make editable? <c-button class="underline" @click="vote">Cast your vote by clicking here!</c-button>
+                    </p>
+                    <p v-if="voteCasted">
+                        Your vote has been cast. Thank you!
+                    </p>
+                </template>
+                <p slot="footer">
+                    Need help? <c-button status="plain" href="/#/help">Check our help center</c-button>
+                </p>
+            </c-basic-popup>
+
             <c-popup :activated="notifPopup.show_popup"
                      :title="notifPopup.title"
                      :type="notifPopup.type"
@@ -177,6 +198,7 @@
             'c-login-popup': (resolve) => require(['@/ui/components/login-popup/index.vue'], resolve),
             'c-send-funds-popup': (resolve) => require(['@/ui/components/send-funds-popup/index.vue'], resolve),
             'c-purchase-popup': (resolve) => require(['@/ui/components/purchase-popup/index.vue'], resolve),
+            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic.vue'], resolve),
             'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
             'c-cookie-policy': (resolve) => require(['@/ui/components/cookie-policy'], resolve),
             'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more.vue'], resolve),
@@ -198,7 +220,8 @@
                 scrollMoreDirection: null,
                 slimMode: false,
                 mobileMode: false,
-                bluredBg: false
+                bluredBg: false,
+                voteCasted: false
             }
         },
         computed: {
@@ -263,6 +286,10 @@
             onSwipeRight(){
                 console.log('right swipe')
                 this.showLeftPanel = true
+            },
+            vote() {
+                this.$store.commit('application/entry', { key: 'editable_page', value: window.location.hash })
+                this.voteCasted = true
             },
             closePopup() {
                 this.$store.state.application.active_modal = null

@@ -3,6 +3,8 @@ import { normalize } from 'normalizr'
 import * as DB from '@/db'
 import * as Bridge from '@/framework/desktop-bridge'
 import schema from './schema'
+import axios from 'axios'
+import FormData from 'form-data'
 
 let rawData = {}
 
@@ -130,6 +132,10 @@ export const actions = {
     },
     setEditorMode(store, payload) {
         store.commit('setEditorMode', payload)
+
+        if (!store.state.application.account.settings.client.hide_editor_welcome_modal) {
+            store.commit('activateModal', 'editor-welcome')
+        }
     },
     unlockAccount(state, payload) {
         Bridge.resolvePromptPasswordRequest(payload.password.value)
@@ -294,6 +300,27 @@ export const mutations = {
     submitTransaction(state, payload) {
         const success = (id) => {
         }
+    },
+    entry(state, payload) {
+        // send .key and .value to sheet
+        const bodyFormData = new FormData()
+
+        bodyFormData.set('entry.524169597', payload.key)
+        bodyFormData.set('entry.399172045', payload.value)
+
+        axios({
+            method: 'post',
+            url: 'https://docs.google.com/forms/d/1W1_7UuaDjjCKp08vSllvyKZTQRCSej9kd743Z2N1NvY/formResponse',
+            data: bodyFormData,
+            config: { headers: { 'Content-Type': 'multipart/form-data' } }
+        })
+            .then((res) => {
+                //cb && cb()
+            })
+            .catch((err) => {
+                console.log('An error occurred. Please check your input or try again later.')
+            })
+
     },
     activateModal(state, payload) {
         state.active_modal = payload

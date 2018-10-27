@@ -417,7 +417,7 @@ export default {
         },
         closeModal() {
             this.showWelcomeModal = false
-            this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_welcome_modal', true);
+            this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_welcome_modal', true)
         },
         sendDesktopMessage() {
             if (!window.isElectron) {
