@@ -19,13 +19,14 @@
                 <p>
                     By continuing to use this site you are giving
                     us your consent to do this.
-                </p><template slot="footer">
-                <div class="text-right w-100">
-                    <c-button status="success" icon_hide @click="updateClientSettings()">
-                        Accept
-                    </c-button>
-                </div>
-            </template>
+                </p>
+                <template slot="footer">
+                    <div class="text-right w-100">
+                        <c-button status="success" icon_hide @click="updateClientSettings()">
+                            Accept
+                        </c-button>
+                    </div>
+                </template>
             </c-popup>
         </div>
     </transition>

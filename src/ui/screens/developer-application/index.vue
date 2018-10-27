@@ -1,7 +1,7 @@
 <template>
     <c-layout navigationKey="store">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12" v-if="!developer_mode">
                     <c-block title="Business Manager" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                         <p>We're still working on our Business Manager. In the meantime, you can contact us directly at <a href="mailto:business@hyperbridge.org"><strong>business@hyperbridge.org</strong></a></p>
                     </c-block>
@@ -18,21 +18,21 @@
                             :class="{ 'default': true }"
                         />
                         <br />
-                        <c-button class="basic" href="/#/account/identities">Choose Different Profile</c-button>
+                        <c-button class="underline" @click="$store.commit('application/showProfileChooser', true)">Choose Different Profile</c-button>
 
                         <br /><br />
 
-                        <c-button class="c-btn-lg outline-white" @click="convertIdentity">Convert to Developer</c-button>
+                        <c-button class="c-btn-lg outline-white margin-top-20" @click="convertIdentity">Convert to Developer</c-button>
                     </div>
-                    <div v-if="developer_mode">
-                        <c-block title="Congratulations" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                            Your profile is all setup. You are Developer #{{ chosenIdentity.developer_id }}
+                </div>
+                <div class="col-12" v-if="developer_mode">
+                    <c-block title="Congratulations" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                        Your profile is all setup. You are Developer #{{ chosenIdentity.developer_id }}
 
-                            <br /><br />
+                        <br /><br />
 
-                            <c-button href="/#/developer">Go to dashboard</c-button>
-                        </c-block>
-                    </div>
+                        <c-button href="/#/developer">Go to dashboard</c-button>
+                    </c-block>
                 </div>
             </div>
     </c-layout>
