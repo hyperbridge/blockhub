@@ -131,7 +131,7 @@
                 </div>
             </div>
         </div>
-        <c-custom-modal title="Help Center" v-if="first_product && editing" @close="closeModal">
+        <c-custom-modal title="Help Center" v-if="first_product && editing && !$store.state.application.account.settings.client.hide_product_intro_modal" @close="closeModal">
             <div class="help-modal__content" slot="modal_body" style="max-width: 500px">
                 <h4 class="h2 mb-3">Creating your first product?</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -312,6 +312,7 @@
             },
             closeModal() {
                 this.$store.state.marketplace.first_product = false
+            this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_product_intro_modal', true)
             },
             showImporter() {
                 this.importing = true
