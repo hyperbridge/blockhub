@@ -6,8 +6,31 @@
                 :active_tab_prop="currentStep"
                 @click="changeTab($event)"
             >
-                <c-tab name="Product Verification" :tab_id="1" :selected="true" :showFooter="true">
+                <c-tab name="Done" :tab_id="2" :selected="true" :showFooter="true" v-if="complete">
                     <div>
+                        <p>Product verification request has been submit. We'll be in touch soon. Thank you!</p>
+                    </div>
+                    <div slot="footer" class="d-flex align-items-center justify-content-end">
+                        <div class="text-right w-100">
+                            <c-button status="success" icon_hide @click="$emit('close')">
+                                OK
+                            </c-button>
+                        </div>
+                    </div>
+                </c-tab>
+                <c-tab name="Product Verification" :tab_id="1" :selected="true" :showFooter="true" v-if="!complete">
+                    <div>
+                        <p>
+                            To manage your product listing, you'll need to verify your connection with this company. <br />
+                            What you'll get with verification:
+                            <br /><br />
+                            <i class="fas fa-check"></i> Allow new customers to find you on BlockHub Search<br />
+                            <i class="fas fa-check"></i> Promote your business with bounties<br />
+                            <i class="fas fa-check"></i> Track product analytics to understand your customers<br />
+                            <i class="fas fa-check"></i> Respond to customer reviews<br />
+                            <i class="fas fa-check"></i> And much more<br />
+                            <br />
+                        </p>
                         <div class="row">
                             <div class="col">
                                 <p>What's the name of your company?</p>
@@ -28,6 +51,18 @@
                         </div>
                         <div class="row">
                             <div class="col">
+                                <p>What's your developer profile address?</p>
+                                <div class="form-group">
+                                    <label class="sr-only">Developer Profile Address</label>
+                                    <input type="text" class="form-control" placeholder="Developer Profile Address"
+                                            name="developerProfileAddress" v-model="developerProfileAddress">
+                                </div>
+                                <c-button class="underline" @click="$store.commit('application/showProfileChooser', true)">Choose Different Profile</c-button>
+                            </div>
+                        </div>
+                        <div class="row" hidden>
+                            <div class="col">
+                                <br /><br />
                                 <p>By continuing you agree to the following Terms and Services and Privacy Policy</p>
                             </div>
                         </div>
@@ -41,10 +76,8 @@
                         </div>
                     </div>
                 </c-tab>
-                <c-tab name="Step 2" :tab_id="2" :showFooter="true">
+                <c-tab name="Contact" :tab_id="2" :showFooter="true" v-if="!complete">
                     <div>
-                        <p>Please fill in your information</p>
-
                         <div class="row">
                             <div class="col">
                                 <p>Website URL</p>
@@ -81,27 +114,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div slot="footer" class="d-flex align-items-center justify-content-end">
-                        <div class="text-right w-100">
-                            <c-button @click="$emit('close')">Cancel</c-button>
-                            <c-button status="success" icon_hide @click="nextStep()">
-                                Continue
-                            </c-button>
-                        </div>
-                    </div>
-                </c-tab>
-                <c-tab name="Step 3" :tab_id="3" :showFooter="true">
-                    <div>
-                        <p>
-                            To manage your listing, you'll need to verify your connection with this company. What you'll get with verification:
-                            <br /><br />
-                            <i class="fas fa-check"></i> Allow new customers to find you on BlockHub Search<br />
-                            <i class="fas fa-check"></i> Promote your business with bounties<br />
-                            <i class="fas fa-check"></i> Track product analytics to understand your customers<br />
-                            <i class="fas fa-check"></i> Respond to customer reviews<br />
-                            <i class="fas fa-check"></i> And much more<br />
-                            <br />
+
+                        <p class="errors" v-if="errors.length">
+                            <strong>Please correct the following error(s):</strong>
+                            <ul>
+                                <li v-for="error in errors" :key="error">{{ error }}</li>
+                            </ul>
                         </p>
                     </div>
                     <div slot="footer" class="d-flex align-items-center justify-content-end">
@@ -119,6 +137,9 @@
 </template>
 
 <script>
+    import axios from 'axios'
+    import FormData from 'form-data'
+
     export default {
         props: ['activated'],
         components: {
@@ -129,6 +150,8 @@
         data() {
             return {
                 currentStep: 1,
+                complete: false,
+                errors: [],
                 companyName: null,
                 productName: null,
                 contactName: null,
@@ -137,17 +160,56 @@
                 companyWebsite: null
             }
         },
+        computed: {
+            developerProfileAddress() { return this.$store.state.application.account.current_identity.public_address }
+        },
         methods: {
             changeTab(step) {
                 if (step > this.currentStep) {
-                    this.nextStep();
+                    this.nextStep()
                 } else {
-                    this.currentStep = step;
+                    this.currentStep = step
                 }
             },
             nextStep() {
-                if (this.currentStep === 3) {
-                    // submit to google form
+                if (this.currentStep === 2) {
+                    const bodyFormData = new FormData()
+
+                    bodyFormData.set('entry.524169597', this.companyName)
+                    bodyFormData.set('entry.399172045', this.productName)
+                    bodyFormData.set('entry.1527852888', this.contactName)
+                    bodyFormData.set('entry.903832048', this.contactNumber)
+                    bodyFormData.set('entry.2146275482', this.contactEmail)
+                    bodyFormData.set('entry.817087000', this.companyWebsite)
+                    bodyFormData.set('entry.199140031', this.developerProfileAddres)
+
+                    axios({
+                        method: 'post',
+                        url: 'https://docs.google.com/forms/d/1X0LukIIimTL9egE9dbtHYECXG9W-y3HFj_kGRKk7cww/formResponse',
+                        data: bodyFormData,
+                        config: { headers: {'Content-Type': 'multipart/form-data' } }
+                    })
+                    .then((res) => {
+                        this.complete = true
+                    })
+                    .catch((err) => {
+                        this.errors.push('An error occurred. Please check your input or try again later.')
+                    })
+
+                    // $.ajax({
+                    //     url: "https://docs.google.com/forms/d/1X0LukIIimTL9egE9dbtHYECXG9W-y3HFj_kGRKk7cww/formResponse",
+                    //     data: data,
+                    //     type: "POST",
+                    //     dataType: "xml",
+                    //     statusCode: {
+                    //         0: function() {
+                    //             //Success message
+                    //         },
+                    //         200: function() {
+                    //             //Success Message
+                    //         }
+                    //     }
+                    // });
                 } else {
                     this.currentStep += 1
                 }
