@@ -307,7 +307,14 @@ export const mutations = {
     activateModal(state, payload) {
         state.active_modal = payload
     },
-    UPDATE_CLIENT_SETTINGS (state, property) {
-        Vue.set(state.account.settings.client, property, !state.account.settings.client[property])
+    UPDATE_CLIENT_SETTINGS (state, property, value) {
+        value = value || !state.account.settings.client[property]
+
+        Vue.set(state.account.settings.client, property, value)
+
+        state.account.settings.client[property] = value
+
+        DB.application.config.update(state)
+        DB.save()
     }
 }

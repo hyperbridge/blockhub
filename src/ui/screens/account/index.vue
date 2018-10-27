@@ -47,9 +47,9 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <c-button @click="exportAccountFile" hidden>Download Account File</c-button>
-                                        <c-button @click="importAccountFile" hidden>Import Account File</c-button>
-                                        <c-button class="outline-danger" @click="deleteAccount">Delete Account</c-button>
+                                        <c-button @click="importAccountFile" hidden>Import Account</c-button>
+                                        <c-button @click="exportAccountFile" hidden>Export Saved Account</c-button>
+                                        <c-button class="outline-danger" @click="deleteAccount">Clear Saved Account</c-button>
                                     </div>
                                 </div>
                             </form>

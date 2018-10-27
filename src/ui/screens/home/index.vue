@@ -54,11 +54,11 @@
                                     <c-button @click="resetSettings()">Reset Settings</c-button>
                                     <br /><br />
                                 </div>
-                                <div v-if="desktop_mode">
+                                <div v-if="desktop_mode" hidden>
                                     <input ref="desktopMessage" type="text" />
                                     <c-button @click="sendDesktopMessage()">Send Message To Desktop</c-button>
                                 </div>
-                                <div v-if="developer_mode">
+                                <div v-if="developer_mode" hidden>
                                     <h4>Darklaunch Manager</h4>
                                     <select id="darklaunch-editor" class="form-control" multiple="multiple">
                                         <option v-for="(flag, index) in $store.state.application.darklaunch_flags"
@@ -118,7 +118,7 @@ export default {
     },
     data() {
         return {
-            showWelcomeModal: this.$store.state.application.environment_mode === 'preview',
+            showWelcomeModal: ['preview', 'staging', 'local'].includes(this.$store.state.application.environment_mode) && !this.$store.state.application.account.settings.client.hide_welcome_modal,
             showPreviewPanel: ['preview', 'staging', 'local'].includes(this.$store.state.application.environment_mode)
         }
     },
@@ -417,6 +417,7 @@ export default {
         },
         closeModal() {
             this.showWelcomeModal = false
+            this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_welcome_modal', true);
         },
         sendDesktopMessage() {
             if (!window.isElectron) {

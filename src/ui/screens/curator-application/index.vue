@@ -12,39 +12,13 @@
 
                     <br />
 
-                    <c-block title="Choose Profile" class="margin-bottom-30">
-                        <div class="profile-picker">
-                            <div
-                                class="profile-picker__profile"
-                                v-for="identity in identities"
-                                :key="identity.id"
-                                v-if="identities && identities.length"
-                            >
-                                <c-user-card
-                                    :user="identity"
-                                    :previewMode="true"
-                                    :class="{ 'default': chosenIdentity && identity.id == chosenIdentity.id }"
-                                />
-                                <div class="profile__action">
-                                    <c-button
-                                        status="info"
-                                        icon="check"
-                                        @click="chooseIdentity(identity)"
-                                        v-if="!chosenIdentity || identity.id != chosenIdentity.id"
-                                    >Choose</c-button>
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-                        <c-button href="/#/account/identities">New Profile</c-button>
-                    </c-block>
 
                     <br /><br />
 
                     <c-button @click="convertIdentity">Convert to Curator</c-button>
                 </div>
                 <div v-if="developerIdentity">
-                    Congratulations, your curator profile is all setup. You are Curator #{{ this.chosenIdentity.developer_id }}
+                    Congratulations, your curator profile is all setup. You are Curator #{{ this.chosenIdentity.curator_id }}
 
                     <br /><br />
 
@@ -64,7 +38,7 @@
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         },
         data() {
-            let developerIdentity = this.$store.state.application.account.identities.find(identity => identity.developer_id !== undefined)
+            let developerIdentity = this.$store.state.application.account.identities.find(identity => identity.curator_id !== undefined)
             let chosenIdentity = this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
 
             if (!chosenIdentity && this.$store.state.application.account.identities.length) {
@@ -80,8 +54,8 @@
         },
         methods: {
             convertIdentity() {
-                Bridge.sendCommand('createDeveloperRequest', this.chosenIdentity).then((data) => {
-                    this.chosenIdentity.developer_id = data
+                Bridge.sendCommand('createCuratorRequest', this.chosenIdentity).then((data) => {
+                    this.chosenIdentity.curator_id = data
                     this.developerIdentity = this.chosenIdentity
                     this.$store.state.application.developer_mode = true
                 })

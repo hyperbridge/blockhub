@@ -52,9 +52,10 @@
                                                         input-class="form-control form-calendar__text"
                                                         name="birthday"
                                                         calendar-class="form-calendar"
-                                                        minimumView="day" 
-                                                        maximumView="year" 
+                                                        minimumView="day"
+                                                        maximumView="year"
                                                         initialView="year"
+                                                        :format="customBirthdayFormatter"
                                                     />
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">
@@ -333,7 +334,7 @@
                                     </div>
                                 </div>
                                 <div class="tab-card" v-if="!verifyingPassphrase">
-                                    <p>We've generated a passphrase for you. This is used to encrypt your account, password, etc. If you ever need to recover it, you can use your password. If you forget your password, you can use your secret question AND your birthday. We do this to protect you against hackers, however don't lose them, otherwise it will be impossible to recover the account.</p>
+                                    <p>We've generated a passphrase for you. You can change it, but it's not recommended. This is used to access, create &amp; change your data. If you ever need to recover it, you can use your password. If you forget your password, you can use your secret question AND your birthday. We do this to protect you against hackers, however don't lose them, otherwise it will be impossible to recover the account.</p>
 
                                     <p>Make sure to write down your passphase, password, and secret answers and put it somewhere safe.</p>
 
@@ -341,12 +342,13 @@
                                         <input type="text" class="form-control" v-for="(word, index) in passphrase" :key="index" :value="word" @keyup="passphrase[index] = $event.target.value" />
                                     </div>
 
-                                    <br />
+                                    <c-button class="plain" @click="showPassphrase()" v-if="verifyingPassphrase"> </c-button> 
+                                    <br /><br />
 
                                     <c-button class="c-btn-lg" @click="startVerification()">Got it</c-button>
                                 </div>
                                 <div class="tab-card" v-if="verifyingPassphrase">
-                                    <p>We've generated a passphrase for you. This is used to encrypt your account, password, etc. If you ever need to recover it, you can use your password. If you forget your password, you can use your secret question AND your birthday. We do this to protect you against hackers, however don't lose them, otherwise it will be impossible to recover the account.</p>
+                                    <p>We've generated a passphrase for you. You can change it, but it's not recommended. This is used to access, create &amp; change your data. If you ever need to recover it, you can use your password. If you forget your password, you can use your secret question AND your birthday. We do this to protect you against hackers, however don't lose them, otherwise it will be impossible to recover the account.</p>
 
                                     <p>Make sure to write down your passphase, password, and secret answers and put it somewhere safe.</p>
 
@@ -743,6 +745,7 @@
 
 <script>
 import * as Bridge from '@/framework/desktop-bridge'
+import moment from 'moment'
 
 export default {
     components: {
@@ -868,7 +871,7 @@ export default {
                             first_name: this.account.first_name,
                             last_name: this.account.last_name,
                             email: this.account.email,
-                            birthday: this.account.birthday,
+                            birthday: moment(this.account.birthday).format('DD-MM-YYYY'),
                             password: this.account.password,
                             passphrase: passphraseOriginal,
                             encrypt_passphrase: this.account.encrypt_passphrase,
@@ -930,6 +933,9 @@ export default {
             } else {
                 this.currentStep = step;
             }
+        },
+        customBirthdayFormatter(date) {
+            return moment(date).format('DD-MM-YYYY')
         },
         showPassphrase() {
             this.errors = []
@@ -1214,7 +1220,7 @@ export default {
             display: inline;
             margin-right: 5px;
             margin-top: 5px;
-            width: 80px;
+            width: 7.8%;
         }
     }
 

@@ -1,7 +1,7 @@
 <template>
     <div class="page-sidepanel invert text-right" id="page-sidepanel">
         <div class="page-sidepanel__content">
-            <c-swiper :options="panelOption" ref="mySwiper">
+            <c-swiper ref="mySwiper">
                 <c-slide v-if="$store.state.application.signed_in">
                     <div class="item">
                         <h3>NOTIFICATION</h3>
@@ -95,13 +95,13 @@
                         <div class="navigation">
                             <ul>
                                 <template v-for="(update, index) in updates">
-                                    <li class="title" :key="`title-${index}`">
-                                        <a href="/#/updates">
-                                            <span class="text">{{ update.title }}</span>
-                                        </a>
-                                    </li>
-                                    <li :key="`info-${index}`">
-                                        <span class="text">{{ update.description }}</span>
+                                    <li class="mb-4" @click="showUpdateModal(update)" style="cursor: pointer">
+                                        <div class="h5 font-weight-bold mb-1 pb-0":key="`title-${index}`">
+                                            {{ update.title }}
+                                        </div>
+                                        <div class="text" :key="`info-${index}`">
+                                            {{ update.description }}
+                                        </div>
                                     </li>
                                 </template>
                                 <li>
@@ -172,6 +172,20 @@
             </c-swiper>
         </div>
         <div class="page-sidepanel__button page-sidepanel__button--lower" data-action="sidepanel-hide"><div></div></div>
+        <c-basic-popup :activated="showModal" class="text-left" @close="hideUpdateModal">
+            <div class="d-flex flex-column" slot="header">
+                <div class="h4 m-0 p-0">
+                    {{ currentUpdate.title }}
+                </div>
+                <div>
+                    {{ currentUpdate.version }}
+                </div>
+            </div>
+            <div slot="body" v-html="currentUpdate.content" />
+            <small slot="footer">
+                Missed an update? <c-button status="plain" href="/#/updates">Check our previous updates here.</c-button>
+            </small>
+        </c-basic-popup>
     </div>
 </template>
 
@@ -188,7 +202,10 @@
             'c-swiper': swiper,
             'c-notification': (resolve) => require(['@/ui/components/notification/index.vue'], resolve),
             'c-message': (resolve) => require(['@/ui/components/message'], resolve),
-            'c-slide': swiperSlide
+            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic'], resolve),
+            'c-slide': swiperSlide,
+            'c-doted-list': (resolve) => require(['@/ui/components/list/dots'], resolve),
+            'c-heading-bar-color': (resolve) => require(['@/ui/components/heading-bar/simple-colored'], resolve)
         },
         computed: {
             swiper() {
@@ -206,7 +223,9 @@
                 errors: [],
                 updateExpanded: null,
                 updates: [],
-                entries: []
+                entries: [],
+                currentUpdate: {},
+                showModal: false
             }
         },
         methods: {
@@ -230,6 +249,14 @@
                 }
 
             },
+            showUpdateModal(update){
+                this.currentUpdate = update
+                this.showModal = true
+            },
+            hideUpdateModal(){
+                this.showModal = false
+                this.currentUpdate = []
+            }
         },
         created() {
             if (this.navigationKey === 'store' && this.$store.state.application.desktop_mode) {
