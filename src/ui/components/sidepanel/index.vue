@@ -183,7 +183,7 @@
             </div>
             <div slot="body" v-html="currentUpdate.content" />
             <small slot="footer">
-                Missed an Updates? <c-button status="plain" href="/#/updates">Check out our previous change log.</c-button>
+                Missed an update? <c-button status="plain" href="/#/updates">Check our previous updates here.</c-button>
             </small>
         </c-basic-popup>
     </div>

@@ -59,6 +59,7 @@ export default {
     components: {
         'c-rating-stars': (resolve) => require(['@/ui/components/rating-stars'], resolve),
         'c-button': (resolve) => require(['@/ui/components/buttons/wide'], resolve),
+        'c-heading-bar-color': (resolve) => require(['@/ui/components/heading-bar/simple-colored'], resolve)
     },
     data() {
         return {

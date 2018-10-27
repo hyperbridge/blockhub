@@ -1818,7 +1818,7 @@ storiesOf('Block Title', module)
             'c-heading-bar-color': BlockHeadersColor
         },
         template: injectHBarTemp(`
-            <c-heading-bar-color colorCode="f60" textAlign="center">
+            <c-heading-bar-color colorCode="#f60" textAlign="center">
                 <strong>This is the Title</strong>
             </c-heading-bar-color>
         `)
@@ -3706,7 +3706,7 @@ storiesOf('Changelog Popup', module)
     .add('default', () =>({
         components:{
             'c-basic-popup': BasicPopup,
-            'c-doted-list': List,
+            'c-dotted-list': List,
             'c-heading-bar-color': BlockHeadersColor
         },
         template: `
@@ -3720,25 +3720,25 @@ storiesOf('Changelog Popup', module)
                             Sed iaculis mauris vitae eros fringilla, id congue libero mattis. 
                         </p>
                         
-                        <c-heading-bar-color colorCode="5EA72B" textAlign="left" class="margin-bottom-15 margin-top-10">
+                        <c-heading-bar-color colorCode="#5EA72B" textAlign="left" class="margin-bottom-15 margin-top-10">
                             <strong>This is the Title</strong>
                         </c-heading-bar-color>
-                        <c-doted-list>
+                        <c-dotted-list>
                             <li>Donec sapien velit, vulputate</li>
                             <li>Nulla ut fermentum turpis, a fermentum enim.</li>
                             <li>Praesent feugiat erat diam, tincidunt cursus ligula pulvinar id.</li>
-                        </c-doted-list>
+                        </c-dotted-list>
                         
-                        <c-heading-bar-color colorCode="FADC72" textAlign="left" class="margin-bottom-15 margin-top-20">
+                        <c-heading-bar-color colorCode="#FADC72" textAlign="left" class="margin-bottom-15 margin-top-20">
                             <strong>Aliquam nulla mi, mattis ut nisl nec</strong>
                         </c-heading-bar-color>
-                        <c-doted-list>
+                        <c-dotted-list>
                             <li>Praesent in mauris nec felis dignissim viverra in at diam. Mauris congue aliquet tempus.</li>
                             <li>Morbi ut consequat eros</li>
                             <li>Aenean imperdiet lobortis tristique.</li>
-                        </c-doted-list>
+                        </c-dotted-list>
                         
-                        <c-heading-bar-color colorCode="F75D5D" textAlign="left" class="margin-bottom-15 margin-top-20">
+                        <c-heading-bar-color colorCode="#F75D5D" textAlign="left" class="margin-bottom-15 margin-top-20">
                             <strong>Sed vitae lobortis quam, non porta est</strong>
                         </c-heading-bar-color>
                         <p>
@@ -3948,15 +3948,15 @@ import List from '@/ui/components/list/dots'
 storiesOf('List', module)
     .add('doted', () => ({
         components:{
-            'c-doted-list': List
+            'c-dotted-list': List
         },
         template:`
         <div class="p-5">
-            <c-doted-list>
+            <c-dotted-list>
                 <li>Some text</li>
                 <li>Some text</li>
                 <li>Some text</li>
-            </c-doted-list>
+            </c-dotted-list>
         </div>`
     }))
 

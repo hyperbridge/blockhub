@@ -1,10 +1,10 @@
 <template>
     <div class="heading-bar-colored" :class="['text-position-' + textAlign]">
-        <span class="heading-bar-colored__left-line" :style="{'background-color': '#' + colorCode}" v-if="textAlign != 'left'"></span>
-        <div class="h3 heading-bar-colored__title" :style="{color: '#' + colorCode}">
+        <span class="heading-bar-colored__left-line" :style="{'background-color': colorCode}" v-if="textAlign != 'left'"></span>
+        <div class="h3 heading-bar-colored__title" :style="{color: colorCode}">
             <slot />
         </div>
-        <span class="heading-bar-colored__right-line" :style="{'background-color': '#' + colorCode}" v-if="textAlign != 'right'"></span>
+        <span class="heading-bar-colored__right-line" :style="{'background-color': colorCode}" v-if="textAlign != 'right'"></span>
     </div>
 </template>
 
