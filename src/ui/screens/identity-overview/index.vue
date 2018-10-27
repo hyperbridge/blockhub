@@ -5,24 +5,24 @@
             <div class="col-12 d-flex margin-top-30 justify-content-end">
                 <div class="identity__wallet">
                     <i class="fas fa-copy"></i>
-                    <span id="wallet_number">jbkjBhBJIBXIUi8plmPOJOnoNCYTcPSkSOsvsdf08Uhg7gBU</span>
+                    <span id="wallet_number">{{ identity.public_address }}</span>
                 </div>
                 <div class="identity__action-group">
-                    <c-button status="info" icon="arrow-up">Send funds</c-button>
+                    <c-button status="info" icon="arrow-up">Send</c-button>
                     <c-button status="share">Share</c-button>
                     <c-button status="danger">Report</c-button>
                 </div>
             </div>
-            <div class="col-12" v-if="!signed_in">
+            <div class="col-12" v-if="!signed_in && !$store.state.application.account.settings.client.hide_profile_signup">
                 <div class="identity__user-notify">
-                    <a href="#3" class="btn-close">
+                    <c-button class="btn-close" @click="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_profile_signup', true)">
                         <i class="fas fa-times"></i>
-                    </a>
+                    </c-button>
                     <h3>Create your BlockHub Profile</h3>
                     <p>BlockHub is the best place for curated community-driven game development,
                         digital assets and micro-licensing. Sugn up for your own account and build
                         the future of gaming.</p>
-                    <c-button status="success" size="lg" icon_hide>
+                    <c-button status="success" size="lg" icon_hide href="/#/download">
                         Sign Up
                     </c-button>
                 </div>
@@ -206,7 +206,6 @@
     export default {
         props: ['id'],
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
             'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
             'c-assets-grid': (resolve) => require(['@/ui/components/assets-grid'], resolve),
@@ -231,7 +230,10 @@
             }
         },
         computed: {
-            signed_in() { return this.$store.state.application.signed_in }
+            signed_in() { return this.$store.state.application.signed_in },
+            identity() {
+                return this.$store.state.application.account.current_identity
+            }
         },
         created() {
             $(".rating_readonly").raty({readOnly: true});
