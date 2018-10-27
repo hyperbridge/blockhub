@@ -768,3 +768,12 @@
         }
     }
 </style>
+
+<style lang="scss">
+    .swiper-button-prev,
+    .swiper-button-next{
+        user-select: none;
+        outline: none;
+        box-shadow: none;
+    }
+</style>

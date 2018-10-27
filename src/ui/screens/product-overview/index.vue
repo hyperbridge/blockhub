@@ -55,6 +55,24 @@
             <c-language-support :languages="product.language_support"/>
         </div>
         <div class="col-12">
+            <c-block title="Streams for this game"
+                     :noGutter="true"
+                     :bgGradient="true"
+                     :onlyContentBg="true"
+                     :showArrows="true"
+                     :showBackground="true"
+                     ref="streams_slider"
+                     @prevClick="streams_slider.slidePrev()"
+                     @nextClick="streams_slider.slideNext()"
+                     class="margin-top-30 margin-bottom-20">
+                <c-swiper :options="sliderOptions">
+                    <c-slide v-for="(el, index) in streamersList" :key="index">
+                        <c-stream-item />
+                    </c-slide>
+                </c-swiper>
+            </c-block>
+        </div>
+        <div class="col-12">
             <div class="row">
                 <div class="col-12">
                     <c-heading-bar name="Reviews" :showArrows="true" :showBackground="false"/>
@@ -81,7 +99,8 @@
 </template>
 
 <script>
-    import Vue from 'vue'
+    import 'swiper/dist/css/swiper.css'
+    import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
     export default {
         props: ['product', 'editing'],
@@ -97,6 +116,9 @@
             'c-review': (resolve) => require(['@/ui/components/review'], resolve),
             'c-system-requirements': (resolve) => require(['@/ui/components/product-overview/system-requirements'], resolve),
             'c-language-support': (resolve) => require(['@/ui/components/product-overview/language-support'], resolve),
+            'c-stream-item': (resolve) => require(['@/ui/components/stream'], resolve),
+            'c-swiper': swiper,
+            'c-slide': swiperSlide,
         },
         data() {
             const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.';
@@ -173,13 +195,40 @@
                         }
                     ]
                 },
-                promotionSections: null
+                promotionSections: null,
+                sliderOptions: {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                    breakpoints: {
+                        1200: {
+                            slidesPerView: 3,
+                            spaceBetween: 20
+                        },
+                        768: {
+                            slidesPerView: 1,
+                            spaceBetween: 0
+                        },
+                    }
+                },
+                streamersList: 8
             }
         },
         methods: {
             showPurchaseModal() {
                 this.$store.dispatch('application/activateModal', 'purchase')
-            }
+            },
+            showArrowsState(el, count) {
+                if ( el.length > count) {
+                    return true
+                } else {
+                    return false
+                }
+            },
+        },
+        computed:{
+            streams_slider() {
+                return this.$refs.streams_slider.swiper;
+            },
         }
     }
 </script>
