@@ -5,20 +5,22 @@
             <c-tabs
                 :active_tab_prop="currentStep"
                 @click="changeTab($event)"
+                :tabNames="['Product Verification', 'Contact']"
+                styled
             >
-                <c-tab name="Done" :tab_id="2" :selected="true" :showFooter="true" v-if="complete">
+                <c-tab :tab_id="2" :selected="true" :showFooter="true" v-if="complete">
                     <div>
                         <p>Product verification request has been submit. We'll be in touch soon. Thank you!</p>
                     </div>
-                    <div slot="footer" class="d-flex align-items-center justify-content-end">
+                    <div slot="footer" class="d-flex align-items-center justify-content-end margin-top-10">
                         <div class="text-right w-100">
-                            <c-button status="success" icon_hide @click="$emit('close')">
+                            <c-button status="info" icon_hide @click="$emit('close')">
                                 OK
                             </c-button>
                         </div>
                     </div>
                 </c-tab>
-                <c-tab name="Product Verification" :tab_id="1" :selected="true" :showFooter="true" v-if="!complete">
+                <c-tab :tab_id="1" :selected="true" :showFooter="true" v-if="!complete">
                     <div>
                         <p>
                             To manage your product listing, you'll need to verify your connection with this company. <br />
@@ -75,16 +77,16 @@
                             </ul>
                         </p>
                     </div>
-                    <div slot="footer" class="d-flex align-items-center justify-content-end">
+                    <div slot="footer" class="d-flex align-items-center justify-content-end margin-top-10">
                         <div class="text-right w-100">
                             <c-button @click="$emit('close')">Cancel</c-button>
-                            <c-button status="success" icon_hide @click="nextStep()">
+                            <c-button status="info" icon_hide @click="nextStep()">
                                 Continue
                             </c-button>
                         </div>
                     </div>
                 </c-tab>
-                <c-tab name="Contact" :tab_id="2" :showFooter="true" v-if="!complete">
+                <c-tab :tab_id="2" :showFooter="true" v-if="!complete">
                     <div>
                         <div class="row">
                             <div class="col">
@@ -130,10 +132,10 @@
                             </ul>
                         </p>
                     </div>
-                    <div slot="footer" class="d-flex align-items-center justify-content-end">
+                    <div slot="footer" class="d-flex align-items-center justify-content-end margin-top-10">
                         <div class="text-right w-100">
                             <c-button @click="$emit('close')">Cancel</c-button>
-                            <c-button status="success" icon_hide @click="nextStep()">
+                            <c-button status="info" icon_hide @click="nextStep()">
                                 Finish
                             </c-button>
                         </div>
@@ -152,8 +154,8 @@
         props: ['activated'],
         components: {
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
-            'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
-            'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
+            'c-tabs': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve),
+            'c-tab': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
         },
         data() {
             return {
@@ -197,7 +199,7 @@
                     && this.contactNumber
                     && this.contactEmail
                     && this.companyWebsite
-                    && this.developerProfileAddres) {
+                    && this.developerProfileAddress) {
                         const bodyFormData = new FormData()
 
                         bodyFormData.set('entry.524169597', this.companyName)
@@ -206,7 +208,7 @@
                         bodyFormData.set('entry.903832048', this.contactNumber)
                         bodyFormData.set('entry.2146275482', this.contactEmail)
                         bodyFormData.set('entry.817087000', this.companyWebsite)
-                        bodyFormData.set('entry.199140031', this.developerProfileAddres)
+                        bodyFormData.set('entry.199140031', this.developerProfileAddress)
 
                         axios({
                             method: 'post',
