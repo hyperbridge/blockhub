@@ -84,7 +84,6 @@
                             <c-user-card
                                 :user="identity"
                                 :previewMode="!identity.edit"
-                                :type="identity.developer_id ? 'developer' : 'user'"
                                 class="margin-bottom-30"
                                 :class="{ 'default': identity.id == (defaultIdentity && defaultIdentity.id) }"
                                 v-bind.sync="identityClone"

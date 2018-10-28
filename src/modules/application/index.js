@@ -325,6 +325,14 @@ export const mutations = {
     activateModal(state, payload) {
         state.active_modal = payload
     },
+    convertCurator(state, payload) {
+        Bridge.sendCommand('createCuratorRequest', payload.identity).then((data) => {
+            payload.identity.curator_id = data
+            state.curator_mode = true
+
+            // TODO: just redirect here?
+        })
+    },
     UPDATE_CLIENT_SETTINGS (state, property, value) {
         value = value || !state.account.settings.client[property]
 

@@ -13,7 +13,8 @@
                     </div>
                 </div>
                 <div>
-                    <c-button status="info" icon_hide>Suggest Idea</c-button>
+                    <c-button status="info" icon_hide href="/#/project/new" v-if="developer_mode">Propose Idea</c-button>
+                    <c-button status="info" icon_hide @click="$store.commit('application/activateModal', 'propose-idea')" v-if="!developer_mode">Propose Idea</c-button>
                 </div>
             </div>
         </div>
