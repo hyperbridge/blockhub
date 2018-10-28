@@ -750,8 +750,6 @@ import moment from 'moment'
 export default {
     components: {
         'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-        'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
-        'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
         'c-datepicker': (resolve) => require(['vuejs-datepicker'], resolve),
         'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),

@@ -249,11 +249,12 @@
         margin-right: 15px;
         span{
             margin-left: 10px;
-            width: 200px;
+            width: 300px;
             text-overflow: ellipsis;
             display: inline-block;
             overflow: hidden;
             float: right;
+            user-select: text;
         }
     }
     .identity__action-group{
