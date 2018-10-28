@@ -186,7 +186,11 @@
                     "code": "BATTLE_PASS",
                     "enabled": false
                 }
-            ]
+            ],
+            "products_wishlist": {},
+            "products_favorites": {},
+            "projects_wishlist": {},
+            "projects_favorites": {}
         },
         "darklaunch_flags": [
             {

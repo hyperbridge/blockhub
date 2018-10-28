@@ -3,12 +3,12 @@
         <div slot="custom_close" hidden></div>
         <div class="c-popup__content" slot="custom_content">
             <c-tabs
-                :active_tab_prop="currentStep"
+                :setActiveTab="currentStep"
                 @click="changeTab($event)"
-                :tabNames="['Product Verification', 'Contact']"
+                :tabNames="['Product Verification', 'Contact', 'Done']"
                 styled
             >
-                <c-tab :tab_id="2" :selected="true" :showFooter="true" v-if="complete">
+                <c-tab :tab_id="3" :selected="true" :showFooter="true">
                     <div>
                         <p>Product verification request has been submit. We'll be in touch soon. Thank you!</p>
                     </div>
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                 </c-tab>
-                <c-tab :tab_id="1" :selected="true" :showFooter="true" v-if="!complete">
+                <c-tab :tab_id="1" :selected="true" :showFooter="true">
                     <div>
                         <p>
                             To manage your product listing, you'll need to verify your connection with this company. <br />
@@ -86,7 +86,7 @@
                         </div>
                     </div>
                 </c-tab>
-                <c-tab :tab_id="2" :showFooter="true" v-if="!complete">
+                <c-tab :tab_id="2" :showFooter="true">
                     <div>
                         <div class="row">
                             <div class="col">
@@ -136,7 +136,7 @@
                         <div class="text-right w-100">
                             <c-button @click="$emit('close')">Cancel</c-button>
                             <c-button status="info" icon_hide @click="nextStep()">
-                                Finish
+                                Continue
                             </c-button>
                         </div>
                     </div>
@@ -160,7 +160,6 @@
         data() {
             return {
                 currentStep: 1,
-                complete: false,
                 errors: [],
                 companyName: null,
                 productName: null,
@@ -238,6 +237,7 @@
                         //     }
                         // });
 
+                        this.currentStep = 3
                         return
                     }
 

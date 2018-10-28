@@ -49,7 +49,7 @@
             'c-tag-count': (resolve) => require(['@/ui/components/tags/count'], resolve)
         },
         props: {
-            items: Object,
+            items: [Object, Array],
             isParent: Boolean
         },
         data() {

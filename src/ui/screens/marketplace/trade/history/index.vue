@@ -48,6 +48,7 @@
 </template>
 
 <script>
+
     export default {
         components: {
             'c-asset': (resolve) => require(['@/ui/components/assets-grid-inventory/asset'], resolve),
@@ -55,7 +56,8 @@
         computed: {
             transactions() {
                 return this.$store.getters['assets/transactionsArray'];
-            }
+            },
+
         }
     }
 </script>

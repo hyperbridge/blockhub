@@ -10,6 +10,20 @@ import collectionsData from '@/db/seed/collections';
 const rand = () => Math.floor(Math.random() * 100);
 const assignId = (id, object) => ({ ...object, data: { ...object.data, id }, id });
 
+const extract = (object, props) => ['id', 'name', ...props]
+    .reduce((extracted, prop) => object[prop]
+        ? { ...extracted, [prop]: object[prop] }
+        : extracted
+    , {});
+
+const skip = (object, props) => {
+    const copy = { ...object };
+    for (let prop in props) {
+        delete copy[prop];
+    }
+    return copy;
+};
+
 const assets = {
     namespaced: true,
     state: {
@@ -150,7 +164,7 @@ const assets = {
         }
     },
     getters: {
-        assets: ({ assets }, getters, { marketplace: { collections, products }}) => Object.values(assets)
+        assets: ({ assets }, { collections: col }, { marketplace: { collections, products }}) => Object.values(assets)
             .reduce((populated, asset) => ({
                 ...populated,
                 [asset.id]: {
@@ -158,30 +172,39 @@ const assets = {
                     offers_list: asset.offers_list.map(id => assets[id]),
                     inventory_list: asset.inventory_list.map(id => assets[id]),
                     collections: asset.collections.map(id => collections[id]),
-                    product: products[asset.product]
+                    product: extract(products[asset.product], ['images', 'price'])
                 }
             }), {}),
         array: (state, { assets }) => Object.values(assets),
         assetsArray: (state, { assets }) => Object.values(assets),
         users: ({ users }, { assets }) => Object.values(users)
+            .map(user => ({
+                ...user,
+                inventory: user.inventory.map(id => extract(assets[id], ['image', 'price', 'product']))
+            }))
             .reduce((populated, user) => ({
                 ...populated,
                 [user.id]: {
                     ...user,
-                    inventory: user.inventory.map(id => assets[id])
+                    inventoryGrouped: user.inventory.reduce((grouped, asset) => {
+                        const { name } = asset.product;
+                        grouped[name] = grouped[name] || [];
+                        grouped[name] = [...grouped[name], asset];
+                        return grouped;
+                    }, {})
                 }
             }), {}),
-        transactions: ({ trxs }, { users, assets }) => Object.values(trxs)
+        transactions: ({ trxs, assets }, { users }) => Object.values(trxs)
             .reduce((populated, trx) => ({
                 ...populated,
-                [trx.id]: trx
-                // [trx.id]: {
-                //     ...trx,
-                //     you: users[trx.you],
-                //     contractor: users[trx.contractor],
-                //     contractorOffer: trx.contractorOffer.map(id => assets[id]),
-                //     yourOffer: trx.yourOffer.map(id => assets[id])
-                // }
+                // [trx.id]: trx
+                [trx.id]: {
+                    ...trx,
+                    you: users[trx.you],
+                    contractor: users[trx.contractor],
+                    contractorOffer: trx.contractorOffer.map(id => assets[id]),
+                    yourOffer: trx.yourOffer.map(id => assets[id])
+                }
             }), {}),
         // inventoryGrouped: user.inventory.reduce((grouped, id) => {
         //     return {};

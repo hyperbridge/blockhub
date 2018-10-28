@@ -1,8 +1,8 @@
 <template>
-    <span class="author">
-        <c-img class="author__img" :src="author.img" />
+    <div class="author">
+        <c-img class="author__img" :src="author.img"/>
         {{ author.name }}
-    </span>
+    </div>
 </template>
 
 <script>

@@ -242,6 +242,15 @@ export const mutations = {
         DB.application.config.update(state)
         DB.save()
     },
+    updateAccount({ account }, { prop, data, key }) {
+        if (Array.isArray(account[prop])) {
+            account[prop][key] = data;
+        } else if (typeof account[prop] === 'object') {
+            account[prop] = { ...account[prop], ...data };
+        } else {
+            account[prop] = data;
+        }
+    },
     signIn(state, payload) {
         state.signed_in = true
 

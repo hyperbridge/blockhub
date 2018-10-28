@@ -43,6 +43,7 @@
           content="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/msapplication-icon-144x144.png"/>
     <meta name="msapplication-TileColor" content="#000000"/>
 
+    <script src="http://localhost:8098"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110820930-3"></script>
     <script>
@@ -56,7 +57,7 @@
 
         gtag('config', 'UA-110820930-3');
     </script>
-        
+
     <script>
         document.addEventListener('dragover', event => {
             event.preventDefault()
@@ -80,7 +81,7 @@
 
   Project:        BlockHub
   Version:        v1.0.0
-  Last change:    17/05/18 [Release]    
+  Last change:    17/05/18 [Release]
 
 -------------------------------------------------------------------*/
 
@@ -495,7 +496,7 @@ a {
       <p>BlockHub is taking a while to load. If it's been longer than one minute and your internet connection is fine, this page may be broken, or you may need to reset your settings.</p>
       <br />
       <button onClick="window.goHome()">Go Home</button>
-      <button onClick="window.resetSettings()">Reset Settings</button> 
+      <button onClick="window.resetSettings()">Reset Settings</button>
       <button onClick="window.location = 'https://hyperbridge.org/#contact'">Contact Us</button>
       <br />
     </div>
@@ -516,7 +517,7 @@ window.resetSettings = function() {
   if (window.closeLokiDatabase) {
     window.closeLokiDatabase()
   }
-  
+
   var req = indexedDB.deleteDatabase('LokiCatalog');
   req.onsuccess = function () {
     //alert("Deleted settings successfully. The page will now reload.");
