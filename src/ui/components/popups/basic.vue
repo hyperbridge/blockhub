@@ -3,10 +3,10 @@
         <div class="c-basic-popup" v-if="activated" @click.self.prevent="$emit('close')">
             <div class="c-basic-popup__item" :style="{ 'width': + width + 'px'}">
                 <div class="position-relative">
-                    <div class="c-basic-popup__close" @click="$emit('close')">
-                        <i class="fas fa-times"></i>
-                    </div>
                     <div class="c-basic-popup__content">
+                        <div class="c-basic-popup__close" @click="$emit('close')">
+                            <i class="fas fa-times"></i>
+                        </div>
                         <div class="c-basic-popup__header">
                             <slot name="header" />
                         </div>
@@ -61,8 +61,8 @@
 
     .c-basic-popup__close {
         position: absolute;
-        top: -25px;
-        right: 0px;
+        top: 10px;
+        right: 10px;
         opacity: .7;
         -webkit-transition: 0.1s ease-out;
         -moz-transition:  0.1s ease-out;
