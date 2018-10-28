@@ -3,10 +3,11 @@
         <div slot="custom_close" hidden></div>
         <div class="c-popup__content" slot="custom_content">
             <c-tabs
-                :active_tab_prop="currentStep"
+                :setActiveTab="currentStep"
                 @click="changeTab($event)"
+                styled
             >
-                <c-tab name="Done" :tab_id="2" :selected="true" :showFooter="true" v-if="complete">
+                <c-tab name="Done" :tab_id="3" :selected="true" :showFooter="true">
                     <div>
                         <p>Product verification request has been submit. We'll be in touch soon. Thank you!</p>
                     </div>
@@ -18,7 +19,7 @@
                         </div>
                     </div>
                 </c-tab>
-                <c-tab name="Product Verification" :tab_id="1" :selected="true" :showFooter="true" v-if="!complete">
+                <c-tab name="Product Verification" :tab_id="1" :selected="true" :showFooter="true">
                     <div>
                         <p>
                             To manage your product listing, you'll need to verify your connection with this company. <br />
@@ -84,7 +85,7 @@
                         </div>
                     </div>
                 </c-tab>
-                <c-tab name="Contact" :tab_id="2" :showFooter="true" v-if="!complete">
+                <c-tab name="Contact" :tab_id="2" :showFooter="true">
                     <div>
                         <div class="row">
                             <div class="col">
@@ -152,8 +153,8 @@
         props: ['activated'],
         components: {
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
-            'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
-            'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
+            'c-tabs': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve),
+            'c-tab': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
         },
         data() {
             return {
