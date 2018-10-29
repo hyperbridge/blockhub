@@ -3,17 +3,17 @@
         <div class="c-basic-popup" v-if="activated" @click.self.prevent="$emit('close')">
             <div class="c-basic-popup__item" :style="{ 'width': + width + 'px'}">
                 <div class="position-relative">
-                    <div class="c-basic-popup__close" @click="$emit('close')">
-                        <i class="fas fa-times"></i>
-                    </div>
                     <div class="c-basic-popup__content">
-                        <div class="c-basic-popup__header">
+                        <div class="c-basic-popup__close" @click="$emit('close')">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="c-basic-popup__header" v-if="$slots.header">
                             <slot name="header" />
                         </div>
-                        <div class="c-basic-popup__body">
+                        <div class="c-basic-popup__body" :class="{'margin-top-20' : $slots.header, 'margin-bottom-20' : $slots.footer}" v-if="$slots.body">
                             <slot name="body" />
                         </div>
-                        <div class="c-basic-popup__footer">
+                        <div class="c-basic-popup__footer" v-if="$slots.footer">
                             <slot name="footer" />
                         </div>
                     </div>
@@ -61,12 +61,12 @@
 
     .c-basic-popup__close {
         position: absolute;
-        top: -25px;
-        right: 0px;
+        top: 10px;
+        right: 10px;
         opacity: .7;
-        -webkit-transition: 0.1s ease-out;
-        -moz-transition:  0.1s ease-out;
-        transition:  0.1s ease-out;
+        -webkit-transition: 0.2s ease-out;
+        -moz-transition:  0.2s ease-out;
+        transition:  0.2s ease-out;
         font-size: 22px;
         z-index: 999;
         img {
@@ -104,6 +104,7 @@
         margin-bottom: 10px;
         border-bottom: 1px solid rgba(255, 255, 255, .1);
         width: 100%;
+        padding-right: 100px;
         display: block;
         color: #fff;
         h2,h3,h4,h5,
@@ -120,6 +121,6 @@
         height: auto;
         color: #fff;
         max-height: 60vh;
-        margin: 20px 0;
+        /*margin: 20px 0;*/
     }
 </style>

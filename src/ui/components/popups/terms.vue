@@ -3,10 +3,10 @@
         <div class="c-terms-popup" v-if="activated" @click.self.prevent="$emit('close')">
             <div class="c-terms-popup__item" :style="{ 'width': + width + 'px'}">
                 <div class="position-relative">
-                    <div class="c-terms-popup__close" @click="$emit('close')">
-                        <i class="fas fa-times"></i>
-                    </div>
                     <div class="c-terms-popup__content">
+                        <div class="c-terms-popup__close" @click="$emit('close')">
+                            <i class="fas fa-times"></i>
+                        </div>
                         <div class="c-terms-popup__header">
                             <slot name="header" />
                         </div>
@@ -14,12 +14,12 @@
                             <slot name="body" />
                         </div>
                         <div class="c-terms-popup__footer">
-                            <c-button status="danger">
+                            <a href="#" class="c-btn btn-cancel">
                                 Cancel
-                            </c-button>
-                            <c-button status="success" :class="{'not-accept' : !isRead}">
-                                Accept
-                            </c-button>
+                            </a>
+                            <a href="#" class="c-btn btn-agree" :class="{'not-accept' : !isRead}">
+                                I Agree
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -78,12 +78,12 @@
 
     .c-terms-popup__close {
         position: absolute;
-        top: -25px;
-        right: 0px;
+        top: 10px;
+        right: 10px;
         opacity: .7;
-        -webkit-transition: 0.1s ease-out;
-        -moz-transition:  0.1s ease-out;
-        transition:  0.1s ease-out;
+        -webkit-transition: 0.2s ease-out;
+        -moz-transition:  0.2s ease-out;
+        transition:  0.2s ease-out;
         font-size: 22px;
         z-index: 999;
         img {
@@ -121,6 +121,7 @@
         margin-bottom: 10px;
         border-bottom: 1px solid rgba(255, 255, 255, .1);
         width: 100%;
+        padding-right: 100px;
         display: block;
         color: #fff;
         h2,h3,h4,h5,
@@ -138,13 +139,41 @@
         color: #fff;
         max-height: 60vh;
         margin: 20px 0;
+        background: rgba(255, 255, 255, .03);
+        padding: 10px;
     }
     .c-terms-popup__footer{
         display: flex;
         justify-content: flex-end;
+        align-items: center;
         margin-top: 30px;
         .c-btn{
             margin-left: 10px;
+            font-weight: bold;
+            text-decoration: none;
+            &.btn-cancel{
+                color: #F75D5D;
+                margin-right: 10px;
+                &:hover{
+                    color: #cb4d4d;
+                }
+            }
+            &.btn-agree{
+                text-shadow: 0 1px 1px rgba(28,115,184,0.64);
+                background-color: #2189db;
+                background: -webkit-linear-gradient(#42a1ec, #0070c9);
+                background: linear-gradient(#42a1ec, #0070c9);
+                border: 1px solid #07c;
+                border-radius: 4px;
+                color: #fff;
+                padding: 3px 10px;
+                &:hover{
+                    background-color: #3392de;
+                    background: -webkit-linear-gradient(#51a9ee, #147bcd);
+                    background: linear-gradient(#51a9ee, #147bcd);
+                    border-color: #1482d0;
+                }
+            }
             &.not-accept{
                 pointer-events: none;
                 opacity: .5;
