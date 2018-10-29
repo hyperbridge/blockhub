@@ -583,7 +583,7 @@
                         if (data.error) {
                             return console.log(data.message)
                         }
-                    }
+                    })
 
                 }
             }
