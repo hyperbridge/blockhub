@@ -47,7 +47,7 @@
                     </div>
 
                     <div class="col-12">
-                        <c-heading-bar name="All Identities" :showArrows="false" :showBackground="false">
+                        <c-heading-bar name="All Identities" :showArrows="false" :showBackground="false" showActions>
                             <div class="additional-action margin-left-20" slot="additional-action">
                                 <span class="text">Name <c-icon name="user" /></span>
                                 <c-button-arrows
@@ -84,7 +84,6 @@
                             <c-user-card
                                 :user="identity"
                                 :previewMode="!identity.edit"
-                                :type="identity.developer_id ? 'developer' : 'user'"
                                 class="margin-bottom-30"
                                 :class="{ 'default': identity.id == (defaultIdentity && defaultIdentity.id) }"
                                 v-bind.sync="identityClone"

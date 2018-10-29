@@ -1,7 +1,7 @@
 <template>
     <div class="row mx-0">
         <div class="col-12 col-lg-7 col-xl-8">
-            <c-screen-gallery :items="project.images.preview" v-if="project.images.preview"></c-screen-gallery>
+            <c-screen-gallery :items="project.images.preview" v-if="project.images.preview"/>
             <div class="editor-container">
                 <div class="editor" v-if="editing">
                     <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
@@ -42,6 +42,11 @@
                         <span>Configure Campaign</span>
                     </a>
                     <h2 class="title">Crowndfunding campaign</h2>
+                    <c-btn-fav
+                        @click="addToWishlist()"
+                        target="Wishlist"
+                        :active="!!wishlist[project.id]"
+                    />
                     <div class="project">
                         <div class="project__progress">
                             <div v-for="(stage, index) in project.funding.stages" :key="index"
@@ -147,7 +152,8 @@
             'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar'], resolve),
             'c-contribute-form': (resolve) => require(['@/ui/components/contribute/form.vue'], resolve),
             'c-contribute-pledge': (resolve) => require(['@/ui/components/contribute/pledge.vue'], resolve),
-            'c-badges': (resolve) => require(['@/ui/components/project/badges.vue'], resolve)
+            'c-badges': (resolve) => require(['@/ui/components/project/badges'], resolve),
+            'c-btn-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve),
         },
         data() {
             return {
@@ -170,9 +176,22 @@
         },
         methods:{
             showContributeModal() {
-                this.$store.state.application.profile_chooser = true;
-                this.$store.dispatch('application/activateModal', 'send-funds')
+                this.$store.commit('application/showProfileChooser', true)
+                //this.$store.dispatch('application/activateModal', 'send-funds')
             },
+            addToWishlist() {
+                const { id } = this.project;
+                this.$store.commit('application/updateFavorites', { id, prop: 'project_wishlist' })
+                this.$snotify.success(
+                    `Project has been ${this.wishlist[id] ? 'added to' : 'removed from'} your wishlist`,
+                    `Project ${this.wishlist[id] ? 'added' : 'removed'}`
+                );
+            }
+        },
+        computed: {
+            wishlist() {
+                return this.$store.state.application.account.project_wishlist;
+            }
         }
     }
 </script>

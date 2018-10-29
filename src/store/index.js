@@ -128,7 +128,6 @@ window.BlockHub.importSeedData = () => {
         }
     }
 
-    DB.application.config.data[0].account.is_verified = true
     DB.application.config.data[0].account.notifications = seed.notifications
     DB.application.config.data[0].updates = seed.updates
 

@@ -1,38 +1,88 @@
 <template>
-    <c-layout navigationKey="help" :showLeftPanel="false" :showRightPanel="false">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12 mb-4">
-                        <h2>Updates</h2>
-                        <p>
-                            <template v-for="(update,  index) in updates">
-                                <div :key="index">
-                                    <a :href="update.link">
-                                        <span class="text">{{ update.title }}</span>
-                                    </a>
-                                    <span class="text">{{ update.info }}</span>
-                                </div>
-                            </template>
-                        </p>
+    <c-layout navigationKey="help">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <c-block title="Updates" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                    <p class="errors" v-if="errors.length">
+                        <strong>Please correct the following error(s):</strong>
+                        <ul>
+                            <li v-for="error in errors" :key="error">{{ error }}</li>
+                        </ul>
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12" v-for="(update, index) in updates" :key="index">
+                            <c-expand-block 
+                                :title="update.title" 
+                                :description="update.description" 
+                                :content="update.content" 
+                            />
+                        </div>
                     </div>
-                </div>
+                </c-block>
             </div>
+        </div>
     </c-layout>
 </template>
 
 <script>
+import axios from 'axios'
+import Vue from 'vue'
+import HeadingBar from '@/ui/components/heading-bar/simple-colored'
+import DottedList from '@/ui/components/list/dots'
+
 export default {
-  components: {
-    'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
-  },
-  computed: {
-    desktop_mode() {
-        return this.$store.state.application.desktop_mode;
+    components: {
+        'c-expand-block': (resolve) => require(['@/ui/components/block/expand'], resolve),
+        'c-heading-bar-color': (resolve) => require(['@/ui/components/heading-bar/simple-colored'], resolve)
     },
-    updates() {
-        return this.$store.state.application.updates
+    computed: {
     },
-  }
+    data() {
+        return {
+            errors: [],
+            updateExpanded: null,
+            updates: [],
+            entries: []
+        }
+    },
+    created() {
+        const sheetUrl = 'https://spreadsheets.google.com/feeds/list/1Ndg4etkvLQZKeTcPfP1L1nJiMWn6UkwFd9RVSMcltp4/1/public/values?alt=json'
+
+        axios({
+            method: 'get',
+            url: sheetUrl
+        })
+        .then((res) => {
+            this.entries = res.data.feed.entry
+            try {
+                for (let i in this.entries) {
+                    const entry = this.entries[i]
+
+                    let el = Vue.compile('<div>' + entry.gsx$content.$t + '</div>')
+                    el = new Vue({
+                        components: {
+                            'c-heading-bar-color': HeadingBar,
+                            'c-dotted-list': DottedList
+                        },
+                        render: el.render,
+                        staticRenderFns: el.staticRenderFns
+                    }).$mount()
+
+                    this.updates.push({
+                        version: entry.gsx$version.$t,
+                        title: entry.gsx$title.$t,
+                        description: entry.gsx$description.$t,
+                        content: el.$el.innerHTML //.replace(/\n/g, '<br />')
+                    })
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        })
+        .catch((err) => {
+            this.errors.push('Could not contact update service. Please contact support with this error: ' + JSON.stringify(err))
+        })
+    }
 }
 </script>
 

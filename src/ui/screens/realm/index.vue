@@ -88,7 +88,7 @@
                         <c-featured-assets></c-featured-assets>
                     </div>
                     <div class="games-container">
-                        <c-heading-bar name="Games" :showArrows="false" :showBackground="false">
+                        <c-heading-bar name="Games" :showArrows="false" :showBackground="false" showActions>
                             <div class="additional-action margin-left-20" slot="additional-action">
                                 <div class="text">
                                     Price

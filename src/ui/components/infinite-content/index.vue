@@ -113,11 +113,14 @@
                                 slot="title"
                                 class="mb-0"
                                 :name="item.data.title"
-                                :showArrows="showArrowsState(item.data.reviews, 3)"
-                                :prevClick="() => this.$refs['swiper-' + index].swiper.slidePrev()"
-                                :nextClick="() => this.$refs['swiper-' + index].swiper.slideNext()"
+                                showArrows
+                                showActions
+                                :activeIndex="curatorsIndex"
+                                :itemsLength="item.data.reviews.length"
+                                @prevClick="swiperCurators.slidePrev(); updateIndex('curatorsIndex', -1, item.data.reviews.length)"
+                                @nextClick="swiperCurators.slideNext(); updateIndex('curatorsIndex', 1, item.data.reviews.length)"
                             />
-                            <c-swiper :options="item.data.options" :ref="`swiper-${index}`">
+                            <c-swiper :options="item.data.options" ref="swiper">
                                 <c-slide v-for="(review, index) in item.data.reviews" :key="index">
                                     <c-curator-review  :review="review" />
                                 </c-slide>
@@ -134,20 +137,22 @@
                                 slot="title"
                                 class="mb-0"
                                 :name="item.data.title"
-                                :showArrows="showArrowsState(item.data.projects, 3)"
-                                :prevClick="() => this.$refs['swiper-' + index].swiper.slidePrev()"
-                                :nextClick="() => this.$refs['swiper-' + index].swiper.slideNext()"
+                                showArrows
+                                showActions
+                                @prevClick="swiperProjects.slidePrev()"
+                                @nextClick="swiperProjects.slideNext()"
                             />
-                            <c-swiper :options="item.data.options" :ref="`swiper-${index}`">
+                            <c-swiper :options="item.data.options" ref="swiper">
                                 <c-slide v-for="(project, index) in item.data.projects" :key="index">
                                     <c-project-card
                                         class="p-2"
                                         :image="project.images.medium_tile" 
                                         :description="project.description" 
                                         :funds="project.funds" 
-                                        :productName="project.product && project.product.name" 
-                                        :productDeveloper="project.product && project.product.developer" 
-                                        :productImage="project.product && project.product.images.medium_tile" 
+                                        :parentName="project.product && project.product.name" 
+                                        :parentDeveloper="project.product && project.product.developer" 
+                                        :parentImage="project.product && project.product.images.medium_tile"
+                                        :id="project.id"
                                     />
                                 </c-slide>
                             </c-swiper>
@@ -168,11 +173,12 @@
                                 slot="title"
                                 class="mb-0"
                                 :name="item.data.title"
-                                :showArrows="showArrowsState(item.data.realms, 3)"
-                                :prevClick="() => this.$refs['swiper-' + index].swiper.slidePrev()"
-                                :nextClick="() => this.$refs['swiper-' + index].swiper.slideNext()"
+                                :showArrows="true"
+                                :showActions="true"
+                                @prevClick="swiperRealms.slidePrev()"
+                                @nextClick="swiperRealms.slideNext()"
                             />
-                            <c-swiper :options="item.data.options" :ref="`swiper-${index}`">
+                            <c-swiper :options="item.data.options" :ref="swiper">
                                 <c-slide v-for="(realm, index) in item.data.realms" :key="index">
                                     <c-button :href="`/#/realm/${realm.id}`">{{ realm.name }}</c-button>
                                 </c-slide>
@@ -192,7 +198,7 @@
 
                 <div class="row margin-bottom-30" v-if="item.type === 'collections_list'" :key="`level-1-${index}`">
                     <div class="col-12">
-                        <c-collection-list 
+                        <c-collection-list
                             title="Get Started"
                             description="Start building your collection today, share it and save it for the rest of your lifetime. It's yours - on the blockchain."
                             :collections="item.data.collections_list"
@@ -203,7 +209,7 @@
 
                 <div class="row margin-bottom-30" v-if="item.type === 'new_releases_grid'" :key="`level-1-${index}`">
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
-                        <c-block title="New Releases" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                        <c-block title="New Releases" :noGutter="true" :bgGradient="true" :onlyContentBg="true" showActions>
                             <template slot="additional-action">
                                 <c-heading-bar-fields name="Reviews" icon="star" @clickUp=""  @clickDown="" />
                                 <c-heading-bar-fields name="Date" icon="calendar" @clickUp=""  @clickDown="" />
@@ -224,7 +230,7 @@
 
                 <div class="row margin-bottom-30" v-if="item.type === 'top_items_grid'" :key="`level-1-${index}`">
                     <div class="col-md-12 col-lg-6 margin-bottom-30">
-                        <c-block title="Top 20 Items" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                        <c-block title="Top 20 Items" :noGutter="true" :bgGradient="true" :onlyContentBg="true" showActions>
                             <template slot="additional-action">
                                 <c-heading-bar-fields name="Price" icon="dollar-sign" @clickUp=""  @clickDown="" />
                                 <c-heading-bar-fields name="Trading" icon="star" @clickUp=""  @clickDown="" />
@@ -314,7 +320,8 @@ export default {
             offset : 1,     // items to display after scroll
             display: 3,     // initial items
             trigger: 50,   // how far from the bottom to trigger infinite scroll
-            end    : false, // no more updates
+            end    : false, // no more updates,
+            curatorsIndex: 0
         }
     },
     computed: {
@@ -323,6 +330,15 @@ export default {
         }),
         sliced() {
             return this.list.slice(0, this.display);
+        },
+        swiperCurators() {
+            return this.$refs.swiper[0].swiper;
+        },
+        swiperProjects() {
+            return this.$refs.swiper[1].swiper;
+        },
+        swiperRealms() {
+            return this.$refs.swiper[2].swiper;
         }
     },
     methods: {
@@ -332,6 +348,16 @@ export default {
             } else {
                 return false
             }
+        },
+        updateIndex(targetProp, dir, itemsLength) {
+            const target = this[targetProp];
+            if (dir && target + 1 <= itemsLength -3) this[targetProp]++;
+            else if (!dir && target -1 >= 0) this[targetProp]--;
+        },
+        slidePrev() {
+            const sl = this.$refs.swiperProjects[0].swiper
+            console.log(sl)
+            window.swiper = sl;
         },
         scroll() {
             window.onscroll = ev => {

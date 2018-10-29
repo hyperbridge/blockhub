@@ -3,6 +3,9 @@ import { normalize } from 'normalizr'
 import * as DB from '@/db'
 import * as Bridge from '@/framework/desktop-bridge'
 import schema from './schema'
+import axios from 'axios'
+import FormData from 'form-data'
+import { extract } from '@/store/utils'
 
 let rawData = {}
 
@@ -44,8 +47,8 @@ const updateState = (savedData, updatedState = {}) => {
         operating_system: getOS(),
         account: DB.application.config.data[0].account,
         darklaunch_flags: DB.application.config.data[0].darklaunch_flags,
-        developer_mode: savedData.developer_mode !== null ? savedData.developer_mode : DB.application.config.data[0].account && !!DB.application.config.data[0].account.current_identity.developer_id,
-        environment_mode: savedData.environment_mode !== null ? savedData.environment_mode : BlockHub.GetMode(),
+        developer_mode: savedData.developer_mode != null ? savedData.developer_mode : DB.application.config.data[0].account && !!DB.application.config.data[0].account.current_identity.developer_id,
+        environment_mode: savedData.environment_mode != null ? savedData.environment_mode : BlockHub.GetMode(),
         ...updatedState
     }
 
@@ -87,7 +90,15 @@ export const getters = {
         }
 
         return result
-    }
+    },
+    wishlistedProducts: ({ account }, getters, { marketplace: { products }}) => Object
+        .keys(account.product_wishlist)
+        .map(id => products[Number(id)]),
+        // .map(id => extract(products[Number(id)], ['images', 'release_date', 'price'])),
+    wishlistedProjects: ({ account }, getters, { funding: { projects }}) => Object
+        .keys(account.project_wishlist)
+        .map(id => projects[id]),
+
 }
 
 export const actions = {
@@ -130,8 +141,12 @@ export const actions = {
     },
     setEditorMode(store, payload) {
         store.commit('setEditorMode', payload)
+
+        if (!store.state.account.settings.client.hide_editor_welcome_modal) {
+            store.commit('activateModal', 'editor-welcome')
+        }
     },
-    unlockAccount(state, payload) {
+    unlockAccount(store, payload) {
         Bridge.resolvePromptPasswordRequest(payload.password.value)
 
         // Bridge.sendCommand('getAccountRequest', data).then((res) => {
@@ -236,6 +251,32 @@ export const mutations = {
         DB.application.config.update(state)
         DB.save()
     },
+    updateAccount({ account }, { prop, data, key }) {
+        if (Array.isArray(account[prop])) {
+            account[prop][key] = data;
+        } else if (typeof account[prop] === 'object') {
+            account[prop] = { ...account[prop], [id]: data };
+        } else {
+            account[prop] = data;
+        }
+    },
+    updateFavorites2({ account }, { prop = 'product_wishlist', id }) {
+        const foundKey = account[prop].findIndex(savedId => savedId === id);
+        foundKey
+        ? account[prop].push(id)
+        : account[prop].splice(foundKey, 0);
+        return !!foundKey;
+    },
+    updateFavorites({ account }, { prop = 'product_wishlist', id }) {
+        // Optional -> object
+        if (account[prop][id]) {
+            const { [id]: deleted, ...rest } = account[prop];
+            delete(rest[id])
+            account[prop] = rest;
+        } else {
+            account[prop] = { ...account[prop], [id]: true };
+        }
+    },
     signIn(state, payload) {
         state.signed_in = true
 
@@ -257,6 +298,9 @@ export const mutations = {
     },
     setSimulatorMode(state, payload) {
         state.simulator_mode = payload
+    },
+    showProfileChooser(state, payload) {
+        state.profile_chooser = payload
     },
     enableDarklaunch(state, payload) {
         const darklaunch = state.account.darklaunch_flags.find(darklaunch => darklaunch.code === payload)
@@ -292,10 +336,46 @@ export const mutations = {
         const success = (id) => {
         }
     },
+    entry(state, payload) {
+        // send .key and .value to sheet
+        const bodyFormData = new FormData()
+
+        bodyFormData.set('entry.524169597', payload.key)
+        bodyFormData.set('entry.399172045', payload.value)
+
+        axios({
+            method: 'post',
+            url: 'https://docs.google.com/forms/d/1W1_7UuaDjjCKp08vSllvyKZTQRCSej9kd743Z2N1NvY/formResponse',
+            data: bodyFormData,
+            config: { headers: { 'Content-Type': 'multipart/form-data' } }
+        })
+            .then((res) => {
+                //cb && cb()
+            })
+            .catch((err) => {
+                console.log('An error occurred. Please check your input or try again later.')
+            })
+
+    },
     activateModal(state, payload) {
         state.active_modal = payload
     },
-    UPDATE_CLIENT_SETTINGS (state, property) {
-        Vue.set(state.account.settings.client, property, !state.account.settings.client[property])
+    convertCurator(state, payload) {
+        Bridge.sendCommand('createCuratorRequest', payload.identity).then((data) => {
+            payload.identity.curator_id = data
+            state.curator_mode = true
+
+            // TODO: just redirect here?
+        })
+    },
+    UPDATE_CLIENT_SETTINGS (state, property, value) {
+        value = value || !state.account.settings.client[property]
+
+        Vue.set(state.account.settings.client, property, value)
+
+        state.account.settings.client[property] = value
+
+        DB.application.config.update(state)
+        DB.save()
     }
 }

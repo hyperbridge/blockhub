@@ -1,7 +1,7 @@
 <template>
     <div class="row margin-bottom-30"  >
         <div class="col-12">
-            <c-block title="Top 20 Items" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+            <c-block title="Top 20 Items" :noGutter="true" :onlyContentBg="true" :bgGradient="true" showActions>
                 <template slot="additional-action">
                     <span class="margin-right-15">Sort by:</span>
                     <c-heading-bar-fields

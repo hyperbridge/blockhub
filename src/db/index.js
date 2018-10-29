@@ -89,7 +89,7 @@ export const init = () => {
             marketplace.posts.data = marketplacePostsData
             funding.projects.data = fundingProjectsData
             funding.config.data = fundingConfigData
-            
+
             application.config.ensureId()
             application.config.ensureAllIndexes(true)
 
@@ -147,7 +147,7 @@ export const save = () => {
             console.log(err)
             return
         }
-        
+
         console.log("[BlockHub] Database saved.")
     })
 }

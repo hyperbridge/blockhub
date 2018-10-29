@@ -95,7 +95,7 @@
                     </div>
 
                     <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">
-                        <c-block title="Sales" class="h-100" noGutter onlyContentBg bgGradient>
+                        <c-block title="Sales" class="h-100" noGutter onlyContentBg bgGradient showActions>
                                 <template slot="additional-action">
                                     <a href="#3" class="font-weight-bold text-uppercase text-white">
                                         History
@@ -113,7 +113,7 @@
                     </div>
 
                     <div class="col-12 margin-top-15 margin-bottom-15">
-                        <c-block title="Offers" class="padding-bottom-0" noGutter onlyContentBg bgGradient>
+                        <c-block title="Offers" class="padding-bottom-0" noGutter onlyContentBg bgGradient showActions>
                             <template slot="additional-action">
                                 <c-heading-bar-fields name="Rarity" icon="trophy"/>
                                 <c-heading-bar-fields name="Value" icon="dollar"/>

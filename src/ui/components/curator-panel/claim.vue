@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar-card margin-top-30">
+    <div class="sidebar-card">
         <h4 :class="[ type + '-ttl']">
             <i :class="type | icon"></i>
             {{ title }}

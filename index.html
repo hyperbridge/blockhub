@@ -12,7 +12,7 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
-    <meta name="viewport" id="myViewport" content="width=device-width,initial-scale=1,user-scalable=0,minimal-ui">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimal-ui">
 
     <meta name="description" content="BlockHub is a next-generation decentralized digital distribution platform"/>
     <meta name="keywords" content="blockhub, hyperbridge, blockchain, cryptocurrency, game, indie, developer"/>
@@ -44,7 +44,7 @@
     <meta name="msapplication-TileColor" content="#000000"/>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110820930-3"></script>
+    <script async src="/static/js/vendors/gtag.js"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -56,7 +56,7 @@
 
         gtag('config', 'UA-110820930-3');
     </script>
-        
+
     <script>
         document.addEventListener('dragover', event => {
             event.preventDefault()
@@ -80,7 +80,7 @@
 
   Project:        BlockHub
   Version:        v1.0.0
-  Last change:    17/05/18 [Release]    
+  Last change:    17/05/18 [Release]
 
 -------------------------------------------------------------------*/
 
@@ -464,7 +464,7 @@ a {
           as="<%= file.match(/\.css$/)?'style':'script' %>">
     <% }}} %>
     <!--Animate css lib-->
-    <link rel="stylesheet" href="https://unpkg.com/vue2-animate/dist/vue2-animate.min.css"/>
+    <link rel="stylesheet" href="/static/css/vue2-animate.min.css" />
 </head>
 <body style="background: #30314c;">
 
@@ -495,7 +495,7 @@ a {
       <p>BlockHub is taking a while to load. If it's been longer than one minute and your internet connection is fine, this page may be broken, or you may need to reset your settings.</p>
       <br />
       <button onClick="window.goHome()">Go Home</button>
-      <button onClick="window.resetSettings()">Reset Settings</button> 
+      <button onClick="window.resetSettings()">Reset Settings</button>
       <button onClick="window.location = 'https://hyperbridge.org/#contact'">Contact Us</button>
       <br />
     </div>
@@ -516,7 +516,7 @@ window.resetSettings = function() {
   if (window.closeLokiDatabase) {
     window.closeLokiDatabase()
   }
-  
+
   var req = indexedDB.deleteDatabase('LokiCatalog');
   req.onsuccess = function () {
     //alert("Deleted settings successfully. The page will now reload.");
@@ -681,33 +681,5 @@ setStatusMessage()
 <!-- //END THIS PAGE SCRIPTS ONLY -->
 
 <script>if (window.module) module = window.module;</script>
-<!-- Start of Async Drift Code -->
-<!-- <script>
-  "use strict";
-
-  !function () {
-    var t = window.driftt = window.drift = window.driftt || [];
-    if (!t.init) {
-      if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
-      t.invoked = !0, t.methods = ["identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on"],
-        t.factory = function (e) {
-          return function () {
-            var n = Array.prototype.slice.call(arguments);
-            return n.unshift(e), t.push(n), t;
-          };
-        }, t.methods.forEach(function (e) {
-          t[e] = t.factory(e);
-        }), t.load = function (t) {
-          var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
-          o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
-          var i = document.getElementsByTagName("script")[0];
-          i.parentNode.insertBefore(o, i);
-        };
-    }
-  }();
-  drift.SNIPPET_VERSION = '0.3.1';
-  drift.load('4a396xwyt6ek');
-</script> -->
-<!-- End of Async Drift Code -->
 </body>
 </html>

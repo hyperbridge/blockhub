@@ -109,6 +109,10 @@
         flex-direction: column;
         width: 400px;
         max-width: 90%;
+        @media (max-width: 768px) {
+            max-width: 80%!important;
+            max-height: 70vh;
+        }
         h3 {
             color: #C6C6D6;
             font-size: 30px;

@@ -16,16 +16,26 @@
                 >{{ tab instanceof Object ? tab.title : tab }}</a>
             </slot>
         </div>
-        <div class="heading-bar__additional-action">
+        <div class="heading-bar__additional-action" v-if="showActions">
             <slot name="additional-action"></slot>
             <a :href="more" v-if="more" class="more">
                 MORE <c-icon name="angle-right"/>
             </a>
             <div class="heading-bar__nav" v-if="showArrows">
-                <a href="#3" class="nav-prev" @click.prevent="$emit('prevClick')">
+                    <!-- v-if="dynamicIndex < itemsLength - 1" -->
+                    <!-- v-if="dynamicIndex > 0" -->
+                <a
+                    href="#3"
+                    class="nav-prev"
+                    @click.prevent="$emit('prevClick')"
+                >
                    <c-icon name="arrow-left"/>
                 </a>
-                <a href="#3" class="nav-next" @click.prevent="$emit('nextClick')">
+                <a
+                    href="#3"
+                    class="nav-next"
+                    @click.prevent="$emit('nextClick')"
+                >
                    <c-icon name="arrow-right"/>
                 </a>
             </div>
@@ -41,7 +51,10 @@ export default {
         showBackground: Boolean,
         showArrows: Boolean,
         more: Boolean,
-        headingTabs: Array
+        showActions: Boolean,
+        headingTabs: Array,
+        activeIndex: Number,
+        itemsLength: Number
     },
     data() {
         return {
@@ -52,6 +65,13 @@ export default {
         changeTab(i, category) {
             this.activeTab = i;
             this.$emit('changeTab', category);
+        }
+    },
+    computed: {
+        dynamicIndex() {
+            let { activeIndex: i, itemsLength } = this;
+            i %= itemsLength;
+            return i < 0 ? i * -1 : i;
         }
     }
 }
@@ -112,6 +132,8 @@ export default {
         }
     }
     .heading-bar__tabs{
+        overflow: hidden;
+        width: 100%;
         a {
             color: #ececed;
             background: $name_tab_bg;
@@ -177,9 +199,18 @@ export default {
     }
     .heading-bar__additional-action{
         width: auto;
+        min-width: 235px;
         line-height: 40px;
         display: flex;
-        align-items: center;
+        flex-direction: row;
+        justify-content: flex-end;
+        overflow: hidden;
+
+        @media (max-width: 575px) {
+            & {
+                display: none;
+            }
+        }
     }
 
     .heading-bar__nav{

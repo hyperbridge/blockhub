@@ -1,6 +1,6 @@
 <template>
     <div class="logo-loader">
-        <img src="/static/img/blockhub-logotype-color.png" />
+        <img src="/static/img/blockhub-logotype-color.png" draggable="false" />
     </div>
 </template>
 

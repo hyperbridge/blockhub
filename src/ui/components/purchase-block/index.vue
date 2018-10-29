@@ -7,12 +7,12 @@
             </div>
         </div>
 
-        <div class="purchase-block__price"><span v-if="price">${{ price }}</span><span v-else>$0.00</span></div>
+        <div class="purchase-block__price" v-if="!isUnavailable"><span v-if="price">${{ price }}</span><span v-else>$0.00</span></div>
 
         <div class="purchase-block__info">
             <div v-if="eligibleTokens">Eligible for up to <i class="fas fa-coins mx-1" style="color: #FADC72"></i> HBX +{{ eligibleTokens }}</div>
             <div v-if="offersPurchases">Offers In-Game Purchases</div>
-            <div class="release-date" v-if="releaseDate">Release date: {{ dateFormat(releaseDate) }}</div>
+            <div class="release-date" v-if="releaseDate">Release date: {{ releaseDate | customDate('MM/DD/YYYY') }}</div>
 
             <div v-if="isPurchased" class="purchased-status">
                 <i class="fas fa-check"></i>
@@ -38,27 +38,20 @@
                 Download Demo
             </c-button>
 
-            <button @click="$emit('addToWishlist')" class="wishlist-btn" v-if="!inWishlist">
-                <i class="fas fa-heart mr-2"></i>
-                Add to Wishlist
-            </button>
-            <button @click="$emit('removeFromWishlist')" class="wishlist-btn is-in" v-if="inWishlist">
-                <i class="fas fa-heart mr-2"></i>
-                Remove from Wishlist
-            </button>
+            <c-btn-fav
+                @click="$emit('addToWishlist')"
+                target="Wishlist"
+                :active="inWishlist"
+            />
         </div>
     </c-block>
 </template>
 
 <script>
-    import moment from 'moment'
-
     export default {
         name: 'purchase-block',
         props: {
-            tags:{
-                type: Array
-            },
+            tags: Array,
             title:{
                 type: String,
                 default: null
@@ -94,22 +87,15 @@
                 type: Boolean,
                 default: false
             },
-            inWishlist: {
-                type: Boolean,
-                default: false
-            },
+            inWishlist: Boolean,
             purchaseLink: String,
             fullReviewsLink: String,
             onClickPurchase: Function
         },
-        components:{
+        components: {
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
-        },
-        methods: {
-            dateFormat(date) {
-                return moment(date).format('MM/DD/YYYY')
-            }
-        },
+            'c-btn-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve)
+        }
     }
 </script>
 

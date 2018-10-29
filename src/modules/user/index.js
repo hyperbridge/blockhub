@@ -6,6 +6,7 @@ let previousProperty = ''
 
 export default {
     state: {
+        id: 1,
         settings: {
             animations: true,
             autoplay: true,
@@ -13,6 +14,9 @@ export default {
         }
     },
     mutations: {
+        update(state, { prop, id, data }) {
+            state[prop][id] = { ...state[prop][id], ...data };
+        },
         LOAD_SETTINGS (state, payload) {
             for (let key in payload) {
                 state.settings[key] = payload[key]

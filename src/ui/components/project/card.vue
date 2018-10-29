@@ -1,24 +1,24 @@
 <template>
     <div class="project-card__item" :class="customClass">
-        <div class="head" v-if="productName">
-            <div class="img" v-if="productImage">
-                <c-img :src="productImage" />
+        <div class="head" v-if="parentName">
+            <div class="img" v-if="parentImage">
+                <c-img :src="parentImage" />
             </div>
             <div class="text">
-                <h4>{{ productName }}</h4>
-                <p v-if="productDeveloper">{{ productDeveloper }}</p>
+                <h4>{{ parentName }}</h4>
+                <p v-if="parentDeveloper">{{ parentDeveloper }}</p>
             </div>
         </div>
-        <c-img :src="image" />
+        <c-img :src="image"/>
         <div class="description">{{ description }}</div>
-        <c-money-info label="Obtained Funds" 
-            :percent="goal_progress" 
+        <c-money-info label="Obtained Funds"
+            :percent="goal_progress"
             :amount="funds.obtained"
             :goal="funds.goal"
         />
         <div class="item-action">
-            <c-button status="info" href="/#/project/1" icon_hide>Participate</c-button>
-            <c-button status="success" href="/#/project/1" icon_hide>Donate Funds</c-button>
+            <c-button status="info" :href="`/#/project/${id}`" icon_hide>Participate</c-button>
+            <c-button status="success" href="/#/project/1" icon_hide hidden>Donate Funds</c-button>
         </div>
     </div>
 </template>
@@ -36,9 +36,10 @@ export default {
             obtained: Number,
             goal: Number
         },
-        productImage: String,
-        productName: String,
-        productDeveloper: String,
+        parentImage: String,
+        parentName: String,
+        parentDeveloper: String,
+        id: Number,
         customClass: {
             type: String,
         }

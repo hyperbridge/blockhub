@@ -54,11 +54,11 @@
                                     <c-button @click="resetSettings()">Reset Settings</c-button>
                                     <br /><br />
                                 </div>
-                                <div v-if="desktop_mode">
+                                <div v-if="desktop_mode" hidden>
                                     <input ref="desktopMessage" type="text" />
                                     <c-button @click="sendDesktopMessage()">Send Message To Desktop</c-button>
                                 </div>
-                                <div v-if="developer_mode">
+                                <div v-if="developer_mode" hidden>
                                     <h4>Darklaunch Manager</h4>
                                     <select id="darklaunch-editor" class="form-control" multiple="multiple">
                                         <option v-for="(flag, index) in $store.state.application.darklaunch_flags"
@@ -82,7 +82,7 @@
                     <h4 class="h2 mb-3">Welcome</h4>
                     <p>Welcome to the the nightly BlockHub Preview Build. All features are enabled, with or without bugs. Gotta catch 'em all! 🐛</p>
                     <p>These features are still in active development, and may not functional properly and may not make it into production.</p>
-                    <p>Enjoy your stay, and send us your feedback!</p>
+                    <p>Thanks for visiting and joining us on the journey to a decentralized future!</p>
                     <p hidden>We're a platform built by the community, for the community.</p>
                     <p hidden><a href="/#/help" target="_blank">Check out the BlockHub crowdfund</a></p>
                 </div>
@@ -118,7 +118,7 @@ export default {
     },
     data() {
         return {
-            showWelcomeModal: this.$store.state.application.environment_mode === 'preview',
+            showWelcomeModal: ['preview', 'staging', 'local'].includes(this.$store.state.application.environment_mode) && !this.$store.state.application.account.settings.client.hide_welcome_modal,
             showPreviewPanel: ['preview', 'staging', 'local'].includes(this.$store.state.application.environment_mode)
         }
     },
@@ -417,6 +417,7 @@ export default {
         },
         closeModal() {
             this.showWelcomeModal = false
+            this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_welcome_modal', true)
         },
         sendDesktopMessage() {
             if (!window.isElectron) {

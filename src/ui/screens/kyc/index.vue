@@ -4,7 +4,7 @@
             <div class="row" style="">
                 <div class="col-md-6 offset-md-3 col-sm-12 offset-sm-0 mb-4">
                     <c-block title="KYC" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                        <p>Welcome to the KYC portal. BlockHub Desktop is the recommended way to KYC, purchase &amp; use tokens. You can also KYC on web and create your account in BlockHub later.</p>
+                        <p>Welcome to the KYC portal. <span v-if="!desktop_mode">BlockHub Desktop is the recommended way to KYC, purchase &amp; use tokens. You can also KYC on web and create your account in BlockHub later.</span></p>
 
                         <div v-if="!desktop_mode">
                             <div class="text-center alert alert-info" style="font-weight: bold; font-size: 11px;">
@@ -32,6 +32,7 @@
                             :checked="false"
                             type="square"
                             v-model="useMetamask"
+                            v-if="!desktop_mode"
                         >
                             Use MetaMask
                         </c-checkbox>

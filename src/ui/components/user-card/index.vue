@@ -28,7 +28,7 @@
                 <c-img v-else src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"/>
             </div>
 
-            <div>
+            <div style="text-align: left;">
                 <input
                     type="text"
                     class="form-control margin-bottom-5"
@@ -38,8 +38,10 @@
                     @input="$emit('update:name', $event.target.value)"
                     :readonly="previewMode"
                 />
-                <p v-if="type === 'user'"><em>Gamer</em></p>
-                <p v-if="type === 'developer'"><em>Developer</em></p>
+
+                <p v-if="!user.developer_id && !user.curator_id"><em>Gamer</em></p>
+                <p v-if="user.developer_id"><em>Developer</em></p>
+                <p v-if="user.curator_id"><em>Curator</em></p>
             </div>
         </div>
 

@@ -12,7 +12,7 @@ const local = {
 }
 
 export const on = (event, listener) => {
-    if (typeof local.events[event] !== 'object') {
+    if (!Array.isArray(local.events[event])) {
         local.events[event] = [];
     }
     local.events[event].push(listener);
@@ -20,7 +20,7 @@ export const on = (event, listener) => {
 }
 
 export const removeListener = (event, listener) => {
-    if (typeof local.events[event] === 'object') {
+    if (Array.isArray(local.events[event])) {
         const idx = local.events[event].indexOf(listener);
         if (idx > -1) {
             local.events[event].splice(idx, 1);
@@ -28,8 +28,8 @@ export const removeListener = (event, listener) => {
     }
 }
 
-export const emit = (event, ...args) => {console.log(event, local.events)
-    if (typeof local.events[event] === 'object') {
+export const emit = (event, ...args) => {
+    if (Array.isArray(local.events[event])) {
         local.events[event].forEach(listener => listener.apply(this, args));
     }
 }
@@ -336,6 +336,10 @@ export const init = (store, router) => {
     }
 
     console.log('[Bridge] Initializing')
+
+    on('promptPasswordRequest', (data) => {
+        DB.application.config.data[0].account.secret_question_1 = data.secret_question_1
+    })
 
     sendCommand('init', 1)
 

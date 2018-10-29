@@ -92,7 +92,7 @@
             box-shadow: unset;
             padding: 0 !important;
             margin: 0;
-            color: #fece00;
+            color: #fece00 !important;
             border-bottom: 1px solid #fece00;
             border-radius: 0;
             font-weight: normal;
@@ -100,7 +100,7 @@
 
             &:hover {
                 background: none !important;
-                color: #fff;
+                color: #fff !important;
                 border-bottom: 1px solid #fff;
             }
         }

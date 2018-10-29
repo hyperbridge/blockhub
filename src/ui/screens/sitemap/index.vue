@@ -10,7 +10,7 @@
                           <li><a href="#/help">Help</a></li>
                           <li><a href="#/search">Search</a></li>
                           <li><a href="#/support">Support</a></li>
-                          <li><a href="#/changelog">Changelog</a></li>
+                          <li><a href="#/updates">Updates</a></li>
                           <li><a href="#/welcome">Welcome</a></li>
                           <li><a href="#/redeem">Redeem</a></li>
                           <li><a href="#/token">Token</a></li>
@@ -49,6 +49,7 @@
                           <li><a href="#/settings/activity">Settings > Activity</a></li>
                           <li><a href="#/settings/debug">Settings > Debug</a></li>
                           <li><a href="#/settings/game-scanner">Settings > Game Scanner</a></li>
+                          <li><a href="#/settings/extensions">Settings > Extensions</a></li>
                         </ul>
                     </div>
                     <div class="col-12 col-md-4">
@@ -129,6 +130,7 @@
                           <li><a href="#/curator/1">Curator #1</a></li>
                           <li><a href="#/curator/application">Curator Application</a></li>
                           <li><a href="#/meta">Meta</a></li>
+                          <li><a href="#/meta/presets">Meta > Presets</a></li>
                         </ul>
                     </div>
                     <div class="col-12 col-md-4">

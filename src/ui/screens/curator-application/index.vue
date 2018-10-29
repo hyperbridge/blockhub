@@ -1,55 +1,34 @@
 <template>
     <c-layout navigationKey="store">
         <div class="row">
-            <div class="col-12">
-                <h2>Curator-Powered Ecosystem</h2>
-                <p>Curators make the system work. They drive the quality BlockHub. Here's how it works.</p>
+            <div class="col-12" v-if="!curator_mode">
+                <c-block title="Curator Application" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                    <p>Welcome</p>
+                </c-block>
 
-                <br />
-
-                <div v-if="!developerIdentity">
-                    <p>Choose a profile to convert:</p>
-
+                <div v-if="!curator_mode" style="text-align: center">
+                    <c-user-card
+                        class="col-3 margin-auto"
+                        :user="chosenIdentity"
+                        :previewMode="true"
+                        :class="{ 'default': true }"
+                    />
                     <br />
-
-                    <c-block title="Choose Profile" class="margin-bottom-30">
-                        <div class="profile-picker">
-                            <div
-                                class="profile-picker__profile"
-                                v-for="identity in identities"
-                                :key="identity.id"
-                                v-if="identities && identities.length"
-                            >
-                                <c-user-card
-                                    :user="identity"
-                                    :previewMode="true"
-                                    :class="{ 'default': chosenIdentity && identity.id == chosenIdentity.id }"
-                                />
-                                <div class="profile__action">
-                                    <c-button
-                                        status="info"
-                                        icon="check"
-                                        @click="chooseIdentity(identity)"
-                                        v-if="!chosenIdentity || identity.id != chosenIdentity.id"
-                                    >Choose</c-button>
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-                        <c-button href="/#/account/identities">New Profile</c-button>
-                    </c-block>
+                    <c-button class="underline" @click="$store.commit('application/showProfileChooser', true)">Choose Different Profile</c-button>
 
                     <br /><br />
 
-                    <c-button @click="convertIdentity">Convert to Curator</c-button>
+                    <c-button class="c-btn-lg outline-white margin-top-20" @click="convertIdentity">Convert to Curator</c-button>
                 </div>
-                <div v-if="developerIdentity">
-                    Congratulations, your curator profile is all setup. You are Curator #{{ this.chosenIdentity.developer_id }}
+            </div>
+            <div class="col-12" v-if="curator_mode">
+                <c-block title="Congratulations" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+                    Your profile is all setup. You are Curator #{{ chosenIdentity.developer_id }}
 
                     <br /><br />
 
-                    <c-button href="/#/curator">Go to dashboard</c-button>
-                </div>
+                    <c-button href="/#/meta">Go to dashboard</c-button>
+                </c-block>
             </div>
         </div>
     </c-layout>
@@ -64,7 +43,7 @@
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         },
         data() {
-            let developerIdentity = this.$store.state.application.account.identities.find(identity => identity.developer_id !== undefined)
+            let developerIdentity = this.$store.state.application.account.identities.find(identity => identity.curator_id !== undefined)
             let chosenIdentity = this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
 
             if (!chosenIdentity && this.$store.state.application.account.identities.length) {
@@ -80,10 +59,10 @@
         },
         methods: {
             convertIdentity() {
-                Bridge.sendCommand('createDeveloperRequest', this.chosenIdentity).then((data) => {
-                    this.chosenIdentity.developer_id = data
+                Bridge.sendCommand('createCuratorRequest', this.chosenIdentity).then((data) => {
+                    this.chosenIdentity.curator_id = data
                     this.developerIdentity = this.chosenIdentity
-                    this.$store.state.application.developer_mode = true
+                    this.$store.state.application.curator_mode = true
                 })
             },
             chooseIdentity(identity) {

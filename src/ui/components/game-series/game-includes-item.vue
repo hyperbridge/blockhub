@@ -1,15 +1,14 @@
-
 <template>
     <div class="game-includes__item">
-        <router-link :to="{ name: 'Product', params: { id: id } }">
-            <c-img :src="image" />
+        <router-link :to="{ name: 'Product', params: { id }}">
+            <c-img :src="image"/>
         </router-link>
-        <router-link :to="{ name: 'Product', params: { id: id } }">
+        <router-link :to="{ name: 'Product', params: { id }}">
             <h4>{{ name }}</h4>
         </router-link>
         <p>{{ developer }}</p>
         <div class="rating-stars">
-            <c-rating :number="rating" />
+            <c-rating :number="rating"/>
         </div>
     </div>
 </template>

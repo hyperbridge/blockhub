@@ -4,7 +4,7 @@ import store from '../store'
 
 Vue.use(Router)
 
-const appVersion = '0.6.1'
+const appVersion = '0.6.3'
 
 const router = new Router({
     //mode: 'history',
@@ -95,11 +95,6 @@ const router = new Router({
             path: '/support',
             name: 'Support',
             component: (resolve) => require(['@/ui/screens/support'], resolve)
-        },
-        {
-            path: '/changelog',
-            name: 'Changelog',
-            component: (resolve) => require(['@/ui/screens/changelog'], resolve)
         },
         {
             path: '/news',
@@ -296,7 +291,10 @@ const router = new Router({
             path: '/identity/:id',
             name: 'Profile',
             props: true,
-            component: (resolve) => require(['@/ui/screens/identity-overview'], resolve)
+            component: (resolve) => require(['@/ui/screens/identity-overview'], resolve),
+            meta: {
+                breadcrumb: false
+            }
         },
         {
             path: '/identity/:id/contacts',
@@ -380,6 +378,14 @@ const router = new Router({
             path: '/settings/game-scanner',
             name: 'Game Scanner',
             component: (resolve) => require(['@/ui/screens/settings-game-scanner'], resolve),
+            meta: {
+                auth: true
+            }
+        },
+        {
+            path: '/settings/extensions',
+            name: 'Extensions',
+            component: (resolve) => require(['@/ui/screens/settings-extensions'], resolve),
             meta: {
                 auth: true
             }
@@ -606,16 +612,16 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/curators'], resolve)
         },
         {
-            path: '/curator/:id',
-            name: 'Curator',
-            props: true,
-            component: (resolve) => require(['@/ui/screens/curator-overview'], resolve)
-        },
-        {
             path: '/curator/application',
             name: 'Curator Application',
             props: true,
             component: (resolve) => require(['@/ui/screens/curator-application'], resolve)
+        },
+        {
+            path: '/curator/:id',
+            name: 'Curator',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/curator-overview'], resolve)
         },
         {
             path: '/download',
@@ -656,6 +662,11 @@ const router = new Router({
             path: '/meta',
             name: 'Meta',
             component: (resolve) => require(['@/ui/screens/meta'], resolve)
+        },
+        {
+            path: '/meta/presets',
+            name: 'Presets',
+            component: (resolve) => require(['@/ui/screens/meta-presets'], resolve)
         },
         {
             path: '/updates',
@@ -706,7 +717,8 @@ const router = new Router({
                         {
                             path: ':id',
                             name: 'Marketplace Trade',
-                            component: (resolve) => require(['@/ui/screens/marketplace/trade/_id'], resolve)
+                            component: (resolve) => require(['@/ui/screens/marketplace/trade/_id'], resolve),
+                            props: true
                         }
                     ]
                 },
@@ -742,11 +754,6 @@ const router = new Router({
                     component: (resolve) => require(['@/ui/screens/marketplace-inventory/compare'], resolve),
                 }
             ]
-        },
-        {
-            path: '/marketplace/trade/:tradeId',
-            name: 'Marketplace Trade Transaction',
-            component: (resolve) => require(['@/ui/screens/marketplace-trade-transaction'], resolve)
         },
         {
             path: '/download/desktop/mac',

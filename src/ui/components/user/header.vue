@@ -4,23 +4,23 @@
             <div class="identity__user-info">
                 <div class="user_avatar">
                     <c-img
-                        src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png"/>
+                        src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png" />
                     <div class="us_icon">
                         <i class="fas fa-lock"></i>
                     </div>
                 </div>
                 <div class="user_info">
-                    <h2 class="user_name">MrMoody</h2>
+                    <h2 class="user_name">{{ identity.name }} </h2>
                     <div class="user_status">Trusted User</div>
                     <div class="user_statistic">
-                                <span>
-                                    12
-                                    <i class="fas fa-arrow-up"></i>
-                                </span>
                         <span>
-                                    193
-                                    <i class="fas fa-arrow-down"></i>
-                                </span>
+                            12
+                            <i class="fas fa-arrow-up"></i>
+                        </span>
+                        <span>
+                            193
+                            <i class="fas fa-arrow-down"></i>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -38,10 +38,14 @@
 
 <script>
     export default {
-        components:{
+        components: {
             'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'], resolve),
+        },
+        computed: {
+            identity() {
+                return this.$store.state.application.account.current_identity
+            }
         }
-
     }
 </script>
 

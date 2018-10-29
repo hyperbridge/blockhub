@@ -8,24 +8,21 @@
             :links="links.gameOverview"
         />
 
-        <c-curator-panel>
-            <c-claim title="Content curated" type="success" v-darklaunch="'CURATORS'">
-                <p>This page has been curated by 2041 people</p>
-                <a href="/#/curator/application" class="btn btn-sm btn-outline-white">
-                    Become a curator
-                </a>
-            </c-claim>
-            <c-claim title="Unclaimed Page" type="warning" v-darklaunch="'CURATORS'">
-                <p>This page has been curatedby 2041 people</p>
-                <c-switch label="Enable Curation Mode"/>
-            </c-claim>
-            <c-claim title="Some info" v-darklaunch="'CURATORS'">
-                <p>This page has been curatedby 2041 people</p>
-            </c-claim>
+        <c-button @click="$store.commit('application/activateModal', 'import-product')" v-if="$store.state.application.editor_mode === 'editing'">Import from third-party</c-button>
 
-            <c-curator-info title="Curator panel" v-darklaunch="'CURATORS'">
-                <p>1023 people have
-                    curated this product.</p>
+        <c-curator-panel>
+            <!-- <c-claim title="Unclaimed Page" type="warning" v-darklaunch="'CURATORS'">
+                <p>Created this game?</p>
+                <c-switch label="Enable Curation Mode" />
+            </c-claim> -->
+
+            <c-curator-info title="" v-darklaunch="'CURATORS'">
+                <c-claim title="Content curated" type="success" v-darklaunch="'CURATORS'" class="margin-bottom-10 margin-top-10">
+                    <p>This product has been curated by 2041 people.</p>
+                    <c-button href="/#/curator/application" class="outline-white">
+                        Become a curator
+                    </c-button>
+                </c-claim>
                 <ul>
                     <li>
                         <strong>492</strong>
@@ -44,6 +41,7 @@
                         Disapproved with 0 changes
                     </li>
                 </ul>
+                <c-button class="underline" @click="showClaimPopup">Created this game?</c-button>
             </c-curator-info>
         </c-curator-panel>
 
@@ -65,6 +63,11 @@
             'c-claim': (resolve) => require(['@/ui/components/curator-panel/claim.vue'], resolve),
             'c-curator-panel': (resolve) => require(['@/ui/components/curator-panel'], resolve),
             'c-curator-info': (resolve) => require(['@/ui/components/curator-panel/info-card.vue'], resolve),
+        },
+        methods: {
+            showClaimPopup() {
+                this.$store.commit('application/activateModal', 'claim')
+            }
         },
         data() {
             return {
