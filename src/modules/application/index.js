@@ -133,11 +133,11 @@ export const actions = {
     setEditorMode(store, payload) {
         store.commit('setEditorMode', payload)
 
-        if (!store.state.application.account.settings.client.hide_editor_welcome_modal) {
+        if (!store.state.account.settings.client.hide_editor_welcome_modal) {
             store.commit('activateModal', 'editor-welcome')
         }
     },
-    unlockAccount(state, payload) {
+    unlockAccount(store, payload) {
         Bridge.resolvePromptPasswordRequest(payload.password.value)
 
         // Bridge.sendCommand('getAccountRequest', data).then((res) => {

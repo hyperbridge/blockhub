@@ -8,36 +8,6 @@
         </div>
         <div class="row" v-if="product">
             <div class="col-12 col-md-12">
-                <div class="row" v-if="editing" style="margin-bottom: 70px;">
-                    <c-button @click="showImporter" v-if="!importing">Import from Steam, GOG, etc.</c-button>
-                    <div class="" v-if="importing">
-                        Choose source: 
-                        <br />
-                        <div class="row">
-                            <div class="col">
-                                Steam
-                            </div>
-                            <div class="col">
-                                GOG.com
-                            </div>
-                            <div class="col">
-                                Itch
-                            </div>
-                        </div>
-                        <br />
-                        Enter URL:
-                        <br />
-                        <input ref="importUrl" type="text" value="https://store.steampowered.com/app/441830/I_am_Setsuna/" />
-                        <br />
-                        <c-button @click="startImport">Go</c-button>
-                        <br />
-                        <div>Importing...</div>
-                        Results:
-                        <br />
-                        <textarea ref="importResults"></textarea>
-                        <div>Submission Cost: 10 HBX</div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <div class="editor-container">
@@ -144,6 +114,70 @@
                 <c-button size="md" @click="closeModal">Got it</c-button>
             </div>
         </c-custom-modal>
+
+
+        <c-basic-popup 
+            :activated="$store.state.application.active_modal === 'import-product'"
+            @close="$store.commit('application/activateModal', null)"
+        >
+            <div class="h4" slot="header">Propose Idea</div>
+            <template slot="body">
+                <div v-if="importStep === 1">
+                    <h3 class="margin-auto">Choose source: </h3>
+                    <br />
+                    <div class="row justify-content-center margin-bottom-50">
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <c-topic-item
+                                @click="nextImportStep"
+                                size="lg"
+                                icon="users"
+                                class="padding-10">
+                                Steam
+                            </c-topic-item>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <c-topic-item
+                                @click="nextImportStep"
+                                icon="users"
+                                size="lg"
+                                class="padding-10">
+                                GOG
+                            </c-topic-item>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <c-topic-item
+                                @click="nextImportStep"
+                                icon="users"
+                                size="lg"
+                                class="padding-10">
+                                Itch
+                            </c-topic-item>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+                <div v-if="importStep === 2">
+                    <h3 class="margin-auto">Enter URL: </h3>
+                    <br />
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <input class="form-control" ref="importUrl" type="text" value="https://store.steampowered.com/app/441830/I_am_Setsuna/" />
+                            <span class="form-text">Example: https://store.steampowered.com/app/441830/I_am_Setsuna/</span>
+                        </div>
+                    </div>
+                    
+                    <c-button class="c-btn-lg outline-white margin-top-20 margin-auto" @click="startImport">GO</c-button>
+                </div>
+                <br />
+                <div class="padding-40 loading-process" style="position: relative" v-if="importing">
+                    <div class="loading loading--w-spinner"><div><div class="loading-spinner"></div></div></div>
+                </div>
+            </template>
+            <p slot="footer" class="margin-top-20">
+                Need help? <c-button status="plain" href="/#/help">Check the Help Center</c-button>
+            </p>
+        </c-basic-popup>
+        
     </c-layout>
 </template>
 
@@ -167,6 +201,8 @@
             'c-product-projects': (resolve) => require(['@/ui/screens/product-projects'], resolve),
             'c-product-assets': (resolve) => require(['@/ui/screens/product-assets'], resolve),
             'c-product-community': (resolve) => require(['@/ui/screens/product-community'], resolve),
+            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic.vue'], resolve),
+            'c-topic-item': (resolve) => require(['@/ui/components/help/topic-item'], resolve),
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve)
@@ -185,6 +221,7 @@
                     'action'
                 ],
                 importing: false,
+                importStep: 1,
                 savedState: false
             }
         },
@@ -197,6 +234,13 @@
             },
             editor_mode() {
                 return this.$store.state.application.editor_mode
+            },
+            nextImportStep() {
+                if (this.importStep === 1) {
+                    this.importStep = 2
+                } else if (this.importStep === 2) {
+
+                }
             },
             editing() {
                 if (!this.$store.state.application.editor_mode) {
@@ -312,11 +356,11 @@
             },
             closeModal() {
                 this.$store.state.marketplace.first_product = false
-            this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_product_intro_modal', true)
+                this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_product_intro_modal', true)
             },
-            showImporter() {
-                this.importing = true
-            },
+            // showImporter() {
+            //     this.importing = true
+            // },
             startImport() {
                 const onWindowLoad = `function onWindowLoad(requestId) {
                     const script = document.createElement('script');
