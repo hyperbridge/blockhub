@@ -42,7 +42,7 @@
                 <i class="fas fa-heart mr-2"></i>
                 Add to Wishlist
             </button>
-            <button @click="$emit('removeFromWishlist')" class="wishlist-btn is-in" v-if="inWishlist">
+            <button @click="$emit('addToWishlist')" class="wishlist-btn is-in" v-if="inWishlist">
                 <i class="fas fa-heart mr-2"></i>
                 Remove from Wishlist
             </button>
@@ -56,9 +56,7 @@
     export default {
         name: 'purchase-block',
         props: {
-            tags:{
-                type: Array
-            },
+            tags: Array,
             title:{
                 type: String,
                 default: null
@@ -94,10 +92,7 @@
                 type: Boolean,
                 default: false
             },
-            inWishlist: {
-                type: Boolean,
-                default: false
-            },
+            inWishlist: Boolean,
             purchaseLink: String,
             fullReviewsLink: String,
             onClickPurchase: Function

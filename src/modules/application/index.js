@@ -240,9 +240,26 @@ export const mutations = {
         if (Array.isArray(account[prop])) {
             account[prop][key] = data;
         } else if (typeof account[prop] === 'object') {
-            account[prop] = { ...account[prop], ...data };
+            account[prop] = { ...account[prop], [id]: data };
         } else {
             account[prop] = data;
+        }
+    },
+    updateFavorites2({ account }, { prop = 'product_wishlist', id }) {
+        const foundKey = account[prop].findIndex(savedId => savedId === id);
+        foundKey
+        ? account[prop].push(id)
+        : account[prop].splice(foundKey, 0);
+        return !!foundKey;
+    },
+    updateFavorites({ account }, { prop = 'product_wishlist', id }) {
+        // Optional -> object
+        if (account[prop][id]) {
+            const { [id]: deleted, ...rest } = account[prop][id];
+            console.log(rest)
+            account[prop] = rest;
+        } else {
+            account[prop] = { ...account[prop], [id]: true };
         }
     },
     signIn(state, payload) {

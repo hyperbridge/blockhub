@@ -39,7 +39,11 @@
                 :tags="['New']"
                 :onClickPurchase="showPurchaseModal"
                 class="margin-bottom-15"
+                :inWishlist="wishlist[product.id]"
+                @addToWishlist="addToWishlist"
             />
+
+            <!-- <c-btn-fav @click.native="console.log(123)"/> -->
 
             <c-rating-block class="margin-bottom-20" :items="product.rating"
                             :parent_url="`/#/product/${product.id}`"/>
@@ -117,6 +121,7 @@
             'c-system-requirements': (resolve) => require(['@/ui/components/product-overview/system-requirements'], resolve),
             'c-language-support': (resolve) => require(['@/ui/components/product-overview/language-support'], resolve),
             'c-stream-item': (resolve) => require(['@/ui/components/stream'], resolve),
+            'c-btn-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide,
         },
@@ -224,11 +229,22 @@
                     return false
                 }
             },
+            addToWishlist() {
+                const { id } = this.product;
+                this.$store.commit('application/updateFavorites', { id })
+                this.$snotify.success(
+                    `Product has been ${this.wishlist[id] ? 'added to' : 'removed from'} your wishlist`,
+                    `Product ${this.wishlist[id] ? 'added' : 'removed'}`
+                );
+            }
         },
         computed:{
             streams_slider() {
                 return this.$refs.streams_slider.swiper;
             },
+            wishlist() {
+                return this.$store.state.application.account.product_wishlist;
+            }
         }
     }
 </script>
