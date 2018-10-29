@@ -91,7 +91,8 @@ export const getters = {
     },
     wishlistedProducts: ({ account }, getters, { marketplace: { products }}) => Object
         .keys(account.product_wishlist)
-        .map(id => extract(products[Number(id)], ['images', 'release_date', 'price'])),
+        .map(id => products[Number(id)]),
+        // .map(id => extract(products[Number(id)], ['images', 'release_date', 'price'])),
     wishlistedProjects: ({ account }, getters, { funding: { projects }}) => Object
         .keys(account.project_wishlist)
         .map(id => projects[id]),
@@ -263,8 +264,8 @@ export const mutations = {
     updateFavorites({ account }, { prop = 'product_wishlist', id }) {
         // Optional -> object
         if (account[prop][id]) {
-            const { [id]: deleted, ...rest } = account[prop][id];
-            console.log(rest)
+            const { [id]: deleted, ...rest } = account[prop];
+            delete(rest[id])
             account[prop] = rest;
         } else {
             account[prop] = { ...account[prop], [id]: true };

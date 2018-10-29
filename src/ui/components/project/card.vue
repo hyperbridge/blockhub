@@ -2,17 +2,17 @@
     <div class="project-card__item" :class="customClass">
         <div class="head" v-if="productName">
             <div class="img" v-if="productImage">
-                <c-img :src="productImage" />
+                <c-img :src="productImage"/>
             </div>
             <div class="text">
                 <h4>{{ productName }}</h4>
                 <p v-if="productDeveloper">{{ productDeveloper }}</p>
             </div>
         </div>
-        <c-img :src="image" />
+        <c-img :src="image"/>
         <div class="description">{{ description }}</div>
-        <c-money-info label="Obtained Funds" 
-            :percent="goal_progress" 
+        <c-money-info label="Obtained Funds"
+            :percent="goal_progress"
             :amount="funds.obtained"
             :goal="funds.goal"
         />

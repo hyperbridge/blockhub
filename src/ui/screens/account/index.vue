@@ -151,14 +151,47 @@
                 <c-block title="Wishlists" noGutter bgGradient onlyContentBg>
                     <c-tabs :tabNames="['Products', 'Projects']" styled>
                         <c-tab :tab_id="1">
-                            <div v-for="(product, id) in account.product_wishlist" :key="id">
-                                {{ id }}
+                            <div class="wishlist-box" v-for="product in products" :key="product.id">
+                                <c-game-includes-item
+                                    :id="product.id"
+                                    :image="product.images.medium_tile"
+                                    :name="product.name"
+                                    :rating="product.rating.overall"
+                                    :developer="product.developer"
+                                />
+                                <c-btn-fav
+                                    @click="$store.commit(
+                                        'application/updateFavorites',
+                                        { id: product.id }
+                                    )"
+                                    target="Wishlist"
+                                    :active="true"
+                                />
                             </div>
+                            <p v-if="!products.length">
+                                You have not added any products to your wishlist
+                            </p>
+
                         </c-tab>
                         <c-tab :tab_id="2">
-                            <div v-for="(product, id) in account.project_wishlist" :key="id">
-                                {{ id }}
+                            <div v-for="project in projects" :key="project.id">
+                                <c-project-card
+                                    :image="project.images[0]"
+                                    :funds="project.funds"
+                                />
+                                <c-btn-fav
+                                    @click="$store.commit(
+                                        'application/updateFavorites',
+                                        { id: project.id, prop: 'project_wishlist' }
+                                    )"
+                                    target="Wishlist"
+                                    :active="true"
+                                />
                             </div>
+                            <p v-if="!projects.length">
+                                You have not added any projects to your wishlist
+                            </p>
+
                         </c-tab>
                     </c-tabs>
                 </c-block>
@@ -178,14 +211,9 @@
             'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
             'c-tabs': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve),
             'c-tab': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
-        },
-        computed: {
-            identityCount() {
-                return Object.keys(this.$store.state.application.identities).length
-            },
-            account() {
-                return this.$store.state.application.account
-            }
+            'c-game-includes-item': (resolve) => require(['@/ui/components/game-series/game-includes-item'], resolve),
+            'c-btn-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve),
+            'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
         },
         data: () => ({
             wallets: [],
@@ -200,6 +228,20 @@
             },
             deleteAccount() {
                 Bridge.sendCommand('deleteAccountRequest')
+            }
+        },
+        computed: {
+            identityCount() {
+                return Object.keys(this.$store.state.application.identities).length
+            },
+            account() {
+                return this.$store.state.application.account
+            },
+            products() {
+                return this.$store.getters['application/wishlistedProducts'];
+            },
+            projects() {
+                return this.$store.getters['application/wishlistedProjects'];
             }
         }
     }
@@ -373,5 +415,14 @@
                 }
             }
         }
+    }
+    .wishlist-box {
+        background: rgba(1,1,1,.1);
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 </style>
