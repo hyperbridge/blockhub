@@ -39,11 +39,9 @@
                 :tags="['New']"
                 :onClickPurchase="showPurchaseModal"
                 class="margin-bottom-15"
-                :inWishlist="wishlist[product.id]"
+                :inWishlist="!!wishlist[product.id]"
                 @addToWishlist="addToWishlist"
             />
-
-            <!-- <c-btn-fav @click.native="console.log(123)"/> -->
 
             <c-rating-block class="margin-bottom-20" :items="product.rating"
                             :parent_url="`/#/product/${product.id}`"/>
@@ -121,7 +119,6 @@
             'c-system-requirements': (resolve) => require(['@/ui/components/product-overview/system-requirements'], resolve),
             'c-language-support': (resolve) => require(['@/ui/components/product-overview/language-support'], resolve),
             'c-stream-item': (resolve) => require(['@/ui/components/stream'], resolve),
-            'c-btn-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide,
         },
