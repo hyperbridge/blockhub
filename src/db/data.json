@@ -187,10 +187,10 @@
                     "enabled": false
                 }
             ],
-            "products_wishlist": {},
-            "products_favorites": {},
-            "projects_wishlist": {},
-            "projects_favorites": {}
+            "product_wishlist": { "3": true, "14": true },
+            "product_favorites": {},
+            "project_wishlist": { "1": true },
+            "project_favorites": {}
         },
         "darklaunch_flags": [
             {

@@ -9,10 +9,10 @@
                 <p v-if="parentDeveloper">{{ parentDeveloper }}</p>
             </div>
         </div>
-        <c-img :src="image" />
+        <c-img :src="image"/>
         <div class="description">{{ description }}</div>
-        <c-money-info label="Obtained Funds" 
-            :percent="goal_progress" 
+        <c-money-info label="Obtained Funds"
+            :percent="goal_progress"
             :amount="funds.obtained"
             :goal="funds.goal"
         />

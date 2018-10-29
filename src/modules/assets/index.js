@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import moment from 'moment';
+import { extract, skip } from '@/store/utils';
 
 import transactions from '@/db/seed/asset-transactions';
 import trxsData from '@/db/seed/asset-transactions.json';
@@ -7,22 +8,9 @@ import usersData from '@/db/seed/users.json';
 import assetsData from '@/db/seed/assets';
 import collectionsData from '@/db/seed/collections';
 
+
 const rand = () => Math.floor(Math.random() * 100);
 const assignId = (id, object) => ({ ...object, data: { ...object.data, id }, id });
-
-const extract = (object, props) => ['id', 'name', ...props]
-    .reduce((extracted, prop) => object[prop]
-        ? { ...extracted, [prop]: object[prop] }
-        : extracted
-    , {});
-
-const skip = (object, props) => {
-    const copy = { ...object };
-    for (let prop in props) {
-        delete copy[prop];
-    }
-    return copy;
-};
 
 const assets = {
     namespaced: true,

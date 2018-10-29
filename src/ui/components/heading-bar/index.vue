@@ -22,10 +22,20 @@
                 MORE <c-icon name="angle-right"/>
             </a>
             <div class="heading-bar__nav" v-if="showArrows">
-                <a href="#3" class="nav-prev" @click.prevent="$emit('prevClick')">
+                    <!-- v-if="dynamicIndex < itemsLength - 1" -->
+                    <!-- v-if="dynamicIndex > 0" -->
+                <a
+                    href="#3"
+                    class="nav-prev"
+                    @click.prevent="$emit('prevClick')"
+                >
                    <c-icon name="arrow-left"/>
                 </a>
-                <a href="#3" class="nav-next" @click.prevent="$emit('nextClick')">
+                <a
+                    href="#3"
+                    class="nav-next"
+                    @click.prevent="$emit('nextClick')"
+                >
                    <c-icon name="arrow-right"/>
                 </a>
             </div>
@@ -42,7 +52,9 @@ export default {
         showArrows: Boolean,
         more: Boolean,
         showActions: Boolean,
-        headingTabs: Array
+        headingTabs: Array,
+        activeIndex: Number,
+        itemsLength: Number
     },
     data() {
         return {
@@ -53,6 +65,13 @@ export default {
         changeTab(i, category) {
             this.activeTab = i;
             this.$emit('changeTab', category);
+        }
+    },
+    computed: {
+        dynamicIndex() {
+            let { activeIndex: i, itemsLength } = this;
+            i %= itemsLength;
+            return i < 0 ? i * -1 : i;
         }
     }
 }

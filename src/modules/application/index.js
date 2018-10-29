@@ -5,6 +5,7 @@ import * as Bridge from '@/framework/desktop-bridge'
 import schema from './schema'
 import axios from 'axios'
 import FormData from 'form-data'
+import { extract } from '@/store/utils'
 
 let rawData = {}
 
@@ -89,7 +90,15 @@ export const getters = {
         }
 
         return result
-    }
+    },
+    wishlistedProducts: ({ account }, getters, { marketplace: { products }}) => Object
+        .keys(account.product_wishlist)
+        .map(id => products[Number(id)]),
+        // .map(id => extract(products[Number(id)], ['images', 'release_date', 'price'])),
+    wishlistedProjects: ({ account }, getters, { funding: { projects }}) => Object
+        .keys(account.project_wishlist)
+        .map(id => projects[id]),
+
 }
 
 export const actions = {
@@ -246,9 +255,26 @@ export const mutations = {
         if (Array.isArray(account[prop])) {
             account[prop][key] = data;
         } else if (typeof account[prop] === 'object') {
-            account[prop] = { ...account[prop], ...data };
+            account[prop] = { ...account[prop], [id]: data };
         } else {
             account[prop] = data;
+        }
+    },
+    updateFavorites2({ account }, { prop = 'product_wishlist', id }) {
+        const foundKey = account[prop].findIndex(savedId => savedId === id);
+        foundKey
+        ? account[prop].push(id)
+        : account[prop].splice(foundKey, 0);
+        return !!foundKey;
+    },
+    updateFavorites({ account }, { prop = 'product_wishlist', id }) {
+        // Optional -> object
+        if (account[prop][id]) {
+            const { [id]: deleted, ...rest } = account[prop];
+            delete(rest[id])
+            account[prop] = rest;
+        } else {
+            account[prop] = { ...account[prop], [id]: true };
         }
     },
     signIn(state, payload) {

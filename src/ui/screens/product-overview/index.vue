@@ -39,6 +39,8 @@
                 :tags="['New']"
                 :onClickPurchase="showPurchaseModal"
                 class="margin-bottom-15"
+                :inWishlist="!!wishlist[product.id]"
+                @addToWishlist="addToWishlist"
             />
 
             <c-rating-block class="margin-bottom-20" :items="product.rating"
@@ -224,11 +226,22 @@
                     return false
                 }
             },
+            addToWishlist() {
+                const { id } = this.product;
+                this.$store.commit('application/updateFavorites', { id })
+                this.$snotify.success(
+                    `Product has been ${this.wishlist[id] ? 'added to' : 'removed from'} your wishlist`,
+                    `Product ${this.wishlist[id] ? 'added' : 'removed'}`
+                );
+            }
         },
         computed:{
             streams_slider() {
                 return this.$refs.streams_slider.swiper;
             },
+            wishlist() {
+                return this.$store.state.application.account.product_wishlist;
+            }
         }
     }
 </script>
