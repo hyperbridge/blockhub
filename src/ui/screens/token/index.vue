@@ -562,7 +562,7 @@ export default {
                         current: 0.0
                     },
                     image: '/static/img/icons/voyager-badge.png',
-                    system_tags: ['exclusive'],
+                    system_tags: ['special'],
                     css: 'store-card--special'
                 }
             ],
