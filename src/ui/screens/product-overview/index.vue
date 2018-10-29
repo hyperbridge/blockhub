@@ -34,7 +34,7 @@
         </div>
         <div class="col-12 col-lg-4 col-xl-3">
             <c-purchase-block
-                :isReleased="true"
+                :isUnavailable="!Number(product.price)"
                 :price="product.price"
                 :tags="['New']"
                 :onClickPurchase="showPurchaseModal"

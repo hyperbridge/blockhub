@@ -35,7 +35,7 @@
                             <div class="" v-if="editing">
                                 <div class="form-group">
                                     <select id="tag-editor" class="form-control" multiple="multiple">
-                                        <option v-for="(tag, index) in author_tag_options" :key="index"
+                                        <option v-for="(tag, index) in developer_tag_options" :key="index"
                                                 :selected="product.developer_tags.includes(tag)">{{ tag }}
                                         </option>
                                     </select>
@@ -104,7 +104,7 @@
                                                 <label>Price</label>
                                             </label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: 10">
+                                                <input type="text" class="form-control" placeholder="Example: 10" v-model="product.price">
                                                 <span class="form-text"></span>
                                             </div>
                                         </div>
@@ -113,7 +113,7 @@
                                                 <label>Old Price</label>
                                             </label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: 20">
+                                                <input type="text" class="form-control" placeholder="Example: 20" v-model="product.old_price">
                                                 <span class="form-text"></span>
                                             </div>
                                         </div>
@@ -123,7 +123,7 @@
                                                 <label>Genre</label>
                                             </div>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: RPG">
+                                                <input type="text" class="form-control" placeholder="Example: RPG" v-model="product.genre">
                                                 <span class="form-text"></span>
                                             </div>
                                         </div>
@@ -132,7 +132,7 @@
                                                 <label>Release Date</label>
                                             </div>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: 12/30/2020">
+                                                <input type="text" class="form-control" placeholder="Example: 12/30/2020" v-model="product.release_date">
                                                 <span class="form-text"></span>
                                             </div>
                                         </div>
@@ -141,7 +141,7 @@
                                                 <label>Publisher</label>
                                             </div>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: Actilizard Entertainment">
+                                                <input type="text" class="form-control" placeholder="Example: Actilizard Entertainment" v-model="product.publisher">
                                                 <span class="form-text"></span>
                                             </div>
                                         </div>
@@ -150,7 +150,7 @@
                                                 <label>Developer</label>
                                             </div>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: Northcap Studios">
+                                                <input type="text" class="form-control" placeholder="Example: Northcap Studios" v-model="product.developer">
                                                 <span class="form-text"></span>
                                             </div>
                                         </div>
@@ -285,7 +285,7 @@
                     background_image: false,
                     tags: false
                 },
-                author_tag_options: [
+                developer_tag_options: [
                     'rpg',
                     'adventure',
                     'racing',
@@ -525,7 +525,7 @@
                     this.product.type = 'game'
                     //this.product.rating.overall = 0
                     this.product.system_tags = ['imported']
-                    this.product.author_tags = data.tags
+                    this.product.developer_tags = data.tags
                     this.product.name = data.title
                     this.product.release_date = data.releaseDate
                     this.product.description = data.description
@@ -576,6 +576,15 @@
                     this.save()
 
                     this.$store.dispatch('application/setEditorMode', 'viewing')
+                } else if (newMode === 'removing') {
+                    Brdge.sendCommand('removeProduct', {
+                        id: this.product.id
+                    }).then((data) => {
+                        if (data.error) {
+                            return console.log(data.message)
+                        }
+                    }
+
                 }
             }
         }

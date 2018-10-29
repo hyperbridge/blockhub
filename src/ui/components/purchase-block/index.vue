@@ -7,7 +7,7 @@
             </div>
         </div>
 
-        <div class="purchase-block__price"><span v-if="price">${{ price }}</span><span v-else>$0.00</span></div>
+        <div class="purchase-block__price" v-if="!isUnavailable"><span v-if="price">${{ price }}</span><span v-else>$0.00</span></div>
 
         <div class="purchase-block__info">
             <div v-if="eligibleTokens">Eligible for up to <i class="fas fa-coins mx-1" style="color: #FADC72"></i> HBX +{{ eligibleTokens }}</div>

@@ -248,7 +248,7 @@ export default {
             this.$store.dispatch('application/setEditorMode', 'editing')
         },
         clickRemove() {
-
+            this.$store.dispatch('application/setEditorMode', 'removing')
         },
         clickPublish() {
             this.$store.dispatch('application/setEditorMode', 'publishing')
