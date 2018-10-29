@@ -3,6 +3,7 @@ import { normalize } from 'normalizr'
 import * as DB from '@/db'
 import * as Bridge from '@/framework/desktop-bridge'
 import schema from './schema'
+import { extract } from '@/store/utils';
 
 let rawData = {}
 
@@ -87,7 +88,14 @@ export const getters = {
         }
 
         return result
-    }
+    },
+    wishlistedProducts: ({ account }, getters, { marketplace: { products }}) => Object
+        .keys(account.product_wishlist)
+        .map(id => extract(products[Number(id)], ['images', 'release_date', 'price'])),
+    wishlistedProjects: ({ account }, getters, { funding: { projects }}) => Object
+        .keys(account.project_wishlist)
+        .map(id => projects[id]),
+
 }
 
 export const actions = {
