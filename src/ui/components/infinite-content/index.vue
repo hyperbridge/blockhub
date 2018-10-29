@@ -145,9 +145,10 @@
                                         :image="project.images.medium_tile" 
                                         :description="project.description" 
                                         :funds="project.funds" 
-                                        :productName="project.product && project.product.name" 
-                                        :productDeveloper="project.product && project.product.developer" 
-                                        :productImage="project.product && project.product.images.medium_tile" 
+                                        :parentName="project.product && project.product.name" 
+                                        :parentDeveloper="project.product && project.product.developer" 
+                                        :parentImage="project.product && project.product.images.medium_tile"
+                                        :id="project.id"
                                     />
                                 </c-slide>
                             </c-swiper>
