@@ -74,29 +74,100 @@
                         </c-button>
                         <div class="collapse show product_nav" id="product_nav">
                             <ul class="nav nav-tabs margin-bottom-30 justify-content-between">
-                                <li class="nav-item">
+                                <li class="nav-item" @click="section='overview'">
                                     <router-link :to="`/product/${id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" @click="section='community'">
                                     <router-link :to="`/product/${id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community
                                     </router-link>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" @click="section='projects'">
                                     <router-link :to="`/product/${id}/projects`" class="nav-link" :class="{ 'active': section === 'projects' }">Crowdfunding
                                     </router-link>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" @click="section='assets'">
                                     <router-link :to="`/product/${id}/assets`" class="nav-link" :class="{ 'active': section === 'assets' }">Inventory</router-link>
+                                </li>
+                                <li class="nav-item" v-if="editing">
+                                    <a class="nav-link" :class="{ 'active': section === 'configure' }" @click="section='configure'">Configure</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
+
+                        <div class="row" v-if="section === 'configure'" :editing="editing">
+                            <c-block title="Product">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <label class="switch switch-sm col-sm-3">
+                                                <label>Price</label>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Example: 10">
+                                                <span class="form-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="switch switch-sm col-sm-3">
+                                                <label>Old Price</label>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Example: 20">
+                                                <span class="form-text"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <label>Genre</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Example: RPG">
+                                                <span class="form-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <label>Release Date</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Example: 12/30/2020">
+                                                <span class="form-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <label>Publisher</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Example: Actilizard Entertainment">
+                                                <span class="form-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <label>Developer</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Example: Northcap Studios">
+                                                <span class="form-text"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                    </div>
+                                </div>
+                            </c-block>
+                        </div>
 
                     <div class="col-12">
                         <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
                         <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
                         <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
                         <c-product-projects :product="product" v-if="section === 'projects'" :editing="editing" />
+
                     </div>
                 </div>
             </div>

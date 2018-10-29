@@ -1,11 +1,12 @@
 <template>
     <c-layout navigationKey="project" :showRightPanel="false" :breadcrumbLinks="breadcrumbLinks">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12" v-if="!project">
+            <div class="row" v-if="!project">
+                <div class="col-12">
                     Project not found
                 </div>
-                <div class="col-12 tab-content" v-else>
+            </div>
+            <div class="row" v-if="project">
+                <div class="col-12 tab-content">
 
                     <div class="errors" v-if="errors.length">
                         <strong>Please correct the following error(s):</strong>
@@ -270,7 +271,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row" v-darklaunch="'GOVERNANCE'">
                                     <div class="col-12">
                                         Choose your governance system
                                     </div>
@@ -295,7 +296,6 @@
 
                 </div>
             </div>
-        </div>
     </c-layout>
 </template>
 
