@@ -187,9 +187,9 @@
                     "enabled": false
                 }
             ],
-            "product_wishlist": {},
+            "product_wishlist": { "3": true, "14": true },
             "product_favorites": {},
-            "project_wishlist": {},
+            "project_wishlist": { "1": true },
             "project_favorites": {}
         },
         "darklaunch_flags": [
