@@ -612,16 +612,16 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/curators'], resolve)
         },
         {
-            path: '/curator/:id',
-            name: 'Curator',
-            props: true,
-            component: (resolve) => require(['@/ui/screens/curator-overview'], resolve)
-        },
-        {
             path: '/curator/application',
             name: 'Curator Application',
             props: true,
             component: (resolve) => require(['@/ui/screens/curator-application'], resolve)
+        },
+        {
+            path: '/curator/:id',
+            name: 'Curator',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/curator-overview'], resolve)
         },
         {
             path: '/download',

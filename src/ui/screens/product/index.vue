@@ -95,10 +95,10 @@
                         </div>
                     </div>
 
-                        <div class="row" v-if="section === 'configure'" :editing="editing">
+                        <div class="col-12" v-if="section === 'configure'" :editing="editing">
                             <c-block title="Product">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-6">
                                         <div class="form-group row">
                                             <label class="switch switch-sm col-sm-3">
                                                 <label>Price</label>
