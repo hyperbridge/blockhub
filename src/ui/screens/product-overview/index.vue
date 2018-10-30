@@ -97,6 +97,9 @@
                 </div>
             </div>
         </div>
+        <c-modal :title="product.name" @close="showInstaller = false">
+            <c-game-installer slot="body" :product="product"/>
+        </c-modal>
     </div>
 </template>
 
@@ -119,6 +122,8 @@
             'c-system-requirements': (resolve) => require(['@/ui/components/product-overview/system-requirements'], resolve),
             'c-language-support': (resolve) => require(['@/ui/components/product-overview/language-support'], resolve),
             'c-stream-item': (resolve) => require(['@/ui/components/stream'], resolve),
+            'c-modal': (resolve) => require(['@/ui/components/modal'], resolve),
+            'c-game-installer': (resolve) => require(['@/ui/components/game-installer'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide,
         },
@@ -212,7 +217,8 @@
                         },
                     }
                 },
-                streamersList: 8
+                streamersList: 8,
+                showInstaller: false
             }
         },
         methods: {
