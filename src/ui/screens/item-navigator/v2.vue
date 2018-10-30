@@ -66,6 +66,26 @@ export default {
                 ]}
             ]
         }
+    },
+    computed: {
+        populated() {
+            const { navigator } = this;
+            const populated = [];
+
+            const recursiveMap = items => {
+                items.map(item => {
+                    if (item.evolvesTo.length) {
+                    recurMap(item.evolvesTo)
+                    }
+                    console.log('CALLED')
+
+                    stack++;
+                    return { ...item, what: item.id };
+                });
+            };
+
+            return populated;
+        }
     }
 }
 </script>

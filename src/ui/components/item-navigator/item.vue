@@ -12,7 +12,7 @@
         <div class="navigator-item__content">
             <button
                 v-if="!item.evolvesTo.length && hovered"
-                @click="item.evolvesTo.push({ id: 21, evolvesTo: [] })"
+                @click="item.evolvesTo.push({ id: 12, evolvesTo: [] })"
                 class="navigator-item__btn navigator-item__btn--right"
             >
                 <c-icon name="plus"/>
@@ -25,7 +25,7 @@
             >
                 <c-icon name="plus"/>
             </button>
-            <c-asset :asset="item.data" class="navigator-item__asset"/>
+            <c-asset :asset="assets[item.id] || {}" class="navigator-item__asset"/>
             <!-- <span class="fa fa-angle-right"></span>
             {{ hovered }} hovered
             {{ item.id }}
@@ -43,7 +43,7 @@
                 :item="subItem"
                 :isChildren="true"
                 :listLength="item.evolvesTo.length"
-                @evolveDown="item.evolvesTo.push({ id: 21, evolvesTo: [] })"
+                @evolveDown="item.evolvesTo.push({ id: 5, evolvesTo: [] })"
             />
         </div>
     </div>
@@ -55,7 +55,7 @@
     export default {
         name: 'navigator-item',
         components: {
-            'c-asset': (resolve) => require(['@/ui/components/assets-grid-inventory'], resolve),
+            'c-asset': (resolve) => require(['@/ui/components/assets-grid-inventory/asset'], resolve),
         },
         props: {
             item: Object,
@@ -76,6 +76,11 @@
         methods: {
             handleHover(status) {
                 this.debounce(() => { this.hovered = true }, 50);
+            }
+        },
+        computed: {
+            assets() {
+                return this.$store.state.assets.assets;
             }
         }
     }
@@ -135,9 +140,11 @@
             }
         }
         .navigator-item__asset {
-            position: relative;
-            z-index: 100;
-            height: 100%;
+            // position: relative;
+            // z-index: 100;
+            // height: 100%;
+            max-height: 70px;
+            width: 70px;
         }
     }
     .navigator-item__btn {
@@ -153,12 +160,12 @@
         // display: none;
         animation: pop-in .2s ease;
         &--right {
-            right: -$btn-size - 5px;
-            top: calc(50% - #{$btn-size/2});
+            right: -$btn-size - 10px;
+            top: calc(50% - #{$btn-size/2 - 5});
         }
         &--bottom {
-            bottom: -$btn-size - 5px;
-            left: calc(50% - #{$btn-size/2});
+            bottom: -$btn-size - 10px;
+            left: calc(50% - #{$btn-size/2 - 5});
         }
         @keyframes pop-in {
             0% {
