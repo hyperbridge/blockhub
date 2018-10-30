@@ -740,6 +740,12 @@ const router = new Router({
             ]
         },
         {
+            path: '/item-navigator',
+            name: 'Item Navigator',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/item-navigator'], resolve)
+        },
+        {
             path: '/download/desktop/mac',
             beforeEnter(to, from, next) {
                 window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-${appVersion}.dmg`
