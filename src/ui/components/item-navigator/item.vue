@@ -7,7 +7,9 @@
             'navigator-item--last': index === listLength - 1
         }"
     >
+        <!-- <c-icon name="angle-right" v-if="isChildren"/> -->
         <div class="navigator-item__content">
+            <span class="fa fa-angle-right"></span>
             {{ item.id }}
             {{ isChildren && 'child' }}
             {{ index }} {{ listLength }} {{ item.evolvesTo.length }}
@@ -41,6 +43,17 @@
 </script>
 
 <style lang="scss" scoped>
+    // $line-color: #cacaca;
+    $line-color: #a3a3a3;
+    $line-size: 2px;
+    %line-style {
+        // border: 1px solid #4e4e4e;
+        // background: #bebebe;
+    }
+    $margin: 30px;
+    $size: 70px;
+    $center: $margin + $size/2;
+
     .navigator-item {
         display: flex;
         position: relative;
@@ -51,32 +64,44 @@
             font-weight: 900;
             font-size: 15px;
             content: "\F061";
-            left: 8px;
-            // top: calc(65px - 10px);
-            top: 55px;
-            // top: 0;
-            // left: -30px;
+            content: "\f105";
+            top: calc(#{$center} - 8.5px);
+            left: $margin/2;
+            color: $line-color;
         }
-
 
         &:before {
             content: "";
             position: absolute;
-            width: 2px;
+            height: $line-size;
             background: yellow;
-            height: 100%;
-            left: 30px + 70px/2;
+            background: $line-color;
+            width: $margin / 2 + 4px;
+            top: $center;
+            left: 0;
             z-index: -1;
+            @extend %line-style !optional;
         }
 
-        &.navigator-item--first:before {
-            height: 70px;
-            bottom: 0;
-        }
 
-        &.navigator-item--last:before {
-            height: 70px;
-        }
+        // &:before {
+        //     content: "";
+        //     position: absolute;
+        //     width: 2px;
+        //     background: yellow;
+        //     height: 100%;
+        //     left: 30px + 70px/2;
+        //     z-index: -1;
+        // }
+
+        // &.navigator-item--first:before {
+        //     height: 70px;
+        //     bottom: 0;
+        // }
+
+        // &.navigator-item--last:before {
+        //     height: 70px;
+        // }
 
     }
     .navigator-item__content {
@@ -91,20 +116,26 @@
             &:before {
                 position: absolute;
                 content: "";
-                width: 2px;
-                height: calc(100% - 120px);
-                top: 60px;
+                height: calc(100% - #{$center * 2});
+                top: $center;
                 background: blue;
+                width: $line-size;
+                background: $line-color;
+                @extend %line-style !optional;
             }
             &:after {
                 position: absolute;
                 content: "";
-                height: 2px;
+                height: $line-size;
                 width: 30px;
                 background: green;
+                background: $line-color;
                 left: -30px;
-                top: 60px;
-                box-shadow: -15px 0 30px 1px rgb(49, 156, 255);
+                top: $center;
+                background: linear-gradient(to right,#fff, #{$line-color});
+                box-shadow: -15px 0 30px 1px rgb(196, 227, 255);
+                z-index: -1;
+                @extend %line-style !optional;
             }
         }
     }
