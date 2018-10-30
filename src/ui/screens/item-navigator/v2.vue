@@ -21,12 +21,13 @@
             </div> -->
 
             <div class="item-navigator">
-                <c-navigator-item
+                <!-- COMP REQUIRES GLOBAL EVENT BUS -->
+                <!-- <c-navigator-item
                     v-for="(item, index) in navigator"
                     :key="index"
                     :item="item"
                     :listLength="item.evolvesTo.length"
-                />
+                /> -->
             </div>
 
         </div>

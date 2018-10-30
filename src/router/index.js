@@ -740,13 +740,9 @@ const router = new Router({
             ]
         },
         {
-            path: '/item-navigator',
+            path: '/item-navigator-2',
             name: 'Item Navigator',
             props: true,
-            component: (resolve) => require(['@/ui/screens/item-navigator'], resolve)
-        },
-        {
-            path: '/item-navigator-2',
             component: (resolve) => require(['@/ui/screens/item-navigator/v2'], resolve)
         },
         {
