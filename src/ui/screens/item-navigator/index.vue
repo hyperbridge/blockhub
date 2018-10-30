@@ -15,20 +15,26 @@
                         }"
                     />
 
-                    <div v-for="(row, index) in rows" :key="index" class="item-navigator__row">
+                    <div v-for="(row, index) in rows2" :key="index" class="item-navigator__row">
                         <div
                             class="item-navigator__item"
                             v-for="(item, index) in row"
                             :key="index"
                         >
-                            <div class="item__btn-wrapper">
+                            {{ item.id }}
+
+                            {{ item }}
+                            <span
+                                v-if="item.evolvesTo.length"
+                                class="item__evo-line"
+                            ></span>
+                            <!-- <div class="item__btn-wrapper">
                                 <c-icon
                                     name="arrow-right"
                                     v-for="btn in 2"
-                                    @click=""
                                     :key="btn"
                                 />
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 
@@ -53,6 +59,11 @@ export default {
                 [1],
                 [2, 3, 4],
                 [5, 6]
+            ],
+            rows2: [
+                [{ id: 1, evolvesTo: [2, 3] }],
+                [{ id: 2, evolvesTo: [] }, { id: 6, evolvesTo: [] }, { id: 3, evolvesTo: [4, 5] }],
+                [{ id: 4, evolvesTo: [] }, { id: 5, evolvesTo: [] }],
             ]
         }
     },
@@ -85,7 +96,36 @@ export default {
         // display: flex;
         // align-items: center;
     }
+    $line-color: #cacaca;
     .item-navigator__row {
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        // flex-direction: column;
+
+        .item-navigator__item:before {
+            position: absolute;
+            content: "";
+            width: 2px;
+            height: calc(100% + 60px);
+            background: $line-color;
+            top: -30px;
+            left: -30px;
+        }
+        .item-navigator__item:first-child:before {
+            height: 50%;
+            height: calc(50% + 10px);
+            top: 50%;
+            background: blue;
+            background: $line-color;
+        }
+        .item-navigator__item:last-child:before {
+            height: calc(50% + 10px);
+            bottom: 50%;
+            top: -10px;
+            background: yellow;
+            background: $line-color;
+        }
     }
     .item-navigator__item-wrapper {
         padding: 20px;
@@ -96,6 +136,28 @@ export default {
         background: red;
         margin: 30px;
         position: relative;
+
+        &:after {
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            font-size: 15px;
+            content: "\F061";
+            position: absolute;
+            top: calc(50% - 10px);
+            left: -29px;
+        }
+
+        .item__evo-line {
+            height: 2px;
+            background: green;
+            box-shadow: -15px 0 30px 1px rgb(49, 156, 255);
+            z-index: -1;
+            position: absolute;
+            right: -30px;
+            top: calc(50% - 1px);
+            width: 30px;
+        }
+
         .item__btn-wrapper {
             height: 100%;
             right: -20px;
