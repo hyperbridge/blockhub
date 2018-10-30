@@ -827,31 +827,16 @@ storiesOf('Sidebar Menu', module)
         },
         data() {
             return {
-                menu: [
-                    {
-                        url: '#3',
-                        link_text: 'Link Text',
-                        target: '_self',
-                        icon: ''
-                    },
-                    {
-                        url: '#3',
-                        link_text: 'Link Text Blank target',
-                        target: '_blank',
-                        icon: ''
-                    },
-                    {
-                        url: '#3',
-                        link_text: 'Link Text with Icon',
-                        target: '_self',
-                        icon: 'fas fa-gem'
-                    }
+                links: [
+                    { to: { path: '/#/' }, title: 'Suggesting Features' },
+                    { to: { path: '/#/' }, title: 'Voting and Curating Updates' },
+                    { to: { path: '/#/' }, title: 'MORE ...' }
                 ],
             }
         },
         template: '<div class="row m-0">' +
             '<div class="col-3 p-4">' +
-            '<c-sidebar-menu title="Menu Big Title" icon="fab fa-angellist" :menu=menu />' +
+            '<c-sidebar-menu title="Menu Big Title" icon="fab fa-angellist" :links="links" />' +
             '</div>' +
             '</div>'
     }))
@@ -861,31 +846,16 @@ storiesOf('Sidebar Menu', module)
         },
         data() {
             return {
-                menu: [
-                    {
-                        url: '#3',
-                        link_text: 'Link Text',
-                        target: '_self',
-                        icon: ''
-                    },
-                    {
-                        url: '#3',
-                        link_text: 'Link Text Blank target',
-                        target: '_blank',
-                        icon: ''
-                    },
-                    {
-                        url: '#3',
-                        link_text: 'Link Text with Icon',
-                        target: '_self',
-                        icon: 'fas fa-gem'
-                    }
+                links: [
+                    { to: { path: '/#/' }, title: 'Suggesting Features' },
+                    { to: { path: '/#/' }, title: 'Voting and Curating Updates' },
+                    { to: { path: '/#/' }, title: 'MORE ...' }
                 ],
             }
         },
         template: `<div class="row m-0">
                 <div class="col-3 p-4">
-                    <c-sidebar-menu sub_title="This sub title" sub_icon="fas fa-info-circle" :menu="menu" />
+                    <c-sidebar-menu sub_title="This sub title" sub_icon="fas fa-info-circle" :links="links" />
                 </div>
             </div>`
     }))
@@ -896,10 +866,9 @@ storiesOf('Sidebar Menu', module)
         template: `<div class="row m-0">
                 <div class="col-3 p-4">
                     <c-sidebar-menu-link
-                                 url="#333"
-                                 target="_self"
-                                 icon="fas fa-link"
-                                 link_text="Single Link">
+                                 :to="{ path: '/#/' }"
+                                 title="Suggesting Features">
+                                 Suggesting Features
                     </c-sidebar-menu-link>
                 </div>
             </div>`
@@ -927,55 +896,62 @@ storiesOf('Buttons', module)
             }
         },
         template: injectButtonTemplate(`
-            <c-button @click="testFunction">
-                default
-            </c-button>
-            <c-button size="md" @click="testFunction">
-                default
-            </c-button>
-            <c-button size="lg" @click="testFunction">
-                default
-            </c-button>
-        `)
-    }))
-    .add('info', () => ({
-        components: {'c-button': Buttons},
-        template: injectButtonTemplate(`
+            <c-button @click="testFunction">default</c-button>
+            <c-button size="md" @click="testFunction">default</c-button>
+            <c-button size="lg" @click="testFunction">default</c-button>
+            <hr />
             <c-button status="info">info</c-button>
             <c-button status="info" size="md">info</c-button>
             <c-button status="info" size="lg">info</c-button>
-        `)
-    }))
-    .add('success', () => ({
-        components: {'c-button': Buttons},
-        template: injectButtonTemplate(`
+            <hr />
             <c-button status="success">success</c-button>
             <c-button status="success" size="md">success</c-button>
             <c-button status="success" size="lg">success</c-button>
-        `)
-    }))
-    .add('danger', () => ({
-        components: {'c-button': Buttons},
-        template: injectButtonTemplate(`
+            <hr />
             <c-button status="danger">danger</c-button>
             <c-button status="danger" size="md">danger</c-button>
             <c-button status="danger" size="lg">danger</c-button>
-        `)
-    }))
-    .add('share', () => ({
-        components: {'c-button': Buttons},
-        template: injectButtonTemplate(`
+            <hr />
             <c-button status="share">share</c-button>
             <c-button status="share" size="md">share</c-button>
             <c-button status="share" size="lg">share</c-button>
-        `)
-    }))
-    .add('support', () => ({
-        components: {'c-button': Buttons},
-        template: injectButtonTemplate(`
+            <hr />
             <c-button status="support">support</c-button>
             <c-button status="support" size="md">support</c-button>
             <c-button status="support" size="lg">support</c-button>
+        `)
+    }))
+    .add('outline', () => ({
+        components: {'c-button': Buttons},
+        methods: {
+            testFunction: function () {
+                console.log('BOOOOOOOOOOOM!')
+            }
+        },
+        template: injectButtonTemplate(`
+            <c-button status="outline-white">white</c-button>
+            <c-button status="outline-white" size="md">white</c-button>
+            <c-button status="outline-white" size="lg">white</c-button>
+            <hr />
+            <c-button status="outline-info">info</c-button>
+            <c-button status="outline-info" size="md">info</c-button>
+            <c-button status="outline-info" size="lg">info</c-button>
+            <hr />
+            <c-button status="outline-success">success</c-button>
+            <c-button status="outline-success" size="md">success</c-button>
+            <c-button status="outline-success" size="lg">success</c-button>
+            <hr />
+            <c-button status="outline-danger">danger</c-button>
+            <c-button status="outline-danger" size="md">danger</c-button>
+            <c-button status="outline-danger" size="lg">danger</c-button>
+            <hr />
+            <c-button status="outline-share">share</c-button>
+            <c-button status="outline-share" size="md">share</c-button>
+            <c-button status="outline-share" size="lg">share</c-button>
+            <hr />
+            <c-button status="outline-support">support</c-button>
+            <c-button status="outline-support" size="md">support</c-button>
+            <c-button status="outline-support" size="lg">support</c-button>
         `)
     }))
     .add('[options] - swap direction', () => ({

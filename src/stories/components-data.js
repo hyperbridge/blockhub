@@ -201,27 +201,27 @@ export const ActivityChart = {
 export const MilestonesLine = {
     milestones: [
         {
-            "status": "awaiting",
+            "status": "done",
             "text": "m1"
         },
         {
-            "status": "awaiting",
+            "status": "done",
             "text": "m2"
         },
         {
-            "status": "awaiting",
+            "status": "done",
             "text": "m3"
         },
         {
-            "status": "awaiting",
+            "status": "done",
             "text": "m4"
         },
         {
-            "status": "awaiting",
+            "status": "done",
             "text": "m5"
         },
         {
-            "status": "awaiting",
+            "status": "in_progress",
             "text": "m6"
         }
     ]
