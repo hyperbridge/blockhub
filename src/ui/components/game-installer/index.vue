@@ -27,16 +27,16 @@
                     <label>
                         Install
                     </label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <i class="fas fa-folder-open"></i>
+                    <div class="dropdown">
+                        <a class="btn dropdown-toggle" href="#" role="button"
+                           :id="id" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="fas fa-gamepad"></i>
+                            Chose game
+                        </a>
+                        <div class="dropdown-menu" :aria-labelledby="[ id + '_button']">
+                            <slot></slot>
                         </div>
-                        <select class="custom-select">
-                            <option selected>Choose...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
                     </div>
                 </div>
                 <div class="game-installer__select-row">
@@ -91,6 +91,7 @@
         },
         components:{
             'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic'], resolve),
+            'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
         }
     }
 </script>
@@ -147,6 +148,7 @@
         .input-group{
             display: flex;
             align-items: center;
+            width: calc( 100% - 100px );
             margin: 0;
             border: 1px solid rgba(255, 255, 255, .1);
             select{
@@ -164,6 +166,35 @@
                 font-size: 14px;
                 line-height: 30px;
                 display: inline-block;
+            }
+        }
+        .dropdown{
+            display: flex;
+            width: calc( 100% - 100px );
+            border: 1px solid rgba(255, 255, 255, .1);
+            background: rgba(0, 0, 0, .3);
+            .btn{
+                display: flex;
+                align-items: center;
+                color: #fff;
+                padding: 0 10px;
+                width: 100%;
+                line-height: 30px;
+                font-size: 13px;
+                i{
+                    margin-right: 10px;
+                    font-size: 14px;
+                }
+                &:after{
+                    margin-left: auto;
+                }
+            }
+            .dropdown-menu{
+                right: 0;
+                border: 1px solid rgba(255, 255, 255, .1);
+                background: rgba(0, 0, 0, .3);
+                border-radius: 0 0 5px 5px;
+                margin: 0;
             }
         }
     }
