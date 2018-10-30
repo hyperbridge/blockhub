@@ -9,6 +9,9 @@
                 attrs: {
                     ...this.$attrs,
                     ...this.$props
+                },
+                domProps: {
+                    value: this.value
                 }
             });
         },

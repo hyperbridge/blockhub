@@ -24,9 +24,7 @@
     export default {
         name: 'tooltip',
         props: {
-            name: {
-                type: String
-            },
+            name: [String, Number],
             position: {
                 type: String,
                 default: 'left'

@@ -1,6 +1,6 @@
 <template>
     <c-layout navigationKey="meta">
-            <div class="container-fluid">  
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         BlockHub Meta
@@ -9,7 +9,7 @@
                         [ Crowdfund ]
                         [ Product ]
                         <br />
-                        Flagged: 
+                        Flagged:
                         [ Product ]
                         [ Crowdfund ]
                         [ Comment ]
