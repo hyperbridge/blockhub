@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <div class="inline-notification" :class="[ 'type-' + type ]" v-if="show">
+        <div class="inline-notification" :class="[ 'type-' + type, 'size-' + size ]" v-if="show">
             <div class="inline-notification__icon">
                 <i :class="`fas fa-${notif_icon}`"></i>
             </div>
@@ -17,7 +17,7 @@
 <script>
     export default {
         name: 'inline-notification',
-        props:['type'],
+        props:['type', 'size'],
         data() {
             return {
                 show: true
@@ -74,14 +74,18 @@
         &.type-default {
             background: rgba(255, 255, 255, .3)
         }
+        &.size-md{
+            padding: 10px;
+        }
     }
     .inline-notification__icon{
-        width: 40px;
-        font-size: 30px;
+        width: 35px;
+        font-size: 25px;
+        text-align: center;
     }
     .inline-notification__text{
         margin: 0 20px 0 10px;
-        width: 100%;
+        width: calc( 100% - 35px );
         text-align: left;
     }
 </style>
