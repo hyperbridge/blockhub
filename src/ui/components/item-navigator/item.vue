@@ -9,9 +9,7 @@
         @mouseover="hovered = true"
         @mouseout="hovered = false"
     >
-        <!-- <c-icon name="angle-right" v-if="isChildren"/> -->
         <div class="navigator-item__content">
-            <span class="fa fa-angle-right"></span>
             <button
                 v-if="!item.evolvesTo.length && hovered"
                 @click="item.evolvesTo.push({ id: 21, evolvesTo: [] })"
@@ -27,10 +25,12 @@
             >
                 <c-icon name="plus"/>
             </button>
-            <!-- {{ hovered }} hovered -->
+            <c-asset :asset="item.data" class="navigator-item__asset"/>
+            <!-- <span class="fa fa-angle-right"></span>
+            {{ hovered }} hovered
             {{ item.id }}
             {{ isChildren && 'child' }}
-            {{ index }} {{ listLength }} {{ item.evolvesTo.length }}
+            {{ index }} {{ listLength }} {{ item.evolvesTo.length }} -->
         </div>
         <div
             class="navigator-item__sub-navigators"
@@ -54,11 +54,18 @@
 
     export default {
         name: 'navigator-item',
+        components: {
+            'c-asset': (resolve) => require(['@/ui/components/assets-grid-inventory'], resolve),
+        },
         props: {
             item: Object,
             isChildren: Boolean,
             index: Number,
-            listLength: Number
+            listLength: Number,
+            useComp: {
+                type: String,
+                default: 'c-asset'
+            }
         },
         mixins: [debouncer],
         data() {
@@ -119,13 +126,18 @@
     .navigator-item__content {
         width: 70px;
         height: 70px;
-        background: red;
+        // background: red;
         margin: 30px;
         position: relative;
         &:hover {
             .navigator-item__btn {
                 display: block;
             }
+        }
+        .navigator-item__asset {
+            position: relative;
+            z-index: 100;
+            height: 100%;
         }
     }
     .navigator-item__btn {
