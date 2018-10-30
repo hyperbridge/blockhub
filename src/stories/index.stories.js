@@ -3966,11 +3966,47 @@ storiesOf('Game Installer Modal', module)
         components:{
             'c-game-installer': GameInstallerModal
         },
+        data(){
+            return{
+                img: 'https://static.adweek.com/adweek.com-prod/wp-content/uploads/sites/2/2015/05/Earthcore.png',
+                mac: true,
+                win: true,
+                linux: true,
+                name: 'Shuttered',
+                filesList:[
+                    {
+                        platform: 'mac',
+                        size: 1034532,
+                        src: '#'
+                    },
+                    {
+                        platform: 'win',
+                        size: 1943258,
+                        src: '#'
+                    },
+                    {
+                        platform: 'linux',
+                        size: 923453,
+                        src: '#'
+                    }
+                ]
+            }
+        },
         template: `
         <div class="row p-5">
             <div class="col-5">
-                <c-game-installer :activated="true">
-                    
+                <c-game-installer 
+                :activated="true" 
+                :win="win"
+                :mac="mac"
+                :linux="linux"
+                :name="name"
+                :img="img"
+                :filesList="filesList"
+                >
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vulputate
+                    et tellus ac scelerisque. Duis vel suscipit orci, vel tristique elit.
+                    Praesent sollicitudin volutpat finibus.
                 </c-game-installer>
             </div>
         </div>
