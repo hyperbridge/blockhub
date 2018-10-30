@@ -17,7 +17,13 @@
 <script>
     export default {
         name: 'inline-notification',
-        props:['type', 'size'],
+        props:{
+            type:{
+                type: String,
+                default: 'default'
+            },
+            size: String
+        },
         data() {
             return {
                 show: true
@@ -72,7 +78,8 @@
             background: #43C981;
         }
         &.type-default {
-            background: rgba(255, 255, 255, .3)
+            background: rgba(255, 255, 255, .3);
+            color: #f0f0f0;
         }
         &.size-md{
             padding: 10px;

@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    name: 'project-card',
+    name: 'c-project-card',
     components: {
         'c-money-info': (resolve) => require(['@/ui/components/money-info'], resolve),
     },

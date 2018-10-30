@@ -86,6 +86,7 @@ storiesOf('Assets Importer', module)
     }))
 
 import Notification from '../ui/components/notification'
+import NotificationInline from '../ui/components/notification/inline'
 
 storiesOf('Notifications', module)
     .add('default', () => ({
@@ -156,22 +157,136 @@ storiesOf('Notifications', module)
             </div>
         `
     }))
+    .add('inline', () => ({
+        components: {
+            'c-notification-inline': NotificationInline
+        },
+        data() {
+            return {
+                notif: {
+                    type: 'info',
+                    title: 'Info message',
+                    text: 'Something is changed in our policy, please view this notification.Click to view full',
+                    actionOnClose: false,
+                    actionOnTextClick: true
+                },
+                notifs: [
+                    {
+                        type: 'info',
+                        title: 'Info message',
+                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        showCloseBtn: true,
+                        actionOnClose: false,
+                        actionOnTextClick: true
+                    },
+                    {
+                        type: 'warning',
+                        title: 'Warning message',
+                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        showCloseBtn: false,
+                        actionOnClose: '',
+                        actionOnTextClick: ''
+                    },
+                    {
+                        type: 'danger',
+                        title: 'Danger message',
+                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        showCloseBtn: true,
+                        actionOnClose: '',
+                        actionOnTextClick: ''
+                    },
+                    {
+                        type: 'success',
+                        title: 'Success message',
+                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        showCloseBtn: true,
+                        actionOnClose: '',
+                        actionOnTextClick: ''
+                    },
+                    {
+                        title: 'Other message',
+                        text: 'Something is changed in our policy, please view this notification.Click to view full',
+                        showCloseBtn: true,
+                        actionOnClose: '',
+                        actionOnTextClick: ''
+                    }
+                ]
+            }
+        },
+        template: `
+            <div class="row m-0">
+                <div class="col-4 pt-3 text-white">
+                    Single:
+                    <c-notification-inline :notification="notif">
+                        {{ notif.text }}
+                    </c-notification-inline>
+                    <hr />
+                    Single medium:
+                    <c-notification-inline :notification="notif" size="md">
+                        {{ notif.text }}
+                    </c-notification-inline>
+                    <hr />
+                    Multiple:
+                    <c-notification-inline v-for="(notif, index) in notifs" :key="index" class="my-3" :notification="notif" :type="notif.type">
+                        {{ notif.text }}
+                    </c-notification-inline>
+                </div>
+            </div>
+        `
+    }))
 
 import Searcher from '../ui/components/searcher';
 
 storiesOf('Searcher', module)
     .add('default', () => ({
-        components: {Searcher},
-        template: `<searcher />`
+        components: {
+            'c-searcher': Searcher
+        },
+        template: `<div class="p-5 col-4">
+                <c-searcher />
+            </div>`
     }))
 
 import RatingStars from '../ui/components/rating-stars';
+import RatingBlock from '../ui/components/rating-block/index'
 
 storiesOf('Rating', module)
     .add('Stars', () => ({
-        components: {RatingStars},
-        template: '<rating-stars :number="3.5"/>'
-    }));
+        components: {
+            'c-rating-stars' : RatingStars
+        },
+        template: '<div class="text-white p-5"><c-rating-stars :number="3.5"/></div>'
+    }))
+    .add('Rating Block', () => ({
+        components: {
+            'c-rating-block': RatingBlock
+        },
+        data() {
+            return {
+                items: [
+                    {
+                        name: 'Some title',
+                        number: 4
+                    },
+                    {
+                        name: 'Some second title',
+                        number: 3.6
+                    },
+                    {
+                        name: 'Some third a little bit bigger title',
+                        number: 5
+                    }
+                ]
+            }
+        },
+        template: `
+        <div class="row p-5">
+            <div class="col-8">
+                <c-rating-block :items="items" fullReviewsLink="#3" rateGameLink="#4" />
+            </div>
+        </div>
+        `
+    }))
 
 import Author from '../ui/components/author';
 
@@ -186,7 +301,7 @@ storiesOf('Author', module)
                 }
             }
         },
-        template: `<author :author="author"/>`
+        template: `<div class="text-white p-5"><author :author="author"/></div>`
     }))
 
 import Tags from '../ui/components/tags';
@@ -194,22 +309,24 @@ import Tags from '../ui/components/tags';
 storiesOf('Tags', module)
     .add('Tags', () => ({
         components: {Tags},
-        template: `<tags :tags="['RPG', 'Open-World']"/>`
+        template: `<div class="text-white p-5"><tags :tags="['RPG', 'Open-World']"/></div>`
     }))
 
-import LoadingBar from '../ui/components/loading-bar';
-import LoadingLogo from '../ui/components/loading-bar/logo-loader';
+import LoadingLine from '../ui/components/loading-bar';
+import LoadingCircle from '../ui/components/loading-bar/circle';
 
 storiesOf('LoadingBar', module)
-    .add('LoadingBar', () => ({
-        components: {LoadingBar},
-        template: `<loading-bar/>`
-    }))
-    .add('LoadingLogo', () => ({
+    .add('line', () => ({
         components: {
-            'c-loading-logo': LoadingLogo
+            'c-loading-bar': LoadingLine
         },
-        template: `<div class="p-5" style="width:300px;background: #fff"><c-loading-logo :isLoading="true"/></div>`
+        template: `<c-loading-bar/>`
+    }))
+    .add('circle', () => ({
+        components: {
+            'c-loading-bar-circle': LoadingCircle
+        },
+        template: `<div class="position-relative" style="width: 300px; height: 300px"><c-loading-bar-circle /></div>`
     }))
 
 
@@ -250,10 +367,15 @@ storiesOf('Navigation', module)
 
 
 import Card from '../ui/components/project/card';
+import Badges from '../ui/components/project/badges';
+import Milestone from '../ui/components/project/milestone';
+import UpdatesCount from '../ui/components/project/updates-count';
 
 storiesOf('Projects', module)
     .add('card', () => ({
-        components: {Card},
+        components: {
+            'c-project-card' : Card
+        },
         data() {
             return {
                 projects: [
@@ -317,15 +439,117 @@ storiesOf('Projects', module)
             }
         },
         template: `
-            <div class="col-4">
-                <card
-                    v-for="(project, index) in projects"
-                    :key="index"
-                    :project="project"
-                />
-            </div>
+                <div class="row">
+                    <div class="col-4" v-for="(project, index) in projects" :key="index">
+                        <c-project-card
+                            :image="project.game.img"
+                            :description="project.description"
+                            :funds="project.funds"
+                            :parentImage="project.game.img"
+                            :parentName="project.game.title"
+                            :parentDeveloper="project.game.developer"
+                            :id="project"
+                            customClass="project"
+                        />
+                    </div>
+                </div>
         `
     }))
+    .add('badges', () => ({
+        components:{
+            'c-badges' : Badges
+        },
+        template: `<c-badges :icons="['trophy','gem']" />`
+    }))
+    .add('milestone', () => ({
+        components:{
+            'c-milestone' : Milestone
+        },
+        data(){
+            return{
+                milestones:[
+                    {
+                        "id": 1,
+                        "title": "Create the base game with 2 dungeons",
+                        "short_description": "Maecenas faucibus tincidunt consectetur. Phasellus ac malesuada quam, vitae vulputate quam. Nulla dui ipsum, suscipit sed laoreet auctor, sagittis et mauris.",
+                        "text": "Aenean eu tellus vel tortor tincidunt pharetra. Aenean mattis, sapien vel lacinia accumsan, justo mi venenatis justo, ut accumsan diam mauris sit amet ipsum. Vivamus iaculis lectus vel egestas vehicula. Phasellus in lacus nunc. Curabitur lobortis arcu neque, non rutrum elit placerat eget.",
+                        "img": "http://via.placeholder.com/350x250",
+                        "status": "done",
+                        "step_number": 1,
+                        "progress":{
+                            "percent_days": 45,
+                            "days_left": 97,
+                            "percent_done": 17,
+                            "percent_spent": 83
+                        }
+                    },
+                    {
+                        "id": 3,
+                        "title": "Lorem ipsum dolor sit amet",
+                        "short_description": "Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
+                        "text": "Proin sollicitudin faucibus mauris non pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce efficitur imperdiet urna, mollis vulputate risus feugiat sit amet. Ut turpis nulla, ultricies a ultricies eget, bibendum eu orci. In in suscipit nisl. Sed bibendum, mauris a convallis rhoncus, enim libero condimentum enim, in ultrices ligula orci ac nisl. Nunc vestibulum purus vitae lorem porta, eget aliquam nibh rhoncus.",
+                        "img": "http://via.placeholder.com/350x250",
+                        "status": "done",
+                        "step_number": 3,
+                        "progress":{
+                            "percent_days": 34,
+                            "days_left": 125,
+                            "percent_done": 3,
+                            "percent_spent": 80
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "title": "Praesent eu fringilla nisl",
+                        "short_description": "Aenean aliquam erat quis tortor varius convallis. Suspendisse finibus orci at nibh pharetra, vel ullamcorper tellus mattis.",
+                        "text": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac, sollicitudin lacinia arcu. Phasellus vehicula arcu tristique nunc lacinia facilisis. Nunc egestas congue massa a euismod. Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
+                        "img": "http://via.placeholder.com/350x250",
+                        "status": "in_progress",
+                        "step_number": 2,
+                        "progress":{
+                            "percent_days": 91,
+                            "days_left": 4,
+                            "percent_done": 97,
+                            "percent_spent": 99
+                        }
+                    },
+                    {
+                        "id": 4,
+                        "title": "In hac habitasse platea dictumst",
+                        "short_description": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac",
+                        "text": "Praesent eu fringilla nisl. Nullam iaculis odio non est ornare sodales non a massa. Sed sollicitudin nibh et ipsum sollicitudin blandit. Quisque vel enim congue, semper leo vitae, luctus nibh.",
+                        "img": "http://via.placeholder.com/350x250",
+                        "status": "in_progress",
+                        "step_number": 4,
+                        "progress":{
+                            "percent_days": 85,
+                            "days_left": 45,
+                            "percent_done": 37,
+                            "percent_spent": 84
+                        }
+                    }
+                ]
+            }
+        },
+        template: `<div class="row">
+                <c-milestone
+                                    v-for="(milestone, index) in milestones"
+                                    :key="index"
+                                    :milestone="milestone"
+                                />
+            </div>`
+    }))
+    .add('updates-count', () => ({
+        components:{
+            'c-updates-count' : UpdatesCount
+        },
+        template: `<div class="p-5">
+                    <c-updates-count>
+                        5
+                    </c-updates-count>
+                </div>`
+    }))
+
 
 import Tabs from '../ui/components/tab/tabs.vue'
 import Tab from '../ui/components/tab/tab.vue'
@@ -2081,42 +2305,6 @@ storiesOf('Project Card', module)
             </div>
         `
     }))
-
-
-import RatingBlock from '../ui/components/rating-block/index'
-
-storiesOf('Rating Block', module)
-    .add('default', () => ({
-        components: {
-            'c-rating-block': RatingBlock
-        },
-        data() {
-            return {
-                items: [
-                    {
-                        name: 'Some title',
-                        number: 4
-                    },
-                    {
-                        name: 'Some second title',
-                        number: 3.6
-                    },
-                    {
-                        name: 'Some third a little bit bigger title',
-                        number: 5
-                    }
-                ]
-            }
-        },
-        template: `
-        <div class="row">
-            <div class="col-8">
-                <c-rating-block :items="items" fullReviewsLink="#3" rateGameLink="#4" />
-            </div>
-        </div>
-        `
-    }))
-
 
 import SendingFundsPopup from '../ui/components/send-funds-popup/index'
 
