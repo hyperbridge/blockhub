@@ -38,6 +38,15 @@
             </div>
         </div>
 
+        <div class="game-installer__buttons-wrapper">
+            <button type="button" class="game-installer__button">
+                Cancel
+            </button>
+            <button type="button" class="game-installer__button--install">
+                <c-icon name="hdd"/>
+                <span>Install</span>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -114,6 +123,29 @@
     .game-installer__opt-wrapper {
         display: flex;
         align-items: center;
+    }
+
+    .game-installer__buttons-wrapper {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 40px;
+    }
+    .game-installer__button {
+        padding: 7px 20px;
+        border-radius: 4px;
+        border: 1px solid #8c92ff;
+        border-top-width: 2px;
+        background: linear-gradient(-115deg,#30336b, #130f40);
+        color: #fff;
+        cursor: pointer;
+        text-shadow: 2px 2px 0px rgba(1,1,1,.4);
+    }
+    .game-installer__button--install {
+        @extend .game-installer__button;
+        box-shadow: 0 0 30px 0 rgba(140, 146, 255, .45);
+        .fas {
+            margin-right: 5px;
+        }
     }
 </style>
 
