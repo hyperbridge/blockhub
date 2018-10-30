@@ -75,8 +75,12 @@ export default {
         background: rgba(1,1,1,.1);
         border-radius: 4px;
         width: 100%;
-        height: 600px;
+        // height: 600px;
         display: flex;
+        overflow: hidden;
+        overflow: auto;
+        cursor: move;
+        margin-bottom: 100px;
     }
     .item-navigator__row {
 

@@ -14,6 +14,7 @@
             <span class="fa fa-angle-right"></span>
             <button
                 v-if="!item.evolvesTo.length && hovered"
+                @click="item.evolvesTo.push({ id: 21, evolvesTo: [] })"
                 class="navigator-item__btn navigator-item__btn--right"
             >
                 <c-icon name="plus"/>
@@ -21,6 +22,7 @@
 
             <button
                 v-if="index === listLength - 1 && hovered"
+                @click="$emit('evolveDown')"
                 class="navigator-item__btn navigator-item__btn--bottom"
             >
                 <c-icon name="plus"/>
@@ -41,6 +43,7 @@
                 :item="subItem"
                 :isChildren="true"
                 :listLength="item.evolvesTo.length"
+                @evolveDown="item.evolvesTo.push({ id: 21, evolvesTo: [] })"
             />
         </div>
     </div>
@@ -191,6 +194,10 @@
     }
 
     .navigator-item--first-row {
+        .sub-navigators__line {
+            height: calc(100% - 130px);
+            // height: calc(100% + #{$margin + 20});
+        }
         &:before, &:after {
             display: none;
         }
