@@ -6,10 +6,26 @@
             'navigator-item--first': index === 0,
             'navigator-item--last': index === listLength - 1
         }"
+        @mouseover="hovered = true"
+        @mouseout="hovered = false"
     >
         <!-- <c-icon name="angle-right" v-if="isChildren"/> -->
         <div class="navigator-item__content">
             <span class="fa fa-angle-right"></span>
+            <button
+                v-if="!item.evolvesTo.length && hovered"
+                class="navigator-item__btn navigator-item__btn--right"
+            >
+                <c-icon name="plus"/>
+            </button>
+
+            <button
+                v-if="index === listLength - 1 && hovered"
+                class="navigator-item__btn navigator-item__btn--bottom"
+            >
+                <c-icon name="plus"/>
+            </button>
+            <!-- {{ hovered }} hovered -->
             {{ item.id }}
             {{ isChildren && 'child' }}
             {{ index }} {{ listLength }} {{ item.evolvesTo.length }}
@@ -31,6 +47,8 @@
 </template>
 
 <script>
+    import { debouncer } from '@/mixins';
+
     export default {
         name: 'navigator-item',
         props: {
@@ -38,6 +56,17 @@
             isChildren: Boolean,
             index: Number,
             listLength: Number
+        },
+        mixins: [debouncer],
+        data() {
+            return {
+                hovered: false
+            }
+        },
+        methods: {
+            handleHover(status) {
+                this.debounce(() => { this.hovered = true }, 50);
+            }
         }
     }
 </script>
@@ -83,32 +112,53 @@
             @extend %line-style !optional;
         }
 
-
-        // &:before {
-        //     content: "";
-        //     position: absolute;
-        //     width: 2px;
-        //     background: yellow;
-        //     height: 100%;
-        //     left: 30px + 70px/2;
-        //     z-index: -1;
-        // }
-
-        // &.navigator-item--first:before {
-        //     height: 70px;
-        //     bottom: 0;
-        // }
-
-        // &.navigator-item--last:before {
-        //     height: 70px;
-        // }
-
     }
     .navigator-item__content {
         width: 70px;
         height: 70px;
         background: red;
         margin: 30px;
+        position: relative;
+        &:hover {
+            .navigator-item__btn {
+                display: block;
+            }
+        }
+    }
+    .navigator-item__btn {
+        $btn-size: 35px;
+        position: absolute;
+        border: 2px dotted #fff;
+        width: $btn-size;
+        height: $btn-size;
+        background: rgba(255,255,255,.2);
+        border-radius: 50%;
+        color: #fff;
+        cursor: pointer;
+        // display: none;
+        animation: pop-in .2s ease;
+        &--right {
+            right: -$btn-size - 5px;
+            top: calc(50% - #{$btn-size/2});
+        }
+        &--bottom {
+            bottom: -$btn-size - 5px;
+            left: calc(50% - #{$btn-size/2});
+        }
+        @keyframes pop-in {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            60% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
     }
     .navigator-item__sub-navigators {
         position: relative;
