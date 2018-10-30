@@ -51,7 +51,11 @@
 
 
         <div class="game-installer__buttons-wrapper">
-            <button type="button" class="game-installer__button">
+            <button
+                @click="$emit('cancel')"
+                type="button"
+                class="game-installer__button"
+            >
                 Cancel
             </button>
             <button
@@ -69,7 +73,9 @@
 <script>
     export default {
         name: 'game-installer',
-        props: ['product'],
+        props: {
+            product: Object
+        },
         components: {
             'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-3'], resolve),
             'c-list': (resolve) => require(['@/ui/components/list'], resolve),

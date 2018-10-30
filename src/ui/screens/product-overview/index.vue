@@ -42,6 +42,7 @@
                 :inWishlist="!!wishlist[product.id]"
                 @addToWishlist="addToWishlist"
             />
+            <c-button icon_hide @click="showInstaller = !showInstaller">Open installer</c-button>
 
             <c-rating-block class="margin-bottom-20" :items="product.rating"
                             :parent_url="`/#/product/${product.id}`"/>
@@ -97,8 +98,16 @@
                 </div>
             </div>
         </div>
-        <c-modal :title="product.name" @close="showInstaller = false">
-            <c-game-installer slot="body" :product="product"/>
+        <c-modal
+            v-if="showInstaller"
+            :title="product.name"
+            @close="showInstaller = false"
+        >
+            <c-game-installer
+                slot="body"
+                :product="product"
+                @cancel="showInstaller = false"
+            />
         </c-modal>
     </div>
 </template>
