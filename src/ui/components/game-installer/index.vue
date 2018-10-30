@@ -16,12 +16,28 @@
                 />
             </div>
         </div>
-        <input
-            class="game-installer__file-dest"
-            v-model="location"
-            type="text"
-            readonly
-        />
+
+        <div class="game-installer__opt-wrapper">
+            <span class="game-installer__opt-title">
+                Location:
+            </span>
+            <div class="game-installer__input-wrapper">
+                <input
+                    class="game-installer__file-dest"
+                    type="text"
+                    list="saved-paths"
+                    v-model="location"
+                />
+                <c-dropdown>
+                    <c-list :items="savedLocations" @click="location = $event">
+                        <span slot-scope="props">
+                            {{ props.item }}
+                        </span>
+                    </c-list>
+                </c-dropdown>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -29,9 +45,14 @@
     export default {
         name: 'game-installer',
         props: ['product'],
+        components: {
+            'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-3'], resolve),
+            'c-list': (resolve) => require(['@/ui/components/list'], resolve),
+        },
         data() {
             return {
-                location: '/home/leafo/.config/itch/apps'
+                location: '/home/leafo/.config/itch/apps',
+                savedLocations: ['ww', 'aa']
             }
         },
         methods: {
@@ -59,7 +80,7 @@
         margin-bottom: 20px;
     }
     .game-installer__image {
-        width: 150px;
+        width: 160px;
         max-height: 170px;
         object-fit: cover;
         background-position: 0 0;
@@ -72,6 +93,27 @@
     }
     .game-installer__file-dest {
         width: 80%;
+        padding: 7px 7px 7px 37px;
+        background: url("../../../assets/SVG/folder-open-regular.svg") 7px center no-repeat;
+        background-size: 20px;
+        border-style: none;
+    }
+
+    .game-installer__input-wrapper {
+        display: flex;
+        align-items: center;
+        background-color: #28283B;
+        padding: 4px;
+        justify-content: space-between;
+        border: 1px solid rgba(255,255,255,.2);
+        width: 100%;
+    }
+    .game-installer__opt-title {
+        margin-right: 30px;
+    }
+    .game-installer__opt-wrapper {
+        display: flex;
+        align-items: center;
     }
 </style>
 
