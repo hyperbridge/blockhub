@@ -25,6 +25,7 @@
                     v-for="(item, index) in navigator"
                     :key="index"
                     :item="item"
+                    :listLength="item.evolvesTo.length"
                 />
             </div>
 
@@ -56,6 +57,7 @@ export default {
                         { id: 7, evolvesTo: [] },
                         { id: 8, evolvesTo: [] },
                         { id: 9, evolvesTo: [] },
+
                     ]},
                     { id: 4, evolvesTo: [
                         { id: 5, evolvesTo: [] },
