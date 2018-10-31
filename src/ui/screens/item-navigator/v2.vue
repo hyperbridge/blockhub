@@ -23,7 +23,7 @@
             <div class="item-navigator">
                 <!-- COMP REQUIRES GLOBAL EVENT BUS -->
                 <c-navigator-item
-                    v-for="(item, index) in navigator"
+                    v-for="(item, index) in deeplyNestedNav"
                     :key="index"
                     :item="item"
                     :listLength="item.evolvesTo.length"
@@ -69,41 +69,23 @@
                     ]}
                 ],
                 nav: {
-                    1: { id: 1, assetId: 1, evolvesTo: [1, 2], isRoot: true },
-                    2: { id: 2, assetId: 2, evolvesTo: [3, 3]},
-                    3: { id: 3, assetId: 3, evolvesTo: [4, 4]},
-                    4: { id: 4, assetId: 4, evolvesTo: [5, 5]},
-                    5: { id: 5, assetId: 5, evolvesTo: [1, 7]},
-                    6: { id: 6, assetId: 6, evolvesTo: [5, 1]},
-                    7: { id: 7, assetId: 7, evolvesTo: [4, 2]}
-                }
+                    1: { id: 1, assetId: 1, evolvesTo: [2, 3], isRoot: true },
+                    2: { id: 2, assetId: 2, evolvesTo: [4]},
+                    3: { id: 3, assetId: 3, evolvesTo: []},
+                    4: { id: 4, assetId: 4, evolvesTo: []},
+                    5: { id: 5, assetId: 5, evolvesTo: []},
+                    6: { id: 6, assetId: 6, evolvesTo: []},
+                    7: { id: 7, assetId: 7, evolvesTo: []}
+                },
+                activeId: null
             }
         },
         computed: {
-            populated() {
-                const { navigator } = this;
-                const populated = [];
-
-                const recursiveMap = items => {
-                    items.map(item => {
-                        if (item.evolvesTo.length) {
-                        recurMap(item.evolvesTo)
-                        }
-                        console.log('CALLED')
-
-                        stack++;
-                        return { ...item, what: item.id };
-                    });
-                };
-
-                return populated;
+            assets() {
+                return this.$store.state.assets.assets;
             },
-            navp() {
-                const { nav } = this;
-                return Object.values(nav).reduce((pop))
-            },
-            populate() {
-                const { nav } = this;
+            deeplyNestedNav() {
+                const { nav, assets } = this;
                 const deepCopy = Object.values(nav).reduce((populated, row) => {
                     const shallowCopy = { ...row };
                     for (let key in shallowCopy) {
@@ -113,7 +95,10 @@
                         }
                     }
 
-                    return { ...populated, [row.id]: shallowCopy };
+                    return { ...populated, [row.id]: {
+                        ...shallowCopy,
+                        asset: assets[shallowCopy.assetId]
+                    }};
                 }, {});
 
                 const deepCopyArray = Object.values(deepCopy);
@@ -128,7 +113,8 @@
         mounted() {
             EventBus.$on('evolve', e => {
                 console.log(e)
-            })
+                // this.nav[e.id].evolvesTo.push(7);
+            });
         },
         beforeDestroy() {
             EventBus.$off('evolve');

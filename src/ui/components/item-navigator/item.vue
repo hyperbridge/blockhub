@@ -21,12 +21,12 @@
 
             <button
                 v-if="index === listLength - 1 && hovered"
-                @click="$emit('evolveDown'); handleClick"
+                @click="clickDown(parentId)"
                 class="navigator-item__btn navigator-item__btn--bottom"
             >
                 <c-icon name="plus"/>
             </button>
-            <c-asset :asset="assets[item.id] || {}" class="navigator-item__asset"/>
+            <c-asset :asset="item.asset" class="navigator-item__asset"/>
             <!-- <span class="fa fa-angle-right"></span>
             {{ hovered }} hovered
             {{ item.id }}
@@ -44,8 +44,9 @@
                 :item="subItem"
                 :isChildren="true"
                 :listLength="item.evolvesTo.length"
-                @evolveDown="item.evolvesTo.push({ id: 5, evolvesTo: [] })"
+                :parentId="item.id"
             />
+            <!-- @evolveDown="item.evolvesTo.push({ id: 5, evolvesTo: [] })" -->
         </div>
     </div>
 </template>
@@ -67,7 +68,8 @@
             useComp: {
                 type: String,
                 default: 'c-asset'
-            }
+            },
+            parentId: [Number, String]
         },
         mixins: [debouncer],
         data() {
@@ -81,7 +83,10 @@
             },
             handleClick() {
                 const { id } = this.item;
-                EventBus.$emit('evolve', { id });
+                EventBus.$emit('evolve', this.item);
+            },
+            clickDown(id) {
+                EventBus.$emit('evolve', { id })
             }
         },
         computed: {
