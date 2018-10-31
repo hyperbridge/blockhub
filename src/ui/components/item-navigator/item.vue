@@ -15,7 +15,6 @@
                 @click="handleClick(item.id)"
                 class="navigator-item__btn navigator-item__btn--right"
             >
-            <!-- item.evolvesTo.push({ id: 12, evolvesTo: [] });  -->
                 <c-icon name="plus"/>
             </button>
 
@@ -26,16 +25,16 @@
             >
                 <c-icon name="plus"/>
             </button>
+            <!-- {{ item.id }} -->
             <c-asset :asset="item.asset" class="navigator-item__asset"/>
-            <!-- <span class="fa fa-angle-right"></span>
-            {{ hovered }} hovered
-            {{ item.id }}
-            {{ isChildren && 'child' }}
-            {{ index }} {{ listLength }} {{ item.evolvesTo.length }} -->
         </div>
         <div
             class="navigator-item__sub-navigators"
-            :class="{ 'sub-navigators__line': item.evolvesTo.length }"
+            :class="{
+                'sub-navigators__line': item.evolvesTo.length,
+                'first-line': index === 0,
+                'hide-line': item.evolvesTo.length < 2
+            }"
         >
             <navigator-item
                 v-for="(subItem, index) in item.evolvesTo"
@@ -45,8 +44,8 @@
                 :isChildren="true"
                 :listLength="item.evolvesTo.length"
                 :parentId="item.id"
+                :parentItem="item"
             />
-            <!-- @evolveDown="item.evolvesTo.push({ id: 5, evolvesTo: [] })" -->
         </div>
     </div>
 </template>
@@ -69,7 +68,8 @@
                 type: String,
                 default: 'c-asset'
             },
-            parentId: [Number, String]
+            parentId: [Number, String],
+            parentItem: Object
         },
         mixins: [debouncer],
         data() {
@@ -107,6 +107,14 @@
     $margin: 30px;
     $size: 70px;
     $center: $margin + $size/2;
+
+    .first-line {
+        height: 100% !important;
+    }
+
+    .hide-line:before {
+        display: none !important;
+    }
 
     .navigator-item {
         display: flex;

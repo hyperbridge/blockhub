@@ -25,6 +25,7 @@
                 <c-navigator-item
                     v-for="(item, index) in deeplyNestedNav"
                     :key="index"
+                    :index="index"
                     :item="item"
                     :listLength="item.evolvesTo.length"
                 />
@@ -42,8 +43,6 @@
                     slot="body"
                 />
             </c-modal>
-
-            <pre>{{ navigator }}</pre>
 
         </div>
     </div>
@@ -85,6 +84,7 @@
         methods: {
             evolveNavigator(assetId) {
                 this.$store.dispatch('assets/evolveNavigator', { evolveId: this.activeId, assetId });
+                this.activeId = null;
             }
         },
         computed: {
@@ -124,12 +124,7 @@
             }
         },
         mounted() {
-            EventBus.$on('evolve', e => {
-                this.activeId = e;
-
-                console.log(e)
-                // this.nav[e.id].evolvesTo.push(7);
-            });
+            EventBus.$on('evolve', id => this.activeId = id);
         },
         beforeDestroy() {
             EventBus.$off('evolve');
@@ -146,8 +141,9 @@
         display: flex;
         overflow: hidden;
         overflow: auto;
-        cursor: move;
+        // cursor: move;
         margin-bottom: 100px;
+        padding: 0 100px 100px 0;
     }
     .item-navigator__row {
     }
