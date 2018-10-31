@@ -50,6 +50,7 @@ export default {
         &.progress-bar-horizontal {
             min-height: 7px;
             height: 100%;
+            width: 100%;
         }
         &.progress-bar-vertical {
             width: 7px;

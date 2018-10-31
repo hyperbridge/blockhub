@@ -21,7 +21,9 @@
                                     <span>usd</span>
                                 </div>
                             </div>
-                            <c-button status="success">Proceed to Purchase</c-button>
+                            <c-button status="success">
+                                Proceed to Purchase
+                            </c-button>
                         </div>
                     </div>
                 </div>

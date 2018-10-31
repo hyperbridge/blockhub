@@ -198,6 +198,28 @@ export const ActivityChart = {
     ],
 }
 
+export const GameSeries = {
+    game: {
+        "id": 1,
+        "price": "32.00",
+        "expires": "2020-01-20 09:21:02 -02:00",
+        "images": [
+            "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/med-tile.jpg",
+            "https://cdn.hyperbridge.org/blockhub/images/products/capsized-5004/med-tile.jpg",
+            "https://cdn.hyperbridge.org/blockhub/images/products/doom-20087/med-tile.jpg",
+            "https://cdn.hyperbridge.org/blockhub/images/products/a-game-of-thrones---genesis-4221/med-tile.jpg"
+        ],
+        "title": "Dragon Age: Ultimate Edition + Dragon Age: Full Series Collection",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra gravida odio eget consectetur. Vestibulum mattis ut dui sit amet maximus. Cras nec enim auctor, eleifend urna congue",
+        "tags": [
+            "RPG",
+            "ACTION",
+            "FULL Series"
+        ],
+        "products": [1, 2, 3, 4, 5, 6]
+    }
+}
+
 export const MilestonesLine = {
     milestones: [
         {
@@ -331,7 +353,7 @@ export const SendingFunds = {
             <div class="col-8">
                 <c-button @click="showModalHandler" status="warning" c_class="ml-1">Show Sending Funds Modal</c-button>
 
-                <c-send-funds :modalActive="modalActive">
+                <c-send-funds :activated="modalActive" @close="modalActive">
                     <template slot="agreement_text">
                         <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span>
                             </h1>

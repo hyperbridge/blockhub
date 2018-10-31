@@ -2520,24 +2520,34 @@ storiesOf('News List', module)
         data() {
             return {
                 article: {
-                    heading: 'New class and event coming next week!',
-                    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
-                    url: 'article-url',
-                    date: '2018-07-24T04:09:00.000Z'
-                }
+                    "id": 1,
+                    "target_type": "product",
+                    "target_id": 1,
+                    "system_tags": [
+                        "news"
+                    ],
+                    "heading": "New class and event coming next week!",
+                    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
+                    "url": "/#/post/1",
+                    "date": "2018-07-24T04:09:00.000Z"
+                },
             }
         },
         template: `
             <div class="row">
                 <div class="col-6">
-                    <c-news-article :article="article" itemInRow="1" />
+                    <c-news-article 
+                    :heading="article.heading"
+                    :date="article.date"
+                    :content="article.content"
+                    :url="article.url"
+                    itemInRow="1" />
                 </div>
             </div>
         `
     }))
 
 import Pagination from '@/ui/components/pagination/index';
-
 storiesOf('Pagination', module)
     .add('default', () => ({
         components: {
@@ -2574,7 +2584,6 @@ storiesOf('Pagination', module)
 import ProductCommunity from '@/ui/components/community/post-item';
 import ProductCommunityComment from '@/ui/components/community/comment';
 import ProductCommunityReply from '@/ui/components/community/reply';
-
 storiesOf('Product Community', module)
     .add('post', () => ({
         components: {
@@ -2613,7 +2622,6 @@ storiesOf('Product Community', module)
 
 
 import ProjectCard from '../ui/components/project/card'
-
 storiesOf('Project Card', module)
     .add('default', () => ({
         components: {
@@ -2634,7 +2642,8 @@ storiesOf('Project Card', module)
                             currency: 'USD',
                             obtained: 2834,
                             goal: 5000
-                        }
+                        },
+                        id: 1
                     },
                     {
                         game: {
@@ -2648,7 +2657,8 @@ storiesOf('Project Card', module)
                             currency: 'GBP',
                             obtained: 7613,
                             goal: 8500
-                        }
+                        },
+                        id: 9
                     },
                     {
                         game: {
@@ -2662,7 +2672,8 @@ storiesOf('Project Card', module)
                             currency: 'USD',
                             obtained: 2834,
                             goal: 5000
-                        }
+                        },
+                        id: 4
                     },
                     {
                         game: {
@@ -2676,25 +2687,31 @@ storiesOf('Project Card', module)
                             currency: 'USD',
                             obtained: 2834,
                             goal: 5000
-                        }
+                        },
+                        id: 3
                     },
                 ]
             }
         },
         template: `
             <div class="row m-0 p-5">
-                <div class="col-10">
-                    <c-project-card v-for="(project, index) in trending_projects"
-                                    :key="index"
-                                    :project="project"
+                <div class="col-4" v-for="(project, index) in trending_projects" :key="index">
+                    <c-project-card 
+                                    :image="project.img"
+                                    :description="project.description"
+                                    :funds="project.funds"
+                                    :parentImage="project.game.img"
+                                    :parentName="project.game.title"
+                                    :parentDeveloper="project.game.developer"
+                                    :id="id"
                                     customClass="margin-bottom-20"/>
                 </div>
             </div>
         `
     }))
 
-import SendingFundsPopup from '../ui/components/send-funds-popup/index'
 
+import SendingFundsPopup from '../ui/components/send-funds-popup/index'
 storiesOf('Sending Funds(not finished)', module)
     .add('default', () => ({
         components: {
@@ -2714,8 +2731,8 @@ storiesOf('Sending Funds(not finished)', module)
         template: data.SendingFunds.template
     }))
 
-import UserCard from '@/ui/components/user-card/index';
 
+import UserCard from '@/ui/components/user-card/index';
 storiesOf('User Card', module)
     .add('default', () => ({
         components: {
@@ -2748,8 +2765,8 @@ storiesOf('User Card', module)
         `
     }))
 
-import ScreenGallery from '../ui/components/screen-gallery/gallery';
 
+import ScreenGallery from '../ui/components/screen-gallery/gallery';
 storiesOf('Gallery', module)
     .add('screen-gallery', () => ({
         components: {ScreenGallery},
@@ -2765,10 +2782,10 @@ storiesOf('Gallery', module)
         template: `<screen-gallery :items="items" class="col-6"/>`
     }))
 
+
 import ProductCardDynamic from '@/ui/components/store/product-card-dynamic';
 import ProductCard from '@/ui/components/store/product-card';
 import ProductsCards from '@/ui/components/store/product-cards';
-
 const productsCardsData = [
     {
         id: "8",
@@ -2855,19 +2872,21 @@ storiesOf('Product Card', module)
         `
     }))
     .add('wrapper', () => ({
-        components: {ProductsCards},
+        components: {
+            'product-cards' : ProductsCards
+        },
         data: () => ({products: productsCardsData}),
         template: `
-            <div>
-                <h1 style="text-align: center;">Hover transitions are enabled only on bigger screens</h1>
+            <div class="p-5">
+                <h1 class="text-center text-white">Hover transitions are enabled only on bigger screens</h1>
                 <product-cards :products="products"/>
             </div>
         `
     }))
 
+
 import CuratorReview from '@/ui/components/store/curator-review';
 import CuratorsReviews from '@/ui/components/store/curator-reviews';
-
 const curatorReview = {
     author: {name: 'SatoSan', img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'},
     rate: 4.5,
@@ -2897,10 +2916,13 @@ storiesOf('Curators Reviews', module)
         template: `<curator-review :review="review" class="col-3"/>`
     }))
     .add('reviews wrapper', () => ({
-        components: {CuratorsReviews},
+        components: {
+            'curator-reviews': CuratorsReviews
+        },
         data: () => ({reviews: [curatorReview, curatorReview, curatorReview]}),
-        template: `<curator-reviews :reviews="reviews" class="col-8"/>`
+        template: `<curator-reviews :reviews="reviews" class="col-12"/>`
     }))
+
 
 import ImagesExplorer from '@/ui/components/images-explorer';
 storiesOf('Images Explorer', module)
@@ -2922,9 +2944,9 @@ storiesOf('Images Explorer', module)
         `
     }))
 
+
 import CollectionItem from '@/ui/components/collection/item';
 import CollectionList from '@/ui/components/collection/list';
-
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 storiesOf('Collection', module)
@@ -3053,18 +3075,14 @@ storiesOf('Collection', module)
         },
         template: `
             <div class="p-5" style="width: 900px">
-                <c-collection-list title="Get Started"
+                <c-collection-list title="Get Started" :collections="items"
                                     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet tellus in neque porttitor consequat."
                                     >
-                    <c-swiper :options="sliderOptions" class="padding-10">
-                        <c-slide v-for="(item, index) in items" :key="index">
-                            <c-collection-item :item="item" />
-                        </c-slide>
-                    </c-swiper>
                 </c-collection-list>
             </div>
         `
     }))
+
 
 import GameSeries from '@/ui/components/game-series/index'
 import GameDescription from '@/ui/components/game-series/game-description'
@@ -3145,7 +3163,10 @@ storiesOf('Game Series', module)
         components:{
             'c-game-description': GameDescription
         },
-        template: `<div class="p-5" style="width: 900px"><c-game-description /></div>`
+        data:() => object('Data', data.GameSeries),
+        template: `<div class="p-5" style="width: 900px">
+            <c-game-description :game="game" />
+        </div>`
     }))
     .add('includes item', () => ({
         components:{
@@ -3153,15 +3174,21 @@ storiesOf('Game Series', module)
         },
         data(){
             return{
-                item:{
-                    img: 'https://pre00.deviantart.net/9d38/th/pre/i/2014/309/a/5/dragon_age__inquisition___movie_poster_by_the4therinyes-d85exws.png',
-                    title: 'Dragon Age: Inquisition',
-                    company: 'BioWare',
-                    stars: 5,
-                }
+                img: 'https://pre00.deviantart.net/9d38/th/pre/i/2014/309/a/5/dragon_age__inquisition___movie_poster_by_the4therinyes-d85exws.png',
+                title: 'Dragon Age: Inquisition',
+                developer: 'BioWare',
+                stars: 5,
             }
         },
-        template: `<div class="p-5" style="width: 900px"><c-game-includes-item :item="item" /></div>`
+        template: `<div class="p-5" style="width: 900px">
+                        <c-game-includes-item 
+                            :id="23"
+                            :name="title"
+                            :rating="stars"
+                            :image="img"
+                            :developer="developer"
+                         />
+                     </div>`
     }))
     .add('includes list', () => ({
         components:{
@@ -3225,6 +3252,7 @@ storiesOf('Game Series', module)
         template: `<div class="p-5" style="width: 900px"><c-game-includes-list :list="list" :showNumber="5" /></div>`
     }))
 
+
 import ProgressBar from '@/ui/components/progress-bar';
 storiesOf('Progress Bar', module)
     .add('default', () => ({
@@ -3242,8 +3270,8 @@ storiesOf('Progress Bar', module)
             'c-progress-bar': ProgressBar
         },
         template: `
-            <div class="padding-50" :style="{ height: '200px' }">
-                <c-progress-bar direction="vertical"/>
+            <div style="height: 100px; width: 100px" class="m-4">
+                <c-progress-bar direction="vertical" :percentages="40" style="height: 100px"/>
             </div>
         `
     }))
@@ -3275,6 +3303,7 @@ storiesOf('Progress Bar', module)
         `
     }))
 
+
 import ProjectMilestone from '@/ui/components/project/milestone';
 storiesOf('Project Milestone', module)
     .add('default', () => ({
@@ -3287,15 +3316,15 @@ storiesOf('Project Milestone', module)
                     img: 'http://via.placeholder.com/350x250',
                     title: 'Milestone 1',
                     short_description: `For far away, behind the word mountains, far from the countries Vokalia and Consonatia, there live.`,
-                    full_text: `Aenean eu tellus vel tortor tincidunt pharetra. Aenean mattis, sapien vel
+                    text: `Aenean eu tellus vel tortor tincidunt pharetra. Aenean mattis, sapien vel
                         lacinia accumsan, justo mi venenatis justo, ut accumsan diam mauris sit amet
                         ipsum. Vivamus iaculis lectus vel egestas vehicula. Phasellus in lacus nunc.
                         Curabitur lobortis arcu neque, non rutrum elit placerat eget.`,
                     progress: {
                         days_amouth: "133",
-                        days_percent: 94,
-                        done_percent: 8,
-                        spent_percent: 95
+                        days_left: 94,
+                        percent_done: 8,
+                        percent_spent: 95
                     }
                 }
             }
@@ -3365,153 +3394,79 @@ storiesOf('Banner', module)
         },
         data(){
             return{
-                logoPosition: '',
-                logoSize: '',
-                bgPosition: '',
-                img: {
-                    src: 'https://d2q63o9r0h0ohi.cloudfront.net/images/kobolds-and-catacombs/header-bg-backup-337031b146d6540bc3d2513f0fb11daa966398f512db7163c7e819120a62b2b17c2abaa893cfcef5c14e1f4a696ce45fa8d2e4d36a987029e563b449b402a115.jpg',
-                    position: 'center'
-                },
-                logo: {
-                    src: 'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png',
-                    position: '',
-                    size: ''
-                }
-            }
-        },
-        watch:{
-            bgPosition(){
-                this.img['position'] = this.bgPosition;
-            },
-            logoPosition(){
-                this.logo['position'] = this.logoPosition;
-            },
-            logoSize(){
-                this.logo['size'] = this.logoSize;
+                slides:[
+                    {
+                        image: {
+                            src: 'https://d2q63o9r0h0ohi.cloudfront.net/images/kobolds-and-catacombs/header-bg-backup-337031b146d6540bc3d2513f0fb11daa966398f512db7163c7e819120a62b2b17c2abaa893cfcef5c14e1f4a696ce45fa8d2e4d36a987029e563b449b402a115.jpg',
+                            position: 'center'
+                        },
+                        logo: {
+                            src: 'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png',
+                            position: '',
+                            size: ''
+                        },
+                        title: 'Some title',
+                        buttonText: 'Details'
+                    }
+                ],
             }
         },
         template: `<div class="padding-50" style="width: 900px">
                     <div class="row mb-2">
-                        <div class="col-4">
-                            <div class="form-group">
-                                <label class="text-white">Logo Position</label>
-                                <select class="form-control" id="logo_position" v-model="logoPosition">
-                                    <optgroup label="top">
-                                        <option value="left top">left top</option>
-                                        <option value="center top">center top</option>
-                                        <option value="right top">right top</option>
-                                    </optgroup>
-                                    <optgroup label="center">
-                                        <option value="left center">left center</option>
-                                        <option value="center center">center center</option>
-                                        <option value="right center">right center</option>
-                                    </optgroup>
-                                    <optgroup label="bottom">
-                                        <option value="left bottom">left bottom</option>
-                                        <option value="center bottom">center bottom</option>
-                                        <option value="right bottom">right bottom</option>
-                                    </optgroup>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                        <label class="text-white">Logo Size</label>
-                            <select class="form-control" id="logo_size" v-model="logoSize">
-                                    <option value="sm">sm</option>
-                                    <option value="md">md</option>
-                                    <option value="lg">lg</option>
-                                    <option value="xl">xl</option>
-                            </select>
-                        </div>
-                        <div class="col-4">
-                        <label class="text-white">Background Position</label>
-                            <select class="form-control" id="background_position" v-model="bgPosition">
-                                <optgroup label="top">
-                                    <option value="left top">left top</option>
-                                    <option value="center top">center top</option>
-                                    <option value="right top">right top</option>
-                                </optgroup>
-                                <optgroup label="center">
-                                    <option value="left center">left center</option>
-                                    <option value="center center">center center</option>
-                                    <option value="right center">right center</option>
-                                </optgroup>
-                                <optgroup label="bottom">
-                                    <option value="left bottom">left bottom</option>
-                                    <option value="center bottom">center bottom</option>
-                                    <option value="right bottom">right bottom</option>
-                                </optgroup>
-                            </select>
-                        </div>
+                        <!--<div class="col-4">-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="text-white">Logo Position</label>-->
+                                <!--<select class="form-control" id="logo_position" v-model="logoPosition">-->
+                                    <!--<optgroup label="top">-->
+                                        <!--<option value="left top">left top</option>-->
+                                        <!--<option value="center top">center top</option>-->
+                                        <!--<option value="right top">right top</option>-->
+                                    <!--</optgroup>-->
+                                    <!--<optgroup label="center">-->
+                                        <!--<option value="left center">left center</option>-->
+                                        <!--<option value="center center">center center</option>-->
+                                        <!--<option value="right center">right center</option>-->
+                                    <!--</optgroup>-->
+                                    <!--<optgroup label="bottom">-->
+                                        <!--<option value="left bottom">left bottom</option>-->
+                                        <!--<option value="center bottom">center bottom</option>-->
+                                        <!--<option value="right bottom">right bottom</option>-->
+                                    <!--</optgroup>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-4">-->
+                        <!--<label class="text-white">Logo Size</label>-->
+                            <!--<select class="form-control" id="logo_size" v-model="logoSize">-->
+                                    <!--<option value="sm">sm</option>-->
+                                    <!--<option value="md">md</option>-->
+                                    <!--<option value="lg">lg</option>-->
+                                    <!--<option value="xl">xl</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+                        <!--<div class="col-4">-->
+                        <!--<label class="text-white">Background Position</label>-->
+                            <!--<select class="form-control" id="background_position" v-model="bgPosition">-->
+                                <!--<optgroup label="top">-->
+                                    <!--<option value="left top">left top</option>-->
+                                    <!--<option value="center top">center top</option>-->
+                                    <!--<option value="right top">right top</option>-->
+                                <!--</optgroup>-->
+                                <!--<optgroup label="center">-->
+                                    <!--<option value="left center">left center</option>-->
+                                    <!--<option value="center center">center center</option>-->
+                                    <!--<option value="right center">right center</option>-->
+                                <!--</optgroup>-->
+                                <!--<optgroup label="bottom">-->
+                                    <!--<option value="left bottom">left bottom</option>-->
+                                    <!--<option value="center bottom">center bottom</option>-->
+                                    <!--<option value="right bottom">right bottom</option>-->
+                                <!--</optgroup>-->
+                            <!--</select>-->
+                        <!--</div>-->
                     </div>
-                    <c-banner :image="img" :logo="logo" />
-            </div>`
-    }))
-    .add('video', () => ({
-        components:{
-            'c-banner': Banner
-        },
-        data(){
-            return{
-                logoPosition: '',
-                logoSize: '',
-                videoSrc: '',
-                logo: {
-                    src: 'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/5/57/Kobolds_and_Catacombs.png',
-                    position: '',
-                    size: ''
-                },
-                video:{
-                    src: 'https://v.ftcdn.net/01/38/38/15/700_F_138381553_qnyzrhPi5l5TMI0koaObyjYg13AWKND1_ST.mp4'
-                }
-            }
-        },
-        watch:{
-            logoPosition(){
-                this.logo['position'] = this.logoPosition
-            },
-            logoSize(){
-                this.logo['size'] = this.logoSize
-            }
-        },
-        template: `<div class="padding-50" style="width: 900px">
-                    <div class="row mb-2">
-                        <div class="col-4">
-                            <div class="form-group">
-                                <label class="text-white">Logo Position</label>
-                                <select class="form-control" id="logo_position" v-model="logoPosition">
-                                    <optgroup label="top">
-                                        <option value="left top">left top</option>
-                                        <option value="center top">center top</option>
-                                        <option value="right top">right top</option>
-                                    </optgroup>
-                                    <optgroup label="center">
-                                        <option value="left center">left center</option>
-                                        <option value="center center">center center</option>
-                                        <option value="right center">right center</option>
-                                    </optgroup>
-                                    <optgroup label="bottom">
-                                        <option value="left bottom">left bottom</option>
-                                        <option value="center bottom">center bottom</option>
-                                        <option value="right bottom">right bottom</option>
-                                    </optgroup>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                        <div class="form-group">
-                            <label class="text-white">Logo Size</label>
-                            <select class="form-control" v-model="logoSize">
-                                    <option value="sm">sm</option>
-                                    <option value="md">md</option>
-                                    <option value="lg">lg</option>
-                                    <option value="xl">xl</option>
-                            </select>
-                        </div>
-                        </div>
-                    </div>
-                    <c-banner :video="video" :logo="logo" />
-
+                    
+                    <c-banner :slides="slides" />
             </div>`
     }))
 
@@ -3606,6 +3561,7 @@ storiesOf('Product Overview', module)
             </div>`
     }))
 
+
 import Input from '@/ui/components/inputs';
 import InputSearcher from '@/ui/components/inputs/searcher';
 storiesOf('Inputs', module)
@@ -3638,6 +3594,7 @@ storiesOf('Inputs', module)
         `
     }))
 
+
 import TimelineList from '@/ui/components/timeline/list.vue';
 import TimelineItem from '@/ui/components/timeline/item.vue';
 storiesOf('Timeline', module)
@@ -3646,11 +3603,24 @@ storiesOf('Timeline', module)
             'c-timeline': TimelineList,
             'c-timeline-item': TimelineItem
         },
-        template: `<div class="row">
-                        <div class="col">
-                            <c-timeline-item />
-                        </div>
-                    </div>`
+        data(){
+            return{
+                item: {
+                    id: 1,
+                    type: 'post',
+                    title: 'Thank you, friends!',
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in diam eu sapien tempor feugiat. Nulla quis sagittis eros, at placerat nisl. Nulla arcu ex, laoreet ut nunc eget, placerat molestie leo.',
+                    date: '2018-09-19',
+                }
+            }
+        },
+        template:
+            `<div class="row">
+                <div class="col">
+                    <c-timeline-item :item="item" />
+                </div>
+            </div>
+        `
     }))
     .add('list', () => ({
         components:{

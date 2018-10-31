@@ -131,7 +131,7 @@ export default {
                             margin-right: 15px;
                             min-width: 20px;
                         }
-                        .progress-bar {
+                        .progress {
                             margin-right: 15px;
                         }
                     }
