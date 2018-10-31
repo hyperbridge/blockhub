@@ -30,6 +30,21 @@
                 />
             </div>
 
+
+            <c-modal
+                v-if="activeId"
+                title="Select next asset to evolve"
+                @close="activeId = null"
+            >
+                <c-assets
+                    @click="evolveNavigator($event.id)"
+                    :assets="assetsArray"
+                    slot="body"
+                />
+            </c-modal>
+
+            <pre>{{ navigator }}</pre>
+
         </div>
     </div>
 </div>
@@ -43,6 +58,8 @@
         components: {
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-navigator-item': (resolve) => require(['@/ui/components/item-navigator/item'], resolve),
+            'c-modal': (resolve) => require(['@/ui/components/modal'], resolve),
+            'c-assets': (resolve) => require(['@/ui/components/assets-grid-inventory'], resolve),
         },
         data() {
             return {
@@ -52,21 +69,6 @@
                     [{ id: 1, evolvesTo: [2, 3] }],
                     [{ id: 2, evolvesTo: [] }, { id: 6, evolvesTo: [] }, { id: 3, evolvesTo: [4, 5] }],
                     [{ id: 4, evolvesTo: [] }, { id: 5, evolvesTo: [] }],
-                ],
-                navigator: [
-                    { id: 1, evolvesTo: [
-                        { id: 2, evolvesTo: [] },
-                        { id: 3, evolvesTo: [
-                            { id: 7, evolvesTo: [] },
-                            { id: 8, evolvesTo: [] },
-                            { id: 9, evolvesTo: [] },
-
-                        ]},
-                        { id: 4, evolvesTo: [
-                            { id: 5, evolvesTo: [] },
-                            { id: 6, evolvesTo: [] },
-                        ]},
-                    ]}
                 ],
                 nav: {
                     1: { id: 1, assetId: 1, evolvesTo: [2, 3], isRoot: true },
@@ -80,13 +82,24 @@
                 activeId: null
             }
         },
+        methods: {
+            evolveNavigator(assetId) {
+                this.$store.dispatch('assets/evolveNavigator', { evolveId: this.activeId, assetId });
+            }
+        },
         computed: {
             assets() {
                 return this.$store.state.assets.assets;
             },
+            navigator() {
+                return this.$store.state.assets.navigator;
+            },
+            assetsArray() {
+                return Object.values(this.assets);
+            },
             deeplyNestedNav() {
-                const { nav, assets } = this;
-                const deepCopy = Object.values(nav).reduce((populated, row) => {
+                const { navigator, assets } = this;
+                const deepCopy = Object.values(navigator).reduce((populated, row) => {
                     const shallowCopy = { ...row };
                     for (let key in shallowCopy) {
                         if (typeof shallowCopy[key] === 'object') {
@@ -112,6 +125,8 @@
         },
         mounted() {
             EventBus.$on('evolve', e => {
+                this.activeId = e;
+
                 console.log(e)
                 // this.nav[e.id].evolvesTo.push(7);
             });

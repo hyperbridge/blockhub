@@ -12,7 +12,7 @@
         <div class="navigator-item__content">
             <button
                 v-if="!item.evolvesTo.length && hovered"
-                @click="handleClick"
+                @click="handleClick(item.id)"
                 class="navigator-item__btn navigator-item__btn--right"
             >
             <!-- item.evolvesTo.push({ id: 12, evolvesTo: [] });  -->
@@ -21,7 +21,7 @@
 
             <button
                 v-if="index === listLength - 1 && hovered"
-                @click="clickDown(parentId)"
+                @click="handleClick(parentId)"
                 class="navigator-item__btn navigator-item__btn--bottom"
             >
                 <c-icon name="plus"/>
@@ -81,9 +81,8 @@
             handleHover(status) {
                 this.debounce(() => { this.hovered = true }, 50);
             },
-            handleClick() {
-                const { id } = this.item;
-                EventBus.$emit('evolve', this.item);
+            handleClick(id) {
+                EventBus.$emit('evolve', id);
             },
             clickDown(id) {
                 EventBus.$emit('evolve', { id })
