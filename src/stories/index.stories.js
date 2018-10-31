@@ -908,6 +908,10 @@ storiesOf('Buttons', module)
             <c-button status="success" size="md">success</c-button>
             <c-button status="success" size="lg">success</c-button>
             <hr />
+            <c-button status="warning">danger</c-button>
+            <c-button status="warning" size="md">danger</c-button>
+            <c-button status="warning" size="lg">danger</c-button>
+            <hr />
             <c-button status="danger">danger</c-button>
             <c-button status="danger" size="md">danger</c-button>
             <c-button status="danger" size="lg">danger</c-button>
@@ -941,6 +945,10 @@ storiesOf('Buttons', module)
             <c-button status="outline-success" size="md">success</c-button>
             <c-button status="outline-success" size="lg">success</c-button>
             <hr />
+            <c-button status="outline-warning">danger</c-button>
+            <c-button status="outline-warning" size="md">danger</c-button>
+            <c-button status="outline-warning" size="lg">danger</c-button>
+            <hr />
             <c-button status="outline-danger">danger</c-button>
             <c-button status="outline-danger" size="md">danger</c-button>
             <c-button status="outline-danger" size="lg">danger</c-button>
@@ -952,6 +960,31 @@ storiesOf('Buttons', module)
             <c-button status="outline-support">support</c-button>
             <c-button status="outline-support" size="md">support</c-button>
             <c-button status="outline-support" size="lg">support</c-button>
+        `)
+    }))
+    .add('gradient', () => ({
+        components: {'c-button': Buttons},
+        methods: {
+            testFunction: function () {
+                console.log('BOOOOOOOOOOOM!')
+            }
+        },
+        template: injectButtonTemplate(`
+            <c-button status="gradient-info">info</c-button>
+            <c-button status="gradient-info" size="md">info</c-button>
+            <c-button status="gradient-info" size="lg">info</c-button>
+            <hr />
+            <c-button status="gradient-success">success</c-button>
+            <c-button status="gradient-success" size="md">success</c-button>
+            <c-button status="gradient-success" size="lg">success</c-button>
+            <hr />
+            <c-button status="gradient-warning">danger</c-button>
+            <c-button status="gradient-warning" size="md">danger</c-button>
+            <c-button status="gradient-warning" size="lg">danger</c-button>
+            <hr />
+            <c-button status="gradient-danger">danger</c-button>
+            <c-button status="gradient-danger" size="md">danger</c-button>
+            <c-button status="gradient-danger" size="lg">danger</c-button>
         `)
     }))
     .add('[options] - swap direction', () => ({
@@ -1052,7 +1085,7 @@ storiesOf('Money Info', module)
         },
         template: `
         <div class="row m-0 p-3">
-            <c-money-info label="Spent" percent="63" amount="555.999" goal="555.999" />
+            <c-money-info label="Spent" percent="63" amount="555.999" goal="1555.999" />
         </div>
         `
     }));
@@ -1101,15 +1134,21 @@ storiesOf('Tooltips', module)
             'c-tooltips': Tooltips
         },
         template: `
-            <div class="row padding-50">
+            <div class="row p-5">
                 <div class="col-4 text-center">
-                            <c-tooltips name="Hover Me(left Position)!" position="left" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='false' />
+                    <c-tooltips name="Hover Me(left Position)!" position="left" :lightStyle='false'>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </c-tooltips>
                 </div>
                 <div class="col-4 text-center">
-                    <c-tooltips name="Hover Me(Center Position)!" position="center" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='false' />
+                    <c-tooltips name="Hover Me(Center Position)!" position="center" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='false'>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </c-tooltips>
                 </div>
                 <div class="col-4 text-center">
-                    <c-tooltips name="Hover Me(Right Position)!" position="right" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='false' />
+                    <c-tooltips name="Hover Me(Right Position)!" position="right" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='false'>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </c-tooltips>
                 </div>
             </div>
         `
@@ -1119,15 +1158,21 @@ storiesOf('Tooltips', module)
             'c-tooltips': Tooltips
         },
         template: `
-            <div class="row">
+            <div class="row p-5">
                 <div class="col-4 text-center">
-                            <c-tooltips name="Hover Me(left Position)!" position="left" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='true' />
+                    <c-tooltips name="Hover Me(left Position)!" position="left" :lightStyle='true' >
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </c-tooltips>
                 </div>
                 <div class="col-4 text-center">
-                    <c-tooltips name="Hover Me(Center Position)!" position="center" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='true' />
+                    <c-tooltips name="Hover Me(Center Position)!" position="center" :lightStyle='true' >
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </c-tooltips>
                 </div>
                 <div class="col-4 text-center">
-                    <c-tooltips name="Hover Me(Right Position)!" position="right" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." :lightStyle='true' />
+                    <c-tooltips name="Hover Me(Right Position)!" position="right" :lightStyle='true' >
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </c-tooltips>
                 </div>
             </div>
         `
@@ -1137,7 +1182,7 @@ storiesOf('Tooltips', module)
             'c-tooltips': Tooltips
         },
         template: `
-            <div class="row">
+            <div class="row p-5">
                 <div class="col-6 text-center">
                     <c-tooltips name="Click Me(Custom content)!" type="click" position="left" :lightStyle='true'>
                         <p class="p-0">Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.</p>
@@ -1349,7 +1394,9 @@ storiesOf('Activity Chart', module)
         `
     }))
 
-import PopUps from '../ui/components/popups'
+import PopUps from '@/ui/components/popups'
+import BasicPopup from '@/ui/components/popups/basic'
+import TermsPopup from '@/ui/components/popups/terms'
 
 storiesOf('Popups', module)
     .add('default', () => ({
@@ -1365,13 +1412,17 @@ storiesOf('Popups', module)
         methods: {
             showModalHandler: function () {
                 this.modalActive = !this.modalActive;
+            },
+            close() {
+                console.log('PopUp was closed!!!!!!!!!');
+                this.showModalHandler()
             }
         },
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is dafault popup</h3>
                 <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" ref="modal" title="Default" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                <c-popup :activated="modalActive" @close="close" ref="modal" title="Default" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
                 Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
@@ -1398,14 +1449,15 @@ storiesOf('Popups', module)
                 this.modalActive = !this.modalActive;
             },
             close() {
-                console.log('PopUp was closed!!!!!!!!!')
+                console.log('PopUp was closed!!!!!!!!!');
+                this.showModalHandler()
             }
         },
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is warning popup</h3>
                 <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" @onClose="close" ref="modal" title="Warning" type="warning" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                <c-popup :activated="modalActive" @close="close" ref="modal" title="Warning" type="warning" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
                 Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
@@ -1430,13 +1482,17 @@ storiesOf('Popups', module)
         methods: {
             showModalHandler: function () {
                 this.modalActive = !this.modalActive;
+            },
+            close() {
+                console.log('PopUp was closed!!!!!!!!!');
+                this.showModalHandler()
             }
         },
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is danger popup</h3>
                 <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" ref="modal" title="Danger" type="danger" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                <c-popup :activated="modalActive" @close="close" ref="modal" title="Danger" type="danger" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
                 Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
@@ -1461,13 +1517,17 @@ storiesOf('Popups', module)
         methods: {
             showModalHandler: function () {
                 this.modalActive = !this.modalActive;
+            },
+            close() {
+                console.log('PopUp was closed!!!!!!!!!');
+                this.showModalHandler()
             }
         },
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is info popup</h3>
                 <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" ref="modal" title="Info" type="info" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                <c-popup :activated="modalActive" @close="close" ref="modal" title="Info" type="info" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
                 Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.
                     <template slot="footer">
                         <div class="text-right w-100">
@@ -1492,92 +1552,295 @@ storiesOf('Popups', module)
         methods: {
             showModalHandler: function () {
                 this.modalActive = !this.modalActive;
+            },
+            close() {
+                console.log('PopUp was closed!!!!!!!!!');
+                this.showModalHandler()
             }
         },
         template: `
             <div class="col-12 p-5 text-white">
                 <h3 class="text-white">This is success popup</h3>
                 <c-button @click="showModalHandler">Show modal</c-button>
-                <c-popup :activated="modalActive" ref="modal" type="success" title="Success" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                <c-popup :activated="modalActive" @close="close" ref="modal" type="success" title="Success" sub_title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
                         text="Praesent nec urna non libero lobortis sagittis. Etiam quis pellentesque dolor.Aenean semper fermentum lorem, ac cursus metus mollis eget.">
                     <template slot="footer">
                         <div class="text-right w-100">
-                            <c-button text="Cancel" variant="danger" icon="fas fa-times" icon_position="left" c_class="mx-1" />
-                            <c-button text="Confirm" variant="success" icon="fas fa-check" icon_position="left" c_class="ml-1" />
+                            <c-button status="danger">Cancel</c-button>
+                            <c-button status="success">Confirm</c-button>
                         </div>
                     </template>
                 </c-popup>
             </div>
         `
     }))
+    .add('changelog', () =>({
+        components:{
+            'c-basic-popup': BasicPopup,
+            'c-dotted-list': List,
+            'c-heading-bar-color': BlockHeadersColor
+        },
+        template: `
+        <div class="row p-5">
+            <div class="col-4">
+                <c-basic-popup :activated="true">
+                    <div class="h4" slot="header">Our Updates</div>
+                    <template slot="body">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus gravida arcu quis tellus imperdiet tincidunt. 
+                            Sed iaculis mauris vitae eros fringilla, id congue libero mattis. 
+                        </p>
+                        
+                        <c-heading-bar-color colorCode="#5EA72B" textAlign="left" class="margin-bottom-15 margin-top-10">
+                            <strong>This is the Title</strong>
+                        </c-heading-bar-color>
+                        <c-dotted-list>
+                            <li>Donec sapien velit, vulputate</li>
+                            <li>Nulla ut fermentum turpis, a fermentum enim.</li>
+                            <li>Praesent feugiat erat diam, tincidunt cursus ligula pulvinar id.</li>
+                        </c-dotted-list>
+                        
+                        <c-heading-bar-color colorCode="#FADC72" textAlign="left" class="margin-bottom-15 margin-top-20">
+                            <strong>Aliquam nulla mi, mattis ut nisl nec</strong>
+                        </c-heading-bar-color>
+                        <c-dotted-list>
+                            <li>Praesent in mauris nec felis dignissim viverra in at diam. Mauris congue aliquet tempus.</li>
+                            <li>Morbi ut consequat eros</li>
+                            <li>Aenean imperdiet lobortis tristique.</li>
+                        </c-dotted-list>
+                        
+                        <c-heading-bar-color colorCode="#F75D5D" textAlign="left" class="margin-bottom-15 margin-top-20">
+                            <strong>Sed vitae lobortis quam, non porta est</strong>
+                        </c-heading-bar-color>
+                        <p>
+                            Donec urna nulla, condimentum vel quam quis, tempus pellentesque nibh. Vivamus gravida purus 
+                            at nisl molestie commodo. Praesent dictum et purus in varius. Aenean imperdiet lobortis tristique. 
+                            Phasellus eleifend dolor non mi tempor, quis sagittis massa vehicula. Pellentesque eget enim quis 
+                            dui volutpat varius quis eget elit.
+                        </p>
+                    </template>
+                    <small slot="footer">
+                        Missed an Updates? <c-button status="plain">Check out our previous change log.</c-button>
+                    </small>
+                </c-basic-popup>
+            </div>
+        </div>
+        
+        `
+    }))
+    .add('terms', () =>({
+        components:{
+            'c-terms-popup': TermsPopup
+        },
+        template: `
+        <div class="row p-5">
+            <div class="col-4">
+                <c-terms-popup :activated="true" width="600">
+                    <div class="h4" slot="header">BlockHub Developer License Agreement</div>
+                    <div slot="body">
+                        <div class="terms_block">
 
-import RangeSlider from '../ui/components/range-slider'
+                            <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span>
+                            </h1>
+
+                            <h2>Introduction</h2>
+
+                            <p>These Website Standard Terms and Conditions written on this webpage shall
+                                manage
+                                your use of our website, <span class="highlight preview_website_name">BlockHub</span>
+                                accessible at <span class="highlight preview_website_url">BlockHub.gg</span>.
+                            </p>
+
+                            <p>These Terms will be applied fully and affect to your use of this Website. By
+                                using this Website, you agreed to accept all terms and conditions written in
+                                here. You must not use this Website if you disagree with any of these
+                                Website
+                                Standard Terms and Conditions.</p>
+
+                            <p>Minors or people below 18 years old are not allowed to use this Website.</p>
+
+                            <h2>Intellectual Property Rights</h2>
+
+                            <p>Other than the content you own, under these Terms, <span
+                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and/or its
+                                licensors
+                                own all the intellectual property rights and materials contained in this
+                                Website.</p>
+
+                            <p>You are granted limited license only for purposes of viewing the material
+                                contained on this Website.</p>
+
+                            <h2>Restrictions</h2>
+
+                            <p>You are specifically restricted from all of the following:</p>
+
+                            <ul>
+                                <li>publishing any Website material in any other media;</li>
+                                <li>selling, sublicensing and/or otherwise commercializing any Website
+                                    material;
+                                </li>
+                                <li>publicly performing and/or showing any Website material;</li>
+                                <li>using this Website in any way that is or may be damaging to this
+                                    Website;
+                                </li>
+                                <li>using this Website in any way that impacts user access to this
+                                    Website;
+                                </li>
+                                <li>using this Website contrary to applicable laws and regulations, or in
+                                    any
+                                    way may cause harm to the Website, or to any person or business entity;
+                                </li>
+                                <li>engaging in any data mining, data harvesting, data extracting or any
+                                    other
+                                    similar activity in relation to this Website;
+                                </li>
+                                <li>using this Website to engage in any advertising or marketing.</li>
+                            </ul>
+
+                            <p>Certain areas of this Website are restricted from being access by you and
+                                <span
+                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> may further
+                                restrict
+                                access by you to any areas of this Website, at any time, in absolute
+                                discretion.
+                                Any user ID and password you may have for this Website are confidential and
+                                you
+                                must maintain confidentiality as well.</p>
+
+                            <h2>Your Content</h2>
+
+                            <p>In these Website Standard Terms and Conditions, “Your Content” shall mean any
+                                audio, video text, images or other material you choose to display on this
+                                Website. By displaying Your Content, you grant <span
+                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> a
+                                non-exclusive,
+                                worldwide irrevocable, sub licensable license to use, reproduce, adapt,
+                                publish,
+                                translate and distribute it in any and all media.</p>
+
+                            <p>Your Content must be your own and must not be invading any third-party's
+                                rights.
+                                <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> reserves
+                                the
+                                right to remove any of Your Content from this Website at any time without
+                                notice.</p>
+
+                            <h2>No warranties</h2>
+
+                            <p>This Website is provided “as is,” with all faults, and <span
+                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> express no
+                                representations or warranties, of any kind related to this Website or the
+                                materials contained on this Website. Also, nothing contained on this Website
+                                shall be interpreted as advising you.</p>
+
+                            <h2>Limitation of liability</h2>
+
+                            <p>In no event shall <span
+                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span>, nor any of its
+                                officers, directors and employees, shall be held liable for anything arising
+                                out
+                                of or in any way connected with your use of this Website whether such
+                                liability
+                                is under contract. &nbsp;<span class="highlight preview_company_name">Hyperbridge Technology Inc.</span>,
+                                including its officers, directors and employees shall not be held liable for
+                                any
+                                indirect, consequential or special liability arising out of or in any way
+                                related to your use of this Website.</p>
+
+                            <h2>Indemnification<p></p>
+
+                                <p>You hereby indemnify to the fullest extent <span
+                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> from and
+                                    against
+                                    any and/or all liabilities, costs, demands, causes of action, damages
+                                    and
+                                    expenses arising in any way related to your breach of any of the
+                                    provisions
+                                    of these Terms.</p>
+
+                            </h2>
+                            <h2>Severability</h2>
+
+                            <p>If any provision of these Terms is found to be invalid under any applicable
+                                law,
+                                such provisions shall be deleted without affecting the remaining provisions
+                                herein.</p>
+
+                            <h2>Variation of Terms</h2>
+
+                            <p><span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is permitted
+                                to
+                                revise these Terms at any time as it sees fit, and by using this Website you
+                                are
+                                expected to review these Terms on a regular basis.</p>
+
+                            <h2>Assignment</h2>
+
+                            <p>The <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is
+                                allowed
+                                to assign, transfer, and subcontract its rights and/or obligations under
+                                these
+                                Terms without any notification. However, you are not allowed to assign,
+                                transfer, or subcontract any of your rights and/or obligations under these
+                                Terms.</p>
+
+                            <h2>Entire Agreement</h2>
+
+                            <p>These Terms constitute the entire agreement between <span
+                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and you in
+                                relation
+                                to your use of this Website, and supersede all prior agreements and
+                                understandings.</p>
+
+                            <h2>Governing Law &amp; Jurisdiction</h2>
+
+                            <p>These Terms will be governed by and interpreted in accordance with the laws
+                                of
+                                the State of <span class="highlight preview_country">Country</span>, and you
+                                submit to the non-exclusive jurisdiction of the state and federal courts
+                                located
+                                in <span class="highlight preview_country">Country</span> for the resolution
+                                of
+                                any disputes.</p>
+
+                        </div>
+                    </div>
+                </c-terms-popup>
+            </div>
+        </div>
+        
+        `
+    }))
+
+
+import RangeSlider from '../ui/components/range-slider/pure'
 
 storiesOf('Range Slider', module)
-    .add('single range slider', () => ({
+    .add('default', () => ({
         components: {
             'c-range-slider': RangeSlider
         },
+        data(){
+            return{
+                min: 10,
+                max: 67,
+                value: 0
+            }
+        },
         template: `
          <div class="row m-0 p-3">
-            <div class="col-8">
-                <c-range-slider label="Single slider" :min="45" />
+            <div class="col-8 text-white">
+                <c-range-slider :min="min" :max="max" v-model.value="value" />
+                <hr />
+                min - {{ min }}<br/>
+                max - {{ max }}<br />
+                value - {{ value }}
             </div>
          </div>
         `
     }))
-    .add('single step slider', () => ({
-        components: {
-            'c-range-slider': RangeSlider
-        },
-        template: `
-         <div class="row m-0 p-3">
-            <div class="col-8">
-                <c-range-slider label="Single step slider"
-                 :min="1"
-                 :max="10"
-                 :step="1"
-                 :gridNum="2"
-                 :grid="true"/>
-            </div>
-         </div>
-        `
-    }))
-    .add('double range slider', () => ({
-        components: {
-            'c-range-slider': RangeSlider
-        },
-        template: `
-         <div class="row m-0 p-3">
-            <div class="col-8">
-                <c-range-slider
-                label="Double slider"
-                :min="0"
-                :from="25"
-                :to="67"
-                type="double" />
-            </div>
-         </div>
-        `
-    }))
-    .add('double grid range slider', () => ({
-        components: {
-            'c-range-slider': RangeSlider
-        },
-        template: `
-         <div class="row m-0 p-3">
-            <div class="col-8">
-                <c-range-slider
-                label="Double slider"
-                :min="0"
-                :from="25"
-                :to="67"
-                :grid="true"
-                type="double" />
-            </div>
-         </div>
-        `
-    }))
+
+
 
 import AssetsGrid from '../ui/components/assets-grid'
 
@@ -1590,8 +1853,7 @@ const assets_list = [
             "current": 2.99
         },
         count: '240.000',
-        main_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
-        sub_img: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
+        image: 'https://d1u5p3l4wpay3k.cloudfront.net/skyrim_de_gamepedia/thumb/0/04/SteelPlateArmorofIllusion.png/200px-SteelPlateArmorofIllusion.png',
     },
     {
         name: 'some another item name',
@@ -1601,8 +1863,7 @@ const assets_list = [
             "current": 2.99
         },
         count: '824.000',
-        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
-        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
     },
     {
         name: 'some another item name',
@@ -1612,8 +1873,7 @@ const assets_list = [
             "current": 2.99
         },
         count: '824.000',
-        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
-        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
     },
     {
         name: 'some another item name',
@@ -1623,8 +1883,7 @@ const assets_list = [
             "current": 2.99
         },
         count: '824.000',
-        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
-        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
     },
     {
         name: 'some another item name',
@@ -1634,8 +1893,7 @@ const assets_list = [
             "current": 2.99
         },
         count: '824.000',
-        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
-        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
     },
     {
         name: 'some another item name',
@@ -1645,14 +1903,12 @@ const assets_list = [
             "current": 2.99
         },
         count: '824.000',
-        main_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
-        sub_img: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
+        image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
     }
 ]
 
 storiesOf('Assets Grid', module)
     .addDecorator(withKnobs)
-    .addDecorator(withViewport())
     .add('default', () => ({
         components: {
             'c-assets-grid': AssetsGrid
@@ -1666,19 +1922,6 @@ storiesOf('Assets Grid', module)
         <c-assets-grid :list="assets_list" />
         `
     }), { viewport: 'desktop' })
-    .add('default (iPhone 6 Plus)', () => ({
-        components: {
-            'c-assets-grid': AssetsGrid
-        },
-        data() {
-            return object('Data', {
-                assets_list: assets_list
-            })
-        },
-        template: `
-        <c-assets-grid :list="assets_list" />
-        `
-    }), { viewport: 'iphone6p' })
 
 import AssetsPopup from '../ui/components/asset-overview-popup'
 
@@ -3864,250 +4107,6 @@ storiesOf('Stream', module)
         `
     }))
 
-
-// ToDo remove it
-import BasicPopup from '@/ui/components/popups/basic'
-storiesOf('Changelog Popup', module)
-    .add('default', () =>({
-        components:{
-            'c-basic-popup': BasicPopup,
-            'c-dotted-list': List,
-            'c-heading-bar-color': BlockHeadersColor
-        },
-        template: `
-        <div class="row p-5">
-            <div class="col-4">
-                <c-basic-popup :activated="true">
-                    <div class="h4" slot="header">Our Updates</div>
-                    <template slot="body">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus gravida arcu quis tellus imperdiet tincidunt. 
-                            Sed iaculis mauris vitae eros fringilla, id congue libero mattis. 
-                        </p>
-                        
-                        <c-heading-bar-color colorCode="#5EA72B" textAlign="left" class="margin-bottom-15 margin-top-10">
-                            <strong>This is the Title</strong>
-                        </c-heading-bar-color>
-                        <c-dotted-list>
-                            <li>Donec sapien velit, vulputate</li>
-                            <li>Nulla ut fermentum turpis, a fermentum enim.</li>
-                            <li>Praesent feugiat erat diam, tincidunt cursus ligula pulvinar id.</li>
-                        </c-dotted-list>
-                        
-                        <c-heading-bar-color colorCode="#FADC72" textAlign="left" class="margin-bottom-15 margin-top-20">
-                            <strong>Aliquam nulla mi, mattis ut nisl nec</strong>
-                        </c-heading-bar-color>
-                        <c-dotted-list>
-                            <li>Praesent in mauris nec felis dignissim viverra in at diam. Mauris congue aliquet tempus.</li>
-                            <li>Morbi ut consequat eros</li>
-                            <li>Aenean imperdiet lobortis tristique.</li>
-                        </c-dotted-list>
-                        
-                        <c-heading-bar-color colorCode="#F75D5D" textAlign="left" class="margin-bottom-15 margin-top-20">
-                            <strong>Sed vitae lobortis quam, non porta est</strong>
-                        </c-heading-bar-color>
-                        <p>
-                            Donec urna nulla, condimentum vel quam quis, tempus pellentesque nibh. Vivamus gravida purus 
-                            at nisl molestie commodo. Praesent dictum et purus in varius. Aenean imperdiet lobortis tristique. 
-                            Phasellus eleifend dolor non mi tempor, quis sagittis massa vehicula. Pellentesque eget enim quis 
-                            dui volutpat varius quis eget elit.
-                        </p>
-                    </template>
-                    <small slot="footer">
-                        Missed an Updates? <c-button status="plain">Check out our previous change log.</c-button>
-                    </small>
-                </c-basic-popup>
-            </div>
-        </div>
-        
-        `
-    }))
-// ToDo remove it
-import TermsPopup from '@/ui/components/popups/terms'
-storiesOf('Terms Popup', module)
-    .add('default', () =>({
-        components:{
-            'c-terms-popup': TermsPopup
-        },
-        template: `
-        <div class="row p-5">
-            <div class="col-4">
-                <c-terms-popup :activated="true" width="600">
-                    <div class="h4" slot="header">BlockHub Developer License Agreement</div>
-                    <div slot="body">
-                        <div class="terms_block">
-
-                            <h1>Terms and Conditions for <span class="highlight preview_company_name">BlockHub</span>
-                            </h1>
-
-                            <h2>Introduction</h2>
-
-                            <p>These Website Standard Terms and Conditions written on this webpage shall
-                                manage
-                                your use of our website, <span class="highlight preview_website_name">BlockHub</span>
-                                accessible at <span class="highlight preview_website_url">BlockHub.gg</span>.
-                            </p>
-
-                            <p>These Terms will be applied fully and affect to your use of this Website. By
-                                using this Website, you agreed to accept all terms and conditions written in
-                                here. You must not use this Website if you disagree with any of these
-                                Website
-                                Standard Terms and Conditions.</p>
-
-                            <p>Minors or people below 18 years old are not allowed to use this Website.</p>
-
-                            <h2>Intellectual Property Rights</h2>
-
-                            <p>Other than the content you own, under these Terms, <span
-                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and/or its
-                                licensors
-                                own all the intellectual property rights and materials contained in this
-                                Website.</p>
-
-                            <p>You are granted limited license only for purposes of viewing the material
-                                contained on this Website.</p>
-
-                            <h2>Restrictions</h2>
-
-                            <p>You are specifically restricted from all of the following:</p>
-
-                            <ul>
-                                <li>publishing any Website material in any other media;</li>
-                                <li>selling, sublicensing and/or otherwise commercializing any Website
-                                    material;
-                                </li>
-                                <li>publicly performing and/or showing any Website material;</li>
-                                <li>using this Website in any way that is or may be damaging to this
-                                    Website;
-                                </li>
-                                <li>using this Website in any way that impacts user access to this
-                                    Website;
-                                </li>
-                                <li>using this Website contrary to applicable laws and regulations, or in
-                                    any
-                                    way may cause harm to the Website, or to any person or business entity;
-                                </li>
-                                <li>engaging in any data mining, data harvesting, data extracting or any
-                                    other
-                                    similar activity in relation to this Website;
-                                </li>
-                                <li>using this Website to engage in any advertising or marketing.</li>
-                            </ul>
-
-                            <p>Certain areas of this Website are restricted from being access by you and
-                                <span
-                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> may further
-                                restrict
-                                access by you to any areas of this Website, at any time, in absolute
-                                discretion.
-                                Any user ID and password you may have for this Website are confidential and
-                                you
-                                must maintain confidentiality as well.</p>
-
-                            <h2>Your Content</h2>
-
-                            <p>In these Website Standard Terms and Conditions, “Your Content” shall mean any
-                                audio, video text, images or other material you choose to display on this
-                                Website. By displaying Your Content, you grant <span
-                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> a
-                                non-exclusive,
-                                worldwide irrevocable, sub licensable license to use, reproduce, adapt,
-                                publish,
-                                translate and distribute it in any and all media.</p>
-
-                            <p>Your Content must be your own and must not be invading any third-party's
-                                rights.
-                                <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> reserves
-                                the
-                                right to remove any of Your Content from this Website at any time without
-                                notice.</p>
-
-                            <h2>No warranties</h2>
-
-                            <p>This Website is provided “as is,” with all faults, and <span
-                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> express no
-                                representations or warranties, of any kind related to this Website or the
-                                materials contained on this Website. Also, nothing contained on this Website
-                                shall be interpreted as advising you.</p>
-
-                            <h2>Limitation of liability</h2>
-
-                            <p>In no event shall <span
-                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span>, nor any of its
-                                officers, directors and employees, shall be held liable for anything arising
-                                out
-                                of or in any way connected with your use of this Website whether such
-                                liability
-                                is under contract. &nbsp;<span class="highlight preview_company_name">Hyperbridge Technology Inc.</span>,
-                                including its officers, directors and employees shall not be held liable for
-                                any
-                                indirect, consequential or special liability arising out of or in any way
-                                related to your use of this Website.</p>
-
-                            <h2>Indemnification<p></p>
-
-                                <p>You hereby indemnify to the fullest extent <span
-                                    class="highlight preview_company_name">Hyperbridge Technology Inc.</span> from and
-                                    against
-                                    any and/or all liabilities, costs, demands, causes of action, damages
-                                    and
-                                    expenses arising in any way related to your breach of any of the
-                                    provisions
-                                    of these Terms.</p>
-
-                            </h2>
-                            <h2>Severability</h2>
-
-                            <p>If any provision of these Terms is found to be invalid under any applicable
-                                law,
-                                such provisions shall be deleted without affecting the remaining provisions
-                                herein.</p>
-
-                            <h2>Variation of Terms</h2>
-
-                            <p><span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is permitted
-                                to
-                                revise these Terms at any time as it sees fit, and by using this Website you
-                                are
-                                expected to review these Terms on a regular basis.</p>
-
-                            <h2>Assignment</h2>
-
-                            <p>The <span class="highlight preview_company_name">Hyperbridge Technology Inc.</span> is
-                                allowed
-                                to assign, transfer, and subcontract its rights and/or obligations under
-                                these
-                                Terms without any notification. However, you are not allowed to assign,
-                                transfer, or subcontract any of your rights and/or obligations under these
-                                Terms.</p>
-
-                            <h2>Entire Agreement</h2>
-
-                            <p>These Terms constitute the entire agreement between <span
-                                class="highlight preview_company_name">Hyperbridge Technology Inc.</span> and you in
-                                relation
-                                to your use of this Website, and supersede all prior agreements and
-                                understandings.</p>
-
-                            <h2>Governing Law &amp; Jurisdiction</h2>
-
-                            <p>These Terms will be governed by and interpreted in accordance with the laws
-                                of
-                                the State of <span class="highlight preview_country">Country</span>, and you
-                                submit to the non-exclusive jurisdiction of the state and federal courts
-                                located
-                                in <span class="highlight preview_country">Country</span> for the resolution
-                                of
-                                any disputes.</p>
-
-                        </div>
-                    </div>
-                </c-terms-popup>
-            </div>
-        </div>
-        
-        `
-    }))
 
 import List from '@/ui/components/list/dots'
 storiesOf('List', module)

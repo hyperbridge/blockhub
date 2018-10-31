@@ -77,8 +77,7 @@
         name: 'asset-overview-popup',
         props: {
             asset: {
-                type: Object,
-                required: true
+                type: Object
             }
         },
         components:{

@@ -128,5 +128,9 @@
                 background: #5D75F7;
             }
         }
+        .c-tooltips__content-default{
+            z-index: 1000;
+            position: relative;
+        }
     }
 </style>
