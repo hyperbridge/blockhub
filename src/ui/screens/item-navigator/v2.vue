@@ -67,7 +67,16 @@
                             { id: 6, evolvesTo: [] },
                         ]},
                     ]}
-                ]
+                ],
+                nav: {
+                    1: { id: 1, assetId: 1, evolvesTo: [1, 2], isRoot: true },
+                    2: { id: 2, assetId: 2, evolvesTo: [3, 3]},
+                    3: { id: 3, assetId: 3, evolvesTo: [4, 4]},
+                    4: { id: 4, assetId: 4, evolvesTo: [5, 5]},
+                    5: { id: 5, assetId: 5, evolvesTo: [1, 7]},
+                    6: { id: 6, assetId: 6, evolvesTo: [5, 1]},
+                    7: { id: 7, assetId: 7, evolvesTo: [4, 2]}
+                }
             }
         },
         computed: {
@@ -88,6 +97,32 @@
                 };
 
                 return populated;
+            },
+            navp() {
+                const { nav } = this;
+                return Object.values(nav).reduce((pop))
+            },
+            populate() {
+                const { nav } = this;
+                const deepCopy = Object.values(nav).reduce((populated, row) => {
+                    const shallowCopy = { ...row };
+                    for (let key in shallowCopy) {
+                        if (typeof shallowCopy[key] === 'object') {
+                            if (Array.isArray(shallowCopy[key])) shallowCopy[key] = [...shallowCopy[key]];
+                            else shallowCopy[key] = { ...shallowCopy[key] }
+                        }
+                    }
+
+                    return { ...populated, [row.id]: shallowCopy };
+                }, {});
+
+                const deepCopyArray = Object.values(deepCopy);
+
+                for (let row of deepCopyArray) {
+                    row.evolvesTo = row.evolvesTo.map(id => deepCopy[id]);
+                }
+
+                return deepCopyArray.filter(data => data.isRoot);
             }
         },
         mounted() {
