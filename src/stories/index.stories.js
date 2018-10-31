@@ -3960,6 +3960,24 @@ storiesOf('List', module)
         </div>`
     }))
 
+import GameInstallerModal from '@/ui/components/game-installer'
+storiesOf('Game Installer Modal', module)
+    .add('default', () =>({
+        components:{
+            'c-game-installer': GameInstallerModal
+        },
+        template: `
+        <div class="row p-5">
+            <div class="col-5">
+                <c-game-installer :activated="true">
+                    
+                </c-game-installer>
+            </div>
+        </div>
+        
+        `
+    }))
+
 
 
 

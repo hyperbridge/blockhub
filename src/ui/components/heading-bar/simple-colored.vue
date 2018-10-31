@@ -14,7 +14,7 @@
         props: {
             colorCode: {
                 type: String,
-                default: 'fff'
+                default: '#fff'
             },
             textAlign: {
                 type: String,

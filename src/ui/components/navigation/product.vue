@@ -8,6 +8,8 @@
             :links="links.gameOverview"
         />
 
+        <c-button @click="$store.commit('application/activateModal', 'import-product')" v-if="$store.state.application.editor_mode === 'editing'">Import from third-party</c-button>
+
         <c-curator-panel>
             <!-- <c-claim title="Unclaimed Page" type="warning" v-darklaunch="'CURATORS'">
                 <p>Created this game?</p>

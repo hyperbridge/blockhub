@@ -45,6 +45,26 @@
                 </div>
             </div> -->
 
+            <div class="row promotion margin-top-40 margin-bottom-20">
+                <h1 class="margin-auto margin-bottom-20">Launch Promotion</h1>
+                <p>For the first month, HBX will be on discount and purchasers will receive an exclusive badge, the Voyager Badge (<a href="http://erc721.org/">an ERC-721 NFT</a>). The token price will be $0.055 USD each, and this time only, any unsold tokens will be equally distributed to the purchasers, the equivalent of being burned 🔥. This is as a thanks to you, our early supporters.</p>
+                <div class="carousel-wrapper margin-auto margin-top-20 margin-bottom-20">
+                    <c-carousel-3d
+                        :items="assets"
+                        :limitTo="2"
+                    >
+                        <template slot-scope="props">
+                            <c-asset-store-card
+                                v-for="(item) in props.items"
+                                :class="item.css"
+                                :key="item.id"
+                                :asset="item"
+                            />
+                        </template>
+                    </c-carousel-3d>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked">
                     <c-block title="Purchase" class="margin-bottom-30">
@@ -452,6 +472,8 @@ export default {
         'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
         'c-tabs': (resolve) => require(['@/ui/components/tab/tabs'], resolve),
         'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
+        'c-carousel-3d': (resolve) => require(['@/ui/components/carousel-3d'], resolve),
+        'c-asset-store-card': (resolve) => require(['@/ui/components/asset/store-card'], resolve),
         'c-welcome-box': (resolve) => require(['@/ui/components/welcome-box'], resolve)
     },
     data() {
@@ -520,6 +542,30 @@ export default {
             ethereum_connected: this.$store.state.application.desktop_mode,
             purchaseAddress: chosenIdentity ? chosenIdentity.public_address : null,
             override: false,
+            assets: [
+                {
+                    name: 'HBX',
+                    price: {
+                        min: 0.055,
+                        max: 0.055,
+                        current: 0.055
+                    },
+                    image: '/static/img/icons/hbx-token.png',
+                    system_tags: ['exclusive'],
+                    css: 'store-card--trending'
+                },
+                {
+                    name: 'Voyager Badge',
+                    price: {
+                        min: 0.0,
+                        max: 0.0,
+                        current: 0.0
+                    },
+                    image: '/static/img/icons/voyager-badge.png',
+                    system_tags: ['special'],
+                    css: 'store-card--special'
+                }
+            ],
             purchasePopup: {
                 title: 'Purchase',
                 text: '',

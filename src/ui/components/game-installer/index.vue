@@ -1,195 +1,281 @@
 <template>
-    <div class="game-installer">
-        <div class="game-installer__product-preview">
-            <c-img
-                class="game-installer__image"
-                :src="product.images.medium_tile"
-            />
-            <div class="game-installer__description">
-                <h3>{{ product.name }}</h3>
-                <p v-html="description"></p>
-                <c-icon
-                    v-for="(reqs, index) in product.system_requirements"
-                    :key="index"
-                    cat="fab"
-                    :name="getSysName(reqs.os)"
-                />
+    <c-basic-popup :activated="activated" :width="width">
+        <div class="game-installer" slot="body">
+            <div class="game-installer__header">
+                <div class="game-installer__game-img">
+                    <c-img :src="img" />
+                </div>
+                <div class="game-installer__game-description">
+                    <div class="h5 mb-0 pb-0 font-weight-bold">
+                        {{ name }}
+                    </div>
+                    <p>
+                        <slot />
+                    </p>
+                    <div class="game-operations-support">
+                        Systems
+                        <i class="fab fa-apple" v-if="mac"></i>
+                        <i class="fab fa-linux" v-if="linux"></i>
+                        <i class="fab fa-windows" v-if="win"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="game-installer__body">
+                <div class="game-installer__select-row">
+                    <label>
+                        Install
+                    </label>
+                    <div class="dropdown">
+                        <a class="btn dropdown-toggle" href="#" role="button"
+                           :id="id" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="fas fa-gamepad"></i>
+                            {{ file }}
+                        </a>
+                        <div class="dropdown-menu" :aria-labelledby="[ id + '_button']">
+                            <ul class="list-unstyled mb-0 p-0">
+                                <li @click="choosenGame(file)" v-for="(file, index) in filesList" :key="index">
+                                    {{ name }} ({{ makeCapitalize(file.platform) }}, {{ file.size | numeralFormat('0.0') }})
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-installer__select-row">
+                    <label>
+                        To location
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <select class="custom-select">
+                            <option selected>Choose...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="game-installer__space">
+                    <div>
+                        Disk space required <strong>251</strong> MiB
+                    </div>
+                    <div>
+                        Disk space available <strong>25</strong> GiB
+                        <i class="fas fa-check-circle" style="color: #43C981"></i>
+                    </div>
+                </div>
+                <div class="game-installer__footer">
+                    <a href="#" class="c-btn btn-cancel">
+                        Cancel
+                    </a>
+                    <a href="#" class="c-btn btn-download">
+                        <i class="fas fa-download"></i> Install
+                    </a>
+                </div>
             </div>
         </div>
-
-        <div class="game-installer__opt-wrapper">
-            <span class="game-installer__opt-title">
-                Location:
-            </span>
-            <div class="game-installer__input-wrapper">
-                <c-icon name="folder-open"/>
-                <input
-                    class="game-installer__input"
-                    v-model="path"
-                    list="saved-paths"
-                />
-                <datalist id="saved-paths">
-                    <option v-for="(path, index) in savedPaths" :key="index">
-                        {{ path }}
-                    </option>
-                </datalist>
-            </div>
-        </div>
-
-
-
-        <div class="game-installer__space-info">
-            <p>
-                Disk space required
-                <span class="game-installer__size">512 MiB</span>
-            </p>
-            <p>
-                Disk space available
-                <span class="game-installer__size">53 GiB</span>
-            </p>
-        </div>
-
-
-        <div class="game-installer__buttons-wrapper">
-            <button
-                @click="$emit('cancel')"
-                type="button"
-                class="game-installer__button"
-            >
-                Cancel
-            </button>
-            <button
-                type="button"
-                class="game-installer__button--install"
-                :class="{ 'disabled': !path }"
-            >
-                <c-icon name="hdd"/>
-                <span>Install</span>
-            </button>
-        </div>
-    </div>
+    </c-basic-popup>
 </template>
 
 <script>
     export default {
-        name: 'game-installer',
-        props: {
-            product: Object
-        },
-        components: {
-            'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-3'], resolve),
-            'c-list': (resolve) => require(['@/ui/components/list'], resolve),
-        },
-        data() {
-            return {
-                path: '',
-            }
-        },
-        methods: {
-            getSysName(os) {
-                switch(os) {
-                    case 'win':
-                        return 'windows';
-                    case 'mac':
-                        return 'apple';
-                    case 'linux':
-                        return 'linux';
-                    default: return '';
-                }
-            }
-        },
-        computed: {
-            description() {
-                return this.product.content.substring(0, 150) + '...';
+        props:{
+            activated:{
+                type: Boolean,
+                default: false
             },
-            savedPaths() {
-                return this.$store.state.application.account.saved_paths;
+            width: {
+                type: String,
+                default: '500'
+            },
+            name: String,
+            mac: String,
+            win: String,
+            linux: String,
+            img: String,
+            filesList: Array
+        },
+        components:{
+            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic'], resolve),
+            'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
+        },
+        data(){
+            return{
+                file: 'Choose the game'
+            }
+        },
+        methods:{
+            choosenGame(){
+            },
+            makeCapitalize(str){
+                return str.charAt(0).toUpperCase() + str.slice(1);
             }
         }
     }
 </script>
 
 <style lang="scss" scoped>
-    .game-installer__product-preview {
-        background: rgba(255,255,255,.025);
+    .game-installer__header{
         display: flex;
-        border: 1px solid rgba(255,255,255,.08);
-        margin-bottom: 20px;
-        .fab {
-            margin-right: 10px;
-        }
-    }
-    .game-installer__image {
-        width: 160px;
-        max-height: 160px;
-        object-fit: cover;
-        background-position: 0 0;
-    }
-    .game-installer__description {
-        padding: 20px;
-    }
-
-    .game-installer__input-wrapper {
-        display: flex;
-        align-items: center;
-        background-color: #28283B;
-        padding: 4px 10px;
         justify-content: space-between;
-        border: 1px solid rgba(255,255,255,.2);
-        width: 100%;
-        .fas {
-            font-size: 16px;
-        }
-        .game-installer__input {
+        align-items: stretch;
+        flex-wrap: nowrap;
+        margin-bottom: 10px;
+    }
+    .game-installer__body{
+        display: flex;
+        flex-direction: column;
+    }
+    .game-installer__game-img{
+        width: 30%;
+        img{
             width: 100%;
-            background: #28283B;
-            padding: 5px;
-            margin-left: 10px;
-            border: none;
+            height: auto;
         }
     }
-
-    .game-installer__opt-wrapper {
+    .game-installer__game-description{
+        width: 70%;
+        padding: 5px 0 5px 15px;
+        flex-direction: column;
         display: flex;
-        align-items: center;
-        .game-installer__opt-title {
-            margin-right: 30px;
+        p{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
         }
-    }
-
-    .game-installer__space-info {
-        margin: 35px 0;
-        .game-installer__size {
-            color: #fff;
-            margin-left: 4px;
-        }
-    }
-
-    .game-installer__buttons-wrapper {
-        display: flex;
-        justify-content: space-between;
-        .game-installer__button {
-            padding: 7px 20px;
-            border-radius: 4px;
-            border: 1px solid #8c92ff;
-            border-top-width: 2px;
-            background: linear-gradient(-115deg,#30336b, #130f40);
-            color: #fff;
-            cursor: pointer;
-            text-shadow: 2px 2px 0px rgba(1,1,1,.4);
-        }
-        .game-installer__button--install {
-            @extend .game-installer__button;
-            box-shadow: 0 0 30px 0 rgba(140, 146, 255, .45);
-            .fas {
-                margin-right: 5px;
+        .game-operations-support{
+            margin-top: auto;
+            opacity: .7;
+            i{
+                margin-left: 3px;
+                &:first-child{
+                    margin-left: 10px;
+                }
             }
         }
-        .disabled {
-            pointer-events: none;
-            filter: grayscale(100%);
-            box-shadow: none;
+    }
+    .game-installer__select-row{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        label{
+            width: 130px;
+            margin: 0;
+        }
+        .input-group{
+            display: flex;
+            align-items: center;
+            width: calc( 100% - 100px );
+            margin: 0;
+            border: 1px solid rgba(255, 255, 255, .1);
+            select{
+                padding: 5px;
+                background: rgba(0, 0, 0, .3);
+                color: #fff;
+                border: none;
+                outline: none;
+                user-select: none;
+                box-shadow: none;
+            }
+            .input-group-prepend{
+                padding: 0 10px;
+                background: rgba(0, 0, 0, .3);
+                font-size: 14px;
+                line-height: 30px;
+                display: inline-block;
+            }
+        }
+        .dropdown{
+            display: flex;
+            width: calc( 100% - 100px );
+            border: 1px solid rgba(255, 255, 255, .1);
+            background: rgba(0, 0, 0, .3);
+            position: relative;
+            .btn{
+                display: flex;
+                align-items: center;
+                color: #fff;
+                padding: 0 10px;
+                width: 100%;
+                line-height: 30px;
+                font-size: 13px;
+                user-select: none;
+                box-shadow: none;
+                i{
+                    margin-right: 10px;
+                    font-size: 14px;
+                }
+                &:after{
+                    margin-left: auto;
+                }
+            }
+            .dropdown-menu{
+                right: 0;
+                border: 1px solid rgba(255, 255, 255, .1);
+                background: rgba(0, 0, 0, .85);
+                border-radius: 0 0 5px 5px;
+                margin: 0;
+                color: #fff;
+                padding: 0px;
+                transform: translate3d(0, 30px, 0)!important;
+                li{
+                    line-height: 28px;
+                    padding: 0 10px;
+                    cursor: pointer;
+                    &:hover{
+                        background: rgba(255, 255, 255, .15);
+                    }
+                }
+            }
+        }
+    }
+    .game-installer__space{
+        margin: 20px 0 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    .game-installer__footer{
+        display: flex;
+        padding-top: 20px;
+        margin-top: 10px;
+        border-top: 1px solid rgba(255, 255, 255, .1);
+        justify-content: space-between;
+        align-items: center;
+        .c-btn{
+            padding: 2px 20px;
+            border-radius: 3px;
+            color: #fff;
+            text-shadow: 0 0 3px rgba(0, 0, 0, .5);
+            border-top-width: 2px!important;
+            &.btn-cancel{
+                border: 1px solid #a3424b;
+                /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#67272c+0,551e23+100 */
+                background: rgb(103,39,44); /* Old browsers */
+                background: -moz-linear-gradient(top, rgba(103,39,44,1) 0%, rgba(85,30,35,1) 100%); /* FF3.6-15 */
+                background: -webkit-linear-gradient(top, rgba(103,39,44,1) 0%,rgba(85,30,35,1) 100%); /* Chrome10-25,Safari5.1-6 */
+                background: linear-gradient(to bottom, rgba(103,39,44,1) 0%,rgba(85,30,35,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#67272c', endColorstr='#551e23',GradientType=0 ); /* IE6-9 */
+                &:hover{
+                    background: #a3424b;
+                    text-decoration: none;
+                }
+            }
+            &.btn-download{
+                border: 1px solid #c0525d;
+                /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ae343f+0,8d2a33+100 */
+                background: rgb(174,52,63); /* Old browsers */
+                background: -moz-linear-gradient(top, rgba(174,52,63,1) 0%, rgba(141,42,51,1) 100%); /* FF3.6-15 */
+                background: -webkit-linear-gradient(top, rgba(174,52,63,1) 0%,rgba(141,42,51,1) 100%); /* Chrome10-25,Safari5.1-6 */
+                background: linear-gradient(to bottom, rgba(174,52,63,1) 0%,rgba(141,42,51,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ae343f', endColorstr='#8d2a33',GradientType=0 ); /* IE6-9 */
+                &:hover{
+                    background: #c0525d;
+                    text-decoration: none;
+                }
+            }
         }
     }
 </style>
-

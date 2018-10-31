@@ -143,6 +143,12 @@
                                             My Wallets
                                         </a>
                                     </li>
+                                    <li v-if="account.current_identity">
+                                        <a :href="`/#/identity/${account.current_identity.public_address}`">
+                                            <i class="fas fa-user"></i>
+                                            Public Profile
+                                        </a>
+                                    </li>
                                     <li>
                                         <a href="/#/account/identities">
                                             <i class="fas fa-users"></i>
@@ -242,7 +248,7 @@ export default {
             this.$store.dispatch('application/setEditorMode', 'editing')
         },
         clickRemove() {
-
+            this.$store.dispatch('application/setEditorMode', 'removing')
         },
         clickPublish() {
             this.$store.dispatch('application/setEditorMode', 'publishing')

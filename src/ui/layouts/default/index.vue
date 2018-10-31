@@ -86,6 +86,63 @@
             <c-purchase-popup :activated="purchase_modal_active" @close="closePopup" ref="purchase_modal_active"></c-purchase-popup>
             <c-claim-popup :activated="claim_modal_active" @close="closePopup" ref="claim_modal_active"></c-claim-popup>
 
+            <c-basic-popup 
+                :activated="$store.state.application.editor_mode && $store.state.application.account.settings.client.hide_editor_welcome_modal"
+                @close="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_editor_welcome_modal', true)"
+            >
+                <div class="h4" slot="header">Welcome to the editor</div>
+                <template slot="body">
+                    <p v-if="!voteCasted">
+                        The goal of BlockHub is everything is editable and curatable through community vote. Like a super-charged Wikipedia-style entertainment platform. But this isn't yet!
+                    </p>
+                    <p v-if="!voteCasted">
+                        Want this to be the next section we make editable? <c-button class="underline" @click="vote">Cast your vote by clicking here!</c-button>
+                    </p>
+                    <p v-if="voteCasted">
+                        Your vote has been cast. Thank you!
+                    </p>
+                </template>
+                <p slot="footer">
+                    Need help? <c-button status="plain" href="/#/help">Check the Help Center</c-button>
+                </p>
+            </c-basic-popup>
+
+            <c-basic-popup 
+                :activated="$store.state.application.active_modal === 'propose-idea'"
+                @close="$store.commit('application/activateModal', null)"
+            >
+                <div class="h4" slot="header">Propose Idea</div>
+                <template slot="body">
+                    <div v-if="chosenIdentity.curator_id">
+                        <p>Great, you're a curator. <c-button class="underline" href="/#/project/new">Click here to continue</c-button>.</p>
+                    </div>
+                    <div v-if="!chosenIdentity.curator_id">
+                        <p>
+                            To propose ideas you must sign up for a Curator Profile. Don't worry, the process is simple!
+                        </p>
+                        <p hidden>
+                            Tell people about yourself<br />
+                            <textarea></textarea>
+                        </p>
+                        <c-user-card
+                            class="col-8 margin-auto"
+                            :user="chosenIdentity"
+                            :previewMode="true"
+                            :class="{ 'default': true }"
+                        />
+                        <br />
+                        <c-button class="underline" @click="$store.commit('application/showProfileChooser', true)">Choose Different Profile</c-button>
+
+                        <br /><br />
+
+                        <c-button class="c-btn-lg outline-white margin-top-20" @click="$store.commit('application/convertCurator', { identity: chosenIdentity })">Convert to Curator</c-button>
+                    </div>
+                </template>
+                <p slot="footer">
+                    Need help? <c-button status="plain" href="/#/help">Check the Help Center</c-button>
+                </p>
+            </c-basic-popup>
+
             <c-popup :activated="notifPopup.show_popup"
                      :title="notifPopup.title"
                      :type="notifPopup.type"
@@ -109,7 +166,7 @@
         </div>
         <!-- //END PAGE CONTENT -->
 
-        <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
+        <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
 
         <!--<transition name="slideDown">-->
             <c-profile-chooser v-if="profile_chooser && signed_in" />
@@ -169,7 +226,6 @@
             'c-asset-navigation': (resolve) => require(['@/ui/components/navigation/asset'], resolve),
             'c-product-navigation': (resolve) => require(['@/ui/components/navigation/product'], resolve),
             'c-project-navigation': (resolve) => require(['@/ui/components/navigation/project'], resolve),
-            'c-clock': (resolve) => require(['@/ui/components/clock/index.vue'], resolve),
             'c-welcome-popup': (resolve) => require(['@/ui/components/welcome-popup/index.vue'], resolve),
             'c-download-popup': (resolve) => require(['@/ui/components/download-popup/index.vue'], resolve),
             'c-unlock-popup': (resolve) => require(['@/ui/components/unlock-popup/index.vue'], resolve),
@@ -177,6 +233,9 @@
             'c-login-popup': (resolve) => require(['@/ui/components/login-popup/index.vue'], resolve),
             'c-send-funds-popup': (resolve) => require(['@/ui/components/send-funds-popup/index.vue'], resolve),
             'c-purchase-popup': (resolve) => require(['@/ui/components/purchase-popup/index.vue'], resolve),
+            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic.vue'], resolve),
+            'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
+            'c-clock': (resolve) => require(['@/ui/components/clock/index.vue'], resolve),
             'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
             'c-cookie-policy': (resolve) => require(['@/ui/components/cookie-policy'], resolve),
             'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more.vue'], resolve),
@@ -198,12 +257,16 @@
                 scrollMoreDirection: null,
                 slimMode: false,
                 mobileMode: false,
-                bluredBg: false
+                bluredBg: false,
+                voteCasted: false
             }
         },
         computed: {
             is_connected() {
                 return this.$store.state.application.connection.internet && this.$store.state.application.connection.datasource
+            },
+            chosenIdentity() {
+                return this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
             },
             connection_status() {
                 return this.$store.state.application.connection.status
@@ -263,6 +326,10 @@
             onSwipeRight(){
                 console.log('right swipe')
                 this.showLeftPanel = true
+            },
+            vote() {
+                this.$store.commit('application/entry', { key: 'editable_page', value: window.location.hash })
+                this.voteCasted = true
             },
             closePopup() {
                 this.$store.state.application.active_modal = null
@@ -414,6 +481,24 @@
         height: 50px;
         opacity: 0.85;
         z-index: 100;
+
+
+        animation: badgeGlimmer ease-out;
+        animation-fill-mode: forwards;
+        animation-duration: 1s;
+        animation-delay: .2s
+    }
+
+    @keyframes badgeGlimmer {
+        0% {
+            left: -100%;
+            opacity: .3
+        }
+
+        100% {
+            left: 200%;
+            opacity: 1
+        }
     }
 
     .cookie-policy {

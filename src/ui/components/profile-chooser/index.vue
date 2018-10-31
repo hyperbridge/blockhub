@@ -15,14 +15,13 @@
                         <c-slide
                             v-for="identity in identities"
                             :key="identity.id">
-                            <a href="#3" class="user-card__container-link" @click="setDefault(identity)">
+                            <div class="user-card__container-link" @click="setDefault(identity)">
                                 <c-user-card
                                     :user="identity"
                                     :previewMode="!identity.edit"
-                                    :type="identity.developer_id ? 'developer' : 'user'"
                                     :class="{ 'default': identity.id == (defaultIdentity && defaultIdentity.id) }"
                                 />
-                            </a>
+                            </div>
                         </c-slide>
                     </c-swiper>
                     <div class="swiper-button-prev" slot="button-prev"></div>

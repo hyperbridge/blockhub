@@ -13,7 +13,8 @@
                     </div>
                 </div>
                 <div>
-                    <c-button status="info" icon_hide>Suggest Idea</c-button>
+                    <c-button status="info" icon_hide href="/#/project/new" v-if="developer_mode">Propose Idea</c-button>
+                    <c-button status="info" icon_hide @click="$store.commit('application/activateModal', 'propose-idea')" v-if="!developer_mode">Propose Idea</c-button>
                 </div>
             </div>
         </div>
@@ -28,9 +29,9 @@
                             :image="project.images.medium_tile"
                             :description="project.description"
                             :funds="project.funds"
-                            :productImage="product.images.medium_tile"
-                            :productName="product.name"
-                            :productDeveloper="product.developer"
+                            :name="project.name"
+                            :developer="product.developer"
+                            :id="project.id"
                             :showGame="false"
                             class="margin-0 w-100"
                         />

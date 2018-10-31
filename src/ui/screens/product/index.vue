@@ -8,36 +8,6 @@
         </div>
         <div class="row" v-if="product">
             <div class="col-12 col-md-12">
-                <div class="row" v-if="editing" style="margin-bottom: 70px;">
-                    <c-button @click="showImporter" v-if="!importing">Import from Steam, GOG, etc.</c-button>
-                    <div class="" v-if="importing">
-                        Choose source: 
-                        <br />
-                        <div class="row">
-                            <div class="col">
-                                Steam
-                            </div>
-                            <div class="col">
-                                GOG.com
-                            </div>
-                            <div class="col">
-                                Itch
-                            </div>
-                        </div>
-                        <br />
-                        Enter URL:
-                        <br />
-                        <input ref="importUrl" type="text" value="https://store.steampowered.com/app/441830/I_am_Setsuna/" />
-                        <br />
-                        <c-button @click="startImport">Go</c-button>
-                        <br />
-                        <div>Importing...</div>
-                        Results:
-                        <br />
-                        <textarea ref="importResults"></textarea>
-                        <div>Submission Cost: 10 HBX</div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <div class="editor-container">
@@ -65,7 +35,7 @@
                             <div class="" v-if="editing">
                                 <div class="form-group">
                                     <select id="tag-editor" class="form-control" multiple="multiple">
-                                        <option v-for="(tag, index) in author_tag_options" :key="index"
+                                        <option v-for="(tag, index) in developer_tag_options" :key="index"
                                                 :selected="product.developer_tags.includes(tag)">{{ tag }}
                                         </option>
                                     </select>
@@ -104,34 +74,105 @@
                         </c-button>
                         <div class="collapse show product_nav" id="product_nav">
                             <ul class="nav nav-tabs margin-bottom-30 justify-content-between">
-                                <li class="nav-item">
+                                <li class="nav-item" @click="section='overview'">
                                     <router-link :to="`/product/${id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" @click="section='community'">
                                     <router-link :to="`/product/${id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community
                                     </router-link>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" @click="section='projects'">
                                     <router-link :to="`/product/${id}/projects`" class="nav-link" :class="{ 'active': section === 'projects' }">Crowdfunding
                                     </router-link>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" @click="section='assets'">
                                     <router-link :to="`/product/${id}/assets`" class="nav-link" :class="{ 'active': section === 'assets' }">Inventory</router-link>
+                                </li>
+                                <li class="nav-item" v-if="editing">
+                                    <a class="nav-link" :class="{ 'active': section === 'configure' }" @click="section='configure'">Configure</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
+
+                        <div class="col-12" v-if="section === 'configure'" :editing="editing">
+                            <c-block title="Product">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group row">
+                                            <label class="switch switch-sm col-sm-3">
+                                                <label>Price</label>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Example: 10" v-model="product.price">
+                                                <span class="form-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="switch switch-sm col-sm-3">
+                                                <label>Old Price</label>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Example: 20" v-model="product.old_price">
+                                                <span class="form-text"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <label>Genre</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Example: RPG" v-model="product.genre">
+                                                <span class="form-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <label>Release Date</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Example: 12/30/2020" v-model="product.release_date">
+                                                <span class="form-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <label>Publisher</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Example: Actilizard Entertainment" v-model="product.publisher">
+                                                <span class="form-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <label>Developer</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Example: Northcap Studios" v-model="product.developer">
+                                                <span class="form-text"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                    </div>
+                                </div>
+                            </c-block>
+                        </div>
 
                     <div class="col-12">
                         <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
                         <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
                         <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
                         <c-product-projects :product="product" v-if="section === 'projects'" :editing="editing" />
+
                     </div>
                 </div>
             </div>
         </div>
-        <c-custom-modal title="Help Center" v-if="first_product && editing" @close="closeModal">
+        <c-custom-modal title="Help Center" v-if="first_product && editing && !$store.state.application.account.settings.client.hide_product_intro_modal" @close="closeModal">
             <div class="help-modal__content" slot="modal_body" style="max-width: 500px">
                 <h4 class="h2 mb-3">Creating your first product?</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -144,6 +185,70 @@
                 <c-button size="md" @click="closeModal">Got it</c-button>
             </div>
         </c-custom-modal>
+
+
+        <c-basic-popup 
+            :activated="$store.state.application.active_modal === 'import-product'"
+            @close="$store.commit('application/activateModal', null)"
+        >
+            <div class="h4" slot="header">Propose Idea</div>
+            <template slot="body">
+                <div v-if="importStep === 1">
+                    <h3 class="margin-auto">Choose source: </h3>
+                    <br />
+                    <div class="row justify-content-center margin-bottom-50">
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <c-topic-item
+                                @click="nextImportStep"
+                                size="lg"
+                                icon="users"
+                                class="padding-10">
+                                Steam
+                            </c-topic-item>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <c-topic-item
+                                @click="nextImportStep"
+                                icon="users"
+                                size="lg"
+                                class="padding-10">
+                                GOG
+                            </c-topic-item>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <c-topic-item
+                                @click="nextImportStep"
+                                icon="users"
+                                size="lg"
+                                class="padding-10">
+                                Itch
+                            </c-topic-item>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+                <div v-if="importStep === 2">
+                    <h3 class="margin-auto">Enter URL: </h3>
+                    <br />
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <input class="form-control" ref="importUrl" type="text" value="https://store.steampowered.com/app/441830/I_am_Setsuna/" />
+                            <span class="form-text">Example: https://store.steampowered.com/app/441830/I_am_Setsuna/</span>
+                        </div>
+                    </div>
+                    
+                    <c-button class="c-btn-lg outline-white margin-top-20 margin-auto" @click="startImport">GO</c-button>
+                </div>
+                <br />
+                <div class="padding-40 loading-process" style="position: relative" v-if="importing">
+                    <div class="loading loading--w-spinner"><div><div class="loading-spinner"></div></div></div>
+                </div>
+            </template>
+            <p slot="footer" class="margin-top-20">
+                Need help? <c-button status="plain" href="/#/help">Check the Help Center</c-button>
+            </p>
+        </c-basic-popup>
+        
     </c-layout>
 </template>
 
@@ -167,6 +272,8 @@
             'c-product-projects': (resolve) => require(['@/ui/screens/product-projects'], resolve),
             'c-product-assets': (resolve) => require(['@/ui/screens/product-assets'], resolve),
             'c-product-community': (resolve) => require(['@/ui/screens/product-community'], resolve),
+            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic.vue'], resolve),
+            'c-topic-item': (resolve) => require(['@/ui/components/help/topic-item'], resolve),
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve)
@@ -178,13 +285,14 @@
                     background_image: false,
                     tags: false
                 },
-                author_tag_options: [
+                developer_tag_options: [
                     'rpg',
                     'adventure',
                     'racing',
                     'action'
                 ],
                 importing: false,
+                importStep: 1,
                 savedState: false
             }
         },
@@ -197,6 +305,13 @@
             },
             editor_mode() {
                 return this.$store.state.application.editor_mode
+            },
+            nextImportStep() {
+                if (this.importStep === 1) {
+                    this.importStep = 2
+                } else if (this.importStep === 2) {
+
+                }
             },
             editing() {
                 if (!this.$store.state.application.editor_mode) {
@@ -312,10 +427,11 @@
             },
             closeModal() {
                 this.$store.state.marketplace.first_product = false
+                this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_product_intro_modal', true)
             },
-            showImporter() {
-                this.importing = true
-            },
+            // showImporter() {
+            //     this.importing = true
+            // },
             startImport() {
                 const onWindowLoad = `function onWindowLoad(requestId) {
                     const script = document.createElement('script');
@@ -409,7 +525,7 @@
                     this.product.type = 'game'
                     //this.product.rating.overall = 0
                     this.product.system_tags = ['imported']
-                    this.product.author_tags = data.tags
+                    this.product.developer_tags = data.tags
                     this.product.name = data.title
                     this.product.release_date = data.releaseDate
                     this.product.description = data.description
@@ -460,6 +576,15 @@
                     this.save()
 
                     this.$store.dispatch('application/setEditorMode', 'viewing')
+                } else if (newMode === 'removing') {
+                    Brdge.sendCommand('removeProduct', {
+                        id: this.product.id
+                    }).then((data) => {
+                        if (data.error) {
+                            return console.log(data.message)
+                        }
+                    })
+
                 }
             }
         }

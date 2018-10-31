@@ -3,7 +3,9 @@ import { normalize } from 'normalizr'
 import * as DB from '@/db'
 import * as Bridge from '@/framework/desktop-bridge'
 import schema from './schema'
-import { extract } from '@/store/utils';
+import axios from 'axios'
+import FormData from 'form-data'
+import { extract } from '@/store/utils'
 
 let rawData = {}
 
@@ -139,8 +141,12 @@ export const actions = {
     },
     setEditorMode(store, payload) {
         store.commit('setEditorMode', payload)
+
+        if (!store.state.account.settings.client.hide_editor_welcome_modal) {
+            store.commit('activateModal', 'editor-welcome')
+        }
     },
-    unlockAccount(state, payload) {
+    unlockAccount(store, payload) {
         Bridge.resolvePromptPasswordRequest(payload.password.value)
 
         // Bridge.sendCommand('getAccountRequest', data).then((res) => {
@@ -330,8 +336,37 @@ export const mutations = {
         const success = (id) => {
         }
     },
+    entry(state, payload) {
+        // send .key and .value to sheet
+        const bodyFormData = new FormData()
+
+        bodyFormData.set('entry.524169597', payload.key)
+        bodyFormData.set('entry.399172045', payload.value)
+
+        axios({
+            method: 'post',
+            url: 'https://docs.google.com/forms/d/1W1_7UuaDjjCKp08vSllvyKZTQRCSej9kd743Z2N1NvY/formResponse',
+            data: bodyFormData,
+            config: { headers: { 'Content-Type': 'multipart/form-data' } }
+        })
+            .then((res) => {
+                //cb && cb()
+            })
+            .catch((err) => {
+                console.log('An error occurred. Please check your input or try again later.')
+            })
+
+    },
     activateModal(state, payload) {
         state.active_modal = payload
+    },
+    convertCurator(state, payload) {
+        Bridge.sendCommand('createCuratorRequest', payload.identity).then((data) => {
+            payload.identity.curator_id = data
+            state.curator_mode = true
+
+            // TODO: just redirect here?
+        })
     },
     UPDATE_CLIENT_SETTINGS (state, property, value) {
         value = value || !state.account.settings.client[property]

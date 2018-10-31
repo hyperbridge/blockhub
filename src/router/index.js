@@ -291,7 +291,10 @@ const router = new Router({
             path: '/identity/:id',
             name: 'Profile',
             props: true,
-            component: (resolve) => require(['@/ui/screens/identity-overview'], resolve)
+            component: (resolve) => require(['@/ui/screens/identity-overview'], resolve),
+            meta: {
+                breadcrumb: false
+            }
         },
         {
             path: '/identity/:id/contacts',
@@ -375,6 +378,14 @@ const router = new Router({
             path: '/settings/game-scanner',
             name: 'Game Scanner',
             component: (resolve) => require(['@/ui/screens/settings-game-scanner'], resolve),
+            meta: {
+                auth: true
+            }
+        },
+        {
+            path: '/settings/extensions',
+            name: 'Extensions',
+            component: (resolve) => require(['@/ui/screens/settings-extensions'], resolve),
             meta: {
                 auth: true
             }
@@ -601,16 +612,16 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/curators'], resolve)
         },
         {
-            path: '/curator/:id',
-            name: 'Curator',
-            props: true,
-            component: (resolve) => require(['@/ui/screens/curator-overview'], resolve)
-        },
-        {
             path: '/curator/application',
             name: 'Curator Application',
             props: true,
             component: (resolve) => require(['@/ui/screens/curator-application'], resolve)
+        },
+        {
+            path: '/curator/:id',
+            name: 'Curator',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/curator-overview'], resolve)
         },
         {
             path: '/download',
@@ -651,6 +662,11 @@ const router = new Router({
             path: '/meta',
             name: 'Meta',
             component: (resolve) => require(['@/ui/screens/meta'], resolve)
+        },
+        {
+            path: '/meta/presets',
+            name: 'Presets',
+            component: (resolve) => require(['@/ui/screens/meta-presets'], resolve)
         },
         {
             path: '/updates',
