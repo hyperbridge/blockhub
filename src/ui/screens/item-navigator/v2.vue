@@ -34,7 +34,7 @@
 
             <c-modal
                 v-if="activeId"
-                title="Select next asset to evolve"
+                title="Select next asset to expand the tree"
                 @close="activeId = null"
             >
                 <c-assets
@@ -42,6 +42,30 @@
                     :assets="assetsArray"
                     slot="body"
                 />
+            </c-modal>
+
+            <c-modal
+                v-if="deletingTree"
+                title="Delete asset from the tree"
+                @close="deletingTree = null"
+            >
+                <p class="text-align-center">Are you sure to delete this assets tree?</p>
+                <c-navigator-item
+                    v-for="(item, index) in deletingTree"
+                    :key="index"
+                    :index="index"
+                    :item="item"
+                    :listLength="item.evolvesTo.length"
+                    hideButtons
+                />
+                <div class="flex-center-between margin-top-50">
+                    <c-button status="info" @click="deletingTree = null" icon_hide>
+                        Cancel
+                    </c-button>
+                    <c-button status="success" @click="deleteTree()">
+                        Confirm
+                    </c-button>
+                </div>
             </c-modal>
 
         </div>
@@ -62,13 +86,18 @@
         },
         data() {
             return {
-                activeId: null
+                activeId: null,
+                deleteId: null,
+                deletingTree: null
             }
         },
         methods: {
             evolveNavigator(assetId) {
                 this.$store.dispatch('assets/evolveNavigator', { evolveId: this.activeId, assetId });
                 this.activeId = null;
+            },
+            deleteTree() {
+
             }
         },
         computed: {
@@ -109,9 +138,19 @@
         },
         mounted() {
             EventBus.$on('evolve', id => this.activeId = id);
+            EventBus.$on('devolve', ({ id, tree }) => {
+                this.deletingTree = [{ ...tree, isRoot: true }];
+                console.log(tree)
+                // this.deleteId = id;
+            });
+            EventBus.$on('selected', id => {
+                // for
+                // this.$store.commit('update')
+            })
         },
         beforeDestroy() {
             EventBus.$off('evolve');
+            EventBus.$off('devolve');
         }
     }
 </script>

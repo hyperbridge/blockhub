@@ -11,7 +11,7 @@
     >
         <div class="navigator-item__content">
             <button
-                v-if="!item.evolvesTo.length && hovered"
+                v-if="!item.evolvesTo.length && hovered && !hideButtons"
                 @click="handleClick(item.id)"
                 class="navigator-item__btn navigator-item__btn--right"
             >
@@ -19,14 +19,18 @@
             </button>
 
             <button
-                v-if="index === listLength - 1 && hovered"
+                v-if="index === listLength - 1 && hovered && !hideButtons"
                 @click="handleClick(parentId)"
                 class="navigator-item__btn navigator-item__btn--bottom"
             >
                 <c-icon name="plus"/>
             </button>
             <!-- {{ item.id }} -->
-            <c-asset :asset="item.asset" class="navigator-item__asset"/>
+            <c-asset
+                :asset="item.asset"
+                class="navigator-item__asset"
+                @click="handleDevolve"
+            />
         </div>
         <div
             class="navigator-item__sub-navigators"
@@ -45,6 +49,7 @@
                 :listLength="item.evolvesTo.length"
                 :parentId="item.id"
                 :parentItem="item"
+                :hideButtons="hideButtons"
             />
         </div>
     </div>
@@ -68,7 +73,8 @@
                 default: 'c-asset'
             },
             parentId: [Number, String],
-            parentItem: Object
+            parentItem: Object,
+            hideButtons: Boolean
         },
         data() {
             return {
@@ -78,6 +84,13 @@
         methods: {
             handleClick(id) {
                 EventBus.$emit('evolve', id);
+            },
+            handleDevolve({ id }) {
+                // const { item: { id }} = this;
+
+                // const { id } = this.item;
+                EventBus.$emit('devolve', { tree: this.item });
+                EventBus.$emit('selected', id);
             }
         }
     }
