@@ -88,6 +88,13 @@ const assets = {
             const { [id]: value, ...values } = state[prop];
             state[prop] = values;
         },
+        deleteMany(state, { prop = 'assets', ids }) {
+            const copy = { ...state[prop] };
+            for (let id of ids) {
+                delete copy[id];
+            }
+            state[prop] = copy;
+        },
         deleteAsset(state, { prop = 'assets', id }) {
             // delete state[prop][id];
             Vue.delete(state[prop][id]);
@@ -138,6 +145,16 @@ const assets = {
                 },
                 [id]: { id, assetId, evolvesTo: [], isRoot }
             };
+        },
+        deleteNavigator(state, { id: itemId, parentId }) {
+            console.log('parentId', parentId)
+
+            const navTree = state.navigator[parentId];
+            state.navigator[parentId] = {
+                ...navTree,
+                evolvesTo: navTree.evolvesTo.filter(id => id !== itemId)
+            };
+            // evolvesTo: navTree.evolvesTo.filter(id => id !== parentId)
         }
     },
     actions: {
@@ -170,6 +187,25 @@ const assets = {
         evolveNavigator({ commit }, payload) {
             const id = rand();
             commit('evolveNavigator', { ...payload, id });
+        },
+        deleteNavigatorTree({ state: { navigator }, commit }, id) {
+            const idsToDelete = [id];
+
+            const checkId = (id) => {
+                if (navigator[id].evolvesTo.length) {
+                    navigator[id].evolvesTo.forEach(id => {
+                        idsToDelete.push(id);
+                        checkId(id);
+                    });
+                }
+            };
+            checkId(id);
+
+            console.log(idsToDelete)
+
+            // async calls
+
+            commit('deleteMany', { prop: 'navigator', ids: idsToDelete });
         }
     },
     getters: {

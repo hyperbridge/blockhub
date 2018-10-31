@@ -52,6 +52,7 @@
                 <p class="text-align-center">Are you sure to delete this assets tree?</p>
                 <c-navigator-item
                     v-for="(item, index) in deletingTree"
+                    class="assets-tree--delete"
                     :key="index"
                     :index="index"
                     :item="item"
@@ -62,7 +63,7 @@
                     <c-button status="info" @click="deletingTree = null" icon_hide>
                         Cancel
                     </c-button>
-                    <c-button status="success" @click="deleteTree()">
+                    <c-button status="success" @click="deleteTree(deletingTree[0].id)">
                         Confirm
                     </c-button>
                 </div>
@@ -88,7 +89,8 @@
             return {
                 activeId: null,
                 deleteId: null,
-                deletingTree: null
+                deletingTree: null,
+                deletingParentId: null
             }
         },
         methods: {
@@ -96,8 +98,11 @@
                 this.$store.dispatch('assets/evolveNavigator', { evolveId: this.activeId, assetId });
                 this.activeId = null;
             },
-            deleteTree() {
-
+            deleteTree(id) {
+                this.$store.commit('assets/deleteNavigator', { id, parentId: this.deletingParentId });
+                this.deletingParentId = null;
+                // this.$store.dispatch('assets/deleteNavigatorTree', id);
+                this.deletingTree = null;
             }
         },
         computed: {
@@ -138,8 +143,9 @@
         },
         mounted() {
             EventBus.$on('evolve', id => this.activeId = id);
-            EventBus.$on('devolve', ({ id, tree }) => {
+            EventBus.$on('devolve', ({ id, tree, parentId }) => {
                 this.deletingTree = [{ ...tree, isRoot: true }];
+                this.deletingParentId = parentId;
                 console.log(tree)
                 // this.deleteId = id;
             });
@@ -167,6 +173,11 @@
         // cursor: move;
         margin-bottom: 100px;
         padding: 0 100px 100px 0;
+    }
+    .assets-tree--delete {
+        background: rgba(1,1,1, .1);
+        border-radius: 4px;
+        border: 1px solid #fff;
     }
     .item-navigator__row {
     }
