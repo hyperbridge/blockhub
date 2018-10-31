@@ -73,7 +73,6 @@ storiesOf('Promotion Box', module)
     }))
 
 import AssetsImporter from '../ui/components/asset-importer'
-
 storiesOf('Assets Importer', module)
     .add('default', () => ({
         components: {
@@ -89,7 +88,6 @@ storiesOf('Assets Importer', module)
 
 import Notification from '../ui/components/notification'
 import NotificationInline from '../ui/components/notification/inline'
-
 storiesOf('Notifications', module)
     .add('default', () => ({
         components: {
@@ -238,7 +236,6 @@ storiesOf('Notifications', module)
     }))
 
 import Searcher from '../ui/components/searcher';
-
 storiesOf('Searcher', module)
     .add('default', () => ({
         components: {
@@ -251,7 +248,6 @@ storiesOf('Searcher', module)
 
 import RatingStars from '../ui/components/rating-stars';
 import RatingBlock from '../ui/components/rating-block/index'
-
 storiesOf('Rating', module)
     .add('Stars', () => ({
         components: {
@@ -291,7 +287,6 @@ storiesOf('Rating', module)
     }))
 
 import Author from '../ui/components/author';
-
 storiesOf('Author', module)
     .add('Author', () => ({
         components: {Author},
@@ -307,7 +302,6 @@ storiesOf('Author', module)
     }))
 
 import Tags from '../ui/components/tags';
-
 storiesOf('Tags', module)
     .add('Tags', () => ({
         components: {Tags},
@@ -316,7 +310,6 @@ storiesOf('Tags', module)
 
 import LoadingLine from '../ui/components/loading-bar';
 import LoadingCircle from '../ui/components/loading-bar/circle';
-
 storiesOf('LoadingBar', module)
     .add('line', () => ({
         components: {
@@ -340,7 +333,6 @@ import NavigationProduct from '../ui/components/navigation/product';
 import NavigationProject from '../ui/components/navigation/project';
 import NavigationSettings from '../ui/components/navigation/settings';
 import NavigationWallet from '../ui/components/navigation/wallet';
-
 storiesOf('Navigation', module)
     .add('account', () => ({
         components: {NavigationAccount}, template: `<div class="col-2 py-3"><NavigationAccount /></div>`
@@ -372,7 +364,6 @@ import Card from '../ui/components/project/card';
 import Badges from '../ui/components/project/badges';
 import Milestone from '../ui/components/project/milestone';
 import UpdatesCount from '../ui/components/project/updates-count';
-
 storiesOf('Projects', module)
     .add('card', () => ({
         components: {
@@ -557,7 +548,6 @@ import Tabs from '../ui/components/tab/tabs.vue'
 import Tab from '../ui/components/tab/tab.vue'
 import TabsUniversal from '@/ui/components/tab/tabs-universal';
 import TabUniversal from '@/ui/components/tab/tab-universal';
-
 storiesOf('Tabs', module)
     .add('default', () => ({
         components: {
@@ -779,7 +769,6 @@ import LanguageSupport from '@/ui/components/product-overview/language-support';
 import SystemRequirements from '@/ui/components/product-overview/system-requirements';
 
 import MilestonesLine from '../ui/components/milestones-line'
-
 storiesOf('Milestones Line', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
@@ -819,7 +808,6 @@ storiesOf('Milestones Line', module)
 
 import SidebarMenu from '../ui/components/sidebar-menu'
 import SidebarMenuLink from '../ui/components/sidebar-menu/menu_item'
-
 storiesOf('Sidebar Menu', module)
     .add('Main title', () => ({
         components: {
@@ -886,7 +874,6 @@ const injectButtonTemplate = code => `
 import Buttons from '../ui/components/buttons'
 import LoadMore from '../ui/components/buttons/load-more'
 import ButtonArrows from '@/ui/components/buttons/arrows'
-
 storiesOf('Buttons', module)
     .add('default', () => ({
         components: {'c-button': Buttons},
@@ -1077,7 +1064,6 @@ storiesOf('Buttons', module)
 
 
 import MoneyInfo from '../ui/components/money-info'
-
 storiesOf('Money Info', module)
     .add('default', () => ({
         components: {
@@ -1092,7 +1078,6 @@ storiesOf('Money Info', module)
 
 import Checkbox from '@/ui/components/checkbox';
 import CheckboxGroup from '@/ui/components/checkbox/group.vue';
-
 storiesOf('Checkbox', module)
     .add('Single checkbox', () => ({
         components: {
@@ -1127,7 +1112,6 @@ storiesOf('Checkbox', module)
     }));
 
 import Tooltips from '@/ui/components/tooltips';
-
 storiesOf('Tooltips', module)
     .add('dark', () => ({
         components: {
@@ -1201,7 +1185,6 @@ storiesOf('Tooltips', module)
     }))
 
 import TooltipUniversal from '@/ui/components/tooltips/universal';
-
 storiesOf('Tooltip Universal', module)
     .add('default', () => ({
         components: { 'c-tooltip-universal': TooltipUniversal },
@@ -1347,7 +1330,6 @@ storiesOf('Tooltip Universal', module)
 
 
 import ActivityChart from '../ui/components/activity-chart'
-
 storiesOf('Activity Chart', module)
     .add('default', () => ({
         components: {
@@ -1397,7 +1379,6 @@ storiesOf('Activity Chart', module)
 import PopUps from '@/ui/components/popups'
 import BasicPopup from '@/ui/components/popups/basic'
 import TermsPopup from '@/ui/components/popups/terms'
-
 storiesOf('Popups', module)
     .add('default', () => ({
         components: {
@@ -1814,7 +1795,6 @@ storiesOf('Popups', module)
 
 
 import RangeSlider from '../ui/components/range-slider/pure'
-
 storiesOf('Range Slider', module)
     .add('default', () => ({
         components: {
@@ -1843,7 +1823,6 @@ storiesOf('Range Slider', module)
 
 
 import AssetsGrid from '../ui/components/assets-grid'
-
 const assets_list = [
     {
         name: 'some item name',
@@ -1906,7 +1885,6 @@ const assets_list = [
         image: 'https://vignette.wikia.nocookie.net/elderscrolls/images/a/a6/FalmerSkulker.png/revision/latest?cb=20140826005240',
     }
 ]
-
 storiesOf('Assets Grid', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
@@ -1924,7 +1902,6 @@ storiesOf('Assets Grid', module)
     }), { viewport: 'desktop' })
 
 import AssetsPopup from '../ui/components/asset-overview-popup'
-
 storiesOf('Assets Overview Popup', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
@@ -1984,7 +1961,6 @@ storiesOf('Assets Overview Popup', module)
     }));
 
 import Switch from '../ui/components/switch'
-
 storiesOf('Switch', module)
     .addDecorator(withKnobs)
     .add('default', () => ({
@@ -1993,17 +1969,17 @@ storiesOf('Switch', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-switch label="Some text" label_position="right" label_size="22px" />
+             <c-switch :checked=true />
          </div>
         `
     }))
-    .add('small', () => ({
+    .add('changed label size', () => ({
         components: {
             'c-switch': Switch
         },
         template: `
          <div class="row m-0 p-3">
-             <c-switch size="sm" :checked=true />
+             <c-switch label="Some text" label_position="right" label_size="22px" />
          </div>
         `
     }))
@@ -2021,7 +1997,6 @@ storiesOf('Switch', module)
 
 import AssetsList from '../ui/components/assets-list-item/featured-list.vue'
 import AssetsListDetail from '../ui/components/assets-list-item'
-
 storiesOf('Assets List', module)
     .addDecorator(withKnobs)
     .add('type 1', () => ({
@@ -2052,44 +2027,45 @@ storiesOf('Assets List', module)
     }))
     .add('type 2', () => ({
         components: {
-            'c-asset-list': AssetsListDetail
+            'c-asset-list-detail': AssetsListDetail
         },
         data() {
             return object('Data', {
                 items: [
                     {
-                        img: 'https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de',
+                        image: 'https://vignette.wikia.nocookie.net/elderscrolls2/images/0/07/Lederr%C3%BCstung2.png/revision/latest?cb=20131219143228&path-prefix=de',
                         title: 'Magic Plate Armor',
                         price: {
                             "min": 0.99,
                             "max": 9.99,
                             "current": 2.99
                         },
-                        count: '350.000'
+                        count: '350.000',
+                        id: 1
                     },
                     {
-                        img: 'https://vignette.wikia.nocookie.net/angrybirds-fiction/images/8/8b/Toons_assets_chuck_01.png/revision/latest?cb=20150120103056&path-prefix=ru',
+                        image: 'https://vignette.wikia.nocookie.net/angrybirds-fiction/images/8/8b/Toons_assets_chuck_01.png/revision/latest?cb=20150120103056&path-prefix=ru',
                         title: 'Magic Chuck',
                         price: {
                             "min": 0.99,
                             "max": 9.99,
                             "current": 2.99
                         },
-                        count: '50.000'
+                        count: '50.000',
+                        id: 2
                     }
                 ]
             })
         },
         template: `
          <div class="row m-0 p-3">
-             <c-asset-list :items="items" itemInRow="4" />
+             <c-asset-list-detail :items="items" itemInRow="4" />
          </div>
         `
     }))
 
 
 import Block from '../ui/components/block'
-
 storiesOf('Block', module)
     .add('default', () => ({
         components: {
@@ -2142,9 +2118,10 @@ storiesOf('Block', module)
              </div>
             `
     }))
+
+
 import CustomModal from '../ui/components/modal/custom'
 import Modal from '@/ui/components/modal/';
-
 storiesOf('Modal', module)
     .add('image', () => ({
         components: { 'c-modal': Modal },
@@ -2189,8 +2166,8 @@ storiesOf('Modal', module)
     }))
 
 import Dropdown from '../ui/components/dropdown-menu/type-2'
-import DropdownSmall from '../ui/components/dropdown-menu/index'
-
+import DropdownCustom from '../ui/components/dropdown-menu/type-3'
+import DropdownPost from '../ui/components/dropdown-menu/index'
 storiesOf('Dropdown', module)
     .add('default', () => ({
         components: {
@@ -2206,9 +2183,9 @@ storiesOf('Dropdown', module)
          </div>
         `
     }))
-    .add('small', () => ({
+    .add('post dropdown', () => ({
         components: {
-            'c-dropdown': DropdownSmall
+            'c-dropdown': DropdownPost
         },
         template: `
          <div class="row m-0 p-3">
@@ -2216,10 +2193,42 @@ storiesOf('Dropdown', module)
          </div>
         `
     }))
+    .add('custom content', () => ({
+        components: {
+            'c-dropdown': DropdownCustom
+        },
+        template: `
+         <div class="row m-0 p-3">
+             <c-dropdown title="Dropdown">
+                <ul class="list-unstyled">
+                <li>
+                    <a href="#">
+                        This is link
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        This is link
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        This is link
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        This is link
+                    </a>
+                </li>
+            </ul>
+            </c-dropdown>
+         </div>
+        `
+    }))
 
 import DropdownMenu from '../ui/components/dropdown-menu/type-2.vue'
 import FTradedAssets from '../ui/components/frequently-traded-assets/index'
-
 storiesOf('Frequently traded assets', module)
     .add('default', () => ({
         components: {
@@ -2245,7 +2254,6 @@ storiesOf('Frequently traded assets', module)
     }))
 
 import GamePlan from '@/ui/components/game-plans/plan'
-
 storiesOf('Game Plans', module)
     .add('default', () => ({
         components: {
@@ -2289,7 +2297,6 @@ storiesOf('Game Plans', module)
 
 import GamesGrid from '../ui/components/game-grid/with-description'
 import GamesGridSimple from '../ui/components/game-grid/simple'
-
 storiesOf('Games Grid', module)
     .addDecorator(withKnobs)
     .add('with description', () => ({
@@ -2330,22 +2337,20 @@ storiesOf('Games Grid', module)
          `
     }))
 
-import Headers from '../ui/components/headers/basic'
-
-storiesOf('Headers', module)
-    .add('default', () => ({
-        components: {
-            'c-headers': Headers
-        },
-        template: `
-            <!--<c-headers />-->
-        `
-    }))
+// import Headers from '../ui/components/headers/basic'
+// storiesOf('Headers', module)
+//     .add('default', () => ({
+//         components: {
+//             'c-headers': Headers
+//         },
+//         template: `
+//             <!--<c-headers />-->
+        // `
+    // }))
 
 import BlockHeaders from '../ui/components/heading-bar/index'
 import BlockHeadersColor from '../ui/components/heading-bar/simple-colored.vue'
 import BlockHeadersAddFields from '../ui/components/heading-bar/additional-action'
-
 const injectHBarTemp = code => `
     <div class="row">
         <div class="col-8 p-5">
@@ -2367,7 +2372,7 @@ storiesOf('Block Title', module)
             'c-heading-bar': BlockHeaders
         },
         template: injectHBarTemp(`
-            <c-heading-bar name="This is the Title" showBackground="true" />
+            <c-heading-bar name="This is the Title" :showBackground="true" />
         `)
     }))
     .add('with arrows', () => ({
@@ -2375,7 +2380,7 @@ storiesOf('Block Title', module)
             'c-heading-bar': BlockHeaders
         },
         template: injectHBarTemp(`
-            <c-heading-bar name="This is the Title" showArrows="true"  />
+            <c-heading-bar name="This is the Title" :showActions="true" :showArrows="true" />
         `)
     }))
     .add('with more button', () => ({
@@ -2383,7 +2388,7 @@ storiesOf('Block Title', module)
             'c-heading-bar': BlockHeaders
         },
         template: injectHBarTemp(`
-            <c-heading-bar name="This is the Title" more="#some_link"  />
+            <c-heading-bar name="This is the Title" :showActions="true" more="#some_link"  />
         `)
     }))
     .add('with filters', () => ({
@@ -2400,7 +2405,7 @@ storiesOf('Block Title', module)
             }
         },
         template: injectHBarTemp(`
-            <c-heading-bar name="This is the Title">
+            <c-heading-bar name="This is the Title" :showActions="true">
                 <template slot="additional-action">
                     <c-heading-bar-fields name="Reviews" icon="fas fa-trophy" @click_up="upClick"  @click_down="downClick" />
                     <c-heading-bar-fields name="Price" icon="fas fa-dollar-sign" />
@@ -2433,10 +2438,10 @@ storiesOf('Block Title', module)
         `)
     }))
 
+
 import NewsListNav from '../ui/components/news-list/navigation'
 import NewsList from '../ui/components/news-list/articles'
 import NewsArticle from '../ui/components/news-list/article'
-
 storiesOf('News List', module)
     .add('default', () => ({
         components: {
@@ -2445,57 +2450,54 @@ storiesOf('News List', module)
         },
         data() {
             return {
-                news: [
+                posts: [
                     {
-                        game: {
-                            title: 'Diablo III',
-                            developer: 'Blizzard Entertainment',
-                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                        },
-                        articles: [
-                            {
-                                heading: 'New class and event coming next week!',
-                                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
-                                url: 'article-url',
-                                date: '2018-07-24T04:09:00.000Z'
-                            }
-                        ]
+                        "id": 1,
+                        "target_type": "product",
+                        "target_id": 1,
+                        "system_tags": [
+                            "news"
+                        ],
+                        "heading": "New class and event coming next week!",
+                        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
+                        "url": "/#/post/1",
+                        "date": "2018-07-24T04:09:00.000Z"
                     },
                     {
-                        game: {
-                            title: 'Diablo I',
-                            developer: 'Blizzard Entertainment',
-                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                        },
-                        articles: [
-                            {
-                                heading: 'New class and event coming next week!',
-                                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
-                                url: 'article-url',
-                                date: '2016-09-24T04:09:00.000Z'
-                            },
-                            {
-                                heading: 'New class and event coming next week!',
-                                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
-                                url: 'article-url',
-                                date: '2014-03-24T04:09:00.000Z'
-                            }
-                        ]
+                        "id": 2,
+                        "target_type": "product",
+                        "target_id": 1,
+                        "system_tags": [
+                            "news"
+                        ],
+                        "heading": "New class and event coming next week!",
+                        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
+                        "url": "/#/post/1",
+                        "date": "2016-09-24T04:09:00.000Z"
                     },
                     {
-                        game: {
-                            title: 'Diablo II',
-                            developer: 'Blizzard Entertainment',
-                            img: 'https://cdn6.aptoide.com/imgs/a/d/2/ad2ccdb6e2dda907c1970845476d9128_icon.png?w=240'
-                        },
-                        articles: [
-                            {
-                                heading: 'New class and event coming next week!',
-                                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.',
-                                url: 'article-url',
-                                date: '2017-12-24T04:09:00.000Z'
-                            }
-                        ]
+                        "id": 3,
+                        "target_type": "product",
+                        "target_id": 2,
+                        "system_tags": [
+                            "news"
+                        ],
+                        "heading": "New class and event coming next week!",
+                        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
+                        "url": "/#/post/1",
+                        "date": "2014-03-24T04:09:00.000Z"
+                    },
+                    {
+                        "id": 4,
+                        "target_type": "product",
+                        "target_id": 3,
+                        "system_tags": [
+                            "news"
+                        ],
+                        "heading": "New class and event coming next week!",
+                        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
+                        "url": "/#/post/1",
+                        "date": "2017-12-24T04:09:00.000Z"
                     }
                 ]
             }
@@ -2503,10 +2505,10 @@ storiesOf('News List', module)
         template: `
         <div class="row m-0 p-5">
             <c-news-list-navigation
-                :news="news"
+                :list="posts"
             />
             <c-news-list-articles
-                :news="news"
+                :articles="posts"
             />
         </div>
         `

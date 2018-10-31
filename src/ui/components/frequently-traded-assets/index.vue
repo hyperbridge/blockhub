@@ -11,7 +11,9 @@
                     </a>
                 </li>
             </ul>
-            <a :href="assetsUrl" class="btn btn-outline-white">Go To Assets</a>
+            <c-button status="outline-white" :href="assetsUrl">
+                Go To Assets
+            </c-button>
         </div>
         <div v-else>
             <h4>No frequently traded assets yet.</h4>
@@ -33,34 +35,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-    .traded-assets {
-        a.btn-outline-white {
-            font-size: 12px;
-            text-transform: uppercase;
-            color: #fff;
-            border: 1px solid #fff;
-            border-radius: 5px;
-            font-weight: bold;
-            display: inline-block;
-            /*float: left;*/
-            line-height: 24px;
-            padding: 0 8px;
-            width: auto;
-            margin: 5px 10px 3px 0;
-            &:last-child {
-                margin-right: 0;
-            }
-            &:hover {
-                background: #fff;
-                color: #000;
-                text-decoration: none;
-            }
-        }
-    }
-
-    .traded-assets__filter {
-    }
 
     .traded-assets__list {
         padding: 0;
