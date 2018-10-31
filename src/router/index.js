@@ -756,10 +756,10 @@ const router = new Router({
             ]
         },
         {
-            path: '/item-navigator-2',
+            path: '/item-navigator',
             name: 'Item Navigator',
             props: true,
-            component: (resolve) => require(['@/ui/screens/item-navigator/v2'], resolve)
+            component: (resolve) => require(['@/ui/screens/item-navigator'], resolve)
         },
         {
             path: '/download/desktop/mac',

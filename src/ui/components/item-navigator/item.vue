@@ -91,7 +91,6 @@
                 // const { id } = this.item;
                 const { parentId } = this;
                 EventBus.$emit('devolve', { tree: this.item, parentId });
-                EventBus.$emit('selected', id);
             }
         }
     }

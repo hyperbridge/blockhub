@@ -21,7 +21,6 @@
             </div> -->
 
             <div class="item-navigator">
-                <!-- COMP REQUIRES GLOBAL EVENT BUS -->
                 <c-navigator-item
                     v-for="(item, index) in deeplyNestedNav"
                     :key="index"
@@ -149,10 +148,6 @@
                 console.log(tree)
                 // this.deleteId = id;
             });
-            EventBus.$on('selected', id => {
-                // for
-                // this.$store.commit('update')
-            })
         },
         beforeDestroy() {
             EventBus.$off('evolve');
