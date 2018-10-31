@@ -62,22 +62,6 @@
         },
         data() {
             return {
-                showButton: false,
-                target: null,
-                rows: [
-                    [{ id: 1, evolvesTo: [2, 3] }],
-                    [{ id: 2, evolvesTo: [] }, { id: 6, evolvesTo: [] }, { id: 3, evolvesTo: [4, 5] }],
-                    [{ id: 4, evolvesTo: [] }, { id: 5, evolvesTo: [] }],
-                ],
-                nav: {
-                    1: { id: 1, assetId: 1, evolvesTo: [2, 3], isRoot: true },
-                    2: { id: 2, assetId: 2, evolvesTo: [4]},
-                    3: { id: 3, assetId: 3, evolvesTo: []},
-                    4: { id: 4, assetId: 4, evolvesTo: []},
-                    5: { id: 5, assetId: 5, evolvesTo: []},
-                    6: { id: 6, assetId: 6, evolvesTo: []},
-                    7: { id: 7, assetId: 7, evolvesTo: []}
-                },
                 activeId: null
             }
         },

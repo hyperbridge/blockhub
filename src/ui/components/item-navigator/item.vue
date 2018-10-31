@@ -52,7 +52,6 @@
 
 <script>
     import { EventBus } from '@/event-bus';
-    import { debouncer } from '@/mixins';
 
     export default {
         name: 'navigator-item',
@@ -71,26 +70,14 @@
             parentId: [Number, String],
             parentItem: Object
         },
-        mixins: [debouncer],
         data() {
             return {
                 hovered: false
             }
         },
         methods: {
-            handleHover(status) {
-                this.debounce(() => { this.hovered = true }, 50);
-            },
             handleClick(id) {
                 EventBus.$emit('evolve', id);
-            },
-            clickDown(id) {
-                EventBus.$emit('evolve', { id })
-            }
-        },
-        computed: {
-            assets() {
-                return this.$store.state.assets.assets;
             }
         }
     }
@@ -158,9 +145,6 @@
             }
         }
         .navigator-item__asset {
-            // position: relative;
-            // z-index: 100;
-            // height: 100%;
             max-height: 70px;
             width: 70px;
             margin: 0;
@@ -176,15 +160,14 @@
         border-radius: 50%;
         color: #fff;
         cursor: pointer;
-        // display: none;
         animation: pop-in .2s ease;
         &--right {
             right: -$btn-size - 10px;
-            top: calc(50% - #{$btn-size/2 - 5});
+            top: calc(50% - #{$btn-size/2});
         }
         &--bottom {
             bottom: -$btn-size - 10px;
-            left: calc(50% - #{$btn-size/2 - 5});
+            left: calc(50% - #{$btn-size/2});
         }
         @keyframes pop-in {
             0% {
