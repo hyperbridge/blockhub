@@ -12,15 +12,16 @@
         <div class="navigator-item__content">
             <button
                 v-if="!item.evolvesTo.length && hovered"
-                @click="item.evolvesTo.push({ id: 12, evolvesTo: [] })"
+                @click="handleClick"
                 class="navigator-item__btn navigator-item__btn--right"
             >
+            <!-- item.evolvesTo.push({ id: 12, evolvesTo: [] });  -->
                 <c-icon name="plus"/>
             </button>
 
             <button
                 v-if="index === listLength - 1 && hovered"
-                @click="$emit('evolveDown')"
+                @click="$emit('evolveDown'); handleClick"
                 class="navigator-item__btn navigator-item__btn--bottom"
             >
                 <c-icon name="plus"/>
@@ -50,6 +51,7 @@
 </template>
 
 <script>
+    import { EventBus } from '@/event-bus';
     import { debouncer } from '@/mixins';
 
     export default {
@@ -76,6 +78,10 @@
         methods: {
             handleHover(status) {
                 this.debounce(() => { this.hovered = true }, 50);
+            },
+            handleClick() {
+                const { id } = this.item;
+                EventBus.$emit('evolve', { id });
             }
         },
         computed: {
@@ -145,6 +151,7 @@
             // height: 100%;
             max-height: 70px;
             width: 70px;
+            margin: 0;
         }
     }
     .navigator-item__btn {

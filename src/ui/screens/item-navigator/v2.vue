@@ -22,12 +22,12 @@
 
             <div class="item-navigator">
                 <!-- COMP REQUIRES GLOBAL EVENT BUS -->
-                <!-- <c-navigator-item
+                <c-navigator-item
                     v-for="(item, index) in navigator"
                     :key="index"
                     :item="item"
                     :listLength="item.evolvesTo.length"
-                /> -->
+                />
             </div>
 
         </div>
@@ -37,58 +37,68 @@
 </template>
 
 <script>
-export default {
-    components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-        'c-navigator-item': (resolve) => require(['@/ui/components/item-navigator/item'], resolve),
-    },
-    data() {
-        return {
-            showButton: false,
-            target: null,
-            rows: [
-                [{ id: 1, evolvesTo: [2, 3] }],
-                [{ id: 2, evolvesTo: [] }, { id: 6, evolvesTo: [] }, { id: 3, evolvesTo: [4, 5] }],
-                [{ id: 4, evolvesTo: [] }, { id: 5, evolvesTo: [] }],
-            ],
-            navigator: [
-                { id: 1, evolvesTo: [
-                    { id: 2, evolvesTo: [] },
-                    { id: 3, evolvesTo: [
-                        { id: 7, evolvesTo: [] },
-                        { id: 8, evolvesTo: [] },
-                        { id: 9, evolvesTo: [] },
+    import { EventBus } from '@/event-bus';
 
-                    ]},
-                    { id: 4, evolvesTo: [
-                        { id: 5, evolvesTo: [] },
-                        { id: 6, evolvesTo: [] },
-                    ]},
-                ]}
-            ]
-        }
-    },
-    computed: {
-        populated() {
-            const { navigator } = this;
-            const populated = [];
+    export default {
+        components: {
+            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
+            'c-navigator-item': (resolve) => require(['@/ui/components/item-navigator/item'], resolve),
+        },
+        data() {
+            return {
+                showButton: false,
+                target: null,
+                rows: [
+                    [{ id: 1, evolvesTo: [2, 3] }],
+                    [{ id: 2, evolvesTo: [] }, { id: 6, evolvesTo: [] }, { id: 3, evolvesTo: [4, 5] }],
+                    [{ id: 4, evolvesTo: [] }, { id: 5, evolvesTo: [] }],
+                ],
+                navigator: [
+                    { id: 1, evolvesTo: [
+                        { id: 2, evolvesTo: [] },
+                        { id: 3, evolvesTo: [
+                            { id: 7, evolvesTo: [] },
+                            { id: 8, evolvesTo: [] },
+                            { id: 9, evolvesTo: [] },
 
-            const recursiveMap = items => {
-                items.map(item => {
-                    if (item.evolvesTo.length) {
-                    recurMap(item.evolvesTo)
-                    }
-                    console.log('CALLED')
+                        ]},
+                        { id: 4, evolvesTo: [
+                            { id: 5, evolvesTo: [] },
+                            { id: 6, evolvesTo: [] },
+                        ]},
+                    ]}
+                ]
+            }
+        },
+        computed: {
+            populated() {
+                const { navigator } = this;
+                const populated = [];
 
-                    stack++;
-                    return { ...item, what: item.id };
-                });
-            };
+                const recursiveMap = items => {
+                    items.map(item => {
+                        if (item.evolvesTo.length) {
+                        recurMap(item.evolvesTo)
+                        }
+                        console.log('CALLED')
 
-            return populated;
+                        stack++;
+                        return { ...item, what: item.id };
+                    });
+                };
+
+                return populated;
+            }
+        },
+        mounted() {
+            EventBus.$on('evolve', e => {
+                console.log(e)
+            })
+        },
+        beforeDestroy() {
+            EventBus.$off('evolve');
         }
     }
-}
 </script>
 
 <style lang="scss" scoped>
@@ -104,6 +114,5 @@ export default {
         margin-bottom: 100px;
     }
     .item-navigator__row {
-
     }
 </style>
