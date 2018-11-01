@@ -191,7 +191,7 @@
             :activated="$store.state.application.active_modal === 'import-product'"
             @close="$store.commit('application/activateModal', null)"
         >
-            <div class="h4" slot="header">Propose Idea</div>
+            <div class="h4" slot="header" style="text-align: left">Propose Idea</div>
             <template slot="body">
                 <div v-if="importStep === 1">
                     <h3 class="margin-auto">Choose source: </h3>

@@ -79,7 +79,7 @@ const overrideConsoleLog = () => {
 //window.addEventListener('hashchange', () => { $('body').addClass('screen-loading') }, false);
 
 
-overrideConsoleLog()
+// overrideConsoleLog() TODO: later
 
 initializer().then(() => {
   console.log('[BlockHub] Loading app...')
