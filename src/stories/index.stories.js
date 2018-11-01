@@ -765,7 +765,6 @@ storiesOf('Tabs', module)
             </div>`
     }))
 
-import LanguageSupport from '@/ui/components/product-overview/language-support';
 import SystemRequirements from '@/ui/components/product-overview/system-requirements';
 
 import MilestonesLine from '../ui/components/milestones-line'
@@ -3470,6 +3469,7 @@ storiesOf('Banner', module)
             </div>`
     }))
 
+import LanguageSupport from '@/ui/components/product-overview/language-support';
 
 storiesOf('Product Overview', module)
     .add('Language Support', () => ({
@@ -3481,31 +3481,43 @@ storiesOf('Product Overview', module)
                         "name": "English",
                         "interface": true,
                         "full_audio": false,
-                        "subtitles": false
+                        "subtitles": false,
+                        "code": "en-us"
                     },
                     {
                         "name": "Czech",
                         "interface": true,
                         "full_audio": true,
-                        "subtitles": false
+                        "subtitles": false,
+                        "code": "cz"
                     },
                     {
                         "name": "French",
                         "interface": true,
                         "full_audio": true,
-                        "subtitles": true
+                        "subtitles": true,
+                        "code": "fr"
                     },
                     {
                         "name": "German",
                         "interface": true,
                         "full_audio": false,
-                        "subtitles": false
+                        "subtitles": false,
+                        "code": "de"
                     },
                     {
                         "name": "Hungarian",
                         "interface": true,
                         "full_audio": false,
-                        "subtitles": true
+                        "subtitles": true,
+                        "code": "hu"
+                    },
+                    {
+                        "name": "Russian",
+                        "interface": true,
+                        "full_audio": false,
+                        "subtitles": true,
+                        "code": "ru"
                     }
                 ]
             }

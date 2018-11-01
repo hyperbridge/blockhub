@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-12 col-lg-8 col-xl-9">
+        <div class="col-12 col-lg-8 col-xl-8">
             <c-screen-gallery
                 :items="[product.images.medium_tile, ...product.images.preview]"
                 :video_url="product.video"
@@ -32,7 +32,7 @@
                 <div id="summernote" v-html="product.content">{{ product.content }}</div>
             </div>
         </div>
-        <div class="col-12 col-lg-4 col-xl-3">
+        <div class="col-12 col-lg-4 col-xl-4">
             <c-purchase-block
                 :isUnavailable="!Number(product.price)"
                 :price="product.price"
