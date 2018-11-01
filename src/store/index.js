@@ -141,6 +141,9 @@ window.BlockHub.importSeedData = () => {
 
     DB.funding.projects.data = seed.projects
 
+    // ENABLE ALL DARKLAUNCHES
+    store.state.application.darklaunch_override = true
+
     store.dispatch('marketplace/updateState')
     store.dispatch('funding/updateState')
     store.dispatch('application/updateState')

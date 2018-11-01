@@ -11,8 +11,8 @@
                 </div>
                 <div class="user_info">
                     <h2 class="user_name">{{ identity.name }} </h2>
-                    <div class="user_status">Trusted User</div>
-                    <div class="user_statistic">
+                    <div class="user_status" v-darklaunch="'REPUTATION'">Trusted User</div>
+                    <div class="user_statistic" v-darklaunch="'REPUTATION'">
                         <span>
                             12
                             <i class="fas fa-arrow-up"></i>
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="col-7">
-            <div class="identity__user-medal">
+            <div class="identity__user-medal" v-darklaunch="'BADGES'">
                 <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
                 <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
                 <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
