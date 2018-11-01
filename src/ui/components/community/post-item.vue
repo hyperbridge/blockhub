@@ -63,6 +63,8 @@
 
 <script>
     import Comment from '../community/comment'
+    import moment from 'moment'
+
     export default {
         props: ['post'],
         components: {

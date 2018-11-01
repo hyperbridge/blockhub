@@ -10,7 +10,7 @@
 
 <script>
 export default {
-    name: 'rating-stars',
+    name: 'c-rating-stars',
     props: {
         number: {
             required: true

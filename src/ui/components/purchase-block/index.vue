@@ -48,6 +48,7 @@
 </template>
 
 <script>
+    import moment from 'moment'
     export default {
         name: 'purchase-block',
         props: {

@@ -22,6 +22,8 @@
             :links="links.help"
         />
 
+        <c-join-community />
+
         <c-curator-panel>
             <c-curator-info title="Curator panel" v-darklaunch="'CURATORS'">
                 <div v-if="!editing">
@@ -64,6 +66,7 @@
             'c-claim': (resolve) => require(['@/ui/components/curator-panel/claim.vue'], resolve),
             'c-curator-panel': (resolve) => require(['@/ui/components/curator-panel'], resolve),
             'c-curator-info': (resolve) => require(['@/ui/components/curator-panel/info-card.vue'], resolve),
+            'c-join-community': (resolve) => require(['@/ui/components/join-community'], resolve),
         },
         data() {
             return {
