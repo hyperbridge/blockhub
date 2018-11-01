@@ -3784,6 +3784,7 @@ storiesOf('Purchase block', module)
                         </div>`
     }))
 
+
 import PurchaseOption from '@/ui/components/purchase-option';
 storiesOf('Purchase Option', module)
     .add('single', () => ({
@@ -3793,10 +3794,19 @@ storiesOf('Purchase Option', module)
         template: `
             <div class="p-4" style="width: 600px">
                 <c-purchase-option 
-                :price="44"
-                :oldPrice="55"
-                :gameTag="SOME TAG"
-                :title="SOME TITLE"
+                price="44"
+                oldPrice="55"
+                gameTag="SOME TAG"
+                title="SOME TITLE"
+                :id="4"
+                 />
+                 <hr />
+                <c-purchase-option 
+                price="44"
+                oldPrice="55"
+                img="https://trashbox.ru/ifiles/979051_6c28be_screenshot_00/game-of-warriors-1.1.11-1.png"
+                gameTag="SOME TAG"
+                title="SOME TITLE"
                 :id="4"
                  />
             </div>
@@ -3947,38 +3957,29 @@ storiesOf('Contribute', module)
         },
         data(){
             return{
-                price: 10.99,
-                name: 'BLUE-HAIRED CATS',
-                estimated_delivery: '12/01/2018',
-                ships_to: 'Anywhere in the world',
-                backers: 43,
+                pledge:{
+                    min_price: 10.99,
+                    name: 'BLUE-HAIRED CATS',
+                    estimated_delivery: '12/01/2018',
+                    ships_to: 'Anywhere in the world',
+                    description: 'Maecenas a sapien luctus, placerat massa pellentesque, consectetur ante. Nam dui est, cursus at consequat quis, malesuada eget eros. ',
+                    backers: 43,
+                    includes:[
+                        {
+                            "text": "Morbi vitae orci lacus"
+                        },
+                        {
+                            "text": "Praesent rhoncus tellus vel dapibus auctor"
+                        },
+                        {
+                            "text": "Morbi vitae orci lacus"
+                        }
+                    ]
+                }
             }
         },
         template: `<div class="p-4" style="width: 400px">
-                        <c-contribute-pledge :price="price" :name="name" :estimated_delivery="estimated_delivery" :ships_to="ships_to" :backers="backers">
-                            
-                            Choose ONE Drabblecast "Best of" Audio Anthology:
-                            "Best of Horror," "Best of Fantasy," "Best of Science Fiction,"
-                            each with new and original intro commentary by Norm.
-                            
-                            <template slot="includes">
-                                <ul>
-                                    <li class="list-disc">
-                                        Drabblecast Glow in the Dark Pin
-                                    </li>
-                                    <li>
-                                        (3) Audio Anthologies: Horror, Science Fiction AND Fantasy
-                                    </li>
-                                    <li>
-                                        Original Lovecraft mythos audio story by Frank Key
-                                    </li>
-                                    <li>
-                                        Digital Hugs, Name on Website
-                                    </li>
-                                </ul>
-                            </template>
-                        
-                        </c-contribute-pledge>
+                        <c-contribute-pledge :pledge="pledge" />
                     </div>`
     }))
 
