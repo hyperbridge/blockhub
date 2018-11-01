@@ -112,7 +112,8 @@
                         "name": "Kemp Christian",
                         "img": "http://placehold.it/32x32"
                     }
-                ]
+                ],
+                phrase: ''
             }
         },
         computed: {

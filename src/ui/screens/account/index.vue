@@ -151,22 +151,24 @@
                 <c-block title="Wishlists" noGutter bgGradient onlyContentBg>
                     <c-tabs :tabNames="['Products', 'Projects']" styled>
                         <c-tab :tab_id="1">
-                            <div class="wishlist-box" v-for="product in products" :key="product.id">
-                                <c-game-includes-item
-                                    :id="product.id"
-                                    :image="product.images.medium_tile"
-                                    :name="product.name"
-                                    :rating="product.rating.overall"
-                                    :developer="product.developer"
-                                />
-                                <c-btn-fav
-                                    @click="$store.commit(
+                            <div class="wishlist-box">
+                                <div class="wishlist-box__item" v-for="product in products" :key="product.id">
+                                    <c-game-includes-item
+                                        :id="product.id"
+                                        :image="product.images.medium_tile"
+                                        :name="product.name"
+                                        :rating="product.rating.overall"
+                                        :developer="product.developer"
+                                    />
+                                    <c-btn-fav
+                                        @click="$store.commit(
                                         'application/updateFavorites',
                                         { id: product.id }
                                     )"
-                                    target="Wishlist"
-                                    :active="true"
-                                />
+                                        target="Wishlist"
+                                        :active="true"
+                                    />
+                                </div>
                             </div>
                             <p v-if="!products.length">
                                 You have not added any products to your wishlist
@@ -174,19 +176,22 @@
 
                         </c-tab>
                         <c-tab :tab_id="2">
-                            <div v-for="project in projects" :key="project.id">
-                                <c-project-card
-                                    :image="project.images[0]"
-                                    :funds="project.funds"
-                                />
-                                <c-btn-fav
-                                    @click="$store.commit(
+                            <div class="wishlist-box">
+                                <div v-for="project in projects" :key="project.id" class="wishlist-box__item">
+                                    <c-project-card
+                                        class="p-0 mb-2"
+                                        :image="project.images[0]"
+                                        :funds="project.funds"
+                                    />
+                                    <c-btn-fav
+                                        @click="$store.commit(
                                         'application/updateFavorites',
                                         { id: project.id, prop: 'project_wishlist' }
                                     )"
-                                    target="Wishlist"
-                                    :active="true"
-                                />
+                                        target="Wishlist"
+                                        :active="true"
+                                    />
+                                </div>
                             </div>
                             <p v-if="!projects.length">
                                 You have not added any projects to your wishlist
@@ -417,12 +422,22 @@
         }
     }
     .wishlist-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-wrap: wrap;
+        margin: -10px;
+    }
+    .wishlist-box__item{
+        width: calc( 100%/3 - 20px );
         background: rgba(1,1,1,.1);
         padding: 10px;
         border-radius: 4px;
-        margin-bottom: 20px;
+        margin: 10px;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        .favorite-btn{
+            margin-top: auto;
+        }
     }
 </style>
