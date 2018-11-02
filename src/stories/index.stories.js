@@ -4165,6 +4165,17 @@ storiesOf('Game Installer Modal', module)
 
 
 
+import Emoji from '@/ui/components/emoji'
+storiesOf('Emoji', module)
+    .add('default', () => ({
+        components:{
+            'c-emoji': Emoji
+        },
+        template:`
+        <div class="p-5">
+            <c-emoji />
+        </div>`
+    }))
 
 
 /*
