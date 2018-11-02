@@ -43,7 +43,8 @@
         data(){
             return{
                 emojiList: [],
-                showPicker: false
+                showPicker: false,
+                nEmoji: {}
             }
         },
         methods:{
@@ -55,12 +56,12 @@
                 this.showPicker = !this.showPicker
             },
             addEmoji(emoji) {
-                console.log('add emoji')
+                this.nEmoji = emoji;
                 if ( this.emojiList.includes(emoji) ){
                     this.emojiList[this.emojiList.indexOf(emoji)].count += 1
                 } else {
-                    emoji.count = 0;
-                    this.emojiList.push(emoji)
+                    this.$set(this.nEmoji, 'count', 0)
+                    this.emojiList.push(this.nEmoji)
                 }
             }
         }
