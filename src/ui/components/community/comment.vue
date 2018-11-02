@@ -68,6 +68,7 @@
     padding: 0 10px;
     margin: 30px 0 10px;
     transition: background-color .3s ease;
+    color: #fff;
     .comment-container {
         width: calc(100% - 65px);
         background: rgba(0, 0, 0, .16);

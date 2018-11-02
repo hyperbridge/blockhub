@@ -1,7 +1,15 @@
 <template>
     <div class="emojis">
+        <div class="text-white">
+            <!--{{ emojiList }}-->
+        </div>
         <div class="emojis__list" v-if="emojiList.length">
-            <c-emoji v-for="emoji in emojiList" :emoji="emoji" size="20" :native="true"/>
+            <template v-for="emoji in emojiList">
+                <c-emoji :emoji="emoji" :size="20" :native="true" @click="addEmoji(emoji)"/>
+                <span class="emoji-count" v-if="emoji.count > 0">
+                    +{{ emoji.count }}
+                </span>
+            </template>
         </div>
         <div class="emoji-picker__container">
             <c-button size="lg" status="plain" class="p-0 align-items-center" @click="openPicker">
@@ -47,7 +55,13 @@
                 this.showPicker = !this.showPicker
             },
             addEmoji(emoji) {
-                this.emojiList.push(emoji)
+                console.log('add emoji')
+                if ( this.emojiList.includes(emoji) ){
+                    this.emojiList[this.emojiList.indexOf(emoji)].count += 1
+                } else {
+                    emoji.count = 0;
+                    this.emojiList.push(emoji)
+                }
             }
         }
     }
@@ -57,6 +71,8 @@
     .emoji-mart-emoji{
         height: 24px;
         line-height: 24px;
+        margin: 0 3px 0 0;
+        cursor: pointer;
     }
     .emojis{
         display: inline-flex;
@@ -66,6 +82,12 @@
         margin-right: 10px;
         display: inline-flex;
         margin-top: 2px;
+    }
+    .emoji-count{
+        color: #fff;
+        line-height: 19px;
+        margin-right: 7px;
+        margin-left: -2px;
     }
     .emoji-picker__container{
         position: relative;
@@ -83,10 +105,6 @@
             &:hover{
                 color: #FADC72!important;
             }
-        }
-        .emoji-count{
-            color: #fff;
-            line-height: 24px;
         }
         .emoji-mart{
             position: absolute;
