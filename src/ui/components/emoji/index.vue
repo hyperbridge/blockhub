@@ -4,15 +4,15 @@
             <!--{{ emojiList }}-->
         </div>
         <div class="emojis__list" v-if="emojiList.length">
-            <template v-for="emoji in emojiList">
-                <c-emoji :emoji="emoji" :size="20" :native="true" @click="addEmoji(emoji)"/>
+            <div class="emojis__list-item" :class="{'couple-items' : emoji.count > 0 }" v-for="emoji in emojiList" @click="addEmoji(emoji)">
+                <c-emoji :emoji="emoji" :size="18" :native="true"/>
                 <span class="emoji-count" v-if="emoji.count > 0">
                     +{{ emoji.count }}
                 </span>
-            </template>
+            </div>
         </div>
         <div class="emoji-picker__container">
-            <c-button size="lg" status="plain" class="p-0 align-items-center" @click="openPicker">
+            <c-button status="plain" class="p-0 align-items-center" @click="openPicker">
                 <i class="fas fa-plus mr-0" :class="{'rotate-icon' : showPicker }"></i>
             </c-button>
             <transition name="fade">
@@ -69,32 +69,48 @@
 </script>
 
 <style lang="scss" scoped>
-    .emoji-mart-emoji{
-        height: 24px;
-        line-height: 24px;
-        margin: 0 3px 0 0;
-        cursor: pointer;
-    }
     .emojis{
         display: inline-flex;
-        align-items: flex-start;
     }
     .emojis__list{
         margin-right: 10px;
         display: inline-flex;
-        margin-top: 2px;
+    }
+    .emojis__list-item{
+        display: inline-flex;
+        align-items: center;
+        border-radius: 15px;
+        padding: 3px;
+        margin: 0 3px 0 0;
+        cursor: pointer;
+        &.couple-items{
+            background: rgba(0, 0, 0, .2);
+        }
+        .emoji-mart-emoji{
+            height: 20px;
+            line-height: 24px;
+            transition: all 200ms ease-in-out;
+        }
+        &:active{
+            .emoji-mart-emoji{
+                transition: all 200ms ease-in-out;
+                transform: scale(1.3);
+            }
+        }
     }
     .emoji-count{
         color: #fff;
         line-height: 19px;
-        margin-right: 7px;
-        margin-left: -2px;
+        margin-right: 5px;
+        opacity: .6;
+        font-size: 12px;
     }
     .emoji-picker__container{
         position: relative;
         z-index: 999;
         display: inline-flex;
         .c-btn{
+            line-height: 26px;
             i{
                 transition: all 200ms ease-in-out;
                 &.rotate-icon{
