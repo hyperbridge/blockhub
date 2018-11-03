@@ -4,7 +4,7 @@
             <!--{{ emojiList }}-->
         </div>
         <div class="emojis__list" v-if="emojiList.length">
-            <div class="emojis__list-item" :class="{'couple-items' : emoji.count > 0 }" v-for="emoji in emojiList" @click="addEmoji(emoji)">
+            <div class="emojis__list-item" :class="{'couple-items' : emoji.count > 0 }" v-for="(emoji, index) in emojiList" @click="addEmoji(emoji)">
                 <c-emoji :emoji="emoji" :size="18" :native="true"/>
                 <span class="emoji-count" v-if="emoji.count > 0">
                     +{{ emoji.count }}
@@ -44,7 +44,8 @@
             return{
                 emojiList: [],
                 showPicker: false,
-                nEmoji: {}
+                nEmoji: {},
+                showAll: false
             }
         },
         methods:{
@@ -81,9 +82,10 @@
         align-items: center;
         border-radius: 15px;
         padding: 3px;
-        margin: 0 3px 0 0;
         cursor: pointer;
+        color: #fff;
         &.couple-items{
+            margin: 0 4px 0 0;
             background: rgba(0, 0, 0, .2);
         }
         .emoji-mart-emoji{
