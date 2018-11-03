@@ -91,6 +91,7 @@
         box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
         text-decoration: none;
         cursor: pointer;
+        transition: all 200ms ease-in-out;
         &.plain {
             box-shadow: unset;
             margin: 0 2px;

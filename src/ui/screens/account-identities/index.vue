@@ -1,10 +1,10 @@
 <template>
     <c-layout navigationKey="account">
-                <div class="row">
+                <div class="row align-items-stretch justify-content-center margin-bottom-40">
                     <div class="col-12">
                         <c-heading-bar name="My Profile" :showArrows="false" :showBackground="false"/>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-4 margin-bottom-40 my_identity">
+                    <div class="col-12 col-md-6 col-lg-4 my_identity">
                         <c-user-card
                             v-if="defaultIdentity"
                             :user="defaultIdentity"
@@ -18,9 +18,9 @@
                             You don't have a default profile.
                         </p>
                     </div>
-                    <div class="col-12 col-md-6 offset-lg-2" v-if="defaultIdentity">
-                        <div class="verification-blk">
-                            <h3>Verify Your Profile</h3>
+                    <div class="col-12 col-md-6 col-lg-4" v-if="defaultIdentity">
+                        <div class="verification-blk text-center">
+                            <h3 class="text-white">Verify Your Profile</h3>
                             <div class="status" v-if="defaultIdentity.is_verified">
                                 <i class="fas fa-check"></i>
                                 Verified
@@ -29,15 +29,16 @@
                                 <i class="fas fa-hourglass"></i>
                                 Verifying
                             </div>
-                            <router-link to="/account/verification" v-else>
+                            <c-button status="outline-success" class="mt-3" to="/account/verification" v-else>
                                 Click here to verify
-                            </router-link>
+                            </c-button>
                             <div class="date" v-if="defaultIdentity.is_verified">
                                 Valid up to $7,500 USD
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="row">
                     <div class="col-12 mb-4">
                         <c-button
                             status="info"
@@ -374,29 +375,34 @@
         width: 260px;
         color: #C6C6D6;
         display: flex;
+        height: 100%;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
         padding: 5px 15px 10px;
-        border: 1px solid #707070;
-        background: rgba(0, 0, 0, .2);
+        border: 1px solid rgba(255, 255, 255, .1);
+        background: rgba(0, 0, 0, .3);
         border-radius: 5px;
         margin-bottom: 10px;
         &:last-child {
             margin: 0;
         }
         h3 {
-            font-size: 17px;
+            font-size: 18px;
             width: 100%;
             margin-bottom: 5px;
             color: #C6C6D6;
+            font-weight: bold;
         }
         .status {
             width: 110px;
             text-align: center;
-            padding: 10px;
+            padding: 5px 10px;
             border-radius: 5px;
             border: 1px solid #43C981;
             font-size: 14px;
+            margin-top: 15px;
             i {
                 color: #43C981;
                 margin-right: 5px;
@@ -404,6 +410,7 @@
         }
         .date {
             width: 90px;
+            margin-top: 15px;
         }
 
     }

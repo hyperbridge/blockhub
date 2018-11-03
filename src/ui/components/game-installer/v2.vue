@@ -100,10 +100,10 @@
         },
         computed: {
             description() {
-                return this.product.content.substring(0, 150) + '...';
+                // return this.product.content.substring(0, 150) + '...';
             },
             savedPaths() {
-                return this.$store.state.application.account.saved_paths;
+                // return this.$store.state.application.account.saved_paths;
             }
         }
     }

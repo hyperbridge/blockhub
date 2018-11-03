@@ -17,7 +17,7 @@
                         <c-img :src="comment.author.img"/>
                         <div>
                             <h6>{{ comment.author.name }}</h6>
-                            <span class="time">{{ comment.date | timeAgoShort }}</span>
+                            <!--<span class="time">{{ comment.date | timeAgoShort }}</span>-->
                         </div>
                     </div>
                     <div class="text">{{ comment.text }}</div>
@@ -27,16 +27,21 @@
                 </div>
             </div>
         </div>
-
-        <c-reply
-            @replyMode="reply = $event"
-        />
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <c-emoji-picker v-model="emojiList" @reaction="onReaction" @emojiClick="onEmojiClick" />
+            </div>
+            <c-reply
+                @replyMode="reply = $event"
+            />
+        </div>
 
     </div>
 </template>
 
 <script>
     import moment from 'moment'
+    import VueEmojiReact from 'vue-emoji-react'
 
     export default {
         name: 'comment',
@@ -49,11 +54,27 @@
         components: {
             'c-dropdown-menu': (resolve) => require(['@/ui/components/dropdown-menu'], resolve),
             'c-reply': (resolve) => require(['@/ui/components/community/reply'], resolve),
-            'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'], resolve)
+            'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'], resolve),
+            'c-emoji-picker': VueEmojiReact
         },
         data() {
             return {
-                reply: false
+                reply: false,
+                emojiList: [],
+                showPicker: false
+            }
+        },
+        methods: {
+            onReaction(name, index) {
+                this.emojiList[index].count++
+            },
+            onEmojiClick(name) {
+                if (this.emojiList.findIndex(emo => emo.name === name) === -1) {
+                    this.emojiList.push({
+                        name,
+                        count: 1
+                    })
+                }
             }
         }
     }
@@ -68,7 +89,6 @@
     padding: 0 10px;
     margin: 30px 0 10px;
     transition: background-color .3s ease;
-    color: #fff;
     .comment-container {
         width: calc(100% - 65px);
         background: rgba(0, 0, 0, .16);

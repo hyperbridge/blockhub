@@ -9,7 +9,7 @@
 
         <div class="purchase-block__price" v-if="!isUnavailable"><span v-if="price">${{ price }}</span><span v-else>$0.00</span></div>
 
-        <div class="purchase-block__info">
+        <div class="purchase-block__info" v-if="eligibleTokens || offersPurchases || releaseDate || isPurchased || isUnavailable">
             <div v-if="eligibleTokens">Eligible for up to <i class="fas fa-coins mx-1" style="color: #FADC72"></i> HBX +{{ eligibleTokens }}</div>
             <div v-if="offersPurchases">Offers In-Game Purchases</div>
             <div class="release-date" v-if="releaseDate">Release date: {{ releaseDate | customDate('MM/DD/YYYY') }}</div>
@@ -42,6 +42,7 @@
                 @click="$emit('addToWishlist')"
                 target="Wishlist"
                 :active="inWishlist"
+                class="mt-3"
             />
         </div>
     </c-block>

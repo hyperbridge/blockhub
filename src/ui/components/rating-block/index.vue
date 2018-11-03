@@ -22,7 +22,7 @@
         </div>
         <div v-else>
             <h4>No reviews yet.</h4>
-            <button @click="$emit('goto')" class="btn btn-sm btn-outline-white">Be the first reviewer</button>
+            <c-button tag="button" @click="$emit('goto')" status="outline-white">Be the first reviewer</c-button>
         </div>
     </c-block>
 </template>
@@ -32,7 +32,7 @@ export default {
     name: 'c-rating-block',
     props: {
         items: {
-            type: Array
+            type: [Array, Object]
         },
         fullReviewsLink: {
             type: String
@@ -44,6 +44,8 @@ export default {
     components: {
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-rating-stars': (resolve) => require(['../rating-stars'], resolve)
+    },
+    computed:{
     }
 }
 </script>
