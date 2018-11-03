@@ -10,6 +10,7 @@ import { withKnobs, text, boolean, number, object } from '@storybook/addon-knobs
 
 import '../css/styles.scss'
 import '@/filters'
+import '@/directives'
 import '@/components'
 
 import * as data from './components-data'
@@ -2167,6 +2168,7 @@ storiesOf('Modal', module)
 import Dropdown from '../ui/components/dropdown-menu/type-2'
 import DropdownCustom from '../ui/components/dropdown-menu/type-3'
 import DropdownPost from '../ui/components/dropdown-menu/index'
+import DropdownCurrency from '../ui/components/dropdown-menu/currency'
 storiesOf('Dropdown', module)
     .add('default', () => ({
         components: {
@@ -2222,6 +2224,16 @@ storiesOf('Dropdown', module)
                 </li>
             </ul>
             </c-dropdown>
+         </div>
+        `
+    }))
+    .add('currency', () => ({
+        components: {
+            'c-currency-dropdown': DropdownCurrency
+        },
+        template: `
+         <div class="row m-0 p-3">
+             <c-currency-dropdown />
          </div>
         `
     }))

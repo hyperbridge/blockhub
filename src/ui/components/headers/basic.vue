@@ -190,6 +190,9 @@
                                 <span class="text">Help</span>
                             </a>
                         </li>
+                        <li v-if="!is_locked" class="ml-3">
+                            <c-currency-dropdown />
+                        </li>
                     </ul>
                 </nav>
             </nav>
@@ -204,7 +207,8 @@ export default {
     props: ['isLoader'],
     components: {
         'c-loading-logo': LoadingBar,
-        'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve)
+        'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve),
+        'c-currency-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/currency'], resolve)
     },
     data() {
         return {
