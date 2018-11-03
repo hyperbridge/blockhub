@@ -45,17 +45,17 @@
             <c-button icon_hide @click="showInstaller = !showInstaller">Open installer</c-button>
 
             <c-rating-block class="margin-bottom-20" :items="product.rating"
-                            :parent_url="`/#/product/${product.id}`"/>
+                            :parent_url="`/#/product/${product.id}`" v-darklaunch="'RATINGS'" />
 
             <c-frequently-traded-assets class="margin-bottom-20" :items="product.frequently_traded_assets"
-                                        :assetsUrl="`/#/product/${product.id}/assets`"/>
+                                        :assetsUrl="`/#/product/${product.id}/assets`" v-darklaunch="'ASSETS'" />
 
             <c-community-spotlight class="margin-bottom-20" :discussions="product.community.discussions"
-                                    :communityUrl="`/#/product/${product.id}/community`"/>
+                                    :communityUrl="`/#/product/${product.id}/community`" v-darklaunch="'COMMUNITY'" />
 
-            <c-system-requirements class="margin-bottom-20" :requirements="product.system_requirements"/>
+            <c-system-requirements class="margin-bottom-20" :requirements="product.system_requirements" />
 
-            <c-language-support :languages="product.language_support"/>
+            <c-language-support :languages="product.language_support" />
         </div>
         <div class="col-12">
             <c-block :title="`TWITCH STREAMS - ${product.name}`"

@@ -144,6 +144,7 @@
             "birthday": null,
             "password": null,
             "email": null,
+            "darklaunch_override": false,
             "current_identity": {
                 "id": null,
                 "name": null,
