@@ -22,28 +22,36 @@
             :links="links.help"
         />
 
+        <c-join-community />
+
         <c-curator-panel>
             <c-curator-info title="Curator panel" v-darklaunch="'CURATORS'">
-                <p>1023 people have
-                    curated this crowdfund.</p>
-                <ul>
-                    <li>
-                        <strong>492</strong>
-                        Approved with 0 changes
-                    </li>
-                    <li>
-                        <strong>132</strong>
-                        Approved with at least 1 change requested
-                    </li>
-                    <li>
-                        <strong>32</strong>
-                        Disapproved with requests
-                    </li>
-                    <li>
-                        <strong>23</strong>
-                        Disapproved with 0 changes
-                    </li>
-                </ul>
+                <div v-if="!editing">
+                    <p>1023 people have
+                        curated this crowdfund.</p>
+                    <ul>
+                        <li>
+                            <strong>492</strong>
+                            Approved with 0 changes
+                        </li>
+                        <li>
+                            <strong>132</strong>
+                            Approved with at least 1 change requested
+                        </li>
+                        <li>
+                            <strong>32</strong>
+                            Disapproved with requests
+                        </li>
+                        <li>
+                            <strong>23</strong>
+                            Disapproved with 0 changes
+                        </li>
+                    </ul>
+                </div>
+                <div v-if="editing">
+                    <c-switch />
+                    Enable Curator Mode
+                </div>
             </c-curator-info>
         </c-curator-panel>
 
@@ -58,6 +66,7 @@
             'c-claim': (resolve) => require(['@/ui/components/curator-panel/claim.vue'], resolve),
             'c-curator-panel': (resolve) => require(['@/ui/components/curator-panel'], resolve),
             'c-curator-info': (resolve) => require(['@/ui/components/curator-panel/info-card.vue'], resolve),
+            'c-join-community': (resolve) => require(['@/ui/components/join-community'], resolve),
         },
         data() {
             return {
@@ -79,6 +88,11 @@
                         { to: { path: '/help/1' }, title: 'MORE ...' }
                     ]
                 }
+            }
+        },
+        computed: {
+            editing() {
+                return this.$store.state.application.editor_mode === 'editing'
             }
         }
     }

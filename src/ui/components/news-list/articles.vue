@@ -33,6 +33,7 @@ export default {
 .tab-pane {
     padding: 15px 5px 5px;
     background: #3D3E5D;
+    width: 100%;
 }
 
 .home-tabs__news-list {

@@ -6,7 +6,7 @@
                 </div>
             </div>
             <div class="row" v-if="project">
-                <div class="col-12 tab-content">
+                <div class="col-12">
 
                     <div class="errors" v-if="errors.length">
                         <strong>Please correct the following error(s):</strong>
@@ -111,12 +111,12 @@
                     </c-button>
                     <div class="collapse show project_nav" id="project_nav">
                         <ul class="nav nav-tabs margin-bottom-40 justify-content-between">
-                            <li class="nav-item">
+                            <li class="nav-item" @click="section='overview'">
                                 <router-link :to="`/project/${project.id}`" class="nav-link" :class="{ 'active': section === 'overview' }">
                                     Overview
                                 </router-link>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" @click="section='community'">
                                 <router-link :to="`/project/${project.id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">
                                     Community
                                     <c-updates-count>
@@ -124,12 +124,12 @@
                                     </c-updates-count>
                                 </router-link>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" @click="section='bounties'">
                                 <router-link :to="`/project/${project.id}/bounties`" class="nav-link" :class="{ 'active': section === 'bounties' }">
                                     Bounties
                                 </router-link>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" @click="section='updates'">
                                 <router-link :to="`/project/${project.id}/updates`" class="nav-link" :class="{ 'active': section === 'updates' }">
                                     Updates
                                     <c-updates-count>
@@ -137,19 +137,18 @@
                                     </c-updates-count>
                                 </router-link>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" @click="section='milestones'">
                                 <router-link :to="`/project/${project.id}/milestones`" class="nav-link" :class="{ 'active': section === 'milestones' }">
                                     Milestones
                                 </router-link>
                             </li>
                             <li class="nav-item" v-if="editing">
-                                <a class="nav-link" data-toggle="pill" href="#configure" role="tab"
-                                   aria-controls="configure" aria-selected="true">Configure</a>
+                                <a class="nav-link" :class="{ 'active': section === 'configure' }" @click="section='configure'">Configure</a>
                             </li>
                         </ul>
                     </div>
 
-                    <div class="row tab-pane fade" id="configure" role="tabpanel" aria-labelledby="configure-tab">
+                    <div class="row" id="configure" v-if="section === 'configure'" :editing="editing">
                         <c-block title="Campaign">
                             <form>
 
@@ -283,18 +282,18 @@
                         </c-block>
                     </div>
 
-                    <div class="row tab-pane fade active show" id="overview" role="tabpanel"
-                         aria-labelledby="overview-tab">
-                        <c-project-overview :project="project" v-if="section === 'overview'" :editing="editing" />
-                        <c-project-community :project="project" v-if="section === 'community'" :editing="editing" />
-                        <c-project-bounties :project="project" v-if="section === 'bounties'" :editing="editing" />
-                        <c-project-contributors :project="project" v-if="section === 'contributors'" :editing="editing" />
-                        <c-project-discussion :project="project" v-if="section === 'discussion'" :editing="editing" />
-                        <c-project-milestones :project="project" v-if="section === 'milestones'" :editing="editing" />
-                        <c-project-updates :project="project" v-if="section === 'updates'" :editing="editing" />
-                    </div>
-
                 </div>
+
+                    <div class="col-12" id="overview">
+                            <c-project-overview :project="project" v-if="section === 'overview'" :editing="editing" />
+                            <c-project-community :project="project" v-if="section === 'community'" :editing="editing" />
+                            <c-project-bounties :project="project" v-if="section === 'bounties'" :editing="editing" />
+                            <c-project-contributors :project="project" v-if="section === 'contributors'" :editing="editing" />
+                            <c-project-discussion :project="project" v-if="section === 'discussion'" :editing="editing" />
+                            <c-project-milestones :project="project" v-if="section === 'milestones'" :editing="editing" />
+                            <c-project-updates :project="project" v-if="section === 'updates'" :editing="editing" />
+                        
+                    </div>
             </div>
     </c-layout>
 </template>

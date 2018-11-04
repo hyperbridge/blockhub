@@ -144,6 +144,7 @@
             "birthday": null,
             "password": null,
             "email": null,
+            "darklaunch_override": false,
             "current_identity": {
                 "id": null,
                 "name": null,
@@ -190,7 +191,12 @@
             "product_wishlist": { "3": true, "14": true },
             "product_favorites": {},
             "project_wishlist": { "1": true },
-            "project_favorites": {}
+            "project_favorites": {},
+            "saved_paths": [
+                "/home/leafo/.config/itch/apps",
+                "C:/Users/Tom/Program Files/apps",
+                "/home/games"
+            ]
         },
         "darklaunch_flags": [
             {

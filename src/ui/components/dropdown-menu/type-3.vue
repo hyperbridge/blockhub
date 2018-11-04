@@ -61,6 +61,9 @@
         min-width: 140px;
         color: #fff;
         font-size: 11px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         &.dropdown-vue__button--active {
             text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
         }

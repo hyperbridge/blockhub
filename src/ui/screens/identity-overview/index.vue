@@ -8,9 +8,9 @@
                     <span id="wallet_number">{{ identity.public_address }}</span>
                 </div>
                 <div class="identity__action-group">
-                    <c-button status="info" icon="arrow-up">Send</c-button>
-                    <c-button status="share">Share</c-button>
-                    <c-button status="danger">Report</c-button>
+                    <c-button status="info" icon="arrow-up" @click="showSendPopup">Send</c-button>
+                    <c-button status="share" v-darklaunch="'SHARING'">Share</c-button>
+                    <c-button status="danger" v-darklaunch="'REPORTING'">Report</c-button>
                 </div>
             </div>
             <div class="col-12" v-if="!signed_in && !$store.state.application.account.settings.client.hide_profile_signup">
@@ -233,6 +233,11 @@
             signed_in() { return this.$store.state.application.signed_in },
             identity() {
                 return this.$store.state.application.account.current_identity
+            }
+        },
+        methods: {
+            showSendPopup() {
+                this.$store.dispatch('application/activateModal', 'send-funds')
             }
         },
         created() {

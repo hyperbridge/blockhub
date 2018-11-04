@@ -755,8 +755,8 @@
     }
     .col-lg-6{
         @media (max-width: 1500px){
-            flex: 0 0 100%;
-            max-width: 100%;
+            /*flex: 0 0 100%;*/
+            /*max-width: 100%;*/
         }
     }
 

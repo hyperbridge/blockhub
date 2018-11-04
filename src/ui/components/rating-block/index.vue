@@ -13,22 +13,26 @@
                     />
                 </li>
             </ul>
-            <a :href="fullReviewsLink" class="btn btn-outline-white" v-if="fullReviewsLink">See Full Reviews</a>
-            <a :href="rateGameLink" class="btn btn-outline-white" v-if="rateGameLink">Rate this game</a>
+            <c-button status="outline-white" :href="fullReviewsLink" v-if="fullReviewsLink">
+                See Full Reviews
+            </c-button>
+            <c-button status="outline-white" :href="rateGameLink" v-if="rateGameLink">
+                Rate this game
+            </c-button>
         </div>
         <div v-else>
             <h4>No reviews yet.</h4>
-            <button @click="$emit('goto')" class="btn btn-sm btn-outline-white">Be the first reviewer</button>
+            <c-button tag="button" @click="$emit('goto')" status="outline-white">Be the first reviewer</c-button>
         </div>
     </c-block>
 </template>
 
 <script>
 export default {
-    name: 'rating-block',
+    name: 'c-rating-block',
     props: {
         items: {
-            type: Array
+            type: [Array, Object]
         },
         fullReviewsLink: {
             type: String
@@ -40,6 +44,8 @@ export default {
     components: {
         'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-rating-stars': (resolve) => require(['../rating-stars'], resolve)
+    },
+    computed:{
     }
 }
 </script>
@@ -80,24 +86,6 @@ export default {
         float: right;
         text-align: left;
         width: 80px;
-    }
-    button.btn-outline-white {
-        font-size: 12px;
-        text-transform: uppercase;
-        color: #fff;
-        background: transparent;
-        border: 1px solid #fff;
-        border-radius: 5px;
-        font-weight: bold;
-        display: inline-block;
-        line-height: 24px;
-        padding: 0 8px;
-        width: auto;
-        margin: 5px 10px 3px 0;
-        &:hover{
-            color: #000;
-            background: #fff;
-        }
     }
 
 </style>

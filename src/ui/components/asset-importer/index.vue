@@ -4,13 +4,12 @@
             <h3>Import contacts</h3>
             <p class="mb-0">Now let's match the columns in your uploaded file to your MailChimp list.</p>
             <p><a href="#3">See an example of the import field match process</a></p>
-            <div class="alert alert-primary my-4" role="alert">
+            <c-notification-inline type="info" size="md" class="my-4">
                 A simple primary alert—check it out!
-            </div>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="checkbox1" v-model="skippedState">
-                <label class="custom-control-label" for="checkbox1">Show skipped columns</label>
-            </div>
+            </c-notification-inline>
+            <c-checkbox id="test" v-model="skippedState">
+                Show skipped columns
+            </c-checkbox>
             <div class="row mt-4">
                 <div class="col-12 col-md-4">
                     <div class="card">
@@ -18,8 +17,12 @@
                             <h4>Email Address</h4>
                             <h6>dedeqit@gmail.com</h6>
                             <div class="action">
-                                <a href="#3" class="btn btn-sm btn-danger mx-1">Edit</a>
-                                <a href="#3" class="btn btn-sm btn-info mx-1">Skip</a>
+                                <c-button status="outline-danger" class="mx-1">
+                                    Edit
+                                </c-button>
+                                <c-button status="outline-info" class="mx-1">
+                                    Skip
+                                </c-button>
                             </div>
                         </div>
                         <div class="card-header invert p-3 d-none">
@@ -53,8 +56,12 @@
                             <h4>First Name</h4>
                             <h6>text field</h6>
                             <div class="action">
-                                <a href="#3" class="btn btn-sm btn-danger mx-1">Edit</a>
-                                <a href="#3" class="btn btn-sm btn-info mx-1">Skip</a>
+                                <c-button status="outline-danger" class="mx-1">
+                                    Edit
+                                </c-button>
+                                <c-button status="outline-info" class="mx-1">
+                                    Skip
+                                </c-button>
                             </div>
                         </div>
                         <ul class="list">
@@ -73,8 +80,12 @@
                             <h4>Last Name</h4>
                             <h6>text field</h6>
                             <div class="action">
-                                <a href="#3" class="btn btn-sm btn-danger mx-1">Edit</a>
-                                <a href="#3" class="btn btn-sm btn-info mx-1">Skip</a>
+                                <c-button status="outline-danger" class="mx-1">
+                                    Edit
+                                </c-button>
+                                <c-button status="outline-info" class="mx-1">
+                                    Skip
+                                </c-button>
                             </div>
                         </div>
                         <ul class="list">
@@ -89,7 +100,9 @@
             </div>
             <div class="row mt-3">
                 <div class="col-12 text-right">
-                    <button @click="uploadAssets" class="btn btn-sm btn-success">Upload</button>
+                    <c-button status="outline-success" @click="uploadAssets">
+                        Upload
+                    </c-button>
                 </div>
             </div>
         </div>
@@ -180,12 +193,13 @@
 
 
 <script>
-    import cLoadingBar from '../loading-bar';
 
     export default {
         props: ['show_skipped'],
         components: {
-            'c-loading-bar': cLoadingBar
+            'c-loading-bar': (resolve) => require(['@/ui/components/loading-bar'], resolve),
+            'c-notification-inline': (resolve) => require(['@/ui/components/notification/inline'], resolve),
+            'c-checkbox': (resolve) => require(['@/ui/components/checkbox'], resolve),
         },
         data(){
             return {

@@ -47,6 +47,7 @@
                     <div class="d-flex flex-nowrap">
                         <div class="time mr-3" v-if="item.release_date && showDate">
                             <i class="fas fa-calendar-alt"></i>
+                            <!--<c-tooltip :name="calculateSince(item.release_date)" position="center">-->
                             <c-tooltip :name="calculateSince(item.release_date)" position="center">
                                 <div class="text-center" style="white-space: nowrap">
                                     <strong>Released</strong><br>
@@ -56,7 +57,8 @@
                         </div>
                         <div class="followers mr-3" v-if="item.followers">
                             <i class="fas fa-eye"></i>
-                            <c-tooltip :name="item.followers" position="center">
+                            <!--<c-tooltip :name="item.followers" position="center">-->
+                            <c-tooltip position="center">
                                 <div class="text-center" style="white-space: nowrap">
                                     <strong>Followers</strong><br>
                                     {{ item.followers }}
@@ -65,7 +67,8 @@
                         </div>
                         <div class="players" v-if="item.players">
                             <i class="fas fa-user"></i>
-                            <c-tooltip :name="item.players" position="center">
+                            <!--<c-tooltip :name="item.players" position="center">-->
+                            <c-tooltip position="center">
                                 <div class="text-center" style="white-space: nowrap">
                                     <strong>Players</strong><br>
                                     {{ item.players }}

@@ -7,13 +7,11 @@
             return h('div', {
                 staticClass: 'input-searcher'
             }, [
-                h('c-input', {
+                h('input', {
                     on: this.listeners,
-                    attrs: {
-                        ...this.$attrs,
-                        value: this.value
-                    },
-                    props: {
+                    staticClass: 'c-input',
+                    attrs: this.$attrs,
+                    domProps: {
                         value: this.value
                     }
                 }),
@@ -28,7 +26,10 @@
         },
         computed: {
             listeners() {
-                const listeners = { ...this.$listeners };
+                const listeners = {
+                    ...this.$listeners,
+                    input: e => this.$emit('input', e.target.value)
+                };
                 delete listeners.click;
                 return listeners;
             }
@@ -43,6 +44,11 @@
         display: flex;
         align-items: center;
         .c-input {
+            background: #222235;
+            border-radius: 3px;
+            padding: 0 10px;
+            height: 33px;
+
             padding-right: 25px;
             width: 100%;
             border: 1px solid rgba(255, 255, 255, 0.1);

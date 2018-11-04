@@ -49,7 +49,7 @@
     import moment from 'moment'
 
     export default {
-        name: '',
+        name: 'pledge',
         props: ['pledge'],
         components:{
             'c-contribute-form': ContributeForm

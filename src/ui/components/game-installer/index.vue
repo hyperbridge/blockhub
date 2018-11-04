@@ -3,22 +3,20 @@
         <div class="game-installer" slot="body">
             <div class="game-installer__header">
                 <div class="game-installer__game-img">
-                    <c-img src="https://static.adweek.com/adweek.com-prod/wp-content/uploads/sites/2/2015/05/Earthcore.png" />
+                    <c-img :src="img" />
                 </div>
                 <div class="game-installer__game-description">
                     <div class="h5 mb-0 pb-0 font-weight-bold">
-                        Shattered
+                        {{ name }}
                     </div>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vulputate
-                        et tellus ac scelerisque. Duis vel suscipit orci, vel tristique elit.
-                        Praesent sollicitudin volutpat finibus.
+                        <slot />
                     </p>
                     <div class="game-operations-support">
                         Systems
-                        <i class="fab fa-apple"></i>
-                        <i class="fab fa-linux"></i>
-                        <i class="fab fa-windows"></i>
+                        <i class="fab fa-apple" v-if="mac"></i>
+                        <i class="fab fa-linux" v-if="linux"></i>
+                        <i class="fab fa-windows" v-if="win"></i>
                     </div>
                 </div>
             </div>
@@ -27,16 +25,20 @@
                     <label>
                         Install
                     </label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <i class="fas fa-folder-open"></i>
+                    <div class="dropdown">
+                        <a class="btn dropdown-toggle" href="#" role="button"
+                           data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="fas fa-gamepad"></i>
+                            {{ file }}
+                        </a>
+                        <div class="dropdown-menu">
+                            <ul class="list-unstyled mb-0 p-0">
+                                <li @click="choosenGame(file)" v-for="(file, index) in filesList" :key="index">
+                                    {{ name }} ({{ makeCapitalize(file.platform) }}, {{ file.size | numeralFormat('0.0') }})
+                                </li>
+                            </ul>
                         </div>
-                        <select class="custom-select">
-                            <option selected>Choose...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
                     </div>
                 </div>
                 <div class="game-installer__select-row">
@@ -87,10 +89,29 @@
             width: {
                 type: String,
                 default: '500'
-            }
+            },
+            name: String,
+            mac: String,
+            win: String,
+            linux: String,
+            img: String,
+            filesList: Array
         },
         components:{
             'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic'], resolve),
+            'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
+        },
+        data(){
+            return{
+                file: 'Choose the game'
+            }
+        },
+        methods:{
+            choosenGame(){
+            },
+            makeCapitalize(str){
+                return str.charAt(0).toUpperCase() + str.slice(1);
+            }
         }
     }
 </script>
@@ -147,6 +168,7 @@
         .input-group{
             display: flex;
             align-items: center;
+            width: calc( 100% - 100px );
             margin: 0;
             border: 1px solid rgba(255, 255, 255, .1);
             select{
@@ -164,6 +186,49 @@
                 font-size: 14px;
                 line-height: 30px;
                 display: inline-block;
+            }
+        }
+        .dropdown{
+            display: flex;
+            width: calc( 100% - 100px );
+            border: 1px solid rgba(255, 255, 255, .1);
+            background: rgba(0, 0, 0, .3);
+            position: relative;
+            .btn{
+                display: flex;
+                align-items: center;
+                color: #fff;
+                padding: 0 10px;
+                width: 100%;
+                line-height: 30px;
+                font-size: 13px;
+                user-select: none;
+                box-shadow: none;
+                i{
+                    margin-right: 10px;
+                    font-size: 14px;
+                }
+                &:after{
+                    margin-left: auto;
+                }
+            }
+            .dropdown-menu{
+                right: 0;
+                border: 1px solid rgba(255, 255, 255, .1);
+                background: rgba(0, 0, 0, .85);
+                border-radius: 0 0 5px 5px;
+                margin: 0;
+                color: #fff;
+                padding: 0px;
+                transform: translate3d(0, 30px, 0)!important;
+                li{
+                    line-height: 28px;
+                    padding: 0 10px;
+                    cursor: pointer;
+                    &:hover{
+                        background: rgba(255, 255, 255, .15);
+                    }
+                }
             }
         }
     }
@@ -193,6 +258,10 @@
                 background: -webkit-linear-gradient(top, rgba(103,39,44,1) 0%,rgba(85,30,35,1) 100%); /* Chrome10-25,Safari5.1-6 */
                 background: linear-gradient(to bottom, rgba(103,39,44,1) 0%,rgba(85,30,35,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#67272c', endColorstr='#551e23',GradientType=0 ); /* IE6-9 */
+                &:hover{
+                    background: #a3424b;
+                    text-decoration: none;
+                }
             }
             &.btn-download{
                 border: 1px solid #c0525d;
@@ -202,6 +271,10 @@
                 background: -webkit-linear-gradient(top, rgba(174,52,63,1) 0%,rgba(141,42,51,1) 100%); /* Chrome10-25,Safari5.1-6 */
                 background: linear-gradient(to bottom, rgba(174,52,63,1) 0%,rgba(141,42,51,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ae343f', endColorstr='#8d2a33',GradientType=0 ); /* IE6-9 */
+                &:hover{
+                    background: #c0525d;
+                    text-decoration: none;
+                }
             }
         }
     }

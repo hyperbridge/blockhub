@@ -9,6 +9,9 @@
                 attrs: {
                     ...this.$attrs,
                     ...this.$props
+                },
+                domProps: {
+                    value: this.value
                 }
             });
         },
@@ -29,5 +32,10 @@
         border-radius: 3px;
         padding: 0 10px;
         height: 33px;
+        border: none;
+        color: #fff;
+        user-select: none;
+        box-shadow: none;
+        outline: none;
     }
 </style>

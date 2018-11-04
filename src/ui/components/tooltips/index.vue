@@ -24,9 +24,7 @@
     export default {
         name: 'tooltip',
         props: {
-            name: {
-                type: String
-            },
+            name: [String, Number],
             position: {
                 type: String,
                 default: 'left'
@@ -127,6 +125,10 @@
             &:before{
                 background: #5D75F7;
             }
+        }
+        .c-tooltips__content-default{
+            z-index: 1000;
+            position: relative;
         }
     }
 </style>

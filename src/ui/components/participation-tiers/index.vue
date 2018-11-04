@@ -27,12 +27,11 @@
 
 <script>
     export default {
-        // props:['price', 'sold', 'left', 'tag', 'title', 'id']
         props:{
             id: Number,
-            price: String,
-            sold: Number,
-            left: Number,
+            price: [ Number, String ],
+            sold: [ Number, String ],
+            left: [ Number, String ],
             tag: String,
             title: String,
             inList: {

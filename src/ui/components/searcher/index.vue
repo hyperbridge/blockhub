@@ -46,7 +46,7 @@
     import { debouncer } from '@/mixins';
 
     export default {
-        name: 'searcher',
+        name: 'c-searcher',
         components: {
             'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
         },

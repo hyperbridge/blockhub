@@ -1,4 +1,5 @@
 <template>
+    <div class="row">
     <div class="col-12">
         <div class="bounties-header margin-bottom-20">
             <div class="bounties-header__info">
@@ -69,6 +70,7 @@
                 </div>
             </transition>
         </div>
+    </div>
     </div>
 </template>
 

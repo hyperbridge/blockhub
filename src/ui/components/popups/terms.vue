@@ -14,12 +14,12 @@
                             <slot name="body" />
                         </div>
                         <div class="c-terms-popup__footer">
-                            <a href="#" class="c-btn btn-cancel">
+                            <c-button status="plain" class="color-red">
                                 Cancel
-                            </a>
-                            <a href="#" class="c-btn btn-agree" :class="{'not-accept' : !isRead}">
+                            </c-button>
+                            <c-button status="gradient-info" class="ml-3" :class="{'not-accept' : !isRead}">
                                 I Agree
-                            </a>
+                            </c-button>
                         </div>
                     </div>
                 </div>
@@ -148,36 +148,16 @@
         align-items: center;
         margin-top: 30px;
         .c-btn{
-            margin-left: 10px;
-            font-weight: bold;
-            text-decoration: none;
-            &.btn-cancel{
+            &.color-red{
                 color: #F75D5D;
-                margin-right: 10px;
                 &:hover{
                     color: #cb4d4d;
                 }
             }
-            &.btn-agree{
-                text-shadow: 0 1px 1px rgba(28,115,184,0.64);
-                background-color: #2189db;
-                background: -webkit-linear-gradient(#42a1ec, #0070c9);
-                background: linear-gradient(#42a1ec, #0070c9);
-                border: 1px solid #07c;
-                border-radius: 4px;
-                color: #fff;
-                padding: 3px 10px;
-                &:hover{
-                    background-color: #3392de;
-                    background: -webkit-linear-gradient(#51a9ee, #147bcd);
-                    background: linear-gradient(#51a9ee, #147bcd);
-                    border-color: #1482d0;
-                }
-            }
-            &.not-accept{
-                pointer-events: none;
-                opacity: .5;
-            }
+        }
+        .not-accept{
+            pointer-events: none;
+            opacity: .5;
         }
     }
 </style>

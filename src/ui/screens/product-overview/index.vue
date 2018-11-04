@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-12 col-lg-8 col-xl-9">
+        <div class="col-12 col-lg-8 col-xl-8">
             <c-screen-gallery
                 :items="[product.images.medium_tile, ...product.images.preview]"
                 :video_url="product.video"
@@ -32,7 +32,7 @@
                 <div id="summernote" v-html="product.content">{{ product.content }}</div>
             </div>
         </div>
-        <div class="col-12 col-lg-4 col-xl-3">
+        <div class="col-12 col-lg-4 col-xl-4">
             <c-purchase-block
                 :isUnavailable="!Number(product.price)"
                 :price="product.price"
@@ -42,19 +42,20 @@
                 :inWishlist="!!wishlist[product.id]"
                 @addToWishlist="addToWishlist"
             />
+            <c-button icon_hide @click="showInstaller = !showInstaller">Open installer</c-button>
 
             <c-rating-block class="margin-bottom-20" :items="product.rating"
-                            :parent_url="`/#/product/${product.id}`"/>
+                            :parent_url="`/#/product/${product.id}`" v-darklaunch="'RATINGS'" />
 
             <c-frequently-traded-assets class="margin-bottom-20" :items="product.frequently_traded_assets"
-                                        :assetsUrl="`/#/product/${product.id}/assets`"/>
+                                        :assetsUrl="`/#/product/${product.id}/assets`" v-darklaunch="'ASSETS'" />
 
             <c-community-spotlight class="margin-bottom-20" :discussions="product.community.discussions"
-                                    :communityUrl="`/#/product/${product.id}/community`"/>
+                                    :communityUrl="`/#/product/${product.id}/community`" v-darklaunch="'COMMUNITY'" />
 
-            <c-system-requirements class="margin-bottom-20" :requirements="product.system_requirements"/>
+            <c-system-requirements class="margin-bottom-20" :requirements="product.system_requirements" />
 
-            <c-language-support :languages="product.language_support"/>
+            <c-language-support :languages="product.language_support" />
         </div>
         <div class="col-12">
             <c-block :title="`TWITCH STREAMS - ${product.name}`"
@@ -97,6 +98,17 @@
                 </div>
             </div>
         </div>
+        <c-modal
+            v-if="showInstaller"
+            :title="product.name"
+            @close="showInstaller = false"
+        >
+            <c-game-installer
+                slot="body"
+                :product="product"
+                @cancel="showInstaller = false"
+            />
+        </c-modal>
     </div>
 </template>
 
@@ -119,6 +131,8 @@
             'c-system-requirements': (resolve) => require(['@/ui/components/product-overview/system-requirements'], resolve),
             'c-language-support': (resolve) => require(['@/ui/components/product-overview/language-support'], resolve),
             'c-stream-item': (resolve) => require(['@/ui/components/stream'], resolve),
+            'c-modal': (resolve) => require(['@/ui/components/modal'], resolve),
+            'c-game-installer': (resolve) => require(['@/ui/components/game-installer'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide,
         },
@@ -212,7 +226,8 @@
                         },
                     }
                 },
-                streamersList: 8
+                streamersList: 8,
+                showInstaller: false
             }
         },
         methods: {
@@ -240,7 +255,7 @@
                 return this.$refs.streams_slider.swiper;
             },
             wishlist() {
-                return this.$store.state.application.account.product_wishlist;
+                return this.$store.state.application.account.product_wishlist || {};
             }
         }
     }

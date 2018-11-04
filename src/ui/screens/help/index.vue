@@ -1,6 +1,5 @@
 <template>
     <c-layout navigationKey="help">
-            <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-12 text-center">
                         <h2 class="m-0 p-o">Welcome to BlockHub Support</h2>
@@ -85,7 +84,6 @@
                         </c-card>
                     </div>
                 </div>
-            </div>
     </c-layout>
 </template>
 
