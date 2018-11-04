@@ -1,5 +1,14 @@
 <template>
-    <div class="col-12">
+    <div class="row">
+    <div class="col-12" v-if="!project.milestones">
+
+            <div class="posts-timeline__end no-updates">
+                <h3>
+                    There is no milestones defined.
+                </h3>
+            </div>
+    </div>
+    <div class="col-12" v-if="project.milestones">
             <div class="milestones-header margin-bottom-20">
                 <div class="milestones-header__info">
                     <div class="h3 text-white font-weight-bold mb-0">
@@ -72,6 +81,7 @@
                 />
             </div>
         </div>
+    </div>
 </template>
 
 <script>

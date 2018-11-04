@@ -100,6 +100,10 @@
             transform: rotate(45deg);
             box-shadow: -7px 7px 14px rgba(0, 0, 0, .2);
         }
+        img{
+            z-index: 100;
+            position: relative;
+        }
     }
     .assets-grid__item-thumb{
         display: inline-block;

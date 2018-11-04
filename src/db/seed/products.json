@@ -37,61 +37,71 @@
                 "name": "English",
                 "interface": true,
                 "full_audio": false,
-                "subtitles": false
+                "subtitles": false,
+                "code": "en"
             },
             {
                 "name": "Czech",
                 "interface": true,
                 "full_audio": false,
-                "subtitles": false
+                "subtitles": false,
+                "code": "cz"
             },
             {
                 "name": "French",
                 "interface": true,
                 "full_audio": false,
-                "subtitles": false
+                "subtitles": false,
+                "code": "fr"
             },
             {
                 "name": "German",
                 "interface": true,
                 "full_audio": false,
-                "subtitles": false
+                "subtitles": false,
+                "code": "gr"
             },
             {
                 "name": "Hungarian",
                 "interface": true,
                 "full_audio": false,
-                "subtitles": false
+                "subtitles": false,
+                "code": "en"
             },
             {
                 "name": "Italian",
                 "interface": true,
                 "full_audio": false,
-                "subtitles": false
+                "subtitles": false,
+                "code": "it"
             },
             {
                 "name": "Korean",
                 "interface": true,
                 "full_audio": false,
-                "subtitles": false
+                "subtitles": false,
+                "code": "en"
             },
             {
                 "name": "Polish",
                 "interface": true,
                 "full_audio": false,
-                "subtitles": false
+                "subtitles": false,
+                "code": "pl"
             },
             {
                 "name": "Russian",
                 "interface": true,
                 "full_audio": false,
-                "subtitles": false
+                "subtitles": false,
+                "code": "ru"
             },
             {
                 "name": "Spanish",
                 "interface": true,
                 "full_audio": false,
-                "subtitles": false
+                "subtitles": false,
+                "code": "en"
             }
         ],
         "system_requirements": [
@@ -186,7 +196,8 @@
                 "name": "English",
                 "interface": true,
                 "full_audio": false,
-                "subtitles": false
+                "subtitles": false,
+                "code": "en"
             }
         ],
         "system_requirements": [

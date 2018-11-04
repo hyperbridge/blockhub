@@ -18,12 +18,10 @@
         </div>
         <div class="heading-bar__additional-action" v-if="showActions">
             <slot name="additional-action"></slot>
-            <a :href="more" v-if="more" class="more">
-                MORE <c-icon name="angle-right"/>
-            </a>
+            <c-button status="plain" :href="more" v-if="more" icon="angle-right" :swap_order="true">
+                MORE
+            </c-button>
             <div class="heading-bar__nav" v-if="showArrows">
-                    <!-- v-if="dynamicIndex < itemsLength - 1" -->
-                    <!-- v-if="dynamicIndex > 0" -->
                 <a
                     href="#3"
                     class="nav-prev"

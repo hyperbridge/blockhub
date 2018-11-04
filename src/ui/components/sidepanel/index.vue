@@ -289,7 +289,9 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .page-sidepanel{
+        z-index: 1;
+    }
 
     .navigation {
         margin-bottom: 50px;

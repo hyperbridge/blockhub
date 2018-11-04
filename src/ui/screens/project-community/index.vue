@@ -1,4 +1,5 @@
 <template>
+    <div class="row">
     <div class="col-12">
             <div v-if="community_1">
                 <c-item
@@ -14,6 +15,7 @@
 
 
         </div>
+    </div>
 </template>
 
 <script>

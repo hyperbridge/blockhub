@@ -68,11 +68,17 @@ Vue.directive('darklaunch', {
             })
         }
 
+        el.hidden = true
+
         if (value &&
             store.state.application.darklaunch_flags &&
             store.state.application.account.darklaunch_flags &&
-            !isVisible(store.state.application.darklaunch_flags, store.state.application.account.darklaunch_flags, value)) {
-            el.hidden = true
+            isVisible(store.state.application.darklaunch_flags, store.state.application.account.darklaunch_flags, value)) {
+            el.hidden = false
+        }
+
+        if (store.state.application.darklaunch_override) {
+            el.hidden = false
         }
     }
 })

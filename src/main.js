@@ -12,6 +12,8 @@ import './directives';
 import './css/styles.scss';
 import './prototypes';
 import migrations from './db/migrations'
+import {Picker, Emoji} from 'emoji-mart-vue'
+
 
 import VueNumerals from 'vue-numerals'
 
@@ -26,6 +28,9 @@ Vue.use(Snotify, {
 });
 
 Vue.use(VueNumerals);
+Vue.component('picker', Picker)
+Vue.component('emoji', Emoji)
+
 
 const data = {
   user: 'something'
@@ -79,7 +84,7 @@ const overrideConsoleLog = () => {
 //window.addEventListener('hashchange', () => { $('body').addClass('screen-loading') }, false);
 
 
-overrideConsoleLog()
+// overrideConsoleLog() TODO: later
 
 initializer().then(() => {
   console.log('[BlockHub] Loading app...')

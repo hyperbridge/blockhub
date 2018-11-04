@@ -10,12 +10,9 @@
 
         <c-button @click="$store.commit('application/activateModal', 'import-product')" v-if="$store.state.application.editor_mode === 'editing'">Import from third-party</c-button>
 
-        <c-curator-panel>
-            <!-- <c-claim title="Unclaimed Page" type="warning" v-darklaunch="'CURATORS'">
-                <p>Created this game?</p>
-                <c-switch label="Enable Curation Mode" />
-            </c-claim> -->
+        <c-join-community v-if="!$store.state.application.desktop_mode" />
 
+        <c-curator-panel>
             <c-curator-info title="" v-darklaunch="'CURATORS'">
                 <c-claim title="Content curated" type="success" v-darklaunch="'CURATORS'" class="margin-bottom-10 margin-top-10">
                     <p>This product has been curated by 2041 people.</p>
@@ -63,6 +60,7 @@
             'c-claim': (resolve) => require(['@/ui/components/curator-panel/claim.vue'], resolve),
             'c-curator-panel': (resolve) => require(['@/ui/components/curator-panel'], resolve),
             'c-curator-info': (resolve) => require(['@/ui/components/curator-panel/info-card.vue'], resolve),
+            'c-join-community': (resolve) => require(['@/ui/components/join-community'], resolve),
         },
         methods: {
             showClaimPopup() {
@@ -79,6 +77,11 @@
                     ]
                 }
             }
+        },
+        computed:{
+            signed_in() {
+                return this.$store.state.application.signed_in
+            },
         }
     }
 </script>

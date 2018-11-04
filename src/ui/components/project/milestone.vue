@@ -63,6 +63,7 @@ export default {
         display: inline-block;
         float: left;
         width: 100%;
+        color: #fff;
         @media (max-width: 767px) {
             margin-bottom: 20px;
         }
@@ -105,6 +106,7 @@ export default {
                         font-weight: bold;
                         margin-bottom: 15px;
                         line-height: 28px;
+                        color: #fff;
                     }
                     p{
                         font-size: 16px;
@@ -129,7 +131,7 @@ export default {
                             margin-right: 15px;
                             min-width: 20px;
                         }
-                        .progress-bar {
+                        .progress {
                             margin-right: 15px;
                         }
                     }

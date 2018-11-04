@@ -333,7 +333,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-card" v-if="!verifyingPassphrase">
+                                <div class="tab-card" v-if="!verifyingPassphrase" hidden>
                                     <p>We've generated a passphrase for you. You can change it, but it's not recommended. This is used to access, create &amp; change your data. If you ever need to recover it, you can use your password. If you forget your password, you can use your secret question AND your birthday. We do this to protect you against hackers, however don't lose them, otherwise it will be impossible to recover the account.</p>
 
                                     <p>Make sure to write down your passphase, password, and secret answers and put it somewhere safe.</p>
@@ -347,7 +347,7 @@
 
                                     <c-button class="c-btn-lg" @click="startVerification()">Got it</c-button>
                                 </div>
-                                <div class="tab-card" v-if="verifyingPassphrase">
+                                <div class="tab-card" v-if="verifyingPassphrase" hidden>
                                     <p>We've generated a passphrase for you. You can change it, but it's not recommended. This is used to access, create &amp; change your data. If you ever need to recover it, you can use your password. If you forget your password, you can use your secret question AND your birthday. We do this to protect you against hackers, however don't lose them, otherwise it will be impossible to recover the account.</p>
 
                                     <p>Make sure to write down your passphase, password, and secret answers and put it somewhere safe.</p>
@@ -367,6 +367,7 @@
                                         label="I have safely stored my passphrase"
                                         label_position="right"
                                         v-if="verifiedPassphrase"
+                                        hidden
                                     />
                                     <c-switch
                                         v-model="account.encrypt_passphrase"
@@ -759,9 +760,9 @@ export default {
     data() {
         return {
             writtenDown: false,
-            verifyingPassphrase: false,
-            verifiedPassphrase: false,
-            agreeStoredPassphrase: false,
+            verifyingPassphrase: true,
+            verifiedPassphrase: true,
+            agreeStoredPassphrase: true,
             currentStep: 1,
             finishedStep: 1,
             steps: 3,
@@ -824,9 +825,9 @@ export default {
                     }).then((res) => {
                         this.passphrase = res.split(' ')
                         this.repeatPassphrase = res.split(' ')
-                        this.repeatPassphrase[2] = ''
-                        this.repeatPassphrase[4] = ''
-                        this.repeatPassphrase[8] = ''
+                        // this.repeatPassphrase[2] = ''
+                        // this.repeatPassphrase[4] = ''
+                        // this.repeatPassphrase[8] = ''
 
                         this.finishedStep = 1;
                         this.currentStep = 2;

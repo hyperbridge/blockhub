@@ -11,7 +11,7 @@
                 <th>CC</th>
             </thead>
             <tbody>
-                <tr v-for="lang in languages" :key="lang.name">
+                <transition-group name="fadeLeft" tag="tr" v-for="(lang, index) in orderLang" v-if="lang.show == 'default' || show">
                     <template v-for="(value, property) in lang">
                         <td v-if="property == 'name'" :key="property">{{ value }}</td>
                         <td v-else :key="property">
@@ -22,6 +22,20 @@
                             ></i>
                         </td>
                     </template>
+                </transition-group>
+                <tr style="background: transparent">
+                    <td colspan="10" class="text-center">
+                        <transition name="fade" v-if="!show">
+                            <div class="language-support__toggle-btn" @click="toggleLang">
+                                Show {{ languages.length - 1 }} more languages <i class="fas fa-angle-double-down"></i>
+                            </div>
+                        </transition>
+                        <transition name="fade" v-else>
+                            <div class="language-support__toggle-btn" @click="toggleLang">
+                                Hide languages <i class="fas fa-angle-double-up"></i>
+                            </div>
+                        </transition>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -42,8 +56,49 @@ export default {
             options_icons: {
                 subtitles: 'closed-captioning',
                 interface: 'language',
-                full_audio: 'volume-off'
+                full_audio: 'volume-off',
+            },
+            userLang: '',
+            show: false,
+            langList: []
+        }
+    },
+    created(){
+        let lang = navigator.language || navigator.userLanguage,
+            arr = this.languages;
+        this.userLang = lang.toLowerCase()
+        arr.forEach( (el) => {
+
+            if (el.code) {
+                if ( this.userLang.includes(el.code.toLowerCase()) ){
+                    el.order = 1;
+                    el.show = 'default';
+                    this.langList.push(el);
+                } else {
+                    el.order = 2;
+                    this.langList.push(el)
+                }
             }
+            else {
+                if (el.name === 'English') {
+                    el.order = 1;
+                    el.show = 'default';
+                }
+
+                this.langList.push(el)
+            }
+        })
+    },
+    methods:{
+        toggleLang(){
+            this.show = !this.show;
+        }
+    },
+    computed:{
+        orderLang(){
+            return this.langList.sort( (a, b) => {
+                return a.order - b.order;
+            })
         }
     },
     components: {
@@ -64,6 +119,47 @@ export default {
         }
         tbody tr:nth-child(even) {
             background-color: #353551;
+        }
+        tr{
+            &.hide-tr{
+                display: none;
+            }
+        }
+    }
+    .language-support__toggle-btn{
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        padding: 5px 10px;
+        position: relative;
+        margin-top: 5px;
+        transition: all 200ms cubic-bezier(0.34, 1.01, 0.8, 0.24);
+        &:before{
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: -20px;
+            height: 1px;
+            width: 20px;
+            background: #fff;
+        }
+        &:after{
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -20px;
+            height: 1px;
+            width: 20px;
+            background: #fff;
+        }
+        i{
+            margin-left: 10px;
+        }
+        &:hover{
+            cursor: pointer;
+            transition: all 200ms cubic-bezier(0.34, 1.01, 0.8, 0.24);
+            padding: 5px 20px;
         }
     }
 </style>

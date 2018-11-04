@@ -16,10 +16,10 @@
                             <c-switch size="sm" :value="true" label="I agree with the terms" />
                         </div>
                         <div>
-                            <c-button status="danger" @click="" class="mx-1">
+                            <c-button status="outline-danger" @click="" class="mx-1">
                                 Cancel
                             </c-button>
-                            <c-button status="success" @click="toggleSteps" class="mx-1" icon="arrow-right">
+                            <c-button status="outline-success" @click="toggleSteps" class="mx-1" icon="arrow-right">
                                 Next
                             </c-button>
                         </div>
@@ -137,10 +137,10 @@
                     </div>
                     <div slot="footer" class="d-flex align-items-center justify-content-end">
                         <div>
-                            <c-button status="danger" @click="" class="mx-1">
+                            <c-button status="outline-danger" @click="" class="mx-1">
                                 Cancel
                             </c-button>
-                            <c-button status="success" @click="toggleSteps" class="mx-1" icon="check">
+                            <c-button status="outline-success" @click="toggleSteps" class="mx-1" icon="check">
                                 Complete
                             </c-button>
                         </div>

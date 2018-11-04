@@ -27,12 +27,12 @@
                     </label>
                     <div class="dropdown">
                         <a class="btn dropdown-toggle" href="#" role="button"
-                           :id="id" data-toggle="dropdown" aria-haspopup="true"
+                           data-toggle="dropdown" aria-haspopup="true"
                            aria-expanded="false">
                             <i class="fas fa-gamepad"></i>
                             {{ file }}
                         </a>
-                        <div class="dropdown-menu" :aria-labelledby="[ id + '_button']">
+                        <div class="dropdown-menu">
                             <ul class="list-unstyled mb-0 p-0">
                                 <li @click="choosenGame(file)" v-for="(file, index) in filesList" :key="index">
                                     {{ name }} ({{ makeCapitalize(file.platform) }}, {{ file.size | numeralFormat('0.0') }})

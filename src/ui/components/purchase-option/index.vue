@@ -2,9 +2,9 @@
     <div class="purchase-option" :class="{'in-the-list' : inList}">
         <div class="purchase-option__price">
             <s v-if="oldPrice" class="small">
-                {{ oldPrice }}
+                $ {{ oldPrice }}
             </s>
-            {{ price }}
+            $ {{ price }}
         </div>
         <div class="purchase-option__img" v-if="img">
             <c-img :src="img" />

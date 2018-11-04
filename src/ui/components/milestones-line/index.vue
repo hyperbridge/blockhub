@@ -137,9 +137,12 @@
             }
         }
         &.done {
+            span{
+                background: #5EA72B;
+            }
             .stage_progress {
                 &:before {
-                    background: #3D691F;
+                    background: #3D691F!important;
                 }
             }
             i {
@@ -157,15 +160,20 @@
         }
         &.in_progress {
             .stage_progress {
-                background: #5EA72B;
-                &:after {
-                    position: absolute;
+                span{
                     background: #5EA72B;
-                    height: 100%;
-                    left: 0%;
-                    right: 0;
-                    content: "";
-                    display: inline-block;
+                    &:last-child{
+                        background: transparent;
+                    }
+                }
+                &:after {
+                    /*position: absolute;*/
+                    /*background: #5EA72B;*/
+                    /*height: 100%;*/
+                    /*left: 0%;*/
+                    /*right: 0;*/
+                    /*content: "";*/
+                    /*display: inline-block;*/
                 }
             }
             i {
@@ -174,7 +182,7 @@
         }
         &.awaiting {
             .stage_progress {
-                background: #5EA72B;
+                background: #3D691F;
             }
         }
     }
