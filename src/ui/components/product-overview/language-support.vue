@@ -68,7 +68,8 @@ export default {
             arr = this.languages;
         this.userLang = lang.toLowerCase()
         arr.forEach( (el) => {
-            if (el.code)
+
+            if (el.code) {
                 if ( this.userLang.includes(el.code.toLowerCase()) ){
                     el.order = 1;
                     el.show = 'default';
@@ -77,8 +78,15 @@ export default {
                     el.order = 2;
                     this.langList.push(el)
                 }
-            else
+            }
+            else {
+                if (el.name === 'English') {
+                    el.order = 1;
+                    el.show = 'default';
+                }
+
                 this.langList.push(el)
+            }
         })
     },
     methods:{
