@@ -10,6 +10,7 @@ import { withKnobs, text, boolean, number, object } from '@storybook/addon-knobs
 
 import '../css/styles.scss'
 import '@/filters'
+import '@/directives'
 import '@/components'
 
 import * as data from './components-data'
@@ -2167,6 +2168,7 @@ storiesOf('Modal', module)
 import Dropdown from '../ui/components/dropdown-menu/type-2'
 import DropdownCustom from '../ui/components/dropdown-menu/type-3'
 import DropdownPost from '../ui/components/dropdown-menu/index'
+import DropdownCurrency from '../ui/components/dropdown-menu/currency'
 storiesOf('Dropdown', module)
     .add('default', () => ({
         components: {
@@ -2222,6 +2224,16 @@ storiesOf('Dropdown', module)
                 </li>
             </ul>
             </c-dropdown>
+         </div>
+        `
+    }))
+    .add('currency', () => ({
+        components: {
+            'c-currency-dropdown': DropdownCurrency
+        },
+        template: `
+         <div class="row m-0 p-3">
+             <c-currency-dropdown />
          </div>
         `
     }))
@@ -4164,7 +4176,6 @@ storiesOf('Game Installer Modal', module)
     }))
 
 
-
 import Emoji from '@/ui/components/emoji'
 storiesOf('Emoji', module)
     .add('default', () => ({
@@ -4175,6 +4186,66 @@ storiesOf('Emoji', module)
         <div class="p-5">
             <c-emoji />
         </div>`
+    }))
+
+
+import Landing from '@/ui/components/landing'
+import LandingTitle from '@/ui/components/landing/block-title/simple'
+import LandingTitleShadow from '@/ui/components/landing/block-title/shadow'
+import LandingTitleGradient from '@/ui/components/landing/block-title/gradient'
+
+storiesOf('Landing Page', module)
+    .add('block title', () => ({
+        components:{
+            'c-landing-block-title': LandingTitle
+        },
+        template:`
+        <div class="p-5">
+            <c-landing-block-title>
+                Mutation Mode
+            </c-landing-block-title>
+        </div>
+            `
+    }))
+    .add('block title with shadow', () => ({
+        components:{
+            'c-landing-block-title-shadow': LandingTitleShadow
+        },
+        template:`
+        <div class="p-5">
+            <c-landing-block-title-shadow colorShadow="red">
+                Mutation Mode
+            </c-landing-block-title-shadow>
+        </div>
+            `
+    }))
+    .add('block title with gradient', () => ({
+        components:{
+            'c-landing-block-title-gradient': LandingTitleGradient
+        },
+        template:`
+        <div class="p-5">
+            <c-landing-block-title-gradient colorShadow="red">
+                Mutation Mode
+            </c-landing-block-title-gradient>
+            <hr />
+            <c-landing-block-title-gradient colorShadow="red" align="right">
+                Mutation Mode
+            </c-landing-block-title-gradient>
+            <hr />
+            <c-landing-block-title-gradient colorShadow="red" align="center">
+                Mutation Mode
+            </c-landing-block-title-gradient>
+        </div>
+            `
+    }))
+    .add('default', () => ({
+        components:{
+            'c-landing': Landing
+        },
+        template:`
+            <c-landing />
+            `
     }))
 
 
