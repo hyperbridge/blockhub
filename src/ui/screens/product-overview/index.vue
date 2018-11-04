@@ -255,7 +255,7 @@
                 return this.$refs.streams_slider.swiper;
             },
             wishlist() {
-                return this.$store.state.application.account.product_wishlist;
+                return this.$store.state.application.account.product_wishlist || {};
             }
         }
     }

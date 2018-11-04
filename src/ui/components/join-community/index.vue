@@ -8,7 +8,7 @@
             <div>
                 Discover the best games before they're mainstream.
             </div>
-            <c-button status="outline-info" href="/#/account/signup">
+            <c-button status="outline-white" href="/#/download">
                 Sign Up
             </c-button>
         </div>

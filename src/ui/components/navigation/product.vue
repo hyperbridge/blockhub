@@ -10,7 +10,7 @@
 
         <c-button @click="$store.commit('application/activateModal', 'import-product')" v-if="$store.state.application.editor_mode === 'editing'">Import from third-party</c-button>
 
-        <c-join-community />
+        <c-join-community v-if="!$store.state.application.desktop_mode" />
 
         <c-curator-panel>
             <c-curator-info title="" v-darklaunch="'CURATORS'">
