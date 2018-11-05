@@ -710,14 +710,14 @@ const router = new Router({
                             component: (resolve) => require(['@/ui/screens/marketplace/trade/home'], resolve),
                         },
                         {
+                            path: 'explorer',
+                            name: 'Marketplace Trade Explorer',
+                            component: (resolve) => require(['@/ui/screens/marketplace/trade/explorer'], resolve)
+                        },
+                        {
                             path: 'history',
                             name: 'Marketplace Trade History',
                             component: (resolve) => require(['@/ui/screens/marketplace/trade/history'], resolve),
-                        },
-                        {
-                            path: 'histo',
-                            name: 'Marketplace Trade Histo',
-                            component: (resolve) => require(['@/ui/screens/marketplace/trade/histo'], resolve)
                         },
                         {
                             path: ':id',
