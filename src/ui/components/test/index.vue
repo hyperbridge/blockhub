@@ -1,5 +1,5 @@
 <template>
-    <button @click="$emit('customClick', 1)">
+    <button @click="$emit('customClick', 21)">
         Click me
     </button>
 </template>

@@ -21,24 +21,28 @@
             </c-button>
         </section>
 
-        <input type="text"
+        <!-- <input type="text"
             :value="val"
-            @change="add++"
             @input="updateVal"
-            v-debounce:input
         />
-        <c-test v-debounce:click="add + 1"/>
+        <c-test v-debounce:customClick="method"/>
+        <c-test @customClick="debounce(() => add++)"/>
+        {{ add }}
         <button
             @click="$emit('testEvent')"
             v-debounce:testEvent
         >Test e</button>
-        {{ val }}
+        {{ val }} -->
+
     </article>
 </template>
 
 <script>
+    import { debouncer } from '@/mixins';
+
     export default {
         data: () => ({ val: 'm', timeout: null, add: 0 }),
+        mixins: [debouncer],
         components: {
             'c-test': (resolve) => require(['@/ui/components/test'], resolve),
         },
@@ -52,12 +56,17 @@
             }
         },
         methods: {
+            method(e) {
+                console.log('evt from method', e)
+            },
             copyTradeURL() {
                 navigator.clipboard.writeText(this.tradeURL)
                     .then(() => this.$snotify.info('TradeURL has been copied'))
                     .catch(err => this.$snotify.warning('TradeURL could not be copied'));
             },
             updateVal(e) {
+                console.log(e)
+                return;
                 clearTimeout(this.timeout);
                 this.timeout = setTimeout(() => {
                     this.val = e.target.value;
