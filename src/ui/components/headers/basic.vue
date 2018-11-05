@@ -191,7 +191,7 @@
                             </a>
                         </li>
                         <li v-if="!is_locked" class="ml-3">
-                            <c-currency-dropdown />
+                            <c-currency-dropdown :current_currency="current_currency" :currencies="currencies" @change="selectCurrency" />
                         </li>
                     </ul>
                 </nav>
@@ -212,10 +212,16 @@ export default {
     },
     data() {
         return {
-            show_menu: false
+            show_menu: false,
         }
     },
     computed: {
+        currencies() {
+            return this.$store.state.application.currencies
+        },
+        current_currency() {
+            return this.account.currency
+        },
         account() {
             return this.$store.state.application.account
         },
@@ -287,6 +293,9 @@ export default {
             const { BrowserWindow } = window.specialRequire('electron').remote
             let browserWindow = BrowserWindow.getFocusedWindow()
             browserWindow.minimize()
+        },
+        selectCurrency(currency){
+            this.account.currency = currency
         }
     }
 }
