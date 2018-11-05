@@ -20,18 +20,35 @@
                 Generate new trade URL
             </c-button>
         </section>
+
+        <input type="text"
+            :value="val"
+            @change="add++"
+            @input="updateVal"
+            v-debounce:input
+        />
+        <c-test v-debounce:click="add + 1"/>
+        <button
+            @click="$emit('testEvent')"
+            v-debounce:testEvent
+        >Test e</button>
+        {{ val }}
     </article>
 </template>
 
 <script>
     export default {
+        data: () => ({ val: 'm', timeout: null, add: 0 }),
+        components: {
+            'c-test': (resolve) => require(['@/ui/components/test'], resolve),
+        },
         computed: {
             account() {
                 return this.$store.state.application.account;
             },
             tradeURL() {
                 const { id, tradeURLId } = this.account;
-                return `http://blockhub.gg/tradeoffer/new/?partner=${id}&id=${tradeURLId}`;
+                return `${window.location.origin}/#/tradeoffer/new/?partner=${id}&id=${tradeURLId}`;
             }
         },
         methods: {
@@ -39,6 +56,12 @@
                 navigator.clipboard.writeText(this.tradeURL)
                     .then(() => this.$snotify.info('TradeURL has been copied'))
                     .catch(err => this.$snotify.warning('TradeURL could not be copied'));
+            },
+            updateVal(e) {
+                clearTimeout(this.timeout);
+                this.timeout = setTimeout(() => {
+                    this.val = e.target.value;
+                }, 300);
             }
         }
     }
