@@ -1,7 +1,7 @@
 <template>
     <div class="author">
-        <c-img class="author__img" :src="author.img"/>
-        {{ author.name }}
+        <c-img class="author__img" :src="dnUser.img"/>
+        {{ dnUser.name }}
     </div>
 </template>
 
@@ -11,7 +11,16 @@ export default {
     props: {
         author: {
             type: Object,
-            required: true
+            required: false
+        },
+        user: {
+            type: Object,
+            required: false
+        }
+    },
+    computed: {
+        dnUser() {
+            return this.author || this.user;
         }
     }
 }

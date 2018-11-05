@@ -56,8 +56,7 @@
         computed: {
             transactions() {
                 return this.$store.getters['assets/transactionsArray'];
-            },
-
+            }
         }
     }
 </script>
