@@ -15,6 +15,7 @@
         <c-sidebar-menu
             title="DISCUSSIONS"
             :links="links.discussions"
+            v-darklaunch="'COMMUNITY'"
         />
 
         <c-sidebar-menu

@@ -29,7 +29,7 @@
                                 <i class="fas fa-hourglass"></i>
                                 Verifying
                             </div>
-                            <c-button status="outline-success" class="mt-3" to="/account/verification" v-else>
+                            <c-button status="outline-success" class="mt-3" href="/#/account/verification" v-else>
                                 Click here to verify
                             </c-button>
                             <div class="date" v-if="defaultIdentity.is_verified">
@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="col-12">
-                        <c-heading-bar name="All Identities" :showArrows="false" :showBackground="false" showActions>
+                        <c-heading-bar name="All Profiles" :showArrows="false" :showBackground="false" showActions>
                             <div class="additional-action margin-left-20" slot="additional-action">
                                 <span class="text">Name <c-icon name="user" /></span>
                                 <c-button-arrows

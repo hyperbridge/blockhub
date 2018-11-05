@@ -50,10 +50,6 @@
                     <span class="icon fas fa-info-circle"></span>
                     <span class="text">Payment Settings</span>
                 </a>
-                <a href="/#/developer/inquiries" v-if="developer_mode">
-                    <span class="icon fas fa-users"></span>
-                    <span class="text">User Inquiries</span>
-                </a>
                 <a href="/#/realm/new" v-if="developer_mode" v-darklaunch="'REALMS'">
                     <span class="icon fa fa-plus"></span>
                     <span class="text">New Realm</span>
