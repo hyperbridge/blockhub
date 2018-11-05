@@ -720,6 +720,11 @@ const router = new Router({
                             component: (resolve) => require(['@/ui/screens/marketplace/trade/history'], resolve),
                         },
                         {
+                            path: 'settings',
+                            name: 'Marketplace Trade Settings',
+                            component: (resolve) => require(['@/ui/screens/marketplace/trade/settings'], resolve),
+                        },
+                        {
                             path: ':id',
                             name: 'Marketplace Trade',
                             component: (resolve) => require(['@/ui/screens/marketplace/trade/_id'], resolve),

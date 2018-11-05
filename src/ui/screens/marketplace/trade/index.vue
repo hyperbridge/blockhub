@@ -12,8 +12,10 @@
         data() {
             return {
                 links: [
-                    { title: 'Offers', to: '/marketplace/trade' },
+                    { title: 'Manager', to: '/marketplace/trade' },
+                    { title: 'Explorer', to: { name: 'Marketplace Trade Explorer' }},
                     { title: 'History', to: { name: 'Marketplace Trade History' }},
+                    { title: 'Settings', to: { name: 'Marketplace Trade Settings' }}
                 ]
             }
         }

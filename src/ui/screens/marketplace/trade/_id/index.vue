@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <article>
         <c-block  v-if="transaction" :title="'Transaction: ' + this.id" class="transaction">
             <div class="transaction__block">
                 <div class="transaction__headings">
@@ -90,7 +90,7 @@
         <c-block v-else :title="'Transaction: ' + tradeId" class="transaction">
             <p>Transaction with id <i>{{ id }}</i> doesn't exist</p>
         </c-block>
-    </div>
+    </article>
 </template>
 
 
