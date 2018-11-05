@@ -16,9 +16,8 @@
                     </div>
                     <div class="management__inventory-explorer">
                         <c-list-submenu-2 :list="you.inventoryGrouped">
-                            <span slot-scope="props">
-                                {{ props.title }} - {{ props.listLength }}
-                            </span>
+                            <!-- <span slot-scope="props">
+                            </span> -->
                         </c-list-submenu-2>
                         <c-list-submenu :items="users.you.inventoryGrouped" isParent>
                             <c-list-submenu
