@@ -15,7 +15,7 @@
                 </div>
 
                 <c-button status="info" icon_hide>
-                    Create new trade URL
+                    Generate new trade URL
                 </c-button>
             </div>
         </section>
@@ -26,7 +26,12 @@
     export default {
         data() {
             return {
-                tradeURL: '123'
+                tradeURL: 'http://blockhub.gg/tradeoffer/new/?partner=1&id=478'
+            }
+        },
+        computed: {
+            tradeURLz() {
+                return this.$store.state.application.account.tradeURL;
             }
         },
         methods: {

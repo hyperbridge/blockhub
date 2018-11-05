@@ -5,7 +5,7 @@ import * as Bridge from '@/framework/desktop-bridge'
 import schema from './schema'
 import axios from 'axios'
 import FormData from 'form-data'
-import { extract } from '@/store/utils'
+import { extract, getId } from '@/store/utils'
 
 let rawData = {}
 
@@ -98,6 +98,8 @@ export const getters = {
     wishlistedProjects: ({ account }, getters, { funding: { projects }}) => Object
         .keys(account.project_wishlist)
         .map(id => projects[id]),
+    tradeURL: ({ account: { id, tradeURLid }}, getters) =>
+        `http://blockhub.gg/tradeoffer/new/?partner=${id}&id=${tradeURLid}`
 
 }
 
@@ -239,6 +241,11 @@ export const actions = {
                     resolve(contract)
                 })
         })
+    },
+    createTradeURL({ commit, state }) {
+        // async call => delete previous trade url
+        // state.account.tradeURLId
+        commit('createTradeURL', getId());
     }
 }
 
@@ -276,6 +283,9 @@ export const mutations = {
         } else {
             account[prop] = { ...account[prop], [id]: true };
         }
+    },
+    createTradeURL(state, id) {
+        state.account.tradeURLId = id;
     },
     signIn(state, payload) {
         state.signed_in = true

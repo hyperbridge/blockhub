@@ -196,7 +196,9 @@
                 "/home/leafo/.config/itch/apps",
                 "C:/Users/Tom/Program Files/apps",
                 "/home/games"
-            ]
+            ],
+            "tradeURLId": "478",
+            "id": 1
         },
         "darklaunch_flags": [
             {

@@ -11,3 +11,5 @@ export const skip = (object, props) => {
     }
     return copy;
 };
+
+export const getId = () => Math.floor(Math.random() * 1000);
