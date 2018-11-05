@@ -15,6 +15,11 @@
                         />
                     </div>
                     <div class="management__inventory-explorer">
+                        <c-list-submenu-2 :list="you.inventoryGrouped">
+                            <span slot-scope="props">
+                                {{ props.title }} - {{ props.listLength }}
+                            </span>
+                        </c-list-submenu-2>
                         <c-list-submenu :items="users.you.inventoryGrouped" isParent>
                             <c-list-submenu
                                 slot="sublist"
@@ -105,6 +110,7 @@
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-list': (resolve) => require(['@/ui/components/list'], resolve),
             'c-list-submenu': (resolve) => require(['@/ui/components/list-submenu'], resolve),
+            'c-list-submenu-2': (resolve) => require(['@/ui/components/list-submenu/v2'], resolve),
             'c-tooltip': (resolve) => require(['@/ui/components/tooltips/universal'], resolve),
             'c-asset-preview': (resolve) => require(['@/ui/components/asset-preview'], resolve),
             'c-asset-preview-small': (resolve) => require(['@/ui/components/asset-preview/small'], resolve),
@@ -180,6 +186,12 @@
             },
             products() {
                 return this.$store.state.marketplace.products;
+            },
+            you() {
+                return this.$store.getters['assets/users'][this.trx.you];
+            },
+            contractor() {
+                return this.$store.getters['assets/users'][this.trx.contractor];
             },
             users() {
                 const { assets, transaction, products } = this;

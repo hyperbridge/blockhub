@@ -1,27 +1,24 @@
 <template>
     <article>
-        <section>
-            <div class="trade-settings__url">
-                <h3>Your trade URL</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                <div class="trade-settings__url-form">
-                    <c-icon name="copy"/>
-                    <c-input
-                        class="trade-settings__url-input"
-                        @click="copyTradeURL()"
-                        :value="tradeURL"
-                        readonly
-                    />
-                </div>
-
-                <c-button
-                    @click="$store.dispatch('application/createTradeURL')"
-                    status="info"
-                    icon_hide
-                >
-                    Generate new trade URL
-                </c-button>
+        <section class="trade-settings__url">
+            <h3>Your trade URL</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <div class="trade-settings__url-form">
+                <c-icon name="copy"/>
+                <c-input
+                    class="trade-settings__url-input"
+                    @click="copyTradeURL()"
+                    :value="tradeURL"
+                    readonly
+                />
             </div>
+            <c-button
+                @click="$store.dispatch('application/createTradeURL')"
+                status="info"
+                icon_hide
+            >
+                Generate new trade URL
+            </c-button>
         </section>
     </article>
 </template>
