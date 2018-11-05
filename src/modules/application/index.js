@@ -97,9 +97,7 @@ export const getters = {
         // .map(id => extract(products[Number(id)], ['images', 'release_date', 'price'])),
     wishlistedProjects: ({ account }, getters, { funding: { projects }}) => Object
         .keys(account.project_wishlist)
-        .map(id => projects[id]),
-    tradeURL: ({ account: { id, tradeURLid }}, getters) =>
-        `http://blockhub.gg/tradeoffer/new/?partner=${id}&id=${tradeURLid}`
+        .map(id => projects[id])
 
 }
 

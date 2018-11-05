@@ -9,12 +9,16 @@
                     <c-input
                         class="trade-settings__url-input"
                         @click="copyTradeURL()"
-                        v-model="tradeURL"
+                        :value="tradeURL"
                         readonly
                     />
                 </div>
 
-                <c-button status="info" icon_hide>
+                <c-button
+                    @click="$store.dispatch('application/createTradeURL')"
+                    status="info"
+                    icon_hide
+                >
                     Generate new trade URL
                 </c-button>
             </div>
@@ -24,14 +28,13 @@
 
 <script>
     export default {
-        data() {
-            return {
-                tradeURL: 'http://blockhub.gg/tradeoffer/new/?partner=1&id=478'
-            }
-        },
         computed: {
-            tradeURLz() {
-                return this.$store.state.application.account.tradeURL;
+            account() {
+                return this.$store.state.application.account;
+            },
+            tradeURL() {
+                const { id, tradeURLId } = this.account;
+                return `http://blockhub.gg/tradeoffer/new/?partner=${id}&id=${tradeURLId}`;
             }
         },
         methods: {
@@ -54,6 +57,15 @@
         border: 1px solid rgb(100, 119, 230);
         width: 100%;
         cursor: copy;
+        &:focus {
+            animation: pop-in .5s ease;
+        }
+        @keyframes pop-in {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.09); }
+            55% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
     }
     .trade-settings__url-form {
         position: relative;
