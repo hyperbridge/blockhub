@@ -14,6 +14,7 @@ import * as cache from '../modules/cache'
 import user from '@/modules/user'
 import { saveDB } from './plugins'
 import assets from '@/modules/assets'
+import community from '@/modules/community'
 import seed from '../db/seed'
 
 Vue.use(Vuex);
@@ -107,7 +108,8 @@ const store = new Vuex.Store({
             mutations: application.mutations
         },
         user,
-        assets
+        assets,
+        community
     }
 });
 
