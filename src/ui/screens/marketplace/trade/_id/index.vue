@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <article>
         <c-block  v-if="transaction" :title="'Transaction: ' + this.id" class="transaction">
             <div class="transaction__block">
                 <div class="transaction__headings">
@@ -15,6 +15,10 @@
                         />
                     </div>
                     <div class="management__inventory-explorer">
+                        <c-list-submenu-2 :list="you.inventoryGrouped">
+                            <!-- <span slot-scope="props">
+                            </span> -->
+                        </c-list-submenu-2>
                         <c-list-submenu :items="users.you.inventoryGrouped" isParent>
                             <c-list-submenu
                                 slot="sublist"
@@ -90,7 +94,7 @@
         <c-block v-else :title="'Transaction: ' + tradeId" class="transaction">
             <p>Transaction with id <i>{{ id }}</i> doesn't exist</p>
         </c-block>
-    </div>
+    </article>
 </template>
 
 
@@ -105,6 +109,7 @@
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-list': (resolve) => require(['@/ui/components/list'], resolve),
             'c-list-submenu': (resolve) => require(['@/ui/components/list-submenu'], resolve),
+            'c-list-submenu-2': (resolve) => require(['@/ui/components/list-submenu/v2'], resolve),
             'c-tooltip': (resolve) => require(['@/ui/components/tooltips/universal'], resolve),
             'c-asset-preview': (resolve) => require(['@/ui/components/asset-preview'], resolve),
             'c-asset-preview-small': (resolve) => require(['@/ui/components/asset-preview/small'], resolve),
@@ -180,6 +185,12 @@
             },
             products() {
                 return this.$store.state.marketplace.products;
+            },
+            you() {
+                return this.$store.getters['assets/users'][this.trx.you];
+            },
+            contractor() {
+                return this.$store.getters['assets/users'][this.trx.contractor];
             },
             users() {
                 const { assets, transaction, products } = this;

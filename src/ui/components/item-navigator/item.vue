@@ -11,30 +11,34 @@
     >
         <div class="navigator-item__content">
             <button
-                v-if="!item.evolvesTo.length && hovered"
-                @click="item.evolvesTo.push({ id: 12, evolvesTo: [] })"
+                v-if="!item.evolvesTo.length && hovered && !hideButtons"
+                @click="handleClick(item.id)"
                 class="navigator-item__btn navigator-item__btn--right"
             >
                 <c-icon name="plus"/>
             </button>
 
             <button
-                v-if="index === listLength - 1 && hovered"
-                @click="$emit('evolveDown')"
+                v-if="index === listLength - 1 && hovered && !hideButtons"
+                @click="handleClick(parentId)"
                 class="navigator-item__btn navigator-item__btn--bottom"
             >
                 <c-icon name="plus"/>
             </button>
-            <c-asset :asset="assets[item.id] || {}" class="navigator-item__asset"/>
-            <!-- <span class="fa fa-angle-right"></span>
-            {{ hovered }} hovered
-            {{ item.id }}
-            {{ isChildren && 'child' }}
-            {{ index }} {{ listLength }} {{ item.evolvesTo.length }} -->
+            <!-- {{ item.id }} -->
+            <c-asset
+                :asset="item.asset"
+                class="navigator-item__asset"
+                @click="handleDevolve"
+            />
         </div>
         <div
             class="navigator-item__sub-navigators"
-            :class="{ 'sub-navigators__line': item.evolvesTo.length }"
+            :class="{
+                'sub-navigators__line': item.evolvesTo.length,
+                'first-line': index === 0,
+                'hide-line': item.evolvesTo.length < 2
+            }"
         >
             <navigator-item
                 v-for="(subItem, index) in item.evolvesTo"
@@ -43,14 +47,16 @@
                 :item="subItem"
                 :isChildren="true"
                 :listLength="item.evolvesTo.length"
-                @evolveDown="item.evolvesTo.push({ id: 5, evolvesTo: [] })"
+                :parentId="item.id"
+                :parentItem="item"
+                :hideButtons="hideButtons"
             />
         </div>
     </div>
 </template>
 
 <script>
-    import { debouncer } from '@/mixins';
+    import { EventBus } from '@/event-bus';
 
     export default {
         name: 'navigator-item',
@@ -65,22 +71,26 @@
             useComp: {
                 type: String,
                 default: 'c-asset'
-            }
+            },
+            parentId: [Number, String],
+            parentItem: Object,
+            hideButtons: Boolean
         },
-        mixins: [debouncer],
         data() {
             return {
                 hovered: false
             }
         },
         methods: {
-            handleHover(status) {
-                this.debounce(() => { this.hovered = true }, 50);
-            }
-        },
-        computed: {
-            assets() {
-                return this.$store.state.assets.assets;
+            handleClick(id) {
+                EventBus.$emit('evolve', id);
+            },
+            handleDevolve({ id }) {
+                // const { item: { id }} = this;
+
+                // const { id } = this.item;
+                const { parentId } = this;
+                EventBus.$emit('devolve', { tree: this.item, parentId });
             }
         }
     }
@@ -97,6 +107,14 @@
     $margin: 30px;
     $size: 70px;
     $center: $margin + $size/2;
+
+    .first-line {
+        height: 100% !important;
+    }
+
+    .hide-line:before {
+        display: none !important;
+    }
 
     .navigator-item {
         display: flex;
@@ -140,11 +158,9 @@
             }
         }
         .navigator-item__asset {
-            // position: relative;
-            // z-index: 100;
-            // height: 100%;
             max-height: 70px;
             width: 70px;
+            margin: 0;
         }
     }
     .navigator-item__btn {
@@ -157,15 +173,14 @@
         border-radius: 50%;
         color: #fff;
         cursor: pointer;
-        // display: none;
         animation: pop-in .2s ease;
         &--right {
             right: -$btn-size - 10px;
-            top: calc(50% - #{$btn-size/2 - 5});
+            top: calc(50% - #{$btn-size/2});
         }
         &--bottom {
             bottom: -$btn-size - 10px;
-            left: calc(50% - #{$btn-size/2 - 5});
+            left: calc(50% - #{$btn-size/2});
         }
         @keyframes pop-in {
             0% {

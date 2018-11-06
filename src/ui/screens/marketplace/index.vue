@@ -1,15 +1,16 @@
 <template>
     <c-layout>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <h1>Marketplace</h1>
-                        <transition name="slider">
-                            <h2 :key="$route.name">
-                                {{ $route.name | cut }}
-                            </h2>
-                        </transition>
+        <main class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Marketplace</h1>
+                    <transition name="slider">
+                        <h2 :key="$route.name">
+                            {{ $route.name | cut }}
+                        </h2>
+                    </transition>
 
+                    <nav>
                         <ul class="marketplace-menu reset-list">
                             <li v-for="(link, index) in links" :key="index">
                                 <router-link
@@ -18,13 +19,16 @@
                                 >{{ link | cut }}</router-link>
                             </li>
                         </ul>
+                    </nav>
 
+                    <section>
                         <transition name="page">
-                            <router-view/>
+                                <router-view/>
                         </transition>
-                    </div>
+                    </section>
                 </div>
             </div>
+        </main>
     </c-layout>
 </template>
 

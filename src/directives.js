@@ -112,3 +112,28 @@ Vue.directive('click-outside', {
         document.body.removeEventListener('click', el.clickOutsideEvent)
     }
 });
+
+Vue.directive('debounce', {
+    bind(el, binding, vnode) {
+        const { arg: event, expression } = binding;
+        const { context } = vnode;
+
+        const delay = 250;
+        let timeout = null;
+
+        el.__debounce__ = e => {
+            clearTimeout(timeout);
+            setTimeout(() => {
+                console.log(vnode)
+                console.log(binding)
+                console.log(expression)
+                context[expression](e);
+            }, delay);
+        };
+
+        vnode.componentInstance.$on('customClick', el.__debounce__);
+    },
+    unbind(el, { arg: event }, vnode) {
+        vnode.componentInstance.$off(event, el.__debounce__);
+    }
+});

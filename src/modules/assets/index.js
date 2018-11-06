@@ -9,7 +9,7 @@ import assetsData from '@/db/seed/assets';
 import collectionsData from '@/db/seed/collections';
 
 
-const rand = () => Math.floor(Math.random() * 100);
+const rand = () => Math.floor(Math.random() * 1000);
 const assignId = (id, object) => ({ ...object, data: { ...object.data, id }, id });
 
 const assets = {
@@ -58,7 +58,13 @@ const assets = {
         users: usersData.reduce((users, user) => ({
             ...users,
             [user.id]: user
-        }), {})
+        }), {}),
+        navigator: {
+            1: { id: 1, assetId: 1, evolvesTo: [2, 3], isRoot: true },
+            2: { id: 2, assetId: 2, evolvesTo: [4]},
+            3: { id: 3, assetId: 3, evolvesTo: []},
+            4: { id: 4, assetId: 4, evolvesTo: []}
+        }
     },
     mutations: {
         addAsset(state, { prop = 'assets', data }) {
@@ -81,6 +87,13 @@ const assets = {
         delete(state, { prop = 'assets', id }) {
             const { [id]: value, ...values } = state[prop];
             state[prop] = values;
+        },
+        deleteMany(state, { prop = 'assets', ids }) {
+            const copy = { ...state[prop] };
+            for (let id of ids) {
+                delete copy[id];
+            }
+            state[prop] = copy;
         },
         deleteAsset(state, { prop = 'assets', id }) {
             // delete state[prop][id];
@@ -121,6 +134,27 @@ const assets = {
             const { tradeId, target, assetId } = payload;
             // const assetKey = state.transactions[]
             state.transactions[transactionKey][target].selling.splice(assetKey, 1);
+        },
+        evolveNavigator(state, { id, evolveId, assetId, isRoot = false }) {
+            const { navigator } = state;
+            state.navigator = {
+                ...navigator,
+                [evolveId]: {
+                    ...navigator[evolveId],
+                    evolvesTo: [...navigator[evolveId].evolvesTo, id]
+                },
+                [id]: { id, assetId, evolvesTo: [], isRoot }
+            };
+        },
+        deleteNavigator(state, { id: itemId, parentId }) {
+            console.log('parentId', parentId)
+
+            const navTree = state.navigator[parentId];
+            state.navigator[parentId] = {
+                ...navTree,
+                evolvesTo: navTree.evolvesTo.filter(id => id !== itemId)
+            };
+            // evolvesTo: navTree.evolvesTo.filter(id => id !== parentId)
         }
     },
     actions: {
@@ -149,6 +183,29 @@ const assets = {
                 prop: 'offers',
                 data: { auctions: [...state.offers[offerId].auctions, newId] }
             });
+        },
+        evolveNavigator({ commit }, payload) {
+            const id = rand();
+            commit('evolveNavigator', { ...payload, id });
+        },
+        deleteNavigatorTree({ state: { navigator }, commit }, id) {
+            const idsToDelete = [id];
+
+            const checkId = (id) => {
+                if (navigator[id].evolvesTo.length) {
+                    navigator[id].evolvesTo.forEach(id => {
+                        idsToDelete.push(id);
+                        checkId(id);
+                    });
+                }
+            };
+            checkId(id);
+
+            console.log(idsToDelete)
+
+            // async calls
+
+            commit('deleteMany', { prop: 'navigator', ids: idsToDelete });
         }
     },
     getters: {

@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert left-sidebar" style="max-width: 250px" id="page-aside" v-if="showLeftPanel">
                 <!--<transition name="slideLeft" v-if="initialized">-->
@@ -86,7 +86,7 @@
             <c-purchase-popup :activated="purchase_modal_active" @close="closePopup" ref="purchase_modal_active"></c-purchase-popup>
             <c-claim-popup :activated="claim_modal_active" @close="closePopup" ref="claim_modal_active"></c-claim-popup>
 
-            <c-basic-popup 
+            <c-basic-popup
                 :activated="$store.state.application.editor_mode && $store.state.application.account.settings.client.hide_editor_welcome_modal"
                 @close="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_editor_welcome_modal', true)"
             >
@@ -107,16 +107,16 @@
                 </p>
             </c-basic-popup>
 
-            <c-basic-popup 
+            <c-basic-popup
                 :activated="$store.state.application.active_modal === 'propose-idea'"
                 @close="$store.commit('application/activateModal', null)"
             >
                 <div class="h4" slot="header">Propose Idea</div>
                 <template slot="body">
-                    <div v-if="chosenIdentity.curator_id">
+                    <div v-if="chosenIdentity && chosenIdentity.curator_id">
                         <p>Great, you're a curator. <c-button class="underline" href="/#/project/new">Click here to continue</c-button>.</p>
                     </div>
-                    <div v-if="!chosenIdentity.curator_id">
+                    <div v-else>
                         <p>
                             To propose ideas you must sign up for a Curator Profile. Don't worry, the process is simple!
                         </p>
@@ -157,7 +157,7 @@
                     vehicula.
                 </p>
             </c-popup>
-            
+
             <c-cookie-policy v-if="!desktop_mode" />
 
             <c-clock v-if="desktop_mode" />
@@ -730,7 +730,7 @@
             transform: rotate(0deg);
             pointer-events: none;
         }
-        
+
         &:after {
             content: '';
             position: absolute;
@@ -760,7 +760,7 @@
         }
     }
 
-    
+
     .content {
         width: 100%;
         padding-top: 0;
