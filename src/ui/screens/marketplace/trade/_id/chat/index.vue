@@ -37,7 +37,15 @@
             }
         },
         methods: {
+            dispatch(type, payload) {
+                return;
+                return this.$store.dispatch(type, payload);
+            },
+            // ['assets/update']: this.$store.dispatch('assets/update').bind(this),
             sendMessage() {
+                const { id, messages } = this.trx;
+
+                // this.$store.dispatch('assets/update', { data: {} })
                 this.$store.dispatch('community/createMessage', this.newMessage);
                 this.newMessage = '';
             }

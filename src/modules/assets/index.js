@@ -76,8 +76,8 @@ const assets = {
             // Payload could be written in format => { 'id_28313': { ...payload data } }
             state[prop][id] = { ...state[prop][id], ...data };
         },
-        update(state, { prop = 'assets', id, data }) {
-            state[prop][id] = { ...state[prop][id], ...data };
+        update(state, { prop = 'assets', target = prop, id, data }) {
+            state[target][id] = { ...state[target][id], ...data };
         },
         updatev2(state, payload) {
             const [prop, id] = Object.keys(payload)[0].split('_');
@@ -160,7 +160,7 @@ const assets = {
             commit('create', { ...payload, id, data: { ...payload.data, id }});
         },
         update({ commit }, payload) {
-            const { target, data, id } = payload;
+            const { prop, target = prop || 'messages', data, id } = payload;
             // await axios.post(`/${target}/${id}`, data);
             commit('update', payload);
         },
@@ -182,6 +182,7 @@ const assets = {
                 data: { auctions: [...state.offers[offerId].auctions, newId] }
             });
         },
+
         evolveNavigator({ commit }, payload) {
             const id = rand();
             commit('evolveNavigator', { ...payload, id });
@@ -203,7 +204,8 @@ const assets = {
 
             commit('devolveNavigator', { id, parentId });
             commit('deleteMany', { prop: 'navigator', ids: [...idsToDelete, id] });
-        }
+        },
+
     },
     getters: {
         assets: ({ assets }, { collections: col }, { marketplace: { collections, products }}) => Object.values(assets)

@@ -5,6 +5,15 @@ import usersData from '@/db/seed/users.json';
 
 import { extract, getId, mergeId } from '@/store/utils';
 
+const asyncData = {
+    get: {
+        ['2']: 3
+    },
+    post: {
+        message: () => ({ id: getId(), author: 1, createdAt: moment() })
+    }
+};
+
 const community = {
     namespaced: true,
     state: {
@@ -36,6 +45,8 @@ const community = {
         createMessage({ commit }, message) {
             const id = getId();
 
+
+
             const payload = {
                 id,
                 data: {
@@ -47,6 +58,12 @@ const community = {
             };
 
             commit('add', payload);
+            return id;
+        },
+        createTransactionMessage({ commit, dispatch, rootState }, payload) {
+            console.log(rootState)
+            const id = dispatch('createMessage', payload);
+            dispatch('update')
         }
     },
     getters: {
