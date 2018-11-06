@@ -8,7 +8,20 @@
                 :userId="userId"
             />
         </ul>
-        <textarea v-model="newMessage"/>
+        <div class="chat-form">
+            <input
+                class="chat-form__input"
+                type="text"
+                v-model="newMessage"
+                @keyup.enter="sendMessage()"
+            />
+            <button
+                @click="sendMessage()"
+                class="chat-form__btn"
+            >
+                <c-icon name="paper-plane"/>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -21,6 +34,11 @@
         data() {
             return {
                 newMessage: ''
+            }
+        },
+        methods: {
+            sendMessage() {
+
             }
         },
         computed: {
@@ -36,6 +54,27 @@
         max-height: 600px;
         overflow-x: scroll;
         padding: 10px;
+    }
+    .chat-form {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-around;
+    }
+    .chat-form__input {
+        // background: transparent;
+        background: #fff;
+        color: #000;
+        width: 80%;
+        padding: 10px;
+    }
+    .chat-form__btn {
+        border-radius: 50%;
+        background: #696cb3;
+        border-style: none;
+        cursor: pointer;
+        height: 42px;
+        width: 42px;
+        color: #fff;
     }
 </style>
 

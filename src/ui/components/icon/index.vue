@@ -12,7 +12,7 @@
             }
         },
         render(h) {
-            return h('i', {
+            return h('span', {
                 class: `${this.cat} fa-${this.name}`,
                 on: { click: () => this.$emit('click') }
             });
