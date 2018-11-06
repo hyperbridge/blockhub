@@ -189,7 +189,7 @@ const assets = {
             commit('evolveNavigator', { ...payload, id });
         },
         deleteNavigatorTree({ state: { navigator }, commit }, id) {
-            const idsToDelete = [id];
+            const idsToDelete = [];
 
             const checkId = (id) => {
                 if (navigator[id].evolvesTo.length) {
@@ -204,7 +204,7 @@ const assets = {
             console.log(idsToDelete)
 
             // async calls
-
+            commit('delete', { prop: 'navigator', id });
             commit('deleteMany', { prop: 'navigator', ids: idsToDelete });
         }
     },
