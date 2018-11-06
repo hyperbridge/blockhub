@@ -1,7 +1,14 @@
 <template>
     <div>
-        chat
-        <c-chat-message :message="trx.messages[0]" :userId="userId"/>
+        <ul class="reset-list chat">
+            <c-chat-message
+                v-for="(msg, index) in trx.messages"
+                :key="index"
+                :message="msg"
+                :userId="userId"
+            />
+        </ul>
+        <textarea v-model="newMessage"/>
     </div>
 </template>
 
@@ -10,6 +17,11 @@
         props: ['trx'],
         components: {
             'c-chat-message': (resolve) => require(['@/ui/components/chat-message'], resolve),
+        },
+        data() {
+            return {
+                newMessage: ''
+            }
         },
         computed: {
             userId() {
@@ -20,6 +32,10 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .chat {
+        max-height: 600px;
+        overflow-x: scroll;
+        padding: 10px;
+    }
 </style>
 
