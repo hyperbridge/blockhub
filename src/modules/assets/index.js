@@ -146,15 +146,13 @@ const assets = {
                 [id]: { id, assetId, evolvesTo: [], isRoot }
             };
         },
-        deleteNavigator(state, { id: itemId, parentId }) {
-            console.log('parentId', parentId)
+        devolveNavigator(state, { id: itemId, parentId }) {
 
             const navTree = state.navigator[parentId];
             state.navigator[parentId] = {
                 ...navTree,
                 evolvesTo: navTree.evolvesTo.filter(id => id !== itemId)
             };
-            // evolvesTo: navTree.evolvesTo.filter(id => id !== parentId)
         }
     },
     actions: {
@@ -188,7 +186,7 @@ const assets = {
             const id = rand();
             commit('evolveNavigator', { ...payload, id });
         },
-        deleteNavigatorTree({ state: { navigator }, commit }, id) {
+        devolveNavigator({ state: { navigator }, commit }, { id, parentId }) {
             const idsToDelete = [];
 
             const checkId = (id) => {
@@ -201,11 +199,10 @@ const assets = {
             };
             checkId(id);
 
-            console.log(idsToDelete)
-
             // async calls
-            commit('delete', { prop: 'navigator', id });
-            commit('deleteMany', { prop: 'navigator', ids: idsToDelete });
+
+            commit('devolveNavigator', { id, parentId });
+            commit('deleteMany', { prop: 'navigator', ids: [...idsToDelete, id] });
         }
     },
     getters: {

@@ -81,10 +81,9 @@
                 this.activeId = null;
             },
             deleteTree(id) {
-                // this.$store.dispatch('assets/deleteNavigator', {})
-                this.$store.commit('assets/deleteNavigator', { id, parentId: this.deletingParentId });
+                this.$store.dispatch('assets/devolveNavigator', { id, parentId: this.deletingParentId });
+                // this.$store.commit('assets/deleteNavigator', { id, parentId: this.deletingParentId });
                 this.deletingParentId = null;
-                // this.$store.dispatch('assets/deleteNavigatorTree', id);
                 this.deletingTree = null;
             }
         },
