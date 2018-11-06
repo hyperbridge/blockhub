@@ -2169,6 +2169,7 @@ import Dropdown from '../ui/components/dropdown-menu/type-2'
 import DropdownCustom from '../ui/components/dropdown-menu/type-3'
 import DropdownPost from '../ui/components/dropdown-menu/index'
 import DropdownCurrency from '../ui/components/dropdown-menu/currency'
+import DropdownLang from '../ui/components/dropdown-menu/language'
 storiesOf('Dropdown', module)
     .add('default', () => ({
         components: {
@@ -2231,9 +2232,94 @@ storiesOf('Dropdown', module)
         components: {
             'c-currency-dropdown': DropdownCurrency
         },
+        data(){
+            return{
+                "currencies":[
+                    {
+                        "code": "USD",
+                        "symbol": "$",
+                        "name": "United States Dollar",
+                        "country": "us"
+
+                    },
+                    {
+                        "code": "RUB",
+                        "symbol": "$",
+                        "name": "United States Dollar",
+                        "country": "ru"
+
+                    },
+                    {
+                        "code": "BTC",
+                        "symbol": "B",
+                        "name": "Bitcoin",
+                        "country": ""
+
+                    },
+                    {
+                        "code": "ETH",
+                        "symbol": "E",
+                        "name": "Ethereum"
+
+                    },
+                    {
+                        "code": "DAI",
+                        "symbol": "D",
+                        "name": "Dau"
+                    }
+                ],
+                "currency": {
+                    "code": "USD",
+                    "symbol": "$",
+                    "name": "United States Dollar",
+                    "country": "us"
+
+                },
+            }
+        },
         template: `
          <div class="row m-0 p-3">
-             <c-currency-dropdown />
+             <c-currency-dropdown :current_currency="currency" :currencies="currencies" />
+         </div>
+        `
+    }))
+    .add('languages', () => ({
+        components: {
+            'c-languages-dropdown': DropdownLang
+        },
+        data(){
+            return{
+                current_language: {
+                    code: 'us',
+                    name: 'English',
+                },
+                languages:[
+                    {
+                        code: 'us',
+                        name: 'English',
+                        native: 'English'
+                    },
+                    {
+                        code: 'ru',
+                        name: 'Russian',
+                        native: 'Русский'
+                    },
+                    {
+                        code: 'ua',
+                        name: 'Ukrainian',
+                        native: 'Українська'
+                    },
+                    {
+                        code: 'cn',
+                        name: 'Chinese',
+                        native: '繁體中文'
+                    }
+                ]
+            }
+        },
+        template: `
+         <div class="row m-0 p-3">
+             <c-languages-dropdown :current_language="current_language" :languages="languages" />
          </div>
         `
     }))

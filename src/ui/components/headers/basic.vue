@@ -190,7 +190,10 @@
                                 <span class="text">Help</span>
                             </a>
                         </li>
-                        <li v-if="!is_locked" class="ml-3">
+                        <li v-if="!is_locked && languages" class="ml-3">
+                            <c-language-dropdown :current_language="current_language" :languages="languages" @change="selectLanguages" />
+                        </li>
+                        <li v-if="!is_locked && currencies" class="ml-2">
                             <c-currency-dropdown :current_currency="current_currency" :currencies="currencies" @change="selectCurrency" />
                         </li>
                     </ul>
@@ -208,7 +211,8 @@ export default {
     components: {
         'c-loading-logo': LoadingBar,
         'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve),
-        'c-currency-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/currency'], resolve)
+        'c-currency-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/currency'], resolve),
+        'c-language-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/language'], resolve)
     },
     data() {
         return {
@@ -216,6 +220,19 @@ export default {
         }
     },
     computed: {
+        languages() {
+            // console.log('get languages', this.$store.state.application.languages)
+            return this.$store.state.application.languages
+        },
+        current_language() {
+            let system_lang = 'ru',
+                arr = this.languages;
+            arr.forEach( (el) => {
+                let cd = el.code;
+                if (cd.includes(system_lang))
+
+            })
+        },
         currencies() {
             return this.$store.state.application.currencies
         },
@@ -296,6 +313,9 @@ export default {
         },
         selectCurrency(currency){
             this.account.currency = currency
+        },
+        selectLanguages(lang){
+            // this.account.currency = currency
         }
     }
 }

@@ -140,32 +140,50 @@
                 "symbol": "$",
                 "name": "United States Dollar",
                 "country": "us"
-
             },
             {
                 "code": "RUB",
                 "symbol": "$",
                 "name": "United States Dollar",
                 "country": "ru"
-
             },
             {
                 "code": "BTC",
                 "symbol": "B",
                 "name": "Bitcoin",
                 "country": ""
-
             },
             {
                 "code": "ETH",
                 "symbol": "E",
                 "name": "Ethereum"
-
             },
             {
                 "code": "DAI",
                 "symbol": "D",
                 "name": "Dau"
+            }
+        ],
+        "languages":[
+            {
+                "code": "us",
+                "name": "English",
+                "native": "English"
+            },
+            {
+                "code": "ru",
+                "name": "Russian",
+                "native": "Русский"
+            },
+            {
+                "code": "ua",
+                "name": "Ukrainian",
+                "native": "Українська"
+            },
+            {
+                "code": "cn",
+                "name": "Chinese",
+                "native": "繁體中文"
             }
         ],
         "account": {
@@ -178,13 +196,8 @@
             "birthday": null,
             "password": null,
             "email": null,
-            "currency": {
-                "code": "USD",
-                "symbol": "$",
-                "name": "United States Dollar",
-                "country": "us"
-
-            },
+            "currency": {},
+            "language":{},
             "darklaunch_override": false,
             "current_identity": {
                 "id": null,
