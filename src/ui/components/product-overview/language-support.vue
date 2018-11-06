@@ -64,11 +64,10 @@ export default {
         }
     },
     created(){
-        let lang = navigator.language || navigator.userLanguage,
+        let lang = this.$store.state.application.account.language.code,
             arr = this.languages;
         this.userLang = lang.toLowerCase()
         arr.forEach( (el) => {
-
             if (el.code) {
                 if ( this.userLang.includes(el.code.toLowerCase()) ){
                     el.order = 1;
@@ -84,7 +83,6 @@ export default {
                     el.order = 1;
                     el.show = 'default';
                 }
-
                 this.langList.push(el)
             }
         })
@@ -110,6 +108,9 @@ export default {
 <style lang="scss" scoped>
     .language-support__table {
         width: 100%;
+        th:first-child{
+            width: 60%;
+        }
         th:not(:first-child), td:not(:first-child) {
             text-align: center;
             width: 15%;
