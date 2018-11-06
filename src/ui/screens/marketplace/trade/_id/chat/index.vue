@@ -38,12 +38,16 @@
         },
         methods: {
             sendMessage() {
-
+                this.$store.dispatch('community/createMessage', this.newMessage);
+                this.newMessage = '';
             }
         },
         computed: {
             userId() {
                 return this.$store.state.application.account.id;
+            },
+            messages() {
+                return this.$store.getters['community/messages'];
             }
         }
     }

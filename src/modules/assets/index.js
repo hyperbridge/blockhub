@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import moment from 'moment';
-import { extract, skip } from '@/store/utils';
+import { extract, skip, getId, assignId } from '@/store/utils';
 
 import transactions from '@/db/seed/asset-transactions';
 import trxsData from '@/db/seed/asset-transactions.json';
@@ -10,7 +10,6 @@ import collectionsData from '@/db/seed/collections';
 
 
 const rand = () => Math.floor(Math.random() * 1000);
-const assignId = (id, object) => ({ ...object, data: { ...object.data, id }, id });
 
 const assets = {
     namespaced: true,
@@ -161,7 +160,8 @@ const assets = {
             commit('create', { ...payload, id, data: { ...payload.data, id }});
         },
         update({ commit }, payload) {
-            // async call
+            const { target, data, id } = payload;
+            // await axios.post(`/${target}/${id}`, data);
             commit('update', payload);
         },
         createFilter({ commit }, payload) {

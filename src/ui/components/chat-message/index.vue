@@ -17,9 +17,8 @@
             </span>
         </div>
         <span class="chat-message__date">
-            2 days ago
+            {{ message.createdAt | timeAgo }}
         </span>
-        <!-- {{ message }} -->
     </li>
 </template>
 

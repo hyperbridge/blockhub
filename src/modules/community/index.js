@@ -1,15 +1,19 @@
+import moment from 'moment';
 
 import messagesData from '@/db/seed/messages.json';
 import usersData from '@/db/seed/users.json';
 
-import { extract } from '@/store/utils';
+import { extract, getId, mergeId } from '@/store/utils';
 
 const community = {
     namespaced: true,
     state: {
-        messages: messagesData.reduce((messages, msg) => ({
+        messages: messagesData.reduce((messages, msg, index) => ({
             ...messages,
-            [msg.id]: msg
+            [msg.id]: {
+                ...msg,
+                createdAt: moment().add(-10, 'minutes').add(index + 1, 'minutes')
+            }
         }), {}),
         users: usersData.reduce((users, user) => ({
             ...users,
@@ -17,10 +21,33 @@ const community = {
         }), {}),
     },
     mutations: {
-
+        add(state, { target = 'messages', id, data }) {
+            state[target] = {
+                ...state[target],
+                [id]: data
+            };
+        }
     },
     actions: {
+        create({ commit }, payload) {
+            const id = getId();
+            commit('create', { ...payload, id });
+        },
+        createMessage({ commit }, message) {
+            const id = getId();
 
+            const payload = {
+                id,
+                data: {
+                    id,
+                    author: 1,
+                    content: message,
+                    createdAt: moment()
+                }
+            };
+
+            commit('add', payload);
+        }
     },
     getters: {
         messages: ({ messages, users }, getters) => Object.values(messages)
