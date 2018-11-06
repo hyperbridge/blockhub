@@ -150,8 +150,7 @@
             {
                 "code": "BTC",
                 "symbol": "B",
-                "name": "Bitcoin",
-                "country": ""
+                "name": "Bitcoin"
             },
             {
                 "code": "ETH",
@@ -165,6 +164,11 @@
             }
         ],
         "languages":[
+            {
+                "code": "gb",
+                "name": "United Kingdom",
+                "native": "GB"
+            },
             {
                 "code": "us",
                 "name": "English",

@@ -1,16 +1,16 @@
 <template>
     <div class="language-dropdown">
         <div class="language-dropdown__current" @click="toggleList">
-            <c-country-flag :country="current_language.code" size="small" />
+            <c-country-flag :country="current_language.code" size="small" v-if="current_language" />
             <span class="language-name">
-                {{ current_language.name }}
+                {{ current_language ? current_language.name : 'Language' }}
             </span>
             <i class="fas " :class="showList ? 'fa-angle-up' : 'fa-angle-down' "></i>
         </div>
         <transition name="slide-in-top">
             <div class="language-dropdown__list" v-if="showList" v-click-outside.bool="showList">
                 <ul :class="{'d-block' : showList}">
-                    <li class="language-dropdown__list-item" v-for="(lang, index) in languages" @click="changeCurrency(lang)" :key="index">
+                    <li class="language-dropdown__list-item" v-for="(lang, index) in languages" @click="changeLanguage(lang)" :key="index">
                         <c-country-flag :country="lang.code" size="small" />
                         <span class="language-name">
                             {{ lang.name }} ({{ lang.native }})

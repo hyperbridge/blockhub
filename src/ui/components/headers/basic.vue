@@ -194,7 +194,7 @@
                             <c-language-dropdown :current_language="current_language" :languages="languages" @change="selectLanguages" />
                         </li>
                         <li v-if="!is_locked && currencies" class="ml-2">
-                            <c-currency-dropdown :current_currency="current_currency" :currencies="currencies" @change="selectCurrency" />
+                            <!--<c-currency-dropdown :current_currency="current_currency" :currencies="currencies" @change="selectCurrency" />-->
                         </li>
                     </ul>
                 </nav>
@@ -221,22 +221,37 @@ export default {
     },
     computed: {
         languages() {
-            // console.log('get languages', this.$store.state.application.languages)
             return this.$store.state.application.languages
         },
         current_language() {
-            let system_lang = 'ru',
-                arr = this.languages;
-            arr.forEach( (el) => {
-                let cd = el.code;
-                if (cd.includes(system_lang))
-
-            })
+            console.log(this.account.language)
+            if( Object.keys(this.account.language).length === 0 ){
+                let system_lang = navigator.language || navigator.userLanguage,
+                    arr = this.languages;
+                console.log(system_lang)
+                arr.forEach( (el) => {
+                    let cd = el.code.toLowerCase();
+                    if (system_lang.toLowerCase().includes(cd)){
+                        this.$store.state.application.account.language = el;
+                    }
+                })
+            }
+            return this.account.language
         },
         currencies() {
             return this.$store.state.application.currencies
         },
         current_currency() {
+            let defCurrency = 'USD',
+                arr = this.currencies;
+            if( !this.account.currency ){
+                arr.forEach( (el) => {
+                    let cd = el.code;
+                    if (cd.includes(defCurrency)){
+                        this.$store.state.application.account.currency = el;
+                    }
+                })
+            }
             return this.account.currency
         },
         account() {
@@ -315,7 +330,7 @@ export default {
             this.account.currency = currency
         },
         selectLanguages(lang){
-            // this.account.currency = currency
+            this.account.language = lang
         }
     }
 }
