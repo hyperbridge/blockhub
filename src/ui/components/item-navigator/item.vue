@@ -12,7 +12,7 @@
         <div class="navigator-item__content">
             <button
                 v-if="!item.evolvesTo.length && hovered && !hideButtons"
-                @click="handleClick(item.id)"
+                @click="handleEvolve(item.id)"
                 class="navigator-item__btn navigator-item__btn--right"
             >
                 <c-icon name="plus"/>
@@ -20,7 +20,7 @@
 
             <button
                 v-if="index === listLength - 1 && hovered && !hideButtons"
-                @click="handleClick(parentId)"
+                @click="handleEvolve(parentId)"
                 class="navigator-item__btn navigator-item__btn--bottom"
             >
                 <c-icon name="plus"/>
@@ -48,7 +48,6 @@
                 :isChildren="true"
                 :listLength="item.evolvesTo.length"
                 :parentId="item.id"
-                :parentItem="item"
                 :hideButtons="hideButtons"
             />
         </div>
@@ -73,7 +72,6 @@
                 default: 'c-asset'
             },
             parentId: [Number, String],
-            parentItem: Object,
             hideButtons: Boolean
         },
         data() {
@@ -82,13 +80,10 @@
             }
         },
         methods: {
-            handleClick(id) {
+            handleEvolve(id) {
                 EventBus.$emit('evolve', id);
             },
             handleDevolve({ id }) {
-                // const { item: { id }} = this;
-
-                // const { id } = this.item;
                 const { parentId } = this;
                 EventBus.$emit('devolve', { tree: this.item, parentId });
             }
@@ -110,6 +105,10 @@
 
     .first-line {
         height: 100% !important;
+        // this fixes first line height
+        // &:before {
+        //     height: calc(100% - 130px * 2) !important;
+        // }
     }
 
     .hide-line:before {

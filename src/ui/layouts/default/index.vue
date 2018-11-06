@@ -62,7 +62,7 @@
             <!-- //END PAGE ASIDE PANEL -->
 
             <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
-                <c-breadcrumb :links="breadcrumbLinks" ref="breadcrumb" v-if="is_connected" />
+                <c-breadcrumb :links="breadcrumbLinksData" ref="breadcrumb" v-if="is_connected" />
                 <div class="container-fluid">
                     <slot v-if="is_connected" />
                 </div>
@@ -208,8 +208,7 @@
             },
             breadcrumbLinks: {
                 type: Array,
-                default: () => ([]),
-                required: false
+                default: () => ([])
             }
         },
         mixins: [debouncer],
@@ -258,7 +257,8 @@
                 slimMode: false,
                 mobileMode: false,
                 bluredBg: false,
-                voteCasted: false
+                voteCasted: false,
+                breadcrumbLinksData: this.breadcrumbLinks
             }
         },
         computed: {
@@ -367,14 +367,14 @@
                 }
             },
             updateBreadcrumbLinks() {
-                if (this.breadcrumbLinks.length === 0) {
+                if (this.breadcrumbLinksData.length === 0) {
                     if (this.$route.meta.breadcrumb) {
-                        this.breadcrumbLinks = this.$route.meta.breadcrumb
+                        this.breadcrumbLinksData = this.$route.meta.breadcrumb
                     } else if (this.$route.meta.breadcrumb === false) {
-                        this.breadcrumbLinks = []
+                        this.breadcrumbLinksData = []
                     } else {
                         if (this.$route.name !== 'Home') {
-                            this.breadcrumbLinks = [
+                            this.breadcrumbLinksData = [
                                 { to: { path: '/' }, title: 'Home' },
                                 { to: { path: this.$route.path }, title: this.$route.name }
                             ]
