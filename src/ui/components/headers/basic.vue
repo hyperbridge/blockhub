@@ -194,7 +194,7 @@
                             <c-language-dropdown :current_language="current_language" :languages="languages" @change="selectLanguages" />
                         </li>
                         <li v-if="!is_locked && currencies" class="ml-2">
-                            <!--<c-currency-dropdown :current_currency="current_currency" :currencies="currencies" @change="selectCurrency" />-->
+                            <c-currency-dropdown :current_currency="current_currency" :currencies="currencies" @change="selectCurrency" />
                         </li>
                     </ul>
                 </nav>
@@ -224,11 +224,9 @@ export default {
             return this.$store.state.application.languages
         },
         current_language() {
-            console.log(this.account.language)
             if( Object.keys(this.account.language).length === 0 ){
                 let system_lang = navigator.language || navigator.userLanguage,
                     arr = this.languages;
-                console.log(system_lang)
                 arr.forEach( (el) => {
                     let cd = el.code.toLowerCase();
                     if (system_lang.toLowerCase().includes(cd)){
@@ -244,7 +242,7 @@ export default {
         current_currency() {
             let defCurrency = 'USD',
                 arr = this.currencies;
-            if( !this.account.currency ){
+            if( Object.keys(this.account.currency).length === 0 ){
                 arr.forEach( (el) => {
                     let cd = el.code;
                     if (cd.includes(defCurrency)){

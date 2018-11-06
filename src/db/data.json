@@ -165,6 +165,11 @@
         ],
         "languages":[
             {
+                "code": "pl",
+                "name": "Poland",
+                "native": "Polski"
+            },
+            {
                 "code": "gb",
                 "name": "United Kingdom",
                 "native": "GB"

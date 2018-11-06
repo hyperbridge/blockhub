@@ -2,7 +2,7 @@
     <div class="currency-dropdown">
         <div class="currency-dropdown__current" @click="toggleList">
             <c-country-flag :country="current_currency.country" size="small" v-if="current_currency.country" />
-            <c-crypto-icon :name="current_currency.code.toLowerCase()" v-else />
+            <c-crypto-icon :name="current_currency.code" v-else />
             <span class="currency-name">
                 {{ current_currency.code }}
             </span>
@@ -13,7 +13,7 @@
                 <ul :class="{'d-block' : showList}">
                     <li class="currency-dropdown__list-item" v-for="(currency, index) in currencies" @click="changeCurrency(currency)" :key="index">
                         <c-country-flag :country="currency.country" size="small" v-if="currency.country" />
-                        <c-crypto-icon :name="currency.code.toLowerCase()" v-else/>
+                        <c-crypto-icon :name="currency.code" v-else/>
                         <span class="currency-name">
                             {{ currency.code }}
                         </span>
