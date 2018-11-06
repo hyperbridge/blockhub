@@ -236,7 +236,7 @@ const assets = {
                     }, {})
                 }
             }), {}),
-        transactions: ({ trxs, assets }, { users }) => Object.values(trxs)
+        transactions: ({ trxs, assets }, { users }, rootState, { ['community/messages']: messages }) => Object.values(trxs)
             .reduce((populated, trx) => ({
                 ...populated,
                 // [trx.id]: trx
@@ -245,7 +245,8 @@ const assets = {
                     you: users[trx.you],
                     contractor: users[trx.contractor],
                     contractorOffer: trx.contractorOffer.map(id => assets[id]),
-                    yourOffer: trx.yourOffer.map(id => assets[id])
+                    yourOffer: trx.yourOffer.map(id => assets[id]),
+                    messages: trx.messages.map(id => messages[id])
                 }
             }), {}),
         // inventoryGrouped: user.inventory.reduce((grouped, id) => {
