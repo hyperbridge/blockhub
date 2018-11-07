@@ -24,7 +24,7 @@
                                     <div class="h5 font-weight-bold m-0 p-0 text-white">
                                         Estimated Value
                                     </div>
-                                    {{ collection.estimated_value | numeralFormat('0,0') }} USD
+                                    {{ collection.estimated_value | currency }}
                                 </div>
                                 <div>
                                     <div class="h5 font-weight-bold m-0 p-0 text-white">

@@ -251,7 +251,14 @@ export default {
             // If that failed, set to default: USD
             if (!this.account.currency || !this.account.currency.code)
                 this.account.currency = this.currencies.find((el) => !!el.code.toLowerCase().includes('usd'))
-
+            this.$CurrencyFilter.setConfig({
+                symbol: this.account.currency.symbol,
+                thousandsSeparator: ',',
+                fractionCount: 2,
+                fractionSeparator: '.',
+                symbolPosition: 'front',
+                symbolSpacing: true
+            })
             return this.account.currency
         },
         account() {

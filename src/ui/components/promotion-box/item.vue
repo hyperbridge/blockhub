@@ -18,7 +18,7 @@
                 <div class="font-weight-normal text-uppercase" v-if="basic">
                     Basic Package
                 </div>
-                Buy for ${{ price }}
+                Buy for {{ price | currency }}
             </div>
             <div v-else>
                 Free Download

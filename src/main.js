@@ -13,6 +13,7 @@ import './css/styles.scss';
 import './prototypes';
 import migrations from './db/migrations'
 import {Picker, Emoji} from 'emoji-mart-vue'
+import VueCurrencyFilter from 'vue-currency-filter'
 
 
 import VueNumerals from 'vue-numerals'
@@ -30,6 +31,15 @@ Vue.use(Snotify, {
 Vue.use(VueNumerals);
 Vue.component('picker', Picker)
 Vue.component('emoji', Emoji)
+Vue.use(VueCurrencyFilter,
+    {
+        symbol : '$',
+        thousandsSeparator: '.',
+        fractionCount: 2,
+        fractionSeparator: ',',
+        symbolPosition: 'front',
+        symbolSpacing: true
+    })
 
 
 const data = {

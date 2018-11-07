@@ -2,7 +2,7 @@
     <div class="transaction__exchange">
         <div class="exchange__data">
             <p>Sell {{ yours }} assets for</p>
-            <span class="data__price">{{ price.yours }}$</span>
+            <span class="data__price">{{ price.yours | currency }}</span>
         </div>
         <div class="exchange__sum">
             <div class="sum__circle">
@@ -15,7 +15,7 @@
                             ? 'negative'
                             : ''
                     ]"
-                >{{ price.sum > 0 ? '+' : '' }}{{ price.sum }}$</span>
+                >{{ price.sum > 0 ? '+' : '' }}{{ price.sum | currency }}</span>
                 <c-icon
                     name="exchange-alt"
                     class="circle__icon"
@@ -25,7 +25,7 @@
         </div>
         <div class="exchange__data">
             <p>Buy {{ their }} assets for</p>
-            <span class="data__price">{{ price.their }}$</span>
+            <span class="data__price">{{ price.their | currency }}</span>
         </div>
     </div>
 </template>

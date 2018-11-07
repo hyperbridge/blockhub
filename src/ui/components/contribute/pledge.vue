@@ -5,7 +5,7 @@
                 Select this reward
             </div>
         </transition>
-        <h3>Pledge US ${{ pledge.min_price }} or more</h3>
+        <h3>Pledge US {{ pledge.min_price | currency }} or more</h3>
         <h4 v-if="pledge.title">{{ pledge.title }}</h4>
         <div class="pledge-item__text">
             {{ pledge.description }}

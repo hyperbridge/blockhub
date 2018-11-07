@@ -143,13 +143,13 @@
             },
             {
                 "code": "RUB",
-                "symbol": "$",
+                "symbol": "₽",
                 "name": "Russian ruble",
                 "country": "ru"
             },
             {
                 "code": "BTC",
-                "symbol": "B",
+                "symbol": "฿",
                 "name": "Bitcoin"
             },
             {
