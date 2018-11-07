@@ -230,32 +230,18 @@ export default {
             return this.$store.state.application.languages
         },
         current_language() {
-            if( Object.keys(this.account.language).length === 0 ){
-                let system_lang = navigator.language || navigator.userLanguage,
-                    arr = this.languages;
-                arr.forEach( (el) => {
-                    let cd = el.code.toLowerCase();
-                    if (system_lang.toLowerCase().includes(cd)){
-                        this.$store.state.application.account.language = el;
-                    }
-                })
-            }
+            if (!this.account.language || !this.account.language.code)
+                this.account.language = this.languages.filter((el) => (navigator.language || navigator.userLanguage).language.toLowerCase().includes(el.code.toLowerCase()))
+            
             return this.account.language
         },
         currencies() {
             return this.$store.state.application.currencies
         },
         current_currency() {
-            let defCurrency = 'USD',
-                arr = this.currencies;
-            if( Object.keys(this.account.currency).length === 0 ){
-                arr.forEach( (el) => {
-                    let cd = el.code;
-                    if (cd.includes(defCurrency)){
-                        this.$store.state.application.account.currency = el;
-                    }
-                })
-            }
+            if (!this.account.currency || !this.account.currency.code)
+                this.account.currency = this.currencies.filter((el) => el.code.toLowerCase().includes('USD'))
+            
             return this.account.currency
         },
         account() {
@@ -330,11 +316,13 @@ export default {
             let browserWindow = BrowserWindow.getFocusedWindow()
             browserWindow.minimize()
         },
-        selectCurrency(currency){
+        selectCurrency(currency) {
             this.account.currency = currency
+            this.$store.commit('application/updateState')
         },
-        selectLanguages(lang){
+        selectLanguages(lang) {
             this.account.language = lang
+            this.$store.commit('application/updateState')
         }
     }
 }
