@@ -45,8 +45,6 @@ const community = {
         createMessage({ commit }, message) {
             const id = getId();
 
-
-
             const payload = {
                 id,
                 data: {
@@ -59,11 +57,6 @@ const community = {
 
             commit('add', payload);
             return id;
-        },
-        createTransactionMessage({ commit, dispatch, rootState }, payload) {
-            console.log(rootState)
-            const id = dispatch('createMessage', payload);
-            dispatch('update')
         }
     },
     getters: {

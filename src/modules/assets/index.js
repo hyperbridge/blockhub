@@ -178,11 +178,19 @@ const assets = {
             commit('create', { id: newId, prop: 'auctions', data: payload });
             commit('update', {
                 id: offerId,
-                prop: 'offers',
+                target: 'offers',
                 data: { auctions: [...state.offers[offerId].auctions, newId] }
             });
         },
+        async createTransactionMessage({ commit, dispatch, state }, { trxId, message }) {
+            const id = await dispatch('community/createMessage', message, { root: true });
 
+            const data = {
+                messages: [...state.trxs[trxId].messages, id]
+            };
+
+            await dispatch('update', { target: 'trxs', data, id: trxId });
+        },
         evolveNavigator({ commit }, payload) {
             const id = rand();
             commit('evolveNavigator', { ...payload, id });

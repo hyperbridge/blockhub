@@ -72,6 +72,12 @@
                     offers[target].push(transaction);
                     return offers;
                 }, { received: [], sent: [], closed: [] });
+            },
+            transactions() {
+                return this.$store.getters['assets/transactionsArray'];
+            },
+            offers2() {
+                // const transactions = this.$store.getters['assets/transactionsArray'];
             }
         }
     }

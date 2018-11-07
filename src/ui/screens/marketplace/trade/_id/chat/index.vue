@@ -45,8 +45,12 @@
             sendMessage() {
                 const { id, messages } = this.trx;
 
-                // this.$store.dispatch('assets/update', { data: {} })
-                this.$store.dispatch('community/createMessage', this.newMessage);
+                const payload = {
+                    message: this.newMessage,
+                    trxId: id
+                };
+
+                this.$store.dispatch('assets/createTransactionMessage', payload);
                 this.newMessage = '';
             }
         },
