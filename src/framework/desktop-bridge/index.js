@@ -252,6 +252,8 @@ export const runCommand = async (cmd, meta = {}) => {
             console.log(cmd.data)
 
             await sendCommand('quitAndInstall')
+        } else if (cmd.key === 'updateState') {
+            local.store.commit(cmd.data.module + '/updateState', cmd.data.state)
         } else if (cmd.key === 'systemError') {
             console.warn('[Bridge] Received system error from desktop', cmd.data)
 
