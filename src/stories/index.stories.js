@@ -4279,6 +4279,7 @@ import Landing from '@/ui/components/landing'
 import LandingTitle from '@/ui/components/landing/block-title/simple'
 import LandingTitleShadow from '@/ui/components/landing/block-title/shadow'
 import LandingTitleGradient from '@/ui/components/landing/block-title/gradient'
+import LandingContent from '@/ui/components/landing/block-content/simple'
 
 storiesOf('Landing Page', module)
     .add('block title', () => ({
@@ -4323,6 +4324,16 @@ storiesOf('Landing Page', module)
                 Mutation Mode
             </c-landing-block-title-gradient>
         </div>
+            `
+    }))
+    .add('content block', () => ({
+        components:{
+            'c-landing-block': LandingContent
+        },
+        template:`
+            <div class="p-5">
+                <c-landing-block title="Some content block title" />
+            </div>
             `
     }))
     .add('default', () => ({

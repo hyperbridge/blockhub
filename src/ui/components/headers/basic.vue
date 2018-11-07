@@ -232,12 +232,12 @@ export default {
         current_language() {
             // Try to set based on browser language
             if (!this.account.language || !this.account.language.code)
-                this.account.language = this.languages.filter((el) => (navigator.language || navigator.userLanguage).language.toLowerCase().includes(el.code.toLowerCase()))
-            
+                this.account.language = this.languages.find((el) => !!(navigator.language || navigator.userLanguage).toLowerCase().includes(el.code.toLowerCase()))
+
             // If that failed, set to default: US
             if (!this.account.language || !this.account.language.code)
-                this.account.language = this.languages.filter((el) => el.code.toLowerCase().includes('us'))
-            
+                this.account.language = this.languages.find((el) => !!el.code.toLowerCase().includes('us'))
+
             return this.account.language
         },
         currencies() {
@@ -245,13 +245,13 @@ export default {
         },
         current_currency() {
             // Try to set currency based on language
-            // TODO
+            if (!this.account.currency || !this.account.currency.code)
+                this.account.currency = this.currencies.find((el) => el.country && !!el.country.includes(this.account.language.code))
 
-            
             // If that failed, set to default: USD
             if (!this.account.currency || !this.account.currency.code)
-                this.account.currency = this.currencies.filter((el) => el.code.toLowerCase().includes('usd'))
-            
+                this.account.currency = this.currencies.find((el) => !!el.code.toLowerCase().includes('usd'))
+
             return this.account.currency
         },
         account() {
@@ -327,6 +327,7 @@ export default {
             browserWindow.minimize()
         },
         selectCurrency(currency) {
+            console.log(currency)
             this.account.currency = currency
             this.$store.commit('application/updateState')
         },
