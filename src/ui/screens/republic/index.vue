@@ -5,7 +5,7 @@
                 <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                     <c-card class="text-center">
                         <h4 class="h2">The Republic</h4>
-                        
+                        <i class="fas fa-wolf-pack-battalion" />
                     </c-card>
                 </div>
             </div>

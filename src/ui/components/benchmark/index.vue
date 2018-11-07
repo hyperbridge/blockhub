@@ -6,7 +6,7 @@
                 :class="{ 'avoid-clicks': running }"
                 icon_hide
             >
-                {{ finished ? 'Try again' : running ? 'Running...' : 'Start' }}
+                {{ finished ? 'Try again' : running ? 'Running...' : 'Run Performance Test' }}
             </c-button>
             <p class="benchmark__status">STATUS: {{ running ? 'Running' : finished ? 'Finished' : 'Waiting to start' }}</p>
 

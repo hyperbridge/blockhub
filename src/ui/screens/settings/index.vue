@@ -6,7 +6,7 @@
                         <div class="settings_item">
                             <c-switch />
                             <div class="text">
-                                <h4>Open BlockHub on system startup</h4>
+                                <h4>Open on system startup</h4>
                                 <p>Turn on if you want the application to load automatically
                                 when you turn on your computer</p>
                             </div>
@@ -16,8 +16,8 @@
                         <div class="settings_item">
                             <c-switch />
                             <div class="text">
-                                <h4>Show system warnings</h4>
-                                <p>Queues for games that mickey nex to Ogopogo in freezie Serviette, eh?</p>
+                                <h4>System warnings</h4>
+                                <p>Turn on if you want to see system warnings (useful for debugging)</p>
                             </div>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                         <div class="settings_item">
                             <c-switch />
                             <div class="text">
-                                <h4>Enable Ethereum connection</h4>
+                                <h4>Ethereum connection</h4>
                                 <p>Turn on if you want the application to enable Ethereum connection</p>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                                 @change="updateClientSettings('pagination')"
                             />
                             <div class="text">
-                                <h4>Pagination Mode</h4>
+                                <h4>Pagination mode</h4>
                                 <p>Turn on if you want to switch between <i>pagination</i> or <i>load more</i> navigation mode</p>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                             />
                             <div class="text">
                                 <h4>System notifications</h4>
-                                <p>Enable system notifications from BlockHub App</p>
+                                <p>Turn on if you want system notifications</p>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                                 :checked="settings.client.animations"
                             />
                             <div class="text">
-                                <h4>Enable animations</h4>
+                                <h4>UI animations</h4>
                                 <p>Turn on if you want to enable animations and transitions</p>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                                 :checked="settings.client.autoplay"
                             />
                             <div class="text">
-                                <h4>Enable autoplay</h4>
+                                <h4>Video auto-play</h4>
                                 <p>Turn on if you want to play videos automatically</p>
                             </div>
                         </div>
@@ -748,12 +748,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .console-log {
-        width: 100%;
-        height: 500px;
-        overflow-y: scroll;
-        padding: 20px 20px 60px 20px;
-    }
     .settings_item{
         display: flex;
         width: 100%;
