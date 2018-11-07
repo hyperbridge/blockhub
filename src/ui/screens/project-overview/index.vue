@@ -41,7 +41,7 @@
                         <i class="fas fa-cog"></i>
                         <span>Configure Campaign</span>
                     </a>
-                    <h2 class="title">Crowndfunding campaign</h2>
+                    <h2 class="title">Crowdfunding campaign</h2>
                     <c-btn-fav
                         @click="addToWishlist()"
                         target="Wishlist"
@@ -124,7 +124,7 @@
             <c-community-spotlight :discussions="project.community.discussions"
                                    :community_url="`/#/project/${project.id}`" :editing="editing"
                                    :activeElement="activeElement['milestones']"
-                                   class="margin-bottom-30"/>
+                                   class="margin-bottom-30" />
 
             <c-block title="Contribute" class="margin-bottom-30">
                 <c-contribute-form @click="showContributeModal" />
@@ -132,6 +132,7 @@
 
             <c-contribute-pledge @click="showContributeModal" v-for="(pledge, index) in project.pledges" :key="index" :pledge="pledge" />
 
+            <c-decentralization-meter />
         </div>
     </div>
 </template>
@@ -153,6 +154,7 @@
             'c-contribute-form': (resolve) => require(['@/ui/components/contribute/form.vue'], resolve),
             'c-contribute-pledge': (resolve) => require(['@/ui/components/contribute/pledge.vue'], resolve),
             'c-badges': (resolve) => require(['@/ui/components/project/badges'], resolve),
+            'c-decentralization-meter': (resolve) => require(['@/ui/components/decentralization-meter'], resolve),
             'c-btn-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve),
         },
         data() {
