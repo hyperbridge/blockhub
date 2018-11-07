@@ -3,6 +3,10 @@
         <ul class="reset-list chat" ref="chatList">
             <c-chat-message
                 v-for="(msg, index) in trx.messages"
+                @delete="$store.dispatch(
+                    'assets/deleteTransactionMessage',
+                    { id: $event, trxId: trx.id }
+                )"
                 :key="index"
                 :message="msg"
                 :userId="userId"
@@ -40,7 +44,7 @@
         },
         methods: {
             async sendMessage() {
-                if (this.newMessage && Date.now() / 1000 - this.lastMsg < 5) {
+                if (this.newMessage && Date.now() / 1000 - this.lastMsg < 10) {
                     const { lastMessageId } = this;
                     const { content } = this.trx.messages.find(msg => msg.id === lastMessageId);
                     this.$store.dispatch(

@@ -11,10 +11,15 @@
             />
             <span
                 class="chat-message__content"
+                v-text="message.content"
+            />
+            <button
+                v-if="userId == message.author.id"
+                class="chat-message__delete-btn"
+                @click="$emit('delete', message.id)"
             >
-                {{ message.content }}
-
-            </span>
+                <c-icon name="trash-alt"/>
+            </button>
         </div>
         <span class="chat-message__date">
             {{ timeAgo }}
@@ -41,6 +46,12 @@
     .chat-message__content-wrapper {
         display: flex;
         align-items: flex-end;
+        position: relative;
+        &:hover {
+            .chat-message__delete-btn {
+                display: block;
+            }
+        }
     }
     .chat-message--own {
         .chat-message__content {
@@ -52,6 +63,9 @@
         }
         .chat-message__date {
             text-align: right;
+        }
+        .chat-message__delete-btn {
+            left: 0;
         }
     }
 
@@ -87,6 +101,25 @@
             left: -$size;
             bottom: 0;
         }
+    }
+
+    .chat-message__delete-btn {
+        border-radius: 50%;
+        border-style: none;
+        color: #fff;
+        background: rgb(255, 118, 118);
+        position: absolute;
+        top: calc(50% - 15px);
+        right: 0;
+        display: none;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        animation: fade-in .5s ease;
+        @keyframes fade-in {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        };
     }
 </style>
 

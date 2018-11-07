@@ -190,6 +190,15 @@ const assets = {
             await dispatch('update', { target: 'trxs', data, id: trxId });
             return id;
         },
+        deleteTransactionMessage({ commit, dispatch, state }, { id, trxId }) {
+            console.log(state.trxs[trxId].messages)
+            const data = {
+                messages: state.trxs[trxId].messages.filter(msgId => msgId !== id)
+            };
+            console.log(data)
+            commit('update', { id: trxId, target: 'trxs', data });
+            dispatch('community/delete', { id }, { root: true });
+        },
         evolveNavigator({ commit }, payload) {
             const id = rand();
             commit('evolveNavigator', { ...payload, id });

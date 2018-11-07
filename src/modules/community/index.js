@@ -38,6 +38,10 @@ const community = {
         },
         update(state, { target = 'messages', id, data }) {
             state[target][id] = { ...state[target][id], ...data };
+        },
+        delete(state, { target = 'messages', id }) {
+            const { [id]: deleted, ...rest } = state[target];
+            state[target] = rest;
         }
     },
     actions: {
@@ -49,6 +53,11 @@ const community = {
             const { id, target, data } = payload;
             // await axios.post(`/${target}/${id}`, data);
             commit('update', payload);
+        },
+        delete({ commit }, payload) {
+            const { id, target = 'messages' } = payload;
+            // await axios.delete(`/${target}/${id}`, { id })
+            commit('delete', payload);
         },
         createMessage({ commit }, message) {
             const id = getId();
