@@ -190,8 +190,11 @@
                                 <span class="text">Help</span>
                             </a>
                         </li>
-                        <li v-if="!is_locked" class="ml-3">
-                            <c-currency-dropdown />
+                        <li v-if="!is_locked && languages" class="ml-3">
+                            <c-language-dropdown :current_language="current_language" :languages="languages" @change="selectLanguages" />
+                        </li>
+                        <li v-if="!is_locked && currencies" class="ml-2">
+                            <c-currency-dropdown :current_currency="current_currency" :currencies="currencies" @change="selectCurrency" />
                         </li>
                     </ul>
                 </nav>
@@ -208,14 +211,47 @@ export default {
     components: {
         'c-loading-logo': LoadingBar,
         'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve),
-        'c-currency-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/currency'], resolve)
+        'c-currency-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/currency'], resolve),
+        'c-language-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/language'], resolve)
     },
     data() {
         return {
-            show_menu: false
+            show_menu: false,
         }
     },
     computed: {
+        languages() {
+            return this.$store.state.application.languages
+        },
+        current_language() {
+            if( Object.keys(this.account.language).length === 0 ){
+                let system_lang = navigator.language || navigator.userLanguage,
+                    arr = this.languages;
+                arr.forEach( (el) => {
+                    let cd = el.code.toLowerCase();
+                    if (system_lang.toLowerCase().includes(cd)){
+                        this.$store.state.application.account.language = el;
+                    }
+                })
+            }
+            return this.account.language
+        },
+        currencies() {
+            return this.$store.state.application.currencies
+        },
+        current_currency() {
+            let defCurrency = 'USD',
+                arr = this.currencies;
+            if( Object.keys(this.account.currency).length === 0 ){
+                arr.forEach( (el) => {
+                    let cd = el.code;
+                    if (cd.includes(defCurrency)){
+                        this.$store.state.application.account.currency = el;
+                    }
+                })
+            }
+            return this.account.currency
+        },
         account() {
             return this.$store.state.application.account
         },
@@ -287,6 +323,12 @@ export default {
             const { BrowserWindow } = window.specialRequire('electron').remote
             let browserWindow = BrowserWindow.getFocusedWindow()
             browserWindow.minimize()
+        },
+        selectCurrency(currency){
+            this.account.currency = currency
+        },
+        selectLanguages(lang){
+            this.account.language = lang
         }
     }
 }
