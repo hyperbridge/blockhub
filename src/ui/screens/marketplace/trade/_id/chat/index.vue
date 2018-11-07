@@ -26,6 +26,18 @@
                 <c-icon name="paper-plane"/>
             </button>
         </div>
+        <!-- <button @click="$store.dispatch(
+            'assets/deleteSubitem',
+            { id: 1, target: 'trxs', prop: 'messages' }
+        )">
+            deleteSubitem
+        </button>
+        <button @click="$store.dispatch(
+            'assets/deleteGeneric',
+            ['messages', 1, 'trxs', trx.id, 'community']
+        )">
+            deleteSub
+        </button> -->
     </div>
 </template>
 

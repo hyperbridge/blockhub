@@ -30,7 +30,7 @@ const community = {
         }), {}),
     },
     mutations: {
-        add(state, { target = 'messages', id, data }) {
+        create(state, { target = 'messages', id, data }) {
             state[target] = {
                 ...state[target],
                 [id]: data
@@ -46,12 +46,17 @@ const community = {
     },
     actions: {
         create({ commit }, payload) {
+            const { target, data } = payload;
             const id = getId();
+            /* const newData = await axios.post(`/${target}`, data);
+               *** merge new data with payload's data and return id
+               return newData.id;
+            */
             commit('create', { ...payload, id });
         },
         update({ commit }, payload) {
             const { id, target, data } = payload;
-            // await axios.post(`/${target}/${id}`, data);
+            // await axios.patch(`/${target}/${id}`, data);
             commit('update', payload);
         },
         delete({ commit }, payload) {
@@ -72,7 +77,7 @@ const community = {
                 }
             };
 
-            commit('add', payload);
+            commit('create', payload);
             return id;
         }
     },
