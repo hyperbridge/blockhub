@@ -232,7 +232,7 @@ export default {
         current_language() {
             // Try to set based on browser language
             if (!this.account.language || !this.account.language.code)
-                this.account.language = this.languages.filter((el) => (navigator.language || navigator.userLanguage).language.toLowerCase().includes(el.code.toLowerCase()))
+                this.account.language = this.languages.filter((el) => (navigator.language || navigator.userLanguage).toLowerCase().includes(el.code.toLowerCase()))
             
             // If that failed, set to default: US
             if (!this.account.language || !this.account.language.code)
