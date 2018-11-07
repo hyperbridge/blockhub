@@ -28,6 +28,7 @@
                             <li>Purchase products within the store</li>
                             <li>Vote for the direct of game development (staking)</li>
                             <li>Receive 10% discount on all transactions</li>
+                            <li>Running promotions within BlockHub</li>
                         </ul>
                         <br />
                         For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees by 50%. To learn more, please see the <c-button status="underline" size="md" href="https://hyperbridge.org/whitepaper">whitepaper</c-button>.

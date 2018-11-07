@@ -146,12 +146,18 @@
                                     <li v-if="account.current_identity">
                                         <a :href="`/#/identity/${account.current_identity.public_address}`">
                                             <i class="fas fa-user"></i>
-                                            Public Profile
+                                            View Public Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a @click="$store.commit('application/showProfileChooser', true)">
+                                            <i class="fas fa-user-edit"></i>
+                                            Choose Profile
                                         </a>
                                     </li>
                                     <li>
                                         <a href="/#/account/identities">
-                                            <i class="fas fa-users"></i>
+                                            <i class="fas fa-users-cog"></i>
                                             Profile Manager
                                         </a>
                                     </li>
