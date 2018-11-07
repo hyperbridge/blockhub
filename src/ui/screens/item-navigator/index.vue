@@ -1,77 +1,60 @@
 <template>
-<c-layout navigationKey="meta">
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
+    <c-layout navigationKey="meta">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
 
-            <!-- <div class="item-navigator">
-                <div
-                    v-for="(row, index) in rows"
-                    :key="index"
-                    class="item-navigator__row"
-                >
-                    <c-navigator-item
-                        v-for="(item, index) in row"
-                        :key="index"
-                        :item="item"
+                    <div class="item-navigator">
+                        <c-navigator-item
+                            v-for="(item, index) in deeplyNestedNav"
+                            :key="index"
+                            :index="index"
+                            :item="item"
+                            :listLength="item.evolvesTo.length"
+                        />
+                    </div>
+
+                    <c-modal
+                        v-if="activeId"
+                        title="Select next asset to expand the tree"
+                        @close="activeId = null"
                     >
-                        {{ item.id }}
-                    </c-navigator-item>
-                </div>
-            </div> -->
+                        <c-assets
+                            @click="evolveNavigator($event.id)"
+                            :assets="assetsArray"
+                            slot="body"
+                        />
+                    </c-modal>
 
-            <div class="item-navigator">
-                <c-navigator-item
-                    v-for="(item, index) in deeplyNestedNav"
-                    :key="index"
-                    :index="index"
-                    :item="item"
-                    :listLength="item.evolvesTo.length"
-                />
+                    <c-modal
+                        v-if="deletingTree"
+                        title="Delete asset from the tree"
+                        @close="deletingTree = null"
+                    >
+                        <p class="text-align-center">Are you sure to delete this assets tree?</p>
+                        <c-navigator-item
+                            v-for="(item, index) in deletingTree"
+                            class="assets-tree--delete"
+                            :key="index"
+                            :index="index"
+                            :item="item"
+                            :listLength="item.evolvesTo.length"
+                            hideButtons
+                        />
+                        <div class="flex-center-between margin-top-50">
+                            <c-button status="info" @click="deletingTree = null" icon_hide>
+                                Cancel
+                            </c-button>
+                            <c-button status="success" @click="deleteTree(deletingTree[0].id)">
+                                Confirm
+                            </c-button>
+                        </div>
+                    </c-modal>
+
+                </div>
             </div>
-
-
-            <c-modal
-                v-if="activeId"
-                title="Select next asset to expand the tree"
-                @close="activeId = null"
-            >
-                <c-assets
-                    @click="evolveNavigator($event.id)"
-                    :assets="assetsArray"
-                    slot="body"
-                />
-            </c-modal>
-
-            <c-modal
-                v-if="deletingTree"
-                title="Delete asset from the tree"
-                @close="deletingTree = null"
-            >
-                <p class="text-align-center">Are you sure to delete this assets tree?</p>
-                <c-navigator-item
-                    v-for="(item, index) in deletingTree"
-                    class="assets-tree--delete"
-                    :key="index"
-                    :index="index"
-                    :item="item"
-                    :listLength="item.evolvesTo.length"
-                    hideButtons
-                />
-                <div class="flex-center-between margin-top-50">
-                    <c-button status="info" @click="deletingTree = null" icon_hide>
-                        Cancel
-                    </c-button>
-                    <c-button status="success" @click="deleteTree(deletingTree[0].id)">
-                        Confirm
-                    </c-button>
-                </div>
-            </c-modal>
-
         </div>
-    </div>
-</div>
-</c-layout>
+    </c-layout>
 </template>
 
 <script>
@@ -98,9 +81,9 @@
                 this.activeId = null;
             },
             deleteTree(id) {
-                this.$store.commit('assets/deleteNavigator', { id, parentId: this.deletingParentId });
+                this.$store.dispatch('assets/devolveNavigator', { id, parentId: this.deletingParentId });
+                // this.$store.commit('assets/deleteNavigator', { id, parentId: this.deletingParentId });
                 this.deletingParentId = null;
-                // this.$store.dispatch('assets/deleteNavigatorTree', id);
                 this.deletingTree = null;
             }
         },
@@ -145,8 +128,6 @@
             EventBus.$on('devolve', ({ id, tree, parentId }) => {
                 this.deletingTree = [{ ...tree, isRoot: true }];
                 this.deletingParentId = parentId;
-                console.log(tree)
-                // this.deleteId = id;
             });
         },
         beforeDestroy() {

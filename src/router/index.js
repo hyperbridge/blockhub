@@ -728,8 +728,20 @@ const router = new Router({
                             path: ':id',
                             name: 'Marketplace Trade',
                             component: (resolve) => require(['@/ui/screens/marketplace/trade/_id'], resolve),
-                            props: true
-                        }
+                            props: true,
+                            children: [
+                                {
+                                    path: '',
+                                    name: 'Marketplace Trade Offer',
+                                    component: (resolve) => require(['@/ui/screens/marketplace/trade/_id/offer'], resolve)
+                                },
+                                {
+                                    path: 'chat',
+                                    name: 'Marketplace Trade Chat',
+                                    component: (resolve) => require(['@/ui/screens/marketplace/trade/_id/chat'], resolve)
+                                }
+                            ]
+                        },
                     ]
                 },
                 {

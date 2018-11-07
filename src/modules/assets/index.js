@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import moment from 'moment';
-import { extract, skip } from '@/store/utils';
+import { extract, skip, getId, assignId } from '@/store/utils';
 
 import transactions from '@/db/seed/asset-transactions';
 import trxsData from '@/db/seed/asset-transactions.json';
@@ -10,7 +10,6 @@ import collectionsData from '@/db/seed/collections';
 
 
 const rand = () => Math.floor(Math.random() * 1000);
-const assignId = (id, object) => ({ ...object, data: { ...object.data, id }, id });
 
 const assets = {
     namespaced: true,
@@ -77,8 +76,8 @@ const assets = {
             // Payload could be written in format => { 'id_28313': { ...payload data } }
             state[prop][id] = { ...state[prop][id], ...data };
         },
-        update(state, { prop = 'assets', id, data }) {
-            state[prop][id] = { ...state[prop][id], ...data };
+        update(state, { prop = 'assets', target = prop, id, data }) {
+            state[target][id] = { ...state[target][id], ...data };
         },
         updatev2(state, payload) {
             const [prop, id] = Object.keys(payload)[0].split('_');
@@ -146,15 +145,13 @@ const assets = {
                 [id]: { id, assetId, evolvesTo: [], isRoot }
             };
         },
-        deleteNavigator(state, { id: itemId, parentId }) {
-            console.log('parentId', parentId)
+        devolveNavigator(state, { id: itemId, parentId }) {
 
             const navTree = state.navigator[parentId];
             state.navigator[parentId] = {
                 ...navTree,
                 evolvesTo: navTree.evolvesTo.filter(id => id !== itemId)
             };
-            // evolvesTo: navTree.evolvesTo.filter(id => id !== parentId)
         }
     },
     actions: {
@@ -163,7 +160,8 @@ const assets = {
             commit('create', { ...payload, id, data: { ...payload.data, id }});
         },
         update({ commit }, payload) {
-            // async call
+            const { prop, target = prop || 'messages', data, id } = payload;
+            // await axios.post(`/${target}/${id}`, data);
             commit('update', payload);
         },
         createFilter({ commit }, payload) {
@@ -184,12 +182,13 @@ const assets = {
                 data: { auctions: [...state.offers[offerId].auctions, newId] }
             });
         },
+
         evolveNavigator({ commit }, payload) {
             const id = rand();
             commit('evolveNavigator', { ...payload, id });
         },
-        deleteNavigatorTree({ state: { navigator }, commit }, id) {
-            const idsToDelete = [id];
+        devolveNavigator({ state: { navigator }, commit }, { id, parentId }) {
+            const idsToDelete = [];
 
             const checkId = (id) => {
                 if (navigator[id].evolvesTo.length) {
@@ -201,12 +200,12 @@ const assets = {
             };
             checkId(id);
 
-            console.log(idsToDelete)
-
             // async calls
 
-            commit('deleteMany', { prop: 'navigator', ids: idsToDelete });
-        }
+            commit('devolveNavigator', { id, parentId });
+            commit('deleteMany', { prop: 'navigator', ids: [...idsToDelete, id] });
+        },
+
     },
     getters: {
         assets: ({ assets }, { collections: col }, { marketplace: { collections, products }}) => Object.values(assets)
@@ -239,7 +238,7 @@ const assets = {
                     }, {})
                 }
             }), {}),
-        transactions: ({ trxs, assets }, { users }) => Object.values(trxs)
+        transactions: ({ trxs, assets }, { users }, rootState, { ['community/messages']: messages }) => Object.values(trxs)
             .reduce((populated, trx) => ({
                 ...populated,
                 // [trx.id]: trx
@@ -248,7 +247,8 @@ const assets = {
                     you: users[trx.you],
                     contractor: users[trx.contractor],
                     contractorOffer: trx.contractorOffer.map(id => assets[id]),
-                    yourOffer: trx.yourOffer.map(id => assets[id])
+                    yourOffer: trx.yourOffer.map(id => assets[id]),
+                    messages: trx.messages.map(id => messages[id])
                 }
             }), {}),
         // inventoryGrouped: user.inventory.reduce((grouped, id) => {
