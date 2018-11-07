@@ -102,7 +102,6 @@ export default {
         }
     },
     components: {
-        'c-block': (resolve) => require(['@/ui/components/block'], resolve),
     }
 }
 </script>

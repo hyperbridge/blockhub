@@ -390,15 +390,15 @@ export default {
         },
         rotateEnvironmentMode() {
             if (this.$store.state.application.environment_mode === 'production') {
-                this.$store.state.application.environment_mode = 'staging'
+                this.$store.commit('application/updateEnvironmentMode', 'staging')
             } else if (this.$store.state.application.environment_mode === 'staging') {
-                this.$store.state.application.environment_mode = 'beta'
+                this.$store.commit('application/updateEnvironmentMode', 'beta')
             } else if (this.$store.state.application.environment_mode === 'beta') {
-                this.$store.state.application.environment_mode = 'preview'
+                this.$store.commit('application/updateEnvironmentMode', 'preview')
             } else if (this.$store.state.application.environment_mode === 'preview') {
-                this.$store.state.application.environment_mode = 'local'
+                this.$store.commit('application/updateEnvironmentMode', 'local')
             } else {
-                this.$store.state.application.environment_mode = 'production'
+                this.$store.commit('application/updateEnvironmentMode', 'production')
             }
         },
         importSeedData() {
