@@ -230,8 +230,13 @@ export default {
             return this.$store.state.application.languages
         },
         current_language() {
+            // Try to set based on browser language
             if (!this.account.language || !this.account.language.code)
                 this.account.language = this.languages.filter((el) => (navigator.language || navigator.userLanguage).language.toLowerCase().includes(el.code.toLowerCase()))
+            
+            // If that failed, set to default: US
+            if (!this.account.language || !this.account.language.code)
+                this.account.language = this.languages.filter((el) => el.code.toLowerCase().includes('us'))
             
             return this.account.language
         },
@@ -239,8 +244,13 @@ export default {
             return this.$store.state.application.currencies
         },
         current_currency() {
+            // Try to set currency based on language
+            // TODO
+
+            
+            // If that failed, set to default: USD
             if (!this.account.currency || !this.account.currency.code)
-                this.account.currency = this.currencies.filter((el) => el.code.toLowerCase().includes('USD'))
+                this.account.currency = this.currencies.filter((el) => el.code.toLowerCase().includes('usd'))
             
             return this.account.currency
         },
