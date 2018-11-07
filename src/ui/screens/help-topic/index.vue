@@ -1,6 +1,6 @@
 <template>
     <c-layout navigationKey="help">
-            <div class="row margin-bottom-30" v-if="!article">
+            <div class="row margin-bottom-30" v-if="!topic">
                 <div class="col-12">
                     <c-card class="text-center">
                         <p>Oh no! That topic was not found!</p>
@@ -28,15 +28,15 @@
                     </c-block>
 
                     <c-block class="margin-bottom-30 padding-bottom-5">
-                        <div class="article-list" v-if="showByTopic(articles, topic.id)">
+                        <div class="article-list" v-if="showByTopic(topic.id).length">
                             <c-article-item :link="`/#/help/${topic.id}/article/${article.slug}`"
-                                            v-for="(article, index) in showByTopic(articles, topic.id)"
+                                            v-for="(article, index) in showByTopic(topic.id)"
                                             :key="index"
                             >
                                 {{ article.title }}
                             </c-article-item>
                         </div>
-                        <h3 v-else>Nothing to show</h3>
+                        <h3 v-else>No articles yet</h3>
                     </c-block>
 
                 </div>
@@ -75,15 +75,14 @@
             topic_id: this.id
         }),
         methods: {
-            showByTopic(data, id) {
-                let results = [],
-                    key = 'topic';
+            showByTopic(id) {
+                let results = [];
+                let data = Object.values(this.$store.state.marketplace.help.topics[id].articles || [])
 
                 for (let i = 0; i < data.length; i++) {
-                    if (data[i][key].includes(id)) {
-                        results.push(data[i]);
-                    }
+                    results.push(this.$store.state.marketplace.help.articles[data[i]]);
                 }
+
                 return results;
             }
         },

@@ -72,12 +72,16 @@ const router = new Router({
             }
         },
         {
-            path: '/help',
-            name: 'Help',
-            component: (resolve) => require(['@/ui/screens/help'], resolve),
-            meta: {
-                breadcrumb: false
-            }
+            path: '/help/:id/article/:slug/:info',
+            name: 'Help article',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/help-article'], resolve)
+        },
+        {
+            path: '/help/:id/article/:slug',
+            name: 'Help article',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/help-article'], resolve)
         },
         {
             path: '/help/:id',
@@ -86,10 +90,12 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/help-topic'], resolve)
         },
         {
-            path: '/help/:id/article/:slug',
-            name: 'Help article',
-            props: true,
-            component: (resolve) => require(['@/ui/screens/help-article'], resolve)
+            path: '/help',
+            name: 'Help',
+            component: (resolve) => require(['@/ui/screens/help'], resolve),
+            meta: {
+                breadcrumb: false
+            }
         },
         {
             path: '/support',
