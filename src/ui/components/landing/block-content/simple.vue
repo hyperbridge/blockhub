@@ -6,8 +6,8 @@
              'background-position' : bgPosition
              }">
         <div class="container">
-            <div class="row">
-                <div class="landing__content-block-body">
+            <div class="row" :class="[horizontalPozition, verticalPosition]">
+                <div class="landing__content-block-body" :style="{ width: contentWidth}">
                     <slot />
                 </div>
             </div>
@@ -45,6 +45,31 @@
             horizontal:{
                 type: String,
                 default: 'left'
+            },
+            contentWidth: String
+        },
+        computed: {
+            verticalPosition(){
+                switch (this.vertical) {
+                    case 'top':
+                        return 'align-items-start';
+                    case 'center':
+                        return 'align-items-center';
+                    case 'bottom':
+                        return 'align-items-end';
+                    default:
+                        break;
+                }
+            },
+            horizontalPozition(){
+                switch (this.horizontal) {
+                    case 'left':
+                        return 'justify-content-start'
+                    case 'center':
+                        return 'justify-content-center'
+                    case 'right':
+                        return 'justify-content-end'
+                }
             }
         }
     }
@@ -69,5 +94,7 @@
     .landing__content-block-body{
         color: #fff;
         margin: 15px 0;
+        padding: 0 15px;
+        max-width: 100%;
     }
 </style>

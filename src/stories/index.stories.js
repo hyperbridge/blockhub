@@ -4366,7 +4366,7 @@ storiesOf('Landing Page', module)
         },
         template: `
         <div class="p-5">
-            <c-landing-block-title-shadow colorShadow="red">
+            <c-landing-block-title-shadow colorShadow="#f60">
                 Mutation Mode
             </c-landing-block-title-shadow>
         </div>
@@ -4402,45 +4402,56 @@ storiesOf('Landing Page', module)
         template: `
             <div>
                 <c-landing-block title="Some content block title" bgPosition="top center" minHeight="400px" bgImage="https://images5.alphacoders.com/387/thumb-1920-387546.jpg">
-                    <div class="col-7"> 
-                        <c-landing-block-title-shadow colorShadow="#03A9F4">
-                            Aliquam quis magna at diam convallis congue.
-                        </c-landing-block-title-shadow>
-    
-                         <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
-                        Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
-                        Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
-                        Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
-                        Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
-                    </div>
+                    <c-landing-block-title-shadow colorShadow="#03A9F4">
+                        Aliquam quis magna at diam convallis congue.
+                    </c-landing-block-title-shadow>
+
+                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
+                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
+                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
+                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
                 </c-landing-block>
                 
-                <c-landing-block title="Some content block title" minHeight="50vh" bgImage="https://dota2hq.eu/wallpaper/dota2hq.eu-dota-2-roshan-vs-ursa-desktop-wallpaper-3894-1920x1080.jpg">
-                    <div class="col-8"> 
-                        <c-landing-block-title-gradient align="center">
-                            Aliquam quis magna at diam convallis congue.
-                        </c-landing-block-title-gradient>
-    
-                         <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
-                        Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
-                        Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
-                        Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
-                        Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
-                    </div>
+                <c-landing-block 
+                horizontal="center"
+                vertical="center"
+                title="Some content block title" 
+                minHeight="50vh" 
+                contentWidth="60%"
+                bgImage="https://dota2hq.eu/wallpaper/dota2hq.eu-dota-2-roshan-vs-ursa-desktop-wallpaper-3894-1920x1080.jpg">
+                    <c-landing-block-title-gradient align="center">
+                        Aliquam quis magna at diam convallis congue.
+                    </c-landing-block-title-gradient>
+
+                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
+                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
+                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
+                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
                 </c-landing-block>
                 
-                <c-landing-block title="Some content block title" fullHeight bgImage="https://s1.1zoom.ru/big3/691/Sven_DOTA_2_Armor_Helmet_510699.jpg">
-                    <div class="col-8"> 
-                        <c-landing-block-title-gradient align="center">
-                            Aliquam quis magna at diam convallis congue.
-                        </c-landing-block-title-gradient>
-    
-                         <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
-                        Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
-                        Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
-                        Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
-                        Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
-                    </div>
+                <c-landing-block 
+                title="Some content block title" 
+                horizontal="center"
+                vertical="center"
+                contentWidth="70%"
+                fullHeight bgImage="https://s1.1zoom.ru/big3/691/Sven_DOTA_2_Armor_Helmet_510699.jpg">
+                    <c-landing-block-title-gradient align="center">
+                        Aliquam quis magna at diam convallis congue.
+                    </c-landing-block-title-gradient>
+
+                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
+                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
+                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
+                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
+
+                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
+                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
+                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
+                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
                 </c-landing-block>
             </div>
             `
