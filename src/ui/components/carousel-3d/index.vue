@@ -1,18 +1,20 @@
 <template>
     <div class="carousel-3d">
-        <c-icon
-            name="arrow-circle-left"
-            class="carousel-3d__btn"
-            @click="focusedItem--"
-        />
         <div class="carousel-3d__content">
             <slot :items="visibleItems" :css="css"/>
         </div>
-        <c-icon
-            name="arrow-circle-right"
-            class="carousel-3d__btn"
-            @click="focusedItem++"
-        />
+        <template v-if="items.length > limitTo">
+            <c-icon
+                name="arrow-circle-left"
+                class="carousel-3d__btn carousel-3d__btn--left"
+                @click="focusedItem--"
+            />
+            <c-icon
+                name="arrow-circle-right"
+                class="carousel-3d__btn carousel-3d__btn--right"
+                @click="focusedItem++"
+            />
+        </template>
     </div>
 </template>
 
@@ -115,6 +117,9 @@
         cursor: pointer;
         font-size: 35px;
         color: rgba(255,255,255,.6);
+        &--left {
+            order: -1;
+        }
     }
 
     /deep/.carousel-3d__item {
