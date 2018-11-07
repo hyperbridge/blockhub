@@ -35,12 +35,20 @@ const community = {
                 ...state[target],
                 [id]: data
             };
+        },
+        update(state, { target = 'messages', id, data }) {
+            state[target][id] = { ...state[target][id], ...data };
         }
     },
     actions: {
         create({ commit }, payload) {
             const id = getId();
             commit('create', { ...payload, id });
+        },
+        update({ commit }, payload) {
+            const { id, target, data } = payload;
+            // await axios.post(`/${target}/${id}`, data);
+            commit('update', payload);
         },
         createMessage({ commit }, message) {
             const id = getId();

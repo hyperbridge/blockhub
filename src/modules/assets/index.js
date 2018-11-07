@@ -185,11 +185,10 @@ const assets = {
         async createTransactionMessage({ commit, dispatch, state }, { trxId, message }) {
             const id = await dispatch('community/createMessage', message, { root: true });
 
-            const data = {
-                messages: [...state.trxs[trxId].messages, id]
-            };
+            const data = { messages: [...state.trxs[trxId].messages, id] };
 
             await dispatch('update', { target: 'trxs', data, id: trxId });
+            return id;
         },
         evolveNavigator({ commit }, payload) {
             const id = rand();

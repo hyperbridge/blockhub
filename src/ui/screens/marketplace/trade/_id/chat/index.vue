@@ -33,26 +33,43 @@
         },
         data() {
             return {
-                newMessage: ''
+                newMessage: '',
+                lastMessageId: null,
+                lastMsg: null
             }
         },
         methods: {
             async sendMessage() {
-                if (this.newMessage) {
+                if (this.newMessage && Date.now() / 1000 - this.lastMsg < 5) {
+                    const { lastMessageId } = this;
+                    const { content } = this.trx.messages.find(msg => msg.id === lastMessageId);
+                    this.$store.dispatch(
+                        'community/update',
+                        { id: lastMessageId, data: { content: `${content} ${this.newMessage}` }}
+                    );
+                    this.cleanUp();
+                }
+                else if (this.newMessage) {
                     const { id, messages } = this.trx;
-
                     const payload = {
                         message: this.newMessage,
                         trxId: id
                     };
 
-                    await this.$store.dispatch('assets/createTransactionMessage', payload);
-                    this.newMessage = '';
-
-                    const { chatList } = this.$refs;
-                    await this.$nextTick();
-                    chatList.scrollTop = chatList.scrollHeight;
+                    this.lastMessageId = await this.$store.dispatch(
+                        'assets/createTransactionMessage',
+                        payload
+                    );
+                    this.cleanUp();
                 }
+            },
+            async cleanUp() {
+                this.newMessage = '';
+                this.lastMsg = Date.now() / 1000;
+
+                const { chatList } = this.$refs;
+                await this.$nextTick();
+                chatList.scrollTop = chatList.scrollHeight;
             }
         },
         computed: {

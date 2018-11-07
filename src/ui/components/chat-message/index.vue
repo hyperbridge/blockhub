@@ -17,7 +17,7 @@
             </span>
         </div>
         <span class="chat-message__date">
-            {{ message.timeAgo }}
+            {{ timeAgo }}
         </span>
     </li>
 </template>
@@ -25,7 +25,12 @@
 <script>
     export default {
         props: ['message', 'userId'],
-        name: 'chat-message'
+        name: 'chat-message',
+        computed: {
+            timeAgo() {
+                return this.message.createdAt.fromNow();
+            }
+        }
     }
 </script>
 
