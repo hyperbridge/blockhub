@@ -245,8 +245,7 @@ export default {
         },
         current_currency() {
             // Try to set currency based on language
-            // TODO
-            if (!this.account.currency || !this.account.currency.country)
+            if (!this.account.currency || !this.account.currency.code)
                 this.account.currency = this.currencies.find((el) => el.country && !!el.country.includes(this.account.language.code))
 
             // If that failed, set to default: USD
@@ -328,6 +327,7 @@ export default {
             browserWindow.minimize()
         },
         selectCurrency(currency) {
+            console.log(currency)
             this.account.currency = currency
             this.$store.commit('application/updateState')
         },
