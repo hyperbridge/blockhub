@@ -247,7 +247,7 @@ export default {
             // Try to set currency based on language
             // TODO
             if (!this.account.currency || !this.account.currency.country)
-                this.account.currency = this.currencies.find((el) => !!el.country.includes(this.account.language.code))
+                this.account.currency = this.currencies.find((el) => el.country && !!el.country.includes(this.account.language.code))
 
             // If that failed, set to default: USD
             if (!this.account.currency || !this.account.currency.code)
