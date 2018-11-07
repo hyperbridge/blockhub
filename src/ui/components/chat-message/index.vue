@@ -17,7 +17,7 @@
             </span>
         </div>
         <span class="chat-message__date">
-            {{ message.createdAt | timeAgo }}
+            {{ message.timeAgo }}
         </span>
     </li>
 </template>

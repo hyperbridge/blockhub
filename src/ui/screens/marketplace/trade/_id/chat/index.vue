@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ul class="reset-list chat">
+        <ul class="reset-list chat" ref="chatList">
             <c-chat-message
                 v-for="(msg, index) in trx.messages"
                 :key="index"
@@ -37,21 +37,22 @@
             }
         },
         methods: {
-            dispatch(type, payload) {
-                return;
-                return this.$store.dispatch(type, payload);
-            },
-            // ['assets/update']: this.$store.dispatch('assets/update').bind(this),
-            sendMessage() {
-                const { id, messages } = this.trx;
+            async sendMessage() {
+                if (this.newMessage) {
+                    const { id, messages } = this.trx;
 
-                const payload = {
-                    message: this.newMessage,
-                    trxId: id
-                };
+                    const payload = {
+                        message: this.newMessage,
+                        trxId: id
+                    };
 
-                this.$store.dispatch('assets/createTransactionMessage', payload);
-                this.newMessage = '';
+                    await this.$store.dispatch('assets/createTransactionMessage', payload);
+                    this.newMessage = '';
+
+                    const { chatList } = this.$refs;
+                    await this.$nextTick();
+                    chatList.scrollTop = chatList.scrollHeight;
+                }
             }
         },
         computed: {
@@ -67,8 +68,8 @@
 
 <style lang="scss" scoped>
     .chat {
-        max-height: 600px;
-        overflow-x: scroll;
+        max-height: 450px;
+        overflow-y: scroll;
         padding: 10px;
     }
     .chat-form {

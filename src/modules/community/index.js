@@ -65,7 +65,8 @@ const community = {
                 ...populated,
                 [msg.id]: {
                     ...msg,
-                    author: users[msg.author]
+                    author: users[msg.author],
+                    timeAgo: moment(msg.createdAt).fromNow()
                 }
             }), {}),
         users: ({ users }, getters, rootState, { ['assets/assets']: assets }) => Object.values(users)
