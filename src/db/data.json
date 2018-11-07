@@ -150,17 +150,20 @@
             {
                 "code": "BTC",
                 "symbol": "B",
-                "name": "Bitcoin"
+                "name": "Bitcoin",
+                "country": ""
             },
             {
                 "code": "ETH",
                 "symbol": "E",
-                "name": "Ethereum"
+                "name": "Ethereum",
+                "country": ""
             },
             {
                 "code": "DAI",
                 "symbol": "D",
-                "name": "Dau"
+                "name": "Dau",
+                "country": ""
             }
         ],
         "languages":[
