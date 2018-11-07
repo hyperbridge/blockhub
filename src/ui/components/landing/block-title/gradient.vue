@@ -45,6 +45,7 @@
 
 <style lang="scss" scoped>
     .landing__block-title-gradient{
+        margin-bottom: 15px;
         &.left-align{
             padding: 4px 40px 4px 10px;
             border-radius: 2px 0 0 2px;
@@ -58,8 +59,9 @@
         &.center-align{
             padding: 4px 40px;
             border-radius: 2px 0 0 2px;
-            display: inline-flex;
+            display: block;
             text-align: center;
+            /*margin: 0 auto;*/
             /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2989d8+50,5ea72b+50,5ea72b+50&0+0,1+45,1+53,0+100 */
             background: -moz-linear-gradient(left, rgba(94,167,43,0) 0%, rgba(94,167,43,1) 45%, rgba(94,167,43,1) 50%, rgba(94,167,43,1) 53%, rgba(94,167,43,0) 100%); /* FF3.6-15 */
             background: -webkit-linear-gradient(left, rgba(94,167,43,0) 0%,rgba(94,167,43,1) 45%,rgba(94,167,43,1) 50%,rgba(94,167,43,1) 53%,rgba(94,167,43,0) 100%); /* Chrome10-25,Safari5.1-6 */

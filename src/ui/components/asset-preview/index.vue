@@ -8,7 +8,7 @@
             <tbody>
                 <tr v-for="(price, priceKey) in asset.price" :key="priceKey">
                     <td>{{ priceKey | upperFirstChar }}</td>
-                    <td class="price-table__price">{{ asset.price[priceKey] }}$</td>
+                    <td class="price-table__price">{{ asset.price[priceKey] | currency }}</td>
                 </tr>
             </tbody>
         </table>

@@ -9,7 +9,7 @@
             data-target="#purchase-modal"
         >
             <span class="margin-left-5" v-if="plan.price">
-                ${{ plan.price }}
+                {{ plan.price | currency }}
             </span>
             <span class="margin-left-5" v-else-if="plan.link_text">
                 {{ plan.link_text }}

@@ -32,7 +32,7 @@
                 >
                     <thead>
                         <th>{{ assetsKey | upperFirstChar }} items</th>
-                        <th>Total value ${{ totalValue[assetsKey] }}</th>
+                        <th>Total value {{ totalValue[assetsKey] | currency }}</th>
                     </thead>
                     <tbody>
                         <tr v-for="asset in assets" :key="asset.id">
@@ -48,7 +48,7 @@
                                     </div>
                                 </c-tooltip>
                             </td>
-                            <td>{{ asset.price.current }}$</td>
+                            <td>{{ asset.price.current | currency }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -61,11 +61,11 @@
                     <tbody>
                         <tr>
                             <td>Their items:</td>
-                            <td>- {{ totalValue.their }}$</td>
+                            <td>- {{ totalValue.their | currency }}</td>
                         </tr>
                         <tr>
                             <td>Yours items:</td>
-                            <td>+ {{ totalValue.yours }}$</td>
+                            <td>+ {{ totalValue.yours | currency }}</td>
                         </tr>
                     </tbody>
                     <tfoot>
