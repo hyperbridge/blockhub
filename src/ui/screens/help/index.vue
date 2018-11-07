@@ -18,7 +18,7 @@
                         <c-block title="Trending articles" class="margin-bottom-30" v-if="articles">
                             <div class="article-list">
                                 <c-article-item :link="`/#/help/${0}/article/${article.slug}`"
-                                                v-for="(article, index) in showByTopic(articles, 0)"
+                                                v-for="(article, index) in showByTopic(0)"
                                                 :key="index"
                                                 :class="{'mb-0': articles.length === index+1 }"
                                 >
@@ -44,7 +44,7 @@
                         <c-block title="Changelog">
                             <div class="simple-list">
                                 <c-list-item :link="`/#/help/${5}/article/${article.slug}`"
-                                             v-for="(article, index) in showByTopic(articles, 5)"
+                                             v-for="(article, index) in showByTopic(5)"
                                              :key="index"
                                              :class="{'mb-0': articles.length === index+1 }"
                                 >
@@ -56,8 +56,8 @@
                     <div class="col-12 col-lg-6 margin-bottom-30">
                         <c-block title="Common issues">
                             <div class="simple-list">
-                                <c-list-item :link="`/#/help/${7}/article/${article.slug}`"
-                                             v-for="(article, index) in showByTopic(articles, 7)"
+                                <c-list-item :link="`/#/help/${6}/article/${article.slug}`"
+                                             v-for="(article, index) in showByTopic(6)"
                                              :key="index"
                                              :class="{'mb-0': articles.length === index+1 }"
                                 >
@@ -96,15 +96,14 @@
             'c-card': (resolve) => require(['@/ui/components/help/help-card.vue'], resolve),
         },
         methods:{
-            showByTopic(data, id){
-                let results = [],
-                    key = 'topic';
+            showByTopic(id) {
+                let results = [];
+                let data = Object.values(this.$store.state.marketplace.help.topics[id].articles || [])
 
-                for(let i = 0; i < data.length; i++) {
-                    if( data[i][key].includes(id)) {
-                        results.push(data[i]);
-                    }
+                for (let i = 0; i < data.length; i++) {
+                    results.push(this.$store.state.marketplace.help.articles[data[i]]);
                 }
+
                 return results;
             }
         },

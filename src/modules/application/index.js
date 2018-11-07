@@ -282,6 +282,13 @@ export const mutations = {
             account[prop] = { ...account[prop], [id]: true };
         }
     },
+    updateEnvironmentMode(state, payload) {
+        state.environment_mode = payload
+
+        Bridge.sendCommand('setEnvironmentMode', payload).then((data) => {
+            
+        })
+    },
     createTradeURL(state, id) {
         state.account.tradeURLId = id;
     },

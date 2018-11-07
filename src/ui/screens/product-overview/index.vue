@@ -244,10 +244,10 @@
             addToWishlist() {
                 const { id } = this.product;
                 this.$store.commit('application/updateFavorites', { id })
-                this.$snotify.success(
-                    `Product has been ${this.wishlist[id] ? 'added to' : 'removed from'} your wishlist`,
-                    `Product ${this.wishlist[id] ? 'added' : 'removed'}`
-                );
+                // this.$snotify.success(
+                //     `Product has been ${this.wishlist[id] ? 'added to' : 'removed from'} your wishlist`,
+                //     `Product ${this.wishlist[id] ? 'added' : 'removed'}`
+                // );
             }
         },
         computed:{

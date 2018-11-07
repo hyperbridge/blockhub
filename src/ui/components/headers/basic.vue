@@ -146,12 +146,18 @@
                                     <li v-if="account.current_identity">
                                         <a :href="`/#/identity/${account.current_identity.public_address}`">
                                             <i class="fas fa-user"></i>
-                                            Public Profile
+                                            View Public Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a @click="$store.commit('application/showProfileChooser', true)">
+                                            <i class="fas fa-user-edit"></i>
+                                            Choose Profile
                                         </a>
                                     </li>
                                     <li>
                                         <a href="/#/account/identities">
-                                            <i class="fas fa-users"></i>
+                                            <i class="fas fa-users-cog"></i>
                                             Profile Manager
                                         </a>
                                     </li>
@@ -190,8 +196,11 @@
                                 <span class="text">Help</span>
                             </a>
                         </li>
-                        <li v-if="!is_locked" class="ml-3">
-                            <c-currency-dropdown />
+                        <li v-if="!is_locked && languages" class="ml-3">
+                            <c-language-dropdown :current_language="current_language" :languages="languages" @change="selectLanguages" />
+                        </li>
+                        <li v-if="!is_locked && currencies" class="ml-2">
+                            <c-currency-dropdown :current_currency="current_currency" :currencies="currencies" @change="selectCurrency" />
                         </li>
                     </ul>
                 </nav>
@@ -208,14 +217,43 @@ export default {
     components: {
         'c-loading-logo': LoadingBar,
         'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve),
-        'c-currency-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/currency'], resolve)
+        'c-currency-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/currency'], resolve),
+        'c-language-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/language'], resolve)
     },
     data() {
         return {
-            show_menu: false
+            show_menu: false,
         }
     },
     computed: {
+        languages() {
+            return this.$store.state.application.languages
+        },
+        current_language() {
+            // Try to set based on browser language
+            if (!this.account.language || !this.account.language.code)
+                this.account.language = this.languages.find((el) => !!(navigator.language || navigator.userLanguage).toLowerCase().includes(el.code.toLowerCase()))
+
+            // If that failed, set to default: US
+            if (!this.account.language || !this.account.language.code)
+                this.account.language = this.languages.find((el) => !!el.code.toLowerCase().includes('us'))
+
+            return this.account.language
+        },
+        currencies() {
+            return this.$store.state.application.currencies
+        },
+        current_currency() {
+            // Try to set currency based on language
+            if (!this.account.currency || !this.account.currency.code)
+                this.account.currency = this.currencies.find((el) => el.country && !!el.country.includes(this.account.language.code))
+
+            // If that failed, set to default: USD
+            if (!this.account.currency || !this.account.currency.code)
+                this.account.currency = this.currencies.find((el) => !!el.code.toLowerCase().includes('usd'))
+
+            return this.account.currency
+        },
         account() {
             return this.$store.state.application.account
         },
@@ -287,6 +325,15 @@ export default {
             const { BrowserWindow } = window.specialRequire('electron').remote
             let browserWindow = BrowserWindow.getFocusedWindow()
             browserWindow.minimize()
+        },
+        selectCurrency(currency) {
+            console.log(currency)
+            this.account.currency = currency
+            this.$store.commit('application/updateState')
+        },
+        selectLanguages(lang) {
+            this.account.language = lang
+            this.$store.commit('application/updateState')
         }
     }
 }
