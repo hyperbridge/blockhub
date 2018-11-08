@@ -192,6 +192,9 @@
 <script>
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
     import axios from 'axios'
+    import Vue from 'vue'
+    import HeadingBar from '@/ui/components/heading-bar/simple-colored'
+    import DottedList from '@/ui/components/list/dots'
     import 'swiper/dist/css/swiper.css'
 
     export default {
@@ -204,7 +207,7 @@
             'c-message': (resolve) => require(['@/ui/components/message'], resolve),
             'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic'], resolve),
             'c-slide': swiperSlide,
-            'c-doted-list': (resolve) => require(['@/ui/components/list/dots'], resolve),
+            'c-dotted-list': (resolve) => require(['@/ui/components/list/dots'], resolve),
             'c-heading-bar-color': (resolve) => require(['@/ui/components/heading-bar/simple-colored'], resolve)
         },
         computed: {
@@ -272,11 +275,21 @@
                     for (let i in this.entries) {
                         const entry = this.entries[i]
 
+                        let el = Vue.compile('<div>' + entry.gsx$content.$t + '</div>')
+                        el = new Vue({
+                            components: {
+                                'c-heading-bar-color': HeadingBar,
+                                'c-dotted-list': DottedList
+                            },
+                            render: el.render,
+                            staticRenderFns: el.staticRenderFns
+                        }).$mount()
+
                         this.updates.push({
                             version: entry.gsx$version.$t,
                             title: entry.gsx$title.$t,
                             description: entry.gsx$description.$t,
-                            content: entry.gsx$content.$t //.replace(/\n/g, '<br />')
+                            content: el.$el.innerHTML //.replace(/\n/g, '<br />')
                         })
                     }
                 })
