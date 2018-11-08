@@ -1,9 +1,19 @@
 import { getId, mergeId } from '@/store/utils';
 
+const relations = {
+    assets: {
+        trxs: { messages: 'community' },
+        transactions: { messages: 'community' }
+    },
+    community: {},
+    marketplace: {}
+};
+
 const rootStore = {
     mutations: {
         create(rootState, { id, module, target, data }) {
             const { [module]: state } = rootState;
+            console.log(id, module, target, data)
             rootState[module][target] = { ...state[target], [id]: data };
         },
         update(rootState,  { id, module, target, data }) {
@@ -29,7 +39,8 @@ const rootStore = {
 
             // const newData = await axios.post(`/${target}`, data);
             const id = getId();
-            commit('create', { data, id });
+            console.log('NEW ID', id)
+            commit('create', { ...payload, id, data: { ...data, id }});
             return id;
         },
         update({ commit }, payload) {
@@ -46,16 +57,52 @@ const rootStore = {
             { commit, dispatch, state },
             [prop, data, target, targetId, propModule = 'assets', module = propModule]
         ) {
+            // 'assets/trxs/messages'
+            // const [module, target, prop] = targets.split('/');
+
 
             const newId = await dispatch(
                 'create',
                 { target: prop, data, module: propModule }
             );
 
+            console.log('newId', newId)
+
             const targetData = {
-                [prop]: [...state[target][tragetId][prop], newId]
+                [prop]: [...state[module][target][targetId][prop], newId]
             };
-            commit('update', { target, id: tragetId, data: targetData, module });
+            commit('update', { target, id: targetId, data: targetData, module });
+        },
+        async createGen(
+            { commit, dispatch, state },
+            [targets, data, targetId]
+        ) {
+            const [module, target, prop] = targets.split('/'); /* "assets/transactions/messages" => path, dest, targets? */
+
+            const propModule = (relations[module][target] && relations[module][target][prop]) || module;
+
+            const newId = await dispatch(
+                'create',
+                { target, module: propModule, data }
+            );
+
+            const targetData = {
+                [prop]: [...state[module][target][targetId][prop], newId]
+            };
+            commit('update', { module, target, id: targetId, data: targetData });
+        },
+        deleteGen(
+            { commit, dispatch, state },
+            [targets, id, targetId]
+        ) {
+            const [module, target, prop] = targets.split('/');
+            const propModule = (relations[module][target] && relations[module][target][prop]) || module;
+
+            const targetData = {
+                [prop]: state[module][target][targetId][prop].filter(propId => propId != id)
+            };
+            commit('update', { module, target, id: targetId, data: targetData });
+            dispatch('delete', { id, target: prop, module: propModule });
         },
         deleteGeneric(
             { commit, dispatch, state },
@@ -63,7 +110,7 @@ const rootStore = {
         ) {
 
             const targetData = {
-                [prop]: state[target][targetId][prop].filter(propId => propId != id)
+                [prop]: state[module][target][targetId][prop].filter(propId => propId != id)
             };
             commit('update', { target, id: targetId, data: targetData, module });
             dispatch('delete', { id, target: prop, module: propModule });

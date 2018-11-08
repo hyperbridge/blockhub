@@ -38,6 +38,21 @@
         )">
             deleteSub
         </button> -->
+        <button @click="$store.dispatch(
+            'createGeneric',
+            ['messages', { content: 'New message!', author: 1, id: 21 }, 'trxs', trx.id, 'community', 'assets']
+        )">
+            Dispatch root create
+        </button>
+        <button @click="$store.dispatch(
+            'createGen',
+            ['assets/trxs/messages', { content: 'New message!', author: 1, id: 21 }, trx.id]
+        )">
+            Dispatch root createGen
+        </button>
+        <button @click="$store.dispatch('')">
+            Dispatch root delete
+        </button>
     </div>
 </template>
 
@@ -89,6 +104,9 @@
             }
         },
         computed: {
+            trxRaw() {
+                return this.$store.state.assets.trxs[this.trx.id];
+            },
             userId() {
                 return this.$store.state.application.account.id;
             },

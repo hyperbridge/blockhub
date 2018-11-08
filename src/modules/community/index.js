@@ -88,7 +88,7 @@ const community = {
                 [msg.id]: {
                     ...msg,
                     author: users[msg.author],
-                    timeAgo: moment(msg.createdAt).fromNow()
+                    // timeAgo: moment(msg.createdAt).fromNow()
                 }
             }), {}),
         users: ({ users }, getters, rootState, { ['assets/assets']: assets }) => Object.values(users)
