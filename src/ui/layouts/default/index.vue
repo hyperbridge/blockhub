@@ -62,7 +62,7 @@
             <!-- //END PAGE ASIDE PANEL -->
 
             <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
-                <c-breadcrumb :links="breadcrumbLinksData" ref="breadcrumb" v-if="is_connected" />
+                <c-breadcrumb :links="breadcrumbLinksData" ref="breadcrumb" v-if="is_connected && showBreadcrumbs" />
                 <div class="container-fluid">
                     <slot v-if="is_connected" />
                 </div>
@@ -201,6 +201,11 @@
                 default: true,
                 required: false
             },
+            showBreadcrumbs: {
+                type: Boolean,
+                default: true,
+                required: false
+            },
             headerText: {
                 type: String,
                 default: 'BlockHub',
@@ -311,7 +316,7 @@
                     to: names.reduce((to, name, index) => (index < i + 1) ? to += '/' + name : to, '')
                 }));
             },
-            profile_chooser(){
+            profile_chooser() {
                 return this.$store.state.application.profile_chooser
             }
         },
@@ -319,12 +324,10 @@
             this.user_submitted_connection_message = this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))]
         },
         methods: {
-            onSwipeLeft(){
-                console.log('left swipe')
+            onSwipeLeft() {
                 this.showRightPanel = true
             },
-            onSwipeRight(){
-                console.log('right swipe')
+            onSwipeRight() {
                 this.showLeftPanel = true
             },
             vote() {
@@ -341,15 +344,15 @@
                 this.notifPopup = ntf;
                 this.notifPopup.show_popup = true;
             },
-            scrollSidebarDown(){
+            scrollSidebarDown() {
                 $('#scroll_sidebar').animate({scrollTop: '+=100', duration: '150'});
                 this.checkScrollButton()
             },
-            scrollSidebarUp(){
+            scrollSidebarUp() {
                 $('#scroll_sidebar').animate({scrollTop: '-=500', duration: '150'});
                 this.checkScrollButton()
             },
-            checkScrollButton(){
+            checkScrollButton() {
                 try {
                     if ($('#scroll_sidebar').children().height() > $('#scroll_sidebar').height()) {
                         // Change the scroll direction when it hits the last 10px of the sidebar
