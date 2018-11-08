@@ -13,7 +13,7 @@ const rootStore = {
     mutations: {
         create(rootState, { id, module, target, data }) {
             const { [module]: state } = rootState;
-            console.log(id, module, target, data)
+            console.log('ROOT CREATE HOOK',id, module, target, data)
             rootState[module][target] = { ...state[target], [id]: data };
         },
         update(rootState,  { id, module, target, data }) {
@@ -27,9 +27,13 @@ const rootStore = {
         delete(rootState, { id, module, target }) {
             const { [module]: state } = rootState;
 
-            const { [id]: deleted, ...rest } = state[target][id];
-            rootState[module][target] = rest;
-            // const { [module]: state } = rootState;
+            const shallowCopy = { ...rootState[module][target] };
+            delete shallowCopy[id];
+            rootState[module][target] = shallowCopy;
+
+            /* BUG? */
+            // const { [id]: deleted, ...rest } = rootState[module][target];
+            // console.log('module', module, 'target', target, 'id', id)
         }
     },
     actions: {
@@ -39,7 +43,6 @@ const rootStore = {
 
             // const newData = await axios.post(`/${target}`, data);
             const id = getId();
-            console.log('NEW ID', id)
             commit('create', { ...payload, id, data: { ...data, id }});
             return id;
         },
@@ -55,35 +58,16 @@ const rootStore = {
         },
         async createGeneric(
             { commit, dispatch, state },
-            [prop, data, target, targetId, propModule = 'assets', module = propModule]
+            [targets, targetId, data]
         ) {
-            // 'assets/trxs/messages'
-            // const [module, target, prop] = targets.split('/');
-
-
-            const newId = await dispatch(
-                'create',
-                { target: prop, data, module: propModule }
-            );
-
-            console.log('newId', newId)
-
-            const targetData = {
-                [prop]: [...state[module][target][targetId][prop], newId]
-            };
-            commit('update', { target, id: targetId, data: targetData, module });
-        },
-        async createGen(
-            { commit, dispatch, state },
-            [targets, data, targetId]
-        ) {
-            const [module, target, prop] = targets.split('/'); /* "assets/transactions/messages" => path, dest, targets? */
+            const [module, target, prop] = targets.split('/');
+            /* "assets/transactions/messages" => path, dest, targets? */
 
             const propModule = (relations[module][target] && relations[module][target][prop]) || module;
 
             const newId = await dispatch(
                 'create',
-                { target, module: propModule, data }
+                { target: prop, module: propModule, data }
             );
 
             const targetData = {
@@ -91,9 +75,9 @@ const rootStore = {
             };
             commit('update', { module, target, id: targetId, data: targetData });
         },
-        deleteGen(
+        deleteGeneric(
             { commit, dispatch, state },
-            [targets, id, targetId]
+            [targets, targetId, id]
         ) {
             const [module, target, prop] = targets.split('/');
             const propModule = (relations[module][target] && relations[module][target][prop]) || module;
@@ -103,19 +87,7 @@ const rootStore = {
             };
             commit('update', { module, target, id: targetId, data: targetData });
             dispatch('delete', { id, target: prop, module: propModule });
-        },
-        deleteGeneric(
-            { commit, dispatch, state },
-            [prop, id, target, targetId, propModule = 'assets', module = propModule]
-        ) {
-
-            const targetData = {
-                [prop]: state[module][target][targetId][prop].filter(propId => propId != id)
-            };
-            commit('update', { target, id: targetId, data: targetData, module });
-            dispatch('delete', { id, target: prop, module: propModule });
-        },
-
+        }
     }
 };
 

@@ -40,18 +40,15 @@
         </button> -->
         <button @click="$store.dispatch(
             'createGeneric',
-            ['messages', { content: 'New message!', author: 1, id: 21 }, 'trxs', trx.id, 'community', 'assets']
+            ['assets/trxs/messages', trx.id, { content: 'New message!', author: 1, id: 21 }]
         )">
-            Dispatch root create
+            Dispatch root createGeneric
         </button>
         <button @click="$store.dispatch(
-            'createGen',
-            ['assets/trxs/messages', { content: 'New message!', author: 1, id: 21 }, trx.id]
+            'deleteGeneric',
+            ['assets/trxs/messages', trx.id, 8]
         )">
-            Dispatch root createGen
-        </button>
-        <button @click="$store.dispatch('')">
-            Dispatch root delete
+            Dispatch root deleteGeneric
         </button>
     </div>
 </template>
@@ -72,11 +69,11 @@
         methods: {
             async sendMessage() {
                 if (this.newMessage && Date.now() / 1000 - this.lastMsg < 10) {
-                    const { lastMessageId } = this;
+                    const { lastMessageId: id } = this;
                     const { content } = this.trx.messages.find(msg => msg.id === lastMessageId);
                     this.$store.dispatch(
                         'community/update',
-                        { id: lastMessageId, data: { content: `${content} ${this.newMessage}` }}
+                        { id, data: { content: `${content} ${this.newMessage}` }}
                     );
                     this.cleanUp();
                 }
