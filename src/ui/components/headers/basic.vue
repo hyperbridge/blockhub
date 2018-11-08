@@ -85,7 +85,7 @@
                                 <span class="text">Store</span>
                             </a>
                         </li>
-                        <li v-if="signed_in">
+                        <li v-if="signed_in" v-darklaunch="'CHEST'">
                             <a href="/#/chest">
                                 <span class="icon fa fa-box-open"></span>
                                 <span class="text">Chest</span>
@@ -98,7 +98,7 @@
                                  <!-- podcast  global hand-holding-heart -->
                             </a>
                         </li>
-                        <li v-if="signed_in">
+                        <li v-if="signed_in" v-darklaunch="'COMMUNITY'">
                             <a href="/#/community">
                                 <span class="icon fa fa-globe-americas"></span>
                                 <span class="text">Community</span>
@@ -190,17 +190,17 @@
                                 <span class="text">Sign In</span>
                             </a>
                         </li>
-                        <li v-if="!is_locked">
-                            <a href="/#/help">
-                                <span class="icon fa fa-question-circle"></span>
-                                <span class="text">Help</span>
-                            </a>
-                        </li>
                         <li v-if="!is_locked && languages" class="ml-3">
                             <c-language-dropdown :current_language="current_language" :languages="languages" @change="selectLanguages" />
                         </li>
                         <li v-if="!is_locked && currencies" class="ml-2">
                             <c-currency-dropdown :current_currency="current_currency" :currencies="currencies" @change="selectCurrency" />
+                        </li>
+                        <li v-if="!is_locked">
+                            <a href="/#/help">
+                                <span class="icon fa fa-question-circle"></span>
+                                <span class="text">Help</span>
+                            </a>
                         </li>
                     </ul>
                 </nav>

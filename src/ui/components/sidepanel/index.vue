@@ -12,7 +12,7 @@
                                 <i class="fa fa-bell"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('messages')"
-                                        style="box-shadow: none" v-if="$store.state.application.signed_in">
+                                        style="box-shadow: none" v-if="$store.state.application.signed_in" v-darklaunch="'MESSAGES'">
                                 <i class="fa fa-envelope"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('updates')"
@@ -35,7 +35,7 @@
 
                     </div>
                 </c-slide>
-                <c-slide v-if="$store.state.application.signed_in">
+                <c-slide v-if="$store.state.application.signed_in" v-darklaunch="'MESSAGES'">
                     <div class="item">
                         <h3>MESSAGES</h3>
 
@@ -79,7 +79,7 @@
                                 <i class="fa fa-bell"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('messages')"
-                                        style="box-shadow: none" v-if="$store.state.application.signed_in">
+                                        style="box-shadow: none" v-if="$store.state.application.signed_in" v-darklaunch="'MESSAGES'">
                                 <i class="fa fa-envelope"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('updates')" class="active"
@@ -92,14 +92,14 @@
                             </c-button>
                         </div>
 
-                        <div class="navigation">
+                        <div class="navigation">{{ updates.length }}
                             <ul>
                                 <template v-for="(update, index) in updates">
-                                    <li class="mb-4" @click="showUpdateModal(update)" style="cursor: pointer">
-                                        <div class="h5 font-weight-bold mb-1 pb-0":key="`title-${index}`">
+                                    <li class="mb-4" @click="showUpdateModal(update)" style="cursor: pointer" :key="index">
+                                        <div class="h5 font-weight-bold mb-1 pb-0">
                                             {{ update.title }}
                                         </div>
-                                        <div class="text" :key="`info-${index}`">
+                                        <div class="text">
                                             {{ update.description }}
                                         </div>
                                     </li>
@@ -125,7 +125,7 @@
                                 <i class="fa fa-bell"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('messages')"
-                                        style="box-shadow: none" v-if="$store.state.application.signed_in">
+                                        style="box-shadow: none" v-if="$store.state.application.signed_in" v-darklaunch="'MESSAGES'">
                                 <i class="fa fa-envelope"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('updates')"
