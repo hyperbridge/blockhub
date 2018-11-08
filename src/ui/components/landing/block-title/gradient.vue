@@ -46,6 +46,7 @@
 <style lang="scss" scoped>
     .landing__block-title-gradient{
         margin-bottom: 15px;
+        filter: drop-shadow(0 0px 15px #30314c);
         &.left-align{
             padding: 4px 40px 4px 10px;
             border-radius: 2px 0 0 2px;

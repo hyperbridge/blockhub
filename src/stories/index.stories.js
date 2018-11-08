@@ -4456,13 +4456,27 @@ storiesOf('Landing Page', module)
             </div>
             `
     }))
-    .add('default', () => ({
+    .add('divider', () => ({
         components: {
-            'c-landing': Landing
+            'c-landing-divider': (resolve) => require(['@/ui/components/landing/block-content/divider'], resolve),
         },
         template: `
-            <c-landing />
+        <div class="p-5">
+            <c-landing-divider />
+        </div>
             `
+    }))
+
+
+storiesOf('Token Sale Box', module)
+    .add('default', () => ({
+        components: {
+            'c-toke-sale': (resolve) => require(['@/ui/components/token-sale-box'], resolve),
+        },
+        template: `
+        <div class="p-5" style="width: 1200px;">
+            <c-toke-sale />
+        </div>`
     }))
 
 
