@@ -4,7 +4,7 @@
             <div class="row" style="">
                 <div class="col-12 col-md-6 mb-4">
                     <h2>What is HBX?</h2>
-                    <p>
+                    <div>
                         Built by <c-button status="underline" size="md" href="https://hyperbridge.org">Hyperbridge</c-button>, HBX tokens are used to fuel the decentralized protocols underlying BlockHub. 
                         BlockHub is the first economy built on these protocols, designed to let players and game developers productively interact in mutually beneficial ways. 
                         HBX tokens can be purchased or received by:
@@ -17,12 +17,12 @@
                             <li>Product testing</li>
                             <li>Polls/Questionnaires</li>
                         </ul>
-                    </p>
+                    </div>
 
                 </div>
                 <div class="col-12 col-md-6">
                     <h2>What can HBX be used for?</h2>
-                    <p>
+                    <div>
                         <ul>
                             <li>Contribute to crowdfund projects</li>
                             <li>Purchase products within the store</li>
@@ -32,7 +32,7 @@
                         </ul>
                         <br />
                         For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees by 50%. To learn more, please see the <c-button status="underline" size="md" href="https://hyperbridge.org/whitepaper">whitepaper</c-button>.
-                    </p>
+                    </div>
                 </div>
             </div>
 
@@ -94,26 +94,29 @@
                 <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked && desktop_mode">
                     <c-block title="Payment Profile" class="margin-bottom-30">
                         <div class="profile-picker">
-                            <div
-                                class="profile-picker__profile"
-                                v-for="identity in identities"
-                                :key="identity.id"
-                                v-if="identities && identities.length"
-                            >
-                                <c-user-card
-                                    :user="identity"
-                                    :previewMode="true"
-                                    :class="{ 'default': chosenIdentity && identity.id == chosenIdentity.id }"
-                                />
-                                <div class="profile__action">
-                                    <c-button
-                                        status="info"
-                                        icon="check"
-                                        @click="chooseIdentity(identity)"
-                                        v-if="!chosenIdentity || identity.id != chosenIdentity.id"
-                                    >Choose</c-button>
-                                </div>
-                            </div>
+                            <c-swiper :options="profileOptions">
+                                <c-slide v-for="identity in identities">
+                                    <div
+                                        class="profile-picker__profile w-100 m-0 padding-15 pb-0"
+                                        :key="identity.id"
+                                        v-if="identities && identities.length"
+                                    >
+                                        <c-user-card
+                                            :user="identity"
+                                            :previewMode="true"
+                                            :class="{ 'default': chosenIdentity && identity.id == chosenIdentity.id }"
+                                        />
+                                        <div class="profile__action">
+                                            <c-button
+                                                status="info"
+                                                icon="check"
+                                                @click="chooseIdentity(identity)"
+                                                v-if="!chosenIdentity || identity.id != chosenIdentity.id"
+                                            >Choose</c-button>
+                                        </div>
+                                    </div>
+                                </c-slide>
+                            </c-swiper>
                         </div>
                     </c-block>
                 </div>
@@ -392,12 +395,12 @@
                     </div>
 
                     <div class="col-8 offset-2">
-                        <p class="errors" v-if="errors.length">
+                        <div class="errors" v-if="errors.length">
                             <strong>Please correct the following error(s):</strong>
                             <ul>
                                 <li v-for="error in errors" :key="error">{{ error }}</li>
                             </ul>
-                        </p>
+                        </div>
                         
                         <br /><br />
                         <c-button status="success" class="justify-content-center" icon_hide size="xl" @click="proceed" :class="{'disabled': !canContinue }">
@@ -465,6 +468,7 @@
 import axios from 'axios'
 import * as Bridge from '@/framework/desktop-bridge'
 import { setInterval } from 'core-js';
+import { swiper, swiperSlide } from 'vue-awesome-swiper';
 
 export default {
     components: {
@@ -475,7 +479,9 @@ export default {
         'c-tab': (resolve) => require(['@/ui/components/tab/tab'], resolve),
         'c-carousel-3d': (resolve) => require(['@/ui/components/carousel-3d'], resolve),
         'c-asset-store-card': (resolve) => require(['@/ui/components/asset/store-card'], resolve),
-        'c-welcome-box': (resolve) => require(['@/ui/components/welcome-box'], resolve)
+        'c-welcome-box': (resolve) => require(['@/ui/components/welcome-box'], resolve),
+        'c-swiper': swiper,
+        'c-slide': swiperSlide,
     },
     data() {
         const checkEthereumConnection = () => {
@@ -577,7 +583,15 @@ export default {
             purchaseSuccessful: false,
             purchaseError: null,
             transactionHash: null,
-            errors: []
+            errors: [],
+            profileOptions:{
+                slidesPerView: 1,
+                spaceBetween: 0,
+                navigation: {
+                    nextEl: '.profile-picker .swiper-button-next',
+                    prevEl: '.profile-picker .swiper-button-prev'
+                },
+            }
         }
 
         return result
@@ -722,41 +736,20 @@ export default {
     .profile-picker {
         display: flex;
         flex-wrap: wrap;
-        margin-bottom: 20px;
+        margin: -10px -10px -5px;
         align-items: center;
         justify-content: center;
     }
 
     .profile-picker__profile {
-        position: relative;
-        margin: 10px 2%;
-        width: 46%;
-        &:hover .profile__action, &.edit .profile__action {
-            display: flex;
-        }
-        >.default {
-            $defColor: #43C981;
-            border-color: $defColor !important;
-            &:before {
-                content: "";
-                width: 26px;
-                position: absolute;
-                border-radius: 5px 0 0 5px;
-                left: -22px;
-                bottom: -1px;
-                height: calc(100% + 2px);
-                background: $defColor;
-            }
+        &.default {
             &:after {
-                font-family: 'Font Awesome 5 Free', 'Barlow', sans-serif;
-                content: "CHOSEN \F14A";
-                color: #1C2032;
-                font-weight: bold;
-                font-size: 16px;
-                position: absolute;
-                transform: rotate(-90deg);
-                top: 40px;
                 left: -50px;
+            }
+        }
+        &:hover{
+            .profile__action{
+                display: flex;
             }
         }
     }
@@ -765,8 +758,9 @@ export default {
         display: none;
         position: absolute;
         justify-content: center;
-        bottom: -20px;
-        width: 100%;
+        bottom: 0px;
+        left: 0;
+        right: 0;
         height: 26px;
         .c-btn {
             margin: 0 5px;

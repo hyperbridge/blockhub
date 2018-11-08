@@ -177,12 +177,13 @@
         &.default {
             $defColor: #43C981;
             border-color: $defColor !important;
+            padding-left: 38px;
             &:before {
                 content: "";
                 width: 26px;
                 position: absolute;
                 border-radius: 5px 0 0 5px;
-                left: -22px;
+                left: 0px;
                 bottom: -1px;
                 height: calc(100% + 2px);
                 background: $defColor;
@@ -196,7 +197,7 @@
                 position: absolute;
                 transform: rotate(-90deg);
                 top: 40px;
-                left: -50px;
+                left: -30px;
             }
         }
     }
