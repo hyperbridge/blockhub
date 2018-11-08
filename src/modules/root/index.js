@@ -6,7 +6,7 @@ const rootStore = {
     mutations: {
         create(rootState, { id, module, target, data }) {
             const { [module]: state } = rootState;
-            console.log('ROOT CREATE HOOK',id, module, target, data)
+            console.log('ROOT CREATE',id, module, target, data)
             rootState[module][target] = { ...state[target], [id]: data };
         },
         update(rootState,  { id, module, target, data }) {
