@@ -56,7 +56,7 @@
                     <p><span class="fa fa-check"></span> Publish</p>
                 </button>
                 <button class="exit-btn btn btn-secondary btn-block btn--icon btn--icon-left" @click="clickExit()" v-if="!is_viewing">
-                    <p><span class="fa fa-eye"></span> Preview</p>
+                    <p><span class="fa fa-arrow-alt-circle-left"></span> Back</p>
                 </button>
             </div>
             <nav class="app-header__nav hide-on-mobile" v-if="!signed_in || (signed_in && is_viewing)">

@@ -44,7 +44,7 @@
                                         <c-button @click="toggleRawData(protocol.id)" v-if="!protocolData[protocol.id].visible">Raw</c-button>
                                     </td>
                                 </tr>
-                                <tr v-for="(contract) in protocol.contracts" :key="contract.name">
+                                <tr v-for="(contract) in protocol.contracts" :key="`${protocol.id}-${contract.name}`">
                                     <td>
                                         <label class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" v-model="selected" :value="`${protocol.id}.${contract.name}`" number />
