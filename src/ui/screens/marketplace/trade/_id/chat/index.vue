@@ -1,8 +1,12 @@
 <template>
     <div>
-        <ul class="reset-list chat">
+        <ul class="reset-list chat" ref="chatList">
             <c-chat-message
                 v-for="(msg, index) in trx.messages"
+                @delete="$store.dispatch(
+                    'assets/deleteTransactionMessage',
+                    { id: $event, trxId: trx.id }
+                )"
                 :key="index"
                 :message="msg"
                 :userId="userId"
@@ -22,6 +26,18 @@
                 <c-icon name="paper-plane"/>
             </button>
         </div>
+        <!-- <button @click="$store.dispatch(
+            'assets/deleteSubitem',
+            { id: 1, target: 'trxs', prop: 'messages' }
+        )">
+            deleteSubitem
+        </button>
+        <button @click="$store.dispatch(
+            'assets/deleteGeneric',
+            ['messages', 1, 'trxs', trx.id, 'community']
+        )">
+            deleteSub
+        </button> -->
     </div>
 </template>
 
@@ -33,21 +49,43 @@
         },
         data() {
             return {
-                newMessage: ''
+                newMessage: '',
+                lastMessageId: null,
+                lastMsg: null
             }
         },
         methods: {
-            dispatch(type, payload) {
-                return;
-                return this.$store.dispatch(type, payload);
-            },
-            // ['assets/update']: this.$store.dispatch('assets/update').bind(this),
-            sendMessage() {
-                const { id, messages } = this.trx;
+            async sendMessage() {
+                if (this.newMessage && Date.now() / 1000 - this.lastMsg < 10) {
+                    const { lastMessageId } = this;
+                    const { content } = this.trx.messages.find(msg => msg.id === lastMessageId);
+                    this.$store.dispatch(
+                        'community/update',
+                        { id: lastMessageId, data: { content: `${content} ${this.newMessage}` }}
+                    );
+                    this.cleanUp();
+                }
+                else if (this.newMessage) {
+                    const { id, messages } = this.trx;
+                    const payload = {
+                        message: this.newMessage,
+                        trxId: id
+                    };
 
-                // this.$store.dispatch('assets/update', { data: {} })
-                this.$store.dispatch('community/createMessage', this.newMessage);
+                    this.lastMessageId = await this.$store.dispatch(
+                        'assets/createTransactionMessage',
+                        payload
+                    );
+                    this.cleanUp();
+                }
+            },
+            async cleanUp() {
                 this.newMessage = '';
+                this.lastMsg = Date.now() / 1000;
+
+                const { chatList } = this.$refs;
+                await this.$nextTick();
+                chatList.scrollTop = chatList.scrollHeight;
             }
         },
         computed: {
@@ -63,8 +101,8 @@
 
 <style lang="scss" scoped>
     .chat {
-        max-height: 600px;
-        overflow-x: scroll;
+        max-height: 450px;
+        overflow-y: scroll;
         padding: 10px;
     }
     .chat-form {

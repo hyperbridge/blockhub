@@ -178,11 +178,61 @@ const assets = {
             commit('create', { id: newId, prop: 'auctions', data: payload });
             commit('update', {
                 id: offerId,
-                prop: 'offers',
+                target: 'offers',
                 data: { auctions: [...state.offers[offerId].auctions, newId] }
             });
         },
+        async createTransactionMessage({ commit, dispatch, state }, { trxId, message }) {
+            const id = await dispatch('community/createMessage', message, { root: true });
 
+            const data = { messages: [...state.trxs[trxId].messages, id] };
+
+            await dispatch('update', { target: 'trxs', data, id: trxId });
+            return id;
+        },
+        deleteTransactionMessage({ commit, dispatch, state }, { id, trxId }) {
+            console.log(state.trxs[trxId].messages)
+            const data = {
+                messages: state.trxs[trxId].messages.filter(msgId => msgId !== id)
+            };
+            console.log(data)
+            commit('update', { id: trxId, target: 'trxs', data });
+            dispatch('community/delete', { id }, { root: true });
+        },
+        deleteSubitem({ commit, dispatch, state }, { id, tId, target, prop }) {
+            const data = {
+                [prop]: state[target][tId][prop].filter(propId => propId != id)
+            };
+        },
+        deleteGeneric(
+            { commit, dispatch, state },
+            [prop, id, target, targetId, propModule, module = 'assets']
+        ) {
+            /* Generic action prototype for universal actions on target's prop array [v2] */
+            // console.log(prop, id, target, targetId, module, propModule)
+            // console.log(state[target])
+
+            propModule = propModule || module;
+            const targetData = {
+                [prop]: state[target][targetId][prop].filter(propId => propId != id)
+            };
+            commit('update', { target, id: targetId, data: targetData });
+            dispatch(`${propModule}/delete`, { id, target: prop }, { root: true });
+
+        },
+        async createGeneric(
+            { commit, dispatch, state },
+            [prop, data, target, targetId, propModule = 'assets', module = propModule]
+        ) {
+
+            const newId = await dispatch(`${propModule}/create`, { target: prop, data }, { root: true });
+
+            const targetData = {
+                [prop]: [...state[target][tragetId][prop], newId]
+            };
+
+            commit('update', { target, id: tragetId, data: targetData });
+        },
         evolveNavigator({ commit }, payload) {
             const id = rand();
             commit('evolveNavigator', { ...payload, id });
@@ -251,17 +301,6 @@ const assets = {
                     messages: trx.messages.map(id => messages[id])
                 }
             }), {}),
-        // inventoryGrouped: user.inventory.reduce((grouped, id) => {
-        //     return {};
-
-        //     // return {
-        //     //     ...grouped,
-        //     //     [name]: [
-        //     //         ...grouped[name],
-        //     //         assets[id]
-        //     //     ]
-        //     // };
-        // }, {})
         transactionsArray: (state, { transactions }) => Object.values(transactions),
         inventoryAssets: (state, { assetsArray }) => assetsArray
             .filter(asset => !asset.for_sale),
