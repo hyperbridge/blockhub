@@ -92,7 +92,7 @@
                             </c-button>
                         </div>
 
-                        <div class="navigation">{{ updates.length }}
+                        <div class="navigation">
                             <ul>
                                 <template v-for="(update, index) in updates">
                                     <li class="mb-4" @click="showUpdateModal(update)" style="cursor: pointer" :key="index">
