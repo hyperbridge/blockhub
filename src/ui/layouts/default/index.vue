@@ -87,8 +87,8 @@
             <c-claim-popup :activated="claim_modal_active" @close="closePopup" ref="claim_modal_active"></c-claim-popup>
 
             <c-basic-popup
-                :activated="$store.state.application.editor_mode && $store.state.application.account.settings.client.hide_editor_welcome_modal"
-                @close="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_editor_welcome_modal', true)"
+                :activated="$store.state.application.editor_mode === 'editing' && !$store.state.application.account.settings.client['hide_editor_welcome_modal/' + $router.currentRoute.fullPath]"
+                @close="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_editor_welcome_modal/' + $router.currentRoute.fullPath, true)"
             >
                 <div class="h4" slot="header">Welcome to the editor</div>
                 <template slot="body">
@@ -104,6 +104,28 @@
                 </template>
                 <p slot="footer">
                     Need help? <c-button status="plain" href="/#/help">Check the Help Center</c-button>
+                </p>
+            </c-basic-popup>
+
+
+            <c-basic-popup
+                :activated="$store.state.application.active_modal === 'report'"
+                @close="$store.state.application.active_modal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">Report</div>
+                <template slot="body">
+                    <p>
+                        Our goal are BlockHub is to be hyper-focused on our community needs. That's why we've created this handy way for you to give us feedback. Simply hold ALT and click somewhere. It will send us the location of what you're looking at. Report a problem or suggest something at the click of a button! So, what's up?
+                    </p>
+                    <br />
+                    <div class="form-group">
+                        <input type="text" class="form-control" ref="reportText" placeholder="Report..." @keyup.enter="sendReport()" v-focus />
+                    </div>
+                    <br />
+                    <p><em>Hit ENTER when done</em></p>
+                </template>
+                <p slot="footer">
                 </p>
             </c-basic-popup>
 
@@ -263,6 +285,7 @@
                 mobileMode: false,
                 bluredBg: false,
                 voteCasted: false,
+                reportCoords: null,
                 breadcrumbLinksData: this.breadcrumbLinks
             }
         },
@@ -331,8 +354,42 @@
                 this.showLeftPanel = true
             },
             vote() {
-                this.$store.commit('application/entry', { key: 'editable_page', value: window.location.hash })
+                this.$store.commit('application/entry', { key: 'editable_page', value: window.location.hash, user: this.$store.state.application.account.public_address })
                 this.voteCasted = true
+            },
+            sendReport() {
+                if (this.reportCoords) {
+                    const getPathTo = (element) => {
+                        if (element.tagName == 'HTML')
+                            return '/html[1]';
+                        if (element===document.body)
+                            return '/html[1]/body[1]';
+
+                        var ix= 0;
+                        var siblings= element.parentNode.childNodes;
+                        for (var i= 0; i<siblings.length; i++) {
+                            var sibling= siblings[i];
+                            if (sibling===element)
+                                return getPathTo(element.parentNode)+'/'+element.tagName.toLowerCase()+'['+(ix+1)+']';
+                            if (sibling.nodeType===1 && sibling.tagName===element.tagName)
+                                ix++;
+                        }
+                    }
+
+                    const cmd = {
+                        key: 'report',
+                        data: {
+                            coords: { x: this.reportCoords.x, y: this.reportCoords.y },
+                            path: this.$router.currentRoute.fullPath,
+                            element: getPathTo(document.elementFromPoint(this.reportCoords.x, this.reportCoords.y)),
+                            message: this.$refs.reportText.value
+                        }
+                    }
+
+                    this.$store.commit('application/entry', { key: 'report', value: JSON.stringify(cmd), user: this.$store.state.application.account.public_address })
+                }
+
+                this.$store.commit('application/activateModal', null)
             },
             closePopup() {
                 this.$store.state.application.active_modal = null
@@ -395,7 +452,7 @@
                     // this.showLeftPanel = false;
             }
         },
-        created(){
+        created() {
             window.addEventListener('resize', this.handleResize())
             this.handleResize();
         },
@@ -439,6 +496,31 @@
                 symbolPosition: 'front',
                 symbolSpacing: true
             })
+
+            window.onmousemove = function (e) {
+                if (e.altKey) {
+                    document.body.style.cursor = 'crosshair'
+                } else {
+                    document.body.style.cursor = 'default'
+                }
+            }
+
+            $(document).on('click', (e) => {
+                if (e.altKey) {
+                    e.preventDefault();
+
+                    this.reportCoords = {
+                        x: e.clientX,
+                        y: e.clientY
+                    }
+
+                    this.$store.state.application.active_modal = 'report'
+
+                    return false;
+                }
+
+                return true;
+            });
         },
         watch: {
             '$route'() {
