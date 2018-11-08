@@ -6,10 +6,19 @@ const rootStore = {
             const { [module]: state } = rootState;
             rootState[module][target] = { ...state[target], [id]: data };
         },
-        update(state,  { id, module, target }) {
+        update(rootState,  { id, module, target, data }) {
+            const { [module]: state } = rootState;
+            rootState[module][target][id] = {
+                ...rootState[module][target][id],
+                ...data
+            };
             // const { [module]: state } = rootState;
         },
-        delete(state, { id, module, target }) {
+        delete(rootState, { id, module, target }) {
+            const { [module]: state } = rootState;
+
+            const { [id]: deleted, ...rest } = state[target][id];
+            rootState[module][target] = rest;
             // const { [module]: state } = rootState;
         }
     },
@@ -21,13 +30,45 @@ const rootStore = {
             // const newData = await axios.post(`/${target}`, data);
             const id = getId();
             commit('create', { data, id });
+            return id;
         },
-        update() {
-
+        update({ commit }, payload) {
+            const { id, target, data } = payload;
+            // await axios.patch(`/${target}/${id}`, data);
+            commit('update', payload);
         },
-        delete() {
+        delete({ commit }, payload) {
+            const { id, target } = payload;
+            // await axios.delete(`/${target}/${id}`);
+            commit('delete', payload);
+        },
+        async createGeneric(
+            { commit, dispatch, state },
+            [prop, data, target, targetId, propModule = 'assets', module = propModule]
+        ) {
 
-        }
+            const newId = await dispatch(
+                'create',
+                { target: prop, data, module: propModule }
+            );
+
+            const targetData = {
+                [prop]: [...state[target][tragetId][prop], newId]
+            };
+            commit('update', { target, id: tragetId, data: targetData, module });
+        },
+        deleteGeneric(
+            { commit, dispatch, state },
+            [prop, id, target, targetId, propModule = 'assets', module = propModule]
+        ) {
+
+            const targetData = {
+                [prop]: state[target][targetId][prop].filter(propId => propId != id)
+            };
+            commit('update', { target, id: targetId, data: targetData, module });
+            dispatch('delete', { id, target: prop, module: propModule });
+        },
+
     }
 };
 
