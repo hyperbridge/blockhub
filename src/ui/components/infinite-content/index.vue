@@ -13,12 +13,12 @@
                         <div class="frontpage-product__footer">
                             <div class="price-list">
                                 <div class="price old_price" v-if="item.data.old_price">
-                                    {{ item.data.old_price }}
-                                    <span>usd</span>
+                                    {{ item.data.old_price | convertCurrency }}
+                                    <!--<span>usd</span>-->
                                 </div>
                                 <div class="price">
-                                    {{ item.data.price }}
-                                    <span>usd</span>
+                                    {{ item.data.price | convertCurrency }}
+                                    <!--<span>usd</span>-->
                                 </div>
                             </div>
                             <c-button status="success">
@@ -241,8 +241,7 @@
                             <c-assets-list
                                 :items="assets"
                                 itemInRow="2"
-                                v-if="assets.length"
-                            />
+                                v-if="assets.length"/>
 
                             <p v-if="!assets.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
 

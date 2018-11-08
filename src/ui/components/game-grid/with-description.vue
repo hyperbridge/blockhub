@@ -10,7 +10,7 @@
         >
             <div class="img">
                 <div v-if="item.price && showPrice" class="price" :class="['price-position-' + pricePosition]">
-                    <strong>{{ item.price }}</strong> USD
+                    <strong>{{ item.price | convertCurrency }}</strong>
                 </div>
                 <a :href="`/#/product/${item.id}`">
                     <c-img :src="item.images.medium_tile" />

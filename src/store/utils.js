@@ -11,3 +11,9 @@ export const skip = (object, props) => {
     }
     return copy;
 };
+
+export const getId = () => Math.floor(Math.random() * 1000);
+
+export const assignId = (id, object) => ({ ...object, data: { ...object.data, id }, id });
+
+export const mergeId = (id, object) => ({ ...object, data: { ...object.data, id }, id });

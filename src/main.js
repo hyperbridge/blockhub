@@ -3,19 +3,20 @@
 import Vue from 'vue'
 import moment from 'moment'
 import Snotify, { SnotifyPosition } from 'vue-snotify'
+import { Picker, Emoji } from 'emoji-mart-vue'
+import VueCurrencyFilter from 'vue-currency-filter'
+import VueNumerals from 'vue-numerals'
 import app from './app'
 import router from './router'
 import store, { initializer } from './store'
-import './filters';
-import './components';
-import './directives';
-import './css/styles.scss';
-import './prototypes';
 import migrations from './db/migrations'
-import {Picker, Emoji} from 'emoji-mart-vue'
+import './filters'
+import './components'
+import './directives'
+import './prototypes'
 
+import './css/styles.scss'
 
-import VueNumerals from 'vue-numerals'
 
 const debounce = require('debounce')
 
@@ -30,6 +31,15 @@ Vue.use(Snotify, {
 Vue.use(VueNumerals);
 Vue.component('picker', Picker)
 Vue.component('emoji', Emoji)
+Vue.use(VueCurrencyFilter,
+    {
+        symbol : '$',
+        thousandsSeparator: '.',
+        fractionCount: 2,
+        fractionSeparator: ',',
+        symbolPosition: 'front',
+        symbolSpacing: true
+    })
 
 
 const data = {

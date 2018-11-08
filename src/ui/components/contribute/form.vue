@@ -3,7 +3,7 @@
         <div class="input-group mb-4" :class="[{ 'active' : activeForm }, { 'has-error' : error }]">
             <div class="input-group-prepend">
                 <span class="input-group-text">
-                    $
+                    {{ currency }}
                 </span>
             </div>
             <input type="text" class="form-control" ref="input" placeholder="0.00" v-model="mutableValue" />

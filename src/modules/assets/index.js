@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import moment from 'moment';
-import { extract, skip } from '@/store/utils';
+import { extract, skip, getId, assignId } from '@/store/utils';
 
 import transactions from '@/db/seed/asset-transactions';
 import trxsData from '@/db/seed/asset-transactions.json';
@@ -9,8 +9,7 @@ import assetsData from '@/db/seed/assets';
 import collectionsData from '@/db/seed/collections';
 
 
-const rand = () => Math.floor(Math.random() * 100);
-const assignId = (id, object) => ({ ...object, data: { ...object.data, id }, id });
+const rand = () => Math.floor(Math.random() * 1000);
 
 const assets = {
     namespaced: true,
@@ -58,7 +57,13 @@ const assets = {
         users: usersData.reduce((users, user) => ({
             ...users,
             [user.id]: user
-        }), {})
+        }), {}),
+        navigator: {
+            1: { id: 1, assetId: 1, evolvesTo: [2, 3], isRoot: true },
+            2: { id: 2, assetId: 2, evolvesTo: [4]},
+            3: { id: 3, assetId: 3, evolvesTo: []},
+            4: { id: 4, assetId: 4, evolvesTo: []}
+        }
     },
     mutations: {
         addAsset(state, { prop = 'assets', data }) {
@@ -71,8 +76,8 @@ const assets = {
             // Payload could be written in format => { 'id_28313': { ...payload data } }
             state[prop][id] = { ...state[prop][id], ...data };
         },
-        update(state, { prop = 'assets', id, data }) {
-            state[prop][id] = { ...state[prop][id], ...data };
+        update(state, { prop = 'assets', target = prop, id, data }) {
+            state[target][id] = { ...state[target][id], ...data };
         },
         updatev2(state, payload) {
             const [prop, id] = Object.keys(payload)[0].split('_');
@@ -81,6 +86,13 @@ const assets = {
         delete(state, { prop = 'assets', id }) {
             const { [id]: value, ...values } = state[prop];
             state[prop] = values;
+        },
+        deleteMany(state, { prop = 'assets', ids }) {
+            const copy = { ...state[prop] };
+            for (let id of ids) {
+                delete copy[id];
+            }
+            state[prop] = copy;
         },
         deleteAsset(state, { prop = 'assets', id }) {
             // delete state[prop][id];
@@ -121,6 +133,25 @@ const assets = {
             const { tradeId, target, assetId } = payload;
             // const assetKey = state.transactions[]
             state.transactions[transactionKey][target].selling.splice(assetKey, 1);
+        },
+        evolveNavigator(state, { id, evolveId, assetId, isRoot = false }) {
+            const { navigator } = state;
+            state.navigator = {
+                ...navigator,
+                [evolveId]: {
+                    ...navigator[evolveId],
+                    evolvesTo: [...navigator[evolveId].evolvesTo, id]
+                },
+                [id]: { id, assetId, evolvesTo: [], isRoot }
+            };
+        },
+        devolveNavigator(state, { id: itemId, parentId }) {
+
+            const navTree = state.navigator[parentId];
+            state.navigator[parentId] = {
+                ...navTree,
+                evolvesTo: navTree.evolvesTo.filter(id => id !== itemId)
+            };
         }
     },
     actions: {
@@ -129,7 +160,8 @@ const assets = {
             commit('create', { ...payload, id, data: { ...payload.data, id }});
         },
         update({ commit }, payload) {
-            // async call
+            const { prop, target = prop || 'messages', data, id } = payload;
+            // await axios.post(`/${target}/${id}`, data);
             commit('update', payload);
         },
         createFilter({ commit }, payload) {
@@ -146,10 +178,84 @@ const assets = {
             commit('create', { id: newId, prop: 'auctions', data: payload });
             commit('update', {
                 id: offerId,
-                prop: 'offers',
+                target: 'offers',
                 data: { auctions: [...state.offers[offerId].auctions, newId] }
             });
-        }
+        },
+        async createTransactionMessage({ commit, dispatch, state }, { trxId, message }) {
+            const id = await dispatch('community/createMessage', message, { root: true });
+
+            const data = { messages: [...state.trxs[trxId].messages, id] };
+
+            await dispatch('update', { target: 'trxs', data, id: trxId });
+            return id;
+        },
+        deleteTransactionMessage({ commit, dispatch, state }, { id, trxId }) {
+            console.log(state.trxs[trxId].messages)
+            const data = {
+                messages: state.trxs[trxId].messages.filter(msgId => msgId !== id)
+            };
+            console.log(data)
+            commit('update', { id: trxId, target: 'trxs', data });
+            dispatch('community/delete', { id }, { root: true });
+        },
+        deleteSubitem({ commit, dispatch, state }, { id, tId, target, prop }) {
+            const data = {
+                [prop]: state[target][tId][prop].filter(propId => propId != id)
+            };
+        },
+        deleteGeneric(
+            { commit, dispatch, state },
+            [prop, id, target, targetId, propModule, module = 'assets']
+        ) {
+            /* Generic action prototype for universal actions on target's prop array [v2] */
+            // console.log(prop, id, target, targetId, module, propModule)
+            // console.log(state[target])
+
+            propModule = propModule || module;
+            const targetData = {
+                [prop]: state[target][targetId][prop].filter(propId => propId != id)
+            };
+            commit('update', { target, id: targetId, data: targetData });
+            dispatch(`${propModule}/delete`, { id, target: prop }, { root: true });
+
+        },
+        async createGeneric(
+            { commit, dispatch, state },
+            [prop, data, target, targetId, propModule = 'assets', module = propModule]
+        ) {
+
+            const newId = await dispatch(`${propModule}/create`, { target: prop, data }, { root: true });
+
+            const targetData = {
+                [prop]: [...state[target][tragetId][prop], newId]
+            };
+
+            commit('update', { target, id: tragetId, data: targetData });
+        },
+        evolveNavigator({ commit }, payload) {
+            const id = rand();
+            commit('evolveNavigator', { ...payload, id });
+        },
+        devolveNavigator({ state: { navigator }, commit }, { id, parentId }) {
+            const idsToDelete = [];
+
+            const checkId = (id) => {
+                if (navigator[id].evolvesTo.length) {
+                    navigator[id].evolvesTo.forEach(id => {
+                        idsToDelete.push(id);
+                        checkId(id);
+                    });
+                }
+            };
+            checkId(id);
+
+            // async calls
+
+            commit('devolveNavigator', { id, parentId });
+            commit('deleteMany', { prop: 'navigator', ids: [...idsToDelete, id] });
+        },
+
     },
     getters: {
         assets: ({ assets }, { collections: col }, { marketplace: { collections, products }}) => Object.values(assets)
@@ -182,7 +288,7 @@ const assets = {
                     }, {})
                 }
             }), {}),
-        transactions: ({ trxs, assets }, { users }) => Object.values(trxs)
+        transactions: ({ trxs, assets }, { users }, rootState, { ['community/messages']: messages }) => Object.values(trxs)
             .reduce((populated, trx) => ({
                 ...populated,
                 // [trx.id]: trx
@@ -191,20 +297,10 @@ const assets = {
                     you: users[trx.you],
                     contractor: users[trx.contractor],
                     contractorOffer: trx.contractorOffer.map(id => assets[id]),
-                    yourOffer: trx.yourOffer.map(id => assets[id])
+                    yourOffer: trx.yourOffer.map(id => assets[id]),
+                    messages: trx.messages.map(id => messages[id])
                 }
             }), {}),
-        // inventoryGrouped: user.inventory.reduce((grouped, id) => {
-        //     return {};
-
-        //     // return {
-        //     //     ...grouped,
-        //     //     [name]: [
-        //     //         ...grouped[name],
-        //     //         assets[id]
-        //     //     ]
-        //     // };
-        // }, {})
         transactionsArray: (state, { transactions }) => Object.values(transactions),
         inventoryAssets: (state, { assetsArray }) => assetsArray
             .filter(asset => !asset.for_sale),

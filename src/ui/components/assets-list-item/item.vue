@@ -11,8 +11,7 @@
             <h5>{{ item.name }}</h5>
             <slot>
                 <span class="float-left price">
-                    <c-icon name="dollar-sign"/>
-                    {{ item.price.current }}
+                    {{ item.price.current | convertCurrency }}
                 </span>
                 <span class="float-right box">
                     <c-icon name="box"/>

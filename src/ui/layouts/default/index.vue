@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert left-sidebar" style="max-width: 250px" id="page-aside" v-if="showLeftPanel">
                 <!--<transition name="slideLeft" v-if="initialized">-->
@@ -62,7 +62,7 @@
             <!-- //END PAGE ASIDE PANEL -->
 
             <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
-                <c-breadcrumb :links="breadcrumbLinks" ref="breadcrumb" v-if="is_connected" />
+                <c-breadcrumb :links="breadcrumbLinksData" ref="breadcrumb" v-if="is_connected" />
                 <div class="container-fluid">
                     <slot v-if="is_connected" />
                 </div>
@@ -86,7 +86,7 @@
             <c-purchase-popup :activated="purchase_modal_active" @close="closePopup" ref="purchase_modal_active"></c-purchase-popup>
             <c-claim-popup :activated="claim_modal_active" @close="closePopup" ref="claim_modal_active"></c-claim-popup>
 
-            <c-basic-popup 
+            <c-basic-popup
                 :activated="$store.state.application.editor_mode && $store.state.application.account.settings.client.hide_editor_welcome_modal"
                 @close="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_editor_welcome_modal', true)"
             >
@@ -107,16 +107,16 @@
                 </p>
             </c-basic-popup>
 
-            <c-basic-popup 
+            <c-basic-popup
                 :activated="$store.state.application.active_modal === 'propose-idea'"
                 @close="$store.commit('application/activateModal', null)"
             >
                 <div class="h4" slot="header">Propose Idea</div>
                 <template slot="body">
-                    <div v-if="chosenIdentity.curator_id">
+                    <div v-if="chosenIdentity && chosenIdentity.curator_id">
                         <p>Great, you're a curator. <c-button class="underline" href="/#/project/new">Click here to continue</c-button>.</p>
                     </div>
-                    <div v-if="!chosenIdentity.curator_id">
+                    <div v-else>
                         <p>
                             To propose ideas you must sign up for a Curator Profile. Don't worry, the process is simple!
                         </p>
@@ -157,7 +157,7 @@
                     vehicula.
                 </p>
             </c-popup>
-            
+
             <c-cookie-policy v-if="!desktop_mode" />
 
             <c-clock v-if="desktop_mode" />
@@ -166,7 +166,7 @@
         </div>
         <!-- //END PAGE CONTENT -->
 
-        <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
+        <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
 
         <!--<transition name="slideDown">-->
             <c-profile-chooser v-if="profile_chooser && signed_in" />
@@ -208,8 +208,7 @@
             },
             breadcrumbLinks: {
                 type: Array,
-                default: () => ([]),
-                required: false
+                default: () => ([])
             }
         },
         mixins: [debouncer],
@@ -258,7 +257,8 @@
                 slimMode: false,
                 mobileMode: false,
                 bluredBg: false,
-                voteCasted: false
+                voteCasted: false,
+                breadcrumbLinksData: this.breadcrumbLinks
             }
         },
         computed: {
@@ -367,14 +367,14 @@
                 }
             },
             updateBreadcrumbLinks() {
-                if (this.breadcrumbLinks.length === 0) {
+                if (this.breadcrumbLinksData.length === 0) {
                     if (this.$route.meta.breadcrumb) {
-                        this.breadcrumbLinks = this.$route.meta.breadcrumb
+                        this.breadcrumbLinksData = this.$route.meta.breadcrumb
                     } else if (this.$route.meta.breadcrumb === false) {
-                        this.breadcrumbLinks = []
+                        this.breadcrumbLinksData = []
                     } else {
                         if (this.$route.name !== 'Home') {
-                            this.breadcrumbLinks = [
+                            this.breadcrumbLinksData = [
                                 { to: { path: '/' }, title: 'Home' },
                                 { to: { path: this.$route.path }, title: this.$route.name }
                             ]
@@ -421,6 +421,21 @@
             setTimeout(() => {
                 $(this.$refs.poweredBy).fadeOut(400)
             }, 10 * 1000)
+
+            const fractionCountMap = {
+                'BTC': 6,
+                'ETH': 6,
+                'DAI': 2
+            }
+
+            this.$CurrencyFilter.setConfig({
+                symbol: this.$store.state.application.account.currency.symbol,
+                thousandsSeparator: ',',
+                fractionCount: fractionCountMap[this.$store.state.application.account.currency.code] || 2,
+                fractionSeparator: '.',
+                symbolPosition: 'front',
+                symbolSpacing: true
+            })
         },
         watch: {
             '$route'() {
@@ -730,7 +745,7 @@
             transform: rotate(0deg);
             pointer-events: none;
         }
-        
+
         &:after {
             content: '';
             position: absolute;
@@ -760,7 +775,7 @@
         }
     }
 
-    
+
     .content {
         width: 100%;
         padding-top: 0;

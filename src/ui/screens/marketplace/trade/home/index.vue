@@ -1,5 +1,5 @@
 <template>
-    <div class="trade-block">
+    <article class="trade-block">
         <nav class="trade-block__nav">
             <ul class="trade-block__menu-list reset-list">
                 <li
@@ -33,7 +33,7 @@
                 <p v-if="!offers.length">No offers were found</p>
             </c-tab>
         </c-tabs>
-    </div>
+    </article>
 </template>
 
 <script>
@@ -72,6 +72,12 @@
                     offers[target].push(transaction);
                     return offers;
                 }, { received: [], sent: [], closed: [] });
+            },
+            transactions() {
+                return this.$store.getters['assets/transactionsArray'];
+            },
+            offers2() {
+                // const transactions = this.$store.getters['assets/transactionsArray'];
             }
         }
     }

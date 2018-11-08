@@ -1,20 +1,22 @@
 <template>
     <div class="currency-dropdown">
         <div class="currency-dropdown__current" @click="toggleList">
-            <c-country-flag :country='current_currency.country' size='small' />
+            <c-country-flag :country="current_currency.country" size="small" v-if="current_currency.country" />
+            <c-crypto-icon :name="current_currency.code" v-else />
             <span class="currency-name">
-                {{ current_currency.name }}
+                {{ current_currency.code }}
             </span>
             <i class="fas " :class="showList ? 'fa-angle-up' : 'fa-angle-down' "></i>
         </div>
         <transition name="slide-in-top">
             <div class="currency-dropdown__list" v-if="showList" v-click-outside.bool="showList">
                 <ul :class="{'d-block' : showList}">
-                    <li class="currency-dropdown__list-item" v-for="(currency, index) in currencies" @click="changeCurrency(currency)">
-                        <c-country-flag :country='currency.country' size='small' />
+                    <li class="currency-dropdown__list-item" v-for="(currency, index) in currencies" @click="changeCurrency(currency)" :key="index">
+                        <c-country-flag :country="currency.country" size="small" v-if="currency.country" />
+                        <c-crypto-icon :name="currency.code" v-else/>
                         <span class="currency-name">
-                        {{ currency.name }}
-                    </span>
+                            {{ currency.code }}
+                        </span>
                     </li>
                 </ul>
             </div>
@@ -27,37 +29,16 @@
 
     export default {
         name: 'currency-dropdown',
+        props: {
+            current_currency: Object,
+            currencies: Array
+        },
         components: {
-            'c-country-flag' : CountryFlag
+            'c-country-flag' : CountryFlag,
+            'c-crypto-icon' : (resolve) => require(['@/ui/components/icon/crypto'], resolve),
         },
         data(){
             return{
-                current_currency:{
-                    country: 'us',
-                    symbol: '$',
-                    name: 'USD'
-
-                },
-                currencies:[
-                    {
-                        country: 'ua',
-                        symbol: '',
-                        name: 'UAH'
-
-                    },
-                    {
-                        country: 'us',
-                        symbol: '$',
-                        name: 'USD'
-
-                    },
-                    {
-                        country: 'ru',
-                        symbol: '',
-                        name: 'RUB'
-
-                    }
-                ],
                 showList: false
             }
         },
@@ -66,7 +47,8 @@
                 this.showList = !this.showList
             },
             changeCurrency(currency){
-                this.current_currency = currency
+                this.$emit('change', currency);
+                this.toggleList();
             }
         }
     }

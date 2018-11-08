@@ -94,6 +94,24 @@
         box-shadow: 0px 0px 200px 10px rgba($primary-background, 0.3);
     }
 }
+
+@keyframes show-in {
+    0% {
+        transform: translateY(10%);
+        opacity: 0;
+    }
+    60% {
+        transform: translateY(-5%);
+        opacity: 1;
+    }
+    80% {
+        transform: translate(3%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
 .keepAttentionTo{
     animation: shadowPulse 1s;
 }

@@ -6,7 +6,7 @@
 
         <nav class="pagination__nav" :class="{ 'show-bg' : showBg }">
             <ul>
-                <li>
+                <li v-show="activePage > 1">
                     <a
                         href="#first"
                         class="first"
@@ -15,7 +15,7 @@
                         <c-icon name="angle-double-left"/>
                     </a>
                 </li>
-                <li>
+                <li v-show="activePage > 1">
                     <a
                         href="#prev"
                         class="prev"
@@ -35,7 +35,7 @@
                         @click.prevent="change_page(page)"
                     >{{ page }}</a>
                 </li>
-                <li>
+                <li v-show="activePage < pages">
                     <a
                         href="#next"
                         class="next"
@@ -44,7 +44,7 @@
                         <c-icon name="angle-right"/>
                     </a>
                 </li>
-                <li>
+                <li v-show="activePage < pages">
                     <a
                         href="#last"
                         class="last"

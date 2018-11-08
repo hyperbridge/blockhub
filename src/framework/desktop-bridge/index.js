@@ -243,8 +243,8 @@ export const runCommand = async (cmd, meta = {}) => {
             if (local.store.state.application.mode === 'production') {
                 BlockHub.importSeedData()
 
-                store.state.application.desktop_mode = true
-                store.state.application.signed_in = true
+                local.store.state.application.desktop_mode = true
+                local.store.state.application.signed_in = true
             }
             // store.state.application.locked = true
             // store.state.application.signed_in = false
@@ -252,6 +252,8 @@ export const runCommand = async (cmd, meta = {}) => {
             console.log(cmd.data)
 
             await sendCommand('quitAndInstall')
+        } else if (cmd.key === 'updateState') {
+            local.store.commit(cmd.data.module + '/updateState', cmd.data.state)
         } else if (cmd.key === 'systemError') {
             console.warn('[Bridge] Received system error from desktop', cmd.data)
 

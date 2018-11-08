@@ -72,12 +72,16 @@ const router = new Router({
             }
         },
         {
-            path: '/help',
-            name: 'Help',
-            component: (resolve) => require(['@/ui/screens/help'], resolve),
-            meta: {
-                breadcrumb: false
-            }
+            path: '/help/:id/article/:slug/:info',
+            name: 'Help article',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/help-article'], resolve)
+        },
+        {
+            path: '/help/:id/article/:slug',
+            name: 'Help article',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/help-article'], resolve)
         },
         {
             path: '/help/:id',
@@ -86,10 +90,12 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/help-topic'], resolve)
         },
         {
-            path: '/help/:id/article/:slug',
-            name: 'Help article',
-            props: true,
-            component: (resolve) => require(['@/ui/screens/help-article'], resolve)
+            path: '/help',
+            name: 'Help',
+            component: (resolve) => require(['@/ui/screens/help'], resolve),
+            meta: {
+                breadcrumb: false
+            }
         },
         {
             path: '/support',
@@ -710,16 +716,38 @@ const router = new Router({
                             component: (resolve) => require(['@/ui/screens/marketplace/trade/home'], resolve),
                         },
                         {
+                            path: 'explorer',
+                            name: 'Marketplace Trade Explorer',
+                            component: (resolve) => require(['@/ui/screens/marketplace/trade/explorer'], resolve)
+                        },
+                        {
                             path: 'history',
                             name: 'Marketplace Trade History',
                             component: (resolve) => require(['@/ui/screens/marketplace/trade/history'], resolve),
                         },
                         {
+                            path: 'settings',
+                            name: 'Marketplace Trade Settings',
+                            component: (resolve) => require(['@/ui/screens/marketplace/trade/settings'], resolve),
+                        },
+                        {
                             path: ':id',
                             name: 'Marketplace Trade',
                             component: (resolve) => require(['@/ui/screens/marketplace/trade/_id'], resolve),
-                            props: true
-                        }
+                            props: true,
+                            children: [
+                                {
+                                    path: '',
+                                    name: 'Marketplace Trade Offer',
+                                    component: (resolve) => require(['@/ui/screens/marketplace/trade/_id/offer'], resolve)
+                                },
+                                {
+                                    path: 'chat',
+                                    name: 'Marketplace Trade Chat',
+                                    component: (resolve) => require(['@/ui/screens/marketplace/trade/_id/chat'], resolve)
+                                }
+                            ]
+                        },
                     ]
                 },
                 {
@@ -756,10 +784,10 @@ const router = new Router({
             ]
         },
         {
-            path: '/item-navigator-2',
+            path: '/item-navigator',
             name: 'Item Navigator',
             props: true,
-            component: (resolve) => require(['@/ui/screens/item-navigator/v2'], resolve)
+            component: (resolve) => require(['@/ui/screens/item-navigator'], resolve)
         },
         {
             path: '/download/desktop/mac',

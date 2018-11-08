@@ -50,10 +50,6 @@
                     <span class="icon fas fa-info-circle"></span>
                     <span class="text">Payment Settings</span>
                 </a>
-                <a href="/#/developer/inquiries" v-if="developer_mode">
-                    <span class="icon fas fa-users"></span>
-                    <span class="text">User Inquiries</span>
-                </a>
                 <a href="/#/realm/new" v-if="developer_mode" v-darklaunch="'REALMS'">
                     <span class="icon fa fa-plus"></span>
                     <span class="text">New Realm</span>
@@ -124,7 +120,7 @@
                         <h3>Are you a developer?</h3>
                         <p>Start developing for blockchain with BlockHub SDK</p>
                         <c-button status="info" href="/#/developer/apply" icon_hide>Start Developing</c-button>
-                        <c-button status="dark" href="/#/developer/learn" icon_hide>Learn More</c-button>
+                        <c-button status="dark" href="/#/help/0/article/developer-program" icon_hide>Learn More</c-button>
                     </div>
                 </div>
                 <div class="d-flex justify-content-start">

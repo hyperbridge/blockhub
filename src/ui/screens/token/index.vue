@@ -28,6 +28,7 @@
                             <li>Purchase products within the store</li>
                             <li>Vote for the direct of game development (staking)</li>
                             <li>Receive 10% discount on all transactions</li>
+                            <li>Running promotions within BlockHub</li>
                         </ul>
                         <br />
                         For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees by 50%. To learn more, please see the <c-button status="underline" size="md" href="https://hyperbridge.org/whitepaper">whitepaper</c-button>.
@@ -68,7 +69,7 @@
             <div class="row">
                 <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked">
                     <c-block title="Purchase" class="margin-bottom-30">
-                        <p>Each HBX token is <strong>${{ tokenPriceUSD }} USD</strong>, and can be purchased with ETH at the current price of <strong>{{ (1/ETH2USD).toString().slice(0, 6) }} ETH</strong> per HBX <em>(Based on a locked conversion of ${{ ETH2USD }} USD per 1 ETH)</em>.</p>
+                        <p>Each HBX token is <strong>${{ tokenPriceUSD | convertCurrency }}</strong>, and can be purchased with ETH at the current price of <strong>{{ (1/ETH2USD).toString().slice(0, 6) }} ETH</strong> per HBX <em>(Based on a locked conversion of ${{ ETH2USD }} USD per 1 ETH)</em>.</p>
                         <div class="input-group mb-4">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">

@@ -42,7 +42,7 @@
                 :inWishlist="!!wishlist[product.id]"
                 @addToWishlist="addToWishlist"
             />
-            <c-button icon_hide @click="showInstaller = !showInstaller">Open installer</c-button>
+            <c-button icon_hide @click="showInstaller = !showInstaller" hidden>Open installer</c-button>
 
             <c-rating-block class="margin-bottom-20" :items="product.rating"
                             :parent_url="`/#/product/${product.id}`" v-darklaunch="'RATINGS'" />
@@ -244,10 +244,10 @@
             addToWishlist() {
                 const { id } = this.product;
                 this.$store.commit('application/updateFavorites', { id })
-                this.$snotify.success(
-                    `Product has been ${this.wishlist[id] ? 'added to' : 'removed from'} your wishlist`,
-                    `Product ${this.wishlist[id] ? 'added' : 'removed'}`
-                );
+                // this.$snotify.success(
+                //     `Product has been ${this.wishlist[id] ? 'added to' : 'removed from'} your wishlist`,
+                //     `Product ${this.wishlist[id] ? 'added' : 'removed'}`
+                // );
             }
         },
         computed:{

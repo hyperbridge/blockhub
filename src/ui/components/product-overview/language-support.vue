@@ -5,111 +5,112 @@
         </template>
         <table class="language-support__table">
             <thead>
-                <th>Name</th>
-                <th>Interface</th>
-                <th>Audio</th>
-                <th>CC</th>
+            <th>Name</th>
+            <th>Interface</th>
+            <th>Audio</th>
+            <th>CC</th>
             </thead>
             <tbody>
-                <transition-group name="fadeLeft" tag="tr" v-for="(lang, index) in orderLang" v-if="lang.show == 'default' || show">
-                    <template v-for="(value, property) in lang">
-                        <td v-if="property == 'name'" :key="property">{{ value }}</td>
-                        <td v-else :key="property">
-                            <i
-                                v-if="value"
-                                class="fas"
-                                :class="`fa-${options_icons[property]}`"
-                            ></i>
-                        </td>
-                    </template>
-                </transition-group>
-                <tr style="background: transparent">
-                    <td colspan="10" class="text-center">
-                        <transition name="fade" v-if="!show">
-                            <div class="language-support__toggle-btn" @click="toggleLang">
-                                Show {{ languages.length - 1 }} more languages <i class="fas fa-angle-double-down"></i>
-                            </div>
-                        </transition>
-                        <transition name="fade" v-else>
-                            <div class="language-support__toggle-btn" @click="toggleLang">
-                                Hide languages <i class="fas fa-angle-double-up"></i>
-                            </div>
-                        </transition>
+            <transition-group name="fadeLeft" tag="tr" v-for="(lang, index) in orderLang" :class="['tr-order-' + lang.order]" v-if="lang.show == 'default' || show || index < 5">
+                <template v-for="(value, property) in lang">
+                    <td v-if="property == 'name'" :key="property">{{ value }}</td>
+                    <td v-else :key="property">
+                        <i
+                            v-if="value"
+                            class="fas"
+                            :class="`fa-${options_icons[property]}`"
+                        ></i>
                     </td>
-                </tr>
+                </template>
+            </transition-group>
+            <tr style="background: transparent">
+                <td colspan="10" class="text-center">
+                    <transition name="fade" v-if="!show">
+                        <div class="language-support__toggle-btn" @click="toggleLang">
+                            Show {{ languages.length - 5 }} more languages <i class="fas fa-angle-double-down"></i>
+                        </div>
+                    </transition>
+                    <transition name="fade" v-else>
+                        <div class="language-support__toggle-btn" @click="toggleLang">
+                            Hide languages <i class="fas fa-angle-double-up"></i>
+                        </div>
+                    </transition>
+                </td>
+            </tr>
             </tbody>
         </table>
     </c-block>
 </template>
 
 <script>
-export default {
-    name: 'language-support',
-    props: {
-        languages: {
-            type: Array,
-            required: true
-        }
-    },
-    data() {
-        return {
-            options_icons: {
-                subtitles: 'closed-captioning',
-                interface: 'language',
-                full_audio: 'volume-off',
-            },
-            userLang: '',
-            show: false,
-            langList: []
-        }
-    },
-    created(){
-        let lang = navigator.language || navigator.userLanguage,
-            arr = this.languages;
-        this.userLang = lang.toLowerCase()
-        arr.forEach( (el) => {
-
-            if (el.code) {
-                if ( this.userLang.includes(el.code.toLowerCase()) ){
-                    el.order = 1;
-                    el.show = 'default';
-                    this.langList.push(el);
-                } else {
-                    el.order = 2;
+    export default {
+        name: 'language-support',
+        props: {
+            languages: {
+                type: Array,
+                required: true
+            }
+        },
+        data() {
+            return {
+                options_icons: {
+                    subtitles: 'closed-captioning',
+                    interface: 'language',
+                    full_audio: 'volume-off',
+                },
+                userLang: '',
+                show: false,
+                langList: []
+            }
+        },
+        created(){
+            let lang = this.$store.state.application.account.language.code,
+                arr = this.languages;
+            this.userLang = lang.toLowerCase()
+            arr.forEach( (el) => {
+                if (el.code) {
+                    if ( this.userLang.includes(el.code.toLowerCase()) ){
+                        el.order = 0;
+                        el.show = 'default';
+                        this.langList.push(el);
+                    } else {
+                        el.order = 1;
+                        this.langList.push(el)
+                    }
+                }
+                else {
+                    if (el.name === 'English') {
+                        el.order = 0;
+                        el.show = 'default';
+                    }
                     this.langList.push(el)
                 }
-            }
-            else {
-                if (el.name === 'English') {
-                    el.order = 1;
-                    el.show = 'default';
-                }
-
-                this.langList.push(el)
-            }
-        })
-    },
-    methods:{
-        toggleLang(){
-            this.show = !this.show;
-        }
-    },
-    computed:{
-        orderLang(){
-            return this.langList.sort( (a, b) => {
-                return a.order - b.order;
             })
+        },
+        methods:{
+            toggleLang(){
+                this.show = !this.show;
+            }
+        },
+        computed:{
+            orderLang(){
+                return this.langList.sort( (a, b) => {
+                    return a.order - b.order;
+                })
+            }
+        },
+        components: {
+            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         }
-    },
-    components: {
-        'c-block': (resolve) => require(['@/ui/components/block'], resolve),
     }
-}
 </script>
 
 <style lang="scss" scoped>
     .language-support__table {
         width: 100%;
+        th:first-child{
+            width: 60%;
+        }
         th:not(:first-child), td:not(:first-child) {
             text-align: center;
             width: 15%;

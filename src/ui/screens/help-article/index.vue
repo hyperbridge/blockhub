@@ -14,28 +14,28 @@
 
 <script>
     export default {
-        props:['slug'],
+        props: ['id', 'slug'],
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-article-item': (resolve) => require(['@/ui/components/help/article-item'], resolve),
             'c-topic-item': (resolve) => require(['@/ui/components/help/topic-item'], resolve),
             'c-list-item': (resolve) => require(['@/ui/components/help/simple-item'], resolve),
             'c-card': (resolve) => require(['@/ui/components/help/help-card.vue'], resolve),
         },
-        computed:{
+        computed: {
             article: function () {
-                let results,
-                    data = this.$store.state.marketplace.help.articles,
+                let result,
+                    data,
                     key = 'slug';
+
+                data = this.$store.state.marketplace.help.articles
 
                 for (let i = 0; i < data.length; i++) {
                     if (data[i][key].includes(this.slug)) {
-                        results = data[i]
+                        result = data[i]
                     }
                 }
-                
-                return results;
+
+                return result;
             }
         }
     }

@@ -1,5 +1,33 @@
-import Vue from 'vue';
+import Vue from 'vue'
 import moment from 'moment'
+import store from './store'
+
+Vue.filter('convertCurrency', function (value) {
+    const currencyCode = store.state.application.account.currency.code
+    const currencyMap = {
+        'USD': {
+            'USD': 1,
+            'BTC': 0.00016,
+            'ETH': 0.0047,
+            'DAI': 1,
+            'RUB': 0.66
+        },
+        // 'BTC': {
+        //     'USD': 6455,
+        //     'ETH': 30.28,
+        //     'DAI': 6455
+        // },
+        // 'ETH': {
+        //     'USD': 213.5,
+        //     'BTC': 0.033,
+        //     'DAI': 213.5
+        // }
+    }
+
+    const price = parseFloat(value)
+
+    return Vue.options.filters.currency(price * currencyMap['USD'][currencyCode])
+});
 
 Vue.filter('formatDate', function(value) {
     if (value) {
