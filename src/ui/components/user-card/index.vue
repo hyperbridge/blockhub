@@ -69,7 +69,7 @@
                 @input="$emit('update:wallet', $event.target.value)"
                 readonly="readonly"
             />
-            <button v-darklaunch="'BADGES'">
+            <button v-darklaunch="'BADGES'" @click="copyToClipboard(user.public_address)">
                 <i :class="`fas fa-${previewMode ? 'copy' : 'redo-alt'}`"></i>
             </button>
         </div>
@@ -97,6 +97,11 @@
             iconColor: String,
             iconClass: String,
             previewMode: Boolean
+        },
+        methods: {
+            copyToClipboard(value) {
+                BlockHub.Bridge.sendCommand('writeToClipboard', value)
+            }
         }
     }
 </script>
