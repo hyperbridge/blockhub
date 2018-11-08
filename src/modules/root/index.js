@@ -34,7 +34,7 @@ const rootStore = {
             const { target, module, data } = payload;
             const { [module]: state } = rootState;
 
-            // const newData = await axios.post(`/${target}`, data);
+            // const { id, data } = await axios.post(`/${target}`, data);
             const id = getId();
             commit('create', { ...payload, id, data: { ...data, id }});
             return id;
@@ -43,6 +43,11 @@ const rootStore = {
             const { id, target, data } = payload;
             // await axios.patch(`/${target}/${id}`, data);
             commit('update', payload);
+        },
+        updateV2({ commit }, [targets, id, data]) {
+            const [module, target] = targets.split('/');
+            // await axios.patch(`/${target}/${id}`, data);
+            commit('update', { module, target, id, data });
         },
         delete({ commit }, payload) {
             const { id, target } = payload;
@@ -67,6 +72,7 @@ const rootStore = {
                 [prop]: [...state[module][target][targetId][prop], newId]
             };
             commit('update', { module, target, id: targetId, data: targetData });
+            return newId;
         },
         deleteRelation(
             { commit, dispatch, state },
