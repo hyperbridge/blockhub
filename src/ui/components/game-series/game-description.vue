@@ -21,7 +21,7 @@
                 </div>
                 <div>
                     <a href="#3" class="btn-price">
-                        <span class="price">{{ game.price | currency}}</span>
+                        <span class="price">{{ game.price | convertCurrency}}</span>
                         <span class="name">BUY NOW</span>
                     </a>
                 </div>

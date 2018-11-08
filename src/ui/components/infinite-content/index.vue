@@ -13,11 +13,11 @@
                         <div class="frontpage-product__footer">
                             <div class="price-list">
                                 <div class="price old_price" v-if="item.data.old_price">
-                                    {{ item.data.old_price | currency }}
+                                    {{ item.data.old_price | convertCurrency }}
                                     <!--<span>usd</span>-->
                                 </div>
                                 <div class="price">
-                                    {{ item.data.price | currency }}
+                                    {{ item.data.price | convertCurrency }}
                                     <!--<span>usd</span>-->
                                 </div>
                             </div>

@@ -1,15 +1,17 @@
 <template>
     <c-block :title="title" class="purchase-block" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
 
-        <div class="purchase-block__tags" v-if="tags">
+        <div class="purchase-block__tags col-12" v-if="tags">
             <div v-for="(tag, index) in tags" :key="index">
                 {{ tag }}
             </div>
         </div>
 
-        <div class="purchase-block__price" v-if="!isUnavailable"><span v-if="price">{{ price | currency }}</span><span v-else>$0.00</span></div>
+        <div class="purchase-block__price col-12" v-if="!isUnavailable">
+            <span v-if="price">{{ price | convertCurrency }}</span><span v-else>$0.00</span>
+        </div>
 
-        <div class="purchase-block__info" v-if="eligibleTokens || offersPurchases || releaseDate || isPurchased || isUnavailable">
+        <div class="purchase-block__info col-12" v-if="eligibleTokens || offersPurchases || releaseDate || isPurchased || isUnavailable">
             <div v-if="eligibleTokens">Eligible for up to <i class="fas fa-coins mx-1" style="color: #FADC72"></i> HBX +{{ eligibleTokens }}</div>
             <div v-if="offersPurchases">Offers In-Game Purchases</div>
             <div class="release-date" v-if="releaseDate">Release date: {{ releaseDate | customDate('MM/DD/YYYY') }}</div>
@@ -25,7 +27,7 @@
             </div>
         </div>
 
-        <div class="purchase-block__buttons-group">
+        <div class="purchase-block__buttons-group col-12">
             <c-button status="outline-success" :href="purchaseLink" icon_hide size="xl" :shadow="false" v-if="isReleased && price" @click="onClickPurchase">
                 Proceed to Purchase
             </c-button>
@@ -95,13 +97,15 @@
             onClickPurchase: Function
         },
         components: {
-            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-btn-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve)
         }
     }
 </script>
 
 <style lang="scss" scoped>
+    .purchase-block {
+        margin: 0;
+    }
     .purchase-block__price{
         font-size: 38px;
         line-height: 38px;
@@ -113,6 +117,7 @@
     .purchase-block__tags{
         display: flex;
         flex-wrap: wrap;
+        padding: 0;
         margin: -5px -3px 20px;
         div{
             padding: 0px 7px;
@@ -129,6 +134,7 @@
         display: flex;
         flex-direction: column;
         margin: 20px 0;
+        padding: 0;
         .release-date{
             font-size: 16px;
             margin-top: 15px;
@@ -153,6 +159,7 @@
     .purchase-block__buttons-group{
         display: inline-flex;
         flex-direction: column;
+        padding: 0;
         .c-btn{
             width: auto;
             margin: 0 auto 15px 0;

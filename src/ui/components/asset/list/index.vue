@@ -32,7 +32,7 @@
                     />
                     {{ asset.user_name }}
                 </span>
-                <span class="asset__price">{{ asset.price.current | currency }}</span>
+                <span class="asset__price">{{ asset.price.current | convertCurrency }}</span>
                 <c-button status="success" icon="cart-plus">
                     Proceed to Purchase
                 </c-button>

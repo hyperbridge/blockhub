@@ -243,8 +243,8 @@ export const runCommand = async (cmd, meta = {}) => {
             if (local.store.state.application.mode === 'production') {
                 BlockHub.importSeedData()
 
-                store.state.application.desktop_mode = true
-                store.state.application.signed_in = true
+                local.store.state.application.desktop_mode = true
+                local.store.state.application.signed_in = true
             }
             // store.state.application.locked = true
             // store.state.application.signed_in = false

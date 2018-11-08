@@ -2,7 +2,7 @@
     <div class="participation-tier" :class="{'in-the-list' : inList}">
         <div class="participation-tier__stat">
             <div class="font-weight-bold h5 p-0 m-0">
-                {{ price | currency }}
+                {{ price | convertCurrency }}
             </div>
             <div class="p-0 my-1">
                 {{ sold }} Sold

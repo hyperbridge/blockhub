@@ -166,7 +166,7 @@
         </div>
         <!-- //END PAGE CONTENT -->
 
-        <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
+        <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
 
         <!--<transition name="slideDown">-->
             <c-profile-chooser v-if="profile_chooser && signed_in" />
@@ -421,6 +421,21 @@
             setTimeout(() => {
                 $(this.$refs.poweredBy).fadeOut(400)
             }, 10 * 1000)
+
+            const fractionCountMap = {
+                'BTC': 6,
+                'ETH': 6,
+                'DAI': 2
+            }
+
+            this.$CurrencyFilter.setConfig({
+                symbol: this.$store.state.application.account.currency.symbol,
+                thousandsSeparator: ',',
+                fractionCount: fractionCountMap[this.$store.state.application.account.currency.code] || 2,
+                fractionSeparator: '.',
+                symbolPosition: 'front',
+                symbolSpacing: true
+            })
         },
         watch: {
             '$route'() {

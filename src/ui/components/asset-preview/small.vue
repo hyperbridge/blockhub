@@ -8,7 +8,7 @@
         <span
             v-if="showPrice"
             class="asset-preview-small__price"
-        > - {{ asset.price.current | currency }}</span>
+        > - {{ asset.price.current | convertCurrency }}</span>
     </div>
 </template>
 

@@ -4,8 +4,8 @@
         <div class="money-info__detail">
             <div class="text">{{ label }}</div>
             <div class="amount-detail">
-                {{ amount | currency}}
-                <span v-if="goal"> of {{ goal | currency }}</span>
+                {{ amount | convertCurrency}}
+                <span v-if="goal"> of {{ goal | convertCurrency }}</span>
             </div>
         </div>
     </div>

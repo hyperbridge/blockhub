@@ -13,7 +13,7 @@
                     <div class="assets-grid__item-tooltip">
                         <h5>{{ item.name }}</h5>
                         <span class="float-left price">
-                            {{ item.price['current'] | currency }}
+                            {{ item.price['current'] | convertCurrency }}
                         </span>
                         <span class="float-right box">
                             <i class="fas fa-box"></i>

@@ -149,6 +149,12 @@
                                             View Public Profile
                                         </a>
                                     </li>
+                                    <li v-if="signed_in" v-darklaunch="'CONTACTS'">
+                                        <a :href="`/#/identity/${account.current_identity.public_address}/contacts`">
+                                            <i class="fas fa-users"></i>
+                                            Contacts
+                                        </a>
+                                    </li>
                                     <li>
                                         <a @click="$store.commit('application/showProfileChooser', true)">
                                             <i class="fas fa-user-edit"></i>
@@ -177,12 +183,6 @@
                                 </ul>
 
                             </c-dropdown>
-                        </li>
-                        <li v-if="signed_in" v-darklaunch="'CONTACTS'">
-                            <a href="/#/identity/1/contacts">
-                                <span class="icon fa fa-users"></span>
-                                <span class="text">Contacts</span>
-                            </a>
                         </li>
                         <li v-if="desktop_mode && !signed_in && !is_locked">
                             <a href="/#/account/signin">
@@ -251,14 +251,7 @@ export default {
             // If that failed, set to default: USD
             if (!this.account.currency || !this.account.currency.code)
                 this.account.currency = this.currencies.find((el) => !!el.code.toLowerCase().includes('usd'))
-            this.$CurrencyFilter.setConfig({
-                symbol: this.account.currency.symbol,
-                thousandsSeparator: ',',
-                fractionCount: 2,
-                fractionSeparator: '.',
-                symbolPosition: 'front',
-                symbolSpacing: true
-            })
+
             return this.account.currency
         },
         account() {
@@ -334,9 +327,23 @@ export default {
             browserWindow.minimize()
         },
         selectCurrency(currency) {
-            console.log(currency)
             this.account.currency = currency
             this.$store.commit('application/updateState')
+
+            const fractionCountMap = {
+                'BTC': 6,
+                'ETH': 6,
+                'DAI': 2
+            }
+
+            this.$CurrencyFilter.setConfig({
+                symbol: currency.symbol,
+                thousandsSeparator: ',',
+                fractionCount: fractionCountMap[currency.code] || 2,
+                fractionSeparator: '.',
+                symbolPosition: 'front',
+                symbolSpacing: true
+            })
         },
         selectLanguages(lang) {
             this.account.language = lang

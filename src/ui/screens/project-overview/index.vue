@@ -61,11 +61,11 @@
                         <div class="project__info">
                             <div class="funded">
                                 <div class="text">114% Funded</div>
-                                {{ project.funding.funded_amount | currency }}
+                                {{ project.funding.funded_amount | convertCurrency }}
                             </div>
                             <div class="goal">
                                 <div class="text">Goal</div>
-                                {{ project.funding.goal_amount | currency }}
+                                {{ project.funding.goal_amount | convertCurrency }}
                             </div>
                             <div
                                 v-for="(prop, index) in crowdfunding_props"
@@ -83,7 +83,7 @@
                                 </div>
                                 <div>
                                     <p class="text"><strong>{{ prop | upperFirstChar }}</strong></p>
-                                    {{ project.funding[prop + '_amount'] | currency }}
+                                    {{ project.funding[prop + '_amount'] | convertCurrency }}
                                 </div>
                             </div>
                         </div>

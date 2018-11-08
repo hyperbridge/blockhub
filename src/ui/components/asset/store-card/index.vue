@@ -13,7 +13,7 @@
         <div class="store-card__info">
             <span class="store-card__name">{{ asset.name }}</span>
             <span class="store-card__price">
-                {{ asset.price.current | currency}}
+                {{ asset.price.current | convertCurrency}}
             </span>
         </div>
     </div>
