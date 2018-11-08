@@ -39,13 +39,13 @@
             deleteSub
         </button> -->
         <button @click="$store.dispatch(
-            'createGeneric',
-            ['assets/trxs/messages', trx.id, { content: 'New message!', author: 1, id: 21 }]
+            'createRelation',
+            ['assets/trxs/messages', trx.id, { content: 'New message!', author: 3 }]
         )">
             Dispatch root createGeneric
         </button>
         <button @click="$store.dispatch(
-            'deleteGeneric',
+            'deleteRelation',
             ['assets/trxs/messages', trx.id, 8]
         )">
             Dispatch root deleteGeneric

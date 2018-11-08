@@ -1,13 +1,6 @@
 import { getId, mergeId } from '@/store/utils';
+import { findRelation } from '@/store/module-relations';
 
-const relations = {
-    assets: {
-        trxs: { messages: 'community' },
-        transactions: { messages: 'community' }
-    },
-    community: {},
-    marketplace: {}
-};
 
 const rootStore = {
     mutations: {
@@ -56,14 +49,14 @@ const rootStore = {
             // await axios.delete(`/${target}/${id}`);
             commit('delete', payload);
         },
-        async createGeneric(
+        async createRelation(
             { commit, dispatch, state },
             [targets, targetId, data]
         ) {
             const [module, target, prop] = targets.split('/');
             /* "assets/transactions/messages" => path, dest, targets? */
 
-            const propModule = (relations[module][target] && relations[module][target][prop]) || module;
+            const propModule = findRelation(module, target, prop);
 
             const newId = await dispatch(
                 'create',
@@ -75,12 +68,12 @@ const rootStore = {
             };
             commit('update', { module, target, id: targetId, data: targetData });
         },
-        deleteGeneric(
+        deleteRelation(
             { commit, dispatch, state },
             [targets, targetId, id]
         ) {
             const [module, target, prop] = targets.split('/');
-            const propModule = (relations[module][target] && relations[module][target][prop]) || module;
+            const propModule =  findRelation(module, target, prop);
 
             const targetData = {
                 [prop]: state[module][target][targetId][prop].filter(propId => propId != id)
