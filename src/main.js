@@ -10,7 +10,6 @@ import app from './app'
 import router from './router'
 import store, { initializer } from './store'
 import migrations from './db/migrations'
-import {Picker, Emoji} from 'emoji-mart-vue'
 import VueI18n from 'vue-i18n';
 
 import localeData from '@/db/seed/locale-data.json';
@@ -105,7 +104,11 @@ const overrideConsoleLog = () => {
 initializer().then(() => {
   console.log('[BlockHub] Loading app...')
 
-  const [locale] = (window && window.navigator.locale.split('-')) || 'en';
+  const [language] = (
+      window.navigator &&
+      window.navigator.language &&
+      window.navigator.language.split('-')
+    ) || 'en';
 
   /* eslint-disable no-new */
   BlockHub.Vue = new Vue({
