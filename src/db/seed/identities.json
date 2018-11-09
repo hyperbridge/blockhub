@@ -53,7 +53,7 @@
                 "text": "Praesent porta vulputate velit, sit amet scelerisque mauris suscipit eget. Aenean vel mi non metus consequat commodo quis vitae nibh."
             }
         ],
-        "author": 1
+        "owner": 1
     },
     {
         "id": 2,
@@ -63,7 +63,7 @@
         "default": true,
         "edit": false,
         "messages": [],
-        "author": 1
+        "owner": 1
     },
     {
         "id": 3,
@@ -73,7 +73,7 @@
         "default": true,
         "edit": false,
         "messages": [],
-        "author": 1
+        "owner": 1
     },
     {
         "id": 4,
@@ -83,7 +83,7 @@
         "default": true,
         "edit": false,
         "messages": [],
-        "author": 2
+        "owner": 2
     },
     {
         "id": 5,
@@ -93,6 +93,6 @@
         "default": true,
         "edit": false,
         "messages": [],
-        "author": 2
+        "owner": 2
     }
 ]

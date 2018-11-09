@@ -97,7 +97,13 @@ export const getters = {
         // .map(id => extract(products[Number(id)], ['images', 'release_date', 'price'])),
     wishlistedProjects: ({ account }, getters, { funding: { projects }}) => Object
         .keys(account.project_wishlist)
-        .map(id => projects[id])
+        .map(id => projects[id]),
+    account: ({ account }, getters, { community: { identities }}) => ({
+        ...account,
+        active_identity: identities[account.active_identity],
+        identities: account.idts.map(id => identities[id]),
+        friends_list: account.friends_list.map(id => identities[id])
+    })
 
 }
 
@@ -286,7 +292,7 @@ export const mutations = {
         state.environment_mode = payload
 
         Bridge.sendCommand('setEnvironmentMode', payload).then((data) => {
-            
+
         })
     },
     createTradeURL(state, id) {
