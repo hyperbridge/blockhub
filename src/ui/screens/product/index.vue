@@ -156,18 +156,19 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        
+
                                     </div>
                                 </div>
                             </c-block>
                         </div>
 
                     <div class="col-12">
-                        <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
-                        <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
-                        <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
-                        <c-product-projects :product="product" v-if="section === 'projects'" :editing="editing" />
-
+                        <transition name="page">
+                            <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
+                            <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
+                            <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
+                            <c-product-projects :product="product" v-if="section === 'projects'" :editing="editing" />
+                        </transition>
                     </div>
                 </div>
             </div>
@@ -187,7 +188,7 @@
         </c-custom-modal>
 
 
-        <c-basic-popup 
+        <c-basic-popup
             :activated="$store.state.application.active_modal === 'import-product'"
             @close="$store.commit('application/activateModal', null)"
         >
@@ -236,7 +237,7 @@
                             <span class="form-text">Example: https://store.steampowered.com/app/441830/I_am_Setsuna/</span>
                         </div>
                     </div>
-                    
+
                     <c-button class="c-btn-lg outline-white margin-top-20 margin-auto" @click="startImport">GO</c-button>
                 </div>
                 <br />
@@ -248,7 +249,7 @@
                 Need help? <c-button status="plain" href="/#/help">Check the Help Center</c-button>
             </p>
         </c-basic-popup>
-        
+
     </c-layout>
 </template>
 
@@ -266,7 +267,13 @@
     };
 
     export default {
-        props: ['id', 'section'],
+        props: {
+            id: [String, Number],
+            section: {
+                type: String,
+                default: 'overview'
+            }
+        },
         components: {
             'c-product-overview': (resolve) => require(['@/ui/screens/product-overview'], resolve),
             'c-product-projects': (resolve) => require(['@/ui/screens/product-projects'], resolve),
@@ -347,7 +354,7 @@
             if (this.id === 'new') {
                 this.$store.dispatch('application/setEditorMode', 'editing')
             }
-        
+
             if (!product.community) {
                 product.community = {
                     discussions: []
@@ -415,7 +422,7 @@
 
                     Vue.set(this.$store.state.marketplace.products, product.id, product)
 
-                    DB.marketplace.products.update(product) 
+                    DB.marketplace.products.update(product)
                     DB.save()
 
                     this.savedState = true
@@ -511,7 +518,7 @@
 
                     document.body.appendChild(script);
                 }`
-                
+
                 Brdge.sendCommand('fetchPageDataRequest', {
                     url: this.$refs.importUrl.value,
                     script: onWindowLoad
@@ -661,7 +668,7 @@
     .editor-container {
         position: relative;
     }
-    
+
     @media (min-width: 768px){
         .product_nav{
             display: block!important;

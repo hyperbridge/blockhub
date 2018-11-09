@@ -151,8 +151,12 @@
                 <c-block title="Wishlists" noGutter bgGradient onlyContentBg>
                     <c-tabs :tabNames="['Products', 'Projects']" styled>
                         <c-tab :tab_id="1">
-                            <div class="wishlist-box">
-                                <div class="wishlist-box__item" v-for="product in products" :key="product.id">
+                            <div v-if="identity.product_wishlist.length" class="wishlist-box">
+                                <div
+                                    class="wishlist-box__item"
+                                    v-for="product in identity.product_wishlist"
+                                    :key="product.id"
+                                >
                                     <c-game-includes-item
                                         :id="product.id"
                                         :image="product.images.medium_tile"
@@ -161,39 +165,46 @@
                                         :developer="product.developer"
                                     />
                                     <c-btn-fav
-                                        @click="$store.commit(
-                                        'application/updateFavorites',
-                                        { id: product.id }
-                                    )"
-                                        target="Wishlist"
+                                        @click="$store.dispatch(
+                                            'community/updateWishlist',
+                                            ['product', product.id]
+                                        )"
+                                        target="wishlist"
                                         :active="true"
                                     />
                                 </div>
                             </div>
-                            <p v-if="!products.length">
+                            <p v-else>
                                 You have not added any products to your wishlist
                             </p>
 
                         </c-tab>
                         <c-tab :tab_id="2">
-                            <div class="wishlist-box">
-                                <div v-for="project in projects" :key="project.id" class="wishlist-box__item">
+                            <div
+                                v-if="identity.project_wishlist.length"
+                                class="wishlist-box"
+                            >
+                                <div
+                                    class="wishlist-box__item"
+                                    v-for="project in identity.project_wishlist"
+                                    :key="project.id"
+                                >
                                     <c-project-card
                                         class="p-0 mb-2"
                                         :image="project.images[0]"
                                         :funds="project.funds"
                                     />
                                     <c-btn-fav
-                                        @click="$store.commit(
-                                        'application/updateFavorites',
-                                        { id: project.id, prop: 'project_wishlist' }
-                                    )"
-                                        target="Wishlist"
+                                        target="wishlist"
                                         :active="true"
+                                        @click="$store.dispatch(
+                                            'community/updateWishlist',
+                                            ['project', project.id]
+                                        )"
                                     />
                                 </div>
                             </div>
-                            <p v-if="!projects.length">
+                            <p v-else>
                                 You have not added any projects to your wishlist
                             </p>
 
@@ -220,10 +231,12 @@
             'c-btn-fav': (resolve) => require(['@/ui/components/buttons/favorite'], resolve),
             'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
         },
-        data: () => ({
-            wallets: [],
-            expert_mode: false
-        }),
+        data() {
+            return {
+                wallets: [],
+                expert_mode: false
+            }
+        },
         methods: {
             exportAccountFile() {
                 Bridge.sendCommand('exportAccountFileRequest')
@@ -237,16 +250,20 @@
         },
         computed: {
             identityCount() {
-                return Object.keys(this.$store.state.application.identities).length
+                return Object.keys(this.$store.state.application.identities).length;
             },
             account() {
-                return this.$store.state.application.account
+                return this.$store.state.application.account;
             },
-            products() {
-                return this.$store.getters['application/wishlistedProducts'];
-            },
-            projects() {
-                return this.$store.getters['application/wishlistedProjects'];
+            identity() {
+                const { products } = this.$store.state.marketplace;
+                const { projects } = this.$store.state.funding;
+                const identity = this.$store.getters['application/identity'];
+                return {
+                    ...identity,
+                    product_wishlist: Object.keys(identity.product_wishlist).map(id => products[id]),
+                    project_wishlist: Object.keys(identity.project_wishlist).map(id => projects[id])
+                };
             }
         }
     }

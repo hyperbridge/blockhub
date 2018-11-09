@@ -91,14 +91,12 @@ export const getters = {
 
         return result
     },
-    wishlistedProducts: ({ account }, getters, { marketplace: { products }}) => Object
-        .keys(account.product_wishlist)
-        .map(id => products[Number(id)]),
-        // .map(id => extract(products[Number(id)], ['images', 'release_date', 'price'])),
-    wishlistedProjects: ({ account }, getters, { funding: { projects }}) => Object
-        .keys(account.project_wishlist)
-        .map(id => projects[id])
-
+    account: ({ account }, getters, { community: { identities }}) => ({
+        ...account,
+        active_identity: identities[account.active_identity],
+        identities: account.idts.map(id => identities[id])
+    }),
+    identity: (state, { account }) => account.active_identity
 }
 
 export const actions = {
@@ -289,7 +287,7 @@ export const mutations = {
         state.environment_mode = payload
 
         Bridge.sendCommand('setEnvironmentMode', payload).then((data) => {
-            
+
         })
     },
     createTradeURL(state, id) {

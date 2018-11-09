@@ -37,7 +37,7 @@
             {
                 "id": 4,
                 "author": {
-                    "name": "Nakatochi", 
+                    "name": "Nakatochi",
                     "img": "https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png"
                 },
                 "time": "2014-11-05 6:09:21 -02:00",
@@ -52,7 +52,12 @@
                 "time": "2014-11-05 11:58:21 -02:00",
                 "text": "Praesent porta vulputate velit, sit amet scelerisque mauris suscipit eget. Aenean vel mi non metus consequat commodo quis vitae nibh."
             }
-        ]
+        ],
+        "friends": [3, 4],
+        "hide_friends": false,
+        "owner": 1,
+        "product_wishlist": { "3": true },
+        "project_wishlist": {}
     },
     {
         "id": 2,
@@ -61,6 +66,53 @@
         "img": "https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1",
         "default": true,
         "edit": false,
-        "messages": []
+        "messages": [],
+        "friends": [5],
+        "hide_friends": false,
+        "owner": 1,
+        "product_wishlist": {},
+        "project_wishlist": {}
+    },
+    {
+        "id": 3,
+        "name": "San",
+        "wallet": "0xfe236119c7Cd3656436F9f087070a429e4BfD91d",
+        "img": "https://pbs.twimg.com/media/CRsLt5HVAAEoI3N.png",
+        "default": true,
+        "edit": false,
+        "messages": [],
+        "friends": [],
+        "hide_friends": false,
+        "owner": 1,
+        "product_wishlist": {},
+        "project_wishlist": {}
+    },
+    {
+        "id": 4,
+        "name": "Tomeh",
+        "wallet": "0xfe236119c7Cd3656436F9f087070a429e4BfD91d",
+        "img": "https://d.facdn.net/art/echofireant/1420800644/1420800644.echofireant_sniper_avatar.jpg",
+        "default": true,
+        "edit": false,
+        "messages": [],
+        "friends": [],
+        "hide_friends": true,
+        "owner": 2,
+        "product_wishlist": {},
+        "project_wishlist": {}
+    },
+    {
+        "id": 5,
+        "name": "Predda",
+        "wallet": "0xfe236119c7Cd3656436F9f087070a429e4BfD91d",
+        "img": "https://pbs.twimg.com/profile_images/794107415876747264/g5fWe6Oh.jpg",
+        "default": true,
+        "edit": false,
+        "messages": [],
+        "friends": [],
+        "hide_friends": true,
+        "owner": 2,
+        "product_wishlist": {},
+        "project_wishlist": {}
     }
 ]

@@ -253,9 +253,11 @@
                 "passphrase": null,
                 "private_key": null
             },
+            "active_identity": 3,
             "notifications": [],
             "wallets": [],
             "identities": [],
+            "idts": [1, 2, 3],
             "settings": {
                 "client": {
                     "animations": true,
@@ -292,7 +294,7 @@
                 "C:/Users/Tom/Program Files/apps",
                 "/home/games"
             ],
-            "friends_list": [2, 3, 4],
+            "friends_list": [4, 5],
             "tradeURLId": "478",
             "id": 1
         },

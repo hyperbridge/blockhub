@@ -1,5 +1,5 @@
 import { getId, mergeId } from '@/store/utils';
-import { findRelation } from '@/store/module-relations';
+import { findRelation } from '@/store/modules-relation';
 
 
 const rootStore = {
@@ -11,6 +11,7 @@ const rootStore = {
         },
         update(rootState,  { id, module, target, data }) {
             const { [module]: state } = rootState;
+
             rootState[module][target][id] = {
                 ...rootState[module][target][id],
                 ...data
