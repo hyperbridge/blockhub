@@ -101,8 +101,7 @@ export const getters = {
     account: ({ account }, getters, { community: { identities }}) => ({
         ...account,
         active_identity: identities[account.active_identity],
-        identities: account.idts.map(id => identities[id]),
-        friends_list: account.friends_list.map(id => identities[id])
+        identities: account.idts.map(id => identities[id])
     })
 
 }

@@ -77,6 +77,8 @@ const community = {
 
             commit('create', payload);
             return id;
+        },
+        loadIdentities({ commit }, payload) {
         }
     },
     getters: {
@@ -106,6 +108,14 @@ const community = {
                     }, {})
                 }
             }), {}),
+        identities: ({ identities }) => Object.entries(identities)
+            .reduce((populated, [id, identity]) => ({
+                ...populated,
+                [id]: {
+                    ...identity,
+                    friends: identity.friends.map(id => identities[id])
+                }
+            }), {})
     }
 };
 

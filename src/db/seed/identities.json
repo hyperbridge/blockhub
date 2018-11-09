@@ -53,6 +53,8 @@
                 "text": "Praesent porta vulputate velit, sit amet scelerisque mauris suscipit eget. Aenean vel mi non metus consequat commodo quis vitae nibh."
             }
         ],
+        "friends": [3, 4],
+        "hide_friends": false,
         "owner": 1
     },
     {
@@ -63,6 +65,8 @@
         "default": true,
         "edit": false,
         "messages": [],
+        "friends": [5],
+        "hide_friends": false,
         "owner": 1
     },
     {
@@ -73,6 +77,8 @@
         "default": true,
         "edit": false,
         "messages": [],
+        "friends": [],
+        "hide_friends": false,
         "owner": 1
     },
     {
@@ -83,6 +89,8 @@
         "default": true,
         "edit": false,
         "messages": [],
+        "friends": [],
+        "hide_friends": true,
         "owner": 2
     },
     {
@@ -93,6 +101,8 @@
         "default": true,
         "edit": false,
         "messages": [],
+        "friends": [],
+        "hide_friends": true,
         "owner": 2
     }
 ]
