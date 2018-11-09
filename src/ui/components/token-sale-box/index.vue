@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div>
-                    <c-button status="success" size="lg" style="border-radius: 20px" icon_hide >
+                    <c-button status="success" size="lg" icon_hide >
                         Purchase HBX
                     </c-button>
                 </div>

@@ -9,7 +9,37 @@
                         :volume="1000000000"
                         :soldDollar="23455424"
                         :soldTokens="243424234"
+                        class="margin-bottom-30"
                     />
+                    <c-block class="margin-bottom-30">
+                        <div class="d-flex justify-content-between align-items-center padding-10">
+                            <div>
+                                <div class="h3 font-weight-bold p-0 m-0">
+                                    Do you hold over 20k HBX?
+                                </div>
+                                <div class="h4 font-weight-light p-0 m-0">
+                                    Don't miss exclusive splash sale on nov 15, 16, 17! Only for 20k+ HBX holders!
+                                </div>
+                            </div>
+                            <c-button size="lg" status="success" icon_hide>
+                                Purchase 20k+ HBX
+                            </c-button>
+                        </div>
+                    </c-block>
+
+                    <c-block>
+                        <div class="d-flex justify-content-between align-items-center padding-10">
+                            <div>
+                                <c-img src="../../../../static/img/hyperbridge-logo_brand-color-h.png" style="height: 50px" alt="Hyperbridge" />
+                            </div>
+                            <div class="h4 px-4 m-0 w-auto font-weight-light">
+                                BlockHub and HBX are brought to you by Hyperbridge Technology. We build technology for a crowdfunded world.
+                            </div>
+                            <c-button size="lg" status="info" icon_hide>
+                                Learn more
+                            </c-button>
+                        </div>
+                    </c-block>
                 </div>
                 <div class="col-12 col-md-6 mb-4">
                     <h2>What is HBX?</h2>
