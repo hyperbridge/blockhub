@@ -13,6 +13,9 @@ import './css/styles.scss';
 import './prototypes';
 import migrations from './db/migrations'
 import {Picker, Emoji} from 'emoji-mart-vue'
+import VueI18n from 'vue-i18n';
+
+import localeData from '@/db/seed/locale-data.json';
 
 
 import VueNumerals from 'vue-numerals'
@@ -86,8 +89,12 @@ const overrideConsoleLog = () => {
 
 // overrideConsoleLog() TODO: later
 
+
+
 initializer().then(() => {
   console.log('[BlockHub] Loading app...')
+
+  const [locale] = (window && window.navigator.locale.split('-')) || 'en';
 
   /* eslint-disable no-new */
   BlockHub.Vue = new Vue({
@@ -98,8 +105,12 @@ initializer().then(() => {
       template: `<app :data="${dataString}" />`,
       components: {
         'app': app
-      }
-  })
+      },
+    //   i18n: new VueI18n({
+    //     locale,
+    //     messages: localeData
+    //   })
+  });
 
   BlockHub.Notifications = BlockHub.Vue.$snotify
 })
