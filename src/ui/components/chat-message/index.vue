@@ -1,7 +1,7 @@
 <template>
     <li
         class="chat-message"
-        :class="{ 'chat-message--own': userId == message.author.id }"
+        :class="{ 'chat-message--own': message.author && userId == message.author.id }"
     >
         <div class="chat-message__content-wrapper">
             <c-img
@@ -14,7 +14,7 @@
                 v-text="message.content"
             />
             <button
-                v-if="userId == message.author.id"
+                v-if="message.author && userId == message.author.id"
                 class="chat-message__delete-btn"
                 @click="$emit('delete', message.id)"
             >
@@ -33,6 +33,7 @@
         name: 'chat-message',
         computed: {
             timeAgo() {
+                return;
                 return this.message.createdAt.fromNow();
             }
         }

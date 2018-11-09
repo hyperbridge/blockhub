@@ -23,7 +23,7 @@
 
                     <section>
                         <transition name="page">
-                                <router-view/>
+                            <router-view/>
                         </transition>
                     </section>
                 </div>
@@ -76,23 +76,6 @@
             padding: 9px 0;
             font-size: 21px;
             border-bottom: 5px solid transparent;
-        }
-    }
-
-    .page {
-        &-enter-active {
-            transition: opacity .6s, transform .6s ease;
-        }
-        &-leave-active {
-            transition: opacity .3s, transform .3s ease;
-        }
-        &-enter, &-leave-to {
-            opacity: 0;
-            transform: translateY(5vh);
-        }
-        &-leave-active {
-            position: absolute;
-            width: calc(100% - 30px);
         }
     }
 

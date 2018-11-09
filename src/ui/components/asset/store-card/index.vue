@@ -13,7 +13,7 @@
         <div class="store-card__info">
             <span class="store-card__name">{{ asset.name }}</span>
             <span class="store-card__price">
-                {{ asset.price.current | convertCurrency}}
+                $ {{ asset.price.current }}
             </span>
         </div>
     </div>
@@ -70,6 +70,7 @@ export default {
             padding: 6px;
             font-size: 23px;
             display: flex;
+            min-width: 90px;
             .price__dollar-sign {
                 font-size: 12px;
                 margin-left: 3px;

@@ -62,7 +62,7 @@
             <!-- //END PAGE ASIDE PANEL -->
 
             <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
-                <c-breadcrumb :links="breadcrumbLinksData" ref="breadcrumb" v-if="is_connected" />
+                <c-breadcrumb :links="breadcrumbLinksData" ref="breadcrumb" v-if="is_connected && showBreadcrumbs" />
                 <div class="container-fluid">
                     <slot v-if="is_connected" />
                 </div>
@@ -87,16 +87,19 @@
             <c-claim-popup :activated="claim_modal_active" @close="closePopup" ref="claim_modal_active"></c-claim-popup>
 
             <c-basic-popup
-                :activated="$store.state.application.editor_mode && $store.state.application.account.settings.client.hide_editor_welcome_modal"
-                @close="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_editor_welcome_modal', true)"
+                :activated="$store.state.application.editor_mode === 'editing' && !$store.state.application.account.settings.client['hide_editor_welcome_modal/' + $router.currentRoute.fullPath]"
+                @close="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_editor_welcome_modal/' + $router.currentRoute.fullPath, true)"
+                style="text-align: left;"
             >
                 <div class="h4" slot="header">Welcome to the editor</div>
                 <template slot="body">
                     <p v-if="!voteCasted">
-                        The goal of BlockHub is everything is editable and curatable through community vote. Like a super-charged Wikipedia-style entertainment platform. But this isn't yet!
+                        The goal of BlockHub is everything is editable and curatable through community vote. Like a super-charged Wikipedia-style entertainment platform. But we aren't quite there yet! So for now, you can cast votes the old school way.
                     </p>
                     <p v-if="!voteCasted">
-                        Want this to be the next section we make editable? <c-button class="underline" @click="vote">Cast your vote by clicking here!</c-button>
+                        Want this to be the next section we make editable? 
+                        <br />
+                        <c-button class="underline" @click="vote">Cast your vote by clicking here!</c-button>
                     </p>
                     <p v-if="voteCasted">
                         Your vote has been cast. Thank you!
@@ -104,6 +107,28 @@
                 </template>
                 <p slot="footer">
                     Need help? <c-button status="plain" href="/#/help">Check the Help Center</c-button>
+                </p>
+            </c-basic-popup>
+
+
+            <c-basic-popup
+                :activated="$store.state.application.active_modal === 'report'"
+                @close="$store.state.application.active_modal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">Report</div>
+                <template slot="body">
+                    <p>
+                        Our goal are BlockHub is to be hyper-focused on our community needs. That's why we've created this handy way for you to give us feedback. Simply hold ALT and click somewhere. It will send us the location of what you're looking at. Report a problem or suggest something at the click of a button! So, what's up?
+                    </p>
+                    <br />
+                    <div class="form-group">
+                        <input type="text" class="form-control" ref="reportText" placeholder="Report..." @keyup.enter="sendReport()" v-focus />
+                    </div>
+                    <br />
+                    <p><em>Hit ENTER when done</em></p>
+                </template>
+                <p slot="footer">
                 </p>
             </c-basic-popup>
 
@@ -201,6 +226,11 @@
                 default: true,
                 required: false
             },
+            showBreadcrumbs: {
+                type: Boolean,
+                default: true,
+                required: false
+            },
             headerText: {
                 type: String,
                 default: 'BlockHub',
@@ -258,6 +288,7 @@
                 mobileMode: false,
                 bluredBg: false,
                 voteCasted: false,
+                reportCoords: null,
                 breadcrumbLinksData: this.breadcrumbLinks
             }
         },
@@ -311,7 +342,7 @@
                     to: names.reduce((to, name, index) => (index < i + 1) ? to += '/' + name : to, '')
                 }));
             },
-            profile_chooser(){
+            profile_chooser() {
                 return this.$store.state.application.profile_chooser
             }
         },
@@ -319,17 +350,49 @@
             this.user_submitted_connection_message = this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))]
         },
         methods: {
-            onSwipeLeft(){
-                console.log('left swipe')
+            onSwipeLeft() {
                 this.showRightPanel = true
             },
-            onSwipeRight(){
-                console.log('right swipe')
+            onSwipeRight() {
                 this.showLeftPanel = true
             },
             vote() {
-                this.$store.commit('application/entry', { key: 'editable_page', value: window.location.hash })
+                this.$store.commit('application/entry', { key: 'editable_page', value: window.location.hash, user: this.$store.state.application.account.public_address })
                 this.voteCasted = true
+            },
+            sendReport() {
+                if (this.reportCoords) {
+                    const getPathTo = (element) => {
+                        if (element.tagName == 'HTML')
+                            return '/html[1]';
+                        if (element===document.body)
+                            return '/html[1]/body[1]';
+
+                        var ix= 0;
+                        var siblings= element.parentNode.childNodes;
+                        for (var i= 0; i<siblings.length; i++) {
+                            var sibling= siblings[i];
+                            if (sibling===element)
+                                return getPathTo(element.parentNode)+'/'+element.tagName.toLowerCase()+'['+(ix+1)+']';
+                            if (sibling.nodeType===1 && sibling.tagName===element.tagName)
+                                ix++;
+                        }
+                    }
+
+                    const cmd = {
+                        key: 'report',
+                        data: {
+                            coords: { x: this.reportCoords.x, y: this.reportCoords.y },
+                            path: this.$router.currentRoute.fullPath,
+                            element: getPathTo(document.elementFromPoint(this.reportCoords.x, this.reportCoords.y)),
+                            message: this.$refs.reportText.value
+                        }
+                    }
+
+                    this.$store.commit('application/entry', { key: 'report', value: JSON.stringify(cmd), user: this.$store.state.application.account.public_address })
+                }
+
+                this.$store.commit('application/activateModal', null)
             },
             closePopup() {
                 this.$store.state.application.active_modal = null
@@ -341,15 +404,15 @@
                 this.notifPopup = ntf;
                 this.notifPopup.show_popup = true;
             },
-            scrollSidebarDown(){
+            scrollSidebarDown() {
                 $('#scroll_sidebar').animate({scrollTop: '+=100', duration: '150'});
                 this.checkScrollButton()
             },
-            scrollSidebarUp(){
+            scrollSidebarUp() {
                 $('#scroll_sidebar').animate({scrollTop: '-=500', duration: '150'});
                 this.checkScrollButton()
             },
-            checkScrollButton(){
+            checkScrollButton() {
                 try {
                     if ($('#scroll_sidebar').children().height() > $('#scroll_sidebar').height()) {
                         // Change the scroll direction when it hits the last 10px of the sidebar
@@ -392,7 +455,7 @@
                     // this.showLeftPanel = false;
             }
         },
-        created(){
+        created() {
             window.addEventListener('resize', this.handleResize())
             this.handleResize();
         },
@@ -436,6 +499,31 @@
                 symbolPosition: 'front',
                 symbolSpacing: true
             })
+
+            window.onmousemove = function (e) {
+                if (e.altKey) {
+                    document.body.style.cursor = 'crosshair'
+                } else {
+                    document.body.style.cursor = 'default'
+                }
+            }
+
+            $(document).on('click', (e) => {
+                if (e.altKey) {
+                    e.preventDefault();
+
+                    this.reportCoords = {
+                        x: e.clientX,
+                        y: e.clientY
+                    }
+
+                    this.$store.state.application.active_modal = 'report'
+
+                    return false;
+                }
+
+                return true;
+            });
         },
         watch: {
             '$route'() {

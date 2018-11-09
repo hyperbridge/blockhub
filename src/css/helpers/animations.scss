@@ -134,3 +134,21 @@
     opacity: 0;
     transform: translateY(-10%);
 }
+
+
+.page {
+    &-enter-active {
+        transition: opacity .6s, transform .6s ease;
+    }
+    &-leave-active {
+        transition: opacity .3s, transform .3s ease;
+    }
+    &-enter, &-leave-to {
+        opacity: 0;
+        transform: translateY(5vh);
+    }
+    &-leave-active {
+        position: absolute;
+        width: calc(100% - 30px);
+    }
+}

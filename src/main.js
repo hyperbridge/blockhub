@@ -10,6 +10,9 @@ import app from './app'
 import router from './router'
 import store, { initializer } from './store'
 import migrations from './db/migrations'
+import VueI18n from 'vue-i18n';
+
+import localeData from '@/db/seed/locale-data.json';
 import './filters'
 import './components'
 import './directives'
@@ -96,8 +99,16 @@ const overrideConsoleLog = () => {
 
 // overrideConsoleLog() TODO: later
 
+
+
 initializer().then(() => {
   console.log('[BlockHub] Loading app...')
+
+  const [language] = (
+      window.navigator &&
+      window.navigator.language &&
+      window.navigator.language.split('-')
+    ) || 'en';
 
   /* eslint-disable no-new */
   BlockHub.Vue = new Vue({
@@ -108,8 +119,12 @@ initializer().then(() => {
       template: `<app :data="${dataString}" />`,
       components: {
         'app': app
-      }
-  })
+      },
+    //   i18n: new VueI18n({
+    //     locale,
+    //     messages: localeData
+    //   })
+  });
 
   BlockHub.Notifications = BlockHub.Vue.$snotify
 })

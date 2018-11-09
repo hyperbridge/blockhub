@@ -1,79 +1,28 @@
 <template>
     <c-layout navigationKey="store">
-                <div class="row">
-                    <div class="col-12 mb-4">
-                        <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/token">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <h3 class="text-yellow">Launch Sale</h3>
-                                    <p>BlockHub will begin selling the HBX token on November 10, 2018</p>
-                                </div>
-                                <div class="banner-action">
-                                    <c-button tag="div" tatus="info" icon_hide size="lg" href="/#/token">JOIN NOW</c-button>
-                                </div>
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/token">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3 class="text-yellow">Launch Sale</h3>
+                                <p>BlockHub will begin selling the HBX token on November 10, 2018</p>
                             </div>
-                        </c-banner>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12 mb-4" v-if="!desktop_mode">
-                        <c-welcome-box />
-                    </div>
-                    <div class="col-12 mb-4" v-if="showPreviewPanel">
-                        <div class="card invert">
-                            <div class="card-body">
-                                <h4>Play around with the future of BlockHub:</h4>
-                                <div>
-                                    <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
-                                    <c-button @click="rotateOperatingSystem()">Operating System {{ operating_system === 'mac' ? 'MAC' : (operating_system === 'windows' ? 'WINDOWS' : 'LINUX' ) }}</c-button>
-                                    <c-button @click="rotateEnvironmentMode()">Environment Mode {{ environment_mode.toUpperCase() }}</c-button>
-                                    <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button>
-                                    <c-button @click="$store.state.application.account.is_verified = !$store.state.application.account.is_verified">Account {{ $store.state.application.account.is_verified ? 'VERIFIED' : 'NOT VERIFIED' }}</c-button>
-                                    <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button>
-                                    <c-button @click="rotateEditorMode()">Editor Mode {{ $store.state.application.editor_mode.toUpperCase() }}</c-button>
-                                    <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button>
-                                    <br /><br />
-                                </div>
-                                <div>
-                                    <c-button @click="importSeedData()">Import Seed Data</c-button>
-                                    <c-button @click="resetSeedData()">Reset Seed Data</c-button>
-                                    <br /><br />
-                                </div>
-                                <div>
-                                    <c-button @click="$store.state.application.connection.auto = !$store.state.application.connection.auto">Auto Connect is {{ $store.state.application.connection.auto ? 'ON' : 'OFF' }}</c-button>
-                                    <c-button @click="$store.state.application.connection.internet = !$store.state.application.connection.internet">Internet is {{ $store.state.application.connection.internet ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
-                                    <c-button @click="$store.state.application.connection.datasource = !$store.state.application.connection.datasource">Datasource is {{ $store.state.application.connection.datasource ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
-                                    <c-button @click="$store.state.application.connection.operator = !$store.state.application.connection.operator" v-if="desktop_mode">Operator is {{ $store.state.application.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
-                                    <c-button @click="$store.state.application.connection.ethereum = !$store.state.application.connection.ethereum" v-if="desktop_mode">Ethereum is {{ $store.state.application.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
-                                    <br /><br />
-                                </div>
-                                <div>
-                                    <c-button @click="saveSettings()">Save Settings</c-button>
-                                    <c-button @click="resetSettings()">Reset Settings</c-button>
-                                    <br /><br />
-                                </div>
-                                <div v-if="desktop_mode" hidden>
-                                    <input ref="desktopMessage" type="text" />
-                                    <c-button @click="sendDesktopMessage()">Send Message To Desktop</c-button>
-                                </div>
-                                <div v-if="developer_mode" hidden>
-                                    <h4>Darklaunch Manager</h4>
-                                    <select id="darklaunch-editor" class="form-control" multiple="multiple">
-                                        <option v-for="(flag, index) in $store.state.application.darklaunch_flags"
-                                            :key="index"
-                                            :selected="$store.state.application.account.darklaunch_flags.map(flag => flag.enabled ? flag.code : null).includes(flag.code)"
-                                        >
-                                            {{ flag.code }} - {{ flag.description }}
-                                        </option>
-                                    </select>
-                                </div>
+                            <div class="banner-action">
+                                <c-button tag="div" tatus="info" icon_hide size="lg" href="/#/token">JOIN NOW</c-button>
                             </div>
                         </div>
-                    </div>
+                    </c-banner>
                 </div>
+            </div>
 
-                <c-infinite-content :list="list" />
+            <div class="row">
+                <div class="col-12 mb-4" v-if="!$store.state.application.desktop_mode">
+                    <c-welcome-box />
+                </div>
+            </div>
+
+            <c-infinite-content :list="list" />
 
             <c-custom-modal title="BlockHub Preview" v-if="showWelcomeModal" @close="closeModal">
                 <div class="help-modal__content" slot="modal_body" style="max-width: 500px">
@@ -94,7 +43,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-
 
 const updateLandingImage = function() {
     const frontpage_product = this.$store.state.marketplace.frontpage_product
@@ -117,7 +65,6 @@ export default {
     data() {
         return {
             showWelcomeModal: ['preview', 'staging', 'local'].includes(this.$store.state.application.environment_mode) && !this.$store.state.application.account.settings.client.hide_welcome_modal,
-            showPreviewPanel: ['preview', 'staging', 'local'].includes(this.$store.state.application.environment_mode)
         }
     },
     computed: {
@@ -335,95 +282,11 @@ export default {
 
         //     return this.$store.state.marketplace.products
         // },
-        signed_in() {
-            return this.$store.state.application.signed_in
-        },
-        simulator_mode() {
-            return this.$store.state.application.simulator_mode
-        },
-        desktop_mode() {
-            return this.$store.state.application.desktop_mode
-        },
-        developer_mode() {
-            return this.$store.state.application.developer_mode
-        },
-        operating_system() {
-            return this.$store.state.application.operating_system
-        },
-        environment_mode() {
-            return this.$store.state.application.environment_mode
-        }
     },
     methods: {
-        toggleDesktopMode() {
-            this.$store.state.application.desktop_mode = !this.$store.state.application.desktop_mode
-        },
-        toggleSignedIn() {
-            this.$store.state.application.signed_in = !this.$store.state.application.signed_in
-        },
-        toggleDeveloper() {
-            this.$store.state.application.is_developer = !this.$store.state.application.is_developer
-        },
-        toggleDeveloperMode() {
-            this.$store.state.application.developer_mode = !this.$store.state.application.developer_mode
-        },
-        toggleSimulator() {
-            this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulator_mode)
-        },
-        rotateEditorMode() {
-            if (this.$store.state.application.editor_mode === 'editing') {
-                this.$store.state.application.editor_mode = 'viewing'
-            } else if (this.$store.state.application.editor_mode === 'viewing') {
-                this.$store.state.application.editor_mode = 'publishing'
-            } else {
-                this.$store.state.application.editor_mode = 'editing'
-            }
-        },
-        rotateOperatingSystem() {
-            if (this.$store.state.application.operating_system === 'mac') {
-                this.$store.state.application.operating_system = 'windows'
-            } else if (this.$store.state.application.operating_system === 'windows') {
-                this.$store.state.application.operating_system = 'linux'
-            } else {
-                this.$store.state.application.operating_system = 'mac'
-            }
-        },
-        rotateEnvironmentMode() {
-            if (this.$store.state.application.environment_mode === 'production') {
-                this.$store.commit('application/updateEnvironmentMode', 'staging')
-            } else if (this.$store.state.application.environment_mode === 'staging') {
-                this.$store.commit('application/updateEnvironmentMode', 'beta')
-            } else if (this.$store.state.application.environment_mode === 'beta') {
-                this.$store.commit('application/updateEnvironmentMode', 'preview')
-            } else if (this.$store.state.application.environment_mode === 'preview') {
-                this.$store.commit('application/updateEnvironmentMode', 'local')
-            } else {
-                this.$store.commit('application/updateEnvironmentMode', 'production')
-            }
-        },
-        importSeedData() {
-            window.BlockHub.importSeedData()
-        },
-        resetSeedData() {
-            window.BlockHub.resetSeedData()
-        },
-        saveSettings() {
-            window.BlockHub.saveDatabase()
-        },
-        resetSettings() {
-            window.resetSettings()
-        },
         closeModal() {
             this.showWelcomeModal = false
             this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_welcome_modal', true)
-        },
-        sendDesktopMessage() {
-            if (!window.isElectron) {
-                return alert('Not on desktop')
-            }
-
-            BlockHub.Bridge.sendCommand('ping', this.$refs.desktopMessage.value)
-            BlockHub.Bridge.on('pong', (event, msg) => console.log('Message from desktop: ', msg) )
         }
     },
     mounted() {

@@ -44,7 +44,7 @@
                                         <c-button @click="toggleRawData(protocol.id)" v-if="!protocolData[protocol.id].visible">Raw</c-button>
                                     </td>
                                 </tr>
-                                <tr v-for="(contract) in protocol.contracts" :key="contract.name">
+                                <tr v-for="(contract) in protocol.contracts" :key="`${protocol.id}-${contract.name}`">
                                     <td>
                                         <label class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" v-model="selected" :value="`${protocol.id}.${contract.name}`" number />
@@ -66,14 +66,15 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" :value="contract.address" />
+                                            <input type="text" class="form-control" v-model="contract.address" />
                                             <span class="input-group-append">
-                                                <button class="btn btn-light" type="button">Copy</button>
+                                                <button class="btn btn-light" type="button" @click.prevent="$store.dispatch('application/sendCommand', { key: 'writeToClipboard', data: contract.address })">Copy</button>
                                             </span>
                                         </div>
                                     </td>
                                     <td>
                                         <button class="btn btn-light btn-sm" @click.prevent="deployContract(protocol.id, contract.name, contract.address)">Deploy</button>
+                                        <button class="btn btn-light btn-sm" @click.prevent="$store.dispatch('application/sendCommand', { key: 'setContractAddress', data: { protocolName: protocol.id, contractName: contract.name, address: contract.address }})">Update</button>
                                     </td>
                                 </tr>
                             </template>

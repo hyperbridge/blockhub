@@ -40,7 +40,10 @@
                 :onClickPurchase="showPurchaseModal"
                 class="margin-bottom-15"
                 :inWishlist="!!wishlist[product.id]"
-                @addToWishlist="addToWishlist"
+                @addToWishlist="$store.dispatch(
+                    'community/updateWishlist',
+                    ['product', product.id]
+                )"
             />
             <c-button icon_hide @click="showInstaller = !showInstaller" hidden>Open installer</c-button>
 
@@ -240,14 +243,6 @@
                 } else {
                     return false
                 }
-            },
-            addToWishlist() {
-                const { id } = this.product;
-                this.$store.commit('application/updateFavorites', { id })
-                // this.$snotify.success(
-                //     `Product has been ${this.wishlist[id] ? 'added to' : 'removed from'} your wishlist`,
-                //     `Product ${this.wishlist[id] ? 'added' : 'removed'}`
-                // );
             }
         },
         computed:{
@@ -255,7 +250,7 @@
                 return this.$refs.streams_slider.swiper;
             },
             wishlist() {
-                return this.$store.state.application.account.product_wishlist || {};
+                return this.$store.getters['application/identity'].product_wishlist || {};
             }
         }
     }

@@ -40,8 +40,6 @@ const temporaryGetters = {
 }
 
 
-window.getters = temporaryGetters;
-console.log(temporaryGetters.assets)
 
 const ctx = {};
 

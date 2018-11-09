@@ -63,7 +63,7 @@ export default {
         }
     }
     .progress-bar {
-        border-radius: 4px;
+        border-radius: 10px;
         background: #2abaf3;
         background: -moz-linear-gradient(left, #2abaf3 0%, #63ec48 100%);
         background: -webkit-linear-gradient(left, #2abaf3 0%, #63ec48 100%);

@@ -15,6 +15,7 @@ import user from '@/modules/user'
 import { saveDB } from './plugins'
 import assets from '@/modules/assets'
 import community from '@/modules/community'
+import rootStore from '@/modules/root'
 import seed from '../db/seed'
 
 Vue.use(Vuex);
@@ -63,6 +64,7 @@ const CheckDevConfig = () => {
 const devConfig = CheckDevConfig()
 
 const store = new Vuex.Store({
+    ...rootStore,
     plugins: [saveDB],
     modules: {
         cache: {

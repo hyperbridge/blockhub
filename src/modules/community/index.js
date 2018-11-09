@@ -2,17 +2,11 @@ import moment from 'moment';
 
 import messagesData from '@/db/seed/messages.json';
 import usersData from '@/db/seed/users.json';
+import identitiesData from '@/db/seed/identities.json';
 
 import { extract, getId, mergeId } from '@/store/utils';
 
-const asyncData = {
-    get: {
-        ['2']: 3
-    },
-    post: {
-        message: () => ({ id: getId(), author: 1, createdAt: moment() })
-    }
-};
+
 
 const community = {
     namespaced: true,
@@ -28,6 +22,10 @@ const community = {
             ...users,
             [user.id]: user
         }), {}),
+        identities: identitiesData.reduce((identities, idt) => ({
+            ...identities,
+            [idt.id]: idt
+        }), {})
     },
     mutations: {
         create(state, { target = 'messages', id, data }) {
@@ -79,6 +77,23 @@ const community = {
 
             commit('create', payload);
             return id;
+        },
+        updateWishlist(
+            { dispatch, rootGetters: { ['application/account']: account }},
+            [name, itemId]
+        ) {
+            const identity = account.active_identity;
+            const prop = [name + '_wishlist'];
+            const wishlist = { ...identity[prop] };
+
+            if (wishlist[itemId]) delete wishlist[itemId];
+            else wishlist[itemId] = true;
+
+            dispatch(
+                'updateV2',
+                [`community/identities/${prop}`, identity.id, { [prop]: wishlist }],
+                { root: true }
+            );
         }
     },
     getters: {
@@ -88,7 +103,7 @@ const community = {
                 [msg.id]: {
                     ...msg,
                     author: users[msg.author],
-                    timeAgo: moment(msg.createdAt).fromNow()
+                    // timeAgo: moment(msg.createdAt).fromNow()
                 }
             }), {}),
         users: ({ users }, getters, rootState, { ['assets/assets']: assets }) => Object.values(users)
@@ -108,6 +123,15 @@ const community = {
                     }, {})
                 }
             }), {}),
+        identities: ({ identities }) => Object
+            .entries(identities)
+            .reduce((populated, [id, identity]) => ({
+                ...populated,
+                [id]: {
+                    ...identity,
+                    friends: identity.friends.map(id => identities[id])
+                }
+            }), {})
     }
 };
 

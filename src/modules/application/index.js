@@ -91,14 +91,12 @@ export const getters = {
 
         return result
     },
-    wishlistedProducts: ({ account }, getters, { marketplace: { products }}) => Object
-        .keys(account.product_wishlist)
-        .map(id => products[Number(id)]),
-        // .map(id => extract(products[Number(id)], ['images', 'release_date', 'price'])),
-    wishlistedProjects: ({ account }, getters, { funding: { projects }}) => Object
-        .keys(account.project_wishlist)
-        .map(id => projects[id])
-
+    account: ({ account }, getters, { community: { identities }}) => ({
+        ...account,
+        active_identity: identities[account.active_identity],
+        identities: account.idts.map(id => identities[id])
+    }),
+    identity: (state, { account }) => account.active_identity
 }
 
 export const actions = {
@@ -240,6 +238,9 @@ export const actions = {
                 })
         })
     },
+    sendCommand(store, { key, data }) {
+        Bridge.sendCommand(key, data).then(() => {})
+    },
     createTradeURL({ commit, state }) {
         // async call => delete previous trade url
         // state.account.tradeURLId
@@ -286,7 +287,7 @@ export const mutations = {
         state.environment_mode = payload
 
         Bridge.sendCommand('setEnvironmentMode', payload).then((data) => {
-            
+
         })
     },
     createTradeURL(state, id) {
@@ -357,6 +358,7 @@ export const mutations = {
 
         bodyFormData.set('entry.524169597', payload.key)
         bodyFormData.set('entry.399172045', payload.value)
+        bodyFormData.set('entry.832916558', payload.user || '')
 
         axios({
             method: 'post',

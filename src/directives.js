@@ -1,5 +1,6 @@
-import Vue from 'vue'
-import store from './store'
+import Vue from 'vue';
+import store from './store';
+import axios from 'axios';
 
 Vue.directive('xmodel', {
     bind(el, binding, vnode) {
@@ -135,5 +136,23 @@ Vue.directive('debounce', {
     },
     unbind(el, { arg: event }, vnode) {
         vnode.componentInstance.$off(event, el.__debounce__);
+    }
+});
+
+Vue.directive('translate', {
+    bind(el, binding, vnode) {
+        console.log(el)
+        console.log(binding)
+        console.log(vnode)
+
+        const { textContent } = el;
+        const { language } = navigator;
+
+        el.textContent = 'Translating...';
+
+        setTimeout(() => {
+
+        }, 2000);
+        // el.textContent = 'Translating...';
     }
 });

@@ -266,10 +266,9 @@ const assets = {
                     offers_list: asset.offers_list.map(id => assets[id]),
                     inventory_list: asset.inventory_list.map(id => assets[id]),
                     collections: asset.collections.map(id => collections[id]),
-                    product: extract(products[asset.product], ['images', 'price'])
+                    product: (products[asset.product] && extract(products[asset.product], ['images', 'price'])) || {}
                 }
             }), {}),
-        array: (state, { assets }) => Object.values(assets),
         assetsArray: (state, { assets }) => Object.values(assets),
         users: ({ users }, { assets }) => Object.values(users)
             .map(user => ({
