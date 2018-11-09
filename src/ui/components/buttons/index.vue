@@ -92,6 +92,9 @@
         text-decoration: none;
         cursor: pointer;
         transition: all 200ms ease-in-out;
+        span{
+            white-space: nowrap;
+        }
         &.plain {
             box-shadow: unset;
             margin: 0 2px;

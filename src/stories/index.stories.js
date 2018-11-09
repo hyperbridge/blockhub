@@ -4475,7 +4475,13 @@ storiesOf('Token Sale Box', module)
         },
         template: `
         <div class="p-5" style="width: 1200px;">
-            <c-toke-sale />
+            <c-toke-sale 
+            :hardCap="18000000"
+            :softCap="7500000"
+            :volume="1000000000"
+            :soldDollar="23455424"
+            :soldTokens="243424234"
+            />
         </div>`
     }))
 
