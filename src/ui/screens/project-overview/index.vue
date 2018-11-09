@@ -43,9 +43,12 @@
                     </a>
                     <h2 class="title">Crowdfunding campaign</h2>
                     <c-btn-fav
-                        @click="addToWishlist()"
-                        target="Wishlist"
+                        target="wishlist"
                         :active="!!wishlist[project.id]"
+                        @click="$store.dispatch(
+                            'community/updateWishlist',
+                            ['project', project.id]
+                        )"
                     />
                     <div class="project">
                         <div class="project__progress">
@@ -180,19 +183,11 @@
             showContributeModal() {
                 this.$store.commit('application/showProfileChooser', true)
                 //this.$store.dispatch('application/activateModal', 'send-funds')
-            },
-            addToWishlist() {
-                const { id } = this.project;
-                this.$store.commit('application/updateFavorites', { id, prop: 'project_wishlist' })
-                this.$snotify.success(
-                    `Project has been ${this.wishlist[id] ? 'added to' : 'removed from'} your wishlist`,
-                    `Project ${this.wishlist[id] ? 'added' : 'removed'}`
-                );
             }
         },
         computed: {
             wishlist() {
-                return this.$store.state.application.account.project_wishlist;
+                return this.$store.getters['application/identity'].project_wishlist || {};
             }
         }
     }

@@ -123,7 +123,8 @@ const community = {
                     }, {})
                 }
             }), {}),
-        identities: ({ identities }) => Object.entries(identities)
+        identities: ({ identities }) => Object
+            .entries(identities)
             .reduce((populated, [id, identity]) => ({
                 ...populated,
                 [id]: {
