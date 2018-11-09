@@ -285,6 +285,7 @@
                 </div>
 
                     <div class="col-12" id="overview">
+                        <transition name="page">
                             <c-project-overview :project="project" v-if="section === 'overview'" :editing="editing" />
                             <c-project-community :project="project" v-if="section === 'community'" :editing="editing" />
                             <c-project-bounties :project="project" v-if="section === 'bounties'" :editing="editing" />
@@ -292,7 +293,7 @@
                             <c-project-discussion :project="project" v-if="section === 'discussion'" :editing="editing" />
                             <c-project-milestones :project="project" v-if="section === 'milestones'" :editing="editing" />
                             <c-project-updates :project="project" v-if="section === 'updates'" :editing="editing" />
-                        
+                        </transition>
                     </div>
             </div>
     </c-layout>
@@ -328,7 +329,13 @@
     }
 
     export default {
-        props: ['id', 'section'],
+        props: {
+            id: [String, Number],
+            section: {
+                type: String,
+                default: 'overview'
+            }
+        },
         components: {
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-badges': (resolve) => require(['@/ui/components/project/badges'], resolve),
