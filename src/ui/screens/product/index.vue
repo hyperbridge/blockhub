@@ -163,11 +163,12 @@
                         </div>
 
                     <div class="col-12">
-                        <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
-                        <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
-                        <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
-                        <c-product-projects :product="product" v-if="section === 'projects'" :editing="editing" />
-
+                        <transition name="page">
+                            <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
+                            <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
+                            <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
+                            <c-product-projects :product="product" v-if="section === 'projects'" :editing="editing" />
+                        </transition>
                     </div>
                 </div>
             </div>
