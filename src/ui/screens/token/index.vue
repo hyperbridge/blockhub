@@ -187,13 +187,13 @@
                     <p>The BlockHub desktop client is the recommended way to load up on tokens.</p>
                 </div> -->
 
-                <div class="" v-if="!ethereum_connected" style="text-align: center; width: 100%">
+                <div class="" v-if="!ethereum_connected" style="text-align: center; width: 100%" hidden>
                     <c-welcome-box />
                     <br /><br />
                 </div>
 
                 <div class="col-12 col-md-6 offset-md-3" v-if="!ethereum_connected" style="text-align: center; width: 100%">
-                    <h2>Alternative: MetaMask</h2>
+                    <h2 hidden>Alternative: MetaMask</h2>
 
                     <br />
 
