@@ -110,10 +110,11 @@
                 </ul>
             </div>
             <div class="token-sale-box__body-media">
-                <video controls >
-                    <source src="../../../../static/video/mission_launch.mp4" type="video/mp4">
-                    Your browser doesn't support HTML5 video tag.
-                </video>
+                <!--<video controls >-->
+                    <!--<source src="../../../../static/video/mission_launch.mp4" type="video/mp4">-->
+                    <!--Your browser doesn't support HTML5 video tag.-->
+                <!--</video>-->
+                <iframe width="280" height="160" src="https://www.youtube.com/embed/-QEdXZWMe-M" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -253,10 +254,17 @@
     }
     .token-sale-box__body-media{
         overflow: hidden;
+        border-radius: 10px;
         video{
             width: auto;
             height: 158px;
             border-radius: 10px;
+        }
+        iframe{
+            border-radius: 10px;
+            overflow: hidden;
+            height: 100%;
+            width: 295px;
         }
     }
 </style>
