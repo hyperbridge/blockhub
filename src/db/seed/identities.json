@@ -55,7 +55,9 @@
         ],
         "friends": [3, 4],
         "hide_friends": false,
-        "owner": 1
+        "owner": 1,
+        "product_wishlist": { "3": true },
+        "project_wishlist": {}
     },
     {
         "id": 2,
@@ -67,7 +69,9 @@
         "messages": [],
         "friends": [5],
         "hide_friends": false,
-        "owner": 1
+        "owner": 1,
+        "product_wishlist": {},
+        "project_wishlist": {}
     },
     {
         "id": 3,
@@ -79,7 +83,9 @@
         "messages": [],
         "friends": [],
         "hide_friends": false,
-        "owner": 1
+        "owner": 1,
+        "product_wishlist": {},
+        "project_wishlist": {}
     },
     {
         "id": 4,
@@ -91,7 +97,9 @@
         "messages": [],
         "friends": [],
         "hide_friends": true,
-        "owner": 2
+        "owner": 2,
+        "product_wishlist": {},
+        "project_wishlist": {}
     },
     {
         "id": 5,
@@ -103,6 +111,8 @@
         "messages": [],
         "friends": [],
         "hide_friends": true,
-        "owner": 2
+        "owner": 2,
+        "product_wishlist": {},
+        "project_wishlist": {}
     }
 ]

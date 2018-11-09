@@ -11,6 +11,7 @@ const rootStore = {
         },
         update(rootState,  { id, module, target, data }) {
             const { [module]: state } = rootState;
+
             rootState[module][target][id] = {
                 ...rootState[module][target][id],
                 ...data

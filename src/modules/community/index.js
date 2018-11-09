@@ -78,7 +78,22 @@ const community = {
             commit('create', payload);
             return id;
         },
-        loadIdentities({ commit }, payload) {
+        updateWishlist(
+            { dispatch, rootGetters: { ['application/account']: account }},
+            [name, itemId]
+        ) {
+            const identity = account.active_identity;
+            const prop = [name + '_wishlist'];
+            const wishlist = { ...identity[prop] };
+
+            if (wishlist[itemId]) delete wishlist[itemId];
+            else wishlist[itemId] = true;
+
+            dispatch(
+                'updateV2',
+                [`community/identities/${prop}`, identity.id, { [prop]: wishlist }],
+                { root: true }
+            );
         }
     },
     getters: {

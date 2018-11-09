@@ -61,7 +61,8 @@ const data = [
     }, spreadProps);
   }
 
-  const deco = decompose('identities', ['messages'], data);
+//   const deco = decompose('identities', ['messages'], data);
 
-  const { idts, msgs, users } = decomp(['identities|idts', 'messages|msgs', 'messages/author|users'], data);
+//   const decomp = () => ({});
+//   const { idts, msgs, users } = decomp(['identities|idts', 'messages|msgs', 'messages/author|users'], data);
 
