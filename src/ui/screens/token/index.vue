@@ -69,7 +69,7 @@
             <div class="row">
                 <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked">
                     <c-block title="Purchase" class="margin-bottom-30">
-                        <p>Each HBX token is <strong>${{ tokenPriceUSD }} USD</strong>, and can be purchased with ETH at the current price of <strong>{{ (1/ETH2USD).toString().slice(0, 6) }} ETH</strong> per HBX <em>(Based on a locked conversion of ${{ ETH2USD }} USD per 1 ETH)</em>.</p>
+                        <p>Each HBX token is <strong>${{ tokenPriceUSD | convertCurrency }}</strong>, and can be purchased with ETH at the current price of <strong>{{ (1/ETH2USD).toString().slice(0, 6) }} ETH</strong> per HBX <em>(Based on a locked conversion of ${{ ETH2USD }} USD per 1 ETH)</em>.</p>
                         <div class="input-group mb-4">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">

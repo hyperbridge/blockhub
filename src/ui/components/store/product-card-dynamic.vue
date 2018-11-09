@@ -6,7 +6,7 @@
     >
         <div class="position-relative">
             <div v-if="product.price" class="product-grid__item-price">
-                <strong>{{ product.price }}</strong> USD
+                <strong>{{ product.price | convertCurrency }}</strong>
             </div>
             <a :href="`/#/product/${product.id}`" class="card-img-top">
                 <transition name="fade">

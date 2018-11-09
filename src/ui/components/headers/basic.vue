@@ -56,7 +56,7 @@
                     <p><span class="fa fa-check"></span> Publish</p>
                 </button>
                 <button class="exit-btn btn btn-secondary btn-block btn--icon btn--icon-left" @click="clickExit()" v-if="!is_viewing">
-                    <p><span class="fa fa-eye"></span> Preview</p>
+                    <p><span class="fa fa-arrow-alt-circle-left"></span> Back</p>
                 </button>
             </div>
             <nav class="app-header__nav hide-on-mobile" v-if="!signed_in || (signed_in && is_viewing)">
@@ -85,7 +85,7 @@
                                 <span class="text">Store</span>
                             </a>
                         </li>
-                        <li v-if="signed_in">
+                        <li v-if="signed_in" v-darklaunch="'CHEST'">
                             <a href="/#/chest">
                                 <span class="icon fa fa-box-open"></span>
                                 <span class="text">Chest</span>
@@ -98,7 +98,7 @@
                                  <!-- podcast  global hand-holding-heart -->
                             </a>
                         </li>
-                        <li v-if="signed_in">
+                        <li v-if="signed_in" v-darklaunch="'COMMUNITY'">
                             <a href="/#/community">
                                 <span class="icon fa fa-globe-americas"></span>
                                 <span class="text">Community</span>
@@ -149,6 +149,12 @@
                                             View Public Profile
                                         </a>
                                     </li>
+                                    <li v-if="signed_in" v-darklaunch="'CONTACTS'">
+                                        <a :href="`/#/identity/${account.current_identity.public_address}/contacts`">
+                                            <i class="fas fa-users"></i>
+                                            Contacts
+                                        </a>
+                                    </li>
                                     <li>
                                         <a @click="$store.commit('application/showProfileChooser', true)">
                                             <i class="fas fa-user-edit"></i>
@@ -178,22 +184,10 @@
 
                             </c-dropdown>
                         </li>
-                        <li v-if="signed_in" v-darklaunch="'CONTACTS'">
-                            <a href="/#/identity/1/contacts">
-                                <span class="icon fa fa-users"></span>
-                                <span class="text">Contacts</span>
-                            </a>
-                        </li>
                         <li v-if="desktop_mode && !signed_in && !is_locked">
                             <a href="/#/account/signin">
                                 <span class="icon fa fa-sign-out-alt"></span>
                                 <span class="text">Sign In</span>
-                            </a>
-                        </li>
-                        <li v-if="!is_locked">
-                            <a href="/#/help">
-                                <span class="icon fa fa-question-circle"></span>
-                                <span class="text">Help</span>
                             </a>
                         </li>
                         <li v-if="!is_locked && languages" class="ml-3">
@@ -201,6 +195,12 @@
                         </li>
                         <li v-if="!is_locked && currencies" class="ml-2">
                             <c-currency-dropdown :current_currency="current_currency" :currencies="currencies" @change="selectCurrency" />
+                        </li>
+                        <li v-if="!is_locked">
+                            <a href="/#/help">
+                                <span class="icon fa fa-question-circle"></span>
+                                <span class="text">Help</span>
+                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -327,9 +327,23 @@ export default {
             browserWindow.minimize()
         },
         selectCurrency(currency) {
-            console.log(currency)
             this.account.currency = currency
             this.$store.commit('application/updateState')
+
+            const fractionCountMap = {
+                'BTC': 6,
+                'ETH': 6,
+                'DAI': 2
+            }
+
+            this.$CurrencyFilter.setConfig({
+                symbol: currency.symbol,
+                thousandsSeparator: ',',
+                fractionCount: fractionCountMap[currency.code] || 2,
+                fractionSeparator: '.',
+                symbolPosition: 'front',
+                symbolSpacing: true
+            })
         },
         selectLanguages(lang) {
             this.account.language = lang

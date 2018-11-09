@@ -25,9 +25,7 @@ This is the main web client for BlockHub, built primarily with Web3.js and Vue.j
 - 💻 [Web Client](https://github.com/hyperbridge/blockhub-web-client)
 - 💻 [Desktop Client](https://github.com/hyperbridge/blockhub-desktop-client)
 - 🛡 [Node Operator](https://github.com/hyperbridge/blockhub-node-operator)
-- 🔗 [Token](https://github.com/hyperbridge/token)
-- 🔗 [Funding Protocol](https://github.com/hyperbridge/funding-protocol)
-- 🔗 [Marketplace Protocol](https://github.com/hyperbridge/marketplace-protocol)
+- 🔗 [Protocol](https://github.com/hyperbridge/protocol)
 
 ## Install
 

@@ -3,15 +3,12 @@
 
         <c-sidebar-menu title="STORE" sub_title="General" mClass="margin-bottom-20">
             <c-sidebar-menu-link :to="{ name: 'Home' }">Home</c-sidebar-menu-link>
-            <c-sidebar-menu-link :to="{ name: 'Community' }">Community</c-sidebar-menu-link>
-            <c-sidebar-menu-link
-                v-for="page in ['Crowdfunds', 'Realms', 'Curators', 'Collections']"
-                :key="`${page}`"
-                :to="{ name: page }"
-            >
-                Browse {{ page }}
-            </c-sidebar-menu-link>
-            <c-sidebar-menu-link :to="{ name: 'Marketplace' }">Browse Items</c-sidebar-menu-link>
+            <c-sidebar-menu-link :to="{ name: 'Community' }" v-darklaunch="'COMMUNITY'">Community</c-sidebar-menu-link>
+            <c-sidebar-menu-link :to="{ name: 'Crowdfunds' }">Browse Crowdfunds</c-sidebar-menu-link>
+            <c-sidebar-menu-link :to="{ name: 'Realms' }" v-darklaunch="'REALMS'">Browse Realms</c-sidebar-menu-link>
+            <c-sidebar-menu-link :to="{ name: 'Curators' }" v-darklaunch="'CURATORS'">Browse Curators</c-sidebar-menu-link>
+            <c-sidebar-menu-link :to="{ name: 'Collections' }" v-darklaunch="'COLLECTIONS'">Browse Collections</c-sidebar-menu-link>
+            <c-sidebar-menu-link :to="{ name: 'Marketplace' }" v-darklaunch="'MARKETPLACE'">Browse Items</c-sidebar-menu-link>
         </c-sidebar-menu>
 
         <c-sidebar-menu sub_title="Browse By Genre" sub_icon="fas fa-gamepad" mClass="margin-bottom-20">

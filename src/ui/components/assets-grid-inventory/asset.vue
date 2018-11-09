@@ -18,11 +18,11 @@
                     :asset="asset"
                 />
                 <c-img :src="asset.image" class="asset__image"/>
-                <span class="asset__price">{{ asset.price.current }}$</span>
+                <span class="asset__price">{{ asset.price.current | convertCurrency }}</span>
             </c-tooltip>
             <div v-else>
                 <c-img :src="asset.image" class="asset__image"/>
-                <span class="asset__price">{{ asset.price.current }}$</span>
+                <span class="asset__price">{{ asset.price.current | convertCurrency }}</span>
             </div>
         </slot>
         <div class="asset__show-sold" v-show="showSold">

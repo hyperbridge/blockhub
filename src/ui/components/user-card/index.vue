@@ -5,6 +5,7 @@
                 v-if="previewMode"
                 class="user-data__icon"
                 :class="{ 'verified': user.verified }"
+                hidden
             >
                 <i class="fas" :class="{ 'fa-check': user.verified, 'fa-times': !user.verified }"></i>
             </div>
@@ -69,7 +70,7 @@
                 @input="$emit('update:wallet', $event.target.value)"
                 readonly="readonly"
             />
-            <button v-darklaunch="'BADGES'">
+            <button v-darklaunch="'BADGES'" @click="copyToClipboard(user.public_address)">
                 <i :class="`fas fa-${previewMode ? 'copy' : 'redo-alt'}`"></i>
             </button>
         </div>
@@ -91,12 +92,19 @@
                 type: String,
                 default: 'success',
                 validator(val) {
-                    return ['info', 'success', 'warning', 'danger'].includes(val);
+                    return ['info', 'success', 'warning', 'danger'].includes(val)
                 }
             },
             iconColor: String,
             iconClass: String,
             previewMode: Boolean
+        },
+        methods: {
+            copyToClipboard(value) {
+                BlockHub.Bridge.sendCommand('writeToClipboard', value)
+
+                this.$snotify.success('Address copied to clipboard')
+            }
         }
     }
 </script>

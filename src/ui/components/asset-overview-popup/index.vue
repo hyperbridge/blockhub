@@ -11,9 +11,9 @@
                 <h4>{{ asset.name }}</h4>
                 <h6>{{ asset.product_name }}</h6>
                 <div class="description">
-                    <h6>{{ asset.price['current'] }}$</h6>
+                    <h6>{{ asset.price['current'] | convertCurrency }}</h6>
                     <p>Based on 7461 other transactions</p>
-                    <p>Lowest: {{ asset.price['min'] }}$ Highest: {{ asset.price['max'] }}$</p>
+                    <p >Lowest: {{ asset.price['min'] | convertCurrency }} Highest: {{ asset.price['max'] | convertCurrency }}</p>
                 </div>
             </div>
         </div>

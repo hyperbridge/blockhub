@@ -62,7 +62,7 @@
             <!-- //END PAGE ASIDE PANEL -->
 
             <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
-                <c-breadcrumb :links="breadcrumbLinksData" ref="breadcrumb" v-if="is_connected" />
+                <c-breadcrumb :links="breadcrumbLinksData" ref="breadcrumb" v-if="is_connected && showBreadcrumbs" />
                 <div class="container-fluid">
                     <slot v-if="is_connected" />
                 </div>
@@ -166,7 +166,7 @@
         </div>
         <!-- //END PAGE CONTENT -->
 
-        <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
+        <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
 
         <!--<transition name="slideDown">-->
             <c-profile-chooser v-if="profile_chooser && signed_in" />
@@ -197,6 +197,11 @@
                 required: false
             },
             showRightPanel: {
+                type: Boolean,
+                default: true,
+                required: false
+            },
+            showBreadcrumbs: {
                 type: Boolean,
                 default: true,
                 required: false
@@ -311,7 +316,7 @@
                     to: names.reduce((to, name, index) => (index < i + 1) ? to += '/' + name : to, '')
                 }));
             },
-            profile_chooser(){
+            profile_chooser() {
                 return this.$store.state.application.profile_chooser
             }
         },
@@ -319,12 +324,10 @@
             this.user_submitted_connection_message = this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))]
         },
         methods: {
-            onSwipeLeft(){
-                console.log('left swipe')
+            onSwipeLeft() {
                 this.showRightPanel = true
             },
-            onSwipeRight(){
-                console.log('right swipe')
+            onSwipeRight() {
                 this.showLeftPanel = true
             },
             vote() {
@@ -341,15 +344,15 @@
                 this.notifPopup = ntf;
                 this.notifPopup.show_popup = true;
             },
-            scrollSidebarDown(){
+            scrollSidebarDown() {
                 $('#scroll_sidebar').animate({scrollTop: '+=100', duration: '150'});
                 this.checkScrollButton()
             },
-            scrollSidebarUp(){
+            scrollSidebarUp() {
                 $('#scroll_sidebar').animate({scrollTop: '-=500', duration: '150'});
                 this.checkScrollButton()
             },
-            checkScrollButton(){
+            checkScrollButton() {
                 try {
                     if ($('#scroll_sidebar').children().height() > $('#scroll_sidebar').height()) {
                         // Change the scroll direction when it hits the last 10px of the sidebar
@@ -421,6 +424,21 @@
             setTimeout(() => {
                 $(this.$refs.poweredBy).fadeOut(400)
             }, 10 * 1000)
+
+            const fractionCountMap = {
+                'BTC': 6,
+                'ETH': 6,
+                'DAI': 2
+            }
+
+            this.$CurrencyFilter.setConfig({
+                symbol: this.$store.state.application.account.currency.symbol,
+                thousandsSeparator: ',',
+                fractionCount: fractionCountMap[this.$store.state.application.account.currency.code] || 2,
+                fractionSeparator: '.',
+                symbolPosition: 'front',
+                symbolSpacing: true
+            })
         },
         watch: {
             '$route'() {

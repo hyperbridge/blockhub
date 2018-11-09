@@ -1,6 +1,6 @@
 <template>
     <c-layout navigationKey="product" :showRightPanel="false" navigationTitle="GAME OVERVIEW"
-              :breadcrumbLinks="editing ? [] : breadcrumbLinks">
+              :breadcrumbLinks="breadcrumbLinks" :showBreadcrumbs="!editing">
         <div class="row" v-if="!product">
             <div class="col-12">
                 Product not found
@@ -191,7 +191,7 @@
             :activated="$store.state.application.active_modal === 'import-product'"
             @close="$store.commit('application/activateModal', null)"
         >
-            <div class="h4" slot="header" style="text-align: left">Propose Idea</div>
+            <div class="h4" slot="header" style="text-align: left">Import Product</div>
             <template slot="body">
                 <div v-if="importStep === 1">
                     <h3 class="margin-auto">Choose source: </h3>
@@ -533,6 +533,8 @@
                     this.product.genre = ''
                     this.product.developer = data.developers && data.developers[0]
                     this.product.publisher = data.publishers && data.publishers[0]
+
+                    this.$store.commit('application/activateModal', null)
                 })
             },
         },
