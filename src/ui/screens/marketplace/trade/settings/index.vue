@@ -20,6 +20,9 @@
                 Generate new trade URL
             </c-button>
         </section>
+        <button @click="storeTest()">
+            Commit/Dispatch create
+        </button>
 
         <!-- <input type="text"
             :value="val"
@@ -53,11 +56,19 @@
             tradeURL() {
                 const { id, tradeURLId } = this.account;
                 return `${window.location.origin}/#/tradeoffer/new/?partner=${id}&id=${tradeURLId}`;
-            }
+            },
+            assets() { return this.$store.state.assets.assets; }
         },
         methods: {
-            method(e) {
-                console.log('evt from method', e)
+            storeTest() {
+                this.$store.dispatch('create', {
+                    module: 'assets',
+                    target: 'assets',
+                    data: {
+                        id: 30,
+                        name: 'New asset'
+                    }
+                });
             },
             copyTradeURL() {
                 navigator.clipboard.writeText(this.tradeURL)

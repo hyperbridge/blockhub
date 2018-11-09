@@ -76,8 +76,25 @@
             transactions() {
                 return this.$store.getters['assets/transactionsArray'];
             },
+            userId() {
+                return this.$store.state.application.account.id;
+            },
             offers2() {
-                // const transactions = this.$store.getters['assets/transactionsArray'];
+                const { userId } = this;
+                return this.transactions.reduce((offers, trx) => {
+
+                    const target = !trx.accepted
+                        ? trx.createdBy == userId ? 'sent' : 'received'
+                        : 'closed';
+
+                    offers[target].push(trx);
+                    return offers;
+                }, { received: [], sent: [], closed: [] });
+            },
+            offersCount() {
+                return Object.entries(this.offers2).reduce((count, [name, offers]) =>
+                    ({ ...count, [name]: offers.length })
+                , { received: 0, sent: 0, closed: 0 });
             }
         }
     }
