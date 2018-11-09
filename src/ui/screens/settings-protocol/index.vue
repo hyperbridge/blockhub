@@ -66,14 +66,15 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" :value="contract.address" />
+                                            <input type="text" class="form-control" :value="contract.address" :v-model="contract.address" />
                                             <span class="input-group-append">
-                                                <button class="btn btn-light" type="button">Copy</button>
+                                                <button class="btn btn-light" type="button" @click.prevent="$store.dispatch('application/sendCommand', { key: 'writeToClipboard', data: contract.address })">Copy</button>
                                             </span>
                                         </div>
                                     </td>
                                     <td>
                                         <button class="btn btn-light btn-sm" @click.prevent="deployContract(protocol.id, contract.name, contract.address)">Deploy</button>
+                                        <button class="btn btn-light btn-sm" @click.prevent="$store.dispatch('application/sendCommand', { key: 'setContractAddress', data: { protocolName: protocol.id, contractName: contract.name, address: contract.address }})">Update</button>
                                     </td>
                                 </tr>
                             </template>

@@ -240,6 +240,9 @@ export const actions = {
                 })
         })
     },
+    sendCommand(store, { key, data }) {
+        Bridge.sendCommand(key, data).then(() => {})
+    },
     createTradeURL({ commit, state }) {
         // async call => delete previous trade url
         // state.account.tradeURLId
