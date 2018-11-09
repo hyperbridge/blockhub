@@ -4,14 +4,15 @@
             <div class="row">
                 <div class="col-12 margin-bottom-30">
                     <c-toke-sale
-                        :hardCap="18000000"
-                        :softCap="7500000"
-                        :volume="1000000000"
-                        :soldDollar="23455424"
-                        :soldTokens="243424234"
                         class="margin-bottom-30"
+                        :hardCap="18500000"
+                        :softCap="400000"
+                        :volume="300000000"
+                        :soldDollar="0"
+                        :soldTokens="0"
+                        @purchase="scrollMeTo('purchase')"
                     />
-                    <c-block class="margin-bottom-30">
+                    <c-block class="margin-bottom-30" hidden>
                         <div class="d-flex justify-content-between align-items-center padding-10">
                             <div>
                                 <div class="h3 font-weight-bold p-0 m-0">
@@ -35,48 +36,47 @@
                             <div class="h4 px-4 m-0 w-auto font-weight-light">
                                 BlockHub and HBX are brought to you by Hyperbridge Technology. We build technology for a crowdfunded world.
                             </div>
-                            <c-button size="lg" status="info" icon_hide>
+                            <c-button href="https://hyperbridge.org/" size="lg" status="info" icon_hide>
                                 Learn more
                             </c-button>
                         </div>
                     </c-block>
                 </div>
                 <div class="col-12 col-md-6 mb-4">
-                    <h2>What is HBX?</h2>
-                    <div>
-                        Built by <c-button status="underline" size="md" href="https://hyperbridge.org">Hyperbridge</c-button>, HBX tokens are used to fuel the decentralized protocols underlying BlockHub. 
-                        BlockHub is the first economy built on these protocols, designed to let players and game developers productively interact in mutually beneficial ways. 
-                        HBX tokens can be purchased or received by:
-                        <br /><br />
-                        <ul>
-                            <li>Selling game items</li>
-                            <li>Curating game information in the store</li>
-                            <li>Bug reporting</li>
-                            <li>Game promotion</li>
-                            <li>Product testing</li>
-                            <li>Polls/Questionnaires</li>
-                        </ul>
-                    </div>
-
+                    <c-block>
+                        <h2>What is HBX?</h2>
+                        <p>
+                            Built by <c-button status="underline" size="md" href="https://hyperbridge.org">Hyperbridge</c-button>, HBX tokens are used to fuel the decentralized protocols underlying BlockHub. 
+                            BlockHub is the first economy built on these protocols, designed to let players and game developers productively interact in mutually beneficial ways. 
+                            HBX tokens can be purchased or received by:
+                            <br /><br />
+                            <ul>
+                                <li>Selling game items</li>
+                                <li>Curating game information in the store</li>
+                                <li>Bug reporting</li>
+                                <li>Game promotion</li>
+                                <li>Product testing</li>
+                                <li>Polls/Questionnaires</li>
+                            </ul>
+                        </p>
+                    </c-block>
                 </div>
                 <div class="col-12 col-md-6">
-                    <h2>What can HBX be used for?</h2>
-                    <div>
-                        <ul>
-                            <li>Contribute to crowdfund projects</li>
-                            <li>Purchase products within the store</li>
-                            <li>Vote for the direct of game development (staking)</li>
-                            <li>Receive 10% discount on all transactions</li>
-                            <li>Running promotions within BlockHub</li>
-                        </ul>
-                        <br />
-                        For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees by 50%. To learn more, please see the <c-button status="underline" size="md" href="https://hyperbridge.org/whitepaper">whitepaper</c-button>.
-                    </div>
+                    <c-block>
+                        <h2>What can HBX be used for?</h2>
+                        <p>
+                            <ul>
+                                <li>Contribute to crowdfund projects</li>
+                                <li>Purchase products within the store</li>
+                                <li>Vote for the direct of game development (staking)</li>
+                                <li>Receive 10% discount on all transactions</li>
+                                <li>Running promotions within BlockHub</li>
+                            </ul>
+                            <br />
+                            For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees by 50%. To learn more, please see the <c-button status="underline" size="md" href="https://hyperbridge.org/whitepaper">whitepaper</c-button>.
+                        </p>
+                    </c-block>
                 </div>
-            </div>
-
-            <div class="col-12 text-center alert alert-info">
-                <p><strong>If you haven't already, KYC &amp; whitelist your address <c-button href="/#/kyc">click here</c-button></strong></p>
             </div>
 
             <!-- <div v-if="!desktop_mode && !ethereum_connected">
@@ -85,30 +85,34 @@
                 </div>
             </div> -->
 
-            <div class="row promotion margin-top-40 margin-bottom-20">
-                <h1 class="margin-auto margin-bottom-20">Launch Promotion</h1>
-                <p>For the first month, HBX will be on discount and purchasers will receive an exclusive badge, the Voyager Badge (<a href="http://erc721.org/">an ERC-721 NFT</a>). The token price will be $0.055 USD each, and this time only, any unsold tokens will be equally distributed to the purchasers, the equivalent of being burned 🔥. This is as a thanks to you, our early supporters.</p>
-                <div class="carousel-wrapper margin-auto margin-top-20 margin-bottom-20">
-                    <c-carousel-3d
-                        :items="assets"
-                        :limitTo="2"
-                    >
-                        <template slot-scope="props">
-                            <c-asset-store-card
-                                v-for="(item) in props.items"
-                                :class="item.css"
-                                :key="item.id"
-                                :asset="item"
-                            />
-                        </template>
-                    </c-carousel-3d>
+            <div ref="purchase" class="row promotion margin-top-40 margin-bottom-20">
+                <div class="col-12" style="text-align: center">
+                    <h1 class="margin-auto margin-bottom-20" style="display:block;">Launch Promotion</h1>
+                    <div class="carousel-wrapper margin-auto margin-top-20 margin-bottom-20">
+                        <c-carousel-3d
+                            :items="assets"
+                            :limitTo="2"
+                        >
+                            <template slot-scope="props">
+                                <c-asset-store-card
+                                    v-for="(item) in props.items"
+                                    :class="item.css"
+                                    :key="item.id"
+                                    :asset="item"
+                                />
+                            </template>
+                        </c-carousel-3d>
+                    </div>
                 </div>
+                <c-block class="col-8 offset-2">
+                    <p>For the first month, HBX will be on discount and purchasers will receive an exclusive badge, the Voyager Badge (<a href="http://erc721.org/">an ERC-721 NFT</a>). The token price will be $0.055 USD each, and this time only, any unsold tokens will be equally distributed to the purchasers, the equivalent of being burned 🔥. This is as a thanks to you, our early supporters.</p>
+                </c-block>
             </div>
 
             <div class="row">
                 <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked">
                     <c-block title="Purchase" class="margin-bottom-30">
-                        <p>Each HBX token is <strong>${{ tokenPriceUSD | convertCurrency }}</strong>, and can be purchased with ETH at the current price of <strong>{{ (1/ETH2USD).toString().slice(0, 6) }} ETH</strong> per HBX <em>(Based on a locked conversion of ${{ ETH2USD }} USD per 1 ETH)</em>.</p>
+                        <p>Each HBX token is <strong>${{ tokenPriceUSD }}</strong>, and can be purchased with ETH at the current price of <strong>{{ (1/ETH2USD).toString().slice(0, 6) }} ETH</strong> per HBX <em>(Based on a locked conversion of ${{ ETH2USD }} USD per 1 ETH)</em>.</p>
                         <div class="input-group mb-4">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -156,6 +160,10 @@
                                     </div>
                                 </c-slide>
                             </c-swiper>
+                        </div>
+
+                        <div class="text-center alert alert-info">
+                            <p><strong>If you haven't already, KYC &amp; whitelist your address <c-button href="/#/kyc">click here</c-button></strong></p>
                         </div>
                     </c-block>
                 </div>
@@ -579,8 +587,8 @@ export default {
             chosenIdentity: chosenIdentity,
             purchaseETH: null,
             purchaseHBX: null,
-            ETH2USD: 220.10,
-            maxPurchaseUSD: 7500,
+            ETH2USD: 220,
+            maxPurchaseUSD: 45000,
             tokenPriceUSD: 0.055,
             tokenSaleAgreement: false,
             jurisdictionAgreement: false,
@@ -673,6 +681,12 @@ export default {
         },
         showPurchasePopup(ntf) {
             this.purchasePopup.show = true
+        },
+        scrollMeTo(refName) {
+            var element = this.$refs[refName];
+            var top = element.offsetTop;
+
+            window.scrollTo(0, top);
         },
         confirmPurchase() {
             if (this.desktop_mode) {

@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div>
-                    <c-button status="success" size="lg" icon_hide >
+                    <c-button status="success" size="lg" icon_hide @click="$emit('purchase')">
                         Purchase HBX
                     </c-button>
                 </div>
@@ -37,7 +37,7 @@
                 <h2 class="p-0 mb-2">
                     Sale status
                 </h2>
-                <div>
+                <div style="margin-top: 20px;">
                     <strong>
                         Sold
                     </strong>
@@ -54,7 +54,7 @@
                 <div class="token-sale-box__money-info">
                     <div>
                         <strong>
-                            Volume
+                            Supply
                         </strong>
                         <span>
                             {{ volume | numeralFormat(0,0) }} HBX
@@ -90,9 +90,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://hyperbridge.org/#team" target="_blank">
+                        <a href="https://hyperbridge.org/team" target="_blank">
                             Team
                             <i class="fas fa-users"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://hyperbridge.org/roadmap" target="_blank">
+                            Roadmap
+                            <i class="fas fa-gamepad"></i>
                         </a>
                     </li>
                     <li>
@@ -101,16 +107,10 @@
                             <i class="fas fa-home"></i>
                         </a>
                     </li>
-                    <li>
-                        <a href="https://preview.blockhub.gg/#/" target="_blank">
-                            BlockHub
-                            <i class="fas fa-gamepad"></i>
-                        </a>
-                    </li>
                 </ul>
             </div>
             <div class="token-sale-box__body-media">
-                <iframe width="280" height="160" src="https://www.youtube.com/embed/-QEdXZWMe-M" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="380" height="220" src="https://www.youtube.com/embed/-QEdXZWMe-M" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -183,8 +183,7 @@
         justify-content: space-between;
     }
     .token-sale-box_body-info{
-        width: 410px;
-        display: inline-flex;
+        display: flex;
         flex-direction: column;
         .progress.progress-bar-horizontal{
             height: 15px;
@@ -197,8 +196,8 @@
     .token-sale-box_body-links{
         padding-left: 80px;
         position: relative;
-        width: 230px;
-        margin: 0 30px 0 auto;
+        width: 240px;
+        margin: 20px 30px 0 auto;
         &:before{
             content: "";
             position: absolute;
@@ -271,7 +270,8 @@
     .token-sale-box__body-media{
         overflow: hidden;
         border-radius: 10px;
-        width: 291px;
+        width: 440px;
+        height: 248px;
         video{
             width: auto;
             height: 158px;
