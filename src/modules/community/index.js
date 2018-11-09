@@ -2,17 +2,11 @@ import moment from 'moment';
 
 import messagesData from '@/db/seed/messages.json';
 import usersData from '@/db/seed/users.json';
+import identitiesData from '@/db/seed/identities.json';
 
 import { extract, getId, mergeId } from '@/store/utils';
 
-const asyncData = {
-    get: {
-        ['2']: 3
-    },
-    post: {
-        message: () => ({ id: getId(), author: 1, createdAt: moment() })
-    }
-};
+
 
 const community = {
     namespaced: true,
@@ -28,6 +22,10 @@ const community = {
             ...users,
             [user.id]: user
         }), {}),
+        identities: identitiesData.reduce((identities, idt) => ({
+            ...identities,
+            [idt.id]: idt
+        }), {})
     },
     mutations: {
         create(state, { target = 'messages', id, data }) {
