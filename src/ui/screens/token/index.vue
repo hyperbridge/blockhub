@@ -1,7 +1,16 @@
 <template>
-    <c-layout>
+    <c-layout navigationKey="store">
         <div class="container-fluid">
-            <div class="row" style="">
+            <div class="row">
+                <div class="col-12 margin-bottom-30">
+                    <c-toke-sale
+                        :hardCap="18000000"
+                        :softCap="7500000"
+                        :volume="1000000000"
+                        :soldDollar="23455424"
+                        :soldTokens="243424234"
+                    />
+                </div>
                 <div class="col-12 col-md-6 mb-4">
                     <h2>What is HBX?</h2>
                     <div>
@@ -482,6 +491,7 @@ export default {
         'c-welcome-box': (resolve) => require(['@/ui/components/welcome-box'], resolve),
         'c-swiper': swiper,
         'c-slide': swiperSlide,
+        'c-toke-sale': (resolve) => require(['@/ui/components/token-sale-box'], resolve)
     },
     data() {
         const checkEthereumConnection = () => {

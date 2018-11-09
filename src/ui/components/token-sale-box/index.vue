@@ -42,14 +42,14 @@
                         Sold
                     </strong>
                     <span class="ml-4">
-                        $ 1,845,245,05 USD
+                        {{ soldDollar | convertCurrency }}
                     </span>
                     <span class="ml-3">
-                        403,005,084 HBX
+                        {{ soldTokens | numeralFormat(0,0) }} HBX
                     </span>
                 </div>
                 <div class="mt-3">
-                    <c-progress-bar :percentages="45" />
+                    <c-progress-bar :percentages="percentProgress" />
                 </div>
                 <div class="token-sale-box__money-info">
                     <div>
@@ -57,7 +57,7 @@
                             Volume
                         </strong>
                         <span>
-                            1,000,000,000 HBX
+                            {{ volume | numeralFormat(0,0) }} HBX
                         </span>
                     </div>
                     <div>
@@ -65,15 +65,15 @@
                             Hard Cap
                         </strong>
                         <span>
-                            $ 18,500,000 HBX
+                            {{ hardCap | convertCurrency }}
                         </span>
                     </div>
                     <div>
                         <strong>
-                            Soft Cup
+                            Soft Cap
                         </strong>
                         <span>
-                            $ 7,500,000 HBX
+                            {{ softCap | convertCurrency }}
                         </span>
                     </div>
                 </div>
@@ -84,25 +84,25 @@
                 </h3>
                 <ul>
                     <li>
-                        <a href="#3">
+                        <a href="https://hyperbridge.org/downloads/whitepaper.pdf" target="_blank">
                             Whitepaper
                             <i class="fas fa-file-alt"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#3">
+                        <a href="https://hyperbridge.org/#team" target="_blank">
                             Team
                             <i class="fas fa-users"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#3">
+                        <a href="https://hyperbridge.org/" target="_blank">
                             Corp. website
                             <i class="fas fa-home"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#3">
+                        <a href="https://preview.blockhub.gg/#/" target="_blank">
                             BlockHub
                             <i class="fas fa-gamepad"></i>
                         </a>
@@ -117,10 +117,23 @@
 </template>
 
 <script>
+
     export default {
         name: 'token-sale',
         components:{
             'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar'], resolve),
+        },
+        props:{
+            hardCap: [ Number, String ],
+            softCap: [ Number, String ],
+            volume: [ Number, String ],
+            soldDollar: [ Number, String ],
+            soldTokens: [ Number, String ]
+        },
+        computed:{
+            percentProgress(){
+                return Number(this.soldTokens) * 100 / Number(this.volume)
+            }
         }
     }
 </script>
@@ -226,6 +239,11 @@
                         margin-left: 5px;
                         font-size: 18px;
                     }
+                    &:hover{
+                        i{
+                            margin-left: 15px;
+                        }
+                    }
                 }
             }
         }
@@ -243,6 +261,7 @@
             flex-direction: column;
             white-space: nowrap;
             border-left: 3px solid #3D3E5D;
+            min-width: 140px;
             &:first-child{
                 border-left: none;
             }
