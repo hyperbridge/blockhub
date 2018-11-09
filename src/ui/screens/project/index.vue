@@ -407,7 +407,7 @@
                     this.$store.dispatch('application/setEditorMode', 'publishing')
                 }
             },
-            checkForm(e) {
+            checkForm() {
                 this.errors = []
 
                 if (this.project.name && this.project.description) {

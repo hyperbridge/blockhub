@@ -89,14 +89,17 @@
             <c-basic-popup
                 :activated="$store.state.application.editor_mode === 'editing' && !$store.state.application.account.settings.client['hide_editor_welcome_modal/' + $router.currentRoute.fullPath]"
                 @close="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_editor_welcome_modal/' + $router.currentRoute.fullPath, true)"
+                style="text-align: left;"
             >
                 <div class="h4" slot="header">Welcome to the editor</div>
                 <template slot="body">
                     <p v-if="!voteCasted">
-                        The goal of BlockHub is everything is editable and curatable through community vote. Like a super-charged Wikipedia-style entertainment platform. But this isn't yet!
+                        The goal of BlockHub is everything is editable and curatable through community vote. Like a super-charged Wikipedia-style entertainment platform. But we aren't quite there yet! So for now, you can cast votes the old school way.
                     </p>
                     <p v-if="!voteCasted">
-                        Want this to be the next section we make editable? <c-button class="underline" @click="vote">Cast your vote by clicking here!</c-button>
+                        Want this to be the next section we make editable? 
+                        <br />
+                        <c-button class="underline" @click="vote">Cast your vote by clicking here!</c-button>
                     </p>
                     <p v-if="voteCasted">
                         Your vote has been cast. Thank you!
