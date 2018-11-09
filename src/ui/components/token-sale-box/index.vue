@@ -238,6 +238,7 @@
                         text-align: center;
                         margin-left: 5px;
                         font-size: 18px;
+                        transition: all 200ms ease-in-out;
                     }
                     &:hover{
                         i{
