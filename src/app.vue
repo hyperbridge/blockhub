@@ -153,7 +153,9 @@
                         <c-button @click="$store.state.application.account.is_verified = !$store.state.application.account.is_verified">Account {{ $store.state.application.account.is_verified ? 'VERIFIED' : 'NOT VERIFIED' }}</c-button>
                         <c-button @click="toggleDeveloperMode()">Developer Mode {{ developer_mode ? 'ON' : 'OFF' }}</c-button>
                         <c-button @click="rotateEditorMode()">Editor Mode {{ $store.state.application.editor_mode.toUpperCase() }}</c-button>
+                        <c-button @click="toggleDarklaunchOverride()">Darklaunch Override {{ $store.state.application.darklaunch_override ? 'ON' : 'OFF' }}</c-button>
                         <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button>
+                        
                         <br /><br />
                     </div>
                     <div>
@@ -263,6 +265,9 @@
             },
             toggleDeveloperMode() {
                 this.$store.state.application.developer_mode = !this.$store.state.application.developer_mode
+            },
+            toggleDarklaunchOverride() {
+                this.$store.state.application.darklaunch_override = !this.$store.state.application.darklaunch_override
             },
             toggleSimulator() {
                 this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulator_mode)
