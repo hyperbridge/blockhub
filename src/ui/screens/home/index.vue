@@ -6,7 +6,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h3 class="text-yellow">Launch Sale</h3>
-                                <p>BlockHub will begin selling the HBX token on November 10, 2018</p>
+                                <p>BlockHub has launched and the token sale is now live!</p>
                             </div>
                             <div class="banner-action">
                                 <c-button tag="div" tatus="info" icon_hide size="lg" href="/#/token">JOIN NOW</c-button>
