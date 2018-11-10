@@ -190,7 +190,7 @@
                                 <span class="text">Sign In</span>
                             </a>
                         </li>
-                        <li v-if="!is_locked && languages" class="ml-3">
+                        <li v-if="!is_locked && languages" class="ml-3" v-darklaunch="'LANGUAGES'">
                             <c-language-dropdown :current_language="current_language" :languages="languages" @change="selectLanguages" />
                         </li>
                         <li v-if="!is_locked && currencies" class="ml-2">

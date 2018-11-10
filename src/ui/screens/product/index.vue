@@ -77,7 +77,7 @@
                                 <li class="nav-item" @click="section='overview'">
                                     <router-link :to="`/product/${id}`" class="nav-link" :class="{ 'active': section === 'overview' }">Overview</router-link>
                                 </li>
-                                <li class="nav-item" @click="section='community'">
+                                <li class="nav-item" @click="section='community'" v-darklaunch="'COMMUNITY'">
                                     <router-link :to="`/product/${id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">Community
                                     </router-link>
                                 </li>

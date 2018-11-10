@@ -112,14 +112,35 @@
 
 
             <c-basic-popup
+                :activated="$store.state.application.active_modal === 'coming-soon'"
+                @close="$store.state.application.active_modal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">Coming Soon</div>
+                <template slot="body">
+                    <p>
+                        Stealth mode engage! <br />
+                        &nbsp; &nbsp; &lt;explosion&gt; &nbsp; <br />
+                        &nbsp; &nbsp; &nbsp; &nbsp; Dang, didn't work.<br /><br />
+                        Okay, you caught us. So, we're still working on this feature, but we'll have it out as quick as a mage getting pwned by a warrior in a melee battle!
+                        <br /><br />
+                    </p>
+                    <p>We believe in transparency and community-driven development, so why don't you check out the <a href="https://preview.blockhub.gg">Preview Build</a> and let us know what you think!<p>
+                    <p>To make things simple, hold ALT and click anywhere to send us feedback/bug reports!</p>
+                </template>
+                <p slot="footer">
+                </p>
+            </c-basic-popup>
+
+            <c-basic-popup
                 :activated="$store.state.application.active_modal === 'report'"
                 @close="$store.state.application.active_modal = null"
                 style="text-align: left;"
             >
-                <div class="h4" slot="header">Report</div>
+                <div class="h4" slot="header">Feedback/Report</div>
                 <template slot="body">
                     <p>
-                        Our goal are BlockHub is to be hyper-focused on our community needs. That's why we've created this handy way for you to give us feedback. Simply hold ALT and click somewhere. It will send us the location of what you're looking at. Report a problem or suggest something at the click of a button! So, what's up?
+                        Our goal are BlockHub is to be hyper-focused on our community needs. That's why we've created this handy way for you to give us feedback or report issues. Simply hold ALT and click somewhere. It will send us the location of what you're looking at. Report a problem or suggest something at the click of a button! So, what's up?
                     </p>
                     <br />
                     <div class="form-group">

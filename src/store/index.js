@@ -134,11 +134,12 @@ window.BlockHub.importSeedData = () => {
 
     DB.application.config.data[0].account.notifications = seed.notifications
     DB.application.config.data[0].updates = seed.updates
-
     DB.marketplace.config.data[0].curator_reviews = seed.curator_reviews
     DB.marketplace.config.data[0].realms = seed.realms
     DB.marketplace.config.data[0].collections = seed.collections
     DB.marketplace.config.data[0].game_series = seed.game_series
+    DB.marketplace.config.data[0].bounties = seed.bounties
+
     DB.marketplace.assets.data = seed.assets
     DB.marketplace.products.data = seed.products
     DB.marketplace.posts.data = seed.posts
@@ -161,15 +162,18 @@ window.BlockHub.resetSeedData = () => {
         DB.application.config.data[0].account.current_identity = { id: null }
     }
 
-    DB.application.config.data[0].account.is_verified = false
     DB.application.config.data[0].account.notifications = []
-
+    DB.marketplace.config.data[0].updates = []
     DB.marketplace.config.data[0].curator_reviews = []
     DB.marketplace.config.data[0].product_news = []
-    DB.marketplace.config.data[0].collections = []
     DB.marketplace.config.data[0].realms = []
+    DB.marketplace.config.data[0].collections = []
+    DB.marketplace.config.data[0].game_series = []
+    DB.marketplace.config.data[0].bounties = []
+
     DB.marketplace.products.data = []
     DB.marketplace.assets.data = []
+    DB.marketplace.posts.data = []
 
     DB.funding.config.data[0].trending_projects = []
     DB.funding.projects.data = []
