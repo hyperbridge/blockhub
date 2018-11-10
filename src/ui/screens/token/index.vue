@@ -313,6 +313,7 @@
                             Proceed to Purchase
                         </c-button>
                     </div>
+                    <br /><br /><br /><br />
                 </div>
             </div>
         </div>
@@ -616,7 +617,7 @@ export default {
             return this.$store.state.application.desktop_mode
         },
         tokenContractAddress() {
-            return "0x9453eD18535138Bd6037C31fd0EBCcba2b331961"
+            return "0xebf0027ef3b4b7a742a148cddb0f2b14e5d8f0e9"
 
             try {
                 return this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve.contracts.TokenSale.public_address
