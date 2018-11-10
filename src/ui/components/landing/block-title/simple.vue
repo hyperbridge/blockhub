@@ -24,7 +24,7 @@
             },
             fontWeight:{
                 type: String,
-                default: 'normal'
+                default: 'bold'
             }
         }
     }
@@ -32,7 +32,7 @@
 
 <style lang="scss" scoped>
     .landing__block-title{
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         h2{
             text-shadow: 0 3px 6px rgba(0, 0, 0, .4);
             padding: 0;

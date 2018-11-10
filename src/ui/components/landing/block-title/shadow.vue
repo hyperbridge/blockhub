@@ -24,7 +24,7 @@
             },
             fontWeight:{
                 type: String,
-                default: 'normal'
+                default: 'bold'
             },
             colorShadow:{
                 type: String,

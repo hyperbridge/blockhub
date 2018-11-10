@@ -50,7 +50,7 @@
             .landing-level__number{
                 width: 90px;
                 height: 90px;
-                font-size: 22px;
+                font-size: 20px;
             }
         }
         &.level-size-lg{
@@ -58,7 +58,7 @@
             .landing-level__number{
                 width: 110px;
                 height: 110px;
-                font-size: 24px;
+                font-size: 22px;
             }
         }
     }
@@ -69,6 +69,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        color: #fff;
+        color: #036c35;
+        font-weight: bold;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, .7);
     }
 </style>

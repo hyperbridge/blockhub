@@ -4495,7 +4495,41 @@ storiesOf('Landing Page', module)
         </div>
             `
     }))
-
+    .add('feature item', () => ({
+        components: {
+            'c-landing-feature-item': (resolve) => require(['@/ui/components/landing/block-content/feature-item'], resolve),
+        },
+        data(){
+            return{
+                items:[
+                    {
+                        img: 'https://i.ytimg.com/vi/6ki31hkQk8c/maxresdefault.jpg',
+                        title: 'Donec placerat turpis est',
+                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in nulla sed ante maximus fringilla id at mi. Aenean nec elit ac ex porta volutpat. In porta porttitor purus a congue. Aenean sit amet lectus ac purus fringilla rutrum lobortis eu lorem. Quisque accumsan et odio vel ullamcorper.'
+                    },
+                    {
+                        img: 'http://cdn.dota2.com/apps/dota2/images/blog/play/dota_heroes.png',
+                        title: 'Aenean suscipit',
+                        text: 'Nulla facilisi. Donec eu ligula a massa accumsan dignissim a quis orci. Aenean suscipit, turpis eget tempor mattis, turpis tellus tristique nibh, eu lobortis eros libero quis nisl. Donec in maximus tellus.'
+                    },
+                    {
+                        img: 'https://dota2.pl/wp-content/uploads/2017/09/dota_2_clash_of_heroes_by_agussw-d8yukg0.jpg',
+                        title: 'Donec sodales in dui nec vestibulum',
+                        text: 'Nulla ultrices fermentum tristique. Integer a venenatis lacus, eget pretium lectus. Suspendisse potenti. Vestibulum sodales ultricies mattis. Donec sodales in dui nec vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.'
+                    }
+                ]
+            }
+        },
+        template: `
+        <div class="p-5 d-flex" style="width: 1200px;">
+            <div v-for="item in items" class="px-3" style="width: 33.3%;">
+                <c-landing-feature-item :title="item.title" :img="item.img">
+                    {{ item.text }}
+                </c-landing-feature-item>
+            </div>
+        </div>
+        `
+    }))
 
 storiesOf('Token Sale Box', module)
     .add('default', () => ({
