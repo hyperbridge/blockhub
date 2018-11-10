@@ -49,6 +49,11 @@ export const init = () => {
     loki.loadDatabase({}, (result) => {
         console.log('[BlockHub] Database loaded from IndexedDB')
 
+        // If not desktop mode, then wipe and reload (fresh data)
+        if (!window.isElectron && loki.getCollection('applicationConfig')) {
+            window.resetSettings()
+        }
+
         if (loki.getCollection('applicationConfig')) {
             application.config = loki.getCollection('applicationConfig')
             marketplace.config = loki.getCollection('marketplaceConfig')
@@ -57,6 +62,8 @@ export const init = () => {
             marketplace.posts = loki.getCollection('marketplacePosts')
             funding.projects = loki.getCollection('fundingProjects')
             funding.config = loki.getCollection('fundingConfig')
+
+            // If not desktop mode, then wipe
         } else {
             let applicationConfigData = application.config.data
             let marketplaceConfigData = marketplace.config.data
