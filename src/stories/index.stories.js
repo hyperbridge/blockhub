@@ -4374,19 +4374,27 @@ storiesOf('Landing Page', module)
     }))
     .add('block title with gradient', () => ({
         components: {
-            'c-landing-block-title-gradient': LandingTitleGradient
+            'c-landing-block-title-gradient': LandingTitleGradient,
+            'c-landing-block-title': LandingTitle,
+            'c-landing-block-title-shadow': LandingTitleShadow
         },
         template: `
         <div class="p-5">
-            <c-landing-block-title-gradient colorShadow="red">
+            <c-landing-block-title-gradient>
+                <c-landing-block-title slot="before" class="mb-1" fontSize="16" fontWeight="bold">
+                    NEW
+                </c-landing-block-title>
                 Mutation Mode
             </c-landing-block-title-gradient>
             <hr />
-            <c-landing-block-title-gradient colorShadow="red" align="right">
+            <c-landing-block-title-gradient align="right">
                 Mutation Mode
+                <c-landing-block-title-shadow slot="after" class="mt-1" fontSize="16" fontWeight="bold">
+                    Before title text
+                </c-landing-block-title-shadow>
             </c-landing-block-title-gradient>
             <hr />
-            <c-landing-block-title-gradient colorShadow="red" align="center">
+            <c-landing-block-title-gradient align="center">
                 Mutation Mode
             </c-landing-block-title-gradient>
         </div>

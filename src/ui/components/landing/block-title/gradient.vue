@@ -1,8 +1,16 @@
 <template>
-    <div class="landing__block-title-gradient" :class="gradientDirection">
-        <component :is="tag" :style="{ 'color': color, 'font-size': fontSize + 'px', 'font-weight': fontWeight }">
-            <slot />
-        </component>
+    <div class="landing__block-title" :class="['text-' + align ]">
+        <div style="padding: 0 10px" v-if="$slots.before">
+            <slot name="before" />
+        </div>
+        <div class="landing__block-title-gradient" :class="gradientDirection">
+            <component :is="tag" :style="{ 'color': color, 'font-size': fontSize + 'px', 'font-weight': fontWeight }">
+                <slot />
+            </component>
+        </div>
+        <div style="padding: 0 10px" v-if="$slots.after">
+            <slot name="after" />
+        </div>
     </div>
 </template>
 
@@ -28,7 +36,7 @@
             },
             fontWeight:{
                 type: String,
-                default: 'normal'
+                default: 'bold'
             }
         },
         computed:{
@@ -44,41 +52,70 @@
 </script>
 
 <style lang="scss" scoped>
+    @mixin gradient ($direction, $start_color, $end_color){
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#5ea72b+0,7db9e8+98&1+0,0+76 */
+        background: -moz-linear-gradient($direction, $start_color 0%, $end_color 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient($direction, $start_color 0%,$end_color 100%); /* Chrome10-25,Safari5.1-6 */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5ea72b', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 */
+    }
+    @mixin gradient_center ($start_color, $center_color ,$end_color){
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2989d8+50,5ea72b+50,5ea72b+50&0+0,1+45,1+53,0+100 */
+        background: -moz-linear-gradient(left, $start_color 0%, $center_color 50%, $end_color 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(left, $start_color 0%, $center_color 50%, $end_color 100%); /* Chrome10-25,Safari5.1-6 */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$start_color', endColorstr='$center_color',GradientType=1 ); /* IE6-9 */
+    }
+
     .landing__block-title-gradient{
-        margin-bottom: 15px;
+        position: relative;
         filter: drop-shadow(0 0px 15px #30314c);
         &.left-align{
             padding: 4px 40px 4px 10px;
             border-radius: 2px 0 0 2px;
             display: inline-flex;
-            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#5ea72b+0,7db9e8+98&1+0,0+76 */
-            background: -moz-linear-gradient(left, rgba(94,167,43,1) 0%, rgba(118,181,190,0) 76%, rgba(125,185,232,0) 98%); /* FF3.6-15 */
-            background: -webkit-linear-gradient(left, rgba(94,167,43,1) 0%,rgba(118,181,190,0) 76%,rgba(125,185,232,0) 98%); /* Chrome10-25,Safari5.1-6 */
-            background: linear-gradient(to right, rgba(94,167,43,1) 0%,rgba(118,181,190,0) 76%,rgba(125,185,232,0) 98%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5ea72b', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 */
+            text-align: left;
+            @include gradient (130deg, rgba(94,167,43,0), rgba(94,167,43,1));
+            &:before{
+                content: "";
+                position: absolute;
+                height: 2px;
+                top: 0;
+                left: 0;
+                width: 100%;
+                @include gradient (right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3));
+            }
         }
         &.center-align{
             padding: 4px 40px;
             border-radius: 2px 0 0 2px;
             display: block;
             text-align: center;
-            /*margin: 0 auto;*/
-            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2989d8+50,5ea72b+50,5ea72b+50&0+0,1+45,1+53,0+100 */
-            background: -moz-linear-gradient(left, rgba(94,167,43,0) 0%, rgba(94,167,43,1) 45%, rgba(94,167,43,1) 50%, rgba(94,167,43,1) 53%, rgba(94,167,43,0) 100%); /* FF3.6-15 */
-            background: -webkit-linear-gradient(left, rgba(94,167,43,0) 0%,rgba(94,167,43,1) 45%,rgba(94,167,43,1) 50%,rgba(94,167,43,1) 53%,rgba(94,167,43,0) 100%); /* Chrome10-25,Safari5.1-6 */
-            background: linear-gradient(to right, rgba(94,167,43,0) 0%,rgba(94,167,43,1) 45%,rgba(94,167,43,1) 50%,rgba(94,167,43,1) 53%,rgba(94,167,43,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#005ea72b', endColorstr='#005ea72b',GradientType=1 ); /* IE6-9 */
+            position: relative;
+            @include gradient_center (rgba(94,167,43,0), rgba(94,167,43,1), rgba(94,167,43,0));
+            &:before{
+                content: "";
+                position: absolute;
+                height: 2px;
+                top: 0;
+                left: 0;
+                width: 100%;
+                @include gradient_center (rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+            }
         }
         &.right-align{
             padding: 4px 10px 4px 40px;
             border-radius: 0 2px 2px 0;
             display: inline-flex;
             text-align: right;
-            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#5ea72b+0,7db9e8+98&1+0,0+76 */
-            background: -moz-linear-gradient(right, rgba(94,167,43,1) 0%, rgba(118,181,190,0) 76%, rgba(125,185,232,0) 98%); /* FF3.6-15 */
-            background: -webkit-linear-gradient(right, rgba(94,167,43,1) 0%,rgba(118,181,190,0) 76%,rgba(125,185,232,0) 98%); /* Chrome10-25,Safari5.1-6 */
-            background: linear-gradient(to left, rgba(94,167,43,1) 0%,rgba(118,181,190,0) 76%,rgba(125,185,232,0) 98%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5ea72b', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 */
+            @include gradient (50deg, rgba(94,167,43,0), rgba(94,167,43,1));
+            &:before{
+                content: "";
+                position: absolute;
+                height: 2px;
+                top: 0;
+                left: 0;
+                width: 100%;
+                @include gradient (left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3));
+            }
         }
         h2{
             text-shadow: 1px 1px 3px rgba(0, 0, 0, .8);
