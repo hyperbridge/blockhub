@@ -8,8 +8,8 @@
                         :hardCap="18500000"
                         :softCap="400000"
                         :volume="300000000"
-                        :soldDollar="0"
-                        :soldTokens="0"
+                        :soldDollar="275"
+                        :soldTokens="4895"
                         @purchase="scrollMeTo('purchase')"
                     />
                     <c-block class="margin-bottom-30" hidden>
