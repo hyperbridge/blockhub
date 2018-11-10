@@ -4474,6 +4474,27 @@ storiesOf('Landing Page', module)
         </div>
             `
     }))
+    .add('level', () => ({
+        components: {
+            'c-landing-level': (resolve) => require(['@/ui/components/landing/block-content/level'], resolve),
+        },
+        template: `
+        <div class="p-5">
+            <c-landing-level :number="92" textPosition="left">
+                Caster Pack 5 (2017)
+            </c-landing-level>
+            <hr />
+            <c-landing-level size="md" :number="7" textPosition="right">
+                Caster Pack 5 (2017)
+            </c-landing-level>
+            <hr />
+            <c-landing-level size="lg" :number="1982" textPosition="right">
+                Caster Pack 5 (2017)
+            </c-landing-level>
+            <hr />
+        </div>
+            `
+    }))
 
 
 storiesOf('Token Sale Box', module)
