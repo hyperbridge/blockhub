@@ -74,7 +74,7 @@
                                 </template>
                             </c-carousel-3d>
                         </div>
-                        <p>For the first month, HBX will be on discount at $0.055 USD each, and as a thank you to our early supporters, unsold tokens will be equally distributed to the purchasers - the equivalent of being burned 🔥</p>
+                        <p>For the first month, HBX will be discounted at $0.055 USD each, and as a thank you to our early supporters, unsold tokens will be equally distributed to the purchasers - the equivalent of being burned 🔥</p>
                     </c-block>
                 </div>
                 <div class="col-12 col-md-6">
@@ -90,6 +90,7 @@
                             </ul>
                             <br />
                             For the game developers, when accepting HBX you will receive a number of benefits, including reduced fees by 50%. To learn more, please see the <c-button status="underline" size="md" href="https://hyperbridge.org/whitepaper">whitepaper</c-button>.
+                            <br /><br />
                         </p>
                         <div class="carousel-wrapper margin-auto margin-top-20 margin-bottom-20" style="zoom: 0.7">
                             <c-carousel-3d
@@ -561,7 +562,7 @@ export default {
                         current: 0.055
                     },
                     image: '/static/img/icons/hbx-token.png',
-                    system_tags: ['epic'],
+                    system_tags: [],
                     css: 'store-card--epic'
                 },
                 {
@@ -572,7 +573,7 @@ export default {
                         current: 0.0
                     },
                     image: '/static/img/icons/voyager-badge.png',
-                    system_tags: ['exclusive'],
+                    system_tags: [],
                     css: 'store-card--special'
                 },
                 {
@@ -583,7 +584,7 @@ export default {
                         current: 0.0
                     },
                     image: '/static/img/icons/master-sword.png',
-                    system_tags: ['exclusive'],
+                    system_tags: [],
                     css: 'store-card--trending'
                 }
             ],
