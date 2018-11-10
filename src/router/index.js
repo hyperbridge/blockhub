@@ -417,7 +417,11 @@ const router = new Router({
         {
             path: '/developer/apply',
             name: 'Developer Application',
-            component: (resolve) => require(['@/ui/screens/developer-application'], resolve)
+            component: (resolve) => require(['@/ui/screens/developer-application'], resolve),
+            meta: {
+                auth: true,
+                permission: 'signed_in'
+            }
         },
         {
             path: '/developer/new-product',
@@ -621,7 +625,11 @@ const router = new Router({
             path: '/curator/application',
             name: 'Curator Application',
             props: true,
-            component: (resolve) => require(['@/ui/screens/curator-application'], resolve)
+            component: (resolve) => require(['@/ui/screens/curator-application'], resolve),
+            meta: {
+                auth: true,
+                permission: 'signed_in'
+            }
         },
         {
             path: '/curator/:id',
@@ -884,7 +892,7 @@ router.beforeEach((to, from, next) => {
 
   if (!Auth.loggedIn() && !!to.meta.auth) {
     next({
-      path: '/account/signin',
+      path: '/download',
       query: { redirect: to.fullPath }
     })
     return
