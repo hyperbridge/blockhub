@@ -4484,6 +4484,21 @@ storiesOf('Token Sale Box', module)
             />
         </div>`
     }))
+    .add('type 2', () => ({
+        components: {
+            'c-toke-sale-2': (resolve) => require(['@/ui/components/token-sale-box/type-2'], resolve),
+        },
+        template: `
+        <div class="p-5" style="width: 1200px;">
+            <c-toke-sale-2 
+            :hardCap="18000000"
+            :softCap="7500000"
+            :volume="1000000000"
+            :soldDollar="23455424"
+            :soldTokens="243424234"
+            />
+        </div>`
+    }))
 
 
 /*
