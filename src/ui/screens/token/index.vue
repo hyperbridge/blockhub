@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 margin-bottom-30">
-                    <c-toke-sale
+                    <c-token-sale
                         class="margin-bottom-30"
                         :hardCap="18500000"
                         :softCap="400000"
@@ -105,9 +105,54 @@
                     </div>
                 </div>
                 <c-block class="col-8 offset-2">
-                    <p>For the first month, HBX will be on discount and purchasers will receive an exclusive badge, the Voyager Badge (<a href="http://erc721.org/">an ERC-721 NFT</a>). The token price will be $0.055 USD each, and this time only, any unsold tokens will be equally distributed to the purchasers, the equivalent of being burned 🔥. This is as a thanks to you, our early supporters.</p>
+                    <p>For the first month, HBX will be on discount and purchasers will receive an exclusive badge, the Voyager Badge (<a href="http://erc721.org/">an ERC-721 NFT</a>). The token price will be $0.055 USD each, and this time only, any unsold tokens will be equally distributed to the purchasers, the equivalent of being burned 🔥 This is as a thanks to you, our early supporters.</p>
                 </c-block>
             </div>
+
+                <div class="" v-if="!ethereum_connected" style="text-align: center; width: 100%" hidden>
+                    <c-welcome-box />
+                    <br /><br />
+                </div>
+
+                <div class="col-12 col-md-6 offset-md-3" v-if="!ethereum_connected" style="text-align: center; width: 100%">
+                    <h2 hidden>Alternative: MetaMask</h2>
+
+                    <br />
+
+                    <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en">
+                        <img src="/static/img/metamask.png" style="max-width: 350px;margin: 0 auto" />
+                    </a>
+
+                    <br /><br />
+
+                    <p>The BlockHub desktop client is the recommended way to load up on tokens, but you can also purchase using the MetaMask web wallet. Come back to this page within BlockHub, or when you've installed MetaMask.</p>
+
+                    <br />
+                </div>
+
+                <div class="col-12" v-if="ethereum_connected && !ethereum_unlocked" hidden>
+                    <c-welcome-box />
+                </div>
+
+                <div class="col-6 offset-3" v-if="ethereum_connected && !ethereum_unlocked && !desktop_mode" style="text-align: center; width: 100%; margin-top: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
+                    <h2>Alternative: MetaMask</h2>
+
+                    <br />
+
+                    <img src="/static/img/metamask-logo.png" style="max-width: 150px;margin: 0 auto;opacity: 0.3; filter: grayscale(1);" />
+
+                    <br /><br />
+
+                    <p>The BlockHub desktop client is the recommended way to load up on tokens, but if you'd like to purchase with MetaMask, open the extension to unlock your web wallet.</p>
+                </div>
+                
+                <div class="col-6 offset-3" v-if="ethereum_connected && ethereum_unlocked && !desktop_mode" style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
+                    <img src="/static/img/metamask-logo.png" style="max-width: 150px;margin: 0 auto;" />
+
+                    <br /><br />
+
+                    <h2>Connected to MetaMask <span class="fa fa-check-circle" /></h2>
+                </div>
 
             <div class="row">
                 <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked">
@@ -130,7 +175,7 @@
                             </div>
                             <input type="text" class="form-control" ref="input" placeholder="0.00" v-model="purchaseHBX" readonly />
                         </div>
-                        <strong>Note:</strong> Personal cap is {{ (maxPurchaseUSD / ETH2USD).toString().slice(0, 2) }} ETH (${{ maxPurchaseUSD }} USD equivalent).
+                        <strong>Note:</strong> Personal cap is {{ (maxPurchaseUSD / ETH2USD).toString().slice(0, 3) }} ETH (${{ maxPurchaseUSD }} USD equivalent).
                     </c-block>
                 </div>
 
@@ -186,51 +231,6 @@
                 <!-- <div class="col-12 text-center alert alert-info" v-if="!desktop_mode">
                     <p>The BlockHub desktop client is the recommended way to load up on tokens.</p>
                 </div> -->
-
-                <div class="" v-if="!ethereum_connected" style="text-align: center; width: 100%" hidden>
-                    <c-welcome-box />
-                    <br /><br />
-                </div>
-
-                <div class="col-12 col-md-6 offset-md-3" v-if="!ethereum_connected" style="text-align: center; width: 100%">
-                    <h2 hidden>Alternative: MetaMask</h2>
-
-                    <br />
-
-                    <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en">
-                        <img src="/static/img/metamask.png" style="max-width: 350px;margin: 0 auto" />
-                    </a>
-
-                    <br /><br />
-
-                    <p>The BlockHub desktop client is the recommended way to load up on tokens, but you can also purchase using the MetaMask web wallet. Come back to this page within BlockHub, or when you've installed MetaMask.</p>
-
-                    <br />
-                </div>
-
-                <div class="col-12" v-if="ethereum_connected && !ethereum_unlocked">
-                    <c-welcome-box />
-                </div>
-
-                <div class="col-6 offset-3" v-if="ethereum_connected && !ethereum_unlocked && !desktop_mode" style="text-align: center; width: 100%; margin-top: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
-                    <h2>Alternative: MetaMask</h2>
-
-                    <br />
-
-                    <img src="/static/img/metamask-logo.png" style="max-width: 150px;margin: 0 auto;opacity: 0.3; filter: grayscale(1);" />
-
-                    <br /><br />
-
-                    <p>The BlockHub desktop client is the recommended way to load up on tokens, but if you'd like to purchase with MetaMask, open the extension to unlock your web wallet.</p>
-                </div>
-                
-                <div class="col-6 offset-3" v-if="ethereum_connected && ethereum_unlocked && !desktop_mode" style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
-                    <img src="/static/img/metamask-logo.png" style="max-width: 150px;margin: 0 auto;" />
-
-                    <br /><br />
-
-                    <h2>Connected to MetaMask <span class="fa fa-check-circle" /></h2>
-                </div>
 
                 <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && desktop_mode && (!account.is_verified && !account.is_verifying)" style="text-align: center">
                     <h2 style="text-align: center">Oops, you haven't verified your account yet. <br />You'll need to do this to participate.</h2>
@@ -312,32 +312,157 @@
                 <c-tabs>
                     <c-tab name="Confirm Purchase" :selected="true" :showFooter="true">
                         <div>
-                            <div class="tab-card" v-if="purchaseSuccessful">
-                                Great! Here's your transaction hash: {{ transactionHash }}
-                            </div>
                             <div class="tab-card" v-if="!purchaseSuccessful">
+                                <div class="sending-blk">
+                                    <div class="clmn-1">
+                                        <div class="grid">
+                                            <div class="grid-item">
+                                                <div>
+                                                    <c-img src="../../../../static/img/icons/ethereum-icon.jpg" />
+                                                    <span class="grid-item__amount">{{ purchaseETH }} ETH</span>
+                                                </div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                        </div>
+                                        <div class="info text-center">
+                                            <strong>{{ purchaseAddress.slice(0, 8) }}...{{ purchaseAddress.slice(-4) }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="clmn-2" style="margin-bottom: 130px;">
+                                        <div class="directions">
+                                            <div class="right-arrow">
+                                                <div class="progress" style="width: 100%"></div>
+                                            </div>
+                                            <div class="left-arrow">
+                                                <div class="progress" style="width: 100%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clmn-3">
+                                        <div class="grid">
+                                            <div class="grid-item">
+                                                <div style="background-color: #eee">
+                                                    <c-img src="../../../../static/img/icons/token-icon.png" style="padding: 5px;" />
+                                                    <span class="grid-item__amount">{{ purchaseHBX }} HBX</span>
+                                                </div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                            <div class="grid-item">
+                                                <div></div>
+                                            </div>
+                                        </div>
+                                        <div class="info text-center">
+                                            <strong>{{ tokenContractAddress.slice(0, 8) }}...{{ tokenContractAddress.slice(-4) }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br /><br />
+
+                                <h3>Transaction Details</h3>
+
                                 <div class="alert alert-warning" v-if="purchaseError">
                                     An error occurred with the purchase: {{ purchaseError }}
                                 </div>
                                 
                                 <div>
-                                    <p>Purchasing {{ purchaseHBX }} HBX in exchange for {{ purchaseETH}} ETH.</p>
-                                    <br />
+                                    <p>
+                                        Purchase Amount: {{ purchaseHBX }} HBX
+                                        <br />
+                                        Purchase Address: <a :href="`https://etherscan.io/address/${purchaseAddress}`"><strong>{{ purchaseAddress }}</strong></a>
+                                        <br />
+                                        Payment Amount: {{ purchaseETH }} ETH
+                                        <br />
+                                        <template v-if="tokenContractAddress">Payment Address: <a :href="`https://etherscan.io/address/${tokenContractAddress}`"><strong>{{ tokenContractAddress }}</strong></a></template>
+                                        <br />
+                                        <template v-if="!tokenContractAddress" class="alert alert-warning">No contract address. Check your <a href="/#/settings/protocol">Protocol Settings</a></template>
+                                    </p>
                                 </div>
 
-                                <p>BlockHub will purchase tokens for this profile:</p>
-                                <p><a :href="`https://etherscan.io/address/${chosenIdentity.public_address}`"><strong>{{ chosenIdentity.public_address }}</strong></a></p>
-
-                                <br />
-
-                                <p>BlockHub will send a payment of {{ purchaseETH }} ETH to this contract address:</p>
-                                <p v-if="tokenContractAddress"><a :href="`https://etherscan.io/address/${tokenContractAddress}`"><strong>{{ tokenContractAddress }}</strong></a></p>
-                                <p v-if="!tokenContractAddress" class="alert alert-warning">No contract address. Check your <c-button href="/#/settings/protocol">Protocol Settings</c-button></p>
-
                                 <br /><br />
-                                <c-button status="success" class="justify-content-center" icon_hide size="xl" @click="confirmPurchase">
-                                    Confirm Purchase
-                                </c-button>
+                                <div style="text-align: center">
+                                    <c-button status="info" class="justify-content-center" icon_hide size="xl" @click="confirmPurchase">
+                                        Confirm Purchase
+                                    </c-button>
+                                </div>
+                                <br />
+                            </div>
+                            <div class="tab-card" v-if="purchaseSuccessful">
+                                <div class="row">
+                                    <div class="col-12 mb-4 text-center">
+                                        <h2><img src="/static/img/success.png" style="max-width: 100px;" /></h2>
+                                        <p>
+                                            Transaction <a :href="`http://etherscan.io/tx/${transactionHash}`">{{ transactionHash }}</a>
+                                            <br /><br />
+                                            Boom. You will receive your freshly minted tokens soon, but they won't be usable until December 10th.
+                                            <br /><br />
+                                            Thank you very much for your contribution, and we look forward to building the future of decentralized entertainment with you!
+                                            <br /><br />
+                                            Don't worry, we'll email you a reminder ;)
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div slot="footer" class="d-flex align-items-center justify-content-end">
@@ -370,7 +495,7 @@ export default {
         'c-welcome-box': (resolve) => require(['@/ui/components/welcome-box'], resolve),
         'c-swiper': swiper,
         'c-slide': swiperSlide,
-        'c-toke-sale': (resolve) => require(['@/ui/components/token-sale-box'], resolve)
+        'c-token-sale': (resolve) => require(['@/ui/components/token-sale-box'], resolve)
     },
     data() {
         const checkEthereumConnection = () => {
@@ -490,8 +615,10 @@ export default {
             return this.$store.state.application.desktop_mode
         },
         tokenContractAddress() {
+            return "0x9453eD18535138Bd6037C31fd0EBCcba2b331961"
+
             try {
-                return this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve.contracts.TokenSale.address
+                return this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve.contracts.TokenSale.public_address
             } catch (e) {
 
             }
@@ -536,23 +663,30 @@ export default {
                     toAddress: this.tokenContractAddress,
                     amount: this.purchaseETH
                 }).then((data) => {
-                    if (data.success) {
-                        this.purchaseSuccessful = true
-                        this.transactionHash = data.transactionHash
-                    } else {
+                    if (!data.success) {
                         this.purchaseSuccessful = false
                         this.purchaseError = data.message
+                        return
                     }
+
+                    this.purchaseSuccessful = true
+                    this.transactionHash = data.transactionHash
                 })
-            } else {console.log({
-                    to: this.tokenContractAddress,
-                    from: this.purchaseAddress,
-                    value: window.web3.utils.toWei(this.purchaseETH, 'ether')
-                })
+            } else {
                 window.web3.eth.sendTransaction({
                     to: this.tokenContractAddress,
                     from: this.purchaseAddress,
-                    value: window.web3.utils.toWei(this.purchaseETH, 'ether')
+                    value: window.web3.toWei(this.purchaseETH, 'ether'),
+                    gasPrice: web3.toWei('10', 'gwei')
+                }, (err, transactionHash) => {
+                    if (err) {
+                        this.purchaseSuccessful = false
+                        this.purchaseError = "An error occurred sending with MetaMask. Please try again or contact support."
+                        return
+                    }
+
+                    this.purchaseSuccessful = true
+                    this.transactionHash = transactionHash
                 })
             }
         },
@@ -600,7 +734,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 ol.lst-kix_list_7-0{list-style-type:none}.lst-kix_list_14-1>li:before{content:"" counter(lst-ctn-kix_list_14-1,lower-latin) ". "}.lst-kix_list_14-3>li:before{content:"" counter(lst-ctn-kix_list_14-3,decimal) ". "}.lst-kix_list_2-1>li{counter-increment:lst-ctn-kix_list_2-1}ol.lst-kix_list_15-6{list-style-type:none}ol.lst-kix_list_15-7{list-style-type:none}ol.lst-kix_list_15-8{list-style-type:none}ol.lst-kix_list_9-0.start{counter-reset:lst-ctn-kix_list_9-0 3}.lst-kix_list_14-0>li:before{content:"(" counter(lst-ctn-kix_list_14-0,decimal) ") "}.lst-kix_list_14-4>li:before{content:"" counter(lst-ctn-kix_list_14-4,lower-latin) ". "}ol.lst-kix_list_15-2{list-style-type:none}ol.lst-kix_list_15-3{list-style-type:none}ol.lst-kix_list_15-4{list-style-type:none}.lst-kix_list_6-1>li{counter-increment:lst-ctn-kix_list_6-1}.lst-kix_list_14-5>li:before{content:"" counter(lst-ctn-kix_list_14-5,lower-roman) ". "}.lst-kix_list_14-7>li:before{content:"" counter(lst-ctn-kix_list_14-7,lower-latin) ". "}ol.lst-kix_list_15-5{list-style-type:none}ol.lst-kix_list_15-0{list-style-type:none}ol.lst-kix_list_13-4.start{counter-reset:lst-ctn-kix_list_13-4 0}.lst-kix_list_14-6>li:before{content:"" counter(lst-ctn-kix_list_14-6,decimal) ". "}ol.lst-kix_list_15-1{list-style-type:none}.lst-kix_list_13-0>li{counter-increment:lst-ctn-kix_list_13-0}ol.lst-kix_list_7-4.start{counter-reset:lst-ctn-kix_list_7-4 0}.lst-kix_list_17-0>li{counter-increment:lst-ctn-kix_list_17-0}.lst-kix_list_5-0>li{counter-increment:lst-ctn-kix_list_5-0}.lst-kix_list_9-0>li{counter-increment:lst-ctn-kix_list_9-0}ol.lst-kix_list_2-3.start{counter-reset:lst-ctn-kix_list_2-3 0}ol.lst-kix_list_7-5{list-style-type:none}ol.lst-kix_list_7-6{list-style-type:none}ol.lst-kix_list_7-7{list-style-type:none}ol.lst-kix_list_7-8{list-style-type:none}ol.lst-kix_list_7-1{list-style-type:none}ol.lst-kix_list_7-2{list-style-type:none}ol.lst-kix_list_11-8.start{counter-reset:lst-ctn-kix_list_11-8 0}ol.lst-kix_list_7-3{list-style-type:none}ol.lst-kix_list_7-4{list-style-type:none}.lst-kix_list_14-2>li:before{content:"" counter(lst-ctn-kix_list_14-2,lower-roman) ". "}ol.lst-kix_list_5-3.start{counter-reset:lst-ctn-kix_list_5-3 0}ol.lst-kix_list_12-0.start{counter-reset:lst-ctn-kix_list_12-0 3}.lst-kix_list_4-3>li{counter-increment:lst-ctn-kix_list_4-3}ol.lst-kix_list_17-1.start{counter-reset:lst-ctn-kix_list_17-1 0}ol.lst-kix_list_3-7.start{counter-reset:lst-ctn-kix_list_3-7 0}.lst-kix_list_14-8>li:before{content:"" counter(lst-ctn-kix_list_14-8,lower-roman) ". "}ol.lst-kix_list_8-8.start{counter-reset:lst-ctn-kix_list_8-8 0}.lst-kix_list_3-2>li{counter-increment:lst-ctn-kix_list_3-2}ol.lst-kix_list_15-5.start{counter-reset:lst-ctn-kix_list_15-5 0}ol.lst-kix_list_10-4.start{counter-reset:lst-ctn-kix_list_10-4 0}.lst-kix_list_7-2>li{counter-increment:lst-ctn-kix_list_7-2}.lst-kix_list_5-0>li:before{content:"" counter(lst-ctn-kix_list_5-0,decimal) " "}ol.lst-kix_list_6-0{list-style-type:none}ol.lst-kix_list_6-1{list-style-type:none}.lst-kix_list_14-8>li{counter-increment:lst-ctn-kix_list_14-8}.lst-kix_list_5-4>li{counter-increment:lst-ctn-kix_list_5-4}ol.lst-kix_list_16-5{list-style-type:none}.lst-kix_list_1-4>li{counter-increment:lst-ctn-kix_list_1-4}ol.lst-kix_list_16-6{list-style-type:none}ol.lst-kix_list_16-7{list-style-type:none}ol.lst-kix_list_1-6.start{counter-reset:lst-ctn-kix_list_1-6 0}ol.lst-kix_list_16-8{list-style-type:none}.lst-kix_list_5-3>li:before{content:"" counter(lst-ctn-kix_list_5-0,decimal) "." counter(lst-ctn-kix_list_5-1,decimal) "." counter(lst-ctn-kix_list_5-2,decimal) "." counter(lst-ctn-kix_list_5-3,decimal) " "}ol.lst-kix_list_9-5.start{counter-reset:lst-ctn-kix_list_9-5 0}ol.lst-kix_list_16-1{list-style-type:none}ol.lst-kix_list_16-2{list-style-type:none}.lst-kix_list_5-2>li:before{content:"" counter(lst-ctn-kix_list_5-0,decimal) "." counter(lst-ctn-kix_list_5-1,decimal) "." counter(lst-ctn-kix_list_5-2,decimal) " "}ol.lst-kix_list_16-3{list-style-type:none}.lst-kix_list_8-3>li{counter-increment:lst-ctn-kix_list_8-3}ol.lst-kix_list_16-4{list-style-type:none}.lst-kix_list_5-1>li:before{content:"" counter(lst-ctn-kix_list_5-0,decimal) "." counter(lst-ctn-kix_list_5-1,decimal) " "}ol.lst-kix_list_16-0{list-style-type:none}.lst-kix_list_5-7>li:before{content:"" counter(lst-ctn-kix_list_5-0,decimal) "." counter(lst-ctn-kix_list_5-1,decimal) "." counter(lst-ctn-kix_list_5-2,decimal) "." counter(lst-ctn-kix_list_5-3,decimal) "." counter(lst-ctn-kix_list_5-4,decimal) "." counter(lst-ctn-kix_list_5-5,decimal) "." counter(lst-ctn-kix_list_5-6,decimal) "." counter(lst-ctn-kix_list_5-7,decimal) " "}.lst-kix_list_5-6>li:before{content:"" counter(lst-ctn-kix_list_5-0,decimal) "." counter(lst-ctn-kix_list_5-1,decimal) "." counter(lst-ctn-kix_list_5-2,decimal) "." counter(lst-ctn-kix_list_5-3,decimal) "." counter(lst-ctn-kix_list_5-4,decimal) "." counter(lst-ctn-kix_list_5-5,decimal) "." counter(lst-ctn-kix_list_5-6,decimal) " "}.lst-kix_list_5-8>li:before{content:"" counter(lst-ctn-kix_list_5-0,decimal) "." counter(lst-ctn-kix_list_5-1,decimal) "." counter(lst-ctn-kix_list_5-2,decimal) "." counter(lst-ctn-kix_list_5-3,decimal) "." counter(lst-ctn-kix_list_5-4,decimal) "." counter(lst-ctn-kix_list_5-5,decimal) "." counter(lst-ctn-kix_list_5-6,decimal) "." counter(lst-ctn-kix_list_5-7,decimal) "." counter(lst-ctn-kix_list_5-8,decimal) " "}.lst-kix_list_9-4>li{counter-increment:lst-ctn-kix_list_9-4}ol.lst-kix_list_6-6{list-style-type:none}ol.lst-kix_list_6-7{list-style-type:none}.lst-kix_list_5-4>li:before{content:"" counter(lst-ctn-kix_list_5-0,decimal) "." counter(lst-ctn-kix_list_5-1,decimal) "." counter(lst-ctn-kix_list_5-2,decimal) "." counter(lst-ctn-kix_list_5-3,decimal) "." counter(lst-ctn-kix_list_5-4,decimal) " "}ol.lst-kix_list_6-8{list-style-type:none}.lst-kix_list_5-5>li:before{content:"" counter(lst-ctn-kix_list_5-0,decimal) "." counter(lst-ctn-kix_list_5-1,decimal) "." counter(lst-ctn-kix_list_5-2,decimal) "." counter(lst-ctn-kix_list_5-3,decimal) "." counter(lst-ctn-kix_list_5-4,decimal) "." counter(lst-ctn-kix_list_5-5,decimal) " "}ol.lst-kix_list_6-2{list-style-type:none}ol.lst-kix_list_6-3{list-style-type:none}ol.lst-kix_list_6-4{list-style-type:none}ol.lst-kix_list_16-4.start{counter-reset:lst-ctn-kix_list_16-4 0}ol.lst-kix_list_6-5{list-style-type:none}ol.lst-kix_list_14-1.start{counter-reset:lst-ctn-kix_list_14-1 0}ol.lst-kix_list_12-5.start{counter-reset:lst-ctn-kix_list_12-5 0}.lst-kix_list_6-1>li:before{content:"" counter(lst-ctn-kix_list_6-0,decimal) "." counter(lst-ctn-kix_list_6-1,decimal) " "}.lst-kix_list_6-3>li:before{content:"" counter(lst-ctn-kix_list_6-0,decimal) "." counter(lst-ctn-kix_list_6-1,decimal) "." counter(lst-ctn-kix_list_6-2,decimal) "." counter(lst-ctn-kix_list_6-3,decimal) " "}.lst-kix_list_6-5>li{counter-increment:lst-ctn-kix_list_6-5}.lst-kix_list_6-8>li{counter-increment:lst-ctn-kix_list_6-8}.lst-kix_list_6-0>li:before{content:"" counter(lst-ctn-kix_list_6-0,decimal) " "}.lst-kix_list_6-4>li:before{content:"" counter(lst-ctn-kix_list_6-0,decimal) "." counter(lst-ctn-kix_list_6-1,decimal) "." counter(lst-ctn-kix_list_6-2,decimal) "." counter(lst-ctn-kix_list_6-3,decimal) "." counter(lst-ctn-kix_list_6-4,decimal) " "}ol.lst-kix_list_14-8.start{counter-reset:lst-ctn-kix_list_14-8 0}.lst-kix_list_3-6>li{counter-increment:lst-ctn-kix_list_3-6}.lst-kix_list_6-2>li:before{content:"" counter(lst-ctn-kix_list_6-0,decimal) "." counter(lst-ctn-kix_list_6-1,decimal) "." counter(lst-ctn-kix_list_6-2,decimal) " "}ol.lst-kix_list_15-0.start{counter-reset:lst-ctn-kix_list_15-0 0}.lst-kix_list_2-5>li{counter-increment:lst-ctn-kix_list_2-5}.lst-kix_list_2-8>li{counter-increment:lst-ctn-kix_list_2-8}ol.lst-kix_list_3-2.start{counter-reset:lst-ctn-kix_list_3-2 0}.lst-kix_list_6-8>li:before{content:"" counter(lst-ctn-kix_list_6-0,decimal) "." counter(lst-ctn-kix_list_6-1,decimal) "." counter(lst-ctn-kix_list_6-2,decimal) "." counter(lst-ctn-kix_list_6-3,decimal) "." counter(lst-ctn-kix_list_6-4,decimal) "." counter(lst-ctn-kix_list_6-5,decimal) "." counter(lst-ctn-kix_list_6-6,decimal) "." counter(lst-ctn-kix_list_6-7,decimal) "." counter(lst-ctn-kix_list_6-8,decimal) " "}.lst-kix_list_6-5>li:before{content:"" counter(lst-ctn-kix_list_6-0,decimal) "." counter(lst-ctn-kix_list_6-1,decimal) "." counter(lst-ctn-kix_list_6-2,decimal) "." counter(lst-ctn-kix_list_6-3,decimal) "." counter(lst-ctn-kix_list_6-4,decimal) "." counter(lst-ctn-kix_list_6-5,decimal) " "}.lst-kix_list_6-7>li:before{content:"" counter(lst-ctn-kix_list_6-0,decimal) "." counter(lst-ctn-kix_list_6-1,decimal) "." counter(lst-ctn-kix_list_6-2,decimal) "." counter(lst-ctn-kix_list_6-3,decimal) "." counter(lst-ctn-kix_list_6-4,decimal) "." counter(lst-ctn-kix_list_6-5,decimal) "." counter(lst-ctn-kix_list_6-6,decimal) "." counter(lst-ctn-kix_list_6-7,decimal) " "}.lst-kix_list_6-6>li:before{content:"" counter(lst-ctn-kix_list_6-0,decimal) "." counter(lst-ctn-kix_list_6-1,decimal) "." counter(lst-ctn-kix_list_6-2,decimal) "." counter(lst-ctn-kix_list_6-3,decimal) "." counter(lst-ctn-kix_list_6-4,decimal) "." counter(lst-ctn-kix_list_6-5,decimal) "." counter(lst-ctn-kix_list_6-6,decimal) " "}ol.lst-kix_list_17-8{list-style-type:none}ol.lst-kix_list_10-6.start{counter-reset:lst-ctn-kix_list_10-6 0}.lst-kix_list_7-4>li:before{content:"" counter(lst-ctn-kix_list_7-0,decimal) "." counter(lst-ctn-kix_list_7-1,decimal) "." counter(lst-ctn-kix_list_7-2,decimal) "." counter(lst-ctn-kix_list_7-3,decimal) "." counter(lst-ctn-kix_list_7-4,decimal) " "}.lst-kix_list_7-6>li:before{content:"" counter(lst-ctn-kix_list_7-0,decimal) "." counter(lst-ctn-kix_list_7-1,decimal) "." counter(lst-ctn-kix_list_7-2,decimal) "." counter(lst-ctn-kix_list_7-3,decimal) "." counter(lst-ctn-kix_list_7-4,decimal) "." counter(lst-ctn-kix_list_7-5,decimal) "." counter(lst-ctn-kix_list_7-6,decimal) " "}ol.lst-kix_list_17-4{list-style-type:none}ol.lst-kix_list_17-5{list-style-type:none}ol.lst-kix_list_6-2.start{counter-reset:lst-ctn-kix_list_6-2 0}.lst-kix_list_15-5>li{counter-increment:lst-ctn-kix_list_15-5}ol.lst-kix_list_17-6{list-style-type:none}ol.lst-kix_list_17-7{list-style-type:none}ol.lst-kix_list_17-0{list-style-type:none}ol.lst-kix_list_17-1{list-style-type:none}ol.lst-kix_list_17-2{list-style-type:none}.lst-kix_list_7-2>li:before{content:"" counter(lst-ctn-kix_list_7-0,decimal) "." counter(lst-ctn-kix_list_7-1,decimal) "." counter(lst-ctn-kix_list_7-2,decimal) " "}ol.lst-kix_list_17-3{list-style-type:none}.lst-kix_list_7-6>li{counter-increment:lst-ctn-kix_list_7-6}.lst-kix_list_8-6>li{counter-increment:lst-ctn-kix_list_8-6}.lst-kix_list_12-6>li{counter-increment:lst-ctn-kix_list_12-6}ol.lst-kix_list_4-6.start{counter-reset:lst-ctn-kix_list_4-6 0}ol.lst-kix_list_9-7{list-style-type:none}ol.lst-kix_list_9-8{list-style-type:none}.lst-kix_list_13-7>li:before{content:"" counter(lst-ctn-kix_list_13-0,decimal) "." counter(lst-ctn-kix_list_13-1,decimal) "." counter(lst-ctn-kix_list_13-2,decimal) "." counter(lst-ctn-kix_list_13-3,decimal) "." counter(lst-ctn-kix_list_13-4,decimal) "." counter(lst-ctn-kix_list_13-5,decimal) "." counter(lst-ctn-kix_list_13-6,decimal) "." counter(lst-ctn-kix_list_13-7,decimal) ". "}ol.lst-kix_list_3-0.start{counter-reset:lst-ctn-kix_list_3-0 0}ol.lst-kix_list_9-3{list-style-type:none}ol.lst-kix_list_9-4{list-style-type:none}.lst-kix_list_5-7>li{counter-increment:lst-ctn-kix_list_5-7}ol.lst-kix_list_9-5{list-style-type:none}.lst-kix_list_7-8>li:before{content:"" counter(lst-ctn-kix_list_7-0,decimal) "." counter(lst-ctn-kix_list_7-1,decimal) "." counter(lst-ctn-kix_list_7-2,decimal) "." counter(lst-ctn-kix_list_7-3,decimal) "." counter(lst-ctn-kix_list_7-4,decimal) "." counter(lst-ctn-kix_list_7-5,decimal) "." counter(lst-ctn-kix_list_7-6,decimal) "." counter(lst-ctn-kix_list_7-7,decimal) "." counter(lst-ctn-kix_list_7-8,decimal) " "}ol.lst-kix_list_9-6{list-style-type:none}.lst-kix_list_15-6>li{counter-increment:lst-ctn-kix_list_15-6}.lst-kix_list_4-7>li{counter-increment:lst-ctn-kix_list_4-7}ol.lst-kix_list_9-0{list-style-type:none}ol.lst-kix_list_9-1{list-style-type:none}ol.lst-kix_list_9-2{list-style-type:none}ol.lst-kix_list_2-5.start{counter-reset:lst-ctn-kix_list_2-5 0}.lst-kix_list_15-5>li:before{content:"" counter(lst-ctn-kix_list_15-0,decimal) "." counter(lst-ctn-kix_list_15-1,decimal) "." counter(lst-ctn-kix_list_15-2,decimal) "." counter(lst-ctn-kix_list_15-3,decimal) "." counter(lst-ctn-kix_list_15-4,decimal) "." counter(lst-ctn-kix_list_15-5,decimal) " "}.lst-kix_list_9-8>li{counter-increment:lst-ctn-kix_list_9-8}.lst-kix_list_13-4>li{counter-increment:lst-ctn-kix_list_13-4}.lst-kix_list_4-1>li:before{content:"" counter(lst-ctn-kix_list_4-1,lower-latin) ". "}.lst-kix_list_15-7>li:before{content:"" counter(lst-ctn-kix_list_15-0,decimal) "." counter(lst-ctn-kix_list_15-1,decimal) "." counter(lst-ctn-kix_list_15-2,decimal) "." counter(lst-ctn-kix_list_15-3,decimal) "." counter(lst-ctn-kix_list_15-4,decimal) "." counter(lst-ctn-kix_list_15-5,decimal) "." counter(lst-ctn-kix_list_15-6,decimal) "." counter(lst-ctn-kix_list_15-7,decimal) " "}.lst-kix_list_17-7>li{counter-increment:lst-ctn-kix_list_17-7}.lst-kix_list_4-3>li:before{content:"" counter(lst-ctn-kix_list_4-3,decimal) ". "}.lst-kix_list_4-5>li:before{content:"" counter(lst-ctn-kix_list_4-5,lower-roman) ". "}.lst-kix_list_1-8>li{counter-increment:lst-ctn-kix_list_1-8}.lst-kix_list_10-5>li{counter-increment:lst-ctn-kix_list_10-5}.lst-kix_list_15-1>li:before{content:"" counter(lst-ctn-kix_list_15-0,decimal) "." counter(lst-ctn-kix_list_15-1,decimal) " "}ol.lst-kix_list_1-4.start{counter-reset:lst-ctn-kix_list_1-4 0}.lst-kix_list_3-5>li{counter-increment:lst-ctn-kix_list_3-5}ol.lst-kix_list_1-1.start{counter-reset:lst-ctn-kix_list_1-1 0}.lst-kix_list_15-3>li:before{content:"" counter(lst-ctn-kix_list_15-0,decimal) "." counter(lst-ctn-kix_list_15-1,decimal) "." counter(lst-ctn-kix_list_15-2,decimal) "." counter(lst-ctn-kix_list_15-3,decimal) " "}ol.lst-kix_list_4-4.start{counter-reset:lst-ctn-kix_list_4-4 0}.lst-kix_list_16-2>li{counter-increment:lst-ctn-kix_list_16-2}.lst-kix_list_6-4>li{counter-increment:lst-ctn-kix_list_6-4}ol.lst-kix_list_9-2.start{counter-reset:lst-ctn-kix_list_9-2 0}ol.lst-kix_list_16-7.start{counter-reset:lst-ctn-kix_list_16-7 0}.lst-kix_list_9-3>li{counter-increment:lst-ctn-kix_list_9-3}.lst-kix_list_11-2>li{counter-increment:lst-ctn-kix_list_11-2}ol.lst-kix_list_15-2.start{counter-reset:lst-ctn-kix_list_15-2 0}ol.lst-kix_list_2-8.start{counter-reset:lst-ctn-kix_list_2-8 0}ol.lst-kix_list_8-8{list-style-type:none}.lst-kix_list_12-3>li:before{content:"" counter(lst-ctn-kix_list_12-0,decimal) "." counter(lst-ctn-kix_list_12-1,decimal) "." counter(lst-ctn-kix_list_12-2,decimal) "." counter(lst-ctn-kix_list_12-3,decimal) ". "}ol.lst-kix_list_7-6.start{counter-reset:lst-ctn-kix_list_7-6 0}ol.lst-kix_list_8-4{list-style-type:none}.lst-kix_list_12-1>li:before{content:"" counter(lst-ctn-kix_list_12-0,decimal) "." counter(lst-ctn-kix_list_12-1,decimal) ". "}ol.lst-kix_list_8-5{list-style-type:none}ol.lst-kix_list_8-6{list-style-type:none}ol.lst-kix_list_8-7{list-style-type:none}ol.lst-kix_list_8-0{list-style-type:none}.lst-kix_list_16-3>li{counter-increment:lst-ctn-kix_list_16-3}ol.lst-kix_list_8-1{list-style-type:none}ol.lst-kix_list_8-2{list-style-type:none}.lst-kix_list_13-3>li{counter-increment:lst-ctn-kix_list_13-3}ol.lst-kix_list_13-6.start{counter-reset:lst-ctn-kix_list_13-6 0}ol.lst-kix_list_8-3{list-style-type:none}.lst-kix_list_10-4>li{counter-increment:lst-ctn-kix_list_10-4}ol.lst-kix_list_15-3.start{counter-reset:lst-ctn-kix_list_15-3 0}.lst-kix_list_14-1>li{counter-increment:lst-ctn-kix_list_14-1}.lst-kix_list_13-3>li:before{content:"" counter(lst-ctn-kix_list_13-0,decimal) "." counter(lst-ctn-kix_list_13-1,decimal) "." counter(lst-ctn-kix_list_13-2,decimal) "." counter(lst-ctn-kix_list_13-3,decimal) ". "}ol.lst-kix_list_5-8.start{counter-reset:lst-ctn-kix_list_5-8 0}.lst-kix_list_1-3>li{counter-increment:lst-ctn-kix_list_1-3}.lst-kix_list_13-5>li:before{content:"" counter(lst-ctn-kix_list_13-0,decimal) "." counter(lst-ctn-kix_list_13-1,decimal) "." counter(lst-ctn-kix_list_13-2,decimal) "." counter(lst-ctn-kix_list_13-3,decimal) "." counter(lst-ctn-kix_list_13-4,decimal) "." counter(lst-ctn-kix_list_13-5,decimal) ". "}.lst-kix_list_12-5>li:before{content:"" counter(lst-ctn-kix_list_12-0,decimal) "." counter(lst-ctn-kix_list_12-1,decimal) "." counter(lst-ctn-kix_list_12-2,decimal) "." counter(lst-ctn-kix_list_12-3,decimal) "." counter(lst-ctn-kix_list_12-4,decimal) "." counter(lst-ctn-kix_list_12-5,decimal) ". "}ol.lst-kix_list_13-7.start{counter-reset:lst-ctn-kix_list_13-7 0}ol.lst-kix_list_12-2.start{counter-reset:lst-ctn-kix_list_12-2 0}.lst-kix_list_12-7>li:before{content:"" counter(lst-ctn-kix_list_12-0,decimal) "." counter(lst-ctn-kix_list_12-1,decimal) "." counter(lst-ctn-kix_list_12-2,decimal) "." counter(lst-ctn-kix_list_12-3,decimal) "." counter(lst-ctn-kix_list_12-4,decimal) "." counter(lst-ctn-kix_list_12-5,decimal) "." counter(lst-ctn-kix_list_12-6,decimal) "." counter(lst-ctn-kix_list_12-7,decimal) ". "}ol.lst-kix_list_6-0.start{counter-reset:lst-ctn-kix_list_6-0 6}.lst-kix_list_4-2>li{counter-increment:lst-ctn-kix_list_4-2}.lst-kix_list_13-1>li:before{content:"" counter(lst-ctn-kix_list_13-0,decimal) "." counter(lst-ctn-kix_list_13-1,decimal) ". "}ol.lst-kix_list_3-1{list-style-type:none}ol.lst-kix_list_3-2{list-style-type:none}ol.lst-kix_list_3-3{list-style-type:none}ol.lst-kix_list_3-4.start{counter-reset:lst-ctn-kix_list_3-4 0}.lst-kix_list_5-1>li{counter-increment:lst-ctn-kix_list_5-1}ol.lst-kix_list_3-4{list-style-type:none}ol.lst-kix_list_3-0{list-style-type:none}ol.lst-kix_list_11-6{list-style-type:none}ol.lst-kix_list_11-7{list-style-type:none}ol.lst-kix_list_11-8{list-style-type:none}.lst-kix_list_1-1>li{counter-increment:lst-ctn-kix_list_1-1}.lst-kix_list_7-1>li{counter-increment:lst-ctn-kix_list_7-1}ol.lst-kix_list_11-2{list-style-type:none}ol.lst-kix_list_11-3{list-style-type:none}ol.lst-kix_list_2-6.start{counter-reset:lst-ctn-kix_list_2-6 0}.lst-kix_list_3-0>li:before{content:"" counter(lst-ctn-kix_list_3-0,decimal) ". "}ol.lst-kix_list_11-4{list-style-type:none}ol.lst-kix_list_11-5{list-style-type:none}ol.lst-kix_list_13-1.start{counter-reset:lst-ctn-kix_list_13-1 1}ol.lst-kix_list_11-0{list-style-type:none}ol.lst-kix_list_11-1{list-style-type:none}.lst-kix_list_16-0>li{counter-increment:lst-ctn-kix_list_16-0}.lst-kix_list_4-0>li{counter-increment:lst-ctn-kix_list_4-0}.lst-kix_list_8-0>li{counter-increment:lst-ctn-kix_list_8-0}.lst-kix_list_10-0>li{counter-increment:lst-ctn-kix_list_10-0}.lst-kix_list_3-4>li:before{content:"" counter(lst-ctn-kix_list_3-0,decimal) "." counter(lst-ctn-kix_list_3-1,decimal) "." counter(lst-ctn-kix_list_3-2,decimal) "." counter(lst-ctn-kix_list_3-3,decimal) "." counter(lst-ctn-kix_list_3-4,decimal) ". "}.lst-kix_list_3-3>li:before{content:"" counter(lst-ctn-kix_list_3-0,decimal) "." counter(lst-ctn-kix_list_3-1,decimal) "." counter(lst-ctn-kix_list_3-2,decimal) "." counter(lst-ctn-kix_list_3-3,decimal) ". "}ol.lst-kix_list_3-5{list-style-type:none}ol.lst-kix_list_3-6{list-style-type:none}.lst-kix_list_8-0>li:before{content:"" counter(lst-ctn-kix_list_8-0,decimal) " "}ol.lst-kix_list_3-7{list-style-type:none}ol.lst-kix_list_3-8{list-style-type:none}.lst-kix_list_8-7>li:before{content:"" counter(lst-ctn-kix_list_8-0,decimal) "." counter(lst-ctn-kix_list_8-1,decimal) "." counter(lst-ctn-kix_list_8-2,decimal) "." counter(lst-ctn-kix_list_8-3,decimal) "." counter(lst-ctn-kix_list_8-4,decimal) "." counter(lst-ctn-kix_list_8-5,decimal) "." counter(lst-ctn-kix_list_8-6,decimal) "." counter(lst-ctn-kix_list_8-7,decimal) " "}.lst-kix_list_3-8>li:before{content:"" counter(lst-ctn-kix_list_3-0,decimal) "." counter(lst-ctn-kix_list_3-1,decimal) "." counter(lst-ctn-kix_list_3-2,decimal) "." counter(lst-ctn-kix_list_3-3,decimal) "." counter(lst-ctn-kix_list_3-4,decimal) "." counter(lst-ctn-kix_list_3-5,decimal) "." counter(lst-ctn-kix_list_3-6,decimal) "." counter(lst-ctn-kix_list_3-7,decimal) "." counter(lst-ctn-kix_list_3-8,decimal) ". "}ol.lst-kix_list_10-7.start{counter-reset:lst-ctn-kix_list_10-7 0}.lst-kix_list_13-1>li{counter-increment:lst-ctn-kix_list_13-1}ol.lst-kix_list_15-8.start{counter-reset:lst-ctn-kix_list_15-8 0}.lst-kix_list_8-3>li:before{content:"" counter(lst-ctn-kix_list_8-0,decimal) "." counter(lst-ctn-kix_list_8-1,decimal) "." counter(lst-ctn-kix_list_8-2,decimal) "." counter(lst-ctn-kix_list_8-3,decimal) " "}.lst-kix_list_3-7>li:before{content:"" counter(lst-ctn-kix_list_3-0,decimal) "." counter(lst-ctn-kix_list_3-1,decimal) "." counter(lst-ctn-kix_list_3-2,decimal) "." counter(lst-ctn-kix_list_3-3,decimal) "." counter(lst-ctn-kix_list_3-4,decimal) "." counter(lst-ctn-kix_list_3-5,decimal) "." counter(lst-ctn-kix_list_3-6,decimal) "." counter(lst-ctn-kix_list_3-7,decimal) ". "}.lst-kix_list_8-4>li:before{content:"" counter(lst-ctn-kix_list_8-0,decimal) "." counter(lst-ctn-kix_list_8-1,decimal) "." counter(lst-ctn-kix_list_8-2,decimal) "." counter(lst-ctn-kix_list_8-3,decimal) "." counter(lst-ctn-kix_list_8-4,decimal) " "}.lst-kix_list_10-2>li{counter-increment:lst-ctn-kix_list_10-2}ol.lst-kix_list_8-5.start{counter-reset:lst-ctn-kix_list_8-5 0}.lst-kix_list_17-1>li{counter-increment:lst-ctn-kix_list_17-1}.lst-kix_list_11-1>li:before{content:"" counter(lst-ctn-kix_list_11-0,decimal) "." counter(lst-ctn-kix_list_11-1,decimal) ". "}.lst-kix_list_11-0>li:before{content:"" counter(lst-ctn-kix_list_11-0,decimal) ". "}ol.lst-kix_list_9-3.start{counter-reset:lst-ctn-kix_list_9-3 0}.lst-kix_list_8-8>li:before{content:"" counter(lst-ctn-kix_list_8-0,decimal) "." counter(lst-ctn-kix_list_8-1,decimal) "." counter(lst-ctn-kix_list_8-2,decimal) "." counter(lst-ctn-kix_list_8-3,decimal) "." counter(lst-ctn-kix_list_8-4,decimal) "." counter(lst-ctn-kix_list_8-5,decimal) "." counter(lst-ctn-kix_list_8-6,decimal) "." counter(lst-ctn-kix_list_8-7,decimal) "." counter(lst-ctn-kix_list_8-8,decimal) " "}ol.lst-kix_list_2-2{list-style-type:none}.lst-kix_list_16-8>li:before{content:"" counter(lst-ctn-kix_list_16-0,decimal) "." counter(lst-ctn-kix_list_16-1,decimal) "." counter(lst-ctn-kix_list_16-2,decimal) "." counter(lst-ctn-kix_list_16-3,decimal) "." counter(lst-ctn-kix_list_16-4,decimal) "." counter(lst-ctn-kix_list_16-5,decimal) "." counter(lst-ctn-kix_list_16-6,decimal) "." counter(lst-ctn-kix_list_16-7,decimal) "." counter(lst-ctn-kix_list_16-8,decimal) " "}ol.lst-kix_list_2-3{list-style-type:none}ol.lst-kix_list_2-4{list-style-type:none}.lst-kix_list_16-7>li:before{content:"" counter(lst-ctn-kix_list_16-0,decimal) "." counter(lst-ctn-kix_list_16-1,decimal) "." counter(lst-ctn-kix_list_16-2,decimal) "." counter(lst-ctn-kix_list_16-3,decimal) "." counter(lst-ctn-kix_list_16-4,decimal) "." counter(lst-ctn-kix_list_16-5,decimal) "." counter(lst-ctn-kix_list_16-6,decimal) "." counter(lst-ctn-kix_list_16-7,decimal) " "}ol.lst-kix_list_7-2.start{counter-reset:lst-ctn-kix_list_7-2 3}ol.lst-kix_list_2-5{list-style-type:none}.lst-kix_list_17-8>li{counter-increment:lst-ctn-kix_list_17-8}ol.lst-kix_list_2-0{list-style-type:none}ol.lst-kix_list_2-1{list-style-type:none}.lst-kix_list_4-8>li:before{content:"" counter(lst-ctn-kix_list_4-8,lower-roman) ". "}ol.lst-kix_list_12-5{list-style-type:none}ol.lst-kix_list_12-6{list-style-type:none}.lst-kix_list_4-7>li:before{content:"" counter(lst-ctn-kix_list_4-7,lower-latin) ". "}ol.lst-kix_list_12-7{list-style-type:none}.lst-kix_list_14-2>li{counter-increment:lst-ctn-kix_list_14-2}.lst-kix_list_17-0>li:before{content:"" counter(lst-ctn-kix_list_17-0,decimal) " "}ol.lst-kix_list_12-8{list-style-type:none}ol.lst-kix_list_12-1{list-style-type:none}ol.lst-kix_list_12-2{list-style-type:none}ol.lst-kix_list_12-3{list-style-type:none}ol.lst-kix_list_12-4{list-style-type:none}.lst-kix_list_16-0>li:before{content:"" counter(lst-ctn-kix_list_16-0,decimal) " "}ol.lst-kix_list_12-0{list-style-type:none}ol.lst-kix_list_4-8.start{counter-reset:lst-ctn-kix_list_4-8 0}.lst-kix_list_8-4>li{counter-increment:lst-ctn-kix_list_8-4}.lst-kix_list_16-4>li:before{content:"" counter(lst-ctn-kix_list_16-0,decimal) "." counter(lst-ctn-kix_list_16-1,decimal) "." counter(lst-ctn-kix_list_16-2,decimal) "." counter(lst-ctn-kix_list_16-3,decimal) "." counter(lst-ctn-kix_list_16-4,decimal) " "}ol.lst-kix_list_3-3.start{counter-reset:lst-ctn-kix_list_3-3 0}ol.lst-kix_list_10-8.start{counter-reset:lst-ctn-kix_list_10-8 0}.lst-kix_list_16-3>li:before{content:"" counter(lst-ctn-kix_list_16-0,decimal) "." counter(lst-ctn-kix_list_16-1,decimal) "." counter(lst-ctn-kix_list_16-2,decimal) "." counter(lst-ctn-kix_list_16-3,decimal) " "}ol.lst-kix_list_2-6{list-style-type:none}ol.lst-kix_list_2-7{list-style-type:none}ol.lst-kix_list_2-8{list-style-type:none}.lst-kix_list_11-3>li{counter-increment:lst-ctn-kix_list_11-3}ol.lst-kix_list_7-1.start{counter-reset:lst-ctn-kix_list_7-1 2}ol.lst-kix_list_8-6.start{counter-reset:lst-ctn-kix_list_8-6 0}.lst-kix_list_17-7>li:before{content:"" counter(lst-ctn-kix_list_17-0,decimal) "." counter(lst-ctn-kix_list_17-1,decimal) "." counter(lst-ctn-kix_list_17-2,decimal) "." counter(lst-ctn-kix_list_17-3,decimal) "." counter(lst-ctn-kix_list_17-4,decimal) "." counter(lst-ctn-kix_list_17-5,decimal) "." counter(lst-ctn-kix_list_17-6,decimal) "." counter(lst-ctn-kix_list_17-7,decimal) " "}.lst-kix_list_16-7>li{counter-increment:lst-ctn-kix_list_16-7}.lst-kix_list_17-8>li:before{content:"" counter(lst-ctn-kix_list_17-0,decimal) "." counter(lst-ctn-kix_list_17-1,decimal) "." counter(lst-ctn-kix_list_17-2,decimal) "." counter(lst-ctn-kix_list_17-3,decimal) "." counter(lst-ctn-kix_list_17-4,decimal) "." counter(lst-ctn-kix_list_17-5,decimal) "." counter(lst-ctn-kix_list_17-6,decimal) "." counter(lst-ctn-kix_list_17-7,decimal) "." counter(lst-ctn-kix_list_17-8,decimal) " "}.lst-kix_list_17-3>li:before{content:"" counter(lst-ctn-kix_list_17-0,decimal) "." counter(lst-ctn-kix_list_17-1,decimal) "." counter(lst-ctn-kix_list_17-2,decimal) "." counter(lst-ctn-kix_list_17-3,decimal) " "}.lst-kix_list_17-4>li:before{content:"" counter(lst-ctn-kix_list_17-0,decimal) "." counter(lst-ctn-kix_list_17-1,decimal) "." counter(lst-ctn-kix_list_17-2,decimal) "." counter(lst-ctn-kix_list_17-3,decimal) "." counter(lst-ctn-kix_list_17-4,decimal) " "}ol.lst-kix_list_8-0.start{counter-reset:lst-ctn-kix_list_8-0 7}.lst-kix_list_7-0>li:before{content:"" counter(lst-ctn-kix_list_7-0,decimal) " "}.lst-kix_list_13-8>li{counter-increment:lst-ctn-kix_list_13-8}.lst-kix_list_2-2>li{counter-increment:lst-ctn-kix_list_2-2}ol.lst-kix_list_4-7.start{counter-reset:lst-ctn-kix_list_4-7 0}.lst-kix_list_16-5>li{counter-increment:lst-ctn-kix_list_16-5}ol.lst-kix_list_5-0{list-style-type:none}.lst-kix_list_3-7>li{counter-increment:lst-ctn-kix_list_3-7}ol.lst-kix_list_5-1{list-style-type:none}ol.lst-kix_list_9-7.start{counter-reset:lst-ctn-kix_list_9-7 0}ol.lst-kix_list_5-2{list-style-type:none}ol.lst-kix_list_13-8{list-style-type:none}.lst-kix_list_2-4>li:before{content:"" counter(lst-ctn-kix_list_2-4,lower-latin) ". "}.lst-kix_list_2-8>li:before{content:"" counter(lst-ctn-kix_list_2-8,lower-roman) ". "}ol.lst-kix_list_13-4{list-style-type:none}ol.lst-kix_list_13-5{list-style-type:none}ol.lst-kix_list_13-6{list-style-type:none}ol.lst-kix_list_13-7{list-style-type:none}ol.lst-kix_list_13-0{list-style-type:none}ol.lst-kix_list_13-1{list-style-type:none}.lst-kix_list_6-6>li{counter-increment:lst-ctn-kix_list_6-6}ol.lst-kix_list_13-2{list-style-type:none}ol.lst-kix_list_15-7.start{counter-reset:lst-ctn-kix_list_15-7 0}.lst-kix_list_7-3>li:before{content:"" counter(lst-ctn-kix_list_7-0,decimal) "." counter(lst-ctn-kix_list_7-1,decimal) "." counter(lst-ctn-kix_list_7-2,decimal) "." counter(lst-ctn-kix_list_7-3,decimal) " "}ol.lst-kix_list_13-3{list-style-type:none}.lst-kix_list_10-0>li:before{content:"(" counter(lst-ctn-kix_list_10-0,lower-roman) ") "}.lst-kix_list_9-7>li{counter-increment:lst-ctn-kix_list_9-7}.lst-kix_list_13-6>li{counter-increment:lst-ctn-kix_list_13-6}.lst-kix_list_13-8>li:before{content:"" counter(lst-ctn-kix_list_13-0,decimal) "." counter(lst-ctn-kix_list_13-1,decimal) "." counter(lst-ctn-kix_list_13-2,decimal) "." counter(lst-ctn-kix_list_13-3,decimal) "." counter(lst-ctn-kix_list_13-4,decimal) "." counter(lst-ctn-kix_list_13-5,decimal) "." counter(lst-ctn-kix_list_13-6,decimal) "." counter(lst-ctn-kix_list_13-7,decimal) "." counter(lst-ctn-kix_list_13-8,decimal) ". "}ol.lst-kix_list_14-6.start{counter-reset:lst-ctn-kix_list_14-6 0}ol.lst-kix_list_5-7{list-style-type:none}ol.lst-kix_list_5-8{list-style-type:none}ol.lst-kix_list_5-3{list-style-type:none}.lst-kix_list_8-7>li{counter-increment:lst-ctn-kix_list_8-7}ol.lst-kix_list_5-4{list-style-type:none}ol.lst-kix_list_3-8.start{counter-reset:lst-ctn-kix_list_3-8 0}ol.lst-kix_list_5-5{list-style-type:none}ol.lst-kix_list_5-6{list-style-type:none}.lst-kix_list_7-7>li:before{content:"" counter(lst-ctn-kix_list_7-0,decimal) "." counter(lst-ctn-kix_list_7-1,decimal) "." counter(lst-ctn-kix_list_7-2,decimal) "." counter(lst-ctn-kix_list_7-3,decimal) "." counter(lst-ctn-kix_list_7-4,decimal) "." counter(lst-ctn-kix_list_7-5,decimal) "." counter(lst-ctn-kix_list_7-6,decimal) "." counter(lst-ctn-kix_list_7-7,decimal) " "}ol.lst-kix_list_8-1.start{counter-reset:lst-ctn-kix_list_8-1 0}.lst-kix_list_15-4>li:before{content:"" counter(lst-ctn-kix_list_15-0,decimal) "." counter(lst-ctn-kix_list_15-1,decimal) "." counter(lst-ctn-kix_list_15-2,decimal) "." counter(lst-ctn-kix_list_15-3,decimal) "." counter(lst-ctn-kix_list_15-4,decimal) " "}.lst-kix_list_9-5>li{counter-increment:lst-ctn-kix_list_9-5}.lst-kix_list_5-8>li{counter-increment:lst-ctn-kix_list_5-8}.lst-kix_list_10-4>li:before{content:"" counter(lst-ctn-kix_list_10-4,lower-latin) ". "}.lst-kix_list_10-8>li:before{content:"" counter(lst-ctn-kix_list_10-8,lower-roman) ". "}.lst-kix_list_4-0>li:before{content:"(" counter(lst-ctn-kix_list_4-0,lower-latin) ") "}.lst-kix_list_15-0>li:before{content:"" counter(lst-ctn-kix_list_15-0,decimal) ". "}.lst-kix_list_15-8>li:before{content:"" counter(lst-ctn-kix_list_15-0,decimal) "." counter(lst-ctn-kix_list_15-1,decimal) "." counter(lst-ctn-kix_list_15-2,decimal) "." counter(lst-ctn-kix_list_15-3,decimal) "." counter(lst-ctn-kix_list_15-4,decimal) "." counter(lst-ctn-kix_list_15-5,decimal) "." counter(lst-ctn-kix_list_15-6,decimal) "." counter(lst-ctn-kix_list_15-7,decimal) "." counter(lst-ctn-kix_list_15-8,decimal) " "}ol.lst-kix_list_14-3.start{counter-reset:lst-ctn-kix_list_14-3 0}.lst-kix_list_15-7>li{counter-increment:lst-ctn-kix_list_15-7}.lst-kix_list_4-4>li:before{content:"" counter(lst-ctn-kix_list_4-4,lower-latin) ". "}ol.lst-kix_list_2-2.start{counter-reset:lst-ctn-kix_list_2-2 0}.lst-kix_list_9-3>li:before{content:"" counter(lst-ctn-kix_list_9-0,decimal) "." counter(lst-ctn-kix_list_9-1,decimal) "." counter(lst-ctn-kix_list_9-2,decimal) "." counter(lst-ctn-kix_list_9-3,decimal) ". "}ol.lst-kix_list_7-0.start{counter-reset:lst-ctn-kix_list_7-0 6}.lst-kix_list_12-8>li{counter-increment:lst-ctn-kix_list_12-8}ol.lst-kix_list_13-2.start{counter-reset:lst-ctn-kix_list_13-2 0}ol.lst-kix_list_4-0{list-style-type:none}ol.lst-kix_list_4-1{list-style-type:none}ol.lst-kix_list_4-2{list-style-type:none}ol.lst-kix_list_4-3{list-style-type:none}ol.lst-kix_list_14-7{list-style-type:none}ol.lst-kix_list_14-4.start{counter-reset:lst-ctn-kix_list_14-4 0}ol.lst-kix_list_14-8{list-style-type:none}.lst-kix_list_9-7>li:before{content:"" counter(lst-ctn-kix_list_9-0,decimal) "." counter(lst-ctn-kix_list_9-1,decimal) "." counter(lst-ctn-kix_list_9-2,decimal) "." counter(lst-ctn-kix_list_9-3,decimal) "." counter(lst-ctn-kix_list_9-4,decimal) "." counter(lst-ctn-kix_list_9-5,decimal) "." counter(lst-ctn-kix_list_9-6,decimal) "." counter(lst-ctn-kix_list_9-7,decimal) ". "}.lst-kix_list_2-4>li{counter-increment:lst-ctn-kix_list_2-4}ol.lst-kix_list_14-3{list-style-type:none}ol.lst-kix_list_3-6.start{counter-reset:lst-ctn-kix_list_3-6 0}ol.lst-kix_list_14-4{list-style-type:none}ol.lst-kix_list_14-5{list-style-type:none}ol.lst-kix_list_14-6{list-style-type:none}.lst-kix_list_11-4>li:before{content:"" counter(lst-ctn-kix_list_11-0,decimal) "." counter(lst-ctn-kix_list_11-1,decimal) "." counter(lst-ctn-kix_list_11-2,decimal) "." counter(lst-ctn-kix_list_11-3,decimal) "." counter(lst-ctn-kix_list_11-4,decimal) ". "}.lst-kix_list_15-2>li{counter-increment:lst-ctn-kix_list_15-2}ol.lst-kix_list_14-0{list-style-type:none}.lst-kix_list_12-4>li:before{content:"" counter(lst-ctn-kix_list_12-0,decimal) "." counter(lst-ctn-kix_list_12-1,decimal) "." counter(lst-ctn-kix_list_12-2,decimal) "." counter(lst-ctn-kix_list_12-3,decimal) "." counter(lst-ctn-kix_list_12-4,decimal) ". "}ol.lst-kix_list_14-1{list-style-type:none}ol.lst-kix_list_14-2{list-style-type:none}.lst-kix_list_5-3>li{counter-increment:lst-ctn-kix_list_5-3}ol.lst-kix_list_4-8{list-style-type:none}.lst-kix_list_7-4>li{counter-increment:lst-ctn-kix_list_7-4}.lst-kix_list_1-0>li:before{content:"(" counter(lst-ctn-kix_list_1-0,decimal) ") "}ol.lst-kix_list_4-4{list-style-type:none}.lst-kix_list_11-8>li:before{content:"" counter(lst-ctn-kix_list_11-0,decimal) "." counter(lst-ctn-kix_list_11-1,decimal) "." counter(lst-ctn-kix_list_11-2,decimal) "." counter(lst-ctn-kix_list_11-3,decimal) "." counter(lst-ctn-kix_list_11-4,decimal) "." counter(lst-ctn-kix_list_11-5,decimal) "." counter(lst-ctn-kix_list_11-6,decimal) "." counter(lst-ctn-kix_list_11-7,decimal) "." counter(lst-ctn-kix_list_11-8,decimal) ". "}.lst-kix_list_12-3>li{counter-increment:lst-ctn-kix_list_12-3}ol.lst-kix_list_4-5{list-style-type:none}ol.lst-kix_list_2-0.start{counter-reset:lst-ctn-kix_list_2-0 0}ol.lst-kix_list_4-6{list-style-type:none}.lst-kix_list_12-0>li:before{content:"" counter(lst-ctn-kix_list_12-0,decimal) ". "}.lst-kix_list_17-3>li{counter-increment:lst-ctn-kix_list_17-3}ol.lst-kix_list_4-7{list-style-type:none}ol.lst-kix_list_8-4.start{counter-reset:lst-ctn-kix_list_8-4 0}.lst-kix_list_1-4>li:before{content:"" counter(lst-ctn-kix_list_1-4,lower-latin) ". "}.lst-kix_list_13-0>li:before{content:"" counter(lst-ctn-kix_list_13-0,decimal) ". "}ol.lst-kix_list_3-5.start{counter-reset:lst-ctn-kix_list_3-5 0}.lst-kix_list_1-6>li{counter-increment:lst-ctn-kix_list_1-6}ol.lst-kix_list_13-0.start{counter-reset:lst-ctn-kix_list_13-0 10}.lst-kix_list_14-4>li{counter-increment:lst-ctn-kix_list_14-4}.lst-kix_list_13-4>li:before{content:"" counter(lst-ctn-kix_list_13-0,decimal) "." counter(lst-ctn-kix_list_13-1,decimal) "." counter(lst-ctn-kix_list_13-2,decimal) "." counter(lst-ctn-kix_list_13-3,decimal) "." counter(lst-ctn-kix_list_13-4,decimal) ". "}.lst-kix_list_10-7>li{counter-increment:lst-ctn-kix_list_10-7}.lst-kix_list_2-0>li:before{content:"(" counter(lst-ctn-kix_list_2-0,lower-roman) ") "}ol.lst-kix_list_2-1.start{counter-reset:lst-ctn-kix_list_2-1 0}ol.lst-kix_list_8-3.start{counter-reset:lst-ctn-kix_list_8-3 0}.lst-kix_list_11-5>li{counter-increment:lst-ctn-kix_list_11-5}.lst-kix_list_4-5>li{counter-increment:lst-ctn-kix_list_4-5}ol.lst-kix_list_14-5.start{counter-reset:lst-ctn-kix_list_14-5 0}ol.lst-kix_list_9-8.start{counter-reset:lst-ctn-kix_list_9-8 0}.lst-kix_list_1-8>li:before{content:"" counter(lst-ctn-kix_list_1-8,lower-roman) ". "}.lst-kix_list_12-8>li:before{content:"" counter(lst-ctn-kix_list_12-0,decimal) "." counter(lst-ctn-kix_list_12-1,decimal) "." counter(lst-ctn-kix_list_12-2,decimal) "." counter(lst-ctn-kix_list_12-3,decimal) "." counter(lst-ctn-kix_list_12-4,decimal) "." counter(lst-ctn-kix_list_12-5,decimal) "." counter(lst-ctn-kix_list_12-6,decimal) "." counter(lst-ctn-kix_list_12-7,decimal) "." counter(lst-ctn-kix_list_12-8,decimal) ". "}.lst-kix_list_8-2>li{counter-increment:lst-ctn-kix_list_8-2}.lst-kix_list_4-1>li{counter-increment:lst-ctn-kix_list_4-1}ol.lst-kix_list_17-7.start{counter-reset:lst-ctn-kix_list_17-7 0}ol.lst-kix_list_12-6.start{counter-reset:lst-ctn-kix_list_12-6 0}.lst-kix_list_8-1>li{counter-increment:lst-ctn-kix_list_8-1}ol.lst-kix_list_8-2.start{counter-reset:lst-ctn-kix_list_8-2 0}ol.lst-kix_list_3-1.start{counter-reset:lst-ctn-kix_list_3-1 0}.lst-kix_list_15-0>li{counter-increment:lst-ctn-kix_list_15-0}ol.lst-kix_list_6-6.start{counter-reset:lst-ctn-kix_list_6-6 0}.lst-kix_list_7-0>li{counter-increment:lst-ctn-kix_list_7-0}.lst-kix_list_11-0>li{counter-increment:lst-ctn-kix_list_11-0}ol.lst-kix_list_1-5.start{counter-reset:lst-ctn-kix_list_1-5 0}ol.lst-kix_list_9-6.start{counter-reset:lst-ctn-kix_list_9-6 0}ol.lst-kix_list_16-3.start{counter-reset:lst-ctn-kix_list_16-3 0}.lst-kix_list_2-3>li{counter-increment:lst-ctn-kix_list_2-3}ol.lst-kix_list_4-5.start{counter-reset:lst-ctn-kix_list_4-5 0}.lst-kix_list_1-2>li{counter-increment:lst-ctn-kix_list_1-2}ol.lst-kix_list_14-7.start{counter-reset:lst-ctn-kix_list_14-7 0}ol.lst-kix_list_11-2.start{counter-reset:lst-ctn-kix_list_11-2 0}.lst-kix_list_5-2>li{counter-increment:lst-ctn-kix_list_5-2}.lst-kix_list_9-2>li{counter-increment:lst-ctn-kix_list_9-2}ol.lst-kix_list_8-7.start{counter-reset:lst-ctn-kix_list_8-7 0}.lst-kix_list_17-2>li{counter-increment:lst-ctn-kix_list_17-2}ol.lst-kix_list_17-2.start{counter-reset:lst-ctn-kix_list_17-2 0}.lst-kix_list_13-2>li{counter-increment:lst-ctn-kix_list_13-2}.lst-kix_list_14-3>li{counter-increment:lst-ctn-kix_list_14-3}ol.lst-kix_list_15-6.start{counter-reset:lst-ctn-kix_list_15-6 0}.lst-kix_list_10-3>li{counter-increment:lst-ctn-kix_list_10-3}.lst-kix_list_12-1>li{counter-increment:lst-ctn-kix_list_12-1}ol.lst-kix_list_1-0.start{counter-reset:lst-ctn-kix_list_1-0 0}ol.lst-kix_list_13-3.start{counter-reset:lst-ctn-kix_list_13-3 0}.lst-kix_list_3-0>li{counter-increment:lst-ctn-kix_list_3-0}ol.lst-kix_list_4-0.start{counter-reset:lst-ctn-kix_list_4-0 0}ol.lst-kix_list_11-7.start{counter-reset:lst-ctn-kix_list_11-7 0}ol.lst-kix_list_14-2.start{counter-reset:lst-ctn-kix_list_14-2 0}.lst-kix_list_16-1>li{counter-increment:lst-ctn-kix_list_16-1}ol.lst-kix_list_2-4.start{counter-reset:lst-ctn-kix_list_2-4 0}ol.lst-kix_list_1-3{list-style-type:none}ol.lst-kix_list_1-4{list-style-type:none}.lst-kix_list_2-7>li:before{content:"" counter(lst-ctn-kix_list_2-7,lower-latin) ". "}.lst-kix_list_2-7>li{counter-increment:lst-ctn-kix_list_2-7}ol.lst-kix_list_1-5{list-style-type:none}ol.lst-kix_list_1-6{list-style-type:none}ol.lst-kix_list_1-0{list-style-type:none}.lst-kix_list_2-5>li:before{content:"" counter(lst-ctn-kix_list_2-5,lower-roman) ". "}ol.lst-kix_list_1-1{list-style-type:none}.lst-kix_list_17-5>li{counter-increment:lst-ctn-kix_list_17-5}ol.lst-kix_list_1-2{list-style-type:none}ol.lst-kix_list_17-0.start{counter-reset:lst-ctn-kix_list_17-0 0}ol.lst-kix_list_10-3.start{counter-reset:lst-ctn-kix_list_10-3 0}ol.lst-kix_list_9-4.start{counter-reset:lst-ctn-kix_list_9-4 0}.lst-kix_list_14-6>li{counter-increment:lst-ctn-kix_list_14-6}.lst-kix_list_10-1>li:before{content:"" counter(lst-ctn-kix_list_10-1,lower-latin) ". "}.lst-kix_list_17-6>li{counter-increment:lst-ctn-kix_list_17-6}.lst-kix_list_7-7>li{counter-increment:lst-ctn-kix_list_7-7}ol.lst-kix_list_15-1.start{counter-reset:lst-ctn-kix_list_15-1 0}ol.lst-kix_list_15-4.start{counter-reset:lst-ctn-kix_list_15-4 0}ol.lst-kix_list_4-3.start{counter-reset:lst-ctn-kix_list_4-3 0}ol.lst-kix_list_1-7{list-style-type:none}ol.lst-kix_list_1-8{list-style-type:none}.lst-kix_list_10-7>li:before{content:"" counter(lst-ctn-kix_list_10-7,lower-latin) ". "}.lst-kix_list_7-8>li{counter-increment:lst-ctn-kix_list_7-8}.lst-kix_list_10-5>li:before{content:"" counter(lst-ctn-kix_list_10-5,lower-roman) ". "}ol.lst-kix_list_13-5.start{counter-reset:lst-ctn-kix_list_13-5 0}.lst-kix_list_10-3>li:before{content:"" counter(lst-ctn-kix_list_10-3,decimal) ". "}.lst-kix_list_15-4>li{counter-increment:lst-ctn-kix_list_15-4}.lst-kix_list_2-6>li{counter-increment:lst-ctn-kix_list_2-6}ol.lst-kix_list_7-3.start{counter-reset:lst-ctn-kix_list_7-3 0}ol.lst-kix_list_13-8.start{counter-reset:lst-ctn-kix_list_13-8 0}.lst-kix_list_11-7>li{counter-increment:lst-ctn-kix_list_11-7}.lst-kix_list_9-2>li:before{content:"" counter(lst-ctn-kix_list_9-0,decimal) "." counter(lst-ctn-kix_list_9-1,decimal) "." counter(lst-ctn-kix_list_9-2,decimal) ". "}ol.lst-kix_list_5-7.start{counter-reset:lst-ctn-kix_list_5-7 0}ol.lst-kix_list_14-0.start{counter-reset:lst-ctn-kix_list_14-0 0}.lst-kix_list_12-5>li{counter-increment:lst-ctn-kix_list_12-5}.lst-kix_list_5-5>li{counter-increment:lst-ctn-kix_list_5-5}.lst-kix_list_9-0>li:before{content:"" counter(lst-ctn-kix_list_9-0,decimal) ". "}.lst-kix_list_3-4>li{counter-increment:lst-ctn-kix_list_3-4}.lst-kix_list_16-8>li{counter-increment:lst-ctn-kix_list_16-8}ol.lst-kix_list_10-7{list-style-type:none}.lst-kix_list_9-6>li:before{content:"" counter(lst-ctn-kix_list_9-0,decimal) "." counter(lst-ctn-kix_list_9-1,decimal) "." counter(lst-ctn-kix_list_9-2,decimal) "." counter(lst-ctn-kix_list_9-3,decimal) "." counter(lst-ctn-kix_list_9-4,decimal) "." counter(lst-ctn-kix_list_9-5,decimal) "." counter(lst-ctn-kix_list_9-6,decimal) ". "}ol.lst-kix_list_10-8{list-style-type:none}ol.lst-kix_list_10-3{list-style-type:none}.lst-kix_list_9-4>li:before{content:"" counter(lst-ctn-kix_list_9-0,decimal) "." counter(lst-ctn-kix_list_9-1,decimal) "." counter(lst-ctn-kix_list_9-2,decimal) "." counter(lst-ctn-kix_list_9-3,decimal) "." counter(lst-ctn-kix_list_9-4,decimal) ". "}ol.lst-kix_list_10-4{list-style-type:none}ol.lst-kix_list_10-5{list-style-type:none}.lst-kix_list_11-3>li:before{content:"" counter(lst-ctn-kix_list_11-0,decimal) "." counter(lst-ctn-kix_list_11-1,decimal) "." counter(lst-ctn-kix_list_11-2,decimal) "." counter(lst-ctn-kix_list_11-3,decimal) ". "}ol.lst-kix_list_10-6{list-style-type:none}.lst-kix_list_6-3>li{counter-increment:lst-ctn-kix_list_6-3}ol.lst-kix_list_10-0{list-style-type:none}ol.lst-kix_list_10-1{list-style-type:none}ol.lst-kix_list_1-3.start{counter-reset:lst-ctn-kix_list_1-3 0}ol.lst-kix_list_10-2{list-style-type:none}ol.lst-kix_list_12-1.start{counter-reset:lst-ctn-kix_list_12-1 0}ol.lst-kix_list_1-2.start{counter-reset:lst-ctn-kix_list_1-2 0}.lst-kix_list_11-5>li:before{content:"" counter(lst-ctn-kix_list_11-0,decimal) "." counter(lst-ctn-kix_list_11-1,decimal) "." counter(lst-ctn-kix_list_11-2,decimal) "." counter(lst-ctn-kix_list_11-3,decimal) "." counter(lst-ctn-kix_list_11-4,decimal) "." counter(lst-ctn-kix_list_11-5,decimal) ". "}ol.lst-kix_list_6-1.start{counter-reset:lst-ctn-kix_list_6-1 2}.lst-kix_list_9-8>li:before{content:"" counter(lst-ctn-kix_list_9-0,decimal) "." counter(lst-ctn-kix_list_9-1,decimal) "." counter(lst-ctn-kix_list_9-2,decimal) "." counter(lst-ctn-kix_list_9-3,decimal) "." counter(lst-ctn-kix_list_9-4,decimal) "." counter(lst-ctn-kix_list_9-5,decimal) "." counter(lst-ctn-kix_list_9-6,decimal) "." counter(lst-ctn-kix_list_9-7,decimal) "." counter(lst-ctn-kix_list_9-8,decimal) ". "}.lst-kix_list_1-1>li:before{content:"" counter(lst-ctn-kix_list_1-1,lower-latin) ". "}.lst-kix_list_11-7>li:before{content:"" counter(lst-ctn-kix_list_11-0,decimal) "." counter(lst-ctn-kix_list_11-1,decimal) "." counter(lst-ctn-kix_list_11-2,decimal) "." counter(lst-ctn-kix_list_11-3,decimal) "." counter(lst-ctn-kix_list_11-4,decimal) "." counter(lst-ctn-kix_list_11-5,decimal) "." counter(lst-ctn-kix_list_11-6,decimal) "." counter(lst-ctn-kix_list_11-7,decimal) ". "}.lst-kix_list_8-5>li{counter-increment:lst-ctn-kix_list_8-5}.lst-kix_list_1-3>li:before{content:"" counter(lst-ctn-kix_list_1-3,decimal) ". "}ol.lst-kix_list_16-8.start{counter-reset:lst-ctn-kix_list_16-8 0}ol.lst-kix_list_10-5.start{counter-reset:lst-ctn-kix_list_10-5 0}.lst-kix_list_4-8>li{counter-increment:lst-ctn-kix_list_4-8}.lst-kix_list_1-7>li:before{content:"" counter(lst-ctn-kix_list_1-7,lower-latin) ". "}ol.lst-kix_list_2-7.start{counter-reset:lst-ctn-kix_list_2-7 0}.lst-kix_list_1-5>li:before{content:"" counter(lst-ctn-kix_list_1-5,lower-roman) ". "}ol.lst-kix_list_9-1.start{counter-reset:lst-ctn-kix_list_9-1 0}.lst-kix_list_14-7>li{counter-increment:lst-ctn-kix_list_14-7}.lst-kix_list_5-6>li{counter-increment:lst-ctn-kix_list_5-6}ol.lst-kix_list_7-5.start{counter-reset:lst-ctn-kix_list_7-5 0}.lst-kix_list_2-1>li:before{content:"" counter(lst-ctn-kix_list_2-1,lower-latin) ". "}.lst-kix_list_2-3>li:before{content:"" counter(lst-ctn-kix_list_2-3,decimal) ". "}.lst-kix_list_11-8>li{counter-increment:lst-ctn-kix_list_11-8}.lst-kix_list_3-1>li{counter-increment:lst-ctn-kix_list_3-1}.lst-kix_list_9-1>li{counter-increment:lst-ctn-kix_list_9-1}ol.lst-kix_list_7-7.start{counter-reset:lst-ctn-kix_list_7-7 0}.lst-kix_list_3-1>li:before{content:"" counter(lst-ctn-kix_list_3-0,decimal) "." counter(lst-ctn-kix_list_3-1,decimal) ". "}.lst-kix_list_3-2>li:before{content:"" counter(lst-ctn-kix_list_3-0,decimal) "." counter(lst-ctn-kix_list_3-1,decimal) "." counter(lst-ctn-kix_list_3-2,decimal) ". "}.lst-kix_list_14-0>li{counter-increment:lst-ctn-kix_list_14-0}.lst-kix_list_8-1>li:before{content:"" counter(lst-ctn-kix_list_8-0,decimal) "." counter(lst-ctn-kix_list_8-1,decimal) " "}ol.lst-kix_list_1-8.start{counter-reset:lst-ctn-kix_list_1-8 0}ol.lst-kix_list_17-4.start{counter-reset:lst-ctn-kix_list_17-4 0}.lst-kix_list_8-2>li:before{content:"" counter(lst-ctn-kix_list_8-0,decimal) "." counter(lst-ctn-kix_list_8-1,decimal) "." counter(lst-ctn-kix_list_8-2,decimal) " "}.lst-kix_list_6-0>li{counter-increment:lst-ctn-kix_list_6-0}.lst-kix_list_3-5>li:before{content:"" counter(lst-ctn-kix_list_3-0,decimal) "." counter(lst-ctn-kix_list_3-1,decimal) "." counter(lst-ctn-kix_list_3-2,decimal) "." counter(lst-ctn-kix_list_3-3,decimal) "." counter(lst-ctn-kix_list_3-4,decimal) "." counter(lst-ctn-kix_list_3-5,decimal) ". "}.lst-kix_list_12-0>li{counter-increment:lst-ctn-kix_list_12-0}ol.lst-kix_list_12-3.start{counter-reset:lst-ctn-kix_list_12-3 0}ol.lst-kix_list_11-5.start{counter-reset:lst-ctn-kix_list_11-5 0}.lst-kix_list_8-5>li:before{content:"" counter(lst-ctn-kix_list_8-0,decimal) "." counter(lst-ctn-kix_list_8-1,decimal) "." counter(lst-ctn-kix_list_8-2,decimal) "." counter(lst-ctn-kix_list_8-3,decimal) "." counter(lst-ctn-kix_list_8-4,decimal) "." counter(lst-ctn-kix_list_8-5,decimal) " "}.lst-kix_list_11-1>li{counter-increment:lst-ctn-kix_list_11-1}.lst-kix_list_8-6>li:before{content:"" counter(lst-ctn-kix_list_8-0,decimal) "." counter(lst-ctn-kix_list_8-1,decimal) "." counter(lst-ctn-kix_list_8-2,decimal) "." counter(lst-ctn-kix_list_8-3,decimal) "." counter(lst-ctn-kix_list_8-4,decimal) "." counter(lst-ctn-kix_list_8-5,decimal) "." counter(lst-ctn-kix_list_8-6,decimal) " "}.lst-kix_list_2-0>li{counter-increment:lst-ctn-kix_list_2-0}.lst-kix_list_15-1>li{counter-increment:lst-ctn-kix_list_15-1}.lst-kix_list_3-6>li:before{content:"" counter(lst-ctn-kix_list_3-0,decimal) "." counter(lst-ctn-kix_list_3-1,decimal) "." counter(lst-ctn-kix_list_3-2,decimal) "." counter(lst-ctn-kix_list_3-3,decimal) "." counter(lst-ctn-kix_list_3-4,decimal) "." counter(lst-ctn-kix_list_3-5,decimal) "." counter(lst-ctn-kix_list_3-6,decimal) ". "}ol.lst-kix_list_16-6.start{counter-reset:lst-ctn-kix_list_16-6 0}ol.lst-kix_list_5-0.start{counter-reset:lst-ctn-kix_list_5-0 6}.lst-kix_list_11-2>li:before{content:"" counter(lst-ctn-kix_list_11-0,decimal) "." counter(lst-ctn-kix_list_11-1,decimal) "." counter(lst-ctn-kix_list_11-2,decimal) ". "}ol.lst-kix_list_4-2.start{counter-reset:lst-ctn-kix_list_4-2 0}ol.lst-kix_list_16-0.start{counter-reset:lst-ctn-kix_list_16-0 0}ol.lst-kix_list_11-6.start{counter-reset:lst-ctn-kix_list_11-6 0}ol.lst-kix_list_12-4.start{counter-reset:lst-ctn-kix_list_12-4 0}.lst-kix_list_16-6>li:before{content:"" counter(lst-ctn-kix_list_16-0,decimal) "." counter(lst-ctn-kix_list_16-1,decimal) "." counter(lst-ctn-kix_list_16-2,decimal) "." counter(lst-ctn-kix_list_16-3,decimal) "." counter(lst-ctn-kix_list_16-4,decimal) "." counter(lst-ctn-kix_list_16-5,decimal) "." counter(lst-ctn-kix_list_16-6,decimal) " "}ol.lst-kix_list_10-1.start{counter-reset:lst-ctn-kix_list_10-1 0}.lst-kix_list_4-4>li{counter-increment:lst-ctn-kix_list_4-4}ol.lst-kix_list_6-4.start{counter-reset:lst-ctn-kix_list_6-4 0}.lst-kix_list_17-1>li:before{content:"" counter(lst-ctn-kix_list_17-0,decimal) "." counter(lst-ctn-kix_list_17-1,decimal) " "}ol.lst-kix_list_5-6.start{counter-reset:lst-ctn-kix_list_5-6 0}.lst-kix_list_16-1>li:before{content:"" counter(lst-ctn-kix_list_16-0,decimal) "." counter(lst-ctn-kix_list_16-1,decimal) " "}ol.lst-kix_list_4-1.start{counter-reset:lst-ctn-kix_list_4-1 0}.lst-kix_list_7-3>li{counter-increment:lst-ctn-kix_list_7-3}.lst-kix_list_16-2>li:before{content:"" counter(lst-ctn-kix_list_16-0,decimal) "." counter(lst-ctn-kix_list_16-1,decimal) "." counter(lst-ctn-kix_list_16-2,decimal) " "}.lst-kix_list_16-5>li:before{content:"" counter(lst-ctn-kix_list_16-0,decimal) "." counter(lst-ctn-kix_list_16-1,decimal) "." counter(lst-ctn-kix_list_16-2,decimal) "." counter(lst-ctn-kix_list_16-3,decimal) "." counter(lst-ctn-kix_list_16-4,decimal) "." counter(lst-ctn-kix_list_16-5,decimal) " "}.lst-kix_list_15-3>li{counter-increment:lst-ctn-kix_list_15-3}ol.lst-kix_list_7-8.start{counter-reset:lst-ctn-kix_list_7-8 0}.lst-kix_list_12-4>li{counter-increment:lst-ctn-kix_list_12-4}ol.lst-kix_list_11-0.start{counter-reset:lst-ctn-kix_list_11-0 10}.lst-kix_list_3-3>li{counter-increment:lst-ctn-kix_list_3-3}.lst-kix_list_16-4>li{counter-increment:lst-ctn-kix_list_16-4}ol.lst-kix_list_6-3.start{counter-reset:lst-ctn-kix_list_6-3 0}ol.lst-kix_list_10-2.start{counter-reset:lst-ctn-kix_list_10-2 0}.lst-kix_list_12-7>li{counter-increment:lst-ctn-kix_list_12-7}.lst-kix_list_17-2>li:before{content:"" counter(lst-ctn-kix_list_17-0,decimal) "." counter(lst-ctn-kix_list_17-1,decimal) "." counter(lst-ctn-kix_list_17-2,decimal) " "}ol.lst-kix_list_5-5.start{counter-reset:lst-ctn-kix_list_5-5 0}ol.lst-kix_list_16-5.start{counter-reset:lst-ctn-kix_list_16-5 0}ol.lst-kix_list_17-3.start{counter-reset:lst-ctn-kix_list_17-3 0}.lst-kix_list_17-6>li:before{content:"" counter(lst-ctn-kix_list_17-0,decimal) "." counter(lst-ctn-kix_list_17-1,decimal) "." counter(lst-ctn-kix_list_17-2,decimal) "." counter(lst-ctn-kix_list_17-3,decimal) "." counter(lst-ctn-kix_list_17-4,decimal) "." counter(lst-ctn-kix_list_17-5,decimal) "." counter(lst-ctn-kix_list_17-6,decimal) " "}.lst-kix_list_17-5>li:before{content:"" counter(lst-ctn-kix_list_17-0,decimal) "." counter(lst-ctn-kix_list_17-1,decimal) "." counter(lst-ctn-kix_list_17-2,decimal) "." counter(lst-ctn-kix_list_17-3,decimal) "." counter(lst-ctn-kix_list_17-4,decimal) "." counter(lst-ctn-kix_list_17-5,decimal) " "}.lst-kix_list_6-2>li{counter-increment:lst-ctn-kix_list_6-2}.lst-kix_list_2-6>li:before{content:"" counter(lst-ctn-kix_list_2-6,decimal) ". "}ol.lst-kix_list_16-2.start{counter-reset:lst-ctn-kix_list_16-2 0}.lst-kix_list_14-5>li{counter-increment:lst-ctn-kix_list_14-5}.lst-kix_list_7-1>li:before{content:"" counter(lst-ctn-kix_list_7-0,decimal) "." counter(lst-ctn-kix_list_7-1,decimal) " "}.lst-kix_list_7-5>li:before{content:"" counter(lst-ctn-kix_list_7-0,decimal) "." counter(lst-ctn-kix_list_7-1,decimal) "." counter(lst-ctn-kix_list_7-2,decimal) "." counter(lst-ctn-kix_list_7-3,decimal) "." counter(lst-ctn-kix_list_7-4,decimal) "." counter(lst-ctn-kix_list_7-5,decimal) " "}.lst-kix_list_13-5>li{counter-increment:lst-ctn-kix_list_13-5}.lst-kix_list_9-6>li{counter-increment:lst-ctn-kix_list_9-6}ol.lst-kix_list_5-4.start{counter-reset:lst-ctn-kix_list_5-4 0}ol.lst-kix_list_11-1.start{counter-reset:lst-ctn-kix_list_11-1 2}.lst-kix_list_13-6>li:before{content:"" counter(lst-ctn-kix_list_13-0,decimal) "." counter(lst-ctn-kix_list_13-1,decimal) "." counter(lst-ctn-kix_list_13-2,decimal) "." counter(lst-ctn-kix_list_13-3,decimal) "." counter(lst-ctn-kix_list_13-4,decimal) "." counter(lst-ctn-kix_list_13-5,decimal) "." counter(lst-ctn-kix_list_13-6,decimal) ". "}ol.lst-kix_list_5-1.start{counter-reset:lst-ctn-kix_list_5-1 0}.lst-kix_list_6-7>li{counter-increment:lst-ctn-kix_list_6-7}.lst-kix_list_16-6>li{counter-increment:lst-ctn-kix_list_16-6}.lst-kix_list_10-6>li{counter-increment:lst-ctn-kix_list_10-6}.lst-kix_list_11-6>li{counter-increment:lst-ctn-kix_list_11-6}.lst-kix_list_1-7>li{counter-increment:lst-ctn-kix_list_1-7}ol.lst-kix_list_10-0.start{counter-reset:lst-ctn-kix_list_10-0 0}.lst-kix_list_7-5>li{counter-increment:lst-ctn-kix_list_7-5}.lst-kix_list_15-6>li:before{content:"" counter(lst-ctn-kix_list_15-0,decimal) "." counter(lst-ctn-kix_list_15-1,decimal) "." counter(lst-ctn-kix_list_15-2,decimal) "." counter(lst-ctn-kix_list_15-3,decimal) "." counter(lst-ctn-kix_list_15-4,decimal) "." counter(lst-ctn-kix_list_15-5,decimal) "." counter(lst-ctn-kix_list_15-6,decimal) " "}ol.lst-kix_list_17-8.start{counter-reset:lst-ctn-kix_list_17-8 0}.lst-kix_list_11-4>li{counter-increment:lst-ctn-kix_list_11-4}.lst-kix_list_3-8>li{counter-increment:lst-ctn-kix_list_3-8}ol.lst-kix_list_6-8.start{counter-reset:lst-ctn-kix_list_6-8 0}.lst-kix_list_10-2>li:before{content:"" counter(lst-ctn-kix_list_10-2,lower-roman) ". "}.lst-kix_list_4-6>li{counter-increment:lst-ctn-kix_list_4-6}.lst-kix_list_13-7>li{counter-increment:lst-ctn-kix_list_13-7}ol.lst-kix_list_1-7.start{counter-reset:lst-ctn-kix_list_1-7 0}.lst-kix_list_1-5>li{counter-increment:lst-ctn-kix_list_1-5}ol.lst-kix_list_17-5.start{counter-reset:lst-ctn-kix_list_17-5 0}ol.lst-kix_list_6-5.start{counter-reset:lst-ctn-kix_list_6-5 0}.lst-kix_list_4-2>li:before{content:"" counter(lst-ctn-kix_list_4-2,lower-roman) ". "}.lst-kix_list_4-6>li:before{content:"" counter(lst-ctn-kix_list_4-6,decimal) ". "}.lst-kix_list_17-4>li{counter-increment:lst-ctn-kix_list_17-4}.lst-kix_list_15-2>li:before{content:"" counter(lst-ctn-kix_list_15-0,decimal) "." counter(lst-ctn-kix_list_15-1,decimal) "." counter(lst-ctn-kix_list_15-2,decimal) " "}.lst-kix_list_10-8>li{counter-increment:lst-ctn-kix_list_10-8}.lst-kix_list_10-6>li:before{content:"" counter(lst-ctn-kix_list_10-6,decimal) ". "}.lst-kix_list_9-1>li:before{content:"" counter(lst-ctn-kix_list_9-0,decimal) "." counter(lst-ctn-kix_list_9-1,decimal) ". "}ol.lst-kix_list_12-7.start{counter-reset:lst-ctn-kix_list_12-7 0}.lst-kix_list_15-8>li{counter-increment:lst-ctn-kix_list_15-8}ol.lst-kix_list_6-7.start{counter-reset:lst-ctn-kix_list_6-7 0}.lst-kix_list_12-2>li{counter-increment:lst-ctn-kix_list_12-2}.lst-kix_list_9-5>li:before{content:"" counter(lst-ctn-kix_list_9-0,decimal) "." counter(lst-ctn-kix_list_9-1,decimal) "." counter(lst-ctn-kix_list_9-2,decimal) "." counter(lst-ctn-kix_list_9-3,decimal) "." counter(lst-ctn-kix_list_9-4,decimal) "." counter(lst-ctn-kix_list_9-5,decimal) ". "}.lst-kix_list_12-2>li:before{content:"" counter(lst-ctn-kix_list_12-0,decimal) "." counter(lst-ctn-kix_list_12-1,decimal) "." counter(lst-ctn-kix_list_12-2,decimal) ". "}ol.lst-kix_list_12-8.start{counter-reset:lst-ctn-kix_list_12-8 0}.lst-kix_list_11-6>li:before{content:"" counter(lst-ctn-kix_list_11-0,decimal) "." counter(lst-ctn-kix_list_11-1,decimal) "." counter(lst-ctn-kix_list_11-2,decimal) "." counter(lst-ctn-kix_list_11-3,decimal) "." counter(lst-ctn-kix_list_11-4,decimal) "." counter(lst-ctn-kix_list_11-5,decimal) "." counter(lst-ctn-kix_list_11-6,decimal) ". "}ol.lst-kix_list_11-3.start{counter-reset:lst-ctn-kix_list_11-3 0}.lst-kix_list_1-2>li:before{content:"" counter(lst-ctn-kix_list_1-2,lower-roman) ". "}.lst-kix_list_10-1>li{counter-increment:lst-ctn-kix_list_10-1}.lst-kix_list_1-0>li{counter-increment:lst-ctn-kix_list_1-0}.lst-kix_list_8-8>li{counter-increment:lst-ctn-kix_list_8-8}ol.lst-kix_list_16-1.start{counter-reset:lst-ctn-kix_list_16-1 0}ol.lst-kix_list_17-6.start{counter-reset:lst-ctn-kix_list_17-6 0}.lst-kix_list_1-6>li:before{content:"" counter(lst-ctn-kix_list_1-6,decimal) ". "}.lst-kix_list_12-6>li:before{content:"" counter(lst-ctn-kix_list_12-0,decimal) "." counter(lst-ctn-kix_list_12-1,decimal) "." counter(lst-ctn-kix_list_12-2,decimal) "." counter(lst-ctn-kix_list_12-3,decimal) "." counter(lst-ctn-kix_list_12-4,decimal) "." counter(lst-ctn-kix_list_12-5,decimal) "." counter(lst-ctn-kix_list_12-6,decimal) ". "}ol.lst-kix_list_11-4.start{counter-reset:lst-ctn-kix_list_11-4 0}.lst-kix_list_2-2>li:before{content:"" counter(lst-ctn-kix_list_2-2,lower-roman) ". "}.lst-kix_list_13-2>li:before{content:"" counter(lst-ctn-kix_list_13-0,decimal) "." counter(lst-ctn-kix_list_13-1,decimal) "." counter(lst-ctn-kix_list_13-2,decimal) ". "}ol.lst-kix_list_5-2.start{counter-reset:lst-ctn-kix_list_5-2 0}ol{margin:0;padding:0}table td,table th{padding:0}.c20{margin-left:28.4pt;padding-top:0pt;text-indent:-28.4pt;padding-bottom:0pt;line-height:1.0;orphans:2;widows:2;text-align:justify;height:11pt}.c18{margin-left:28.4pt;padding-top:0pt;text-indent:-36pt;padding-bottom:0pt;line-height:1.0;orphans:2;widows:2;text-align:justify;height:11pt}.c2{margin-left:18pt;padding-top:12pt;padding-left:10.4pt;padding-bottom:12pt;line-height:1.0;page-break-after:avoid;orphans:2;widows:2;text-align:justify}.c15{margin-left:36pt;padding-top:0pt;padding-left:0pt;padding-bottom:6pt;line-height:1.0;orphans:2;widows:2;text-align:justify}.c0{margin-left:18pt;padding-top:0pt;padding-left:10.4pt;padding-bottom:6pt;line-height:1.0;orphans:2;widows:2;text-align:justify}.c28{padding-top:0pt;text-indent:-36pt;padding-bottom:0pt;line-height:1.0;orphans:2;widows:2;text-align:justify;height:11pt}.c25{margin-left:35.9pt;padding-top:0pt;padding-left:-0.1pt;padding-bottom:0pt;line-height:1.0;orphans:2;widows:2;text-align:justify}.c10{margin-left:18pt;padding-top:0pt;padding-left:18pt;padding-bottom:6pt;line-height:1.0;orphans:2;widows:2;text-align:justify}.c4{margin-left:18pt;padding-top:0pt;padding-left:18pt;padding-bottom:0pt;line-height:1.0;orphans:2;widows:2;text-align:justify}.c12{margin-left:18pt;padding-top:0pt;padding-left:10.4pt;padding-bottom:0pt;line-height:1.0;orphans:2;widows:2;text-align:justify}.c16{padding-top:0pt;padding-bottom:0pt;line-height:1.0;orphans:2;widows:2;text-align:left;height:11pt}.c5{font-weight:700;text-decoration:none;vertical-align:baseline;font-size:12pt;font-family:"Calibri";font-style:normal}.c1{font-weight:700;text-decoration:none;vertical-align:baseline;font-size:11pt;font-family:"Calibri";font-style:normal}.c3{padding-top:0pt;padding-bottom:6pt;line-height:1.0;orphans:2;widows:2;text-align:justify;height:11pt}.c23{padding-top:0pt;padding-bottom:0pt;line-height:1.0;orphans:2;widows:2;text-align:center;height:11pt}.c22{-webkit-text-decoration-skip:none;color:#0563c1;text-decoration:underline;vertical-align:baseline;text-decoration-skip-ink:none;font-size:11pt;font-style:normal}.c9{font-weight:400;text-decoration:none;vertical-align:baseline;font-size:12pt;font-family:"Calibri";font-style:normal}.c27{padding-top:0pt;padding-bottom:6pt;line-height:1.0;orphans:2;widows:2;text-align:center;height:11pt}.c30{padding-top:0pt;padding-bottom:0pt;line-height:1.0;orphans:2;widows:2;text-align:justify;height:11pt}.c6{font-weight:400;text-decoration:none;vertical-align:baseline;font-size:11pt;font-family:"Calibri";font-style:normal}.c19{padding-top:0pt;padding-bottom:6pt;line-height:1.0;orphans:2;widows:2;text-align:justify}.c29{padding-top:0pt;padding-bottom:6pt;line-height:1.0;orphans:2;widows:2;text-align:center}.c14{text-decoration:none;vertical-align:baseline;font-size:11pt;font-style:italic}.c26{background-color:#ffffff;max-width:453.6pt;padding:70.8pt 70.8pt 70.8pt 70.8pt}.c7{padding:0;margin:0}.c24{margin-left:28.4pt;text-indent:-36pt}.c21{margin-left:28.4pt;text-indent:-28.4pt}.c13{font-weight:700;font-family:"Calibri"}.c17{color:inherit;text-decoration:inherit}.c11{font-weight:400;font-family:"Calibri"}.c8{page-break-after:avoid}.title{padding-top:24pt;font-weight:700;font-size:36pt;padding-bottom:6pt;font-family:"Calibri";line-height:1.0666666666666667;page-break-after:avoid;orphans:2;widows:2;text-align:left}.subtitle{padding-top:18pt;color:#666666;font-size:24pt;padding-bottom:4pt;font-family:"Georgia";line-height:1.0666666666666667;page-break-after:avoid;font-style:italic;orphans:2;widows:2;text-align:left}
 </style>
 
@@ -699,4 +833,147 @@ ol.lst-kix_list_7-0{list-style-type:none}.lst-kix_list_14-1>li:before{content:""
             }
         }
     }
+
+
+        .sending-blk{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            .clmn-1,
+            .clmn-3{
+                width: 35%;
+                padding: 0 5px;
+                .grid{
+                    border: 1px solid rgba(255, 255, 255, .1);
+                    border-radius: 5px;
+                    margin-bottom: 15px;
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    padding: 5px;
+                    .grid-item{
+                        width: 33.3%;
+                        padding: 5px;
+                        position: relative;
+                        div{
+                            border: 1px solid #30304B;
+                            background: rgba(255, 255, 255, .07);
+                            border-radius: 5px;
+                            position: relative;
+                            display: inline-block;
+                            width: 100%;
+                            float: left;
+                            overflow: hidden;
+                            img{
+                                display: block;
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                height: 100%;
+                                width: 100%;
+                                object-fit: cover;
+                                transform: translate(-50%, -50%);
+                            }
+                            &:before{
+                                content: "";
+                                padding-top: 100%;
+                                float: left;
+                            }
+                            &:hover{
+                                cursor: pointer;
+                                background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQyIDQyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0MiA0MjsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIzMnB4IiBoZWlnaHQ9IjMycHgiPgo8cGF0aCBkPSJNMzcuMDU5LDE2SDI2VjQuOTQxQzI2LDIuMjI0LDIzLjcxOCwwLDIxLDBzLTUsMi4yMjQtNSw0Ljk0MVYxNkg0Ljk0MUMyLjIyNCwxNiwwLDE4LjI4MiwwLDIxczIuMjI0LDUsNC45NDEsNUgxNnYxMS4wNTkgIEMxNiwzOS43NzYsMTguMjgyLDQyLDIxLDQyczUtMi4yMjQsNS00Ljk0MVYyNmgxMS4wNTlDMzkuNzc2LDI2LDQyLDIzLjcxOCw0MiwyMVMzOS43NzYsMTYsMzcuMDU5LDE2eiIgZmlsbD0iIzJhMzA0ZCIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
+                                background-position: center;
+                                background-size: 16px;
+                                background-repeat: no-repeat;
+                            }
+                        }
+                    }
+                    .grid-item__amount {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        z-index: 1000000;
+                        color: #fff;
+                        font-weight: bold;
+                        background: rgba(0, 0, 0, 0.4);
+                        text-align: center;
+                    }
+                }
+                .info{
+                    font-size: 12px;
+
+                    span{
+                        &.down{
+                            color: #F75D5D
+                        }
+                        &.up{
+                            color: #43C981
+                        }
+                    }
+                }
+            }
+            .clmn-2{
+                width: 30%;
+                padding: 0 5px;
+                text-align: center;
+                .time{
+                    padding: 20px 0 30px;
+                    i{
+                        display: block;
+                        font-size: 18px;
+                        margin-bottom: 4px;
+                    }
+                }
+                .directions{
+                    width: 100px;
+                    display: block;
+                    margin: auto auto 20px;
+                    .right-arrow{
+                        width: 100%;
+                        height: 35px;
+                        position: relative;
+                        -webkit-clip-path: polygon(0% 35%, 70% 35%, 70% 0%, 100% 50%, 70% 100%, 70% 65%, 0% 65%);
+                        clip-path: polygon(0% 35%, 70% 35%, 70% 0%, 100% 50%, 70% 100%, 70% 65%, 0% 65%);
+                        background: #30304B;
+                        margin-bottom: 4px;
+                        .progress{
+                            left: 0;
+                        }
+                    }
+                    .left-arrow{
+                        width: 100%;
+                        height: 35px;
+                        position: relative;
+                        -webkit-clip-path: polygon(0% 35%, 70% 35%, 70% 0%, 100% 50%, 70% 100%, 70% 65%, 0% 65%);
+                        clip-path: polygon(0% 35%, 70% 35%, 70% 0%, 100% 50%, 70% 100%, 70% 65%, 0% 65%);
+                        background: #30304B;
+                        transform: rotate(180deg);
+                        .progress{
+                            left: 0;
+                        }
+                    }
+                    .progress{
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        background: #5EA72B;
+                        margin: 0;
+                        padding: 0;
+                        border-radius: 0;
+                        height: 100%;
+                    }
+                }
+            }
+            .clmn-1,
+            .clmn-2,
+            .clmn-3{
+                .info{
+                    border: 1px solid rgba(255, 255, 255, .1);
+                    border-radius: 5px;
+                    padding: 5px;
+                    width: 100%;
+                }
+            }
+        }
 </style>
