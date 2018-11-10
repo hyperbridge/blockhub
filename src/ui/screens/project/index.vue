@@ -116,10 +116,10 @@
                                     Overview
                                 </router-link>
                             </li>
-                            <li class="nav-item" @click="section='community'">
+                            <li class="nav-item" @click="section='community'" v-darklaunch="'COMMUNITY'">
                                 <router-link :to="`/project/${project.id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">
                                     Community
-                                    <c-updates-count>
+                                    <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
                                         13
                                     </c-updates-count>
                                 </router-link>
@@ -132,7 +132,7 @@
                             <li class="nav-item" @click="section='updates'">
                                 <router-link :to="`/project/${project.id}/updates`" class="nav-link" :class="{ 'active': section === 'updates' }">
                                     Updates
-                                    <c-updates-count>
+                                    <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
                                         348
                                     </c-updates-count>
                                 </router-link>

@@ -5,7 +5,7 @@
                 <c-curator-review :review="review" />
             </c-slide>
         </c-swiper>
-        <p v-if="!reviews.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
+        <p v-if="!reviews.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
     </div>
 </template>
 

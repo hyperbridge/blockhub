@@ -27,9 +27,11 @@
             <c-custom-modal title="BlockHub Preview" v-if="showWelcomeModal" @close="closeModal">
                 <div class="help-modal__content" slot="modal_body" style="max-width: 500px">
                     <h4 class="h2 mb-3">Welcome</h4>
-                    <p>Welcome to the the nightly BlockHub Preview Build. All features are enabled, with or without bugs. Gotta catch 'em all! 🐛</p>
+                    <p>Welcome to the the BlockHub Preview Build. All features are enabled, with or without bugs. Gotta catch 'em all! 🐛</p>
                     <p>These features are still in active development, and may not functional properly and may not make it into production.</p>
-                    <p>Thanks for visiting and joining us on the journey to a decentralized future!</p>
+                    <p>We believe in transparency and community-driven development, so why don't you let us know what you think!<p>
+                    <p>To make things simple, hold ALT and click anywhere to send us feedback/bug reports!<p>
+                    <p>Thanks for visiting and joining us on the journey to a decentralized future.</p>
                     <p hidden>We're a platform built by the community, for the community.</p>
                     <p hidden><a href="/#/help" target="_blank">Check out the BlockHub crowdfund</a></p>
                 </div>
