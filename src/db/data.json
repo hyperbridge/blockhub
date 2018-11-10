@@ -615,22 +615,6 @@
                 }
             },
             "darklaunch_flags": [
-                {
-                    "code": "COLLECTIONS",
-                    "enabled": true
-                },
-                {
-                    "code": "CURATORS",
-                    "enabled": true
-                },
-                {
-                    "code": "REALMS",
-                    "enabled": true
-                },
-                {
-                    "code": "BATTLE_PASS",
-                    "enabled": false
-                }
             ],
             "product_wishlist": { "3": true, "14": true },
             "product_favorites": {},

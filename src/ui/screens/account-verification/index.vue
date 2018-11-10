@@ -214,7 +214,7 @@
                                 lastName: this.last_name,
                                 idNumber: this.document_number
                             },
-                            vendorData: JSON.stringify({ email: this.email, eth: this.public_address }),
+                            //vendorData: JSON.stringify({ email: this.email, eth: this.public_address }),
                             additionalData: {
                                 eth: this.public_address,
                                 email: this.email,
