@@ -4400,70 +4400,6 @@ storiesOf('Landing Page', module)
         </div>
             `
     }))
-    .add('content block', () => ({
-        components: {
-            'c-landing-block': LandingContent,
-            'c-landing-block-title' : (resolve) => require(['@/ui/components/landing/block-title/simple'], resolve),
-            'c-landing-block-title-shadow' : (resolve) => require(['@/ui/components/landing/block-title/shadow'], resolve),
-            'c-landing-block-title-gradient' : (resolve) => require(['@/ui/components/landing/block-title/gradient'], resolve),
-        },
-        template: `
-            <div>
-                <c-landing-block title="Some content block title" bgPosition="top center" minHeight="400px" bgImage="https://images5.alphacoders.com/387/thumb-1920-387546.jpg">
-                    <c-landing-block-title-shadow colorShadow="#03A9F4">
-                        Aliquam quis magna at diam convallis congue.
-                    </c-landing-block-title-shadow>
-
-                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
-                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
-                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
-                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
-                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
-                </c-landing-block>
-                
-                <c-landing-block 
-                horizontal="center"
-                vertical="center"
-                title="Some content block title" 
-                minHeight="50vh" 
-                contentWidth="60%"
-                bgImage="https://dota2hq.eu/wallpaper/dota2hq.eu-dota-2-roshan-vs-ursa-desktop-wallpaper-3894-1920x1080.jpg">
-                    <c-landing-block-title-gradient align="center">
-                        Aliquam quis magna at diam convallis congue.
-                    </c-landing-block-title-gradient>
-
-                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
-                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
-                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
-                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
-                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
-                </c-landing-block>
-                
-                <c-landing-block 
-                title="Some content block title" 
-                horizontal="center"
-                vertical="center"
-                contentWidth="70%"
-                fullHeight bgImage="https://s1.1zoom.ru/big3/691/Sven_DOTA_2_Armor_Helmet_510699.jpg">
-                    <c-landing-block-title-gradient align="center">
-                        Aliquam quis magna at diam convallis congue.
-                    </c-landing-block-title-gradient>
-
-                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
-                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
-                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
-                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
-                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
-
-                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
-                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
-                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
-                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
-                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
-                </c-landing-block>
-            </div>
-            `
-    }))
     .add('divider', () => ({
         components: {
             'c-landing-divider': (resolve) => require(['@/ui/components/landing/block-content/divider'], resolve),
@@ -4529,6 +4465,104 @@ storiesOf('Landing Page', module)
             </div>
         </div>
         `
+    }))
+    .add('content block', () => ({
+        components: {
+            'c-landing-block': LandingContent,
+            'c-landing-block-title' : (resolve) => require(['@/ui/components/landing/block-title/simple'], resolve),
+            'c-landing-block-title-shadow' : (resolve) => require(['@/ui/components/landing/block-title/shadow'], resolve),
+            'c-landing-block-title-gradient' : (resolve) => require(['@/ui/components/landing/block-title/gradient'], resolve),
+            'c-landing-feature-item': (resolve) => require(['@/ui/components/landing/block-content/feature-item'], resolve),
+        },
+        data(){
+            return{
+                items:[
+                    {
+                        img: 'https://i.ytimg.com/vi/6ki31hkQk8c/maxresdefault.jpg',
+                        title: 'Donec placerat turpis est',
+                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in nulla sed ante maximus fringilla id at mi. Aenean nec elit ac ex porta volutpat. In porta porttitor purus a congue. Aenean sit amet lectus ac purus fringilla rutrum lobortis eu lorem. Quisque accumsan et odio vel ullamcorper.'
+                    },
+                    {
+                        img: 'http://cdn.dota2.com/apps/dota2/images/blog/play/dota_heroes.png',
+                        title: 'Aenean suscipit',
+                        text: 'Nulla facilisi. Donec eu ligula a massa accumsan dignissim a quis orci. Aenean suscipit, turpis eget tempor mattis, turpis tellus tristique nibh, eu lobortis eros libero quis nisl. Donec in maximus tellus.'
+                    },
+                    {
+                        img: 'https://dota2.pl/wp-content/uploads/2017/09/dota_2_clash_of_heroes_by_agussw-d8yukg0.jpg',
+                        title: 'Donec sodales in dui nec vestibulum',
+                        text: 'Nulla ultrices fermentum tristique. Integer a venenatis lacus, eget pretium lectus. Suspendisse potenti. Vestibulum sodales ultricies mattis. Donec sodales in dui nec vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.'
+                    }
+                ]
+            }
+        },
+        template: `
+            <div>
+                <c-landing-block title="Some content block title" bgPosition="top center" minHeight="400px" bgImage="https://images5.alphacoders.com/387/thumb-1920-387546.jpg">
+                    <div class="col-12 col-md-8">
+                        <c-landing-block-title-shadow colorShadow="#03A9F4">
+                            Aliquam quis magna at diam convallis congue.
+                        </c-landing-block-title-shadow>
+    
+                         <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
+                        Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
+                        Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
+                        Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                        Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
+                    </div>
+                </c-landing-block>
+                
+                <c-landing-block 
+                horizontal="center"
+                vertical="center"
+                title="Some content block title" 
+                minHeight="50vh"
+                bgImage="https://dota2hq.eu/wallpaper/dota2hq.eu-dota-2-roshan-vs-ursa-desktop-wallpaper-3894-1920x1080.jpg">
+                    <div class="col-12 col-md-7">
+                        <c-landing-block-title-gradient align="center" class="margin-bottom-15">
+                            Aliquam quis magna at diam convallis congue.
+                        </c-landing-block-title-gradient>
+    
+                         <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
+                        Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
+                        Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
+                        Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                        Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
+                    </div>
+                    <div class="col-12 margin-top-50">
+                        <div class="row">
+                            <div v-for="item in items" class="col-12 col-md-4 mb-3 mb-md-0">
+                                <c-landing-feature-item :title="item.title" :img="item.img">
+                                    {{ item.text }}
+                                </c-landing-feature-item>
+                            </div>
+                        </div>
+                    </div>
+                </c-landing-block>
+                
+                <c-landing-block 
+                title="Some content block title" 
+                horizontal="center"
+                vertical="center"
+                contentWidth="70%"
+                fullHeight bgImage="https://s1.1zoom.ru/big3/691/Sven_DOTA_2_Armor_Helmet_510699.jpg">
+                    <c-landing-block-title-gradient align="center">
+                        Aliquam quis magna at diam convallis congue.
+                    </c-landing-block-title-gradient>
+
+                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
+                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
+                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
+                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
+
+                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
+                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
+                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
+                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
+                </c-landing-block>
+            </div>
+            `
     }))
 
 storiesOf('Token Sale Box', module)
