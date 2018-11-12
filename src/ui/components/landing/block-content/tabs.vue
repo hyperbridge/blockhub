@@ -75,7 +75,7 @@
             flex-wrap: nowrap;
             justify-content: center;
             align-items: center;
-            @include gradient_center( rgba(0, 0, 0, .0), #222, rgba(0, 0, 0, 0));
+            @include gradient_center( rgba(0, 0, 0, .1), #111, rgba(0, 0, 0, .1));
             position: relative;
             &:before,
             &:after{
@@ -85,7 +85,7 @@
                 top: 0;
                 left: 0;
                 width: 100%;
-                @include gradient_center (rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+                @include gradient_center (rgba(94, 167, 43, 0), rgba(94, 167, 43, 0.8), rgba(94, 167, 43, 0));
             }
             &:after{
                 top: unset;
@@ -102,14 +102,14 @@
                     border: none;
                     position: relative;
                     display: inline-block;
-                    opacity: .4;
+                    opacity: .6;
                     font-weight: bold;
                     &.active{
                         opacity: 1;
                     }
                     &:hover{
                         text-decoration: none;
-                        opacity: .7;
+                        opacity: .8;
                     }
                 }
             }

@@ -1,14 +1,34 @@
 <template>
     <div class="landing-slider">
-        <div class="landing-slider__main">
-            <video :poster="currentSlide.poster" preload="true" controls v-if="currentSlide.type === 'video'" :autoplay="playVideo">
-                <source type="video/webm" :src="currentSlide.src">
-            </video>
-        </div>
+        <transition name="fade" v-if="currentSlide">
+            <div class="landing-slider__main">
+                <c-swiper class="gallery-top" ref="swiperTop">
+                    <c-slide v-for="slide in items" :key="slide">
+                        <div class="p-3">
+                            <video :poster="slide.poster"
+                                   :preload="preload"
+                                   :controls="controls"
+                                   :autoplay="autoplay"
+                                   loop
+                                   v-if="slide.type === 'video'">
+                                <source type="video/webm" :src="slide.src">
+                            </video>
+                            <c-img :src="slide.image" v-else />
+                            <c-landing-block-title fontSize="32" class="text-uppercase p-0 mt-4 mb-0" v-if="slide.title">
+                                {{ slide.title }}
+                            </c-landing-block-title>
+                            <c-landing-block-title tag="div" fontSize="16" fontWeight="normal" v-if="slide.subtitle">
+                                {{ slide.subtitle }}
+                            </c-landing-block-title>
+                        </div>
+                    </c-slide>
+                </c-swiper>
+            </div>
+        </transition>
         <div class="landing-slider__thumbs">
-            <c-swiper :options="options" ref="landingSlider">
+            <c-swiper :options="swiperOptionThumbs" ref="swiperThumbs">
                 <template v-for="slide in items">
-                    <c-slide @click.native="checkSlide(slide)">
+                    <c-slide>
                         <c-img :src="slide.poster" />
                     </c-slide>
                 </template>
@@ -33,40 +53,36 @@
         components:{
             'c-swiper': swiper,
             'c-slide': swiperSlide,
+            'c-landing-block-title' : (resolve) => require(['@/ui/components/landing/block-title/simple'], resolve),
         },
         data(){
             return{
-                options: {
-                    slidesPerView: 6,
-                    spaceBetween: 15,
+                swiperOptionThumbs: {
+                    slidesPerView: 8,
+                    touchRatio: 0.2,
                     centeredSlides: true,
+                    slideToClickedSlide: true,
                     navigation: {
                         nextEl: '.swiper-button-next',
                         prevEl: '.swiper-button-prev'
+                    },
+                    onSlideChangeStart:function(){
+                        this.onActiveIndex()
                     }
                 },
                 currentSlide: {},
-                playVideo: false
+                autoplay: false,
+                controls: true,
+                preload: false
             }
         },
-        created(){
-            this.currentSlide = this.items[0]
-        },
-        computed:{
-            slider() {
-                return this.$refs.landingSlider.swiper;
-            },
-        },
-        methods:{
-            checkSlide(sl){
-                this.playVideo = false
-                this.currentSlide = sl
-            }
-        },
-        watch:{
-            currentSlide(){
-                this.playVideo = true
-            }
+        mounted() {
+            this.$nextTick(() => {
+                const swiperTop = this.$refs.swiperTop.swiper
+                const swiperThumbs = this.$refs.swiperThumbs.swiper
+                // swiperTop.controller.thumbs = swiperThumbs
+                swiperThumbs.controller.control = swiperTop
+            });
         }
     }
 </script>
@@ -77,7 +93,7 @@
         video, img{
             width: 100%;
             height: auto;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+            box-shadow: 3px 6px 15px rgba(0, 0, 0, .6), 3px 6px 15px rgba(0, 0, 0, .6), 3px 6px 15px rgba(0, 0, 0, .6);
         }
     }
     .landing-slider__thumbs{
@@ -86,11 +102,17 @@
         width: 90%;
         margin: 0 5%;
         .swiper-slide{
-            padding: 3px;
+            padding: 6px;
             img{
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+                box-shadow: 0 0 8px #000;
+                transition: all 200ms ease-in-out;
+                &:hover{
+                    cursor: pointer;
+                    transform: scale(1.2);
+                }
             }
         }
         .swiper-button-white{

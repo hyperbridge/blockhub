@@ -4502,63 +4502,81 @@ storiesOf('Landing Page', module)
                         type: 'video',
                         poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
                         thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.webm?v=4806847'
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.webm?v=4806847',
+                        title: 'Span of sorrow',
+                        subtitle: 'Back item with custom Sunder effect'
                     },
                     {
                         id: 2,
                         type: 'video',
                         poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
                         thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.webm?v=4806847'
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Nulla ultrices fermentum tristique'
                     },
                     {
                         id: 3,
                         type: 'video',
                         poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
                         thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.webm?v=4806847'
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Morbi in nulla sed'
                     },
                     {
                         id: 4,
                         type: 'video',
                         poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
                         thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.webm?v=4806847'
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Donec eu ligula a massa accumsan dignissim'
                     },
                     {
                         id: 5,
                         type: 'video',
                         poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
                         thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.webm?v=4806847'
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Aenean suscipit'
                     },
                     {
                         id: 6,
                         type: 'video',
                         poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
                         thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.webm?v=4806847'
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Vestibulum dignissim tincidunt'
                     },
                     {
                         id: 7,
                         type: 'video',
                         poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
                         thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.webm?v=4806847'
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Proin efficitur ut ipsum'
                     },
                     {
                         id: 8,
                         type: 'video',
                         poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
                         thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.webm?v=4806847'
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Mauris ex massa'
                     },
                     {
                         id: 9,
                         type: 'video',
                         poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
                         thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
-                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.webm?v=4806847'
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Maecenas suscipit ante'
                     }
                 ],
             }
@@ -4570,7 +4588,7 @@ storiesOf('Landing Page', module)
                 horizontal="center" 
                 bgPosition="top center" 
                 minHeight="400px" 
-                bgImage="https://images5.alphacoders.com/387/thumb-1920-387546.jpg">
+                bgImage="https://i.pinimg.com/originals/eb/ab/7f/ebab7f413318ffaaf0443b8428664bac.jpg">
                     <div class="col-10 text-center">
                         <c-landing-block-title fontSize="42" color="#f8e6c7" class="text-uppercase">
                             Battle level rewards
@@ -4609,7 +4627,7 @@ storiesOf('Landing Page', module)
                 vertical="center"
                 title="Some content block title" 
                 minHeight="50vh"
-                bgImage="https://dota2hq.eu/wallpaper/dota2hq.eu-dota-2-roshan-vs-ursa-desktop-wallpaper-3894-1920x1080.jpg">
+                bgImage="https://s1.1zoom.ru/big3/691/Sven_DOTA_2_Armor_Helmet_510699.jpg">
                     <div class="col-12 col-md-7">
                         <c-landing-block-title-gradient align="center" fontSize="32" class="text-uppercase">
                             About our Feature Items
@@ -4635,8 +4653,8 @@ storiesOf('Landing Page', module)
                 title="Some content block title" 
                 horizontal="center"
                 vertical="center"
-                contentWidth="70%"
-                fullHeight bgImage="https://s1.1zoom.ru/big3/691/Sven_DOTA_2_Armor_Helmet_510699.jpg">
+                fullHeight 
+                bgImage="https://dota2hq.eu/wallpaper/dota2hq.eu-dota-2-roshan-vs-ursa-desktop-wallpaper-3894-1920x1080.jpg">
                     <c-landing-block-title-gradient align="center">
                         Aliquam quis magna at diam convallis congue.
                     </c-landing-block-title-gradient>
