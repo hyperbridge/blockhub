@@ -4466,13 +4466,16 @@ storiesOf('Landing Page', module)
         </div>
         `
     }))
-    .add('content block', () => ({
+    .add('page', () => ({
         components: {
             'c-landing-block': LandingContent,
             'c-landing-block-title' : (resolve) => require(['@/ui/components/landing/block-title/simple'], resolve),
             'c-landing-block-title-shadow' : (resolve) => require(['@/ui/components/landing/block-title/shadow'], resolve),
             'c-landing-block-title-gradient' : (resolve) => require(['@/ui/components/landing/block-title/gradient'], resolve),
             'c-landing-feature-item': (resolve) => require(['@/ui/components/landing/block-content/feature-item'], resolve),
+            'c-landing-tabs': (resolve) => require(['@/ui/components/landing/block-content/tabs'], resolve),
+            'c-landing-tab': (resolve) => require(['@/ui/components/landing/block-content/tab'], resolve),
+            'c-landing-slider' : (resolve) => require(['@/ui/components/landing/block-content/slider'], resolve),
         },
         data(){
             return{
@@ -4492,22 +4495,112 @@ storiesOf('Landing Page', module)
                         title: 'Donec sodales in dui nec vestibulum',
                         text: 'Nulla ultrices fermentum tristique. Integer a venenatis lacus, eget pretium lectus. Suspendisse potenti. Vestibulum sodales ultricies mattis. Donec sodales in dui nec vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.'
                     }
-                ]
+                ],
+                slides:[
+                    {
+                        id: 1,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.webm?v=4806847'
+                    },
+                    {
+                        id: 2,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.webm?v=4806847'
+                    },
+                    {
+                        id: 3,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.webm?v=4806847'
+                    },
+                    {
+                        id: 4,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.webm?v=4806847'
+                    },
+                    {
+                        id: 5,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.webm?v=4806847'
+                    },
+                    {
+                        id: 6,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.webm?v=4806847'
+                    },
+                    {
+                        id: 7,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.webm?v=4806847'
+                    },
+                    {
+                        id: 8,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.webm?v=4806847'
+                    },
+                    {
+                        id: 9,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.webm?v=4806847'
+                    }
+                ],
             }
         },
         template: `
             <div>
-                <c-landing-block title="Some content block title" bgPosition="top center" minHeight="400px" bgImage="https://images5.alphacoders.com/387/thumb-1920-387546.jpg">
-                    <div class="col-12 col-md-8">
-                        <c-landing-block-title-shadow colorShadow="#03A9F4">
-                            Aliquam quis magna at diam convallis congue.
-                        </c-landing-block-title-shadow>
-    
+                <c-landing-block 
+                title="Some content block title"
+                horizontal="center" 
+                bgPosition="top center" 
+                minHeight="400px" 
+                bgImage="https://images5.alphacoders.com/387/thumb-1920-387546.jpg">
+                    <div class="col-10 text-center">
+                        <c-landing-block-title fontSize="42" color="#f8e6c7" class="text-uppercase">
+                            Battle level rewards
+                        </c-landing-block-title>
+ 
                          <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
                         Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
                         Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
                         Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
                         Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
+                    </div>
+                    <div class="col-11 margin-top-30">
+                        <c-landing-block-title-gradient align="center" size="md" fontSize="32" class="text-uppercase">
+                            The 2018 immortals
+                        </c-landing-block-title-gradient>
+                        
+                        <c-landing-tabs class="margin-top-20">
+                            <c-landing-tab name="TREASURE I">
+                                Maecenas suscipit ante a leo convallis ornare. 
+                                Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                                Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.
+                            </c-landing-tab>
+                            <c-landing-tab name="TREASURE II" selected>
+                                <c-landing-slider :items="slides" />
+                            </c-landing-tab>
+                            <c-landing-tab name="TREASURE III">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at condimentum risus. 
+                                Integer viverra quam in ipsum posuere lobortis. Integer rhoncus gravida ante a aliquam. In aliquet ex eu nibh pulvinar varius. Suspendisse maximus a arcu at sagittis. Etiam et mauris volutpat diam consequat accumsan vitae non nisi. Sed dignissim odio metus, sit amet ullamcorper ligula blandit et. Donec ac justo a erat lacinia venenatis id eu nisl.
+                            </c-landing-tab>
+                        </c-landing-tabs>
                     </div>
                 </c-landing-block>
                 
@@ -4518,10 +4611,9 @@ storiesOf('Landing Page', module)
                 minHeight="50vh"
                 bgImage="https://dota2hq.eu/wallpaper/dota2hq.eu-dota-2-roshan-vs-ursa-desktop-wallpaper-3894-1920x1080.jpg">
                     <div class="col-12 col-md-7">
-                        <c-landing-block-title-gradient align="center" class="margin-bottom-15">
-                            Aliquam quis magna at diam convallis congue.
+                        <c-landing-block-title-gradient align="center" fontSize="32" class="text-uppercase">
+                            About our Feature Items
                         </c-landing-block-title-gradient>
-    
                          <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
                         Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
                         Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 

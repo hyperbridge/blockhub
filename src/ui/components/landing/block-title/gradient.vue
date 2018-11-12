@@ -1,9 +1,9 @@
 <template>
-    <div class="landing__block-title" :class="['text-' + align ]">
+    <div class="landing__block-title" :class="['text-' + align]">
         <div style="padding: 0 10px" v-if="$slots.before">
             <slot name="before" />
         </div>
-        <div class="landing__block-title-gradient" :class="gradientDirection">
+        <div class="landing__block-title-gradient" :class="[gradientDirection, 'size-' + size ]">
             <component :is="tag" :style="{ 'color': color, 'font-size': fontSize + 'px', 'font-weight': fontWeight }">
                 <slot />
             </component>
@@ -21,6 +21,10 @@
             tag:{
                 type: String,
                 default: 'h2'
+            },
+            size:{
+                type: String,
+                default: 'md'
             },
             fontSize: {
                 type: [Number, String],
@@ -68,12 +72,16 @@
     .landing__block-title-gradient{
         position: relative;
         filter: drop-shadow(0 0px 15px #30314c);
+        margin-bottom: 15px;
         &.left-align{
             padding: 4px 40px 4px 10px;
             border-radius: 2px 0 0 2px;
             display: inline-flex;
             text-align: left;
             @include gradient (130deg, rgba(94,167,43,0), rgba(94,167,43,1));
+            &.size-md{
+                padding: 8px 70px 8px 10px;
+            }
             &:before{
                 content: "";
                 position: absolute;
@@ -85,12 +93,15 @@
             }
         }
         &.center-align{
-            padding: 4px 40px;
+            padding: 4px 50px;
             border-radius: 2px 0 0 2px;
-            display: block;
+            display: inline-flex;
             text-align: center;
             position: relative;
             @include gradient_center (rgba(94,167,43,0), rgba(94,167,43,1), rgba(94,167,43,0));
+            &.size-md{
+                padding: 8px 70px;
+            }
             &:before{
                 content: "";
                 position: absolute;
@@ -102,11 +113,14 @@
             }
         }
         &.right-align{
-            padding: 4px 10px 4px 40px;
+            padding: 4px 10px 4px 50px;
             border-radius: 0 2px 2px 0;
             display: inline-flex;
             text-align: right;
             @include gradient (50deg, rgba(94,167,43,0), rgba(94,167,43,1));
+            &.size-md{
+                padding: 8px 10px 8px 70px;
+            }
             &:before{
                 content: "";
                 position: absolute;
