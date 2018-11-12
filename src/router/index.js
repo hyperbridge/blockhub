@@ -4,7 +4,7 @@ import store from '../store'
 
 Vue.use(Router)
 
-const appVersion = '0.6.3'
+const appVersion = '0.7.0'
 
 const router = new Router({
     //mode: 'history',

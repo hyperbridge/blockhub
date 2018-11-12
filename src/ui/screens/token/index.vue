@@ -7,9 +7,9 @@
                         class="margin-bottom-30"
                         :hardCap="18500000"
                         :softCap="400000"
-                        :volume="300000000"
-                        :soldDollar="0"
-                        :soldTokens="0"
+                        :volume="350000000"
+                        :soldDollar="440269"
+                        :soldTokens="8004895"
                         @purchase="scrollMeTo('purchase')"
                     />
                     <c-block class="margin-bottom-30" hidden>

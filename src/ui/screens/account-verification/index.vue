@@ -59,15 +59,15 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label class="sr-only">Given Name</label>
-                                                    <input type="text" class="form-control" placeholder="Given Name"
+                                                    <label class="sr-only">Given Name (First + Middle)</label>
+                                                    <input type="text" class="form-control" placeholder="Given Name (First + Middle Name)"
                                                             name="first_name" v-model="first_name">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Family Name</label>
-                                                    <input type="text" class="form-control" placeholder="Family Name"
+                                                    <input type="text" class="form-control" placeholder="Family Name (Last Name)"
                                                             name="last_name" v-model="last_name">
                                                 </div>
                                             </div>
@@ -214,7 +214,7 @@
                                 lastName: this.last_name,
                                 idNumber: this.document_number
                             },
-                            vendorData: JSON.stringify({ email: this.email, eth: this.public_address }),
+                            vendorData: this.email,//JSON.stringify({ email: this.email, eth: this.public_address }),
                             additionalData: {
                                 eth: this.public_address,
                                 email: this.email,

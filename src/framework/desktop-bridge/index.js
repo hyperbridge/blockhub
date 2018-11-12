@@ -241,10 +241,10 @@ export const runCommand = async (cmd, meta = {}) => {
 
             // Import seed data for now
             if (local.store.state.application.mode === 'production') {
-                BlockHub.importSeedData()
+                //BlockHub.importSeedData()
 
-                local.store.state.application.desktop_mode = true
-                local.store.state.application.signed_in = true
+                // local.store.state.application.desktop_mode = true
+                // local.store.state.application.signed_in = true
             }
             // store.state.application.locked = true
             // store.state.application.signed_in = false
