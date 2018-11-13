@@ -9,13 +9,37 @@ import {withViewport} from '@storybook/addon-viewport'
 import {withKnobs, text, boolean, number, object} from '@storybook/addon-knobs/vue'
 
 import '../css/styles.scss'
+import '@/main'
 import '@/filters'
 import '@/directives'
 import '@/components'
+import store from '@/store'
+import router from '@/router'
 
+import * as Bridge from '@/framework/desktop-bridge'
 import * as data from './components-data'
 
+
+const StoreDummy = {
+    install(Vue, options) {
+        Vue.prototype.$store = store
+    }
+}
+
+Vue.use(StoreDummy)
+
 //import '!style-loader!css-loader!./styles.scss'
+
+window.ga = function() {}
+
+Bridge.init(store, router)
+
+store.dispatch('database/init')
+store.dispatch('application/init')
+store.dispatch('marketplace/init')
+store.dispatch('funding/init')
+
+console.log('BlockHub initialized.')
 
 
 addDecorator(withViewport('desktop'))
