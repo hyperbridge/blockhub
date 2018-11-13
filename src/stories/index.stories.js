@@ -4517,6 +4517,7 @@ storiesOf('Landing Page', module)
             'c-landing-slider' : (resolve) => require(['@/ui/components/landing/block-content/slider'], resolve),
             'c-landing-gradient-block' : (resolve) => require(['@/ui/components/landing/block-content/gradient'], resolve),
             'c-landing-benefactor' : (resolve) => require(['@/ui/components/landing/block-content/benefactor'], resolve),
+            'c-landing-level': (resolve) => require(['@/ui/components/landing/block-content/level'], resolve),
         },
         data(){
             return{
@@ -4620,6 +4621,29 @@ storiesOf('Landing Page', module)
                         title: 'Maecenas suscipit ante'
                     }
                 ],
+                benefactor_items:[
+                {
+                    src: 'http://dotafun.su/images/aeee/b_keeperofthelight.png',
+                    name: 'Immortal I'
+                },
+
+                {
+                    src: 'https://u.kanobu.ru/editor/images/82/c2a25ffa-c77c-44e2-a616-c6d5e0e6d4a3.png',
+                    name: 'Immortal II'
+                },
+                {
+                    src: 'https://i.pinimg.com/originals/44/61/88/44618879e898abbbec878eda26551d52.png',
+                    name: 'Immortal III',
+                    includes_list: ['200 x Fire Lotus Belt', '200 x Golden Ornithomancer Mantle', '200 x Dragonclaw Hook', '200 x Rainmaker', '200 x Pipe of Dezun', '200 x Perceptions of the Eternal Mind',
+                        '200 x Kantusa the Script Sword', '200 x Shattered Greatsword', '200 x Golden Gravelmaw', '100 x Golden Grasping Bludgeon', '100 x Golden Shards of Exile', '100 x Golden Staff of Perplex',
+                        '100 x Golden Huntling', '100 x Golden Severing Crest', '100 x Golden Sullen Hollow', '100 x Golden Lamb to the Slaughter', '100 x Lockjaw the Boxhound']
+                },
+
+                {
+                    src: 'http://cdn.dota2.com/apps/dota2/images/international2017/battlepass/immortals/c_legioncommander.png?v=4054578',
+                    name: 'Immortal IV'
+                }
+            ]
             }
         },
         template: `
@@ -4689,25 +4713,26 @@ storiesOf('Landing Page', module)
                 vertical="center"
                 title="Some content block title" 
                 minHeight="50vh"
-                bgImage="https://s1.1zoom.ru/big3/691/Sven_DOTA_2_Armor_Helmet_510699.jpg">
-                    <div class="col-12 col-md-7">
-                        <c-landing-block-title-gradient align="center" fontSize="32" class="text-uppercase">
-                            About our Feature Items
+                bgImage="http://dota2-i.ru/assets/images/resources/1671/1366x768-2042847-shadow-fiend-dota-2-wallpaper-hd.jpg">
+                    <div class="col-12">
+                        <c-landing-block-title-gradient align="center" size="md" fontSize="32" class="text-uppercase">
+                            TRUST OF THE BENEFACTOR
                         </c-landing-block-title-gradient>
+                        <c-landing-benefactor :items="benefactor_items">
+                        
+                        </c-landing-benefactor>
+                    </div>
+                    <div class="col-3 text-right">
+                        <c-landing-level :number="92" size="md" textPosition="left" textColor="#00662e">
+                            LEVEL
+                        </c-landing-level>
+                    </div>
+                    <div class="col-9">
                          <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
                         Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
                         Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
                         Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
                         Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
-                    </div>
-                    <div class="col-12 margin-top-50">
-                        <div class="row">
-                            <div v-for="item in items" class="col-12 col-md-4 mb-3 mb-md-0">
-                                <c-landing-feature-item :title="item.title" :img="item.img">
-                                    {{ item.text }}
-                                </c-landing-feature-item>
-                            </div>
-                        </div>
                     </div>
                 </c-landing-block>
                 
