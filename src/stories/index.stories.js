@@ -4374,69 +4374,287 @@ storiesOf('Landing Page', module)
     }))
     .add('block title with gradient', () => ({
         components: {
-            'c-landing-block-title-gradient': LandingTitleGradient
+            'c-landing-block-title-gradient': LandingTitleGradient,
+            'c-landing-block-title': LandingTitle,
+            'c-landing-block-title-shadow': LandingTitleShadow
         },
         template: `
         <div class="p-5">
-            <c-landing-block-title-gradient colorShadow="red">
+            <c-landing-block-title-gradient>
+                <c-landing-block-title slot="before" class="mb-1" fontSize="16" fontWeight="bold">
+                    NEW
+                </c-landing-block-title>
                 Mutation Mode
             </c-landing-block-title-gradient>
             <hr />
-            <c-landing-block-title-gradient colorShadow="red" align="right">
+            <c-landing-block-title-gradient align="right">
                 Mutation Mode
+                <c-landing-block-title-shadow slot="after" class="mt-1" fontSize="16" fontWeight="bold">
+                    Before title text
+                </c-landing-block-title-shadow>
             </c-landing-block-title-gradient>
             <hr />
-            <c-landing-block-title-gradient colorShadow="red" align="center">
+            <c-landing-block-title-gradient align="center">
                 Mutation Mode
             </c-landing-block-title-gradient>
         </div>
             `
     }))
-    .add('content block', () => ({
+    .add('divider', () => ({
+        components: {
+            'c-landing-divider': (resolve) => require(['@/ui/components/landing/block-content/divider'], resolve),
+        },
+        template: `
+        <div class="p-5">
+            <c-landing-divider />
+        </div>
+            `
+    }))
+    .add('level', () => ({
+        components: {
+            'c-landing-level': (resolve) => require(['@/ui/components/landing/block-content/level'], resolve),
+        },
+        template: `
+        <div class="p-5">
+            <c-landing-level :number="92" textPosition="left">
+                Caster Pack 5 (2017)
+            </c-landing-level>
+            <hr />
+            <c-landing-level size="md" :number="7" textPosition="right">
+                Caster Pack 5 (2017)
+            </c-landing-level>
+            <hr />
+            <c-landing-level size="lg" :number="1982" textPosition="right">
+                Caster Pack 5 (2017)
+            </c-landing-level>
+            <hr />
+        </div>
+            `
+    }))
+    .add('feature item', () => ({
+        components: {
+            'c-landing-feature-item': (resolve) => require(['@/ui/components/landing/block-content/feature-item'], resolve),
+        },
+        data(){
+            return{
+                items:[
+                    {
+                        img: 'https://i.ytimg.com/vi/6ki31hkQk8c/maxresdefault.jpg',
+                        title: 'Donec placerat turpis est',
+                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in nulla sed ante maximus fringilla id at mi. Aenean nec elit ac ex porta volutpat. In porta porttitor purus a congue. Aenean sit amet lectus ac purus fringilla rutrum lobortis eu lorem. Quisque accumsan et odio vel ullamcorper.'
+                    },
+                    {
+                        img: 'http://cdn.dota2.com/apps/dota2/images/blog/play/dota_heroes.png',
+                        title: 'Aenean suscipit',
+                        text: 'Nulla facilisi. Donec eu ligula a massa accumsan dignissim a quis orci. Aenean suscipit, turpis eget tempor mattis, turpis tellus tristique nibh, eu lobortis eros libero quis nisl. Donec in maximus tellus.'
+                    },
+                    {
+                        img: 'https://dota2.pl/wp-content/uploads/2017/09/dota_2_clash_of_heroes_by_agussw-d8yukg0.jpg',
+                        title: 'Donec sodales in dui nec vestibulum',
+                        text: 'Nulla ultrices fermentum tristique. Integer a venenatis lacus, eget pretium lectus. Suspendisse potenti. Vestibulum sodales ultricies mattis. Donec sodales in dui nec vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.'
+                    }
+                ]
+            }
+        },
+        template: `
+        <div class="p-5 d-flex" style="width: 1200px;">
+            <div v-for="item in items" class="px-3" style="width: 33.3%;">
+                <c-landing-feature-item :title="item.title" :img="item.img">
+                    {{ item.text }}
+                </c-landing-feature-item>
+            </div>
+        </div>
+        `
+    }))
+    .add('page', () => ({
         components: {
             'c-landing-block': LandingContent,
             'c-landing-block-title' : (resolve) => require(['@/ui/components/landing/block-title/simple'], resolve),
             'c-landing-block-title-shadow' : (resolve) => require(['@/ui/components/landing/block-title/shadow'], resolve),
             'c-landing-block-title-gradient' : (resolve) => require(['@/ui/components/landing/block-title/gradient'], resolve),
+            'c-landing-feature-item': (resolve) => require(['@/ui/components/landing/block-content/feature-item'], resolve),
+            'c-landing-tabs': (resolve) => require(['@/ui/components/landing/block-content/tabs'], resolve),
+            'c-landing-tab': (resolve) => require(['@/ui/components/landing/block-content/tab'], resolve),
+            'c-landing-slider' : (resolve) => require(['@/ui/components/landing/block-content/slider'], resolve),
+        },
+        data(){
+            return{
+                items:[
+                    {
+                        img: 'https://i.ytimg.com/vi/6ki31hkQk8c/maxresdefault.jpg',
+                        title: 'Donec placerat turpis est',
+                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in nulla sed ante maximus fringilla id at mi. Aenean nec elit ac ex porta volutpat. In porta porttitor purus a congue. Aenean sit amet lectus ac purus fringilla rutrum lobortis eu lorem. Quisque accumsan et odio vel ullamcorper.'
+                    },
+                    {
+                        img: 'http://cdn.dota2.com/apps/dota2/images/blog/play/dota_heroes.png',
+                        title: 'Aenean suscipit',
+                        text: 'Nulla facilisi. Donec eu ligula a massa accumsan dignissim a quis orci. Aenean suscipit, turpis eget tempor mattis, turpis tellus tristique nibh, eu lobortis eros libero quis nisl. Donec in maximus tellus.'
+                    },
+                    {
+                        img: 'https://dota2.pl/wp-content/uploads/2017/09/dota_2_clash_of_heroes_by_agussw-d8yukg0.jpg',
+                        title: 'Donec sodales in dui nec vestibulum',
+                        text: 'Nulla ultrices fermentum tristique. Integer a venenatis lacus, eget pretium lectus. Suspendisse potenti. Vestibulum sodales ultricies mattis. Donec sodales in dui nec vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.'
+                    }
+                ],
+                slides:[
+                    {
+                        id: 1,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.webm?v=4806847',
+                        title: 'Span of sorrow',
+                        subtitle: 'Back item with custom Sunder effect'
+                    },
+                    {
+                        id: 2,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Nulla ultrices fermentum tristique'
+                    },
+                    {
+                        id: 3,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Morbi in nulla sed'
+                    },
+                    {
+                        id: 4,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Donec eu ligula a massa accumsan dignissim'
+                    },
+                    {
+                        id: 5,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Aenean suscipit'
+                    },
+                    {
+                        id: 6,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Vestibulum dignissim tincidunt'
+                    },
+                    {
+                        id: 7,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_abyssal_underlord.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Proin efficitur ut ipsum'
+                    },
+                    {
+                        id: 8,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_emblem.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Mauris ex massa'
+                    },
+                    {
+                        id: 9,
+                        type: 'video',
+                        poster: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
+                        thumbnail: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.jpg',
+                        src: 'https://steamcdn-a.akamaihd.net/apps/dota2/videos/international2018/battlepass/immortals/a_vengeful_spirit.webm?v=4806847',
+                        subtitle: 'Emereld Conquest',
+                        title: 'Maecenas suscipit ante'
+                    }
+                ],
+            }
         },
         template: `
             <div>
-                <c-landing-block title="Some content block title" bgPosition="top center" minHeight="400px" bgImage="https://images5.alphacoders.com/387/thumb-1920-387546.jpg">
-                    <c-landing-block-title-shadow colorShadow="#03A9F4">
-                        Aliquam quis magna at diam convallis congue.
-                    </c-landing-block-title-shadow>
-
-                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
-                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
-                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
-                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
-                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
+                <c-landing-block 
+                title="Some content block title"
+                horizontal="center" 
+                bgPosition="top center" 
+                minHeight="400px" 
+                bgImage="https://i.pinimg.com/originals/eb/ab/7f/ebab7f413318ffaaf0443b8428664bac.jpg">
+                    <div class="col-10 text-center">
+                        <c-landing-block-title fontSize="42" color="#f8e6c7" class="text-uppercase">
+                            Battle level rewards
+                        </c-landing-block-title>
+ 
+                         <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
+                        Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
+                        Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
+                        Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                        Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
+                    </div>
+                    <div class="col-11 margin-top-30">
+                        <c-landing-block-title-gradient align="center" size="md" fontSize="32" class="text-uppercase">
+                            The 2018 immortals
+                        </c-landing-block-title-gradient>
+                        
+                        <c-landing-tabs class="margin-top-20">
+                            <c-landing-tab name="TREASURE I">
+                                Maecenas suscipit ante a leo convallis ornare. 
+                                Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                                Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.
+                            </c-landing-tab>
+                            <c-landing-tab name="TREASURE II" selected>
+                                <c-landing-slider :items="slides" />
+                            </c-landing-tab>
+                            <c-landing-tab name="TREASURE III">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at condimentum risus. 
+                                Integer viverra quam in ipsum posuere lobortis. Integer rhoncus gravida ante a aliquam. In aliquet ex eu nibh pulvinar varius. Suspendisse maximus a arcu at sagittis. Etiam et mauris volutpat diam consequat accumsan vitae non nisi. Sed dignissim odio metus, sit amet ullamcorper ligula blandit et. Donec ac justo a erat lacinia venenatis id eu nisl.
+                            </c-landing-tab>
+                        </c-landing-tabs>
+                    </div>
                 </c-landing-block>
                 
                 <c-landing-block 
                 horizontal="center"
                 vertical="center"
                 title="Some content block title" 
-                minHeight="50vh" 
-                contentWidth="60%"
+                minHeight="50vh"
+                bgImage="https://s1.1zoom.ru/big3/691/Sven_DOTA_2_Armor_Helmet_510699.jpg">
+                    <div class="col-12 col-md-7">
+                        <c-landing-block-title-gradient align="center" fontSize="32" class="text-uppercase">
+                            About our Feature Items
+                        </c-landing-block-title-gradient>
+                         <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
+                        Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
+                        Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
+                        Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                        Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
+                    </div>
+                    <div class="col-12 margin-top-50">
+                        <div class="row">
+                            <div v-for="item in items" class="col-12 col-md-4 mb-3 mb-md-0">
+                                <c-landing-feature-item :title="item.title" :img="item.img">
+                                    {{ item.text }}
+                                </c-landing-feature-item>
+                            </div>
+                        </div>
+                    </div>
+                </c-landing-block>
+                
+                <c-landing-block 
+                title="Some content block title" 
+                horizontal="center"
+                vertical="center"
+                fullHeight 
                 bgImage="https://dota2hq.eu/wallpaper/dota2hq.eu-dota-2-roshan-vs-ursa-desktop-wallpaper-3894-1920x1080.jpg">
-                    <c-landing-block-title-gradient align="center">
-                        Aliquam quis magna at diam convallis congue.
-                    </c-landing-block-title-gradient>
-
-                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
-                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
-                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
-                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
-                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
-                </c-landing-block>
-                
-                <c-landing-block 
-                title="Some content block title" 
-                horizontal="center"
-                vertical="center"
-                contentWidth="70%"
-                fullHeight bgImage="https://s1.1zoom.ru/big3/691/Sven_DOTA_2_Armor_Helmet_510699.jpg">
                     <c-landing-block-title-gradient align="center">
                         Aliquam quis magna at diam convallis congue.
                     </c-landing-block-title-gradient>
@@ -4456,17 +4674,6 @@ storiesOf('Landing Page', module)
             </div>
             `
     }))
-    .add('divider', () => ({
-        components: {
-            'c-landing-divider': (resolve) => require(['@/ui/components/landing/block-content/divider'], resolve),
-        },
-        template: `
-        <div class="p-5">
-            <c-landing-divider />
-        </div>
-            `
-    }))
-
 
 storiesOf('Token Sale Box', module)
     .add('default', () => ({
@@ -4480,6 +4687,21 @@ storiesOf('Token Sale Box', module)
             :softCap="7500000"
             :volume="1000000000"
             :soldDollars="23455424"
+            :soldTokens="243424234"
+            />
+        </div>`
+    }))
+    .add('type 2', () => ({
+        components: {
+            'c-toke-sale-2': (resolve) => require(['@/ui/components/token-sale-box/type-2'], resolve),
+        },
+        template: `
+        <div class="p-5" style="width: 1200px;">
+            <c-toke-sale-2 
+            :hardCap="18000000"
+            :softCap="7500000"
+            :volume="1000000000"
+            :soldDollar="23455424"
             :soldTokens="243424234"
             />
         </div>`

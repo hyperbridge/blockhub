@@ -24,16 +24,21 @@
             },
             fontWeight:{
                 type: String,
-                default: 'normal'
+                default: 'bold'
             },
             colorShadow:{
                 type: String,
-                default: 'rgba(0, 0, 0, .4)'
+                default: '#f60'
             }
         },
         computed:{
             textShadow(){
-                return '0px 0px 15px' + this.colorShadow + ', 0px 0px 15px' + this.colorShadow + ', 0px 0px 15px' + this.colorShadow + ', 0px 0px 15px' + this.colorShadow
+                if ( Number(this.fontSize) <= 18 )
+                    return '0px 0px 5px' + this.colorShadow + ', 0px 0px 5px' + this.colorShadow
+                else if ( Number(this.fontSize) <= 28 )
+                    return '0px 0px 10px' + this.colorShadow + ', 0px 0px 10px' + this.colorShadow + ', 0px 0px 10px' + this.colorShadow
+                else
+                    return '0px 0px 10px' + this.colorShadow + ', 0px 0px 10px' + this.colorShadow + ', 0px 0px 10px' + this.colorShadow + ', 0px 0px 10px' + this.colorShadow
             }
         }
     }
