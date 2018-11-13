@@ -200,6 +200,8 @@
 </template>
 
 <script>
+    import axios from 'axios'
+    import Vue from 'vue'
     import { mapActions } from 'vuex'
 
     export default {
@@ -315,6 +317,40 @@
             resetSettings() {
                 window.resetSettings()
             },
+            getExternalState() {
+                const sheetUrl = 'https://spreadsheets.google.com/feeds/list/1QBzZ7O0l3-wsdvl7PgdYKeQrv_wvuQ4FoqrDgiyxugY/1/public/values?alt=json'
+
+                axios({
+                    method: 'get',
+                    url: sheetUrl
+                })
+                .then((res) => {
+                    this.entries = res.data.feed.entry
+                    try {
+                        for (let i in this.entries) {
+                            const entry = this.entries[i]
+                            const key = entry.gsx$key.$t
+                            const type = entry.gsx$type.$t
+                            let value = entry.gsx$value.$t
+
+                            if (type === 'int32') {
+                                value = Number(value)
+                            } else if (type === 'boolean') {
+                                value = Boolean(value)
+                            }else if (type === 'json') {
+                                value = JSON.parse(value)
+                            }
+
+                            Vue.set(this.$store.state.application.externalState, key, value)
+                        }
+                    } catch (e) {
+                        console.log(e)
+                    }
+                })
+                .catch((err) => {
+                    console.log('Could not contact external state service. Please contact support with this error: ' + JSON.stringify(err))
+                })
+            },
             sendDesktopMessage() {
                 if (!window.isElectron) {
                     return alert('Not on desktop')
@@ -328,6 +364,9 @@
             this.$store.commit('assets/loadTransactions');
             this.loadSettings()
             this.ensureDesktopWelcome()
+        },
+        created() {
+            this.getExternalState()
         },
         watch: {
             $route(to, from) {

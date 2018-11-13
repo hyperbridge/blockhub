@@ -4471,15 +4471,15 @@ storiesOf('Landing Page', module)
 storiesOf('Token Sale Box', module)
     .add('default', () => ({
         components: {
-            'c-toke-sale': (resolve) => require(['@/ui/components/token-sale-box'], resolve),
+            'c-token-sale': (resolve) => require(['@/ui/components/token-sale-box'], resolve),
         },
         template: `
         <div class="p-5" style="width: 1200px;">
-            <c-toke-sale 
+            <c-token-sale 
             :hardCap="18000000"
             :softCap="7500000"
             :volume="1000000000"
-            :soldDollar="23455424"
+            :soldDollars="23455424"
             :soldTokens="243424234"
             />
         </div>`

@@ -8,8 +8,8 @@
                         :hardCap="18500000"
                         :softCap="400000"
                         :volume="350000000"
-                        :soldDollar="440269"
-                        :soldTokens="8004895"
+                        :soldDollars="soldDollars"
+                        :soldTokens="soldTokens"
                         @purchase="scrollMeTo('purchase')"
                     />
                     <c-block class="margin-bottom-30" hidden>
@@ -632,7 +632,9 @@ export default {
             && this.jurisdictionAgreement
             && this.residentAgreement
             && this.purchaseETH <= (this.maxPurchaseUSD / this.ETH2USD)
-        }
+        },
+        soldDollars() { return this.$store.state.application.externalState['tokenSale.soldDollars'] },
+        soldTokens() { return this.$store.state.application.externalState['tokenSale.soldTokens'] }
     },
     methods: {
         calcHBX() {

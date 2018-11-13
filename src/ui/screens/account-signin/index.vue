@@ -75,6 +75,11 @@
         components: {
             'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
         },
+        data() {
+            return {
+                errors: []
+            }
+        },
         methods: {
             signIn() {
                 this.$store.dispatch('application/signIn')
