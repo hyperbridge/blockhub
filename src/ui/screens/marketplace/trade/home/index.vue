@@ -28,6 +28,7 @@
                     v-for="offer in offers"
                     :key="offer.id"
                     :offer="offer"
+                    :toffer="offers2.received[0]"
                     @wasSeen="offer.new = false"
                 />
                 <p v-if="!offers.length">No offers were found</p>

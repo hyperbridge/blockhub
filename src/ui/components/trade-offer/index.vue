@@ -3,19 +3,19 @@
         <div class="trade-offer__date">
             <span>
                 <span class="trade-offer__status" v-if="offer.new">NEW</span>
-                {{ offer.createdAt | formatDate }} - {{ offer.createdAt | timeAgo }}
+                {{ toffer.createdAt | formatDate }} - {{ toffer.createdAt | timeAgo }}
             </span>
             <span>
-                Expires {{ offer.createdAt | expIn | timeAgo }}
+                Expires {{ toffer.createdAt | expIn | timeAgo }}
             </span>
         </div>
         <div
             class="trade-offer__content"
             @click="expandDetails()"
         >
-            <c-author :author="offer.contractor.user"/>
+            <c-author :author="toffer.contractor"/>
             <span>
-                Trade {{ offer.me.selling.length }} for {{ offer.contractor.selling.length }} assets
+                Trade {{ toffer.yourOffer.length }} for {{ toffer.contractorOffer.length }} assets
             </span>
             <div>
                 <c-button status="success" icon_hide>Accept</c-button>
@@ -31,8 +31,8 @@
                     class="trade-offer__assets-table"
                 >
                     <thead>
-                        <th>{{ assetsKey | upperFirstChar }} items</th>
-                        <th>Total value {{ totalValue[assetsKey] | convertCurrency }}</th>
+                        <th>{{ assetsKey }} items</th>
+                        <th>Total value {{ totalVal[assetsKey] | convertCurrency }}</th>
                     </thead>
                     <tbody>
                         <tr v-for="asset in assets" :key="asset.id">
@@ -60,12 +60,12 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Their items:</td>
-                            <td>- {{ totalValue.their | convertCurrency }}</td>
+                            <td>{{ contrName }} items:</td>
+                            <td>- {{ totalVal[contrName] | convertCurrency }}</td>
                         </tr>
                         <tr>
                             <td>Yours items:</td>
-                            <td>+ {{ totalValue.yours | convertCurrency }}</td>
+                            <td>+ {{ totalVal.Yours | convertCurrency }}</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -113,7 +113,8 @@
         props: {
             offer: {
                 type: Object
-            }
+            },
+            toffer: Object
         },
         components: {
             'c-author': (resolve) => require(['@/ui/components/author'], resolve),
@@ -135,24 +136,25 @@
             }
         },
         computed: {
-            totalValue() {
+            totalVal() {
                 const { assets, round } = this;
-                return Object.keys(assets).reduce((total, assetsKey) => ({
+                return Object.entries(assets).reduce((total, [owner, assets]) => ({
                     ...total,
-                    [assetsKey]: round(
-                        assets[assetsKey].reduce((totalPrice, asset) =>
-                            totalPrice += asset.price.current
-                        , 0)
+                    [owner]: round(
+                        assets.reduce((price, asset) => price += asset.price.current, 0)
                     )
                 }), {});
             },
             finalBalance() {
-                return this.round(this.totalValue.yours - this.totalValue.their);
+                return this.round(this.totalVal.Yours - this.totalVal[this.contrName]);
+            },
+            contrName() {
+                return this.toffer.contractor.name + 's';
             },
             assets() {
                 return {
-                    yours: this.offer.me.selling,
-                    their: this.offer.contractor.selling
+                    Yours: this.toffer.yourOffer,
+                    [this.contrName]: this.toffer.contractorOffer
                 }
             }
         },
