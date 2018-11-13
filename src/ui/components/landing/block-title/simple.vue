@@ -33,8 +33,8 @@
 <style lang="scss" scoped>
     .landing__block-title{
         margin-bottom: 10px;
-        h2{
-            text-shadow: 0 3px 6px rgba(0, 0, 0, .4);
+        text-shadow: 0 2px 3px rgba(0, 0, 0, .6);
+        h1, h2, h3, h4, h5, h6{
             padding: 0;
             margin: 0;
         }
