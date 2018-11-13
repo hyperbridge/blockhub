@@ -239,8 +239,7 @@
                                         @click="clearFilters()"
                                         status="info"
                                     >Clear filters</c-button>
-                                    <c-button
-                                    >Check for updates</c-button>
+                                    <c-button @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>
                                 </div>
                                 <c-content-navigation
                                     v-else

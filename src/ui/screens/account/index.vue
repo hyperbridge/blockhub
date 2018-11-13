@@ -34,14 +34,14 @@
                                         <span class="form-text">This field cannot be changed at this time.</span>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row" hidden>
                                     <label class="switch switch-sm col-sm-3">
                                         <label>Public Address</label>
                                     </label>
                                     <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Public address"
-                                        :value="account.public_address" readonly>
-                                <span class="form-text">Your account is an Ethereum wallet, and can be <a
+                                        <input type="text" class="form-control" placeholder="Public address"
+                                                :value="account.public_address" readonly>
+                                        <span class="form-text">Your account is an Ethereum wallet, and can be <a
                                     :href="`https://etherscan.io/address/${account.public_address}`">found on the blockchain using the Public Address</a></span>
                                     </div>
                                 </div>

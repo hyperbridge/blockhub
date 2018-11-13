@@ -9,15 +9,17 @@
                 <p v-if="parentDeveloper">{{ parentDeveloper }}</p>
             </div>
         </div>
-        <c-img :src="image"/>
-        <div class="description">{{ description }}</div>
+        <a :href="`/#/project/${id}`">
+            <c-img :src="image"/>
+            <div class="description">{{ description }}</div>
+        </a>
         <c-money-info label="Obtained Funds"
             :percent="goal_progress"
             :amount="funds.obtained"
             :goal="funds.goal"
         />
         <div class="item-action">
-            <c-button status="info" :href="`/#/project/${id}`" icon_hide>Participate</c-button>
+            <c-button status="info" :href="`/#/project/${id}`" icon_hide>Check it out</c-button>
             <c-button status="success" href="/#/project/1" icon_hide hidden>Donate Funds</c-button>
         </div>
     </div>

@@ -42,7 +42,7 @@
                         Sold
                     </strong>
                     <span class="ml-4">
-                        {{ soldDollar | convertCurrency }}
+                        {{ soldDollars | convertCurrency }} USD
                     </span>
                     <span class="ml-3">
                         {{ soldTokens | numeralFormat(0,0) }} HBX
@@ -65,7 +65,7 @@
                             Hard Cap
                         </strong>
                         <span>
-                            {{ hardCap | convertCurrency }}
+                            {{ hardCap | convertCurrency }} USD
                         </span>
                     </div>
                     <div>
@@ -73,7 +73,7 @@
                             Soft Cap
                         </strong>
                         <span>
-                            {{ softCap | convertCurrency }}
+                            {{ softCap | convertCurrency }} USD
                         </span>
                     </div>
                 </div>
@@ -127,12 +127,12 @@
             hardCap: [ Number, String ],
             softCap: [ Number, String ],
             volume: [ Number, String ],
-            soldDollar: [ Number, String ],
+            soldDollars: [ Number, String ],
             soldTokens: [ Number, String ]
         },
         computed:{
-            percentProgress(){
-                return Number(this.soldTokens) * 100 / Number(this.volume)
+            percentProgress() {
+                return (this.soldTokens + 5000000) / this.volume * 100
             }
         }
     }

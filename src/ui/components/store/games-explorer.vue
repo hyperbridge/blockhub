@@ -123,7 +123,7 @@
                 />
             </c-content-navigation>
             <div v-else-if="filtersActive">
-                <p>No products were found using these filters. Want to <c-button status="plain">Check for updates</c-button>?</p>
+                <p>No products were found using these filters. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
                 <c-button
                     status="info"
                     size="md"
@@ -132,7 +132,7 @@
                 >Clear filters</c-button>
             </div>
             <p v-else>
-                Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?
+                Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?
             </p>
         </c-block>
     </div>

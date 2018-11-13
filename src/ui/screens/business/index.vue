@@ -1,6 +1,5 @@
 <template>
     <c-business-layout>
-
         <div>
             <!-- PAGE HEADING -->
             <div class="page-heading">
@@ -488,7 +487,6 @@
 
 <script>
     export default {
-        name: 'business-screen',
         components: {
             'c-business-layout': (resolve) => require(['@/ui/layouts/business'], resolve)
         },

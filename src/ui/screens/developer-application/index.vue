@@ -3,7 +3,7 @@
             <div class="row">
                 <div class="col-12" v-if="!developer_mode">
                     <c-block title="Business Manager" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                        <p>We're still working on our Business Manager. In the meantime, you can contact us directly at <a href="mailto:business@hyperbridge.org"><strong>business@hyperbridge.org</strong></a></p>
+                        <p>We're still working on our Business Manager. If you want a sneak preview, <a href="/#/business">it's over here</a>. In the meantime, you can contact us directly at <a href="mailto:business@hyperbridge.org"><strong>business@hyperbridge.org</strong></a></p>
                     </c-block>
 
                     <c-block title="Why Community-Driven Development?" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">

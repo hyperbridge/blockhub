@@ -37,7 +37,7 @@
                         />
                     </div>
                     <div class="col-12" v-else>
-                        Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?
+                        Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?
                     </div>
                 </div>
             </c-block>

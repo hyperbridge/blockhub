@@ -13,7 +13,8 @@
                             <p>Maybe you just have an awesome idea, or want to inspire your favourite dev studio to continue a series (*cough* half-life).</p>
                         </div>
                         <br />
-                        <p v-if="$store.state.application.desktop_mode"><c-button class="c-btn-lg outline-white" href="/#/project/new">Get Started</c-button></p>
+                        <p v-if="$store.state.application.desktop_mode && $store.state.application.developer_mode"><c-button class="c-btn-lg outline-white" href="/#/business/project/new">Get Started</c-button></p>
+                        <p v-if="$store.state.application.desktop_mode && !$store.state.application.developer_mode"><c-button class="c-btn-lg outline-white" href="/#/developer/apply">Get Started</c-button></p>
                         <p v-if="!$store.state.application.desktop_mode"><c-button class="c-btn-lg outline-white" @click="$store.commit('application/activateModal', 'welcome')">Get Started</c-button></p>
                     </div>
                 </div>

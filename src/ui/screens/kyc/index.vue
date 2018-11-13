@@ -53,6 +53,10 @@
                             <br /><br />
 
                             <p>The BlockHub desktop client is the recommended way to load up on tokens, but if you'd like to purchase with MetaMask, open the extension to unlock your web wallet.</p>
+
+                            <br /><br />
+                            
+                            <c-button class="c-btn-lg " @click="unlockWallet">Unlock Wallet</c-button>
                         </div>
                         
                         <div class="col-12 margin-top-30 margin-bottom-30" v-if="useMetamask && ethereum_connected && ethereum_unlocked" style="text-align: center; width: 100%; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
@@ -111,30 +115,6 @@ export default {
             }
         }
 
-        const initEthereum = () => {
-            if (typeof window.web3 !== 'undefined') {
-                if (window.ethereum) {
-                    try {
-                        // Request account access if needed
-                        window.ethereum.enable().then(() => {
-                            window.web3 = new Web3(window.ethereum)
-
-                            checkEthereumConnection()
-                        })
-                    } catch (error) {
-                        // User denied account access...
-                    }
-                }
-                else if (window.web3) {
-                    window.web3 = new Web3(window.web3.currentProvider)
-
-                    checkEthereumConnection()
-                }
-            }
-        }
-
-        initEthereum()
-
         setInterval(checkEthereumConnection, 2000)
 
         return {
@@ -154,6 +134,27 @@ export default {
         }
     },
     methods: {
+        unlockWallet() {
+            if (typeof window.web3 !== 'undefined') {
+                if (window.ethereum) {
+                    try {
+                        // Request account access if needed
+                        window.ethereum.enable().then(() => {
+                            window.web3 = new Web3(window.ethereum)
+
+                            checkEthereumConnection()
+                        })
+                    } catch (error) {
+                        // User denied account access...
+                    }
+                }
+                else if (window.web3) {
+                    window.web3 = new Web3(window.web3.currentProvider)
+
+                    checkEthereumConnection()
+                }
+            }
+        },
         proceed() {
             this.errors = []
 

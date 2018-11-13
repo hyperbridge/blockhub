@@ -4,7 +4,7 @@ import store from '../store'
 
 Vue.use(Router)
 
-const appVersion = '0.6.3'
+const appVersion = '0.7.1'
 
 const router = new Router({
     //mode: 'history',
@@ -417,7 +417,11 @@ const router = new Router({
         {
             path: '/developer/apply',
             name: 'Developer Application',
-            component: (resolve) => require(['@/ui/screens/developer-application'], resolve)
+            component: (resolve) => require(['@/ui/screens/developer-application'], resolve),
+            meta: {
+                auth: true,
+                permission: 'signed_in'
+            }
         },
         {
             path: '/developer/new-product',
@@ -621,7 +625,11 @@ const router = new Router({
             path: '/curator/application',
             name: 'Curator Application',
             props: true,
-            component: (resolve) => require(['@/ui/screens/curator-application'], resolve)
+            component: (resolve) => require(['@/ui/screens/curator-application'], resolve),
+            meta: {
+                auth: true,
+                permission: 'signed_in'
+            }
         },
         {
             path: '/curator/:id',
@@ -688,14 +696,18 @@ const router = new Router({
         {
             path: '/chest',
             name: 'Chest',
-            props: true,
             component: (resolve) => require(['@/ui/screens/chest'], resolve)
         },
         {
             path: '/business',
             name: 'Business',
+            component: (resolve) => require(['@/ui/screens/business'], resolve),
+        },
+        {
+            path: '/business/project/:id',
+            name: 'Project',
             props: true,
-            component: (resolve) => require(['@/ui/screens/business'], resolve)
+            component: (resolve) => require(['@/ui/screens/business-project'], resolve),
         },
         {
             path: '/marketplace',
@@ -853,6 +865,9 @@ const router = new Router({
 router.afterEach((to, from) => {
     // Complete the animation of the route progress bar.
     $('body').removeClass('screen-loading')
+
+    ga('set', 'page', to.fullPath)
+    ga('send', 'pageview')
 })
 
 export const Auth = {
@@ -884,7 +899,7 @@ router.beforeEach((to, from, next) => {
 
   if (!Auth.loggedIn() && !!to.meta.auth) {
     next({
-      path: '/account/signin',
+      path: '/download',
       query: { redirect: to.fullPath }
     })
     return

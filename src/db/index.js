@@ -49,7 +49,26 @@ export const init = () => {
     loki.loadDatabase({}, (result) => {
         console.log('[BlockHub] Database loaded from IndexedDB')
 
-        if (loki.getCollection('applicationConfig')) {
+        // If not desktop mode, then wipe and reload (fresh data)
+        if (!window.isElectron && loki.getCollection('applicationConfig')) {
+            if (window.closeLokiDatabase) {
+                window.closeLokiDatabase()
+            }
+
+            var req = indexedDB.deleteDatabase('LokiCatalog');
+            req.onsuccess = function () {
+                //alert("Deleted settings successfully. The page will now reload.");
+                window.location = window.location.href.replace(window.location.hash, '')
+            };
+            req.onerror = function () {
+                //alert("ERR 301: Couldn't delete database");
+            };
+            req.onblocked = function (event) {
+                //alert("ERR 302: Couldn't delete database due to the operation being blocked.");
+            };
+        }
+
+        if (window.isElectron && loki.getCollection('applicationConfig')) {
             application.config = loki.getCollection('applicationConfig')
             marketplace.config = loki.getCollection('marketplaceConfig')
             marketplace.products = loki.getCollection('marketplaceProducts')
@@ -57,6 +76,8 @@ export const init = () => {
             marketplace.posts = loki.getCollection('marketplacePosts')
             funding.projects = loki.getCollection('fundingProjects')
             funding.config = loki.getCollection('fundingConfig')
+
+            // If not desktop mode, then wipe
         } else {
             let applicationConfigData = application.config.data
             let marketplaceConfigData = marketplace.config.data

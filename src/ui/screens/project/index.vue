@@ -116,11 +116,11 @@
                                     Overview
                                 </router-link>
                             </li>
-                            <li class="nav-item" @click="section='community'">
+                            <li class="nav-item" @click="section='community'" v-darklaunch="'COMMUNITY'">
                                 <router-link :to="`/project/${project.id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">
                                     Community
-                                    <c-updates-count>
-                                        13
+                                    <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
+                                        0
                                     </c-updates-count>
                                 </router-link>
                             </li>
@@ -132,8 +132,8 @@
                             <li class="nav-item" @click="section='updates'">
                                 <router-link :to="`/project/${project.id}/updates`" class="nav-link" :class="{ 'active': section === 'updates' }">
                                     Updates
-                                    <c-updates-count>
-                                        348
+                                    <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
+                                        0
                                     </c-updates-count>
                                 </router-link>
                             </li>
@@ -150,7 +150,6 @@
 
                     <div class="row" id="configure" v-if="section === 'configure'" :editing="editing">
                         <c-block title="Campaign">
-                            <form>
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -278,23 +277,22 @@
                                         <i class="fas first-order" />
                                     </div>
                                 </div>
-                            </form>
                         </c-block>
                     </div>
 
                 </div>
 
-                    <div class="col-12" id="overview">
-                        <transition name="page">
-                            <c-project-overview :project="project" v-if="section === 'overview'" :editing="editing" />
-                            <c-project-community :project="project" v-if="section === 'community'" :editing="editing" />
-                            <c-project-bounties :project="project" v-if="section === 'bounties'" :editing="editing" />
-                            <c-project-contributors :project="project" v-if="section === 'contributors'" :editing="editing" />
-                            <c-project-discussion :project="project" v-if="section === 'discussion'" :editing="editing" />
-                            <c-project-milestones :project="project" v-if="section === 'milestones'" :editing="editing" />
-                            <c-project-updates :project="project" v-if="section === 'updates'" :editing="editing" />
-                        </transition>
-                    </div>
+                <div class="col-12" id="overview">
+                    <transition name="page">
+                        <c-project-overview :project="project" v-if="section === 'overview'" :editing="editing" />
+                        <c-project-community :project="project" v-if="section === 'community'" :editing="editing" />
+                        <c-project-bounties :project="project" v-if="section === 'bounties'" :editing="editing" />
+                        <c-project-contributors :project="project" v-if="section === 'contributors'" :editing="editing" />
+                        <c-project-discussion :project="project" v-if="section === 'discussion'" :editing="editing" />
+                        <c-project-milestones :project="project" v-if="section === 'milestones'" :editing="editing" />
+                        <c-project-updates :project="project" v-if="section === 'updates'" :editing="editing" />
+                    </transition>
+                </div>
             </div>
     </c-layout>
 </template>

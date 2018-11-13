@@ -33,7 +33,7 @@
                         <c-main-banner class="margin-bottom-30" :slides="item.data.slides" v-if="item.data.slides"/>
 
                         <c-block class="margin-bottom-30" :title="item.data.title" :noGutter="true" :onlyContentBg="true" :bgGradient="true" v-else>
-                            <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
+                            <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
                         </c-block>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                         <c-product-slider :products="item.data.products" :title="item.data.title" :maxPerView="item.data.slidesPerView" v-if="item.data.products.length" />
 
                         <c-block class="margin-bottom-30" :title="item.data.title" :noGutter="true" :onlyContentBg="true" :bgGradient="true" v-else>
-                            <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
+                            <p v-if="!item.data.products.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
                         </c-block>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                                     <c-curator-review  :review="review" />
                                 </c-slide>
                             </c-swiper>
-                            <p v-if="!item.data.reviews.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
+                            <p v-if="!item.data.reviews.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
                         </c-block>
                     </div>
                 </div>
@@ -158,7 +158,7 @@
                                     />
                                 </c-slide>
                             </c-swiper>
-                            <p v-if="!item.data.projects.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
+                            <p v-if="!item.data.projects.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
                         </c-block>
                     </div>
                 </div>
@@ -185,7 +185,7 @@
                                     <c-button :href="`/#/realm/${realm.id}`">{{ realm.name }}</c-button>
                                 </c-slide>
                             </c-swiper>
-                            <p v-if="!item.data.realms.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
+                            <p v-if="!item.data.realms.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
                         </c-block>
                 </div>
 
@@ -243,7 +243,7 @@
                                 itemInRow="2"
                                 v-if="assets.length"/>
 
-                            <p v-if="!assets.length">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
+                            <p v-if="!assets.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
 
                             <c-content-navigation v-if="assets.length" />
                         </c-block>

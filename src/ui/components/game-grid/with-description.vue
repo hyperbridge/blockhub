@@ -90,7 +90,7 @@
                 </div>
             </div>
         </div>
-        <p v-if="!items || !items.length" key="nothing">Nothing could be found. Want to <c-button status="plain">Check for updates</c-button>?</p>
+        <p v-if="!items || !items.length" key="nothing">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
     </transition-group>
 </template>
 

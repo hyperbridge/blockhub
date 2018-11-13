@@ -236,19 +236,21 @@ export const runCommand = async (cmd, meta = {}) => {
             const res = await setAccountRequest(cmd.data)
 
             return resolve(await sendCommand('setAccountRequestResponse', res, meta.client, cmd.requestId))
-        } else if (cmd.key === 'setMode') {
-            local.store.state.application.mode = cmd.data
+        } 
+        // else if (cmd.key === 'setMode') {
+        //     local.store.state.application.mode = cmd.data
 
-            // Import seed data for now
-            if (local.store.state.application.mode === 'production') {
-                BlockHub.importSeedData()
+        //     // Import seed data for now
+        //     if (local.store.state.application.mode === 'production') {
+        //         //BlockHub.importSeedData()
 
-                local.store.state.application.desktop_mode = true
-                local.store.state.application.signed_in = true
-            }
-            // store.state.application.locked = true
-            // store.state.application.signed_in = false
-        } else if (cmd.key === 'updateReady') {
+        //         // local.store.state.application.desktop_mode = true
+        //         // local.store.state.application.signed_in = true
+        //     }
+        //     // store.state.application.locked = true
+        //     // store.state.application.signed_in = false
+        // } 
+        else if (cmd.key === 'updateReady') {
             console.log(cmd.data)
 
             await sendCommand('quitAndInstall')
