@@ -69,7 +69,7 @@
             </c-tabs>
         </c-block>
 
-        <c-block title="Created auction snipers" noGutter onlyContentBg bgGradient>
+        <c-block title="Created auction prospectors" noGutter onlyContentBg bgGradient>
             <table class="snipers-table">
                 <thead>
                     <th>ID</th>

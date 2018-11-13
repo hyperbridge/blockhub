@@ -47,7 +47,7 @@
                 links: [
                     'Marketplace',
                     'Marketplace Trade Manager',
-                    'Marketplace Snipers',
+                    'Marketplace Prospectors',
                     'Marketplace Search',
                     'Marketplace Offers',
                 ]

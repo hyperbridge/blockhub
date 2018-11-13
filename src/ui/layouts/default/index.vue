@@ -143,6 +143,7 @@
                     <div class="input-group mb-4">
                         <input type="text" class="form-control" ref="input" value="0xebf0027ef3b4b7a742a148cddb0f2b14e5d8f0e9" />
                     </div>
+                    <p>You should confirm the contract address <a href="https://t.me/hyperbridgechat">in our Telegram</a>.</p>
                 </template>
                 <p slot="footer">
                 </p>
