@@ -12,10 +12,14 @@ const rootStore = {
         update(rootState,  { id, module, target, data }) {
             const { [module]: state } = rootState;
 
+            console.log(id, module, target, data)
+
             rootState[module][target][id] = {
                 ...rootState[module][target][id],
                 ...data
             };
+
+            console.log(rootState)
             // const { [module]: state } = rootState;
         },
         delete(rootState, { id, module, target }) {

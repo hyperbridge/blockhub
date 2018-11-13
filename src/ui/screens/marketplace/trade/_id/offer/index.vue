@@ -85,6 +85,7 @@
                 <c-button
                     status="info"
                     icon_hide
+                    @click="updateTrx()"
                 >Update transaction</c-button>
             </div>
         </c-block>
@@ -122,6 +123,17 @@
                 this.$store.dispatch(
                     `${action}WeakRel`,
                     [`assets/transactions/${target}Offer`, this.id, asset.id]
+                );
+            },
+            updateTrx() {
+                // rename yoursOffer => yourOffer
+                const { yoursOffer, theirOffer } = this;
+                this.$store.dispatch(
+                    'updateV2',
+                    ['assets/transactions', this.id, {
+                        yourOffer: yoursOffer.map(asset => asset.id),
+                        theirOffer: theirOffer.map(asset => asset.id)
+                    }]
                 );
             },
             addTransactionAsset(asset, target) {
