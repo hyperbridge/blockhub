@@ -1,12 +1,13 @@
 import Vue from 'vue';
 import moment from 'moment';
-import { extract, skip, getId, assignId } from '@/store/utils';
+import { extract, skip, getId, assignId, mergeId, normalize } from '@/store/utils';
 
 import transactions from '@/db/seed/asset-transactions';
 import trxsData from '@/db/seed/asset-transactions.json';
 import usersData from '@/db/seed/users.json';
 import assetsData from '@/db/seed/assets';
 import collectionsData from '@/db/seed/collections';
+import productsData from '@/db/seed/products';
 
 
 const rand = () => Math.floor(Math.random() * 1000);
@@ -54,16 +55,14 @@ const assets = {
                 createdAt: moment().add(-index, 'days')
             }
         }), {}),
-        users: usersData.reduce((users, user) => ({
-            ...users,
-            [user.id]: user
-        }), {}),
+        users: normalize(usersData),
         navigator: {
             1: { id: 1, assetId: 1, evolvesTo: [2, 3], isRoot: true },
             2: { id: 2, assetId: 2, evolvesTo: [4]},
             3: { id: 3, assetId: 3, evolvesTo: []},
             4: { id: 4, assetId: 4, evolvesTo: []}
-        }
+        },
+        products: normalize(productsData)
     },
     mutations: {
         addAsset(state, { prop = 'assets', data }) {
@@ -171,10 +170,6 @@ const assets = {
         createAuction({ state, commit }, { offerId, ...payload }) {
             const newId = rand();
 
-            // commit('updatev2', { ['offers_'+ offerId]: {
-            //     auctions: [...state.offers[id].auctions, newId]
-            // }});
-
             commit('create', { id: newId, prop: 'auctions', data: payload });
             commit('update', {
                 id: offerId,
@@ -182,7 +177,7 @@ const assets = {
                 data: { auctions: [...state.offers[offerId].auctions, newId] }
             });
         },
-        async createTransactionMessage({ commit, dispatch, state }, { trxId, message }) {
+        async createTransactionMessage({ dispatch, state }, { trxId, message }) {
             const id = await dispatch('community/createMessage', message, { root: true });
 
             const data = { messages: [...state.trxs[trxId].messages, id] };
@@ -198,40 +193,6 @@ const assets = {
             console.log(data)
             commit('update', { id: trxId, target: 'trxs', data });
             dispatch('community/delete', { id }, { root: true });
-        },
-        deleteSubitem({ commit, dispatch, state }, { id, tId, target, prop }) {
-            const data = {
-                [prop]: state[target][tId][prop].filter(propId => propId != id)
-            };
-        },
-        deleteGeneric(
-            { commit, dispatch, state },
-            [prop, id, target, targetId, propModule, module = 'assets']
-        ) {
-            /* Generic action prototype for universal actions on target's prop array [v2] */
-            // console.log(prop, id, target, targetId, module, propModule)
-            // console.log(state[target])
-
-            propModule = propModule || module;
-            const targetData = {
-                [prop]: state[target][targetId][prop].filter(propId => propId != id)
-            };
-            commit('update', { target, id: targetId, data: targetData });
-            dispatch(`${propModule}/delete`, { id, target: prop }, { root: true });
-
-        },
-        async createGeneric(
-            { commit, dispatch, state },
-            [prop, data, target, targetId, propModule = 'assets', module = propModule]
-        ) {
-
-            const newId = await dispatch(`${propModule}/create`, { target: prop, data }, { root: true });
-
-            const targetData = {
-                [prop]: [...state[target][tragetId][prop], newId]
-            };
-
-            commit('update', { target, id: tragetId, data: targetData });
         },
         evolveNavigator({ commit }, payload) {
             const id = rand();
@@ -258,7 +219,7 @@ const assets = {
 
     },
     getters: {
-        assets: ({ assets }, { collections: col }, { marketplace: { collections, products }}) => Object.values(assets)
+        assets: ({ assets, products }, { collections: col }, { marketplace: { collections }}) => Object.values(assets)
             .reduce((populated, asset) => ({
                 ...populated,
                 [asset.id]: {
@@ -266,7 +227,7 @@ const assets = {
                     offers_list: asset.offers_list.map(id => assets[id]),
                     inventory_list: asset.inventory_list.map(id => assets[id]),
                     collections: asset.collections.map(id => collections[id]),
-                    product: (products[asset.product] && extract(products[asset.product], ['images', 'price'])) || {}
+                    product: extract(products[asset.product], ['images', 'price'])
                 }
             }), {}),
         assetsArray: (state, { assets }) => Object.values(assets),

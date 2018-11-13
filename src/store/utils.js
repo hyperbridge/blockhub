@@ -18,6 +18,13 @@ export const assignId = (id, object) => ({ ...object, data: { ...object.data, id
 
 export const mergeId = (id, object) => ({ ...object, data: { ...object.data, id }, id });
 
+export const normalize = data => data
+    .reduce((normalized, data) => ({
+        ...normalized,
+        [data.id]: data
+    }), {});
+
+
 const data = [
     {
       id: 1,

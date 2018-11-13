@@ -92,9 +92,6 @@
         <c-block v-else :title="'Transaction: ' + tradeId" class="transaction">
             <p>Transaction with id <i>{{ id }}</i> doesn't exist</p>
         </c-block>
-        <c-block-menu :links="links">
-            Test
-        </c-block-menu>
     </article>
 </template>
 
@@ -104,7 +101,7 @@
     // import getters from '@/store/temporary-getters';
 
     export default {
-        props: ['id'],
+        props: ['id', 'trx'],
         mixins: [arrayHandler],
         components: {
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
@@ -257,9 +254,6 @@
             tradeId() {
                 return this.$route.params.tradeId;
             },
-            trx() {
-                return this.transaction;
-            }
         }
     }
 </script>

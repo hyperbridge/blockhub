@@ -4,7 +4,7 @@ import messagesData from '@/db/seed/messages.json';
 import usersData from '@/db/seed/users.json';
 import identitiesData from '@/db/seed/identities.json';
 
-import { extract, getId, mergeId } from '@/store/utils';
+import { extract, getId, mergeId, normalize } from '@/store/utils';
 
 
 
@@ -22,10 +22,7 @@ const community = {
             ...users,
             [user.id]: user
         }), {}),
-        identities: identitiesData.reduce((identities, idt) => ({
-            ...identities,
-            [idt.id]: idt
-        }), {})
+        identities: normalize(identitiesData)
     },
     mutations: {
         create(state, { target = 'messages', id, data }) {
@@ -123,13 +120,15 @@ const community = {
                     }, {})
                 }
             }), {}),
-        identities: ({ identities }) => Object
+        identities: ({ identities }, { users }) => Object
             .entries(identities)
             .reduce((populated, [id, identity]) => ({
                 ...populated,
                 [id]: {
                     ...identity,
-                    friends: identity.friends.map(id => identities[id])
+                    friends: identity.friends.map(id => identities[id]),
+                    inventory: users[identity.owner].inventory,
+                    inventoryGrouped: users[identity.owner].inventoryGrouped
                 }
             }), {})
     }
