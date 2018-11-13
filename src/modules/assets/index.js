@@ -240,8 +240,8 @@ const assets = {
                 }
             }), {}),
         transactions: (
-            { transactions, assets }, getters, { community: { identities }},
-            { ['community/messages']: messages }
+            { transactions, assets }, getters, rootState,
+            { ['community/messages']: messages, ['community/identities']: identities }
         ) => normalize(transactions, trx => ({
                 you: identities[trx.you],
                 contractor: identities[trx.contractor],

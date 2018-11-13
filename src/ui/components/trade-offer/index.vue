@@ -35,7 +35,7 @@
                         <th>Total value {{ totalVal[assetsKey] | convertCurrency }}</th>
                     </thead>
                     <tbody>
-                        <tr v-for="asset in assets" :key="asset.id">
+                        <tr v-for="(asset, index) in assets" :key="index">
                             <td>
                                 <c-tooltip>
                                     <c-asset-preview
