@@ -12,7 +12,7 @@
                         @click="activeTab = index + 1"
                     >
                         {{ title | upperFirstChar }}
-                        <c-tag-count :number="offers[title].length"/>
+                        <c-tag-count :number="offersCount[title]"/>
                     </a>
                 </li>
             </ul>
@@ -28,7 +28,6 @@
                     v-for="offer in offers"
                     :key="offer.id"
                     :offer="offer"
-                    :toffer="offers2.received[0]"
                     @wasSeen="offer.new = false"
                 />
                 <p v-if="!offers.length">No offers were found</p>
@@ -53,34 +52,13 @@
             }
         },
         computed: {
-            notifsCount() {
-                return {};
-                /* WIP */
-                return {
-                    received: this.offers.received.filter(offer => offer.new).length,
-                    sent: this.offers.sent.filter(offer => offer.new).length,
-                }
-            },
-            offers() {
-                const { transactions } = this.$store.state.assets;
-                return transactions.reduce((offers, transaction) => {
-                    const { createdBy, status } = transaction;
-                    const target = createdBy !== 1
-                        ? status === 'closed'
-                            ? 'closed'
-                            : 'received'
-                        : 'sent';
-                    offers[target].push(transaction);
-                    return offers;
-                }, { received: [], sent: [], closed: [] });
-            },
             transactions() {
                 return this.$store.getters['assets/transactionsArray'];
             },
             userId() {
                 return this.$store.state.application.account.id;
             },
-            offers2() {
+            offers() {
                 const { userId } = this;
                 return this.transactions.reduce((offers, trx) => {
 
@@ -93,7 +71,7 @@
                 }, { received: [], sent: [], closed: [] });
             },
             offersCount() {
-                return Object.entries(this.offers2).reduce((count, [name, offers]) =>
+                return Object.entries(this.offers).reduce((count, [name, offers]) =>
                     ({ ...count, [name]: offers.length })
                 , { received: 0, sent: 0, closed: 0 });
             }

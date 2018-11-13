@@ -3,19 +3,19 @@
         <div class="trade-offer__date">
             <span>
                 <span class="trade-offer__status" v-if="offer.new">NEW</span>
-                {{ toffer.createdAt | formatDate }} - {{ toffer.createdAt | timeAgo }}
+                {{ offer.createdAt | formatDate }} - {{ offer.createdAt | timeAgo }}
             </span>
             <span>
-                Expires {{ toffer.createdAt | expIn | timeAgo }}
+                Expires {{ offer.createdAt | addTime(2, 'weeks') | timeAgo }}
             </span>
         </div>
         <div
             class="trade-offer__content"
             @click="expandDetails()"
         >
-            <c-author :author="toffer.contractor"/>
+            <c-author :author="offer.contractor"/>
             <span>
-                Trade {{ toffer.yourOffer.length }} for {{ toffer.contractorOffer.length }} assets
+                Trade {{ offer.yourOffer.length }} for {{ offer.contractorOffer.length }} assets
             </span>
             <div>
                 <c-button status="success" icon_hide>Accept</c-button>
@@ -107,14 +107,13 @@
 </template>
 
 <script>
-    import moment from 'moment';
-
     export default {
+        name: 'trade-offer',
         props: {
             offer: {
-                type: Object
-            },
-            toffer: Object
+                type: Object,
+                required: true
+            }
         },
         components: {
             'c-author': (resolve) => require(['@/ui/components/author'], resolve),
@@ -149,18 +148,13 @@
                 return this.round(this.totalVal.Yours - this.totalVal[this.contrName]);
             },
             contrName() {
-                return this.toffer.contractor.name + 's';
+                return this.offer.contractor.name + 's';
             },
             assets() {
                 return {
-                    Yours: this.toffer.yourOffer,
-                    [this.contrName]: this.toffer.contractorOffer
+                    Yours: this.offer.yourOffer,
+                    [this.contrName]: this.offer.contractorOffer
                 }
-            }
-        },
-        filters: {
-            expIn(date) {
-                return moment(date).add(2, 'weeks');
             }
         }
     }
