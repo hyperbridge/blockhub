@@ -2,22 +2,18 @@ import Vue from 'vue';
 import moment from 'moment';
 import { extract, skip, getId, assignId, mergeId, normalize } from '@/store/utils';
 
-import trxsData from '@/db/seed/asset-transactions.json';
+import transactionsData from '@/db/seed/asset-transactions.json';
 import usersData from '@/db/seed/users.json';
-import assetsData from '@/db/seed/assets';
-import collectionsData from '@/db/seed/collections';
-import productsData from '@/db/seed/products';
+import assetsData from '@/db/seed/assets.json';
+import collectionsData from '@/db/seed/collections.json';
+import productsData from '@/db/seed/products.json';
 
 
 const rand = () => Math.floor(Math.random() * 1000);
 
-const transactions = trxsData.reduce((transactions, trx, index) => ({
-        ...transactions,
-        [trx.id]: {
-            ...trx,
-            createdAt: moment().add(-index, 'days')
-        }
-    }), {});
+const transactions = normalize(transactionsData, (trx, i) => ({
+    createdAt: moment().add(-i, 'days')
+}));
 
 const assets = {
     namespaced: true,
@@ -204,6 +200,14 @@ const assets = {
 
     },
     getters: {
+        assets: ({ assets, products }, { collections: col }, { marketplace: { collections }}) =>
+            normalize(assets, asset => ({
+                offers_list: asset.offers_list.map(id => assets[id]),
+                inventory_list: asset.inventory_list.map(id => assets[id]),
+                collections: asset.collections.map(id => collections[id]),
+                product: extract(products[asset.product], ['images', 'price'])
+            })),
+        /* Old normalization
         assets: ({ assets, products }, { collections: col }, { marketplace: { collections }}) => Object.values(assets)
             .reduce((populated, asset) => ({
                 ...populated,
@@ -215,6 +219,7 @@ const assets = {
                     product: extract(products[asset.product], ['images', 'price'])
                 }
             }), {}),
+        */
         assetsArray: (state, { assets }) => Object.values(assets),
         assetsMap: (state, { assets }) => Object.entries(assets),
         users: ({ users }, { assets }) => Object.values(users)
@@ -268,14 +273,10 @@ const assets = {
             ], []),
         assetsByName: (state, { assetsArray }) => name => assetsArray
             .filter(asset => asset.name.toLowerCase().includes(name.toLowerCase())),
-        collections: ({ assets, collections }) => Object.values(collections)
-            .reduce((populated, collection) => ({
-                ...populated,
-                [collection.id]: {
-                    ...collection,
-                    assets: collection.assets.map(id => assets[id])
-                }
-            }), {}),
+        collections: ({ assets, collections }) =>
+            normalize(collections, col => ({
+                assets: col.assets.map(id => assets[id])
+            })),
         collectionsArray: (state, { collections }) => Object.values(collections),
         snipers: ({ snipers, assets }) => Object.values(snipers)
             .reduce((populated, sniper) => ({
