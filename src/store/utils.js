@@ -18,11 +18,15 @@ export const assignId = (id, object) => ({ ...object, data: { ...object.data, id
 
 export const mergeId = (id, object) => ({ ...object, data: { ...object.data, id }, id });
 
-export const normalize = data => data
-    .reduce((normalized, data) => ({
-        ...normalized,
-        [data.id]: data
-    }), {});
+
+export const normalize = (data, fn = (i) => i) =>
+    (Array.isArray(data) ? data : Object.values(data))
+        .reduce((normalized, item, index) => ({
+            ...normalized,
+            [item.id]: typeof fn === 'function'
+                ? { ...item, ...fn(item, index) }
+                : { ...item, ...fn }
+        }), {});
 
 
 const data = [

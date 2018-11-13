@@ -155,7 +155,7 @@
                         <c-button @click="rotateEditorMode()">Editor Mode {{ $store.state.application.editor_mode.toUpperCase() }}</c-button>
                         <c-button @click="toggleDarklaunchOverride()">Darklaunch Override {{ $store.state.application.darklaunch_override ? 'ON' : 'OFF' }}</c-button>
                         <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button>
-                        
+
                         <br /><br />
                     </div>
                     <div>
@@ -361,7 +361,6 @@
             }
         },
         mounted() {
-            this.$store.commit('assets/loadTransactions');
             this.loadSettings()
             this.ensureDesktopWelcome()
         },
@@ -384,7 +383,7 @@
     #app {
         -webkit-user-select: none;
     }
-    
+
     .fixed-panel {
         width: 540px;
         right: -540px;

@@ -2,7 +2,6 @@ import Vue from 'vue';
 import moment from 'moment';
 import { extract, skip, getId, assignId, mergeId, normalize } from '@/store/utils';
 
-import transactions from '@/db/seed/asset-transactions';
 import trxsData from '@/db/seed/asset-transactions.json';
 import usersData from '@/db/seed/users.json';
 import assetsData from '@/db/seed/assets';
@@ -12,23 +11,23 @@ import productsData from '@/db/seed/products';
 
 const rand = () => Math.floor(Math.random() * 1000);
 
+const transactions = trxsData.reduce((transactions, trx, index) => ({
+        ...transactions,
+        [trx.id]: {
+            ...trx,
+            createdAt: moment().add(-index, 'days')
+        }
+    }), {});
+
 const assets = {
     namespaced: true,
     state: {
-        transactions: [],
-        assets: assetsData.reduce((assets, asset) => ({
-            ...assets,
-            [asset.id]: {
-                ...asset,
-                market_price: 0,
-                selected: false,
-                for_sale: false,
-            }
-        }), {}),
-        collections: collectionsData.reduce((collections, collection) => ({
-            ...collections,
-            [collection.id]: collection
-        }), {}),
+        assets: normalize(assetsData, {
+            market_price: 0,
+            selected: false,
+            for_sale: false
+        }),
+        collections: normalize(collectionsData),
         snipers: {
             1: { id: 1, asset: 4, priceMin: 31, priceMax: 59, expDate: "2018-12-15T14:29:47+02:00" },
             3: { id: 3, asset: 6, priceMin: 11, priceMax: 89, expDate: "2018-11-14T14:29:47+02:00" }
@@ -48,13 +47,8 @@ const assets = {
             1: { id: 1, name: null, phrase: 'Armor', priceMin: 1, priceMax: 52 },
             2: { id: 2, name: 'Cheap armors', phrase: 'Armors', priceMin: 0, priceMax: 10 }
         },
-        trxs: trxsData.reduce((transactions, trx, index) => ({
-            ...transactions,
-            [trx.id]: {
-                ...trx,
-                createdAt: moment().add(-index, 'days')
-            }
-        }), {}),
+        trxs: transactions,
+        transactions,
         users: normalize(usersData),
         navigator: {
             1: { id: 1, assetId: 1, evolvesTo: [2, 3], isRoot: true },
@@ -111,15 +105,6 @@ const assets = {
                     state[prop][id] = { ...state[prop][id], ...payloadData };
                 }
             }
-        },
-        loadTransactions(state, payload = transactions) {
-            state.transactions = payload
-                .map((transaction, index) => ({
-                    ...transaction,
-                    createdAt: moment().add(-1 * (index + 1), 'days').format(),
-                    updatedAt: moment().add(-1 * (index + 1), 'days').format(),
-                    edited: false
-                }));
         },
         addTransactionAsset(state, payload) {
             const { tradeId, target, asset } = payload;
@@ -231,6 +216,7 @@ const assets = {
                 }
             }), {}),
         assetsArray: (state, { assets }) => Object.values(assets),
+        assetsMap: (state, { assets }) => Object.entries(assets),
         users: ({ users }, { assets }) => Object.values(users)
             .map(user => ({
                 ...user,
@@ -248,19 +234,17 @@ const assets = {
                     }, {})
                 }
             }), {}),
-        transactions: ({ trxs, assets }, { users }, rootState, { ['community/messages']: messages }) => Object.values(trxs)
-            .reduce((populated, trx) => ({
-                ...populated,
-                // [trx.id]: trx
-                [trx.id]: {
-                    ...trx,
-                    you: users[trx.you],
-                    contractor: users[trx.contractor],
-                    contractorOffer: trx.contractorOffer.map(id => assets[id]),
-                    yourOffer: trx.yourOffer.map(id => assets[id]),
-                    messages: trx.messages.map(id => messages[id])
-                }
-            }), {}),
+        transactions: (
+            { transactions, assets }, getters, { community: { identities }},
+            { ['community/messages']: messages }
+        ) => normalize(transactions, trx => ({
+                you: identities[trx.you],
+                contractor: identities[trx.contractor],
+                contractorOffer: trx.contractorOffer.map(id => assets[id]),
+                yourOffer: trx.yourOffer.map(id => assets[id]),
+                messages: trx.messages.map(id => messages[id])
+            })),
+        transactionsMap: (state, { transactions }) => Object.entries(transactions),
         transactionsArray: (state, { transactions }) => Object.values(transactions),
         inventoryAssets: (state, { assetsArray }) => assetsArray
             .filter(asset => !asset.for_sale),
