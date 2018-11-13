@@ -653,7 +653,7 @@ export default {
             this.$store.commit('application/activateModal', 'token-contract')
         },
         gaStep(step) {
-            window.ga('send', 'event', 'Token', 'Token Purchase', 'Token Purchase Step', step, {'NonInteraction': 1})
+            window.ga('send', 'event', 'Token', 'Token Purchase', 'Token Purchase Step ' + step, step, {'NonInteraction': 1})
         },
         manualOverride() {
             this.override = true
