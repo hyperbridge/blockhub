@@ -861,6 +861,9 @@ const router = new Router({
 router.afterEach((to, from) => {
     // Complete the animation of the route progress bar.
     $('body').removeClass('screen-loading')
+
+    ga('set', 'page', to.fullPath)
+    ga('send', 'pageview')
 })
 
 export const Auth = {

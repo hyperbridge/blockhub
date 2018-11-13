@@ -128,6 +128,10 @@ export const actions = {
         store.commit('updateState', state)
     },
     activateModal(store, payload) {
+        if (payload) {
+            window.ga('send', 'event', 'Modal', 'Show Modal', 'Show Modal', payload, { 'NonInteraction': 1 })
+        }
+
         if (store.state.desktop_mode) {
             if (store.state.signed_in) {
                 store.commit('activateModal', payload)

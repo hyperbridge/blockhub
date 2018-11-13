@@ -132,6 +132,22 @@
                 </p>
             </c-basic-popup>
 
+
+            <c-basic-popup
+                :activated="$store.state.application.active_modal === 'token-contract'"
+                @close="$store.state.application.active_modal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">Token Purchase Contract Address</div>
+                <template slot="body">
+                    <div class="input-group mb-4">
+                        <input type="text" class="form-control" ref="input" value="0xebf0027ef3b4b7a742a148cddb0f2b14e5d8f0e9" />
+                    </div>
+                </template>
+                <p slot="footer">
+                </p>
+            </c-basic-popup>
+
             <c-basic-popup
                 :activated="$store.state.application.active_modal === 'report'"
                 @close="$store.state.application.active_modal = null"
