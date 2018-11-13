@@ -11,21 +11,28 @@ const relations = {
         }
     },
     [ASSETS]: {
-        trxs: { messages: COMMUNITY },
-        transactions: { messages: COMMUNITY }
+        trxs: {
+            messages: [COMMUNITY, 'messages']
+        },
+        transactions: {
+            messages: [COMMUNITY, 'messages'],
+            yourOffer: [ASSETS, 'assets'],
+            contractorOffer: [ASSETS, 'assets']
+        }
     },
     [COMMUNITY]: {
 
     }
 };
 
-export const findRelation = (module, target, prop) =>
+export const findRelationV1 = (module, target, prop) =>
     (relations[module][target] && relations[module][target][prop]) || module;
 
     /* Upgraded ver */
-    const findRel = (module, target, prop) =>
-        (relations[module][target] && relations[module][target][prop])
-        || [module, prop];
+export const findRelation = (module, target, prop) =>
+    (relations[module][target] && relations[module][target][prop])
+    || [module, prop];
+
 
 
 export default relations;

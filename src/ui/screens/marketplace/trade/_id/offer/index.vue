@@ -118,10 +118,10 @@
             }
         },
         methods: {
-            updateTransaction(asset) {
+            updateTransaction(target, asset, action = 'create') {
                 this.$store.dispatch(
-                    'createRelation',
-                    ['assets/transactions/yourOffer', this.id, asset]
+                    `${action}WeakRel`,
+                    [`assets/transactions/${target}Offer`, this.id, asset.id]
                 );
             },
             addTransactionAsset(asset, target) {
