@@ -1,5 +1,5 @@
-import { getId, mergeId } from '@/store/utils';
-import { findRelation, findRel } from '@/store/modules-relation';
+import { getId, mergeId, normalize } from '@/store/utils';
+import { findRelation, decompose } from '@/store/modules-relation';
 
 
 const rootStore = {
@@ -32,6 +32,13 @@ const rootStore = {
             /* BUG? */
             // const { [id]: deleted, ...rest } = rootState[module][target];
             // console.log('module', module, 'target', target, 'id', id)
+        },
+        loadData(rootState, [targets, data]) {
+            const [module, target] = targets.split('/');
+            rootState[module][target] = {
+                ...[module][target],
+                ...normalize(data)
+            }
         }
     },
     actions: {
@@ -120,6 +127,16 @@ const rootStore = {
             };
             commit('update', { module, target, id: targetId, data: targetData });
             dispatch('delete', { id, target: prop, module: propModule });
+        },
+
+
+
+        loadData({ commit }, [data, baseTarget]) {
+            const mutations = Object.entries(decompose(data, baseTarget));
+
+            for (let [mutation, data] of mutations) {
+                commit('loadData', [mutation, data]);
+            }
         }
     }
 };

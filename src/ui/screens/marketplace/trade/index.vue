@@ -4,10 +4,13 @@
         <c-block-menu :links="links">
             <router-view/>
         </c-block-menu>
+        {{ results }}
     </div>
 </template>
 
 <script>
+    import transactionsData from '@/db/seed/asset-transactions.json';
+
     export default {
         components: {
             'c-block-menu': (resolve) => require(['@/ui/components/block/menu'], resolve),
@@ -19,8 +22,14 @@
                     { title: 'Explorer', to: { name: 'Marketplace Trade Explorer' }},
                     { title: 'History', to: { name: 'Marketplace Trade History' }},
                     { title: 'Settings', to: { name: 'Marketplace Trade Settings' }}
-                ]
+                ],
+                results: []
             }
+        },
+        async created() {
+            await new Promise(res => setTimeout(res, 2000));
+
+            // this.results = [1,23,3,,3]
         }
     }
 </script>

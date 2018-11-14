@@ -4,7 +4,7 @@ import messagesData from '@/db/seed/messages.json';
 import usersData from '@/db/seed/users.json';
 import identitiesData from '@/db/seed/identities.json';
 
-import { extract, getId, mergeId, normalize } from '@/store/utils';
+import { extract, skip, getId, mergeId, normalize } from '@/store/utils';
 
 
 
@@ -120,18 +120,20 @@ const community = {
                     }, {})
                 }
             }), {}),
-        identities: ({ identities }, getters, rootState, { ['assets/assets']: assets }) => Object
-            .values(identities)
+        identities: (
+            { identities }, getters, rootState,
+            { ['assets/assets']: assets }
+        ) => Object.values(identities)
             .map(identity => ({
                 ...identity,
-                friends: identity.friends.map(id => identities[id]),
                 inventory: identity.inventory.map(id => extract(assets[id], ['image', 'price', 'product']))
             }))
-            .reduce((populated, user) => ({
+            .reduce((populated, identity, identities) => ({
                 ...populated,
-                [user.id]: {
-                    ...user,
-                    inventoryGrouped: user.inventory.reduce((grouped, asset) => {
+                [identity.id]: {
+                    ...identity,
+                    // friends: identity.friends.map(id => skip(identities[id], ['friends', 'inventory'])),
+                    inventoryGrouped: identity.inventory.reduce((grouped, asset) => {
                         const { name } = asset.product;
                         grouped[name] = grouped[name] || [];
                         grouped[name] = [...grouped[name], asset];
