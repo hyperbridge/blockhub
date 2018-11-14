@@ -56,6 +56,7 @@
         "friends": [3, 4],
         "hide_friends": false,
         "owner": 1,
+        "inventory": [1, 2, 3, 4],
         "product_wishlist": { "3": true },
         "project_wishlist": {}
     },
@@ -70,6 +71,7 @@
         "friends": [5],
         "hide_friends": false,
         "owner": 1,
+        "inventory": [2, 6, 9],
         "product_wishlist": {},
         "project_wishlist": {}
     },
@@ -84,6 +86,7 @@
         "friends": [],
         "hide_friends": false,
         "owner": 1,
+        "inventory": [7, 8 ,9],
         "product_wishlist": {},
         "project_wishlist": {}
     },
@@ -98,6 +101,7 @@
         "friends": [],
         "hide_friends": true,
         "owner": 2,
+        "inventory": [1, 2, 3, 4, 5, 6, 7],
         "product_wishlist": {},
         "project_wishlist": {}
     },
@@ -112,6 +116,7 @@
         "friends": [],
         "hide_friends": true,
         "owner": 2,
+        "inventory": [8, 7, 4, 3, 3, 3, 1, 8],
         "product_wishlist": {},
         "project_wishlist": {}
     }

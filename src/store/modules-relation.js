@@ -21,7 +21,11 @@ const relations = {
         }
     },
     [COMMUNITY]: {
-
+        identities: {
+            inventory: [ASSETS, 'assets'],
+            messages: [COMMUNITY, 'messages'],
+            friends: [COMMUNITY, 'identities']
+        }
     }
 };
 
