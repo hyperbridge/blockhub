@@ -46,19 +46,19 @@
                     <span class="icon fas fa-list-alt"></span>
                     <span class="text">My Content</span>
                 </a>
-                <a href="/#/developer/payment" v-if="developer_mode">
+                <a href="/#/business/developer/payment" v-if="developer_mode">
                     <span class="icon fas fa-info-circle"></span>
                     <span class="text">Payment Settings</span>
                 </a>
-                <a href="/#/realm/new" v-if="developer_mode" v-darklaunch="'REALMS'">
+                <a href="/#/business/realm/new" v-if="developer_mode" v-darklaunch="'REALMS'">
                     <span class="icon fa fa-plus"></span>
                     <span class="text">New Realm</span>
                 </a>
-                <a href="/#/product/new" v-if="developer_mode">
+                <a href="/#/business/product/new" v-if="developer_mode">
                     <span class="icon fa fa-plus"></span>
                     <span class="text">New Game</span>
                 </a>
-                <a href="/#/project/new" v-if="developer_mode">
+                <a href="/#/business/project/new" v-if="developer_mode">
                     <span class="icon fa fa-plus"></span>
                     <span class="text">New Crowdfund</span>
                 </a>

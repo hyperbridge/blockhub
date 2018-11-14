@@ -1,6 +1,42 @@
 <template>
-    <div>
-
+    <div class="navigation">
+        <ul>
+            <li class="title">Main</li>
+            <li class="openable active open">
+                <a href="#">
+                    <span class="icon li-home"></span>
+                    <span class="text">Marketplace</span>
+                </a>
+                <ul style="top: auto; height: auto;">
+                    <li class="active">
+                        <a href="/#/business/product/new" class="no-icon">
+                            <span class="text">New Product</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="title">Funding</li>
+            <li class="openable">
+                <a href="#">
+                    <span class="icon li-document"></span>
+                    <span class="text">Funding</span>
+                </a>
+                <ul>
+                    <li class="openable">
+                        <a href="#" class="no-icon">
+                            <span class="text">Crowdfunds</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="/#/business/project/new" class="no-icon">
+                                    <span class="text">New Crowdfund</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
         <!-- <div class="user user--bordered user--huge user--centred margin-bottom-20">
             <img src="http://via.placeholder.com/128x128">
             <div class="user__name">
