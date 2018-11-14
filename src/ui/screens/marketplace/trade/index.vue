@@ -4,12 +4,11 @@
         <c-block-menu :links="links">
             <router-view/>
         </c-block-menu>
-        {{ results }}
     </div>
 </template>
 
 <script>
-    import transactionsData from '@/db/seed/asset-transactions.json';
+    import transactionsData from '@/db/api/asset-transactions';
 
     export default {
         components: {
@@ -23,13 +22,15 @@
                     { title: 'History', to: { name: 'Marketplace Trade History' }},
                     { title: 'Settings', to: { name: 'Marketplace Trade Settings' }}
                 ],
-                results: []
+                results: [
+
+                ]
             }
         },
         async created() {
             await new Promise(res => setTimeout(res, 2000));
 
-            // this.results = [1,23,3,,3]
+            this.results = transactionsData;
         }
     }
 </script>
