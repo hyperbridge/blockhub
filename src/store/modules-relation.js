@@ -38,32 +38,69 @@ export const findRelation = (module, target, prop) =>
     || [module, prop];
 
 
-const decompose = (data, destination) => {
-    const [module, target] = destination.split('/');
-    const relation = relations[module][target];
+export const decompose = (destination, data) =>
+    data.reduce((mutations, item) => {
 
-    const decomposed = data.map(item => {
-        const decompItem = { ...item };
+        const [module, target] = destination.split('/');
+        const relation = relations[module][target];
 
-        for (let key in item) {
-            if (relation && relation[key]) {
-                decompItem[key].map(val => val.id);
+        const decompRelation = (relation, items) => {
+            for (let item of items) {
+                for (let prop in relation) {
+                    if (item[prop]) {
+
+                        const [propModule, propTarget] = relation[prop];
+                        const mutName = `${propModule}/${propTarget}`;
+
+                        mutations[mutName] = mutations[mutName] || [];
+                        mutations[mutName].push(...item[prop]);
+
+                        const subRelation = relations[propModule][propTarget];
+
+                        if (subRelation) decompRelation(subRelation, item[prop]);
+
+                        item[prop] = item[prop].map(el => el.id);
+                    }
+                }
             }
         }
 
+        decompRelation(relation, [item]);
 
-    });
-};
-
-
-const data = [
-    { id: 1, yourOffer: [{ id: 1, name: 'Armor'}, { id: 1, name: 'Armor'}] },
-    { id: 2, yourOffer: [{ id: 3, name: 'Armor'}, { id: 4, name: 'Armor'}] },
-]
+        mutations[destination].push(item);
+        return mutations;
+    }, { [destination]: [] });
 
 
-// decompose(data, ['assets/transactions']);
+/* example usage
 
+(parsing/normalizing posts data)
 
+const posts = [
+    {
+        id: 11,
+        messages: [{
+            id: 22,
+            txt: 'Hi',
+            authors: [{
+                id: 33,
+                inventory: [{ id: 41, name: 'Armor' }],
+                images: [{ id: 42, src: 'someimgsrc' }]
+            }]
+        }]
+    }
+];
+
+decompose('community/posts', posts);
+=>> ** output **
+{
+  'community/posts': [ { id: 11, messages: [22] } ],
+  'community/messages': [ { id: 22, txt: 'Hi', authors: [33] } ],
+  'community/identities': [ { id: 33, inventory: [41], images: [42] } ],
+  'assets/assets': [ { id: 41, name: 'Armor' } ],
+  'community/pictures': [ { id: 42, src: 'someimgsrc' } ] }
+}
+
+*/
 
 export default relations;

@@ -39,6 +39,10 @@ const rootStore = {
                 ...[module][target],
                 ...normalize(data)
             }
+        },
+        clearData(rootState, [targets]) {
+            const [module, target] = targets.split('/');
+            rootState[module][target] = {};
         }
     },
     actions: {
@@ -137,6 +141,9 @@ const rootStore = {
             for (let [mutation, data] of mutations) {
                 commit('loadData', [mutation, data]);
             }
+        },
+        clearData({ commit }, [target]) {
+
         }
     }
 };
