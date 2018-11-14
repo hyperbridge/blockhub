@@ -530,7 +530,7 @@ window.resetSettings = function() {
 
 function isWhiteSpace(coords) {
   var element = document.elementFromPoint(coords.x, coords.y);
-  var whitespace = $(document).add('body, html, #app, #header-bg, #startup-loader, #critical-error, #left-bg, #right-bg, .startup-loader__container');
+  var whitespace = $(document).add('body, html, #business-app, #app, #header-bg, #startup-loader, #critical-error, #left-bg, #right-bg, .startup-loader__container');
 
   return (whitespace.get().indexOf(element) > -1) ? true : false;
 }

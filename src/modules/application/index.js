@@ -45,8 +45,8 @@ const updateState = (savedData, updatedState = {}) => {
             message: null
         },
         operating_system: getOS(),
-        account: DB.application.config.data[0].account,
-        darklaunch_flags: DB.application.config.data[0].darklaunch_flags,
+        account: DB.application.config.data[0].account || {},
+        darklaunch_flags: DB.application.config.data[0].darklaunch_flags || [],
         developer_mode: savedData.developer_mode != null ? savedData.developer_mode : DB.application.config.data[0].account && !!DB.application.config.data[0].account.current_identity.developer_id,
         environment_mode: savedData.environment_mode != null ? savedData.environment_mode : BlockHub.GetMode(),
         externalState: {},

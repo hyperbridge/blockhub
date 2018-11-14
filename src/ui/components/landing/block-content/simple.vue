@@ -6,10 +6,8 @@
              'background-position' : bgPosition
              }">
         <div class="container">
-            <div class="row" :class="[horizontalPozition, verticalPosition]">
-                <div class="landing__content-block-body" :style="{ width: contentWidth}">
-                    <slot />
-                </div>
+            <div class="row landing__content-block-body" :class="[horizontalPozition, verticalPosition]">
+                <slot />
             </div>
         </div>
     </section>
@@ -93,8 +91,7 @@
     }
     .landing__content-block-body{
         color: #fff;
-        margin: 15px 0;
-        padding: 0 15px;
-        max-width: 100%;
+        margin-top: 15px;
+        margin-bottom: 15px;
     }
 </style>
