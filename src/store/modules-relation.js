@@ -58,7 +58,7 @@ const data = [
 ]
 
 
-decompose(data, ['assets/transactions']);
+// decompose(data, ['assets/transactions']);
 
 
 
