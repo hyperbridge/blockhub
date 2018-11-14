@@ -1,16 +1,16 @@
 <template>
     <!-- PAGE WRAPPER -->
-    <div class="page page--w-header page--w-container">
+    <div id="business-app" class="page page--w-header page--w-container">
         <div class="page-top-bar draggable" :class="{'invert' : darkMode}">
             <a class="logo-holder undraggable" href="/#/">
                 <c-img src="/static/img/logo-white.svg" alt="Logo" v-if="darkMode" />
-                <c-img src="/static/img/logo.svg" alt="Logo" v-else />
+                <c-img src="/static/img/logo.svg" alt="Logo" style="height: 90%; margin-top: 2%" v-else />
             </a>
             <div class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
                 Business Manager
             </div>
             <div class="mb-0 float-right h5" style="margin-left: auto">
-                User Name | {{ darkMode }}
+                {{ current_identity.name }}
             </div>
         </div>
         <!-- PAGE LEFT PANEL -->
@@ -41,24 +41,29 @@
 <script>
     export default {
         name: 'business',
-        props:{
-            showLeftPanel:{
+        props: {
+            showLeftPanel: {
                 type: Boolean,
                 default: true
             },
-            showRightPanel:{
+            showRightPanel: {
                 type: Boolean,
                 default: false
             }
         },
-        components:{
+        components: {
             'c-business-sidebar': (resolve) => require(['@/ui/components/business/sidepanel'], resolve)
         },
-        data(){
-            return{
+        data() {
+            return {
                 loadingState: true,
                 darkMode: false
             }
+        },
+        computed: {
+            current_identity() {
+                return this.$store.state.application.account && this.$store.state.application.account.current_identity
+            },
         },
         mounted() {
             this.$nextTick(() => {

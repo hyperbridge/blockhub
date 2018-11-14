@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <div class="user user--bordered user--huge user--centred margin-bottom-20">
+        <!-- <div class="user user--bordered user--huge user--centred margin-bottom-20">
             <img src="http://via.placeholder.com/128x128">
             <div class="user__name">
                 <strong>Tracey Newman</strong><br>
@@ -77,7 +77,7 @@
                     Change account / Log off
                 </c-button>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -85,7 +85,6 @@
     export default {
         name: 'business-sidebar',
         components:{
-            'c-switch': (resolve) => require(['@/ui/components/switch'], resolve)
         },
         data(){
             return{

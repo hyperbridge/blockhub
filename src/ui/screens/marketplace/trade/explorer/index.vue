@@ -50,11 +50,12 @@
 <script>
 
     export default {
+        props: ['transactions'],
         components: {
             'c-asset': (resolve) => require(['@/ui/components/assets-grid-inventory/asset'], resolve),
         },
         computed: {
-            transactions() {
+            transactionsX() {
                 return this.$store.getters['assets/transactionsArray'];
             }
         }

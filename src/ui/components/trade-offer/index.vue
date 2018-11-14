@@ -6,16 +6,16 @@
                 {{ offer.createdAt | formatDate }} - {{ offer.createdAt | timeAgo }}
             </span>
             <span>
-                Expires {{ offer.createdAt | expIn | timeAgo }}
+                Expires {{ offer.createdAt | addTime(2, 'weeks') | timeAgo }}
             </span>
         </div>
         <div
             class="trade-offer__content"
             @click="expandDetails()"
         >
-            <c-author :author="offer.contractor.user"/>
+            <c-author :author="offer.contractor"/>
             <span>
-                Trade {{ offer.me.selling.length }} for {{ offer.contractor.selling.length }} assets
+                Trade {{ offer.yourOffer.length }} for {{ offer.contractorOffer.length }} assets
             </span>
             <div>
                 <c-button status="success" icon_hide>Accept</c-button>
@@ -31,11 +31,11 @@
                     class="trade-offer__assets-table"
                 >
                     <thead>
-                        <th>{{ assetsKey | upperFirstChar }} items</th>
-                        <th>Total value {{ totalValue[assetsKey] | convertCurrency }}</th>
+                        <th>{{ assetsKey }} items</th>
+                        <th>Total value {{ totalVal[assetsKey] | convertCurrency }}</th>
                     </thead>
                     <tbody>
-                        <tr v-for="asset in assets" :key="asset.id">
+                        <tr v-for="(asset, index) in assets" :key="index">
                             <td>
                                 <c-tooltip>
                                     <c-asset-preview
@@ -60,12 +60,12 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Their items:</td>
-                            <td>- {{ totalValue.their | convertCurrency }}</td>
+                            <td>{{ contrName }} items:</td>
+                            <td>- {{ totalVal[contrName] | convertCurrency }}</td>
                         </tr>
                         <tr>
                             <td>Yours items:</td>
-                            <td>+ {{ totalValue.yours | convertCurrency }}</td>
+                            <td>+ {{ totalVal.Yours | convertCurrency }}</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -107,12 +107,12 @@
 </template>
 
 <script>
-    import moment from 'moment';
-
     export default {
+        name: 'trade-offer',
         props: {
             offer: {
-                type: Object
+                type: Object,
+                required: true
             }
         },
         components: {
@@ -135,30 +135,26 @@
             }
         },
         computed: {
-            totalValue() {
+            totalVal() {
                 const { assets, round } = this;
-                return Object.keys(assets).reduce((total, assetsKey) => ({
+                return Object.entries(assets).reduce((total, [owner, assets]) => ({
                     ...total,
-                    [assetsKey]: round(
-                        assets[assetsKey].reduce((totalPrice, asset) =>
-                            totalPrice += asset.price.current
-                        , 0)
+                    [owner]: round(
+                        assets.reduce((price, asset) => price += asset.price.current, 0)
                     )
                 }), {});
             },
             finalBalance() {
-                return this.round(this.totalValue.yours - this.totalValue.their);
+                return this.round(this.totalVal.Yours - this.totalVal[this.contrName]);
+            },
+            contrName() {
+                return this.offer.contractor.name + 's';
             },
             assets() {
                 return {
-                    yours: this.offer.me.selling,
-                    their: this.offer.contractor.selling
+                    Yours: this.offer.yourOffer,
+                    [this.contrName]: this.offer.contractorOffer
                 }
-            }
-        },
-        filters: {
-            expIn(date) {
-                return moment(date).add(2, 'weeks');
             }
         }
     }

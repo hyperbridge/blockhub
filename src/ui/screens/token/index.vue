@@ -8,8 +8,8 @@
                         :hardCap="18500000"
                         :softCap="400000"
                         :volume="350000000"
-                        :soldDollar="440269"
-                        :soldTokens="8004895"
+                        :soldDollars="soldDollars"
+                        :soldTokens="soldTokens"
                         @purchase="scrollMeTo('purchase')"
                     />
                     <c-block class="margin-bottom-30" hidden>
@@ -139,7 +139,9 @@
                 <p>The BlockHub desktop client is the recommended way to load up on tokens, but you can also purchase using the MetaMask web wallet. Come back to this page within BlockHub, or when you've installed MetaMask.</p>
 
                 <br /><br />
-                <c-button class="c-btn-lg " href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en">Install MetaMask to Purchase Tokens</c-button>
+                <c-button class="c-btn-lg " href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank" @click="gaStep(1)">Install MetaMask to Purchase Tokens</c-button>
+                <br /><br />
+                <c-button status="underline" size="sm" @click="showContractAddress">Click here if you just want the contract address</c-button>
                 <br /><br />
             </div>
 
@@ -160,6 +162,9 @@
                 <br />
                 <br />
                 <c-button class="c-btn-lg " @click="unlockWallet">Unlock Wallet</c-button>
+                <br /><br />
+                <c-button status="underline" size="sm" @click="showContractAddress">Click here if you just want the contract address</c-button>
+                <br /><br />
             </div>
             
             <div class="col-4 offset-4" v-if="ethereum_connected && ethereum_unlocked && !desktop_mode" style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2); zoom: 0.8" hidden>
@@ -224,7 +229,7 @@
                         </div>
 
                         <div class="text-center alert alert-info">
-                            <p><strong>If you haven't already, KYC &amp; whitelist your address <c-button href="/#/kyc">click here</c-button></strong></p>
+                            <p><strong>If you haven't already, KYC &amp; whitelist your address <c-button href="/#/kyc" @click="gaStep(4)">click here</c-button></strong></p>
                         </div>
                     </c-block>
                 </div>
@@ -240,7 +245,7 @@
                             </div>
                             <input type="text" class="form-control" ref="input" placeholder="Public Ethereum address...." v-model="purchaseAddress" />
                         </div>
-                        <p>Haven't verified yet? You'll need to do that! <c-button class="" href="/#/kyc" style="margin: 0 auto">Verify Account</c-button></p>
+                        <p>Haven't verified yet? You'll need to do that! <c-button class="" href="/#/kyc" style="margin: 0 auto" @click="gaStep(5)">Verify Account</c-button></p>
                     </c-block>
                 </div>
 
@@ -251,7 +256,7 @@
                 <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && desktop_mode && (!account.is_verified && !account.is_verifying)" style="text-align: center">
                     <h2 style="text-align: center">Oops, you haven't verified your account yet. <br />You'll need to do this to participate.</h2>
                     <br />
-                    <c-button class="c-btn-lg" href="/#/account/verification" style="margin: 0 auto">Verify Account</c-button>
+                    <c-button class="c-btn-lg" href="/#/account/verification" style="margin: 0 auto" @click="gaStep(6)">Verify Account</c-button>
                     <br /><br />
                     <c-button status="underline" size="sm" @click="manualOverride">Click here if you're pretty sure you've verified</c-button>
                     <br /><br />
@@ -449,11 +454,11 @@
                                     <p>
                                         Purchase Amount: {{ purchaseHBX }} HBX
                                         <br />
-                                        Purchase Address: <a :href="`https://etherscan.io/address/${purchaseAddress}`"><strong>{{ purchaseAddress }}</strong></a>
+                                        Purchase Address: <a :href="`https://etherscan.io/address/${purchaseAddress}`" @click="gaStep(20)"><strong>{{ purchaseAddress }}</strong></a>
                                         <br />
                                         Payment Amount: {{ purchaseETH }} ETH
                                         <br />
-                                        <template v-if="tokenContractAddress">Payment Address: <a :href="`https://etherscan.io/address/${tokenContractAddress}`"><strong>{{ tokenContractAddress }}</strong></a></template>
+                                        <template v-if="tokenContractAddress">Payment Address: <a :href="`https://etherscan.io/address/${tokenContractAddress}`" @click="gaStep(21)"><strong>{{ tokenContractAddress }}</strong></a></template>
                                         <br />
                                         <template v-if="!tokenContractAddress" class="alert alert-warning">No contract address. Check your <a href="/#/settings/protocol">Protocol Settings</a></template>
                                     </p>
@@ -632,11 +637,23 @@ export default {
             && this.jurisdictionAgreement
             && this.residentAgreement
             && this.purchaseETH <= (this.maxPurchaseUSD / this.ETH2USD)
-        }
+        },
+        soldDollars() { return this.$store.state.application.externalState['tokenSale.soldDollars'] },
+        soldTokens() { return this.$store.state.application.externalState['tokenSale.soldTokens'] }
     },
     methods: {
         calcHBX() {
+            this.gaStep(3)
+
             this.purchaseHBX = (this.purchaseETH * this.ETH2USD) / 0.055
+        },
+        showContractAddress() {
+            this.gaStep(11)
+
+            this.$store.commit('application/activateModal', 'token-contract')
+        },
+        gaStep(step) {
+            window.ga('send', 'event', 'Token', 'Token Purchase', 'Token Purchase Step ' + step, step, {'NonInteraction': 1})
         },
         manualOverride() {
             this.override = true
@@ -659,6 +676,8 @@ export default {
             window.scrollTo(0, top);
         },
         unlockWallet() {
+            this.gaStep(2)
+
             if (typeof window.web3 !== 'undefined') {
                 if (window.ethereum) {
                     try {
@@ -685,6 +704,8 @@ export default {
             }
         },
         confirmPurchase() {
+            this.gaStep(8)
+
             if (this.desktop_mode) {
                 Bridge.sendTransactionRequest({
                     fromAddress: this.purchaseAddress,
@@ -708,17 +729,22 @@ export default {
                     gasPrice: web3.toWei('10', 'gwei')
                 }, (err, transactionHash) => {
                     if (err) {
+                        this.gaStep(9)
+
                         this.purchaseSuccessful = false
                         this.purchaseError = "An error occurred sending with MetaMask. Please try again or contact support."
                         return
                     }
 
+                    this.gaStep(10)
                     this.purchaseSuccessful = true
                     this.transactionHash = transactionHash
                 })
             }
         },
         proceed() {
+            this.gaStep(7)
+
             this.errors = []
 
             if (this.canContinue) {

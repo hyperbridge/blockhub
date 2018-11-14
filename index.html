@@ -43,18 +43,15 @@
           content="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/msapplication-icon-144x144.png"/>
     <meta name="msapplication-TileColor" content="#000000"/>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="/static/js/vendors/gtag.js"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
+        (function (i, s, o, g, r, a, m) {
+          i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+          }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-
-        gtag('config', 'UA-110820930-3');
+        ga('create', 'UA-110820930-3', 'blockhub.gg')
     </script>
 
     <script>
@@ -533,7 +530,7 @@ window.resetSettings = function() {
 
 function isWhiteSpace(coords) {
   var element = document.elementFromPoint(coords.x, coords.y);
-  var whitespace = $(document).add('body, html, #app, #header-bg, #startup-loader, #critical-error, #left-bg, #right-bg, .startup-loader__container');
+  var whitespace = $(document).add('body, html, #business-app, #app, #header-bg, #startup-loader, #critical-error, #left-bg, #right-bg, .startup-loader__container');
 
   return (whitespace.get().indexOf(element) > -1) ? true : false;
 }

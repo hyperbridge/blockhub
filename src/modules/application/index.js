@@ -45,10 +45,11 @@ const updateState = (savedData, updatedState = {}) => {
             message: null
         },
         operating_system: getOS(),
-        account: DB.application.config.data[0].account,
-        darklaunch_flags: DB.application.config.data[0].darklaunch_flags,
+        account: DB.application.config.data[0].account || {},
+        darklaunch_flags: DB.application.config.data[0].darklaunch_flags || [],
         developer_mode: savedData.developer_mode != null ? savedData.developer_mode : DB.application.config.data[0].account && !!DB.application.config.data[0].account.current_identity.developer_id,
         environment_mode: savedData.environment_mode != null ? savedData.environment_mode : BlockHub.GetMode(),
+        externalState: {},
         ...updatedState
     }
 
@@ -127,6 +128,10 @@ export const actions = {
         store.commit('updateState', state)
     },
     activateModal(store, payload) {
+        if (payload) {
+            window.ga('send', 'event', 'Modal', 'Show Modal', 'Show Modal', payload, { 'NonInteraction': 1 })
+        }
+
         if (store.state.desktop_mode) {
             if (store.state.signed_in) {
                 store.commit('activateModal', payload)

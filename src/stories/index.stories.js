@@ -9,13 +9,37 @@ import {withViewport} from '@storybook/addon-viewport'
 import {withKnobs, text, boolean, number, object} from '@storybook/addon-knobs/vue'
 
 import '../css/styles.scss'
+import '@/main'
 import '@/filters'
 import '@/directives'
 import '@/components'
+import store from '@/store'
+import router from '@/router'
 
+import * as Bridge from '@/framework/desktop-bridge'
 import * as data from './components-data'
 
+
+const StoreDummy = {
+    install(Vue, options) {
+        Vue.prototype.$store = store
+    }
+}
+
+Vue.use(StoreDummy)
+
 //import '!style-loader!css-loader!./styles.scss'
+
+window.ga = function() {}
+
+Bridge.init(store, router)
+
+store.dispatch('database/init')
+store.dispatch('application/init')
+store.dispatch('marketplace/init')
+store.dispatch('funding/init')
+
+console.log('BlockHub initialized.')
 
 
 addDecorator(withViewport('desktop'))
@@ -4765,15 +4789,15 @@ storiesOf('Landing Page', module)
 storiesOf('Token Sale Box', module)
     .add('default', () => ({
         components: {
-            'c-toke-sale': (resolve) => require(['@/ui/components/token-sale-box'], resolve),
+            'c-token-sale': (resolve) => require(['@/ui/components/token-sale-box'], resolve),
         },
         template: `
         <div class="p-5" style="width: 1200px;">
-            <c-toke-sale 
+            <c-token-sale 
             :hardCap="18000000"
             :softCap="7500000"
             :volume="1000000000"
-            :soldDollar="23455424"
+            :soldDollars="23455424"
             :soldTokens="243424234"
             />
         </div>`

@@ -42,7 +42,7 @@
                         Sold
                     </strong>
                     <span class="ml-4">
-                        $ {{ soldDollar | convertCurrency }} USD
+                        {{ soldDollars | convertCurrency }} USD
                     </span>
                     <span class="ml-3">
                         {{ soldTokens | numeralFormat(0,0) }} HBX
@@ -65,7 +65,7 @@
                             Hard Cap
                         </strong>
                         <span>
-                            $ {{ hardCap | convertCurrency }} USD
+                            {{ hardCap | convertCurrency }} USD
                         </span>
                     </div>
                     <div>
@@ -73,7 +73,7 @@
                             Soft Cap
                         </strong>
                         <span>
-                            $ {{ softCap | convertCurrency }} USD
+                            {{ softCap | convertCurrency }} USD
                         </span>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
             hardCap: [ Number, String ],
             softCap: [ Number, String ],
             volume: [ Number, String ],
-            soldDollar: [ Number, String ],
+            soldDollars: [ Number, String ],
             soldTokens: [ Number, String ]
         },
         computed:{

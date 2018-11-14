@@ -1,6 +1,6 @@
 <template>
     <article>
-        <c-block  v-if="transaction" :title="'Transaction: ' + this.id" class="transaction">
+        <c-block :title="`Trading with ${trx.contractor.name}`" class="transaction">
             <div class="transaction__block">
                 <div class="transaction__headings">
                     <h4>You offered</h4>
@@ -15,9 +15,7 @@
                         />
                     </div>
                     <div class="management__inventory-explorer">
-                        <!-- <c-list-submenu-2 :list="you.inventoryGrouped">
-                        </c-list-submenu-2> -->
-                        <c-list-submenu :items="users.you.inventoryGrouped" isParent>
+                        <c-list-submenu :items="trx.you.inventoryGrouped" isParent>
                             <c-list-submenu
                                 slot="sublist"
                                 slot-scope="{ sublist }"
@@ -33,6 +31,8 @@
                                         :asset="props.list"
                                         @click.native="yoursOffer.push(props.list)"
                                     />
+                                    <!-- @click.native="updateTransaction(props.list)" -->
+                                    <!-- @click.native="yoursOffer.push(props.list)" -->
                                     <!-- {{ list.length > 1 ? list.length : '' }} -->
                                 </div>
                             </c-list-submenu>
@@ -47,9 +47,9 @@
             />
             <div class="transaction__block">
                 <div class="transaction__headings">
-                    <h4>For {{ users.contractor.name }}'s</h4>
-                    <c-author :author="users.contractor"/>
-                    <h4>{{ users.contractor.name }}'s inventory</h4>
+                    <h4>For {{ trx.contractor.name }}'s</h4>
+                    <c-author :author="trx.contractor"/>
+                    <h4>{{ trx.contractor.name }}'s inventory</h4>
                 </div>
                 <div class="transaction__management">
                     <div class="management__selected-assets">
@@ -60,7 +60,7 @@
                         />
                     </div>
                     <div class="management__inventory-explorer">
-                        <c-list-submenu :items="users.contractor.inventoryGrouped" isParent>
+                        <c-list-submenu :items="trx.contractor.inventoryGrouped" isParent>
                             <c-list-submenu
                                 slot="sublist"
                                 slot-scope="{ sublist }"
@@ -75,7 +75,6 @@
                                         :asset="props.list"
                                         @click.native="theirOffer.push(props.list)"
                                     />
-                                    <!-- {{ list.length > 1 ? list.length : '' }} -->
                                 </div>
                             </c-list-submenu>
                         </c-list-submenu>
@@ -86,25 +85,19 @@
                 <c-button
                     status="info"
                     icon_hide
+                    @click="updateTrx()"
                 >Update transaction</c-button>
             </div>
         </c-block>
-        <c-block v-else :title="'Transaction: ' + tradeId" class="transaction">
-            <p>Transaction with id <i>{{ id }}</i> doesn't exist</p>
-        </c-block>
-        <c-block-menu :links="links">
-            Test
-        </c-block-menu>
     </article>
 </template>
 
 
 <script>
     import { arrayHandler } from '@/mixins';
-    // import getters from '@/store/temporary-getters';
 
     export default {
-        props: ['id'],
+        props: ['id', 'trxa', 'trx'],
         mixins: [arrayHandler],
         components: {
             'c-block': (resolve) => require(['@/ui/components/block'], resolve),
@@ -121,17 +114,27 @@
         },
         data() {
             return {
-                yoursOffer: [],
-                theirOffer: [],
-                links: [
-                    { title: 'Offer', to: '/marketplace/trade' },
-                    { title: 'Chat', to: { name: 'Marketplace Trade Explorer' }},
-                ]
+                yoursOffer: [...this.trx.yourOffer],
+                theirOffer: [...this.trx.contractorOffer]
             }
         },
         methods: {
-            checkClick(e) {
-                console.log(e)
+            updateTransaction(target, asset, action = 'create') {
+                this.$store.dispatch(
+                    `${action}WeakRel`,
+                    [`assets/transactions/${target}Offer`, this.id, asset.id]
+                );
+            },
+            updateTrx() {
+                // rename yoursOffer => yourOffer
+                const { yoursOffer, theirOffer } = this;
+                this.$store.dispatch(
+                    'updateV2',
+                    ['assets/transactions', this.id, {
+                        yourOffer: yoursOffer.map(asset => asset.id),
+                        theirOffer: theirOffer.map(asset => asset.id)
+                    }]
+                );
             },
             addTransactionAsset(asset, target) {
                 const { tradeId } = this;
@@ -142,106 +145,10 @@
             }
         },
         computed: {
-            inventory() {
-                return {}
-                const extractor = (target, offer) => {
-                    const { inventory: originalInv } = this.transaction[target].user;
-                    const reduced = originalInv
-                        .reduce((inventory, asset) => {
-                            const { product_name } = asset;
-                            if (inventory[product_name]) inventory[product_name].push(asset);
-                            else inventory[product_name] = [asset];
-                            return inventory;
-                        }, {});
-
-                    return Object.keys(reduced)
-                        .reduce((inventory, productKey) => {
-                            inventory[productKey] = reduced[productKey].reduce((assets, asset, productAssets) => {
-                                const { name } = asset;
-
-                                const offerAssets = this[offer].filter(offAsset => offAsset.id === asset.id);
-                                const invAssets = originalInv.filter(invAsset => invAsset.id === asset.id);
-
-                                if (assets[name] && !this[offer].includes(asset)) {
-                                    assets[name].push(asset);
-                                }
-                                else if (offerAssets.length !== invAssets.length) {
-                                    assets[name] = [asset];
-                                }
-
-                                return assets;
-                            }, {});
-                            return inventory;
-                        }, {});
-                }
-
-                return {
-                    yours: extractor('me', 'yoursOffer'),
-                    their: extractor('contractor', 'theirOffer')
-                };
-            },
-            assetsStore() {
-                return this.$store.state.assets;
-            },
-            assets() {
-                return this.assetsStore.assets;
-            },
-            transaction() {
-                return this.$store.state.assets.trxs[this.id];
-            },
-            products() {
-                return this.$store.state.marketplace.products;
-            },
-            you() {
-                return this.$store.getters['assets/users'][this.trx.you];
-            },
-            contractor() {
-                return this.$store.getters['assets/users'][this.trx.contractor];
-            },
-            users() {
-                const { assets, transaction, products } = this;
-                const { users } = this.$store.state.assets;
-
-                const you = users[transaction.you];
-                const yourInventory = you.inventory.map(id => assets[id]);
-
-                const contractor = users[transaction.contractor];
-                const contractorsInventory = contractor.inventory.map(id => assets[id]);
-
-                return {
-                    you: {
-                        ...you,
-                        inventory: yourInventory,
-                        inventoryGrouped: yourInventory.reduce((grouped, asset) => {
-                            const product = products[asset.product];
-                            grouped[product.name] = grouped[product.name] || [];
-                            grouped[product.name] = [...grouped[product.name], asset];
-                            return grouped;
-                        }, {})
-                    },
-                    contractor: {
-                        ...contractor,
-                        inventory: contractorsInventory,
-                        inventoryGrouped: contractorsInventory.reduce((grouped, asset) => {
-                            const product = products[asset.product];
-                            grouped[product.name] = grouped[product.name] || [];
-                            grouped[product.name] = [...grouped[product.name], asset];
-                            return grouped;
-                        }, {})
-                    }
-                };
-            },
-            tr() {
-                const trx = this.$store.state.assets.trxs[this.id];
-                return {
-                    ...trx
-                };
-            },
             price() {
                 const { yoursOffer, theirOffer } = this;
                 const round = num => Math.round(num * 100) / 100;
 
-                // const {  }
                 const yours = round(
                     yoursOffer.reduce((price, asset) => price += asset.price.current, 0)
                 );
@@ -253,12 +160,6 @@
                     their,
                     sum: round(yours - their)
                 };
-            },
-            tradeId() {
-                return this.$route.params.tradeId;
-            },
-            trx() {
-                return this.transaction;
             }
         }
     }

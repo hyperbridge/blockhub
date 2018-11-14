@@ -39,12 +39,12 @@
                 required: true
             },
             yours: Number,
-            their: Number,
-            interval: null
+            their: Number
         },
         data() {
             return {
-                displayedPrice: 0
+                displayedPrice: 0,
+                interval: 0
             }
         },
         computed: {
