@@ -12,7 +12,7 @@
                         @click="activeTab = index + 1"
                     >
                         {{ title | upperFirstChar }}
-                        <c-tag-count :number="offers[title].length"/>
+                        <c-tag-count :number="offersCount[title]"/>
                     </a>
                 </li>
             </ul>
@@ -37,9 +37,8 @@
 </template>
 
 <script>
-    import getters from '@/store/temporary-getters';
-
     export default {
+        props: ['transactions'],
         components: {
             'c-tabs': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve),
             'c-tab': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
@@ -52,34 +51,14 @@
             }
         },
         computed: {
-            notifsCount() {
-                return {};
-                /* WIP */
-                return {
-                    received: this.offers.received.filter(offer => offer.new).length,
-                    sent: this.offers.sent.filter(offer => offer.new).length,
-                }
-            },
-            offers() {
-                const { transactions } = this.$store.state.assets;
-                return transactions.reduce((offers, transaction) => {
-                    const { createdBy, status } = transaction;
-                    const target = createdBy !== 1
-                        ? status === 'closed'
-                            ? 'closed'
-                            : 'received'
-                        : 'sent';
-                    offers[target].push(transaction);
-                    return offers;
-                }, { received: [], sent: [], closed: [] });
-            },
-            transactions() {
+            transactionsX() {
+                return;
                 return this.$store.getters['assets/transactionsArray'];
             },
             userId() {
                 return this.$store.state.application.account.id;
             },
-            offers2() {
+            offers() {
                 const { userId } = this;
                 return this.transactions.reduce((offers, trx) => {
 
@@ -92,7 +71,7 @@
                 }, { received: [], sent: [], closed: [] });
             },
             offersCount() {
-                return Object.entries(this.offers2).reduce((count, [name, offers]) =>
+                return Object.entries(this.offers).reduce((count, [name, offers]) =>
                     ({ ...count, [name]: offers.length })
                 , { received: 0, sent: 0, closed: 0 });
             }

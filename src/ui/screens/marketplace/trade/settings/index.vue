@@ -20,9 +20,9 @@
                 Generate new trade URL
             </c-button>
         </section>
-        <button @click="storeTest()">
+        <!-- <button @click="storeTest()">
             Commit/Dispatch create
-        </button>
+        </button> -->
 
         <!-- <input type="text"
             :value="val"

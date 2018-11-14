@@ -2,15 +2,20 @@
     <div>
         <!-- <button class="create-offer-btn">Create new offer</button> -->
         <c-block-menu :links="links">
-            <router-view/>
+            <c-spinner v-if="loading"/>
+            <router-view v-else :transactions="results"/>
         </c-block-menu>
     </div>
 </template>
 
 <script>
+    import transactionsData from '@/db/api/asset-transactions';
+    import moment from 'moment';
+
     export default {
         components: {
             'c-block-menu': (resolve) => require(['@/ui/components/block/menu'], resolve),
+            'c-spinner': (resolve) => require(['@/ui/components/spinner'], resolve),
         },
         data() {
             return {
@@ -19,7 +24,32 @@
                     { title: 'Explorer', to: { name: 'Marketplace Trade Explorer' }},
                     { title: 'History', to: { name: 'Marketplace Trade History' }},
                     { title: 'Settings', to: { name: 'Marketplace Trade Settings' }}
-                ]
+                ],
+                results: [],
+                loading: true
+            }
+        },
+        computed: {
+            identity() {
+                return this.$store.state.application.account.current_identity;
+            }
+        },
+        methods: {
+            async loadData() {
+                this.loading = true;
+                await new Promise(res => setTimeout(res, 2000));
+                this.results = transactionsData
+                    .filter(trx => trx.you.id == this.identity.id)
+                    .map(trx => ({ ...trx, createdAt: moment() }));
+                this.loading = false;
+            }
+        },
+        created() {
+            this.loadData();
+        },
+        watch: {
+            'identity.id'() {
+                this.loadData();
             }
         }
     }
