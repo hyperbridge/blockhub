@@ -38,6 +38,7 @@
 
 <script>
     export default {
+        props: ['transactions'],
         components: {
             'c-tabs': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve),
             'c-tab': (resolve) => require(['@/ui/components/tab/tab-universal'], resolve),
@@ -50,7 +51,8 @@
             }
         },
         computed: {
-            transactions() {
+            transactionsX() {
+                return;
                 return this.$store.getters['assets/transactionsArray'];
             },
             userId() {

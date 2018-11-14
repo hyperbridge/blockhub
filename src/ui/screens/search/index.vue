@@ -1,266 +1,266 @@
 <template>
     <c-layout>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <c-block title="Search" class="searching-box">
-                            <div class="search__main">
-                                <c-input-searcher
-                                    v-model="phrase"
-                                    placeholder="Search for games"
-                                    aria-placeholder="Search for games"
-                                />
-                                <c-button
-                                    status="success"
-                                    size="lg"
-                                    icon="sliders-h"
-                                    data-toggle="collapse"
-                                    data-target="#expand-filters"
-                                    aria-expanded="false"
-                                    aria-controls="collapseFilters"
-                                    @click="expandFilters = !expandFilters"
-                                >Filters</c-button>
-                            </div>
-                            <transition name="slide-in-top">
-                            <div
-                                v-if="expandFilters"
-                                class="search-filters__container"
-                            >
-                                <div class="filter-box">
-                                    <h4>
-                                        Specials:
-                                        <span v-show="selectedSpecials.length">
-                                            ({{ selectedSpecials.length }})
-                                        </span>
-                                    </h4>
-                                    <c-checkbox
-                                        v-for="(tag, index) in systemTags"
-                                        :key="index"
-                                        :id="`specials-${tag.value}`"
-                                        v-model="tag.selected"
-                                    >
-                                        {{ tag.value | replaceLoDash | upperFirstChar }}
-                                    </c-checkbox>
-                                </div>
-                                <div class="filter-box">
-                                    <h4>
-                                        Price range:
-                                        <span v-show="price.min && price.max">
-                                            ({{ price.min }} - {{ price.max }})
-                                        </span>
-                                    </h4>
-                                    <p class="margin-top-20">Minimum:</p>
-                                    <c-range-slider
-                                        v-model.number="price.min"
-                                        :min="0"
-                                        :max="60"
-                                    />
-                                    <p class="margin-top-20">Maximum:</p>
-                                    <c-range-slider
-                                        v-model.number="price.max"
-                                        :max="300"
-                                    />
-                                </div>
-                                <div class="filter-box">
-                                    <h4>
-                                        Genres:
-                                        <span v-show="selectedGenres.length">
-                                            ({{ selectedGenres.length }})
-                                        </span>
-                                    </h4>
-                                    <c-list
-                                        :items="selectableTags"
-                                        @click="tag => tag.selected = !tag.selected"
-                                    />
-                                </div>
-                                <div class="filter-box">
-                                    <h4>
-                                        Languages:
-                                        <span v-show="selectedLanguages.length">
-                                            ({{ selectedLanguages.length }})
-                                        </span>
-                                    </h4>
-                                    <div>
-                                        <c-list
-                                            :items="selectableLanguages"
-                                            @click="item => item.selected = !item.selected"
-                                        >
-                                        </c-list>
-                                    </div>
-                                </div>
-                                <div class="filter-box">
-                                    <h4>Community:</h4>
-                                    <p class="margin-top-20">Size:</p>
-                                    <c-range-slider
-                                        v-model.number="communitySize"
-                                        :max="1000"
-                                    />
-                                    <p class="margin-top-20">Active Users:</p>
-                                    <c-range-slider
-                                        v-model.number="activeUsers"
-                                        :max="5000"
-                                    />
-                                </div>
-                                <div class="filter-box">
-                                    <h4>System:</h4>
-                                    <c-checkbox
-                                        v-for="os in platforms"
-                                        :key="os.prop"
-                                        :id="`specials-${os.prop}`"
-                                        v-model="os.selected"
-                                    >
-                                        <c-icon
-                                            cat="fab"
-                                            class="platform-icon"
-                                            :name="os.icon"
-                                            :class="[ os.selected
-                                                ? 'icon--active'
-                                                : 'icon--inactive'
-                                            ]"
-                                        />
-                                        {{ os.name }}
-                                    </c-checkbox>
-                                </div>
-                            </div>
-                            </transition>
-                        </c-block>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <c-block title="Search" class="searching-box">
+                        <div class="search__main">
+                            <c-input-searcher
+                                v-model="phrase"
+                                placeholder="Search for games"
+                                aria-placeholder="Search for games"
+                            />
+                            <c-button
+                                status="success"
+                                size="lg"
+                                icon="sliders-h"
+                                data-toggle="collapse"
+                                data-target="#expand-filters"
+                                aria-expanded="false"
+                                aria-controls="collapseFilters"
+                                @click="expandFilters = !expandFilters"
+                            >Filters</c-button>
+                        </div>
                         <transition name="slide-in-top">
-                            <div class="active-filters" v-if="filtersActive">
-                                <h3>Active filters</h3>
-                                <div class="active-filters__content">
-                                    <c-option-tag
-                                        v-if="phrase.length"
-                                        title="NAME:"
-                                        :text="phrase"
-                                        @delete="phrase = ''"
-                                    />
-                                    <c-option-tag
-                                        v-if="selectedGenres.length"
-                                        title="GENRES:"
-                                        @delete="selectedGenres.forEach(genre => genre.selected = false)"
-                                    >
-                                        <c-option-tag
-                                            v-for="(genre, index) in selectedGenres"
-                                            :key="index"
-                                            :text="genre.name"
-                                            @delete="genre.selected = false"
-                                            isChildren
-                                        />
-                                    </c-option-tag>
-                                    <c-option-tag
-                                        v-if="selectedSpecials.length"
-                                        title="SPECIALS:"
-                                        @delete="selectedSpecials.forEach(tag => tag.selected = false)"
-                                    >
-                                        <c-option-tag
-                                            v-for="(tag, index) in selectedSpecials"
-                                            :key="index"
-                                            :text="tag.value | replaceLoDash | upperFirstChar"
-                                            @delete="tag.selected = false"
-                                            isChildren
-                                        />
-                                    </c-option-tag>
-                                    <c-option-tag
-                                        v-if="price.min > 0 || price.max > 0"
-                                        title="PRICE RANGE:"
-                                        @delete="price.min = 0; price.max = 0"
-                                    >
-                                        <c-option-tag
-                                            v-if="price.min"
-                                            title="Minimum:"
-                                            :text="price.min"
-                                            @delete="price.min = 0"
-                                            isChildren
-                                        />
-                                        <c-option-tag
-                                            v-if="price.max"
-                                            title="Maximum:"
-                                            :text="price.max"
-                                            isChildren
-                                            @delete="price.max = 0"
-                                        />
-                                    </c-option-tag>
-                                    <c-option-tag
-                                        v-if="selectedLanguages.length"
-                                        title="LANGUAGES:"
-                                        @delete="selectableLanguages.forEach(lang => lang.selected = false)"
-                                    >
-                                        <c-option-tag
-                                            v-for="(lang, index) in selectedLanguages"
-                                            :key="index"
-                                            :text="lang.name"
-                                            @delete="lang.selected = false"
-                                            isChildren
-                                        />
-                                    </c-option-tag>
-                                    <c-option-tag
-                                        v-if="communitySize || activeUsers"
-                                        title="COMMUNITY:"
-                                        @delete="communitySize = 0; activeUsers = 0"
-                                    >
-                                        <c-option-tag
-                                            v-if="communitySize"
-                                            title="Size:"
-                                            :text="communitySize"
-                                            @delete="communitySize = 0"
-                                            isChildren
-                                        />
-                                        <c-option-tag
-                                            v-if="activeUsers"
-                                            title="Active users:"
-                                            :text="activeUsers"
-                                            @delete="activeUsers = 0"
-                                            isChildren
-                                        />
-                                    </c-option-tag>
-                                    <c-option-tag
-                                        v-if="selectedPlatforms.length"
-                                        title="PLATFORMS:"
-                                        @delete="selectedPlatforms.forEach(os => os.selected = false)"
-                                    >
-                                        <c-option-tag
-                                            v-for="(os, index) in selectedPlatforms"
-                                            :key="index"
-                                            :text="os.name | upperFirstChar"
-                                            @delete="os.selected = false"
-                                            isChildren
-                                        />
-                                    </c-option-tag>
-                                </div>
-                            </div>
-                        </transition>
-                        <h3>Results</h3>
-                        <div class="results__container">
-                            <div class="results">
-                                <c-spinner v-if="isTyping"/>
-                                <div v-else-if="!resultsFiltered.length">
-                                    <p>No results were found for provided filters</p>
-                                    <c-button
-                                        @click="clearFilters()"
-                                        status="info"
-                                    >Clear filters</c-button>
-                                    <c-button @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>
-                                </div>
-                                <c-content-navigation
-                                    v-else
-                                    :items="resultsFiltered"
-                                    :setItemsLimit="12"
-                                    :setItemsPerPage="12"
+                        <div
+                            v-if="expandFilters"
+                            class="search-filters__container"
+                        >
+                            <div class="filter-box">
+                                <h4>
+                                    Specials:
+                                    <span v-show="selectedSpecials.length">
+                                        ({{ selectedSpecials.length }})
+                                    </span>
+                                </h4>
+                                <c-checkbox
+                                    v-for="(tag, index) in systemTags"
+                                    :key="index"
+                                    :id="`specials-${tag.value}`"
+                                    v-model="tag.selected"
                                 >
-                                    <c-game-grid
-                                        slot-scope="{ items }"
-                                        :itemInRow="2"
-                                        :showRating="false"
-                                        :items="items"
-                                        itemBg="transparent"
-                                        showTime
-                                    />
-                                </c-content-navigation>
+                                    {{ tag.value | replaceLoDash | upperFirstChar }}
+                                </c-checkbox>
                             </div>
+                            <div class="filter-box">
+                                <h4>
+                                    Price range:
+                                    <span v-show="price.min && price.max">
+                                        ({{ price.min }} - {{ price.max }})
+                                    </span>
+                                </h4>
+                                <p class="margin-top-20">Minimum:</p>
+                                <c-range-slider
+                                    v-model.number="price.min"
+                                    :min="0"
+                                    :max="60"
+                                />
+                                <p class="margin-top-20">Maximum:</p>
+                                <c-range-slider
+                                    v-model.number="price.max"
+                                    :max="300"
+                                />
+                            </div>
+                            <div class="filter-box">
+                                <h4>
+                                    Genres:
+                                    <span v-show="selectedGenres.length">
+                                        ({{ selectedGenres.length }})
+                                    </span>
+                                </h4>
+                                <c-list
+                                    :items="selectableTags"
+                                    @click="tag => tag.selected = !tag.selected"
+                                />
+                            </div>
+                            <div class="filter-box">
+                                <h4>
+                                    Languages:
+                                    <span v-show="selectedLanguages.length">
+                                        ({{ selectedLanguages.length }})
+                                    </span>
+                                </h4>
+                                <div>
+                                    <c-list
+                                        :items="selectableLanguages"
+                                        @click="item => item.selected = !item.selected"
+                                    >
+                                    </c-list>
+                                </div>
+                            </div>
+                            <div class="filter-box">
+                                <h4>Community:</h4>
+                                <p class="margin-top-20">Size:</p>
+                                <c-range-slider
+                                    v-model.number="communitySize"
+                                    :max="1000"
+                                />
+                                <p class="margin-top-20">Active Users:</p>
+                                <c-range-slider
+                                    v-model.number="activeUsers"
+                                    :max="5000"
+                                />
+                            </div>
+                            <div class="filter-box">
+                                <h4>System:</h4>
+                                <c-checkbox
+                                    v-for="os in platforms"
+                                    :key="os.prop"
+                                    :id="`specials-${os.prop}`"
+                                    v-model="os.selected"
+                                >
+                                    <c-icon
+                                        cat="fab"
+                                        class="platform-icon"
+                                        :name="os.icon"
+                                        :class="[ os.selected
+                                            ? 'icon--active'
+                                            : 'icon--inactive'
+                                        ]"
+                                    />
+                                    {{ os.name }}
+                                </c-checkbox>
+                            </div>
+                        </div>
+                        </transition>
+                    </c-block>
+                    <transition name="slide-in-top">
+                        <div class="active-filters" v-if="filtersActive">
+                            <h3>Active filters</h3>
+                            <div class="active-filters__content">
+                                <c-option-tag
+                                    v-if="phrase.length"
+                                    title="NAME:"
+                                    :text="phrase"
+                                    @delete="phrase = ''"
+                                />
+                                <c-option-tag
+                                    v-if="selectedGenres.length"
+                                    title="GENRES:"
+                                    @delete="selectedGenres.forEach(genre => genre.selected = false)"
+                                >
+                                    <c-option-tag
+                                        v-for="(genre, index) in selectedGenres"
+                                        :key="index"
+                                        :text="genre.name"
+                                        @delete="genre.selected = false"
+                                        isChildren
+                                    />
+                                </c-option-tag>
+                                <c-option-tag
+                                    v-if="selectedSpecials.length"
+                                    title="SPECIALS:"
+                                    @delete="selectedSpecials.forEach(tag => tag.selected = false)"
+                                >
+                                    <c-option-tag
+                                        v-for="(tag, index) in selectedSpecials"
+                                        :key="index"
+                                        :text="tag.value | replaceLoDash | upperFirstChar"
+                                        @delete="tag.selected = false"
+                                        isChildren
+                                    />
+                                </c-option-tag>
+                                <c-option-tag
+                                    v-if="price.min > 0 || price.max > 0"
+                                    title="PRICE RANGE:"
+                                    @delete="price.min = 0; price.max = 0"
+                                >
+                                    <c-option-tag
+                                        v-if="price.min"
+                                        title="Minimum:"
+                                        :text="price.min"
+                                        @delete="price.min = 0"
+                                        isChildren
+                                    />
+                                    <c-option-tag
+                                        v-if="price.max"
+                                        title="Maximum:"
+                                        :text="price.max"
+                                        isChildren
+                                        @delete="price.max = 0"
+                                    />
+                                </c-option-tag>
+                                <c-option-tag
+                                    v-if="selectedLanguages.length"
+                                    title="LANGUAGES:"
+                                    @delete="selectableLanguages.forEach(lang => lang.selected = false)"
+                                >
+                                    <c-option-tag
+                                        v-for="(lang, index) in selectedLanguages"
+                                        :key="index"
+                                        :text="lang.name"
+                                        @delete="lang.selected = false"
+                                        isChildren
+                                    />
+                                </c-option-tag>
+                                <c-option-tag
+                                    v-if="communitySize || activeUsers"
+                                    title="COMMUNITY:"
+                                    @delete="communitySize = 0; activeUsers = 0"
+                                >
+                                    <c-option-tag
+                                        v-if="communitySize"
+                                        title="Size:"
+                                        :text="communitySize"
+                                        @delete="communitySize = 0"
+                                        isChildren
+                                    />
+                                    <c-option-tag
+                                        v-if="activeUsers"
+                                        title="Active users:"
+                                        :text="activeUsers"
+                                        @delete="activeUsers = 0"
+                                        isChildren
+                                    />
+                                </c-option-tag>
+                                <c-option-tag
+                                    v-if="selectedPlatforms.length"
+                                    title="PLATFORMS:"
+                                    @delete="selectedPlatforms.forEach(os => os.selected = false)"
+                                >
+                                    <c-option-tag
+                                        v-for="(os, index) in selectedPlatforms"
+                                        :key="index"
+                                        :text="os.name | upperFirstChar"
+                                        @delete="os.selected = false"
+                                        isChildren
+                                    />
+                                </c-option-tag>
+                            </div>
+                        </div>
+                    </transition>
+                    <h3>Results</h3>
+                    <div class="results__container">
+                        <div class="results">
+                            <c-spinner v-if="isTyping"/>
+                            <div v-else-if="!resultsFiltered.length">
+                                <p>No results were found for provided filters</p>
+                                <c-button
+                                    @click="clearFilters()"
+                                    status="info"
+                                >Clear filters</c-button>
+                                <c-button @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>
+                            </div>
+                            <c-content-navigation
+                                v-else
+                                :items="resultsFiltered"
+                                :setItemsLimit="12"
+                                :setItemsPerPage="12"
+                            >
+                                <c-game-grid
+                                    slot-scope="{ items }"
+                                    :itemInRow="2"
+                                    :showRating="false"
+                                    :items="items"
+                                    itemBg="transparent"
+                                    showTime
+                                />
+                            </c-content-navigation>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </c-layout>
 </template>
 
