@@ -20,13 +20,52 @@
             <div class="container-fluid">
 
                 <div class="row">
+
+                    <div class="col-2 offset-10" v-if="product.id">
+                        <a :href="`/#/product/${product.id}`" class="btn btn-primary">PREVIEW</a>
+                    </div>
+
+                    <div class="col-md-12" v-if="successfulCreationMessage">
+                        <p class="alert alert-info">{{ successfulCreationMessage }}</p>
+                        <br /><br />
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="switch switch-sm col-sm-3">
                                 <label>Title</label>
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="" v-model="project.name">
+                                <input type="text" class="form-control" placeholder="" v-model="product.name">
+                                <span class="form-text"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="switch switch-sm col-sm-3">
+                                <label>Type</label>
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" v-model="product.type">
+                                <span class="form-text"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="switch switch-sm col-sm-3">
+                                <label>Description</label>
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" v-model="product.description">
+                                <span class="form-text"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="switch switch-sm col-sm-3">
+                                <label>Content</label>
+                            </label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" v-model="product.content">
+
+                                </textarea>
+
                                 <span class="form-text"></span>
                             </div>
                         </div>
@@ -37,8 +76,11 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-2 offset-10">
+                    <div class="col-2 offset-10" v-if="product.id">
                         <a href="#" target="_blank" class="btn btn-primary" @click.prevent="save">SAVE</a>
+                    </div>
+                    <div class="col-2 offset-10" v-if="!product.id">
+                        <a href="#" target="_blank" class="btn btn-primary" @click.prevent="create">CREATE</a>
                     </div>
                 </div>
             </div>
@@ -56,19 +98,22 @@
         },
         data() {
             return {
-                loadingState: true
+                loadingState: true,
+                creating: this.id === 'new',
+                successfulCreationMessage: false
             }
         },
         computed: {
-            funding() {
-                return this.$store.state.funding
+            marketplace() {
+                return this.$store.state.marketplace
             },
-            project() {
-                return this.id === 'new' ? this.funding.default_project : this.funding.projects[this.id]
+            product() {
+                return this.id === 'new' ? this.marketplace.default_product : this.marketplace.products[this.id]
             },
         },
         methods: {
-            save() {
+            create() {
+
                 const run = function(
                     local, 
                     DB, 
@@ -78,70 +123,84 @@
                     ReserveAPI, 
                     BABEL_PROMISE,
                     BABEL_GENERATOR,
-                    BABEL_REGENERATOR
+                    BABEL_REGENERATOR,
+                    params
                 ) {
-                    return new Promise(async () => {
-                        const project = {
-                            title: 'test',
-                            description: 'test',
-                            about: 'test',
-                            minContributionGoal: 1000,
-                            maxContributionGoal: 10000,
-                            contributionPeriod: 4,
-                            noRefunds: false,
-                            noTimeline: true,
-                        }
+                    const { product, profile } = params
+                    
+                    return new Promise(async (resolve, reject) => {
+                        const productRegistrationContract = MarketplaceAPI.api.ethereum.state.contracts.ProductRegistration.deployed
 
-                        const projectRegistrationContract = FundingAPI.api.ethereum.state.contracts.ProjectRegistration.deployed
+                        let created = false
 
-                        let resProjectId = null
-                        const getProjectId = new Promise((res) => {
-                            resProjectId = res
-                        })
+                        const watcher = productRegistrationContract.ProductCreated().watch((err, res) => {
+                            if (created) return
 
-                        const watcher = projectRegistrationContract.ProjectCreated().watch((err, res) => {
+                            created = true
+
                             if (err) {
-                                console.warn('[BlockHub][Funding] Error', err)
+                                console.warn('[BlockHub][Marketplace] Error', err)
 
                                 return reject(err)
                             }
 
-                            project.$loki = undefined
-                            project.id = res.args.projectId.toNumber()
+                            product.$loki = undefined
+                            product.id = res.args.productId.toNumber()
 
                             try {
-                                DB.funding.projects.insert(project)
+                                DB.marketplace.products.insert(product)
+                                console.log('after', product.id)
                             } catch (e) {
                                 try {
-                                    DB.funding.projects.update(project)
+                                    DB.marketplace.products.update(product)
                                 } catch (e) {
                                     reject(e)
                                 }
                             }
 
-                            resProjectId(project.id)
+                            DB.save()
+
+                            console.log('Product created')
+
+                            resolve(product)
                         })
 
-                        await projectRegistrationContract.createProject(
-                            project.title,
-                            project.description,
-                            project.about,
+                        // product.name = 'test'
+                        // product.type = 'game'
+                        // product.content = 'test'
+
+                        await productRegistrationContract.createProduct(
+                            product.name,
+                            product.type,
+                            product.content,
+                            { from: profile.public_address }
                         )
 
-                        watcher.stopWatching()
-
-                        const projectId = await getProjectId
-
-                        await projectRegistrationContract.setProjectContributionGoals(projectId, project.minContributionGoal, project.maxContributionGoal, project.contributionPeriod, { from: developerAccount });
-                        await projectRegistrationContract.setProjectTerms(projectId, project.noRefunds, project.noTimeline, { from: developerAccount });
-
-                        const remoteProject = await projectRegistrationContract.getProject(projectId);
-
-                        console.log(remoteProject)
+                        watcher.stopWatching(() => {
+                            // Must be async or tries to launch nasty process
+                        })
                     })
                 }
 
-                BlockHub.Bridge.sendCommand('eval', run.toString())
+                const cmd = {
+                    code: run.toString(),
+                    params: {
+                        profile: this.$store.state.application.account.current_identity,
+                        product: this.product
+                    }
+                }
+
+                BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
+                    if (productResult.id) {
+                        this.product.id = productResult.id
+                        this.successfulCreationMessage = "Congratulations, your product has been created!"
+
+                        this.marketplace.products[this.product.id] = this.product
+
+                        this.$router.push('/business/product/' + this.product.id)
+                    }
+                })
+
             }
         },
         mounted() {
