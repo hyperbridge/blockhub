@@ -57,6 +57,10 @@
         "hide_friends": false,
         "owner": 1,
         "inventory": [1, 2, 3, 4],
+        "transactions": [
+            "507f191e810c19729de860ea",
+            "31317f1we110c19729de8660"
+        ],
         "product_wishlist": { "3": true },
         "project_wishlist": {}
     },
@@ -72,6 +76,9 @@
         "hide_friends": false,
         "owner": 1,
         "inventory": [2, 6, 9],
+        "transactions": [
+            "651f1ew1312729de860e228a"
+        ],
         "product_wishlist": {},
         "project_wishlist": {}
     },
@@ -87,6 +94,9 @@
         "hide_friends": false,
         "owner": 1,
         "inventory": [7, 8 ,9],
+        "transactions": [
+            "312f191e810c19729de860ea"
+        ],
         "product_wishlist": {},
         "project_wishlist": {}
     },

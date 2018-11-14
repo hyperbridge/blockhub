@@ -10,6 +10,9 @@
                         </h2>
                     </transition>
 
+                    <p>You are connected to marketplace as: </p>
+                    {{ identity.name }}
+
                     <nav>
                         <ul class="marketplace-menu reset-list">
                             <li v-for="(link, index) in links" :key="index">
@@ -55,6 +58,11 @@
         },
         filters: {
             cut: val => val.replace('Marketplace ', '')
+        },
+        computed: {
+            identity() {
+                return this.$store.getters['application/account'].active_identity;
+            }
         }
     }
 </script>

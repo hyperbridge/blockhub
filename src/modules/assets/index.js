@@ -262,7 +262,7 @@ const assets = {
                 ...tags,
                 ...asset.system_tags.filter(tag =>
                     !tags.includes(tag)
-                )
+                 )
             ], []),
         assetsAttributes: (state, { assetsArray }) => assetsArray
             .reduce((attributes, asset) => [

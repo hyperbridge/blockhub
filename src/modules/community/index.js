@@ -120,15 +120,23 @@ const community = {
                     }, {})
                 }
             }), {}),
-        identities: ({ identities }, { users }) => Object
-            .entries(identities)
-            .reduce((populated, [id, identity]) => ({
+        identities: ({ identities }, getters, rootState, { ['assets/assets']: assets }) => Object
+            .values(identities)
+            .map(identity => ({
+                ...identity,
+                friends: identity.friends.map(id => identities[id]),
+                inventory: identity.inventory.map(id => extract(assets[id], ['image', 'price', 'product']))
+            }))
+            .reduce((populated, user) => ({
                 ...populated,
-                [id]: {
-                    ...identity,
-                    friends: identity.friends.map(id => identities[id]),
-                    inventory: users[identity.owner].inventory,
-                    inventoryGrouped: users[identity.owner].inventoryGrouped
+                [user.id]: {
+                    ...user,
+                    inventoryGrouped: user.inventory.reduce((grouped, asset) => {
+                        const { name } = asset.product;
+                        grouped[name] = grouped[name] || [];
+                        grouped[name] = [...grouped[name], asset];
+                        return grouped;
+                    }, {})
                 }
             }), {})
     }
