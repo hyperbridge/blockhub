@@ -1,5 +1,5 @@
 <template>
-    <div class="landing-level" :class="['level-size-' + size]">
+    <div class="landing-level" :class="['level-size-' + size]" :style="{'color' : textColor}">
         <div class="landing-level__text-left" v-if="textPosition == 'left'">
             <slot />
         </div>
@@ -19,6 +19,10 @@
         name: 'level',
         props:{
             textPosition: String,
+            textColor:{
+                type: String,
+                default: '#fff'
+            },
             number: {
                 type: [Number, String],
                 default: 0
