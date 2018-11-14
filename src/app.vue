@@ -306,13 +306,18 @@
                 }
             },
             importSeedData() {
-                window.BlockHub.importSeedData()
+                BlockHub.importSeedData()
             },
             resetSeedData() {
-                window.BlockHub.resetSeedData()
+                BlockHub.resetSeedData()
             },
             saveSettings() {
-                window.BlockHub.saveDatabase()
+                BlockHub.saveDatabase()
+
+                BlockHub.Notifications.info('', 'Settings saved', {
+                    timeout: 2000,
+                    pauseOnHover: true
+                })
             },
             resetSettings() {
                 window.resetSettings()
@@ -337,7 +342,7 @@
                                 value = Number(value)
                             } else if (type === 'boolean') {
                                 value = Boolean(value)
-                            }else if (type === 'json') {
+                            } else if (type === 'json') {
                                 value = JSON.parse(value)
                             }
 
@@ -362,10 +367,8 @@
         },
         mounted() {
             this.loadSettings()
-            this.ensureDesktopWelcome()
-        },
-        created() {
             this.getExternalState()
+            this.ensureDesktopWelcome()
         },
         watch: {
             $route(to, from) {

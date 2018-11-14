@@ -253,8 +253,8 @@
                     <p>The BlockHub desktop client is the recommended way to load up on tokens.</p>
                 </div> -->
 
-                <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && desktop_mode && (!account.is_verified && !account.is_verifying)" style="text-align: center">
-                    <h2 style="text-align: center">Oops, you haven't verified your account yet. <br />You'll need to do this to participate.</h2>
+                <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && desktop_mode && (!account.is_verified && !account.is_verifying) && !override" style="text-align: center">
+                    <h2 style="text-align: center" hidden>Oops, you haven't verified your account yet. <br />You'll need to do this to participate.</h2>
                     <br />
                     <c-button class="c-btn-lg" href="/#/account/verification" style="margin: 0 auto" @click="gaStep(6)">Verify Account</c-button>
                     <br /><br />

@@ -9,6 +9,7 @@
         "desktop_mode": null,
         "developer_mode": null,
         "profile_chooser": false,
+        "darklaunch_override": false,
         "operating_system": null,
         "is_developer": false,
         "editor_mode": "viewing",
@@ -586,7 +587,6 @@
             "email": null,
             "currency": {},
             "language":{},
-            "darklaunch_override": false,
             "current_identity": {
                 "id": null,
                 "name": null,

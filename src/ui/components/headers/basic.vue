@@ -73,12 +73,6 @@
                                 <span class="text">DOWNLOAD</span> <span class="fa fa-download"></span>
                             </a>
                         </li>
-                        <li v-if="signed_in" v-darklaunch="'WALLETS'">
-                            <a href="/#/account/wallets">
-                                <span class="icon fa fa-credit-card"></span>
-                                <span class="text">Wallets</span>
-                            </a>
-                        </li>
                         <li v-if="signed_in">
                             <a href="/#/">
                                 <span class="icon fa fa-shopping-cart"></span>
