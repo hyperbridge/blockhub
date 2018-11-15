@@ -84,52 +84,64 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: ['id'],
-    components: {
-        'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
-        'c-asset-list': (resolve) => require(['@/ui/components/asset/list'], resolve),
-        'c-asset-preview-basic': (resolve) => require(['@/ui/components/asset/preview-basic'], resolve),
-        'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve)
-    },
-    data() {
-        return {
-            openedOffer: null,
-            bidValue: 0
-        }
-    },
-    methods: {
-        openOffer(id) {
-            if (this.bidValue != 0) this.bidValue = 0;
-            if (this.openedOffer == id) this.openedOffer = null;
-            else this.openedOffer = id;
-        },
-        createAuction(offerId) {
-            const { bidValue: bid } = this;
 
-            if (bid) {
-                const newAuction = {
-                    offerId,
-                    bid,
-                    user: { name: 'Me' },
-                    date: moment()
-                };
-                this.$store.dispatch('assets/createAuction', newAuction);
-                this.$snotify.success(`You have successfully created an auction bid for ${bid} $`, 'Created');
-                this.bidValue = 0;
+<script>
+    import offers from '@/db/api/offers';
+
+    export default {
+        props: ['id'],
+        components: {
+            'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
+            'c-asset-list': (resolve) => require(['@/ui/components/asset/list'], resolve),
+            'c-asset-preview-basic': (resolve) => require(['@/ui/components/asset/preview-basic'], resolve),
+            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve)
+        },
+        data() {
+            return {
+                openedOffer: null,
+                bidValue: 0,
+                results: []
+            }
+        },
+        methods: {
+            openOffer(id) {
+                if (this.bidValue != 0) this.bidValue = 0;
+                if (this.openedOffer == id) this.openedOffer = null;
+                else this.openedOffer = id;
+            },
+            createAuction(offerId) {
+                const { bidValue: bid } = this;
+
+                if (bid) {
+                    const newAuction = {
+                        offerId,
+                        bid,
+                        user: { name: 'Me' },
+                        date: moment()
+                    };
+                    this.$store.dispatch('assets/createAuction', newAuction);
+                    this.$snotify.success(`You have successfully created an auction bid for ${bid} $`, 'Created');
+                    this.bidValue = 0;
+                }
+            },
+            async getOffers() {
+                await new Promise(r => setTimeout(r, 3000));
+                // this.results = offers;
+                this.$store.dispatch('loadData', ['assets/offers', offers]);
+            }
+        },
+        created() {
+            this.getOffers();
+        },
+        computed: {
+            assets() {
+                return this.$store.getters['assets/assetsArray'];
+            },
+            offers() {
+                return this.$store.getters['assets/offersArray'];
             }
         }
-    },
-    computed: {
-        assets() {
-            return this.$store.getters['assets/assetsArray'];
-        },
-        offers() {
-            return this.$store.getters['assets/offersArray'];
-        }
     }
-}
 </script>
 
 <style lang="scss" scoped>
