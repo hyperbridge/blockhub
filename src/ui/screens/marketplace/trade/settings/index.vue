@@ -53,9 +53,12 @@
             account() {
                 return this.$store.state.application.account;
             },
+            identity() {
+                return this.$store.getters['application/identity'];
+            },
             tradeURL() {
-                const { id, tradeURLId } = this.account;
-                return `${window.location.origin}/#/tradeoffer/new/?partner=${id}&id=${tradeURLId}`;
+                const { tradeURLId } = this.account;
+                return `${window.location.origin}/#/tradeoffer/new/?partner=${identity.id}&id=${tradeURLId}`;
             },
             assets() { return this.$store.state.assets.assets; }
         },
