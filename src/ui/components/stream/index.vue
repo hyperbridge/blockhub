@@ -64,7 +64,7 @@
         width: 100%;
         img{
             width: 100%;
-            height: calc(100% - 80px);
+            height: 200px;
             object-fit: cover;
         }
         &:before{
