@@ -308,7 +308,7 @@
                 return this.$store.state.marketplace;
             },
             product() {
-                return this.id === 'new' ? this.marketplace.default_product : this.marketplace.products[this.id];
+                return this.id === 'new' ? this.marketplace.default_product : this.marketplace.products.find(p => p.id == this.id)
             },
             editor_mode() {
                 return this.$store.state.application.editor_mode

@@ -189,12 +189,13 @@ export const clean = () => {
     funding.config.chain().remove()
 }
 
-const updateCollection = (collection, data) => {
+export const updateCollection = (collection, data) => {
     let obj = collection.findObject({ 'id': data.id })
 
     if (obj) {
         collection.update(data)
     } else {
+        data.$loki = undefined
         collection.insert(data)
     }
 }
