@@ -151,13 +151,12 @@ const rootStore = {
 
 
         loadData({ commit }, [destination, data]) {
-            const mtz = decompose(destination, data);
+            console.log(decompose(destination, data))
             const mutations = Object.entries(decompose(destination, data));
-            console.log(mtz)
 
 
             for (let [mutation, data] of mutations) {
-                // commit('loadData', [mutation, data]);
+                commit('loadData', [mutation, data]);
             }
         },
         clearData({ commit }, [target]) {

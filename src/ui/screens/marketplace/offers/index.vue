@@ -13,20 +13,20 @@
                     <th>Show auctions</th>
                 </thead>
                 <tbody>
-                    <tr v-for="(offer, id) in props.items" :key="id">
+                    <tr v-for="[id, offer] in props.items" :key="id">
                         <template v-if="openedOffer != offer.id">
                             <td>
                                 <c-asset-preview-basic
-                                    :asset="assets[id]"
+                                    :asset="offer.asset"
                                     size="sm"
                                     horizontal
                                     hideGame
                                 />
                             </td>
-                            <td>{{ offer.auctions.length }}</td>
-                            <td>{{ offer.expDate | timeAgoShort }}</td>
+                            <td>{{ offer.bids.length }}</td>
+                            <td>{{ offer.expiresIn | timeAgoShort }}</td>
                             <td>{{ offer.seller.name }}</td>
-                            <td>{{ offer.auctions[0].bid }} $</td>
+                            <td>{{ offer.bids[0].value }} $</td>
                             <td>{{ offer.buyout }} $</td>
                             <td>{{ offer.marketValue }} %</td>
                             <td>
@@ -36,7 +36,7 @@
                             </td>
                         </template>
                         <template v-else>
-                            <td colspan="7" class="offers-table--opened" @click.self="openOffer(id)">
+                            <td colspan="7" class="offers-table--opened">
                                 <table class="auctions-table">
                                     <thead>
                                         <tr>
@@ -46,7 +46,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-if="!offer.auctions.length">
+                                        <tr v-if="!offer.bids.length">
                                             <td colspan="3">
                                                 This offer doesn't contain any auctions yet
                                             </td>
@@ -126,7 +126,6 @@
             },
             async getOffers() {
                 await new Promise(r => setTimeout(r, 3000));
-                // this.results = offers;
                 this.$store.dispatch('loadData', ['assets/offers', offers]);
             }
         },
@@ -134,11 +133,8 @@
             this.getOffers();
         },
         computed: {
-            assets() {
-                return this.$store.getters['assets/assetsArray'];
-            },
             offers() {
-                return this.$store.getters['assets/offersArray'];
+                return this.$store.getters['assets/offersMap'];
             }
         }
     }
