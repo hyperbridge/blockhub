@@ -96,20 +96,19 @@
                 </div>
                 <div class="col-md-6 col-12">
                     <h3 class="margin-vertical-20">Most helpful</h3>
-                    {{ product }}
-                    <!--<c-review-->
-                        <!--v-for="(review, index) in reviews.helpful"-->
-                        <!--:key="index"-->
-                        <!--:review="review"-->
-                    <!--/>-->
+                    <c-review
+                        v-for="(review, index) in helpfulReviews"
+                        :key="index"
+                        :review="review"
+                    />
                 </div>
                 <div class="col-md-6 col-12">
                     <h3 class="margin-vertical-20">Most recent</h3>
-                    <!--<c-review-->
-                        <!--v-for="(review, index) in helpfulReviews"-->
-                        <!--:key="index"-->
-                        <!--:review="review"-->
-                    <!--/>-->
+                    <c-review
+                        v-for="(review, index) in recentReviews"
+                        :key="index"
+                        :review="review"
+                    />
                 </div>
             </div>
         </div>
@@ -172,9 +171,6 @@
                 showInstaller: false
             }
         },
-        created(){
-            console.log(this.product.reviews)
-        },
         methods: {
             showPurchaseModal() {
                 this.$store.dispatch('application/activateModal', 'purchase')
@@ -198,21 +194,25 @@
                 return this.product.streams
             },
             reviews(){
-                return this.product.reviews
+                return this.product.rews
             },
             helpfulReviews(){
                 let arr = [];
                 console.log(this.reviews)
-                    this.reviews.forEach( (el) => {
-                        if (el.helpful)
-                            arr.push(el)
-                        console.log(arr)
-                        return arr;
-                    })
+                this.reviews.forEach( (el) => {
+                    if (el.helpful)
+                        arr.push(el)
+                })
+                return arr;
             },
             recentReviews(){
-
-            }
+                let arr = [];
+                this.reviews.forEach( (el) => {
+                    if (el.recent)
+                        arr.push(el)
+                })
+                return arr;
+            },
         }
     }
 </script>
