@@ -22,6 +22,21 @@ const rootStore = {
             console.log(rootState)
             // const { [module]: state } = rootState;
         },
+        updateV2(rootState, [targets, id, data]) {
+            const [module, target] = targets.split('/');
+
+            rootState[module][target][id] = {
+                ...rootState[module][target][id],
+                ...data
+            };
+        },
+        updateSingle(rootState, [targets, data]) {
+            const [module, target] = targets.split('/');
+            rootState[module][target] = {
+                ...rootState[module][target],
+                ...data
+            }
+        },
         delete(rootState, { id, module, target }) {
             const { [module]: state } = rootState;
 

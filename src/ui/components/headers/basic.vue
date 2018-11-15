@@ -121,7 +121,8 @@
                             <c-dropdown class="ml-4 account-menu" style="z-index: 12">
                                 <template slot="title">
                                     <div class="__title">
-                                        <i class="fa fa-user"></i> {{ current_identity && current_identity.name }}
+                                        <i class="fa fa-user"></i>
+                                        {{ currentIdentity && currentIdentity.name }}
                                     </div>
                                 </template>
                                 <ul class="item-dropdown">
@@ -137,14 +138,14 @@
                                             My Wallets
                                         </a>
                                     </li>
-                                    <li v-if="account.current_identity">
-                                        <a :href="`/#/identity/${account.current_identity.public_address}`">
+                                    <li v-if="account.active_identity">
+                                        <a :href="`/#/identity/${currentIdentity.public_address}`">
                                             <i class="fas fa-user"></i>
                                             View Public Profile
                                         </a>
                                     </li>
                                     <li v-if="signed_in" v-darklaunch="'CONTACTS'">
-                                        <a :href="`/#/identity/${account.current_identity.public_address}/contacts`">
+                                        <a :href="`/#/identity/${currentIdentity.public_address}/contacts`">
                                             <i class="fas fa-users"></i>
                                             Contacts
                                         </a>
@@ -251,8 +252,8 @@ export default {
         account() {
             return this.$store.state.application.account
         },
-        current_identity() {
-            return this.$store.state.application.account && this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
+        currentIdentity() {
+            return this.$store.getters['application/identity'];
         },
         is_locked() {
             return this.$store.state.application.locked
