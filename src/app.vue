@@ -46,19 +46,19 @@
                     <span class="icon fas fa-list-alt"></span>
                     <span class="text">My Content</span>
                 </a>
-                <a href="/#/developer/payment" v-if="developer_mode">
+                <a href="/#/business/developer/payment" v-if="developer_mode">
                     <span class="icon fas fa-info-circle"></span>
                     <span class="text">Payment Settings</span>
                 </a>
-                <a href="/#/realm/new" v-if="developer_mode" v-darklaunch="'REALMS'">
+                <a href="/#/business/realm/new" v-if="developer_mode" v-darklaunch="'REALMS'">
                     <span class="icon fa fa-plus"></span>
                     <span class="text">New Realm</span>
                 </a>
-                <a href="/#/product/new" v-if="developer_mode">
+                <a href="/#/business/product/new" v-if="developer_mode">
                     <span class="icon fa fa-plus"></span>
                     <span class="text">New Game</span>
                 </a>
-                <a href="/#/project/new" v-if="developer_mode">
+                <a href="/#/business/project/new" v-if="developer_mode">
                     <span class="icon fa fa-plus"></span>
                     <span class="text">New Crowdfund</span>
                 </a>
@@ -254,7 +254,7 @@
                 }
             },
             updateEditorMode() {
-                this.$store.state.application.editor_mode = 'viewing'
+                // this.$store.state.application.editor_mode = 'viewing'
             },
             toggleDesktopMode() {
                 this.$store.state.application.desktop_mode = !this.$store.state.application.desktop_mode
@@ -275,13 +275,13 @@
                 this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulator_mode)
             },
             rotateEditorMode() {
-                if (this.$store.state.application.editor_mode === 'editing') {
-                    this.$store.state.application.editor_mode = 'viewing'
-                } else if (this.$store.state.application.editor_mode === 'viewing') {
-                    this.$store.state.application.editor_mode = 'publishing'
-                } else {
-                    this.$store.state.application.editor_mode = 'editing'
-                }
+                // if (this.$store.state.application.editor_mode === 'editing') {
+                //     this.$store.state.application.editor_mode = 'viewing'
+                // } else if (this.$store.state.application.editor_mode === 'viewing') {
+                //     this.$store.state.application.editor_mode = 'publishing'
+                // } else {
+                //     this.$store.state.application.editor_mode = 'editing'
+                // }
             },
             rotateOperatingSystem() {
                 if (this.$store.state.application.operating_system === 'mac') {
@@ -306,13 +306,18 @@
                 }
             },
             importSeedData() {
-                window.BlockHub.importSeedData()
+                BlockHub.importSeedData()
             },
             resetSeedData() {
-                window.BlockHub.resetSeedData()
+                BlockHub.resetSeedData()
             },
             saveSettings() {
-                window.BlockHub.saveDatabase()
+                BlockHub.saveDatabase()
+
+                BlockHub.Notifications.info('', 'Settings saved', {
+                    timeout: 2000,
+                    pauseOnHover: true
+                })
             },
             resetSettings() {
                 window.resetSettings()
@@ -337,7 +342,7 @@
                                 value = Number(value)
                             } else if (type === 'boolean') {
                                 value = Boolean(value)
-                            }else if (type === 'json') {
+                            } else if (type === 'json') {
                                 value = JSON.parse(value)
                             }
 
@@ -362,10 +367,8 @@
         },
         mounted() {
             this.loadSettings()
-            this.ensureDesktopWelcome()
-        },
-        created() {
             this.getExternalState()
+            this.ensureDesktopWelcome()
         },
         watch: {
             $route(to, from) {

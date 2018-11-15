@@ -149,7 +149,7 @@
                 <c-welcome-box />
             </div>
 
-            <div class="col-6 offset-3" v-if="ethereum_connected && !ethereum_unlocked && !desktop_mode" style="text-align: center; width: 100%; margin-top: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
+            <div class="col-6 offset-3" v-if="ethereum_connected && !ethereum_unlocked" style="text-align: center; width: 100%; margin-top: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
                 <h2 hidden>Purchase Tokens with MetaMask</h2>
 
                 <br />
@@ -167,7 +167,7 @@
                 <br /><br />
             </div>
             
-            <div class="col-4 offset-4" v-if="ethereum_connected && ethereum_unlocked && !desktop_mode" style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2); zoom: 0.8" hidden>
+            <div class="col-4 offset-4" v-if="ethereum_connected && ethereum_unlocked" style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2); zoom: 0.8" hidden>
                 <img src="/static/img/metamask-logo.png" style="max-width: 150px;margin: 0 auto;" />
 
                 <br /><br />
@@ -253,8 +253,8 @@
                     <p>The BlockHub desktop client is the recommended way to load up on tokens.</p>
                 </div> -->
 
-                <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && desktop_mode && (!account.is_verified && !account.is_verifying)" style="text-align: center">
-                    <h2 style="text-align: center">Oops, you haven't verified your account yet. <br />You'll need to do this to participate.</h2>
+                <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && desktop_mode && (!account.is_verified && !account.is_verifying) && !override" style="text-align: center">
+                    <h2 style="text-align: center" hidden>Oops, you haven't verified your account yet. <br />You'll need to do this to participate.</h2>
                     <br />
                     <c-button class="c-btn-lg" href="/#/account/verification" style="margin: 0 auto" @click="gaStep(6)">Verify Account</c-button>
                     <br /><br />

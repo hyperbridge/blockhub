@@ -710,6 +710,12 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/business-project'], resolve),
         },
         {
+            path: '/business/product/:id',
+            name: 'Product',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/business-product'], resolve),
+        },
+        {
             path: '/marketplace',
             component: (resolve) => require(['@/ui/screens/marketplace'], resolve),
             children: [
@@ -769,7 +775,7 @@ const router = new Router({
                 },
                 {
                     path: 'snipers',
-                    name: 'Marketplace Snipers',
+                    name: 'Marketplace Prospectors',
                     component: (resolve) => require(['@/ui/screens/marketplace/snipers'], resolve),
                 },
                 {
