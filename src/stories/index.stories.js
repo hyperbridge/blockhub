@@ -2411,21 +2411,18 @@ storiesOf('Game Plans', module)
             return object('Data', {
                 plans: [
                     {
-                        "title": "Play Tibia Now",
-                        "link": "#3",
-                        "link_text": "Play Now"
+                        "title": "Play Now",
+                        "link": "#3"
                     },
                     {
-                        "title": "1 Month Premium benefits",
-                        "price": "34",
-                        "link": "#4",
-                        "link_text": "Buy Now"
+                        "title": "3 Month Subscription",
+                        "price": "12.95",
+                        "link": ""
                     },
                     {
-                        "title": "2 Month Premium benefits",
-                        "price": "57",
-                        "link": "#4",
-                        "link_text": "Buy Now"
+                        "title": "1 Year Subscription",
+                        "price": "120.95",
+                        "link": ""
                     }
                 ]
             })
