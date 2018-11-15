@@ -16,7 +16,6 @@
 <script>
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
         },
         mounted() {
             window.location = 'blockhub://account/verification'
