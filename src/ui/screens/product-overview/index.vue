@@ -71,11 +71,22 @@
                      @prevClick="streams_slider.slidePrev()"
                      @nextClick="streams_slider.slideNext()"
                      class="margin-top-30 margin-bottom-20">
-                <c-swiper :options="sliderOptions">
-                    <c-slide v-for="(el, index) in streamersList" :key="index">
-                        <c-stream-item />
+                <c-swiper :options="sliderOptions" v-if="streams">
+                    <c-slide v-for="(stream, index) in streams" :key="index">
+                        <!--<c-stream-item />-->
+                        <c-stream-item
+                            :streamGame="product.name"
+                            :streamName="stream.userName"
+                            :streamAvatar="stream.userAvatar"
+                            :streamImg="stream.previews"
+                            :streamSrc="stream.src"
+                            :streamViews="stream.views"
+                        />
                     </c-slide>
                 </c-swiper>
+                <div class="h5" v-else>
+                    Twitch streams was not fount.
+                </div>
             </c-block>
         </div>
         <div class="col-12">
@@ -251,6 +262,9 @@
             },
             wishlist() {
                 return this.$store.getters['application/identity'].product_wishlist || {};
+            },
+            streams(){
+                return this.product.streams
             }
         }
     }

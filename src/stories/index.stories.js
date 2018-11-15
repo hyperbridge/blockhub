@@ -4264,10 +4264,27 @@ storiesOf('Stream', module)
         components: {
             'c-stream-item': StreamItem
         },
+        data(){
+            return{
+                "game": "Dota II",
+                "userName": "GodOfDota",
+                "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVIOE5IdK4MWeI-iEphf-BhZh2XsXBrBn_fcsGXbFGSF-xwH8h",
+                "previews": "http://dota2-videos.com/wp-content/uploads/2018/07/jx3Oj0O-G8Ihqdefault.jpg",
+                "src": "#",
+                "views": 10
+            }
+        },
         template: `
         <div class="row p-5">
             <div class="col-5">
-                <c-stream-item />
+                <c-stream-item 
+                :streamGame="game"
+                :streamName="userName"
+                :streamAvatar="userAvatar"
+                :streamImg="previews"
+                :streamSrc="src"
+                :streamViews="views"
+                />
             </div>
         </div>
         

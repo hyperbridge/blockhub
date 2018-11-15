@@ -156,7 +156,23 @@
         "crowdfund": true,
         "state_tag": "trending",
         "followers": 591,
-        "players": 12
+        "players": 12,
+        "streams": [
+            {
+                "userName": "GodOfDota",
+                "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVIOE5IdK4MWeI-iEphf-BhZh2XsXBrBn_fcsGXbFGSF-xwH8h",
+                "previews": "http://dota2-videos.com/wp-content/uploads/2018/07/jx3Oj0O-G8Ihqdefault.jpg",
+                "src": "#",
+                "views": 10
+            },
+            {
+                "userName": "GodOfDota",
+                "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVIOE5IdK4MWeI-iEphf-BhZh2XsXBrBn_fcsGXbFGSF-xwH8h",
+                "previews": "http://dota2-videos.com/wp-content/uploads/2018/07/jx3Oj0O-G8Ihqdefault.jpg",
+                "src": "#",
+                "views": 10
+            }
+        ]
     },
     {
         "id": 2,
