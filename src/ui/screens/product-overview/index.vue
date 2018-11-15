@@ -96,19 +96,20 @@
                 </div>
                 <div class="col-md-6 col-12">
                     <h3 class="margin-vertical-20">Most helpful</h3>
-                    <c-review
-                        v-for="(review, index) in reviews.helpful"
-                        :key="index"
-                        :review="review"
-                    />
+                    {{ product }}
+                    <!--<c-review-->
+                        <!--v-for="(review, index) in reviews.helpful"-->
+                        <!--:key="index"-->
+                        <!--:review="review"-->
+                    <!--/>-->
                 </div>
                 <div class="col-md-6 col-12">
                     <h3 class="margin-vertical-20">Most recent</h3>
-                    <c-review
-                        v-for="(review, index) in reviews.recent"
-                        :key="index"
-                        :review="review"
-                    />
+                    <!--<c-review-->
+                        <!--v-for="(review, index) in helpfulReviews"-->
+                        <!--:key="index"-->
+                        <!--:review="review"-->
+                    <!--/>-->
                 </div>
             </div>
         </div>
@@ -151,80 +152,7 @@
             'c-slide': swiperSlide,
         },
         data() {
-            const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.';
-            const title = 'Good game with very nice graphics made by very smart people.';
-            const setup = {
-                system: 'Windows 10',
-                gpu: 'GTX 1080',
-                cpu: 'Core i7 7980x',
-                ram: '8 GB',
-                storage: 'HyperX 1TB SSD'
-            };
-            const author = {
-                name: 'Nakatochi',
-                img: 'https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png'
-            };
             return {
-                reviews: {
-                    helpful: [
-                        {
-                            author,
-                            title: title,
-                            text,
-                            date: '2018-08-19T04:09:00.000Z',
-                            rating: 4.5,
-                            minutes_played: 1938,
-                            setup
-                        },
-                        {
-                            author,
-                            title: title,
-                            text,
-                            date: '2018-08-16T04:09:00.000Z',
-                            rating: 1.5,
-                            minutes_played: 414,
-                            setup
-                        },
-                        {
-                            author,
-                            title: title,
-                            text,
-                            date: '2018-08-18T04:09:00.000Z',
-                            rating: 3.5,
-                            minutes_played: 71,
-                            setup
-                        }
-                    ],
-                    recent: [
-                        {
-                            author,
-                            title: title,
-                            text,
-                            date: '2018-08-20T04:09:00.000Z',
-                            rating: 1.5,
-                            minutes_played: 13,
-                            setup
-                        },
-                        {
-                            author,
-                            title: title,
-                            text,
-                            date: '2018-03-21T04:09:00.000Z',
-                            rating: 5,
-                            minutes_played: 241,
-                            setup
-                        },
-                        {
-                            author,
-                            title: title,
-                            text,
-                            date: '2018-08-11T04:09:00.000Z',
-                            rating: 3,
-                            minutes_played: 2941,
-                            setup
-                        }
-                    ]
-                },
                 promotionSections: null,
                 sliderOptions: {
                     slidesPerView: 4,
@@ -243,6 +171,9 @@
                 streamersList: 8,
                 showInstaller: false
             }
+        },
+        created(){
+            console.log(this.product.reviews)
         },
         methods: {
             showPurchaseModal() {
@@ -265,6 +196,22 @@
             },
             streams(){
                 return this.product.streams
+            },
+            reviews(){
+                return this.product.reviews
+            },
+            helpfulReviews(){
+                let arr = [];
+                console.log(this.reviews)
+                    this.reviews.forEach( (el) => {
+                        if (el.helpful)
+                            arr.push(el)
+                        console.log(arr)
+                        return arr;
+                    })
+            },
+            recentReviews(){
+
             }
         }
     }

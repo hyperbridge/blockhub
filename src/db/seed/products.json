@@ -172,6 +172,71 @@
                 "src": "#",
                 "views": 10
             }
+        ],
+        "reviews": [
+            {
+                "id" : 1,
+                "author": {
+                    "name": "Nakatochi",
+                    "img": "https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png"
+                },
+                "setup": {
+                    "system": "Windows 10",
+                    "gpu": "GTX 1080",
+                    "cpu": "Core i7 7980x",
+                    "ram": "8 GB",
+                    "storage": "HyperX 1TB SSD"
+                },
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.",
+                "date": "2018-08-19T04:09:00.000Z",
+                "rating": 1.5,
+                "minutes_played": 56543,
+                "title": "Good game with very nice graphics made by very smart people.",
+                "helpful": true,
+                "recent": true
+            },
+            {
+                "id" : 2,
+                "author": {
+                    "name": "Nakatochi",
+                    "img": "https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png"
+                },
+                "setup": {
+                    "system": "Windows 10",
+                    "gpu": "GTX 1080",
+                    "cpu": "Core i7 7980x",
+                    "ram": "8 GB",
+                    "storage": "HyperX 1TB SSD"
+                },
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.",
+                "date": "2018-08-19T04:09:00.000Z",
+                "rating": 2.5,
+                "minutes_played": 3453,
+                "title": "Good game with very nice graphics made by very smart people.",
+                "helpful": false,
+                "recent": true
+            },
+            {
+                "id" : 3,
+                "author": {
+                    "name": "Nakatochi",
+                    "img": "https://www.shareicon.net/data/128x128/2015/09/20/104335_avatar_512x512.png"
+                },
+                "setup": {
+                    "system": "Windows 10",
+                    "gpu": "GTX 1080",
+                    "cpu": "Core i7 7980x",
+                    "ram": "8 GB",
+                    "storage": "HyperX 1TB SSD"
+                },
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut luctus ante, a volutpat velit. Cras in arcu a sem ultrices id luctus sem. Cras a venenatis mauris. Nullam non tortor nec neque accumsan euismod. Fusce tempus nunc ac varius gravida. Fusce at lacus pharetra, elementum risus a, bibendum ante. Morbi velit est, tincidunt id auctor sit amet, varius non nunc. Vestibulum elementum nulla et condimentum vulputate. Nullam id eleifend velit, quis aliquam elit. In maximus non orci eget maximus.",
+                "date": "2018-08-19T04:09:00.000Z",
+                "rating": 3.5,
+                "minutes_played": 1239,
+                "title": "Good game with very nice graphics made by very smart people.",
+                "helpful": true,
+                "recent": false
+            }
         ]
     },
     {
