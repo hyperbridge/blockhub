@@ -41,34 +41,38 @@ export const findRelation = (module, target, prop) =>
 export const decompose = (destination, data) =>
     data.reduce((mutations, item) => {
 
-        const [module, target] = destination.split('/');
-        const relation = relations[module][target];
+      const [module, target] = destination.split('/');
+      const relation = relations[module][target];
 
-        const decompRelation = (relation, items) => {
-            for (let item of items) {
-                for (let prop in relation) {
-                    if (item[prop]) {
+      const decompRelation = (relation, items) => {
+        for (let item of items) {
+          for (let prop in relation) {
+            if (item[prop]) {
 
-                        const [propModule, propTarget] = relation[prop];
-                        const mutName = `${propModule}/${propTarget}`;
+              const [propModule, propTarget] = relation[prop];
+              const mutName = `${propModule}/${propTarget}`;
 
-                        mutations[mutName] = mutations[mutName] || [];
-                        mutations[mutName].push(...item[prop]);
+              mutations[mutName] = mutations[mutName] || [];
+              const checkType = arr => Array.isArray(arr) ? arr : [arr];
+              mutations[mutName] = [...mutations[mutName], ...checkType(item[prop])];
 
-                        const subRelation = relations[propModule][propTarget];
+              const subRelation = relations[propModule][propTarget];
+              if (subRelation) {
+                const subValue = Array.isArray(item[prop]) ? item[prop] : [item[prop]];
+                decompRelation(subRelation, subValue);
+              }
 
-                        if (subRelation) decompRelation(subRelation, item[prop]);
-
-                        item[prop] = item[prop].map(el => el.id);
-                    }
-                }
+              if (Array.isArray(item[prop])) item[prop] = item[prop].map(el => el.id);
+              else item[prop] = item[prop].id;
             }
+          }
         }
+      }
 
-        decompRelation(relation, [item]);
+      decompRelation(relation, [item]);
 
-        mutations[destination].push(item);
-        return mutations;
+      mutations[destination].push(item);
+      return mutations;
     }, { [destination]: [] });
 
 

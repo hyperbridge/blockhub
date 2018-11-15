@@ -163,7 +163,7 @@
                         </div>
 
                     <div class="col-12">
-                        <transition name="page">
+                        <transition name="page" mode="out-in">
                             <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
                             <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
                             <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
