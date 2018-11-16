@@ -11,7 +11,7 @@
                         <p>{{ item.data.short_description }}</p>
                         <c-tags :tags="item.data.developer_tags"></c-tags>
                         <div class="frontpage-product__footer">
-                            <div class="price-list">
+                            <div class="price-list" v-if="item.data.price">
                                 <div class="price old_price" v-if="item.data.old_price">
                                     {{ item.data.old_price | convertCurrency }}
                                     <!--<span>usd</span>-->
@@ -21,7 +21,7 @@
                                     <!--<span>usd</span>-->
                                 </div>
                             </div>
-                            <c-button status="success">
+                            <c-button status="success" v-if="item.data.price">
                                 Proceed to Purchase
                             </c-button>
                         </div>

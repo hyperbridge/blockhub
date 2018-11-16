@@ -57,6 +57,10 @@ const updateLandingImage = function() {
     }
 }
 
+function isVisible(availableFlags, userFlags, code, variant, data) {
+    return availableFlags.map(flag => flag.code).includes(code) && userFlags.map(flag => flag.enabled ? flag.code : null).includes(code)
+}
+
 export default {
     components: {
         'c-banner': (resolve) => require(['@/ui/components/banner/simple'], resolve),
@@ -202,25 +206,27 @@ export default {
                 }
             })
 
-            result.push({
-                type: 'curator_reviews',
-                data: {
-                    title: 'From our curators',
-                    ref: 'curator_reviews_sl',
-                    swiper: this.$refs.curator_reviews_sl && this.$refs.curator_reviews_sl.swiper,
-                    options: {
-                        slidesPerView: 3,
-                        spaceBetween: 0,
-                        breakpoints: {
-                            768: {
-                                slidesPerView: 1,
-                                spaceBetween: 0
-                            },
-                        }
-                    },
-                    reviews: this.$store.state.marketplace.curator_reviews
-                }
-            })
+            if (isVisible(this.$store.state.application.darklaunch_flags, this.$store.state.application.account.darklaunch_flags, 'CURATORS')) {
+                result.push({
+                    type: 'curator_reviews',
+                    data: {
+                        title: 'From our curators',
+                        ref: 'curator_reviews_sl',
+                        swiper: this.$refs.curator_reviews_sl && this.$refs.curator_reviews_sl.swiper,
+                        options: {
+                            slidesPerView: 3,
+                            spaceBetween: 0,
+                            breakpoints: {
+                                768: {
+                                    slidesPerView: 1,
+                                    spaceBetween: 0
+                                },
+                            }
+                        },
+                        reviews: this.$store.state.marketplace.curator_reviews
+                    }
+                })
+            }
 
             const groupBy = function(xs, key) {
                 return xs.reduce(function(rv, x) {

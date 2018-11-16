@@ -155,7 +155,7 @@
                         <div class="navigation">
                             <ul>
                                 <li class="title">TOP FREE</li>
-                                <li v-for="(product, index) in $store.state.marketplace.top_free" :key="index">
+                                <li v-for="(product, index) in $store.state.marketplace.top_free.slice(0, 5)" :key="index">
                                     <a :href="`/#/product/${product.id}`">
                                         <span class="text">{{ product.name }}</span>
                                     </a>

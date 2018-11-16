@@ -139,7 +139,7 @@
                                             <span class="price">
                                                 $ {{ item.price.current }}
                                             </span>
-                                            <a href="#3" class="btn btn-success float-right">
+                                            <a href="#3" class="btn btn-success float-right" v-if="item.price.current">
                                                 <c-icon name="cart-plus"/>
                                                 Proceed to Purchase
                                             </a>
