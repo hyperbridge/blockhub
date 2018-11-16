@@ -128,7 +128,7 @@
         $color: #2ecc71;
         background: $color;
         padding: 10px;
-        border-radius: 10px 10px 8px 10px;
+        border-radius: 10px;
         .marketplace-profile__name {
             text-shadow: 1.5px 1.5px 0 rgba(1,1,1,.2);
             margin-bottom: 4px;

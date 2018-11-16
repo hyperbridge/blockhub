@@ -30,7 +30,7 @@
                             </template>
                             <template v-else>
                                 <td>{{ id }}</td>
-                                <td><c-asset-preview :asset="sniper.asset" size="sm"/></td>
+                                <td><c-asset-preview :asset="prosp.asset" size="sm"/></td>
                                 <td><c-input v-model="edited.priceMin" class="edit-input"/></td>
                                 <td><c-input v-model="edited.priceMax" class="edit-input"/></td>
                                 <td>
@@ -42,8 +42,20 @@
                                 </td>
                                 <td>
                                     <c-button status="warning" @click="edited = {}" icon_hide>Cancel</c-button>
-                                    <c-button status="danger" @click="deleteSniper(id)">Delete</c-button>
-                                    <c-button status="success" @click="updateSniper(id)">Save</c-button>
+                                    <c-button
+                                        status="danger"
+                                        @click="$store.dispatch(
+                                            'delete',
+                                            ['assets/prospectors', id]
+                                        )"
+                                    >Delete</c-button>
+                                    <c-button
+                                        status="success"
+                                        @click="$store.dispatch(
+                                            'update',
+                                            ['assets/prospectors', id, edited]
+                                        ); edited = {}"
+                                    >Save</c-button>
                                 </td>
                             </template>
                         </tr>
@@ -180,20 +192,8 @@
                     }
                 }
             },
-            setEdited(sniper) {
-                this.edited = { ...sniper };
-            },
-            updateSniper(id) {
-                const { edited } = this;
-                this.$store.commit('assets/update', {
-                    id,
-                    prop: 'snipers',
-                    data: { ...edited, asset: edited.asset.id }
-                });
-                this.edited = {};
-            },
-            deleteSniper(id) {
-                this.$store.commit('assets/delete', { id, prop: 'snipers' });
+            setEdited(prospector) {
+                this.edited = { ...prospector };
             },
             cancelCreation() {
                 this.activeStep = 1;
