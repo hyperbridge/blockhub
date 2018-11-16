@@ -26,50 +26,43 @@
                 cw: 0,
                 ch: 0,
                 priceHistory: [
+                    1,
+                    300,
                     10,
-                    14.2,
-                    13
+                    20
                 ]
             }
         },
         methods: {
             draw() {
                 requestAnimationFrame(this.draw);
-                const { ctx, cw, ch, priceHistory: data } = this;
+                const { ctx, cw, ch, priceHistory: data, diffs } = this;
                 const dataLength = data.length;
                 const lineWidth = cw / dataLength;
 
-                // ctx.beginPath();
-                // ctx.moveTo(0, ch);
-                // ctx.lineTo(300,150);
-                // ctx.stroke();
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round'
 
                 let xPos = 0;
+                let yPos = 0;
 
+                let prevY = 400;
 
-                for (let value of data) {
+                for (let value of diffs) {
+
+                    yPos = ch - (ch * value / 100);
                     ctx.beginPath();
-                    ctx.moveTo(xPos, ch);
+                    ctx.moveTo(xPos, prevY);
 
                     xPos += lineWidth;
 
-                    ctx.lineTo(xPos, 150);
+                    ctx.lineTo(xPos, yPos);
                     ctx.stroke();
+
+                    prevY = yPos;
                 }
 
-
-
-
                 ctx.strokeStyle = '#2ECB71';
-
-
-
-
-                // ctx.strokeStyle = '#2ECB71';
-
-                // this.ctx.fillStyle = '#2EC76F';
-                // this.ctx.lineWidth = '2';
-                // this.ctx.fillRect(0, 0, 123, 312);
             }
         },
         mounted() {
@@ -77,11 +70,18 @@
             this.ctx = canvas.getContext('2d');
             this.cw = canvas.width;
             this.ch = canvas.height;
-            this.draw();
+            // this.draw();
         },
         computed: {
             asset() {
                 return this.$store.getters['assets/assets'][this.id];
+            },
+            diffs() {
+                const data = this.priceHistory.sort();
+                const min = data[0];
+                const max = data[data.length - 1];
+
+                return data.map((value, index) => value / max * 100);
             }
         }
     }
