@@ -2,7 +2,7 @@
     <div>
         <!-- <button class="create-offer-btn">Create new offer</button> -->
         <c-block-menu :links="links">
-            <c-spinner v-if="loading"/>
+            <c-spinner v-if="isLoading"/>
             <router-view v-else :transactions="results"/>
         </c-block-menu>
     </div>
@@ -13,6 +13,7 @@
     import moment from 'moment';
 
     export default {
+        props: ['identityId'],
         components: {
             'c-block-menu': (resolve) => require(['@/ui/components/block/menu'], resolve),
             'c-spinner': (resolve) => require(['@/ui/components/spinner'], resolve),
@@ -26,26 +27,21 @@
                     { title: 'Settings', to: { name: 'Marketplace Trade Settings' }}
                 ],
                 results: [],
-                loading: true
-            }
-        },
-        computed: {
-            identity() {
-                return this.$store.getters['application/identity'];
+                isLoading: true
             }
         },
         methods: {
             async loadData() {
-                this.loading = true;
+                this.isLoading = true;
                 await new Promise(r => setTimeout(r, 2000));
                 this.results = transactionsData
-                    .filter(trx => trx.you.id == this.identity.id)
+                    .filter(trx => trx.you.id == this.identityId)
                     .map(trx => ({ ...trx, createdAt: moment() }));
-                this.loading = false;
+                this.isLoading = false;
             }
         },
         watch: {
-            'identity.id': {
+            identityId: {
                 handler: 'loadData',
                 immediate: true
             }

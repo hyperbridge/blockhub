@@ -41,7 +41,7 @@
 
                     <section>
                         <transition name="page" mode="out-in">
-                            <router-view/>
+                            <router-view :identityId="identity.id"/>
                         </transition>
                     </section>
                 </div>

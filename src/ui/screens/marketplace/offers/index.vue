@@ -90,7 +90,7 @@
     import offers from '@/db/api/offers';
 
     export default {
-        props: ['id'],
+        props: ['id', 'identityId'],
         components: {
             'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
             'c-asset-list': (resolve) => require(['@/ui/components/asset/list'], resolve),
@@ -127,13 +127,17 @@
                 }
             },
             async getOffers() {
+                this.isLoading = true;
                 await new Promise(r => setTimeout(r, 2500));
                 this.$store.dispatch('loadData', ['assets/offers', offers]);
                 this.isLoading = false;
             }
         },
-        created() {
-            this.getOffers();
+        watch: {
+            identityId: {
+                handler: 'getOffers',
+                immediate: true
+            }
         },
         computed: {
             offers() {
