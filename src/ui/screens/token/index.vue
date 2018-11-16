@@ -74,7 +74,7 @@
                                 </template>
                             </c-carousel-3d>
                         </div>
-                        <p>For the first month, HBX will be discounted at $0.055 USD each</p>
+                        <p>Initially HBX will be available at $0.055 USD each</p>
                     </c-block>
                 </div>
                 <div class="col-12 col-md-6">
@@ -208,7 +208,7 @@
                     </div>
 
                     <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked && desktop_mode">
-                        <c-block title="Payment Profile" class="margin-bottom-30">
+                        <c-block title="Payment" class="margin-bottom-30">
                             <div class="profile-picker">
                                 <c-swiper :options="profileOptions">
                                     <c-slide v-for="identity in identities">
@@ -243,7 +243,7 @@
 
                     <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked && !desktop_mode">
                         <c-block title="Payment Profile" class="margin-bottom-30">
-                            <p>Input your KYC verified Ethereum address:</p>
+                            <p>Your Ethereum address:</p>
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">

@@ -265,14 +265,11 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
-    import { debouncer } from '@/mixins';
+    import { mapGetters } from 'vuex'
+    import { debouncer } from '@/mixins'
 
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-            'c-checkbox': (resolve) => require(['@/ui/components/checkbox/'], resolve),
-            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-searcher': (resolve) => require(['@/ui/components/searcher'], resolve),
             'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
             'c-game-grid': (resolve) => require(['@/ui/components/game-grid/with-description'], resolve),
@@ -317,18 +314,18 @@
         methods: {
             search() {
                 this.debounce(() => {
-                    if (!this.isTyping) this.isTyping = true;
+                    if (!this.isTyping) this.isTyping = true
                     if (this.filtersActive) {
                         this.debounce(() => {
-                            this.isTyping = false;
-                            this.results = [...this.getProductsQuery(this.query)];
-                        }, 250, 'timeout2');
+                            this.isTyping = false
+                            this.results = [...this.getProductsQuery(this.query)]
+                        }, 250, 'timeout2')
                     } else {
-                        this.isTyping = false;
-                        this.results = this.products;
+                        this.isTyping = false
+                        this.results = this.products
                     }
-                    this.$router.replace({ name: 'Search', query: this.urlQuery });
-                }, 500);
+                    this.$router.replace({ name: 'Search', query: this.urlQuery })
+                }, 500)
             },
             clearFilters() {
                 const {
@@ -340,14 +337,14 @@
                     communitySize,
                     activeUsers,
                     selectedPlatforms
-                } = this;
-                if (phrase.length) this.phrase = '';
-                if (selectedSpecials.length) this.selectedSpecials.forEach(tag => tag.selected = false);
-                if (selectedGenres.length) this.selectedGenres.forEach(tag => tag.selected = false);
-                if (selectedLanguages.length) this.selectedLanguages.forEach(lang => lang.selected = false);
+                } = this
+                if (phrase.length) this.phrase = ''
+                if (selectedSpecials.length) this.selectedSpecials.forEach(tag => tag.selected = false)
+                if (selectedGenres.length) this.selectedGenres.forEach(tag => tag.selected = false)
+                if (selectedLanguages.length) this.selectedLanguages.forEach(lang => lang.selected = false)
                 if (price.min || price.max) { this.price.min = 0; this.price.max = 0; };
                 if (communitySize || activeUsers) { this.communitySize = 0; this.activeUsers = 0; }
-                if (selectedPlatforms.length) this.selectedPlatforms.forEach(platform => platform.selected = false);
+                if (selectedPlatforms.length) this.selectedPlatforms.forEach(platform => platform.selected = false)
             }
         },
         computed: {
@@ -358,19 +355,21 @@
                 languages: 'marketplace/productsLanguages'
             }),
             query() {
-                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price } = this;
-                const query = {};
-                if (phrase.length) query['name'] = { '$eq': phrase };
-                if (selectedSpecials.length) query['system_tags'] = { '$contains': selectedSpecials.map(tag => tag.value) };
-                if (selectedGenres.length) query['developer_tags'] = { '$contains': selectedGenres.map(tag => tag.name) };
+                const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price, communitySize, activeUsers } = this
+                const query = {}
+                if (phrase.length) query['name'] = { '$eq': phrase }
+                if (selectedSpecials.length) query['system_tags'] = { '$contains': selectedSpecials.map(tag => tag.value) }
+                if (selectedGenres.length) query['developer_tags'] = { '$contains': selectedGenres.map(tag => tag.name) }
                 // if (selectedLanguages.length) query['language_support'] = {
                 //     '$contains': { name: selectedLanguages.map(lang => lang.name) }
                 // }
-                if (price.min || price.max) query['price'] = { '$between': [price.min, price.max | 300] };
-                return query;
+                if (price.min || price.max) query['price'] = { '$between': [price.min, price.max | 300] }
+                if (communitySize) query['community_size'] = { '$between': [communitySize, 999999999] }
+                if (activeUsers) query['active_users'] = { '$between': [activeUsers, 999999999] }
+                return query
             },
             resultsFiltered() {
-                const { selectedLanguagesNames, selectedPlatformsNames } = this;
+                const { selectedLanguagesNames, selectedPlatformsNames } = this
 
                 return this.results
                     .filter(product => selectedLanguagesNames.length
@@ -384,25 +383,25 @@
                             selectedPlatformsNames.includes(req.os)
                           ).length
                         : true
-                    );
+                    )
             },
             selectedGenres() {
-                return this.selectableTags.filter(tag => tag.selected);
+                return this.selectableTags.filter(tag => tag.selected)
             },
             selectedSpecials() {
-                return this.systemTags.filter(tag => tag.selected);
+                return this.systemTags.filter(tag => tag.selected)
             },
             selectedLanguages() {
-                return this.selectableLanguages.filter(lang => lang.selected);
+                return this.selectableLanguages.filter(lang => lang.selected)
             },
             selectedLanguagesNames() {
-                return this.selectedLanguages.map(lang => lang.name);
+                return this.selectedLanguages.map(lang => lang.name)
             },
             selectedPlatforms() {
-                return this.platforms.filter(platform => platform.selected);
+                return this.platforms.filter(platform => platform.selected)
             },
             selectedPlatformsNames() {
-                return this.selectedPlatforms.map(platform => platform.prop);
+                return this.selectedPlatforms.map(platform => platform.prop)
             },
             filtersActive() {
                 return !!(this.selectedGenres.length ||
@@ -411,10 +410,10 @@
                     this.price.max || this.price.min ||
                     this.selectedLanguages.length ||
                     this.communitySize || this.activeUsers ||
-                    this.selectedPlatforms.length);
+                    this.selectedPlatforms.length)
             },
             urlQuery() {
-                const urlQuery = {};
+                const urlQuery = {}
                 const {
                     phrase,
                     selectedSpecials,
@@ -424,26 +423,26 @@
                     communitySize,
                     activeUsers,
                     selectedPlatforms
-                } = this;
+                } = this
 
-                if (phrase.length) urlQuery.name = phrase;
-                if (price.min) urlQuery.priceMin = price.min;
-                if (price.max) urlQuery.priceMax = price.max;
-                if (selectedSpecials.length) urlQuery.specials = selectedSpecials.map(tag => tag.value);
-                if (selectedGenres.length) urlQuery.tags = selectedGenres.map(tag => tag.name);
-                if (selectedLanguages.length) urlQuery.langs = this.selectedLanguagesNames;
-                if (communitySize) urlQuery.communitySize = communitySize;
-                if (activeUsers) urlQuery.activeUsers = activeUsers;
-                if (selectedPlatforms.length) urlQuery.platforms = this.selectedPlatformsNames;
-                return urlQuery;
+                if (phrase.length) urlQuery.name = phrase
+                if (price.min) urlQuery.priceMin = price.min
+                if (price.max) urlQuery.priceMax = price.max
+                if (selectedSpecials.length) urlQuery.specials = selectedSpecials.map(tag => tag.value)
+                if (selectedGenres.length) urlQuery.tags = selectedGenres.map(tag => tag.name)
+                if (selectedLanguages.length) urlQuery.langs = this.selectedLanguagesNames
+                if (communitySize) urlQuery.communitySize = communitySize
+                if (activeUsers) urlQuery.activeUsers = activeUsers
+                if (selectedPlatforms.length) urlQuery.platforms = this.selectedPlatformsNames
+                return urlQuery
             }
         },
         mounted() {
             if (!Object.keys(this.$route.query).length) {
-                this.results = this.products;
+                this.results = this.products
             } else {
 
-                this.isTyping = true;
+                this.isTyping = true
                 const {
                     tags,
                     langs,
@@ -455,31 +454,31 @@
                     activeUsers,
                     communitySize,
                     platforms
-                } = this.$route.query;
+                } = this.$route.query
 
-                if (name) this.phrase = name;
-                if (priceMin) this.price.min = priceMin;
-                if (priceMax) this.price.max = priceMax;
+                if (name) this.phrase = name
+                if (priceMin) this.price.min = priceMin
+                if (priceMax) this.price.max = priceMax
 
                 this.selectableTags = this.productsTags.map(tag => ({
                     name: tag, selected: tags && tags.includes(tag)
-                }));
+                }))
 
                 this.selectableLanguages = this.languages.map(lang => ({
                     name: lang, selected: !!(langs && langs.includes(lang))
-                }));
+                }))
 
-                if (showFilters) this.expandFilters = true;
-                if (activeUsers) this.activeUsers = activeUsers;
-                if (communitySize) this.communitySize = communitySize;
+                if (showFilters) this.expandFilters = true
+                if (activeUsers) this.activeUsers = activeUsers
+                if (communitySize) this.communitySize = communitySize
                 if (platforms) this.platforms.forEach(platform => {
-                    if (platforms.includes(platform.prop)) platform.selected = true;
-                });
+                    if (platforms.includes(platform.prop)) platform.selected = true
+                })
 
                 if (specials) {
                     this.systemTags.forEach(tag => {
-                        if (specials.includes(tag.value)) tag.selected = true;
-                    });
+                        if (specials.includes(tag.value)) tag.selected = true
+                    })
                 }
             }
         },
@@ -491,7 +490,7 @@
         },
         filters: {
             replaceLoDash(val) {
-                return val.replace(/_/g, ' ');
+                return val.replace(/_/g, ' ')
             }
         }
     }

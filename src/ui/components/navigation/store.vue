@@ -110,8 +110,8 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
-    import { arrayHandler } from '@/mixins';
+    import { mapGetters } from 'vuex'
+    import { arrayHandler } from '@/mixins'
 
     export default {
         components: {
@@ -140,13 +140,13 @@
             search() {
                 this.results = this.phrase.length
                     ? this.getProductsByName(this.phrase)
-                    : [];
+                    : []
             },
             goToSearchPage() {
                 this.$router.push({
                     name: 'Search',
                     query: this.query
-                });
+                })
             }
         },
         computed: {
@@ -154,7 +154,7 @@
                 getProductsByName: 'marketplace/getProductsByName'
             }),
             filteredResults() {
-                const { choosenPlatforms } = this;
+                const { choosenPlatforms } = this
 
                 return this.results
                     .filter(result => choosenPlatforms.length
@@ -165,15 +165,15 @@
                     )
             },
             query() {
-                const { phrase, choosenPlatforms, communitySize, activeUsers } = this;
-                const query = {};
+                const { phrase, choosenPlatforms, communitySize, activeUsers } = this
+                const query = {}
 
-                if (phrase.length) query.name = phrase;
-                if (choosenPlatforms.length) query.platforms = choosenPlatforms;
-                if (communitySize) query.communitySize = communitySize;
-                if (activeUsers) query.activeUsers = activeUsers;
+                if (phrase.length) query.name = phrase
+                if (choosenPlatforms.length) query.platforms = choosenPlatforms
+                if (communitySize) query.communitySize = communitySize
+                if (activeUsers) query.activeUsers = activeUsers
 
-                return query;
+                return query
             }
         }
     }

@@ -4,6 +4,8 @@
         "name": "Might & Magic: Heroes VI",
         "price": 0,
         "old_price": 0,
+        "community_size": 10000,
+        "active_users": 1000,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/med-tile.jpg",
@@ -244,6 +246,8 @@
         "name": "Capsized",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/capsized-5004/med-tile.jpg",
@@ -353,6 +357,8 @@
         "name": "DOOM",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/doom-20087/med-tile.jpg",
@@ -494,6 +500,8 @@
         "name": "A Game of Thrones - Genesis",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/a-game-of-thrones---genesis-4221/med-tile.jpg",
@@ -608,6 +616,8 @@
         "name": "Teeworlds",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/teeworlds-20137/med-tile.jpg",
@@ -815,6 +825,8 @@
         "name": "Wargame: European Escalation",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/wargame-european-escalation-4226/med-tile.jpg",
@@ -960,6 +972,8 @@
         "name": "ArcaniA",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/arcania-4380/med-tile.jpg",
@@ -1085,6 +1099,8 @@
         "name": "Pride of Nations",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/pride-of-nations-4591/med-tile.jpg",
@@ -1192,6 +1208,8 @@
         "name": "Car Mechanic Simulator 2015 Demo",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/car-mechanic-simulator-2015-demo-20147/med-tile.jpg",
@@ -1331,6 +1349,8 @@
         "name": "Kingdom Come: Deliverance",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/kingdom-come-deliverance-20030/med-tile.jpg",
@@ -1474,6 +1494,8 @@
         "name": "Fishing Planet",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/fishing-planet-20121/med-tile.jpg",
@@ -1638,6 +1660,8 @@
         "name": "Men of War: Assault Squad",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/men-of-war-assault-squad-4305/med-tile.jpg",
@@ -1763,6 +1787,8 @@
         "name": "Sniper Elite V2",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/sniper-elite-v2-4275/med-tile.jpg",
@@ -1888,6 +1914,8 @@
         "name": "Chime",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/chime-4259/med-tile.jpg",
@@ -1993,6 +2021,8 @@
         "name": "Who's That Flying?!",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/who's-that-flying!-4190/med-tile.jpg",
@@ -2077,6 +2107,8 @@
         "name": "Fallout New Vegas: Dead Money",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/fallout-new-vegas-dead-money-4513/med-tile.jpg",
@@ -2177,6 +2209,8 @@
         "name": "Fallout New Vegas: Honest Hearts",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/fallout-new-vegas-honest-hearts-4514/med-tile.jpg",
@@ -2280,6 +2314,8 @@
         "name": "Call of Duty®: Black Ops",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/call-of-duty%C2%AE-black-ops-4930/med-tile.jpg",
@@ -2392,6 +2428,8 @@
         "name": "Homefront",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/homefront-4059/med-tile.jpg",
@@ -2512,6 +2550,8 @@
         "name": "Mafia II",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/mafia-ii-4001/med-tile.jpg",
@@ -2653,6 +2693,8 @@
         "name": "The Witcher 2: Assassins of Kings Enhanced Edition",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/the-witcher-2-assassins-of-kings-enhanced-edition-4664/med-tile.jpg",
@@ -2825,6 +2867,8 @@
         "name": "Dungeon Defenders",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/dungeon-defenders-4398/med-tile.jpg",
@@ -2955,6 +2999,8 @@
         "name": "Worms Ultimate Mayhem",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/worms-ultimate-mayhem-4439/med-tile.jpg",
@@ -3069,6 +3115,8 @@
         "name": "Saints Row: The Third",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/saints-row-the-third-4089/med-tile.jpg",
@@ -3215,6 +3263,8 @@
         "name": "World of Warcraft",
         "price": 0,
         "old_price": 0,
+        "community_size": 0,
+        "active_users": 0,
         "images": {
             "header": null,
             "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/med-tile.jpg",
