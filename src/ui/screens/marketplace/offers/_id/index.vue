@@ -1,9 +1,9 @@
 <template>
     <div>
         <div v-if="asset" class="asset__wrapper">
-            <!-- <h1 class="asset__name">{{ asset.name }}</h1> -->
+            <h1 class="asset__name">{{ asset.name }}</h1>
 
-            <canvas ref="canv" width="400" height="400" class="canv-bord"/>
+            <!-- <canvas ref="canv" width="400" height="400" class="canv-bord"/> -->
 
 
             <div>
@@ -92,9 +92,9 @@
         position: relative;
     }
     .asset__name {
-        font-size: 160px !important;
+        font-size: 110px !important;
         z-index: -1;
-        opacity: .2;
+        opacity: .15;
         position: absolute;
         color: #000;
         // display: block;
