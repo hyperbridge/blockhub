@@ -672,7 +672,8 @@
             "name": "My Project Name",
             "system_tags": [],
             "images": {},
-            "author": "0x0",
+            "developer": "0x0",
+            "developer_id": 1,
             "developer_tags": [
                 "game"
             ],

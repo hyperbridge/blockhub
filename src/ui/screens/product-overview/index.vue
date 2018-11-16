@@ -85,7 +85,7 @@
                     </c-slide>
                 </c-swiper>
                 <div class="h5" v-else>
-                    Twitch streams was not fount.
+                    Twitch streams were not found.
                 </div>
             </c-block>
         </div>
@@ -94,7 +94,10 @@
                 <div class="col-12">
                     <c-heading-bar name="Reviews" :showArrows="true" :showBackground="false"/>
                 </div>
-                <div class="col-md-6 col-12">
+                <div class="col-12 h5" v-if="!helpfulReviews.length && !recentReviews.length">
+                    No reviews found.
+                </div>
+                <div class="col-md-6 col-12" v-if="helpfulReviews.length">
                     <h3 class="margin-vertical-20">Most helpful</h3>
                     <c-review
                         v-for="(review, index) in helpfulReviews"
@@ -102,7 +105,7 @@
                         :review="review"
                     />
                 </div>
-                <div class="col-md-6 col-12">
+                <div class="col-md-6 col-12" v-if="recentReviews.length">
                     <h3 class="margin-vertical-20">Most recent</h3>
                     <c-review
                         v-for="(review, index) in recentReviews"
@@ -197,8 +200,10 @@
                 return this.product.rews
             },
             helpfulReviews(){
+                if (!this.reviews) return []
+
                 let arr = [];
-                console.log(this.reviews)
+                
                 this.reviews.forEach( (el) => {
                     if (el.helpful)
                         arr.push(el)
@@ -206,6 +211,8 @@
                 return arr;
             },
             recentReviews(){
+                if (!this.reviews) return []
+
                 let arr = [];
                 this.reviews.forEach( (el) => {
                     if (el.recent)

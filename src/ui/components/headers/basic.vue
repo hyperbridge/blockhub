@@ -188,7 +188,7 @@
                         <li v-if="!is_locked && languages" class="ml-3" v-darklaunch="'LANGUAGES'">
                             <c-language-dropdown :current_language="current_language" :languages="languages" @change="selectLanguages" />
                         </li>
-                        <li v-if="!is_locked && currencies" class="ml-2">
+                        <li v-if="!is_locked && currencies" class="ml-2" v-darklaunch="'CURRENCIES'">
                             <c-currency-dropdown :current_currency="current_currency" :currencies="currencies" @change="selectCurrency" />
                         </li>
                         <li v-if="!is_locked">

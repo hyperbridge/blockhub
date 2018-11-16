@@ -146,9 +146,6 @@ window.BlockHub.importSeedData = () => {
 
     DB.funding.projects.data = seed.projects
 
-    // ENABLE ALL DARKLAUNCHES
-    store.state.application.darklaunch_override = true
-
     store.dispatch('marketplace/updateState')
     store.dispatch('funding/updateState')
     store.dispatch('application/updateState')
@@ -422,11 +419,20 @@ export let initializer = () => {
             store.dispatch('marketplace/init')
             store.dispatch('funding/init')
 
-            if (store.state.application.environment_mode === 'preview') {
+            if (store.state.application.environment_mode === 'preview'
+                || store.state.application.environment_mode === 'beta'
+                || store.state.application.environment_mode === 'production') {
                 BlockHub.importSeedData()
+            }
 
+            if (store.state.application.environment_mode === 'preview') {
                 store.state.application.desktop_mode = true
                 store.state.application.signed_in = true
+
+                // ENABLE ALL DARKLAUNCHES
+                store.state.application.darklaunch_override = true
+
+                // ENABLE SIMULATOR MODE
                 //store.state.application.simulator_mode = true
             }
 

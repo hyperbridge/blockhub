@@ -192,7 +192,7 @@ export const clean = () => {
 export const updateCollection = (collection, data) => {
     let obj = collection.findObject({ 'id': data.id })
 
-    if (obj) {
+    if (obj && obj.$loki) {
         collection.update(data)
     } else {
         data.$loki = undefined
