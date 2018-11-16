@@ -1,16 +1,24 @@
 <template>
-    <li :class="[{'has-submenu' : $slots.submenu }, {'open' : isOpen }]" >
+    <li :class="{'has-submenu' : $slots.submenu, 'open' : isOpen, 'is-minimized' : minimized }">
+
         <router-link :to="to" v-if="!$slots.submenu">
             <i :class="[iconType + ' fa-' + icon ]"></i>
-            <slot />
+            <span>
+                <slot />
+            </span>
         </router-link>
+
         <a href="#" @click="toggleSubMenu" v-else>
             <i :class="[iconType + ' fa-' + icon ]"></i>
-            <slot />
+            <span>
+                <slot />
+            </span>
         </a>
+
         <ul class="sub-menu" v-if="$slots.submenu">
             <slot name="submenu" />
         </ul>
+
     </li>
 </template>
 
@@ -26,6 +34,10 @@
             iconType: {
                 type: String,
                 default: 'fas'
+            },
+            minimized: {
+                type: Boolean,
+                default: false
             }
         },
         data(){
@@ -41,7 +53,7 @@
             }
         },
         mounted(){
-            console.log('find el', this.$el)
+            console.log('minimized', this.$parent['minimized'])
         }
     }
 </script>
@@ -72,6 +84,7 @@
                 text-decoration: none;
             }
             &.is-active{
+                background: rgba(0, 0, 0, 0.03);
                 i{
                     color: #65bbfb;
                 }
@@ -101,6 +114,47 @@
         &.open{
             .sub-menu{
                 display: flex;
+            }
+        }
+        &.is-minimized{
+            a{
+                padding: 0;
+            }
+            i{
+                margin: 0;
+                width: 100%;
+            }
+            span{
+                display: none;
+            }
+            &:before{
+                display: none;
+            }
+            position: relative;
+            .sub-menu{
+                position: absolute;
+                transform: translateX(40px);
+                width: 200px;
+                top: 0;
+                z-index: 10;
+                padding-left: 10px;
+                li{
+                    background: #efeeef;
+                    a{
+                        padding: 0 10px;
+                        i{
+                            width: 20px;
+                        }
+                    }
+                }
+                span{
+                    display: block;
+                }
+            }
+            &:hover{
+                .sub-menu{
+                    display: flex;
+                }
             }
         }
     }

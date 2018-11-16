@@ -19,14 +19,15 @@
 
         <!-- PAGE LEFT PANEL -->
         <transition name="slideRight">
-            <div class="page-aside left-sidebar" id="page-aside" v-if="showLeftPanel" :class="{'invert' : darkMode}">
+            <div class="page-aside left-sidebar" id="page-aside" v-if="showLeftPanel" :class="{'invert' : darkMode, 'is-minimized' : minimized}">
                 <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
                     <div class="left-sidebar__option">
-                        <button>
-                            <i class="fas fa-angle-right"></i>
+                        <button @click="minimized = !minimized" :class="{'m-auto' : minimized }">
+                            <i class="fas fa-angle-right" v-if="minimized"></i>
+                            <i class="fas fa-angle-left" v-else></i>
                         </button>
                     </div>
-                    <c-business-sidebar />
+                    <c-business-sidebar :minimized="minimized" />
                 </div>
             </div>
         </transition>
@@ -117,6 +118,23 @@
             #left-bg{
                 display: none!important;
             }
+            #business-app {
+                ::-webkit-scrollbar-track {
+                    /* background: rgba(0, 0, 0, .3);
+                    border-radius: 0 4px 4px 0; */
+                }
+
+                ::-webkit-scrollbar-thumb {
+                    background: #cccccc;
+                    border-radius: 8px;
+                    border: unset;
+                }
+
+                ::-webkit-scrollbar {
+                    width: 7px;
+                    height: 4px;
+                }
+            }
         }
     }
 </style>
@@ -172,6 +190,7 @@
         display: flex;
         flex-direction: column;
         background: #fff;
+        transition: all 200ms ease-in-out;
         .divider{
             opacity: .3;
         }
@@ -181,6 +200,9 @@
             .text-secondary{
                 color: #5D75F7!important;
             }
+        }
+        &.is-minimized{
+            width: 60px;
         }
     }
     .page-aside .navigation,
@@ -192,12 +214,13 @@
         padding-top: 60px;
         border-left: 1px solid rgba(0, 0, 0, 0.1);
         border-right: 1px solid rgba(0, 0, 0, 0.1);
+        transition: all 200ms ease-in-out;
         &.left-sidebar,
         &.right-sidebar{
-            width: calc( 100% - 250px );
+            min-width: calc( 100% - 250px );
         }
         &.left-sidebar.right-sidebar{
-            width: calc( 100% - 500px );
+            min-width: calc( 100% - 500px );
         }
         &.invert{
             background: $dark_color_1;
@@ -218,10 +241,11 @@
         }
     }
     .left-sidebar__option{
-        margin: -2px -20px 20px;
+        margin: -2px -10px 20px;
         display: flex;
         padding: 0 10px 10px;
         border-bottom: 1px solid rgba(0, 0, 0, .1);
+        text-align: right;
         button{
             font-size: 15px;
             background: #f5f6f5;
@@ -233,6 +257,7 @@
             text-align: center;
             border-radius: 3px;
             padding: 0;
+            margin-left: auto;
             &:active,
             &:focus{
                 user-select: none;
