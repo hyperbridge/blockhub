@@ -31,25 +31,23 @@
         },
         computed: {
             identity() {
-                return this.$store.state.application.account.current_identity;
+                return this.$store.getters['application/identity'];
             }
         },
         methods: {
             async loadData() {
                 this.loading = true;
-                await new Promise(res => setTimeout(res, 2000));
+                await new Promise(r => setTimeout(r, 2000));
                 this.results = transactionsData
                     .filter(trx => trx.you.id == this.identity.id)
                     .map(trx => ({ ...trx, createdAt: moment() }));
                 this.loading = false;
             }
         },
-        created() {
-            this.loadData();
-        },
         watch: {
-            'identity.id'() {
-                this.loadData();
+            'identity.id': {
+                handler: 'loadData',
+                immediate: true
             }
         }
     }

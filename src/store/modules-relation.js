@@ -18,6 +18,10 @@ const relations = {
             messages: [COMMUNITY, 'messages'],
             yourOffer: [ASSETS, 'assets'],
             contractorOffer: [ASSETS, 'assets']
+        },
+        offers: {
+            bids: [ASSETS, 'offerBids'],
+            seller: [COMMUNITY, 'offersSeller']
         }
     },
     [COMMUNITY]: {
@@ -29,6 +33,8 @@ const relations = {
     }
 };
 
+/* Feature: Automatically create described sub-properties for each module */
+
 export const findRelationV1 = (module, target, prop) =>
     (relations[module][target] && relations[module][target][prop]) || module;
 
@@ -39,7 +45,8 @@ export const findRelation = (module, target, prop) =>
 
 
 export const decompose = (destination, data) =>
-    data.reduce((mutations, item) => {
+    data.reduce((mutations, singleItem) => {
+        const item = { ...singleItem };
 
         const [module, target] = destination.split('/');
         const relation = relations[module][target];
@@ -53,13 +60,17 @@ export const decompose = (destination, data) =>
                         const mutName = `${propModule}/${propTarget}`;
 
                         mutations[mutName] = mutations[mutName] || [];
-                        mutations[mutName].push(...item[prop]);
+                        const checkType = arr => Array.isArray(arr) ? arr : [arr];
+                        mutations[mutName] = [...mutations[mutName], ...checkType(item[prop])];
 
                         const subRelation = relations[propModule][propTarget];
+                        if (subRelation) {
+                        const subValue = Array.isArray(item[prop]) ? item[prop] : [item[prop]];
+                        decompRelation(subRelation, subValue);
+                        }
 
-                        if (subRelation) decompRelation(subRelation, item[prop]);
-
-                        item[prop] = item[prop].map(el => el.id);
+                        if (Array.isArray(item[prop])) item[prop] = item[prop].map(el => el.id);
+                        else item[prop] = item[prop].id;
                     }
                 }
             }

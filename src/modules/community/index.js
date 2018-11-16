@@ -22,7 +22,8 @@ const community = {
             ...users,
             [user.id]: user
         }), {}),
-        identities: normalize(identitiesData)
+        identities: normalize(identitiesData),
+        offersSeller: {}
     },
     mutations: {
         create(state, { target = 'messages', id, data }) {

@@ -254,7 +254,7 @@
                 }
             },
             updateEditorMode() {
-                this.$store.state.application.editor_mode = 'viewing'
+                // this.$store.state.application.editor_mode = 'viewing'
             },
             toggleDesktopMode() {
                 this.$store.state.application.desktop_mode = !this.$store.state.application.desktop_mode
@@ -275,13 +275,13 @@
                 this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulator_mode)
             },
             rotateEditorMode() {
-                if (this.$store.state.application.editor_mode === 'editing') {
-                    this.$store.state.application.editor_mode = 'viewing'
-                } else if (this.$store.state.application.editor_mode === 'viewing') {
-                    this.$store.state.application.editor_mode = 'publishing'
-                } else {
-                    this.$store.state.application.editor_mode = 'editing'
-                }
+                // if (this.$store.state.application.editor_mode === 'editing') {
+                //     this.$store.state.application.editor_mode = 'viewing'
+                // } else if (this.$store.state.application.editor_mode === 'viewing') {
+                //     this.$store.state.application.editor_mode = 'publishing'
+                // } else {
+                //     this.$store.state.application.editor_mode = 'editing'
+                // }
             },
             rotateOperatingSystem() {
                 if (this.$store.state.application.operating_system === 'mac') {

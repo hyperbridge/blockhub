@@ -14,12 +14,18 @@
                     <c-swiper :options="options">
                         <c-slide
                             v-for="identity in identities"
-                            :key="identity.id">
-                            <div class="user-card__container-link" @click="setDefault(identity)">
+                            :key="identity.id"
+                        >
+                            <div
+                                class="user-card__container-link"
+                                @click="setDefault(identity)"
+                            >
                                 <c-user-card
                                     :user="identity"
                                     :previewMode="!identity.edit"
-                                    :class="{ 'default': identity.id == (defaultIdentity && defaultIdentity.id) }"
+                                    :class="{
+                                        'default': currentIdentity && identity.id == currentIdentity.id
+                                    }"
                                 />
                             </div>
                         </c-slide>
@@ -80,19 +86,21 @@
                     if (!this.$store.state.application.account.identities[i].name)
                         this.$store.state.application.account.identities[i].name = 'Default'
                 }
-
                 return this.$store.state.application.account.identities
             },
-            defaultIdentity() {
-                return this.identities.find(identity => this.$store.state.application.account.current_identity ? identity.id == this.$store.state.application.account.current_identity.id : null)
+            currentIdentity() {
+                return this.$store.getters['application/identity'];
             }
         },
-        methods:{
+        methods: {
             closeProfileChooser() {
                 this.$store.commit('application/showProfileChooser', false)
             },
             setDefault(identity) {
-                this.$store.state.application.account.current_identity = identity
+                this.$store.commit(
+                    'updateSingle',
+                    ['application/account', { active_identity: identity.id }]
+                );
                 this.$store.state.application.developer_mode = !!identity.developer_id
             }
         }

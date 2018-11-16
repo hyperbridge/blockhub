@@ -10,8 +10,8 @@
                         </h2>
                     </transition>
 
-                    <p>You are connected to marketplace as: </p>
-                    {{ identity.name }}
+                    <p>You are connected to marketplace as:</p>
+                    <c-user :user="identity"/>
 
                     <nav>
                         <ul class="marketplace-menu reset-list">
@@ -39,6 +39,7 @@
     export default {
         components: {
             'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
+            'c-user': (resolve) => require(['@/ui/components/user/simple'], resolve),
         },
         computed: {
             assets() {
@@ -61,7 +62,7 @@
         },
         computed: {
             identity() {
-                return this.$store.getters['application/account'].active_identity;
+                return this.$store.getters['application/identity'];
             }
         }
     }
