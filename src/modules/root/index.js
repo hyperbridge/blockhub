@@ -1,5 +1,5 @@
 import { getId, mergeId, normalize } from '@/store/utils';
-import { findRelation, decompose } from '@/store/modules-relation';
+import { findRelation, decompose, findRelationPaths } from '@/store/modules-relation';
 
 
 const rootStore = {
@@ -55,9 +55,11 @@ const rootStore = {
                 ...normalize(data)
             }
         },
-        clearData(rootState, [targets]) {
-            const [module, target] = targets.split('/');
-            rootState[module][target] = {};
+        clearData(rootState, paths) {
+            for (let path of paths) {
+                const [module, target] = path.split('/');
+                rootState[module][target] = {};
+            }
         }
     },
     actions: {
@@ -159,8 +161,8 @@ const rootStore = {
                 commit('loadData', [mutation, data]);
             }
         },
-        clearData({ commit }, [target]) {
-
+        clearData({ commit }, target) {
+            commit('clearData', findRelationPaths(target));
         }
     }
 };
