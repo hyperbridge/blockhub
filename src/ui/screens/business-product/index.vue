@@ -6,13 +6,13 @@
                 <div class="page-heading__container" style="float: none">
                     <h1 class="title" style="float: left'">Product Creation</h1>
                     <div class="float-right mb-3" v-if="product.id">
-                        <a :href="`/#/product/${product.id}`" class="btn btn-primary">PREVIEW</a>
+                        <a :href="`#/product/${product.id}`" class="btn btn-primary">PREVIEW</a>
                     </div>
                 </div>
 
                 <nav aria-label="breadcrumb" role="navigation">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/#/business">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#/business">Dashboard</a></li>
                         <li class="breadcrumb-item active">Product</li>
                     </ol>
                 </nav>

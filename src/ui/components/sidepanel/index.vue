@@ -141,12 +141,12 @@
                             <ul>
                                 <li class="title">TOP 5</li>
                                 <li v-for="(product, index) in $store.state.marketplace.top_5" :key="index">
-                                    <a :href="`/#/product/${product.id}`">
+                                    <a :href="`#/product/${product.id}`">
                                         <span class="text">{{ product.name }}</span>
                                     </a>
                                 </li>
                                 <li class="more">
-                                    <a href="/#/search">
+                                    <a href="#/search">
                                         <span class="text">MORE...</span>
                                     </a>
                                 </li>
@@ -156,12 +156,12 @@
                             <ul>
                                 <li class="title">TOP FREE</li>
                                 <li v-for="(product, index) in $store.state.marketplace.top_free.slice(0, 5)" :key="index">
-                                    <a :href="`/#/product/${product.id}`">
+                                    <a :href="`#/product/${product.id}`">
                                         <span class="text">{{ product.name }}</span>
                                     </a>
                                 </li>
                                 <li class="more">
-                                    <a href="/#/search">
+                                    <a href="#/search">
                                         <span class="text">MORE...</span>
                                     </a>
                                 </li>
@@ -183,7 +183,7 @@
             </div>
             <div slot="body" v-html="currentUpdate.content" />
             <small slot="footer">
-                Missed an update? <c-button status="plain" href="/#/updates">Check our previous updates here.</c-button>
+                Missed an update? <c-button status="plain" href="#/updates">Check our previous updates here.</c-button>
             </small>
         </c-basic-popup>
     </div>

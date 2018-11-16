@@ -10,7 +10,7 @@
 
                 <nav aria-label="breadcrumb" role="navigation">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/#/business">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#/business">Dashboard</a></li>
                         <li class="breadcrumb-item active">Crowdfund</li>
                     </ol>
                 </nav>

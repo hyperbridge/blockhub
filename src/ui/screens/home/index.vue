@@ -2,14 +2,14 @@
     <c-layout navigationKey="store">
             <div class="row">
                 <div class="col-12 mb-4">
-                    <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="/#/token">
+                    <c-banner :imgSrc="'/static/img/banners/banner-3.png'" link="#/token">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h3 class="text-yellow">Launch Sale</h3>
                                 <p>BlockHub has launched and the token sale is now live!</p>
                             </div>
                             <div class="banner-action">
-                                <c-button tag="div" tatus="info" icon_hide size="lg" href="/#/token">JOIN NOW</c-button>
+                                <c-button tag="div" tatus="info" icon_hide size="lg" href="#/token">JOIN NOW</c-button>
                             </div>
                         </div>
                     </c-banner>
@@ -33,7 +33,7 @@
                     <p>To make things simple, hold ALT and click anywhere to send us feedback/bug reports!<p>
                     <p>Thanks for visiting and joining us on the journey to a decentralized future.</p>
                     <p hidden>We're a platform built by the community, for the community.</p>
-                    <p hidden><a href="/#/help" target="_blank">Check out the BlockHub crowdfund</a></p>
+                    <p hidden><a href="#/help" target="_blank">Check out the BlockHub crowdfund</a></p>
                 </div>
                 <div slot="modal_footer" class="text-right w-100">
                     <c-button size="md" @click="closeModal">Got it</c-button>
@@ -171,7 +171,7 @@ export default {
                             title: 'Item Marketplace',
                             subtitle: 'All-in-one spot for games assets',
                             buttonText: 'GAME ON',
-                            link: '/#/marketplace'
+                            link: '#/marketplace'
                         },
                         {
                             type: 4,
@@ -179,7 +179,7 @@ export default {
                             image: '/static/img/banners/banner-4.png',
                             title: 'Top Collections',
                             subtitle: 'Our community has curated the best ones for you',
-                            link: '/#/collections'
+                            link: '#/collections'
                         },
                     ]
                 }

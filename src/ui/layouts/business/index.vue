@@ -4,7 +4,7 @@
 
         <transition name="slideDown">
             <div class="page-top-bar draggable" :class="{'invert' : darkMode}">
-                <a class="logo-holder undraggable" href="/#/">
+                <a class="logo-holder undraggable" href="#/">
                     <c-img src="/static/img/logo-white.svg" alt="Logo" v-if="darkMode" />
                     <c-img src="/static/img/logo.svg" alt="Logo" style="height: 90%; margin-top: 2%" v-else />
                 </a>

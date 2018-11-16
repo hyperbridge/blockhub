@@ -852,9 +852,9 @@ storiesOf('Sidebar Menu', module)
         data() {
             return {
                 links: [
-                    {to: {path: '/#/'}, title: 'Suggesting Features'},
-                    {to: {path: '/#/'}, title: 'Voting and Curating Updates'},
-                    {to: {path: '/#/'}, title: 'MORE ...'}
+                    {to: {path: '#/'}, title: 'Suggesting Features'},
+                    {to: {path: '#/'}, title: 'Voting and Curating Updates'},
+                    {to: {path: '#/'}, title: 'MORE ...'}
                 ],
             }
         },
@@ -871,9 +871,9 @@ storiesOf('Sidebar Menu', module)
         data() {
             return {
                 links: [
-                    {to: {path: '/#/'}, title: 'Suggesting Features'},
-                    {to: {path: '/#/'}, title: 'Voting and Curating Updates'},
-                    {to: {path: '/#/'}, title: 'MORE ...'}
+                    {to: {path: '#/'}, title: 'Suggesting Features'},
+                    {to: {path: '#/'}, title: 'Voting and Curating Updates'},
+                    {to: {path: '#/'}, title: 'MORE ...'}
                 ],
             }
         },
@@ -890,7 +890,7 @@ storiesOf('Sidebar Menu', module)
         template: `<div class="row m-0">
                 <div class="col-3 p-4">
                     <c-sidebar-menu-link
-                                 :to="{ path: '/#/' }"
+                                 :to="{ path: '#/' }"
                                  title="Suggesting Features">
                                  Suggesting Features
                     </c-sidebar-menu-link>
@@ -2608,7 +2608,7 @@ storiesOf('News List', module)
                         ],
                         "heading": "New class and event coming next week!",
                         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                        "url": "/#/post/1",
+                        "url": "#/post/1",
                         "date": "2018-07-24T04:09:00.000Z"
                     },
                     {
@@ -2620,7 +2620,7 @@ storiesOf('News List', module)
                         ],
                         "heading": "New class and event coming next week!",
                         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                        "url": "/#/post/1",
+                        "url": "#/post/1",
                         "date": "2016-09-24T04:09:00.000Z"
                     },
                     {
@@ -2632,7 +2632,7 @@ storiesOf('News List', module)
                         ],
                         "heading": "New class and event coming next week!",
                         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                        "url": "/#/post/1",
+                        "url": "#/post/1",
                         "date": "2014-03-24T04:09:00.000Z"
                     },
                     {
@@ -2644,7 +2644,7 @@ storiesOf('News List', module)
                         ],
                         "heading": "New class and event coming next week!",
                         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                        "url": "/#/post/1",
+                        "url": "#/post/1",
                         "date": "2017-12-24T04:09:00.000Z"
                     }
                 ]
@@ -2676,7 +2676,7 @@ storiesOf('News List', module)
                     ],
                     "heading": "New class and event coming next week!",
                     "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                    "url": "/#/post/1",
+                    "url": "#/post/1",
                     "date": "2018-07-24T04:09:00.000Z"
                 },
             }

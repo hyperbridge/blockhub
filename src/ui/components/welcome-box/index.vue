@@ -71,41 +71,41 @@
                         default: {
                             text: 'MacOS',
                             subtext: '64-bit',
-                            link: '/#/download/desktop/mac'
+                            link: '#/download/desktop/mac'
                         }
                     },
                     'windows': {
                         default: {
                             text: 'Windows',
                             subtext: '64-bit',
-                            link: '/#/download/desktop/windows'
+                            link: '#/download/desktop/windows'
                         },
                         generic32: {
                             text: 'Windows',
                             subtext: '32-bit',
-                            link: '/#/download/desktop/windows-32bit'
+                            link: '#/download/desktop/windows-32bit'
                         },
                     },
                     'linux': {
                         default: {
                             text: 'Linux',
                             subtext: '64-bit',
-                            link: '/#/download/desktop/linux'
+                            link: '#/download/desktop/linux'
                         },
                         generic32: {
                             text: 'Linux',
                             subtext: '32-bit',
-                            link: '/#/download/desktop/linux-32bit'
+                            link: '#/download/desktop/linux-32bit'
                         },
                         debian64: {
                             text: 'Linux',
                             subtext: '64-bit Debian',
-                            link: '/#/download/desktop/linux-64bit-debian'
+                            link: '#/download/desktop/linux-64bit-debian'
                         },
                         debian32: {
                             text: 'Linux',
                             subtext: '32-bit Debian',
-                            link: '/#/download/desktop/linux-32bit-debian'
+                            link: '#/download/desktop/linux-32bit-debian'
                         }
                     }
                 }

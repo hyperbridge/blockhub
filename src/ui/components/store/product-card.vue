@@ -1,8 +1,8 @@
 <template>
     <div class="product-grid__item">
         <div class="card-body padding-0">
-            <a :href="`/#/product/${product.id}`"><c-img class="card-img-top" :src="product.images.medium_tile" /></a>
-            <h4><a :href="`/#/product/${product.id}`">{{ product.name }}</a></h4>
+            <a :href="`#/product/${product.id}`"><c-img class="card-img-top" :src="product.images.medium_tile" /></a>
+            <h4><a :href="`#/product/${product.id}`">{{ product.name }}</a></h4>
             <p class="card-text" hidden>{{ product.short_description }} </p>
             <c-tags :tags="product.developer_tags.slice(0,3)" />
         </div>

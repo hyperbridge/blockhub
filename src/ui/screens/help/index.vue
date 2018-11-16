@@ -17,7 +17,7 @@
                     <div class="col-12">
                         <c-block title="Trending articles" class="margin-bottom-30" v-if="articles">
                             <div class="article-list">
-                                <c-article-item :link="`/#/help/${0}/article/${article.slug}`"
+                                <c-article-item :link="`#/help/${0}/article/${article.slug}`"
                                                 v-for="(article, index) in showByTopic(0)"
                                                 :key="index"
                                                 :class="{'mb-0': articles.length === index+1 }"
@@ -32,7 +32,7 @@
                                 <c-topic-item
                                     v-for="(topic, index) in topics"
                                     :key="index"
-                                    :link="`/#/help/${topic.id}`"
+                                    :link="`#/help/${topic.id}`"
                                     :icon="topic.icon"
                                     class="padding-10">
                                     {{ topic.label }}
@@ -43,7 +43,7 @@
                     <div class="col-12 col-lg-6 margin-bottom-30">
                         <c-block title="Changelog">
                             <div class="simple-list">
-                                <c-list-item :link="`/#/help/${5}/article/${article.slug}`"
+                                <c-list-item :link="`#/help/${5}/article/${article.slug}`"
                                              v-for="(article, index) in showByTopic(5)"
                                              :key="index"
                                              :class="{'mb-0': articles.length === index+1 }"
@@ -56,7 +56,7 @@
                     <div class="col-12 col-lg-6 margin-bottom-30">
                         <c-block title="Common issues">
                             <div class="simple-list">
-                                <c-list-item :link="`/#/help/${6}/article/${article.slug}`"
+                                <c-list-item :link="`#/help/${6}/article/${article.slug}`"
                                              v-for="(article, index) in showByTopic(6)"
                                              :key="index"
                                              :class="{'mb-0': articles.length === index+1 }"

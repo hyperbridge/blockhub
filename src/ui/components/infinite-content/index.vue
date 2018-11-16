@@ -7,7 +7,7 @@
                         <c-img :src="item.data.images.medium_tile" />
                     </div>
                     <div class="col-12 col-lg-6 frontpage-product__info">
-                        <h2><a :href="`/#/product/${item.data.id}`">{{ item.data.name }}</a></h2>
+                        <h2><a :href="`#/product/${item.data.id}`">{{ item.data.name }}</a></h2>
                         <p>{{ item.data.short_description }}</p>
                         <c-tags :tags="item.data.developer_tags"></c-tags>
                         <div class="frontpage-product__footer">
@@ -50,14 +50,14 @@
 
                 <div class="row align-items-stretch" v-if="item.type === 'banners'" :key="`level-1-${index}`">
                     <div class="col-12 col-md-5 col-lg-4 margin-bottom-30">
-                        <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="/#/battlepass/1">
+                        <c-banner :imgSrc="'/static/img/banners/banner-1.png'" link="#/battlepass/1">
                             <h4 class="text-yellow">summer block</h4>
                             <h3>Championship</h3>
                             <p>You won't believe the prize!</p>
                         </c-banner>
                     </div>
                     <div class="col-12 col-md-7 col-lg-8 margin-bottom-30">
-                        <c-banner :imgSrc="'/static/img/banners/banner-2.png'" link="/#/curators">
+                        <c-banner :imgSrc="'/static/img/banners/banner-2.png'" link="#/curators">
                             <div class="align-items-start">
                                 <h3 class="text-yellow margin-bottom-5">top<br>curators</h3>
                                 <h4 class="text-capitalize">What are they<br>playing?</h4>
@@ -182,7 +182,7 @@
                             />
                             <c-swiper :options="item.data.options" :ref="swiper">
                                 <c-slide v-for="(realm, index) in item.data.realms" :key="index">
-                                    <c-button :href="`/#/realm/${realm.id}`">{{ realm.name }}</c-button>
+                                    <c-button :href="`#/realm/${realm.id}`">{{ realm.name }}</c-button>
                                 </c-slide>
                             </c-swiper>
                             <p v-if="!item.data.realms.length">Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>

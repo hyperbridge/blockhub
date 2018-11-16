@@ -12,7 +12,7 @@
                 <div v-if="item.price && showPrice" class="price" :class="['price-position-' + pricePosition]">
                     <strong>{{ item.price | convertCurrency }}</strong>
                 </div>
-                <a :href="`/#/product/${item.id}`">
+                <a :href="`#/product/${item.id}`">
                     <c-img :src="item.images.medium_tile" />
                 </a>
                 <div class="crowdfund-icon" v-if="item.crowdfund">
@@ -32,7 +32,7 @@
                             <span class="ml-4" style="color: #499fd3">Pre Release</span>
                         </template>
                     </div>
-                    <a  :href="`/#/product/${item.id}`"
+                    <a  :href="`#/product/${item.id}`"
                         :title="item.name + ' - product page'"
                     >
                         <h4>{{ item.name }}</h4>
@@ -84,7 +84,7 @@
                     <c-button
                         status="success"
                         v-if="showLink"
-                        :href="`/#/product/${item.id}`"
+                        :href="`#/product/${item.id}`"
                         icon_hide
                     >More</c-button>
                 </div>

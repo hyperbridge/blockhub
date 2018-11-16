@@ -19,7 +19,7 @@
                     </a>
                 </div>
                 <div v-if="!desktop_mode">
-                    <a class="app-header__bar-left-link" href="/#/">
+                    <a class="app-header__bar-left-link" href="#/">
                         <span class="fa fa-home"></span>
                     </a>
                     <a class="app-header__bar-left-link hide-on-mobile" @click="$router.go(-1)">
@@ -64,36 +64,36 @@
                     <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
                     <ul>
                         <li class="app-header__create-account-btn" v-if="desktop_mode && !signed_in && !is_locked">
-                            <a href="/#/account/signup" class="">
+                            <a href="#/account/signup" class="">
                                 <span class="text">CREATE ACCOUNT</span> <span class="fa fa-user-plus"></span>
                             </a>
                         </li>
                         <li class="app-header__download-btn" v-if="!desktop_mode">
-                            <a href="/#/download" class="">
+                            <a href="#/download" class="">
                                 <span class="text">DOWNLOAD</span> <span class="fa fa-download"></span>
                             </a>
                         </li>
                         <li v-if="signed_in">
-                            <a href="/#/">
+                            <a href="#/">
                                 <span class="icon fa fa-shopping-cart"></span>
                                 <span class="text">Store</span>
                             </a>
                         </li>
                         <li v-if="signed_in" v-darklaunch="'CHEST'">
-                            <a href="/#/chest">
+                            <a href="#/chest">
                                 <span class="icon fa fa-box-open"></span>
                                 <span class="text">Chest</span>
                             </a>
                         </li>
                         <li v-if="signed_in">
-                            <a href="/#/streams" v-darklaunch="'STREAMS'">
+                            <a href="#/streams" v-darklaunch="'STREAMS'">
                                 <span class="icon fa fa-eye"></span>
                                 <span class="text">Streams</span>
                                  <!-- podcast  global hand-holding-heart -->
                             </a>
                         </li>
                         <li v-if="signed_in" v-darklaunch="'COMMUNITY'">
-                            <a href="/#/community">
+                            <a href="#/community">
                                 <span class="icon fa fa-globe-americas"></span>
                                 <span class="text">Community</span>
                             </a>
@@ -110,7 +110,7 @@
                             </button>
                         </li>
                         <li v-if="signed_in" class="token">
-                            <a href="/#/token">
+                            <a href="#/token">
                                 <span class="token__count">
                                     0 <span class="icon fa fa-coins"></span>
                                 </span>
@@ -127,25 +127,25 @@
                                 </template>
                                 <ul class="item-dropdown">
                                     <li>
-                                        <a href="/#/account">
+                                        <a href="#/account">
                                             <i class="fas fa-user"></i>
                                             Account Info
                                         </a>
                                     </li>
                                     <li v-darklaunch="'WALLETS'">
-                                        <a href="/#/account/wallets">
+                                        <a href="#/account/wallets">
                                             <i class="fas fa-credit-card"></i>
                                             My Wallets
                                         </a>
                                     </li>
                                     <li v-if="account.active_identity">
-                                        <a :href="`/#/identity/${currentIdentity.public_address}`">
+                                        <a :href="`#/identity/${currentIdentity.public_address}`">
                                             <i class="fas fa-user"></i>
                                             View Public Profile
                                         </a>
                                     </li>
                                     <li v-if="signed_in" v-darklaunch="'CONTACTS'">
-                                        <a :href="`/#/identity/${currentIdentity.public_address}/contacts`">
+                                        <a :href="`#/identity/${currentIdentity.public_address}/contacts`">
                                             <i class="fas fa-users"></i>
                                             Contacts
                                         </a>
@@ -157,20 +157,20 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/#/account/identities">
+                                        <a href="#/account/identities">
                                             <i class="fas fa-users-cog"></i>
                                             Profile Manager
                                         </a>
                                     </li>
                                     <hr>
                                     <li v-darklaunch="'CHAT'">
-                                        <a href="/#/settings/chat">
+                                        <a href="#/settings/chat">
                                             <i class="fas fa-comments"></i>
                                             Chat Settings
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/#/help">
+                                        <a href="#/help">
                                             <i class="fas fa-info-circle"></i>
                                             FAQ
                                         </a>
@@ -180,7 +180,7 @@
                             </c-dropdown>
                         </li>
                         <li v-if="desktop_mode && !signed_in && !is_locked">
-                            <a href="/#/account/signin">
+                            <a href="#/account/signin">
                                 <span class="icon fa fa-sign-out-alt"></span>
                                 <span class="text">Sign In</span>
                             </a>
@@ -192,7 +192,7 @@
                             <c-currency-dropdown :current_currency="current_currency" :currencies="currencies" @change="selectCurrency" />
                         </li>
                         <li v-if="!is_locked">
-                            <a href="/#/help">
+                            <a href="#/help">
                                 <span class="icon fa fa-question-circle"></span>
                                 <span class="text">Help</span>
                             </a>

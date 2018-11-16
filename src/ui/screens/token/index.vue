@@ -229,7 +229,7 @@
                         </div>
 
                         <div class="text-center alert alert-info">
-                            <p><strong>If you haven't already, KYC &amp; whitelist your address <c-button href="/#/kyc" @click="gaStep(4)">click here</c-button></strong></p>
+                            <p><strong>If you haven't already, KYC &amp; whitelist your address <c-button href="#/kyc" @click="gaStep(4)">click here</c-button></strong></p>
                         </div>
                     </c-block>
                 </div>
@@ -245,7 +245,7 @@
                             </div>
                             <input type="text" class="form-control" ref="input" placeholder="Public Ethereum address...." v-model="purchaseAddress" />
                         </div>
-                        <p>Haven't verified yet? You'll need to do that! <c-button class="" href="/#/kyc" style="margin: 0 auto" @click="gaStep(5)">Verify Account</c-button></p>
+                        <p>Haven't verified yet? You'll need to do that! <c-button class="" href="#/kyc" style="margin: 0 auto" @click="gaStep(5)">Verify Account</c-button></p>
                     </c-block>
                 </div>
 
@@ -256,7 +256,7 @@
                 <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && desktop_mode && (!account.is_verified && !account.is_verifying) && !override" style="text-align: center">
                     <h2 style="text-align: center" hidden>Oops, you haven't verified your account yet. <br />You'll need to do this to participate.</h2>
                     <br />
-                    <c-button class="c-btn-lg" href="/#/account/verification" style="margin: 0 auto" @click="gaStep(6)">Verify Account</c-button>
+                    <c-button class="c-btn-lg" href="#/account/verification" style="margin: 0 auto" @click="gaStep(6)">Verify Account</c-button>
                     <br /><br />
                     <c-button status="underline" size="sm" @click="manualOverride">Click here if you're pretty sure you've verified</c-button>
                     <br /><br />
@@ -460,7 +460,7 @@
                                         <br />
                                         <template v-if="tokenContractAddress">Payment Address: <a :href="`https://etherscan.io/address/${tokenContractAddress}`" @click="gaStep(21)"><strong>{{ tokenContractAddress }}</strong></a></template>
                                         <br />
-                                        <template v-if="!tokenContractAddress" class="alert alert-warning">No contract address. Check your <a href="/#/settings/protocol">Protocol Settings</a></template>
+                                        <template v-if="!tokenContractAddress" class="alert alert-warning">No contract address. Check your <a href="#/settings/protocol">Protocol Settings</a></template>
                                     </p>
                                 </div>
 

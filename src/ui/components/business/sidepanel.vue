@@ -9,7 +9,7 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="/#/business/product/new" class="no-icon">
+                        <a href="#/business/product/new" class="no-icon">
                             <span class="text">New Product</span>
                         </a>
                     </li>
@@ -28,7 +28,7 @@
                         </a>
                         <ul>
                             <li>
-                                <a href="/#/business/project/new" class="no-icon">
+                                <a href="#/business/project/new" class="no-icon">
                                     <span class="text">New Crowdfund</span>
                                 </a>
                             </li>

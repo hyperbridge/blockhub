@@ -11,7 +11,7 @@
             </div>
             <div class="user-data__avatar" v-if="previewMode">
                 <a
-                    :href="`/#/identities/${user.id}`"
+                    :href="`#/identities/${user.id}`"
                     class="user-data__avatar-upload-btn"
                 >
                     <c-img v-if="user.img" :src="user.img" />
