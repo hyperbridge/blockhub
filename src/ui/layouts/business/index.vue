@@ -1,38 +1,48 @@
 <template>
     <!-- PAGE WRAPPER -->
     <div id="business-app" class="page page--w-header page--w-container">
-        <div class="page-top-bar draggable" :class="{'invert' : darkMode}">
-            <a class="logo-holder undraggable" href="/#/">
-                <c-img src="/static/img/logo-white.svg" alt="Logo" v-if="darkMode" />
-                <c-img src="/static/img/logo.svg" alt="Logo" style="height: 90%; margin-top: 2%" v-else />
-            </a>
-            <div class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
-                Business Manager
+
+        <transition name="slideDown">
+            <div class="page-top-bar draggable" :class="{'invert' : darkMode}">
+                <a class="logo-holder undraggable" href="/#/">
+                    <c-img src="/static/img/logo-white.svg" alt="Logo" v-if="darkMode" />
+                    <c-img src="/static/img/logo.svg" alt="Logo" style="height: 90%; margin-top: 2%" v-else />
+                </a>
+                <div class="h2 ml-4 mb-0 pl-4 text-uppercase border-left">
+                    Business Manager
+                </div>
+                <div class="mb-0 float-right h5" style="margin-left: auto">
+                    {{ current_identity.name }}
+                </div>
             </div>
-            <div class="mb-0 float-right h5" style="margin-left: auto">
-                {{ current_identity.name }}
-            </div>
-        </div>
+        </transition>
+
         <!-- PAGE LEFT PANEL -->
-        <div class="page-aside left-sidebar" id="page-aside" v-if="showLeftPanel" :class="{'invert' : darkMode}">
-            <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
-                <c-business-sidebar />
+        <transition name="slideRight">
+            <div class="page-aside left-sidebar" id="page-aside" v-if="showLeftPanel" :class="{'invert' : darkMode}">
+                <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
+                    <c-business-sidebar />
+                </div>
             </div>
-        </div>
+        </transition>
         <!---->
 
         <!-- PAGE CONTENT -->
-        <div class="content" id="content" :class="{'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel, 'invert' : darkMode }">
-            <slot />
-        </div>
+        <transition name="fade">
+            <div class="content" id="content" :class="{'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel, 'invert' : darkMode }">
+                <slot />
+            </div>
+        </transition>
         <!---->
 
         <!-- PAGE RIGHT PANEL -->
-        <div class="page-sidepanel text-right" id="page-sidepanel" v-if="showRightPanel" :class="{'invert' : darkMode}">
-            <div class="page-sidepanel__content">
-                <slot name="right" />
+        <transition name="slideRight">
+            <div class="page-sidepanel text-right" id="page-sidepanel" v-if="showRightPanel" :class="{'invert' : darkMode}">
+                <div class="page-sidepanel__content">
+                    <slot name="right" />
+                </div>
             </div>
-        </div>
+        </transition>
         <!---->
     </div>
 </template>
@@ -167,6 +177,10 @@
             }
         }
     }
+    .page-aside .navigation,
+    .page-sidepanel .navigation{
+        padding: 0;
+    }
     .content{
         width: 100%;
         padding-top: 60px;
@@ -196,5 +210,11 @@
                 color: #5D75F7!important;
             }
         }
+    }
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+        opacity: 0;
     }
 </style>

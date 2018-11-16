@@ -4,7 +4,6 @@
             <ul>
                 <li
                     v-for="(tab, index) in tabs"
-                    :key="index"
                     :class="`nav-item layer${index+1}`"
                 >
                     <a

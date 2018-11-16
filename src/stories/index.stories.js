@@ -2411,21 +2411,18 @@ storiesOf('Game Plans', module)
             return object('Data', {
                 plans: [
                     {
-                        "title": "Play Tibia Now",
-                        "link": "#3",
-                        "link_text": "Play Now"
+                        "title": "Play Now",
+                        "link": "#3"
                     },
                     {
-                        "title": "1 Month Premium benefits",
-                        "price": "34",
-                        "link": "#4",
-                        "link_text": "Buy Now"
+                        "title": "3 Month Subscription",
+                        "price": "12.95",
+                        "link": ""
                     },
                     {
-                        "title": "2 Month Premium benefits",
-                        "price": "57",
-                        "link": "#4",
-                        "link_text": "Buy Now"
+                        "title": "1 Year Subscription",
+                        "price": "120.95",
+                        "link": ""
                     }
                 ]
             })
@@ -4267,10 +4264,27 @@ storiesOf('Stream', module)
         components: {
             'c-stream-item': StreamItem
         },
+        data(){
+            return{
+                "game": "Dota II",
+                "userName": "GodOfDota",
+                "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVIOE5IdK4MWeI-iEphf-BhZh2XsXBrBn_fcsGXbFGSF-xwH8h",
+                "previews": "http://dota2-videos.com/wp-content/uploads/2018/07/jx3Oj0O-G8Ihqdefault.jpg",
+                "src": "#",
+                "views": 10
+            }
+        },
         template: `
         <div class="row p-5">
             <div class="col-5">
-                <c-stream-item />
+                <c-stream-item 
+                :streamGame="game"
+                :streamName="userName"
+                :streamAvatar="userAvatar"
+                :streamImg="previews"
+                :streamSrc="src"
+                :streamViews="views"
+                />
             </div>
         </div>
         
@@ -4529,6 +4543,27 @@ storiesOf('Landing Page', module)
         </div>
             `
     }))
+    .add('reward list', () =>({
+        components:{
+            'c-landing-reward-list': (resolve) => require(['@/ui/components/landing/block-content/reward-list'], resolve),
+        },
+        data(){
+            return{
+            }
+        },
+        template:
+            `
+            <div class="p-5" style="width: 1000px;">
+                <c-landing-reward-list>
+                    <template slot="list">
+                        <div v-for="(item, index) in list" :key="index" class="my-1" style="font-size: 15px; opacity: .8">
+                            {{ item }}
+                        </div>
+                    </template>
+                </c-landing-reward-list>
+            </div>
+            `
+    }))
     .add('page', () => ({
         components: {
             'c-landing-block': LandingContent,
@@ -4542,6 +4577,9 @@ storiesOf('Landing Page', module)
             'c-landing-gradient-block' : (resolve) => require(['@/ui/components/landing/block-content/gradient'], resolve),
             'c-landing-benefactor' : (resolve) => require(['@/ui/components/landing/block-content/benefactor'], resolve),
             'c-landing-level': (resolve) => require(['@/ui/components/landing/block-content/level'], resolve),
+            'c-landing-reward-list': (resolve) => require(['@/ui/components/landing/block-content/reward-list'], resolve),
+            'c-landing-divider': (resolve) => require(['@/ui/components/landing/block-content/divider'], resolve),
+            'c-landing-button': (resolve) => require(['@/ui/components/landing/button'], resolve),
         },
         data(){
             return{
@@ -4667,7 +4705,25 @@ storiesOf('Landing Page', module)
                     src: 'http://cdn.dota2.com/apps/dota2/images/international2017/battlepass/immortals/c_legioncommander.png?v=4054578',
                     name: 'Immortal IV'
                 }
-            ]
+            ],
+                reward_list:[
+                    '1 - Immortal Treasure I 2018',
+                    '1 - Immortal Treasure II 2018',
+                    '1 - Immortal Treasure III 2018',
+                    '1 - The International 2018 Music Pack',
+                    '1 - The International 2018 Cursor Pack',
+                    '1 - Eimer Hillburrow Courier',
+                    '1 - Trailgazer Ward Set',
+                    '1 - Taunt: Cold Breakfast',
+                    '1 - International 2018 Player Card Pack x5',
+                    '1 - Pro Circuit Predictions Unlocked',
+                    '1 - Ranked Match Team Challenge Token',
+                    '5 - Ranked Match Team Challenge Token',
+                    '8 - International 2018 Battle Point Tribute - 250 Tokens x2',
+                    '12 - International 2018 Player Card Pack x5',
+                    '24 - Chat Wheel: Crash and burn',
+                    '36 - Ranked Match Team Challenge Token'
+                ]
             }
         },
         template: `
@@ -4732,6 +4788,8 @@ storiesOf('Landing Page', module)
                     </div>
                 </c-landing-block>
                 
+                <c-landing-divider />
+                
                 <c-landing-block 
                 horizontal="center"
                 vertical="center"
@@ -4760,27 +4818,49 @@ storiesOf('Landing Page', module)
                     </div>
                 </c-landing-block>
                 
+                <c-landing-divider />
+                
                 <c-landing-block 
                 title="Some content block title" 
                 horizontal="center"
                 vertical="center"
-                fullHeight 
-                bgImage="https://dota2hq.eu/wallpaper/dota2hq.eu-dota-2-roshan-vs-ursa-desktop-wallpaper-3894-1920x1080.jpg">
-                    <c-landing-block-title-gradient align="center">
-                        Aliquam quis magna at diam convallis congue.
-                    </c-landing-block-title-gradient>
-
-                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
-                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
-                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
-                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
-                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
-
-                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
-                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
-                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
-                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
-                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
+                bgImage="https://steamcdn-a.akamaihd.net/apps/dota2/images/international2018/battlepass/bg_24.png">
+                        <div class="col-10">
+                            <c-landing-reward-list>
+                                <div class="d-flex justify-content-center w-100">
+                                    <div class="text-center mx-3">
+                                        <c-landing-button class="margin-bottom-20" width="280">
+                                            Buy Battle Pass
+                                        </c-landing-button>
+                                        <c-landing-block-title fontSize="13" color="#f8e6c7" class="text-uppercase">
+                                            LEVEL 1  $9.99 USD
+                                        </c-landing-block-title>
+                                        <c-landing-block-title fontSize="13" color="#f8e6c7" class="text-uppercase">
+                                            LEVEL 75  $36.99 USD
+                                        </c-landing-block-title>
+                                    </div>
+                                    <div class="text-center mx-3">
+                                        <c-landing-button class="margin-bottom-20" width="280">
+                                            Buy Levels
+                                        </c-landing-button>
+                                        <c-landing-block-title fontSize="13" color="#f8e6c7" class="text-uppercase">
+                                            5 LEVELS  $2.49 USD
+                                        </c-landing-block-title>
+                                        <c-landing-block-title fontSize="13" color="#f8e6c7" class="text-uppercase">
+                                            11 LEVELS  $4.99 USD
+                                        </c-landing-block-title>
+                                        <c-landing-block-title fontSize="13" color="#f8e6c7" class="text-uppercase">
+                                            24 LEVELS  $9.99 USD
+                                        </c-landing-block-title>
+                                    </div>
+                                </div>
+                                <template slot="list">
+                                    <div v-for="(item, index) in reward_list" :key="index" class="my-1" style="font-size: 15px; opacity: .8">
+                                        {{ item }}
+                                    </div>
+                                </template>
+                            </c-landing-reward-list>
+                        </div>
                 </c-landing-block>
             </div>
             `

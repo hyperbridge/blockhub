@@ -11,8 +11,13 @@
             <span class="margin-left-5" v-if="plan.price">
                 {{ plan.price | convertCurrency }}
             </span>
-            <span class="margin-left-5" v-else-if="plan.link_text">
-                {{ plan.link_text }}
+            <span class="margin-left-5" v-else>
+                <template v-if="plan.link_text">
+                    {{ plan.link_text }}
+                </template>
+                <template v-else>
+                    Play Now
+                </template>
             </span>
         </c-button>
     </div>
