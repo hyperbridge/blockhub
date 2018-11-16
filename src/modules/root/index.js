@@ -1,5 +1,5 @@
 import { getId, mergeId, normalize } from '@/store/utils';
-import { findRelation, decompose } from '@/store/modules-relation';
+import { findRelation, decompose, findRelationPaths } from '@/store/modules-relation';
 
 
 const rootStore = {
@@ -9,7 +9,7 @@ const rootStore = {
             console.log('ROOT CREATE',id, module, target, data)
             rootState[module][target] = { ...state[target], [id]: data };
         },
-        update(rootState,  { id, module, target, data }) {
+        updateV3(rootState,  { id, module, target, data }) {
             const { [module]: state } = rootState;
 
             console.log(id, module, target, data)
@@ -22,7 +22,7 @@ const rootStore = {
             console.log(rootState)
             // const { [module]: state } = rootState;
         },
-        updateV2(rootState, [targets, id, data]) {
+        update(rootState, [targets, id, data]) {
             const [module, target] = targets.split('/');
 
             rootState[module][target][id] = {
@@ -30,6 +30,7 @@ const rootStore = {
                 ...data
             };
         },
+        // updateSingular
         updateSingle(rootState, [targets, data]) {
             const [module, target] = targets.split('/');
             rootState[module][target] = {
@@ -37,8 +38,10 @@ const rootStore = {
                 ...data
             }
         },
-        delete(rootState, { id, module, target }) {
-            const { [module]: state } = rootState;
+        delete(rootState, [targets, id]) {
+            const [module, target] = targets.split('/');
+
+            console.log(targets, id)
 
             const shallowCopy = { ...rootState[module][target] };
             delete shallowCopy[id];
@@ -55,9 +58,11 @@ const rootStore = {
                 ...normalize(data)
             }
         },
-        clearData(rootState, [targets]) {
-            const [module, target] = targets.split('/');
-            rootState[module][target] = {};
+        clearData(rootState, paths) {
+            for (let path of paths) {
+                const [module, target] = path.split('/');
+                rootState[module][target] = {};
+            }
         }
     },
     actions: {
@@ -81,7 +86,9 @@ const rootStore = {
             commit('update', { module, target, id, data });
         },
         delete({ commit }, payload) {
-            const { id, target } = payload;
+            const [targets, id] = payload;
+            const [module, target] = targets.split('/');
+
             // await axios.delete(`/${target}/${id}`);
             commit('delete', payload);
         },
@@ -151,16 +158,14 @@ const rootStore = {
 
 
         loadData({ commit }, [destination, data]) {
-            // console.log(decompose(destination, data))
             const mutations = Object.entries(decompose(destination, data));
-
 
             for (let [mutation, data] of mutations) {
                 commit('loadData', [mutation, data]);
             }
         },
-        clearData({ commit }, [target]) {
-
+        clearData({ commit }, target) {
+            commit('clearData', findRelationPaths(target));
         }
     }
 };

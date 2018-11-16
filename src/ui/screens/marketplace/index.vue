@@ -10,8 +10,23 @@
                         </h2>
                     </transition>
 
-                    <p>You are connected to marketplace as:</p>
-                    <c-user :user="identity"/>
+                    <p class="marketplace__profile-info">You are connected to marketplace as:</p>
+                    <div class="marketplace-identity">
+                        <div class="marketplace-profile">
+                            <c-img class="marketplace-profile__image" :src="identity.img"/>
+                            <div>
+                                <h3 class="marketplace-profile__name">
+                                    {{ identity.name }}
+                                </h3>
+                                <input
+                                    class="marketplace-profile__wallet"
+                                    type="text"
+                                    :value="identity.wallet"
+                                    readonly
+                                />
+                            </div>
+                        </div>
+                    </div>
 
                     <nav>
                         <ul class="marketplace-menu reset-list">
@@ -26,7 +41,7 @@
 
                     <section>
                         <transition name="page" mode="out-in">
-                            <router-view/>
+                            <router-view :identityId="identity.id"/>
                         </transition>
                     </section>
                 </div>
@@ -107,6 +122,43 @@
         &-leave-active {
             position: absolute;
         }
+    }
+
+    .marketplace-profile {
+        $color: #2ecc71;
+        background: $color;
+        padding: 10px;
+        border-radius: 10px;
+        .marketplace-profile__name {
+            text-shadow: 1.5px 1.5px 0 rgba(1,1,1,.2);
+            margin-bottom: 4px;
+        }
+        .marketplace-profile__image {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            margin-right: 10px;
+        }
+        .marketplace-profile__wallet {
+            padding: 5px;
+            height: 25px;
+            border-radius: 6px;
+            background: darken($color, 7%);
+            border-style: none;
+            color: #fff;
+        }
+        display: inline-flex;
+        margin-left: auto;
+        box-shadow: 3px 3px 0 0 darken($color, 15%);
+    }
+
+    .marketplace-identity {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .marketplace__profile-info {
+        text-align: right;
     }
 </style>
 

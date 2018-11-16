@@ -28,6 +28,7 @@ const assets = {
             1: { id: 1, asset: 4, priceMin: 31, priceMax: 59, expDate: "2018-12-15T14:29:47+02:00" },
             3: { id: 3, asset: 6, priceMin: 11, priceMax: 89, expDate: "2018-11-14T14:29:47+02:00" }
         },
+        prospectors: {},
         offers: {},
         offerBids: {},
         auctions: {
@@ -281,6 +282,7 @@ const assets = {
                     asset: assets[sniper.asset]
                 }
             }), {}),
+        prospectorsMap: ({ prospectors }) => Object.entries(prospectors),
         offers: ({ offers, offerBids }, getters, { community: { offersSeller }}) =>
             normalize(offers, offer => ({
                 bids: offer.bids.map(id => offerBids[id]),

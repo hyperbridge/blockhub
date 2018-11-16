@@ -771,7 +771,20 @@ const router = new Router({
                 {
                     path: 'offers',
                     name: 'Marketplace Offers',
-                    component: (resolve) => require(['@/ui/screens/marketplace/offers'], resolve)
+                    component: (resolve) => require(['@/ui/screens/marketplace/offers'], resolve),
+                    children: [
+                        // {
+                        //     path: ':id',
+                        //     name: 'Matketplace Asset Offers',
+                        //     component: (resolve) => require(['@/ui/screens/marketplace/offers/_id'], resolve)
+                        // }
+                    ]
+                },
+                {
+                    path: 'offers/:id',
+                    name: 'Matketplace Asset Offers',
+                    component: (resolve) => require(['@/ui/screens/marketplace/offers/_id'], resolve),
+                    props: true
                 },
                 {
                     path: 'snipers',

@@ -7,5 +7,5 @@ export default new schema.Entity('products', {
     author: identity,
     developers: [identity],
     publishers: [identity],
-    reviews: [review]
+    // reviews: [review]
 })
