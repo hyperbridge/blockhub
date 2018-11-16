@@ -142,6 +142,40 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-6">
+                        Ownership
+                    </div>
+                    <div class="col-6">
+                        Owned by address: {{ product.developer }}<br />
+                        Created by Developer ID: {{ product.developerId }}
+                    </div>
+                    <div class="col-12">
+                        <h3>Transfer Ownership</h3>
+                        <div class="form-group row">
+                            <label class="switch switch-sm col-sm-3">
+                                <label>Developer Address</label>
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" v-model="product.developer">
+                                <span class="form-text"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="switch switch-sm col-sm-3">
+                                <label>Developer ID</label>
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" v-model="product.developer_id">
+                                <span class="form-text"></span>
+                            </div>
+                        </div>
+                        
+                        <c-button @click="transferOwnership">Transfer</c-button>
+
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-2 offset-10" v-if="product.id">
                         <a href="#" target="_blank" class="btn btn-primary" @click.prevent="save">SAVE</a>
                     </div>
@@ -180,11 +214,47 @@
         methods: {
             transferOwnership() {
 
-                marketplaceStorage.setProductDeveloper(productId, msg.sender);
-                marketplaceStorage.setProductDeveloperId(productId, developerId);
+                const run = function(
+                    local, 
+                    DB, 
+                    Bridge,
+                    FundingAPI, 
+                    MarketplaceAPI, 
+                    TokenAPI, 
+                    ReserveAPI, 
+                    BABEL_PROMISE,
+                    BABEL_GENERATOR,
+                    BABEL_REGENERATOR,
+                    params
+                ) {
+                    const { product, profile } = params
+                    
+                    return new Promise(async (resolve, reject) => {
+                        const marketplaceStorageContract = MarketplaceAPI.api.ethereum.state.contracts.MarketplaceStorage.deployed
 
-                marketplaceStorage.setDeveloperOwnsProduct(developerId, productId, true);
-                marketplaceStorage.pushDeveloperOwnedProduct(developerId, productId);
+                        await marketplaceStorage.setDeveloperOwnsProduct(product.developer_id, product.id, true, { from: profile.public_address })
+                        await marketplaceStorage.pushDeveloperOwnedProduct(product.developer_id, product.id, { from: profile.public_address })
+
+                        await marketplaceStorage.setProductDeveloper(product.id, product.developer, { from: profile.public_address })
+                        await marketplaceStorage.setProductDeveloperId(product.id, product.developer_id, { from: profile.public_address })
+
+                        resolve(product)
+                    })
+                }
+
+                const cmd = {
+                    code: run.toString(),
+                    params: {
+                        profile: this.$store.state.application.account.current_identity,
+                        product: this.product
+                    }
+                }
+
+                BlockHub.Bridge.sendCommand('eval', cmd).then((productResult) => {
+                    if (productResult.id) {
+                        this.successfulCreationMessage = "Product ownership has been changed"
+                    }
+                })
             },
             updateStatus() {
 
