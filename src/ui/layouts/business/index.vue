@@ -21,6 +21,11 @@
         <transition name="slideRight">
             <div class="page-aside left-sidebar" id="page-aside" v-if="showLeftPanel" :class="{'invert' : darkMode}">
                 <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
+                    <div class="left-sidebar__option">
+                        <button>
+                            <i class="fas fa-angle-right"></i>
+                        </button>
+                    </div>
                     <c-business-sidebar />
                 </div>
             </div>
@@ -67,7 +72,8 @@
         data() {
             return {
                 loadingState: true,
-                darkMode: false
+                darkMode: false,
+                minimized: false
             }
         },
         computed: {
@@ -162,7 +168,7 @@
     .page-aside{
         top: 0;
         width: 250px;
-        padding: 80px 20px 20px;
+        padding: 80px 10px 20px;
         display: flex;
         flex-direction: column;
         background: #fff;
@@ -208,6 +214,30 @@
             }
             .text-secondary{
                 color: #5D75F7!important;
+            }
+        }
+    }
+    .left-sidebar__option{
+        margin: -2px -20px 20px;
+        display: flex;
+        padding: 0 10px 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
+        button{
+            font-size: 15px;
+            background: #f5f6f5;
+            border: none;
+            color: #666666;
+            width: 25px;
+            height: 25px;
+            line-height: 20px;
+            text-align: center;
+            border-radius: 3px;
+            padding: 0;
+            &:active,
+            &:focus{
+                user-select: none;
+                box-shadow: none;
+                outline: none;
             }
         }
     }

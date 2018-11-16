@@ -1,49 +1,34 @@
 <template>
     <div class="navigation">
-        <ul>
+        <c-menu-container>
             <li class="title">Main</li>
-            <li class="openable" @click="isActive = !isActive" :class="{ open: isActive }">
-                <a href="#" class="no-icon">
-                    <span class="icon li-home"></span>
-                    <span class="text">Marketplace</span>
-                </a>
-                <ul>
-                    <li>
-                        <a href="/#/business/product/new" class="no-icon">
-                            <span class="text">New Product</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            <c-menu-item to="#" icon="home">
+                Marketplace
+                <template slot="submenu">
+                    <c-menu-item to="/business/product/new">
+                        New Product
+                    </c-menu-item>
+                </template>
+            </c-menu-item>
             <li class="title">Funding</li>
-            <li class="openable">
-                <a href="#">
-                    <span class="icon li-document"></span>
-                    <span class="text">Funding</span>
-                </a>
-                <ul>
-                    <li class="openable" @click="isActive = !isActive" :class="{ open: isActive }">
-                        <a href="#" class="no-icon">
-                            <span class="text">Crowdfunds</span>
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="/#/business/project/new" class="no-icon">
-                                    <span class="text">New Crowdfund</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+            <c-menu-item to="#" icon="file-alt">
+                Funding
+                <template slot="submenu">
+                    <c-menu-item to="/business/project/new">
+                        New Crowdfund
+                    </c-menu-item>
+                </template>
+            </c-menu-item>
+        </c-menu-container>
     </div>
 </template>
 
 <script>
     export default {
         name: 'business-sidebar',
-        components:{
+        components: {
+            'c-menu-container': (resolve) => require(['@/ui/components/business/menu/menu-container'], resolve),
+            'c-menu-item': (resolve) => require(['@/ui/components/business/menu/menu-item'], resolve)
         },
         data(){
             return{
@@ -65,30 +50,15 @@
 
 <style lang="scss" scoped>
     .navigation{
+        max-height: 100%;
+        overflow-y: auto;
         ul{
             display: flex;
             flex-direction: column;
             li{
-                a{
-                    height: 40px;
-                    padding: 0 10px;
-                    display: flex;
-                    align-items: center;
-                }
-                &:before{
-                    font-family: 'Font Awesome 5 Free';
-                }
-                ul{
-                    li{
-                        a{
-                            &.no-icon {
-                                padding-left: 40px;
-                                &:after{
-                                    background: rgba(0, 0, 0, .4);
-                                }
-                            }
-                        }
-                    }
+                &.title{
+                    text-transform: uppercase;
+                    padding-left: 10px;
                 }
             }
         }
