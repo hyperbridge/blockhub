@@ -408,7 +408,6 @@ export let initializer = () => {
 
         DB.setInitCallback(async () => {
             console.log('DB init callback')
-            BlockHub.environment_mode = store.state.application.environment_mode
             // TODO: is this a race condition?
             //TODO: PeerService.init()
 
@@ -418,6 +417,8 @@ export let initializer = () => {
             store.dispatch('application/init')
             store.dispatch('marketplace/init')
             store.dispatch('funding/init')
+            
+            BlockHub.environment_mode = store.state.application.environment_mode
 
             if (store.state.application.environment_mode === 'preview'
                 || store.state.application.environment_mode === 'beta'
