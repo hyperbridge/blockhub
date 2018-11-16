@@ -228,7 +228,7 @@
                             </c-swiper>
                         </div>
 
-                        <div class="text-center alert alert-info">
+                        <div class="text-center alert alert-info" hidden>
                             <p><strong>If you haven't already, KYC &amp; whitelist your address <c-button href="#/kyc" @click="gaStep(4)">click here</c-button></strong></p>
                         </div>
                     </c-block>
@@ -245,7 +245,7 @@
                             </div>
                             <input type="text" class="form-control" ref="input" placeholder="Public Ethereum address...." v-model="purchaseAddress" />
                         </div>
-                        <p>Haven't verified yet? You'll need to do that! <c-button class="" href="#/kyc" style="margin: 0 auto" @click="gaStep(5)">Verify Account</c-button></p>
+                        <p hidden>Haven't verified yet? You'll need to do that! <c-button class="" href="#/kyc" style="margin: 0 auto" @click="gaStep(5)">Verify Account</c-button></p>
                     </c-block>
                 </div>
 
