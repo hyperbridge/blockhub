@@ -1,40 +1,62 @@
 <template>
     <div class="navigation">
-        <c-menu-container :class="{'is-minimized' : minimized}">
-            <li class="title">Main</li>
-            <c-menu-item to="#" icon="home" :minimized="minimized">
-                Marketplace
-                <template slot="submenu">
-                    <c-menu-item to="/business/product/new">
-                        New Product
-                    </c-menu-item>
-                </template>
-            </c-menu-item>
-            <li class="title">Funding</li>
-            <c-menu-item to="#" icon="file-alt" :minimized="minimized">
-                Funding
-                <template slot="submenu">
-                    <c-menu-item to="/business/project/new">
-                        New Crowdfund
-                    </c-menu-item>
-                </template>
-            </c-menu-item>
-        </c-menu-container>
+        <!--<c-menu-container :class="{'is-minimized' : minimized}">-->
+            <!--<li class="title">Main</li>-->
+            <!--<c-menu-item to="#" icon="home" :minimized="minimized">-->
+                <!--Marketplace-->
+                <!--<template slot="submenu">-->
+                    <!--<c-menu-item to="/business/product/new">-->
+                        <!--New Product-->
+                    <!--</c-menu-item>-->
+                <!--</template>-->
+            <!--</c-menu-item>-->
+            <!--<li class="title">Funding</li>-->
+            <!--<c-menu-item to="#" icon="file-alt" :minimized="minimized">-->
+                <!--Funding-->
+                <!--<template slot="submenu">-->
+                    <!--<c-menu-item to="/business/project/new">-->
+                        <!--New Crowdfund-->
+                    <!--</c-menu-item>-->
+                <!--</template>-->
+            <!--</c-menu-item>-->
+        <!--</c-menu-container>-->
     </div>
 </template>
 
 <script>
+
     export default {
         name: 'business-sidebar',
         props:['minimized'],
         components: {
             'c-menu-container': (resolve) => require(['@/ui/components/business/menu/menu-container'], resolve),
-            'c-menu-item': (resolve) => require(['@/ui/components/business/menu/menu-item'], resolve)
+            'c-menu-item': (resolve) => require(['@/ui/components/business/menu/menu-item'], resolve),
         },
         data(){
             return{
                 darkMode: false,
-                isActive: false
+                isActive: false,
+                menu: [
+                    {
+                        header: true,
+                        title: 'Main Navigation',
+                    },
+                    {
+                        href: '/',
+                        title: 'Dashboard',
+                        icon: 'fa fa-user'
+                    },
+                    {
+                        title: 'Charts',
+                        icon: 'fa fa-chart-area',
+                        child: [
+                            {
+                                href: '/charts/sublink',
+                                title: 'Sub Link',
+                            }
+                        ]
+                    }
+                ]
             }
         },
         methods:{

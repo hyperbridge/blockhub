@@ -19,23 +19,17 @@
 
         <!-- PAGE LEFT PANEL -->
         <transition name="slideRight">
-            <div class="page-aside left-sidebar" id="page-aside" v-if="showLeftPanel" :class="{'invert' : darkMode, 'is-minimized' : minimized}">
-                <div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">
-                    <div class="left-sidebar__option">
-                        <button @click="minimized = !minimized" :class="{'m-auto' : minimized }">
-                            <i class="fas fa-angle-right" v-if="minimized"></i>
-                            <i class="fas fa-angle-left" v-else></i>
-                        </button>
-                    </div>
-                    <c-business-sidebar :minimized="minimized" />
-                </div>
-            </div>
+            <!--<div class="page-aside left-sidebar" id="page-aside" v-if="showLeftPanel" :class="{'invert' : darkMode, 'is-minimized' : minimized}">-->
+                <!--<div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">-->
+                    <sidebar-menu width="250px" :menu="menu" :class="{'light-v' : !darkMode}" @collapse="minimized = !minimized" />
+                <!--</div>-->
+            <!--</div>-->
         </transition>
         <!---->
 
         <!-- PAGE CONTENT -->
         <transition name="fade">
-            <div class="content" id="content" :class="{'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel, 'invert' : darkMode }">
+            <div class="content" id="content" :class="{'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel, 'invert' : darkMode, 'is-minimized' : minimized }">
                 <slot />
             </div>
         </transition>
@@ -55,6 +49,8 @@
 
 
 <script>
+    import { SidebarMenu } from 'vue-sidebar-menu'
+
     export default {
         name: 'business',
         props: {
@@ -68,13 +64,44 @@
             }
         },
         components: {
-            'c-business-sidebar': (resolve) => require(['@/ui/components/business/sidepanel'], resolve)
+            'c-business-sidebar': (resolve) => require(['@/ui/components/business/sidepanel'], resolve),
+            SidebarMenu
         },
         data() {
             return {
                 loadingState: true,
                 darkMode: false,
-                minimized: false
+                minimized: false,
+                menu: [
+                    {
+                        header: true,
+                        title: 'Main',
+                    },
+                    {
+                        title: 'Marketplace',
+                        icon: 'fas fa-home',
+                        child: [
+                            {
+                                href: '/business/product/new',
+                                title: 'New Product',
+                            }
+                        ]
+                    },
+                    {
+                        header: true,
+                        title: 'Funding',
+                    },
+                    {
+                        title: 'Funding',
+                        icon: 'fas fa-file-alt',
+                        child: [
+                            {
+                                href: '/business/project/new',
+                                title: 'New Crowdfund',
+                            }
+                        ]
+                    }
+                ]
             }
         },
         computed: {
@@ -137,6 +164,49 @@
             }
         }
     }
+
+    .v-sidebar-menu.light-v{
+        padding-top: 70px;
+        background-color: #fff!important;
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+        z-index: 20;
+        .vsm-header{
+            color: #323c47!important;
+        }
+        .vsm-item{
+            .vsm-link{
+                .vsm-icon{
+
+                    background: none!important;
+                    color: #323c47!important;
+                }
+                .vsm-link,
+                .vsm-title,
+                .vsm-arrow{
+                    color: #323c47!important;
+                }
+                &:hover{
+                    background: rgba(0, 0, 0, .03)!important;
+                }
+            }
+        }
+        .vsm-dropdown > .vsm-list {
+            background: #f2f2f2 !important;
+            padding: 5px;
+        }
+        .vsm-item.first-item.open-item>.vsm-link{
+            background: #59b8fc!important;
+        }
+        .collapse-btn{
+            background: rgba(0, 0, 0, .03)!important;
+            color: #323c47!important;
+            &:focus{
+                user-select: none!important;
+                box-shadow: none!important;
+                outline: none;
+            }
+        }
+    }
 </style>
 
 <style lang="scss" scoped>
@@ -163,7 +233,7 @@
         left: 0;
         right: 0;
         padding: 5px 25px;
-        z-index: 10;
+        z-index: 21;
         height: 60px;
         background: #fff;
         color: #c3c3d6;
@@ -215,12 +285,13 @@
         border-left: 1px solid rgba(0, 0, 0, 0.1);
         border-right: 1px solid rgba(0, 0, 0, 0.1);
         transition: all 200ms ease-in-out;
-        &.left-sidebar,
-        &.right-sidebar{
-            min-width: calc( 100% - 250px );
+        position: relative;
+        z-index: 10;
+        &.left-sidebar{
+            padding: 60px 0 0 250px;
         }
         &.left-sidebar.right-sidebar{
-            min-width: calc( 100% - 500px );
+            padding: 60px 250px 0;
         }
         &.invert{
             background: $dark_color_1;
@@ -238,6 +309,9 @@
             .text-secondary{
                 color: #5D75F7!important;
             }
+        }
+        &.is-minimized{
+            padding-left: 50px;
         }
     }
     .left-sidebar__option{
