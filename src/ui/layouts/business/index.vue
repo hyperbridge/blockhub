@@ -84,6 +84,14 @@
                             {
                                 href: '/business/product/new',
                                 title: 'New Product',
+                                icon: 'fas fa-square-full icon-sm',
+                                child: [
+                                    {
+                                        href: '/business/project/new',
+                                        title: 'New Crowdfund',
+                                        icon: 'fas fa-square-full icon-sm'
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -98,6 +106,7 @@
                             {
                                 href: '/business/project/new',
                                 title: 'New Crowdfund',
+                                icon: 'fas fa-square-full icon-sm'
                             }
                         ]
                     }
@@ -175,27 +184,47 @@
         }
         .vsm-item{
             .vsm-link{
+                padding: 5px 10px;
                 .vsm-icon{
-
                     background: none!important;
                     color: #323c47!important;
+                    font-size: 20px;
                 }
                 .vsm-link,
                 .vsm-title,
                 .vsm-arrow{
                     color: #323c47!important;
+                    font-size: 14px;
                 }
                 &:hover{
                     background: rgba(0, 0, 0, .03)!important;
                 }
             }
+            &.active-item{
+                .vsm-link{
+                    font-weight: normal;
+                }
+            }
         }
-        .vsm-dropdown > .vsm-list {
-            background: #f2f2f2 !important;
-            padding: 5px;
+        .vsm-dropdown {
+            .vsm-list {
+                background: #f2f2f2 !important;
+                padding: 0px;
+            }
+            .vsm-link{
+                display: flex;
+                align-items: center;
+                .icon-sm{
+                    height: 30px;
+                    line-height: 30px;
+                    width: 30px;
+                    text-align: center;
+                    font-size: 4px;
+                }
+            }
         }
         .vsm-item.first-item.open-item>.vsm-link{
-            background: #59b8fc!important;
+            background: #f2f2f2!important;
         }
         .collapse-btn{
             background: rgba(0, 0, 0, .03)!important;
