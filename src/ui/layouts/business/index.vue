@@ -18,12 +18,8 @@
         </transition>
 
         <!-- PAGE LEFT PANEL -->
-        <transition name="slideRight">
-            <!--<div class="page-aside left-sidebar" id="page-aside" v-if="showLeftPanel" :class="{'invert' : darkMode, 'is-minimized' : minimized}">-->
-                <!--<div class="left-sidebar__content" id="scroll_sidebar" ref="scroll_sidebar">-->
-                    <sidebar-menu width="250px" :menu="menu" :class="{'light-v' : !darkMode}" @collapse="minimized = !minimized" />
-                <!--</div>-->
-            <!--</div>-->
+        <transition name="slideDown">
+            <sidebar-menu width="250px" :menu="menu" :class="{'light-v' : !darkMode}" @collapse="minimized = !minimized" />
         </transition>
         <!---->
 
