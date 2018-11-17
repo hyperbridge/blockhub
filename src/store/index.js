@@ -29,13 +29,13 @@ if (!window.BlockHub)
 ChaosMonkey.config.ENABLED = false
 
 /* Usage:
-- mode1 - Navigate to http://localhost:8000/#/mode1
+- mode1 - Navigate to http://localhost:8000#/mode1
     - Best used to mode a well-behaved peer relayer
-- mode2 - Navigate to http://localhost:8000/#/mode2
+- mode2 - Navigate to http://localhost:8000#/mode2
     - Best used to mode a non-Web3 enabled user can receive data from peer network
     - Clean database
     - No relaying, ie. no responding to peer data requests
-- mode3 - Navigate to http://localhost:8000/#/mode3
+- mode3 - Navigate to http://localhost:8000#/mode3
     - Best used to mode fault-tolerance, ie. does this thing behave appropriately when problems occur
     - Permanent chaos monkey
 */
@@ -408,7 +408,6 @@ export let initializer = () => {
 
         DB.setInitCallback(async () => {
             console.log('DB init callback')
-            BlockHub.environment_mode = store.state.application.environment_mode
             // TODO: is this a race condition?
             //TODO: PeerService.init()
 
@@ -418,6 +417,8 @@ export let initializer = () => {
             store.dispatch('application/init')
             store.dispatch('marketplace/init')
             store.dispatch('funding/init')
+
+            BlockHub.environment_mode = store.state.application.environment_mode
 
             if (store.state.application.environment_mode === 'preview'
                 || store.state.application.environment_mode === 'beta'

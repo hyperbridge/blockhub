@@ -83,6 +83,28 @@ export const decompose = (destination, data) =>
     }, { [destination]: [] });
 
 
+export const findRelationPaths = destination => {
+    const [module, target] = destination.split('/');
+    const relationPaths = [`${module}/${target}`];
+
+    const relation = relations[module] && relations[module][target];
+
+    const findRelation = relation => {
+        for (let key in relation) {
+            const [module, target] = relation[key];
+            relationPaths.push(`${module}/${target}`);
+
+            const subRelation = relations[module] && relations[module][target];
+
+            if (subRelation) findRelation(subRelation);
+        }
+    }
+
+    findRelation(relation);
+    return relationPaths;
+}
+
+
 /* example usage
 
 (parsing/normalizing posts data)

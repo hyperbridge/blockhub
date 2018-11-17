@@ -180,7 +180,7 @@
                     Etiam elementum ac ligula nec viverra. Nunc molestie augue a erat ultrices fermentum.</p>
                 <p>Curabitur non bibendum erat. Praesent nec vestibulum odio, vel euismod enim. Sed at tincidunt risus.
                     Mauris ac facilisis metus. Proin venenatis neque posuere urna sagittis ultricies.</p>
-                <p><a href="/#/help" target="_blank">Learn more about creating products</a></p>
+                <p><a href="#/help" target="_blank">Learn more about creating products</a></p>
             </div>
             <div slot="modal_footer" class="text-right w-100">
                 <c-button size="md" @click="closeModal">Got it</c-button>
@@ -246,7 +246,7 @@
                 </div>
             </template>
             <p slot="footer" class="margin-top-20">
-                Need help? <c-button status="plain" href="/#/help">Check the Help Center</c-button>
+                Need help? <c-button status="plain" href="#/help">Check the Help Center</c-button>
             </p>
         </c-basic-popup>
 

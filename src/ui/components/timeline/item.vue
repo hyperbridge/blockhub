@@ -8,7 +8,7 @@
                 <h3>{{ item.title }}</h3>
             </a>
             <p class="mb-4">{{ item.text | stringLength }}</p>
-            <c-button status="info" :href="`/#/project/${projectID}/updates/${item.id}`" icon_hide >Read more</c-button>
+            <c-button status="info" :href="`#/project/${projectID}/updates/${item.id}`" icon_hide >Read more</c-button>
         </div>
     </div>
 </template>

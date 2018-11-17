@@ -61,6 +61,7 @@
         },
         methods:{
             toggleColorMode(){
+                console.log(this.$parent.$root.darkMode)
                 if (this.darkMode)
                     this.$parent.$root.darkMode = true
                 else

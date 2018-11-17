@@ -29,7 +29,7 @@
                                 <i class="fas fa-hourglass"></i>
                                 Verifying
                             </div>
-                            <c-button status="outline-success" class="mt-3" href="/#/account/verification" v-else>
+                            <c-button status="outline-success" class="mt-3" href="#/account/verification" v-else>
                                 Click here to verify
                             </c-button>
                             <div class="date" v-if="defaultIdentity.is_verified">

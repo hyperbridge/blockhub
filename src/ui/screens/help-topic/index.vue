@@ -19,7 +19,7 @@
                             <c-topic-item
                                 v-for="(topic, index) in topic.sub_topics"
                                 :key="index"
-                                :link="`/#/help/${topic.id}`"
+                                :link="`#/help/${topic.id}`"
                                 :icon="topic.icon"
                                 class="padding-10">
                                 {{ topic.label }}
@@ -29,7 +29,7 @@
 
                     <c-block class="margin-bottom-30 padding-bottom-5">
                         <div class="article-list" v-if="showByTopic(topic.id).length">
-                            <c-article-item :link="`/#/help/${topic.id}/article/${article.slug}`"
+                            <c-article-item :link="`#/help/${topic.id}/article/${article.slug}`"
                                             v-for="(article, index) in showByTopic(topic.id)"
                                             :key="index"
                             >

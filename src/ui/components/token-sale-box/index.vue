@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="d-flex align-items-center" hidden>
-                <div class="text-center mr-5">
+                <div class="text-center mr-5" hidden>
                     <div>
                         Token
                     </div>

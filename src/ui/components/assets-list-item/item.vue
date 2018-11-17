@@ -1,7 +1,7 @@
 <template>
     <a class="assets-list__item"
        :class="{ 'transparent-bg' : isTransparent }"
-       :href="`/#/asset/${item.id}`"
+       :href="`#/asset/${item.id}`"
     >
         <div class="thumb">
             <c-img

@@ -16,7 +16,7 @@
             <c-curator-info title="">
                 <c-claim title="Content curated" type="success" v-darklaunch="'CURATORS'" class="margin-bottom-10 margin-top-10">
                     <p>This product has been curated by 2041 people.</p>
-                    <c-button href="/#/curator/application" class="outline-white">
+                    <c-button href="#/curator/application" class="outline-white">
                         Become a curator
                     </c-button>
                 </c-claim>

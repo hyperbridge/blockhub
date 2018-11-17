@@ -16,7 +16,7 @@
 
                     <p class="loader-block__message">{{ user_submitted_connection_message.message }}</p>
                     <p class="loader-block__user">Submitted by <a
-                        :href="`/#/identity/${user_submitted_connection_message.user.id}`">@{{ user_submitted_connection_message.user.name }}</a></p>
+                        :href="`#/identity/${user_submitted_connection_message.user.id}`">@{{ user_submitted_connection_message.user.name }}</a></p>
 
                     <h1 class="loader-block__status-code" v-if="connection_status.code">ERROR {{ connection_status.code }}</h1>
 
@@ -106,7 +106,7 @@
                     </p>
                 </template>
                 <p slot="footer">
-                    Need help? <c-button status="plain" href="/#/help">Check the Help Center</c-button>
+                    Need help? <c-button status="plain" href="#/help">Check the Help Center</c-button>
                 </p>
             </c-basic-popup>
 
@@ -177,7 +177,7 @@
                 <div class="h4" slot="header">Propose Idea</div>
                 <template slot="body">
                     <div v-if="chosenIdentity && chosenIdentity.curator_id">
-                        <p>Great, you're a curator. <c-button class="underline" href="/#/project/new">Click here to continue</c-button>.</p>
+                        <p>Great, you're a curator. <c-button class="underline" href="#/project/new">Click here to continue</c-button>.</p>
                     </div>
                     <div v-else>
                         <p>
@@ -202,7 +202,7 @@
                     </div>
                 </template>
                 <p slot="footer">
-                    Need help? <c-button status="plain" href="/#/help">Check the Help Center</c-button>
+                    Need help? <c-button status="plain" href="#/help">Check the Help Center</c-button>
                 </p>
             </c-basic-popup>
 

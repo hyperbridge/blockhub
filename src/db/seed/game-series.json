@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "price": "32.00",
+        "price": 0,
         "expires": "2020-01-20 09:21:02 -02:00",
         "images": [
             "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/med-tile.jpg",
@@ -10,7 +10,7 @@
             "https://cdn.hyperbridge.org/blockhub/images/products/a-game-of-thrones---genesis-4221/med-tile.jpg"
         ],
         "title": "Dragon Age: Ultimate Edition + Dragon Age: Full Series Collection",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra gravida odio eget consectetur. Vestibulum mattis ut dui sit amet maximus. Cras nec enim auctor, eleifend urna congue",
+        "description": "",
         "tags": [
             "RPG",
             "ACTION",
