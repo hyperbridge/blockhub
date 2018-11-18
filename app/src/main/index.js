@@ -150,7 +150,7 @@ export const initApp = () => {
       if (deeplinkUri.startsWith('go')) {
 
       } else {
-        const baseUrl = config.IS_PRODUCTION ? 'http://localhost:9999/' : 'http://localhost:8000/'
+        const baseUrl = config.IS_PRODUCTION ? 'https://blockhub.gg/' : 'http://localhost:8000/' //'http://localhost:9999/' : 'http://localhost:8000/'
         Windows.main.webContents.loadURL(baseUrl + deeplinkUri)
       }
     })
