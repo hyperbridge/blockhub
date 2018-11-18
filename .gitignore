@@ -2,6 +2,7 @@
 
 app/account.json
 data.dev.json
+data.json
 
 .node-xmlhttprequest-*
 

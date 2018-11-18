@@ -52,11 +52,18 @@ git clone https://github.com/hyperbridge/blockhub-desktop-client
 cd blockhub-desktop-client
 # Install deps
 npm install
+# Navigate to app
+cd app
 # Run the app in electron
 npm run dev
-# Create the desktop app
-npm run package
 ```
+
+
+You'll also need to install [Ganache](https://github.com/trufflesuite/ganache/releases)
+
+Change the `Port Number` to `8545`
+
+
 
 Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
 

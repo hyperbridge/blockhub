@@ -8,8 +8,7 @@ import * as DB from '../db'
 
 export const ethereum = {
     infura: {
-        accessToken: 'q0dsZEe9ohtOnGy8V0cT',
-        endpoint: 'https://ropsten.infura.io/'
+        accessToken: 'q0dsZEe9ohtOnGy8V0cT'
     },
     activeNetwork: 'local',
     networks: {

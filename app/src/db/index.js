@@ -3,7 +3,18 @@ import path from 'path'
 import Loki from 'lokijs'
 import beautify from 'json-beautify'
 
-const data = require('./data.json')
+const getData = () => {
+    if (fs.existsSync('./src/db/data.json')) {
+        return require('./data.json')
+    } else {
+        fs.writeFile('./src/db/data.json', '{}', 'utf8')
+
+        return {}
+    }
+}
+
+let data = getData()
+let initialData = require('./data.initial.json')
 
 let loki = null
 let initCallback = null
@@ -59,6 +70,10 @@ export const loadDefault = () => {
     funding.projects = loki.addCollection('fundingProjects')
     funding.config = loki.addCollection('fundingConfig')
 
+    if (Object.keys(data).length === 0) {
+        data = initialData
+    }
+
     try {
         updateCollection(application.config, data.application)
         updateCollection(marketplace.config, data.marketplace)
@@ -70,6 +85,7 @@ export const loadDefault = () => {
     catch (e) {
         console.warn(e)
     }
+
     application.config.ensureId()
     application.config.ensureAllIndexes(true)
 
@@ -94,6 +110,7 @@ export const save = () => {
     data.marketplace[0].assets = marketplace.assets.data
     data.funding = funding.config.data
     data.funding[0].projects = funding.projects.data
+
     fs.writeFile('./src/db/data.json', beautify(data, null, 2, 100), 'utf8', (err) => {
         if (err) {
             return console.log('[BlockHub] Error saving database', err)
