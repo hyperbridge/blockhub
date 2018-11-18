@@ -70,16 +70,24 @@
                 minimized: false,
                 menu: [
                     {
-                        header: true,
-                        title: 'Main',
-                    },
-                    {
                         title: 'Marketplace',
                         icon: 'fas fa-home',
                         child: [
                             {
-                                href: '/business/product/new',
-                                title: 'New Product',
+                                href: '/business/products',
+                                title: 'Products',
+                                icon: 'fas fa-square-full icon-sm',
+                                child: [
+                                    {
+                                        href: '/business/product/new',
+                                        title: 'New Product',
+                                        icon: 'fas fa-square-full icon-sm'
+                                    }
+                                ]
+                            },
+                            {
+                                href: '/business',
+                                title: 'Crowdfunds',
                                 icon: 'fas fa-square-full icon-sm',
                                 child: [
                                     {
@@ -91,21 +99,21 @@
                             }
                         ]
                     },
-                    {
-                        header: true,
-                        title: 'Funding',
-                    },
-                    {
-                        title: 'Funding',
-                        icon: 'fas fa-file-alt',
-                        child: [
-                            {
-                                href: '/business/project/new',
-                                title: 'New Crowdfund',
-                                icon: 'fas fa-square-full icon-sm'
-                            }
-                        ]
-                    }
+                    // {
+                    //     header: true,
+                    //     title: 'Funding',
+                    // },
+                    // {
+                    //     title: 'Funding',
+                    //     icon: 'fas fa-file-alt',
+                    //     child: [
+                    //         {
+                    //             href: '/business/project/new',
+                    //             title: 'New Crowdfund',
+                    //             icon: 'fas fa-square-full icon-sm'
+                    //         }
+                    //     ]
+                    // }
                 ]
             }
         },

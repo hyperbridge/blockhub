@@ -704,6 +704,16 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/business'], resolve),
         },
         {
+            path: '/business/products',
+            name: 'Business',
+            component: (resolve) => require(['@/ui/screens/business-products'], resolve),
+        },
+        {
+            path: '/business/projects',
+            name: 'Business',
+            component: (resolve) => require(['@/ui/screens/business-projects'], resolve),
+        },
+        {
             path: '/business/project/:id',
             name: 'Project',
             props: true,

@@ -4,7 +4,7 @@
             <!-- PAGE HEADING -->
             <div class="page-heading">
                 <div class="page-heading__container" style="float: none">
-                    <h1 class="title" style="float: left'">Product Creation</h1>
+                    <h1 class="title" style="float: left'" hidden>Product Creation</h1>
                     <div class="float-right mb-3" v-if="product.id">
                         <a :href="`#/product/${product.id}`" class="btn btn-primary">PREVIEW</a>
                     </div>
@@ -141,7 +141,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" v-if="product.id">
                     <div class="col-6">
                         Ownership
                     </div>
@@ -208,7 +208,7 @@
                 return this.$store.state.marketplace
             },
             product() {
-                return this.id === 'new' ? this.marketplace.default_product : this.marketplace.products[this.id]
+                return this.id === 'new' ? this.marketplace.default_product : this.marketplace.products.find(p => p.id == this.id)
             },
         },
         methods: {

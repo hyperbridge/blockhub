@@ -4,14 +4,13 @@
             <!-- PAGE HEADING -->
             <div class="page-heading">
                 <div class="page-heading__container">
-                    <h1 class="title">Recent project</h1>
-                    <p class="caption">Welcome to RW CRM sales dashboard</p>
+                    <h1 class="title">Dashboard</h1>
+                    <p class="caption"></p>
                 </div>
 
                 <nav aria-label="breadcrumb" role="navigation">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Recent projects</li>
+                        <li class="breadcrumb-item active"><a href="#/business">Dashboard</a></li>
                     </ol>
                 </nav>
             </div>
@@ -30,16 +29,16 @@
                                     <div class="widget__icon">
                                         <span class="li-window"></span>
                                     </div>
-                                    <div class="widget__title">Projects</div>
-                                    <div class="widget__subtitle">Count of active projects</div>
+                                    <div class="widget__title">Products</div>
+                                    <div class="widget__subtitle"></div>
                                 </div>
                                 <div class="widget__box widget__box--left">
-                                    <div class="widget__informer">5 projects</div>
+                                    <div class="widget__informer">5 products</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-3">
+                    <div class="col-12 col-lg-3" hidden>
                         <div class="widget">
                             <div class="widget__icon_layer widget__icon_layer--right">
                                 <span class="li-users"></span>
@@ -58,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-3">
+                    <div class="col-12 col-lg-3" hidden>
                         <div class="widget">
                             <div class="widget__icon_layer widget__icon_layer--right">
                                 <span class="li-receipt"></span>
@@ -77,7 +76,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-3">
+                    <div class="col-12 col-lg-3" hidden>
                         <div class="widget">
                             <div class="widget__icon_layer widget__icon_layer--right">
                                 <span class="li-lifebuoy"></span>
@@ -98,7 +97,7 @@
                     </div>
                 </div>
 
-                <div class="card margin-bottom-0">
+                <div class="card margin-bottom-0" hidden>
                     <div class="card-body">
 
                         <div class="form-row">
