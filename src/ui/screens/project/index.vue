@@ -41,13 +41,21 @@
                                             @click="activateElement('developer_tags')"
                                             v-if="!activeElement['developer_tags']" style="margin-bottom: 20px">Change
                                         Tags <span class="fa fa-edit"></span></button>
-                                    <div class="form-control-element form-control-element--right"
+                                    <div class="form-control-element tag-editor form-control-element--right"
                                          v-if="activeElement['developer_tags']">
-                                        <select id="tag-editor" class="form-control" multiple="multiple">
-                                            <option v-for="(tag, index) in author_tag_options" :key="index"
-                                                    :selected="project.developer_tags.includes(tag)">{{ tag }}
-                                            </option>
-                                        </select>
+                                        <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
+                                            <!--<option v-for="(tag, index) in author_tag_options" :key="index"-->
+                                                    <!--:selected="project.developer_tags.includes(tag)">{{ tag }}-->
+                                            <!--</option>-->
+                                        <!--</select>-->
+
+                                        <multiselect v-model="project.developer_tags"
+                                                     class="dark-mode"
+                                                     :multiple="true"
+                                                     :taggable="true"
+                                                     :options="author_tag_options">
+
+                                        </multiselect>
                                         <div
                                             class="form-control-element__box form-control-element__box--pretify bg-secondary"
                                             style="">
@@ -299,6 +307,9 @@
 
 <script>
 
+    import Multiselect from 'vue-multiselect'
+    import 'vue-multiselect/dist/vue-multiselect.min.css';
+
     const updateProject = function () {
         let project = null
 
@@ -346,6 +357,7 @@
             'c-project-bounties': (resolve) => require(['@/ui/screens/project-bounties'], resolve),
             'c-project-updates': (resolve) => require(['@/ui/screens/project-updates'], resolve),
             'c-updates-count': (resolve) => require(['@/ui/components/project/updates-count'], resolve),
+            Multiselect
         },
         data() {
             return {
