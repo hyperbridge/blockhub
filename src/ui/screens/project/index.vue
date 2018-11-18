@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="project" :showRightPanel="false" :breadcrumbLinks="breadcrumbLinks">
+    <c-layout navigationKey="project" :showRightPanel="false" :breadcrumbLinks="breadcrumbLinks" class="project-single-page">
             <div class="row" v-if="!project">
                 <div class="col-12">
                     Project not found

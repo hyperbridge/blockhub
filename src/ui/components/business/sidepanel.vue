@@ -1,54 +1,62 @@
 <template>
     <div class="navigation">
-        <ul>
-            <li class="title">Main</li>
-            <li class="openable" @click="isActive = !isActive" :class="{ open: isActive }">
-                <a href="#" class="no-icon">
-                    <span class="icon li-home"></span>
-                    <span class="text">Marketplace</span>
-                </a>
-                <ul>
-                    <li>
-                        <a href="#/business/product/new" class="no-icon">
-                            <span class="text">New Product</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="title">Funding</li>
-            <li class="openable">
-                <a href="#">
-                    <span class="icon li-document"></span>
-                    <span class="text">Funding</span>
-                </a>
-                <ul>
-                    <li class="openable" @click="isActive = !isActive" :class="{ open: isActive }">
-                        <a href="#" class="no-icon">
-                            <span class="text">Crowdfunds</span>
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="#/business/project/new" class="no-icon">
-                                    <span class="text">New Crowdfund</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+        <!--<c-menu-container :class="{'is-minimized' : minimized}">-->
+            <!--<li class="title">Main</li>-->
+            <!--<c-menu-item to="#" icon="home" :minimized="minimized">-->
+                <!--Marketplace-->
+                <!--<template slot="submenu">-->
+                    <!--<c-menu-item to="/business/product/new">-->
+                        <!--New Product-->
+                    <!--</c-menu-item>-->
+                <!--</template>-->
+            <!--</c-menu-item>-->
+            <!--<li class="title">Funding</li>-->
+            <!--<c-menu-item to="#" icon="file-alt" :minimized="minimized">-->
+                <!--Funding-->
+                <!--<template slot="submenu">-->
+                    <!--<c-menu-item to="/business/project/new">-->
+                        <!--New Crowdfund-->
+                    <!--</c-menu-item>-->
+                <!--</template>-->
+            <!--</c-menu-item>-->
+        <!--</c-menu-container>-->
     </div>
 </template>
 
 <script>
+
     export default {
         name: 'business-sidebar',
-        components:{
+        props:['minimized'],
+        components: {
+            'c-menu-container': (resolve) => require(['@/ui/components/business/menu/menu-container'], resolve),
+            'c-menu-item': (resolve) => require(['@/ui/components/business/menu/menu-item'], resolve),
         },
         data(){
             return{
                 darkMode: false,
-                isActive: false
+                isActive: false,
+                menu: [
+                    {
+                        header: true,
+                        title: 'Main Navigation',
+                    },
+                    {
+                        href: '/',
+                        title: 'Dashboard',
+                        icon: 'fa fa-user'
+                    },
+                    {
+                        title: 'Charts',
+                        icon: 'fa fa-chart-area',
+                        child: [
+                            {
+                                href: '/charts/sublink',
+                                title: 'Sub Link',
+                            }
+                        ]
+                    }
+                ]
             }
         },
         methods:{
@@ -59,37 +67,32 @@
                 else
                     this.$parent.$root.darkMode = false
             }
-        }
+        },
     }
 </script>
 
 <style lang="scss" scoped>
     .navigation{
+        max-height: 100%;
         ul{
             display: flex;
             flex-direction: column;
             li{
-                a{
-                    height: 40px;
-                    padding: 0 10px;
-                    display: flex;
-                    align-items: center;
-                }
-                &:before{
-                    font-family: 'Font Awesome 5 Free';
-                }
-                ul{
-                    li{
-                        a{
-                            &.no-icon {
-                                padding-left: 40px;
-                                &:after{
-                                    background: rgba(0, 0, 0, .4);
-                                }
-                            }
-                        }
+                &.title{
+                    text-transform: uppercase;
+                    padding-left: 10px;
+                    margin-top: 10px;
+                    &:first-child{
+                        margin-top: 0;
                     }
                 }
+            }
+        }
+        .is-minimized{
+            width: 40px;
+            float: left;
+            li.title{
+                display: none;
             }
         }
     }
