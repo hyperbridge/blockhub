@@ -9,7 +9,6 @@ import VueNumerals from 'vue-numerals'
 import app from './app'
 import router from './router'
 import store, { initializer } from './store'
-import migrations from './db/migrations'
 import VueI18n from 'vue-i18n';
 
 import localeData from '@/db/seed/locale-data.json';
@@ -119,7 +118,7 @@ initializer().then(() => {
       el: '#app',
       router,
       store,
-      mixins: [migrations],
+      mixins: [],
       template: `<app :data="${dataString}" />`,
       components: {
         'app': app
