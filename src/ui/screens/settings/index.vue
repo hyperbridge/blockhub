@@ -4,7 +4,10 @@
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
-                            <c-switch />
+                            <c-switch
+                                :checked="settings.client.open_startup"
+                                @change="setOpenStartup(settings.client.open_startup)"
+                            />
                             <div class="text">
                                 <h4>Open on system startup</h4>
                                 <p>Turn on if you want the application to load automatically
@@ -730,6 +733,11 @@ export default {
         },
         clearDatabase() {
             window.resetSettings()
+        },
+        setOpenStartup(value) {
+            this.updateClientSettings('open_startup', value)
+
+            BlockHub.Bridge.sendCommand('setOpenStartup', value)
         },
         async requestNotifPerm() {
             const permission = await Notification.requestPermission();
