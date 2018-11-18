@@ -17,7 +17,10 @@
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
-                            <c-switch />
+                            <c-switch
+                                :checked="settings.client.system_warnings"
+                                @change="updateClientSettings('system_warnings')"
+                            />
                             <div class="text">
                                 <h4>System warnings</h4>
                                 <p>Turn on if you want to see system warnings (useful for debugging)</p>
@@ -26,7 +29,10 @@
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="settings_item">
-                            <c-switch />
+                            <c-switch
+                                :checked="settings.client.ethereum_connection"
+                                @change="updateClientSettings('ethereum_connection')"
+                            />
                             <div class="text">
                                 <h4>Ethereum connection</h4>
                                 <p>Turn on if you want the application to enable Ethereum connection</p>
