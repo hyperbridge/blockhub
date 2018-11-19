@@ -716,6 +716,18 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/business-product'], resolve),
         },
         {
+            path: '/business/release-history/',
+            name: 'Release History',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/business-release-history'], resolve),
+        },
+        {
+            path: '/business/add-release/',
+            name: 'Add New Release',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/business-new-release'], resolve),
+        },
+        {
             path: '/marketplace',
             component: (resolve) => require(['@/ui/screens/marketplace'], resolve),
             children: [

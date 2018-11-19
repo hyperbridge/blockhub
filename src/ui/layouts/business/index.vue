@@ -26,6 +26,28 @@
         <!-- PAGE CONTENT -->
         <transition name="fade">
             <div class="content" id="content" :class="{'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel, 'invert' : darkMode, 'is-minimized' : minimized }">
+                <!-- PAGE HEADING -->
+                <div class="page-heading">
+                    <div class="page-heading__container">
+                        <div>
+                            <h3 class="page-heading__title p-0 m-0">
+                                {{ title }} {{ breadcrumbLinks }}
+                            </h3>
+                        </div>
+                        <div>
+                            <slot name="action" />
+                        </div>
+                    </div>
+
+                    <nav aria-label="breadcrumb" role="navigation">
+                        <ul class="breadcrumb" v-if="breadcrumbLinks.length">
+                            <li v-for="(link, index) in breadcrumbLinks" class="breadcrumb-item" :class="{ 'active': index == breadcrumbLinks.length-1 }" :key="index">
+                                <router-link :to="link.to ? link.to : link.title">{{ link.title }}</router-link>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- //END PAGE HEADING -->
                 <slot />
             </div>
         </transition>
@@ -57,17 +79,23 @@
             showRightPanel: {
                 type: Boolean,
                 default: false
-            }
+            },
+            breadcrumbLinks: {
+                type: Array,
+                default: () => ([])
+            },
+            title: String
         },
         components: {
-            'c-business-sidebar': (resolve) => require(['@/ui/components/business/sidepanel'], resolve),
-            SidebarMenu
+            SidebarMenu,
+            'c-page-heading': (resolve) => require(['@/ui/components/business/page_heading'], resolve),
         },
         data() {
             return {
                 loadingState: true,
                 darkMode: false,
                 minimized: false,
+                breadcrumbLinksData: this.breadcrumbLinks,
                 menu: [
                     {
                         header: true,
@@ -80,14 +108,7 @@
                             {
                                 href: '/business/product/new',
                                 title: 'New Product',
-                                icon: 'fas fa-square-full icon-sm',
-                                child: [
-                                    {
-                                        href: '/business/project/new',
-                                        title: 'New Crowdfund',
-                                        icon: 'fas fa-square-full icon-sm'
-                                    }
-                                ]
+                                icon: 'fas fa-square-full icon-sm'
                             }
                         ]
                     },
@@ -105,6 +126,21 @@
                                 icon: 'fas fa-square-full icon-sm'
                             }
                         ]
+                    },
+                    {
+                        header: true,
+                        title: 'Setting',
+                    },
+                    {
+                        title: 'Release manager',
+                        icon: 'fas fa-cog',
+                        child: [
+                            {
+                                href: '/business/release-history',
+                                title: 'History',
+                                icon: 'fas fa-square-full icon-sm'
+                            }
+                        ]
                     }
                 ]
             }
@@ -112,6 +148,24 @@
         computed: {
             current_identity() {
                 return this.$store.state.application.account && this.$store.state.application.account.current_identity
+            },
+        },
+        methods:{
+            updateBreadcrumbLinks() {
+                if (this.breadcrumbLinksData.length === 0) {
+                    if (this.$route.meta.breadcrumb) {
+                        this.breadcrumbLinksData = this.$route.meta.breadcrumb
+                    } else if (this.$route.meta.breadcrumb === false) {
+                        this.breadcrumbLinksData = []
+                    } else {
+                        if (this.$route.name !== 'Dashboard') {
+                            this.breadcrumbLinksData = [
+                                { to: { path: '/business' }, title: 'Dashboard' },
+                                { to: { path: this.$route.path }, title: this.$route.name }
+                            ]
+                        }
+                    }
+                }
             },
         },
         mounted() {
@@ -122,10 +176,18 @@
 
             let body = document.body;
             body.classList.add("light");
+            this.updateBreadcrumbLinks();
+            console.log('layout mounted')
         },
         beforeDestroy(){
             let body = document.body;
             body.classList.remove("light");
+            console.log('layout all most destroyed')
+        },
+        watch:{
+            '$route'() {
+                this.updateBreadcrumbLinks()
+            },
         }
     }
 </script>
@@ -145,6 +207,7 @@
     body{
         &.light{
             background: #f7f6f7!important;
+            font-size: 14px;
             #header-bg,
             #right-bg,
             #left-bg{
@@ -215,7 +278,12 @@
                     line-height: 30px;
                     width: 30px;
                     text-align: center;
-                    font-size: 4px;
+                    font-size: 5px;
+                }
+                &.is-active{
+                    .vsm-icon{
+                        color: #f50!important;
+                    }
                 }
             }
         }
@@ -247,8 +315,19 @@
     }
     .page-heading{
         border-bottom: 1px solid rgba(0, 0, 0, 0.1)!important;
-        background: #fff!important;
         margin-bottom: 15px!important;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+    }
+    .page-heading__container{
+        align-items: center;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .page-heading__title{
+        font-weight: 500;
     }
     .page-top-bar{
         display: flex;

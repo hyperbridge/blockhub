@@ -1,24 +1,7 @@
 <template>
-    <c-business-layout>
+    <c-business-layout title="Crowdfund Creation">
         <div>
-            <!-- PAGE HEADING -->
-            <div class="page-heading">
-                <div class="page-heading__container">
-                    <h1 class="title">Crowdfund Creation</h1>
-                    <p class="caption"></p>
-                </div>
-
-                <nav aria-label="breadcrumb" role="navigation">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#/business">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Crowdfund</li>
-                    </ol>
-                </nav>
-            </div>
-            <!-- //END PAGE HEADING -->
-
             <div class="container-fluid">
-
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">

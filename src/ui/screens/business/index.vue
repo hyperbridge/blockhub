@@ -1,24 +1,7 @@
 <template>
     <c-business-layout>
         <div>
-            <!-- PAGE HEADING -->
-            <div class="page-heading">
-                <div class="page-heading__container">
-                    <h1 class="title">Recent project</h1>
-                    <p class="caption">Welcome to RW CRM sales dashboard</p>
-                </div>
-
-                <nav aria-label="breadcrumb" role="navigation">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Recent projects</li>
-                    </ol>
-                </nav>
-            </div>
-            <!-- //END PAGE HEADING -->
-
             <div class="container-fluid">
-
                 <div class="row margin-bottom-20">
                     <div class="col-12 col-lg-3">
                         <div class="widget">
