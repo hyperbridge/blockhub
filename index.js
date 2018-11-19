@@ -51,16 +51,16 @@ app.post('/verification/', function (req, res) {
 
         var listId = '3b2ec4d052';
 
-        var vendorData = JSON.decode(payload.verification.vendorData)
+        //var vendorData = JSON.decode(payload.verification.vendorData)
 
         mailchimp.request({
             method: 'post',
             path: `/lists/${listId}/members`,
             body: {
-                email_address: vendorData.email,
+                email_address: payload.verification.vendorData,//vendorData.email,
                 FNAME: payload.verification.person.firstName,
                 LNAME: payload.verification.person.lastName,
-                PADDRESS: vendorData.eth,
+                PADDRESS: 'UNKNOWN',//vendorData.eth,
                 BTYPE: 'Ethereum',
                 status: 'subscribed',
                 tags: ['veriff', payload.verification.status],
