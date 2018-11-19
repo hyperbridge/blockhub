@@ -98,6 +98,10 @@ Use `npm run build` to build production. Currently it uses `/docs` directory, as
 
 Check [PR #4](https://github.com/hyperbridge/blockhub-web-client/pull/4) for instructions on using different testing modes and how data-driven p2p views work.
 
+## Style Guide
+
+Check the [Storybook Style Guide here](http://styleguide.blockhub.gg/)
+
 ## Articles
 
 * [TBD](docs/tbd.md)
