@@ -238,6 +238,10 @@ body::-webkit-scrollbar {
     cursor: pointer;
 }
 
+*:focus, *:active, *.active, *:focus:active {
+  outline: none;
+}
+
 // .swiper-container {
 //     overflow: visible;
 // }

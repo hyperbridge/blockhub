@@ -3413,11 +3413,12 @@
         "old_price": 0,
         "community_size": 1000,
         "active_users": 10,
+        "current_version": "v3.3.0",
         "releases": [
             {
                 "version": "v3.3.0",
                 "play_link": "https://play.fishbank.io/",
-                "download_link": "",
+                "downloads": [],
                 "meta": {
                     "created": 29239728
                 }

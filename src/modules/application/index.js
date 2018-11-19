@@ -286,6 +286,16 @@ export const mutations = {
         DB.application.config.update(state)
         DB.save()
     },
+    updateShortcut(state, shortcut) {
+        if (state.shortcuts.find(s => s.id == shortcut.id)) {
+            state.shortcuts.splice(state.shortcuts.findIndex(s => s.id == shortcut.id), 1)
+        } else {
+            state.shortcuts.push(shortcut)
+        }
+
+        DB.application.config.update(state)
+        DB.save()
+    },
     updateFavorites2({ account }, { prop = 'product_wishlist', id }) {
         const foundKey = account[prop].findIndex(savedId => savedId === id);
         foundKey

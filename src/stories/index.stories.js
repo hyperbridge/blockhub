@@ -3942,7 +3942,7 @@ storiesOf('Purchase block', module)
                         :tags="['top', 'new']"
                         :price="49.99"
                         releaseDate="8 Jun, 2018"
-                        :hasDemo="true"
+                        :demoLink="#"
                         :offersPurchases="true"
                         :inWishlist="inWishlist"
                         @addToWishlist="inWishlist = true"

@@ -20,7 +20,14 @@
                 "g": 255,
                 "b": 255,
                 "image": "/static/img/icons/store.png",
-                "link": "#/"
+                "link": "#/",
+                "text": "Go to store"
+            },
+            {
+                "icon": "fa fa-plus",
+                "eventKey": "application/activateModal",
+                "eventValue": "shortcutCreator",
+                "text": "Create"
             }
         ],
         "ethereum": {

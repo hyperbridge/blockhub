@@ -36,14 +36,27 @@
                 Free Download
             </c-button>
 
-            <c-button icon_hide icon="download" :href="fullReviewsLink" v-if="hasDemo">
+            <c-button icon_hide icon="download" :href="demoLink" v-if="demoLink">
                 Download Demo
+            </c-button>
+
+            <c-button icon_hide status="success" size="xl" icon="download" :href="playLink" v-if="playLink">
+                Play Now
             </c-button>
 
             <c-btn-fav
                 @click="$emit('addToWishlist')"
                 target="Wishlist"
                 :active="inWishlist"
+                class="mt-3"
+            />
+
+            <c-btn-fav
+                @click="$emit('addToShortcut')"
+                target="Shortcuts"
+                :active="inShortcut"
+                activeIcon="link"
+                unactiveIcon="unlink"
                 class="mt-3"
             />
         </div>
@@ -87,11 +100,16 @@
                 type: Boolean,
                 default: false
             },
-            hasDemo: {
-                type: Boolean,
-                default: false
+            demoLink: {
+                type: String,
+                default: null
+            },
+            playLink: {
+                type: String,
+                default: null
             },
             inWishlist: Boolean,
+            inShortcut: Boolean,
             purchaseLink: String,
             fullReviewsLink: String,
             onClickPurchase: Function
