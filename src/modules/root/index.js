@@ -4,23 +4,18 @@ import { findRelation, decompose, findRelationPaths } from '@/store/modules-rela
 
 const rootStore = {
     mutations: {
-        create(rootState, { id, module, target, data }) {
+        createV1(rootState, { id, module, target, data }) {
             const { [module]: state } = rootState;
             console.log('ROOT CREATE',id, module, target, data)
             rootState[module][target] = { ...state[target], [id]: data };
         },
-        updateV3(rootState,  { id, module, target, data }) {
-            const { [module]: state } = rootState;
+        create(rootState, [targets, id, data]) {
+            const [module, target] = targets.split('/');
 
-            console.log(id, module, target, data)
-
-            rootState[module][target][id] = {
-                ...rootState[module][target][id],
-                ...data
+            rootState[module][target] = {
+                ...state[module][target],
+                [id]: data
             };
-
-            console.log(rootState)
-            // const { [module]: state } = rootState;
         },
         update(rootState, [targets, id, data]) {
             const [module, target] = targets.split('/');
@@ -30,8 +25,14 @@ const rootStore = {
                 ...data
             };
         },
-        // updateSingular
         updateSingle(rootState, [targets, data]) {
+            const [module, target] = targets.split('/');
+            rootState[module][target] = {
+                ...rootState[module][target],
+                ...data
+            }
+        },
+        updateSingular(rootState, [targets, data]) {
             const [module, target] = targets.split('/');
             rootState[module][target] = {
                 ...rootState[module][target],
@@ -40,8 +41,6 @@ const rootStore = {
         },
         delete(rootState, [targets, id]) {
             const [module, target] = targets.split('/');
-
-            console.log(targets, id)
 
             const shallowCopy = { ...rootState[module][target] };
             delete shallowCopy[id];
@@ -66,24 +65,18 @@ const rootStore = {
         }
     },
     actions: {
-        create({ commit, state: rootState }, payload) {
-            const { target, module, data } = payload;
-            const { [module]: state } = rootState;
+        create({ commit, state: rootState }, [targets, data]) {
+            const [module, target] = targets.split('/');
 
             // const { id, data } = await axios.post(`/${target}`, data);
             const id = getId();
-            commit('create', { ...payload, id, data: { ...data, id }});
+            commit('create', [targets, id, data]);
             return id;
         },
-        update({ commit }, payload) {
-            const { id, target, data } = payload;
-            // await axios.patch(`/${target}/${id}`, data);
-            commit('update', payload);
-        },
-        updateV2({ commit }, [targets, id, data]) {
+        update({ commit }, [targets, id, data]) {
             const [module, target] = targets.split('/');
             // await axios.patch(`/${target}/${id}`, data);
-            commit('update', { module, target, id, data });
+            commit('update', [targets, id, data]);
         },
         delete({ commit }, payload) {
             const [targets, id] = payload;
@@ -105,7 +98,7 @@ const rootStore = {
                 [prop]: [...state[module][target][targetId][prop], itemId]
             };
 
-            commit('update', { module, target, id: targetId, data });
+            commit('update', [`${module}/${target}`, targetId, data]);
         },
         deleteWeakRel(
             { commit, dispatch, state },
@@ -116,7 +109,7 @@ const rootStore = {
             const data = {
                 [prop]: state[module][target][targetId][prop].filter(id => id != itemId)
             };
-            commit('update', { module, target, id: targetId, data });
+            commit('update', [`${module}/${target}`, targetId, data]);
         },
 
 
@@ -132,13 +125,13 @@ const rootStore = {
 
             const newId = await dispatch(
                 'create',
-                { target: propTarget, module: propModule, data }
+                [`${propModule}/${propTarget}`, data]
             );
 
             const targetData = {
                 [prop]: [...state[module][target][targetId][prop], newId]
             };
-            commit('update', { module, target, id: targetId, data: targetData });
+            commit('update', [`${module}/${target}`, targetId, targetData]);
             return newId;
         },
         deleteRelation(
@@ -151,8 +144,8 @@ const rootStore = {
             const targetData = {
                 [prop]: state[module][target][targetId][prop].filter(propId => propId != id)
             };
-            commit('update', { module, target, id: targetId, data: targetData });
-            dispatch('delete', { id, target: prop, module: propModule });
+            commit('update', [`${module}/${target}`, targetId, targetData]);
+            dispatch('delete', [`${propModule}/${prop}`, id]);
         },
 
 
