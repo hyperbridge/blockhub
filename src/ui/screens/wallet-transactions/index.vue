@@ -5,7 +5,7 @@
                     <div class="col-12">
                         <ul class="nav nav-tabs margin-bottom-10">
                             <li class="nav-item">
-                                <a class="nav-link" :href="`/#/account/wallets`">Overview</a>
+                                <a class="nav-link" :href="`#/account/wallets`">Overview</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="#3">Transactions</a>

@@ -14,8 +14,8 @@
                     </h3>
                 </div>
             </div>
-            <div class="d-flex align-items-center">
-                <div class="text-center mr-5">
+            <div class="d-flex align-items-center" hidden>
+                <div class="text-center mr-5" hidden>
                     <div>
                         Token
                     </div>
@@ -25,7 +25,7 @@
                         </h2>
                     </div>
                 </div>
-                <div>
+                <div hidden>
                     <c-button status="success" size="lg" icon_hide @click="$emit('purchase')">
                         Purchase HBX
                     </c-button>
@@ -85,7 +85,7 @@
                 <ul>
                     <li>
                         <a href="https://hyperbridge.org/downloads/whitepaper.pdf" target="_blank">
-                            Whitepaper
+                            White Paper
                             <i class="fas fa-file-alt"></i>
                         </a>
                     </li>

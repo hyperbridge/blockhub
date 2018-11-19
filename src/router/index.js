@@ -704,10 +704,26 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/business'], resolve),
         },
         {
+            path: '/business/products',
+            name: 'Business',
+            component: (resolve) => require(['@/ui/screens/business-products'], resolve),
+        },
+        {
+            path: '/business/projects',
+            name: 'Business',
+            component: (resolve) => require(['@/ui/screens/business-projects'], resolve),
+        },
+        {
             path: '/business/project/:id',
             name: 'Project',
             props: true,
             component: (resolve) => require(['@/ui/screens/business-project'], resolve),
+        },
+        {
+            path: '/business/product/:id',
+            name: 'Product',
+            props: true,
+            component: (resolve) => require(['@/ui/screens/business-product'], resolve),
         },
         {
             path: '/marketplace',
@@ -765,11 +781,24 @@ const router = new Router({
                 {
                     path: 'offers',
                     name: 'Marketplace Offers',
-                    component: (resolve) => require(['@/ui/screens/marketplace/offers'], resolve)
+                    component: (resolve) => require(['@/ui/screens/marketplace/offers'], resolve),
+                    children: [
+                        // {
+                        //     path: ':id',
+                        //     name: 'Matketplace Asset Offers',
+                        //     component: (resolve) => require(['@/ui/screens/marketplace/offers/_id'], resolve)
+                        // }
+                    ]
+                },
+                {
+                    path: 'offers/:id',
+                    name: 'Matketplace Asset Offers',
+                    component: (resolve) => require(['@/ui/screens/marketplace/offers/_id'], resolve),
+                    props: true
                 },
                 {
                     path: 'snipers',
-                    name: 'Marketplace Snipers',
+                    name: 'Marketplace Prospectors',
                     component: (resolve) => require(['@/ui/screens/marketplace/snipers'], resolve),
                 },
                 {

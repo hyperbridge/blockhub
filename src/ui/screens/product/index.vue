@@ -1,6 +1,7 @@
 <template>
     <c-layout navigationKey="product" :showRightPanel="false" navigationTitle="GAME OVERVIEW"
-              :breadcrumbLinks="breadcrumbLinks" :showBreadcrumbs="!editing">
+              :breadcrumbLinks="breadcrumbLinks" :showBreadcrumbs="!editing" class="product-single-page">
+
         <div class="row" v-if="!product">
             <div class="col-12">
                 Product not found
@@ -33,12 +34,19 @@
 
                         <div class="editor-container">
                             <div class="" v-if="editing">
-                                <div class="form-group">
-                                    <select id="tag-editor" class="form-control" multiple="multiple">
-                                        <option v-for="(tag, index) in developer_tag_options" :key="index"
-                                                :selected="product.developer_tags.includes(tag)">{{ tag }}
-                                        </option>
-                                    </select>
+                                <div class="form-group tag-editor">
+                                    <multiselect v-model="product.developer_tags"
+                                                 class="dark-mode"
+                                                 :multiple="true"
+                                                 :taggable="true"
+                                                 :options="developer_tag_options">
+
+                                    </multiselect>
+                                    <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
+                                        <!--<option v-for="(tag, index) in developer_tag_options" :key="index"-->
+                                                <!--:selected="product.developer_tags.includes(tag)">{{ tag }}-->
+                                        <!--</option>-->
+                                    <!--</select>-->
                                 </div>
                             </div>
                             <c-tags-list :tags="product.developer_tags" v-if="!editing"></c-tags-list>
@@ -163,7 +171,7 @@
                         </div>
 
                     <div class="col-12">
-                        <transition name="page">
+                        <transition name="page" mode="out-in">
                             <c-product-overview :product="product" v-if="section === 'overview'" :editing="editing" />
                             <c-product-assets :product="product" v-if="section === 'assets'" :editing="editing" />
                             <c-product-community :product="product" v-if="section === 'community'" :editing="editing" />
@@ -180,7 +188,7 @@
                     Etiam elementum ac ligula nec viverra. Nunc molestie augue a erat ultrices fermentum.</p>
                 <p>Curabitur non bibendum erat. Praesent nec vestibulum odio, vel euismod enim. Sed at tincidunt risus.
                     Mauris ac facilisis metus. Proin venenatis neque posuere urna sagittis ultricies.</p>
-                <p><a href="/#/help" target="_blank">Learn more about creating products</a></p>
+                <p><a href="#/help" target="_blank">Learn more about creating products</a></p>
             </div>
             <div slot="modal_footer" class="text-right w-100">
                 <c-button size="md" @click="closeModal">Got it</c-button>
@@ -246,7 +254,7 @@
                 </div>
             </template>
             <p slot="footer" class="margin-top-20">
-                Need help? <c-button status="plain" href="/#/help">Check the Help Center</c-button>
+                Need help? <c-button status="plain" href="#/help">Check the Help Center</c-button>
             </p>
         </c-basic-popup>
 
@@ -257,6 +265,9 @@
     import Vue from 'vue'
     import * as Brdge from '@/framework/desktop-bridge'
     import * as DB from '@/db'
+
+    import Multiselect from 'vue-multiselect'
+    import 'vue-multiselect/dist/vue-multiselect.min.css';
 
     const groupBy = function (xs, key) {
         return xs.reduce(function (rv, x) {
@@ -283,7 +294,8 @@
             'c-topic-item': (resolve) => require(['@/ui/components/help/topic-item'], resolve),
             'c-tags-list': (resolve) => require(['@/ui/components/tags'], resolve),
             'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
-            'c-popup': (resolve) => require(['@/ui/components/popups'], resolve)
+            'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
+            Multiselect
         },
         data() {
             return {
@@ -300,7 +312,8 @@
                 ],
                 importing: false,
                 importStep: 1,
-                savedState: false
+                savedState: false,
+                value: null
             }
         },
         computed: {
@@ -308,7 +321,7 @@
                 return this.$store.state.marketplace;
             },
             product() {
-                return this.id === 'new' ? this.marketplace.default_product : this.marketplace.products[this.id];
+                return this.id === 'new' ? this.marketplace.default_product : DB.marketplace.products.findOne({ 'id': Number(this.id) })
             },
             editor_mode() {
                 return this.$store.state.application.editor_mode
@@ -546,23 +559,23 @@
             },
         },
         updated() {
-            $('#tag-editor').select2()
-                .on('select2:select', (e) => {
-                    let data = e.params.data
-
-                    if (!this.product.developer_tags.includes(data.text)) {
-                        this.product.developer_tags.push(data.text)
-                    }
-
-                    Vue.set(this.product, 'developer_tags', this.product.developer_tags)
-                })
-                .on('select2:unselect', (e) => {
-                    let data = e.params.data
-
-                    this.product.developer_tags = this.product.developer_tags.filter(e => e !== data.text)
-
-                    Vue.set(this.product, 'developer_tags', this.product.developer_tags)
-                })
+            // $('#tag-editor').select2()
+            //     .on('select2:select', (e) => {
+            //         let data = e.params.data
+            //
+            //         if (!this.product.developer_tags.includes(data.text)) {
+            //             this.product.developer_tags.push(data.text)
+            //         }
+            //
+            //         Vue.set(this.product, 'developer_tags', this.product.developer_tags)
+            //     })
+            //     .on('select2:unselect', (e) => {
+            //         let data = e.params.data
+            //
+            //         this.product.developer_tags = this.product.developer_tags.filter(e => e !== data.text)
+            //
+            //         Vue.set(this.product, 'developer_tags', this.product.developer_tags)
+            //     })
 
             $('#summernote').summernote({
                 placeholder: 'Type in your text',
@@ -688,4 +701,47 @@
         }
     }
 
+</style>
+
+<style lang="scss">
+    .tag-editor{
+        .multiselect.dark-mode{
+            color: #ffffff;
+            input{
+                background: transparent;
+                border: unset;
+            }
+            .multiselect__tags{
+                border: 1px solid #1b1c2a;
+                background: #1b1c2a;
+                .multiselect__tag{
+                    background: #fbdd6a;
+                    color: #1b1c2a;
+                    .multiselect__tag-icon,
+                    .multiselect__tag-icon:focus,
+                    .multiselect__tag-icon:hover{
+                        background: #fbdd6a;
+                        &:after{
+                            color: #1b1c2a;
+                        }
+                    }
+                }
+            }
+            .multiselect__content-wrapper{
+                border: 1px solid #1b1c2a;
+                background: #1b1c2a;
+            }
+            .multiselect__option--selected{
+                background: #fbdd6a;
+                &:after{
+                    color: #28293e;
+                }
+                &.multiselect__option--highlight{
+                    background: #dfc45e;
+                    color: #1b1c2a;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
 </style>

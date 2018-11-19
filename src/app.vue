@@ -5,107 +5,107 @@
             <div class="fixed-panel__content scroll">
                 <h5 v-if="developer_mode" v-darklaunch="'REALMS'">Your Realms</h5>
 
-                <a href="/#/realm/1" v-if="developer_mode" v-darklaunch="'REALMS'">
+                <a href="#/realm/1" v-if="developer_mode" v-darklaunch="'REALMS'">
                     <span class="icon icon-letter-circle">C</span>
                     <span class="text">Continuum</span>
                 </a>
-                <a href="/#/realm/1" v-if="developer_mode" v-darklaunch="'REALMS'">
+                <a href="#/realm/1" v-if="developer_mode" v-darklaunch="'REALMS'">
                     <span class="icon icon-letter-circle">H</span>
                     <span class="text">Hyperbridge</span>
                 </a>
-                <a href="/#/realm/1" v-if="developer_mode" v-darklaunch="'REALMS'">
+                <a href="#/realm/1" v-if="developer_mode" v-darklaunch="'REALMS'">
                     <span class="icon icon-letter-circle">R</span>
                     <span class="text">Ready Block One</span>
                 </a>
 
-                <a href="/#/profile/1/realms" v-if="developer_mode" v-darklaunch="'REALMS'">See More...</a>
+                <a href="#/profile/1/realms" v-if="developer_mode" v-darklaunch="'REALMS'">See More...</a>
 
                 <hr v-if="developer_mode" v-darklaunch="'REALMS'" />
 
                 <h5 v-if="developer_mode">Your Products</h5>
-                <a v-if="developer_mode" href="/#/product/1">
+                <a v-if="developer_mode" href="#/product/1">
                     <span class="icon icon-letter-circle">B</span>
                     <span class="text">BlockHub</span>
                 </a>
-                <a v-if="developer_mode" href="/#/product/1">
+                <a v-if="developer_mode" href="#/product/1">
                     <span class="icon icon-letter-circle">D</span>
                     <span class="text">Dataforce</span>
                 </a>
-                <a v-if="developer_mode" href="/#/product/1">
+                <a v-if="developer_mode" href="#/product/1">
                     <span class="icon icon-letter-circle">R</span>
                     <span class="text">Republic</span>
                 </a>
 
-                <a v-if="developer_mode" href="/#/profile/1/products">See More...</a>
+                <a v-if="developer_mode" href="#/profile/1/products">See More...</a>
 
                 <hr v-if="developer_mode" />
 
                 <h5 v-if="developer_mode"><i class="fas fa-code" /> Developer</h5>
 
-                <a href="/#/developer" v-if="developer_mode">
+                <a href="#/developer" v-if="developer_mode">
                     <span class="icon fas fa-list-alt"></span>
                     <span class="text">My Content</span>
                 </a>
-                <a href="/#/developer/payment" v-if="developer_mode">
+                <a href="#/business/developer/payment" v-if="developer_mode">
                     <span class="icon fas fa-info-circle"></span>
                     <span class="text">Payment Settings</span>
                 </a>
-                <a href="/#/realm/new" v-if="developer_mode" v-darklaunch="'REALMS'">
+                <a href="#/business/realm/new" v-if="developer_mode" v-darklaunch="'REALMS'">
                     <span class="icon fa fa-plus"></span>
                     <span class="text">New Realm</span>
                 </a>
-                <a href="/#/product/new" v-if="developer_mode">
+                <a href="#/business/product/new" v-if="developer_mode">
                     <span class="icon fa fa-plus"></span>
                     <span class="text">New Game</span>
                 </a>
-                <a href="/#/project/new" v-if="developer_mode">
+                <a href="#/business/project/new" v-if="developer_mode">
                     <span class="icon fa fa-plus"></span>
                     <span class="text">New Crowdfund</span>
                 </a>
 
                 <hr v-if="developer_mode" />
 
-                <a v-if="signed_in" href="/#/account">
+                <a v-if="signed_in" href="#/account">
                     <span class="icon fa fa-user"></span>
                     <span class="text">Account</span>
                 </a>
-                <a v-if="signed_in" href="/#/account/identities">
+                <a v-if="signed_in" href="#/account/identities">
                     <span class="icon fa fa-id-card"></span>
                     <span class="text">Profiles</span>
                 </a>
-                <a v-if="signed_in" href="/#/account/wallets" v-darklaunch="'WALLETS'">
+                <a v-if="signed_in" href="#/account/wallets" v-darklaunch="'WALLETS'">
                     <span class="icon fa fa-credit-card"></span>
                     <span class="text">Wallets</span>
                 </a>
 
                 <hr v-if="signed_in" />
 
-                <a v-if="signed_in" href="/#/identity/1">
+                <a v-if="signed_in" href="#/identity/1">
                     <span class="icon fa fa-user"></span>
                     <span class="text">Current Profile</span>
                 </a>
-                <a v-if="signed_in" href="/#/settings/activity">
+                <a v-if="signed_in" href="#/settings/activity">
                     <span class="icon fa fa-list-alt"></span>
                     <span class="text">Activity Log</span>
                 </a>
-                <a v-if="signed_in" href="/#/identity/1/contacts" v-darklaunch="'CONTACTS'">
+                <a v-if="signed_in" href="#/identity/1/contacts" v-darklaunch="'CONTACTS'">
                     <span class="icon fa fa-users"></span>
                     <span class="text">Contacts</span>
                 </a>
 
                 <hr v-if="signed_in" />
 
-                <a v-if="signed_in" href="/#/settings">
+                <a v-if="signed_in" href="#/settings">
                     <span class="icon fa fa-cog"></span>
                     <span class="text">Settings</span>
                 </a>
 
-                <a href="/#/sitemap">
+                <a href="#/sitemap">
                     <span class="icon fa fa-list-alt"></span>
                     <span class="text">Sitemap</span>
                 </a>
 
-                <a v-if="signed_in" href="/#/account/signout">
+                <a v-if="signed_in" href="#/account/signout">
                     <span class="icon fa fa-sign-out-alt"></span>
                     <span class="text">Sign Out</span>
                 </a>
@@ -119,8 +119,8 @@
                     <div class="text">
                         <h3>Are you a developer?</h3>
                         <p>Start developing for blockchain with BlockHub SDK</p>
-                        <c-button status="info" href="/#/developer/apply" icon_hide>Start Developing</c-button>
-                        <c-button status="dark" href="/#/help/0/article/developer-program" icon_hide>Learn More</c-button>
+                        <c-button status="info" href="#/developer/apply" icon_hide>Start Developing</c-button>
+                        <c-button status="dark" href="#/help/0/article/developer-program" icon_hide>Learn More</c-button>
                     </div>
                 </div>
                 <div class="d-flex justify-content-start">
@@ -128,13 +128,13 @@
                         <h5><i class="fas fa-code"></i>Become Developer</h5>
                         <ul>
                             <li>
-                                <a href="/#/developer/apply">
+                                <a href="#/developer/apply">
                                     <i class="fas fa-list-alt"></i>
                                     Apply Now
                                 </a>
                             </li>
                             <li>
-                                <a href="/#/developer/faq">
+                                <a href="#/developer/faq">
                                     <i class="fas fa-info-circle"></i>
                                     Developer FAQ
                                 </a>
@@ -155,7 +155,7 @@
                         <c-button @click="rotateEditorMode()">Editor Mode {{ $store.state.application.editor_mode.toUpperCase() }}</c-button>
                         <c-button @click="toggleDarklaunchOverride()">Darklaunch Override {{ $store.state.application.darklaunch_override ? 'ON' : 'OFF' }}</c-button>
                         <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button>
-                        
+
                         <br /><br />
                     </div>
                     <div>
@@ -254,7 +254,7 @@
                 }
             },
             updateEditorMode() {
-                this.$store.state.application.editor_mode = 'viewing'
+                // this.$store.state.application.editor_mode = 'viewing'
             },
             toggleDesktopMode() {
                 this.$store.state.application.desktop_mode = !this.$store.state.application.desktop_mode
@@ -275,13 +275,13 @@
                 this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulator_mode)
             },
             rotateEditorMode() {
-                if (this.$store.state.application.editor_mode === 'editing') {
-                    this.$store.state.application.editor_mode = 'viewing'
-                } else if (this.$store.state.application.editor_mode === 'viewing') {
-                    this.$store.state.application.editor_mode = 'publishing'
-                } else {
-                    this.$store.state.application.editor_mode = 'editing'
-                }
+                // if (this.$store.state.application.editor_mode === 'editing') {
+                //     this.$store.state.application.editor_mode = 'viewing'
+                // } else if (this.$store.state.application.editor_mode === 'viewing') {
+                //     this.$store.state.application.editor_mode = 'publishing'
+                // } else {
+                //     this.$store.state.application.editor_mode = 'editing'
+                // }
             },
             rotateOperatingSystem() {
                 if (this.$store.state.application.operating_system === 'mac') {
@@ -306,13 +306,18 @@
                 }
             },
             importSeedData() {
-                window.BlockHub.importSeedData()
+                BlockHub.importSeedData()
             },
             resetSeedData() {
-                window.BlockHub.resetSeedData()
+                BlockHub.resetSeedData()
             },
             saveSettings() {
-                window.BlockHub.saveDatabase()
+                BlockHub.saveDatabase()
+
+                BlockHub.Notifications.info('', 'Settings saved', {
+                    timeout: 2000,
+                    pauseOnHover: true
+                })
             },
             resetSettings() {
                 window.resetSettings()
@@ -337,7 +342,7 @@
                                 value = Number(value)
                             } else if (type === 'boolean') {
                                 value = Boolean(value)
-                            }else if (type === 'json') {
+                            } else if (type === 'json') {
                                 value = JSON.parse(value)
                             }
 
@@ -361,12 +366,9 @@
             }
         },
         mounted() {
-            this.$store.commit('assets/loadTransactions');
             this.loadSettings()
-            this.ensureDesktopWelcome()
-        },
-        created() {
             this.getExternalState()
+            this.ensureDesktopWelcome()
         },
         watch: {
             $route(to, from) {
@@ -384,7 +386,7 @@
     #app {
         -webkit-user-select: none;
     }
-    
+
     .fixed-panel {
         width: 540px;
         right: -540px;

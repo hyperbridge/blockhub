@@ -56,14 +56,18 @@ const notifyError = debounce(function (message) {
   if (!message) return
 
   if (message.indexOf('Error') !== -1) {
-    BlockHub.Bridge.sendCommand('error', { message: message.slice(0, 250) })
+    if (store.state.application.account.settings.client.system_warnings) {
+      BlockHub.Bridge.sendCommand('error', { message: message.slice(0, 250) })
+    }
   }
 
   if (message.indexOf('TypeError') !== -1) {
-    BlockHub.Notifications.error(message, 'UI Error', {
-      timeout: 5000,
-      pauseOnHover: true
-    })
+    if (store.state.application.account.settings.client.system_warnings) {
+      BlockHub.Notifications.error(message, 'UI Error', {
+        timeout: 5000,
+        pauseOnHover: true
+      })
+    }
   }
 }, 500)
 

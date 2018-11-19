@@ -3,15 +3,18 @@
         <div>
             <!-- PAGE HEADING -->
             <div class="page-heading">
-                <div class="page-heading__container">
-                    <h1 class="title">Crowdfund Creation</h1>
-                    <p class="caption"></p>
+                <div class="page-heading__container" style="float: none">
+                    <h1 class="title" style="float: left'" hidden>Product Creation</h1>
+                    <div class="float-right mb-3" v-if="project.id">
+                        <a :href="`#/project/${project.id}`" class="btn btn-primary">PREVIEW</a>
+                    </div>
                 </div>
 
                 <nav aria-label="breadcrumb" role="navigation">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/#/business">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Crowdfund</li>
+                        <li class="breadcrumb-item"><a href="#/business">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#/business/projects">Crowdfunds</a></li>
+                        <li class="breadcrumb-item active">{{ project.id ? 'Edit' : 'New' }} Crowdfund</li>
                     </ol>
                 </nav>
             </div>
@@ -30,6 +33,27 @@
                                 <span class="form-text"></span>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="switch switch-sm col-sm-3">
+                                <label>Description</label>
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="" v-model="project.description">
+                                <span class="form-text"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="switch switch-sm col-sm-3">
+                                <label>About</label>
+                            </label>
+                            <div class="col-sm-9">
+                                <c-html-editor height="200" :model.sync="project.content" />
+
+                                <span class="form-text"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group row">
                             <label class="switch switch-sm col-sm-3">
                                 <label>Tags</label>
@@ -58,6 +82,17 @@
                                 <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="page-heading">
+                    <div class="page-heading__container" style="float: none">
+                        <a class="title" href="#" style="float: left'" @click="toggleAdvanced">{{ advanced ? 'Hide' : 'Show' }} Advanced</a>
+                    </div>
+                </div>
+
+                <div class="row" v-if="advanced">
+                    <div class="col-md-6">
 
                         <div class="form-group row">
                             <div class="col-sm-3">
@@ -154,7 +189,7 @@
                         </div>
                     </div>
                 </div>
-
+            
                 <div class="row" v-darklaunch="'GOVERNANCE'">
                     <div class="col-12">
                         Choose your governance system
@@ -165,8 +200,11 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-2 offset-10">
+                    <div class="col-2 offset-10" v-if="project.id">
                         <a href="#" target="_blank" class="btn btn-primary" @click.prevent="save">SAVE</a>
+                    </div>
+                    <div class="col-2 offset-10" v-if="!project.id">
+                        <a href="#" target="_blank" class="btn btn-primary" @click.prevent="create">CREATE</a>
                     </div>
                 </div>
             </div>
@@ -180,11 +218,13 @@
             id: [String, Number]
         },
         components: {
-            'c-business-layout': (resolve) => require(['@/ui/layouts/business'], resolve)
+            'c-business-layout': (resolve) => require(['@/ui/layouts/business'], resolve),
+            'c-html-editor': (resolve) => require(['@/ui/components/html-editor'], resolve)
         },
         data() {
             return {
-                loadingState: true
+                loadingState: true,
+                advanced: false
             }
         },
         computed: {
@@ -193,20 +233,119 @@
             },
             project() {
                 return this.id === 'new' ? this.funding.default_project : this.funding.projects[this.id]
-            },
+            }
         },
         methods: {
-            save() {
+            toggleAdvanced() {
+                this.advanced = !this.advanced
+            },
+            create() {
+
                 const run = function(
                     local, 
-                    DB, 
+                    DB,
+                    Bridge,
                     FundingAPI, 
                     MarketplaceAPI, 
                     TokenAPI, 
                     ReserveAPI, 
                     BABEL_PROMISE,
                     BABEL_GENERATOR,
-                    BABEL_REGENERATOR
+                    BABEL_REGENERATOR,
+                    params
+                ) {
+                    const { project, profile } = params
+                    
+                    return new Promise(async (resolve, reject) => {
+                        const projectRegistrationContract = FundingAPI.api.ethereum.state.contracts.ProjectRegistration.deployed
+
+                        let created = false
+
+                        const watcher = projectRegistrationContract.ProjectCreated().watch((err, res) => {
+                            if (created) return
+
+                            created = true
+
+                            if (err) {
+                                console.warn('[BlockHub][Marketplace] Error', err)
+
+                                return reject(err)
+                            }
+
+                            project.$loki = undefined
+                            project.id = res.args.projectId.toNumber()
+
+                            try {
+                                DB.funding.projects.insert(project)
+                                console.log('after', project.id)
+                            } catch (e) {
+                                try {
+                                    DB.funding.projects.update(project)
+                                } catch (e) {
+                                    reject(e)
+                                }
+                            }
+
+                            DB.save()
+
+                            Bridge.sendCommand('updateState', {
+                                module: 'funding',
+                                state: {
+                                    projects: DB.funding.projects.data
+                                }
+                            })
+
+                            console.log('Project created')
+
+                            resolve(project)
+                        })
+
+                        await projectRegistrationContract.createProject(
+                            project.name,
+                            project.description,
+                            project.content,
+                            { from: profile.public_address }
+                        )
+
+                        watcher.stopWatching(() => {
+                            // Must be async or tries to launch nasty process
+                        })
+                    })
+                }
+
+                const cmd = {
+                    code: run.toString(),
+                    params: {
+                        profile: this.$store.state.application.account.current_identity,
+                        project: this.project
+                    }
+                }
+
+                BlockHub.Bridge.sendCommand('eval', cmd).then((projectResult) => {
+                    if (projectResult.id) {
+                        this.project.id = projectResult.id
+                        this.successfulCreationMessage = "Congratulations, your project has been created!"
+
+                        this.funding.projects[this.project.id] = this.project
+
+                        this.$router.push('/business/project/' + this.project.id)
+                    }
+                })
+
+            },
+            save() {
+                const run = function(
+                    local, 
+                    DB,
+                    Bridge,
+                    FundingAPI, 
+                    MarketplaceAPI, 
+                    TokenAPI, 
+                    ReserveAPI, 
+                    BABEL_PROMISE,
+                    BABEL_GENERATOR,
+                    BABEL_REGENERATOR,
+                    params
                 ) {
                     return new Promise(async () => {
                         const project = {

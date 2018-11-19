@@ -85,7 +85,7 @@
                         <li>
                             <a href="https://hyperbridge.org/downloads/whitepaper.pdf" target="_blank">
                                 <i class="fas fa-file-alt"></i>
-                                Whitepaper
+                                White Paper
                             </a>
                         </li>
                         <li>

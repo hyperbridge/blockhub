@@ -23,7 +23,7 @@
                     </td>
                 </template>
             </transition-group>
-            <tr style="background: transparent">
+            <tr style="background: transparent" v-if="languages.length > 5">
                 <td colspan="10" class="text-center">
                     <transition name="fade" v-if="!show">
                         <div class="language-support__toggle-btn" @click="toggleLang">
@@ -64,12 +64,12 @@
             }
         },
         created(){
-            let lang = this.$store.state.application.account.language.code,
+            let lang = this.$store.state.application.account.language,
                 arr = this.languages;
-            this.userLang = lang.toLowerCase()
+            this.userLang = lang.name.toLowerCase();
             arr.forEach( (el) => {
-                if (el.code) {
-                    if ( this.userLang.includes(el.code.toLowerCase()) ){
+                if (el.name) {
+                    if ( this.userLang.includes(el.name.toLowerCase()) ){
                         el.order = 0;
                         el.show = 'default';
                         this.langList.push(el);

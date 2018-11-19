@@ -1,6 +1,7 @@
 <template>
     <div>
-        <c-content-navigation :items="offers" :setLimits="7">
+        <span v-if="isLoading">Loading ...</span>
+        <c-content-navigation v-else :items="offers" :setLimits="7">
             <table class="offers-table" slot-scope="props">
                 <thead>
                     <th>Item</th>
@@ -13,20 +14,20 @@
                     <th>Show auctions</th>
                 </thead>
                 <tbody>
-                    <tr v-for="(offer, id) in props.items" :key="id">
+                    <tr v-for="[id, offer] in props.items" :key="id">
                         <template v-if="openedOffer != offer.id">
                             <td>
                                 <c-asset-preview-basic
-                                    :asset="assets[id]"
+                                    :asset="offer.asset"
                                     size="sm"
                                     horizontal
                                     hideGame
                                 />
                             </td>
-                            <td>{{ offer.auctions.length }}</td>
-                            <td>{{ offer.expDate | timeAgoShort }}</td>
+                            <td>{{ offer.bids.length }}</td>
+                            <td>{{ offer.expiresIn | timeAgoShort }}</td>
                             <td>{{ offer.seller.name }}</td>
-                            <td>{{ offer.auctions[0].bid }} $</td>
+                            <td>{{ offer.bids[0].value }} $</td>
                             <td>{{ offer.buyout }} $</td>
                             <td>{{ offer.marketValue }} %</td>
                             <td>
@@ -36,7 +37,7 @@
                             </td>
                         </template>
                         <template v-else>
-                            <td colspan="7" class="offers-table--opened" @click.self="openOffer(id)">
+                            <td colspan="7" class="offers-table--opened">
                                 <table class="auctions-table">
                                     <thead>
                                         <tr>
@@ -46,7 +47,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-if="!offer.auctions.length">
+                                        <tr v-if="!offer.bids.length">
                                             <td colspan="3">
                                                 This offer doesn't contain any auctions yet
                                             </td>
@@ -84,52 +85,69 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: ['id'],
-    components: {
-        'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
-        'c-asset-list': (resolve) => require(['@/ui/components/asset/list'], resolve),
-        'c-asset-preview-basic': (resolve) => require(['@/ui/components/asset/preview-basic'], resolve),
-        'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve)
-    },
-    data() {
-        return {
-            openedOffer: null,
-            bidValue: 0
-        }
-    },
-    methods: {
-        openOffer(id) {
-            if (this.bidValue != 0) this.bidValue = 0;
-            if (this.openedOffer == id) this.openedOffer = null;
-            else this.openedOffer = id;
-        },
-        createAuction(offerId) {
-            const { bidValue: bid } = this;
 
-            if (bid) {
-                const newAuction = {
-                    offerId,
-                    bid,
-                    user: { name: 'Me' },
-                    date: moment()
-                };
-                this.$store.dispatch('assets/createAuction', newAuction);
-                this.$snotify.success(`You have successfully created an auction bid for ${bid} $`, 'Created');
-                this.bidValue = 0;
-            }
-        }
-    },
-    computed: {
-        assets() {
-            return this.$store.getters['assets/assetsArray'];
+<script>
+    import offers from '@/db/api/offers';
+
+    export default {
+        props: ['id', 'identityId'],
+        components: {
+            'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
+            'c-asset-list': (resolve) => require(['@/ui/components/asset/list'], resolve),
+            'c-asset-preview-basic': (resolve) => require(['@/ui/components/asset/preview-basic'], resolve),
+            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve)
         },
-        offers() {
-            return this.$store.getters['assets/offersArray'];
+        data() {
+            return {
+                openedOffer: null,
+                bidValue: 0,
+                results: [],
+                isLoading: true
+            }
+        },
+        methods: {
+            openOffer(id) {
+                if (this.bidValue != 0) this.bidValue = 0;
+                if (this.openedOffer == id) this.openedOffer = null;
+                else this.openedOffer = id;
+            },
+            createAuction(offerId) {
+                const { bidValue: bid } = this;
+
+                if (bid) {
+                    const newAuction = {
+                        offerId,
+                        bid,
+                        user: { name: 'Me' },
+                        date: moment()
+                    };
+                    this.$store.dispatch('assets/createAuction', newAuction);
+                    this.$snotify.success(`You have successfully created an auction bid for ${bid} $`, 'Created');
+                    this.bidValue = 0;
+                }
+            },
+            async getOffers() {
+                this.isLoading = true;
+                await new Promise(r => setTimeout(r, 2500));
+                this.$store.dispatch('loadData', ['assets/offers', offers]);
+                this.isLoading = false;
+            }
+        },
+        watch: {
+            identityId: {
+                handler: 'getOffers',
+                immediate: true
+            }
+        },
+        computed: {
+            offers() {
+                return this.$store.getters['assets/offersMap'];
+            }
+        },
+        beforeDestroy() {
+            this.$store.dispatch('clearData', 'assets/offers');
         }
     }
-}
 </script>
 
 <style lang="scss" scoped>

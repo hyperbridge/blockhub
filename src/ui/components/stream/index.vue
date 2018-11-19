@@ -2,28 +2,28 @@
     <div class="stream-item">
         <div class="stream-item__wrapper">
             <div class="stream-item__img">
-                <c-img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQirZ7XcXSa1fX6SLff2k21LqAcfF-2uNUwlPKtl93ZSdm-Rw6UWQ" />
-                <a href="#3" class="stream-item__run-btn">
+                <c-img :src="streamImg" />
+                <a :href="streamSrc" class="stream-item__run-btn">
                     <i class="fas fa-play-circle"></i>
                 </a>
             </div>
             <div class="stream-item__info">
                 <div>
-                    <c-img src="https://static.planetminecraft.com/files/resource_media/screenshot/1648/gsggnxg10685537_lrg.png" />
+                    <c-img :src="streamAvatar" />
                 </div>
                 <div>
                     <div class="h6 p-0 m-0 font-weight-bold user-name">
-                        GodOfWarCraft
+                        {{ streamName }}
                     </div>
                     <div class="m-0 p-0 text-muted product-name">
                         <a href="#3" class="text-muted">
-                            The Witcher 2
+                            {{ streamGame }}
                         </a>
                     </div>
                 </div>
                 <div class="stream-item__viewers">
                     <i class="fas fa-eye"></i>
-                    91823
+                    {{ streamViews }}
                 </div>
             </div>
         </div>
@@ -32,7 +32,17 @@
 
 <script>
     export default {
-
+        props:{
+            streamGame: String,
+            streamName: String,
+            streamAvatar: String,
+            streamImg: String,
+            streamSrc: String,
+            streamViews: {
+                type: [ String, Number ],
+                default: 0
+            }
+        }
     }
 </script>
 
@@ -54,7 +64,7 @@
         width: 100%;
         img{
             width: 100%;
-            height: calc(100% - 80px);
+            height: 200px;
             object-fit: cover;
         }
         &:before{

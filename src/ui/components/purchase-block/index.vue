@@ -32,7 +32,7 @@
                 Proceed to Purchase
             </c-button>
 
-            <c-button status="success" size="lg" icon="download" :href="purchaseLink" v-if="!price" @click="onClickPurchase">
+            <c-button status="success" size="lg" icon="download" :href="purchaseLink" v-if="!price && isReleased" @click="onClickPurchase">
                 Free Download
             </c-button>
 

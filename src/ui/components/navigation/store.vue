@@ -94,14 +94,14 @@
                 Help
             </li>
             <li>
-                <a href="/#/help/1/article/purchasing-with-cryptocurrency">Purchasing with Cryptocurrency</a>
-                <a href="/#/help/1/article/content-availability-by-country">Content Availability by Country</a>
-                <a href="/#/help/1/article/becoming-a-community-curator">Becoming a Community Curator</a>
-                <a href="/#/help/1/article/18-plus-games-and-verification">18+ Games and Verification</a>
-                <a href="/#/help/1/article/recporting-misleading-content">Reporting Misleading Content</a>
+                <a href="#/help/1/article/purchasing-with-cryptocurrency">Purchasing with Cryptocurrency</a>
+                <a href="#/help/1/article/content-availability-by-country">Content Availability by Country</a>
+                <a href="#/help/1/article/becoming-a-community-curator">Becoming a Community Curator</a>
+                <a href="#/help/1/article/18-plus-games-and-verification">18+ Games and Verification</a>
+                <a href="#/help/1/article/recporting-misleading-content">Reporting Misleading Content</a>
             </li>
             <li>
-                <a href="/#/help/1" class="btn btn-link">
+                <a href="#/help/1" class="btn btn-link">
                     More...
                 </a>
             </li>
@@ -110,8 +110,8 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
-    import { arrayHandler } from '@/mixins';
+    import { mapGetters } from 'vuex'
+    import { arrayHandler } from '@/mixins'
 
     export default {
         components: {
@@ -140,13 +140,13 @@
             search() {
                 this.results = this.phrase.length
                     ? this.getProductsByName(this.phrase)
-                    : [];
+                    : []
             },
             goToSearchPage() {
                 this.$router.push({
                     name: 'Search',
                     query: this.query
-                });
+                })
             }
         },
         computed: {
@@ -154,7 +154,7 @@
                 getProductsByName: 'marketplace/getProductsByName'
             }),
             filteredResults() {
-                const { choosenPlatforms } = this;
+                const { choosenPlatforms } = this
 
                 return this.results
                     .filter(result => choosenPlatforms.length
@@ -165,15 +165,15 @@
                     )
             },
             query() {
-                const { phrase, choosenPlatforms, communitySize, activeUsers } = this;
-                const query = {};
+                const { phrase, choosenPlatforms, communitySize, activeUsers } = this
+                const query = {}
 
-                if (phrase.length) query.name = phrase;
-                if (choosenPlatforms.length) query.platforms = choosenPlatforms;
-                if (communitySize) query.communitySize = communitySize;
-                if (activeUsers) query.activeUsers = activeUsers;
+                if (phrase.length) query.name = phrase
+                if (choosenPlatforms.length) query.platforms = choosenPlatforms
+                if (communitySize) query.communitySize = communitySize
+                if (activeUsers) query.activeUsers = activeUsers
 
-                return query;
+                return query
             }
         }
     }

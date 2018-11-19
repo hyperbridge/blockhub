@@ -852,9 +852,9 @@ storiesOf('Sidebar Menu', module)
         data() {
             return {
                 links: [
-                    {to: {path: '/#/'}, title: 'Suggesting Features'},
-                    {to: {path: '/#/'}, title: 'Voting and Curating Updates'},
-                    {to: {path: '/#/'}, title: 'MORE ...'}
+                    {to: {path: '#/'}, title: 'Suggesting Features'},
+                    {to: {path: '#/'}, title: 'Voting and Curating Updates'},
+                    {to: {path: '#/'}, title: 'MORE ...'}
                 ],
             }
         },
@@ -871,9 +871,9 @@ storiesOf('Sidebar Menu', module)
         data() {
             return {
                 links: [
-                    {to: {path: '/#/'}, title: 'Suggesting Features'},
-                    {to: {path: '/#/'}, title: 'Voting and Curating Updates'},
-                    {to: {path: '/#/'}, title: 'MORE ...'}
+                    {to: {path: '#/'}, title: 'Suggesting Features'},
+                    {to: {path: '#/'}, title: 'Voting and Curating Updates'},
+                    {to: {path: '#/'}, title: 'MORE ...'}
                 ],
             }
         },
@@ -890,7 +890,7 @@ storiesOf('Sidebar Menu', module)
         template: `<div class="row m-0">
                 <div class="col-3 p-4">
                     <c-sidebar-menu-link
-                                 :to="{ path: '/#/' }"
+                                 :to="{ path: '#/' }"
                                  title="Suggesting Features">
                                  Suggesting Features
                     </c-sidebar-menu-link>
@@ -2411,21 +2411,18 @@ storiesOf('Game Plans', module)
             return object('Data', {
                 plans: [
                     {
-                        "title": "Play Tibia Now",
-                        "link": "#3",
-                        "link_text": "Play Now"
+                        "title": "Play Now",
+                        "link": "#3"
                     },
                     {
-                        "title": "1 Month Premium benefits",
-                        "price": "34",
-                        "link": "#4",
-                        "link_text": "Buy Now"
+                        "title": "3 Month Subscription",
+                        "price": "12.95",
+                        "link": ""
                     },
                     {
-                        "title": "2 Month Premium benefits",
-                        "price": "57",
-                        "link": "#4",
-                        "link_text": "Buy Now"
+                        "title": "1 Year Subscription",
+                        "price": "120.95",
+                        "link": ""
                     }
                 ]
             })
@@ -2611,7 +2608,7 @@ storiesOf('News List', module)
                         ],
                         "heading": "New class and event coming next week!",
                         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                        "url": "/#/post/1",
+                        "url": "#/post/1",
                         "date": "2018-07-24T04:09:00.000Z"
                     },
                     {
@@ -2623,7 +2620,7 @@ storiesOf('News List', module)
                         ],
                         "heading": "New class and event coming next week!",
                         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                        "url": "/#/post/1",
+                        "url": "#/post/1",
                         "date": "2016-09-24T04:09:00.000Z"
                     },
                     {
@@ -2635,7 +2632,7 @@ storiesOf('News List', module)
                         ],
                         "heading": "New class and event coming next week!",
                         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                        "url": "/#/post/1",
+                        "url": "#/post/1",
                         "date": "2014-03-24T04:09:00.000Z"
                     },
                     {
@@ -2647,7 +2644,7 @@ storiesOf('News List', module)
                         ],
                         "heading": "New class and event coming next week!",
                         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                        "url": "/#/post/1",
+                        "url": "#/post/1",
                         "date": "2017-12-24T04:09:00.000Z"
                     }
                 ]
@@ -2679,7 +2676,7 @@ storiesOf('News List', module)
                     ],
                     "heading": "New class and event coming next week!",
                     "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum fringilla ante eget hendrerit. Mauris maximus, augue sit amet laoreet pretium, ipsum est eleifend tellus, vestibulum aliquet turpis lectus quis nisi.",
-                    "url": "/#/post/1",
+                    "url": "#/post/1",
                     "date": "2018-07-24T04:09:00.000Z"
                 },
             }
@@ -4267,10 +4264,27 @@ storiesOf('Stream', module)
         components: {
             'c-stream-item': StreamItem
         },
+        data(){
+            return{
+                "game": "Dota II",
+                "userName": "GodOfDota",
+                "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVIOE5IdK4MWeI-iEphf-BhZh2XsXBrBn_fcsGXbFGSF-xwH8h",
+                "previews": "http://dota2-videos.com/wp-content/uploads/2018/07/jx3Oj0O-G8Ihqdefault.jpg",
+                "src": "#",
+                "views": 10
+            }
+        },
         template: `
         <div class="row p-5">
             <div class="col-5">
-                <c-stream-item />
+                <c-stream-item 
+                :streamGame="game"
+                :streamName="userName"
+                :streamAvatar="userAvatar"
+                :streamImg="previews"
+                :streamSrc="src"
+                :streamViews="views"
+                />
             </div>
         </div>
         
@@ -4490,6 +4504,66 @@ storiesOf('Landing Page', module)
         </div>
         `
     }))
+    .add('benefactor', () => ({
+        components:{
+            'c-landing-benefactor' : (resolve) => require(['@/ui/components/landing/block-content/benefactor'], resolve),
+        },
+        data(){
+            return{
+                items:[
+                    {
+                        src: 'http://dotafun.su/images/aeee/b_keeperofthelight.png',
+                        name: 'Immortal I'
+                    },
+
+                    {
+                        src: 'https://u.kanobu.ru/editor/images/82/c2a25ffa-c77c-44e2-a616-c6d5e0e6d4a3.png',
+                        name: 'Immortal II'
+                    },
+                    {
+                        src: 'https://i.pinimg.com/originals/44/61/88/44618879e898abbbec878eda26551d52.png',
+                        name: 'Immortal III',
+                        includes_list: ['200 x Fire Lotus Belt', '200 x Golden Ornithomancer Mantle', '200 x Dragonclaw Hook', '200 x Rainmaker', '200 x Pipe of Dezun', '200 x Perceptions of the Eternal Mind',
+                        '200 x Kantusa the Script Sword', '200 x Shattered Greatsword', '200 x Golden Gravelmaw', '100 x Golden Grasping Bludgeon', '100 x Golden Shards of Exile', '100 x Golden Staff of Perplex',
+                        '100 x Golden Huntling', '100 x Golden Severing Crest', '100 x Golden Sullen Hollow', '100 x Golden Lamb to the Slaughter', '100 x Lockjaw the Boxhound']
+                    },
+
+                    {
+                        src: 'http://cdn.dota2.com/apps/dota2/images/international2017/battlepass/immortals/c_legioncommander.png?v=4054578',
+                        name: 'Immortal IV'
+                    }
+                ]
+            }
+        },
+        template:
+            `
+        <div class="p-5" style="width: 1000px;">
+            <c-landing-benefactor :items="items">
+            </c-landing-benefactor>
+        </div>
+            `
+    }))
+    .add('reward list', () =>({
+        components:{
+            'c-landing-reward-list': (resolve) => require(['@/ui/components/landing/block-content/reward-list'], resolve),
+        },
+        data(){
+            return{
+            }
+        },
+        template:
+            `
+            <div class="p-5" style="width: 1000px;">
+                <c-landing-reward-list>
+                    <template slot="list">
+                        <div v-for="(item, index) in list" :key="index" class="my-1" style="font-size: 15px; opacity: .8">
+                            {{ item }}
+                        </div>
+                    </template>
+                </c-landing-reward-list>
+            </div>
+            `
+    }))
     .add('page', () => ({
         components: {
             'c-landing-block': LandingContent,
@@ -4500,6 +4574,12 @@ storiesOf('Landing Page', module)
             'c-landing-tabs': (resolve) => require(['@/ui/components/landing/block-content/tabs'], resolve),
             'c-landing-tab': (resolve) => require(['@/ui/components/landing/block-content/tab'], resolve),
             'c-landing-slider' : (resolve) => require(['@/ui/components/landing/block-content/slider'], resolve),
+            'c-landing-gradient-block' : (resolve) => require(['@/ui/components/landing/block-content/gradient'], resolve),
+            'c-landing-benefactor' : (resolve) => require(['@/ui/components/landing/block-content/benefactor'], resolve),
+            'c-landing-level': (resolve) => require(['@/ui/components/landing/block-content/level'], resolve),
+            'c-landing-reward-list': (resolve) => require(['@/ui/components/landing/block-content/reward-list'], resolve),
+            'c-landing-divider': (resolve) => require(['@/ui/components/landing/block-content/divider'], resolve),
+            'c-landing-button': (resolve) => require(['@/ui/components/landing/button'], resolve),
         },
         data(){
             return{
@@ -4603,6 +4683,47 @@ storiesOf('Landing Page', module)
                         title: 'Maecenas suscipit ante'
                     }
                 ],
+                benefactor_items:[
+                {
+                    src: 'http://dotafun.su/images/aeee/b_keeperofthelight.png',
+                    name: 'Immortal I'
+                },
+
+                {
+                    src: 'https://u.kanobu.ru/editor/images/82/c2a25ffa-c77c-44e2-a616-c6d5e0e6d4a3.png',
+                    name: 'Immortal II'
+                },
+                {
+                    src: 'https://i.pinimg.com/originals/44/61/88/44618879e898abbbec878eda26551d52.png',
+                    name: 'Immortal III',
+                    includes_list: ['200 x Fire Lotus Belt', '200 x Golden Ornithomancer Mantle', '200 x Dragonclaw Hook', '200 x Rainmaker', '200 x Pipe of Dezun', '200 x Perceptions of the Eternal Mind',
+                        '200 x Kantusa the Script Sword', '200 x Shattered Greatsword', '200 x Golden Gravelmaw', '100 x Golden Grasping Bludgeon', '100 x Golden Shards of Exile', '100 x Golden Staff of Perplex',
+                        '100 x Golden Huntling', '100 x Golden Severing Crest', '100 x Golden Sullen Hollow', '100 x Golden Lamb to the Slaughter', '100 x Lockjaw the Boxhound']
+                },
+
+                {
+                    src: 'http://cdn.dota2.com/apps/dota2/images/international2017/battlepass/immortals/c_legioncommander.png?v=4054578',
+                    name: 'Immortal IV'
+                }
+            ],
+                reward_list:[
+                    '1 - Immortal Treasure I 2018',
+                    '1 - Immortal Treasure II 2018',
+                    '1 - Immortal Treasure III 2018',
+                    '1 - The International 2018 Music Pack',
+                    '1 - The International 2018 Cursor Pack',
+                    '1 - Eimer Hillburrow Courier',
+                    '1 - Trailgazer Ward Set',
+                    '1 - Taunt: Cold Breakfast',
+                    '1 - International 2018 Player Card Pack x5',
+                    '1 - Pro Circuit Predictions Unlocked',
+                    '1 - Ranked Match Team Challenge Token',
+                    '5 - Ranked Match Team Challenge Token',
+                    '8 - International 2018 Battle Point Tribute - 250 Tokens x2',
+                    '12 - International 2018 Player Card Pack x5',
+                    '24 - Chat Wheel: Crash and burn',
+                    '36 - Ranked Match Team Challenge Token'
+                ]
             }
         },
         template: `
@@ -4612,7 +4733,7 @@ storiesOf('Landing Page', module)
                 horizontal="center" 
                 bgPosition="top center" 
                 minHeight="400px" 
-                bgImage="https://i.pinimg.com/originals/eb/ab/7f/ebab7f413318ffaaf0443b8428664bac.jpg">
+                bgImage="https://s1.1zoom.ru/b5050/840/Magic_Castles_Mountains_506826_1920x1080.jpg">
                     <div class="col-10 text-center">
                         <c-landing-block-title fontSize="42" color="#f8e6c7" class="text-uppercase">
                             Battle level rewards
@@ -4624,12 +4745,16 @@ storiesOf('Landing Page', module)
                         Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
                         Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
                     </div>
-                    <div class="col-11 margin-top-30">
+                    <div class="col-10 margin-top-30">
                         <c-landing-block-title-gradient align="center" size="md" fontSize="32" class="text-uppercase">
                             The 2018 immortals
                         </c-landing-block-title-gradient>
                         
                         <c-landing-tabs class="margin-top-20">
+                            <p class="text-center">
+                                 Nunc gravida placerat erat, ac pharetra felis malesuada id.<br>
+                                Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.
+                            </p>
                             <c-landing-tab name="TREASURE I">
                                 Maecenas suscipit ante a leo convallis ornare. 
                                 Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
@@ -4642,58 +4767,100 @@ storiesOf('Landing Page', module)
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at condimentum risus. 
                                 Integer viverra quam in ipsum posuere lobortis. Integer rhoncus gravida ante a aliquam. In aliquet ex eu nibh pulvinar varius. Suspendisse maximus a arcu at sagittis. Etiam et mauris volutpat diam consequat accumsan vitae non nisi. Sed dignissim odio metus, sit amet ullamcorper ligula blandit et. Donec ac justo a erat lacinia venenatis id eu nisl.
                             </c-landing-tab>
+                                
+                            <c-landing-block-title tag="div" fontSize="17" color="#5EA72B" class="text-center my-4">
+                                <div class="mb-1">TREASURE I: 1 - 10 - 22 - 34 - 46 - 80 - 220 (repeats every 30 levels)</div>
+                                <div class="mb-1">TREASURE II: 1 - 98 - 112 - 132 - 152 - 230 (repeats every 30 levels)</div>
+                                <div>TREASURE III: 1 - 164 - 178 - 194 - 206 - 240 (repeats every 30 levels)</div>
+                            </c-landing-block-title>
+                            
+                            <c-landing-gradient-block class="mt-4">
+                                <c-landing-block-title tag="div" fontSize="16" color="#fff" class="text-center">
+                                    LIMITED MARKETABILITY
+                                </c-landing-block-title>
+                                <p>
+                                    Maecenas suscipit ante a leo convallis ornare. 
+                                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
+                                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.
+                                </p>
+                            </c-landing-gradient-block>
                         </c-landing-tabs>
                     </div>
                 </c-landing-block>
+                
+                <c-landing-divider />
                 
                 <c-landing-block 
                 horizontal="center"
                 vertical="center"
                 title="Some content block title" 
                 minHeight="50vh"
-                bgImage="https://s1.1zoom.ru/big3/691/Sven_DOTA_2_Armor_Helmet_510699.jpg">
-                    <div class="col-12 col-md-7">
-                        <c-landing-block-title-gradient align="center" fontSize="32" class="text-uppercase">
-                            About our Feature Items
+                bgImage="http://dota2-i.ru/assets/images/resources/1671/1366x768-2042847-shadow-fiend-dota-2-wallpaper-hd.jpg">
+                    <div class="col-12">
+                        <c-landing-block-title-gradient align="center" size="md" fontSize="32" class="text-uppercase">
+                            TRUST OF THE BENEFACTOR
                         </c-landing-block-title-gradient>
+                        <c-landing-benefactor :items="benefactor_items">
+                        
+                        </c-landing-benefactor>
+                    </div>
+                    <div class="col-3 text-right">
+                        <c-landing-level :number="92" size="md" textPosition="left" textColor="#00662e">
+                            LEVEL
+                        </c-landing-level>
+                    </div>
+                    <div class="col-9">
                          <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
                         Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
                         Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
                         Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
                         Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
                     </div>
-                    <div class="col-12 margin-top-50">
-                        <div class="row">
-                            <div v-for="item in items" class="col-12 col-md-4 mb-3 mb-md-0">
-                                <c-landing-feature-item :title="item.title" :img="item.img">
-                                    {{ item.text }}
-                                </c-landing-feature-item>
-                            </div>
-                        </div>
-                    </div>
                 </c-landing-block>
+                
+                <c-landing-divider />
                 
                 <c-landing-block 
                 title="Some content block title" 
                 horizontal="center"
                 vertical="center"
-                fullHeight 
-                bgImage="https://dota2hq.eu/wallpaper/dota2hq.eu-dota-2-roshan-vs-ursa-desktop-wallpaper-3894-1920x1080.jpg">
-                    <c-landing-block-title-gradient align="center">
-                        Aliquam quis magna at diam convallis congue.
-                    </c-landing-block-title-gradient>
-
-                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
-                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
-                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
-                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
-                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
-
-                     <p>Aliquam quis magna at diam convallis congue. Vestibulum dignissim tincidunt sapien quis consequat. 
-                    Mauris vel metus dui. Donec vitae sagittis mauris. Nam semper pretium sapien, quis dictum odio. 
-                    Cras id nisl sed neque luctus ultrices ut ut elit. Maecenas suscipit ante a leo convallis ornare. 
-                    Proin efficitur ut ipsum a egestas. Nunc gravida placerat erat, ac pharetra felis malesuada id. 
-                    Mauris ex massa, dictum id eros quis, sodales maximus nibh. Morbi tempus erat vitae tempus euismod.</p>
+                bgImage="https://steamcdn-a.akamaihd.net/apps/dota2/images/international2018/battlepass/bg_24.png">
+                        <div class="col-10">
+                            <c-landing-reward-list>
+                                <div class="d-flex justify-content-center w-100">
+                                    <div class="text-center mx-3">
+                                        <c-landing-button class="margin-bottom-20" width="280">
+                                            Buy Battle Pass
+                                        </c-landing-button>
+                                        <c-landing-block-title fontSize="13" color="#f8e6c7" class="text-uppercase">
+                                            LEVEL 1  $9.99 USD
+                                        </c-landing-block-title>
+                                        <c-landing-block-title fontSize="13" color="#f8e6c7" class="text-uppercase">
+                                            LEVEL 75  $36.99 USD
+                                        </c-landing-block-title>
+                                    </div>
+                                    <div class="text-center mx-3">
+                                        <c-landing-button class="margin-bottom-20" width="280">
+                                            Buy Levels
+                                        </c-landing-button>
+                                        <c-landing-block-title fontSize="13" color="#f8e6c7" class="text-uppercase">
+                                            5 LEVELS  $2.49 USD
+                                        </c-landing-block-title>
+                                        <c-landing-block-title fontSize="13" color="#f8e6c7" class="text-uppercase">
+                                            11 LEVELS  $4.99 USD
+                                        </c-landing-block-title>
+                                        <c-landing-block-title fontSize="13" color="#f8e6c7" class="text-uppercase">
+                                            24 LEVELS  $9.99 USD
+                                        </c-landing-block-title>
+                                    </div>
+                                </div>
+                                <template slot="list">
+                                    <div v-for="(item, index) in reward_list" :key="index" class="my-1" style="font-size: 15px; opacity: .8">
+                                        {{ item }}
+                                    </div>
+                                </template>
+                            </c-landing-reward-list>
+                        </div>
                 </c-landing-block>
             </div>
             `

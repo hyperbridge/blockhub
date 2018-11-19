@@ -125,7 +125,7 @@ export const actions = {
     updateState(store, payload) {
         //console.log("[BlockHub][Marketplace] Updating store...")
 
-        updateState(store.state)
+        updateState(store.state, payload)
 
         store.commit('updateState', state)
     },
@@ -174,6 +174,13 @@ export const mutations = {
         for (let x in payload) {
             Vue.set(state, x, payload[x])
         }
+
+        for (let y in state.products) {
+            DB.updateCollection(DB.marketplace.products, state.products[y])
+        }
+        
+        DB.marketplace.config.update(state)
+        DB.save()
     },
     update(state, { prop = 'products', id, data }) {
         state[prop][id] = { ...state[prop][id], ...data };
