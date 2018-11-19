@@ -14,10 +14,7 @@ export const skip = (object, props) => {
 
 export const getId = () => Math.floor(Math.random() * 10000);
 
-export const assignId = (id, object) => ({ ...object, data: { ...object.data, id }, id });
-
 export const mergeId = (id, object) => ({ ...object, data: { ...object.data, id }, id });
-
 
 export const normalize = (data, fn = (i) => i) =>
     (Array.isArray(data) ? data : Object.values(data))
@@ -27,53 +24,3 @@ export const normalize = (data, fn = (i) => i) =>
                 ? { ...item, ...fn(item, index) }
                 : { ...item, ...fn }
         }), {});
-
-
-const data = [
-    {
-      id: 1,
-      messages: [{ id: 1, txt: "Hello" }, { id: 2, txt: "HI!" }]
-    },
-    {
-      id: 2,
-      messages: [
-        { id: 3, txt: "Nice" },
-        { id: 4, txt: "h", author: { id: 1, name: 'Rock' }}
-      ]
-    }
-  ];
-
-  const identities = {};
-  const messages = {};
-
-  export const decompose = (main, nested, data) => {
-
-    const spreadProps = nested.reduce((obj, prop) => ({
-      ...obj,
-      [prop]: {}
-    }), { [main]: {} });
-
-
-    return data.reduce((spread, item) => {
-
-      const decomposed = { ...item };
-
-      for (let nestedProp of nested) {
-        decomposed[nestedProp] = item[nestedProp].map(val => val.id);
-
-        for (let nestedVal of item[nestedProp]) {
-          spread[nestedProp][nestedVal.id] = nestedVal;
-        }
-      }
-
-      spread[main][item.id] = decomposed;
-
-      return spread;
-    }, spreadProps);
-  }
-
-//   const deco = decompose('identities', ['messages'], data);
-
-//   const decomp = () => ({});
-//   const { idts, msgs, users } = decomp(['identities|idts', 'messages|msgs', 'messages/author|users'], data);
-

@@ -142,6 +142,9 @@
         computed: {
             offers() {
                 return this.$store.getters['assets/offersMap'];
+            },
+            assets() {
+                return this.$store.assets['assets/assetsMap'];
             }
         },
         beforeDestroy() {

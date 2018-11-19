@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import moment from 'moment';
-import { extract, skip, getId, assignId, mergeId, normalize } from '@/store/utils';
+import { extract, getId, mergeId, normalize } from '@/store/utils';
 
 import transactionsData from '@/db/seed/asset-transactions.json';
 import usersData from '@/db/seed/users.json';
@@ -8,8 +8,6 @@ import assetsData from '@/db/seed/assets.json';
 import collectionsData from '@/db/seed/collections.json';
 import productsData from '@/db/seed/products.json';
 
-
-const rand = () => Math.floor(Math.random() * 1000);
 
 const transactions = normalize(transactionsData, (trx, i) => ({
     createdAt: moment().add(-i, 'days')
@@ -132,7 +130,7 @@ const assets = {
     },
     actions: {
         create({ commit }, payload) {
-            const id = rand();
+            const id = getId();
             commit('create', { ...payload, id, data: { ...payload.data, id }});
         },
         update({ commit }, payload) {
@@ -141,11 +139,11 @@ const assets = {
             commit('update', payload);
         },
         createFilter({ commit }, payload) {
-            const id = rand();
-            commit('create', assignId(payload));
+            const id = getId();
+            commit('create', mergeId(payload));
         },
         createAuction({ state, commit }, { offerId, ...payload }) {
-            const newId = rand();
+            const newId = getId();
 
             commit('create', { id: newId, prop: 'auctions', data: payload });
             commit('update', {
@@ -172,7 +170,7 @@ const assets = {
             dispatch('community/delete', { id }, { root: true });
         },
         evolveNavigator({ commit }, payload) {
-            const id = rand();
+            const id = getId();
             commit('evolveNavigator', { ...payload, id });
         },
         devolveNavigator({ state: { navigator }, commit }, { id, parentId }) {
