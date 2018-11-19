@@ -355,6 +355,8 @@
                         let $target = $(event.nativeEvent.target)
                         let $link = null
                         let $image = null
+                        let link = null
+                        let image = null
                         let name = null
 
                         if ($target.is('a')) {
@@ -362,14 +364,22 @@
                         }
                         else if ($target.is('img')) {
                             $image = $target
-                            $link = $target.parents('a').first()
+                            $link = $target.parents('a').length ? $target.parents('a').first() : null
                         } else {
-                            $link = $target.parents('a').first()
-                            $image = $target.parents('a').first()
+                            $link = $target.parents('a').length ? $target.parents('a').first() : null
+                            $image = $target.parents('a').length ? $target.parents('a').first() : null
+                        }
+                        
+                        if (!$link && $image) {
+                            link = $image.data('link')
+                        }
+                        
+                        if (!$image && $link) {
+                            image = $link.data('image')
                         }
 
                         if (!$image && $link) {
-                            $image = $link.find('img').first()
+                            $image = $link.find('img').length ? $link.find('img').first() : null
                         }
 
                         // Set name
@@ -379,15 +389,25 @@
                         else if ($link) {
                             name = $link.text()
                         }
+
+                        if ($link) {
+                            link = $link.attr('href')
+                        }
+
+                        if ($image) {
+                            image = $image.attr('src')
+                        }
                         
-                        self.$store.commit('application/addShortcut', {
-                            r: 255,
-                            g: 255,
-                            b: 255,
-                            name: name,
-                            link: $link && $link.attr('href'),
-                            image: $image && $image.attr('src')
-                        })
+                        if (link) {
+                            self.$store.commit('application/addShortcut', {
+                                r: 255,
+                                g: 255,
+                                b: 255,
+                                name,
+                                link,
+                                image
+                            })
+                        }
 
                         event.stop()
                     }

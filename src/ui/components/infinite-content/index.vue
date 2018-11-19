@@ -4,7 +4,7 @@
             <transition-group name="slideUp" :key="index">
                 <div class="row justify-content-center frontpage-product" v-if="item.type === 'frontpage_product'" :key="`level-1-${index}`">
                     <div class="col-12 col-lg-6 frontpage-product__slider" v-if="item.data.images">
-                        <c-img :src="item.data.images.medium_tile" />
+                        <c-img :src="item.data.images.medium_tile" :data-link="`#/product/${item.data.id}`" />
                     </div>
                     <div class="col-12 col-lg-6 frontpage-product__info">
                         <h2><a :href="`#/product/${item.data.id}`">{{ item.data.name }}</a></h2>
