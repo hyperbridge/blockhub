@@ -274,8 +274,17 @@ export const mutations = {
             account[prop] = data;
         }
     },
-    addShortcut({ shortcuts }, shortcut) {
-        shortcuts.push(shortcut)
+    addShortcut(state, shortcut) {
+        state.shortcuts.push(shortcut)
+
+        DB.application.config.update(state)
+        DB.save()
+    },
+    removeShortcut(state, index) {
+        state.shortcuts.splice(index, 1)
+
+        DB.application.config.update(state)
+        DB.save()
     },
     updateFavorites2({ account }, { prop = 'product_wishlist', id }) {
         const foundKey = account[prop].findIndex(savedId => savedId === id);

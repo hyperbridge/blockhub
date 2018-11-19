@@ -19,7 +19,7 @@
                 "r": 255,
                 "g": 255,
                 "b": 255,
-                "image": "https://img.icons8.com/cotton/1600/online-store.png",
+                "image": "/static/img/icons/store.png",
                 "link": "#/"
             }
         ],

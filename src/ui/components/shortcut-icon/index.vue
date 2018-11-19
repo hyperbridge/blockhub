@@ -19,7 +19,7 @@ export default {
     },
     image: {
         type: String,
-        default: 'https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/med-tile.jpg'
+        default: '/static/img/icons/apple-touch-icon.png'
     },
     link: {
         type: String,
@@ -32,7 +32,11 @@ export default {
     color: {
       type: Object,
       default: () => {
-        return null
+        return {
+            r: 255,
+            g: 255,
+            b: 255
+        }
       }
     }
   },

@@ -65,7 +65,7 @@
                 console.log('change', event)
             },
             remove (event) {
-                console.log('remove', event)
+                this.$store.commit('application/removeShortcut', event.index)
             },
             sort (event) {
                 console.log('sort', event)

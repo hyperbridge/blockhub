@@ -336,11 +336,7 @@
                 voteCasted: false,
                 reportCoords: null,
                 breadcrumbLinksData: this.breadcrumbLinks,
-                shortcutItems: [{
-                    r: 10,
-                    g: 10,
-                    b: 10
-                }],
+                shortcutItems: [],
                 dragOptions: {
                     dropzoneSelector: '.does-not-exist',
                     draggableSelector: 'a',
@@ -385,9 +381,9 @@
                         }
                         
                         self.$store.commit('application/addShortcut', {
-                            r: 50,
-                            g: 50,
-                            b: 50,
+                            r: 255,
+                            g: 255,
+                            b: 255,
                             name: name,
                             link: $link && $link.attr('href'),
                             image: $image && $image.attr('src')
