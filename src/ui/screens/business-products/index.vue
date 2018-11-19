@@ -162,7 +162,7 @@
                                     </td>
                                     <td>{{ product.id }}</td>
                                     <td><a :href="`#/business/product/${product.id}`" class="text-secondary text-bold">{{ product.name }}</a></td>
-                                    <td>{{ product.created_at }}</td>
+                                    <td>{{ product.meta.created }}</td>
                                     <td>
                                         <div class="user user--bordered">
                                             <img src="http://via.placeholder.com/128x128">
