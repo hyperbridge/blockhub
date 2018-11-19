@@ -4,13 +4,13 @@
          class="icon-delete-btn fa fa-times"
          @mousedown="remove" />
     <slot>
-        <c-tooltip position="right" :iconHide="true" :delay="0">
-            <a :href="link" :style="{ 'background-image': image ? 'url(' + image + ')' : 'none' }" @click="click">
-                <i v-if="icon"
-                    :class="icon" />
-            </a>
+        <a :href="link" :style="{ 'background-image': image ? 'url(' + image + ')' : 'none' }" @click="click">
+            <i v-if="icon"
+                :class="icon" />
+        </a>
+        <!-- <c-tooltip position="right" :iconHide="true" :delay="0">
             <div slot="tooltip" v-if="text">{{ text }}</div>
-        </c-tooltip>
+        </c-tooltip> -->
     </slot>
   </div>
 </template>

@@ -50,6 +50,15 @@
                 :active="inWishlist"
                 class="mt-3"
             />
+
+            <c-btn-fav
+                @click="$emit('addToShortcut')"
+                target="Shortcuts"
+                :active="inShortcut"
+                activeIcon="unlink"
+                unactiveIcon="link"
+                class="mt-3"
+            />
         </div>
     </c-block>
 </template>
@@ -100,6 +109,7 @@
                 default: null
             },
             inWishlist: Boolean,
+            inShortcut: Boolean,
             purchaseLink: String,
             fullReviewsLink: String,
             onClickPurchase: Function
