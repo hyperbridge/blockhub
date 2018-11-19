@@ -33,9 +33,9 @@ export default {
       type: Object,
       default: () => {
         return {
-            r: 255,
-            g: 255,
-            b: 255
+            r: null,
+            g: null,
+            b: null
         }
       }
     }
@@ -93,7 +93,7 @@ export default {
   text-align: center;
   transition: all 0.1s;
   cursor: pointer;
-  border: 1px dashed #dcdcdc;
+  border: 1px dashed rgba(0, 0, 0, 1);
   overflow: hidden;
   a {
     background-size: cover;

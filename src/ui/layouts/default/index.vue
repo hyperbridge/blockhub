@@ -400,9 +400,9 @@
                         
                         if (link) {
                             self.$store.commit('application/addShortcut', {
-                                r: 255,
-                                g: 255,
-                                b: 255,
+                                r: null,
+                                g: null,
+                                b: null,
                                 name,
                                 link,
                                 image
