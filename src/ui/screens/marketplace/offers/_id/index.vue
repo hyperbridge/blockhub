@@ -4,7 +4,7 @@
             <h1 class="asset__name">{{ asset.name }}</h1>
 
             <!-- <canvas ref="canv" width="400" height="400" class="canv-bord"/> -->
-
+            <c-line-chart/>
 
             <div>
                 <c-img :src="asset.image"/>
@@ -32,6 +32,9 @@
                     20
                 ]
             }
+        },
+        components: {
+            'c-line-chart': (resolve) => require(['@/ui/components/charts/line'], resolve),
         },
         methods: {
             draw() {
