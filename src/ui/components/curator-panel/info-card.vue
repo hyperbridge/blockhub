@@ -15,14 +15,13 @@
 <style lang="scss" scoped>
     .info-card{
         display: inline-block;
-        width: calc( 100% + 30px );
-        margin: 40px 0 0 -30px;
+        width: 100%;
+        margin: 40px 0 0 0;
         background: rgba(0, 0, 0, .13);
-        border-radius: 0 5px 5px 0;
+        border-radius: 5px;
         border: 1px solid rgba(0, 0, 0, .5);
         padding: 15px 15px 15px 30px;
         overflow: hidden;
-        border-left: none;
         color: #fff;
         h3{
             font-size: 21px;

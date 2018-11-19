@@ -975,11 +975,11 @@
         z-index: 101;
     }
 
-    #page-content {
-
+    .page {
+        
         &:before {
             content: '';
-            position: absolute;
+            position: fixed;
             bottom: 0;
             left: 0;
             width: 246px;
@@ -992,7 +992,7 @@
 
         &:after {
             content: '';
-            position: absolute;
+            position: fixed;
             bottom: 0;
             left: 0;
             width: 246px;
