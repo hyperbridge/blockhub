@@ -1,15 +1,10 @@
 <template>
-    <textarea class="form-control" :name="name"></textarea>
+    <textarea class="form-control"></textarea>
 </template>
 <script>
     export default {
         props: {
             model: {
-                required: true,
-            },
-
-            name: {
-                type: String,
                 required: true,
             },
 

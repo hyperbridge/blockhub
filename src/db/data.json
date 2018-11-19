@@ -655,11 +655,7 @@
                 "description": "",
                 "type": "boolean"
             }
-        ],
-        "migrations": {
-            "latest": "1537948419066",
-            "current": ""
-        }
+        ]
     },
     "funding": {
         "current_ethereum_network": "local",
