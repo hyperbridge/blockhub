@@ -80,6 +80,7 @@
 
 <style lang="scss" scoped>
     .shortcut-sidebar__grid {
+        border: 1px dashed rgba(0, 0, 0, 1);
         background-image: url(/static/img/icons/grid.png);
         background-size: 70%;
         background-repeat: no-repeat;

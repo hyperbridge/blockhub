@@ -244,12 +244,18 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss">
 .c-grid-container {
-  display: block;
-  position: relative;
-  width: 60px;
-  overflow-y: auto;
+    display: block;
+    position: relative;
+    width: 60px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0) !important;
+        border: 0 none !important;
+    }
+
 }
 .c-grid {
 }
