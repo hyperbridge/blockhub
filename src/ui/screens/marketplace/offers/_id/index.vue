@@ -3,8 +3,11 @@
         <div v-if="asset" class="asset__wrapper">
             <h1 class="asset__name">{{ asset.name }}</h1>
 
-            <!-- <canvas ref="canv" width="400" height="400" class="canv-bord"/> -->
-            <c-line-chart/>
+            <c-line-chart
+                :data="chartData"
+                :height="400"
+                :options="{ maintainAspectRatio: false }"
+            />
 
             <div>
                 <c-img :src="asset.image"/>
@@ -18,73 +21,37 @@
 </template>
 
 <script>
+    import moment from 'moment';
+
     export default {
         props: ['id'],
         data() {
             return {
-                ctx: null,
-                cw: 0,
-                ch: 0,
-                priceHistory: [
-                    1,
-                    300,
-                    10,
-                    20
-                ]
+                priceHistory: Array.from({ length: 100 }, (x, i) =>
+                    Math.round(Math.random() * (i + 1))
+                ),
+                priceDates: Array.from({ length: 100 }, (x, i) =>
+                    moment().add(-100 + i, 'days').format('DD / MM')
+                )
             }
         },
         components: {
             'c-line-chart': (resolve) => require(['@/ui/components/charts/line'], resolve),
         },
-        methods: {
-            draw() {
-                requestAnimationFrame(this.draw);
-                const { ctx, cw, ch, priceHistory: data, diffs } = this;
-                const dataLength = data.length;
-                const lineWidth = cw / dataLength;
-
-                ctx.lineCap = 'round';
-                ctx.lineJoin = 'round'
-
-                let xPos = 0;
-                let yPos = 0;
-
-                let prevY = 400;
-
-                for (let value of diffs) {
-
-                    yPos = ch - (ch * value / 100);
-                    ctx.beginPath();
-                    ctx.moveTo(xPos, prevY);
-
-                    xPos += lineWidth;
-
-                    ctx.lineTo(xPos, yPos);
-                    ctx.stroke();
-
-                    prevY = yPos;
-                }
-
-                ctx.strokeStyle = '#2ECB71';
-            }
-        },
-        mounted() {
-            const canvas = this.$refs.canv
-            this.ctx = canvas.getContext('2d');
-            this.cw = canvas.width;
-            this.ch = canvas.height;
-            // this.draw();
-        },
         computed: {
             asset() {
                 return this.$store.getters['assets/assets'][this.id];
             },
-            diffs() {
-                const data = this.priceHistory.sort();
-                const min = data[0];
-                const max = data[data.length - 1];
-
-                return data.map((value, index) => value / max * 100);
+            chartData() {
+                const { priceDates, priceHistory } = this;
+                return {
+                    labels: priceDates,
+                    datasets: [{
+                        label: 'Price history',
+                        data: priceHistory,
+                        backgroundColor: '#83D0F2'
+                    }]
+                };
             }
         }
     }
