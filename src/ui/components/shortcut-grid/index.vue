@@ -2,25 +2,27 @@
     <div class="c-grid-container" :style="containerStyle">
         <div class="c-grid" :style="gridStyle">
             <GridItem v-for="v in list"
-                    :key="v.index"
+                :key="v.index"
+                :index="v.index"
+                :sort="v.sort"
+                :draggable="draggable"
+                :drag-delay="dragDelay"
+                :row-count="rowCount"
+                :cell-width="cellWidth"
+                :cell-height="cellHeight"
+                :window-width="windowWidth"
+                :row-shift="rowShift"
+                @dragstart="onDragStart"
+                @dragend="onDragEnd"
+                @drag="onDrag"
+                @click="click"
+            >
+                <slot name="cell"
+                    :item="v.item"
                     :index="v.index"
                     :sort="v.sort"
-                    :draggable="draggable"
-                    :drag-delay="dragDelay"
-                    :row-count="rowCount"
-                    :cell-width="cellWidth"
-                    :cell-height="cellHeight"
-                    :window-width="windowWidth"
-                    :row-shift="rowShift"
-                    @dragstart="onDragStart"
-                    @dragend="onDragEnd"
-                    @drag="onDrag"
-                    @click="click">
-                <slot name="cell"
-                        :item="v.item"
-                        :index="v.index"
-                        :sort="v.sort"
-                        :remove="() => { removeItem(v) }">
+                    :remove="() => { removeItem(v) }"
+                >
                 </slot>
             </GridItem>
         </div>
@@ -249,7 +251,6 @@ export default {
     display: block;
     position: relative;
     width: 60px;
-    overflow-y: auto;
 
     &::-webkit-scrollbar-thumb {
         background: rgba(255, 255, 255, 0) !important;
@@ -257,6 +258,18 @@ export default {
     }
 
 }
-.c-grid {
+.c-grid_add-button {
+    border: 1px dashed rgba(0, 0, 0, 1);
+    background-image: url(/static/img/icons/grid.png);
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-color: #fff;
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.07);
 }
 </style>

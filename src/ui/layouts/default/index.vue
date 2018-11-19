@@ -234,7 +234,7 @@
         </div>
         <!-- //END PAGE CONTENT -->
 
-        <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
+        <!-- <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a> -->
 
         <!--<transition name="slideDown">-->
             <c-profile-chooser v-if="profile_chooser && signed_in" />
@@ -357,7 +357,7 @@
                         let $image = null
                         let link = null
                         let image = null
-                        let name = null
+                        let text = null
 
                         if ($target.is('a')) {
                             $link = $target
@@ -382,12 +382,12 @@
                             $image = $link.find('img').length ? $link.find('img').first() : null
                         }
 
-                        // Set name
+                        // Set text
                         if ($image) {
-                            name = $image.attr('alt')
+                            text = $image.attr('alt')
                         }
                         else if ($link) {
-                            name = $link.text()
+                            text = $link.text()
                         }
 
                         if ($link) {
@@ -403,7 +403,7 @@
                                 r: null,
                                 g: null,
                                 b: null,
-                                name,
+                                text,
                                 link,
                                 image
                             })

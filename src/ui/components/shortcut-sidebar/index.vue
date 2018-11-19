@@ -20,6 +20,10 @@
                     :with-button="true"
                     :link="props.item.link"
                     :image="props.item.image"
+                    :text="props.item.text"
+                    :eventKey="props.item.eventKey"
+                    :eventValue="props.item.eventValue"
+                    :icon="props.item.icon"
                     @remove="props.remove()" />
             </template>
         </c-grid>

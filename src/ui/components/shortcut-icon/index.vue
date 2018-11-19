@@ -1,12 +1,16 @@
 <template>
   <div class="shortcut-icon" :style="style">
-    <i v-if="withButton"
+    <i v-if="withButton && !icon"
          class="icon-delete-btn fa fa-times"
          @mousedown="remove" />
     <slot>
-        
-        <a :href="link" :style="{ 'background-image': 'url(' + image + ')' }">
-        </a>
+        <c-tooltip position="right" :iconHide="true" :delay="0">
+            <a :href="link" :style="{ 'background-image': image ? 'url(' + image + ')' : 'none' }" @click="click">
+                <i v-if="icon"
+                    :class="icon" />
+            </a>
+            <div slot="tooltip" v-if="text">{{ text }}</div>
+        </c-tooltip>
     </slot>
   </div>
 </template>
@@ -17,13 +21,29 @@ export default {
     index: {
       type: Number
     },
+    text: {
+        type: String,
+        default: null
+    },
     image: {
         type: String,
-        default: '/static/img/icons/apple-touch-icon.png'
+        default: null
     },
     link: {
         type: String,
         default: '#'
+    },
+    icon: {
+        type: String,
+        default: null
+    },
+    eventKey: {
+        type: String,
+        default: null
+    },
+    eventValue: {
+        type: String,
+        default: null
     },
     withButton: {
       type: Boolean,
@@ -39,6 +59,9 @@ export default {
         }
       }
     }
+  },
+  components: {
+    'c-tooltip': (resolve) => require(['@/ui/components/tooltips/universal'], resolve)
   },
   computed: {
     brightness () {
@@ -60,10 +83,15 @@ export default {
     }
   },
   methods: {
-    remove () {
+    remove() {
       this.$emit('remove', {
         index: this.index
       })
+    },
+    click() {
+        if (this.eventKey) {
+            BlockHub.store.dispatch(this.eventKey, this.eventValue)
+        }
     }
   }
 }
@@ -78,6 +106,7 @@ export default {
     transform: rotate(4deg);
   }
 }
+
 .shortcut-icon {
   position: relative;
   background-color: transparent;
@@ -93,22 +122,34 @@ export default {
   text-align: center;
   transition: all 0.1s;
   cursor: pointer;
-  border: 1px dashed rgba(0, 0, 0, 1);
-  overflow: hidden;
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+
   a {
     background-size: cover;
     background-repeat: no-repeat;
+    overflow: hidden;
+    border-radius: 10px;
     width: 100%;
     height: 100%;
     display: block;
+
+    i {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.4);
+    }
   }
   img {
       object-fit: contain;
+        border-radius: 10px;
   }
   &:hover {
     border: 1px dashed #f96854;
     background: hsla(7,93%,65%,.13);
     box-shadow: 0 4px 10px 0 hsla(7,93%,65%,.13);
+
+    i {
+        color: #f96854;
+    }
   }
 }
 .shortcut-icon .icon-delete-btn {
