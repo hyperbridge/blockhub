@@ -145,7 +145,7 @@
             }
         },
         beforeDestroy() {
-            this.$store.dispatch('clearData', 'assets/offers');
+            // this.$store.dispatch('clearData', 'assets/offers');
         }
     }
 </script>
