@@ -49,17 +49,18 @@ app.post('/verification/', function (req, res) {
     if (isValid) {
         console.log('Payload', JSON.stringify(payload, null, 4));
 
-        var listId = 'b2c67f22d5';
+        var listId = '3b2ec4d052';
+
+        var vendorData = JSON.decode(payload.verification.vendorData)
 
         mailchimp.request({
             method: 'post',
             path: `/lists/${listId}/members`,
             body: {
-                email_address: payload.verification.additionalData.email,
+                email_address: vendorData.email,
                 FNAME: payload.verification.person.firstName,
                 LNAME: payload.verification.person.lastName,
-                PADDRESS: payload.verification.additionalData.eth,
-                PIDENTITY: payload.verification.additionalData.identity,
+                PADDRESS: vendorData.eth,
                 BTYPE: 'Ethereum',
                 status: 'subscribed',
                 tags: ['veriff', payload.verification.status],
@@ -73,8 +74,9 @@ app.post('/verification/', function (req, res) {
 
         res.json({ status: 'success' });
     }
-
-    res.json({ status: 'failure' });
+    else {
+        res.json({ status: 'failure' });
+    }
 
     process.exit();
 })
