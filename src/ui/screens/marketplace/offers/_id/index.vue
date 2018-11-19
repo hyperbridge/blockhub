@@ -6,39 +6,38 @@
 
             <div class="asset__details">
                 <c-img class="asset__img" :src="asset.image"/>
-                <ul class="details__data">
+                <ul class="details__list">
                     <li class="details__list-item">
                         <span class="details__title">Game:</span>
                         {{ asset.product.name }}
                     </li>
-                    <li
-                        v-for="(value, prop, index) in asset.metadata"
-                        :key="index"
-                        class="details__list-item"
-                    >
-                        <span class="details__title">
-                            {{ prop | space | upperFirstChar }}:
-                        </span>
-                        <ul
-                            v-if="typeof value === 'object'"
-                        >
-                            <li v-for="(value, prop, index) in value" :key="index">
-                                {{ prop }} : {{ value }}
-                            </li>
-                        </ul>
-                        <template v-else>
-                            {{ value }}
-                        </template>
+                    <li class="details__list-item">
+                        <span class="details__title">Type:</span>
+                        {{ asset.metadata.type }}
+                    </li>
+                    <li class="details__list-item">
+                        <span class="details__title">Average Price:</span>
+                        14 $
+                    </li>
+                    <li class="details__list-item">
+                        <span class="details__title">Minimum Price:</span>
+                        {{ priceHistorySorted[0] }} $
+                    </li>
+                    <li class="details__list-item">
+                        <span class="details__title">Minimum Price:</span>
+                        {{ priceHistorySorted[priceHistory.length-1] }} $
+                    </li>
+                    <li class="details__list-item">
+                        <span class="details__title">Sold in 24hrs:</span>
+                        412
                     </li>
                 </ul>
             </div>
-            <span>{{ asset.price.current }}</span>
             <c-line-chart
                 :data="chartData"
                 :height="400"
                 :options="{ maintainAspectRatio: false }"
             />
-
         </div>
         <p v-else>Asset with id {{ id }} doesn't exist</p>
     </div>
@@ -76,6 +75,9 @@
                         backgroundColor: '#83D0F2'
                     }]
                 };
+            },
+            priceHistorySorted() {
+                return [...this.priceHistory].sort();
             }
         }
     }
@@ -88,13 +90,7 @@
     .asset__name {
         font-size: 100px !important;
         text-shadow: 0 2px 25px rgba(1,1,1,.8);
-        // z-index: -1;
-        // opacity: .15;
-        // position: absolute;
-        // color: #000;
-        // display: block;
         white-space: nowrap;
-        // margin-bottom: 10px;
     }
     .asset__background-img {
         position: absolute;
@@ -107,28 +103,30 @@
     .asset__img {
         border-radius: 5px;
         display: block;
+        filter: drop-shadow(0 0 10px rgba(1,1,1,.45));
     }
 
-    .details__data {
+
+    .asset__details {
+        display: flex;
+        align-items: center;
+    }
+    .details__list {
         position: relative;
+        margin-bottom: 0;
         &:before {
             position: absolute;
             content: "";
             width: 150%;
-            height: 80%;
-            top: 10%;
+            height: 140%;
+            top: -20%;
             left: -50%;
             background: linear-gradient(to right, rgba(255,255,255,.2), transparent);
             z-index: -1;
         }
     }
-
-    .asset__details {
-        display: flex;
-    }
-
     .details__title {
-        margin-right: 20px;
+        margin-right: 10px;
     }
     .details__game-icon {
         width: 30px;
@@ -138,5 +136,4 @@
         object-position: 0 50%;
         margin-left: 5px;
     }
-
 </style>
