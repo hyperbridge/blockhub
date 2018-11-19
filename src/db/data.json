@@ -14,6 +14,15 @@
         "is_developer": false,
         "editor_mode": "viewing",
         "current_ethereum_network": "local",
+        "shortcuts": [
+            {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "image": "https://img.icons8.com/cotton/1600/online-store.png",
+                "link": "#/"
+            }
+        ],
         "ethereum": {
             "mainnet": {
                 "packages": {

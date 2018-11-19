@@ -44,6 +44,7 @@ const updateState = (savedData, updatedState = {}) => {
             code: null,
             message: null
         },
+        shortcuts: savedData.shortcuts != null ? savedData.shortcuts : [],
         operating_system: savedData.operating_system != null ? savedData.operating_system : getOS(),
         account: DB.application.config.data[0].account || {},
         darklaunch_flags: DB.application.config.data[0].darklaunch_flags || [],
@@ -272,6 +273,9 @@ export const mutations = {
         } else {
             account[prop] = data;
         }
+    },
+    addShortcut({ shortcuts }, shortcut) {
+        shortcuts.push(shortcut)
     },
     updateFavorites2({ account }, { prop = 'product_wishlist', id }) {
         const foundKey = account[prop].findIndex(savedId => savedId === id);

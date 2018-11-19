@@ -197,7 +197,7 @@
                 return this.product.streams
             },
             reviews(){
-                return this.product.rews
+                return this.product.reviews
             },
             helpfulReviews(){
                 if (!this.reviews) return []

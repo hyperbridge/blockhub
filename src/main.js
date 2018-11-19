@@ -9,9 +9,11 @@ import VueNumerals from 'vue-numerals'
 import app from './app'
 import router from './router'
 import store, { initializer } from './store'
-import VueI18n from 'vue-i18n';
+import VueI18n from 'vue-i18n'
+import VueDraggable from 'vue-draggable'
 
-import localeData from '@/db/seed/locale-data.json';
+import localeData from '@/db/seed/locale-data.json'
+
 import './filters'
 import './components'
 import './directives'
@@ -23,6 +25,8 @@ import './css/styles.scss'
 const debounce = require('debounce')
 
 Vue.config.productionTip = false
+
+Vue.use(VueDraggable)
 
 Vue.use(Snotify, {
   toast: {

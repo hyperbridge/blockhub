@@ -100,7 +100,7 @@ Check [PR #4](https://github.com/hyperbridge/blockhub-web-client/pull/4) for ins
 
 ## Style Guide
 
-Check the [Storybook Style Guide here](http://styleguide.blockhub.gg/)
+Check the [Storybook Style Guide here](https://styleguide.blockhub.gg/)
 
 ## Articles
 

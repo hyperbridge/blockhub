@@ -9,7 +9,8 @@
         <!-- //END PAGE HEADER -->
 
         <!-- PAGE CONTENT WRAPPER -->
-        <div class="page__content page__content-invert invert" :class="{'make-it-blur': bluredBg}" id="page-content">
+        <div class="page__content page__content-invert invert" :class="{'make-it-blur': bluredBg}" id="page-content" 
+            v-drag-and-drop:options="dragOptions">
             <div class="loader-block" v-if="!is_connected">
                 <div class="loader-block__container">
                     <div class="loader-block__spinner"></div>
@@ -37,6 +38,10 @@
                             Status</a>
                     </div>
                 </div>
+            </div>
+
+            <div class="page-shortcuts invert">
+                <c-shortcut-sidebar :items="shortcuts" />
             </div>
 
             <!-- PAGE ASIDE PANEL -->
@@ -305,12 +310,15 @@
             'c-clock': (resolve) => require(['@/ui/components/clock/index.vue'], resolve),
             'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
             'c-cookie-policy': (resolve) => require(['@/ui/components/cookie-policy'], resolve),
+            'c-shortcut-sidebar': (resolve) => require(['@/ui/components/shortcut-sidebar'], resolve),
             'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more.vue'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide,
             'c-profile-chooser': (resolve) => require(['@/ui/components/profile-chooser'], resolve),
         },
         data() {
+            const self = this
+
             return {
                 navigationComponent: this.navigationKey || false,
                 loadingState: true,
@@ -327,7 +335,67 @@
                 bluredBg: false,
                 voteCasted: false,
                 reportCoords: null,
-                breadcrumbLinksData: this.breadcrumbLinks
+                breadcrumbLinksData: this.breadcrumbLinks,
+                shortcutItems: [{
+                    r: 10,
+                    g: 10,
+                    b: 10
+                }],
+                dragOptions: {
+                    dropzoneSelector: '.does-not-exist',
+                    draggableSelector: 'a',
+                    excludeOlderBrowsers: true,
+                    showDropzoneAreas: true,
+                    multipleDropzonesItemsDraggingEnabled: true,
+                    onDrop(event) {},
+                    onDragstart(event) {
+                        let $target = $(event.nativeEvent.target)
+                        
+                        if ($target.parents('.page-shortcuts').length) {
+                            event.stop()
+                        }
+                    },
+                    onDragend(event) {
+                        let $target = $(event.nativeEvent.target)
+                        let $link = null
+                        let $image = null
+                        let name = null
+
+                        if ($target.is('a')) {
+                            $link = $target
+                        }
+                        else if ($target.is('img')) {
+                            $image = $target
+                            $link = $target.parents('a').first()
+                        } else {
+                            $link = $target.parents('a').first()
+                            $image = $target.parents('a').first()
+                        }
+
+                        if (!$image && $link) {
+                            $image = $link.find('img').first()
+                        }
+
+                        // Set name
+                        if ($image) {
+                            name = $image.attr('alt')
+                        }
+                        else if ($link) {
+                            name = $link.text()
+                        }
+                        
+                        self.$store.commit('application/addShortcut', {
+                            r: 50,
+                            g: 50,
+                            b: 50,
+                            name: name,
+                            link: $link && $link.attr('href'),
+                            image: $image && $image.attr('src')
+                        })
+
+                        event.stop()
+                    }
+                }
             }
         },
         computed: {
@@ -336,6 +404,9 @@
             },
             chosenIdentity() {
                 return this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
+            },
+            shortcuts() {
+                return this.$store.state.application.shortcuts
             },
             connection_status() {
                 return this.$store.state.application.connection.status
@@ -588,6 +659,7 @@
     }
     .content{
         padding: 20px;
+        padding-left: 80px;
         .container-fluid{
             padding: 0!important;
         }
@@ -843,6 +915,10 @@
     .page .page__content {
         padding-top: 100px;
         position: relative;
+        .page-aside {
+            margin-left: 60px;
+        }
+
         .page-aside,
         .page-sidepanel {
             top: 100px;
@@ -858,6 +934,32 @@
             align-items: center;
             line-height: 18px;
         }
+
+        .navigation {
+            padding-bottom: 80px;
+        }
+    }
+    .left-sidebar__content{
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: calc(100% - 40px);
+    }
+    .col-lg-6{
+        @media (max-width: 1500px){
+            /*flex: 0 0 100%;*/
+            /*max-width: 100%;*/
+        }
+    }
+
+    .page-shortcuts {
+        position: fixed;
+        top: 50px;
+        left: 7px;
+        width: 50px;
+        z-index: 101;
+    }
+
+    #page-content {
 
         &:before {
             content: '';
@@ -885,27 +987,13 @@
             pointer-events: none;
         }
 
-        .navigation {
-            padding-bottom: 80px;
-        }
     }
-    .left-sidebar__content{
-        overflow-y: scroll;
-        overflow-x: hidden;
-        height: calc(100% - 40px);
-    }
-    .col-lg-6{
-        @media (max-width: 1500px){
-            /*flex: 0 0 100%;*/
-            /*max-width: 100%;*/
-        }
-    }
-
 
     .content {
         width: 100%;
         padding-top: 0;
         margin: 0 auto;
+        
     }
 
     .page__with-left-sidebar .content, .page__with-right-sidebar .content {

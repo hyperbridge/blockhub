@@ -133,8 +133,8 @@
             },
             itemBg: String
         },
-        data(){
-            return{
+        data() {
+            return {
                 itemWidth: ''
             }
         },
