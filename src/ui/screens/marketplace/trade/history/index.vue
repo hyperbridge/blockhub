@@ -43,11 +43,13 @@
 
 <script>
     export default {
+        props: ['transactions'],
         components: {
             'c-user': (resolve) => require(['@/ui/components/author'], resolve),
         },
         computed: {
-            transactions() {
+            transactionsX() {
+                return;
                 return this.$store.getters['assets/transactionsArray'];
             }
         }

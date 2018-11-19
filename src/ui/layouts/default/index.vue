@@ -16,7 +16,7 @@
 
                     <p class="loader-block__message">{{ user_submitted_connection_message.message }}</p>
                     <p class="loader-block__user">Submitted by <a
-                        :href="`/#/identity/${user_submitted_connection_message.user.id}`">@{{ user_submitted_connection_message.user.name }}</a></p>
+                        :href="`#/identity/${user_submitted_connection_message.user.id}`">@{{ user_submitted_connection_message.user.name }}</a></p>
 
                     <h1 class="loader-block__status-code" v-if="connection_status.code">ERROR {{ connection_status.code }}</h1>
 
@@ -106,7 +106,7 @@
                     </p>
                 </template>
                 <p slot="footer">
-                    Need help? <c-button status="plain" href="/#/help">Check the Help Center</c-button>
+                    Need help? <c-button status="plain" href="#/help">Check the Help Center</c-button>
                 </p>
             </c-basic-popup>
 
@@ -143,6 +143,7 @@
                     <div class="input-group mb-4">
                         <input type="text" class="form-control" ref="input" value="0xebf0027ef3b4b7a742a148cddb0f2b14e5d8f0e9" />
                     </div>
+                    <p>You should confirm the contract address <a href="https://t.me/hyperbridgechat" target="_blank">in our Telegram</a>.</p>
                 </template>
                 <p slot="footer">
                 </p>
@@ -176,7 +177,7 @@
                 <div class="h4" slot="header">Propose Idea</div>
                 <template slot="body">
                     <div v-if="chosenIdentity && chosenIdentity.curator_id">
-                        <p>Great, you're a curator. <c-button class="underline" href="/#/project/new">Click here to continue</c-button>.</p>
+                        <p>Great, you're a curator. <c-button class="underline" href="#/project/new">Click here to continue</c-button>.</p>
                     </div>
                     <div v-else>
                         <p>
@@ -201,7 +202,7 @@
                     </div>
                 </template>
                 <p slot="footer">
-                    Need help? <c-button status="plain" href="/#/help">Check the Help Center</c-button>
+                    Need help? <c-button status="plain" href="#/help">Check the Help Center</c-button>
                 </p>
             </c-basic-popup>
 

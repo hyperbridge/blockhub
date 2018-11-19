@@ -8,7 +8,7 @@
             <div v-if="product.price" class="product-grid__item-price">
                 <strong>{{ product.price | convertCurrency }}</strong>
             </div>
-            <a :href="`/#/product/${product.id}`" class="card-img-top">
+            <a :href="`#/product/${product.id}`" class="card-img-top">
                 <transition name="fade">
                     <c-img v-if="!display_preview" class="card-img-top" :src="product.images.medium_tile"/>
                     <template v-else>
@@ -28,7 +28,7 @@
                 </transition>
             </a>
         </div>
-        <h4><a :href="`/#/product/${product.id}`">{{ product.name }}</a></h4>
+        <h4><a :href="`#/product/${product.id}`">{{ product.name }}</a></h4>
         <p class="card-text" hidden>{{ product.short_description }} </p>
         <c-tags :tags="product.developer_tags.slice(0,3)"/>
     </div>

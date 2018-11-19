@@ -20,9 +20,9 @@
                 Generate new trade URL
             </c-button>
         </section>
-        <button @click="storeTest()">
+        <!-- <button @click="storeTest()">
             Commit/Dispatch create
-        </button>
+        </button> -->
 
         <!-- <input type="text"
             :value="val"
@@ -51,11 +51,15 @@
         },
         computed: {
             account() {
-                return this.$store.state.application.account;
+                return this.$store.getters['application/account'];
+            },
+            identity() {
+                return this.account.active_identity;
             },
             tradeURL() {
-                const { id, tradeURLId } = this.account;
-                return `${window.location.origin}/#/tradeoffer/new/?partner=${id}&id=${tradeURLId}`;
+                const { tradeURLId } = this.account;
+                const { id } = this.identity;
+                return `${window.location.origin}#/tradeoffer/new/?partner=${id}&id=${tradeURLId}`;
             },
             assets() { return this.$store.state.assets.assets; }
         },

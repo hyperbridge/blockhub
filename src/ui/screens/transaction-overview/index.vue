@@ -9,7 +9,7 @@
                         {{ transaction.name }}
                         {{ transaction.id }}
                         <br />
-                        <a :href="`/#/transaction/${transaction.id}/transactions`">Transactions</a>
+                        <a :href="`#/transaction/${transaction.id}/transactions`">Transactions</a>
                     </div>
                 </div>
             </div>

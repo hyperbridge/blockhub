@@ -4,7 +4,7 @@ import messagesData from '@/db/seed/messages.json';
 import usersData from '@/db/seed/users.json';
 import identitiesData from '@/db/seed/identities.json';
 
-import { extract, getId, mergeId } from '@/store/utils';
+import { extract, skip, getId, mergeId, normalize } from '@/store/utils';
 
 
 
@@ -22,10 +22,8 @@ const community = {
             ...users,
             [user.id]: user
         }), {}),
-        identities: identitiesData.reduce((identities, idt) => ({
-            ...identities,
-            [idt.id]: idt
-        }), {})
+        identities: normalize(identitiesData),
+        offersSeller: {}
     },
     mutations: {
         create(state, { target = 'messages', id, data }) {
@@ -123,13 +121,25 @@ const community = {
                     }, {})
                 }
             }), {}),
-        identities: ({ identities }) => Object
-            .entries(identities)
-            .reduce((populated, [id, identity]) => ({
+        identities: (
+            { identities }, getters, rootState,
+            { ['assets/assets']: assets }
+        ) => Object.values(identities)
+            .map(identity => ({
+                ...identity,
+                inventory: identity.inventory.map(id => extract(assets[id], ['image', 'price', 'product']))
+            }))
+            .reduce((populated, identity, identities) => ({
                 ...populated,
-                [id]: {
+                [identity.id]: {
                     ...identity,
-                    friends: identity.friends.map(id => identities[id])
+                    // friends: identity.friends.map(id => skip(identities[id], ['friends', 'inventory'])),
+                    inventoryGrouped: identity.inventory.reduce((grouped, asset) => {
+                        const { name } = asset.product;
+                        grouped[name] = grouped[name] || [];
+                        grouped[name] = [...grouped[name], asset];
+                        return grouped;
+                    }, {})
                 }
             }), {})
     }

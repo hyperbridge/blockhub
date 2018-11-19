@@ -82,6 +82,8 @@
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
+        position: relative;
+        z-index: 8;
         &.full-height{
             min-height: 100vh;
         }

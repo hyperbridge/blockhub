@@ -22,7 +22,7 @@
                     <p>BlockHub is the best place for curated community-driven game development,
                         digital assets and micro-licensing. Sugn up for your own account and build
                         the future of gaming.</p>
-                    <c-button status="success" size="lg" icon_hide href="/#/download">
+                    <c-button status="success" size="lg" icon_hide href="#/download">
                         Sign Up
                     </c-button>
                 </div>
@@ -150,7 +150,7 @@
                         <p>BlockHub is the best place for curated community-driven game development,
                             digital assets and micro-licensing. Sign up for your own account and build
                             the future of gaming.</p>
-                        <c-button href="/#/download" status="success" size="lg" icon_hide>
+                        <c-button href="#/download" status="success" size="lg" icon_hide>
                             Sign Up
                         </c-button>
                     </div>

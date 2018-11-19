@@ -9,7 +9,7 @@
                         {{ wallet.name }}
                         {{ wallet.id }}
                         <br />
-                        <a :href="`/#/wallet/${wallet.id}/transactions`">Transactions</a>
+                        <a :href="`#/wallet/${wallet.id}/transactions`">Transactions</a>
                     </div>
                 </div>
             </div>

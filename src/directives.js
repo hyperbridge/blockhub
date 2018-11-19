@@ -151,8 +151,7 @@ Vue.directive('translate', {
         el.textContent = 'Translating...';
 
         setTimeout(() => {
-
+            el.textContent = 'Translated';
         }, 2000);
-        // el.textContent = 'Translating...';
     }
 });

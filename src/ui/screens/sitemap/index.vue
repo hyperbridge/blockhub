@@ -175,8 +175,8 @@
                         <h2>Developer Area</h2>
                         <ul>
                           <li><a href="#/developer">Developer Area</a></li>
-                          <li><a href="#/developer/new-product">Developer > New Product</a></li>
-                          <li><a href="#/developer/new-asset">Developer > New Digital Asset</a></li>
+                          <li><a href="#/business/product/new">Developer > New Product</a></li>
+                          <li><a href="#/business/asset/new">Developer > New Digital Asset</a></li>
                         </ul>
                     </div>
                     <div class="col-12 col-md-4">

@@ -25,6 +25,13 @@ export const mapElement = ({ name, module, prop = module, id, action = false, se
     };
 };
 
+/*
+
+    call Store._delete while null was assigned to mapped el e.g.
+    asset = null
+
+*/
+
 /*  Example usage
 
     import { mapElement } from '@/store/helpers';

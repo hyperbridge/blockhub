@@ -65,7 +65,7 @@
                                 <h4>Announcing: The Boomsday Project</h4>
                                 <p>Sed pulvinar nibh id interdum tempus. Nam id massa sit amet dolor tincidunt bibendum.
                                     Nullam ante nunc, dapibus et mauris ut, sodales accumsan lorem.</p>
-                                <a href="/#/project/1">Read More</a>
+                                <a href="#/project/1">Read More</a>
                             </div>
                         </div>
                         <div class="banner-sm">

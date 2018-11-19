@@ -1,127 +1,145 @@
 <template>
     <div>
-        <c-block title="Create new auction sniper" noGutter onlyContentBg bgGradient>
-            <template v-if="errors.length">
-                <p>Correct following error(s):</p>
-                <ul>
-                    <li v-for="(error, index) in errors" :key="index">
-                        {{ error }}
-                    </li>
-                </ul>
-            </template>
+        <p v-if="isLoading">Loading ...</p>
+        <div v-else>
+            <c-block title="Created auction prospectors" noGutter onlyContentBg bgGradient>
+                <table class="snipers-table">
+                    <thead>
+                        <th>ID</th>
+                        <th>Asset</th>
+                        <th>Minimum price</th>
+                        <th>Maximum price</th>
+                        <th>Expiration date</th>
+                        <th>Edit</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="[id, prosp] in prospectors" :key="id">
+                            <template v-if="edited.id != prosp.id">
+                                <td>{{ id }}</td>
+                                <td><c-asset-preview :asset="prosp.asset" size="sm"/></td>
+                                <td>{{ prosp.priceMin }} $</td>
+                                <td>{{ prosp.priceMax }} $</td>
+                                <td>{{ prosp.expDate | timeAgo }}</td>
+                                <td>
+                                    <c-button
+                                        status="info"
+                                        icon="edit"
+                                        @click="setEdited(prosp)"
+                                    >Edit</c-button>
+                                </td>
+                            </template>
+                            <template v-else>
+                                <td>{{ id }}</td>
+                                <td><c-asset-preview :asset="prosp.asset" size="sm"/></td>
+                                <td><c-input v-model="edited.priceMin" class="edit-input"/></td>
+                                <td><c-input v-model="edited.priceMax" class="edit-input"/></td>
+                                <td>
+                                    <c-datepicker
+                                        v-model="edited.expDate"
+                                        input-class="form-control form-calendar__text edit-input"
+                                        calendar-class="form-calendar"
+                                    />
+                                </td>
+                                <td>
+                                    <c-button status="warning" @click="edited = {}" icon_hide>Cancel</c-button>
+                                    <c-button
+                                        status="danger"
+                                        @click="$store.dispatch(
+                                            'delete',
+                                            ['assets/prospectors', id]
+                                        )"
+                                    >Delete</c-button>
+                                    <c-button
+                                        status="success"
+                                        @click="$store.dispatch(
+                                            'update',
+                                            ['assets/prospectors', id, edited]
+                                        ); edited = {}"
+                                    >Save</c-button>
+                                </td>
+                            </template>
+                        </tr>
+                    </tbody>
+                </table>
+            </c-block>
 
-            <c-tabs tabText="Step" class="margin-bottom-100" :setActiveTab="activeStep" @click="createSniper">
+            <c-block title="Create new auction prospector" noGutter onlyContentBg bgGradient>
+                <template v-if="errors.length">
+                    <p>Correct following error(s):</p>
+                    <ul>
+                        <li v-for="(error, index) in errors" :key="index">
+                            {{ error }}
+                        </li>
+                    </ul>
+                </template>
 
-                <c-tab :tab_id="1">
-                    <p>Select asset that you are going to buy</p>
-                    <c-content-navigation :items="assetsArray" :setLimits="10">
-                        <c-asset-grid
-                            slot-scope="props"
-                            :assets="props.items"
-                            @click="newSniper.asset = $event.id; activeStep = 2"
+                <c-tabs tabText="Step" class="margin-bottom-100" :setActiveTab="activeStep" @click="createSniper">
+
+                    <c-tab :tab_id="1">
+                        <p>Select asset that you are going to buy</p>
+                        <c-content-navigation :items="assetsArray" :setLimits="10">
+                            <c-asset-grid
+                                slot-scope="props"
+                                :assets="props.items"
+                                @click="newSniper.asset = $event.id; activeStep = 2"
+                            />
+                        </c-content-navigation>
+                    </c-tab>
+
+                    <c-tab :tab_id="2">
+                        <h4 class="text-align-center">Selected asset:</h4>
+                        <c-asset-preview-price
+                            :asset="assets[newSniper.asset]"
+                            class="margin-auto margin-bottom-30 half-width"
                         />
-                    </c-content-navigation>
-                </c-tab>
+                        <p>Select minimum price</p>
+                        <div class="flex-center-between margin-bottom-20">
+                            <c-range-slider
+                                v-model="newSniper.priceMin"
+                                class="half-width margin-right-20"
+                                :max="getPrice(assets[newSniper.asset], 'min')"
+                            />
+                            <c-input v-model="newSniper.priceMin" class="half-width"/>
+                        </div>
+                        <p>Select maximum price</p>
+                        <div class="flex-center-between margin-bottom-20">
+                            <c-range-slider
+                                v-model="newSniper.priceMax"
+                                class="half-width margin-right-20"
+                                :max="getPrice(assets[newSniper.asset], 'max')"
+                            />
+                            <c-input v-model="newSniper.priceMax" class="half-width"/>
+                        </div>
+                        <p>Select expiration date</p>
+                        <div class="flex-center margin-bottom-40">
+                            <c-datepicker
+                                v-model="newSniper.expDate"
+                                placeholder="Expiration date"
+                                input-class="form-control form-calendar__text"
+                                calendar-class="form-calendar"
+                            />
+                        </div>
+                        <div class="flex-center-between">
+                            <c-button status="warning" @click="cancelCreation()" icon="trash-alt" size="lg">
+                                Cancel
+                            </c-button>
+                            <c-button status="success" @click="createSniper()" size="lg">
+                                Create
+                            </c-button>
+                        </div>
+                    </c-tab>
 
-                <c-tab :tab_id="2">
-                    <h4 class="text-align-center">Selected asset:</h4>
-                    <c-asset-preview-price
-                        :asset="assets[newSniper.asset]"
-                        class="margin-auto margin-bottom-30 half-width"
-                    />
-                    <p>Select minimum price</p>
-                    <div class="flex-center-between margin-bottom-20">
-                        <c-range-slider
-                            v-model="newSniper.priceMin"
-                            class="half-width margin-right-20"
-                            :max="getPrice(assets[newSniper.asset], 'min')"
-                        />
-                        <c-input v-model="newSniper.priceMin" class="half-width"/>
-                    </div>
-                    <p>Select maximum price</p>
-                    <div class="flex-center-between margin-bottom-20">
-                        <c-range-slider
-                            v-model="newSniper.priceMax"
-                            class="half-width margin-right-20"
-                            :max="getPrice(assets[newSniper.asset], 'max')"
-                        />
-                        <c-input v-model="newSniper.priceMax" class="half-width"/>
-                    </div>
-                    <p>Select expiration date</p>
-                    <div class="flex-center margin-bottom-40">
-                        <c-datepicker
-                            v-model="newSniper.expDate"
-                            placeholder="Expiration date"
-                            input-class="form-control form-calendar__text"
-                            calendar-class="form-calendar"
-                        />
-                    </div>
-                    <div class="flex-center-between">
-                        <c-button status="warning" @click="cancelCreation()" icon="trash-alt" size="lg">
-                            Cancel
-                        </c-button>
-                        <c-button status="success" @click="createSniper()" size="lg">
-                            Create
-                        </c-button>
-                    </div>
-                </c-tab>
-
-            </c-tabs>
-        </c-block>
-
-        <c-block title="Created auction snipers" noGutter onlyContentBg bgGradient>
-            <table class="snipers-table">
-                <thead>
-                    <th>ID</th>
-                    <th>Asset</th>
-                    <th>Minimum price</th>
-                    <th>Maximum price</th>
-                    <th>Expiration date</th>
-                    <th>Edit</th>
-                </thead>
-                <tbody>
-                    <tr v-for="(sniper, id) in snipers" :key="id">
-                        <template v-if="edited.id != sniper.id">
-                            <td>{{ id }}</td>
-                            <td><c-asset-preview :asset="sniper.asset" size="sm"/></td>
-                            <td>{{ sniper.priceMin }} $</td>
-                            <td>{{ sniper.priceMax }} $</td>
-                            <td>{{ sniper.expDate | timeAgo }}</td>
-                            <td>
-                                <c-button
-                                    status="info"
-                                    icon="edit"
-                                    @click="setEdited(sniper)"
-                                >Edit</c-button>
-                            </td>
-                        </template>
-                        <template v-else>
-                            <td>{{ id }}</td>
-                            <td><c-asset-preview :asset="sniper.asset" size="sm"/></td>
-                            <td><c-input v-model="edited.priceMin" class="edit-input"/></td>
-                            <td><c-input v-model="edited.priceMax" class="edit-input"/></td>
-                            <td>
-                                <c-datepicker
-                                    v-model="edited.expDate"
-                                    input-class="form-control form-calendar__text edit-input"
-                                    calendar-class="form-calendar"
-                                />
-                            </td>
-                            <td>
-                                <c-button status="warning" @click="edited = {}" icon_hide>Cancel</c-button>
-                                <c-button status="danger" @click="deleteSniper(id)">Delete</c-button>
-                                <c-button status="success" @click="updateSniper(id)">Save</c-button>
-                            </td>
-                        </template>
-                    </tr>
-                </tbody>
-            </table>
-        </c-block>
+                </c-tabs>
+            </c-block>
+        </div>
     </div>
 </template>
 
 <script>
+    import prospectors from '@/db/api/prospectors';
+
     export default {
+        props: ['identityId'],
         components: {
             'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
             'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
@@ -143,7 +161,8 @@
                 },
                 edited: {},
                 activeStep: 1,
-                errors: []
+                errors: [],
+                isLoading: true
             }
         },
         methods: {
@@ -173,20 +192,8 @@
                     }
                 }
             },
-            setEdited(sniper) {
-                this.edited = { ...sniper };
-            },
-            updateSniper(id) {
-                const { edited } = this;
-                this.$store.commit('assets/update', {
-                    id,
-                    prop: 'snipers',
-                    data: { ...edited, asset: edited.asset.id }
-                });
-                this.edited = {};
-            },
-            deleteSniper(id) {
-                this.$store.commit('assets/delete', { id, prop: 'snipers' });
+            setEdited(prospector) {
+                this.edited = { ...prospector };
             },
             cancelCreation() {
                 this.activeStep = 1;
@@ -198,7 +205,16 @@
                 };
                 this.errors = [];
             },
-            getPrice: (asset, target) => asset && Math.round(asset.price[target] * 2)
+            getPrice: (asset, target) => asset && Math.round(asset.price[target] * 2),
+            async getProspectors() {
+                this.isLoading = true;
+                await new Promise(r => setTimeout(r, 2000));
+                this.$store.dispatch('loadData', [
+                    'assets/prospectors',
+                    prospectors.filter(prosp => prosp.user.id == this.identityId)
+                ]);
+                this.isLoading = false;
+            }
         },
         computed: {
             snipers() {
@@ -209,6 +225,15 @@
             },
             assetsArray() {
                 return this.$store.getters['assets/assetsArray'];
+            },
+            prospectors() {
+                return this.$store.getters['assets/prospectorsMap'];
+            }
+        },
+        watch: {
+            identityId: {
+                handler: 'getProspectors',
+                immediate: true
             }
         }
     }
