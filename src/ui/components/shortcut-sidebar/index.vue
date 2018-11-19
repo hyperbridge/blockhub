@@ -1,5 +1,6 @@
 <template>
     <div>
+        <a class="shortcut-sidebar__grid" href="#" @click.prevent="showGrid"></a>
         <c-grid
             :center="false"
             :draggable="true"
@@ -56,6 +57,9 @@
             }
         },
         methods: {
+            showGrid() {
+
+            },
             click ({ items, index }) {
                 let value = items.find(v => v.index === index)
                 this.selected = value.item
@@ -75,5 +79,17 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .shortcut-sidebar__grid {
+        background-image: url(/static/img/icons/grid.png);
+        background-size: 70%;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-color: #fff;
+        width: 50px;
+        height: 50px;
+        display: block;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.07);
+    }
 </style>

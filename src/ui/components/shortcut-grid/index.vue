@@ -111,7 +111,7 @@ export default {
     },
     containerStyle() {
       return {
-        height: window.innerWidth + 'px'
+        height: window.innerHeight + 'px'
       }
     },
 

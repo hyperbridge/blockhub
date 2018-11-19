@@ -970,7 +970,7 @@
     .page-shortcuts {
         position: fixed;
         top: 50px;
-        left: 7px;
+        left: 10px;
         width: 50px;
         z-index: 101;
     }
