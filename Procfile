@@ -1,1 +1,1 @@
-npm run start-storybook -p $PORT
+web: npm run start-storybook -p $PORT
