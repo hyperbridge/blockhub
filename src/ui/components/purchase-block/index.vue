@@ -55,8 +55,8 @@
                 @click="$emit('addToShortcut')"
                 target="Shortcuts"
                 :active="inShortcut"
-                activeIcon="unlink"
-                unactiveIcon="link"
+                activeIcon="link"
+                unactiveIcon="unlink"
                 class="mt-3"
             />
         </div>

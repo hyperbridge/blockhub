@@ -251,6 +251,9 @@ export default {
     display: block;
     position: relative;
     width: 60px;
+    overflow-x: visible;
+    overflow-y: auto;
+    padding-right: 800px; margin-right: -800px;
 
     &::-webkit-scrollbar-thumb {
         background: rgba(255, 255, 255, 0) !important;
