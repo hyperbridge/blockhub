@@ -34,12 +34,14 @@
         </div>
         <div class="col-12 col-lg-4 col-xl-4">
             <c-purchase-block
-                :isUnavailable="!Number(product.price)"
+                :isUnavailable="!currentRelease"
                 :price="product.price"
                 :tags="['New']"
                 :onClickPurchase="showPurchaseModal"
                 class="margin-bottom-15"
                 :inWishlist="!!wishlist[product.id]"
+                :releaseDate="product.release_date"
+                :playLink="currentRelease && currentRelease.play_link"
                 @addToWishlist="$store.dispatch(
                     'community/updateWishlist',
                     ['product', product.id]
@@ -198,6 +200,9 @@
             },
             reviews(){
                 return this.product.reviews
+            },
+            currentRelease() {
+                return this.product.releases && this.product.releases.find(p => this.product.current_version === p.version)
             },
             helpfulReviews(){
                 if (!this.reviews) return []

@@ -292,7 +292,7 @@
         .crowdfund-icon{
             position: absolute;
             top: 0;
-            right: 0;
+            right: -1px;
             width: 80px;
             height: 80px;
             padding: 8px;
