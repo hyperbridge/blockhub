@@ -35,8 +35,8 @@
             </div>
             <c-line-chart
                 :data="chartData"
+                :options="chartOptions"
                 :height="400"
-                :options="{ maintainAspectRatio: false }"
             />
             <h2 class="offers__title">
                 Offers
@@ -90,7 +90,14 @@
                 ),
                 priceDates: Array.from({ length: 100 }, (x, i) =>
                     moment().add(-100 + i, 'days').format('DD / MM')
-                )
+                ),
+                chartOptions: {
+                    maintainAspectRatio: false,
+                    // scales: {
+                    //     xAxes: [{ gridLines: { display: false } }],
+                    //     yAxes: [{ gridLines: { display: false } }]
+                    // }
+                }
             }
         },
         components: {
@@ -131,7 +138,7 @@
         padding: 10px;
         border-radius: 5px;
         background: #343555;
-        box-shadow: 2px 0  15px 0 rgba(1,1,1,.2);
+        box-shadow: 2px 0  20px 0 rgba(1,1,1,.15);
         margin-bottom: 20px;
         list-style-type: none;
         cursor: pointer;
