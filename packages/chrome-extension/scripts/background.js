@@ -26,7 +26,7 @@ var initialized = false;
 var messages = [];
 
 function onNativeMessage(message) {
-    console.log(message);
+    console.log("Native message received: ", message);
 
     if (message.Command === "text") {
         messages.push(message)
@@ -40,13 +40,13 @@ function onNativeMessage(message) {
 }
 
 function onDisconnected() {
-    //appendMessage("Failed to connect: " + chrome.runtime.lastError.message);
     port = null;
     uiState = 'disconnected';
+    messages = ["Connection Failed: " + chrome.runtime.lastError.message];
 }
 
 function connect() {
-    var hostName = "com.jet.portal";
+    var hostName = "com.hyperbridge.blockhub";
 
     port = chrome.runtime.connectNative(hostName);
     port.onMessage.addListener(onNativeMessage);

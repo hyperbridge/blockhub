@@ -2,10 +2,10 @@
   // Extension ID: knldjmfmopnpolahpmmgbagdohdnhkik
   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDcBHwzDvyBQ6bDppkIs9MP4ksKqCMyXQ/A52JivHZKh4YO/9vJsT3oaYhSpDCE9RPocOEQvwsHsFReW2nUEc6OLLyoCFFxIb7KkLGsmfakkut/fFdNJYh0xOTbSN8YvLWcqph09XAY2Y/f0AL7vfO1cuCqtkMt8hFrBGWxDdf9CQIDAQAB",  
   "manifest_version": 2,
-  "name": "Portal",
-  "short_name": "Portal",
-  "description": "Connecting the crypto world",
-  "version": "0.0.1",
+  "name": "Blockhub Bridge",
+  "short_name": "Blockhub",
+  "description": "Bridge to Blockhub, a platform for next-generation app experiences",
+  "version": "0.1.0",
   "minimum_chrome_version": "38",
   "externally_connectable": {
     "matches": [
@@ -23,7 +23,7 @@
   },
   "browser_action": {
     "default_popup": "settings.html",
-    "default_title": "Portal"
+    "default_title": "Blockhub Bridge"
   },
   "permissions": [
     "nativeMessaging",
@@ -38,8 +38,7 @@
     "unlimitedStorage",
     "notifications",
     "idle",
-    "alarms",
-    "https://bittrex.com/*"
+    "alarms"
   ],
   "content_scripts": [
     {

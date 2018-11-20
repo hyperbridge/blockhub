@@ -19,7 +19,7 @@ Enhancer.replaceAd = function replaceAd(text) {
         }
 
         const newElement = document.createElement('div');
-        newElement.id = "portal-ad";
+        newElement.id = "hyperbridge-ad";
         newElement.innerHTML = "<div>" + text + "</div>";
         node.appendChild(newElement);
     }
@@ -39,7 +39,7 @@ Enhancer.notifyBackground = function notifyBackground() {
 }
 
 Enhancer.checkMessages = function() {
-    console.log("Checking messages");
+    //console.log("[Blockhub] Checking messages");
 
     chrome.runtime.sendMessage({
         checkMessages: true
