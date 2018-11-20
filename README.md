@@ -22,9 +22,6 @@ This is the monorepo for BlockHub.
 - 📺 [Site - Staging](https://staging.blockhub.gg/)
 - 📖 [Docs](http://docs.hyperbridge.org/blockhub)
 - 📓 [EIPs](https://github.com/hyperbridge/EIPs)
-- 💻 [Web Client](https://github.com/hyperbridge/blockhub-web-client)
-- 💻 [Desktop Client](https://github.com/hyperbridge/blockhub-desktop-client)
-- 🛡 [Node Operator](https://github.com/hyperbridge/blockhub-node-operator)
 - 🔗 [Protocol](https://github.com/hyperbridge/protocol)
 
 
