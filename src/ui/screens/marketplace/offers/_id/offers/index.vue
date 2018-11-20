@@ -9,33 +9,33 @@
             </li>
         </ul>
         <ul class="reset-list">
-            <li
-                class="offer"
+            <router-link
                 v-for="[id, offer] in offersMap" :key="id"
-            >
-                <router-link :to="{
+                tag="li"
+                class="offer"
+                :to="{
                     name: 'Marketplace Asset Offer',
                     params: { assetId, offerId: offer.id }
-                }">
-                    <span>
-                        <span class="offer__max-bid">
-                            {{ offer.bids[offer.bids.length - 1].value }}
-                        </span>$
-                    </span>
-                    <span class="offer__bids-count">
-                        <i class="fas fa-gavel"></i>
-                        {{ offer.bids.length }}
-                    </span>
-                    <span>{{ offer.buyout }}</span>
-                    <span>{{ offer.marketValue }}</span>
-                    <div class="flex-center">
-                        <c-user
-                            :user="offer.seller"
-                            class="margin-left-5"
-                        />
-                    </div>
-                </router-link>
-            </li>
+                }"
+            >
+                <span>
+                    <span class="offer__max-bid">
+                        {{ offer.bids[offer.bids.length - 1].value }}
+                    </span>$
+                </span>
+                <span class="offer__bids-count">
+                    <i class="fas fa-gavel"></i>
+                    {{ offer.bids.length }}
+                </span>
+                <span>{{ offer.buyout }}</span>
+                <span>{{ offer.marketValue }}</span>
+                <div class="flex-center">
+                    <c-user
+                        :user="offer.seller"
+                        class="margin-left-5"
+                    />
+                </div>
+            </router-link>
         </ul>
     </div>
 </template>
