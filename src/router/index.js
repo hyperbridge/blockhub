@@ -8,10 +8,16 @@ const appVersion = '0.7.1'
 
 const router = new Router({
     //mode: 'history',
-    scrollBehavior: (to, from, savedPosition) => to.name === 'Search' && from.name === 'Search'
-        ? savedPosition
-        : ({ y: 0 })
-    ,
+    scrollBehavior: (to, from, savedPosition) => {
+        if (
+            (to.name === 'Marketplace Asset Offers' && from.name === 'Marketplace Asset Offer') ||
+            (to.name === 'Marketplace Asset Offer' && from.name === 'Marketplace Asset Offers')
+        ) return savedPosition;
+
+        if (to.name === 'Search' && from.name === 'Search') return savedPosition;
+
+        return ({ y: 0 });
+    },
     linkActiveClass: 'is-active',
     routes: [
         {
@@ -803,19 +809,19 @@ const router = new Router({
                     ]
                 },
                 {
-                    path: 'offers/:id',
-                    name: 'Matketplace Asset Offers',
+                    path: 'asset/:assetId',
+                    name: 'Marketplace Asset',
                     component: (resolve) => require(['@/ui/screens/marketplace/offers/_id'], resolve),
                     props: true,
                     children: [
                         {
                             path: '',
-                            name: 'Marketpalce Asset Offe',
+                            name: 'Marketplace Asset Offers',
                             component: (resolve) => require(['@/ui/screens/marketplace/offers/_id/offers'], resolve),
                         },
                         {
-                            path: ':id',
-                            name: 'Marketpalce Asset Offer',
+                            path: 'offer/:offerId',
+                            name: 'Marketplace Asset Offer',
                             component: (resolve) => require(['@/ui/screens/marketplace/offers/_id/_id'], resolve),
                             props: true
                         }

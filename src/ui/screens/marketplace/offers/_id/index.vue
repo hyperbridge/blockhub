@@ -41,45 +41,15 @@
             <h2 class="offers__title">
                 Offers
             </h2>
-            <!-- <ul class="reset-list flex-center-between margin-bottom-10">
-                <li
-                    v-for="title in ['Latest bid', 'Bids', 'Buyout', 'Market value', 'Created by']"
-                    :key="title"
-                >
-                    {{ title }}
-                </li>
-            </ul>
-            <ul class="reset-list">
-                <li
-                    class="offer"
-                    v-for="[id, offer] in offersMap" :key="id"
-                >
-                    <span>
-                        <span class="offer__max-bid">
-                            {{ offer.bids[offer.bids.length - 1].value }}
-                        </span>$
-                    </span>
-                    <span class="offer__bids-count">
-                        <i class="fas fa-gavel"></i>
-                        {{ offer.bids.length }}
-                    </span>
-                    <span>{{ offer.buyout }}</span>
-                    <span>{{ offer.marketValue }}</span>
-                    <div class="flex-center">
-                        <c-user
-                            :user="offer.seller"
-                            class="margin-left-5"
-                        />
-                    </div>
-                </li>
-            </ul> -->
-            <router-link :to="{ name: 'Marketpalce Asset Offer' }">
-                Marketpalce Asset Offer
+
+            <router-link :to="{ name: 'Marketplace Asset Offers' }">
+                Go back
             </router-link>
+
             <router-view
                 :offersMap="offersMap"
                 :offers="offers"
-                :assetId="id"
+                :assetId="assetId"
             />
         </div>
         <p v-else>Asset with id {{ id }} doesn't exist</p>
@@ -88,9 +58,10 @@
 
 <script>
     import moment from 'moment';
+    import offers from '@/db/api/offers';
 
     export default {
-        props: ['id', 'identityId'],
+        props: ['assetId', 'identityId'],
         data() {
             return {
                 priceHistory: Array.from({ length: 100 }, (x, i) =>
@@ -116,14 +87,17 @@
         methods: {
             async getOffers() {
                 this.isLoading = true;
-                await new Promise(r => setTimeout(r, 2500));
+                // await new Promise(r => setTimeout(r, 2500));
                 this.$store.dispatch('loadData', ['assets/offers', offers]);
                 this.isLoading = false;
             }
         },
+        created() {
+            this.getOffers();
+        },
         computed: {
             asset() {
-                return this.$store.getters['assets/assets'][this.id];
+                return this.$store.getters['assets/assets'][this.assetId];
             },
             chartData() {
                 const { priceDates, priceHistory } = this;

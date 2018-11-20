@@ -13,7 +13,10 @@
                 class="offer"
                 v-for="[id, offer] in offersMap" :key="id"
             >
-                <router-link :to="`marketplace/offers/${assetId}/${id}`">
+                <router-link :to="{
+                    name: 'Marketplace Asset Offer',
+                    params: { assetId, offerId: offer.id }
+                }">
                     <span>
                         <span class="offer__max-bid">
                             {{ offer.bids[offer.bids.length - 1].value }}
@@ -39,7 +42,10 @@
 
 <script>
     export default {
-        props: ['offersMap', 'offers', 'assetId']
+        props: ['offersMap', 'offers', 'assetId'],
+        components: {
+            'c-user': (resolve) => require(['@/ui/components/user/simple'], resolve),
+        }
     }
 </script>
 
