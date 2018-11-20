@@ -1,0 +1,12 @@
+[
+    {
+        "Target": "App",
+        "Command": "Name",
+        "Value": "Test"
+    },
+    {
+        "Target": "Browser",
+        "Command": "Name",
+        "Value": "Test"
+    }
+]
