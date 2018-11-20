@@ -1,0 +1,88 @@
+{
+    "product": {
+        "name": "DOOM",
+        "images": {
+            "header": null,
+            "medium_tile": "/static/img/products/doom-20087/med-tile.jpg",
+            "main": null,
+            "icon": "/static/img/doom-20087/icon.jpg",
+            "preview": [
+                "/static/img/products/doom-20087/preview-01.jpg",
+                "/static/img/products/doom-20087/preview-02.jpg",
+                "/static/img/products/doom-20087/preview-03.jpg",
+                "/static/img/products/doom-20087/preview-04.jpg",
+                "/static/img/products/doom-20087/preview-05.jpg",
+                "/static/img/products/doom-20087/preview-06.jpg"
+            ]
+        },
+        "price": 0,
+        "video": "/static/videos/products/doom-20087/trailer.mp4",
+        "genre": "Action",
+        "release_date": "12 May, 2016",
+        "developer": "id Software",
+        "publisher": "Bethesda Softworks",
+        "content": "Developed by id software...",
+        "developer_tags": [
+            "FPS",
+            "Action",
+            "Gore",
+            "Demons",
+            "Shooter",
+            "First-Person"
+        ],
+        "language_support": [
+            {
+                "name": "English",
+                "interface": true,
+                "full_audio": true,
+                "subtitles": true
+            },
+            {
+                "name": "French",
+                "interface": true,
+                "full_audio": true,
+                "subtitles": true
+            }
+        ],
+        "system_requirements": [
+            {
+                "os": "win",
+                "system": "Windows 7/8.1/10 (64-bit versions)",
+                "processor": "Intel Core i7-3770/AMD FX-8350 or better",
+                "memory": "8 GB RAM",
+                "graphics": "NVIDIA GTX 970 4GB/AMD Radeon R9 290 4GB or better",
+                "storage": "55 GB available space",
+                "additional_notes": "Requires Steam activation and broadband internet connection for Multiplayer and SnapMap"
+            }
+        ],
+        "system_tags": [
+            "sale",
+            "new",
+            "featured",
+            "trending",
+            "top_seller",
+            "specials"
+        ],
+        "type": "game",
+        "downloads": 0,
+        "plans": [
+        ],
+        "frequently_traded_assets": [
+        ],
+        "sale_box": {
+            "title": null,
+            "price": 0,
+            "link": null
+        },
+        "rating": [
+        ],
+        "assets": [
+        ],
+        "community": {
+            "discussions": [
+            ]
+        },
+        "name_url": "doom-20087",
+        "steam_id": 379720
+    }
+}
