@@ -35,24 +35,24 @@ This is the monorepo for BlockHub.
 
 ### SDKs
 
-[C#](sdks/csharp) - Supports basic BlockHub interactions. Built with .NET.
-C++ - Coming soon
-JS - Coming soon
+* [C#](sdks/csharp) - Supports basic BlockHub interactions. Built with .NET.
+* C++ - Coming soon
+* JS - Coming soon
 
 
 ### Services
 
-[Web](services/web) - Web Service provides API for BlockHub protocols. Built with Node + Express + Swagger.
-[Gateway](services/gateway) - Gateway for other API services. Currently sits in front of the Web Service. Built with Express Gateway + Swagger.
-[Veriff](services/veriff) - Webhook for Veriff verification callbacks. Adds people to the Mailchimp mailing list. Built with Express.
+* [Web](services/web) - Web Service provides API for BlockHub protocols. Built with Node + Express + Swagger.
+* [Gateway](services/gateway) - Gateway for other API services. Currently sits in front of the Web Service. Built with Express Gateway + Swagger.
+* [Veriff](services/veriff) - Webhook for Veriff verification callbacks. Adds people to the Mailchimp mailing list. Built with Express.
 
 
 ### Packages
 
-[Chrome Extension](packages/chrome-extension) - Chrome extension for BlockHub.
-[Chrome Bridge](packages/chrome-bridge) - Native messaging proxy for Google Chrome to communicate with BlockHub.
-[Web Connector](packages/web-connector) - One-liner integration for websites. Utilizes the BlockHub JS API to provide a standard UI popups.
-[Node Operator](packages/node-operator) - Connects peers to fuel and facilitate network actions. Built with Node + Express + libp2p + IPFS.
+* [Chrome Extension](packages/chrome-extension) - Chrome extension for BlockHub.
+* [Chrome Bridge](packages/chrome-bridge) - Native messaging proxy for Google Chrome to communicate with BlockHub.
+* [Web Connector](packages/web-connector) - One-liner integration for websites. Utilizes the BlockHub JS API to provide a standard UI popups.
+* [Node Operator](packages/node-operator) - Connects peers to fuel and facilitate network actions. Built with Node + Express + libp2p + IPFS.
 
 
 ## License
