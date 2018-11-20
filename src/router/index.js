@@ -806,7 +806,20 @@ const router = new Router({
                     path: 'offers/:id',
                     name: 'Matketplace Asset Offers',
                     component: (resolve) => require(['@/ui/screens/marketplace/offers/_id'], resolve),
-                    props: true
+                    props: true,
+                    children: [
+                        {
+                            path: '',
+                            name: 'Marketpalce Asset Offe',
+                            component: (resolve) => require(['@/ui/screens/marketplace/offers/_id/offers'], resolve),
+                        },
+                        {
+                            path: ':id',
+                            name: 'Marketpalce Asset Offer',
+                            component: (resolve) => require(['@/ui/screens/marketplace/offers/_id/_id'], resolve),
+                            props: true
+                        }
+                    ]
                 },
                 {
                     path: 'snipers',

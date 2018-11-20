@@ -20,7 +20,7 @@
                         14 $
                     </li>
                     <li class="details__list-item">
-                        <span class="details__title">Minimum Price:</span>
+                        <span class="details__title">Maximum Price:</span>
                         {{ priceHistorySorted[0] }} $
                     </li>
                     <li class="details__list-item">
@@ -41,7 +41,7 @@
             <h2 class="offers__title">
                 Offers
             </h2>
-            <ul class="reset-list flex-center-between margin-bottom-10">
+            <!-- <ul class="reset-list flex-center-between margin-bottom-10">
                 <li
                     v-for="title in ['Latest bid', 'Bids', 'Buyout', 'Market value', 'Created by']"
                     :key="title"
@@ -72,7 +72,15 @@
                         />
                     </div>
                 </li>
-            </ul>
+            </ul> -->
+            <router-link :to="{ name: 'Marketpalce Asset Offer' }">
+                Marketpalce Asset Offer
+            </router-link>
+            <router-view
+                :offersMap="offersMap"
+                :offers="offers"
+                :assetId="id"
+            />
         </div>
         <p v-else>Asset with id {{ id }} doesn't exist</p>
     </div>
@@ -97,12 +105,21 @@
                     //     xAxes: [{ gridLines: { display: false } }],
                     //     yAxes: [{ gridLines: { display: false } }]
                     // }
-                }
+                },
+                isLoading: true
             }
         },
         components: {
             'c-line-chart': (resolve) => require(['@/ui/components/charts/line'], resolve),
             'c-user': (resolve) => require(['@/ui/components/user/simple'], resolve),
+        },
+        methods: {
+            async getOffers() {
+                this.isLoading = true;
+                await new Promise(r => setTimeout(r, 2500));
+                this.$store.dispatch('loadData', ['assets/offers', offers]);
+                this.isLoading = false;
+            }
         },
         computed: {
             asset() {
@@ -124,6 +141,9 @@
             },
             offersMap() {
                 return this.$store.getters['assets/offersMap'];
+            },
+            offers() {
+                return this.$store.getters['assets/offers'];
             }
         }
     }
