@@ -51,6 +51,8 @@
 </template>
 
 <script>
+    import offers from '@/db/api/offers';
+
     export default {
         components: {
             'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
@@ -74,6 +76,9 @@
         },
         filters: {
             cut: val => val.replace('Marketplace ', '')
+        },
+        created() {
+            this.$store.dispatch('loadData', ['assets/offers', offers]);
         },
         computed: {
             identity() {

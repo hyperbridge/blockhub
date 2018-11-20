@@ -1,50 +1,141 @@
 <template>
     <div>
-        <ul class="reset-list flex-center-between margin-bottom-10">
-            <li
-                v-for="title in ['Latest bid', 'Bids', 'Buyout', 'Market value', 'Created by']"
-                :key="title"
-            >
-                {{ title }}
-            </li>
-        </ul>
-        <ul class="reset-list">
-            <router-link
-                v-for="[id, offer] in offersMap" :key="id"
-                tag="li"
-                class="offer"
-                :to="{
-                    name: 'Marketplace Asset Offer',
-                    params: { assetId, offerId: offer.id }
-                }"
-            >
-                <span>
-                    <span class="offer__max-bid">
-                        {{ offer.bids[offer.bids.length - 1].value }}
-                    </span>$
-                </span>
-                <span class="offer__bids-count">
-                    <i class="fas fa-gavel"></i>
-                    {{ offer.bids.length }}
-                </span>
-                <span>{{ offer.buyout }}</span>
-                <span>{{ offer.marketValue }}</span>
-                <div class="flex-center">
-                    <c-user
-                        :user="offer.seller"
-                        class="margin-left-5"
-                    />
-                </div>
-            </router-link>
-        </ul>
+        <p v-if="!offersMap.length">
+            No offers were found for this asset
+        </p>
+        <template v-else>
+            <ul class="reset-list flex-center-between margin-bottom-10">
+                <li
+                    v-for="title in ['Latest bid', 'Bids', 'Buyout', 'Market value', 'Created by']"
+                    :key="title"
+                >
+                    {{ title }}
+                </li>
+            </ul>
+            <ul class="reset-list">
+                <router-link
+                    v-for="[id, offer] in offersMap" :key="id"
+                    tag="li"
+                    class="offer"
+                    :to="{
+                        name: 'Marketplace Asset Offer',
+                        params: { assetId, offerId: offer.id }
+                    }"
+                >
+                    <span>
+                        <span class="offer__max-bid">
+                            <template v-if="offer.bids.length">
+                                {{ offer.bids[offer.bids.length - 1].value }}
+                            </template>
+                            <template v-else>
+                                0
+                            </template>
+                        </span>$
+                    </span>
+                    <span class="offer__bids-count">
+                        <i class="fas fa-gavel"></i>
+                        {{ offer.bids.length }}
+                    </span>
+                    <span>{{ offer.buyout }}</span>
+                    <span>{{ offer.marketValue }}</span>
+                    <div class="flex-center">
+                        <c-user
+                            :user="offer.seller"
+                            class="margin-left-5"
+                        />
+                    </div>
+                </router-link>
+            </ul>
+        </template>
+        <div class="create-offer">
+            <h3>Create new offer for this asset</h3>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Buyout value</td>
+                        <td><c-input v-model="newOffer.buyout"/></td>
+                    </tr>
+                    <tr>
+                        <td>Minimum bid difference</td>
+                        <td><c-input v-model="newOffer.bidDiff"/></td>
+                    </tr>
+                    <tr>
+                        <td>Market value</td>
+                        <td><c-input v-model="newOffer.marketValue"/></td>
+                    </tr>
+                </tbody>
+            </table>
+            <c-button size="md" @click="createOffer()">
+                Create offer
+            </c-button>
+        </div>
     </div>
 </template>
 
 <script>
+    const newOffer = {
+        buyout: 0,
+        bidDiff: 0,
+        marketValue: 42
+    }
+
+    import moment from 'moment';
+
     export default {
-        props: ['offersMap', 'offers', 'assetId'],
+        props: ['offersMap', 'assetId', 'identityId', 'asset'],
         components: {
             'c-user': (resolve) => require(['@/ui/components/user/simple'], resolve),
+            'c-tooltip': (resolve) => require(['@/ui/components/tooltips/universal'], resolve),
+        },
+        data() {
+            return {
+                newOffer: { ...newOffer },
+                errors: []
+            }
+        },
+        methods: {
+            createOffer() {
+                const vals = Object.values(this.newOffer);
+                this.errors = [];
+
+                if (vals.some(val => !val)) {
+                    this.errors.push('No value can be null');
+                } else {
+                    // const { bidDiff, marketValue, buyout } = this.newOffer;
+
+                    const id = Math.round(Math.random() * 10000);
+
+                    const createdOffer = {
+                        id,
+                        seller: this.identity,
+                        asset: this.asset,
+                        bids: [],
+                        expiresIn: moment().add(1, 'week'),
+                        ...this.newOffer
+                    }
+
+
+                    this.$store.dispatch('loadData', ['assets/offers', [createdOffer]]);
+
+
+                    // this.$store.dispatch('create',
+                    //     ['assets/offers', {
+                    //         seller: this.identityId,
+                    //         asset: this.asset,
+                    //         bids: [],
+                    //         expiresIn: moment().add(1, 'week'),
+                    //         ...this.newOffer
+                    //     }]
+                    // );
+
+                    this.newOffer = { ...newOffer };
+                }
+            }
+        },
+        computed: {
+            identity() {
+                return this.$store.getters['application/identity'];
+            }
         }
     }
 </script>
@@ -80,6 +171,20 @@
         .fas {
             opacity: .15;
             margin-right: 5px;
+        }
+    }
+
+    .create-offer {
+        margin-top: 80px;
+        padding: 10px;
+        border-radius: 5px;
+        background: rgba(255,255,255,.05);
+        label {
+            display: block;
+            margin: 10px;
+            .c-input {
+                margin-left: 5px;
+            }
         }
     }
 </style>

@@ -13,7 +13,7 @@ const rootStore = {
             const [module, target] = targets.split('/');
 
             rootState[module][target] = {
-                ...state[module][target],
+                ...rootState[module][target],
                 [id]: data
             };
         },
@@ -52,6 +52,7 @@ const rootStore = {
         },
         loadData(rootState, [targets, data]) {
             const [module, target] = targets.split('/');
+            console.log(data)
             rootState[module][target] = {
                 ...[module][target],
                 ...normalize(data)
@@ -70,7 +71,7 @@ const rootStore = {
 
             // const { id, data } = await axios.post(`/${target}`, data);
             const id = getId();
-            commit('create', [targets, id, data]);
+            commit('create', [targets, id, { ...data, id }]);
             return id;
         },
         update({ commit }, [targets, id, data]) {

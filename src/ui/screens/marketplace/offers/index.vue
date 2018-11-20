@@ -128,8 +128,8 @@
             },
             async getOffers() {
                 this.isLoading = true;
-                await new Promise(r => setTimeout(r, 2500));
-                this.$store.dispatch('loadData', ['assets/offers', offers]);
+                // await new Promise(r => setTimeout(r, 2500));
+                // this.$store.dispatch('loadData', ['assets/offers', offers]);
                 this.isLoading = false;
             }
         },

@@ -38,8 +38,15 @@
                 :options="chartOptions"
                 :height="400"
             />
-            <h2 class="offers__title">
-                Offers
+
+            <h2
+                key="offers"
+                class="offers__title"
+            >
+                {{ $route.name === 'Marketplace Asset Offers'
+                    ? 'Offers'
+                    : 'Offer bids'
+                }}
             </h2>
 
             <nav class="back-btn">
@@ -55,9 +62,10 @@
             <div class="offers-route">
                 <transition name="slide">
                     <router-view
+                        :identityId="identityId"
                         :offersMap="offersMap"
-                        :offers="offers"
                         :assetId="assetId"
+                        :asset="asset"
                     />
                 </transition>
             </div>
@@ -99,7 +107,7 @@
             async getOffers() {
                 this.isLoading = true;
                 // await new Promise(r => setTimeout(r, 2500));
-                this.$store.dispatch('loadData', ['assets/offers', offers]);
+                // this.$store.dispatch('loadData', ['assets/offers', offers]);
                 this.isLoading = false;
             }
         },
@@ -125,10 +133,8 @@
                 return [...this.priceHistory].sort();
             },
             offersMap() {
-                return this.$store.getters['assets/offersMap'];
-            },
-            offers() {
-                return this.$store.getters['assets/offers'];
+                return this.$store.getters['assets/offersMap']
+                    .filter(([id, offer]) => offer.asset.id == this.assetId);
             }
         }
     }
