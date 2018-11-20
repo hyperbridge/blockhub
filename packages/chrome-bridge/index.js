@@ -1,4 +1,4 @@
-#!/usr/local / bin / node
+#!/usr/local/bin/node
 
 // Might be good to use an explicit path to node on the shebang line in case
 // it isn't in PATH when launched by Chrome.
@@ -30,14 +30,18 @@ input.on('end', function () {
     clearInterval(timer);
 });
 
-const child = spawn('/Applications/Portal.app/Contents/MacOS/Portal', ['-logfile']);
+const child = spawn('/Applications/Blockhub.app/Contents/MacOS/Blockhub', ['-logfile']);
 
 child.stdout.on('data', (data) => {
     //console.log(`child stdout:\n${data}`);
 
     if (data.indexOf("{\"Command\"") != -1) {
-        var json = JSON.parse(data.toString().slice(data.indexOf("{")));
-        output.write(json)
+        try {
+            var json = JSON.parse(data.toString().slice(data.indexOf("{")));
+            output.write(json)
+        } catch (e) {
+
+        }
     }
 });
 
@@ -45,8 +49,12 @@ child.stderr.on('data', (data) => {
     //console.error(`child stderr:\n${data}`);
 
     if (data.indexOf("{\"Command\"") != -1) {
-        var json = JSON.parse(data.toString().slice(data.indexOf("{")));
-        output.write(json)
+        try {
+            var json = JSON.parse(data.toString().slice(data.indexOf("{")));
+            output.write(json)
+        } catch (e) {
+
+        }
     }
 });
 
