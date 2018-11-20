@@ -30,29 +30,29 @@ This is the monorepo for BlockHub.
 
 ### Clients
 
-[clients/desktop](Desktop Client) - Standard BlockHub experience for desktop users. Wraps the Web Client. Built with Electron.
+[Desktop Client](clients/desktop) - Standard BlockHub experience for desktop users. Wraps the Web Client. Built with Electron.
 
 
 ### SDKs
 
-[sdks/csharp](C#) - Supports basic BlockHub interactions. Built with .NET.
+[C#](sdks/csharp) - Supports basic BlockHub interactions. Built with .NET.
 C++ - Coming soon
 JS - Coming soon
 
 
 ### Services
 
-[services/web](Web) - Web Service provides API for BlockHub protocols. Built with Node + Express + Swagger.
-[services/gateway](Gateway) - Gateway for other API services. Currently sits in front of the Web Service. Built with Express Gateway + Swagger.
-[services/veriff](Veriff) - Webhook for Veriff verification callbacks. Adds people to the Mailchimp mailing list. Built with Express.
+[Web](services/web) - Web Service provides API for BlockHub protocols. Built with Node + Express + Swagger.
+[Gateway](services/gateway) - Gateway for other API services. Currently sits in front of the Web Service. Built with Express Gateway + Swagger.
+[Veriff](services/veriff) - Webhook for Veriff verification callbacks. Adds people to the Mailchimp mailing list. Built with Express.
 
 
 ### Packages
 
-[packages/chrome-extension](Chrome Extension) - Chrome extension for BlockHub.
-[packages/chrome-bridge](Chrome Bridge) - Native messaging proxy for Google Chrome to communicate with BlockHub.
-[packages/web-connector](Web Connector) - One-liner integration for websites. Utilizes the BlockHub JS API to provide a standard UI popups.
-[packages/node-operator](Node Operator) - Connects peers to fuel and facilitate network actions. Built with Node + Express + libp2p + IPFS.
+[Chrome Extension](packages/chrome-extension) - Chrome extension for BlockHub.
+[Chrome Bridge](packages/chrome-bridge) - Native messaging proxy for Google Chrome to communicate with BlockHub.
+[Web Connector](packages/web-connector) - One-liner integration for websites. Utilizes the BlockHub JS API to provide a standard UI popups.
+[Node Operator](packages/node-operator) - Connects peers to fuel and facilitate network actions. Built with Node + Express + libp2p + IPFS.
 
 
 ## License
