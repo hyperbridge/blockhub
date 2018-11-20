@@ -62,9 +62,7 @@
             <div class="offers-route">
                 <transition name="slide">
                     <router-view
-                        :identityId="identityId"
                         :offersMap="offersMap"
-                        :assetId="assetId"
                         :asset="asset"
                         :identity="identity"
                     />
@@ -78,7 +76,6 @@
 
 <script>
     import moment from 'moment';
-    import offers from '@/db/api/offers';
 
     export default {
         props: ['assetId', 'identityId'],
@@ -96,24 +93,12 @@
                     //     xAxes: [{ gridLines: { display: false } }],
                     //     yAxes: [{ gridLines: { display: false } }]
                     // }
-                },
-                isLoading: true
+                }
             }
         },
         components: {
             'c-line-chart': (resolve) => require(['@/ui/components/charts/line'], resolve),
             'c-user': (resolve) => require(['@/ui/components/user/simple'], resolve),
-        },
-        methods: {
-            async getOffers() {
-                this.isLoading = true;
-                // await new Promise(r => setTimeout(r, 2500));
-                // this.$store.dispatch('loadData', ['assets/offers', offers]);
-                this.isLoading = false;
-            }
-        },
-        created() {
-            this.getOffers();
         },
         computed: {
             asset() {

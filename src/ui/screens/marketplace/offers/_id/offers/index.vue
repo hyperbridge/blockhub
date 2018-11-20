@@ -13,13 +13,14 @@
                 </li>
             </ul>
             <ul class="reset-list">
+                <!-- Can be replaced with router[...]() function -->
                 <router-link
                     v-for="[id, offer] in offersMap" :key="id"
                     tag="li"
                     class="offer"
                     :to="{
                         name: 'Marketplace Asset Offer',
-                        params: { assetId, offerId: offer.id }
+                        params: { assetId: asset.id, offerId: offer.id }
                     }"
                 >
                     <span>
@@ -73,16 +74,16 @@
 </template>
 
 <script>
+    import moment from 'moment';
+
     const newOffer = {
         buyout: 0,
         bidDiff: 0,
         marketValue: 42
     }
 
-    import moment from 'moment';
-
     export default {
-        props: ['offersMap', 'assetId', 'identityId', 'asset'],
+        props: ['offersMap', 'asset', 'identity'],
         components: {
             'c-user': (resolve) => require(['@/ui/components/user/simple'], resolve),
             'c-tooltip': (resolve) => require(['@/ui/components/tooltips/universal'], resolve),
@@ -101,8 +102,6 @@
                 if (vals.some(val => !val)) {
                     this.errors.push('No value can be null');
                 } else {
-                    // const { bidDiff, marketValue, buyout } = this.newOffer;
-
                     const id = Math.round(Math.random() * 10000);
 
                     const createdOffer = {
@@ -130,11 +129,6 @@
                     this.newOffer = { ...newOffer };
                 }
             }
-        },
-        computed: {
-            identity() {
-                return this.$store.getters['application/identity'];
-            }
         }
     }
 </script>
@@ -145,11 +139,11 @@
         font-size: 25px;
     }
     .offer {
-        padding: 10px;
+        padding: 15px;
         border-radius: 5px;
-        background: #343555;
-        box-shadow: 2px 0  20px 0 rgba(1,1,1,.15);
-        margin-bottom: 20px;
+        background: #393a5c;
+        box-shadow: 2px 0  25px 0 rgba(1,1,1,.15);
+        margin-bottom: 25px;
         list-style-type: none;
         cursor: pointer;
         display: flex;

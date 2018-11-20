@@ -23,7 +23,7 @@
                                 {{ bid.value }}
                             </span>$
                         </td>
-                        <td>{{ bid.createdAt | customDate('dddd, DD MMMM, HH:MM:SS')}}</td>
+                        <td>{{ bid.createdAt | customDate('dddd, DD MMMM, HH:MM:SS') }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -45,7 +45,7 @@
     import moment from 'moment';
 
     export default {
-        props: ['offers', 'offersMap', 'offerId', 'identity'],
+        props: ['offersMap', 'asset', 'identity', 'offerId'],
         components: {
             'c-user': (resolve) => require(['@/ui/components/user/simple'], resolve),
         },
