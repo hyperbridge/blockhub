@@ -181,6 +181,23 @@ export const initApp = () => {
         callback({ cancel: false })
       }
     })
+    
+    // Test for the electron prompt
+    const prompt = require('electron-prompt');
+
+    prompt({
+      title: 'TEST PROMPT',
+      label: 'TEST INPUT',
+      value: 'TEST',
+      inputAttr: {
+        type: 'text'
+      },
+      type: 'input'
+    }).then(r => {
+      console.log('Input is ', r);
+    }).catch(console.error);
+
+
 
     DB.init()
     Windows.main.init(deeplinkUri, !config.IS_PRODUCTION, argv.tools)
