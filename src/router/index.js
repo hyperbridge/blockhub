@@ -766,7 +766,7 @@ const router = new Router({
                     }
                 },
                 {
-                    path: 'add-release/',
+                    path: 'new-release',
                     name: 'Add New Release',
                     props: true,
                     component: (resolve) => require(['@/ui/screens/business-new-release'], resolve),

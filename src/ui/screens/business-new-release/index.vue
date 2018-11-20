@@ -1,86 +1,95 @@
 <template>
-    <!--<c-business-layout>-->
-        <div class="container-fluid">
-
-            <div class="row">
-                <div class="col-12">
-                    <c-button status="outline-success" size="lg" :shadow="false" icon_hide>
-                        Releases
-                    </c-button>
-                    <c-button status="outline-info" size="lg" class="margin-left-10" :shadow="false" icon_hide>
-                        Tags
-                    </c-button>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row align-items-center">
+                    <div class="col-sm-3 col-lg-2">
+                        <label>Version</label>
+                    </div>
+                    <div class="col-sm-9 col-lg-10">
+                        <input type="text" class="form-control" placeholder="Example: v.0.0.7">
+                    </div>
                 </div>
-                <div class="col-12">
-                    <div class="history-list">
-                        <div class="history-list__item">
-                            <div class="history-list__item-date">
-                        <span>
-                            10 days ago
-                        </span>
-                                <span>
-                            v.0.7.1
-                        </span>
-                            </div>
-                            <div class="history-list__item-info">
-                                <div class="h3">
-                                    v.0.7.1
-                                </div>
-                                <div>
-                                    Josh Doel released this this version 5 days ago
-                                </div>
-                            </div>
+                <div class="form-group row">
+                    <div class="col-sm-3 col-lg-2">
+                        <label>Your text</label>
+                    </div>
+                    <div class="col-sm-9 col-lg-10">
+                        <c-text-editor v-model="text" :editorToolbar="customToolbar" />
+                        <span class="form-text">Attach files by dragging & dropping, selecting them, or pasting from the clipboard.</span>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <div class="col-sm-3 col-lg-2">
+                    </div>
+                    <div class="col-sm-9 col-lg-10">
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input">
+                            <label class="form-check-label">This is pre-release</label>
                         </div>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <div class="col-sm-3 col-lg-2">
+                    </div>
+                    <div class="col-sm-9 col-lg-10">
+                        <c-button status="success" icon_hide>
+                            Publish release
+                        </c-button>
+                        <c-button status="danger" icon_hide class="mx-3">
+                            Save draft
+                        </c-button>
                     </div>
                 </div>
             </div>
         </div>
-    <!--</c-business-layout>-->
+    </div>
 </template>
 
 <script>
+    import { VueEditor } from "vue2-editor";
+
     export default {
         components: {
-            'c-business-layout': (resolve) => require(['@/ui/layouts/business'], resolve)
+            'c-business-layout': (resolve) => require(['@/ui/layouts/business'], resolve),
+            'c-text-editor': VueEditor
         },
         data() {
             return {
                 loadingState: true,
-                breadcrumbLinks: [
-                    { to: { path: '/business' }, title: 'Dashboard' },
-                    { to: { path: '/business/release-history/' }, title: 'Release history' }
+                text: '',
+                customToolbar: [
+                    ["bold", "italic", "underline"],
+                    [{ list: "ordered" }, { list: "bullet" }],
+                    [ "code-block"],
+                    [{ 'size': ['small', false, 'large', 'huge'] }],
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    [{ 'color': [] }, { 'background': [] }],
+                    ['clean']
                 ]
             }
         },
+        created(){
+            console.log('created')
+            $('#summernote').summernote({
+                placeholder: 'Type in your text',
+                tabsize: 2,
+                height: 300,
+                callbacks: {
+                    // onBlur: () => {
+                    //     Vue.set(this.text, 'content', $('#summernote').summernote('code'))
+                    // }
+                }
+            });
+        }
     }
 </script>
 
 <style lang="scss" scoped>
-    .history-list {
-        display: flex;
-        flex-direction: column;
-        margin: 30px 0;
-        border-top: 1px solid #d4d4d4;
-    }
-
-    .history-list__item {
-        display: flex;
-        align-items: stretch;
-        flex-wrap: nowrap;
-    }
-
-    .history-list__item-date {
-        display: flex;
-        flex-direction: column;
-        text-align: right;
-        padding: 20px 20px 20px 0;
-        margin-right: 20px;
-        width: 150px;
-        font-size: 14px;
-        border-right: 2px solid #d4d4d4;
-    }
-
-    .history-list__item-info {
-        padding: 20px 0;
+    .form-group{
+        label{
+            font-size: 14px;
+            text-align: right;
+        }
     }
 </style>

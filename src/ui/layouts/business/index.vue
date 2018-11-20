@@ -141,6 +141,11 @@
                                 href: '/business/release-history',
                                 title: 'History',
                                 icon: 'fas fa-square-full icon-sm'
+                            },
+                            {
+                                href: '/business/new-release',
+                                title: 'New release',
+                                icon: 'fas fa-square-full icon-sm'
                             }
                         ]
                     }
