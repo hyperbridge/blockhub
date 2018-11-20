@@ -42,15 +42,26 @@
                 Offers
             </h2>
 
-            <router-link :to="{ name: 'Marketplace Asset Offers' }">
-                Go back
-            </router-link>
+            <nav class="back-btn">
+                <router-link
+                    v-show="$route.name === 'Marketplace Asset Offer'"
+                    :to="{ name: 'Marketplace Asset Offers' }"
+                >
+                    <c-icon name="arrow-left"/>
+                    Go back
+                </router-link>
+            </nav>
 
-            <router-view
-                :offersMap="offersMap"
-                :offers="offers"
-                :assetId="assetId"
-            />
+            <div class="offers-route">
+                <transition name="slide">
+                    <router-view
+                        :offersMap="offersMap"
+                        :offers="offers"
+                        :assetId="assetId"
+                    />
+                </transition>
+            </div>
+
         </div>
         <p v-else>Asset with id {{ id }} doesn't exist</p>
     </div>
@@ -124,37 +135,47 @@
 </script>
 
 <style lang="scss" scoped>
-    .offers__title {
-        margin-top: 30px;
-        font-size: 25px;
-    }
-    .offer {
-        padding: 10px;
-        border-radius: 5px;
-        background: #343555;
-        box-shadow: 2px 0  20px 0 rgba(1,1,1,.15);
-        margin-bottom: 20px;
-        list-style-type: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .offer__max-bid {
-        font-size: 16px;
-        margin: 0 1px 0 5px;
-    }
-    .offer__bids-count {
-        background: rgba(1, 1, 1, 0.15);
-        border-radius: 4px;
-        padding: 2px 4px;
-        min-width: 24px;
-        height: 24px;
-        text-align: center;
-        .fas {
-            opacity: .15;
-            margin-right: 5px;
+    .back-btn {
+        min-height: 36px;
+        a {
+            font-size: 16px;
+            color: #fff;
+            padding: 8px;
+            display: block;
+            .fas {
+                font-size: 14px;
+                transition: transform .2s ease;
+                margin-right: 3px;
+            }
+            &:hover {
+                .fas {
+                    transform: translateX(-5px);
+                }
+            }
         }
+    }
+
+    .slide {
+        &-enter-active, &-leave-active {
+            transition: transform .5s ease, opacity .5s ease;
+        }
+        &-enter, &-leave-to {
+            opacity: 0;
+        }
+        &-leave-to {
+            transform: translateY(50px);
+        }
+        &-enter {
+            transform: translateX(150px);
+        }
+        &-leave-active {
+            position: absolute;
+            width: 100%;
+        }
+    }
+
+    .offers-route {
+        min-height: 300px;
     }
 
     .asset__wrapper {
