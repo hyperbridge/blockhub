@@ -66,6 +66,7 @@
                         :offersMap="offersMap"
                         :assetId="assetId"
                         :asset="asset"
+                        :identity="identity"
                     />
                 </transition>
             </div>
@@ -135,6 +136,9 @@
             offersMap() {
                 return this.$store.getters['assets/offersMap']
                     .filter(([id, offer]) => offer.asset.id == this.assetId);
+            },
+            identity() {
+                return this.$store.getters['application/identity'];
             }
         }
     }

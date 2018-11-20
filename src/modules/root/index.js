@@ -52,9 +52,8 @@ const rootStore = {
         },
         loadData(rootState, [targets, data]) {
             const [module, target] = targets.split('/');
-            console.log(data)
             rootState[module][target] = {
-                ...[module][target],
+                ...rootState[module][target],
                 ...normalize(data)
             }
         },

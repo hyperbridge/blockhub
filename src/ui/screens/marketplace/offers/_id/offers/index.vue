@@ -117,7 +117,6 @@
 
                     this.$store.dispatch('loadData', ['assets/offers', [createdOffer]]);
 
-
                     // this.$store.dispatch('create',
                     //     ['assets/offers', {
                     //         seller: this.identityId,

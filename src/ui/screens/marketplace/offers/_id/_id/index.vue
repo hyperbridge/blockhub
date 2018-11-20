@@ -1,7 +1,10 @@
 <template>
     <div>
         <p v-if="!offer">
-            Offer with id {{ offerId }} doesn't exist
+            Offer with id {{ offerId }} doesn't exist.
+        </p>
+        <p v-else-if="!offer.bids.length">
+            This offer doesn't contain any bids yet.
         </p>
         <div v-else>
             <table class="bids-table">
@@ -20,25 +23,58 @@
                                 {{ bid.value }}
                             </span>$
                         </td>
-                        <td>{{ bid.createdAt }}</td>
+                        <td>{{ bid.createdAt | customDate('dddd, DD MMMM, HH:MM:SS')}}</td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="create-bid">
+            <h3>Create new bid</h3>
+            <label>
+                Bid value
+                <c-input v-model="value"/>
+            </label>
+            <c-button size="md" @click="createBid()">
+                Create bid
+            </c-button>
         </div>
     </div>
 </template>
 
 <script>
+    import moment from 'moment';
+
     export default {
-        props: ['offers', 'offersMap', 'offerId'],
+        props: ['offers', 'offersMap', 'offerId', 'identity'],
         components: {
             'c-user': (resolve) => require(['@/ui/components/user/simple'], resolve),
+        },
+        data: () => ({
+            value: 0
+        }),
+        methods: {
+            createBid() {
+                this.$store.dispatch('createRelation',
+                    ['assets/offers/bids', this.offerId, {
+                        value: this.value,
+                        user: this.identity,
+                        createdAt: moment()
+                    }]
+                );
+                this.value = 0;
+            },
         },
         computed: {
             offer() {
                 return this.$store.getters['assets/offers'][this.offerId];
             }
-        }
+        },
+        created() {
+            if (this.offer && this.offer.bids.length) {
+                const highestVal = this.offer.bids[this.offer.bids.length - 1].value;
+                this.value = highestVal + 4;
+            }
+        },
     }
 </script>
 
@@ -63,6 +99,19 @@
     }
     .bid-price {
         font-size: 16px;
+    }
+
+    .create-bid {
+        margin-top: 80px;
+        padding: 15px;
+        border-radius: 5px;
+        background: rgba(255,255,255,.05);
+        label {
+            margin: 0;
+            .c-input {
+                margin-left: 5px;
+            }
+        }
     }
 </style>
 
