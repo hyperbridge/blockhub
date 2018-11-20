@@ -1,5 +1,5 @@
 <template>
-    <c-business-layout title="Crowdfund Creation">
+    <!--<c-business-layout title="Crowdfund Creation">-->
         <div>
             <div class="container-fluid">
                 <div class="row">
@@ -189,7 +189,7 @@
                 </div>
             </div>
         </div>
-    </c-business-layout>
+    <!--</c-business-layout>-->
 </template>
 
 <script>

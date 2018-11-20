@@ -1,5 +1,5 @@
 <template>
-    <c-business-layout>
+    <!--<c-business-layout>-->
         <div class="container-fluid">
 
             <div class="row">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-    </c-business-layout>
+    <!--</c-business-layout>-->
 </template>
 
 <script>

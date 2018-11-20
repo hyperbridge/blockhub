@@ -31,7 +31,7 @@
                     <div class="page-heading__container">
                         <div>
                             <h3 class="page-heading__title p-0 m-0">
-                                {{ title }} {{ breadcrumbLinks }}
+                                {{ page_title }}
                             </h3>
                         </div>
                         <div>
@@ -40,9 +40,12 @@
                     </div>
 
                     <nav aria-label="breadcrumb" role="navigation">
-                        <ul class="breadcrumb" v-if="breadcrumbLinks.length">
-                            <li v-for="(link, index) in breadcrumbLinks" class="breadcrumb-item" :class="{ 'active': index == breadcrumbLinks.length-1 }" :key="index">
-                                <router-link :to="link.to ? link.to : link.title">{{ link.title }}</router-link>
+                        <ul class="breadcrumb" v-if="breadcrumbLinksData.length">
+                            <li v-for="(link, index) in breadcrumbLinksData" class="breadcrumb-item" :class="{ 'active': index == breadcrumbLinksData.length-1 }" :key="index">
+                                <router-link :to="link.to" v-if="link.to">{{ link.title }}</router-link>
+                                <template v-else>
+                                    {{ link.title }}
+                                </template>
                             </li>
                         </ul>
                     </nav>
@@ -80,10 +83,6 @@
                 type: Boolean,
                 default: false
             },
-            breadcrumbLinks: {
-                type: Array,
-                default: () => ([])
-            },
             title: String
         },
         components: {
@@ -95,7 +94,8 @@
                 loadingState: true,
                 darkMode: false,
                 minimized: false,
-                breadcrumbLinksData: this.breadcrumbLinks,
+                breadcrumbLinksData: [],
+                page_title: '',
                 menu: [
                     {
                         title: 'Marketplace',
@@ -119,58 +119,16 @@
                             },
                             {
                                 title: 'Crowdfunds',
-                                // icon: 'fas fa-square-full icon-sm',
                                 child: [
                                     {
                                         href: '/business/project/new',
-                                        title: 'Crowdfunds',
+                                        title: 'New Crowdfunds',
                                         icon: 'fas fa-square-full icon-sm'
                                     },
-                                    {
-                                        href: '/business/project/new',
-                                        title: 'New Crowdfund',
-                                        icon: 'fas fa-square-full icon-sm'
-                                    }
                                 ]
                             }
                         ]
                     },
-                    // {
-                    //     header: true,
-                    //     title: 'Funding',
-                    // },
-                    // {
-                    //     title: 'Funding',
-                    //     icon: 'fas fa-file-alt',
-                    //     child: [
-                    //         {
-                    //             href: '/business/project/new',
-                    //             title: 'New Crowdfund',
-                    //             icon: 'fas fa-square-full icon-sm'
-                    //         }
-                    //     ]
-                    // }
-                    //             href: '/business/product/new',
-                    //             title: 'New Product',
-                    //             icon: 'fas fa-square-full icon-sm'
-                    //         }
-                    //     ]
-                    // },
-                    // {
-                    //     header: true,
-                    //     title: 'Funding',
-                    // },
-                    // {
-                    //     title: 'Funding',
-                    //     icon: 'fas fa-file-alt',
-                    //     child: [
-                    //         {
-                    //             href: '/business/project/new',
-                    //             title: 'New Crowdfund',
-                    //             icon: 'fas fa-square-full icon-sm'
-                    //         }
-                    //     ]
-                    // },
                     {
                         header: true,
                         title: 'Setting',
@@ -196,20 +154,9 @@
         },
         methods:{
             updateBreadcrumbLinks() {
-                if (this.breadcrumbLinksData.length === 0) {
-                    if (this.$route.meta.breadcrumb) {
-                        this.breadcrumbLinksData = this.$route.meta.breadcrumb
-                    } else if (this.$route.meta.breadcrumb === false) {
-                        this.breadcrumbLinksData = []
-                    } else {
-                        if (this.$route.name !== 'Dashboard') {
-                            this.breadcrumbLinksData = [
-                                { to: { path: '/business' }, title: 'Dashboard' },
-                                { to: { path: this.$route.path }, title: this.$route.name }
-                            ]
-                        }
-                    }
-                }
+                console.log('updateBreadcrumbLinks')
+                console.log(this.$route.meta.breadcrumb)
+                this.breadcrumbLinksData = this.$route.meta.breadcrumb
             },
         },
         mounted() {
@@ -229,8 +176,9 @@
             console.log('layout all most destroyed')
         },
         watch:{
-            '$route'() {
-                this.updateBreadcrumbLinks()
+            '$route'(to, from) {
+                this.updateBreadcrumbLinks();
+                this.page_title = to.meta.title || 'Dashboard';
             },
         }
     }
@@ -363,6 +311,7 @@
         display: flex;
         width: 100%;
         flex-direction: column;
+        padding-top: 5px;
     }
     .page-heading__container{
         align-items: center;
@@ -386,7 +335,7 @@
         background: #fff;
         color: #c3c3d6;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        box-shadow: 0 0 15px rgba(0, 0, 0, .4);
+        box-shadow: 0 0 10px rgba(0, 0, 0, .4), 0 0 10px rgba(0, 0, 0, .4);
         .logo-holder{
             height: 50px;
             width: auto;

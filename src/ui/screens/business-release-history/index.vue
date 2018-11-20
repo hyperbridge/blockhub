@@ -1,5 +1,5 @@
 <template>
-    <c-business-layout title="Release history">
+    <!--<c-business-layout title="Release history">-->
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -17,9 +17,9 @@
                 </div>
                 <div class="col-12">
                     <div class="history-list" v-if="listType == 'list'">
-                        <div class="history-list__list-item" v-for="i in 10">
+                        <div class="history-list__list-item" v-for="release in releases_list">
                             <div class="history-list__item-info">
-                                <div class="latest-badge">
+                                <div class="latest-badge" v-if="release.latest_release">
                                     Latest Release
                                 </div>
                                 <span>
@@ -31,127 +31,34 @@
                             </div>
                             <div class="history-list__item-description">
                                 <div class="h1">
-                                    v.0.7.1
+                                    v.{{ release.version }}
                                 </div>
                                 <div>
-                                    Josh Doel released this this version 5 days ago
+                                    {{ release.author }} released this this version 5 days ago
                                 </div>
-                                <div class="release-text padding-top-15">
-                                    In this update:
-                                    <ul>
-                                        <li>
-                                            Token purchase flow
-                                        </li>
-                                        <li>
-                                            Copy to address works
-                                        </li>
-                                        <li>
-                                            Account recovery
-                                        </li>
-                                        <li>
-                                            Simplify sign up
-                                        </li>
-                                        <li>
-                                            Hold ALT and click to give feedback!
-                                        </li>
-                                    </ul>
+                                <div class="release-text padding-top-15" v-html="release.text">
                                 </div>
-                                <div class="assets-list__wrapper">
+                                <div class="assets-list__wrapper" v-if="release.files">
                                     <div class="assets-list__button" @click="showList = !showList">
                                         <div class="icon">
                                             <i class="fas" :class="[ showList ? 'fa-angle-up' : 'fa-angle-down']"></i>
                                         </div>
                                         <div class="text">
-                                            Assets (16)
+                                            Assets ({{ release.files.length }})
                                         </div>
                                     </div>
                                     <div class="assets-list" v-if="showList">
-                                        <div class="assets-list__item">
+                                        <div class="assets-list__item" @click="" v-for="file in release.files">
                                             <div class="icon">
-                                                <i class="fas fa-download"></i>
+                                                <i class="fas fa-file-download"></i>
                                             </div>
                                             <div class="title">
-                                                Some latest release v.0.7.1
+                                                <a :href="file.src" target="_blank">
+                                                    {{ file.name }}
+                                                </a>
                                             </div>
                                             <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
+                                                {{ file.size | numeralFormat('0.00b') }}
                                             </div>
                                         </div>
                                     </div>
@@ -160,9 +67,9 @@
                         </div>
                     </div>
                     <div class="history-list" v-if="listType == 'tags'">
-                        <div class="history-list__tag-item" v-for="i in 10">
+                        <div class="history-list__tag-item" v-for="release in releases_list">
                             <div class="h3">
-                                v.0.7.1
+                                v.{{ release.version }}
                             </div>
                             <div class="sub-info">
                                 <div>
@@ -186,7 +93,7 @@
                 </div>
             </div>
         </div>
-    </c-business-layout>
+    <!--</c-business-layout>-->
 </template>
 
 <script>
@@ -198,7 +105,33 @@
         data() {
             return {
                 showList: false,
-                listType: 'list'
+                listType: 'list',
+                releases_list:[
+                    {
+                        date: '',
+                        latest_release: false,
+                        version: '0.7.1',
+                        author: 'Josh Doel',
+                        text: 'In this update:<ul><li>Token purchase flow\n</li><li>Copy to address works</li><li>Account recovery</li><li>Simplify sign up</li><li>Hold ALT and click to give feedback!</li></ul>',
+                        files: [
+                            {
+                                name: 'BlockHub-0.7.1-mac.zip',
+                                src: '#',
+                                size: 234214324
+                            },
+                            {
+                                name: 'BlockHub-0.7.1-Win86.zip',
+                                src: '#',
+                                size: 2342324324
+                            },
+                            {
+                                name: 'BlockHub-0.7.1-Linux.zip',
+                                src: '#',
+                                size: 942324324
+                            }
+                        ]
+                    }
+                ]
             }
         },
         computed:{
@@ -213,9 +146,9 @@
             ifTags(){
                 switch (this.listType) {
                     case "tags":
-                        return 'info'
+                        return 'success'
                     default:
-                        return 'outline-info'
+                        return 'outline-success'
                 }
             }
         }
@@ -329,15 +262,17 @@
         padding: 5px 0;
         font-weight: 500;
         margin-top: 5px;
-        color: #237cc1;
         font-size: 15px;
         .icon{
-            font-size: 16px;
-            margin-right: 8px;
+            font-size: 15px;
+            margin-right: 5px;
         }
         .size{
             margin-left: auto;
             font-weight: normal;
+        }
+        a{
+            color: #237cc1;
         }
     }
 </style>

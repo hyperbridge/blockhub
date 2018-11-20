@@ -1,5 +1,5 @@
 <template>
-    <c-business-layout title="Product Creation">
+    <!--<c-business-layout title="Product Creation">-->
         <div>
 
             <div class="container-fluid">
@@ -168,7 +168,7 @@
                 </div>
             </div>
         </div>
-    </c-business-layout>
+    <!--</c-business-layout>-->
 </template>
 
 <script>
