@@ -797,8 +797,8 @@ const router = new Router({
                     ]
                 },
                 {
-                    path: 'offers',
-                    name: 'Marketplace Offers',
+                    path: 'assets',
+                    name: 'Marketplace Assets',
                     component: (resolve) => require(['@/ui/screens/marketplace/offers'], resolve),
                     children: [
                         // {

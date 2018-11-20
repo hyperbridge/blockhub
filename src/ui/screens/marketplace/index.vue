@@ -70,7 +70,7 @@
                     'Marketplace Trade Manager',
                     'Marketplace Prospectors',
                     'Marketplace Search',
-                    'Marketplace Offers',
+                    'Marketplace Assets',
                 ]
             }
         },
