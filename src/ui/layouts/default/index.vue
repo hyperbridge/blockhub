@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="page-shortcuts invert">
+            <div class="page-shortcuts invert" v-if="initialized">
                 <c-shortcut-sidebar :items="shortcuts" />
             </div>
 

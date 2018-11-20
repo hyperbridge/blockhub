@@ -1,27 +1,7 @@
 <template>
-    <c-business-layout>
+    <c-business-layout title="Crowdfund Creation">
         <div>
-            <!-- PAGE HEADING -->
-            <div class="page-heading">
-                <div class="page-heading__container" style="float: none">
-                    <h1 class="title" style="float: left'" hidden>Product Creation</h1>
-                    <div class="float-right mb-3" v-if="project.id">
-                        <a :href="`#/project/${project.id}`" class="btn btn-primary">PREVIEW</a>
-                    </div>
-                </div>
-
-                <nav aria-label="breadcrumb" role="navigation">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#/business">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="#/business/projects">Crowdfunds</a></li>
-                        <li class="breadcrumb-item active">{{ project.id ? 'Edit' : 'New' }} Crowdfund</li>
-                    </ol>
-                </nav>
-            </div>
-            <!-- //END PAGE HEADING -->
-
             <div class="container-fluid">
-
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">

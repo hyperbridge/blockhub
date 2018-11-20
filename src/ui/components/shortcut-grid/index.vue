@@ -251,15 +251,14 @@ export default {
     display: block;
     position: relative;
     width: 60px;
-    overflow-x: visible;
-    overflow-y: auto;
-    padding-right: 800px; margin-right: -800px;
+    // overflow-x: visible;
+    // overflow-y: auto;
+    /* padding-right: 800px; margin-right: -800px; pointer-events: none; Pretty hacky way around the overflow bug */
 
     &::-webkit-scrollbar-thumb {
         background: rgba(255, 255, 255, 0) !important;
         border: 0 none !important;
     }
-
 }
 .c-grid_add-button {
     border: 1px dashed rgba(0, 0, 0, 1);
