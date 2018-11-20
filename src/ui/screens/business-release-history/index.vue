@@ -3,15 +3,15 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <c-button status="outline-success" size="lg" :shadow="false" icon_hide>
+                    <c-button status="outline-success" size="lg" @click="listType = 'list'" :shadow="false" icon_hide>
                         Releases
                     </c-button>
-                    <c-button status="outline-info" size="lg" class="margin-left-10" :shadow="false" icon_hide>
+                    <c-button :status="outline-info" size="lg" @click="listType = 'tags'" class="margin-left-10" :shadow="false" icon_hide>
                         Tags
                     </c-button>
                 </div>
                 <div class="col-12">
-                    <div class="history-list">
+                    <div class="history-list as-list" v-if="listType == 'list'">
                         <div class="history-list__item">
                             <div class="history-list__item-info">
                                 <div class="latest-badge">
@@ -859,6 +859,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="history-list as-tags" v-if="listType == 'tags'">
+                        <div class="history-list__item">
+                            <div class="h2">
+                                v.0.7.1
+                            </div>
+                            <div class="sub-info">
+                                <div>
+                                    <i class="far fa-clock"></i> 10 days ago
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -873,6 +885,7 @@
         data() {
             return {
                 showList: false,
+                listType: 'list'
             }
         },
     }
