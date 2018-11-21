@@ -11,7 +11,7 @@
                 :src="items[active_item]"
                 @click="show_modal = true"
             />
-            <video v-else-if="play_video" controls autoplay>
+            <video v-else-if="play_video" controls autoplay muted>
                 <source :src="video_url" type="video/mp4">
             </video>
             <div v-show="run_slideshow" class="screen-gallery__progress-bar"></div>
@@ -112,7 +112,7 @@ export default {
             if (!parent) {
                 return
             }
-            
+
             const parentRect = parent.getBoundingClientRect();
 
             const parentViewableArea = {
