@@ -43,6 +43,7 @@
     "vue-router": "^3.0.1",
     "vue-sidebar-menu": "^2.1.0",
     "vue-snotify": "^3.2.1",
+    "vue-upload-component": "^2.8.15",
     "vue2-editor": "^2.6.6",
     "vuejs-datepicker": "^1.5.3"
   },
