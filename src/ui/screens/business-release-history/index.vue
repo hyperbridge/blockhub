@@ -11,7 +11,7 @@
                             Tags
                         </c-button>
                     </c-buttons-group>
-                    <c-button status="success" icon="plus" class="float-right" size="md">
+                    <c-button status="success" icon="plus" class="float-right" size="md" @click="$router.push({ path: '/business/new-release' })">
                         Draft a new release
                     </c-button>
                 </div>
@@ -23,7 +23,7 @@
                                     Latest Release
                                 </div>
                                 <span>
-                                    10 days ago
+                                    {{ release.date | timeAgo }}
                                 </span>
                                         <span>
                                     <i class="fas fa-tag mr-2"></i> v.0.7.1
@@ -34,7 +34,7 @@
                                     v.{{ release.version }}
                                 </div>
                                 <div>
-                                    {{ release.author }} released this this version 5 days ago
+                                    {{ release.author }} released this this version {{ release.date | timeAgo }}
                                 </div>
                                 <div class="release-text padding-top-15" v-html="release.text">
                                 </div>
@@ -108,7 +108,7 @@
                 listType: 'list',
                 releases_list:[
                     {
-                        date: '',
+                        date: '2005-08-09T18:31:42+03:30',
                         latest_release: false,
                         version: '0.7.1',
                         author: 'Josh Doel',
@@ -159,7 +159,7 @@
     .history-list {
         display: flex;
         flex-direction: column;
-        margin: 20px 0;
+        margin: 20px 0 0;
         background: #fff;
         border: 1px solid #d4d4d4;
     }
