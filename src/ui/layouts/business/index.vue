@@ -51,7 +51,9 @@
                     </nav>
                 </div>
                 <!-- //END PAGE HEADING -->
-                <slot />
+                <div class="content__wrapper">
+                    <slot />
+                </div>
             </div>
         </transition>
         <!---->
@@ -151,6 +153,10 @@
                     }
                 ]
             }
+        },
+        created(){
+            this.updateBreadcrumbLinks();
+            this.page_title = this.$route.meta.title || 'Dashboard';
         },
         computed: {
             current_identity() {
@@ -388,7 +394,7 @@
         border-right: 1px solid rgba(0, 0, 0, 0.1);
         transition: all 200ms ease-in-out;
         position: relative;
-        z-index: 10;
+        /*z-index: 10;*/
         &.left-sidebar{
             padding: 60px 0 0 250px;
         }
@@ -447,5 +453,11 @@
     }
     .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
         opacity: 0;
+    }
+    .content__wrapper{
+        margin: 15px;
+        background: #fff;
+        padding: 15px 0;
+        border: 1px solid #ebebeb;
     }
 </style>
