@@ -1,12 +1,11 @@
 const {
-    name,
     version,
     description
 } = require('../../package.json')
 
-export default (req, res) => {
+export default (_, res) => {
     res.json({
-        name,
+        name: 'sss',
         description,
         version,
         uptime: process.uptime()

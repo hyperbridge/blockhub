@@ -5,29 +5,50 @@
     "license": "SEE LICENSE IN LICENSE.md",
     "version": "0.1.0",
     "scripts": {
-        "build": "rm -rf build && cp -R src/ build && ./node_modules/.bin/babel src --out-dir build",
-        "start": "npm run build && ./node_modules/.bin/nodemon --exec node ./build/index.js",
+        "watch": "tsc --listEmittedFiles -w",
+        "build": "tsc --listEmittedFiles",
+        "format": "./node_modules/.bin/tsfmt -r",
+        "start": "npm run format && npm run build && ./node_modules/.bin/nodemon --exec node ./build/index.js",
         "test-api-call": "curl http://localhost:3000/api/v1/ping"
+    },
+    "semistandard": {
+        "globals": [
+            "after",
+            "afterEach",
+            "before",
+            "beforeEach",
+            "describe",
+            "it"
+        ]
     },
     "dependencies": {
         "express": "^4.16.4",
+        "knex": "^0.15.2",
+        "mysql": "^2.16.0",
+        "objection": "^1.4.0",
+        "swagger-express-validator": "^0.1.1",
         "swagger-parser": "^6.0.2",
         "swagger-routes-express": "^2.0.0"
     },
     "devDependencies": {
-        "@babel/cli": "^7.1.5",
-        "@babel/core": "^7.1.5",
-        "@babel/plugin-proposal-export-default-from": "^7.0.0",
-        "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
-        "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
-        "@babel/plugin-proposal-optional-chaining": "^7.0.0",
-        "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
-        "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-        "@babel/plugin-transform-async-to-generator": "^7.1.0",
-        "@babel/polyfill": "^7.0.0",
-        "@babel/preset-env": "^7.1.5",
-        "@babel/preset-stage-1": "^7.0.0",
-        "@babel/register": "^7.0.0",
-        "nodemon": "^1.18.6"
+        "nodemon": "^1.18.6",
+        "typescript": "^3.1.6",
+        "typescript-formatter": "^7.2.2"
+    },
+    "babel": {
+        "presets": [
+            "es2015"
+        ],
+        "env": {
+            "development": {
+                "presets": []
+            },
+            "production": {
+                "presets": []
+            },
+            "test": {
+                "presets": []
+            }
+        }
     }
 }
