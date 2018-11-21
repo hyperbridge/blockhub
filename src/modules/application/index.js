@@ -296,6 +296,10 @@ export const mutations = {
         DB.application.config.update(state)
         DB.save()
     },
+    showNotification(state, notification) {
+        state.active_notification = notification
+        state.active_modal = 'notification'
+    },
     updateFavorites2({ account }, { prop = 'product_wishlist', id }) {
         const foundKey = account[prop].findIndex(savedId => savedId === id);
         foundKey

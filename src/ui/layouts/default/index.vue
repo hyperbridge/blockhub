@@ -40,6 +40,8 @@
                 </div>
             </div>
 
+
+
             <div class="page-shortcuts invert" v-if="initialized && showShortcuts">
                 <c-shortcut-sidebar :items="shortcuts" />
             </div>
@@ -211,20 +213,19 @@
                 </p>
             </c-basic-popup>
 
-            <c-popup :activated="notifPopup.show_popup"
-                     :title="notifPopup.title"
-                     :type="notifPopup.type"
-                     :sub_title="notifPopup.text"
-                     @close="closeNotifPopup"
-                     v-if="notifPopup"
-                     ref="notifpopup">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ligula elit. Praesent sit amet tellus
-                    malesuada, condimentum sem ut, laoreet ex. Maecenas elementum, velit eu porta lobortis, est nunc
-                    vehicula neque, id sodales urna purus eget purus. Nam vel orci turpis. Duis vestibulum ac nibh vel
-                    vehicula.
+            <c-basic-popup
+                :activated="$store.state.application.active_modal === 'notification'"
+                @close="$store.state.application.active_modal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">{{ active_notification.title }}</div>
+                <template slot="body">
+                    <p>{{ active_notification.text }}</p>
+                </template>
+                <p slot="footer">
                 </p>
-            </c-popup>
+            </c-basic-popup>
+
 
             <c-cookie-policy v-if="!desktop_mode" />
 
@@ -294,6 +295,7 @@
             'c-header': (resolve) => require(['@/ui/components/headers/basic'], resolve),
             'c-slim-header': (resolve) => require(['@/ui/components/headers/slim'], resolve),
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
+            'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
             'c-wallet-navigation': (resolve) => require(['@/ui/components/navigation/wallet'], resolve),
             'c-account-navigation': (resolve) => require(['@/ui/components/navigation/account'], resolve),
             'c-settings-navigation': (resolve) => require(['@/ui/components/navigation/settings'], resolve),
@@ -333,7 +335,6 @@
                     spaceBetween: 0,
                     loop: false,
                 },
-                notifPopup: {},
                 scrollMoreDirection: null,
                 slimMode: false,
                 mobileMode: false,
@@ -462,6 +463,9 @@
             current_identity() {
                 return this.$store.state.application.account && this.$store.state.application.account.current_identity
             },
+            active_notification() {
+                return this.$store.state.application.active_notification
+            },
             dynamicLinks() {
                 const [empty, ...links] = this.$route.path.split('/');
                 // const names = links.filter()
@@ -526,13 +530,6 @@
             },
             closePopup() {
                 this.$store.state.application.active_modal = null
-            },
-            closeNotifPopup() {
-                this.notifPopup = {};
-            },
-            showNotifPopup(ntf) {
-                this.notifPopup = ntf;
-                this.notifPopup.show_popup = true;
             },
             scrollSidebarDown() {
                 $('#scroll_sidebar').animate({scrollTop: '+=100', duration: '150'});
