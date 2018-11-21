@@ -209,11 +209,11 @@
                 this.errors = [];
             },
             getPrice: (asset, target) => asset && Math.round(asset.price[target] * 2),
-            // async getProspectors() {
-            //     this.isLoading = true;
-            //     await new Promise(r => setTimeout(r, 2000));
-            //     this.isLoading = false;
-            // }
+            async getProspectors() {
+                this.isLoading = true;
+                await new Promise(r => setTimeout(r, 1000));
+                this.isLoading = false;
+            }
         },
         computed: {
             snipers() {
@@ -233,12 +233,12 @@
                 return this.$store.getters['application/identity'];
             }
         },
-        // watch: {
-        //     identityId: {
-        //         handler: 'getProspectors',
-        //         immediate: true
-        //     }
-        // }
+        watch: {
+            identityId: {
+                handler: 'getProspectors',
+                immediate: true
+            }
+        }
     }
 </script>
 

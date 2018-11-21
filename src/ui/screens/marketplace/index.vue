@@ -53,6 +53,7 @@
 <script>
     import offers from '@/db/api/offers';
     import prospectors from '@/db/api/prospectors';
+    import transactions from '@/db/api/asset-transactions';
 
     export default {
         components: {
@@ -80,10 +81,8 @@
         },
         mounted() {
             this.$store.dispatch('loadData', ['assets/offers', offers]);
-            this.$store.dispatch('loadData', [
-                'assets/prospectors',
-                prospectors.filter(prosp => prosp.user.id == this.identity.id)
-            ]);
+            this.$store.dispatch('loadData', ['assets/prospectors', prospectors]);
+            this.$store.dispatch('loadData', ['assets/transactions', transactions]);
         },
         computed: {
             identity() {
