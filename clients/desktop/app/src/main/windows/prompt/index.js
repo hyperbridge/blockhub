@@ -8,11 +8,10 @@ const path = require('path');
 function electronPrompt(options, parentWindow) {
 	return new Promise((resolve, reject) => {
 		const id = `${new Date().getTime()}-${Math.random()}`;
-
 		const opts = Object.assign(
 			{
 				width: 370,
-				height: 130,
+				height: 1300,
 				resizable: false,
 				title: 'Prompt',
 				label: 'Please input a value:',
@@ -87,7 +86,7 @@ function electronPrompt(options, parentWindow) {
 		const promptUrl = url.format({
 			protocol: 'file',
 			slashes: true,
-			pathname: path.join(__dirname, 'page', 'prompt.html'),
+			pathname: path.join(__dirname, 'index.html'),
 			hash: id
 		});
 
@@ -95,4 +94,4 @@ function electronPrompt(options, parentWindow) {
 	});
 }
 
-module.exports = electronPrompt;
+export default electronPrompt;

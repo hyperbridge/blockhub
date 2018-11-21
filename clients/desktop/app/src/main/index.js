@@ -183,8 +183,6 @@ export const initApp = () => {
     })
     
     // Test for the electron prompt
-   
-
     electronPrompt({
       title: 'TEST PROMPT',
       label: 'TEST INPUT',
@@ -193,7 +191,7 @@ export const initApp = () => {
         type: 'text'
       },
       type: 'input'
-    }).then(r => {
+    }, Windows.main).then(r => {
       console.log('Input is ', r);
     }).catch(console.error);
 
