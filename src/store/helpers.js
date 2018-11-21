@@ -32,21 +32,35 @@ export const mapEl = ({ name, module, target, id, idSource, action, getter = tru
     const path = `${module}/${target}`;
     const propertyName = name || path;
 
-    return {
-        [propertyName]: {
-            set(data) {
-                const id = id || this[idSource] || this.id;
-                this.$store[action ? 'dispatch' : 'commit']([path, id, data]);
-            },
-            get() {
-                const id = id || this[idSource] || this.id;
-                return getter
-                    ? this.$store.getters[path][id]
-                    : this.$store.state[module][target][id];
+    if (!singular) {
+        return {
+            [propertyName]: {
+                set(data) {
+                    const id = id || this[idSource] || this.id;
+                    this.$store[action ? 'dispatch' : 'commit']('update', [path, id, data]);
+                },
+                get() {
+                    const id = id || this[idSource] || this.id;
+                    return getter
+                        ? this.$store.getters[path][id]
+                        : this.$store.state[module][target][id];
+                }
             }
         }
     }
 
+    return {
+        [propertyName]: {
+            set(data) {
+                this.$store[action ? 'dispatch' : 'commit']('updateSingular', [path, data]);
+            },
+            get() {
+                return getter
+                    ? this.$store.getters[path]
+                    : this.$store.state[module][target]
+            }
+        }
+    }
 }
 
 /* ...mapEl({
