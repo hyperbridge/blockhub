@@ -30,6 +30,13 @@
         </div>
         <div class="create-bid">
             <h3>Create new bid</h3>
+            <ul v-if="errors.length">
+                <li
+                    v-for="(error, index) in errors"
+                    :key="index"
+                    v-text="error"
+                />
+            </ul>
             <label>
                 Bid value
                 <c-input v-model="value"/>
@@ -50,10 +57,17 @@
             'c-user': (resolve) => require(['@/ui/components/user/simple'], resolve),
         },
         data: () => ({
-            value: 0
+            value: 0,
+            errors: []
         }),
         methods: {
-            createBid() {
+            async createBid() {
+                this.errors = [];
+
+                if (this.value < this.minValue) {
+                    this.errors.push(`Minimum bid value for this offer is ${this.minValue}`);
+                }
+
                 this.$store.dispatch('createRelation',
                     ['assets/offers/bids', this.offerId, {
                         value: this.value,
@@ -61,20 +75,27 @@
                         createdAt: moment()
                     }]
                 );
-                this.value = 0;
+
+                await this.$nextTick();
+                this.value = this.minValue;
             },
         },
         computed: {
             offer() {
                 return this.$store.getters['assets/offers'][this.offerId];
+            },
+            minValue() {
+                const { offer } = this;
+
+                if (!offer && !offer.bids.length) return 0;
+
+                const highestVal = offer.bids[offer.bids.length - 1].value;
+                return Math.round((highestVal + highestVal * 0.05) * 100) / 100;
             }
         },
-        created() {
-            if (this.offer && this.offer.bids.length) {
-                const highestVal = this.offer.bids[this.offer.bids.length - 1].value;
-                this.value = highestVal + 4;
-            }
-        },
+        mounted() {
+            this.value = this.minValue;
+        }
     }
 </script>
 
