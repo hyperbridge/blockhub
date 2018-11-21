@@ -24,7 +24,6 @@
         "commander": "^2.19.0",
         "crypto": "^1.0.1",
         "debounce": "^1.2.0",
-        "electron-prompt": "^1.2.0",
         "electron-updater": "^3.2.3",
         "express": "^4.16.4",
         "hyperbridge-funding-protocol": "^1.0.13",

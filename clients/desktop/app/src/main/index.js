@@ -8,7 +8,7 @@ import * as PeerService from '../framework/peer-service'
 import * as Wallet from '../framework/wallet'
 import * as Windows from './windows'
 import * as Updater from './updater'
-
+import electronPrompt from './windows/prompt/index.js'
 
 const config = require('../config')
 
@@ -183,9 +183,9 @@ export const initApp = () => {
     })
     
     // Test for the electron prompt
-    const prompt = require('electron-prompt');
+   
 
-    prompt({
+    electronPrompt({
       title: 'TEST PROMPT',
       label: 'TEST INPUT',
       value: 'TEST',
