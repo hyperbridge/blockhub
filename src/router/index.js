@@ -778,6 +778,19 @@ const router = new Router({
                         ]
                     }
                 },
+                {
+                    path: 'release-page',
+                    name: 'Release page',
+                    props: true,
+                    component: (resolve) => require(['@/ui/screens/business-release-page'], resolve),
+                    meta:{
+                        title: 'Release Page',
+                        breadcrumb: [
+                            { to: '/release-page', title: 'Dashboard' },
+                            { title: 'Release page' }
+                        ]
+                    }
+                },
             ]
         },
         {
