@@ -40,7 +40,9 @@
                 </div>
             </div>
 
-            <div class="page-shortcuts invert" v-if="initialized">
+
+
+            <div class="page-shortcuts invert" v-if="initialized && showShortcuts">
                 <c-shortcut-sidebar :items="shortcuts" />
             </div>
 
@@ -83,13 +85,17 @@
                 {{ connection_status.message }}
             </div>
 
+
             <c-welcome-popup :activated="welcome_modal_active" @close="closePopup" ref="welcome_modal_active"></c-welcome-popup>
             <c-download-popup :activated="download_modal_active" @close="closePopup" ref="download_modal_active"></c-download-popup>
             <c-unlock-popup :activated="unlock_modal_active" @close="closePopup" ref="unlock_modal_active"></c-unlock-popup>
             <c-send-funds-popup :activated="send_funds_modal_active" @close="closePopup" ref="send_funds_modal_active"></c-send-funds-popup>
-            <c-login-popup :activated="login_modal_active" @close="closePopup" ref="login_modal_active"></c-login-popup>
             <c-purchase-popup :activated="purchase_modal_active" @close="closePopup" ref="purchase_modal_active"></c-purchase-popup>
             <c-claim-popup :activated="claim_modal_active" @close="closePopup" ref="claim_modal_active"></c-claim-popup>
+            <c-login-popup :activated="login_modal_active" @close="closePopup" ref="login_modal_active"></c-login-popup>
+            <c-register-popup :activated="register_modal_active" @close="closePopup" ref="register_modal_active"></c-register-popup>
+            <c-privacy-popup :activated="$store.state.application.active_modal === 'privacy'" @close="$store.state.application.active_modal = null"></c-privacy-popup>
+            <c-terms-popup :activated="$store.state.application.active_modal === 'terms'" @close="$store.state.application.active_modal = null"></c-terms-popup>
 
             <c-basic-popup
                 :activated="$store.state.application.editor_mode === 'editing' && !$store.state.application.account.settings.client['hide_editor_welcome_modal/' + $router.currentRoute.fullPath]"
@@ -154,6 +160,7 @@
                 </p>
             </c-basic-popup>
 
+
             <c-basic-popup
                 :activated="$store.state.application.active_modal === 'report'"
                 @close="$store.state.application.active_modal = null"
@@ -174,6 +181,7 @@
                 <p slot="footer">
                 </p>
             </c-basic-popup>
+
 
             <c-basic-popup
                 :activated="$store.state.application.active_modal === 'propose-idea'"
@@ -211,20 +219,40 @@
                 </p>
             </c-basic-popup>
 
-            <c-popup :activated="notifPopup.show_popup"
-                     :title="notifPopup.title"
-                     :type="notifPopup.type"
-                     :sub_title="notifPopup.text"
-                     @close="closeNotifPopup"
-                     v-if="notifPopup"
-                     ref="notifpopup">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ligula elit. Praesent sit amet tellus
-                    malesuada, condimentum sem ut, laoreet ex. Maecenas elementum, velit eu porta lobortis, est nunc
-                    vehicula neque, id sodales urna purus eget purus. Nam vel orci turpis. Duis vestibulum ac nibh vel
-                    vehicula.
+
+            <c-basic-popup
+                :activated="$store.state.application.active_modal === 'notification'"
+                @close="$store.state.application.active_modal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">{{ active_notification.title }}</div>
+                <template slot="body">
+                    <p>{{ active_notification.text }}</p>
+                </template>
+                <p slot="footer">
                 </p>
-            </c-popup>
+            </c-basic-popup>
+
+
+            <c-basic-popup
+                :activated="$store.state.application.active_modal === 'addition-details'"
+                @close="$store.state.application.active_modal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header"></div>
+                <template slot="body">
+                    <p>
+                        secret question / answer
+
+                        My familiarity with gaming platforms is...
+
+                        My familiarity with blockchain is... 
+                    </p>
+                </template>
+                <p slot="footer">
+                </p>
+            </c-basic-popup>
+
 
             <c-cookie-policy v-if="!desktop_mode" />
 
@@ -269,6 +297,11 @@
                 default: true,
                 required: false
             },
+            showShortcuts: {
+                type: Boolean,
+                default: true,
+                required: false
+            },
             showBreadcrumbs: {
                 type: Boolean,
                 default: true,
@@ -289,6 +322,10 @@
             'c-header': (resolve) => require(['@/ui/components/headers/basic'], resolve),
             'c-slim-header': (resolve) => require(['@/ui/components/headers/slim'], resolve),
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
+            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic.vue'], resolve),
+            'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
+            'c-terms-popup': (resolve) => require(['@/ui/components/terms-popup'], resolve),
+            'c-privacy-popup': (resolve) => require(['@/ui/components/privacy-popup'], resolve),
             'c-wallet-navigation': (resolve) => require(['@/ui/components/navigation/wallet'], resolve),
             'c-account-navigation': (resolve) => require(['@/ui/components/navigation/account'], resolve),
             'c-settings-navigation': (resolve) => require(['@/ui/components/navigation/settings'], resolve),
@@ -303,9 +340,9 @@
             'c-unlock-popup': (resolve) => require(['@/ui/components/unlock-popup/index.vue'], resolve),
             'c-claim-popup': (resolve) => require(['@/ui/components/claim-popup/index.vue'], resolve),
             'c-login-popup': (resolve) => require(['@/ui/components/login-popup/index.vue'], resolve),
+            'c-register-popup': (resolve) => require(['@/ui/components/register-popup/index.vue'], resolve),
             'c-send-funds-popup': (resolve) => require(['@/ui/components/send-funds-popup/index.vue'], resolve),
             'c-purchase-popup': (resolve) => require(['@/ui/components/purchase-popup/index.vue'], resolve),
-            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic.vue'], resolve),
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
             'c-clock': (resolve) => require(['@/ui/components/clock/index.vue'], resolve),
             'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
@@ -328,7 +365,6 @@
                     spaceBetween: 0,
                     loop: false,
                 },
-                notifPopup: {},
                 scrollMoreDirection: null,
                 slimMode: false,
                 mobileMode: false,
@@ -436,6 +472,9 @@
             login_modal_active() {
                 return this.$store.state.application.active_modal === 'login'
             },
+            register_modal_active() {
+                return this.$store.state.application.active_modal === 'register'
+            },
             purchase_modal_active() {
                 return this.$store.state.application.active_modal === 'purchase'
             },
@@ -456,6 +495,9 @@
             },
             current_identity() {
                 return this.$store.state.application.account && this.$store.state.application.account.current_identity
+            },
+            active_notification() {
+                return this.$store.state.application.active_notification || {}
             },
             dynamicLinks() {
                 const [empty, ...links] = this.$route.path.split('/');
@@ -521,13 +563,6 @@
             },
             closePopup() {
                 this.$store.state.application.active_modal = null
-            },
-            closeNotifPopup() {
-                this.notifPopup = {};
-            },
-            showNotifPopup(ntf) {
-                this.notifPopup = ntf;
-                this.notifPopup.show_popup = true;
             },
             scrollSidebarDown() {
                 $('#scroll_sidebar').animate({scrollTop: '+=100', duration: '150'});

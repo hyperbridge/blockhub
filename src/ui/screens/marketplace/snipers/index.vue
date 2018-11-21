@@ -81,7 +81,7 @@
                             <c-asset-grid
                                 slot-scope="props"
                                 :assets="props.items"
-                                @click="newSniper.asset = $event.id; activeStep = 2"
+                                @click="newSniper.asset = $event; activeStep = 2"
                             />
                         </c-content-navigation>
                     </c-tab>
@@ -89,7 +89,7 @@
                     <c-tab :tab_id="2">
                         <h4 class="text-align-center">Selected asset:</h4>
                         <c-asset-preview-price
-                            :asset="assets[newSniper.asset]"
+                            :asset="newSniper.asset"
                             class="margin-auto margin-bottom-30 half-width"
                         />
                         <p>Select minimum price</p>
@@ -97,7 +97,7 @@
                             <c-range-slider
                                 v-model="newSniper.priceMin"
                                 class="half-width margin-right-20"
-                                :max="getPrice(assets[newSniper.asset], 'min')"
+                                :max="getPrice(newSniper.asset, 'min')"
                             />
                             <c-input v-model="newSniper.priceMin" class="half-width"/>
                         </div>
@@ -106,7 +106,7 @@
                             <c-range-slider
                                 v-model="newSniper.priceMax"
                                 class="half-width margin-right-20"
-                                :max="getPrice(assets[newSniper.asset], 'max')"
+                                :max="getPrice(newSniper.asset, 'max')"
                             />
                             <c-input v-model="newSniper.priceMax" class="half-width"/>
                         </div>
@@ -136,8 +136,6 @@
 </template>
 
 <script>
-    import prospectors from '@/db/api/prospectors';
-
     export default {
         props: ['identityId'],
         components: {
@@ -185,9 +183,14 @@
                             if (!priceMax) push('Invalid maximum price range.');
                             if (!expDate) push('Invalid expiration date.');
                         } else {
-                            this.$store.dispatch('assets/create', { prop: 'snipers', data: { ...this.newSniper }});
-                            this.$snotify.success('Auction sniper has been successfully created', 'Created');
-                            this.cancelCreation();
+                            this.$store.dispatch('create', [
+                                'assets/prospectors', {
+                                    ...this.newSniper,
+                                    user: this.identity
+                                }
+                            ]);
+                            this.$snotify.success('Auction prospector has been successfully created', 'Created');
+                            this.resetCreation();
                         }
                     }
                 }
@@ -195,7 +198,7 @@
             setEdited(prospector) {
                 this.edited = { ...prospector };
             },
-            cancelCreation() {
+            resetCreation() {
                 this.activeStep = 1;
                 this.newSniper = {
                     asset: null,
@@ -208,11 +211,7 @@
             getPrice: (asset, target) => asset && Math.round(asset.price[target] * 2),
             async getProspectors() {
                 this.isLoading = true;
-                await new Promise(r => setTimeout(r, 2000));
-                this.$store.dispatch('loadData', [
-                    'assets/prospectors',
-                    prospectors.filter(prosp => prosp.user.id == this.identityId)
-                ]);
+                await new Promise(r => setTimeout(r, 1000));
                 this.isLoading = false;
             }
         },
@@ -227,7 +226,11 @@
                 return this.$store.getters['assets/assetsArray'];
             },
             prospectors() {
-                return this.$store.getters['assets/prospectorsMap'];
+                return this.$store.getters['assets/prospectorsMap']
+                    .filter(([id, prosp]) => prosp.user.id == this.identityId);
+            },
+            identity() {
+                return this.$store.getters['application/identity'];
             }
         },
         watch: {

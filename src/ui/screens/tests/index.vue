@@ -11,11 +11,15 @@
         >
             Add to wishlist
         </button>
+        <c-installer-progress :progress="14"/>
     </c-layout>
 </template>
 
 <script>
     export default {
+        components: {
+            'c-installer-progress': (resolve) => require(['@/ui/components/progress-bar/installer'], resolve),
+        },
         data() {
             return {
                 msg: 'Bonjour',

@@ -8,10 +8,16 @@ const appVersion = '0.7.1'
 
 const router = new Router({
     //mode: 'history',
-    scrollBehavior: (to, from, savedPosition) => to.name === 'Search' && from.name === 'Search'
-        ? savedPosition
-        : ({ y: 0 })
-    ,
+    scrollBehavior: (to, from, savedPosition) => {
+        if (
+            (to.name === 'Marketplace Asset Offers' && from.name === 'Marketplace Asset Offer') ||
+            (to.name === 'Marketplace Asset Offer' && from.name === 'Marketplace Asset Offers')
+        ) return savedPosition;
+
+        if (to.name === 'Search' && from.name === 'Search') return savedPosition;
+
+        return ({ y: 0 });
+    },
     linkActiveClass: 'is-active',
     routes: [
         {
@@ -193,7 +199,6 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/account-signup'], resolve),
             meta: {
                 auth: false,
-                permission: 'desktop_mode',
                 breadcrumb: false
             }
         },
@@ -203,7 +208,6 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/account-signin'], resolve),
             meta: {
                 auth: false,
-                permission: 'desktop_mode',
                 breadcrumb: false
             }
         },
@@ -417,11 +421,7 @@ const router = new Router({
         {
             path: '/developer/apply',
             name: 'Developer Application',
-            component: (resolve) => require(['@/ui/screens/developer-application'], resolve),
-            meta: {
-                auth: true,
-                permission: 'signed_in'
-            }
+            component: (resolve) => require(['@/ui/screens/developer-application'], resolve)
         },
         {
             path: '/developer/new-product',
@@ -847,8 +847,8 @@ const router = new Router({
                     ]
                 },
                 {
-                    path: 'offers',
-                    name: 'Marketplace Offers',
+                    path: 'assets',
+                    name: 'Marketplace Assets',
                     component: (resolve) => require(['@/ui/screens/marketplace/offers'], resolve),
                     children: [
                         // {
@@ -859,10 +859,23 @@ const router = new Router({
                     ]
                 },
                 {
-                    path: 'offers/:id',
-                    name: 'Matketplace Asset Offers',
+                    path: 'asset/:assetId',
+                    name: 'Marketplace Asset',
                     component: (resolve) => require(['@/ui/screens/marketplace/offers/_id'], resolve),
-                    props: true
+                    props: true,
+                    children: [
+                        {
+                            path: '',
+                            name: 'Marketplace Asset Offers',
+                            component: (resolve) => require(['@/ui/screens/marketplace/offers/_id/offers'], resolve),
+                        },
+                        {
+                            path: 'offer/:offerId',
+                            name: 'Marketplace Asset Offer',
+                            component: (resolve) => require(['@/ui/screens/marketplace/offers/_id/_id'], resolve),
+                            props: true
+                        }
+                    ]
                 },
                 {
                     path: 'snipers',
@@ -906,49 +919,49 @@ const router = new Router({
         {
             path: '/download/desktop/mac',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-${appVersion}.dmg`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/BlockHub-${appVersion}.dmg`
             }
         },
         {
             path: '/download/desktop/windows',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-Setup-${appVersion}.exe`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/BlockHub-Setup-${appVersion}.exe`
             }
         },
         {
             path: '/download/desktop/windows-32bit',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-Setup-${appVersion}.exe`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/BlockHub-Setup-${appVersion}.exe`
             }
         },
         {
             path: '/download/desktop/linux',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/blockhub-desktop-client-${appVersion}-x86_64.AppImage`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/blockhub-desktop-client-${appVersion}-x86_64.AppImage`
             }
         },
         {
             path: '/download/desktop/linux-64bit',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/blockhub-desktop-client-${appVersion}.tar.gz`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/blockhub-desktop-client-${appVersion}.tar.gz`
             }
         },
         {
             path: '/download/desktop/linux-32bit',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/blockhub-desktop-client-${appVersion}-ia32.tar.gz`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/blockhub-desktop-client-${appVersion}-ia32.tar.gz`
             }
         },
         {
             path: '/download/desktop/linux-64bit-debian',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/blockhub-desktop-client_${appVersion}_amd64.deb`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/blockhub-desktop-client_${appVersion}_amd64.deb`
             }
         },
         {
             path: '/download/desktop/linux-32bit-debian',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/blockhub-desktop-client_${appVersion}_i386.deb`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/blockhub-desktop-client_${appVersion}_i386.deb`
             }
         },
         {

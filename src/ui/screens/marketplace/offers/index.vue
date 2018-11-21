@@ -1,8 +1,31 @@
 <template>
     <div>
         <span v-if="isLoading">Loading ...</span>
-        <c-content-navigation v-else :items="offers" :setLimits="7">
-            <table class="offers-table" slot-scope="props">
+        <c-content-navigation v-else :items="assets" :setLimits="7">
+            <ul class="assets-list" slot-scope="props">
+                <c-asset-list-item
+                    v-for="asset in props.items"
+                    :key="asset.id"
+                    :asset="asset"
+                >
+                    <router-link
+                        slot="link"
+                        slot-scope="props"
+                        :to="{
+                            name: 'Marketplace Asset Offers',
+                            params: { assetId: props.asset.id }
+                        }"
+                        v-text="props.asset.name"
+                    />
+                    <!-- <a slot="link" slot-scope="props" :title="props.asset.name">
+                        {{ props.asset.name }}
+                    </a> -->
+                    <!-- <router-link slot="link" slot-scope="props" :to="`/`">
+                        {{ props.asset }} 123
+                    </router-link> -->
+                </c-asset-list-item>
+            </ul>
+            <!-- <table class="offers-table" slot-scope="props">
                 <thead>
                     <th>Item</th>
                     <th>Auctions</th>
@@ -80,7 +103,7 @@
                         </template>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
         </c-content-navigation>
     </div>
 </template>
@@ -93,9 +116,9 @@
         props: ['id', 'identityId'],
         components: {
             'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
-            'c-asset-list': (resolve) => require(['@/ui/components/asset/list'], resolve),
+            'c-asset-list-item': (resolve) => require(['@/ui/components/asset/list/list-item'], resolve),
             'c-asset-preview-basic': (resolve) => require(['@/ui/components/asset/preview-basic'], resolve),
-            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve)
+            'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
         },
         data() {
             return {
@@ -128,8 +151,8 @@
             },
             async getOffers() {
                 this.isLoading = true;
-                await new Promise(r => setTimeout(r, 2500));
-                this.$store.dispatch('loadData', ['assets/offers', offers]);
+                // await new Promise(r => setTimeout(r, 2500));
+                // this.$store.dispatch('loadData', ['assets/offers', offers]);
                 this.isLoading = false;
             }
         },
@@ -144,7 +167,7 @@
                 return this.$store.getters['assets/offersMap'];
             },
             assets() {
-                return this.$store.assets['assets/assetsMap'];
+                return this.$store.getters['assets/assetsArray'];
             }
         },
         beforeDestroy() {
@@ -196,6 +219,16 @@
                 margin-right: 15px;
             }
         }
+    }
+
+    .list-item {
+        cursor: pointer;
+    }
+
+    .assets-list {
+        width: 100%;
+        margin: 0 0 50px 0;
+        padding: 0;
     }
 </style>
 

@@ -13,6 +13,8 @@
         "operating_system": null,
         "is_developer": false,
         "editor_mode": "viewing",
+        "active_modal": null,
+        "active_notification": null,
         "current_ethereum_network": "local",
         "shortcuts": [
             {
@@ -529,7 +531,6 @@
             }
         ],
         "updates": [],
-        "active_modal": null,
         "currencies":[
             {
                 "code": "USD",
