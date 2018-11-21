@@ -119,67 +119,72 @@
                     <div class="table-responsive margin-top-20 margin-bottom-0">
                         <table class="table table-striped table-bordered margin-bottom-0" style="min-width: 800px;">
                             <thead>
-                            <tr>
-                                <th width="30">
-                                    <label class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input">
-                                        <span class="custom-control-label"></span>
-                                    </label>
-                                </th>
-                                <th width="100">ID</th>
-                                <th>Name</th>
-                                <th>Date</th>
-                                <th>Owner</th>
-                                <th hidden>Operators</th>
-                                <th>Price</th>
-                                <th width="100">Status</th>
-                                <th width="30"></th>
-                            </tr>
+                                <tr>
+                                    <th width="30">
+                                        <label class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input">
+                                            <span class="custom-control-label"></span>
+                                        </label>
+                                    </th>
+                                    <th width="100">ID</th>
+                                    <th>Name</th>
+                                    <th>Date</th>
+                                    <th>Owner</th>
+                                    <th hidden>Operators</th>
+                                    <th>Price</th>
+                                    <th width="100">Status</th>
+                                    <th width="30"></th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="product in products" :key="product.id">
-                                <td>
-                                    <label class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input">
-                                        <span class="custom-control-label"></span>
-                                    </label>
-                                </td>
-                                <td>{{ product.id }}</td>
-                                <td><a :href="`#/business/product/${product.id}`" class="text-secondary text-bold">{{
-                                    product.name }}</a></td>
-                                <td>{{ product.meta.created }}</td>
-                                <td>
-                                    <div class="user user--bordered">
-                                        <img src="http://via.placeholder.com/128x128">
-                                        <div class="user__name">
-                                            <strong>{{ product.developer_id }}</strong>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td hidden>
-                                    <div class="user-group user-group--bordered">
-                                        <div class="user">
+                                <tr v-for="product in products" :key="product.id" v-if="products">
+                                    <td>
+                                        <label class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input">
+                                            <span class="custom-control-label"></span>
+                                        </label>
+                                    </td>
+                                    <td>{{ product.id }}</td>
+                                    <td><a :href="`#/business/product/${product.id}`" class="text-secondary text-bold">{{
+                                        product.name }}</a></td>
+                                    <td>{{ product.meta.created }}</td>
+                                    <td>
+                                        <div class="user user--bordered">
                                             <img src="http://via.placeholder.com/128x128">
+                                            <div class="user__name">
+                                                <strong>{{ product.developer_id }}</strong>
+                                            </div>
                                         </div>
-                                        <div class="user">
-                                            <img src="http://via.placeholder.com/128x128">
+                                    </td>
+                                    <td hidden>
+                                        <div class="user-group user-group--bordered">
+                                            <div class="user">
+                                                <img src="http://via.placeholder.com/128x128">
+                                            </div>
+                                            <div class="user">
+                                                <img src="http://via.placeholder.com/128x128">
+                                            </div>
+                                            <div class="user">
+                                                <img src="http://via.placeholder.com/128x128">
+                                            </div>
                                         </div>
-                                        <div class="user">
-                                            <img src="http://via.placeholder.com/128x128">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    {{ product.price }}
-                                </td>
-                                <td>
-                                    <button class="btn btn-outline-success btn-block btn-sm">{{ product.status }}
-                                    </button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-secondary btn-icon btn-sm"><i class="fa fa-pencil"/></button>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td>
+                                        {{ product.price }}
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-outline-success btn-block btn-sm">{{ product.status }}
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-secondary btn-icon btn-sm"><i class="fa fa-pencil"/></button>
+                                    </td>
+                                </tr>
+                                <tr v-else>
+                                    <td colspan="12">
+                                        Nothing found.
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
