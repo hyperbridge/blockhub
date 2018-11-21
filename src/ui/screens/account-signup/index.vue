@@ -1,5 +1,5 @@
 <template>
-    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false">
+    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false" :showShortcuts="false">
         <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
@@ -366,19 +366,20 @@
                                         v-model="agreeStoredPassphrase"
                                         label="I have safely stored my passphrase"
                                         label_position="right"
-                                        v-if="verifiedPassphrase"
-                                        hidden
+                                        v-if="false && verifiedPassphrase"
                                     />
                                     <c-switch
                                         v-model="account.encrypt_passphrase"
                                         label="I want to encrypt my passphrase with my password"
                                         label_position="right"
-                                        v-if="verifiedPassphrase"
+                                        v-if="false && verifiedPassphrase"
                                     />
-                                    <c-button
-                                        @click="checkForm()"
-                                        v-if="verifiedPassphrase"
-                                    >CONTINUE</c-button>
+                                    <div>
+                                        <c-button
+                                            @click="checkForm()"
+                                            v-if="verifiedPassphrase"
+                                        >CONTINUE</c-button>
+                                    </div>
                                 </div>
                             </c-tab>
                             <c-tab :tab_id="3">

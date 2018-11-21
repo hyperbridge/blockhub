@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="page-shortcuts invert" v-if="initialized">
+            <div class="page-shortcuts invert" v-if="initialized && showShortcuts">
                 <c-shortcut-sidebar :items="shortcuts" />
             </div>
 
@@ -265,6 +265,11 @@
                 required: false
             },
             showRightPanel: {
+                type: Boolean,
+                default: true,
+                required: false
+            },
+            showShortcuts: {
                 type: Boolean,
                 default: true,
                 required: false

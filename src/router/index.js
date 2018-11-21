@@ -850,49 +850,49 @@ const router = new Router({
         {
             path: '/download/desktop/mac',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-${appVersion}.dmg`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/BlockHub-${appVersion}.dmg`
             }
         },
         {
             path: '/download/desktop/windows',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-Setup-${appVersion}.exe`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/BlockHub-Setup-${appVersion}.exe`
             }
         },
         {
             path: '/download/desktop/windows-32bit',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/BlockHub-Setup-${appVersion}.exe`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/BlockHub-Setup-${appVersion}.exe`
             }
         },
         {
             path: '/download/desktop/linux',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/blockhub-desktop-client-${appVersion}-x86_64.AppImage`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/blockhub-desktop-client-${appVersion}-x86_64.AppImage`
             }
         },
         {
             path: '/download/desktop/linux-64bit',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/blockhub-desktop-client-${appVersion}.tar.gz`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/blockhub-desktop-client-${appVersion}.tar.gz`
             }
         },
         {
             path: '/download/desktop/linux-32bit',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/blockhub-desktop-client-${appVersion}-ia32.tar.gz`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/blockhub-desktop-client-${appVersion}-ia32.tar.gz`
             }
         },
         {
             path: '/download/desktop/linux-64bit-debian',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/blockhub-desktop-client_${appVersion}_amd64.deb`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/blockhub-desktop-client_${appVersion}_amd64.deb`
             }
         },
         {
             path: '/download/desktop/linux-32bit-debian',
             beforeEnter(to, from, next) {
-                window.location = `https://github.com/hyperbridge/blockhub-desktop-client/releases/download/v${appVersion}/blockhub-desktop-client_${appVersion}_i386.deb`
+                window.location = `https://github.com/hyperbridge/blockhub/releases/download/v${appVersion}/blockhub-desktop-client_${appVersion}_i386.deb`
             }
         },
         {
