@@ -102,10 +102,14 @@
                         icon: 'fas fa-home',
                         child: [
                             {
-                                href: '/business/products',
                                 title: 'Products',
-                                icon: 'fas fa-square-full icon-sm',
+                                // icon: 'fas fa-square-full icon-sm',
                                 child: [
+                                    {
+                                        href: '/business/products',
+                                        title: 'All Products',
+                                        icon: 'fas fa-square-full icon-sm',
+                                    },
                                     {
                                         href: '/business/product/new',
                                         title: 'New Product',
@@ -114,10 +118,14 @@
                                 ]
                             },
                             {
-                                href: '/business',
                                 title: 'Crowdfunds',
-                                icon: 'fas fa-square-full icon-sm',
+                                // icon: 'fas fa-square-full icon-sm',
                                 child: [
+                                    {
+                                        href: '/business/project/new',
+                                        title: 'Crowdfunds',
+                                        icon: 'fas fa-square-full icon-sm'
+                                    },
                                     {
                                         href: '/business/project/new',
                                         title: 'New Crowdfund',

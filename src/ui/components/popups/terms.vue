@@ -30,7 +30,6 @@
 
 <script>
     export default {
-        name: 'c-terms-popup',
         props:{
             activated:{
                 type: Boolean,

@@ -230,6 +230,6 @@ export default {
 }
 
 .c-grid-item-animate {
-  transition: transform 50ms ease;
+  transition: transform 200ms ease;
 }
 </style>
