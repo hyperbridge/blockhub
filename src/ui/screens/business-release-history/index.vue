@@ -26,7 +26,7 @@
                                     {{ release.date | timeAgo }}
                                 </span>
                                         <span>
-                                    <i class="fas fa-tag mr-2"></i> v.0.7.1
+                                    <i class="fas fa-tag mr-2"></i> {{ release.version }}
                                 </span>
                             </div>
                             <div class="history-list__item-description">

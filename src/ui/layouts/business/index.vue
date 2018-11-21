@@ -323,6 +323,7 @@
         width: 100%;
         flex-direction: column;
         padding-top: 5px;
+        background: #fff!important;
     }
     .page-heading__container{
         align-items: center;

@@ -2,7 +2,7 @@
     <!--<c-business-layout>-->
         <div>
             <div class="container-fluid">
-                <div class="row margin-bottom-20">
+                <div class="row">
                     <div class="col-12 col-lg-3">
                         <div class="widget">
                             <div class="widget__icon_layer widget__icon_layer--right">
