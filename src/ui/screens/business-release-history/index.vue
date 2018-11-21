@@ -31,7 +31,7 @@
                             </div>
                             <div class="history-list__item-description">
                                 <div class="h1">
-                                    v.{{ release.version }}
+                                    {{ release.version }}
                                 </div>
                                 <div>
                                     {{ release.author }} released this this version {{ release.date | timeAgo }}
@@ -69,11 +69,11 @@
                     <div class="history-list" v-if="listType == 'tags'">
                         <div class="history-list__tag-item" v-for="release in releases_list">
                             <div class="h3">
-                                v.{{ release.version }}
+                                {{ release.version }}
                             </div>
                             <div class="sub-info">
                                 <div>
-                                    <i class="fas fa-clock"></i> 10 days ago
+                                    <i class="fas fa-clock"></i> {{ release.date | timeAgo }}
                                 </div>
                                 <div>
                                     <i class="fas fa-file-archive"></i> .zip
