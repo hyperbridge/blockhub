@@ -3,6 +3,7 @@
   "productName": "BlockHub",
   "version": "0.7.1",
   "description": "BlockHub",
+  "homepage": "https://blockhub.gg",
   "author": {
     "name": "Hyperbridge",
     "email": "hello@hyperbridge.org",
@@ -11,7 +12,7 @@
   "license": "SEE LICENSE IN LICENSE.md",
   "scripts": {
     "build": "cd app && npm run build && cd .. && rm -rf build && cp -R app/ build",
-    "copy-web": "cd ../blockhub-web-client && NODE_ENV=production npm run build && rm -rf ../blockhub-desktop-client/app/web && cp -R dist/ ../blockhub-desktop-client/app/web && cd ../blockhub-desktop-client",
+    "copy-web": "cd ../../../blockhub-web-client && NODE_ENV=production npm run build && rm -rf ../blockhub/clients/desktop/app/web && cp -R dist/ ../blockhub/clients/desktop/app/web && cd ../blockhub/clients/desktop",
     "package": "ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true npm run build-all",
     "publish": "electron-builder --publish",
     "build-all": "npm run copy-web && cd app && npm run build && cd .. && rm -rf dist/packages && rm -rf build && cp -R app/ build && electron-builder --mac --win --linux",
@@ -20,8 +21,7 @@
     "build-windows": "npm run copy-web && cd app && npm run build && cd .. && rm -rf dist/packages && rm -rf build && cp -R app/ build && electron-builder --win"
   },
   "postinstall": "electron-builder install-app-deps",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "electron": "^2.0.8",
     "electron-builder": "^20.28.4"
@@ -125,8 +125,7 @@
           "scripts",
           ".vscode"
         ],
-        "afterPrune": [
-        ]
+        "afterPrune": []
       }
     }
   }

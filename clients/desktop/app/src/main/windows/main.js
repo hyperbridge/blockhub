@@ -455,18 +455,21 @@ export const init = (deeplinkUri, devMode, showTools) => {
         // const https = require('https')
         //const http = require('http')
 
-        const app = express()
+        // const app = express()
 
-        app.use('/static', express.static(path.join(__dirname, '/../../../web/static')))
-        app.get('/', function (req, res) {
-            res.sendFile(path.join(__dirname + '/../../../web/index.html'))
-        })
+        // app.use('/static', express.static(path.join(__dirname, '/../../../web/static')))
+        // app.get('/', function (req, res) {
+        //     res.sendFile(path.join(__dirname + '/../../../web/index.html'))
+        // })
 
-        //const server = https.createServer(options, app).listen(9999, () => console.log('App is running on port 9999'))
-        const server = app.listen(9999, () => console.log('App is running on port 9999'))
+        // //const server = https.createServer(options, app).listen(9999, () => console.log('App is running on port 9999'))
+        // const server = app.listen(9999, () => console.log('App is running on port 9999'))
 
-        window.loadURL('http://localhost:9999/')
+        // window.loadURL('http://localhost:9999/')
+        
         //window.loadURL(`file://${__dirname}/../../../web/index.html`)
+
+        window.loadURL('https://blockhub.gg/')
     }
 
     if (showTools) {

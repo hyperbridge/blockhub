@@ -1289,7 +1289,7 @@ export const runCommand = async (cmd, meta = {}) => {
             console.log('[BlockHub] Web initialized', cmd.data) // msg from web page
 
             if (cmd.data == '1') {
-                await setEnvironmentMode(DB.application.config.data[0].environment_mode)
+                await setEnvironmentMode(config.IS_PRODUCTION ? 'production' : DB.application.config.data[0].environment_mode)
 
                 // const mode = config.IS_PRODUCTION ? 'production' : 'local'
 

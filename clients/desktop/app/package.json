@@ -2,6 +2,7 @@
     "name": "blockhub-desktop-client",
     "version": "0.7.1",
     "description": "BlockHub Desktop Client",
+    "homepage": "https://blockhub.gg",
     "license": "SEE LICENSE IN LICENSE.md",
     "author": {
         "name": "Hyperbridge",
