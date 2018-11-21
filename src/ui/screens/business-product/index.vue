@@ -159,11 +159,15 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-2 offset-10" v-if="product.id">
-                        <a href="#" target="_blank" class="btn btn-primary" @click.prevent="save">SAVE</a>
+                    <div class="col-12 text-right" v-if="product.id">
+                        <c-button status="success" @click.prevent="save" icon="save">
+                            Save
+                        </c-button>
                     </div>
-                    <div class="col-2 offset-10" v-if="!product.id">
-                        <a href="#" target="_blank" class="btn btn-primary" @click.prevent="create">CREATE</a>
+                    <div class="col-12 text-right" v-if="!product.id">
+                        <c-button status="success" @click.prevent="create" icon="plus">
+                            Create
+                        </c-button>
                     </div>
                 </div>
             </div>
