@@ -52,6 +52,7 @@
 
 <script>
     import offers from '@/db/api/offers';
+    import prospectors from '@/db/api/prospectors';
 
     export default {
         components: {
@@ -77,8 +78,12 @@
         filters: {
             cut: val => val.replace('Marketplace ', '')
         },
-        created() {
+        mounted() {
             this.$store.dispatch('loadData', ['assets/offers', offers]);
+            this.$store.dispatch('loadData', [
+                'assets/prospectors',
+                prospectors.filter(prosp => prosp.user.id == this.identity.id)
+            ]);
         },
         computed: {
             identity() {
