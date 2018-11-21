@@ -1,10 +1,21 @@
 <template>
     <c-custom-modal 
-        title="Sign In"
+        title="Sign Up"
         @close="$store.state.application.active_modal = null"
         v-if="activated"
     >
         <div class="" slot="modal_body" style="width: 100%">
+            <p hidden>
+                To manage your product listing, you'll need to verify your connection with this company. <br />
+                What you'll get with verification:
+                <br /><br />
+                <i class="fas fa-check"></i> Allow new customers to find you on BlockHub Search<br />
+                <i class="fas fa-check"></i> Promote your business with bounties<br />
+                <i class="fas fa-check"></i> Track product analytics to understand your customers<br />
+                <i class="fas fa-check"></i> Respond to customer reviews<br />
+                <i class="fas fa-check"></i> And much more<br />
+                <br />
+            </p>
             <div class="row">
                 <div class="col">
                     <div class="form-group">
@@ -22,6 +33,28 @@
                                 name="password" v-model="password">
                     </div>
                 </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label>Repeat Password</label>
+                        <input type="password" class="form-control" placeholder="Repeat Password"
+                                name="repeatPassword" v-model="repeatPassword">
+                    </div>
+                </div>
+            </div>
+            <div class="row" hidden>
+                <div class="col">
+                    <c-switch
+                        v-model="agreement"
+                        label_position="right"
+                        :customLabel="true"
+                    >
+                        <template slot="label">
+                            I agree to the
+                            <c-button status="plain" @click="terms = true">terms</c-button> and
+                            <c-button status="plain" @click="privacy = true">privacy policy</c-button>
+                        </template>
+                    </c-switch>
+                </div>
             </div>
 
             <p class="errors" v-if="errors.length">
@@ -32,8 +65,27 @@
                 </ul>
             </p>
         </div>
+
+        <c-terms-popup title="Terms" :activated="terms" @close="terms = false" width="800">
+            <div class="h4" slot="header">Terms and Conditions for BlockHub</div>
+            <div slot="body">
+                <div class="terms_block">
+                    <c-terms-block />
+                </div>
+            </div>
+        </c-terms-popup>
+
+        <c-terms-popup title="Privacy" :activated="privacy" @close="privacy = false" width="800">
+            <div class="h4" slot="header">Privacy Policy for BlockHub</div>
+            <div slot="body">
+                <div class="terms_block">
+                    <c-privacy-block />
+                </div>
+            </div>
+        </c-terms-popup>
+
         <div slot="modal_footer" class="text-right w-100">
-            <a href="#" @click="$store.commit('application/activateModal', 'register')" style="float: left; margin-right: 20px">Don't have an account? Sign Up</a>
+            <a href="#" @click="$store.commit('application/activateModal', 'login')" style="float: left">Already registered? Sign In</a>
             <c-button size="md" @click="next()">Continue</c-button>
         </div>
     </c-custom-modal>

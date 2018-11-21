@@ -193,7 +193,6 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/account-signup'], resolve),
             meta: {
                 auth: false,
-                permission: 'desktop_mode',
                 breadcrumb: false
             }
         },
@@ -203,7 +202,6 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/account-signin'], resolve),
             meta: {
                 auth: false,
-                permission: 'desktop_mode',
                 breadcrumb: false
             }
         },

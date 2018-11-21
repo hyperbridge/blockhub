@@ -11,7 +11,8 @@
                     </p>
                     <div class="chosen-box">
                         <div class="chosen-box__container">
-                            <div class="h1 mb-4">Already have an account?</div>
+                            <div class="h1 mb-4">Sign In</div>
+                            
                             <c-button status="outline-success" size="lg" @click="importAccountFile">Import Account</c-button>
                         </div>
                     </div>
