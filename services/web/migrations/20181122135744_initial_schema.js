@@ -34,6 +34,11 @@ exports.up = knex => {
                 .inTable('projects')
                 .onDelete('CASCADE')
         })
+        .createTable('sessions', table => {
+            table.string('sid').primary()
+            table.json('sess').notNullable()
+            table.timestamp('expired').notNullable()
+        })
 }
 
 exports.down = knex => {
@@ -41,4 +46,5 @@ exports.down = knex => {
         .dropTableIfExists('project_members')
         .dropTableIfExists('projects')
         .dropTableIfExists('users')
+        .dropTableIfExists('sessions')
 }
