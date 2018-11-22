@@ -753,7 +753,7 @@ const router = new Router({
                     }
                 },
                 {
-                    path: 'release-history',
+                    path: 'release-history/:id',
                     name: 'Release History',
                     props: true,
                     component: (resolve) => require(['@/ui/screens/business-release-history'], resolve),
@@ -779,7 +779,7 @@ const router = new Router({
                     }
                 },
                 {
-                    path: 'release-page',
+                    path: 'release-page/:id',
                     name: 'Release page',
                     props: true,
                     component: (resolve) => require(['@/ui/screens/business-release-page'], resolve),
