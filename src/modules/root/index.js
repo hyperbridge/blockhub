@@ -1,6 +1,7 @@
 import { getId, mergeId, normalize } from '@/store/utils';
 import { findRelation, decompose, findRelationPaths } from '@/store/modules-relation';
 
+/* Create and populate action/mutation needed (asset/offers) */
 
 const rootStore = {
     mutations: {
@@ -9,38 +10,38 @@ const rootStore = {
             console.log('ROOT CREATE',id, module, target, data)
             rootState[module][target] = { ...state[target], [id]: data };
         },
-        create(rootState, [targets, id, data]) {
-            const [module, target] = targets.split('/');
+        create(rootState, [path, id, data]) {
+            const [module, target] = path.split('/');
 
             rootState[module][target] = {
-                ...state[module][target],
+                ...rootState[module][target],
                 [id]: data
             };
         },
-        update(rootState, [targets, id, data]) {
-            const [module, target] = targets.split('/');
+        update(rootState, [path, id, data]) {
+            const [module, target] = path.split('/');
 
             rootState[module][target][id] = {
                 ...rootState[module][target][id],
                 ...data
             };
         },
-        updateSingle(rootState, [targets, data]) {
-            const [module, target] = targets.split('/');
+        updateSingle(rootState, [path, data]) {
+            const [module, target] = path.split('/');
             rootState[module][target] = {
                 ...rootState[module][target],
                 ...data
             }
         },
-        updateSingular(rootState, [targets, data]) {
-            const [module, target] = targets.split('/');
+        updateSingular(rootState, [path, data]) {
+            const [module, target] = path.split('/');
             rootState[module][target] = {
                 ...rootState[module][target],
                 ...data
             }
         },
-        delete(rootState, [targets, id]) {
-            const [module, target] = targets.split('/');
+        delete(rootState, [path, id]) {
+            const [module, target] = path.split('/');
 
             const shallowCopy = { ...rootState[module][target] };
             delete shallowCopy[id];
@@ -50,10 +51,10 @@ const rootStore = {
             // const { [id]: deleted, ...rest } = rootState[module][target];
             // console.log('module', module, 'target', target, 'id', id)
         },
-        loadData(rootState, [targets, data]) {
-            const [module, target] = targets.split('/');
+        loadData(rootState, [path, data]) {
+            const [module, target] = path.split('/');
             rootState[module][target] = {
-                ...[module][target],
+                ...rootState[module][target],
                 ...normalize(data)
             }
         },
@@ -65,25 +66,28 @@ const rootStore = {
         }
     },
     actions: {
-        create({ commit, state: rootState }, [targets, data]) {
-            const [module, target] = targets.split('/');
+        create({ commit }, [path, payload]) {
+            const [module, target] = path.split('/');
 
-            // const { id, data } = await axios.post(`/${target}`, data);
+            /*
+                const { data } = await axios.post(`/${target}`, payload);
+                commit('create', [targets, data.id, { ...payload, ...data }]);
+            */
+
             const id = getId();
-            commit('create', [targets, id, data]);
+            commit('create', [path, id, { ...payload, id }]);
             return id;
         },
-        update({ commit }, [targets, id, data]) {
-            const [module, target] = targets.split('/');
+        update({ commit }, [path, id, data]) {
+            const [module, target] = path.split('/');
             // await axios.patch(`/${target}/${id}`, data);
-            commit('update', [targets, id, data]);
+            commit('update', [path, id, data]);
         },
-        delete({ commit }, payload) {
-            const [targets, id] = payload;
-            const [module, target] = targets.split('/');
+        delete({ commit }, [path, id]) {
+            const [module, target] = path.split('/');
 
             // await axios.delete(`/${target}/${id}`);
-            commit('delete', payload);
+            commit('delete', id);
         },
 
 

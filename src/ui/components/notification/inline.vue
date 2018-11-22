@@ -69,6 +69,10 @@
         }
         &.type-danger {
             background: #F75D5D;
+            color: #fff;
+            .close{
+                color: #fff;
+            }
         }
         &.type-info {
             background: #5D75F7;
@@ -80,6 +84,9 @@
         &.type-default {
             background: rgba(255, 255, 255, .3);
             color: #f0f0f0;
+        }
+        &.size-sm{
+            padding: 5px;
         }
         &.size-md{
             padding: 10px;

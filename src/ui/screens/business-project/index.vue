@@ -1,9 +1,9 @@
 <template>
-    <c-business-layout title="Crowdfund Creation">
+    <!--<c-business-layout title="Crowdfund Creation">-->
         <div>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="form-group row">
                             <label class="switch switch-sm col-sm-3">
                                 <label>Title</label>
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group row">
                             <label class="switch switch-sm col-sm-3">
                                 <label>Tags</label>
@@ -63,15 +63,19 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="page-heading">
-                    <div class="page-heading__container" style="float: none">
-                        <a class="title" href="#" style="float: left'" @click="toggleAdvanced">{{ advanced ? 'Hide' : 'Show' }} Advanced</a>
+                    <div class="col-12">
+                        <div class="h5" @click="toggleAdvanced">
+                            <i class="mr-2 fas" :class="advanced ? 'fa-angle-up' : 'fa-angle-down'"></i>
+                            {{ advanced ? 'Hide' : 'Show' }} Advanced
+                        </div>
                     </div>
                 </div>
 
                 <div class="row" v-if="advanced">
+                    <div class="col-12">
+                        <hr />
+                    </div>
                     <div class="col-md-6">
 
                         <div class="form-group row">
@@ -107,7 +111,6 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-
                         <div class="form-group row">
                             <label class="switch switch-sm col-sm-1">
                                 <input type="checkbox" name="switch_8" checked="" value="0">
@@ -168,6 +171,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12">
+                        <hr />
+                    </div>
                 </div>
             
                 <div class="row" v-darklaunch="'GOVERNANCE'">
@@ -180,16 +186,20 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-2 offset-10" v-if="project.id">
-                        <a href="#" target="_blank" class="btn btn-primary" @click.prevent="save">SAVE</a>
+                    <div class="col-12 text-right" v-if="project.id">
+                        <c-button status="success" @click.prevent="save" icon="save">
+                            Save
+                        </c-button>
                     </div>
-                    <div class="col-2 offset-10" v-if="!project.id">
-                        <a href="#" target="_blank" class="btn btn-primary" @click.prevent="create">CREATE</a>
+                    <div class="col-12 text-right" v-if="!project.id">
+                        <c-button status="success" @click.prevent="create" icon="plus">
+                            Create
+                        </c-button>
                     </div>
                 </div>
             </div>
         </div>
-    </c-business-layout>
+    <!--</c-business-layout>-->
 </template>
 
 <script>

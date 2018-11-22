@@ -51,6 +51,10 @@
 </template>
 
 <script>
+    import offers from '@/db/api/offers';
+    import prospectors from '@/db/api/prospectors';
+    import transactions from '@/db/api/asset-transactions';
+
     export default {
         components: {
             'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
@@ -68,12 +72,17 @@
                     'Marketplace Trade Manager',
                     'Marketplace Prospectors',
                     'Marketplace Search',
-                    'Marketplace Offers',
+                    'Marketplace Assets',
                 ]
             }
         },
         filters: {
             cut: val => val.replace('Marketplace ', '')
+        },
+        mounted() {
+            this.$store.dispatch('loadData', ['assets/offers', offers]);
+            this.$store.dispatch('loadData', ['assets/prospectors', prospectors]);
+            this.$store.dispatch('loadData', ['assets/transactions', transactions]);
         },
         computed: {
             identity() {

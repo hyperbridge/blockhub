@@ -142,16 +142,6 @@ const assets = {
             const id = getId();
             commit('create', mergeId(payload));
         },
-        createAuction({ state, commit }, { offerId, ...payload }) {
-            const newId = getId();
-
-            commit('create', { id: newId, prop: 'auctions', data: payload });
-            commit('update', {
-                id: offerId,
-                target: 'offers',
-                data: { auctions: [...state.offers[offerId].auctions, newId] }
-            });
-        },
         async createTransactionMessage({ dispatch, state }, { trxId, message }) {
             const id = await dispatch('community/createMessage', message, { root: true });
 
@@ -237,8 +227,6 @@ const assets = {
             { transactions, assets }, getters, rootState,
             { ['community/messages']: messages, ['community/identities']: identities }
         ) => normalize(transactions, trx => ({
-                you: identities[trx.you],
-                contractor: identities[trx.contractor],
                 contractorOffer: trx.contractorOffer.map(id => assets[id]),
                 yourOffer: trx.yourOffer.map(id => assets[id]),
                 messages: trx.messages.map(id => messages[id])

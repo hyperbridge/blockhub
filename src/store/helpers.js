@@ -25,6 +25,51 @@ export const mapElement = ({ name, module, prop = module, id, action = false, se
     };
 };
 
+/* v2 */
+
+export const mapEl = ({ name, module, target, id, idSource, action, getter = true, singular }) => {
+
+    const path = `${module}/${target}`;
+    const propertyName = name || path;
+
+    if (!singular) {
+        return {
+            [propertyName]: {
+                set(data) {
+                    const id = id || this[idSource] || this.id;
+                    this.$store[action ? 'dispatch' : 'commit']('update', [path, id, data]);
+                },
+                get() {
+                    const id = id || this[idSource] || this.id;
+                    return getter
+                        ? this.$store.getters[path][id]
+                        : this.$store.state[module][target][id];
+                }
+            }
+        }
+    }
+
+    return {
+        [propertyName]: {
+            set(data) {
+                this.$store[action ? 'dispatch' : 'commit']('updateSingular', [path, data]);
+            },
+            get() {
+                return getter
+                    ? this.$store.getters[path]
+                    : this.$store.state[module][target]
+            }
+        }
+    }
+}
+
+/* ...mapEl({
+    name: 'asset'
+    module: 'assets',
+    target: 'transactions',
+    idSource: 'id'
+}) */
+
 /*
 
     call Store._delete while null was assigned to mapped el e.g.
