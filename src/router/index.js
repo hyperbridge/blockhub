@@ -702,40 +702,96 @@ const router = new Router({
             path: '/business',
             name: 'Business',
             component: (resolve) => require(['@/ui/screens/business'], resolve),
-        },
-        {
-            path: '/business/products',
-            name: 'Business',
-            component: (resolve) => require(['@/ui/screens/business-products'], resolve),
-        },
-        {
-            path: '/business/projects',
-            name: 'Business',
-            component: (resolve) => require(['@/ui/screens/business-projects'], resolve),
-        },
-        {
-            path: '/business/project/:id',
-            name: 'Project',
-            props: true,
-            component: (resolve) => require(['@/ui/screens/business-project'], resolve),
-        },
-        {
-            path: '/business/product/:id',
-            name: 'Product',
-            props: true,
-            component: (resolve) => require(['@/ui/screens/business-product'], resolve),
-        },
-        {
-            path: '/business/release-history/',
-            name: 'Release History',
-            props: true,
-            component: (resolve) => require(['@/ui/screens/business-release-history'], resolve),
-        },
-        {
-            path: '/business/add-release/',
-            name: 'Add New Release',
-            props: true,
-            component: (resolve) => require(['@/ui/screens/business-new-release'], resolve),
+            children:[
+                {
+                    path: '',
+                    name: 'Business',
+                    component: (resolve) => require(['@/ui/screens/business-home'], resolve),
+                    meta:{
+                        title: 'Business',
+                        breadcrumb: [
+                            { path: '/business', title: 'Dashboard' },
+                        ]
+                    }
+                },
+                {
+                    path: 'products',
+                    name: 'All Products',
+                    component: (resolve) => require(['@/ui/screens/business-products'], resolve),
+                    meta:{
+                        title: 'All Products',
+                        breadcrumb: [
+                            { path: '/business', title: 'Dashboard' },
+                            { title: 'All Products' }
+                        ]
+                    }
+                },
+                {
+                    path: 'product/:id',
+                    name: 'Product',
+                    props: true,
+                    component: (resolve) => require(['@/ui/screens/business-product'], resolve),
+                    meta:{
+                        title: 'Product',
+                        breadcrumb: [
+                            { to: '/business', title: 'Dashboard' },
+                            { title: 'Product' }
+                        ]
+                    }
+                },
+                {
+                    path: 'project/:id',
+                    name: 'Crowdfunds',
+                    props: true,
+                    component: (resolve) => require(['@/ui/screens/business-project'], resolve),
+                    meta:{
+                        title: 'Crowdfunds',
+                        breadcrumb: [
+                            { to: '/business', title: 'Dashboard' },
+                            { title: 'Crowdfunds' }
+                        ]
+                    }
+                },
+                {
+                    path: 'release-history',
+                    name: 'Release History',
+                    props: true,
+                    component: (resolve) => require(['@/ui/screens/business-release-history'], resolve),
+                    meta:{
+                        title: 'Release History',
+                        breadcrumb: [
+                            { to: '/business', title: 'Dashboard' },
+                            { title: 'Release History' }
+                        ]
+                    }
+                },
+                {
+                    path: 'new-release',
+                    name: 'Add New Release',
+                    props: true,
+                    component: (resolve) => require(['@/ui/screens/business-new-release'], resolve),
+                    meta:{
+                        title: 'Add New Release',
+                        breadcrumb: [
+                            { to: '/business', title: 'Dashboard' },
+                            { title: 'Add New Release' }
+                        ]
+                    }
+                },
+                {
+                    path: 'release-page',
+                    name: 'Release page',
+                    props: true,
+                    component: (resolve) => require(['@/ui/screens/business-release-page'], resolve),
+                    meta:{
+                        title: 'Release Page',
+                        breadcrumb: [
+                            { to: '/release-page', title: 'Dashboard' },
+                            { title: 'Release page' }
+                        ]
+                    }
+                },
+            ]
         },
         {
             path: '/marketplace',

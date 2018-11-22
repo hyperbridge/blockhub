@@ -1,5 +1,5 @@
 <template>
-    <c-business-layout title="Product Creation">
+    <!--<c-business-layout title="Product Creation">-->
         <div>
 
             <div class="container-fluid">
@@ -11,8 +11,8 @@
                         <br /><br />
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
+                        <div class="form-group row align-items-center">
+                            <label class="col-sm-3">
                                 <label>Change Status</label>
                             </label>
                             <div class="col-sm-9">
@@ -26,8 +26,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
+                        <div class="form-group row align-items-center">
+                            <label class="col-sm-3">
                                 <label>Title</label>
                             </label>
                             <div class="col-sm-9">
@@ -35,8 +35,8 @@
                                 <span class="form-text"></span>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
+                        <div class="form-group row align-items-center">
+                            <label class="col-sm-3">
                                 <label>Type</label>
                             </label>
                             <div class="col-sm-9">
@@ -44,8 +44,8 @@
                                 <span class="form-text"></span>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
+                        <div class="form-group row align-items-center">
+                            <label class="col-sm-3">
                                 <label>Description</label>
                             </label>
                             <div class="col-sm-9">
@@ -53,8 +53,8 @@
                                 <span class="form-text"></span>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
+                        <div class="form-group row align-items-center">
+                            <label class="col-sm-3">
                                 <label>Content</label>
                             </label>
                             <div class="col-sm-9">
@@ -134,8 +134,8 @@
                     </div>
                     <div class="col-12">
                         <h3>Transfer Ownership</h3>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
+                        <div class="form-group row align-items-center">
+                            <label class="col-sm-3">
                                 <label>Developer Address</label>
                             </label>
                             <div class="col-sm-9">
@@ -143,8 +143,8 @@
                                 <span class="form-text"></span>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
+                        <div class="form-group row align-items-center">
+                            <label class="col-sm-3">
                                 <label>Developer ID</label>
                             </label>
                             <div class="col-sm-9">
@@ -159,16 +159,20 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-2 offset-10" v-if="product.id">
-                        <a href="#" target="_blank" class="btn btn-primary" @click.prevent="save">SAVE</a>
+                    <div class="col-12 text-right" v-if="product.id">
+                        <c-button status="success" @click.prevent="save" icon="save">
+                            Save
+                        </c-button>
                     </div>
-                    <div class="col-2 offset-10" v-if="!product.id">
-                        <a href="#" target="_blank" class="btn btn-primary" @click.prevent="create">CREATE</a>
+                    <div class="col-12 text-right" v-if="!product.id">
+                        <c-button status="success" @click.prevent="create" icon="plus">
+                            Create
+                        </c-button>
                     </div>
                 </div>
             </div>
         </div>
-    </c-business-layout>
+    <!--</c-business-layout>-->
 </template>
 
 <script>

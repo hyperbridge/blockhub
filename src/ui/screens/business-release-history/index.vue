@@ -1,857 +1,64 @@
 <template>
-    <c-business-layout title="Release history">
+    <!--<c-business-layout title="Release history">-->
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <c-button status="outline-success" size="lg" @click="listType = 'list'" :shadow="false" icon_hide>
-                        Releases
-                    </c-button>
-                    <c-button :status="outline-info" size="lg" @click="listType = 'tags'" class="margin-left-10" :shadow="false" icon_hide>
-                        Tags
+                    <c-buttons-group>
+                        <c-button :status="ifList" size="md" @click="listType = 'list'" :shadow="false" icon_hide>
+                            Releases
+                        </c-button>
+                        <c-button :status="ifTags" size="md" @click="listType = 'tags'" :shadow="false" icon_hide>
+                            Tags
+                        </c-button>
+                    </c-buttons-group>
+                    <c-button status="success" icon="plus" class="float-right" size="md" @click="$router.push({ path: '/business/new-release' })">
+                        Draft a new release
                     </c-button>
                 </div>
                 <div class="col-12">
-                    <div class="history-list as-list" v-if="listType == 'list'">
-                        <div class="history-list__item">
+                    <div class="history-list" v-if="listType == 'list'">
+                        <div class="history-list__list-item" v-for="release in releases_list">
                             <div class="history-list__item-info">
-                                <div class="latest-badge">
+                                <div class="latest-badge" v-if="release.latest_release">
                                     Latest Release
                                 </div>
                                 <span>
-                                    10 days ago
+                                    {{ release.date | timeAgo }}
                                 </span>
                                         <span>
-                                    <i class="fas fa-tag mr-2"></i> v.0.7.1
+                                    <i class="fas fa-tag mr-2"></i> {{ release.version }}
                                 </span>
                             </div>
                             <div class="history-list__item-description">
                                 <div class="h1">
-                                    v.0.7.1
+                                    {{ release.version }}
                                 </div>
                                 <div>
-                                    Josh Doel released this this version 5 days ago
+                                    {{ release.author }} released this this version {{ release.date | timeAgo }}
                                 </div>
-                                <div class="release-text padding-top-15">
-                                    In this update:
-                                    <ul>
-                                        <li>
-                                            Token purchase flow
-                                        </li>
-                                        <li>
-                                            Copy to address works
-                                        </li>
-                                        <li>
-                                            Account recovery
-                                        </li>
-                                        <li>
-                                            Simplify sign up
-                                        </li>
-                                        <li>
-                                            Hold ALT and click to give feedback!
-                                        </li>
-                                    </ul>
+                                <div class="release-text padding-top-15" v-html="release.text">
                                 </div>
-                                <div class="assets-list__wrapper">
+                                <div class="assets-list__wrapper" v-if="release.files">
                                     <div class="assets-list__button" @click="showList = !showList">
                                         <div class="icon">
                                             <i class="fas" :class="[ showList ? 'fa-angle-up' : 'fa-angle-down']"></i>
                                         </div>
                                         <div class="text">
-                                            Assets (16)
+                                            Assets ({{ release.files.length }})
                                         </div>
                                     </div>
                                     <div class="assets-list" v-if="showList">
-                                        <div class="assets-list__item">
+                                        <div class="assets-list__item" @click="" v-for="file in release.files">
                                             <div class="icon">
-                                                <i class="fas fa-download"></i>
+                                                <i class="fas fa-file-download"></i>
                                             </div>
                                             <div class="title">
-                                                Some latest release v.0.7.1
+                                                <a :href="file.src" target="_blank">
+                                                    {{ file.name }}
+                                                </a>
                                             </div>
                                             <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="history-list__item">
-                            <div class="history-list__item-info">
-                                <div class="latest-badge">
-                                    Latest Release
-                                </div>
-                                <span>
-                                    10 days ago
-                                </span>
-                                <span>
-                                    <i class="fas fa-tag mr-2"></i> v.0.7.1
-                                </span>
-                            </div>
-                            <div class="history-list__item-description">
-                                <div class="h1">
-                                    v.0.7.1
-                                </div>
-                                <div>
-                                    Josh Doel released this this version 5 days ago
-                                </div>
-                                <div class="release-text padding-top-15">
-                                    In this update:
-                                    <ul>
-                                        <li>
-                                            Token purchase flow
-                                        </li>
-                                        <li>
-                                            Copy to address works
-                                        </li>
-                                        <li>
-                                            Account recovery
-                                        </li>
-                                        <li>
-                                            Simplify sign up
-                                        </li>
-                                        <li>
-                                            Hold ALT and click to give feedback!
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="assets-list__wrapper">
-                                    <div class="assets-list__button" @click="showList = !showList">
-                                        <div class="icon">
-                                            <i class="fas" :class="[ showList ? 'fa-angle-up' : 'fa-angle-down']"></i>
-                                        </div>
-                                        <div class="text">
-                                            Assets (16)
-                                        </div>
-                                    </div>
-                                    <div class="assets-list" v-if="showList">
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="history-list__item">
-                            <div class="history-list__item-info">
-                                <div class="latest-badge">
-                                    Latest Release
-                                </div>
-                                <span>
-                                    10 days ago
-                                </span>
-                                <span>
-                                    <i class="fas fa-tag mr-2"></i> v.0.7.1
-                                </span>
-                            </div>
-                            <div class="history-list__item-description">
-                                <div class="h1">
-                                    v.0.7.1
-                                </div>
-                                <div>
-                                    Josh Doel released this this version 5 days ago
-                                </div>
-                                <div class="release-text padding-top-15">
-                                    In this update:
-                                    <ul>
-                                        <li>
-                                            Token purchase flow
-                                        </li>
-                                        <li>
-                                            Copy to address works
-                                        </li>
-                                        <li>
-                                            Account recovery
-                                        </li>
-                                        <li>
-                                            Simplify sign up
-                                        </li>
-                                        <li>
-                                            Hold ALT and click to give feedback!
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="assets-list__wrapper">
-                                    <div class="assets-list__button" @click="showList = !showList">
-                                        <div class="icon">
-                                            <i class="fas" :class="[ showList ? 'fa-angle-up' : 'fa-angle-down']"></i>
-                                        </div>
-                                        <div class="text">
-                                            Assets (16)
-                                        </div>
-                                    </div>
-                                    <div class="assets-list" v-if="showList">
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="history-list__item">
-                            <div class="history-list__item-info">
-                                <div class="latest-badge">
-                                    Latest Release
-                                </div>
-                                <span>
-                                    10 days ago
-                                </span>
-                                <span>
-                                    <i class="fas fa-tag mr-2"></i> v.0.7.1
-                                </span>
-                            </div>
-                            <div class="history-list__item-description">
-                                <div class="h1">
-                                    v.0.7.1
-                                </div>
-                                <div>
-                                    Josh Doel released this this version 5 days ago
-                                </div>
-                                <div class="release-text padding-top-15">
-                                    In this update:
-                                    <ul>
-                                        <li>
-                                            Token purchase flow
-                                        </li>
-                                        <li>
-                                            Copy to address works
-                                        </li>
-                                        <li>
-                                            Account recovery
-                                        </li>
-                                        <li>
-                                            Simplify sign up
-                                        </li>
-                                        <li>
-                                            Hold ALT and click to give feedback!
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="assets-list__wrapper">
-                                    <div class="assets-list__button" @click="showList = !showList">
-                                        <div class="icon">
-                                            <i class="fas" :class="[ showList ? 'fa-angle-up' : 'fa-angle-down']"></i>
-                                        </div>
-                                        <div class="text">
-                                            Assets (16)
-                                        </div>
-                                    </div>
-                                    <div class="assets-list" v-if="showList">
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="history-list__item">
-                            <div class="history-list__item-info">
-                                <div class="latest-badge">
-                                    Latest Release
-                                </div>
-                                <span>
-                                    10 days ago
-                                </span>
-                                <span>
-                                    <i class="fas fa-tag mr-2"></i> v.0.7.1
-                                </span>
-                            </div>
-                            <div class="history-list__item-description">
-                                <div class="h1">
-                                    v.0.7.1
-                                </div>
-                                <div>
-                                    Josh Doel released this this version 5 days ago
-                                </div>
-                                <div class="release-text padding-top-15">
-                                    In this update:
-                                    <ul>
-                                        <li>
-                                            Token purchase flow
-                                        </li>
-                                        <li>
-                                            Copy to address works
-                                        </li>
-                                        <li>
-                                            Account recovery
-                                        </li>
-                                        <li>
-                                            Simplify sign up
-                                        </li>
-                                        <li>
-                                            Hold ALT and click to give feedback!
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="assets-list__wrapper">
-                                    <div class="assets-list__button" @click="showList = !showList">
-                                        <div class="icon">
-                                            <i class="fas" :class="[ showList ? 'fa-angle-up' : 'fa-angle-down']"></i>
-                                        </div>
-                                        <div class="text">
-                                            Assets (16)
-                                        </div>
-                                    </div>
-                                    <div class="assets-list" v-if="showList">
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="history-list__item">
-                            <div class="history-list__item-info">
-                                <div class="latest-badge">
-                                    Latest Release
-                                </div>
-                                <span>
-                                    10 days ago
-                                </span>
-                                <span>
-                                    <i class="fas fa-tag mr-2"></i> v.0.7.1
-                                </span>
-                            </div>
-                            <div class="history-list__item-description">
-                                <div class="h1">
-                                    v.0.7.1
-                                </div>
-                                <div>
-                                    Josh Doel released this this version 5 days ago
-                                </div>
-                                <div class="release-text padding-top-15">
-                                    In this update:
-                                    <ul>
-                                        <li>
-                                            Token purchase flow
-                                        </li>
-                                        <li>
-                                            Copy to address works
-                                        </li>
-                                        <li>
-                                            Account recovery
-                                        </li>
-                                        <li>
-                                            Simplify sign up
-                                        </li>
-                                        <li>
-                                            Hold ALT and click to give feedback!
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="assets-list__wrapper">
-                                    <div class="assets-list__button" @click="showList = !showList">
-                                        <div class="icon">
-                                            <i class="fas" :class="[ showList ? 'fa-angle-up' : 'fa-angle-down']"></i>
-                                        </div>
-                                        <div class="text">
-                                            Assets (16)
-                                        </div>
-                                    </div>
-                                    <div class="assets-list" v-if="showList">
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
-                                            </div>
-                                        </div>
-                                        <div class="assets-list__item">
-                                            <div class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                Some latest release v.0.7.1
-                                            </div>
-                                            <div class="size">
-                                                97.8 Mb
+                                                {{ file.size | numeralFormat('0.00b') }}
                                             </div>
                                         </div>
                                     </div>
@@ -859,14 +66,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="history-list as-tags" v-if="listType == 'tags'">
-                        <div class="history-list__item">
-                            <div class="h2">
-                                v.0.7.1
+                    <div class="history-list" v-if="listType == 'tags'">
+                        <div class="history-list__tag-item" v-for="release in releases_list">
+                            <div class="h3">
+                                {{ release.version }}
                             </div>
                             <div class="sub-info">
                                 <div>
-                                    <i class="far fa-clock"></i> 10 days ago
+                                    <i class="fas fa-clock"></i> {{ release.date | timeAgo }}
+                                </div>
+                                <div>
+                                    <i class="fas fa-file-archive"></i> .zip
+                                </div>
+                                <div>
+                                    <i class="fas fa-file-archive"></i> .tar.gz
+                                </div>
+                                <div>
+                                    <i class="fas fa-file-alt"></i> Notes
+                                </div>
+                                <div>
+                                    <i class="fas fa-file-download"></i> Download
                                 </div>
                             </div>
                         </div>
@@ -874,20 +93,65 @@
                 </div>
             </div>
         </div>
-    </c-business-layout>
+    <!--</c-business-layout>-->
 </template>
 
 <script>
     export default {
         components: {
             'c-business-layout': (resolve) => require(['@/ui/layouts/business'], resolve),
+            'c-buttons-group': (resolve) => require(['@/ui/components/buttons/group'], resolve),
         },
         data() {
             return {
                 showList: false,
-                listType: 'list'
+                listType: 'list',
+                releases_list:[
+                    {
+                        date: '2005-08-09T18:31:42+03:30',
+                        latest_release: false,
+                        version: '0.7.1',
+                        author: 'Josh Doel',
+                        text: 'In this update:<ul><li>Token purchase flow\n</li><li>Copy to address works</li><li>Account recovery</li><li>Simplify sign up</li><li>Hold ALT and click to give feedback!</li></ul>',
+                        files: [
+                            {
+                                name: 'BlockHub-0.7.1-mac.zip',
+                                src: '#',
+                                size: 234214324
+                            },
+                            {
+                                name: 'BlockHub-0.7.1-Win86.zip',
+                                src: '#',
+                                size: 2342324324
+                            },
+                            {
+                                name: 'BlockHub-0.7.1-Linux.zip',
+                                src: '#',
+                                size: 942324324
+                            }
+                        ]
+                    }
+                ]
             }
         },
+        computed:{
+            ifList(){
+                switch (this.listType) {
+                    case "list":
+                        return 'success'
+                    default:
+                        return 'outline-success'
+                }
+            },
+            ifTags(){
+                switch (this.listType) {
+                    case "tags":
+                        return 'success'
+                    default:
+                        return 'outline-success'
+                }
+            }
+        }
     }
 </script>
 
@@ -895,14 +159,44 @@
     .history-list {
         display: flex;
         flex-direction: column;
-        margin: 30px 0;
-        border-top: 1px solid #d4d4d4;
+        margin: 20px 0 0;
+        background: #fff;
+        border: 1px solid #d4d4d4;
     }
 
-    .history-list__item {
+    .history-list__list-item {
         display: flex;
         align-items: stretch;
         flex-wrap: nowrap;
+        padding: 0 15px;
+    }
+    .history-list__tag-item{
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #d4d4d4;
+        padding: 15px;
+        background: #fff;
+        &:last-child{
+            border-bottom: none;
+        }
+        .sub-info{
+            display: flex;
+            font-size: 14px;
+            align-items: center;
+            div{
+                margin-right: 20px;
+                i{
+                    opacity: .7;
+                    font-size: 13px;
+                    margin-right: 3px;
+                }
+                &:hover{
+                    color: #237cc1;
+                    cursor: pointer;
+                    opacity: 1;
+                }
+            }
+        }
     }
 
     .history-list__item-info {
@@ -968,15 +262,17 @@
         padding: 5px 0;
         font-weight: 500;
         margin-top: 5px;
-        color: #237cc1;
         font-size: 15px;
         .icon{
-            font-size: 16px;
-            margin-right: 8px;
+            font-size: 15px;
+            margin-right: 5px;
         }
         .size{
             margin-left: auto;
             font-weight: normal;
+        }
+        a{
+            color: #237cc1;
         }
     }
 </style>

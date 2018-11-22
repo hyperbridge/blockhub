@@ -1,21 +1,6 @@
 <template>
-    <c-business-layout>
+    <!--<c-business-layout>-->
         <div>
-            <!-- PAGE HEADING -->
-            <div class="page-heading">
-                <div class="page-heading__container">
-                    <h1 class="title">Crowdfunds</h1>
-                    <p class="caption"></p>
-                </div>
-
-                <nav aria-label="breadcrumb" role="navigation">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#/business">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Crowdfunds</li>
-                    </ol>
-                </nav>
-            </div>
-            <!-- //END PAGE HEADING -->
 
             <div class="container-fluid">
 
@@ -205,7 +190,7 @@
                 </div>
             </div>
         </div>
-    </c-business-layout>
+    <!--</c-business-layout>-->
 </template>
 
 <script>
