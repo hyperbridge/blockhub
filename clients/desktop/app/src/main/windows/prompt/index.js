@@ -1,97 +1,112 @@
-const electron = require('electron');
+const {ipcRenderer} = require('electron');
+const docReady = require('doc-ready');
 
-const BrowserWindow = electron.BrowserWindow || electron.remote.BrowserWindow;
-const ipcMain = electron.ipcMain || electron.remote.ipcMain;
-const url = require('url');
-const path = require('path');
+let promptId = null;
+let promptOptions = null;
 
-function electronPrompt(options, parentWindow) {
-	return new Promise((resolve, reject) => {
-		const id = `${new Date().getTime()}-${Math.random()}`;
-		const opts = Object.assign(
-			{
-				width: 370,
-				height: 1300,
-				resizable: false,
-				title: 'Prompt',
-				label: 'Please input a value:',
-				alwaysOnTop: false,
-				value: null,
-				type: 'input',
-				selectOptions: null,
-				icon: null
-			},
-			options || {}
-		);
+const promptError = e => {
+	if (e instanceof Error) {
+		e = e.message;
+	}
+	ipcRenderer.sendSync('prompt-error:' + promptId, e);
+};
 
-		if (opts.type === 'select' && (opts.selectOptions === null || typeof opts.selectOptions !== 'object')) {
-			return reject(new Error('"selectOptions" must be an object'));
+const promptCancel = () => {
+	ipcRenderer.sendSync('prompt-post-data:' + promptId, null);
+};
+
+const promptSubmit = () => {
+	const dataEl = document.getElementById('data');
+	let data = null;
+
+	if (promptOptions.type === 'input') {
+		data = dataEl.value;
+	} else if (promptOptions.type === 'select') {
+		if (promptOptions.selectMultiple) {
+			data = dataEl.querySelectorAll('option[selected]').map(o => o.getAttribute('value'));
+		} else {
+			data = dataEl.value;
+		}
+	}
+	ipcRenderer.sendSync('prompt-post-data:' + promptId, data);
+};
+
+
+window.addEventListener('error', error => {
+	if (promptId) {
+		promptError('An error has occured on the prompt window: \n' + error);
+	}
+});
+
+docReady(() => {
+	promptId = document.location.hash.replace('#', '');
+
+	try {
+		promptOptions = JSON.parse(ipcRenderer.sendSync('prompt-get-options:' + promptId));
+	} catch (e) {
+		return promptError(e);
+	}
+
+	document.getElementById('label').textContent = promptOptions.label;
+	document.getElementById('ok').addEventListener('click', () => promptSubmit());
+	document.getElementById('cancel').addEventListener('click', () => promptCancel());
+
+	const dataContainerEl = document.getElementById('data-container');
+
+	let dataEl;
+	if (promptOptions.type === 'input') {
+		dataEl = document.createElement('input');
+		dataEl.setAttribute('type', 'text');
+
+		if (promptOptions.value) {
+			dataEl.value = promptOptions.value;
+		} else {
+			dataEl.value = '';
 		}
 
-		let promptWindow = new BrowserWindow({
-			width: opts.width,
-			height: opts.height,
-			resizable: opts.resizable,
-			parent: parentWindow,
-			skipTaskbar: true,
-			alwaysOnTop: opts.alwaysOnTop,
-			useContentSize: true,
-			modal: Boolean(parentWindow),
-			title: opts.title,
-			icon: opts.icon
-		});
+		if (promptOptions.inputAttrs && typeof (promptOptions.inputAttrs) === 'object') {
+			for (const k in promptOptions.inputAttrs) {
+				if (!Object.prototype.hasOwnProperty.call(promptOptions.inputAttrs, k)) {
+					continue;
+				}
 
-		promptWindow.setMenu(null);
-
-		const getOptionsListener = event => {
-			event.returnValue = JSON.stringify(opts);
-		};
-
-		const cleanup = () => {
-			if (promptWindow) {
-				promptWindow.close();
-				promptWindow = null;
+				dataEl.setAttribute(k, promptOptions.inputAttrs[k]);
 			}
-		};
+		}
 
-		const postDataListener = (event, value) => {
-			resolve(value);
-			event.returnValue = null;
-			cleanup();
-		};
-
-		const unresponsiveListener = () => {
-			reject(new Error('Window was unresponsive'));
-			cleanup();
-		};
-
-		const errorListener = (event, message) => {
-			reject(new Error(message));
-			event.returnValue = null;
-			cleanup();
-		};
-
-		ipcMain.on('prompt-get-options:' + id, getOptionsListener);
-		ipcMain.on('prompt-post-data:' + id, postDataListener);
-		ipcMain.on('prompt-error:' + id, errorListener);
-		promptWindow.on('unresponsive', unresponsiveListener);
-
-		promptWindow.on('closed', () => {
-			ipcMain.removeListener('prompt-get-options:' + id, getOptionsListener);
-			ipcMain.removeListener('prompt-post-data:' + id, postDataListener);
-			ipcMain.removeListener('prompt-error:' + id, postDataListener);
-			resolve(null);
+		dataEl.addEventListener('keyup', e => {
+			e.which = e.which || e.keyCode;
+			if (e.which === 13) {
+				promptSubmit();
+			}
+			if (e.which === 27) {
+				promptCancel();
+			}
 		});
+	} else if (promptOptions.type === 'select') {
+		dataEl = document.createElement('select');
+		let optionEl;
 
-		const promptUrl = url.format({
-			protocol: 'file',
-			slashes: true,
-			pathname: path.join(__dirname, 'index.html'),
-			hash: id
-		});
+		for (const k in promptOptions.selectOptions) {
+			if (!Object.prototype.hasOwnProperty.call(promptOptions.selectOptions, k)) {
+				continue;
+			}
 
-		promptWindow.loadURL(promptUrl);
-	});
-}
+			optionEl = document.createElement('option');
+			optionEl.setAttribute('value', k);
+			optionEl.textContent = promptOptions.selectOptions[k];
+			if (k === promptOptions.value) {
+				optionEl.setAttribute('selected', 'selected');
+			}
+			dataEl.appendChild(optionEl);
+		}
+	}
 
-export default electronPrompt;
+	dataContainerEl.appendChild(dataEl);
+	dataEl.setAttribute('id', 'data');
+
+	dataEl.focus();
+	if (promptOptions.type === 'input') {
+		dataEl.select();
+	}
+});
