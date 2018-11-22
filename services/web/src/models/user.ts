@@ -23,7 +23,7 @@ export default class User extends Model {
                     from: 'users.id',
                     through: {
                         from: 'project_members.userId',
-                        to: 'project_members.groupId',
+                        to: 'project_members.projectId',
                         modelClass: ProjectMember,
                         extra: ['isAdmin']
                     },

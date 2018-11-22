@@ -189,13 +189,13 @@ paths:
     - name: projectId
       in: path
       required: true
-      description: application id
+      description: project id
       schema:
         type: string
     get:
       tags:
       - Projects
-      summary: Returns an app by id
+      summary: Returns an project by id
       responses:
         '200':
           description: OK
@@ -208,7 +208,7 @@ paths:
     delete:
       tags:
       - Projects
-      summary: Deletes an app by id
+      summary: Deletes an project by id
       responses:
         '204':
           description: No Content
@@ -217,7 +217,7 @@ paths:
     put:
       tags:
       - Projects
-      summary: Updates an app by id
+      summary: Updates an project by id
       responses:
         '200':
           description: OK
@@ -429,7 +429,7 @@ paths:
           description: No Content
         '404':
           '$ref': '#/components/responses/NotFound'
-  /api-endpoints:
+  '/api-endpoints':
     get:
       tags:
         - API Endpoints
@@ -476,6 +476,172 @@ paths:
       responses:
         '204':
           description: No Content
+  '/objects':
+    get:
+      tags:
+      - Objects
+      summary: Returns all Objects from BlockHub
+      description: Users
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                '$ref': '#/components/schemas/Objects'
+    post:
+      tags:
+      - Objects
+      summary: Creates new Object
+      responses:
+        '201':
+          description: Created
+          content:
+            'application/json':
+              schema:
+                '$ref': '#/components/schemas/Object'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              '$ref': '#/components/schemas/CreateObjectRequest'
+        description: Object to add to the system
+        required: true
+  '/objects/{objectId}':
+    parameters:
+    - name: objectId
+      in: path
+      required: true
+      description: object id
+      schema:
+        type: string
+    get:
+      tags:
+      - Objects
+      summary: Returns an object by id
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                '$ref': '#/components/schemas/Object'
+        '404':
+          '$ref': '#/components/responses/NotFound'
+    delete:
+      tags:
+      - Objects
+      summary: Deletes an object by id
+      responses:
+        '204':
+          description: No Content
+        '404':
+          '$ref': '#/components/responses/NotFound'
+    put:
+      tags:
+      - Objects
+      summary: Updates an object by id
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                '$ref': '#/components/schemas/Object'
+        '404':
+          '$ref': '#/components/responses/NotFound'
+        '422':
+          '$ref': '#/components/responses/ValidationError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              '$ref': '#/components/schemas/UpdateObjectRequest'
+        description: Object to add to the system
+        required: true
+  '/products':
+    get:
+      tags:
+      - Products
+      summary: Returns all Products from BlockHub
+      description: Users
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                '$ref': '#/components/schemas/Products'
+    post:
+      tags:
+      - Products
+      summary: Creates new Product
+      responses:
+        '201':
+          description: Created
+          content:
+            'application/json':
+              schema:
+                '$ref': '#/components/schemas/Product'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              '$ref': '#/components/schemas/CreateProductRequest'
+        description: Product to add to the system
+        required: true
+  '/products/{productId}':
+    parameters:
+    - name: productId
+      in: path
+      required: true
+      description: product id
+      schema:
+        type: string
+    get:
+      tags:
+      - Products
+      summary: Returns an product by id
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                '$ref': '#/components/schemas/Product'
+        '404':
+          '$ref': '#/components/responses/NotFound'
+    delete:
+      tags:
+      - Products
+      summary: Deletes an product by id
+      responses:
+        '204':
+          description: No Content
+        '404':
+          '$ref': '#/components/responses/NotFound'
+    put:
+      tags:
+      - Products
+      summary: Updates an product by id
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                '$ref': '#/components/schemas/Product'
+        '404':
+          '$ref': '#/components/responses/NotFound'
+        '422':
+          '$ref': '#/components/responses/ValidationError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              '$ref': '#/components/schemas/UpdateProductRequest'
+        description: Product to add to the system
+        required: true
 components:
   schemas:
     APIVersion:
