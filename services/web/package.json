@@ -9,6 +9,8 @@
         "build": "tsc --listEmittedFiles",
         "format": "./node_modules/.bin/tsfmt -r",
         "start": "npm run format && npm run build && ./node_modules/.bin/nodemon --exec node ./build/index.js",
+        "migrate": "./node_modules/.bin/knex migrate:latest",
+        "migrate-heroku": "heroku run 'knex migrate:latest'",
         "test-api-call": "curl http://localhost:3000/api/v1/ping"
     },
     "semistandard": {
@@ -22,10 +24,15 @@
         ]
     },
     "dependencies": {
+        "body-parser": "^1.18.3",
+        "dotenv": "^6.1.0",
         "express": "^4.16.4",
         "knex": "^0.15.2",
+        "knex-migrate": "^1.7.0",
+        "morgan": "^1.9.1",
         "mysql": "^2.16.0",
         "objection": "^1.4.0",
+        "pg": "^7.6.1",
         "swagger-express-validator": "^0.1.1",
         "swagger-parser": "^6.0.2",
         "swagger-routes-express": "^2.0.0"

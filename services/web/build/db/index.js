@@ -8,16 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mysql_1 = require("mysql");
-const config_1 = require("../config");
 const user_1 = require("../models/user");
 const project_1 = require("../models/project");
-const connection = mysql_1.default.createConnection({
-    host: config_1.default.db.host,
-    user: config_1.default.db.user,
-    database: config_1.default.db.database,
-    debug: false
-});
 // export type Project = {
 //     uuid: number,
 //     name: string
@@ -33,8 +25,8 @@ const connection = mysql_1.default.createConnection({
 // type UserRecord = {
 //     id: number,
 //     email: string,
-//     first_name: string,
-//     last_name: string,
+//     firstName: string,
+//     lastName: string,
 //     is_active: number
 // }
 // type ProjectRecord = {
@@ -47,7 +39,7 @@ exports.fetchProjectMembers = (projectId, isAdmin) => __awaiter(this, void 0, vo
         .query()
         .eager('members(onlyMembers)', {
         onlyMembers: (builder) => {
-            builder.where('is_admin', isAdmin ? 1 : 0);
+            builder.where('isAdmin', isAdmin ? 1 : 0);
         }
     })
         .findById(projectId);
@@ -55,47 +47,82 @@ exports.fetchProjectMembers = (projectId, isAdmin) => __awaiter(this, void 0, vo
 });
 exports.findSocalProfile = (uId, snType) => __awaiter(this, void 0, void 0, function* () {
     return new Promise((resolve, reject) => {
-        let queryString = 'SELECT * from social_profile where sn_uid=? AND sn_type=?';
-        connection.query(queryString, [uId, snType], function (error, results) {
-            if (error) {
-                reject(error);
-            }
-            resolve(results);
-        });
+        // let queryString = 'SELECT * from socialProfile where snUid=? AND snType=?'
+        // connection.query(queryString, [uId, snType], function(
+        //     error,
+        //     results
+        // ) {
+        //     if (error) {
+        //         reject(error)
+        //     }
+        //     resolve(results)
+        // })
     });
 });
-exports.storeToken = (personId, accessToken1, accessToken2, snType, snUid) => __awaiter(this, void 0, void 0, function* () {
+exports.storeToken = (userId, accessToken1, accessToken2, snType, snUid) => __awaiter(this, void 0, void 0, function* () {
     return new Promise((resolve, reject) => {
-        let queryString = 'INSERT INTO social_profile (user_id, access_token_1, access_token_2, sn_type, sn_uid) VALUES(?,?,?,?,?)';
-        connection.query(queryString, [personId, accessToken1, accessToken2, snType, snUid], (error, results) => {
-            if (error) {
-                reject(error);
-            }
-            resolve(results);
-        });
+        // let queryString = 'INSERT INTO socialProfile (userId, accessToken1, accessToken2, snType, snUid) VALUES(?,?,?,?,?)'
+        // connection.query(
+        //     queryString,
+        //     [userId, accessToken1, accessToken2, snType, snUid],
+        //     (error, results) => {
+        //         if (error) {
+        //             reject(error)
+        //         }
+        //         resolve(results)
+        //     }
+        // )
     });
 });
 exports.updateToken = (req) => __awaiter(this, void 0, void 0, function* () {
     return new Promise((resolve, reject) => {
-        let queryString = 'UPDATE social_profile set user_id = ?, access_token_1 = ?, access_token_2 =? , sn_type = ? where id = ? ';
-        connection.query(queryString, [req.personId, req.accessToken1, req.accessToken2, req.snType, req.id], (error, results) => {
-            if (error) {
-                reject(error);
-            }
-            resolve(results);
-        });
+        // let queryString = 'UPDATE socialProfile set userId = ?, accessToken1 = ?, accessToken2 =? , snType = ? where id = ? '
+        // connection.query(
+        //     queryString,
+        //     [req.userId, req.accessToken1, req.accessToken2, req.snType, req.id],
+        //     (error, results) => {
+        //         if (error) {
+        //             reject(error)
+        //         }
+        //         resolve(results)
+        //     }
+        // )
     });
 });
 exports.createUser = (email, firstName, lastName) => __awaiter(this, void 0, void 0, function* () {
-    return new Promise((resolve, reject) => {
-        let queryString = 'INSERT INTO person (Email, FirstName, LastName) VALUES(?,?,?)';
-        connection.query(queryString, [email, firstName, lastName], (error, results) => {
-            if (error) {
-                reject(error);
-            }
-            resolve(results);
-        });
+    let user = yield user_1.default
+        .query()
+        .insertAndFetch({
+        email,
+        firstName,
+        lastName
     });
+    return Promise.resolve(user);
+    // return new Promise((resolve, reject) => {
+    //     // let queryString = 'INSERT INTO users (email, firstName, lastName) VALUES(?,?,?)'
+    //     // connection.query(
+    //     //     queryString,
+    //     //     [email, firstName, lastName],
+    //     //     (error, results) => {
+    //     //         if (error) {
+    //     //             reject(error)
+    //     //         }
+    //     //         resolve(results)
+    //     //     }
+    //     // )
+    // })
+});
+exports.getUsers = (isAdmin) => __awaiter(this, void 0, void 0, function* () {
+    const userRecords = yield user_1.default
+        .query()
+        .pick(['id', 'firstName', 'lastName', 'email']);
+    // .eager('members(onlyMembers)', {
+    //     onlyMembers: (builder) => {
+    //         builder.where('isAdmin', isAdmin ? 1 : 0)
+    //     }
+    // })
+    //.groupBy('id')
+    return Promise.resolve(userRecords);
 });
 exports.fetchUser = ({ uuid, email, fieldKey }) => __awaiter(this, void 0, void 0, function* () {
     let result = yield user_1.default
@@ -104,12 +131,12 @@ exports.fetchUser = ({ uuid, email, fieldKey }) => __awaiter(this, void 0, void 
     if (!result) {
         return Promise.resolve(result);
     } //If no record is found
-    result.is_active = result.is_active || !!result.password_hash;
+    result.isActive = result.isActive || !!result.passwordHash;
     return Promise.resolve(result);
 });
 // export const fetchProject = async (uuid: number): Promise<ProjectModel> => {
 //     return new Promise((resolve, reject) => {
-//         const queryString = 'select id, name from `project` where id = ?'
+//         const queryString = 'select id, name from `projects` where id = ?'
 //         connection.query(
 //             queryString,
 //             [ uuid ],

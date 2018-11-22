@@ -1,24 +1,34 @@
-import mysql from 'mysql'
-
 import config from '../config'
 import UserModel from '../models/user'
 import ProjectModel from '../models/project'
 
+// const pg = require('pg')
 
-const connection = mysql.createConnection({
-    host: config.db.host,
-    user: config.db.user,
-    database: config.db.database,
-    debug: false
-})
+// const connection = new pg.Client({
+//     connectionString: process.env.DATABASE_URL,
+//     ssl: true
+// })
+
+// connection.connect(function(err) {
+//     if (err) {
+//         return console.error('Could not connect to Postgres', err)
+//     }
+// })
+
+// const connection = mysql.createConnection({
+//     host: config.db.host,
+//     user: config.db.user,
+//     database: config.db.database,
+//     debug: false
+// })
 
 export type UpdateTokenRequest = {
     id: number,
-    personId: number,
+    userId: number,
     accessToken1: string,
     accessToken2: string,
     snType: string,
-};
+}
 
 // export type Project = {
 //     uuid: number,
@@ -37,8 +47,8 @@ export type UpdateTokenRequest = {
 // type UserRecord = {
 //     id: number,
 //     email: string,
-//     first_name: string,
-//     last_name: string,
+//     firstName: string,
+//     lastName: string,
 //     is_active: number
 // }
 
@@ -53,7 +63,7 @@ export const fetchProjectMembers = async (projectId: number, isAdmin: boolean) =
         .query()
         .eager('members(onlyMembers)', {
             onlyMembers: (builder) => {
-                builder.where('is_admin', isAdmin ? 1 : 0)
+                builder.where('isAdmin', isAdmin ? 1 : 0)
             }
         })
         .findById(projectId)
@@ -63,66 +73,90 @@ export const fetchProjectMembers = async (projectId: number, isAdmin: boolean) =
 
 export const findSocalProfile = async (uId: string, snType: string) => {
     return new Promise((resolve, reject) => {
-        let queryString = 'SELECT * from social_profile where sn_uid=? AND sn_type=?'
-        connection.query(queryString, [uId, snType], function(
-            error,
-            results
-        ) {
-            if (error) {
-                reject(error)
-            }
-            resolve(results)
-        })
+        // let queryString = 'SELECT * from socialProfile where snUid=? AND snType=?'
+        // connection.query(queryString, [uId, snType], function(
+        //     error,
+        //     results
+        // ) {
+        //     if (error) {
+        //         reject(error)
+        //     }
+        //     resolve(results)
+        // })
     })
 }
 
-export const storeToken = async (personId: number, accessToken1: string, accessToken2: string, snType: string, snUid: string) => {
+export const storeToken = async (userId: number, accessToken1: string, accessToken2: string, snType: string, snUid: string) => {
     return new Promise((resolve, reject) => {
-        let queryString = 'INSERT INTO social_profile (user_id, access_token_1, access_token_2, sn_type, sn_uid) VALUES(?,?,?,?,?)'
-        connection.query(
-            queryString,
-            [personId, accessToken1, accessToken2, snType, snUid],
-            (error, results) => {
-                if (error) {
-                    reject(error)
-                }
-                resolve(results)
-            }
-        )
+        // let queryString = 'INSERT INTO socialProfile (userId, accessToken1, accessToken2, snType, snUid) VALUES(?,?,?,?,?)'
+        // connection.query(
+        //     queryString,
+        //     [userId, accessToken1, accessToken2, snType, snUid],
+        //     (error, results) => {
+        //         if (error) {
+        //             reject(error)
+        //         }
+        //         resolve(results)
+        //     }
+        // )
     })
 }
 
 export const updateToken = async (req: UpdateTokenRequest) => {
     return new Promise((resolve, reject) => {
-        let queryString = 'UPDATE social_profile set user_id = ?, access_token_1 = ?, access_token_2 =? , sn_type = ? where id = ? '
-        connection.query(
-            queryString,
-            [req.personId, req.accessToken1, req.accessToken2, req.snType, req.id],
-            (error, results) => {
-                if (error) {
-                    reject(error)
-                }
-                resolve(results)
-            }
-        )
+        // let queryString = 'UPDATE socialProfile set userId = ?, accessToken1 = ?, accessToken2 =? , snType = ? where id = ? '
+        // connection.query(
+        //     queryString,
+        //     [req.userId, req.accessToken1, req.accessToken2, req.snType, req.id],
+        //     (error, results) => {
+        //         if (error) {
+        //             reject(error)
+        //         }
+        //         resolve(results)
+        //     }
+        // )
     })
 }
 
 
-export const createUser = async (email: string, firstName: string, lastName: string) => {
-    return new Promise((resolve, reject) => {
-        let queryString = 'INSERT INTO person (Email, FirstName, LastName) VALUES(?,?,?)'
-        connection.query(
-            queryString,
-            [email, firstName, lastName],
-            (error, results) => {
-                if (error) {
-                    reject(error)
-                }
-                resolve(results)
-            }
-        )
-    })
+export const createUser = async (email: string, firstName: string, lastName: string): Promise<UserModel | undefined> => {
+    let user = await UserModel
+        .query()
+        .insertAndFetch({
+            email,
+            firstName,
+            lastName
+        })
+
+    return Promise.resolve(user)
+
+    // return new Promise((resolve, reject) => {
+    //     // let queryString = 'INSERT INTO users (email, firstName, lastName) VALUES(?,?,?)'
+    //     // connection.query(
+    //     //     queryString,
+    //     //     [email, firstName, lastName],
+    //     //     (error, results) => {
+    //     //         if (error) {
+    //     //             reject(error)
+    //     //         }
+    //     //         resolve(results)
+    //     //     }
+    //     // )
+    // })
+}
+
+export const getUsers = async (isAdmin: boolean) => {
+    const userRecords = await UserModel
+        .query()
+        .pick(['id', 'firstName', 'lastName', 'email'])
+    // .eager('members(onlyMembers)', {
+    //     onlyMembers: (builder) => {
+    //         builder.where('isAdmin', isAdmin ? 1 : 0)
+    //     }
+    // })
+    //.groupBy('id')
+
+    return Promise.resolve(userRecords)
 }
 
 export const fetchUser = async ({ uuid, email, fieldKey }): Promise<UserModel | undefined> => {
@@ -132,14 +166,14 @@ export const fetchUser = async ({ uuid, email, fieldKey }): Promise<UserModel | 
 
     if (!result) { return Promise.resolve(result) } //If no record is found
 
-    result.is_active = result.is_active || !!result.password_hash
+    result.isActive = result.isActive || !!result.passwordHash
 
     return Promise.resolve(result)
 }
 
 // export const fetchProject = async (uuid: number): Promise<ProjectModel> => {
 //     return new Promise((resolve, reject) => {
-//         const queryString = 'select id, name from `project` where id = ?'
+//         const queryString = 'select id, name from `projects` where id = ?'
 //         connection.query(
 //             queryString,
 //             [ uuid ],

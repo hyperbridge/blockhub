@@ -7,13 +7,13 @@ class UserModel extends objection_1.Model {
     constructor() {
         super(...arguments);
         this.email = '';
-        this.first_name = '';
-        this.last_name = '';
-        this.is_active = false;
-        this.password_hash = '';
+        this.firstName = '';
+        this.lastName = '';
+        this.isActive = false;
+        this.passwordHash = '';
     }
     static get tableName() {
-        return 'user';
+        return 'users';
     }
     static get relationMappings() {
         return {
@@ -21,14 +21,14 @@ class UserModel extends objection_1.Model {
                 relation: objection_1.Model.ManyToManyRelation,
                 modelClass: project_1.default,
                 join: {
-                    from: 'user.id',
+                    from: 'users.id',
                     through: {
-                        from: 'project_member.user_id',
-                        to: 'project_member.group_id',
+                        from: 'project_members.userId',
+                        to: 'project_members.groupId',
                         modelClass: project_member_1.default,
-                        extra: ['is_admin']
+                        extra: ['isAdmin']
                     },
-                    to: 'project.id'
+                    to: 'projects.id'
                 }
             }
         };

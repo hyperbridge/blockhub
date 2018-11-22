@@ -4,13 +4,13 @@ import ProjectMemberModel from './project-member'
 
 export default class UserModel extends Model implements Model {
     email: string = ''
-    first_name: string = ''
-    last_name: string = ''
-    is_active: boolean = false
-    password_hash: string = ''
+    firstName: string = ''
+    lastName: string = ''
+    isActive: boolean = false
+    passwordHash: string = ''
 
     static get tableName() {
-        return 'user'
+        return 'users'
     }
 
     static get relationMappings() {
@@ -19,14 +19,14 @@ export default class UserModel extends Model implements Model {
                 relation: Model.ManyToManyRelation,
                 modelClass: ProjectModel,
                 join: {
-                    from: 'user.id',
+                    from: 'users.id',
                     through: {
-                        from: 'project_member.user_id',
-                        to: 'project_member.group_id',
+                        from: 'project_members.userId',
+                        to: 'project_members.groupId',
                         modelClass: ProjectMemberModel,
-                        extra: ['is_admin']
+                        extra: ['isAdmin']
                     },
-                    to: 'project.id'
+                    to: 'projects.id'
                 }
             }
         }

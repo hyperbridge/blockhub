@@ -7,7 +7,7 @@ export default class ProjectModel extends Model implements Model {
     members: Array<UserModel> = []
 
     static get tableName() {
-        return 'project'
+        return 'projects'
     }
 
     static get relationMappings() {
@@ -16,14 +16,14 @@ export default class ProjectModel extends Model implements Model {
                 relation: Model.ManyToManyRelation,
                 modelClass: UserModel,
                 join: {
-                    from: 'project.id',
+                    from: 'projects.id',
                     through: {
-                        from: 'project_member.project_id',
-                        to: 'project_member.user_id',
+                        from: 'project_members.projectId',
+                        to: 'project_members.userId',
                         modelClass: ProjectMemberModel,
-                        extra: ['is_admin']
+                        extra: ['isAdmin']
                     },
-                    to: 'user.id'
+                    to: 'users.id'
                 }
             }
         }

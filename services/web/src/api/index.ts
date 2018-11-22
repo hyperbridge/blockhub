@@ -1,9 +1,11 @@
 import versions from './versions'
 import ping from './ping'
-import registerAccount from './registerAccount'
+import createUser from './createUser'
+import getUsers from './getUsers'
 
 export default {
     versions,
     ping,
-    registerAccount
+    createUser,
+    getUsers
 }

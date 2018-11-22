@@ -4,6 +4,7 @@ servers:
 # Added by API Auto Mocking Plugin
 - description: SwaggerHub API Auto Mocking
   url: https://virtserver.swaggerhub.com/hyperbri/blockhub-web-service/1.0.0
+- url: http://localhost:9001/api/v1
 - url: /api/v1
 info:
   version: 0.7.1
@@ -51,6 +52,7 @@ paths:
       - Users
       summary: Returns all users from BlockHub
       description: Users
+      operationId: getUsers
       responses:
         '200':
           description: OK
@@ -62,6 +64,7 @@ paths:
       tags:
       - Users
       summary: Creates new User
+      operationId: createUser
       responses:
         '201':
           description: Created
@@ -88,6 +91,7 @@ paths:
       tags:
       - Users
       summary: Returns a user by id or username
+      operationId: getUser
       responses:
         '200':
           description: OK
@@ -101,6 +105,7 @@ paths:
       tags:
       - Users
       summary: Deletes a user by id or username
+      operationId: removeUser
       responses:
         '204':
           description: No Content
@@ -110,6 +115,7 @@ paths:
       tags:
       - Users
       summary: Updates a user by id or username
+      operationId: updateUser
       responses:
         '200':
           description: OK
@@ -563,8 +569,8 @@ components:
     CreateUserRequest:
       required:
       - username
-      - firstname
-      - lastname
+      - firstName
+      - lastName
       properties:
         username:
           type: string
@@ -574,12 +580,12 @@ components:
           type: string
           description: email of user, configurable, not required by default
           example: steve@example.com
-        firstname:
+        firstName:
           type: string
           example: Steve
           description: First name of user (custom property configured in User model,
             required by default)
-        lastname:
+        lastName:
           type: string
           example: Brown
           description: Last name of user (custom property configured in User model,
@@ -591,19 +597,19 @@ components:
       type: object
     UpdateUserRequest:
       required:
-      - firstname
-      - lastname
+      - firstName
+      - lastName
       properties:
         email:
           type: string
           description: email of user, configurable, not required by default
           example: steve@example.com
-        firstname:
+        firstName:
           type: string
           example: Steve
           description: First name of user (custom property configured in User model,
             required by default)
-        lastname:
+        lastName:
           type: string
           example: Brown
           description: Last name of user (custom property configured in User model,
@@ -683,7 +689,7 @@ components:
             '$ref': '#/components/schemas/Scope'
     User:
       description: Main item in the system. Typically would be used to represent a
-        person in BlockHub. User can have multiple Projectlications (Projects) and
+        person in BlockHub. User can have multiple Projects and
         Credentials
       properties:
         username:
@@ -701,12 +707,12 @@ components:
           type: string
           description: email of user, configurable, not required by default
           example: steve@example.com
-        firstname:
+        firstName:
           type: string
           example: Steve
           description: First name of user (custom property configured in User model,
             required by default)
-        lastname:
+        lastName:
           type: string
           example: Brown
           description: Last name of user (custom property configured in User model,

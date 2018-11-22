@@ -16,13 +16,6 @@
         "secret": "",
         "redirectUrl": "http://localhost:4000/googleAuthConfirm"
     },
-    "db": {
-        "client": "mysql",
-        "host": "localhost",
-        "user": "root",
-        "password": "",
-        "database": "blockhub-web-service"
-    },
     "grpc": {
         "host": "localhost:50051"
     },

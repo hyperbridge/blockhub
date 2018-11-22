@@ -10,7 +10,7 @@ class ProjectModel extends objection_1.Model {
         this.members = [];
     }
     static get tableName() {
-        return 'project';
+        return 'projects';
     }
     static get relationMappings() {
         return {
@@ -18,14 +18,14 @@ class ProjectModel extends objection_1.Model {
                 relation: objection_1.Model.ManyToManyRelation,
                 modelClass: User_1.default,
                 join: {
-                    from: 'project.id',
+                    from: 'projects.id',
                     through: {
-                        from: 'project_member.project_id',
-                        to: 'project_member.user_id',
+                        from: 'project_members.projectId',
+                        to: 'project_members.userId',
                         modelClass: project_member_1.default,
-                        extra: ['is_admin']
+                        extra: ['isAdmin']
                     },
-                    to: 'user.id'
+                    to: 'users.id'
                 }
             }
         };
