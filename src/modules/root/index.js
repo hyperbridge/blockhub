@@ -87,7 +87,7 @@ const rootStore = {
             const [module, target] = path.split('/');
 
             // await axios.delete(`/${target}/${id}`);
-            commit('delete', id);
+            commit('delete', [path, id]);
         },
 
 
