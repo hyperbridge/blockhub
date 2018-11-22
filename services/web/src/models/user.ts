@@ -8,7 +8,8 @@ export default class User extends Model {
     firstName!: string
     lastName!: string
     passwordHash!: string
-    isActive: boolean = true
+    avatar!: string
+    isActive!: boolean
 
     static get tableName() {
         return 'users'

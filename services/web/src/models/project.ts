@@ -2,9 +2,10 @@ import { Model } from 'objection'
 import ProjectMember from './project-member'
 import User from './User'
 
-export default class ProjectModel extends Model {
-    name: string = ''
+export default class Project extends Model {
+    name!: string
     members: Array<User> = []
+    isProposal: Boolean = false
 
     static get tableName() {
         return 'projects'
