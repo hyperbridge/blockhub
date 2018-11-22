@@ -907,7 +907,7 @@ router.afterEach((to, from) => {
 
 export const Auth = {
   loggedIn() {
-    return store.state.application.signed_in
+    return store.state.application.signed_in || store.state.auth.user
   },
   accessGate(permission = false) {
     const privileges = store.getters['application/privileges']

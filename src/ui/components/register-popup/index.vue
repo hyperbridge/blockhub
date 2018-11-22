@@ -86,7 +86,7 @@
 
         <div slot="modal_footer" class="text-right w-100">
             <a href="#" @click="$store.commit('application/activateModal', 'login')" style="float: left">Already registered? Sign In</a>
-            <c-button size="md" @click="next()">Continue</c-button>
+            <c-button size="md" @click="next">Continue</c-button>
         </div>
     </c-custom-modal>
 </template>
@@ -94,6 +94,7 @@
 <script>
     import axios from 'axios'
     import FormData from 'form-data'
+    import { mapMutations, mapActions } from 'vuex'
 
     export default {
         props: ['activated'],
@@ -121,21 +122,40 @@
         },
         methods: {
             next() {
+                const { email, password } = this
                 this.errors = []
+                this.clearCreateError()
 
-                if (this.companyName
-                && this.productName
-                && this.contactName
-                && this.contactNumber
-                && this.contactEmail
-                && this.companyWebsite
-                && this.developerProfileAddress) {
-                   
+                if (email
+                && password) {
+                    // Automatically log the user in after successful signup.
+                    this.createUser({ email, password })
+                        .then(response => this.authenticate({ strategy: 'local', email, password }))
+                        // Just use the returned error instead of mapping it from the store.
+                        .catch(error => {
+                            // Convert the error to a plain object and add a message.
+                            let type = error.errorType
+                            error = Object.assign({}, error)
+                            error.message = (type === 'uniqueViolated')
+                                ? 'That email address is unavailable.'
+                                : 'An error prevented signup.'
+                                this.errors = [error.message]
+                        })
+                        
                     return
                 }
 
                 this.errors.push('Missing fields.')
-            }
+            },
+            ...mapActions('users', {
+                createUser: 'create'
+            }),
+            ...mapMutations('users', {
+                clearCreateError: 'clearCreateError'
+            }),
+            ...mapActions('auth', [
+                'authenticate'
+            ])
         }
     }
 </script>

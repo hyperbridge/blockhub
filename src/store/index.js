@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import feathersVuex from 'feathers-vuex'
+import feathersClient from '../api/feathers-client'
 
 import router from '../router'
 import * as DB from '../db'
@@ -20,6 +22,19 @@ import seed from '../db/seed'
 
 Vue.use(Vuex);
 
+const { service, auth } = feathersVuex(feathersClient, {
+    idField: 'id',
+    auth: {
+        userService: 'users'
+    }
+})
+
+    // .configure(feathersVuex(store, {
+    //     idField: '_id',
+    //     auth: {
+    //         userService: '/users'
+    //     }
+    // }))
 if (!window.BlockHub)
     window.BlockHub = {}
 
@@ -65,7 +80,15 @@ const devConfig = CheckDevConfig()
 
 const store = new Vuex.Store({
     ...rootStore,
-    plugins: [saveDB],
+    plugins: [
+        saveDB,
+        service('users'),
+        service('messages'),
+
+        auth({
+            userService: 'users'
+        })
+    ],
     modules: {
         cache: {
             namespaced: true,

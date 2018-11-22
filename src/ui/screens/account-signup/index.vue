@@ -1,6 +1,6 @@
 <template>
     <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false" :showShortcuts="false">
-        <div class="content login-container" id="content">
+        <!-- <div class="content login-container" id="content">
             <div class="container">
                 <div class="col-12">
                     <p class="errors" v-if="errors.length">
@@ -238,7 +238,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <c-popup title="Terms" :activated="terms" @close="terms = false" width="800">
             <div class="scroll_block">
@@ -480,6 +480,9 @@ export default {
                 this.errors.push('Passphrase does not match.')
             }
         }
+    },
+    created() {
+        this.$store.commit('application/activateModal', 'register')
     }
 }
 </script>

@@ -237,7 +237,11 @@
             signed_in() { return this.$store.state.application.signed_in },
             simulator_mode() { return this.$store.state.application.simulator_mode },
             operating_system() { return this.$store.state.application.operating_system },
-            environment_mode() { return this.$store.state.application.environment_mode }
+            environment_mode() { return this.$store.state.application.environment_mode },
+            // The user is automatically set by the feathers-vuex auth module upon login.
+            user () {
+                return this.$store.state.auth.user
+            }
         },
         methods: {
             ...mapActions(['loadSettings']),
@@ -369,6 +373,16 @@
             this.loadSettings()
             this.getExternalState()
             this.ensureDesktopWelcome()
+
+            this.$store.dispatch('auth/authenticate').catch(error => {
+                if (error) {
+                    if (!error.message.includes('Could not find stored JWT')) {
+                        console.error(error)
+                    }
+                    return
+                }
+
+            })
         },
         watch: {
             $route(to, from) {
@@ -377,6 +391,14 @@
 
                 this.updateEditorMode()
                 this.ensureDesktopWelcome(to)
+            },
+            // When the user is set, redirect to the Chat page.
+            user (newVal) {
+                if (newVal === undefined) {
+                    this.$router.replace({name: 'Sign In'})
+                } else {
+                    this.$router.replace({name: 'Chat'})
+                }
             }
         }
     }

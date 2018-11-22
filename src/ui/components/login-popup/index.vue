@@ -42,6 +42,7 @@
 <script>
     import axios from 'axios'
     import FormData from 'form-data'
+    import { mapMutations, mapActions } from 'vuex'
 
     export default {
         props: ['activated'],
@@ -58,32 +59,42 @@
             return {
                 errors: [],
                 email: null,
-                password: null,
-                repeatPassword: null,
-                agreement: null,
-                terms: null,
-                privacy: null
+                password: null
             }
         },
         computed: {
         },
         methods: {
             next() {
+                const { email, password } = this
                 this.errors = []
+                this.clearAuthenticateError()
 
-                if (this.companyName
-                && this.productName
-                && this.contactName
-                && this.contactNumber
-                && this.contactEmail
-                && this.companyWebsite
-                && this.developerProfileAddress) {
-                   
+                if (email
+                && password) {
+                    this.authenticate({ strategy: 'local', email, password })
+                        // Just use the returned error instead of mapping it from the store.
+                        .catch(error => {
+                            // Convert the error to a plain object and add a message.
+                            let type = error.className
+                            error = Object.assign({}, error)
+                            error.message = (type === 'not-authenticated')
+                                ? 'Incorrect email or password.'
+                                : 'An error prevented login.'
+                            this.errors = [error.message]
+                        })
+                    
                     return
                 }
 
                 this.errors.push('Missing fields.')
-            }
+            },
+            onSubmit (email, password) {
+            },
+            ...mapMutations('auth', {
+                clearAuthenticateError: 'clearAuthenticateError'
+            }),
+            ...mapActions('auth', ['authenticate'])
         }
     }
 </script>

@@ -11,6 +11,7 @@ import router from './router'
 import store, { initializer } from './store'
 import VueI18n from 'vue-i18n'
 import VueDraggable from 'vue-draggable'
+import '@/api/feathers-client'
 
 import localeData from '@/db/seed/locale-data.json'
 
