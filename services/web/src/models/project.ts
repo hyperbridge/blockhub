@@ -1,10 +1,10 @@
 import { Model } from 'objection'
-import ProjectMemberModel from './project-member'
-import UserModel from './User'
+import ProjectMember from './project-member'
+import User from './User'
 
-export default class ProjectModel extends Model implements Model {
+export default class ProjectModel extends Model {
     name: string = ''
-    members: Array<UserModel> = []
+    members: Array<User> = []
 
     static get tableName() {
         return 'projects'
@@ -14,13 +14,13 @@ export default class ProjectModel extends Model implements Model {
         return {
             members: {
                 relation: Model.ManyToManyRelation,
-                modelClass: UserModel,
+                modelClass: User,
                 join: {
                     from: 'projects.id',
                     through: {
                         from: 'project_members.projectId',
                         to: 'project_members.userId',
-                        modelClass: ProjectMemberModel,
+                        modelClass: ProjectMember,
                         extra: ['isAdmin']
                     },
                     to: 'users.id'

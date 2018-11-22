@@ -1,6 +1,6 @@
 import config from '../config'
-import UserModel from '../models/user'
-import ProjectModel from '../models/project'
+import User from '../models/user'
+import Project from '../models/project'
 
 // const pg = require('pg')
 
@@ -59,7 +59,7 @@ export type UpdateTokenRequest = {
 // }
 
 export const fetchProjectMembers = async (projectId: number, isAdmin: boolean) => {
-    let projectRecord = await ProjectModel
+    let projectRecord = await Project
         .query()
         .eager('members(onlyMembers)', {
             onlyMembers: (builder) => {
@@ -119,8 +119,8 @@ export const updateToken = async (req: UpdateTokenRequest) => {
 }
 
 
-export const createUser = async (email: string, firstName: string, lastName: string): Promise<UserModel | undefined> => {
-    let user = await UserModel
+export const createUser = async (email: string, firstName: string, lastName: string): Promise<User | undefined> => {
+    let user = await User
         .query()
         .insertAndFetch({
             email,
@@ -146,7 +146,7 @@ export const createUser = async (email: string, firstName: string, lastName: str
 }
 
 export const getUsers = async (isAdmin: boolean) => {
-    const userRecords = await UserModel
+    const userRecords = await User
         .query()
         .pick(['id', 'firstName', 'lastName', 'email'])
     // .eager('members(onlyMembers)', {
@@ -159,8 +159,8 @@ export const getUsers = async (isAdmin: boolean) => {
     return Promise.resolve(userRecords)
 }
 
-export const fetchUser = async ({ uuid, email, fieldKey }): Promise<UserModel | undefined> => {
-    let result = await UserModel
+export const fetchUser = async ({ uuid, email, fieldKey }): Promise<User | undefined> => {
+    let result = await User
         .query()
         .findOne(fieldKey, fieldKey === 'id' ? uuid : email)
 
@@ -171,7 +171,7 @@ export const fetchUser = async ({ uuid, email, fieldKey }): Promise<UserModel | 
     return Promise.resolve(result)
 }
 
-// export const fetchProject = async (uuid: number): Promise<ProjectModel> => {
+// export const fetchProject = async (uuid: number): Promise<Project> => {
 //     return new Promise((resolve, reject) => {
 //         const queryString = 'select id, name from `projects` where id = ?'
 //         connection.query(
@@ -182,7 +182,7 @@ export const fetchUser = async ({ uuid, email, fieldKey }): Promise<UserModel | 
 //                     return reject(error)
 //                 }
 
-//                 const record: ProjectModel = new ProjectModel()
+//                 const record: Project = new Project()
 
 //                 resolve(record)
 //             }
