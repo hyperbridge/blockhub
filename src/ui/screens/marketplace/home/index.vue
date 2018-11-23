@@ -23,12 +23,16 @@
                     />
                 </transition-group> -->
                 <template slot-scope="props">
-                    <c-asset-store-card
+                    <router-link
                         v-for="(item, index) in props.items"
                         :class="props.css[index]"
                         :key="item.id"
-                        :asset="item"
-                    />
+                        :to="`/marketplace/asset/${item.id}`"
+                    >
+                        <c-asset-store-card
+                            :asset="item"
+                        />
+                    </router-link>
                 </template>
             </c-carousel-3d>
         </div>

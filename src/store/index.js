@@ -13,7 +13,6 @@ import * as marketplace from '../modules/marketplace'
 import * as application from '../modules/application'
 import * as database from '../modules/database'
 import * as cache from '../modules/cache'
-import user from '@/modules/user'
 import { saveDB } from './plugins'
 import assets from '@/modules/assets'
 import community from '@/modules/community'
@@ -132,7 +131,6 @@ const store = new Vuex.Store({
             actions: application.actions,
             mutations: application.mutations
         },
-        user,
         assets,
         community
     }

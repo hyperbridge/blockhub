@@ -87,7 +87,7 @@
             minValue() {
                 const { offer } = this;
 
-                if (!offer && !offer.bids.length) return 0;
+                if (!offer || !offer.bids.length) return 0;
 
                 const highestVal = offer.bids[offer.bids.length - 1].value;
                 return Math.round((highestVal + highestVal * 0.05) * 100) / 100;

@@ -120,7 +120,7 @@
                             />
                         </div>
                         <div class="flex-center-between">
-                            <c-button status="warning" @click="cancelCreation()" icon="trash-alt" size="lg">
+                            <c-button status="warning" @click="resetCreation()" icon="trash-alt" size="lg">
                                 Cancel
                             </c-button>
                             <c-button status="success" @click="createSniper()" size="lg">

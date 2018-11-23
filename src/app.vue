@@ -202,7 +202,6 @@
 <script>
     import axios from 'axios'
     import Vue from 'vue'
-    import { mapActions } from 'vuex'
 
     export default {
         name: 'app',
@@ -244,7 +243,6 @@
             }
         },
         methods: {
-            ...mapActions(['loadSettings']),
             ensureDesktopWelcome(to) {
                 if (this.$store.state.application.desktop_mode
                 && !this.$store.state.application.signed_in
@@ -370,7 +368,6 @@
             }
         },
         mounted() {
-            this.loadSettings()
             this.getExternalState()
             this.ensureDesktopWelcome()
 
