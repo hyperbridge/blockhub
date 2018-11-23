@@ -2,7 +2,7 @@
     <div class="container-fluid p-4">
 
         <!--Buttons block -->
-        <c-block title="Buttons" class="margin-bottom-30" hidden>
+        <c-block title="Buttons" class="margin-bottom-30">
             <div class="row justify-content-center">
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 buttons-container">
                     <c-button>default</c-button>
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </c-block>
-        <c-block title="Outline Buttons" class="margin-bottom-30" hidden>
+        <c-block title="Outline Buttons" class="margin-bottom-30">
             <div class="row justify-content-center">
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 buttons-container">
                     <c-button status="outline-white">White</c-button>
@@ -90,7 +90,7 @@
                 </div>
             </div>
         </c-block>
-        <c-block title="Gradient Buttons" class="margin-bottom-30" hidden>
+        <c-block title="Gradient Buttons" class="margin-bottom-30">
             <div class="row justify-content-center">
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 buttons-container">
                     <c-button status="gradient-success">success</c-button>
