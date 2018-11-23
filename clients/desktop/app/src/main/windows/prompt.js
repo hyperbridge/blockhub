@@ -87,7 +87,7 @@ function electronPrompt(options, parentWindow) {
 		const promptUrl = url.format({
 			protocol: 'file',
 			slashes: true,
-			pathname: path.join(__dirname, 'index.html'),
+			pathname: path.join(__dirname, 'prompt/main.html'),
 			hash: id
 		});
 

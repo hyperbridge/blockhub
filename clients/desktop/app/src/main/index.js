@@ -8,7 +8,7 @@ import * as PeerService from '../framework/peer-service'
 import * as Wallet from '../framework/wallet'
 import * as Windows from './windows'
 import * as Updater from './updater'
-import electronPrompt from './windows/prompt/index.js'
+import electronPrompt from './windows/prompt/main.js'
 
 const config = require('../config')
 
