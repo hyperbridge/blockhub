@@ -12,16 +12,13 @@ import ComposeMessage from './composer.vue'
 import SingleMessage from './message.vue'
 
 export default {
-  data () {
-    return {
-      // TODO: Fix the placeholder
-      placeholder: 'PLACEHOLDER'
-    }
-  },
   props: {
     messages: Array,
-    findMessages: Function,
     createMessage: Function
+  },
+  data () {
+    return {
+    }
   },
   methods: {
     scrollToBottom () {

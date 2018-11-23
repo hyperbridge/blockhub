@@ -10,8 +10,7 @@
       <c-user-list :users="users"
         :logout="logout" />
 
-      <c-message-list :messages="messages.data"
-        :findMessages="findMessages"
+      <c-message-list :messages="messages"
         :createMessage="createMessage" />
     </div>
   </main>
@@ -23,55 +22,63 @@ import UserList from './users'
 import MessageList from './messages'
 
 export default {
-  computed: {
-    ...mapState('auth', [
-      'user'
-    ]),
-    ...mapGetters('messages', {
-      findMessagesInStore: 'find'
-    }),
-    ...mapGetters('users', {
-      users: 'list'
-    }),
-    messages () {
-      return this.findMessagesInStore({query: { $sort: {createdAt: 1} }})
+    props: {
+        messages: Array
+    },
+    computed: {
+        ...mapState('auth', [
+          'user'
+        ]),
+        ...mapGetters('users', {
+          users: 'list'
+        }),
+        // users2 () {
+        //   return this.findUsers({
+        //     query: {
+        //       $sort: {
+        //         email: 1
+        //       },
+        //       $limit: 25
+        //     }
+        //   })
+        // },
+    },
+    methods: {
+        ...mapActions('messages', {
+            createMessage: 'create'
+        }),
+        ...mapActions('users', {
+            findUsers: 'find'
+        }),
+        ...mapActions('messages', {
+            findMessages: 'find'
+        }),
+        ...mapActions('auth', [
+            'logout'
+        ])
+    },
+    created () {
+        this.findMessages({
+          query: {
+            $sort: {
+              createdAt: 1
+            },
+            $limit: 25
+          }
+        })
+        this.findUsers({
+          query: {
+            $sort: {
+              email: 1
+            },
+            $limit: 25
+          }
+        })
+    },
+    components: {
+        'c-user-list': UserList,
+        'c-message-list': MessageList
     }
-  },
-  methods: {
-    ...mapActions('messages', {
-      findMessages: 'find',
-      createMessage: 'create'
-    }),
-    ...mapActions('users', {
-      findUsers: 'find'
-    }),
-    ...mapActions('auth', [
-      'logout'
-    ])
-  },
-  created () {
-    if (!this.user) {
-      return this.$router.replace({name: 'Sign In'})
-    }
-    // Query users from Feathers
-    this.findUsers({
-      query: {
-        $sort: {email: 1},
-        $limit: 25
-      }
-    })
-    // Query messages from Feathers
-    this.findMessages({
-      query: {
-        $sort: {createdAt: -1},
-        $limit: 25
-      }
-    })
-  },
-  components: {
-    'c-user-list': UserList,
-    'c-message-list': MessageList
-  }
 }
 </script>
 

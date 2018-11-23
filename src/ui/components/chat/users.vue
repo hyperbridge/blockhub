@@ -20,6 +20,10 @@
 
 <script>
 export default {
+  props: {
+    users: Array,
+    logout: Function
+  },
   data () {
     return {
       dummyUser: [
@@ -35,10 +39,6 @@ export default {
       return this.users.length === 1 ? 'user' : 'users'
     }
   },
-  props: {
-    users: Array,
-    logout: Function
-  }
 }
 </script>
 

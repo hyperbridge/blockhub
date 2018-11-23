@@ -1,6 +1,6 @@
 <template>
     <div style="background: #fff">
-      <c-chat></c-chat>
+      <c-chat :messages="messages"></c-chat>
     </div>
 </template>
 
@@ -8,11 +8,17 @@
 import Chat from '@/ui/components/chat/chat'
 
 export default {
-  components: {
-    'c-chat': Chat
-  },
-  data: () => ({
-  })
+    components: {
+        'c-chat': Chat
+    },
+    computed: {
+        messages() {
+            return this.$store.getters['messages/list']
+                //.filter(trx => trx.you.id == this.identityId);
+        }
+    },
+    data: () => ({
+    })
 }
 </script>
 
