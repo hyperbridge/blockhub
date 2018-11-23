@@ -16,79 +16,28 @@
                     </c-button>
                 </div>
                 <div class="col-12">
-                    <div class="history-list" v-if="listType == 'list'">
-                        <div class="history-list__list-item" v-for="release in releases_list">
-                            <div class="history-list__item-info">
-                                <div class="latest-badge" v-if="release.latest_release">
-                                    Latest Release
-                                </div>
-                                <span>
-                                    {{ release.date | timeAgo }}
-                                </span>
-                                        <span>
-                                    <i class="fas fa-tag mr-2"></i> {{ release.version }}
-                                </span>
-                            </div>
-                            <div class="history-list__item-description">
-                                <div class="h1">
-                                    {{ release.version }}
-                                </div>
-                                <div>
-                                    {{ release.author }} released this this version {{ release.date | timeAgo }}
-                                </div>
-                                <div class="release-text padding-top-15" v-html="release.text">
-                                </div>
-                                <div class="assets-list__wrapper" v-if="release.files">
-                                    <div class="assets-list__button" @click="showList = !showList">
-                                        <div class="icon">
-                                            <i class="fas" :class="[ showList ? 'fa-angle-up' : 'fa-angle-down']"></i>
-                                        </div>
-                                        <div class="text">
-                                            Assets ({{ release.files.length }})
-                                        </div>
-                                    </div>
-                                    <div class="assets-list" v-if="showList">
-                                        <div class="assets-list__item" @click="" v-for="file in release.files">
-                                            <div class="icon">
-                                                <i class="fas fa-file-download"></i>
-                                            </div>
-                                            <div class="title">
-                                                <a :href="file.src" target="_blank">
-                                                    {{ file.name }}
-                                                </a>
-                                            </div>
-                                            <div class="size">
-                                                {{ file.size | numeralFormat('0.00b') }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="history-list">
+
+                        <c-release-list-item  v-for="(release, index) in sortedList"
+                                              :version="release.version"
+                                              :date="release.date"
+                                              :author="release.author"
+                                              :size="release.size"
+                                              :files="release.files"
+                                              :text="release.text"
+                                              :id="release.id"
+                                              :latest_release="release.latest_release"
+                                              v-if="listType == 'list'"
+                        />
+                        <div class="history-list__tags-title" v-if="listType == 'tags'" >
+                            <i class="fas fa-tag mr-2"></i> Tags
                         </div>
-                    </div>
-                    <div class="history-list" v-if="listType == 'tags'">
-                        <div class="history-list__tag-item" v-for="release in releases_list">
-                            <div class="h3">
-                                {{ release.version }}
-                            </div>
-                            <div class="sub-info">
-                                <div>
-                                    <i class="fas fa-clock"></i> {{ release.date | timeAgo }}
-                                </div>
-                                <div>
-                                    <i class="fas fa-file-archive"></i> .zip
-                                </div>
-                                <div>
-                                    <i class="fas fa-file-archive"></i> .tar.gz
-                                </div>
-                                <div>
-                                    <i class="fas fa-file-alt"></i> Notes
-                                </div>
-                                <div>
-                                    <i class="fas fa-file-download"></i> Download
-                                </div>
-                            </div>
-                        </div>
+                        <c-release-tag-item  v-for="release in sortedList"
+                                            :version="release.version"
+                                            :id="release.id"
+                                            :date="release.date"
+                                            :author="release.author"
+                                            v-if="listType == 'tags'" />
                     </div>
                 </div>
             </div>
@@ -101,18 +50,45 @@
         components: {
             'c-business-layout': (resolve) => require(['@/ui/layouts/business'], resolve),
             'c-buttons-group': (resolve) => require(['@/ui/components/buttons/group'], resolve),
+            'c-release-tag-item': (resolve) => require(['@/ui/components/business/release-history/tag-item'], resolve),
+            'c-release-list-item': (resolve) => require(['@/ui/components/business/release-history/list-item'], resolve),
         },
         data() {
             return {
-                showList: false,
                 listType: 'list',
                 releases_list:[
                     {
-                        date: '2005-08-09T18:31:42+03:30',
+                        id: "987",
+                        date: '2018-03-09T18:31:42+03:30',
                         latest_release: false,
+                        version: '0.5.1',
+                        author: 'Josh Doel',
+                        text: 'In this update:<ul><li>Simplify sign up</li><li>Hold ALT and click to give feedback!</li></ul>',
+                        files: [
+                            {
+                                name: 'BlockHub-0.3.1-mac.zip',
+                                src: '#',
+                                size: 234214324
+                            },
+                            {
+                                name: 'BlockHub-0.3.1-Win86.zip',
+                                src: '#',
+                                size: 2342324324
+                            },
+                            {
+                                name: 'BlockHub-0.3.1-Linux.zip',
+                                src: '#',
+                                size: 942324324
+                            }
+                        ]
+                    },
+                    {
+                        id: "23413",
+                        date: '2018-08-09T18:31:42+03:30',
+                        latest_release: true,
                         version: '0.7.1',
                         author: 'Josh Doel',
-                        text: 'In this update:<ul><li>Token purchase flow\n</li><li>Copy to address works</li><li>Account recovery</li><li>Simplify sign up</li><li>Hold ALT and click to give feedback!</li></ul>',
+                        text: 'In this update:<ul><li>Token purchase flow</li><li>Copy to address works</li><li>Account recovery</li></ul>',
                         files: [
                             {
                                 name: 'BlockHub-0.7.1-mac.zip',
@@ -129,6 +105,41 @@
                                 src: '#',
                                 size: 942324324
                             }
+                        ]
+                    },
+                    {
+                        id: "12",
+                        date: '2013-12-09T18:31:42+03:30',
+                        latest_release: false,
+                        version: '0.0.1',
+                        author: 'Josh Doel',
+                        text: 'Add version for MacOs',
+                        files: [
+                            {
+                                name: 'BlockHub-0.0.1-mac.zip',
+                                src: '#',
+                                size: 234214324
+                            }
+                        ]
+                    },
+                    {
+                        id: "243",
+                        date: '2013-08-09T18:31:42+03:30',
+                        latest_release: false,
+                        version: '0.0.1',
+                        author: 'Josh Doel',
+                        text: 'First release',
+                        files: [
+                            {
+                                name: 'BlockHub-0.0.1-Win86.zip',
+                                src: '#',
+                                size: 2342324324
+                            },
+                            {
+                                name: 'BlockHub-0.0.1-Win64.zip',
+                                src: '#',
+                                size: 2342324324
+                            },
                         ]
                     }
                 ]
@@ -150,6 +161,14 @@
                     default:
                         return 'outline-success'
                 }
+            },
+            sortedList(){
+                let arr = this.releases_list;
+                arr.sort(function(a,b){
+                    console.log(new Date(b.date) - new Date(a.date))
+                    return new Date(b.date) - new Date(a.date);
+                });
+                return arr;
             }
         }
     }
@@ -161,118 +180,15 @@
         flex-direction: column;
         margin: 20px 0 0;
         background: #fff;
-        border: 1px solid #d4d4d4;
+        border-top: 1px solid #e7e7e7;
     }
-
-    .history-list__list-item {
+    .history-list__tags-title{
         display: flex;
-        align-items: stretch;
-        flex-wrap: nowrap;
-        padding: 0 15px;
-    }
-    .history-list__tag-item{
-        display: flex;
-        flex-direction: column;
-        border-bottom: 1px solid #d4d4d4;
-        padding: 15px;
-        background: #fff;
-        &:last-child{
-            border-bottom: none;
-        }
-        .sub-info{
-            display: flex;
+        padding: 10px 15px;
+        background: #e7e7e7;
+        align-items: center;
+        i{
             font-size: 14px;
-            align-items: center;
-            div{
-                margin-right: 20px;
-                i{
-                    opacity: .7;
-                    font-size: 13px;
-                    margin-right: 3px;
-                }
-                &:hover{
-                    color: #237cc1;
-                    cursor: pointer;
-                    opacity: 1;
-                }
-            }
-        }
-    }
-
-    .history-list__item-info {
-        display: flex;
-        flex-direction: column;
-        text-align: right;
-        padding: 20px 20px 20px 0;
-        margin-right: 20px;
-        width: 150px;
-        font-size: 14px;
-        border-right: 2px solid #d4d4d4;
-        position: relative;
-        &:after{
-            position: absolute;
-            top: 25px;
-            right: -6px;
-            width: 10px;
-            height: 10px;
-            border-radius: 100%;
-            background: #d4d4d4;
-            content: "";
-        }
-    }
-
-    .history-list__item-description {
-        padding: 10px 0;
-        width: calc(100% - 170px);
-    }
-
-    .latest-badge {
-        border: 1px solid #28a745;
-        color: #28a745;
-        padding: 0px 7px;
-        border-radius: 2px;
-        font-size: 10px;
-        font-weight: 500;
-        margin-bottom: 10px;
-        text-transform: uppercase;
-        margin-left: auto;
-    }
-
-    .assets-list__wrapper,
-    .assets-list{
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-    }
-    .assets-list{
-        padding-top: 10px;
-    }
-    .assets-list__button{
-        display: flex;
-        align-items: center;
-        font-size: 20px;
-        cursor: pointer;
-        .icon{
-            font-size: 24px;
-        }
-    }
-    .assets-list__item{
-        display: flex;
-        align-items: center;
-        padding: 5px 0;
-        font-weight: 500;
-        margin-top: 5px;
-        font-size: 15px;
-        .icon{
-            font-size: 15px;
-            margin-right: 5px;
-        }
-        .size{
-            margin-left: auto;
-            font-weight: normal;
-        }
-        a{
-            color: #237cc1;
         }
     }
 </style>

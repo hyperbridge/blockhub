@@ -133,6 +133,7 @@
                                     <th hidden>Operators</th>
                                     <th>Price</th>
                                     <th width="100">Status</th>
+                                    <th width="100">History</th>
                                     <th width="30"></th>
                                 </tr>
                             </thead>
@@ -173,8 +174,13 @@
                                         {{ product.price }}
                                     </td>
                                     <td>
-                                        <button class="btn btn-outline-success btn-block btn-sm">{{ product.status }}
-                                        </button>
+                                        <!--<button class="btn btn-outline-success btn-block btn-sm">{{ product.status }}-->
+                                        <!--</button>-->
+                                    </td>
+                                    <td>
+                                        <router-link :to="{ name: 'Release History', params: {id: product.id } }">
+                                            View
+                                        </router-link>
                                     </td>
                                     <td>
                                         <button class="btn btn-secondary btn-icon btn-sm"><i class="fa fa-pencil"/></button>
@@ -210,12 +216,9 @@
                 return this.$store.state.marketplace.products
             }
         },
-        mounted() {
-            this.$nextTick(() => {
-                this.loadingState = false
-                document.getElementById('startup-loader').style.display = 'none'
-            })
-        },
+        created(){
+            console.log('products', this.$store.state.marketplace)
+        }
     }
 </script>
 

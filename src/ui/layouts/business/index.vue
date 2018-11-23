@@ -134,22 +134,6 @@
                     {
                         header: true,
                         title: 'Setting',
-                    },
-                    {
-                        title: 'Release manager',
-                        icon: 'fas fa-cog',
-                        child: [
-                            {
-                                href: '/business/release-history',
-                                title: 'History',
-                                icon: 'fas fa-square-full icon-sm'
-                            },
-                            {
-                                href: '/business/new-release',
-                                title: 'New release',
-                                icon: 'fas fa-square-full icon-sm'
-                            }
-                        ]
                     }
                 ]
             }
@@ -165,8 +149,6 @@
         },
         methods:{
             updateBreadcrumbLinks() {
-                console.log('updateBreadcrumbLinks')
-                console.log(this.$route.meta.breadcrumb)
                 this.breadcrumbLinksData = this.$route.meta.breadcrumb
             },
         },
@@ -179,12 +161,10 @@
             let body = document.body;
             body.classList.add("light");
             this.updateBreadcrumbLinks();
-            console.log('layout mounted')
         },
         beforeDestroy(){
             let body = document.body;
             body.classList.remove("light");
-            console.log('layout all most destroyed')
         },
         watch:{
             '$route'(to, from) {
@@ -210,7 +190,8 @@
     body{
         &.light{
             background: #f7f6f7!important;
-            font-size: 14px;
+            font-size: 16px;
+            line-height: 26px;
             #header-bg,
             #right-bg,
             #left-bg{

@@ -4898,6 +4898,14 @@ storiesOf('Token Sale Box', module)
         </div>`
     }))
 
+storiesOf('Guide', module)
+    .add('default', () =>({
+        components:{
+            'c-guide': (resolve) => require(['@/ui/components/guide'], resolve),
+        },
+        template: `<c-guide />`
+    }))
+
 
 /*
      Dynamic import - test version

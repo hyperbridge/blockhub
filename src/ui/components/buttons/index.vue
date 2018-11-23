@@ -172,14 +172,14 @@
 
         $statusColors: (
             default: (#fff, #3D3E5D, #3D3E5D, #A2A3BE),
-            plain: (transparent, #fff, transparent, #ddd),
-            info: (#5D75F7, #fff, #5165d5, #30304B),
             success: (#5EA72B, #fff, #559727, #30304B),
-            danger: (#F75D5D, #fff, #de5454, #30304B),
-            warning: (#FADC72, #3D3E5D, #efd26d, #32334c),
-            share: (#43B4C9, #fff, #3b9fb1, #32334c),
             support: (#43C981, #fff, #3db876, #30304B),
+            info: (#5D75F7, #fff, #5165d5, #30304B),
+            share: (#43B4C9, #fff, #3b9fb1, #32334c),
+            warning: (#FADC72, #3D3E5D, #efd26d, #32334c),
+            danger: (#F75D5D, #fff, #de5454, #30304B),
             dark: (#3D3E5D, #fff, #2e2f47, #fff),
+            plain: (transparent, #fff, transparent, #ddd),
         );
 
         @each $status, $colorSet in $statusColors {
