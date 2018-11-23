@@ -9,8 +9,8 @@
         components: {
             'c-business-layout': (resolve) => require(['@/ui/layouts/business'], resolve)
         },
-        data(){
-            return{
+        data() {
+            return {
                 loadingState: true,
             }
         }

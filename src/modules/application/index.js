@@ -46,6 +46,7 @@ const updateState = (savedData, updatedState = {}) => {
         },
         shortcuts: savedData.shortcuts != null ? savedData.shortcuts : [],
         operating_system: savedData.operating_system != null ? savedData.operating_system : getOS(),
+        initialized: savedData.initialized != null ? savedData.initialized : BlockHub.initialized,
         account: DB.application.config.data[0].account || {},
         darklaunch_flags: DB.application.config.data[0].darklaunch_flags || [],
         developer_mode: savedData.developer_mode != null ? savedData.developer_mode : DB.application.config.data[0].account && !!DB.application.config.data[0].account.current_identity.developer_id,

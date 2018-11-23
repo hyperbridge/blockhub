@@ -117,7 +117,6 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Secret Question #1</label>
-                                                    <!-- http://goodsecurityquestions.com/examples/ -->
                                                     <select id="secret_question_1" name="secret_question_1" class="form-control" v-model="account.secret_question_1">
                                                         <option value="" selected>Choose Secret Question</option>
                                                         <option value="last_name_first_kissed">What is the first name of the person you first kissed?</option>
@@ -132,7 +131,6 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Secret Question #2</label>
-                                                    <!-- http://goodsecurityquestions.com/examples/ -->
                                                     <select id="secret_question_2" name="secret_question_2" class="form-control" v-model="account.secret_question_2">
                                                         <option value="" selected>Choose Secret Question</option>
                                                         <option value="last_name_first_kissed">What is the first name of the person you first kissed?</option>

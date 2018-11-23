@@ -71,7 +71,7 @@
             <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
                 <c-breadcrumb :links="breadcrumbLinksData" ref="breadcrumb" v-if="is_connected && showBreadcrumbs" />
                 <div class="container-fluid">
-                    <slot v-if="is_connected" />
+                    <slot v-if="initialized && is_connected" />
                 </div>
             </div>
 
@@ -359,7 +359,6 @@
             return {
                 navigationComponent: this.navigationKey || false,
                 loadingState: true,
-                initialized: BlockHub.initialized,
                 user_submitted_connection_message: this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))],
                 panelOption: {
                     spaceBetween: 0,
@@ -451,6 +450,9 @@
             }
         },
         computed: {
+            initialized() {
+                return this.$store.state.application.initialized
+            },
             is_connected() {
                 return this.$store.state.application.connection.internet && this.$store.state.application.connection.datasource
             },
@@ -613,28 +615,58 @@
                 }
                     // this.showRightPanel = false;
                     // this.showLeftPanel = false;
+            },
+            initialize() {
+                if (this.initialized) {
+                    return
+                }
+
+                this.$store.state.application.initialized = BlockHub.initialized = true
+
+                document.getElementById('startup-loader').style.display = 'none'
+
+                // check sidebar button
+                $(this.$refs.scroll_sidebar).scroll(() => {
+                    this.debounce(() => {
+                        this.checkScrollButton()
+                    }, 250)
+                })
+            }
+        },
+        watch: {
+            '$store.state.auth.accessToken'() {
+                this.initialize()
             }
         },
         created() {
             window.addEventListener('resize', this.handleResize())
-            this.handleResize();
+            this.handleResize()
+
+            this.$store.dispatch('auth/authenticate')
+                .then(() => {
+                    if (this.$store.state.auth.accessToken) {
+                        this.initialize()
+                    }
+                })
+                .catch(error => {
+                    this.initialize()
+
+                    if (error) {
+                        if (!error.message.includes('Could not find stored JWT')) {
+                            console.error(error)
+                        }
+                        return
+                    }
+
+                })
         },
         mounted() {
             this.updateBreadcrumbLinks()
             this.$nextTick(() => {
                 this.loadingState = false
-                setTimeout(() => {
-                    document.getElementById('startup-loader').style.display = 'none'
-
-                    this.initialized = BlockHub.initialized = true
-
-                    // check sidebar button
-                    $(this.$refs.scroll_sidebar).scroll(() => {
-                        this.debounce(() => {
-                            this.checkScrollButton()
-                        }, 250)
-                    })
-                }, 1000) // TODO: remove arbitrary delay
+                // setTimeout(() => {
+                //     this.initialize()
+                // }, 3000) // TODO: remove arbitrary delay
 
                 setInterval(() => {
                     this.checkScrollButton()

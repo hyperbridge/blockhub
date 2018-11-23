@@ -370,21 +370,13 @@
         mounted() {
             this.getExternalState()
             this.ensureDesktopWelcome()
-
-            this.$store.dispatch('auth/authenticate').catch(error => {
-                if (error) {
-                    if (!error.message.includes('Could not find stored JWT')) {
-                        console.error(error)
-                    }
-                    return
-                }
-
-            })
         },
         watch: {
             $route(to, from) {
                 $('body').removeClass('show-sidebar')
                 $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-cog')
+
+                this.$store.state.application.active_modal = false
 
                 this.updateEditorMode()
                 this.ensureDesktopWelcome(to)
@@ -392,9 +384,11 @@
             // When the user is set, redirect to the Chat page.
             user (newVal) {
                 if (newVal === undefined) {
-                    this.$router.replace({name: 'Sign In'})
+                    this.$store.state.application.signed_in = false
+                    //this.$router.replace({ name: 'Home' })
                 } else {
-                    this.$router.replace({name: 'Chat'})
+                    this.$store.state.application.signed_in = true
+                    //this.$router.replace({ name: 'Home' })
                 }
             }
         }

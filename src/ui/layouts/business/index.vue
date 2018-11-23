@@ -138,39 +138,66 @@
                 ]
             }
         },
-        created(){
-            this.updateBreadcrumbLinks();
-            this.page_title = this.$route.meta.title || 'Dashboard';
+        created() {
+            this.updateBreadcrumbLinks()
+            this.page_title = this.$route.meta.title || 'Dashboard'
+            this.$store.dispatch('auth/authenticate')
+                .then(() => {
+                    if (this.$store.state.auth.accessToken) {
+                        this.initialize()
+                    }
+                })
+                .catch(error => {
+                    this.initialize()
+
+                    if (error) {
+                        if (!error.message.includes('Could not find stored JWT')) {
+                            console.error(error)
+                        }
+                        return
+                    }
+
+                })
         },
         computed: {
             current_identity() {
                 return this.$store.state.application.account && this.$store.state.application.account.current_identity
             },
         },
-        methods:{
+        methods: {
             updateBreadcrumbLinks() {
                 this.breadcrumbLinksData = this.$route.meta.breadcrumb
             },
+            initialize() {
+                if (this.initialized) {
+                    return
+                }
+
+                this.$store.state.application.initialized = BlockHub.initialized = true
+
+                document.getElementById('startup-loader').style.display = 'none'
+            }
         },
         mounted() {
             this.$nextTick(() => {
                 this.loadingState = false
-                document.getElementById('startup-loader').style.display = 'none'
             })
 
-            let body = document.body;
-            body.classList.add("light");
-            this.updateBreadcrumbLinks();
+            document.body.classList.add('light')
+
+            this.updateBreadcrumbLinks()
         },
-        beforeDestroy(){
-            let body = document.body;
-            body.classList.remove("light");
+        beforeDestroy() {
+            document.body.classList.remove('light')
         },
-        watch:{
+        watch: {
             '$route'(to, from) {
-                this.updateBreadcrumbLinks();
-                this.page_title = to.meta.title || 'Dashboard';
+                this.updateBreadcrumbLinks()
+                this.page_title = to.meta.title || 'Dashboard'
             },
+            '$store.state.auth.accessToken'() {
+                this.initialize()
+            }
         }
     }
 </script>

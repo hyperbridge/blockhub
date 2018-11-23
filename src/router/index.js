@@ -982,7 +982,7 @@ router.afterEach((to, from) => {
 
 export const Auth = {
   loggedIn() {
-    return store.state.application.signed_in || store.state.auth.user
+    return store.state.application.signed_in
   },
   accessGate(permission = false) {
     const privileges = store.getters['application/privileges']
@@ -1008,8 +1008,10 @@ router.beforeEach((to, from, next) => {
   }
 
   if (!Auth.loggedIn() && !!to.meta.auth) {
+    store.state.application.signed_in = false
+
     next({
-      path: '/download',
+      name: 'Sign In',
       query: { redirect: to.fullPath }
     })
     return

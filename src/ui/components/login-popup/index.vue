@@ -89,8 +89,6 @@
 
                 this.errors.push('Missing fields.')
             },
-            onSubmit (email, password) {
-            },
             ...mapMutations('auth', {
                 clearAuthenticateError: 'clearAuthenticateError'
             }),

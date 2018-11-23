@@ -28,12 +28,6 @@ const { service, auth } = feathersVuex(feathersClient, {
     }
 })
 
-    // .configure(feathersVuex(store, {
-    //     idField: '_id',
-    //     auth: {
-    //         userService: '/users'
-    //     }
-    // }))
 if (!window.BlockHub)
     window.BlockHub = {}
 
@@ -83,6 +77,7 @@ const store = new Vuex.Store({
         saveDB,
         service('users'),
         service('messages'),
+        service('projects'),
 
         auth({
             userService: 'users'
@@ -230,7 +225,7 @@ window.BlockHub.saveDatabase = () => {
 const initSubscribers = () => {
     store.subscribe((mutation, state) => {
         if (mutation.type !== 'application/setInternetConnection') {
-            console.info('[BlockHub] Mutation: ' + mutation.type, state)
+            console.info('[BlockHub] Mutation: ' + mutation.type, mutation.payload, state)
         }
 
         if (mutation.type === 'database/initialized') {

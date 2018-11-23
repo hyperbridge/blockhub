@@ -1,6 +1,7 @@
 {
     "application": {
         "version": "0.7.1",
+        "initialized": false,
         "environment_mode": null,
         "locked": false,
         "signed_in": false,
