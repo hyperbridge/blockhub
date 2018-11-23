@@ -4951,6 +4951,14 @@ storiesOf('Guide', module)
         template: `<c-guide />`
     }))
 
+storiesOf('Video Popup', module)
+    .add('default', () =>({
+        components:{
+            'c-video-popup': (resolve) => require(['@/ui/components/video-popup'], resolve),
+        },
+        template: `<c-video-popup />`
+    }))
+
 
 /*
      Dynamic import - test version
