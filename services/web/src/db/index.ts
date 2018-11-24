@@ -1,4 +1,4 @@
-import config from '../config'
+import config from '../../config'
 import User from '../models/user'
 import Project from '../models/project'
 

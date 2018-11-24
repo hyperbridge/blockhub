@@ -2,7 +2,7 @@ const {
     name,
     version,
     description
-} = require('../../package.json')
+} = require('../../../package.json')
 
 export default (_, res) => {
     res.json({

@@ -4,8 +4,8 @@ import User from './User'
 
 export default class Project extends Model {
     name!: string
-    members: Array<User> = []
-    isProposal: Boolean = false
+    members!: Array<User>
+    isProposal!: Boolean
 
     static get tableName() {
         return 'projects'

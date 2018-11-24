@@ -1,7 +1,7 @@
 // Use this hook to manipulate incoming or outgoing data.
 
 // We need this to create the MD5 hash
-const crypto = require('crypto')
+const cryptoLib = require('crypto')
 
 // The Gravatar image service
 const gravatarUrl = 'https://s.gravatar.com/avatar'
@@ -14,7 +14,7 @@ module.exports = function(options = {}) { // eslint-disable-line no-unused-vars
         const { email } = context.data
 
         // Gravatar uses MD5 hashes from an email address (all lowercase) to get the image
-        const hash = crypto.createHash('md5').update(email.toLowerCase()).digest('hex')
+        const hash = cryptoLib.createHash('md5').update(email.toLowerCase()).digest('hex')
 
         context.data.avatar = `${gravatarUrl}/${hash}?${query}`
 

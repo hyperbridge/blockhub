@@ -1,6 +1,7 @@
-// Use this hook to manipulate incoming or outgoing data.
+const { authenticate } = require('@feathersjs/authentication').hooks
+const populateUser = require('../../hooks/populate-user')
 
-module.exports = function(options = {}) {
+const create = function(options = {}) {
     return async context => {
         const { data } = context
 
@@ -33,4 +34,35 @@ module.exports = function(options = {}) {
         // Best practise, hooks should always return the context
         return context
     }
+}
+
+
+export const before = {
+    all: [authenticate('jwt')],
+    find: [],
+    get: [],
+    create: [create()],
+    update: [],
+    patch: [],
+    remove: []
+}
+
+export const after = {
+    all: [populateUser()],
+    find: [],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
+}
+
+export const error = {
+    all: [],
+    find: [],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
 }

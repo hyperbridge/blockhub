@@ -7,7 +7,7 @@ import SwaggerParser = require('swagger-parser')
 import swaggerRoutes = require('swagger-routes-express')
 import api from './api'
 import { Model } from 'objection'
-import config from './config'
+import config = require('../config')
 import feathers = require('@feathersjs/feathers')
 import express = require('@feathersjs/express')
 import rest = require('@feathersjs/express/rest')
@@ -15,15 +15,16 @@ import errorHandler = require('@feathersjs/express/errors')
 
 import channels from './channels'
 import services from './services'
+import loggerLib from './logger'
 
-const logger = require('./logger')
-const appHooks = require('./hooks/app')
-const authentication = require('@feathersjs/authentication')
-const local = require('@feathersjs/authentication-local')
-const jwt = require('@feathersjs/authentication-jwt')
-const createService = require('feathers-objection')
-const socketio = require('@feathersjs/socketio')
-const session = require('express-session')
+import * as appHooks from './hooks/app'
+
+import authentication = require('@feathersjs/authentication')
+import local = require('@feathersjs/authentication-local')
+import jwt = require('@feathersjs/authentication-jwt')
+import createService = require('feathers-objection')
+import socketio = require('@feathersjs/socketio')
+import session = require('express-session')
 const KnexSessionStore = require('connect-session-knex')(session)
 
 const knexfile = require('../knexfile')
@@ -98,13 +99,14 @@ export default async () => {
     app.configure(channels)
 
     // Setup services
-    app.configure(services.users)
-    app.configure(services.messages)
+    for (let key in services) {
+        app.configure(services[key])
+    }
 
-    app.service('users').hooks({
-        // Make sure `password` never gets sent to the client
-        after: local.hooks.protect('password')
-    })
+    // app.service('users').hooks({
+    //     // Make sure `password` never gets sent to the client
+    //     after: local.hooks.protect('password')
+    // })
 
     app.service('authentication').hooks({
         before: {
@@ -118,28 +120,15 @@ export default async () => {
         }
     })
 
-    // Add a hook to the user service that automatically replaces
-    // the password with a hash of the password before saving it.
-    // app.service('users').hooks({
-    //     before: {
-    //         find: [
-    //             authentication.hooks.authenticate('jwt')
-    //         ],
-    //         create: [
-    //             local.hooks.hashPassword({ passwordField: 'password' })
-    //         ]
-    //     }
-    // })
-
     // do any other app stuff, such as wire in passport, use cors etc
     // then attach the routes
     connect(app)
 
-    app.use(errorHandler({ logger }))
+    // add any error handlers
+    app.use(errorHandler({ logger: loggerLib }))
 
+    // app hooks last
     app.hooks(appHooks)
 
-
-    // add any error handlers last
     return app
 }

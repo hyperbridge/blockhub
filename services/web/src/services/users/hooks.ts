@@ -3,7 +3,7 @@ const { hashPassword, protect } = require('@feathersjs/authentication-local').ho
 const { errorIfReadonly, allowNull, wildcardsInLike } = require('../../hooks')
 const gravatar = require('../../hooks/gravatar')
 
-exports.before = {
+export const before = {
     all: [],
     find: [includeAssociatedModels, authenticate('jwt'), findbyCategoryName, findCategoryById, allowNull(), wildcardsInLike()],
     get: [includeAssociatedModels, authenticate('jwt')],
@@ -13,7 +13,7 @@ exports.before = {
     remove: [authenticate('jwt')]
 }
 
-exports.after = {
+export const after = {
     all: [
         // Make sure the password field is never sent to the client
         // Always must be the last hook
@@ -27,7 +27,7 @@ exports.after = {
     remove: []
 }
 
-exports.error = {
+export const error = {
     all: [],
     find: [],
     get: [],
