@@ -27,7 +27,7 @@ import socketio = require('@feathersjs/socketio')
 import session = require('express-session')
 const KnexSessionStore = require('connect-session-knex')(session)
 
-const knexfile = require('../knexfile')
+const knexfile = require('./knexfile')
 const knex = Knex(knexfile)
 
 Model.knex(knex)
