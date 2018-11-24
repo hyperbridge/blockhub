@@ -7,8 +7,8 @@
     "scripts": {
         "watch": "tsc -w",
         "build": "tsc --listEmittedFiles",
-        "format": "./node_modules/.bin/tsfmt -r",
-        "start": "npm run format && npm run build && ./node_modules/.bin/nodemon --exec node ./build/src/index.js",
+        "format": "tsfmt -r",
+        "start": "npm run format && npm run build && nodemon --exec node ./build/src/index.js",
         "migrate": "./node_modules/.bin/knex migrate:latest",
         "migrate-heroku": "heroku run 'knex migrate:latest'",
         "test-api-call": "curl http://localhost:3000/api/v1/ping"
