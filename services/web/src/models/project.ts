@@ -1,6 +1,6 @@
 import { Model } from 'objection'
 import ProjectMember from './project-member'
-import User from './User'
+import User from './user'
 
 export default class Project extends Model {
     name!: string
