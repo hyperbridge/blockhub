@@ -1,4 +1,4 @@
-import Model from '../../models/user'
+import Model from '../../models/account'
 import createService = require('feathers-objection')
 import hooks = require('./hooks')
 
@@ -15,9 +15,9 @@ export default function(app) {
         }
     }
 
-    app.use('users', createService(options))
+    app.use('accounts', createService(options))
 
-    const service = app.service('users')
+    const service = app.service('accounts')
 
     service.hooks(hooks)
 }

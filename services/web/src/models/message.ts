@@ -1,9 +1,9 @@
 import { Model } from 'objection'
-import User from './user'
+import Account from './account'
 
 export default class Message extends Model {
     id!: number
-    userId!: number
+    accountId!: number
     text!: string
     createdAt!: string
     updatedAt!: string
@@ -14,12 +14,12 @@ export default class Message extends Model {
 
     static get relationMappings() {
         return {
-            user: {
+            account: {
                 relation: Model.HasOneRelation,
-                modelClass: User,
+                modelClass: Account,
                 join: {
-                    from: 'messages.userId',
-                    to: 'users.id'
+                    from: 'messages.accountId',
+                    to: 'accounts.id'
                 }
             }
             // matches: {

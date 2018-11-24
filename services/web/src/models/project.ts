@@ -1,10 +1,10 @@
 import { Model } from 'objection'
 import ProjectMember from './project-member'
-import User from './user'
+import Profile from './profile'
 
 export default class Project extends Model {
     name!: string
-    members!: Array<User>
+    members!: Array<Profile>
     isProposal!: Boolean
 
     static get tableName() {
@@ -15,24 +15,24 @@ export default class Project extends Model {
         return {
             members: {
                 relation: Model.ManyToManyRelation,
-                modelClass: User,
+                modelClass: Profile,
                 join: {
                     from: 'projects.id',
                     through: {
                         from: 'project_members.projectId',
-                        to: 'project_members.userId',
+                        to: 'project_members.profileId',
                         modelClass: ProjectMember,
                         extra: ['isAdmin']
                     },
-                    to: 'users.id'
+                    to: 'profiles.id'
                 }
             },
-            projects: {
+            subprojects: {
                 relation: Model.HasManyRelation,
                 modelClass: Project,
                 join: {
                     from: 'projects.id',
-                    to: 'projects.parent_id'
+                    to: 'projects.parentId'
                 }
             },
         }

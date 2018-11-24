@@ -1,32 +1,30 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
-const populateUser = require('../../hooks/populate-user')
+const populateProfile = require('../../hooks/populate-profile')
 
 const create = function(options = {}) {
     return async context => {
         const { data } = context
 
-        // Throw an error if we didn't get a text
-        if (!data.text) {
-            throw new Error('A message must have a text')
-        }
+        // // Throw an error if we didn't get a text
+        // if (!data.text) {
+        //     throw new Error('A message must have a text')
+        // }
 
-        // The authenticated user
-        const user = context.params.user
+        const profile = context.params.profile
 
-        // The actual message text
         const text = context.data.text
             // Messages can't be longer than 400 characters
             .substring(0, 400)
 
-        if (!user.id) {
-            throw new Error('A message must have a user')
+        if (!profile.id) {
+            throw new Error('A message must have a profile')
         }
 
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
             text,
-            // Set the user id
-            userId: user.id,
+            // Set the profile id
+            profileId: profile.id,
             // Add the current date
             createdAt: new Date()
         }
@@ -48,7 +46,7 @@ export const before = {
 }
 
 export const after = {
-    all: [populateUser()],
+    all: [populateProfile()],
     find: [],
     get: [],
     create: [],

@@ -1,5 +1,5 @@
 const { authenticate } = require('@feathersjs/authentication').hooks
-const populateUser = require('../../hooks/populate-user')
+const populateProfile = require('../../hooks/populate-profile')
 
 const fillProject = function(project) {
     project.images = {
@@ -34,32 +34,39 @@ const fillAll = function(options = {}) {
 
 const create = function(options = {}) {
     return async context => {
-        const { data } = context
+        const { app, data } = context
 
         console.log('Project creation request: ', data)
 
-        // Throw an error if we didn't get a text
-        if (!data.name) {
-            throw new Error('A project must have a name')
+        // // Throw an error if we didn't get a text
+        // if (!data.name) {
+        //     throw new Error('A project must have a name')
+        // }
+
+        // The authenticated account
+        const account = context.params.account
+
+        if (!account.id) {
+            throw new Error('A project must have a account')
         }
 
-        // The authenticated user
-        const user = context.params.user
+        const profile = await app.service('profiles').get(data.ownerId)
+
+        if (profile.accountId !== account.id) {
+            throw new Error('Project must be owned by a profile of authenticated account')
+        }
 
         // The actual project text
-        const { name, description } = context.data
-
-        if (!user.id) {
-            throw new Error('A project must have a user')
-        }
+        const { name, description, about } = context.data
 
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
             name,
             description,
+            about,
             //meta: context.data,
-            // Set the user id
-            ownerId: user.id,
+            // Set the account id
+            ownerId: profile.id,
             // Add the current date
             createdAt: new Date()
         }
@@ -69,18 +76,36 @@ const create = function(options = {}) {
     }
 }
 
+
+const validatePermission = function (options = {}) {
+    return async context => {
+        const { app, data } = context
+
+        const account = context.params.account
+
+        const project = await app.service('projects').get(data.id)
+        const profile = await app.service('profiles').get(project.ownerId)
+
+        if (profile.accountId !== account.id) {
+            throw new Error('Project must be owned by a profile of authenticated account')
+        }
+
+        return context
+    }
+}
+
 export const before = {
     all: [authenticate('jwt')],
     find: [],
     get: [],
     create: [create()],
-    update: [],
-    patch: [],
-    remove: []
+    update: [validatePermission()],
+    patch: [validatePermission()],
+    remove: [validatePermission()]
 }
 
 export const after = {
-    all: [populateUser({ columnName: 'ownerId' })],
+    all: [populateProfile({ columnName: 'ownerId' })],
     find: [fillAll()],
     get: [fillOne()],
     create: [],

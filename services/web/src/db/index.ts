@@ -1,5 +1,6 @@
 import config from '../../config'
-import User from '../models/user'
+import Account from '../models/account'
+import Profile from '../models/profile'
 import Project from '../models/project'
 
 // const pg = require('pg')
@@ -17,14 +18,14 @@ import Project from '../models/project'
 
 // const connection = mysql.createConnection({
 //     host: config.db.host,
-//     user: config.db.user,
+//     account: config.db.account,
 //     database: config.db.database,
 //     debug: false
 // })
 
 export type UpdateTokenRequest = {
     id: number,
-    userId: number,
+    accountId: number,
     accessToken1: string,
     accessToken2: string,
     snType: string,
@@ -35,7 +36,7 @@ export type UpdateTokenRequest = {
 //     name: string
 // }
 
-// export type User = {
+// export type Account = {
 //     id: number,
 //     email: string,
 //     firstName: string,
@@ -44,7 +45,7 @@ export type UpdateTokenRequest = {
 //     pastMatches?: Array<any>
 // }
 
-// type UserRecord = {
+// type AccountRecord = {
 //     id: number,
 //     email: string,
 //     firstName: string,
@@ -55,7 +56,7 @@ export type UpdateTokenRequest = {
 // type ProjectRecord = {
 //     id: number,
 //     name: string,
-//     members: Array<UserRecord>
+//     members: Array<AccountRecord>
 // }
 
 export const fetchProjectMembers = async (projectId: number, isAdmin: boolean) => {
@@ -86,12 +87,12 @@ export const findSocalProfile = async (uId: string, snType: string) => {
     })
 }
 
-export const storeToken = async (userId: number, accessToken1: string, accessToken2: string, snType: string, snUid: string) => {
+export const storeToken = async (accountId: number, accessToken1: string, accessToken2: string, snType: string, snUid: string) => {
     return new Promise((resolve, reject) => {
-        // let queryString = 'INSERT INTO socialProfile (userId, accessToken1, accessToken2, snType, snUid) VALUES(?,?,?,?,?)'
+        // let queryString = 'INSERT INTO socialProfile (accountId, accessToken1, accessToken2, snType, snUid) VALUES(?,?,?,?,?)'
         // connection.query(
         //     queryString,
-        //     [userId, accessToken1, accessToken2, snType, snUid],
+        //     [accountId, accessToken1, accessToken2, snType, snUid],
         //     (error, results) => {
         //         if (error) {
         //             reject(error)
@@ -104,10 +105,10 @@ export const storeToken = async (userId: number, accessToken1: string, accessTok
 
 export const updateToken = async (req: UpdateTokenRequest) => {
     return new Promise((resolve, reject) => {
-        // let queryString = 'UPDATE socialProfile set userId = ?, accessToken1 = ?, accessToken2 =? , snType = ? where id = ? '
+        // let queryString = 'UPDATE socialProfile set accountId = ?, accessToken1 = ?, accessToken2 =? , snType = ? where id = ? '
         // connection.query(
         //     queryString,
-        //     [req.userId, req.accessToken1, req.accessToken2, req.snType, req.id],
+        //     [req.accountId, req.accessToken1, req.accessToken2, req.snType, req.id],
         //     (error, results) => {
         //         if (error) {
         //             reject(error)
@@ -119,8 +120,8 @@ export const updateToken = async (req: UpdateTokenRequest) => {
 }
 
 
-// export const createUser = async (email: string, firstName: string, lastName: string, password: string): Promise<User | undefined> => {
-//     let user = await User
+// export const createAccount = async (email: string, firstName: string, lastName: string, password: string): Promise<Account | undefined> => {
+//     let account = await Account
 //         .query()
 //         .insert({
 //             email,
@@ -129,10 +130,10 @@ export const updateToken = async (req: UpdateTokenRequest) => {
 //             passwordHash
 //         })
 
-//     return Promise.resolve(user)
+//     return Promise.resolve(account)
 
 //     // return new Promise((resolve, reject) => {
-//     //     // let queryString = 'INSERT INTO users (email, firstName, lastName) VALUES(?,?,?)'
+//     //     // let queryString = 'INSERT INTO accounts (email, firstName, lastName) VALUES(?,?,?)'
 //     //     // connection.query(
 //     //     //     queryString,
 //     //     //     [email, firstName, lastName],
@@ -146,8 +147,8 @@ export const updateToken = async (req: UpdateTokenRequest) => {
 //     // })
 // }
 
-export const getUsers = async (isAdmin: boolean) => {
-    const userRecords = await User
+export const getAccounts = async (isAdmin: boolean) => {
+    const accountRecords = await Account
         .query()
         .pick(['id', 'firstName', 'lastName', 'email'])
     // .eager('members(onlyMembers)', {
@@ -157,14 +158,15 @@ export const getUsers = async (isAdmin: boolean) => {
     // })
     //.groupBy('id')
 
-    return Promise.resolve(userRecords)
+    return Promise.resolve(accountRecords)
 }
 
-export const getUser = async ({ id, email, fieldKey }): Promise<User | undefined> => {
-    let result = await User
+
+export const getAccount = async ({ id, email, fieldKey }): Promise<Account | undefined> => {
+    let result = await Account
         .query()
         .findOne(fieldKey, fieldKey === 'id' ? id : email)
-        .eager('projects')
+        .eager('profiles')
 
     if (!result) { return Promise.resolve(result) }
 
@@ -173,8 +175,35 @@ export const getUser = async ({ id, email, fieldKey }): Promise<User | undefined
     return Promise.resolve(result)
 }
 
-export const removeUser = async ({ id }): Promise<number> => {
-    let result = await User.query().deleteById(id)
+export const removeAccount = async ({ id }): Promise<number> => {
+    let result = await Account.query().deleteById(id)
+
+    return Promise.resolve(result)
+}
+
+
+export const getProfiles = async (isAdmin: boolean) => {
+    const accountRecords = await Profile
+        .query()
+        .pick(['id', 'address'])
+    // .eager('members(onlyMembers)', {
+    //     onlyMembers: (builder) => {
+    //         builder.where('isAdmin', isAdmin ? 1 : 0)
+    //     }
+    // })
+    //.groupBy('id')
+
+    return Promise.resolve(accountRecords)
+}
+
+
+export const getProfile = async ({ id, email, fieldKey }): Promise<Profile | undefined> => {
+    let result = await Profile
+        .query()
+        .findOne(fieldKey, fieldKey === 'id' ? id : email)
+        .eager('projects')
+
+    if (!result) { return Promise.resolve(result) }
 
     return Promise.resolve(result)
 }
@@ -209,13 +238,13 @@ export const removeUser = async ({ id }): Promise<number> => {
 
 // exports.post_product = async req => {
 //     const { product } = req.body;
-//     const { id: userId } = req.userData;
+//     const { id: accountId } = req.accountData;
 //     await Joi.validate(product, productSchema);
 
 //     const date = Date.now();
 //     const newProduct = {
 //         ...product,
-//         author: userId
+//         author: accountId
 //     }
 
 //     const { _id: id } = await new Product(newProduct).save();
@@ -230,7 +259,7 @@ export const removeUser = async ({ id }): Promise<number> => {
 // exports.patch_product = async req => {
 //     const { productId } = req.params;
 //     const { product } = req.body;
-//     const { id } = req.userData;
+//     const { id } = req.accountData;
 
 //     await Joi.validate(product, productSchema);
 //     await Product.where({ _id: productId, author: id }).updateOne(product);
@@ -328,12 +357,12 @@ export const removeUser = async ({ id }): Promise<number> => {
 // exports.post_comment = async req => {
 //     const { objectId } = req.params;
 //     const { comment } = req.body;
-//     const { id: userId } = req.userData;
+//     const { id: accountId } = req.accountData;
 
 //     await Joi.validate(comment, commentSchema);
 //     const newComment = {
 //         text: comment.text,
-//         author: userId,
+//         author: accountId,
 //         objectId
 //     }
 //     const { _id: id } = await new Comment(newComment).save();
@@ -348,7 +377,7 @@ export const removeUser = async ({ id }): Promise<number> => {
 // exports.patch_comment = async req => {
 //     const { commentId } = req.params;
 //     const { comment } = req.body;
-//     const { id } = req.userData;
+//     const { id } = req.accountData;
 
 //     await Joi.validate(comment, commentSchema);
 //     await Comment.where({ _id: commentId, author: id }).updateOne(comment);
@@ -360,7 +389,7 @@ export const removeUser = async ({ id }): Promise<number> => {
 
 // exports.delete_comment = async req => {
 //     const { commentId } = req.params;
-//     const { id } = req.userData;
+//     const { id } = req.accountData;
 
 //     await Comment.deleteOne({ _id: commentId, author: id });
 
@@ -372,13 +401,13 @@ export const removeUser = async ({ id }): Promise<number> => {
 // exports.post_comment_reply = async req => {
 //     const { commentId, objectId } = req.params;
 //     const { comment } = req.body;
-//     const { id: userId } = req.userData;
+//     const { id: accountId } = req.accountData;
 
 //     await Joi.validate(comment, commentSchema);
 
 //     const newComment = {
 //         text: comment.text,
-//         author: userId,
+//         author: accountId,
 //         objectId
 //     }
 

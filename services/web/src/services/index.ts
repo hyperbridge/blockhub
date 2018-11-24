@@ -1,9 +1,11 @@
-import users from './users'
+import accounts from './accounts'
 import messages from './messages'
+import profiles from './profiles'
 import projects from './projects'
 
 export default {
-    users,
+    accounts,
     messages,
+    profiles,
     projects
 }

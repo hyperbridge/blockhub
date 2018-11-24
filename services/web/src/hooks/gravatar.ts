@@ -10,7 +10,7 @@ const query = 's=60'
 
 module.exports = function(options = {}) { // eslint-disable-line no-unused-vars
     return async context => {
-        // The user email
+        // The email
         const { email } = context.data
 
         // Gravatar uses MD5 hashes from an email address (all lowercase) to get the image
