@@ -16,7 +16,6 @@
 
 <script>
     import * as Bridge from '@/framework/desktop-bridge'
-    import { mapMutations, mapActions } from 'vuex'
 
     export default {
         methods: {
@@ -25,10 +24,9 @@
             },
             signOut() {
                 this.$store.state.application.signed_in = false
-                this.logout()
+                this.$store.dispatch('auth/logout')
                 this.$router.replace({ name: 'Home' })
-            },
-            ...mapActions('auth', ['logout'])
+            }
         }
     }
 </script>

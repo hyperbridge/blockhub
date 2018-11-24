@@ -64,6 +64,13 @@
         },
         computed: {
         },
+        watch: {
+            '$store.state.auth.user'(newVal) {
+                if (newVal) {
+                    this.$router.replace({ name: 'Home' })
+                }
+            }
+        },
         methods: {
             next() {
                 const { email, password } = this

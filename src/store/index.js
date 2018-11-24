@@ -24,7 +24,7 @@ Vue.use(Vuex);
 const { service, auth } = feathersVuex(feathersClient, {
     idField: 'id',
     auth: {
-        userService: 'users'
+        userService: 'accounts' // TODO: can this be removed?
     }
 })
 
@@ -75,12 +75,13 @@ const store = new Vuex.Store({
     ...rootStore,
     plugins: [
         saveDB,
-        service('users'),
+        service('accounts'),
+        service('profiles'),
         service('messages'),
         service('projects'),
 
         auth({
-            userService: 'users'
+            userService: 'accounts'
         })
     ],
     modules: {
@@ -131,10 +132,10 @@ const store = new Vuex.Store({
     }
 });
 
-
 window.BlockHub.Bridge = Bridge
 window.BlockHub.ChaosMonkey = ChaosMonkey
 window.BlockHub.store = store
+window.BlockHub.router = router // doesnt work?
 window.BlockHub.DB = DB
 window.BlockHub.seed = seed
 
@@ -438,7 +439,7 @@ export let initializer = () => {
 
             if (store.state.application.environment_mode === 'preview'
                 || store.state.application.environment_mode === 'beta'
-                || store.state.application.environment_mode === 'production') {
+                /*|| store.state.application.environment_mode === 'production'*/) {
                 BlockHub.importSeedData()
             }
 

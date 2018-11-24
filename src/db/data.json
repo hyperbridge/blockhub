@@ -3,6 +3,7 @@
         "version": "0.7.1",
         "initialized": false,
         "environment_mode": null,
+        "decentralized_mode": false,
         "locked": false,
         "signed_in": false,
         "loading": false,

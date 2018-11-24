@@ -236,11 +236,7 @@
             signed_in() { return this.$store.state.application.signed_in },
             simulator_mode() { return this.$store.state.application.simulator_mode },
             operating_system() { return this.$store.state.application.operating_system },
-            environment_mode() { return this.$store.state.application.environment_mode },
-            // The user is automatically set by the feathers-vuex auth module upon login.
-            user () {
-                return this.$store.state.auth.user
-            }
+            environment_mode() { return this.$store.state.application.environment_mode }
         },
         methods: {
             ensureDesktopWelcome(to) {
@@ -372,9 +368,9 @@
             this.ensureDesktopWelcome()
         },
         watch: {
-            $route(to, from) {
+            '$route'(to, from) {
                 $('body').removeClass('show-sidebar')
-                $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-cog')
+                $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-bars')
 
                 this.$store.state.application.active_modal = false
 
@@ -382,8 +378,8 @@
                 this.ensureDesktopWelcome(to)
             },
             // When the user is set, redirect to the Chat page.
-            user (newVal) {
-                if (newVal === undefined) {
+            '$store.state.auth.user'(newVal) {
+                if (this.$store.state.application.signed_in && newVal === undefined) {
                     this.$store.state.application.signed_in = false
                     //this.$router.replace({ name: 'Home' })
                 } else {

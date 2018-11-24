@@ -416,15 +416,15 @@
                 if (this.id === 'new') {
                     this.$store.dispatch('application/setEditorMode', 'publishing')
 
-                    BlockHub.DesktopBridge
-                        .createFundingProject({ title: this.project.name, description: this.project.description, about: this.project.content })
-                        .then((project) => {
-                            store.state.projects[project.id] = project
+                    // BlockHub.DesktopBridge
+                    //     .createFundingProject({ title: this.project.name, description: this.project.description, about: this.project.about })
+                    //     .then((project) => {
+                    //         store.state.projects[project.id] = project
 
-                            store.dispatch('updateState')
+                    //         store.dispatch('updateState')
 
-                            this.$store.dispatch('application/setEditorMode', 'viewing')
-                        })
+                    //         this.$store.dispatch('application/setEditorMode', 'viewing')
+                    //     })
                 } else {
                     this.$store.dispatch('funding/updateProject', this.project)
                     this.$store.dispatch('application/setEditorMode', 'publishing')

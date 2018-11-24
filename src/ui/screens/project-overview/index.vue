@@ -23,12 +23,12 @@
                 <p class="project__description">{{ project.description }}</p>
             </div>
 
-            <div class="main-content" v-html="project.content" v-if="!editing">
-                {{ project.content }}
+            <div class="main-content" v-html="project.about" v-if="!editing">
+                {{ project.about }}
             </div>
 
             <div class="content-editor" v-if="editing">
-                <div id="summernote" v-html="project.content">{{ project.content }}</div>
+                <div id="summernote" v-html="project.about">{{ project.about }}</div>
             </div>
         </div>
         <div class="col-12 col-lg-5 col-xl-4">

@@ -94,7 +94,6 @@
 <script>
     import axios from 'axios'
     import FormData from 'form-data'
-    import { mapMutations, mapActions } from 'vuex'
 
     export default {
         props: ['activated'],
@@ -118,19 +117,26 @@
                 privacy: null
             }
         },
+        watch: {
+            '$store.state.auth.user'(newVal) {
+                if (newVal) {
+                    this.$router.replace({ name: 'Home' })
+                }
+            }
+        },
         computed: {
         },
         methods: {
             next() {
                 const { email, password } = this
                 this.errors = []
-                this.clearCreateError()
+                this.$store.commit('accounts/clearCreateError')
 
                 if (email
                 && password) {
                     // Automatically log the user in after successful signup.
-                    this.createUser({ email, password })
-                        .then(response => this.authenticate({ strategy: 'local', email, password }))
+                    this.$store.dispatch('accounts/create', { email, password })
+                        .then(response => this.$store.dispatch('auth/authenticate', { strategy: 'local', email, password }))
                         // Just use the returned error instead of mapping it from the store.
                         .catch(error => {
                             // Convert the error to a plain object and add a message.
@@ -146,16 +152,7 @@
                 }
 
                 this.errors.push('Missing fields.')
-            },
-            ...mapActions('users', {
-                createUser: 'create'
-            }),
-            ...mapMutations('users', {
-                clearCreateError: 'clearCreateError'
-            }),
-            ...mapActions('auth', [
-                'authenticate'
-            ])
+            }
         }
     }
 </script>

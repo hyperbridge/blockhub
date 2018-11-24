@@ -31,7 +31,7 @@
                                 <label>About</label>
                             </label>
                             <div class="col-sm-9">
-                                <c-html-editor height="200" :model.sync="project.content" />
+                                <c-html-editor height="200" :model.sync="project.about" />
 
                                 <span class="form-text"></span>
                             </div>
