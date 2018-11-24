@@ -1,6 +1,7 @@
 {
     "application": {
         "version": "0.7.1",
+        "initialized": false,
         "environment_mode": null,
         "locked": false,
         "signed_in": false,
@@ -13,7 +14,25 @@
         "operating_system": null,
         "is_developer": false,
         "editor_mode": "viewing",
+        "active_modal": null,
+        "active_notification": null,
         "current_ethereum_network": "local",
+        "shortcuts": [
+            {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "image": "/static/img/icons/store.png",
+                "link": "#/",
+                "text": "Go to store"
+            },
+            {
+                "icon": "fa fa-plus",
+                "eventKey": "application/activateModal",
+                "eventValue": "shortcutCreator",
+                "text": "Create"
+            }
+        ],
         "ethereum": {
             "mainnet": {
                 "packages": {
@@ -513,7 +532,6 @@
             }
         ],
         "updates": [],
-        "active_modal": null,
         "currencies":[
             {
                 "code": "USD",

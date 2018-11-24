@@ -33,12 +33,8 @@ const relations = {
     }
 };
 
-/* Feature: Automatically create described sub-properties for each module */
 
-export const findRelationV1 = (module, target, prop) =>
-    (relations[module][target] && relations[module][target][prop]) || module;
 
-    /* Upgraded ver */
 export const findRelation = (module, target, prop) =>
     (relations[module][target] && relations[module][target][prop])
     || [module, prop];
@@ -65,8 +61,8 @@ export const decompose = (destination, data) =>
 
                         const subRelation = relations[propModule][propTarget];
                         if (subRelation) {
-                        const subValue = Array.isArray(item[prop]) ? item[prop] : [item[prop]];
-                        decompRelation(subRelation, subValue);
+                            const subValue = Array.isArray(item[prop]) ? item[prop] : [item[prop]];
+                            decompRelation(subRelation, subValue);
                         }
 
                         if (Array.isArray(item[prop])) item[prop] = item[prop].map(el => el.id);

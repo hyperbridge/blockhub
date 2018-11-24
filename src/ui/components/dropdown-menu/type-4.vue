@@ -1,13 +1,17 @@
 <template>
-    <div class="dropdown dropmenu_container" :class="{'show' : show}" >
+    <div class="dropdown dropmenu_container" :class="{ 'show' : show }">
         <div class="rw-btn rw-btn--card" @click="toggleMenu" v-if="!$slots.title">
             <div></div>
         </div>
         <div class="dropdown__title" @click="toggleMenu" v-else>
             <slot name="title" />
         </div>
-        <div class="dropdown-menu dropdown-menu-left"
-             :class="{'show' : show}">
+        <div
+            v-if="show"
+            class="dropdown-menu dropdown-menu-left"
+            v-click-outside:self="toggleMenu"
+            :class="{ 'show' : show }"
+        >
             <div class="position-relative" style="z-index: 4">
                 <slot />
             </div>
@@ -17,51 +21,17 @@
 
 <script>
     export default {
-        data(){
-            return{
+        data() {
+            return {
                 show: false
             }
         },
         methods:{
-            toggleMenu(){
+            toggleMenu() {
                 this.show = !this.show;
-                this.$emit('click')
             },
-            closeMenu(){
+            closeMenu() {
                 this.show = false;
-            }
-        },
-        directives: {
-            'click-outside': {
-                bind: function (el, binding, vNode) {
-                    // Provided expression must evaluate to a function.
-                    if (typeof binding.value !== 'function') {
-                        const compName = vNode.context.name
-                        let warn = `[Vue-click-outside:] provided expression '${binding.expression}' is not a function, but has to be`
-                        if (compName) {
-                            warn += `Found in component '${compName}'`
-                        }
-
-                        console.warn(warn)
-                    }
-                    // Define Handler and cache it on the element
-                    const bubble = binding.modifiers.bubble
-                    const handler = (e) => {
-                        if (bubble || (!el.contains(e.target) && el !== e.target)) {
-                            binding.value(e)
-                        }
-                    }
-                    el.__vueClickOutside__ = handler
-
-                    // add Event Listeners
-                    document.addEventListener('click', handler)
-                },
-                unbind: function (el, binding) {
-                    // Remove Event Listeners
-                    document.removeEventListener('click', el.__vueClickOutside__)
-                    el.__vueClickOutside__ = null
-
-                }
             }
         }
     }

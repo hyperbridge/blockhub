@@ -1,316 +1,320 @@
 <template>
     <c-layout navigationKey="project" :showRightPanel="false" :breadcrumbLinks="breadcrumbLinks" class="project-single-page">
-            <div class="row" v-if="!project">
-                <div class="col-12">
-                    Project not found
-                </div>
+        <div class="row" v-if="!project">
+            <div class="col-12">
+                Project not found
             </div>
-            <div class="row" v-if="project">
-                <div class="col-12">
+        </div>
+        <div class="row" v-if="project">
+            <div class="col-12">
 
-                    <div class="errors" v-if="errors.length">
-                        <strong>Please correct the following error(s):</strong>
-                        <ul>
-                            <li v-for="error in errors" :key="error">{{ error }}</li>
-                        </ul>
-                    </div>
+                <div class="errors" v-if="errors.length">
+                    <strong>Please correct the following error(s):</strong>
+                    <ul>
+                        <li v-for="error in errors" :key="error">{{ error }}</li>
+                    </ul>
+                </div>
 
-                    <div class="row justify-content-between">
-                        <div class="col-12 col-md-4 text-center text-md-left">
-                            <div class="editor-container">
-                                <div class="editor" v-if="editing">
-                                    <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                            @click="activateElement('name')" v-if="!activeElement['name']">Change
-                                        Project Name <span class="fa fa-edit"></span></button>
-
-                                    <div class="form-control-element form-control-element--right"
-                                         v-if="activeElement['name']">
-                                        <input ref="name" name="name" type="text" class="form-control"
-                                               placeholder="Project name..." v-model="project.name"/>
-                                        <div
-                                            class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                            <span class="fa fa-check" @click="deactivateElement('name')"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h1 class="title margin-top-10 margin-bottom-15">{{ project.name }}</h1>
-                            </div>
-                            <div class="editor-container">
-                                <div class="editor" v-if="editing">
-                                    <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                            @click="activateElement('developer_tags')"
-                                            v-if="!activeElement['developer_tags']" style="margin-bottom: 20px">Change
-                                        Tags <span class="fa fa-edit"></span></button>
-                                    <div class="form-control-element tag-editor form-control-element--right"
-                                         v-if="activeElement['developer_tags']">
-                                        <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
-                                            <!--<option v-for="(tag, index) in author_tag_options" :key="index"-->
-                                                    <!--:selected="project.developer_tags.includes(tag)">{{ tag }}-->
-                                            <!--</option>-->
-                                        <!--</select>-->
-
-                                        <multiselect v-model="project.developer_tags"
-                                                     class="dark-mode"
-                                                     :multiple="true"
-                                                     :taggable="true"
-                                                     :options="author_tag_options">
-
-                                        </multiselect>
-                                        <div
-                                            class="form-control-element__box form-control-element__box--pretify bg-secondary"
-                                            style="">
-                                                <span class="fa fa-check"
-                                                      @click="deactivateElement('developer_tags')"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <c-tags-list :tags="project.developer_tags"
-                                             v-if="!editing || !activeElement['developer_tags']"></c-tags-list>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <c-badges :icons="['trophy','gem']" />
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="editor text-right" v-if="editing" style="margin-bottom: 30px">
+                <div class="row justify-content-between">
+                    <div class="col-12 col-md-4 text-center text-md-left">
+                        <div class="editor-container">
+                            <div class="editor" v-if="editing">
                                 <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                        @click="activateElement('background_image')"
-                                        v-if="!activeElement['background_image']">Change Background Image <span
-                                    class="fa fa-edit"></span></button>
+                                        @click="activateElement('name')" v-if="!activeElement['name']">Change
+                                    Project Name <span class="fa fa-edit"></span></button>
 
-                                <div class="" v-if="activeElement['background_image']">
-                                    <div class="form-control-element form-control-element--right">
-                                        <input ref="background_image" name="background_image" type="text"
-                                               class="form-control" placeholder="Background image URL..."
-                                               v-model="project.images.header"/>
-                                        <div
-                                            class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                                <span class="fa fa-check"
-                                                      @click="deactivateElement('background_image')"></span>
-                                        </div>
+                                <div class="form-control-element form-control-element--right"
+                                        v-if="activeElement['name']">
+                                    <input ref="name" name="name" type="text" class="form-control"
+                                            placeholder="Project name..." v-model="project.name"/>
+                                    <div
+                                        class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                        <span class="fa fa-check" @click="deactivateElement('name')"></span>
                                     </div>
                                 </div>
-                                <label style="display: block">RECOMMENDED SIZE: 1120 x 524px</label>
                             </div>
-                            <div class="editor text-right" v-if="editing">
+                            <h1 class="title margin-top-10 margin-bottom-15">{{ project.name }}</h1>
+                        </div>
+                        <div class="editor-container">
+                            <div class="editor" v-if="editing">
                                 <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                        @click="activateElement('store_image')"
-                                        v-if="!activeElement['store_image']">Change Project Image <span
-                                    class="fa fa-edit"></span></button>
+                                        @click="activateElement('developer_tags')"
+                                        v-if="!activeElement['developer_tags']" style="margin-bottom: 20px">Change
+                                    Tags <span class="fa fa-edit"></span></button>
+                                <div class="form-control-element tag-editor form-control-element--right"
+                                        v-if="activeElement['developer_tags']">
+                                    <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
+                                        <!--<option v-for="(tag, index) in author_tag_options" :key="index"-->
+                                                <!--:selected="project.developer_tags.includes(tag)">{{ tag }}-->
+                                        <!--</option>-->
+                                    <!--</select>-->
 
-                                <div class="" v-if="activeElement['store_image']">
-                                    <div class="form-control-element form-control-element--right">
-                                        <input ref="store_image" name="store_image" type="text" class="form-control"
-                                               placeholder="Background image URL..."
-                                               v-model="project.images.header"/>
-                                        <div
-                                            class="form-control-element__box form-control-element__box--pretify bg-secondary">
-                                                <span class="fa fa-check"
-                                                      @click="deactivateElement('store_image')"></span>
-                                        </div>
+                                    <multiselect v-model="project.developer_tags"
+                                                    class="dark-mode"
+                                                    :multiple="true"
+                                                    :taggable="true"
+                                                    :options="author_tag_options">
+
+                                    </multiselect>
+                                    <div
+                                        class="form-control-element__box form-control-element__box--pretify bg-secondary"
+                                        style="">
+                                            <span class="fa fa-check"
+                                                    @click="deactivateElement('developer_tags')"></span>
                                     </div>
                                 </div>
-                                <label style="display: block">RECOMMENDED SIZE: 2140 x 680px</label>
                             </div>
+                            <c-tags-list :tags="project.developer_tags"
+                                            v-if="!editing || !activeElement['developer_tags']"></c-tags-list>
                         </div>
                     </div>
-                    <c-button status="dark" class="w-100 d-flex d-md-none justify-content-center my-4" size="lg" data-toggle="collapse" data-target="#project_nav" aria-expanded="false" aria-controls="project_nav">
-                        Menu
-                    </c-button>
-                    <div class="collapse show project_nav" id="project_nav">
-                        <ul class="nav nav-tabs margin-bottom-40 justify-content-between">
-                            <li class="nav-item" @click="section='overview'">
-                                <router-link :to="`/project/${project.id}`" class="nav-link" :class="{ 'active': section === 'overview' }">
-                                    Overview
-                                </router-link>
-                            </li>
-                            <li class="nav-item" @click="section='community'" v-darklaunch="'COMMUNITY'">
-                                <router-link :to="`/project/${project.id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">
-                                    Community
-                                    <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
-                                        0
-                                    </c-updates-count>
-                                </router-link>
-                            </li>
-                            <li class="nav-item" @click="section='bounties'">
-                                <router-link :to="`/project/${project.id}/bounties`" class="nav-link" :class="{ 'active': section === 'bounties' }">
-                                    Bounties
-                                </router-link>
-                            </li>
-                            <li class="nav-item" @click="section='updates'">
-                                <router-link :to="`/project/${project.id}/updates`" class="nav-link" :class="{ 'active': section === 'updates' }">
-                                    Updates
-                                    <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
-                                        0
-                                    </c-updates-count>
-                                </router-link>
-                            </li>
-                            <li class="nav-item" @click="section='milestones'">
-                                <router-link :to="`/project/${project.id}/milestones`" class="nav-link" :class="{ 'active': section === 'milestones' }">
-                                    Milestones
-                                </router-link>
-                            </li>
-                            <li class="nav-item" v-if="editing">
-                                <a class="nav-link" :class="{ 'active': section === 'configure' }" @click="section='configure'">Configure</a>
-                            </li>
-                        </ul>
+                    <div class="col-12 col-md-4">
+                        <c-badges :icons="['trophy','gem']" />
                     </div>
+                    <div class="col-12 col-md-4">
+                        <div class="editor text-right" v-if="editing" style="margin-bottom: 30px">
+                            <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                    @click="activateElement('background_image')"
+                                    v-if="!activeElement['background_image']">Change Background Image <span
+                                class="fa fa-edit"></span></button>
 
-                    <div class="row" id="configure" v-if="section === 'configure'" :editing="editing">
-                        <c-block title="Campaign">
+                            <div class="" v-if="activeElement['background_image']">
+                                <div class="form-control-element form-control-element--right">
+                                    <input ref="background_image" name="background_image" type="text"
+                                            class="form-control" placeholder="Background image URL..."
+                                            v-model="project.images.header"/>
+                                    <div
+                                        class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                            <span class="fa fa-check"
+                                                    @click="deactivateElement('background_image')"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <label style="display: block">RECOMMENDED SIZE: 1120 x 524px</label>
+                        </div>
+                        <div class="editor text-right" v-if="editing">
+                            <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
+                                    @click="activateElement('store_image')"
+                                    v-if="!activeElement['store_image']">Change Project Image <span
+                                class="fa fa-edit"></span></button>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="switch switch-sm col-sm-3">
-                                                <label>Minimum Contribution Goal</label>
-                                            </label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: 0">
-                                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                            </div>
+                            <div class="" v-if="activeElement['store_image']">
+                                <div class="form-control-element form-control-element--right">
+                                    <input ref="store_image" name="store_image" type="text" class="form-control"
+                                            placeholder="Background image URL..."
+                                            v-model="project.images.header"/>
+                                    <div
+                                        class="form-control-element__box form-control-element__box--pretify bg-secondary">
+                                            <span class="fa fa-check"
+                                                    @click="deactivateElement('store_image')"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <label style="display: block">RECOMMENDED SIZE: 2140 x 680px</label>
+                        </div>
+                    </div>
+                </div>
+                <c-button status="dark" class="w-100 d-flex d-md-none justify-content-center my-4" size="lg" data-toggle="collapse" data-target="#project_nav" aria-expanded="false" aria-controls="project_nav">
+                    Menu
+                </c-button>
+                <div class="collapse show project_nav" id="project_nav">
+                    <ul class="nav nav-tabs margin-bottom-40 justify-content-between">
+                        <li class="nav-item" @click="section='overview'">
+                            <router-link :to="`/project/${project.id}`" class="nav-link" :class="{ 'active': section === 'overview' }">
+                                Overview
+                            </router-link>
+                        </li>
+                        <li class="nav-item" @click="section='community'" v-darklaunch="'COMMUNITY'">
+                            <router-link :to="`/project/${project.id}/community`" class="nav-link" :class="{ 'active': section === 'community' }">
+                                Community
+                                <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
+                                    0
+                                </c-updates-count>
+                            </router-link>
+                        </li>
+                        <li class="nav-item" @click="section='bounties'">
+                            <router-link :to="`/project/${project.id}/bounties`" class="nav-link" :class="{ 'active': section === 'bounties' }">
+                                Bounties
+                            </router-link>
+                        </li>
+                        <li class="nav-item" @click="section='updates'">
+                            <router-link :to="`/project/${project.id}/updates`" class="nav-link" :class="{ 'active': section === 'updates' }">
+                                Updates
+                                <c-updates-count v-darklaunch="'UPDATE-COUNTER'">
+                                    0
+                                </c-updates-count>
+                            </router-link>
+                        </li>
+                        <li class="nav-item" @click="section='milestones'">
+                            <router-link :to="`/project/${project.id}/milestones`" class="nav-link" :class="{ 'active': section === 'milestones' }">
+                                Milestones
+                            </router-link>
+                        </li>
+                        <li class="nav-item" v-if="editing">
+                            <a class="nav-link" :class="{ 'active': section === 'configure' }" @click="section='configure'">Configure</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="row" id="configure" v-if="section === 'configure'" :editing="editing">
+                    <c-block title="Campaign">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="switch switch-sm col-sm-3">
+                                            <label>Minimum Contribution Goal</label>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Example: 0">
+                                            <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="switch switch-sm col-sm-3">
-                                                <label>Maximum Contribution Goal</label>
-                                            </label>
-                                            <div class="col-sm-9">
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="switch switch-sm col-sm-3">
+                                            <label>Maximum Contribution Goal</label>
+                                        </label>
+                                        <div class="col-sm-9">
 
-                                                <input type="text" class="form-control" placeholder="Example: 1000">
-                                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                            </div>
+                                            <input type="text" class="form-control" placeholder="Example: 1000">
+                                            <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
                                         </div>
+                                    </div>
 
-                                        <div class="form-group row">
-                                            <div class="col-sm-3">
-                                                <label>Support Email</label>
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <input type="email" class="form-control" placeholder="Example: example@domain.com">
-                                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
-                                            </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label>Support Email</label>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-3">
-                                                <label>Twitter Username</label>
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">@</span>
-                                                    </div>
-                                                    <input type="text" class="form-control" placeholder="Example: @example">
+                                        <div class="col-sm-9">
+                                            <input type="email" class="form-control" placeholder="Example: example@domain.com">
+                                            <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label>Twitter Username</label>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">@</span>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-3">
-                                                <label>Share Text</label>
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: Join our crowdfund on BlockHub today!">
-                                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                                                <input type="text" class="form-control" placeholder="Example: @example">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-
-                                        <div class="form-group row">
-                                            <label class="switch switch-sm col-sm-1">
-                                                <input type="checkbox" name="switch_8" checked="" value="0">
-                                                <span></span>
-                                            </label>
-                                            <div class="col-sm-11">
-                                                <label>Overflow</label>
-                                                <span class="form-text">Projects with Overflow enabled will accept more than the funding goal (over-contribution)</span>
-                                            </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label>Share Text</label>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="switch switch-sm col-sm-1">
-                                                <input type="checkbox" name="switch_8" checked="" value="0">
-                                                <span></span>
-                                            </label>
-                                            <div class="col-sm-11">
-                                                <label>Timeline</label>
-                                                <span class="form-text">Projects with Timeline enabled will have a current timeline with associated milestones.</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="switch switch-sm col-sm-1">
-                                                <input type="checkbox" name="switch_8" checked="" value="0">
-                                                <span></span>
-                                            </label>
-                                            <div class="col-sm-11">
-                                                <label>Refunds</label>
-                                                <span class="form-text">Projects with Refunds enabled will allow contributors to get partial or full refund if the project is deemed not successful (by community vote).</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="switch switch-sm col-sm-1">
-                                                <input type="checkbox" name="switch_8" checked="" value="0">
-                                                <span></span>
-                                            </label>
-                                            <div class="col-sm-11">
-                                                <label>Curation</label>
-                                                <span class="form-text">Projects with Curation enabled will allow the community to curate the project and earn reputation for their actions.</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="switch switch-sm col-sm-1">
-                                            </label>
-                                            <div class="col-sm-11">
-                                                <input type="text" id="ise_default" name="ise_default" value="">
-                                                <label>Contribution Period</label>
-                                                <span class="form-text">Projects with Curation Enabled will allow the community to curate the project and earn reputation for their actions.</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="switch switch-sm col-sm-1">
-                                                <input type="checkbox" name="switch_8" checked="" value="0">
-                                                <span></span>
-                                            </label>
-                                            <div class="col-sm-11">
-                                                <label>No Contribution Period</label>
-                                                <span class="form-text">Projects with No Contribution Period will be open for contribution until the project is completed, allowing for contributions during the project.</span>
-                                            </div>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Example: Join our crowdfund on BlockHub today!">
+                                            <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
 
-                                <div class="row" v-darklaunch="'GOVERNANCE'">
-                                    <div class="col-12">
-                                        Choose your governance system
+                                    <div class="form-group row">
+                                        <label class="switch switch-sm col-sm-1">
+                                            <input type="checkbox" name="switch_8" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <div class="col-sm-11">
+                                            <label>Overflow</label>
+                                            <span class="form-text">Projects with Overflow enabled will accept more than the funding goal (over-contribution)</span>
+                                        </div>
                                     </div>
-                                    <div class="col-4">
-                                        <i class="fas first-order" />
+                                    <div class="form-group row">
+                                        <label class="switch switch-sm col-sm-1">
+                                            <input type="checkbox" name="switch_8" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <div class="col-sm-11">
+                                            <label>Timeline</label>
+                                            <span class="form-text">Projects with Timeline enabled will have a current timeline with associated milestones.</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="switch switch-sm col-sm-1">
+                                            <input type="checkbox" name="switch_8" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <div class="col-sm-11">
+                                            <label>Refunds</label>
+                                            <span class="form-text">Projects with Refunds enabled will allow contributors to get partial or full refund if the project is deemed not successful (by community vote).</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="switch switch-sm col-sm-1">
+                                            <input type="checkbox" name="switch_8" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <div class="col-sm-11">
+                                            <label>Curation</label>
+                                            <span class="form-text">Projects with Curation enabled will allow the community to curate the project and earn reputation for their actions.</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="switch switch-sm col-sm-1">
+                                        </label>
+                                        <div class="col-sm-11">
+                                            <input type="text" id="ise_default" name="ise_default" value="">
+                                            <label>Contribution Period</label>
+                                            <span class="form-text">Projects with Curation Enabled will allow the community to curate the project and earn reputation for their actions.</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="switch switch-sm col-sm-1">
+                                            <input type="checkbox" name="switch_8" checked="" value="0">
+                                            <span></span>
+                                        </label>
+                                        <div class="col-sm-11">
+                                            <label>No Contribution Period</label>
+                                            <span class="form-text">Projects with No Contribution Period will be open for contribution until the project is completed, allowing for contributions during the project.</span>
+                                        </div>
                                     </div>
                                 </div>
-                        </c-block>
-                    </div>
+                            </div>
 
+                            <div class="row" v-darklaunch="'GOVERNANCE'">
+                                <div class="col-12">
+                                    Choose your governance system
+                                </div>
+                                <div class="col-4">
+                                    <i class="fas first-order" />
+                                </div>
+                            </div>
+                    </c-block>
                 </div>
 
-                <div class="col-12" id="overview">
-                    <transition name="page" mode="out-in">
-                        <c-project-overview :project="project" v-if="section === 'overview'" :editing="editing" />
-                        <c-project-community :project="project" v-if="section === 'community'" :editing="editing" />
-                        <c-project-bounties :project="project" v-if="section === 'bounties'" :editing="editing" />
-                        <c-project-contributors :project="project" v-if="section === 'contributors'" :editing="editing" />
-                        <c-project-discussion :project="project" v-if="section === 'discussion'" :editing="editing" />
-                        <c-project-milestones :project="project" v-if="section === 'milestones'" :editing="editing" />
-                        <c-project-updates :project="project" v-if="section === 'updates'" :editing="editing" />
-                    </transition>
-                </div>
             </div>
+
+            <div class="col-12" id="overview">
+                <transition name="page" mode="out-in">
+                    <c-project-overview :project="project" v-if="section === 'overview'" :editing="editing" />
+                    <c-project-community :project="project" v-if="section === 'community'" :editing="editing" />
+                    <c-project-bounties :project="project" v-if="section === 'bounties'" :editing="editing" />
+                    <c-project-contributors :project="project" v-if="section === 'contributors'" :editing="editing" />
+                    <c-project-discussion :project="project" v-if="section === 'discussion'" :editing="editing" />
+                    <c-project-milestones :project="project" v-if="section === 'milestones'" :editing="editing" />
+                    <c-project-updates :project="project" v-if="section === 'updates'" :editing="editing" />
+                </transition>
+            </div>
+        </div>
     </c-layout>
 </template>
 
 <script>
 
     import Multiselect from 'vue-multiselect'
-    import 'vue-multiselect/dist/vue-multiselect.min.css';
+    import 'vue-multiselect/dist/vue-multiselect.min.css'
 
     const updateProject = function () {
+        if (!this.$store.state.application.initialized) {
+            return null
+        }
+
         let project = null
 
         if (this.id === 'new') {
@@ -320,8 +324,10 @@
             this.$store.dispatch('application/setEditorMode', 'editing')
         }
 
-        if (this.$store.state.funding.projects && this.$store.state.funding.projects[this.id]) {
-            project = this.$store.state.funding.projects[this.id]
+        if (!project) {
+            //if (this.$store.state.funding.projects && this.$store.state.funding.projects[this.id]) {
+                project = this.$store.getters['projects/get'](this.id) //this.$store.state.funding.projects[this.id]
+            //}
         }
 
         if (project && project.images && project.images.header) {
@@ -458,7 +464,7 @@
             breadcrumbLinks() {
                 const links = [
                     { to: { path: '/' }, title: 'Store' },
-                    { to: { path: '/project/' + this.project.id }, title: this.project.name }
+                    { to: { path: '/project/' + (this.project ? this.project.id : 0) }, title: (this.project ? this.project.name : 'Loading') }
                 ]
 
                 if (this.section === 'community') {
@@ -475,14 +481,23 @@
             }
         },
         watch: {
-            editing(newVal, oldVal) {
+            '$route'() {
+                this.updateSection()
+            },
+            '$store.state.application.initialized'() {
+                if (this.id === 'new') { return }
+
+                this.$store.dispatch('projects/find', {
+                    query: {
+                        id: this.id
+                    }
+                })
+            },
+            editing() {
                 if (this.$store.state.application.editor_mode === 'publishing') {
                     this.save()
                 }
             },
-            '$route'() {
-                this.updateSection()
-            }
         },
         created() {
             //this.$store.dispatch('application/setEditorMode', 'editing')

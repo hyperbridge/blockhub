@@ -1,23 +1,6 @@
 <template>
-    <c-business-layout>
+    <!--<c-business-layout title="Product Creation">-->
         <div>
-            <!-- PAGE HEADING -->
-            <div class="page-heading">
-                <div class="page-heading__container" style="float: none">
-                    <h1 class="title" style="float: left'" hidden>Product Creation</h1>
-                    <div class="float-right mb-3" v-if="product.id">
-                        <a :href="`#/product/${product.id}`" class="btn btn-primary">PREVIEW</a>
-                    </div>
-                </div>
-
-                <nav aria-label="breadcrumb" role="navigation">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#/business">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Product</li>
-                    </ol>
-                </nav>
-            </div>
-            <!-- //END PAGE HEADING -->
 
             <div class="container-fluid">
 
@@ -28,8 +11,8 @@
                         <br /><br />
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
+                        <div class="form-group row align-items-center">
+                            <label class="col-sm-3">
                                 <label>Change Status</label>
                             </label>
                             <div class="col-sm-9">
@@ -43,8 +26,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
+                        <div class="form-group row align-items-center">
+                            <label class="col-sm-3">
                                 <label>Title</label>
                             </label>
                             <div class="col-sm-9">
@@ -52,8 +35,8 @@
                                 <span class="form-text"></span>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
+                        <div class="form-group row align-items-center">
+                            <label class="col-sm-3">
                                 <label>Type</label>
                             </label>
                             <div class="col-sm-9">
@@ -61,8 +44,8 @@
                                 <span class="form-text"></span>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
+                        <div class="form-group row align-items-center">
+                            <label class="col-sm-3">
                                 <label>Description</label>
                             </label>
                             <div class="col-sm-9">
@@ -70,8 +53,8 @@
                                 <span class="form-text"></span>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
+                        <div class="form-group row align-items-center">
+                            <label class="col-sm-3">
                                 <label>Content</label>
                             </label>
                             <div class="col-sm-9">
@@ -151,8 +134,8 @@
                     </div>
                     <div class="col-12">
                         <h3>Transfer Ownership</h3>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
+                        <div class="form-group row align-items-center">
+                            <label class="col-sm-3">
                                 <label>Developer Address</label>
                             </label>
                             <div class="col-sm-9">
@@ -160,8 +143,8 @@
                                 <span class="form-text"></span>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
+                        <div class="form-group row align-items-center">
+                            <label class="col-sm-3">
                                 <label>Developer ID</label>
                             </label>
                             <div class="col-sm-9">
@@ -176,16 +159,20 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-2 offset-10" v-if="product.id">
-                        <a href="#" target="_blank" class="btn btn-primary" @click.prevent="save">SAVE</a>
+                    <div class="col-12 text-right" v-if="product.id">
+                        <c-button status="success" @click.prevent="save" icon="save">
+                            Save
+                        </c-button>
                     </div>
-                    <div class="col-2 offset-10" v-if="!product.id">
-                        <a href="#" target="_blank" class="btn btn-primary" @click.prevent="create">CREATE</a>
+                    <div class="col-12 text-right" v-if="!product.id">
+                        <c-button status="success" @click.prevent="create" icon="plus">
+                            Create
+                        </c-button>
                     </div>
                 </div>
             </div>
         </div>
-    </c-business-layout>
+    <!--</c-business-layout>-->
 </template>
 
 <script>

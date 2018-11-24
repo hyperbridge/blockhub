@@ -1,6 +1,6 @@
 <template>
-    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false">
-        <div class="content login-container" id="content">
+    <c-layout navigationKey="account" :showLeftPanel="false" :showRightPanel="false" :showShortcuts="false">
+        <div class="content login-container" id="content" hidden>
             <div class="container">
                 <div class="col-12">
                     <p class="errors" v-if="errors.length">
@@ -11,7 +11,8 @@
                     </p>
                     <div class="chosen-box">
                         <div class="chosen-box__container">
-                            <div class="h1 mb-4">Already have an account?</div>
+                            <div class="h1 mb-4">Sign In</div>
+
                             <c-button status="outline-success" size="lg" @click="importAccountFile">Import Account</c-button>
                         </div>
                     </div>
@@ -73,7 +74,6 @@
 
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
         },
         data() {
             return {
@@ -91,6 +91,9 @@
                     window.location.reload()
                 })
             }
+        },
+        created() {
+            this.$store.commit('application/activateModal', 'login')
         }
     }
 </script>

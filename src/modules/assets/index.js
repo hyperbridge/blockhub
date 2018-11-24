@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import moment from 'moment';
-import { extract, skip, getId, assignId, mergeId, normalize } from '@/store/utils';
+import { extract, getId, mergeId, normalize } from '@/store/utils';
 
 import transactionsData from '@/db/seed/asset-transactions.json';
 import usersData from '@/db/seed/users.json';
@@ -8,8 +8,6 @@ import assetsData from '@/db/seed/assets.json';
 import collectionsData from '@/db/seed/collections.json';
 import productsData from '@/db/seed/products.json';
 
-
-const rand = () => Math.floor(Math.random() * 1000);
 
 const transactions = normalize(transactionsData, (trx, i) => ({
     createdAt: moment().add(-i, 'days')
@@ -132,7 +130,7 @@ const assets = {
     },
     actions: {
         create({ commit }, payload) {
-            const id = rand();
+            const id = getId();
             commit('create', { ...payload, id, data: { ...payload.data, id }});
         },
         update({ commit }, payload) {
@@ -141,18 +139,8 @@ const assets = {
             commit('update', payload);
         },
         createFilter({ commit }, payload) {
-            const id = rand();
-            commit('create', assignId(payload));
-        },
-        createAuction({ state, commit }, { offerId, ...payload }) {
-            const newId = rand();
-
-            commit('create', { id: newId, prop: 'auctions', data: payload });
-            commit('update', {
-                id: offerId,
-                target: 'offers',
-                data: { auctions: [...state.offers[offerId].auctions, newId] }
-            });
+            const id = getId();
+            commit('create', mergeId(payload));
         },
         async createTransactionMessage({ dispatch, state }, { trxId, message }) {
             const id = await dispatch('community/createMessage', message, { root: true });
@@ -172,7 +160,7 @@ const assets = {
             dispatch('community/delete', { id }, { root: true });
         },
         evolveNavigator({ commit }, payload) {
-            const id = rand();
+            const id = getId();
             commit('evolveNavigator', { ...payload, id });
         },
         devolveNavigator({ state: { navigator }, commit }, { id, parentId }) {
@@ -239,8 +227,6 @@ const assets = {
             { transactions, assets }, getters, rootState,
             { ['community/messages']: messages, ['community/identities']: identities }
         ) => normalize(transactions, trx => ({
-                you: identities[trx.you],
-                contractor: identities[trx.contractor],
                 contractorOffer: trx.contractorOffer.map(id => assets[id]),
                 yourOffer: trx.yourOffer.map(id => assets[id]),
                 messages: trx.messages.map(id => messages[id])

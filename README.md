@@ -86,7 +86,7 @@ npm run unit
 # run e2e tests
 npm run e2e
 
-# run all tests
+# run all tests 
 npm test
 ```
 
@@ -97,6 +97,10 @@ Use `npm run build` to build production. Currently it uses `/docs` directory, as
 ## Testing modes
 
 Check [PR #4](https://github.com/hyperbridge/blockhub-web-client/pull/4) for instructions on using different testing modes and how data-driven p2p views work.
+
+## Style Guide
+
+Check the [Storybook Style Guide here](https://styleguide.blockhub.gg/)
 
 ## Articles
 

@@ -175,7 +175,7 @@
                 "views": 87658
             }
         ],
-        "rews": [
+        "reviews": [
             {
                 "id" : 1,
                 "author": {
@@ -3405,5 +3405,98 @@
         "state_tag": "trending",
         "followers": 591,
         "players": 12
+    },
+    {
+        "id": 27,
+        "name": "Fishbank",
+        "price": 0,
+        "old_price": 0,
+        "community_size": 1000,
+        "active_users": 10,
+        "current_version": "v3.3.0",
+        "releases": [
+            {
+                "version": "v3.3.0",
+                "play_link": "https://play.fishbank.io/",
+                "downloads": [],
+                "meta": {
+                    "created": 29239728
+                }
+            }
+        ],
+        "images": {
+            "header": null,
+            "medium_tile": "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/med-tile.jpg",
+            "main": null,
+            "icon": "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/icon.jpg",
+            "preview": [
+                "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/preview-01.jpg",
+                "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/preview-02.jpg",
+                "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/preview-03.jpg",
+                "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/preview-04.jpg",
+                "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/preview-05.jpg",
+                "https://cdn.hyperbridge.org/blockhub/images/products/might-&-magic-heroes-vi-4896/preview-06.jpg"
+            ]
+        },
+        "video": null,
+        "genre": "MMO",
+        "release_date": "13 Oct, 2017",
+        "developer": "Fishbank",
+        "publisher": "Fishbank",
+        "content": "",
+        "developer_tags": [
+            "MMO",
+            "Battle"
+        ],
+        "language_support": [
+            {
+                "name": "English",
+                "interface": true,
+                "full_audio": false,
+                "subtitles": false,
+                "code": "en"
+            }
+        ],
+        "system_requirements": [
+            {
+                "os": "win",
+                "system": "Windows XP, Windows Vista, Windows 7 (all 32/64 bit)",
+                "processor": "Intel Pentium Core 2 @ Duo E6400 @ 2.00 Ghz, AMD Athlon II X2 240 @ 2.8 Ghz",
+                "memory": "2 GB for Windows XP and 2GB for Vista / Windows 7",
+                "graphics": "1 GB, DirectX 9.0c",
+                "directx": "9.0c",
+                "hard_drive": "8 GB",
+                "sound": "DirectX 9.0c compatible",
+                "special_info": "ATI® RADEON® HD 6000 Series"
+            }
+        ],
+        "system_tags": [
+            "new",
+            "featured",
+            "upcoming"
+        ],
+        "type": "game",
+        "downloads": 0,
+        "plans": [],
+        "frequently_traded_assets": [],
+        "rating": {
+            "overall": 0,
+            "items": [
+            ],
+            "fullReviewsLink": "#fullReviewsLink",
+            "rateGameLink": "#rateGameLink"
+        },
+        "assets": [],
+        "community": {
+            "discussions": []
+        },
+        "crowdfund": true,
+        "state_tag": "trending",
+        "followers": 0,
+        "players": 0,
+        "streams": [
+        ],
+        "reviews": [
+        ]
     }
 ]

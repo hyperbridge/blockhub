@@ -3,7 +3,7 @@
         <!-- <button class="create-offer-btn">Create new offer</button> -->
         <c-block-menu :links="links">
             <c-spinner v-if="isLoading"/>
-            <router-view v-else :transactions="results"/>
+            <router-view v-else :transactions="transactions"/>
         </c-block-menu>
     </div>
 </template>
@@ -33,11 +33,16 @@
         methods: {
             async loadData() {
                 this.isLoading = true;
-                await new Promise(r => setTimeout(r, 2000));
-                this.results = transactionsData
-                    .filter(trx => trx.you.id == this.identityId)
-                    .map(trx => ({ ...trx, createdAt: moment() }));
+                await new Promise(r => setTimeout(r, 1000));
+                // this.results = transactionsData
+                //     .map(trx => ({ ...trx, createdAt: moment() }));
                 this.isLoading = false;
+            }
+        },
+        computed: {
+            transactions() {
+                return Object.values(this.$store.getters['assets/transactions'])
+                    .filter(trx => trx.you.id == this.identityId);
             }
         },
         watch: {

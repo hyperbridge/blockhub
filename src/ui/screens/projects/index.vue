@@ -1,32 +1,72 @@
 <template>
     <c-layout navigationKey="funding">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="crowdfund-notice col-12 col-md-6 offset-md-3" v-if="!$store.state.application.account.settings.client.hide_crowdfund_game_notice" style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
-                        <c-button class="btn-close" @click="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_crowdfund_game_notice', true)">
-                            <i class="fas fa-times"></i>
-                        </c-button>
+        <div class="row">
+            <div class="crowdfund-notice col-12 col-md-6 offset-md-3" v-if="!$store.state.application.account.settings.client.hide_crowdfund_game_notice" style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
+                <c-button class="btn-close" @click="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_crowdfund_game_notice', true)">
+                    <i class="fas fa-times"></i>
+                </c-button>
 
-                        <h2>Crowdfund Your Game</h2>
-                        <div style="text-align: left">
-                            <p>Are you looking to crowdfund that game you've been working hard on? We're here to help.</p>
-                            <p>Maybe you just have an awesome idea, or want to inspire your favourite dev studio to continue a series (*cough* half-life).</p>
-                        </div>
-                        <br />
-                        <p v-if="$store.state.application.desktop_mode && $store.state.application.developer_mode"><c-button class="c-btn-lg outline-white" href="#/business/project/new">Get Started</c-button></p>
-                        <p v-if="$store.state.application.desktop_mode && !$store.state.application.developer_mode"><c-button class="c-btn-lg outline-white" href="#/developer/apply">Get Started</c-button></p>
-                        <p v-if="!$store.state.application.desktop_mode"><c-button class="c-btn-lg outline-white" @click="$store.commit('application/activateModal', 'welcome')">Get Started</c-button></p>
-                    </div>
+                <h2>Crowdfund Your Game</h2>
+                <div style="text-align: left">
+                    <p>Are you looking to crowdfund that game you've been working hard on? We're here to help.</p>
+                    <p>Maybe you just have an awesome idea, or want to inspire your favourite dev studio to continue a series (*cough* half-life).</p>
                 </div>
-
-                <c-infinite-content :list="list" />
+                <br />
+                <p v-if="$store.state.application.desktop_mode && $store.state.application.developer_mode"><c-button class="c-btn-lg outline-white" href="#/business/project/new">Get Started</c-button></p>
+                <p v-if="$store.state.application.desktop_mode && !$store.state.application.developer_mode"><c-button class="c-btn-lg outline-white" href="#/developer/apply">Get Started</c-button></p>
+                <p v-if="!$store.state.application.desktop_mode"><c-button class="c-btn-lg outline-white" @click="$store.commit('application/activateModal', 'welcome')">Get Started</c-button></p>
             </div>
+        </div>
+
+        <c-infinite-content :list="list" />
+
+        <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
+            <c-heading-bar
+                slot="title"
+                class="mb-0"
+                :name="Projects"
+            />
+            <div class="row">
+                <c-project-card
+                    class="p-2 col-3"
+                    :image="project.images.medium_tile" 
+                    :description="project.description" 
+                    :funds="project.funds" 
+                    :parentName="project.product && project.product.name" 
+                    :parentDeveloper="project.product && project.product.developer" 
+                    :parentImage="project.product && project.product.images.medium_tile"
+                    :id="project.id"
+                    v-for="(project, index) in projects" :key="index"
+                />
+            </div>
+        </c-block>
     </c-layout>
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
+    components: {
+        'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
+    },
+    watch: {
+        '$store.state.application.initialized'(newVal, oldVal) {
+            this.$store.dispatch('projects/find', {
+                query: {
+                    $sort: {
+                        createdAt: -1
+                    },
+                    $limit: 25
+                }
+            })
+        }
+    },
     computed: {
+        projects() {
+            return this.$store.getters['projects/list'] // Object.values(this.$store.state.funding.projects)//this.$store.getters['projects/list']
+                //.filter(trx => trx.you.id == this.identityId);
+        },
         list() {
             const result = []
 

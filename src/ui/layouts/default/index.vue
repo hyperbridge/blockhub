@@ -9,7 +9,8 @@
         <!-- //END PAGE HEADER -->
 
         <!-- PAGE CONTENT WRAPPER -->
-        <div class="page__content page__content-invert invert" :class="{'make-it-blur': bluredBg}" id="page-content">
+        <div class="page__content page__content-invert invert" :class="{'make-it-blur': bluredBg}" id="page-content" 
+            v-drag-and-drop:options="dragOptions">
             <div class="loader-block" v-if="!is_connected">
                 <div class="loader-block__container">
                     <div class="loader-block__spinner"></div>
@@ -39,6 +40,12 @@
                 </div>
             </div>
 
+
+
+            <div class="page-shortcuts invert" v-if="initialized && showShortcuts">
+                <c-shortcut-sidebar :items="shortcuts" />
+            </div>
+
             <!-- PAGE ASIDE PANEL -->
             <div class="page-aside invert left-sidebar" style="max-width: 250px" id="page-aside" v-if="showLeftPanel">
                 <!--<transition name="slideLeft" v-if="initialized">-->
@@ -64,7 +71,7 @@
             <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
                 <c-breadcrumb :links="breadcrumbLinksData" ref="breadcrumb" v-if="is_connected && showBreadcrumbs" />
                 <div class="container-fluid">
-                    <slot v-if="is_connected" />
+                    <slot v-if="initialized && is_connected" />
                 </div>
             </div>
 
@@ -78,13 +85,17 @@
                 {{ connection_status.message }}
             </div>
 
+
             <c-welcome-popup :activated="welcome_modal_active" @close="closePopup" ref="welcome_modal_active"></c-welcome-popup>
             <c-download-popup :activated="download_modal_active" @close="closePopup" ref="download_modal_active"></c-download-popup>
             <c-unlock-popup :activated="unlock_modal_active" @close="closePopup" ref="unlock_modal_active"></c-unlock-popup>
             <c-send-funds-popup :activated="send_funds_modal_active" @close="closePopup" ref="send_funds_modal_active"></c-send-funds-popup>
-            <c-login-popup :activated="login_modal_active" @close="closePopup" ref="login_modal_active"></c-login-popup>
             <c-purchase-popup :activated="purchase_modal_active" @close="closePopup" ref="purchase_modal_active"></c-purchase-popup>
             <c-claim-popup :activated="claim_modal_active" @close="closePopup" ref="claim_modal_active"></c-claim-popup>
+            <c-login-popup :activated="login_modal_active" @close="closePopup" ref="login_modal_active"></c-login-popup>
+            <c-register-popup :activated="register_modal_active" @close="closePopup" ref="register_modal_active"></c-register-popup>
+            <c-privacy-popup :activated="$store.state.application.active_modal === 'privacy'" @close="$store.state.application.active_modal = null"></c-privacy-popup>
+            <c-terms-popup :activated="$store.state.application.active_modal === 'terms'" @close="$store.state.application.active_modal = null"></c-terms-popup>
 
             <c-basic-popup
                 :activated="$store.state.application.editor_mode === 'editing' && !$store.state.application.account.settings.client['hide_editor_welcome_modal/' + $router.currentRoute.fullPath]"
@@ -149,6 +160,7 @@
                 </p>
             </c-basic-popup>
 
+
             <c-basic-popup
                 :activated="$store.state.application.active_modal === 'report'"
                 @close="$store.state.application.active_modal = null"
@@ -169,6 +181,7 @@
                 <p slot="footer">
                 </p>
             </c-basic-popup>
+
 
             <c-basic-popup
                 :activated="$store.state.application.active_modal === 'propose-idea'"
@@ -206,20 +219,40 @@
                 </p>
             </c-basic-popup>
 
-            <c-popup :activated="notifPopup.show_popup"
-                     :title="notifPopup.title"
-                     :type="notifPopup.type"
-                     :sub_title="notifPopup.text"
-                     @close="closeNotifPopup"
-                     v-if="notifPopup"
-                     ref="notifpopup">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ligula elit. Praesent sit amet tellus
-                    malesuada, condimentum sem ut, laoreet ex. Maecenas elementum, velit eu porta lobortis, est nunc
-                    vehicula neque, id sodales urna purus eget purus. Nam vel orci turpis. Duis vestibulum ac nibh vel
-                    vehicula.
+
+            <c-basic-popup
+                :activated="$store.state.application.active_modal === 'notification'"
+                @close="$store.state.application.active_modal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">{{ active_notification.title }}</div>
+                <template slot="body">
+                    <p>{{ active_notification.text }}</p>
+                </template>
+                <p slot="footer">
                 </p>
-            </c-popup>
+            </c-basic-popup>
+
+
+            <c-basic-popup
+                :activated="$store.state.application.active_modal === 'addition-details'"
+                @close="$store.state.application.active_modal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header"></div>
+                <template slot="body">
+                    <p>
+                        secret question / answer
+
+                        My familiarity with gaming platforms is...
+
+                        My familiarity with blockchain is... 
+                    </p>
+                </template>
+                <p slot="footer">
+                </p>
+            </c-basic-popup>
+
 
             <c-cookie-policy v-if="!desktop_mode" />
 
@@ -229,7 +262,7 @@
         </div>
         <!-- //END PAGE CONTENT -->
 
-        <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a>
+        <!-- <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a> -->
 
         <!--<transition name="slideDown">-->
             <c-profile-chooser v-if="profile_chooser && signed_in" />
@@ -264,6 +297,11 @@
                 default: true,
                 required: false
             },
+            showShortcuts: {
+                type: Boolean,
+                default: true,
+                required: false
+            },
             showBreadcrumbs: {
                 type: Boolean,
                 default: true,
@@ -284,6 +322,10 @@
             'c-header': (resolve) => require(['@/ui/components/headers/basic'], resolve),
             'c-slim-header': (resolve) => require(['@/ui/components/headers/slim'], resolve),
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
+            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic.vue'], resolve),
+            'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
+            'c-terms-popup': (resolve) => require(['@/ui/components/terms-popup'], resolve),
+            'c-privacy-popup': (resolve) => require(['@/ui/components/privacy-popup'], resolve),
             'c-wallet-navigation': (resolve) => require(['@/ui/components/navigation/wallet'], resolve),
             'c-account-navigation': (resolve) => require(['@/ui/components/navigation/account'], resolve),
             'c-settings-navigation': (resolve) => require(['@/ui/components/navigation/settings'], resolve),
@@ -298,44 +340,127 @@
             'c-unlock-popup': (resolve) => require(['@/ui/components/unlock-popup/index.vue'], resolve),
             'c-claim-popup': (resolve) => require(['@/ui/components/claim-popup/index.vue'], resolve),
             'c-login-popup': (resolve) => require(['@/ui/components/login-popup/index.vue'], resolve),
+            'c-register-popup': (resolve) => require(['@/ui/components/register-popup/index.vue'], resolve),
             'c-send-funds-popup': (resolve) => require(['@/ui/components/send-funds-popup/index.vue'], resolve),
             'c-purchase-popup': (resolve) => require(['@/ui/components/purchase-popup/index.vue'], resolve),
-            'c-basic-popup': (resolve) => require(['@/ui/components/popups/basic.vue'], resolve),
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
             'c-clock': (resolve) => require(['@/ui/components/clock/index.vue'], resolve),
             'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
             'c-cookie-policy': (resolve) => require(['@/ui/components/cookie-policy'], resolve),
+            'c-shortcut-sidebar': (resolve) => require(['@/ui/components/shortcut-sidebar'], resolve),
             'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more.vue'], resolve),
             'c-swiper': swiper,
             'c-slide': swiperSlide,
             'c-profile-chooser': (resolve) => require(['@/ui/components/profile-chooser'], resolve),
         },
         data() {
+            const self = this
+
             return {
                 navigationComponent: this.navigationKey || false,
                 loadingState: true,
-                initialized: BlockHub.initialized,
                 user_submitted_connection_message: this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))],
                 panelOption: {
                     spaceBetween: 0,
                     loop: false,
                 },
-                notifPopup: {},
                 scrollMoreDirection: null,
                 slimMode: false,
                 mobileMode: false,
                 bluredBg: false,
                 voteCasted: false,
                 reportCoords: null,
-                breadcrumbLinksData: this.breadcrumbLinks
+                breadcrumbLinksData: this.breadcrumbLinks,
+                shortcutItems: [],
+                dragOptions: {
+                    dropzoneSelector: '.does-not-exist',
+                    draggableSelector: 'a',
+                    excludeOlderBrowsers: true,
+                    showDropzoneAreas: true,
+                    multipleDropzonesItemsDraggingEnabled: true,
+                    onDrop(event) {},
+                    onDragstart(event) {
+                        let $target = $(event.nativeEvent.target)
+                        
+                        if ($target.parents('.page-shortcuts').length) {
+                            event.stop()
+                        }
+                    },
+                    onDragend(event) {
+                        let $target = $(event.nativeEvent.target)
+                        let $link = null
+                        let $image = null
+                        let link = null
+                        let image = null
+                        let text = null
+
+                        if ($target.is('a')) {
+                            $link = $target
+                        }
+                        else if ($target.is('img')) {
+                            $image = $target
+                            $link = $target.parents('a').length ? $target.parents('a').first() : null
+                        } else {
+                            $link = $target.parents('a').length ? $target.parents('a').first() : null
+                            $image = $target.parents('a').length ? $target.parents('a').first() : null
+                        }
+                        
+                        if (!$link && $image) {
+                            link = $image.data('link')
+                        }
+                        
+                        if (!$image && $link) {
+                            image = $link.data('image')
+                        }
+
+                        if (!$image && $link) {
+                            $image = $link.find('img').length ? $link.find('img').first() : null
+                        }
+
+                        // Set text
+                        if ($image) {
+                            text = $image.attr('alt')
+                        }
+                        else if ($link) {
+                            text = $link.text()
+                        }
+
+                        if ($link) {
+                            link = $link.attr('href')
+                        }
+
+                        if ($image) {
+                            image = $image.attr('src')
+                        }
+                        
+                        if (link) {
+                            self.$store.commit('application/addShortcut', {
+                                r: null,
+                                g: null,
+                                b: null,
+                                text,
+                                link,
+                                image
+                            })
+                        }
+
+                        event.stop()
+                    }
+                }
             }
         },
         computed: {
+            initialized() {
+                return this.$store.state.application.initialized
+            },
             is_connected() {
                 return this.$store.state.application.connection.internet && this.$store.state.application.connection.datasource
             },
             chosenIdentity() {
                 return this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
+            },
+            shortcuts() {
+                return this.$store.state.application.shortcuts
             },
             connection_status() {
                 return this.$store.state.application.connection.status
@@ -348,6 +473,9 @@
             },
             login_modal_active() {
                 return this.$store.state.application.active_modal === 'login'
+            },
+            register_modal_active() {
+                return this.$store.state.application.active_modal === 'register'
             },
             purchase_modal_active() {
                 return this.$store.state.application.active_modal === 'purchase'
@@ -369,6 +497,9 @@
             },
             current_identity() {
                 return this.$store.state.application.account && this.$store.state.application.account.current_identity
+            },
+            active_notification() {
+                return this.$store.state.application.active_notification || {}
             },
             dynamicLinks() {
                 const [empty, ...links] = this.$route.path.split('/');
@@ -435,13 +566,6 @@
             closePopup() {
                 this.$store.state.application.active_modal = null
             },
-            closeNotifPopup() {
-                this.notifPopup = {};
-            },
-            showNotifPopup(ntf) {
-                this.notifPopup = ntf;
-                this.notifPopup.show_popup = true;
-            },
             scrollSidebarDown() {
                 $('#scroll_sidebar').animate({scrollTop: '+=100', duration: '150'});
                 this.checkScrollButton()
@@ -491,28 +615,58 @@
                 }
                     // this.showRightPanel = false;
                     // this.showLeftPanel = false;
+            },
+            initialize() {
+                if (this.initialized) {
+                    return
+                }
+
+                this.$store.state.application.initialized = BlockHub.initialized = true
+
+                document.getElementById('startup-loader').style.display = 'none'
+
+                // check sidebar button
+                $(this.$refs.scroll_sidebar).scroll(() => {
+                    this.debounce(() => {
+                        this.checkScrollButton()
+                    }, 250)
+                })
+            }
+        },
+        watch: {
+            '$store.state.auth.accessToken'() {
+                this.initialize()
             }
         },
         created() {
             window.addEventListener('resize', this.handleResize())
-            this.handleResize();
+            this.handleResize()
+
+            this.$store.dispatch('auth/authenticate')
+                .then(() => {
+                    if (this.$store.state.auth.accessToken) {
+                        this.initialize()
+                    }
+                })
+                .catch(error => {
+                    this.initialize()
+
+                    if (error) {
+                        if (!error.message.includes('Could not find stored JWT')) {
+                            console.error(error)
+                        }
+                        return
+                    }
+
+                })
         },
         mounted() {
             this.updateBreadcrumbLinks()
             this.$nextTick(() => {
                 this.loadingState = false
-                setTimeout(() => {
-                    document.getElementById('startup-loader').style.display = 'none'
-
-                    this.initialized = BlockHub.initialized = true
-
-                    // check sidebar button
-                    $(this.$refs.scroll_sidebar).scroll(() => {
-                        this.debounce(() => {
-                            this.checkScrollButton()
-                        }, 250)
-                    })
-                }, 1000) // TODO: remove arbitrary delay
+                // setTimeout(() => {
+                //     this.initialize()
+                // }, 3000) // TODO: remove arbitrary delay
 
                 setInterval(() => {
                     this.checkScrollButton()
@@ -588,6 +742,7 @@
     }
     .content{
         padding: 20px;
+        padding-left: 80px;
         .container-fluid{
             padding: 0!important;
         }
@@ -843,6 +998,10 @@
     .page .page__content {
         padding-top: 100px;
         position: relative;
+        .page-aside {
+            margin-left: 60px;
+        }
+
         .page-aside,
         .page-sidepanel {
             top: 100px;
@@ -857,32 +1016,6 @@
             flex-direction: column;
             align-items: center;
             line-height: 18px;
-        }
-
-        &:before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 246px;
-            height: 100px;
-            z-index: 1;
-            background: linear-gradient(to top, rgba(48, 49, 77, 1) 60%, rgba(48, 49, 77, 0) 100%);
-            transform: rotate(0deg);
-            pointer-events: none;
-        }
-
-        &:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 246px;
-            height: 182px;
-            z-index: 1;
-            background: url("../../../assets/img/left-fade.png") bottom left no-repeat;
-            background-size: 100% auto;
-            pointer-events: none;
         }
 
         .navigation {
@@ -901,11 +1034,49 @@
         }
     }
 
+    .page-shortcuts {
+        position: fixed;
+        top: 50px;
+        left: 10px;
+        width: 50px;
+        z-index: 101;
+    }
+
+    .page {
+        
+        &:before {
+            content: '';
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 246px;
+            height: 100px;
+            z-index: 1;
+            background: linear-gradient(to top, rgba(48, 49, 77, 1) 60%, rgba(48, 49, 77, 0) 100%);
+            transform: rotate(0deg);
+            pointer-events: none;
+        }
+
+        &:after {
+            content: '';
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 246px;
+            height: 182px;
+            z-index: 1;
+            background: url("../../../assets/img/left-fade.png") bottom left no-repeat;
+            background-size: 100% auto;
+            pointer-events: none;
+        }
+
+    }
 
     .content {
         width: 100%;
         padding-top: 0;
         margin: 0 auto;
+        
     }
 
     .page__with-left-sidebar .content, .page__with-right-sidebar .content {

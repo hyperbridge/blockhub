@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import feathersVuex from 'feathers-vuex'
+import feathersClient from '../api/feathers-client'
 
 import router from '../router'
 import * as DB from '../db'
@@ -11,7 +13,6 @@ import * as marketplace from '../modules/marketplace'
 import * as application from '../modules/application'
 import * as database from '../modules/database'
 import * as cache from '../modules/cache'
-import user from '@/modules/user'
 import { saveDB } from './plugins'
 import assets from '@/modules/assets'
 import community from '@/modules/community'
@@ -19,6 +20,13 @@ import rootStore from '@/modules/root'
 import seed from '../db/seed'
 
 Vue.use(Vuex);
+
+const { service, auth } = feathersVuex(feathersClient, {
+    idField: 'id',
+    auth: {
+        userService: 'users'
+    }
+})
 
 if (!window.BlockHub)
     window.BlockHub = {}
@@ -65,7 +73,16 @@ const devConfig = CheckDevConfig()
 
 const store = new Vuex.Store({
     ...rootStore,
-    plugins: [saveDB],
+    plugins: [
+        saveDB,
+        service('users'),
+        service('messages'),
+        service('projects'),
+
+        auth({
+            userService: 'users'
+        })
+    ],
     modules: {
         cache: {
             namespaced: true,
@@ -109,7 +126,6 @@ const store = new Vuex.Store({
             actions: application.actions,
             mutations: application.mutations
         },
-        user,
         assets,
         community
     }
@@ -209,7 +225,7 @@ window.BlockHub.saveDatabase = () => {
 const initSubscribers = () => {
     store.subscribe((mutation, state) => {
         if (mutation.type !== 'application/setInternetConnection') {
-            console.info('[BlockHub] Mutation: ' + mutation.type, state)
+            console.info('[BlockHub] Mutation: ' + mutation.type, mutation.payload, state)
         }
 
         if (mutation.type === 'database/initialized') {

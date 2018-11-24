@@ -31,11 +31,17 @@
                 v-model="phrase"
                 class="margin-bottom-20"
                 :results="filteredResults"
-                resultUrl="/product/"
-                resultUrlProp="id"
-                resultTextProp="name"
                 :resultsCount="filteredResults.length"
-            />
+            >
+                <router-link
+                    slot-scope="props"
+                    :to="`/product/${props.result.id}`"
+                    v-html="$options.filters.highlightPhrase(
+                        props.result.name, phrase, 'u'
+                    )"
+                    :title="`${props.result.name} - product page`"
+                />
+            </c-searcher>
 
             <h4 class="margin-vertical-20">Community Size</h4>
             <c-range-slider

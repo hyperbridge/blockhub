@@ -7,7 +7,6 @@ import identitiesData from '@/db/seed/identities.json';
 import { extract, skip, getId, mergeId, normalize } from '@/store/utils';
 
 
-
 const community = {
     namespaced: true,
     state: {
@@ -88,7 +87,7 @@ const community = {
             else wishlist[itemId] = true;
 
             dispatch(
-                'updateV2',
+                'update',
                 [`community/identities/${prop}`, identity.id, { [prop]: wishlist }],
                 { root: true }
             );

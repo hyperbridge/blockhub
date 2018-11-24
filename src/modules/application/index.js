@@ -44,7 +44,9 @@ const updateState = (savedData, updatedState = {}) => {
             code: null,
             message: null
         },
+        shortcuts: savedData.shortcuts != null ? savedData.shortcuts : [],
         operating_system: savedData.operating_system != null ? savedData.operating_system : getOS(),
+        initialized: savedData.initialized != null ? savedData.initialized : BlockHub.initialized,
         account: DB.application.config.data[0].account || {},
         darklaunch_flags: DB.application.config.data[0].darklaunch_flags || [],
         developer_mode: savedData.developer_mode != null ? savedData.developer_mode : DB.application.config.data[0].account && !!DB.application.config.data[0].account.current_identity.developer_id,
@@ -272,6 +274,32 @@ export const mutations = {
         } else {
             account[prop] = data;
         }
+    },
+    addShortcut(state, shortcut) {
+        state.shortcuts.push(shortcut)
+
+        DB.application.config.update(state)
+        DB.save()
+    },
+    removeShortcut(state, index) {
+        state.shortcuts.splice(index, 1)
+
+        DB.application.config.update(state)
+        DB.save()
+    },
+    updateShortcut(state, shortcut) {
+        if (state.shortcuts.find(s => s.id == shortcut.id)) {
+            state.shortcuts.splice(state.shortcuts.findIndex(s => s.id == shortcut.id), 1)
+        } else {
+            state.shortcuts.push(shortcut)
+        }
+
+        DB.application.config.update(state)
+        DB.save()
+    },
+    showNotification(state, notification) {
+        state.active_notification = notification
+        state.active_modal = 'notification'
     },
     updateFavorites2({ account }, { prop = 'product_wishlist', id }) {
         const foundKey = account[prop].findIndex(savedId => savedId === id);

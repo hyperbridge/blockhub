@@ -1,29 +1,13 @@
 <template>
-    <c-business-layout>
+    <!--<c-business-layout title="Crowdfund Creation">-->
         <div>
-            <!-- PAGE HEADING -->
-            <div class="page-heading">
-                <div class="page-heading__container" style="float: none">
-                    <h1 class="title" style="float: left'" hidden>Product Creation</h1>
-                    <div class="float-right mb-3" v-if="project.id">
-                        <a :href="`#/project/${project.id}`" class="btn btn-primary">PREVIEW</a>
-                    </div>
-                </div>
-
-                <nav aria-label="breadcrumb" role="navigation">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#/business">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="#/business/projects">Crowdfunds</a></li>
-                        <li class="breadcrumb-item active">{{ project.id ? 'Edit' : 'New' }} Crowdfund</li>
-                    </ol>
-                </nav>
-            </div>
-            <!-- //END PAGE HEADING -->
-
-            <div class="container-fluid">
-
+            <div class="container-fluid" v-if="project">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12" v-if="notice">
+                        <p class="alert alert-info">{{ notice }}</p>
+                        <br /><br />
+                    </div>
+                    <div class="col-md-8">
                         <div class="form-group row">
                             <label class="switch switch-sm col-sm-3">
                                 <label>Title</label>
@@ -53,7 +37,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group row">
                             <label class="switch switch-sm col-sm-3">
                                 <label>Tags</label>
@@ -83,15 +67,19 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="page-heading">
-                    <div class="page-heading__container" style="float: none">
-                        <a class="title" href="#" style="float: left'" @click="toggleAdvanced">{{ advanced ? 'Hide' : 'Show' }} Advanced</a>
+                    <div class="col-12">
+                        <div class="h5" @click="toggleAdvanced">
+                            <i class="mr-2 fas" :class="advanced ? 'fa-angle-up' : 'fa-angle-down'"></i>
+                            {{ advanced ? 'Hide' : 'Show' }} Advanced
+                        </div>
                     </div>
                 </div>
 
                 <div class="row" v-if="advanced">
+                    <div class="col-12">
+                        <hr />
+                    </div>
                     <div class="col-md-6">
 
                         <div class="form-group row">
@@ -127,7 +115,6 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-
                         <div class="form-group row">
                             <label class="switch switch-sm col-sm-1">
                                 <input type="checkbox" name="switch_8" checked="" value="0">
@@ -188,6 +175,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12">
+                        <hr />
+                    </div>
                 </div>
             
                 <div class="row" v-darklaunch="'GOVERNANCE'">
@@ -200,16 +190,20 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-2 offset-10" v-if="project.id">
-                        <a href="#" target="_blank" class="btn btn-primary" @click.prevent="save">SAVE</a>
+                    <div class="col-12 text-right" v-if="project.id">
+                        <c-button status="success" @click="save" icon="save">
+                            Save
+                        </c-button>
                     </div>
-                    <div class="col-2 offset-10" v-if="!project.id">
-                        <a href="#" target="_blank" class="btn btn-primary" @click.prevent="create">CREATE</a>
+                    <div class="col-12 text-right" v-if="!project.id">
+                        <c-button status="success" @click="create" icon="plus">
+                            Create
+                        </c-button>
                     </div>
                 </div>
             </div>
         </div>
-    </c-business-layout>
+    <!--</c-business-layout>-->
 </template>
 
 <script>
@@ -232,183 +226,208 @@
                 return this.$store.state.funding
             },
             project() {
-                return this.id === 'new' ? this.funding.default_project : this.funding.projects[this.id]
+                return this.id === 'new' ? this.funding.default_project : this.$store.getters['projects/get'](this.id)
             }
+        },
+        watch: {
+            '$store.state.application.initialized'() {
+                if (this.id === 'new') { return }
+
+                this.$store.dispatch('projects/find', {
+                    query: {
+                        id: Number(this.id)
+                    }
+                })
+            },
         },
         methods: {
             toggleAdvanced() {
                 this.advanced = !this.advanced
             },
             create() {
+                this.$store.dispatch('projects/create', this.project).then((projectResult) => {
+                    this.project.id = projectResult.id
+                    this.notice = "Congratulations, your project has been created!"
 
-                const run = function(
-                    local, 
-                    DB,
-                    Bridge,
-                    FundingAPI, 
-                    MarketplaceAPI, 
-                    TokenAPI, 
-                    ReserveAPI, 
-                    BABEL_PROMISE,
-                    BABEL_GENERATOR,
-                    BABEL_REGENERATOR,
-                    params
-                ) {
-                    const { project, profile } = params
-                    
-                    return new Promise(async (resolve, reject) => {
-                        const projectRegistrationContract = FundingAPI.api.ethereum.state.contracts.ProjectRegistration.deployed
-
-                        let created = false
-
-                        const watcher = projectRegistrationContract.ProjectCreated().watch((err, res) => {
-                            if (created) return
-
-                            created = true
-
-                            if (err) {
-                                console.warn('[BlockHub][Marketplace] Error', err)
-
-                                return reject(err)
-                            }
-
-                            project.$loki = undefined
-                            project.id = res.args.projectId.toNumber()
-
-                            try {
-                                DB.funding.projects.insert(project)
-                                console.log('after', project.id)
-                            } catch (e) {
-                                try {
-                                    DB.funding.projects.update(project)
-                                } catch (e) {
-                                    reject(e)
-                                }
-                            }
-
-                            DB.save()
-
-                            Bridge.sendCommand('updateState', {
-                                module: 'funding',
-                                state: {
-                                    projects: DB.funding.projects.data
-                                }
-                            })
-
-                            console.log('Project created')
-
-                            resolve(project)
-                        })
-
-                        await projectRegistrationContract.createProject(
-                            project.name,
-                            project.description,
-                            project.content,
-                            { from: profile.public_address }
-                        )
-
-                        watcher.stopWatching(() => {
-                            // Must be async or tries to launch nasty process
-                        })
-                    })
-                }
-
-                const cmd = {
-                    code: run.toString(),
-                    params: {
-                        profile: this.$store.state.application.account.current_identity,
-                        project: this.project
-                    }
-                }
-
-                BlockHub.Bridge.sendCommand('eval', cmd).then((projectResult) => {
-                    if (projectResult.id) {
-                        this.project.id = projectResult.id
-                        this.successfulCreationMessage = "Congratulations, your project has been created!"
-
-                        this.funding.projects[this.project.id] = this.project
-
-                        this.$router.push('/business/project/' + this.project.id)
-                    }
+                    this.$router.push('/business/project/' + this.project.id)
                 })
+
+                // const run = function(
+                //     local, 
+                //     DB,
+                //     Bridge,
+                //     FundingAPI, 
+                //     MarketplaceAPI, 
+                //     TokenAPI, 
+                //     ReserveAPI, 
+                //     BABEL_PROMISE,
+                //     BABEL_GENERATOR,
+                //     BABEL_REGENERATOR,
+                //     params
+                // ) {
+                //     const { project, profile } = params
+                    
+                //     return new Promise(async (resolve, reject) => {
+                //         const projectRegistrationContract = FundingAPI.api.ethereum.state.contracts.ProjectRegistration.deployed
+
+                //         let created = false
+
+                //         const watcher = projectRegistrationContract.ProjectCreated().watch((err, res) => {
+                //             if (created) return
+
+                //             created = true
+
+                //             if (err) {
+                //                 console.warn('[BlockHub][Marketplace] Error', err)
+
+                //                 return reject(err)
+                //             }
+
+                //             project.$loki = undefined
+                //             project.id = res.args.projectId.toNumber()
+
+                //             try {
+                //                 DB.funding.projects.insert(project)
+                //                 console.log('after', project.id)
+                //             } catch (e) {
+                //                 try {
+                //                     DB.funding.projects.update(project)
+                //                 } catch (e) {
+                //                     reject(e)
+                //                 }
+                //             }
+
+                //             DB.save()
+
+                //             Bridge.sendCommand('updateState', {
+                //                 module: 'funding',
+                //                 state: {
+                //                     projects: DB.funding.projects.data
+                //                 }
+                //             })
+
+                //             console.log('Project created')
+
+                //             resolve(project)
+                //         })
+
+                //         await projectRegistrationContract.createProject(
+                //             project.name,
+                //             project.description,
+                //             project.content,
+                //             { from: profile.public_address }
+                //         )
+
+                //         watcher.stopWatching(() => {
+                //             // Must be async or tries to launch nasty process
+                //         })
+                //     })
+                // }
+
+                // const cmd = {
+                //     code: run.toString(),
+                //     params: {
+                //         profile: this.$store.state.application.account.current_identity,
+                //         project: this.project
+                //     }
+                // }
+
+                // BlockHub.Bridge.sendCommand('eval', cmd).then((projectResult) => {
+                //     if (projectResult.id) {
+                //         this.project.id = projectResult.id
+                //         this.successfulCreationMessage = "Congratulations, your project has been created!"
+
+                //         this.funding.projects[this.project.id] = this.project
+
+                //         this.$router.push('/business/project/' + this.project.id)
+                //     }
+                // })
 
             },
             save() {
-                const run = function(
-                    local, 
-                    DB,
-                    Bridge,
-                    FundingAPI, 
-                    MarketplaceAPI, 
-                    TokenAPI, 
-                    ReserveAPI, 
-                    BABEL_PROMISE,
-                    BABEL_GENERATOR,
-                    BABEL_REGENERATOR,
-                    params
-                ) {
-                    return new Promise(async () => {
-                        const project = {
-                            title: 'test',
-                            description: 'test',
-                            about: 'test',
-                            minContributionGoal: 1000,
-                            maxContributionGoal: 10000,
-                            contributionPeriod: 4,
-                            noRefunds: false,
-                            noTimeline: true,
-                        }
+                this.$store.dispatch('projects/update', [this.project.id, this.project]).then(() => {
+                    this.notice = "Project has been saved."
+                    //this.project.id = projectResult.id
+                    //this.successfulCreationMessage = "Congratulations, your project has been created!"
 
-                        const projectRegistrationContract = FundingAPI.api.ethereum.state.contracts.ProjectRegistration.deployed
+                    //this.$router.push('/business/project/' + this.project.id)
+                })
 
-                        let resProjectId = null
-                        const getProjectId = new Promise((res) => {
-                            resProjectId = res
-                        })
+                // const run = function(
+                //     local, 
+                //     DB,
+                //     Bridge,
+                //     FundingAPI, 
+                //     MarketplaceAPI, 
+                //     TokenAPI, 
+                //     ReserveAPI, 
+                //     BABEL_PROMISE,
+                //     BABEL_GENERATOR,
+                //     BABEL_REGENERATOR,
+                //     params
+                // ) {
+                //     return new Promise(async () => {
+                //         const project = {
+                //             title: 'test',
+                //             description: 'test',
+                //             about: 'test',
+                //             minContributionGoal: 1000,
+                //             maxContributionGoal: 10000,
+                //             contributionPeriod: 4,
+                //             noRefunds: false,
+                //             noTimeline: true,
+                //         }
 
-                        const watcher = projectRegistrationContract.ProjectCreated().watch((err, res) => {
-                            if (err) {
-                                console.warn('[BlockHub][Funding] Error', err)
+                //         const projectRegistrationContract = FundingAPI.api.ethereum.state.contracts.ProjectRegistration.deployed
 
-                                return reject(err)
-                            }
+                //         let resProjectId = null
+                //         const getProjectId = new Promise((res) => {
+                //             resProjectId = res
+                //         })
 
-                            project.$loki = undefined
-                            project.id = res.args.projectId.toNumber()
+                //         const watcher = projectRegistrationContract.ProjectCreated().watch((err, res) => {
+                //             if (err) {
+                //                 console.warn('[BlockHub][Funding] Error', err)
 
-                            try {
-                                DB.funding.projects.insert(project)
-                            } catch (e) {
-                                try {
-                                    DB.funding.projects.update(project)
-                                } catch (e) {
-                                    reject(e)
-                                }
-                            }
+                //                 return reject(err)
+                //             }
 
-                            resProjectId(project.id)
-                        })
+                //             project.$loki = undefined
+                //             project.id = res.args.projectId.toNumber()
 
-                        await projectRegistrationContract.createProject(
-                            project.title,
-                            project.description,
-                            project.about,
-                        )
+                //             try {
+                //                 DB.funding.projects.insert(project)
+                //             } catch (e) {
+                //                 try {
+                //                     DB.funding.projects.update(project)
+                //                 } catch (e) {
+                //                     reject(e)
+                //                 }
+                //             }
 
-                        watcher.stopWatching()
+                //             resProjectId(project.id)
+                //         })
 
-                        const projectId = await getProjectId
+                //         await projectRegistrationContract.createProject(
+                //             project.title,
+                //             project.description,
+                //             project.about,
+                //         )
 
-                        await projectRegistrationContract.setProjectContributionGoals(projectId, project.minContributionGoal, project.maxContributionGoal, project.contributionPeriod, { from: developerAccount });
-                        await projectRegistrationContract.setProjectTerms(projectId, project.noRefunds, project.noTimeline, { from: developerAccount });
+                //         watcher.stopWatching()
 
-                        const remoteProject = await projectRegistrationContract.getProject(projectId);
+                //         const projectId = await getProjectId
 
-                        console.log(remoteProject)
-                    })
-                }
+                //         await projectRegistrationContract.setProjectContributionGoals(projectId, project.minContributionGoal, project.maxContributionGoal, project.contributionPeriod, { from: developerAccount });
+                //         await projectRegistrationContract.setProjectTerms(projectId, project.noRefunds, project.noTimeline, { from: developerAccount });
 
-                BlockHub.Bridge.sendCommand('eval', run.toString())
+                //         const remoteProject = await projectRegistrationContract.getProject(projectId);
+
+                //         console.log(remoteProject)
+                //     })
+                // }
+
+                // BlockHub.Bridge.sendCommand('eval', run.toString())
             }
         },
         mounted() {

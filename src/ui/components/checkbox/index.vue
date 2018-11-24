@@ -32,7 +32,7 @@
             checked: [Boolean, String],
             type: {
                 type: String,
-                default: 'circle',
+                default: 'square',
                 validator: val => ['circle', 'square'].includes(val)
             }
         }

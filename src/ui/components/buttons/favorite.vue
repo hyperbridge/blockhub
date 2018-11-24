@@ -5,7 +5,7 @@
         :title="dynamicTitle"
         @click="$emit('click')"
     >
-        <c-icon name="heart mr-2"/>
+        <c-icon :name="`${active ? unactiveIcon : activeIcon} mr-2`" />
         {{ dynamicTitle }}
     </button>
 </template>
@@ -16,7 +16,15 @@
         props: {
             active: Boolean,
             target: String,
-            title: String
+            title: String,
+            activeIcon: {
+                type: String,
+                default: 'heart'
+            },
+            unactiveIcon: {
+                type: String,
+                default: 'heart'
+            }
         },
         computed: {
             dynamicTitle() {

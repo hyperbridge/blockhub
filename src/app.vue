@@ -202,7 +202,6 @@
 <script>
     import axios from 'axios'
     import Vue from 'vue'
-    import { mapActions } from 'vuex'
 
     export default {
         name: 'app',
@@ -237,10 +236,13 @@
             signed_in() { return this.$store.state.application.signed_in },
             simulator_mode() { return this.$store.state.application.simulator_mode },
             operating_system() { return this.$store.state.application.operating_system },
-            environment_mode() { return this.$store.state.application.environment_mode }
+            environment_mode() { return this.$store.state.application.environment_mode },
+            // The user is automatically set by the feathers-vuex auth module upon login.
+            user () {
+                return this.$store.state.auth.user
+            }
         },
         methods: {
-            ...mapActions(['loadSettings']),
             ensureDesktopWelcome(to) {
                 if (this.$store.state.application.desktop_mode
                 && !this.$store.state.application.signed_in
@@ -366,7 +368,6 @@
             }
         },
         mounted() {
-            this.loadSettings()
             this.getExternalState()
             this.ensureDesktopWelcome()
         },
@@ -375,8 +376,20 @@
                 $('body').removeClass('show-sidebar')
                 $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-cog')
 
+                this.$store.state.application.active_modal = false
+
                 this.updateEditorMode()
                 this.ensureDesktopWelcome(to)
+            },
+            // When the user is set, redirect to the Chat page.
+            user (newVal) {
+                if (newVal === undefined) {
+                    this.$store.state.application.signed_in = false
+                    //this.$router.replace({ name: 'Home' })
+                } else {
+                    this.$store.state.application.signed_in = true
+                    //this.$router.replace({ name: 'Home' })
+                }
             }
         }
     }

@@ -26,7 +26,34 @@
         <!-- PAGE CONTENT -->
         <transition name="fade">
             <div class="content" id="content" :class="{'left-sidebar': showLeftPanel, 'right-sidebar': showRightPanel, 'invert' : darkMode, 'is-minimized' : minimized }">
-                <slot />
+                <!-- PAGE HEADING -->
+                <div class="page-heading">
+                    <div class="page-heading__container">
+                        <div>
+                            <h3 class="page-heading__title p-0 m-0">
+                                {{ page_title }}
+                            </h3>
+                        </div>
+                        <div>
+                            <slot name="action" />
+                        </div>
+                    </div>
+
+                    <nav aria-label="breadcrumb" role="navigation">
+                        <ul class="breadcrumb" v-if="breadcrumbLinksData.length">
+                            <li v-for="(link, index) in breadcrumbLinksData" class="breadcrumb-item" :class="{ 'active': index == breadcrumbLinksData.length-1 }" :key="index">
+                                <router-link :to="link.to" v-if="link.to">{{ link.title }}</router-link>
+                                <template v-else>
+                                    {{ link.title }}
+                                </template>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- //END PAGE HEADING -->
+                <div class="content__wrapper">
+                    <slot />
+                </div>
             </div>
         </transition>
         <!---->
@@ -57,27 +84,34 @@
             showRightPanel: {
                 type: Boolean,
                 default: false
-            }
+            },
+            title: String
         },
         components: {
-            'c-business-sidebar': (resolve) => require(['@/ui/components/business/sidepanel'], resolve),
-            SidebarMenu
+            SidebarMenu,
+            'c-page-heading': (resolve) => require(['@/ui/components/business/page_heading'], resolve),
         },
         data() {
             return {
                 loadingState: true,
                 darkMode: false,
                 minimized: false,
+                breadcrumbLinksData: [],
+                page_title: '',
                 menu: [
                     {
                         title: 'Marketplace',
                         icon: 'fas fa-home',
                         child: [
                             {
-                                href: '/business/products',
                                 title: 'Products',
-                                icon: 'fas fa-square-full icon-sm',
+                                // icon: 'fas fa-square-full icon-sm',
                                 child: [
+                                    {
+                                        href: '/business/products',
+                                        title: 'All Products',
+                                        icon: 'fas fa-square-full icon-sm',
+                                    },
                                     {
                                         href: '/business/product/new',
                                         title: 'New Product',
@@ -86,54 +120,84 @@
                                 ]
                             },
                             {
-                                href: '/business',
                                 title: 'Crowdfunds',
-                                icon: 'fas fa-square-full icon-sm',
                                 child: [
                                     {
                                         href: '/business/project/new',
-                                        title: 'New Crowdfund',
+                                        title: 'New Crowdfunds',
                                         icon: 'fas fa-square-full icon-sm'
-                                    }
+                                    },
                                 ]
                             }
                         ]
                     },
-                    // {
-                    //     header: true,
-                    //     title: 'Funding',
-                    // },
-                    // {
-                    //     title: 'Funding',
-                    //     icon: 'fas fa-file-alt',
-                    //     child: [
-                    //         {
-                    //             href: '/business/project/new',
-                    //             title: 'New Crowdfund',
-                    //             icon: 'fas fa-square-full icon-sm'
-                    //         }
-                    //     ]
-                    // }
+                    {
+                        header: true,
+                        title: 'Setting',
+                    }
                 ]
             }
+        },
+        created() {
+            this.updateBreadcrumbLinks()
+            this.page_title = this.$route.meta.title || 'Dashboard'
+            this.$store.dispatch('auth/authenticate')
+                .then(() => {
+                    if (this.$store.state.auth.accessToken) {
+                        this.initialize()
+                    }
+                })
+                .catch(error => {
+                    this.initialize()
+
+                    if (error) {
+                        if (!error.message.includes('Could not find stored JWT')) {
+                            console.error(error)
+                        }
+                        return
+                    }
+
+                })
         },
         computed: {
             current_identity() {
                 return this.$store.state.application.account && this.$store.state.application.account.current_identity
             },
         },
+        methods: {
+            updateBreadcrumbLinks() {
+                this.breadcrumbLinksData = this.$route.meta.breadcrumb
+            },
+            initialize() {
+                if (this.initialized) {
+                    return
+                }
+
+                this.$store.state.application.initialized = BlockHub.initialized = true
+
+                document.getElementById('startup-loader').style.display = 'none'
+            }
+        },
         mounted() {
             this.$nextTick(() => {
                 this.loadingState = false
-                document.getElementById('startup-loader').style.display = 'none'
             })
 
-            let body = document.body;
-            body.classList.add("light");
+            document.body.classList.add('light')
+
+            this.updateBreadcrumbLinks()
         },
-        beforeDestroy(){
-            let body = document.body;
-            body.classList.remove("light");
+        beforeDestroy() {
+            document.body.classList.remove('light')
+        },
+        watch: {
+            '$route'(to, from) {
+                this.updateBreadcrumbLinks()
+                this.page_title = to.meta.title || 'Dashboard'
+            },
+            '$store.state.auth.accessToken'() {
+                this.initialize()
+            }
         }
     }
 </script>
@@ -153,6 +217,8 @@
     body{
         &.light{
             background: #f7f6f7!important;
+            font-size: 16px;
+            line-height: 26px;
             #header-bg,
             #right-bg,
             #left-bg{
@@ -223,7 +289,12 @@
                     line-height: 30px;
                     width: 30px;
                     text-align: center;
-                    font-size: 4px;
+                    font-size: 5px;
+                }
+                &.is-active{
+                    .vsm-icon{
+                        color: #f50!important;
+                    }
                 }
             }
         }
@@ -255,8 +326,21 @@
     }
     .page-heading{
         border-bottom: 1px solid rgba(0, 0, 0, 0.1)!important;
-        background: #fff!important;
         margin-bottom: 15px!important;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        padding-top: 5px;
+        background: #fff!important;
+    }
+    .page-heading__container{
+        align-items: center;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .page-heading__title{
+        font-weight: 500;
     }
     .page-top-bar{
         display: flex;
@@ -271,7 +355,7 @@
         background: #fff;
         color: #c3c3d6;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        box-shadow: 0 0 15px rgba(0, 0, 0, .4);
+        box-shadow: 0 0 10px rgba(0, 0, 0, .4), 0 0 10px rgba(0, 0, 0, .4);
         .logo-holder{
             height: 50px;
             width: auto;
@@ -319,7 +403,7 @@
         border-right: 1px solid rgba(0, 0, 0, 0.1);
         transition: all 200ms ease-in-out;
         position: relative;
-        z-index: 10;
+        /*z-index: 10;*/
         &.left-sidebar{
             padding: 60px 0 0 250px;
         }
@@ -378,5 +462,11 @@
     }
     .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
         opacity: 0;
+    }
+    .content__wrapper{
+        margin: 15px;
+        background: #fff;
+        padding: 15px 0;
+        border: 1px solid #ebebeb;
     }
 </style>

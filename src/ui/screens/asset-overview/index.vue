@@ -58,6 +58,12 @@
                         </div>
                     </div>
 
+                    <c-model-obj
+                        src="../../../../static/assets-3d/sylvanas/Sylvanas.obj"
+                        mtl="../../../../static/assets-3d/sylvanas/Sylvanas.mtl"
+                        :backgroundAlpha="0"
+                    />
+
                     <div class="col-12 col-lg-6 margin-top-15 margin-bottom-15">
                         <c-block title="Attributes" class="h-100" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
                                 <template slot="additional-action">
@@ -235,6 +241,8 @@
 </template>
 
 <script>
+    import { ModelObj } from 'vue-3d-model'
+
     export default {
         props: ['id'],
         components: {
@@ -247,6 +255,7 @@
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
             'c-asset-popup': (resolve) => require(['@/ui/components/asset-overview-popup'], resolve),
             'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
+            'c-model-obj': ModelObj
         },
         data() {
             return {

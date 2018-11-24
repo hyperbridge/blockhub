@@ -269,8 +269,53 @@ storiesOf('Searcher', module)
         components: {
             'c-searcher': Searcher
         },
+        data(){
+            return {
+                results:[],
+                phrase: [],
+                items:[
+                    {name :'Saints Row: The Third'},
+                    {name :'Worms Ultimate Mayhem'},
+                    {name :'Dungeon Defenders'},
+                    {name :'The Witcher 2: Assassins of Kings Enhanced Edition'},
+                    {name :'Mafia II'},
+                    {name :'Homefront'},
+                    {name :'Call of Duty®: Black Ops'},
+                    {name :'Fallout New Vegas: Dead Money'},
+                ]
+            }
+        },
+        methods:{
+            search() {
+                this.results = this.phrase.length ? this.getByVal(this.phrase) : []
+            },
+            getByVal(val){
+                let arr = [];
+                this.items.forEach( (el) => {
+                    console.log('first', el)
+                    if( el.name.includes(val) ){
+                        arr.push(el);
+                        console.log('second', arr)
+                    }
+                });
+                return arr;
+            }
+        },
+        computed:{
+        },
+        watch:{
+            results(){
+                console.log(this.results)
+            }
+        },
         template: `<div class="p-5 col-4">
-                <c-searcher />
+                <c-searcher  @input="search" :results="results" v-model="phrase">
+                    <template slot-scope="props">
+                        <span class="text-white">
+                            {{ props.result.name }}
+                        </span>
+                    </template>
+                </c-searcher>
             </div>`
     }))
 
@@ -3942,7 +3987,7 @@ storiesOf('Purchase block', module)
                         :tags="['top', 'new']"
                         :price="49.99"
                         releaseDate="8 Jun, 2018"
-                        :hasDemo="true"
+                        :demoLink="#"
                         :offersPurchases="true"
                         :inWishlist="inWishlist"
                         @addToWishlist="inWishlist = true"
@@ -4896,6 +4941,14 @@ storiesOf('Token Sale Box', module)
             :soldTokens="243424234"
             />
         </div>`
+    }))
+
+storiesOf('Guide', module)
+    .add('default', () =>({
+        components:{
+            'c-guide': (resolve) => require(['@/ui/components/guide'], resolve),
+        },
+        template: `<c-guide />`
     }))
 
 

@@ -179,8 +179,8 @@
 
                             </c-dropdown>
                         </li>
-                        <li v-if="desktop_mode && !signed_in && !is_locked">
-                            <a href="#/account/signin">
+                        <li v-if="!signed_in && !is_locked">
+                            <a href="#" @click="$store.commit('application/activateModal', 'login')">
                                 <span class="icon fa fa-sign-out-alt"></span>
                                 <span class="text">Sign In</span>
                             </a>

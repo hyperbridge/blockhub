@@ -21,19 +21,7 @@
                 <ul v-else class="results__list">
                     <slot name="list">
                         <li v-for="(result, index) in results" :key="index" class="list__result">
-                            <slot :result="result">
-                                <!-- <router-link
-                                    v-if="disableDecoration"
-                                    :to="`${resultUrl}${result[resultUrlProp]}`"
-                                >
-                                    {{ result[resultTextProp] }}
-                                </router-link>
-                                <router-link
-                                    v-else
-                                    :to="`${resultUrl}${result[resultUrlProp]}`"
-                                    v-html="$options.filters.highlightPhrase(result[resultTextProp], phrase, 'u')"
-                                /> -->
-                            </slot>
+                            <slot :result="result"/>
                         </li>
                     </slot>
                 </ul>
@@ -65,11 +53,7 @@
                 type: Number,
                 default: 250
             },
-            results: Array,
-            resultUrl: String,
-            resultUrlProp: String,
-            resultTextProp: String,
-            disableDecoration: Boolean,
+            results: Array
         },
         data() {
             return {

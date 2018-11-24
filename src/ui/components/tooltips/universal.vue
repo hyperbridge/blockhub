@@ -61,6 +61,7 @@
     .tooltip-universal__content {
         position: relative;
         width: 100%;
+        height: 100%;
         .fa-question-circle {
             position: absolute;
             font-size: 10px;
@@ -72,6 +73,8 @@
     .tooltip-universal__wrapper {
         position: relative;
         display: inline-flex;
+        width: 100%;
+        height: 100%;
     }
 
     $distance: 10px;
