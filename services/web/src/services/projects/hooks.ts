@@ -23,7 +23,7 @@ const fillOne = function(options = {}) {
     }
 }
 
-const fillAll = function (options = {}) {
+const fillAll = function(options = {}) {
     return async context => {
         context.result.data = context.result.data.map((project) => {
             return fillProject(project)
