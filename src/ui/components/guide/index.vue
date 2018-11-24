@@ -136,9 +136,9 @@
                                         Heading h1
                                     </h1>
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>500</td>
+                                <td>24px</td>
+                                <td>White</td>
                             </tr>
                             <tr>
                                 <td>
@@ -146,9 +146,9 @@
                                         Heading h2
                                     </h2>
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>500</td>
+                                <td>20px</td>
+                                <td>White</td>
                             </tr>
                             <tr>
                                 <td>
@@ -156,9 +156,9 @@
                                         Heading h3
                                     </h3>
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>500</td>
+                                <td>18px</td>
+                                <td>White</td>
                             </tr>
                             <tr>
                                 <td>
@@ -166,9 +166,9 @@
                                         Heading h4
                                     </h4>
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>500</td>
+                                <td>15px</td>
+                                <td>White</td>
                             </tr>
                             <tr>
                                 <td>
@@ -176,9 +176,9 @@
                                         Heading h5
                                     </h5>
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>500</td>
+                                <td>13px</td>
+                                <td>White</td>
                             </tr>
                             <tr>
                                 <td>
@@ -186,9 +186,9 @@
                                         Heading h6
                                     </h6>
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>500</td>
+                                <td>13px</td>
+                                <td>White</td>
                             </tr>
                             <tr>
                                 <td>
@@ -196,9 +196,9 @@
                                         Paragraph
                                     </p>
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>500</td>
+                                <td>18px</td>
+                                <td>White</td>
                             </tr>
                             <tr>
                                 <td>
@@ -206,9 +206,9 @@
                                         Small
                                     </small>
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>500</td>
+                                <td>11px</td>
+                                <td>White</td>
                             </tr>
                         </tbody>
                     </table>
