@@ -3,7 +3,7 @@
         <div class="video-popup" slot="custom_content">
             <div class="video-popup__video-container">
                 <youtube :video-id="youtubeId" :player-vars="playerVars" fitParent="true" height="450" width="800"  :resize="true" v-if="youtubeId"></youtube>
-                <video controls v-else-if="video">
+                <video controls v-else="video">
                     <template v-for="item in video">
                         <source :src="item.src" :type="['video/' + item.format ]">
                     </template>
@@ -45,7 +45,7 @@
         props:{
             activated:{
                 type: Boolean,
-                default: true
+                default: false
             },
             video: [ Object, Array ],
             youtubeId: String
@@ -83,12 +83,15 @@
         display: flex;
         flex-direction: column;
         background: #3D3E5D;
-        padding: 10px 20px 20px;
+        padding: 10px 20px 10px;
     }
     .comments__wrapper{
         height: 70%;
         overflow-y: auto;
         color: #fff;
+        display: flex;
+        flex-direction: column;
+        padding-right: 14px;
     }
     .comments__form{
         margin-top: 15px;
