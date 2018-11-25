@@ -1,11 +1,11 @@
 import { schema } from 'normalizr'
-import identity from './identity'
+import profile from './profile'
 import comment from './comment'
 
 export default new schema.Entity('projects', {
-    contributors: [identity],
-    moderators: [identity],
+    contributors: [profile],
+    moderators: [profile],
     comments: [comment],
-    owner: identity,
-    author: identity
+    owner: profile,
+    author: profile
 })

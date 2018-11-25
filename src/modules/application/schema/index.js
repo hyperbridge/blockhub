@@ -1,9 +1,9 @@
-import identity from './identity'
+import profile from './profile'
 import wallet from './wallet'
 import account from './account'
 
 export default {
-    identity,
+    profile,
     wallet,
     account
 }

@@ -1,8 +1,8 @@
 import { schema } from 'normalizr'
-import identity from './identity'
+import profile from './profile'
 import comment from './comment'
 
 export default new schema.Entity('articles', {
-    author: identity,
+    author: profile,
     comments: [comment]
 })

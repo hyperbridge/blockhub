@@ -7,7 +7,7 @@ export default {
     assets: require('./assets.json'),
     projects: require('./projects.json'),
     realms: require('./realms.json'),
-    identities: require('./identities.json'),
+    profiles: require('./profiles.json'),
     updates: require('./updates.json'),
     wallets: require('./wallets.json'),
     game_series: require('./game-series.json')

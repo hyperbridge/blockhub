@@ -9,7 +9,7 @@
                 <div v-if="!curator_mode" style="text-align: center">
                     <c-user-card
                         class="col-3 margin-auto"
-                        :user="chosenIdentity"
+                        :user="chosenProfile"
                         :previewMode="true"
                         :class="{ 'default': true }"
                     />
@@ -18,12 +18,12 @@
 
                     <br /><br />
 
-                    <c-button class="c-btn-lg outline-white margin-top-20" @click="convertIdentity">Convert to Curator</c-button>
+                    <c-button class="c-btn-lg outline-white margin-top-20" @click="convertProfile">Convert to Curator</c-button>
                 </div>
             </div>
             <div class="col-12" v-if="curator_mode">
                 <c-block title="Congratulations" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                    Your profile is all setup. You are Curator #{{ chosenIdentity.developer_id }}
+                    Your profile is all setup. You are Curator #{{ chosenProfile.developer_id }}
 
                     <br /><br />
 
@@ -43,30 +43,30 @@
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         },
         data() {
-            let developerIdentity = this.$store.state.application.account.identities.find(identity => identity.curator_id !== undefined)
-            let chosenIdentity = this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.activeProfile.id)
+            let developerProfile = this.$store.state.application.account.profiles.find(profile => profile.curator_id !== undefined)
+            let chosenProfile = this.$store.state.application.account.profiles.find(profile => profile.id == this.$store.state.application.account.activeProfile.id)
 
-            if (!chosenIdentity && this.$store.state.application.account.identities.length) {
-                chosenIdentity = this.$store.state.application.account.identities[0]
+            if (!chosenProfile && this.$store.state.application.account.profiles.length) {
+                chosenProfile = this.$store.state.application.account.profiles[0]
             }
 
             return {
-                identities: this.$store.state.application.account.identities,
-                chosenIdentity: chosenIdentity,
-                developerIdentity: developerIdentity,
+                profiles: this.$store.state.application.account.profiles,
+                chosenProfile: chosenProfile,
+                developerProfile: developerProfile,
                 errors: []
             }
         },
         methods: {
-            convertIdentity() {
-                Bridge.sendCommand('createCuratorRequest', this.chosenIdentity).then((data) => {
-                    this.chosenIdentity.curator_id = data
-                    this.developerIdentity = this.chosenIdentity
+            convertProfile() {
+                Bridge.sendCommand('createCuratorRequest', this.chosenProfile).then((data) => {
+                    this.chosenProfile.curator_id = data
+                    this.developerProfile = this.chosenProfile
                     this.$store.state.application.curator_mode = true
                 })
             },
-            chooseIdentity(identity) {
-                this.chosenIdentity = identity
+            chooseProfile(profile) {
+                this.chosenProfile = profile
             },
         }
     }

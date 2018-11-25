@@ -137,7 +137,7 @@
 
 <script>
     export default {
-        props: ['identityId'],
+        props: ['profileId'],
         components: {
             'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
             'c-range-slider': (resolve) => require(['@/ui/components/range-slider/pure'], resolve),
@@ -186,7 +186,7 @@
                             this.$store.dispatch('create', [
                                 'assets/prospectors', {
                                     ...this.newSniper,
-                                    user: this.identity
+                                    user: this.profile
                                 }
                             ]);
                             this.$snotify.success('Auction prospector has been successfully created', 'Created');
@@ -227,14 +227,14 @@
             },
             prospectors() {
                 return this.$store.getters['assets/prospectorsMap']
-                    .filter(([id, prosp]) => prosp.user.id == this.identityId);
+                    .filter(([id, prosp]) => prosp.user.id == this.profileId);
             },
-            identity() {
-                return this.$store.getters['application/identity'];
+            profile() {
+                return this.$store.getters['application/profile'];
             }
         },
         watch: {
-            identityId: {
+            profileId: {
                 handler: 'getProspectors',
                 immediate: true
             }

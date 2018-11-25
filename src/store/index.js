@@ -21,12 +21,6 @@ import seed from '../db/seed'
 
 Vue.use(Vuex);
 
-const { service, auth } = feathersVuex(feathersClient, {
-    idField: 'id',
-    auth: {
-        userService: 'accounts' // TODO: can this be removed?
-    }
-})
 
 if (!window.BlockHub)
     window.BlockHub = {}
@@ -70,6 +64,66 @@ const CheckDevConfig = () => {
 }
 
 const devConfig = CheckDevConfig()
+
+
+let service = null
+let auth = null
+
+const decentralizedMode = false
+
+const feathers = feathersVuex(feathersClient, {
+    idField: 'id',
+    auth: {
+        userService: 'accounts' // TODO: can this be removed?
+    }
+})
+
+if (decentralizedMode) {
+    service = (module) => {
+        return {
+            'profiles': {
+                create() {
+                    Bridge.sendCommand('createProfileRequest', newProfile).then((profile) => {
+                        newProfile.id = profile.id
+                        newProfile.public_address = profile.public_address
+
+                        if (!newProfile.name)
+                            newProfile.name = 'Default'
+
+                        this.profiles.push({ ...newProfile, edit: true })
+
+                        this.editedProfile = newProfile
+
+                        this.saveProfiles()
+                    })
+                },
+                save() {
+                    Bridge.sendCommand('saveProfileRequest', profile).then((profile) => {
+                        this.saveProfiles()
+                    })
+                },
+                remove() {
+                    Bridge.sendCommand('removeProfileRequest', this.removeProfile).then(() => {
+                        const index = this.profiles.indexOf(this.removeProfile)
+                        this.profiles.splice(index, 1)
+                        this.removeProfile.edit = false
+                        this.removeProfile = null
+
+                        this.saveProfiles()
+                    })
+                }
+            }
+        }
+    }
+
+    auth = () => {
+        console.log("TODO")
+    }
+} else {
+    service = feathers.service
+    auth = feathers.auth
+}
+
 
 const store = new Vuex.Store({
     ...rootStore,
@@ -143,9 +197,9 @@ window.BlockHub.importSeedData = () => {
     // We dont want to mess with the important signed in account data
     if (!DB.application.config.data[0].account.public_address) {
         DB.application.config.data[0].account.wallets = seed.wallets
-        DB.application.config.data[0].account.identities = seed.identities
+        DB.application.config.data[0].account.profiles = seed.profiles
         DB.application.config.data[0].account.activeProfile = {
-            id: seed.identities[0].id
+            id: seed.profiles[0].id
         }
     }
 
@@ -172,7 +226,7 @@ window.BlockHub.resetSeedData = () => {
     // We dont want to mess with the important signed in account data
     if (!DB.application.config.data[0].account.public_address) {
         DB.application.config.data[0].account.wallets = []
-        DB.application.config.data[0].account.identities = []
+        DB.application.config.data[0].account.profiles = []
         DB.application.config.data[0].account.activeProfile = { id: null }
     }
 

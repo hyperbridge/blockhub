@@ -33,8 +33,8 @@
             }
         },
         computed: {
-            identities() {
-                return this.$store.getters['community/identities'];
+            profiles() {
+                return this.$store.getters['community/profiles'];
             }
         }
     }

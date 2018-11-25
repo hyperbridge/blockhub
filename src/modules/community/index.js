@@ -2,7 +2,7 @@ import moment from 'moment';
 
 import messagesData from '@/db/seed/messages.json';
 import usersData from '@/db/seed/users.json';
-import identitiesData from '@/db/seed/identities.json';
+import profilesData from '@/db/seed/profiles.json';
 
 import { extract, skip, getId, mergeId, normalize } from '@/store/utils';
 
@@ -21,7 +21,7 @@ const community = {
             ...users,
             [user.id]: user
         }), {}),
-        identities: normalize(identitiesData),
+        profiles: normalize(profilesData),
         offersSeller: {}
     },
     mutations: {
@@ -79,16 +79,16 @@ const community = {
             { dispatch, rootGetters: { ['application/account']: account }},
             [name, itemId]
         ) {
-            const identity = account.active_identity;
+            const profile = account.active_profile;
             const prop = [name + '_wishlist'];
-            const wishlist = { ...identity[prop] };
+            const wishlist = { ...profile[prop] };
 
             if (wishlist[itemId]) delete wishlist[itemId];
             else wishlist[itemId] = true;
 
             dispatch(
                 'update',
-                [`community/identities/${prop}`, identity.id, { [prop]: wishlist }],
+                [`community/profiles/${prop}`, profile.id, { [prop]: wishlist }],
                 { root: true }
             );
         }
@@ -120,20 +120,20 @@ const community = {
                     }, {})
                 }
             }), {}),
-        identities: (
-            { identities }, getters, rootState,
+        profiles: (
+            { profiles }, getters, rootState,
             { ['assets/assets']: assets }
-        ) => Object.values(identities)
-            .map(identity => ({
-                ...identity,
-                inventory: identity.inventory.map(id => extract(assets[id], ['image', 'price', 'product']))
+        ) => Object.values(profiles)
+            .map(profile => ({
+                ...profile,
+                inventory: profile.inventory.map(id => extract(assets[id], ['image', 'price', 'product']))
             }))
-            .reduce((populated, identity, identities) => ({
+            .reduce((populated, profile, profiles) => ({
                 ...populated,
-                [identity.id]: {
-                    ...identity,
-                    // friends: identity.friends.map(id => skip(identities[id], ['friends', 'inventory'])),
-                    inventoryGrouped: identity.inventory.reduce((grouped, asset) => {
+                [profile.id]: {
+                    ...profile,
+                    // friends: profile.friends.map(id => skip(profiles[id], ['friends', 'inventory'])),
+                    inventoryGrouped: profile.inventory.reduce((grouped, asset) => {
                         const { name } = asset.product;
                         grouped[name] = grouped[name] || [];
                         grouped[name] = [...grouped[name], asset];

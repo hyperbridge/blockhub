@@ -122,7 +122,7 @@
                                 <template slot="title">
                                     <div class="__title">
                                         <i class="fa fa-user"></i>
-                                        {{ currentIdentity && currentIdentity.name }}
+                                        {{ currentProfile && currentProfile.name }}
                                     </div>
                                 </template>
                                 <ul class="item-dropdown">
@@ -138,28 +138,28 @@
                                             My Wallets
                                         </a>
                                     </li>
-                                    <li v-if="account.active_identity">
-                                        <a :href="`#/identity/${currentIdentity.public_address}`">
+                                    <li v-if="account.active_profile">
+                                        <a :href="`#/profile/${currentProfile.public_address}`">
                                             <i class="fas fa-user"></i>
                                             View Public Profile
                                         </a>
                                     </li>
                                     <li v-if="signed_in" v-darklaunch="'CONTACTS'">
-                                        <a :href="`#/identity/${currentIdentity.public_address}/contacts`">
+                                        <a :href="`#/profile/${currentProfile.public_address}/contacts`">
                                             <i class="fas fa-users"></i>
                                             Contacts
                                         </a>
                                     </li>
                                     <li>
-                                        <a @click="$store.commit('application/showProfileChooser', true)">
-                                            <i class="fas fa-user-edit"></i>
-                                            Choose Profile
+                                        <a href="#/account/profiles">
+                                            <i class="fas fa-users-cog"></i>
+                                            Profile Manager
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#/account/identities">
-                                            <i class="fas fa-users-cog"></i>
-                                            Profile Manager
+                                        <a @click="$store.commit('application/showProfileChooser', true)">
+                                            <i class="fas fa-user-edit"></i>
+                                            Switch Profile
                                         </a>
                                     </li>
                                     <hr>
@@ -252,8 +252,8 @@ export default {
         account() {
             return this.$store.state.application.account
         },
-        currentIdentity() {
-            return this.$store.getters['application/identity'];
+        currentProfile() {
+            return this.$store.getters['application/profile'];
         },
         is_locked() {
             return this.$store.state.application.locked

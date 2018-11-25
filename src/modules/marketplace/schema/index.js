@@ -1,9 +1,9 @@
 import product from './product'
 import asset from './asset'
-import identity from './identity'
+import profile from './profile'
 
 export default {
     product,
     asset,
-    identity
+    profile
 }

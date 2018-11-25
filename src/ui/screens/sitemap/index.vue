@@ -33,8 +33,8 @@
                           <li><a href="#/account/backup">Account > Backup</a></li>
                           <li><a href="#/account/wallets">Account > Wallets</a></li>
                           <li><a href="#/account/new-wallet">Account > New Wallet</a></li>
-                          <li><a href="#/account/identities">Account > Identities</a></li>
-                          <li><a href="#/account/new-identity">Account > New Identity</a></li>
+                          <li><a href="#/account/profiles">Account > Profiles</a></li>
+                          <li><a href="#/account/new-profile">Account > New Profile</a></li>
                           <li><a href="#/account/verification">Account > Verification</a></li>
                           <li><a href="#/account/verification/callback">Account > Verification Callback</a></li>
                         </ul>
@@ -63,13 +63,13 @@
                         </ul>
                     </div>
                     <div class="col-12 col-md-4">
-                        <h2>Identities</h2>
+                        <h2>Profiles</h2>
                         <ul>
-                          <li><a href="#/identity/1">Identity #1</a></li>
-                          <li><a href="#/identity/1/assets">Identity #1 > Digital Assets</a></li>
-                          <li><a href="#/identity/1/contacts">Identity #1 > Contacts</a></li>
-                          <li><a href="#/identity/1/projects">Identity #1 > Projects</a></li>
-                          <li><a href="#/identity/1/bounties">Identity #1 > Bounties</a></li>
+                          <li><a href="#/profile/1">Profile #1</a></li>
+                          <li><a href="#/profile/1/assets">Profile #1 > Digital Assets</a></li>
+                          <li><a href="#/profile/1/contacts">Profile #1 > Contacts</a></li>
+                          <li><a href="#/profile/1/projects">Profile #1 > Projects</a></li>
+                          <li><a href="#/profile/1/bounties">Profile #1 > Bounties</a></li>
                         </ul>
                     </div>
                 </div>

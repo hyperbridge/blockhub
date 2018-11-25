@@ -225,7 +225,7 @@ const assets = {
             }), {}),
         transactions: (
             { transactions, assets }, getters, rootState,
-            { ['community/messages']: messages, ['community/identities']: identities }
+            { ['community/messages']: messages, ['community/profiles']: profiles }
         ) => normalize(transactions, trx => ({
                 contractorOffer: trx.contractorOffer.map(id => assets[id]),
                 yourOffer: trx.yourOffer.map(id => assets[id]),

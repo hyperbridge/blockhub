@@ -6,8 +6,8 @@ const COMMUNITY = 'community';
 const relations = {
     [APPLICATION]: {
         account: {
-            idts: [COMMUNITY, 'identities'],
-            friends_list: [COMMUNITY, 'identities']
+            idts: [COMMUNITY, 'profiles'],
+            friends_list: [COMMUNITY, 'profiles']
         }
     },
     [ASSETS]: {
@@ -25,10 +25,10 @@ const relations = {
         }
     },
     [COMMUNITY]: {
-        identities: {
+        profiles: {
             inventory: [ASSETS, 'assets'],
             messages: [COMMUNITY, 'messages'],
-            friends: [COMMUNITY, 'identities']
+            friends: [COMMUNITY, 'profiles']
         }
     }
 };
@@ -125,7 +125,7 @@ decompose('community/posts', posts);
 {
   'community/posts': [ { id: 11, messages: [22] } ],
   'community/messages': [ { id: 22, txt: 'Hi', authors: [33] } ],
-  'community/identities': [ { id: 33, inventory: [41], images: [42] } ],
+  'community/profiles': [ { id: 33, inventory: [41], images: [42] } ],
   'assets/assets': [ { id: 41, name: 'Armor' } ],
   'community/pictures': [ { id: 42, src: 'someimgsrc' } ] }
 }

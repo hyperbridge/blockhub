@@ -11,17 +11,17 @@
                     </transition>
 
                     <p class="marketplace__profile-info">You are connected to marketplace as:</p>
-                    <div class="marketplace-identity">
+                    <div class="marketplace-profile">
                         <div class="marketplace-profile">
-                            <c-img class="marketplace-profile__image" :src="identity.img"/>
+                            <c-img class="marketplace-profile__image" :src="profile.img"/>
                             <div>
                                 <h3 class="marketplace-profile__name">
-                                    {{ identity.name }}
+                                    {{ profile.name }}
                                 </h3>
                                 <input
                                     class="marketplace-profile__wallet"
                                     type="text"
-                                    :value="identity.wallet"
+                                    :value="profile.wallet"
                                     readonly
                                 />
                             </div>
@@ -41,7 +41,7 @@
 
                     <section>
                         <transition name="page" mode="out-in">
-                            <router-view :identityId="identity.id"/>
+                            <router-view :profileId="profile.id"/>
                         </transition>
                     </section>
                 </div>
@@ -85,8 +85,8 @@
             this.$store.dispatch('loadData', ['assets/transactions', transactions]);
         },
         computed: {
-            identity() {
-                return this.$store.getters['application/identity'];
+            profile() {
+                return this.$store.getters['application/profile'];
             }
         }
     }
@@ -161,7 +161,7 @@
         box-shadow: 3px 3px 0 0 darken($color, 15%);
     }
 
-    .marketplace-identity {
+    .marketplace-profile {
         display: flex;
         justify-content: flex-end;
     }

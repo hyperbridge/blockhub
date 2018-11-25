@@ -13,7 +13,7 @@
     import moment from 'moment';
 
     export default {
-        props: ['identityId'],
+        props: ['profileId'],
         components: {
             'c-block-menu': (resolve) => require(['@/ui/components/block/menu'], resolve),
             'c-spinner': (resolve) => require(['@/ui/components/spinner'], resolve),
@@ -42,11 +42,11 @@
         computed: {
             transactions() {
                 return Object.values(this.$store.getters['assets/transactions'])
-                    .filter(trx => trx.you.id == this.identityId);
+                    .filter(trx => trx.you.id == this.profileId);
             }
         },
         watch: {
-            identityId: {
+            profileId: {
                 handler: 'loadData',
                 immediate: true
             }

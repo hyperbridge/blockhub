@@ -1,9 +1,9 @@
 import { schema } from 'normalizr'
-import identity from './identity'
+import profile from './profile'
 import review from './review'
 
 export default new schema.Entity('assets', {
-    owner: identity,
-    author: identity,
+    owner: profile,
+    author: profile,
     reviews: [review]
 })

@@ -12,20 +12,20 @@
                                     <div class="profile-picker">
                                         <div
                                             class="profile-picker__profile"
-                                            v-for="identity in identities"
-                                            :key="identity.id"
+                                            v-for="profile in profiles"
+                                            :key="profile.id"
                                         >
                                             <c-user-card
-                                                :user="identity"
+                                                :user="profile"
                                                 :previewMode="true"
-                                                :class="{ 'default': identity.chosen }"
+                                                :class="{ 'default': profile.chosen }"
                                             />
                                             <div class="profile__action">
                                                 <c-button
                                                     status="info"
                                                     icon="check"
-                                                    @click="chooseIdentity(identity)"
-                                                    v-if="!identity.chosen"
+                                                    @click="chooseProfile(profile)"
+                                                    v-if="!profile.chosen"
                                                 >Choose</c-button>
                                             </div>
                                         </div>
@@ -33,7 +33,7 @@
 
                                     <br />
 
-                                    <c-button @click="verifyIdentity">
+                                    <c-button @click="verifyProfile">
                                         Send Again
                                     </c-button>
                                 </div>
@@ -49,9 +49,9 @@
                                 <div class="tab-card padding-20" v-if="!(is_verified || is_verifying) || been1hour || manual_override">
                                     <div v-if="!verificationLink">
                                         <p>
-                                            Submit proof of identity for KYC by providing your legal name, country of residence, and documentation.<br /><br />
+                                            Submit proof of profile for KYC by providing your legal name, country of residence, and documentation.<br /><br />
                                             KYC stands for Know Your Customer. BlockHub is required by law to collect this information so that we know the source of money and comply with anti-money laundering laws by assessing potential risks of illegal intentions. As we are handling cryptocurrencies, account holders are entirely unknown, and we want to be very safe by following strict KYC procedure. We do anticipate these procedures can be relaxed post-launch, and will work with our lawyers on that, as our token represents the same utility as many existing point systems.<br /><br />
-                                            Please fill in the fields below. Afterward you will be taken to our partner Veriff to complete your identity verification. You will need to use the same information as you've used here.<br /><br />
+                                            Please fill in the fields below. Afterward you will be taken to our partner Veriff to complete your profile verification. You will need to use the same information as you've used here.<br /><br />
                                             <strong>Disclaimer:</strong> We're working with our lawyers in multiple jurisdictions to determine which countries can purchase. As of this moment we know for certain these countries cannot participate: China, Canada. We're very sorry and hope we can extend support worldwide in the future.
                                         </p>
                                         <br /><br />
@@ -165,8 +165,8 @@
 
             return {
                 errors: [],
-                identities: { ...account.identities },
-                chosenIdentity: null,
+                profiles: { ...account.profiles },
+                chosenProfile: null,
                 manual_override: false,
                 been1hour: been1hour,
                 document_type: '',
@@ -186,13 +186,13 @@
             overrideForm() {
                 this.manual_override = true
             },
-            chooseIdentity(identity) {
-                if (this.chosenIdentity) this.chosenIdentity.chosen = false;
-                identity.chosen = true;
+            chooseProfile(profile) {
+                if (this.chosenProfile) this.chosenProfile.chosen = false;
+                profile.chosen = true;
             },
-            verifyIdentity() {
+            verifyProfile() {
                 // send a contract call
-                // encrypt identity with the secret answer #2
+                // encrypt profile with the secret answer #2
                 // manual override for now lol
                 this.manual_override = true
             },
@@ -219,7 +219,7 @@
                                 eth: this.public_address,
                                 email: this.email,
                                 secret: this.account.secret_answer_2,
-                                identity: this.account.activeProfile && this.account.activeProfile.public_address
+                                profile: this.account.activeProfile && this.account.activeProfile.public_address
                             },
                             timestamp: (new Date).toISOString()
                         }

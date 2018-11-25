@@ -14,7 +14,7 @@ export default {
     computed: {
         messages() {
             return this.$store.getters['messages/list']
-                //.filter(trx => trx.you.id == this.identityId);
+                //.filter(trx => trx.you.id == this.profileId);
         }
     },
     data: () => ({

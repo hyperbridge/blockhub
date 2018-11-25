@@ -187,7 +187,7 @@
         },
         computed: {
             wishlist() {
-                return this.$store.getters['application/identity'].project_wishlist || {};
+                return this.$store.getters['application/profile'].project_wishlist || {};
             }
         }
     }

@@ -35,7 +35,7 @@ const getOS = () => {
 }
 
 const updateState = (savedData, updatedState = {}) => {
-    //let developerIdentity = DB.application.config.data[0].account && DB.application.config.data[0].account.identities.find(identity => identity.developer_id !== undefined)
+    //let developerProfile = DB.application.config.data[0].account && DB.application.config.data[0].account.profiles.find(profile => profile.developer_id !== undefined)
 
     rawData = {
         ...rawData,
@@ -96,12 +96,12 @@ export const getters = {
 
         return result
     },
-    account: ({ account }, getters, { community: { identities }}) => ({
+    account: ({ account }, getters, { community: { profiles }}) => ({
         ...account,
-        active_identity: identities[account.active_identity],
-        identities: account.idts.map(id => identities[id])
+        active_profile: profiles[account.active_profile],
+        profiles: account.idts.map(id => profiles[id])
     }),
-    identity: (state, { account }) => account.active_identity
+    profile: (state, { account }) => account.active_profile
 }
 
 export const actions = {
@@ -413,8 +413,8 @@ export const mutations = {
         state.active_modal = payload
     },
     convertCurator(state, payload) {
-        Bridge.sendCommand('createCuratorRequest', payload.identity).then((data) => {
-            payload.identity.curator_id = data
+        Bridge.sendCommand('createCuratorRequest', payload.profile).then((data) => {
+            payload.profile.curator_id = data
             state.curator_mode = true
 
             // TODO: just redirect here?

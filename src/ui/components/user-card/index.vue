@@ -1,6 +1,6 @@
 <template>
-    <div class="identity-block" :class="{ 'preview-mode': previewMode }">
-        <div class="identity-block__user-data">
+    <div class="profile-block" :class="{ 'preview-mode': previewMode }">
+        <div class="profile-block__user-data">
             <div
                 v-if="previewMode"
                 class="user-data__icon"
@@ -11,7 +11,7 @@
             </div>
             <div class="user-data__avatar" v-if="previewMode">
                 <a
-                    :href="`#/identities/${user.id}`"
+                    :href="`#/profiles/${user.id}`"
                     class="user-data__avatar-upload-btn"
                 >
                     <c-img v-if="user.img" :src="user.img" />
@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <div class="identity-block__unknown-blk" v-darklaunch="'BADGES'">
+        <div class="profile-block__unknown-blk" v-darklaunch="'BADGES'">
             <button v-for="index in 4" :key="index" class="btn">
                 <i class="fas fa-plus"></i>
             </button>
@@ -110,7 +110,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .identity-block {
+    .profile-block {
         padding: 10px;
         background-color: #303046;
         border-radius: 5px;
@@ -147,7 +147,7 @@
                     background: #43C981;
                 }
             }
-            .identity-block__unknown-blk {
+            .profile-block__unknown-blk {
                 a {
                     border-color: #404354;
                     color: #404354;
@@ -201,13 +201,13 @@
             }
         }
     }
-    .identity-block__text {
+    .profile-block__text {
         border: none;
         box-shadow: 0 0 3px rgba(0, 0, 0, .4) inset;
         background: #303049;
         color: rgba(255, 255, 255, .5);
     }
-    .identity-block__user-data {
+    .profile-block__user-data {
         display: flex;
         align-items: center;
         margin-bottom: 5px;
@@ -248,7 +248,7 @@
         align-items: center;
         justify-content: center;
     }
-    .identity-block__unknown-blk {
+    .profile-block__unknown-blk {
         display: flex;
         align-items: center;
         margin: 20px 0;

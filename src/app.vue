@@ -69,7 +69,7 @@
                     <span class="icon fa fa-user"></span>
                     <span class="text">Account</span>
                 </a>
-                <a v-if="signed_in" href="#/account/identities">
+                <a v-if="signed_in" href="#/account/profiles">
                     <span class="icon fa fa-id-card"></span>
                     <span class="text">Profiles</span>
                 </a>
@@ -80,7 +80,7 @@
 
                 <hr v-if="signed_in" />
 
-                <a v-if="signed_in" href="#/identity/1">
+                <a v-if="signed_in" href="#/profile/1">
                     <span class="icon fa fa-user"></span>
                     <span class="text">Current Profile</span>
                 </a>
@@ -88,7 +88,7 @@
                     <span class="icon fa fa-list-alt"></span>
                     <span class="text">Activity Log</span>
                 </a>
-                <a v-if="signed_in" href="#/identity/1/contacts" v-darklaunch="'CONTACTS'">
+                <a v-if="signed_in" href="#/profile/1/contacts" v-darklaunch="'CONTACTS'">
                     <span class="icon fa fa-users"></span>
                     <span class="text">Contacts</span>
                 </a>

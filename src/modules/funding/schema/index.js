@@ -1,9 +1,9 @@
 import project from './project'
 import comment from './comment'
-import identity from './identity'
+import profile from './profile'
 
 export default {
     project,
-    identity,
+    profile,
     comment
 }

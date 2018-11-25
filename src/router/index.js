@@ -259,9 +259,9 @@ const router = new Router({
             }
         },
         {
-            path: '/account/identities',
+            path: '/account/profiles',
             name: 'Profiles',
-            component: (resolve) => require(['@/ui/screens/account-identities'], resolve),
+            component: (resolve) => require(['@/ui/screens/account-profiles'], resolve),
             meta: {
                 permission: 'signed_in',
                 breadcrumb: [
@@ -298,43 +298,43 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/transaction-overview'], resolve)
         },
         {
-            path: '/identity/:id',
+            path: '/profile/:id',
             name: 'Profile',
             props: true,
-            component: (resolve) => require(['@/ui/screens/identity-overview'], resolve),
+            component: (resolve) => require(['@/ui/screens/profile-overview'], resolve),
             meta: {
                 breadcrumb: false
             }
         },
         {
-            path: '/identity/:id/contacts',
+            path: '/profile/:id/contacts',
             name: 'Profile Contacts',
             props: true,
-            component: (resolve) => require(['@/ui/screens/identity-contacts'], resolve)
+            component: (resolve) => require(['@/ui/screens/profile-contacts'], resolve)
         },
         {
-            path: '/identity/:id/projects',
+            path: '/profile/:id/projects',
             name: 'Profile Projects',
             props: true,
-            component: (resolve) => require(['@/ui/screens/identity-projects'], resolve)
+            component: (resolve) => require(['@/ui/screens/profile-projects'], resolve)
         },
         {
-            path: '/identity/:id/licenses',
+            path: '/profile/:id/licenses',
             name: 'Profile licenses',
             props: true,
-            component: (resolve) => require(['@/ui/screens/identity-licenses'], resolve)
+            component: (resolve) => require(['@/ui/screens/profile-licenses'], resolve)
         },
         {
-            path: '/identity/:id/assets',
+            path: '/profile/:id/assets',
             name: 'Profile Assets',
             props: true,
-            component: (resolve) => require(['@/ui/screens/identity-assets'], resolve)
+            component: (resolve) => require(['@/ui/screens/profile-assets'], resolve)
         },
         {
-            path: '/identity/:id/collections',
+            path: '/profile/:id/collections',
             name: 'Profile Collections',
             props: true,
-            component: (resolve) => require(['@/ui/screens/identity-collection'], resolve)
+            component: (resolve) => require(['@/ui/screens/profile-collection'], resolve)
         },
         {
             path: '/settings',

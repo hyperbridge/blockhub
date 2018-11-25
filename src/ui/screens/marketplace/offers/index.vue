@@ -113,7 +113,7 @@
     import offers from '@/db/api/offers';
 
     export default {
-        props: ['id', 'identityId'],
+        props: ['id', 'profileId'],
         components: {
             'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
             'c-asset-list-item': (resolve) => require(['@/ui/components/asset/list/list-item'], resolve),
@@ -157,7 +157,7 @@
             }
         },
         watch: {
-            identityId: {
+            profileId: {
                 handler: 'getOffers',
                 immediate: true
             }

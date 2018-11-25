@@ -13,18 +13,18 @@
                 <div class="profile-slider">
                     <c-swiper :options="options">
                         <c-slide
-                            v-for="identity in identities"
-                            :key="identity.id"
+                            v-for="profile in profiles"
+                            :key="profile.id"
                         >
                             <div
                                 class="user-card__container-link"
-                                @click="setDefault(identity)"
+                                @click="setDefault(profile)"
                             >
                                 <c-user-card
-                                    :user="identity"
-                                    :previewMode="!identity.edit"
+                                    :user="profile"
+                                    :previewMode="!profile.edit"
                                     :class="{
-                                        'default': currentIdentity && identity.id == currentIdentity.id
+                                        'default': currentProfile && profile.id == currentProfile.id
                                     }"
                                 />
                             </div>
@@ -81,27 +81,27 @@
             }
         },
         computed: {
-            identities() {
-                for(let i in this.$store.state.application.account.identities) {
-                    if (!this.$store.state.application.account.identities[i].name)
-                        this.$store.state.application.account.identities[i].name = 'Default'
+            profiles() {
+                for(let i in this.$store.state.application.account.profiles) {
+                    if (!this.$store.state.application.account.profiles[i].name)
+                        this.$store.state.application.account.profiles[i].name = 'Default'
                 }
-                return this.$store.state.application.account.identities
+                return this.$store.state.application.account.profiles
             },
-            currentIdentity() {
-                return this.$store.getters['application/identity'];
+            currentProfile() {
+                return this.$store.getters['application/profile'];
             }
         },
         methods: {
             closeProfileChooser() {
                 this.$store.commit('application/showProfileChooser', false)
             },
-            setDefault(identity) {
+            setDefault(profile) {
                 this.$store.commit(
                     'updateSingle',
-                    ['application/account', { active_identity: identity.id }]
+                    ['application/account', { active_profile: profile.id }]
                 );
-                this.$store.state.application.developer_mode = !!identity.developer_id
+                this.$store.state.application.developer_mode = !!profile.developer_id
             }
         }
     }
@@ -135,7 +135,7 @@
             padding: 0 40px;
             .swiper-slide{
                 padding: 15px;
-                .identity-block{
+                .profile-block{
                     transition: transform .2s ease;
                     z-index: 8;
                     &.default{

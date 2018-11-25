@@ -3,18 +3,18 @@
         <c-user-head />
         <div class="row justify-content-between align-items-center">
             <div class="col-12 d-flex margin-top-30 justify-content-end">
-                <div class="identity__wallet">
+                <div class="profile__wallet">
                     <i class="fas fa-copy"></i>
-                    <span id="wallet_number">{{ identity.public_address }}</span>
+                    <span id="wallet_number">{{ profile.public_address }}</span>
                 </div>
-                <div class="identity__action-group">
+                <div class="profile__action-group">
                     <c-button status="info" icon="arrow-up" @click="showSendPopup">Send</c-button>
                     <c-button status="share" v-darklaunch="'SHARING'">Share</c-button>
                     <c-button status="danger" v-darklaunch="'REPORTING'">Report</c-button>
                 </div>
             </div>
             <div class="col-12" v-if="!signed_in && !$store.state.application.account.settings.client.hide_profile_signup">
-                <div class="identity__user-notify">
+                <div class="profile__user-notify">
                     <c-button class="btn-close" @click="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_profile_signup', true)">
                         <i class="fas fa-times"></i>
                     </c-button>
@@ -141,7 +141,7 @@
             </div>
 
             <div class="col-12 margin-top-40 margin-bottom-40">
-                <div class="identity__user-notify-card">
+                <div class="profile__user-notify-card">
                     <div>
                         <c-user-card />
                     </div>
@@ -231,7 +231,7 @@
         },
         computed: {
             signed_in() { return this.$store.state.application.signed_in },
-            identity() {
+            profile() {
                 return this.$store.state.application.account.activeProfile
             }
         },
@@ -248,7 +248,7 @@
 
 <style lang="scss" scoped>
 
-    .identity__wallet{
+    .profile__wallet{
         width: auto;
         line-height: 30px;
         margin-right: 15px;
@@ -262,7 +262,7 @@
             user-select: text;
         }
     }
-    .identity__action-group{
+    .profile__action-group{
         width: auto;
         a{
             margin: 0 0 0 15px;
@@ -274,7 +274,7 @@
         }
     }
 
-    .identity__user-notify{
+    .profile__user-notify{
         padding: 25px 40px;
         text-align: center;
         position: relative;
@@ -449,7 +449,7 @@
         }
     }
 
-    .identity__user-notify-card{
+    .profile__user-notify-card{
         padding: 20px;
         text-align: center;
         position: relative;

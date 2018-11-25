@@ -14325,13 +14325,13 @@ exports[`Storyshots Navigation account 1`] = `
         <a
           href="#/"
         >
-          Identities
+          Profiles
         </a>
       </li>
        
       <li>
         <a
-          href="#/account/identities"
+          href="#/account/profiles"
         >
           
                 Overview
@@ -14341,10 +14341,10 @@ exports[`Storyshots Navigation account 1`] = `
        
       <li>
         <a
-          href="#/account/new-identity"
+          href="#/account/new-profile"
         >
           
-                New Identity
+                New Profile
             
         </a>
       </li>
@@ -18113,10 +18113,10 @@ exports[`Storyshots User Card default 1`] = `
     class="col-4"
   >
     <div
-      class="identity-block"
+      class="profile-block"
     >
       <div
-        class="identity-block__user-data"
+        class="profile-block__user-data"
       >
         <!---->
          
@@ -18143,7 +18143,7 @@ exports[`Storyshots User Card default 1`] = `
       </div>
        
       <div
-        class="identity-block__unknown-blk"
+        class="profile-block__unknown-blk"
       >
         <button
           class="btn"
@@ -18200,10 +18200,10 @@ exports[`Storyshots User Card default 1`] = `
     class="col-4"
   >
     <div
-      class="identity-block preview-mode"
+      class="profile-block preview-mode"
     >
       <div
-        class="identity-block__user-data"
+        class="profile-block__user-data"
       >
         <div
           class="user-data__icon"
@@ -18237,7 +18237,7 @@ exports[`Storyshots User Card default 1`] = `
       </div>
        
       <div
-        class="identity-block__unknown-blk"
+        class="profile-block__unknown-blk"
       >
         <button
           class="btn"

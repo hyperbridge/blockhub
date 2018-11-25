@@ -619,10 +619,10 @@
                 "passphrase": null,
                 "private_key": null
             },
-            "active_identity": 3,
+            "active_profile": 3,
             "notifications": [],
             "wallets": [],
-            "identities": [],
+            "profiles": [],
             "idts": [1, 2, 3],
             "settings": {
                 "client": {

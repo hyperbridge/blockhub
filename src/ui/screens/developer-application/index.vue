@@ -16,7 +16,7 @@
                 <div v-if="!developer_mode" style="text-align: center">
                     <c-user-card
                         class="col-3 margin-auto"
-                        :user="chosenIdentity"
+                        :user="chosenProfile"
                         :previewMode="true"
                         :class="{ 'default': true }"
                     />
@@ -25,12 +25,12 @@
 
                     <br /><br />
 
-                    <c-button class="c-btn-lg outline-white margin-top-20" @click="convertIdentity">Convert to Developer</c-button>
+                    <c-button class="c-btn-lg outline-white margin-top-20" @click="convertProfile">Convert to Developer</c-button>
                 </div>
             </div>
             <div class="col-12" v-if="developer_mode">
                 <c-block title="Congratulations" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                    Your profile is all setup. You are Developer #{{ chosenIdentity.developer_id }}
+                    Your profile is all setup. You are Developer #{{ chosenProfile.developer_id }}
 
                     <br /><br />
 
@@ -50,36 +50,36 @@
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         },
         data() {
-            let chosenIdentity = this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.activeProfile.id)
+            let chosenProfile = this.$store.state.application.account.profiles.find(profile => profile.id == this.$store.state.application.account.activeProfile.id)
 
-            if (!chosenIdentity && this.$store.state.application.account.identities.length) {
-                chosenIdentity = this.$store.state.application.account.identities[0]
+            if (!chosenProfile && this.$store.state.application.account.profiles.length) {
+                chosenProfile = this.$store.state.application.account.profiles[0]
             }
 
             return {
                 errors: [],
-                chosenIdentity
+                chosenProfile
             }
         },
         computed: {
-            identities() {
-                return this.$store.state.application.account.identities
+            profiles() {
+                return this.$store.state.application.account.profiles
             },
             developer_mode() {
                 return this.$store.state.application.developer_mode
             }
         },
         methods: {
-            convertIdentity() {
-                Bridge.sendCommand('createDeveloperRequest', this.chosenIdentity).then((data) => {
-                    this.chosenIdentity.developer_id = data
+            convertProfile() {
+                Bridge.sendCommand('createDeveloperRequest', this.chosenProfile).then((data) => {
+                    this.chosenProfile.developer_id = data
                     this.$store.state.application.developer_mode = true
 
                     // TODO: just redirect here?
                 })
             },
-            chooseIdentity(identity) {
-                this.chosenIdentity = identity
+            chooseProfile(profile) {
+                this.chosenProfile = profile
             },
         }
     }

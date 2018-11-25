@@ -1,9 +1,9 @@
 import prospectors from '../seed/prospectors';
 import assets from '../seed/assets';
-import identities from '../seed/identities';
+import profiles from '../seed/profiles';
 
 export default prospectors.map((prospector, i) => ({
     ...prospector,
     asset: assets.find(a => a.id == prospector.asset),
-    user: identities.find(idt => idt.id == prospector.user)
+    user: profiles.find(idt => idt.id == prospector.user)
 }));

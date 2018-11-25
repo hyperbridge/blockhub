@@ -83,7 +83,7 @@
     }
 
     export default {
-        props: ['offersMap', 'asset', 'identity'],
+        props: ['offersMap', 'asset', 'profile'],
         components: {
             'c-user': (resolve) => require(['@/ui/components/user/simple'], resolve),
             'c-tooltip': (resolve) => require(['@/ui/components/tooltips/universal'], resolve),
@@ -106,7 +106,7 @@
 
                     const createdOffer = {
                         id,
-                        seller: this.identity,
+                        seller: this.profile,
                         asset: this.asset,
                         bids: [],
                         expiresIn: moment().add(1, 'week'),
@@ -118,7 +118,7 @@
 
                     // this.$store.dispatch('create',
                     //     ['assets/offers', {
-                    //         seller: this.identityId,
+                    //         seller: this.profileId,
                     //         asset: this.asset,
                     //         bids: [],
                     //         expiresIn: moment().add(1, 'week'),

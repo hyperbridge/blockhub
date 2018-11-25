@@ -58,7 +58,7 @@
                 <c-block title="Overview" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                     <div class="stat-card-container">
                         <div class="stat-card-list">
-                            <router-link tag="div" to="/account/identities" class="route stat-card">
+                            <router-link tag="div" to="/account/profiles" class="route stat-card">
                                 <div class="icon">
                                     <i class="fas fa-id-card"></i>
                                 </div>
@@ -66,7 +66,7 @@
                                     <h4>Profiles</h4>
                                     <div class="stat">
                                         <div>
-                                            {{ account.identities.length }} owned by your account
+                                            {{ account.profiles.length }} owned by your account
                                         </div>
                                     </div>
                                     <p>
@@ -151,10 +151,10 @@
                 <c-block title="Wishlists" noGutter bgGradient onlyContentBg>
                     <c-tabs :tabNames="['Products', 'Projects']" styled>
                         <c-tab :tab_id="1">
-                            <div v-if="identity.product_wishlist.length" class="wishlist-box">
+                            <div v-if="profile.product_wishlist.length" class="wishlist-box">
                                 <div
                                     class="wishlist-box__item"
-                                    v-for="product in identity.product_wishlist"
+                                    v-for="product in profile.product_wishlist"
                                     :key="product.id"
                                 >
                                     <c-game-includes-item
@@ -181,12 +181,12 @@
                         </c-tab>
                         <c-tab :tab_id="2">
                             <div
-                                v-if="identity.project_wishlist.length"
+                                v-if="profile.project_wishlist.length"
                                 class="wishlist-box"
                             >
                                 <div
                                     class="wishlist-box__item"
-                                    v-for="project in identity.project_wishlist"
+                                    v-for="project in profile.project_wishlist"
                                     :key="project.id"
                                 >
                                     <c-project-card
@@ -249,20 +249,20 @@
             }
         },
         computed: {
-            identityCount() {
-                return Object.keys(this.$store.state.application.identities).length;
+            profileCount() {
+                return Object.keys(this.$store.state.application.profiles).length;
             },
             account() {
                 return this.$store.state.application.account;
             },
-            identity() {
+            profile() {
                 const { products } = this.$store.state.marketplace;
                 const { projects } = this.$store.state.funding;
-                const identity = this.$store.getters['application/identity'];
+                const profile = this.$store.getters['application/profile'];
                 return {
-                    ...identity,
-                    product_wishlist: Object.keys(identity.product_wishlist).map(id => products[id]),
-                    project_wishlist: Object.keys(identity.project_wishlist).map(id => projects[id])
+                    ...profile,
+                    product_wishlist: Object.keys(profile.product_wishlist).map(id => products[id]),
+                    project_wishlist: Object.keys(profile.project_wishlist).map(id => projects[id])
                 };
             }
         }

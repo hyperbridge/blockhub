@@ -65,7 +65,7 @@ export default {
     computed: {
         projects() {
             return this.$store.getters['projects/list'] // Object.values(this.$store.state.funding.projects)//this.$store.getters['projects/list']
-                //.filter(trx => trx.you.id == this.identityId);
+                //.filter(trx => trx.you.id == this.profileId);
         },
         list() {
             const result = []

@@ -1,8 +1,8 @@
 import { schema } from 'normalizr'
-import identity from './identity'
+import profile from './profile'
 import wallet from './wallet'
 
 export default new schema.Entity('account', {
-    identities: [identity],
+    profiles: [profile],
     wallets: [wallet]
 })

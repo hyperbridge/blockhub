@@ -52,7 +52,7 @@
     import moment from 'moment';
 
     export default {
-        props: ['offersMap', 'asset', 'identity', 'offerId'],
+        props: ['offersMap', 'asset', 'profile', 'offerId'],
         components: {
             'c-user': (resolve) => require(['@/ui/components/user/simple'], resolve),
         },
@@ -71,7 +71,7 @@
                 this.$store.dispatch('createRelation',
                     ['assets/offers/bids', this.offerId, {
                         value: this.value,
-                        user: this.identity,
+                        user: this.profile,
                         createdAt: moment()
                     }]
                 );

@@ -310,7 +310,7 @@ export default {
                 passphrase: null,
                 repeat_passphrase: null,
                 encrypt_passphrase: true,
-                identity: {
+                profile: {
                     name: '',
                     img: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
                     wallet: ''
@@ -514,7 +514,7 @@ export default {
         }
     }
 
-    .identity-block {
+    .profile-block {
         padding: 10px;
         background: #303046;
         border-radius: 5px;

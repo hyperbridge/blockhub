@@ -64,7 +64,7 @@
                     <router-view
                         :offersMap="offersMap"
                         :asset="asset"
-                        :identity="identity"
+                        :profile="profile"
                     />
                 </transition>
             </div>
@@ -78,7 +78,7 @@
     import moment from 'moment';
 
     export default {
-        props: ['assetId', 'identityId'],
+        props: ['assetId', 'profileId'],
         data() {
             return {
                 priceHistory: Array.from({ length: 100 }, (x, i) =>
@@ -122,8 +122,8 @@
                 return this.$store.getters['assets/offersMap']
                     .filter(([id, offer]) => offer.asset.id == this.assetId);
             },
-            identity() {
-                return this.$store.getters['application/identity'];
+            profile() {
+                return this.$store.getters['application/profile'];
             }
         }
     }

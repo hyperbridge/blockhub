@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-5">
-            <div class="identity__user-info">
+            <div class="profile__user-info">
                 <div class="user_avatar">
                     <c-img
                         src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png" />
@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="user_info">
-                    <h2 class="user_name">{{ identity.name }} </h2>
+                    <h2 class="user_name">{{ profile.name }} </h2>
                     <div class="user_status" v-darklaunch="'REPUTATION'">Trusted User</div>
                     <div class="user_statistic" v-darklaunch="'REPUTATION'">
                         <span>
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="col-7">
-            <div class="identity__user-medal" v-darklaunch="'BADGES'">
+            <div class="profile__user-medal" v-darklaunch="'BADGES'">
                 <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
                 <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
                 <c-img src="https://cdn3.iconfinder.com/data/icons/game-menu-control/512/Your-rank.png"/>
@@ -42,7 +42,7 @@
             'c-button-arrows': (resolve) => require(['@/ui/components/buttons/arrows'], resolve),
         },
         computed: {
-            identity() {
+            profile() {
                 return this.$store.state.application.account.activeProfile
             }
         }
@@ -50,7 +50,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .identity__user-info {
+    .profile__user-info {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -100,7 +100,7 @@
             }
         }
     }
-    .identity__user-medal{
+    .profile__user-medal{
         display: flex;
         justify-content: flex-end;
         align-items: center;

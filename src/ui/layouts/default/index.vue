@@ -17,7 +17,7 @@
 
                     <p class="loader-block__message">{{ user_submitted_connection_message.message }}</p>
                     <p class="loader-block__user">Submitted by <a
-                        :href="`#/identity/${user_submitted_connection_message.user.id}`">@{{ user_submitted_connection_message.user.name }}</a></p>
+                        :href="`#/profile/${user_submitted_connection_message.user.id}`">@{{ user_submitted_connection_message.user.name }}</a></p>
 
                     <h1 class="loader-block__status-code" v-if="connection_status.code">ERROR {{ connection_status.code }}</h1>
 
@@ -189,7 +189,7 @@
             >
                 <div class="h4" slot="header">Propose Idea</div>
                 <template slot="body">
-                    <div v-if="chosenIdentity && chosenIdentity.curator_id">
+                    <div v-if="chosenProfile && chosenProfile.curator_id">
                         <p>Great, you're a curator. <c-button class="underline" href="#/project/new">Click here to continue</c-button>.</p>
                     </div>
                     <div v-else>
@@ -202,7 +202,7 @@
                         </p>
                         <c-user-card
                             class="col-8 margin-auto"
-                            :user="chosenIdentity"
+                            :user="chosenProfile"
                             :previewMode="true"
                             :class="{ 'default': true }"
                         />
@@ -211,7 +211,7 @@
 
                         <br /><br />
 
-                        <c-button class="c-btn-lg outline-white margin-top-20" @click="$store.commit('application/convertCurator', { identity: chosenIdentity })">Convert to Curator</c-button>
+                        <c-button class="c-btn-lg outline-white margin-top-20" @click="$store.commit('application/convertCurator', { profile: chosenProfile })">Convert to Curator</c-button>
                     </div>
                 </template>
                 <p slot="footer">
@@ -456,8 +456,8 @@
             is_connected() {
                 return this.$store.state.application.connection.internet && this.$store.state.application.connection.datasource
             },
-            chosenIdentity() {
-                return this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.activeProfile.id)
+            chosenProfile() {
+                return this.$store.state.application.account.profiles.find(profile => profile.id == this.$store.state.application.account.activeProfile.id)
             },
             shortcuts() {
                 return this.$store.state.application.shortcuts
