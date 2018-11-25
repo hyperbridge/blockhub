@@ -151,7 +151,7 @@ export const setAccountRequest = async (data) => {
 
         DB.application.config.data[0].account.activeProfile = data.account.profiles.find(i => i.id === data.account.activeProfile.id)
 
-        DB.application.config.data[0].developerMode = !!DB.application.config.data[0].account.activeProfile.developer_id
+        DB.application.config.data[0].developerMode = !!DB.application.config.data[0].account.activeProfile.developerId
 
         DB.save()
 
@@ -244,7 +244,7 @@ export const runCommand = async (cmd, meta = {}) => {
         //     if (local.store.state.application.mode === 'production') {
         //         //BlockHub.importSeedData()
 
-        //         // local.store.state.application.desktop_mode = true
+        //         // local.store.state.application.desktopMode = true
         //         // local.store.state.application.signed_in = true
         //     }
         //     // store.state.application.locked = true

@@ -61,8 +61,8 @@
             "507f191e810c19729de860ea",
             "31317f1we110c19729de8660"
         ],
-        "product_wishlist": { "3": true },
-        "project_wishlist": {}
+        "productWishlist": { "3": true },
+        "projectWishlist": {}
     },
     {
         "id": 2,
@@ -79,8 +79,8 @@
         "transactions": [
             "651f1ew1312729de860e228a"
         ],
-        "product_wishlist": {},
-        "project_wishlist": {}
+        "productWishlist": {},
+        "projectWishlist": {}
     },
     {
         "id": 3,
@@ -97,8 +97,8 @@
         "transactions": [
             "312f191e810c19729de860ea"
         ],
-        "product_wishlist": {},
-        "project_wishlist": {}
+        "productWishlist": {},
+        "projectWishlist": {}
     },
     {
         "id": 4,
@@ -112,8 +112,8 @@
         "hide_friends": true,
         "owner": 2,
         "inventory": [1, 2, 3, 4, 5, 6, 7],
-        "product_wishlist": {},
-        "project_wishlist": {}
+        "productWishlist": {},
+        "projectWishlist": {}
     },
     {
         "id": 5,
@@ -127,7 +127,7 @@
         "hide_friends": true,
         "owner": 2,
         "inventory": [8, 7, 4, 3, 3, 3, 1, 8],
-        "product_wishlist": {},
-        "project_wishlist": {}
+        "productWishlist": {},
+        "projectWishlist": {}
     }
 ]

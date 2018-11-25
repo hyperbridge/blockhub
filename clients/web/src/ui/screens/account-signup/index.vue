@@ -33,14 +33,14 @@
                                                 <div class="form-group">
                                                     <label class="sr-only">Given Name</label>
                                                     <input type="text" class="form-control" placeholder="Given Name"
-                                                            name="first_name" v-model="account.first_name">
+                                                            name="firstName" v-model="account.firstName">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Family Name</label>
                                                     <input type="text" class="form-control" placeholder="Family Name"
-                                                            name="last_name" v-model="account.last_name">
+                                                            name="lastName" v-model="account.lastName">
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -119,10 +119,10 @@
                                                     <label class="sr-only">Secret Question #1</label>
                                                     <select id="secret_question_1" name="secret_question_1" class="form-control" v-model="account.secret_question_1">
                                                         <option value="" selected>Choose Secret Question</option>
-                                                        <option value="last_name_first_kissed">What is the first name of the person you first kissed?</option>
-                                                        <option value="first_name_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
+                                                        <option value="lastName_first_kissed">What is the first name of the person you first kissed?</option>
+                                                        <option value="firstName_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
                                                         <option value="favorite_high_school_teacher">What is the last name of your favorite teacher in high school?</option>
-                                                        <option value="last_name_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
+                                                        <option value="lastName_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
                                                         <option value="wedding_reception">What is the name of the plac eyour wedding reception was held?</option>
                                                         <option value="city_sibling_live">In what city or town does your nearest sibling live?</option>
                                                     </select>
@@ -133,10 +133,10 @@
                                                     <label class="sr-only">Secret Question #2</label>
                                                     <select id="secret_question_2" name="secret_question_2" class="form-control" v-model="account.secret_question_2">
                                                         <option value="" selected>Choose Secret Question</option>
-                                                        <option value="last_name_first_kissed">What is the first name of the person you first kissed?</option>
-                                                        <option value="first_name_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
+                                                        <option value="lastName_first_kissed">What is the first name of the person you first kissed?</option>
+                                                        <option value="firstName_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
                                                         <option value="favorite_high_school_teacher">What is the last name of your favorite teacher in high school?</option>
-                                                        <option value="last_name_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
+                                                        <option value="lastName_teacher_failing_grade">What is the last name of the teacher who gave you your first failing grade?</option>
                                                         <option value="wedding_reception">What is the name of the plac eyour wedding reception was held?</option>
                                                         <option value="city_sibling_live">In what city or town does your nearest sibling live?</option>
                                                     </select>
@@ -282,8 +282,8 @@ export default {
             repeatPassphrase: [],
             errors: [],
             account: {
-                first_name: '',
-                last_name: '',
+                firstName: '',
+                lastName: '',
                 birthday: '',
                 email: '',
                 password: '',
@@ -294,14 +294,14 @@ export default {
                 secret_answer_2: '',
                 agreement: false,
 
-                // first_name: 'Eric',
-                // last_name: 'Muyser',
+                // firstName: 'Eric',
+                // lastName: 'Muyser',
                 // birthday: '26 Mar 1952',
                 // email: 'eric@muyser.com',
                 // password: '1234',
                 // repeat_password: '1234',
-                // secret_question_1: 'first_name_favorite_aunt_uncle',
-                // secret_question_2: 'first_name_favorite_aunt_uncle',
+                // secret_question_1: 'firstName_favorite_aunt_uncle',
+                // secret_question_2: 'firstName_favorite_aunt_uncle',
                 // secret_answer_1: 'larry',
                 // secret_answer_2: 'larry',
                 // agreement: true,
@@ -326,8 +326,8 @@ export default {
 
             if (this.currentStep === 1) {
                 if (
-                    this.account.first_name
-                    && this.account.last_name
+                    this.account.firstName
+                    && this.account.lastName
                     && this.account.email
                     && this.account.birthday
                     && this.account.agreement
@@ -345,10 +345,10 @@ export default {
                         this.currentStep = 2;
                     })
                 } else {
-                    if (!this.account.first_name) {
+                    if (!this.account.firstName) {
                         this.errors.push('First name required.')
                     }
-                    if (!this.account.last_name) {
+                    if (!this.account.lastName) {
                         this.errors.push('Last name required.')
                     }
                     if (!this.account.birthday) {
@@ -379,8 +379,8 @@ export default {
                     && passphraseOriginal === passphraseVerification) {
                         Bridge.createAccountRequest({
                             seed: 13891737193, // TODO:  remove hardcode. should derived from input data + mouse movement
-                            first_name: this.account.first_name,
-                            last_name: this.account.last_name,
+                            firstName: this.account.firstName,
+                            lastName: this.account.lastName,
                             email: this.account.email,
                             birthday: moment(this.account.birthday).format('DD-MM-YYYY'),
                             password: this.account.password,

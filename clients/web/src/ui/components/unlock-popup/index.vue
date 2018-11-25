@@ -126,10 +126,10 @@
                 if (!DB.application.config.data[0].account.secret_question_1) return "Secret question not found"
 
                 const expanded = {}
-                expanded["last_name_first_kissed"] = "What is the first name of the person you first kissed?"
-                expanded["first_name_favorite_aunt_uncle"] = "What is the first name of the your favorite aunt or uncle?"
+                expanded["lastName_first_kissed"] = "What is the first name of the person you first kissed?"
+                expanded["firstName_favorite_aunt_uncle"] = "What is the first name of the your favorite aunt or uncle?"
                 expanded["favorite_high_school_teacher"] = "What is the last name of your favorite teacher in high school?"
-                expanded["last_name_teacher_failing_grade"] = "What is the last name of the teacher who gave you your first failing grade?"
+                expanded["lastName_teacher_failing_grade"] = "What is the last name of the teacher who gave you your first failing grade?"
                 expanded["wedding_reception"] = "What is the name of the plac eyour wedding reception was held?"
                 expanded["city_sibling_live"] = "In what city or town does your nearest sibling live?"
 

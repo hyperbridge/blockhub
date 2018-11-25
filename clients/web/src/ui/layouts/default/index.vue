@@ -94,11 +94,11 @@
             <c-claim-popup :activated="claim_modal_active" @close="closePopup" ref="claim_modal_active"></c-claim-popup>
             <c-login-popup :activated="login_modal_active" @close="closePopup" ref="login_modal_active"></c-login-popup>
             <c-register-popup :activated="register_modal_active" @close="closePopup" ref="register_modal_active"></c-register-popup>
-            <c-privacy-popup :activated="$store.state.application.active_modal === 'privacy'" @close="$store.state.application.active_modal = null"></c-privacy-popup>
-            <c-terms-popup :activated="$store.state.application.active_modal === 'terms'" @close="$store.state.application.active_modal = null"></c-terms-popup>
+            <c-privacy-popup :activated="$store.state.application.activeModal === 'privacy'" @close="$store.state.application.activeModal = null"></c-privacy-popup>
+            <c-terms-popup :activated="$store.state.application.activeModal === 'terms'" @close="$store.state.application.activeModal = null"></c-terms-popup>
 
             <c-basic-popup
-                :activated="$store.state.application.editor_mode === 'editing' && !$store.state.application.account.settings.client['hide_editor_welcome_modal/' + $router.currentRoute.fullPath]"
+                :activated="$store.state.application.editorMode === 'editing' && !$store.state.application.account.settings.client['hide_editor_welcome_modal/' + $router.currentRoute.fullPath]"
                 @close="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_editor_welcome_modal/' + $router.currentRoute.fullPath, true)"
                 style="text-align: left;"
             >
@@ -123,8 +123,8 @@
 
 
             <c-basic-popup
-                :activated="$store.state.application.active_modal === 'coming-soon'"
-                @close="$store.state.application.active_modal = null"
+                :activated="$store.state.application.activeModal === 'coming-soon'"
+                @close="$store.state.application.activeModal = null"
                 style="text-align: left;"
             >
                 <div class="h4" slot="header">Coming Soon</div>
@@ -145,8 +145,8 @@
 
 
             <c-basic-popup
-                :activated="$store.state.application.active_modal === 'token-contract'"
-                @close="$store.state.application.active_modal = null"
+                :activated="$store.state.application.activeModal === 'token-contract'"
+                @close="$store.state.application.activeModal = null"
                 style="text-align: left;"
             >
                 <div class="h4" slot="header">Token Purchase Contract Address</div>
@@ -162,8 +162,8 @@
 
 
             <c-basic-popup
-                :activated="$store.state.application.active_modal === 'report'"
-                @close="$store.state.application.active_modal = null"
+                :activated="$store.state.application.activeModal === 'report'"
+                @close="$store.state.application.activeModal = null"
                 style="text-align: left;"
             >
                 <div class="h4" slot="header">Feedback/Report</div>
@@ -184,7 +184,7 @@
 
 
             <c-basic-popup
-                :activated="$store.state.application.active_modal === 'propose-idea'"
+                :activated="$store.state.application.activeModal === 'propose-idea'"
                 @close="$store.commit('application/activateModal', null)"
             >
                 <div class="h4" slot="header">Propose Idea</div>
@@ -221,13 +221,13 @@
 
 
             <c-basic-popup
-                :activated="$store.state.application.active_modal === 'notification'"
-                @close="$store.state.application.active_modal = null"
+                :activated="$store.state.application.activeModal === 'notification'"
+                @close="$store.state.application.activeModal = null"
                 style="text-align: left;"
             >
-                <div class="h4" slot="header">{{ active_notification.title }}</div>
+                <div class="h4" slot="header">{{ activeNotification.title }}</div>
                 <template slot="body">
-                    <p>{{ active_notification.text }}</p>
+                    <p>{{ activeNotification.text }}</p>
                 </template>
                 <p slot="footer">
                 </p>
@@ -235,8 +235,8 @@
 
 
             <c-basic-popup
-                :activated="$store.state.application.active_modal === 'addition-details'"
-                @close="$store.state.application.active_modal = null"
+                :activated="$store.state.application.activeModal === 'addition-details'"
+                @close="$store.state.application.activeModal = null"
                 style="text-align: left;"
             >
                 <div class="h4" slot="header"></div>
@@ -254,18 +254,18 @@
             </c-basic-popup>
 
 
-            <c-cookie-policy v-if="!desktop_mode" />
+            <c-cookie-policy v-if="!desktopMode" />
 
-            <c-clock v-if="desktop_mode" />
+            <c-clock v-if="desktopMode" />
 
-            <div class="version" v-if="desktop_mode">v{{ $store.state.application.version }}</div>
+            <div class="version" v-if="desktopMode">v{{ $store.state.application.version }}</div>
         </div>
         <!-- //END PAGE CONTENT -->
 
-        <!-- <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktop_mode"><img src="/static/img/powered-by-hyperbridge.png" /></a> -->
+        <!-- <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktopMode"><img src="/static/img/powered-by-hyperbridge.png" /></a> -->
 
         <!--<transition name="slideDown">-->
-            <c-profile-chooser v-if="profile_chooser && signed_in" />
+            <c-profile-chooser v-if="profileChooser && signed_in" />
         <!--</transition>-->
     </div>
     <!-- //END PAGE WRAPPER -->
@@ -359,7 +359,7 @@
             return {
                 navigationComponent: this.navigationKey || false,
                 loadingState: true,
-                user_submitted_connection_message: this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))],
+                user_submitted_connection_message: this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))],
                 panelOption: {
                     spaceBetween: 0,
                     loop: false,
@@ -466,31 +466,31 @@
                 return this.$store.state.application.connection.status
             },
             unlock_modal_active() {
-                return this.$store.state.application.active_modal === 'unlock'
+                return this.$store.state.application.activeModal === 'unlock'
             },
             send_funds_modal_active() {
-                return this.$store.state.application.active_modal === 'send-funds'
+                return this.$store.state.application.activeModal === 'send-funds'
             },
             login_modal_active() {
-                return this.$store.state.application.active_modal === 'login'
+                return this.$store.state.application.activeModal === 'login'
             },
             register_modal_active() {
-                return this.$store.state.application.active_modal === 'register'
+                return this.$store.state.application.activeModal === 'register'
             },
             purchase_modal_active() {
-                return this.$store.state.application.active_modal === 'purchase'
+                return this.$store.state.application.activeModal === 'purchase'
             },
             claim_modal_active() {
-                return this.$store.state.application.active_modal === 'claim'
+                return this.$store.state.application.activeModal === 'claim'
             },
             download_modal_active() {
-                return this.$store.state.application.active_modal === 'download'
+                return this.$store.state.application.activeModal === 'download'
             },
             welcome_modal_active() {
-                return this.$store.state.application.active_modal === 'welcome'
+                return this.$store.state.application.activeModal === 'welcome'
             },
-            desktop_mode() {
-                return this.$store.state.application.desktop_mode
+            desktopMode() {
+                return this.$store.state.application.desktopMode
             },
             signed_in() {
                 return this.$store.state.application.signed_in
@@ -498,8 +498,8 @@
             activeProfile() {
                 return this.$store.state.application.account && this.$store.state.application.account.activeProfile
             },
-            active_notification() {
-                return this.$store.state.application.active_notification || {}
+            activeNotification() {
+                return this.$store.state.application.activeNotification || {}
             },
             dynamicLinks() {
                 const [empty, ...links] = this.$route.path.split('/');
@@ -511,12 +511,12 @@
                     to: names.reduce((to, name, index) => (index < i + 1) ? to += '/' + name : to, '')
                 }));
             },
-            profile_chooser() {
-                return this.$store.state.application.profile_chooser
+            profileChooser() {
+                return this.$store.state.application.profileChooser
             }
         },
         updated() {
-            this.user_submitted_connection_message = this.$store.state.application.user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(this.$store.state.application.user_submitted_connection_messages.length))]
+            this.user_submitted_connection_message = this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))]
         },
         methods: {
             onSwipeLeft() {
@@ -564,7 +564,7 @@
                 this.$store.commit('application/activateModal', null)
             },
             closePopup() {
-                this.$store.state.application.active_modal = null
+                this.$store.state.application.activeModal = null
             },
             scrollSidebarDown() {
                 $('#scroll_sidebar').animate({scrollTop: '+=100', duration: '150'});
@@ -709,7 +709,7 @@
                         y: e.clientY
                     }
 
-                    this.$store.state.application.active_modal = 'report'
+                    this.$store.state.application.activeModal = 'report'
 
                     return false;
                 }
@@ -721,9 +721,9 @@
             '$route'() {
                 this.updateBreadcrumbLinks()
             },
-            profile_chooser(){
+            profileChooser(){
                 if (this.signed_in)
-                    if (this.profile_chooser)
+                    if (this.profileChooser)
                         this.bluredBg = true
                     else
                         this.bluredBg = false

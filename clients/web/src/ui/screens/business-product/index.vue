@@ -85,7 +85,7 @@
           "old_price": 0,
           "system_tags": [ "game", "new" ],
           "author": "0x0",
-          "developer_tags": [ "adventure" ],
+          "developerTags": [ "adventure" ],
           "plans": [
             { "title": "Play Now", "link": "#3" },
             { "title": "3 Month Subscription", "price": "12.95", "link": "" },
@@ -148,7 +148,7 @@
                                 <label>Developer ID</label>
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="" v-model="product.developer_id">
+                                <input type="text" class="form-control" placeholder="" v-model="product.developerId">
                                 <span class="form-text"></span>
                             </div>
                         </div>
@@ -219,11 +219,11 @@
                     return new Promise(async (resolve, reject) => {
                         const marketplaceStorageContract = MarketplaceAPI.api.ethereum.state.contracts.MarketplaceStorage.deployed
 
-                        await marketplaceStorage.setDeveloperOwnsProduct(product.developer_id, product.id, true, { from: profile.address })
-                        await marketplaceStorage.pushDeveloperOwnedProduct(product.developer_id, product.id, { from: profile.address })
+                        await marketplaceStorage.setDeveloperOwnsProduct(product.developerId, product.id, true, { from: profile.address })
+                        await marketplaceStorage.pushDeveloperOwnedProduct(product.developerId, product.id, { from: profile.address })
 
                         await marketplaceStorage.setProductDeveloper(product.id, product.developer, { from: profile.address })
-                        await marketplaceStorage.setProductDeveloperId(product.id, product.developer_id, { from: profile.address })
+                        await marketplaceStorage.setProductDeveloperId(product.id, product.developerId, { from: profile.address })
 
                         resolve(product)
                     })

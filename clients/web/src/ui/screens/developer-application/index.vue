@@ -30,7 +30,7 @@
             </div>
             <div class="col-12" v-if="developerMode">
                 <c-block title="Congratulations" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                    Your profile is all setup. You are Developer #{{ chosenProfile.developer_id }}
+                    Your profile is all setup. You are Developer #{{ chosenProfile.developerId }}
 
                     <br /><br />
 
@@ -72,7 +72,7 @@
         methods: {
             convertProfile() {
                 Bridge.sendCommand('createDeveloperRequest', this.chosenProfile).then((data) => {
-                    this.chosenProfile.developer_id = data
+                    this.chosenProfile.developerId = data
                     this.$store.state.application.developerMode = true
 
                     // TODO: just redirect here?

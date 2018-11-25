@@ -16,7 +16,7 @@
                                 <i class="fa fa-envelope"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('updates')"
-                                        style="box-shadow: none" v-if="$store.state.application.desktop_mode">
+                                        style="box-shadow: none" v-if="$store.state.application.desktopMode">
                                 <i class="fa fa-star"/>
                             </c-button>
                             <c-button status="plain" icon-hide v-if="navigationKey === 'store'" @click="showSlide('top_lists')"
@@ -49,7 +49,7 @@
                                 <i class="fa fa-envelope"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('updates')"
-                                        style="box-shadow: none" v-if="$store.state.application.desktop_mode">
+                                        style="box-shadow: none" v-if="$store.state.application.desktopMode">
                                 <i class="fa fa-star"/>
                             </c-button>
                             <c-button status="plain" v-if="navigationKey === 'store'" icon-hide @click="showSlide('top_lists')"
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </c-slide>
-                <c-slide v-if="$store.state.application.desktop_mode">
+                <c-slide v-if="$store.state.application.desktopMode">
                     <div class="item">
                         <h3>UPDATES</h3>
 
@@ -83,7 +83,7 @@
                                 <i class="fa fa-envelope"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('updates')" class="active"
-                                        v-if="$store.state.application.desktop_mode">
+                                        v-if="$store.state.application.desktopMode">
                                 <i class="fa fa-star"/>
                             </c-button>
                             <c-button status="plain" v-if="navigationKey === 'store'" icon-hide @click="showSlide('top_lists')"
@@ -129,7 +129,7 @@
                                 <i class="fa fa-envelope"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('updates')"
-                                        style="box-shadow: none" v-if="$store.state.application.desktop_mode">
+                                        style="box-shadow: none" v-if="$store.state.application.desktopMode">
                                 <i class="fa fa-star"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('top_lists')" class="active">
@@ -262,7 +262,7 @@
             }
         },
         created() {
-            if (this.navigationKey === 'store' && this.$store.state.application.desktop_mode) {
+            if (this.navigationKey === 'store' && this.$store.state.application.desktopMode) {
                 const sheetUrl = 'https://spreadsheets.google.com/feeds/list/1Ndg4etkvLQZKeTcPfP1L1nJiMWn6UkwFd9RVSMcltp4/1/public/values?alt=json'
 
                 axios({

@@ -233,7 +233,7 @@ window.BlockHub.resetSeedData = () => {
     DB.application.config.data[0].account.notifications = []
     DB.marketplace.config.data[0].updates = []
     DB.marketplace.config.data[0].curator_reviews = []
-    DB.marketplace.config.data[0].product_news = []
+    DB.marketplace.config.data[0].productNews = []
     DB.marketplace.config.data[0].realms = []
     DB.marketplace.config.data[0].collections = []
     DB.marketplace.config.data[0].game_series = []
@@ -362,7 +362,7 @@ const randomAction = () => {
 let simulatorInitialized = false
 
 const monitorSimulatorMode = () => {
-    if (!store.state.application.simulator_mode) {
+    if (!store.state.application.simulatorMode) {
         simulatorInitialized = false
         return setTimeout(monitorSimulatorMode, 1000)
     }
@@ -392,7 +392,7 @@ const monitorSimulatorMode = () => {
         [store.state.application.account.wallets, seed.wallets],
         [store.state.marketplace.trending_projects, seed.trending_projects],
         [store.state.marketplace.curator_reviews, seed.curator_reviews],
-        [store.state.marketplace.product_news, seed.product_news],
+        [store.state.marketplace.productNews, seed.productNews],
         [store.state.marketplace.assets, seed.assets],
         [store.state.marketplace.products, seed.products],
         [store.state.marketplace.collections, seed.collections],
@@ -498,14 +498,14 @@ export let initializer = () => {
             }
 
             if (store.state.application.environmentMode === 'preview') {
-                store.state.application.desktop_mode = true
+                store.state.application.desktopMode = true
                 store.state.application.signed_in = true
 
                 // ENABLE ALL DARKLAUNCHES
-                store.state.application.darklaunch_override = true
+                store.state.application.darklaunchOverride = true
 
                 // ENABLE SIMULATOR MODE
-                //store.state.application.simulator_mode = true
+                //store.state.application.simulatorMode = true
             }
 
             try { // TODO: we dont need this do we?

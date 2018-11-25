@@ -41,8 +41,8 @@
                     v-focus="!previewMode"
                 />
 
-                <p v-if="!user.developer_id && !user.curator_id"><em>Gamer</em></p>
-                <p v-if="user.developer_id"><em>Developer</em></p>
+                <p v-if="!user.developerId && !user.curator_id"><em>Gamer</em></p>
+                <p v-if="user.developerId"><em>Developer</em></p>
                 <p v-if="user.curator_id"><em>Curator</em></p>
             </div>
         </div>

@@ -294,7 +294,7 @@ export const GamesGrid = {
             state_tag: 'trending',
             followers: 591,
             players: 12,
-            developer_tags: ['RPG', 'ACTION', 'TOP']
+            developerTags: ['RPG', 'ACTION', 'TOP']
         },
         {
             id: 2,
@@ -310,7 +310,7 @@ export const GamesGrid = {
             prerelease_count: 591,
             followers: 5991,
             players: 98,
-            developer_tags: ['RPG', 'ACTION', 'TOP']
+            developerTags: ['RPG', 'ACTION', 'TOP']
         },
         {
             id: 3,
@@ -325,7 +325,7 @@ export const GamesGrid = {
             state_tag: 'trending',
             followers: 234,
             players: 92,
-            developer_tags: ['RPG', 'ACTION', 'TOP']
+            developerTags: ['RPG', 'ACTION', 'TOP']
         },
         {
             id: 4,
@@ -342,7 +342,7 @@ export const GamesGrid = {
             state_tag: 'trending',
             followers: 22,
             players: 123,
-            developer_tags: ['RPG', 'ACTION', 'TOP']
+            developerTags: ['RPG', 'ACTION', 'TOP']
         }
     ]
 }

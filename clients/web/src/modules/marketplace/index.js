@@ -20,14 +20,14 @@ const updateState = (savedData, updatedState = {}) => {
         curator_reviews: DB.marketplace.config.data[0].curator_reviews,
         posts: DB.marketplace.config.data[0].posts,
         game_series: DB.marketplace.config.data[0].game_series,
-        frontpage_product: DB.marketplace ? DB.marketplace.products.findOne({ 'system_tags': { '$contains': ['frontpage'] } }) : {},
-        new_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['new'] } }) : [],
+        frontpageProduct: DB.marketplace ? DB.marketplace.products.findOne({ 'system_tags': { '$contains': ['frontpage'] } }) : {},
+        newProducts: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['new'] } }) : [],
         featured_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['featured'] } }) : [],
-        upcoming_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['upcoming'] } }) : [],
+        upcomingProducts: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['upcoming'] } }) : [],
         trending_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['trending'] } }) : [],
-        top_selling_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }) : [],
+        topSellingProducts: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }) : [],
         special_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : [],
-        product_news: DB.marketplace ? DB.marketplace.posts.find({ 'target': { '$eq': ['product'] }, 'system_tags': { '$contains': ['news'] } }) : [],
+        productNews: DB.marketplace ? DB.marketplace.posts.find({ 'target': { '$eq': ['product'] }, 'system_tags': { '$contains': ['news'] } }) : [],
         top_free: DB.marketplace ? DB.marketplace.products.find({ 'price': { '$eq': 0 } }) : [],
         top_5: DB.marketplace ? DB.marketplace.products.find({ 'rating.overall': { '$gte': 5 } }) : [],
         ...updatedState,
@@ -36,12 +36,12 @@ const updateState = (savedData, updatedState = {}) => {
     const normalizedData = normalize(rawData, {
         assets: [schema.asset],
         products: [schema.product],
-        frontpage_product: schema.product,
-        new_products: [schema.product],
-        sale_products: [schema.product],
-        upcoming_products: [schema.product],
+        frontpageProduct: schema.product,
+        newProducts: [schema.product],
+        saleProducts: [schema.product],
+        upcomingProducts: [schema.product],
         trending_products: [schema.product],
-        top_selling_products: [schema.product],
+        topSellingProducts: [schema.product],
         special_products: [schema.product]
     })
 
@@ -57,7 +57,7 @@ export const getters = {
     productsTags: (state, getters) => getters.productsArray
         .reduce((tags, product) => [
             ...tags,
-            ...product.developer_tags
+            ...product.developerTags
                 .filter(tag =>
                     !tags.includes(tag)
                 )
@@ -91,7 +91,7 @@ export const getters = {
             : true
         )
         .filter(product => tags && tags.length
-            ? product.developer_tags.some(genre => this.selectedGenres.includes(genre))
+            ? product.developerTags.some(genre => this.selectedGenres.includes(genre))
             : true
         )
         .sort((a, b) => sortBy
@@ -118,7 +118,7 @@ export const actions = {
     },
     initEthereum(store, payload) {
         // Bridge.initProtocol({ protocolName: 'marketplace' }).then((config) => {
-        //     store.state.ethereum[store.state.current_ethereum_network] = config
+        //     store.state.ethereum[store.state.currentEthereumNetwork] = config
         //     store.dispatch('updateState')
         // })
     },

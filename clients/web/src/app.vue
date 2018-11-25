@@ -146,15 +146,15 @@
 
                 <div class="preview-panel col-12 mt-4" v-if="showPreviewPanel">
                     <div>
-                        <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktop_mode ? 'ON' : 'OFF' }}</c-button>
-                        <c-button @click="rotateOperatingSystem()">Operating System {{ operating_system === 'mac' ? 'MAC' : (operating_system === 'windows' ? 'WINDOWS' : 'LINUX' ) }}</c-button>
+                        <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktopMode ? 'ON' : 'OFF' }}</c-button>
+                        <c-button @click="rotateOperatingSystem()">Operating System {{ operatingSystem === 'mac' ? 'MAC' : (operatingSystem === 'windows' ? 'WINDOWS' : 'LINUX' ) }}</c-button>
                         <c-button @click="rotateEnvironmentMode()">Environment Mode {{ environmentMode.toUpperCase() }}</c-button>
                         <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button>
-                        <c-button @click="$store.state.application.account.is_verified = !$store.state.application.account.is_verified">Account {{ $store.state.application.account.is_verified ? 'VERIFIED' : 'NOT VERIFIED' }}</c-button>
+                        <c-button @click="$store.state.application.account.isVerified = !$store.state.application.account.isVerified">Account {{ $store.state.application.account.isVerified ? 'VERIFIED' : 'NOT VERIFIED' }}</c-button>
                         <c-button @click="toggleDeveloperMode()">Developer Mode {{ developerMode ? 'ON' : 'OFF' }}</c-button>
-                        <c-button @click="rotateEditorMode()">Editor Mode {{ $store.state.application.editor_mode.toUpperCase() }}</c-button>
-                        <c-button @click="toggleDarklaunchOverride()">Darklaunch Override {{ $store.state.application.darklaunch_override ? 'ON' : 'OFF' }}</c-button>
-                        <c-button @click="toggleSimulator()">Simulator {{ simulator_mode ? 'ON' : 'OFF' }}</c-button>
+                        <c-button @click="rotateEditorMode()">Editor Mode {{ $store.state.application.editorMode.toUpperCase() }}</c-button>
+                        <c-button @click="toggleDarklaunchOverride()">Darklaunch Override {{ $store.state.application.darklaunchOverride ? 'ON' : 'OFF' }}</c-button>
+                        <c-button @click="toggleSimulator()">Simulator {{ simulatorMode ? 'ON' : 'OFF' }}</c-button>
 
                         <br /><br />
                     </div>
@@ -167,8 +167,8 @@
                         <c-button @click="$store.state.application.connection.auto = !$store.state.application.connection.auto">Auto Connect is {{ $store.state.application.connection.auto ? 'ON' : 'OFF' }}</c-button>
                         <c-button @click="$store.state.application.connection.internet = !$store.state.application.connection.internet">Internet is {{ $store.state.application.connection.internet ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
                         <c-button @click="$store.state.application.connection.datasource = !$store.state.application.connection.datasource">Datasource is {{ $store.state.application.connection.datasource ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
-                        <c-button @click="$store.state.application.connection.operator = !$store.state.application.connection.operator" v-if="desktop_mode">Operator is {{ $store.state.application.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
-                        <c-button @click="$store.state.application.connection.ethereum = !$store.state.application.connection.ethereum" v-if="desktop_mode">Ethereum is {{ $store.state.application.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                        <c-button @click="$store.state.application.connection.operator = !$store.state.application.connection.operator" v-if="desktopMode">Operator is {{ $store.state.application.connection.operator ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
+                        <c-button @click="$store.state.application.connection.ethereum = !$store.state.application.connection.ethereum" v-if="desktopMode">Ethereum is {{ $store.state.application.connection.ethereum ? 'CONNECTED' : 'DISCONNECTED' }}</c-button>
                         <br /><br />
                     </div>
                     <div>
@@ -176,16 +176,16 @@
                         <c-button @click="resetSettings()">Reset Settings</c-button>
                         <br /><br />
                     </div>
-                    <div v-if="desktop_mode" hidden>
+                    <div v-if="desktopMode" hidden>
                         <input ref="desktopMessage" type="text" />
                         <c-button @click="sendDesktopMessage()">Send Message To Desktop</c-button>
                     </div>
                     <div v-if="developerMode" hidden>
                         <h4>Darklaunch Manager</h4>
                         <select id="darklaunch-editor" class="form-control" multiple="multiple">
-                            <option v-for="(flag, index) in $store.state.application.darklaunch_flags"
+                            <option v-for="(flag, index) in $store.state.application.darklaunchFlags"
                                 :key="index"
-                                :selected="$store.state.application.account.darklaunch_flags.map(flag => flag.enabled ? flag.code : null).includes(flag.code)"
+                                :selected="$store.state.application.account.darklaunchFlags.map(flag => flag.enabled ? flag.code : null).includes(flag.code)"
                             >
                                 {{ flag.code }} - {{ flag.description }}
                             </option>
@@ -232,15 +232,15 @@
         computed: {
             disableAnimations() { return this.$store.state.application.account.settings.client.animations },
             developerMode() { return this.$store.state.application.developerMode },
-            desktop_mode() { return this.$store.state.application.desktop_mode },
+            desktopMode() { return this.$store.state.application.desktopMode },
             signed_in() { return this.$store.state.application.signed_in },
-            simulator_mode() { return this.$store.state.application.simulator_mode },
-            operating_system() { return this.$store.state.application.operating_system },
+            simulatorMode() { return this.$store.state.application.simulatorMode },
+            operatingSystem() { return this.$store.state.application.operatingSystem },
             environmentMode() { return this.$store.state.application.environmentMode }
         },
         methods: {
             ensureDesktopWelcome(to) {
-                if (this.$store.state.application.desktop_mode
+                if (this.$store.state.application.desktopMode
                 && !this.$store.state.application.signed_in
                 && (!to ? true : (
                     to.path !== '/account/signup'
@@ -252,42 +252,42 @@
                 }
             },
             updateEditorMode() {
-                // this.$store.state.application.editor_mode = 'viewing'
+                // this.$store.state.application.editorMode = 'viewing'
             },
             toggleDesktopMode() {
-                this.$store.state.application.desktop_mode = !this.$store.state.application.desktop_mode
+                this.$store.state.application.desktopMode = !this.$store.state.application.desktopMode
             },
             toggleSignedIn() {
                 this.$store.state.application.signed_in = !this.$store.state.application.signed_in
             },
             toggleDeveloper() {
-                this.$store.state.application.is_developer = !this.$store.state.application.is_developer
+                this.$store.state.application.isDeveloper = !this.$store.state.application.isDeveloper
             },
             toggleDeveloperMode() {
                 this.$store.state.application.developerMode = !this.$store.state.application.developerMode
             },
             toggleDarklaunchOverride() {
-                this.$store.state.application.darklaunch_override = !this.$store.state.application.darklaunch_override
+                this.$store.state.application.darklaunchOverride = !this.$store.state.application.darklaunchOverride
             },
             toggleSimulator() {
-                this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulator_mode)
+                this.$store.commit('application/setSimulatorMode', !this.$store.state.application.simulatorMode)
             },
             rotateEditorMode() {
-                // if (this.$store.state.application.editor_mode === 'editing') {
-                //     this.$store.state.application.editor_mode = 'viewing'
-                // } else if (this.$store.state.application.editor_mode === 'viewing') {
-                //     this.$store.state.application.editor_mode = 'publishing'
+                // if (this.$store.state.application.editorMode === 'editing') {
+                //     this.$store.state.application.editorMode = 'viewing'
+                // } else if (this.$store.state.application.editorMode === 'viewing') {
+                //     this.$store.state.application.editorMode = 'publishing'
                 // } else {
-                //     this.$store.state.application.editor_mode = 'editing'
+                //     this.$store.state.application.editorMode = 'editing'
                 // }
             },
             rotateOperatingSystem() {
-                if (this.$store.state.application.operating_system === 'mac') {
-                    this.$store.state.application.operating_system = 'windows'
-                } else if (this.$store.state.application.operating_system === 'windows') {
-                    this.$store.state.application.operating_system = 'linux'
+                if (this.$store.state.application.operatingSystem === 'mac') {
+                    this.$store.state.application.operatingSystem = 'windows'
+                } else if (this.$store.state.application.operatingSystem === 'windows') {
+                    this.$store.state.application.operatingSystem = 'linux'
                 } else {
-                    this.$store.state.application.operating_system = 'mac'
+                    this.$store.state.application.operatingSystem = 'mac'
                 }
             },
             rotateEnvironmentMode() {
@@ -372,7 +372,7 @@
                 $('body').removeClass('show-sidebar')
                 $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-bars')
 
-                this.$store.state.application.active_modal = false
+                this.$store.state.application.activeModal = false
 
                 this.updateEditorMode()
                 this.ensureDesktopWelcome(to)

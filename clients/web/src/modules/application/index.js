@@ -35,7 +35,7 @@ const getOS = () => {
 }
 
 const updateState = (savedData, updatedState = {}) => {
-    //let developerProfile = DB.application.config.data[0].account && DB.application.config.data[0].account.profiles.find(profile => profile.developer_id !== undefined)
+    //let developerProfile = DB.application.config.data[0].account && DB.application.config.data[0].account.profiles.find(profile => profile.developerId !== undefined)
 
     rawData = {
         ...rawData,
@@ -45,11 +45,11 @@ const updateState = (savedData, updatedState = {}) => {
             message: null
         },
         shortcuts: savedData.shortcuts != null ? savedData.shortcuts : [],
-        operating_system: savedData.operating_system != null ? savedData.operating_system : getOS(),
+        operatingSystem: savedData.operatingSystem != null ? savedData.operatingSystem : getOS(),
         initialized: BlockHub.initialized,
         account: DB.application.config.data[0].account || {},
-        darklaunch_flags: DB.application.config.data[0].darklaunch_flags || [],
-        developerMode: savedData.developerMode != null ? savedData.developerMode : DB.application.config.data[0].account && !!DB.application.config.data[0].account.activeProfile.developer_id,
+        darklaunchFlags: DB.application.config.data[0].darklaunchFlags || [],
+        developerMode: savedData.developerMode != null ? savedData.developerMode : DB.application.config.data[0].account && !!DB.application.config.data[0].account.activeProfile.developerId,
         environmentMode: savedData.environmentMode != null ? savedData.environmentMode : BlockHub.GetMode(),
         externalState: savedData.externalState != null ? savedData.externalState : {},
         ...updatedState
@@ -61,8 +61,8 @@ const updateState = (savedData, updatedState = {}) => {
         rawData.locked = updatedState.locked
     }
 
-    if (rawData.desktop_mode == null)
-        rawData.desktop_mode = window.isElectron
+    if (rawData.desktopMode == null)
+        rawData.desktopMode = window.isElectron
 
     const normalizedData = normalize(rawData, {
     })
@@ -74,8 +74,8 @@ export const getters = {
     privileges(state) {
         const result = []
 
-        if (state.desktop_mode) {
-            result.push('desktop_mode')
+        if (state.desktopMode) {
+            result.push('desktopMode')
         }
 
         if (state.signed_in) {
@@ -136,7 +136,7 @@ export const actions = {
             window.ga('send', 'event', 'Modal', 'Show Modal', 'Show Modal', payload, { 'NonInteraction': 1 })
         }
 
-        if (store.state.desktop_mode) {
+        if (store.state.desktopMode) {
             if (store.state.signed_in) {
                 store.commit('activateModal', payload)
             } else {
@@ -165,7 +165,7 @@ export const actions = {
     },
     initEthereum(store, payload) {
         // Bridge.initProtocol({ protocolName: 'application' }).then((config) => {
-        //     store.state.ethereum[store.state.current_ethereum_network] = config
+        //     store.state.ethereum[store.state.currentEthereumNetwork] = config
         //     store.dispatch('updateState')
         // })
     },
@@ -240,7 +240,7 @@ export const actions = {
             Bridge
                 .deployContract({ protocolName, contractName, oldContractAddress })
                 .then((contract) => {
-                    state.ethereum[state.current_ethereum_network].packages[protocolName].contracts[contractName] = contract
+                    state.ethereum[state.currentEthereumNetwork].packages[protocolName].contracts[contractName] = contract
                     store.dispatch('updateState')
 
                     resolve(contract)
@@ -298,17 +298,17 @@ export const mutations = {
         DB.save()
     },
     showNotification(state, notification) {
-        state.active_notification = notification
-        state.active_modal = 'notification'
+        state.activeNotification = notification
+        state.activeModal = 'notification'
     },
-    updateFavorites2({ account }, { prop = 'product_wishlist', id }) {
+    updateFavorites2({ account }, { prop = 'productWishlist', id }) {
         const foundKey = account[prop].findIndex(savedId => savedId === id);
         foundKey
         ? account[prop].push(id)
         : account[prop].splice(foundKey, 0);
         return !!foundKey;
     },
-    updateFavorites({ account }, { prop = 'product_wishlist', id }) {
+    updateFavorites({ account }, { prop = 'productWishlist', id }) {
         // Optional -> object
         if (account[prop][id]) {
             const { [id]: deleted, ...rest } = account[prop];
@@ -341,37 +341,37 @@ export const mutations = {
         DB.save()
     },
     setEditorMode(state, payload) {
-        state.editor_mode = payload
+        state.editorMode = payload
     },
     setInternetConnection(state, payload) {
         state.connection.internet = payload.connected
         state.connection.status.message = payload.message
     },
     setSimulatorMode(state, payload) {
-        state.simulator_mode = payload
+        state.simulatorMode = payload
     },
     showProfileChooser(state, payload) {
-        state.profile_chooser = payload
+        state.profileChooser = payload
     },
     enableDarklaunch(state, payload) {
-        const darklaunch = state.account.darklaunch_flags.find(darklaunch => darklaunch.code === payload)
+        const darklaunch = state.account.darklaunchFlags.find(darklaunch => darklaunch.code === payload)
 
         if (darklaunch) {
             darklaunch.enabled = true
         } else {
-            state.account.darklaunch_flags.push({
+            state.account.darklaunchFlags.push({
                 code: payload,
                 enabled: true
             })
         }
     },
     disableDarklaunch(state, payload) {
-        const darklaunch = state.account.darklaunch_flags.find(darklaunch => darklaunch.code === payload)
+        const darklaunch = state.account.darklaunchFlags.find(darklaunch => darklaunch.code === payload)
 
         if (darklaunch) {
             darklaunch.enabled = false
         } else {
-            state.account.darklaunch_flags.push({
+            state.account.darklaunchFlags.push({
                 code: payload,
                 enabled: false
             })
@@ -410,7 +410,7 @@ export const mutations = {
 
     },
     activateModal(state, payload) {
-        state.active_modal = payload
+        state.activeModal = payload
     },
     convertCurator(state, payload) {
         Bridge.sendCommand('createCuratorRequest', payload.profile).then((data) => {

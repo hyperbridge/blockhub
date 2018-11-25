@@ -119,8 +119,8 @@
             }
         },
         computed: {
-            first_product() {
-                return this.$store.state.marketplace.first_product
+            firstProduct() {
+                return this.$store.state.marketplace.firstProduct
             },
             breadcrumbLinks() {
                 return [

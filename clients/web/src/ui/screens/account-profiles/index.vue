@@ -21,18 +21,18 @@
             <div class="col-12 col-md-6 col-lg-4" v-if="defaultProfile">
                 <div class="verification-blk text-center">
                     <h3 class="text-white">Verify Your Profile</h3>
-                    <div class="status" v-if="defaultProfile.is_verified">
+                    <div class="status" v-if="defaultProfile.isVerified">
                         <i class="fas fa-check"></i>
                         Verified
                     </div>
-                    <div class="status" v-else-if="defaultProfile.is_verifying">
+                    <div class="status" v-else-if="defaultProfile.isVerifying">
                         <i class="fas fa-hourglass"></i>
                         Verifying
                     </div>
                     <c-button status="outline-success" class="mt-3" href="#/account/verification" v-else>
                         Click here to verify
                     </c-button>
-                    <div class="date" v-if="defaultProfile.is_verified">
+                    <div class="date" v-if="defaultProfile.isVerified">
                         Valid up to $7,500 USD
                     </div>
                 </div>
@@ -180,7 +180,7 @@
         methods: {
             setDefault(profile) {
                 this.$store.state.application.account.activeProfile = profile
-                this.$store.state.application.developerMode = !!profile.developer_id
+                this.$store.state.application.developerMode = !!profile.developerId
                 // if (this.defaultProfile) this.defaultProfile.default = false
                 // profile.default = true
 

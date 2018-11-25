@@ -11,7 +11,7 @@ const productSchema = Joi.object().keys({
   developer: Joi.string().required(),
   publisher: Joi.string().required(),
   content: Joi.string(),
-  developer_tags: Joi.array(),
+  developerTags: Joi.array(),
   language_support: Joi.array().required(),
   system_requirements: Joi.array().required(),
   system_tags: Joi.array(),

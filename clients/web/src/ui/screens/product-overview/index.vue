@@ -198,7 +198,7 @@
                 return this.$refs.streams_slider.swiper;
             },
             wishlist() {
-                return this.$store.getters['application/profile'].product_wishlist || {};
+                return this.$store.getters['application/profile'].productWishlist || {};
             },
             streams(){
                 return this.product.streams

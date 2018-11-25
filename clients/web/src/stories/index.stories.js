@@ -3003,7 +3003,7 @@ const productsCardsData = [
         },
         author: "Piranha Bytes",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/901191/movie480.webm?t=1490866901"],
-        developer_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+        developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     },
     {
         id: "9",
@@ -3021,7 +3021,7 @@ const productsCardsData = [
         },
         author: "CD PROJEKT RED",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256658589/movie480.webm?t=1528288687"],
-        developer_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+        developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     },
     {
         id: "10",
@@ -3039,7 +3039,7 @@ const productsCardsData = [
         },
         author: "Bethesda",
         videos: ["https://steamcdn-a.akamaihd.net/steam/apps/256657338/movie480.webm?t=1447378505"],
-        developer_tags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
+        developerTags: ["RPG", "Open World", "Fantasy", "Action", "Atmospheric", "Third Person"]
     }
 ];
 storiesOf('Product Card', module)

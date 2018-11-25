@@ -3,22 +3,22 @@
         <div class="app-header__top-bar draggable"></div>
         <div class="position-relative w-100" style="margin-top: -10px; zoom: 0.9;">
             <div class="app-header__bar-left">
-                <div v-if="desktop_mode && operating_system === 'mac'" class="mac-icons">
+                <div v-if="desktopMode && operatingSystem === 'mac'" class="mac-icons">
                     <a class="close_w" href="#" @click.prevent="closeWindow"></a>
                     <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
                     <a class="maximize" href="#" @click.prevent="maximizeWindow"></a>
                 </div>
-                <div v-if="desktop_mode && operating_system === 'linux'" class="linux-icons">
+                <div v-if="desktopMode && operatingSystem === 'linux'" class="linux-icons">
                     <a class="close_w" href="#" @click.prevent="closeWindow"></a>
                     <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
                     <a class="maximize" href="#" @click.prevent="maximizeWindow"></a>
                 </div>
-                <div v-if="desktop_mode && operating_system === 'windows'">
+                <div v-if="desktopMode && operatingSystem === 'windows'">
                     <a class="app-header__bar-left-link margin-right-0 margin-left-10" href="javascript:;" data-action="fixedpanel-toggle" v-if="!is_locked">
                         <span class="fas fa-bars"></span>
                     </a>
                 </div>
-                <div v-if="!desktop_mode">
+                <div v-if="!desktopMode">
                     <a class="app-header__bar-left-link" href="#/">
                         <span class="fa fa-home"></span>
                     </a>
@@ -35,7 +35,7 @@
                 <c-loading-logo :isLoading="isLoader" />
             </a>
             <div class="app-header__bar-right">
-                <div v-if="desktop_mode && operating_system === 'windows'" class="windows-icons margin-right-5">
+                <div v-if="desktopMode && operatingSystem === 'windows'" class="windows-icons margin-right-5">
                     <a class="minimize" href="#" @click.prevent="minimizeWindow"></a>
                     <a class="maximize" href="#" @click.prevent="maximizeWindow"></a>
                     <a class="close_w" href="#" @click.prevent="closeWindow"></a>
@@ -63,12 +63,12 @@
                 <nav class="horizontal-navigation app-header__nav-left">
                     <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
                     <ul>
-                        <li class="app-header__create-account-btn" v-if="desktop_mode && !signed_in && !is_locked">
+                        <li class="app-header__create-account-btn" v-if="desktopMode && !signed_in && !is_locked">
                             <a href="#/account/signup" class="">
                                 <span class="text">CREATE ACCOUNT</span> <span class="fa fa-user-plus"></span>
                             </a>
                         </li>
-                        <li class="app-header__download-btn" v-if="!desktop_mode">
+                        <li class="app-header__download-btn" v-if="!desktopMode">
                             <a href="#/download" class="">
                                 <span class="text">DOWNLOAD</span> <span class="fa fa-download"></span>
                             </a>
@@ -262,10 +262,10 @@ export default {
             return this.$store.state.application.loading
         },
         is_viewing() {
-            return this.$store.state.application.editor_mode === 'viewing'
+            return this.$store.state.application.editorMode === 'viewing'
         },
-        editor_mode() {
-            return this.$store.state.application.editor_mode
+        editorMode() {
+            return this.$store.state.application.editorMode
         },
         developerMode() {
             return this.$store.state.application.developerMode
@@ -273,11 +273,11 @@ export default {
         signed_in() {
             return this.$store.state.application.signed_in
         },
-        desktop_mode() {
-            return this.$store.state.application.desktop_mode
+        desktopMode() {
+            return this.$store.state.application.desktopMode
         },
-        operating_system() {
-            return this.$store.state.application.operating_system
+        operatingSystem() {
+            return this.$store.state.application.operatingSystem
         }
     },
     methods: {

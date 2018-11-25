@@ -301,7 +301,7 @@ export const getProfile = async ({ id, email, fieldKey }): Promise<Profile | und
 // exports.get_products_filters = async req => {
 //     const { properties } = req.params;
 
-//     const arrayProps = ['system_tags', 'developer_tags'];
+//     const arrayProps = ['system_tags', 'developerTags'];
 //     const objectProps = ['system_requirements', 'language_support'];
 
 //     const filters = properties.split('&').reduce((filters, option) => {

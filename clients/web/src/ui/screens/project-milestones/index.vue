@@ -33,13 +33,13 @@
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             Total Spent
                         </div>
-                        {{ project.funding.spent_amount | convertCurrency }}
+                        {{ project.funding.spentAmount | convertCurrency }}
                     </c-icon-block>
                     <c-icon-block icon="hand-holding-usd">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             Project Budget
                         </div>
-                        {{ project.funding.funded_amount | convertCurrency  }}
+                        {{ project.funding.fundedAmount | convertCurrency  }}
                     </c-icon-block>
                 </div>
             </div>

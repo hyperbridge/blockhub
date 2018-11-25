@@ -112,7 +112,7 @@
                 </div>
             </div>
 
-            <!-- <div v-if="!desktop_mode && !ethereum_connected">
+            <!-- <div v-if="!desktopMode && !ethereum_connected">
                 <div class="col-12 text-center alert alert-info">
                     <p>The BlockHub desktop app is the recommended way to load up on tokens.</p>
                 </div>
@@ -207,7 +207,7 @@
                         </c-block>
                     </div>
 
-                    <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked && desktop_mode">
+                    <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked && desktopMode">
                         <c-block title="Payment" class="margin-bottom-30">
                             <div class="profile-picker">
                                 <c-swiper :options="profileOptions">
@@ -241,7 +241,7 @@
                         </c-block>
                     </div>
 
-                    <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked && !desktop_mode">
+                    <div class="col-12 col-md-6" v-if="ethereum_connected && ethereum_unlocked && !desktopMode">
                         <c-block title="Payment Profile" class="margin-bottom-30">
                             <p>Your Ethereum address:</p>
                             <div class="input-group mb-4">
@@ -256,11 +256,11 @@
                         </c-block>
                     </div>
 
-                    <!-- <div class="col-12 text-center alert alert-info" v-if="!desktop_mode">
+                    <!-- <div class="col-12 text-center alert alert-info" v-if="!desktopMode">
                         <p>The BlockHub desktop client is the recommended way to load up on tokens.</p>
                     </div> -->
 
-                    <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && desktop_mode && (!account.is_verified && !account.is_verifying) && !override" style="text-align: center">
+                    <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && desktopMode && (!account.isVerified && !account.isVerifying) && !override" style="text-align: center">
                         <h2 style="text-align: center" hidden>Oops, you haven't verified your account yet. <br />You'll need to do this to participate.</h2>
                         <br />
                         <c-button class="c-btn-lg" href="#/account/verification" style="margin: 0 auto" @click="gaStep(6)">Verify Account</c-button>
@@ -269,14 +269,14 @@
                         <br /><br />
                     </div>
 
-                    <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && desktop_mode && !account.is_verified && account.is_verifying" style="text-align: center">
+                    <div class="col-8 offset-2" v-if="ethereum_connected && ethereum_unlocked && desktopMode && !account.isVerified && account.isVerifying" style="text-align: center">
                         <p>Your account is currently being verified. You'll need to wait until it's finished to participate.</p>
                         <p>Please check back later. If you've been waiting too long or have problems, please email support@hyperbridge.org</p>
                     </div>
 
                     <br /><br /><br />
                     
-                    <div v-if="ethereum_connected && ethereum_unlocked && (!desktop_mode || account.is_verified || override)" style="text-align: center">
+                    <div v-if="ethereum_connected && ethereum_unlocked && (!desktopMode || account.isVerified || override)" style="text-align: center">
                         <div class="col-10 offset-1 tab-card">
                             <h4>Token Sale Agreement</h4>
                             <div class="terms_block">
@@ -531,7 +531,7 @@ export default {
     },
     data() {
         const checkEthereumConnection = () => {
-            if (this.desktop_mode || (typeof web3 !== 'undefined' && web3.currentProvider.isMetaMask === true)) {
+            if (this.desktopMode || (typeof web3 !== 'undefined' && web3.currentProvider.isMetaMask === true)) {
                 this.ethereum_connected = true
             }
 
@@ -563,8 +563,8 @@ export default {
             tokenSaleAgreement: false,
             jurisdictionAgreement: false,
             residentAgreement: false,
-            ethereum_unlocked: this.$store.state.application.desktop_mode,
-            ethereum_connected: this.$store.state.application.desktop_mode,
+            ethereum_unlocked: this.$store.state.application.desktopMode,
+            ethereum_connected: this.$store.state.application.desktopMode,
             purchaseAddress: chosenProfile ? chosenProfile.address : null,
             override: false,
             assets: [
@@ -626,8 +626,8 @@ export default {
         return result
     },
     computed: {
-        desktop_mode() {
-            return this.$store.state.application.desktop_mode
+        desktopMode() {
+            return this.$store.state.application.desktopMode
         },
         is_mobile() {
             if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) 
@@ -641,7 +641,7 @@ export default {
             return "0xebf0027ef3b4b7a742a148cddb0f2b14e5d8f0e9"
 
             try {
-                return this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve.contracts.TokenSale.address
+                return this.$store.state.application.ethereum[this.$store.state.application.currentEthereumNetwork].packages.reserve.contracts.TokenSale.address
             } catch (e) {
 
             }
@@ -722,7 +722,7 @@ export default {
         confirmPurchase() {
             this.gaStep(8)
 
-            if (this.desktop_mode) {
+            if (this.desktopMode) {
                 Bridge.sendTransactionRequest({
                     fromAddress: this.purchaseAddress,
                     toAddress: this.tokenContractAddress,

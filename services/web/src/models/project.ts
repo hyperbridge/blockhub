@@ -47,7 +47,7 @@ export default class Project extends Model {
         //     "preview": []
         // },
         // "author": "0x0",
-        // "developer_tags": [
+        // "developerTags": [
         //     "lifestyle",
         //     "vr",
         //     "gym"
@@ -113,11 +113,11 @@ export default class Project extends Model {
         //             "text": "m6"
         //         }
         //     ],
-        //     "funded_amount": "202190.63",
-        //     "goal_amount": "200000.00",
-        //     "spent_amount": "32000",
-        //     "locked_amount": "182242",
-        //     "overflow_amount": "17342"
+        //     "fundedAmount": "202190.63",
+        //     "goalAmount": "200000.00",
+        //     "spentAmount": "32000",
+        //     "lockedAmount": "182242",
+        //     "overflowAmount": "17342"
         // },
         // "milestones": {
         //     "overall_progress": 32,

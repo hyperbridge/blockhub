@@ -45,7 +45,7 @@ export const actions = {
         // Bridge
         //     .initProtocol({ protocolName: 'funding' })
         //     .then((config) => {
-        //         store.state.ethereum[store.state.current_ethereum_network] = config
+        //         store.state.ethereum[store.state.currentEthereumNetwork] = config
         //         store.dispatch('updateState')
         //     })
     },

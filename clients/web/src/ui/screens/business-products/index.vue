@@ -153,7 +153,7 @@
                                         <div class="user user--bordered">
                                             <img src="http://via.placeholder.com/128x128">
                                             <div class="user__name">
-                                                <strong>{{ product.developer_id }}</strong>
+                                                <strong>{{ product.developerId }}</strong>
                                             </div>
                                         </div>
                                     </td>

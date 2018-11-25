@@ -22,7 +22,7 @@
         "developer": "id Software",
         "publisher": "Bethesda Softworks",
         "content": "Developed by id software...",
-        "developer_tags": [
+        "developerTags": [
             "FPS",
             "Action",
             "Gore",

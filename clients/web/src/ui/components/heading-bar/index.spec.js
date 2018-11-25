@@ -6,9 +6,9 @@ describe('heading-bar', () => {
         const props = {
             name: 'Testy Mc Test Pants',
             headingTabs: [
-                { title: 'Top Selling', category: 'top_selling_products' },
-                { title: 'New Releases', category: 'new_products' },
-                { title: 'Upcoming', category: 'upcoming_products' }
+                { title: 'Top Selling', category: 'topSellingProducts' },
+                { title: 'New Releases', category: 'newProducts' },
+                { title: 'Upcoming', category: 'upcomingProducts' }
             ]
         }
         
@@ -23,9 +23,9 @@ describe('heading-bar', () => {
     it('shows tabs if given but not name', () => {
         const props = {
             headingTabs: [
-                { title: 'Top Selling', category: 'top_selling_products' },
-                { title: 'New Releases', category: 'new_products' },
-                { title: 'Upcoming', category: 'upcoming_products' }
+                { title: 'Top Selling', category: 'topSellingProducts' },
+                { title: 'New Releases', category: 'newProducts' },
+                { title: 'Upcoming', category: 'upcomingProducts' }
             ]
         }
 
@@ -40,9 +40,9 @@ describe('heading-bar', () => {
     it('changes active tab', () => {
         const props = {
             headingTabs: [
-                { title: 'Top Selling', category: 'top_selling_products' },
-                { title: 'New Releases', category: 'new_products' },
-                { title: 'Upcoming', category: 'upcoming_products' }
+                { title: 'Top Selling', category: 'topSellingProducts' },
+                { title: 'New Releases', category: 'newProducts' },
+                { title: 'Upcoming', category: 'upcomingProducts' }
             ]
         }
         const wrapper = shallowMount(Component, {

@@ -16,8 +16,8 @@ Vue.directive('darklaunch', {
     bind(el, binding, vnode, oldVnode) {
         const { value } = binding
 
-        if (!store.state.application.darklaunch_flags.map(flag => flag.code).includes(value)) {
-            store.state.application.darklaunch_flags.push({
+        if (!store.state.application.darklaunchFlags.map(flag => flag.code).includes(value)) {
+            store.state.application.darklaunchFlags.push({
                 code: value,
                 description: 'Undefined',
                 type: 'undefined'
@@ -27,13 +27,13 @@ Vue.directive('darklaunch', {
         el.hidden = true
 
         if (value &&
-            store.state.application.darklaunch_flags &&
-            store.state.application.account.darklaunch_flags &&
-            isVisible(store.state.application.darklaunch_flags, store.state.application.account.darklaunch_flags, value)) {
+            store.state.application.darklaunchFlags &&
+            store.state.application.account.darklaunchFlags &&
+            isVisible(store.state.application.darklaunchFlags, store.state.application.account.darklaunchFlags, value)) {
             el.hidden = false
         }
 
-        if (store.state.application.darklaunch_override) {
+        if (store.state.application.darklaunchOverride) {
             el.hidden = false
         }
     }

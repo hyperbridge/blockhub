@@ -96,8 +96,8 @@ export const getCurrentAccount = async (web3) => {
 
             web3.eth.getAccounts((err, currentAccounts) => {
                 resolve({
-                    public_address: currentAccounts[0],
-                    private_key: web3.currentProvider.wallets[currentAccounts[0].toLowerCase()]._privKey.toString('hex')
+                    address: currentAccounts[0],
+                    privateKey: web3.currentProvider.wallets[currentAccounts[0].toLowerCase()]._privKey.toString('hex')
                 })
             })
         } catch(e) {

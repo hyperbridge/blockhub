@@ -35,7 +35,7 @@
                         <div class="editor-container">
                             <div class="" v-if="editing">
                                 <div class="form-group tag-editor">
-                                    <multiselect v-model="product.developer_tags"
+                                    <multiselect v-model="product.developerTags"
                                                  class="dark-mode"
                                                  :multiple="true"
                                                  :taggable="true"
@@ -44,12 +44,12 @@
                                     </multiselect>
                                     <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
                                         <!--<option v-for="(tag, index) in developer_tag_options" :key="index"-->
-                                                <!--:selected="product.developer_tags.includes(tag)">{{ tag }}-->
+                                                <!--:selected="product.developerTags.includes(tag)">{{ tag }}-->
                                         <!--</option>-->
                                     <!--</select>-->
                                 </div>
                             </div>
-                            <c-tags-list :tags="product.developer_tags" v-if="!editing"></c-tags-list>
+                            <c-tags-list :tags="product.developerTags" v-if="!editing"></c-tags-list>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
@@ -181,7 +181,7 @@
                 </div>
             </div>
         </div>
-        <c-custom-modal title="Help Center" v-if="first_product && editing && !$store.state.application.account.settings.client.hide_product_intro_modal" @close="closeModal">
+        <c-custom-modal title="Help Center" v-if="firstProduct && editing && !$store.state.application.account.settings.client.hide_product_intro_modal" @close="closeModal">
             <div class="help-modal__content" slot="modal_body" style="max-width: 500px">
                 <h4 class="h2 mb-3">Creating your first product?</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -197,7 +197,7 @@
 
 
         <c-basic-popup
-            :activated="$store.state.application.active_modal === 'import-product'"
+            :activated="$store.state.application.activeModal === 'import-product'"
             @close="$store.commit('application/activateModal', null)"
         >
             <div class="h4" slot="header" style="text-align: left">Import Product</div>
@@ -323,8 +323,8 @@
             product() {
                 return this.id === 'new' ? this.marketplace.default_product : DB.marketplace.products.findOne({ 'id': Number(this.id) })
             },
-            editor_mode() {
-                return this.$store.state.application.editor_mode
+            editorMode() {
+                return this.$store.state.application.editorMode
             },
             nextImportStep() {
                 if (this.importStep === 1) {
@@ -334,15 +334,15 @@
                 }
             },
             editing() {
-                if (!this.$store.state.application.editor_mode) {
+                if (!this.$store.state.application.editorMode) {
                     for (let key in this.activeElement) {
                         this.activeElement[key] = false
                     }
                 }
-                return this.$store.state.application.editor_mode === 'editing'
+                return this.$store.state.application.editorMode === 'editing'
             },
-            first_product() {
-                return this.$store.state.marketplace.first_product
+            firstProduct() {
+                return this.$store.state.marketplace.firstProduct
             },
             breadcrumbLinks() {
                 const links = [
@@ -374,8 +374,8 @@
                 }
             }
 
-            if (!product.developer_tags) {
-                product.developer_tags = []
+            if (!product.developerTags) {
+                product.developerTags = []
             }
 
             if (product.promotions) {
@@ -442,11 +442,11 @@
                 }
             },
             unsaved() {
-                if (this.savedState === false && this.$store.state.application.editor_mode === 'editing')
+                if (this.savedState === false && this.$store.state.application.editorMode === 'editing')
                     return true
             },
             closeModal() {
-                this.$store.state.marketplace.first_product = false
+                this.$store.state.marketplace.firstProduct = false
                 this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_product_intro_modal', true)
             },
             // showImporter() {
@@ -545,7 +545,7 @@
                     this.product.type = 'game'
                     //this.product.rating.overall = 0
                     this.product.system_tags = ['imported']
-                    this.product.developer_tags = data.tags
+                    this.product.developerTags = data.tags
                     this.product.name = data.title
                     this.product.release_date = data.releaseDate
                     this.product.description = data.description
@@ -563,18 +563,18 @@
             //     .on('select2:select', (e) => {
             //         let data = e.params.data
             //
-            //         if (!this.product.developer_tags.includes(data.text)) {
-            //             this.product.developer_tags.push(data.text)
+            //         if (!this.product.developerTags.includes(data.text)) {
+            //             this.product.developerTags.push(data.text)
             //         }
             //
-            //         Vue.set(this.product, 'developer_tags', this.product.developer_tags)
+            //         Vue.set(this.product, 'developerTags', this.product.developerTags)
             //     })
             //     .on('select2:unselect', (e) => {
             //         let data = e.params.data
             //
-            //         this.product.developer_tags = this.product.developer_tags.filter(e => e !== data.text)
+            //         this.product.developerTags = this.product.developerTags.filter(e => e !== data.text)
             //
-            //         Vue.set(this.product, 'developer_tags', this.product.developer_tags)
+            //         Vue.set(this.product, 'developerTags', this.product.developerTags)
             //     })
 
             $('#summernote').summernote({
@@ -593,7 +593,7 @@
             '$route'() {
                 this.updateSection()
             },
-            editor_mode (newMode, oldMode) {
+            editorMode (newMode, oldMode) {
                 if (oldMode === 'editing' && newMode === 'publishing') {
                     this.save()
 

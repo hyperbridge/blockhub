@@ -93,12 +93,12 @@ export default {
             }
         },
         darklaunches() {
-            return this.$store.state.application.darklaunch_flags.map(darklaunch => ({...darklaunch, enabled: this.$store.state.application.account.darklaunch_flags.map(flag => flag.enabled ? flag.code : undefined).includes(darklaunch.code)}))
+            return this.$store.state.application.darklaunchFlags.map(darklaunch => ({...darklaunch, enabled: this.$store.state.application.account.darklaunchFlags.map(flag => flag.enabled ? flag.code : undefined).includes(darklaunch.code)}))
         }
     },
     methods: {
         toggleDarklaunch(darklaunchCode) {
-            const darklaunch = this.$store.state.application.account.darklaunch_flags.find(darklaunch => darklaunch.code === darklaunchCode)
+            const darklaunch = this.$store.state.application.account.darklaunchFlags.find(darklaunch => darklaunch.code === darklaunchCode)
 
             if (darklaunch.enabled) {
                 this.$store.dispatch('application/disableDarklaunch', darklaunch.code)

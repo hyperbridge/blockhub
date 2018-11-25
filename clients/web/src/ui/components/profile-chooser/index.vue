@@ -101,7 +101,7 @@
                     'updateSingle',
                     ['application/account', { active_profile: profile.id }]
                 );
-                this.$store.state.application.developerMode = !!profile.developer_id
+                this.$store.state.application.developerMode = !!profile.developerId
             }
         }
     }

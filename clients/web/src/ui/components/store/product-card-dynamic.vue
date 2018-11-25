@@ -30,7 +30,7 @@
         </div>
         <h4><a :href="`#/product/${product.id}`">{{ product.name }}</a></h4>
         <p class="card-text" hidden>{{ product.short_description }} </p>
-        <c-tags :tags="product.developer_tags.slice(0,3)"/>
+        <c-tags :tags="product.developerTags.slice(0,3)"/>
     </div>
 </template>
 

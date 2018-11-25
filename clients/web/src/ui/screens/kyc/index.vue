@@ -4,9 +4,9 @@
             <div class="row" style="">
                 <div class="col-md-6 offset-md-3 col-sm-12 offset-sm-0 mb-4">
                     <c-block title="KYC" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                        <p>Welcome to the KYC portal. <span v-if="!desktop_mode">BlockHub Desktop is the recommended way to KYC, purchase &amp; use tokens. You can also KYC on web and create your account in BlockHub later.</span></p>
+                        <p>Welcome to the KYC portal. <span v-if="!desktopMode">BlockHub Desktop is the recommended way to KYC, purchase &amp; use tokens. You can also KYC on web and create your account in BlockHub later.</span></p>
 
-                        <div v-if="!desktop_mode">
+                        <div v-if="!desktopMode">
                             <div class="text-center alert alert-info" style="font-weight: bold; font-size: 11px;">
                                 <p> BlockHub, the first platform powered by Hyperbridge protocols has been released. <c-button href="#/download" class="outline-white">Download it now</c-button></p>
                             </div>
@@ -32,7 +32,7 @@
                             :checked="false"
                             type="square"
                             v-model="useMetamask"
-                            v-if="!desktop_mode"
+                            v-if="!desktopMode"
                         >
                             Use MetaMask
                         </c-checkbox>
@@ -103,7 +103,7 @@ export default {
         const checkEthereumConnection = () => {
             if (!this.useMetamask) return
 
-            if (this.desktop_mode || (typeof web3 !== 'undefined' && web3.currentProvider.isMetaMask === true)) {
+            if (this.desktopMode || (typeof web3 !== 'undefined' && web3.currentProvider.isMetaMask === true)) {
                 this.ethereum_connected = true
             }
 
@@ -126,8 +126,8 @@ export default {
         }
     },
     computed: {
-        desktop_mode() {
-            return this.$store.state.application.desktop_mode
+        desktopMode() {
+            return this.$store.state.application.desktopMode
         },
         canContinue() {
             return this.purchaseAddress

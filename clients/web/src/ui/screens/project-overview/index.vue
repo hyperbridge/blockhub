@@ -64,11 +64,11 @@
                         <div class="project__info">
                             <div class="funded">
                                 <div class="text">114% Funded</div>
-                                {{ project.funding.funded_amount | convertCurrency }}
+                                {{ project.funding.fundedAmount | convertCurrency }}
                             </div>
                             <div class="goal">
                                 <div class="text">Goal</div>
-                                {{ project.funding.goal_amount | convertCurrency }}
+                                {{ project.funding.goalAmount | convertCurrency }}
                             </div>
                             <div
                                 v-for="(prop, index) in crowdfunding_props"
@@ -79,7 +79,7 @@
                                     <c-progress-bar
                                         :values="{
                                                             reached: project.funding[prop + '_amount'],
-                                                            goal: project.funding.goal_amount
+                                                            goal: project.funding.goalAmount
                                                         }"
                                         direction="vertical"
                                     />
@@ -167,7 +167,7 @@
                     name: false,
                     background_image: false,
                     store_image: false,
-                    developer_tags: false,
+                    developerTags: false,
                     description: false,
                     content: false
                 },
@@ -187,7 +187,7 @@
         },
         computed: {
             wishlist() {
-                return this.$store.getters['application/profile'].project_wishlist || {};
+                return this.$store.getters['application/profile'].projectWishlist || {};
             }
         }
     }

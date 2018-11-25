@@ -12,7 +12,7 @@ const productSchema = Schema({
   developer: { type: String, required: true },
   publisher: { type: String, required: true },
   content: { type: String, required: true },
-  developer_tags: { type: Array, required: true },
+  developerTags: { type: Array, required: true },
   language_support: { type: Array, required: true },
   system_requirements: { type: Array, required: true },
   system_tags: Array,
