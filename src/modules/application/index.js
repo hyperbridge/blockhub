@@ -49,8 +49,8 @@ const updateState = (savedData, updatedState = {}) => {
         initialized: BlockHub.initialized,
         account: DB.application.config.data[0].account || {},
         darklaunch_flags: DB.application.config.data[0].darklaunch_flags || [],
-        developer_mode: savedData.developer_mode != null ? savedData.developer_mode : DB.application.config.data[0].account && !!DB.application.config.data[0].account.activeProfile.developer_id,
-        environment_mode: savedData.environment_mode != null ? savedData.environment_mode : BlockHub.GetMode(),
+        developerMode: savedData.developerMode != null ? savedData.developerMode : DB.application.config.data[0].account && !!DB.application.config.data[0].account.activeProfile.developer_id,
+        environmentMode: savedData.environmentMode != null ? savedData.environmentMode : BlockHub.GetMode(),
         externalState: savedData.externalState != null ? savedData.externalState : {},
         ...updatedState
     }
@@ -82,8 +82,8 @@ export const getters = {
             result.push('signed_in')
         }
 
-        if (state.developer_mode) {
-            result.push('developer_mode')
+        if (state.developerMode) {
+            result.push('developerMode')
         }
 
         if (state.verified_account) {
@@ -319,7 +319,7 @@ export const mutations = {
         }
     },
     updateEnvironmentMode(state, payload) {
-        state.environment_mode = payload
+        state.environmentMode = payload
 
         Bridge.sendCommand('setEnvironmentMode', payload).then((data) => {
 

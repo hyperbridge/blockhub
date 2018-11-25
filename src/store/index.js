@@ -489,15 +489,15 @@ export let initializer = () => {
             store.dispatch('marketplace/init')
             store.dispatch('funding/init')
 
-            BlockHub.environment_mode = store.state.application.environment_mode
+            BlockHub.environmentMode = store.state.application.environmentMode
 
-            if (store.state.application.environment_mode === 'preview'
-                || store.state.application.environment_mode === 'beta'
-                /*|| store.state.application.environment_mode === 'production'*/) {
+            if (store.state.application.environmentMode === 'preview'
+                || store.state.application.environmentMode === 'beta'
+                /*|| store.state.application.environmentMode === 'production'*/) {
                 BlockHub.importSeedData()
             }
 
-            if (store.state.application.environment_mode === 'preview') {
+            if (store.state.application.environmentMode === 'preview') {
                 store.state.application.desktop_mode = true
                 store.state.application.signed_in = true
 

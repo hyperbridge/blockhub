@@ -164,7 +164,7 @@
         data() {
             return {
                 newProfile: {
-                    name: '',
+                    name: 'Default',
                     wallet: '',
                     img: '/static/img/new-profile.png',
                     default: false,
@@ -180,7 +180,7 @@
         methods: {
             setDefault(profile) {
                 this.$store.state.application.account.activeProfile = profile
-                this.$store.state.application.developer_mode = !!profile.developer_id
+                this.$store.state.application.developerMode = !!profile.developer_id
                 // if (this.defaultProfile) this.defaultProfile.default = false
                 // profile.default = true
 
@@ -236,7 +236,7 @@
 
                 this.editedProfile = null
 
-                this.saveProfiles()
+                //this.saveProfiles()
             },
             createProfile() {
                 const { newProfile } = this
@@ -247,10 +247,10 @@
                     address: newProfile.wallet
                 })
             },
-            saveProfiles() {
-                this.$store.state.application.account.profiles = this.profiles
-                this.$store.dispatch('application/updateState')
-            }
+            // saveProfiles() {
+            //     this.$store.state.application.account.profiles = this.profiles
+            //     this.$store.dispatch('application/updateState')
+            // }
         },
         computed: {
             profiles() {

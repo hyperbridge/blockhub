@@ -320,7 +320,7 @@
         if (this.id === 'new') {
             project = this.$store.state.funding.defaultProject
 
-            this.$store.state.application.developer_mode = true
+            this.$store.state.application.developerMode = true
             this.$store.dispatch('application/setEditorMode', 'editing')
         }
 

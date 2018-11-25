@@ -432,7 +432,7 @@ const router = new Router({
             },
             meta: {
                 section: 'overview',
-                permission: 'developer_mode'
+                permission: 'developerMode'
             }
         },
         {

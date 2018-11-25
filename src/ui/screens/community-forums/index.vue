@@ -2,12 +2,12 @@
     <c-layout navigationKey="store">
             <div class="container-fluid">
                 <div class="row margin-bottom-50">
-                    <div class="col-12 col-lg-8" v-if="developer_mode">
+                    <div class="col-12 col-lg-8" v-if="developerMode">
                         <div class="h2 margin-top-5">Welcome to the BlockHub community</div>
                         <p><strong>BlockHub Community</strong> allows you to engage your audience through crowdfunding campaigns, discussion forums, and a dedicated help centre for your product. You can now be in direct contact with your end users, answer their questions, address their concerns, and improve your approval rating on our platform. </p>
                         <p>For more questions on BlockHub Community visit our help centre or email help@hyperbridge.org. </p>
                     </div>
-                    <div class="col-12 col-lg-8" v-if="!developer_mode">
+                    <div class="col-12 col-lg-8" v-if="!developerMode">
                         <div class="h2 margin-top-5">Welcome to the BlockHub community</div>
                         <p><strong>BlockHub Community</strong> allows you to engage with other gamers and the game developers for an enhanced community-driven gaming experience. You can ask questions on technical issues, post your feedback on the gameplay, and suggest improvements to the game. </p>
                     </div>

@@ -4,7 +4,7 @@
             <p>Interested in developing with BlockHub? Please contact us at developers@hyperbridge.org</p>
         </div>
         <div class="row" v-if="$store.state.application.signed_in">
-            <div class="col-12" v-if="!developer_mode">
+            <div class="col-12" v-if="!developerMode">
                 <c-block title="Business Manager" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true" hidden>
                     <p>We're still working on our Business Manager. If you want a sneak preview, <a href="#/business">it's over here</a>. In the meantime, you can contact us directly at <a href="mailto:business@hyperbridge.org"><strong>business@hyperbridge.org</strong></a></p>
                 </c-block>
@@ -13,7 +13,7 @@
                     <p>You might initially think that community-driven feature development could lead to bad game design. And in ordinary circumstances that's correct. But don't worry, BlockHub is not an ordinary platform. We know the reason why forum feedback is often mostly negative. It's because people enjoying the game aren't there, <strong>they're playing the game</strong>. That's why we need to use <strong>comparison</strong> metrics to determine the state of your feedback to other games. This, along with the reputations system, will greatly improve the feedback loop to your internal testers. We want to make it super easy to understand your community. For the growth of your game, both the developer and the community need to work together, it's a symbiotic relationship. And we're to help nurture it.</p>
                 </c-block>
 
-                <div v-if="!developer_mode" style="text-align: center">
+                <div v-if="!developerMode" style="text-align: center">
                     <c-user-card
                         class="col-3 margin-auto"
                         :user="chosenProfile"
@@ -28,7 +28,7 @@
                     <c-button class="c-btn-lg outline-white margin-top-20" @click="convertProfile">Convert to Developer</c-button>
                 </div>
             </div>
-            <div class="col-12" v-if="developer_mode">
+            <div class="col-12" v-if="developerMode">
                 <c-block title="Congratulations" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                     Your profile is all setup. You are Developer #{{ chosenProfile.developer_id }}
 
@@ -65,15 +65,15 @@
             profiles() {
                 return this.$store.state.application.account.profiles
             },
-            developer_mode() {
-                return this.$store.state.application.developer_mode
+            developerMode() {
+                return this.$store.state.application.developerMode
             }
         },
         methods: {
             convertProfile() {
                 Bridge.sendCommand('createDeveloperRequest', this.chosenProfile).then((data) => {
                     this.chosenProfile.developer_id = data
-                    this.$store.state.application.developer_mode = true
+                    this.$store.state.application.developerMode = true
 
                     // TODO: just redirect here?
                 })

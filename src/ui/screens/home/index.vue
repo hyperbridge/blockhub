@@ -70,7 +70,7 @@ export default {
     },
     data() {
         return {
-            showWelcomeModal: ['preview', 'staging', 'local'].includes(this.$store.state.application.environment_mode) && !this.$store.state.application.account.settings.client.hide_welcome_modal,
+            showWelcomeModal: ['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode) && !this.$store.state.application.account.settings.client.hide_welcome_modal,
         }
     },
     computed: {
