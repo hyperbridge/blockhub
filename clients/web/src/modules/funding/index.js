@@ -15,11 +15,11 @@ const updateState = (savedData, updatedState = {}) => {
         ...savedData,
         ...updatedState,
         projects: DB.funding ? DB.funding.projects.find({ 'status': { '$eq': 'approved' } }) : [],
-        trending_projects: DB.funding ? DB.funding.projects.find({ 'system_tags': { '$contains': ['trending'] }, 'status': { '$eq': 'approved' } }) : [],
-        top_game_ideas: DB.funding ? DB.funding.projects.find({ 'system_tags': { '$contains': ['top', 'game'] } }) : [],
-        top_content_suggestions: DB.funding ? DB.funding.projects.find({ 'system_tags': { '$contains': ['top', 'content', 'suggestion'] } }) : [],
-        top_item_suggestions: DB.funding ? DB.funding.projects.find({ 'system_tags': { '$contains': ['top', 'item', 'suggestion'] } }) : [],
-        most_popular_games: DB.funding ? DB.funding.projects.find({ 'system_tags': { '$contains': ['popular', 'game'] } }) : []
+        trendingProjects: DB.funding ? DB.funding.projects.find({ 'systemTags': { '$contains': ['trending'] }, 'status': { '$eq': 'approved' } }) : [],
+        top_game_ideas: DB.funding ? DB.funding.projects.find({ 'systemTags': { '$contains': ['top', 'game'] } }) : [],
+        top_content_suggestions: DB.funding ? DB.funding.projects.find({ 'systemTags': { '$contains': ['top', 'content', 'suggestion'] } }) : [],
+        top_item_suggestions: DB.funding ? DB.funding.projects.find({ 'systemTags': { '$contains': ['top', 'item', 'suggestion'] } }) : [],
+        most_popular_games: DB.funding ? DB.funding.projects.find({ 'systemTags': { '$contains': ['popular', 'game'] } }) : []
     }
 
     const normalizedData = normalize(rawData, {
@@ -27,7 +27,7 @@ const updateState = (savedData, updatedState = {}) => {
     })
 
     state = { ...rawData, ...normalizedData.entities }
-};
+}
 
 
 export const getters = {

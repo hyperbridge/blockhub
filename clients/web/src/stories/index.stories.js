@@ -2373,7 +2373,7 @@ storiesOf('Dropdown', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-currency-dropdown :current_currency="currency" :currencies="currencies" />
+             <c-currency-dropdown :currentCurrency="currency" :currencies="currencies" />
          </div>
         `
     }))
@@ -2383,7 +2383,7 @@ storiesOf('Dropdown', module)
         },
         data() {
             return {
-                current_language: {
+                currentLanguage: {
                     code: 'us',
                     name: 'English',
                 },
@@ -2413,7 +2413,7 @@ storiesOf('Dropdown', module)
         },
         template: `
          <div class="row m-0 p-3">
-             <c-languages-dropdown :current_language="current_language" :languages="languages" />
+             <c-languages-dropdown :currentLanguage="currentLanguage" :languages="languages" />
          </div>
         `
     }))
@@ -2431,7 +2431,7 @@ storiesOf('Frequently traded assets', module)
         template: `
          <div class="row m-0 p-3">
              <div class="col-4">
-                <c-traded-assets :items="frequently_traded_assets" assets_url="#some_url_here">
+                <c-traded-assets :items="frequentlyTradedAssets" assets_url="#some_url_here">
                     <template slot="filter">
                     <c-dropdown name="Most valuable" id="most_valuable">
                         <a class="dropdown-item" href="#">Action</a>
@@ -2648,7 +2648,7 @@ storiesOf('News List', module)
                         "id": 1,
                         "target_type": "product",
                         "target_id": 1,
-                        "system_tags": [
+                        "systemTags": [
                             "news"
                         ],
                         "heading": "New class and event coming next week!",
@@ -2660,7 +2660,7 @@ storiesOf('News List', module)
                         "id": 2,
                         "target_type": "product",
                         "target_id": 1,
-                        "system_tags": [
+                        "systemTags": [
                             "news"
                         ],
                         "heading": "New class and event coming next week!",
@@ -2672,7 +2672,7 @@ storiesOf('News List', module)
                         "id": 3,
                         "target_type": "product",
                         "target_id": 2,
-                        "system_tags": [
+                        "systemTags": [
                             "news"
                         ],
                         "heading": "New class and event coming next week!",
@@ -2684,7 +2684,7 @@ storiesOf('News List', module)
                         "id": 4,
                         "target_type": "product",
                         "target_id": 3,
-                        "system_tags": [
+                        "systemTags": [
                             "news"
                         ],
                         "heading": "New class and event coming next week!",
@@ -2716,7 +2716,7 @@ storiesOf('News List', module)
                     "id": 1,
                     "target_type": "product",
                     "target_id": 1,
-                    "system_tags": [
+                    "systemTags": [
                         "news"
                     ],
                     "heading": "New class and event coming next week!",
@@ -2825,7 +2825,7 @@ storiesOf('Project Card', module)
         },
         data() {
             return {
-                trending_projects: [
+                trendingProjects: [
                     {
                         game: {
                             title: 'Diablo III',
@@ -2891,7 +2891,7 @@ storiesOf('Project Card', module)
         },
         template: `
             <div class="row m-0 p-5">
-                <div class="col-4" v-for="(project, index) in trending_projects" :key="index">
+                <div class="col-4" v-for="(project, index) in trendingProjects" :key="index">
                     <c-project-card 
                                     :image="project.img"
                                     :description="project.description"

@@ -108,7 +108,7 @@
                     </div>
                 </div>
 
-                <div class="row margin-bottom-30" v-if="item.type === 'curator_reviews'" :key="`level-1-${index}`">
+                <div class="row margin-bottom-30" v-if="item.type === 'curatorReviews'" :key="`level-1-${index}`">
                     <div class="col-12">
                         <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                             <c-heading-bar
@@ -132,7 +132,7 @@
                     </div>
                 </div>
 
-                <div class="row margin-bottom-30" v-if="item.type === 'trending_projects_row'" :key="`level-1-${index}`">
+                <div class="row margin-bottom-30" v-if="item.type === 'trendingProjects_row'" :key="`level-1-${index}`">
                     <div class="col-12">
                         <c-block :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                             <c-heading-bar
@@ -189,7 +189,7 @@
                         </c-block>
                 </div>
 
-                <div class="row margin-bottom-30" v-if="item.type === 'game_series'" :key="`level-1-${index}`">
+                <div class="row margin-bottom-30" v-if="item.type === 'gameSeries'" :key="`level-1-${index}`">
                     <div class="col-12">
                         <c-game-series v-for="(game, index) in item.data.list" :key="index">
                             <c-game-description :game="game" />

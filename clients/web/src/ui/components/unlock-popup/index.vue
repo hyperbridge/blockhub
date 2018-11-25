@@ -19,7 +19,7 @@
                                         <div class="form-group">
                                             <label class="sr-only">Enter your secret question #1</label>
                                             <!-- http://goodsecurityquestions.com/examples/ -->
-                                            <p>{{ secret_question_1 }}</p>
+                                            <p>{{ secretQuestion1 }}</p>
                                             <div class="input-group mb-4">
                                                 <input type="text" class="form-control" placeholder="Secret Answer"
                                                         name="secret_answer_1" v-model="secret_answer_1">
@@ -97,7 +97,7 @@
             },
             recoverPassword() {
                 Bridge.sendCommand('recoverPasswordRequest', {
-                    secret_question_1: this.secret_question_1,
+                    secretQuestion1: this.secretQuestion1,
                     secret_answer_1: this.secret_answer_1,
                     birthday: moment(this.birthday).format('DD-MM-YYYY'),
                 }).then((data) => {
@@ -122,8 +122,8 @@
             }
         },
         computed: {
-            secret_question_1() {
-                if (!DB.application.config.data[0].account.secret_question_1) return "Secret question not found"
+            secretQuestion1() {
+                if (!DB.application.config.data[0].account.secretQuestion1) return "Secret question not found"
 
                 const expanded = {}
                 expanded["lastName_first_kissed"] = "What is the first name of the person you first kissed?"
@@ -133,7 +133,7 @@
                 expanded["wedding_reception"] = "What is the name of the plac eyour wedding reception was held?"
                 expanded["city_sibling_live"] = "In what city or town does your nearest sibling live?"
 
-                return expanded[DB.application.config.data[0].account.secret_question_1]
+                return expanded[DB.application.config.data[0].account.secretQuestion1]
             }
         },
         data() {

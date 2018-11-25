@@ -2,7 +2,7 @@
     <c-layout navigationKey="funding">
         <div class="row">
             <div class="crowdfund-notice col-12 col-md-6 offset-md-3" v-if="!$store.state.application.account.settings.client.hide_crowdfund_game_notice" style="text-align: center; width: 100%; margin-top: 30px; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
-                <c-button class="btn-close" @click="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_crowdfund_game_notice', true)">
+                <c-button class="btn-close" @click="$store.commit('application/updateClientSettings', 'hide_crowdfund_game_notice', true)">
                     <i class="fas fa-times"></i>
                 </c-button>
 
@@ -71,7 +71,7 @@ export default {
             const result = []
 
             result.push({
-                type: 'trending_projects_row',
+                type: 'trendingProjects_row',
                 data: {
                     title: 'Trending Crowdfunds',
                     options: {
@@ -84,12 +84,12 @@ export default {
                             },
                         }
                     },
-                    projects: this.$store.state.funding.trending_projects || []
+                    projects: this.$store.state.funding.trendingProjects || []
                 }
             })
 
             result.push({
-                type: 'trending_projects_row',
+                type: 'trendingProjects_row',
                 data: {
                     title: 'Top Game Ideas',
                     options: {
@@ -107,7 +107,7 @@ export default {
             })
 
             result.push({
-                type: 'trending_projects_row',
+                type: 'trendingProjects_row',
                 data: {
                     title: 'Top Content Proposals',
                     options: {
@@ -125,7 +125,7 @@ export default {
             })
 
             result.push({
-                type: 'trending_projects_row',
+                type: 'trendingProjects_row',
                 data: {
                     title: 'Top Item Proposals',
                     options: {
@@ -143,7 +143,7 @@ export default {
             })
 
             result.push({
-                type: 'trending_projects_row',
+                type: 'trendingProjects_row',
                 data: {
                     title: 'Most Popular Games',
                     options: {

@@ -117,7 +117,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Secret Question #1</label>
-                                                    <select id="secret_question_1" name="secret_question_1" class="form-control" v-model="account.secret_question_1">
+                                                    <select id="secretQuestion1" name="secretQuestion1" class="form-control" v-model="account.secretQuestion1">
                                                         <option value="" selected>Choose Secret Question</option>
                                                         <option value="lastName_first_kissed">What is the first name of the person you first kissed?</option>
                                                         <option value="firstName_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
@@ -131,7 +131,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Secret Question #2</label>
-                                                    <select id="secret_question_2" name="secret_question_2" class="form-control" v-model="account.secret_question_2">
+                                                    <select id="secretQuestion2" name="secretQuestion2" class="form-control" v-model="account.secretQuestion2">
                                                         <option value="" selected>Choose Secret Question</option>
                                                         <option value="lastName_first_kissed">What is the first name of the person you first kissed?</option>
                                                         <option value="firstName_favorite_aunt_uncle">What is the first name of the your favorite aunt or uncle?</option>
@@ -288,8 +288,8 @@ export default {
                 email: '',
                 password: '',
                 repeat_password: '',
-                secret_question_1: '',
-                secret_question_2: '',
+                secretQuestion1: '',
+                secretQuestion2: '',
                 secret_answer_1: '',
                 secret_answer_2: '',
                 agreement: false,
@@ -300,8 +300,8 @@ export default {
                 // email: 'eric@muyser.com',
                 // password: '1234',
                 // repeat_password: '1234',
-                // secret_question_1: 'firstName_favorite_aunt_uncle',
-                // secret_question_2: 'firstName_favorite_aunt_uncle',
+                // secretQuestion1: 'firstName_favorite_aunt_uncle',
+                // secretQuestion2: 'firstName_favorite_aunt_uncle',
                 // secret_answer_1: 'larry',
                 // secret_answer_2: 'larry',
                 // agreement: true,
@@ -366,9 +366,9 @@ export default {
                 const passphraseOriginal = this.passphrase.join(' ')
                 const passphraseVerification = this.repeatPassphrase.join(' ')
 
-                if (this.account.secret_question_1
+                if (this.account.secretQuestion1
                     && this.account.secret_answer_1
-                    && this.account.secret_question_2
+                    && this.account.secretQuestion2
                     && this.account.secret_answer_2
                     && this.account.password
                     && this.account.repeat_password
@@ -386,9 +386,9 @@ export default {
                             password: this.account.password,
                             passphrase: passphraseOriginal,
                             encrypt_passphrase: this.account.encrypt_passphrase,
-                            secret_question_1: this.account.secret_question_1,
+                            secretQuestion1: this.account.secretQuestion1,
                             secret_answer_1: this.account.secret_answer_1,
-                            secret_question_2: this.account.secret_question_2,
+                            secretQuestion2: this.account.secretQuestion2,
                             secret_answer_2: this.account.secret_answer_2
                         }).then((res) => {
                             this.finishedStep = 2;
@@ -410,13 +410,13 @@ export default {
                     if (this.account.password !== this.account.repeat_password) {
                         this.errors.push('Passwords must match.')
                     }
-                    if (!this.account.secret_question_1) {
+                    if (!this.account.secretQuestion1) {
                         this.errors.push('Secret Question 1 required.')
                     }
                     if (!this.account.secret_answer_1) {
                         this.errors.push('Secret Answer 1 required.')
                     }
-                    if (!this.account.secret_question_2) {
+                    if (!this.account.secretQuestion2) {
                         this.errors.push('Secret Question 2 required.')
                     }
                     if (!this.account.secret_answer_2) {

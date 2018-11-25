@@ -53,7 +53,7 @@
         "inventory_list": [4, 6, 5, 7],
         "offers_list": [1, 2, 3, 4],
         "tags": [],
-        "system_tags": ["special", "trending"]
+        "systemTags": ["special", "trending"]
     },
     {
         "id": 2,
@@ -102,7 +102,7 @@
         "inventory_list": [4, 1, 3, 4, 5],
         "offers_list": [4, 6, 1, 2],
         "tags": [],
-        "system_tags": ["trending"]
+        "systemTags": ["trending"]
     },
     {
         "id": 3,
@@ -151,7 +151,7 @@
         "inventory_list": [4, 1, 3, 4, 5],
         "offers_list": [4, 6, 1, 2],
         "tags": [],
-        "system_tags": ["epic"]
+        "systemTags": ["epic"]
     },
     {
         "id": 4,
@@ -201,7 +201,7 @@
         "inventory_list": [4, 1, 3, 4, 5],
         "offers_list": [4, 6, 1, 2],
         "tags": [],
-        "system_tags": ["mythic", "legendary"]
+        "systemTags": ["mythic", "legendary"]
     },
     {
         "id": 5,
@@ -251,7 +251,7 @@
         "inventory_list": [4, 1, 3, 4, 5],
         "offers_list": [4, 6, 1, 2],
         "tags": [],
-        "system_tags": ["specials"]
+        "systemTags": ["specials"]
     },
     {
         "id": 6,
@@ -301,7 +301,7 @@
         "inventory_list": [4, 1, 3, 4, 5],
         "offers_list": [4, 6, 1, 2],
         "tags": [],
-        "system_tags": ["extremely_rare"]
+        "systemTags": ["extremely_rare"]
     },
     {
         "id": 7,
@@ -351,7 +351,7 @@
         "inventory_list": [4, 1, 3, 4, 5],
         "offers_list": [4, 6, 1, 2],
         "tags": [],
-        "system_tags": ["upcoming"]
+        "systemTags": ["upcoming"]
     },
     {
         "id": 8,
@@ -396,7 +396,7 @@
         "inventory_list": ["4", "6", "5", "7"],
         "offers_list": ["1", "2", "3", "4"],
         "tags": [],
-        "system_tags": ["discount"]
+        "systemTags": ["discount"]
     },
     {
         "id": 9,
@@ -425,7 +425,7 @@
         "inventory_list": [1, 2, 3, 4, 5, 6, 7, 8, 9],
         "offers_list": [4, 6, 1, 2],
         "tags": [],
-        "system_tags": ["trending"]
+        "systemTags": ["trending"]
     },
     {
         "id": 10,
@@ -454,7 +454,7 @@
         "inventory_list": [7, 8, 9, 10, 11, 12],
         "offers_list": [4, 6, 1, 2],
         "tags": [],
-        "system_tags": ["heroic"]
+        "systemTags": ["heroic"]
     },
     {
         "id": 11,
@@ -483,7 +483,7 @@
         "inventory_list": [7, 8, 9, 10, 11, 12],
         "offers_list": [4, 6, 1, 2],
         "tags": [],
-        "system_tags": ["discount"]
+        "systemTags": ["discount"]
     },
     {
         "id": 12,
@@ -511,7 +511,7 @@
         "inventory_list": [7, 8, 9, 10, 11, 12],
         "offers_list": [4, 6, 1, 2],
         "tags": [],
-        "system_tags": ["popular"]
+        "systemTags": ["popular"]
     },
     {
         "id": 13,
@@ -539,7 +539,7 @@
         "inventory_list": [7, 8, 9, 10, 11, 12],
         "offers_list": [4, 6, 1, 2],
         "tags": [],
-        "system_tags": []
+        "systemTags": []
     },
     {
         "id": 14,
@@ -565,6 +565,6 @@
         "inventory_list": [7, 8, 9, 10, 11, 12],
         "offers_list": [4, 6, 1, 2],
         "tags": [],
-        "system_tags": []
+        "systemTags": []
     }
 ]

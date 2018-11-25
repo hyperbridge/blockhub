@@ -83,7 +83,7 @@
           "downloads": 20,
           "price": 0,
           "old_price": 0,
-          "system_tags": [ "game", "new" ],
+          "systemTags": [ "game", "new" ],
           "author": "0x0",
           "developerTags": [ "adventure" ],
           "plans": [
@@ -93,7 +93,7 @@
           ],
           "meta": { "revision": 0, "created": 1542265778146, "version": 0 },
           "content": "<h2>An adventure of a lifetime...</h2>\n<p>Any new features or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.</p><p>Our store is hosted on Shopify Inc. They provide us with the online e-commerce platform that allows us to sell our products and services to you.</p> IMAGE LIST",
-          "frequently_traded_assets": [],
+          "frequentlyTradedAssets": [],
           "rating": [
             { "name": "Game", "number": 0 },
             { "name": "Developer", "number": 0 },

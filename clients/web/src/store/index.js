@@ -205,10 +205,10 @@ window.BlockHub.importSeedData = () => {
 
     DB.application.config.data[0].account.notifications = seed.notifications
     DB.application.config.data[0].updates = seed.updates
-    DB.marketplace.config.data[0].curator_reviews = seed.curator_reviews
+    DB.marketplace.config.data[0].curatorReviews = seed.curatorReviews
     DB.marketplace.config.data[0].realms = seed.realms
     DB.marketplace.config.data[0].collections = seed.collections
-    DB.marketplace.config.data[0].game_series = seed.game_series
+    DB.marketplace.config.data[0].gameSeries = seed.gameSeries
     DB.marketplace.config.data[0].bounties = seed.bounties
 
     DB.marketplace.assets.data = seed.assets
@@ -232,18 +232,18 @@ window.BlockHub.resetSeedData = () => {
 
     DB.application.config.data[0].account.notifications = []
     DB.marketplace.config.data[0].updates = []
-    DB.marketplace.config.data[0].curator_reviews = []
+    DB.marketplace.config.data[0].curatorReviews = []
     DB.marketplace.config.data[0].productNews = []
     DB.marketplace.config.data[0].realms = []
     DB.marketplace.config.data[0].collections = []
-    DB.marketplace.config.data[0].game_series = []
+    DB.marketplace.config.data[0].gameSeries = []
     DB.marketplace.config.data[0].bounties = []
 
     DB.marketplace.products.data = []
     DB.marketplace.assets.data = []
     DB.marketplace.posts.data = []
 
-    DB.funding.config.data[0].trending_projects = []
+    DB.funding.config.data[0].trendingProjects = []
     DB.funding.projects.data = []
 
     store.dispatch('marketplace/updateState')
@@ -369,8 +369,8 @@ const monitorSimulatorMode = () => {
 
     // Start out with some decent amount of content
     if (!simulatorInitialized) {
-        store.state.marketplace.trending_projects = seed.trending_projects
-        store.state.marketplace.curator_reviews = seed.curator_reviews.slice(seed.curator_reviews.length / 2)
+        store.state.marketplace.trendingProjects = seed.trendingProjects
+        store.state.marketplace.curatorReviews = seed.curatorReviews.slice(seed.curatorReviews.length / 2)
         store.state.marketplace.posts = seed.posts.slice(seed.posts.length / 2)
         store.state.marketplace.products = seed.products.slice(seed.products.length / 2)
         store.state.marketplace.assets = seed.assets.slice(seed.assets.length / 2)
@@ -390,8 +390,8 @@ const monitorSimulatorMode = () => {
     const targets = [
         [store.state.application.account.notifications, seed.notifications],
         [store.state.application.account.wallets, seed.wallets],
-        [store.state.marketplace.trending_projects, seed.trending_projects],
-        [store.state.marketplace.curator_reviews, seed.curator_reviews],
+        [store.state.marketplace.trendingProjects, seed.trendingProjects],
+        [store.state.marketplace.curatorReviews, seed.curatorReviews],
         [store.state.marketplace.productNews, seed.productNews],
         [store.state.marketplace.assets, seed.assets],
         [store.state.marketplace.products, seed.products],

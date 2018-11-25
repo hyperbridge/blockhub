@@ -37,7 +37,7 @@
                             Use MetaMask
                         </c-checkbox>
 
-                        <div class="col-12 margin-top-30 margin-bottom-30" v-if="useMetamask && !ethereum_connected" style="text-align: center; width: 100%">
+                        <div class="col-12 margin-top-30 margin-bottom-30" v-if="useMetamask && !ethereumConnected" style="text-align: center; width: 100%">
                             <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en">
                                 <img src="/static/img/metamask.png" style="max-width: 350px;margin: 0 auto" />
                             </a>
@@ -47,7 +47,7 @@
                             <p>The BlockHub desktop client is the recommended way to load up on tokens, but you can also purchase using the MetaMask web wallet. Come back to this page within BlockHub, or when you've installed MetaMask.</p>
                         </div>
 
-                        <div class="col-12 margin-top-30 margin-bottom-30" v-if="useMetamask && ethereum_connected && !ethereum_unlocked" style="text-align: center; width: 100%; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
+                        <div class="col-12 margin-top-30 margin-bottom-30" v-if="useMetamask && ethereumConnected && !ethereumUnlocked" style="text-align: center; width: 100%; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
                             <img src="/static/img/metamask-logo.png" style="max-width: 150px;margin: 0 auto;opacity: 0.3; filter: grayscale(1);" />
 
                             <br /><br />
@@ -59,7 +59,7 @@
                             <c-button class="c-btn-lg " @click="unlockWallet">Unlock Wallet</c-button>
                         </div>
                         
-                        <div class="col-12 margin-top-30 margin-bottom-30" v-if="useMetamask && ethereum_connected && ethereum_unlocked" style="text-align: center; width: 100%; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
+                        <div class="col-12 margin-top-30 margin-bottom-30" v-if="useMetamask && ethereumConnected && ethereumUnlocked" style="text-align: center; width: 100%; margin-bottom: 30px; padding:20px;border: 3px dashed rgba(0,0,0,0.1); border-radius: 7px;background: rgba(0,0,0,0.2)">
                             <img src="/static/img/metamask-logo.png" style="max-width: 150px;margin: 0 auto;" />
 
                             <br /><br />
@@ -104,12 +104,12 @@ export default {
             if (!this.useMetamask) return
 
             if (this.desktopMode || (typeof web3 !== 'undefined' && web3.currentProvider.isMetaMask === true)) {
-                this.ethereum_connected = true
+                this.ethereumConnected = true
             }
 
             if (typeof window.web3 !== 'undefined') {
                 window.web3.eth.getAccounts((err, accounts) => {
-                    this.ethereum_unlocked = accounts.length > 0
+                    this.ethereumUnlocked = accounts.length > 0
                     this.purchaseAddress = accounts[0]
                 })
             }
@@ -120,8 +120,8 @@ export default {
         return {
             purchaseAddress: null,
             useMetamask: false,
-            ethereum_connected: false,
-            ethereum_unlocked: false,
+            ethereumConnected: false,
+            ethereumUnlocked: false,
             errors: []
         }
     },

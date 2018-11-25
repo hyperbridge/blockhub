@@ -55,7 +55,7 @@
                 "additional_notes": "Requires Steam activation and broadband internet connection for Multiplayer and SnapMap"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "sale",
             "new",
             "featured",
@@ -67,7 +67,7 @@
         "downloads": 0,
         "plans": [
         ],
-        "frequently_traded_assets": [
+        "frequentlyTradedAssets": [
         ],
         "sale_box": {
             "title": null,

@@ -342,7 +342,7 @@ export const init = (store, router) => {
     console.log('[Bridge] Initializing')
 
     on('promptPasswordRequest', (data) => {
-        DB.application.config.data[0].account.secret_question_1 = data.secret_question_1
+        DB.application.config.data[0].account.secretQuestion1 = data.secretQuestion1
     })
 
     sendCommand('init', 1)

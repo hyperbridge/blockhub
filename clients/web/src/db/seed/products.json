@@ -119,7 +119,7 @@
                 "special_info": "ATI® RADEON® HD 6000 Series"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "new",
             "featured",
             "upcoming"
@@ -127,7 +127,7 @@
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 4,
             "items": [
@@ -312,14 +312,14 @@
                 "video_card": "OpenGL 3.0+ support (2.1 with ARB extensions acceptable)"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "upcoming",
             "trending"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -460,7 +460,7 @@
                 "additional_notes": "Requires Steam activation and broadband internet connection for Multiplayer and SnapMap"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "sale",
             "featured",
             "trending",
@@ -470,7 +470,7 @@
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 5,
             "items": [
@@ -573,14 +573,14 @@
                 "internet": "INTERNET CONNECTION REQUIRED FOR ONLINE GAMING AND GAME ACTIVATION"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "top_seller",
             "specials"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -782,14 +782,14 @@
                 "storage": "10 MB available space"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "new",
             "trending"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -931,14 +931,14 @@
                 "other": "INTERNET CONNECTION REQUIRED FOR ONLINE GAMING"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "trending",
             "top_seller"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -1058,14 +1058,14 @@
                 "sound": "DirectX 8.1 compatible sound card"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "sale",
             "specials"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -1168,13 +1168,13 @@
                 "additional": "Internet Connection required for multiplayer"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "upcoming"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -1307,7 +1307,7 @@
                 "sound_card": "DirectX compatble"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "sale",
             "new",
             "specials"
@@ -1315,7 +1315,7 @@
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -1454,13 +1454,13 @@
                 "sound_card": "Creative SOUND BLASTER Zx"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "sale"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -1619,14 +1619,14 @@
                 "additional_notes": "External mouse or compatible Xbox controller required"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "top_seller",
             "specials"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 5,
             "items": [
@@ -1746,14 +1746,14 @@
                 "sound": "any OS compatible"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "new",
             "trending"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -1873,14 +1873,14 @@
                 "directx": "Microsoft® DirectX® 11.0"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "sale",
             "new"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -1981,13 +1981,13 @@
                 "os": "win"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "specials"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2067,13 +2067,13 @@
                 "sound": "Windows compatible sound card"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "sale"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2169,13 +2169,13 @@
                 "storage": "10 GB available space"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "sale"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2274,13 +2274,13 @@
                 "graphics": "NVIDIA GeForce 6 series, ATI 1300XT series"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "sale"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2388,13 +2388,13 @@
                 "sound": "DirectX® 9.0c-compatible"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "new"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2509,14 +2509,14 @@
                 "other": "3D Vision-Ready Display"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "upcoming",
             "trending"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2653,13 +2653,13 @@
                 "special_info": "*    All MacBooks released since Early 2016"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "featured"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2825,14 +2825,14 @@
                 "hard_drive": "25 GB HD space"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "sale",
             "frontpage"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -2959,13 +2959,13 @@
                 "opengl": "2.1"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "specials"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -3074,14 +3074,14 @@
                 "other": "Internet connection required"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "specials",
             "sale"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -3223,13 +3223,13 @@
                 "disk_space": "Around 7 GB"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "sale"
         ],
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 3.5,
             "items": [
@@ -3365,7 +3365,7 @@
                 "special_info": "ATI® RADEON® HD 6000 Series"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "new",
             "featured",
             "upcoming"
@@ -3373,7 +3373,7 @@
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 4,
             "items": [
@@ -3470,7 +3470,7 @@
                 "special_info": "ATI® RADEON® HD 6000 Series"
             }
         ],
-        "system_tags": [
+        "systemTags": [
             "new",
             "featured",
             "upcoming"
@@ -3478,7 +3478,7 @@
         "type": "game",
         "downloads": 0,
         "plans": [],
-        "frequently_traded_assets": [],
+        "frequentlyTradedAssets": [],
         "rating": {
             "overall": 0,
             "items": [

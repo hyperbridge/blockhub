@@ -14,7 +14,7 @@
                     <a class="maximize" href="#" @click.prevent="maximizeWindow"></a>
                 </div>
                 <div v-if="desktopMode && operatingSystem === 'windows'">
-                    <a class="app-header__bar-left-link margin-right-0 margin-left-10" href="javascript:;" data-action="fixedpanel-toggle" v-if="!is_locked">
+                    <a class="app-header__bar-left-link margin-right-0 margin-left-10" href="javascript:;" data-action="fixedpanel-toggle" v-if="!isLocked">
                         <span class="fas fa-bars"></span>
                     </a>
                 </div>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="app-header__shadow"></div>
-            <a class="app-header__bar-center" :href="is_locked ? '#' : '#/'">
+            <a class="app-header__bar-center" :href="isLocked ? '#' : '#/'">
                 <c-loading-logo :isLoading="isLoader" />
             </a>
             <div class="app-header__bar-right">
@@ -41,7 +41,7 @@
                     <a class="close_w" href="#" @click.prevent="closeWindow"></a>
                 </div>
                 <div v-else>
-                    <a class="app-header__bar-left-link" href="javascript:;" data-action="fixedpanel-toggle" v-if="!is_locked">
+                    <a class="app-header__bar-left-link" href="javascript:;" data-action="fixedpanel-toggle" v-if="!isLocked">
                         <span class="fas fa-bars"></span>
                     </a>
                 </div>
@@ -63,7 +63,7 @@
                 <nav class="horizontal-navigation app-header__nav-left">
                     <button class="btn btn-light btn--icon" data-action="horizontal-show"><span class="fa fa-bars"></span> Toggle navigation</button>
                     <ul>
-                        <li class="app-header__create-account-btn" v-if="desktopMode && !signedIn && !is_locked">
+                        <li class="app-header__create-account-btn" v-if="desktopMode && !signedIn && !isLocked">
                             <a href="#/account/signup" class="">
                                 <span class="text">CREATE ACCOUNT</span> <span class="fa fa-user-plus"></span>
                             </a>
@@ -122,7 +122,7 @@
                                 <template slot="title">
                                     <div class="__title">
                                         <i class="fa fa-user"></i>
-                                        {{ currentProfile && currentProfile.name }}
+                                        {{ activeProfile && activeProfile.name }}
                                     </div>
                                 </template>
                                 <ul class="item-dropdown">
@@ -138,14 +138,14 @@
                                             My Wallets
                                         </a>
                                     </li>
-                                    <li v-if="currentProfile">
-                                        <a :href="`#/profile/${currentProfile.address}`">
+                                    <li v-if="activeProfile">
+                                        <a :href="`#/profile/${activeProfile.address}`">
                                             <i class="fas fa-user"></i>
                                             View Public Profile
                                         </a>
                                     </li>
-                                    <li v-if="signedIn && currentProfile" v-darklaunch="'CONTACTS'">
-                                        <a :href="`#/profile/${currentProfile.address}/contacts`">
+                                    <li v-if="signedIn && activeProfile" v-darklaunch="'CONTACTS'">
+                                        <a :href="`#/profile/${activeProfile.address}/contacts`">
                                             <i class="fas fa-users"></i>
                                             Contacts
                                         </a>
@@ -179,19 +179,19 @@
 
                             </c-dropdown>
                         </li>
-                        <li v-if="!signedIn && !is_locked">
+                        <li v-if="!signedIn && !isLocked">
                             <a href="#" @click="$store.commit('application/activateModal', 'login')">
                                 <span class="icon fa fa-sign-out-alt"></span>
                                 <span class="text">Sign In</span>
                             </a>
                         </li>
-                        <li v-if="!is_locked && languages" class="ml-3" v-darklaunch="'LANGUAGES'">
-                            <c-language-dropdown :current_language="current_language" :languages="languages" @change="selectLanguages" />
+                        <li v-if="!isLocked && languages" class="ml-3" v-darklaunch="'LANGUAGES'">
+                            <c-language-dropdown :currentLanguage="currentLanguage" :languages="languages" @change="selectLanguages" />
                         </li>
-                        <li v-if="!is_locked && currencies" class="ml-2" v-darklaunch="'CURRENCIES'">
-                            <c-currency-dropdown :current_currency="current_currency" :currencies="currencies" @change="selectCurrency" />
+                        <li v-if="!isLocked && currencies" class="ml-2" v-darklaunch="'CURRENCIES'">
+                            <c-currency-dropdown :currentCurrency="currentCurrency" :currencies="currencies" @change="selectCurrency" />
                         </li>
-                        <li v-if="!is_locked">
+                        <li v-if="!isLocked">
                             <a href="#/help">
                                 <span class="icon fa fa-question-circle"></span>
                                 <span class="text">Help</span>
@@ -224,7 +224,7 @@ export default {
         languages() {
             return this.$store.state.application.languages
         },
-        current_language() {
+        currentLanguage() {
             // Try to set based on browser language
             if (!this.account.language || !this.account.language.code)
                 this.account.language = this.languages.find((el) => !!(navigator.language || navigator.userLanguage).toLowerCase().includes(el.code.toLowerCase()))
@@ -238,7 +238,7 @@ export default {
         currencies() {
             return this.$store.state.application.currencies
         },
-        current_currency() {
+        currentCurrency() {
             // Try to set currency based on language
             if (!this.account.currency || !this.account.currency.code)
                 this.account.currency = this.currencies.find((el) => el.country && !!el.country.includes(this.account.language.code))
@@ -252,10 +252,10 @@ export default {
         account() {
             return this.$store.state.application.account
         },
-        currentProfile() {
+        activeProfile() {
             return this.$store.getters['application/profile'];
         },
-        is_locked() {
+        isLocked() {
             return this.$store.state.application.locked
         },
         is_loading() {

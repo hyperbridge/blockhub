@@ -98,10 +98,10 @@ export const getters = {
     },
     account: ({ account }, getters, { community: { profiles }}) => ({
         ...account,
-        currentProfile: profiles[account.currentProfile],
+        activeProfile: profiles[account.activeProfile],
         profiles: account.idts.map(id => profiles[id])
     }),
-    profile: (state, { account }) => account.currentProfile
+    profile: (state, { account }) => account.activeProfile
 }
 
 export const actions = {
@@ -149,7 +149,7 @@ export const actions = {
     setEditorMode(store, payload) {
         store.commit('setEditorMode', payload)
 
-        if (!store.state.account.settings.client.hide_editor_welcome_modal) {
+        if (!store.state.account.settings.client.hideEditorWelcomeModal) {
             store.commit('activateModal', 'editor-welcome')
         }
     },
@@ -250,10 +250,10 @@ export const actions = {
     sendCommand(store, { key, data }) {
         Bridge.sendCommand(key, data).then(() => {})
     },
-    createTradeURL({ commit, state }) {
+    createTradeUrl({ commit, state }) {
         // async call => delete previous trade url
         // state.account.tradeURLId
-        commit('createTradeURL', getId());
+        commit('createTradeUrl', getId());
     }
 }
 
@@ -325,7 +325,7 @@ export const mutations = {
 
         })
     },
-    createTradeURL(state, id) {
+    createTradeUrl(state, id) {
         state.account.tradeURLId = id;
     },
     signIn(state, payload) {
@@ -414,13 +414,13 @@ export const mutations = {
     },
     convertCurator(state, payload) {
         Bridge.sendCommand('createCuratorRequest', payload.profile).then((data) => {
-            payload.profile.curator_id = data
-            state.curator_mode = true
+            payload.profile.curatorId = data
+            state.curatorMode = true
 
             // TODO: just redirect here?
         })
     },
-    UPDATE_CLIENT_SETTINGS (state, property, value) {
+    updateClientSettings (state, property, value) {
         value = value || !state.account.settings.client[property]
 
         Vue.set(state.account.settings.client, property, value)

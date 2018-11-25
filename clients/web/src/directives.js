@@ -1,12 +1,12 @@
-import Vue from 'vue';
-import store from './store';
-import axios from 'axios';
+import Vue from 'vue'
+import store from './store'
+import axios from 'axios'
 
 Vue.directive('focus', {
     inserted(el) {
-        el.focus();
+        el.focus()
     }
-});
+})
 
 function isVisible(availableFlags, userFlags, code, variant, data) {
     return availableFlags.map(flag => flag.code).includes(code) && userFlags.map(flag => flag.enabled ? flag.code : null).includes(code)
@@ -41,48 +41,48 @@ Vue.directive('darklaunch', {
 
 Vue.directive('click-outside', {
     bind(el, binding, vnode) {
-        const { expression, arg } = binding;
-        const clickOutside = Symbol.for('clickOutside');
+        const { expression, arg } = binding
+        const clickOutside = Symbol.for('clickOutside')
 
         el[clickOutside] = evt => {
             if (arg && arg == 'self') {
-                vnode.context[expression](evt);
+                vnode.context[expression](evt)
             } else if (!(el == evt.target || el.contains(evt.target))) {
-                vnode.context[expression](evt);
+                vnode.context[expression](evt)
             }
         }
 
-        document.body.addEventListener('click', el[clickOutside]);
+        document.body.addEventListener('click', el[clickOutside])
     },
     unbind(el) {
-        document.body.removeEventListener('click', el[Symbol.for('clickOutside')]);
+        document.body.removeEventListener('click', el[Symbol.for('clickOutside')])
     }
-});
+})
 
 Vue.directive('debounce', {
     bind(el, binding, vnode) {
-        const { arg: event, expression } = binding;
-        const { context } = vnode;
+        const { arg: event, expression } = binding
+        const { context } = vnode
 
-        const delay = 250;
-        let timeout = null;
+        const delay = 250
+        let timeout = null
 
         el.__debounce__ = e => {
-            clearTimeout(timeout);
+            clearTimeout(timeout)
             setTimeout(() => {
                 console.log(vnode)
                 console.log(binding)
                 console.log(expression)
-                context[expression](e);
-            }, delay);
-        };
+                context[expression](e)
+            }, delay)
+        }
 
-        vnode.componentInstance.$on('customClick', el.__debounce__);
+        vnode.componentInstance.$on('customClick', el.__debounce__)
     },
     unbind(el, { arg: event }, vnode) {
-        vnode.componentInstance.$off(event, el.__debounce__);
+        vnode.componentInstance.$off(event, el.__debounce__)
     }
-});
+})
 
 Vue.directive('translate', {
     bind(el, binding, vnode) {
@@ -90,13 +90,13 @@ Vue.directive('translate', {
         console.log(binding)
         console.log(vnode)
 
-        const { textContent } = el;
-        const { language } = navigator;
+        const { textContent } = el
+        const { language } = navigator
 
-        el.textContent = 'Translating...';
+        el.textContent = 'Translating...'
 
         setTimeout(() => {
-            el.textContent = 'Translated';
-        }, 2000);
+            el.textContent = 'Translated'
+        }, 2000)
     }
-});
+})

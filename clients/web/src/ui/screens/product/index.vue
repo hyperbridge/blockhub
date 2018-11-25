@@ -447,7 +447,7 @@
             },
             closeModal() {
                 this.$store.state.marketplace.firstProduct = false
-                this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_product_intro_modal', true)
+                this.$store.commit('application/updateClientSettings', 'hide_product_intro_modal', true)
             },
             // showImporter() {
             //     this.importing = true
@@ -544,7 +544,7 @@
 
                     this.product.type = 'game'
                     //this.product.rating.overall = 0
-                    this.product.system_tags = ['imported']
+                    this.product.systemTags = ['imported']
                     this.product.developerTags = data.tags
                     this.product.name = data.title
                     this.product.release_date = data.releaseDate

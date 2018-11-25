@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Gym With Tim",
-        "system_tags": [],
+        "systemTags": [],
         "images": {
             "preview": []
         },
@@ -328,7 +328,7 @@
         "id": 2,
         "name": "Blockcraft",
         "status": "pending",
-        "system_tags": [
+        "systemTags": [
             "trending"
         ],
         "images": {
@@ -359,7 +359,7 @@
         "id": 3,
         "name": "Lodge Builder 2000",
         "status": "pending",
-        "system_tags": [
+        "systemTags": [
             "trending"
         ],
         "images": {
@@ -436,7 +436,7 @@
         "id": 4,
         "name": "Desert canyon",
         "status": "approved",
-        "system_tags": [
+        "systemTags": [
             "trending"
         ],
         "target_type": "product",
@@ -471,7 +471,7 @@
         "target_id": 26,
         "status": "approved",
         "name": "WoW Classic",
-        "system_tags": [
+        "systemTags": [
             "trending"
         ],
         "description": "Bring back Classic servers, for players who prefer the game without expansions.",

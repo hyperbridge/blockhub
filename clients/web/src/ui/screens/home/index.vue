@@ -208,11 +208,11 @@ export default {
 
             if (isVisible(this.$store.state.application.darklaunchFlags, this.$store.state.application.account.darklaunchFlags, 'CURATORS')) {
                 result.push({
-                    type: 'curator_reviews',
+                    type: 'curatorReviews',
                     data: {
                         title: 'From our curators',
-                        ref: 'curator_reviews_sl',
-                        swiper: this.$refs.curator_reviews_sl && this.$refs.curator_reviews_sl.swiper,
+                        ref: 'curatorReviews_sl',
+                        swiper: this.$refs.curatorReviews_sl && this.$refs.curatorReviews_sl.swiper,
                         options: {
                             slidesPerView: 3,
                             spaceBetween: 0,
@@ -223,7 +223,7 @@ export default {
                                 },
                             }
                         },
-                        reviews: this.$store.state.marketplace.curator_reviews
+                        reviews: this.$store.state.marketplace.curatorReviews
                     }
                 })
             }
@@ -257,7 +257,7 @@ export default {
             })
 
             result.push({
-                type: 'trending_projects_row',
+                type: 'trendingProjects_row',
                 data: {
                     title: 'Trending Crowdfunds',
                     options: {
@@ -270,14 +270,14 @@ export default {
                             },
                         }
                     },
-                    projects: this.$store.state.funding.trending_projects
+                    projects: this.$store.state.funding.trendingProjects
                 }
             })
 
             result.push({
-                type: 'game_series',
+                type: 'gameSeries',
                 data: {
-                    list: this.$store.state.marketplace.game_series,
+                    list: this.$store.state.marketplace.gameSeries,
                     showNumber: 3
                 }
             })
@@ -294,7 +294,7 @@ export default {
     methods: {
         closeModal() {
             this.showWelcomeModal = false
-            this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hideWelcomeModal', true)
+            this.$store.commit('application/updateClientSettings', 'hideWelcomeModal', true)
         }
     },
     mounted() {

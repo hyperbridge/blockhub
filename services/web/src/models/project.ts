@@ -42,7 +42,7 @@ export default class Project extends Model {
 
         // "id": 1,
         // "name": "Gym With Tim",
-        // "system_tags": [],
+        // "systemTags": [],
         // "images": {
         //     "preview": []
         // },

@@ -358,7 +358,7 @@
                 const { phrase, selectedSpecials, selectedGenres, selectedLanguages, price, communitySize, activeUsers } = this
                 const query = {}
                 if (phrase.length) query['name'] = { '$eq': phrase }
-                if (selectedSpecials.length) query['system_tags'] = { '$contains': selectedSpecials.map(tag => tag.value) }
+                if (selectedSpecials.length) query['systemTags'] = { '$contains': selectedSpecials.map(tag => tag.value) }
                 if (selectedGenres.length) query['developerTags'] = { '$contains': selectedGenres.map(tag => tag.name) }
                 // if (selectedLanguages.length) query['language_support'] = {
                 //     '$contains': { name: selectedLanguages.map(lang => lang.name) }

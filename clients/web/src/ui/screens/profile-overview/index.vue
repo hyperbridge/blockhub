@@ -15,7 +15,7 @@
             </div>
             <div class="col-12" v-if="!signedIn && !$store.state.application.account.settings.client.hide_profile_signup">
                 <div class="profile__user-notify">
-                    <c-button class="btn-close" @click="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_profile_signup', true)">
+                    <c-button class="btn-close" @click="$store.commit('application/updateClientSettings', 'hide_profile_signup', true)">
                         <i class="fas fa-times"></i>
                     </c-button>
                     <h3>Create your BlockHub Profile</h3>

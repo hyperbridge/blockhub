@@ -45,9 +45,9 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(['UPDATE_CLIENT_SETTINGS']),
+        ...mapMutations(['updateClientSettings']),
         updateClientSettings() {
-            this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'cookiePolicyAccepted');
+            this.$store.commit('application/updateClientSettings', 'cookiePolicyAccepted');
             this.show = false;
         },
         showPopup(){

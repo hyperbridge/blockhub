@@ -13,7 +13,7 @@
                 />
             </div>
             <c-button
-                @click="$store.dispatch('application/createTradeURL')"
+                @click="$store.dispatch('application/createTradeUrl')"
                 status="info"
                 icon_hide
             >
@@ -54,7 +54,7 @@
                 return this.$store.getters['application/account'];
             },
             profile() {
-                return this.account.currentProfile;
+                return this.account.activeProfile;
             },
             tradeURL() {
                 const { tradeURLId } = this.account;

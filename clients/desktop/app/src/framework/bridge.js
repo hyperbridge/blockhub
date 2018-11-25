@@ -357,7 +357,7 @@ export const getAllProducts = async () => {
     })
 }
 
-// Do same as Developer, but just save as curator_id instead
+// Do same as Developer, but just save as curatorId instead
 export const createCuratorRequest = async (identity) => {
     return new Promise(async (resolve, reject) => {
         const web3 = local.wallet.web3
@@ -367,14 +367,14 @@ export const createCuratorRequest = async (identity) => {
 
         let watcher = developerContract.DeveloperCreated().watch(function (error, result) {
             if (!error) {
-                identity.curator_id = result.args.developerId.toNumber()
+                identity.curatorId = result.args.developerId.toNumber()
 
                 DB.save()
 
 
                 saveAccountFile().then()
 
-                return resolve(identity.curator_id)
+                return resolve(identity.curatorId)
             }
 
             return reject(error)
@@ -400,13 +400,13 @@ export const createCuratorRequest = async (identity) => {
                 let developerId = await marketplaceStorage.getUint(web3.sha3(web3._extend.utils.toHex("developer.developerMap") + identity.address.replace('0x', ''), { encoding: 'hex' }));
 
                 if (developerId && developerId.toNumber()) {
-                    identity.curator_id = developerId.toNumber()
+                    identity.curatorId = developerId.toNumber()
 
                     DB.save()
 
                     await saveAccountFile()
 
-                    return resolve(identity.curator_id)
+                    return resolve(identity.curatorId)
                 } else {
                     return reject(error.toString())
                 }
@@ -426,14 +426,14 @@ export const registerUsernameRequest = async (identity) => {
 
         let watcher = developerContract.DeveloperCreated().watch(function (error, result) {
             if (!error) {
-                identity.curator_id = result.args.developerId.toNumber()
+                identity.curatorId = result.args.developerId.toNumber()
 
                 DB.save()
 
 
                 saveAccountFile().then()
 
-                return resolve(identity.curator_id)
+                return resolve(identity.curatorId)
             }
 
             return reject(error)
@@ -772,9 +772,9 @@ export const setAccountRequest = async () => {
             console.log('private key', decryptedPrivateKey)
             account = {
                 address: account.address,
-                secret_question_1: account.secret_question_1,
+                secretQuestion1: account.secretQuestion1,
                 secret_answer_1: 'HIDDEN',
-                secret_question_2: account.secret_question_2,
+                secretQuestion2: account.secretQuestion2,
                 secret_answer_2: account.secret_answer_2,
                 passphrase: 'HIDDEN',
                 privateKey: 'HIDDEN',
@@ -794,9 +794,9 @@ export const setAccountRequest = async () => {
         } else {
             account = {
                 address: null,
-                secret_question_1: null,
+                secretQuestion1: null,
                 secret_answer_1: null,
-                secret_question_2: null,
+                secretQuestion2: null,
                 secret_answer_2: null,
                 passphrase: null,
                 privateKey: null,
@@ -966,9 +966,9 @@ export const deleteAccountRequest = async (data) => {
 
                 local.account = {
                     address: null,
-                    secret_question_1: null,
+                    secretQuestion1: null,
                     secret_answer_1: null,
-                    secret_question_2: null,
+                    secretQuestion2: null,
                     secret_answer_2: null,
                     passphrase: null,
                     privateKey: null,
@@ -1127,7 +1127,7 @@ export const setEnvironmentMode = async (environmentMode) => {
 }
 
 
-export const recoverPasswordRequest = async ({ secret_question_1, secret_answer_1, birthday }) => {
+export const recoverPasswordRequest = async ({ secretQuestion1, secret_answer_1, birthday }) => {
     return new Promise(async (resolve) => {
         let password = null
 
@@ -1156,7 +1156,7 @@ export const writeToClipboard = async (data) => {
     })
 }
 
-export const handleCreateAccountRequest = async ({ email, password, birthday, firstName, lastName, passphrase, encrypt_passphrase, secret_question_1, secret_answer_1, secret_question_2, secret_answer_2 }) => {
+export const handleCreateAccountRequest = async ({ email, password, birthday, firstName, lastName, passphrase, encrypt_passphrase, secretQuestion1, secret_answer_1, secretQuestion2, secret_answer_2 }) => {
     return new Promise(async (resolve) => {
         const wallet = await Wallet.create(passphrase, 0)
         const identity = await Wallet.create(passphrase, 10)
@@ -1164,8 +1164,8 @@ export const handleCreateAccountRequest = async ({ email, password, birthday, fi
         local.account = {
             ...local.account,
             address: wallet.address,
-            secret_question_1: secret_question_1,
-            secret_question_2: secret_question_2,
+            secretQuestion1: secretQuestion1,
+            secretQuestion2: secretQuestion2,
             encrypt_passphrase: encrypt_passphrase,
             passphrase: encrypt_passphrase ? encrypt(passphrase, password) : passphrase,
             privateKey: encrypt(wallet.privateKey, password),
@@ -1202,8 +1202,8 @@ export const handleCreateAccountRequest = async ({ email, password, birthday, fi
                 firstName: firstName,
                 lastName: lastName,
                 birthday: birthday,
-                secret_question_1: secret_question_1,
-                secret_question_2: secret_question_2,
+                secretQuestion1: secretQuestion1,
+                secretQuestion2: secretQuestion2,
                 current_identity: {
                     id: 10
                 },
@@ -1309,7 +1309,7 @@ export const runCommand = async (cmd, meta = {}) => {
                 if (local.account.passphrase) {
                     if (local.account.encrypt_passphrase && !local.password) {
                         // Desktop asks to prompt password
-                        await promptPasswordRequest({ secret_question_1: local.account.secret_question_1 })
+                        await promptPasswordRequest({ secretQuestion1: local.account.secretQuestion1 })
                     } else {
                         // Passphrase was already decrypted and not already set (incase reloading page)
                         if (!local.passphrase) {

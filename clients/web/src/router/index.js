@@ -12,11 +12,11 @@ const router = new Router({
         if (
             (to.name === 'Marketplace Asset Offers' && from.name === 'Marketplace Asset Offer') ||
             (to.name === 'Marketplace Asset Offer' && from.name === 'Marketplace Asset Offers')
-        ) return savedPosition;
+        ) return savedPosition
 
-        if (to.name === 'Search' && from.name === 'Search') return savedPosition;
+        if (to.name === 'Search' && from.name === 'Search') return savedPosition
 
-        return ({ y: 0 });
+        return ({ y: 0 })
     },
     linkActiveClass: 'is-active',
     routes: [
@@ -970,7 +970,7 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/not-found'], resolve)
         }
     ]
-});
+})
 
 router.afterEach((to, from) => {
     // Complete the animation of the route progress bar.

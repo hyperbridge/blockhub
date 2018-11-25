@@ -89,7 +89,7 @@
         },
         components: {
             SidebarMenu,
-            'c-page-heading': (resolve) => require(['@/ui/components/business/page_heading'], resolve),
+            'c-page-heading': (resolve) => require(['@/ui/components/business/page-heading'], resolve),
         },
         data() {
             return {

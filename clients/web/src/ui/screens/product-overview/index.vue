@@ -57,7 +57,7 @@
             <c-rating-block class="margin-bottom-20" :items="product.rating"
                             :parent_url="`#/product/${product.id}`" v-darklaunch="'RATINGS'" />
 
-            <c-frequently-traded-assets class="margin-bottom-20" :items="product.frequently_traded_assets"
+            <c-frequently-traded-assets class="margin-bottom-20" :items="product.frequentlyTradedAssets"
                                         :assetsUrl="`#/product/${product.id}/assets`" v-darklaunch="'ASSETS'" />
 
             <c-community-spotlight class="margin-bottom-20" :discussions="product.community.discussions"
