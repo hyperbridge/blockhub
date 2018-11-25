@@ -2,15 +2,15 @@ const { authenticate } = require('@feathersjs/authentication').hooks
 const populateProfile = require('../../hooks/populate-profile')
 
 const fillProject = function(project) {
-    project.images = {
-        "medium_tile": "https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"
-    }
+    // project.images = {
+    //     "medium_tile": "https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"
+    // }
 
-    project.funds = {
-        "currency": "USD",
-        "obtained": 7613,
-        "goal": 8500
-    }
+    // project.funds = {
+    //     "currency": "USD",
+    //     "obtained": 0,
+    //     "goal": 0
+    // }
 
     return project
 }
@@ -44,7 +44,7 @@ const create = function(options = {}) {
         // }
 
         // The authenticated account
-        const account = context.params.account
+        const account = context.params.user
 
         if (!account.id) {
             throw new Error('A project must have a account')
@@ -57,13 +57,14 @@ const create = function(options = {}) {
         }
 
         // The actual project text
-        const { name, description, about } = context.data
+        const { name, description, about, meta } = context.data
 
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
             name,
             description,
             about,
+            meta,
             //meta: context.data,
             // Set the account id
             ownerId: profile.id,
@@ -81,7 +82,7 @@ const validatePermission = function (options = {}) {
     return async context => {
         const { app, data } = context
 
-        const account = context.params.account
+        const account = context.params.user
 
         const project = await app.service('projects').get(data.id)
         const profile = await app.service('profiles').get(project.ownerId)
