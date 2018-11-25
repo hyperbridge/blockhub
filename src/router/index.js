@@ -981,48 +981,50 @@ router.afterEach((to, from) => {
 })
 
 export const Auth = {
-  loggedIn() {
-    return store.state.application.signed_in
-  },
-  accessGate(permission = false) {
-    const privileges = store.getters['application/privileges']
-    if (!permission) {
-      return true
+    loggedIn() {
+        return store.state.application.signed_in
+    },
+    accessGate(permission = false) {
+        const privileges = store.getters['application/privileges']
+        if (!permission) {
+            return true
+        }
+        return !!privileges && !!privileges.find(p => {
+            return p === permission
+        })
     }
-    return !!privileges && !!privileges.find(p => {
-      return p === permission
-    })
-  }
 }
 
 
 router.beforeEach((to, from, next) => {
-  $('body').addClass('screen-loading')
+    $('body').addClass('screen-loading')
 
-  if (Auth.loggedIn() && to.meta.auth === false) {
-      next({
-          path: '/',
-          query: { redirect: to.fullPath }
-      })
-      return
-  }
+    document.title = to.name + ' | BlockHub'
 
-  if (!Auth.loggedIn() && !!to.meta.auth) {
-    store.state.application.signed_in = false
+    if (Auth.loggedIn() && to.meta.auth === false) {
+        next({
+            path: '/',
+            query: { redirect: to.fullPath }
+        })
+        return
+    }
 
-    next({
-      name: 'Sign In',
-      query: { redirect: to.fullPath }
-    })
-    return
-  }
+    if (!Auth.loggedIn() && !!to.meta.auth) {
+        store.state.application.signed_in = false
 
-  if (!Auth.accessGate(to.meta.permission)) {
-    next('/')
-    throw new Error("Oops! You don't seem to have access to that page.")
-  }
+        next({
+            name: 'Sign In',
+            query: { redirect: to.fullPath }
+        })
+        return
+    }
 
-  next()
+    if (!Auth.accessGate(to.meta.permission)) {
+        next('/')
+        throw new Error("Oops! You don't seem to have access to that page.")
+    }
+
+    next()
 })
 
 // router.beforeEach((to, from, next) => {

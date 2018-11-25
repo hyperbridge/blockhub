@@ -83,11 +83,6 @@
   import ItemAddForm from './item-add-form.vue'
   import JsonView from './json-view.vue'
 
-  Array.prototype.rmIndex = function (index) {
-	  this.splice(index, 1);
-	  return this
-	};
-
   export default ArrayView = {
     name: 'ArrayView',
     props: ['parsedData'],
@@ -113,8 +108,12 @@
     },
 
     methods: {
+        rmIndex: function (arr, index) {
+            arr.splice(index, 1);
+            return arr
+        },
       delItem: function (parentDom, item, index) {
-        this.flowData = this.flowData.rmIndex(index);
+        this.flowData = this.rmIndex(this.flowData, index);
         if (this.hideMyItem[index]) this.hideMyItem[index] = false;
         this.$emit('input', this.flowData)
       },
