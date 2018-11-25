@@ -265,7 +265,7 @@
         <!-- <a id="powered-by" ref="poweredBy" href="https://hyperbridge.org" target="_blank" v-if="!desktopMode"><img src="/static/img/powered-by-hyperbridge.png" /></a> -->
 
         <!--<transition name="slideDown">-->
-            <c-profile-chooser v-if="profileChooser && signed_in" />
+            <c-profile-chooser v-if="profileChooser && signedIn" />
         <!--</transition>-->
     </div>
     <!-- //END PAGE WRAPPER -->
@@ -492,8 +492,8 @@
             desktopMode() {
                 return this.$store.state.application.desktopMode
             },
-            signed_in() {
-                return this.$store.state.application.signed_in
+            signedIn() {
+                return this.$store.state.application.signedIn
             },
             activeProfile() {
                 return this.$store.state.application.account && this.$store.state.application.account.activeProfile
@@ -722,7 +722,7 @@
                 this.updateBreadcrumbLinks()
             },
             profileChooser(){
-                if (this.signed_in)
+                if (this.signedIn)
                     if (this.profileChooser)
                         this.bluredBg = true
                     else

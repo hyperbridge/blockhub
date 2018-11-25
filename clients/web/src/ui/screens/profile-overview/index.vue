@@ -13,7 +13,7 @@
                     <c-button status="danger" v-darklaunch="'REPORTING'">Report</c-button>
                 </div>
             </div>
-            <div class="col-12" v-if="!signed_in && !$store.state.application.account.settings.client.hide_profile_signup">
+            <div class="col-12" v-if="!signedIn && !$store.state.application.account.settings.client.hide_profile_signup">
                 <div class="profile__user-notify">
                     <c-button class="btn-close" @click="$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_profile_signup', true)">
                         <i class="fas fa-times"></i>
@@ -145,7 +145,7 @@
                     <div>
                         <c-user-card />
                     </div>
-                    <div class="text text-left" v-if="!signed_in">
+                    <div class="text text-left" v-if="!signedIn">
                         <h3>Create your BlockHub profile</h3>
                         <p>BlockHub is the best place for curated community-driven game development,
                             digital assets and micro-licensing. Sign up for your own account and build
@@ -230,7 +230,7 @@
             }
         },
         computed: {
-            signed_in() { return this.$store.state.application.signed_in },
+            signedIn() { return this.$store.state.application.signedIn },
             profile() {
                 return this.$store.state.application.account.activeProfile
             }

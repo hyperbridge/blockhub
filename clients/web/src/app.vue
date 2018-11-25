@@ -65,37 +65,37 @@
 
                 <hr v-if="developerMode" />
 
-                <a v-if="signed_in" href="#/account">
+                <a v-if="signedIn" href="#/account">
                     <span class="icon fa fa-user"></span>
                     <span class="text">Account</span>
                 </a>
-                <a v-if="signed_in" href="#/account/profiles">
+                <a v-if="signedIn" href="#/account/profiles">
                     <span class="icon fa fa-id-card"></span>
                     <span class="text">Profiles</span>
                 </a>
-                <a v-if="signed_in" href="#/account/wallets" v-darklaunch="'WALLETS'">
+                <a v-if="signedIn" href="#/account/wallets" v-darklaunch="'WALLETS'">
                     <span class="icon fa fa-credit-card"></span>
                     <span class="text">Wallets</span>
                 </a>
 
-                <hr v-if="signed_in" />
+                <hr v-if="signedIn" />
 
-                <a v-if="signed_in" href="#/profile/1">
+                <a v-if="signedIn" href="#/profile/1">
                     <span class="icon fa fa-user"></span>
                     <span class="text">Current Profile</span>
                 </a>
-                <a v-if="signed_in" href="#/settings/activity">
+                <a v-if="signedIn" href="#/settings/activity">
                     <span class="icon fa fa-list-alt"></span>
                     <span class="text">Activity Log</span>
                 </a>
-                <a v-if="signed_in" href="#/profile/1/contacts" v-darklaunch="'CONTACTS'">
+                <a v-if="signedIn" href="#/profile/1/contacts" v-darklaunch="'CONTACTS'">
                     <span class="icon fa fa-users"></span>
                     <span class="text">Contacts</span>
                 </a>
 
-                <hr v-if="signed_in" />
+                <hr v-if="signedIn" />
 
-                <a v-if="signed_in" href="#/settings">
+                <a v-if="signedIn" href="#/settings">
                     <span class="icon fa fa-cog"></span>
                     <span class="text">Settings</span>
                 </a>
@@ -105,7 +105,7 @@
                     <span class="text">Sitemap</span>
                 </a>
 
-                <a v-if="signed_in" href="#/account/signout">
+                <a v-if="signedIn" href="#/account/signout">
                     <span class="icon fa fa-sign-out-alt"></span>
                     <span class="text">Sign Out</span>
                 </a>
@@ -149,7 +149,7 @@
                         <c-button @click="toggleDesktopMode()">Desktop Mode {{ desktopMode ? 'ON' : 'OFF' }}</c-button>
                         <c-button @click="rotateOperatingSystem()">Operating System {{ operatingSystem === 'mac' ? 'MAC' : (operatingSystem === 'windows' ? 'WINDOWS' : 'LINUX' ) }}</c-button>
                         <c-button @click="rotateEnvironmentMode()">Environment Mode {{ environmentMode.toUpperCase() }}</c-button>
-                        <c-button @click="toggleSignedIn()">Signed {{ signed_in ? 'IN' : 'OUT' }}</c-button>
+                        <c-button @click="toggleSignedIn()">Signed {{ signedIn ? 'IN' : 'OUT' }}</c-button>
                         <c-button @click="$store.state.application.account.isVerified = !$store.state.application.account.isVerified">Account {{ $store.state.application.account.isVerified ? 'VERIFIED' : 'NOT VERIFIED' }}</c-button>
                         <c-button @click="toggleDeveloperMode()">Developer Mode {{ developerMode ? 'ON' : 'OFF' }}</c-button>
                         <c-button @click="rotateEditorMode()">Editor Mode {{ $store.state.application.editorMode.toUpperCase() }}</c-button>
@@ -233,7 +233,7 @@
             disableAnimations() { return this.$store.state.application.account.settings.client.animations },
             developerMode() { return this.$store.state.application.developerMode },
             desktopMode() { return this.$store.state.application.desktopMode },
-            signed_in() { return this.$store.state.application.signed_in },
+            signedIn() { return this.$store.state.application.signedIn },
             simulatorMode() { return this.$store.state.application.simulatorMode },
             operatingSystem() { return this.$store.state.application.operatingSystem },
             environmentMode() { return this.$store.state.application.environmentMode }
@@ -241,7 +241,7 @@
         methods: {
             ensureDesktopWelcome(to) {
                 if (this.$store.state.application.desktopMode
-                && !this.$store.state.application.signed_in
+                && !this.$store.state.application.signedIn
                 && (!to ? true : (
                     to.path !== '/account/signup'
                     && to.path !== '/account/signin'
@@ -258,7 +258,7 @@
                 this.$store.state.application.desktopMode = !this.$store.state.application.desktopMode
             },
             toggleSignedIn() {
-                this.$store.state.application.signed_in = !this.$store.state.application.signed_in
+                this.$store.state.application.signedIn = !this.$store.state.application.signedIn
             },
             toggleDeveloper() {
                 this.$store.state.application.isDeveloper = !this.$store.state.application.isDeveloper
@@ -379,11 +379,11 @@
             },
             // When the user is set, redirect to the Chat page.
             '$store.state.auth.user'(newVal) {
-                if (this.$store.state.application.signed_in && newVal === undefined) {
-                    this.$store.state.application.signed_in = false
+                if (this.$store.state.application.signedIn && newVal === undefined) {
+                    this.$store.state.application.signedIn = false
                     //this.$router.replace({ name: 'Home' })
                 } else {
-                    this.$store.state.application.signed_in = true
+                    this.$store.state.application.signedIn = true
                     //this.$router.replace({ name: 'Home' })
                 }
             }

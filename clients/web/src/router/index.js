@@ -190,7 +190,7 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/account'], resolve),
             meta: {
                 auth: true,
-                permission: 'signed_in'
+                permission: 'signedIn'
             }
         },
         {
@@ -217,7 +217,7 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/account-signout'], resolve),
             meta: {
                 auth: true,
-                permission: 'signed_in'
+                permission: 'signedIn'
             }
         },
         {
@@ -250,7 +250,7 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/account-wallets'], resolve),
             meta: {
                 auth: true,
-                permission: 'signed_in',
+                permission: 'signedIn',
                 breadcrumb: [
                     { title: 'Home' },
                     { title: 'Account' },
@@ -263,7 +263,7 @@ const router = new Router({
             name: 'Profiles',
             component: (resolve) => require(['@/ui/screens/account-profiles'], resolve),
             meta: {
-                permission: 'signed_in',
+                permission: 'signedIn',
                 breadcrumb: [
                     { title: 'Home' },
                     { title: 'Account' },
@@ -628,7 +628,7 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/curator-application'], resolve),
             meta: {
                 auth: true,
-                permission: 'signed_in'
+                permission: 'signedIn'
             }
         },
         {
@@ -982,7 +982,7 @@ router.afterEach((to, from) => {
 
 export const Auth = {
     loggedIn() {
-        return store.state.application.signed_in
+        return store.state.application.signedIn
     },
     accessGate(permission = false) {
         const privileges = store.getters['application/privileges']
@@ -1010,7 +1010,7 @@ router.beforeEach((to, from, next) => {
     }
 
     if (!Auth.loggedIn() && !!to.meta.auth) {
-        store.state.application.signed_in = false
+        store.state.application.signedIn = false
 
         next({
             name: 'Sign In',

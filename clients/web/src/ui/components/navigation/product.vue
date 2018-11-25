@@ -79,8 +79,8 @@
             }
         },
         computed:{
-            signed_in() {
-                return this.$store.state.application.signed_in
+            signedIn() {
+                return this.$store.state.application.signedIn
             },
         }
     }

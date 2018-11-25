@@ -2,17 +2,17 @@
     <div class="page-sidepanel invert text-right" id="page-sidepanel">
         <div class="page-sidepanel__content">
             <c-swiper ref="mySwiper">
-                <c-slide v-if="$store.state.application.signed_in">
+                <c-slide v-if="$store.state.application.signedIn">
                     <div class="item">
                         <h3>NOTIFICATION</h3>
 
                         <div class="slide-chooser">
                             <c-button status="plain" icon-hide @click="showSlide('notification')" class="active"
-                                        v-if="$store.state.application.signed_in">
+                                        v-if="$store.state.application.signedIn">
                                 <i class="fa fa-bell"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('messages')"
-                                        style="box-shadow: none" v-if="$store.state.application.signed_in" v-darklaunch="'MESSAGES'">
+                                        style="box-shadow: none" v-if="$store.state.application.signedIn" v-darklaunch="'MESSAGES'">
                                 <i class="fa fa-envelope"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('updates')"
@@ -35,17 +35,17 @@
 
                     </div>
                 </c-slide>
-                <c-slide v-if="$store.state.application.signed_in" v-darklaunch="'MESSAGES'">
+                <c-slide v-if="$store.state.application.signedIn" v-darklaunch="'MESSAGES'">
                     <div class="item">
                         <h3>MESSAGES</h3>
 
                         <div class="slide-chooser">
                             <c-button status="plain" icon-hide @click="showSlide('notification')"
-                                        style="box-shadow: none" v-if="$store.state.application.signed_in">
+                                        style="box-shadow: none" v-if="$store.state.application.signedIn">
                                 <i class="fa fa-bell"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('messages')" class="active"
-                                        v-if="$store.state.application.signed_in">
+                                        v-if="$store.state.application.signedIn">
                                 <i class="fa fa-envelope"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('updates')"
@@ -75,11 +75,11 @@
 
                         <div class="slide-chooser">
                             <c-button status="plain" icon-hide @click="showSlide('notification')"
-                                        style="box-shadow: none" v-if="$store.state.application.signed_in">
+                                        style="box-shadow: none" v-if="$store.state.application.signedIn">
                                 <i class="fa fa-bell"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('messages')"
-                                        style="box-shadow: none" v-if="$store.state.application.signed_in" v-darklaunch="'MESSAGES'">
+                                        style="box-shadow: none" v-if="$store.state.application.signedIn" v-darklaunch="'MESSAGES'">
                                 <i class="fa fa-envelope"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('updates')" class="active"
@@ -121,11 +121,11 @@
 
                         <div class="slide-chooser">
                             <c-button status="plain" icon-hide @click="showSlide('notification')"
-                                        style="box-shadow: none" v-if="$store.state.application.signed_in">
+                                        style="box-shadow: none" v-if="$store.state.application.signedIn">
                                 <i class="fa fa-bell"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('messages')"
-                                        style="box-shadow: none" v-if="$store.state.application.signed_in" v-darklaunch="'MESSAGES'">
+                                        style="box-shadow: none" v-if="$store.state.application.signedIn" v-darklaunch="'MESSAGES'">
                                 <i class="fa fa-envelope"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('updates')"

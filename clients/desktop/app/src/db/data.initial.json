@@ -2,7 +2,7 @@
   "application": [
     {
       "environmentMode": "local",
-      "signed_in": false,
+      "signedIn": false,
       "loading": false,
       "connection": {
         "auto": true,

@@ -99,7 +99,7 @@
             setDefault(profile) {
                 this.$store.commit(
                     'updateSingle',
-                    ['application/account', { active_profile: profile.id }]
+                    ['application/account', { currentProfile: profile.id }]
                 );
                 this.$store.state.application.developerMode = !!profile.developerId
             }

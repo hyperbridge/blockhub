@@ -499,7 +499,7 @@ export let initializer = () => {
 
             if (store.state.application.environmentMode === 'preview') {
                 store.state.application.desktopMode = true
-                store.state.application.signed_in = true
+                store.state.application.signedIn = true
 
                 // ENABLE ALL DARKLAUNCHES
                 store.state.application.darklaunchOverride = true

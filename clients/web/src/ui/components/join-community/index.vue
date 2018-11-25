@@ -1,5 +1,5 @@
 <template>
-    <div class="join-community" v-if="!signed_in">
+    <div class="join-community" v-if="!signedIn">
         <div class="join-community__wrapper">
             <c-img src="../../../../static/img/logo.fw.png" />
             <div class="h5 font-weight-bold">
@@ -19,8 +19,8 @@
     export default {
         name: 'c-join-community',
         computed:{
-            signed_in() {
-                return this.$store.state.application.signed_in
+            signedIn() {
+                return this.$store.state.application.signedIn
             }
         }
     }

@@ -5,7 +5,7 @@
         "environmentMode": null,
         "decentralizedMode": false,
         "locked": false,
-        "signed_in": false,
+        "signedIn": false,
         "loading": false,
         "simulatorMode": false,
         "desktopMode": null,

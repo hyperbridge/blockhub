@@ -78,8 +78,8 @@ export const getters = {
             result.push('desktopMode')
         }
 
-        if (state.signed_in) {
-            result.push('signed_in')
+        if (state.signedIn) {
+            result.push('signedIn')
         }
 
         if (state.developerMode) {
@@ -98,10 +98,10 @@ export const getters = {
     },
     account: ({ account }, getters, { community: { profiles }}) => ({
         ...account,
-        active_profile: profiles[account.active_profile],
+        currentProfile: profiles[account.currentProfile],
         profiles: account.idts.map(id => profiles[id])
     }),
-    profile: (state, { account }) => account.active_profile
+    profile: (state, { account }) => account.currentProfile
 }
 
 export const actions = {
@@ -137,7 +137,7 @@ export const actions = {
         }
 
         if (store.state.desktopMode) {
-            if (store.state.signed_in) {
+            if (store.state.signedIn) {
                 store.commit('activateModal', payload)
             } else {
                 store.commit('activateModal', 'login')
@@ -160,7 +160,7 @@ export const actions = {
         //     store.state.account.address = res.account.address
 
         //     store.state.password_required = true
-        //     //store.state.signed_in = true
+        //     //store.state.signedIn = true
         // })
     },
     initEthereum(store, payload) {
@@ -329,13 +329,13 @@ export const mutations = {
         state.account.tradeURLId = id;
     },
     signIn(state, payload) {
-        state.signed_in = true
+        state.signedIn = true
 
         DB.application.config.update(state)
         DB.save()
     },
     signOut(state, payload) {
-        state.signed_in = false
+        state.signedIn = false
 
         DB.application.config.update(state)
         DB.save()

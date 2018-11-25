@@ -109,7 +109,7 @@ export const promptPasswordRequest = async (data) => {
 
         local.store.commit('application/updateState', {
             locked: true,
-            signed_in: false
+            signedIn: false
         })
 
         local.store.commit('application/activateModal', 'unlock')
@@ -131,7 +131,7 @@ export const setAccountRequest = async (data) => {
 
             local.store.commit('application/updateState', {
                 locked: false,
-                signed_in: true
+                signedIn: true
             })
         } else {
             local.store.commit('application/activateModal', null)
@@ -140,7 +140,7 @@ export const setAccountRequest = async (data) => {
             
             local.store.commit('application/updateState', {
                 locked: true,
-                signed_in: false
+                signedIn: false
             })
         }
 
@@ -245,10 +245,10 @@ export const runCommand = async (cmd, meta = {}) => {
         //         //BlockHub.importSeedData()
 
         //         // local.store.state.application.desktopMode = true
-        //         // local.store.state.application.signed_in = true
+        //         // local.store.state.application.signedIn = true
         //     }
         //     // store.state.application.locked = true
-        //     // store.state.application.signed_in = false
+        //     // store.state.application.signedIn = false
         // } 
         else if (cmd.key === 'updateReady') {
             console.log(cmd.data)

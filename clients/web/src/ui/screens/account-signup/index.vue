@@ -397,7 +397,7 @@ export default {
                             this.$store.dispatch('application/updateState', {
                                 account: { ...this.$store.state.application.account, ...res.account },
                                 locked: false,
-                                signed_in: true
+                                signedIn: true
                             })
                         })
                 } else {
