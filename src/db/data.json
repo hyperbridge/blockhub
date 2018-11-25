@@ -595,7 +595,7 @@
             }
         ],
         "account": {
-            "public_address": null,
+            "address": null,
             "verification_timestamp": null,
             "is_verified": false,
             "is_verifying": false,
@@ -615,7 +615,7 @@
                 "licenses": [],
                 "products": [],
                 "messages": [],
-                "public_address": null,
+                "address": null,
                 "passphrase": null,
                 "private_key": null
             },

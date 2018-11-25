@@ -38,6 +38,7 @@
                     :value="user.name"
                     @input="$emit('update:name', $event.target.value)"
                     :readonly="previewMode"
+                    v-focus="!previewMode"
                 />
 
                 <p v-if="!user.developer_id && !user.curator_id"><em>Gamer</em></p>
@@ -60,17 +61,17 @@
             </div>
         </div>
 
-        <div class="wallet_number">
+        <div class="wallet_number" hidden>
             <input
                 type="text"
                 class="form-control"
                 name="wallet_number"
                 placeholder="Public address"
-                :value="user.public_address"
+                :value="user.address"
                 @input="$emit('update:wallet', $event.target.value)"
                 readonly="readonly"
             />
-            <button v-darklaunch="'BADGES'" @click="copyToClipboard(user.public_address)">
+            <button v-darklaunch="'BADGES'" @click="copyToClipboard(user.address)">
                 <i :class="`fas fa-${previewMode ? 'copy' : 'redo-alt'}`"></i>
             </button>
         </div>

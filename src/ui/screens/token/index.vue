@@ -565,7 +565,7 @@ export default {
             residentAgreement: false,
             ethereum_unlocked: this.$store.state.application.desktop_mode,
             ethereum_connected: this.$store.state.application.desktop_mode,
-            purchaseAddress: chosenProfile ? chosenProfile.public_address : null,
+            purchaseAddress: chosenProfile ? chosenProfile.address : null,
             override: false,
             assets: [
                 {
@@ -641,7 +641,7 @@ export default {
             return "0xebf0027ef3b4b7a742a148cddb0f2b14e5d8f0e9"
 
             try {
-                return this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve.contracts.TokenSale.public_address
+                return this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve.contracts.TokenSale.address
             } catch (e) {
 
             }
@@ -676,7 +676,7 @@ export default {
         },
         chooseProfile(profile) {
             this.chosenProfile = profile
-            this.purchaseAddress = profile.public_address
+            this.purchaseAddress = profile.address
         },
         closePurchasePopup() {
             this.purchasePopup.show = false
@@ -703,7 +703,7 @@ export default {
 
                             window.web3.eth.getAccounts((err, accounts) => {
                                 this.purchaseAddress = accounts[0]
-                                this.account.public_address = accounts[0] // save for verification screen
+                                this.account.address = accounts[0] // save for verification screen
                             })
                         })
                     } catch (error) {

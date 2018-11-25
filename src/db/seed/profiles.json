@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Satoshi",
-        "public_address": "0xf4636099c7Cd3656436F9f087070a429e4BfD91d",
+        "address": "0xf4636099c7Cd3656436F9f087070a429e4BfD91d",
         "img": "https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1",
         "default": false,
         "edit": false,

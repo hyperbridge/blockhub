@@ -104,7 +104,7 @@
                                                 <div class="form-group">
                                                     <label class="sr-only">Ethereum Public Address</label>
                                                     <input type="text" class="form-control" placeholder="Ethereum Public Address"
-                                                            name="public_address" v-model="public_address">
+                                                            name="address" v-model="address">
                                                 </div>
                                             </div>
                                         </div>
@@ -174,7 +174,7 @@
                 email: account.email,
                 first_name: account.first_name,
                 last_name: account.last_name,
-                public_address: account.public_address,
+                address: account.address,
                 account: account,
                 is_verified: account.is_verified,
                 is_verifying: account.is_verifying,
@@ -203,7 +203,7 @@
                     && this.email
                     && this.document_type
                     && this.document_number
-                    && this.public_address
+                    && this.address
                 ) {
                     const data = {
                         verification: {
@@ -214,12 +214,12 @@
                                 lastName: this.last_name,
                                 idNumber: this.document_number
                             },
-                            vendorData: this.email,//JSON.stringify({ email: this.email, eth: this.public_address }),
+                            vendorData: this.email,//JSON.stringify({ email: this.email, eth: this.address }),
                             additionalData: {
-                                eth: this.public_address,
+                                eth: this.address,
                                 email: this.email,
                                 secret: this.account.secret_answer_2,
-                                profile: this.account.activeProfile && this.account.activeProfile.public_address
+                                profile: this.account.activeProfile && this.account.activeProfile.address
                             },
                             timestamp: (new Date).toISOString()
                         }
@@ -260,7 +260,7 @@
                 if (!this.document_number) {
                     this.errors.push('Document Number required.')
                 }
-                if (!this.public_address) {
+                if (!this.address) {
                     this.errors.push('Ethereum Public Address required.')
                 }
             }

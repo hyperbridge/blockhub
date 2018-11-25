@@ -170,7 +170,7 @@
             }
         },
         computed: {
-            developerProfileAddress() { return this.$store.state.application.account.activeProfile && this.$store.state.application.account.activeProfile.public_address }
+            developerProfileAddress() { return this.$store.state.application.account.activeProfile && this.$store.state.application.account.activeProfile.address }
         },
         methods: {
             changeTab(step) {

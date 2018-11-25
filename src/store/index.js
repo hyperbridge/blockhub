@@ -85,7 +85,7 @@ if (decentralizedMode) {
                 create() {
                     Bridge.sendCommand('createProfileRequest', newProfile).then((profile) => {
                         newProfile.id = profile.id
-                        newProfile.public_address = profile.public_address
+                        newProfile.address = profile.address
 
                         if (!newProfile.name)
                             newProfile.name = 'Default'
@@ -195,7 +195,7 @@ window.BlockHub.seed = seed
 
 window.BlockHub.importSeedData = () => {
     // We dont want to mess with the important signed in account data
-    if (!DB.application.config.data[0].account.public_address) {
+    if (!DB.application.config.data[0].account.address) {
         DB.application.config.data[0].account.wallets = seed.wallets
         DB.application.config.data[0].account.profiles = seed.profiles
         DB.application.config.data[0].account.activeProfile = {
@@ -224,7 +224,7 @@ window.BlockHub.importSeedData = () => {
 
 window.BlockHub.resetSeedData = () => {
     // We dont want to mess with the important signed in account data
-    if (!DB.application.config.data[0].account.public_address) {
+    if (!DB.application.config.data[0].account.address) {
         DB.application.config.data[0].account.wallets = []
         DB.application.config.data[0].account.profiles = []
         DB.application.config.data[0].account.activeProfile = { id: null }

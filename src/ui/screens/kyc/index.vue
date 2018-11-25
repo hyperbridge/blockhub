@@ -159,7 +159,7 @@ export default {
             this.errors = []
 
             if (this.canContinue) {
-                this.$store.state.application.account.public_address = this.purchaseAddress  // save for verification screen
+                this.$store.state.application.account.address = this.purchaseAddress  // save for verification screen
 
                 this.$router.push('/account/verification')
 

@@ -219,11 +219,11 @@
                     return new Promise(async (resolve, reject) => {
                         const marketplaceStorageContract = MarketplaceAPI.api.ethereum.state.contracts.MarketplaceStorage.deployed
 
-                        await marketplaceStorage.setDeveloperOwnsProduct(product.developer_id, product.id, true, { from: profile.public_address })
-                        await marketplaceStorage.pushDeveloperOwnedProduct(product.developer_id, product.id, { from: profile.public_address })
+                        await marketplaceStorage.setDeveloperOwnsProduct(product.developer_id, product.id, true, { from: profile.address })
+                        await marketplaceStorage.pushDeveloperOwnedProduct(product.developer_id, product.id, { from: profile.address })
 
-                        await marketplaceStorage.setProductDeveloper(product.id, product.developer, { from: profile.public_address })
-                        await marketplaceStorage.setProductDeveloperId(product.id, product.developer_id, { from: profile.public_address })
+                        await marketplaceStorage.setProductDeveloper(product.id, product.developer, { from: profile.address })
+                        await marketplaceStorage.setProductDeveloperId(product.id, product.developer_id, { from: profile.address })
 
                         resolve(product)
                     })
@@ -266,7 +266,7 @@
                         await marketplaceStorageContract.setProductStatus(
                             productId, 
                             Number(product.status),
-                            { from: profile.public_address }
+                            { from: profile.address }
                         )
 
                         resolve(product)
@@ -352,7 +352,7 @@
                             product.name,
                             product.type,
                             product.content,
-                            { from: profile.public_address }
+                            { from: profile.address }
                         )
 
                         watcher.stopWatching(() => {
@@ -406,7 +406,7 @@
                             product.name,
                             product.type,
                             product.content,
-                            { from: profile.public_address }
+                            { from: profile.address }
                         )
 
                         resolve(product)

@@ -157,7 +157,7 @@ export const actions = {
         Bridge.resolvePromptPasswordRequest(payload.password.value)
 
         // Bridge.sendCommand('getAccountRequest', data).then((res) => {
-        //     store.state.account.public_address = res.account.public_address
+        //     store.state.account.address = res.account.address
 
         //     store.state.password_required = true
         //     //store.state.signed_in = true

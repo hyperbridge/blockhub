@@ -343,7 +343,7 @@
                 //             project.name,
                 //             project.description,
                 //             project.content,
-                //             { from: profile.public_address }
+                //             { from: profile.address }
                 //         )
 
                 //         watcher.stopWatching(() => {

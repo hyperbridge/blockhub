@@ -526,7 +526,7 @@
                 this.showLeftPanel = true
             },
             vote() {
-                this.$store.commit('application/entry', { key: 'editable_page', value: window.location.hash, user: this.$store.state.application.account.public_address })
+                this.$store.commit('application/entry', { key: 'editable_page', value: window.location.hash, user: this.$store.state.application.account.address })
                 this.voteCasted = true
             },
             sendReport() {
@@ -558,7 +558,7 @@
                         }
                     }
 
-                    this.$store.commit('application/entry', { key: 'report', value: JSON.stringify(cmd), user: this.$store.state.application.account.public_address })
+                    this.$store.commit('application/entry', { key: 'report', value: JSON.stringify(cmd), user: this.$store.state.application.account.address })
                 }
 
                 this.$store.commit('application/activateModal', null)

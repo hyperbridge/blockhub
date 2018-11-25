@@ -5,7 +5,7 @@
             <div class="col-12 d-flex margin-top-30 justify-content-end">
                 <div class="profile__wallet">
                     <i class="fas fa-copy"></i>
-                    <span id="wallet_number">{{ profile.public_address }}</span>
+                    <span id="wallet_number">{{ profile.address }}</span>
                 </div>
                 <div class="profile__action-group">
                     <c-button status="info" icon="arrow-up" @click="showSendPopup">Send</c-button>

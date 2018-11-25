@@ -40,9 +40,9 @@
                                     </label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" placeholder="Public address"
-                                                :value="account.public_address" readonly>
+                                                :value="account.address" readonly>
                                         <span class="form-text">Your account is an Ethereum wallet, and can be <a
-                                    :href="`https://etherscan.io/address/${account.public_address}`">found on the blockchain using the Public Address</a></span>
+                                    :href="`https://etherscan.io/address/${account.address}`">found on the blockchain using the Public Address</a></span>
                                     </div>
                                 </div>
                             </div>

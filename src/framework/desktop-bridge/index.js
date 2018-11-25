@@ -121,7 +121,7 @@ export const promptPasswordRequest = async (data) => {
 export const setAccountRequest = async (data) => {
     return new Promise(async (resolve) => {
 
-        if (data.account.public_address) {
+        if (data.account.address) {
             local.store.commit('application/activateModal', null)
 
             // We were locked

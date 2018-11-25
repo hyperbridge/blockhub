@@ -153,8 +153,6 @@
 </template>
 
 <script>
-    import * as Bridge from '@/framework/desktop-bridge'
-
     export default {
         components: {
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
@@ -256,12 +254,7 @@
         },
         computed: {
             profiles() {
-                for(let i in this.$store.state.application.account.profiles) {
-                    if (!this.$store.state.application.account.profiles[i].name)
-                        this.$store.state.application.account.profiles[i].name = 'Default'
-                }
-                
-                return this.$store.state.application.account.profiles
+                return this.$store.getters['profiles/list']
             },
             defaultProfile() {
                 return this.profiles.find(profile => this.$store.state.application.account.activeProfile ? profile.id == this.$store.state.application.account.activeProfile.id : null)
@@ -277,7 +270,24 @@
                     .filter(profile => !profile.name || profile.name.toLowerCase().includes(this.filterPhrase.toLowerCase()))
                     .sort((a, b) => (a.name > b.name) ? (this.sortAsc ? 1 : -1) : 0)
             }
-        }
+        },
+        watch: {
+            '$store.state.application.initialized'() {
+                this.$store.dispatch('profiles/find', {
+                    query: {
+                        $sort: {
+                            createdAt: -1
+                        },
+                        $limit: 25
+                    }
+                })
+            },
+            '$store.state.profiles.isCreatePending'(newVal, oldVal) {
+                if (newVal === false) {debugger
+                    this.editProfile(this.profiles.find(p => p.id === this.$store.state.profiles.currentId))
+                }
+            }
+        },
     }
 </script>
 
