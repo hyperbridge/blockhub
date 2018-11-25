@@ -1,7 +1,7 @@
 <template>
     <transition name="fade" :duration="100">
         <div class="c-popup" v-if="activated" @click.self.prevent="$emit('close')">
-            <div class="c-popup__item" :style="{ 'width': + width + 'px'}">
+            <div class="c-popup__item" :style="{ 'width': + width + dimension}">
                 <h3 v-if="title">{{ title }}</h3>
                 <div class="position-relative">
                     <div class="c-popup__close" @click="$emit('close')" v-if="!customClose">
@@ -54,6 +54,10 @@
             },
             width: {
                 default: '400'
+            },
+            dimension:{
+                type: String,
+                default: 'px'
             }
         },
         computed:{
