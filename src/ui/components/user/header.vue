@@ -43,7 +43,7 @@
         },
         computed: {
             identity() {
-                return this.$store.state.application.account.current_identity
+                return this.$store.state.application.account.activeProfile
             }
         }
     }

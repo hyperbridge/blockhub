@@ -232,7 +232,7 @@
         computed: {
             signed_in() { return this.$store.state.application.signed_in },
             identity() {
-                return this.$store.state.application.account.current_identity
+                return this.$store.state.application.account.activeProfile
             }
         },
         methods: {

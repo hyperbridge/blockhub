@@ -214,11 +214,11 @@
             swiper() {
                 return this.$refs.mySwiper.swiper
             },
-            current_identity() {
-                return this.$store.state.application.account && this.$store.state.application.account.current_identity
+            activeProfile() {
+                return this.$store.state.application.account && this.$store.state.application.account.activeProfile
             },
             messages() {
-                return this.current_identity && this.current_identity.messages
+                return this.activeProfile && this.activeProfile.messages
             },
         },
         data() {

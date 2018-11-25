@@ -12,7 +12,7 @@
                     Business Manager
                 </div>
                 <div class="mb-0 float-right h5" style="margin-left: auto">
-                    {{ current_identity.name }}
+                    {{ activeProfile.name }}
                 </div>
             </div>
         </transition>
@@ -160,8 +160,8 @@
                 })
         },
         computed: {
-            current_identity() {
-                return this.$store.state.application.account && this.$store.state.application.account.current_identity
+            activeProfile() {
+                return this.$store.state.application.account && this.$store.state.application.account.activeProfile
             },
         },
         methods: {

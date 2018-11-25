@@ -11,6 +11,8 @@ import router from './router'
 import store, { initializer } from './store'
 import VueI18n from 'vue-i18n'
 import VueDraggable from 'vue-draggable'
+
+import Popover from 'vue-js-popover'
 import '@/api/feathers-client'
 
 import localeData from '@/db/seed/locale-data.json'
@@ -26,6 +28,8 @@ import './css/styles.scss'
 const debounce = require('debounce')
 
 Vue.config.productionTip = false
+
+Vue.use(Popover)
 
 Vue.use(VueDraggable)
 

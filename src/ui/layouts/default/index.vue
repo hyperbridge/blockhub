@@ -457,7 +457,7 @@
                 return this.$store.state.application.connection.internet && this.$store.state.application.connection.datasource
             },
             chosenIdentity() {
-                return this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
+                return this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.activeProfile.id)
             },
             shortcuts() {
                 return this.$store.state.application.shortcuts
@@ -495,8 +495,8 @@
             signed_in() {
                 return this.$store.state.application.signed_in
             },
-            current_identity() {
-                return this.$store.state.application.account && this.$store.state.application.account.current_identity
+            activeProfile() {
+                return this.$store.state.application.account && this.$store.state.application.account.activeProfile
             },
             active_notification() {
                 return this.$store.state.application.active_notification || {}

@@ -232,7 +232,7 @@
                 const cmd = {
                     code: run.toString(),
                     params: {
-                        profile: this.$store.state.application.account.current_identity,
+                        profile: this.$store.state.application.account.activeProfile,
                         product: this.product
                     }
                 }
@@ -276,7 +276,7 @@
                 const cmd = {
                     code: run.toString(),
                     params: {
-                        profile: this.$store.state.application.account.current_identity,
+                        profile: this.$store.state.application.account.activeProfile,
                         product: this.product
                     }
                 }
@@ -364,7 +364,7 @@
                 const cmd = {
                     code: run.toString(),
                     params: {
-                        profile: this.$store.state.application.account.current_identity,
+                        profile: this.$store.state.application.account.activeProfile,
                         product: this.product
                     }
                 }
@@ -416,7 +416,7 @@
                 const cmd = {
                     code: run.toString(),
                     params: {
-                        profile: this.$store.state.application.account.current_identity,
+                        profile: this.$store.state.application.account.activeProfile,
                         product: this.product
                     }
                 }

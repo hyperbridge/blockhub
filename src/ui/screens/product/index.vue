@@ -422,7 +422,7 @@
                 if (this.id === 'new') {
                     this.product.type = 'game'
 
-                    Brdge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.account.current_identity, product: this.product }).then((data) => {
+                    Brdge.sendCommand('createMarketplaceProductRequest', { profile: this.$store.state.application.account.activeProfile, product: this.product }).then((data) => {
                         const product = DB.marketplace.products.insert(data)
                         DB.save()
 

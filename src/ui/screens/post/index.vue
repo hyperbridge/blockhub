@@ -25,7 +25,7 @@
         let project = null
 
         if (this.id === 'new') {
-            project = this.$store.state.funding.default_project
+            project = this.$store.state.funding.defaultProject
         }
 
         if (this.$store.state.funding.projects && this.$store.state.funding.projects[this.id]) {

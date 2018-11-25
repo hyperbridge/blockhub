@@ -1,5 +1,4 @@
 <template>
-    <!--<c-business-layout title="Crowdfund Creation">-->
         <div>
             <div class="container-fluid" v-if="project">
                 <div class="row">
@@ -52,8 +51,8 @@
                                 <label>Minimum Contribution Goal</label>
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Example: 0">
-                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                                <input type="text" class="form-control" placeholder="Example: 0" v-model="project.meta.funds.goal">
+                                <span class="form-text"></span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -62,8 +61,8 @@
                             </label>
                             <div class="col-sm-9">
 
-                                <input type="text" class="form-control" placeholder="Example: 1000">
-                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                                <input type="text" class="form-control" placeholder="Example: 1000" v-model="project.meta.funds.cap">
+                                <span class="form-text"></span>
                             </div>
                         </div>
                     </div>
@@ -87,8 +86,8 @@
                                 <label>Support Email</label>
                             </div>
                             <div class="col-sm-9">
-                                <input type="email" class="form-control" placeholder="Example: example@domain.com">
-                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                                <input type="email" class="form-control" placeholder="Example: example@domain.com" v-model="project.meta.supportEmail">
+                                <span class="form-text"></span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -100,7 +99,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">@</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Example: @example">
+                                    <input type="text" class="form-control" placeholder="Example: @example" v-model="project.meta.twitterUsername">
                                 </div>
                             </div>
                         </div>
@@ -109,47 +108,59 @@
                                 <label>Share Text</label>
                             </div>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Example: Join our crowdfund on BlockHub today!">
-                                <span class="form-text">Projects with Overflow Enabled will accept more than the funding goal (over-contribution)</span>
+                                <input type="text" class="form-control" placeholder="Example: Join our crowdfund on BlockHub today!" v-model="project.meta.shareText">
+                                <span class="form-text"></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="switch switch-sm col-sm-1">
-                                <input type="checkbox" name="switch_8" checked="" value="0">
-                                <span></span>
-                            </label>
+                            <div class="col-sm-1">
+                                <c-switch
+                                    class="switch-sm"
+                                    :checked="project.meta.overflowEnabled"
+                                    @change="val => project.meta.overflowEnabled = val"
+                                />
+                            </div>
                             <div class="col-sm-11">
                                 <label>Overflow</label>
                                 <span class="form-text">Projects with Overflow enabled will accept more than the funding goal (over-contribution)</span>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="switch switch-sm col-sm-1">
-                                <input type="checkbox" name="switch_8" checked="" value="0">
-                                <span></span>
-                            </label>
+                            <div class="col-sm-1">
+                                <c-switch
+                                    class="switch-sm"
+                                    :checked="project.meta.timelineEnabled"
+                                    @change="val => project.meta.timelineEnabled = val"
+                                />
+                            </div>
                             <div class="col-sm-11">
                                 <label>Timeline</label>
                                 <span class="form-text">Projects with Timeline enabled will have a current timeline with associated milestones.</span>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="switch switch-sm col-sm-1">
-                                <input type="checkbox" name="switch_8" checked="" value="0">
-                                <span></span>
-                            </label>
+                            <div class="col-sm-1">
+                                <c-switch
+                                    class="switch-sm"
+                                    :checked="project.meta.refundsEnabled"
+                                    @change="val => project.meta.refundsEnabled = val"
+                                />
+                            </div>
                             <div class="col-sm-11">
                                 <label>Refunds</label>
                                 <span class="form-text">Projects with Refunds enabled will allow contributors to get partial or full refund if the project is deemed not successful (by community vote).</span>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="switch switch-sm col-sm-1">
-                                <input type="checkbox" name="switch_8" checked="" value="0">
-                                <span></span>
-                            </label>
+                            <div class="col-sm-1">
+                                <c-switch
+                                    class="switch-sm"
+                                    :checked="project.meta.curationEnabled"
+                                    @change="val => project.meta.curationEnabled = val"
+                                />
+                            </div>
                             <div class="col-sm-11">
                                 <label>Curation</label>
                                 <span class="form-text">Projects with Curation enabled will allow the community to curate the project and earn reputation for their actions.</span>
@@ -165,14 +176,26 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="switch switch-sm col-sm-1">
-                                <input type="checkbox" name="switch_8" checked="" value="0">
-                                <span></span>
-                            </label>
+                            <div class="col-sm-1">
+                                <c-switch
+                                    class="switch-sm"
+                                    :checked="project.meta.contributionPeriodEnabled"
+                                    @change="val => project.meta.contributionPeriodEnabled = val"
+                                />
+                            </div>
                             <div class="col-sm-11">
                                 <label>No Contribution Period</label>
                                 <span class="form-text">Projects with No Contribution Period will be open for contribution until the project is completed, allowing for contributions during the project.</span>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group row" style="text-align: center">
+                            <br />
+                            <h3 style="width: 100%">Raw Editor</h3>
+                            <br /><br />
+                            <span class="form-text"></span>
+                            <c-json-editor :objData="project" v-model="project" style="margin: 0 auto"></c-json-editor>
                         </div>
                     </div>
                     <div class="col-12">
@@ -203,7 +226,6 @@
                 </div>
             </div>
         </div>
-    <!--</c-business-layout>-->
 </template>
 
 <script>
@@ -212,21 +234,24 @@
             id: [String, Number]
         },
         components: {
-            'c-business-layout': (resolve) => require(['@/ui/layouts/business'], resolve),
-            'c-html-editor': (resolve) => require(['@/ui/components/html-editor'], resolve)
+            'c-html-editor': (resolve) => require(['@/ui/components/html-editor'], resolve),
+            'c-json-editor': (resolve) => require(['@/ui/components/json-editor'], resolve)
         },
         data() {
+            const project = this.id === 'new' ? this.$store.state.funding.defaultProject : this.$store.getters['projects/get'](this.id)
+
             return {
                 loadingState: true,
-                advanced: false
+                advanced: false,
+                project: {
+                    ...project,
+                    ownerId: this.$store.state.application.account.activeProfile.id
+                }
             }
         },
         computed: {
-            funding() {
-                return this.$store.state.funding
-            },
-            project() {
-                return this.id === 'new' ? this.funding.default_project : this.$store.getters['projects/get'](this.id)
+            originalProject() {
+                return this.id === 'new' ? this.$store.state.funding.defaultProject : this.$store.getters['projects/get'](this.id)
             }
         },
         watch: {
@@ -239,6 +264,9 @@
                     }
                 })
             },
+            originalProject() {
+                this.project = { ...this.project, ...this.originalProject }
+            }
         },
         methods: {
             toggleAdvanced() {
@@ -327,7 +355,7 @@
                 // const cmd = {
                 //     code: run.toString(),
                 //     params: {
-                //         profile: this.$store.state.application.account.current_identity,
+                //         profile: this.$store.state.application.account.activeProfile,
                 //         project: this.project
                 //     }
                 // }

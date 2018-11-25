@@ -175,8 +175,8 @@ export const mutations = {
             Vue.set(state, x, payload[x])
         }
 
-        for (let y in state.products) {
-            DB.updateCollection(DB.marketplace.products, state.products[y])
+        for (let product of state.products) {
+            DB.updateCollection(DB.marketplace.products, product)
         }
         
         DB.marketplace.config.update(state)

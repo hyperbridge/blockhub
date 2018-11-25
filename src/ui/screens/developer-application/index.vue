@@ -50,7 +50,7 @@
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         },
         data() {
-            let chosenIdentity = this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.current_identity.id)
+            let chosenIdentity = this.$store.state.application.account.identities.find(identity => identity.id == this.$store.state.application.account.activeProfile.id)
 
             if (!chosenIdentity && this.$store.state.application.account.identities.length) {
                 chosenIdentity = this.$store.state.application.account.identities[0]

@@ -4,7 +4,7 @@ import socketio from 'feathers-socketio'
 import auth from 'feathers-authentication-client'
 import io from 'socket.io-client'
 
-const socket = io('https://api.blockhub.gg', { transports: ['websocket'] })
+const socket = io('http://localhost:9001', { transports: ['websocket'] }) // https://api.blockhub.gg // http://localhost:9001
 
 const feathersClient = feathers()
     .configure(hooks())

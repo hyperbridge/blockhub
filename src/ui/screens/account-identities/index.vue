@@ -182,7 +182,7 @@
         },
         methods: {
             setDefault(identity) {
-                this.$store.state.application.account.current_identity = identity
+                this.$store.state.application.account.activeProfile = identity
                 this.$store.state.application.developer_mode = !!identity.developer_id
                 // if (this.defaultIdentity) this.defaultIdentity.default = false
                 // identity.default = true
@@ -281,7 +281,7 @@
                 return this.$store.state.application.account.identities
             },
             defaultIdentity() {
-                return this.identities.find(identity => this.$store.state.application.account.current_identity ? identity.id == this.$store.state.application.account.current_identity.id : null)
+                return this.identities.find(identity => this.$store.state.application.account.activeProfile ? identity.id == this.$store.state.application.account.activeProfile.id : null)
             },
             identityClone() {
                 return this.editedIdentity ? { ...this.editedIdentity } : {}
