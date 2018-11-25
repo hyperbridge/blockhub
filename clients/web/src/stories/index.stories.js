@@ -4995,7 +4995,10 @@ storiesOf('Video Popup', module)
                         }
                     }
                 ],
-                showModal: false
+                showModal: false,
+                showVideo:{},
+                youtube: 'A747o4LwQfM',
+                twitch: 'lanvirion'
             }
         },
         methods:{
@@ -5004,8 +5007,11 @@ storiesOf('Video Popup', module)
             }
         },
         template: `<div class="p-5">
-                        <c-button @click="toggleModal">Show Video Modal</c-button>
-                        <c-video-popup :video="video" @close="toggleModal" :activated="showModal">
+                        <c-button @click="toggleModal" class="m-3">Show Local Video Modal</c-button>
+                        <c-button @click="toggleModal" class="m-3">Show Youtube Video Modal</c-button>
+                        <c-button @click="toggleModal" class="m-3">Show Twitch Video Modal</c-button>
+                        
+                        <c-video-popup :twitch="twitch" @close="toggleModal" :activated="showModal">
                             <template v-for="comment in comments">
                                 <div class="mb-3">
                                 <author :author="comment.author" class="mb-1"/>

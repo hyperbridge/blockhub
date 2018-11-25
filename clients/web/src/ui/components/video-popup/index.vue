@@ -2,15 +2,17 @@
     <c-popup :activated="activated" width="1100" @close="$emit('close')">
         <div class="video-popup" slot="custom_content">
             <div class="video-popup__video-container">
-                <youtube :video-id="youtubeId" :player-vars="playerVars" fitParent="true" height="450" width="800"  :resize="true" v-if="youtubeId"></youtube>
-                <video controls v-else="video">
+                <c-youtube :video-id="youtube" :player-vars="playerVars" fitParent="true" height="450" width="800" :resize="true" v-if="youtube"></c-youtube>
+                <c-twitch :channel="twitch" height="450" width="800" v-else-if="twitch"></c-twitch>
+                <video controls v-else-if="video">
                     <template v-for="item in video">
                         <source :src="item.src" :type="['video/' + item.format ]">
                     </template>
                     Your browser does not support the video tag.
                 </video>
+                <slot name="video" v-else />
             </div>
-            <div class="video-popup__video-comments">
+            <div class="video-popup__video-comments" v-if="showComments">
                 <c-heading-bar name="Comments" :bgColor="false" />
                 <div class="comments__wrapper">
                     <slot />
@@ -31,16 +33,14 @@
 </template>
 
 <script>
-    import Vue from 'vue'
-    import VueYoutube from 'vue-youtube'
-
-    Vue.use(VueYoutube)
 
     export default {
         name: 'video-popup',
         components:{
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
-            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve)
+            'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
+            'c-youtube': (resolve) => require(['@/ui/components/youtube'], resolve),
+            'c-twitch': (resolve) => require(['@/ui/components/twitch'], resolve)
         },
         props:{
             activated:{
@@ -48,11 +48,15 @@
                 default: false
             },
             video: [ Object, Array ],
-            youtubeId: String
+            youtube: String,
+            twitch: String,
+            showComments:{
+                type: Boolean,
+                default: true
+            },
         },
         data(){
             return {
-                videoId: '',
                 playerVars: {
                     autoplay: 0
                 }
