@@ -1,0 +1,5 @@
+{
+  "name": "BlockHub Node Operator",
+  "description": "A server to broker connections between BlockHub clients.",
+  "website": "https://hyperbridge.org/"
+}

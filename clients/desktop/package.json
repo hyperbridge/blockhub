@@ -1,0 +1,132 @@
+{
+  "name": "blockhub-desktop-client",
+  "productName": "BlockHub",
+  "version": "0.7.1",
+  "description": "BlockHub",
+  "homepage": "https://blockhub.gg",
+  "author": {
+    "name": "Hyperbridge",
+    "email": "hello@hyperbridge.org",
+    "url": "https://github.com/hyperbridge"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "scripts": {
+    "build": "cd app && npm run build && cd .. && rm -rf build && cp -R app/ build",
+    "copy-web": "cd ../../../blockhub-web-client && NODE_ENV=production npm run build && rm -rf ../blockhub/clients/desktop/app/web && cp -R dist/ ../blockhub/clients/desktop/app/web && cd ../blockhub/clients/desktop",
+    "package": "ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true npm run build-all",
+    "publish": "electron-builder --publish",
+    "build-all": "npm run copy-web && cd app && npm run build && cd .. && rm -rf dist/packages && rm -rf build && cp -R app/ build && electron-builder --mac --win --linux",
+    "build-linux": "npm run copy-web && cd app && npm run build && cd .. && rm -rf dist/packages && rm -rf build && cp -R app/ build && electron-builder --linux",
+    "build-mac": "npm run copy-web && cd app && npm run build && cd .. && rm -rf dist/packages && rm -rf build && cp -R app/ build && electron-builder --mac",
+    "build-windows": "npm run copy-web && cd app && npm run build && cd .. && rm -rf dist/packages && rm -rf build && cp -R app/ build && electron-builder --win"
+  },
+  "postinstall": "electron-builder install-app-deps",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^2.0.8",
+    "electron-builder": "^20.28.4"
+  },
+  "optionalDependencies": {},
+  "build": {
+    "appId": "gg.blockhub.BlockHub",
+    "productName": "BlockHub",
+    "copyright": "Entertainment 🎮  by Hyperbridge",
+    "removePackageScripts": false,
+    "generateUpdatesFilesForAllChannels": true,
+    "buildDependenciesFromSource": false,
+    "nodeGypRebuild": false,
+    "detectUpdateChannel": true,
+    "compression": "normal",
+    "directories": {
+      "app": "build",
+      "buildResources": "static",
+      "output": "dist/packages"
+    },
+    "npmRebuild": true,
+    "mac": {
+      "category": "public.app-category.entertainment",
+      "icon": "static/Icon-512.png",
+      "target": [
+        "zip",
+        "dmg"
+      ]
+    },
+    "win": {
+      "asar": false,
+      "asarUnpack": "**\\*.node2",
+      "icon": "static/Icon-512.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "icon": "static/Icon-512.png",
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        },
+        {
+          "target": "tar.gz",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "synopsis": "BlockHub",
+      "category": "Entertainment"
+    },
+    "appx": {
+      "identityName": "Blockhub",
+      "publisher": "CN=Hyperbridge Technology Inc, O=Hyperbridge Technology Inc, L=Talinn, S=Talinn, C=EE",
+      "publisherDisplayName": "Hyperbridge Technology Inc",
+      "backgroundColor": "#34262A"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": "true",
+      "deleteAppDataOnUninstall": "true",
+      "createDesktopShortcut": "always",
+      "installerIcon": "static/Icon-512.ico",
+      "perMachine": true,
+      "artifactName": "BlockHub-Setup-${version}.${ext}"
+    },
+    "afterPack": "./scripts/after-pack.js",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "hyperbridge",
+        "repo": "blockhub-desktop-client"
+      }
+    ]
+  },
+  "config": {
+    "forge": {
+      "electronPackagerConfig": {
+        "icon": "static/Icon-512.ico",
+        "prune": true,
+        "ignore": [
+          ".*node_modules/fsevents/build.*",
+          "scripts",
+          ".vscode"
+        ],
+        "afterPrune": []
+      }
+    }
+  }
+}
