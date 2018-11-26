@@ -5194,6 +5194,15 @@ storiesOf('Video Popup', module)
 `
     }))
 
+storiesOf('Wallet Popup', module)
+    .add('default', () => ({
+        components: {
+            'c-wallet': (resolve) => require(['@/ui/components/wallet'], resolve),
+        },
+        template: `<div class="p-5">
+                        <c-wallet />
+                    </div>`
+    }))
 
 /*
      Dynamic import - test version
