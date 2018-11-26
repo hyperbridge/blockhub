@@ -385,8 +385,12 @@
                 } else {
                     this.$store.state.application.signedIn = true
                     //this.$router.replace({ name: 'Home' })
+
+                    if (!this.$store.state.application.account.activeProfile.id) {
+                        this.$store.state.application.account.activeProfile = this.$store.state.account.profiles[0]
+                    }
                 }
-            }
+            },
         }
     }
 </script>

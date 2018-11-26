@@ -1,6 +1,6 @@
 {
     "name": "web",
-    "description": "Web server",
+    "description": "Web service",
     "repository": {},
     "license": "SEE LICENSE IN LICENSE.md",
     "version": "0.1.0",
@@ -14,7 +14,7 @@
         "dev": "npm run build-development && ./node_modules/nodemon --exec node ./build/src/index.js",
         "migrate": "./node_modules/.bin/knex migrate:latest",
         "migrate-heroku": "heroku run 'knex migrate:latest'",
-        "test-api-call": "curl http://localhost:3000/api/v1/ping",
+        "test-api-call": "curl http://localhost:9001/api/v1/ping",
         "deploy-beta": "cp -R dist/ ../../../beta-api.blockhub.gg && cd ../../../beta-api.blockhub.gg && rm CNAME && git add -A && git commit -m \"Rebuild\" && git push && cd ../../../blockhub/services/web",
         "deploy-preview": "cp -R dist/ ../../../preview-api.blockhub.gg && cd ../../../preview-api.blockhub.gg && rm CNAME && git add -A && git commit -m \"Rebuild\" && git push && cd ../../../blockhub/services/web",
         "deploy-staging": "cp -R dist/ ../../../staging-api.blockhub.gg && cd ../../../staging-api.blockhub.gg && rm CNAME && git add -A && git commit -m \"Rebuild\" && git push && cd ../../../blockhub/services/web",
@@ -62,8 +62,7 @@
         "typescript": "^3.1.6",
         "typescript-formatter": "^7.2.2"
     },
-    "devDependencies": {
-    },
+    "devDependencies": {},
     "babel": {
         "presets": [
             "es2015"

@@ -435,7 +435,7 @@ export default {
                 
             } else if (this.currentStep === 3) {
                 this.finishedStep = 3;
-                this.$router.push('/')
+                this.$router.push({ path: '/' })
             }
         },
         changeTab(step) {
