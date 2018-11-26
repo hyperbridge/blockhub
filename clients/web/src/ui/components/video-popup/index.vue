@@ -1,15 +1,11 @@
 <template>
-    <c-popup :activated="activated" width="1100" @close="$emit('close')">
+    <c-popup :activated="activated" :width="showComments ? '1000' : '800'" @close="closeModal">
         <div class="video-popup" slot="custom_content">
             <div class="video-popup__video-container">
-                <c-youtube :video-id="youtube" :player-vars="playerVars" fitParent="true" height="450" width="800" :resize="true" v-if="youtube"></c-youtube>
-                <c-twitch :channel="twitch" height="450" width="800" v-else-if="twitch"></c-twitch>
-                <video controls v-else-if="video">
-                    <template v-for="item in video">
-                        <source :src="item.src" :type="['video/' + item.format ]">
-                    </template>
-                    Your browser does not support the video tag.
-                </video>
+                <c-loading-bar-circle v-if="showLoader" />
+                <youtube :video-id="youtube" :player-vars="playerVars" :fitParent="true" height="450" width="800" :resize="true" v-if="youtube" @ready="isReady"></youtube>
+                <c-twitch :channel="twitch" height="450" width="800" v-else-if="twitch" @ready="isReady"></c-twitch>
+                <c-video :video="video" v-else-if="video" @ready="isReady" />
                 <slot name="video" v-else />
             </div>
             <div class="video-popup__video-comments" v-if="showComments">
@@ -33,14 +29,19 @@
 </template>
 
 <script>
+    import Vue from 'vue'
+    import VueYoutube from 'vue-youtube'
 
+    Vue.use(VueYoutube)
     export default {
         name: 'video-popup',
         components:{
             'c-popup': (resolve) => require(['@/ui/components/popups'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
             'c-youtube': (resolve) => require(['@/ui/components/youtube'], resolve),
-            'c-twitch': (resolve) => require(['@/ui/components/twitch'], resolve)
+            'c-video': (resolve) => require(['@/ui/components/video'], resolve),
+            'c-twitch': (resolve) => require(['@/ui/components/twitch'], resolve),
+            'c-loading-bar-circle': (resolve) => require(['@/ui/components/loading-bar/circle'], resolve)
         },
         props:{
             activated:{
@@ -52,14 +53,24 @@
             twitch: String,
             showComments:{
                 type: Boolean,
-                default: true
-            },
+                default: false
+            }
         },
         data(){
             return {
                 playerVars: {
                     autoplay: 0
-                }
+                },
+                showLoader: true
+            }
+        },
+        methods:{
+            isReady(){
+                this.showLoader = false
+            },
+            closeModal(){
+                this.$emit('close')
+                this.showLoader = true
             }
         }
     }
@@ -73,10 +84,16 @@
         justify-content: space-between;
     }
     .video-popup__video-container{
-        width: auto;
+        width: 800px;
         display: flex;
+        position: relative;
+        background: #111;
+        &.full-width{
+            width: 100%;
+            height: auto;
+        }
         video{
-            width: 800px;
+            width: 100%;
         }
     }
     .video-popup__video-comments{
