@@ -39,11 +39,11 @@
                                                  class="dark-mode"
                                                  :multiple="true"
                                                  :taggable="true"
-                                                 :options="developer_tag_options">
+                                                 :options="developerTagOptions">
 
                                     </multiselect>
                                     <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
-                                        <!--<option v-for="(tag, index) in developer_tag_options" :key="index"-->
+                                        <!--<option v-for="(tag, index) in developerTagOptions" :key="index"-->
                                                 <!--:selected="product.developerTags.includes(tag)">{{ tag }}-->
                                         <!--</option>-->
                                     <!--</select>-->
@@ -121,7 +121,7 @@
                                                 <label>Old Price</label>
                                             </label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: 20" v-model="product.old_price">
+                                                <input type="text" class="form-control" placeholder="Example: 20" v-model="product.oldPrice">
                                                 <span class="form-text"></span>
                                             </div>
                                         </div>
@@ -140,7 +140,7 @@
                                                 <label>Release Date</label>
                                             </div>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Example: 12/30/2020" v-model="product.release_date">
+                                                <input type="text" class="form-control" placeholder="Example: 12/30/2020" v-model="product.releaseDate">
                                                 <span class="form-text"></span>
                                             </div>
                                         </div>
@@ -304,7 +304,7 @@
                     background_image: false,
                     tags: false
                 },
-                developer_tag_options: [
+                developerTagOptions: [
                     'rpg',
                     'adventure',
                     'racing',
@@ -321,7 +321,7 @@
                 return this.$store.state.marketplace;
             },
             product() {
-                return this.id === 'new' ? this.marketplace.default_product : DB.marketplace.products.findOne({ 'id': Number(this.id) })
+                return this.id === 'new' ? this.marketplace.defaultProduct : DB.marketplace.products.findOne({ 'id': Number(this.id) })
             },
             editorMode() {
                 return this.$store.state.application.editorMode
@@ -472,7 +472,7 @@
                                             developers: Object.values($('#developers_list a').map((i, el) => $(el).text().trim()).get()),
                                             publishers: Object.values($('#developers_list').parent().next().find('a').map((i, el) => $(el).text().trim()).get()),
                                             tags: Object.values($('.popular_tags a').map((i, el) => $(el).text().trim()).get()),
-                                            releaseDate: $('.release_date .date').text().trim(),
+                                            releaseDate: $('.releaseDate .date').text().trim(),
                                             images: {
                                                 preview: Object.values($('.highlight_strip_item.highlight_strip_screenshot').map((i, el) => $(el).find('img').attr('src')).get())
                                             },
@@ -547,7 +547,7 @@
                     this.product.systemTags = ['imported']
                     this.product.developerTags = data.tags
                     this.product.name = data.title
-                    this.product.release_date = data.releaseDate
+                    this.product.releaseDate = data.releaseDate
                     this.product.description = data.description
                     this.product.content = data.about
                     this.product.genre = ''

@@ -17,8 +17,8 @@
                                 </div>
                                 <div class="title-text">
                                     <h1>{{ asset.name }}</h1>
-                                    <span><strong>{{ asset.game_name }}</strong></span>
-                                    <span class="company">{{ asset.product_name }}</span>
+                                    <span><strong>{{ asset.gameName }}</strong></span>
+                                    <span class="company">{{ asset.productName }}</span>
                                 </div>
                             </div>
                             <div class="asset-head__icons">
@@ -27,7 +27,7 @@
                                         <i class="fas fa-box"></i>
                                     </div>
                                     <div class="info">
-                                        <div class="h5 mb-0 font-weight-bold">{{ asset.inventory_count | numeralFormat('0 a') }}</div>
+                                        <div class="h5 mb-0 font-weight-bold">{{ asset.inventoryCount | numeralFormat('0 a') }}</div>
                                         <p class="p-0">Your Inventory</p>
                                     </div>
                                 </div>
@@ -36,7 +36,7 @@
                                         <i class="fas fa-shopping-basket"></i>
                                     </div>
                                     <div class="info">
-                                        <div class="h5 mb-0 font-weight-bold">{{ asset.existing_count | numeralFormat('0.0 a') }}</div>
+                                        <div class="h5 mb-0 font-weight-bold">{{ asset.existingCount | numeralFormat('0.0 a') }}</div>
                                         <p class="p-0">For Sale</p>
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
                                         <i class="fas fa-globe"></i>
                                     </div>
                                     <div class="info">
-                                        <div class="h5 mb-0 font-weight-bold">{{ asset.for_sale_count | numeralFormat('0.0 a') }}</div>
+                                        <div class="h5 mb-0 font-weight-bold">{{ asset.forSaleCount | numeralFormat('0.0 a') }}</div>
                                         <p class="p-0">Existing</p>
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@
                                 <c-heading-bar-fields name="Rarity" icon="trophy"/>
                                 <c-heading-bar-fields name="Value" icon="dollar"/>
                             </template>
-                            <c-content-navigation :items="asset.offers_list" :setLimits="4">
+                            <c-content-navigation :items="asset.offersList" :setLimits="4">
                                 <div class="offers__list" slot-scope="props">
                                     <div
                                         v-for="(item, index) in props.items"
@@ -139,8 +139,8 @@
                                             {{ item.company_name }}
                                         </div>
                                         <div class="item-info">
-                                            <span class="user_name">
-                                                {{ item.user_name }}
+                                            <span class="userName">
+                                                {{ item.userName }}
                                             </span>
                                             <span class="price">
                                                 $ {{ item.price.current }}
@@ -170,7 +170,7 @@
 
                     <div class="col-12 margin-top-15 margin-bottom-15">
                         <c-block class="padding-bottom-0" title="Yours Inventory" noGutter onlyContentBg bgGradient>
-                            <c-content-navigation :items="asset.inventory_list" :setLimits="4">
+                            <c-content-navigation :items="asset.inventoryList" :setLimits="4">
                                 <div class="my-assets__list" slot-scope="props">
                                     <div
                                         v-for="(item, index) in props.items"
@@ -191,13 +191,13 @@
                                             <div class="switcher">
                                                 <c-switch
                                                     label="Accept offers"
-                                                    :checked="item.accept_offers"
+                                                    :checked="item.acceptOffers"
                                                     @change="$store.commit('assets/negateValue', {
                                                         id: item.id,
-                                                        iprop: 'accept_offers'
+                                                        iprop: 'acceptOffers'
                                                     })"
                                                     @changev2="$store.commit('assets/negateValue', {
-                                                        ['id'+item.id]: 'accept_offers'
+                                                        ['id'+item.id]: 'acceptOffers'
                                                     })"
                                                     size="sm"
                                                     label_position="left"
@@ -432,7 +432,7 @@
                     line-height: 26px;
                     font-size: 14px;
                     margin-right: 20px;
-                    &.user_name {
+                    &.userName {
                         font-weight: bold;
                     }
                 }

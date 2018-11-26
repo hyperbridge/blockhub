@@ -253,7 +253,7 @@ export const actions = {
     createTradeUrl({ commit, state }) {
         // async call => delete previous trade url
         // state.account.tradeURLId
-        commit('createTradeUrl', getId());
+        commit('createTradeUrl', getId())
     }
 }
 
@@ -268,11 +268,11 @@ export const mutations = {
     },
     updateAccount({ account }, { prop, data, key }) {
         if (Array.isArray(account[prop])) {
-            account[prop][key] = data;
+            account[prop][key] = data
         } else if (typeof account[prop] === 'object') {
-            account[prop] = { ...account[prop], [id]: data };
+            account[prop] = { ...account[prop], [id]: data }
         } else {
-            account[prop] = data;
+            account[prop] = data
         }
     },
     addShortcut(state, shortcut) {
@@ -302,20 +302,20 @@ export const mutations = {
         state.activeModal = 'notification'
     },
     updateFavorites2({ account }, { prop = 'productWishlist', id }) {
-        const foundKey = account[prop].findIndex(savedId => savedId === id);
+        const foundKey = account[prop].findIndex(savedId => savedId === id)
         foundKey
         ? account[prop].push(id)
         : account[prop].splice(foundKey, 0);
-        return !!foundKey;
+        return !!foundKey
     },
     updateFavorites({ account }, { prop = 'productWishlist', id }) {
         // Optional -> object
         if (account[prop][id]) {
-            const { [id]: deleted, ...rest } = account[prop];
+            const { [id]: deleted, ...rest } = account[prop]
             delete(rest[id])
-            account[prop] = rest;
+            account[prop] = rest
         } else {
-            account[prop] = { ...account[prop], [id]: true };
+            account[prop] = { ...account[prop], [id]: true }
         }
     },
     updateEnvironmentMode(state, payload) {

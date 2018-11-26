@@ -4,16 +4,16 @@
             <transition-group name="slideUp" :key="index">
                 <div class="row justify-content-center frontpage-product" v-if="item.type === 'frontpageProduct'" :key="`level-1-${index}`">
                     <div class="col-12 col-lg-6 frontpage-product__slider" v-if="item.data.images">
-                        <c-img :src="item.data.images.medium_tile" :data-link="`#/product/${item.data.id}`" />
+                        <c-img :src="item.data.images.mediumTile" :data-link="`#/product/${item.data.id}`" />
                     </div>
                     <div class="col-12 col-lg-6 frontpage-product__info">
                         <h2><a :href="`#/product/${item.data.id}`">{{ item.data.name }}</a></h2>
-                        <p>{{ item.data.short_description }}</p>
+                        <p>{{ item.data.shortDescription }}</p>
                         <c-tags :tags="item.data.developerTags"></c-tags>
                         <div class="frontpage-product__footer">
                             <div class="price-list" v-if="item.data.price">
-                                <div class="price old_price" v-if="item.data.old_price">
-                                    {{ item.data.old_price | convertCurrency }}
+                                <div class="price oldPrice" v-if="item.data.oldPrice">
+                                    {{ item.data.oldPrice | convertCurrency }}
                                     <!--<span>usd</span>-->
                                 </div>
                                 <div class="price">
@@ -148,12 +148,12 @@
                                 <c-slide v-for="(project, index) in item.data.projects" :key="index">
                                     <c-project-card
                                         class="p-2"
-                                        :image="project.images.medium_tile" 
+                                        :image="project.images.mediumTile" 
                                         :description="project.description" 
                                         :funds="project.funds" 
                                         :parentName="project.product && project.product.name" 
                                         :parentDeveloper="project.product && project.product.developer" 
-                                        :parentImage="project.product && project.product.images.medium_tile"
+                                        :parentImage="project.product && project.product.images.mediumTile"
                                         :id="project.id"
                                     />
                                 </c-slide>
@@ -520,7 +520,7 @@ export default {
                 span{
                     font-size: 13px;
                 }
-                &.old_price{
+                &.oldPrice{
                     &:before{
                         position: absolute;
                         height: 2px;

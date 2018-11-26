@@ -52,7 +52,9 @@
                 </div>
                 <!-- //END PAGE HEADING -->
                 <div class="content__wrapper">
-                    <slot />
+                    <div class="container-fluid">
+                        <slot />
+                    </div>
                 </div>
             </div>
         </transition>
@@ -122,6 +124,11 @@
                             {
                                 title: 'Crowdfunds',
                                 child: [
+                                    {
+                                        href: '/business/projects',
+                                        title: 'All Crowdfunds',
+                                        icon: 'fas fa-square-full icon-sm',
+                                    },
                                     {
                                         href: '/business/project/new',
                                         title: 'New Crowdfunds',

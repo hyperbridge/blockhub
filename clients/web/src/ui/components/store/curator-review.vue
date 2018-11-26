@@ -16,9 +16,9 @@
             {{ read_more ? 'SHOW LESS' : 'MORE...' }}
         </a>
         <h4 class="curator-review__more-header">More curated by {{ review.author.name }}</h4>
-        <ul class="more_reviews">
+        <ul class="moreReviews">
             <li
-                v-for="(sub_review, index) in review.more_reviews"
+                v-for="(sub_review, index) in review.moreReviews"
                 :key="index"
                 class="sub-review"
             >
@@ -101,7 +101,7 @@ export default {
     }
 }
 
-.more_reviews {
+.moreReviews {
     margin: 0;
     margin-bottom: 20px;
     padding: 0;

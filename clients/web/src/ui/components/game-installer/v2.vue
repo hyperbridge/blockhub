@@ -3,13 +3,13 @@
         <div class="game-installer__product-preview">
             <c-img
                 class="game-installer__image"
-                :src="product.images.medium_tile"
+                :src="product.images.mediumTile"
             />
             <div class="game-installer__description">
                 <h3>{{ product.name }}</h3>
                 <p v-html="description"></p>
                 <c-icon
-                    v-for="(reqs, index) in product.system_requirements"
+                    v-for="(reqs, index) in product.systemRequirements"
                     :key="index"
                     cat="fab"
                     :name="getSysName(reqs.os)"

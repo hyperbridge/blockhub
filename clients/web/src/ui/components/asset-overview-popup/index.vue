@@ -9,7 +9,7 @@
             </div>
             <div class="info">
                 <h4>{{ asset.name }}</h4>
-                <h6>{{ asset.product_name }}</h6>
+                <h6>{{ asset.productName }}</h6>
                 <div class="description">
                     <h6>{{ asset.price['current'] | convertCurrency }}</h6>
                     <p>Based on 7461 other transactions</p>
@@ -34,11 +34,11 @@
             <div class="w-100 py-4">
                 <c-switch
                     label="Accept offers for this item?"
-                    :checked="asset.accept_offers"
+                    :checked="asset.acceptOffers"
                     label_size="18px"
                     size="sm"
                     label_position="left"
-                    @change="$store.commit('assets/negateValue', { id: asset.id, iprop: 'accept_offers' })"
+                    @change="$store.commit('assets/negateValue', { id: asset.id, iprop: 'acceptOffers' })"
                 />
             </div>
         </div>

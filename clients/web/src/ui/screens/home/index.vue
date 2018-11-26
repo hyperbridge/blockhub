@@ -239,12 +239,12 @@ export default {
             result.push({
                 type: 'productNews',
                 data: {
-                    headings: Object.values(groupBy(this.$store.state.marketplace.posts, 'target_id')).map(post => {
-                        if (post[0].target_type === 'product') {
-                            const target = this.$store.state.marketplace.products[post[0].target_id]
+                    headings: Object.values(groupBy(this.$store.state.marketplace.posts, 'targetId')).map(post => {
+                        if (post[0].targetType === 'product') {
+                            const target = this.$store.state.marketplace.products[post[0].targetId]
 
                             return {
-                                image: target.images.medium_tile,
+                                image: target.images.mediumTile,
                                 title: target.name,
                                 developer: target.developer
                             }
@@ -252,7 +252,7 @@ export default {
                             return undefined
                         }
                     }),
-                    lists: Object.values(groupBy(this.$store.state.marketplace.posts, 'target_id'))
+                    lists: Object.values(groupBy(this.$store.state.marketplace.posts, 'targetId'))
                 }
             })
 

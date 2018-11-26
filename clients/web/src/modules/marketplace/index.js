@@ -26,7 +26,7 @@ const updateState = (savedData, updatedState = {}) => {
         upcomingProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['upcoming'] } }) : [],
         trending_products: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['trending'] } }) : [],
         topSellingProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['top_seller'] } }) : [],
-        special_products: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['specials'] } }) : [],
+        specialProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['specials'] } }) : [],
         productNews: DB.marketplace ? DB.marketplace.posts.find({ 'target': { '$eq': ['product'] }, 'systemTags': { '$contains': ['news'] } }) : [],
         top_free: DB.marketplace ? DB.marketplace.products.find({ 'price': { '$eq': 0 } }) : [],
         top_5: DB.marketplace ? DB.marketplace.products.find({ 'rating.overall': { '$gte': 5 } }) : [],
@@ -42,7 +42,7 @@ const updateState = (savedData, updatedState = {}) => {
         upcomingProducts: [schema.product],
         trending_products: [schema.product],
         topSellingProducts: [schema.product],
-        special_products: [schema.product]
+        specialProducts: [schema.product]
     })
 
     state = { ...rawData, ...normalizedData.entities } // ...normalizedData.result,
@@ -75,7 +75,7 @@ export const getters = {
     productsLanguages: (state, getters) => getters.productsArray
         .reduce((languages, product) => [
             ...languages,
-            ...product.language_support
+            ...product.languageSupport
                 .filter(lang =>
                     !languages.includes(lang.name)
                 )
@@ -102,9 +102,9 @@ export const getters = {
         )
     ,
     assetsProducts: (state, getters) => getters.assetsArray.reduce((products, asset) =>
-        products.includes(asset.product_name)
+        products.includes(asset.productName)
             ? products
-            : [ ...products, asset.product_name ]
+            : [ ...products, asset.productName ]
         , []).sort()
 }
 

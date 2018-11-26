@@ -597,7 +597,7 @@ export default {
                 }
             }
         }
-        .wallet_number {
+        .walletNumber {
             .form-group {
                 display: inline-block;
                 width: calc(100% - 40px);

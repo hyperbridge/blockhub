@@ -1,8 +1,8 @@
 [
     {
         "id": 1,
-        "target_type": "product",
-        "target_id": 1,
+        "targetType": "product",
+        "targetId": 1,
         "systemTags": [
             "news"
         ],
@@ -13,8 +13,8 @@
     },
     {
         "id": 2,
-        "target_type": "product",
-        "target_id": 1,
+        "targetType": "product",
+        "targetId": 1,
         "systemTags": [
             "news"
         ],
@@ -25,8 +25,8 @@
     },
     {
         "id": 3,
-        "target_type": "product",
-        "target_id": 2,
+        "targetType": "product",
+        "targetId": 2,
         "systemTags": [
             "news"
         ],
@@ -37,8 +37,8 @@
     },
     {
         "id": 4,
-        "target_type": "product",
-        "target_id": 3,
+        "targetType": "product",
+        "targetId": 3,
         "systemTags": [
             "news"
         ],

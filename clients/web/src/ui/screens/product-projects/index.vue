@@ -26,7 +26,7 @@
                         <c-project-card
                             v-for="(project, index) in projects"
                             :key="index"
-                            :image="project.images.medium_tile"
+                            :image="project.images.mediumTile"
                             :description="project.description"
                             :funds="project.funds"
                             :name="project.name"
@@ -54,7 +54,7 @@ export default {
     },
     computed: {
         projects() {
-            return BlockHub.DB.funding.projects.find({ 'target_id': { '$eq': this.product.id } }) || []
+            return BlockHub.DB.funding.projects.find({ 'targetId': { '$eq': this.product.id } }) || []
         }
     }
 }

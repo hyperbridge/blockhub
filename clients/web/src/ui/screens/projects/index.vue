@@ -29,12 +29,12 @@
             <div class="row">
                 <c-project-card
                     class="p-2 col-3"
-                    :image="project.images.medium_tile" 
+                    :image="project.images.mediumTile" 
                     :description="project.description" 
                     :funds="project.funds" 
                     :parentName="project.product && project.product.name" 
                     :parentDeveloper="project.product && project.product.developer" 
-                    :parentImage="project.product && project.product.images.medium_tile"
+                    :parentImage="project.product && project.product.images.mediumTile"
                     :id="project.id"
                     v-for="(project, index) in projects" :key="index"
                 />

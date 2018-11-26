@@ -156,9 +156,9 @@ function hexToRgb(hex) {
                 this.css.headerBgLayer1 = $('.header-bg__layer-1')[0].style
                 this.css.headerBgLayer2 = $('.header-bg__layer-2')[0].style
 
-                document.body.style.backgroundColor = this.realm.theme.background_color
-                $('#header-bg').css({ 'background-image': `url(${this.realm.images.background})`, 'background-size': this.realm.theme.header.background_size || 'cover' })
-                $('.header-bg__layer-1').css({ 'background': `linear-gradient(to bottom, rgba(${hexToRgb(this.realm.theme.background_color.slice(1))}, 0.34) 0%, rgba(${hexToRgb(this.realm.theme.background_color.slice(1))}, 1) 100%)` })
+                document.body.style.backgroundColor = this.realm.theme.backgroundColor
+                $('#header-bg').css({ 'background-image': `url(${this.realm.images.background})`, 'background-size': this.realm.theme.header.backgroundSize || 'cover' })
+                $('.header-bg__layer-1').css({ 'background': `linear-gradient(to bottom, rgba(${hexToRgb(this.realm.theme.backgroundColor.slice(1))}, 0.34) 0%, rgba(${hexToRgb(this.realm.theme.backgroundColor.slice(1))}, 1) 100%)` })
                 $('.header-bg__layer-2').css({ 'position': 'fixed', 'background': 'rgba(255, 255, 255, 0.2)', 'height': '48px' })
                 $('.app-header__shadow').hide()
                 $('#page-aside').hide()

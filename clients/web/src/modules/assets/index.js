@@ -186,8 +186,8 @@ const assets = {
     getters: {
         assets: ({ assets, products }, { collections: col }, { marketplace: { collections }}) =>
             normalize(assets, asset => ({
-                offers_list: asset.offers_list.map(id => assets[id]),
-                inventory_list: asset.inventory_list.map(id => assets[id]),
+                offersList: asset.offersList.map(id => assets[id]),
+                inventoryList: asset.inventoryList.map(id => assets[id]),
                 collections: asset.collections.map(id => collections[id]),
                 product: extract(products[asset.product], ['images', 'price'])
             })),
@@ -197,8 +197,8 @@ const assets = {
                 ...populated,
                 [asset.id]: {
                     ...asset,
-                    offers_list: asset.offers_list.map(id => assets[id]),
-                    inventory_list: asset.inventory_list.map(id => assets[id]),
+                    offersList: asset.offersList.map(id => assets[id]),
+                    inventoryList: asset.inventoryList.map(id => assets[id]),
                     collections: asset.collections.map(id => collections[id]),
                     product: extract(products[asset.product], ['images', 'price'])
                 }

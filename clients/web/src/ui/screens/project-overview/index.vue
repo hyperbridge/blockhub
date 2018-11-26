@@ -110,11 +110,11 @@
                     <ul class="milestones__list">
                         <li v-for="(item, index) in project.milestones.items"
                             v-bind:class="{ done: item.status === 'done' }" :key="index">
-                            <div class="step_number" v-if="item.status === 'done'">
+                            <div class="stepNumber" v-if="item.status === 'done'">
                                 <i class="fas fa-check"></i>
                             </div>
-                            <div class="step_number" v-else>
-                                {{ item.step_number }}
+                            <div class="stepNumber" v-else>
+                                {{ item.stepNumber }}
                             </div>
                             <div class="text">
                                 {{ item.title }}
@@ -571,7 +571,7 @@
                 flex-basis: calc(100% - 40px);
                 text-align: left;
             }
-            .step_number {
+            .stepNumber {
                 flex-basis: 40px;
                 text-align: center;
                 font-size: 22px;

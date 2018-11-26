@@ -76,7 +76,7 @@ exports.get_products_filters = async req => {
   const { properties } = req.params;
 
   const arrayProps = ['systemTags', 'developerTags'];
-  const objectProps = ['system_requirements', 'language_support'];
+  const objectProps = ['systemRequirements', 'languageSupport'];
 
   const filters = properties.split('&').reduce((filters, option) => {
     const [prop, val] = option.split('=');

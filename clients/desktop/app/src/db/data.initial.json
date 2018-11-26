@@ -881,9 +881,9 @@
           { "text": "New Class, storyline and weapons type", "status": "done" },
           {
             "text": "Level cap updated to 90 with new set of armors and weapons.",
-            "step_number": "3"
+            "stepNumber": "3"
           },
-          { "text": "Add 3 extra dungeons", "step_number": "4" }
+          { "text": "Add 3 extra dungeons", "stepNumber": "4" }
         ]
       },
       "projects": [],
@@ -904,14 +904,14 @@
       "upcomingProducts": [],
       "trending_products": [],
       "topSellingProducts": [],
-      "special_products": [],
+      "specialProducts": [],
       "assets": [],
       "products": [
         {
           "name": "My Product Name",
           "images": {
             "header": "https://picsum.photos/2000/300/?random",
-            "medium_tile": "https://picsum.photos/200/300/?random",
+            "mediumTile": "https://picsum.photos/200/300/?random",
             "main": "https://picsum.photos/200/300/?image=3",
             "preview": [
               "https://picsum.photos/200/300/?image=0",
@@ -922,7 +922,7 @@
           "type": "game",
           "downloads": 20,
           "price": 0,
-          "old_price": 0,
+          "oldPrice": 0,
           "systemTags": [ "game", "new" ],
           "author": "0x0",
           "developerTags": [ "adventure" ],
@@ -941,7 +941,7 @@
           ],
           "assets": [],
           "community": { "discussions": [ { "name": "Example Discussion", "count": "0", "link": "" } ] },
-          "system_requirements": [
+          "systemRequirements": [
             {
               "system": "Microsoft Windows",
               "requirements": "8GB storage space,\n4GB RAM, GTX 1050, or equivalent",
@@ -958,7 +958,7 @@
               "icon": "fab fa-apple"
             }
           ],
-          "language_support": [
+          "languageSupport": [
             {
               "name": "English",
               "closed_captioning": true,
@@ -984,11 +984,11 @@
           "size": "lg"
         }
       },
-      "default_product": {
+      "defaultProduct": {
         "name": "My Product Name",
         "images": {
           "header": "https://picsum.photos/2000/300/?random",
-          "medium_tile": "https://picsum.photos/200/300/?random",
+          "mediumTile": "https://picsum.photos/200/300/?random",
           "main": "https://picsum.photos/200/300/?image=3",
           "preview": [
             "https://picsum.photos/200/300/?image=0",
@@ -1017,7 +1017,7 @@
         ],
         "assets": [],
         "community": { "discussions": [ { "name": "Example Discussion", "count": "0", "link": "" } ] },
-        "system_requirements": [
+        "systemRequirements": [
           {
             "system": "Microsoft Windows",
             "requirements": "8GB storage space,\n4GB RAM, GTX 1050, or equivalent",
@@ -1034,7 +1034,7 @@
             "icon": "fab fa-apple"
           }
         ],
-        "language_support": [ { "name": "English", "closed_captioning": true, "audio_description": true } ]
+        "languageSupport": [ { "name": "English", "closed_captioning": true, "audio_description": true } ]
       },
       "help": {
         "topics": [
@@ -1043,7 +1043,7 @@
             "slug": "general",
             "label": "General Platform Features",
             "icon": "cogs",
-            "sub_topics": [
+            "subTopics": [
               { "id": 0, "slug": "common-runtime", "label": "Common runtime", "icon": "lock" },
               { "id": 1, "slug": "add-ons", "label": "Add-ons", "icon": "desktop" },
               { "id": 2, "slug": "builds", "label": "Builds", "icon": "cubes" },

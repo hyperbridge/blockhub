@@ -543,61 +543,61 @@ storiesOf('Projects', module)
                     {
                         "id": 1,
                         "title": "Create the base game with 2 dungeons",
-                        "short_description": "Maecenas faucibus tincidunt consectetur. Phasellus ac malesuada quam, vitae vulputate quam. Nulla dui ipsum, suscipit sed laoreet auctor, sagittis et mauris.",
+                        "shortDescription": "Maecenas faucibus tincidunt consectetur. Phasellus ac malesuada quam, vitae vulputate quam. Nulla dui ipsum, suscipit sed laoreet auctor, sagittis et mauris.",
                         "text": "Aenean eu tellus vel tortor tincidunt pharetra. Aenean mattis, sapien vel lacinia accumsan, justo mi venenatis justo, ut accumsan diam mauris sit amet ipsum. Vivamus iaculis lectus vel egestas vehicula. Phasellus in lacus nunc. Curabitur lobortis arcu neque, non rutrum elit placerat eget.",
                         "img": "http://via.placeholder.com/350x250",
                         "status": "done",
-                        "step_number": 1,
+                        "stepNumber": 1,
                         "progress": {
-                            "percent_days": 45,
-                            "days_left": 97,
-                            "percent_done": 17,
-                            "percent_spent": 83
+                            "percentDays": 45,
+                            "daysLeft": 97,
+                            "percentDone": 17,
+                            "percentSpent": 83
                         }
                     },
                     {
                         "id": 3,
                         "title": "Lorem ipsum dolor sit amet",
-                        "short_description": "Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
+                        "shortDescription": "Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
                         "text": "Proin sollicitudin faucibus mauris non pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce efficitur imperdiet urna, mollis vulputate risus feugiat sit amet. Ut turpis nulla, ultricies a ultricies eget, bibendum eu orci. In in suscipit nisl. Sed bibendum, mauris a convallis rhoncus, enim libero condimentum enim, in ultrices ligula orci ac nisl. Nunc vestibulum purus vitae lorem porta, eget aliquam nibh rhoncus.",
                         "img": "http://via.placeholder.com/350x250",
                         "status": "done",
-                        "step_number": 3,
+                        "stepNumber": 3,
                         "progress": {
-                            "percent_days": 34,
-                            "days_left": 125,
-                            "percent_done": 3,
-                            "percent_spent": 80
+                            "percentDays": 34,
+                            "daysLeft": 125,
+                            "percentDone": 3,
+                            "percentSpent": 80
                         }
                     },
                     {
                         "id": 2,
                         "title": "Praesent eu fringilla nisl",
-                        "short_description": "Aenean aliquam erat quis tortor varius convallis. Suspendisse finibus orci at nibh pharetra, vel ullamcorper tellus mattis.",
+                        "shortDescription": "Aenean aliquam erat quis tortor varius convallis. Suspendisse finibus orci at nibh pharetra, vel ullamcorper tellus mattis.",
                         "text": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac, sollicitudin lacinia arcu. Phasellus vehicula arcu tristique nunc lacinia facilisis. Nunc egestas congue massa a euismod. Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
                         "img": "http://via.placeholder.com/350x250",
                         "status": "in_progress",
-                        "step_number": 2,
+                        "stepNumber": 2,
                         "progress": {
-                            "percent_days": 91,
-                            "days_left": 4,
-                            "percent_done": 97,
-                            "percent_spent": 99
+                            "percentDays": 91,
+                            "daysLeft": 4,
+                            "percentDone": 97,
+                            "percentSpent": 99
                         }
                     },
                     {
                         "id": 4,
                         "title": "In hac habitasse platea dictumst",
-                        "short_description": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac",
+                        "shortDescription": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac",
                         "text": "Praesent eu fringilla nisl. Nullam iaculis odio non est ornare sodales non a massa. Sed sollicitudin nibh et ipsum sollicitudin blandit. Quisque vel enim congue, semper leo vitae, luctus nibh.",
                         "img": "http://via.placeholder.com/350x250",
                         "status": "in_progress",
-                        "step_number": 4,
+                        "stepNumber": 4,
                         "progress": {
-                            "percent_days": 85,
-                            "days_left": 45,
-                            "percent_done": 37,
-                            "percent_spent": 84
+                            "percentDays": 85,
+                            "daysLeft": 45,
+                            "percentDone": 37,
+                            "percentSpent": 84
                         }
                     }
                 ]
@@ -2646,8 +2646,8 @@ storiesOf('News List', module)
                 posts: [
                     {
                         "id": 1,
-                        "target_type": "product",
-                        "target_id": 1,
+                        "targetType": "product",
+                        "targetId": 1,
                         "systemTags": [
                             "news"
                         ],
@@ -2658,8 +2658,8 @@ storiesOf('News List', module)
                     },
                     {
                         "id": 2,
-                        "target_type": "product",
-                        "target_id": 1,
+                        "targetType": "product",
+                        "targetId": 1,
                         "systemTags": [
                             "news"
                         ],
@@ -2670,8 +2670,8 @@ storiesOf('News List', module)
                     },
                     {
                         "id": 3,
-                        "target_type": "product",
-                        "target_id": 2,
+                        "targetType": "product",
+                        "targetId": 2,
                         "systemTags": [
                             "news"
                         ],
@@ -2682,8 +2682,8 @@ storiesOf('News List', module)
                     },
                     {
                         "id": 4,
-                        "target_type": "product",
-                        "target_id": 3,
+                        "targetType": "product",
+                        "targetId": 3,
                         "systemTags": [
                             "news"
                         ],
@@ -2714,8 +2714,8 @@ storiesOf('News List', module)
             return {
                 article: {
                     "id": 1,
-                    "target_type": "product",
-                    "target_id": 1,
+                    "targetType": "product",
+                    "targetId": 1,
                     "systemTags": [
                         "news"
                     ],
@@ -2992,7 +2992,7 @@ const productsCardsData = [
         name: "Gothic® 3",
         images: {
             header: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
-            medium_tile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
+            mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/39500/header.jpg?t=1533039803",
             main: "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004036.1920x1080.jpg?t=1533039803",
             preview: [
                 "https://steamcdn-a.akamaihd.net/steam/apps/39500/0000004033.1920x1080.jpg?t=1533039803",
@@ -3010,7 +3010,7 @@ const productsCardsData = [
         name: "The Witcher® 3: Wild Hunt",
         images: {
             header: "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_b74d60ee215337d765e4d20c8ca6710ae2362cc2.600x338.jpg?t=1529405012",
-            medium_tile: "https://steamcdn-a.akamaihd.net/steam/apps/292030/header.jpg?t=1529405012",
+            mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/292030/header.jpg?t=1529405012",
             main: "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_b74d60ee215337d765e4d20c8ca6710ae2362cc2.600x338.jpg?t=1529405012",
             preview: [
                 "https://steamcdn-a.akamaihd.net/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.600x338.jpg?t=1529405012",
@@ -3028,7 +3028,7 @@ const productsCardsData = [
         name: "Fallout 4",
         images: {
             header: "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_c6b798424a93617b4b825aea3bcd9547c0b0a5ce.1920x1080.jpg?t=1533676954",
-            medium_tile: "https://steamcdn-a.akamaihd.net/steam/apps/377160/header.jpg?t=1533676954",
+            mediumTile: "https://steamcdn-a.akamaihd.net/steam/apps/377160/header.jpg?t=1533676954",
             main: "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_c6b798424a93617b4b825aea3bcd9547c0b0a5ce.1920x1080.jpg?t=1533676954",
             preview: [
                 "https://steamcdn-a.akamaihd.net/steam/apps/377160/ss_f7861bd71e6c0c218d8ff69fb1c626aec0d187cf.1920x1080.jpg?t=1533676954",
@@ -3093,7 +3093,7 @@ const curatorReview = {
     rate: 4.5,
     game: {img: 'http://www.pixels-association.ch/wp-content/uploads/2017/11/no1.jpg'},
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mi arcu, viverra et efficitur luctus, tincidunt vel lacus. Morbi erat augue, posuere et sodales venenatis, tincidunt eu arcu. In sollicitudin purus quis sodales ornare. Cras tempus vestibulum elementum. Sed placerat, turpis id cursus cursus, augue enim molestie dui, elementum luctus lectus est vitae dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris vehicula mi a nunc cursus, id volutpat purus commodo. Duis consequat elementum varius. Suspendisse dui enim, rhoncus a molestie at, tristique ut urna. Praesent et consectetur dui. Pellentesque ut volutpat nunc, ut viverra nulla. Duis ultricies, sem sit amet laoreet lobortis, mauris est mollis orci, non eleifend urna leo quis lectus. Vestibulum sit amet volutpat est.',
-    more_reviews: [
+    moreReviews: [
         {
             rate: 3.5,
             game: {
@@ -3519,16 +3519,16 @@ storiesOf('Project Milestone', module)
                 milestone: {
                     img: 'http://via.placeholder.com/350x250',
                     title: 'Milestone 1',
-                    short_description: `For far away, behind the word mountains, far from the countries Vokalia and Consonatia, there live.`,
+                    shortDescription: `For far away, behind the word mountains, far from the countries Vokalia and Consonatia, there live.`,
                     text: `Aenean eu tellus vel tortor tincidunt pharetra. Aenean mattis, sapien vel
                         lacinia accumsan, justo mi venenatis justo, ut accumsan diam mauris sit amet
                         ipsum. Vivamus iaculis lectus vel egestas vehicula. Phasellus in lacus nunc.
                         Curabitur lobortis arcu neque, non rutrum elit placerat eget.`,
                     progress: {
                         days_amouth: "133",
-                        days_left: 94,
-                        percent_done: 8,
-                        percent_spent: 95
+                        daysLeft: 94,
+                        percentDone: 8,
+                        percentSpent: 95
                     }
                 }
             }
@@ -3697,42 +3697,42 @@ storiesOf('Product Overview', module)
                     {
                         "name": "English",
                         "interface": true,
-                        "full_audio": false,
+                        "fullAudio": false,
                         "subtitles": false,
                         "code": "en-us"
                     },
                     {
                         "name": "Czech",
                         "interface": true,
-                        "full_audio": true,
+                        "fullAudio": true,
                         "subtitles": false,
                         "code": "cz"
                     },
                     {
                         "name": "French",
                         "interface": true,
-                        "full_audio": true,
+                        "fullAudio": true,
                         "subtitles": true,
                         "code": "fr"
                     },
                     {
                         "name": "German",
                         "interface": true,
-                        "full_audio": false,
+                        "fullAudio": false,
                         "subtitles": false,
                         "code": "de"
                     },
                     {
                         "name": "Hungarian",
                         "interface": true,
-                        "full_audio": false,
+                        "fullAudio": false,
                         "subtitles": true,
                         "code": "hu"
                     },
                     {
                         "name": "Russian",
                         "interface": true,
-                        "full_audio": false,
+                        "fullAudio": false,
                         "subtitles": true,
                         "code": "ru"
                     }
@@ -3751,7 +3751,7 @@ storiesOf('Product Overview', module)
         components: {'c-system-requirements': SystemRequirements},
         data() {
             return {
-                system_requirements: [
+                systemRequirements: [
                     {
                         "os": "win",
                         "system": "Windows XP/Vista/7",
@@ -3785,7 +3785,7 @@ storiesOf('Product Overview', module)
             <div class="padding-50">
                 <c-system-requirements
                     style="color: white"
-                    :requirements="system_requirements"
+                    :requirements="systemRequirements"
                 />
             </div>`
     }))
@@ -4051,21 +4051,21 @@ storiesOf('Purchase Option', module)
                 options: [
                     {
                         id: 1,
-                        old_price: '22.99',
+                        oldPrice: '22.99',
                         price: '16.99',
                         tag: 'Game Only',
                         title: 'Standard Edition'
                     },
                     {
                         id: 2,
-                        old_price: '19.99',
+                        oldPrice: '19.99',
                         price: '12.99',
                         tag: 'Super Nice Expansion Pack',
                         title: 'Standard Edition'
                     },
                     {
                         id: 3,
-                        old_price: '9.99',
+                        oldPrice: '9.99',
                         price: '0.69',
                         tag: 'Super Nice Expansion Pack',
                         title: 'Game + All Expansion'
@@ -4083,7 +4083,7 @@ storiesOf('Purchase Option', module)
                 <c-purchase-option v-for="(option, index) in options" 
                 :key="index" 
                 :price="option.price"
-                :oldPrice="option.old_price"
+                :oldPrice="option.oldPrice"
                 :gameTag="option.tag"
                 :title="option.title"
                 :id="option.id"
@@ -4193,10 +4193,10 @@ storiesOf('Contribute', module)
         data() {
             return {
                 pledge: {
-                    min_price: 10.99,
+                    minPrice: 10.99,
                     name: 'BLUE-HAIRED CATS',
                     estimated_delivery: '12/01/2018',
-                    ships_to: 'Anywhere in the world',
+                    shipsTo: 'Anywhere in the world',
                     description: 'Maecenas a sapien luctus, placerat massa pellentesque, consectetur ante. Nam dui est, cursus at consequat quis, malesuada eget eros. ',
                     backers: 43,
                     includes: [

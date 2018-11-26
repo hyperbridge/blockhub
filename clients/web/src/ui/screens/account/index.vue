@@ -159,7 +159,7 @@
                                 >
                                     <c-game-includes-item
                                         :id="product.id"
-                                        :image="product.images.medium_tile"
+                                        :image="product.images.mediumTile"
                                         :name="product.name"
                                         :rating="product.rating.overall"
                                         :developer="product.developer"
@@ -221,8 +221,6 @@
 
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
             'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
             'c-tabs': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve),
@@ -250,20 +248,20 @@
         },
         computed: {
             profileCount() {
-                return Object.keys(this.$store.state.application.profiles).length;
+                return Object.keys(this.$store.state.application.profiles).length
             },
             account() {
-                return this.$store.state.application.account;
+                return this.$store.state.application.account
             },
             profile() {
-                const { products } = this.$store.state.marketplace;
-                const { projects } = this.$store.state.funding;
-                const profile = this.$store.getters['application/profile'];
+                const { products } = this.$store.state.marketplace
+                const { projects } = this.$store.state.funding
+                const profile = this.$store.getters['application/profile']
                 return {
                     ...profile,
                     productWishlist: Object.keys(profile.productWishlist).map(id => products[id]),
                     projectWishlist: Object.keys(profile.projectWishlist).map(id => projects[id])
-                };
+                }
             }
         }
     }

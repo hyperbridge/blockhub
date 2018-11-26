@@ -702,7 +702,7 @@ const router = new Router({
             path: '/business',
             name: 'Business',
             component: (resolve) => require(['@/ui/screens/business'], resolve),
-            children:[
+            children: [
                 {
                     path: '',
                     name: 'Business',
@@ -735,7 +735,20 @@ const router = new Router({
                         title: 'Product',
                         breadcrumb: [
                             { to: '/business', title: 'Dashboard' },
+                            { to: '/business/products', title: 'Products' },
                             { title: 'Product' }
+                        ]
+                    }
+                },
+                {
+                    path: 'projects',
+                    name: 'All Crowdfunds',
+                    component: (resolve) => require(['@/ui/screens/business-projects'], resolve),
+                    meta: {
+                        title: 'All Crowdfunds',
+                        breadcrumb: [
+                            { path: '/business', title: 'Dashboard' },
+                            { title: 'All Crowdfunds' }
                         ]
                     }
                 },
@@ -748,7 +761,8 @@ const router = new Router({
                         title: 'Crowdfunds',
                         breadcrumb: [
                             { to: '/business', title: 'Dashboard' },
-                            { title: 'Crowdfunds' }
+                            { to: '/business/projects', title: 'Crowdfunds' },
+                            { title: 'Crowdfund' }
                         ]
                     }
                 },

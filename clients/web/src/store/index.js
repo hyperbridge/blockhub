@@ -19,7 +19,7 @@ import community from '@/modules/community'
 import rootStore from '@/modules/root'
 import seed from '../db/seed'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 
 if (!window.BlockHub)
@@ -69,7 +69,12 @@ const devConfig = CheckDevConfig()
 let service = null
 let auth = null
 
-const decentralizedMode = false
+const IsDecentralizedMode = () => {
+    // Decentralized mode if we're not on GameDelta
+    return window.location.hostname.toLowerCase().indexOf('gamedelta') !== -1
+}
+
+const decentralizedMode = IsDecentralizedMode()
 
 const feathers = feathersVuex(feathersClient, {
     idField: 'id',
@@ -460,13 +465,13 @@ BlockHub.GetMode = () => {
         return hash.replace('mode=', '')
     }
 
-    if (hostname === 'blockhub.gg') {
+    if (hostname === 'blockhub.gg' || hostname === 'gamedelta.net') {
         return 'production'
-    } else if (hostname === 'staging.blockhub.gg') {
+    } else if (hostname === 'staging.blockhub.gg' || hostname === 'staging.gamedelta.net') {
         return 'staging'
-    } else if (hostname === 'beta.blockhub.gg') {
+    } else if (hostname === 'beta.blockhub.gg' || hostname === 'beta.gamedelta.net') {
         return 'beta'
-    } else if (hostname === 'preview.blockhub.gg') {
+    } else if (hostname === 'preview.blockhub.gg' || hostname === 'preview.gamedelta.net') {
         return 'preview'
     } else {
         return 'local'

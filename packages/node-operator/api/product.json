@@ -3,7 +3,7 @@
         "name": "DOOM",
         "images": {
             "header": null,
-            "medium_tile": "/static/img/products/doom-20087/med-tile.jpg",
+            "mediumTile": "/static/img/products/doom-20087/med-tile.jpg",
             "main": null,
             "icon": "/static/img/doom-20087/icon.jpg",
             "preview": [
@@ -18,7 +18,7 @@
         "price": 0,
         "video": "/static/videos/products/doom-20087/trailer.mp4",
         "genre": "Action",
-        "release_date": "12 May, 2016",
+        "releaseDate": "12 May, 2016",
         "developer": "id Software",
         "publisher": "Bethesda Softworks",
         "content": "Developed by id software...",
@@ -30,21 +30,21 @@
             "Shooter",
             "First-Person"
         ],
-        "language_support": [
+        "languageSupport": [
             {
                 "name": "English",
                 "interface": true,
-                "full_audio": true,
+                "fullAudio": true,
                 "subtitles": true
             },
             {
                 "name": "French",
                 "interface": true,
-                "full_audio": true,
+                "fullAudio": true,
                 "subtitles": true
             }
         ],
-        "system_requirements": [
+        "systemRequirements": [
             {
                 "os": "win",
                 "system": "Windows 7/8.1/10 (64-bit versions)",

@@ -13,7 +13,7 @@
                     <strong>{{ item.price | convertCurrency }}</strong>
                 </div>
                 <a :href="`#/product/${item.id}`">
-                    <c-img :src="item.images.medium_tile" />
+                    <c-img :src="item.images.mediumTile" />
                 </a>
                 <div class="crowdfund-icon" v-if="item.crowdfund">
                     <i class="fas fa-hand-holding-usd"></i>
@@ -22,12 +22,12 @@
             <div class="info">
                 <div class="text">
                     <div class="state-tag">
-                        <template v-if="item.state_tag == 'trending'">
+                        <template v-if="item.stateTag == 'trending'">
                             <span style="color: #F75D5D">
                                 <i class="fas fa-fire"></i> Trending
                             </span>
                         </template>
-                        <template v-else-if="item.state_tag == 'pre-release'">
+                        <template v-else-if="item.stateTag == 'pre-release'">
                             <i class="fas fa-bolt" style="color: #FADC72"></i> {{ item.prerelease_count }}
                             <span class="ml-4" style="color: #499fd3">Pre Release</span>
                         </template>
@@ -45,13 +45,13 @@
                 </div>
                 <div class="footer">
                     <div class="d-flex flex-nowrap">
-                        <div class="time mr-3" v-if="item.release_date && showDate">
+                        <div class="time mr-3" v-if="item.releaseDate && showDate">
                             <i class="fas fa-calendar-alt"></i>
-                            <!--<c-tooltip :name="calculateSince(item.release_date)" position="center">-->
-                            <c-tooltip :name="calculateSince(item.release_date)" position="center">
+                            <!--<c-tooltip :name="calculateSince(item.releaseDate)" position="center">-->
+                            <c-tooltip :name="calculateSince(item.releaseDate)" position="center">
                                 <div class="text-center" style="white-space: nowrap">
                                     <strong>Released</strong><br>
-                                    {{ formatDate(item.release_date) }}
+                                    {{ formatDate(item.releaseDate) }}
                                 </div>
                             </c-tooltip>
                         </div>

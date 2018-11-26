@@ -61,11 +61,11 @@
             </div>
         </div>
 
-        <div class="wallet_number" hidden>
+        <div class="walletNumber" hidden>
             <input
                 type="text"
                 class="form-control"
-                name="wallet_number"
+                name="walletNumber"
                 placeholder="Public address"
                 :value="user.address"
                 @input="$emit('update:wallet', $event.target.value)"
@@ -119,7 +119,7 @@
         width: 100%;
         position: relative;
         color: #fff;
-        .wallet_number {
+        .walletNumber {
             display: flex;
             justify-content: space-between;
             .form-control {

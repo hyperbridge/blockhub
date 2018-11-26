@@ -3,7 +3,7 @@
         "id": "1",
         "name": "Bitcoin",
         "icon": "",
-        "short_name": "BTC",
+        "shortName": "BTC",
         "count": "0.00827",
         "history": [
             {
@@ -22,14 +22,14 @@
                 "direction": "up"
             }
         ],
-        "wallet_number": "QMdp32odsoN45insPS91ninZPEld9",
-        "preferred_switcher": true
+        "walletNumber": "QMdp32odsoN45insPS91ninZPEld9",
+        "preferredSwitcher": true
     },
     {
         "id": "2",
         "name": "Ethereum",
         "icon": "",
-        "short_name": "ETH",
+        "shortName": "ETH",
         "count": "0.00015",
         "history": [
             {
@@ -48,14 +48,14 @@
                 "direction": "up"
             }
         ],
-        "wallet_number": "kKJV798BIUFvu6ibkvVV7",
-        "preferred_switcher": false
+        "walletNumber": "kKJV798BIUFvu6ibkvVV7",
+        "preferredSwitcher": false
     },
     {
         "id": "3",
         "name": "Viacoin",
         "icon": "",
-        "short_name": "VIA",
+        "shortName": "VIA",
         "count": "0.00045",
         "history": [
             {
@@ -74,14 +74,14 @@
                 "direction": "up"
             }
         ],
-        "wallet_number": "kKJV798BIUFvu6ibkvVV7",
-        "preferred_switcher": false
+        "walletNumber": "kKJV798BIUFvu6ibkvVV7",
+        "preferredSwitcher": false
     },
     {
         "id": "4",
         "name": "Monero",
         "icon": "",
-        "short_name": "XMR",
+        "shortName": "XMR",
         "count": "0.00045",
         "history": [
             {
@@ -100,7 +100,7 @@
                 "direction": "up"
             }
         ],
-        "wallet_number": "kKJV798BIUFvu6ibkvVV7",
-        "preferred_switcher": true
+        "walletNumber": "kKJV798BIUFvu6ibkvVV7",
+        "preferredSwitcher": true
     }
 ]
