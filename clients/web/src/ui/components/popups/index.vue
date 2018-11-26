@@ -88,12 +88,13 @@
         position: absolute;
         top: -25px;
         right: 0px;
-        opacity: .7;
+        opacity: .5;
         -webkit-transition: 0.1s ease-out;
         -moz-transition:  0.1s ease-out;
         transition:  0.1s ease-out;
         font-size: 22px;
         z-index: 999;
+        color: #fff;
         img {
             width: 24px;
         }
