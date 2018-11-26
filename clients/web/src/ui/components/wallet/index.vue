@@ -6,9 +6,48 @@
                 BlockHub
             </div>
             <div class="wallet-header__bar-right">
-                <button type="button" @click.prevent="closeWindow" aria-label="Close">
-                    <i class="fas fa-times"></i>
-                </button>
+                <!--<button type="button">-->
+                <c-dropdown position="right">
+                    <div slot="title" class="account_btn">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <ul class="p-0 m-0">
+                        <li>
+                            <a href="#">
+                                Account 1
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Account 2
+                            </a>
+                        </li>
+                    </ul>
+                    <hr />
+                    <ul class="p-0 m-0">
+                        <li>
+                            <a href="#">
+                                Add account
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Import account
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Info & Help
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </c-dropdown>
+                <!--</button>-->
             </div>
         </div>
         <div class="wallet__body">
@@ -17,7 +56,7 @@
                 <div class="h2">
                     0 HBX
                 </div>
-                <div class="h3">
+                <div class="h4">
                     $ 0.00 USD
                 </div>
                 <div class="wallet__actions margin-top-20">
@@ -29,6 +68,16 @@
                     </c-button>
                 </div>
             </div>
+            <div class="wallet__history">
+                <div class="h5">
+                    History
+                </div>
+                <div class="wallet__history-list">
+                    <div class="text-center">
+                        No transaction history
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -37,7 +86,9 @@
     export default {
         name: 'wallet-popup',
         props:{},
-        components:{}
+        components:{
+            'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve)
+        }
     }
 </script>
 
@@ -47,7 +98,8 @@
         border: 1px solid rgba(0, 0, 0, .5);
         background: #3D3E5D;
         width: 350px;
-        padding: 30px;
+        padding: 30px 20px 20px;
+        height: 500px;
     }
     .wallet-header {
         position: absolute;
@@ -113,7 +165,7 @@
         border-radius: 0 0 0 13px;
         display: flex;
         align-items: center;
-        /*justify-content: center;*/
+        justify-content: center;
         &:before {
             content: "";
             border-style: solid;
@@ -123,7 +175,7 @@
             left: -22px;
             top: 0px;
         }
-        button {
+        .account_btn {
             color: #F75D5D;
             border: none;
             background: transparent;
@@ -142,6 +194,8 @@
     .wallet__body{
         display: flex;
         flex-direction: column;
+        height: 100%;
+        overflow-y: auto;
     }
     .wallet__info{
         display: flex;
@@ -154,6 +208,35 @@
             width: 60px;
             height: 60px;
             margin-bottom: 20px;
+        }
+    }
+    .wallet__history{
+        display: flex;
+        flex-direction: column;
+        color: #fff;
+    }
+    .wallet__history-list{
+        display: flex;
+        flex-direction: column;
+        color: #fff;
+        padding-top: 10px;
+        margin-top: 5px;
+        border-top: 1px solid rgba(255, 255, 255, .1);
+    }
+    .dropdown-menu{
+        li{
+            a{
+                color: #000;
+                opacity: .7;
+                line-height: 24px;
+                i{
+                    font-size: 12px;
+                    margin-right: 5px;
+                }
+                &:hover{
+                    opacity: 1;
+                }
+            }
         }
     }
 </style>
