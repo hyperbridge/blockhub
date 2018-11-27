@@ -1,14 +1,14 @@
 <template>
-    <div class="wallet-deposit">
-        <div class="wallet-deposit__head">
+    <div class="wallet-transfer">
+        <div class="wallet-transfer__head">
             <div class="h2">
-                Deposit ETH
+                Send ETH
             </div>
             <div>
                 Only send ETH to an Ethereum address.
             </div>
         </div>
-        <div class="wallet-deposit__body mt-auto">
+        <div class="wallet-transfer__body mt-auto">
             <div class="form-group row align-items-center">
                 <div class="col-3">
                     <label>
@@ -152,19 +152,19 @@
 </script>
 
 <style lang="scss" scoped>
-    .wallet-deposit {
+    .wallet-transfer {
         display: flex;
         flex-direction: column;
         color: #fff;
         min-height: 100%;
     }
-    .wallet-deposit__head {
+    .wallet-transfer__head {
         padding: 20px 0;
         border-bottom: 1px solid rgba(255, 255, 255, .1);
         color: #fff;
         margin-bottom: 15px;
     }
-    .wallet-deposit__body{
+    .wallet-transfer__body{
         display: flex;
         flex-direction: column;
         color: #fff;

@@ -5199,13 +5199,20 @@ storiesOf('Wallet Popup', module)
         components: {
             'c-wallet-base': (resolve) => require(['@/ui/components/wallet/base'], resolve),
             'c-wallet-main': (resolve) => require(['@/ui/components/wallet'], resolve),
+            'c-wallet-transfer': (resolve) => require(['@/ui/components/wallet/transfer'], resolve),
             'c-wallet-deposit': (resolve) => require(['@/ui/components/wallet/deposit'], resolve),
         },
-        template: `<div class="row p-4 m-0 flex-wrap">
+        template: `<div class="row p-4 m-0 flex-wrap" style="width: 1200px">
                         <div class="mx-2">
                             <h4 class="text-white">Main screen</h4>
                             <c-wallet-base>
                                 <c-wallet-main />
+                            </c-wallet-base>
+                        </div>
+                        <div class="mx-2">
+                            <h4 class="text-white">Transfer screen</h4>
+                            <c-wallet-base>
+                                <c-wallet-transfer />
                             </c-wallet-base>
                         </div>
                         <div class="mx-2">
