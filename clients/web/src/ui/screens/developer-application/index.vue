@@ -1,9 +1,9 @@
 <template>
     <c-layout navigationKey="store">
-        <div class="row" v-if="!$store.state.application.signed_in">
+        <div class="row" v-if="!$store.state.application.signedIn">
             <p>Interested in developing with BlockHub? Please contact us at developers@hyperbridge.org</p>
         </div>
-        <div class="row" v-if="$store.state.application.signed_in">
+        <div class="row" v-if="$store.state.application.signedIn">
             <div class="col-12" v-if="!developerMode">
                 <c-block title="Business Manager" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true" hidden>
                     <p>We're still working on our Business Manager. If you want a sneak preview, <a href="#/business">it's over here</a>. In the meantime, you can contact us directly at <a href="mailto:business@hyperbridge.org"><strong>business@hyperbridge.org</strong></a></p>
@@ -30,7 +30,7 @@
             </div>
             <div class="col-12" v-if="developerMode">
                 <c-block title="Congratulations" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                    Your profile is all setup. You are Developer #{{ chosenProfile.developer_id }}
+                    Your profile is all setup. You are Developer #{{ chosenProfile.developerId }}
 
                     <br /><br />
 
@@ -72,7 +72,7 @@
         methods: {
             convertProfile() {
                 Bridge.sendCommand('createDeveloperRequest', this.chosenProfile).then((data) => {
-                    this.chosenProfile.developer_id = data
+                    this.chosenProfile.developerId = data
                     this.$store.state.application.developerMode = true
 
                     // TODO: just redirect here?

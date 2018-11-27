@@ -5,45 +5,45 @@ export const mapElement = ({ name, module, prop = module, id, action = false, se
             • Name - Name of the computed property that will evaluate to
             • Module - Vuex module
             • Id - Saved in data property (in format like 'name + Id' eg. productId: 3), or as 'id' prop, or hardcoded to mapElement method.
-        `);
+        `)
     }
 
     return {
         [name]: {
             set(data) {
-                const id = id || this[name + 'Id'] || this.id;
-                this.$store[action ? 'dispatch' : 'commit'](`${module}/${setFn}`, { id, data, prop });
+                const id = id || this[name + 'Id'] || this.id
+                this.$store[action ? 'dispatch' : 'commit'](`${module}/${setFn}`, { id, data, prop })
             },
             get() {
-                const id = id || this[name + 'Id'] || this.id;
-                return this.$store.state[module][prop][id];
+                const id = id || this[name + 'Id'] || this.id
+                return this.$store.state[module][prop][id]
             }
         },
         [name + 'Clone']() {
-            return { ...this[name] };
+            return { ...this[name] }
         }
-    };
-};
+    }
+}
 
 /* v2 */
 
 export const mapEl = ({ name, module, target, id, idSource, action, getter = true, singular }) => {
 
-    const path = `${module}/${target}`;
-    const propertyName = name || path;
+    const path = `${module}/${target}`
+    const propertyName = name || path
 
     if (!singular) {
         return {
             [propertyName]: {
                 set(data) {
-                    const id = id || this[idSource] || this.id;
-                    this.$store[action ? 'dispatch' : 'commit']('update', [path, id, data]);
+                    const id = id || this[idSource] || this.id
+                    this.$store[action ? 'dispatch' : 'commit']('update', [path, id, data])
                 },
                 get() {
-                    const id = id || this[idSource] || this.id;
+                    const id = id || this[idSource] || this.id
                     return getter
                         ? this.$store.getters[path][id]
-                        : this.$store.state[module][target][id];
+                        : this.$store.state[module][target][id]
                 }
             }
         }
@@ -52,7 +52,7 @@ export const mapEl = ({ name, module, target, id, idSource, action, getter = tru
     return {
         [propertyName]: {
             set(data) {
-                this.$store[action ? 'dispatch' : 'commit']('updateSingular', [path, data]);
+                this.$store[action ? 'dispatch' : 'commit']('updateSingular', [path, data])
             },
             get() {
                 return getter
@@ -79,7 +79,7 @@ export const mapEl = ({ name, module, target, id, idSource, action, getter = tru
 
 /*  Example usage
 
-    import { mapElement } from '@/store/helpers';
+    import { mapElement } from '@/store/helpers'
 
     data: () => ({ assetId: 2 }),
     computed: {

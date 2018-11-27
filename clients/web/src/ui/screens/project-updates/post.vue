@@ -1,22 +1,20 @@
 <template>
     <c-layout navigationKey="project">
-            <div class="container-fluid">
-                <div class="row" v-if="post">
-                    <div class="col-12">
-                        <h2>
-                            {{ post.title }}
-                        </h2>
-                        <div v-html="post.text" />
-                    </div>
-                </div>
-                <div class="row" v-else>
-                    <div class="col-12">
-                        <h4>
-                            Something went wrong
-                        </h4>
-                    </div>
-                </div>
+        <div class="row" v-if="post">
+            <div class="col-12">
+                <h2>
+                    {{ post.title }}
+                </h2>
+                <div v-html="post.text" />
             </div>
+        </div>
+        <div class="row" v-else>
+            <div class="col-12">
+                <h4>
+                    Something went wrong
+                </h4>
+            </div>
+        </div>
     </c-layout>
 </template>
 

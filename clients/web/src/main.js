@@ -37,9 +37,9 @@ Vue.use(Snotify, {
   toast: {
     position: SnotifyPosition.leftBottom
   }
-});
+})
 
-Vue.use(VueNumerals);
+Vue.use(VueNumerals)
 Vue.component('picker', Picker)
 Vue.component('emoji', Emoji)
 Vue.use(VueCurrencyFilter,
@@ -82,7 +82,7 @@ const notifyError = debounce(function (message) {
 const overrideConsoleLog = () => {
   window.consoleLogMessages = []
 
-  var oldLog = console.log
+  let oldLog = console.log
   console.log = function (message) {
     window.consoleLogMessages.push(message)
 
@@ -91,14 +91,14 @@ const overrideConsoleLog = () => {
     oldLog.apply(console, arguments)
   }
 
-  var oldWarn = console.log
+  let oldWarn = console.log
   console.warn = function (message) {
     window.consoleLogMessages.push('Warn: ' + message)
 
     oldWarn.apply(console, arguments)
   }
 
-  var oldError = console.log
+  let oldError = console.log
   console.error = function (message) {
     window.consoleLogMessages.push('Error: ' + message)
 
@@ -106,12 +106,9 @@ const overrideConsoleLog = () => {
   }
 }
 
-//window.addEventListener('hashchange', () => { $('body').addClass('screen-loading') }, false);
-
+//window.addEventListener('hashchange', () => { $('body').addClass('screen-loading') }, false)
 
 // overrideConsoleLog() TODO: later
-
-
 
 initializer().then(() => {
   console.log('[BlockHub] Loading app...')
@@ -120,7 +117,7 @@ initializer().then(() => {
       window.navigator &&
       window.navigator.language &&
       window.navigator.language.split('-')
-    ) || 'en';
+    ) || 'en'
 
   /* eslint-disable no-new */
   BlockHub.Vue = new Vue({
@@ -136,7 +133,7 @@ initializer().then(() => {
     //     locale,
     //     messages: localeData
     //   })
-  });
+  })
 
   BlockHub.Notifications = BlockHub.Vue.$snotify
 })

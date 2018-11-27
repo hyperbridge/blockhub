@@ -17,7 +17,7 @@
             </div>
 
             <div class="row">
-                <div class="col-12 mb-4" v-if="!$store.state.application.desktop_mode">
+                <div class="col-12 mb-4" v-if="!$store.state.application.desktopMode">
                     <c-welcome-box />
                 </div>
             </div>
@@ -47,12 +47,12 @@
 import { mapGetters } from 'vuex'
 
 const updateLandingImage = function() {
-    const frontpage_product = this.$store.state.marketplace.frontpage_product
+    const frontpageProduct = this.$store.state.marketplace.frontpageProduct
 
-    if (frontpage_product && frontpage_product.images) {
+    if (frontpageProduct && frontpageProduct.images) {
         const header = window.document.getElementById('header-bg');
-        const randomImage = Math.floor(Math.random() * frontpage_product.images.preview.length);
-        header.style['background-image'] = 'url(' + frontpage_product.images.preview[randomImage] + ')';
+        const randomImage = Math.floor(Math.random() * frontpageProduct.images.preview.length);
+        header.style['background-image'] = 'url(' + frontpageProduct.images.preview[randomImage] + ')';
         header.style['background-size'] = 'cover';
     }
 }
@@ -70,7 +70,7 @@ export default {
     },
     data() {
         return {
-            showWelcomeModal: ['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode) && !this.$store.state.application.account.settings.client.hide_welcome_modal,
+            showWelcomeModal: ['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode) && !this.$store.state.application.account.settings.client.hideWelcomeModal,
         }
     },
     computed: {
@@ -80,10 +80,10 @@ export default {
         list() {
             const result = []
 
-            if (this.$store.state.marketplace.frontpage_product && this.$store.state.marketplace.frontpage_product.id) {
+            if (this.$store.state.marketplace.frontpageProduct && this.$store.state.marketplace.frontpageProduct.id) {
                 result.push({
-                    type: 'frontpage_product',
-                    data: this.$store.state.marketplace.frontpage_product
+                    type: 'frontpageProduct',
+                    data: this.$store.state.marketplace.frontpageProduct
                 })
             }
             if ( this.$store.state.marketplace.featured_products.length ) {
@@ -156,7 +156,7 @@ export default {
                 data: {
                     title: 'New Releases',
                     slidesPerView: 3,
-                    products: this.$store.state.marketplace.new_products
+                    products: this.$store.state.marketplace.newProducts
                 }
             })
 
@@ -195,7 +195,7 @@ export default {
                 data: {
                     title: 'Summer Sale',
                     slidesPerView: 3,
-                    products: this.$store.state.marketplace.sale_products
+                    products: this.$store.state.marketplace.saleProducts
                 }
             })
 
@@ -206,13 +206,13 @@ export default {
                 }
             })
 
-            if (isVisible(this.$store.state.application.darklaunch_flags, this.$store.state.application.account.darklaunch_flags, 'CURATORS')) {
+            if (isVisible(this.$store.state.application.darklaunchFlags, this.$store.state.application.account.darklaunchFlags, 'CURATORS')) {
                 result.push({
-                    type: 'curator_reviews',
+                    type: 'curatorReviews',
                     data: {
                         title: 'From our curators',
-                        ref: 'curator_reviews_sl',
-                        swiper: this.$refs.curator_reviews_sl && this.$refs.curator_reviews_sl.swiper,
+                        ref: 'curatorReviews_sl',
+                        swiper: this.$refs.curatorReviews_sl && this.$refs.curatorReviews_sl.swiper,
                         options: {
                             slidesPerView: 3,
                             spaceBetween: 0,
@@ -223,7 +223,7 @@ export default {
                                 },
                             }
                         },
-                        reviews: this.$store.state.marketplace.curator_reviews
+                        reviews: this.$store.state.marketplace.curatorReviews
                     }
                 })
             }
@@ -237,14 +237,14 @@ export default {
             };
             
             result.push({
-                type: 'product_news',
+                type: 'productNews',
                 data: {
-                    headings: Object.values(groupBy(this.$store.state.marketplace.posts, 'target_id')).map(post => {
-                        if (post[0].target_type === 'product') {
-                            const target = this.$store.state.marketplace.products[post[0].target_id]
+                    headings: Object.values(groupBy(this.$store.state.marketplace.posts, 'targetId')).map(post => {
+                        if (post[0].targetType === 'product') {
+                            const target = this.$store.state.marketplace.products[post[0].targetId]
 
                             return {
-                                image: target.images.medium_tile,
+                                image: target.images.mediumTile,
                                 title: target.name,
                                 developer: target.developer
                             }
@@ -252,12 +252,12 @@ export default {
                             return undefined
                         }
                     }),
-                    lists: Object.values(groupBy(this.$store.state.marketplace.posts, 'target_id'))
+                    lists: Object.values(groupBy(this.$store.state.marketplace.posts, 'targetId'))
                 }
             })
 
             result.push({
-                type: 'trending_projects_row',
+                type: 'trendingProjects_row',
                 data: {
                     title: 'Trending Crowdfunds',
                     options: {
@@ -270,14 +270,14 @@ export default {
                             },
                         }
                     },
-                    projects: this.$store.state.funding.trending_projects
+                    projects: this.$store.state.funding.trendingProjects
                 }
             })
 
             result.push({
-                type: 'game_series',
+                type: 'gameSeries',
                 data: {
-                    list: this.$store.state.marketplace.game_series,
+                    list: this.$store.state.marketplace.gameSeries,
                     showNumber: 3
                 }
             })
@@ -294,7 +294,7 @@ export default {
     methods: {
         closeModal() {
             this.showWelcomeModal = false
-            this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'hide_welcome_modal', true)
+            this.$store.commit('application/updateClientSettings', 'hideWelcomeModal', true)
         }
     },
     mounted() {

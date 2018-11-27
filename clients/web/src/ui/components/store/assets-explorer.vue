@@ -261,7 +261,7 @@
                         : true
                     )
                     .filter(asset => selectedProductsNames.length
-                        ? selectedProductsNames.includes(asset.product_name)
+                        ? selectedProductsNames.includes(asset.productName)
                         : true
                     )
                     .sort((a, b) => property

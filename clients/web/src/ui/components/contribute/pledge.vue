@@ -5,7 +5,7 @@
                 Select this reward
             </div>
         </transition>
-        <h3>Pledge US {{ pledge.min_price | convertCurrency }} or more</h3>
+        <h3>Pledge US {{ pledge.minPrice | convertCurrency }} or more</h3>
         <h4 v-if="pledge.title">{{ pledge.title }}</h4>
         <div class="pledge-item__text">
             {{ pledge.description }}
@@ -19,13 +19,13 @@
             </ul>
         </div>
         <div class="pledge-item__info">
-            <div v-if="pledge.delivery_date">
+            <div v-if="pledge.deliveryDate">
                 <span class="h6">Estimated delivery</span>
                 {{ date }}
             </div>
-            <div v-if="pledge.ships_to">
+            <div v-if="pledge.shipsTo">
                 <span class="h6">Ships to</span>
-                {{ pledge.ships_to }}
+                {{ pledge.shipsTo }}
             </div>
             <div class="w-100 mt-5" v-if="pledge.backers">
                 <span class="h6">
@@ -38,7 +38,7 @@
                 <div class="h6 font-weight-bold text-uppercase mb-3">
                     Pledge amount
                 </div>
-                <c-contribute-form v-model="toBePaid" :defaultValue="pledge.min_price" :active="true" @click="$emit('click')" />
+                <c-contribute-form v-model="toBePaid" :defaultValue="pledge.minPrice" :active="true" @click="$emit('click')" />
             </div>
         </transition>
     </div>
@@ -69,7 +69,7 @@
         },
         computed:{
             date(){
-                return moment(this.pledge.delivery_date).format('DD MMMM, YYYY')
+                return moment(this.pledge.deliveryDate).format('DD MMMM, YYYY')
             }
         }
     }

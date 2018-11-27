@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12 col-lg-8 col-xl-8">
             <c-screen-gallery
-                :items="[product.images.medium_tile, ...product.images.preview]"
+                :items="[product.images.mediumTile, ...product.images.preview]"
                 :video_url="product.video"
             />
 
@@ -41,7 +41,7 @@
                 class="margin-bottom-15"
                 :inWishlist="!!wishlist[product.id]"
                 :inShortcut="$store.state.application.shortcuts.find(s => s.id == ('product' + product.id))"
-                :releaseDate="product.release_date"
+                :releaseDate="product.releaseDate"
                 :playLink="currentRelease && currentRelease.play_link"
                 @addToWishlist="$store.dispatch(
                     'community/updateWishlist',
@@ -49,7 +49,7 @@
                 )"
                 @addToShortcut="$store.commit(
                     'application/updateShortcut',
-                    { id: 'product' + product.id, type: 'product', text: product.name, link: '#/product/' + product.id, image: product.images.medium_tile }
+                    { id: 'product' + product.id, type: 'product', text: product.name, link: '#/product/' + product.id, image: product.images.mediumTile }
                 )"
             />
             <c-button icon_hide @click="showInstaller = !showInstaller" hidden>Open installer</c-button>
@@ -57,15 +57,15 @@
             <c-rating-block class="margin-bottom-20" :items="product.rating"
                             :parent_url="`#/product/${product.id}`" v-darklaunch="'RATINGS'" />
 
-            <c-frequently-traded-assets class="margin-bottom-20" :items="product.frequently_traded_assets"
+            <c-frequently-traded-assets class="margin-bottom-20" :items="product.frequentlyTradedAssets"
                                         :assetsUrl="`#/product/${product.id}/assets`" v-darklaunch="'ASSETS'" />
 
             <c-community-spotlight class="margin-bottom-20" :discussions="product.community.discussions"
                                     :communityUrl="`#/product/${product.id}/community`" v-darklaunch="'COMMUNITY'" />
 
-            <c-system-requirements class="margin-bottom-20" :requirements="product.system_requirements" />
+            <c-system-requirements class="margin-bottom-20" :requirements="product.systemRequirements" />
 
-            <c-language-support :languages="product.language_support" />
+            <c-language-support :languages="product.languageSupport" />
         </div>
         <div class="col-12">
             <c-block :title="`TWITCH STREAMS - ${product.name}`"
@@ -74,9 +74,9 @@
                      :onlyContentBg="true"
                      :showArrows="true"
                      :showBackground="true"
-                     ref="streams_slider"
-                     @prevClick="streams_slider.slidePrev()"
-                     @nextClick="streams_slider.slideNext()"
+                     ref="streamsSlider"
+                     @prevClick="streamsSlider.slidePrev()"
+                     @nextClick="streamsSlider.slideNext()"
                      class="margin-top-30 margin-bottom-20">
                 <c-swiper :options="sliderOptions" v-if="streams">
                     <c-slide v-for="(stream, index) in streams" :key="index">
@@ -194,11 +194,11 @@
             }
         },
         computed:{
-            streams_slider() {
-                return this.$refs.streams_slider.swiper;
+            streamsSlider() {
+                return this.$refs.streamsSlider.swiper
             },
             wishlist() {
-                return this.$store.getters['application/profile'].product_wishlist || {};
+                return this.$store.getters['application/profile'].productWishlist || {}
             },
             streams(){
                 return this.product.streams
@@ -207,28 +207,28 @@
                 return this.product.reviews
             },
             currentRelease() {
-                return this.product.releases && this.product.releases.find(p => this.product.current_version === p.version)
+                return this.product.releases && this.product.releases.find(p => this.product.currentVersion === p.version)
             },
-            helpfulReviews(){
+            helpfulReviews() {
                 if (!this.reviews) return []
 
-                let arr = [];
+                let arr = []
                 
                 this.reviews.forEach( (el) => {
                     if (el.helpful)
                         arr.push(el)
                 })
-                return arr;
+                return arr
             },
-            recentReviews(){
+            recentReviews() {
                 if (!this.reviews) return []
 
-                let arr = [];
+                let arr = []
                 this.reviews.forEach( (el) => {
                     if (el.recent)
                         arr.push(el)
                 })
-                return arr;
+                return arr
             },
         }
     }

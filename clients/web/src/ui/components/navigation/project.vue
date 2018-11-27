@@ -93,7 +93,7 @@
         },
         computed: {
             editing() {
-                return this.$store.state.application.editor_mode === 'editing'
+                return this.$store.state.application.editorMode === 'editing'
             }
         }
     }

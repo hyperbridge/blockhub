@@ -1,231 +1,228 @@
 <template>
-        <div>
-            <div class="container-fluid" v-if="project">
-                <div class="row">
-                    <div class="col-md-12" v-if="notice">
-                        <p class="alert alert-info">{{ notice }}</p>
-                        <br /><br />
-                    </div>
-                    <div class="col-md-8">
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
-                                <label>Title</label>
-                            </label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="" v-model="project.name">
-                                <span class="form-text"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
-                                <label>Description</label>
-                            </label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="" v-model="project.description">
-                                <span class="form-text"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
-                                <label>About</label>
-                            </label>
-                            <div class="col-sm-9">
-                                <c-html-editor height="200" :model.sync="project.about" />
-
-                                <span class="form-text"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
-                                <label>Tags</label>
-                            </label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="">
-                                <span class="form-text"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
-                                <label>Minimum Contribution Goal</label>
-                            </label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Example: 0" v-model="project.meta.funds.goal">
-                                <span class="form-text"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-3">
-                                <label>Maximum Contribution Goal</label>
-                            </label>
-                            <div class="col-sm-9">
-
-                                <input type="text" class="form-control" placeholder="Example: 1000" v-model="project.meta.funds.cap">
-                                <span class="form-text"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="h5" @click="toggleAdvanced">
-                            <i class="mr-2 fas" :class="advanced ? 'fa-angle-up' : 'fa-angle-down'"></i>
-                            {{ advanced ? 'Hide' : 'Show' }} Advanced
-                        </div>
-                    </div>
+    <div class="row" v-if="project">
+        <div class="col-md-12" v-if="notice">
+            <p class="alert alert-info">{{ notice }}</p>
+            <br /><br />
+        </div>
+        <div class="col-md-8">
+            <div class="form-group row">
+                <label class="switch switch-sm col-sm-3">
+                    <label>Title</label>
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="" v-model="project.name">
+                    <span class="form-text"></span>
                 </div>
-
-                <div class="row" v-if="advanced">
-                    <div class="col-12">
-                        <hr />
-                    </div>
-                    <div class="col-md-6">
-
-                        <div class="form-group row">
-                            <div class="col-sm-3">
-                                <label>Support Email</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <input type="email" class="form-control" placeholder="Example: example@domain.com" v-model="project.meta.supportEmail">
-                                <span class="form-text"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-3">
-                                <label>Twitter Username</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">@</span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Example: @example" v-model="project.meta.twitterUsername">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-3">
-                                <label>Share Text</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Example: Join our crowdfund on BlockHub today!" v-model="project.meta.shareText">
-                                <span class="form-text"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <div class="col-sm-1">
-                                <c-switch
-                                    class="switch-sm"
-                                    :checked="project.meta.overflowEnabled"
-                                    @change="val => project.meta.overflowEnabled = val"
-                                />
-                            </div>
-                            <div class="col-sm-11">
-                                <label>Overflow</label>
-                                <span class="form-text">Projects with Overflow enabled will accept more than the funding goal (over-contribution)</span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-1">
-                                <c-switch
-                                    class="switch-sm"
-                                    :checked="project.meta.timelineEnabled"
-                                    @change="val => project.meta.timelineEnabled = val"
-                                />
-                            </div>
-                            <div class="col-sm-11">
-                                <label>Timeline</label>
-                                <span class="form-text">Projects with Timeline enabled will have a current timeline with associated milestones.</span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-1">
-                                <c-switch
-                                    class="switch-sm"
-                                    :checked="project.meta.refundsEnabled"
-                                    @change="val => project.meta.refundsEnabled = val"
-                                />
-                            </div>
-                            <div class="col-sm-11">
-                                <label>Refunds</label>
-                                <span class="form-text">Projects with Refunds enabled will allow contributors to get partial or full refund if the project is deemed not successful (by community vote).</span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-1">
-                                <c-switch
-                                    class="switch-sm"
-                                    :checked="project.meta.curationEnabled"
-                                    @change="val => project.meta.curationEnabled = val"
-                                />
-                            </div>
-                            <div class="col-sm-11">
-                                <label>Curation</label>
-                                <span class="form-text">Projects with Curation enabled will allow the community to curate the project and earn reputation for their actions.</span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="switch switch-sm col-sm-1">
-                            </label>
-                            <div class="col-sm-11">
-                                <input type="text" id="ise_default" name="ise_default" value="">
-                                <label>Contribution Period</label>
-                                <span class="form-text">Projects with Curation Enabled will allow the community to curate the project and earn reputation for their actions.</span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-1">
-                                <c-switch
-                                    class="switch-sm"
-                                    :checked="project.meta.contributionPeriodEnabled"
-                                    @change="val => project.meta.contributionPeriodEnabled = val"
-                                />
-                            </div>
-                            <div class="col-sm-11">
-                                <label>No Contribution Period</label>
-                                <span class="form-text">Projects with No Contribution Period will be open for contribution until the project is completed, allowing for contributions during the project.</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group row" style="text-align: center">
-                            <br />
-                            <h3 style="width: 100%">Raw Editor</h3>
-                            <br /><br />
-                            <span class="form-text"></span>
-                            <c-json-editor :objData="project" v-model="project" style="margin: 0 auto"></c-json-editor>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <hr />
-                    </div>
+            </div>
+            <div class="form-group row">
+                <label class="switch switch-sm col-sm-3">
+                    <label>Description</label>
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="" v-model="project.description">
+                    <span class="form-text"></span>
                 </div>
-            
-                <div class="row" v-darklaunch="'GOVERNANCE'">
-                    <div class="col-12">
-                        Choose your governance system
-                    </div>
-                    <div class="col-4">
-                        <i class="fas first-order" />
-                    </div>
-                </div>
+            </div>
+            <div class="form-group row">
+                <label class="switch switch-sm col-sm-3">
+                    <label>About</label>
+                </label>
+                <div class="col-sm-9">
+                    <c-html-editor height="200" :model.sync="project.about" />
 
-                <div class="row">
-                    <div class="col-12 text-right" v-if="project.id">
-                        <c-button status="success" @click="save" icon="save">
-                            Save
-                        </c-button>
-                    </div>
-                    <div class="col-12 text-right" v-if="!project.id">
-                        <c-button status="success" @click="create" icon="plus">
-                            Create
-                        </c-button>
-                    </div>
+                    <span class="form-text"></span>
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="form-group row">
+                <label class="switch switch-sm col-sm-3">
+                    <label>Tags</label>
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="">
+                    <span class="form-text"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="switch switch-sm col-sm-3">
+                    <label>Minimum Contribution Goal</label>
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="Example: 0" v-model="project.meta.funds.goal">
+                    <span class="form-text"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="switch switch-sm col-sm-3">
+                    <label>Maximum Contribution Goal</label>
+                </label>
+                <div class="col-sm-9">
+
+                    <input type="text" class="form-control" placeholder="Example: 1000" v-model="project.meta.funds.cap">
+                    <span class="form-text"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="h5" @click="toggleAdvanced">
+                <i class="mr-2 fas" :class="advanced ? 'fa-angle-up' : 'fa-angle-down'"></i>
+                {{ advanced ? 'Hide' : 'Show' }} Advanced
+            </div>
+        </div>
+
+        <div class="col-12" v-if="advanced">
+            <hr />
+        </div>
+
+        <div class="col-md-6" v-if="advanced">
+
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <label>Support Email</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control" placeholder="Example: example@domain.com" v-model="project.meta.supportEmail">
+                    <span class="form-text"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <label>Twitter Username</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Example: @example" v-model="project.meta.twitterUsername">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <label>Share Text</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="Example: Join our crowdfund on BlockHub today!" v-model="project.meta.shareText">
+                    <span class="form-text"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" v-if="advanced">
+            <div class="form-group row">
+                <div class="col-sm-1">
+                    <c-switch
+                        class="switch-sm"
+                        :checked="project.meta.overflowEnabled"
+                        @change="val => project.meta.overflowEnabled = val"
+                    />
+                </div>
+                <div class="col-sm-11">
+                    <label>Overflow</label>
+                    <span class="form-text">Projects with Overflow enabled will accept more than the funding goal (over-contribution)</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-1">
+                    <c-switch
+                        class="switch-sm"
+                        :checked="project.meta.timelineEnabled"
+                        @change="val => project.meta.timelineEnabled = val"
+                    />
+                </div>
+                <div class="col-sm-11">
+                    <label>Timeline</label>
+                    <span class="form-text">Projects with Timeline enabled will have a current timeline with associated milestones.</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-1">
+                    <c-switch
+                        class="switch-sm"
+                        :checked="project.meta.refundsEnabled"
+                        @change="val => project.meta.refundsEnabled = val"
+                    />
+                </div>
+                <div class="col-sm-11">
+                    <label>Refunds</label>
+                    <span class="form-text">Projects with Refunds enabled will allow contributors to get partial or full refund if the project is deemed not successful (by community vote).</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-1">
+                    <c-switch
+                        class="switch-sm"
+                        :checked="project.meta.curationEnabled"
+                        @change="val => project.meta.curationEnabled = val"
+                    />
+                </div>
+                <div class="col-sm-11">
+                    <label>Curation</label>
+                    <span class="form-text">Projects with Curation enabled will allow the community to curate the project and earn reputation for their actions.</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="switch switch-sm col-sm-1">
+                </label>
+                <div class="col-sm-11">
+                    <input type="text" id="ise_default" name="ise_default" value="">
+                    <label>Contribution Period</label>
+                    <span class="form-text">Projects with Curation Enabled will allow the community to curate the project and earn reputation for their actions.</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-1">
+                    <c-switch
+                        class="switch-sm"
+                        :checked="project.meta.contributionPeriodEnabled"
+                        @change="val => project.meta.contributionPeriodEnabled = val"
+                    />
+                </div>
+                <div class="col-sm-11">
+                    <label>No Contribution Period</label>
+                    <span class="form-text">Projects with No Contribution Period will be open for contribution until the project is completed, allowing for contributions during the project.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12" v-if="advanced">
+            <div class="form-group row" style="text-align: center">
+                <br />
+                <h3 style="width: 100%">Raw Editor</h3>
+                <br /><br />
+                <span class="form-text"></span>
+                <c-json-editor :objData="project" v-model="project" style="margin: 0 auto"></c-json-editor>
+            </div>
+        </div>
+        <div class="col-12" hidden>
+            <div class="row" v-darklaunch="'GOVERNANCE'">
+                <div class="col-12">
+                    Choose your governance system
+                </div>
+                <div class="col-4">
+                    <i class="fas first-order" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <hr />
+        
+            <div class="row">
+                <div class="col-12 text-right" v-if="project.id">
+                    <c-button status="success" @click="save" icon="save">
+                        Save
+                    </c-button>
+                </div>
+                <div class="col-12 text-right" v-if="!project.id">
+                    <c-button status="success" @click="create" icon="plus">
+                        Create
+                    </c-button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>

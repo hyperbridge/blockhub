@@ -7,11 +7,11 @@
             "revision": 0,
             "created": 1531430916082,
             "version": 0,
-            "system_tags": [],
+            "systemTags": [],
             "images": {
                 "preview": []
             },
-            "developer_tags": [
+            "developerTags": [
                 "lifestyle",
                 "vr",
                 "gym"
@@ -71,73 +71,73 @@
                         "text": "m6"
                     }
                 ],
-                "funded_amount": "202190.63",
-                "goal_amount": "200000.00",
-                "spent_amount": "32000",
-                "locked_amount": "182242",
-                "overflow_amount": "17342"
+                "fundedAmount": "202190.63",
+                "goalAmount": "200000.00",
+                "spentAmount": "32000",
+                "lockedAmount": "182242",
+                "overflowAmount": "17342"
             },
             "milestones": {
-                "overall_progress": 32,
+                "overallProgress": 32,
                 "items": [
                     {
                         "id": 1,
                         "title": "Create the base game with 2 dungeons",
-                        "short_description": "Maecenas faucibus tincidunt consectetur. Phasellus ac malesuada quam, vitae vulputate quam. Nulla dui ipsum, suscipit sed laoreet auctor, sagittis et mauris.",
+                        "shortDescription": "Maecenas faucibus tincidunt consectetur. Phasellus ac malesuada quam, vitae vulputate quam. Nulla dui ipsum, suscipit sed laoreet auctor, sagittis et mauris.",
                         "text": "Aenean eu tellus vel tortor tincidunt pharetra. Aenean mattis, sapien vel lacinia accumsan, justo mi venenatis justo, ut accumsan diam mauris sit amet ipsum. Vivamus iaculis lectus vel egestas vehicula. Phasellus in lacus nunc. Curabitur lobortis arcu neque, non rutrum elit placerat eget.",
                         "img": "http://via.placeholder.com/350x250",
                         "status": "done",
-                        "step_number": 1,
+                        "stepNumber": 1,
                         "progress": {
-                            "percent_days": 45,
-                            "days_left": 97,
-                            "percent_done": 17,
-                            "percent_spent": 83
+                            "percentDays": 45,
+                            "daysLeft": 97,
+                            "percentDone": 17,
+                            "percentSpent": 83
                         }
                     },
                     {
                         "id": 3,
                         "title": "Lorem ipsum dolor sit amet",
-                        "short_description": "Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
+                        "shortDescription": "Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
                         "text": "Proin sollicitudin faucibus mauris non pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce efficitur imperdiet urna, mollis vulputate risus feugiat sit amet. Ut turpis nulla, ultricies a ultricies eget, bibendum eu orci. In in suscipit nisl. Sed bibendum, mauris a convallis rhoncus, enim libero condimentum enim, in ultrices ligula orci ac nisl. Nunc vestibulum purus vitae lorem porta, eget aliquam nibh rhoncus.",
                         "img": "http://via.placeholder.com/350x250",
                         "status": "done",
-                        "step_number": 3,
+                        "stepNumber": 3,
                         "progress": {
-                            "percent_days": 34,
-                            "days_left": 125,
-                            "percent_done": 3,
-                            "percent_spent": 80
+                            "percentDays": 34,
+                            "daysLeft": 125,
+                            "percentDone": 3,
+                            "percentSpent": 80
                         }
                     },
                     {
                         "id": 2,
                         "title": "Praesent eu fringilla nisl",
-                        "short_description": "Aenean aliquam erat quis tortor varius convallis. Suspendisse finibus orci at nibh pharetra, vel ullamcorper tellus mattis.",
+                        "shortDescription": "Aenean aliquam erat quis tortor varius convallis. Suspendisse finibus orci at nibh pharetra, vel ullamcorper tellus mattis.",
                         "text": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac, sollicitudin lacinia arcu. Phasellus vehicula arcu tristique nunc lacinia facilisis. Nunc egestas congue massa a euismod. Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
                         "img": "http://via.placeholder.com/350x250",
                         "status": "in_progress",
-                        "step_number": 2,
+                        "stepNumber": 2,
                         "progress": {
-                            "percent_days": 91,
-                            "days_left": 4,
-                            "percent_done": 97,
-                            "percent_spent": 99
+                            "percentDays": 91,
+                            "daysLeft": 4,
+                            "percentDone": 97,
+                            "percentSpent": 99
                         }
                     },
                     {
                         "id": 4,
                         "title": "In hac habitasse platea dictumst",
-                        "short_description": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac",
+                        "shortDescription": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac",
                         "text": "Praesent eu fringilla nisl. Nullam iaculis odio non est ornare sodales non a massa. Sed sollicitudin nibh et ipsum sollicitudin blandit. Quisque vel enim congue, semper leo vitae, luctus nibh.",
                         "img": "http://via.placeholder.com/350x250",
                         "status": "in_progress",
-                        "step_number": 4,
+                        "stepNumber": 4,
                         "progress": {
-                            "percent_days": 85,
-                            "days_left": 45,
-                            "percent_done": 37,
-                            "percent_spent": 84
+                            "percentDays": 85,
+                            "daysLeft": 45,
+                            "percentDone": 37,
+                            "percentSpent": 84
                         }
                     }
                 ]
@@ -151,8 +151,8 @@
                 "approved": "408",
                 "prize": "30000",
                 "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu nulla sed urna malesuada ornare nec ac risus. Nam vehicula mauris ac augue finibus finibus non et erat. Integer malesuada rutrum elit non hendrerit. Nam volutpat scelerisque magna, in lacinia nulla consectetur eget. Nunc feugiat egestas arcu id lobortis. Proin rhoncus viverra mi, ac bibendum ligula molestie eget. Vivamus a tempor ligula.",
-                "explain_text": "",
-                "file_src": ""
+                "explainText": "",
+                "fileSrc": ""
             }
         ],
         "updates": [
@@ -283,10 +283,10 @@
                 "title": "Some awesome Things",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a sapien luctus, placerat massa pellentesque, consectetur ante. Nam dui est, cursus at consequat quis, malesuada eget eros. ",
                 "includes": [],
-                "delivery_date": "2019-01-12 03:46:26 -03:00",
-                "ships_to": "USA",
+                "deliveryDate": "2019-01-12 03:46:26 -03:00",
+                "shipsTo": "USA",
                 "backers": "39",
-                "min_price": 10
+                "minPrice": 10
             },
             {
                 "id": 2,
@@ -297,10 +297,10 @@
                         "text": "Morbi vitae orci lacus"
                     }
                 ],
-                "delivery_date": "2018-12-15 03:46:26 -03:00",
-                "ships_to": "Canada",
+                "deliveryDate": "2018-12-15 03:46:26 -03:00",
+                "shipsTo": "Canada",
                 "backers": "27",
-                "min_price": 15
+                "minPrice": 15
             },
             {
                 "id": 3,
@@ -317,10 +317,10 @@
                         "text": "Morbi vitae orci lacus"
                     }
                 ],
-                "delivery_date": "2019-04-25 03:46:26 -03:00",
-                "ships_to": "Anywhere in the world",
+                "deliveryDate": "2019-04-25 03:46:26 -03:00",
+                "shipsTo": "Anywhere in the world",
                 "backers": "15",
-                "min_price": 20
+                "minPrice": 20
             }
         ]
     }

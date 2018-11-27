@@ -53,12 +53,8 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
-
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve),
             'c-input-searcher': (resolve) => require(['@/ui/components/inputs/searcher'], resolve),
             'c-dropdown-menu': (resolve) => require(['@/ui/components/dropdown-menu/type-3'], resolve),

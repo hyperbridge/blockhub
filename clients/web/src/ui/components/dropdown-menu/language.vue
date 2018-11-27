@@ -1,9 +1,9 @@
 <template>
     <div class="language-dropdown">
         <div class="language-dropdown__current" @click="toggleList">
-            <c-country-flag :country="current_language.code" size="small" v-if="current_language" />
+            <c-country-flag :country="currentLanguage.code" size="small" v-if="currentLanguage" />
             <span class="language-name">
-                {{ current_language ? current_language.name : 'Language' }}
+                {{ currentLanguage ? currentLanguage.name : 'Language' }}
             </span>
             <i class="fas " :class="showList ? 'fa-angle-up' : 'fa-angle-down' "></i>
         </div>
@@ -28,7 +28,7 @@
     export default {
         name: 'language-dropdown',
         props: {
-            current_language: Object,
+            currentLanguage: Object,
             languages: Array
         },
         components: {

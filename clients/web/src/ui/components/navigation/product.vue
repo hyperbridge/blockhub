@@ -8,9 +8,9 @@
             :links="links.gameOverview"
         />
 
-        <c-button @click="$store.commit('application/activateModal', 'import-product')" v-if="$store.state.application.editor_mode === 'editing'">Import from third-party</c-button>
+        <c-button @click="$store.commit('application/activateModal', 'import-product')" v-if="$store.state.application.editorMode === 'editing'">Import from third-party</c-button>
 
-        <c-join-community v-if="!$store.state.application.desktop_mode" />
+        <c-join-community v-if="!$store.state.application.desktopMode" />
 
         <c-curator-panel>
             <c-curator-info title="">
@@ -79,8 +79,8 @@
             }
         },
         computed:{
-            signed_in() {
-                return this.$store.state.application.signed_in
+            signedIn() {
+                return this.$store.state.application.signedIn
             },
         }
     }

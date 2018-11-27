@@ -1,5 +1,5 @@
 <template>
-    <div class="navigation" id="navigation-default" v-if="signed_in">
+    <div class="navigation" id="navigation-default" v-if="signedIn">
         <c-sidebar-menu title="ACCOUNT" :links="links.account" />
         <c-sidebar-menu sub_title="Wallets" :links="links.wallets" v-darklaunch="'WALLETS'" />
         <c-sidebar-menu sub_title="Profiles" :links="links.profiles" />
@@ -15,7 +15,7 @@
             'c-sidebar-menu': (resolve) => require(['@/ui/components/sidebar-menu/index'], resolve)
         },
         computed: {
-            signed_in() { return this.$store.state.application.signed_in },
+            signedIn() { return this.$store.state.application.signedIn },
             links() {
                 return {
                     account: [

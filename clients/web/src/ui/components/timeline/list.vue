@@ -20,13 +20,13 @@
 </template>
 
 <script>
-    import moment from 'moment';
+    import moment from 'moment'
 
     export default {
         name: 'timeline-list',
         props: ['items', 'project_id'],
-        data(){
-            return{
+        data() {
+            return {
                 show   : false, // display content after API request
                 offset : 3,     // items to display after scroll
                 display: 5,     // initial items
@@ -35,10 +35,10 @@
                 end    : false, // no more updates
             }
         },
-        components:{
+        components: {
             'c-timeline-item': (resolve) => require(['@/ui/components/timeline/item.vue'], resolve)
         },
-        methods:{
+        methods: {
             scroll() {
                 window.onscroll = ev => {
                     if (
@@ -46,44 +46,44 @@
                         (document.body.offsetHeight - this.trigger)
                     ) {
                         if (this.display < this.list.length) {
-                            this.display = this.display + this.offset;
+                            this.display = this.display + this.offset
                         }
                         else {
-                            this.end = true;
+                            this.end = true
                         }
                     }
-                };
+                }
                 console.log('done scroll')
             },
         },
         created() {
             if (this.items){
-                let arr = this.items;
+                let arr = this.items
                 arr.sort( ( a, b) => {
-                    return new Date(a.date) - new Date(b.date);
+                    return new Date(a.date) - new Date(b.date)
                 }).forEach( (o, i) => {
                     let d1 = moment(o.date).format('MMMM YYYY'),
-                        d2 = arr[i-1] ? moment(arr[i-1].date).format('MMMM YYYY') : false;
+                        d2 = arr[i-1] ? moment(arr[i-1].date).format('MMMM YYYY') : false
                     if ( !d2 || d1 != d2 ){
-                        o.period = moment(d1).format('MMMM, YYYY');
+                        o.period = moment(d1).format('MMMM, YYYY')
                     }
-                });
-                this.list = arr.reverse();
-                this.show = true;
+                })
+                this.list = arr.reverse()
+                this.show = true
             } else {
                 return false
             }
             console.log('done create')
         },
-        computed:{
+        computed: {
             // slice the array of data to display
             sliced() {
-                return this.list.slice(0, this.display);
+                return this.list.slice(0, this.display)
             },
         },
         mounted() {
             console.log('done mounted')
-            this.scroll();
+            this.scroll()
         }
     }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <c-custom-modal 
         title="Sign Up"
-        @close="$store.state.application.active_modal = null"
+        @close="$store.state.application.activeModal = null"
         v-if="activated"
     >
         <div class="" slot="modal_body" style="width: 100%">

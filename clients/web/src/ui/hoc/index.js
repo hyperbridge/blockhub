@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from 'vue'
 
 export const withListLength = (component) =>
     Vue.extend('withListLength', {
@@ -7,15 +7,15 @@ export const withListLength = (component) =>
                 props: {
                     listLength: this.listLength
                 }
-           });
+           })
         },
         computed: {
             listLength() {
                 // return this.  Array.isArray(val) ? val.length : Object.keys(val).length
-                return;
+                return
             }
         }
-    });
+    })
 
 export const withUniqueList = component =>
     Vue.extend('withUniqueList', {
@@ -24,7 +24,7 @@ export const withUniqueList = component =>
                 props: {
                     list: this.uniqueList
                 }
-            });
+            })
         },
         computed: {
             uniqueList() {
@@ -33,14 +33,14 @@ export const withUniqueList = component =>
                     { id: 2 },
                     { id: 3 },
                     { id: 4 }
-                ];
+                ]
                 const uniqueList = list.reduce((reduced, item) => {
-                    const { id } = item;
-                    if (reduced[id]) reduced[id].count++;
-                    else reduced[id] = { item, count: 1 };
-                    return reduced;
-                }, {});
-                return Object.values(uniqueList);
+                    const { id } = item
+                    if (reduced[id]) reduced[id].count++
+                    else reduced[id] = { item, count: 1 }
+                    return reduced
+                }, {})
+                return Object.values(uniqueList)
             }
         }
-    });
+    })

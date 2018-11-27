@@ -7,8 +7,6 @@
 
 
 <script>
-import * as Bridge from '@/framework/desktop-bridge'
-
 export default {
     components: {
         'c-login-popup': (resolve) => require(['@/ui/components/login-popup/index.vue'], resolve),

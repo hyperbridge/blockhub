@@ -164,7 +164,7 @@
 
                 return this.results
                     .filter(result => choosenPlatforms.length
-                        ? result.system_requirements.some(req =>
+                        ? result.systemRequirements.some(req =>
                             choosenPlatforms.includes(req.os)
                           )
                         : true

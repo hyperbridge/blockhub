@@ -1,10 +1,10 @@
-import moment from 'moment';
+import moment from 'moment'
 
-import messagesData from '@/db/seed/messages.json';
-import usersData from '@/db/seed/users.json';
-import profilesData from '@/db/seed/profiles.json';
+import messagesData from '@/db/seed/messages.json'
+import usersData from '@/db/seed/users.json'
+import profilesData from '@/db/seed/profiles.json'
 
-import { extract, skip, getId, mergeId, normalize } from '@/store/utils';
+import { extract, skip, getId, mergeId, normalize } from '@/store/utils'
 
 
 const community = {
@@ -29,38 +29,38 @@ const community = {
             state[target] = {
                 ...state[target],
                 [id]: data
-            };
+            }
         },
         update(state, { target = 'messages', id, data }) {
-            state[target][id] = { ...state[target][id], ...data };
+            state[target][id] = { ...state[target][id], ...data }
         },
         delete(state, { target = 'messages', id }) {
-            const { [id]: deleted, ...rest } = state[target];
-            state[target] = rest;
+            const { [id]: deleted, ...rest } = state[target]
+            state[target] = rest
         }
     },
     actions: {
         create({ commit }, payload) {
-            const { target, data } = payload;
-            const id = getId();
-            /* const newData = await axios.post(`/${target}`, data);
+            const { target, data } = payload
+            const id = getId()
+            /* const newData = await axios.post(`/${target}`, data)
                *** merge new data with payload's data and return id
-               return newData.id;
+               return newData.id
             */
-            commit('create', { ...payload, id });
+            commit('create', { ...payload, id })
         },
         update({ commit }, payload) {
-            const { id, target, data } = payload;
-            // await axios.patch(`/${target}/${id}`, data);
-            commit('update', payload);
+            const { id, target, data } = payload
+            // await axios.patch(`/${target}/${id}`, data)
+            commit('update', payload)
         },
         delete({ commit }, payload) {
-            const { id, target = 'messages' } = payload;
+            const { id, target = 'messages' } = payload
             // await axios.delete(`/${target}/${id}`, { id })
-            commit('delete', payload);
+            commit('delete', payload)
         },
         createMessage({ commit }, message) {
-            const id = getId();
+            const id = getId()
 
             const payload = {
                 id,
@@ -70,27 +70,27 @@ const community = {
                     content: message,
                     createdAt: moment()
                 }
-            };
+            }
 
-            commit('create', payload);
-            return id;
+            commit('create', payload)
+            return id
         },
         updateWishlist(
             { dispatch, rootGetters: { ['application/account']: account }},
             [name, itemId]
         ) {
-            const profile = account.active_profile;
-            const prop = [name + '_wishlist'];
-            const wishlist = { ...profile[prop] };
+            const profile = account.activeProfile
+            const prop = [name + '_wishlist']
+            const wishlist = { ...profile[prop] }
 
-            if (wishlist[itemId]) delete wishlist[itemId];
-            else wishlist[itemId] = true;
+            if (wishlist[itemId]) delete wishlist[itemId]
+            else wishlist[itemId] = true
 
             dispatch(
                 'update',
                 [`community/profiles/${prop}`, profile.id, { [prop]: wishlist }],
                 { root: true }
-            );
+            )
         }
     },
     getters: {
@@ -113,10 +113,10 @@ const community = {
                 [user.id]: {
                     ...user,
                     inventoryGrouped: user.inventory.reduce((grouped, asset) => {
-                        const { name } = asset.product;
-                        grouped[name] = grouped[name] || [];
-                        grouped[name] = [...grouped[name], asset];
-                        return grouped;
+                        const { name } = asset.product
+                        grouped[name] = grouped[name] || []
+                        grouped[name] = [...grouped[name], asset]
+                        return grouped
                     }, {})
                 }
             }), {}),
@@ -134,14 +134,14 @@ const community = {
                     ...profile,
                     // friends: profile.friends.map(id => skip(profiles[id], ['friends', 'inventory'])),
                     inventoryGrouped: profile.inventory.reduce((grouped, asset) => {
-                        const { name } = asset.product;
-                        grouped[name] = grouped[name] || [];
-                        grouped[name] = [...grouped[name], asset];
-                        return grouped;
+                        const { name } = asset.product
+                        grouped[name] = grouped[name] || []
+                        grouped[name] = [...grouped[name], asset]
+                        return grouped
                     }, {})
                 }
             }), {})
     }
-};
+}
 
-export default community;
+export default community

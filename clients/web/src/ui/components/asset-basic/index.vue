@@ -2,7 +2,7 @@
     <div>
         <div>
             <span>{{ asset.name }}</span>
-            <span>{{ asset.product_name }}</span>
+            <span>{{ asset.productName }}</span>
         </div>
         <c-img :src="asset.image"/>
     </div>

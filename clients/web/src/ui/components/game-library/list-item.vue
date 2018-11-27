@@ -1,7 +1,7 @@
 <template>
     <div class="game-library__item loading--w-spinner" :class="{'is-active': active}">
         <div class="item-img">
-            <c-img :src="game.images.medium_tile"/>
+            <c-img :src="game.images.mediumTile"/>
         </div>
         <div class="item-info">
             <div>

@@ -1,10 +1,10 @@
 <template>
     <div class="currency-dropdown">
         <div class="currency-dropdown__current" @click="toggleList">
-            <c-country-flag :country="current_currency.country" size="small" v-if="current_currency.country" />
-            <c-crypto-icon :name="current_currency.code" v-else />
+            <c-country-flag :country="currentCurrency.country" size="small" v-if="currentCurrency.country" />
+            <c-crypto-icon :name="currentCurrency.code" v-else />
             <span class="currency-name">
-                {{ current_currency.code }}
+                {{ currentCurrency.code }}
             </span>
             <i class="fas " :class="showList ? 'fa-angle-up' : 'fa-angle-down' "></i>
         </div>
@@ -30,7 +30,7 @@
     export default {
         name: 'currency-dropdown',
         props: {
-            current_currency: Object,
+            currentCurrency: Object,
             currencies: Array
         },
         components: {

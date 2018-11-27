@@ -6,7 +6,7 @@
                     <c-tabs :currentStep="current_step">
                         <c-tab name="Account Verification" :selected="true" :showFooter="true">
                             <div class="tab-container">
-                                <div class="tab-card padding-20" v-if="is_verified">
+                                <div class="tab-card padding-20" v-if="isVerified">
                                     <p>Your account has been verified. You can request approval for additional profiles below.</p>
 
                                     <div class="profile-picker">
@@ -37,7 +37,7 @@
                                         Send Again
                                     </c-button>
                                 </div>
-                                <div class="tab-card padding-20" v-if="is_verifying">
+                                <div class="tab-card padding-20" v-if="isVerifying">
                                     <div class="col-12 mb-4 text-center">
                                         <h2><img src="/static/img/success.png" style="max-width: 40px;" /> Account Verification Requested</h2>
                                         <p>Account is undergoing verification. You can now close this browser tab.</p>
@@ -46,7 +46,7 @@
                                         <p v-if="been1hour">Something wrong? <c-button @click="overrideForm">Show Form</c-button></p>
                                     </div>
                                 </div>
-                                <div class="tab-card padding-20" v-if="!(is_verified || is_verifying) || been1hour || manual_override">
+                                <div class="tab-card padding-20" v-if="!(isVerified || isVerifying) || been1hour || manual_override">
                                     <div v-if="!verificationLink">
                                         <p>
                                             Submit proof of profile for KYC by providing your legal name, country of residence, and documentation.<br /><br />
@@ -61,14 +61,14 @@
                                                 <div class="form-group">
                                                     <label class="sr-only">Given Name (First + Middle)</label>
                                                     <input type="text" class="form-control" placeholder="Given Name (First + Middle Name)"
-                                                            name="first_name" v-model="first_name">
+                                                            name="firstName" v-model="firstName">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="sr-only">Family Name</label>
                                                     <input type="text" class="form-control" placeholder="Family Name (Last Name)"
-                                                            name="last_name" v-model="last_name">
+                                                            name="lastName" v-model="lastName">
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -159,8 +159,8 @@
 
             let been1hour = false
 
-            if (account.verification_timestamp) {
-                been1hour = (Math.abs(new Date() - new Date(account.verification_timestamp)) / 36e5) > 1
+            if (account.verificationTimestamp) {
+                been1hour = (Math.abs(new Date() - new Date(account.verificationTimestamp)) / 36e5) > 1
             }
 
             return {
@@ -172,13 +172,13 @@
                 document_type: '',
                 document_number: '',
                 email: account.email,
-                first_name: account.first_name,
-                last_name: account.last_name,
+                firstName: account.firstName,
+                lastName: account.lastName,
                 address: account.address,
                 account: account,
-                is_verified: account.is_verified,
-                is_verifying: account.is_verifying,
-                verification_timestamp: account.verification_timestamp,
+                isVerified: account.isVerified,
+                isVerifying: account.isVerifying,
+                verificationTimestamp: account.verificationTimestamp,
                 verificationLink: null
             }
         },
@@ -198,8 +198,8 @@
             },
             verifyAccount() {
                 if (
-                    this.first_name
-                    && this.last_name
+                    this.firstName
+                    && this.lastName
                     && this.email
                     && this.document_type
                     && this.document_number
@@ -210,8 +210,8 @@
                             features: [ 'selfid' ],
                             callback: 'https://blockhub.gg#/account/verification/callback',
                             person: {
-                                firstName: this.first_name,
-                                lastName: this.last_name,
+                                firstName: this.firstName,
+                                lastName: this.lastName,
                                 idNumber: this.document_number
                             },
                             vendorData: this.email,//JSON.stringify({ email: this.email, eth: this.address }),
@@ -235,8 +235,8 @@
                         }
                     })
                     .then((res) => {
-                        BlockHub.DB.application.config.data[0].account.is_verifying = true
-                        BlockHub.DB.application.config.data[0].account.verification_timestamp = new Date()
+                        BlockHub.DB.application.config.data[0].account.isVerifying = true
+                        BlockHub.DB.application.config.data[0].account.verificationTimestamp = new Date()
                         BlockHub.DB.save()
 
                         this.verificationLink = res.data.verification.url
@@ -248,10 +248,10 @@
                     return
                 }
 
-                if (!this.first_name) {
+                if (!this.firstName) {
                     this.errors.push('First Name required.')
                 }
-                if (!this.last_name) {
+                if (!this.lastName) {
                     this.errors.push('Last Name required.')
                 }
                 if (!this.document_type) {

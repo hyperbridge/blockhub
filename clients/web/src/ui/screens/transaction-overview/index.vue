@@ -1,18 +1,16 @@
 <template>
     <c-layout navigationKey="account">
-            <div class="container-fluid">  
-                <div class="row">
-                    <div class="col-12" v-if="!transaction">
-                        Transaction not found
-                    </div>
-                    <div class="col-12" v-if="transaction">
-                        {{ transaction.name }}
-                        {{ transaction.id }}
-                        <br />
-                        <a :href="`#/transaction/${transaction.id}/transactions`">Transactions</a>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-12" v-if="!transaction">
+                Transaction not found
             </div>
+            <div class="col-12" v-if="transaction">
+                {{ transaction.name }}
+                {{ transaction.id }}
+                <br />
+                <a :href="`#/transaction/${transaction.id}/transactions`">Transactions</a>
+            </div>
+        </div>
     </c-layout>
 </template>
 
@@ -21,7 +19,6 @@
 export default {
   props: ['id'],
   components: {
-    'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
   },
   computed: {
       transaction() {

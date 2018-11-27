@@ -92,7 +92,7 @@
                     : 'You should consider lowering your settings (preferably by auto-update option)'
             },
             updateSettings(prop) {
-                this.$store.commit('UPDATE_CLIENT_SETTINGS', prop);
+                this.$store.commit('updateClientSettings', prop);
             },
             autoUpdateSettings() {
                 if (!this.finished || this.running) {

@@ -2,21 +2,21 @@
     <div class="page-sidepanel invert text-right" id="page-sidepanel">
         <div class="page-sidepanel__content">
             <c-swiper ref="mySwiper">
-                <c-slide v-if="$store.state.application.signed_in">
+                <c-slide v-if="$store.state.application.signedIn">
                     <div class="item">
                         <h3>NOTIFICATION</h3>
 
                         <div class="slide-chooser">
                             <c-button status="plain" icon-hide @click="showSlide('notification')" class="active"
-                                        v-if="$store.state.application.signed_in">
+                                        v-if="$store.state.application.signedIn">
                                 <i class="fa fa-bell"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('messages')"
-                                        style="box-shadow: none" v-if="$store.state.application.signed_in" v-darklaunch="'MESSAGES'">
+                                        style="box-shadow: none" v-if="$store.state.application.signedIn" v-darklaunch="'MESSAGES'">
                                 <i class="fa fa-envelope"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('updates')"
-                                        style="box-shadow: none" v-if="$store.state.application.desktop_mode">
+                                        style="box-shadow: none" v-if="$store.state.application.desktopMode">
                                 <i class="fa fa-star"/>
                             </c-button>
                             <c-button status="plain" icon-hide v-if="navigationKey === 'store'" @click="showSlide('top_lists')"
@@ -35,21 +35,21 @@
 
                     </div>
                 </c-slide>
-                <c-slide v-if="$store.state.application.signed_in" v-darklaunch="'MESSAGES'">
+                <c-slide v-if="$store.state.application.signedIn" v-darklaunch="'MESSAGES'">
                     <div class="item">
                         <h3>MESSAGES</h3>
 
                         <div class="slide-chooser">
                             <c-button status="plain" icon-hide @click="showSlide('notification')"
-                                        style="box-shadow: none" v-if="$store.state.application.signed_in">
+                                        style="box-shadow: none" v-if="$store.state.application.signedIn">
                                 <i class="fa fa-bell"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('messages')" class="active"
-                                        v-if="$store.state.application.signed_in">
+                                        v-if="$store.state.application.signedIn">
                                 <i class="fa fa-envelope"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('updates')"
-                                        style="box-shadow: none" v-if="$store.state.application.desktop_mode">
+                                        style="box-shadow: none" v-if="$store.state.application.desktopMode">
                                 <i class="fa fa-star"/>
                             </c-button>
                             <c-button status="plain" v-if="navigationKey === 'store'" icon-hide @click="showSlide('top_lists')"
@@ -69,21 +69,21 @@
                         </div>
                     </div>
                 </c-slide>
-                <c-slide v-if="$store.state.application.desktop_mode">
+                <c-slide v-if="$store.state.application.desktopMode">
                     <div class="item">
                         <h3>UPDATES</h3>
 
                         <div class="slide-chooser">
                             <c-button status="plain" icon-hide @click="showSlide('notification')"
-                                        style="box-shadow: none" v-if="$store.state.application.signed_in">
+                                        style="box-shadow: none" v-if="$store.state.application.signedIn">
                                 <i class="fa fa-bell"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('messages')"
-                                        style="box-shadow: none" v-if="$store.state.application.signed_in" v-darklaunch="'MESSAGES'">
+                                        style="box-shadow: none" v-if="$store.state.application.signedIn" v-darklaunch="'MESSAGES'">
                                 <i class="fa fa-envelope"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('updates')" class="active"
-                                        v-if="$store.state.application.desktop_mode">
+                                        v-if="$store.state.application.desktopMode">
                                 <i class="fa fa-star"/>
                             </c-button>
                             <c-button status="plain" v-if="navigationKey === 'store'" icon-hide @click="showSlide('top_lists')"
@@ -121,15 +121,15 @@
 
                         <div class="slide-chooser">
                             <c-button status="plain" icon-hide @click="showSlide('notification')"
-                                        style="box-shadow: none" v-if="$store.state.application.signed_in">
+                                        style="box-shadow: none" v-if="$store.state.application.signedIn">
                                 <i class="fa fa-bell"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('messages')"
-                                        style="box-shadow: none" v-if="$store.state.application.signed_in" v-darklaunch="'MESSAGES'">
+                                        style="box-shadow: none" v-if="$store.state.application.signedIn" v-darklaunch="'MESSAGES'">
                                 <i class="fa fa-envelope"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('updates')"
-                                        style="box-shadow: none" v-if="$store.state.application.desktop_mode">
+                                        style="box-shadow: none" v-if="$store.state.application.desktopMode">
                                 <i class="fa fa-star"/>
                             </c-button>
                             <c-button status="plain" icon-hide @click="showSlide('top_lists')" class="active">
@@ -262,7 +262,7 @@
             }
         },
         created() {
-            if (this.navigationKey === 'store' && this.$store.state.application.desktop_mode) {
+            if (this.navigationKey === 'store' && this.$store.state.application.desktopMode) {
                 const sheetUrl = 'https://spreadsheets.google.com/feeds/list/1Ndg4etkvLQZKeTcPfP1L1nJiMWn6UkwFd9RVSMcltp4/1/public/values?alt=json'
 
                 axios({

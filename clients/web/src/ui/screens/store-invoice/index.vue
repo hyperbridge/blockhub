@@ -1,6 +1,7 @@
 <template>
     <c-layout>
-            <div class="container">  
+        <div class="row">
+            <div class="col-12">
                 <div class="card invert">
                     <div class="card-body padding-top-50 padding-bottom-30">
                         
@@ -141,6 +142,7 @@
                     
                 </div>
             </div>
+        </div>
     </c-layout>
 </template>
 
@@ -148,7 +150,6 @@
 <script>
 export default {
   components: {
-    'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
   }
 }
 </script>

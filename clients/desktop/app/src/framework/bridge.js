@@ -115,7 +115,7 @@ export const createIdentityRequest = (identity) => {
 
         local.account.identities.push({
             id,
-            public_address: identity.public_address
+            address: identity.address
         })
 
         local.account.identity_index = id
@@ -124,7 +124,7 @@ export const createIdentityRequest = (identity) => {
 
         resolve({
             id: id,
-            public_address: identity.public_address
+            address: identity.address
         })
     })
 }
@@ -188,7 +188,7 @@ export const setContractAddress = async ({ protocolName, contractName, address }
         // update saved contract address
         // 0x05b3dc72dbda198bc8434993c4feb0f20c179a58
         const state = DB.application.config.data[0]
-        const currentNetwork = state.current_ethereum_network
+        const currentNetwork = state.currentEthereumNetwork
 
         const config = state.ethereum[currentNetwork].packages[protocolName]
         config.contracts[contractName].address = address
@@ -310,7 +310,7 @@ export const createMarketplaceProductRequest = async ({ profile, product }) => {
             product.name,
             product.type,
             product.content,
-            { from: profile.public_address }
+            { from: profile.address }
         )
 
         watcher.stopWatching(() => {
@@ -353,11 +353,11 @@ export const getAllProducts = async () => {
             // Must be async or tries to launch nasty process
         })
 
-        //await marketplaceStorage.getUint(web3.sha3(web3._extend.utils.toHex("developer.developerMap") + identity.public_address.replace('0x', ''), { encoding: 'hex' }));
+        //await marketplaceStorage.getUint(web3.sha3(web3._extend.utils.toHex("developer.developerMap") + identity.address.replace('0x', ''), { encoding: 'hex' }));
     })
 }
 
-// Do same as Developer, but just save as curator_id instead
+// Do same as Developer, but just save as curatorId instead
 export const createCuratorRequest = async (identity) => {
     return new Promise(async (resolve, reject) => {
         const web3 = local.wallet.web3
@@ -367,21 +367,21 @@ export const createCuratorRequest = async (identity) => {
 
         let watcher = developerContract.DeveloperCreated().watch(function (error, result) {
             if (!error) {
-                identity.curator_id = result.args.developerId.toNumber()
+                identity.curatorId = result.args.developerId.toNumber()
 
                 DB.save()
 
 
                 saveAccountFile().then()
 
-                return resolve(identity.curator_id)
+                return resolve(identity.curatorId)
             }
 
             return reject(error)
         })
 
         try {
-            await developerContract.createDeveloper(identity.name, { from: identity.public_address })
+            await developerContract.createDeveloper(identity.name, { from: identity.address })
 
             watcher.stopWatching(() => {
                 // Must be async or tries to launch nasty process
@@ -397,16 +397,16 @@ export const createCuratorRequest = async (identity) => {
                 const developerContract = MarketplaceAPI.api.ethereum.state.contracts.Developer.deployed
                 const marketplaceStorage = MarketplaceAPI.api.ethereum.state.contracts.MarketplaceStorage.deployed //await developerContract.marketplaceStorage()
 
-                let developerId = await marketplaceStorage.getUint(web3.sha3(web3._extend.utils.toHex("developer.developerMap") + identity.public_address.replace('0x', ''), { encoding: 'hex' }));
+                let developerId = await marketplaceStorage.getUint(web3.sha3(web3._extend.utils.toHex("developer.developerMap") + identity.address.replace('0x', ''), { encoding: 'hex' }));
 
                 if (developerId && developerId.toNumber()) {
-                    identity.curator_id = developerId.toNumber()
+                    identity.curatorId = developerId.toNumber()
 
                     DB.save()
 
                     await saveAccountFile()
 
-                    return resolve(identity.curator_id)
+                    return resolve(identity.curatorId)
                 } else {
                     return reject(error.toString())
                 }
@@ -426,14 +426,14 @@ export const registerUsernameRequest = async (identity) => {
 
         let watcher = developerContract.DeveloperCreated().watch(function (error, result) {
             if (!error) {
-                identity.curator_id = result.args.developerId.toNumber()
+                identity.curatorId = result.args.developerId.toNumber()
 
                 DB.save()
 
 
                 saveAccountFile().then()
 
-                return resolve(identity.curator_id)
+                return resolve(identity.curatorId)
             }
 
             return reject(error)
@@ -450,18 +450,18 @@ export const createDeveloperRequest = async (identity) => {
 
         let watcher = developerContract.DeveloperCreated().watch(function (error, result) {
             if (!error) {
-                identity.developer_id = result.args.developerId.toNumber()
+                identity.developerId = result.args.developerId.toNumber()
 
                 saveAccountFile().then()
 
-                return resolve(identity.developer_id)
+                return resolve(identity.developerId)
             }
             
             return reject(error)
         })
 
         try {
-            await developerContract.createDeveloper(identity.name, { from: identity.public_address })
+            await developerContract.createDeveloper(identity.name, { from: identity.address })
 
             watcher.stopWatching(() => {
                 // Must be async or tries to launch nasty process
@@ -477,16 +477,16 @@ export const createDeveloperRequest = async (identity) => {
                 const developerContract = MarketplaceAPI.api.ethereum.state.contracts.Developer.deployed
                 const marketplaceStorage = MarketplaceAPI.api.ethereum.state.contracts.MarketplaceStorage.deployed //await developerContract.marketplaceStorage()
 
-                let developerId = await marketplaceStorage.getUint(web3.sha3(web3._extend.utils.toHex("developer.developerMap") + identity.public_address.replace('0x', ''), { encoding: 'hex' }));
+                let developerId = await marketplaceStorage.getUint(web3.sha3(web3._extend.utils.toHex("developer.developerMap") + identity.address.replace('0x', ''), { encoding: 'hex' }));
 
                 if (developerId && developerId.toNumber()) {
-                    identity.developer_id = developerId.toNumber()
+                    identity.developerId = developerId.toNumber()
 
                     DB.save()
 
                     await saveAccountFile()
 
-                    return resolve(identity.developer_id)
+                    return resolve(identity.developerId)
                 } else {
                     return reject(error.toString())
                 }
@@ -517,23 +517,23 @@ export const initProtocol = async ({ protocolName }) => {
     return new Promise(async (resolve) => {
         const protocol = getProtocolByName(protocolName)
         const state = DB.application.config.data[0]
-        const currentNetwork = state.current_ethereum_network
+        const currentNetwork = state.currentEthereumNetwork
 
         const config = state.ethereum[currentNetwork].packages[protocolName]
         
         //const provider = getWebProvider(currentNetwork)
 
-        // local.wallet.web3.eth.accounts.privateKeyToAccount('0x' + local.account.private_key, (err, account) => {
+        // local.wallet.web3.eth.accounts.privateKeyToAccount('0x' + local.account.privateKey, (err, account) => {
         //     local.wallet.web3.eth.accounts.wallet.add(account, () => { })
         // })
 
-        config.user_from_address = local.account.public_address
+        config.userFromAddress = local.account.address
         
-        console.log('[BlockHub] Initializing protocol, with public address: ', config.user_from_address)
+        console.log('[BlockHub] Initializing protocol, with public address: ', config.userFromAddress)
 
         protocol.api.ethereum.init(
             local.wallet.provider,
-            config.user_from_address,
+            config.userFromAddress,
             config.user_to_address
         )
 
@@ -558,13 +558,13 @@ export const initProtocol = async ({ protocolName }) => {
                 await setContractAddress({ protocolName, contractName, address: contract.address })
                     .catch(() => {
                         config.contracts[contractName].address = null
-                        config.contracts[contractName].created_at = null
+                        config.contracts[contractName].createdAt = null
                     })
                     .then(() => {
 
                     })
             } else {
-                config.contracts[contractName].created_at = null
+                config.contracts[contractName].createdAt = null
             }
         }
 
@@ -591,7 +591,7 @@ export const deployContract = async ({ protocolName, contractName, oldContractAd
     return new Promise(async (resolve, reject) => {
         const protocol = getProtocolByName(protocolName)
         const state = DB.application.config.data[0]
-        const currentNetwork = state.current_ethereum_network
+        const currentNetwork = state.currentEthereumNetwork
         const config = state.ethereum[currentNetwork].packages[protocolName]
         const web3 = local.wallet.web3
 
@@ -601,7 +601,7 @@ export const deployContract = async ({ protocolName, contractName, oldContractAd
         if (!config.contracts[contractName]) {
             config.contracts[contractName] = {
                 name: contractName,
-                created_at: null,
+                createdAt: null,
                 address: null
             }
         }
@@ -647,17 +647,17 @@ export const deployContract = async ({ protocolName, contractName, oldContractAd
             const hbxToken = TokenAPI.api.ethereum.state.contracts.TokenDelegate.deployed
             const tokenLib = TokenAPI.api.ethereum.state.contracts.TokenLib.deployed
 
-            //await eternalStorage.addAdmin(hbxToken.address, { from: local.wallet.public_address })
+            //await eternalStorage.addAdmin(hbxToken.address, { from: local.wallet.address })
 
-            //await token.upgradeTo(hbxToken.address, { from: local.wallet.public_address }).catch(() => { })
+            //await token.upgradeTo(hbxToken.address, { from: local.wallet.address }).catch(() => { })
 
             token = { ...TokenAPI.api.ethereum.state.contracts.TokenDelegate.deployed, ...token }
 
             const tokenWallet = await Wallet.create(local.passphrase, 2) // this should be a semi-secure wallet - metamask
             const saleWallet = await Wallet.create(local.passphrase, 3) // this should be secure wallet - hardware
 
-            console.log('tokenWallet addy', tokenWallet.public_address, tokenWallet.private_key)
-            console.log('saleWallet addy', saleWallet.public_address, saleWallet.private_key)
+            console.log('tokenWallet addy', tokenWallet.address, tokenWallet.privateKey)
+            console.log('saleWallet addy', saleWallet.address, saleWallet.privateKey)
             const decimals = web3._extend.utils.toBigNumber(18)
             const totalAmount = web3._extend.utils.toBigNumber(1000000000)
             const saleAmount = web3._extend.utils.toBigNumber(300000000)
@@ -665,7 +665,7 @@ export const deployContract = async ({ protocolName, contractName, oldContractAd
             const tokenSupply = totalAmount.times(web3._extend.utils.toBigNumber(10).pow(decimals))
             const tokenAllowance = saleAmount.times(web3._extend.utils.toBigNumber(10).pow(decimals))
 
-            //await token.mint(tokenWallet.public_address, tokenSupply, { from: local.wallet.public_address })
+            //await token.mint(tokenWallet.address, tokenSupply, { from: local.wallet.address })
 
             const latestBlock = await web3.eth.getBlockPromise('latest')
 
@@ -677,7 +677,7 @@ export const deployContract = async ({ protocolName, contractName, oldContractAd
 
             params = [
                 rate,
-                saleWallet.public_address,
+                saleWallet.address,
                 hbxToken.address
             ]
 
@@ -688,7 +688,7 @@ export const deployContract = async ({ protocolName, contractName, oldContractAd
             // uint256 _rate, address _wallet, ERC20 _token, address _tokenWallet, uint256 _cap, uint256 _startTime, uint256 _endTime
             const tokensale = ReserveAPI.api.ethereum.state.contracts.TokenSale.deployed//await ReserveAPI.api.ethereum.deployContract('TokenSale', links, params)
 
-            config.contracts[contractName].created_at = Date.now()
+            config.contracts[contractName].createdAt = Date.now()
             config.contracts[contractName].address = tokensale.address
 
             DB.application.config.update(state)
@@ -703,7 +703,7 @@ export const deployContract = async ({ protocolName, contractName, oldContractAd
             let tokenWalletHolder = await TokenAPI.api.ethereum.state.contracts.Token.contract.at(token.address)
             tokenWalletHolder = { ...tokenDelegateHolder, ...tokenWalletHolder }
 
-            //await tokenWalletHolder.approve(tokensale.address, tokenAllowance, { from: tokenWallet.public_address })
+            //await tokenWalletHolder.approve(tokensale.address, tokenAllowance, { from: tokenWallet.address })
 
             TokenAPI.api.ethereum.state.contracts.Token.contract.setProvider(originalProvider)
             TokenAPI.api.ethereum.state.contracts.TokenDelegate.contract.setProvider(originalProvider)
@@ -715,7 +715,7 @@ export const deployContract = async ({ protocolName, contractName, oldContractAd
             protocol.api.ethereum
                 .deployContract(contractName, links, params)
                 .then(async (contract) => {
-                    config.contracts[contractName].created_at = Date.now()
+                    config.contracts[contractName].createdAt = Date.now()
                     config.contracts[contractName].address = contract.address
 
                     DB.application.config.update(state)
@@ -768,42 +768,42 @@ export const setAccountRequest = async () => {
         let account = local.account
 
         if (local.password) {
-            const decryptedPrivateKey = decrypt(account.private_key, local.password)
+            const decryptedPrivateKey = decrypt(account.privateKey, local.password)
             console.log('private key', decryptedPrivateKey)
             account = {
-                public_address: account.public_address,
-                secret_question_1: account.secret_question_1,
+                address: account.address,
+                secretQuestion1: account.secretQuestion1,
                 secret_answer_1: 'HIDDEN',
-                secret_question_2: account.secret_question_2,
+                secretQuestion2: account.secretQuestion2,
                 secret_answer_2: account.secret_answer_2,
                 passphrase: 'HIDDEN',
-                private_key: 'HIDDEN',
+                privateKey: 'HIDDEN',
                 password: 'HIDDEN',
                 email: decrypt(account.email, decryptedPrivateKey),
-                first_name: decrypt(account.first_name, decryptedPrivateKey),
-                last_name: decrypt(account.last_name, decryptedPrivateKey),
+                firstName: decrypt(account.firstName, decryptedPrivateKey),
+                lastName: decrypt(account.lastName, decryptedPrivateKey),
                 birthday: decrypt(account.birthday, decryptedPrivateKey),
                 current_identity: account.current_identity,
                 identities: account.identities.map(identity => ({
                     id: identity.id,
                     name: identity.name,
-                    public_address: identity.public_address,
-                    developer_id: identity.developer_id
+                    address: identity.address,
+                    developerId: identity.developerId
                 }))
             }
         } else {
             account = {
-                public_address: null,
-                secret_question_1: null,
+                address: null,
+                secretQuestion1: null,
                 secret_answer_1: null,
-                secret_question_2: null,
+                secretQuestion2: null,
                 secret_answer_2: null,
                 passphrase: null,
-                private_key: null,
+                privateKey: null,
                 password: null,
                 email: null,
-                first_name: null,
-                last_name: null,
+                firstName: null,
+                lastName: null,
                 birthday: null,
                 current_identity: { id: null },
                 identities: []
@@ -965,17 +965,17 @@ export const deleteAccountRequest = async (data) => {
                 removeFile(path + '/account.json')
 
                 local.account = {
-                    public_address: null,
-                    secret_question_1: null,
+                    address: null,
+                    secretQuestion1: null,
                     secret_answer_1: null,
-                    secret_question_2: null,
+                    secretQuestion2: null,
                     secret_answer_2: null,
                     passphrase: null,
-                    private_key: null,
+                    privateKey: null,
                     password: null,
                     email: null,
-                    first_name: null,
-                    last_name: null,
+                    firstName: null,
+                    lastName: null,
                     birthday: null,
                 }
 
@@ -1010,8 +1010,8 @@ export const generateWallet = async () => {
 
         resolve({
             passphrase: passphrase,
-            public_address: wallet.public_address,
-            private_key: wallet.private_key
+            address: wallet.address,
+            privateKey: wallet.privateKey
         })
     })
 }
@@ -1047,7 +1047,7 @@ Are you sure you want to send?`
                 console.log(fromAddress.toLowerCase())
                 console.log(local.account.identities)
                 
-                const walletIndex = local.account.identities.find((identity) => fromAddress.toLowerCase() === identity.public_address.toLowerCase()).id
+                const walletIndex = local.account.identities.find((identity) => fromAddress.toLowerCase() === identity.address.toLowerCase()).id
 
                 const wallet = await Wallet.create(local.passphrase, walletIndex)
                 const web3 = wallet.web3
@@ -1086,7 +1086,7 @@ export const setEnvironmentMode = async (environmentMode) => {
     return new Promise(async (resolve) => {
         config.IS_PRODUCTION = environmentMode === 'production'
 
-        DB.application.config.data[0].environment_mode = environmentMode
+        DB.application.config.data[0].environmentMode = environmentMode
 
         let networkOptions = {
             'production': 'mainnet',
@@ -1096,12 +1096,12 @@ export const setEnvironmentMode = async (environmentMode) => {
             'local': 'local'
         }
 
-        DB.application.config.data[0].current_ethereum_network = networkOptions[environmentMode]
+        DB.application.config.data[0].currentEthereumNetwork = networkOptions[environmentMode]
 
         DB.save()
 
         Wallet.ethereum.activeNetwork = networkOptions[environmentMode]
-        Wallet.ethereum.fromAddress = local.account.public_address
+        Wallet.ethereum.fromAddress = local.account.address
 
         console.log('[BlockHub] Setting environment mode: ', environmentMode)
         console.log('[BlockHub] Setting active network: ', networkOptions[environmentMode])
@@ -1109,8 +1109,8 @@ export const setEnvironmentMode = async (environmentMode) => {
         await sendCommand('updateState', {
             module: 'application',
             state: {
-                environment_mode: environmentMode,
-                current_ethereum_network: networkOptions[environmentMode]
+                environmentMode: environmentMode,
+                currentEthereumNetwork: networkOptions[environmentMode]
             }
         })
 
@@ -1127,7 +1127,7 @@ export const setEnvironmentMode = async (environmentMode) => {
 }
 
 
-export const recoverPasswordRequest = async ({ secret_question_1, secret_answer_1, birthday }) => {
+export const recoverPasswordRequest = async ({ secretQuestion1, secret_answer_1, birthday }) => {
     return new Promise(async (resolve) => {
         let password = null
 
@@ -1156,24 +1156,24 @@ export const writeToClipboard = async (data) => {
     })
 }
 
-export const handleCreateAccountRequest = async ({ email, password, birthday, first_name, last_name, passphrase, encrypt_passphrase, secret_question_1, secret_answer_1, secret_question_2, secret_answer_2 }) => {
+export const handleCreateAccountRequest = async ({ email, password, birthday, firstName, lastName, passphrase, encrypt_passphrase, secretQuestion1, secret_answer_1, secretQuestion2, secret_answer_2 }) => {
     return new Promise(async (resolve) => {
         const wallet = await Wallet.create(passphrase, 0)
         const identity = await Wallet.create(passphrase, 10)
 
         local.account = {
             ...local.account,
-            public_address: wallet.public_address,
-            secret_question_1: secret_question_1,
-            secret_question_2: secret_question_2,
+            address: wallet.address,
+            secretQuestion1: secretQuestion1,
+            secretQuestion2: secretQuestion2,
             encrypt_passphrase: encrypt_passphrase,
             passphrase: encrypt_passphrase ? encrypt(passphrase, password) : passphrase,
-            private_key: encrypt(wallet.private_key, password),
+            privateKey: encrypt(wallet.privateKey, password),
             password: encrypt(password, secret_answer_1 + birthday),
-            email: encrypt(email, wallet.private_key),
-            first_name: encrypt(first_name, wallet.private_key),
-            last_name: encrypt(last_name, wallet.private_key),
-            birthday: encrypt(birthday, wallet.private_key),
+            email: encrypt(email, wallet.privateKey),
+            firstName: encrypt(firstName, wallet.privateKey),
+            lastName: encrypt(lastName, wallet.privateKey),
+            birthday: encrypt(birthday, wallet.privateKey),
             versonCreated: config.APP_VERSION,
             identity_index: 10,
             current_identity: {
@@ -1183,8 +1183,8 @@ export const handleCreateAccountRequest = async ({ email, password, birthday, fi
                 {
                     id: 10,
                     name: 'Default',
-                    public_address: identity.public_address,
-                    private_key: encrypt(identity.private_key, password),
+                    address: identity.address,
+                    privateKey: encrypt(identity.privateKey, password),
                 }
             ]
         }
@@ -1197,13 +1197,13 @@ export const handleCreateAccountRequest = async ({ email, password, birthday, fi
         // Tell web all non-sensitive account info
         resolve({
             account: {
-                public_address: wallet.public_address,
+                address: wallet.address,
                 email: email,
-                first_name: first_name,
-                last_name: last_name,
+                firstName: firstName,
+                lastName: lastName,
                 birthday: birthday,
-                secret_question_1: secret_question_1,
-                secret_question_2: secret_question_2,
+                secretQuestion1: secretQuestion1,
+                secretQuestion2: secretQuestion2,
                 current_identity: {
                     id: 10
                 },
@@ -1211,7 +1211,7 @@ export const handleCreateAccountRequest = async ({ email, password, birthday, fi
                     {
                         id: 10,
                         name: 'Default',
-                        public_address: identity.public_address
+                        address: identity.address
                     }
                 ]
             }
@@ -1289,7 +1289,7 @@ export const runCommand = async (cmd, meta = {}) => {
             console.log('[BlockHub] Web initialized', cmd.data) // msg from web page
 
             if (cmd.data == '1') {
-                await setEnvironmentMode(config.IS_PRODUCTION ? 'production' : DB.application.config.data[0].environment_mode)
+                await setEnvironmentMode(config.IS_PRODUCTION ? 'production' : DB.application.config.data[0].environmentMode)
 
                 // const mode = config.IS_PRODUCTION ? 'production' : 'local'
 
@@ -1309,7 +1309,7 @@ export const runCommand = async (cmd, meta = {}) => {
                 if (local.account.passphrase) {
                     if (local.account.encrypt_passphrase && !local.password) {
                         // Desktop asks to prompt password
-                        await promptPasswordRequest({ secret_question_1: local.account.secret_question_1 })
+                        await promptPasswordRequest({ secretQuestion1: local.account.secretQuestion1 })
                     } else {
                         // Passphrase was already decrypted and not already set (incase reloading page)
                         if (!local.passphrase) {

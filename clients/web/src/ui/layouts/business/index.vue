@@ -52,7 +52,9 @@
                 </div>
                 <!-- //END PAGE HEADING -->
                 <div class="content__wrapper">
-                    <slot />
+                    <div class="container-fluid">
+                        <slot />
+                    </div>
                 </div>
             </div>
         </transition>
@@ -89,7 +91,7 @@
         },
         components: {
             SidebarMenu,
-            'c-page-heading': (resolve) => require(['@/ui/components/business/page_heading'], resolve),
+            'c-page-heading': (resolve) => require(['@/ui/components/business/page-heading'], resolve),
         },
         data() {
             return {
@@ -122,6 +124,11 @@
                             {
                                 title: 'Crowdfunds',
                                 child: [
+                                    {
+                                        href: '/business/projects',
+                                        title: 'All Crowdfunds',
+                                        icon: 'fas fa-square-full icon-sm',
+                                    },
                                     {
                                         href: '/business/project/new',
                                         title: 'New Crowdfunds',

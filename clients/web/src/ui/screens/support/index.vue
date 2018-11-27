@@ -1,30 +1,27 @@
 <template>
     <c-layout navigationKey="help">
-            <div class="page-heading">
-                <div class="page-heading__container">
-                    <h1 class="title">Support</h1>
-                    <p class="caption">Let us know if you need further help.</p>
-                </div>
-                <c-heading />
+        <div class="row page-heading">
+            <div class="page-heading__container">
+                <h1 class="title">Support</h1>
+                <p class="caption">Let us know if you need further help.</p>
             </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <ul>
-                        <li>E-mail: <a href="mailto:support@hyperbridge.zendesk.com">support@hyperbridge.zendesk.com</a></li>
-                        <li>Support Desk: <a href="https://hyperbridge.zendesk.com/">https://hyperbridge.zendesk.com/</a></li>
-                    </ul>
-                </div>
-            </div>
+            <c-heading />
+        </div>
+        <div class="row">
+            <ul>
+                <li>E-mail: <a href="mailto:support@hyperbridge.zendesk.com">support@hyperbridge.zendesk.com</a></li>
+                <li>Support Desk: <a href="https://hyperbridge.zendesk.com/">https://hyperbridge.zendesk.com/</a></li>
+            </ul>
+        </div>
     </c-layout>
 </template>
 
 <script>
 export default {
-  components: {
-    'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
-  },
-  data: () => ({
-  })
+    components: {
+    },
+    data: () => ({
+    })
 }
 </script>
 

@@ -38,18 +38,18 @@
                         <div class="editor-container">
                             <div class="editor" v-if="editing">
                                 <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                        @click="activateElement('developer_tags')"
-                                        v-if="!activeElement['developer_tags']" style="margin-bottom: 20px">Change
+                                        @click="activateElement('developerTags')"
+                                        v-if="!activeElement['developerTags']" style="margin-bottom: 20px">Change
                                     Tags <span class="fa fa-edit"></span></button>
                                 <div class="form-control-element tag-editor form-control-element--right"
-                                        v-if="activeElement['developer_tags']">
+                                        v-if="activeElement['developerTags']">
                                     <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
                                         <!--<option v-for="(tag, index) in author_tag_options" :key="index"-->
-                                                <!--:selected="project.developer_tags.includes(tag)">{{ tag }}-->
+                                                <!--:selected="project.developerTags.includes(tag)">{{ tag }}-->
                                         <!--</option>-->
                                     <!--</select>-->
 
-                                    <multiselect v-model="project.developer_tags"
+                                    <multiselect v-model="project.developerTags"
                                                     class="dark-mode"
                                                     :multiple="true"
                                                     :taggable="true"
@@ -60,12 +60,12 @@
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary"
                                         style="">
                                             <span class="fa fa-check"
-                                                    @click="deactivateElement('developer_tags')"></span>
+                                                    @click="deactivateElement('developerTags')"></span>
                                     </div>
                                 </div>
                             </div>
-                            <c-tags-list :tags="project.developer_tags"
-                                            v-if="!editing || !activeElement['developer_tags']"></c-tags-list>
+                            <c-tags-list :tags="project.developerTags"
+                                            v-if="!editing || !activeElement['developerTags']"></c-tags-list>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
@@ -372,7 +372,7 @@
                     name: false,
                     background_image: false,
                     store_image: false,
-                    developer_tags: false,
+                    developerTags: false,
                     description: false,
                     content: false
                 },
@@ -453,13 +453,13 @@
         computed: {
             project: updateProject,
             editing() {
-                if (!this.$store.state.application.editor_mode) {
+                if (!this.$store.state.application.editorMode) {
                     for (let key in this.activeElement) {
                         this.activeElement[key] = false
                     }
                 }
 
-                return this.$store.state.application.editor_mode === 'editing'
+                return this.$store.state.application.editorMode === 'editing'
             },
             breadcrumbLinks() {
                 const links = [
@@ -494,7 +494,7 @@
                 })
             },
             editing() {
-                if (this.$store.state.application.editor_mode === 'publishing') {
+                if (this.$store.state.application.editorMode === 'publishing') {
                     this.save()
                 }
             },
@@ -512,18 +512,18 @@
                 .on('select2:select', (e) => {
                     let data = e.params.data
 
-                    if (!this.project.developer_tags.includes(data.text)) {
-                        this.project.developer_tags.push(data.text)
+                    if (!this.project.developerTags.includes(data.text)) {
+                        this.project.developerTags.push(data.text)
                     }
 
-                    Vue.set(this.project, 'developer_tags', this.project.developer_tags)
+                    Vue.set(this.project, 'developerTags', this.project.developerTags)
                 })
                 .on('select2:unselect', (e) => {
                     let data = e.params.data
 
-                    this.project.developer_tags = this.project.developer_tags.filter(e => e !== data.text)
+                    this.project.developerTags = this.project.developerTags.filter(e => e !== data.text)
 
-                    Vue.set(this.project, 'developer_tags', this.project.developer_tags)
+                    Vue.set(this.project, 'developerTags', this.project.developerTags)
                 })
 
             $('#summernote').summernote({

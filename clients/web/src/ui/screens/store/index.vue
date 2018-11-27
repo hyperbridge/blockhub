@@ -1,8 +1,8 @@
 <template>
     <c-layout navigationKey="store">
-            <div class="container-fluid">
-                Nothing to see here
-            </div>
+        <div class="row">
+            Nothing to see here
+        </div>
     </c-layout>
 </template>
 

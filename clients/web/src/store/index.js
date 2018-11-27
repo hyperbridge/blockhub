@@ -19,7 +19,7 @@ import community from '@/modules/community'
 import rootStore from '@/modules/root'
 import seed from '../db/seed'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 
 if (!window.BlockHub)
@@ -69,7 +69,12 @@ const devConfig = CheckDevConfig()
 let service = null
 let auth = null
 
-const decentralizedMode = false
+const IsDecentralizedMode = () => {
+    // Decentralized mode if we're not on GameDelta
+    return window.location.hostname.toLowerCase().indexOf('gamedelta') !== -1
+}
+
+const decentralizedMode = IsDecentralizedMode()
 
 const feathers = feathersVuex(feathersClient, {
     idField: 'id',
@@ -205,10 +210,10 @@ window.BlockHub.importSeedData = () => {
 
     DB.application.config.data[0].account.notifications = seed.notifications
     DB.application.config.data[0].updates = seed.updates
-    DB.marketplace.config.data[0].curator_reviews = seed.curator_reviews
+    DB.marketplace.config.data[0].curatorReviews = seed.curatorReviews
     DB.marketplace.config.data[0].realms = seed.realms
     DB.marketplace.config.data[0].collections = seed.collections
-    DB.marketplace.config.data[0].game_series = seed.game_series
+    DB.marketplace.config.data[0].gameSeries = seed.gameSeries
     DB.marketplace.config.data[0].bounties = seed.bounties
 
     DB.marketplace.assets.data = seed.assets
@@ -232,18 +237,18 @@ window.BlockHub.resetSeedData = () => {
 
     DB.application.config.data[0].account.notifications = []
     DB.marketplace.config.data[0].updates = []
-    DB.marketplace.config.data[0].curator_reviews = []
-    DB.marketplace.config.data[0].product_news = []
+    DB.marketplace.config.data[0].curatorReviews = []
+    DB.marketplace.config.data[0].productNews = []
     DB.marketplace.config.data[0].realms = []
     DB.marketplace.config.data[0].collections = []
-    DB.marketplace.config.data[0].game_series = []
+    DB.marketplace.config.data[0].gameSeries = []
     DB.marketplace.config.data[0].bounties = []
 
     DB.marketplace.products.data = []
     DB.marketplace.assets.data = []
     DB.marketplace.posts.data = []
 
-    DB.funding.config.data[0].trending_projects = []
+    DB.funding.config.data[0].trendingProjects = []
     DB.funding.projects.data = []
 
     store.dispatch('marketplace/updateState')
@@ -362,15 +367,15 @@ const randomAction = () => {
 let simulatorInitialized = false
 
 const monitorSimulatorMode = () => {
-    if (!store.state.application.simulator_mode) {
+    if (!store.state.application.simulatorMode) {
         simulatorInitialized = false
         return setTimeout(monitorSimulatorMode, 1000)
     }
 
     // Start out with some decent amount of content
     if (!simulatorInitialized) {
-        store.state.marketplace.trending_projects = seed.trending_projects
-        store.state.marketplace.curator_reviews = seed.curator_reviews.slice(seed.curator_reviews.length / 2)
+        store.state.marketplace.trendingProjects = seed.trendingProjects
+        store.state.marketplace.curatorReviews = seed.curatorReviews.slice(seed.curatorReviews.length / 2)
         store.state.marketplace.posts = seed.posts.slice(seed.posts.length / 2)
         store.state.marketplace.products = seed.products.slice(seed.products.length / 2)
         store.state.marketplace.assets = seed.assets.slice(seed.assets.length / 2)
@@ -390,9 +395,9 @@ const monitorSimulatorMode = () => {
     const targets = [
         [store.state.application.account.notifications, seed.notifications],
         [store.state.application.account.wallets, seed.wallets],
-        [store.state.marketplace.trending_projects, seed.trending_projects],
-        [store.state.marketplace.curator_reviews, seed.curator_reviews],
-        [store.state.marketplace.product_news, seed.product_news],
+        [store.state.marketplace.trendingProjects, seed.trendingProjects],
+        [store.state.marketplace.curatorReviews, seed.curatorReviews],
+        [store.state.marketplace.productNews, seed.productNews],
         [store.state.marketplace.assets, seed.assets],
         [store.state.marketplace.products, seed.products],
         [store.state.marketplace.collections, seed.collections],
@@ -460,13 +465,13 @@ BlockHub.GetMode = () => {
         return hash.replace('mode=', '')
     }
 
-    if (hostname === 'blockhub.gg') {
+    if (hostname === 'blockhub.gg' || hostname === 'gamedelta.net') {
         return 'production'
-    } else if (hostname === 'staging.blockhub.gg') {
+    } else if (hostname === 'staging.blockhub.gg' || hostname === 'staging.gamedelta.net') {
         return 'staging'
-    } else if (hostname === 'beta.blockhub.gg') {
+    } else if (hostname === 'beta.blockhub.gg' || hostname === 'beta.gamedelta.net') {
         return 'beta'
-    } else if (hostname === 'preview.blockhub.gg') {
+    } else if (hostname === 'preview.blockhub.gg' || hostname === 'preview.gamedelta.net') {
         return 'preview'
     } else {
         return 'local'
@@ -498,14 +503,14 @@ export let initializer = () => {
             }
 
             if (store.state.application.environmentMode === 'preview') {
-                store.state.application.desktop_mode = true
-                store.state.application.signed_in = true
+                store.state.application.desktopMode = true
+                store.state.application.signedIn = true
 
                 // ENABLE ALL DARKLAUNCHES
-                store.state.application.darklaunch_override = true
+                store.state.application.darklaunchOverride = true
 
                 // ENABLE SIMULATOR MODE
-                //store.state.application.simulator_mode = true
+                //store.state.application.simulatorMode = true
             }
 
             try { // TODO: we dont need this do we?

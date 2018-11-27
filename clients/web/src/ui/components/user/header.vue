@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="user_info">
-                    <h2 class="user_name">{{ profile.name }} </h2>
+                    <h2 class="userName">{{ profile.name }} </h2>
                     <div class="user_status" v-darklaunch="'REPUTATION'">Trusted User</div>
                     <div class="user_statistic" v-darklaunch="'REPUTATION'">
                         <span>
@@ -78,7 +78,7 @@
         .user_info {
             width: calc(100% - 130px);
             text-align: left;
-            .user_name {
+            .userName {
                 font-size: 32px;
                 padding: 0;
                 margin: 0;

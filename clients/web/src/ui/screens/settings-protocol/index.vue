@@ -57,11 +57,11 @@
                                         <p v-if="contract.links && contract.links.length"><strong>Dependencies:</strong> <em v-for="link in contract.links" :key="link.name">{{ link.name }} </em></p>
                                     </td>
                                     <td>
-                                        <span class="badge badge-success" v-if="contract.created_at">Deployed</span>
-                                        <span class="badge badge-warning" v-if="!contract.created_at">Undeployed</span>
-                                        <div v-if="contract.created_at">
-                                            <strong>{{ contract.created_at | formatDate }}</strong><br>
-                                            <span class="text-muted">{{ contract.created_at | formatTime }}</span>
+                                        <span class="badge badge-success" v-if="contract.createdAt">Deployed</span>
+                                        <span class="badge badge-warning" v-if="!contract.createdAt">Undeployed</span>
+                                        <div v-if="contract.createdAt">
+                                            <strong>{{ contract.createdAt | formatDate }}</strong><br>
+                                            <span class="text-muted">{{ contract.createdAt | formatTime }}</span>
                                         </div>
                                     </td>
                                     <td>
@@ -127,35 +127,35 @@ export default {
             }
         },
         protocols() {
-            this.protocolData.token.data = JSON.stringify(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.token)
-            this.protocolData.reserve.data = JSON.stringify(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve)
-            this.protocolData.marketplace.data = JSON.stringify(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.marketplace)
-            this.protocolData.funding.data = JSON.stringify(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.funding)
+            this.protocolData.token.data = JSON.stringify(this.$store.state.application.ethereum[this.$store.state.application.currentEthereumNetwork].packages.token)
+            this.protocolData.reserve.data = JSON.stringify(this.$store.state.application.ethereum[this.$store.state.application.currentEthereumNetwork].packages.reserve)
+            this.protocolData.marketplace.data = JSON.stringify(this.$store.state.application.ethereum[this.$store.state.application.currentEthereumNetwork].packages.marketplace)
+            this.protocolData.funding.data = JSON.stringify(this.$store.state.application.ethereum[this.$store.state.application.currentEthereumNetwork].packages.funding)
 
             return [
                 {
                     id: 'token',
                     name: 'Token',
                     link: 'https://github.com/hyperbridge/protocol/tree/master/packages/token',
-                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.token.contracts)
+                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.currentEthereumNetwork].packages.token.contracts)
                 },
                 {
                     id: 'reserve',
                     name: 'Reserve',
                     link: 'https://github.com/hyperbridge/protocol/tree/master/packages/reserve',
-                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.reserve.contracts)
+                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.currentEthereumNetwork].packages.reserve.contracts)
                 },
                 {
                     id: 'marketplace',
                     name: 'Marketplace',
                     link: 'https://github.com/hyperbridge/protocol/tree/master/packages/marketplace',
-                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.marketplace.contracts)
+                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.currentEthereumNetwork].packages.marketplace.contracts)
                 },
                 {
                     id: 'funding',
                     name: 'Funding',
                     link: 'https://github.com/hyperbridge/protocol/tree/master/packages/funding',
-                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages.funding.contracts)
+                    contracts: Object.values(this.$store.state.application.ethereum[this.$store.state.application.currentEthereumNetwork].packages.funding.contracts)
                 }
             ]
         }
@@ -165,7 +165,7 @@ export default {
             this.protocolData[protocolName].visible = !this.protocolData[protocolName].visible
         },
         saveRawData(protocolName) {
-            this.$store.state.application.ethereum[this.$store.state.application.current_ethereum_network].packages[protocolName] = JSON.parse(this.protocolData[protocolName].data)
+            this.$store.state.application.ethereum[this.$store.state.application.currentEthereumNetwork].packages[protocolName] = JSON.parse(this.protocolData[protocolName].data)
         },
         deployContract(protocolName, contractName, oldContractAddress) {
             this.$store.dispatch('application/deployContract', { protocolName, contractName, oldContractAddress })

@@ -65,7 +65,7 @@
                         Select a Dossier File
                     </div>
                     <span>or</span>
-                    <input v-model="item.explain_text" class="explain_input" type="text" placeholder="Explain your findings"/>
+                    <input v-model="item.explainText" class="explain_input" type="text" placeholder="Explain your findings"/>
                     <c-button status="success" icon="arrow-right" size="md">Submit</c-button>
                 </div>
             </transition>
@@ -87,8 +87,8 @@
                         "approved": "408",
                         "prize": "30000",
                         "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu nulla sed urna malesuada ornare nec ac risus. Nam vehicula mauris ac augue finibus finibus non et erat. Integer malesuada rutrum elit non hendrerit. Nam volutpat scelerisque magna, in lacinia nulla consectetur eget. Nunc feugiat egestas arcu id lobortis. Proin rhoncus viverra mi, ac bibendum ligula molestie eget. Vivamus a tempor ligula.",
-                        "explain_text": "",
-                        "file_src": ""
+                        "explainText": "",
+                        "fileSrc": ""
 
                     },
                     {
@@ -97,8 +97,8 @@
                         "approved": "408",
                         "prize": "30000",
                         "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu nulla sed urna malesuada ornare nec ac risus. Nam vehicula mauris ac augue finibus finibus non et erat. Integer malesuada rutrum elit non hendrerit. Nam volutpat scelerisque magna, in lacinia nulla consectetur eget. Nunc feugiat egestas arcu id lobortis. Proin rhoncus viverra mi, ac bibendum ligula molestie eget. Vivamus a tempor ligula.",
-                        "explain_text": "",
-                        "file_src": ""
+                        "explainText": "",
+                        "fileSrc": ""
 
                     }
                 ],

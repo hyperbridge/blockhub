@@ -1,188 +1,186 @@
 <template>
     <c-layout navigationKey="settings">
-            <c-block class="margin-bottom-30" title="Client Settings" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                <div class="row">
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <div class="settings_item">
-                            <c-switch
-                                :checked="settings.client.open_startup"
-                                @change="setOpenStartup(settings.client.open_startup)"
-                            />
-                            <div class="text">
-                                <h4>Open on system startup</h4>
-                                <p>Turn on if you want the application to load automatically
-                                when you turn on your computer</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <div class="settings_item">
-                            <c-switch
-                                :checked="settings.client.system_warnings"
-                                @change="updateClientSettings('system_warnings')"
-                            />
-                            <div class="text">
-                                <h4>System warnings</h4>
-                                <p>Turn on if you want to see system warnings (useful for debugging)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <div class="settings_item">
-                            <c-switch
-                                :checked="settings.client.ethereum_connection"
-                                @change="updateClientSettings('ethereum_connection')"
-                            />
-                            <div class="text">
-                                <h4>Ethereum connection</h4>
-                                <p>Turn on if you want the application to enable Ethereum connection</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <div class="settings_item">
-                            <c-switch
-                                :checked="settings.client.pagination"
-                                @change="updateClientSettings('pagination')"
-                            />
-                            <div class="text">
-                                <h4>Pagination mode</h4>
-                                <p>Turn on if you want to switch between <i>pagination</i> or <i>load more</i> navigation mode</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <div class="settings_item">
-                            <c-switch
-                                :checked="systemPermissions"
-                                @change="requestNotifPerm()"
-                            />
-                            <div class="text">
-                                <h4>System notifications</h4>
-                                <p>Turn on if you want system notifications</p>
-                            </div>
+        <c-block class="margin-bottom-30" title="Client Settings" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="settings_item">
+                        <c-switch
+                            :checked="settings.client.open_startup"
+                            @change="setOpenStartup(settings.client.open_startup)"
+                        />
+                        <div class="text">
+                            <h4>Open on system startup</h4>
+                            <p>Turn on if you want the application to load automatically
+                            when you turn on your computer</p>
                         </div>
                     </div>
                 </div>
-            </c-block>
-            <c-block class="margin-bottom-30" title="Performance Settings" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                <div class="row">
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <div class="settings_item">
-                            <c-switch
-                                @change="updateClientSettings('animations')"
-                                :checked="settings.client.animations"
-                            />
-                            <div class="text">
-                                <h4>UI animations</h4>
-                                <p>Turn on if you want to enable animations and transitions</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <div class="settings_item">
-                            <c-switch
-                                @change="updateClientSettings('autoplay')"
-                                :checked="settings.client.autoplay"
-                            />
-                            <div class="text">
-                                <h4>Video auto-play</h4>
-                                <p>Turn on if you want to play videos automatically</p>
-                            </div>
-                        </div>
-                    </div>
-                    <c-benchmark
-                        :settings="settings"
-                        class="col-12 d-flex justify-content-between align-items-center"
-                    />
-                </div>
-            </c-block>
-            <c-block class="margin-bottom-30" title="Advanced" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                <div class="row">
-                    <div class="col-12 d-flex justify-content-between align-items-center">
-                        <div>
-                            Advanced settings can be managed here. These are primarily for @BlockHub developers.
-                            <br /><strong>Warning:</strong> Only use these if you know what you're doing.
-                        </div>
-                        <div>
-                            <c-button @click="clearDatabase" status="warning">DELETE DATABASE</c-button>
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="settings_item">
+                        <c-switch
+                            :checked="settings.client.system_warnings"
+                            @change="updateClientSettings('system_warnings')"
+                        />
+                        <div class="text">
+                            <h4>System warnings</h4>
+                            <p>Turn on if you want to see system warnings (useful for debugging)</p>
                         </div>
                     </div>
                 </div>
-            </c-block>
-            <c-block class="margin-bottom-30" title="Game Activity" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                <c-inline-ntf type="warning">
-                    <div class="h4 font-weight-bold p-0 m-0">No game activity!</div>
-                    <div class="h5 p-0 m-0">What are you playing!?</div>
-                </c-inline-ntf>
-                <div class="h5 margin-top-20">
-                    Not seeing your game? <c-button status="plain">Add it!</c-button>
-                </div>
-                <div class="margin-top-20">
-                    <c-switch label="Display currently running games as a status message" />
-                </div>
-            </c-block>
-            <c-block class="margin-bottom-30" title="Added games" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                <div class="games-list">
-                    <div class="games-list__item">
-                        <div class="icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div>
-                            <h3 class="p-0 m-0">World of Warcraft</h3>
-                            <span>Last played 6 hours ago</span>
-                        </div>
-                    </div>
-                    <div class="games-list__item">
-                        <div class="icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div>
-                            <h3 class="p-0 m-0">Might & Magic: Heroes VI</h3>
-                            <span>Last played 2 days ago</span>
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="settings_item">
+                        <c-switch
+                            :checked="settings.client.ethereum_connection"
+                            @change="updateClientSettings('ethereum_connection')"
+                        />
+                        <div class="text">
+                            <h4>Ethereum connection</h4>
+                            <p>Turn on if you want the application to enable Ethereum connection</p>
                         </div>
                     </div>
                 </div>
-                <div class="h5 d-none">
-                    No added games yet.
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="settings_item">
+                        <c-switch
+                            :checked="settings.client.pagination"
+                            @change="updateClientSettings('pagination')"
+                        />
+                        <div class="text">
+                            <h4>Pagination mode</h4>
+                            <p>Turn on if you want to switch between <i>pagination</i> or <i>load more</i> navigation mode</p>
+                        </div>
+                    </div>
                 </div>
-            </c-block>
-            <c-block class="margin-bottom-30" title="Language Preferences" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
-                <h3>Primary language</h3>
-                <p>
-                    When possible, display content in this language:
-                </p>
-                <select class="form-control" style="width: 300px">
-                    <option v-for="(lang, index) in languages" :key="index" :id="['select_' + lang.name.toLowerCase() ]">
-                        {{ lang.nativeName }}
-                    </option>
-                </select>
-                <hr>
-                <h3>Secondary Languages</h3>
-                <p>
-                    Additionally, show me content only available on this languages:
-                </p>
-                <c-checkbox-group>
-                    <c-checkbox class="lang-checkbox" v-for="(lang, index) in languages" :key="index" :id="lang.name.toLowerCase()" >
-                        {{ lang.nativeName }}
-                    </c-checkbox>
-                </c-checkbox-group>
-                <div class="text-right">
-                    <c-button status="success" class="margin-top-30">
-                        Save
-                    </c-button>
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="settings_item">
+                        <c-switch
+                            :checked="systemPermissions"
+                            @change="requestNotifPerm()"
+                        />
+                        <div class="text">
+                            <h4>System notifications</h4>
+                            <p>Turn on if you want system notifications</p>
+                        </div>
+                    </div>
                 </div>
-            </c-block>
+            </div>
+        </c-block>
+        <c-block class="margin-bottom-30" title="Performance Settings" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="settings_item">
+                        <c-switch
+                            @change="updateClientSettings('animations')"
+                            :checked="settings.client.animations"
+                        />
+                        <div class="text">
+                            <h4>UI animations</h4>
+                            <p>Turn on if you want to enable animations and transitions</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="settings_item">
+                        <c-switch
+                            @change="updateClientSettings('autoplay')"
+                            :checked="settings.client.autoplay"
+                        />
+                        <div class="text">
+                            <h4>Video auto-play</h4>
+                            <p>Turn on if you want to play videos automatically</p>
+                        </div>
+                    </div>
+                </div>
+                <c-benchmark
+                    :settings="settings"
+                    class="col-12 d-flex justify-content-between align-items-center"
+                />
+            </div>
+        </c-block>
+        <c-block class="margin-bottom-30" title="Advanced" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-between align-items-center">
+                    <div>
+                        Advanced settings can be managed here. These are primarily for @BlockHub developers.
+                        <br /><strong>Warning:</strong> Only use these if you know what you're doing.
+                    </div>
+                    <div>
+                        <c-button @click="clearDatabase" status="warning">DELETE DATABASE</c-button>
+                    </div>
+                </div>
+            </div>
+        </c-block>
+        <c-block class="margin-bottom-30" title="Game Activity" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+            <c-inline-ntf type="warning">
+                <div class="h4 font-weight-bold p-0 m-0">No game activity!</div>
+                <div class="h5 p-0 m-0">What are you playing!?</div>
+            </c-inline-ntf>
+            <div class="h5 margin-top-20">
+                Not seeing your game? <c-button status="plain">Add it!</c-button>
+            </div>
+            <div class="margin-top-20">
+                <c-switch label="Display currently running games as a status message" />
+            </div>
+        </c-block>
+        <c-block class="margin-bottom-30" title="Added games" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+            <div class="games-list">
+                <div class="games-list__item">
+                    <div class="icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <h3 class="p-0 m-0">World of Warcraft</h3>
+                        <span>Last played 6 hours ago</span>
+                    </div>
+                </div>
+                <div class="games-list__item">
+                    <div class="icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <h3 class="p-0 m-0">Might & Magic: Heroes VI</h3>
+                        <span>Last played 2 days ago</span>
+                    </div>
+                </div>
+            </div>
+            <div class="h5 d-none">
+                No added games yet.
+            </div>
+        </c-block>
+        <c-block class="margin-bottom-30" title="Language Preferences" :noGutter="true" :onlyContentBg="true" :bgGradient="true">
+            <h3>Primary language</h3>
+            <p>
+                When possible, display content in this language:
+            </p>
+            <select class="form-control" style="width: 300px">
+                <option v-for="(lang, index) in languages" :key="index" :id="['select_' + lang.name.toLowerCase() ]">
+                    {{ lang.nativeName }}
+                </option>
+            </select>
+            <hr>
+            <h3>Secondary Languages</h3>
+            <p>
+                Additionally, show me content only available on this languages:
+            </p>
+            <c-checkbox-group>
+                <c-checkbox class="lang-checkbox" v-for="(lang, index) in languages" :key="index" :id="lang.name.toLowerCase()" >
+                    {{ lang.nativeName }}
+                </c-checkbox>
+            </c-checkbox-group>
+            <div class="text-right">
+                <c-button status="success" class="margin-top-30">
+                    Save
+                </c-button>
+            </div>
+        </c-block>
     </c-layout>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations } from 'vuex'
 
 export default {
     components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-        'c-block': (resolve) => require(['@/ui/components/block'], resolve),
         'c-benchmark': (resolve) => require(['@/ui/components/benchmark'], resolve),
         'c-inline-ntf': (resolve) => require(['@/ui/components/notification/inline.vue'], resolve),
         'c-switch': (resolve) => require(['@/ui/components/switch'], resolve),
@@ -733,9 +731,9 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(['UPDATE_CLIENT_SETTINGS']),
+        ...mapMutations(['updateClientSettings']),
         updateClientSettings(prop) {
-            this.$store.commit('application/UPDATE_CLIENT_SETTINGS', prop);
+            this.$store.commit('application/updateClientSettings', prop)
         },
         clearDatabase() {
             window.resetSettings()
@@ -746,16 +744,16 @@ export default {
             BlockHub.Bridge.sendCommand('setOpenStartup', value)
         },
         async requestNotifPerm() {
-            const permission = await Notification.requestPermission();
-            if (permission === 'granted') this.systemPermissions = true;
+            const permission = await Notification.requestPermission()
+            if (permission === 'granted') this.systemPermissions = true
         }
     },
     mounted() {
-        this.systemPermissions = Notification.permission === 'granted';
+        this.systemPermissions = Notification.permission === 'granted'
     },
     computed: {
         settings() {
-            return this.$store.state.application.account.settings;
+            return this.$store.state.application.account.settings
         }
     }
 }

@@ -24,7 +24,7 @@
                                     :user="profile"
                                     :previewMode="!profile.edit"
                                     :class="{
-                                        'default': currentProfile && profile.id == currentProfile.id
+                                        'default': activeProfile && profile.id == activeProfile.id
                                     }"
                                 />
                             </div>
@@ -88,7 +88,7 @@
                 }
                 return this.$store.state.application.account.profiles
             },
-            currentProfile() {
+            activeProfile() {
                 return this.$store.getters['application/profile'];
             }
         },
@@ -99,9 +99,9 @@
             setDefault(profile) {
                 this.$store.commit(
                     'updateSingle',
-                    ['application/account', { active_profile: profile.id }]
+                    ['application/account', { activeProfile: profile.id }]
                 );
-                this.$store.state.application.developerMode = !!profile.developer_id
+                this.$store.state.application.developerMode = !!profile.developerId
             }
         }
     }

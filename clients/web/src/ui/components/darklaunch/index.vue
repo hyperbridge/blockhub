@@ -22,7 +22,7 @@ export default {
     name: 'darklaunch',
     data() {
         return {
-            isVisible: isVisible(this.$store.state.application.darklaunch_flags, this.$store.state.application.account.darklaunch_flags, this.code, this.variant, this.data)
+            isVisible: isVisible(this.$store.state.application.darklaunchFlags, this.$store.state.application.account.darklaunchFlags, this.code, this.variant, this.data)
         }
     },
     render: function (createElement) {
@@ -34,7 +34,7 @@ export default {
     },
     methods: {
         _isVisible: function(code, variant, data) {
-            return isVisible(this.$store.state.application.darklaunch_flags, this.$store.state.application.account.darklaunch_flags, code, variant, data)
+            return isVisible(this.$store.state.application.darklaunchFlags, this.$store.state.application.account.darklaunchFlags, code, variant, data)
         }
     }
 }
