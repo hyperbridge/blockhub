@@ -5197,10 +5197,23 @@ storiesOf('Video Popup', module)
 storiesOf('Wallet Popup', module)
     .add('default', () => ({
         components: {
-            'c-wallet': (resolve) => require(['@/ui/components/wallet'], resolve),
+            'c-wallet-base': (resolve) => require(['@/ui/components/wallet/base'], resolve),
+            'c-wallet-main': (resolve) => require(['@/ui/components/wallet'], resolve),
+            'c-wallet-deposit': (resolve) => require(['@/ui/components/wallet/deposit'], resolve),
         },
-        template: `<div class="p-5">
-                        <c-wallet />
+        template: `<div class="row p-4 m-0 flex-wrap">
+                        <div class="mx-2">
+                            <h4 class="text-white">Main screen</h4>
+                            <c-wallet-base>
+                                <c-wallet-main />
+                            </c-wallet-base>
+                        </div>
+                        <div class="mx-2">
+                            <h4 class="text-white">Deposit screen</h4>
+                            <c-wallet-base>
+                                <c-wallet-deposit />
+                            </c-wallet-base>
+                        </div>
                     </div>`
     }))
 
