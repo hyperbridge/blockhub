@@ -25,6 +25,8 @@ Vue.use(Vuex)
 if (!window.BlockHub)
     window.BlockHub = {}
 
+BlockHub.feathersClient = feathersClient
+
 // Initial settings
 // Disable peer relaying by default (until we're somewhat stable)
 // Disable chaos monkey by default (until we're somewhat stable)
@@ -115,6 +117,14 @@ if (decentralizedMode) {
                         this.removeProfile = null
 
                         this.saveProfiles()
+                    })
+                },
+                convert() {
+                    Bridge.sendCommand('createDeveloperRequest', this.chosenProfile).then((data) => {
+                        this.chosenProfile.developerId = data
+                        this.$store.state.application.developerMode = true
+
+                        // TODO: just redirect here?
                     })
                 }
             }

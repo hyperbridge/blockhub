@@ -232,7 +232,7 @@
         data() {
             return {
                 wallets: [],
-                expert_mode: false
+                expertMode: false
             }
         },
         methods: {

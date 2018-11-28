@@ -3,31 +3,39 @@ const { hashPassword, protect } = require('@feathersjs/authentication-local').ho
 const { errorIfReadonly, allowNull, wildcardsInLike } = require('../../hooks')
 const gravatar = require('../../hooks/gravatar')
 
-const populate = function (options = { key: 'profile', columnName: 'profileId' }) {
+const populate = function (options = { }) {
     return async context => {
-        // Get `app`, `method`, `params` and `result` from the hook context
         const { app, method, result, params } = context
-
-        // Make sure that we always have a list of items either by wrapping
-        // a single item into an array or by getting the `data` from the `find` method result
         const items = method === 'find' ? result.data : [result]
 
-        // Asynchronously get profile object from each items `profileId`
-        // and add it to the item
         await Promise.all(items.map(async item => {
-            // We'll also pass the original `params` to the service call
-            // so that it has the same information available (e.g. who is requesting it)
-            const profile = await app.service('profiles').find({
-                parentId: params.id
-            })
+            if (method === 'create') {
+                console.log(item)
 
-            item.profiles = profile.data
+                const profile = await app.service('profiles').create({
+                    accountId: item.id,
+                    name: 'Default'
+                }, {
+                    user: { id: item.id }
+                })
+
+                item.profiles = [profile]
+            } else {
+                console.log(item)
+                const profiles = await app.service('profiles').find({
+                    query: {
+                        accountId: item.id
+                    }
+                })
+
+                item.profiles = profiles.data
+            }
         }))
 
-        // Best practise, hooks should always return the context
         return context
     }
 }
+
 
 export const before = {
     all: [],

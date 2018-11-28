@@ -25,7 +25,7 @@
             signOut() {
                 this.$store.state.application.signedIn = false
                 this.$store.dispatch('auth/logout')
-                this.$router.replace({ name: 'Home' })
+                this.$router.push({ path: '/' })
             }
         }
     }

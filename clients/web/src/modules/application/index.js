@@ -95,13 +95,7 @@ export const getters = {
         }
 
         return result
-    },
-    account: ({ account }, getters, { community: { profiles }}) => ({
-        ...account,
-        activeProfile: profiles[account.activeProfile],
-        profiles: account.idts.map(id => profiles[id])
-    }),
-    profile: (state, { account }) => account.activeProfile
+    }
 }
 
 export const actions = {

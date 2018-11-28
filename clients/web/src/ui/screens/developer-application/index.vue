@@ -16,7 +16,7 @@
                 <div v-if="!developerMode" style="text-align: center">
                     <c-user-card
                         class="col-3 margin-auto"
-                        :user="chosenProfile"
+                        :user="$store.state.application.account.activeProfile"
                         :previewMode="true"
                         :class="{ 'default': true }"
                     />
@@ -42,44 +42,30 @@
 </template>
 
 <script>
-    import * as Bridge from '@/framework/desktop-bridge'
-    import * as DB from '@/db'
-
     export default {
         components: {
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         },
         data() {
-            let chosenProfile = this.$store.state.application.account.profiles.find(profile => profile.id == this.$store.state.application.account.activeProfile.id)
-
-            if (!chosenProfile && this.$store.state.application.account.profiles.length) {
-                chosenProfile = this.$store.state.application.account.profiles[0]
-            }
-
             return {
-                errors: [],
-                chosenProfile
+                errors: []
             }
         },
         computed: {
-            profiles() {
-                return this.$store.state.application.account.profiles
-            },
             developerMode() {
                 return this.$store.state.application.developerMode
             }
         },
         methods: {
             convertProfile() {
-                Bridge.sendCommand('createDeveloperRequest', this.chosenProfile).then((data) => {
-                    this.chosenProfile.developerId = data
-                    this.$store.state.application.developerMode = true
-
-                    // TODO: just redirect here?
+                BlockHub.feathersClient.service('/profile/:id/convert').update(
+                    this.$store.state.application.account.activeProfile.id,
+                    {
+                        role: 'developer'
+                    }
+                ).then(function() {
+                    console.log('4444')
                 })
-            },
-            chooseProfile(profile) {
-                this.chosenProfile = profile
             },
         }
     }

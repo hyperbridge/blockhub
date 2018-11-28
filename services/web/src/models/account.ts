@@ -21,7 +21,7 @@ export default class Account extends Model {
                 modelClass: Profile,
                 join: {
                     from: 'accounts.id',
-                    to: 'profiles.parentId'
+                    to: 'profiles.accountId'
                 }
             },
         }

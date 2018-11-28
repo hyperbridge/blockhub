@@ -86,7 +86,7 @@
 
         <div slot="modal_footer" class="text-right w-100">
             <a href="#" @click="$store.commit('application/activateModal', 'login')" style="float: left">Already registered? Sign In</a>
-            <c-button size="md" @click="next">Continue</c-button>
+            <c-button size="md" @click="next()">Continue</c-button>
         </div>
     </c-custom-modal>
 </template>
@@ -118,9 +118,9 @@
             }
         },
         watch: {
-            '$store.state.auth.user'(newVal) {
-                if (newVal) {
-                    this.$router.replace({ name: 'Home' })
+            '$store.state.application.signedIn'(newVal) {
+                if (newVal === true) {
+                    this.$router.push({ path: '/' })
                 }
             }
         },

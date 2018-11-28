@@ -1,13 +1,12 @@
-import feathers from 'feathers'
-import hooks from 'feathers-hooks'
-import socketio from 'feathers-socketio'
-import auth from 'feathers-authentication-client'
+import feathers from '@feathersjs/feathers'
+import socketio from '@feathersjs/socketio-client'
+import auth from '@feathersjs/authentication-client'
 import io from 'socket.io-client'
 
 const socket = io('http://localhost:9001', { transports: ['websocket'] }) // https://api.blockhub.gg // http://localhost:9001
 
 const feathersClient = feathers()
-    .configure(hooks())
+    //.configure(hooks())
     .configure(socketio(socket))
     .configure(auth({ storage: window.localStorage }))
 
