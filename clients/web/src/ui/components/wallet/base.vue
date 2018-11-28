@@ -1,12 +1,33 @@
 <template>
     <div class="wallet">
         <div class="wallet-header slim-header">
-            <div class="wallet-header__top-bar"></div>
+            <div class="wallet-header__top-bar">
+                <div class="network-status">
+                    <c-dropdown-second name="Ethereum" style="float: unset">
+                        <ul class="p-0 m-0">
+                            <li>
+                                <a href="#">
+                                    Menu link 1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Menu link 2
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Menu link 3
+                                </a>
+                            </li>
+                        </ul>
+                    </c-dropdown-second>
+                </div>
+            </div>
             <div class="wallet-header__bar-left">
                 BlockHub
             </div>
             <div class="wallet-header__bar-right">
-                <!--<button type="button">-->
                 <c-dropdown position="right">
                     <div slot="title" class="account_btn">
                         <i class="fas fa-user"></i>
@@ -47,7 +68,62 @@
                         </li>
                     </ul>
                 </c-dropdown>
-                <!--</button>-->
+            </div>
+        </div>
+        <div class="wallet__account-info">
+            <div class="account-menu text-left">
+                <c-dropdown>
+                    <div slot="title" class="account-menu_btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <ul class="p-0 m-0">
+                        <li>
+                            <a href="#">
+                                Menu link 1
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Menu link 2
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Menu link 3
+                            </a>
+                        </li>
+                    </ul>
+                </c-dropdown>
+            </div>
+            <div class="account-number">
+                <div>
+                    <strong>Account 1</strong>
+                    <span>0x82ur9h29r823r9823r9823982392h3</span>
+                </div>
+            </div>
+            <div class="account-options text-right">
+                <c-dropdown position="right">
+                    <div slot="title" class="account-options_btn">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </div>
+                    <ul class="p-0 m-0">
+                        <li>
+                            <a href="#">
+                                Menu link 1
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Menu link 2
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Menu link 3
+                            </a>
+                        </li>
+                    </ul>
+                </c-dropdown>
             </div>
         </div>
         <div class="wallet__body">
@@ -61,7 +137,8 @@
         name: 'wallet-popup',
         props:{},
         components:{
-            'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve)
+            'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve),
+            'c-dropdown-second': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve)
         }
     }
 </script>
@@ -73,7 +150,7 @@
         background: #3D3E5D;
         width: 350px;
         padding: 30px 20px 20px;
-        height: 500px;
+        height: 540px;
     }
     .wallet-header {
         position: absolute;
@@ -98,6 +175,18 @@
         top: 0;
         left: 0;
         right: 0;
+        .network-status{
+            position: absolute;
+            top: 13px;
+            left: 140px;
+            right: 50px;
+            text-align: center;
+            color: #fff;
+            font-size: 14px;
+            i{
+                margin-left: 15px;
+            }
+        }
     }
     .wallet-header__bar-left {
         position: absolute;
@@ -165,10 +254,54 @@
             }
         }
     }
+    .wallet__account-info{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
+        .account-menu,
+        .account-options{
+            width: 40px;
+            i{
+                color: #fff;
+                opacity: .7;
+                font-size: 16px;
+            }
+            &:hover{
+                i{
+                    opacity: 1;
+                    cursor: pointer;
+                }
+            }
+        }
+        .account-number{
+            width: calc( 100% - 80px );
+            padding: 0 10px;
+            display: flex;
+            justify-content: center;
+            div{
+                width: auto;
+                padding: 5px 10px;
+                border-radius: 4px;
+                text-align: center;
+                color: #fff;
+                span{
+                    max-width: 130px;
+                    overflow: hidden;
+                    display: block;
+                }
+                &:hover{
+                    background: rgba(255, 255, 255, .1);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
     .wallet__body{
         display: flex;
         flex-direction: column;
-        height: 100%;
+        height: calc( 100% - 85px );
         /*overflow-y: auto;*/
         /*overflow-x: hidden;*/
     }

@@ -156,7 +156,6 @@
         display: flex;
         flex-direction: column;
         color: #fff;
-        min-height: 100%;
     }
     .wallet-transfer__head {
         padding: 20px 0;
