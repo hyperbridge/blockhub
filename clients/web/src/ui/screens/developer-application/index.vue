@@ -58,8 +58,10 @@
         },
         methods: {
             convertProfile() {
-                BlockHub.feathersClient.service('/profile/:id/convert').update(
-                    this.$store.state.application.account.activeProfile.id,
+                const profileId = this.$store.state.application.account.activeProfile.id
+
+                BlockHub.feathersClient.service(`/profile/:id/convert`).update(
+                    profileId,
                     {
                         role: 'developer'
                     }

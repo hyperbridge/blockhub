@@ -162,6 +162,12 @@
                                             Switch Profile
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="#/account/signout">
+                                            <i class="fa fa-sign-out-alt"></i>
+                                            Sign Out
+                                        </a>
+                                    </li>
                                     <hr>
                                     <li v-darklaunch="'CHAT'">
                                         <a href="#/settings/chat">

@@ -40,7 +40,6 @@ export const windowSize = {
     beforeDestroy() {
         window.removeEventListener('resize', this.getWindowSize)
     },
-
     methods: {
         getWindowSize() {
             this.windowHeight = document.body.clientHeight

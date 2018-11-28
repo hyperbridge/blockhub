@@ -11,7 +11,6 @@ import router from './router'
 import store, { initializer } from './store'
 import VueI18n from 'vue-i18n'
 import VueDraggable from 'vue-draggable'
-
 import Popover from 'vue-js-popover'
 import '@/api/feathers-client'
 

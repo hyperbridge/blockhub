@@ -32,7 +32,7 @@ const { allowNull, wildcardsInLike } = require('../../hooks')
 // }
 
 
-const updateQuery = function (options = {}) {
+const updateQuery = function(options = {}) {
     return async context => {
         context.params.query = {
             $pick: ['id', 'name', 'accountId'],
@@ -43,9 +43,28 @@ const updateQuery = function (options = {}) {
     }
 }
 
+const create = function(options = {}) {
+    return async context => {
+        context.data.accountId = context.params.user.id
 
+        return context
+    }
+}
 
-const accessGate = function (options = {}) {
+const update = function(options = {}) {
+    return async context => {
+        const item = await context.app.service('profiles').get(context.id)
+
+        context.data = {
+            ...item,
+            name: context.data.name
+        }
+
+        return context
+    }
+}
+
+const accessGate = function(options = {}) {
     return async context => {
         const { app, method, result, params } = context
         const items = method === 'find' ? result.data : [result]
@@ -56,29 +75,9 @@ const accessGate = function (options = {}) {
         }
 
         await Promise.all(items.map(async item => {
-            console.log(method, item, account)
             if (method === 'create') {
-                item.accountId = account.id
-
-                account.profiles.push(item)
             }
             else if (method === 'update') {
-                if (!item.accountId) {
-                    // TODO: why the F do we have to do this? couldn't get accountId field without it
-                    if (!account.profiles) {
-                        account.profiles = await app.service('profiles').find({
-                            query: {
-                                //id: item.id,
-                                accountId: account.id
-                                //'$pick': ['id', 'name', 'accountId']
-                            }
-                        })
-
-                        account.profiles = account.profiles.data
-                    }
-
-                    item = account.profiles.find(i => i.id === item.id)
-                }
             }
 
             if (!item) {
@@ -89,20 +88,7 @@ const accessGate = function (options = {}) {
                 throw new Error('You dont have access to do that')
             }
         }))
-
-        console.log(444, context)
-
-        return context
-    }
-}
-
-const zzz = function (options = {}) {
-    return async context => {
-        // context.arguments.address = 'adasd'
-        // context.params.result.address = 'adasd'
-        context.data.accountId = 13
-        context.data.address = 'adasd'
-console.log(context)  
+        
         return context
     }
 }
@@ -111,8 +97,8 @@ export const before = {
     all: [],
     find: [authenticate('jwt')],
     get: [authenticate('jwt')],
-    create: [authenticate('jwt'), zzz()],
-    update: [authenticate('jwt')],
+    create: [authenticate('jwt'), create()],
+    update: [authenticate('jwt'), update()],
     patch: [authenticate('jwt')],
     remove: [authenticate('jwt')]
 }
@@ -121,10 +107,10 @@ export const after = {
     all: [],
     find: [],
     get: [],
-    create: [zzz()],
-    update: [],
-    patch: [],
-    remove: []
+    create: [accessGate()],
+    update: [accessGate()],
+    patch: [accessGate()],
+    remove: [accessGate()]
 }
 
 export const error = {

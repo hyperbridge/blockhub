@@ -22,7 +22,6 @@ import * as appHooks from './hooks/app'
 import authentication = require('@feathersjs/authentication')
 import local = require('@feathersjs/authentication-local')
 import jwt = require('@feathersjs/authentication-jwt')
-import createService = require('feathers-objection')
 import socketio = require('@feathersjs/socketio')
 import session = require('express-session')
 const KnexSessionStore = require('connect-session-knex')(session)
@@ -108,7 +107,7 @@ export default async () => {
     //     after: local.hooks.protect('password')
     // })
 
-    app.service('authentication').hooks({
+    app.service('/authentication').hooks({
         before: {
             create: [
                 // You can chain multiple strategies

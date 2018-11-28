@@ -7,7 +7,7 @@ const migrations = {
                 if (err) throw err
                 set.up(err => {
                     if (err) throw err
-                    this.$notif('Client was successfully upgraded')
+                    this.$notify('Client was successfully upgraded')
                 })
             })
         }
@@ -16,7 +16,7 @@ const migrations = {
         const { current, latest } = this.$store.state.application.migrations
 
         // if (!current.length || current < latest) {
-        //     this.$notif({
+        //     this.$notify({
         //         title: 'Update available',
         //         body: 'You have an update ready for BlockHub',
         //         onclick: this.runMigrations

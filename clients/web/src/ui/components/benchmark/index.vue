@@ -120,7 +120,7 @@
                         timeout: 2500,
                         pauseOnHover: true
                     });
-                    this.$notif({ title: 'Saved', body: 'Settings were saved successfully' });
+                    this.$notify({ title: 'Saved', body: 'Settings were saved successfully' });
                 }
             },
         }

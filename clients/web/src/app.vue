@@ -1,6 +1,8 @@
 <template>
     <div id="app" :class="{ 'disable-animations': !disableAnimations }">
-        <router-view></router-view>
+        <c-render-condition :type="renderCondition">
+            <router-view></router-view>
+        </c-render-condition>
         <div class="fixed-panel invert" id="fixed_panel">
             <div class="fixed-panel__content scroll">
                 <h5 v-if="developerMode" v-darklaunch="'REALMS'">Your Realms</h5>
@@ -204,8 +206,10 @@
     import Vue from 'vue'
 
     export default {
-        name: 'app',
         props: ['data'],
+        components: {
+            'c-render-condition': (resolve) => require(['@/ui/components/render-condition'], resolve)
+        },
         updated() {
             $('body').off('click').on('click', "[data-action='fixedpanel-toggle']", (e) => {
                 let panel = $('#fixed_panel')
@@ -226,6 +230,8 @@
         },
         data() {
             return {
+                initialized: false,
+                renderCondition: 'initialized',
                 showPreviewPanel: true //['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode)
             }
         },
@@ -367,12 +373,16 @@
             this.getExternalState()
             this.ensureDesktopWelcome()
         },
+        created() {
+        },
         watch: {
             '$route'(to, from) {
                 $('body').removeClass('show-sidebar')
                 $('[data-action="fixedpanel-toggle"] span').removeClass('fa-times').addClass('fa-bars')
 
                 this.$store.state.application.activeModal = false
+
+                this.renderCondition = this.$route.meta.renderCondition || this.renderCondition
 
                 this.updateEditorMode()
                 this.ensureDesktopWelcome(to)

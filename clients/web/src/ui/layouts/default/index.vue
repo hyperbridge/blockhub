@@ -615,58 +615,26 @@
                 }
                     // this.showRightPanel = false;
                     // this.showLeftPanel = false;
-            },
-            initialize() {
-                if (this.initialized) {
-                    return
-                }
-
-                this.$store.state.application.initialized = BlockHub.initialized = true
-
-                document.getElementById('startup-loader').style.display = 'none'
-
-                // check sidebar button
-                $(this.$refs.scroll_sidebar).scroll(() => {
-                    this.debounce(() => {
-                        this.checkScrollButton()
-                    }, 250)
-                })
-            }
-        },
-        watch: {
-            '$store.state.auth.accessToken'() {
-                this.initialize()
             }
         },
         created() {
             window.addEventListener('resize', this.handleResize())
             this.handleResize()
-
-            this.$store.dispatch('auth/authenticate')
-                .then(() => {
-                    if (this.$store.state.auth.accessToken) {
-                        this.initialize()
-                    }
-                })
-                .catch(error => {
-                    this.initialize()
-
-                    if (error) {
-                        if (!error.message.includes('Could not find stored JWT')) {
-                            console.error(error)
-                        }
-                        return
-                    }
-
-                })
         },
         mounted() {
             this.updateBreadcrumbLinks()
             this.$nextTick(() => {
                 this.loadingState = false
-                // setTimeout(() => {
-                //     this.initialize()
-                // }, 3000) // TODO: remove arbitrary delay
+                setTimeout(() => {
+                    document.getElementById('startup-loader').style.display = 'none'
+
+                    // check sidebar button
+                    $(this.$refs.scroll_sidebar).scroll(() => {
+                        this.debounce(() => {
+                            this.checkScrollButton()
+                        }, 250)
+                    })
+                }, 3000) // TODO: remove arbitrary delay
 
                 setInterval(() => {
                     this.checkScrollButton()

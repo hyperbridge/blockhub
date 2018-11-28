@@ -1,11 +1,11 @@
 import Vue from 'vue'
 
-Vue.prototype.$notif = async (data) => {
+Vue.prototype.$notify = async (data) => {
     if (!("Notification" in window)) {
         return
     } else {
 
-        const spawnNotif = () => {
+        const spawnNotification = () => {
             const icon = require('./assets/logo.png')
 
             if (typeof data === 'string') {
@@ -26,11 +26,11 @@ Vue.prototype.$notif = async (data) => {
         }
 
         if (Notification.permission === 'granted') {
-            spawnNotif()
+            spawnNotification()
         } else if (['denied', 'granted'].some(perm => !perm.includes(Notification.permission))) {
             const permission = await Notification.requestPermission()
             if (permission === 'granted') {
-                spawnNotif()
+                spawnNotification()
             }
         }
     }

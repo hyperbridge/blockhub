@@ -258,7 +258,7 @@
         created() {
             this.$store.dispatch('profiles/find', {
                 query: {
-                    accountId: this.$store.state.application.account.id,
+                    accountId: this.$store.state.auth.user.id,
                     $sort: {
                         createdAt: -1
                     },

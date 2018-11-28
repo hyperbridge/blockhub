@@ -15,7 +15,7 @@ export default function(app) {
         }
     }
 
-    app.use('accounts', createService(options))
+    app.use('/accounts', createService(options))
 
     const service = app.service('accounts')
 
