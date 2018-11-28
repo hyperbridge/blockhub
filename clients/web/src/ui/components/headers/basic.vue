@@ -253,7 +253,7 @@ export default {
             return this.$store.state.application.account
         },
         activeProfile() {
-            return this.$store.getters['application/profile'];
+            return this.$store.state.application.account.activeProfile
         },
         isLocked() {
             return this.$store.state.application.locked

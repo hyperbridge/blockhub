@@ -1,26 +1,45 @@
 import { Model } from 'objection'
-import Account from './account'
+//import Account from './account'
 import Project from './project'
 //import ProjectMember from './project-member'
 
 export default class Profile extends Model {
     id!: number
     isActive!: boolean
+    accountId!: number
+    createdAt!: String
+    updatedAt!: String
 
     static get tableName() {
         return 'profiles'
     }
 
+    static get jsonSchema() {
+        return {
+            type: 'object',
+            required: ['accountId'],
+
+            properties: {
+                id: { type: 'integer' },
+                accountId: { type: 'integer' },
+                address: { type: 'string' }
+            },
+            options: {
+                timestamps: true
+            }
+        }
+    }
+
     static get relationMappings() {
         return {
-            account: {
-                relation: Model.HasOneRelation,
-                modelClass: Account,
-                join: {
-                    from: 'profiles.accountId',
-                    to: 'accounts.id'
-                }
-            },
+            // account: {
+            //     relation: Model.BelongsToOneRelation,
+            //     modelClass: Account,
+            //     join: {
+            //         from: 'profiles.accountId',
+            //         to: 'accounts.id'
+            //     }
+            // },
             projects: {
                 relation: Model.HasManyRelation,
                 modelClass: Project,
@@ -44,5 +63,13 @@ export default class Profile extends Model {
             //     }
             // }
         }
+    }
+
+    $beforeInsert() {
+        this.createdAt = this.updatedAt = new Date().toISOString()
+    }
+
+    $beforeUpdate() {
+        this.updatedAt = new Date().toISOString()
     }
 }

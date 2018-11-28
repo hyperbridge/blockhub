@@ -377,7 +377,6 @@
                 this.updateEditorMode()
                 this.ensureDesktopWelcome(to)
             },
-            // When the user is set, redirect to the Chat page.
             '$store.state.auth.user'(newVal) {
                 if (this.$store.state.application.signedIn && newVal === undefined) {
                     this.$store.state.application.signedIn = false
@@ -386,9 +385,20 @@
                     this.$store.state.application.signedIn = true
                     //this.$router.replace({ name: 'Home' })
 
-                    if (!this.$store.state.application.account.activeProfile.id) {
-                        this.$store.state.application.account.activeProfile = this.$store.state.account.profiles[0]
+                    this.$store.state.application.account = {
+                        ...this.$store.state.application.account,
+                        ...this.$store.state.auth.user
                     }
+
+                    // this.profiles.find(profile => this.$store.state.application.account.activeProfile ? profile.id == this.$store.state.application.account.activeProfile.id : null)
+                    if (!this.$store.state.application.account.activeProfile.id) {
+                        this.$store.state.application.account.activeProfile = this.$store.getters['accounts/current'].profiles[0]
+                    }
+                }
+            },
+            '$store.state.profiles.ids'(newVal) {
+                if (!this.$store.state.application.account.activeProfile.id) {
+                    this.$store.state.application.account.activeProfile = this.$store.getters['profiles/list'][0]
                 }
             },
         }

@@ -12,12 +12,27 @@ export default function (app) {
             default: 10,
             max: 25,
             ...paginate
-        }
+        },
+        allowedEager: 'account'
     }
 
     app.use('profiles', createService(options))
 
-    const service = app.service('profiles')
+    app.use('/profiles/convert', {
+        async update(id, data, params) {
+            console.log(55, arguments)
+            const { role } = data
 
-    service.hooks(hooks)
+            console.log(id, data, params)
+
+            const result = await app.service('profiles').get(id)
+
+            result.name = 'sss'
+
+            return result
+        }
+    })
+
+    app.service('profiles').hooks(hooks)
+    app.service('/profiles/convert').hooks(hooks)
 }

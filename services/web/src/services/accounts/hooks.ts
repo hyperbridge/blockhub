@@ -3,27 +3,32 @@ const { hashPassword, protect } = require('@feathersjs/authentication-local').ho
 const { errorIfReadonly, allowNull, wildcardsInLike } = require('../../hooks')
 const gravatar = require('../../hooks/gravatar')
 
-const populate = function (options = { key: 'profile', columnName: 'profileId' }) {
+const populate = function (options = { }) {
     return async context => {
         const { app, method, result, params } = context
         const items = method === 'find' ? result.data : [result]
 
-        await Promise.all(items.map(async item => {console.log(item.id)
+        await Promise.all(items.map(async item => {
             if (method === 'create') {
+                console.log(item)
+
                 const profile = await app.service('profiles').create({
                     accountId: item.id,
                     name: 'Default'
+                }, {
+                    user: { id: item.id }
                 })
 
                 item.profiles = [profile]
             } else {
-                const profile = await app.service('profiles').find({
+                console.log(item)
+                const profiles = await app.service('profiles').find({
                     query: {
                         accountId: item.id
                     }
                 })
 
-                item.profiles = profile.data
+                item.profiles = profiles.data
             }
         }))
 
