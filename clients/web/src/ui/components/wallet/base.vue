@@ -177,7 +177,7 @@
         right: 0;
         .network-status{
             position: absolute;
-            top: 13px;
+            top: 15px;
             left: 140px;
             right: 50px;
             text-align: center;
