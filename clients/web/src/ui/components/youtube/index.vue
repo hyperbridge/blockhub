@@ -1,5 +1,5 @@
 <script>
-    // const player = require('youtube-player');
+    let player;
     const UNSTARTED = -1;
     const ENDED = 0;
     const PLAYING = 1;

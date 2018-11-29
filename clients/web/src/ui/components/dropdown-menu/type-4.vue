@@ -8,9 +8,9 @@
         </div>
         <div
             v-if="show"
-            class="dropdown-menu dropdown-menu-left"
-            v-click-outside:self="toggleMenu"
-            :class="{ 'show' : show }"
+            class="dropdown-menu"
+            v-click-outside:self="closeMenu"
+            :class="dropdownPosition"
         >
             <div class="position-relative" style="z-index: 4">
                 <slot />
@@ -21,6 +21,12 @@
 
 <script>
     export default {
+        props:{
+            position:{
+                type: String,
+                default: 'left'
+            }
+        },
         data() {
             return {
                 show: false
@@ -32,6 +38,17 @@
             },
             closeMenu() {
                 this.show = false;
+            }
+        },
+        computed:{
+            dropdownPosition(){
+                console.log('run switch', this.position)
+                switch (this.position) {
+                    case 'left':
+                        return 'dropdown-menu-left';
+                    case 'right':
+                        return 'dropdown-menu-right';
+                }
             }
         }
     }
@@ -75,6 +92,10 @@
                     }
                 }
             }
+            .dropdown-menu{
+                display: flex;
+                flex-direction: column;
+            }
         }
         .dropdown-menu {
             width: auto;
@@ -83,6 +104,13 @@
             /*overflow: hidden;*/
             border: none;
             background: rgba(255, 255, 255, .75);
+            &.dropdown-menu-left{
+                left: 0;
+            }
+            &.dropdown-menu-right{
+                right: 0;
+                left: unset;
+            }
         }
     }
 </style>
