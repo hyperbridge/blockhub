@@ -72,28 +72,36 @@
         </div>
         <div class="wallet__account-info">
             <div class="account-menu text-left">
-                <c-dropdown>
-                    <div slot="title" class="account-menu_btn">
-                        <i class="fas fa-bars"></i>
+                <div class="account-menu_btn" @click="toggleInfo">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="account-menu__info" v-if="showInfo">
+                    <i class="close-info fas fa-times" @click="toggleInfo"></i>
+                    <div class="account-number">
+                        <div>
+                            <strong>Account 1</strong>
+                            <span>0x82ur9h29r823r9823r9823982392h3</span>
+                        </div>
                     </div>
-                    <ul class="p-0 m-0">
-                        <li>
-                            <a href="#">
-                                Menu link 1
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Menu link 2
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Menu link 3
-                            </a>
-                        </li>
-                    </ul>
-                </c-dropdown>
+                    <div class="qr-code">
+                        <c-img src="https://images-eu.ssl-images-amazon.com/images/I/31Umxl57vfL.png" />
+                    </div>
+                    <div class="money-info">
+                        <img src="../../../../static/img/icons/token-icon.png" alt="Token" />
+                        <div>
+                            <strong>0 HBX</strong>
+                            <span>$ 0.00 USD</span>
+                        </div>
+                    </div>
+                    <div class="account-token-list">
+                        <div class="h5 font-weight-bold">
+                            Don't see your tokens?
+                        </div>
+                        <div>
+                            Click <c-button status="plain" class="p-0">here</c-button> to add token to your account
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="account-number">
                 <div>
@@ -139,6 +147,16 @@
         components:{
             'c-dropdown': (resolve) => require(['@/ui/components/dropdown-menu/type-4'], resolve),
             'c-dropdown-second': (resolve) => require(['@/ui/components/dropdown-menu/type-2'], resolve)
+        },
+        data(){
+            return{
+                showInfo: false
+            }
+        },
+        methods:{
+            toggleInfo(){
+                this.showInfo = !this.showInfo
+            }
         }
     }
 </script>
@@ -302,6 +320,8 @@
         display: flex;
         flex-direction: column;
         height: calc( 100% - 85px );
+        position: relative;
+        z-index: 4;
         /*overflow-y: auto;*/
         /*overflow-x: hidden;*/
     }
@@ -321,6 +341,71 @@
                     opacity: 1;
                 }
             }
+        }
+    }
+    .account-menu__info{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 50px;
+        bottom: 0;
+        padding: 60px 0px 20px;
+        background: #3D3E5D;
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        &:before{
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 50px;
+            right: -50px;
+            bottom: 0;
+            background: rgba(0, 0, 0, .8);
+        }
+        i.close-info{
+            color: #fff;
+            left: 25px;
+            font-size: 24px;
+            top: 60px;
+            position: absolute;
+        }
+        .qr-code{
+            width: 150px;
+            margin: 10px auto;
+            color: #fff;
+            img{
+                width: 100%;
+            }
+        }
+        .money-info{
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            width: 100%;
+            padding: 10px 30px;
+            background: rgba(255, 255, 255, .2);
+            color: #fff;
+            img{
+                height: 40px;
+                width: 40px;
+                margin-right: 15px;
+                color: #fff;
+            }
+            div{
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        .account-token-list{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 30%;
+            color: #fff;
         }
     }
 </style>
