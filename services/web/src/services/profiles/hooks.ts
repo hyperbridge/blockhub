@@ -32,18 +32,18 @@ const { allowNull, wildcardsInLike } = require('../../hooks')
 // }
 
 
-const updateQuery = function(options = {}) {
-    return async context => {
-        context.params.query = {
-            $pick: ['id', 'name', 'accountId'],
-            $eager: 'account',
-        }
+// const updateQuery = function(options = {}) {
+//     return async context => {
+//         context.params.query = {
+//             $pick: ['id', 'name', 'accountId'],
+//             $eager: 'account',
+//         }
 
-        return context
-    }
-}
+//         return context
+//     }
+// }
 
-const create = function(options = {}) {
+const beforeCreate = function(options = {}) {
     return async context => {
         context.data.accountId = context.params.user.id
 
@@ -51,13 +51,25 @@ const create = function(options = {}) {
     }
 }
 
-const update = function(options = {}) {
+
+const beforeUpdate = function(options = {}) {
     return async context => {
-        const item = await context.app.service('profiles').get(context.id)
+        const item = await context.app.service('/profiles').get(context.id)
 
         context.data = {
             ...item,
-            name: context.data.name
+            ...context.data
+        }
+
+        return context
+    }
+}
+
+const afterUpdate = function(options = {}) {
+    return async context => {
+        context.result = {
+            name: context.data.name,
+            avatar: context.data.avatar
         }
 
         return context
@@ -66,6 +78,7 @@ const update = function(options = {}) {
 
 const accessGate = function(options = {}) {
     return async context => {
+        //console.log(context)
         const { app, method, result, params } = context
         const items = method === 'find' ? result.data : [result]
         let account = params.user
@@ -75,6 +88,7 @@ const accessGate = function(options = {}) {
         }
 
         await Promise.all(items.map(async item => {
+            console.log(item.accountId, account.id)
             if (method === 'create') {
             }
             else if (method === 'update') {
@@ -88,7 +102,7 @@ const accessGate = function(options = {}) {
                 throw new Error('You dont have access to do that')
             }
         }))
-        
+
         return context
     }
 }
@@ -97,8 +111,8 @@ export const before = {
     all: [],
     find: [authenticate('jwt')],
     get: [authenticate('jwt')],
-    create: [authenticate('jwt'), create()],
-    update: [authenticate('jwt'), update()],
+    create: [authenticate('jwt'), beforeCreate()],
+    update: [authenticate('jwt'), beforeUpdate()],
     patch: [authenticate('jwt')],
     remove: [authenticate('jwt')]
 }
@@ -108,7 +122,7 @@ export const after = {
     find: [],
     get: [],
     create: [accessGate()],
-    update: [accessGate()],
+    update: [accessGate(), afterUpdate()],
     patch: [accessGate()],
     remove: [accessGate()]
 }

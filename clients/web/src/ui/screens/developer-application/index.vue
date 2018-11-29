@@ -60,15 +60,22 @@
             convertProfile() {
                 const profileId = this.$store.state.application.account.activeProfile.id
 
-                BlockHub.feathersClient.service(`/profile/:id/convert`).update(
+                BlockHub.feathersClient.service(`/profiles/:id/convert`).update(
                     profileId,
                     {
                         role: 'developer'
                     }
                 ).then(function() {
-                    console.log('4444')
+                    
                 })
             },
+        },
+        watch: {
+            '$store.state.application.account.activeProfile.role'(newVal) {
+                if (newVal === 'developer') {
+                    this.$store.state.application.developerMode = true
+                }
+            }
         }
     }
 </script>

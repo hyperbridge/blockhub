@@ -76,6 +76,7 @@
                 name="item"
                 :duration="100"
             >
+                <c-loading :enabled="!filteredProfiles.length" />
                 <div
                     class="profile-picker__profile"
                     :class="{ 'edit': profile.edit, 'default-type': profile.id == (defaultProfile && defaultProfile.id) }"
@@ -85,6 +86,7 @@
                     <c-user-card
                         :user="profile"
                         :previewMode="!profile.edit"
+                        :removing="profile.removing"
                         class="margin-bottom-30"
                         :class="{ 'default': profile.id == (defaultProfile && defaultProfile.id) }"
                         v-bind.sync="profileClone"
@@ -225,6 +227,11 @@
             deleteProfile(profile) {
                 if (this.removeProfile) {
                     this.$store.dispatch('profiles/remove', this.removeProfile.id)
+                    this.removeProfile.edit = false
+                    this.removeProfile.removing = true
+                    this.removeProfile = null
+
+                    //this.saveProfiles()
                     // Bridge.sendCommand('removeProfileRequest', this.removeProfile).then(() => {
                     //     const index = this.profiles.indexOf(this.removeProfile)
                     //     this.profiles.splice(index, 1)

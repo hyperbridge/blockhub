@@ -1,6 +1,8 @@
 <template>
     <div class="profile-block" :class="{ 'preview-mode': previewMode }">
-        <div class="profile-block__user-data">
+        <c-loading :enabled="removing" />
+        
+        <div class="profile-block__user-data" v-if="!removing">
             <div
                 v-if="previewMode"
                 class="user-data__icon"
@@ -80,7 +82,6 @@
 
 <script>
     export default {
-        name: 'user-card',
         props: {
             id: String,
             type: String,
@@ -98,7 +99,8 @@
             },
             iconColor: String,
             iconClass: String,
-            previewMode: Boolean
+            previewMode: Boolean,
+            removing: Boolean
         },
         methods: {
             copyToClipboard(value) {

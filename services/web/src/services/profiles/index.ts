@@ -18,21 +18,21 @@ export default function(app) {
 
     app.use('/profiles', createService(options))
 
-    app.use('/profile/:id/convert', {
+    app.use('/profiles/:id/convert', {
         async update(id, data, params) {
-            console.log(55, arguments)
             const { role } = data
-
-            console.log(id, data, params)
 
             const result = await app.service('/profiles').get(id)
 
-            result.name = 'sss'
+            result.name = role
+
+            console.log(444, result)
+            //result.save()
 
             return result
         }
     })
 
     app.service('/profiles').hooks(hooks)
-    //app.service('/profile/:id/convert').hooks(hooks)
+    app.service('/profiles/:id/convert').hooks(hooks)
 }

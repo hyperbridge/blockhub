@@ -609,6 +609,7 @@
             "activeProfile": {
                 "id": null,
                 "name": null,
+                "role": "user",
                 "developerId": null,
                 "badges": [],
                 "assets": [],
