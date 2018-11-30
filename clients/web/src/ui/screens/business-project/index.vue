@@ -194,7 +194,7 @@
         <div class="col-md-12" v-if="advanced">
             <div class="form-group row" style="text-align: center">
                 <br />
-                <h3 style="width: 100%">Raw Editor</h3>
+                <h3 style="width: 100%">Raw Data Editor</h3>
                 <br /><br />
                 <span class="form-text"></span>
                 <c-json-editor :objData="project" v-model="project" style="margin: 0 auto"></c-json-editor>

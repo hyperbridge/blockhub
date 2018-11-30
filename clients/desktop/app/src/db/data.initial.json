@@ -865,7 +865,7 @@
           "stages": [
             { "status": "done", "text": "m1" },
             { "status": "done", "text": "m2" },
-            { "status": "in_progress", "text": "m3" },
+            { "status": "InProgress", "text": "m3" },
             { "status": "awaiting", "text": "m4" },
             { "status": "awaiting", "text": "m5" },
             { "status": "awaiting", "text": "m6" }

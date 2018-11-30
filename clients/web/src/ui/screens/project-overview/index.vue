@@ -55,8 +55,8 @@
                             <div v-for="(stage, index) in project.funding.stages" :key="index"
                                  :class="stage.status"
                                  class="project__progress-stage">
-                                <i class="fas fa-check" v-if="stage.status === 'done'"></i>
-                                <i class="fas fa-clock" v-if="stage.status === 'in_progress'"></i>
+                                <i class="fas fa-check" v-if="stage.status === 'Done'"></i>
+                                <i class="fas fa-clock" v-if="stage.status === 'InProgress'"></i>
                                 <span class="stage_line"></span>
                                 <span class="name">{{ stage.text}}</span>
                             </div>
@@ -71,16 +71,16 @@
                                 {{ project.funding.goalAmount | convertCurrency }}
                             </div>
                             <div
-                                v-for="(prop, index) in crowdfunding_props"
+                                v-for="(prop, index) in crowdfundingProps"
                                 :key="index"
                                 :class="prop"
                             >
                                 <div class="progress-bar-vertical">
                                     <c-progress-bar
                                         :values="{
-                                                            reached: project.funding[prop + '_amount'],
-                                                            goal: project.funding.goalAmount
-                                                        }"
+                                            reached: project.funding[prop + '_amount'],
+                                            goal: project.funding.goalAmount
+                                        }"
                                         direction="vertical"
                                     />
                                 </div>
@@ -109,8 +109,8 @@
                     <h2 class="title">Milestones</h2>
                     <ul class="milestones__list">
                         <li v-for="(item, index) in project.milestones.items"
-                            v-bind:class="{ done: item.status === 'done' }" :key="index">
-                            <div class="stepNumber" v-if="item.status === 'done'">
+                            v-bind:class="{ done: item.status === 'Done' }" :key="index">
+                            <div class="stepNumber" v-if="item.status === 'Done'">
                                 <i class="fas fa-check"></i>
                             </div>
                             <div class="stepNumber" v-else>
@@ -165,18 +165,18 @@
                 errors: [],
                 activeElement: {
                     name: false,
-                    background_image: false,
-                    store_image: false,
+                    backgroundImage: false,
+                    storeImage: false,
                     developerTags: false,
                     description: false,
                     content: false
                 },
-                author_tag_options: [
+                authorTagOptions: [
                     'game',
                     'mod',
                     'other'
                 ],
-                crowdfunding_props: ['spent', 'locked', 'overflow']
+                crowdfundingProps: ['spent', 'locked', 'overflow']
             }
         },
         methods:{
@@ -390,7 +390,7 @@
                 width: 65%;
                 float: right;
             }
-            &.in_progress {
+            &.InProgress {
                 .stage_line {
                     &:after {
                         left: 25%;
@@ -404,7 +404,7 @@
                 width: 65%;
                 float: left;
             }
-            &.in_progress {
+            &.InProgress {
                 .stage_line {
                     &:after {
                         left: 75%;
@@ -422,7 +422,7 @@
                 color: #3D691F;
             }
         }
-        &.in_progress {
+        &.InProgress {
             .stage_line {
                 &:after {
                     position: absolute;

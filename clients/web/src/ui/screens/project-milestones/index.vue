@@ -93,19 +93,20 @@
             'c-progress-bar': (resolve) => require(['@/ui/components/progress-bar'], resolve)
         },
         computed: {
-            milestones(){
-                let arr = this.project.milestones.items;
-                return arr.sort() ;
+            milestones() {
+                let arr = this.project.milestones.items
+                return arr.sort()
             },
-            doneMilestones(){
+            doneMilestones() {
                 let arr = this.project.milestones.items,
-                    count = 0;
-                arr.forEach( (obj, i) => {
-                    console.log(obj)
-                    if (obj.status === 'done')
-                        count += 1;
-                });
-                return count;
+                    count = 0
+                
+                arr.forEach((obj, i) => {
+                    if (obj.status === 'Done')
+                        count += 1
+                })
+
+                return count
             }
         }
     }

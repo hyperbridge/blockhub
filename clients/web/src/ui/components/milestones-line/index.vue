@@ -4,8 +4,8 @@
             <div v-for="(milestone, index) in milestones" :key="index"
                  :class="milestone.status"
                  class="stages-line__stage">
-                <i class="fas fa-check" v-if="milestone.status === 'done'"></i>
-                <i class="fas fa-clock" v-if="milestone.status === 'in_progress'"></i>
+                <i class="fas fa-check" v-if="milestone.status === 'Done'"></i>
+                <i class="fas fa-clock" v-if="milestone.status === 'InProgress'"></i>
                 <div class="stage_progress">
                     <span></span>
                     <span></span>
@@ -22,12 +22,12 @@
             'milestones'
         ],
         mounted() {
-            let finished_el = document.getElementsByClassName('done')
+            let finished_el = document.getElementsByClassName('Done')
 
             if (!finished_el.length) return
+            
             let last_el = finished_el[finished_el.length - 1]
             last_el.className += " last-done-el"
-            console.log(last_el)
         }
     }
 </script>
@@ -98,7 +98,7 @@
                 width: 65%;
                 float: right;
             }
-            &.in_progress {
+            &.InProgress {
                 .stage_progress {
                     &:after {
                         left: 25%;
@@ -121,7 +121,7 @@
                 width: 65%;
                 float: left;
             }
-            &.in_progress {
+            &.InProgress {
                 .stage_progress {
                     &:after {
                         left: 75%;
@@ -158,7 +158,7 @@
                 }
             }
         }
-        &.in_progress {
+        &.InProgress {
             .stage_progress {
                 span{
                     background: #5EA72B;

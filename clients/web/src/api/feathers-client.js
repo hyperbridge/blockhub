@@ -3,7 +3,22 @@ import socketio from '@feathersjs/socketio-client'
 import auth from '@feathersjs/authentication-client'
 import io from 'socket.io-client'
 
-const socket = io('http://localhost:9001', { transports: ['websocket'] }) // https://api.blockhub.gg // http://localhost:9001
+
+const getCookie = (name) => {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
+const setCookie = (variable, value, expires_seconds) => {
+  var d = new Date();
+  d = new Date(d.getTime() + 1000 * expires_seconds);
+  document.cookie = variable + '=' + value + '; expires=' + d.toGMTString() + ';';
+}
+
+//setCookie('WEB_SERVICE_URL', 'http://localhost:9001')
+
+const socket = io(getCookie('WEB_SERVICE_URL') || 'https://api.blockhub.gg', { transports: ['websocket'] }) // https://api.blockhub.gg // http://localhost:9001
 
 const feathersClient = feathers()
     //.configure(hooks())

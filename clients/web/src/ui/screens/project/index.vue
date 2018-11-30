@@ -44,7 +44,7 @@
                                 <div class="form-control-element tag-editor form-control-element--right"
                                         v-if="activeElement['developerTags']">
                                     <!--<select id="tag-editor" class="form-control" multiple="multiple">-->
-                                        <!--<option v-for="(tag, index) in author_tag_options" :key="index"-->
+                                        <!--<option v-for="(tag, index) in authorTagOptions" :key="index"-->
                                                 <!--:selected="project.developerTags.includes(tag)">{{ tag }}-->
                                         <!--</option>-->
                                     <!--</select>-->
@@ -53,7 +53,7 @@
                                                     class="dark-mode"
                                                     :multiple="true"
                                                     :taggable="true"
-                                                    :options="author_tag_options">
+                                                    :options="authorTagOptions">
 
                                     </multiselect>
                                     <div
@@ -74,19 +74,19 @@
                     <div class="col-12 col-md-4">
                         <div class="editor text-right" v-if="editing" style="margin-bottom: 30px">
                             <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                    @click="activateElement('background_image')"
-                                    v-if="!activeElement['background_image']">Change Background Image <span
+                                    @click="activateElement('backgroundImage')"
+                                    v-if="!activeElement['backgroundImage']">Change Background Image <span
                                 class="fa fa-edit"></span></button>
 
-                            <div class="" v-if="activeElement['background_image']">
+                            <div class="" v-if="activeElement['backgroundImage']">
                                 <div class="form-control-element form-control-element--right">
-                                    <input ref="background_image" name="background_image" type="text"
+                                    <input ref="backgroundImage" name="backgroundImage" type="text"
                                             class="form-control" placeholder="Background image URL..."
                                             v-model="project.images.header"/>
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary">
                                             <span class="fa fa-check"
-                                                    @click="deactivateElement('background_image')"></span>
+                                                    @click="deactivateElement('backgroundImage')"></span>
                                     </div>
                                 </div>
                             </div>
@@ -94,19 +94,19 @@
                         </div>
                         <div class="editor text-right" v-if="editing">
                             <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                    @click="activateElement('store_image')"
-                                    v-if="!activeElement['store_image']">Change Project Image <span
+                                    @click="activateElement('storeImage')"
+                                    v-if="!activeElement['storeImage']">Change Project Image <span
                                 class="fa fa-edit"></span></button>
 
-                            <div class="" v-if="activeElement['store_image']">
+                            <div class="" v-if="activeElement['storeImage']">
                                 <div class="form-control-element form-control-element--right">
-                                    <input ref="store_image" name="store_image" type="text" class="form-control"
+                                    <input ref="storeImage" name="storeImage" type="text" class="form-control"
                                             placeholder="Background image URL..."
-                                            v-model="project.images.header"/>
+                                            v-model="project.images.header" />
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary">
                                             <span class="fa fa-check"
-                                                    @click="deactivateElement('store_image')"></span>
+                                                    @click="deactivateElement('storeImage')"></span>
                                     </div>
                                 </div>
                             </div>
@@ -310,39 +310,6 @@
     import Multiselect from 'vue-multiselect'
     import 'vue-multiselect/dist/vue-multiselect.min.css'
 
-    const updateProject = function () {
-        if (!this.$store.state.application.initialized) {
-            return null
-        }
-
-        let project = null
-
-        if (this.id === 'new') {
-            project = this.$store.state.funding.defaultProject
-
-            this.$store.state.application.developerMode = true
-            this.$store.dispatch('application/setEditorMode', 'editing')
-        }
-
-        if (!project) {
-            //if (this.$store.state.funding.projects && this.$store.state.funding.projects[this.id]) {
-                project = this.$store.getters['projects/get'](this.id) //this.$store.state.funding.projects[this.id]
-            //}
-        }
-
-        if (project && project.images && project.images.header) {
-            window.document.getElementById('header-bg').style['background-image'] = 'url(' + project.images.header + ')'
-        }
-
-        if (project && !project.community) {
-            project.community = {
-                discussions: []
-            }
-        }
-
-        return project
-    }
-
     export default {
         props: {
             id: [String, Number],
@@ -370,26 +337,23 @@
                 errors: [],
                 activeElement: {
                     name: false,
-                    background_image: false,
-                    store_image: false,
+                    backgroundImage: false,
+                    storeImage: false,
                     developerTags: false,
                     description: false,
                     content: false
                 },
-                author_tag_options: [
+                authorTagOptions: [
                     'game',
                     'mod',
                     'other'
                 ],
-                crowdfunding_props: ['spent', 'locked', 'overflow']
+                crowdfundingProps: ['spent', 'locked', 'overflow']
             }
         },
         methods: {
             showTab(name) {
                 $('.nav-tabs a[href="#' + name + '"]').tab('show')
-            },
-            showContributeModal() {
-                this.$store.dispatch('application/activateModal', 'send-funds')
             },
             deactivateElement(key) {
                 this.activeElement[key] = false
@@ -416,15 +380,7 @@
                 if (this.id === 'new') {
                     this.$store.dispatch('application/setEditorMode', 'publishing')
 
-                    // BlockHub.DesktopBridge
-                    //     .createFundingProject({ title: this.project.name, description: this.project.description, about: this.project.about })
-                    //     .then((project) => {
-                    //         store.state.projects[project.id] = project
-
-                    //         store.dispatch('updateState')
-
-                    //         this.$store.dispatch('application/setEditorMode', 'viewing')
-                    //     })
+                    // API: CREATE PROJECT
                 } else {
                     this.$store.dispatch('funding/updateProject', this.project)
                     this.$store.dispatch('application/setEditorMode', 'publishing')
@@ -451,7 +407,32 @@
             },
         },
         computed: {
-            project: updateProject,
+            project() {
+                let project = null
+
+                if (this.id === 'new') {
+                    project = this.$store.state.funding.defaultProject
+
+                    this.$store.state.application.developerMode = true
+                    this.$store.dispatch('application/setEditorMode', 'editing')
+                }
+
+                if (!project) {
+                    project = this.$store.getters['projects/get'](this.id)
+                }
+
+                if (project && project.images && project.images.header) {
+                    window.document.getElementById('header-bg').style['background-image'] = 'url(' + project.images.header + ')'
+                }
+
+                if (project && !project.community) {
+                    project.community = {
+                        discussions: []
+                    }
+                }
+
+                return project
+            },
             editing() {
                 if (!this.$store.state.application.editorMode) {
                     for (let key in this.activeElement) {
@@ -498,7 +479,6 @@
                     }
                 })
             }
-            //this.$store.dispatch('application/setEditorMode', 'editing')
 
             this.updateSection()
         },

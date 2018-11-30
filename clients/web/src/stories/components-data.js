@@ -243,7 +243,7 @@ export const MilestonesLine = {
             "text": "m5"
         },
         {
-            "status": "in_progress",
+            "status": "InProgress",
             "text": "m6"
         }
     ]

@@ -745,7 +745,7 @@
                             "text": "m2"
                         },
                         {
-                            "status": "in_progress",
+                            "status": "InProgress",
                             "text": "m3"
                         },
                         {

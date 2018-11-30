@@ -55,18 +55,18 @@
                     <div class="col-12 col-md-4">
                         <div class="editor" v-if="editing">
                             <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"
-                                    @click="activateElement('background_image')"
-                                    v-if="!activeElement['background_image']">Change Background Image <span
+                                    @click="activateElement('backgroundImage')"
+                                    v-if="!activeElement['backgroundImage']">Change Background Image <span
                                 class="fa fa-edit"></span></button>
 
-                            <div class="form-group" v-if="activeElement['background_image']">
+                            <div class="form-group" v-if="activeElement['backgroundImage']">
                                 <div class="form-control-element form-control-element--right">
-                                    <input ref="background_image" name="background_image" type="text"
+                                    <input ref="backgroundImage" name="backgroundImage" type="text"
                                             class="form-control" placeholder="Background image URL..."
                                             v-model="product.images.header"/>
                                     <div
                                         class="form-control-element__box form-control-element__box--pretify bg-secondary"
-                                        @click="deactivateElement('background_image')">
+                                        @click="deactivateElement('backgroundImage')">
                                         <span class="fa fa-check"></span>
                                     </div>
                                 </div>
@@ -301,7 +301,7 @@
             return {
                 activeElement: {
                     name: false,
-                    background_image: false,
+                    backgroundImage: false,
                     tags: false
                 },
                 developerTagOptions: [

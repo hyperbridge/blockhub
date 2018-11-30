@@ -576,7 +576,7 @@ storiesOf('Projects', module)
                         "shortDescription": "Aenean aliquam erat quis tortor varius convallis. Suspendisse finibus orci at nibh pharetra, vel ullamcorper tellus mattis.",
                         "text": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac, sollicitudin lacinia arcu. Phasellus vehicula arcu tristique nunc lacinia facilisis. Nunc egestas congue massa a euismod. Sed commodo laoreet dolor nec euismod. Donec at ex in augue iaculis accumsan quis et libero.",
                         "img": "http://via.placeholder.com/350x250",
-                        "status": "in_progress",
+                        "status": "InProgress",
                         "stepNumber": 2,
                         "progress": {
                             "percentDays": 91,
@@ -591,7 +591,7 @@ storiesOf('Projects', module)
                         "shortDescription": "Nulla facilisi. In hac habitasse platea dictumst. Mauris lacus nulla, laoreet et est ac",
                         "text": "Praesent eu fringilla nisl. Nullam iaculis odio non est ornare sodales non a massa. Sed sollicitudin nibh et ipsum sollicitudin blandit. Quisque vel enim congue, semper leo vitae, luctus nibh.",
                         "img": "http://via.placeholder.com/350x250",
-                        "status": "in_progress",
+                        "status": "InProgress",
                         "stepNumber": 4,
                         "progress": {
                             "percentDays": 85,
