@@ -94,10 +94,10 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between">
-                <c-button status="outline-danger" size="lg">
+                <c-button status="opacity-danger" size="lg">
                     Cancel
                 </c-button>
-                <c-button status="outline-success" size="lg">
+                <c-button status="opacity-success" size="lg">
                     Next
                 </c-button>
             </div>

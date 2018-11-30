@@ -215,35 +215,54 @@
                     color: nth($colorSet, 2);
                 }
             }
+        }
 
-            $gradientColor: (
-                gradient-info: (#346196, rgba(161,202,249,0), #96bce8, #2189db, #fff),
-                gradient-success: (#447f53, rgba(161, 249, 192, 0), #93e5a8, #579b28, #fff),
-                gradient-danger: (#79610d, rgba(161,202,249,0), #f8f9a1, #d3ba61, #fff),
-                gradient-warning: (rgba(141,42,51,1), rgba(161,202,249,0), #f9a1a1, rgb(186, 56, 67), #fff),
-            );
-            @each $status, $colorSet in $gradientColor {
-                &.#{$status} {
-                    background: nth($colorSet, 1) !important;
+        $gradientColor: (
+            gradient-info: (#346196, rgba(161,202,249,0), #96bce8, #2189db, #fff),
+            gradient-success: (#447f53, rgba(161, 249, 192, 0), #93e5a8, #579b28, #fff),
+            gradient-danger: (#79610d, rgba(161,202,249,0), #f8f9a1, #d3ba61, #fff),
+            gradient-warning: (rgba(141,42,51,1), rgba(161,202,249,0), #f9a1a1, rgb(186, 56, 67), #fff),
+        );
+    
+        @each $status, $colorSet in $gradientColor {
+            &.#{$status} {
+                background: nth($colorSet, 1) !important;
+                @include gradient(nth($colorSet, 2), nth($colorSet, 3));
+                /*border: 2px solid nth($colorSet, 3);*/
+                border: 0 none;
+                color: nth($colorSet, 5);
+                &:not([disabled]):hover {
+                    /*background: nth($colorSet, 4);
+                    color: nth($colorSet, 5);*/
+                    background: #333 !important;
                     @include gradient(nth($colorSet, 2), nth($colorSet, 3));
-                    /*border: 2px solid nth($colorSet, 3);*/
-                    border: 0 none;
-                    color: nth($colorSet, 5);
-                    &:not([disabled]):hover {
-                        /*background: nth($colorSet, 4);
-                        color: nth($colorSet, 5);*/
-                        background: #333 !important;
-                        @include gradient(nth($colorSet, 2), nth($colorSet, 3));
-                    }
                 }
+            }
+        }
 
-                &[disabled] {
-                    background: #bfbfbf !important;
-                }
+        &[disabled], &.disabled {
+            background: #bfbfbf !important;
+        }
 
-                &.disabled {
-                    background: #bfbfbf !important;
+        $opacityColor: (
+            opacity-info: (#0194ef, rgba(1,148,239,.4), #fff),
+            opacity-success: (#1bb934, rgba(27,185,52,.4), #fff),
+            opacity-danger: (#ffc02a, rgba(255,192,42,.4), #fff),
+            opacity-warning: (#e1112c, rgba(225,17,44,.4), #fff),
+        );
+
+        @each $status, $colorSet in $opacityColor {
+            &.#{$status} {
+                background: nth($colorSet, 2);
+                color: nth($colorSet, 3);
+                border: 1px solid nth($colorSet, 1);
+                &:not([disabled]):hover {
+                    background: nth($colorSet, 1);
+                    color: nth($colorSet, 3);
                 }
+            }
+            &[disabled], &.disabled {
+                background: #bfbfbf !important;
             }
         }
     }

@@ -14,7 +14,7 @@
                     Vestibulum magna nisl, vehicula eu orci sed, viverra venenatis nisi.
                     Vivamus nulla metus, tempus id rhoncus ac, ullamcorper eget felis.
                 </p>
-                <c-button status="outline-info" size="lg">
+                <c-button status="opacity-info" size="lg">
                     Buy
                 </c-button>
             </div>
@@ -26,7 +26,7 @@
                     Vestibulum magna nisl, vehicula eu orci sed, viverra venenatis nisi.
                     Vivamus nulla metus, tempus id rhoncus ac, ullamcorper eget felis.
                 </p>
-                <c-button status="outline-info" size="lg">
+                <c-button status="opacity-info" size="lg">
                     Buy
                 </c-button>
             </div>
@@ -38,7 +38,7 @@
                     Vestibulum magna nisl, vehicula eu orci sed, viverra venenatis nisi.
                     Vivamus nulla metus, tempus id rhoncus ac, ullamcorper eget felis.
                 </p>
-                <c-button status="outline-info" size="lg">
+                <c-button status="opacity-info" size="lg">
                     Buy
                 </c-button>
             </div>
@@ -50,7 +50,7 @@
                     Vestibulum magna nisl, vehicula eu orci sed, viverra venenatis nisi.
                     Vivamus nulla metus, tempus id rhoncus ac, ullamcorper eget felis.
                 </p>
-                <c-button status="outline-info" size="lg">
+                <c-button status="opacity-info" size="lg">
                     Buy
                 </c-button>
             </div>

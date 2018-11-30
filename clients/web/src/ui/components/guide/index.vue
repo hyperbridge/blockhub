@@ -114,6 +114,30 @@
                 </div>
             </div>
         </c-block>
+        <c-block title="Buttons with opacity bg" class="margin-bottom-30">
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 buttons-container">
+                    <c-button status="opacity-success">success</c-button>
+                    <c-button status="opacity-success" size="md">success</c-button>
+                    <c-button status="opacity-success" size="lg">success</c-button>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 buttons-container">
+                    <c-button status="opacity-info">Info</c-button>
+                    <c-button status="opacity-info" size="md">Info</c-button>
+                    <c-button status="opacity-info" size="lg">Info</c-button>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 buttons-container">
+                    <c-button status="opacity-danger">danger</c-button>
+                    <c-button status="opacity-danger" size="md">danger</c-button>
+                    <c-button status="opacity-danger" size="lg">danger</c-button>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 buttons-container">
+                    <c-button status="opacity-warning">warning</c-button>
+                    <c-button status="opacity-warning" size="md">warning</c-button>
+                    <c-button status="opacity-warning" size="lg">warning</c-button>
+                </div>
+            </div>
+        </c-block>
         <!--Buttons block end-->
 
         <!--Title block-->
