@@ -139,13 +139,13 @@
                                         </a>
                                     </li>
                                     <li v-if="activeProfile">
-                                        <a :href="`#/profile/${activeProfile.address}`">
+                                        <a :href="`#/profile/${activeProfile.id}`">
                                             <i class="fas fa-user"></i>
                                             View Public Profile
                                         </a>
                                     </li>
                                     <li v-if="signedIn && activeProfile" v-darklaunch="'CONTACTS'">
-                                        <a :href="`#/profile/${activeProfile.address}/contacts`">
+                                        <a :href="`#/profile/${activeProfile.id}/contacts`">
                                             <i class="fas fa-users"></i>
                                             Contacts
                                         </a>

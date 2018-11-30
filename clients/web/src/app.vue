@@ -418,8 +418,8 @@
     }
 
     .fixed-panel {
-        width: 540px;
-        right: -540px;
+        width: 350px;
+        right: -350px;
         overflow-y: auto;
         min-height: 100%;
     }
@@ -439,17 +439,14 @@
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9d972', endColorstr='#f7bf77', GradientType=1); /* IE6-9 */
         display: flex;
         padding: 20px;
-        width: 500px;
         justify-content: space-between;
         align-items: center;
         color: #3D3E5D;
         font-size: 14px;
         margin: 25px 0;
         overflow: hidden;
-        @media (max-width: 767px) {
-            flex-direction: column;
-            width: 100%;
-        }
+        flex-direction: column;
+        width: 100%;
         .img {
             margin-right: 15px;
             img {
