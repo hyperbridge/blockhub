@@ -214,31 +214,49 @@
                     color: nth($colorSet, 2);
                 }
             }
+        }
 
-            $gradientColor: (
-                gradient-info: (#42a1ec, #0070c9, #2189db, #fff),
-                gradient-success: (#5EA72B, #4c8027, #579b28, #fff),
-                gradient-danger: (#e3c868, #b8a02a, #d3ba61, #fff),
-                gradient-warning: (rgba(174,52,63,1), rgba(141,42,51,1), rgb(186, 56, 67), #fff),
-            );
-            @each $status, $colorSet in $gradientColor {
-                &.#{$status} {
-                    @include gradient(nth($colorSet, 1), nth($colorSet, 2));
-                    border: 2px solid nth($colorSet, 3);
+        $gradientColor: (
+            gradient-info: (#42a1ec, #0070c9, #2189db, #fff),
+            gradient-success: (#5EA72B, #4c8027, #579b28, #fff),
+            gradient-danger: (#e3c868, #b8a02a, #d3ba61, #fff),
+            gradient-warning: (rgba(174,52,63,1), rgba(141,42,51,1), rgb(186, 56, 67), #fff),
+        );
+        @each $status, $colorSet in $gradientColor {
+            &.#{$status} {
+                @include gradient(nth($colorSet, 1), nth($colorSet, 2));
+                border: 2px solid nth($colorSet, 3);
+                color: nth($colorSet, 4);
+                &:not([disabled]):hover {
+                    background: nth($colorSet, 3);
                     color: nth($colorSet, 4);
-                    &:not([disabled]):hover {
-                        background: nth($colorSet, 3);
-                        color: nth($colorSet, 4);
-                    }
                 }
+            }
 
-                &[disabled] {
-                    background: #bfbfbf !important;
-                }
+            &[disabled], &.disabled {
+                background: #bfbfbf !important;
+            }
+        }
 
-                &.disabled {
-                    background: #bfbfbf !important;
+        $opacityColor: (
+            opacity-info: (#0194ef, rgba(1,148,239,.4), #fff),
+            opacity-success: (#1bb934, rgba(27,185,52,.4), #fff),
+            opacity-danger: (#ffc02a, rgba(255,192,42,.4), #fff),
+            opacity-warning: (#e1112c, rgba(225,17,44,.4), #fff),
+        );
+
+        @each $status, $colorSet in $opacityColor {
+            &.#{$status} {
+                background: nth($colorSet, 2);
+                color: nth($colorSet, 3);
+                border: 1px solid nth($colorSet, 1);
+                &:not([disabled]):hover {
+                    background: nth($colorSet, 1);
+                    color: nth($colorSet, 3);
                 }
+            }
+            &[disabled], &.disabled {
+                background: #bfbfbf !important;
             }
         }
     }
