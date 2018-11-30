@@ -1,7 +1,7 @@
 <template>
     <div class="row mx-0">
         <div class="col-12 col-lg-7 col-xl-8">
-            <c-screen-gallery :items="project.images.preview" v-if="project.images.preview"/>
+            <c-screen-gallery :items="project.images.preview" v-if="project.images && project.images.preview"/>
             <div class="editor-container">
                 <div class="editor" v-if="editing">
                     <button class="btn btn-secondary btn--icon btn--icon-stacked btn--icon-right"

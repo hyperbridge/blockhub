@@ -703,12 +703,15 @@ const router = new Router({
             path: '/business',
             name: 'Business',
             component: (resolve) => require(['@/ui/screens/business'], resolve),
+            meta: {
+                area: 'business',
+            },
             children: [
                 {
                     path: '',
                     name: 'Business',
                     component: (resolve) => require(['@/ui/screens/business-home'], resolve),
-                    meta:{
+                    meta: {
                         title: 'Business',
                         breadcrumb: [
                             { path: '/business', title: 'Dashboard' },
@@ -719,7 +722,7 @@ const router = new Router({
                     path: 'products',
                     name: 'All Products',
                     component: (resolve) => require(['@/ui/screens/business-products'], resolve),
-                    meta:{
+                    meta: {
                         title: 'All Products',
                         breadcrumb: [
                             { path: '/business', title: 'Dashboard' },
@@ -732,7 +735,7 @@ const router = new Router({
                     name: 'Product',
                     props: true,
                     component: (resolve) => require(['@/ui/screens/business-product'], resolve),
-                    meta:{
+                    meta: {
                         title: 'Product',
                         breadcrumb: [
                             { to: '/business', title: 'Dashboard' },
@@ -755,11 +758,12 @@ const router = new Router({
                 },
                 {
                     path: 'project/:id',
-                    name: 'Crowdfunds',
+                    name: 'Crowdfund',
                     props: true,
                     component: (resolve) => require(['@/ui/screens/business-project'], resolve),
-                    meta:{
-                        title: 'Crowdfunds',
+                    meta: {
+                        title: 'Crowdfund',
+                        permission: 'signedIn',
                         breadcrumb: [
                             { to: '/business', title: 'Dashboard' },
                             { to: '/business/projects', title: 'Crowdfunds' },
@@ -772,7 +776,7 @@ const router = new Router({
                     name: 'Release History',
                     props: true,
                     component: (resolve) => require(['@/ui/screens/business-release-history'], resolve),
-                    meta:{
+                    meta: {
                         title: 'Release History',
                         breadcrumb: [
                             { to: '/business', title: 'Dashboard' },
@@ -785,7 +789,7 @@ const router = new Router({
                     name: 'Add New Release',
                     props: true,
                     component: (resolve) => require(['@/ui/screens/business-new-release'], resolve),
-                    meta:{
+                    meta: {
                         title: 'Add New Release',
                         breadcrumb: [
                             { to: '/business', title: 'Dashboard' },
@@ -798,7 +802,7 @@ const router = new Router({
                     name: 'Release page',
                     props: true,
                     component: (resolve) => require(['@/ui/screens/business-release-page'], resolve),
-                    meta:{
+                    meta: {
                         title: 'Release Page',
                         breadcrumb: [
                             { to: '/release-page', title: 'Dashboard' },

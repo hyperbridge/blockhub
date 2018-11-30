@@ -1,5 +1,10 @@
 <template>
     <div class="row" v-if="project">
+        <div class="col-12">
+            <c-button :href="`#/project/${project.id}`" target="_blank" status="info" icon="open">
+                View Page
+            </c-button>
+        </div>
         <div class="col-md-12" v-if="notice">
             <p class="alert alert-info">{{ notice }}</p>
             <br /><br />
@@ -240,10 +245,7 @@
             return {
                 loadingState: true,
                 advanced: false,
-                project: {
-                    ...project,
-                    ownerId: this.$store.state.application.account.activeProfile.id
-                }
+                project: project
             }
         },
         computed: {
@@ -252,24 +254,29 @@
             }
         },
         watch: {
-            '$store.state.application.initialized'() {
-                if (this.id === 'new') { return }
+            originalProject() {
+                this.project = { ...this.project, ...this.originalProject }
+            }
+        },
+        created() {
+            if (this.id !== 'new') {
 
                 this.$store.dispatch('projects/find', {
                     query: {
                         id: Number(this.id)
                     }
                 })
-            },
-            originalProject() {
-                this.project = { ...this.project, ...this.originalProject }
             }
         },
         methods: {
+            viewPage() {
+
+            },
             toggleAdvanced() {
                 this.advanced = !this.advanced
             },
             create() {
+                //    ownerId: this.$store.state.application.account.activeProfile.id
                 this.$store.dispatch('projects/create', this.project).then((projectResult) => {
                     this.project.id = projectResult.id
                     this.notice = "Congratulations, your project has been created!"
@@ -454,12 +461,6 @@
 
                 // BlockHub.Bridge.sendCommand('eval', run.toString())
             }
-        },
-        mounted() {
-            this.$nextTick(() => {
-                this.loadingState = false
-                document.getElementById('startup-loader').style.display = 'none'
-            })
         },
     }
 </script>

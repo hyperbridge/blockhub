@@ -379,7 +379,7 @@
 
                 this.$store.state.application.activeModal = false
 
-                this.renderCondition = this.$route.meta.renderCondition || this.renderCondition
+                this.renderCondition = this.$route.meta.renderCondition || (this.$route.meta.permission === 'signedIn' ? 'user' : this.renderCondition)
 
                 this.updateEditorMode()
                 this.ensureDesktopWelcome(to)

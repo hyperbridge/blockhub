@@ -16,12 +16,11 @@ const populate = function(options = {}) {
                     accountId: item.id,
                     name: 'Default'
                 }, {
-                        user: { id: item.id }
-                    })
+                    user: { id: item.id }
+                })
 
                 item.profiles = [profile]
             } else {
-                console.log(item)
                 const profiles = await app.service('profiles').find({
                     query: {
                         accountId: item.id

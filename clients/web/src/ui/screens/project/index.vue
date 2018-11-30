@@ -292,6 +292,7 @@
 
             <div class="col-12" id="overview">
                 <transition name="page" mode="out-in">
+                {{ project }}
                     <c-project-overview :project="project" v-if="section === 'overview'" :editing="editing" />
                     <c-project-community :project="project" v-if="section === 'community'" :editing="editing" />
                     <c-project-bounties :project="project" v-if="section === 'bounties'" :editing="editing" />
@@ -484,15 +485,6 @@
             '$route'() {
                 this.updateSection()
             },
-            '$store.state.application.initialized'() {
-                if (this.id === 'new') { return }
-
-                this.$store.dispatch('projects/find', {
-                    query: {
-                        id: this.id
-                    }
-                })
-            },
             editing() {
                 if (this.$store.state.application.editorMode === 'publishing') {
                     this.save()
@@ -500,8 +492,15 @@
             },
         },
         created() {
+            if (this.id !== 'new') {
+                this.$store.dispatch('projects/find', {
+                    query: {
+                        id: Number(this.id)
+                    }
+                })
+            }
             //this.$store.dispatch('application/setEditorMode', 'editing')
-            console.log(this, this.$parent)
+
             this.updateSection()
         },
         beforeDestroy() {
