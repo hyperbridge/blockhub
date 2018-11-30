@@ -43,6 +43,7 @@
 
 <style lang="scss" scoped>
     .app-header {
+        width: 100%;
         position: fixed;
         top: 0;
         left: 0;
