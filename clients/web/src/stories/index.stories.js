@@ -5238,6 +5238,19 @@ storiesOf('Wallet Popup', module)
                     </div>`
     }))
 
+
+storiesOf('Chat', module)
+    .add('base', () => ({
+        components: {
+            'c-chat-base': (resolve) => require(['@/ui/components/chat-new/base'], resolve)
+        },
+        template: `<div class="row p-3 m-0 flex-wrap" style="width: 1100px; height: 700px">
+                        <c-chat-base />
+                    </div>`
+    }))
+
+
+
 /*
      Dynamic import - test version
 
