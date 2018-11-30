@@ -70,13 +70,14 @@
                 </c-heading-bar>
             </div>
 
-            <transition-group
+            <!-- <transition-group
                 tag="div"
                 class="profile-picker"
                 name="item"
                 :duration="100"
-            >
-                <c-loading :enabled="!filteredProfiles.length" />
+            > -->
+            <div class="profile-picker">
+                <c-loading :enabled="!filteredProfiles.length" key="loading" />
                 <div
                     class="profile-picker__profile"
                     :class="{ 'edit': profile.edit, 'default-type': profile.id == (defaultProfile && defaultProfile.id) }"
@@ -123,7 +124,8 @@
                         >Cancel</c-button>
                     </div>
                 </div>
-            </transition-group>
+            </div>
+            <!-- </transition-group> -->
 
 
             <c-modal-light
@@ -257,10 +259,10 @@
                     address: newProfile.wallet
                 })
             },
-            // saveProfiles() {
-            //     this.$store.state.application.account.profiles = this.profiles
-            //     this.$store.dispatch('application/updateState')
-            // }
+            saveProfiles() {
+                //this.$store.state.application.account.profiles = this.profiles
+                this.$store.dispatch('application/updateState')
+            }
         },
         created() {
             this.$store.dispatch('profiles/find', {
@@ -299,6 +301,9 @@
                 if (newVal === false) {
                     this.editProfile(this.profiles.find(p => p.id === this.$store.state.profiles.currentId))
                 }
+            },
+            '$store.state.profiles.list'(newVal, oldVal) {
+                this.$store.state.application.account.profiles = this.$store.state.profiles.list
             }
         },
     }

@@ -119,6 +119,7 @@
         border-radius: 5px;
         border: 1px solid #28273a;
         width: 100%;
+        min-height: 100px;
         position: relative;
         color: #fff;
         .walletNumber {
