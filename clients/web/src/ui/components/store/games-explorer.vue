@@ -5,9 +5,9 @@
                 slot="title"
                 class="mb-0"
                 :headingTabs="[
-                    { title: 'Top Games', category: 'top_selling_products' },
-                    { title: 'New Releases', category: 'new_products' },
-                    { title: 'Upcoming', category: 'upcoming_products' }
+                    { title: 'Top Games', category: 'topSellingProducts' },
+                    { title: 'New Releases', category: 'newProducts' },
+                    { title: 'Upcoming', category: 'upcomingProducts' }
                 ]"
                 @changeTab="category = $event; clearFilters()"
                 :showActions="true"
@@ -153,7 +153,7 @@
         },
         data() {
             return {
-                category: 'top_selling_products',
+                category: 'topSellingProducts',
                 phrase: '',
                 selectedGenres: [],
                 sortBy: {
@@ -199,7 +199,7 @@
                         product.name.toLowerCase().includes(this.phrase.toLowerCase())
                     )
                     .filter(product => this.selectedGenres.length
-                        ? product.developer_tags.some(genre => this.selectedGenres.includes(genre))
+                        ? product.developerTags.some(genre => this.selectedGenres.includes(genre))
                         : true
                     )
                     .sort((a, b) => property
@@ -212,7 +212,7 @@
             availableGenres() {
                 return this.products.reduce((tags, product) => [
                     ...tags,
-                    ...product.developer_tags.filter(tag =>
+                    ...product.developerTags.filter(tag =>
                         !tags.includes(tag)
                     )
                 ], []).sort();

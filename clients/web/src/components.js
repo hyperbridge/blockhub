@@ -10,6 +10,7 @@ import InfiniteContent from '@/ui/components/infinite-content'
 import Icon from '@/ui/components/icon'
 import Input from '@/ui/components/inputs'
 import InputSearcher from '@/ui/components/inputs/searcher'
+import LoadingIndicator from '@/ui/components/loading-indicator'
 import Breadcrumb from '@/ui/components/breadcrumb'
 import Img from '@/ui/components/img'
 import Darklaunch from '@/ui/components/darklaunch'
@@ -24,6 +25,7 @@ Vue.component('c-infinite-content', InfiniteContent)
 Vue.component('c-icon', Icon)
 Vue.component('c-input', Input)
 Vue.component('c-input-searcher', InputSearcher)
+Vue.component('c-loading', LoadingIndicator)
 Vue.component('c-breadcrumb', Breadcrumb)
 Vue.component('c-img', Img)
 Vue.component('c-darklaunch', Darklaunch)

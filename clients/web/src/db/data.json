@@ -3,21 +3,21 @@
         "version": "0.7.1",
         "initialized": false,
         "environmentMode": null,
-        "decentralized_mode": false,
+        "decentralizedMode": false,
         "locked": false,
-        "signed_in": false,
+        "signedIn": false,
         "loading": false,
-        "simulator_mode": false,
-        "desktop_mode": null,
+        "simulatorMode": false,
+        "desktopMode": null,
         "developerMode": null,
-        "profile_chooser": false,
-        "darklaunch_override": false,
-        "operating_system": null,
-        "is_developer": false,
-        "editor_mode": "viewing",
-        "active_modal": null,
-        "active_notification": null,
-        "current_ethereum_network": "local",
+        "profileChooser": false,
+        "darklaunchOverride": false,
+        "operatingSystem": null,
+        "isDeveloper": false,
+        "editorMode": "viewing",
+        "activeModal": null,
+        "activeNotification": null,
+        "currentEthereumNetwork": "local",
         "shortcuts": [
             {
                 "r": 255,
@@ -42,21 +42,21 @@
                             "EternalStorage": {
                                 "name": "EternalStorage",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/token/smart-contracts/ethereum/contracts/EternalStorage.sol",
-                                "created_at": 1541861913124,
+                                "createdAt": 1541861913124,
                                 "address": "0x306b5cf6f9ee067b676a3a6be0dff0b5df2f629f"
                             },
                             "TokenLib": {
                                 "links": [],
                                 "name": "TokenLib",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/token/smart-contracts/ethereum/contracts/TokenLib.sol",
-                                "created_at": 1541862015914,
+                                "createdAt": 1541862015914,
                                 "address": "0x1ee9faa44d313a1d2e4bfa135ffb15c6f0da8a27"
                             },
                             "Token": {
                                 "links": [],
                                 "name": "Token",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/token/smart-contracts/ethereum/contracts/Token.sol",
-                                "created_at": 1541862092379,
+                                "createdAt": 1541862092379,
                                 "address": "0x2be42c6d0c022a49258256cb2d46aeb7b1bb994d"
                             },
                             "TokenDelegate": {
@@ -68,30 +68,30 @@
                                 ],
                                 "name": "TokenDelegate",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/token/smart-contracts/ethereum/contracts/TokenDelegate.sol",
-                                "created_at": 1541862170010,
+                                "createdAt": 1541862170010,
                                 "address": "0x2793a23341012e0970cf478bab08606b56504c3e"
                             }
                         },
-                        "user_from_address": "0x41bd0e132b2d09abb1259cbd245f90117a432c69"
+                        "userFromAddress": "0x41bd0e132b2d09abb1259cbd245f90117a432c69"
                     },
                     "reserve": {
                         "contracts": {
                             "TokenSale": {
                                 "name": "TokenSale",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/reserve/smart-contracts/ethereum/contracts/TokenSale.sol",
-                                "created_at": 1541870837408,
+                                "createdAt": 1541870837408,
                                 "links": [],
                                 "address": "0xebf0027ef3b4b7a742a148cddb0f2b14e5d8f0e9"
                             }
                         },
-                        "user_from_address": "0x41bd0e132b2d09abb1259cbd245f90117a432c69"
+                        "userFromAddress": "0x41bd0e132b2d09abb1259cbd245f90117a432c69"
                     },
                     "marketplace": {
                         "contracts": {
                             "MarketplaceStorage": {
                                 "name": "MarketplaceStorage",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/MarketplaceStorage.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "Administration": {
                                 "links": [
@@ -102,37 +102,37 @@
                                 ],
                                 "name": "Administration",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/Administration.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "DeveloperStorageAccess": {
                                 "name": "DeveloperStorageAccess",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/DeveloperStorageAccess.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProductStorageAccess": {
                                 "name": "ProductStorageAccess",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/ProductStorageAccess.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "AdministrationStorageAccess": {
                                 "name": "AdministrationStorageAccess",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/AdministrationStorageAccess.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "Bytes32Utils": {
                                 "name": "Bytes32Utils",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/Bytes32Utils.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "BytesUtils": {
                                 "name": "BytesUtils",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/BytesUtils.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "StringUtils": {
                                 "name": "StringUtils",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/StringUtils.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProductRegistration": {
                                 "links": [
@@ -147,7 +147,7 @@
                                 ],
                                 "name": "ProductRegistration",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/ProductRegistration.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProductLanguageSupport": {
                                 "links": [
@@ -158,7 +158,7 @@
                                 ],
                                 "name": "ProductLanguageSupport",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/ProductLanguageSupport.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProductSystemRequirement": {
                                 "links": [
@@ -169,7 +169,7 @@
                                 ],
                                 "name": "ProductSystemRequirement",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/ProductSystemRequirement.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProductPricePlan": {
                                 "links": [
@@ -180,7 +180,7 @@
                                 ],
                                 "name": "ProductPricePlan",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/ProductPricePlan.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProductVersion": {
                                 "links": [
@@ -191,7 +191,7 @@
                                 ],
                                 "name": "ProductVersion",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/ProductVersion.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProductVersionVoting": {
                                 "links": [
@@ -202,7 +202,7 @@
                                 ],
                                 "name": "ProductVersionVoting",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/ProductVersionVoting.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProductPurchase": {
                                 "links": [
@@ -217,7 +217,7 @@
                                 ],
                                 "name": "ProductPurchase",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/ProductPurchase.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "Developer": {
                                 "links": [
@@ -232,37 +232,37 @@
                                 ],
                                 "name": "Developer",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/marketplace/smart-contracts/ethereum/contracts/Developer.sol",
-                                "created_at": null
+                                "createdAt": null
                             }
                         },
-                        "user_from_address": "0x41bd0e132b2d09abb1259cbd245f90117a432c69"
+                        "userFromAddress": "0x41bd0e132b2d09abb1259cbd245f90117a432c69"
                     },
                     "funding": {
                         "contracts": {
                             "FundingStorage": {
                                 "name": "FundingStorage",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/FundingStorage.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "DeveloperStorageAccess": {
                                 "name": "DeveloperStorageAccess",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/DeveloperStorageAccess.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProjectStorageAccess": {
                                 "name": "ProjectStorageAccess",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/ProjectStorageAccess.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ContributionStorageAccess": {
                                 "name": "ContributionStorageAccess",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/ContributionStorageAccess.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "FundingVault": {
                                 "name": "FundingVault",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/FundingVault.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "Developer": {
                                 "links": [
@@ -273,7 +273,7 @@
                                 ],
                                 "name": "Developer",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/Developer.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "Contribution": {
                                 "links": [
@@ -288,12 +288,12 @@
                                 ],
                                 "name": "Contribution",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/Contribution.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProjectTimeline": {
                                 "name": "ProjectTimeline",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/ProjectTimeline.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProjectTimelineHelpersLibrary": {
                                 "links": [
@@ -304,7 +304,7 @@
                                 ],
                                 "name": "ProjectTimelineHelpersLibrary",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/ProjectTimelineHelpersLibrary.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProjectTimelineProposal": {
                                 "links": [
@@ -315,7 +315,7 @@
                                 ],
                                 "name": "ProjectTimelineProposal",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/ProjectTimelineProposal.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProjectContributionTierHelpersLibrary": {
                                 "links": [
@@ -326,7 +326,7 @@
                                 ],
                                 "name": "ProjectContributionTierHelpersLibrary",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/ProjectContributionTierHelpersLibrary.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProjectMilestoneCompletion": {
                                 "links": [
@@ -337,7 +337,7 @@
                                 ],
                                 "name": "ProjectMilestoneCompletion",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/ProjectMilestoneCompletion.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProjectRegistrationHelpersLibrary": {
                                 "links": [
@@ -348,7 +348,7 @@
                                 ],
                                 "name": "ProjectRegistrationHelpersLibrary",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/ProjectRegistrationHelpersLibrary.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "ProjectRegistration": {
                                 "links": [
@@ -371,12 +371,12 @@
                                 ],
                                 "name": "ProjectRegistration",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/ProjectRegistration.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "CurationStorageAccess": {
                                 "name": "CurationStorageAccess",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/CurationStorageAccess.sol",
-                                "created_at": null
+                                "createdAt": null
                             },
                             "Curation": {
                                 "links": [
@@ -391,10 +391,10 @@
                                 ],
                                 "name": "Curation",
                                 "link": "https://github.com/hyperbridge/protocol/blob/master/packages/funding/smart-contracts/ethereum/contracts/Curation.sol",
-                                "created_at": null
+                                "createdAt": null
                             }
                         },
-                        "user_from_address": "0x41bd0e132b2d09abb1259cbd245f90117a432c69"
+                        "userFromAddress": "0x41bd0e132b2d09abb1259cbd245f90117a432c69"
                     }
                 }
             },
@@ -442,7 +442,7 @@
                 "message": "Launching..."
             }
         },
-        "user_submitted_connection_messages": [
+        "userSubmittedConnectionMessages": [
             {
                 "id": 1,
                 "message": "wubba lubba dub dubbbb",
@@ -596,11 +596,11 @@
         ],
         "account": {
             "address": null,
-            "verification_timestamp": null,
-            "is_verified": false,
-            "is_verifying": false,
-            "first_name": null,
-            "last_name": null,
+            "verificationTimestamp": null,
+            "isVerified": false,
+            "isVerifying": false,
+            "firstName": null,
+            "lastName": null,
             "birthday": null,
             "password": null,
             "email": null,
@@ -609,7 +609,8 @@
             "activeProfile": {
                 "id": null,
                 "name": null,
-                "developer_id": null,
+                "role": "user",
+                "developerId": null,
                 "badges": [],
                 "assets": [],
                 "licenses": [],
@@ -617,9 +618,8 @@
                 "messages": [],
                 "address": null,
                 "passphrase": null,
-                "private_key": null
+                "privateKey": null
             },
-            "active_profile": 3,
             "notifications": [],
             "wallets": [],
             "profiles": [],
@@ -629,26 +629,26 @@
                     "animations": true,
                     "autoplay": true,
                     "pagination": true,
-                    "hide_welcome_modal": false,
-                    "cookie_policy_accepted": false
+                    "hideWelcomeModal": false,
+                    "cookiePolicyAccepted": false
                 }
             },
-            "darklaunch_flags": [
+            "darklaunchFlags": [
             ],
-            "product_wishlist": { "3": true, "14": true },
-            "product_favorites": {},
-            "project_wishlist": { "1": true },
-            "project_favorites": {},
-            "saved_paths": [
+            "productWishlist": { "3": true, "14": true },
+            "productFavorites": {},
+            "projectWishlist": { "1": true },
+            "projectFavorites": {},
+            "savedPaths": [
                 "/home/leafo/.config/itch/apps",
                 "C:/Users/Tom/Program Files/apps",
                 "/home/games"
             ],
-            "friends_list": [4, 5],
+            "friendsList": [4, 5],
             "tradeURLId": "478",
             "id": 1
         },
-        "darklaunch_flags": [
+        "darklaunchFlags": [
             {
                 "code": "CONTACTS",
                 "description": "",
@@ -677,7 +677,7 @@
         ]
     },
     "funding": {
-        "current_ethereum_network": "local",
+        "currentEthereumNetwork": "local",
         "ethereum": {
             "local": {
                 "contracts": {}
@@ -691,11 +691,11 @@
                 "revision": 0,
                 "created": 1531430916082,
                 "version": 0,
-                "system_tags": [],
+                "systemTags": [],
                 "images": {},
                 "developer": "0x0",
-                "developer_id": 1,
-                "developer_tags": [
+                "developerId": 1,
+                "developerTags": [
                     "game"
                 ],
                 "funds": {
@@ -761,17 +761,17 @@
                             "text": "m6"
                         }
                     ],
-                    "funded_amount": "202,190.63",
-                    "goal_amount": "200,000.00",
-                    "spent_amount": {
+                    "fundedAmount": "202,190.63",
+                    "goalAmount": "200,000.00",
+                    "spentAmount": {
                         "amount": "32,000",
                         "percent": "37"
                     },
-                    "locked_amount": {
+                    "lockedAmount": {
                         "amount": "182,242",
                         "percent": "71"
                     },
-                    "overflow_amount": {
+                    "overflowAmount": {
                         "amount": "17,342",
                         "percent": "12"
                     }
@@ -787,11 +787,11 @@
                     },
                     {
                         "text": "Level cap updated to 90 with new set of armors and weapons.",
-                        "step_number": "3"
+                        "stepNumber": "3"
                     },
                     {
                         "text": "Add 3 extra dungeons",
-                        "step_number": "4"
+                        "stepNumber": "4"
                     }
                 ]
             }
@@ -799,27 +799,27 @@
         "projects": []
     },
     "marketplace": {
-        "current_ethereum_network": "local",
-        "selected_product": null,
-        "first_product": true,
-        "frontpage_product": {},
-        "product_news": [],
-        "new_products": [],
-        "sale_products": [],
-        "upcoming_products": [],
-        "top_selling_products": [],
-        "special_products": [],
+        "currentEthereumNetwork": "local",
+        "selectedProduct": null,
+        "firstProduct": true,
+        "frontpageProduct": {},
+        "productNews": [],
+        "newProducts": [],
+        "saleProducts": [],
+        "upcomingProducts": [],
+        "topSellingProducts": [],
+        "specialProducts": [],
         "assets": [],
         "products": [],
         "posts": [],
-        "game_series": [],
+        "gameSeries": [],
         "collections": [],
-        "curator_reviews": [],
-        "default_product": {
+        "curatorReviews": [],
+        "defaultProduct": {
             "name": "My Product Name",
             "images": {
                 "header": "https://picsum.photos/2000/300/?random",
-                "medium_tile": "https://picsum.photos/200/300/?random",
+                "mediumTile": "https://picsum.photos/200/300/?random",
                 "main": "https://picsum.photos/200/300/?image=3",
                 "preview": [
                     "https://picsum.photos/200/300/?image=0",
@@ -831,8 +831,8 @@
                 "type": "game",
                 "downloads": 20,
                 "price": 0,
-                "old_price": 0,
-                "system_tags": [
+                "oldPrice": 0,
+                "systemTags": [
                     "game",
                     "new"
                 ],
@@ -842,7 +842,7 @@
                     "goal": 8500
                 },
                 "author": "0x0",
-                "developer_tags": [
+                "developerTags": [
                     "adventure"
                 ],
                 "plans": [
@@ -867,7 +867,7 @@
                     "version": 0
                 },
                 "content": "<h2>An adventure of a lifetime...</h2>\n<p>Any new features or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.</p><p>Our store is hosted on Shopify Inc. They provide us with the online e-commerce platform that allows us to sell our products and services to you.</p> IMAGE LIST",
-                "frequently_traded_assets": [],
+                "frequentlyTradedAssets": [],
                 "rating": [
                     {
                         "name": "Game",
@@ -892,7 +892,7 @@
                         }
                     ]
                 },
-                "system_requirements": [
+                "systemRequirements": [
                     {
                         "system": "Microsoft Windows",
                         "requirements": "8GB storage space,\n4GB RAM, GTX 1050, or equivalent",
@@ -909,7 +909,7 @@
                         "icon": "fab fa-apple"
                     }
                 ],
-                "language_support": [
+                "languageSupport": [
                     {
                         "name": "English",
                         "closed_captioning": true,
@@ -925,7 +925,7 @@
                     "slug": "general",
                     "label": "General Platform Features",
                     "icon": "cogs",
-                    "sub_topics": [
+                    "subTopics": [
                         {
                             "id": 0,
                             "slug": "common-runtime",

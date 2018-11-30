@@ -3,9 +3,9 @@
         "id": 1,
         "name": "BlockHub",
         "theme": {
-            "background_color": "#3F2797",
+            "backgroundColor": "#3F2797",
             "header": {
-                "background_size": "cover"
+                "backgroundSize": "cover"
             }
         },
         "images": {
@@ -45,9 +45,9 @@
         "id": 2,
         "name": "Hyperbridge",
         "theme": {
-            "background_color": "#0086FF",
+            "backgroundColor": "#0086FF",
             "header": {
-                "background_size": "contain"
+                "backgroundSize": "contain"
             }
         },
         "images": {
@@ -87,9 +87,9 @@
         "id": 3,
         "name": "Blizzard",
         "theme": {
-            "background_color": "#2878C0",
+            "backgroundColor": "#2878C0",
             "header": {
-                "background_size": "contain"
+                "backgroundSize": "contain"
             }
         },
         "images": {

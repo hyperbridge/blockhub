@@ -1,6 +1,8 @@
 <template>
     <div class="profile-block" :class="{ 'preview-mode': previewMode }">
-        <div class="profile-block__user-data">
+        <c-loading :enabled="removing" />
+        
+        <div class="profile-block__user-data" v-if="!removing">
             <div
                 v-if="previewMode"
                 class="user-data__icon"
@@ -41,9 +43,9 @@
                     v-focus="!previewMode"
                 />
 
-                <p v-if="!user.developer_id && !user.curator_id"><em>Gamer</em></p>
-                <p v-if="user.developer_id"><em>Developer</em></p>
-                <p v-if="user.curator_id"><em>Curator</em></p>
+                <p v-if="!user.developerId && !user.curatorId"><em>Gamer</em></p>
+                <p v-if="user.developerId"><em>Developer</em></p>
+                <p v-if="user.curatorId"><em>Curator</em></p>
             </div>
         </div>
 
@@ -61,11 +63,11 @@
             </div>
         </div>
 
-        <div class="wallet_number" hidden>
+        <div class="walletNumber" hidden>
             <input
                 type="text"
                 class="form-control"
-                name="wallet_number"
+                name="walletNumber"
                 placeholder="Public address"
                 :value="user.address"
                 @input="$emit('update:wallet', $event.target.value)"
@@ -80,7 +82,6 @@
 
 <script>
     export default {
-        name: 'user-card',
         props: {
             id: String,
             type: String,
@@ -98,7 +99,8 @@
             },
             iconColor: String,
             iconClass: String,
-            previewMode: Boolean
+            previewMode: Boolean,
+            removing: Boolean
         },
         methods: {
             copyToClipboard(value) {
@@ -119,7 +121,7 @@
         width: 100%;
         position: relative;
         color: #fff;
-        .wallet_number {
+        .walletNumber {
             display: flex;
             justify-content: space-between;
             .form-control {

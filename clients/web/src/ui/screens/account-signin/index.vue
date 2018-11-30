@@ -84,7 +84,7 @@
             signIn() {
                 this.$store.dispatch('application/signIn')
 
-                this.$router.push('/')
+                this.$router.push({ path: '/' })
             },
             importAccountFile() {
                 Bridge.sendCommand('importAccountFileRequest').then(() => {

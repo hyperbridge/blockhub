@@ -6,22 +6,22 @@ export const debouncer = {
     },
     methods: {
         debounce(fn, debounceTime = 250, timeout = 'timeout') {
-            clearTimeout(this[timeout]);
-            this[timeout] = setTimeout(fn, debounceTime);
+            clearTimeout(this[timeout])
+            this[timeout] = setTimeout(fn, debounceTime)
         }
     }
-};
+}
 
 export const arrayHandler = {
     methods: {
         handleArray(val, arrayName) {
-            const itemIndex = this[arrayName].indexOf(val);
+            const itemIndex = this[arrayName].indexOf(val)
             itemIndex > -1
                 ? this[arrayName].splice(itemIndex, 1)
-                : this[arrayName].push(val);
+                : this[arrayName].push(val)
         }
     }
-};
+}
 
 export const windowSize = {
     data() {
@@ -40,7 +40,6 @@ export const windowSize = {
     beforeDestroy() {
         window.removeEventListener('resize', this.getWindowSize)
     },
-
     methods: {
         getWindowSize() {
             this.windowHeight = document.body.clientHeight

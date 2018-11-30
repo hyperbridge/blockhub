@@ -7,28 +7,28 @@
             <div class="head">
                 <div class="description">
                     <h4>{{ milestone.title }}</h4>
-                    <p>{{ milestone.short_description }}</p>
+                    <p>{{ milestone.shortDescription }}</p>
                 </div>
                 <div class="milestones_progress">
                     <div class="progress_line">
                         <i class="fas fa-clock icon"></i>
-                        <c-progress-bar :percentages="milestone.progress['percent_days']"/>
+                        <c-progress-bar :percentages="milestone.progress['percentDays']"/>
                         <span class="ml-auto">
-                            {{ milestone.progress['days_left'] }} days left
+                            {{ milestone.progress['daysLeft'] }} days left
                         </span>
                     </div>
                     <div class="progress_line">
                         <i class="fas fa-check icon"></i>
-                        <c-progress-bar :percentages="milestone.progress['percent_done']"/>
+                        <c-progress-bar :percentages="milestone.progress['percentDone']"/>
                         <span class="ml-auto">
-                            {{ milestone.progress['percent_done'] }}% Done
+                            {{ milestone.progress['percentDone'] }}% Done
                         </span>
                     </div>
                     <div class="progress_line">
                         <i class="fas fa-dollar-sign icon"></i>
-                        <c-progress-bar :percentages="milestone.progress['percent_spent']"/>
+                        <c-progress-bar :percentages="milestone.progress['percentSpent']"/>
                         <span class="ml-auto">
-                            {{ milestone.progress['percent_spent'] }}% Spent
+                            {{ milestone.progress['percentSpent'] }}% Spent
                         </span>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 <template>
     <c-layout navigationKey="account">
-        <div class="row align-items-stretch justify-content-center margin-bottom-40">
+        <div class="row align-items-stretch justify-content-center margin-bottom-40" v-if="profiles">
             <div class="col-12">
                 <c-heading-bar name="My Profile" :showArrows="false" :showBackground="false"/>
             </div>
@@ -18,21 +18,21 @@
                     You don't have a default profile.
                 </p>
             </div>
-            <div class="col-12 col-md-6 col-lg-4" v-if="defaultProfile">
+            <div class="col-12 col-md-6 col-lg-4" v-if="defaultProfile" hidden>
                 <div class="verification-blk text-center">
                     <h3 class="text-white">Verify Your Profile</h3>
-                    <div class="status" v-if="defaultProfile.is_verified">
+                    <div class="status" v-if="defaultProfile.isVerified">
                         <i class="fas fa-check"></i>
                         Verified
                     </div>
-                    <div class="status" v-else-if="defaultProfile.is_verifying">
+                    <div class="status" v-else-if="defaultProfile.isVerifying">
                         <i class="fas fa-hourglass"></i>
                         Verifying
                     </div>
                     <c-button status="outline-success" class="mt-3" href="#/account/verification" v-else>
                         Click here to verify
                     </c-button>
-                    <div class="date" v-if="defaultProfile.is_verified">
+                    <div class="date" v-if="defaultProfile.isVerified">
                         Valid up to $7,500 USD
                     </div>
                 </div>
@@ -76,6 +76,7 @@
                 name="item"
                 :duration="100"
             >
+                <c-loading :enabled="!filteredProfiles.length" />
                 <div
                     class="profile-picker__profile"
                     :class="{ 'edit': profile.edit, 'default-type': profile.id == (defaultProfile && defaultProfile.id) }"
@@ -85,6 +86,7 @@
                     <c-user-card
                         :user="profile"
                         :previewMode="!profile.edit"
+                        :removing="profile.removing"
                         class="margin-bottom-30"
                         :class="{ 'default': profile.id == (defaultProfile && defaultProfile.id) }"
                         v-bind.sync="profileClone"
@@ -180,7 +182,7 @@
         methods: {
             setDefault(profile) {
                 this.$store.state.application.account.activeProfile = profile
-                this.$store.state.application.developerMode = !!profile.developer_id
+                //this.$store.state.application.developerMode = !!profile.developerId
                 // if (this.defaultProfile) this.defaultProfile.default = false
                 // profile.default = true
 
@@ -209,11 +211,14 @@
                 profile.edit = false
                 this.editedProfile = null
                 
-                this.$store.dispatch('profiles/update', {
-                    name: profile.name,
-                    avatar: profile.img,
-                    address: profile.wallet
-                })
+                this.$store.dispatch('profiles/update', [
+                    profile.id, 
+                    {
+                        name: profile.name,
+                        avatar: profile.img,
+                        address: profile.wallet
+                    }
+                ])
 
                 // Bridge.sendCommand('saveProfileRequest', profile).then((profile) => {
                 //     this.saveProfiles()
@@ -222,6 +227,11 @@
             deleteProfile(profile) {
                 if (this.removeProfile) {
                     this.$store.dispatch('profiles/remove', this.removeProfile.id)
+                    this.removeProfile.edit = false
+                    this.removeProfile.removing = true
+                    this.removeProfile = null
+
+                    //this.saveProfiles()
                     // Bridge.sendCommand('removeProfileRequest', this.removeProfile).then(() => {
                     //     const index = this.profiles.indexOf(this.removeProfile)
                     //     this.profiles.splice(index, 1)
@@ -252,38 +262,41 @@
             //     this.$store.dispatch('application/updateState')
             // }
         },
+        created() {
+            this.$store.dispatch('profiles/find', {
+                query: {
+                    accountId: this.$store.state.auth.user.id,
+                    $sort: {
+                        createdAt: -1
+                    },
+                    $limit: 25
+                }
+            })
+        },
         computed: {
             profiles() {
                 return this.$store.getters['profiles/list']
             },
             defaultProfile() {
-                return this.profiles.find(profile => this.$store.state.application.account.activeProfile ? profile.id == this.$store.state.application.account.activeProfile.id : null)
+                return this.$store.state.application.account.activeProfile
             },
             profileClone() {
                 return this.editedProfile ? { ...this.editedProfile } : {}
             },
             isEditing() {
-                return this.profiles.find(profile => profile.edit)
+                return this.profiles && this.profiles.find(profile => profile.edit)
             },
             filteredProfiles() {
-                return this.profiles
+                return this.profiles && this.profiles
                     .filter(profile => !profile.name || profile.name.toLowerCase().includes(this.filterPhrase.toLowerCase()))
                     .sort((a, b) => (a.name > b.name) ? (this.sortAsc ? 1 : -1) : 0)
             }
         },
         watch: {
             '$store.state.application.initialized'() {
-                this.$store.dispatch('profiles/find', {
-                    query: {
-                        $sort: {
-                            createdAt: -1
-                        },
-                        $limit: 25
-                    }
-                })
             },
             '$store.state.profiles.isCreatePending'(newVal, oldVal) {
-                if (newVal === false) {debugger
+                if (newVal === false) {
                     this.editProfile(this.profiles.find(p => p.id === this.$store.state.profiles.currentId))
                 }
             }

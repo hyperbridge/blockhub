@@ -12,11 +12,8 @@
 
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-
 export default {
   components: {
-    'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
   }
 }
 </script>

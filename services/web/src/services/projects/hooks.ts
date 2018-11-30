@@ -3,7 +3,7 @@ const populateProfile = require('../../hooks/populate-profile')
 
 const fillProject = function(project) {
     // project.images = {
-    //     "medium_tile": "https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"
+    //     "mediumTile": "https://cnet1.cbsistatic.com/img/zSoSnjjOVxk2Hl0HOsT-nrFaYsc=/970x0/2018/04/02/068c90d1-19d9-4703-a5be-9814b2c7f8bb/fortnite-stock-image-1.jpg"
     // }
 
     // project.funds = {
@@ -78,7 +78,7 @@ const create = function(options = {}) {
 }
 
 
-const validatePermission = function (options = {}) {
+const validatePermission = function(options = {}) {
     return async context => {
         const { app, data } = context
 
@@ -126,11 +126,11 @@ export const error = {
 }
 
 
-                        // : image = "project.images.medium_tile" 
+                        // : image = "project.images.mediumTile" 
                         // : description = "project.description" 
                         // : funds = "project.funds" 
                         // : parentName = "project.product && project.product.name" 
                         // : parentDeveloper = "project.product && project.product.developer" 
-                        // : parentImage = "project.product && project.product.images.medium_tile"
+                        // : parentImage = "project.product && project.product.images.mediumTile"
                         // : id = "project.id"
 

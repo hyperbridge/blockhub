@@ -1,9 +1,9 @@
 <template>
     <c-layout navigationKey="store">
-        <div class="row" v-if="!$store.state.application.signed_in">
+        <div class="row" v-if="!$store.state.application.signedIn">
             <p>Interested in developing with BlockHub? Please contact us at developers@hyperbridge.org</p>
         </div>
-        <div class="row" v-if="$store.state.application.signed_in">
+        <div class="row" v-if="$store.state.application.signedIn">
             <div class="col-12" v-if="!developerMode">
                 <c-block title="Business Manager" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true" hidden>
                     <p>We're still working on our Business Manager. If you want a sneak preview, <a href="#/business">it's over here</a>. In the meantime, you can contact us directly at <a href="mailto:business@hyperbridge.org"><strong>business@hyperbridge.org</strong></a></p>
@@ -16,7 +16,7 @@
                 <div v-if="!developerMode" style="text-align: center">
                     <c-user-card
                         class="col-3 margin-auto"
-                        :user="chosenProfile"
+                        :user="$store.state.application.account.activeProfile"
                         :previewMode="true"
                         :class="{ 'default': true }"
                     />
@@ -30,7 +30,7 @@
             </div>
             <div class="col-12" v-if="developerMode">
                 <c-block title="Congratulations" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
-                    Your profile is all setup. You are Developer #{{ chosenProfile.developer_id }}
+                    Your profile is all setup. You are Developer #{{ chosenProfile.developerId }}
 
                     <br /><br />
 
@@ -42,45 +42,40 @@
 </template>
 
 <script>
-    import * as Bridge from '@/framework/desktop-bridge'
-    import * as DB from '@/db'
-
     export default {
         components: {
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
         },
         data() {
-            let chosenProfile = this.$store.state.application.account.profiles.find(profile => profile.id == this.$store.state.application.account.activeProfile.id)
-
-            if (!chosenProfile && this.$store.state.application.account.profiles.length) {
-                chosenProfile = this.$store.state.application.account.profiles[0]
-            }
-
             return {
-                errors: [],
-                chosenProfile
+                errors: []
             }
         },
         computed: {
-            profiles() {
-                return this.$store.state.application.account.profiles
-            },
             developerMode() {
                 return this.$store.state.application.developerMode
             }
         },
         methods: {
             convertProfile() {
-                Bridge.sendCommand('createDeveloperRequest', this.chosenProfile).then((data) => {
-                    this.chosenProfile.developer_id = data
-                    this.$store.state.application.developerMode = true
+                const profileId = this.$store.state.application.account.activeProfile.id
 
-                    // TODO: just redirect here?
+                BlockHub.feathersClient.service(`/profiles/:id/convert`).update(
+                    profileId,
+                    {
+                        role: 'developer'
+                    }
+                ).then(function() {
+                    
                 })
             },
-            chooseProfile(profile) {
-                this.chosenProfile = profile
-            },
+        },
+        watch: {
+            '$store.state.application.account.activeProfile.role'(newVal) {
+                if (newVal === 'developer') {
+                    this.$store.state.application.developerMode = true
+                }
+            }
         }
     }
 </script>

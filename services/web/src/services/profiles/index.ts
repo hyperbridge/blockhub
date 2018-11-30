@@ -2,7 +2,7 @@ import Model from '../../models/profile'
 import createService = require('feathers-objection')
 import hooks = require('./hooks')
 
-export default function (app) {
+export default function(app) {
     const paginate = app.get('paginate')
 
     const options = {
@@ -12,12 +12,27 @@ export default function (app) {
             default: 10,
             max: 25,
             ...paginate
-        }
+        },
+        allowedEager: 'account'
     }
 
-    app.use('profiles', createService(options))
+    app.use('/profiles', createService(options))
 
-    const service = app.service('profiles')
+    app.use('/profiles/:id/convert', {
+        async update(id, data, params) {
+            const { role } = data
 
-    service.hooks(hooks)
+            const result = await app.service('/profiles').get(id)
+
+            result.name = role
+
+            console.log(444, result)
+            //result.save()
+
+            return result
+        }
+    })
+
+    app.service('/profiles').hooks(hooks)
+    app.service('/profiles/:id/convert').hooks(hooks)
 }

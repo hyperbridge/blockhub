@@ -109,7 +109,7 @@ export const promptPasswordRequest = async (data) => {
 
         local.store.commit('application/updateState', {
             locked: true,
-            signed_in: false
+            signedIn: false
         })
 
         local.store.commit('application/activateModal', 'unlock')
@@ -131,7 +131,7 @@ export const setAccountRequest = async (data) => {
 
             local.store.commit('application/updateState', {
                 locked: false,
-                signed_in: true
+                signedIn: true
             })
         } else {
             local.store.commit('application/activateModal', null)
@@ -140,7 +140,7 @@ export const setAccountRequest = async (data) => {
             
             local.store.commit('application/updateState', {
                 locked: true,
-                signed_in: false
+                signedIn: false
             })
         }
 
@@ -151,7 +151,7 @@ export const setAccountRequest = async (data) => {
 
         DB.application.config.data[0].account.activeProfile = data.account.profiles.find(i => i.id === data.account.activeProfile.id)
 
-        DB.application.config.data[0].developerMode = !!DB.application.config.data[0].account.activeProfile.developer_id
+        DB.application.config.data[0].developerMode = !!DB.application.config.data[0].account.activeProfile.developerId
 
         DB.save()
 
@@ -244,11 +244,11 @@ export const runCommand = async (cmd, meta = {}) => {
         //     if (local.store.state.application.mode === 'production') {
         //         //BlockHub.importSeedData()
 
-        //         // local.store.state.application.desktop_mode = true
-        //         // local.store.state.application.signed_in = true
+        //         // local.store.state.application.desktopMode = true
+        //         // local.store.state.application.signedIn = true
         //     }
         //     // store.state.application.locked = true
-        //     // store.state.application.signed_in = false
+        //     // store.state.application.signedIn = false
         // } 
         else if (cmd.key === 'updateReady') {
             console.log(cmd.data)
@@ -342,7 +342,7 @@ export const init = (store, router) => {
     console.log('[Bridge] Initializing')
 
     on('promptPasswordRequest', (data) => {
-        DB.application.config.data[0].account.secret_question_1 = data.secret_question_1
+        DB.application.config.data[0].account.secretQuestion1 = data.secretQuestion1
     })
 
     sendCommand('init', 1)

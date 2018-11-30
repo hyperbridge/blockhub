@@ -12,7 +12,7 @@
             <div class="milestones-header margin-bottom-20">
                 <div class="milestones-header__info">
                     <div class="h3 text-white font-weight-bold mb-0">
-                        {{ project.milestones.overall_progress }}% Project Completion
+                        {{ project.milestones.overallProgress }}% Project Completion
                     </div>
                     {{ doneMilestones }} of {{ project.milestones.items.length }} Milestones Completed
                 </div>
@@ -33,41 +33,41 @@
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             Total Spent
                         </div>
-                        {{ project.funding.spent_amount | convertCurrency }}
+                        {{ project.funding.spentAmount | convertCurrency }}
                     </c-icon-block>
                     <c-icon-block icon="hand-holding-usd">
                         <div class="h6 p-0 m-0 text-white font-weight-bold">
                             Project Budget
                         </div>
-                        {{ project.funding.funded_amount | convertCurrency  }}
+                        {{ project.funding.fundedAmount | convertCurrency  }}
                     </c-icon-block>
                 </div>
             </div>
             <div class="timeline-blk position-relative">
                 <div class="progress main_timeline" style="height: 15px;">
-                    <c-progress-bar :percentages="project.milestones.overall_progress"/>
+                    <c-progress-bar :percentages="project.milestones.overallProgress"/>
                 </div>
                 <div class="period-container" v-if="milestones">
                     <div v-for="(milestone, index) in milestones" :key="index" class="period">
-                        <div class="number">{{ milestone.step_number }}</div>
+                        <div class="number">{{ milestone.stepNumber }}</div>
                         <div class="info">
                             <div class="title">
-                                {{ milestone.short_description }}
+                                {{ milestone.shortDescription }}
                             </div>
                             <div class="progress_line">
                                 <i class="fas fa-clock icon"></i>
-                                <c-progress-bar :percentages="milestone.progress['percent_days']"/>
-                                {{ milestone.progress['days_left'] }} days left
+                                <c-progress-bar :percentages="milestone.progress['percentDays']"/>
+                                {{ milestone.progress['daysLeft'] }} days left
                             </div>
                             <div class="progress_line">
                                 <i class="fas fa-check icon"></i>
-                                <c-progress-bar :percentages="milestone.progress['percent_done']"/>
-                                {{ milestone.progress['percent_done'] }}% Done
+                                <c-progress-bar :percentages="milestone.progress['percentDone']"/>
+                                {{ milestone.progress['percentDone'] }}% Done
                             </div>
                             <div class="progress_line">
                                 <i class="fas fa-dollar-sign icon"></i>
-                                <c-progress-bar :percentages="milestone.progress['percent_spent']"/>
-                                {{ milestone.progress['percent_spent'] }}% Spent
+                                <c-progress-bar :percentages="milestone.progress['percentSpent']"/>
+                                {{ milestone.progress['percentSpent'] }}% Spent
                             </div>
                         </div>
                     </div>

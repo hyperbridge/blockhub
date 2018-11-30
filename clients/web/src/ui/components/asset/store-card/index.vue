@@ -1,8 +1,8 @@
 <template>
-    <div class="store-card" :class="'store-card--' + asset.system_tags[0]">
-        <div class="store-card__badges" v-if="asset.system_tags.length">
+    <div class="store-card" :class="'store-card--' + asset.systemTags[0]">
+        <div class="store-card__badges" v-if="asset.systemTags.length">
             <c-badge-card
-                v-for="(tag, index) in asset.system_tags"
+                v-for="(tag, index) in asset.systemTags"
                 class="store-card__single-badge"
                 :key="index"
                 :title="tag | space"

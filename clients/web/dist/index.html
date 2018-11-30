@@ -451,7 +451,7 @@ setTimeout(bootChecker, 15 * 1000)
 function setStatusMessage() {
   if (typeof ($) == 'undefined') return setTimeout(setStatusMessage, 100)
 
-  const user_submitted_connection_messages = [
+  const userSubmittedConnectionMessages = [
     {
       "id": 1,
       "message": "wubba lubba dub dubbbb",
@@ -542,7 +542,7 @@ function setStatusMessage() {
     }
   ]
 
-  const message = user_submitted_connection_messages[Math.floor(Math.random() * Math.floor(user_submitted_connection_messages.length))]
+  const message = userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(userSubmittedConnectionMessages.length))]
 
   $('.startup-loader__message').html(message.message)
   $('.startup-loader__user a').html(message.user.name)

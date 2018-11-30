@@ -21,7 +21,7 @@
                                         <label>Given Name</label>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="Given name" :value="account.first_name" readonly>
+                                        <input type="text" class="form-control" placeholder="Given name" :value="account.firstName" readonly>
                                         <span class="form-text">This field cannot be changed at this time.</span>
                                     </div>
                                 </div>
@@ -30,7 +30,7 @@
                                         <label>Family Name</label>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="Family name" :value="account.last_name" readonly>
+                                        <input type="text" class="form-control" placeholder="Family name" :value="account.lastName" readonly>
                                         <span class="form-text">This field cannot be changed at this time.</span>
                                     </div>
                                 </div>
@@ -151,15 +151,15 @@
                 <c-block title="Wishlists" noGutter bgGradient onlyContentBg>
                     <c-tabs :tabNames="['Products', 'Projects']" styled>
                         <c-tab :tab_id="1">
-                            <div v-if="profile.product_wishlist.length" class="wishlist-box">
+                            <div v-if="profile.productWishlist.length" class="wishlist-box">
                                 <div
                                     class="wishlist-box__item"
-                                    v-for="product in profile.product_wishlist"
+                                    v-for="product in profile.productWishlist"
                                     :key="product.id"
                                 >
                                     <c-game-includes-item
                                         :id="product.id"
-                                        :image="product.images.medium_tile"
+                                        :image="product.images.mediumTile"
                                         :name="product.name"
                                         :rating="product.rating.overall"
                                         :developer="product.developer"
@@ -181,12 +181,12 @@
                         </c-tab>
                         <c-tab :tab_id="2">
                             <div
-                                v-if="profile.project_wishlist.length"
+                                v-if="profile.projectWishlist.length"
                                 class="wishlist-box"
                             >
                                 <div
                                     class="wishlist-box__item"
-                                    v-for="project in profile.project_wishlist"
+                                    v-for="project in profile.projectWishlist"
                                     :key="project.id"
                                 >
                                     <c-project-card
@@ -221,8 +221,6 @@
 
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve),
             'c-custom-modal': (resolve) => require(['@/ui/components/modal/custom'], resolve),
             'c-tabs': (resolve) => require(['@/ui/components/tab/tabs-universal'], resolve),
@@ -234,7 +232,7 @@
         data() {
             return {
                 wallets: [],
-                expert_mode: false
+                expertMode: false
             }
         },
         methods: {
@@ -250,20 +248,20 @@
         },
         computed: {
             profileCount() {
-                return Object.keys(this.$store.state.application.profiles).length;
+                return Object.keys(this.$store.state.application.profiles).length
             },
             account() {
-                return this.$store.state.application.account;
+                return this.$store.state.application.account
             },
             profile() {
-                const { products } = this.$store.state.marketplace;
-                const { projects } = this.$store.state.funding;
-                const profile = this.$store.getters['application/profile'];
+                const { products } = this.$store.state.marketplace
+                const { projects } = this.$store.state.funding
+                const profile = this.$store.getters['application/profile']
                 return {
                     ...profile,
-                    product_wishlist: Object.keys(profile.product_wishlist).map(id => products[id]),
-                    project_wishlist: Object.keys(profile.project_wishlist).map(id => projects[id])
-                };
+                    productWishlist: Object.keys(profile.productWishlist).map(id => products[id]),
+                    projectWishlist: Object.keys(profile.projectWishlist).map(id => projects[id])
+                }
             }
         }
     }

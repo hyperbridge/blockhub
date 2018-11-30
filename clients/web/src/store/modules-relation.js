@@ -7,7 +7,7 @@ const relations = {
     [APPLICATION]: {
         account: {
             idts: [COMMUNITY, 'profiles'],
-            friends_list: [COMMUNITY, 'profiles']
+            friendsList: [COMMUNITY, 'profiles']
         }
     },
     [ASSETS]: {

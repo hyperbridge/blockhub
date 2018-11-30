@@ -1,6 +1,6 @@
 <template>
     <div class="asset-preview">
-        <p class="asset-preview__product">{{ asset.product_name }}</p>
+        <p class="asset-preview__product">{{ asset.productName }}</p>
         <c-img class="asset-preview__image" :src="asset.image"/>
         <h4 class="asset-preview__name">{{ asset.name }}</h4>
         <p class="asset-preview__history-title">Market price history:</p>

@@ -29,8 +29,6 @@
 
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
-            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-item': (resolve) => require(['@/ui/components/community/post-item'], resolve),
             'c-post-comment': (resolve) => require(['@/ui/components/community/comment'], resolve),
             'c-search': (resolve) => require(['@/ui/components/searcher'], resolve)

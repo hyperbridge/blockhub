@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <div class="cookie-policy" v-if="!settings.client.cookie_policy_accepted">
+        <div class="cookie-policy" v-if="!settings.client.cookiePolicyAccepted">
             <p class="p-0 m-0">
                 By using this website, you agree to our
                 <c-button status="plain" class="p-0 m-0" @click="showPopup">cookie policy</c-button>
@@ -45,9 +45,9 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(['UPDATE_CLIENT_SETTINGS']),
+        ...mapMutations(['updateClientSettings']),
         updateClientSettings() {
-            this.$store.commit('application/UPDATE_CLIENT_SETTINGS', 'cookie_policy_accepted');
+            this.$store.commit('application/updateClientSettings', 'cookiePolicyAccepted');
             this.show = false;
         },
         showPopup(){

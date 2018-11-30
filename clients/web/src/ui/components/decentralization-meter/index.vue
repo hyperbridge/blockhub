@@ -48,7 +48,7 @@ export default {
             options_icons: {
                 subtitles: 'closed-captioning',
                 interface: 'language',
-                full_audio: 'volume-off',
+                fullAudio: 'volume-off',
             },
             showDetails: false,
             list: [

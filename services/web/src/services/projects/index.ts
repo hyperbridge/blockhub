@@ -16,9 +16,9 @@ export default function(app) {
         }
     }
 
-    app.use('projects', createService(options))
+    app.use('/projects', createService(options))
 
-    const service = app.service('projects')
+    const service = app.service('/projects')
 
     service.hooks(hooks)
 }

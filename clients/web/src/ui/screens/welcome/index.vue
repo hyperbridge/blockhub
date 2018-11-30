@@ -7,16 +7,14 @@
 
 
 <script>
-import * as Bridge from '@/framework/desktop-bridge'
-
 export default {
     components: {
         'c-login-popup': (resolve) => require(['@/ui/components/login-popup/index.vue'], resolve),
     },
     watch: {
-        '$store.state.auth.user'(newVal) {
-            if (newVal) {
-                this.$router.replace({ name: 'Home' })
+        '$store.state.application.signedIn'(newVal) {
+            if (newVal === true) {
+                this.$router.push({ path: '/' })
             }
         }
     }

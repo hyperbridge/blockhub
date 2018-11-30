@@ -35,7 +35,7 @@ const getOS = () => {
 }
 
 const updateState = (savedData, updatedState = {}) => {
-    //let developerProfile = DB.application.config.data[0].account && DB.application.config.data[0].account.profiles.find(profile => profile.developer_id !== undefined)
+    //let developerProfile = DB.application.config.data[0].account && DB.application.config.data[0].account.profiles.find(profile => profile.developerId !== undefined)
 
     rawData = {
         ...rawData,
@@ -45,11 +45,11 @@ const updateState = (savedData, updatedState = {}) => {
             message: null
         },
         shortcuts: savedData.shortcuts != null ? savedData.shortcuts : [],
-        operating_system: savedData.operating_system != null ? savedData.operating_system : getOS(),
+        operatingSystem: savedData.operatingSystem != null ? savedData.operatingSystem : getOS(),
         initialized: BlockHub.initialized,
         account: DB.application.config.data[0].account || {},
-        darklaunch_flags: DB.application.config.data[0].darklaunch_flags || [],
-        developerMode: savedData.developerMode != null ? savedData.developerMode : DB.application.config.data[0].account && !!DB.application.config.data[0].account.activeProfile.developer_id,
+        darklaunchFlags: DB.application.config.data[0].darklaunchFlags || [],
+        developerMode: savedData.developerMode != null ? savedData.developerMode : DB.application.config.data[0].account && !!DB.application.config.data[0].account.activeProfile.developerId,
         environmentMode: savedData.environmentMode != null ? savedData.environmentMode : BlockHub.GetMode(),
         externalState: savedData.externalState != null ? savedData.externalState : {},
         ...updatedState
@@ -61,8 +61,8 @@ const updateState = (savedData, updatedState = {}) => {
         rawData.locked = updatedState.locked
     }
 
-    if (rawData.desktop_mode == null)
-        rawData.desktop_mode = window.isElectron
+    if (rawData.desktopMode == null)
+        rawData.desktopMode = window.isElectron
 
     const normalizedData = normalize(rawData, {
     })
@@ -74,12 +74,12 @@ export const getters = {
     privileges(state) {
         const result = []
 
-        if (state.desktop_mode) {
-            result.push('desktop_mode')
+        if (state.desktopMode) {
+            result.push('desktopMode')
         }
 
-        if (state.signed_in) {
-            result.push('signed_in')
+        if (state.signedIn) {
+            result.push('signedIn')
         }
 
         if (state.developerMode) {
@@ -95,13 +95,7 @@ export const getters = {
         }
 
         return result
-    },
-    account: ({ account }, getters, { community: { profiles }}) => ({
-        ...account,
-        active_profile: profiles[account.active_profile],
-        profiles: account.idts.map(id => profiles[id])
-    }),
-    profile: (state, { account }) => account.active_profile
+    }
 }
 
 export const actions = {
@@ -136,8 +130,8 @@ export const actions = {
             window.ga('send', 'event', 'Modal', 'Show Modal', 'Show Modal', payload, { 'NonInteraction': 1 })
         }
 
-        if (store.state.desktop_mode) {
-            if (store.state.signed_in) {
+        if (store.state.desktopMode) {
+            if (store.state.signedIn) {
                 store.commit('activateModal', payload)
             } else {
                 store.commit('activateModal', 'login')
@@ -149,7 +143,7 @@ export const actions = {
     setEditorMode(store, payload) {
         store.commit('setEditorMode', payload)
 
-        if (!store.state.account.settings.client.hide_editor_welcome_modal) {
+        if (!store.state.account.settings.client.hideEditorWelcomeModal) {
             store.commit('activateModal', 'editor-welcome')
         }
     },
@@ -160,12 +154,12 @@ export const actions = {
         //     store.state.account.address = res.account.address
 
         //     store.state.password_required = true
-        //     //store.state.signed_in = true
+        //     //store.state.signedIn = true
         // })
     },
     initEthereum(store, payload) {
         // Bridge.initProtocol({ protocolName: 'application' }).then((config) => {
-        //     store.state.ethereum[store.state.current_ethereum_network] = config
+        //     store.state.ethereum[store.state.currentEthereumNetwork] = config
         //     store.dispatch('updateState')
         // })
     },
@@ -240,7 +234,7 @@ export const actions = {
             Bridge
                 .deployContract({ protocolName, contractName, oldContractAddress })
                 .then((contract) => {
-                    state.ethereum[state.current_ethereum_network].packages[protocolName].contracts[contractName] = contract
+                    state.ethereum[state.currentEthereumNetwork].packages[protocolName].contracts[contractName] = contract
                     store.dispatch('updateState')
 
                     resolve(contract)
@@ -250,10 +244,10 @@ export const actions = {
     sendCommand(store, { key, data }) {
         Bridge.sendCommand(key, data).then(() => {})
     },
-    createTradeURL({ commit, state }) {
+    createTradeUrl({ commit, state }) {
         // async call => delete previous trade url
         // state.account.tradeURLId
-        commit('createTradeURL', getId());
+        commit('createTradeUrl', getId())
     }
 }
 
@@ -268,11 +262,11 @@ export const mutations = {
     },
     updateAccount({ account }, { prop, data, key }) {
         if (Array.isArray(account[prop])) {
-            account[prop][key] = data;
+            account[prop][key] = data
         } else if (typeof account[prop] === 'object') {
-            account[prop] = { ...account[prop], [id]: data };
+            account[prop] = { ...account[prop], [id]: data }
         } else {
-            account[prop] = data;
+            account[prop] = data
         }
     },
     addShortcut(state, shortcut) {
@@ -298,24 +292,24 @@ export const mutations = {
         DB.save()
     },
     showNotification(state, notification) {
-        state.active_notification = notification
-        state.active_modal = 'notification'
+        state.activeNotification = notification
+        state.activeModal = 'notification'
     },
-    updateFavorites2({ account }, { prop = 'product_wishlist', id }) {
-        const foundKey = account[prop].findIndex(savedId => savedId === id);
+    updateFavorites2({ account }, { prop = 'productWishlist', id }) {
+        const foundKey = account[prop].findIndex(savedId => savedId === id)
         foundKey
         ? account[prop].push(id)
         : account[prop].splice(foundKey, 0);
-        return !!foundKey;
+        return !!foundKey
     },
-    updateFavorites({ account }, { prop = 'product_wishlist', id }) {
+    updateFavorites({ account }, { prop = 'productWishlist', id }) {
         // Optional -> object
         if (account[prop][id]) {
-            const { [id]: deleted, ...rest } = account[prop];
+            const { [id]: deleted, ...rest } = account[prop]
             delete(rest[id])
-            account[prop] = rest;
+            account[prop] = rest
         } else {
-            account[prop] = { ...account[prop], [id]: true };
+            account[prop] = { ...account[prop], [id]: true }
         }
     },
     updateEnvironmentMode(state, payload) {
@@ -325,53 +319,53 @@ export const mutations = {
 
         })
     },
-    createTradeURL(state, id) {
+    createTradeUrl(state, id) {
         state.account.tradeURLId = id;
     },
     signIn(state, payload) {
-        state.signed_in = true
+        state.signedIn = true
 
         DB.application.config.update(state)
         DB.save()
     },
     signOut(state, payload) {
-        state.signed_in = false
+        state.signedIn = false
 
         DB.application.config.update(state)
         DB.save()
     },
     setEditorMode(state, payload) {
-        state.editor_mode = payload
+        state.editorMode = payload
     },
     setInternetConnection(state, payload) {
         state.connection.internet = payload.connected
         state.connection.status.message = payload.message
     },
     setSimulatorMode(state, payload) {
-        state.simulator_mode = payload
+        state.simulatorMode = payload
     },
     showProfileChooser(state, payload) {
-        state.profile_chooser = payload
+        state.profileChooser = payload
     },
     enableDarklaunch(state, payload) {
-        const darklaunch = state.account.darklaunch_flags.find(darklaunch => darklaunch.code === payload)
+        const darklaunch = state.account.darklaunchFlags.find(darklaunch => darklaunch.code === payload)
 
         if (darklaunch) {
             darklaunch.enabled = true
         } else {
-            state.account.darklaunch_flags.push({
+            state.account.darklaunchFlags.push({
                 code: payload,
                 enabled: true
             })
         }
     },
     disableDarklaunch(state, payload) {
-        const darklaunch = state.account.darklaunch_flags.find(darklaunch => darklaunch.code === payload)
+        const darklaunch = state.account.darklaunchFlags.find(darklaunch => darklaunch.code === payload)
 
         if (darklaunch) {
             darklaunch.enabled = false
         } else {
-            state.account.darklaunch_flags.push({
+            state.account.darklaunchFlags.push({
                 code: payload,
                 enabled: false
             })
@@ -410,17 +404,17 @@ export const mutations = {
 
     },
     activateModal(state, payload) {
-        state.active_modal = payload
+        state.activeModal = payload
     },
     convertCurator(state, payload) {
         Bridge.sendCommand('createCuratorRequest', payload.profile).then((data) => {
-            payload.profile.curator_id = data
-            state.curator_mode = true
+            payload.profile.curatorId = data
+            state.curatorMode = true
 
             // TODO: just redirect here?
         })
     },
-    UPDATE_CLIENT_SETTINGS (state, property, value) {
+    updateClientSettings (state, property, value) {
         value = value || !state.account.settings.client[property]
 
         Vue.set(state.account.settings.client, property, value)

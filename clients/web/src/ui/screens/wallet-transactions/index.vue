@@ -1,189 +1,187 @@
 <template>
     <c-layout navigationKey="account">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <ul class="nav nav-tabs margin-bottom-10">
-                            <li class="nav-item">
-                                <a class="nav-link" :href="`#/account/wallets`">Overview</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#3">Transactions</a>
-                            </li>
-                        </ul>
-                        <div class="filter-line margin-bottom-50">
-                            <div class="filter-line__search">
-                                <input type="text" class="form-control" placeholder="Term Search">
-                            </div>
-                            <div class="filter-line__filter">
-                                Filter by:
-                                <div class="dropdown">
-                                    <a class="btn dropdown-toggle" href="#" role="button" id="filtering_type"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Type
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                                <a href="#3" class="btn btn-sm btn-danger">clear <i class="fas fa-times"></i></a>
-                                <a href="#3" class="btn btn-sm btn-info">more filters</a>
-                            </div>
-                            <div class="filter-line__sorting">
-                                Sort by:
-                                <div class="dropdown">
-                                    <a class="btn dropdown-toggle" href="#" role="button" id="sorting_value"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Value
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                                <a href="#3" class="btn btn-link">
-                                    <i class="fas fa-sort-numeric-up"></i>
-                                </a>
-                                <a href="#3" class="btn btn-link">
-                                    <i class="fas fa-sort-amount-up"></i>
-                                </a>
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav nav-tabs margin-bottom-10">
+                    <li class="nav-item">
+                        <a class="nav-link" :href="`#/account/wallets`">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#3">Transactions</a>
+                    </li>
+                </ul>
+                <div class="filter-line margin-bottom-50">
+                    <div class="filter-line__search">
+                        <input type="text" class="form-control" placeholder="Term Search">
+                    </div>
+                    <div class="filter-line__filter">
+                        Filter by:
+                        <div class="dropdown">
+                            <a class="btn dropdown-toggle" href="#" role="button" id="filtering_type"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Type
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </div>
+                        <a href="#3" class="btn btn-sm btn-danger">clear <i class="fas fa-times"></i></a>
+                        <a href="#3" class="btn btn-sm btn-info">more filters</a>
+                    </div>
+                    <div class="filter-line__sorting">
+                        Sort by:
+                        <div class="dropdown">
+                            <a class="btn dropdown-toggle" href="#" role="button" id="sorting_value"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Value
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                        <a href="#3" class="btn btn-link">
+                            <i class="fas fa-sort-numeric-up"></i>
+                        </a>
+                        <a href="#3" class="btn btn-link">
+                            <i class="fas fa-sort-amount-up"></i>
+                        </a>
+                    </div>
+                </div>
 
-                        <div class="transaction-list">
-                            <div class="transaction-list__item">
-                                <div class="date">
-                                    17 nov
-                                </div>
-                                <div class="direction up">
-                                    <i class="fas fa-angle-double-up"></i>
-                                </div>
-                                <div class="company">
-                                    <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
-                                    Wallmart
-                                </div>
-                                <div class="purpose">
-                                    Made a purchase on Online Store
-                                </div>
-                                <div class="currency">
-                                    Bitcoin
-                                </div>
-                                <div class="amount">
-                                    $ 0.05
-                                </div>
-                            </div>
-                            <div class="transaction-list__item">
-                                <div class="date">
-                                    17 nov
-                                </div>
-                                <div class="direction down">
-                                    <i class="fas fa-angle-double-down"></i>
-                                </div>
-                                <div class="company">
-                                    <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
-                                    Wallmart
-                                </div>
-                                <div class="purpose">
-                                    Made a purchase on Online Store
-                                </div>
-                                <div class="currency">
-                                    Bitcoin
-                                </div>
-                                <div class="amount">
-                                    $ 0.05
-                                </div>
-                            </div>
-                            <div class="transaction-list__item">
-                                <div class="date">
-                                    17 nov
-                                </div>
-                                <div class="direction up">
-                                    <i class="fas fa-angle-double-up"></i>
-                                </div>
-                                <div class="company">
-                                    <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
-                                    Wallmart
-                                </div>
-                                <div class="purpose">
-                                    Made a purchase on Online Store
-                                </div>
-                                <div class="currency">
-                                    Bitcoin
-                                </div>
-                                <div class="amount">
-                                    $ 0.05
-                                </div>
-                            </div>
-                            <div class="transaction-list__item">
-                                <div class="date">
-                                    17 nov
-                                </div>
-                                <div class="direction up">
-                                    <i class="fas fa-angle-double-up"></i>
-                                </div>
-                                <div class="company">
-                                    <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
-                                    Wallmart
-                                </div>
-                                <div class="purpose">
-                                    Made a purchase on Online Store
-                                </div>
-                                <div class="currency">
-                                    Bitcoin
-                                </div>
-                                <div class="amount">
-                                    $ 0.05
-                                </div>
-                            </div>
-                            <div class="transaction-list__item">
-                                <div class="date">
-                                    17 nov
-                                </div>
-                                <div class="direction up">
-                                    <i class="fas fa-angle-double-up"></i>
-                                </div>
-                                <div class="company">
-                                    <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
-                                    Wallmart
-                                </div>
-                                <div class="purpose">
-                                    Made a purchase on Online Store
-                                </div>
-                                <div class="currency">
-                                    Bitcoin
-                                </div>
-                                <div class="amount">
-                                    $ 0.05
-                                </div>
-                            </div>
-                            <div class="transaction-list__item">
-                                <div class="date">
-                                    17 nov
-                                </div>
-                                <div class="direction up">
-                                    <i class="fas fa-angle-double-up"></i>
-                                </div>
-                                <div class="company">
-                                    <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
-                                    Wallmart
-                                </div>
-                                <div class="purpose">
-                                    Made a purchase on Online Store
-                                </div>
-                                <div class="currency">
-                                    Bitcoin
-                                </div>
-                                <div class="amount">
-                                    $ 0.05
-                                </div>
-                            </div>
+                <div class="transaction-list">
+                    <div class="transaction-list__item">
+                        <div class="date">
+                            17 nov
+                        </div>
+                        <div class="direction up">
+                            <i class="fas fa-angle-double-up"></i>
+                        </div>
+                        <div class="company">
+                            <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                            Wallmart
+                        </div>
+                        <div class="purpose">
+                            Made a purchase on Online Store
+                        </div>
+                        <div class="currency">
+                            Bitcoin
+                        </div>
+                        <div class="amount">
+                            $ 0.05
+                        </div>
+                    </div>
+                    <div class="transaction-list__item">
+                        <div class="date">
+                            17 nov
+                        </div>
+                        <div class="direction down">
+                            <i class="fas fa-angle-double-down"></i>
+                        </div>
+                        <div class="company">
+                            <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                            Wallmart
+                        </div>
+                        <div class="purpose">
+                            Made a purchase on Online Store
+                        </div>
+                        <div class="currency">
+                            Bitcoin
+                        </div>
+                        <div class="amount">
+                            $ 0.05
+                        </div>
+                    </div>
+                    <div class="transaction-list__item">
+                        <div class="date">
+                            17 nov
+                        </div>
+                        <div class="direction up">
+                            <i class="fas fa-angle-double-up"></i>
+                        </div>
+                        <div class="company">
+                            <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                            Wallmart
+                        </div>
+                        <div class="purpose">
+                            Made a purchase on Online Store
+                        </div>
+                        <div class="currency">
+                            Bitcoin
+                        </div>
+                        <div class="amount">
+                            $ 0.05
+                        </div>
+                    </div>
+                    <div class="transaction-list__item">
+                        <div class="date">
+                            17 nov
+                        </div>
+                        <div class="direction up">
+                            <i class="fas fa-angle-double-up"></i>
+                        </div>
+                        <div class="company">
+                            <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                            Wallmart
+                        </div>
+                        <div class="purpose">
+                            Made a purchase on Online Store
+                        </div>
+                        <div class="currency">
+                            Bitcoin
+                        </div>
+                        <div class="amount">
+                            $ 0.05
+                        </div>
+                    </div>
+                    <div class="transaction-list__item">
+                        <div class="date">
+                            17 nov
+                        </div>
+                        <div class="direction up">
+                            <i class="fas fa-angle-double-up"></i>
+                        </div>
+                        <div class="company">
+                            <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                            Wallmart
+                        </div>
+                        <div class="purpose">
+                            Made a purchase on Online Store
+                        </div>
+                        <div class="currency">
+                            Bitcoin
+                        </div>
+                        <div class="amount">
+                            $ 0.05
+                        </div>
+                    </div>
+                    <div class="transaction-list__item">
+                        <div class="date">
+                            17 nov
+                        </div>
+                        <div class="direction up">
+                            <i class="fas fa-angle-double-up"></i>
+                        </div>
+                        <div class="company">
+                            <c-img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Walmart_Spark.svg/963px-Walmart_Spark.svg.png" />
+                            Wallmart
+                        </div>
+                        <div class="purpose">
+                            Made a purchase on Online Store
+                        </div>
+                        <div class="currency">
+                            Bitcoin
+                        </div>
+                        <div class="amount">
+                            $ 0.05
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </c-layout>
 </template>
 
@@ -196,7 +194,6 @@
             }
         },
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
         },
         created() {
         }

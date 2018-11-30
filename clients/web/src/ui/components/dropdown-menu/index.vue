@@ -12,7 +12,7 @@
                     <a
                         href="#"
                         class="btn btn-sm"
-                        :class="item | btn_dynamic_class"
+                        :class="item | btnDynamicClass"
                     >{{ item }}</a>
                 </li>
             </ul>
@@ -30,7 +30,7 @@ export default {
         }
     },
     filters: {
-        btn_dynamic_class(menuItem) {
+        btnDynamicClass(menuItem) {
             let class_name = 'btn-';
             switch(menuItem) {
                 case 'Save':

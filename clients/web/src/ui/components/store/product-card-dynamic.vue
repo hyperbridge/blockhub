@@ -10,7 +10,7 @@
             </div>
             <a :href="`#/product/${product.id}`" class="card-img-top">
                 <transition name="fade">
-                    <c-img v-if="!display_preview" class="card-img-top" :src="product.images.medium_tile"/>
+                    <c-img v-if="!display_preview" class="card-img-top" :src="product.images.mediumTile"/>
                     <template v-else>
                         <video v-if="product.video && autoplay" class="card-img-top" width="100%" autoplay>
                             <source :src="product.video" type="video/mp4">
@@ -29,8 +29,8 @@
             </a>
         </div>
         <h4><a :href="`#/product/${product.id}`">{{ product.name }}</a></h4>
-        <p class="card-text" hidden>{{ product.short_description }} </p>
-        <c-tags :tags="product.developer_tags.slice(0,3)"/>
+        <p class="card-text" hidden>{{ product.shortDescription }} </p>
+        <c-tags :tags="product.developerTags.slice(0,3)"/>
     </div>
 </template>
 

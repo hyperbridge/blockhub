@@ -1,16 +1,17 @@
 <template>
     <c-layout navigationKey="store">
-            <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
                 <h2>Streams</h2>
                 <c-infinite-content :list="list" />
             </div>
+        </div>
     </c-layout>
 </template>
 
 <script>
 export default {
     components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
         'c-infinite-content': (resolve) => require(['@/ui/components/infinite-content'], resolve),
     },
     computed: {

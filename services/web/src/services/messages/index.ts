@@ -16,9 +16,9 @@ export default function(app) {
         }
     }
 
-    app.use('messages', createService(options))
+    app.use('/messages', createService(options))
 
-    const service = app.service('messages')
+    const service = app.service('/messages')
 
     service.hooks(hooks)
 }

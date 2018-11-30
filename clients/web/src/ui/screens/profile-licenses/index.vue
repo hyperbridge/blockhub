@@ -1,59 +1,56 @@
 <template>
     <c-layout navigationKey="product">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="page_ttl">
-                            My Licenses
-                        </h2>
-                    </div>
-                    <div class="col-12">
-                        <div class="licenses-list">
-                            <c-heading-bar name="Owned Licenses" :showArrows="false" :showBackground="false">
-                            </c-heading-bar>
-                            <div class="licenses-list__container margin-top-30">
-                                <div
-                                    v-for="index in 6"
-                                    :key="index"
-                                    class="licenses-list__item"
-                                >
-                                    <div class="icon">
-                                        <c-img :src="license.game.img" />
-                                    </div>
-                                    <div class="name">
-                                        <strong>{{ license.game.name }}</strong>
-                                        <span>{{ license.game.developer }}</span>
-                                    </div>
-                                    <div class="expires_date">
-                                        <strong>Expires date on</strong>
-                                        <span>{{ license.expiration_date }}</span>
-                                    </div>
-                                    <div class="sell_status">
-                                        <strong>Sell</strong>
-                                        <span>{{ license.sell }}</span>
-                                    </div>
-                                    <div class="trade_status">
-                                        <strong>Trade</strong>
-                                        <span>{{ license.trade }}</span>
-                                    </div>
-                                    <div class="price text-right">
-                                        <strong>Purchace price</strong>
-                                        <span>${{ license.price }}</span>
-                                    </div>
-                                </div>
+        <div class="row">
+            <div class="col-12">
+                <h2 class="page_ttl">
+                    My Licenses
+                </h2>
+            </div>
+            <div class="col-12">
+                <div class="licenses-list">
+                    <c-heading-bar name="Owned Licenses" :showArrows="false" :showBackground="false">
+                    </c-heading-bar>
+                    <div class="licenses-list__container margin-top-30">
+                        <div
+                            v-for="index in 6"
+                            :key="index"
+                            class="licenses-list__item"
+                        >
+                            <div class="icon">
+                                <c-img :src="license.game.img" />
                             </div>
-                            <c-content-navigation/>
+                            <div class="name">
+                                <strong>{{ license.game.name }}</strong>
+                                <span>{{ license.game.developer }}</span>
+                            </div>
+                            <div class="expires_date">
+                                <strong>Expires date on</strong>
+                                <span>{{ license.expiration_date }}</span>
+                            </div>
+                            <div class="sell_status">
+                                <strong>Sell</strong>
+                                <span>{{ license.sell }}</span>
+                            </div>
+                            <div class="trade_status">
+                                <strong>Trade</strong>
+                                <span>{{ license.trade }}</span>
+                            </div>
+                            <div class="price text-right">
+                                <strong>Purchace price</strong>
+                                <span>${{ license.price }}</span>
+                            </div>
                         </div>
                     </div>
+                    <c-content-navigation/>
                 </div>
             </div>
+        </div>
     </c-layout>
 </template>
 
 <script>
     export default {
         components: {
-            'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve),
             'c-content-navigation': (resolve) => require(['@/ui/components/content-navigation'], resolve),
             'c-heading-bar': (resolve) => require(['@/ui/components/heading-bar'], resolve)
         },

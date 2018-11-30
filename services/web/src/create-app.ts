@@ -22,7 +22,6 @@ import * as appHooks from './hooks/app'
 import authentication = require('@feathersjs/authentication')
 import local = require('@feathersjs/authentication-local')
 import jwt = require('@feathersjs/authentication-jwt')
-import createService = require('feathers-objection')
 import socketio = require('@feathersjs/socketio')
 import session = require('express-session')
 const KnexSessionStore = require('connect-session-knex')(session)
@@ -48,9 +47,7 @@ export default async () => {
 
     const app = express(feathers())
 
-    app.use(helmet())
-
-    app.use(morgan('tiny'))
+    //app.use(morgan('tiny'))
 
     app.configure(socketio())
     app.configure(rest())
@@ -95,6 +92,28 @@ export default async () => {
 
     app.set('knex', knex)
 
+
+    app.use(function(req, res, next) {
+        console.log(req)
+
+        next()
+    })
+
+    app.use(morgan(function(tokens, req, res) {
+        let { url, method, params, body, _parsedUrl, headers, query } = req
+
+        console.log(111111, url, method, params)
+        // do something with the data, save it to db, etc..
+        return [
+            tokens.method(req, res),
+            tokens.url(req, res),
+            tokens.status(req, res),
+            tokens.res(req, res, 'content-length'), '-',
+            tokens['response-time'](req, res), 'ms'
+        ]
+    }))
+
+
     // Setup channels
     app.configure(channels)
 
@@ -108,7 +127,7 @@ export default async () => {
     //     after: local.hooks.protect('password')
     // })
 
-    app.service('authentication').hooks({
+    app.service('/authentication').hooks({
         before: {
             create: [
                 // You can chain multiple strategies
@@ -122,7 +141,7 @@ export default async () => {
 
     // do any other app stuff, such as wire in passport, use cors etc
     // then attach the routes
-    connect(app)
+    //connect(app)
 
     // add any error handlers
     app.use(errorHandler({ logger: loggerLib }))

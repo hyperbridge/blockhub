@@ -18178,11 +18178,11 @@ exports[`Storyshots User Card default 1`] = `
       </div>
        
       <div
-        class="wallet_number"
+        class="walletNumber"
       >
         <input
           class="form-control"
-          name="wallet_number"
+          name="walletNumber"
           placeholder="Wallet number"
           type="text"
         />
@@ -18290,11 +18290,11 @@ exports[`Storyshots User Card default 1`] = `
       </div>
        
       <div
-        class="wallet_number"
+        class="walletNumber"
       >
         <input
           class="form-control"
-          name="wallet_number"
+          name="walletNumber"
           placeholder="Wallet number"
           readonly="readonly"
           type="text"

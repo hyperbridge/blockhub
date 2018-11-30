@@ -11,7 +11,7 @@
         >
             Add to wishlist
         </button>
-        <c-installer-progress :progress="14"/>
+        <c-installer-progress :progress="14" />
     </c-layout>
 </template>
 

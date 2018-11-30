@@ -9,7 +9,6 @@
     export default {
         props: ['project', 'editing'],
         components: {
-            'c-block': (resolve) => require(['@/ui/components/block'], resolve),
             'c-timeline': (resolve) => require(['@/ui/components/timeline/list'], resolve)
         },
     }

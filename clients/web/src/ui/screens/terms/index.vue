@@ -10,9 +10,9 @@
 
 <script>
 export default {
-  components: {
-    'c-terms-block': (resolve) => require(['@/ui/components/terms-block'], resolve)
-  },
+    components: {
+        'c-terms-block': (resolve) => require(['@/ui/components/terms-block'], resolve)
+    },
 }
 </script>
 

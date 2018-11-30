@@ -4,9 +4,9 @@ import schema from './schema'
 import * as DB from '@/db'
 import * as Bridge from '@/framework/desktop-bridge'
 
-let rawData = {};
+let rawData = {}
 
-export let state = {};
+export let state = {}
 
 const updateState = (savedData, updatedState = {}) => {
     rawData = {
@@ -17,17 +17,17 @@ const updateState = (savedData, updatedState = {}) => {
         posts: DB.marketplace ? DB.marketplace.posts.data : [],
         collections: DB.marketplace.config.data[0].collections,
         realms: DB.marketplace.config.data[0].realms,
-        curator_reviews: DB.marketplace.config.data[0].curator_reviews,
+        curatorReviews: DB.marketplace.config.data[0].curatorReviews,
         posts: DB.marketplace.config.data[0].posts,
-        game_series: DB.marketplace.config.data[0].game_series,
-        frontpage_product: DB.marketplace ? DB.marketplace.products.findOne({ 'system_tags': { '$contains': ['frontpage'] } }) : {},
-        new_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['new'] } }) : [],
-        featured_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['featured'] } }) : [],
-        upcoming_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['upcoming'] } }) : [],
-        trending_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['trending'] } }) : [],
-        top_selling_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['top_seller'] } }) : [],
-        special_products: DB.marketplace ? DB.marketplace.products.find({ 'system_tags': { '$contains': ['specials'] } }) : [],
-        product_news: DB.marketplace ? DB.marketplace.posts.find({ 'target': { '$eq': ['product'] }, 'system_tags': { '$contains': ['news'] } }) : [],
+        gameSeries: DB.marketplace.config.data[0].gameSeries,
+        frontpageProduct: DB.marketplace ? DB.marketplace.products.findOne({ 'systemTags': { '$contains': ['frontpage'] } }) : {},
+        newProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['new'] } }) : [],
+        featured_products: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['featured'] } }) : [],
+        upcomingProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['upcoming'] } }) : [],
+        trending_products: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['trending'] } }) : [],
+        topSellingProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['top_seller'] } }) : [],
+        specialProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['specials'] } }) : [],
+        productNews: DB.marketplace ? DB.marketplace.posts.find({ 'target': { '$eq': ['product'] }, 'systemTags': { '$contains': ['news'] } }) : [],
         top_free: DB.marketplace ? DB.marketplace.products.find({ 'price': { '$eq': 0 } }) : [],
         top_5: DB.marketplace ? DB.marketplace.products.find({ 'rating.overall': { '$gte': 5 } }) : [],
         ...updatedState,
@@ -36,19 +36,19 @@ const updateState = (savedData, updatedState = {}) => {
     const normalizedData = normalize(rawData, {
         assets: [schema.asset],
         products: [schema.product],
-        frontpage_product: schema.product,
-        new_products: [schema.product],
-        sale_products: [schema.product],
-        upcoming_products: [schema.product],
+        frontpageProduct: schema.product,
+        newProducts: [schema.product],
+        saleProducts: [schema.product],
+        upcomingProducts: [schema.product],
         trending_products: [schema.product],
-        top_selling_products: [schema.product],
-        special_products: [schema.product]
+        topSellingProducts: [schema.product],
+        specialProducts: [schema.product]
     })
 
     state = { ...rawData, ...normalizedData.entities } // ...normalizedData.result,
 }
 
-const sortDir = (dir, asc) => asc ? dir : dir * -1;
+const sortDir = (dir, asc) => asc ? dir : dir * -1
 
 export const getters = {
     assetsArray: state => Array.isArray(state.assets) ? state.assets : Object.values(state.assets),
@@ -57,7 +57,7 @@ export const getters = {
     productsTags: (state, getters) => getters.productsArray
         .reduce((tags, product) => [
             ...tags,
-            ...product.developer_tags
+            ...product.developerTags
                 .filter(tag =>
                     !tags.includes(tag)
                 )
@@ -66,7 +66,7 @@ export const getters = {
     systemTags: (state, getters) => getters.productsArray
         .reduce((tags, product) => [
             ...tags,
-            ...product.system_tags
+            ...product.systemTags
                 .filter(tag =>
                     !tags.includes(tag)
                 )
@@ -75,7 +75,7 @@ export const getters = {
     productsLanguages: (state, getters) => getters.productsArray
         .reduce((languages, product) => [
             ...languages,
-            ...product.language_support
+            ...product.languageSupport
                 .filter(lang =>
                     !languages.includes(lang.name)
                 )
@@ -91,7 +91,7 @@ export const getters = {
             : true
         )
         .filter(product => tags && tags.length
-            ? product.developer_tags.some(genre => this.selectedGenres.includes(genre))
+            ? product.developerTags.some(genre => this.selectedGenres.includes(genre))
             : true
         )
         .sort((a, b) => sortBy
@@ -102,11 +102,11 @@ export const getters = {
         )
     ,
     assetsProducts: (state, getters) => getters.assetsArray.reduce((products, asset) =>
-        products.includes(asset.product_name)
+        products.includes(asset.productName)
             ? products
-            : [ ...products, asset.product_name ]
+            : [ ...products, asset.productName ]
         , []).sort()
-};
+}
 
 export const actions = {
     init(store, payload) {
@@ -118,7 +118,7 @@ export const actions = {
     },
     initEthereum(store, payload) {
         // Bridge.initProtocol({ protocolName: 'marketplace' }).then((config) => {
-        //     store.state.ethereum[store.state.current_ethereum_network] = config
+        //     store.state.ethereum[store.state.currentEthereumNetwork] = config
         //     store.dispatch('updateState')
         // })
     },
@@ -183,7 +183,7 @@ export const mutations = {
         DB.save()
     },
     update(state, { prop = 'products', id, data }) {
-        state[prop][id] = { ...state[prop][id], ...data };
+        state[prop][id] = { ...state[prop][id], ...data }
     }
 }
 

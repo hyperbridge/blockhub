@@ -154,9 +154,9 @@
                     const { inventory: originalInv } = this.transaction[target].user;
                     const reduced = originalInv
                         .reduce((inventory, asset) => {
-                            const { product_name } = asset;
-                            if (inventory[product_name]) inventory[product_name].push(asset);
-                            else inventory[product_name] = [asset];
+                            const { productName } = asset;
+                            if (inventory[productName]) inventory[productName].push(asset);
+                            else inventory[productName] = [asset];
                             return inventory;
                         }, {});
 

@@ -21,16 +21,16 @@
                             {{ asset.name }}
                         </router-link>
                     </p>
-                    <span>{{ asset.product_name }}</span>
+                    <span>{{ asset.productName }}</span>
                 </div>
             </div>
             <div class="flex-center-between">
-                <span v-if="asset.user_name" class="asset__user">
+                <span v-if="asset.userName" class="asset__user">
                     <c-icon
                         name="user"
                         class="margin-right-5"
                     />
-                    {{ asset.user_name }}
+                    {{ asset.userName }}
                 </span>
                 <span class="asset__price">{{ asset.price.current | convertCurrency }}</span>
                 <c-button status="success" icon="cart-plus">

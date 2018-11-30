@@ -14,10 +14,10 @@
                         {{ topic.label }}
                     </h3>
 
-                    <c-block class="margin-bottom-30 padding-top-5 padding-bottom-5" v-if="topic.sub_topics">
+                    <c-block class="margin-bottom-30 padding-top-5 padding-bottom-5" v-if="topic.subTopics">
                         <div class="topics-list">
                             <c-topic-item
-                                v-for="(topic, index) in topic.sub_topics"
+                                v-for="(topic, index) in topic.subTopics"
                                 :key="index"
                                 :link="`#/help/${topic.id}`"
                                 :icon="topic.icon"
