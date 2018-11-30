@@ -45,7 +45,7 @@ const updateState = (savedData, updatedState = {}) => {
         specialProducts: [schema.product]
     })
 
-    state = { ...rawData, ...normalizedData.entities } // ...normalizedData.result,
+    state = { ...rawData, ...normalizedData.entities }
 }
 
 const sortDir = (dir, asc) => asc ? dir : dir * -1

@@ -129,13 +129,13 @@
                                    :activeElement="activeElement['milestones']"
                                    class="margin-bottom-30" />
 
-            <c-block title="Contribute" class="margin-bottom-30">
+            <c-block title="Contribute" class="margin-bottom-30" :noGutter="true" :bgGradient="true" :onlyContentBg="true">
                 <c-contribute-form @click="showContributeModal" />
             </c-block>
 
             <c-contribute-pledge @click="showContributeModal" v-for="(pledge, index) in project.pledges" :key="index" :pledge="pledge" />
 
-            <c-decentralization-meter />
+            <c-decentralization-meter v-decentralized-mode />
         </div>
     </div>
 </template>

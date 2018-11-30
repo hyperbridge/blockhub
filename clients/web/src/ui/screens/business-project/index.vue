@@ -244,6 +244,7 @@
 
             return {
                 loadingState: true,
+                notice: "",
                 advanced: false,
                 project: project
             }

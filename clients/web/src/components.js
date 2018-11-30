@@ -14,6 +14,8 @@ import LoadingIndicator from '@/ui/components/loading-indicator'
 import Breadcrumb from '@/ui/components/breadcrumb'
 import Img from '@/ui/components/img'
 import Darklaunch from '@/ui/components/darklaunch'
+import JsonView from '@/ui/components/json-editor/json-view'
+import ArrayView from '@/ui/components/json-editor/array-view'
 
 Vue.component('c-layout', Layout)
 Vue.component('c-heading-bar', HeadingBar)
@@ -21,6 +23,8 @@ Vue.component('c-button', Button)
 Vue.component('c-block', Block)
 Vue.component('c-switch', Switch)
 Vue.component('c-checkbox', Checkbox)
+Vue.component('c-json-view', JsonView)
+Vue.component('c-array-view', ArrayView)
 Vue.component('c-infinite-content', InfiniteContent)
 Vue.component('c-icon', Icon)
 Vue.component('c-input', Input)

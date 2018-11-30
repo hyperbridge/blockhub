@@ -73,83 +73,79 @@
         <div class="block add-key" v-popover="{ name: popoverKey }" @click="viewType = 'array-full'">
             <i class="fa fa-plus"></i>
         </div>
-        <popover :name="popoverKey" :pointer="false" :class="viewType">
+        <popover :name="popoverKey" :pointer="false" :class="viewType" style="position: fixed;left: 0px;top: 0px;">
             <c-item-add-form @confirm="newItem" @popoverView="popoverClass" :needName="false"></c-item-add-form>
         </popover>
     </div>
 </template>
 
 <script>
-  import ItemAddForm from './item-add-form.vue'
-  import JsonView from './json-view.vue'
+import ItemAddForm from './item-add-form.vue'
 
-  export default ArrayView = {
-    name: 'ArrayView',
+export default {
     props: ['parsedData'],
 
     data: function () {
-      return {
-        flowData: this.parsedData,
-        toAddItem: false,
-        hideMyItem: {},
-        popoverKey: null,
-        viewType: 'array-full'
-      }
+        return {
+            flowData: this.parsedData,
+            toAddItem: false,
+            hideMyItem: {},
+            popoverKey: null,
+            viewType: 'array-full'
+        }
     },
 
     components: {
-      'c-item-add-form': ItemAddForm,
-      'c-json-view': JsonView,
-      'c-array-view': ArrayView
+        'c-item-add-form': ItemAddForm
     },
 
     beforeMount: function() {
-      this.popoverKey = this.generateKey();
+        this.popoverKey = this.generateKey();
     },
 
     methods: {
-        rmIndex: function (arr, index) {
-            arr.splice(index, 1);
-            return arr
+            rmIndex: function (arr, index) {
+                    arr.splice(index, 1);
+                    return arr
+            },
+        delItem: function (parentDom, item, index) {
+            this.flowData = this.rmIndex(this.flowData, index);
+            if (this.hideMyItem[index]) this.hideMyItem[index] = false;
+            this.$emit('input', this.flowData)
         },
-      delItem: function (parentDom, item, index) {
-        this.flowData = this.rmIndex(this.flowData, index);
-        if (this.hideMyItem[index]) this.hideMyItem[index] = false;
-        this.$emit('input', this.flowData)
-      },
 
-      closeBlock: function (index, e) {
-        this.$set(this.hideMyItem, index, !this.hideMyItem[index])
-      },
+        closeBlock: function (index, e) {
+            this.$set(this.hideMyItem, index, !this.hideMyItem[index])
+        },
 
-      newItem: function (obj) {
-        this.toAddItem = false;
+        newItem: function (obj) {
+            this.toAddItem = false;
 
-        let oj = {
-          'name': obj.key,
-          'type': obj.type
-        };
-        if (obj.type === 'array' || obj.type === 'object') {
-          oj.childParams = obj.val;
-          oj.remark = null
-        } else {
-          oj.childParams = null;
-          oj.remark = obj.val
-        }
+            let oj = {
+                'name': obj.key,
+                'type': obj.type
+            };
+            if (obj.type === 'array' || obj.type === 'object') {
+                oj.childParams = obj.val;
+                oj.remark = null
+            } else {
+                oj.childParams = null;
+                oj.remark = obj.val
+            }
 
-        this.flowData.push(oj);
-        this.$emit('input', this.flowData);
-      },
+            this.flowData.push(oj);
+            this.$emit('input', this.flowData);
+        },
 
-      generateKey: function () {
-        return '_' + Math.random().toString(36).substr(2, 9);
-      },
+        generateKey: function () {
+            return '_' + Math.random().toString(36).substr(2, 9);
+        },
 
-      popoverClass: function (className) {
-        this.viewType = 'array-' + className;
-      },
+        popoverClass: function (className) {
+            this.viewType = 'array-' + className;
+        },
     }
-  }
+}
 
 </script>
 
