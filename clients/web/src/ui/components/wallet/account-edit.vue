@@ -14,11 +14,11 @@
             </span>
         </div>
 
-        <c-button status="outline-info" class="mb-3 w-100 justify-content-center" size="lg">
+        <c-button status="opacity-info" class="mb-3 w-100 justify-content-center" size="lg">
             View account on EtherScan
         </c-button>
 
-        <c-button status="outline-info" size="lg" class="w-100 justify-content-center">
+        <c-button status="opacity-info" size="lg" class="w-100 justify-content-center">
             Export private key
         </c-button>
     </div>
