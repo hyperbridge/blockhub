@@ -1,5 +1,5 @@
 <template>
-    <div>{{ type }}
+    <div>
         <slot v-if="satisfied" />
     </div>
 </template>

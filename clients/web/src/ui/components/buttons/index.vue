@@ -73,11 +73,11 @@
 
 <style lang="scss" scoped>
     @mixin gradient( $first, $second ) {
-        background: $first; /* Old browsers */
-        background: -moz-linear-gradient(top, $first 0%, $second 100%); /* FF3.6-15 */
-        background: -webkit-linear-gradient(top, $first 0%, $second 100%); /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(to bottom, $first 0%, $second 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$first', endColorstr='$second', GradientType=0); /* IE6-9 */
+        background-image: $first !important; /* Old browsers */
+        background-image: -moz-linear-gradient(to left top, $first 0%, $second 100%) !important; /* FF3.6-15 */
+        background-image: -webkit-linear-gradient(to left top, $first 0%, $second 100%) !important; /* Chrome10-25,Safari5.1-6 */
+        background-image: linear-gradient(to left top, $first 0%, $second 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$first', endColorstr='$second', GradientType=0); */ /* IE6-9 */
     }
 
     .c-btn {
@@ -85,12 +85,13 @@
         align-items: center;
         padding: 0px 8px;
         line-height: 24px;
-        font-weight: bold;
         border-style: none;
         border-radius: 5px;
         box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
         text-decoration: none;
         cursor: pointer;
+        font-weight: normal;
+        /*text-shadow: 0 0 2px rgba(0, 0, 0, 0.1);*/
         transition: all 200ms ease-in-out;
         span{
             white-space: nowrap;
@@ -208,7 +209,7 @@
             &.#{$status} {
                 background: transparent;
                 color: nth($colorSet, 1);
-                border: 2px solid nth($colorSet, 1);
+                border: 1px solid nth($colorSet, 1);
                 &:not([disabled]):hover {
                     background: nth($colorSet, 1);
                     color: nth($colorSet, 2);
@@ -216,19 +217,23 @@
             }
 
             $gradientColor: (
-                gradient-info: (#42a1ec, #0070c9, #2189db, #fff),
-                gradient-success: (#5EA72B, #4c8027, #579b28, #fff),
-                gradient-danger: (#e3c868, #b8a02a, #d3ba61, #fff),
-                gradient-warning: (rgba(174,52,63,1), rgba(141,42,51,1), rgb(186, 56, 67), #fff),
+                gradient-info: (#346196, rgba(161,202,249,0), #96bce8, #2189db, #fff),
+                gradient-success: (#447f53, rgba(161, 249, 192, 0), #93e5a8, #579b28, #fff),
+                gradient-danger: (#79610d, rgba(161,202,249,0), #f8f9a1, #d3ba61, #fff),
+                gradient-warning: (rgba(141,42,51,1), rgba(161,202,249,0), #f9a1a1, rgb(186, 56, 67), #fff),
             );
             @each $status, $colorSet in $gradientColor {
                 &.#{$status} {
-                    @include gradient(nth($colorSet, 1), nth($colorSet, 2));
-                    border: 2px solid nth($colorSet, 3);
-                    color: nth($colorSet, 4);
+                    background: nth($colorSet, 1) !important;
+                    @include gradient(nth($colorSet, 2), nth($colorSet, 3));
+                    /*border: 2px solid nth($colorSet, 3);*/
+                    border: 0 none;
+                    color: nth($colorSet, 5);
                     &:not([disabled]):hover {
-                        background: nth($colorSet, 3);
-                        color: nth($colorSet, 4);
+                        /*background: nth($colorSet, 4);
+                        color: nth($colorSet, 5);*/
+                        background: #333 !important;
+                        @include gradient(nth($colorSet, 2), nth($colorSet, 3));
                     }
                 }
 
