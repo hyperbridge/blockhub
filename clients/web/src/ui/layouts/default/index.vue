@@ -1095,6 +1095,9 @@
                 padding: 20px;
             }
         }
+        .page::before {
+            display: none;
+        }
 
     }
     @media (max-width: 1400px) {
