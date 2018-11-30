@@ -11,4 +11,13 @@
 </script>
 
 <style lang="scss" scoped>
+    .loading-process {
+        position: relative;
+        width: 100%;
+    }
+
+    .loading {
+        background: transparent !important;
+        zoom: 2;
+    }
 </style>

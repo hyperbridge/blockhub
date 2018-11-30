@@ -12,9 +12,9 @@
                     <p>Maybe you just have an awesome idea, or want to inspire your favourite dev studio to continue a series (*cough* half-life).</p>
                 </div>
                 <br />
-                <p v-if="$store.state.application.desktopMode && $store.state.application.developerMode"><c-button class="c-btn-lg outline-white" href="#/business/project/new">Get Started</c-button></p>
-                <p v-if="$store.state.application.desktopMode && !$store.state.application.developerMode"><c-button class="c-btn-lg outline-white" href="#/developer/apply">Get Started</c-button></p>
-                <p v-if="!$store.state.application.desktopMode"><c-button class="c-btn-lg outline-white" @click="$store.commit('application/activateModal', 'welcome')">Get Started</c-button></p>
+                <p v-if="$store.state.application.developerMode"><c-button class="c-btn-lg outline-white" href="#/business/project/new">Get Started</c-button></p>
+                <p v-if="!$store.state.application.developerMode"><c-button class="c-btn-lg outline-white" href="#/developer/apply">Get Started</c-button></p>
+                <!-- <p v-if="!$store.state.application.desktopMode"><c-button class="c-btn-lg outline-white" @click="$store.commit('application/activateModal', 'welcome')">Get Started</c-button></p> -->
             </div>
         </div>
 
@@ -27,6 +27,7 @@
                 :name="Projects"
             />
             <div class="row">
+                <c-loading :enabled="!projects.length" />
                 <c-project-card
                     class="p-2 col-3"
                     :image="project.images.mediumTile" 
@@ -50,17 +51,15 @@ export default {
     components: {
         'c-project-card': (resolve) => require(['@/ui/components/project/card'], resolve),
     },
-    watch: {
-        '$store.state.application.initialized'(newVal, oldVal) {
-            this.$store.dispatch('projects/find', {
-                query: {
-                    $sort: {
-                        createdAt: -1
-                    },
-                    $limit: 25
-                }
-            })
-        }
+    created() {
+        this.$store.dispatch('projects/find', {
+            query: {
+                $sort: {
+                    createdAt: -1
+                },
+                $limit: 25
+            }
+        })
     },
     computed: {
         projects() {

@@ -90,7 +90,7 @@
         box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
         text-decoration: none;
         cursor: pointer;
-        font-weight: normal;
+        font-weight: bold;
         /*text-shadow: 0 0 2px rgba(0, 0, 0, 0.1);*/
         transition: all 200ms ease-in-out;
         span{

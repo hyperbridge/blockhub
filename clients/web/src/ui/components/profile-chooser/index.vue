@@ -62,7 +62,7 @@
         data(){
             return{
                 options: {
-                    slidesPerView: 3,
+                    slidesPerView: 4,
                     spaceBetween: 0,
                     navigation: {
                         nextEl: '.profile-chooser__wrapper .swiper-button-next',
@@ -82,14 +82,10 @@
         },
         computed: {
             profiles() {
-                for(let i in this.$store.state.application.account.profiles) {
-                    if (!this.$store.state.application.account.profiles[i].name)
-                        this.$store.state.application.account.profiles[i].name = 'Default'
-                }
                 return this.$store.state.application.account.profiles
             },
             activeProfile() {
-                return this.$store.getters['application/profile'];
+                return this.$store.state.application.account.activeProfile
             }
         },
         methods: {
@@ -99,8 +95,9 @@
             setDefault(profile) {
                 this.$store.commit(
                     'updateSingle',
-                    ['application/account', { activeProfile: profile.id }]
-                );
+                    ['application/account', { activeProfile: profile }]
+                )
+
                 this.$store.state.application.developerMode = !!profile.developerId
             }
         }
