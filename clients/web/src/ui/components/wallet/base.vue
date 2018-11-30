@@ -169,6 +169,8 @@
         width: 350px;
         padding: 30px 20px 20px;
         height: 540px;
+        background-image: url("../../../../static/img/backgrounds/1.jpg");
+        background-size: 300%;
     }
     .wallet-header {
         position: absolute;
