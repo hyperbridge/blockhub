@@ -266,9 +266,6 @@
             toggleSignedIn() {
                 this.$store.state.application.signedIn = !this.$store.state.application.signedIn
             },
-            toggleDeveloper() {
-                this.$store.state.application.isDeveloper = !this.$store.state.application.isDeveloper
-            },
             toggleDeveloperMode() {
                 this.$store.state.application.developerMode = !this.$store.state.application.developerMode
             },

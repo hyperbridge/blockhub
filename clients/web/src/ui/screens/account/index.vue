@@ -256,11 +256,11 @@
             profile() {
                 const { products } = this.$store.state.marketplace
                 const { projects } = this.$store.state.funding
-                const profile = this.$store.getters['application/profile']
+                const profile = this.$store.state.application.account.activeProfile
                 return {
                     ...profile,
-                    productWishlist: Object.keys(profile.productWishlist).map(id => products[id]),
-                    projectWishlist: Object.keys(profile.projectWishlist).map(id => projects[id])
+                    productWishlist: Object.keys(profile.productWishlist || []).map(id => products[id]),
+                    projectWishlist: Object.keys(profile.projectWishlist || []).map(id => projects[id])
                 }
             }
         }

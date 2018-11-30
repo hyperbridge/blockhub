@@ -13,7 +13,6 @@
         "profileChooser": false,
         "darklaunchOverride": false,
         "operatingSystem": null,
-        "isDeveloper": false,
         "editorMode": "viewing",
         "activeModal": null,
         "activeNotification": null,
@@ -453,7 +452,7 @@
             },
             {
                 "id": 2,
-                "message": "LOADING SIMULATION",
+                "message": "The body achieves, what the mind believes",
                 "user": {
                     "id": 2,
                     "name": "GymTim"
@@ -605,7 +604,7 @@
             "password": null,
             "email": null,
             "currency": {},
-            "language":{},
+            "language": {},
             "activeProfile": {
                 "id": null,
                 "name": null,
@@ -618,12 +617,14 @@
                 "messages": [],
                 "address": null,
                 "passphrase": null,
-                "privateKey": null
+                "privateKey": null,
+                "productWishlist": {},
+                "productFavorites": {}
             },
             "notifications": [],
             "wallets": [],
             "profiles": [],
-            "idts": [1, 2, 3],
+            "idts": [],
             "settings": {
                 "client": {
                     "animations": true,
@@ -635,8 +636,6 @@
             },
             "darklaunchFlags": [
             ],
-            "productWishlist": { "3": true, "14": true },
-            "productFavorites": {},
             "projectWishlist": { "1": true },
             "projectFavorites": {},
             "savedPaths": [

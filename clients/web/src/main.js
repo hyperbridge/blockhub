@@ -33,9 +33,9 @@ Vue.use(Popover)
 Vue.use(VueDraggable)
 
 Vue.use(Snotify, {
-  toast: {
-    position: SnotifyPosition.leftBottom
-  }
+    toast: {
+        position: SnotifyPosition.leftBottom
+    }
 })
 
 Vue.use(VueNumerals)
@@ -53,56 +53,56 @@ Vue.use(VueCurrencyFilter,
 
 
 const data = {
-  user: 'something'
+    user: 'something'
 }
 
 const dataString = JSON.stringify(data).replace(/"/g, "'")
 
 
 const notifyError = debounce(function (message) {
-  if (!message) return
+    if (!message) return
 
-  if (message.indexOf('Error') !== -1) {
-    if (store.state.application.account.settings.client.system_warnings) {
-      BlockHub.Bridge.sendCommand('error', { message: message.slice(0, 250) })
+    if (message.indexOf('Error') !== -1) {
+        if (store.state.application.account.settings.client.system_warnings) {
+            BlockHub.Bridge.sendCommand('error', { message: message.slice(0, 250) })
+        }
     }
-  }
 
-  if (message.indexOf('TypeError') !== -1) {
-    if (store.state.application.account.settings.client.system_warnings) {
-      BlockHub.Notifications.error(message, 'UI Error', {
-        timeout: 5000,
-        pauseOnHover: true
-      })
+    if (message.indexOf('TypeError') !== -1) {
+        if (store.state.application.account.settings.client.system_warnings) {
+            BlockHub.Notifications.error(message, 'UI Error', {
+                timeout: 5000,
+                pauseOnHover: true
+            })
+        }
     }
-  }
 }, 500)
 
 const overrideConsoleLog = () => {
-  window.consoleLogMessages = []
+    window.consoleLogMessages = []
 
-  let oldLog = console.log
-  console.log = function (message) {
-    window.consoleLogMessages.push(message)
+    let oldLog = console.log
+    console.log = function (message) {
+        window.consoleLogMessages.push(message)
 
-    notifyError(message.toString())
+        notifyError(message.toString())
 
-    oldLog.apply(console, arguments)
-  }
+        oldLog.apply(console, arguments)
+    }
 
-  let oldWarn = console.log
-  console.warn = function (message) {
-    window.consoleLogMessages.push('Warn: ' + message)
+    let oldWarn = console.log
+    console.warn = function (message) {
+        window.consoleLogMessages.push('Warn: ' + message)
 
-    oldWarn.apply(console, arguments)
-  }
+        oldWarn.apply(console, arguments)
+    }
 
-  let oldError = console.log
-  console.error = function (message) {
-    window.consoleLogMessages.push('Error: ' + message)
+    let oldError = console.log
+    console.error = function (message) {
+        window.consoleLogMessages.push('Error: ' + message)
 
-    oldError.apply(console, arguments)
-  }
+        oldError.apply(console, arguments)
+    }
 }
 
 //window.addEventListener('hashchange', () => { $('body').addClass('screen-loading') }, false)
@@ -110,29 +110,29 @@ const overrideConsoleLog = () => {
 // overrideConsoleLog() TODO: later
 
 initializer().then(() => {
-  console.log('[BlockHub] Loading app...')
+    console.log('[BlockHub] Loading app...')
 
-  const [language] = (
-      window.navigator &&
-      window.navigator.language &&
-      window.navigator.language.split('-')
+    const [language] = (
+        window.navigator &&
+        window.navigator.language &&
+        window.navigator.language.split('-')
     ) || 'en'
 
-  /* eslint-disable no-new */
-  BlockHub.Vue = new Vue({
-      el: '#app',
-      router,
-      store,
-      mixins: [],
-      template: `<app :data="${dataString}" />`,
-      components: {
-        'app': app
-      },
-    //   i18n: new VueI18n({
-    //     locale,
-    //     messages: localeData
-    //   })
-  })
+    /* eslint-disable no-new */
+    BlockHub.Vue = new Vue({
+        el: '#app',
+        router,
+        store,
+        mixins: [],
+        template: `<app :data="${dataString}" />`,
+        components: {
+            'app': app
+        },
+        //     i18n: new VueI18n({
+        //         locale,
+        //         messages: localeData
+        //     })
+    })
 
-  BlockHub.Notifications = BlockHub.Vue.$snotify
+    BlockHub.Notifications = BlockHub.Vue.$snotify
 })
