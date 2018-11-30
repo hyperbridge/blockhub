@@ -140,7 +140,7 @@
                         <div class="navigation">
                             <ul>
                                 <li class="title">TOP 5</li>
-                                <li v-for="(product, index) in $store.state.marketplace.top_5" :key="index">
+                                <li v-for="(product, index) in $store.state.marketplace.top5" :key="index">
                                     <a :href="`#/product/${product.id}`">
                                         <span class="text">{{ product.name }}</span>
                                     </a>
@@ -155,7 +155,7 @@
                         <div class="navigation">
                             <ul>
                                 <li class="title">TOP FREE</li>
-                                <li v-for="(product, index) in $store.state.marketplace.top_free.slice(0, 5)" :key="index">
+                                <li v-for="(product, index) in $store.state.marketplace.topFree.slice(0, 5)" :key="index">
                                     <a :href="`#/product/${product.id}`">
                                         <span class="text">{{ product.name }}</span>
                                     </a>

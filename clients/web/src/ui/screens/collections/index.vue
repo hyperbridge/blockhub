@@ -16,8 +16,8 @@ export default {
                 type: 'collections_list',
                 data: {
                     collections_list: this.$store.state.marketplace.collections,
-                    ref: 'collections_sl',
-                    swiper: this.$refs.collections_sl && this.$refs.collections_sl.swiper,
+                    ref: 'collectionsSlider',
+                    swiper: this.$refs.collectionsSlider && this.$refs.collectionsSlider.swiper,
                     options: {
                         slidesPerView: 3,
                         spaceBetween: 10,

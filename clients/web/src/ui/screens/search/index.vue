@@ -285,7 +285,7 @@
                     { value: "new", selected: false },
                     { value: "sale", selected: false },
                     { value: "specials", selected: false },
-                    { value: "top_seller", selected: false },
+                    { value: "topSeller", selected: false },
                     { value: "trending", selected: false },
                     { value: "upcoming", selected: false }
                 ],

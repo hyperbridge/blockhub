@@ -464,7 +464,7 @@
             "sale",
             "featured",
             "trending",
-            "top_seller",
+            "topSeller",
             "specials"
         ],
         "type": "game",
@@ -574,7 +574,7 @@
             }
         ],
         "systemTags": [
-            "top_seller",
+            "topSeller",
             "specials"
         ],
         "type": "game",
@@ -933,7 +933,7 @@
         ],
         "systemTags": [
             "trending",
-            "top_seller"
+            "topSeller"
         ],
         "type": "game",
         "downloads": 0,
@@ -1620,7 +1620,7 @@
             }
         ],
         "systemTags": [
-            "top_seller",
+            "topSeller",
             "specials"
         ],
         "type": "game",

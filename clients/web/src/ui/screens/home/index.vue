@@ -86,56 +86,57 @@ export default {
                     data: this.$store.state.marketplace.frontpageProduct
                 })
             }
-            if ( this.$store.state.marketplace.featured_products.length ) {
+            
+            if (this.$store.state.marketplace.featuredProducts.length ) {
                 result.push({
                     type: 'featured_product_gallery',
                     data: {
                         title: 'Featured',
-                        ref: 'featured_product_gallery_sl',
-                        swiper: this.$refs.featured_product_gallery_sl && this.$refs.featured_product_gallery_sl.swiper,
-                        products: this.$store.state.marketplace.featured_products,
+                        ref: 'featuredProductGallerySlider',
+                        swiper: this.$refs.featuredProductGallerySlider && this.$refs.featuredProductGallerySlider.swiper,
+                        products: this.$store.state.marketplace.featuredProducts,
                         slides:[
                             {
                                 image:  {
-                                    src:  this.$store.state.marketplace.featured_products[0].images.preview[0],
+                                    src:  this.$store.state.marketplace.featuredProducts[0].images.preview[0],
                                     position: 'center'
                                 },
                                 logo: {
-                                    src:  this.$store.state.marketplace.featured_products[0].images.icon,
+                                    src:  this.$store.state.marketplace.featuredProducts[0].images.icon,
                                     position: 'left bottom',
                                     size: 'lg',
                                 },
-                                title:  this.$store.state.marketplace.featured_products[0].name,
+                                title:  this.$store.state.marketplace.featuredProducts[0].name,
                                 buttonText: 'Check it out',
-                                id:  this.$store.state.marketplace.featured_products[0].id
+                                id:  this.$store.state.marketplace.featuredProducts[0].id
                             },
                             {
                                 image:  {
-                                    src:  this.$store.state.marketplace.featured_products[1].images.preview[0],
+                                    src:  this.$store.state.marketplace.featuredProducts[1].images.preview[0],
                                     position: 'center'
                                 },
                                 logo: {
-                                    src:  this.$store.state.marketplace.featured_products[1].images.icon,
+                                    src:  this.$store.state.marketplace.featuredProducts[1].images.icon,
                                     position: 'left bottom',
                                     size: 'lg',
                                 },
-                                title:  this.$store.state.marketplace.featured_products[1].name,
+                                title:  this.$store.state.marketplace.featuredProducts[1].name,
                                 buttonText: 'Check it out',
-                                id:  this.$store.state.marketplace.featured_products[1].id
+                                id:  this.$store.state.marketplace.featuredProducts[1].id
                             },
                             {
                                 image:  {
-                                    src:  this.$store.state.marketplace.featured_products[2].images.preview[0],
+                                    src:  this.$store.state.marketplace.featuredProducts[2].images.preview[0],
                                     position: 'center'
                                 },
                                 logo: {
-                                    src:  this.$store.state.marketplace.featured_products[2].images.icon,
+                                    src:  this.$store.state.marketplace.featuredProducts[2].images.icon,
                                     position: 'left bottom',
                                     size: 'lg',
                                 },
-                                title:  this.$store.state.marketplace.featured_products[2].name,
+                                title:  this.$store.state.marketplace.featuredProducts[2].name,
                                 buttonText: 'Check it out',
-                                id:  this.$store.state.marketplace.featured_products[2].id
+                                id:  this.$store.state.marketplace.featuredProducts[2].id
                             }
                         ]
                     }
@@ -146,8 +147,8 @@ export default {
                 type: 'collections_list',
                 data: {
                     collections_list: Array.isArray(this.$store.state.marketplace.collections) ? this.$store.state.marketplace.collections : Object.values(this.$store.state.marketplace.collections),
-                    ref: 'collections_sl',
-                    swiper: this.$refs.collections_sl && this.$refs.collections_sl.swiper,
+                    ref: 'collectionsSlider',
+                    swiper: this.$refs.collectionsSlider && this.$refs.collectionsSlider.swiper,
                 }
             })
 
@@ -206,13 +207,15 @@ export default {
                 }
             })
 
-            if (isVisible(this.$store.state.application.darklaunchFlags, this.$store.state.application.account.darklaunchFlags, 'CURATORS')) {
+            if (this.$store.state.application.darklaunchFlags
+            && this.$store.state.application.account.darklaunchFlags
+            && isVisible(this.$store.state.application.darklaunchFlags, this.$store.state.application.account.darklaunchFlags, 'CURATORS')) {
                 result.push({
                     type: 'curatorReviews',
                     data: {
                         title: 'From our curators',
-                        ref: 'curatorReviews_sl',
-                        swiper: this.$refs.curatorReviews_sl && this.$refs.curatorReviews_sl.swiper,
+                        ref: 'curatorReviewsSlider',
+                        swiper: this.$refs.curatorReviewsSlider && this.$refs.curatorReviewsSlider.swiper,
                         options: {
                             slidesPerView: 3,
                             spaceBetween: 0,

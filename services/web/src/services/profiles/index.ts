@@ -26,9 +26,6 @@ export default function(app) {
 
             result.name = role
 
-            console.log(444, result)
-            //result.save()
-
             return result
         }
     })

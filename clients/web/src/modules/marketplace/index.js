@@ -22,14 +22,14 @@ const updateState = (savedData, updatedState = {}) => {
         gameSeries: DB.marketplace.config.data[0].gameSeries,
         frontpageProduct: DB.marketplace ? DB.marketplace.products.findOne({ 'systemTags': { '$contains': ['frontpage'] } }) : {},
         newProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['new'] } }) : [],
-        featured_products: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['featured'] } }) : [],
+        featuredProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['featured'] } }) : [],
         upcomingProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['upcoming'] } }) : [],
-        trending_products: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['trending'] } }) : [],
-        topSellingProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['top_seller'] } }) : [],
+        trendingProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['trending'] } }) : [],
+        topSellingProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['topSeller'] } }) : [],
         specialProducts: DB.marketplace ? DB.marketplace.products.find({ 'systemTags': { '$contains': ['specials'] } }) : [],
         productNews: DB.marketplace ? DB.marketplace.posts.find({ 'target': { '$eq': ['product'] }, 'systemTags': { '$contains': ['news'] } }) : [],
-        top_free: DB.marketplace ? DB.marketplace.products.find({ 'price': { '$eq': 0 } }) : [],
-        top_5: DB.marketplace ? DB.marketplace.products.find({ 'rating.overall': { '$gte': 5 } }) : [],
+        topFree: DB.marketplace ? DB.marketplace.products.find({ 'price': { '$eq': 0 } }) : [],
+        top5: DB.marketplace ? DB.marketplace.products.find({ 'rating.overall': { '$gte': 5 } }) : [],
         ...updatedState,
     }
 
@@ -40,7 +40,7 @@ const updateState = (savedData, updatedState = {}) => {
         newProducts: [schema.product],
         saleProducts: [schema.product],
         upcomingProducts: [schema.product],
-        trending_products: [schema.product],
+        trendingProducts: [schema.product],
         topSellingProducts: [schema.product],
         specialProducts: [schema.product]
     })

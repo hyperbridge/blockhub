@@ -110,7 +110,7 @@ export default {
         //  #9b59b6 #D6A2E8    #c56cf0  #808e9b #706fd3
 
         $tags: (
-            top_seller: #9980FA,
+            topSeller: #9980FA,
             special: #1abc9c,
             discount: #74b9ff,
             epic: #ffda79,

@@ -60,7 +60,7 @@
             "new",
             "featured",
             "trending",
-            "top_seller",
+            "topSeller",
             "specials"
         ],
         "type": "game",

@@ -28,6 +28,7 @@ Vue.directive('darklaunch', {
 
         if (value &&
             store.state.application.darklaunchFlags &&
+            store.state.application.account &&
             store.state.application.account.darklaunchFlags &&
             isVisible(store.state.application.darklaunchFlags, store.state.application.account.darklaunchFlags, value)) {
             el.hidden = false

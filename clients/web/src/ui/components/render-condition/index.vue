@@ -11,6 +11,7 @@
         },
         data() {
             return {
+                initialized: false,
                 satisfied: false
             }
         },
@@ -36,7 +37,7 @@
             }
         },
         watch: {
-            '$store.state.auth.user'(newVal) {console.log(4444444)
+            '$store.state.auth.user'(newVal) {
                 if (newVal) {
                     if (this.type === 'user') {
                         this.satisfied = true

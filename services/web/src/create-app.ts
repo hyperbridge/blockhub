@@ -93,25 +93,25 @@ export default async () => {
     app.set('knex', knex)
 
 
-    app.use(function(req, res, next) {
-        console.log(req)
+    // app.use(function(req, res, next) {
+    //     console.log(req)
 
-        next()
-    })
+    //     next()
+    // })
 
-    app.use(morgan(function(tokens, req, res) {
-        let { url, method, params, body, _parsedUrl, headers, query } = req
+    // app.use(morgan(function(tokens, req, res) {
+    //     let { url, method, params, body, _parsedUrl, headers, query } = req
 
-        console.log(111111, url, method, params)
-        // do something with the data, save it to db, etc..
-        return [
-            tokens.method(req, res),
-            tokens.url(req, res),
-            tokens.status(req, res),
-            tokens.res(req, res, 'content-length'), '-',
-            tokens['response-time'](req, res), 'ms'
-        ]
-    }))
+    //     console.log(111111, url, method, params)
+    //     // do something with the data, save it to db, etc..
+    //     return [
+    //         tokens.method(req, res),
+    //         tokens.url(req, res),
+    //         tokens.status(req, res),
+    //         tokens.res(req, res, 'content-length'), '-',
+    //         tokens['response-time'](req, res), 'ms'
+    //     ]
+    // }))
 
 
     // Setup channels
