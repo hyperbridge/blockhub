@@ -5242,10 +5242,16 @@ storiesOf('Wallet Popup', module)
 storiesOf('Chat', module)
     .add('base', () => ({
         components: {
-            'c-chat-base': (resolve) => require(['@/ui/components/chat-new/base'], resolve)
+            'c-chat-base': (resolve) => require(['@/ui/components/chat-new/base'], resolve),
+            'c-chat-group': (resolve) => require(['@/ui/components/chat-new/content/group'], resolve),
+            'c-chat-message': (resolve) => require(['@/ui/components/chat-new/message'], resolve)
         },
         template: `<div class="row p-3 m-0 flex-wrap" style="width: 1100px; height: 700px">
-                        <c-chat-base />
+                        <c-chat-base>
+                            <c-chat-group>
+                                <c-chat-message v-for="i in 5" />
+                            </c-chat-group>
+                        </c-chat-base>
                     </div>`
     }))
 
