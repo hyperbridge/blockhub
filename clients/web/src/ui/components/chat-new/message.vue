@@ -1,7 +1,7 @@
 <template>
     <div class="chat-message">
         <div class="chat-message__avatar">
-
+            <img src="../../../../static/img/user.png" />
         </div>
         <div class="chat-message__body">
             <div class="chat-message__info">
@@ -33,22 +33,23 @@
         width: 100%;
         align-items: flex-start;
         color: #fff;
-        padding: 15px 0;
+        padding: 10px 0;
     }
-
     .chat-message__avatar {
-        width: 50px;
+        width: 40px;
+        img{
+            width: 100%;
+            border-radius: 100%;
+        }
     }
-
     .chat-message__body {
-        width: calc(100% - 50px);
+        width: calc(100% - 40px);
         padding-left: 15px;
     }
-
     .chat-message__info {
         display: flex;
         align-items: center;
-        padding-bottom: 10px;
+        padding-bottom: 5px;
         strong {
             font-weight: bold;
             color: #5D75F7;
