@@ -84,7 +84,7 @@
         color: #fff;
     }
     .chat-shortcuts{
-        width: 70px;
+        flex: 0 0 60px;
         background: #1C2032;
         padding: 10px;
         display: flex;
@@ -92,7 +92,7 @@
     }
     .chat__group-info{
         background: #272745;
-        width: 200px;
+        flex: 0 0 200px;
         padding: 15px;
         color: #fff;
         border-left: 1px solid rgba(255, 255, 255, .1);
@@ -116,9 +116,8 @@
         }
     }
     .chat-main{
-        padding: 10px;
+        padding: 15px;
         background: #3D3E5D;
-        flex-grow: 1;
     }
     .chat-main__content{
         height: calc( 100% - 52px );

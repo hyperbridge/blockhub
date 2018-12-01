@@ -5244,7 +5244,8 @@ storiesOf('Chat', module)
         components: {
             'c-chat-base': (resolve) => require(['@/ui/components/chat-new/base'], resolve),
             'c-chat-group': (resolve) => require(['@/ui/components/chat-new/content/group'], resolve),
-            'c-chat-message': (resolve) => require(['@/ui/components/chat-new/message'], resolve)
+            'c-chat-message': (resolve) => require(['@/ui/components/chat-new/message'], resolve),
+            'c-chat-user': (resolve) => require(['@/ui/components/chat-new/user'], resolve)
         },
         template: `<div class="row p-3 m-0 flex-wrap" style="width: 1100px; height: 700px">
                         <c-chat-base>
