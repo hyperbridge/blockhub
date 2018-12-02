@@ -76,8 +76,9 @@
                 name="item"
                 :duration="100"
             > -->
-            <div class="profile-picker">
-                <c-loading :enabled="!filteredProfiles.length" key="loading" />
+            <c-loading :enabled="!filteredProfiles.length" key="loading" />
+            
+            <div class="profile-picker" v-if="filteredProfiles.length">
                 <div
                     class="profile-picker__profile"
                     :class="{ 'edit': profile.edit, 'default-type': profile.id == (defaultProfile && defaultProfile.id) }"

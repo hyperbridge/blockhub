@@ -264,7 +264,6 @@ const router = new Router({
             component: (resolve) => require(['@/ui/screens/account-profiles'], resolve),
             meta: {
                 permission: 'signedIn',
-                renderCondition: 'user',
                 breadcrumb: [
                     { title: 'Home' },
                     { title: 'Account' },

@@ -11,18 +11,18 @@
         <!-- PAGE CONTENT WRAPPER -->
         <div class="page__content page__content-invert invert" :class="{'make-it-blur': bluredBg}" id="page-content" 
             v-drag-and-drop:options="dragOptions">
-            <div class="loader-block" v-if="!is_connected">
+            <!-- <div class="loader-block" v-if="!isConnected">
                 <div class="loader-block__container">
                     <div class="loader-block__spinner"></div>
 
-                    <p class="loader-block__message">{{ user_submitted_connection_message.message }}</p>
+                    <p class="loader-block__message">{{ userSubmittedConnectionMessage.message }}</p>
                     <p class="loader-block__user">Submitted by <a
-                        :href="`#/profile/${user_submitted_connection_message.user.id}`">@{{ user_submitted_connection_message.user.name }}</a></p>
+                        :href="`#/profile/${userSubmittedConnectionMessage.user.id}`">@{{ userSubmittedConnectionMessage.user.name }}</a></p>
 
-                    <h1 class="loader-block__status-code" v-if="connection_status.code">ERROR {{ connection_status.code }}</h1>
+                    <h1 class="loader-block__status-code" v-if="connectionStatus.code">ERROR {{ connectionStatus.code }}</h1>
 
-                    <div class="loader-block__status-message" v-if="connection_status.message">
-                        <p hidden>{{ connection_status.message }}</p>
+                    <div class="loader-block__status-message" v-if="connectionStatus.message">
+                        <p hidden>{{ connectionStatus.message }}</p>
                         <div>Internet Connection <span class="fa"
                             :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }"></span>
                         </div>
@@ -38,7 +38,7 @@
                             Status</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
 
 
@@ -69,9 +69,9 @@
             <!-- //END PAGE ASIDE PANEL -->
 
             <div class="content" :class="{'w-100': !showRightPanel && !showLeftPanel}" id="content">
-                <c-breadcrumb :links="breadcrumbLinksData" ref="breadcrumb" v-if="is_connected && showBreadcrumbs" />
+                <c-breadcrumb :links="breadcrumbLinksData" ref="breadcrumb" v-if="showBreadcrumbs" />
                 <div class="container-fluid">
-                    <slot v-if="initialized && is_connected" />
+                    <slot v-if="initialized" />
                 </div>
             </div>
 
@@ -82,7 +82,7 @@
             <!-- //END SIDEPANEL -->
 
             <div class="status-bar" hidden>
-                {{ connection_status.message }}
+                {{ connectionStatus.message }}
             </div>
 
 
@@ -258,6 +258,8 @@
 
             <c-clock v-if="desktopMode" />
 
+            <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" />
+
             <div class="version" v-if="desktopMode">v{{ $store.state.application.version }}</div>
         </div>
         <!-- //END PAGE CONTENT -->
@@ -345,6 +347,7 @@
             'c-purchase-popup': (resolve) => require(['@/ui/components/purchase-popup/index.vue'], resolve),
             'c-user-card': (resolve) => require(['@/ui/components/user-card'], resolve),
             'c-clock': (resolve) => require(['@/ui/components/clock/index.vue'], resolve),
+            'c-status-dot': (resolve) => require(['@/ui/components/status-dot/index.vue'], resolve),
             'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
             'c-cookie-policy': (resolve) => require(['@/ui/components/cookie-policy'], resolve),
             'c-shortcut-sidebar': (resolve) => require(['@/ui/components/shortcut-sidebar'], resolve),
@@ -359,7 +362,7 @@
             return {
                 navigationComponent: this.navigationKey || false,
                 loadingState: true,
-                user_submitted_connection_message: this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))],
+                userSubmittedConnectionMessage: this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))],
                 panelOption: {
                     spaceBetween: 0,
                     loop: false,
@@ -453,7 +456,7 @@
             initialized() {
                 return this.$store.state.application.initialized
             },
-            is_connected() {
+            isConnected() {
                 return this.$store.state.application.connection.internet && this.$store.state.application.connection.datasource
             },
             chosenProfile() {
@@ -462,7 +465,7 @@
             shortcuts() {
                 return this.$store.state.application.shortcuts
             },
-            connection_status() {
+            connectionStatus() {
                 return this.$store.state.application.connection.status
             },
             unlock_modal_active() {
@@ -516,7 +519,7 @@
             }
         },
         updated() {
-            this.user_submitted_connection_message = this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))]
+            this.userSubmittedConnectionMessage = this.$store.state.application.userSubmittedConnectionMessages[Math.floor(Math.random() * Math.floor(this.$store.state.application.userSubmittedConnectionMessages.length))]
         },
         methods: {
             onSwipeLeft() {
@@ -625,25 +628,23 @@
             this.updateBreadcrumbLinks()
             this.$nextTick(() => {
                 this.loadingState = false
-                setTimeout(() => {
-                    document.getElementById('startup-loader').style.display = 'none'
 
-                    // check sidebar button
-                    $(this.$refs.scroll_sidebar).scroll(() => {
-                        this.debounce(() => {
-                            this.checkScrollButton()
-                        }, 250)
-                    })
-                }, 3000) // TODO: remove arbitrary delay
+                document.getElementById('startup-loader').style.display = 'none'
 
-                setInterval(() => {
-                    this.checkScrollButton()
-                }, 500)
+                // check sidebar button
+                $(this.$refs.scroll_sidebar).scroll(() => {
+                    this.debounce(() => {
+                        this.checkScrollButton()
+                    }, 250)
+                })
+                // setInterval(() => {
+                //     this.checkScrollButton()
+                // }, 500)
             })
 
-            setTimeout(() => {
-                $(this.$refs.poweredBy).fadeOut(400)
-            }, 10 * 1000)
+            // setTimeout(() => {
+            //     $(this.$refs.poweredBy).fadeOut(400)
+            // }, 10 * 1000)
 
             const fractionCountMap = {
                 'BTC': 6,
@@ -689,7 +690,9 @@
             '$route'() {
                 this.updateBreadcrumbLinks()
             },
-            profileChooser(){
+            '$store.state.application.initialized'() {debugger
+            },
+            profileChooser() {
                 if (this.signedIn)
                     if (this.profileChooser)
                         this.bluredBg = true
@@ -809,6 +812,13 @@
         bottom: 20px;
         right: 20px;
         z-index: -1;
+    }
+
+    .status-dot {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 100;
     }
 
     .loader-block {
@@ -1095,7 +1105,7 @@
                 padding: 20px;
             }
         }
-        .page::before {
+        .page:before {
             display: none;
         }
 

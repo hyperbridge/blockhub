@@ -16,8 +16,8 @@ const populate = function(options = {}) {
                     accountId: item.id,
                     name: 'Default'
                 }, {
-                    user: { id: item.id }
-                })
+                        user: { id: item.id }
+                    })
 
                 item.profiles = [profile]
             } else {

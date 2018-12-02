@@ -49,7 +49,7 @@ const updateState = (savedData, updatedState = {}) => {
         initialized: BlockHub.initialized,
         account: DB.application.config.data[0].account || {},
         darklaunchFlags: DB.application.config.data[0].darklaunchFlags || [],
-        developerMode: savedData.developerMode != null ? savedData.developerMode : DB.application.config.data[0].account && !!DB.application.config.data[0].account.activeProfile.developerId,
+        developerMode: savedData.developerMode != null ? savedData.developerMode : DB.application.config.data[0].account && DB.application.config.data[0].account.activeProfile && !!DB.application.config.data[0].account.activeProfile.developerId,
         environmentMode: savedData.environmentMode != null ? savedData.environmentMode : BlockHub.GetMode(),
         externalState: savedData.externalState != null ? savedData.externalState : {},
         ...updatedState
@@ -194,7 +194,7 @@ export const actions = {
         }
 
         const xhr = new XMLHttpRequest()
-        const file = "/static/img/blank.png"
+        const file = "https://blockhub.gg/static/img/blank.png"
         const randomNum = Math.round(Math.random() * 10000)
 
         xhr.open('HEAD', file + "?rand=" + randomNum, true)

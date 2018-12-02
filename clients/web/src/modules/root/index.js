@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { getId, mergeId, normalize } from '@/store/utils'
 import { findRelation, decompose, findRelationPaths } from '@/store/modules-relation'
 
@@ -28,16 +29,14 @@ const rootStore = {
         },
         updateSingle(rootState, [path, data]) {
             const [module, target] = path.split('/')
-            rootState[module][target] = {
-                ...rootState[module][target],
-                ...data
-            }
-        },
-        updateSingular(rootState, [path, data]) {
-            const [module, target] = path.split('/')
-            rootState[module][target] = {
-                ...rootState[module][target],
-                ...data
+            if (data !== null && typeof data === 'object') {
+                rootState[module][target] = {
+                    ...rootState[module][target],
+                    ...data
+                }
+            } else {
+                //rootState[module][target] = data
+                Vue.set(rootState[module], target, data)
             }
         },
         delete(rootState, [path, id]) {

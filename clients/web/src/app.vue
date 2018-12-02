@@ -231,7 +231,7 @@
         data() {
             return {
                 initialized: false,
-                renderCondition: 'initialized',
+                renderCondition: 'none',
                 showPreviewPanel: true //['preview', 'staging', 'local'].includes(this.$store.state.application.environmentMode)
             }
         },
@@ -379,7 +379,7 @@
 
                 this.$store.state.application.activeModal = false
 
-                this.renderCondition = this.$route.meta.renderCondition || (this.$route.meta.permission === 'signedIn' ? 'user' : this.renderCondition)
+                this.renderCondition = this.$route.meta.renderCondition || (this.$route.meta.permission === 'signedIn' ? 'user' : 'initialized')
 
                 this.updateEditorMode()
                 this.ensureDesktopWelcome(to)

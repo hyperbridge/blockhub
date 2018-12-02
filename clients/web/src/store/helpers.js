@@ -52,7 +52,7 @@ export const mapEl = ({ name, module, target, id, idSource, action, getter = tru
     return {
         [propertyName]: {
             set(data) {
-                this.$store[action ? 'dispatch' : 'commit']('updateSingular', [path, data])
+                this.$store[action ? 'dispatch' : 'commit']('updateSingle', [path, data])
             },
             get() {
                 return getter

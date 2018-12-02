@@ -17,24 +17,20 @@
         },
         created() {
             if (this.$store.state.auth.accessToken) {
-                this.initialize()
+                this.authenticate()
             } else {
                 this.$store.dispatch('auth/authenticate')
                     .then(() => {
-                        this.initialize()
+                        this.authenticate()
                     })
                     .catch(error => {
-                        this.initialize()
-
-                        if (error) {
-                            if (!error.message.includes('Could not find stored JWT')) {
-                                console.error(error)
-                            }
-                            return
+                        if (error && !error.message.includes('Could not find stored JWT')) {
+                            console.error(error)
                         }
-
                     })
             }
+
+            setTimeout(this.initialize.bind(this), 3000) // TODO: remove arbitrary delay
         },
         watch: {
             '$store.state.auth.user'(newVal) {
@@ -45,18 +41,27 @@
                 }
             },
             '$store.state.auth.accessToken'() {
-                this.initialize()
+                if (newVal) {
+                    this.authenticate()
+                }
             }
         },
         computed: {
         },
         methods: {
+            authenticate() {
+                if (this.type === 'authenticated') {
+                    this.satisfied = true
+                }
+            },
             initialize() {
                 if (this.initialized) {
                     return
                 }
 
-                this.initialized = this.$store.state.application.initialized = BlockHub.initialized = true
+                this.initialized = BlockHub.initialized = true
+
+                this.$store.commit('updateSingle', ['application/initialized', true])
 
                 if (this.type === 'initialized') {
                     this.satisfied = true

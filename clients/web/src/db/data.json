@@ -5,6 +5,7 @@
         "initialized": false,
         "environmentMode": null,
         "decentralizedMode": false,
+        "extensionMode": false,
         "locked": false,
         "signedIn": false,
         "loading": false,
