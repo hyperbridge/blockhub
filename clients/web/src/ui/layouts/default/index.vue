@@ -254,11 +254,42 @@
             </c-basic-popup>
 
 
+            <c-basic-popup
+                :activated="$store.state.application.activeModal === 'connection-status'"
+                @close="$store.state.application.activeModal = null"
+                style="text-align: left;"
+            >
+                <div class="h4" slot="header">Connection Status</div>
+                <template slot="body">
+                    <div class="connection-status__status-items">
+                        <div>Internet Connection <span class="fa"
+                            :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }"></span>
+                        </div>
+                        <div>Web Server Connection <span class="fa"
+                            :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }"></span>
+                        </div>
+                        <div>Real-time Server Connection <span class="fa"
+                            :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }"></span>
+                        </div>
+                        <div>Ethereum Connection <span class="fa"
+                            :class="{'fa-check-circle': $store.state.application.connection.ethereum, 'fa-times-circle': !$store.state.application.connection.ethereum }"></span>
+                        </div>
+                    </div>
+
+                    <h1 class="connection-status__status-code" v-if="connectionStatus.code">ERROR {{ connectionStatus.code }}</h1>
+                    <p class="connection-status__status-message" hidden v-if="connectionStatus.message">{{ connectionStatus.message }}</p>
+                </template>
+                <p slot="footer">
+                </p>
+            </c-basic-popup>
+
+
+
             <c-cookie-policy v-if="!desktopMode" />
 
             <c-clock v-if="desktopMode" />
 
-            <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" />
+            <c-status-dot :status="this.$store.state.application.connection.internet ? 'connected' : 'disconnected'" @click="$store.commit('application/activateModal', 'connection-status')" />
 
             <div class="version" v-if="desktopMode">v{{ $store.state.application.version }}</div>
         </div>
@@ -818,7 +849,7 @@
         position: fixed;
         bottom: 20px;
         left: 20px;
-        z-index: 100;
+        z-index: 120;
     }
 
     .loader-block {
@@ -927,6 +958,35 @@
             }
         }
     }
+
+    .connection-status {
+
+    }
+
+    .connection-status__status-code {
+        margin-top: 80px;
+    }
+
+    .connection-status__status-items {
+        color: #ddd;
+        font-size: 16px;
+        margin-top: 30px;
+        text-align: center;
+
+        p {
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        div {
+            margin: 15px 0;
+
+            span {
+                margin-left: 5px;
+            }
+        }
+    }
+
 
     .messages-action {
         display: flex;
