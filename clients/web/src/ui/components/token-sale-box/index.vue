@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div hidden>
-                    <c-button status="success" size="lg" icon_hide @click="$emit('purchase')">
+                    <c-button status="success" size="lg" iconHide @click="$emit('purchase')">
                         Purchase HBX
                     </c-button>
                 </div>
@@ -146,6 +146,7 @@
         overflow: hidden;
         color: #fff;
         box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+        backdrop-filter: blur(2px);
     }
     .token-sale-box__head{
         background: rgba(0, 0, 0, .45);
@@ -178,7 +179,7 @@
     .token-sale-box__body{
         padding: 20px;
         display: flex;
-        background: #3D3E5D;
+        background: rgba(61, 62, 93, 0.45);
         align-items: stretch;
         justify-content: space-between;
     }

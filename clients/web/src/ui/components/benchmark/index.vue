@@ -4,7 +4,7 @@
             <c-button
                 @click="benchmark"
                 :class="{ 'avoid-clicks': running }"
-                icon_hide
+                iconHide
             >
                 {{ finished ? 'Try again' : running ? 'Running...' : 'Run Performance Test' }}
             </c-button>

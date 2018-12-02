@@ -121,8 +121,8 @@
                     <div class="text">
                         <h3>Are you a developer?</h3>
                         <p>Start developing for blockchain with BlockHub SDK</p>
-                        <c-button status="info" href="#/developer/apply" icon_hide>Start Developing</c-button>
-                        <c-button status="dark" href="#/help/0/article/developer-program" icon_hide>Learn More</c-button>
+                        <c-button status="info" href="#/developer/apply" iconHide>Start Developing</c-button>
+                        <c-button status="dark" href="#/help/0/article/developer-program" iconHide>Learn More</c-button>
                     </div>
                 </div>
                 <div class="d-flex justify-content-start">
@@ -422,6 +422,7 @@
         right: -350px;
         overflow-y: auto;
         min-height: 100%;
+        backdrop-filter: blur(10px);
     }
 
     .preview-panel {

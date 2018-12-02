@@ -42,7 +42,7 @@
                             hideButtons
                         />
                         <div class="flex-center-between margin-top-50">
-                            <c-button status="info" @click="deletingTree = null" icon_hide>
+                            <c-button status="info" @click="deletingTree = null" iconHide>
                                 Cancel
                             </c-button>
                             <c-button status="success" @click="deleteTree(deletingTree[0].id)">

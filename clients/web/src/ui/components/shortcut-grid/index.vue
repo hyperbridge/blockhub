@@ -247,6 +247,10 @@ export default {
 }
 </script>
 <style lang="scss">
+.c-grid {
+    margin-top: 10px;
+}
+
 .c-grid-container {
     display: block;
     position: relative;

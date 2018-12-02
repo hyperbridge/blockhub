@@ -12,7 +12,7 @@
             status="outline-success"
             data-toggle="modal"
             data-target="#purchase-modal"
-            icon_hide
+            iconHide
         >
             <div v-if="price">
                 <div class="font-weight-normal text-uppercase" v-if="basic">

@@ -1,8 +1,31 @@
 {
     "application": {
-        "name": "Thor",
+        "brands": {
+            "blockhub": {
+                "name": "BlockHub",
+                "domain": "blockhub.gg",
+                "homeLink": "https://blockhub.gg"
+            },
+            "thor": {
+                "name": "Thor",
+                "domain": "thor.gg",
+                "homeLink": "https://thor.gg"
+            },
+            "gamemask": {
+                "name": "GameMask",
+                "domain": "gamemask.io",
+                "homeLink": "https://gamemask.io"
+            },
+            "netero": {
+                "name": "Netero",
+                "domain": "netero.com",
+                "homeLink": "https://netero.com"
+            }
+        },
+        "activeBrand": "thor",
         "version": "0.7.1",
         "initialized": false,
+        "adminMode": false,
         "environmentMode": null,
         "decentralizedMode": false,
         "extensionMode": false,
@@ -21,18 +44,32 @@
         "currentEthereumNetwork": "local",
         "shortcuts": [
             {
-                "r": 255,
-                "g": 255,
-                "b": 255,
+                "r": null,
+                "g": null,
+                "b": null,
+                "image": "/static/img/icons/grid.png",
+                "link": "#/",
+                "text": "Open Grid",
+                "sort": 1,
+                "removable": false
+            },
+            {
+                "r": null,
+                "g": null,
+                "b": null,
                 "image": "/static/img/icons/store.png",
                 "link": "#/",
-                "text": "Go to store"
+                "text": "Go to store",
+                "sort": 2,
+                "removable": false
             },
             {
                 "icon": "fa fa-plus",
                 "eventKey": "application/activateModal",
                 "eventValue": "shortcutCreator",
-                "text": "Create"
+                "text": "Create",
+                "sort": -1,
+                "removable": false
             }
         ],
         "ethereum": {

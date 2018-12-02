@@ -54,7 +54,7 @@
                             <td>{{ offer.buyout }} $</td>
                             <td>{{ offer.marketValue }} %</td>
                             <td>
-                                <c-button icon_hide status="info" @click="openOffer(id)">
+                                <c-button iconHide status="info" @click="openOffer(id)">
                                     <c-icon name="arrow-circle-down"/>
                                 </c-button>
                             </td>
@@ -96,7 +96,7 @@
                                 </table>
                             </td>
                             <td>
-                                <c-button icon_hide status="info" @click="openOffer(id)">
+                                <c-button iconHide status="info" @click="openOffer(id)">
                                     <c-icon name="arrow-circle-up"/>
                                 </c-button>
                             </td>

@@ -30,6 +30,8 @@
         text-shadow: 0 0 2px rgba(0, 0, 0, .2);
         align-items: center;
         background-size: cover;
+        backdrop-filter: blur(2px);
+        opacity: 0.9;
         &:hover{
             cursor: pointer;
             will-change: transform;

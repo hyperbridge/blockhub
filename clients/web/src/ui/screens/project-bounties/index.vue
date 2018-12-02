@@ -22,13 +22,13 @@
                 </c-icon-block>
             </div>
             <div class="bounties-header__action">
-                <c-button status="dark" icon_hide size="lg" fontSize="14" class="text-uppercase with-label">
+                <c-button status="dark" iconHide size="lg" fontSize="14" class="text-uppercase with-label">
                                 <span class="btn-label">
                                     <i class="fas fa-lock"></i>
                                 </span>
                     Management
                 </c-button>
-                <c-button status="info" icon_hide size="lg" fontSize="14" class="text-uppercase ml-3">
+                <c-button status="info" iconHide size="lg" fontSize="14" class="text-uppercase ml-3">
                     My bounties
                 </c-button>
             </div>
@@ -50,7 +50,7 @@
                         <span>{{ item.approved }}</span>
                     </div>
                 </div>
-                <c-button status="success" fontSize="14" icon_hide @click=" showDownload = !showDownload " size="lg" class="text-uppercase">
+                <c-button status="success" fontSize="14" iconHide @click=" showDownload = !showDownload " size="lg" class="text-uppercase">
                     Claim Bounty
                 </c-button>
             </div>

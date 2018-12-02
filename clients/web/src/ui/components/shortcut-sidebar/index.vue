@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a class="shortcut-sidebar__grid" href="#" @click.prevent="showGrid"></a>
+        <a class="shortcut-sidebar__grid" href="#" @click.prevent="showGrid" hidden></a>
         <c-grid
             :center="false"
             :draggable="true"
@@ -24,6 +24,7 @@
                     :eventKey="props.item.eventKey"
                     :eventValue="props.item.eventValue"
                     :icon="props.item.icon"
+                    :removable="props.item.removable"
                     @remove="props.remove()" />
             </template>
         </c-grid>
@@ -84,12 +85,12 @@
 
 <style lang="scss" scoped>
     .shortcut-sidebar__grid {
-        border: 1px dashed rgba(0, 0, 0, 1);
+        border: 1px dashed rgba(255, 255, 255, 0.4);
         background-image: url(/static/img/icons/grid.png);
         background-size: 70%;
         background-repeat: no-repeat;
         background-position: 50% 50%;
-        background-color: #fff;
+        margin-top: 10px;
         width: 50px;
         height: 50px;
         display: block;

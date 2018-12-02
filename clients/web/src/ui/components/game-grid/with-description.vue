@@ -85,7 +85,7 @@
                         status="success"
                         v-if="showLink"
                         :href="`#/product/${item.id}`"
-                        icon_hide
+                        iconHide
                     >More</c-button>
                 </div>
             </div>

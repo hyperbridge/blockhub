@@ -105,6 +105,7 @@
                 }
             }
         }
+        backdrop-filter: blur(2px);
     }
     .block__content{
         width: 100%;

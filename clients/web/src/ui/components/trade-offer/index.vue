@@ -18,8 +18,8 @@
                 Trade {{ offer.yourOffer.length }} for {{ offer.contractorOffer.length }} assets
             </span>
             <div>
-                <c-button status="success" icon_hide>Accept</c-button>
-                <c-button status="danger" icon_hide>Decline</c-button>
+                <c-button status="success" iconHide>Accept</c-button>
+                <c-button status="danger" iconHide>Decline</c-button>
             </div>
         </div>
         <transition name="slide-in-top">
@@ -91,14 +91,14 @@
                 <div class="trade-offer__action">
                     <c-button
                         status="info"
-                        icon_hide
+                        iconHide
                         @click="$router.push({
                             path: '/marketplace/trade/' + offer.id
                         })"
                     >Go to transaction</c-button>
                     <span>
-                        <c-button status="success" icon_hide>Accept</c-button>
-                        <c-button status="danger" icon_hide>Decline</c-button>
+                        <c-button status="success" iconHide>Accept</c-button>
+                        <c-button status="danger" iconHide>Decline</c-button>
                     </span>
                 </div>
             </div>

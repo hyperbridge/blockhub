@@ -84,7 +84,7 @@
             <div class="transaction__actions">
                 <c-button
                     status="info"
-                    icon_hide
+                    iconHide
                     @click="updateTrx()"
                 >Update transaction</c-button>
             </div>

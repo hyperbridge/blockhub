@@ -97,7 +97,7 @@
                                     <p>{{ banner.subtitle }}</p>
                                 </div>
                                 <div class="banner-action">
-                                    <c-button status="info" icon_hide size="lg">{{ banner.buttonText }}</c-button>
+                                    <c-button status="info" iconHide size="lg">{{ banner.buttonText }}</c-button>
                                 </div>
                             </div>
                         </c-banner>

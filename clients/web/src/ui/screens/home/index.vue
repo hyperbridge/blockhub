@@ -9,7 +9,7 @@
                                 <p>BlockHub has launched and the token sale is now live!</p>
                             </div>
                             <div class="banner-action">
-                                <c-button tag="div" tatus="info" icon_hide size="lg" href="#/token">JOIN NOW</c-button>
+                                <c-button tag="div" tatus="info" iconHide size="lg" href="#/token">JOIN NOW</c-button>
                             </div>
                         </div>
                     </c-banner>

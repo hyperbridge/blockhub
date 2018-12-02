@@ -18,7 +18,7 @@
         </div>
         <div class="heading-bar__additional-action" v-if="showActions">
             <slot name="additional-action"></slot>
-            <c-button status="plain" :href="more" v-if="more" icon="angle-right" :swap_order="true">
+            <c-button status="plain" :href="more" v-if="more" icon="angle-right" :swapOrder="true">
                 MORE
             </c-button>
             <div class="heading-bar__nav" v-if="showArrows">

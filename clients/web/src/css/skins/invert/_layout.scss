@@ -41,9 +41,7 @@
             left: 0;
 
             &.invert{
-                background-color: transparent;
-                color: $invert-color;            
-                border-right-color: transparent;
+                color: $invert-color;
                 @if $shadows != 0 {
                     box-shadow: 2px 0px 12px rgba(0,0,0,0.2);
                 }
@@ -61,14 +59,11 @@
             right: 0;
 
             &.invert{
-                background: transparent;
                 color: $invert-color;
-                border-right-color: $invert-sidepanel-border;
                 
                 > .page-sidepanel__button{
                     background: transparent;
                     border: 1px solid $invert-sidepanel-border;
-                    border-left-color: $invert-sidepanel-background;
                     
                     div{
                         border-color: transparent $invert-color transparent transparent;                        

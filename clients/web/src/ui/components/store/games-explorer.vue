@@ -42,7 +42,7 @@
                         v-model="phrase"
                     />
                 </div>
-                <c-button status="info" icon_hide>All New Releases</c-button>
+                <c-button status="lightpurple" iconHide doubled>All New Releases</c-button>
             </div>
             <transition name="slide-in">
                 <div v-if="filtersActive" class="active-filters">
@@ -123,11 +123,11 @@
                 />
             </c-content-navigation>
             <div v-else-if="filtersActive">
-                <p>No products were found using these filters. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
+                <p>No products were found using these filters. Want to <c-button status="plain" doubled @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
                 <c-button
                     status="info"
                     size="md"
-                    icon_hide
+                    iconHide
                     @click="clearFilters()"
                 >Clear filters</c-button>
             </div>

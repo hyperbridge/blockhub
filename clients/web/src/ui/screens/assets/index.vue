@@ -70,7 +70,7 @@
                             <div class="align-items-start" style="margin-top: auto">
                                 <h3 class="text-white h1 font-weight-bold p-0 m-0">Very Fiery Contest</h3>
                                 <p class="text-capitalize h3 my-3">What are they playing?</p>
-                                <c-button status="info" size="lg" class="mt-4" icon_hide>Call To action</c-button>
+                                <c-button status="info" size="lg" class="mt-4" iconHide>Call To action</c-button>
                             </div>
                         </c-banner>
                     </div>

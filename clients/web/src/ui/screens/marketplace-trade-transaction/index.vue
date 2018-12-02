@@ -111,7 +111,7 @@
                             <div class="transaction__actions">
                                 <c-button
                                     status="info"
-                                    icon_hide
+                                    iconHide
                                 >Update transaction</c-button>
                             </div>
                         </c-block>

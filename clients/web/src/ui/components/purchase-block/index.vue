@@ -28,7 +28,7 @@
         </div>
 
         <div class="purchase-block__buttons-group col-12">
-            <c-button status="outline-success" :href="purchaseLink" icon_hide size="xl" :shadow="false" v-if="isReleased && price" @click="onClickPurchase">
+            <c-button status="outline-success" :href="purchaseLink" iconHide size="xl" :shadow="false" v-if="isReleased && price" @click="onClickPurchase">
                 Proceed to Purchase
             </c-button>
 
@@ -36,11 +36,11 @@
                 Free Download
             </c-button>
 
-            <c-button icon_hide icon="download" :href="demoLink" v-if="demoLink">
+            <c-button iconHide icon="download" :href="demoLink" v-if="demoLink">
                 Download Demo
             </c-button>
 
-            <c-button icon_hide status="success" size="xl" icon="download" :href="playLink" v-if="playLink">
+            <c-button iconHide status="success" size="xl" icon="download" :href="playLink" v-if="playLink">
                 Play Now
             </c-button>
 

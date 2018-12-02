@@ -8,7 +8,7 @@
                         <div class="input-group input-group-lg my-5">
                             <input type="text" class="form-control" placeholder="Search query" aria-label="Search query" aria-describedby="button-addon">
                             <div class="input-group-append">
-                                <c-button status="info" class="px-4" icon_hide style="border-radius: 0 5px 5px 0">Search</c-button>
+                                <c-button status="info" class="px-4" iconHide style="border-radius: 0 5px 5px 0">Search</c-button>
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                             <h4 class="h2">Community</h4>
                             <p><strong>Want to get help and maybe meet a new dungeon buddy?</strong></p>
                             <p>Engage with a community of passionate gamers to get the answers you need.</p>
-                            <c-button icon_hide class="width-auto margin-top-10" href="https://github.com/hyperbridge/blockhub-desktop-client"
+                            <c-button iconHide class="width-auto margin-top-10" href="https://github.com/hyperbridge/blockhub-desktop-client"
                                       target="_blank">Ask Our Community
                             </c-button>
                         </c-card>
@@ -81,7 +81,7 @@
                             <h4 class="h2">BlockHub Support</h4>
                             <p><strong>Didn't find the answer you were looking for?</strong></p>
                             <p>Create a support ticket and our support experts will get back to you.</p>
-                            <c-button href="https://hyperbridge.zendesk.com/" status="info" icon_hide class="width-auto margin-top-10" target="_blank">Contact Us
+                            <c-button href="https://hyperbridge.zendesk.com/" status="info" iconHide class="width-auto margin-top-10" target="_blank">Contact Us
                             </c-button>
                         </c-card>
                     </div>

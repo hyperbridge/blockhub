@@ -5,7 +5,7 @@
                 By using this website, you agree to our
                 <c-button status="plain" class="p-0 m-0" @click="showPopup">cookie policy</c-button>
             </p>
-            <c-button status="info" class="margin-left-20" icon_hide @click="updateClientSettings()">
+            <c-button status="info" class="margin-left-20" iconHide @click="updateClientSettings()">
                 Dismiss
             </c-button>
             <c-popup :activated="show" @close="closePopup" title="Cookie Policy">
@@ -22,7 +22,7 @@
                 </p>
                 <template slot="footer">
                     <div class="text-right w-100">
-                        <c-button status="success" icon_hide @click="updateClientSettings()">
+                        <c-button status="success" iconHide @click="updateClientSettings()">
                             Accept
                         </c-button>
                     </div>

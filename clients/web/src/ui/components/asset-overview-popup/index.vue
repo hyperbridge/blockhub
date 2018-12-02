@@ -19,7 +19,7 @@
         </div>
         <div class="asset-overview-popup__action">
             <div class="button-line d-flex w-100 justify-content-between">
-                <c-button status="danger" icon_hide>
+                <c-button status="danger" iconHide>
                     <c-icon name="trash-alt"/>
                 </c-button>
                 <div class="text-right">

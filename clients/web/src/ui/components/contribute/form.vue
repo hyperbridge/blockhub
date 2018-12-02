@@ -8,7 +8,7 @@
             </div>
             <input type="text" class="form-control" ref="input" placeholder="0.00" v-model="mutableValue" />
         </div>
-        <c-button status="success" class="justify-content-center" icon_hide size="xl" @click="$emit('click')">
+        <c-button status="success" class="justify-content-center" iconHide size="xl" @click="$emit('click')">
             Continue
         </c-button>
     </div>

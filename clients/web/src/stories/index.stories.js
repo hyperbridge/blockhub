@@ -1059,27 +1059,27 @@ storiesOf('Buttons', module)
     .add('[options] - swap direction', () => ({
         components: {'c-button': Buttons},
         template: injectButtonTemplate(`
-            <c-button status="info" swap_direction>direction swapped</c-button>
-            <c-button status="info" size="md" swap_direction>direction swapped</c-button>
-            <c-button status="info" size="lg" swap_direction>direction swapped</c-button>
+            <c-button status="info" swapDirection>direction swapped</c-button>
+            <c-button status="info" size="md" swapDirection>direction swapped</c-button>
+            <c-button status="info" size="lg" swapDirection>direction swapped</c-button>
         `)
     }))
     .add('[options] - swap order', () => ({
         components: {'c-button': Buttons},
         template: injectButtonTemplate(`
-            <c-button status="success" swap_order>success</c-button>
+            <c-button status="success" swapOrder>success</c-button>
         `)
     }))
     .add('[options] - swap order & direction', () => ({
         components: {'c-button': Buttons},
         template: injectButtonTemplate(`
-            <c-button status="info" size="lg" swap_direction swap_order>order & direction swapped</c-button>
+            <c-button status="info" size="lg" swapDirection swapOrder>order & direction swapped</c-button>
         `)
     }))
     .add('[options] - hide icon', () => ({
         components: {'c-button': Buttons},
         template: injectButtonTemplate(`
-            <c-button status="success" icon_hide>success</c-button>
+            <c-button status="success" iconHide>success</c-button>
         `)
     }))
     .add('[options] - emoji', () => ({
@@ -1363,7 +1363,7 @@ storiesOf('Tooltip Universal', module)
                     title="Some epic title!"
                     text="Tooltip description goes here :) 👻👽"
                     position="bottom"
-                    icon_hide
+                    iconHide
                 >
                     <h2>I have no questionmark icon</h2>
                 </c-tooltip-universal>

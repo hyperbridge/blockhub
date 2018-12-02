@@ -41,7 +41,7 @@
                                     />
                                 </td>
                                 <td>
-                                    <c-button status="warning" @click="edited = {}" icon_hide>Cancel</c-button>
+                                    <c-button status="warning" @click="edited = {}" iconHide>Cancel</c-button>
                                     <c-button
                                         status="danger"
                                         @click="$store.dispatch(
@@ -230,7 +230,7 @@
                     .filter(([id, prosp]) => prosp.user.id == this.profileId);
             },
             profile() {
-                return this.$store.getters['application/profile'];
+                return this.$store.state.application.account.activeProfile
             }
         },
         watch: {

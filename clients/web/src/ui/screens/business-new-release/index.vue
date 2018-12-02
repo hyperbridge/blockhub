@@ -75,10 +75,10 @@
                     <div class="col-sm-3 col-lg-2">
                     </div>
                     <div class="col-sm-9 col-lg-10">
-                        <c-button status="success" icon_hide>
+                        <c-button status="success" iconHide>
                             Publish release
                         </c-button>
-                        <c-button status="danger" icon_hide class="mx-3">
+                        <c-button status="danger" iconHide class="mx-3">
                             Save draft
                         </c-button>
                     </div>

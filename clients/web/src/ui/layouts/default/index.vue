@@ -262,16 +262,20 @@
                 <div class="h4" slot="header">Connection Status</div>
                 <template slot="body">
                     <div class="connection-status__status-items">
-                        <div>Internet Connection <span class="fa"
+                        <div>
+                            Internet Connection <span class="fa"
                             :class="{'fa-check-circle': $store.state.application.connection.internet, 'fa-times-circle': !$store.state.application.connection.internet }"></span>
                         </div>
-                        <div>Web Server Connection <span class="fa"
+                        <div>
+                            Web Server Connection <span class="fa"
                             :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }"></span>
                         </div>
-                        <div>Real-time Server Connection <span class="fa"
+                        <div>
+                            Real-time Server Connection <span class="fa"
                             :class="{'fa-check-circle': $store.state.application.connection.datasource, 'fa-times-circle': !$store.state.application.connection.datasource }"></span>
                         </div>
-                        <div>Ethereum Connection <span class="fa"
+                        <div v-decentralized-mode>
+                            Ethereum Connection <span class="fa"
                             :class="{'fa-check-circle': $store.state.application.connection.ethereum, 'fa-times-circle': !$store.state.application.connection.ethereum }"></span>
                         </div>
                     </div>
@@ -744,7 +748,8 @@
     }
     .content{
         padding: 20px;
-        padding-left: 80px;
+        padding-left: 90px;
+        z-index: 2;
         .container-fluid{
             padding: 0!important;
         }
@@ -1037,12 +1042,17 @@
         padding-top: 100px;
         position: relative;
         .page-aside {
-            margin-left: 60px;
+            margin-left: 70px;
         }
 
         .page-aside,
         .page-sidepanel {
-            top: 100px;
+            height: 100%;
+            top: 0;
+            padding-top: 100px;
+            background: rgba(0, 0, 0, 0.3);
+            box-shadow: inset 0 0 3px #000;
+            border: 0 none;
         }
     }
 
@@ -1074,10 +1084,13 @@
 
     .page-shortcuts {
         position: fixed;
-        top: 50px;
-        left: 10px;
-        width: 50px;
-        z-index: 101;
+        top: 30px;
+        left: 0;
+        width: 70px;
+        padding: 10px;
+        z-index: 99;
+        background: rgba(0, 0, 0, 0.3);
+        box-shadow: inset 0 0 3px #000;
     }
 
     .page {

@@ -74,7 +74,7 @@
                         </p>
                         
                         <div class="margin-top-30" style="text-align: center">
-                            <c-button status="success" class="c-btn-lg justify-content-center" icon_hide size="xl" @click="proceed" :class="{'disabled': !canContinue }">
+                            <c-button status="success" class="c-btn-lg justify-content-center" iconHide size="xl" @click="proceed" :class="{'disabled': !canContinue }">
                                 Continue
                             </c-button>
                         </div>

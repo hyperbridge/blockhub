@@ -21,7 +21,7 @@
                                 Don't miss exclusive splash sale on nov 15, 16, 17! Only for 20k+ HBX holders!
                             </div>
                         </div>
-                        <c-button size="lg" status="success" icon_hide>
+                        <c-button size="lg" status="success" iconHide>
                             Purchase 20k+ HBX
                         </c-button>
                     </div>
@@ -35,7 +35,7 @@
                         <div class="h4 px-4 m-0 w-auto font-weight-light">
                             BlockHub and HBX are brought to you by Hyperbridge Technology. We build technology for a crowdfunded world.
                         </div>
-                        <c-button href="https://hyperbridge.org/" size="lg" status="info" icon_hide target="_blank" hidden>
+                        <c-button href="https://hyperbridge.org/" size="lg" status="info" iconHide target="_blank" hidden>
                             Learn more
                         </c-button>
                     </div>
@@ -320,7 +320,7 @@
                         </div>
                         
                         <br /><br />
-                        <c-button status="success" class="justify-content-center" icon_hide size="xl" @click="proceed" :class="{'disabled': !canContinue }">
+                        <c-button status="success" class="justify-content-center" iconHide size="xl" @click="proceed" :class="{'disabled': !canContinue }">
                             Proceed to Purchase
                         </c-button>
                     </div>
@@ -472,7 +472,7 @@
 
                                 <br /><br />
                                 <div style="text-align: center">
-                                    <c-button status="info" class="justify-content-center" icon_hide size="xl" @click="confirmPurchase">
+                                    <c-button status="info" class="justify-content-center" iconHide size="xl" @click="confirmPurchase">
                                         Confirm Purchase
                                     </c-button>
                                 </div>

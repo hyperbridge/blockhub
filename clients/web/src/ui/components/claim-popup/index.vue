@@ -14,7 +14,7 @@
                     </div>
                     <div slot="footer" class="d-flex align-items-center justify-content-end margin-top-10">
                         <div class="text-right w-100">
-                            <c-button status="info" icon_hide @click="$emit('close')">
+                            <c-button status="info" iconHide @click="$emit('close')">
                                 OK
                             </c-button>
                         </div>
@@ -80,7 +80,7 @@
                     <div slot="footer" class="d-flex align-items-center justify-content-end margin-top-10">
                         <div class="text-right w-100">
                             <c-button @click="$emit('close')">Cancel</c-button>
-                            <c-button status="info" icon_hide @click="nextStep()">
+                            <c-button status="info" iconHide @click="nextStep()">
                                 Continue
                             </c-button>
                         </div>
@@ -135,7 +135,7 @@
                     <div slot="footer" class="d-flex align-items-center justify-content-end margin-top-10">
                         <div class="text-right w-100">
                             <c-button @click="$emit('close')">Cancel</c-button>
-                            <c-button status="info" icon_hide @click="nextStep()">
+                            <c-button status="info" iconHide @click="nextStep()">
                                 Continue
                             </c-button>
                         </div>

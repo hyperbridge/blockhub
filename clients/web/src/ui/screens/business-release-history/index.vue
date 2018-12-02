@@ -4,10 +4,10 @@
             <div class="row">
                 <div class="col-12">
                     <c-buttons-group>
-                        <c-button :status="ifList" size="md" @click="listType = 'list'" :shadow="false" icon_hide>
+                        <c-button :status="ifList" size="md" @click="listType = 'list'" :shadow="false" iconHide>
                             Releases
                         </c-button>
-                        <c-button :status="ifTags" size="md" @click="listType = 'tags'" :shadow="false" icon_hide>
+                        <c-button :status="ifTags" size="md" @click="listType = 'tags'" :shadow="false" iconHide>
                             Tags
                         </c-button>
                     </c-buttons-group>

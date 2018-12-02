@@ -91,9 +91,9 @@
                             </div>
                         </div>
                         <div class="project__action">
-                            <c-button status="share" swap_direction>Share</c-button>
-                            <c-button status="info" icon="check" swap_direction>Follow</c-button>
-                            <c-button status="support" swap_direction>Support</c-button>
+                            <c-button status="share" swapDirection>Share</c-button>
+                            <c-button status="info" icon="check" swapDirection>Follow</c-button>
+                            <c-button status="support" swapDirection>Support</c-button>
                         </div>
                     </div>
                 </div>
@@ -187,7 +187,7 @@
         },
         computed: {
             wishlist() {
-                return this.$store.getters['application/profile'].projectWishlist || {};
+                return this.$store.state.application.account.activeProfile && this.$store.state.application.account.activeProfile.productWishlist || {};
             }
         }
     }

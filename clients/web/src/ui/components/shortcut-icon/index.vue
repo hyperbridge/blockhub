@@ -1,6 +1,6 @@
 <template>
   <div class="shortcut-icon" :style="style">
-    <i v-if="withButton && !icon"
+    <i v-if="withButton && !icon && removable"
          class="icon-delete-btn fa fa-times"
          @mousedown="remove" />
     <slot>
@@ -17,83 +17,93 @@
 
 <script>
 export default {
-  props: {
-    index: {
-      type: Number
-    },
-    text: {
-        type: String,
-        default: null
-    },
-    image: {
-        type: String,
-        default: null
-    },
-    link: {
-        type: String,
-        default: '#'
-    },
-    icon: {
-        type: String,
-        default: null
-    },
-    eventKey: {
-        type: String,
-        default: null
-    },
-    eventValue: {
-        type: String,
-        default: null
-    },
-    withButton: {
-      type: Boolean,
-      default: false
-    },
-    color: {
-      type: Object,
-      default: () => {
-        return {
-            r: null,
-            g: null,
-            b: null
+    props: {
+        index: {
+            type: Number
+        },
+        text: {
+            type: String,
+            default: null
+        },
+        image: {
+            type: String,
+            default: null
+        },
+        link: {
+            type: String,
+            default: '#'
+        },
+        icon: {
+            type: String,
+            default: null
+        },
+        sort: {
+            type: Number,
+            default: null
+        },
+        eventKey: {
+            type: String,
+            default: null
+        },
+        eventValue: {
+            type: String,
+            default: null
+        },
+        withButton: {
+            type: Boolean,
+            default: false
+        },
+        removable: {
+            type: Boolean,
+            default: true
+        },
+        color: {
+            type: Object,
+            default: () => {
+                return {
+                        r: null,
+                        g: null,
+                        b: null
+                }
+            }
         }
-      }
-    }
-  },
-  components: {
-    'c-tooltip': (resolve) => require(['@/ui/components/tooltips/universal'], resolve)
-  },
-  computed: {
-    brightness () {
-      let { r, g, b } = this.color
-      return 0.299 * r + 0.587 * g + 0.114 * b
     },
-    style () {
-      if (this.color) {
-        let { r, g, b } = this.color
-        let background = `rgb(${r}, ${g}, ${b})`
-        let shadow = `rgba(${r}, ${g}, ${b}, 0.5)`
-        return {
-          'background-color': background,
-          //'box-shadow': `0px 6px 20px ${shadow}`,
-          'color': this.brightness > 180 ? '#777' : '#f3f3f3'
-        }
-      }
-      return null
-    }
-  },
-  methods: {
-    remove() {
-      this.$emit('remove', {
-        index: this.index
-      })
+    components: {
+        'c-tooltip': (resolve) => require(['@/ui/components/tooltips/universal'], resolve)
     },
-    click() {
-        if (this.eventKey) {
-            BlockHub.store.dispatch(this.eventKey, this.eventValue)
+    computed: {
+        brightness() {
+            let { r, g, b } = this.color
+
+            return 0.299 * r + 0.587 * g + 0.114 * b
+        },
+        style() {
+            if (this.color) {
+                let { r, g, b } = this.color
+                let background = `rgb(${r}, ${g}, ${b})`
+                let shadow = `rgba(${r}, ${g}, ${b}, 0.5)`
+
+                return {
+                    'background-color': background,
+                    //'box-shadow': `0px 6px 20px ${shadow}`,
+                    'color': this.brightness > 180 ? '#777' : '#f3f3f3'
+                }
+            }
+            return null
+        }
+    },
+    methods: {
+        remove() {
+            this.$emit('remove', {
+                index: this.index
+            })
+        },
+        click() {
+            if (this.eventKey) {
+                this.$store.dispatch(this.eventKey, this.eventValue)
+            }
         }
     }
-  }
 }
 </script>
 
@@ -114,7 +124,7 @@ export default {
   height: 50px;
   width: 50px;
   border-radius: 10px;
-  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.07);
+  /*box-shadow: 0 0px 3px rgba(255, 255, 255, 0.4);*/
   color: #777;
   font-weight: 900;
   font-size: 12px;
@@ -122,7 +132,7 @@ export default {
   text-align: center;
   transition: all 0.1s;
   cursor: pointer;
-  border: 1px dashed rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 
   a {
     background-size: cover;

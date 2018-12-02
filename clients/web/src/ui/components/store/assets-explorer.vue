@@ -50,7 +50,7 @@
                         <c-button
                             tag="div"
                             status="info"
-                            icon_hide
+                            iconHide
                             v-if="assets.length"
                         >
                         View All
@@ -160,16 +160,16 @@
                     />
                 </c-content-navigation>
                 <div v-else-if="filtersActive">
-                    <p>No products were found using these filters. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
+                    <p>No products were found using these filters. Want to <c-button status="plain" doubled @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?</p>
                     <c-button
                         status="info"
                         size="md"
-                        icon_hide
+                        iconHide
                         @click="clearFilters()"
                     >Clear filters</c-button>
                 </div>
                 <p v-else>
-                    Nothing could be found. Want to <c-button status="plain" @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?
+                    Nothing could be found. Want to <c-button status="plain" doubled @click="$store.commit('application/activateModal', 'coming-soon')">Check for updates</c-button>?
                 </p>
             </c-block>
         </div>

@@ -58,6 +58,7 @@
         border-radius: 5px;
         background: rgba(255, 255, 255, .2);
         position: relative;
+        backdrop-filter: blur(2px);
     }
     .collection-list__header{
         display: flex;

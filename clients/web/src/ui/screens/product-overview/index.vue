@@ -52,7 +52,7 @@
                     { id: 'product' + product.id, type: 'product', text: product.name, link: '#/product/' + product.id, image: product.images.mediumTile }
                 )"
             />
-            <c-button icon_hide @click="showInstaller = !showInstaller" hidden>Open installer</c-button>
+            <c-button iconHide @click="showInstaller = !showInstaller" hidden>Open installer</c-button>
 
             <c-rating-block class="margin-bottom-20" :items="product.rating"
                             :parent_url="`#/product/${product.id}`" v-darklaunch="'RATINGS'" />
@@ -198,12 +198,12 @@
                 return this.$refs.streamsSlider.swiper
             },
             wishlist() {
-                return this.$store.getters['application/profile'].productWishlist || {}
+                return this.$store.state.application.account.activeProfile && this.$store.state.application.account.activeProfile.productWishlist || {}
             },
-            streams(){
+            streams() {
                 return this.product.streams
             },
-            reviews(){
+            reviews() {
                 return this.product.reviews
             },
             currentRelease() {

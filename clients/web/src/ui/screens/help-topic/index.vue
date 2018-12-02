@@ -44,7 +44,7 @@
                     <c-card class="text-center">
                         <h4 class="h2">Community</h4>
                         <p>Engage with a community of passionate experts to get the answers you need</p>
-                        <c-button icon_hide class="width-auto margin-top-10" href="https://github.com/hyperbridge/blockhub-desktop-client"
+                        <c-button iconHide class="width-auto margin-top-10" href="https://github.com/hyperbridge/blockhub-desktop-client"
                                     target="_blank">Visit GitHub
                         </c-button>
                     </c-card>
@@ -53,7 +53,7 @@
                     <c-card class="text-center">
                         <h4 class="h2">BlockHub Support</h4>
                         <p>Create a support ticket and our support experts will get back to you</p>
-                        <c-button href="https://hyperbridge.zendesk.com/" status="info" icon_hide class="width-auto margin-top-10">Create a ticket
+                        <c-button href="https://hyperbridge.zendesk.com/" status="info" iconHide class="width-auto margin-top-10">Create a ticket
                         </c-button>
                     </c-card>
                 </div>

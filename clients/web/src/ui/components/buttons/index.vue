@@ -6,7 +6,8 @@
         class="c-btn"
         :class="[
             status, 'c-btn-' + size ,
-            { 'swap-direction': swap_direction },
+            { 'swap-direction': swapDirection },
+            { 'doubled': doubled },
             { 'no-shadow' : !shadow}
         ]"
         style="font-size: 14px"
@@ -14,11 +15,11 @@
         @click="$emit('click')"
     >
         <i
-            v-if="(icon || inject_filter.length) && !icon_hide"
+            v-if="(icon || injectFilter.length) && !iconHide"
             class="icon fas"
             :class="[
-                icon ? 'fa-' + icon : inject_filter,
-                swap_order ? 'swap-order' : ''
+                icon ? 'fa-' + icon : injectFilter,
+                swapOrder ? 'swap-order' : ''
             ]"
         ></i>
         <span>
@@ -44,13 +45,14 @@
                 default: '_self',
             },
             icon: String,
-            icon_hide: Boolean,
+            iconHide: Boolean,
             status: {
                 type: String,
                 default: 'default'
             },
-            swap_order: Boolean,
-            swap_direction: Boolean,
+            swapOrder: Boolean,
+            swapDirection: Boolean,
+            doubled: Boolean,
             size: {
                 type: String,
                 default: 'sm'
@@ -64,7 +66,7 @@
             }
         },
         computed: {
-            inject_filter() {
+            injectFilter() {
                 return this.$options.filters.statusIcon(this.status);
             }
         }
@@ -82,6 +84,7 @@
 
     .c-btn {
         display: inline-flex;
+        position: relative;
         align-items: center;
         padding: 0px 8px;
         line-height: 24px;
@@ -171,6 +174,26 @@
             }
         }
 
+        &.doubled {
+            padding: 3px 11px;
+
+            &:before {
+                content: "";
+                position: absolute;
+                display: block;
+                top: 4px;
+                right: 4px;
+                bottom: 4px;
+                left: 4px;
+                border: 1px solid;
+                border-radius: 2px;
+                -webkit-transition: .3s background-color,.3s border-color;
+                -o-transition: .3s background-color,.3s border-color;
+                transition: .3s background-color,.3s border-color;
+                z-index: 1;
+            }
+        }
+
         $statusColors: (
             default: (#fff, #3D3E5D, #3D3E5D, #A2A3BE),
             success: (#5EA72B, #fff, #559727, #30304B),
@@ -180,6 +203,8 @@
             warning: (#FADC72, #3D3E5D, #efd26d, #32334c),
             danger: (#F75D5D, #fff, #de5454, #30304B),
             dark: (#3D3E5D, #fff, #2e2f47, #fff),
+            verydark: (rgba(14,14,14,.9), #fff, rgba(14,14,14,.9), #fff),
+            lightpurple: (rgba(68, 67, 95, 0.9), #fff, rgba(68, 67, 95, 0.9), #fff),
             plain: (transparent, #fff, transparent, #ddd),
         );
 

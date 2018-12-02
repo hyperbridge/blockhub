@@ -86,7 +86,7 @@
         },
         computed: {
             profile() {
-                return this.$store.getters['application/profile'];
+                return this.$store.state.application.account.activeProfile
             }
         }
     }

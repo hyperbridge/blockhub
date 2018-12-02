@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div>
-                    <c-button status="success" size="lg" icon_hide @click="$emit('purchase')">
+                    <c-button status="success" size="lg" iconHide @click="$emit('purchase')">
                         Purchase HBX
                     </c-button>
                 </div>

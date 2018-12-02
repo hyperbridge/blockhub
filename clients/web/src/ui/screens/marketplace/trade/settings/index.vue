@@ -15,7 +15,7 @@
             <c-button
                 @click="$store.dispatch('application/createTradeUrl')"
                 status="info"
-                icon_hide
+                iconHide
             >
                 Generate new trade URL
             </c-button>
