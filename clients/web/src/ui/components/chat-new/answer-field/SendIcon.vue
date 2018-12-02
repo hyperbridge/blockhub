@@ -1,6 +1,6 @@
 <template>
     <button
-        @click.prevent="onClick"
+        @click.prevent="$emit('click')"
         class="sc-user-input--send-icon-wrapper"
     >
         <svg
@@ -26,10 +26,6 @@
 <script>
     export default {
         props: {
-            onClick: {
-                type: Function,
-                required: true
-            },
             color: {
                 type: String,
                 required: true
@@ -45,6 +41,9 @@
         padding: 0px;
         margin: 0px;
         outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .sc-user-input--send-icon-wrapper:focus {
         outline: none;

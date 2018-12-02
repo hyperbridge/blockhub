@@ -1,12 +1,13 @@
 <template>
     <div class="group-content">
-        <div class="group-content__msgs-list">
-            <slot name="messages" />
+        <div class="group-content__msgs">
+            <div class="msgs-list">
+                <slot name="messages" />
+            </div>
             <c-answer-field />
         </div>
         <div class="chat__user-list">
             <slot name="users" />
-            <!--<c-chat-user v-for="i in 5" />-->
         </div>
     </div>
 </template>
@@ -30,12 +31,18 @@
         display: flex;
         justify-content: space-between;
     }
-    .group-content__msgs-list{
+    .group-content__msgs{
         height: 100%;
         width: calc( 100% - 250px );
+        padding: 10px 15px 0 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .msgs-list{
         overflow-y: auto;
         overflow-x: hidden;
-        padding: 10px 15px 10px 0;
+        margin-bottom: 15px;
     }
     .chat__user-list{
         width: 250px;

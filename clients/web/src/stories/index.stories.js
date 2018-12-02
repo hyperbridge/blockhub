@@ -5298,6 +5298,30 @@ storiesOf('Chat', module)
                     {
                         user: 1,
                         text: 'Aliquam maximus convallis dui ut facilisis.'
+                    },
+                    {
+                        user: 2,
+                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit ullamcorper enim varius sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,'
+                    },
+                    {
+                        user: 3,
+                        text: 'Duis sit amet nisl efficitur, rutrum arcu ac, bibendum ligula. Mauris viverra pellentesque massa sed congue. Nunc dictum gravida lobortis.'
+                    },
+                    {
+                        user: 1,
+                        text: 'Aliquam maximus convallis dui ut facilisis.'
+                    },
+                    {
+                        user: 2,
+                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit ullamcorper enim varius sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,'
+                    },
+                    {
+                        user: 3,
+                        text: 'Duis sit amet nisl efficitur, rutrum arcu ac, bibendum ligula. Mauris viverra pellentesque massa sed congue. Nunc dictum gravida lobortis.'
+                    },
+                    {
+                        user: 1,
+                        text: 'Aliquam maximus convallis dui ut facilisis.'
                     }
                 ]
             }

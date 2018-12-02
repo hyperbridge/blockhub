@@ -1,12 +1,6 @@
 <template>
-    <div>
-        <!--<Suggestions :suggestions="suggestions" v-on:sendSuggestion="_submitSuggestion" :colors="colors"/>-->
-        <!--<div v-if="file" class='file-container' :style="{backgroundColor: colors.userInput.text, color: colors.userInput.bg}">-->
-            <!--<span class='icon-file-message'><img src="./assets/file.svg" alt='genericFileIcon' height="15" /></span>-->
-            <!--{{file.name}}-->
-            <!--<span class='delete-file-message' @click="cancelFile()" ><img src="./assets/close.svg" alt='close icon' height="10" title='Remove the file' /></span>-->
-        <!--</div>-->
-        <form class="sc-user-input" :class="{active: inputActive}">
+    <div class="c-user-input">
+        <form class="c-user-input-field" :class="{ 'active': inputActive }">
             <div
                 role="button"
                 tabIndex="0"
@@ -15,60 +9,34 @@
                 @keydown="handleKey"
                 contentEditable="true"
                 :placeholder="placeholder"
-                class="sc-user-input--text"
+                class="c-user-input--text"
                 ref="userInput"
             >
             </div>
-            <div class="sc-user-input--buttons">
-                <div class="sc-user-input--button"></div>
-                <div v-if="showEmoji" class="sc-user-input--button">
-                    <!--<EmojiIcon :onEmojiPicked="_handleEmojiPicked" :color="colors.userInput.text" />-->
-                </div>
-                <div class="sc-user-input--button">
-                    <SendIcon :onClick="_submitText" color="rgba(255, 255, 255, .4)" />
+            <div class="c-user-input--buttons">
+                <div class="c-user-input--button">
+                    <SendIcon @click="_submitText" color="rgba(255, 255, 255, .4)" />
                 </div>
             </div>
         </form>
+        <div class="c-user-input__typing">
+            Josh and Ann is typing ...
+        </div>
     </div>
 </template>
 
 
 <script>
-    // import EmojiIcon from './EmojiIcon.vue'
-    // import FileIcons from './FileIcons.vue'
     import SendIcon from './SendIcon.vue'
-    // import Suggestions from './Suggestions.vue'
+
     export default {
         components: {
-            // EmojiIcon,
-            // FileIcons,
-            SendIcon,
-            // Suggestions
+            SendIcon
         },
         props: {
-            showEmoji: {
-                type: Boolean,
-                default: () => false
-            },
-            suggestions: {
-                type: Array,
-                default: () => []
-            },
-            showFile: {
-                type: Boolean,
-                default: () => false
-            },
-            onSubmit: {
-                type: Function,
-                // required: true
-            },
             placeholder: {
                 type: String,
                 default: 'Write a reply'
-            },
-            colors: {
-                type: Object,
-                // required: true
             }
         },
         data () {
@@ -78,9 +46,6 @@
             }
         },
         methods: {
-            cancelFile () {
-                this.file = null
-            },
             setInputActive (onoff) {
                 this.inputActive = onoff
             },
@@ -89,9 +54,6 @@
                     this._submitText(event)
                     event.preventDefault()
                 }
-            },
-            _submitSuggestion(suggestion) {
-                this.onSubmit({author: 'me', type: 'text', data: { text: suggestion }})
             },
             _submitText (event) {
                 const text = this.$refs.userInput.textContent
@@ -123,95 +85,94 @@
                         this.$refs.userInput.innerHTML = ''
                     }
                 }
-            },
-            _handleEmojiPicked (emoji) {
-                this.onSubmit({
-                    author: 'me',
-                    type: 'emoji',
-                    data: { emoji }
-                })
-            },
-            _handleFileSubmit (file) {
-                this.file = file
             }
         }
     }
 </script>
 
-<style>
-    .sc-user-input {
-        min-height: 55px;
-        margin: 0px;
+<style lang="scss" scoped>
+    .c-user-input{
+        position: relative;
+    }
+    .c-user-input-field {
+        margin: 0;
         position: relative;
         bottom: 0;
         display: flex;
         background-color: rgba(0, 0, 0, .16);
         transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        justify-content: space-between;
     }
-    .sc-user-input--text {
-        width: 300px;
+    .c-user-input--text {
+        width: calc(100% - 100px );
         resize: none;
         border: none;
         outline: none;
         box-sizing: border-box;
-        padding: 18px;
-        font-size: 15px;
+        padding: 10px;
+        font-size: 14px;
         font-weight: 400;
         line-height: 1.33;
         white-space: pre-wrap;
         word-wrap: break-word;
         color: #fff;
-        -webkit-font-smoothing: antialiased;
         max-height: 200px;
         overflow: scroll;
         bottom: 0;
         overflow-x: hidden;
         overflow-y: auto;
+        &:empty:before {
+            content: attr(placeholder);
+            display: block;
+            filter: contrast(15%);
+            outline: none;
+        }
     }
-    .sc-user-input--text:empty:before {
-        content: attr(placeholder);
-        display: block; /* For Firefox */
-        /* color: rgba(86, 88, 103, 0.3); */
-        filter: contrast(15%);
-        outline: none;
-    }
-    .sc-user-input--buttons {
+    .c-user-input--buttons {
         width: 100px;
         position: absolute;
-        right: 30px;
+        right: 0;
         height: 100%;
         display: flex;
+        justify-content: flex-end;
     }
-    .sc-user-input--button:first-of-type {
-        width: 40px;
-    }
-    .sc-user-input--button {
+    .c-user-input--button {
         width: 30px;
-        height: 55px;
+        height: 38px;
         margin-left: 2px;
         margin-right: 2px;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        &:first-of-type {
+            width: 40px;
+        }
+        label {
+            position: relative;
+            height: 24px;
+            padding-left: 3px;
+            cursor: pointer;
+            &:hover path {
+                fill: rgba(86, 88, 103, 1);
+            }
+        }
+        input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            z-index: 99999;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            overflow: hidden;
+        }
     }
-    .sc-user-input--button label {
-        position: relative;
-        height: 24px;
-        padding-left: 3px;
-        cursor: pointer;
-    }
-    .sc-user-input--button label:hover path {
-        fill: rgba(86, 88, 103, 1);
-    }
-    .sc-user-input--button input {
+    .c-user-input__typing{
+        font-size: 10px;
+        color: #fff;
+        opacity: .5;
         position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        z-index: 99999;
-        height: 100%;
-        opacity: 0;
-        cursor: pointer;
-        overflow: hidden;
+        bottom: -17px;
     }
 </style>
