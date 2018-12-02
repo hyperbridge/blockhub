@@ -5245,12 +5245,72 @@ storiesOf('Chat', module)
             'c-chat-base': (resolve) => require(['@/ui/components/chat-new/base'], resolve),
             'c-chat-group': (resolve) => require(['@/ui/components/chat-new/content/group'], resolve),
             'c-chat-message': (resolve) => require(['@/ui/components/chat-new/message'], resolve),
-            'c-chat-user': (resolve) => require(['@/ui/components/chat-new/user'], resolve)
+            'c-chat-user': (resolve) => require(['@/ui/components/chat-new/user'], resolve),
+        },
+        data(){
+            return{
+                users:[
+                    {
+                        id: 1,
+                        avatar: 'http://sharethingz.com/wp-content/uploads/2014/08/avatar.png',
+                        name: 'Gregory Smith',
+                        game: 'Dota II',
+                        status: 'offline'
+                    },
+                    {
+                        id: 2,
+                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE0I_Z85x-UDnEncEgx0myKWxgAirSMenb4VN2TepCnropn4Hl',
+                        name: 'Louis Burns',
+                        game: 'WarCraft',
+                        status: 'busy'
+                    },
+                    {
+                        id: 3,
+                        avatar: 'http://geedmo.com/codecanyon/bskins/plan/assets/img/avatar.png',
+                        name: 'Thomas Harris',
+                        game: 'Heroes',
+                        status: 'online'
+                    },
+                    {
+                        id: 4,
+                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6yM6JujrHFOvFH9NvuV2lWnyXECBr1SWeF-I0tMdYmK942MXr',
+                        name: 'Terri Kopp',
+                        game: 'Dota II',
+                        status: 'online'
+                    },
+                    {
+                        id: 5,
+                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPk-mHx8SMUl0FBrnGMm49fksyHtj9yPPodc6JbrdubpbSqKxU',
+                        name: 'Mildred Floyd',
+                        game: 'CS GO',
+                        status: 'online'
+                    }
+                ],
+                messages:[
+                    {
+                        user: 2,
+                        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit ullamcorper enim varius sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,'
+                    },
+                    {
+                        user: 3,
+                        text: 'Duis sit amet nisl efficitur, rutrum arcu ac, bibendum ligula. Mauris viverra pellentesque massa sed congue. Nunc dictum gravida lobortis.'
+                    },
+                    {
+                        user: 1,
+                        text: 'Aliquam maximus convallis dui ut facilisis.'
+                    }
+                ]
+            }
         },
         template: `<div class="row p-3 m-0 flex-wrap" style="width: 1100px; height: 700px">
                         <c-chat-base>
                             <c-chat-group>
-                                <c-chat-message v-for="i in 5" />
+                                <template slot="messages">
+                                    <c-chat-message v-for="msg in messages" :text="msg.text" :user="users[msg.user]" />
+                                </template>
+                                <template slot="users">
+                                    <c-chat-user v-for="user in users" :avatar="user.avatar" :name="user.name" :game="user.game" :status="user.status"/>
+                                </template>
                             </c-chat-group>
                         </c-chat-base>
                     </div>`

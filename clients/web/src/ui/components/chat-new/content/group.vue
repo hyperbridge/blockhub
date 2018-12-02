@@ -1,20 +1,25 @@
 <template>
     <div class="group-content">
         <div class="group-content__msgs-list">
-            <slot />
+            <slot name="messages" />
+            <c-answer-field />
         </div>
         <div class="chat__user-list">
-            <c-chat-user v-for="i in 5" />
+            <slot name="users" />
+            <!--<c-chat-user v-for="i in 5" />-->
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        components:{
-            'c-chat-user': (resolve) => require(['@/ui/components/chat-new/user'], resolve)
-        }
+        props:{
 
+        },
+        components:{
+            'c-chat-user': (resolve) => require(['@/ui/components/chat-new/user'], resolve),
+            'c-answer-field': (resolve) => require(['@/ui/components/chat-new/answer-field/field'], resolve)
+        }
     }
 </script>
 
