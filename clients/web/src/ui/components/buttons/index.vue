@@ -12,7 +12,8 @@
         ]"
         style="font-size: 14px"
         :style="{ 'font-size': fontSize + 'px' }"
-        @click="$emit('click')"
+        @mouseover="mouseover"
+        @click="click"
     >
         <i
             v-if="(icon || injectFilter.length) && !iconHide"
@@ -29,6 +30,8 @@
 </template>
 
 <script>
+    import { Howl } from 'howler'
+
     export default {
         name: 'c-button',
         props: {
@@ -68,6 +71,24 @@
         computed: {
             injectFilter() {
                 return this.$options.filters.statusIcon(this.status);
+            }
+        },
+        methods: {
+            mouseover() {
+                const sound = new Howl({
+                    src: ['/static/sounds/information.mp3']
+                })
+
+                sound.play()
+            },
+            click() {
+                const sound = new Howl({
+                    src: ['/static/sounds/ask.mp3']
+                })
+
+                sound.play()
+
+                this.$emit('click')
             }
         }
     }
