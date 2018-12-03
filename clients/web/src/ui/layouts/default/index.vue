@@ -742,8 +742,8 @@
 
     .header-bg__layer-2 {
         position: fixed;
-    background: rgba(34, 30, 58, 1);
-    box-shadow: inset 0 0 3px #000;
+    /* background: rgba(34, 30, 58, 1);
+    box-shadow: inset 0 0 3px #000; */
         height: 48px;
     }
 </style>
@@ -1061,8 +1061,13 @@
             top: 0;
             padding-top: 100px;
             background: rgba(48, 47, 76, 1);
-            box-shadow: inset 0 0 3px #000;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.2) 88%, rgba(0, 0, 0, 0.2) 91%, rgba(0, 0, 0, 0) 100%);
+            /*box-shadow: inset 0 0 3px #000;*/
             border: 0 none;
+        }
+
+        .page-sidepanel {
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.2) 88%, rgba(0, 0, 0, 0.2) 91%, rgba(0, 0, 0, 0) 100%);
         }
     }
 
@@ -1099,8 +1104,8 @@
         width: 70px;
         padding: 10px;
         z-index: 99;
-        background: rgba(34, 32, 56, 1);
-        box-shadow: inset 0 0 3px #000;
+        background: rgba(0, 0, 0, 0.5);
+        /*box-shadow: inset 0 0 3px #000;*/
     }
 
     .page {
