@@ -5248,6 +5248,7 @@ storiesOf('Chat', module)
             'c-chat-message': (resolve) => require(['@/ui/components/chat-new/message'], resolve),
             'c-chat-user': (resolve) => require(['@/ui/components/chat-new/user'], resolve),
             'c-chat-group-welcome': (resolve) => require(['@/ui/components/chat-new/content/welcome'], resolve),
+            'c-chat-group-sidebar': (resolve) => require(['@/ui/components/chat-new/content/group-list'], resolve),
         },
         data(){
             return{
@@ -5374,6 +5375,9 @@ storiesOf('Chat', module)
                     <div class="col-12">
                         <h3 class="text-white">Group chat "Welcome block"</h3>
                         <c-chat-base style="height: 700px" :shortcuts="shortcuts">
+                            <template slot="sidebar">
+                                <c-chat-group-sidebar />
+                            </template>
                             <c-chat-group>
                                 <template slot="messages">
                                     <c-chat-group-welcome />
@@ -5388,6 +5392,9 @@ storiesOf('Chat', module)
                     <div class="col-12">
                         <h3 class="text-white">Group chat with messages</h3>
                         <c-chat-base style="height: 700px" :shortcuts="shortcuts">
+                            <template slot="sidebar">
+                                <c-chat-group-sidebar />
+                            </template>
                             <c-chat-group>
                                 <template slot="messages">
                                     <c-chat-message v-for="msg in messages" :text="msg.text" :user="users[msg.user]" />
