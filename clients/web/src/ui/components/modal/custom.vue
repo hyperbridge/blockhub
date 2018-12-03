@@ -42,8 +42,8 @@
         left: 0;
         top: 0;
         z-index: 99;
-        width: 100%;
-        height: 100%;
+        width: 100vw;
+        height: 100vh;
         background: rgba(33, 33, 51, 0.9);
         animation: opacity .5s ease;
         display: flex;
