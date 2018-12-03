@@ -118,6 +118,7 @@
     .chat-main{
         padding: 15px;
         background: #3D3E5D;
+        width: 100%;
     }
     .chat-main__content{
         height: calc( 100% - 52px );
