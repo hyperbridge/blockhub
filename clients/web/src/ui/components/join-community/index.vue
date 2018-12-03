@@ -30,7 +30,7 @@
     .join-community__wrapper{
         padding: 20px 10px;
         border-radius: 5px;
-        background: #3D3E5D;
+        background: rgba(93, 95, 136, 0.5);
         display: flex;
         flex-direction: column;
         text-align: center;
