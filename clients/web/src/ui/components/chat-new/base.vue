@@ -63,12 +63,18 @@
 
 <script>
     export default {
+        props:{
+            shortcuts: [ Array, Object ]
+        },
         components:{
             'c-shortcut-sidebar': (resolve) => require(['@/ui/components/shortcut-sidebar'], resolve)
         },
         data(){
             return{
-                showShortcuts: true
+                showShortcuts: true,
+                shortcuts:[
+
+                ]
             }
         }
     }
