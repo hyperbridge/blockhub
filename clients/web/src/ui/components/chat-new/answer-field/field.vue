@@ -109,7 +109,7 @@
         border: none;
         outline: none;
         box-sizing: border-box;
-        padding: 10px;
+        padding: 8px;
         font-size: 14px;
         font-weight: 400;
         line-height: 1.33;
@@ -138,41 +138,22 @@
     }
     .c-user-input--button {
         width: 30px;
-        height: 38px;
+        height: 34px;
         margin-left: 2px;
         margin-right: 2px;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        &:first-of-type {
-            width: 40px;
-        }
-        label {
-            position: relative;
-            height: 24px;
-            padding-left: 3px;
-            cursor: pointer;
-            &:hover path {
-                fill: rgba(86, 88, 103, 1);
-            }
-        }
-        input {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            z-index: 99999;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-            overflow: hidden;
+        opacity: .8;
+        &:hover{
+            opacity: 1;
         }
     }
     .c-user-input__typing{
-        font-size: 10px;
+        font-size: 11px;
         color: #fff;
         opacity: .5;
         position: absolute;
-        bottom: -17px;
+        top: -21px;
     }
 </style>

@@ -42,7 +42,7 @@
     .msgs-list{
         overflow-y: auto;
         overflow-x: hidden;
-        margin-bottom: 15px;
+        margin-bottom: 25px;
     }
     .chat__user-list{
         width: 250px;

@@ -55,7 +55,4 @@
         align-self: center;
         outline: none;
     }
-    .sc-user-input--send-icon:hover path {
-        filter: contrast(15%);
-    }
 </style>

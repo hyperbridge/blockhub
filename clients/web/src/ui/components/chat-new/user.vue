@@ -11,8 +11,8 @@
             <span>{{ game }}</span>
         </div>
         <div class="user-action">
-            <i class="fas fa-volume-up"></i>
-            <i class="fas fa-microphone"></i>
+            <i class="fas" :class=" volume ? 'fa-volume-up' : 'fa-volume-off'" @click="toggleVolume"></i>
+            <i class="fas" :class=" microphone ? 'fa-microphone' : 'fa-microphone-slash'" @click="toggleMicrophone"></i>
         </div>
     </div>
 </template>
@@ -24,6 +24,20 @@
             name: String,
             status: String,
             game: String
+        },
+        data(){
+            return{
+                volume: true,
+                microphone: true
+            }
+        },
+        methods:{
+            toggleVolume(){
+                this.volume = !this.volume
+            },
+            toggleMicrophone(){
+                this.microphone = !this.microphone
+            }
         }
     }
 </script>
@@ -80,6 +94,8 @@
             margin-right: 5px;
             color: #4c7be5;
             cursor: pointer;
+            width: 23px;
+            text-align: center;
             &:last-child{
                 margin-right: 0;
             }
