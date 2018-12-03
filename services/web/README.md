@@ -1,6 +1,31 @@
-TODO
+# Web Service API
 
-Routes
+```sh
+git clone https://github.com/hyperbridge/blockhub
+cd services/web
+docker-compose build
+docker-compose up
+```
 
-filters
-tags
+To use your BlockHub account, create a `.env` file like:
+
+```
+BLOCKHUB_WEB_API_KEY=XXXXXXXXXXXXXXX
+BLOCKHUB_ACCOUNT_ID=XXXXXXXXXXXXXXXX
+```
+
+
+To use your own database, create a `.env` file like:
+
+```
+NODE_ENV=development
+PORT=9001
+DATABASE_URL=postgres://postgres@localhost:5432/blockhub
+SESSION_SECRET=XXXXXXXXXXXXXXX
+```
+
+For deployment, set the same variables in the environment.
+
+## Routes
+
+Refer to [SwaggerHub](https://app.swaggerhub.com/apis/hyperbri/blockhub-web-service/1.0.0) or the [api.yml](api.yml) file.
