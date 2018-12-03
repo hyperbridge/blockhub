@@ -64,7 +64,7 @@
 <script>
     export default {
         components:{
-            'c-shortcut-sidebar': (resolve) => require(['@/ui/components/shortcut-sidebar'], resolve),
+            'c-shortcut-sidebar': (resolve) => require(['@/ui/components/shortcut-sidebar'], resolve)
         },
         data(){
             return{

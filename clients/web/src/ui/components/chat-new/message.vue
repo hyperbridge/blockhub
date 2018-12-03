@@ -1,30 +1,35 @@
 <template>
     <div class="chat-message">
         <div class="chat-message__avatar">
-            <img src="../../../../static/img/user.png" />
+            <img :src="user.avatar" />
         </div>
         <div class="chat-message__body">
             <div class="chat-message__info">
                 <strong>
-                    Josh Levinson
+                    {{ user.name }}
                 </strong>
                 <span>
-                    11:30 pm
+                    {{ time }}
                 </span>
             </div>
-            <div class="chat-message__content">
-                Proin ut purus suscipit, bibendum eros et, mollis augue. Pellentesque habitant morbi tristique senectus
-                et netus et malesuada fames ac turpis egestas. Aenean feugiat libero vel tortor feugiat maximus. Nullam
-                lobortis nisi felis, sed vehicula neque hendrerit accumsan. Sed tincidunt aliquam lacus, et aliquet
-                magna pharetra eget. Ut elementum sit amet tellus non pulvinar. Integer mi quam, mattis at ultrices
-                quis, aliquet ut risus.
+            <div class="chat-message__content" v-html="text">
             </div>
+            <c-emoji />
         </div>
     </div>
 </template>
 
 <script>
-    export default {}
+    export default {
+        props:{
+            user: Object,
+            time: String,
+            text: String
+        },
+        components:{
+            'c-emoji': (resolve) => require(['@/ui/components/emoji'], resolve),
+        }
+    }
 </script>
 
 <style lang="scss" scoped>

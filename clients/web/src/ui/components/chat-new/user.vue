@@ -1,14 +1,14 @@
 <template>
     <div class="chat__user-item">
         <div class="user-avatar">
-            <img src="../../../../static/img/user.png" />
-            <span class="user-status status-online"></span>
+            <img :src="avatar" />
+            <span class="user-status" :class="['status-' + status]"></span>
         </div>
         <div class="user-info">
             <strong>
-                Josh Doel
+                {{ name }}
             </strong>
-            <span>Dota II</span>
+            <span>{{ game }}</span>
         </div>
         <div class="user-action">
             <i class="fas fa-volume-up"></i>
@@ -19,7 +19,12 @@
 
 <script>
     export default {
-
+        props:{
+            avatar: String,
+            name: String,
+            status: String,
+            game: String
+        }
     }
 </script>
 
@@ -49,7 +54,7 @@
             background: #43C981;
         }
         &.status-offline{
-            background: #666;
+            background: #999;
         }
         &.status-busy{
             background: #F75D5D;
