@@ -7,6 +7,7 @@
         <div class="user-info">
             <strong>
                 {{ name }}
+                <i class="fas fa-crown margin-left-5" style="color: #FADC72" v-if="isAdmin"></i>
             </strong>
             <span>{{ game }}</span>
         </div>
@@ -23,7 +24,11 @@
             avatar: String,
             name: String,
             status: String,
-            game: String
+            game: String,
+            isAdmin:{
+                type: Boolean,
+                default: false
+            }
         },
         data(){
             return{
@@ -89,12 +94,12 @@
     }
     .user-action{
         margin-left: auto;
-        font-size: 18px;
+        font-size: 14px;
         i{
-            margin-right: 5px;
+            margin-right: 2px;
             color: #4c7be5;
             cursor: pointer;
-            width: 23px;
+            width: 18px;
             text-align: center;
             &:last-child{
                 margin-right: 0;
