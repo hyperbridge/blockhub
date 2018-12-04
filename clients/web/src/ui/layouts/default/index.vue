@@ -306,6 +306,7 @@
             <c-profile-chooser v-if="profileChooser && signedIn" />
         <!--</transition>-->
 
+        <c-quick-launch class="quick-launch" />
         <!-- <search /> Discover the next best thing... -->
     </div>
     <!-- //END PAGE WRAPPER -->
@@ -387,6 +388,7 @@
             'c-clock': (resolve) => require(['@/ui/components/clock/index.vue'], resolve),
             'c-status-dot': (resolve) => require(['@/ui/components/status-dot/index.vue'], resolve),
             'c-sidepanel': (resolve) => require(['@/ui/components/sidepanel'], resolve),
+            'c-quick-launch': (resolve) => require(['@/ui/components/quick-launch'], resolve),
             'c-cookie-policy': (resolve) => require(['@/ui/components/cookie-policy'], resolve),
             'c-shortcut-sidebar': (resolve) => require(['@/ui/components/shortcut-sidebar'], resolve),
             'c-load-more': (resolve) => require(['@/ui/components/buttons/load-more.vue'], resolve),
@@ -868,6 +870,13 @@
         bottom: 20px;
         left: 20px;
         z-index: 120;
+    }
+
+    .quick-launch {
+        position: fixed;
+        top: 14px;
+        right: 230px;
+        z-index: 102;
     }
 
     .loader-block {
