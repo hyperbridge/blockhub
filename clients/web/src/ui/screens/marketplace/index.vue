@@ -51,19 +51,13 @@
 </template>
 
 <script>
-    import offers from '@/db/api/offers';
-    import prospectors from '@/db/api/prospectors';
-    import transactions from '@/db/api/asset-transactions';
+    import offers from '@/db/api/offers'
+    import prospectors from '@/db/api/prospectors'
+    import transactions from '@/db/api/asset-transactions'
 
     export default {
         components: {
-            'c-block': (resolve) => require(['@/ui/components/block/index'], resolve),
             'c-user': (resolve) => require(['@/ui/components/user/simple'], resolve),
-        },
-        computed: {
-            assets() {
-                return this.$store.getters['assets/assets'];
-            }
         },
         data() {
             return {
@@ -80,14 +74,20 @@
             cut: val => val.replace('Marketplace ', '')
         },
         mounted() {
-            this.$store.dispatch('loadData', ['assets/offers', offers]);
-            this.$store.dispatch('loadData', ['assets/prospectors', prospectors]);
-            this.$store.dispatch('loadData', ['assets/transactions', transactions]);
+            this.$store.dispatch('loadData', ['assets/offers', offers])
+            this.$store.dispatch('loadData', ['assets/prospectors', prospectors])
+            this.$store.dispatch('loadData', ['assets/transactions', transactions])
         },
         computed: {
+            assets() {
+                return this.$store.getters['assets/assets']
+            },
             profile() {
                 return this.$store.state.application.account.activeProfile
             }
+        },
+        created() {
+            this.$store.commit('application/activateModal', 'coming-soon')
         }
     }
 </script>

@@ -19,6 +19,9 @@ export default {
 
             return result
         }
+    },
+    created() {
+        this.$store.commit('application/activateModal', 'coming-soon')
     }
 }
 </script>

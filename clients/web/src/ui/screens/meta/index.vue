@@ -22,7 +22,9 @@
 <script>
 export default {
     components: {
-        'c-layout': (resolve) => require(['@/ui/layouts/default'], resolve)
+    },
+    created() {
+        this.$store.commit('application/activateModal', 'coming-soon')
     }
 }
 </script>

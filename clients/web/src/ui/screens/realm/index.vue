@@ -173,6 +173,9 @@ function hexToRgb(hex) {
             $('.header-bg__layer-2')[0].style = this.css.headerBgLayer2
             $('.app-header__shadow').show()
             $('#page-aside').show()
+        },
+        created() {
+            this.$store.commit('application/activateModal', 'coming-soon')
         }
     }
 </script>

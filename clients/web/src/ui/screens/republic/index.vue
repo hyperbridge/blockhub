@@ -24,6 +24,9 @@
         },
         computed: {
 
+        },
+        created() {
+            this.$store.commit('application/activateModal', 'coming-soon')
         }
     }
 </script>

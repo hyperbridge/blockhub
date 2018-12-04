@@ -32,6 +32,9 @@ export default {
 
             return wallet
         }
+    },
+    created() {
+        this.$store.commit('application/activateModal', 'coming-soon')
     }
 }
 </script>

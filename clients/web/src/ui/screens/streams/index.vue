@@ -12,7 +12,6 @@
 <script>
 export default {
     components: {
-        'c-infinite-content': (resolve) => require(['@/ui/components/infinite-content'], resolve),
     },
     computed: {
         list() {
@@ -21,6 +20,9 @@ export default {
 
             return result
         }
+    },
+    created() {
+        this.$store.commit('application/activateModal', 'coming-soon')
     }
 }
 </script>

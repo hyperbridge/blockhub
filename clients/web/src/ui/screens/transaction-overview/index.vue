@@ -17,22 +17,25 @@
 
 <script>
 export default {
-  props: ['id'],
-  components: {
-  },
-  computed: {
-      transaction() {
-        if (!this.$store.state.application.transactions)
-            return
-        
-        const transaction = this.$store.state.application.transactions[this.id]
+    props: ['id'],
+    components: {
+    },
+    computed: {
+        transaction() {
+            if (!this.$store.state.application.transactions)
+                return
+            
+            const transaction = this.$store.state.application.transactions[this.id]
 
-        if (!transaction)
-            return
+            if (!transaction)
+                return
 
-        return transaction
+            return transaction
+        }
+    },
+    created() {
+        this.$store.commit('application/activateModal', 'coming-soon')
     }
-  }
 }
 </script>
 
